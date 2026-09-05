@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type BudgetResourceAssociationInitParameters struct {
@@ -21,11 +21,11 @@ type BudgetResourceAssociationInitParameters struct {
 
 	// Reference to a Budget in budgets to populate budgetName.
 	// +kubebuilder:validation:Optional
-	BudgetNameRef *v1.Reference `json:"budgetNameRef,omitempty" tf:"-"`
+	BudgetNameRef *v2.Reference `json:"budgetNameRef,omitempty" tf:"-"`
 
 	// Selector for a Budget in budgets to populate budgetName.
 	// +kubebuilder:validation:Optional
-	BudgetNameSelector *v1.Selector `json:"budgetNameSelector,omitempty" tf:"-"`
+	BudgetNameSelector *v2.Selector `json:"budgetNameSelector,omitempty" tf:"-"`
 
 	// Resource identifier.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/servicecatalog/v1beta2.Product
@@ -33,11 +33,11 @@ type BudgetResourceAssociationInitParameters struct {
 
 	// Reference to a Product in servicecatalog to populate resourceId.
 	// +kubebuilder:validation:Optional
-	ResourceIDRef *v1.Reference `json:"resourceIdRef,omitempty" tf:"-"`
+	ResourceIDRef *v2.Reference `json:"resourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Product in servicecatalog to populate resourceId.
 	// +kubebuilder:validation:Optional
-	ResourceIDSelector *v1.Selector `json:"resourceIdSelector,omitempty" tf:"-"`
+	ResourceIDSelector *v2.Selector `json:"resourceIdSelector,omitempty" tf:"-"`
 }
 
 type BudgetResourceAssociationObservation struct {
@@ -65,11 +65,11 @@ type BudgetResourceAssociationParameters struct {
 
 	// Reference to a Budget in budgets to populate budgetName.
 	// +kubebuilder:validation:Optional
-	BudgetNameRef *v1.Reference `json:"budgetNameRef,omitempty" tf:"-"`
+	BudgetNameRef *v2.Reference `json:"budgetNameRef,omitempty" tf:"-"`
 
 	// Selector for a Budget in budgets to populate budgetName.
 	// +kubebuilder:validation:Optional
-	BudgetNameSelector *v1.Selector `json:"budgetNameSelector,omitempty" tf:"-"`
+	BudgetNameSelector *v2.Selector `json:"budgetNameSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -83,17 +83,17 @@ type BudgetResourceAssociationParameters struct {
 
 	// Reference to a Product in servicecatalog to populate resourceId.
 	// +kubebuilder:validation:Optional
-	ResourceIDRef *v1.Reference `json:"resourceIdRef,omitempty" tf:"-"`
+	ResourceIDRef *v2.Reference `json:"resourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Product in servicecatalog to populate resourceId.
 	// +kubebuilder:validation:Optional
-	ResourceIDSelector *v1.Selector `json:"resourceIdSelector,omitempty" tf:"-"`
+	ResourceIDSelector *v2.Selector `json:"resourceIdSelector,omitempty" tf:"-"`
 }
 
 // BudgetResourceAssociationSpec defines the desired state of BudgetResourceAssociation
 type BudgetResourceAssociationSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     BudgetResourceAssociationParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   BudgetResourceAssociationParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -109,8 +109,8 @@ type BudgetResourceAssociationSpec struct {
 
 // BudgetResourceAssociationStatus defines the observed state of BudgetResourceAssociation.
 type BudgetResourceAssociationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        BudgetResourceAssociationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               BudgetResourceAssociationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

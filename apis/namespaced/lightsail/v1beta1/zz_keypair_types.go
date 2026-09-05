@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type KeyPairInitParameters struct {
@@ -52,9 +51,6 @@ type KeyPairObservation struct {
 
 	// PGP key to encrypt the resulting private key material. Only used when creating a new key pair.
 	PgpKey *string `json:"pgpKey,omitempty" tf:"pgp_key,omitempty"`
-
-	// Private key, base64 encoded. This is only populated when creating a new key, and when no pgp_key is provided.
-	PrivateKey *string `json:"privateKey,omitempty" tf:"private_key,omitempty"`
 
 	// Public key material. This public key will be imported into Lightsail.
 	PublicKey *string `json:"publicKey,omitempty" tf:"public_key,omitempty"`
@@ -116,8 +112,8 @@ type KeyPairSpec struct {
 
 // KeyPairStatus defines the observed state of KeyPair.
 type KeyPairStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        KeyPairObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               KeyPairObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

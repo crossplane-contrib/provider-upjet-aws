@@ -68,3 +68,15 @@ spec:
       name: application_name
       value: example-cluster-instance
     region: us-west-1
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rds/v1beta2/cluster
+  name: sample-cluster-password
+  namespace: upbound-system
+type: Opaque
+stringData:
+  password: "TestPass0!"
+

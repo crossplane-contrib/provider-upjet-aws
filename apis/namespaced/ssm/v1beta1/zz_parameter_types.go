@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ParameterInitParameters_2 struct {
@@ -48,10 +47,10 @@ type ParameterInitParameters_2 struct {
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// Value of the parameter.15 and later, this may require additional configuration handling for certain scenarios.15 Upgrade Guide.
-	ValueSecretRef *v1.LocalSecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
+	ValueSecretRef *v2.LocalSecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
 
 	// Value of the parameter. Additionally, write-only values are never stored to state. value_wo_version can be used to trigger an update and is required with this argument.15 and later, this may require additional configuration handling for certain scenarios.15 Upgrade Guide.
-	ValueWoSecretRef *v1.LocalSecretKeySelector `json:"valueWoSecretRef,omitempty" tf:"-"`
+	ValueWoSecretRef *v2.LocalSecretKeySelector `json:"valueWoSecretRef,omitempty" tf:"-"`
 
 	// Used together with value_wo to trigger an update. Increment this value when an update to the value_wo is required.
 	ValueWoVersion *float64 `json:"valueWoVersion,omitempty" tf:"value_wo_version,omitempty"`
@@ -160,11 +159,11 @@ type ParameterParameters_2 struct {
 
 	// Value of the parameter.15 and later, this may require additional configuration handling for certain scenarios.15 Upgrade Guide.
 	// +kubebuilder:validation:Optional
-	ValueSecretRef *v1.LocalSecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
+	ValueSecretRef *v2.LocalSecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
 
 	// Value of the parameter. Additionally, write-only values are never stored to state. value_wo_version can be used to trigger an update and is required with this argument.15 and later, this may require additional configuration handling for certain scenarios.15 Upgrade Guide.
 	// +kubebuilder:validation:Optional
-	ValueWoSecretRef *v1.LocalSecretKeySelector `json:"valueWoSecretRef,omitempty" tf:"-"`
+	ValueWoSecretRef *v2.LocalSecretKeySelector `json:"valueWoSecretRef,omitempty" tf:"-"`
 
 	// Used together with value_wo to trigger an update. Increment this value when an update to the value_wo is required.
 	// +kubebuilder:validation:Optional
@@ -190,8 +189,8 @@ type ParameterSpec struct {
 
 // ParameterStatus defines the observed state of Parameter.
 type ParameterStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ParameterObservation_2 `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ParameterObservation_2 `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

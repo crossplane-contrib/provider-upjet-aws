@@ -332,7 +332,7 @@ func (mg *StaticIPAttachment) ResolveReferences(ctx context.Context, c client.Re
 
 		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.InstanceName),
-			Extract:      resource.ExtractResourceID(),
+			Extract:      reference.ExternalName(),
 			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.InstanceNameRef,
 			Selector:     mg.Spec.ForProvider.InstanceNameSelector,
@@ -352,7 +352,7 @@ func (mg *StaticIPAttachment) ResolveReferences(ctx context.Context, c client.Re
 
 		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StaticIPName),
-			Extract:      resource.ExtractResourceID(),
+			Extract:      resource.ExtractParamPath("name", false),
 			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.StaticIPNameRef,
 			Selector:     mg.Spec.ForProvider.StaticIPNameSelector,
@@ -372,7 +372,7 @@ func (mg *StaticIPAttachment) ResolveReferences(ctx context.Context, c client.Re
 
 		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.InstanceName),
-			Extract:      resource.ExtractResourceID(),
+			Extract:      reference.ExternalName(),
 			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.InstanceNameRef,
 			Selector:     mg.Spec.InitProvider.InstanceNameSelector,
@@ -392,7 +392,7 @@ func (mg *StaticIPAttachment) ResolveReferences(ctx context.Context, c client.Re
 
 		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StaticIPName),
-			Extract:      resource.ExtractResourceID(),
+			Extract:      resource.ExtractParamPath("name", false),
 			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.StaticIPNameRef,
 			Selector:     mg.Spec.InitProvider.StaticIPNameSelector,

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type EndpointInitParameters struct {
@@ -52,11 +52,11 @@ type KinesisStreamConfigInitParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.Reference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// The ARN of the Kinesis data stream.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kinesis/v1beta2.Stream
@@ -65,11 +65,11 @@ type KinesisStreamConfigInitParameters struct {
 
 	// Reference to a Stream in kinesis to populate streamArn.
 	// +kubebuilder:validation:Optional
-	StreamArnRef *v1.Reference `json:"streamArnRef,omitempty" tf:"-"`
+	StreamArnRef *v2.Reference `json:"streamArnRef,omitempty" tf:"-"`
 
 	// Selector for a Stream in kinesis to populate streamArn.
 	// +kubebuilder:validation:Optional
-	StreamArnSelector *v1.Selector `json:"streamArnSelector,omitempty" tf:"-"`
+	StreamArnSelector *v2.Selector `json:"streamArnSelector,omitempty" tf:"-"`
 }
 
 type KinesisStreamConfigObservation struct {
@@ -93,11 +93,11 @@ type KinesisStreamConfigParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.Reference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// The ARN of the Kinesis data stream.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kinesis/v1beta2.Stream
@@ -107,11 +107,11 @@ type KinesisStreamConfigParameters struct {
 
 	// Reference to a Stream in kinesis to populate streamArn.
 	// +kubebuilder:validation:Optional
-	StreamArnRef *v1.Reference `json:"streamArnRef,omitempty" tf:"-"`
+	StreamArnRef *v2.Reference `json:"streamArnRef,omitempty" tf:"-"`
 
 	// Selector for a Stream in kinesis to populate streamArn.
 	// +kubebuilder:validation:Optional
-	StreamArnSelector *v1.Selector `json:"streamArnSelector,omitempty" tf:"-"`
+	StreamArnSelector *v2.Selector `json:"streamArnSelector,omitempty" tf:"-"`
 }
 
 type RealtimeLogConfigInitParameters struct {
@@ -174,8 +174,8 @@ type RealtimeLogConfigParameters struct {
 
 // RealtimeLogConfigSpec defines the desired state of RealtimeLogConfig
 type RealtimeLogConfigSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     RealtimeLogConfigParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   RealtimeLogConfigParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -191,8 +191,8 @@ type RealtimeLogConfigSpec struct {
 
 // RealtimeLogConfigStatus defines the observed state of RealtimeLogConfig.
 type RealtimeLogConfigStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        RealtimeLogConfigObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               RealtimeLogConfigObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

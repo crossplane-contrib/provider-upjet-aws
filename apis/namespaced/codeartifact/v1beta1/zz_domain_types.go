@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type DomainInitParameters struct {
@@ -26,11 +25,11 @@ type DomainInitParameters struct {
 
 	// Reference to a Key in kms to populate encryptionKey.
 	// +kubebuilder:validation:Optional
-	EncryptionKeyRef *v1.NamespacedReference `json:"encryptionKeyRef,omitempty" tf:"-"`
+	EncryptionKeyRef *v2.NamespacedReference `json:"encryptionKeyRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate encryptionKey.
 	// +kubebuilder:validation:Optional
-	EncryptionKeySelector *v1.NamespacedSelector `json:"encryptionKeySelector,omitempty" tf:"-"`
+	EncryptionKeySelector *v2.NamespacedSelector `json:"encryptionKeySelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -93,11 +92,11 @@ type DomainParameters struct {
 
 	// Reference to a Key in kms to populate encryptionKey.
 	// +kubebuilder:validation:Optional
-	EncryptionKeyRef *v1.NamespacedReference `json:"encryptionKeyRef,omitempty" tf:"-"`
+	EncryptionKeyRef *v2.NamespacedReference `json:"encryptionKeyRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate encryptionKey.
 	// +kubebuilder:validation:Optional
-	EncryptionKeySelector *v1.NamespacedSelector `json:"encryptionKeySelector,omitempty" tf:"-"`
+	EncryptionKeySelector *v2.NamespacedSelector `json:"encryptionKeySelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -129,8 +128,8 @@ type DomainSpec struct {
 
 // DomainStatus defines the observed state of Domain.
 type DomainStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        DomainObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               DomainObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

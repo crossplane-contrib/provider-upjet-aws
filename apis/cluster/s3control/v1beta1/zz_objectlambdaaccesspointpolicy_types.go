@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ObjectLambdaAccessPointPolicyInitParameters struct {
@@ -25,11 +25,11 @@ type ObjectLambdaAccessPointPolicyInitParameters struct {
 
 	// Reference to a ObjectLambdaAccessPoint in s3control to populate name.
 	// +kubebuilder:validation:Optional
-	NameRef *v1.Reference `json:"nameRef,omitempty" tf:"-"`
+	NameRef *v2.Reference `json:"nameRef,omitempty" tf:"-"`
 
 	// Selector for a ObjectLambdaAccessPoint in s3control to populate name.
 	// +kubebuilder:validation:Optional
-	NameSelector *v1.Selector `json:"nameSelector,omitempty" tf:"-"`
+	NameSelector *v2.Selector `json:"nameSelector,omitempty" tf:"-"`
 
 	// The Object Lambda Access Point resource policy document.
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
@@ -71,11 +71,11 @@ type ObjectLambdaAccessPointPolicyParameters struct {
 
 	// Reference to a ObjectLambdaAccessPoint in s3control to populate name.
 	// +kubebuilder:validation:Optional
-	NameRef *v1.Reference `json:"nameRef,omitempty" tf:"-"`
+	NameRef *v2.Reference `json:"nameRef,omitempty" tf:"-"`
 
 	// Selector for a ObjectLambdaAccessPoint in s3control to populate name.
 	// +kubebuilder:validation:Optional
-	NameSelector *v1.Selector `json:"nameSelector,omitempty" tf:"-"`
+	NameSelector *v2.Selector `json:"nameSelector,omitempty" tf:"-"`
 
 	// The Object Lambda Access Point resource policy document.
 	// +kubebuilder:validation:Optional
@@ -89,8 +89,8 @@ type ObjectLambdaAccessPointPolicyParameters struct {
 
 // ObjectLambdaAccessPointPolicySpec defines the desired state of ObjectLambdaAccessPointPolicy
 type ObjectLambdaAccessPointPolicySpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ObjectLambdaAccessPointPolicyParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ObjectLambdaAccessPointPolicyParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -106,8 +106,8 @@ type ObjectLambdaAccessPointPolicySpec struct {
 
 // ObjectLambdaAccessPointPolicyStatus defines the observed state of ObjectLambdaAccessPointPolicy.
 type ObjectLambdaAccessPointPolicyStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ObjectLambdaAccessPointPolicyObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ObjectLambdaAccessPointPolicyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

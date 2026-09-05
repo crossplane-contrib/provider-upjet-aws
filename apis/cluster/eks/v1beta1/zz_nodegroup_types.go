@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AutoscalingGroupsInitParameters struct {
@@ -98,11 +98,11 @@ type NodeGroupInitParameters struct {
 
 	// Reference to a Role in iam to populate nodeRoleArn.
 	// +kubebuilder:validation:Optional
-	NodeRoleArnRef *v1.Reference `json:"nodeRoleArnRef,omitempty" tf:"-"`
+	NodeRoleArnRef *v2.Reference `json:"nodeRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate nodeRoleArn.
 	// +kubebuilder:validation:Optional
-	NodeRoleArnSelector *v1.Selector `json:"nodeRoleArnSelector,omitempty" tf:"-"`
+	NodeRoleArnSelector *v2.Selector `json:"nodeRoleArnSelector,omitempty" tf:"-"`
 
 	// AMI version of the EKS Node Group. Defaults to latest version for Kubernetes version.
 	ReleaseVersion *string `json:"releaseVersion,omitempty" tf:"release_version,omitempty"`
@@ -115,11 +115,11 @@ type NodeGroupInitParameters struct {
 
 	// References to Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIDRefs []v1.Reference `json:"subnetIdRefs,omitempty" tf:"-"`
+	SubnetIDRefs []v2.Reference `json:"subnetIdRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// Identifiers of EC2 Subnets to associate with the EKS Node Group. Amazon EKS managed node groups can be launched in both public and private subnets. If you plan to deploy load balancers to a subnet, the private subnet must have tag kubernetes.io/role/internal-elb, the public subnet must have tag kubernetes.io/role/elb.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Subnet
@@ -145,11 +145,11 @@ type NodeGroupInitParameters struct {
 
 	// Reference to a Cluster in eks to populate version.
 	// +kubebuilder:validation:Optional
-	VersionRef *v1.Reference `json:"versionRef,omitempty" tf:"-"`
+	VersionRef *v2.Reference `json:"versionRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in eks to populate version.
 	// +kubebuilder:validation:Optional
-	VersionSelector *v1.Selector `json:"versionSelector,omitempty" tf:"-"`
+	VersionSelector *v2.Selector `json:"versionSelector,omitempty" tf:"-"`
 }
 
 type NodeGroupObservation struct {
@@ -250,11 +250,11 @@ type NodeGroupParameters struct {
 
 	// Reference to a Cluster in eks to populate clusterName.
 	// +kubebuilder:validation:Optional
-	ClusterNameRef *v1.Reference `json:"clusterNameRef,omitempty" tf:"-"`
+	ClusterNameRef *v2.Reference `json:"clusterNameRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in eks to populate clusterName.
 	// +kubebuilder:validation:Optional
-	ClusterNameSelector *v1.Selector `json:"clusterNameSelector,omitempty" tf:"-"`
+	ClusterNameSelector *v2.Selector `json:"clusterNameSelector,omitempty" tf:"-"`
 
 	// Disk size in GiB for worker nodes. Defaults to 50 for Windows, 20 all other node groups.
 	// +kubebuilder:validation:Optional
@@ -289,11 +289,11 @@ type NodeGroupParameters struct {
 
 	// Reference to a Role in iam to populate nodeRoleArn.
 	// +kubebuilder:validation:Optional
-	NodeRoleArnRef *v1.Reference `json:"nodeRoleArnRef,omitempty" tf:"-"`
+	NodeRoleArnRef *v2.Reference `json:"nodeRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate nodeRoleArn.
 	// +kubebuilder:validation:Optional
-	NodeRoleArnSelector *v1.Selector `json:"nodeRoleArnSelector,omitempty" tf:"-"`
+	NodeRoleArnSelector *v2.Selector `json:"nodeRoleArnSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -314,11 +314,11 @@ type NodeGroupParameters struct {
 
 	// References to Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIDRefs []v1.Reference `json:"subnetIdRefs,omitempty" tf:"-"`
+	SubnetIDRefs []v2.Reference `json:"subnetIdRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// Identifiers of EC2 Subnets to associate with the EKS Node Group. Amazon EKS managed node groups can be launched in both public and private subnets. If you plan to deploy load balancers to a subnet, the private subnet must have tag kubernetes.io/role/internal-elb, the public subnet must have tag kubernetes.io/role/elb.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Subnet
@@ -349,11 +349,11 @@ type NodeGroupParameters struct {
 
 	// Reference to a Cluster in eks to populate version.
 	// +kubebuilder:validation:Optional
-	VersionRef *v1.Reference `json:"versionRef,omitempty" tf:"-"`
+	VersionRef *v2.Reference `json:"versionRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in eks to populate version.
 	// +kubebuilder:validation:Optional
-	VersionSelector *v1.Selector `json:"versionSelector,omitempty" tf:"-"`
+	VersionSelector *v2.Selector `json:"versionSelector,omitempty" tf:"-"`
 }
 
 type NodeRepairConfigInitParameters struct {
@@ -481,11 +481,11 @@ type RemoteAccessInitParameters struct {
 
 	// References to SecurityGroup in ec2 to populate sourceSecurityGroupIds.
 	// +kubebuilder:validation:Optional
-	SourceSecurityGroupIDRefs []v1.Reference `json:"sourceSecurityGroupIdRefs,omitempty" tf:"-"`
+	SourceSecurityGroupIDRefs []v2.Reference `json:"sourceSecurityGroupIdRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate sourceSecurityGroupIds.
 	// +kubebuilder:validation:Optional
-	SourceSecurityGroupIDSelector *v1.Selector `json:"sourceSecurityGroupIdSelector,omitempty" tf:"-"`
+	SourceSecurityGroupIDSelector *v2.Selector `json:"sourceSecurityGroupIdSelector,omitempty" tf:"-"`
 
 	// Set of EC2 Security Group IDs to allow SSH access (port 22) from on the worker nodes. If you specify ec2_ssh_key, but do not specify this configuration when you create an EKS Node Group, port 22 on the worker nodes is opened to the Internet (0.0.0.0/0).
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.SecurityGroup
@@ -513,11 +513,11 @@ type RemoteAccessParameters struct {
 
 	// References to SecurityGroup in ec2 to populate sourceSecurityGroupIds.
 	// +kubebuilder:validation:Optional
-	SourceSecurityGroupIDRefs []v1.Reference `json:"sourceSecurityGroupIdRefs,omitempty" tf:"-"`
+	SourceSecurityGroupIDRefs []v2.Reference `json:"sourceSecurityGroupIdRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate sourceSecurityGroupIds.
 	// +kubebuilder:validation:Optional
-	SourceSecurityGroupIDSelector *v1.Selector `json:"sourceSecurityGroupIdSelector,omitempty" tf:"-"`
+	SourceSecurityGroupIDSelector *v2.Selector `json:"sourceSecurityGroupIdSelector,omitempty" tf:"-"`
 
 	// Set of EC2 Security Group IDs to allow SSH access (port 22) from on the worker nodes. If you specify ec2_ssh_key, but do not specify this configuration when you create an EKS Node Group, port 22 on the worker nodes is opened to the Internet (0.0.0.0/0).
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.SecurityGroup
@@ -662,8 +662,8 @@ type UpdateConfigParameters struct {
 
 // NodeGroupSpec defines the desired state of NodeGroup
 type NodeGroupSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     NodeGroupParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   NodeGroupParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -679,8 +679,8 @@ type NodeGroupSpec struct {
 
 // NodeGroupStatus defines the observed state of NodeGroup.
 type NodeGroupStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        NodeGroupObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               NodeGroupObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

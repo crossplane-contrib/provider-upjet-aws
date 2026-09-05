@@ -55,3 +55,21 @@ func SetupGated_appmesh(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupWebhookWithManager_appmesh registers conversion webhooks for all resource kinds in the group.
+func SetupWebhookWithManager_appmesh(mgr ctrl.Manager) error {
+	for _, setup := range []func(ctrl.Manager) error{
+		gatewayroute.SetupWebhookWithManager,
+		mesh.SetupWebhookWithManager,
+		route.SetupWebhookWithManager,
+		virtualgateway.SetupWebhookWithManager,
+		virtualnode.SetupWebhookWithManager,
+		virtualrouter.SetupWebhookWithManager,
+		virtualservice.SetupWebhookWithManager,
+	} {
+		if err := setup(mgr); err != nil {
+			return err
+		}
+	}
+	return nil
+}

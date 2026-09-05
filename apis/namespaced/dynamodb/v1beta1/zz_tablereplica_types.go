@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type TableReplicaInitParameters_2 struct {
@@ -26,11 +25,11 @@ type TableReplicaInitParameters_2 struct {
 
 	// Reference to a Table in dynamodb to populate globalTableArn.
 	// +kubebuilder:validation:Optional
-	GlobalTableArnRef *v1.NamespacedReference `json:"globalTableArnRef,omitempty" tf:"-"`
+	GlobalTableArnRef *v2.NamespacedReference `json:"globalTableArnRef,omitempty" tf:"-"`
 
 	// Selector for a Table in dynamodb to populate globalTableArn.
 	// +kubebuilder:validation:Optional
-	GlobalTableArnSelector *v1.NamespacedSelector `json:"globalTableArnSelector,omitempty" tf:"-"`
+	GlobalTableArnSelector *v2.NamespacedSelector `json:"globalTableArnSelector,omitempty" tf:"-"`
 
 	// ARN of the CMK that should be used for the AWS KMS encryption. This argument should only be used if the key is different from the default KMS-managed DynamoDB key, alias/aws/dynamodb. Note: This attribute will not be populated with the ARN of default keys.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kms/v1beta1.Key
@@ -38,11 +37,11 @@ type TableReplicaInitParameters_2 struct {
 
 	// Reference to a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnRef *v1.NamespacedReference `json:"kmsKeyArnRef,omitempty" tf:"-"`
+	KMSKeyArnRef *v2.NamespacedReference `json:"kmsKeyArnRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnSelector *v1.NamespacedSelector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
+	KMSKeyArnSelector *v2.NamespacedSelector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
 
 	// Whether to enable Point In Time Recovery for the table replica. Default is false.
 	PointInTimeRecovery *bool `json:"pointInTimeRecovery,omitempty" tf:"point_in_time_recovery,omitempty"`
@@ -105,11 +104,11 @@ type TableReplicaParameters_2 struct {
 
 	// Reference to a Table in dynamodb to populate globalTableArn.
 	// +kubebuilder:validation:Optional
-	GlobalTableArnRef *v1.NamespacedReference `json:"globalTableArnRef,omitempty" tf:"-"`
+	GlobalTableArnRef *v2.NamespacedReference `json:"globalTableArnRef,omitempty" tf:"-"`
 
 	// Selector for a Table in dynamodb to populate globalTableArn.
 	// +kubebuilder:validation:Optional
-	GlobalTableArnSelector *v1.NamespacedSelector `json:"globalTableArnSelector,omitempty" tf:"-"`
+	GlobalTableArnSelector *v2.NamespacedSelector `json:"globalTableArnSelector,omitempty" tf:"-"`
 
 	// ARN of the CMK that should be used for the AWS KMS encryption. This argument should only be used if the key is different from the default KMS-managed DynamoDB key, alias/aws/dynamodb. Note: This attribute will not be populated with the ARN of default keys.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kms/v1beta1.Key
@@ -118,11 +117,11 @@ type TableReplicaParameters_2 struct {
 
 	// Reference to a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnRef *v1.NamespacedReference `json:"kmsKeyArnRef,omitempty" tf:"-"`
+	KMSKeyArnRef *v2.NamespacedReference `json:"kmsKeyArnRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnSelector *v1.NamespacedSelector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
+	KMSKeyArnSelector *v2.NamespacedSelector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
 
 	// Whether to enable Point In Time Recovery for the table replica. Default is false.
 	// +kubebuilder:validation:Optional
@@ -162,8 +161,8 @@ type TableReplicaSpec struct {
 
 // TableReplicaStatus defines the observed state of TableReplica.
 type TableReplicaStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        TableReplicaObservation_2 `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               TableReplicaObservation_2 `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

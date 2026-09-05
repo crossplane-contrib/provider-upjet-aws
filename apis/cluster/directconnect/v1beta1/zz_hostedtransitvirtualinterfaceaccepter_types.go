@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type HostedTransitVirtualInterfaceAccepterInitParameters struct {
@@ -22,11 +22,11 @@ type HostedTransitVirtualInterfaceAccepterInitParameters struct {
 
 	// Reference to a Gateway in directconnect to populate dxGatewayId.
 	// +kubebuilder:validation:Optional
-	DxGatewayIDRef *v1.Reference `json:"dxGatewayIdRef,omitempty" tf:"-"`
+	DxGatewayIDRef *v2.Reference `json:"dxGatewayIdRef,omitempty" tf:"-"`
 
 	// Selector for a Gateway in directconnect to populate dxGatewayId.
 	// +kubebuilder:validation:Optional
-	DxGatewayIDSelector *v1.Selector `json:"dxGatewayIdSelector,omitempty" tf:"-"`
+	DxGatewayIDSelector *v2.Selector `json:"dxGatewayIdSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -38,11 +38,11 @@ type HostedTransitVirtualInterfaceAccepterInitParameters struct {
 
 	// Reference to a HostedTransitVirtualInterface in directconnect to populate virtualInterfaceId.
 	// +kubebuilder:validation:Optional
-	VirtualInterfaceIDRef *v1.Reference `json:"virtualInterfaceIdRef,omitempty" tf:"-"`
+	VirtualInterfaceIDRef *v2.Reference `json:"virtualInterfaceIdRef,omitempty" tf:"-"`
 
 	// Selector for a HostedTransitVirtualInterface in directconnect to populate virtualInterfaceId.
 	// +kubebuilder:validation:Optional
-	VirtualInterfaceIDSelector *v1.Selector `json:"virtualInterfaceIdSelector,omitempty" tf:"-"`
+	VirtualInterfaceIDSelector *v2.Selector `json:"virtualInterfaceIdSelector,omitempty" tf:"-"`
 }
 
 type HostedTransitVirtualInterfaceAccepterObservation struct {
@@ -82,11 +82,11 @@ type HostedTransitVirtualInterfaceAccepterParameters struct {
 
 	// Reference to a Gateway in directconnect to populate dxGatewayId.
 	// +kubebuilder:validation:Optional
-	DxGatewayIDRef *v1.Reference `json:"dxGatewayIdRef,omitempty" tf:"-"`
+	DxGatewayIDRef *v2.Reference `json:"dxGatewayIdRef,omitempty" tf:"-"`
 
 	// Selector for a Gateway in directconnect to populate dxGatewayId.
 	// +kubebuilder:validation:Optional
-	DxGatewayIDSelector *v1.Selector `json:"dxGatewayIdSelector,omitempty" tf:"-"`
+	DxGatewayIDSelector *v2.Selector `json:"dxGatewayIdSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -105,17 +105,17 @@ type HostedTransitVirtualInterfaceAccepterParameters struct {
 
 	// Reference to a HostedTransitVirtualInterface in directconnect to populate virtualInterfaceId.
 	// +kubebuilder:validation:Optional
-	VirtualInterfaceIDRef *v1.Reference `json:"virtualInterfaceIdRef,omitempty" tf:"-"`
+	VirtualInterfaceIDRef *v2.Reference `json:"virtualInterfaceIdRef,omitempty" tf:"-"`
 
 	// Selector for a HostedTransitVirtualInterface in directconnect to populate virtualInterfaceId.
 	// +kubebuilder:validation:Optional
-	VirtualInterfaceIDSelector *v1.Selector `json:"virtualInterfaceIdSelector,omitempty" tf:"-"`
+	VirtualInterfaceIDSelector *v2.Selector `json:"virtualInterfaceIdSelector,omitempty" tf:"-"`
 }
 
 // HostedTransitVirtualInterfaceAccepterSpec defines the desired state of HostedTransitVirtualInterfaceAccepter
 type HostedTransitVirtualInterfaceAccepterSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     HostedTransitVirtualInterfaceAccepterParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   HostedTransitVirtualInterfaceAccepterParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -131,8 +131,8 @@ type HostedTransitVirtualInterfaceAccepterSpec struct {
 
 // HostedTransitVirtualInterfaceAccepterStatus defines the observed state of HostedTransitVirtualInterfaceAccepter.
 type HostedTransitVirtualInterfaceAccepterStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        HostedTransitVirtualInterfaceAccepterObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               HostedTransitVirtualInterfaceAccepterObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type TransitGatewayConnectPeerAssociationInitParameters struct {
@@ -22,11 +22,11 @@ type TransitGatewayConnectPeerAssociationInitParameters struct {
 
 	// Reference to a Device in networkmanager to populate deviceId.
 	// +kubebuilder:validation:Optional
-	DeviceIDRef *v1.Reference `json:"deviceIdRef,omitempty" tf:"-"`
+	DeviceIDRef *v2.Reference `json:"deviceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Device in networkmanager to populate deviceId.
 	// +kubebuilder:validation:Optional
-	DeviceIDSelector *v1.Selector `json:"deviceIdSelector,omitempty" tf:"-"`
+	DeviceIDSelector *v2.Selector `json:"deviceIdSelector,omitempty" tf:"-"`
 
 	// ID of the link.
 	LinkID *string `json:"linkId,omitempty" tf:"link_id,omitempty"`
@@ -59,11 +59,11 @@ type TransitGatewayConnectPeerAssociationParameters struct {
 
 	// Reference to a Device in networkmanager to populate deviceId.
 	// +kubebuilder:validation:Optional
-	DeviceIDRef *v1.Reference `json:"deviceIdRef,omitempty" tf:"-"`
+	DeviceIDRef *v2.Reference `json:"deviceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Device in networkmanager to populate deviceId.
 	// +kubebuilder:validation:Optional
-	DeviceIDSelector *v1.Selector `json:"deviceIdSelector,omitempty" tf:"-"`
+	DeviceIDSelector *v2.Selector `json:"deviceIdSelector,omitempty" tf:"-"`
 
 	// ID of the global network.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/networkmanager/v1beta1.GlobalNetwork
@@ -73,11 +73,11 @@ type TransitGatewayConnectPeerAssociationParameters struct {
 
 	// Reference to a GlobalNetwork in networkmanager to populate globalNetworkId.
 	// +kubebuilder:validation:Optional
-	GlobalNetworkIDRef *v1.Reference `json:"globalNetworkIdRef,omitempty" tf:"-"`
+	GlobalNetworkIDRef *v2.Reference `json:"globalNetworkIdRef,omitempty" tf:"-"`
 
 	// Selector for a GlobalNetwork in networkmanager to populate globalNetworkId.
 	// +kubebuilder:validation:Optional
-	GlobalNetworkIDSelector *v1.Selector `json:"globalNetworkIdSelector,omitempty" tf:"-"`
+	GlobalNetworkIDSelector *v2.Selector `json:"globalNetworkIdSelector,omitempty" tf:"-"`
 
 	// ID of the link.
 	// +kubebuilder:validation:Optional
@@ -91,17 +91,17 @@ type TransitGatewayConnectPeerAssociationParameters struct {
 
 	// Reference to a TransitGatewayConnectPeer in ec2 to populate transitGatewayConnectPeerArn.
 	// +kubebuilder:validation:Optional
-	TransitGatewayConnectPeerArnRef *v1.Reference `json:"transitGatewayConnectPeerArnRef,omitempty" tf:"-"`
+	TransitGatewayConnectPeerArnRef *v2.Reference `json:"transitGatewayConnectPeerArnRef,omitempty" tf:"-"`
 
 	// Selector for a TransitGatewayConnectPeer in ec2 to populate transitGatewayConnectPeerArn.
 	// +kubebuilder:validation:Optional
-	TransitGatewayConnectPeerArnSelector *v1.Selector `json:"transitGatewayConnectPeerArnSelector,omitempty" tf:"-"`
+	TransitGatewayConnectPeerArnSelector *v2.Selector `json:"transitGatewayConnectPeerArnSelector,omitempty" tf:"-"`
 }
 
 // TransitGatewayConnectPeerAssociationSpec defines the desired state of TransitGatewayConnectPeerAssociation
 type TransitGatewayConnectPeerAssociationSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     TransitGatewayConnectPeerAssociationParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   TransitGatewayConnectPeerAssociationParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -117,8 +117,8 @@ type TransitGatewayConnectPeerAssociationSpec struct {
 
 // TransitGatewayConnectPeerAssociationStatus defines the observed state of TransitGatewayConnectPeerAssociation.
 type TransitGatewayConnectPeerAssociationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        TransitGatewayConnectPeerAssociationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               TransitGatewayConnectPeerAssociationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

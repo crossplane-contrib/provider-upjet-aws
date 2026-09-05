@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AgentOrchestrationConfigInitParameters struct {
@@ -95,8 +95,8 @@ type ProfilingGroupParameters struct {
 
 // ProfilingGroupSpec defines the desired state of ProfilingGroup
 type ProfilingGroupSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ProfilingGroupParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ProfilingGroupParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -112,8 +112,8 @@ type ProfilingGroupSpec struct {
 
 // ProfilingGroupStatus defines the observed state of ProfilingGroup.
 type ProfilingGroupStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ProfilingGroupObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ProfilingGroupObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

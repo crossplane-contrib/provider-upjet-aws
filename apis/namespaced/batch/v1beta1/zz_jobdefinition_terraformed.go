@@ -36,6 +36,8 @@ func (tr *JobDefinition) GetObservation() (map[string]any, error) {
 
 // SetObservation for this JobDefinition
 func (tr *JobDefinition) SetObservation(obs map[string]any) error {
+	tr.Status.AtProvider.Tags = nil
+	tr.Status.AtProvider.TagsAll = nil
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err

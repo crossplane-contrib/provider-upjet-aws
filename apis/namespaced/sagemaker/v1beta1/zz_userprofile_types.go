@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CanvasAppSettingsDirectDeploySettingsInitParameters struct {
@@ -235,11 +234,11 @@ type UserProfileInitParameters struct {
 
 	// Reference to a Domain in sagemaker to populate domainId.
 	// +kubebuilder:validation:Optional
-	DomainIDRef *v1.NamespacedReference `json:"domainIdRef,omitempty" tf:"-"`
+	DomainIDRef *v2.NamespacedReference `json:"domainIdRef,omitempty" tf:"-"`
 
 	// Selector for a Domain in sagemaker to populate domainId.
 	// +kubebuilder:validation:Optional
-	DomainIDSelector *v1.NamespacedSelector `json:"domainIdSelector,omitempty" tf:"-"`
+	DomainIDSelector *v2.NamespacedSelector `json:"domainIdSelector,omitempty" tf:"-"`
 
 	// A specifier for the type of value specified in single_sign_on_user_value. Currently, the only supported value is UserName. If the Domain's AuthMode is SSO, this field is required. If the Domain's AuthMode is not SSO, this field cannot be specified.
 	SingleSignOnUserIdentifier *string `json:"singleSignOnUserIdentifier,omitempty" tf:"single_sign_on_user_identifier,omitempty"`
@@ -306,11 +305,11 @@ type UserProfileParameters struct {
 
 	// Reference to a Domain in sagemaker to populate domainId.
 	// +kubebuilder:validation:Optional
-	DomainIDRef *v1.NamespacedReference `json:"domainIdRef,omitempty" tf:"-"`
+	DomainIDRef *v2.NamespacedReference `json:"domainIdRef,omitempty" tf:"-"`
 
 	// Selector for a Domain in sagemaker to populate domainId.
 	// +kubebuilder:validation:Optional
-	DomainIDSelector *v1.NamespacedSelector `json:"domainIdSelector,omitempty" tf:"-"`
+	DomainIDSelector *v2.NamespacedSelector `json:"domainIdSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -1872,8 +1871,8 @@ type UserProfileSpec struct {
 
 // UserProfileStatus defines the observed state of UserProfile.
 type UserProfileStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        UserProfileObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               UserProfileObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

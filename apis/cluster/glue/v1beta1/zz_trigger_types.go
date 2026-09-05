@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ActionsInitParameters struct {
@@ -25,11 +25,11 @@ type ActionsInitParameters struct {
 
 	// Reference to a Crawler in glue to populate crawlerName.
 	// +kubebuilder:validation:Optional
-	CrawlerNameRef *v1.Reference `json:"crawlerNameRef,omitempty" tf:"-"`
+	CrawlerNameRef *v2.Reference `json:"crawlerNameRef,omitempty" tf:"-"`
 
 	// Selector for a Crawler in glue to populate crawlerName.
 	// +kubebuilder:validation:Optional
-	CrawlerNameSelector *v1.Selector `json:"crawlerNameSelector,omitempty" tf:"-"`
+	CrawlerNameSelector *v2.Selector `json:"crawlerNameSelector,omitempty" tf:"-"`
 
 	// The name of a job to be executed. Conflicts with crawler_name.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/glue/v1beta1.Job
@@ -37,11 +37,11 @@ type ActionsInitParameters struct {
 
 	// Reference to a Job in glue to populate jobName.
 	// +kubebuilder:validation:Optional
-	JobNameRef *v1.Reference `json:"jobNameRef,omitempty" tf:"-"`
+	JobNameRef *v2.Reference `json:"jobNameRef,omitempty" tf:"-"`
 
 	// Selector for a Job in glue to populate jobName.
 	// +kubebuilder:validation:Optional
-	JobNameSelector *v1.Selector `json:"jobNameSelector,omitempty" tf:"-"`
+	JobNameSelector *v2.Selector `json:"jobNameSelector,omitempty" tf:"-"`
 
 	// Specifies configuration properties of a job run notification. See Notification Property details below.
 	NotificationProperty []ActionsNotificationPropertyInitParameters `json:"notificationProperty,omitempty" tf:"notification_property,omitempty"`
@@ -108,11 +108,11 @@ type ActionsParameters struct {
 
 	// Reference to a Crawler in glue to populate crawlerName.
 	// +kubebuilder:validation:Optional
-	CrawlerNameRef *v1.Reference `json:"crawlerNameRef,omitempty" tf:"-"`
+	CrawlerNameRef *v2.Reference `json:"crawlerNameRef,omitempty" tf:"-"`
 
 	// Selector for a Crawler in glue to populate crawlerName.
 	// +kubebuilder:validation:Optional
-	CrawlerNameSelector *v1.Selector `json:"crawlerNameSelector,omitempty" tf:"-"`
+	CrawlerNameSelector *v2.Selector `json:"crawlerNameSelector,omitempty" tf:"-"`
 
 	// The name of a job to be executed. Conflicts with crawler_name.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/glue/v1beta1.Job
@@ -121,11 +121,11 @@ type ActionsParameters struct {
 
 	// Reference to a Job in glue to populate jobName.
 	// +kubebuilder:validation:Optional
-	JobNameRef *v1.Reference `json:"jobNameRef,omitempty" tf:"-"`
+	JobNameRef *v2.Reference `json:"jobNameRef,omitempty" tf:"-"`
 
 	// Selector for a Job in glue to populate jobName.
 	// +kubebuilder:validation:Optional
-	JobNameSelector *v1.Selector `json:"jobNameSelector,omitempty" tf:"-"`
+	JobNameSelector *v2.Selector `json:"jobNameSelector,omitempty" tf:"-"`
 
 	// Specifies configuration properties of a job run notification. See Notification Property details below.
 	// +kubebuilder:validation:Optional
@@ -151,11 +151,11 @@ type ConditionsInitParameters struct {
 
 	// Reference to a Crawler in glue to populate crawlerName.
 	// +kubebuilder:validation:Optional
-	CrawlerNameRef *v1.Reference `json:"crawlerNameRef,omitempty" tf:"-"`
+	CrawlerNameRef *v2.Reference `json:"crawlerNameRef,omitempty" tf:"-"`
 
 	// Selector for a Crawler in glue to populate crawlerName.
 	// +kubebuilder:validation:Optional
-	CrawlerNameSelector *v1.Selector `json:"crawlerNameSelector,omitempty" tf:"-"`
+	CrawlerNameSelector *v2.Selector `json:"crawlerNameSelector,omitempty" tf:"-"`
 
 	// The name of a job to be executed. Conflicts with crawler_name.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/glue/v1beta1.Job
@@ -163,11 +163,11 @@ type ConditionsInitParameters struct {
 
 	// Reference to a Job in glue to populate jobName.
 	// +kubebuilder:validation:Optional
-	JobNameRef *v1.Reference `json:"jobNameRef,omitempty" tf:"-"`
+	JobNameRef *v2.Reference `json:"jobNameRef,omitempty" tf:"-"`
 
 	// Selector for a Job in glue to populate jobName.
 	// +kubebuilder:validation:Optional
-	JobNameSelector *v1.Selector `json:"jobNameSelector,omitempty" tf:"-"`
+	JobNameSelector *v2.Selector `json:"jobNameSelector,omitempty" tf:"-"`
 
 	// A logical operator. Defaults to EQUALS.
 	LogicalOperator *string `json:"logicalOperator,omitempty" tf:"logical_operator,omitempty"`
@@ -207,11 +207,11 @@ type ConditionsParameters struct {
 
 	// Reference to a Crawler in glue to populate crawlerName.
 	// +kubebuilder:validation:Optional
-	CrawlerNameRef *v1.Reference `json:"crawlerNameRef,omitempty" tf:"-"`
+	CrawlerNameRef *v2.Reference `json:"crawlerNameRef,omitempty" tf:"-"`
 
 	// Selector for a Crawler in glue to populate crawlerName.
 	// +kubebuilder:validation:Optional
-	CrawlerNameSelector *v1.Selector `json:"crawlerNameSelector,omitempty" tf:"-"`
+	CrawlerNameSelector *v2.Selector `json:"crawlerNameSelector,omitempty" tf:"-"`
 
 	// The name of a job to be executed. Conflicts with crawler_name.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/glue/v1beta1.Job
@@ -220,11 +220,11 @@ type ConditionsParameters struct {
 
 	// Reference to a Job in glue to populate jobName.
 	// +kubebuilder:validation:Optional
-	JobNameRef *v1.Reference `json:"jobNameRef,omitempty" tf:"-"`
+	JobNameRef *v2.Reference `json:"jobNameRef,omitempty" tf:"-"`
 
 	// Selector for a Job in glue to populate jobName.
 	// +kubebuilder:validation:Optional
-	JobNameSelector *v1.Selector `json:"jobNameSelector,omitempty" tf:"-"`
+	JobNameSelector *v2.Selector `json:"jobNameSelector,omitempty" tf:"-"`
 
 	// A logical operator. Defaults to EQUALS.
 	// +kubebuilder:validation:Optional
@@ -429,8 +429,8 @@ type TriggerParameters struct {
 
 // TriggerSpec defines the desired state of Trigger
 type TriggerSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     TriggerParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   TriggerParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -446,8 +446,8 @@ type TriggerSpec struct {
 
 // TriggerStatus defines the observed state of Trigger.
 type TriggerStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        TriggerObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               TriggerObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

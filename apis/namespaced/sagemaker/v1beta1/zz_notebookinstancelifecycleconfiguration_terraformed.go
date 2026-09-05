@@ -36,6 +36,8 @@ func (tr *NotebookInstanceLifecycleConfiguration) GetObservation() (map[string]a
 
 // SetObservation for this NotebookInstanceLifecycleConfiguration
 func (tr *NotebookInstanceLifecycleConfiguration) SetObservation(obs map[string]any) error {
+	tr.Status.AtProvider.Tags = nil
+	tr.Status.AtProvider.TagsAll = nil
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err

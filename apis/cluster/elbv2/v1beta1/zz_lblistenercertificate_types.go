@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type LBListenerCertificateInitParameters struct {
@@ -22,11 +22,11 @@ type LBListenerCertificateInitParameters struct {
 
 	// Reference to a Certificate in acm to populate certificateArn.
 	// +kubebuilder:validation:Optional
-	CertificateArnRef *v1.Reference `json:"certificateArnRef,omitempty" tf:"-"`
+	CertificateArnRef *v2.Reference `json:"certificateArnRef,omitempty" tf:"-"`
 
 	// Selector for a Certificate in acm to populate certificateArn.
 	// +kubebuilder:validation:Optional
-	CertificateArnSelector *v1.Selector `json:"certificateArnSelector,omitempty" tf:"-"`
+	CertificateArnSelector *v2.Selector `json:"certificateArnSelector,omitempty" tf:"-"`
 
 	// The ARN of the listener to which to attach the certificate.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/elbv2/v1beta2.LBListener
@@ -35,11 +35,11 @@ type LBListenerCertificateInitParameters struct {
 
 	// Reference to a LBListener in elbv2 to populate listenerArn.
 	// +kubebuilder:validation:Optional
-	ListenerArnRef *v1.Reference `json:"listenerArnRef,omitempty" tf:"-"`
+	ListenerArnRef *v2.Reference `json:"listenerArnRef,omitempty" tf:"-"`
 
 	// Selector for a LBListener in elbv2 to populate listenerArn.
 	// +kubebuilder:validation:Optional
-	ListenerArnSelector *v1.Selector `json:"listenerArnSelector,omitempty" tf:"-"`
+	ListenerArnSelector *v2.Selector `json:"listenerArnSelector,omitempty" tf:"-"`
 }
 
 type LBListenerCertificateObservation struct {
@@ -68,11 +68,11 @@ type LBListenerCertificateParameters struct {
 
 	// Reference to a Certificate in acm to populate certificateArn.
 	// +kubebuilder:validation:Optional
-	CertificateArnRef *v1.Reference `json:"certificateArnRef,omitempty" tf:"-"`
+	CertificateArnRef *v2.Reference `json:"certificateArnRef,omitempty" tf:"-"`
 
 	// Selector for a Certificate in acm to populate certificateArn.
 	// +kubebuilder:validation:Optional
-	CertificateArnSelector *v1.Selector `json:"certificateArnSelector,omitempty" tf:"-"`
+	CertificateArnSelector *v2.Selector `json:"certificateArnSelector,omitempty" tf:"-"`
 
 	// The ARN of the listener to which to attach the certificate.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/elbv2/v1beta2.LBListener
@@ -82,11 +82,11 @@ type LBListenerCertificateParameters struct {
 
 	// Reference to a LBListener in elbv2 to populate listenerArn.
 	// +kubebuilder:validation:Optional
-	ListenerArnRef *v1.Reference `json:"listenerArnRef,omitempty" tf:"-"`
+	ListenerArnRef *v2.Reference `json:"listenerArnRef,omitempty" tf:"-"`
 
 	// Selector for a LBListener in elbv2 to populate listenerArn.
 	// +kubebuilder:validation:Optional
-	ListenerArnSelector *v1.Selector `json:"listenerArnSelector,omitempty" tf:"-"`
+	ListenerArnSelector *v2.Selector `json:"listenerArnSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -96,8 +96,8 @@ type LBListenerCertificateParameters struct {
 
 // LBListenerCertificateSpec defines the desired state of LBListenerCertificate
 type LBListenerCertificateSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     LBListenerCertificateParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   LBListenerCertificateParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -113,8 +113,8 @@ type LBListenerCertificateSpec struct {
 
 // LBListenerCertificateStatus defines the observed state of LBListenerCertificate.
 type LBListenerCertificateStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        LBListenerCertificateObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               LBListenerCertificateObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

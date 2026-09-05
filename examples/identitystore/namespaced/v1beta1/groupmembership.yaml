@@ -55,7 +55,7 @@ spec:
     displayName: John Doe
     identityStoreId: Identity store id from a manually created SSO instance in the same region specified below
     name:
-      - familyName: Doe
-        givenName: John
+      familyName: Doe
+      givenName: John
     region: us-east-1
     userName: john.doe@example.com

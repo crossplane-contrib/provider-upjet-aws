@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ContentTypeProfileConfigInitParameters struct {
@@ -188,11 +188,11 @@ type QueryArgProfilesItemsInitParameters struct {
 
 	// Reference to a FieldLevelEncryptionProfile in cloudfront to populate profileId.
 	// +kubebuilder:validation:Optional
-	ProfileIDRef *v1.Reference `json:"profileIdRef,omitempty" tf:"-"`
+	ProfileIDRef *v2.Reference `json:"profileIdRef,omitempty" tf:"-"`
 
 	// Selector for a FieldLevelEncryptionProfile in cloudfront to populate profileId.
 	// +kubebuilder:validation:Optional
-	ProfileIDSelector *v1.Selector `json:"profileIdSelector,omitempty" tf:"-"`
+	ProfileIDSelector *v2.Selector `json:"profileIdSelector,omitempty" tf:"-"`
 
 	// Query argument for field-level encryption query argument-profile mapping.
 	QueryArg *string `json:"queryArg,omitempty" tf:"query_arg,omitempty"`
@@ -217,11 +217,11 @@ type QueryArgProfilesItemsParameters struct {
 
 	// Reference to a FieldLevelEncryptionProfile in cloudfront to populate profileId.
 	// +kubebuilder:validation:Optional
-	ProfileIDRef *v1.Reference `json:"profileIdRef,omitempty" tf:"-"`
+	ProfileIDRef *v2.Reference `json:"profileIdRef,omitempty" tf:"-"`
 
 	// Selector for a FieldLevelEncryptionProfile in cloudfront to populate profileId.
 	// +kubebuilder:validation:Optional
-	ProfileIDSelector *v1.Selector `json:"profileIdSelector,omitempty" tf:"-"`
+	ProfileIDSelector *v2.Selector `json:"profileIdSelector,omitempty" tf:"-"`
 
 	// Query argument for field-level encryption query argument-profile mapping.
 	// +kubebuilder:validation:Optional
@@ -240,8 +240,8 @@ type QueryArgProfilesParameters struct {
 
 // FieldLevelEncryptionConfigSpec defines the desired state of FieldLevelEncryptionConfig
 type FieldLevelEncryptionConfigSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     FieldLevelEncryptionConfigParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   FieldLevelEncryptionConfigParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -257,8 +257,8 @@ type FieldLevelEncryptionConfigSpec struct {
 
 // FieldLevelEncryptionConfigStatus defines the observed state of FieldLevelEncryptionConfig.
 type FieldLevelEncryptionConfigStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        FieldLevelEncryptionConfigObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               FieldLevelEncryptionConfigObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

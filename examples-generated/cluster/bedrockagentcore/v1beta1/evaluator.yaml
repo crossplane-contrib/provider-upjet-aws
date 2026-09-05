@@ -1,0 +1,40 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
+apiVersion: bedrockagentcore.aws.upbound.io/v1beta1
+kind: Evaluator
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrockagentcore/v1beta1/evaluator
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    description: Rates assistant helpfulness from 1 to 5
+    evaluatorConfig:
+      llmAsAJudge:
+        instructionsSecretRef:
+          key: example-key
+          name: example-secret
+          namespace: upbound-system
+        modelConfig:
+          bedrockEvaluatorModelConfig:
+            inferenceConfig:
+              maxTokens: 1024
+              temperature: 0
+              topP: 1
+            modelId: us.amazon.nova-2-lite-v1:0
+        ratingScale:
+          numerical:
+          - definition: Not helpful at all.
+            label: "1"
+            value: 1
+          - definition: Extremely helpful.
+            label: "5"
+            value: 5
+    evaluatorName: helpfulness_evaluator
+    level: TRACE
+    region: us-west-1

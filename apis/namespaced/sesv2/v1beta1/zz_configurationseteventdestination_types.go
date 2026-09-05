@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CloudWatchDestinationInitParameters struct {
@@ -41,16 +40,16 @@ type ConfigurationSetEventDestinationInitParameters struct {
 
 	// Reference to a ConfigurationSet in sesv2 to populate configurationSetName.
 	// +kubebuilder:validation:Optional
-	ConfigurationSetNameRef *v1.NamespacedReference `json:"configurationSetNameRef,omitempty" tf:"-"`
+	ConfigurationSetNameRef *v2.NamespacedReference `json:"configurationSetNameRef,omitempty" tf:"-"`
 
 	// Selector for a ConfigurationSet in sesv2 to populate configurationSetName.
 	// +kubebuilder:validation:Optional
-	ConfigurationSetNameSelector *v1.NamespacedSelector `json:"configurationSetNameSelector,omitempty" tf:"-"`
-
-	// A name that identifies the event destination within the configuration set.
-	EventDestination *EventDestinationInitParameters `json:"eventDestination,omitempty" tf:"event_destination,omitempty"`
+	ConfigurationSetNameSelector *v2.NamespacedSelector `json:"configurationSetNameSelector,omitempty" tf:"-"`
 
 	// An object that defines the event destination. See event_destination Block for details.
+	EventDestination *EventDestinationInitParameters `json:"eventDestination,omitempty" tf:"event_destination,omitempty"`
+
+	// A name that identifies the event destination within the configuration set.
 	EventDestinationName *string `json:"eventDestinationName,omitempty" tf:"event_destination_name,omitempty"`
 }
 
@@ -59,10 +58,10 @@ type ConfigurationSetEventDestinationObservation struct {
 	// The name of the configuration set.
 	ConfigurationSetName *string `json:"configurationSetName,omitempty" tf:"configuration_set_name,omitempty"`
 
-	// A name that identifies the event destination within the configuration set.
+	// An object that defines the event destination. See event_destination Block for details.
 	EventDestination *EventDestinationObservation `json:"eventDestination,omitempty" tf:"event_destination,omitempty"`
 
-	// An object that defines the event destination. See event_destination Block for details.
+	// A name that identifies the event destination within the configuration set.
 	EventDestinationName *string `json:"eventDestinationName,omitempty" tf:"event_destination_name,omitempty"`
 
 	// A pipe-delimited string combining configuration_set_name and event_destination_name.
@@ -82,17 +81,17 @@ type ConfigurationSetEventDestinationParameters struct {
 
 	// Reference to a ConfigurationSet in sesv2 to populate configurationSetName.
 	// +kubebuilder:validation:Optional
-	ConfigurationSetNameRef *v1.NamespacedReference `json:"configurationSetNameRef,omitempty" tf:"-"`
+	ConfigurationSetNameRef *v2.NamespacedReference `json:"configurationSetNameRef,omitempty" tf:"-"`
 
 	// Selector for a ConfigurationSet in sesv2 to populate configurationSetName.
 	// +kubebuilder:validation:Optional
-	ConfigurationSetNameSelector *v1.NamespacedSelector `json:"configurationSetNameSelector,omitempty" tf:"-"`
+	ConfigurationSetNameSelector *v2.NamespacedSelector `json:"configurationSetNameSelector,omitempty" tf:"-"`
 
-	// A name that identifies the event destination within the configuration set.
+	// An object that defines the event destination. See event_destination Block for details.
 	// +kubebuilder:validation:Optional
 	EventDestination *EventDestinationParameters `json:"eventDestination,omitempty" tf:"event_destination,omitempty"`
 
-	// An object that defines the event destination. See event_destination Block for details.
+	// A name that identifies the event destination within the configuration set.
 	// +kubebuilder:validation:Optional
 	EventDestinationName *string `json:"eventDestinationName,omitempty" tf:"event_destination_name,omitempty"`
 
@@ -178,7 +177,7 @@ type EventDestinationInitParameters struct {
 	// +listType=set
 	MatchingEventTypes []*string `json:"matchingEventTypes,omitempty" tf:"matching_event_types,omitempty"`
 
-	// An object that defines an Amazon Pinpoint project destination for email events. See pinpoint_destination Block for details.
+	// An object that defines an AWS End User Messaging project destination for email events. See pinpoint_destination Block for details.
 	PinpointDestination *PinpointDestinationInitParameters `json:"pinpointDestination,omitempty" tf:"pinpoint_destination,omitempty"`
 
 	// An object that defines an Amazon SNS destination for email events. See sns_destination Block for details.
@@ -203,7 +202,7 @@ type EventDestinationObservation struct {
 	// +listType=set
 	MatchingEventTypes []*string `json:"matchingEventTypes,omitempty" tf:"matching_event_types,omitempty"`
 
-	// An object that defines an Amazon Pinpoint project destination for email events. See pinpoint_destination Block for details.
+	// An object that defines an AWS End User Messaging project destination for email events. See pinpoint_destination Block for details.
 	PinpointDestination *PinpointDestinationObservation `json:"pinpointDestination,omitempty" tf:"pinpoint_destination,omitempty"`
 
 	// An object that defines an Amazon SNS destination for email events. See sns_destination Block for details.
@@ -233,7 +232,7 @@ type EventDestinationParameters struct {
 	// +listType=set
 	MatchingEventTypes []*string `json:"matchingEventTypes" tf:"matching_event_types,omitempty"`
 
-	// An object that defines an Amazon Pinpoint project destination for email events. See pinpoint_destination Block for details.
+	// An object that defines an AWS End User Messaging project destination for email events. See pinpoint_destination Block for details.
 	// +kubebuilder:validation:Optional
 	PinpointDestination *PinpointDestinationParameters `json:"pinpointDestination,omitempty" tf:"pinpoint_destination,omitempty"`
 
@@ -251,11 +250,11 @@ type KinesisFirehoseDestinationInitParameters struct {
 
 	// Reference to a DeliveryStream in firehose to populate deliveryStreamArn.
 	// +kubebuilder:validation:Optional
-	DeliveryStreamArnRef *v1.NamespacedReference `json:"deliveryStreamArnRef,omitempty" tf:"-"`
+	DeliveryStreamArnRef *v2.NamespacedReference `json:"deliveryStreamArnRef,omitempty" tf:"-"`
 
 	// Selector for a DeliveryStream in firehose to populate deliveryStreamArn.
 	// +kubebuilder:validation:Optional
-	DeliveryStreamArnSelector *v1.NamespacedSelector `json:"deliveryStreamArnSelector,omitempty" tf:"-"`
+	DeliveryStreamArnSelector *v2.NamespacedSelector `json:"deliveryStreamArnSelector,omitempty" tf:"-"`
 
 	// The Amazon Resource Name (ARN) of the IAM role that the Amazon SES API v2 uses to send email events to the Amazon Kinesis Data Firehose stream.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
@@ -264,11 +263,11 @@ type KinesisFirehoseDestinationInitParameters struct {
 
 	// Reference to a Role in iam to populate iamRoleArn.
 	// +kubebuilder:validation:Optional
-	IAMRoleArnRef *v1.NamespacedReference `json:"iamRoleArnRef,omitempty" tf:"-"`
+	IAMRoleArnRef *v2.NamespacedReference `json:"iamRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate iamRoleArn.
 	// +kubebuilder:validation:Optional
-	IAMRoleArnSelector *v1.NamespacedSelector `json:"iamRoleArnSelector,omitempty" tf:"-"`
+	IAMRoleArnSelector *v2.NamespacedSelector `json:"iamRoleArnSelector,omitempty" tf:"-"`
 }
 
 type KinesisFirehoseDestinationObservation struct {
@@ -290,11 +289,11 @@ type KinesisFirehoseDestinationParameters struct {
 
 	// Reference to a DeliveryStream in firehose to populate deliveryStreamArn.
 	// +kubebuilder:validation:Optional
-	DeliveryStreamArnRef *v1.NamespacedReference `json:"deliveryStreamArnRef,omitempty" tf:"-"`
+	DeliveryStreamArnRef *v2.NamespacedReference `json:"deliveryStreamArnRef,omitempty" tf:"-"`
 
 	// Selector for a DeliveryStream in firehose to populate deliveryStreamArn.
 	// +kubebuilder:validation:Optional
-	DeliveryStreamArnSelector *v1.NamespacedSelector `json:"deliveryStreamArnSelector,omitempty" tf:"-"`
+	DeliveryStreamArnSelector *v2.NamespacedSelector `json:"deliveryStreamArnSelector,omitempty" tf:"-"`
 
 	// The Amazon Resource Name (ARN) of the IAM role that the Amazon SES API v2 uses to send email events to the Amazon Kinesis Data Firehose stream.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
@@ -304,11 +303,11 @@ type KinesisFirehoseDestinationParameters struct {
 
 	// Reference to a Role in iam to populate iamRoleArn.
 	// +kubebuilder:validation:Optional
-	IAMRoleArnRef *v1.NamespacedReference `json:"iamRoleArnRef,omitempty" tf:"-"`
+	IAMRoleArnRef *v2.NamespacedReference `json:"iamRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate iamRoleArn.
 	// +kubebuilder:validation:Optional
-	IAMRoleArnSelector *v1.NamespacedSelector `json:"iamRoleArnSelector,omitempty" tf:"-"`
+	IAMRoleArnSelector *v2.NamespacedSelector `json:"iamRoleArnSelector,omitempty" tf:"-"`
 }
 
 type PinpointDestinationInitParameters struct {
@@ -319,11 +318,11 @@ type PinpointDestinationInitParameters struct {
 
 	// Reference to a App in pinpoint to populate applicationArn.
 	// +kubebuilder:validation:Optional
-	ApplicationArnRef *v1.NamespacedReference `json:"applicationArnRef,omitempty" tf:"-"`
+	ApplicationArnRef *v2.NamespacedReference `json:"applicationArnRef,omitempty" tf:"-"`
 
 	// Selector for a App in pinpoint to populate applicationArn.
 	// +kubebuilder:validation:Optional
-	ApplicationArnSelector *v1.NamespacedSelector `json:"applicationArnSelector,omitempty" tf:"-"`
+	ApplicationArnSelector *v2.NamespacedSelector `json:"applicationArnSelector,omitempty" tf:"-"`
 }
 
 type PinpointDestinationObservation struct {
@@ -339,11 +338,11 @@ type PinpointDestinationParameters struct {
 
 	// Reference to a App in pinpoint to populate applicationArn.
 	// +kubebuilder:validation:Optional
-	ApplicationArnRef *v1.NamespacedReference `json:"applicationArnRef,omitempty" tf:"-"`
+	ApplicationArnRef *v2.NamespacedReference `json:"applicationArnRef,omitempty" tf:"-"`
 
 	// Selector for a App in pinpoint to populate applicationArn.
 	// +kubebuilder:validation:Optional
-	ApplicationArnSelector *v1.NamespacedSelector `json:"applicationArnSelector,omitempty" tf:"-"`
+	ApplicationArnSelector *v2.NamespacedSelector `json:"applicationArnSelector,omitempty" tf:"-"`
 }
 
 type SnsDestinationInitParameters struct {
@@ -355,11 +354,11 @@ type SnsDestinationInitParameters struct {
 
 	// Reference to a Topic in sns to populate topicArn.
 	// +kubebuilder:validation:Optional
-	TopicArnRef *v1.NamespacedReference `json:"topicArnRef,omitempty" tf:"-"`
+	TopicArnRef *v2.NamespacedReference `json:"topicArnRef,omitempty" tf:"-"`
 
 	// Selector for a Topic in sns to populate topicArn.
 	// +kubebuilder:validation:Optional
-	TopicArnSelector *v1.NamespacedSelector `json:"topicArnSelector,omitempty" tf:"-"`
+	TopicArnSelector *v2.NamespacedSelector `json:"topicArnSelector,omitempty" tf:"-"`
 }
 
 type SnsDestinationObservation struct {
@@ -378,11 +377,11 @@ type SnsDestinationParameters struct {
 
 	// Reference to a Topic in sns to populate topicArn.
 	// +kubebuilder:validation:Optional
-	TopicArnRef *v1.NamespacedReference `json:"topicArnRef,omitempty" tf:"-"`
+	TopicArnRef *v2.NamespacedReference `json:"topicArnRef,omitempty" tf:"-"`
 
 	// Selector for a Topic in sns to populate topicArn.
 	// +kubebuilder:validation:Optional
-	TopicArnSelector *v1.NamespacedSelector `json:"topicArnSelector,omitempty" tf:"-"`
+	TopicArnSelector *v2.NamespacedSelector `json:"topicArnSelector,omitempty" tf:"-"`
 }
 
 // ConfigurationSetEventDestinationSpec defines the desired state of ConfigurationSetEventDestination
@@ -404,8 +403,8 @@ type ConfigurationSetEventDestinationSpec struct {
 
 // ConfigurationSetEventDestinationStatus defines the observed state of ConfigurationSetEventDestination.
 type ConfigurationSetEventDestinationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ConfigurationSetEventDestinationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ConfigurationSetEventDestinationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

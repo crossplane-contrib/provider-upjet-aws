@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type TableItemInitParameters struct {
@@ -31,17 +30,20 @@ type TableItemInitParameters struct {
 
 	// Reference to a Table in dynamodb to populate tableName.
 	// +kubebuilder:validation:Optional
-	TableNameRef *v1.NamespacedReference `json:"tableNameRef,omitempty" tf:"-"`
+	TableNameRef *v2.NamespacedReference `json:"tableNameRef,omitempty" tf:"-"`
 
 	// Selector for a Table in dynamodb to populate tableName.
 	// +kubebuilder:validation:Optional
-	TableNameSelector *v1.NamespacedSelector `json:"tableNameSelector,omitempty" tf:"-"`
+	TableNameSelector *v2.NamespacedSelector `json:"tableNameSelector,omitempty" tf:"-"`
 }
 
 type TableItemObservation struct {
 
 	// Hash key to use for lookups and identification of the item
 	HashKey *string `json:"hashKey,omitempty" tf:"hash_key,omitempty"`
+
+	// Canonical string representation of the hash key value. Binary values are base64-encoded; numbers and strings are taken verbatim.
+	HashKeyValue *string `json:"hashKeyValue,omitempty" tf:"hash_key_value,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -50,6 +52,9 @@ type TableItemObservation struct {
 
 	// Range key to use for lookups and identification of the item. Required if there is range key defined in the table.
 	RangeKey *string `json:"rangeKey,omitempty" tf:"range_key,omitempty"`
+
+	// Canonical string representation of the range key value, when the table has a range key. Same encoding as hash_key_value.
+	RangeKeyValue *string `json:"rangeKeyValue,omitempty" tf:"range_key_value,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -85,11 +90,11 @@ type TableItemParameters struct {
 
 	// Reference to a Table in dynamodb to populate tableName.
 	// +kubebuilder:validation:Optional
-	TableNameRef *v1.NamespacedReference `json:"tableNameRef,omitempty" tf:"-"`
+	TableNameRef *v2.NamespacedReference `json:"tableNameRef,omitempty" tf:"-"`
 
 	// Selector for a Table in dynamodb to populate tableName.
 	// +kubebuilder:validation:Optional
-	TableNameSelector *v1.NamespacedSelector `json:"tableNameSelector,omitempty" tf:"-"`
+	TableNameSelector *v2.NamespacedSelector `json:"tableNameSelector,omitempty" tf:"-"`
 }
 
 // TableItemSpec defines the desired state of TableItem
@@ -111,8 +116,8 @@ type TableItemSpec struct {
 
 // TableItemStatus defines the observed state of TableItem.
 type TableItemStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        TableItemObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               TableItemObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

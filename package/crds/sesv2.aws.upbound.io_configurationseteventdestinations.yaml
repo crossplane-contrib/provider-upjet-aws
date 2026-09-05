@@ -1361,6 +1361,13 @@ spec:
                 x-kubernetes-list-map-keys:
                 - type
                 x-kubernetes-list-type: map
+              lastHandledReconcileAt:
+                description: |-
+                  LastHandledReconcileAt holds the value of the most recent
+                  reconcile-requested-at annotation token that the controller has
+                  processed. Users can compare this to the annotation to determine
+                  whether a reconcile request has been handled.
+                type: string
               observedGeneration:
                 description: |-
                   ObservedGeneration is the latest metadata.generation
@@ -1512,8 +1519,8 @@ spec:
                         type: object
                     type: object
                   eventDestination:
-                    description: A name that identifies the event destination within
-                      the configuration set.
+                    description: An object that defines the event destination. See
+                      event_destination Block for details.
                     properties:
                       cloudWatchDestination:
                         description: An object that defines an Amazon CloudWatch destination
@@ -1737,9 +1744,9 @@ spec:
                         type: array
                         x-kubernetes-list-type: set
                       pinpointDestination:
-                        description: An object that defines an Amazon Pinpoint project
-                          destination for email events. See pinpoint_destination Block
-                          for details.
+                        description: An object that defines an AWS End User Messaging
+                          project destination for email events. See pinpoint_destination
+                          Block for details.
                         properties:
                           applicationArn:
                             type: string
@@ -1905,8 +1912,8 @@ spec:
                         type: object
                     type: object
                   eventDestinationName:
-                    description: An object that defines the event destination. See
-                      event_destination Block for details.
+                    description: A name that identifies the event destination within
+                      the configuration set.
                     type: string
                   region:
                     description: |-
@@ -2009,8 +2016,8 @@ spec:
                         type: object
                     type: object
                   eventDestination:
-                    description: A name that identifies the event destination within
-                      the configuration set.
+                    description: An object that defines the event destination. See
+                      event_destination Block for details.
                     properties:
                       cloudWatchDestination:
                         description: An object that defines an Amazon CloudWatch destination
@@ -2234,9 +2241,9 @@ spec:
                         type: array
                         x-kubernetes-list-type: set
                       pinpointDestination:
-                        description: An object that defines an Amazon Pinpoint project
-                          destination for email events. See pinpoint_destination Block
-                          for details.
+                        description: An object that defines an AWS End User Messaging
+                          project destination for email events. See pinpoint_destination
+                          Block for details.
                         properties:
                           applicationArn:
                             type: string
@@ -2402,8 +2409,8 @@ spec:
                         type: object
                     type: object
                   eventDestinationName:
-                    description: An object that defines the event destination. See
-                      event_destination Block for details.
+                    description: A name that identifies the event destination within
+                      the configuration set.
                     type: string
                 type: object
               managementPolicies:
@@ -2511,8 +2518,8 @@ spec:
                     description: The name of the configuration set.
                     type: string
                   eventDestination:
-                    description: A name that identifies the event destination within
-                      the configuration set.
+                    description: An object that defines the event destination. See
+                      event_destination Block for details.
                     properties:
                       cloudWatchDestination:
                         description: An object that defines an Amazon CloudWatch destination
@@ -2586,9 +2593,9 @@ spec:
                         type: array
                         x-kubernetes-list-type: set
                       pinpointDestination:
-                        description: An object that defines an Amazon Pinpoint project
-                          destination for email events. See pinpoint_destination Block
-                          for details.
+                        description: An object that defines an AWS End User Messaging
+                          project destination for email events. See pinpoint_destination
+                          Block for details.
                         properties:
                           applicationArn:
                             type: string
@@ -2604,8 +2611,8 @@ spec:
                         type: object
                     type: object
                   eventDestinationName:
-                    description: An object that defines the event destination. See
-                      event_destination Block for details.
+                    description: A name that identifies the event destination within
+                      the configuration set.
                     type: string
                   id:
                     description: A pipe-delimited string combining configuration_set_name
@@ -2663,6 +2670,13 @@ spec:
                 x-kubernetes-list-map-keys:
                 - type
                 x-kubernetes-list-type: map
+              lastHandledReconcileAt:
+                description: |-
+                  LastHandledReconcileAt holds the value of the most recent
+                  reconcile-requested-at annotation token that the controller has
+                  processed. Users can compare this to the annotation to determine
+                  whether a reconcile request has been handled.
+                type: string
               observedGeneration:
                 description: |-
                   ObservedGeneration is the latest metadata.generation

@@ -9,7 +9,7 @@
 package v1beta2
 
 import (
-	"github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	"github.com/crossplane/crossplane/apis/v2/core/v2"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 )
 
@@ -74,10 +74,10 @@ func (in *AuthenticationModeParameters) DeepCopyInto(out *AuthenticationModePara
 	*out = *in
 	if in.PasswordsSecretRef != nil {
 		in, out := &in.PasswordsSecretRef, &out.PasswordsSecretRef
-		*out = new([]v1.SecretKeySelector)
+		*out = new([]v2.SecretKeySelector)
 		if **in != nil {
 			in, out := *in, *out
-			*out = make([]v1.SecretKeySelector, len(*in))
+			*out = make([]v2.SecretKeySelector, len(*in))
 			copy(*out, *in)
 		}
 	}
@@ -431,7 +431,7 @@ func (in *ReplicationGroupInitParameters) DeepCopyInto(out *ReplicationGroupInit
 	}
 	if in.AuthTokenSecretRef != nil {
 		in, out := &in.AuthTokenSecretRef, &out.AuthTokenSecretRef
-		*out = new(v1.SecretKeySelector)
+		*out = new(v2.SecretKeySelector)
 		**out = **in
 	}
 	if in.AuthTokenUpdateStrategy != nil {
@@ -464,6 +464,11 @@ func (in *ReplicationGroupInitParameters) DeepCopyInto(out *ReplicationGroupInit
 		*out = new(string)
 		**out = **in
 	}
+	if in.Durability != nil {
+		in, out := &in.Durability, &out.Durability
+		*out = new(string)
+		**out = **in
+	}
 	if in.Engine != nil {
 		in, out := &in.Engine, &out.Engine
 		*out = new(string)
@@ -486,12 +491,12 @@ func (in *ReplicationGroupInitParameters) DeepCopyInto(out *ReplicationGroupInit
 	}
 	if in.GlobalReplicationGroupIDRef != nil {
 		in, out := &in.GlobalReplicationGroupIDRef, &out.GlobalReplicationGroupIDRef
-		*out = new(v1.Reference)
+		*out = new(v2.Reference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.GlobalReplicationGroupIDSelector != nil {
 		in, out := &in.GlobalReplicationGroupIDSelector, &out.GlobalReplicationGroupIDSelector
-		*out = new(v1.Selector)
+		*out = new(v2.Selector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.IPDiscovery != nil {
@@ -506,12 +511,12 @@ func (in *ReplicationGroupInitParameters) DeepCopyInto(out *ReplicationGroupInit
 	}
 	if in.KMSKeyIDRef != nil {
 		in, out := &in.KMSKeyIDRef, &out.KMSKeyIDRef
-		*out = new(v1.Reference)
+		*out = new(v2.Reference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.KMSKeyIDSelector != nil {
 		in, out := &in.KMSKeyIDSelector, &out.KMSKeyIDSelector
-		*out = new(v1.Selector)
+		*out = new(v2.Selector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.LogDeliveryConfiguration != nil {
@@ -591,14 +596,14 @@ func (in *ReplicationGroupInitParameters) DeepCopyInto(out *ReplicationGroupInit
 	}
 	if in.SecurityGroupIDRefs != nil {
 		in, out := &in.SecurityGroupIDRefs, &out.SecurityGroupIDRefs
-		*out = make([]v1.Reference, len(*in))
+		*out = make([]v2.Reference, len(*in))
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
 	if in.SecurityGroupIDSelector != nil {
 		in, out := &in.SecurityGroupIDSelector, &out.SecurityGroupIDSelector
-		*out = new(v1.Selector)
+		*out = new(v2.Selector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.SecurityGroupIds != nil {
@@ -656,12 +661,12 @@ func (in *ReplicationGroupInitParameters) DeepCopyInto(out *ReplicationGroupInit
 	}
 	if in.SubnetGroupNameRef != nil {
 		in, out := &in.SubnetGroupNameRef, &out.SubnetGroupNameRef
-		*out = new(v1.Reference)
+		*out = new(v2.Reference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.SubnetGroupNameSelector != nil {
 		in, out := &in.SubnetGroupNameSelector, &out.SubnetGroupNameSelector
-		*out = new(v1.Selector)
+		*out = new(v2.Selector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.Tags != nil {
@@ -800,6 +805,11 @@ func (in *ReplicationGroupObservation) DeepCopyInto(out *ReplicationGroupObserva
 	}
 	if in.Description != nil {
 		in, out := &in.Description, &out.Description
+		*out = new(string)
+		**out = **in
+	}
+	if in.Durability != nil {
+		in, out := &in.Durability, &out.Durability
 		*out = new(string)
 		**out = **in
 	}
@@ -1077,7 +1087,7 @@ func (in *ReplicationGroupParameters) DeepCopyInto(out *ReplicationGroupParamete
 	}
 	if in.AuthTokenSecretRef != nil {
 		in, out := &in.AuthTokenSecretRef, &out.AuthTokenSecretRef
-		*out = new(v1.SecretKeySelector)
+		*out = new(v2.SecretKeySelector)
 		**out = **in
 	}
 	if in.AuthTokenUpdateStrategy != nil {
@@ -1115,6 +1125,11 @@ func (in *ReplicationGroupParameters) DeepCopyInto(out *ReplicationGroupParamete
 		*out = new(string)
 		**out = **in
 	}
+	if in.Durability != nil {
+		in, out := &in.Durability, &out.Durability
+		*out = new(string)
+		**out = **in
+	}
 	if in.Engine != nil {
 		in, out := &in.Engine, &out.Engine
 		*out = new(string)
@@ -1137,12 +1152,12 @@ func (in *ReplicationGroupParameters) DeepCopyInto(out *ReplicationGroupParamete
 	}
 	if in.GlobalReplicationGroupIDRef != nil {
 		in, out := &in.GlobalReplicationGroupIDRef, &out.GlobalReplicationGroupIDRef
-		*out = new(v1.Reference)
+		*out = new(v2.Reference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.GlobalReplicationGroupIDSelector != nil {
 		in, out := &in.GlobalReplicationGroupIDSelector, &out.GlobalReplicationGroupIDSelector
-		*out = new(v1.Selector)
+		*out = new(v2.Selector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.IPDiscovery != nil {
@@ -1157,12 +1172,12 @@ func (in *ReplicationGroupParameters) DeepCopyInto(out *ReplicationGroupParamete
 	}
 	if in.KMSKeyIDRef != nil {
 		in, out := &in.KMSKeyIDRef, &out.KMSKeyIDRef
-		*out = new(v1.Reference)
+		*out = new(v2.Reference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.KMSKeyIDSelector != nil {
 		in, out := &in.KMSKeyIDSelector, &out.KMSKeyIDSelector
-		*out = new(v1.Selector)
+		*out = new(v2.Selector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.LogDeliveryConfiguration != nil {
@@ -1247,14 +1262,14 @@ func (in *ReplicationGroupParameters) DeepCopyInto(out *ReplicationGroupParamete
 	}
 	if in.SecurityGroupIDRefs != nil {
 		in, out := &in.SecurityGroupIDRefs, &out.SecurityGroupIDRefs
-		*out = make([]v1.Reference, len(*in))
+		*out = make([]v2.Reference, len(*in))
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
 	if in.SecurityGroupIDSelector != nil {
 		in, out := &in.SecurityGroupIDSelector, &out.SecurityGroupIDSelector
-		*out = new(v1.Selector)
+		*out = new(v2.Selector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.SecurityGroupIds != nil {
@@ -1312,12 +1327,12 @@ func (in *ReplicationGroupParameters) DeepCopyInto(out *ReplicationGroupParamete
 	}
 	if in.SubnetGroupNameRef != nil {
 		in, out := &in.SubnetGroupNameRef, &out.SubnetGroupNameRef
-		*out = new(v1.Reference)
+		*out = new(v2.Reference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.SubnetGroupNameSelector != nil {
 		in, out := &in.SubnetGroupNameSelector, &out.SubnetGroupNameSelector
-		*out = new(v1.Selector)
+		*out = new(v2.Selector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.Tags != nil {
@@ -1372,7 +1387,7 @@ func (in *ReplicationGroupParameters) DeepCopy() *ReplicationGroupParameters {
 // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
 func (in *ReplicationGroupSpec) DeepCopyInto(out *ReplicationGroupSpec) {
 	*out = *in
-	in.ResourceSpec.DeepCopyInto(&out.ResourceSpec)
+	in.ClusterManagedResourceSpec.DeepCopyInto(&out.ClusterManagedResourceSpec)
 	in.ForProvider.DeepCopyInto(&out.ForProvider)
 	in.InitProvider.DeepCopyInto(&out.InitProvider)
 }
@@ -1390,7 +1405,7 @@ func (in *ReplicationGroupSpec) DeepCopy() *ReplicationGroupSpec {
 // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
 func (in *ReplicationGroupStatus) DeepCopyInto(out *ReplicationGroupStatus) {
 	*out = *in
-	in.ResourceStatus.DeepCopyInto(&out.ResourceStatus)
+	in.ManagedResourceStatus.DeepCopyInto(&out.ManagedResourceStatus)
 	in.AtProvider.DeepCopyInto(&out.AtProvider)
 }
 
@@ -1464,6 +1479,16 @@ func (in *UserInitParameters) DeepCopyInto(out *UserInitParameters) {
 				**out = **in
 			}
 		}
+	}
+	if in.PasswordsWoSecretRef != nil {
+		in, out := &in.PasswordsWoSecretRef, &out.PasswordsWoSecretRef
+		*out = new(v2.SecretKeySelector)
+		**out = **in
+	}
+	if in.PasswordsWoVersion != nil {
+		in, out := &in.PasswordsWoVersion, &out.PasswordsWoVersion
+		*out = new(float64)
+		**out = **in
 	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
@@ -1563,6 +1588,11 @@ func (in *UserObservation) DeepCopyInto(out *UserObservation) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.PasswordsWoVersion != nil {
+		in, out := &in.PasswordsWoVersion, &out.PasswordsWoVersion
+		*out = new(float64)
+		**out = **in
+	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
 		*out = new(string)
@@ -1642,12 +1672,22 @@ func (in *UserParameters) DeepCopyInto(out *UserParameters) {
 	}
 	if in.PasswordsSecretRef != nil {
 		in, out := &in.PasswordsSecretRef, &out.PasswordsSecretRef
-		*out = new([]v1.SecretKeySelector)
+		*out = new([]v2.SecretKeySelector)
 		if **in != nil {
 			in, out := *in, *out
-			*out = make([]v1.SecretKeySelector, len(*in))
+			*out = make([]v2.SecretKeySelector, len(*in))
 			copy(*out, *in)
 		}
+	}
+	if in.PasswordsWoSecretRef != nil {
+		in, out := &in.PasswordsWoSecretRef, &out.PasswordsWoSecretRef
+		*out = new(v2.SecretKeySelector)
+		**out = **in
+	}
+	if in.PasswordsWoVersion != nil {
+		in, out := &in.PasswordsWoVersion, &out.PasswordsWoVersion
+		*out = new(float64)
+		**out = **in
 	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
@@ -1690,7 +1730,7 @@ func (in *UserParameters) DeepCopy() *UserParameters {
 // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
 func (in *UserSpec) DeepCopyInto(out *UserSpec) {
 	*out = *in
-	in.ResourceSpec.DeepCopyInto(&out.ResourceSpec)
+	in.ClusterManagedResourceSpec.DeepCopyInto(&out.ClusterManagedResourceSpec)
 	in.ForProvider.DeepCopyInto(&out.ForProvider)
 	in.InitProvider.DeepCopyInto(&out.InitProvider)
 }
@@ -1708,7 +1748,7 @@ func (in *UserSpec) DeepCopy() *UserSpec {
 // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
 func (in *UserStatus) DeepCopyInto(out *UserStatus) {
 	*out = *in
-	in.ResourceStatus.DeepCopyInto(&out.ResourceStatus)
+	in.ManagedResourceStatus.DeepCopyInto(&out.ManagedResourceStatus)
 	in.AtProvider.DeepCopyInto(&out.AtProvider)
 }
 

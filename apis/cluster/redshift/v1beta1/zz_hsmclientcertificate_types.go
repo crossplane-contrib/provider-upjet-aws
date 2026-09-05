@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type HSMClientCertificateInitParameters struct {
@@ -58,8 +58,8 @@ type HSMClientCertificateParameters struct {
 
 // HSMClientCertificateSpec defines the desired state of HSMClientCertificate
 type HSMClientCertificateSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     HSMClientCertificateParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   HSMClientCertificateParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -75,8 +75,8 @@ type HSMClientCertificateSpec struct {
 
 // HSMClientCertificateStatus defines the observed state of HSMClientCertificate.
 type HSMClientCertificateStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        HSMClientCertificateObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               HSMClientCertificateObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

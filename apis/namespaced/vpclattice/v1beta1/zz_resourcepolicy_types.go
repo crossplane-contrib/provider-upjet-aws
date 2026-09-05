@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ResourcePolicyInitParameters struct {
@@ -26,11 +25,11 @@ type ResourcePolicyInitParameters struct {
 
 	// Reference to a ServiceNetwork in vpclattice to populate resourceArn.
 	// +kubebuilder:validation:Optional
-	ResourceArnRef *v1.NamespacedReference `json:"resourceArnRef,omitempty" tf:"-"`
+	ResourceArnRef *v2.NamespacedReference `json:"resourceArnRef,omitempty" tf:"-"`
 
 	// Selector for a ServiceNetwork in vpclattice to populate resourceArn.
 	// +kubebuilder:validation:Optional
-	ResourceArnSelector *v1.NamespacedSelector `json:"resourceArnSelector,omitempty" tf:"-"`
+	ResourceArnSelector *v2.NamespacedSelector `json:"resourceArnSelector,omitempty" tf:"-"`
 }
 
 type ResourcePolicyObservation struct {
@@ -66,11 +65,11 @@ type ResourcePolicyParameters struct {
 
 	// Reference to a ServiceNetwork in vpclattice to populate resourceArn.
 	// +kubebuilder:validation:Optional
-	ResourceArnRef *v1.NamespacedReference `json:"resourceArnRef,omitempty" tf:"-"`
+	ResourceArnRef *v2.NamespacedReference `json:"resourceArnRef,omitempty" tf:"-"`
 
 	// Selector for a ServiceNetwork in vpclattice to populate resourceArn.
 	// +kubebuilder:validation:Optional
-	ResourceArnSelector *v1.NamespacedSelector `json:"resourceArnSelector,omitempty" tf:"-"`
+	ResourceArnSelector *v2.NamespacedSelector `json:"resourceArnSelector,omitempty" tf:"-"`
 }
 
 // ResourcePolicySpec defines the desired state of ResourcePolicy
@@ -92,8 +91,8 @@ type ResourcePolicySpec struct {
 
 // ResourcePolicyStatus defines the observed state of ResourcePolicy.
 type ResourcePolicyStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ResourcePolicyObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ResourcePolicyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

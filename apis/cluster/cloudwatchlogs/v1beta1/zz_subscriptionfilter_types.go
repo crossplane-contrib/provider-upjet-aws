@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type SubscriptionFilterInitParameters struct {
@@ -25,11 +25,11 @@ type SubscriptionFilterInitParameters struct {
 
 	// Reference to a Stream in kinesis to populate destinationArn.
 	// +kubebuilder:validation:Optional
-	DestinationArnRef *v1.Reference `json:"destinationArnRef,omitempty" tf:"-"`
+	DestinationArnRef *v2.Reference `json:"destinationArnRef,omitempty" tf:"-"`
 
 	// Selector for a Stream in kinesis to populate destinationArn.
 	// +kubebuilder:validation:Optional
-	DestinationArnSelector *v1.Selector `json:"destinationArnSelector,omitempty" tf:"-"`
+	DestinationArnSelector *v2.Selector `json:"destinationArnSelector,omitempty" tf:"-"`
 
 	// Method used to distribute log data to the destination. By default log data is grouped by log stream, but the grouping can be set to random for a more even distribution. This property is only applicable when the destination is an Amazon Kinesis stream. Valid values are "Random" and "ByLogStream".
 	Distribution *string `json:"distribution,omitempty" tf:"distribution,omitempty"`
@@ -54,11 +54,11 @@ type SubscriptionFilterInitParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.Reference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 }
 
 type SubscriptionFilterObservation struct {
@@ -109,11 +109,11 @@ type SubscriptionFilterParameters struct {
 
 	// Reference to a Stream in kinesis to populate destinationArn.
 	// +kubebuilder:validation:Optional
-	DestinationArnRef *v1.Reference `json:"destinationArnRef,omitempty" tf:"-"`
+	DestinationArnRef *v2.Reference `json:"destinationArnRef,omitempty" tf:"-"`
 
 	// Selector for a Stream in kinesis to populate destinationArn.
 	// +kubebuilder:validation:Optional
-	DestinationArnSelector *v1.Selector `json:"destinationArnSelector,omitempty" tf:"-"`
+	DestinationArnSelector *v2.Selector `json:"destinationArnSelector,omitempty" tf:"-"`
 
 	// Method used to distribute log data to the destination. By default log data is grouped by log stream, but the grouping can be set to random for a more even distribution. This property is only applicable when the destination is an Amazon Kinesis stream. Valid values are "Random" and "ByLogStream".
 	// +kubebuilder:validation:Optional
@@ -149,17 +149,17 @@ type SubscriptionFilterParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.Reference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 }
 
 // SubscriptionFilterSpec defines the desired state of SubscriptionFilter
 type SubscriptionFilterSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     SubscriptionFilterParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   SubscriptionFilterParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -175,8 +175,8 @@ type SubscriptionFilterSpec struct {
 
 // SubscriptionFilterStatus defines the observed state of SubscriptionFilter.
 type SubscriptionFilterStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SubscriptionFilterObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SubscriptionFilterObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

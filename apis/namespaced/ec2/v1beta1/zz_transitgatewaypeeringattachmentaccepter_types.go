@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type TransitGatewayPeeringAttachmentAccepterInitParameters struct {
@@ -27,11 +26,11 @@ type TransitGatewayPeeringAttachmentAccepterInitParameters struct {
 
 	// Reference to a TransitGatewayPeeringAttachment in ec2 to populate transitGatewayAttachmentId.
 	// +kubebuilder:validation:Optional
-	TransitGatewayAttachmentIDRef *v1.NamespacedReference `json:"transitGatewayAttachmentIdRef,omitempty" tf:"-"`
+	TransitGatewayAttachmentIDRef *v2.NamespacedReference `json:"transitGatewayAttachmentIdRef,omitempty" tf:"-"`
 
 	// Selector for a TransitGatewayPeeringAttachment in ec2 to populate transitGatewayAttachmentId.
 	// +kubebuilder:validation:Optional
-	TransitGatewayAttachmentIDSelector *v1.NamespacedSelector `json:"transitGatewayAttachmentIdSelector,omitempty" tf:"-"`
+	TransitGatewayAttachmentIDSelector *v2.NamespacedSelector `json:"transitGatewayAttachmentIdSelector,omitempty" tf:"-"`
 }
 
 type TransitGatewayPeeringAttachmentAccepterObservation struct {
@@ -87,11 +86,11 @@ type TransitGatewayPeeringAttachmentAccepterParameters struct {
 
 	// Reference to a TransitGatewayPeeringAttachment in ec2 to populate transitGatewayAttachmentId.
 	// +kubebuilder:validation:Optional
-	TransitGatewayAttachmentIDRef *v1.NamespacedReference `json:"transitGatewayAttachmentIdRef,omitempty" tf:"-"`
+	TransitGatewayAttachmentIDRef *v2.NamespacedReference `json:"transitGatewayAttachmentIdRef,omitempty" tf:"-"`
 
 	// Selector for a TransitGatewayPeeringAttachment in ec2 to populate transitGatewayAttachmentId.
 	// +kubebuilder:validation:Optional
-	TransitGatewayAttachmentIDSelector *v1.NamespacedSelector `json:"transitGatewayAttachmentIdSelector,omitempty" tf:"-"`
+	TransitGatewayAttachmentIDSelector *v2.NamespacedSelector `json:"transitGatewayAttachmentIdSelector,omitempty" tf:"-"`
 }
 
 // TransitGatewayPeeringAttachmentAccepterSpec defines the desired state of TransitGatewayPeeringAttachmentAccepter
@@ -113,8 +112,8 @@ type TransitGatewayPeeringAttachmentAccepterSpec struct {
 
 // TransitGatewayPeeringAttachmentAccepterStatus defines the observed state of TransitGatewayPeeringAttachmentAccepter.
 type TransitGatewayPeeringAttachmentAccepterStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        TransitGatewayPeeringAttachmentAccepterObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               TransitGatewayPeeringAttachmentAccepterObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

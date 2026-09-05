@@ -19,6 +19,7 @@ func Configure(p *config.Provider) {
 		}
 		r.AddSingletonListConversion("log_delivery_configuration", "logDeliveryConfiguration")
 		r.AddSingletonListConversion("log_delivery_configuration[*].s3_configuration", "logDeliveryConfiguration[*].s3Configuration")
+		r.AddSingletonListConversion("maintenance_schedule", "maintenanceSchedule")
 	})
 	p.AddResourceConfigurator("aws_timestreaminfluxdb_db_cluster", func(r *config.Resource) {
 		r.References["vpc_subnet_ids"] = config.Reference{
@@ -29,5 +30,6 @@ func Configure(p *config.Provider) {
 		}
 		r.AddSingletonListConversion("log_delivery_configuration", "logDeliveryConfiguration")
 		r.AddSingletonListConversion("log_delivery_configuration[*].s3_configuration", "logDeliveryConfiguration[*].s3Configuration")
+		r.AddSingletonListConversion("maintenance_schedule", "maintenanceSchedule")
 	})
 }

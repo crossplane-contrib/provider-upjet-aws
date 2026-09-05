@@ -5,104 +5,104 @@
 
 package v1beta2
 
-import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+import xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 
 // GetCondition of this ClassificationJob.
-func (mg *ClassificationJob) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *ClassificationJob) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this ClassificationJob.
-func (mg *ClassificationJob) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *ClassificationJob) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this ClassificationJob.
-func (mg *ClassificationJob) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *ClassificationJob) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this ClassificationJob.
-func (mg *ClassificationJob) GetProviderConfigReference() *xpv1.Reference {
+func (mg *ClassificationJob) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this ClassificationJob.
-func (mg *ClassificationJob) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *ClassificationJob) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this ClassificationJob.
-func (mg *ClassificationJob) SetConditions(c ...xpv1.Condition) {
+func (mg *ClassificationJob) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this ClassificationJob.
-func (mg *ClassificationJob) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *ClassificationJob) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this ClassificationJob.
-func (mg *ClassificationJob) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *ClassificationJob) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this ClassificationJob.
-func (mg *ClassificationJob) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *ClassificationJob) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this ClassificationJob.
-func (mg *ClassificationJob) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *ClassificationJob) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this FindingsFilter.
-func (mg *FindingsFilter) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *FindingsFilter) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this FindingsFilter.
-func (mg *FindingsFilter) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *FindingsFilter) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this FindingsFilter.
-func (mg *FindingsFilter) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *FindingsFilter) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this FindingsFilter.
-func (mg *FindingsFilter) GetProviderConfigReference() *xpv1.Reference {
+func (mg *FindingsFilter) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this FindingsFilter.
-func (mg *FindingsFilter) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *FindingsFilter) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this FindingsFilter.
-func (mg *FindingsFilter) SetConditions(c ...xpv1.Condition) {
+func (mg *FindingsFilter) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this FindingsFilter.
-func (mg *FindingsFilter) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *FindingsFilter) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this FindingsFilter.
-func (mg *FindingsFilter) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *FindingsFilter) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this FindingsFilter.
-func (mg *FindingsFilter) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *FindingsFilter) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this FindingsFilter.
-func (mg *FindingsFilter) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *FindingsFilter) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type BackupInitParameters struct {
@@ -22,11 +22,11 @@ type BackupInitParameters struct {
 
 	// Reference to a LustreFileSystem in fsx to populate fileSystemId.
 	// +kubebuilder:validation:Optional
-	FileSystemIDRef *v1.Reference `json:"fileSystemIdRef,omitempty" tf:"-"`
+	FileSystemIDRef *v2.Reference `json:"fileSystemIdRef,omitempty" tf:"-"`
 
 	// Selector for a LustreFileSystem in fsx to populate fileSystemId.
 	// +kubebuilder:validation:Optional
-	FileSystemIDSelector *v1.Selector `json:"fileSystemIdSelector,omitempty" tf:"-"`
+	FileSystemIDSelector *v2.Selector `json:"fileSystemIdSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -82,11 +82,11 @@ type BackupParameters struct {
 
 	// Reference to a LustreFileSystem in fsx to populate fileSystemId.
 	// +kubebuilder:validation:Optional
-	FileSystemIDRef *v1.Reference `json:"fileSystemIdRef,omitempty" tf:"-"`
+	FileSystemIDRef *v2.Reference `json:"fileSystemIdRef,omitempty" tf:"-"`
 
 	// Selector for a LustreFileSystem in fsx to populate fileSystemId.
 	// +kubebuilder:validation:Optional
-	FileSystemIDSelector *v1.Selector `json:"fileSystemIdSelector,omitempty" tf:"-"`
+	FileSystemIDSelector *v2.Selector `json:"fileSystemIdSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -105,8 +105,8 @@ type BackupParameters struct {
 
 // BackupSpec defines the desired state of Backup
 type BackupSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     BackupParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   BackupParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -122,8 +122,8 @@ type BackupSpec struct {
 
 // BackupStatus defines the observed state of Backup.
 type BackupStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        BackupObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               BackupObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

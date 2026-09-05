@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ConditionalForwarderInitParameters struct {
@@ -51,11 +51,11 @@ type ConditionalForwarderParameters struct {
 
 	// Reference to a Directory in ds to populate directoryId.
 	// +kubebuilder:validation:Optional
-	DirectoryIDRef *v1.Reference `json:"directoryIdRef,omitempty" tf:"-"`
+	DirectoryIDRef *v2.Reference `json:"directoryIdRef,omitempty" tf:"-"`
 
 	// Selector for a Directory in ds to populate directoryId.
 	// +kubebuilder:validation:Optional
-	DirectoryIDSelector *v1.Selector `json:"directoryIdSelector,omitempty" tf:"-"`
+	DirectoryIDSelector *v2.Selector `json:"directoryIdSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -69,8 +69,8 @@ type ConditionalForwarderParameters struct {
 
 // ConditionalForwarderSpec defines the desired state of ConditionalForwarder
 type ConditionalForwarderSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ConditionalForwarderParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ConditionalForwarderParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -86,8 +86,8 @@ type ConditionalForwarderSpec struct {
 
 // ConditionalForwarderStatus defines the observed state of ConditionalForwarder.
 type ConditionalForwarderStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ConditionalForwarderObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ConditionalForwarderObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

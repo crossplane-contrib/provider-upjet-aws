@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type SamplingRuleInitParameters struct {
@@ -169,8 +169,8 @@ type SamplingRuleParameters struct {
 
 // SamplingRuleSpec defines the desired state of SamplingRule
 type SamplingRuleSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     SamplingRuleParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   SamplingRuleParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -186,8 +186,8 @@ type SamplingRuleSpec struct {
 
 // SamplingRuleStatus defines the observed state of SamplingRule.
 type SamplingRuleStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SamplingRuleObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SamplingRuleObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

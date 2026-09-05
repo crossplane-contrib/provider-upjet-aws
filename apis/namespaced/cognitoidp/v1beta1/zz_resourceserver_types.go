@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ResourceServerInitParameters struct {
@@ -31,11 +30,11 @@ type ResourceServerInitParameters struct {
 
 	// Reference to a UserPool in cognitoidp to populate userPoolId.
 	// +kubebuilder:validation:Optional
-	UserPoolIDRef *v1.NamespacedReference `json:"userPoolIdRef,omitempty" tf:"-"`
+	UserPoolIDRef *v2.NamespacedReference `json:"userPoolIdRef,omitempty" tf:"-"`
 
 	// Selector for a UserPool in cognitoidp to populate userPoolId.
 	// +kubebuilder:validation:Optional
-	UserPoolIDSelector *v1.NamespacedSelector `json:"userPoolIdSelector,omitempty" tf:"-"`
+	UserPoolIDSelector *v2.NamespacedSelector `json:"userPoolIdSelector,omitempty" tf:"-"`
 }
 
 type ResourceServerObservation struct {
@@ -87,11 +86,11 @@ type ResourceServerParameters struct {
 
 	// Reference to a UserPool in cognitoidp to populate userPoolId.
 	// +kubebuilder:validation:Optional
-	UserPoolIDRef *v1.NamespacedReference `json:"userPoolIdRef,omitempty" tf:"-"`
+	UserPoolIDRef *v2.NamespacedReference `json:"userPoolIdRef,omitempty" tf:"-"`
 
 	// Selector for a UserPool in cognitoidp to populate userPoolId.
 	// +kubebuilder:validation:Optional
-	UserPoolIDSelector *v1.NamespacedSelector `json:"userPoolIdSelector,omitempty" tf:"-"`
+	UserPoolIDSelector *v2.NamespacedSelector `json:"userPoolIdSelector,omitempty" tf:"-"`
 }
 
 type ScopeInitParameters struct {
@@ -142,8 +141,8 @@ type ResourceServerSpec struct {
 
 // ResourceServerStatus defines the observed state of ResourceServer.
 type ResourceServerStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ResourceServerObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ResourceServerObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

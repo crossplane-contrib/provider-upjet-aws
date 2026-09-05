@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type DBInstanceAutomatedBackupsReplicationInitParameters struct {
@@ -21,11 +21,11 @@ type DBInstanceAutomatedBackupsReplicationInitParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDRef *v1.Reference `json:"kmsKeyIdRef,omitempty" tf:"-"`
+	KMSKeyIDRef *v2.Reference `json:"kmsKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
+	KMSKeyIDSelector *v2.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
 	// A URL that contains a Signature Version 4 signed request for the StartDBInstanceAutomatedBackupsReplication action to be called in the AWS Region of the source DB instance.
 	PreSignedURL *string `json:"preSignedUrl,omitempty" tf:"pre_signed_url,omitempty"`
@@ -40,11 +40,11 @@ type DBInstanceAutomatedBackupsReplicationInitParameters struct {
 
 	// Reference to a Instance in rds to populate sourceDbInstanceArn.
 	// +kubebuilder:validation:Optional
-	SourceDBInstanceArnRef *v1.Reference `json:"sourceDbInstanceArnRef,omitempty" tf:"-"`
+	SourceDBInstanceArnRef *v2.Reference `json:"sourceDbInstanceArnRef,omitempty" tf:"-"`
 
 	// Selector for a Instance in rds to populate sourceDbInstanceArn.
 	// +kubebuilder:validation:Optional
-	SourceDBInstanceArnSelector *v1.Selector `json:"sourceDbInstanceArnSelector,omitempty" tf:"-"`
+	SourceDBInstanceArnSelector *v2.Selector `json:"sourceDbInstanceArnSelector,omitempty" tf:"-"`
 }
 
 type DBInstanceAutomatedBackupsReplicationObservation struct {
@@ -78,11 +78,11 @@ type DBInstanceAutomatedBackupsReplicationParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDRef *v1.Reference `json:"kmsKeyIdRef,omitempty" tf:"-"`
+	KMSKeyIDRef *v2.Reference `json:"kmsKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
+	KMSKeyIDSelector *v2.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
 	// A URL that contains a Signature Version 4 signed request for the StartDBInstanceAutomatedBackupsReplication action to be called in the AWS Region of the source DB instance.
 	// +kubebuilder:validation:Optional
@@ -105,17 +105,17 @@ type DBInstanceAutomatedBackupsReplicationParameters struct {
 
 	// Reference to a Instance in rds to populate sourceDbInstanceArn.
 	// +kubebuilder:validation:Optional
-	SourceDBInstanceArnRef *v1.Reference `json:"sourceDbInstanceArnRef,omitempty" tf:"-"`
+	SourceDBInstanceArnRef *v2.Reference `json:"sourceDbInstanceArnRef,omitempty" tf:"-"`
 
 	// Selector for a Instance in rds to populate sourceDbInstanceArn.
 	// +kubebuilder:validation:Optional
-	SourceDBInstanceArnSelector *v1.Selector `json:"sourceDbInstanceArnSelector,omitempty" tf:"-"`
+	SourceDBInstanceArnSelector *v2.Selector `json:"sourceDbInstanceArnSelector,omitempty" tf:"-"`
 }
 
 // DBInstanceAutomatedBackupsReplicationSpec defines the desired state of DBInstanceAutomatedBackupsReplication
 type DBInstanceAutomatedBackupsReplicationSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     DBInstanceAutomatedBackupsReplicationParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   DBInstanceAutomatedBackupsReplicationParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -131,8 +131,8 @@ type DBInstanceAutomatedBackupsReplicationSpec struct {
 
 // DBInstanceAutomatedBackupsReplicationStatus defines the observed state of DBInstanceAutomatedBackupsReplication.
 type DBInstanceAutomatedBackupsReplicationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        DBInstanceAutomatedBackupsReplicationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               DBInstanceAutomatedBackupsReplicationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

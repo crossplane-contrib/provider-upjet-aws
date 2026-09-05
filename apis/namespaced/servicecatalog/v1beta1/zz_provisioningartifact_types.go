@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ProvisioningArtifactInitParameters struct {
@@ -41,11 +40,11 @@ type ProvisioningArtifactInitParameters struct {
 
 	// Reference to a Product in servicecatalog to populate productId.
 	// +kubebuilder:validation:Optional
-	ProductIDRef *v1.NamespacedReference `json:"productIdRef,omitempty" tf:"-"`
+	ProductIDRef *v2.NamespacedReference `json:"productIdRef,omitempty" tf:"-"`
 
 	// Selector for a Product in servicecatalog to populate productId.
 	// +kubebuilder:validation:Optional
-	ProductIDSelector *v1.NamespacedSelector `json:"productIdSelector,omitempty" tf:"-"`
+	ProductIDSelector *v2.NamespacedSelector `json:"productIdSelector,omitempty" tf:"-"`
 
 	// Template source as the physical ID of the resource that contains the template. Currently only supports CloudFormation stack ARN. Specify the physical ID as arn:[partition]:cloudformation:[region]:[account ID]:stack/[stack name]/[resource ID].
 	TemplatePhysicalID *string `json:"templatePhysicalId,omitempty" tf:"template_physical_id,omitempty"`
@@ -137,11 +136,11 @@ type ProvisioningArtifactParameters struct {
 
 	// Reference to a Product in servicecatalog to populate productId.
 	// +kubebuilder:validation:Optional
-	ProductIDRef *v1.NamespacedReference `json:"productIdRef,omitempty" tf:"-"`
+	ProductIDRef *v2.NamespacedReference `json:"productIdRef,omitempty" tf:"-"`
 
 	// Selector for a Product in servicecatalog to populate productId.
 	// +kubebuilder:validation:Optional
-	ProductIDSelector *v1.NamespacedSelector `json:"productIdSelector,omitempty" tf:"-"`
+	ProductIDSelector *v2.NamespacedSelector `json:"productIdSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -180,8 +179,8 @@ type ProvisioningArtifactSpec struct {
 
 // ProvisioningArtifactStatus defines the observed state of ProvisioningArtifact.
 type ProvisioningArtifactStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ProvisioningArtifactObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ProvisioningArtifactObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

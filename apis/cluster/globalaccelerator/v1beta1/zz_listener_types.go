@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ListenerInitParameters struct {
@@ -21,11 +21,11 @@ type ListenerInitParameters struct {
 
 	// Reference to a Accelerator in globalaccelerator to populate acceleratorArn.
 	// +kubebuilder:validation:Optional
-	AcceleratorArnRef *v1.Reference `json:"acceleratorArnRef,omitempty" tf:"-"`
+	AcceleratorArnRef *v2.Reference `json:"acceleratorArnRef,omitempty" tf:"-"`
 
 	// Selector for a Accelerator in globalaccelerator to populate acceleratorArn.
 	// +kubebuilder:validation:Optional
-	AcceleratorArnSelector *v1.Selector `json:"acceleratorArnSelector,omitempty" tf:"-"`
+	AcceleratorArnSelector *v2.Selector `json:"acceleratorArnSelector,omitempty" tf:"-"`
 
 	// Direct all requests from a user to the same endpoint. Valid values are NONE, SOURCE_IP. Default: NONE. If NONE, Global Accelerator uses the "five-tuple" properties of source IP address, source port, destination IP address, destination port, and protocol to select the hash value. If SOURCE_IP, Global Accelerator uses the "two-tuple" properties of source (client) IP address and destination IP address to select the hash value.
 	ClientAffinity *string `json:"clientAffinity,omitempty" tf:"client_affinity,omitempty"`
@@ -67,11 +67,11 @@ type ListenerParameters struct {
 
 	// Reference to a Accelerator in globalaccelerator to populate acceleratorArn.
 	// +kubebuilder:validation:Optional
-	AcceleratorArnRef *v1.Reference `json:"acceleratorArnRef,omitempty" tf:"-"`
+	AcceleratorArnRef *v2.Reference `json:"acceleratorArnRef,omitempty" tf:"-"`
 
 	// Selector for a Accelerator in globalaccelerator to populate acceleratorArn.
 	// +kubebuilder:validation:Optional
-	AcceleratorArnSelector *v1.Selector `json:"acceleratorArnSelector,omitempty" tf:"-"`
+	AcceleratorArnSelector *v2.Selector `json:"acceleratorArnSelector,omitempty" tf:"-"`
 
 	// Direct all requests from a user to the same endpoint. Valid values are NONE, SOURCE_IP. Default: NONE. If NONE, Global Accelerator uses the "five-tuple" properties of source IP address, source port, destination IP address, destination port, and protocol to select the hash value. If SOURCE_IP, Global Accelerator uses the "two-tuple" properties of source (client) IP address and destination IP address to select the hash value.
 	// +kubebuilder:validation:Optional
@@ -117,8 +117,8 @@ type PortRangeParameters struct {
 
 // ListenerSpec defines the desired state of Listener
 type ListenerSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ListenerParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ListenerParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -134,8 +134,8 @@ type ListenerSpec struct {
 
 // ListenerStatus defines the observed state of Listener.
 type ListenerStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ListenerObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ListenerObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

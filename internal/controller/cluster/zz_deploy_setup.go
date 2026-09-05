@@ -43,3 +43,17 @@ func SetupGated_deploy(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupWebhookWithManager_deploy registers conversion webhooks for all resource kinds in the group.
+func SetupWebhookWithManager_deploy(mgr ctrl.Manager) error {
+	for _, setup := range []func(ctrl.Manager) error{
+		app.SetupWebhookWithManager,
+		deploymentconfig.SetupWebhookWithManager,
+		deploymentgroup.SetupWebhookWithManager,
+	} {
+		if err := setup(mgr); err != nil {
+			return err
+		}
+	}
+	return nil
+}

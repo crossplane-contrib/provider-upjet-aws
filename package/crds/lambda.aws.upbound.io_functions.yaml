@@ -973,6 +973,15 @@ spec:
                           type: string
                       type: object
                     type: array
+                  useResourceTimeoutForPropagation:
+                    description: Whether to apply resource level timeout values while
+                      retrying eventually consistent API operations. By default the
+                      provider uses a 5 minute timeout to allow for propagation in
+                      the Lambda service. When set to true, this default value is
+                      replaced with the configurable resource timeouts. Increased
+                      timeout values may be useful in highly active accounts, or regions
+                      where propagation delays are inconsistent.
+                    type: boolean
                   vpcConfig:
                     description: Configuration block for VPC. See below.
                     items:
@@ -2063,6 +2072,15 @@ spec:
                           type: string
                       type: object
                     type: array
+                  useResourceTimeoutForPropagation:
+                    description: Whether to apply resource level timeout values while
+                      retrying eventually consistent API operations. By default the
+                      provider uses a 5 minute timeout to allow for propagation in
+                      the Lambda service. When set to true, this default value is
+                      replaced with the configurable resource timeouts. Increased
+                      timeout values may be useful in highly active accounts, or regions
+                      where propagation delays are inconsistent.
+                    type: boolean
                   vpcConfig:
                     description: Configuration block for VPC. See below.
                     items:
@@ -2675,6 +2693,15 @@ spec:
                           type: string
                       type: object
                     type: array
+                  useResourceTimeoutForPropagation:
+                    description: Whether to apply resource level timeout values while
+                      retrying eventually consistent API operations. By default the
+                      provider uses a 5 minute timeout to allow for propagation in
+                      the Lambda service. When set to true, this default value is
+                      replaced with the configurable resource timeouts. Increased
+                      timeout values may be useful in highly active accounts, or regions
+                      where propagation delays are inconsistent.
+                    type: boolean
                   version:
                     description: Latest published version of your Lambda Function.
                     type: string
@@ -2753,6 +2780,13 @@ spec:
                 x-kubernetes-list-map-keys:
                 - type
                 x-kubernetes-list-type: map
+              lastHandledReconcileAt:
+                description: |-
+                  LastHandledReconcileAt holds the value of the most recent
+                  reconcile-requested-at annotation token that the controller has
+                  processed. Users can compare this to the annotation to determine
+                  whether a reconcile request has been handled.
+                type: string
               observedGeneration:
                 description: |-
                   ObservedGeneration is the latest metadata.generation
@@ -2985,10 +3019,12 @@ spec:
                         type: number
                     type: object
                   fileSystemConfig:
-                    description: Configuration block for EFS file system. See below.
+                    description: Configuration block for EFS or S3 Files file system.
+                      See below.
                     properties:
                       arn:
-                        description: ARN of the Amazon EFS Access Point.
+                        description: ARN of the Amazon EFS Access Point, or the Amazon
+                          S3 Files access point.
                         type: string
                       arnRef:
                         description: Reference to a AccessPoint in efs to populate
@@ -3694,6 +3730,15 @@ spec:
                         description: 'X-Ray tracing mode. Valid values: Active, PassThrough.'
                         type: string
                     type: object
+                  useResourceTimeoutForPropagation:
+                    description: Whether to apply resource level timeout values while
+                      retrying eventually consistent API operations. By default the
+                      provider uses a 5 minute timeout to allow for propagation in
+                      the Lambda service. When set to true, this default value is
+                      replaced with the configurable resource timeouts. Increased
+                      timeout values may be useful in highly active accounts, or regions
+                      where propagation delays are inconsistent.
+                    type: boolean
                   vpcConfig:
                     description: Configuration block for VPC. See below.
                     properties:
@@ -4051,10 +4096,12 @@ spec:
                         type: number
                     type: object
                   fileSystemConfig:
-                    description: Configuration block for EFS file system. See below.
+                    description: Configuration block for EFS or S3 Files file system.
+                      See below.
                     properties:
                       arn:
-                        description: ARN of the Amazon EFS Access Point.
+                        description: ARN of the Amazon EFS Access Point, or the Amazon
+                          S3 Files access point.
                         type: string
                       arnRef:
                         description: Reference to a AccessPoint in efs to populate
@@ -4755,6 +4802,15 @@ spec:
                         description: 'X-Ray tracing mode. Valid values: Active, PassThrough.'
                         type: string
                     type: object
+                  useResourceTimeoutForPropagation:
+                    description: Whether to apply resource level timeout values while
+                      retrying eventually consistent API operations. By default the
+                      provider uses a 5 minute timeout to allow for propagation in
+                      the Lambda service. When set to true, this default value is
+                      replaced with the configurable resource timeouts. Increased
+                      timeout values may be useful in highly active accounts, or regions
+                      where propagation delays are inconsistent.
+                    type: boolean
                   vpcConfig:
                     description: Configuration block for VPC. See below.
                     properties:
@@ -5117,10 +5173,12 @@ spec:
                         type: number
                     type: object
                   fileSystemConfig:
-                    description: Configuration block for EFS file system. See below.
+                    description: Configuration block for EFS or S3 Files file system.
+                      See below.
                     properties:
                       arn:
-                        description: ARN of the Amazon EFS Access Point.
+                        description: ARN of the Amazon EFS Access Point, or the Amazon
+                          S3 Files access point.
                         type: string
                       localMountPath:
                         description: Path where the function can access the file system.
@@ -5338,6 +5396,15 @@ spec:
                         description: 'X-Ray tracing mode. Valid values: Active, PassThrough.'
                         type: string
                     type: object
+                  useResourceTimeoutForPropagation:
+                    description: Whether to apply resource level timeout values while
+                      retrying eventually consistent API operations. By default the
+                      provider uses a 5 minute timeout to allow for propagation in
+                      the Lambda service. When set to true, this default value is
+                      replaced with the configurable resource timeouts. Increased
+                      timeout values may be useful in highly active accounts, or regions
+                      where propagation delays are inconsistent.
+                    type: boolean
                   version:
                     description: Latest published version of your Lambda Function.
                     type: string
@@ -5413,6 +5480,13 @@ spec:
                 x-kubernetes-list-map-keys:
                 - type
                 x-kubernetes-list-type: map
+              lastHandledReconcileAt:
+                description: |-
+                  LastHandledReconcileAt holds the value of the most recent
+                  reconcile-requested-at annotation token that the controller has
+                  processed. Users can compare this to the annotation to determine
+                  whether a reconcile request has been handled.
+                type: string
               observedGeneration:
                 description: |-
                   ObservedGeneration is the latest metadata.generation

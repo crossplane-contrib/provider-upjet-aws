@@ -36,6 +36,8 @@ func (tr *Function) GetObservation() (map[string]any, error) {
 
 // SetObservation for this Function
 func (tr *Function) SetObservation(obs map[string]any) error {
+	tr.Status.AtProvider.Tags = nil
+	tr.Status.AtProvider.TagsAll = nil
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -118,6 +120,7 @@ func (tr *Function) LateInitialize(attrs []byte) (bool, error) {
 		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
 	}
 	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+	opts = append(opts, resource.WithNameFilter("CodeSha256"))
 	opts = append(opts, resource.WithNameFilter("SourceCodeHash"))
 
 	li := resource.NewGenericLateInitializer(opts...)

@@ -157,9 +157,9 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: scraper-monolithic-demo-cluster
     vpcConfig:
-      - subnetIdRefs:
-        - name: subnet-1
-        - name: subnet-2
+      subnetIdRefs:
+      - name: subnet-1
+      - name: subnet-2
 ---
 apiVersion: ec2.aws.m.upbound.io/v1beta1
 kind: VPC

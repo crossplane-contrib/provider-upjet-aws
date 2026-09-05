@@ -173,6 +173,16 @@ spec:
                           type: boolean
                       type: object
                     type: array
+                  jobLevelCostAllocationConfiguration:
+                    description: Configuration for job-level cost allocation.
+                    items:
+                      properties:
+                        enabled:
+                          description: Enables the application to automatically start
+                            on job submission. Defaults to true.
+                          type: boolean
+                      type: object
+                    type: array
                   maximumCapacity:
                     description: The maximum capacity to allocate when the application
                       is created. This is cumulative across all workers at any given
@@ -473,6 +483,16 @@ spec:
                         studioEnabled:
                           description: Enables you to connect an application to Amazon
                             EMR Studio to run interactive workloads in a notebook.
+                          type: boolean
+                      type: object
+                    type: array
+                  jobLevelCostAllocationConfiguration:
+                    description: Configuration for job-level cost allocation.
+                    items:
+                      properties:
+                        enabled:
+                          description: Enables the application to automatically start
+                            on job submission. Defaults to true.
                           type: boolean
                       type: object
                     type: array
@@ -869,6 +889,16 @@ spec:
                           type: boolean
                       type: object
                     type: array
+                  jobLevelCostAllocationConfiguration:
+                    description: Configuration for job-level cost allocation.
+                    items:
+                      properties:
+                        enabled:
+                          description: Enables the application to automatically start
+                            on job submission. Defaults to true.
+                          type: boolean
+                      type: object
+                    type: array
                   maximumCapacity:
                     description: The maximum capacity to allocate when the application
                       is created. This is cumulative across all workers at any given
@@ -1113,6 +1143,13 @@ spec:
                 x-kubernetes-list-map-keys:
                 - type
                 x-kubernetes-list-type: map
+              lastHandledReconcileAt:
+                description: |-
+                  LastHandledReconcileAt holds the value of the most recent
+                  reconcile-requested-at annotation token that the controller has
+                  processed. Users can compare this to the annotation to determine
+                  whether a reconcile request has been handled.
+                type: string
               observedGeneration:
                 description: |-
                   ObservedGeneration is the latest metadata.generation
@@ -1266,6 +1303,13 @@ spec:
                           EMR Studio to run interactive workloads in a notebook.
                         type: boolean
                     type: object
+                  jobLevelCostAllocationConfiguration:
+                    properties:
+                      enabled:
+                        description: Enables the application to automatically start
+                          on job submission. Defaults to true.
+                        type: boolean
+                    type: object
                   maximumCapacity:
                     description: The maximum capacity to allocate when the application
                       is created. This is cumulative across all workers at any given
@@ -1532,6 +1576,13 @@ spec:
                       studioEnabled:
                         description: Enables you to connect an application to Amazon
                           EMR Studio to run interactive workloads in a notebook.
+                        type: boolean
+                    type: object
+                  jobLevelCostAllocationConfiguration:
+                    properties:
+                      enabled:
+                        description: Enables the application to automatically start
+                          on job submission. Defaults to true.
                         type: boolean
                     type: object
                   maximumCapacity:
@@ -1892,6 +1943,13 @@ spec:
                           EMR Studio to run interactive workloads in a notebook.
                         type: boolean
                     type: object
+                  jobLevelCostAllocationConfiguration:
+                    properties:
+                      enabled:
+                        description: Enables the application to automatically start
+                          on job submission. Defaults to true.
+                        type: boolean
+                    type: object
                   maximumCapacity:
                     description: The maximum capacity to allocate when the application
                       is created. This is cumulative across all workers at any given
@@ -2115,6 +2173,13 @@ spec:
                 x-kubernetes-list-map-keys:
                 - type
                 x-kubernetes-list-type: map
+              lastHandledReconcileAt:
+                description: |-
+                  LastHandledReconcileAt holds the value of the most recent
+                  reconcile-requested-at annotation token that the controller has
+                  processed. Users can compare this to the annotation to determine
+                  whether a reconcile request has been handled.
+                type: string
               observedGeneration:
                 description: |-
                   ObservedGeneration is the latest metadata.generation

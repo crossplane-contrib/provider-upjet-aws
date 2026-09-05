@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type SnapshotCopyGrantInitParameters struct {
@@ -21,11 +21,11 @@ type SnapshotCopyGrantInitParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDRef *v1.Reference `json:"kmsKeyIdRef,omitempty" tf:"-"`
+	KMSKeyIDRef *v2.Reference `json:"kmsKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
+	KMSKeyIDSelector *v2.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
 	// A friendly name for identifying the grant.
 	SnapshotCopyGrantName *string `json:"snapshotCopyGrantName,omitempty" tf:"snapshot_copy_grant_name,omitempty"`
@@ -70,11 +70,11 @@ type SnapshotCopyGrantParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDRef *v1.Reference `json:"kmsKeyIdRef,omitempty" tf:"-"`
+	KMSKeyIDRef *v2.Reference `json:"kmsKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
+	KMSKeyIDSelector *v2.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -93,8 +93,8 @@ type SnapshotCopyGrantParameters struct {
 
 // SnapshotCopyGrantSpec defines the desired state of SnapshotCopyGrant
 type SnapshotCopyGrantSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     SnapshotCopyGrantParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   SnapshotCopyGrantParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -110,8 +110,8 @@ type SnapshotCopyGrantSpec struct {
 
 // SnapshotCopyGrantStatus defines the observed state of SnapshotCopyGrant.
 type SnapshotCopyGrantStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SnapshotCopyGrantObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SnapshotCopyGrantObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

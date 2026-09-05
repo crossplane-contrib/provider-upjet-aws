@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type UserLoginProfileInitParameters struct {
@@ -31,11 +30,11 @@ type UserLoginProfileInitParameters struct {
 
 	// Reference to a User in iam to populate user.
 	// +kubebuilder:validation:Optional
-	UserRef *v1.NamespacedReference `json:"userRef,omitempty" tf:"-"`
+	UserRef *v2.NamespacedReference `json:"userRef,omitempty" tf:"-"`
 
 	// Selector for a User in iam to populate user.
 	// +kubebuilder:validation:Optional
-	UserSelector *v1.NamespacedSelector `json:"userSelector,omitempty" tf:"-"`
+	UserSelector *v2.NamespacedSelector `json:"userSelector,omitempty" tf:"-"`
 }
 
 type UserLoginProfileObservation struct {
@@ -82,11 +81,11 @@ type UserLoginProfileParameters struct {
 
 	// Reference to a User in iam to populate user.
 	// +kubebuilder:validation:Optional
-	UserRef *v1.NamespacedReference `json:"userRef,omitempty" tf:"-"`
+	UserRef *v2.NamespacedReference `json:"userRef,omitempty" tf:"-"`
 
 	// Selector for a User in iam to populate user.
 	// +kubebuilder:validation:Optional
-	UserSelector *v1.NamespacedSelector `json:"userSelector,omitempty" tf:"-"`
+	UserSelector *v2.NamespacedSelector `json:"userSelector,omitempty" tf:"-"`
 }
 
 // UserLoginProfileSpec defines the desired state of UserLoginProfile
@@ -108,8 +107,8 @@ type UserLoginProfileSpec struct {
 
 // UserLoginProfileStatus defines the observed state of UserLoginProfile.
 type UserLoginProfileStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        UserLoginProfileObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               UserLoginProfileObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type RuleInitParameters struct {
@@ -30,11 +29,11 @@ type RuleInitParameters struct {
 
 	// Reference to a Endpoint in route53resolver to populate resolverEndpointId.
 	// +kubebuilder:validation:Optional
-	ResolverEndpointIDRef *v1.NamespacedReference `json:"resolverEndpointIdRef,omitempty" tf:"-"`
+	ResolverEndpointIDRef *v2.NamespacedReference `json:"resolverEndpointIdRef,omitempty" tf:"-"`
 
 	// Selector for a Endpoint in route53resolver to populate resolverEndpointId.
 	// +kubebuilder:validation:Optional
-	ResolverEndpointIDSelector *v1.NamespacedSelector `json:"resolverEndpointIdSelector,omitempty" tf:"-"`
+	ResolverEndpointIDSelector *v2.NamespacedSelector `json:"resolverEndpointIdSelector,omitempty" tf:"-"`
 
 	// Rule type. Valid values are FORWARD, SYSTEM and RECURSIVE.
 	RuleType *string `json:"ruleType,omitempty" tf:"rule_type,omitempty"`
@@ -117,11 +116,11 @@ type RuleParameters struct {
 
 	// Reference to a Endpoint in route53resolver to populate resolverEndpointId.
 	// +kubebuilder:validation:Optional
-	ResolverEndpointIDRef *v1.NamespacedReference `json:"resolverEndpointIdRef,omitempty" tf:"-"`
+	ResolverEndpointIDRef *v2.NamespacedReference `json:"resolverEndpointIdRef,omitempty" tf:"-"`
 
 	// Selector for a Endpoint in route53resolver to populate resolverEndpointId.
 	// +kubebuilder:validation:Optional
-	ResolverEndpointIDSelector *v1.NamespacedSelector `json:"resolverEndpointIdSelector,omitempty" tf:"-"`
+	ResolverEndpointIDSelector *v2.NamespacedSelector `json:"resolverEndpointIdSelector,omitempty" tf:"-"`
 
 	// Rule type. Valid values are FORWARD, SYSTEM and RECURSIVE.
 	// +kubebuilder:validation:Optional
@@ -206,8 +205,8 @@ type RuleSpec struct {
 
 // RuleStatus defines the observed state of Rule.
 type RuleStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        RuleObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               RuleObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

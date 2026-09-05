@@ -10,6 +10,7 @@ import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
 	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
+	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	errors "github.com/pkg/errors"
 	common "github.com/upbound/provider-aws/v2/config/cluster/common"
 	apisresolver "github.com/upbound/provider-aws/v2/internal/apis"
@@ -228,6 +229,54 @@ func (mg *Scraper) ResolveReferences(ctx context.Context, c client.Reader) error
 
 		}
 	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Source); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.Source[i3].VPC); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "SecurityGroup", "SecurityGroupList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+					CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.Source[i3].VPC[i4].SecurityGroupIds),
+					Extract:       resource.ExtractResourceID(),
+					Namespace:     mg.GetNamespace(),
+					References:    mg.Spec.ForProvider.Source[i3].VPC[i4].SecurityGroupIdsRefs,
+					Selector:      mg.Spec.ForProvider.Source[i3].VPC[i4].SecurityGroupIdsSelector,
+					To:            reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.Source[i3].VPC[i4].SecurityGroupIds")
+			}
+			mg.Spec.ForProvider.Source[i3].VPC[i4].SecurityGroupIds = reference.ToPtrValues(mrsp.ResolvedValues)
+			mg.Spec.ForProvider.Source[i3].VPC[i4].SecurityGroupIdsRefs = mrsp.ResolvedReferences
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Source); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.Source[i3].VPC); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "Subnet", "SubnetList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+					CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.Source[i3].VPC[i4].SubnetIds),
+					Extract:       resource.ExtractResourceID(),
+					Namespace:     mg.GetNamespace(),
+					References:    mg.Spec.ForProvider.Source[i3].VPC[i4].SubnetIdsRefs,
+					Selector:      mg.Spec.ForProvider.Source[i3].VPC[i4].SubnetIdsSelector,
+					To:            reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.Source[i3].VPC[i4].SubnetIds")
+			}
+			mg.Spec.ForProvider.Source[i3].VPC[i4].SubnetIds = reference.ToPtrValues(mrsp.ResolvedValues)
+			mg.Spec.ForProvider.Source[i3].VPC[i4].SubnetIdsRefs = mrsp.ResolvedReferences
+
+		}
+	}
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.Destination); i3++ {
 		for i4 := 0; i4 < len(mg.Spec.InitProvider.Destination[i3].Amp); i4++ {
 			{
@@ -343,6 +392,54 @@ func (mg *Scraper) ResolveReferences(ctx context.Context, c client.Reader) error
 			}
 			mg.Spec.InitProvider.Source[i3].Eks[i4].SubnetIds = reference.ToPtrValues(mrsp.ResolvedValues)
 			mg.Spec.InitProvider.Source[i3].Eks[i4].SubnetIdsRefs = mrsp.ResolvedReferences
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Source); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.Source[i3].VPC); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "SecurityGroup", "SecurityGroupList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+					CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Source[i3].VPC[i4].SecurityGroupIds),
+					Extract:       resource.ExtractResourceID(),
+					Namespace:     mg.GetNamespace(),
+					References:    mg.Spec.InitProvider.Source[i3].VPC[i4].SecurityGroupIdsRefs,
+					Selector:      mg.Spec.InitProvider.Source[i3].VPC[i4].SecurityGroupIdsSelector,
+					To:            reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.Source[i3].VPC[i4].SecurityGroupIds")
+			}
+			mg.Spec.InitProvider.Source[i3].VPC[i4].SecurityGroupIds = reference.ToPtrValues(mrsp.ResolvedValues)
+			mg.Spec.InitProvider.Source[i3].VPC[i4].SecurityGroupIdsRefs = mrsp.ResolvedReferences
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Source); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.Source[i3].VPC); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "Subnet", "SubnetList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+					CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Source[i3].VPC[i4].SubnetIds),
+					Extract:       resource.ExtractResourceID(),
+					Namespace:     mg.GetNamespace(),
+					References:    mg.Spec.InitProvider.Source[i3].VPC[i4].SubnetIdsRefs,
+					Selector:      mg.Spec.InitProvider.Source[i3].VPC[i4].SubnetIdsSelector,
+					To:            reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.Source[i3].VPC[i4].SubnetIds")
+			}
+			mg.Spec.InitProvider.Source[i3].VPC[i4].SubnetIds = reference.ToPtrValues(mrsp.ResolvedValues)
+			mg.Spec.InitProvider.Source[i3].VPC[i4].SubnetIdsRefs = mrsp.ResolvedReferences
 
 		}
 	}

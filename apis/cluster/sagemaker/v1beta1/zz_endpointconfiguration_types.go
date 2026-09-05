@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AsyncInferenceConfigInitParameters struct {
@@ -89,6 +89,35 @@ type AsyncInferenceConfigParameters struct {
 	// Configuration for asynchronous inference invocation outputs.
 	// +kubebuilder:validation:Optional
 	OutputConfig []AsyncInferenceConfigOutputConfigParameters `json:"outputConfig" tf:"output_config,omitempty"`
+}
+
+type CapacityReservationConfigInitParameters struct {
+
+	// Capacity reservation preference. Valid value is capacity-reservations-only. When set to capacity-reservations-only, SageMaker AI launches instances only into an ML capacity reservation; if no capacity is available, the instances fail to launch.
+	CapacityReservationPreference *string `json:"capacityReservationPreference,omitempty" tf:"capacity_reservation_preference,omitempty"`
+
+	// The Amazon Resource Name (ARN) that uniquely identifies the ML capacity reservation that SageMaker AI applies when it deploys the endpoint.
+	MLReservationArn *string `json:"mlReservationArn,omitempty" tf:"ml_reservation_arn,omitempty"`
+}
+
+type CapacityReservationConfigObservation struct {
+
+	// Capacity reservation preference. Valid value is capacity-reservations-only. When set to capacity-reservations-only, SageMaker AI launches instances only into an ML capacity reservation; if no capacity is available, the instances fail to launch.
+	CapacityReservationPreference *string `json:"capacityReservationPreference,omitempty" tf:"capacity_reservation_preference,omitempty"`
+
+	// The Amazon Resource Name (ARN) that uniquely identifies the ML capacity reservation that SageMaker AI applies when it deploys the endpoint.
+	MLReservationArn *string `json:"mlReservationArn,omitempty" tf:"ml_reservation_arn,omitempty"`
+}
+
+type CapacityReservationConfigParameters struct {
+
+	// Capacity reservation preference. Valid value is capacity-reservations-only. When set to capacity-reservations-only, SageMaker AI launches instances only into an ML capacity reservation; if no capacity is available, the instances fail to launch.
+	// +kubebuilder:validation:Optional
+	CapacityReservationPreference *string `json:"capacityReservationPreference,omitempty" tf:"capacity_reservation_preference,omitempty"`
+
+	// The Amazon Resource Name (ARN) that uniquely identifies the ML capacity reservation that SageMaker AI applies when it deploys the endpoint.
+	// +kubebuilder:validation:Optional
+	MLReservationArn *string `json:"mlReservationArn,omitempty" tf:"ml_reservation_arn,omitempty"`
 }
 
 type CaptureContentTypeHeaderInitParameters struct {
@@ -277,11 +306,11 @@ type EndpointConfigurationInitParameters struct {
 
 	// Reference to a Role in iam to populate executionRoleArn.
 	// +kubebuilder:validation:Optional
-	ExecutionRoleArnRef *v1.Reference `json:"executionRoleArnRef,omitempty" tf:"-"`
+	ExecutionRoleArnRef *v2.Reference `json:"executionRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate executionRoleArn.
 	// +kubebuilder:validation:Optional
-	ExecutionRoleArnSelector *v1.Selector `json:"executionRoleArnSelector,omitempty" tf:"-"`
+	ExecutionRoleArnSelector *v2.Selector `json:"executionRoleArnSelector,omitempty" tf:"-"`
 
 	// ARN of a AWS KMS key that SageMaker AI uses to encrypt data on the storage volume attached to the ML compute instance that hosts the endpoint.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kms/v1beta1.Key
@@ -289,11 +318,11 @@ type EndpointConfigurationInitParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnRef *v1.Reference `json:"kmsKeyArnRef,omitempty" tf:"-"`
+	KMSKeyArnRef *v2.Reference `json:"kmsKeyArnRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnSelector *v1.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
+	KMSKeyArnSelector *v2.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
 
 	// List each model that you want to host at this endpoint. See below.
 	ProductionVariants []ProductionVariantsInitParameters `json:"productionVariants,omitempty" tf:"production_variants,omitempty"`
@@ -362,11 +391,11 @@ type EndpointConfigurationParameters struct {
 
 	// Reference to a Role in iam to populate executionRoleArn.
 	// +kubebuilder:validation:Optional
-	ExecutionRoleArnRef *v1.Reference `json:"executionRoleArnRef,omitempty" tf:"-"`
+	ExecutionRoleArnRef *v2.Reference `json:"executionRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate executionRoleArn.
 	// +kubebuilder:validation:Optional
-	ExecutionRoleArnSelector *v1.Selector `json:"executionRoleArnSelector,omitempty" tf:"-"`
+	ExecutionRoleArnSelector *v2.Selector `json:"executionRoleArnSelector,omitempty" tf:"-"`
 
 	// ARN of a AWS KMS key that SageMaker AI uses to encrypt data on the storage volume attached to the ML compute instance that hosts the endpoint.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kms/v1beta1.Key
@@ -375,11 +404,11 @@ type EndpointConfigurationParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnRef *v1.Reference `json:"kmsKeyArnRef,omitempty" tf:"-"`
+	KMSKeyArnRef *v2.Reference `json:"kmsKeyArnRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnSelector *v1.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
+	KMSKeyArnSelector *v2.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
 
 	// List each model that you want to host at this endpoint. See below.
 	// +kubebuilder:validation:Optional
@@ -486,6 +515,9 @@ type ProductionVariantsInitParameters struct {
 	// Size of the Elastic Inference (EI) instance to use for the production variant.
 	AcceleratorType *string `json:"acceleratorType,omitempty" tf:"accelerator_type,omitempty"`
 
+	// Settings for the capacity reservation for the compute instances that SageMaker AI reserves for an endpoint. See capacity_reservation_config below.
+	CapacityReservationConfig []CapacityReservationConfigInitParameters `json:"capacityReservationConfig,omitempty" tf:"capacity_reservation_config,omitempty"`
+
 	// Timeout value, in seconds, for your inference container to pass health check by SageMaker AI Hosting. For more information about health check, see How Your Container Should Respond to Health Check (Ping) Requests. Valid values between 60 and 3600.
 	ContainerStartupHealthCheckTimeoutInSeconds *float64 `json:"containerStartupHealthCheckTimeoutInSeconds,omitempty" tf:"container_startup_health_check_timeout_in_seconds,omitempty"`
 
@@ -519,11 +551,11 @@ type ProductionVariantsInitParameters struct {
 
 	// Reference to a Model in sagemaker to populate modelName.
 	// +kubebuilder:validation:Optional
-	ModelNameRef *v1.Reference `json:"modelNameRef,omitempty" tf:"-"`
+	ModelNameRef *v2.Reference `json:"modelNameRef,omitempty" tf:"-"`
 
 	// Selector for a Model in sagemaker to populate modelName.
 	// +kubebuilder:validation:Optional
-	ModelNameSelector *v1.Selector `json:"modelNameSelector,omitempty" tf:"-"`
+	ModelNameSelector *v2.Selector `json:"modelNameSelector,omitempty" tf:"-"`
 
 	// How the endpoint routes incoming traffic. See routing_config below.
 	RoutingConfig []RoutingConfigInitParameters `json:"routingConfig,omitempty" tf:"routing_config,omitempty"`
@@ -542,6 +574,9 @@ type ProductionVariantsObservation struct {
 
 	// Size of the Elastic Inference (EI) instance to use for the production variant.
 	AcceleratorType *string `json:"acceleratorType,omitempty" tf:"accelerator_type,omitempty"`
+
+	// Settings for the capacity reservation for the compute instances that SageMaker AI reserves for an endpoint. See capacity_reservation_config below.
+	CapacityReservationConfig []CapacityReservationConfigObservation `json:"capacityReservationConfig,omitempty" tf:"capacity_reservation_config,omitempty"`
 
 	// Timeout value, in seconds, for your inference container to pass health check by SageMaker AI Hosting. For more information about health check, see How Your Container Should Respond to Health Check (Ping) Requests. Valid values between 60 and 3600.
 	ContainerStartupHealthCheckTimeoutInSeconds *float64 `json:"containerStartupHealthCheckTimeoutInSeconds,omitempty" tf:"container_startup_health_check_timeout_in_seconds,omitempty"`
@@ -592,6 +627,10 @@ type ProductionVariantsParameters struct {
 	// +kubebuilder:validation:Optional
 	AcceleratorType *string `json:"acceleratorType,omitempty" tf:"accelerator_type,omitempty"`
 
+	// Settings for the capacity reservation for the compute instances that SageMaker AI reserves for an endpoint. See capacity_reservation_config below.
+	// +kubebuilder:validation:Optional
+	CapacityReservationConfig []CapacityReservationConfigParameters `json:"capacityReservationConfig,omitempty" tf:"capacity_reservation_config,omitempty"`
+
 	// Timeout value, in seconds, for your inference container to pass health check by SageMaker AI Hosting. For more information about health check, see How Your Container Should Respond to Health Check (Ping) Requests. Valid values between 60 and 3600.
 	// +kubebuilder:validation:Optional
 	ContainerStartupHealthCheckTimeoutInSeconds *float64 `json:"containerStartupHealthCheckTimeoutInSeconds,omitempty" tf:"container_startup_health_check_timeout_in_seconds,omitempty"`
@@ -635,11 +674,11 @@ type ProductionVariantsParameters struct {
 
 	// Reference to a Model in sagemaker to populate modelName.
 	// +kubebuilder:validation:Optional
-	ModelNameRef *v1.Reference `json:"modelNameRef,omitempty" tf:"-"`
+	ModelNameRef *v2.Reference `json:"modelNameRef,omitempty" tf:"-"`
 
 	// Selector for a Model in sagemaker to populate modelName.
 	// +kubebuilder:validation:Optional
-	ModelNameSelector *v1.Selector `json:"modelNameSelector,omitempty" tf:"-"`
+	ModelNameSelector *v2.Selector `json:"modelNameSelector,omitempty" tf:"-"`
 
 	// How the endpoint routes incoming traffic. See routing_config below.
 	// +kubebuilder:validation:Optional
@@ -716,6 +755,35 @@ type ServerlessConfigParameters struct {
 	ProvisionedConcurrency *float64 `json:"provisionedConcurrency,omitempty" tf:"provisioned_concurrency,omitempty"`
 }
 
+type ShadowProductionVariantsCapacityReservationConfigInitParameters struct {
+
+	// Capacity reservation preference. Valid value is capacity-reservations-only. When set to capacity-reservations-only, SageMaker AI launches instances only into an ML capacity reservation; if no capacity is available, the instances fail to launch.
+	CapacityReservationPreference *string `json:"capacityReservationPreference,omitempty" tf:"capacity_reservation_preference,omitempty"`
+
+	// The Amazon Resource Name (ARN) that uniquely identifies the ML capacity reservation that SageMaker AI applies when it deploys the endpoint.
+	MLReservationArn *string `json:"mlReservationArn,omitempty" tf:"ml_reservation_arn,omitempty"`
+}
+
+type ShadowProductionVariantsCapacityReservationConfigObservation struct {
+
+	// Capacity reservation preference. Valid value is capacity-reservations-only. When set to capacity-reservations-only, SageMaker AI launches instances only into an ML capacity reservation; if no capacity is available, the instances fail to launch.
+	CapacityReservationPreference *string `json:"capacityReservationPreference,omitempty" tf:"capacity_reservation_preference,omitempty"`
+
+	// The Amazon Resource Name (ARN) that uniquely identifies the ML capacity reservation that SageMaker AI applies when it deploys the endpoint.
+	MLReservationArn *string `json:"mlReservationArn,omitempty" tf:"ml_reservation_arn,omitempty"`
+}
+
+type ShadowProductionVariantsCapacityReservationConfigParameters struct {
+
+	// Capacity reservation preference. Valid value is capacity-reservations-only. When set to capacity-reservations-only, SageMaker AI launches instances only into an ML capacity reservation; if no capacity is available, the instances fail to launch.
+	// +kubebuilder:validation:Optional
+	CapacityReservationPreference *string `json:"capacityReservationPreference,omitempty" tf:"capacity_reservation_preference,omitempty"`
+
+	// The Amazon Resource Name (ARN) that uniquely identifies the ML capacity reservation that SageMaker AI applies when it deploys the endpoint.
+	// +kubebuilder:validation:Optional
+	MLReservationArn *string `json:"mlReservationArn,omitempty" tf:"ml_reservation_arn,omitempty"`
+}
+
 type ShadowProductionVariantsCoreDumpConfigInitParameters struct {
 
 	// S3 bucket to send the core dump to.
@@ -749,6 +817,9 @@ type ShadowProductionVariantsInitParameters struct {
 
 	// Size of the Elastic Inference (EI) instance to use for the production variant.
 	AcceleratorType *string `json:"acceleratorType,omitempty" tf:"accelerator_type,omitempty"`
+
+	// Settings for the capacity reservation for the compute instances that SageMaker AI reserves for an endpoint. See capacity_reservation_config below.
+	CapacityReservationConfig []ShadowProductionVariantsCapacityReservationConfigInitParameters `json:"capacityReservationConfig,omitempty" tf:"capacity_reservation_config,omitempty"`
 
 	// Timeout value, in seconds, for your inference container to pass health check by SageMaker AI Hosting. For more information about health check, see How Your Container Should Respond to Health Check (Ping) Requests. Valid values between 60 and 3600.
 	ContainerStartupHealthCheckTimeoutInSeconds *float64 `json:"containerStartupHealthCheckTimeoutInSeconds,omitempty" tf:"container_startup_health_check_timeout_in_seconds,omitempty"`
@@ -837,6 +908,9 @@ type ShadowProductionVariantsObservation struct {
 	// Size of the Elastic Inference (EI) instance to use for the production variant.
 	AcceleratorType *string `json:"acceleratorType,omitempty" tf:"accelerator_type,omitempty"`
 
+	// Settings for the capacity reservation for the compute instances that SageMaker AI reserves for an endpoint. See capacity_reservation_config below.
+	CapacityReservationConfig []ShadowProductionVariantsCapacityReservationConfigObservation `json:"capacityReservationConfig,omitempty" tf:"capacity_reservation_config,omitempty"`
+
 	// Timeout value, in seconds, for your inference container to pass health check by SageMaker AI Hosting. For more information about health check, see How Your Container Should Respond to Health Check (Ping) Requests. Valid values between 60 and 3600.
 	ContainerStartupHealthCheckTimeoutInSeconds *float64 `json:"containerStartupHealthCheckTimeoutInSeconds,omitempty" tf:"container_startup_health_check_timeout_in_seconds,omitempty"`
 
@@ -885,6 +959,10 @@ type ShadowProductionVariantsParameters struct {
 	// Size of the Elastic Inference (EI) instance to use for the production variant.
 	// +kubebuilder:validation:Optional
 	AcceleratorType *string `json:"acceleratorType,omitempty" tf:"accelerator_type,omitempty"`
+
+	// Settings for the capacity reservation for the compute instances that SageMaker AI reserves for an endpoint. See capacity_reservation_config below.
+	// +kubebuilder:validation:Optional
+	CapacityReservationConfig []ShadowProductionVariantsCapacityReservationConfigParameters `json:"capacityReservationConfig,omitempty" tf:"capacity_reservation_config,omitempty"`
 
 	// Timeout value, in seconds, for your inference container to pass health check by SageMaker AI Hosting. For more information about health check, see How Your Container Should Respond to Health Check (Ping) Requests. Valid values between 60 and 3600.
 	// +kubebuilder:validation:Optional
@@ -1003,8 +1081,8 @@ type ShadowProductionVariantsServerlessConfigParameters struct {
 
 // EndpointConfigurationSpec defines the desired state of EndpointConfiguration
 type EndpointConfigurationSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     EndpointConfigurationParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   EndpointConfigurationParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -1020,8 +1098,8 @@ type EndpointConfigurationSpec struct {
 
 // EndpointConfigurationStatus defines the observed state of EndpointConfiguration.
 type EndpointConfigurationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        EndpointConfigurationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               EndpointConfigurationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

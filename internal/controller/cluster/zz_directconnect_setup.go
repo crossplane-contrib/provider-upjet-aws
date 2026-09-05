@@ -82,3 +82,30 @@ func SetupGated_directconnect(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupWebhookWithManager_directconnect registers conversion webhooks for all resource kinds in the group.
+func SetupWebhookWithManager_directconnect(mgr ctrl.Manager) error {
+	for _, setup := range []func(ctrl.Manager) error{
+		bgppeer.SetupWebhookWithManager,
+		connection.SetupWebhookWithManager,
+		connectionassociation.SetupWebhookWithManager,
+		gateway.SetupWebhookWithManager,
+		gatewayassociation.SetupWebhookWithManager,
+		gatewayassociationproposal.SetupWebhookWithManager,
+		hostedprivatevirtualinterface.SetupWebhookWithManager,
+		hostedprivatevirtualinterfaceaccepter.SetupWebhookWithManager,
+		hostedpublicvirtualinterface.SetupWebhookWithManager,
+		hostedpublicvirtualinterfaceaccepter.SetupWebhookWithManager,
+		hostedtransitvirtualinterface.SetupWebhookWithManager,
+		hostedtransitvirtualinterfaceaccepter.SetupWebhookWithManager,
+		lag.SetupWebhookWithManager,
+		privatevirtualinterface.SetupWebhookWithManager,
+		publicvirtualinterface.SetupWebhookWithManager,
+		transitvirtualinterface.SetupWebhookWithManager,
+	} {
+		if err := setup(mgr); err != nil {
+			return err
+		}
+	}
+	return nil
+}

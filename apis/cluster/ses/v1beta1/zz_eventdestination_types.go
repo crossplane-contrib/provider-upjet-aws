@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CloudwatchDestinationInitParameters struct {
@@ -63,11 +63,11 @@ type EventDestinationInitParameters struct {
 
 	// Reference to a ConfigurationSet in ses to populate configurationSetName.
 	// +kubebuilder:validation:Optional
-	ConfigurationSetNameRef *v1.Reference `json:"configurationSetNameRef,omitempty" tf:"-"`
+	ConfigurationSetNameRef *v2.Reference `json:"configurationSetNameRef,omitempty" tf:"-"`
 
 	// Selector for a ConfigurationSet in ses to populate configurationSetName.
 	// +kubebuilder:validation:Optional
-	ConfigurationSetNameSelector *v1.Selector `json:"configurationSetNameSelector,omitempty" tf:"-"`
+	ConfigurationSetNameSelector *v2.Selector `json:"configurationSetNameSelector,omitempty" tf:"-"`
 
 	// If true, the event destination will be enabled
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
@@ -128,11 +128,11 @@ type EventDestinationParameters struct {
 
 	// Reference to a ConfigurationSet in ses to populate configurationSetName.
 	// +kubebuilder:validation:Optional
-	ConfigurationSetNameRef *v1.Reference `json:"configurationSetNameRef,omitempty" tf:"-"`
+	ConfigurationSetNameRef *v2.Reference `json:"configurationSetNameRef,omitempty" tf:"-"`
 
 	// Selector for a ConfigurationSet in ses to populate configurationSetName.
 	// +kubebuilder:validation:Optional
-	ConfigurationSetNameSelector *v1.Selector `json:"configurationSetNameSelector,omitempty" tf:"-"`
+	ConfigurationSetNameSelector *v2.Selector `json:"configurationSetNameSelector,omitempty" tf:"-"`
 
 	// If true, the event destination will be enabled
 	// +kubebuilder:validation:Optional
@@ -166,11 +166,11 @@ type KinesisDestinationInitParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.Reference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// The ARN of the Kinesis Stream
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/firehose/v1beta1.DeliveryStream
@@ -179,11 +179,11 @@ type KinesisDestinationInitParameters struct {
 
 	// Reference to a DeliveryStream in firehose to populate streamArn.
 	// +kubebuilder:validation:Optional
-	StreamArnRef *v1.Reference `json:"streamArnRef,omitempty" tf:"-"`
+	StreamArnRef *v2.Reference `json:"streamArnRef,omitempty" tf:"-"`
 
 	// Selector for a DeliveryStream in firehose to populate streamArn.
 	// +kubebuilder:validation:Optional
-	StreamArnSelector *v1.Selector `json:"streamArnSelector,omitempty" tf:"-"`
+	StreamArnSelector *v2.Selector `json:"streamArnSelector,omitempty" tf:"-"`
 }
 
 type KinesisDestinationObservation struct {
@@ -205,11 +205,11 @@ type KinesisDestinationParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.Reference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// The ARN of the Kinesis Stream
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/firehose/v1beta1.DeliveryStream
@@ -219,11 +219,11 @@ type KinesisDestinationParameters struct {
 
 	// Reference to a DeliveryStream in firehose to populate streamArn.
 	// +kubebuilder:validation:Optional
-	StreamArnRef *v1.Reference `json:"streamArnRef,omitempty" tf:"-"`
+	StreamArnRef *v2.Reference `json:"streamArnRef,omitempty" tf:"-"`
 
 	// Selector for a DeliveryStream in firehose to populate streamArn.
 	// +kubebuilder:validation:Optional
-	StreamArnSelector *v1.Selector `json:"streamArnSelector,omitempty" tf:"-"`
+	StreamArnSelector *v2.Selector `json:"streamArnSelector,omitempty" tf:"-"`
 }
 
 type SnsDestinationInitParameters struct {
@@ -235,11 +235,11 @@ type SnsDestinationInitParameters struct {
 
 	// Reference to a Topic in sns to populate topicArn.
 	// +kubebuilder:validation:Optional
-	TopicArnRef *v1.Reference `json:"topicArnRef,omitempty" tf:"-"`
+	TopicArnRef *v2.Reference `json:"topicArnRef,omitempty" tf:"-"`
 
 	// Selector for a Topic in sns to populate topicArn.
 	// +kubebuilder:validation:Optional
-	TopicArnSelector *v1.Selector `json:"topicArnSelector,omitempty" tf:"-"`
+	TopicArnSelector *v2.Selector `json:"topicArnSelector,omitempty" tf:"-"`
 }
 
 type SnsDestinationObservation struct {
@@ -258,17 +258,17 @@ type SnsDestinationParameters struct {
 
 	// Reference to a Topic in sns to populate topicArn.
 	// +kubebuilder:validation:Optional
-	TopicArnRef *v1.Reference `json:"topicArnRef,omitempty" tf:"-"`
+	TopicArnRef *v2.Reference `json:"topicArnRef,omitempty" tf:"-"`
 
 	// Selector for a Topic in sns to populate topicArn.
 	// +kubebuilder:validation:Optional
-	TopicArnSelector *v1.Selector `json:"topicArnSelector,omitempty" tf:"-"`
+	TopicArnSelector *v2.Selector `json:"topicArnSelector,omitempty" tf:"-"`
 }
 
 // EventDestinationSpec defines the desired state of EventDestination
 type EventDestinationSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     EventDestinationParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   EventDestinationParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -284,8 +284,8 @@ type EventDestinationSpec struct {
 
 // EventDestinationStatus defines the observed state of EventDestination.
 type EventDestinationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        EventDestinationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               EventDestinationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

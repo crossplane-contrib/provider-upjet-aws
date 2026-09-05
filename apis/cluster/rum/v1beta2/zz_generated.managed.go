@@ -5,54 +5,54 @@
 
 package v1beta2
 
-import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+import xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 
 // GetCondition of this AppMonitor.
-func (mg *AppMonitor) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *AppMonitor) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this AppMonitor.
-func (mg *AppMonitor) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *AppMonitor) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this AppMonitor.
-func (mg *AppMonitor) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *AppMonitor) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this AppMonitor.
-func (mg *AppMonitor) GetProviderConfigReference() *xpv1.Reference {
+func (mg *AppMonitor) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this AppMonitor.
-func (mg *AppMonitor) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *AppMonitor) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this AppMonitor.
-func (mg *AppMonitor) SetConditions(c ...xpv1.Condition) {
+func (mg *AppMonitor) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this AppMonitor.
-func (mg *AppMonitor) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *AppMonitor) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this AppMonitor.
-func (mg *AppMonitor) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *AppMonitor) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this AppMonitor.
-func (mg *AppMonitor) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *AppMonitor) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this AppMonitor.
-func (mg *AppMonitor) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *AppMonitor) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

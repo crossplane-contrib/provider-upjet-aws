@@ -5,54 +5,54 @@
 
 package v1beta2
 
-import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+import xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 
 // GetCondition of this PlaceIndex.
-func (mg *PlaceIndex) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *PlaceIndex) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this PlaceIndex.
-func (mg *PlaceIndex) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *PlaceIndex) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this PlaceIndex.
-func (mg *PlaceIndex) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *PlaceIndex) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this PlaceIndex.
-func (mg *PlaceIndex) GetProviderConfigReference() *xpv1.Reference {
+func (mg *PlaceIndex) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this PlaceIndex.
-func (mg *PlaceIndex) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *PlaceIndex) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this PlaceIndex.
-func (mg *PlaceIndex) SetConditions(c ...xpv1.Condition) {
+func (mg *PlaceIndex) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this PlaceIndex.
-func (mg *PlaceIndex) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *PlaceIndex) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this PlaceIndex.
-func (mg *PlaceIndex) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *PlaceIndex) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this PlaceIndex.
-func (mg *PlaceIndex) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *PlaceIndex) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this PlaceIndex.
-func (mg *PlaceIndex) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *PlaceIndex) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

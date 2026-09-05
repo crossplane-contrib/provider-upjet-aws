@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ResourceShareAccepterInitParameters struct {
@@ -23,11 +22,11 @@ type ResourceShareAccepterInitParameters struct {
 
 	// Reference to a PrincipalAssociation in ram to populate shareArn.
 	// +kubebuilder:validation:Optional
-	ShareArnRef *v1.NamespacedReference `json:"shareArnRef,omitempty" tf:"-"`
+	ShareArnRef *v2.NamespacedReference `json:"shareArnRef,omitempty" tf:"-"`
 
 	// Selector for a PrincipalAssociation in ram to populate shareArn.
 	// +kubebuilder:validation:Optional
-	ShareArnSelector *v1.NamespacedSelector `json:"shareArnSelector,omitempty" tf:"-"`
+	ShareArnSelector *v2.NamespacedSelector `json:"shareArnSelector,omitempty" tf:"-"`
 }
 
 type ResourceShareAccepterObservation struct {
@@ -77,11 +76,11 @@ type ResourceShareAccepterParameters struct {
 
 	// Reference to a PrincipalAssociation in ram to populate shareArn.
 	// +kubebuilder:validation:Optional
-	ShareArnRef *v1.NamespacedReference `json:"shareArnRef,omitempty" tf:"-"`
+	ShareArnRef *v2.NamespacedReference `json:"shareArnRef,omitempty" tf:"-"`
 
 	// Selector for a PrincipalAssociation in ram to populate shareArn.
 	// +kubebuilder:validation:Optional
-	ShareArnSelector *v1.NamespacedSelector `json:"shareArnSelector,omitempty" tf:"-"`
+	ShareArnSelector *v2.NamespacedSelector `json:"shareArnSelector,omitempty" tf:"-"`
 }
 
 // ResourceShareAccepterSpec defines the desired state of ResourceShareAccepter
@@ -103,8 +102,8 @@ type ResourceShareAccepterSpec struct {
 
 // ResourceShareAccepterStatus defines the observed state of ResourceShareAccepter.
 type ResourceShareAccepterStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ResourceShareAccepterObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ResourceShareAccepterObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

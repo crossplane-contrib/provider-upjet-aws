@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CopyStepDetailsDestinationFileLocationEFSFileLocationInitParameters struct {
@@ -651,11 +651,11 @@ type StepsCustomStepDetailsInitParameters struct {
 
 	// Reference to a Function in lambda to populate target.
 	// +kubebuilder:validation:Optional
-	TargetRef *v1.Reference `json:"targetRef,omitempty" tf:"-"`
+	TargetRef *v2.Reference `json:"targetRef,omitempty" tf:"-"`
 
 	// Selector for a Function in lambda to populate target.
 	// +kubebuilder:validation:Optional
-	TargetSelector *v1.Selector `json:"targetSelector,omitempty" tf:"-"`
+	TargetSelector *v2.Selector `json:"targetSelector,omitempty" tf:"-"`
 
 	// Timeout, in seconds, for the step.
 	TimeoutSeconds *float64 `json:"timeoutSeconds,omitempty" tf:"timeout_seconds,omitempty"`
@@ -694,11 +694,11 @@ type StepsCustomStepDetailsParameters struct {
 
 	// Reference to a Function in lambda to populate target.
 	// +kubebuilder:validation:Optional
-	TargetRef *v1.Reference `json:"targetRef,omitempty" tf:"-"`
+	TargetRef *v2.Reference `json:"targetRef,omitempty" tf:"-"`
 
 	// Selector for a Function in lambda to populate target.
 	// +kubebuilder:validation:Optional
-	TargetSelector *v1.Selector `json:"targetSelector,omitempty" tf:"-"`
+	TargetSelector *v2.Selector `json:"targetSelector,omitempty" tf:"-"`
 
 	// Timeout, in seconds, for the step.
 	// +kubebuilder:validation:Optional
@@ -1100,8 +1100,8 @@ type WorkflowParameters struct {
 
 // WorkflowSpec defines the desired state of Workflow
 type WorkflowSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     WorkflowParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   WorkflowParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -1117,8 +1117,8 @@ type WorkflowSpec struct {
 
 // WorkflowStatus defines the observed state of Workflow.
 type WorkflowStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        WorkflowObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               WorkflowObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

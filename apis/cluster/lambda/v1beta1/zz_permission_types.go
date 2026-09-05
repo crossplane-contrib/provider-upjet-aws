@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type PermissionInitParameters struct {
@@ -27,11 +27,11 @@ type PermissionInitParameters struct {
 
 	// Reference to a Function in lambda to populate functionName.
 	// +kubebuilder:validation:Optional
-	FunctionNameRef *v1.Reference `json:"functionNameRef,omitempty" tf:"-"`
+	FunctionNameRef *v2.Reference `json:"functionNameRef,omitempty" tf:"-"`
 
 	// Selector for a Function in lambda to populate functionName.
 	// +kubebuilder:validation:Optional
-	FunctionNameSelector *v1.Selector `json:"functionNameSelector,omitempty" tf:"-"`
+	FunctionNameSelector *v2.Selector `json:"functionNameSelector,omitempty" tf:"-"`
 
 	// Lambda Function URL authentication type. Valid values: AWS_IAM or NONE. Only valid with lambda:InvokeFunctionUrl action
 	FunctionURLAuthType *string `json:"functionUrlAuthType,omitempty" tf:"function_url_auth_type,omitempty"`
@@ -51,11 +51,11 @@ type PermissionInitParameters struct {
 
 	// Reference to a Alias in lambda to populate qualifier.
 	// +kubebuilder:validation:Optional
-	QualifierRef *v1.Reference `json:"qualifierRef,omitempty" tf:"-"`
+	QualifierRef *v2.Reference `json:"qualifierRef,omitempty" tf:"-"`
 
 	// Selector for a Alias in lambda to populate qualifier.
 	// +kubebuilder:validation:Optional
-	QualifierSelector *v1.Selector `json:"qualifierSelector,omitempty" tf:"-"`
+	QualifierSelector *v2.Selector `json:"qualifierSelector,omitempty" tf:"-"`
 
 	// AWS account ID of the source owner for cross-account access, S3, or SES
 	SourceAccount *string `json:"sourceAccount,omitempty" tf:"source_account,omitempty"`
@@ -132,11 +132,11 @@ type PermissionParameters struct {
 
 	// Reference to a Function in lambda to populate functionName.
 	// +kubebuilder:validation:Optional
-	FunctionNameRef *v1.Reference `json:"functionNameRef,omitempty" tf:"-"`
+	FunctionNameRef *v2.Reference `json:"functionNameRef,omitempty" tf:"-"`
 
 	// Selector for a Function in lambda to populate functionName.
 	// +kubebuilder:validation:Optional
-	FunctionNameSelector *v1.Selector `json:"functionNameSelector,omitempty" tf:"-"`
+	FunctionNameSelector *v2.Selector `json:"functionNameSelector,omitempty" tf:"-"`
 
 	// Lambda Function URL authentication type. Valid values: AWS_IAM or NONE. Only valid with lambda:InvokeFunctionUrl action
 	// +kubebuilder:validation:Optional
@@ -161,11 +161,11 @@ type PermissionParameters struct {
 
 	// Reference to a Alias in lambda to populate qualifier.
 	// +kubebuilder:validation:Optional
-	QualifierRef *v1.Reference `json:"qualifierRef,omitempty" tf:"-"`
+	QualifierRef *v2.Reference `json:"qualifierRef,omitempty" tf:"-"`
 
 	// Selector for a Alias in lambda to populate qualifier.
 	// +kubebuilder:validation:Optional
-	QualifierSelector *v1.Selector `json:"qualifierSelector,omitempty" tf:"-"`
+	QualifierSelector *v2.Selector `json:"qualifierSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration
 	// Region is the region you'd like your resource to be created in.
@@ -191,8 +191,8 @@ type PermissionParameters struct {
 
 // PermissionSpec defines the desired state of Permission
 type PermissionSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     PermissionParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   PermissionParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -208,8 +208,8 @@ type PermissionSpec struct {
 
 // PermissionStatus defines the observed state of Permission.
 type PermissionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        PermissionObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               PermissionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

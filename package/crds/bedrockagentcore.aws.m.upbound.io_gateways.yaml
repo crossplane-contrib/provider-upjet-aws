@@ -81,10 +81,205 @@ spec:
                               type: string
                             type: array
                             x-kubernetes-list-type: set
+                          allowedScopes:
+                            description: Set of scopes that are allowed to access
+                              the token.
+                            items:
+                              type: string
+                            type: array
+                            x-kubernetes-list-type: set
+                          allowedWorkloadConfiguration:
+                            description: Configuration restricting which workloads
+                              may use this authorizer. See allowed_workload_configuration
+                              below.
+                            properties:
+                              hostingEnvironment:
+                                description: Hosting environments allowed to use the
+                                  authorizer. Between 1 and 10 entries. See hosting_environment
+                                  below.
+                                items:
+                                  properties:
+                                    arn:
+                                      description: ARN of the policy engine. The policy
+                                        engine contains Cedar policies that define
+                                        fine-grained authorization rules specifying
+                                        who can perform what actions on which resources
+                                        as agents interact through the gateway.
+                                      type: string
+                                  type: object
+                                type: array
+                              workloadIdentities:
+                                description: List of workload identity names allowed
+                                  to use the authorizer. Between 1 and 10 entries.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          customClaim:
+                            description: Repeatable block to define a custom claim
+                              validation name, value, and operation. See custom_claim
+                              below.
+                            items:
+                              properties:
+                                authorizingClaimMatchValue:
+                                  description: Configuration block to define the value
+                                    or values to match for and the relationship of
+                                    the match. See authorizing_claim_match_value below.
+                                  properties:
+                                    claimMatchOperator:
+                                      description: Relationship between the claim
+                                        field value and the value or values to match
+                                        for. Valid values are EQUALS, CONTAINS, and
+                                        CONTAINS_ANY. EQUALS can be used only when
+                                        inbound_token_claim_value_type is STRING.
+                                        CONTAINS or CONTAINS_ANY can be used only
+                                        when inbound_token_claim_value_type is STRING_ARRAY.
+                                      type: string
+                                    claimMatchValue:
+                                      description: Value or values to match for. See
+                                        claim_match_value below.
+                                      properties:
+                                        matchValueString:
+                                          description: String value to match for.
+                                            Must be specified when claim_match_operator
+                                            is EQUALS or CONTAINS. Exactly one of
+                                            match_value_string or match_value_string_list
+                                            must be specified.
+                                          type: string
+                                        matchValueStringList:
+                                          description: List of strings to check for
+                                            a match. Must be specified when claim_match_operator
+                                            is CONTAINS_ANY. Exactly one of match_value_string
+                                            or match_value_string_list must be specified.
+                                          items:
+                                            type: string
+                                          type: array
+                                          x-kubernetes-list-type: set
+                                      type: object
+                                  type: object
+                                inboundTokenClaimName:
+                                  description: Name of the custom claim field to check.
+                                  type: string
+                                inboundTokenClaimValueType:
+                                  description: Data type of the claim value to check
+                                    for. Valid values are STRING and STRING_ARRAY.
+                                  type: string
+                              type: object
+                            type: array
                           discoveryUrl:
                             description: URL used to fetch OpenID Connect configuration
                               or authorization server metadata. Must end with .well-known/openid-configuration.
                             type: string
+                          privateEndpoint:
+                            description: Private endpoint used to reach the authorization
+                              server. See private_endpoint below.
+                            properties:
+                              managedVpcResource:
+                                description: Managed VPC resource configuration. See
+                                  managed_vpc_resource below.
+                                properties:
+                                  endpointIpAddressType:
+                                    description: IP address type for the endpoint.
+                                      Valid values are IPV4 and IPV6.
+                                    type: string
+                                  routingDomain:
+                                    description: Routing domain for the endpoint.
+                                    type: string
+                                  securityGroupIds:
+                                    description: IDs of the security groups for the
+                                      endpoint.
+                                    items:
+                                      type: string
+                                    type: array
+                                    x-kubernetes-list-type: set
+                                  subnetIds:
+                                    description: IDs of the subnets for the endpoint.
+                                    items:
+                                      type: string
+                                    type: array
+                                    x-kubernetes-list-type: set
+                                  tags:
+                                    additionalProperties:
+                                      type: string
+                                    description: Key-value map of resource tags.
+                                    type: object
+                                    x-kubernetes-map-type: granular
+                                  vpcIdentifier:
+                                    description: Identifier of the VPC for the endpoint.
+                                    type: string
+                                type: object
+                              selfManagedLatticeResource:
+                                description: Self-managed VPC Lattice resource configuration.
+                                  See self_managed_lattice_resource below.
+                                properties:
+                                  resourceConfigurationIdentifier:
+                                    description: Identifier of the VPC Lattice resource
+                                      configuration.
+                                    type: string
+                                type: object
+                            type: object
+                          privateEndpointOverrides:
+                            description: Overrides for the private endpoints used
+                              to reach the authorization server. See private_endpoint_overrides
+                              below.
+                            items:
+                              properties:
+                                domain:
+                                  description: Domain the override applies to.
+                                  type: string
+                                privateEndpoint:
+                                  description: Private endpoint configuration. See
+                                    private_endpoint below.
+                                  properties:
+                                    managedVpcResource:
+                                      description: Managed VPC resource configuration.
+                                        See managed_vpc_resource below.
+                                      properties:
+                                        endpointIpAddressType:
+                                          description: IP address type for the endpoint.
+                                            Valid values are IPV4 and IPV6.
+                                          type: string
+                                        routingDomain:
+                                          description: Routing domain for the endpoint.
+                                          type: string
+                                        securityGroupIds:
+                                          description: IDs of the security groups
+                                            for the endpoint.
+                                          items:
+                                            type: string
+                                          type: array
+                                          x-kubernetes-list-type: set
+                                        subnetIds:
+                                          description: IDs of the subnets for the
+                                            endpoint.
+                                          items:
+                                            type: string
+                                          type: array
+                                          x-kubernetes-list-type: set
+                                        tags:
+                                          additionalProperties:
+                                            type: string
+                                          description: Key-value map of resource tags.
+                                          type: object
+                                          x-kubernetes-map-type: granular
+                                        vpcIdentifier:
+                                          description: Identifier of the VPC for the
+                                            endpoint.
+                                          type: string
+                                      type: object
+                                    selfManagedLatticeResource:
+                                      description: Self-managed VPC Lattice resource
+                                        configuration. See self_managed_lattice_resource
+                                        below.
+                                      properties:
+                                        resourceConfigurationIdentifier:
+                                          description: Identifier of the VPC Lattice
+                                            resource configuration.
+                                          type: string
+                                      type: object
+                                  type: object
+                              type: object
+                            type: array
                         type: object
                     type: object
                   authorizerType:
@@ -96,8 +291,7 @@ spec:
                     description: Description of the gateway.
                     type: string
                   exceptionLevel:
-                    description: 'Exception level for the gateway. Valid values: INFO,
-                      WARN, ERROR.'
+                    description: 'Exception level for the gateway. Valid values: DEBUG.'
                     type: string
                   interceptorConfiguration:
                     description: List of interceptor configurations for the gateway.
@@ -304,6 +498,110 @@ spec:
                   name:
                     description: Name of the gateway.
                     type: string
+                  policyEngineConfiguration:
+                    description: Configuration for a policy engine associated with
+                      the gateway. A policy engine is a collection of policies that
+                      evaluates and authorizes agent tool calls. When associated with
+                      a gateway, the policy engine intercepts all agent requests and
+                      determines whether to allow or deny each action based on the
+                      defined policies. See policy_engine_configuration below.
+                    properties:
+                      arn:
+                        description: ARN of the policy engine. The policy engine contains
+                          Cedar policies that define fine-grained authorization rules
+                          specifying who can perform what actions on which resources
+                          as agents interact through the gateway.
+                        type: string
+                      arnRef:
+                        description: Reference to a PolicyEngine in bedrockagentcore
+                          to populate arn.
+                        properties:
+                          name:
+                            description: Name of the referenced object.
+                            type: string
+                          namespace:
+                            description: Namespace of the referenced object
+                            type: string
+                          policy:
+                            description: Policies for referencing.
+                            properties:
+                              resolution:
+                                default: Required
+                                description: |-
+                                  Resolution specifies whether resolution of this reference is required.
+                                  The default is 'Required', which means the reconcile will fail if the
+                                  reference cannot be resolved. 'Optional' means this reference will be
+                                  a no-op if it cannot be resolved.
+                                enum:
+                                - Required
+                                - Optional
+                                type: string
+                              resolve:
+                                description: |-
+                                  Resolve specifies when this reference should be resolved. The default
+                                  is 'IfNotPresent', which will attempt to resolve the reference only when
+                                  the corresponding field is not present. Use 'Always' to resolve the
+                                  reference on every reconcile.
+                                enum:
+                                - Always
+                                - IfNotPresent
+                                type: string
+                            type: object
+                        required:
+                        - name
+                        type: object
+                      arnSelector:
+                        description: Selector for a PolicyEngine in bedrockagentcore
+                          to populate arn.
+                        properties:
+                          matchControllerRef:
+                            description: |-
+                              MatchControllerRef ensures an object with the same controller reference
+                              as the selecting object is selected.
+                            type: boolean
+                          matchLabels:
+                            additionalProperties:
+                              type: string
+                            description: MatchLabels ensures an object with matching
+                              labels is selected.
+                            type: object
+                          namespace:
+                            description: Namespace for the selector
+                            type: string
+                          policy:
+                            description: Policies for selection.
+                            properties:
+                              resolution:
+                                default: Required
+                                description: |-
+                                  Resolution specifies whether resolution of this reference is required.
+                                  The default is 'Required', which means the reconcile will fail if the
+                                  reference cannot be resolved. 'Optional' means this reference will be
+                                  a no-op if it cannot be resolved.
+                                enum:
+                                - Required
+                                - Optional
+                                type: string
+                              resolve:
+                                description: |-
+                                  Resolve specifies when this reference should be resolved. The default
+                                  is 'IfNotPresent', which will attempt to resolve the reference only when
+                                  the corresponding field is not present. Use 'Always' to resolve the
+                                  reference on every reconcile.
+                                enum:
+                                - Always
+                                - IfNotPresent
+                                type: string
+                            type: object
+                        type: object
+                      mode:
+                        description: 'Enforcement mode for the policy engine. Valid
+                          values: LOG_ONLY, ENFORCE. In LOG_ONLY mode, the policy
+                          engine evaluates actions and records traces but does not
+                          enforce decisions. In ENFORCE mode, the policy engine evaluates
+                          actions and enforces allow/deny decisions.'
+                        type: string
+                    type: object
                   protocolConfiguration:
                     description: Protocol-specific configuration for the gateway.
                       See protocol_configuration below.
@@ -318,6 +616,24 @@ spec:
                           searchType:
                             description: 'Search type for MCP. Valid values: SEMANTIC.'
                             type: string
+                          sessionConfiguration:
+                            description: Configuration block for session settings
+                              of the MCP gateway. See session_configuration below.
+                            properties:
+                              sessionTimeoutInSeconds:
+                                description: Integer value for session timeout in
+                                  seconds. Must be between 900 and 28800.
+                                type: number
+                            type: object
+                          streamingConfiguration:
+                            description: Configuration block for streaming settings
+                              of the MCP gateway. See streaming_configuration below.
+                            properties:
+                              enableResponseStreaming:
+                                description: Boolean indicating whether response streaming
+                                  is enabled for the gateway.
+                                type: boolean
+                            type: object
                           supportedVersions:
                             description: Set of supported MCP protocol versions.
                             items:
@@ -327,7 +643,10 @@ spec:
                         type: object
                     type: object
                   protocolType:
-                    description: 'Protocol type for the gateway. Valid values: MCP.'
+                    description: 'Protocol type for the gateway. Valid values: MCP.
+                      Omit this argument to create a gateway that routes traffic directly
+                      to HTTP targets such as AgentCore Runtime agents (see aws_bedrockagentcore_gateway_target
+                      target_configuration.http).'
                     type: string
                   region:
                     description: |-
@@ -462,10 +781,205 @@ spec:
                               type: string
                             type: array
                             x-kubernetes-list-type: set
+                          allowedScopes:
+                            description: Set of scopes that are allowed to access
+                              the token.
+                            items:
+                              type: string
+                            type: array
+                            x-kubernetes-list-type: set
+                          allowedWorkloadConfiguration:
+                            description: Configuration restricting which workloads
+                              may use this authorizer. See allowed_workload_configuration
+                              below.
+                            properties:
+                              hostingEnvironment:
+                                description: Hosting environments allowed to use the
+                                  authorizer. Between 1 and 10 entries. See hosting_environment
+                                  below.
+                                items:
+                                  properties:
+                                    arn:
+                                      description: ARN of the policy engine. The policy
+                                        engine contains Cedar policies that define
+                                        fine-grained authorization rules specifying
+                                        who can perform what actions on which resources
+                                        as agents interact through the gateway.
+                                      type: string
+                                  type: object
+                                type: array
+                              workloadIdentities:
+                                description: List of workload identity names allowed
+                                  to use the authorizer. Between 1 and 10 entries.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          customClaim:
+                            description: Repeatable block to define a custom claim
+                              validation name, value, and operation. See custom_claim
+                              below.
+                            items:
+                              properties:
+                                authorizingClaimMatchValue:
+                                  description: Configuration block to define the value
+                                    or values to match for and the relationship of
+                                    the match. See authorizing_claim_match_value below.
+                                  properties:
+                                    claimMatchOperator:
+                                      description: Relationship between the claim
+                                        field value and the value or values to match
+                                        for. Valid values are EQUALS, CONTAINS, and
+                                        CONTAINS_ANY. EQUALS can be used only when
+                                        inbound_token_claim_value_type is STRING.
+                                        CONTAINS or CONTAINS_ANY can be used only
+                                        when inbound_token_claim_value_type is STRING_ARRAY.
+                                      type: string
+                                    claimMatchValue:
+                                      description: Value or values to match for. See
+                                        claim_match_value below.
+                                      properties:
+                                        matchValueString:
+                                          description: String value to match for.
+                                            Must be specified when claim_match_operator
+                                            is EQUALS or CONTAINS. Exactly one of
+                                            match_value_string or match_value_string_list
+                                            must be specified.
+                                          type: string
+                                        matchValueStringList:
+                                          description: List of strings to check for
+                                            a match. Must be specified when claim_match_operator
+                                            is CONTAINS_ANY. Exactly one of match_value_string
+                                            or match_value_string_list must be specified.
+                                          items:
+                                            type: string
+                                          type: array
+                                          x-kubernetes-list-type: set
+                                      type: object
+                                  type: object
+                                inboundTokenClaimName:
+                                  description: Name of the custom claim field to check.
+                                  type: string
+                                inboundTokenClaimValueType:
+                                  description: Data type of the claim value to check
+                                    for. Valid values are STRING and STRING_ARRAY.
+                                  type: string
+                              type: object
+                            type: array
                           discoveryUrl:
                             description: URL used to fetch OpenID Connect configuration
                               or authorization server metadata. Must end with .well-known/openid-configuration.
                             type: string
+                          privateEndpoint:
+                            description: Private endpoint used to reach the authorization
+                              server. See private_endpoint below.
+                            properties:
+                              managedVpcResource:
+                                description: Managed VPC resource configuration. See
+                                  managed_vpc_resource below.
+                                properties:
+                                  endpointIpAddressType:
+                                    description: IP address type for the endpoint.
+                                      Valid values are IPV4 and IPV6.
+                                    type: string
+                                  routingDomain:
+                                    description: Routing domain for the endpoint.
+                                    type: string
+                                  securityGroupIds:
+                                    description: IDs of the security groups for the
+                                      endpoint.
+                                    items:
+                                      type: string
+                                    type: array
+                                    x-kubernetes-list-type: set
+                                  subnetIds:
+                                    description: IDs of the subnets for the endpoint.
+                                    items:
+                                      type: string
+                                    type: array
+                                    x-kubernetes-list-type: set
+                                  tags:
+                                    additionalProperties:
+                                      type: string
+                                    description: Key-value map of resource tags.
+                                    type: object
+                                    x-kubernetes-map-type: granular
+                                  vpcIdentifier:
+                                    description: Identifier of the VPC for the endpoint.
+                                    type: string
+                                type: object
+                              selfManagedLatticeResource:
+                                description: Self-managed VPC Lattice resource configuration.
+                                  See self_managed_lattice_resource below.
+                                properties:
+                                  resourceConfigurationIdentifier:
+                                    description: Identifier of the VPC Lattice resource
+                                      configuration.
+                                    type: string
+                                type: object
+                            type: object
+                          privateEndpointOverrides:
+                            description: Overrides for the private endpoints used
+                              to reach the authorization server. See private_endpoint_overrides
+                              below.
+                            items:
+                              properties:
+                                domain:
+                                  description: Domain the override applies to.
+                                  type: string
+                                privateEndpoint:
+                                  description: Private endpoint configuration. See
+                                    private_endpoint below.
+                                  properties:
+                                    managedVpcResource:
+                                      description: Managed VPC resource configuration.
+                                        See managed_vpc_resource below.
+                                      properties:
+                                        endpointIpAddressType:
+                                          description: IP address type for the endpoint.
+                                            Valid values are IPV4 and IPV6.
+                                          type: string
+                                        routingDomain:
+                                          description: Routing domain for the endpoint.
+                                          type: string
+                                        securityGroupIds:
+                                          description: IDs of the security groups
+                                            for the endpoint.
+                                          items:
+                                            type: string
+                                          type: array
+                                          x-kubernetes-list-type: set
+                                        subnetIds:
+                                          description: IDs of the subnets for the
+                                            endpoint.
+                                          items:
+                                            type: string
+                                          type: array
+                                          x-kubernetes-list-type: set
+                                        tags:
+                                          additionalProperties:
+                                            type: string
+                                          description: Key-value map of resource tags.
+                                          type: object
+                                          x-kubernetes-map-type: granular
+                                        vpcIdentifier:
+                                          description: Identifier of the VPC for the
+                                            endpoint.
+                                          type: string
+                                      type: object
+                                    selfManagedLatticeResource:
+                                      description: Self-managed VPC Lattice resource
+                                        configuration. See self_managed_lattice_resource
+                                        below.
+                                      properties:
+                                        resourceConfigurationIdentifier:
+                                          description: Identifier of the VPC Lattice
+                                            resource configuration.
+                                          type: string
+                                      type: object
+                                  type: object
+                              type: object
+                            type: array
                         type: object
                     type: object
                   authorizerType:
@@ -477,8 +991,7 @@ spec:
                     description: Description of the gateway.
                     type: string
                   exceptionLevel:
-                    description: 'Exception level for the gateway. Valid values: INFO,
-                      WARN, ERROR.'
+                    description: 'Exception level for the gateway. Valid values: DEBUG.'
                     type: string
                   interceptorConfiguration:
                     description: List of interceptor configurations for the gateway.
@@ -685,6 +1198,110 @@ spec:
                   name:
                     description: Name of the gateway.
                     type: string
+                  policyEngineConfiguration:
+                    description: Configuration for a policy engine associated with
+                      the gateway. A policy engine is a collection of policies that
+                      evaluates and authorizes agent tool calls. When associated with
+                      a gateway, the policy engine intercepts all agent requests and
+                      determines whether to allow or deny each action based on the
+                      defined policies. See policy_engine_configuration below.
+                    properties:
+                      arn:
+                        description: ARN of the policy engine. The policy engine contains
+                          Cedar policies that define fine-grained authorization rules
+                          specifying who can perform what actions on which resources
+                          as agents interact through the gateway.
+                        type: string
+                      arnRef:
+                        description: Reference to a PolicyEngine in bedrockagentcore
+                          to populate arn.
+                        properties:
+                          name:
+                            description: Name of the referenced object.
+                            type: string
+                          namespace:
+                            description: Namespace of the referenced object
+                            type: string
+                          policy:
+                            description: Policies for referencing.
+                            properties:
+                              resolution:
+                                default: Required
+                                description: |-
+                                  Resolution specifies whether resolution of this reference is required.
+                                  The default is 'Required', which means the reconcile will fail if the
+                                  reference cannot be resolved. 'Optional' means this reference will be
+                                  a no-op if it cannot be resolved.
+                                enum:
+                                - Required
+                                - Optional
+                                type: string
+                              resolve:
+                                description: |-
+                                  Resolve specifies when this reference should be resolved. The default
+                                  is 'IfNotPresent', which will attempt to resolve the reference only when
+                                  the corresponding field is not present. Use 'Always' to resolve the
+                                  reference on every reconcile.
+                                enum:
+                                - Always
+                                - IfNotPresent
+                                type: string
+                            type: object
+                        required:
+                        - name
+                        type: object
+                      arnSelector:
+                        description: Selector for a PolicyEngine in bedrockagentcore
+                          to populate arn.
+                        properties:
+                          matchControllerRef:
+                            description: |-
+                              MatchControllerRef ensures an object with the same controller reference
+                              as the selecting object is selected.
+                            type: boolean
+                          matchLabels:
+                            additionalProperties:
+                              type: string
+                            description: MatchLabels ensures an object with matching
+                              labels is selected.
+                            type: object
+                          namespace:
+                            description: Namespace for the selector
+                            type: string
+                          policy:
+                            description: Policies for selection.
+                            properties:
+                              resolution:
+                                default: Required
+                                description: |-
+                                  Resolution specifies whether resolution of this reference is required.
+                                  The default is 'Required', which means the reconcile will fail if the
+                                  reference cannot be resolved. 'Optional' means this reference will be
+                                  a no-op if it cannot be resolved.
+                                enum:
+                                - Required
+                                - Optional
+                                type: string
+                              resolve:
+                                description: |-
+                                  Resolve specifies when this reference should be resolved. The default
+                                  is 'IfNotPresent', which will attempt to resolve the reference only when
+                                  the corresponding field is not present. Use 'Always' to resolve the
+                                  reference on every reconcile.
+                                enum:
+                                - Always
+                                - IfNotPresent
+                                type: string
+                            type: object
+                        type: object
+                      mode:
+                        description: 'Enforcement mode for the policy engine. Valid
+                          values: LOG_ONLY, ENFORCE. In LOG_ONLY mode, the policy
+                          engine evaluates actions and records traces but does not
+                          enforce decisions. In ENFORCE mode, the policy engine evaluates
+                          actions and enforces allow/deny decisions.'
+                        type: string
+                    type: object
                   protocolConfiguration:
                     description: Protocol-specific configuration for the gateway.
                       See protocol_configuration below.
@@ -699,6 +1316,24 @@ spec:
                           searchType:
                             description: 'Search type for MCP. Valid values: SEMANTIC.'
                             type: string
+                          sessionConfiguration:
+                            description: Configuration block for session settings
+                              of the MCP gateway. See session_configuration below.
+                            properties:
+                              sessionTimeoutInSeconds:
+                                description: Integer value for session timeout in
+                                  seconds. Must be between 900 and 28800.
+                                type: number
+                            type: object
+                          streamingConfiguration:
+                            description: Configuration block for streaming settings
+                              of the MCP gateway. See streaming_configuration below.
+                            properties:
+                              enableResponseStreaming:
+                                description: Boolean indicating whether response streaming
+                                  is enabled for the gateway.
+                                type: boolean
+                            type: object
                           supportedVersions:
                             description: Set of supported MCP protocol versions.
                             items:
@@ -708,7 +1343,10 @@ spec:
                         type: object
                     type: object
                   protocolType:
-                    description: 'Protocol type for the gateway. Valid values: MCP.'
+                    description: 'Protocol type for the gateway. Valid values: MCP.
+                      Omit this argument to create a gateway that routes traffic directly
+                      to HTTP targets such as AgentCore Runtime agents (see aws_bedrockagentcore_gateway_target
+                      target_configuration.http).'
                     type: string
                   roleArn:
                     description: ARN of the IAM role that the gateway assumes to access
@@ -868,10 +1506,6 @@ spec:
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
                 || (has(self.initProvider) && has(self.initProvider.name))'
-            - message: spec.forProvider.protocolType is a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.protocolType)
-                || (has(self.initProvider) && has(self.initProvider.protocolType))'
           status:
             description: GatewayStatus defines the observed state of Gateway.
             properties:
@@ -899,10 +1533,205 @@ spec:
                               type: string
                             type: array
                             x-kubernetes-list-type: set
+                          allowedScopes:
+                            description: Set of scopes that are allowed to access
+                              the token.
+                            items:
+                              type: string
+                            type: array
+                            x-kubernetes-list-type: set
+                          allowedWorkloadConfiguration:
+                            description: Configuration restricting which workloads
+                              may use this authorizer. See allowed_workload_configuration
+                              below.
+                            properties:
+                              hostingEnvironment:
+                                description: Hosting environments allowed to use the
+                                  authorizer. Between 1 and 10 entries. See hosting_environment
+                                  below.
+                                items:
+                                  properties:
+                                    arn:
+                                      description: ARN of the policy engine. The policy
+                                        engine contains Cedar policies that define
+                                        fine-grained authorization rules specifying
+                                        who can perform what actions on which resources
+                                        as agents interact through the gateway.
+                                      type: string
+                                  type: object
+                                type: array
+                              workloadIdentities:
+                                description: List of workload identity names allowed
+                                  to use the authorizer. Between 1 and 10 entries.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          customClaim:
+                            description: Repeatable block to define a custom claim
+                              validation name, value, and operation. See custom_claim
+                              below.
+                            items:
+                              properties:
+                                authorizingClaimMatchValue:
+                                  description: Configuration block to define the value
+                                    or values to match for and the relationship of
+                                    the match. See authorizing_claim_match_value below.
+                                  properties:
+                                    claimMatchOperator:
+                                      description: Relationship between the claim
+                                        field value and the value or values to match
+                                        for. Valid values are EQUALS, CONTAINS, and
+                                        CONTAINS_ANY. EQUALS can be used only when
+                                        inbound_token_claim_value_type is STRING.
+                                        CONTAINS or CONTAINS_ANY can be used only
+                                        when inbound_token_claim_value_type is STRING_ARRAY.
+                                      type: string
+                                    claimMatchValue:
+                                      description: Value or values to match for. See
+                                        claim_match_value below.
+                                      properties:
+                                        matchValueString:
+                                          description: String value to match for.
+                                            Must be specified when claim_match_operator
+                                            is EQUALS or CONTAINS. Exactly one of
+                                            match_value_string or match_value_string_list
+                                            must be specified.
+                                          type: string
+                                        matchValueStringList:
+                                          description: List of strings to check for
+                                            a match. Must be specified when claim_match_operator
+                                            is CONTAINS_ANY. Exactly one of match_value_string
+                                            or match_value_string_list must be specified.
+                                          items:
+                                            type: string
+                                          type: array
+                                          x-kubernetes-list-type: set
+                                      type: object
+                                  type: object
+                                inboundTokenClaimName:
+                                  description: Name of the custom claim field to check.
+                                  type: string
+                                inboundTokenClaimValueType:
+                                  description: Data type of the claim value to check
+                                    for. Valid values are STRING and STRING_ARRAY.
+                                  type: string
+                              type: object
+                            type: array
                           discoveryUrl:
                             description: URL used to fetch OpenID Connect configuration
                               or authorization server metadata. Must end with .well-known/openid-configuration.
                             type: string
+                          privateEndpoint:
+                            description: Private endpoint used to reach the authorization
+                              server. See private_endpoint below.
+                            properties:
+                              managedVpcResource:
+                                description: Managed VPC resource configuration. See
+                                  managed_vpc_resource below.
+                                properties:
+                                  endpointIpAddressType:
+                                    description: IP address type for the endpoint.
+                                      Valid values are IPV4 and IPV6.
+                                    type: string
+                                  routingDomain:
+                                    description: Routing domain for the endpoint.
+                                    type: string
+                                  securityGroupIds:
+                                    description: IDs of the security groups for the
+                                      endpoint.
+                                    items:
+                                      type: string
+                                    type: array
+                                    x-kubernetes-list-type: set
+                                  subnetIds:
+                                    description: IDs of the subnets for the endpoint.
+                                    items:
+                                      type: string
+                                    type: array
+                                    x-kubernetes-list-type: set
+                                  tags:
+                                    additionalProperties:
+                                      type: string
+                                    description: Key-value map of resource tags.
+                                    type: object
+                                    x-kubernetes-map-type: granular
+                                  vpcIdentifier:
+                                    description: Identifier of the VPC for the endpoint.
+                                    type: string
+                                type: object
+                              selfManagedLatticeResource:
+                                description: Self-managed VPC Lattice resource configuration.
+                                  See self_managed_lattice_resource below.
+                                properties:
+                                  resourceConfigurationIdentifier:
+                                    description: Identifier of the VPC Lattice resource
+                                      configuration.
+                                    type: string
+                                type: object
+                            type: object
+                          privateEndpointOverrides:
+                            description: Overrides for the private endpoints used
+                              to reach the authorization server. See private_endpoint_overrides
+                              below.
+                            items:
+                              properties:
+                                domain:
+                                  description: Domain the override applies to.
+                                  type: string
+                                privateEndpoint:
+                                  description: Private endpoint configuration. See
+                                    private_endpoint below.
+                                  properties:
+                                    managedVpcResource:
+                                      description: Managed VPC resource configuration.
+                                        See managed_vpc_resource below.
+                                      properties:
+                                        endpointIpAddressType:
+                                          description: IP address type for the endpoint.
+                                            Valid values are IPV4 and IPV6.
+                                          type: string
+                                        routingDomain:
+                                          description: Routing domain for the endpoint.
+                                          type: string
+                                        securityGroupIds:
+                                          description: IDs of the security groups
+                                            for the endpoint.
+                                          items:
+                                            type: string
+                                          type: array
+                                          x-kubernetes-list-type: set
+                                        subnetIds:
+                                          description: IDs of the subnets for the
+                                            endpoint.
+                                          items:
+                                            type: string
+                                          type: array
+                                          x-kubernetes-list-type: set
+                                        tags:
+                                          additionalProperties:
+                                            type: string
+                                          description: Key-value map of resource tags.
+                                          type: object
+                                          x-kubernetes-map-type: granular
+                                        vpcIdentifier:
+                                          description: Identifier of the VPC for the
+                                            endpoint.
+                                          type: string
+                                      type: object
+                                    selfManagedLatticeResource:
+                                      description: Self-managed VPC Lattice resource
+                                        configuration. See self_managed_lattice_resource
+                                        below.
+                                      properties:
+                                        resourceConfigurationIdentifier:
+                                          description: Identifier of the VPC Lattice
+                                            resource configuration.
+                                          type: string
+                                      type: object
+                                  type: object
+                              type: object
+                            type: array
                         type: object
                     type: object
                   authorizerType:
@@ -914,8 +1743,7 @@ spec:
                     description: Description of the gateway.
                     type: string
                   exceptionLevel:
-                    description: 'Exception level for the gateway. Valid values: INFO,
-                      WARN, ERROR.'
+                    description: 'Exception level for the gateway. Valid values: DEBUG.'
                     type: string
                   gatewayArn:
                     description: ARN of the Gateway.
@@ -971,6 +1799,28 @@ spec:
                   name:
                     description: Name of the gateway.
                     type: string
+                  policyEngineConfiguration:
+                    description: Configuration for a policy engine associated with
+                      the gateway. A policy engine is a collection of policies that
+                      evaluates and authorizes agent tool calls. When associated with
+                      a gateway, the policy engine intercepts all agent requests and
+                      determines whether to allow or deny each action based on the
+                      defined policies. See policy_engine_configuration below.
+                    properties:
+                      arn:
+                        description: ARN of the policy engine. The policy engine contains
+                          Cedar policies that define fine-grained authorization rules
+                          specifying who can perform what actions on which resources
+                          as agents interact through the gateway.
+                        type: string
+                      mode:
+                        description: 'Enforcement mode for the policy engine. Valid
+                          values: LOG_ONLY, ENFORCE. In LOG_ONLY mode, the policy
+                          engine evaluates actions and records traces but does not
+                          enforce decisions. In ENFORCE mode, the policy engine evaluates
+                          actions and enforces allow/deny decisions.'
+                        type: string
+                    type: object
                   protocolConfiguration:
                     description: Protocol-specific configuration for the gateway.
                       See protocol_configuration below.
@@ -985,6 +1835,24 @@ spec:
                           searchType:
                             description: 'Search type for MCP. Valid values: SEMANTIC.'
                             type: string
+                          sessionConfiguration:
+                            description: Configuration block for session settings
+                              of the MCP gateway. See session_configuration below.
+                            properties:
+                              sessionTimeoutInSeconds:
+                                description: Integer value for session timeout in
+                                  seconds. Must be between 900 and 28800.
+                                type: number
+                            type: object
+                          streamingConfiguration:
+                            description: Configuration block for streaming settings
+                              of the MCP gateway. See streaming_configuration below.
+                            properties:
+                              enableResponseStreaming:
+                                description: Boolean indicating whether response streaming
+                                  is enabled for the gateway.
+                                type: boolean
+                            type: object
                           supportedVersions:
                             description: Set of supported MCP protocol versions.
                             items:
@@ -994,7 +1862,10 @@ spec:
                         type: object
                     type: object
                   protocolType:
-                    description: 'Protocol type for the gateway. Valid values: MCP.'
+                    description: 'Protocol type for the gateway. Valid values: MCP.
+                      Omit this argument to create a gateway that routes traffic directly
+                      to HTTP targets such as AgentCore Runtime agents (see aws_bedrockagentcore_gateway_target
+                      target_configuration.http).'
                     type: string
                   region:
                     description: |-
@@ -1076,6 +1947,13 @@ spec:
                 x-kubernetes-list-map-keys:
                 - type
                 x-kubernetes-list-type: map
+              lastHandledReconcileAt:
+                description: |-
+                  LastHandledReconcileAt holds the value of the most recent
+                  reconcile-requested-at annotation token that the controller has
+                  processed. Users can compare this to the annotation to determine
+                  whether a reconcile request has been handled.
+                type: string
               observedGeneration:
                 description: |-
                   ObservedGeneration is the latest metadata.generation

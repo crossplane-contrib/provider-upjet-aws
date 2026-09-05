@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CertificateBasedAuthPropertiesInitParameters struct {
@@ -116,7 +115,7 @@ type ServiceAccountCredentialsInitParameters struct {
 	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
 
 	// Password for the account.
-	AccountPasswordSecretRef v1.LocalSecretKeySelector `json:"accountPasswordSecretRef" tf:"-"`
+	AccountPasswordSecretRef v2.LocalSecretKeySelector `json:"accountPasswordSecretRef" tf:"-"`
 }
 
 type ServiceAccountCredentialsObservation struct {
@@ -133,7 +132,7 @@ type ServiceAccountCredentialsParameters struct {
 
 	// Password for the account.
 	// +kubebuilder:validation:Optional
-	AccountPasswordSecretRef v1.LocalSecretKeySelector `json:"accountPasswordSecretRef" tf:"-"`
+	AccountPasswordSecretRef v2.LocalSecretKeySelector `json:"accountPasswordSecretRef" tf:"-"`
 }
 
 // DirectoryConfigSpec defines the desired state of DirectoryConfig
@@ -155,8 +154,8 @@ type DirectoryConfigSpec struct {
 
 // DirectoryConfigStatus defines the observed state of DirectoryConfig.
 type DirectoryConfigStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        DirectoryConfigObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               DirectoryConfigObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

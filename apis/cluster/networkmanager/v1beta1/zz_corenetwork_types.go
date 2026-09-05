@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CoreNetworkInitParameters struct {
@@ -35,11 +35,11 @@ type CoreNetworkInitParameters struct {
 
 	// Reference to a GlobalNetwork in networkmanager to populate globalNetworkId.
 	// +kubebuilder:validation:Optional
-	GlobalNetworkIDRef *v1.Reference `json:"globalNetworkIdRef,omitempty" tf:"-"`
+	GlobalNetworkIDRef *v2.Reference `json:"globalNetworkIdRef,omitempty" tf:"-"`
 
 	// Selector for a GlobalNetwork in networkmanager to populate globalNetworkId.
 	// +kubebuilder:validation:Optional
-	GlobalNetworkIDSelector *v1.Selector `json:"globalNetworkIdSelector,omitempty" tf:"-"`
+	GlobalNetworkIDSelector *v2.Selector `json:"globalNetworkIdSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -118,11 +118,11 @@ type CoreNetworkParameters struct {
 
 	// Reference to a GlobalNetwork in networkmanager to populate globalNetworkId.
 	// +kubebuilder:validation:Optional
-	GlobalNetworkIDRef *v1.Reference `json:"globalNetworkIdRef,omitempty" tf:"-"`
+	GlobalNetworkIDRef *v2.Reference `json:"globalNetworkIdRef,omitempty" tf:"-"`
 
 	// Selector for a GlobalNetwork in networkmanager to populate globalNetworkId.
 	// +kubebuilder:validation:Optional
-	GlobalNetworkIDSelector *v1.Selector `json:"globalNetworkIdSelector,omitempty" tf:"-"`
+	GlobalNetworkIDSelector *v2.Selector `json:"globalNetworkIdSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -168,8 +168,8 @@ type SegmentsParameters struct {
 
 // CoreNetworkSpec defines the desired state of CoreNetwork
 type CoreNetworkSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     CoreNetworkParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   CoreNetworkParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -185,8 +185,8 @@ type CoreNetworkSpec struct {
 
 // CoreNetworkStatus defines the observed state of CoreNetwork.
 type CoreNetworkStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        CoreNetworkObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               CoreNetworkObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

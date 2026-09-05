@@ -5,164 +5,164 @@
 
 package v1beta1
 
-import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+import xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 
 // GetCondition of this HTTPNamespace.
-func (mg *HTTPNamespace) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *HTTPNamespace) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this HTTPNamespace.
-func (mg *HTTPNamespace) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *HTTPNamespace) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this HTTPNamespace.
-func (mg *HTTPNamespace) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *HTTPNamespace) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this HTTPNamespace.
-func (mg *HTTPNamespace) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *HTTPNamespace) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this HTTPNamespace.
-func (mg *HTTPNamespace) SetConditions(c ...xpv1.Condition) {
+func (mg *HTTPNamespace) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this HTTPNamespace.
-func (mg *HTTPNamespace) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *HTTPNamespace) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this HTTPNamespace.
-func (mg *HTTPNamespace) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *HTTPNamespace) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this HTTPNamespace.
-func (mg *HTTPNamespace) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *HTTPNamespace) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this PrivateDNSNamespace.
-func (mg *PrivateDNSNamespace) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *PrivateDNSNamespace) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this PrivateDNSNamespace.
-func (mg *PrivateDNSNamespace) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *PrivateDNSNamespace) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this PrivateDNSNamespace.
-func (mg *PrivateDNSNamespace) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *PrivateDNSNamespace) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this PrivateDNSNamespace.
-func (mg *PrivateDNSNamespace) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *PrivateDNSNamespace) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this PrivateDNSNamespace.
-func (mg *PrivateDNSNamespace) SetConditions(c ...xpv1.Condition) {
+func (mg *PrivateDNSNamespace) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this PrivateDNSNamespace.
-func (mg *PrivateDNSNamespace) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *PrivateDNSNamespace) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this PrivateDNSNamespace.
-func (mg *PrivateDNSNamespace) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *PrivateDNSNamespace) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this PrivateDNSNamespace.
-func (mg *PrivateDNSNamespace) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *PrivateDNSNamespace) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this PublicDNSNamespace.
-func (mg *PublicDNSNamespace) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *PublicDNSNamespace) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this PublicDNSNamespace.
-func (mg *PublicDNSNamespace) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *PublicDNSNamespace) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this PublicDNSNamespace.
-func (mg *PublicDNSNamespace) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *PublicDNSNamespace) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this PublicDNSNamespace.
-func (mg *PublicDNSNamespace) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *PublicDNSNamespace) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this PublicDNSNamespace.
-func (mg *PublicDNSNamespace) SetConditions(c ...xpv1.Condition) {
+func (mg *PublicDNSNamespace) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this PublicDNSNamespace.
-func (mg *PublicDNSNamespace) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *PublicDNSNamespace) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this PublicDNSNamespace.
-func (mg *PublicDNSNamespace) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *PublicDNSNamespace) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this PublicDNSNamespace.
-func (mg *PublicDNSNamespace) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *PublicDNSNamespace) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this Service.
-func (mg *Service) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *Service) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this Service.
-func (mg *Service) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *Service) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this Service.
-func (mg *Service) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *Service) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this Service.
-func (mg *Service) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *Service) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this Service.
-func (mg *Service) SetConditions(c ...xpv1.Condition) {
+func (mg *Service) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this Service.
-func (mg *Service) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *Service) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this Service.
-func (mg *Service) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *Service) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this Service.
-func (mg *Service) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *Service) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

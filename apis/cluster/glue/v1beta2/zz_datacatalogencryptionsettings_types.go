@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ConnectionPasswordEncryptionInitParameters struct {
@@ -22,11 +22,11 @@ type ConnectionPasswordEncryptionInitParameters struct {
 
 	// Reference to a Key in kms to populate awsKmsKeyId.
 	// +kubebuilder:validation:Optional
-	AwsKMSKeyIDRef *v1.Reference `json:"awsKmsKeyIdRef,omitempty" tf:"-"`
+	AwsKMSKeyIDRef *v2.Reference `json:"awsKmsKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate awsKmsKeyId.
 	// +kubebuilder:validation:Optional
-	AwsKMSKeyIDSelector *v1.Selector `json:"awsKmsKeyIdSelector,omitempty" tf:"-"`
+	AwsKMSKeyIDSelector *v2.Selector `json:"awsKmsKeyIdSelector,omitempty" tf:"-"`
 
 	// When set to true, passwords remain encrypted in the responses of GetConnection and GetConnections. This encryption takes effect independently of the catalog encryption.
 	ReturnConnectionPasswordEncrypted *bool `json:"returnConnectionPasswordEncrypted,omitempty" tf:"return_connection_password_encrypted,omitempty"`
@@ -51,11 +51,11 @@ type ConnectionPasswordEncryptionParameters struct {
 
 	// Reference to a Key in kms to populate awsKmsKeyId.
 	// +kubebuilder:validation:Optional
-	AwsKMSKeyIDRef *v1.Reference `json:"awsKmsKeyIdRef,omitempty" tf:"-"`
+	AwsKMSKeyIDRef *v2.Reference `json:"awsKmsKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate awsKmsKeyId.
 	// +kubebuilder:validation:Optional
-	AwsKMSKeyIDSelector *v1.Selector `json:"awsKmsKeyIdSelector,omitempty" tf:"-"`
+	AwsKMSKeyIDSelector *v2.Selector `json:"awsKmsKeyIdSelector,omitempty" tf:"-"`
 
 	// When set to true, passwords remain encrypted in the responses of GetConnection and GetConnections. This encryption takes effect independently of the catalog encryption.
 	// +kubebuilder:validation:Optional
@@ -147,11 +147,11 @@ type EncryptionAtRestInitParameters struct {
 
 	// Reference to a Key in kms to populate sseAwsKmsKeyId.
 	// +kubebuilder:validation:Optional
-	SseAwsKMSKeyIDRef *v1.Reference `json:"sseAwsKmsKeyIdRef,omitempty" tf:"-"`
+	SseAwsKMSKeyIDRef *v2.Reference `json:"sseAwsKmsKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate sseAwsKmsKeyId.
 	// +kubebuilder:validation:Optional
-	SseAwsKMSKeyIDSelector *v1.Selector `json:"sseAwsKmsKeyIdSelector,omitempty" tf:"-"`
+	SseAwsKMSKeyIDSelector *v2.Selector `json:"sseAwsKmsKeyIdSelector,omitempty" tf:"-"`
 }
 
 type EncryptionAtRestObservation struct {
@@ -184,17 +184,17 @@ type EncryptionAtRestParameters struct {
 
 	// Reference to a Key in kms to populate sseAwsKmsKeyId.
 	// +kubebuilder:validation:Optional
-	SseAwsKMSKeyIDRef *v1.Reference `json:"sseAwsKmsKeyIdRef,omitempty" tf:"-"`
+	SseAwsKMSKeyIDRef *v2.Reference `json:"sseAwsKmsKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate sseAwsKmsKeyId.
 	// +kubebuilder:validation:Optional
-	SseAwsKMSKeyIDSelector *v1.Selector `json:"sseAwsKmsKeyIdSelector,omitempty" tf:"-"`
+	SseAwsKMSKeyIDSelector *v2.Selector `json:"sseAwsKmsKeyIdSelector,omitempty" tf:"-"`
 }
 
 // DataCatalogEncryptionSettingsSpec defines the desired state of DataCatalogEncryptionSettings
 type DataCatalogEncryptionSettingsSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     DataCatalogEncryptionSettingsParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   DataCatalogEncryptionSettingsParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -210,8 +210,8 @@ type DataCatalogEncryptionSettingsSpec struct {
 
 // DataCatalogEncryptionSettingsStatus defines the observed state of DataCatalogEncryptionSettings.
 type DataCatalogEncryptionSettingsStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        DataCatalogEncryptionSettingsObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               DataCatalogEncryptionSettingsObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

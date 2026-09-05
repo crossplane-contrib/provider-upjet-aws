@@ -77,11 +77,17 @@ spec:
                       stored in the Secret referenced by the masterPasswordSecretRef
                       field.
                     type: boolean
+                  autoMinorVersionUpgrade:
+                    description: Whether to apply minor engine upgrades automatically
+                      to the DB cluster during the maintenance window. Defaults to
+                      true.
+                    type: boolean
                   availabilityZones:
                     description: |-
                       List of EC2 Availability Zones for the DB cluster storage where DB cluster instances can be created.
                       We recommend specifying 3 AZs or using the  if necessary.
                       A maximum of 3 AZs can be configured.
+                      Note: Multi-AZ DB clusters require exactly 3 Availability Zones in the DB subnet group. Aurora DB clusters can operate with fewer AZs, but RDS will still automatically assign 3 AZs as described above.
                     items:
                       type: string
                     type: array
@@ -814,6 +820,86 @@ spec:
                       data. If not specified, the default RDS KMS key will be used
                       (aws/rds).
                     type: string
+                  performanceInsightsKmsKeyIdRef:
+                    description: Reference to a Key in kms to populate performanceInsightsKmsKeyId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      namespace:
+                        description: Namespace of the referenced object
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  performanceInsightsKmsKeyIdSelector:
+                    description: Selector for a Key in kms to populate performanceInsightsKmsKeyId.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      namespace:
+                        description: Namespace for the selector
+                        type: string
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                   performanceInsightsRetentionPeriod:
                     description: Specifies the amount of time to retain performance
                       insights data for. Defaults to 7 days if Performance Insights
@@ -1160,7 +1246,7 @@ spec:
                       DB clusters, storage_type modifications can be done in-place.
                       For Multi-AZ DB Clusters, the iops argument must also be set.
                       Valid values are: "", aurora-iopt1 (Aurora DB Clusters); io1,
-                      io2 (Multi-AZ DB Clusters). Default: "" (Aurora DB Clusters);
+                      io2, gp3 (Multi-AZ DB Clusters). Default: "" (Aurora DB Clusters);
                       io1 (Multi-AZ DB Clusters).'
                     type: string
                   tags:
@@ -1289,11 +1375,17 @@ spec:
                       immediately, or during the next maintenance window. Default
                       is false. See Amazon RDS Documentation for more information.
                     type: boolean
+                  autoMinorVersionUpgrade:
+                    description: Whether to apply minor engine upgrades automatically
+                      to the DB cluster during the maintenance window. Defaults to
+                      true.
+                    type: boolean
                   availabilityZones:
                     description: |-
                       List of EC2 Availability Zones for the DB cluster storage where DB cluster instances can be created.
                       We recommend specifying 3 AZs or using the  if necessary.
                       A maximum of 3 AZs can be configured.
+                      Note: Multi-AZ DB clusters require exactly 3 Availability Zones in the DB subnet group. Aurora DB clusters can operate with fewer AZs, but RDS will still automatically assign 3 AZs as described above.
                     items:
                       type: string
                     type: array
@@ -2026,6 +2118,86 @@ spec:
                       data. If not specified, the default RDS KMS key will be used
                       (aws/rds).
                     type: string
+                  performanceInsightsKmsKeyIdRef:
+                    description: Reference to a Key in kms to populate performanceInsightsKmsKeyId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      namespace:
+                        description: Namespace of the referenced object
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  performanceInsightsKmsKeyIdSelector:
+                    description: Selector for a Key in kms to populate performanceInsightsKmsKeyId.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      namespace:
+                        description: Namespace for the selector
+                        type: string
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                   performanceInsightsRetentionPeriod:
                     description: Specifies the amount of time to retain performance
                       insights data for. Defaults to 7 days if Performance Insights
@@ -2367,7 +2539,7 @@ spec:
                       DB clusters, storage_type modifications can be done in-place.
                       For Multi-AZ DB Clusters, the iops argument must also be set.
                       Valid values are: "", aurora-iopt1 (Aurora DB Clusters); io1,
-                      io2 (Multi-AZ DB Clusters). Default: "" (Aurora DB Clusters);
+                      io2, gp3 (Multi-AZ DB Clusters). Default: "" (Aurora DB Clusters);
                       io1 (Multi-AZ DB Clusters).'
                     type: string
                   tags:
@@ -2552,11 +2724,17 @@ spec:
                   arn:
                     description: Amazon Resource Name (ARN) of cluster
                     type: string
+                  autoMinorVersionUpgrade:
+                    description: Whether to apply minor engine upgrades automatically
+                      to the DB cluster during the maintenance window. Defaults to
+                      true.
+                    type: boolean
                   availabilityZones:
                     description: |-
                       List of EC2 Availability Zones for the DB cluster storage where DB cluster instances can be created.
                       We recommend specifying 3 AZs or using the  if necessary.
                       A maximum of 3 AZs can be configured.
+                      Note: Multi-AZ DB clusters require exactly 3 Availability Zones in the DB subnet group. Aurora DB clusters can operate with fewer AZs, but RDS will still automatically assign 3 AZs as described above.
                     items:
                       type: string
                     type: array
@@ -3008,7 +3186,7 @@ spec:
                       DB clusters, storage_type modifications can be done in-place.
                       For Multi-AZ DB Clusters, the iops argument must also be set.
                       Valid values are: "", aurora-iopt1 (Aurora DB Clusters); io1,
-                      io2 (Multi-AZ DB Clusters). Default: "" (Aurora DB Clusters);
+                      io2, gp3 (Multi-AZ DB Clusters). Default: "" (Aurora DB Clusters);
                       io1 (Multi-AZ DB Clusters).'
                     type: string
                   tags:
@@ -3082,6 +3260,13 @@ spec:
                 x-kubernetes-list-map-keys:
                 - type
                 x-kubernetes-list-type: map
+              lastHandledReconcileAt:
+                description: |-
+                  LastHandledReconcileAt holds the value of the most recent
+                  reconcile-requested-at annotation token that the controller has
+                  processed. Users can compare this to the annotation to determine
+                  whether a reconcile request has been handled.
+                type: string
               observedGeneration:
                 description: |-
                   ObservedGeneration is the latest metadata.generation

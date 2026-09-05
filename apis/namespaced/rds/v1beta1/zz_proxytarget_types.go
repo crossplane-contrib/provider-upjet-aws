@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ProxyTargetInitParameters struct {
@@ -26,11 +25,11 @@ type ProxyTargetInitParameters struct {
 
 	// Reference to a Instance in rds to populate dbInstanceIdentifier.
 	// +kubebuilder:validation:Optional
-	DBInstanceIdentifierRef *v1.NamespacedReference `json:"dbInstanceIdentifierRef,omitempty" tf:"-"`
+	DBInstanceIdentifierRef *v2.NamespacedReference `json:"dbInstanceIdentifierRef,omitempty" tf:"-"`
 
 	// Selector for a Instance in rds to populate dbInstanceIdentifier.
 	// +kubebuilder:validation:Optional
-	DBInstanceIdentifierSelector *v1.NamespacedSelector `json:"dbInstanceIdentifierSelector,omitempty" tf:"-"`
+	DBInstanceIdentifierSelector *v2.NamespacedSelector `json:"dbInstanceIdentifierSelector,omitempty" tf:"-"`
 
 	// The name of the DB proxy.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/rds/v1beta1.Proxy
@@ -38,11 +37,11 @@ type ProxyTargetInitParameters struct {
 
 	// Reference to a Proxy in rds to populate dbProxyName.
 	// +kubebuilder:validation:Optional
-	DBProxyNameRef *v1.NamespacedReference `json:"dbProxyNameRef,omitempty" tf:"-"`
+	DBProxyNameRef *v2.NamespacedReference `json:"dbProxyNameRef,omitempty" tf:"-"`
 
 	// Selector for a Proxy in rds to populate dbProxyName.
 	// +kubebuilder:validation:Optional
-	DBProxyNameSelector *v1.NamespacedSelector `json:"dbProxyNameSelector,omitempty" tf:"-"`
+	DBProxyNameSelector *v2.NamespacedSelector `json:"dbProxyNameSelector,omitempty" tf:"-"`
 
 	// The name of the target group.
 	TargetGroupName *string `json:"targetGroupName,omitempty" tf:"target_group_name,omitempty"`
@@ -102,11 +101,11 @@ type ProxyTargetParameters struct {
 
 	// Reference to a Instance in rds to populate dbInstanceIdentifier.
 	// +kubebuilder:validation:Optional
-	DBInstanceIdentifierRef *v1.NamespacedReference `json:"dbInstanceIdentifierRef,omitempty" tf:"-"`
+	DBInstanceIdentifierRef *v2.NamespacedReference `json:"dbInstanceIdentifierRef,omitempty" tf:"-"`
 
 	// Selector for a Instance in rds to populate dbInstanceIdentifier.
 	// +kubebuilder:validation:Optional
-	DBInstanceIdentifierSelector *v1.NamespacedSelector `json:"dbInstanceIdentifierSelector,omitempty" tf:"-"`
+	DBInstanceIdentifierSelector *v2.NamespacedSelector `json:"dbInstanceIdentifierSelector,omitempty" tf:"-"`
 
 	// The name of the DB proxy.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/rds/v1beta1.Proxy
@@ -115,11 +114,11 @@ type ProxyTargetParameters struct {
 
 	// Reference to a Proxy in rds to populate dbProxyName.
 	// +kubebuilder:validation:Optional
-	DBProxyNameRef *v1.NamespacedReference `json:"dbProxyNameRef,omitempty" tf:"-"`
+	DBProxyNameRef *v2.NamespacedReference `json:"dbProxyNameRef,omitempty" tf:"-"`
 
 	// Selector for a Proxy in rds to populate dbProxyName.
 	// +kubebuilder:validation:Optional
-	DBProxyNameSelector *v1.NamespacedSelector `json:"dbProxyNameSelector,omitempty" tf:"-"`
+	DBProxyNameSelector *v2.NamespacedSelector `json:"dbProxyNameSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -150,8 +149,8 @@ type ProxyTargetSpec struct {
 
 // ProxyTargetStatus defines the observed state of ProxyTarget.
 type ProxyTargetStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ProxyTargetObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ProxyTargetObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

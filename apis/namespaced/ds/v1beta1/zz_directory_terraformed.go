@@ -36,6 +36,8 @@ func (tr *Directory) GetObservation() (map[string]any, error) {
 
 // SetObservation for this Directory
 func (tr *Directory) SetObservation(obs map[string]any) error {
+	tr.Status.AtProvider.Tags = nil
+	tr.Status.AtProvider.TagsAll = nil
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err

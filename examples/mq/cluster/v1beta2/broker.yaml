@@ -13,10 +13,11 @@ metadata:
   name: example
 spec:
   forProvider:
+    autoMinorVersionUpgrade: true
     brokerName: example-broker
     engineType: ActiveMQ
-    engineVersion: 5.17.6
-    hostInstanceType: mq.t2.micro
+    engineVersion: "5.19"
+    hostInstanceType: mq.t3.micro
     region: us-west-1
     securityGroupRefs:
     - name: example

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type InputDataConfigInitParameters struct {
@@ -22,11 +22,11 @@ type InputDataConfigInitParameters struct {
 
 	// Reference to a Role in iam to populate dataAccessRoleArn.
 	// +kubebuilder:validation:Optional
-	DataAccessRoleArnRef *v1.Reference `json:"dataAccessRoleArnRef,omitempty" tf:"-"`
+	DataAccessRoleArnRef *v2.Reference `json:"dataAccessRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate dataAccessRoleArn.
 	// +kubebuilder:validation:Optional
-	DataAccessRoleArnSelector *v1.Selector `json:"dataAccessRoleArnSelector,omitempty" tf:"-"`
+	DataAccessRoleArnSelector *v2.Selector `json:"dataAccessRoleArnSelector,omitempty" tf:"-"`
 
 	// S3 URI where training data is located.
 	S3URI *string `json:"s3Uri,omitempty" tf:"s3_uri,omitempty"`
@@ -57,11 +57,11 @@ type InputDataConfigParameters struct {
 
 	// Reference to a Role in iam to populate dataAccessRoleArn.
 	// +kubebuilder:validation:Optional
-	DataAccessRoleArnRef *v1.Reference `json:"dataAccessRoleArnRef,omitempty" tf:"-"`
+	DataAccessRoleArnRef *v2.Reference `json:"dataAccessRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate dataAccessRoleArn.
 	// +kubebuilder:validation:Optional
-	DataAccessRoleArnSelector *v1.Selector `json:"dataAccessRoleArnSelector,omitempty" tf:"-"`
+	DataAccessRoleArnSelector *v2.Selector `json:"dataAccessRoleArnSelector,omitempty" tf:"-"`
 
 	// S3 URI where training data is located.
 	// +kubebuilder:validation:Optional
@@ -144,8 +144,8 @@ type LanguageModelParameters struct {
 
 // LanguageModelSpec defines the desired state of LanguageModel
 type LanguageModelSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     LanguageModelParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   LanguageModelParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -161,8 +161,8 @@ type LanguageModelSpec struct {
 
 // LanguageModelStatus defines the observed state of LanguageModel.
 type LanguageModelStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        LanguageModelObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               LanguageModelObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ClusterPeeringInitParameters struct {
@@ -24,11 +23,11 @@ type ClusterPeeringInitParameters struct {
 
 	// References to Cluster in dsql to populate clusters.
 	// +kubebuilder:validation:Optional
-	ClustersRefs []v1.NamespacedReference `json:"clustersRefs,omitempty" tf:"-"`
+	ClustersRefs []v2.NamespacedReference `json:"clustersRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Cluster in dsql to populate clusters.
 	// +kubebuilder:validation:Optional
-	ClustersSelector *v1.NamespacedSelector `json:"clustersSelector,omitempty" tf:"-"`
+	ClustersSelector *v2.NamespacedSelector `json:"clustersSelector,omitempty" tf:"-"`
 
 	// DSQL Cluster Identifier.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/dsql/v1beta1.Cluster
@@ -37,11 +36,11 @@ type ClusterPeeringInitParameters struct {
 
 	// Reference to a Cluster in dsql to populate identifier.
 	// +kubebuilder:validation:Optional
-	IdentifierRef *v1.NamespacedReference `json:"identifierRef,omitempty" tf:"-"`
+	IdentifierRef *v2.NamespacedReference `json:"identifierRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in dsql to populate identifier.
 	// +kubebuilder:validation:Optional
-	IdentifierSelector *v1.NamespacedSelector `json:"identifierSelector,omitempty" tf:"-"`
+	IdentifierSelector *v2.NamespacedSelector `json:"identifierSelector,omitempty" tf:"-"`
 
 	// Witness region for a multi-region cluster.
 	WitnessRegion *string `json:"witnessRegion,omitempty" tf:"witness_region,omitempty"`
@@ -77,11 +76,11 @@ type ClusterPeeringParameters struct {
 
 	// References to Cluster in dsql to populate clusters.
 	// +kubebuilder:validation:Optional
-	ClustersRefs []v1.NamespacedReference `json:"clustersRefs,omitempty" tf:"-"`
+	ClustersRefs []v2.NamespacedReference `json:"clustersRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Cluster in dsql to populate clusters.
 	// +kubebuilder:validation:Optional
-	ClustersSelector *v1.NamespacedSelector `json:"clustersSelector,omitempty" tf:"-"`
+	ClustersSelector *v2.NamespacedSelector `json:"clustersSelector,omitempty" tf:"-"`
 
 	// DSQL Cluster Identifier.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/dsql/v1beta1.Cluster
@@ -91,11 +90,11 @@ type ClusterPeeringParameters struct {
 
 	// Reference to a Cluster in dsql to populate identifier.
 	// +kubebuilder:validation:Optional
-	IdentifierRef *v1.NamespacedReference `json:"identifierRef,omitempty" tf:"-"`
+	IdentifierRef *v2.NamespacedReference `json:"identifierRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in dsql to populate identifier.
 	// +kubebuilder:validation:Optional
-	IdentifierSelector *v1.NamespacedSelector `json:"identifierSelector,omitempty" tf:"-"`
+	IdentifierSelector *v2.NamespacedSelector `json:"identifierSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -126,8 +125,8 @@ type ClusterPeeringSpec struct {
 
 // ClusterPeeringStatus defines the observed state of ClusterPeering.
 type ClusterPeeringStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ClusterPeeringObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ClusterPeeringObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

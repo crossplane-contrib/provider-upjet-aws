@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ActionInitParameters struct {
@@ -28,11 +28,11 @@ type ActionInitParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.Reference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// The extension URI associated to the action point in the extension definition. The URI can be an Amazon Resource Name (ARN) for one of the following: an Lambda function, an Amazon Simple Queue Service queue, an Amazon Simple Notification Service topic, or the Amazon EventBridge default event bus.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/sns/v1beta1.Topic
@@ -41,11 +41,11 @@ type ActionInitParameters struct {
 
 	// Reference to a Topic in sns to populate uri.
 	// +kubebuilder:validation:Optional
-	URIRef *v1.Reference `json:"uriRef,omitempty" tf:"-"`
+	URIRef *v2.Reference `json:"uriRef,omitempty" tf:"-"`
 
 	// Selector for a Topic in sns to populate uri.
 	// +kubebuilder:validation:Optional
-	URISelector *v1.Selector `json:"uriSelector,omitempty" tf:"-"`
+	URISelector *v2.Selector `json:"uriSelector,omitempty" tf:"-"`
 }
 
 type ActionObservation struct {
@@ -81,11 +81,11 @@ type ActionParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.Reference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// The extension URI associated to the action point in the extension definition. The URI can be an Amazon Resource Name (ARN) for one of the following: an Lambda function, an Amazon Simple Queue Service queue, an Amazon Simple Notification Service topic, or the Amazon EventBridge default event bus.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/sns/v1beta1.Topic
@@ -95,11 +95,11 @@ type ActionParameters struct {
 
 	// Reference to a Topic in sns to populate uri.
 	// +kubebuilder:validation:Optional
-	URIRef *v1.Reference `json:"uriRef,omitempty" tf:"-"`
+	URIRef *v2.Reference `json:"uriRef,omitempty" tf:"-"`
 
 	// Selector for a Topic in sns to populate uri.
 	// +kubebuilder:validation:Optional
-	URISelector *v1.Selector `json:"uriSelector,omitempty" tf:"-"`
+	URISelector *v2.Selector `json:"uriSelector,omitempty" tf:"-"`
 }
 
 type ActionPointInitParameters struct {
@@ -255,8 +255,8 @@ type ParameterParameters struct {
 
 // ExtensionSpec defines the desired state of Extension
 type ExtensionSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ExtensionParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ExtensionParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -272,8 +272,8 @@ type ExtensionSpec struct {
 
 // ExtensionStatus defines the observed state of Extension.
 type ExtensionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ExtensionObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ExtensionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

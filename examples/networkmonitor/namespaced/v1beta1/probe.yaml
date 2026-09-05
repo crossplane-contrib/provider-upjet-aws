@@ -1,0 +1,78 @@
+# SPDX-FileCopyrightText: 2026 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: networkmonitor.aws.m.upbound.io/v1beta1
+kind: Probe
+metadata:
+  annotations:
+    meta.upbound.io/example-id: networkmonitor/v1beta1/probe
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    destination: 127.0.0.1
+    destinationPort: 80
+    monitorNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    packetSize: 200
+    protocol: TCP
+    region: us-west-1
+    sourceArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: networkmonitor.aws.m.upbound.io/v1beta1
+kind: Monitor
+metadata:
+  annotations:
+    meta.upbound.io/example-id: networkmonitor/v1beta1/probe
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    aggregationPeriod: 30
+    region: us-west-1
+
+---
+
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: networkmonitor/v1beta1/probe
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    availabilityZone: us-west-1a
+    cidrBlock: 10.0.1.0/24
+    region: us-west-1
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: VPC
+metadata:
+  annotations:
+    meta.upbound.io/example-id: networkmonitor/v1beta1/probe
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    cidrBlock: 10.0.0.0/16
+    region: us-west-1

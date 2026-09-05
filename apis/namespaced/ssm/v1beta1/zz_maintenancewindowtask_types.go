@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AutomationParametersInitParameters struct {
@@ -44,11 +43,11 @@ type AutomationParametersParameterInitParameters struct {
 
 	// References to Instance in ec2 to populate values.
 	// +kubebuilder:validation:Optional
-	ValuesRefs []v1.NamespacedReference `json:"valuesRefs,omitempty" tf:"-"`
+	ValuesRefs []v2.NamespacedReference `json:"valuesRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Instance in ec2 to populate values.
 	// +kubebuilder:validation:Optional
-	ValuesSelector *v1.NamespacedSelector `json:"valuesSelector,omitempty" tf:"-"`
+	ValuesSelector *v2.NamespacedSelector `json:"valuesSelector,omitempty" tf:"-"`
 }
 
 type AutomationParametersParameterObservation struct {
@@ -74,11 +73,11 @@ type AutomationParametersParameterParameters struct {
 
 	// References to Instance in ec2 to populate values.
 	// +kubebuilder:validation:Optional
-	ValuesRefs []v1.NamespacedReference `json:"valuesRefs,omitempty" tf:"-"`
+	ValuesRefs []v2.NamespacedReference `json:"valuesRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Instance in ec2 to populate values.
 	// +kubebuilder:validation:Optional
-	ValuesSelector *v1.NamespacedSelector `json:"valuesSelector,omitempty" tf:"-"`
+	ValuesSelector *v2.NamespacedSelector `json:"valuesSelector,omitempty" tf:"-"`
 }
 
 type AutomationParametersParameters struct {
@@ -127,7 +126,7 @@ type LambdaParametersInitParameters struct {
 	ClientContext *string `json:"clientContext,omitempty" tf:"client_context,omitempty"`
 
 	// JSON to provide to your Lambda function as input.
-	PayloadSecretRef *v1.LocalSecretKeySelector `json:"payloadSecretRef,omitempty" tf:"-"`
+	PayloadSecretRef *v2.LocalSecretKeySelector `json:"payloadSecretRef,omitempty" tf:"-"`
 
 	// Specify a Lambda function version or alias name.
 	Qualifier *string `json:"qualifier,omitempty" tf:"qualifier,omitempty"`
@@ -150,7 +149,7 @@ type LambdaParametersParameters struct {
 
 	// JSON to provide to your Lambda function as input.
 	// +kubebuilder:validation:Optional
-	PayloadSecretRef *v1.LocalSecretKeySelector `json:"payloadSecretRef,omitempty" tf:"-"`
+	PayloadSecretRef *v2.LocalSecretKeySelector `json:"payloadSecretRef,omitempty" tf:"-"`
 
 	// Specify a Lambda function version or alias name.
 	// +kubebuilder:validation:Optional
@@ -184,11 +183,11 @@ type MaintenanceWindowTaskInitParameters struct {
 
 	// Reference to a Role in iam to populate serviceRoleArn.
 	// +kubebuilder:validation:Optional
-	ServiceRoleArnRef *v1.NamespacedReference `json:"serviceRoleArnRef,omitempty" tf:"-"`
+	ServiceRoleArnRef *v2.NamespacedReference `json:"serviceRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate serviceRoleArn.
 	// +kubebuilder:validation:Optional
-	ServiceRoleArnSelector *v1.NamespacedSelector `json:"serviceRoleArnSelector,omitempty" tf:"-"`
+	ServiceRoleArnSelector *v2.NamespacedSelector `json:"serviceRoleArnSelector,omitempty" tf:"-"`
 
 	// The targets (either instances or window target ids). Instances are specified using Key=InstanceIds,Values=instanceid1,instanceid2. Window target ids are specified using Key=WindowTargetIds,Values=window target id1, window target id2.
 	Targets []MaintenanceWindowTaskTargetsInitParameters `json:"targets,omitempty" tf:"targets,omitempty"`
@@ -200,11 +199,11 @@ type MaintenanceWindowTaskInitParameters struct {
 
 	// Reference to a Function in lambda to populate taskArn.
 	// +kubebuilder:validation:Optional
-	TaskArnRef *v1.NamespacedReference `json:"taskArnRef,omitempty" tf:"-"`
+	TaskArnRef *v2.NamespacedReference `json:"taskArnRef,omitempty" tf:"-"`
 
 	// Selector for a Function in lambda to populate taskArn.
 	// +kubebuilder:validation:Optional
-	TaskArnSelector *v1.NamespacedSelector `json:"taskArnSelector,omitempty" tf:"-"`
+	TaskArnSelector *v2.NamespacedSelector `json:"taskArnSelector,omitempty" tf:"-"`
 
 	// Configuration block with parameters for task execution.
 	TaskInvocationParameters *TaskInvocationParametersInitParameters `json:"taskInvocationParameters,omitempty" tf:"task_invocation_parameters,omitempty"`
@@ -219,11 +218,11 @@ type MaintenanceWindowTaskInitParameters struct {
 
 	// Reference to a MaintenanceWindow in ssm to populate windowId.
 	// +kubebuilder:validation:Optional
-	WindowIDRef *v1.NamespacedReference `json:"windowIdRef,omitempty" tf:"-"`
+	WindowIDRef *v2.NamespacedReference `json:"windowIdRef,omitempty" tf:"-"`
 
 	// Selector for a MaintenanceWindow in ssm to populate windowId.
 	// +kubebuilder:validation:Optional
-	WindowIDSelector *v1.NamespacedSelector `json:"windowIdSelector,omitempty" tf:"-"`
+	WindowIDSelector *v2.NamespacedSelector `json:"windowIdSelector,omitempty" tf:"-"`
 }
 
 type MaintenanceWindowTaskObservation struct {
@@ -317,11 +316,11 @@ type MaintenanceWindowTaskParameters struct {
 
 	// Reference to a Role in iam to populate serviceRoleArn.
 	// +kubebuilder:validation:Optional
-	ServiceRoleArnRef *v1.NamespacedReference `json:"serviceRoleArnRef,omitempty" tf:"-"`
+	ServiceRoleArnRef *v2.NamespacedReference `json:"serviceRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate serviceRoleArn.
 	// +kubebuilder:validation:Optional
-	ServiceRoleArnSelector *v1.NamespacedSelector `json:"serviceRoleArnSelector,omitempty" tf:"-"`
+	ServiceRoleArnSelector *v2.NamespacedSelector `json:"serviceRoleArnSelector,omitempty" tf:"-"`
 
 	// The targets (either instances or window target ids). Instances are specified using Key=InstanceIds,Values=instanceid1,instanceid2. Window target ids are specified using Key=WindowTargetIds,Values=window target id1, window target id2.
 	// +kubebuilder:validation:Optional
@@ -335,11 +334,11 @@ type MaintenanceWindowTaskParameters struct {
 
 	// Reference to a Function in lambda to populate taskArn.
 	// +kubebuilder:validation:Optional
-	TaskArnRef *v1.NamespacedReference `json:"taskArnRef,omitempty" tf:"-"`
+	TaskArnRef *v2.NamespacedReference `json:"taskArnRef,omitempty" tf:"-"`
 
 	// Selector for a Function in lambda to populate taskArn.
 	// +kubebuilder:validation:Optional
-	TaskArnSelector *v1.NamespacedSelector `json:"taskArnSelector,omitempty" tf:"-"`
+	TaskArnSelector *v2.NamespacedSelector `json:"taskArnSelector,omitempty" tf:"-"`
 
 	// Configuration block with parameters for task execution.
 	// +kubebuilder:validation:Optional
@@ -357,11 +356,11 @@ type MaintenanceWindowTaskParameters struct {
 
 	// Reference to a MaintenanceWindow in ssm to populate windowId.
 	// +kubebuilder:validation:Optional
-	WindowIDRef *v1.NamespacedReference `json:"windowIdRef,omitempty" tf:"-"`
+	WindowIDRef *v2.NamespacedReference `json:"windowIdRef,omitempty" tf:"-"`
 
 	// Selector for a MaintenanceWindow in ssm to populate windowId.
 	// +kubebuilder:validation:Optional
-	WindowIDSelector *v1.NamespacedSelector `json:"windowIdSelector,omitempty" tf:"-"`
+	WindowIDSelector *v2.NamespacedSelector `json:"windowIdSelector,omitempty" tf:"-"`
 }
 
 type MaintenanceWindowTaskTargetsInitParameters struct {
@@ -374,11 +373,11 @@ type MaintenanceWindowTaskTargetsInitParameters struct {
 
 	// References to Instance in ec2 to populate values.
 	// +kubebuilder:validation:Optional
-	ValuesRefs []v1.NamespacedReference `json:"valuesRefs,omitempty" tf:"-"`
+	ValuesRefs []v2.NamespacedReference `json:"valuesRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Instance in ec2 to populate values.
 	// +kubebuilder:validation:Optional
-	ValuesSelector *v1.NamespacedSelector `json:"valuesSelector,omitempty" tf:"-"`
+	ValuesSelector *v2.NamespacedSelector `json:"valuesSelector,omitempty" tf:"-"`
 }
 
 type MaintenanceWindowTaskTargetsObservation struct {
@@ -401,11 +400,11 @@ type MaintenanceWindowTaskTargetsParameters struct {
 
 	// References to Instance in ec2 to populate values.
 	// +kubebuilder:validation:Optional
-	ValuesRefs []v1.NamespacedReference `json:"valuesRefs,omitempty" tf:"-"`
+	ValuesRefs []v2.NamespacedReference `json:"valuesRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Instance in ec2 to populate values.
 	// +kubebuilder:validation:Optional
-	ValuesSelector *v1.NamespacedSelector `json:"valuesSelector,omitempty" tf:"-"`
+	ValuesSelector *v2.NamespacedSelector `json:"valuesSelector,omitempty" tf:"-"`
 }
 
 type NotificationConfigInitParameters struct {
@@ -417,11 +416,11 @@ type NotificationConfigInitParameters struct {
 
 	// Reference to a Topic in sns to populate notificationArn.
 	// +kubebuilder:validation:Optional
-	NotificationArnRef *v1.NamespacedReference `json:"notificationArnRef,omitempty" tf:"-"`
+	NotificationArnRef *v2.NamespacedReference `json:"notificationArnRef,omitempty" tf:"-"`
 
 	// Selector for a Topic in sns to populate notificationArn.
 	// +kubebuilder:validation:Optional
-	NotificationArnSelector *v1.NamespacedSelector `json:"notificationArnSelector,omitempty" tf:"-"`
+	NotificationArnSelector *v2.NamespacedSelector `json:"notificationArnSelector,omitempty" tf:"-"`
 
 	// The different events for which you can receive notifications. Valid values: All, InProgress, Success, TimedOut, Cancelled, and Failed
 	NotificationEvents []*string `json:"notificationEvents,omitempty" tf:"notification_events,omitempty"`
@@ -452,11 +451,11 @@ type NotificationConfigParameters struct {
 
 	// Reference to a Topic in sns to populate notificationArn.
 	// +kubebuilder:validation:Optional
-	NotificationArnRef *v1.NamespacedReference `json:"notificationArnRef,omitempty" tf:"-"`
+	NotificationArnRef *v2.NamespacedReference `json:"notificationArnRef,omitempty" tf:"-"`
 
 	// Selector for a Topic in sns to populate notificationArn.
 	// +kubebuilder:validation:Optional
-	NotificationArnSelector *v1.NamespacedSelector `json:"notificationArnSelector,omitempty" tf:"-"`
+	NotificationArnSelector *v2.NamespacedSelector `json:"notificationArnSelector,omitempty" tf:"-"`
 
 	// The different events for which you can receive notifications. Valid values: All, InProgress, Success, TimedOut, Cancelled, and Failed
 	// +kubebuilder:validation:Optional
@@ -494,11 +493,11 @@ type RunCommandParametersInitParameters struct {
 
 	// Reference to a Bucket in s3 to populate outputS3Bucket.
 	// +kubebuilder:validation:Optional
-	OutputS3BucketRef *v1.NamespacedReference `json:"outputS3BucketRef,omitempty" tf:"-"`
+	OutputS3BucketRef *v2.NamespacedReference `json:"outputS3BucketRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate outputS3Bucket.
 	// +kubebuilder:validation:Optional
-	OutputS3BucketSelector *v1.NamespacedSelector `json:"outputS3BucketSelector,omitempty" tf:"-"`
+	OutputS3BucketSelector *v2.NamespacedSelector `json:"outputS3BucketSelector,omitempty" tf:"-"`
 
 	// The Amazon S3 bucket subfolder.
 	OutputS3KeyPrefix *string `json:"outputS3KeyPrefix,omitempty" tf:"output_s3_key_prefix,omitempty"`
@@ -513,11 +512,11 @@ type RunCommandParametersInitParameters struct {
 
 	// Reference to a Role in iam to populate serviceRoleArn.
 	// +kubebuilder:validation:Optional
-	ServiceRoleArnRef *v1.NamespacedReference `json:"serviceRoleArnRef,omitempty" tf:"-"`
+	ServiceRoleArnRef *v2.NamespacedReference `json:"serviceRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate serviceRoleArn.
 	// +kubebuilder:validation:Optional
-	ServiceRoleArnSelector *v1.NamespacedSelector `json:"serviceRoleArnSelector,omitempty" tf:"-"`
+	ServiceRoleArnSelector *v2.NamespacedSelector `json:"serviceRoleArnSelector,omitempty" tf:"-"`
 
 	// If this time is reached and the command has not already started executing, it doesn't run.
 	TimeoutSeconds *float64 `json:"timeoutSeconds,omitempty" tf:"timeout_seconds,omitempty"`
@@ -622,11 +621,11 @@ type RunCommandParametersParameters struct {
 
 	// Reference to a Bucket in s3 to populate outputS3Bucket.
 	// +kubebuilder:validation:Optional
-	OutputS3BucketRef *v1.NamespacedReference `json:"outputS3BucketRef,omitempty" tf:"-"`
+	OutputS3BucketRef *v2.NamespacedReference `json:"outputS3BucketRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate outputS3Bucket.
 	// +kubebuilder:validation:Optional
-	OutputS3BucketSelector *v1.NamespacedSelector `json:"outputS3BucketSelector,omitempty" tf:"-"`
+	OutputS3BucketSelector *v2.NamespacedSelector `json:"outputS3BucketSelector,omitempty" tf:"-"`
 
 	// The Amazon S3 bucket subfolder.
 	// +kubebuilder:validation:Optional
@@ -644,11 +643,11 @@ type RunCommandParametersParameters struct {
 
 	// Reference to a Role in iam to populate serviceRoleArn.
 	// +kubebuilder:validation:Optional
-	ServiceRoleArnRef *v1.NamespacedReference `json:"serviceRoleArnRef,omitempty" tf:"-"`
+	ServiceRoleArnRef *v2.NamespacedReference `json:"serviceRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate serviceRoleArn.
 	// +kubebuilder:validation:Optional
-	ServiceRoleArnSelector *v1.NamespacedSelector `json:"serviceRoleArnSelector,omitempty" tf:"-"`
+	ServiceRoleArnSelector *v2.NamespacedSelector `json:"serviceRoleArnSelector,omitempty" tf:"-"`
 
 	// If this time is reached and the command has not already started executing, it doesn't run.
 	// +kubebuilder:validation:Optional
@@ -658,7 +657,7 @@ type RunCommandParametersParameters struct {
 type StepFunctionsParametersInitParameters struct {
 
 	// The inputs for the STEP_FUNCTION task.
-	InputSecretRef *v1.LocalSecretKeySelector `json:"inputSecretRef,omitempty" tf:"-"`
+	InputSecretRef *v2.LocalSecretKeySelector `json:"inputSecretRef,omitempty" tf:"-"`
 
 	// The name of the maintenance window task.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -674,7 +673,7 @@ type StepFunctionsParametersParameters struct {
 
 	// The inputs for the STEP_FUNCTION task.
 	// +kubebuilder:validation:Optional
-	InputSecretRef *v1.LocalSecretKeySelector `json:"inputSecretRef,omitempty" tf:"-"`
+	InputSecretRef *v2.LocalSecretKeySelector `json:"inputSecretRef,omitempty" tf:"-"`
 
 	// The name of the maintenance window task.
 	// +kubebuilder:validation:Optional
@@ -749,8 +748,8 @@ type MaintenanceWindowTaskSpec struct {
 
 // MaintenanceWindowTaskStatus defines the observed state of MaintenanceWindowTask.
 type MaintenanceWindowTaskStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        MaintenanceWindowTaskObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               MaintenanceWindowTaskObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

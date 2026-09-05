@@ -15,7 +15,7 @@ metadata:
 spec:
   forProvider:
     compatibleRuntimes:
-    - nodejs20.x
+    - nodejs24.x
     filename: lambda_layer_payload.zip
     layerName: lambda_layer_name
     region: us-west-1

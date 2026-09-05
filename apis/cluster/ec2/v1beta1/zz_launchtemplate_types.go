@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type BlockDeviceMappingsInitParameters struct {
@@ -158,11 +158,11 @@ type EBSInitParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDRef *v1.Reference `json:"kmsKeyIdRef,omitempty" tf:"-"`
+	KMSKeyIDRef *v2.Reference `json:"kmsKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
+	KMSKeyIDSelector *v2.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
 	// The Snapshot ID to mount.
 	SnapshotID *string `json:"snapshotId,omitempty" tf:"snapshot_id,omitempty"`
@@ -242,11 +242,11 @@ type EBSParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDRef *v1.Reference `json:"kmsKeyIdRef,omitempty" tf:"-"`
+	KMSKeyIDRef *v2.Reference `json:"kmsKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
+	KMSKeyIDSelector *v2.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
 	// The Snapshot ID to mount.
 	// +kubebuilder:validation:Optional
@@ -346,11 +346,11 @@ type IAMInstanceProfileInitParameters struct {
 
 	// Reference to a InstanceProfile in iam to populate arn.
 	// +kubebuilder:validation:Optional
-	ArnRef *v1.Reference `json:"arnRef,omitempty" tf:"-"`
+	ArnRef *v2.Reference `json:"arnRef,omitempty" tf:"-"`
 
 	// Selector for a InstanceProfile in iam to populate arn.
 	// +kubebuilder:validation:Optional
-	ArnSelector *v1.Selector `json:"arnSelector,omitempty" tf:"-"`
+	ArnSelector *v2.Selector `json:"arnSelector,omitempty" tf:"-"`
 
 	// The name of the instance profile.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.InstanceProfile
@@ -358,11 +358,11 @@ type IAMInstanceProfileInitParameters struct {
 
 	// Reference to a InstanceProfile in iam to populate name.
 	// +kubebuilder:validation:Optional
-	NameRef *v1.Reference `json:"nameRef,omitempty" tf:"-"`
+	NameRef *v2.Reference `json:"nameRef,omitempty" tf:"-"`
 
 	// Selector for a InstanceProfile in iam to populate name.
 	// +kubebuilder:validation:Optional
-	NameSelector *v1.Selector `json:"nameSelector,omitempty" tf:"-"`
+	NameSelector *v2.Selector `json:"nameSelector,omitempty" tf:"-"`
 }
 
 type IAMInstanceProfileObservation struct {
@@ -384,11 +384,11 @@ type IAMInstanceProfileParameters struct {
 
 	// Reference to a InstanceProfile in iam to populate arn.
 	// +kubebuilder:validation:Optional
-	ArnRef *v1.Reference `json:"arnRef,omitempty" tf:"-"`
+	ArnRef *v2.Reference `json:"arnRef,omitempty" tf:"-"`
 
 	// Selector for a InstanceProfile in iam to populate arn.
 	// +kubebuilder:validation:Optional
-	ArnSelector *v1.Selector `json:"arnSelector,omitempty" tf:"-"`
+	ArnSelector *v2.Selector `json:"arnSelector,omitempty" tf:"-"`
 
 	// The name of the instance profile.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.InstanceProfile
@@ -397,11 +397,11 @@ type IAMInstanceProfileParameters struct {
 
 	// Reference to a InstanceProfile in iam to populate name.
 	// +kubebuilder:validation:Optional
-	NameRef *v1.Reference `json:"nameRef,omitempty" tf:"-"`
+	NameRef *v2.Reference `json:"nameRef,omitempty" tf:"-"`
 
 	// Selector for a InstanceProfile in iam to populate name.
 	// +kubebuilder:validation:Optional
-	NameSelector *v1.Selector `json:"nameSelector,omitempty" tf:"-"`
+	NameSelector *v2.Selector `json:"nameSelector,omitempty" tf:"-"`
 }
 
 type InstanceRequirementsAcceleratorCountInitParameters struct {
@@ -897,11 +897,11 @@ type LaunchTemplateInitParameters_2 struct {
 
 	// References to SecurityGroup in ec2 to populate securityGroupNames.
 	// +kubebuilder:validation:Optional
-	SecurityGroupNameRefs []v1.Reference `json:"securityGroupNameRefs,omitempty" tf:"-"`
+	SecurityGroupNameRefs []v2.Reference `json:"securityGroupNameRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate securityGroupNames.
 	// +kubebuilder:validation:Optional
-	SecurityGroupNameSelector *v1.Selector `json:"securityGroupNameSelector,omitempty" tf:"-"`
+	SecurityGroupNameSelector *v2.Selector `json:"securityGroupNameSelector,omitempty" tf:"-"`
 
 	// A list of security group names to associate with. If you are creating Instances in a VPC, use
 	// vpc_security_group_ids instead.
@@ -926,11 +926,11 @@ type LaunchTemplateInitParameters_2 struct {
 
 	// References to SecurityGroup in ec2 to populate vpcSecurityGroupIds.
 	// +kubebuilder:validation:Optional
-	VPCSecurityGroupIDRefs []v1.Reference `json:"vpcSecurityGroupIdRefs,omitempty" tf:"-"`
+	VPCSecurityGroupIDRefs []v2.Reference `json:"vpcSecurityGroupIdRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate vpcSecurityGroupIds.
 	// +kubebuilder:validation:Optional
-	VPCSecurityGroupIDSelector *v1.Selector `json:"vpcSecurityGroupIdSelector,omitempty" tf:"-"`
+	VPCSecurityGroupIDSelector *v2.Selector `json:"vpcSecurityGroupIdSelector,omitempty" tf:"-"`
 
 	// A list of security group IDs to associate with. Conflicts with network_interfaces.security_groups
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.SecurityGroup
@@ -1657,11 +1657,11 @@ type LaunchTemplateParameters_2 struct {
 
 	// References to SecurityGroup in ec2 to populate securityGroupNames.
 	// +kubebuilder:validation:Optional
-	SecurityGroupNameRefs []v1.Reference `json:"securityGroupNameRefs,omitempty" tf:"-"`
+	SecurityGroupNameRefs []v2.Reference `json:"securityGroupNameRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate securityGroupNames.
 	// +kubebuilder:validation:Optional
-	SecurityGroupNameSelector *v1.Selector `json:"securityGroupNameSelector,omitempty" tf:"-"`
+	SecurityGroupNameSelector *v2.Selector `json:"securityGroupNameSelector,omitempty" tf:"-"`
 
 	// A list of security group names to associate with. If you are creating Instances in a VPC, use
 	// vpc_security_group_ids instead.
@@ -1691,11 +1691,11 @@ type LaunchTemplateParameters_2 struct {
 
 	// References to SecurityGroup in ec2 to populate vpcSecurityGroupIds.
 	// +kubebuilder:validation:Optional
-	VPCSecurityGroupIDRefs []v1.Reference `json:"vpcSecurityGroupIdRefs,omitempty" tf:"-"`
+	VPCSecurityGroupIDRefs []v2.Reference `json:"vpcSecurityGroupIdRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate vpcSecurityGroupIds.
 	// +kubebuilder:validation:Optional
-	VPCSecurityGroupIDSelector *v1.Selector `json:"vpcSecurityGroupIdSelector,omitempty" tf:"-"`
+	VPCSecurityGroupIDSelector *v2.Selector `json:"vpcSecurityGroupIdSelector,omitempty" tf:"-"`
 
 	// A list of security group IDs to associate with. Conflicts with network_interfaces.security_groups
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.SecurityGroup
@@ -1846,11 +1846,11 @@ type NetworkInterfacesInitParameters struct {
 
 	// Reference to a NetworkInterface in ec2 to populate networkInterfaceId.
 	// +kubebuilder:validation:Optional
-	NetworkInterfaceIDRef *v1.Reference `json:"networkInterfaceIdRef,omitempty" tf:"-"`
+	NetworkInterfaceIDRef *v2.Reference `json:"networkInterfaceIdRef,omitempty" tf:"-"`
 
 	// Selector for a NetworkInterface in ec2 to populate networkInterfaceId.
 	// +kubebuilder:validation:Optional
-	NetworkInterfaceIDSelector *v1.Selector `json:"networkInterfaceIdSelector,omitempty" tf:"-"`
+	NetworkInterfaceIDSelector *v2.Selector `json:"networkInterfaceIdSelector,omitempty" tf:"-"`
 
 	// Whether the first IPv6 GUA will be made the primary IPv6 address.
 	PrimaryIPv6 *string `json:"primaryIpv6,omitempty" tf:"primary_ipv6,omitempty"`
@@ -1860,11 +1860,11 @@ type NetworkInterfacesInitParameters struct {
 
 	// References to SecurityGroup in ec2 to populate securityGroups.
 	// +kubebuilder:validation:Optional
-	SecurityGroupRefs []v1.Reference `json:"securityGroupRefs,omitempty" tf:"-"`
+	SecurityGroupRefs []v2.Reference `json:"securityGroupRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate securityGroups.
 	// +kubebuilder:validation:Optional
-	SecurityGroupSelector *v1.Selector `json:"securityGroupSelector,omitempty" tf:"-"`
+	SecurityGroupSelector *v2.Selector `json:"securityGroupSelector,omitempty" tf:"-"`
 
 	// A list of security group IDs to associate.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.SecurityGroup
@@ -1879,11 +1879,11 @@ type NetworkInterfacesInitParameters struct {
 
 	// Reference to a Subnet in ec2 to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.Reference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in ec2 to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 type NetworkInterfacesObservation struct {
@@ -2041,11 +2041,11 @@ type NetworkInterfacesParameters struct {
 
 	// Reference to a NetworkInterface in ec2 to populate networkInterfaceId.
 	// +kubebuilder:validation:Optional
-	NetworkInterfaceIDRef *v1.Reference `json:"networkInterfaceIdRef,omitempty" tf:"-"`
+	NetworkInterfaceIDRef *v2.Reference `json:"networkInterfaceIdRef,omitempty" tf:"-"`
 
 	// Selector for a NetworkInterface in ec2 to populate networkInterfaceId.
 	// +kubebuilder:validation:Optional
-	NetworkInterfaceIDSelector *v1.Selector `json:"networkInterfaceIdSelector,omitempty" tf:"-"`
+	NetworkInterfaceIDSelector *v2.Selector `json:"networkInterfaceIdSelector,omitempty" tf:"-"`
 
 	// Whether the first IPv6 GUA will be made the primary IPv6 address.
 	// +kubebuilder:validation:Optional
@@ -2057,11 +2057,11 @@ type NetworkInterfacesParameters struct {
 
 	// References to SecurityGroup in ec2 to populate securityGroups.
 	// +kubebuilder:validation:Optional
-	SecurityGroupRefs []v1.Reference `json:"securityGroupRefs,omitempty" tf:"-"`
+	SecurityGroupRefs []v2.Reference `json:"securityGroupRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate securityGroups.
 	// +kubebuilder:validation:Optional
-	SecurityGroupSelector *v1.Selector `json:"securityGroupSelector,omitempty" tf:"-"`
+	SecurityGroupSelector *v2.Selector `json:"securityGroupSelector,omitempty" tf:"-"`
 
 	// A list of security group IDs to associate.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.SecurityGroup
@@ -2078,11 +2078,11 @@ type NetworkInterfacesParameters struct {
 
 	// Reference to a Subnet in ec2 to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.Reference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in ec2 to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 type NetworkPerformanceOptionsInitParameters struct {
@@ -2319,8 +2319,8 @@ type TagSpecificationsParameters struct {
 
 // LaunchTemplateSpec defines the desired state of LaunchTemplate
 type LaunchTemplateSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     LaunchTemplateParameters_2 `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   LaunchTemplateParameters_2 `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -2336,8 +2336,8 @@ type LaunchTemplateSpec struct {
 
 // LaunchTemplateStatus defines the observed state of LaunchTemplate.
 type LaunchTemplateStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        LaunchTemplateObservation_2 `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               LaunchTemplateObservation_2 `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

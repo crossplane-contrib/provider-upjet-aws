@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ApplicationSnapshotInitParameters struct {
@@ -22,11 +21,11 @@ type ApplicationSnapshotInitParameters struct {
 
 	// Reference to a Application in kinesisanalyticsv2 to populate applicationName.
 	// +kubebuilder:validation:Optional
-	ApplicationNameRef *v1.NamespacedReference `json:"applicationNameRef,omitempty" tf:"-"`
+	ApplicationNameRef *v2.NamespacedReference `json:"applicationNameRef,omitempty" tf:"-"`
 
 	// Selector for a Application in kinesisanalyticsv2 to populate applicationName.
 	// +kubebuilder:validation:Optional
-	ApplicationNameSelector *v1.NamespacedSelector `json:"applicationNameSelector,omitempty" tf:"-"`
+	ApplicationNameSelector *v2.NamespacedSelector `json:"applicationNameSelector,omitempty" tf:"-"`
 }
 
 type ApplicationSnapshotObservation struct {
@@ -57,11 +56,11 @@ type ApplicationSnapshotParameters struct {
 
 	// Reference to a Application in kinesisanalyticsv2 to populate applicationName.
 	// +kubebuilder:validation:Optional
-	ApplicationNameRef *v1.NamespacedReference `json:"applicationNameRef,omitempty" tf:"-"`
+	ApplicationNameRef *v2.NamespacedReference `json:"applicationNameRef,omitempty" tf:"-"`
 
 	// Selector for a Application in kinesisanalyticsv2 to populate applicationName.
 	// +kubebuilder:validation:Optional
-	ApplicationNameSelector *v1.NamespacedSelector `json:"applicationNameSelector,omitempty" tf:"-"`
+	ApplicationNameSelector *v2.NamespacedSelector `json:"applicationNameSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -88,8 +87,8 @@ type ApplicationSnapshotSpec struct {
 
 // ApplicationSnapshotStatus defines the observed state of ApplicationSnapshot.
 type ApplicationSnapshotStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ApplicationSnapshotObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ApplicationSnapshotObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

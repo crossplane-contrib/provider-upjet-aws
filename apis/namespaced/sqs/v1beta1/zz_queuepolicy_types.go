@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type QueuePolicyInitParameters struct {
@@ -26,11 +25,11 @@ type QueuePolicyInitParameters struct {
 
 	// Reference to a Queue in sqs to populate queueUrl.
 	// +kubebuilder:validation:Optional
-	QueueURLRef *v1.NamespacedReference `json:"queueUrlRef,omitempty" tf:"-"`
+	QueueURLRef *v2.NamespacedReference `json:"queueUrlRef,omitempty" tf:"-"`
 
 	// Selector for a Queue in sqs to populate queueUrl.
 	// +kubebuilder:validation:Optional
-	QueueURLSelector *v1.NamespacedSelector `json:"queueUrlSelector,omitempty" tf:"-"`
+	QueueURLSelector *v2.NamespacedSelector `json:"queueUrlSelector,omitempty" tf:"-"`
 }
 
 type QueuePolicyObservation struct {
@@ -61,11 +60,11 @@ type QueuePolicyParameters struct {
 
 	// Reference to a Queue in sqs to populate queueUrl.
 	// +kubebuilder:validation:Optional
-	QueueURLRef *v1.NamespacedReference `json:"queueUrlRef,omitempty" tf:"-"`
+	QueueURLRef *v2.NamespacedReference `json:"queueUrlRef,omitempty" tf:"-"`
 
 	// Selector for a Queue in sqs to populate queueUrl.
 	// +kubebuilder:validation:Optional
-	QueueURLSelector *v1.NamespacedSelector `json:"queueUrlSelector,omitempty" tf:"-"`
+	QueueURLSelector *v2.NamespacedSelector `json:"queueUrlSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -92,8 +91,8 @@ type QueuePolicySpec struct {
 
 // QueuePolicyStatus defines the observed state of QueuePolicy.
 type QueuePolicyStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        QueuePolicyObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               QueuePolicyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type DataCellsFilterInitParameters struct {
@@ -71,11 +71,11 @@ type DataLocationInitParameters struct {
 
 	// Reference to a Resource in lakeformation to populate arn.
 	// +kubebuilder:validation:Optional
-	ArnRef *v1.Reference `json:"arnRef,omitempty" tf:"-"`
+	ArnRef *v2.Reference `json:"arnRef,omitempty" tf:"-"`
 
 	// Selector for a Resource in lakeformation to populate arn.
 	// +kubebuilder:validation:Optional
-	ArnSelector *v1.Selector `json:"arnSelector,omitempty" tf:"-"`
+	ArnSelector *v2.Selector `json:"arnSelector,omitempty" tf:"-"`
 
 	// Identifier for the Data Catalog where the location is registered with Lake Formation. By default, it is the account ID of the caller.
 	CatalogID *string `json:"catalogId,omitempty" tf:"catalog_id,omitempty"`
@@ -100,11 +100,11 @@ type DataLocationParameters struct {
 
 	// Reference to a Resource in lakeformation to populate arn.
 	// +kubebuilder:validation:Optional
-	ArnRef *v1.Reference `json:"arnRef,omitempty" tf:"-"`
+	ArnRef *v2.Reference `json:"arnRef,omitempty" tf:"-"`
 
 	// Selector for a Resource in lakeformation to populate arn.
 	// +kubebuilder:validation:Optional
-	ArnSelector *v1.Selector `json:"arnSelector,omitempty" tf:"-"`
+	ArnSelector *v2.Selector `json:"arnSelector,omitempty" tf:"-"`
 
 	// Identifier for the Data Catalog where the location is registered with Lake Formation. By default, it is the account ID of the caller.
 	// +kubebuilder:validation:Optional
@@ -122,11 +122,11 @@ type DatabaseInitParameters struct {
 
 	// Reference to a CatalogDatabase in glue to populate name.
 	// +kubebuilder:validation:Optional
-	NameRef *v1.Reference `json:"nameRef,omitempty" tf:"-"`
+	NameRef *v2.Reference `json:"nameRef,omitempty" tf:"-"`
 
 	// Selector for a CatalogDatabase in glue to populate name.
 	// +kubebuilder:validation:Optional
-	NameSelector *v1.Selector `json:"nameSelector,omitempty" tf:"-"`
+	NameSelector *v2.Selector `json:"nameSelector,omitempty" tf:"-"`
 }
 
 type DatabaseObservation struct {
@@ -151,11 +151,11 @@ type DatabaseParameters struct {
 
 	// Reference to a CatalogDatabase in glue to populate name.
 	// +kubebuilder:validation:Optional
-	NameRef *v1.Reference `json:"nameRef,omitempty" tf:"-"`
+	NameRef *v2.Reference `json:"nameRef,omitempty" tf:"-"`
 
 	// Selector for a CatalogDatabase in glue to populate name.
 	// +kubebuilder:validation:Optional
-	NameSelector *v1.Selector `json:"nameSelector,omitempty" tf:"-"`
+	NameSelector *v2.Selector `json:"nameSelector,omitempty" tf:"-"`
 }
 
 type ExpressionInitParameters struct {
@@ -488,11 +488,11 @@ type TableWithColumnsInitParameters struct {
 
 	// Reference to a CatalogTable in glue to populate name.
 	// +kubebuilder:validation:Optional
-	NameRef *v1.Reference `json:"nameRef,omitempty" tf:"-"`
+	NameRef *v2.Reference `json:"nameRef,omitempty" tf:"-"`
 
 	// Selector for a CatalogTable in glue to populate name.
 	// +kubebuilder:validation:Optional
-	NameSelector *v1.Selector `json:"nameSelector,omitempty" tf:"-"`
+	NameSelector *v2.Selector `json:"nameSelector,omitempty" tf:"-"`
 
 	// Whether to use a column wildcard.
 	Wildcard *bool `json:"wildcard,omitempty" tf:"wildcard,omitempty"`
@@ -548,11 +548,11 @@ type TableWithColumnsParameters struct {
 
 	// Reference to a CatalogTable in glue to populate name.
 	// +kubebuilder:validation:Optional
-	NameRef *v1.Reference `json:"nameRef,omitempty" tf:"-"`
+	NameRef *v2.Reference `json:"nameRef,omitempty" tf:"-"`
 
 	// Selector for a CatalogTable in glue to populate name.
 	// +kubebuilder:validation:Optional
-	NameSelector *v1.Selector `json:"nameSelector,omitempty" tf:"-"`
+	NameSelector *v2.Selector `json:"nameSelector,omitempty" tf:"-"`
 
 	// Whether to use a column wildcard.
 	// +kubebuilder:validation:Optional
@@ -561,8 +561,8 @@ type TableWithColumnsParameters struct {
 
 // PermissionsSpec defines the desired state of Permissions
 type PermissionsSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     PermissionsParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   PermissionsParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -578,8 +578,8 @@ type PermissionsSpec struct {
 
 // PermissionsStatus defines the observed state of Permissions.
 type PermissionsStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        PermissionsObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               PermissionsObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

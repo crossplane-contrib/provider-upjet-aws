@@ -1,0 +1,122 @@
+# SPDX-FileCopyrightText: 2026 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+# Basic Online Evaluation Config Example
+# Continuously evaluates agent performance by sampling live traffic from a
+# CloudWatch log group and applying built-in evaluators. Requires CloudWatch
+# Transaction Search to be enabled in the account. Includes the CloudWatch log
+# group and IAM execution role dependencies.
+
+apiVersion: bedrockagentcore.aws.upbound.io/v1beta1
+kind: OnlineEvaluationConfig
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrockagentcore/v1beta1/onlineevaluationconfig
+  labels:
+    testing.upbound.io/example-name: onlineevaluationconfig
+  name: onlineevaluationconfig
+spec:
+  forProvider:
+    region: us-west-2
+    onlineEvaluationConfigName: my_evaluation_config
+    description: Continuous evaluation of agent performance
+    enableOnCreate: true
+    evaluationExecutionRoleArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: onlineevaluationconfig
+    dataSourceConfig:
+      # CloudWatch Transaction Search must be enabled before using this resource.
+      # see https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Enable-TransactionSearch.html
+      cloudwatchLogs:
+        logGroupNamesSelector:
+          matchLabels:
+            testing.upbound.io/example-name: onlineevaluationconfig
+        serviceNames:
+        - my_agent_service
+    evaluator:
+    - evaluatorId: Builtin.Helpfulness
+    - evaluatorId: Builtin.GoalSuccessRate
+    rule:
+      samplingConfig:
+        samplingPercentage: 10
+---
+apiVersion: cloudwatchlogs.aws.upbound.io/v1beta1
+kind: Group
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrockagentcore/v1beta1/onlineevaluationconfig
+    crossplane.io/external-name: "/aws/bedrock-agentcore/my-agent-traces"
+  labels:
+    testing.upbound.io/example-name: onlineevaluationconfig
+  name: agentcore-agent-traces
+spec:
+  forProvider:
+    region: us-west-2
+    retentionInDays: 30
+---
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrockagentcore/v1beta1/onlineevaluationconfig
+  labels:
+    testing.upbound.io/example-name: onlineevaluationconfig
+  name: bedrock-agentcore-eval-role
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {"Service": "bedrock-agentcore.amazonaws.com"},
+            "Action": "sts:AssumeRole"
+          }
+        ]
+      }
+---
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: RolePolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrockagentcore/v1beta1/onlineevaluationconfig
+  labels:
+    testing.upbound.io/example-name: onlineevaluationconfig
+  name: bedrock-agentcore-eval-policy
+spec:
+  forProvider:
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: onlineevaluationconfig
+    policy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Sid": "CloudWatchLogReadStatement",
+            "Effect": "Allow",
+            "Action": ["logs:DescribeLogGroups", "logs:GetQueryResults", "logs:StartQuery"],
+            "Resource": "*"
+          },
+          {
+            "Sid": "CloudWatchLogWriteStatement",
+            "Effect": "Allow",
+            "Action": ["logs:CreateLogGroup", "logs:CreateLogStream", "logs:PutLogEvents"],
+            "Resource": "arn:aws:logs:*:*:log-group:/aws/bedrock-agentcore/evaluations/*"
+          },
+          {
+            "Sid": "CloudWatchIndexPolicyStatement",
+            "Effect": "Allow",
+            "Action": ["logs:DescribeIndexPolicies", "logs:PutIndexPolicy"],
+            "Resource": ["arn:aws:logs:*:*:log-group:aws/spans", "arn:aws:logs:*:*:log-group:aws/spans:*"]
+          },
+          {
+            "Sid": "BedrockInvokeStatement",
+            "Effect": "Allow",
+            "Action": ["bedrock:InvokeModel", "bedrock:InvokeModelWithResponseStream"],
+            "Resource": ["arn:aws:bedrock:*::foundation-model/*", "arn:aws:bedrock:*:*:inference-profile/*"]
+          }
+        ]
+      }

@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ReplicaKeyInitParameters struct {
@@ -42,11 +41,11 @@ type ReplicaKeyInitParameters struct {
 
 	// Reference to a Key in kms to populate primaryKeyArn.
 	// +kubebuilder:validation:Optional
-	PrimaryKeyArnRef *v1.NamespacedReference `json:"primaryKeyArnRef,omitempty" tf:"-"`
+	PrimaryKeyArnRef *v2.NamespacedReference `json:"primaryKeyArnRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate primaryKeyArn.
 	// +kubebuilder:validation:Optional
-	PrimaryKeyArnSelector *v1.NamespacedSelector `json:"primaryKeyArnSelector,omitempty" tf:"-"`
+	PrimaryKeyArnSelector *v2.NamespacedSelector `json:"primaryKeyArnSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -141,11 +140,11 @@ type ReplicaKeyParameters struct {
 
 	// Reference to a Key in kms to populate primaryKeyArn.
 	// +kubebuilder:validation:Optional
-	PrimaryKeyArnRef *v1.NamespacedReference `json:"primaryKeyArnRef,omitempty" tf:"-"`
+	PrimaryKeyArnRef *v2.NamespacedReference `json:"primaryKeyArnRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate primaryKeyArn.
 	// +kubebuilder:validation:Optional
-	PrimaryKeyArnSelector *v1.NamespacedSelector `json:"primaryKeyArnSelector,omitempty" tf:"-"`
+	PrimaryKeyArnSelector *v2.NamespacedSelector `json:"primaryKeyArnSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -177,8 +176,8 @@ type ReplicaKeySpec struct {
 
 // ReplicaKeyStatus defines the observed state of ReplicaKey.
 type ReplicaKeyStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ReplicaKeyObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ReplicaKeyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

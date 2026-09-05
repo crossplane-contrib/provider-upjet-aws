@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AssessmentTemplateInitParameters struct {
@@ -39,11 +39,11 @@ type AssessmentTemplateInitParameters struct {
 
 	// Reference to a AssessmentTarget in inspector to populate targetArn.
 	// +kubebuilder:validation:Optional
-	TargetArnRef *v1.Reference `json:"targetArnRef,omitempty" tf:"-"`
+	TargetArnRef *v2.Reference `json:"targetArnRef,omitempty" tf:"-"`
 
 	// Selector for a AssessmentTarget in inspector to populate targetArn.
 	// +kubebuilder:validation:Optional
-	TargetArnSelector *v1.Selector `json:"targetArnSelector,omitempty" tf:"-"`
+	TargetArnSelector *v2.Selector `json:"targetArnSelector,omitempty" tf:"-"`
 }
 
 type AssessmentTemplateObservation struct {
@@ -119,11 +119,11 @@ type AssessmentTemplateParameters struct {
 
 	// Reference to a AssessmentTarget in inspector to populate targetArn.
 	// +kubebuilder:validation:Optional
-	TargetArnRef *v1.Reference `json:"targetArnRef,omitempty" tf:"-"`
+	TargetArnRef *v2.Reference `json:"targetArnRef,omitempty" tf:"-"`
 
 	// Selector for a AssessmentTarget in inspector to populate targetArn.
 	// +kubebuilder:validation:Optional
-	TargetArnSelector *v1.Selector `json:"targetArnSelector,omitempty" tf:"-"`
+	TargetArnSelector *v2.Selector `json:"targetArnSelector,omitempty" tf:"-"`
 }
 
 type EventSubscriptionInitParameters struct {
@@ -138,11 +138,11 @@ type EventSubscriptionInitParameters struct {
 
 	// Reference to a Topic in sns to populate topicArn.
 	// +kubebuilder:validation:Optional
-	TopicArnRef *v1.Reference `json:"topicArnRef,omitempty" tf:"-"`
+	TopicArnRef *v2.Reference `json:"topicArnRef,omitempty" tf:"-"`
 
 	// Selector for a Topic in sns to populate topicArn.
 	// +kubebuilder:validation:Optional
-	TopicArnSelector *v1.Selector `json:"topicArnSelector,omitempty" tf:"-"`
+	TopicArnSelector *v2.Selector `json:"topicArnSelector,omitempty" tf:"-"`
 }
 
 type EventSubscriptionObservation struct {
@@ -168,17 +168,17 @@ type EventSubscriptionParameters struct {
 
 	// Reference to a Topic in sns to populate topicArn.
 	// +kubebuilder:validation:Optional
-	TopicArnRef *v1.Reference `json:"topicArnRef,omitempty" tf:"-"`
+	TopicArnRef *v2.Reference `json:"topicArnRef,omitempty" tf:"-"`
 
 	// Selector for a Topic in sns to populate topicArn.
 	// +kubebuilder:validation:Optional
-	TopicArnSelector *v1.Selector `json:"topicArnSelector,omitempty" tf:"-"`
+	TopicArnSelector *v2.Selector `json:"topicArnSelector,omitempty" tf:"-"`
 }
 
 // AssessmentTemplateSpec defines the desired state of AssessmentTemplate
 type AssessmentTemplateSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     AssessmentTemplateParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   AssessmentTemplateParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -194,8 +194,8 @@ type AssessmentTemplateSpec struct {
 
 // AssessmentTemplateStatus defines the observed state of AssessmentTemplate.
 type AssessmentTemplateStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        AssessmentTemplateObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               AssessmentTemplateObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

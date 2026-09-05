@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AMIInitParameters struct {
@@ -307,11 +307,11 @@ type EBSBlockDeviceInitParameters struct {
 
 	// Reference to a EBSSnapshot in ec2 to populate snapshotId.
 	// +kubebuilder:validation:Optional
-	SnapshotIDRef *v1.Reference `json:"snapshotIdRef,omitempty" tf:"-"`
+	SnapshotIDRef *v2.Reference `json:"snapshotIdRef,omitempty" tf:"-"`
 
 	// Selector for a EBSSnapshot in ec2 to populate snapshotId.
 	// +kubebuilder:validation:Optional
-	SnapshotIDSelector *v1.Selector `json:"snapshotIdSelector,omitempty" tf:"-"`
+	SnapshotIDSelector *v2.Selector `json:"snapshotIdSelector,omitempty" tf:"-"`
 
 	// Throughput that the EBS volume supports, in MiB/s. Only valid for volume_type of gp3.
 	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
@@ -394,11 +394,11 @@ type EBSBlockDeviceParameters struct {
 
 	// Reference to a EBSSnapshot in ec2 to populate snapshotId.
 	// +kubebuilder:validation:Optional
-	SnapshotIDRef *v1.Reference `json:"snapshotIdRef,omitempty" tf:"-"`
+	SnapshotIDRef *v2.Reference `json:"snapshotIdRef,omitempty" tf:"-"`
 
 	// Selector for a EBSSnapshot in ec2 to populate snapshotId.
 	// +kubebuilder:validation:Optional
-	SnapshotIDSelector *v1.Selector `json:"snapshotIdSelector,omitempty" tf:"-"`
+	SnapshotIDSelector *v2.Selector `json:"snapshotIdSelector,omitempty" tf:"-"`
 
 	// Throughput that the EBS volume supports, in MiB/s. Only valid for volume_type of gp3.
 	// +kubebuilder:validation:Optional
@@ -449,8 +449,8 @@ type EphemeralBlockDeviceParameters struct {
 
 // AMISpec defines the desired state of AMI
 type AMISpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     AMIParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   AMIParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -466,8 +466,8 @@ type AMISpec struct {
 
 // AMIStatus defines the observed state of AMI.
 type AMIStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        AMIObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               AMIObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

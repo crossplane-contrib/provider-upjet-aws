@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type BucketAnalyticsConfigurationFilterInitParameters struct {
@@ -54,11 +54,11 @@ type BucketAnalyticsConfigurationInitParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketRef *v1.Reference `json:"bucketRef,omitempty" tf:"-"`
+	BucketRef *v2.Reference `json:"bucketRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
+	BucketSelector *v2.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
 	// Object filtering that accepts a prefix, tags, or a logical AND of prefix and tags (documented below).
 	Filter *BucketAnalyticsConfigurationFilterInitParameters `json:"filter,omitempty" tf:"filter,omitempty"`
@@ -101,11 +101,11 @@ type BucketAnalyticsConfigurationParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketRef *v1.Reference `json:"bucketRef,omitempty" tf:"-"`
+	BucketRef *v2.Reference `json:"bucketRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
+	BucketSelector *v2.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
 	// Object filtering that accepts a prefix, tags, or a logical AND of prefix and tags (documented below).
 	// +kubebuilder:validation:Optional
@@ -185,11 +185,11 @@ type S3BucketDestinationInitParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucketArn.
 	// +kubebuilder:validation:Optional
-	BucketArnRef *v1.Reference `json:"bucketArnRef,omitempty" tf:"-"`
+	BucketArnRef *v2.Reference `json:"bucketArnRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucketArn.
 	// +kubebuilder:validation:Optional
-	BucketArnSelector *v1.Selector `json:"bucketArnSelector,omitempty" tf:"-"`
+	BucketArnSelector *v2.Selector `json:"bucketArnSelector,omitempty" tf:"-"`
 
 	// Output format of exported analytics data. Allowed values: CSV. Default value: CSV.
 	Format *string `json:"format,omitempty" tf:"format,omitempty"`
@@ -227,11 +227,11 @@ type S3BucketDestinationParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucketArn.
 	// +kubebuilder:validation:Optional
-	BucketArnRef *v1.Reference `json:"bucketArnRef,omitempty" tf:"-"`
+	BucketArnRef *v2.Reference `json:"bucketArnRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucketArn.
 	// +kubebuilder:validation:Optional
-	BucketArnSelector *v1.Selector `json:"bucketArnSelector,omitempty" tf:"-"`
+	BucketArnSelector *v2.Selector `json:"bucketArnSelector,omitempty" tf:"-"`
 
 	// Output format of exported analytics data. Allowed values: CSV. Default value: CSV.
 	// +kubebuilder:validation:Optional
@@ -263,8 +263,8 @@ type StorageClassAnalysisParameters struct {
 
 // BucketAnalyticsConfigurationSpec defines the desired state of BucketAnalyticsConfiguration
 type BucketAnalyticsConfigurationSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     BucketAnalyticsConfigurationParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   BucketAnalyticsConfigurationParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -280,8 +280,8 @@ type BucketAnalyticsConfigurationSpec struct {
 
 // BucketAnalyticsConfigurationStatus defines the observed state of BucketAnalyticsConfiguration.
 type BucketAnalyticsConfigurationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        BucketAnalyticsConfigurationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               BucketAnalyticsConfigurationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

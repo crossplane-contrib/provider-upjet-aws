@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CustomizedCapacityMetricSpecificationInitParameters struct {
@@ -987,11 +986,11 @@ type PolicyParameters struct {
 
 	// Reference to a Target in appautoscaling to populate resourceId.
 	// +kubebuilder:validation:Optional
-	ResourceIDRef *v1.NamespacedReference `json:"resourceIdRef,omitempty" tf:"-"`
+	ResourceIDRef *v2.NamespacedReference `json:"resourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Target in appautoscaling to populate resourceId.
 	// +kubebuilder:validation:Optional
-	ResourceIDSelector *v1.NamespacedSelector `json:"resourceIdSelector,omitempty" tf:"-"`
+	ResourceIDSelector *v2.NamespacedSelector `json:"resourceIdSelector,omitempty" tf:"-"`
 
 	// Scalable dimension of the scalable target. Documentation can be found in the ScalableDimension parameter at: AWS Application Auto Scaling API Reference
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/appautoscaling/v1beta1.Target
@@ -1001,11 +1000,11 @@ type PolicyParameters struct {
 
 	// Reference to a Target in appautoscaling to populate scalableDimension.
 	// +kubebuilder:validation:Optional
-	ScalableDimensionRef *v1.NamespacedReference `json:"scalableDimensionRef,omitempty" tf:"-"`
+	ScalableDimensionRef *v2.NamespacedReference `json:"scalableDimensionRef,omitempty" tf:"-"`
 
 	// Selector for a Target in appautoscaling to populate scalableDimension.
 	// +kubebuilder:validation:Optional
-	ScalableDimensionSelector *v1.NamespacedSelector `json:"scalableDimensionSelector,omitempty" tf:"-"`
+	ScalableDimensionSelector *v2.NamespacedSelector `json:"scalableDimensionSelector,omitempty" tf:"-"`
 
 	// AWS service namespace of the scalable target. Documentation can be found in the ServiceNamespace parameter at: AWS Application Auto Scaling API Reference
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/appautoscaling/v1beta1.Target
@@ -1015,11 +1014,11 @@ type PolicyParameters struct {
 
 	// Reference to a Target in appautoscaling to populate serviceNamespace.
 	// +kubebuilder:validation:Optional
-	ServiceNamespaceRef *v1.NamespacedReference `json:"serviceNamespaceRef,omitempty" tf:"-"`
+	ServiceNamespaceRef *v2.NamespacedReference `json:"serviceNamespaceRef,omitempty" tf:"-"`
 
 	// Selector for a Target in appautoscaling to populate serviceNamespace.
 	// +kubebuilder:validation:Optional
-	ServiceNamespaceSelector *v1.NamespacedSelector `json:"serviceNamespaceSelector,omitempty" tf:"-"`
+	ServiceNamespaceSelector *v2.NamespacedSelector `json:"serviceNamespaceSelector,omitempty" tf:"-"`
 
 	// Step scaling policy configuration, requires policy_type = "StepScaling" (default). See supported fields below.
 	// +kubebuilder:validation:Optional
@@ -1391,8 +1390,8 @@ type PolicySpec struct {
 
 // PolicyStatus defines the observed state of Policy.
 type PolicyStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        PolicyObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               PolicyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

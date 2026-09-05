@@ -61,3 +61,23 @@ func SetupGated_elb(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupWebhookWithManager_elb registers conversion webhooks for all resource kinds in the group.
+func SetupWebhookWithManager_elb(mgr ctrl.Manager) error {
+	for _, setup := range []func(ctrl.Manager) error{
+		appcookiestickinesspolicy.SetupWebhookWithManager,
+		attachment.SetupWebhookWithManager,
+		backendserverpolicy.SetupWebhookWithManager,
+		elb.SetupWebhookWithManager,
+		lbcookiestickinesspolicy.SetupWebhookWithManager,
+		lbsslnegotiationpolicy.SetupWebhookWithManager,
+		listenerpolicy.SetupWebhookWithManager,
+		policy.SetupWebhookWithManager,
+		proxyprotocolpolicy.SetupWebhookWithManager,
+	} {
+		if err := setup(mgr); err != nil {
+			return err
+		}
+	}
+	return nil
+}

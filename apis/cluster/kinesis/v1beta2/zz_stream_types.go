@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type StreamInitParameters struct {
@@ -21,17 +21,17 @@ type StreamInitParameters struct {
 	// A boolean that indicates all registered consumers should be deregistered from the stream so that the stream can be destroyed without error. The default value is false.
 	EnforceConsumerDeletion *bool `json:"enforceConsumerDeletion,omitempty" tf:"enforce_consumer_deletion,omitempty"`
 
-	// The GUID for the customer-managed KMS key to use for encryption. You can also use a Kinesis-owned master key by specifying the alias alias/aws/kinesis.
+	// The identifier for the customer-managed KMS key to use for encryption. This can be a Key ID (UUID), a Key ARN, an Alias Name (prefixed with alias/), or an Alias ARN. You can also use a master key owned by Kinesis Data Streams by specifying the alias aws/kinesis.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kms/v1beta1.Key
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
 	// Reference to a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDRef *v1.Reference `json:"kmsKeyIdRef,omitempty" tf:"-"`
+	KMSKeyIDRef *v2.Reference `json:"kmsKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
+	KMSKeyIDSelector *v2.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
 	// The maximum size for a single data record in KiB. The minimum value is 1024. The maximum value is 10240.
 	MaxRecordSizeInKib *float64 `json:"maxRecordSizeInKib,omitempty" tf:"max_record_size_in_kib,omitempty"`
@@ -39,8 +39,7 @@ type StreamInitParameters struct {
 	// Length of time data records are accessible after they are added to the stream. The maximum value of a stream's retention period is 8760 hours. Minimum value is 24. Default is 24.
 	RetentionPeriod *float64 `json:"retentionPeriod,omitempty" tf:"retention_period,omitempty"`
 
-	// The number of shards that the stream will use. If the stream_mode is PROVISIONED, this field is required.
-	// Amazon has guidelines for specifying the Stream size that should be referenced when creating a Kinesis stream. See Amazon Kinesis Streams for more.
+	// The number of shards that the stream will use. If the stream_mode is PROVISIONED, this field is required. Amazon has guidelines for specifying the Stream size that should be referenced when creating a Kinesis stream. See Amazon Kinesis Streams for more.
 	ShardCount *float64 `json:"shardCount,omitempty" tf:"shard_count,omitempty"`
 
 	// A list of shard-level CloudWatch metrics which can be enabled for the stream. See Monitoring with CloudWatch for more. Note that the value ALL should not be used; instead you should provide an explicit list of metrics you wish to enable.
@@ -53,6 +52,9 @@ type StreamInitParameters struct {
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Target warm throughput in MB/s that the stream should be scaled to handle.
+	WarmThroughputMibPs *float64 `json:"warmThroughputMibPs,omitempty" tf:"warm_throughput_mib_ps,omitempty"`
 }
 
 type StreamModeDetailsInitParameters struct {
@@ -76,7 +78,7 @@ type StreamModeDetailsParameters struct {
 
 type StreamObservation struct {
 
-	// The Amazon Resource Name (ARN) specifying the Stream (same as id)
+	// The Amazon Resource Name (ARN) specifying the stream (same as id).
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The encryption type to use. The only acceptable values are NONE or KMS. The default value is NONE.
@@ -85,10 +87,10 @@ type StreamObservation struct {
 	// A boolean that indicates all registered consumers should be deregistered from the stream so that the stream can be destroyed without error. The default value is false.
 	EnforceConsumerDeletion *bool `json:"enforceConsumerDeletion,omitempty" tf:"enforce_consumer_deletion,omitempty"`
 
-	// The unique Stream id
+	// The unique stream ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The GUID for the customer-managed KMS key to use for encryption. You can also use a Kinesis-owned master key by specifying the alias alias/aws/kinesis.
+	// The identifier for the customer-managed KMS key to use for encryption. This can be a Key ID (UUID), a Key ARN, an Alias Name (prefixed with alias/), or an Alias ARN. You can also use a master key owned by Kinesis Data Streams by specifying the alias aws/kinesis.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
 	// The maximum size for a single data record in KiB. The minimum value is 1024. The maximum value is 10240.
@@ -101,8 +103,7 @@ type StreamObservation struct {
 	// Length of time data records are accessible after they are added to the stream. The maximum value of a stream's retention period is 8760 hours. Minimum value is 24. Default is 24.
 	RetentionPeriod *float64 `json:"retentionPeriod,omitempty" tf:"retention_period,omitempty"`
 
-	// The number of shards that the stream will use. If the stream_mode is PROVISIONED, this field is required.
-	// Amazon has guidelines for specifying the Stream size that should be referenced when creating a Kinesis stream. See Amazon Kinesis Streams for more.
+	// The number of shards that the stream will use. If the stream_mode is PROVISIONED, this field is required. Amazon has guidelines for specifying the Stream size that should be referenced when creating a Kinesis stream. See Amazon Kinesis Streams for more.
 	ShardCount *float64 `json:"shardCount,omitempty" tf:"shard_count,omitempty"`
 
 	// A list of shard-level CloudWatch metrics which can be enabled for the stream. See Monitoring with CloudWatch for more. Note that the value ALL should not be used; instead you should provide an explicit list of metrics you wish to enable.
@@ -119,6 +120,9 @@ type StreamObservation struct {
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// Target warm throughput in MB/s that the stream should be scaled to handle.
+	WarmThroughputMibPs *float64 `json:"warmThroughputMibPs,omitempty" tf:"warm_throughput_mib_ps,omitempty"`
 }
 
 type StreamParameters struct {
@@ -131,18 +135,18 @@ type StreamParameters struct {
 	// +kubebuilder:validation:Optional
 	EnforceConsumerDeletion *bool `json:"enforceConsumerDeletion,omitempty" tf:"enforce_consumer_deletion,omitempty"`
 
-	// The GUID for the customer-managed KMS key to use for encryption. You can also use a Kinesis-owned master key by specifying the alias alias/aws/kinesis.
+	// The identifier for the customer-managed KMS key to use for encryption. This can be a Key ID (UUID), a Key ARN, an Alias Name (prefixed with alias/), or an Alias ARN. You can also use a master key owned by Kinesis Data Streams by specifying the alias aws/kinesis.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kms/v1beta1.Key
 	// +kubebuilder:validation:Optional
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
 	// Reference to a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDRef *v1.Reference `json:"kmsKeyIdRef,omitempty" tf:"-"`
+	KMSKeyIDRef *v2.Reference `json:"kmsKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
+	KMSKeyIDSelector *v2.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
 	// The maximum size for a single data record in KiB. The minimum value is 1024. The maximum value is 10240.
 	// +kubebuilder:validation:Optional
@@ -157,8 +161,7 @@ type StreamParameters struct {
 	// +kubebuilder:validation:Optional
 	RetentionPeriod *float64 `json:"retentionPeriod,omitempty" tf:"retention_period,omitempty"`
 
-	// The number of shards that the stream will use. If the stream_mode is PROVISIONED, this field is required.
-	// Amazon has guidelines for specifying the Stream size that should be referenced when creating a Kinesis stream. See Amazon Kinesis Streams for more.
+	// The number of shards that the stream will use. If the stream_mode is PROVISIONED, this field is required. Amazon has guidelines for specifying the Stream size that should be referenced when creating a Kinesis stream. See Amazon Kinesis Streams for more.
 	// +kubebuilder:validation:Optional
 	ShardCount *float64 `json:"shardCount,omitempty" tf:"shard_count,omitempty"`
 
@@ -175,12 +178,16 @@ type StreamParameters struct {
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Target warm throughput in MB/s that the stream should be scaled to handle.
+	// +kubebuilder:validation:Optional
+	WarmThroughputMibPs *float64 `json:"warmThroughputMibPs,omitempty" tf:"warm_throughput_mib_ps,omitempty"`
 }
 
 // StreamSpec defines the desired state of Stream
 type StreamSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     StreamParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   StreamParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -196,8 +203,8 @@ type StreamSpec struct {
 
 // StreamStatus defines the observed state of Stream.
 type StreamStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        StreamObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               StreamObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

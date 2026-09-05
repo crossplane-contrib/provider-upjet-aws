@@ -103,3 +103,37 @@ func SetupGated_sagemaker(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupWebhookWithManager_sagemaker registers conversion webhooks for all resource kinds in the group.
+func SetupWebhookWithManager_sagemaker(mgr ctrl.Manager) error {
+	for _, setup := range []func(ctrl.Manager) error{
+		app.SetupWebhookWithManager,
+		appimageconfig.SetupWebhookWithManager,
+		coderepository.SetupWebhookWithManager,
+		device.SetupWebhookWithManager,
+		devicefleet.SetupWebhookWithManager,
+		domain.SetupWebhookWithManager,
+		endpoint.SetupWebhookWithManager,
+		endpointconfiguration.SetupWebhookWithManager,
+		featuregroup.SetupWebhookWithManager,
+		image.SetupWebhookWithManager,
+		imageversion.SetupWebhookWithManager,
+		mlflowtrackingserver.SetupWebhookWithManager,
+		model.SetupWebhookWithManager,
+		modelpackagegroup.SetupWebhookWithManager,
+		modelpackagegrouppolicy.SetupWebhookWithManager,
+		notebookinstance.SetupWebhookWithManager,
+		notebookinstancelifecycleconfiguration.SetupWebhookWithManager,
+		servicecatalogportfoliostatus.SetupWebhookWithManager,
+		space.SetupWebhookWithManager,
+		studiolifecycleconfig.SetupWebhookWithManager,
+		userprofile.SetupWebhookWithManager,
+		workforce.SetupWebhookWithManager,
+		workteam.SetupWebhookWithManager,
+	} {
+		if err := setup(mgr); err != nil {
+			return err
+		}
+	}
+	return nil
+}

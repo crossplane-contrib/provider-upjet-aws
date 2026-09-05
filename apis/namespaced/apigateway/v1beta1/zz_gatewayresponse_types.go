@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type GatewayResponseInitParameters struct {
@@ -34,11 +33,11 @@ type GatewayResponseInitParameters struct {
 
 	// Reference to a RestAPI in apigateway to populate restApiId.
 	// +kubebuilder:validation:Optional
-	RestAPIIDRef *v1.NamespacedReference `json:"restApiIdRef,omitempty" tf:"-"`
+	RestAPIIDRef *v2.NamespacedReference `json:"restApiIdRef,omitempty" tf:"-"`
 
 	// Selector for a RestAPI in apigateway to populate restApiId.
 	// +kubebuilder:validation:Optional
-	RestAPIIDSelector *v1.NamespacedSelector `json:"restApiIdSelector,omitempty" tf:"-"`
+	RestAPIIDSelector *v2.NamespacedSelector `json:"restApiIdSelector,omitempty" tf:"-"`
 
 	// HTTP status code of the Gateway Response.
 	StatusCode *string `json:"statusCode,omitempty" tf:"status_code,omitempty"`
@@ -98,11 +97,11 @@ type GatewayResponseParameters struct {
 
 	// Reference to a RestAPI in apigateway to populate restApiId.
 	// +kubebuilder:validation:Optional
-	RestAPIIDRef *v1.NamespacedReference `json:"restApiIdRef,omitempty" tf:"-"`
+	RestAPIIDRef *v2.NamespacedReference `json:"restApiIdRef,omitempty" tf:"-"`
 
 	// Selector for a RestAPI in apigateway to populate restApiId.
 	// +kubebuilder:validation:Optional
-	RestAPIIDSelector *v1.NamespacedSelector `json:"restApiIdSelector,omitempty" tf:"-"`
+	RestAPIIDSelector *v2.NamespacedSelector `json:"restApiIdSelector,omitempty" tf:"-"`
 
 	// HTTP status code of the Gateway Response.
 	// +kubebuilder:validation:Optional
@@ -128,8 +127,8 @@ type GatewayResponseSpec struct {
 
 // GatewayResponseStatus defines the observed state of GatewayResponse.
 type GatewayResponseStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        GatewayResponseObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               GatewayResponseObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

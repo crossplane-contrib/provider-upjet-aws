@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type IdentityProviderInitParameters struct {
@@ -38,11 +38,11 @@ type IdentityProviderInitParameters struct {
 
 	// Reference to a UserPool in cognitoidp to populate userPoolId.
 	// +kubebuilder:validation:Optional
-	UserPoolIDRef *v1.Reference `json:"userPoolIdRef,omitempty" tf:"-"`
+	UserPoolIDRef *v2.Reference `json:"userPoolIdRef,omitempty" tf:"-"`
 
 	// Selector for a UserPool in cognitoidp to populate userPoolId.
 	// +kubebuilder:validation:Optional
-	UserPoolIDSelector *v1.Selector `json:"userPoolIdSelector,omitempty" tf:"-"`
+	UserPoolIDSelector *v2.Selector `json:"userPoolIdSelector,omitempty" tf:"-"`
 }
 
 type IdentityProviderObservation struct {
@@ -110,17 +110,17 @@ type IdentityProviderParameters struct {
 
 	// Reference to a UserPool in cognitoidp to populate userPoolId.
 	// +kubebuilder:validation:Optional
-	UserPoolIDRef *v1.Reference `json:"userPoolIdRef,omitempty" tf:"-"`
+	UserPoolIDRef *v2.Reference `json:"userPoolIdRef,omitempty" tf:"-"`
 
 	// Selector for a UserPool in cognitoidp to populate userPoolId.
 	// +kubebuilder:validation:Optional
-	UserPoolIDSelector *v1.Selector `json:"userPoolIdSelector,omitempty" tf:"-"`
+	UserPoolIDSelector *v2.Selector `json:"userPoolIdSelector,omitempty" tf:"-"`
 }
 
 // IdentityProviderSpec defines the desired state of IdentityProvider
 type IdentityProviderSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     IdentityProviderParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   IdentityProviderParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -136,8 +136,8 @@ type IdentityProviderSpec struct {
 
 // IdentityProviderStatus defines the observed state of IdentityProvider.
 type IdentityProviderStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        IdentityProviderObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               IdentityProviderObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

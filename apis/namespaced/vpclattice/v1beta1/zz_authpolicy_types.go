@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AuthPolicyInitParameters struct {
@@ -26,11 +25,11 @@ type AuthPolicyInitParameters struct {
 
 	// Reference to a Service in vpclattice to populate resourceIdentifier.
 	// +kubebuilder:validation:Optional
-	ResourceIdentifierRef *v1.NamespacedReference `json:"resourceIdentifierRef,omitempty" tf:"-"`
+	ResourceIdentifierRef *v2.NamespacedReference `json:"resourceIdentifierRef,omitempty" tf:"-"`
 
 	// Selector for a Service in vpclattice to populate resourceIdentifier.
 	// +kubebuilder:validation:Optional
-	ResourceIdentifierSelector *v1.NamespacedSelector `json:"resourceIdentifierSelector,omitempty" tf:"-"`
+	ResourceIdentifierSelector *v2.NamespacedSelector `json:"resourceIdentifierSelector,omitempty" tf:"-"`
 
 	// The state of the auth policy. The auth policy is only active when the auth type is set to AWS_IAM. If you provide a policy, then authentication and authorization decisions are made based on this policy and the client's IAM policy. If the Auth type is NONE, then, any auth policy you provide will remain inactive.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
@@ -74,11 +73,11 @@ type AuthPolicyParameters struct {
 
 	// Reference to a Service in vpclattice to populate resourceIdentifier.
 	// +kubebuilder:validation:Optional
-	ResourceIdentifierRef *v1.NamespacedReference `json:"resourceIdentifierRef,omitempty" tf:"-"`
+	ResourceIdentifierRef *v2.NamespacedReference `json:"resourceIdentifierRef,omitempty" tf:"-"`
 
 	// Selector for a Service in vpclattice to populate resourceIdentifier.
 	// +kubebuilder:validation:Optional
-	ResourceIdentifierSelector *v1.NamespacedSelector `json:"resourceIdentifierSelector,omitempty" tf:"-"`
+	ResourceIdentifierSelector *v2.NamespacedSelector `json:"resourceIdentifierSelector,omitempty" tf:"-"`
 
 	// The state of the auth policy. The auth policy is only active when the auth type is set to AWS_IAM. If you provide a policy, then authentication and authorization decisions are made based on this policy and the client's IAM policy. If the Auth type is NONE, then, any auth policy you provide will remain inactive.
 	// +kubebuilder:validation:Optional
@@ -104,8 +103,8 @@ type AuthPolicySpec struct {
 
 // AuthPolicyStatus defines the observed state of AuthPolicy.
 type AuthPolicyStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        AuthPolicyObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               AuthPolicyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

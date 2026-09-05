@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ConfigurationInitParameters_2 struct {
@@ -33,6 +32,9 @@ type ConfigurationInitParameters_2 struct {
 
 	// Name of the configuration.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Default is false.
+	SkipDestroy *bool `json:"skipDestroy,omitempty" tf:"skip_destroy,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -71,6 +73,9 @@ type ConfigurationObservation_2 struct {
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
+	// Default is false.
+	SkipDestroy *bool `json:"skipDestroy,omitempty" tf:"skip_destroy,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -112,6 +117,10 @@ type ConfigurationParameters_2 struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
+	// Default is false.
+	// +kubebuilder:validation:Optional
+	SkipDestroy *bool `json:"skipDestroy,omitempty" tf:"skip_destroy,omitempty"`
+
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
@@ -137,8 +146,8 @@ type ConfigurationSpec struct {
 
 // ConfigurationStatus defines the observed state of Configuration.
 type ConfigurationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ConfigurationObservation_2 `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ConfigurationObservation_2 `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

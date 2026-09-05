@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AccessEntryInitParameters struct {
@@ -82,11 +82,11 @@ type AccessEntryParameters struct {
 
 	// Reference to a Cluster in eks to populate clusterName.
 	// +kubebuilder:validation:Optional
-	ClusterNameRef *v1.Reference `json:"clusterNameRef,omitempty" tf:"-"`
+	ClusterNameRef *v2.Reference `json:"clusterNameRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in eks to populate clusterName.
 	// +kubebuilder:validation:Optional
-	ClusterNameSelector *v1.Selector `json:"clusterNameSelector,omitempty" tf:"-"`
+	ClusterNameSelector *v2.Selector `json:"clusterNameSelector,omitempty" tf:"-"`
 
 	// List of string which can optionally specify the Kubernetes groups the user would belong to when creating an access entry.
 	// +kubebuilder:validation:Optional
@@ -103,11 +103,11 @@ type AccessEntryParameters struct {
 
 	// Reference to a Role in iam to populate principalArn.
 	// +kubebuilder:validation:Optional
-	PrincipalArnFromRoleRef *v1.Reference `json:"principalArnFromRoleRef,omitempty" tf:"-"`
+	PrincipalArnFromRoleRef *v2.Reference `json:"principalArnFromRoleRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate principalArn.
 	// +kubebuilder:validation:Optional
-	PrincipalArnFromRoleSelector *v1.Selector `json:"principalArnFromRoleSelector,omitempty" tf:"-"`
+	PrincipalArnFromRoleSelector *v2.Selector `json:"principalArnFromRoleSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -130,8 +130,8 @@ type AccessEntryParameters struct {
 
 // AccessEntrySpec defines the desired state of AccessEntry
 type AccessEntrySpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     AccessEntryParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   AccessEntryParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -147,8 +147,8 @@ type AccessEntrySpec struct {
 
 // AccessEntryStatus defines the observed state of AccessEntry.
 type AccessEntryStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        AccessEntryObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               AccessEntryObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

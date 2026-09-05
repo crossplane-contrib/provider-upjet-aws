@@ -1,0 +1,41 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
+apiVersion: networkmonitor.aws.upbound.io/v1beta1
+kind: Probe
+metadata:
+  annotations:
+    meta.upbound.io/example-id: networkmonitor/v1beta1/probe
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    destination: 127.0.0.1
+    destinationPort: 80
+    monitorNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    packetSize: 200
+    protocol: TCP
+    region: us-west-1
+    sourceArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: networkmonitor.aws.upbound.io/v1beta1
+kind: Monitor
+metadata:
+  annotations:
+    meta.upbound.io/example-id: networkmonitor/v1beta1/probe
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    aggregationPeriod: 30
+    region: us-west-1

@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ResourceAssociationInitParameters struct {
@@ -26,11 +25,11 @@ type ResourceAssociationInitParameters struct {
 
 	// Reference to a ResourceShare in ram to populate resourceShareArn.
 	// +kubebuilder:validation:Optional
-	ResourceShareArnRef *v1.NamespacedReference `json:"resourceShareArnRef,omitempty" tf:"-"`
+	ResourceShareArnRef *v2.NamespacedReference `json:"resourceShareArnRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceShare in ram to populate resourceShareArn.
 	// +kubebuilder:validation:Optional
-	ResourceShareArnSelector *v1.NamespacedSelector `json:"resourceShareArnSelector,omitempty" tf:"-"`
+	ResourceShareArnSelector *v2.NamespacedSelector `json:"resourceShareArnSelector,omitempty" tf:"-"`
 }
 
 type ResourceAssociationObservation struct {
@@ -68,11 +67,11 @@ type ResourceAssociationParameters struct {
 
 	// Reference to a ResourceShare in ram to populate resourceShareArn.
 	// +kubebuilder:validation:Optional
-	ResourceShareArnRef *v1.NamespacedReference `json:"resourceShareArnRef,omitempty" tf:"-"`
+	ResourceShareArnRef *v2.NamespacedReference `json:"resourceShareArnRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceShare in ram to populate resourceShareArn.
 	// +kubebuilder:validation:Optional
-	ResourceShareArnSelector *v1.NamespacedSelector `json:"resourceShareArnSelector,omitempty" tf:"-"`
+	ResourceShareArnSelector *v2.NamespacedSelector `json:"resourceShareArnSelector,omitempty" tf:"-"`
 }
 
 // ResourceAssociationSpec defines the desired state of ResourceAssociation
@@ -94,8 +93,8 @@ type ResourceAssociationSpec struct {
 
 // ResourceAssociationStatus defines the observed state of ResourceAssociation.
 type ResourceAssociationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ResourceAssociationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ResourceAssociationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

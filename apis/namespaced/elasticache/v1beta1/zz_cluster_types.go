@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CacheNodesInitParameters struct {
@@ -51,7 +50,7 @@ type ClusterInitParameters struct {
 	// Whether the nodes in this Memcached node group are created in a single Availability Zone or created across multiple Availability Zones in the cluster's region. Valid values for this parameter are single-az or cross-az, default is single-az. If you want to choose cross-az, num_cache_nodes must be greater than 1.
 	AzMode *string `json:"azMode,omitempty" tf:"az_mode,omitempty"`
 
-	// Name of the cache engine to be used for this cache cluster. Valid values are memcached, redis and valkey.
+	// Name of the cache engine to be used for this cache cluster. Valid values are memcached, redis.
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
 
 	// Version number of the cache engine to be used.
@@ -82,7 +81,7 @@ type ClusterInitParameters struct {
 	NetworkType *string `json:"networkType,omitempty" tf:"network_type,omitempty"`
 
 	// The instance class used.
-	// See AWS documentation for information on supported node types for Valkey or Redis OSS and guidance on selecting node types for Valkey or Redis OSS.
+	// See AWS documentation for information on supported node types for Redis OSS and guidance on selecting node types for Redis OSS.
 	// See AWS documentation for information on supported node types for Memcached and guidance on selecting node types for Memcached.
 	// For Memcached, changing this value will re-create the resource.
 	NodeType *string `json:"nodeType,omitempty" tf:"node_type,omitempty"`
@@ -102,11 +101,11 @@ type ClusterInitParameters struct {
 
 	// Reference to a ParameterGroup in elasticache to populate parameterGroupName.
 	// +kubebuilder:validation:Optional
-	ParameterGroupNameRef *v1.NamespacedReference `json:"parameterGroupNameRef,omitempty" tf:"-"`
+	ParameterGroupNameRef *v2.NamespacedReference `json:"parameterGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ParameterGroup in elasticache to populate parameterGroupName.
 	// +kubebuilder:validation:Optional
-	ParameterGroupNameSelector *v1.NamespacedSelector `json:"parameterGroupNameSelector,omitempty" tf:"-"`
+	ParameterGroupNameSelector *v2.NamespacedSelector `json:"parameterGroupNameSelector,omitempty" tf:"-"`
 
 	// The port number on which each of the cache nodes will accept connections. For Memcached the default is 11211, and for Redis the default port is 6379. Cannot be provided with replication_group_id. Changing this value will re-create the resource.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
@@ -124,19 +123,19 @@ type ClusterInitParameters struct {
 
 	// Reference to a ReplicationGroup in elasticache to populate replicationGroupId.
 	// +kubebuilder:validation:Optional
-	ReplicationGroupIDRef *v1.NamespacedReference `json:"replicationGroupIdRef,omitempty" tf:"-"`
+	ReplicationGroupIDRef *v2.NamespacedReference `json:"replicationGroupIdRef,omitempty" tf:"-"`
 
 	// Selector for a ReplicationGroup in elasticache to populate replicationGroupId.
 	// +kubebuilder:validation:Optional
-	ReplicationGroupIDSelector *v1.NamespacedSelector `json:"replicationGroupIdSelector,omitempty" tf:"-"`
+	ReplicationGroupIDSelector *v2.NamespacedSelector `json:"replicationGroupIdSelector,omitempty" tf:"-"`
 
 	// References to SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIDRefs []v1.NamespacedReference `json:"securityGroupIdRefs,omitempty" tf:"-"`
+	SecurityGroupIDRefs []v2.NamespacedReference `json:"securityGroupIdRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIDSelector *v1.NamespacedSelector `json:"securityGroupIdSelector,omitempty" tf:"-"`
+	SecurityGroupIDSelector *v2.NamespacedSelector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 
 	// One or more VPC security groups associated with the cache cluster. Cannot be provided with replication_group_id.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
@@ -163,17 +162,17 @@ type ClusterInitParameters struct {
 
 	// Reference to a SubnetGroup in elasticache to populate subnetGroupName.
 	// +kubebuilder:validation:Optional
-	SubnetGroupNameRef *v1.NamespacedReference `json:"subnetGroupNameRef,omitempty" tf:"-"`
+	SubnetGroupNameRef *v2.NamespacedReference `json:"subnetGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a SubnetGroup in elasticache to populate subnetGroupName.
 	// +kubebuilder:validation:Optional
-	SubnetGroupNameSelector *v1.NamespacedSelector `json:"subnetGroupNameSelector,omitempty" tf:"-"`
+	SubnetGroupNameSelector *v2.NamespacedSelector `json:"subnetGroupNameSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Enable encryption in-transit. Supported with Memcached versions 1.6.12 and later, Valkey 7.2 and later, Redis OSS versions 3.2.6, 4.0.10 and later, running in a VPC. See the ElastiCache in-transit encryption documentation for more details.
+	// Enable encryption in-transit. Supported with Memcached versions 1.6.12 and later, Redis OSS versions 3.2.6, 4.0.10 and later, running in a VPC. See the ElastiCache in-transit encryption documentation for more details.
 	TransitEncryptionEnabled *bool `json:"transitEncryptionEnabled,omitempty" tf:"transit_encryption_enabled,omitempty"`
 }
 
@@ -205,7 +204,7 @@ type ClusterObservation struct {
 	// (Memcached only) Configuration endpoint to allow host discovery.
 	ConfigurationEndpoint *string `json:"configurationEndpoint,omitempty" tf:"configuration_endpoint,omitempty"`
 
-	// Name of the cache engine to be used for this cache cluster. Valid values are memcached, redis and valkey.
+	// Name of the cache engine to be used for this cache cluster. Valid values are memcached, redis.
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
 
 	// Version number of the cache engine to be used.
@@ -241,7 +240,7 @@ type ClusterObservation struct {
 	NetworkType *string `json:"networkType,omitempty" tf:"network_type,omitempty"`
 
 	// The instance class used.
-	// See AWS documentation for information on supported node types for Valkey or Redis OSS and guidance on selecting node types for Valkey or Redis OSS.
+	// See AWS documentation for information on supported node types for Redis OSS and guidance on selecting node types for Redis OSS.
 	// See AWS documentation for information on supported node types for Memcached and guidance on selecting node types for Memcached.
 	// For Memcached, changing this value will re-create the resource.
 	NodeType *string `json:"nodeType,omitempty" tf:"node_type,omitempty"`
@@ -301,7 +300,7 @@ type ClusterObservation struct {
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// Enable encryption in-transit. Supported with Memcached versions 1.6.12 and later, Valkey 7.2 and later, Redis OSS versions 3.2.6, 4.0.10 and later, running in a VPC. See the ElastiCache in-transit encryption documentation for more details.
+	// Enable encryption in-transit. Supported with Memcached versions 1.6.12 and later, Redis OSS versions 3.2.6, 4.0.10 and later, running in a VPC. See the ElastiCache in-transit encryption documentation for more details.
 	TransitEncryptionEnabled *bool `json:"transitEncryptionEnabled,omitempty" tf:"transit_encryption_enabled,omitempty"`
 }
 
@@ -325,7 +324,7 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	AzMode *string `json:"azMode,omitempty" tf:"az_mode,omitempty"`
 
-	// Name of the cache engine to be used for this cache cluster. Valid values are memcached, redis and valkey.
+	// Name of the cache engine to be used for this cache cluster. Valid values are memcached, redis.
 	// +kubebuilder:validation:Optional
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
 
@@ -363,7 +362,7 @@ type ClusterParameters struct {
 	NetworkType *string `json:"networkType,omitempty" tf:"network_type,omitempty"`
 
 	// The instance class used.
-	// See AWS documentation for information on supported node types for Valkey or Redis OSS and guidance on selecting node types for Valkey or Redis OSS.
+	// See AWS documentation for information on supported node types for Redis OSS and guidance on selecting node types for Redis OSS.
 	// See AWS documentation for information on supported node types for Memcached and guidance on selecting node types for Memcached.
 	// For Memcached, changing this value will re-create the resource.
 	// +kubebuilder:validation:Optional
@@ -388,11 +387,11 @@ type ClusterParameters struct {
 
 	// Reference to a ParameterGroup in elasticache to populate parameterGroupName.
 	// +kubebuilder:validation:Optional
-	ParameterGroupNameRef *v1.NamespacedReference `json:"parameterGroupNameRef,omitempty" tf:"-"`
+	ParameterGroupNameRef *v2.NamespacedReference `json:"parameterGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ParameterGroup in elasticache to populate parameterGroupName.
 	// +kubebuilder:validation:Optional
-	ParameterGroupNameSelector *v1.NamespacedSelector `json:"parameterGroupNameSelector,omitempty" tf:"-"`
+	ParameterGroupNameSelector *v2.NamespacedSelector `json:"parameterGroupNameSelector,omitempty" tf:"-"`
 
 	// The port number on which each of the cache nodes will accept connections. For Memcached the default is 11211, and for Redis the default port is 6379. Cannot be provided with replication_group_id. Changing this value will re-create the resource.
 	// +kubebuilder:validation:Optional
@@ -419,19 +418,19 @@ type ClusterParameters struct {
 
 	// Reference to a ReplicationGroup in elasticache to populate replicationGroupId.
 	// +kubebuilder:validation:Optional
-	ReplicationGroupIDRef *v1.NamespacedReference `json:"replicationGroupIdRef,omitempty" tf:"-"`
+	ReplicationGroupIDRef *v2.NamespacedReference `json:"replicationGroupIdRef,omitempty" tf:"-"`
 
 	// Selector for a ReplicationGroup in elasticache to populate replicationGroupId.
 	// +kubebuilder:validation:Optional
-	ReplicationGroupIDSelector *v1.NamespacedSelector `json:"replicationGroupIdSelector,omitempty" tf:"-"`
+	ReplicationGroupIDSelector *v2.NamespacedSelector `json:"replicationGroupIdSelector,omitempty" tf:"-"`
 
 	// References to SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIDRefs []v1.NamespacedReference `json:"securityGroupIdRefs,omitempty" tf:"-"`
+	SecurityGroupIDRefs []v2.NamespacedReference `json:"securityGroupIdRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIDSelector *v1.NamespacedSelector `json:"securityGroupIdSelector,omitempty" tf:"-"`
+	SecurityGroupIDSelector *v2.NamespacedSelector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 
 	// One or more VPC security groups associated with the cache cluster. Cannot be provided with replication_group_id.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
@@ -464,18 +463,18 @@ type ClusterParameters struct {
 
 	// Reference to a SubnetGroup in elasticache to populate subnetGroupName.
 	// +kubebuilder:validation:Optional
-	SubnetGroupNameRef *v1.NamespacedReference `json:"subnetGroupNameRef,omitempty" tf:"-"`
+	SubnetGroupNameRef *v2.NamespacedReference `json:"subnetGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a SubnetGroup in elasticache to populate subnetGroupName.
 	// +kubebuilder:validation:Optional
-	SubnetGroupNameSelector *v1.NamespacedSelector `json:"subnetGroupNameSelector,omitempty" tf:"-"`
+	SubnetGroupNameSelector *v2.NamespacedSelector `json:"subnetGroupNameSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Enable encryption in-transit. Supported with Memcached versions 1.6.12 and later, Valkey 7.2 and later, Redis OSS versions 3.2.6, 4.0.10 and later, running in a VPC. See the ElastiCache in-transit encryption documentation for more details.
+	// Enable encryption in-transit. Supported with Memcached versions 1.6.12 and later, Redis OSS versions 3.2.6, 4.0.10 and later, running in a VPC. See the ElastiCache in-transit encryption documentation for more details.
 	// +kubebuilder:validation:Optional
 	TransitEncryptionEnabled *bool `json:"transitEncryptionEnabled,omitempty" tf:"transit_encryption_enabled,omitempty"`
 }
@@ -548,8 +547,8 @@ type ClusterSpec struct {
 
 // ClusterStatus defines the observed state of Cluster.
 type ClusterStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ClusterObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ClusterObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

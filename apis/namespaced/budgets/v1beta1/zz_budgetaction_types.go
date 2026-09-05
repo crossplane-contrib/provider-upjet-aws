@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ActionThresholdInitParameters struct {
@@ -63,11 +62,11 @@ type BudgetActionInitParameters struct {
 
 	// Reference to a Budget in budgets to populate budgetName.
 	// +kubebuilder:validation:Optional
-	BudgetNameRef *v1.NamespacedReference `json:"budgetNameRef,omitempty" tf:"-"`
+	BudgetNameRef *v2.NamespacedReference `json:"budgetNameRef,omitempty" tf:"-"`
 
 	// Selector for a Budget in budgets to populate budgetName.
 	// +kubebuilder:validation:Optional
-	BudgetNameSelector *v1.NamespacedSelector `json:"budgetNameSelector,omitempty" tf:"-"`
+	BudgetNameSelector *v2.NamespacedSelector `json:"budgetNameSelector,omitempty" tf:"-"`
 
 	// Specifies all of the type-specific parameters. See Definition.
 	Definition *DefinitionInitParameters `json:"definition,omitempty" tf:"definition,omitempty"`
@@ -79,11 +78,11 @@ type BudgetActionInitParameters struct {
 
 	// Reference to a Role in iam to populate executionRoleArn.
 	// +kubebuilder:validation:Optional
-	ExecutionRoleArnRef *v1.NamespacedReference `json:"executionRoleArnRef,omitempty" tf:"-"`
+	ExecutionRoleArnRef *v2.NamespacedReference `json:"executionRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate executionRoleArn.
 	// +kubebuilder:validation:Optional
-	ExecutionRoleArnSelector *v1.NamespacedSelector `json:"executionRoleArnSelector,omitempty" tf:"-"`
+	ExecutionRoleArnSelector *v2.NamespacedSelector `json:"executionRoleArnSelector,omitempty" tf:"-"`
 
 	// The type of a notification. Valid values are ACTUAL or FORECASTED.
 	NotificationType *string `json:"notificationType,omitempty" tf:"notification_type,omitempty"`
@@ -171,11 +170,11 @@ type BudgetActionParameters struct {
 
 	// Reference to a Budget in budgets to populate budgetName.
 	// +kubebuilder:validation:Optional
-	BudgetNameRef *v1.NamespacedReference `json:"budgetNameRef,omitempty" tf:"-"`
+	BudgetNameRef *v2.NamespacedReference `json:"budgetNameRef,omitempty" tf:"-"`
 
 	// Selector for a Budget in budgets to populate budgetName.
 	// +kubebuilder:validation:Optional
-	BudgetNameSelector *v1.NamespacedSelector `json:"budgetNameSelector,omitempty" tf:"-"`
+	BudgetNameSelector *v2.NamespacedSelector `json:"budgetNameSelector,omitempty" tf:"-"`
 
 	// Specifies all of the type-specific parameters. See Definition.
 	// +kubebuilder:validation:Optional
@@ -189,11 +188,11 @@ type BudgetActionParameters struct {
 
 	// Reference to a Role in iam to populate executionRoleArn.
 	// +kubebuilder:validation:Optional
-	ExecutionRoleArnRef *v1.NamespacedReference `json:"executionRoleArnRef,omitempty" tf:"-"`
+	ExecutionRoleArnRef *v2.NamespacedReference `json:"executionRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate executionRoleArn.
 	// +kubebuilder:validation:Optional
-	ExecutionRoleArnSelector *v1.NamespacedSelector `json:"executionRoleArnSelector,omitempty" tf:"-"`
+	ExecutionRoleArnSelector *v2.NamespacedSelector `json:"executionRoleArnSelector,omitempty" tf:"-"`
 
 	// The type of a notification. Valid values are ACTUAL or FORECASTED.
 	// +kubebuilder:validation:Optional
@@ -261,11 +260,11 @@ type IAMActionDefinitionInitParameters struct {
 
 	// Reference to a Policy in iam to populate policyArn.
 	// +kubebuilder:validation:Optional
-	PolicyArnRef *v1.NamespacedReference `json:"policyArnRef,omitempty" tf:"-"`
+	PolicyArnRef *v2.NamespacedReference `json:"policyArnRef,omitempty" tf:"-"`
 
 	// Selector for a Policy in iam to populate policyArn.
 	// +kubebuilder:validation:Optional
-	PolicyArnSelector *v1.NamespacedSelector `json:"policyArnSelector,omitempty" tf:"-"`
+	PolicyArnSelector *v2.NamespacedSelector `json:"policyArnSelector,omitempty" tf:"-"`
 
 	// A list of roles to be attached. There must be at least one role.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
@@ -274,11 +273,11 @@ type IAMActionDefinitionInitParameters struct {
 
 	// References to Role in iam to populate roles.
 	// +kubebuilder:validation:Optional
-	RolesRefs []v1.NamespacedReference `json:"rolesRefs,omitempty" tf:"-"`
+	RolesRefs []v2.NamespacedReference `json:"rolesRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Role in iam to populate roles.
 	// +kubebuilder:validation:Optional
-	RolesSelector *v1.NamespacedSelector `json:"rolesSelector,omitempty" tf:"-"`
+	RolesSelector *v2.NamespacedSelector `json:"rolesSelector,omitempty" tf:"-"`
 
 	// A list of users to be attached. There must be at least one user.
 	// +listType=set
@@ -318,11 +317,11 @@ type IAMActionDefinitionParameters struct {
 
 	// Reference to a Policy in iam to populate policyArn.
 	// +kubebuilder:validation:Optional
-	PolicyArnRef *v1.NamespacedReference `json:"policyArnRef,omitempty" tf:"-"`
+	PolicyArnRef *v2.NamespacedReference `json:"policyArnRef,omitempty" tf:"-"`
 
 	// Selector for a Policy in iam to populate policyArn.
 	// +kubebuilder:validation:Optional
-	PolicyArnSelector *v1.NamespacedSelector `json:"policyArnSelector,omitempty" tf:"-"`
+	PolicyArnSelector *v2.NamespacedSelector `json:"policyArnSelector,omitempty" tf:"-"`
 
 	// A list of roles to be attached. There must be at least one role.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
@@ -332,11 +331,11 @@ type IAMActionDefinitionParameters struct {
 
 	// References to Role in iam to populate roles.
 	// +kubebuilder:validation:Optional
-	RolesRefs []v1.NamespacedReference `json:"rolesRefs,omitempty" tf:"-"`
+	RolesRefs []v2.NamespacedReference `json:"rolesRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Role in iam to populate roles.
 	// +kubebuilder:validation:Optional
-	RolesSelector *v1.NamespacedSelector `json:"rolesSelector,omitempty" tf:"-"`
+	RolesSelector *v2.NamespacedSelector `json:"rolesSelector,omitempty" tf:"-"`
 
 	// A list of users to be attached. There must be at least one user.
 	// +kubebuilder:validation:Optional
@@ -463,8 +462,8 @@ type BudgetActionSpec struct {
 
 // BudgetActionStatus defines the observed state of BudgetAction.
 type BudgetActionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        BudgetActionObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               BudgetActionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

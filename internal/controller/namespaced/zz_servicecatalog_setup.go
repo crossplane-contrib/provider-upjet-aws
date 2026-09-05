@@ -67,3 +67,25 @@ func SetupGated_servicecatalog(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupWebhookWithManager_servicecatalog registers conversion webhooks for all resource kinds in the group.
+func SetupWebhookWithManager_servicecatalog(mgr ctrl.Manager) error {
+	for _, setup := range []func(ctrl.Manager) error{
+		budgetresourceassociation.SetupWebhookWithManager,
+		constraint.SetupWebhookWithManager,
+		portfolio.SetupWebhookWithManager,
+		portfolioshare.SetupWebhookWithManager,
+		principalportfolioassociation.SetupWebhookWithManager,
+		product.SetupWebhookWithManager,
+		productportfolioassociation.SetupWebhookWithManager,
+		provisioningartifact.SetupWebhookWithManager,
+		serviceaction.SetupWebhookWithManager,
+		tagoption.SetupWebhookWithManager,
+		tagoptionresourceassociation.SetupWebhookWithManager,
+	} {
+		if err := setup(mgr); err != nil {
+			return err
+		}
+	}
+	return nil
+}

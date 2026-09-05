@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type As2ConfigInitParameters struct {
@@ -111,11 +111,11 @@ type ConnectorInitParameters struct {
 
 	// Reference to a Role in iam to populate accessRole.
 	// +kubebuilder:validation:Optional
-	AccessRoleRef *v1.Reference `json:"accessRoleRef,omitempty" tf:"-"`
+	AccessRoleRef *v2.Reference `json:"accessRoleRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate accessRole.
 	// +kubebuilder:validation:Optional
-	AccessRoleSelector *v1.Selector `json:"accessRoleSelector,omitempty" tf:"-"`
+	AccessRoleSelector *v2.Selector `json:"accessRoleSelector,omitempty" tf:"-"`
 
 	// Either SFTP or AS2 is configured.The parameters to configure for the connector object. Fields documented below.
 	As2Config *As2ConfigInitParameters `json:"as2Config,omitempty" tf:"as2_config,omitempty"`
@@ -193,11 +193,11 @@ type ConnectorParameters struct {
 
 	// Reference to a Role in iam to populate accessRole.
 	// +kubebuilder:validation:Optional
-	AccessRoleRef *v1.Reference `json:"accessRoleRef,omitempty" tf:"-"`
+	AccessRoleRef *v2.Reference `json:"accessRoleRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate accessRole.
 	// +kubebuilder:validation:Optional
-	AccessRoleSelector *v1.Selector `json:"accessRoleSelector,omitempty" tf:"-"`
+	AccessRoleSelector *v2.Selector `json:"accessRoleSelector,omitempty" tf:"-"`
 
 	// Either SFTP or AS2 is configured.The parameters to configure for the connector object. Fields documented below.
 	// +kubebuilder:validation:Optional
@@ -266,11 +266,11 @@ type SftpConfigInitParameters struct {
 
 	// Reference to a Secret in secretsmanager to populate userSecretId.
 	// +kubebuilder:validation:Optional
-	UserSecretIDRef *v1.Reference `json:"userSecretIdRef,omitempty" tf:"-"`
+	UserSecretIDRef *v2.Reference `json:"userSecretIdRef,omitempty" tf:"-"`
 
 	// Selector for a Secret in secretsmanager to populate userSecretId.
 	// +kubebuilder:validation:Optional
-	UserSecretIDSelector *v1.Selector `json:"userSecretIdSelector,omitempty" tf:"-"`
+	UserSecretIDSelector *v2.Selector `json:"userSecretIdSelector,omitempty" tf:"-"`
 }
 
 type SftpConfigObservation struct {
@@ -298,11 +298,11 @@ type SftpConfigParameters struct {
 
 	// Reference to a Secret in secretsmanager to populate userSecretId.
 	// +kubebuilder:validation:Optional
-	UserSecretIDRef *v1.Reference `json:"userSecretIdRef,omitempty" tf:"-"`
+	UserSecretIDRef *v2.Reference `json:"userSecretIdRef,omitempty" tf:"-"`
 
 	// Selector for a Secret in secretsmanager to populate userSecretId.
 	// +kubebuilder:validation:Optional
-	UserSecretIDSelector *v1.Selector `json:"userSecretIdSelector,omitempty" tf:"-"`
+	UserSecretIDSelector *v2.Selector `json:"userSecretIdSelector,omitempty" tf:"-"`
 }
 
 type VPCLatticeInitParameters struct {
@@ -336,8 +336,8 @@ type VPCLatticeParameters struct {
 
 // ConnectorSpec defines the desired state of Connector
 type ConnectorSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ConnectorParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ConnectorParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -353,8 +353,8 @@ type ConnectorSpec struct {
 
 // ConnectorStatus defines the observed state of Connector.
 type ConnectorStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ConnectorObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ConnectorObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

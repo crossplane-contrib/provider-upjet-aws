@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type DomainEntryInitParameters struct {
@@ -54,11 +54,11 @@ type DomainEntryParameters struct {
 
 	// Reference to a Domain in lightsail to populate domainName.
 	// +kubebuilder:validation:Optional
-	DomainNameRef *v1.Reference `json:"domainNameRef,omitempty" tf:"-"`
+	DomainNameRef *v2.Reference `json:"domainNameRef,omitempty" tf:"-"`
 
 	// Selector for a Domain in lightsail to populate domainName.
 	// +kubebuilder:validation:Optional
-	DomainNameSelector *v1.Selector `json:"domainNameSelector,omitempty" tf:"-"`
+	DomainNameSelector *v2.Selector `json:"domainNameSelector,omitempty" tf:"-"`
 
 	// Whether the entry should be an alias. Default: false.
 	// +kubebuilder:validation:Optional
@@ -80,8 +80,8 @@ type DomainEntryParameters struct {
 
 // DomainEntrySpec defines the desired state of DomainEntry
 type DomainEntrySpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     DomainEntryParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   DomainEntryParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -97,8 +97,8 @@ type DomainEntrySpec struct {
 
 // DomainEntryStatus defines the observed state of DomainEntry.
 type DomainEntryStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        DomainEntryObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               DomainEntryObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

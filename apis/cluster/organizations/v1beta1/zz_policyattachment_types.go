@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type PolicyAttachmentInitParameters struct {
@@ -22,11 +22,11 @@ type PolicyAttachmentInitParameters struct {
 
 	// Reference to a Policy in organizations to populate policyId.
 	// +kubebuilder:validation:Optional
-	PolicyIDRef *v1.Reference `json:"policyIdRef,omitempty" tf:"-"`
+	PolicyIDRef *v2.Reference `json:"policyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Policy in organizations to populate policyId.
 	// +kubebuilder:validation:Optional
-	PolicyIDSelector *v1.Selector `json:"policyIdSelector,omitempty" tf:"-"`
+	PolicyIDSelector *v2.Selector `json:"policyIdSelector,omitempty" tf:"-"`
 
 	// If set to true, destroy will not detach the policy and instead just remove the resource from state. This can be useful in situations where the attachment must be preserved to meet the AWS minimum requirement of 1 attached policy.
 	SkipDestroy *bool `json:"skipDestroy,omitempty" tf:"skip_destroy,omitempty"`
@@ -58,11 +58,11 @@ type PolicyAttachmentParameters struct {
 
 	// Reference to a Policy in organizations to populate policyId.
 	// +kubebuilder:validation:Optional
-	PolicyIDRef *v1.Reference `json:"policyIdRef,omitempty" tf:"-"`
+	PolicyIDRef *v2.Reference `json:"policyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Policy in organizations to populate policyId.
 	// +kubebuilder:validation:Optional
-	PolicyIDSelector *v1.Selector `json:"policyIdSelector,omitempty" tf:"-"`
+	PolicyIDSelector *v2.Selector `json:"policyIdSelector,omitempty" tf:"-"`
 
 	// If set to true, destroy will not detach the policy and instead just remove the resource from state. This can be useful in situations where the attachment must be preserved to meet the AWS minimum requirement of 1 attached policy.
 	// +kubebuilder:validation:Optional
@@ -75,8 +75,8 @@ type PolicyAttachmentParameters struct {
 
 // PolicyAttachmentSpec defines the desired state of PolicyAttachment
 type PolicyAttachmentSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     PolicyAttachmentParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   PolicyAttachmentParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -92,8 +92,8 @@ type PolicyAttachmentSpec struct {
 
 // PolicyAttachmentStatus defines the observed state of PolicyAttachment.
 type PolicyAttachmentStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        PolicyAttachmentObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               PolicyAttachmentObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

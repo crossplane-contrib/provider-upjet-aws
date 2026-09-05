@@ -58,3 +58,22 @@ func SetupGated_kafka(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupWebhookWithManager_kafka registers conversion webhooks for all resource kinds in the group.
+func SetupWebhookWithManager_kafka(mgr ctrl.Manager) error {
+	for _, setup := range []func(ctrl.Manager) error{
+		cluster.SetupWebhookWithManager,
+		clusterpolicy.SetupWebhookWithManager,
+		configuration.SetupWebhookWithManager,
+		replicator.SetupWebhookWithManager,
+		scramsecretassociation.SetupWebhookWithManager,
+		serverlesscluster.SetupWebhookWithManager,
+		singlescramsecretassociation.SetupWebhookWithManager,
+		vpcconnection.SetupWebhookWithManager,
+	} {
+		if err := setup(mgr); err != nil {
+			return err
+		}
+	}
+	return nil
+}

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ClusterPolicyInitParameters struct {
@@ -47,11 +47,11 @@ type ClusterPolicyParameters struct {
 
 	// Reference to a Cluster in kafka to populate clusterArn.
 	// +kubebuilder:validation:Optional
-	ClusterArnRef *v1.Reference `json:"clusterArnRef,omitempty" tf:"-"`
+	ClusterArnRef *v2.Reference `json:"clusterArnRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in kafka to populate clusterArn.
 	// +kubebuilder:validation:Optional
-	ClusterArnSelector *v1.Selector `json:"clusterArnSelector,omitempty" tf:"-"`
+	ClusterArnSelector *v2.Selector `json:"clusterArnSelector,omitempty" tf:"-"`
 
 	// Resource policy for cluster.
 	// +kubebuilder:validation:Optional
@@ -65,8 +65,8 @@ type ClusterPolicyParameters struct {
 
 // ClusterPolicySpec defines the desired state of ClusterPolicy
 type ClusterPolicySpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ClusterPolicyParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ClusterPolicyParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -82,8 +82,8 @@ type ClusterPolicySpec struct {
 
 // ClusterPolicyStatus defines the observed state of ClusterPolicy.
 type ClusterPolicyStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ClusterPolicyObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ClusterPolicyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

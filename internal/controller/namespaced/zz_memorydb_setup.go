@@ -55,3 +55,21 @@ func SetupGated_memorydb(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupWebhookWithManager_memorydb registers conversion webhooks for all resource kinds in the group.
+func SetupWebhookWithManager_memorydb(mgr ctrl.Manager) error {
+	for _, setup := range []func(ctrl.Manager) error{
+		acl.SetupWebhookWithManager,
+		cluster.SetupWebhookWithManager,
+		multiregioncluster.SetupWebhookWithManager,
+		parametergroup.SetupWebhookWithManager,
+		snapshot.SetupWebhookWithManager,
+		subnetgroup.SetupWebhookWithManager,
+		user.SetupWebhookWithManager,
+	} {
+		if err := setup(mgr); err != nil {
+			return err
+		}
+	}
+	return nil
+}

@@ -67,3 +67,25 @@ func SetupGated_wafregional(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupWebhookWithManager_wafregional registers conversion webhooks for all resource kinds in the group.
+func SetupWebhookWithManager_wafregional(mgr ctrl.Manager) error {
+	for _, setup := range []func(ctrl.Manager) error{
+		bytematchset.SetupWebhookWithManager,
+		geomatchset.SetupWebhookWithManager,
+		ipset.SetupWebhookWithManager,
+		ratebasedrule.SetupWebhookWithManager,
+		regexmatchset.SetupWebhookWithManager,
+		regexpatternset.SetupWebhookWithManager,
+		rule.SetupWebhookWithManager,
+		sizeconstraintset.SetupWebhookWithManager,
+		sqlinjectionmatchset.SetupWebhookWithManager,
+		webacl.SetupWebhookWithManager,
+		xssmatchset.SetupWebhookWithManager,
+	} {
+		if err := setup(mgr); err != nil {
+			return err
+		}
+	}
+	return nil
+}

@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CustomerGatewayAssociationInitParameters struct {
@@ -23,11 +22,11 @@ type CustomerGatewayAssociationInitParameters struct {
 
 	// Reference to a Device in networkmanager to populate deviceId.
 	// +kubebuilder:validation:Optional
-	DeviceIDRef *v1.NamespacedReference `json:"deviceIdRef,omitempty" tf:"-"`
+	DeviceIDRef *v2.NamespacedReference `json:"deviceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Device in networkmanager to populate deviceId.
 	// +kubebuilder:validation:Optional
-	DeviceIDSelector *v1.NamespacedSelector `json:"deviceIdSelector,omitempty" tf:"-"`
+	DeviceIDSelector *v2.NamespacedSelector `json:"deviceIdSelector,omitempty" tf:"-"`
 
 	// ID of the link.
 	LinkID *string `json:"linkId,omitempty" tf:"link_id,omitempty"`
@@ -60,11 +59,11 @@ type CustomerGatewayAssociationParameters struct {
 
 	// Reference to a CustomerGateway in ec2 to populate customerGatewayArn.
 	// +kubebuilder:validation:Optional
-	CustomerGatewayArnRef *v1.NamespacedReference `json:"customerGatewayArnRef,omitempty" tf:"-"`
+	CustomerGatewayArnRef *v2.NamespacedReference `json:"customerGatewayArnRef,omitempty" tf:"-"`
 
 	// Selector for a CustomerGateway in ec2 to populate customerGatewayArn.
 	// +kubebuilder:validation:Optional
-	CustomerGatewayArnSelector *v1.NamespacedSelector `json:"customerGatewayArnSelector,omitempty" tf:"-"`
+	CustomerGatewayArnSelector *v2.NamespacedSelector `json:"customerGatewayArnSelector,omitempty" tf:"-"`
 
 	// ID of the device.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/networkmanager/v1beta1.Device
@@ -74,11 +73,11 @@ type CustomerGatewayAssociationParameters struct {
 
 	// Reference to a Device in networkmanager to populate deviceId.
 	// +kubebuilder:validation:Optional
-	DeviceIDRef *v1.NamespacedReference `json:"deviceIdRef,omitempty" tf:"-"`
+	DeviceIDRef *v2.NamespacedReference `json:"deviceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Device in networkmanager to populate deviceId.
 	// +kubebuilder:validation:Optional
-	DeviceIDSelector *v1.NamespacedSelector `json:"deviceIdSelector,omitempty" tf:"-"`
+	DeviceIDSelector *v2.NamespacedSelector `json:"deviceIdSelector,omitempty" tf:"-"`
 
 	// ID of the global network.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/networkmanager/v1beta1.GlobalNetwork
@@ -88,11 +87,11 @@ type CustomerGatewayAssociationParameters struct {
 
 	// Reference to a GlobalNetwork in networkmanager to populate globalNetworkId.
 	// +kubebuilder:validation:Optional
-	GlobalNetworkIDRef *v1.NamespacedReference `json:"globalNetworkIdRef,omitempty" tf:"-"`
+	GlobalNetworkIDRef *v2.NamespacedReference `json:"globalNetworkIdRef,omitempty" tf:"-"`
 
 	// Selector for a GlobalNetwork in networkmanager to populate globalNetworkId.
 	// +kubebuilder:validation:Optional
-	GlobalNetworkIDSelector *v1.NamespacedSelector `json:"globalNetworkIdSelector,omitempty" tf:"-"`
+	GlobalNetworkIDSelector *v2.NamespacedSelector `json:"globalNetworkIdSelector,omitempty" tf:"-"`
 
 	// ID of the link.
 	// +kubebuilder:validation:Optional
@@ -118,8 +117,8 @@ type CustomerGatewayAssociationSpec struct {
 
 // CustomerGatewayAssociationStatus defines the observed state of CustomerGatewayAssociation.
 type CustomerGatewayAssociationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        CustomerGatewayAssociationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               CustomerGatewayAssociationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

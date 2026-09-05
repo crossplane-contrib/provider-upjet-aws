@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ImagePipelineImageScanningConfigurationInitParameters struct {
@@ -95,11 +95,11 @@ type ImagePipelineInitParameters struct {
 
 	// Reference to a ImageRecipe in imagebuilder to populate imageRecipeArn.
 	// +kubebuilder:validation:Optional
-	ImageRecipeArnRef *v1.Reference `json:"imageRecipeArnRef,omitempty" tf:"-"`
+	ImageRecipeArnRef *v2.Reference `json:"imageRecipeArnRef,omitempty" tf:"-"`
 
 	// Selector for a ImageRecipe in imagebuilder to populate imageRecipeArn.
 	// +kubebuilder:validation:Optional
-	ImageRecipeArnSelector *v1.Selector `json:"imageRecipeArnSelector,omitempty" tf:"-"`
+	ImageRecipeArnSelector *v2.Selector `json:"imageRecipeArnSelector,omitempty" tf:"-"`
 
 	// Configuration block with image scanning configuration. Detailed below.
 	ImageScanningConfiguration *ImagePipelineImageScanningConfigurationInitParameters `json:"imageScanningConfiguration,omitempty" tf:"image_scanning_configuration,omitempty"`
@@ -114,11 +114,11 @@ type ImagePipelineInitParameters struct {
 
 	// Reference to a InfrastructureConfiguration in imagebuilder to populate infrastructureConfigurationArn.
 	// +kubebuilder:validation:Optional
-	InfrastructureConfigurationArnRef *v1.Reference `json:"infrastructureConfigurationArnRef,omitempty" tf:"-"`
+	InfrastructureConfigurationArnRef *v2.Reference `json:"infrastructureConfigurationArnRef,omitempty" tf:"-"`
 
 	// Selector for a InfrastructureConfiguration in imagebuilder to populate infrastructureConfigurationArn.
 	// +kubebuilder:validation:Optional
-	InfrastructureConfigurationArnSelector *v1.Selector `json:"infrastructureConfigurationArnSelector,omitempty" tf:"-"`
+	InfrastructureConfigurationArnSelector *v2.Selector `json:"infrastructureConfigurationArnSelector,omitempty" tf:"-"`
 
 	// Configuration block with logging configuration. Detailed below.
 	LoggingConfiguration *ImagePipelineLoggingConfigurationInitParameters `json:"loggingConfiguration,omitempty" tf:"logging_configuration,omitempty"`
@@ -277,11 +277,11 @@ type ImagePipelineParameters struct {
 
 	// Reference to a ImageRecipe in imagebuilder to populate imageRecipeArn.
 	// +kubebuilder:validation:Optional
-	ImageRecipeArnRef *v1.Reference `json:"imageRecipeArnRef,omitempty" tf:"-"`
+	ImageRecipeArnRef *v2.Reference `json:"imageRecipeArnRef,omitempty" tf:"-"`
 
 	// Selector for a ImageRecipe in imagebuilder to populate imageRecipeArn.
 	// +kubebuilder:validation:Optional
-	ImageRecipeArnSelector *v1.Selector `json:"imageRecipeArnSelector,omitempty" tf:"-"`
+	ImageRecipeArnSelector *v2.Selector `json:"imageRecipeArnSelector,omitempty" tf:"-"`
 
 	// Configuration block with image scanning configuration. Detailed below.
 	// +kubebuilder:validation:Optional
@@ -299,11 +299,11 @@ type ImagePipelineParameters struct {
 
 	// Reference to a InfrastructureConfiguration in imagebuilder to populate infrastructureConfigurationArn.
 	// +kubebuilder:validation:Optional
-	InfrastructureConfigurationArnRef *v1.Reference `json:"infrastructureConfigurationArnRef,omitempty" tf:"-"`
+	InfrastructureConfigurationArnRef *v2.Reference `json:"infrastructureConfigurationArnRef,omitempty" tf:"-"`
 
 	// Selector for a InfrastructureConfiguration in imagebuilder to populate infrastructureConfigurationArn.
 	// +kubebuilder:validation:Optional
-	InfrastructureConfigurationArnSelector *v1.Selector `json:"infrastructureConfigurationArnSelector,omitempty" tf:"-"`
+	InfrastructureConfigurationArnSelector *v2.Selector `json:"infrastructureConfigurationArnSelector,omitempty" tf:"-"`
 
 	// Configuration block with logging configuration. Detailed below.
 	// +kubebuilder:validation:Optional
@@ -487,8 +487,8 @@ type ScheduleParameters struct {
 
 // ImagePipelineSpec defines the desired state of ImagePipeline
 type ImagePipelineSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ImagePipelineParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ImagePipelineParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -504,8 +504,8 @@ type ImagePipelineSpec struct {
 
 // ImagePipelineStatus defines the observed state of ImagePipeline.
 type ImagePipelineStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ImagePipelineObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ImagePipelineObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

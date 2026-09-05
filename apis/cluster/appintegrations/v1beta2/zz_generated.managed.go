@@ -5,54 +5,54 @@
 
 package v1beta2
 
-import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+import xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 
 // GetCondition of this EventIntegration.
-func (mg *EventIntegration) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *EventIntegration) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this EventIntegration.
-func (mg *EventIntegration) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *EventIntegration) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this EventIntegration.
-func (mg *EventIntegration) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *EventIntegration) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this EventIntegration.
-func (mg *EventIntegration) GetProviderConfigReference() *xpv1.Reference {
+func (mg *EventIntegration) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this EventIntegration.
-func (mg *EventIntegration) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *EventIntegration) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this EventIntegration.
-func (mg *EventIntegration) SetConditions(c ...xpv1.Condition) {
+func (mg *EventIntegration) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this EventIntegration.
-func (mg *EventIntegration) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *EventIntegration) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this EventIntegration.
-func (mg *EventIntegration) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *EventIntegration) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this EventIntegration.
-func (mg *EventIntegration) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *EventIntegration) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this EventIntegration.
-func (mg *EventIntegration) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *EventIntegration) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

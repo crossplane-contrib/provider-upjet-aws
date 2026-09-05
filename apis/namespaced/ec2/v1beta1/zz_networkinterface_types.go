@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AttachmentInitParameters struct {
@@ -35,10 +34,61 @@ type AttachmentObservation struct {
 type AttachmentParameters struct {
 }
 
+type EnaSrdSpecificationEnaSrdUDPSpecificationInitParameters struct {
+
+	// Indicates whether UDP traffic uses ENA Express. Requires ena_srd_enabled to be true.
+	EnaSrdUDPEnabled *bool `json:"enaSrdUdpEnabled,omitempty" tf:"ena_srd_udp_enabled,omitempty"`
+}
+
+type EnaSrdSpecificationEnaSrdUDPSpecificationObservation struct {
+
+	// Indicates whether UDP traffic uses ENA Express. Requires ena_srd_enabled to be true.
+	EnaSrdUDPEnabled *bool `json:"enaSrdUdpEnabled,omitempty" tf:"ena_srd_udp_enabled,omitempty"`
+}
+
+type EnaSrdSpecificationEnaSrdUDPSpecificationParameters struct {
+
+	// Indicates whether UDP traffic uses ENA Express. Requires ena_srd_enabled to be true.
+	// +kubebuilder:validation:Optional
+	EnaSrdUDPEnabled *bool `json:"enaSrdUdpEnabled,omitempty" tf:"ena_srd_udp_enabled,omitempty"`
+}
+
+type NetworkInterfaceEnaSrdSpecificationInitParameters struct {
+
+	// Indicates whether ENA Express is enabled for the network interface.
+	EnaSrdEnabled *bool `json:"enaSrdEnabled,omitempty" tf:"ena_srd_enabled,omitempty"`
+
+	// Configures ENA Express for UDP network traffic. See ENA SRD UDP Specification below for more details.
+	EnaSrdUDPSpecification *EnaSrdSpecificationEnaSrdUDPSpecificationInitParameters `json:"enaSrdUdpSpecification,omitempty" tf:"ena_srd_udp_specification,omitempty"`
+}
+
+type NetworkInterfaceEnaSrdSpecificationObservation struct {
+
+	// Indicates whether ENA Express is enabled for the network interface.
+	EnaSrdEnabled *bool `json:"enaSrdEnabled,omitempty" tf:"ena_srd_enabled,omitempty"`
+
+	// Configures ENA Express for UDP network traffic. See ENA SRD UDP Specification below for more details.
+	EnaSrdUDPSpecification *EnaSrdSpecificationEnaSrdUDPSpecificationObservation `json:"enaSrdUdpSpecification,omitempty" tf:"ena_srd_udp_specification,omitempty"`
+}
+
+type NetworkInterfaceEnaSrdSpecificationParameters struct {
+
+	// Indicates whether ENA Express is enabled for the network interface.
+	// +kubebuilder:validation:Optional
+	EnaSrdEnabled *bool `json:"enaSrdEnabled,omitempty" tf:"ena_srd_enabled,omitempty"`
+
+	// Configures ENA Express for UDP network traffic. See ENA SRD UDP Specification below for more details.
+	// +kubebuilder:validation:Optional
+	EnaSrdUDPSpecification *EnaSrdSpecificationEnaSrdUDPSpecificationParameters `json:"enaSrdUdpSpecification,omitempty" tf:"ena_srd_udp_specification,omitempty"`
+}
+
 type NetworkInterfaceInitParameters_2 struct {
 
 	// Description for the network interface.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Configures ENA Express for the network interface. The ENI must be attached to an instance to configure ENA Express. See ENA SRD Specification below for more details.
+	EnaSrdSpecification *NetworkInterfaceEnaSrdSpecificationInitParameters `json:"enaSrdSpecification,omitempty" tf:"ena_srd_specification,omitempty"`
 
 	// Enables assigning a primary IPv6 Global Unicast Address (GUA) to the network interface (ENI) in dual-stack or IPv6-only subnets. This ensures the instance attached to the ENI retains a consistent IPv6 address. Once enabled, the first IPv6 GUA becomes the primary IPv6 address and cannot be disabled. The primary IPv6 address remains assigned until the instance is terminated or the ENI is detached. Enabling and subsequent disabling forces recreation of the ENI.
 	EnablePrimaryIPv6 *bool `json:"enablePrimaryIpv6,omitempty" tf:"enable_primary_ipv6,omitempty"`
@@ -90,11 +140,11 @@ type NetworkInterfaceInitParameters_2 struct {
 
 	// References to SecurityGroup in ec2 to populate securityGroups.
 	// +kubebuilder:validation:Optional
-	SecurityGroupRefs []v1.NamespacedReference `json:"securityGroupRefs,omitempty" tf:"-"`
+	SecurityGroupRefs []v2.NamespacedReference `json:"securityGroupRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate securityGroups.
 	// +kubebuilder:validation:Optional
-	SecurityGroupSelector *v1.NamespacedSelector `json:"securityGroupSelector,omitempty" tf:"-"`
+	SecurityGroupSelector *v2.NamespacedSelector `json:"securityGroupSelector,omitempty" tf:"-"`
 
 	// List of security group IDs to assign to the ENI.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
@@ -112,11 +162,11 @@ type NetworkInterfaceInitParameters_2 struct {
 
 	// Reference to a Subnet in ec2 to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in ec2 to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -133,6 +183,9 @@ type NetworkInterfaceObservation_2 struct {
 
 	// Description for the network interface.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Configures ENA Express for the network interface. The ENI must be attached to an instance to configure ENA Express. See ENA SRD Specification below for more details.
+	EnaSrdSpecification *NetworkInterfaceEnaSrdSpecificationObservation `json:"enaSrdSpecification,omitempty" tf:"ena_srd_specification,omitempty"`
 
 	// Enables assigning a primary IPv6 Global Unicast Address (GUA) to the network interface (ENI) in dual-stack or IPv6-only subnets. This ensures the instance attached to the ENI retains a consistent IPv6 address. Once enabled, the first IPv6 GUA becomes the primary IPv6 address and cannot be disabled. The primary IPv6 address remains assigned until the instance is terminated or the ENI is detached. Enabling and subsequent disabling forces recreation of the ENI.
 	EnablePrimaryIPv6 *bool `json:"enablePrimaryIpv6,omitempty" tf:"enable_primary_ipv6,omitempty"`
@@ -226,6 +279,10 @@ type NetworkInterfaceParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// Configures ENA Express for the network interface. The ENI must be attached to an instance to configure ENA Express. See ENA SRD Specification below for more details.
+	// +kubebuilder:validation:Optional
+	EnaSrdSpecification *NetworkInterfaceEnaSrdSpecificationParameters `json:"enaSrdSpecification,omitempty" tf:"ena_srd_specification,omitempty"`
+
 	// Enables assigning a primary IPv6 Global Unicast Address (GUA) to the network interface (ENI) in dual-stack or IPv6-only subnets. This ensures the instance attached to the ENI retains a consistent IPv6 address. Once enabled, the first IPv6 GUA becomes the primary IPv6 address and cannot be disabled. The primary IPv6 address remains assigned until the instance is terminated or the ENI is detached. Enabling and subsequent disabling forces recreation of the ENI.
 	// +kubebuilder:validation:Optional
 	EnablePrimaryIPv6 *bool `json:"enablePrimaryIpv6,omitempty" tf:"enable_primary_ipv6,omitempty"`
@@ -296,11 +353,11 @@ type NetworkInterfaceParameters_2 struct {
 
 	// References to SecurityGroup in ec2 to populate securityGroups.
 	// +kubebuilder:validation:Optional
-	SecurityGroupRefs []v1.NamespacedReference `json:"securityGroupRefs,omitempty" tf:"-"`
+	SecurityGroupRefs []v2.NamespacedReference `json:"securityGroupRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate securityGroups.
 	// +kubebuilder:validation:Optional
-	SecurityGroupSelector *v1.NamespacedSelector `json:"securityGroupSelector,omitempty" tf:"-"`
+	SecurityGroupSelector *v2.NamespacedSelector `json:"securityGroupSelector,omitempty" tf:"-"`
 
 	// List of security group IDs to assign to the ENI.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
@@ -321,11 +378,11 @@ type NetworkInterfaceParameters_2 struct {
 
 	// Reference to a Subnet in ec2 to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in ec2 to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -352,8 +409,8 @@ type NetworkInterfaceSpec struct {
 
 // NetworkInterfaceStatus defines the observed state of NetworkInterface.
 type NetworkInterfaceStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        NetworkInterfaceObservation_2 `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               NetworkInterfaceObservation_2 `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

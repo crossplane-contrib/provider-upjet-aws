@@ -9,7 +9,7 @@
 package v1beta2
 
 import (
-	"github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	"github.com/crossplane/crossplane/apis/v2/core/v2"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 )
 
@@ -105,12 +105,12 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 	}
 	if in.DefaultIAMRoleArnRef != nil {
 		in, out := &in.DefaultIAMRoleArnRef, &out.DefaultIAMRoleArnRef
-		*out = new(v1.Reference)
+		*out = new(v2.Reference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.DefaultIAMRoleArnSelector != nil {
 		in, out := &in.DefaultIAMRoleArnSelector, &out.DefaultIAMRoleArnSelector
-		*out = new(v1.Selector)
+		*out = new(v2.Selector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.ElasticIP != nil {
@@ -135,14 +135,14 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 	}
 	if in.IAMRoleRefs != nil {
 		in, out := &in.IAMRoleRefs, &out.IAMRoleRefs
-		*out = make([]v1.Reference, len(*in))
+		*out = make([]v2.Reference, len(*in))
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
 	if in.IAMRoleSelector != nil {
 		in, out := &in.IAMRoleSelector, &out.IAMRoleSelector
-		*out = new(v1.Selector)
+		*out = new(v2.Selector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.IAMRoles != nil {
@@ -163,12 +163,12 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 	}
 	if in.KMSKeyIDRef != nil {
 		in, out := &in.KMSKeyIDRef, &out.KMSKeyIDRef
-		*out = new(v1.Reference)
+		*out = new(v2.Reference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.KMSKeyIDSelector != nil {
 		in, out := &in.KMSKeyIDSelector, &out.KMSKeyIDSelector
-		*out = new(v1.Selector)
+		*out = new(v2.Selector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.MaintenanceTrackName != nil {
@@ -193,12 +193,12 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 	}
 	if in.MasterPasswordSecretRef != nil {
 		in, out := &in.MasterPasswordSecretRef, &out.MasterPasswordSecretRef
-		*out = new(v1.SecretKeySelector)
+		*out = new(v2.SecretKeySelector)
 		**out = **in
 	}
 	if in.MasterPasswordWoSecretRef != nil {
 		in, out := &in.MasterPasswordWoSecretRef, &out.MasterPasswordWoSecretRef
-		*out = new(v1.SecretKeySelector)
+		*out = new(v2.SecretKeySelector)
 		**out = **in
 	}
 	if in.MasterPasswordWoVersion != nil {
@@ -284,14 +284,14 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 	}
 	if in.VPCSecurityGroupIDRefs != nil {
 		in, out := &in.VPCSecurityGroupIDRefs, &out.VPCSecurityGroupIDRefs
-		*out = make([]v1.Reference, len(*in))
+		*out = make([]v2.Reference, len(*in))
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
 	if in.VPCSecurityGroupIDSelector != nil {
 		in, out := &in.VPCSecurityGroupIDSelector, &out.VPCSecurityGroupIDSelector
-		*out = new(v1.Selector)
+		*out = new(v2.Selector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.VPCSecurityGroupIds != nil {
@@ -765,12 +765,12 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 	}
 	if in.DefaultIAMRoleArnRef != nil {
 		in, out := &in.DefaultIAMRoleArnRef, &out.DefaultIAMRoleArnRef
-		*out = new(v1.Reference)
+		*out = new(v2.Reference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.DefaultIAMRoleArnSelector != nil {
 		in, out := &in.DefaultIAMRoleArnSelector, &out.DefaultIAMRoleArnSelector
-		*out = new(v1.Selector)
+		*out = new(v2.Selector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.ElasticIP != nil {
@@ -795,14 +795,14 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 	}
 	if in.IAMRoleRefs != nil {
 		in, out := &in.IAMRoleRefs, &out.IAMRoleRefs
-		*out = make([]v1.Reference, len(*in))
+		*out = make([]v2.Reference, len(*in))
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
 	if in.IAMRoleSelector != nil {
 		in, out := &in.IAMRoleSelector, &out.IAMRoleSelector
-		*out = new(v1.Selector)
+		*out = new(v2.Selector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.IAMRoles != nil {
@@ -823,12 +823,12 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 	}
 	if in.KMSKeyIDRef != nil {
 		in, out := &in.KMSKeyIDRef, &out.KMSKeyIDRef
-		*out = new(v1.Reference)
+		*out = new(v2.Reference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.KMSKeyIDSelector != nil {
 		in, out := &in.KMSKeyIDSelector, &out.KMSKeyIDSelector
-		*out = new(v1.Selector)
+		*out = new(v2.Selector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.MaintenanceTrackName != nil {
@@ -853,12 +853,12 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 	}
 	if in.MasterPasswordSecretRef != nil {
 		in, out := &in.MasterPasswordSecretRef, &out.MasterPasswordSecretRef
-		*out = new(v1.SecretKeySelector)
+		*out = new(v2.SecretKeySelector)
 		**out = **in
 	}
 	if in.MasterPasswordWoSecretRef != nil {
 		in, out := &in.MasterPasswordWoSecretRef, &out.MasterPasswordWoSecretRef
-		*out = new(v1.SecretKeySelector)
+		*out = new(v2.SecretKeySelector)
 		**out = **in
 	}
 	if in.MasterPasswordWoVersion != nil {
@@ -949,14 +949,14 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 	}
 	if in.VPCSecurityGroupIDRefs != nil {
 		in, out := &in.VPCSecurityGroupIDRefs, &out.VPCSecurityGroupIDRefs
-		*out = make([]v1.Reference, len(*in))
+		*out = make([]v2.Reference, len(*in))
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
 	if in.VPCSecurityGroupIDSelector != nil {
 		in, out := &in.VPCSecurityGroupIDSelector, &out.VPCSecurityGroupIDSelector
-		*out = new(v1.Selector)
+		*out = new(v2.Selector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.VPCSecurityGroupIds != nil {
@@ -985,7 +985,7 @@ func (in *ClusterParameters) DeepCopy() *ClusterParameters {
 // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
 func (in *ClusterSpec) DeepCopyInto(out *ClusterSpec) {
 	*out = *in
-	in.ResourceSpec.DeepCopyInto(&out.ResourceSpec)
+	in.ClusterManagedResourceSpec.DeepCopyInto(&out.ClusterManagedResourceSpec)
 	in.ForProvider.DeepCopyInto(&out.ForProvider)
 	in.InitProvider.DeepCopyInto(&out.InitProvider)
 }
@@ -1003,7 +1003,7 @@ func (in *ClusterSpec) DeepCopy() *ClusterSpec {
 // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
 func (in *ClusterStatus) DeepCopyInto(out *ClusterStatus) {
 	*out = *in
-	in.ResourceStatus.DeepCopyInto(&out.ResourceStatus)
+	in.ManagedResourceStatus.DeepCopyInto(&out.ManagedResourceStatus)
 	in.AtProvider.DeepCopyInto(&out.AtProvider)
 }
 
@@ -1309,12 +1309,12 @@ func (in *ScheduledActionInitParameters) DeepCopyInto(out *ScheduledActionInitPa
 	}
 	if in.IAMRoleRef != nil {
 		in, out := &in.IAMRoleRef, &out.IAMRoleRef
-		*out = new(v1.Reference)
+		*out = new(v2.Reference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.IAMRoleSelector != nil {
 		in, out := &in.IAMRoleSelector, &out.IAMRoleSelector
-		*out = new(v1.Selector)
+		*out = new(v2.Selector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.Schedule != nil {
@@ -1461,12 +1461,12 @@ func (in *ScheduledActionParameters) DeepCopyInto(out *ScheduledActionParameters
 	}
 	if in.IAMRoleRef != nil {
 		in, out := &in.IAMRoleRef, &out.IAMRoleRef
-		*out = new(v1.Reference)
+		*out = new(v2.Reference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.IAMRoleSelector != nil {
 		in, out := &in.IAMRoleSelector, &out.IAMRoleSelector
-		*out = new(v1.Selector)
+		*out = new(v2.Selector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.Region != nil {
@@ -1504,7 +1504,7 @@ func (in *ScheduledActionParameters) DeepCopy() *ScheduledActionParameters {
 // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
 func (in *ScheduledActionSpec) DeepCopyInto(out *ScheduledActionSpec) {
 	*out = *in
-	in.ResourceSpec.DeepCopyInto(&out.ResourceSpec)
+	in.ClusterManagedResourceSpec.DeepCopyInto(&out.ClusterManagedResourceSpec)
 	in.ForProvider.DeepCopyInto(&out.ForProvider)
 	in.InitProvider.DeepCopyInto(&out.InitProvider)
 }
@@ -1522,7 +1522,7 @@ func (in *ScheduledActionSpec) DeepCopy() *ScheduledActionSpec {
 // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
 func (in *ScheduledActionStatus) DeepCopyInto(out *ScheduledActionStatus) {
 	*out = *in
-	in.ResourceStatus.DeepCopyInto(&out.ResourceStatus)
+	in.ManagedResourceStatus.DeepCopyInto(&out.ManagedResourceStatus)
 	in.AtProvider.DeepCopyInto(&out.AtProvider)
 }
 

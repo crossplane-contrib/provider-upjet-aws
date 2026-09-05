@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ActivemqBrokerParametersInitParameters struct {
@@ -256,11 +256,11 @@ type CloudwatchLogsLogDestinationInitParameters struct {
 
 	// Reference to a Group in cloudwatchlogs to populate logGroupArn.
 	// +kubebuilder:validation:Optional
-	LogGroupArnRef *v1.Reference `json:"logGroupArnRef,omitempty" tf:"-"`
+	LogGroupArnRef *v2.Reference `json:"logGroupArnRef,omitempty" tf:"-"`
 
 	// Selector for a Group in cloudwatchlogs to populate logGroupArn.
 	// +kubebuilder:validation:Optional
-	LogGroupArnSelector *v1.Selector `json:"logGroupArnSelector,omitempty" tf:"-"`
+	LogGroupArnSelector *v2.Selector `json:"logGroupArnSelector,omitempty" tf:"-"`
 }
 
 type CloudwatchLogsLogDestinationObservation struct {
@@ -279,11 +279,11 @@ type CloudwatchLogsLogDestinationParameters struct {
 
 	// Reference to a Group in cloudwatchlogs to populate logGroupArn.
 	// +kubebuilder:validation:Optional
-	LogGroupArnRef *v1.Reference `json:"logGroupArnRef,omitempty" tf:"-"`
+	LogGroupArnRef *v2.Reference `json:"logGroupArnRef,omitempty" tf:"-"`
 
 	// Selector for a Group in cloudwatchlogs to populate logGroupArn.
 	// +kubebuilder:validation:Optional
-	LogGroupArnSelector *v1.Selector `json:"logGroupArnSelector,omitempty" tf:"-"`
+	LogGroupArnSelector *v2.Selector `json:"logGroupArnSelector,omitempty" tf:"-"`
 }
 
 type CloudwatchLogsParametersInitParameters struct {
@@ -1541,11 +1541,11 @@ type PipeInitParameters struct {
 
 	// Reference to a APIDestination in cloudwatchevents to populate enrichment.
 	// +kubebuilder:validation:Optional
-	EnrichmentRef *v1.Reference `json:"enrichmentRef,omitempty" tf:"-"`
+	EnrichmentRef *v2.Reference `json:"enrichmentRef,omitempty" tf:"-"`
 
 	// Selector for a APIDestination in cloudwatchevents to populate enrichment.
 	// +kubebuilder:validation:Optional
-	EnrichmentSelector *v1.Selector `json:"enrichmentSelector,omitempty" tf:"-"`
+	EnrichmentSelector *v2.Selector `json:"enrichmentSelector,omitempty" tf:"-"`
 
 	// Identifier of the AWS KMS customer managed key for EventBridge to use, if you choose to use a customer managed key to encrypt pipe data. The identifier can be the key Amazon Resource Name (ARN), KeyId, key alias, or key alias ARN. If not set, EventBridge uses an AWS owned key to encrypt pipe data.
 	KMSKeyIdentifier *string `json:"kmsKeyIdentifier,omitempty" tf:"kms_key_identifier,omitempty"`
@@ -1560,11 +1560,11 @@ type PipeInitParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.Reference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// Source resource of the pipe. This field typically requires an ARN (Amazon Resource Name). However, when using a self-managed Kafka cluster, you should use a different format. Instead of an ARN, use 'smk://' followed by the bootstrap server's address.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/sqs/v1beta1.Queue
@@ -1576,11 +1576,11 @@ type PipeInitParameters struct {
 
 	// Reference to a Queue in sqs to populate source.
 	// +kubebuilder:validation:Optional
-	SourceRef *v1.Reference `json:"sourceRef,omitempty" tf:"-"`
+	SourceRef *v2.Reference `json:"sourceRef,omitempty" tf:"-"`
 
 	// Selector for a Queue in sqs to populate source.
 	// +kubebuilder:validation:Optional
-	SourceSelector *v1.Selector `json:"sourceSelector,omitempty" tf:"-"`
+	SourceSelector *v2.Selector `json:"sourceSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -1596,11 +1596,11 @@ type PipeInitParameters struct {
 
 	// Reference to a Queue in sqs to populate target.
 	// +kubebuilder:validation:Optional
-	TargetRef *v1.Reference `json:"targetRef,omitempty" tf:"-"`
+	TargetRef *v2.Reference `json:"targetRef,omitempty" tf:"-"`
 
 	// Selector for a Queue in sqs to populate target.
 	// +kubebuilder:validation:Optional
-	TargetSelector *v1.Selector `json:"targetSelector,omitempty" tf:"-"`
+	TargetSelector *v2.Selector `json:"targetSelector,omitempty" tf:"-"`
 }
 
 type PipeObservation struct {
@@ -1679,11 +1679,11 @@ type PipeParameters struct {
 
 	// Reference to a APIDestination in cloudwatchevents to populate enrichment.
 	// +kubebuilder:validation:Optional
-	EnrichmentRef *v1.Reference `json:"enrichmentRef,omitempty" tf:"-"`
+	EnrichmentRef *v2.Reference `json:"enrichmentRef,omitempty" tf:"-"`
 
 	// Selector for a APIDestination in cloudwatchevents to populate enrichment.
 	// +kubebuilder:validation:Optional
-	EnrichmentSelector *v1.Selector `json:"enrichmentSelector,omitempty" tf:"-"`
+	EnrichmentSelector *v2.Selector `json:"enrichmentSelector,omitempty" tf:"-"`
 
 	// Identifier of the AWS KMS customer managed key for EventBridge to use, if you choose to use a customer managed key to encrypt pipe data. The identifier can be the key Amazon Resource Name (ARN), KeyId, key alias, or key alias ARN. If not set, EventBridge uses an AWS owned key to encrypt pipe data.
 	// +kubebuilder:validation:Optional
@@ -1706,11 +1706,11 @@ type PipeParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.Reference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// Source resource of the pipe. This field typically requires an ARN (Amazon Resource Name). However, when using a self-managed Kafka cluster, you should use a different format. Instead of an ARN, use 'smk://' followed by the bootstrap server's address.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/sqs/v1beta1.Queue
@@ -1724,11 +1724,11 @@ type PipeParameters struct {
 
 	// Reference to a Queue in sqs to populate source.
 	// +kubebuilder:validation:Optional
-	SourceRef *v1.Reference `json:"sourceRef,omitempty" tf:"-"`
+	SourceRef *v2.Reference `json:"sourceRef,omitempty" tf:"-"`
 
 	// Selector for a Queue in sqs to populate source.
 	// +kubebuilder:validation:Optional
-	SourceSelector *v1.Selector `json:"sourceSelector,omitempty" tf:"-"`
+	SourceSelector *v2.Selector `json:"sourceSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -1747,11 +1747,11 @@ type PipeParameters struct {
 
 	// Reference to a Queue in sqs to populate target.
 	// +kubebuilder:validation:Optional
-	TargetRef *v1.Reference `json:"targetRef,omitempty" tf:"-"`
+	TargetRef *v2.Reference `json:"targetRef,omitempty" tf:"-"`
 
 	// Selector for a Queue in sqs to populate target.
 	// +kubebuilder:validation:Optional
-	TargetSelector *v1.Selector `json:"targetSelector,omitempty" tf:"-"`
+	TargetSelector *v2.Selector `json:"targetSelector,omitempty" tf:"-"`
 }
 
 type PipelineParameterInitParameters struct {
@@ -2654,8 +2654,8 @@ type VPCParameters struct {
 
 // PipeSpec defines the desired state of Pipe
 type PipeSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     PipeParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   PipeParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -2671,8 +2671,8 @@ type PipeSpec struct {
 
 // PipeStatus defines the observed state of Pipe.
 type PipeStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        PipeObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               PipeObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -7,7 +7,7 @@ kind: Table
 metadata:
   annotations:
     meta.upbound.io/example-id: dynamodb/v1beta2/table
-  name: example
+  name: example-${Rand.RFC1123Subdomain}
 spec:
   forProvider:
     attribute:

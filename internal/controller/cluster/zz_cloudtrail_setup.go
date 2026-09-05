@@ -40,3 +40,16 @@ func SetupGated_cloudtrail(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupWebhookWithManager_cloudtrail registers conversion webhooks for all resource kinds in the group.
+func SetupWebhookWithManager_cloudtrail(mgr ctrl.Manager) error {
+	for _, setup := range []func(ctrl.Manager) error{
+		eventdatastore.SetupWebhookWithManager,
+		trail.SetupWebhookWithManager,
+	} {
+		if err := setup(mgr); err != nil {
+			return err
+		}
+	}
+	return nil
+}

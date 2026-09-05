@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ActionToUseAllowCustomRequestHandlingInitParameters struct {
@@ -1935,11 +1935,11 @@ type RuleGroupReferenceInitParameters struct {
 
 	// Reference to a RuleGroup in wafv2 to populate arn.
 	// +kubebuilder:validation:Optional
-	ArnRef *v1.Reference `json:"arnRef,omitempty" tf:"-"`
+	ArnRef *v2.Reference `json:"arnRef,omitempty" tf:"-"`
 
 	// Selector for a RuleGroup in wafv2 to populate arn.
 	// +kubebuilder:validation:Optional
-	ArnSelector *v1.Selector `json:"arnSelector,omitempty" tf:"-"`
+	ArnSelector *v2.Selector `json:"arnSelector,omitempty" tf:"-"`
 
 	// Override actions for specific rules within the rule group. See below.
 	// Action settings to use in place of rule actions configured inside the rule group. You can specify up to 100 overrides.
@@ -1968,11 +1968,11 @@ type RuleGroupReferenceParameters struct {
 
 	// Reference to a RuleGroup in wafv2 to populate arn.
 	// +kubebuilder:validation:Optional
-	ArnRef *v1.Reference `json:"arnRef,omitempty" tf:"-"`
+	ArnRef *v2.Reference `json:"arnRef,omitempty" tf:"-"`
 
 	// Selector for a RuleGroup in wafv2 to populate arn.
 	// +kubebuilder:validation:Optional
-	ArnSelector *v1.Selector `json:"arnSelector,omitempty" tf:"-"`
+	ArnSelector *v2.Selector `json:"arnSelector,omitempty" tf:"-"`
 
 	// Override actions for specific rules within the rule group. See below.
 	// Action settings to use in place of rule actions configured inside the rule group. You can specify up to 100 overrides.
@@ -2112,11 +2112,11 @@ type WebACLRuleGroupAssociationInitParameters struct {
 
 	// Reference to a WebACL in wafv2 to populate webAclArn.
 	// +kubebuilder:validation:Optional
-	WebACLArnRef *v1.Reference `json:"webAclArnRef,omitempty" tf:"-"`
+	WebACLArnRef *v2.Reference `json:"webAclArnRef,omitempty" tf:"-"`
 
 	// Selector for a WebACL in wafv2 to populate webAclArn.
 	// +kubebuilder:validation:Optional
-	WebACLArnSelector *v1.Selector `json:"webAclArnSelector,omitempty" tf:"-"`
+	WebACLArnSelector *v2.Selector `json:"webAclArnSelector,omitempty" tf:"-"`
 }
 
 type WebACLRuleGroupAssociationObservation struct {
@@ -2201,11 +2201,11 @@ type WebACLRuleGroupAssociationParameters struct {
 
 	// Reference to a WebACL in wafv2 to populate webAclArn.
 	// +kubebuilder:validation:Optional
-	WebACLArnRef *v1.Reference `json:"webAclArnRef,omitempty" tf:"-"`
+	WebACLArnRef *v2.Reference `json:"webAclArnRef,omitempty" tf:"-"`
 
 	// Selector for a WebACL in wafv2 to populate webAclArn.
 	// +kubebuilder:validation:Optional
-	WebACLArnSelector *v1.Selector `json:"webAclArnSelector,omitempty" tf:"-"`
+	WebACLArnSelector *v2.Selector `json:"webAclArnSelector,omitempty" tf:"-"`
 }
 
 type WebACLRuleGroupAssociationVisibilityConfigInitParameters struct {
@@ -2258,8 +2258,8 @@ type WebACLRuleGroupAssociationVisibilityConfigParameters struct {
 
 // WebACLRuleGroupAssociationSpec defines the desired state of WebACLRuleGroupAssociation
 type WebACLRuleGroupAssociationSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     WebACLRuleGroupAssociationParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   WebACLRuleGroupAssociationParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -2275,8 +2275,8 @@ type WebACLRuleGroupAssociationSpec struct {
 
 // WebACLRuleGroupAssociationStatus defines the observed state of WebACLRuleGroupAssociation.
 type WebACLRuleGroupAssociationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        WebACLRuleGroupAssociationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               WebACLRuleGroupAssociationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

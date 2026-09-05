@@ -46,6 +46,55 @@ func (mg *CatalogTable) ResolveReferences( // ResolveReferences of this CatalogT
 	mg.Spec.ForProvider.DatabaseName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DatabaseNameRef = rsp.ResolvedReference
 
+	if mg.Spec.ForProvider.ViewDefinition != nil {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.ViewDefinition.Representations); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("glue.aws.upbound.io", "v1beta2", "Connection", "ConnectionList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ViewDefinition.Representations[i4].ValidationConnection),
+					Extract:      reference.ExternalName(),
+					Namespace:    mg.GetNamespace(),
+					Reference:    mg.Spec.ForProvider.ViewDefinition.Representations[i4].ValidationConnectionRef,
+					Selector:     mg.Spec.ForProvider.ViewDefinition.Representations[i4].ValidationConnectionSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.ViewDefinition.Representations[i4].ValidationConnection")
+			}
+			mg.Spec.ForProvider.ViewDefinition.Representations[i4].ValidationConnection = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.ViewDefinition.Representations[i4].ValidationConnectionRef = rsp.ResolvedReference
+
+		}
+	}
+	if mg.Spec.InitProvider.ViewDefinition != nil {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.ViewDefinition.Representations); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("glue.aws.upbound.io", "v1beta2", "Connection", "ConnectionList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ViewDefinition.Representations[i4].ValidationConnection),
+					Extract:      reference.ExternalName(),
+					Namespace:    mg.GetNamespace(),
+					Reference:    mg.Spec.InitProvider.ViewDefinition.Representations[i4].ValidationConnectionRef,
+					Selector:     mg.Spec.InitProvider.ViewDefinition.Representations[i4].ValidationConnectionSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.ViewDefinition.Representations[i4].ValidationConnection")
+			}
+			mg.Spec.InitProvider.ViewDefinition.Representations[i4].ValidationConnection = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.ViewDefinition.Representations[i4].ValidationConnectionRef = rsp.ResolvedReference
+
+		}
+	}
+
 	return nil
 }
 
@@ -59,6 +108,28 @@ func (mg *Connection) ResolveReferences(ctx context.Context, c client.Reader) er
 	var mrsp reference.MultiResolutionResponse
 	var err error
 
+	if mg.Spec.ForProvider.AuthenticationConfiguration != nil {
+		{
+			m, l, err = apisresolver.GetManagedResource("secretsmanager.aws.upbound.io", "v1beta1", "Secret", "SecretList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AuthenticationConfiguration.SecretArn),
+				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
+				Reference:    mg.Spec.ForProvider.AuthenticationConfiguration.SecretArnRef,
+				Selector:     mg.Spec.ForProvider.AuthenticationConfiguration.SecretArnSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.AuthenticationConfiguration.SecretArn")
+		}
+		mg.Spec.ForProvider.AuthenticationConfiguration.SecretArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.AuthenticationConfiguration.SecretArnRef = rsp.ResolvedReference
+
+	}
 	if mg.Spec.ForProvider.PhysicalConnectionRequirements != nil {
 		{
 			m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "Subnet", "SubnetList")
@@ -123,6 +194,28 @@ func (mg *Connection) ResolveReferences(ctx context.Context, c client.Reader) er
 		}
 		mg.Spec.ForProvider.PhysicalConnectionRequirements.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
 		mg.Spec.ForProvider.PhysicalConnectionRequirements.SubnetIDRef = rsp.ResolvedReference
+
+	}
+	if mg.Spec.InitProvider.AuthenticationConfiguration != nil {
+		{
+			m, l, err = apisresolver.GetManagedResource("secretsmanager.aws.upbound.io", "v1beta1", "Secret", "SecretList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AuthenticationConfiguration.SecretArn),
+				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
+				Reference:    mg.Spec.InitProvider.AuthenticationConfiguration.SecretArnRef,
+				Selector:     mg.Spec.InitProvider.AuthenticationConfiguration.SecretArnSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.AuthenticationConfiguration.SecretArn")
+		}
+		mg.Spec.InitProvider.AuthenticationConfiguration.SecretArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.AuthenticationConfiguration.SecretArnRef = rsp.ResolvedReference
 
 	}
 	if mg.Spec.InitProvider.PhysicalConnectionRequirements != nil {

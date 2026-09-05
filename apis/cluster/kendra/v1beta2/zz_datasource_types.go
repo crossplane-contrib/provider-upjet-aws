@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AccessControlListConfigurationInitParameters struct {
@@ -60,11 +60,11 @@ type BasicAuthenticationInitParameters struct {
 
 	// Reference to a Secret in secretsmanager to populate credentials.
 	// +kubebuilder:validation:Optional
-	CredentialsRef *v1.Reference `json:"credentialsRef,omitempty" tf:"-"`
+	CredentialsRef *v2.Reference `json:"credentialsRef,omitempty" tf:"-"`
 
 	// Selector for a Secret in secretsmanager to populate credentials.
 	// +kubebuilder:validation:Optional
-	CredentialsSelector *v1.Selector `json:"credentialsSelector,omitempty" tf:"-"`
+	CredentialsSelector *v2.Selector `json:"credentialsSelector,omitempty" tf:"-"`
 
 	// The name of the website host you want to connect to via a web proxy server. For example, the host name of https://a.example.com/page1.html is "a.example.com".
 	Host *string `json:"host,omitempty" tf:"host,omitempty"`
@@ -95,11 +95,11 @@ type BasicAuthenticationParameters struct {
 
 	// Reference to a Secret in secretsmanager to populate credentials.
 	// +kubebuilder:validation:Optional
-	CredentialsRef *v1.Reference `json:"credentialsRef,omitempty" tf:"-"`
+	CredentialsRef *v2.Reference `json:"credentialsRef,omitempty" tf:"-"`
 
 	// Selector for a Secret in secretsmanager to populate credentials.
 	// +kubebuilder:validation:Optional
-	CredentialsSelector *v1.Selector `json:"credentialsSelector,omitempty" tf:"-"`
+	CredentialsSelector *v2.Selector `json:"credentialsSelector,omitempty" tf:"-"`
 
 	// The name of the website host you want to connect to via a web proxy server. For example, the host name of https://a.example.com/page1.html is "a.example.com".
 	// +kubebuilder:validation:Optional
@@ -304,11 +304,11 @@ type DataSourceInitParameters struct {
 
 	// Reference to a Index in kendra to populate indexId.
 	// +kubebuilder:validation:Optional
-	IndexIDRef *v1.Reference `json:"indexIdRef,omitempty" tf:"-"`
+	IndexIDRef *v2.Reference `json:"indexIdRef,omitempty" tf:"-"`
 
 	// Selector for a Index in kendra to populate indexId.
 	// +kubebuilder:validation:Optional
-	IndexIDSelector *v1.Selector `json:"indexIdSelector,omitempty" tf:"-"`
+	IndexIDSelector *v2.Selector `json:"indexIdSelector,omitempty" tf:"-"`
 
 	// The code for a language. This allows you to support a language for all documents when creating the Data Source connector. English is supported by default. For more information on supported languages, including their codes, see Adding documents in languages other than English.
 	LanguageCode *string `json:"languageCode,omitempty" tf:"language_code,omitempty"`
@@ -323,11 +323,11 @@ type DataSourceInitParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.Reference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// Sets the frequency for Amazon Kendra to check the documents in your Data Source repository and update the index. If you don't set a schedule Amazon Kendra will not periodically update the index. You can call the StartDataSourceSyncJob API to update the index.
 	Schedule *string `json:"schedule,omitempty" tf:"schedule,omitempty"`
@@ -425,11 +425,11 @@ type DataSourceParameters struct {
 
 	// Reference to a Index in kendra to populate indexId.
 	// +kubebuilder:validation:Optional
-	IndexIDRef *v1.Reference `json:"indexIdRef,omitempty" tf:"-"`
+	IndexIDRef *v2.Reference `json:"indexIdRef,omitempty" tf:"-"`
 
 	// Selector for a Index in kendra to populate indexId.
 	// +kubebuilder:validation:Optional
-	IndexIDSelector *v1.Selector `json:"indexIdSelector,omitempty" tf:"-"`
+	IndexIDSelector *v2.Selector `json:"indexIdSelector,omitempty" tf:"-"`
 
 	// The code for a language. This allows you to support a language for all documents when creating the Data Source connector. English is supported by default. For more information on supported languages, including their codes, see Adding documents in languages other than English.
 	// +kubebuilder:validation:Optional
@@ -452,11 +452,11 @@ type DataSourceParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.Reference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// Sets the frequency for Amazon Kendra to check the documents in your Data Source repository and update the index. If you don't set a schedule Amazon Kendra will not periodically update the index. You can call the StartDataSourceSyncJob API to update the index.
 	// +kubebuilder:validation:Optional
@@ -793,11 +793,11 @@ type ProxyConfigurationInitParameters struct {
 
 	// Reference to a Secret in secretsmanager to populate credentials.
 	// +kubebuilder:validation:Optional
-	CredentialsRef *v1.Reference `json:"credentialsRef,omitempty" tf:"-"`
+	CredentialsRef *v2.Reference `json:"credentialsRef,omitempty" tf:"-"`
 
 	// Selector for a Secret in secretsmanager to populate credentials.
 	// +kubebuilder:validation:Optional
-	CredentialsSelector *v1.Selector `json:"credentialsSelector,omitempty" tf:"-"`
+	CredentialsSelector *v2.Selector `json:"credentialsSelector,omitempty" tf:"-"`
 
 	// The name of the website host you want to connect to via a web proxy server. For example, the host name of https://a.example.com/page1.html is "a.example.com".
 	Host *string `json:"host,omitempty" tf:"host,omitempty"`
@@ -828,11 +828,11 @@ type ProxyConfigurationParameters struct {
 
 	// Reference to a Secret in secretsmanager to populate credentials.
 	// +kubebuilder:validation:Optional
-	CredentialsRef *v1.Reference `json:"credentialsRef,omitempty" tf:"-"`
+	CredentialsRef *v2.Reference `json:"credentialsRef,omitempty" tf:"-"`
 
 	// Selector for a Secret in secretsmanager to populate credentials.
 	// +kubebuilder:validation:Optional
-	CredentialsSelector *v1.Selector `json:"credentialsSelector,omitempty" tf:"-"`
+	CredentialsSelector *v2.Selector `json:"credentialsSelector,omitempty" tf:"-"`
 
 	// The name of the website host you want to connect to via a web proxy server. For example, the host name of https://a.example.com/page1.html is "a.example.com".
 	// +kubebuilder:validation:Optional
@@ -855,11 +855,11 @@ type S3ConfigurationInitParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucketName.
 	// +kubebuilder:validation:Optional
-	BucketNameRef *v1.Reference `json:"bucketNameRef,omitempty" tf:"-"`
+	BucketNameRef *v2.Reference `json:"bucketNameRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucketName.
 	// +kubebuilder:validation:Optional
-	BucketNameSelector *v1.Selector `json:"bucketNameSelector,omitempty" tf:"-"`
+	BucketNameSelector *v2.Selector `json:"bucketNameSelector,omitempty" tf:"-"`
 
 	// A block that defines the Document metadata files that contain information such as the document access control information, source URI, document author, and custom attributes. Each metadata file contains metadata about a single document. Detailed below.
 	DocumentsMetadataConfiguration *DocumentsMetadataConfigurationInitParameters `json:"documentsMetadataConfiguration,omitempty" tf:"documents_metadata_configuration,omitempty"`
@@ -915,11 +915,11 @@ type S3ConfigurationParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucketName.
 	// +kubebuilder:validation:Optional
-	BucketNameRef *v1.Reference `json:"bucketNameRef,omitempty" tf:"-"`
+	BucketNameRef *v2.Reference `json:"bucketNameRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucketName.
 	// +kubebuilder:validation:Optional
-	BucketNameSelector *v1.Selector `json:"bucketNameSelector,omitempty" tf:"-"`
+	BucketNameSelector *v2.Selector `json:"bucketNameSelector,omitempty" tf:"-"`
 
 	// A block that defines the Document metadata files that contain information such as the document access control information, source URI, document author, and custom attributes. Each metadata file contains metadata about a single document. Detailed below.
 	// +kubebuilder:validation:Optional
@@ -1238,8 +1238,8 @@ type WebCrawlerConfigurationParameters struct {
 
 // DataSourceSpec defines the desired state of DataSource
 type DataSourceSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     DataSourceParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   DataSourceParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -1255,8 +1255,8 @@ type DataSourceSpec struct {
 
 // DataSourceStatus defines the observed state of DataSource.
 type DataSourceStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        DataSourceObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               DataSourceObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

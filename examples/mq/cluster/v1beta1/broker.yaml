@@ -20,9 +20,9 @@ spec:
     securityGroupRefs:
     - name: example
     engineType: ActiveMQ
-    engineVersion: "5.18"
+    engineVersion: "5.19"
     autoMinorVersionUpgrade: true
-    hostInstanceType: mq.m5.large
+    hostInstanceType: mq.t3.micro
     user:
     - passwordSecretRef:
         key: password

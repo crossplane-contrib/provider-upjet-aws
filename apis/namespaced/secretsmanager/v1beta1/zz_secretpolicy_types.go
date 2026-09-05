@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type SecretPolicyInitParameters struct {
@@ -29,11 +28,11 @@ type SecretPolicyInitParameters struct {
 
 	// Reference to a Secret in secretsmanager to populate secretArn.
 	// +kubebuilder:validation:Optional
-	SecretArnRef *v1.NamespacedReference `json:"secretArnRef,omitempty" tf:"-"`
+	SecretArnRef *v2.NamespacedReference `json:"secretArnRef,omitempty" tf:"-"`
 
 	// Selector for a Secret in secretsmanager to populate secretArn.
 	// +kubebuilder:validation:Optional
-	SecretArnSelector *v1.NamespacedSelector `json:"secretArnSelector,omitempty" tf:"-"`
+	SecretArnSelector *v2.NamespacedSelector `json:"secretArnSelector,omitempty" tf:"-"`
 }
 
 type SecretPolicyObservation struct {
@@ -78,11 +77,11 @@ type SecretPolicyParameters struct {
 
 	// Reference to a Secret in secretsmanager to populate secretArn.
 	// +kubebuilder:validation:Optional
-	SecretArnRef *v1.NamespacedReference `json:"secretArnRef,omitempty" tf:"-"`
+	SecretArnRef *v2.NamespacedReference `json:"secretArnRef,omitempty" tf:"-"`
 
 	// Selector for a Secret in secretsmanager to populate secretArn.
 	// +kubebuilder:validation:Optional
-	SecretArnSelector *v1.NamespacedSelector `json:"secretArnSelector,omitempty" tf:"-"`
+	SecretArnSelector *v2.NamespacedSelector `json:"secretArnSelector,omitempty" tf:"-"`
 }
 
 // SecretPolicySpec defines the desired state of SecretPolicy
@@ -104,8 +103,8 @@ type SecretPolicySpec struct {
 
 // SecretPolicyStatus defines the observed state of SecretPolicy.
 type SecretPolicyStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SecretPolicyObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SecretPolicyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

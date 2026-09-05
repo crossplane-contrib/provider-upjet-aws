@@ -37,7 +37,6 @@ spec:
     backupRetentionPeriod: 14
     instanceClass: db.t3.micro
     engine: postgres
-    engineVersion: "13.7"
     username: adminuser
     autoGeneratePassword: true
     passwordSecretRef:

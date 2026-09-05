@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type BucketAnalyticsConfigurationFilterInitParameters struct {
@@ -55,11 +54,11 @@ type BucketAnalyticsConfigurationInitParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketRef *v1.NamespacedReference `json:"bucketRef,omitempty" tf:"-"`
+	BucketRef *v2.NamespacedReference `json:"bucketRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketSelector *v1.NamespacedSelector `json:"bucketSelector,omitempty" tf:"-"`
+	BucketSelector *v2.NamespacedSelector `json:"bucketSelector,omitempty" tf:"-"`
 
 	// Object filtering that accepts a prefix, tags, or a logical AND of prefix and tags (documented below).
 	Filter *BucketAnalyticsConfigurationFilterInitParameters `json:"filter,omitempty" tf:"filter,omitempty"`
@@ -102,11 +101,11 @@ type BucketAnalyticsConfigurationParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketRef *v1.NamespacedReference `json:"bucketRef,omitempty" tf:"-"`
+	BucketRef *v2.NamespacedReference `json:"bucketRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketSelector *v1.NamespacedSelector `json:"bucketSelector,omitempty" tf:"-"`
+	BucketSelector *v2.NamespacedSelector `json:"bucketSelector,omitempty" tf:"-"`
 
 	// Object filtering that accepts a prefix, tags, or a logical AND of prefix and tags (documented below).
 	// +kubebuilder:validation:Optional
@@ -186,11 +185,11 @@ type S3BucketDestinationInitParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucketArn.
 	// +kubebuilder:validation:Optional
-	BucketArnRef *v1.NamespacedReference `json:"bucketArnRef,omitempty" tf:"-"`
+	BucketArnRef *v2.NamespacedReference `json:"bucketArnRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucketArn.
 	// +kubebuilder:validation:Optional
-	BucketArnSelector *v1.NamespacedSelector `json:"bucketArnSelector,omitempty" tf:"-"`
+	BucketArnSelector *v2.NamespacedSelector `json:"bucketArnSelector,omitempty" tf:"-"`
 
 	// Output format of exported analytics data. Allowed values: CSV. Default value: CSV.
 	Format *string `json:"format,omitempty" tf:"format,omitempty"`
@@ -228,11 +227,11 @@ type S3BucketDestinationParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucketArn.
 	// +kubebuilder:validation:Optional
-	BucketArnRef *v1.NamespacedReference `json:"bucketArnRef,omitempty" tf:"-"`
+	BucketArnRef *v2.NamespacedReference `json:"bucketArnRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucketArn.
 	// +kubebuilder:validation:Optional
-	BucketArnSelector *v1.NamespacedSelector `json:"bucketArnSelector,omitempty" tf:"-"`
+	BucketArnSelector *v2.NamespacedSelector `json:"bucketArnSelector,omitempty" tf:"-"`
 
 	// Output format of exported analytics data. Allowed values: CSV. Default value: CSV.
 	// +kubebuilder:validation:Optional
@@ -281,8 +280,8 @@ type BucketAnalyticsConfigurationSpec struct {
 
 // BucketAnalyticsConfigurationStatus defines the observed state of BucketAnalyticsConfiguration.
 type BucketAnalyticsConfigurationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        BucketAnalyticsConfigurationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               BucketAnalyticsConfigurationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

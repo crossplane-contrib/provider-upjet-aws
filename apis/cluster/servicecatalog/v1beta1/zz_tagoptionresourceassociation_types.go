@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type TagOptionResourceAssociationInitParameters struct {
@@ -21,11 +21,11 @@ type TagOptionResourceAssociationInitParameters struct {
 
 	// Reference to a Product in servicecatalog to populate resourceId.
 	// +kubebuilder:validation:Optional
-	ResourceIDRef *v1.Reference `json:"resourceIdRef,omitempty" tf:"-"`
+	ResourceIDRef *v2.Reference `json:"resourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Product in servicecatalog to populate resourceId.
 	// +kubebuilder:validation:Optional
-	ResourceIDSelector *v1.Selector `json:"resourceIdSelector,omitempty" tf:"-"`
+	ResourceIDSelector *v2.Selector `json:"resourceIdSelector,omitempty" tf:"-"`
 
 	// Tag Option identifier.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/servicecatalog/v1beta1.TagOption
@@ -33,11 +33,11 @@ type TagOptionResourceAssociationInitParameters struct {
 
 	// Reference to a TagOption in servicecatalog to populate tagOptionId.
 	// +kubebuilder:validation:Optional
-	TagOptionIDRef *v1.Reference `json:"tagOptionIdRef,omitempty" tf:"-"`
+	TagOptionIDRef *v2.Reference `json:"tagOptionIdRef,omitempty" tf:"-"`
 
 	// Selector for a TagOption in servicecatalog to populate tagOptionId.
 	// +kubebuilder:validation:Optional
-	TagOptionIDSelector *v1.Selector `json:"tagOptionIdSelector,omitempty" tf:"-"`
+	TagOptionIDSelector *v2.Selector `json:"tagOptionIdSelector,omitempty" tf:"-"`
 }
 
 type TagOptionResourceAssociationObservation struct {
@@ -82,11 +82,11 @@ type TagOptionResourceAssociationParameters struct {
 
 	// Reference to a Product in servicecatalog to populate resourceId.
 	// +kubebuilder:validation:Optional
-	ResourceIDRef *v1.Reference `json:"resourceIdRef,omitempty" tf:"-"`
+	ResourceIDRef *v2.Reference `json:"resourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Product in servicecatalog to populate resourceId.
 	// +kubebuilder:validation:Optional
-	ResourceIDSelector *v1.Selector `json:"resourceIdSelector,omitempty" tf:"-"`
+	ResourceIDSelector *v2.Selector `json:"resourceIdSelector,omitempty" tf:"-"`
 
 	// Tag Option identifier.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/servicecatalog/v1beta1.TagOption
@@ -95,17 +95,17 @@ type TagOptionResourceAssociationParameters struct {
 
 	// Reference to a TagOption in servicecatalog to populate tagOptionId.
 	// +kubebuilder:validation:Optional
-	TagOptionIDRef *v1.Reference `json:"tagOptionIdRef,omitempty" tf:"-"`
+	TagOptionIDRef *v2.Reference `json:"tagOptionIdRef,omitempty" tf:"-"`
 
 	// Selector for a TagOption in servicecatalog to populate tagOptionId.
 	// +kubebuilder:validation:Optional
-	TagOptionIDSelector *v1.Selector `json:"tagOptionIdSelector,omitempty" tf:"-"`
+	TagOptionIDSelector *v2.Selector `json:"tagOptionIdSelector,omitempty" tf:"-"`
 }
 
 // TagOptionResourceAssociationSpec defines the desired state of TagOptionResourceAssociation
 type TagOptionResourceAssociationSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     TagOptionResourceAssociationParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   TagOptionResourceAssociationParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -121,8 +121,8 @@ type TagOptionResourceAssociationSpec struct {
 
 // TagOptionResourceAssociationStatus defines the observed state of TagOptionResourceAssociation.
 type TagOptionResourceAssociationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        TagOptionResourceAssociationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               TagOptionResourceAssociationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

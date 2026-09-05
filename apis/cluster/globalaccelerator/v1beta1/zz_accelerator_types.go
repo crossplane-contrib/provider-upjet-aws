@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AcceleratorInitParameters struct {
@@ -165,8 +165,8 @@ type IPSetsParameters struct {
 
 // AcceleratorSpec defines the desired state of Accelerator
 type AcceleratorSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     AcceleratorParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   AcceleratorParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -182,8 +182,8 @@ type AcceleratorSpec struct {
 
 // AcceleratorStatus defines the observed state of Accelerator.
 type AcceleratorStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        AcceleratorObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               AcceleratorObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type EncryptionEntitiesInitParameters struct {
@@ -33,11 +32,11 @@ type EncryptionEntitiesItemsInitParameters struct {
 
 	// Reference to a PublicKey in cloudfront to populate publicKeyId.
 	// +kubebuilder:validation:Optional
-	PublicKeyIDRef *v1.NamespacedReference `json:"publicKeyIdRef,omitempty" tf:"-"`
+	PublicKeyIDRef *v2.NamespacedReference `json:"publicKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a PublicKey in cloudfront to populate publicKeyId.
 	// +kubebuilder:validation:Optional
-	PublicKeyIDSelector *v1.NamespacedSelector `json:"publicKeyIdSelector,omitempty" tf:"-"`
+	PublicKeyIDSelector *v2.NamespacedSelector `json:"publicKeyIdSelector,omitempty" tf:"-"`
 }
 
 type EncryptionEntitiesItemsObservation struct {
@@ -70,11 +69,11 @@ type EncryptionEntitiesItemsParameters struct {
 
 	// Reference to a PublicKey in cloudfront to populate publicKeyId.
 	// +kubebuilder:validation:Optional
-	PublicKeyIDRef *v1.NamespacedReference `json:"publicKeyIdRef,omitempty" tf:"-"`
+	PublicKeyIDRef *v2.NamespacedReference `json:"publicKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a PublicKey in cloudfront to populate publicKeyId.
 	// +kubebuilder:validation:Optional
-	PublicKeyIDSelector *v1.NamespacedSelector `json:"publicKeyIdSelector,omitempty" tf:"-"`
+	PublicKeyIDSelector *v2.NamespacedSelector `json:"publicKeyIdSelector,omitempty" tf:"-"`
 }
 
 type EncryptionEntitiesObservation struct {
@@ -176,8 +175,8 @@ type FieldLevelEncryptionProfileSpec struct {
 
 // FieldLevelEncryptionProfileStatus defines the observed state of FieldLevelEncryptionProfile.
 type FieldLevelEncryptionProfileStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        FieldLevelEncryptionProfileObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               FieldLevelEncryptionProfileObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

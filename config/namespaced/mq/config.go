@@ -68,6 +68,19 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 			},
 		}
 		r.LateInitializer.IgnoredFields = append(r.LateInitializer.IgnoredFields, "maintenance_window_start_time")
+		r.TerraformCustomDiff = func(diff *terraform.InstanceDiff, _ *terraform.InstanceState, _ *terraform.ResourceConfig) (*terraform.InstanceDiff, error) {
+			if diff == nil || diff.Empty() || diff.Destroy || diff.Attributes == nil {
+				return diff, nil
+			}
+			srDiff, ok := diff.GetAttribute("shared_resources.#")
+			if !ok {
+				return diff, nil
+			}
+			if srDiff.Old == "" && srDiff.New == "" {
+				delete(diff.Attributes, "shared_resources.#")
+			}
+			return diff, nil
+		}
 	})
 
 	p.AddResourceConfigurator("aws_mq_user", func(r *config.Resource) {

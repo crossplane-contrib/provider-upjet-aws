@@ -5,164 +5,164 @@
 
 package v1beta1
 
-import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+import xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 
 // GetCondition of this CompositeAlarm.
-func (mg *CompositeAlarm) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *CompositeAlarm) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this CompositeAlarm.
-func (mg *CompositeAlarm) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *CompositeAlarm) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this CompositeAlarm.
-func (mg *CompositeAlarm) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *CompositeAlarm) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this CompositeAlarm.
-func (mg *CompositeAlarm) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *CompositeAlarm) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this CompositeAlarm.
-func (mg *CompositeAlarm) SetConditions(c ...xpv1.Condition) {
+func (mg *CompositeAlarm) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this CompositeAlarm.
-func (mg *CompositeAlarm) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *CompositeAlarm) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this CompositeAlarm.
-func (mg *CompositeAlarm) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *CompositeAlarm) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this CompositeAlarm.
-func (mg *CompositeAlarm) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *CompositeAlarm) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this Dashboard.
-func (mg *Dashboard) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *Dashboard) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this Dashboard.
-func (mg *Dashboard) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *Dashboard) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this Dashboard.
-func (mg *Dashboard) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *Dashboard) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this Dashboard.
-func (mg *Dashboard) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *Dashboard) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this Dashboard.
-func (mg *Dashboard) SetConditions(c ...xpv1.Condition) {
+func (mg *Dashboard) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this Dashboard.
-func (mg *Dashboard) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *Dashboard) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this Dashboard.
-func (mg *Dashboard) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *Dashboard) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this Dashboard.
-func (mg *Dashboard) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *Dashboard) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this MetricAlarm.
-func (mg *MetricAlarm) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *MetricAlarm) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this MetricAlarm.
-func (mg *MetricAlarm) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *MetricAlarm) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this MetricAlarm.
-func (mg *MetricAlarm) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *MetricAlarm) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this MetricAlarm.
-func (mg *MetricAlarm) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *MetricAlarm) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this MetricAlarm.
-func (mg *MetricAlarm) SetConditions(c ...xpv1.Condition) {
+func (mg *MetricAlarm) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this MetricAlarm.
-func (mg *MetricAlarm) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *MetricAlarm) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this MetricAlarm.
-func (mg *MetricAlarm) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *MetricAlarm) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this MetricAlarm.
-func (mg *MetricAlarm) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *MetricAlarm) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this MetricStream.
-func (mg *MetricStream) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *MetricStream) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this MetricStream.
-func (mg *MetricStream) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *MetricStream) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this MetricStream.
-func (mg *MetricStream) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *MetricStream) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this MetricStream.
-func (mg *MetricStream) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *MetricStream) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this MetricStream.
-func (mg *MetricStream) SetConditions(c ...xpv1.Condition) {
+func (mg *MetricStream) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this MetricStream.
-func (mg *MetricStream) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *MetricStream) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this MetricStream.
-func (mg *MetricStream) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *MetricStream) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this MetricStream.
-func (mg *MetricStream) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *MetricStream) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

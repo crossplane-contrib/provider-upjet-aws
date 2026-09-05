@@ -64,8 +64,9 @@ spec:
                       the MLflow Tracking Server artifact store.
                     type: string
                   automaticModelRegistration:
-                    description: A list of Member Definitions that contains objects
-                      that identify the workers that make up the work team.
+                    description: Whether to enable or disable automatic registration
+                      of new MLflow models to the SageMaker Model Registry. Defaults
+                      to false.
                     type: boolean
                   mlflowVersion:
                     description: The version of MLflow that the tracking server uses.
@@ -204,8 +205,9 @@ spec:
                       the MLflow Tracking Server artifact store.
                     type: string
                   automaticModelRegistration:
-                    description: A list of Member Definitions that contains objects
-                      that identify the workers that make up the work team.
+                    description: Whether to enable or disable automatic registration
+                      of new MLflow models to the SageMaker Model Registry. Defaults
+                      to false.
                     type: boolean
                   mlflowVersion:
                     description: The version of MLflow that the tracking server uses.
@@ -397,8 +399,9 @@ spec:
                       the MLflow Tracking Server artifact store.
                     type: string
                   automaticModelRegistration:
-                    description: A list of Member Definitions that contains objects
-                      that identify the workers that make up the work team.
+                    description: Whether to enable or disable automatic registration
+                      of new MLflow models to the SageMaker Model Registry. Defaults
+                      to false.
                     type: boolean
                   id:
                     description: The name of the MLFlow Tracking Server.
@@ -498,6 +501,13 @@ spec:
                 x-kubernetes-list-map-keys:
                 - type
                 x-kubernetes-list-type: map
+              lastHandledReconcileAt:
+                description: |-
+                  LastHandledReconcileAt holds the value of the most recent
+                  reconcile-requested-at annotation token that the controller has
+                  processed. Users can compare this to the annotation to determine
+                  whether a reconcile request has been handled.
+                type: string
               observedGeneration:
                 description: |-
                   ObservedGeneration is the latest metadata.generation

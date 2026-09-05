@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type RequestValidatorInitParameters struct {
@@ -25,11 +25,11 @@ type RequestValidatorInitParameters struct {
 
 	// Reference to a RestAPI in apigateway to populate restApiId.
 	// +kubebuilder:validation:Optional
-	RestAPIIDRef *v1.Reference `json:"restApiIdRef,omitempty" tf:"-"`
+	RestAPIIDRef *v2.Reference `json:"restApiIdRef,omitempty" tf:"-"`
 
 	// Selector for a RestAPI in apigateway to populate restApiId.
 	// +kubebuilder:validation:Optional
-	RestAPIIDSelector *v1.Selector `json:"restApiIdSelector,omitempty" tf:"-"`
+	RestAPIIDSelector *v2.Selector `json:"restApiIdSelector,omitempty" tf:"-"`
 
 	// Boolean whether to validate request body. Defaults to false.
 	ValidateRequestBody *bool `json:"validateRequestBody,omitempty" tf:"validate_request_body,omitempty"`
@@ -79,11 +79,11 @@ type RequestValidatorParameters struct {
 
 	// Reference to a RestAPI in apigateway to populate restApiId.
 	// +kubebuilder:validation:Optional
-	RestAPIIDRef *v1.Reference `json:"restApiIdRef,omitempty" tf:"-"`
+	RestAPIIDRef *v2.Reference `json:"restApiIdRef,omitempty" tf:"-"`
 
 	// Selector for a RestAPI in apigateway to populate restApiId.
 	// +kubebuilder:validation:Optional
-	RestAPIIDSelector *v1.Selector `json:"restApiIdSelector,omitempty" tf:"-"`
+	RestAPIIDSelector *v2.Selector `json:"restApiIdSelector,omitempty" tf:"-"`
 
 	// Boolean whether to validate request body. Defaults to false.
 	// +kubebuilder:validation:Optional
@@ -96,8 +96,8 @@ type RequestValidatorParameters struct {
 
 // RequestValidatorSpec defines the desired state of RequestValidator
 type RequestValidatorSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     RequestValidatorParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   RequestValidatorParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -113,8 +113,8 @@ type RequestValidatorSpec struct {
 
 // RequestValidatorStatus defines the observed state of RequestValidator.
 type RequestValidatorStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        RequestValidatorObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               RequestValidatorObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

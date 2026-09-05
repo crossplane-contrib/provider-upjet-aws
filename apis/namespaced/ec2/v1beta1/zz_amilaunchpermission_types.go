@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AMILaunchPermissionInitParameters struct {
@@ -28,11 +27,11 @@ type AMILaunchPermissionInitParameters struct {
 
 	// Reference to a AMI in ec2 to populate imageId.
 	// +kubebuilder:validation:Optional
-	ImageIDRef *v1.NamespacedReference `json:"imageIdRef,omitempty" tf:"-"`
+	ImageIDRef *v2.NamespacedReference `json:"imageIdRef,omitempty" tf:"-"`
 
 	// Selector for a AMI in ec2 to populate imageId.
 	// +kubebuilder:validation:Optional
-	ImageIDSelector *v1.NamespacedSelector `json:"imageIdSelector,omitempty" tf:"-"`
+	ImageIDSelector *v2.NamespacedSelector `json:"imageIdSelector,omitempty" tf:"-"`
 
 	// ARN of an organization for the launch permission.
 	OrganizationArn *string `json:"organizationArn,omitempty" tf:"organization_arn,omitempty"`
@@ -83,11 +82,11 @@ type AMILaunchPermissionParameters struct {
 
 	// Reference to a AMI in ec2 to populate imageId.
 	// +kubebuilder:validation:Optional
-	ImageIDRef *v1.NamespacedReference `json:"imageIdRef,omitempty" tf:"-"`
+	ImageIDRef *v2.NamespacedReference `json:"imageIdRef,omitempty" tf:"-"`
 
 	// Selector for a AMI in ec2 to populate imageId.
 	// +kubebuilder:validation:Optional
-	ImageIDSelector *v1.NamespacedSelector `json:"imageIdSelector,omitempty" tf:"-"`
+	ImageIDSelector *v2.NamespacedSelector `json:"imageIdSelector,omitempty" tf:"-"`
 
 	// ARN of an organization for the launch permission.
 	// +kubebuilder:validation:Optional
@@ -122,8 +121,8 @@ type AMILaunchPermissionSpec struct {
 
 // AMILaunchPermissionStatus defines the observed state of AMILaunchPermission.
 type AMILaunchPermissionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        AMILaunchPermissionObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               AMILaunchPermissionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

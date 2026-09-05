@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ProductPortfolioAssociationInitParameters struct {
@@ -24,11 +24,11 @@ type ProductPortfolioAssociationInitParameters struct {
 
 	// Reference to a Portfolio in servicecatalog to populate portfolioId.
 	// +kubebuilder:validation:Optional
-	PortfolioIDRef *v1.Reference `json:"portfolioIdRef,omitempty" tf:"-"`
+	PortfolioIDRef *v2.Reference `json:"portfolioIdRef,omitempty" tf:"-"`
 
 	// Selector for a Portfolio in servicecatalog to populate portfolioId.
 	// +kubebuilder:validation:Optional
-	PortfolioIDSelector *v1.Selector `json:"portfolioIdSelector,omitempty" tf:"-"`
+	PortfolioIDSelector *v2.Selector `json:"portfolioIdSelector,omitempty" tf:"-"`
 
 	// Product identifier.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/servicecatalog/v1beta2.Product
@@ -36,11 +36,11 @@ type ProductPortfolioAssociationInitParameters struct {
 
 	// Reference to a Product in servicecatalog to populate productId.
 	// +kubebuilder:validation:Optional
-	ProductIDRef *v1.Reference `json:"productIdRef,omitempty" tf:"-"`
+	ProductIDRef *v2.Reference `json:"productIdRef,omitempty" tf:"-"`
 
 	// Selector for a Product in servicecatalog to populate productId.
 	// +kubebuilder:validation:Optional
-	ProductIDSelector *v1.Selector `json:"productIdSelector,omitempty" tf:"-"`
+	ProductIDSelector *v2.Selector `json:"productIdSelector,omitempty" tf:"-"`
 
 	// Identifier of the source portfolio.
 	SourcePortfolioID *string `json:"sourcePortfolioId,omitempty" tf:"source_portfolio_id,omitempty"`
@@ -81,11 +81,11 @@ type ProductPortfolioAssociationParameters struct {
 
 	// Reference to a Portfolio in servicecatalog to populate portfolioId.
 	// +kubebuilder:validation:Optional
-	PortfolioIDRef *v1.Reference `json:"portfolioIdRef,omitempty" tf:"-"`
+	PortfolioIDRef *v2.Reference `json:"portfolioIdRef,omitempty" tf:"-"`
 
 	// Selector for a Portfolio in servicecatalog to populate portfolioId.
 	// +kubebuilder:validation:Optional
-	PortfolioIDSelector *v1.Selector `json:"portfolioIdSelector,omitempty" tf:"-"`
+	PortfolioIDSelector *v2.Selector `json:"portfolioIdSelector,omitempty" tf:"-"`
 
 	// Product identifier.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/servicecatalog/v1beta2.Product
@@ -94,11 +94,11 @@ type ProductPortfolioAssociationParameters struct {
 
 	// Reference to a Product in servicecatalog to populate productId.
 	// +kubebuilder:validation:Optional
-	ProductIDRef *v1.Reference `json:"productIdRef,omitempty" tf:"-"`
+	ProductIDRef *v2.Reference `json:"productIdRef,omitempty" tf:"-"`
 
 	// Selector for a Product in servicecatalog to populate productId.
 	// +kubebuilder:validation:Optional
-	ProductIDSelector *v1.Selector `json:"productIdSelector,omitempty" tf:"-"`
+	ProductIDSelector *v2.Selector `json:"productIdSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -112,8 +112,8 @@ type ProductPortfolioAssociationParameters struct {
 
 // ProductPortfolioAssociationSpec defines the desired state of ProductPortfolioAssociation
 type ProductPortfolioAssociationSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ProductPortfolioAssociationParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ProductPortfolioAssociationParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -129,8 +129,8 @@ type ProductPortfolioAssociationSpec struct {
 
 // ProductPortfolioAssociationStatus defines the observed state of ProductPortfolioAssociation.
 type ProductPortfolioAssociationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ProductPortfolioAssociationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ProductPortfolioAssociationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

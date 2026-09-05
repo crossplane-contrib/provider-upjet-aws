@@ -9,7 +9,7 @@
 package v1beta2
 
 import (
-	"github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	"github.com/crossplane/crossplane/apis/v2/core/v2"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 )
 
@@ -632,12 +632,12 @@ func (in *CustomEmailSenderInitParameters) DeepCopyInto(out *CustomEmailSenderIn
 	}
 	if in.LambdaArnRef != nil {
 		in, out := &in.LambdaArnRef, &out.LambdaArnRef
-		*out = new(v1.Reference)
+		*out = new(v2.Reference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.LambdaArnSelector != nil {
 		in, out := &in.LambdaArnSelector, &out.LambdaArnSelector
-		*out = new(v1.Selector)
+		*out = new(v2.Selector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.LambdaVersion != nil {
@@ -692,12 +692,12 @@ func (in *CustomEmailSenderParameters) DeepCopyInto(out *CustomEmailSenderParame
 	}
 	if in.LambdaArnRef != nil {
 		in, out := &in.LambdaArnRef, &out.LambdaArnRef
-		*out = new(v1.Reference)
+		*out = new(v2.Reference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.LambdaArnSelector != nil {
 		in, out := &in.LambdaArnSelector, &out.LambdaArnSelector
-		*out = new(v1.Selector)
+		*out = new(v2.Selector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.LambdaVersion != nil {
@@ -727,12 +727,12 @@ func (in *CustomSMSSenderInitParameters) DeepCopyInto(out *CustomSMSSenderInitPa
 	}
 	if in.LambdaArnRef != nil {
 		in, out := &in.LambdaArnRef, &out.LambdaArnRef
-		*out = new(v1.Reference)
+		*out = new(v2.Reference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.LambdaArnSelector != nil {
 		in, out := &in.LambdaArnSelector, &out.LambdaArnSelector
-		*out = new(v1.Selector)
+		*out = new(v2.Selector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.LambdaVersion != nil {
@@ -787,12 +787,12 @@ func (in *CustomSMSSenderParameters) DeepCopyInto(out *CustomSMSSenderParameters
 	}
 	if in.LambdaArnRef != nil {
 		in, out := &in.LambdaArnRef, &out.LambdaArnRef
-		*out = new(v1.Reference)
+		*out = new(v2.Reference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.LambdaArnSelector != nil {
 		in, out := &in.LambdaArnSelector, &out.LambdaArnSelector
-		*out = new(v1.Selector)
+		*out = new(v2.Selector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.LambdaVersion != nil {
@@ -1257,12 +1257,12 @@ func (in *LambdaConfigInitParameters) DeepCopyInto(out *LambdaConfigInitParamete
 	}
 	if in.CreateAuthChallengeRef != nil {
 		in, out := &in.CreateAuthChallengeRef, &out.CreateAuthChallengeRef
-		*out = new(v1.Reference)
+		*out = new(v2.Reference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.CreateAuthChallengeSelector != nil {
 		in, out := &in.CreateAuthChallengeSelector, &out.CreateAuthChallengeSelector
-		*out = new(v1.Selector)
+		*out = new(v2.Selector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.CustomEmailSender != nil {
@@ -1277,12 +1277,12 @@ func (in *LambdaConfigInitParameters) DeepCopyInto(out *LambdaConfigInitParamete
 	}
 	if in.CustomMessageRef != nil {
 		in, out := &in.CustomMessageRef, &out.CustomMessageRef
-		*out = new(v1.Reference)
+		*out = new(v2.Reference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.CustomMessageSelector != nil {
 		in, out := &in.CustomMessageSelector, &out.CustomMessageSelector
-		*out = new(v1.Selector)
+		*out = new(v2.Selector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.CustomSMSSender != nil {
@@ -1297,12 +1297,12 @@ func (in *LambdaConfigInitParameters) DeepCopyInto(out *LambdaConfigInitParamete
 	}
 	if in.DefineAuthChallengeRef != nil {
 		in, out := &in.DefineAuthChallengeRef, &out.DefineAuthChallengeRef
-		*out = new(v1.Reference)
+		*out = new(v2.Reference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.DefineAuthChallengeSelector != nil {
 		in, out := &in.DefineAuthChallengeSelector, &out.DefineAuthChallengeSelector
-		*out = new(v1.Selector)
+		*out = new(v2.Selector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.KMSKeyID != nil {
@@ -1312,12 +1312,12 @@ func (in *LambdaConfigInitParameters) DeepCopyInto(out *LambdaConfigInitParamete
 	}
 	if in.KMSKeyIDRef != nil {
 		in, out := &in.KMSKeyIDRef, &out.KMSKeyIDRef
-		*out = new(v1.Reference)
+		*out = new(v2.Reference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.KMSKeyIDSelector != nil {
 		in, out := &in.KMSKeyIDSelector, &out.KMSKeyIDSelector
-		*out = new(v1.Selector)
+		*out = new(v2.Selector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.PostAuthentication != nil {
@@ -1327,12 +1327,12 @@ func (in *LambdaConfigInitParameters) DeepCopyInto(out *LambdaConfigInitParamete
 	}
 	if in.PostAuthenticationRef != nil {
 		in, out := &in.PostAuthenticationRef, &out.PostAuthenticationRef
-		*out = new(v1.Reference)
+		*out = new(v2.Reference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.PostAuthenticationSelector != nil {
 		in, out := &in.PostAuthenticationSelector, &out.PostAuthenticationSelector
-		*out = new(v1.Selector)
+		*out = new(v2.Selector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.PostConfirmation != nil {
@@ -1342,12 +1342,12 @@ func (in *LambdaConfigInitParameters) DeepCopyInto(out *LambdaConfigInitParamete
 	}
 	if in.PostConfirmationRef != nil {
 		in, out := &in.PostConfirmationRef, &out.PostConfirmationRef
-		*out = new(v1.Reference)
+		*out = new(v2.Reference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.PostConfirmationSelector != nil {
 		in, out := &in.PostConfirmationSelector, &out.PostConfirmationSelector
-		*out = new(v1.Selector)
+		*out = new(v2.Selector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.PreAuthentication != nil {
@@ -1357,12 +1357,12 @@ func (in *LambdaConfigInitParameters) DeepCopyInto(out *LambdaConfigInitParamete
 	}
 	if in.PreAuthenticationRef != nil {
 		in, out := &in.PreAuthenticationRef, &out.PreAuthenticationRef
-		*out = new(v1.Reference)
+		*out = new(v2.Reference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.PreAuthenticationSelector != nil {
 		in, out := &in.PreAuthenticationSelector, &out.PreAuthenticationSelector
-		*out = new(v1.Selector)
+		*out = new(v2.Selector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.PreSignUp != nil {
@@ -1372,12 +1372,12 @@ func (in *LambdaConfigInitParameters) DeepCopyInto(out *LambdaConfigInitParamete
 	}
 	if in.PreSignUpRef != nil {
 		in, out := &in.PreSignUpRef, &out.PreSignUpRef
-		*out = new(v1.Reference)
+		*out = new(v2.Reference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.PreSignUpSelector != nil {
 		in, out := &in.PreSignUpSelector, &out.PreSignUpSelector
-		*out = new(v1.Selector)
+		*out = new(v2.Selector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.PreTokenGeneration != nil {
@@ -1392,12 +1392,12 @@ func (in *LambdaConfigInitParameters) DeepCopyInto(out *LambdaConfigInitParamete
 	}
 	if in.PreTokenGenerationRef != nil {
 		in, out := &in.PreTokenGenerationRef, &out.PreTokenGenerationRef
-		*out = new(v1.Reference)
+		*out = new(v2.Reference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.PreTokenGenerationSelector != nil {
 		in, out := &in.PreTokenGenerationSelector, &out.PreTokenGenerationSelector
-		*out = new(v1.Selector)
+		*out = new(v2.Selector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.UserMigration != nil {
@@ -1407,12 +1407,12 @@ func (in *LambdaConfigInitParameters) DeepCopyInto(out *LambdaConfigInitParamete
 	}
 	if in.UserMigrationRef != nil {
 		in, out := &in.UserMigrationRef, &out.UserMigrationRef
-		*out = new(v1.Reference)
+		*out = new(v2.Reference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.UserMigrationSelector != nil {
 		in, out := &in.UserMigrationSelector, &out.UserMigrationSelector
-		*out = new(v1.Selector)
+		*out = new(v2.Selector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.VerifyAuthChallengeResponse != nil {
@@ -1422,12 +1422,12 @@ func (in *LambdaConfigInitParameters) DeepCopyInto(out *LambdaConfigInitParamete
 	}
 	if in.VerifyAuthChallengeResponseRef != nil {
 		in, out := &in.VerifyAuthChallengeResponseRef, &out.VerifyAuthChallengeResponseRef
-		*out = new(v1.Reference)
+		*out = new(v2.Reference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.VerifyAuthChallengeResponseSelector != nil {
 		in, out := &in.VerifyAuthChallengeResponseSelector, &out.VerifyAuthChallengeResponseSelector
-		*out = new(v1.Selector)
+		*out = new(v2.Selector)
 		(*in).DeepCopyInto(*out)
 	}
 }
@@ -1537,12 +1537,12 @@ func (in *LambdaConfigParameters) DeepCopyInto(out *LambdaConfigParameters) {
 	}
 	if in.CreateAuthChallengeRef != nil {
 		in, out := &in.CreateAuthChallengeRef, &out.CreateAuthChallengeRef
-		*out = new(v1.Reference)
+		*out = new(v2.Reference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.CreateAuthChallengeSelector != nil {
 		in, out := &in.CreateAuthChallengeSelector, &out.CreateAuthChallengeSelector
-		*out = new(v1.Selector)
+		*out = new(v2.Selector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.CustomEmailSender != nil {
@@ -1557,12 +1557,12 @@ func (in *LambdaConfigParameters) DeepCopyInto(out *LambdaConfigParameters) {
 	}
 	if in.CustomMessageRef != nil {
 		in, out := &in.CustomMessageRef, &out.CustomMessageRef
-		*out = new(v1.Reference)
+		*out = new(v2.Reference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.CustomMessageSelector != nil {
 		in, out := &in.CustomMessageSelector, &out.CustomMessageSelector
-		*out = new(v1.Selector)
+		*out = new(v2.Selector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.CustomSMSSender != nil {
@@ -1577,12 +1577,12 @@ func (in *LambdaConfigParameters) DeepCopyInto(out *LambdaConfigParameters) {
 	}
 	if in.DefineAuthChallengeRef != nil {
 		in, out := &in.DefineAuthChallengeRef, &out.DefineAuthChallengeRef
-		*out = new(v1.Reference)
+		*out = new(v2.Reference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.DefineAuthChallengeSelector != nil {
 		in, out := &in.DefineAuthChallengeSelector, &out.DefineAuthChallengeSelector
-		*out = new(v1.Selector)
+		*out = new(v2.Selector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.KMSKeyID != nil {
@@ -1592,12 +1592,12 @@ func (in *LambdaConfigParameters) DeepCopyInto(out *LambdaConfigParameters) {
 	}
 	if in.KMSKeyIDRef != nil {
 		in, out := &in.KMSKeyIDRef, &out.KMSKeyIDRef
-		*out = new(v1.Reference)
+		*out = new(v2.Reference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.KMSKeyIDSelector != nil {
 		in, out := &in.KMSKeyIDSelector, &out.KMSKeyIDSelector
-		*out = new(v1.Selector)
+		*out = new(v2.Selector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.PostAuthentication != nil {
@@ -1607,12 +1607,12 @@ func (in *LambdaConfigParameters) DeepCopyInto(out *LambdaConfigParameters) {
 	}
 	if in.PostAuthenticationRef != nil {
 		in, out := &in.PostAuthenticationRef, &out.PostAuthenticationRef
-		*out = new(v1.Reference)
+		*out = new(v2.Reference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.PostAuthenticationSelector != nil {
 		in, out := &in.PostAuthenticationSelector, &out.PostAuthenticationSelector
-		*out = new(v1.Selector)
+		*out = new(v2.Selector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.PostConfirmation != nil {
@@ -1622,12 +1622,12 @@ func (in *LambdaConfigParameters) DeepCopyInto(out *LambdaConfigParameters) {
 	}
 	if in.PostConfirmationRef != nil {
 		in, out := &in.PostConfirmationRef, &out.PostConfirmationRef
-		*out = new(v1.Reference)
+		*out = new(v2.Reference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.PostConfirmationSelector != nil {
 		in, out := &in.PostConfirmationSelector, &out.PostConfirmationSelector
-		*out = new(v1.Selector)
+		*out = new(v2.Selector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.PreAuthentication != nil {
@@ -1637,12 +1637,12 @@ func (in *LambdaConfigParameters) DeepCopyInto(out *LambdaConfigParameters) {
 	}
 	if in.PreAuthenticationRef != nil {
 		in, out := &in.PreAuthenticationRef, &out.PreAuthenticationRef
-		*out = new(v1.Reference)
+		*out = new(v2.Reference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.PreAuthenticationSelector != nil {
 		in, out := &in.PreAuthenticationSelector, &out.PreAuthenticationSelector
-		*out = new(v1.Selector)
+		*out = new(v2.Selector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.PreSignUp != nil {
@@ -1652,12 +1652,12 @@ func (in *LambdaConfigParameters) DeepCopyInto(out *LambdaConfigParameters) {
 	}
 	if in.PreSignUpRef != nil {
 		in, out := &in.PreSignUpRef, &out.PreSignUpRef
-		*out = new(v1.Reference)
+		*out = new(v2.Reference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.PreSignUpSelector != nil {
 		in, out := &in.PreSignUpSelector, &out.PreSignUpSelector
-		*out = new(v1.Selector)
+		*out = new(v2.Selector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.PreTokenGeneration != nil {
@@ -1672,12 +1672,12 @@ func (in *LambdaConfigParameters) DeepCopyInto(out *LambdaConfigParameters) {
 	}
 	if in.PreTokenGenerationRef != nil {
 		in, out := &in.PreTokenGenerationRef, &out.PreTokenGenerationRef
-		*out = new(v1.Reference)
+		*out = new(v2.Reference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.PreTokenGenerationSelector != nil {
 		in, out := &in.PreTokenGenerationSelector, &out.PreTokenGenerationSelector
-		*out = new(v1.Selector)
+		*out = new(v2.Selector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.UserMigration != nil {
@@ -1687,12 +1687,12 @@ func (in *LambdaConfigParameters) DeepCopyInto(out *LambdaConfigParameters) {
 	}
 	if in.UserMigrationRef != nil {
 		in, out := &in.UserMigrationRef, &out.UserMigrationRef
-		*out = new(v1.Reference)
+		*out = new(v2.Reference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.UserMigrationSelector != nil {
 		in, out := &in.UserMigrationSelector, &out.UserMigrationSelector
-		*out = new(v1.Selector)
+		*out = new(v2.Selector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.VerifyAuthChallengeResponse != nil {
@@ -1702,12 +1702,12 @@ func (in *LambdaConfigParameters) DeepCopyInto(out *LambdaConfigParameters) {
 	}
 	if in.VerifyAuthChallengeResponseRef != nil {
 		in, out := &in.VerifyAuthChallengeResponseRef, &out.VerifyAuthChallengeResponseRef
-		*out = new(v1.Reference)
+		*out = new(v2.Reference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.VerifyAuthChallengeResponseSelector != nil {
 		in, out := &in.VerifyAuthChallengeResponseSelector, &out.VerifyAuthChallengeResponseSelector
-		*out = new(v1.Selector)
+		*out = new(v2.Selector)
 		(*in).DeepCopyInto(*out)
 	}
 }
@@ -2619,12 +2619,12 @@ func (in *RiskConfigurationInitParameters) DeepCopyInto(out *RiskConfigurationIn
 	}
 	if in.UserPoolIDRef != nil {
 		in, out := &in.UserPoolIDRef, &out.UserPoolIDRef
-		*out = new(v1.Reference)
+		*out = new(v2.Reference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.UserPoolIDSelector != nil {
 		in, out := &in.UserPoolIDSelector, &out.UserPoolIDSelector
-		*out = new(v1.Selector)
+		*out = new(v2.Selector)
 		(*in).DeepCopyInto(*out)
 	}
 }
@@ -2756,12 +2756,12 @@ func (in *RiskConfigurationParameters) DeepCopyInto(out *RiskConfigurationParame
 	}
 	if in.UserPoolIDRef != nil {
 		in, out := &in.UserPoolIDRef, &out.UserPoolIDRef
-		*out = new(v1.Reference)
+		*out = new(v2.Reference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.UserPoolIDSelector != nil {
 		in, out := &in.UserPoolIDSelector, &out.UserPoolIDSelector
-		*out = new(v1.Selector)
+		*out = new(v2.Selector)
 		(*in).DeepCopyInto(*out)
 	}
 }
@@ -2779,7 +2779,7 @@ func (in *RiskConfigurationParameters) DeepCopy() *RiskConfigurationParameters {
 // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
 func (in *RiskConfigurationSpec) DeepCopyInto(out *RiskConfigurationSpec) {
 	*out = *in
-	in.ResourceSpec.DeepCopyInto(&out.ResourceSpec)
+	in.ClusterManagedResourceSpec.DeepCopyInto(&out.ClusterManagedResourceSpec)
 	in.ForProvider.DeepCopyInto(&out.ForProvider)
 	in.InitProvider.DeepCopyInto(&out.InitProvider)
 }
@@ -2797,7 +2797,7 @@ func (in *RiskConfigurationSpec) DeepCopy() *RiskConfigurationSpec {
 // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
 func (in *RiskConfigurationStatus) DeepCopyInto(out *RiskConfigurationStatus) {
 	*out = *in
-	in.ResourceStatus.DeepCopyInto(&out.ResourceStatus)
+	in.ManagedResourceStatus.DeepCopyInto(&out.ManagedResourceStatus)
 	in.AtProvider.DeepCopyInto(&out.AtProvider)
 }
 
@@ -2937,12 +2937,12 @@ func (in *SMSConfigurationInitParameters) DeepCopyInto(out *SMSConfigurationInit
 	}
 	if in.SnsCallerArnRef != nil {
 		in, out := &in.SnsCallerArnRef, &out.SnsCallerArnRef
-		*out = new(v1.Reference)
+		*out = new(v2.Reference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.SnsCallerArnSelector != nil {
 		in, out := &in.SnsCallerArnSelector, &out.SnsCallerArnSelector
-		*out = new(v1.Selector)
+		*out = new(v2.Selector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.SnsRegion != nil {
@@ -3007,12 +3007,12 @@ func (in *SMSConfigurationParameters) DeepCopyInto(out *SMSConfigurationParamete
 	}
 	if in.SnsCallerArnRef != nil {
 		in, out := &in.SnsCallerArnRef, &out.SnsCallerArnRef
-		*out = new(v1.Reference)
+		*out = new(v2.Reference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.SnsCallerArnSelector != nil {
 		in, out := &in.SnsCallerArnSelector, &out.SnsCallerArnSelector
-		*out = new(v1.Selector)
+		*out = new(v2.Selector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.SnsRegion != nil {
@@ -4234,7 +4234,7 @@ func (in *UserPoolParameters) DeepCopy() *UserPoolParameters {
 // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
 func (in *UserPoolSpec) DeepCopyInto(out *UserPoolSpec) {
 	*out = *in
-	in.ResourceSpec.DeepCopyInto(&out.ResourceSpec)
+	in.ClusterManagedResourceSpec.DeepCopyInto(&out.ClusterManagedResourceSpec)
 	in.ForProvider.DeepCopyInto(&out.ForProvider)
 	in.InitProvider.DeepCopyInto(&out.InitProvider)
 }
@@ -4252,7 +4252,7 @@ func (in *UserPoolSpec) DeepCopy() *UserPoolSpec {
 // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
 func (in *UserPoolStatus) DeepCopyInto(out *UserPoolStatus) {
 	*out = *in
-	in.ResourceStatus.DeepCopyInto(&out.ResourceStatus)
+	in.ManagedResourceStatus.DeepCopyInto(&out.ManagedResourceStatus)
 	in.AtProvider.DeepCopyInto(&out.AtProvider)
 }
 

@@ -9,7 +9,7 @@
 package v1beta2
 
 import (
-	"github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	"github.com/crossplane/crossplane/apis/v2/core/v2"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 )
 
@@ -117,14 +117,14 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 	}
 	if in.IAMRoleRefs != nil {
 		in, out := &in.IAMRoleRefs, &out.IAMRoleRefs
-		*out = make([]v1.Reference, len(*in))
+		*out = make([]v2.Reference, len(*in))
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
 	if in.IAMRoleSelector != nil {
 		in, out := &in.IAMRoleSelector, &out.IAMRoleSelector
-		*out = new(v1.Selector)
+		*out = new(v2.Selector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.IAMRoles != nil {
@@ -145,12 +145,12 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 	}
 	if in.KMSKeyArnRef != nil {
 		in, out := &in.KMSKeyArnRef, &out.KMSKeyArnRef
-		*out = new(v1.Reference)
+		*out = new(v2.Reference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.KMSKeyArnSelector != nil {
 		in, out := &in.KMSKeyArnSelector, &out.KMSKeyArnSelector
-		*out = new(v1.Selector)
+		*out = new(v2.Selector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.NeptuneClusterParameterGroupName != nil {
@@ -160,12 +160,12 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 	}
 	if in.NeptuneClusterParameterGroupNameRef != nil {
 		in, out := &in.NeptuneClusterParameterGroupNameRef, &out.NeptuneClusterParameterGroupNameRef
-		*out = new(v1.Reference)
+		*out = new(v2.Reference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.NeptuneClusterParameterGroupNameSelector != nil {
 		in, out := &in.NeptuneClusterParameterGroupNameSelector, &out.NeptuneClusterParameterGroupNameSelector
-		*out = new(v1.Selector)
+		*out = new(v2.Selector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.NeptuneInstanceParameterGroupName != nil {
@@ -180,12 +180,12 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 	}
 	if in.NeptuneSubnetGroupNameRef != nil {
 		in, out := &in.NeptuneSubnetGroupNameRef, &out.NeptuneSubnetGroupNameRef
-		*out = new(v1.Reference)
+		*out = new(v2.Reference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.NeptuneSubnetGroupNameSelector != nil {
 		in, out := &in.NeptuneSubnetGroupNameSelector, &out.NeptuneSubnetGroupNameSelector
-		*out = new(v1.Selector)
+		*out = new(v2.Selector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.Port != nil {
@@ -210,12 +210,12 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 	}
 	if in.ReplicationSourceIdentifierRef != nil {
 		in, out := &in.ReplicationSourceIdentifierRef, &out.ReplicationSourceIdentifierRef
-		*out = new(v1.Reference)
+		*out = new(v2.Reference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.ReplicationSourceIdentifierSelector != nil {
 		in, out := &in.ReplicationSourceIdentifierSelector, &out.ReplicationSourceIdentifierSelector
-		*out = new(v1.Selector)
+		*out = new(v2.Selector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.ServerlessV2ScalingConfiguration != nil {
@@ -235,12 +235,12 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 	}
 	if in.SnapshotIdentifierRef != nil {
 		in, out := &in.SnapshotIdentifierRef, &out.SnapshotIdentifierRef
-		*out = new(v1.Reference)
+		*out = new(v2.Reference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.SnapshotIdentifierSelector != nil {
 		in, out := &in.SnapshotIdentifierSelector, &out.SnapshotIdentifierSelector
-		*out = new(v1.Selector)
+		*out = new(v2.Selector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.StorageEncrypted != nil {
@@ -271,14 +271,14 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 	}
 	if in.VPCSecurityGroupIDRefs != nil {
 		in, out := &in.VPCSecurityGroupIDRefs, &out.VPCSecurityGroupIDRefs
-		*out = make([]v1.Reference, len(*in))
+		*out = make([]v2.Reference, len(*in))
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
 	if in.VPCSecurityGroupIDSelector != nil {
 		in, out := &in.VPCSecurityGroupIDSelector, &out.VPCSecurityGroupIDSelector
-		*out = new(v1.Selector)
+		*out = new(v2.Selector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.VPCSecurityGroupIds != nil {
@@ -665,14 +665,14 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 	}
 	if in.IAMRoleRefs != nil {
 		in, out := &in.IAMRoleRefs, &out.IAMRoleRefs
-		*out = make([]v1.Reference, len(*in))
+		*out = make([]v2.Reference, len(*in))
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
 	if in.IAMRoleSelector != nil {
 		in, out := &in.IAMRoleSelector, &out.IAMRoleSelector
-		*out = new(v1.Selector)
+		*out = new(v2.Selector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.IAMRoles != nil {
@@ -693,12 +693,12 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 	}
 	if in.KMSKeyArnRef != nil {
 		in, out := &in.KMSKeyArnRef, &out.KMSKeyArnRef
-		*out = new(v1.Reference)
+		*out = new(v2.Reference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.KMSKeyArnSelector != nil {
 		in, out := &in.KMSKeyArnSelector, &out.KMSKeyArnSelector
-		*out = new(v1.Selector)
+		*out = new(v2.Selector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.NeptuneClusterParameterGroupName != nil {
@@ -708,12 +708,12 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 	}
 	if in.NeptuneClusterParameterGroupNameRef != nil {
 		in, out := &in.NeptuneClusterParameterGroupNameRef, &out.NeptuneClusterParameterGroupNameRef
-		*out = new(v1.Reference)
+		*out = new(v2.Reference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.NeptuneClusterParameterGroupNameSelector != nil {
 		in, out := &in.NeptuneClusterParameterGroupNameSelector, &out.NeptuneClusterParameterGroupNameSelector
-		*out = new(v1.Selector)
+		*out = new(v2.Selector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.NeptuneInstanceParameterGroupName != nil {
@@ -728,12 +728,12 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 	}
 	if in.NeptuneSubnetGroupNameRef != nil {
 		in, out := &in.NeptuneSubnetGroupNameRef, &out.NeptuneSubnetGroupNameRef
-		*out = new(v1.Reference)
+		*out = new(v2.Reference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.NeptuneSubnetGroupNameSelector != nil {
 		in, out := &in.NeptuneSubnetGroupNameSelector, &out.NeptuneSubnetGroupNameSelector
-		*out = new(v1.Selector)
+		*out = new(v2.Selector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.Port != nil {
@@ -763,12 +763,12 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 	}
 	if in.ReplicationSourceIdentifierRef != nil {
 		in, out := &in.ReplicationSourceIdentifierRef, &out.ReplicationSourceIdentifierRef
-		*out = new(v1.Reference)
+		*out = new(v2.Reference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.ReplicationSourceIdentifierSelector != nil {
 		in, out := &in.ReplicationSourceIdentifierSelector, &out.ReplicationSourceIdentifierSelector
-		*out = new(v1.Selector)
+		*out = new(v2.Selector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.ServerlessV2ScalingConfiguration != nil {
@@ -788,12 +788,12 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 	}
 	if in.SnapshotIdentifierRef != nil {
 		in, out := &in.SnapshotIdentifierRef, &out.SnapshotIdentifierRef
-		*out = new(v1.Reference)
+		*out = new(v2.Reference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.SnapshotIdentifierSelector != nil {
 		in, out := &in.SnapshotIdentifierSelector, &out.SnapshotIdentifierSelector
-		*out = new(v1.Selector)
+		*out = new(v2.Selector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.StorageEncrypted != nil {
@@ -824,14 +824,14 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 	}
 	if in.VPCSecurityGroupIDRefs != nil {
 		in, out := &in.VPCSecurityGroupIDRefs, &out.VPCSecurityGroupIDRefs
-		*out = make([]v1.Reference, len(*in))
+		*out = make([]v2.Reference, len(*in))
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
 	if in.VPCSecurityGroupIDSelector != nil {
 		in, out := &in.VPCSecurityGroupIDSelector, &out.VPCSecurityGroupIDSelector
-		*out = new(v1.Selector)
+		*out = new(v2.Selector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.VPCSecurityGroupIds != nil {
@@ -860,7 +860,7 @@ func (in *ClusterParameters) DeepCopy() *ClusterParameters {
 // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
 func (in *ClusterSpec) DeepCopyInto(out *ClusterSpec) {
 	*out = *in
-	in.ResourceSpec.DeepCopyInto(&out.ResourceSpec)
+	in.ClusterManagedResourceSpec.DeepCopyInto(&out.ClusterManagedResourceSpec)
 	in.ForProvider.DeepCopyInto(&out.ForProvider)
 	in.InitProvider.DeepCopyInto(&out.InitProvider)
 }
@@ -878,7 +878,7 @@ func (in *ClusterSpec) DeepCopy() *ClusterSpec {
 // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
 func (in *ClusterStatus) DeepCopyInto(out *ClusterStatus) {
 	*out = *in
-	in.ResourceStatus.DeepCopyInto(&out.ResourceStatus)
+	in.ManagedResourceStatus.DeepCopyInto(&out.ManagedResourceStatus)
 	in.AtProvider.DeepCopyInto(&out.AtProvider)
 }
 

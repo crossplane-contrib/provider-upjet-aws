@@ -10,13 +10,13 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AppInitParameters struct {
 
 	// Personal access token for a third-party source control system for an Amplify app. This token must have write access to the relevant repo to create a webhook and a read-only deploy key for the Amplify project. The token is not stored, so after applying this attribute can be removed and the setup token deleted.
-	AccessTokenSecretRef *v1.SecretKeySelector `json:"accessTokenSecretRef,omitempty" tf:"-"`
+	AccessTokenSecretRef *v2.SecretKeySelector `json:"accessTokenSecretRef,omitempty" tf:"-"`
 
 	// Automated branch creation configuration for an Amplify app. See auto_branch_creation_config Block for details.
 	AutoBranchCreationConfig *AutoBranchCreationConfigInitParameters `json:"autoBranchCreationConfig,omitempty" tf:"auto_branch_creation_config,omitempty"`
@@ -26,7 +26,7 @@ type AppInitParameters struct {
 	AutoBranchCreationPatterns []*string `json:"autoBranchCreationPatterns,omitempty" tf:"auto_branch_creation_patterns,omitempty"`
 
 	// Credentials for basic authorization for an Amplify app.
-	BasicAuthCredentialsSecretRef *v1.SecretKeySelector `json:"basicAuthCredentialsSecretRef,omitempty" tf:"-"`
+	BasicAuthCredentialsSecretRef *v2.SecretKeySelector `json:"basicAuthCredentialsSecretRef,omitempty" tf:"-"`
 
 	// The build specification (build spec) for an Amplify app.
 	BuildSpec *string `json:"buildSpec,omitempty" tf:"build_spec,omitempty"`
@@ -41,11 +41,11 @@ type AppInitParameters struct {
 
 	// Reference to a Role in iam to populate computeRoleArn.
 	// +kubebuilder:validation:Optional
-	ComputeRoleArnRef *v1.Reference `json:"computeRoleArnRef,omitempty" tf:"-"`
+	ComputeRoleArnRef *v2.Reference `json:"computeRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate computeRoleArn.
 	// +kubebuilder:validation:Optional
-	ComputeRoleArnSelector *v1.Selector `json:"computeRoleArnSelector,omitempty" tf:"-"`
+	ComputeRoleArnSelector *v2.Selector `json:"computeRoleArnSelector,omitempty" tf:"-"`
 
 	// The custom HTTP headers for an Amplify app.
 	CustomHeaders *string `json:"customHeaders,omitempty" tf:"custom_headers,omitempty"`
@@ -79,11 +79,11 @@ type AppInitParameters struct {
 
 	// Reference to a Role in iam to populate iamServiceRoleArn.
 	// +kubebuilder:validation:Optional
-	IAMServiceRoleArnRef *v1.Reference `json:"iamServiceRoleArnRef,omitempty" tf:"-"`
+	IAMServiceRoleArnRef *v2.Reference `json:"iamServiceRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate iamServiceRoleArn.
 	// +kubebuilder:validation:Optional
-	IAMServiceRoleArnSelector *v1.Selector `json:"iamServiceRoleArnSelector,omitempty" tf:"-"`
+	IAMServiceRoleArnSelector *v2.Selector `json:"iamServiceRoleArnSelector,omitempty" tf:"-"`
 
 	// Used to configure the Amplify Application build instance compute type. See job_config Block for details.
 	JobConfig *JobConfigInitParameters `json:"jobConfig,omitempty" tf:"job_config,omitempty"`
@@ -92,7 +92,7 @@ type AppInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// OAuth token for a third-party source control system for an Amplify app. The OAuth token is used to create a webhook and a read-only deploy key. The OAuth token is not stored.
-	OauthTokenSecretRef *v1.SecretKeySelector `json:"oauthTokenSecretRef,omitempty" tf:"-"`
+	OauthTokenSecretRef *v2.SecretKeySelector `json:"oauthTokenSecretRef,omitempty" tf:"-"`
 
 	// Platform or framework for an Amplify app. Valid values: WEB, WEB_COMPUTE. Default value: WEB.
 	Platform *string `json:"platform,omitempty" tf:"platform,omitempty"`
@@ -192,7 +192,7 @@ type AppParameters struct {
 
 	// Personal access token for a third-party source control system for an Amplify app. This token must have write access to the relevant repo to create a webhook and a read-only deploy key for the Amplify project. The token is not stored, so after applying this attribute can be removed and the setup token deleted.
 	// +kubebuilder:validation:Optional
-	AccessTokenSecretRef *v1.SecretKeySelector `json:"accessTokenSecretRef,omitempty" tf:"-"`
+	AccessTokenSecretRef *v2.SecretKeySelector `json:"accessTokenSecretRef,omitempty" tf:"-"`
 
 	// Automated branch creation configuration for an Amplify app. See auto_branch_creation_config Block for details.
 	// +kubebuilder:validation:Optional
@@ -205,7 +205,7 @@ type AppParameters struct {
 
 	// Credentials for basic authorization for an Amplify app.
 	// +kubebuilder:validation:Optional
-	BasicAuthCredentialsSecretRef *v1.SecretKeySelector `json:"basicAuthCredentialsSecretRef,omitempty" tf:"-"`
+	BasicAuthCredentialsSecretRef *v2.SecretKeySelector `json:"basicAuthCredentialsSecretRef,omitempty" tf:"-"`
 
 	// The build specification (build spec) for an Amplify app.
 	// +kubebuilder:validation:Optional
@@ -223,11 +223,11 @@ type AppParameters struct {
 
 	// Reference to a Role in iam to populate computeRoleArn.
 	// +kubebuilder:validation:Optional
-	ComputeRoleArnRef *v1.Reference `json:"computeRoleArnRef,omitempty" tf:"-"`
+	ComputeRoleArnRef *v2.Reference `json:"computeRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate computeRoleArn.
 	// +kubebuilder:validation:Optional
-	ComputeRoleArnSelector *v1.Selector `json:"computeRoleArnSelector,omitempty" tf:"-"`
+	ComputeRoleArnSelector *v2.Selector `json:"computeRoleArnSelector,omitempty" tf:"-"`
 
 	// The custom HTTP headers for an Amplify app.
 	// +kubebuilder:validation:Optional
@@ -270,11 +270,11 @@ type AppParameters struct {
 
 	// Reference to a Role in iam to populate iamServiceRoleArn.
 	// +kubebuilder:validation:Optional
-	IAMServiceRoleArnRef *v1.Reference `json:"iamServiceRoleArnRef,omitempty" tf:"-"`
+	IAMServiceRoleArnRef *v2.Reference `json:"iamServiceRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate iamServiceRoleArn.
 	// +kubebuilder:validation:Optional
-	IAMServiceRoleArnSelector *v1.Selector `json:"iamServiceRoleArnSelector,omitempty" tf:"-"`
+	IAMServiceRoleArnSelector *v2.Selector `json:"iamServiceRoleArnSelector,omitempty" tf:"-"`
 
 	// Used to configure the Amplify Application build instance compute type. See job_config Block for details.
 	// +kubebuilder:validation:Optional
@@ -286,7 +286,7 @@ type AppParameters struct {
 
 	// OAuth token for a third-party source control system for an Amplify app. The OAuth token is used to create a webhook and a read-only deploy key. The OAuth token is not stored.
 	// +kubebuilder:validation:Optional
-	OauthTokenSecretRef *v1.SecretKeySelector `json:"oauthTokenSecretRef,omitempty" tf:"-"`
+	OauthTokenSecretRef *v2.SecretKeySelector `json:"oauthTokenSecretRef,omitempty" tf:"-"`
 
 	// Platform or framework for an Amplify app. Valid values: WEB, WEB_COMPUTE. Default value: WEB.
 	// +kubebuilder:validation:Optional
@@ -310,7 +310,7 @@ type AppParameters struct {
 type AutoBranchCreationConfigInitParameters struct {
 
 	// Basic authorization credentials for the autocreated branch.
-	BasicAuthCredentialsSecretRef *v1.SecretKeySelector `json:"basicAuthCredentialsSecretRef,omitempty" tf:"-"`
+	BasicAuthCredentialsSecretRef *v2.SecretKeySelector `json:"basicAuthCredentialsSecretRef,omitempty" tf:"-"`
 
 	// Build specification (build spec) for the autocreated branch.
 	BuildSpec *string `json:"buildSpec,omitempty" tf:"build_spec,omitempty"`
@@ -376,7 +376,7 @@ type AutoBranchCreationConfigParameters struct {
 
 	// Basic authorization credentials for the autocreated branch.
 	// +kubebuilder:validation:Optional
-	BasicAuthCredentialsSecretRef *v1.SecretKeySelector `json:"basicAuthCredentialsSecretRef,omitempty" tf:"-"`
+	BasicAuthCredentialsSecretRef *v2.SecretKeySelector `json:"basicAuthCredentialsSecretRef,omitempty" tf:"-"`
 
 	// Build specification (build spec) for the autocreated branch.
 	// +kubebuilder:validation:Optional
@@ -526,8 +526,8 @@ type ProductionBranchParameters struct {
 
 // AppSpec defines the desired state of App
 type AppSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     AppParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   AppParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -543,8 +543,8 @@ type AppSpec struct {
 
 // AppStatus defines the observed state of App.
 type AppStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        AppObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               AppObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

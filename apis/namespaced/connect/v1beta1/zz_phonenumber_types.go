@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type PhoneNumberInitParameters struct {
@@ -36,11 +35,11 @@ type PhoneNumberInitParameters struct {
 
 	// Reference to a Instance in connect to populate targetArn.
 	// +kubebuilder:validation:Optional
-	TargetArnRef *v1.NamespacedReference `json:"targetArnRef,omitempty" tf:"-"`
+	TargetArnRef *v2.NamespacedReference `json:"targetArnRef,omitempty" tf:"-"`
 
 	// Selector for a Instance in connect to populate targetArn.
 	// +kubebuilder:validation:Optional
-	TargetArnSelector *v1.NamespacedSelector `json:"targetArnSelector,omitempty" tf:"-"`
+	TargetArnSelector *v2.NamespacedSelector `json:"targetArnSelector,omitempty" tf:"-"`
 
 	// The type of phone number. Valid Values: TOLL_FREE | DID.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
@@ -120,11 +119,11 @@ type PhoneNumberParameters struct {
 
 	// Reference to a Instance in connect to populate targetArn.
 	// +kubebuilder:validation:Optional
-	TargetArnRef *v1.NamespacedReference `json:"targetArnRef,omitempty" tf:"-"`
+	TargetArnRef *v2.NamespacedReference `json:"targetArnRef,omitempty" tf:"-"`
 
 	// Selector for a Instance in connect to populate targetArn.
 	// +kubebuilder:validation:Optional
-	TargetArnSelector *v1.NamespacedSelector `json:"targetArnSelector,omitempty" tf:"-"`
+	TargetArnSelector *v2.NamespacedSelector `json:"targetArnSelector,omitempty" tf:"-"`
 
 	// The type of phone number. Valid Values: TOLL_FREE | DID.
 	// +kubebuilder:validation:Optional
@@ -165,8 +164,8 @@ type PhoneNumberSpec struct {
 
 // PhoneNumberStatus defines the observed state of PhoneNumber.
 type PhoneNumberStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        PhoneNumberObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               PhoneNumberObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

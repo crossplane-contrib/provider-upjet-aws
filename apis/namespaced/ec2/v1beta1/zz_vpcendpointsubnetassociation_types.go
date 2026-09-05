@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type VPCEndpointSubnetAssociationInitParameters struct {
@@ -22,11 +21,11 @@ type VPCEndpointSubnetAssociationInitParameters struct {
 
 	// Reference to a Subnet in ec2 to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in ec2 to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// The ID of the VPC endpoint with which the subnet will be associated.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.VPCEndpoint
@@ -35,11 +34,11 @@ type VPCEndpointSubnetAssociationInitParameters struct {
 
 	// Reference to a VPCEndpoint in ec2 to populate vpcEndpointId.
 	// +kubebuilder:validation:Optional
-	VPCEndpointIDRef *v1.NamespacedReference `json:"vpcEndpointIdRef,omitempty" tf:"-"`
+	VPCEndpointIDRef *v2.NamespacedReference `json:"vpcEndpointIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPCEndpoint in ec2 to populate vpcEndpointId.
 	// +kubebuilder:validation:Optional
-	VPCEndpointIDSelector *v1.NamespacedSelector `json:"vpcEndpointIdSelector,omitempty" tf:"-"`
+	VPCEndpointIDSelector *v2.NamespacedSelector `json:"vpcEndpointIdSelector,omitempty" tf:"-"`
 }
 
 type VPCEndpointSubnetAssociationObservation struct {
@@ -72,11 +71,11 @@ type VPCEndpointSubnetAssociationParameters struct {
 
 	// Reference to a Subnet in ec2 to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in ec2 to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// The ID of the VPC endpoint with which the subnet will be associated.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.VPCEndpoint
@@ -86,11 +85,11 @@ type VPCEndpointSubnetAssociationParameters struct {
 
 	// Reference to a VPCEndpoint in ec2 to populate vpcEndpointId.
 	// +kubebuilder:validation:Optional
-	VPCEndpointIDRef *v1.NamespacedReference `json:"vpcEndpointIdRef,omitempty" tf:"-"`
+	VPCEndpointIDRef *v2.NamespacedReference `json:"vpcEndpointIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPCEndpoint in ec2 to populate vpcEndpointId.
 	// +kubebuilder:validation:Optional
-	VPCEndpointIDSelector *v1.NamespacedSelector `json:"vpcEndpointIdSelector,omitempty" tf:"-"`
+	VPCEndpointIDSelector *v2.NamespacedSelector `json:"vpcEndpointIdSelector,omitempty" tf:"-"`
 }
 
 // VPCEndpointSubnetAssociationSpec defines the desired state of VPCEndpointSubnetAssociation
@@ -112,8 +111,8 @@ type VPCEndpointSubnetAssociationSpec struct {
 
 // VPCEndpointSubnetAssociationStatus defines the observed state of VPCEndpointSubnetAssociation.
 type VPCEndpointSubnetAssociationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        VPCEndpointSubnetAssociationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               VPCEndpointSubnetAssociationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

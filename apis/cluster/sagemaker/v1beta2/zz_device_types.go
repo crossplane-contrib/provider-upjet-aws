@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type DeviceDeviceInitParameters struct {
@@ -63,11 +63,11 @@ type DeviceInitParameters struct {
 
 	// Reference to a DeviceFleet in sagemaker to populate deviceFleetName.
 	// +kubebuilder:validation:Optional
-	DeviceFleetNameRef *v1.Reference `json:"deviceFleetNameRef,omitempty" tf:"-"`
+	DeviceFleetNameRef *v2.Reference `json:"deviceFleetNameRef,omitempty" tf:"-"`
 
 	// Selector for a DeviceFleet in sagemaker to populate deviceFleetName.
 	// +kubebuilder:validation:Optional
-	DeviceFleetNameSelector *v1.Selector `json:"deviceFleetNameSelector,omitempty" tf:"-"`
+	DeviceFleetNameSelector *v2.Selector `json:"deviceFleetNameSelector,omitempty" tf:"-"`
 }
 
 type DeviceObservation struct {
@@ -103,11 +103,11 @@ type DeviceParameters struct {
 
 	// Reference to a DeviceFleet in sagemaker to populate deviceFleetName.
 	// +kubebuilder:validation:Optional
-	DeviceFleetNameRef *v1.Reference `json:"deviceFleetNameRef,omitempty" tf:"-"`
+	DeviceFleetNameRef *v2.Reference `json:"deviceFleetNameRef,omitempty" tf:"-"`
 
 	// Selector for a DeviceFleet in sagemaker to populate deviceFleetName.
 	// +kubebuilder:validation:Optional
-	DeviceFleetNameSelector *v1.Selector `json:"deviceFleetNameSelector,omitempty" tf:"-"`
+	DeviceFleetNameSelector *v2.Selector `json:"deviceFleetNameSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -117,8 +117,8 @@ type DeviceParameters struct {
 
 // DeviceSpec defines the desired state of Device
 type DeviceSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     DeviceParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   DeviceParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -134,8 +134,8 @@ type DeviceSpec struct {
 
 // DeviceStatus defines the observed state of Device.
 type DeviceStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        DeviceObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               DeviceObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

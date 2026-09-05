@@ -16,6 +16,7 @@ import (
 	"github.com/upbound/provider-aws/v2/config/namespaced/autoscaling"
 	"github.com/upbound/provider-aws/v2/config/namespaced/backup"
 	"github.com/upbound/provider-aws/v2/config/namespaced/batch"
+	"github.com/upbound/provider-aws/v2/config/namespaced/bedrock"
 	"github.com/upbound/provider-aws/v2/config/namespaced/bedrockagent"
 	"github.com/upbound/provider-aws/v2/config/namespaced/bedrockagentcore"
 	"github.com/upbound/provider-aws/v2/config/namespaced/budgets"
@@ -77,6 +78,7 @@ import (
 	"github.com/upbound/provider-aws/v2/config/namespaced/neptune"
 	"github.com/upbound/provider-aws/v2/config/namespaced/networkfirewall"
 	"github.com/upbound/provider-aws/v2/config/namespaced/networkmanager"
+	"github.com/upbound/provider-aws/v2/config/namespaced/networkmonitor"
 	"github.com/upbound/provider-aws/v2/config/namespaced/opensearch"
 	"github.com/upbound/provider-aws/v2/config/namespaced/opensearchserverless"
 	"github.com/upbound/provider-aws/v2/config/namespaced/organization"
@@ -119,6 +121,7 @@ func init() {
 	ProviderConfiguration.AddConfig(autoscaling.Configure)
 	ProviderConfiguration.AddConfig(backup.Configure)
 	ProviderConfiguration.AddConfig(batch.Configure)
+	ProviderConfiguration.AddConfig(bedrock.Configure)
 	ProviderConfiguration.AddConfig(bedrockagent.Configure)
 	ProviderConfiguration.AddConfig(bedrockagentcore.Configure)
 	ProviderConfiguration.AddConfig(cloudfront.Configure)
@@ -196,6 +199,7 @@ func init() {
 	ProviderConfiguration.AddConfig(qldb.Configure)
 	ProviderConfiguration.AddConfig(fsx.Configure)
 	ProviderConfiguration.AddConfig(networkmanager.Configure)
+	ProviderConfiguration.AddConfig(networkmonitor.Configure)
 	ProviderConfiguration.AddConfig(sagemaker.Configure)
 	ProviderConfiguration.AddConfig(redshiftserverless.Configure)
 	ProviderConfiguration.AddConfig(kendra.Configure)

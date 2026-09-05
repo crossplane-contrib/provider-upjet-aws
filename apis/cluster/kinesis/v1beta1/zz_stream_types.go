@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type StreamInitParameters struct {
@@ -27,11 +27,11 @@ type StreamInitParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDRef *v1.Reference `json:"kmsKeyIdRef,omitempty" tf:"-"`
+	KMSKeyIDRef *v2.Reference `json:"kmsKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
+	KMSKeyIDSelector *v2.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
 	// The maximum size for a single data record in KiB. The minimum value is 1024. The maximum value is 10240.
 	MaxRecordSizeInKib *float64 `json:"maxRecordSizeInKib,omitempty" tf:"max_record_size_in_kib,omitempty"`
@@ -53,6 +53,9 @@ type StreamInitParameters struct {
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Target warm throughput in MB/s that the stream should be scaled to handle.
+	WarmThroughputMibPs *float64 `json:"warmThroughputMibPs,omitempty" tf:"warm_throughput_mib_ps,omitempty"`
 }
 
 type StreamModeDetailsInitParameters struct {
@@ -119,6 +122,9 @@ type StreamObservation struct {
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// Target warm throughput in MB/s that the stream should be scaled to handle.
+	WarmThroughputMibPs *float64 `json:"warmThroughputMibPs,omitempty" tf:"warm_throughput_mib_ps,omitempty"`
 }
 
 type StreamParameters struct {
@@ -138,11 +144,11 @@ type StreamParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDRef *v1.Reference `json:"kmsKeyIdRef,omitempty" tf:"-"`
+	KMSKeyIDRef *v2.Reference `json:"kmsKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
+	KMSKeyIDSelector *v2.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
 	// The maximum size for a single data record in KiB. The minimum value is 1024. The maximum value is 10240.
 	// +kubebuilder:validation:Optional
@@ -175,12 +181,16 @@ type StreamParameters struct {
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Target warm throughput in MB/s that the stream should be scaled to handle.
+	// +kubebuilder:validation:Optional
+	WarmThroughputMibPs *float64 `json:"warmThroughputMibPs,omitempty" tf:"warm_throughput_mib_ps,omitempty"`
 }
 
 // StreamSpec defines the desired state of Stream
 type StreamSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     StreamParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   StreamParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -196,8 +206,8 @@ type StreamSpec struct {
 
 // StreamStatus defines the observed state of Stream.
 type StreamStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        StreamObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               StreamObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

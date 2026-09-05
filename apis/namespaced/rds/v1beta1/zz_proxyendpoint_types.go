@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ProxyEndpointInitParameters struct {
@@ -25,11 +24,11 @@ type ProxyEndpointInitParameters struct {
 
 	// References to SecurityGroup in ec2 to populate vpcSecurityGroupIds.
 	// +kubebuilder:validation:Optional
-	VPCSecurityGroupIDRefs []v1.NamespacedReference `json:"vpcSecurityGroupIdRefs,omitempty" tf:"-"`
+	VPCSecurityGroupIDRefs []v2.NamespacedReference `json:"vpcSecurityGroupIdRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate vpcSecurityGroupIds.
 	// +kubebuilder:validation:Optional
-	VPCSecurityGroupIDSelector *v1.NamespacedSelector `json:"vpcSecurityGroupIdSelector,omitempty" tf:"-"`
+	VPCSecurityGroupIDSelector *v2.NamespacedSelector `json:"vpcSecurityGroupIdSelector,omitempty" tf:"-"`
 
 	// One or more VPC security group IDs to associate with the new proxy.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
@@ -95,11 +94,11 @@ type ProxyEndpointParameters struct {
 
 	// Reference to a Proxy in rds to populate dbProxyName.
 	// +kubebuilder:validation:Optional
-	DBProxyNameRef *v1.NamespacedReference `json:"dbProxyNameRef,omitempty" tf:"-"`
+	DBProxyNameRef *v2.NamespacedReference `json:"dbProxyNameRef,omitempty" tf:"-"`
 
 	// Selector for a Proxy in rds to populate dbProxyName.
 	// +kubebuilder:validation:Optional
-	DBProxyNameSelector *v1.NamespacedSelector `json:"dbProxyNameSelector,omitempty" tf:"-"`
+	DBProxyNameSelector *v2.NamespacedSelector `json:"dbProxyNameSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -117,11 +116,11 @@ type ProxyEndpointParameters struct {
 
 	// References to SecurityGroup in ec2 to populate vpcSecurityGroupIds.
 	// +kubebuilder:validation:Optional
-	VPCSecurityGroupIDRefs []v1.NamespacedReference `json:"vpcSecurityGroupIdRefs,omitempty" tf:"-"`
+	VPCSecurityGroupIDRefs []v2.NamespacedReference `json:"vpcSecurityGroupIdRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate vpcSecurityGroupIds.
 	// +kubebuilder:validation:Optional
-	VPCSecurityGroupIDSelector *v1.NamespacedSelector `json:"vpcSecurityGroupIdSelector,omitempty" tf:"-"`
+	VPCSecurityGroupIDSelector *v2.NamespacedSelector `json:"vpcSecurityGroupIdSelector,omitempty" tf:"-"`
 
 	// One or more VPC security group IDs to associate with the new proxy.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
@@ -156,8 +155,8 @@ type ProxyEndpointSpec struct {
 
 // ProxyEndpointStatus defines the observed state of ProxyEndpoint.
 type ProxyEndpointStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ProxyEndpointObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ProxyEndpointObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

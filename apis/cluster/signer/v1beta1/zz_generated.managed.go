@@ -5,154 +5,154 @@
 
 package v1beta1
 
-import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+import xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 
 // GetCondition of this SigningJob.
-func (mg *SigningJob) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *SigningJob) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this SigningJob.
-func (mg *SigningJob) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *SigningJob) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this SigningJob.
-func (mg *SigningJob) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *SigningJob) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this SigningJob.
-func (mg *SigningJob) GetProviderConfigReference() *xpv1.Reference {
+func (mg *SigningJob) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this SigningJob.
-func (mg *SigningJob) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *SigningJob) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this SigningJob.
-func (mg *SigningJob) SetConditions(c ...xpv1.Condition) {
+func (mg *SigningJob) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this SigningJob.
-func (mg *SigningJob) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *SigningJob) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this SigningJob.
-func (mg *SigningJob) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *SigningJob) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this SigningJob.
-func (mg *SigningJob) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *SigningJob) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this SigningJob.
-func (mg *SigningJob) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *SigningJob) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this SigningProfile.
-func (mg *SigningProfile) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *SigningProfile) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this SigningProfile.
-func (mg *SigningProfile) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *SigningProfile) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this SigningProfile.
-func (mg *SigningProfile) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *SigningProfile) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this SigningProfile.
-func (mg *SigningProfile) GetProviderConfigReference() *xpv1.Reference {
+func (mg *SigningProfile) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this SigningProfile.
-func (mg *SigningProfile) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *SigningProfile) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this SigningProfile.
-func (mg *SigningProfile) SetConditions(c ...xpv1.Condition) {
+func (mg *SigningProfile) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this SigningProfile.
-func (mg *SigningProfile) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *SigningProfile) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this SigningProfile.
-func (mg *SigningProfile) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *SigningProfile) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this SigningProfile.
-func (mg *SigningProfile) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *SigningProfile) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this SigningProfile.
-func (mg *SigningProfile) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *SigningProfile) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this SigningProfilePermission.
-func (mg *SigningProfilePermission) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *SigningProfilePermission) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this SigningProfilePermission.
-func (mg *SigningProfilePermission) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *SigningProfilePermission) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this SigningProfilePermission.
-func (mg *SigningProfilePermission) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *SigningProfilePermission) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this SigningProfilePermission.
-func (mg *SigningProfilePermission) GetProviderConfigReference() *xpv1.Reference {
+func (mg *SigningProfilePermission) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this SigningProfilePermission.
-func (mg *SigningProfilePermission) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *SigningProfilePermission) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this SigningProfilePermission.
-func (mg *SigningProfilePermission) SetConditions(c ...xpv1.Condition) {
+func (mg *SigningProfilePermission) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this SigningProfilePermission.
-func (mg *SigningProfilePermission) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *SigningProfilePermission) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this SigningProfilePermission.
-func (mg *SigningProfilePermission) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *SigningProfilePermission) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this SigningProfilePermission.
-func (mg *SigningProfilePermission) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *SigningProfilePermission) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this SigningProfilePermission.
-func (mg *SigningProfilePermission) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *SigningProfilePermission) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ServerCertificateInitParameters struct {
@@ -31,7 +31,7 @@ type ServerCertificateInitParameters struct {
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
 	// The contents of the private key in PEM-encoded format.
-	PrivateKeySecretRef v1.SecretKeySelector `json:"privateKeySecretRef" tf:"-"`
+	PrivateKeySecretRef v2.SecretKeySelector `json:"privateKeySecretRef" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -98,7 +98,7 @@ type ServerCertificateParameters struct {
 
 	// The contents of the private key in PEM-encoded format.
 	// +kubebuilder:validation:Optional
-	PrivateKeySecretRef v1.SecretKeySelector `json:"privateKeySecretRef" tf:"-"`
+	PrivateKeySecretRef v2.SecretKeySelector `json:"privateKeySecretRef" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -108,8 +108,8 @@ type ServerCertificateParameters struct {
 
 // ServerCertificateSpec defines the desired state of ServerCertificate
 type ServerCertificateSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ServerCertificateParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ServerCertificateParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -125,8 +125,8 @@ type ServerCertificateSpec struct {
 
 // ServerCertificateStatus defines the observed state of ServerCertificate.
 type ServerCertificateStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ServerCertificateObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ServerCertificateObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

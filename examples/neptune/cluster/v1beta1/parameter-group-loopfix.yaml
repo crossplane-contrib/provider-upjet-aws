@@ -1,0 +1,109 @@
+# SPDX-FileCopyrightText: 2026 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+# Neptune instance-level (DB parameter group) cases.
+# Parameter defaults and apply types are from
+# https://docs.aws.amazon.com/neptune/latest/userguide/parameters.html
+# Every documented instance-level parameter is STATIC, so a changed value has to
+# be requested with pending-reboot - AWS rejects immediate for a static
+# parameter whose value actually changes.
+# Note that, unlike aws_db_parameter_group, the Neptune parameter group schema
+# defaults applyMethod to pending-reboot, so the loop is triggered by explicitly
+# asking for immediate on a parameter whose value AWS does not have to touch.
+
+# Case J - neptune_query_timeout defaults to 120000 ms, so the value is a no-op at
+# AWS. AWS ignores the apply method change alone and keeps reporting
+# pending-reboot, which is the perpetual diff.
+apiVersion: neptune.aws.upbound.io/v1beta1
+kind: ParameterGroup
+metadata:
+  name: j-neptune13-querytimeout-immediate
+spec:
+  forProvider:
+    region: us-west-2
+    family: neptune1.3
+    description: "case J - Neptune param group, default value + immediate"
+    parameter:
+      - name: neptune_query_timeout
+        value: "120000"
+        applyMethod: immediate
+    tags:
+      Test: Uptest
+---
+# Case K - same as case J with a non-numeric default value.
+# neptune_dfe_query_engine defaults to viaQueryHint.
+apiVersion: neptune.aws.upbound.io/v1beta1
+kind: ParameterGroup
+metadata:
+  name: k-neptune13-dfequeryengine-immediate
+spec:
+  forProvider:
+    region: us-west-2
+    family: neptune1.3
+    description: "case K - Neptune param group, default string value + immediate"
+    parameter:
+      - name: neptune_dfe_query_engine
+        value: viaQueryHint
+        applyMethod: immediate
+    tags:
+      Test: Uptest
+---
+# Case L - NON-default value on a static parameter, requested with pending-reboot.
+# AWS really applies the change, so the diff must not be suppressed.
+# neptune_result_cache defaults to 0.
+apiVersion: neptune.aws.upbound.io/v1beta1
+kind: ParameterGroup
+metadata:
+  name: l-neptune13-resultcache-pendingreboot
+spec:
+  forProvider:
+    region: us-west-2
+    family: neptune1.3
+    description: "case L - Neptune param group, non-default value + pending-reboot"
+    parameter:
+      - name: neptune_result_cache
+        value: "1"
+        applyMethod: pending-reboot
+    tags:
+      Test: Uptest
+---
+# Case M - default value, applyMethod omitted. Defaults to pending-reboot for
+# Neptune, which is what AWS reports back, so desired == observed and no diff.
+apiVersion: neptune.aws.upbound.io/v1beta1
+kind: ParameterGroup
+metadata:
+  name: m-neptune13-querytimeout-unset
+spec:
+  forProvider:
+    region: us-west-2
+    family: neptune1.3
+    description: "case M - Neptune param group, default value, applyMethod omitted"
+    parameter:
+      - name: neptune_query_timeout
+        value: "120000"
+    tags:
+      Test: Uptest
+---
+# Case N - a loop-triggering parameter and a genuinely changing parameter in the
+# same set. Suppression is all-or-nothing per parameter group, so this asserts
+# that neptune_result_cache is still updated instead of being swallowed together
+# with the neptune_query_timeout apply method churn.
+apiVersion: neptune.aws.upbound.io/v1beta1
+kind: ParameterGroup
+metadata:
+  name: n-neptune13-mixed
+spec:
+  forProvider:
+    region: us-west-2
+    family: neptune1.3
+    description: "case N - Neptune param group, apply method churn + real change"
+    parameter:
+      - name: neptune_query_timeout
+        value: "120000"
+        applyMethod: immediate
+      - name: neptune_result_cache
+        value: "1"
+        applyMethod: pending-reboot
+    tags:
+      Test: Uptest

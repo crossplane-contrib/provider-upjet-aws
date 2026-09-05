@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type GroupPolicyAttachmentInitParameters struct {
@@ -21,11 +21,11 @@ type GroupPolicyAttachmentInitParameters struct {
 
 	// Reference to a Group in iam to populate group.
 	// +kubebuilder:validation:Optional
-	GroupRef *v1.Reference `json:"groupRef,omitempty" tf:"-"`
+	GroupRef *v2.Reference `json:"groupRef,omitempty" tf:"-"`
 
 	// Selector for a Group in iam to populate group.
 	// +kubebuilder:validation:Optional
-	GroupSelector *v1.Selector `json:"groupSelector,omitempty" tf:"-"`
+	GroupSelector *v2.Selector `json:"groupSelector,omitempty" tf:"-"`
 
 	// The ARN of the policy you want to apply
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Policy
@@ -34,11 +34,11 @@ type GroupPolicyAttachmentInitParameters struct {
 
 	// Reference to a Policy in iam to populate policyArn.
 	// +kubebuilder:validation:Optional
-	PolicyArnRef *v1.Reference `json:"policyArnRef,omitempty" tf:"-"`
+	PolicyArnRef *v2.Reference `json:"policyArnRef,omitempty" tf:"-"`
 
 	// Selector for a Policy in iam to populate policyArn.
 	// +kubebuilder:validation:Optional
-	PolicyArnSelector *v1.Selector `json:"policyArnSelector,omitempty" tf:"-"`
+	PolicyArnSelector *v2.Selector `json:"policyArnSelector,omitempty" tf:"-"`
 }
 
 type GroupPolicyAttachmentObservation struct {
@@ -61,11 +61,11 @@ type GroupPolicyAttachmentParameters struct {
 
 	// Reference to a Group in iam to populate group.
 	// +kubebuilder:validation:Optional
-	GroupRef *v1.Reference `json:"groupRef,omitempty" tf:"-"`
+	GroupRef *v2.Reference `json:"groupRef,omitempty" tf:"-"`
 
 	// Selector for a Group in iam to populate group.
 	// +kubebuilder:validation:Optional
-	GroupSelector *v1.Selector `json:"groupSelector,omitempty" tf:"-"`
+	GroupSelector *v2.Selector `json:"groupSelector,omitempty" tf:"-"`
 
 	// The ARN of the policy you want to apply
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Policy
@@ -75,17 +75,17 @@ type GroupPolicyAttachmentParameters struct {
 
 	// Reference to a Policy in iam to populate policyArn.
 	// +kubebuilder:validation:Optional
-	PolicyArnRef *v1.Reference `json:"policyArnRef,omitempty" tf:"-"`
+	PolicyArnRef *v2.Reference `json:"policyArnRef,omitempty" tf:"-"`
 
 	// Selector for a Policy in iam to populate policyArn.
 	// +kubebuilder:validation:Optional
-	PolicyArnSelector *v1.Selector `json:"policyArnSelector,omitempty" tf:"-"`
+	PolicyArnSelector *v2.Selector `json:"policyArnSelector,omitempty" tf:"-"`
 }
 
 // GroupPolicyAttachmentSpec defines the desired state of GroupPolicyAttachment
 type GroupPolicyAttachmentSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     GroupPolicyAttachmentParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   GroupPolicyAttachmentParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -101,8 +101,8 @@ type GroupPolicyAttachmentSpec struct {
 
 // GroupPolicyAttachmentStatus defines the observed state of GroupPolicyAttachment.
 type GroupPolicyAttachmentStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        GroupPolicyAttachmentObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               GroupPolicyAttachmentObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

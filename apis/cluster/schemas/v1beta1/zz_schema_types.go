@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type SchemaInitParameters struct {
@@ -30,11 +30,11 @@ type SchemaInitParameters struct {
 
 	// Reference to a Registry in schemas to populate registryName.
 	// +kubebuilder:validation:Optional
-	RegistryNameRef *v1.Reference `json:"registryNameRef,omitempty" tf:"-"`
+	RegistryNameRef *v2.Reference `json:"registryNameRef,omitempty" tf:"-"`
 
 	// Selector for a Registry in schemas to populate registryName.
 	// +kubebuilder:validation:Optional
-	RegistryNameSelector *v1.Selector `json:"registryNameSelector,omitempty" tf:"-"`
+	RegistryNameSelector *v2.Selector `json:"registryNameSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -114,11 +114,11 @@ type SchemaParameters struct {
 
 	// Reference to a Registry in schemas to populate registryName.
 	// +kubebuilder:validation:Optional
-	RegistryNameRef *v1.Reference `json:"registryNameRef,omitempty" tf:"-"`
+	RegistryNameRef *v2.Reference `json:"registryNameRef,omitempty" tf:"-"`
 
 	// Selector for a Registry in schemas to populate registryName.
 	// +kubebuilder:validation:Optional
-	RegistryNameSelector *v1.Selector `json:"registryNameSelector,omitempty" tf:"-"`
+	RegistryNameSelector *v2.Selector `json:"registryNameSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -132,8 +132,8 @@ type SchemaParameters struct {
 
 // SchemaSpec defines the desired state of Schema
 type SchemaSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     SchemaParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   SchemaParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -149,8 +149,8 @@ type SchemaSpec struct {
 
 // SchemaStatus defines the observed state of Schema.
 type SchemaStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SchemaObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SchemaObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

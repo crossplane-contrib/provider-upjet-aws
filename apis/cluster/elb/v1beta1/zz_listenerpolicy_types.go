@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ListenerPolicyInitParameters struct {
@@ -21,11 +21,11 @@ type ListenerPolicyInitParameters struct {
 
 	// Reference to a ELB in elb to populate loadBalancerName.
 	// +kubebuilder:validation:Optional
-	LoadBalancerNameRef *v1.Reference `json:"loadBalancerNameRef,omitempty" tf:"-"`
+	LoadBalancerNameRef *v2.Reference `json:"loadBalancerNameRef,omitempty" tf:"-"`
 
 	// Selector for a ELB in elb to populate loadBalancerName.
 	// +kubebuilder:validation:Optional
-	LoadBalancerNameSelector *v1.Selector `json:"loadBalancerNameSelector,omitempty" tf:"-"`
+	LoadBalancerNameSelector *v2.Selector `json:"loadBalancerNameSelector,omitempty" tf:"-"`
 
 	// The load balancer listener port to apply the policy to.
 	LoadBalancerPort *float64 `json:"loadBalancerPort,omitempty" tf:"load_balancer_port,omitempty"`
@@ -38,11 +38,11 @@ type ListenerPolicyInitParameters struct {
 
 	// References to Policy in elb to populate policyNames.
 	// +kubebuilder:validation:Optional
-	PolicyNamesRefs []v1.Reference `json:"policyNamesRefs,omitempty" tf:"-"`
+	PolicyNamesRefs []v2.Reference `json:"policyNamesRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Policy in elb to populate policyNames.
 	// +kubebuilder:validation:Optional
-	PolicyNamesSelector *v1.Selector `json:"policyNamesSelector,omitempty" tf:"-"`
+	PolicyNamesSelector *v2.Selector `json:"policyNamesSelector,omitempty" tf:"-"`
 
 	// Map of arbitrary keys and values that, when changed, will trigger an update.
 	// +mapType=granular
@@ -82,11 +82,11 @@ type ListenerPolicyParameters struct {
 
 	// Reference to a ELB in elb to populate loadBalancerName.
 	// +kubebuilder:validation:Optional
-	LoadBalancerNameRef *v1.Reference `json:"loadBalancerNameRef,omitempty" tf:"-"`
+	LoadBalancerNameRef *v2.Reference `json:"loadBalancerNameRef,omitempty" tf:"-"`
 
 	// Selector for a ELB in elb to populate loadBalancerName.
 	// +kubebuilder:validation:Optional
-	LoadBalancerNameSelector *v1.Selector `json:"loadBalancerNameSelector,omitempty" tf:"-"`
+	LoadBalancerNameSelector *v2.Selector `json:"loadBalancerNameSelector,omitempty" tf:"-"`
 
 	// The load balancer listener port to apply the policy to.
 	// +kubebuilder:validation:Optional
@@ -101,11 +101,11 @@ type ListenerPolicyParameters struct {
 
 	// References to Policy in elb to populate policyNames.
 	// +kubebuilder:validation:Optional
-	PolicyNamesRefs []v1.Reference `json:"policyNamesRefs,omitempty" tf:"-"`
+	PolicyNamesRefs []v2.Reference `json:"policyNamesRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Policy in elb to populate policyNames.
 	// +kubebuilder:validation:Optional
-	PolicyNamesSelector *v1.Selector `json:"policyNamesSelector,omitempty" tf:"-"`
+	PolicyNamesSelector *v2.Selector `json:"policyNamesSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -120,8 +120,8 @@ type ListenerPolicyParameters struct {
 
 // ListenerPolicySpec defines the desired state of ListenerPolicy
 type ListenerPolicySpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ListenerPolicyParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ListenerPolicyParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -137,8 +137,8 @@ type ListenerPolicySpec struct {
 
 // ListenerPolicyStatus defines the observed state of ListenerPolicy.
 type ListenerPolicyStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ListenerPolicyObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ListenerPolicyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

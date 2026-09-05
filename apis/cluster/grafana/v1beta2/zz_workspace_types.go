@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type NetworkAccessControlInitParameters struct {
@@ -94,13 +94,13 @@ type WorkspaceInitParameters struct {
 	// The configuration string for the workspace that you create. For more information about the format and configuration options available, see Working in your Grafana workspace.
 	Configuration *string `json:"configuration,omitempty" tf:"configuration,omitempty"`
 
-	// The data sources for the workspace. Valid values are AMAZON_OPENSEARCH_SERVICE, ATHENA, CLOUDWATCH, PROMETHEUS, REDSHIFT, SITEWISE, TIMESTREAM, TWINMAKER, XRAY`
+	// The data sources for the workspace. Valid values are AMAZON_OPENSEARCH_SERVICE, ATHENA, CLOUDWATCH, PROMETHEUS, REDSHIFT, SITEWISE, TIMESTREAM, TWINMAKER, XRAY
 	DataSources []*string `json:"dataSources,omitempty" tf:"data_sources,omitempty"`
 
 	// The workspace description.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Specifies the version of Grafana to support in the new workspace. Supported values are 8.4, 9.4 and 10.4. If not specified, defaults to the latest version.
+	// Specifies the version of Grafana to support in the new workspace. Supported values are 9.4, 10.4 and 12.4. If not specified, defaults to the latest version.
 	GrafanaVersion *string `json:"grafanaVersion,omitempty" tf:"grafana_version,omitempty"`
 
 	// The ARN of the AWS KMS key for encrypting workspace data.
@@ -109,11 +109,11 @@ type WorkspaceInitParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDRef *v1.Reference `json:"kmsKeyIdRef,omitempty" tf:"-"`
+	KMSKeyIDRef *v2.Reference `json:"kmsKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
+	KMSKeyIDSelector *v2.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
 	// The Grafana workspace name.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -140,11 +140,11 @@ type WorkspaceInitParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.Reference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// The AWS CloudFormation stack set name that provisions IAM roles to be used by the workspace.
 	StackSetName *string `json:"stackSetName,omitempty" tf:"stack_set_name,omitempty"`
@@ -171,7 +171,7 @@ type WorkspaceObservation struct {
 	// The configuration string for the workspace that you create. For more information about the format and configuration options available, see Working in your Grafana workspace.
 	Configuration *string `json:"configuration,omitempty" tf:"configuration,omitempty"`
 
-	// The data sources for the workspace. Valid values are AMAZON_OPENSEARCH_SERVICE, ATHENA, CLOUDWATCH, PROMETHEUS, REDSHIFT, SITEWISE, TIMESTREAM, TWINMAKER, XRAY`
+	// The data sources for the workspace. Valid values are AMAZON_OPENSEARCH_SERVICE, ATHENA, CLOUDWATCH, PROMETHEUS, REDSHIFT, SITEWISE, TIMESTREAM, TWINMAKER, XRAY
 	DataSources []*string `json:"dataSources,omitempty" tf:"data_sources,omitempty"`
 
 	// The workspace description.
@@ -180,7 +180,7 @@ type WorkspaceObservation struct {
 	// The endpoint of the Grafana workspace.
 	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 
-	// Specifies the version of Grafana to support in the new workspace. Supported values are 8.4, 9.4 and 10.4. If not specified, defaults to the latest version.
+	// Specifies the version of Grafana to support in the new workspace. Supported values are 9.4, 10.4 and 12.4. If not specified, defaults to the latest version.
 	GrafanaVersion *string `json:"grafanaVersion,omitempty" tf:"grafana_version,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -244,7 +244,7 @@ type WorkspaceParameters struct {
 	// +kubebuilder:validation:Optional
 	Configuration *string `json:"configuration,omitempty" tf:"configuration,omitempty"`
 
-	// The data sources for the workspace. Valid values are AMAZON_OPENSEARCH_SERVICE, ATHENA, CLOUDWATCH, PROMETHEUS, REDSHIFT, SITEWISE, TIMESTREAM, TWINMAKER, XRAY`
+	// The data sources for the workspace. Valid values are AMAZON_OPENSEARCH_SERVICE, ATHENA, CLOUDWATCH, PROMETHEUS, REDSHIFT, SITEWISE, TIMESTREAM, TWINMAKER, XRAY
 	// +kubebuilder:validation:Optional
 	DataSources []*string `json:"dataSources,omitempty" tf:"data_sources,omitempty"`
 
@@ -252,7 +252,7 @@ type WorkspaceParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Specifies the version of Grafana to support in the new workspace. Supported values are 8.4, 9.4 and 10.4. If not specified, defaults to the latest version.
+	// Specifies the version of Grafana to support in the new workspace. Supported values are 9.4, 10.4 and 12.4. If not specified, defaults to the latest version.
 	// +kubebuilder:validation:Optional
 	GrafanaVersion *string `json:"grafanaVersion,omitempty" tf:"grafana_version,omitempty"`
 
@@ -263,11 +263,11 @@ type WorkspaceParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDRef *v1.Reference `json:"kmsKeyIdRef,omitempty" tf:"-"`
+	KMSKeyIDRef *v2.Reference `json:"kmsKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
+	KMSKeyIDSelector *v2.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
 	// The Grafana workspace name.
 	// +kubebuilder:validation:Optional
@@ -306,11 +306,11 @@ type WorkspaceParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.Reference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// The AWS CloudFormation stack set name that provisions IAM roles to be used by the workspace.
 	// +kubebuilder:validation:Optional
@@ -328,8 +328,8 @@ type WorkspaceParameters struct {
 
 // WorkspaceSpec defines the desired state of Workspace
 type WorkspaceSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     WorkspaceParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   WorkspaceParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -345,8 +345,8 @@ type WorkspaceSpec struct {
 
 // WorkspaceStatus defines the observed state of Workspace.
 type WorkspaceStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        WorkspaceObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               WorkspaceObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

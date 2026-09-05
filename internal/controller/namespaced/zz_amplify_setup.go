@@ -46,3 +46,18 @@ func SetupGated_amplify(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupWebhookWithManager_amplify registers conversion webhooks for all resource kinds in the group.
+func SetupWebhookWithManager_amplify(mgr ctrl.Manager) error {
+	for _, setup := range []func(ctrl.Manager) error{
+		app.SetupWebhookWithManager,
+		backendenvironment.SetupWebhookWithManager,
+		branch.SetupWebhookWithManager,
+		webhook.SetupWebhookWithManager,
+	} {
+		if err := setup(mgr); err != nil {
+			return err
+		}
+	}
+	return nil
+}

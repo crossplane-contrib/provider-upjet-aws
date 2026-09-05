@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type FilterGroupInitParameters struct {
@@ -162,11 +162,11 @@ type WebhookInitParameters struct {
 
 	// Reference to a Project in codebuild to populate projectName.
 	// +kubebuilder:validation:Optional
-	ProjectNameRef *v1.Reference `json:"projectNameRef,omitempty" tf:"-"`
+	ProjectNameRef *v2.Reference `json:"projectNameRef,omitempty" tf:"-"`
 
 	// Selector for a Project in codebuild to populate projectName.
 	// +kubebuilder:validation:Optional
-	ProjectNameSelector *v1.Selector `json:"projectNameSelector,omitempty" tf:"-"`
+	ProjectNameSelector *v2.Selector `json:"projectNameSelector,omitempty" tf:"-"`
 
 	// Defines comment-based approval requirements for triggering builds on pull requests. See pull_request_build_policy for details.
 	PullRequestBuildPolicy *PullRequestBuildPolicyInitParameters `json:"pullRequestBuildPolicy,omitempty" tf:"pull_request_build_policy,omitempty"`
@@ -237,11 +237,11 @@ type WebhookParameters struct {
 
 	// Reference to a Project in codebuild to populate projectName.
 	// +kubebuilder:validation:Optional
-	ProjectNameRef *v1.Reference `json:"projectNameRef,omitempty" tf:"-"`
+	ProjectNameRef *v2.Reference `json:"projectNameRef,omitempty" tf:"-"`
 
 	// Selector for a Project in codebuild to populate projectName.
 	// +kubebuilder:validation:Optional
-	ProjectNameSelector *v1.Selector `json:"projectNameSelector,omitempty" tf:"-"`
+	ProjectNameSelector *v2.Selector `json:"projectNameSelector,omitempty" tf:"-"`
 
 	// Defines comment-based approval requirements for triggering builds on pull requests. See pull_request_build_policy for details.
 	// +kubebuilder:validation:Optional
@@ -259,8 +259,8 @@ type WebhookParameters struct {
 
 // WebhookSpec defines the desired state of Webhook
 type WebhookSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     WebhookParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   WebhookParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -276,8 +276,8 @@ type WebhookSpec struct {
 
 // WebhookStatus defines the observed state of Webhook.
 type WebhookStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        WebhookObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               WebhookObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

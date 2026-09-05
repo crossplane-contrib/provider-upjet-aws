@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AuthenticationModeInitParameters struct {
@@ -34,7 +33,7 @@ type AuthenticationModeParameters struct {
 
 	// Set of passwords used for authentication if type is set to password. You can create up to two passwords for each user.
 	// +kubebuilder:validation:Optional
-	PasswordsSecretRef *[]v1.LocalSecretKeySelector `json:"passwordsSecretRef,omitempty" tf:"-"`
+	PasswordsSecretRef *[]v2.LocalSecretKeySelector `json:"passwordsSecretRef,omitempty" tf:"-"`
 
 	// Specifies the authentication type. Valid values are: password or iam.
 	// +kubebuilder:validation:Optional
@@ -124,8 +123,8 @@ type UserSpec struct {
 
 // UserStatus defines the observed state of User.
 type UserStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        UserObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               UserObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

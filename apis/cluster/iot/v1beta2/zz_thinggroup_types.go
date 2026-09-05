@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AttributePayloadInitParameters struct {
@@ -102,11 +102,11 @@ type ThingGroupInitParameters struct {
 
 	// Reference to a ThingGroup in iot to populate parentGroupName.
 	// +kubebuilder:validation:Optional
-	ParentGroupNameRef *v1.Reference `json:"parentGroupNameRef,omitempty" tf:"-"`
+	ParentGroupNameRef *v2.Reference `json:"parentGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ThingGroup in iot to populate parentGroupName.
 	// +kubebuilder:validation:Optional
-	ParentGroupNameSelector *v1.Selector `json:"parentGroupNameSelector,omitempty" tf:"-"`
+	ParentGroupNameSelector *v2.Selector `json:"parentGroupNameSelector,omitempty" tf:"-"`
 
 	// The Thing Group properties. Defined below.
 	Properties *PropertiesInitParameters `json:"properties,omitempty" tf:"properties,omitempty"`
@@ -156,11 +156,11 @@ type ThingGroupParameters struct {
 
 	// Reference to a ThingGroup in iot to populate parentGroupName.
 	// +kubebuilder:validation:Optional
-	ParentGroupNameRef *v1.Reference `json:"parentGroupNameRef,omitempty" tf:"-"`
+	ParentGroupNameRef *v2.Reference `json:"parentGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ThingGroup in iot to populate parentGroupName.
 	// +kubebuilder:validation:Optional
-	ParentGroupNameSelector *v1.Selector `json:"parentGroupNameSelector,omitempty" tf:"-"`
+	ParentGroupNameSelector *v2.Selector `json:"parentGroupNameSelector,omitempty" tf:"-"`
 
 	// The Thing Group properties. Defined below.
 	// +kubebuilder:validation:Optional
@@ -179,8 +179,8 @@ type ThingGroupParameters struct {
 
 // ThingGroupSpec defines the desired state of ThingGroup
 type ThingGroupSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ThingGroupParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ThingGroupParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -196,8 +196,8 @@ type ThingGroupSpec struct {
 
 // ThingGroupStatus defines the observed state of ThingGroup.
 type ThingGroupStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ThingGroupObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ThingGroupObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

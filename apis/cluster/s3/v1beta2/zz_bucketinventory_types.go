@@ -10,24 +10,24 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type BucketInventoryDestinationInitParameters struct {
 
-	// Name of the source bucket that inventory lists the objects for.
+	// Name of the source bucket that inventory lists the objects for. Both general purpose and directory buckets are supported.
 	Bucket *DestinationBucketInitParameters `json:"bucket,omitempty" tf:"bucket,omitempty"`
 }
 
 type BucketInventoryDestinationObservation struct {
 
-	// Name of the source bucket that inventory lists the objects for.
+	// Name of the source bucket that inventory lists the objects for. Both general purpose and directory buckets are supported.
 	Bucket *DestinationBucketObservation `json:"bucket,omitempty" tf:"bucket,omitempty"`
 }
 
 type BucketInventoryDestinationParameters struct {
 
-	// Name of the source bucket that inventory lists the objects for.
+	// Name of the source bucket that inventory lists the objects for. Both general purpose and directory buckets are supported.
 	// +kubebuilder:validation:Optional
 	Bucket *DestinationBucketParameters `json:"bucket" tf:"bucket,omitempty"`
 }
@@ -53,18 +53,18 @@ type BucketInventoryFilterParameters struct {
 
 type BucketInventoryInitParameters struct {
 
-	// Name of the source bucket that inventory lists the objects for.
+	// Name of the source bucket that inventory lists the objects for. Both general purpose and directory buckets are supported.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3/v1beta2.Bucket
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
 	// Reference to a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketRef *v1.Reference `json:"bucketRef,omitempty" tf:"-"`
+	BucketRef *v2.Reference `json:"bucketRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
+	BucketSelector *v2.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
 	// Contains information about where to publish the inventory results (documented below).
 	Destination *BucketInventoryDestinationInitParameters `json:"destination,omitempty" tf:"destination,omitempty"`
@@ -91,7 +91,7 @@ type BucketInventoryInitParameters struct {
 
 type BucketInventoryObservation struct {
 
-	// Name of the source bucket that inventory lists the objects for.
+	// Name of the source bucket that inventory lists the objects for. Both general purpose and directory buckets are supported.
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
 	// Contains information about where to publish the inventory results (documented below).
@@ -125,7 +125,7 @@ type BucketInventoryObservation struct {
 
 type BucketInventoryParameters struct {
 
-	// Name of the source bucket that inventory lists the objects for.
+	// Name of the source bucket that inventory lists the objects for. Both general purpose and directory buckets are supported.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3/v1beta2.Bucket
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -133,11 +133,11 @@ type BucketInventoryParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketRef *v1.Reference `json:"bucketRef,omitempty" tf:"-"`
+	BucketRef *v2.Reference `json:"bucketRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
+	BucketSelector *v2.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
 	// Contains information about where to publish the inventory results (documented below).
 	// +kubebuilder:validation:Optional
@@ -179,18 +179,18 @@ type DestinationBucketInitParameters struct {
 	// ID of the account that owns the destination bucket. Recommended to be set to prevent problems if the destination bucket ownership changes.
 	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
 
-	// Amazon S3 bucket ARN of the destination.
+	// Amazon S3 bucket ARN of the destination. Only general purpose buckets are supported.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3/v1beta2.Bucket
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	BucketArn *string `json:"bucketArn,omitempty" tf:"bucket_arn,omitempty"`
 
 	// Reference to a Bucket in s3 to populate bucketArn.
 	// +kubebuilder:validation:Optional
-	BucketArnRef *v1.Reference `json:"bucketArnRef,omitempty" tf:"-"`
+	BucketArnRef *v2.Reference `json:"bucketArnRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucketArn.
 	// +kubebuilder:validation:Optional
-	BucketArnSelector *v1.Selector `json:"bucketArnSelector,omitempty" tf:"-"`
+	BucketArnSelector *v2.Selector `json:"bucketArnSelector,omitempty" tf:"-"`
 
 	// Contains the type of server-side encryption to use to encrypt the inventory (documented below).
 	Encryption *EncryptionInitParameters `json:"encryption,omitempty" tf:"encryption,omitempty"`
@@ -207,7 +207,7 @@ type DestinationBucketObservation struct {
 	// ID of the account that owns the destination bucket. Recommended to be set to prevent problems if the destination bucket ownership changes.
 	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
 
-	// Amazon S3 bucket ARN of the destination.
+	// Amazon S3 bucket ARN of the destination. Only general purpose buckets are supported.
 	BucketArn *string `json:"bucketArn,omitempty" tf:"bucket_arn,omitempty"`
 
 	// Contains the type of server-side encryption to use to encrypt the inventory (documented below).
@@ -226,7 +226,7 @@ type DestinationBucketParameters struct {
 	// +kubebuilder:validation:Optional
 	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
 
-	// Amazon S3 bucket ARN of the destination.
+	// Amazon S3 bucket ARN of the destination. Only general purpose buckets are supported.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3/v1beta2.Bucket
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -234,11 +234,11 @@ type DestinationBucketParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucketArn.
 	// +kubebuilder:validation:Optional
-	BucketArnRef *v1.Reference `json:"bucketArnRef,omitempty" tf:"-"`
+	BucketArnRef *v2.Reference `json:"bucketArnRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucketArn.
 	// +kubebuilder:validation:Optional
-	BucketArnSelector *v1.Selector `json:"bucketArnSelector,omitempty" tf:"-"`
+	BucketArnSelector *v2.Selector `json:"bucketArnSelector,omitempty" tf:"-"`
 
 	// Contains the type of server-side encryption to use to encrypt the inventory (documented below).
 	// +kubebuilder:validation:Optional
@@ -331,8 +331,8 @@ type SseS3Parameters struct {
 
 // BucketInventorySpec defines the desired state of BucketInventory
 type BucketInventorySpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     BucketInventoryParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   BucketInventoryParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -348,8 +348,8 @@ type BucketInventorySpec struct {
 
 // BucketInventoryStatus defines the observed state of BucketInventory.
 type BucketInventoryStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        BucketInventoryObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               BucketInventoryObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

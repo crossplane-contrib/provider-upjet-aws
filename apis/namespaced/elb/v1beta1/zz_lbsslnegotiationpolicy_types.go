@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AttributeInitParameters struct {
@@ -61,11 +60,11 @@ type LBSSLNegotiationPolicyInitParameters struct {
 
 	// Reference to a ELB in elb to populate loadBalancer.
 	// +kubebuilder:validation:Optional
-	LoadBalancerRef *v1.NamespacedReference `json:"loadBalancerRef,omitempty" tf:"-"`
+	LoadBalancerRef *v2.NamespacedReference `json:"loadBalancerRef,omitempty" tf:"-"`
 
 	// Selector for a ELB in elb to populate loadBalancer.
 	// +kubebuilder:validation:Optional
-	LoadBalancerSelector *v1.NamespacedSelector `json:"loadBalancerSelector,omitempty" tf:"-"`
+	LoadBalancerSelector *v2.NamespacedSelector `json:"loadBalancerSelector,omitempty" tf:"-"`
 
 	// The name of the SSL negotiation policy.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -125,11 +124,11 @@ type LBSSLNegotiationPolicyParameters struct {
 
 	// Reference to a ELB in elb to populate loadBalancer.
 	// +kubebuilder:validation:Optional
-	LoadBalancerRef *v1.NamespacedReference `json:"loadBalancerRef,omitempty" tf:"-"`
+	LoadBalancerRef *v2.NamespacedReference `json:"loadBalancerRef,omitempty" tf:"-"`
 
 	// Selector for a ELB in elb to populate loadBalancer.
 	// +kubebuilder:validation:Optional
-	LoadBalancerSelector *v1.NamespacedSelector `json:"loadBalancerSelector,omitempty" tf:"-"`
+	LoadBalancerSelector *v2.NamespacedSelector `json:"loadBalancerSelector,omitempty" tf:"-"`
 
 	// The name of the SSL negotiation policy.
 	// +kubebuilder:validation:Optional
@@ -165,8 +164,8 @@ type LBSSLNegotiationPolicySpec struct {
 
 // LBSSLNegotiationPolicyStatus defines the observed state of LBSSLNegotiationPolicy.
 type LBSSLNegotiationPolicyStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        LBSSLNegotiationPolicyObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               LBSSLNegotiationPolicyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

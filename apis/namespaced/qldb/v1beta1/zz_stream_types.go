@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type KinesisConfigurationInitParameters struct {
@@ -26,11 +25,11 @@ type KinesisConfigurationInitParameters struct {
 
 	// Reference to a Stream in kinesis to populate streamArn.
 	// +kubebuilder:validation:Optional
-	StreamArnRef *v1.NamespacedReference `json:"streamArnRef,omitempty" tf:"-"`
+	StreamArnRef *v2.NamespacedReference `json:"streamArnRef,omitempty" tf:"-"`
 
 	// Selector for a Stream in kinesis to populate streamArn.
 	// +kubebuilder:validation:Optional
-	StreamArnSelector *v1.NamespacedSelector `json:"streamArnSelector,omitempty" tf:"-"`
+	StreamArnSelector *v2.NamespacedSelector `json:"streamArnSelector,omitempty" tf:"-"`
 }
 
 type KinesisConfigurationObservation struct {
@@ -56,11 +55,11 @@ type KinesisConfigurationParameters struct {
 
 	// Reference to a Stream in kinesis to populate streamArn.
 	// +kubebuilder:validation:Optional
-	StreamArnRef *v1.NamespacedReference `json:"streamArnRef,omitempty" tf:"-"`
+	StreamArnRef *v2.NamespacedReference `json:"streamArnRef,omitempty" tf:"-"`
 
 	// Selector for a Stream in kinesis to populate streamArn.
 	// +kubebuilder:validation:Optional
-	StreamArnSelector *v1.NamespacedSelector `json:"streamArnSelector,omitempty" tf:"-"`
+	StreamArnSelector *v2.NamespacedSelector `json:"streamArnSelector,omitempty" tf:"-"`
 }
 
 type StreamInitParameters struct {
@@ -81,11 +80,11 @@ type StreamInitParameters struct {
 
 	// Reference to a Ledger in qldb to populate ledgerName.
 	// +kubebuilder:validation:Optional
-	LedgerNameRef *v1.NamespacedReference `json:"ledgerNameRef,omitempty" tf:"-"`
+	LedgerNameRef *v2.NamespacedReference `json:"ledgerNameRef,omitempty" tf:"-"`
 
 	// Selector for a Ledger in qldb to populate ledgerName.
 	// +kubebuilder:validation:Optional
-	LedgerNameSelector *v1.NamespacedSelector `json:"ledgerNameSelector,omitempty" tf:"-"`
+	LedgerNameSelector *v2.NamespacedSelector `json:"ledgerNameSelector,omitempty" tf:"-"`
 
 	// The Amazon Resource Name (ARN) of the IAM role that grants QLDB permissions for a journal stream to write data records to a Kinesis Data Streams resource.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
@@ -94,11 +93,11 @@ type StreamInitParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// The name that you want to assign to the QLDB journal stream. User-defined names can help identify and indicate the purpose of a stream.  Your stream name must be unique among other active streams for a given ledger. Stream names have the same naming constraints as ledger names, as defined in the Amazon QLDB Developer Guide.
 	StreamName *string `json:"streamName,omitempty" tf:"stream_name,omitempty"`
@@ -169,11 +168,11 @@ type StreamParameters struct {
 
 	// Reference to a Ledger in qldb to populate ledgerName.
 	// +kubebuilder:validation:Optional
-	LedgerNameRef *v1.NamespacedReference `json:"ledgerNameRef,omitempty" tf:"-"`
+	LedgerNameRef *v2.NamespacedReference `json:"ledgerNameRef,omitempty" tf:"-"`
 
 	// Selector for a Ledger in qldb to populate ledgerName.
 	// +kubebuilder:validation:Optional
-	LedgerNameSelector *v1.NamespacedSelector `json:"ledgerNameSelector,omitempty" tf:"-"`
+	LedgerNameSelector *v2.NamespacedSelector `json:"ledgerNameSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -188,11 +187,11 @@ type StreamParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// The name that you want to assign to the QLDB journal stream. User-defined names can help identify and indicate the purpose of a stream.  Your stream name must be unique among other active streams for a given ledger. Stream names have the same naming constraints as ledger names, as defined in the Amazon QLDB Developer Guide.
 	// +kubebuilder:validation:Optional
@@ -223,8 +222,8 @@ type StreamSpec struct {
 
 // StreamStatus defines the observed state of Stream.
 type StreamStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        StreamObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               StreamObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

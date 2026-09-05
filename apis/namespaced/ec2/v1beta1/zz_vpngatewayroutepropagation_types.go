@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type VPNGatewayRoutePropagationInitParameters struct {
@@ -23,11 +22,11 @@ type VPNGatewayRoutePropagationInitParameters struct {
 
 	// Reference to a RouteTable in ec2 to populate routeTableId.
 	// +kubebuilder:validation:Optional
-	RouteTableIDRef *v1.NamespacedReference `json:"routeTableIdRef,omitempty" tf:"-"`
+	RouteTableIDRef *v2.NamespacedReference `json:"routeTableIdRef,omitempty" tf:"-"`
 
 	// Selector for a RouteTable in ec2 to populate routeTableId.
 	// +kubebuilder:validation:Optional
-	RouteTableIDSelector *v1.NamespacedSelector `json:"routeTableIdSelector,omitempty" tf:"-"`
+	RouteTableIDSelector *v2.NamespacedSelector `json:"routeTableIdSelector,omitempty" tf:"-"`
 
 	// The id of the aws_vpn_gateway to propagate routes from.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.VPNGateway
@@ -36,11 +35,11 @@ type VPNGatewayRoutePropagationInitParameters struct {
 
 	// Reference to a VPNGateway in ec2 to populate vpnGatewayId.
 	// +kubebuilder:validation:Optional
-	VPNGatewayIDRef *v1.NamespacedReference `json:"vpnGatewayIdRef,omitempty" tf:"-"`
+	VPNGatewayIDRef *v2.NamespacedReference `json:"vpnGatewayIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPNGateway in ec2 to populate vpnGatewayId.
 	// +kubebuilder:validation:Optional
-	VPNGatewayIDSelector *v1.NamespacedSelector `json:"vpnGatewayIdSelector,omitempty" tf:"-"`
+	VPNGatewayIDSelector *v2.NamespacedSelector `json:"vpnGatewayIdSelector,omitempty" tf:"-"`
 }
 
 type VPNGatewayRoutePropagationObservation struct {
@@ -72,11 +71,11 @@ type VPNGatewayRoutePropagationParameters struct {
 
 	// Reference to a RouteTable in ec2 to populate routeTableId.
 	// +kubebuilder:validation:Optional
-	RouteTableIDRef *v1.NamespacedReference `json:"routeTableIdRef,omitempty" tf:"-"`
+	RouteTableIDRef *v2.NamespacedReference `json:"routeTableIdRef,omitempty" tf:"-"`
 
 	// Selector for a RouteTable in ec2 to populate routeTableId.
 	// +kubebuilder:validation:Optional
-	RouteTableIDSelector *v1.NamespacedSelector `json:"routeTableIdSelector,omitempty" tf:"-"`
+	RouteTableIDSelector *v2.NamespacedSelector `json:"routeTableIdSelector,omitempty" tf:"-"`
 
 	// The id of the aws_vpn_gateway to propagate routes from.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.VPNGateway
@@ -86,11 +85,11 @@ type VPNGatewayRoutePropagationParameters struct {
 
 	// Reference to a VPNGateway in ec2 to populate vpnGatewayId.
 	// +kubebuilder:validation:Optional
-	VPNGatewayIDRef *v1.NamespacedReference `json:"vpnGatewayIdRef,omitempty" tf:"-"`
+	VPNGatewayIDRef *v2.NamespacedReference `json:"vpnGatewayIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPNGateway in ec2 to populate vpnGatewayId.
 	// +kubebuilder:validation:Optional
-	VPNGatewayIDSelector *v1.NamespacedSelector `json:"vpnGatewayIdSelector,omitempty" tf:"-"`
+	VPNGatewayIDSelector *v2.NamespacedSelector `json:"vpnGatewayIdSelector,omitempty" tf:"-"`
 }
 
 // VPNGatewayRoutePropagationSpec defines the desired state of VPNGatewayRoutePropagation
@@ -112,8 +111,8 @@ type VPNGatewayRoutePropagationSpec struct {
 
 // VPNGatewayRoutePropagationStatus defines the observed state of VPNGatewayRoutePropagation.
 type VPNGatewayRoutePropagationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        VPNGatewayRoutePropagationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               VPNGatewayRoutePropagationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

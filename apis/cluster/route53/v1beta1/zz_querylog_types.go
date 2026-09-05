@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type QueryLogInitParameters struct {
@@ -22,11 +22,11 @@ type QueryLogInitParameters struct {
 
 	// Reference to a Group in cloudwatchlogs to populate cloudwatchLogGroupArn.
 	// +kubebuilder:validation:Optional
-	CloudwatchLogGroupArnRef *v1.Reference `json:"cloudwatchLogGroupArnRef,omitempty" tf:"-"`
+	CloudwatchLogGroupArnRef *v2.Reference `json:"cloudwatchLogGroupArnRef,omitempty" tf:"-"`
 
 	// Selector for a Group in cloudwatchlogs to populate cloudwatchLogGroupArn.
 	// +kubebuilder:validation:Optional
-	CloudwatchLogGroupArnSelector *v1.Selector `json:"cloudwatchLogGroupArnSelector,omitempty" tf:"-"`
+	CloudwatchLogGroupArnSelector *v2.Selector `json:"cloudwatchLogGroupArnSelector,omitempty" tf:"-"`
 
 	// Route53 hosted zone ID to enable query logs.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/route53/v1beta1.Zone
@@ -35,11 +35,11 @@ type QueryLogInitParameters struct {
 
 	// Reference to a Zone in route53 to populate zoneId.
 	// +kubebuilder:validation:Optional
-	ZoneIDRef *v1.Reference `json:"zoneIdRef,omitempty" tf:"-"`
+	ZoneIDRef *v2.Reference `json:"zoneIdRef,omitempty" tf:"-"`
 
 	// Selector for a Zone in route53 to populate zoneId.
 	// +kubebuilder:validation:Optional
-	ZoneIDSelector *v1.Selector `json:"zoneIdSelector,omitempty" tf:"-"`
+	ZoneIDSelector *v2.Selector `json:"zoneIdSelector,omitempty" tf:"-"`
 }
 
 type QueryLogObservation struct {
@@ -67,11 +67,11 @@ type QueryLogParameters struct {
 
 	// Reference to a Group in cloudwatchlogs to populate cloudwatchLogGroupArn.
 	// +kubebuilder:validation:Optional
-	CloudwatchLogGroupArnRef *v1.Reference `json:"cloudwatchLogGroupArnRef,omitempty" tf:"-"`
+	CloudwatchLogGroupArnRef *v2.Reference `json:"cloudwatchLogGroupArnRef,omitempty" tf:"-"`
 
 	// Selector for a Group in cloudwatchlogs to populate cloudwatchLogGroupArn.
 	// +kubebuilder:validation:Optional
-	CloudwatchLogGroupArnSelector *v1.Selector `json:"cloudwatchLogGroupArnSelector,omitempty" tf:"-"`
+	CloudwatchLogGroupArnSelector *v2.Selector `json:"cloudwatchLogGroupArnSelector,omitempty" tf:"-"`
 
 	// Route53 hosted zone ID to enable query logs.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/route53/v1beta1.Zone
@@ -81,17 +81,17 @@ type QueryLogParameters struct {
 
 	// Reference to a Zone in route53 to populate zoneId.
 	// +kubebuilder:validation:Optional
-	ZoneIDRef *v1.Reference `json:"zoneIdRef,omitempty" tf:"-"`
+	ZoneIDRef *v2.Reference `json:"zoneIdRef,omitempty" tf:"-"`
 
 	// Selector for a Zone in route53 to populate zoneId.
 	// +kubebuilder:validation:Optional
-	ZoneIDSelector *v1.Selector `json:"zoneIdSelector,omitempty" tf:"-"`
+	ZoneIDSelector *v2.Selector `json:"zoneIdSelector,omitempty" tf:"-"`
 }
 
 // QueryLogSpec defines the desired state of QueryLog
 type QueryLogSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     QueryLogParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   QueryLogParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -107,8 +107,8 @@ type QueryLogSpec struct {
 
 // QueryLogStatus defines the observed state of QueryLog.
 type QueryLogStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        QueryLogObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               QueryLogObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

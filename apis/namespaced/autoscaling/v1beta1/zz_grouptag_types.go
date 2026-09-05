@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type GroupTagInitParameters struct {
@@ -22,11 +21,11 @@ type GroupTagInitParameters struct {
 
 	// Reference to a AutoscalingGroup in autoscaling to populate autoscalingGroupName.
 	// +kubebuilder:validation:Optional
-	AutoscalingGroupNameRef *v1.NamespacedReference `json:"autoscalingGroupNameRef,omitempty" tf:"-"`
+	AutoscalingGroupNameRef *v2.NamespacedReference `json:"autoscalingGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a AutoscalingGroup in autoscaling to populate autoscalingGroupName.
 	// +kubebuilder:validation:Optional
-	AutoscalingGroupNameSelector *v1.NamespacedSelector `json:"autoscalingGroupNameSelector,omitempty" tf:"-"`
+	AutoscalingGroupNameSelector *v2.NamespacedSelector `json:"autoscalingGroupNameSelector,omitempty" tf:"-"`
 
 	// Tag to create. The tag block is documented below.
 	Tag *GroupTagTagInitParameters `json:"tag,omitempty" tf:"tag,omitempty"`
@@ -57,11 +56,11 @@ type GroupTagParameters struct {
 
 	// Reference to a AutoscalingGroup in autoscaling to populate autoscalingGroupName.
 	// +kubebuilder:validation:Optional
-	AutoscalingGroupNameRef *v1.NamespacedReference `json:"autoscalingGroupNameRef,omitempty" tf:"-"`
+	AutoscalingGroupNameRef *v2.NamespacedReference `json:"autoscalingGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a AutoscalingGroup in autoscaling to populate autoscalingGroupName.
 	// +kubebuilder:validation:Optional
-	AutoscalingGroupNameSelector *v1.NamespacedSelector `json:"autoscalingGroupNameSelector,omitempty" tf:"-"`
+	AutoscalingGroupNameSelector *v2.NamespacedSelector `json:"autoscalingGroupNameSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -131,8 +130,8 @@ type GroupTagSpec struct {
 
 // GroupTagStatus defines the observed state of GroupTag.
 type GroupTagStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        GroupTagObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               GroupTagObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

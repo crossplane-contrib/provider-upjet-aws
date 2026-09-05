@@ -9,15 +9,15 @@ metadata:
   annotations:
     meta.upbound.io/example-id: ec2/v1beta1/routetableassociation
   labels:
-    testing.upbound.io/example-name: a
-  name: a
+    testing.upbound.io/example-name: example
+  name: example
   namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
     routeTableIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: bar
+        testing.upbound.io/example-name: example
     subnetIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: foo
+        testing.upbound.io/example-name: example

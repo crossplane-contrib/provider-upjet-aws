@@ -5,44 +5,44 @@
 
 package v1beta1
 
-import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+import xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 
 // GetCondition of this ServiceQuota.
-func (mg *ServiceQuota) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *ServiceQuota) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this ServiceQuota.
-func (mg *ServiceQuota) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *ServiceQuota) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this ServiceQuota.
-func (mg *ServiceQuota) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *ServiceQuota) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this ServiceQuota.
-func (mg *ServiceQuota) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *ServiceQuota) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this ServiceQuota.
-func (mg *ServiceQuota) SetConditions(c ...xpv1.Condition) {
+func (mg *ServiceQuota) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this ServiceQuota.
-func (mg *ServiceQuota) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *ServiceQuota) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this ServiceQuota.
-func (mg *ServiceQuota) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *ServiceQuota) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this ServiceQuota.
-func (mg *ServiceQuota) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *ServiceQuota) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type HealthCheckInitParameters struct {
@@ -27,11 +26,11 @@ type HealthCheckInitParameters struct {
 
 	// References to HealthCheck in route53 to populate childHealthchecks.
 	// +kubebuilder:validation:Optional
-	ChildHealthchecksRefs []v1.NamespacedReference `json:"childHealthchecksRefs,omitempty" tf:"-"`
+	ChildHealthchecksRefs []v2.NamespacedReference `json:"childHealthchecksRefs,omitempty" tf:"-"`
 
 	// Selector for a list of HealthCheck in route53 to populate childHealthchecks.
 	// +kubebuilder:validation:Optional
-	ChildHealthchecksSelector *v1.NamespacedSelector `json:"childHealthchecksSelector,omitempty" tf:"-"`
+	ChildHealthchecksSelector *v2.NamespacedSelector `json:"childHealthchecksSelector,omitempty" tf:"-"`
 
 	// The name of the CloudWatch alarm.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/cloudwatch/v1beta1.MetricAlarm
@@ -39,11 +38,11 @@ type HealthCheckInitParameters struct {
 
 	// Reference to a MetricAlarm in cloudwatch to populate cloudwatchAlarmName.
 	// +kubebuilder:validation:Optional
-	CloudwatchAlarmNameRef *v1.NamespacedReference `json:"cloudwatchAlarmNameRef,omitempty" tf:"-"`
+	CloudwatchAlarmNameRef *v2.NamespacedReference `json:"cloudwatchAlarmNameRef,omitempty" tf:"-"`
 
 	// Selector for a MetricAlarm in cloudwatch to populate cloudwatchAlarmName.
 	// +kubebuilder:validation:Optional
-	CloudwatchAlarmNameSelector *v1.NamespacedSelector `json:"cloudwatchAlarmNameSelector,omitempty" tf:"-"`
+	CloudwatchAlarmNameSelector *v2.NamespacedSelector `json:"cloudwatchAlarmNameSelector,omitempty" tf:"-"`
 
 	// The region that the CloudWatch alarm was created in.
 	CloudwatchAlarmRegion *string `json:"cloudwatchAlarmRegion,omitempty" tf:"cloudwatch_alarm_region,omitempty"`
@@ -206,11 +205,11 @@ type HealthCheckParameters struct {
 
 	// References to HealthCheck in route53 to populate childHealthchecks.
 	// +kubebuilder:validation:Optional
-	ChildHealthchecksRefs []v1.NamespacedReference `json:"childHealthchecksRefs,omitempty" tf:"-"`
+	ChildHealthchecksRefs []v2.NamespacedReference `json:"childHealthchecksRefs,omitempty" tf:"-"`
 
 	// Selector for a list of HealthCheck in route53 to populate childHealthchecks.
 	// +kubebuilder:validation:Optional
-	ChildHealthchecksSelector *v1.NamespacedSelector `json:"childHealthchecksSelector,omitempty" tf:"-"`
+	ChildHealthchecksSelector *v2.NamespacedSelector `json:"childHealthchecksSelector,omitempty" tf:"-"`
 
 	// The name of the CloudWatch alarm.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/cloudwatch/v1beta1.MetricAlarm
@@ -219,11 +218,11 @@ type HealthCheckParameters struct {
 
 	// Reference to a MetricAlarm in cloudwatch to populate cloudwatchAlarmName.
 	// +kubebuilder:validation:Optional
-	CloudwatchAlarmNameRef *v1.NamespacedReference `json:"cloudwatchAlarmNameRef,omitempty" tf:"-"`
+	CloudwatchAlarmNameRef *v2.NamespacedReference `json:"cloudwatchAlarmNameRef,omitempty" tf:"-"`
 
 	// Selector for a MetricAlarm in cloudwatch to populate cloudwatchAlarmName.
 	// +kubebuilder:validation:Optional
-	CloudwatchAlarmNameSelector *v1.NamespacedSelector `json:"cloudwatchAlarmNameSelector,omitempty" tf:"-"`
+	CloudwatchAlarmNameSelector *v2.NamespacedSelector `json:"cloudwatchAlarmNameSelector,omitempty" tf:"-"`
 
 	// The region that the CloudWatch alarm was created in.
 	// +kubebuilder:validation:Optional
@@ -325,8 +324,8 @@ type HealthCheckSpec struct {
 
 // HealthCheckStatus defines the observed state of HealthCheck.
 type HealthCheckStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        HealthCheckObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               HealthCheckObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

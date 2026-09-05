@@ -34,9 +34,8 @@ spec:
     autoMinorVersionUpgrade: true
     backupRetentionPeriod: 14
     backupWindow: 09:46-10:16
-    name: example
+    dbName: example
     engine: postgres
-    engineVersion: "16.6"
     instanceClass: db.t3.micro
     kmsKeyIdSelector:
       matchLabels:
@@ -69,3 +68,12 @@ spec:
     deletionWindowInDays: 7
     description: Created with Crossplane
     region: us-west-1
+---
+apiVersion: v1
+stringData:
+  password: "password123-${Rand.RFC1123Subdomain}"
+kind: Secret
+metadata:
+  name: example-dbinstance
+  namespace: upbound-system
+type: Opaque

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type IntegrationResponseInitParameters struct {
@@ -21,11 +21,11 @@ type IntegrationResponseInitParameters struct {
 
 	// Reference to a API in apigatewayv2 to populate apiId.
 	// +kubebuilder:validation:Optional
-	APIIDRef *v1.Reference `json:"apiIdRef,omitempty" tf:"-"`
+	APIIDRef *v2.Reference `json:"apiIdRef,omitempty" tf:"-"`
 
 	// Selector for a API in apigatewayv2 to populate apiId.
 	// +kubebuilder:validation:Optional
-	APIIDSelector *v1.Selector `json:"apiIdSelector,omitempty" tf:"-"`
+	APIIDSelector *v2.Selector `json:"apiIdSelector,omitempty" tf:"-"`
 
 	// How to handle response payload content type conversions. Valid values: CONVERT_TO_BINARY, CONVERT_TO_TEXT.
 	ContentHandlingStrategy *string `json:"contentHandlingStrategy,omitempty" tf:"content_handling_strategy,omitempty"`
@@ -36,11 +36,11 @@ type IntegrationResponseInitParameters struct {
 
 	// Reference to a Integration in apigatewayv2 to populate integrationId.
 	// +kubebuilder:validation:Optional
-	IntegrationIDRef *v1.Reference `json:"integrationIdRef,omitempty" tf:"-"`
+	IntegrationIDRef *v2.Reference `json:"integrationIdRef,omitempty" tf:"-"`
 
 	// Selector for a Integration in apigatewayv2 to populate integrationId.
 	// +kubebuilder:validation:Optional
-	IntegrationIDSelector *v1.Selector `json:"integrationIdSelector,omitempty" tf:"-"`
+	IntegrationIDSelector *v2.Selector `json:"integrationIdSelector,omitempty" tf:"-"`
 
 	// Integration response key.
 	IntegrationResponseKey *string `json:"integrationResponseKey,omitempty" tf:"integration_response_key,omitempty"`
@@ -91,11 +91,11 @@ type IntegrationResponseParameters struct {
 
 	// Reference to a API in apigatewayv2 to populate apiId.
 	// +kubebuilder:validation:Optional
-	APIIDRef *v1.Reference `json:"apiIdRef,omitempty" tf:"-"`
+	APIIDRef *v2.Reference `json:"apiIdRef,omitempty" tf:"-"`
 
 	// Selector for a API in apigatewayv2 to populate apiId.
 	// +kubebuilder:validation:Optional
-	APIIDSelector *v1.Selector `json:"apiIdSelector,omitempty" tf:"-"`
+	APIIDSelector *v2.Selector `json:"apiIdSelector,omitempty" tf:"-"`
 
 	// How to handle response payload content type conversions. Valid values: CONVERT_TO_BINARY, CONVERT_TO_TEXT.
 	// +kubebuilder:validation:Optional
@@ -108,11 +108,11 @@ type IntegrationResponseParameters struct {
 
 	// Reference to a Integration in apigatewayv2 to populate integrationId.
 	// +kubebuilder:validation:Optional
-	IntegrationIDRef *v1.Reference `json:"integrationIdRef,omitempty" tf:"-"`
+	IntegrationIDRef *v2.Reference `json:"integrationIdRef,omitempty" tf:"-"`
 
 	// Selector for a Integration in apigatewayv2 to populate integrationId.
 	// +kubebuilder:validation:Optional
-	IntegrationIDSelector *v1.Selector `json:"integrationIdSelector,omitempty" tf:"-"`
+	IntegrationIDSelector *v2.Selector `json:"integrationIdSelector,omitempty" tf:"-"`
 
 	// Integration response key.
 	// +kubebuilder:validation:Optional
@@ -135,8 +135,8 @@ type IntegrationResponseParameters struct {
 
 // IntegrationResponseSpec defines the desired state of IntegrationResponse
 type IntegrationResponseSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     IntegrationResponseParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   IntegrationResponseParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -152,8 +152,8 @@ type IntegrationResponseSpec struct {
 
 // IntegrationResponseStatus defines the observed state of IntegrationResponse.
 type IntegrationResponseStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        IntegrationResponseObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               IntegrationResponseObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

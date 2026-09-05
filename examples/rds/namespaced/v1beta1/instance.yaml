@@ -21,7 +21,6 @@ spec:
     backupWindow: 09:46-10:16
     dbName: example
     engine: postgres
-    engineVersion: "16.6"
     instanceClass: db.t3.micro
     kmsKeyIdSelector:
       matchLabels:
@@ -53,3 +52,15 @@ spec:
     deletionWindowInDays: 7
     description: Created with Crossplane
     region: us-west-1
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rds/v1beta1/instance
+  name: example-dbinstance
+  namespace: upbound-system
+type: Opaque
+stringData:
+  password: "TestPass0!"
+

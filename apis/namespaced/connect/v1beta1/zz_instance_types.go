@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type InstanceInitParameters struct {
@@ -32,11 +31,11 @@ type InstanceInitParameters struct {
 
 	// Reference to a Directory in ds to populate directoryId.
 	// +kubebuilder:validation:Optional
-	DirectoryIDRef *v1.NamespacedReference `json:"directoryIdRef,omitempty" tf:"-"`
+	DirectoryIDRef *v2.NamespacedReference `json:"directoryIdRef,omitempty" tf:"-"`
 
 	// Selector for a Directory in ds to populate directoryId.
 	// +kubebuilder:validation:Optional
-	DirectoryIDSelector *v1.NamespacedSelector `json:"directoryIdSelector,omitempty" tf:"-"`
+	DirectoryIDSelector *v2.NamespacedSelector `json:"directoryIdSelector,omitempty" tf:"-"`
 
 	// Specifies whether early media for outbound calls is enabled . Defaults to true if outbound calls is enabled.
 	EarlyMediaEnabled *bool `json:"earlyMediaEnabled,omitempty" tf:"early_media_enabled,omitempty"`
@@ -143,11 +142,11 @@ type InstanceParameters struct {
 
 	// Reference to a Directory in ds to populate directoryId.
 	// +kubebuilder:validation:Optional
-	DirectoryIDRef *v1.NamespacedReference `json:"directoryIdRef,omitempty" tf:"-"`
+	DirectoryIDRef *v2.NamespacedReference `json:"directoryIdRef,omitempty" tf:"-"`
 
 	// Selector for a Directory in ds to populate directoryId.
 	// +kubebuilder:validation:Optional
-	DirectoryIDSelector *v1.NamespacedSelector `json:"directoryIdSelector,omitempty" tf:"-"`
+	DirectoryIDSelector *v2.NamespacedSelector `json:"directoryIdSelector,omitempty" tf:"-"`
 
 	// Specifies whether early media for outbound calls is enabled . Defaults to true if outbound calls is enabled.
 	// +kubebuilder:validation:Optional
@@ -203,8 +202,8 @@ type InstanceSpec struct {
 
 // InstanceStatus defines the observed state of Instance.
 type InstanceStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        InstanceObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               InstanceObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

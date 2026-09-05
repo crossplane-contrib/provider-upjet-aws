@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type VPCIpamScopeInitParameters struct {
@@ -24,11 +24,11 @@ type VPCIpamScopeInitParameters struct {
 
 	// Reference to a VPCIpam in ec2 to populate ipamId.
 	// +kubebuilder:validation:Optional
-	IpamIDRef *v1.Reference `json:"ipamIdRef,omitempty" tf:"-"`
+	IpamIDRef *v2.Reference `json:"ipamIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPCIpam in ec2 to populate ipamId.
 	// +kubebuilder:validation:Optional
-	IpamIDSelector *v1.Selector `json:"ipamIdSelector,omitempty" tf:"-"`
+	IpamIDSelector *v2.Selector `json:"ipamIdSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -86,11 +86,11 @@ type VPCIpamScopeParameters struct {
 
 	// Reference to a VPCIpam in ec2 to populate ipamId.
 	// +kubebuilder:validation:Optional
-	IpamIDRef *v1.Reference `json:"ipamIdRef,omitempty" tf:"-"`
+	IpamIDRef *v2.Reference `json:"ipamIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPCIpam in ec2 to populate ipamId.
 	// +kubebuilder:validation:Optional
-	IpamIDSelector *v1.Selector `json:"ipamIdSelector,omitempty" tf:"-"`
+	IpamIDSelector *v2.Selector `json:"ipamIdSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -105,8 +105,8 @@ type VPCIpamScopeParameters struct {
 
 // VPCIpamScopeSpec defines the desired state of VPCIpamScope
 type VPCIpamScopeSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     VPCIpamScopeParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   VPCIpamScopeParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -122,8 +122,8 @@ type VPCIpamScopeSpec struct {
 
 // VPCIpamScopeStatus defines the observed state of VPCIpamScope.
 type VPCIpamScopeStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        VPCIpamScopeObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               VPCIpamScopeObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

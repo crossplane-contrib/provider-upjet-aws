@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type DomainServiceAccessPolicyInitParameters struct {
@@ -26,11 +25,11 @@ type DomainServiceAccessPolicyInitParameters struct {
 
 	// Reference to a Domain in cloudsearch to populate domainName.
 	// +kubebuilder:validation:Optional
-	DomainNameRef *v1.NamespacedReference `json:"domainNameRef,omitempty" tf:"-"`
+	DomainNameRef *v2.NamespacedReference `json:"domainNameRef,omitempty" tf:"-"`
 
 	// Selector for a Domain in cloudsearch to populate domainName.
 	// +kubebuilder:validation:Optional
-	DomainNameSelector *v1.NamespacedSelector `json:"domainNameSelector,omitempty" tf:"-"`
+	DomainNameSelector *v2.NamespacedSelector `json:"domainNameSelector,omitempty" tf:"-"`
 }
 
 type DomainServiceAccessPolicyObservation struct {
@@ -62,11 +61,11 @@ type DomainServiceAccessPolicyParameters struct {
 
 	// Reference to a Domain in cloudsearch to populate domainName.
 	// +kubebuilder:validation:Optional
-	DomainNameRef *v1.NamespacedReference `json:"domainNameRef,omitempty" tf:"-"`
+	DomainNameRef *v2.NamespacedReference `json:"domainNameRef,omitempty" tf:"-"`
 
 	// Selector for a Domain in cloudsearch to populate domainName.
 	// +kubebuilder:validation:Optional
-	DomainNameSelector *v1.NamespacedSelector `json:"domainNameSelector,omitempty" tf:"-"`
+	DomainNameSelector *v2.NamespacedSelector `json:"domainNameSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -93,8 +92,8 @@ type DomainServiceAccessPolicySpec struct {
 
 // DomainServiceAccessPolicyStatus defines the observed state of DomainServiceAccessPolicy.
 type DomainServiceAccessPolicyStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        DomainServiceAccessPolicyObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               DomainServiceAccessPolicyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

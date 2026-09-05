@@ -72,5 +72,3 @@ metadata:
   namespace: default
 stringData:
   clientsecret: "clientsecretvalue"
-
----

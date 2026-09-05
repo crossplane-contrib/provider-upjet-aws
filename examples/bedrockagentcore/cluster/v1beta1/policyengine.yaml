@@ -1,0 +1,21 @@
+# SPDX-FileCopyrightText: 2026 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+# Basic Policy Engine Example
+# Creates a Bedrock AgentCore Policy Engine that controls what actions and
+# resources an agent runtime can use. Encryption defaults to an AWS managed key.
+
+apiVersion: bedrockagentcore.aws.upbound.io/v1beta1
+kind: PolicyEngine
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrockagentcore/v1beta1/policyengine
+  labels:
+    testing.upbound.io/example-name: policyengine
+  name: policyengine
+spec:
+  forProvider:
+    region: us-west-2
+    name: example_policy_engine
+    description: Policy engine for customer service agent

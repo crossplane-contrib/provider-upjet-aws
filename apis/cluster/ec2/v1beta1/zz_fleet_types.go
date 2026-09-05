@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AcceleratorCountInitParameters struct {
@@ -709,11 +709,11 @@ type LaunchTemplateSpecificationInitParameters struct {
 
 	// Reference to a LaunchTemplate in ec2 to populate launchTemplateId.
 	// +kubebuilder:validation:Optional
-	LaunchTemplateIDRef *v1.Reference `json:"launchTemplateIdRef,omitempty" tf:"-"`
+	LaunchTemplateIDRef *v2.Reference `json:"launchTemplateIdRef,omitempty" tf:"-"`
 
 	// Selector for a LaunchTemplate in ec2 to populate launchTemplateId.
 	// +kubebuilder:validation:Optional
-	LaunchTemplateIDSelector *v1.Selector `json:"launchTemplateIdSelector,omitempty" tf:"-"`
+	LaunchTemplateIDSelector *v2.Selector `json:"launchTemplateIdSelector,omitempty" tf:"-"`
 
 	// The name of the launch template.
 	LaunchTemplateName *string `json:"launchTemplateName,omitempty" tf:"launch_template_name,omitempty"`
@@ -725,11 +725,11 @@ type LaunchTemplateSpecificationInitParameters struct {
 
 	// Reference to a LaunchTemplate in ec2 to populate version.
 	// +kubebuilder:validation:Optional
-	VersionRef *v1.Reference `json:"versionRef,omitempty" tf:"-"`
+	VersionRef *v2.Reference `json:"versionRef,omitempty" tf:"-"`
 
 	// Selector for a LaunchTemplate in ec2 to populate version.
 	// +kubebuilder:validation:Optional
-	VersionSelector *v1.Selector `json:"versionSelector,omitempty" tf:"-"`
+	VersionSelector *v2.Selector `json:"versionSelector,omitempty" tf:"-"`
 }
 
 type LaunchTemplateSpecificationObservation struct {
@@ -754,11 +754,11 @@ type LaunchTemplateSpecificationParameters struct {
 
 	// Reference to a LaunchTemplate in ec2 to populate launchTemplateId.
 	// +kubebuilder:validation:Optional
-	LaunchTemplateIDRef *v1.Reference `json:"launchTemplateIdRef,omitempty" tf:"-"`
+	LaunchTemplateIDRef *v2.Reference `json:"launchTemplateIdRef,omitempty" tf:"-"`
 
 	// Selector for a LaunchTemplate in ec2 to populate launchTemplateId.
 	// +kubebuilder:validation:Optional
-	LaunchTemplateIDSelector *v1.Selector `json:"launchTemplateIdSelector,omitempty" tf:"-"`
+	LaunchTemplateIDSelector *v2.Selector `json:"launchTemplateIdSelector,omitempty" tf:"-"`
 
 	// The name of the launch template.
 	// +kubebuilder:validation:Optional
@@ -772,11 +772,11 @@ type LaunchTemplateSpecificationParameters struct {
 
 	// Reference to a LaunchTemplate in ec2 to populate version.
 	// +kubebuilder:validation:Optional
-	VersionRef *v1.Reference `json:"versionRef,omitempty" tf:"-"`
+	VersionRef *v2.Reference `json:"versionRef,omitempty" tf:"-"`
 
 	// Selector for a LaunchTemplate in ec2 to populate version.
 	// +kubebuilder:validation:Optional
-	VersionSelector *v1.Selector `json:"versionSelector,omitempty" tf:"-"`
+	VersionSelector *v2.Selector `json:"versionSelector,omitempty" tf:"-"`
 }
 
 type MaintenanceStrategiesInitParameters struct {
@@ -1276,8 +1276,8 @@ type VcpuCountParameters struct {
 
 // FleetSpec defines the desired state of Fleet
 type FleetSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     FleetParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   FleetParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -1293,8 +1293,8 @@ type FleetSpec struct {
 
 // FleetStatus defines the observed state of Fleet.
 type FleetStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        FleetObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               FleetObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AdvancedBackupSettingInitParameters struct {
@@ -239,11 +239,11 @@ type RuleInitParameters struct {
 
 	// Reference to a Vault in backup to populate targetVaultName.
 	// +kubebuilder:validation:Optional
-	TargetVaultNameRef *v1.Reference `json:"targetVaultNameRef,omitempty" tf:"-"`
+	TargetVaultNameRef *v2.Reference `json:"targetVaultNameRef,omitempty" tf:"-"`
 
 	// Selector for a Vault in backup to populate targetVaultName.
 	// +kubebuilder:validation:Optional
-	TargetVaultNameSelector *v1.Selector `json:"targetVaultNameSelector,omitempty" tf:"-"`
+	TargetVaultNameSelector *v2.Selector `json:"targetVaultNameSelector,omitempty" tf:"-"`
 }
 
 type RuleLifecycleInitParameters struct {
@@ -379,11 +379,11 @@ type RuleParameters struct {
 
 	// Reference to a Vault in backup to populate targetVaultName.
 	// +kubebuilder:validation:Optional
-	TargetVaultNameRef *v1.Reference `json:"targetVaultNameRef,omitempty" tf:"-"`
+	TargetVaultNameRef *v2.Reference `json:"targetVaultNameRef,omitempty" tf:"-"`
 
 	// Selector for a Vault in backup to populate targetVaultName.
 	// +kubebuilder:validation:Optional
-	TargetVaultNameSelector *v1.Selector `json:"targetVaultNameSelector,omitempty" tf:"-"`
+	TargetVaultNameSelector *v2.Selector `json:"targetVaultNameSelector,omitempty" tf:"-"`
 }
 
 type ScanActionInitParameters struct {
@@ -459,8 +459,8 @@ type ScanSettingParameters struct {
 
 // PlanSpec defines the desired state of Plan
 type PlanSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     PlanParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   PlanParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -476,8 +476,8 @@ type PlanSpec struct {
 
 // PlanStatus defines the observed state of Plan.
 type PlanStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        PlanObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               PlanObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

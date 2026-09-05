@@ -22,10 +22,16 @@ func (tr *Browser) Hub() {}
 func (tr *CodeInterpreter) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *Evaluator) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *Gateway) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *GatewayTarget) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *Harness) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *Memory) Hub() {}
@@ -35,6 +41,18 @@ func (tr *MemoryStrategy) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *Oauth2CredentialProvider) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *OnlineEvaluationConfig) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *Policy) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *PolicyEngine) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *ResourcePolicy) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *TokenVaultCmk) Hub() {}

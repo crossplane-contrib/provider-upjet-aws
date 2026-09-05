@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ThesaurusInitParameters struct {
@@ -25,11 +25,11 @@ type ThesaurusInitParameters struct {
 
 	// Reference to a Index in kendra to populate indexId.
 	// +kubebuilder:validation:Optional
-	IndexIDRef *v1.Reference `json:"indexIdRef,omitempty" tf:"-"`
+	IndexIDRef *v2.Reference `json:"indexIdRef,omitempty" tf:"-"`
 
 	// Selector for a Index in kendra to populate indexId.
 	// +kubebuilder:validation:Optional
-	IndexIDSelector *v1.Selector `json:"indexIdSelector,omitempty" tf:"-"`
+	IndexIDSelector *v2.Selector `json:"indexIdSelector,omitempty" tf:"-"`
 
 	// The name for the thesaurus.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -41,11 +41,11 @@ type ThesaurusInitParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.Reference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// The S3 path where your thesaurus file sits in S3. Detailed below.
 	SourceS3Path []ThesaurusSourceS3PathInitParameters `json:"sourceS3Path,omitempty" tf:"source_s3_path,omitempty"`
@@ -111,11 +111,11 @@ type ThesaurusParameters struct {
 
 	// Reference to a Index in kendra to populate indexId.
 	// +kubebuilder:validation:Optional
-	IndexIDRef *v1.Reference `json:"indexIdRef,omitempty" tf:"-"`
+	IndexIDRef *v2.Reference `json:"indexIdRef,omitempty" tf:"-"`
 
 	// Selector for a Index in kendra to populate indexId.
 	// +kubebuilder:validation:Optional
-	IndexIDSelector *v1.Selector `json:"indexIdSelector,omitempty" tf:"-"`
+	IndexIDSelector *v2.Selector `json:"indexIdSelector,omitempty" tf:"-"`
 
 	// The name for the thesaurus.
 	// +kubebuilder:validation:Optional
@@ -134,11 +134,11 @@ type ThesaurusParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.Reference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// The S3 path where your thesaurus file sits in S3. Detailed below.
 	// +kubebuilder:validation:Optional
@@ -159,11 +159,11 @@ type ThesaurusSourceS3PathInitParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketRef *v1.Reference `json:"bucketRef,omitempty" tf:"-"`
+	BucketRef *v2.Reference `json:"bucketRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
+	BucketSelector *v2.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
 	// The name of the file.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3/v1beta1.Object
@@ -172,11 +172,11 @@ type ThesaurusSourceS3PathInitParameters struct {
 
 	// Reference to a Object in s3 to populate key.
 	// +kubebuilder:validation:Optional
-	KeyRef *v1.Reference `json:"keyRef,omitempty" tf:"-"`
+	KeyRef *v2.Reference `json:"keyRef,omitempty" tf:"-"`
 
 	// Selector for a Object in s3 to populate key.
 	// +kubebuilder:validation:Optional
-	KeySelector *v1.Selector `json:"keySelector,omitempty" tf:"-"`
+	KeySelector *v2.Selector `json:"keySelector,omitempty" tf:"-"`
 }
 
 type ThesaurusSourceS3PathObservation struct {
@@ -198,11 +198,11 @@ type ThesaurusSourceS3PathParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketRef *v1.Reference `json:"bucketRef,omitempty" tf:"-"`
+	BucketRef *v2.Reference `json:"bucketRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
+	BucketSelector *v2.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
 	// The name of the file.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3/v1beta1.Object
@@ -212,17 +212,17 @@ type ThesaurusSourceS3PathParameters struct {
 
 	// Reference to a Object in s3 to populate key.
 	// +kubebuilder:validation:Optional
-	KeyRef *v1.Reference `json:"keyRef,omitempty" tf:"-"`
+	KeyRef *v2.Reference `json:"keyRef,omitempty" tf:"-"`
 
 	// Selector for a Object in s3 to populate key.
 	// +kubebuilder:validation:Optional
-	KeySelector *v1.Selector `json:"keySelector,omitempty" tf:"-"`
+	KeySelector *v2.Selector `json:"keySelector,omitempty" tf:"-"`
 }
 
 // ThesaurusSpec defines the desired state of Thesaurus
 type ThesaurusSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ThesaurusParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ThesaurusParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -238,8 +238,8 @@ type ThesaurusSpec struct {
 
 // ThesaurusStatus defines the observed state of Thesaurus.
 type ThesaurusStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ThesaurusObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ThesaurusObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

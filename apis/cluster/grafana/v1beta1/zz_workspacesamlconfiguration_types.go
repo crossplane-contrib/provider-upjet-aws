@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type WorkspaceSAMLConfigurationInitParameters struct {
@@ -57,11 +57,11 @@ type WorkspaceSAMLConfigurationInitParameters struct {
 
 	// Reference to a Workspace in grafana to populate workspaceId.
 	// +kubebuilder:validation:Optional
-	WorkspaceIDRef *v1.Reference `json:"workspaceIdRef,omitempty" tf:"-"`
+	WorkspaceIDRef *v2.Reference `json:"workspaceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Workspace in grafana to populate workspaceId.
 	// +kubebuilder:validation:Optional
-	WorkspaceIDSelector *v1.Selector `json:"workspaceIdSelector,omitempty" tf:"-"`
+	WorkspaceIDSelector *v2.Selector `json:"workspaceIdSelector,omitempty" tf:"-"`
 }
 
 type WorkspaceSAMLConfigurationObservation struct {
@@ -177,17 +177,17 @@ type WorkspaceSAMLConfigurationParameters struct {
 
 	// Reference to a Workspace in grafana to populate workspaceId.
 	// +kubebuilder:validation:Optional
-	WorkspaceIDRef *v1.Reference `json:"workspaceIdRef,omitempty" tf:"-"`
+	WorkspaceIDRef *v2.Reference `json:"workspaceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Workspace in grafana to populate workspaceId.
 	// +kubebuilder:validation:Optional
-	WorkspaceIDSelector *v1.Selector `json:"workspaceIdSelector,omitempty" tf:"-"`
+	WorkspaceIDSelector *v2.Selector `json:"workspaceIdSelector,omitempty" tf:"-"`
 }
 
 // WorkspaceSAMLConfigurationSpec defines the desired state of WorkspaceSAMLConfiguration
 type WorkspaceSAMLConfigurationSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     WorkspaceSAMLConfigurationParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   WorkspaceSAMLConfigurationParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -203,8 +203,8 @@ type WorkspaceSAMLConfigurationSpec struct {
 
 // WorkspaceSAMLConfigurationStatus defines the observed state of WorkspaceSAMLConfiguration.
 type WorkspaceSAMLConfigurationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        WorkspaceSAMLConfigurationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               WorkspaceSAMLConfigurationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

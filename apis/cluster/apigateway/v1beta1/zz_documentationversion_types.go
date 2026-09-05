@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type DocumentationVersionInitParameters struct {
@@ -25,11 +25,11 @@ type DocumentationVersionInitParameters struct {
 
 	// Reference to a RestAPI in apigateway to populate restApiId.
 	// +kubebuilder:validation:Optional
-	RestAPIIDRef *v1.Reference `json:"restApiIdRef,omitempty" tf:"-"`
+	RestAPIIDRef *v2.Reference `json:"restApiIdRef,omitempty" tf:"-"`
 
 	// Selector for a RestAPI in apigateway to populate restApiId.
 	// +kubebuilder:validation:Optional
-	RestAPIIDSelector *v1.Selector `json:"restApiIdSelector,omitempty" tf:"-"`
+	RestAPIIDSelector *v2.Selector `json:"restApiIdSelector,omitempty" tf:"-"`
 
 	// Version identifier of the API documentation snapshot.
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
@@ -72,11 +72,11 @@ type DocumentationVersionParameters struct {
 
 	// Reference to a RestAPI in apigateway to populate restApiId.
 	// +kubebuilder:validation:Optional
-	RestAPIIDRef *v1.Reference `json:"restApiIdRef,omitempty" tf:"-"`
+	RestAPIIDRef *v2.Reference `json:"restApiIdRef,omitempty" tf:"-"`
 
 	// Selector for a RestAPI in apigateway to populate restApiId.
 	// +kubebuilder:validation:Optional
-	RestAPIIDSelector *v1.Selector `json:"restApiIdSelector,omitempty" tf:"-"`
+	RestAPIIDSelector *v2.Selector `json:"restApiIdSelector,omitempty" tf:"-"`
 
 	// Version identifier of the API documentation snapshot.
 	// +kubebuilder:validation:Optional
@@ -85,8 +85,8 @@ type DocumentationVersionParameters struct {
 
 // DocumentationVersionSpec defines the desired state of DocumentationVersion
 type DocumentationVersionSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     DocumentationVersionParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   DocumentationVersionParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -102,8 +102,8 @@ type DocumentationVersionSpec struct {
 
 // DocumentationVersionStatus defines the observed state of DocumentationVersion.
 type DocumentationVersionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        DocumentationVersionObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               DocumentationVersionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ResourceInitParameters struct {
@@ -25,14 +25,14 @@ type ResourceInitParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.Reference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// JSON string of the CloudFormation resource type schema which is used for plan time validation where possible. Automatically fetched if not provided. In large scale environments with multiple resources using the same type_name, it is recommended to fetch the schema once via the aws_cloudformation_type data source and use this argument to reduce DescribeType API operation throttling. This value is marked sensitive only to prevent large plan differences from showing.
-	SchemaSecretRef *v1.SecretKeySelector `json:"schemaSecretRef,omitempty" tf:"-"`
+	SchemaSecretRef *v2.SecretKeySelector `json:"schemaSecretRef,omitempty" tf:"-"`
 
 	// CloudFormation resource type name. For example, AWS::EC2::VPC.
 	TypeName *string `json:"typeName,omitempty" tf:"type_name,omitempty"`
@@ -84,15 +84,15 @@ type ResourceParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.Reference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// JSON string of the CloudFormation resource type schema which is used for plan time validation where possible. Automatically fetched if not provided. In large scale environments with multiple resources using the same type_name, it is recommended to fetch the schema once via the aws_cloudformation_type data source and use this argument to reduce DescribeType API operation throttling. This value is marked sensitive only to prevent large plan differences from showing.
 	// +kubebuilder:validation:Optional
-	SchemaSecretRef *v1.SecretKeySelector `json:"schemaSecretRef,omitempty" tf:"-"`
+	SchemaSecretRef *v2.SecretKeySelector `json:"schemaSecretRef,omitempty" tf:"-"`
 
 	// CloudFormation resource type name. For example, AWS::EC2::VPC.
 	// +kubebuilder:validation:Optional
@@ -105,8 +105,8 @@ type ResourceParameters struct {
 
 // ResourceSpec defines the desired state of Resource
 type ResourceSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ResourceParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ResourceParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -122,8 +122,8 @@ type ResourceSpec struct {
 
 // ResourceStatus defines the observed state of Resource.
 type ResourceStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ResourceObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ResourceObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

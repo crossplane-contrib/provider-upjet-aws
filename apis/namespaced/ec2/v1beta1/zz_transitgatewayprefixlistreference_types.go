@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type TransitGatewayPrefixListReferenceInitParameters struct {
@@ -26,11 +25,11 @@ type TransitGatewayPrefixListReferenceInitParameters struct {
 
 	// Reference to a ManagedPrefixList in ec2 to populate prefixListId.
 	// +kubebuilder:validation:Optional
-	PrefixListIDRef *v1.NamespacedReference `json:"prefixListIdRef,omitempty" tf:"-"`
+	PrefixListIDRef *v2.NamespacedReference `json:"prefixListIdRef,omitempty" tf:"-"`
 
 	// Selector for a ManagedPrefixList in ec2 to populate prefixListId.
 	// +kubebuilder:validation:Optional
-	PrefixListIDSelector *v1.NamespacedSelector `json:"prefixListIdSelector,omitempty" tf:"-"`
+	PrefixListIDSelector *v2.NamespacedSelector `json:"prefixListIdSelector,omitempty" tf:"-"`
 
 	// Identifier of EC2 Transit Gateway Attachment.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.TransitGatewayVPCAttachment
@@ -39,11 +38,11 @@ type TransitGatewayPrefixListReferenceInitParameters struct {
 
 	// Reference to a TransitGatewayVPCAttachment in ec2 to populate transitGatewayAttachmentId.
 	// +kubebuilder:validation:Optional
-	TransitGatewayAttachmentIDRef *v1.NamespacedReference `json:"transitGatewayAttachmentIdRef,omitempty" tf:"-"`
+	TransitGatewayAttachmentIDRef *v2.NamespacedReference `json:"transitGatewayAttachmentIdRef,omitempty" tf:"-"`
 
 	// Selector for a TransitGatewayVPCAttachment in ec2 to populate transitGatewayAttachmentId.
 	// +kubebuilder:validation:Optional
-	TransitGatewayAttachmentIDSelector *v1.NamespacedSelector `json:"transitGatewayAttachmentIdSelector,omitempty" tf:"-"`
+	TransitGatewayAttachmentIDSelector *v2.NamespacedSelector `json:"transitGatewayAttachmentIdSelector,omitempty" tf:"-"`
 
 	// Identifier of EC2 Transit Gateway Route Table.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.TransitGateway
@@ -52,11 +51,11 @@ type TransitGatewayPrefixListReferenceInitParameters struct {
 
 	// Reference to a TransitGateway in ec2 to populate transitGatewayRouteTableId.
 	// +kubebuilder:validation:Optional
-	TransitGatewayRouteTableIDRef *v1.NamespacedReference `json:"transitGatewayRouteTableIdRef,omitempty" tf:"-"`
+	TransitGatewayRouteTableIDRef *v2.NamespacedReference `json:"transitGatewayRouteTableIdRef,omitempty" tf:"-"`
 
 	// Selector for a TransitGateway in ec2 to populate transitGatewayRouteTableId.
 	// +kubebuilder:validation:Optional
-	TransitGatewayRouteTableIDSelector *v1.NamespacedSelector `json:"transitGatewayRouteTableIdSelector,omitempty" tf:"-"`
+	TransitGatewayRouteTableIDSelector *v2.NamespacedSelector `json:"transitGatewayRouteTableIdSelector,omitempty" tf:"-"`
 }
 
 type TransitGatewayPrefixListReferenceObservation struct {
@@ -98,11 +97,11 @@ type TransitGatewayPrefixListReferenceParameters struct {
 
 	// Reference to a ManagedPrefixList in ec2 to populate prefixListId.
 	// +kubebuilder:validation:Optional
-	PrefixListIDRef *v1.NamespacedReference `json:"prefixListIdRef,omitempty" tf:"-"`
+	PrefixListIDRef *v2.NamespacedReference `json:"prefixListIdRef,omitempty" tf:"-"`
 
 	// Selector for a ManagedPrefixList in ec2 to populate prefixListId.
 	// +kubebuilder:validation:Optional
-	PrefixListIDSelector *v1.NamespacedSelector `json:"prefixListIdSelector,omitempty" tf:"-"`
+	PrefixListIDSelector *v2.NamespacedSelector `json:"prefixListIdSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -117,11 +116,11 @@ type TransitGatewayPrefixListReferenceParameters struct {
 
 	// Reference to a TransitGatewayVPCAttachment in ec2 to populate transitGatewayAttachmentId.
 	// +kubebuilder:validation:Optional
-	TransitGatewayAttachmentIDRef *v1.NamespacedReference `json:"transitGatewayAttachmentIdRef,omitempty" tf:"-"`
+	TransitGatewayAttachmentIDRef *v2.NamespacedReference `json:"transitGatewayAttachmentIdRef,omitempty" tf:"-"`
 
 	// Selector for a TransitGatewayVPCAttachment in ec2 to populate transitGatewayAttachmentId.
 	// +kubebuilder:validation:Optional
-	TransitGatewayAttachmentIDSelector *v1.NamespacedSelector `json:"transitGatewayAttachmentIdSelector,omitempty" tf:"-"`
+	TransitGatewayAttachmentIDSelector *v2.NamespacedSelector `json:"transitGatewayAttachmentIdSelector,omitempty" tf:"-"`
 
 	// Identifier of EC2 Transit Gateway Route Table.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.TransitGateway
@@ -131,11 +130,11 @@ type TransitGatewayPrefixListReferenceParameters struct {
 
 	// Reference to a TransitGateway in ec2 to populate transitGatewayRouteTableId.
 	// +kubebuilder:validation:Optional
-	TransitGatewayRouteTableIDRef *v1.NamespacedReference `json:"transitGatewayRouteTableIdRef,omitempty" tf:"-"`
+	TransitGatewayRouteTableIDRef *v2.NamespacedReference `json:"transitGatewayRouteTableIdRef,omitempty" tf:"-"`
 
 	// Selector for a TransitGateway in ec2 to populate transitGatewayRouteTableId.
 	// +kubebuilder:validation:Optional
-	TransitGatewayRouteTableIDSelector *v1.NamespacedSelector `json:"transitGatewayRouteTableIdSelector,omitempty" tf:"-"`
+	TransitGatewayRouteTableIDSelector *v2.NamespacedSelector `json:"transitGatewayRouteTableIdSelector,omitempty" tf:"-"`
 }
 
 // TransitGatewayPrefixListReferenceSpec defines the desired state of TransitGatewayPrefixListReference
@@ -157,8 +156,8 @@ type TransitGatewayPrefixListReferenceSpec struct {
 
 // TransitGatewayPrefixListReferenceStatus defines the observed state of TransitGatewayPrefixListReference.
 type TransitGatewayPrefixListReferenceStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        TransitGatewayPrefixListReferenceObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               TransitGatewayPrefixListReferenceObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

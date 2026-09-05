@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ActionInitParameters struct {
@@ -109,11 +109,11 @@ type ActionTargetVirtualServiceInitParameters struct {
 
 	// Reference to a VirtualService in appmesh to populate virtualServiceName.
 	// +kubebuilder:validation:Optional
-	VirtualServiceNameRef *v1.Reference `json:"virtualServiceNameRef,omitempty" tf:"-"`
+	VirtualServiceNameRef *v2.Reference `json:"virtualServiceNameRef,omitempty" tf:"-"`
 
 	// Selector for a VirtualService in appmesh to populate virtualServiceName.
 	// +kubebuilder:validation:Optional
-	VirtualServiceNameSelector *v1.Selector `json:"virtualServiceNameSelector,omitempty" tf:"-"`
+	VirtualServiceNameSelector *v2.Selector `json:"virtualServiceNameSelector,omitempty" tf:"-"`
 }
 
 type ActionTargetVirtualServiceObservation struct {
@@ -132,11 +132,11 @@ type ActionTargetVirtualServiceParameters struct {
 
 	// Reference to a VirtualService in appmesh to populate virtualServiceName.
 	// +kubebuilder:validation:Optional
-	VirtualServiceNameRef *v1.Reference `json:"virtualServiceNameRef,omitempty" tf:"-"`
+	VirtualServiceNameRef *v2.Reference `json:"virtualServiceNameRef,omitempty" tf:"-"`
 
 	// Selector for a VirtualService in appmesh to populate virtualServiceName.
 	// +kubebuilder:validation:Optional
-	VirtualServiceNameSelector *v1.Selector `json:"virtualServiceNameSelector,omitempty" tf:"-"`
+	VirtualServiceNameSelector *v2.Selector `json:"virtualServiceNameSelector,omitempty" tf:"-"`
 }
 
 type GRPCRouteInitParameters struct {
@@ -193,11 +193,11 @@ type GatewayRouteInitParameters struct {
 
 	// Reference to a VirtualGateway in appmesh to populate virtualGatewayName.
 	// +kubebuilder:validation:Optional
-	VirtualGatewayNameRef *v1.Reference `json:"virtualGatewayNameRef,omitempty" tf:"-"`
+	VirtualGatewayNameRef *v2.Reference `json:"virtualGatewayNameRef,omitempty" tf:"-"`
 
 	// Selector for a VirtualGateway in appmesh to populate virtualGatewayName.
 	// +kubebuilder:validation:Optional
-	VirtualGatewayNameSelector *v1.Selector `json:"virtualGatewayNameSelector,omitempty" tf:"-"`
+	VirtualGatewayNameSelector *v2.Selector `json:"virtualGatewayNameSelector,omitempty" tf:"-"`
 }
 
 type GatewayRouteObservation struct {
@@ -281,11 +281,11 @@ type GatewayRouteParameters struct {
 
 	// Reference to a VirtualGateway in appmesh to populate virtualGatewayName.
 	// +kubebuilder:validation:Optional
-	VirtualGatewayNameRef *v1.Reference `json:"virtualGatewayNameRef,omitempty" tf:"-"`
+	VirtualGatewayNameRef *v2.Reference `json:"virtualGatewayNameRef,omitempty" tf:"-"`
 
 	// Selector for a VirtualGateway in appmesh to populate virtualGatewayName.
 	// +kubebuilder:validation:Optional
-	VirtualGatewayNameSelector *v1.Selector `json:"virtualGatewayNameSelector,omitempty" tf:"-"`
+	VirtualGatewayNameSelector *v2.Selector `json:"virtualGatewayNameSelector,omitempty" tf:"-"`
 }
 
 type HTTPRouteActionInitParameters struct {
@@ -1357,8 +1357,8 @@ type VirtualServiceParameters struct {
 
 // GatewayRouteSpec defines the desired state of GatewayRoute
 type GatewayRouteSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     GatewayRouteParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   GatewayRouteParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -1374,8 +1374,8 @@ type GatewayRouteSpec struct {
 
 // GatewayRouteStatus defines the observed state of GatewayRoute.
 type GatewayRouteStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        GatewayRouteObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               GatewayRouteObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

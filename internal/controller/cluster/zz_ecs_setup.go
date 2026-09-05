@@ -52,3 +52,20 @@ func SetupGated_ecs(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupWebhookWithManager_ecs registers conversion webhooks for all resource kinds in the group.
+func SetupWebhookWithManager_ecs(mgr ctrl.Manager) error {
+	for _, setup := range []func(ctrl.Manager) error{
+		accountsettingdefault.SetupWebhookWithManager,
+		capacityprovider.SetupWebhookWithManager,
+		cluster.SetupWebhookWithManager,
+		clustercapacityproviders.SetupWebhookWithManager,
+		service.SetupWebhookWithManager,
+		taskdefinition.SetupWebhookWithManager,
+	} {
+		if err := setup(mgr); err != nil {
+			return err
+		}
+	}
+	return nil
+}

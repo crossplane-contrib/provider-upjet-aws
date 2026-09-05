@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type VPCAttachmentInitParameters struct {
@@ -21,11 +21,11 @@ type VPCAttachmentInitParameters struct {
 
 	// Reference to a CoreNetwork in networkmanager to populate coreNetworkId.
 	// +kubebuilder:validation:Optional
-	CoreNetworkIDRef *v1.Reference `json:"coreNetworkIdRef,omitempty" tf:"-"`
+	CoreNetworkIDRef *v2.Reference `json:"coreNetworkIdRef,omitempty" tf:"-"`
 
 	// Selector for a CoreNetwork in networkmanager to populate coreNetworkId.
 	// +kubebuilder:validation:Optional
-	CoreNetworkIDSelector *v1.Selector `json:"coreNetworkIdSelector,omitempty" tf:"-"`
+	CoreNetworkIDSelector *v2.Selector `json:"coreNetworkIdSelector,omitempty" tf:"-"`
 
 	// Options for the VPC attachment. See below.
 	Options *VPCAttachmentOptionsInitParameters `json:"options,omitempty" tf:"options,omitempty"`
@@ -41,11 +41,11 @@ type VPCAttachmentInitParameters struct {
 
 	// References to Subnet in ec2 to populate subnetArns.
 	// +kubebuilder:validation:Optional
-	SubnetArnsRefs []v1.Reference `json:"subnetArnsRefs,omitempty" tf:"-"`
+	SubnetArnsRefs []v2.Reference `json:"subnetArnsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Subnet in ec2 to populate subnetArns.
 	// +kubebuilder:validation:Optional
-	SubnetArnsSelector *v1.Selector `json:"subnetArnsSelector,omitempty" tf:"-"`
+	SubnetArnsSelector *v2.Selector `json:"subnetArnsSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -58,11 +58,11 @@ type VPCAttachmentInitParameters struct {
 
 	// Reference to a VPC in ec2 to populate vpcArn.
 	// +kubebuilder:validation:Optional
-	VPCArnRef *v1.Reference `json:"vpcArnRef,omitempty" tf:"-"`
+	VPCArnRef *v2.Reference `json:"vpcArnRef,omitempty" tf:"-"`
 
 	// Selector for a VPC in ec2 to populate vpcArn.
 	// +kubebuilder:validation:Optional
-	VPCArnSelector *v1.Selector `json:"vpcArnSelector,omitempty" tf:"-"`
+	VPCArnSelector *v2.Selector `json:"vpcArnSelector,omitempty" tf:"-"`
 }
 
 type VPCAttachmentObservation struct {
@@ -180,11 +180,11 @@ type VPCAttachmentParameters struct {
 
 	// Reference to a CoreNetwork in networkmanager to populate coreNetworkId.
 	// +kubebuilder:validation:Optional
-	CoreNetworkIDRef *v1.Reference `json:"coreNetworkIdRef,omitempty" tf:"-"`
+	CoreNetworkIDRef *v2.Reference `json:"coreNetworkIdRef,omitempty" tf:"-"`
 
 	// Selector for a CoreNetwork in networkmanager to populate coreNetworkId.
 	// +kubebuilder:validation:Optional
-	CoreNetworkIDSelector *v1.Selector `json:"coreNetworkIdSelector,omitempty" tf:"-"`
+	CoreNetworkIDSelector *v2.Selector `json:"coreNetworkIdSelector,omitempty" tf:"-"`
 
 	// Options for the VPC attachment. See below.
 	// +kubebuilder:validation:Optional
@@ -203,11 +203,11 @@ type VPCAttachmentParameters struct {
 
 	// References to Subnet in ec2 to populate subnetArns.
 	// +kubebuilder:validation:Optional
-	SubnetArnsRefs []v1.Reference `json:"subnetArnsRefs,omitempty" tf:"-"`
+	SubnetArnsRefs []v2.Reference `json:"subnetArnsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Subnet in ec2 to populate subnetArns.
 	// +kubebuilder:validation:Optional
-	SubnetArnsSelector *v1.Selector `json:"subnetArnsSelector,omitempty" tf:"-"`
+	SubnetArnsSelector *v2.Selector `json:"subnetArnsSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -222,17 +222,17 @@ type VPCAttachmentParameters struct {
 
 	// Reference to a VPC in ec2 to populate vpcArn.
 	// +kubebuilder:validation:Optional
-	VPCArnRef *v1.Reference `json:"vpcArnRef,omitempty" tf:"-"`
+	VPCArnRef *v2.Reference `json:"vpcArnRef,omitempty" tf:"-"`
 
 	// Selector for a VPC in ec2 to populate vpcArn.
 	// +kubebuilder:validation:Optional
-	VPCArnSelector *v1.Selector `json:"vpcArnSelector,omitempty" tf:"-"`
+	VPCArnSelector *v2.Selector `json:"vpcArnSelector,omitempty" tf:"-"`
 }
 
 // VPCAttachmentSpec defines the desired state of VPCAttachment
 type VPCAttachmentSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     VPCAttachmentParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   VPCAttachmentParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -248,8 +248,8 @@ type VPCAttachmentSpec struct {
 
 // VPCAttachmentStatus defines the observed state of VPCAttachment.
 type VPCAttachmentStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        VPCAttachmentObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               VPCAttachmentObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

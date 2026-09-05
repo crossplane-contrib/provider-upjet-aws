@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AwsLocationInitParameters struct {
@@ -57,11 +57,11 @@ type DeviceInitParameters struct {
 
 	// Reference to a GlobalNetwork in networkmanager to populate globalNetworkId.
 	// +kubebuilder:validation:Optional
-	GlobalNetworkIDRef *v1.Reference `json:"globalNetworkIdRef,omitempty" tf:"-"`
+	GlobalNetworkIDRef *v2.Reference `json:"globalNetworkIdRef,omitempty" tf:"-"`
 
 	// Selector for a GlobalNetwork in networkmanager to populate globalNetworkId.
 	// +kubebuilder:validation:Optional
-	GlobalNetworkIDSelector *v1.Selector `json:"globalNetworkIdSelector,omitempty" tf:"-"`
+	GlobalNetworkIDSelector *v2.Selector `json:"globalNetworkIdSelector,omitempty" tf:"-"`
 
 	// Location of the device. Documented below.
 	Location *LocationInitParameters `json:"location,omitempty" tf:"location,omitempty"`
@@ -79,11 +79,11 @@ type DeviceInitParameters struct {
 
 	// Reference to a Site in networkmanager to populate siteId.
 	// +kubebuilder:validation:Optional
-	SiteIDRef *v1.Reference `json:"siteIdRef,omitempty" tf:"-"`
+	SiteIDRef *v2.Reference `json:"siteIdRef,omitempty" tf:"-"`
 
 	// Selector for a Site in networkmanager to populate siteId.
 	// +kubebuilder:validation:Optional
-	SiteIDSelector *v1.Selector `json:"siteIdSelector,omitempty" tf:"-"`
+	SiteIDSelector *v2.Selector `json:"siteIdSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -157,11 +157,11 @@ type DeviceParameters struct {
 
 	// Reference to a GlobalNetwork in networkmanager to populate globalNetworkId.
 	// +kubebuilder:validation:Optional
-	GlobalNetworkIDRef *v1.Reference `json:"globalNetworkIdRef,omitempty" tf:"-"`
+	GlobalNetworkIDRef *v2.Reference `json:"globalNetworkIdRef,omitempty" tf:"-"`
 
 	// Selector for a GlobalNetwork in networkmanager to populate globalNetworkId.
 	// +kubebuilder:validation:Optional
-	GlobalNetworkIDSelector *v1.Selector `json:"globalNetworkIdSelector,omitempty" tf:"-"`
+	GlobalNetworkIDSelector *v2.Selector `json:"globalNetworkIdSelector,omitempty" tf:"-"`
 
 	// Location of the device. Documented below.
 	// +kubebuilder:validation:Optional
@@ -183,11 +183,11 @@ type DeviceParameters struct {
 
 	// Reference to a Site in networkmanager to populate siteId.
 	// +kubebuilder:validation:Optional
-	SiteIDRef *v1.Reference `json:"siteIdRef,omitempty" tf:"-"`
+	SiteIDRef *v2.Reference `json:"siteIdRef,omitempty" tf:"-"`
 
 	// Selector for a Site in networkmanager to populate siteId.
 	// +kubebuilder:validation:Optional
-	SiteIDSelector *v1.Selector `json:"siteIdSelector,omitempty" tf:"-"`
+	SiteIDSelector *v2.Selector `json:"siteIdSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -244,8 +244,8 @@ type LocationParameters struct {
 
 // DeviceSpec defines the desired state of Device
 type DeviceSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     DeviceParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   DeviceParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -261,8 +261,8 @@ type DeviceSpec struct {
 
 // DeviceStatus defines the observed state of Device.
 type DeviceStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        DeviceObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               DeviceObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

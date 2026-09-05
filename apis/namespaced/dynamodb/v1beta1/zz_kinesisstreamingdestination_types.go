@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type KinesisStreamingDestinationInitParameters struct {
@@ -26,11 +25,11 @@ type KinesisStreamingDestinationInitParameters struct {
 
 	// Reference to a Stream in kinesis to populate streamArn.
 	// +kubebuilder:validation:Optional
-	StreamArnRef *v1.NamespacedReference `json:"streamArnRef,omitempty" tf:"-"`
+	StreamArnRef *v2.NamespacedReference `json:"streamArnRef,omitempty" tf:"-"`
 
 	// Selector for a Stream in kinesis to populate streamArn.
 	// +kubebuilder:validation:Optional
-	StreamArnSelector *v1.NamespacedSelector `json:"streamArnSelector,omitempty" tf:"-"`
+	StreamArnSelector *v2.NamespacedSelector `json:"streamArnSelector,omitempty" tf:"-"`
 
 	// The name of the DynamoDB table. There can only be one Kinesis streaming destination for a given DynamoDB table.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/dynamodb/v1beta1.Table
@@ -38,11 +37,11 @@ type KinesisStreamingDestinationInitParameters struct {
 
 	// Reference to a Table in dynamodb to populate tableName.
 	// +kubebuilder:validation:Optional
-	TableNameRef *v1.NamespacedReference `json:"tableNameRef,omitempty" tf:"-"`
+	TableNameRef *v2.NamespacedReference `json:"tableNameRef,omitempty" tf:"-"`
 
 	// Selector for a Table in dynamodb to populate tableName.
 	// +kubebuilder:validation:Optional
-	TableNameSelector *v1.NamespacedSelector `json:"tableNameSelector,omitempty" tf:"-"`
+	TableNameSelector *v2.NamespacedSelector `json:"tableNameSelector,omitempty" tf:"-"`
 }
 
 type KinesisStreamingDestinationObservation struct {
@@ -83,11 +82,11 @@ type KinesisStreamingDestinationParameters struct {
 
 	// Reference to a Stream in kinesis to populate streamArn.
 	// +kubebuilder:validation:Optional
-	StreamArnRef *v1.NamespacedReference `json:"streamArnRef,omitempty" tf:"-"`
+	StreamArnRef *v2.NamespacedReference `json:"streamArnRef,omitempty" tf:"-"`
 
 	// Selector for a Stream in kinesis to populate streamArn.
 	// +kubebuilder:validation:Optional
-	StreamArnSelector *v1.NamespacedSelector `json:"streamArnSelector,omitempty" tf:"-"`
+	StreamArnSelector *v2.NamespacedSelector `json:"streamArnSelector,omitempty" tf:"-"`
 
 	// The name of the DynamoDB table. There can only be one Kinesis streaming destination for a given DynamoDB table.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/dynamodb/v1beta1.Table
@@ -96,11 +95,11 @@ type KinesisStreamingDestinationParameters struct {
 
 	// Reference to a Table in dynamodb to populate tableName.
 	// +kubebuilder:validation:Optional
-	TableNameRef *v1.NamespacedReference `json:"tableNameRef,omitempty" tf:"-"`
+	TableNameRef *v2.NamespacedReference `json:"tableNameRef,omitempty" tf:"-"`
 
 	// Selector for a Table in dynamodb to populate tableName.
 	// +kubebuilder:validation:Optional
-	TableNameSelector *v1.NamespacedSelector `json:"tableNameSelector,omitempty" tf:"-"`
+	TableNameSelector *v2.NamespacedSelector `json:"tableNameSelector,omitempty" tf:"-"`
 }
 
 // KinesisStreamingDestinationSpec defines the desired state of KinesisStreamingDestination
@@ -122,8 +121,8 @@ type KinesisStreamingDestinationSpec struct {
 
 // KinesisStreamingDestinationStatus defines the observed state of KinesisStreamingDestination.
 type KinesisStreamingDestinationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        KinesisStreamingDestinationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               KinesisStreamingDestinationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

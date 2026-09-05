@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type DNSConfigInitParameters struct {
@@ -26,11 +25,11 @@ type DNSConfigInitParameters struct {
 
 	// Reference to a PrivateDNSNamespace in servicediscovery to populate namespaceId.
 	// +kubebuilder:validation:Optional
-	NamespaceIDRef *v1.NamespacedReference `json:"namespaceIdRef,omitempty" tf:"-"`
+	NamespaceIDRef *v2.NamespacedReference `json:"namespaceIdRef,omitempty" tf:"-"`
 
 	// Selector for a PrivateDNSNamespace in servicediscovery to populate namespaceId.
 	// +kubebuilder:validation:Optional
-	NamespaceIDSelector *v1.NamespacedSelector `json:"namespaceIdSelector,omitempty" tf:"-"`
+	NamespaceIDSelector *v2.NamespacedSelector `json:"namespaceIdSelector,omitempty" tf:"-"`
 
 	// The routing policy that you want to apply to all records that Route 53 creates when you register an instance and specify the service. Valid Values: MULTIVALUE, WEIGHTED
 	RoutingPolicy *string `json:"routingPolicy,omitempty" tf:"routing_policy,omitempty"`
@@ -62,11 +61,11 @@ type DNSConfigParameters struct {
 
 	// Reference to a PrivateDNSNamespace in servicediscovery to populate namespaceId.
 	// +kubebuilder:validation:Optional
-	NamespaceIDRef *v1.NamespacedReference `json:"namespaceIdRef,omitempty" tf:"-"`
+	NamespaceIDRef *v2.NamespacedReference `json:"namespaceIdRef,omitempty" tf:"-"`
 
 	// Selector for a PrivateDNSNamespace in servicediscovery to populate namespaceId.
 	// +kubebuilder:validation:Optional
-	NamespaceIDSelector *v1.NamespacedSelector `json:"namespaceIdSelector,omitempty" tf:"-"`
+	NamespaceIDSelector *v2.NamespacedSelector `json:"namespaceIdSelector,omitempty" tf:"-"`
 
 	// The routing policy that you want to apply to all records that Route 53 creates when you register an instance and specify the service. Valid Values: MULTIVALUE, WEIGHTED
 	// +kubebuilder:validation:Optional
@@ -299,8 +298,8 @@ type ServiceSpec struct {
 
 // ServiceStatus defines the observed state of Service.
 type ServiceStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ServiceObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ServiceObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

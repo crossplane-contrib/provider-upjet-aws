@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type FleetStackAssociationInitParameters struct {
@@ -42,11 +42,11 @@ type FleetStackAssociationParameters struct {
 
 	// Reference to a Fleet in appstream to populate fleetName.
 	// +kubebuilder:validation:Optional
-	FleetNameRef *v1.Reference `json:"fleetNameRef,omitempty" tf:"-"`
+	FleetNameRef *v2.Reference `json:"fleetNameRef,omitempty" tf:"-"`
 
 	// Selector for a Fleet in appstream to populate fleetName.
 	// +kubebuilder:validation:Optional
-	FleetNameSelector *v1.Selector `json:"fleetNameSelector,omitempty" tf:"-"`
+	FleetNameSelector *v2.Selector `json:"fleetNameSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -61,17 +61,17 @@ type FleetStackAssociationParameters struct {
 
 	// Reference to a Stack in appstream to populate stackName.
 	// +kubebuilder:validation:Optional
-	StackNameRef *v1.Reference `json:"stackNameRef,omitempty" tf:"-"`
+	StackNameRef *v2.Reference `json:"stackNameRef,omitempty" tf:"-"`
 
 	// Selector for a Stack in appstream to populate stackName.
 	// +kubebuilder:validation:Optional
-	StackNameSelector *v1.Selector `json:"stackNameSelector,omitempty" tf:"-"`
+	StackNameSelector *v2.Selector `json:"stackNameSelector,omitempty" tf:"-"`
 }
 
 // FleetStackAssociationSpec defines the desired state of FleetStackAssociation
 type FleetStackAssociationSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     FleetStackAssociationParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   FleetStackAssociationParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -87,8 +87,8 @@ type FleetStackAssociationSpec struct {
 
 // FleetStackAssociationStatus defines the observed state of FleetStackAssociation.
 type FleetStackAssociationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        FleetStackAssociationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               FleetStackAssociationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type IdentityNotificationTopicInitParameters struct {
@@ -22,11 +21,11 @@ type IdentityNotificationTopicInitParameters struct {
 
 	// Reference to a DomainIdentity in ses to populate identity.
 	// +kubebuilder:validation:Optional
-	IdentityRef *v1.NamespacedReference `json:"identityRef,omitempty" tf:"-"`
+	IdentityRef *v2.NamespacedReference `json:"identityRef,omitempty" tf:"-"`
 
 	// Selector for a DomainIdentity in ses to populate identity.
 	// +kubebuilder:validation:Optional
-	IdentitySelector *v1.NamespacedSelector `json:"identitySelector,omitempty" tf:"-"`
+	IdentitySelector *v2.NamespacedSelector `json:"identitySelector,omitempty" tf:"-"`
 
 	// Whether SES should include original email headers in SNS notifications of this type. false by default.
 	IncludeOriginalHeaders *bool `json:"includeOriginalHeaders,omitempty" tf:"include_original_headers,omitempty"`
@@ -41,11 +40,11 @@ type IdentityNotificationTopicInitParameters struct {
 
 	// Reference to a Topic in sns to populate topicArn.
 	// +kubebuilder:validation:Optional
-	TopicArnRef *v1.NamespacedReference `json:"topicArnRef,omitempty" tf:"-"`
+	TopicArnRef *v2.NamespacedReference `json:"topicArnRef,omitempty" tf:"-"`
 
 	// Selector for a Topic in sns to populate topicArn.
 	// +kubebuilder:validation:Optional
-	TopicArnSelector *v1.NamespacedSelector `json:"topicArnSelector,omitempty" tf:"-"`
+	TopicArnSelector *v2.NamespacedSelector `json:"topicArnSelector,omitempty" tf:"-"`
 }
 
 type IdentityNotificationTopicObservation struct {
@@ -77,11 +76,11 @@ type IdentityNotificationTopicParameters struct {
 
 	// Reference to a DomainIdentity in ses to populate identity.
 	// +kubebuilder:validation:Optional
-	IdentityRef *v1.NamespacedReference `json:"identityRef,omitempty" tf:"-"`
+	IdentityRef *v2.NamespacedReference `json:"identityRef,omitempty" tf:"-"`
 
 	// Selector for a DomainIdentity in ses to populate identity.
 	// +kubebuilder:validation:Optional
-	IdentitySelector *v1.NamespacedSelector `json:"identitySelector,omitempty" tf:"-"`
+	IdentitySelector *v2.NamespacedSelector `json:"identitySelector,omitempty" tf:"-"`
 
 	// Whether SES should include original email headers in SNS notifications of this type. false by default.
 	// +kubebuilder:validation:Optional
@@ -104,11 +103,11 @@ type IdentityNotificationTopicParameters struct {
 
 	// Reference to a Topic in sns to populate topicArn.
 	// +kubebuilder:validation:Optional
-	TopicArnRef *v1.NamespacedReference `json:"topicArnRef,omitempty" tf:"-"`
+	TopicArnRef *v2.NamespacedReference `json:"topicArnRef,omitempty" tf:"-"`
 
 	// Selector for a Topic in sns to populate topicArn.
 	// +kubebuilder:validation:Optional
-	TopicArnSelector *v1.NamespacedSelector `json:"topicArnSelector,omitempty" tf:"-"`
+	TopicArnSelector *v2.NamespacedSelector `json:"topicArnSelector,omitempty" tf:"-"`
 }
 
 // IdentityNotificationTopicSpec defines the desired state of IdentityNotificationTopic
@@ -130,8 +129,8 @@ type IdentityNotificationTopicSpec struct {
 
 // IdentityNotificationTopicStatus defines the observed state of IdentityNotificationTopic.
 type IdentityNotificationTopicStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        IdentityNotificationTopicObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               IdentityNotificationTopicObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

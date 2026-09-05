@@ -10,8 +10,27 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
+
+type CacheTagConfigInitParameters struct {
+
+	// Name of the HTTP header to extract cache tags. The header value must contain comma-separated tag values.
+	HeaderName *string `json:"headerName,omitempty" tf:"header_name,omitempty"`
+}
+
+type CacheTagConfigObservation struct {
+
+	// Name of the HTTP header to extract cache tags. The header value must contain comma-separated tag values.
+	HeaderName *string `json:"headerName,omitempty" tf:"header_name,omitempty"`
+}
+
+type CacheTagConfigParameters struct {
+
+	// Name of the HTTP header to extract cache tags. The header value must contain comma-separated tag values.
+	// +kubebuilder:validation:Optional
+	HeaderName *string `json:"headerName" tf:"header_name,omitempty"`
+}
 
 type ConnectionFunctionAssociationInitParameters struct {
 
@@ -116,6 +135,9 @@ type CustomOriginConfigInitParameters struct {
 	// The Custom KeepAlive timeout, in seconds. By default, AWS enforces an upper limit of 60. But you can request an increase. Defaults to 5.
 	OriginKeepaliveTimeout *float64 `json:"originKeepaliveTimeout,omitempty" tf:"origin_keepalive_timeout,omitempty"`
 
+	// The origin mTLS configuration for mutual TLS authentication between CloudFront and your origin.
+	OriginMtlsConfig *OriginMtlsConfigInitParameters `json:"originMtlsConfig,omitempty" tf:"origin_mtls_config,omitempty"`
+
 	// Origin protocol policy to apply to your origin. One of http-only, https-only, or match-viewer.
 	OriginProtocolPolicy *string `json:"originProtocolPolicy,omitempty" tf:"origin_protocol_policy,omitempty"`
 
@@ -140,6 +162,9 @@ type CustomOriginConfigObservation struct {
 
 	// The Custom KeepAlive timeout, in seconds. By default, AWS enforces an upper limit of 60. But you can request an increase. Defaults to 5.
 	OriginKeepaliveTimeout *float64 `json:"originKeepaliveTimeout,omitempty" tf:"origin_keepalive_timeout,omitempty"`
+
+	// The origin mTLS configuration for mutual TLS authentication between CloudFront and your origin.
+	OriginMtlsConfig *OriginMtlsConfigObservation `json:"originMtlsConfig,omitempty" tf:"origin_mtls_config,omitempty"`
 
 	// Origin protocol policy to apply to your origin. One of http-only, https-only, or match-viewer.
 	OriginProtocolPolicy *string `json:"originProtocolPolicy,omitempty" tf:"origin_protocol_policy,omitempty"`
@@ -169,6 +194,10 @@ type CustomOriginConfigParameters struct {
 	// The Custom KeepAlive timeout, in seconds. By default, AWS enforces an upper limit of 60. But you can request an increase. Defaults to 5.
 	// +kubebuilder:validation:Optional
 	OriginKeepaliveTimeout *float64 `json:"originKeepaliveTimeout,omitempty" tf:"origin_keepalive_timeout,omitempty"`
+
+	// The origin mTLS configuration for mutual TLS authentication between CloudFront and your origin.
+	// +kubebuilder:validation:Optional
+	OriginMtlsConfig *OriginMtlsConfigParameters `json:"originMtlsConfig,omitempty" tf:"origin_mtls_config,omitempty"`
 
 	// Origin protocol policy to apply to your origin. One of http-only, https-only, or match-viewer.
 	// +kubebuilder:validation:Optional
@@ -408,6 +437,9 @@ type DistributionInitParameters struct {
 	// ID of the Anycast static IP list that is associated with the distribution.
 	AnycastIPListID *string `json:"anycastIpListId,omitempty" tf:"anycast_ip_list_id,omitempty"`
 
+	// Cache tag configuration block for cache tag extraction from origin responses (maximum one). See the AWS documentation for more information about cache tags.
+	CacheTagConfig *CacheTagConfigInitParameters `json:"cacheTagConfig,omitempty" tf:"cache_tag_config,omitempty"`
+
 	// Any comments you want to include about the distribution.
 	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
 
@@ -487,6 +519,9 @@ type DistributionObservation struct {
 
 	// ARN for the distribution. For example: arn:aws:cloudfront::123456789012:distribution/EDFDVBD632BHDS5, where 123456789012 is your AWS account ID.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
+	// Cache tag configuration block for cache tag extraction from origin responses (maximum one). See the AWS documentation for more information about cache tags.
+	CacheTagConfig *CacheTagConfigObservation `json:"cacheTagConfig,omitempty" tf:"cache_tag_config,omitempty"`
 
 	// Internal value used by CloudFront to allow future updates to the distribution configuration.
 	CallerReference *string `json:"callerReference,omitempty" tf:"caller_reference,omitempty"`
@@ -603,6 +638,10 @@ type DistributionParameters struct {
 	// ID of the Anycast static IP list that is associated with the distribution.
 	// +kubebuilder:validation:Optional
 	AnycastIPListID *string `json:"anycastIpListId,omitempty" tf:"anycast_ip_list_id,omitempty"`
+
+	// Cache tag configuration block for cache tag extraction from origin responses (maximum one). See the AWS documentation for more information about cache tags.
+	// +kubebuilder:validation:Optional
+	CacheTagConfig *CacheTagConfigParameters `json:"cacheTagConfig,omitempty" tf:"cache_tag_config,omitempty"`
 
 	// Any comments you want to include about the distribution.
 	// +kubebuilder:validation:Optional
@@ -1089,11 +1128,11 @@ type OrderedCacheBehaviorFunctionAssociationInitParameters struct {
 
 	// Reference to a Function in cloudfront to populate functionArn.
 	// +kubebuilder:validation:Optional
-	FunctionArnRef *v1.Reference `json:"functionArnRef,omitempty" tf:"-"`
+	FunctionArnRef *v2.Reference `json:"functionArnRef,omitempty" tf:"-"`
 
 	// Selector for a Function in cloudfront to populate functionArn.
 	// +kubebuilder:validation:Optional
-	FunctionArnSelector *v1.Selector `json:"functionArnSelector,omitempty" tf:"-"`
+	FunctionArnSelector *v2.Selector `json:"functionArnSelector,omitempty" tf:"-"`
 }
 
 type OrderedCacheBehaviorFunctionAssociationObservation struct {
@@ -1119,11 +1158,11 @@ type OrderedCacheBehaviorFunctionAssociationParameters struct {
 
 	// Reference to a Function in cloudfront to populate functionArn.
 	// +kubebuilder:validation:Optional
-	FunctionArnRef *v1.Reference `json:"functionArnRef,omitempty" tf:"-"`
+	FunctionArnRef *v2.Reference `json:"functionArnRef,omitempty" tf:"-"`
 
 	// Selector for a Function in cloudfront to populate functionArn.
 	// +kubebuilder:validation:Optional
-	FunctionArnSelector *v1.Selector `json:"functionArnSelector,omitempty" tf:"-"`
+	FunctionArnSelector *v2.Selector `json:"functionArnSelector,omitempty" tf:"-"`
 }
 
 type OrderedCacheBehaviorGRPCConfigInitParameters struct {
@@ -1228,11 +1267,11 @@ type OrderedCacheBehaviorLambdaFunctionAssociationInitParameters struct {
 
 	// Reference to a Function in lambda to populate lambdaArn.
 	// +kubebuilder:validation:Optional
-	LambdaArnRef *v1.Reference `json:"lambdaArnRef,omitempty" tf:"-"`
+	LambdaArnRef *v2.Reference `json:"lambdaArnRef,omitempty" tf:"-"`
 
 	// Selector for a Function in lambda to populate lambdaArn.
 	// +kubebuilder:validation:Optional
-	LambdaArnSelector *v1.Selector `json:"lambdaArnSelector,omitempty" tf:"-"`
+	LambdaArnSelector *v2.Selector `json:"lambdaArnSelector,omitempty" tf:"-"`
 }
 
 type OrderedCacheBehaviorLambdaFunctionAssociationObservation struct {
@@ -1265,11 +1304,11 @@ type OrderedCacheBehaviorLambdaFunctionAssociationParameters struct {
 
 	// Reference to a Function in lambda to populate lambdaArn.
 	// +kubebuilder:validation:Optional
-	LambdaArnRef *v1.Reference `json:"lambdaArnRef,omitempty" tf:"-"`
+	LambdaArnRef *v2.Reference `json:"lambdaArnRef,omitempty" tf:"-"`
 
 	// Selector for a Function in lambda to populate lambdaArn.
 	// +kubebuilder:validation:Optional
-	LambdaArnSelector *v1.Selector `json:"lambdaArnSelector,omitempty" tf:"-"`
+	LambdaArnSelector *v2.Selector `json:"lambdaArnSelector,omitempty" tf:"-"`
 }
 
 type OrderedCacheBehaviorObservation struct {
@@ -1492,11 +1531,11 @@ type OriginInitParameters struct {
 
 	// Reference to a OriginAccessControl in cloudfront to populate originAccessControlId.
 	// +kubebuilder:validation:Optional
-	OriginAccessControlIDRef *v1.Reference `json:"originAccessControlIdRef,omitempty" tf:"-"`
+	OriginAccessControlIDRef *v2.Reference `json:"originAccessControlIdRef,omitempty" tf:"-"`
 
 	// Selector for a OriginAccessControl in cloudfront to populate originAccessControlId.
 	// +kubebuilder:validation:Optional
-	OriginAccessControlIDSelector *v1.Selector `json:"originAccessControlIdSelector,omitempty" tf:"-"`
+	OriginAccessControlIDSelector *v2.Selector `json:"originAccessControlIdSelector,omitempty" tf:"-"`
 
 	// Unique identifier for the origin.
 	OriginID *string `json:"originId,omitempty" tf:"origin_id,omitempty"`
@@ -1515,6 +1554,25 @@ type OriginInitParameters struct {
 
 	// The VPC origin configuration.
 	VPCOriginConfig *VPCOriginConfigInitParameters `json:"vpcOriginConfig,omitempty" tf:"vpc_origin_config,omitempty"`
+}
+
+type OriginMtlsConfigInitParameters struct {
+
+	// ARN of the ACM certificate to use for mutual TLS authentication with the origin. The certificate must have Extended Key Usage set to TLS Client Authentication.
+	ClientCertificateArn *string `json:"clientCertificateArn,omitempty" tf:"client_certificate_arn,omitempty"`
+}
+
+type OriginMtlsConfigObservation struct {
+
+	// ARN of the ACM certificate to use for mutual TLS authentication with the origin. The certificate must have Extended Key Usage set to TLS Client Authentication.
+	ClientCertificateArn *string `json:"clientCertificateArn,omitempty" tf:"client_certificate_arn,omitempty"`
+}
+
+type OriginMtlsConfigParameters struct {
+
+	// ARN of the ACM certificate to use for mutual TLS authentication with the origin. The certificate must have Extended Key Usage set to TLS Client Authentication.
+	// +kubebuilder:validation:Optional
+	ClientCertificateArn *string `json:"clientCertificateArn" tf:"client_certificate_arn,omitempty"`
 }
 
 type OriginObservation struct {
@@ -1586,11 +1644,11 @@ type OriginParameters struct {
 
 	// Reference to a OriginAccessControl in cloudfront to populate originAccessControlId.
 	// +kubebuilder:validation:Optional
-	OriginAccessControlIDRef *v1.Reference `json:"originAccessControlIdRef,omitempty" tf:"-"`
+	OriginAccessControlIDRef *v2.Reference `json:"originAccessControlIdRef,omitempty" tf:"-"`
 
 	// Selector for a OriginAccessControl in cloudfront to populate originAccessControlId.
 	// +kubebuilder:validation:Optional
-	OriginAccessControlIDSelector *v1.Selector `json:"originAccessControlIdSelector,omitempty" tf:"-"`
+	OriginAccessControlIDSelector *v2.Selector `json:"originAccessControlIdSelector,omitempty" tf:"-"`
 
 	// Unique identifier for the origin.
 	// +kubebuilder:validation:Optional
@@ -1669,11 +1727,11 @@ type S3OriginConfigInitParameters struct {
 
 	// Reference to a OriginAccessIdentity in cloudfront to populate originAccessIdentity.
 	// +kubebuilder:validation:Optional
-	OriginAccessIdentityRef *v1.Reference `json:"originAccessIdentityRef,omitempty" tf:"-"`
+	OriginAccessIdentityRef *v2.Reference `json:"originAccessIdentityRef,omitempty" tf:"-"`
 
 	// Selector for a OriginAccessIdentity in cloudfront to populate originAccessIdentity.
 	// +kubebuilder:validation:Optional
-	OriginAccessIdentitySelector *v1.Selector `json:"originAccessIdentitySelector,omitempty" tf:"-"`
+	OriginAccessIdentitySelector *v2.Selector `json:"originAccessIdentitySelector,omitempty" tf:"-"`
 }
 
 type S3OriginConfigObservation struct {
@@ -1692,11 +1750,11 @@ type S3OriginConfigParameters struct {
 
 	// Reference to a OriginAccessIdentity in cloudfront to populate originAccessIdentity.
 	// +kubebuilder:validation:Optional
-	OriginAccessIdentityRef *v1.Reference `json:"originAccessIdentityRef,omitempty" tf:"-"`
+	OriginAccessIdentityRef *v2.Reference `json:"originAccessIdentityRef,omitempty" tf:"-"`
 
 	// Selector for a OriginAccessIdentity in cloudfront to populate originAccessIdentity.
 	// +kubebuilder:validation:Optional
-	OriginAccessIdentitySelector *v1.Selector `json:"originAccessIdentitySelector,omitempty" tf:"-"`
+	OriginAccessIdentitySelector *v2.Selector `json:"originAccessIdentitySelector,omitempty" tf:"-"`
 }
 
 type TrustStoreConfigInitParameters struct {
@@ -1923,8 +1981,8 @@ type ViewerMtlsConfigParameters struct {
 
 // DistributionSpec defines the desired state of Distribution
 type DistributionSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     DistributionParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   DistributionParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -1940,8 +1998,8 @@ type DistributionSpec struct {
 
 // DistributionStatus defines the observed state of Distribution.
 type DistributionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        DistributionObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               DistributionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

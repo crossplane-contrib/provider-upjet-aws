@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AuthorizerInitParameters struct {
@@ -23,11 +22,11 @@ type AuthorizerInitParameters struct {
 
 	// Reference to a Role in iam to populate authorizerCredentials.
 	// +kubebuilder:validation:Optional
-	AuthorizerCredentialsRef *v1.NamespacedReference `json:"authorizerCredentialsRef,omitempty" tf:"-"`
+	AuthorizerCredentialsRef *v2.NamespacedReference `json:"authorizerCredentialsRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate authorizerCredentials.
 	// +kubebuilder:validation:Optional
-	AuthorizerCredentialsSelector *v1.NamespacedSelector `json:"authorizerCredentialsSelector,omitempty" tf:"-"`
+	AuthorizerCredentialsSelector *v2.NamespacedSelector `json:"authorizerCredentialsSelector,omitempty" tf:"-"`
 
 	// TTL of cached authorizer results in seconds. Defaults to 300.
 	AuthorizerResultTTLInSeconds *float64 `json:"authorizerResultTtlInSeconds,omitempty" tf:"authorizer_result_ttl_in_seconds,omitempty"`
@@ -40,11 +39,11 @@ type AuthorizerInitParameters struct {
 
 	// Reference to a Function in lambda to populate authorizerUri.
 	// +kubebuilder:validation:Optional
-	AuthorizerURIRef *v1.NamespacedReference `json:"authorizerUriRef,omitempty" tf:"-"`
+	AuthorizerURIRef *v2.NamespacedReference `json:"authorizerUriRef,omitempty" tf:"-"`
 
 	// Selector for a Function in lambda to populate authorizerUri.
 	// +kubebuilder:validation:Optional
-	AuthorizerURISelector *v1.NamespacedSelector `json:"authorizerUriSelector,omitempty" tf:"-"`
+	AuthorizerURISelector *v2.NamespacedSelector `json:"authorizerUriSelector,omitempty" tf:"-"`
 
 	// Source of the identity in an incoming request. Defaults to method.request.header.Authorization. For REQUEST type, this may be a comma-separated list of values, including headers, query string parameters and stage variables - e.g., "method.request.header.SomeHeaderName,method.request.querystring.SomeQueryStringName,stageVariables.SomeStageVariableName"
 	IdentitySource *string `json:"identitySource,omitempty" tf:"identity_source,omitempty"`
@@ -66,11 +65,11 @@ type AuthorizerInitParameters struct {
 
 	// Reference to a RestAPI in apigateway to populate restApiId.
 	// +kubebuilder:validation:Optional
-	RestAPIIDRef *v1.NamespacedReference `json:"restApiIdRef,omitempty" tf:"-"`
+	RestAPIIDRef *v2.NamespacedReference `json:"restApiIdRef,omitempty" tf:"-"`
 
 	// Selector for a RestAPI in apigateway to populate restApiId.
 	// +kubebuilder:validation:Optional
-	RestAPIIDSelector *v1.NamespacedSelector `json:"restApiIdSelector,omitempty" tf:"-"`
+	RestAPIIDSelector *v2.NamespacedSelector `json:"restApiIdSelector,omitempty" tf:"-"`
 
 	// Type of the authorizer. Possible values are TOKEN for a Lambda function using a single authorization token submitted in a custom header, REQUEST for a Lambda function using incoming request parameters, or COGNITO_USER_POOLS for using an Amazon Cognito user pool. Defaults to TOKEN.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
@@ -128,11 +127,11 @@ type AuthorizerParameters struct {
 
 	// Reference to a Role in iam to populate authorizerCredentials.
 	// +kubebuilder:validation:Optional
-	AuthorizerCredentialsRef *v1.NamespacedReference `json:"authorizerCredentialsRef,omitempty" tf:"-"`
+	AuthorizerCredentialsRef *v2.NamespacedReference `json:"authorizerCredentialsRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate authorizerCredentials.
 	// +kubebuilder:validation:Optional
-	AuthorizerCredentialsSelector *v1.NamespacedSelector `json:"authorizerCredentialsSelector,omitempty" tf:"-"`
+	AuthorizerCredentialsSelector *v2.NamespacedSelector `json:"authorizerCredentialsSelector,omitempty" tf:"-"`
 
 	// TTL of cached authorizer results in seconds. Defaults to 300.
 	// +kubebuilder:validation:Optional
@@ -147,11 +146,11 @@ type AuthorizerParameters struct {
 
 	// Reference to a Function in lambda to populate authorizerUri.
 	// +kubebuilder:validation:Optional
-	AuthorizerURIRef *v1.NamespacedReference `json:"authorizerUriRef,omitempty" tf:"-"`
+	AuthorizerURIRef *v2.NamespacedReference `json:"authorizerUriRef,omitempty" tf:"-"`
 
 	// Selector for a Function in lambda to populate authorizerUri.
 	// +kubebuilder:validation:Optional
-	AuthorizerURISelector *v1.NamespacedSelector `json:"authorizerUriSelector,omitempty" tf:"-"`
+	AuthorizerURISelector *v2.NamespacedSelector `json:"authorizerUriSelector,omitempty" tf:"-"`
 
 	// Source of the identity in an incoming request. Defaults to method.request.header.Authorization. For REQUEST type, this may be a comma-separated list of values, including headers, query string parameters and stage variables - e.g., "method.request.header.SomeHeaderName,method.request.querystring.SomeQueryStringName,stageVariables.SomeStageVariableName"
 	// +kubebuilder:validation:Optional
@@ -183,11 +182,11 @@ type AuthorizerParameters struct {
 
 	// Reference to a RestAPI in apigateway to populate restApiId.
 	// +kubebuilder:validation:Optional
-	RestAPIIDRef *v1.NamespacedReference `json:"restApiIdRef,omitempty" tf:"-"`
+	RestAPIIDRef *v2.NamespacedReference `json:"restApiIdRef,omitempty" tf:"-"`
 
 	// Selector for a RestAPI in apigateway to populate restApiId.
 	// +kubebuilder:validation:Optional
-	RestAPIIDSelector *v1.NamespacedSelector `json:"restApiIdSelector,omitempty" tf:"-"`
+	RestAPIIDSelector *v2.NamespacedSelector `json:"restApiIdSelector,omitempty" tf:"-"`
 
 	// Type of the authorizer. Possible values are TOKEN for a Lambda function using a single authorization token submitted in a custom header, REQUEST for a Lambda function using incoming request parameters, or COGNITO_USER_POOLS for using an Amazon Cognito user pool. Defaults to TOKEN.
 	// +kubebuilder:validation:Optional
@@ -213,8 +212,8 @@ type AuthorizerSpec struct {
 
 // AuthorizerStatus defines the observed state of Authorizer.
 type AuthorizerStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        AuthorizerObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               AuthorizerObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

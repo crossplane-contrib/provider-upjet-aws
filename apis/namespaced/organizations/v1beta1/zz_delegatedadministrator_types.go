@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type DelegatedAdministratorInitParameters struct {
@@ -22,11 +21,11 @@ type DelegatedAdministratorInitParameters struct {
 
 	// Reference to a Account in organizations to populate accountId.
 	// +kubebuilder:validation:Optional
-	AccountIDRef *v1.NamespacedReference `json:"accountIdRef,omitempty" tf:"-"`
+	AccountIDRef *v2.NamespacedReference `json:"accountIdRef,omitempty" tf:"-"`
 
 	// Selector for a Account in organizations to populate accountId.
 	// +kubebuilder:validation:Optional
-	AccountIDSelector *v1.NamespacedSelector `json:"accountIdSelector,omitempty" tf:"-"`
+	AccountIDSelector *v2.NamespacedSelector `json:"accountIdSelector,omitempty" tf:"-"`
 
 	// The service principal of the AWS service for which you want to make the member account a delegated administrator.
 	ServicePrincipal *string `json:"servicePrincipal,omitempty" tf:"service_principal,omitempty"`
@@ -74,11 +73,11 @@ type DelegatedAdministratorParameters struct {
 
 	// Reference to a Account in organizations to populate accountId.
 	// +kubebuilder:validation:Optional
-	AccountIDRef *v1.NamespacedReference `json:"accountIdRef,omitempty" tf:"-"`
+	AccountIDRef *v2.NamespacedReference `json:"accountIdRef,omitempty" tf:"-"`
 
 	// Selector for a Account in organizations to populate accountId.
 	// +kubebuilder:validation:Optional
-	AccountIDSelector *v1.NamespacedSelector `json:"accountIdSelector,omitempty" tf:"-"`
+	AccountIDSelector *v2.NamespacedSelector `json:"accountIdSelector,omitempty" tf:"-"`
 
 	// The service principal of the AWS service for which you want to make the member account a delegated administrator.
 	// +kubebuilder:validation:Optional
@@ -104,8 +103,8 @@ type DelegatedAdministratorSpec struct {
 
 // DelegatedAdministratorStatus defines the observed state of DelegatedAdministrator.
 type DelegatedAdministratorStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        DelegatedAdministratorObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               DelegatedAdministratorObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

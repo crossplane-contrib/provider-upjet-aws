@@ -9,13 +9,13 @@ metadata:
   annotations:
     meta.upbound.io/example-id: ssm/v1beta1/patchgroup
   labels:
-    testing.upbound.io/example-name: patchgroup
-  name: patchgroup
+    testing.upbound.io/example-name: example
+  name: example
 spec:
   forProvider:
     baselineIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: production
+        testing.upbound.io/example-name: example
     patchGroup: patch-group-name
     region: us-west-1
 
@@ -27,8 +27,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: ssm/v1beta1/patchgroup
   labels:
-    testing.upbound.io/example-name: production
-  name: production
+    testing.upbound.io/example-name: example
+  name: example
 spec:
   forProvider:
     approvedPatches:

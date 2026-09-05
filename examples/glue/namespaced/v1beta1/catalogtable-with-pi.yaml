@@ -18,7 +18,7 @@ spec:
       name: example-ct-cd
     region: us-east-1
     storageDescriptor:
-    - columns:
+      columns:
       - name: my_column_1
         type: string
       - name: my_column_2

@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AvailabilityZoneAddressInitParameters struct {
@@ -24,11 +23,11 @@ type AvailabilityZoneAddressInitParameters struct {
 
 	// References to EIP in ec2 to populate allocationIds.
 	// +kubebuilder:validation:Optional
-	AllocationIdsRefs []v1.NamespacedReference `json:"allocationIdsRefs,omitempty" tf:"-"`
+	AllocationIdsRefs []v2.NamespacedReference `json:"allocationIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of EIP in ec2 to populate allocationIds.
 	// +kubebuilder:validation:Optional
-	AllocationIdsSelector *v1.NamespacedSelector `json:"allocationIdsSelector,omitempty" tf:"-"`
+	AllocationIdsSelector *v2.NamespacedSelector `json:"allocationIdsSelector,omitempty" tf:"-"`
 
 	// Availability Zone (e.g. us-west-2a) where this specific NAT gateway configuration will be active. Exactly one of availability_zone or availability_zone_id must be specified.
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
@@ -61,11 +60,11 @@ type AvailabilityZoneAddressParameters struct {
 
 	// References to EIP in ec2 to populate allocationIds.
 	// +kubebuilder:validation:Optional
-	AllocationIdsRefs []v1.NamespacedReference `json:"allocationIdsRefs,omitempty" tf:"-"`
+	AllocationIdsRefs []v2.NamespacedReference `json:"allocationIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of EIP in ec2 to populate allocationIds.
 	// +kubebuilder:validation:Optional
-	AllocationIdsSelector *v1.NamespacedSelector `json:"allocationIdsSelector,omitempty" tf:"-"`
+	AllocationIdsSelector *v2.NamespacedSelector `json:"allocationIdsSelector,omitempty" tf:"-"`
 
 	// Availability Zone (e.g. us-west-2a) where this specific NAT gateway configuration will be active. Exactly one of availability_zone or availability_zone_id must be specified.
 	// +kubebuilder:validation:Optional
@@ -85,11 +84,11 @@ type NATGatewayInitParameters_2 struct {
 
 	// Reference to a EIP in ec2 to populate allocationId.
 	// +kubebuilder:validation:Optional
-	AllocationIDRef *v1.NamespacedReference `json:"allocationIdRef,omitempty" tf:"-"`
+	AllocationIDRef *v2.NamespacedReference `json:"allocationIdRef,omitempty" tf:"-"`
 
 	// Selector for a EIP in ec2 to populate allocationId.
 	// +kubebuilder:validation:Optional
-	AllocationIDSelector *v1.NamespacedSelector `json:"allocationIdSelector,omitempty" tf:"-"`
+	AllocationIDSelector *v2.NamespacedSelector `json:"allocationIdSelector,omitempty" tf:"-"`
 
 	// Specifies whether to create a zonal (single-AZ) or regional (multi-AZ) NAT gateway. Valid values are zonal and regional. Defaults to zonal.
 	AvailabilityMode *string `json:"availabilityMode,omitempty" tf:"availability_mode,omitempty"`
@@ -111,11 +110,11 @@ type NATGatewayInitParameters_2 struct {
 
 	// References to EIP in ec2 to populate secondaryAllocationIds.
 	// +kubebuilder:validation:Optional
-	SecondaryAllocationIdsRefs []v1.NamespacedReference `json:"secondaryAllocationIdsRefs,omitempty" tf:"-"`
+	SecondaryAllocationIdsRefs []v2.NamespacedReference `json:"secondaryAllocationIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of EIP in ec2 to populate secondaryAllocationIds.
 	// +kubebuilder:validation:Optional
-	SecondaryAllocationIdsSelector *v1.NamespacedSelector `json:"secondaryAllocationIdsSelector,omitempty" tf:"-"`
+	SecondaryAllocationIdsSelector *v2.NamespacedSelector `json:"secondaryAllocationIdsSelector,omitempty" tf:"-"`
 
 	// The number of secondary private IPv4 addresses you want to assign to the NAT Gateway.
 	SecondaryPrivateIPAddressCount *float64 `json:"secondaryPrivateIpAddressCount,omitempty" tf:"secondary_private_ip_address_count,omitempty"`
@@ -130,11 +129,11 @@ type NATGatewayInitParameters_2 struct {
 
 	// Reference to a Subnet in ec2 to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in ec2 to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -146,11 +145,11 @@ type NATGatewayInitParameters_2 struct {
 
 	// Reference to a VPC in ec2 to populate vpcId.
 	// +kubebuilder:validation:Optional
-	VPCIDRef *v1.NamespacedReference `json:"vpcIdRef,omitempty" tf:"-"`
+	VPCIDRef *v2.NamespacedReference `json:"vpcIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPC in ec2 to populate vpcId.
 	// +kubebuilder:validation:Optional
-	VPCIDSelector *v1.NamespacedSelector `json:"vpcIdSelector,omitempty" tf:"-"`
+	VPCIDSelector *v2.NamespacedSelector `json:"vpcIdSelector,omitempty" tf:"-"`
 }
 
 type NATGatewayObservation_2 struct {
@@ -236,11 +235,11 @@ type NATGatewayParameters_2 struct {
 
 	// Reference to a EIP in ec2 to populate allocationId.
 	// +kubebuilder:validation:Optional
-	AllocationIDRef *v1.NamespacedReference `json:"allocationIdRef,omitempty" tf:"-"`
+	AllocationIDRef *v2.NamespacedReference `json:"allocationIdRef,omitempty" tf:"-"`
 
 	// Selector for a EIP in ec2 to populate allocationId.
 	// +kubebuilder:validation:Optional
-	AllocationIDSelector *v1.NamespacedSelector `json:"allocationIdSelector,omitempty" tf:"-"`
+	AllocationIDSelector *v2.NamespacedSelector `json:"allocationIdSelector,omitempty" tf:"-"`
 
 	// Specifies whether to create a zonal (single-AZ) or regional (multi-AZ) NAT gateway. Valid values are zonal and regional. Defaults to zonal.
 	// +kubebuilder:validation:Optional
@@ -272,11 +271,11 @@ type NATGatewayParameters_2 struct {
 
 	// References to EIP in ec2 to populate secondaryAllocationIds.
 	// +kubebuilder:validation:Optional
-	SecondaryAllocationIdsRefs []v1.NamespacedReference `json:"secondaryAllocationIdsRefs,omitempty" tf:"-"`
+	SecondaryAllocationIdsRefs []v2.NamespacedReference `json:"secondaryAllocationIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of EIP in ec2 to populate secondaryAllocationIds.
 	// +kubebuilder:validation:Optional
-	SecondaryAllocationIdsSelector *v1.NamespacedSelector `json:"secondaryAllocationIdsSelector,omitempty" tf:"-"`
+	SecondaryAllocationIdsSelector *v2.NamespacedSelector `json:"secondaryAllocationIdsSelector,omitempty" tf:"-"`
 
 	// The number of secondary private IPv4 addresses you want to assign to the NAT Gateway.
 	// +kubebuilder:validation:Optional
@@ -294,11 +293,11 @@ type NATGatewayParameters_2 struct {
 
 	// Reference to a Subnet in ec2 to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in ec2 to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -312,11 +311,11 @@ type NATGatewayParameters_2 struct {
 
 	// Reference to a VPC in ec2 to populate vpcId.
 	// +kubebuilder:validation:Optional
-	VPCIDRef *v1.NamespacedReference `json:"vpcIdRef,omitempty" tf:"-"`
+	VPCIDRef *v2.NamespacedReference `json:"vpcIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPC in ec2 to populate vpcId.
 	// +kubebuilder:validation:Optional
-	VPCIDSelector *v1.NamespacedSelector `json:"vpcIdSelector,omitempty" tf:"-"`
+	VPCIDSelector *v2.NamespacedSelector `json:"vpcIdSelector,omitempty" tf:"-"`
 }
 
 type RegionalNATGatewayAddressInitParameters struct {
@@ -368,8 +367,8 @@ type NATGatewaySpec struct {
 
 // NATGatewayStatus defines the observed state of NATGateway.
 type NATGatewayStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        NATGatewayObservation_2 `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               NATGatewayObservation_2 `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

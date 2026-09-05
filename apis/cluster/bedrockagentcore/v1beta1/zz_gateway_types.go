@@ -10,8 +10,27 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
+
+type AllowedWorkloadConfigurationHostingEnvironmentInitParameters struct {
+
+	// ARN of the policy engine. The policy engine contains Cedar policies that define fine-grained authorization rules specifying who can perform what actions on which resources as agents interact through the gateway.
+	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+}
+
+type AllowedWorkloadConfigurationHostingEnvironmentObservation struct {
+
+	// ARN of the policy engine. The policy engine contains Cedar policies that define fine-grained authorization rules specifying who can perform what actions on which resources as agents interact through the gateway.
+	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+}
+
+type AllowedWorkloadConfigurationHostingEnvironmentParameters struct {
+
+	// ARN of the policy engine. The policy engine contains Cedar policies that define fine-grained authorization rules specifying who can perform what actions on which resources as agents interact through the gateway.
+	// +kubebuilder:validation:Optional
+	Arn *string `json:"arn" tf:"arn,omitempty"`
+}
 
 type AuthorizerConfigurationCustomJwtAuthorizerInitParameters struct {
 
@@ -23,8 +42,24 @@ type AuthorizerConfigurationCustomJwtAuthorizerInitParameters struct {
 	// +listType=set
 	AllowedClients []*string `json:"allowedClients,omitempty" tf:"allowed_clients,omitempty"`
 
+	// Set of scopes that are allowed to access the token.
+	// +listType=set
+	AllowedScopes []*string `json:"allowedScopes,omitempty" tf:"allowed_scopes,omitempty"`
+
+	// Configuration restricting which workloads may use this authorizer. See allowed_workload_configuration below.
+	AllowedWorkloadConfiguration *CustomJwtAuthorizerAllowedWorkloadConfigurationInitParameters `json:"allowedWorkloadConfiguration,omitempty" tf:"allowed_workload_configuration,omitempty"`
+
+	// Repeatable block to define a custom claim validation name, value, and operation. See custom_claim below.
+	CustomClaim []CustomJwtAuthorizerCustomClaimInitParameters `json:"customClaim,omitempty" tf:"custom_claim,omitempty"`
+
 	// URL used to fetch OpenID Connect configuration or authorization server metadata. Must end with .well-known/openid-configuration.
 	DiscoveryURL *string `json:"discoveryUrl,omitempty" tf:"discovery_url,omitempty"`
+
+	// Private endpoint used to reach the authorization server. See private_endpoint below.
+	PrivateEndpoint *CustomJwtAuthorizerPrivateEndpointInitParameters `json:"privateEndpoint,omitempty" tf:"private_endpoint,omitempty"`
+
+	// Overrides for the private endpoints used to reach the authorization server. See private_endpoint_overrides below.
+	PrivateEndpointOverrides []CustomJwtAuthorizerPrivateEndpointOverridesInitParameters `json:"privateEndpointOverrides,omitempty" tf:"private_endpoint_overrides,omitempty"`
 }
 
 type AuthorizerConfigurationCustomJwtAuthorizerObservation struct {
@@ -37,8 +72,24 @@ type AuthorizerConfigurationCustomJwtAuthorizerObservation struct {
 	// +listType=set
 	AllowedClients []*string `json:"allowedClients,omitempty" tf:"allowed_clients,omitempty"`
 
+	// Set of scopes that are allowed to access the token.
+	// +listType=set
+	AllowedScopes []*string `json:"allowedScopes,omitempty" tf:"allowed_scopes,omitempty"`
+
+	// Configuration restricting which workloads may use this authorizer. See allowed_workload_configuration below.
+	AllowedWorkloadConfiguration *CustomJwtAuthorizerAllowedWorkloadConfigurationObservation `json:"allowedWorkloadConfiguration,omitempty" tf:"allowed_workload_configuration,omitempty"`
+
+	// Repeatable block to define a custom claim validation name, value, and operation. See custom_claim below.
+	CustomClaim []CustomJwtAuthorizerCustomClaimObservation `json:"customClaim,omitempty" tf:"custom_claim,omitempty"`
+
 	// URL used to fetch OpenID Connect configuration or authorization server metadata. Must end with .well-known/openid-configuration.
 	DiscoveryURL *string `json:"discoveryUrl,omitempty" tf:"discovery_url,omitempty"`
+
+	// Private endpoint used to reach the authorization server. See private_endpoint below.
+	PrivateEndpoint *CustomJwtAuthorizerPrivateEndpointObservation `json:"privateEndpoint,omitempty" tf:"private_endpoint,omitempty"`
+
+	// Overrides for the private endpoints used to reach the authorization server. See private_endpoint_overrides below.
+	PrivateEndpointOverrides []CustomJwtAuthorizerPrivateEndpointOverridesObservation `json:"privateEndpointOverrides,omitempty" tf:"private_endpoint_overrides,omitempty"`
 }
 
 type AuthorizerConfigurationCustomJwtAuthorizerParameters struct {
@@ -53,9 +104,343 @@ type AuthorizerConfigurationCustomJwtAuthorizerParameters struct {
 	// +listType=set
 	AllowedClients []*string `json:"allowedClients,omitempty" tf:"allowed_clients,omitempty"`
 
+	// Set of scopes that are allowed to access the token.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	AllowedScopes []*string `json:"allowedScopes,omitempty" tf:"allowed_scopes,omitempty"`
+
+	// Configuration restricting which workloads may use this authorizer. See allowed_workload_configuration below.
+	// +kubebuilder:validation:Optional
+	AllowedWorkloadConfiguration *CustomJwtAuthorizerAllowedWorkloadConfigurationParameters `json:"allowedWorkloadConfiguration,omitempty" tf:"allowed_workload_configuration,omitempty"`
+
+	// Repeatable block to define a custom claim validation name, value, and operation. See custom_claim below.
+	// +kubebuilder:validation:Optional
+	CustomClaim []CustomJwtAuthorizerCustomClaimParameters `json:"customClaim,omitempty" tf:"custom_claim,omitempty"`
+
 	// URL used to fetch OpenID Connect configuration or authorization server metadata. Must end with .well-known/openid-configuration.
 	// +kubebuilder:validation:Optional
 	DiscoveryURL *string `json:"discoveryUrl" tf:"discovery_url,omitempty"`
+
+	// Private endpoint used to reach the authorization server. See private_endpoint below.
+	// +kubebuilder:validation:Optional
+	PrivateEndpoint *CustomJwtAuthorizerPrivateEndpointParameters `json:"privateEndpoint,omitempty" tf:"private_endpoint,omitempty"`
+
+	// Overrides for the private endpoints used to reach the authorization server. See private_endpoint_overrides below.
+	// +kubebuilder:validation:Optional
+	PrivateEndpointOverrides []CustomJwtAuthorizerPrivateEndpointOverridesParameters `json:"privateEndpointOverrides,omitempty" tf:"private_endpoint_overrides,omitempty"`
+}
+
+type AuthorizingClaimMatchValueClaimMatchValueInitParameters struct {
+
+	// String value to match for. Must be specified when claim_match_operator is EQUALS or CONTAINS. Exactly one of match_value_string or match_value_string_list must be specified.
+	MatchValueString *string `json:"matchValueString,omitempty" tf:"match_value_string,omitempty"`
+
+	// List of strings to check for a match. Must be specified when claim_match_operator is CONTAINS_ANY. Exactly one of match_value_string or match_value_string_list must be specified.
+	// +listType=set
+	MatchValueStringList []*string `json:"matchValueStringList,omitempty" tf:"match_value_string_list,omitempty"`
+}
+
+type AuthorizingClaimMatchValueClaimMatchValueObservation struct {
+
+	// String value to match for. Must be specified when claim_match_operator is EQUALS or CONTAINS. Exactly one of match_value_string or match_value_string_list must be specified.
+	MatchValueString *string `json:"matchValueString,omitempty" tf:"match_value_string,omitempty"`
+
+	// List of strings to check for a match. Must be specified when claim_match_operator is CONTAINS_ANY. Exactly one of match_value_string or match_value_string_list must be specified.
+	// +listType=set
+	MatchValueStringList []*string `json:"matchValueStringList,omitempty" tf:"match_value_string_list,omitempty"`
+}
+
+type AuthorizingClaimMatchValueClaimMatchValueParameters struct {
+
+	// String value to match for. Must be specified when claim_match_operator is EQUALS or CONTAINS. Exactly one of match_value_string or match_value_string_list must be specified.
+	// +kubebuilder:validation:Optional
+	MatchValueString *string `json:"matchValueString,omitempty" tf:"match_value_string,omitempty"`
+
+	// List of strings to check for a match. Must be specified when claim_match_operator is CONTAINS_ANY. Exactly one of match_value_string or match_value_string_list must be specified.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	MatchValueStringList []*string `json:"matchValueStringList,omitempty" tf:"match_value_string_list,omitempty"`
+}
+
+type CustomClaimAuthorizingClaimMatchValueInitParameters struct {
+
+	// Relationship between the claim field value and the value or values to match for. Valid values are EQUALS, CONTAINS, and CONTAINS_ANY. EQUALS can be used only when inbound_token_claim_value_type is STRING. CONTAINS or CONTAINS_ANY can be used only when inbound_token_claim_value_type is STRING_ARRAY.
+	ClaimMatchOperator *string `json:"claimMatchOperator,omitempty" tf:"claim_match_operator,omitempty"`
+
+	// Value or values to match for. See claim_match_value below.
+	ClaimMatchValue *AuthorizingClaimMatchValueClaimMatchValueInitParameters `json:"claimMatchValue,omitempty" tf:"claim_match_value,omitempty"`
+}
+
+type CustomClaimAuthorizingClaimMatchValueObservation struct {
+
+	// Relationship between the claim field value and the value or values to match for. Valid values are EQUALS, CONTAINS, and CONTAINS_ANY. EQUALS can be used only when inbound_token_claim_value_type is STRING. CONTAINS or CONTAINS_ANY can be used only when inbound_token_claim_value_type is STRING_ARRAY.
+	ClaimMatchOperator *string `json:"claimMatchOperator,omitempty" tf:"claim_match_operator,omitempty"`
+
+	// Value or values to match for. See claim_match_value below.
+	ClaimMatchValue *AuthorizingClaimMatchValueClaimMatchValueObservation `json:"claimMatchValue,omitempty" tf:"claim_match_value,omitempty"`
+}
+
+type CustomClaimAuthorizingClaimMatchValueParameters struct {
+
+	// Relationship between the claim field value and the value or values to match for. Valid values are EQUALS, CONTAINS, and CONTAINS_ANY. EQUALS can be used only when inbound_token_claim_value_type is STRING. CONTAINS or CONTAINS_ANY can be used only when inbound_token_claim_value_type is STRING_ARRAY.
+	// +kubebuilder:validation:Optional
+	ClaimMatchOperator *string `json:"claimMatchOperator" tf:"claim_match_operator,omitempty"`
+
+	// Value or values to match for. See claim_match_value below.
+	// +kubebuilder:validation:Optional
+	ClaimMatchValue *AuthorizingClaimMatchValueClaimMatchValueParameters `json:"claimMatchValue,omitempty" tf:"claim_match_value,omitempty"`
+}
+
+type CustomJwtAuthorizerAllowedWorkloadConfigurationInitParameters struct {
+
+	// Hosting environments allowed to use the authorizer. Between 1 and 10 entries. See hosting_environment below.
+	HostingEnvironment []AllowedWorkloadConfigurationHostingEnvironmentInitParameters `json:"hostingEnvironment,omitempty" tf:"hosting_environment,omitempty"`
+
+	// List of workload identity names allowed to use the authorizer. Between 1 and 10 entries.
+	WorkloadIdentities []*string `json:"workloadIdentities,omitempty" tf:"workload_identities,omitempty"`
+}
+
+type CustomJwtAuthorizerAllowedWorkloadConfigurationObservation struct {
+
+	// Hosting environments allowed to use the authorizer. Between 1 and 10 entries. See hosting_environment below.
+	HostingEnvironment []AllowedWorkloadConfigurationHostingEnvironmentObservation `json:"hostingEnvironment,omitempty" tf:"hosting_environment,omitempty"`
+
+	// List of workload identity names allowed to use the authorizer. Between 1 and 10 entries.
+	WorkloadIdentities []*string `json:"workloadIdentities,omitempty" tf:"workload_identities,omitempty"`
+}
+
+type CustomJwtAuthorizerAllowedWorkloadConfigurationParameters struct {
+
+	// Hosting environments allowed to use the authorizer. Between 1 and 10 entries. See hosting_environment below.
+	// +kubebuilder:validation:Optional
+	HostingEnvironment []AllowedWorkloadConfigurationHostingEnvironmentParameters `json:"hostingEnvironment,omitempty" tf:"hosting_environment,omitempty"`
+
+	// List of workload identity names allowed to use the authorizer. Between 1 and 10 entries.
+	// +kubebuilder:validation:Optional
+	WorkloadIdentities []*string `json:"workloadIdentities,omitempty" tf:"workload_identities,omitempty"`
+}
+
+type CustomJwtAuthorizerCustomClaimInitParameters struct {
+
+	// Configuration block to define the value or values to match for and the relationship of the match. See authorizing_claim_match_value below.
+	AuthorizingClaimMatchValue *CustomClaimAuthorizingClaimMatchValueInitParameters `json:"authorizingClaimMatchValue,omitempty" tf:"authorizing_claim_match_value,omitempty"`
+
+	// Name of the custom claim field to check.
+	InboundTokenClaimName *string `json:"inboundTokenClaimName,omitempty" tf:"inbound_token_claim_name,omitempty"`
+
+	// Data type of the claim value to check for. Valid values are STRING and STRING_ARRAY.
+	InboundTokenClaimValueType *string `json:"inboundTokenClaimValueType,omitempty" tf:"inbound_token_claim_value_type,omitempty"`
+}
+
+type CustomJwtAuthorizerCustomClaimObservation struct {
+
+	// Configuration block to define the value or values to match for and the relationship of the match. See authorizing_claim_match_value below.
+	AuthorizingClaimMatchValue *CustomClaimAuthorizingClaimMatchValueObservation `json:"authorizingClaimMatchValue,omitempty" tf:"authorizing_claim_match_value,omitempty"`
+
+	// Name of the custom claim field to check.
+	InboundTokenClaimName *string `json:"inboundTokenClaimName,omitempty" tf:"inbound_token_claim_name,omitempty"`
+
+	// Data type of the claim value to check for. Valid values are STRING and STRING_ARRAY.
+	InboundTokenClaimValueType *string `json:"inboundTokenClaimValueType,omitempty" tf:"inbound_token_claim_value_type,omitempty"`
+}
+
+type CustomJwtAuthorizerCustomClaimParameters struct {
+
+	// Configuration block to define the value or values to match for and the relationship of the match. See authorizing_claim_match_value below.
+	// +kubebuilder:validation:Optional
+	AuthorizingClaimMatchValue *CustomClaimAuthorizingClaimMatchValueParameters `json:"authorizingClaimMatchValue,omitempty" tf:"authorizing_claim_match_value,omitempty"`
+
+	// Name of the custom claim field to check.
+	// +kubebuilder:validation:Optional
+	InboundTokenClaimName *string `json:"inboundTokenClaimName" tf:"inbound_token_claim_name,omitempty"`
+
+	// Data type of the claim value to check for. Valid values are STRING and STRING_ARRAY.
+	// +kubebuilder:validation:Optional
+	InboundTokenClaimValueType *string `json:"inboundTokenClaimValueType" tf:"inbound_token_claim_value_type,omitempty"`
+}
+
+type CustomJwtAuthorizerPrivateEndpointInitParameters struct {
+
+	// Managed VPC resource configuration. See managed_vpc_resource below.
+	ManagedVPCResource *CustomJwtAuthorizerPrivateEndpointManagedVPCResourceInitParameters `json:"managedVpcResource,omitempty" tf:"managed_vpc_resource,omitempty"`
+
+	// Self-managed VPC Lattice resource configuration. See self_managed_lattice_resource below.
+	SelfManagedLatticeResource *CustomJwtAuthorizerPrivateEndpointSelfManagedLatticeResourceInitParameters `json:"selfManagedLatticeResource,omitempty" tf:"self_managed_lattice_resource,omitempty"`
+}
+
+type CustomJwtAuthorizerPrivateEndpointManagedVPCResourceInitParameters struct {
+
+	// IP address type for the endpoint. Valid values are IPV4 and IPV6.
+	EndpointIPAddressType *string `json:"endpointIpAddressType,omitempty" tf:"endpoint_ip_address_type,omitempty"`
+
+	// Routing domain for the endpoint.
+	RoutingDomain *string `json:"routingDomain,omitempty" tf:"routing_domain,omitempty"`
+
+	// IDs of the security groups for the endpoint.
+	// +listType=set
+	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
+
+	// IDs of the subnets for the endpoint.
+	// +listType=set
+	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
+
+	// Key-value map of resource tags.
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Identifier of the VPC for the endpoint.
+	VPCIdentifier *string `json:"vpcIdentifier,omitempty" tf:"vpc_identifier,omitempty"`
+}
+
+type CustomJwtAuthorizerPrivateEndpointManagedVPCResourceObservation struct {
+
+	// IP address type for the endpoint. Valid values are IPV4 and IPV6.
+	EndpointIPAddressType *string `json:"endpointIpAddressType,omitempty" tf:"endpoint_ip_address_type,omitempty"`
+
+	// Routing domain for the endpoint.
+	RoutingDomain *string `json:"routingDomain,omitempty" tf:"routing_domain,omitempty"`
+
+	// IDs of the security groups for the endpoint.
+	// +listType=set
+	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
+
+	// IDs of the subnets for the endpoint.
+	// +listType=set
+	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
+
+	// Key-value map of resource tags.
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Identifier of the VPC for the endpoint.
+	VPCIdentifier *string `json:"vpcIdentifier,omitempty" tf:"vpc_identifier,omitempty"`
+}
+
+type CustomJwtAuthorizerPrivateEndpointManagedVPCResourceParameters struct {
+
+	// IP address type for the endpoint. Valid values are IPV4 and IPV6.
+	// +kubebuilder:validation:Optional
+	EndpointIPAddressType *string `json:"endpointIpAddressType" tf:"endpoint_ip_address_type,omitempty"`
+
+	// Routing domain for the endpoint.
+	// +kubebuilder:validation:Optional
+	RoutingDomain *string `json:"routingDomain,omitempty" tf:"routing_domain,omitempty"`
+
+	// IDs of the security groups for the endpoint.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
+
+	// IDs of the subnets for the endpoint.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	SubnetIds []*string `json:"subnetIds" tf:"subnet_ids,omitempty"`
+
+	// Key-value map of resource tags.
+	// +kubebuilder:validation:Optional
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Identifier of the VPC for the endpoint.
+	// +kubebuilder:validation:Optional
+	VPCIdentifier *string `json:"vpcIdentifier" tf:"vpc_identifier,omitempty"`
+}
+
+type CustomJwtAuthorizerPrivateEndpointObservation struct {
+
+	// Managed VPC resource configuration. See managed_vpc_resource below.
+	ManagedVPCResource *CustomJwtAuthorizerPrivateEndpointManagedVPCResourceObservation `json:"managedVpcResource,omitempty" tf:"managed_vpc_resource,omitempty"`
+
+	// Self-managed VPC Lattice resource configuration. See self_managed_lattice_resource below.
+	SelfManagedLatticeResource *CustomJwtAuthorizerPrivateEndpointSelfManagedLatticeResourceObservation `json:"selfManagedLatticeResource,omitempty" tf:"self_managed_lattice_resource,omitempty"`
+}
+
+type CustomJwtAuthorizerPrivateEndpointOverridesInitParameters struct {
+
+	// Domain the override applies to.
+	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
+
+	// Private endpoint configuration. See private_endpoint below.
+	PrivateEndpoint *CustomJwtAuthorizerPrivateEndpointOverridesPrivateEndpointInitParameters `json:"privateEndpoint,omitempty" tf:"private_endpoint,omitempty"`
+}
+
+type CustomJwtAuthorizerPrivateEndpointOverridesObservation struct {
+
+	// Domain the override applies to.
+	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
+
+	// Private endpoint configuration. See private_endpoint below.
+	PrivateEndpoint *CustomJwtAuthorizerPrivateEndpointOverridesPrivateEndpointObservation `json:"privateEndpoint,omitempty" tf:"private_endpoint,omitempty"`
+}
+
+type CustomJwtAuthorizerPrivateEndpointOverridesParameters struct {
+
+	// Domain the override applies to.
+	// +kubebuilder:validation:Optional
+	Domain *string `json:"domain" tf:"domain,omitempty"`
+
+	// Private endpoint configuration. See private_endpoint below.
+	// +kubebuilder:validation:Optional
+	PrivateEndpoint *CustomJwtAuthorizerPrivateEndpointOverridesPrivateEndpointParameters `json:"privateEndpoint,omitempty" tf:"private_endpoint,omitempty"`
+}
+
+type CustomJwtAuthorizerPrivateEndpointOverridesPrivateEndpointInitParameters struct {
+
+	// Managed VPC resource configuration. See managed_vpc_resource below.
+	ManagedVPCResource *PrivateEndpointOverridesPrivateEndpointManagedVPCResourceInitParameters `json:"managedVpcResource,omitempty" tf:"managed_vpc_resource,omitempty"`
+
+	// Self-managed VPC Lattice resource configuration. See self_managed_lattice_resource below.
+	SelfManagedLatticeResource *PrivateEndpointOverridesPrivateEndpointSelfManagedLatticeResourceInitParameters `json:"selfManagedLatticeResource,omitempty" tf:"self_managed_lattice_resource,omitempty"`
+}
+
+type CustomJwtAuthorizerPrivateEndpointOverridesPrivateEndpointObservation struct {
+
+	// Managed VPC resource configuration. See managed_vpc_resource below.
+	ManagedVPCResource *PrivateEndpointOverridesPrivateEndpointManagedVPCResourceObservation `json:"managedVpcResource,omitempty" tf:"managed_vpc_resource,omitempty"`
+
+	// Self-managed VPC Lattice resource configuration. See self_managed_lattice_resource below.
+	SelfManagedLatticeResource *PrivateEndpointOverridesPrivateEndpointSelfManagedLatticeResourceObservation `json:"selfManagedLatticeResource,omitempty" tf:"self_managed_lattice_resource,omitempty"`
+}
+
+type CustomJwtAuthorizerPrivateEndpointOverridesPrivateEndpointParameters struct {
+
+	// Managed VPC resource configuration. See managed_vpc_resource below.
+	// +kubebuilder:validation:Optional
+	ManagedVPCResource *PrivateEndpointOverridesPrivateEndpointManagedVPCResourceParameters `json:"managedVpcResource,omitempty" tf:"managed_vpc_resource,omitempty"`
+
+	// Self-managed VPC Lattice resource configuration. See self_managed_lattice_resource below.
+	// +kubebuilder:validation:Optional
+	SelfManagedLatticeResource *PrivateEndpointOverridesPrivateEndpointSelfManagedLatticeResourceParameters `json:"selfManagedLatticeResource,omitempty" tf:"self_managed_lattice_resource,omitempty"`
+}
+
+type CustomJwtAuthorizerPrivateEndpointParameters struct {
+
+	// Managed VPC resource configuration. See managed_vpc_resource below.
+	// +kubebuilder:validation:Optional
+	ManagedVPCResource *CustomJwtAuthorizerPrivateEndpointManagedVPCResourceParameters `json:"managedVpcResource,omitempty" tf:"managed_vpc_resource,omitempty"`
+
+	// Self-managed VPC Lattice resource configuration. See self_managed_lattice_resource below.
+	// +kubebuilder:validation:Optional
+	SelfManagedLatticeResource *CustomJwtAuthorizerPrivateEndpointSelfManagedLatticeResourceParameters `json:"selfManagedLatticeResource,omitempty" tf:"self_managed_lattice_resource,omitempty"`
+}
+
+type CustomJwtAuthorizerPrivateEndpointSelfManagedLatticeResourceInitParameters struct {
+
+	// Identifier of the VPC Lattice resource configuration.
+	ResourceConfigurationIdentifier *string `json:"resourceConfigurationIdentifier,omitempty" tf:"resource_configuration_identifier,omitempty"`
+}
+
+type CustomJwtAuthorizerPrivateEndpointSelfManagedLatticeResourceObservation struct {
+
+	// Identifier of the VPC Lattice resource configuration.
+	ResourceConfigurationIdentifier *string `json:"resourceConfigurationIdentifier,omitempty" tf:"resource_configuration_identifier,omitempty"`
+}
+
+type CustomJwtAuthorizerPrivateEndpointSelfManagedLatticeResourceParameters struct {
+
+	// Identifier of the VPC Lattice resource configuration.
+	// +kubebuilder:validation:Optional
+	ResourceConfigurationIdentifier *string `json:"resourceConfigurationIdentifier" tf:"resource_configuration_identifier,omitempty"`
 }
 
 type GatewayAuthorizerConfigurationInitParameters struct {
@@ -88,7 +473,7 @@ type GatewayInitParameters struct {
 	// Description of the gateway.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Exception level for the gateway. Valid values: INFO, WARN, ERROR.
+	// Exception level for the gateway. Valid values: DEBUG.
 	ExceptionLevel *string `json:"exceptionLevel,omitempty" tf:"exception_level,omitempty"`
 
 	// List of interceptor configurations for the gateway. Minimum of 1, maximum of 2. See interceptor_configuration below.
@@ -100,19 +485,22 @@ type GatewayInitParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnRef *v1.Reference `json:"kmsKeyArnRef,omitempty" tf:"-"`
+	KMSKeyArnRef *v2.Reference `json:"kmsKeyArnRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnSelector *v1.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
+	KMSKeyArnSelector *v2.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
 
 	// Name of the gateway.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Configuration for a policy engine associated with the gateway. A policy engine is a collection of policies that evaluates and authorizes agent tool calls. When associated with a gateway, the policy engine intercepts all agent requests and determines whether to allow or deny each action based on the defined policies. See policy_engine_configuration below.
+	PolicyEngineConfiguration *PolicyEngineConfigurationInitParameters `json:"policyEngineConfiguration,omitempty" tf:"policy_engine_configuration,omitempty"`
+
 	// Protocol-specific configuration for the gateway. See protocol_configuration below.
 	ProtocolConfiguration *GatewayProtocolConfigurationInitParameters `json:"protocolConfiguration,omitempty" tf:"protocol_configuration,omitempty"`
 
-	// Protocol type for the gateway. Valid values: MCP.
+	// Protocol type for the gateway. Valid values: MCP. Omit this argument to create a gateway that routes traffic directly to HTTP targets such as AgentCore Runtime agents (see aws_bedrockagentcore_gateway_target target_configuration.http).
 	ProtocolType *string `json:"protocolType,omitempty" tf:"protocol_type,omitempty"`
 
 	// ARN of the IAM role that the gateway assumes to access AWS services.
@@ -122,11 +510,11 @@ type GatewayInitParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.Reference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -144,7 +532,7 @@ type GatewayObservation struct {
 	// Description of the gateway.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Exception level for the gateway. Valid values: INFO, WARN, ERROR.
+	// Exception level for the gateway. Valid values: DEBUG.
 	ExceptionLevel *string `json:"exceptionLevel,omitempty" tf:"exception_level,omitempty"`
 
 	// ARN of the Gateway.
@@ -167,10 +555,13 @@ type GatewayObservation struct {
 	// Name of the gateway.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Configuration for a policy engine associated with the gateway. A policy engine is a collection of policies that evaluates and authorizes agent tool calls. When associated with a gateway, the policy engine intercepts all agent requests and determines whether to allow or deny each action based on the defined policies. See policy_engine_configuration below.
+	PolicyEngineConfiguration *PolicyEngineConfigurationObservation `json:"policyEngineConfiguration,omitempty" tf:"policy_engine_configuration,omitempty"`
+
 	// Protocol-specific configuration for the gateway. See protocol_configuration below.
 	ProtocolConfiguration *GatewayProtocolConfigurationObservation `json:"protocolConfiguration,omitempty" tf:"protocol_configuration,omitempty"`
 
-	// Protocol type for the gateway. Valid values: MCP.
+	// Protocol type for the gateway. Valid values: MCP. Omit this argument to create a gateway that routes traffic directly to HTTP targets such as AgentCore Runtime agents (see aws_bedrockagentcore_gateway_target target_configuration.http).
 	ProtocolType *string `json:"protocolType,omitempty" tf:"protocol_type,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -206,7 +597,7 @@ type GatewayParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Exception level for the gateway. Valid values: INFO, WARN, ERROR.
+	// Exception level for the gateway. Valid values: DEBUG.
 	// +kubebuilder:validation:Optional
 	ExceptionLevel *string `json:"exceptionLevel,omitempty" tf:"exception_level,omitempty"`
 
@@ -221,21 +612,25 @@ type GatewayParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnRef *v1.Reference `json:"kmsKeyArnRef,omitempty" tf:"-"`
+	KMSKeyArnRef *v2.Reference `json:"kmsKeyArnRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnSelector *v1.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
+	KMSKeyArnSelector *v2.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
 
 	// Name of the gateway.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Configuration for a policy engine associated with the gateway. A policy engine is a collection of policies that evaluates and authorizes agent tool calls. When associated with a gateway, the policy engine intercepts all agent requests and determines whether to allow or deny each action based on the defined policies. See policy_engine_configuration below.
+	// +kubebuilder:validation:Optional
+	PolicyEngineConfiguration *PolicyEngineConfigurationParameters `json:"policyEngineConfiguration,omitempty" tf:"policy_engine_configuration,omitempty"`
+
 	// Protocol-specific configuration for the gateway. See protocol_configuration below.
 	// +kubebuilder:validation:Optional
 	ProtocolConfiguration *GatewayProtocolConfigurationParameters `json:"protocolConfiguration,omitempty" tf:"protocol_configuration,omitempty"`
 
-	// Protocol type for the gateway. Valid values: MCP.
+	// Protocol type for the gateway. Valid values: MCP. Omit this argument to create a gateway that routes traffic directly to HTTP targets such as AgentCore Runtime agents (see aws_bedrockagentcore_gateway_target target_configuration.http).
 	// +kubebuilder:validation:Optional
 	ProtocolType *string `json:"protocolType,omitempty" tf:"protocol_type,omitempty"`
 
@@ -252,11 +647,11 @@ type GatewayParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.Reference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -384,11 +779,11 @@ type LambdaInitParameters struct {
 
 	// Reference to a Function in lambda to populate arn.
 	// +kubebuilder:validation:Optional
-	ArnRef *v1.Reference `json:"arnRef,omitempty" tf:"-"`
+	ArnRef *v2.Reference `json:"arnRef,omitempty" tf:"-"`
 
 	// Selector for a Function in lambda to populate arn.
 	// +kubebuilder:validation:Optional
-	ArnSelector *v1.Selector `json:"arnSelector,omitempty" tf:"-"`
+	ArnSelector *v2.Selector `json:"arnSelector,omitempty" tf:"-"`
 }
 
 type LambdaObservation struct {
@@ -407,11 +802,11 @@ type LambdaParameters struct {
 
 	// Reference to a Function in lambda to populate arn.
 	// +kubebuilder:validation:Optional
-	ArnRef *v1.Reference `json:"arnRef,omitempty" tf:"-"`
+	ArnRef *v2.Reference `json:"arnRef,omitempty" tf:"-"`
 
 	// Selector for a Function in lambda to populate arn.
 	// +kubebuilder:validation:Optional
-	ArnSelector *v1.Selector `json:"arnSelector,omitempty" tf:"-"`
+	ArnSelector *v2.Selector `json:"arnSelector,omitempty" tf:"-"`
 }
 
 type McpInitParameters struct {
@@ -421,6 +816,12 @@ type McpInitParameters struct {
 
 	// Search type for MCP. Valid values: SEMANTIC.
 	SearchType *string `json:"searchType,omitempty" tf:"search_type,omitempty"`
+
+	// Configuration block for session settings of the MCP gateway. See session_configuration below.
+	SessionConfiguration *SessionConfigurationInitParameters `json:"sessionConfiguration,omitempty" tf:"session_configuration,omitempty"`
+
+	// Configuration block for streaming settings of the MCP gateway. See streaming_configuration below.
+	StreamingConfiguration *StreamingConfigurationInitParameters `json:"streamingConfiguration,omitempty" tf:"streaming_configuration,omitempty"`
 
 	// Set of supported MCP protocol versions.
 	// +listType=set
@@ -434,6 +835,12 @@ type McpObservation struct {
 
 	// Search type for MCP. Valid values: SEMANTIC.
 	SearchType *string `json:"searchType,omitempty" tf:"search_type,omitempty"`
+
+	// Configuration block for session settings of the MCP gateway. See session_configuration below.
+	SessionConfiguration *SessionConfigurationObservation `json:"sessionConfiguration,omitempty" tf:"session_configuration,omitempty"`
+
+	// Configuration block for streaming settings of the MCP gateway. See streaming_configuration below.
+	StreamingConfiguration *StreamingConfigurationObservation `json:"streamingConfiguration,omitempty" tf:"streaming_configuration,omitempty"`
 
 	// Set of supported MCP protocol versions.
 	// +listType=set
@@ -450,16 +857,208 @@ type McpParameters struct {
 	// +kubebuilder:validation:Optional
 	SearchType *string `json:"searchType,omitempty" tf:"search_type,omitempty"`
 
+	// Configuration block for session settings of the MCP gateway. See session_configuration below.
+	// +kubebuilder:validation:Optional
+	SessionConfiguration *SessionConfigurationParameters `json:"sessionConfiguration,omitempty" tf:"session_configuration,omitempty"`
+
+	// Configuration block for streaming settings of the MCP gateway. See streaming_configuration below.
+	// +kubebuilder:validation:Optional
+	StreamingConfiguration *StreamingConfigurationParameters `json:"streamingConfiguration,omitempty" tf:"streaming_configuration,omitempty"`
+
 	// Set of supported MCP protocol versions.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	SupportedVersions []*string `json:"supportedVersions,omitempty" tf:"supported_versions,omitempty"`
 }
 
+type PolicyEngineConfigurationInitParameters struct {
+
+	// ARN of the policy engine. The policy engine contains Cedar policies that define fine-grained authorization rules specifying who can perform what actions on which resources as agents interact through the gateway.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/bedrockagentcore/v1beta1.PolicyEngine
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("policy_engine_arn",true)
+	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
+	// Reference to a PolicyEngine in bedrockagentcore to populate arn.
+	// +kubebuilder:validation:Optional
+	ArnRef *v2.Reference `json:"arnRef,omitempty" tf:"-"`
+
+	// Selector for a PolicyEngine in bedrockagentcore to populate arn.
+	// +kubebuilder:validation:Optional
+	ArnSelector *v2.Selector `json:"arnSelector,omitempty" tf:"-"`
+
+	// Enforcement mode for the policy engine. Valid values: LOG_ONLY, ENFORCE. In LOG_ONLY mode, the policy engine evaluates actions and records traces but does not enforce decisions. In ENFORCE mode, the policy engine evaluates actions and enforces allow/deny decisions.
+	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
+}
+
+type PolicyEngineConfigurationObservation struct {
+
+	// ARN of the policy engine. The policy engine contains Cedar policies that define fine-grained authorization rules specifying who can perform what actions on which resources as agents interact through the gateway.
+	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
+	// Enforcement mode for the policy engine. Valid values: LOG_ONLY, ENFORCE. In LOG_ONLY mode, the policy engine evaluates actions and records traces but does not enforce decisions. In ENFORCE mode, the policy engine evaluates actions and enforces allow/deny decisions.
+	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
+}
+
+type PolicyEngineConfigurationParameters struct {
+
+	// ARN of the policy engine. The policy engine contains Cedar policies that define fine-grained authorization rules specifying who can perform what actions on which resources as agents interact through the gateway.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/bedrockagentcore/v1beta1.PolicyEngine
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("policy_engine_arn",true)
+	// +kubebuilder:validation:Optional
+	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
+	// Reference to a PolicyEngine in bedrockagentcore to populate arn.
+	// +kubebuilder:validation:Optional
+	ArnRef *v2.Reference `json:"arnRef,omitempty" tf:"-"`
+
+	// Selector for a PolicyEngine in bedrockagentcore to populate arn.
+	// +kubebuilder:validation:Optional
+	ArnSelector *v2.Selector `json:"arnSelector,omitempty" tf:"-"`
+
+	// Enforcement mode for the policy engine. Valid values: LOG_ONLY, ENFORCE. In LOG_ONLY mode, the policy engine evaluates actions and records traces but does not enforce decisions. In ENFORCE mode, the policy engine evaluates actions and enforces allow/deny decisions.
+	// +kubebuilder:validation:Optional
+	Mode *string `json:"mode" tf:"mode,omitempty"`
+}
+
+type PrivateEndpointOverridesPrivateEndpointManagedVPCResourceInitParameters struct {
+
+	// IP address type for the endpoint. Valid values are IPV4 and IPV6.
+	EndpointIPAddressType *string `json:"endpointIpAddressType,omitempty" tf:"endpoint_ip_address_type,omitempty"`
+
+	// Routing domain for the endpoint.
+	RoutingDomain *string `json:"routingDomain,omitempty" tf:"routing_domain,omitempty"`
+
+	// IDs of the security groups for the endpoint.
+	// +listType=set
+	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
+
+	// IDs of the subnets for the endpoint.
+	// +listType=set
+	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
+
+	// Key-value map of resource tags.
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Identifier of the VPC for the endpoint.
+	VPCIdentifier *string `json:"vpcIdentifier,omitempty" tf:"vpc_identifier,omitempty"`
+}
+
+type PrivateEndpointOverridesPrivateEndpointManagedVPCResourceObservation struct {
+
+	// IP address type for the endpoint. Valid values are IPV4 and IPV6.
+	EndpointIPAddressType *string `json:"endpointIpAddressType,omitempty" tf:"endpoint_ip_address_type,omitempty"`
+
+	// Routing domain for the endpoint.
+	RoutingDomain *string `json:"routingDomain,omitempty" tf:"routing_domain,omitempty"`
+
+	// IDs of the security groups for the endpoint.
+	// +listType=set
+	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
+
+	// IDs of the subnets for the endpoint.
+	// +listType=set
+	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
+
+	// Key-value map of resource tags.
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Identifier of the VPC for the endpoint.
+	VPCIdentifier *string `json:"vpcIdentifier,omitempty" tf:"vpc_identifier,omitempty"`
+}
+
+type PrivateEndpointOverridesPrivateEndpointManagedVPCResourceParameters struct {
+
+	// IP address type for the endpoint. Valid values are IPV4 and IPV6.
+	// +kubebuilder:validation:Optional
+	EndpointIPAddressType *string `json:"endpointIpAddressType" tf:"endpoint_ip_address_type,omitempty"`
+
+	// Routing domain for the endpoint.
+	// +kubebuilder:validation:Optional
+	RoutingDomain *string `json:"routingDomain,omitempty" tf:"routing_domain,omitempty"`
+
+	// IDs of the security groups for the endpoint.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
+
+	// IDs of the subnets for the endpoint.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	SubnetIds []*string `json:"subnetIds" tf:"subnet_ids,omitempty"`
+
+	// Key-value map of resource tags.
+	// +kubebuilder:validation:Optional
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Identifier of the VPC for the endpoint.
+	// +kubebuilder:validation:Optional
+	VPCIdentifier *string `json:"vpcIdentifier" tf:"vpc_identifier,omitempty"`
+}
+
+type PrivateEndpointOverridesPrivateEndpointSelfManagedLatticeResourceInitParameters struct {
+
+	// Identifier of the VPC Lattice resource configuration.
+	ResourceConfigurationIdentifier *string `json:"resourceConfigurationIdentifier,omitempty" tf:"resource_configuration_identifier,omitempty"`
+}
+
+type PrivateEndpointOverridesPrivateEndpointSelfManagedLatticeResourceObservation struct {
+
+	// Identifier of the VPC Lattice resource configuration.
+	ResourceConfigurationIdentifier *string `json:"resourceConfigurationIdentifier,omitempty" tf:"resource_configuration_identifier,omitempty"`
+}
+
+type PrivateEndpointOverridesPrivateEndpointSelfManagedLatticeResourceParameters struct {
+
+	// Identifier of the VPC Lattice resource configuration.
+	// +kubebuilder:validation:Optional
+	ResourceConfigurationIdentifier *string `json:"resourceConfigurationIdentifier" tf:"resource_configuration_identifier,omitempty"`
+}
+
+type SessionConfigurationInitParameters struct {
+
+	// Integer value for session timeout in seconds. Must be between 900 and 28800.
+	SessionTimeoutInSeconds *float64 `json:"sessionTimeoutInSeconds,omitempty" tf:"session_timeout_in_seconds,omitempty"`
+}
+
+type SessionConfigurationObservation struct {
+
+	// Integer value for session timeout in seconds. Must be between 900 and 28800.
+	SessionTimeoutInSeconds *float64 `json:"sessionTimeoutInSeconds,omitempty" tf:"session_timeout_in_seconds,omitempty"`
+}
+
+type SessionConfigurationParameters struct {
+
+	// Integer value for session timeout in seconds. Must be between 900 and 28800.
+	// +kubebuilder:validation:Optional
+	SessionTimeoutInSeconds *float64 `json:"sessionTimeoutInSeconds,omitempty" tf:"session_timeout_in_seconds,omitempty"`
+}
+
+type StreamingConfigurationInitParameters struct {
+
+	// Boolean indicating whether response streaming is enabled for the gateway.
+	EnableResponseStreaming *bool `json:"enableResponseStreaming,omitempty" tf:"enable_response_streaming,omitempty"`
+}
+
+type StreamingConfigurationObservation struct {
+
+	// Boolean indicating whether response streaming is enabled for the gateway.
+	EnableResponseStreaming *bool `json:"enableResponseStreaming,omitempty" tf:"enable_response_streaming,omitempty"`
+}
+
+type StreamingConfigurationParameters struct {
+
+	// Boolean indicating whether response streaming is enabled for the gateway.
+	// +kubebuilder:validation:Optional
+	EnableResponseStreaming *bool `json:"enableResponseStreaming,omitempty" tf:"enable_response_streaming,omitempty"`
+}
+
 // GatewaySpec defines the desired state of Gateway
 type GatewaySpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     GatewayParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   GatewayParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -475,8 +1074,8 @@ type GatewaySpec struct {
 
 // GatewayStatus defines the observed state of Gateway.
 type GatewayStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        GatewayObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               GatewayObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true
@@ -494,7 +1093,6 @@ type Gateway struct {
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.authorizerType) || (has(self.initProvider) && has(self.initProvider.authorizerType))",message="spec.forProvider.authorizerType is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || (has(self.initProvider) && has(self.initProvider.name))",message="spec.forProvider.name is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.protocolType) || (has(self.initProvider) && has(self.initProvider.protocolType))",message="spec.forProvider.protocolType is a required parameter"
 	Spec   GatewaySpec   `json:"spec"`
 	Status GatewayStatus `json:"status,omitempty"`
 }

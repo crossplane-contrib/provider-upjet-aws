@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type NotificationRuleInitParameters struct {
@@ -34,11 +33,11 @@ type NotificationRuleInitParameters struct {
 
 	// Reference to a Repository in codecommit to populate resource.
 	// +kubebuilder:validation:Optional
-	ResourceRef *v1.NamespacedReference `json:"resourceRef,omitempty" tf:"-"`
+	ResourceRef *v2.NamespacedReference `json:"resourceRef,omitempty" tf:"-"`
 
 	// Selector for a Repository in codecommit to populate resource.
 	// +kubebuilder:validation:Optional
-	ResourceSelector *v1.NamespacedSelector `json:"resourceSelector,omitempty" tf:"-"`
+	ResourceSelector *v2.NamespacedSelector `json:"resourceSelector,omitempty" tf:"-"`
 
 	// The status of the notification rule. Possible values are ENABLED and DISABLED, default is ENABLED.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
@@ -121,11 +120,11 @@ type NotificationRuleParameters struct {
 
 	// Reference to a Repository in codecommit to populate resource.
 	// +kubebuilder:validation:Optional
-	ResourceRef *v1.NamespacedReference `json:"resourceRef,omitempty" tf:"-"`
+	ResourceRef *v2.NamespacedReference `json:"resourceRef,omitempty" tf:"-"`
 
 	// Selector for a Repository in codecommit to populate resource.
 	// +kubebuilder:validation:Optional
-	ResourceSelector *v1.NamespacedSelector `json:"resourceSelector,omitempty" tf:"-"`
+	ResourceSelector *v2.NamespacedSelector `json:"resourceSelector,omitempty" tf:"-"`
 
 	// The status of the notification rule. Possible values are ENABLED and DISABLED, default is ENABLED.
 	// +kubebuilder:validation:Optional
@@ -150,11 +149,11 @@ type TargetInitParameters struct {
 
 	// Reference to a Topic in sns to populate address.
 	// +kubebuilder:validation:Optional
-	AddressRef *v1.NamespacedReference `json:"addressRef,omitempty" tf:"-"`
+	AddressRef *v2.NamespacedReference `json:"addressRef,omitempty" tf:"-"`
 
 	// Selector for a Topic in sns to populate address.
 	// +kubebuilder:validation:Optional
-	AddressSelector *v1.NamespacedSelector `json:"addressSelector,omitempty" tf:"-"`
+	AddressSelector *v2.NamespacedSelector `json:"addressSelector,omitempty" tf:"-"`
 
 	// The type of the notification target. Valid values are SNS, AWSChatbotSlack, and AWSChatbotMicrosoftTeams. Default value is SNS.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
@@ -182,11 +181,11 @@ type TargetParameters struct {
 
 	// Reference to a Topic in sns to populate address.
 	// +kubebuilder:validation:Optional
-	AddressRef *v1.NamespacedReference `json:"addressRef,omitempty" tf:"-"`
+	AddressRef *v2.NamespacedReference `json:"addressRef,omitempty" tf:"-"`
 
 	// Selector for a Topic in sns to populate address.
 	// +kubebuilder:validation:Optional
-	AddressSelector *v1.NamespacedSelector `json:"addressSelector,omitempty" tf:"-"`
+	AddressSelector *v2.NamespacedSelector `json:"addressSelector,omitempty" tf:"-"`
 
 	// The type of the notification target. Valid values are SNS, AWSChatbotSlack, and AWSChatbotMicrosoftTeams. Default value is SNS.
 	// +kubebuilder:validation:Optional
@@ -212,8 +211,8 @@ type NotificationRuleSpec struct {
 
 // NotificationRuleStatus defines the observed state of NotificationRule.
 type NotificationRuleStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        NotificationRuleObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               NotificationRuleObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

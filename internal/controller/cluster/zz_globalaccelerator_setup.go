@@ -43,3 +43,17 @@ func SetupGated_globalaccelerator(mgr ctrl.Manager, o controller.Options) error 
 	}
 	return nil
 }
+
+// SetupWebhookWithManager_globalaccelerator registers conversion webhooks for all resource kinds in the group.
+func SetupWebhookWithManager_globalaccelerator(mgr ctrl.Manager) error {
+	for _, setup := range []func(ctrl.Manager) error{
+		accelerator.SetupWebhookWithManager,
+		endpointgroup.SetupWebhookWithManager,
+		listener.SetupWebhookWithManager,
+	} {
+		if err := setup(mgr); err != nil {
+			return err
+		}
+	}
+	return nil
+}

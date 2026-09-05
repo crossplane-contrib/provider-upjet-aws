@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type PrivateDNSNameConfigurationInitParameters struct {
@@ -48,11 +47,11 @@ type VPCEndpointServiceInitParameters struct {
 
 	// References to LB in elbv2 to populate gatewayLoadBalancerArns.
 	// +kubebuilder:validation:Optional
-	GatewayLoadBalancerArnsRefs []v1.NamespacedReference `json:"gatewayLoadBalancerArnsRefs,omitempty" tf:"-"`
+	GatewayLoadBalancerArnsRefs []v2.NamespacedReference `json:"gatewayLoadBalancerArnsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of LB in elbv2 to populate gatewayLoadBalancerArns.
 	// +kubebuilder:validation:Optional
-	GatewayLoadBalancerArnsSelector *v1.NamespacedSelector `json:"gatewayLoadBalancerArnsSelector,omitempty" tf:"-"`
+	GatewayLoadBalancerArnsSelector *v2.NamespacedSelector `json:"gatewayLoadBalancerArnsSelector,omitempty" tf:"-"`
 
 	// Amazon Resource Names (ARNs) of one or more Network Load Balancers for the endpoint service.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/elbv2/v1beta1.LB
@@ -62,11 +61,11 @@ type VPCEndpointServiceInitParameters struct {
 
 	// References to LB in elbv2 to populate networkLoadBalancerArns.
 	// +kubebuilder:validation:Optional
-	NetworkLoadBalancerArnsRefs []v1.NamespacedReference `json:"networkLoadBalancerArnsRefs,omitempty" tf:"-"`
+	NetworkLoadBalancerArnsRefs []v2.NamespacedReference `json:"networkLoadBalancerArnsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of LB in elbv2 to populate networkLoadBalancerArns.
 	// +kubebuilder:validation:Optional
-	NetworkLoadBalancerArnsSelector *v1.NamespacedSelector `json:"networkLoadBalancerArnsSelector,omitempty" tf:"-"`
+	NetworkLoadBalancerArnsSelector *v2.NamespacedSelector `json:"networkLoadBalancerArnsSelector,omitempty" tf:"-"`
 
 	// The private DNS name for the service.
 	PrivateDNSName *string `json:"privateDnsName,omitempty" tf:"private_dns_name,omitempty"`
@@ -169,11 +168,11 @@ type VPCEndpointServiceParameters struct {
 
 	// References to LB in elbv2 to populate gatewayLoadBalancerArns.
 	// +kubebuilder:validation:Optional
-	GatewayLoadBalancerArnsRefs []v1.NamespacedReference `json:"gatewayLoadBalancerArnsRefs,omitempty" tf:"-"`
+	GatewayLoadBalancerArnsRefs []v2.NamespacedReference `json:"gatewayLoadBalancerArnsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of LB in elbv2 to populate gatewayLoadBalancerArns.
 	// +kubebuilder:validation:Optional
-	GatewayLoadBalancerArnsSelector *v1.NamespacedSelector `json:"gatewayLoadBalancerArnsSelector,omitempty" tf:"-"`
+	GatewayLoadBalancerArnsSelector *v2.NamespacedSelector `json:"gatewayLoadBalancerArnsSelector,omitempty" tf:"-"`
 
 	// Amazon Resource Names (ARNs) of one or more Network Load Balancers for the endpoint service.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/elbv2/v1beta1.LB
@@ -184,11 +183,11 @@ type VPCEndpointServiceParameters struct {
 
 	// References to LB in elbv2 to populate networkLoadBalancerArns.
 	// +kubebuilder:validation:Optional
-	NetworkLoadBalancerArnsRefs []v1.NamespacedReference `json:"networkLoadBalancerArnsRefs,omitempty" tf:"-"`
+	NetworkLoadBalancerArnsRefs []v2.NamespacedReference `json:"networkLoadBalancerArnsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of LB in elbv2 to populate networkLoadBalancerArns.
 	// +kubebuilder:validation:Optional
-	NetworkLoadBalancerArnsSelector *v1.NamespacedSelector `json:"networkLoadBalancerArnsSelector,omitempty" tf:"-"`
+	NetworkLoadBalancerArnsSelector *v2.NamespacedSelector `json:"networkLoadBalancerArnsSelector,omitempty" tf:"-"`
 
 	// The private DNS name for the service.
 	// +kubebuilder:validation:Optional
@@ -234,8 +233,8 @@ type VPCEndpointServiceSpec struct {
 
 // VPCEndpointServiceStatus defines the observed state of VPCEndpointService.
 type VPCEndpointServiceStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        VPCEndpointServiceObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               VPCEndpointServiceObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

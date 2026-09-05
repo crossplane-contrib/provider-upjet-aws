@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type TransitGatewayRouteTablePropagationInitParameters struct {
@@ -21,11 +21,11 @@ type TransitGatewayRouteTablePropagationInitParameters struct {
 
 	// Reference to a TransitGatewayVPCAttachment in ec2 to populate transitGatewayAttachmentId.
 	// +kubebuilder:validation:Optional
-	TransitGatewayAttachmentIDRef *v1.Reference `json:"transitGatewayAttachmentIdRef,omitempty" tf:"-"`
+	TransitGatewayAttachmentIDRef *v2.Reference `json:"transitGatewayAttachmentIdRef,omitempty" tf:"-"`
 
 	// Selector for a TransitGatewayVPCAttachment in ec2 to populate transitGatewayAttachmentId.
 	// +kubebuilder:validation:Optional
-	TransitGatewayAttachmentIDSelector *v1.Selector `json:"transitGatewayAttachmentIdSelector,omitempty" tf:"-"`
+	TransitGatewayAttachmentIDSelector *v2.Selector `json:"transitGatewayAttachmentIdSelector,omitempty" tf:"-"`
 
 	// Identifier of EC2 Transit Gateway Route Table.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.TransitGatewayRouteTable
@@ -33,11 +33,11 @@ type TransitGatewayRouteTablePropagationInitParameters struct {
 
 	// Reference to a TransitGatewayRouteTable in ec2 to populate transitGatewayRouteTableId.
 	// +kubebuilder:validation:Optional
-	TransitGatewayRouteTableIDRef *v1.Reference `json:"transitGatewayRouteTableIdRef,omitempty" tf:"-"`
+	TransitGatewayRouteTableIDRef *v2.Reference `json:"transitGatewayRouteTableIdRef,omitempty" tf:"-"`
 
 	// Selector for a TransitGatewayRouteTable in ec2 to populate transitGatewayRouteTableId.
 	// +kubebuilder:validation:Optional
-	TransitGatewayRouteTableIDSelector *v1.Selector `json:"transitGatewayRouteTableIdSelector,omitempty" tf:"-"`
+	TransitGatewayRouteTableIDSelector *v2.Selector `json:"transitGatewayRouteTableIdSelector,omitempty" tf:"-"`
 }
 
 type TransitGatewayRouteTablePropagationObservation struct {
@@ -76,11 +76,11 @@ type TransitGatewayRouteTablePropagationParameters struct {
 
 	// Reference to a TransitGatewayVPCAttachment in ec2 to populate transitGatewayAttachmentId.
 	// +kubebuilder:validation:Optional
-	TransitGatewayAttachmentIDRef *v1.Reference `json:"transitGatewayAttachmentIdRef,omitempty" tf:"-"`
+	TransitGatewayAttachmentIDRef *v2.Reference `json:"transitGatewayAttachmentIdRef,omitempty" tf:"-"`
 
 	// Selector for a TransitGatewayVPCAttachment in ec2 to populate transitGatewayAttachmentId.
 	// +kubebuilder:validation:Optional
-	TransitGatewayAttachmentIDSelector *v1.Selector `json:"transitGatewayAttachmentIdSelector,omitempty" tf:"-"`
+	TransitGatewayAttachmentIDSelector *v2.Selector `json:"transitGatewayAttachmentIdSelector,omitempty" tf:"-"`
 
 	// Identifier of EC2 Transit Gateway Route Table.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.TransitGatewayRouteTable
@@ -89,17 +89,17 @@ type TransitGatewayRouteTablePropagationParameters struct {
 
 	// Reference to a TransitGatewayRouteTable in ec2 to populate transitGatewayRouteTableId.
 	// +kubebuilder:validation:Optional
-	TransitGatewayRouteTableIDRef *v1.Reference `json:"transitGatewayRouteTableIdRef,omitempty" tf:"-"`
+	TransitGatewayRouteTableIDRef *v2.Reference `json:"transitGatewayRouteTableIdRef,omitempty" tf:"-"`
 
 	// Selector for a TransitGatewayRouteTable in ec2 to populate transitGatewayRouteTableId.
 	// +kubebuilder:validation:Optional
-	TransitGatewayRouteTableIDSelector *v1.Selector `json:"transitGatewayRouteTableIdSelector,omitempty" tf:"-"`
+	TransitGatewayRouteTableIDSelector *v2.Selector `json:"transitGatewayRouteTableIdSelector,omitempty" tf:"-"`
 }
 
 // TransitGatewayRouteTablePropagationSpec defines the desired state of TransitGatewayRouteTablePropagation
 type TransitGatewayRouteTablePropagationSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     TransitGatewayRouteTablePropagationParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   TransitGatewayRouteTablePropagationParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -115,8 +115,8 @@ type TransitGatewayRouteTablePropagationSpec struct {
 
 // TransitGatewayRouteTablePropagationStatus defines the observed state of TransitGatewayRouteTablePropagation.
 type TransitGatewayRouteTablePropagationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        TransitGatewayRouteTablePropagationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               TransitGatewayRouteTablePropagationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

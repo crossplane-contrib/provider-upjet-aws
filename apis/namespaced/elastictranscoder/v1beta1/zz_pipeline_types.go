@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ContentConfigInitParameters struct {
@@ -23,11 +22,11 @@ type ContentConfigInitParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketRef *v1.NamespacedReference `json:"bucketRef,omitempty" tf:"-"`
+	BucketRef *v2.NamespacedReference `json:"bucketRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketSelector *v1.NamespacedSelector `json:"bucketSelector,omitempty" tf:"-"`
+	BucketSelector *v2.NamespacedSelector `json:"bucketSelector,omitempty" tf:"-"`
 
 	// The Amazon S3 storage class, Standard or ReducedRedundancy, that you want Elastic Transcoder to assign to the files and playlists that it stores in your Amazon S3 bucket.
 	StorageClass *string `json:"storageClass,omitempty" tf:"storage_class,omitempty"`
@@ -52,11 +51,11 @@ type ContentConfigParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketRef *v1.NamespacedReference `json:"bucketRef,omitempty" tf:"-"`
+	BucketRef *v2.NamespacedReference `json:"bucketRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketSelector *v1.NamespacedSelector `json:"bucketSelector,omitempty" tf:"-"`
+	BucketSelector *v2.NamespacedSelector `json:"bucketSelector,omitempty" tf:"-"`
 
 	// The Amazon S3 storage class, Standard or ReducedRedundancy, that you want Elastic Transcoder to assign to the files and playlists that it stores in your Amazon S3 bucket.
 	// +kubebuilder:validation:Optional
@@ -169,11 +168,11 @@ type PipelineInitParameters struct {
 
 	// Reference to a Bucket in s3 to populate inputBucket.
 	// +kubebuilder:validation:Optional
-	InputBucketRef *v1.NamespacedReference `json:"inputBucketRef,omitempty" tf:"-"`
+	InputBucketRef *v2.NamespacedReference `json:"inputBucketRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate inputBucket.
 	// +kubebuilder:validation:Optional
-	InputBucketSelector *v1.NamespacedSelector `json:"inputBucketSelector,omitempty" tf:"-"`
+	InputBucketSelector *v2.NamespacedSelector `json:"inputBucketSelector,omitempty" tf:"-"`
 
 	// The name of the pipeline. Maximum 40 characters
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -191,11 +190,11 @@ type PipelineInitParameters struct {
 
 	// Reference to a Role in iam to populate role.
 	// +kubebuilder:validation:Optional
-	RoleRef *v1.NamespacedReference `json:"roleRef,omitempty" tf:"-"`
+	RoleRef *v2.NamespacedReference `json:"roleRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate role.
 	// +kubebuilder:validation:Optional
-	RoleSelector *v1.NamespacedSelector `json:"roleSelector,omitempty" tf:"-"`
+	RoleSelector *v2.NamespacedSelector `json:"roleSelector,omitempty" tf:"-"`
 
 	// The ThumbnailConfig object specifies information about the Amazon S3 bucket in which you want Elastic Transcoder to save thumbnail files. (documented below)
 	ThumbnailConfig *ThumbnailConfigInitParameters `json:"thumbnailConfig,omitempty" tf:"thumbnail_config,omitempty"`
@@ -269,11 +268,11 @@ type PipelineParameters struct {
 
 	// Reference to a Bucket in s3 to populate inputBucket.
 	// +kubebuilder:validation:Optional
-	InputBucketRef *v1.NamespacedReference `json:"inputBucketRef,omitempty" tf:"-"`
+	InputBucketRef *v2.NamespacedReference `json:"inputBucketRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate inputBucket.
 	// +kubebuilder:validation:Optional
-	InputBucketSelector *v1.NamespacedSelector `json:"inputBucketSelector,omitempty" tf:"-"`
+	InputBucketSelector *v2.NamespacedSelector `json:"inputBucketSelector,omitempty" tf:"-"`
 
 	// The name of the pipeline. Maximum 40 characters
 	// +kubebuilder:validation:Optional
@@ -300,11 +299,11 @@ type PipelineParameters struct {
 
 	// Reference to a Role in iam to populate role.
 	// +kubebuilder:validation:Optional
-	RoleRef *v1.NamespacedReference `json:"roleRef,omitempty" tf:"-"`
+	RoleRef *v2.NamespacedReference `json:"roleRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate role.
 	// +kubebuilder:validation:Optional
-	RoleSelector *v1.NamespacedSelector `json:"roleSelector,omitempty" tf:"-"`
+	RoleSelector *v2.NamespacedSelector `json:"roleSelector,omitempty" tf:"-"`
 
 	// The ThumbnailConfig object specifies information about the Amazon S3 bucket in which you want Elastic Transcoder to save thumbnail files. (documented below)
 	// +kubebuilder:validation:Optional
@@ -324,11 +323,11 @@ type ThumbnailConfigInitParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketRef *v1.NamespacedReference `json:"bucketRef,omitempty" tf:"-"`
+	BucketRef *v2.NamespacedReference `json:"bucketRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketSelector *v1.NamespacedSelector `json:"bucketSelector,omitempty" tf:"-"`
+	BucketSelector *v2.NamespacedSelector `json:"bucketSelector,omitempty" tf:"-"`
 
 	// The Amazon S3 storage class, Standard or ReducedRedundancy, that you want Elastic Transcoder to assign to the files and playlists that it stores in your Amazon S3 bucket.
 	StorageClass *string `json:"storageClass,omitempty" tf:"storage_class,omitempty"`
@@ -353,11 +352,11 @@ type ThumbnailConfigParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketRef *v1.NamespacedReference `json:"bucketRef,omitempty" tf:"-"`
+	BucketRef *v2.NamespacedReference `json:"bucketRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketSelector *v1.NamespacedSelector `json:"bucketSelector,omitempty" tf:"-"`
+	BucketSelector *v2.NamespacedSelector `json:"bucketSelector,omitempty" tf:"-"`
 
 	// The Amazon S3 storage class, Standard or ReducedRedundancy, that you want Elastic Transcoder to assign to the files and playlists that it stores in your Amazon S3 bucket.
 	// +kubebuilder:validation:Optional
@@ -422,8 +421,8 @@ type PipelineSpec struct {
 
 // PipelineStatus defines the observed state of Pipeline.
 type PipelineStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        PipelineObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               PipelineObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

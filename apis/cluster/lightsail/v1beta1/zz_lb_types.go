@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type LBInitParameters struct {
@@ -101,8 +101,8 @@ type LBParameters struct {
 
 // LBSpec defines the desired state of LB
 type LBSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     LBParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   LBParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -118,8 +118,8 @@ type LBSpec struct {
 
 // LBStatus defines the observed state of LB.
 type LBStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        LBObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               LBObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

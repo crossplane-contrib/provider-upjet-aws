@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type MediaInsightsConfigurationInitParameters struct {
@@ -65,11 +64,11 @@ type VoiceConnectorStreamingInitParameters struct {
 
 	// Reference to a VoiceConnector in chime to populate voiceConnectorId.
 	// +kubebuilder:validation:Optional
-	VoiceConnectorIDRef *v1.NamespacedReference `json:"voiceConnectorIdRef,omitempty" tf:"-"`
+	VoiceConnectorIDRef *v2.NamespacedReference `json:"voiceConnectorIdRef,omitempty" tf:"-"`
 
 	// Selector for a VoiceConnector in chime to populate voiceConnectorId.
 	// +kubebuilder:validation:Optional
-	VoiceConnectorIDSelector *v1.NamespacedSelector `json:"voiceConnectorIdSelector,omitempty" tf:"-"`
+	VoiceConnectorIDSelector *v2.NamespacedSelector `json:"voiceConnectorIdSelector,omitempty" tf:"-"`
 }
 
 type VoiceConnectorStreamingObservation struct {
@@ -130,11 +129,11 @@ type VoiceConnectorStreamingParameters struct {
 
 	// Reference to a VoiceConnector in chime to populate voiceConnectorId.
 	// +kubebuilder:validation:Optional
-	VoiceConnectorIDRef *v1.NamespacedReference `json:"voiceConnectorIdRef,omitempty" tf:"-"`
+	VoiceConnectorIDRef *v2.NamespacedReference `json:"voiceConnectorIdRef,omitempty" tf:"-"`
 
 	// Selector for a VoiceConnector in chime to populate voiceConnectorId.
 	// +kubebuilder:validation:Optional
-	VoiceConnectorIDSelector *v1.NamespacedSelector `json:"voiceConnectorIdSelector,omitempty" tf:"-"`
+	VoiceConnectorIDSelector *v2.NamespacedSelector `json:"voiceConnectorIdSelector,omitempty" tf:"-"`
 }
 
 // VoiceConnectorStreamingSpec defines the desired state of VoiceConnectorStreaming
@@ -156,8 +155,8 @@ type VoiceConnectorStreamingSpec struct {
 
 // VoiceConnectorStreamingStatus defines the observed state of VoiceConnectorStreaming.
 type VoiceConnectorStreamingStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        VoiceConnectorStreamingObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               VoiceConnectorStreamingObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

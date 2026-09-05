@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type SecurityGroupEgressRuleInitParameters struct {
@@ -36,11 +36,11 @@ type SecurityGroupEgressRuleInitParameters struct {
 
 	// Reference to a ManagedPrefixList in ec2 to populate prefixListId.
 	// +kubebuilder:validation:Optional
-	PrefixListIDRef *v1.Reference `json:"prefixListIdRef,omitempty" tf:"-"`
+	PrefixListIDRef *v2.Reference `json:"prefixListIdRef,omitempty" tf:"-"`
 
 	// Selector for a ManagedPrefixList in ec2 to populate prefixListId.
 	// +kubebuilder:validation:Optional
-	PrefixListIDSelector *v1.Selector `json:"prefixListIdSelector,omitempty" tf:"-"`
+	PrefixListIDSelector *v2.Selector `json:"prefixListIdSelector,omitempty" tf:"-"`
 
 	// The destination security group that is referenced in the rule.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.SecurityGroup
@@ -48,11 +48,11 @@ type SecurityGroupEgressRuleInitParameters struct {
 
 	// Reference to a SecurityGroup in ec2 to populate referencedSecurityGroupId.
 	// +kubebuilder:validation:Optional
-	ReferencedSecurityGroupIDRef *v1.Reference `json:"referencedSecurityGroupIdRef,omitempty" tf:"-"`
+	ReferencedSecurityGroupIDRef *v2.Reference `json:"referencedSecurityGroupIdRef,omitempty" tf:"-"`
 
 	// Selector for a SecurityGroup in ec2 to populate referencedSecurityGroupId.
 	// +kubebuilder:validation:Optional
-	ReferencedSecurityGroupIDSelector *v1.Selector `json:"referencedSecurityGroupIdSelector,omitempty" tf:"-"`
+	ReferencedSecurityGroupIDSelector *v2.Selector `json:"referencedSecurityGroupIdSelector,omitempty" tf:"-"`
 
 	// The ID of the security group.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.SecurityGroup
@@ -60,11 +60,11 @@ type SecurityGroupEgressRuleInitParameters struct {
 
 	// Reference to a SecurityGroup in ec2 to populate securityGroupId.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIDRef *v1.Reference `json:"securityGroupIdRef,omitempty" tf:"-"`
+	SecurityGroupIDRef *v2.Reference `json:"securityGroupIdRef,omitempty" tf:"-"`
 
 	// Selector for a SecurityGroup in ec2 to populate securityGroupId.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIDSelector *v1.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
+	SecurityGroupIDSelector *v2.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -154,11 +154,11 @@ type SecurityGroupEgressRuleParameters struct {
 
 	// Reference to a ManagedPrefixList in ec2 to populate prefixListId.
 	// +kubebuilder:validation:Optional
-	PrefixListIDRef *v1.Reference `json:"prefixListIdRef,omitempty" tf:"-"`
+	PrefixListIDRef *v2.Reference `json:"prefixListIdRef,omitempty" tf:"-"`
 
 	// Selector for a ManagedPrefixList in ec2 to populate prefixListId.
 	// +kubebuilder:validation:Optional
-	PrefixListIDSelector *v1.Selector `json:"prefixListIdSelector,omitempty" tf:"-"`
+	PrefixListIDSelector *v2.Selector `json:"prefixListIdSelector,omitempty" tf:"-"`
 
 	// The destination security group that is referenced in the rule.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.SecurityGroup
@@ -167,11 +167,11 @@ type SecurityGroupEgressRuleParameters struct {
 
 	// Reference to a SecurityGroup in ec2 to populate referencedSecurityGroupId.
 	// +kubebuilder:validation:Optional
-	ReferencedSecurityGroupIDRef *v1.Reference `json:"referencedSecurityGroupIdRef,omitempty" tf:"-"`
+	ReferencedSecurityGroupIDRef *v2.Reference `json:"referencedSecurityGroupIdRef,omitempty" tf:"-"`
 
 	// Selector for a SecurityGroup in ec2 to populate referencedSecurityGroupId.
 	// +kubebuilder:validation:Optional
-	ReferencedSecurityGroupIDSelector *v1.Selector `json:"referencedSecurityGroupIdSelector,omitempty" tf:"-"`
+	ReferencedSecurityGroupIDSelector *v2.Selector `json:"referencedSecurityGroupIdSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -185,11 +185,11 @@ type SecurityGroupEgressRuleParameters struct {
 
 	// Reference to a SecurityGroup in ec2 to populate securityGroupId.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIDRef *v1.Reference `json:"securityGroupIdRef,omitempty" tf:"-"`
+	SecurityGroupIDRef *v2.Reference `json:"securityGroupIdRef,omitempty" tf:"-"`
 
 	// Selector for a SecurityGroup in ec2 to populate securityGroupId.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIDSelector *v1.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
+	SecurityGroupIDSelector *v2.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -203,8 +203,8 @@ type SecurityGroupEgressRuleParameters struct {
 
 // SecurityGroupEgressRuleSpec defines the desired state of SecurityGroupEgressRule
 type SecurityGroupEgressRuleSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     SecurityGroupEgressRuleParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   SecurityGroupEgressRuleParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -220,8 +220,8 @@ type SecurityGroupEgressRuleSpec struct {
 
 // SecurityGroupEgressRuleStatus defines the observed state of SecurityGroupEgressRule.
 type SecurityGroupEgressRuleStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SecurityGroupEgressRuleObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SecurityGroupEgressRuleObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

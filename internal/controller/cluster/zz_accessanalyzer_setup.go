@@ -40,3 +40,16 @@ func SetupGated_accessanalyzer(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupWebhookWithManager_accessanalyzer registers conversion webhooks for all resource kinds in the group.
+func SetupWebhookWithManager_accessanalyzer(mgr ctrl.Manager) error {
+	for _, setup := range []func(ctrl.Manager) error{
+		analyzer.SetupWebhookWithManager,
+		archiverule.SetupWebhookWithManager,
+	} {
+		if err := setup(mgr); err != nil {
+			return err
+		}
+	}
+	return nil
+}

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type HTTPNamespaceInitParameters struct {
@@ -79,8 +79,8 @@ type HTTPNamespaceParameters struct {
 
 // HTTPNamespaceSpec defines the desired state of HTTPNamespace
 type HTTPNamespaceSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     HTTPNamespaceParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   HTTPNamespaceParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -96,8 +96,8 @@ type HTTPNamespaceSpec struct {
 
 // HTTPNamespaceStatus defines the observed state of HTTPNamespace.
 type HTTPNamespaceStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        HTTPNamespaceObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               HTTPNamespaceObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

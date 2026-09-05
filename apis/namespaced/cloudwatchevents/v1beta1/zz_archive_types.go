@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ArchiveInitParameters struct {
@@ -29,11 +28,11 @@ type ArchiveInitParameters struct {
 
 	// Reference to a Bus in cloudwatchevents to populate eventSourceArn.
 	// +kubebuilder:validation:Optional
-	EventSourceArnRef *v1.NamespacedReference `json:"eventSourceArnRef,omitempty" tf:"-"`
+	EventSourceArnRef *v2.NamespacedReference `json:"eventSourceArnRef,omitempty" tf:"-"`
 
 	// Selector for a Bus in cloudwatchevents to populate eventSourceArn.
 	// +kubebuilder:validation:Optional
-	EventSourceArnSelector *v1.NamespacedSelector `json:"eventSourceArnSelector,omitempty" tf:"-"`
+	EventSourceArnSelector *v2.NamespacedSelector `json:"eventSourceArnSelector,omitempty" tf:"-"`
 
 	// Identifier of the AWS KMS customer managed key for EventBridge to use, if you choose to use a customer managed key to encrypt this archive. The identifier can be the key Amazon Resource Name (ARN), KeyId, key alias, or key alias ARN.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kms/v1beta1.Key
@@ -42,11 +41,11 @@ type ArchiveInitParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyIdentifier.
 	// +kubebuilder:validation:Optional
-	KMSKeyIdentifierRef *v1.NamespacedReference `json:"kmsKeyIdentifierRef,omitempty" tf:"-"`
+	KMSKeyIdentifierRef *v2.NamespacedReference `json:"kmsKeyIdentifierRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyIdentifier.
 	// +kubebuilder:validation:Optional
-	KMSKeyIdentifierSelector *v1.NamespacedSelector `json:"kmsKeyIdentifierSelector,omitempty" tf:"-"`
+	KMSKeyIdentifierSelector *v2.NamespacedSelector `json:"kmsKeyIdentifierSelector,omitempty" tf:"-"`
 
 	// The maximum number of days to retain events in the new event archive. By default, it archives indefinitely.
 	RetentionDays *float64 `json:"retentionDays,omitempty" tf:"retention_days,omitempty"`
@@ -97,11 +96,11 @@ type ArchiveParameters struct {
 
 	// Reference to a Bus in cloudwatchevents to populate eventSourceArn.
 	// +kubebuilder:validation:Optional
-	EventSourceArnRef *v1.NamespacedReference `json:"eventSourceArnRef,omitempty" tf:"-"`
+	EventSourceArnRef *v2.NamespacedReference `json:"eventSourceArnRef,omitempty" tf:"-"`
 
 	// Selector for a Bus in cloudwatchevents to populate eventSourceArn.
 	// +kubebuilder:validation:Optional
-	EventSourceArnSelector *v1.NamespacedSelector `json:"eventSourceArnSelector,omitempty" tf:"-"`
+	EventSourceArnSelector *v2.NamespacedSelector `json:"eventSourceArnSelector,omitempty" tf:"-"`
 
 	// Identifier of the AWS KMS customer managed key for EventBridge to use, if you choose to use a customer managed key to encrypt this archive. The identifier can be the key Amazon Resource Name (ARN), KeyId, key alias, or key alias ARN.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kms/v1beta1.Key
@@ -111,11 +110,11 @@ type ArchiveParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyIdentifier.
 	// +kubebuilder:validation:Optional
-	KMSKeyIdentifierRef *v1.NamespacedReference `json:"kmsKeyIdentifierRef,omitempty" tf:"-"`
+	KMSKeyIdentifierRef *v2.NamespacedReference `json:"kmsKeyIdentifierRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyIdentifier.
 	// +kubebuilder:validation:Optional
-	KMSKeyIdentifierSelector *v1.NamespacedSelector `json:"kmsKeyIdentifierSelector,omitempty" tf:"-"`
+	KMSKeyIdentifierSelector *v2.NamespacedSelector `json:"kmsKeyIdentifierSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -146,8 +145,8 @@ type ArchiveSpec struct {
 
 // ArchiveStatus defines the observed state of Archive.
 type ArchiveStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ArchiveObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ArchiveObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

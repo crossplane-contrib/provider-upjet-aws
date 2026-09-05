@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type MemberInitParameters struct {
@@ -32,11 +31,11 @@ type MemberInitParameters struct {
 
 	// Reference to a Graph in detective to populate graphArn.
 	// +kubebuilder:validation:Optional
-	GraphArnRef *v1.NamespacedReference `json:"graphArnRef,omitempty" tf:"-"`
+	GraphArnRef *v2.NamespacedReference `json:"graphArnRef,omitempty" tf:"-"`
 
 	// Selector for a Graph in detective to populate graphArn.
 	// +kubebuilder:validation:Optional
-	GraphArnSelector *v1.NamespacedSelector `json:"graphArnSelector,omitempty" tf:"-"`
+	GraphArnSelector *v2.NamespacedSelector `json:"graphArnSelector,omitempty" tf:"-"`
 
 	// A custom message to include in the invitation. Amazon Detective adds this message to the standard content that it sends for an invitation.
 	Message *string `json:"message,omitempty" tf:"message,omitempty"`
@@ -106,11 +105,11 @@ type MemberParameters struct {
 
 	// Reference to a Graph in detective to populate graphArn.
 	// +kubebuilder:validation:Optional
-	GraphArnRef *v1.NamespacedReference `json:"graphArnRef,omitempty" tf:"-"`
+	GraphArnRef *v2.NamespacedReference `json:"graphArnRef,omitempty" tf:"-"`
 
 	// Selector for a Graph in detective to populate graphArn.
 	// +kubebuilder:validation:Optional
-	GraphArnSelector *v1.NamespacedSelector `json:"graphArnSelector,omitempty" tf:"-"`
+	GraphArnSelector *v2.NamespacedSelector `json:"graphArnSelector,omitempty" tf:"-"`
 
 	// A custom message to include in the invitation. Amazon Detective adds this message to the standard content that it sends for an invitation.
 	// +kubebuilder:validation:Optional
@@ -141,8 +140,8 @@ type MemberSpec struct {
 
 // MemberStatus defines the observed state of Member.
 type MemberStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        MemberObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               MemberObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

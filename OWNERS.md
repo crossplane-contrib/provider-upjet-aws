@@ -17,6 +17,8 @@ repository maintainers in their own `OWNERS.md` file.
 * Jason Tang <jasont@upbound.io> ([jastang](https://github.com/jastang))
 * Erhan Cagirici <erhan@upbound.io> ([erhancagirici](https://github.com/erhancagirici))
 * Alper Ulucinar <alper@upbound.io> ([ulucinar](https://github.com/ulucinar))
+* Bob Haddleton <bob.haddleton@nokia.com> ([bobh66](https://github.com/bobh66))
+* Jonasz Lasut-Balcerzak <jonasz@upbound.io> ([jonasz-lasut](https://github.com/jonasz-lasut))
 
 See [CODEOWNERS](./CODEOWNERS) for automatic PR assignment.
 

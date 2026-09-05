@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type EventSubscriptionInitParameters struct {
@@ -30,11 +29,11 @@ type EventSubscriptionInitParameters struct {
 
 	// Reference to a Topic in sns to populate snsTopicArn.
 	// +kubebuilder:validation:Optional
-	SnsTopicArnRef *v1.NamespacedReference `json:"snsTopicArnRef,omitempty" tf:"-"`
+	SnsTopicArnRef *v2.NamespacedReference `json:"snsTopicArnRef,omitempty" tf:"-"`
 
 	// Selector for a Topic in sns to populate snsTopicArn.
 	// +kubebuilder:validation:Optional
-	SnsTopicArnSelector *v1.NamespacedSelector `json:"snsTopicArnSelector,omitempty" tf:"-"`
+	SnsTopicArnSelector *v2.NamespacedSelector `json:"snsTopicArnSelector,omitempty" tf:"-"`
 
 	// A list of identifiers of the event sources for which events will be returned. If not specified, then all sources are included in the response. If specified, a source_type must also be specified.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/neptune/v1beta1.ClusterInstance
@@ -44,11 +43,11 @@ type EventSubscriptionInitParameters struct {
 
 	// References to ClusterInstance in neptune to populate sourceIds.
 	// +kubebuilder:validation:Optional
-	SourceIdsRefs []v1.NamespacedReference `json:"sourceIdsRefs,omitempty" tf:"-"`
+	SourceIdsRefs []v2.NamespacedReference `json:"sourceIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of ClusterInstance in neptune to populate sourceIds.
 	// +kubebuilder:validation:Optional
-	SourceIdsSelector *v1.NamespacedSelector `json:"sourceIdsSelector,omitempty" tf:"-"`
+	SourceIdsSelector *v2.NamespacedSelector `json:"sourceIdsSelector,omitempty" tf:"-"`
 
 	// The type of source that will be generating the events. Valid options are db-instance, db-security-group, db-parameter-group, db-snapshot, db-cluster or db-cluster-snapshot. If not set, all sources will be subscribed to.
 	SourceType *string `json:"sourceType,omitempty" tf:"source_type,omitempty"`
@@ -123,11 +122,11 @@ type EventSubscriptionParameters struct {
 
 	// Reference to a Topic in sns to populate snsTopicArn.
 	// +kubebuilder:validation:Optional
-	SnsTopicArnRef *v1.NamespacedReference `json:"snsTopicArnRef,omitempty" tf:"-"`
+	SnsTopicArnRef *v2.NamespacedReference `json:"snsTopicArnRef,omitempty" tf:"-"`
 
 	// Selector for a Topic in sns to populate snsTopicArn.
 	// +kubebuilder:validation:Optional
-	SnsTopicArnSelector *v1.NamespacedSelector `json:"snsTopicArnSelector,omitempty" tf:"-"`
+	SnsTopicArnSelector *v2.NamespacedSelector `json:"snsTopicArnSelector,omitempty" tf:"-"`
 
 	// A list of identifiers of the event sources for which events will be returned. If not specified, then all sources are included in the response. If specified, a source_type must also be specified.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/neptune/v1beta1.ClusterInstance
@@ -138,11 +137,11 @@ type EventSubscriptionParameters struct {
 
 	// References to ClusterInstance in neptune to populate sourceIds.
 	// +kubebuilder:validation:Optional
-	SourceIdsRefs []v1.NamespacedReference `json:"sourceIdsRefs,omitempty" tf:"-"`
+	SourceIdsRefs []v2.NamespacedReference `json:"sourceIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of ClusterInstance in neptune to populate sourceIds.
 	// +kubebuilder:validation:Optional
-	SourceIdsSelector *v1.NamespacedSelector `json:"sourceIdsSelector,omitempty" tf:"-"`
+	SourceIdsSelector *v2.NamespacedSelector `json:"sourceIdsSelector,omitempty" tf:"-"`
 
 	// The type of source that will be generating the events. Valid options are db-instance, db-security-group, db-parameter-group, db-snapshot, db-cluster or db-cluster-snapshot. If not set, all sources will be subscribed to.
 	// +kubebuilder:validation:Optional
@@ -173,8 +172,8 @@ type EventSubscriptionSpec struct {
 
 // EventSubscriptionStatus defines the observed state of EventSubscription.
 type EventSubscriptionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        EventSubscriptionObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               EventSubscriptionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

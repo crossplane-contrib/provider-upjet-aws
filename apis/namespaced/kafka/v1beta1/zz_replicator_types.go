@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AmazonMskClusterInitParameters struct {
@@ -23,11 +22,11 @@ type AmazonMskClusterInitParameters struct {
 
 	// Reference to a Cluster in kafka to populate mskClusterArn.
 	// +kubebuilder:validation:Optional
-	MskClusterArnRef *v1.NamespacedReference `json:"mskClusterArnRef,omitempty" tf:"-"`
+	MskClusterArnRef *v2.NamespacedReference `json:"mskClusterArnRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in kafka to populate mskClusterArn.
 	// +kubebuilder:validation:Optional
-	MskClusterArnSelector *v1.NamespacedSelector `json:"mskClusterArnSelector,omitempty" tf:"-"`
+	MskClusterArnSelector *v2.NamespacedSelector `json:"mskClusterArnSelector,omitempty" tf:"-"`
 }
 
 type AmazonMskClusterObservation struct {
@@ -46,14 +45,17 @@ type AmazonMskClusterParameters struct {
 
 	// Reference to a Cluster in kafka to populate mskClusterArn.
 	// +kubebuilder:validation:Optional
-	MskClusterArnRef *v1.NamespacedReference `json:"mskClusterArnRef,omitempty" tf:"-"`
+	MskClusterArnRef *v2.NamespacedReference `json:"mskClusterArnRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in kafka to populate mskClusterArn.
 	// +kubebuilder:validation:Optional
-	MskClusterArnSelector *v1.NamespacedSelector `json:"mskClusterArnSelector,omitempty" tf:"-"`
+	MskClusterArnSelector *v2.NamespacedSelector `json:"mskClusterArnSelector,omitempty" tf:"-"`
 }
 
 type ConsumerGroupReplicationInitParameters struct {
+
+	// Consumer group offset synchronization mode. Valid values are LEGACY and ENHANCED. With LEGACY, offsets are synchronized when producers write to the source cluster. With ENHANCED, consumer offsets are synchronized regardless of producer location. ENHANCED requires a corresponding replicator that replicates data from the target cluster to the source cluster and requires topic_name_configuration.type to be set to IDENTICAL. Defaults to LEGACY. Changing this value will force a new resource.
+	ConsumerGroupOffsetSyncMode *string `json:"consumerGroupOffsetSyncMode,omitempty" tf:"consumer_group_offset_sync_mode,omitempty"`
 
 	// List of regular expression patterns indicating the consumer groups that should not be replicated.
 	// +listType=set
@@ -72,6 +74,9 @@ type ConsumerGroupReplicationInitParameters struct {
 
 type ConsumerGroupReplicationObservation struct {
 
+	// Consumer group offset synchronization mode. Valid values are LEGACY and ENHANCED. With LEGACY, offsets are synchronized when producers write to the source cluster. With ENHANCED, consumer offsets are synchronized regardless of producer location. ENHANCED requires a corresponding replicator that replicates data from the target cluster to the source cluster and requires topic_name_configuration.type to be set to IDENTICAL. Defaults to LEGACY. Changing this value will force a new resource.
+	ConsumerGroupOffsetSyncMode *string `json:"consumerGroupOffsetSyncMode,omitempty" tf:"consumer_group_offset_sync_mode,omitempty"`
+
 	// List of regular expression patterns indicating the consumer groups that should not be replicated.
 	// +listType=set
 	ConsumerGroupsToExclude []*string `json:"consumerGroupsToExclude,omitempty" tf:"consumer_groups_to_exclude,omitempty"`
@@ -88,6 +93,10 @@ type ConsumerGroupReplicationObservation struct {
 }
 
 type ConsumerGroupReplicationParameters struct {
+
+	// Consumer group offset synchronization mode. Valid values are LEGACY and ENHANCED. With LEGACY, offsets are synchronized when producers write to the source cluster. With ENHANCED, consumer offsets are synchronized regardless of producer location. ENHANCED requires a corresponding replicator that replicates data from the target cluster to the source cluster and requires topic_name_configuration.type to be set to IDENTICAL. Defaults to LEGACY. Changing this value will force a new resource.
+	// +kubebuilder:validation:Optional
+	ConsumerGroupOffsetSyncMode *string `json:"consumerGroupOffsetSyncMode,omitempty" tf:"consumer_group_offset_sync_mode,omitempty"`
 
 	// List of regular expression patterns indicating the consumer groups that should not be replicated.
 	// +kubebuilder:validation:Optional
@@ -137,6 +146,25 @@ type KafkaClusterParameters struct {
 	VPCConfig *VPCConfigParameters `json:"vpcConfig" tf:"vpc_config,omitempty"`
 }
 
+type LogDeliveryInitParameters struct {
+
+	// Configuration block for replicator log delivery. Detailed below.
+	ReplicatorLogDelivery *ReplicatorLogDeliveryInitParameters `json:"replicatorLogDelivery,omitempty" tf:"replicator_log_delivery,omitempty"`
+}
+
+type LogDeliveryObservation struct {
+
+	// Configuration block for replicator log delivery. Detailed below.
+	ReplicatorLogDelivery *ReplicatorLogDeliveryObservation `json:"replicatorLogDelivery,omitempty" tf:"replicator_log_delivery,omitempty"`
+}
+
+type LogDeliveryParameters struct {
+
+	// Configuration block for replicator log delivery. Detailed below.
+	// +kubebuilder:validation:Optional
+	ReplicatorLogDelivery *ReplicatorLogDeliveryParameters `json:"replicatorLogDelivery,omitempty" tf:"replicator_log_delivery,omitempty"`
+}
+
 type ReplicationInfoListInitParameters struct {
 
 	// Configuration relating to consumer group replication.
@@ -149,11 +177,11 @@ type ReplicationInfoListInitParameters struct {
 
 	// Reference to a Cluster in kafka to populate sourceKafkaClusterArn.
 	// +kubebuilder:validation:Optional
-	SourceKafkaClusterArnRef *v1.NamespacedReference `json:"sourceKafkaClusterArnRef,omitempty" tf:"-"`
+	SourceKafkaClusterArnRef *v2.NamespacedReference `json:"sourceKafkaClusterArnRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in kafka to populate sourceKafkaClusterArn.
 	// +kubebuilder:validation:Optional
-	SourceKafkaClusterArnSelector *v1.NamespacedSelector `json:"sourceKafkaClusterArnSelector,omitempty" tf:"-"`
+	SourceKafkaClusterArnSelector *v2.NamespacedSelector `json:"sourceKafkaClusterArnSelector,omitempty" tf:"-"`
 
 	// The type of compression to use writing records to target Kafka cluster.
 	TargetCompressionType *string `json:"targetCompressionType,omitempty" tf:"target_compression_type,omitempty"`
@@ -165,11 +193,11 @@ type ReplicationInfoListInitParameters struct {
 
 	// Reference to a Cluster in kafka to populate targetKafkaClusterArn.
 	// +kubebuilder:validation:Optional
-	TargetKafkaClusterArnRef *v1.NamespacedReference `json:"targetKafkaClusterArnRef,omitempty" tf:"-"`
+	TargetKafkaClusterArnRef *v2.NamespacedReference `json:"targetKafkaClusterArnRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in kafka to populate targetKafkaClusterArn.
 	// +kubebuilder:validation:Optional
-	TargetKafkaClusterArnSelector *v1.NamespacedSelector `json:"targetKafkaClusterArnSelector,omitempty" tf:"-"`
+	TargetKafkaClusterArnSelector *v2.NamespacedSelector `json:"targetKafkaClusterArnSelector,omitempty" tf:"-"`
 
 	// Configuration relating to topic replication.
 	TopicReplication []TopicReplicationInitParameters `json:"topicReplication,omitempty" tf:"topic_replication,omitempty"`
@@ -211,11 +239,11 @@ type ReplicationInfoListParameters struct {
 
 	// Reference to a Cluster in kafka to populate sourceKafkaClusterArn.
 	// +kubebuilder:validation:Optional
-	SourceKafkaClusterArnRef *v1.NamespacedReference `json:"sourceKafkaClusterArnRef,omitempty" tf:"-"`
+	SourceKafkaClusterArnRef *v2.NamespacedReference `json:"sourceKafkaClusterArnRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in kafka to populate sourceKafkaClusterArn.
 	// +kubebuilder:validation:Optional
-	SourceKafkaClusterArnSelector *v1.NamespacedSelector `json:"sourceKafkaClusterArnSelector,omitempty" tf:"-"`
+	SourceKafkaClusterArnSelector *v2.NamespacedSelector `json:"sourceKafkaClusterArnSelector,omitempty" tf:"-"`
 
 	// The type of compression to use writing records to target Kafka cluster.
 	// +kubebuilder:validation:Optional
@@ -229,11 +257,11 @@ type ReplicationInfoListParameters struct {
 
 	// Reference to a Cluster in kafka to populate targetKafkaClusterArn.
 	// +kubebuilder:validation:Optional
-	TargetKafkaClusterArnRef *v1.NamespacedReference `json:"targetKafkaClusterArnRef,omitempty" tf:"-"`
+	TargetKafkaClusterArnRef *v2.NamespacedReference `json:"targetKafkaClusterArnRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in kafka to populate targetKafkaClusterArn.
 	// +kubebuilder:validation:Optional
-	TargetKafkaClusterArnSelector *v1.NamespacedSelector `json:"targetKafkaClusterArnSelector,omitempty" tf:"-"`
+	TargetKafkaClusterArnSelector *v2.NamespacedSelector `json:"targetKafkaClusterArnSelector,omitempty" tf:"-"`
 
 	// Configuration relating to topic replication.
 	// +kubebuilder:validation:Optional
@@ -248,6 +276,9 @@ type ReplicatorInitParameters struct {
 	// A list of Kafka clusters which are targets of the replicator.
 	KafkaCluster []KafkaClusterInitParameters `json:"kafkaCluster,omitempty" tf:"kafka_cluster,omitempty"`
 
+	// Configuration block for delivering replicator logs to customer destinations. Detailed below.
+	LogDelivery *LogDeliveryInitParameters `json:"logDelivery,omitempty" tf:"log_delivery,omitempty"`
+
 	// A list of replication configurations, where each configuration targets a given source cluster to target cluster replication flow.
 	ReplicationInfoList *ReplicationInfoListInitParameters `json:"replicationInfoList,omitempty" tf:"replication_info_list,omitempty"`
 
@@ -261,15 +292,151 @@ type ReplicatorInitParameters struct {
 
 	// Reference to a Role in iam to populate serviceExecutionRoleArn.
 	// +kubebuilder:validation:Optional
-	ServiceExecutionRoleArnRef *v1.NamespacedReference `json:"serviceExecutionRoleArnRef,omitempty" tf:"-"`
+	ServiceExecutionRoleArnRef *v2.NamespacedReference `json:"serviceExecutionRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate serviceExecutionRoleArn.
 	// +kubebuilder:validation:Optional
-	ServiceExecutionRoleArnSelector *v1.NamespacedSelector `json:"serviceExecutionRoleArnSelector,omitempty" tf:"-"`
+	ServiceExecutionRoleArnSelector *v2.NamespacedSelector `json:"serviceExecutionRoleArnSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type ReplicatorLogDeliveryCloudwatchLogsInitParameters struct {
+
+	// Boolean whether to enable log delivery to CloudWatch Logs.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// Name of CloudWatch Logs log group. Required if enabled is true. If enabled is false, this value must not be set.
+	LogGroup *string `json:"logGroup,omitempty" tf:"log_group,omitempty"`
+}
+
+type ReplicatorLogDeliveryCloudwatchLogsObservation struct {
+
+	// Boolean whether to enable log delivery to CloudWatch Logs.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// Name of CloudWatch Logs log group. Required if enabled is true. If enabled is false, this value must not be set.
+	LogGroup *string `json:"logGroup,omitempty" tf:"log_group,omitempty"`
+}
+
+type ReplicatorLogDeliveryCloudwatchLogsParameters struct {
+
+	// Boolean whether to enable log delivery to CloudWatch Logs.
+	// +kubebuilder:validation:Optional
+	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
+
+	// Name of CloudWatch Logs log group. Required if enabled is true. If enabled is false, this value must not be set.
+	// +kubebuilder:validation:Optional
+	LogGroup *string `json:"logGroup,omitempty" tf:"log_group,omitempty"`
+}
+
+type ReplicatorLogDeliveryFirehoseInitParameters struct {
+
+	// Name of the Firehose delivery stream. Required if enabled is true. If enabled is false, this value must not be set.
+	DeliveryStream *string `json:"deliveryStream,omitempty" tf:"delivery_stream,omitempty"`
+
+	// Boolean whether to enable log delivery to Firehose.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+}
+
+type ReplicatorLogDeliveryFirehoseObservation struct {
+
+	// Name of the Firehose delivery stream. Required if enabled is true. If enabled is false, this value must not be set.
+	DeliveryStream *string `json:"deliveryStream,omitempty" tf:"delivery_stream,omitempty"`
+
+	// Boolean whether to enable log delivery to Firehose.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+}
+
+type ReplicatorLogDeliveryFirehoseParameters struct {
+
+	// Name of the Firehose delivery stream. Required if enabled is true. If enabled is false, this value must not be set.
+	// +kubebuilder:validation:Optional
+	DeliveryStream *string `json:"deliveryStream,omitempty" tf:"delivery_stream,omitempty"`
+
+	// Boolean whether to enable log delivery to Firehose.
+	// +kubebuilder:validation:Optional
+	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
+}
+
+type ReplicatorLogDeliveryInitParameters struct {
+
+	// Configuration block for replicator log delivery to Amazon CloudWatch Logs. Detailed below.
+	CloudwatchLogs *ReplicatorLogDeliveryCloudwatchLogsInitParameters `json:"cloudwatchLogs,omitempty" tf:"cloudwatch_logs,omitempty"`
+
+	// Configuration block for replicator log delivery to Amazon Data Firehose. Detailed below.
+	Firehose *ReplicatorLogDeliveryFirehoseInitParameters `json:"firehose,omitempty" tf:"firehose,omitempty"`
+
+	// Configuration block for replicator log delivery to Amazon S3. Detailed below.
+	S3 *ReplicatorLogDeliveryS3InitParameters `json:"s3,omitempty" tf:"s3,omitempty"`
+}
+
+type ReplicatorLogDeliveryObservation struct {
+
+	// Configuration block for replicator log delivery to Amazon CloudWatch Logs. Detailed below.
+	CloudwatchLogs *ReplicatorLogDeliveryCloudwatchLogsObservation `json:"cloudwatchLogs,omitempty" tf:"cloudwatch_logs,omitempty"`
+
+	// Configuration block for replicator log delivery to Amazon Data Firehose. Detailed below.
+	Firehose *ReplicatorLogDeliveryFirehoseObservation `json:"firehose,omitempty" tf:"firehose,omitempty"`
+
+	// Configuration block for replicator log delivery to Amazon S3. Detailed below.
+	S3 *ReplicatorLogDeliveryS3Observation `json:"s3,omitempty" tf:"s3,omitempty"`
+}
+
+type ReplicatorLogDeliveryParameters struct {
+
+	// Configuration block for replicator log delivery to Amazon CloudWatch Logs. Detailed below.
+	// +kubebuilder:validation:Optional
+	CloudwatchLogs *ReplicatorLogDeliveryCloudwatchLogsParameters `json:"cloudwatchLogs,omitempty" tf:"cloudwatch_logs,omitempty"`
+
+	// Configuration block for replicator log delivery to Amazon Data Firehose. Detailed below.
+	// +kubebuilder:validation:Optional
+	Firehose *ReplicatorLogDeliveryFirehoseParameters `json:"firehose,omitempty" tf:"firehose,omitempty"`
+
+	// Configuration block for replicator log delivery to Amazon S3. Detailed below.
+	// +kubebuilder:validation:Optional
+	S3 *ReplicatorLogDeliveryS3Parameters `json:"s3,omitempty" tf:"s3,omitempty"`
+}
+
+type ReplicatorLogDeliveryS3InitParameters struct {
+
+	// Name of the S3 bucket. Required if enabled is true. If enabled is false, this value must not be set.
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+
+	// Boolean whether to enable log delivery to S3.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// Prefix to use when storing replicator logs in S3. If enabled is false, this value must not be set.
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
+}
+
+type ReplicatorLogDeliveryS3Observation struct {
+
+	// Name of the S3 bucket. Required if enabled is true. If enabled is false, this value must not be set.
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+
+	// Boolean whether to enable log delivery to S3.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// Prefix to use when storing replicator logs in S3. If enabled is false, this value must not be set.
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
+}
+
+type ReplicatorLogDeliveryS3Parameters struct {
+
+	// Name of the S3 bucket. Required if enabled is true. If enabled is false, this value must not be set.
+	// +kubebuilder:validation:Optional
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+
+	// Boolean whether to enable log delivery to S3.
+	// +kubebuilder:validation:Optional
+	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
+
+	// Prefix to use when storing replicator logs in S3. If enabled is false, this value must not be set.
+	// +kubebuilder:validation:Optional
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 }
 
 type ReplicatorObservation struct {
@@ -286,6 +453,9 @@ type ReplicatorObservation struct {
 
 	// A list of Kafka clusters which are targets of the replicator.
 	KafkaCluster []KafkaClusterObservation `json:"kafkaCluster,omitempty" tf:"kafka_cluster,omitempty"`
+
+	// Configuration block for delivering replicator logs to customer destinations. Detailed below.
+	LogDelivery *LogDeliveryObservation `json:"logDelivery,omitempty" tf:"log_delivery,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -319,6 +489,10 @@ type ReplicatorParameters struct {
 	// +kubebuilder:validation:Optional
 	KafkaCluster []KafkaClusterParameters `json:"kafkaCluster,omitempty" tf:"kafka_cluster,omitempty"`
 
+	// Configuration block for delivering replicator logs to customer destinations. Detailed below.
+	// +kubebuilder:validation:Optional
+	LogDelivery *LogDeliveryParameters `json:"logDelivery,omitempty" tf:"log_delivery,omitempty"`
+
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +kubebuilder:validation:Required
@@ -340,11 +514,11 @@ type ReplicatorParameters struct {
 
 	// Reference to a Role in iam to populate serviceExecutionRoleArn.
 	// +kubebuilder:validation:Optional
-	ServiceExecutionRoleArnRef *v1.NamespacedReference `json:"serviceExecutionRoleArnRef,omitempty" tf:"-"`
+	ServiceExecutionRoleArnRef *v2.NamespacedReference `json:"serviceExecutionRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate serviceExecutionRoleArn.
 	// +kubebuilder:validation:Optional
-	ServiceExecutionRoleArnSelector *v1.NamespacedSelector `json:"serviceExecutionRoleArnSelector,omitempty" tf:"-"`
+	ServiceExecutionRoleArnSelector *v2.NamespacedSelector `json:"serviceExecutionRoleArnSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -485,11 +659,11 @@ type VPCConfigInitParameters struct {
 
 	// References to SecurityGroup in ec2 to populate securityGroupsIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupsIdsRefs []v1.NamespacedReference `json:"securityGroupsIdsRefs,omitempty" tf:"-"`
+	SecurityGroupsIdsRefs []v2.NamespacedReference `json:"securityGroupsIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate securityGroupsIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupsIdsSelector *v1.NamespacedSelector `json:"securityGroupsIdsSelector,omitempty" tf:"-"`
+	SecurityGroupsIdsSelector *v2.NamespacedSelector `json:"securityGroupsIdsSelector,omitempty" tf:"-"`
 
 	// The list of subnets to connect to in the virtual private cloud (VPC). AWS creates elastic network interfaces inside these subnets to allow communication between your Kafka Cluster and the replicator.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Subnet
@@ -498,11 +672,11 @@ type VPCConfigInitParameters struct {
 
 	// References to Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIdsRefs []v1.NamespacedReference `json:"subnetIdsRefs,omitempty" tf:"-"`
+	SubnetIdsRefs []v2.NamespacedReference `json:"subnetIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIdsSelector *v1.NamespacedSelector `json:"subnetIdsSelector,omitempty" tf:"-"`
+	SubnetIdsSelector *v2.NamespacedSelector `json:"subnetIdsSelector,omitempty" tf:"-"`
 }
 
 type VPCConfigObservation struct {
@@ -527,11 +701,11 @@ type VPCConfigParameters struct {
 
 	// References to SecurityGroup in ec2 to populate securityGroupsIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupsIdsRefs []v1.NamespacedReference `json:"securityGroupsIdsRefs,omitempty" tf:"-"`
+	SecurityGroupsIdsRefs []v2.NamespacedReference `json:"securityGroupsIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate securityGroupsIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupsIdsSelector *v1.NamespacedSelector `json:"securityGroupsIdsSelector,omitempty" tf:"-"`
+	SecurityGroupsIdsSelector *v2.NamespacedSelector `json:"securityGroupsIdsSelector,omitempty" tf:"-"`
 
 	// The list of subnets to connect to in the virtual private cloud (VPC). AWS creates elastic network interfaces inside these subnets to allow communication between your Kafka Cluster and the replicator.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Subnet
@@ -541,11 +715,11 @@ type VPCConfigParameters struct {
 
 	// References to Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIdsRefs []v1.NamespacedReference `json:"subnetIdsRefs,omitempty" tf:"-"`
+	SubnetIdsRefs []v2.NamespacedReference `json:"subnetIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIdsSelector *v1.NamespacedSelector `json:"subnetIdsSelector,omitempty" tf:"-"`
+	SubnetIdsSelector *v2.NamespacedSelector `json:"subnetIdsSelector,omitempty" tf:"-"`
 }
 
 // ReplicatorSpec defines the desired state of Replicator
@@ -567,8 +741,8 @@ type ReplicatorSpec struct {
 
 // ReplicatorStatus defines the observed state of Replicator.
 type ReplicatorStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ReplicatorObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ReplicatorObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

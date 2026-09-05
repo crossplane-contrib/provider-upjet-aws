@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type KerberosAuthenticationSettingsInitParameters struct {
@@ -81,11 +81,11 @@ type ReplicationInstanceInitParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnRef *v1.Reference `json:"kmsKeyArnRef,omitempty" tf:"-"`
+	KMSKeyArnRef *v2.Reference `json:"kmsKeyArnRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnSelector *v1.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
+	KMSKeyArnSelector *v2.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
 
 	// Configuration block for settings required for Kerberos authentication. See below.
 	KerberosAuthenticationSettings *KerberosAuthenticationSettingsInitParameters `json:"kerberosAuthenticationSettings,omitempty" tf:"kerberos_authentication_settings,omitempty"`
@@ -112,11 +112,11 @@ type ReplicationInstanceInitParameters struct {
 
 	// Reference to a ReplicationSubnetGroup in dms to populate replicationSubnetGroupId.
 	// +kubebuilder:validation:Optional
-	ReplicationSubnetGroupIDRef *v1.Reference `json:"replicationSubnetGroupIdRef,omitempty" tf:"-"`
+	ReplicationSubnetGroupIDRef *v2.Reference `json:"replicationSubnetGroupIdRef,omitempty" tf:"-"`
 
 	// Selector for a ReplicationSubnetGroup in dms to populate replicationSubnetGroupId.
 	// +kubebuilder:validation:Optional
-	ReplicationSubnetGroupIDSelector *v1.Selector `json:"replicationSubnetGroupIdSelector,omitempty" tf:"-"`
+	ReplicationSubnetGroupIDSelector *v2.Selector `json:"replicationSubnetGroupIdSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -124,11 +124,11 @@ type ReplicationInstanceInitParameters struct {
 
 	// References to SecurityGroup in ec2 to populate vpcSecurityGroupIds.
 	// +kubebuilder:validation:Optional
-	VPCSecurityGroupIDRefs []v1.Reference `json:"vpcSecurityGroupIdRefs,omitempty" tf:"-"`
+	VPCSecurityGroupIDRefs []v2.Reference `json:"vpcSecurityGroupIdRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate vpcSecurityGroupIds.
 	// +kubebuilder:validation:Optional
-	VPCSecurityGroupIDSelector *v1.Selector `json:"vpcSecurityGroupIdSelector,omitempty" tf:"-"`
+	VPCSecurityGroupIDSelector *v2.Selector `json:"vpcSecurityGroupIdSelector,omitempty" tf:"-"`
 
 	// A list of VPC security group IDs to be used with the replication instance. The VPC security groups must work with the VPC containing the replication instance.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.SecurityGroup
@@ -250,11 +250,11 @@ type ReplicationInstanceParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnRef *v1.Reference `json:"kmsKeyArnRef,omitempty" tf:"-"`
+	KMSKeyArnRef *v2.Reference `json:"kmsKeyArnRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnSelector *v1.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
+	KMSKeyArnSelector *v2.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
 
 	// Configuration block for settings required for Kerberos authentication. See below.
 	// +kubebuilder:validation:Optional
@@ -293,11 +293,11 @@ type ReplicationInstanceParameters struct {
 
 	// Reference to a ReplicationSubnetGroup in dms to populate replicationSubnetGroupId.
 	// +kubebuilder:validation:Optional
-	ReplicationSubnetGroupIDRef *v1.Reference `json:"replicationSubnetGroupIdRef,omitempty" tf:"-"`
+	ReplicationSubnetGroupIDRef *v2.Reference `json:"replicationSubnetGroupIdRef,omitempty" tf:"-"`
 
 	// Selector for a ReplicationSubnetGroup in dms to populate replicationSubnetGroupId.
 	// +kubebuilder:validation:Optional
-	ReplicationSubnetGroupIDSelector *v1.Selector `json:"replicationSubnetGroupIdSelector,omitempty" tf:"-"`
+	ReplicationSubnetGroupIDSelector *v2.Selector `json:"replicationSubnetGroupIdSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -306,11 +306,11 @@ type ReplicationInstanceParameters struct {
 
 	// References to SecurityGroup in ec2 to populate vpcSecurityGroupIds.
 	// +kubebuilder:validation:Optional
-	VPCSecurityGroupIDRefs []v1.Reference `json:"vpcSecurityGroupIdRefs,omitempty" tf:"-"`
+	VPCSecurityGroupIDRefs []v2.Reference `json:"vpcSecurityGroupIdRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate vpcSecurityGroupIds.
 	// +kubebuilder:validation:Optional
-	VPCSecurityGroupIDSelector *v1.Selector `json:"vpcSecurityGroupIdSelector,omitempty" tf:"-"`
+	VPCSecurityGroupIDSelector *v2.Selector `json:"vpcSecurityGroupIdSelector,omitempty" tf:"-"`
 
 	// A list of VPC security group IDs to be used with the replication instance. The VPC security groups must work with the VPC containing the replication instance.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.SecurityGroup
@@ -323,8 +323,8 @@ type ReplicationInstanceParameters struct {
 
 // ReplicationInstanceSpec defines the desired state of ReplicationInstance
 type ReplicationInstanceSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ReplicationInstanceParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ReplicationInstanceParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -340,8 +340,8 @@ type ReplicationInstanceSpec struct {
 
 // ReplicationInstanceStatus defines the observed state of ReplicationInstance.
 type ReplicationInstanceStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ReplicationInstanceObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ReplicationInstanceObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type TopicSubscriptionInitParameters struct {
@@ -31,11 +31,11 @@ type TopicSubscriptionInitParameters struct {
 
 	// Reference to a Queue in sqs to populate endpoint.
 	// +kubebuilder:validation:Optional
-	EndpointRef *v1.Reference `json:"endpointRef,omitempty" tf:"-"`
+	EndpointRef *v2.Reference `json:"endpointRef,omitempty" tf:"-"`
 
 	// Selector for a Queue in sqs to populate endpoint.
 	// +kubebuilder:validation:Optional
-	EndpointSelector *v1.Selector `json:"endpointSelector,omitempty" tf:"-"`
+	EndpointSelector *v2.Selector `json:"endpointSelector,omitempty" tf:"-"`
 
 	// JSON String with the filter policy that will be used in the subscription to filter messages seen by the target resource. Refer to the SNS docs for more details.
 	FilterPolicy *string `json:"filterPolicy,omitempty" tf:"filter_policy,omitempty"`
@@ -62,11 +62,11 @@ type TopicSubscriptionInitParameters struct {
 
 	// Reference to a Role in iam to populate subscriptionRoleArn.
 	// +kubebuilder:validation:Optional
-	SubscriptionRoleArnRef *v1.Reference `json:"subscriptionRoleArnRef,omitempty" tf:"-"`
+	SubscriptionRoleArnRef *v2.Reference `json:"subscriptionRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate subscriptionRoleArn.
 	// +kubebuilder:validation:Optional
-	SubscriptionRoleArnSelector *v1.Selector `json:"subscriptionRoleArnSelector,omitempty" tf:"-"`
+	SubscriptionRoleArnSelector *v2.Selector `json:"subscriptionRoleArnSelector,omitempty" tf:"-"`
 
 	// ARN of the SNS topic to subscribe to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/sns/v1beta1.Topic
@@ -75,11 +75,11 @@ type TopicSubscriptionInitParameters struct {
 
 	// Reference to a Topic in sns to populate topicArn.
 	// +kubebuilder:validation:Optional
-	TopicArnRef *v1.Reference `json:"topicArnRef,omitempty" tf:"-"`
+	TopicArnRef *v2.Reference `json:"topicArnRef,omitempty" tf:"-"`
 
 	// Selector for a Topic in sns to populate topicArn.
 	// +kubebuilder:validation:Optional
-	TopicArnSelector *v1.Selector `json:"topicArnSelector,omitempty" tf:"-"`
+	TopicArnSelector *v2.Selector `json:"topicArnSelector,omitempty" tf:"-"`
 }
 
 type TopicSubscriptionObservation struct {
@@ -162,11 +162,11 @@ type TopicSubscriptionParameters struct {
 
 	// Reference to a Queue in sqs to populate endpoint.
 	// +kubebuilder:validation:Optional
-	EndpointRef *v1.Reference `json:"endpointRef,omitempty" tf:"-"`
+	EndpointRef *v2.Reference `json:"endpointRef,omitempty" tf:"-"`
 
 	// Selector for a Queue in sqs to populate endpoint.
 	// +kubebuilder:validation:Optional
-	EndpointSelector *v1.Selector `json:"endpointSelector,omitempty" tf:"-"`
+	EndpointSelector *v2.Selector `json:"endpointSelector,omitempty" tf:"-"`
 
 	// JSON String with the filter policy that will be used in the subscription to filter messages seen by the target resource. Refer to the SNS docs for more details.
 	// +kubebuilder:validation:Optional
@@ -205,11 +205,11 @@ type TopicSubscriptionParameters struct {
 
 	// Reference to a Role in iam to populate subscriptionRoleArn.
 	// +kubebuilder:validation:Optional
-	SubscriptionRoleArnRef *v1.Reference `json:"subscriptionRoleArnRef,omitempty" tf:"-"`
+	SubscriptionRoleArnRef *v2.Reference `json:"subscriptionRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate subscriptionRoleArn.
 	// +kubebuilder:validation:Optional
-	SubscriptionRoleArnSelector *v1.Selector `json:"subscriptionRoleArnSelector,omitempty" tf:"-"`
+	SubscriptionRoleArnSelector *v2.Selector `json:"subscriptionRoleArnSelector,omitempty" tf:"-"`
 
 	// ARN of the SNS topic to subscribe to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/sns/v1beta1.Topic
@@ -219,17 +219,17 @@ type TopicSubscriptionParameters struct {
 
 	// Reference to a Topic in sns to populate topicArn.
 	// +kubebuilder:validation:Optional
-	TopicArnRef *v1.Reference `json:"topicArnRef,omitempty" tf:"-"`
+	TopicArnRef *v2.Reference `json:"topicArnRef,omitempty" tf:"-"`
 
 	// Selector for a Topic in sns to populate topicArn.
 	// +kubebuilder:validation:Optional
-	TopicArnSelector *v1.Selector `json:"topicArnSelector,omitempty" tf:"-"`
+	TopicArnSelector *v2.Selector `json:"topicArnSelector,omitempty" tf:"-"`
 }
 
 // TopicSubscriptionSpec defines the desired state of TopicSubscription
 type TopicSubscriptionSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     TopicSubscriptionParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   TopicSubscriptionParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -245,8 +245,8 @@ type TopicSubscriptionSpec struct {
 
 // TopicSubscriptionStatus defines the observed state of TopicSubscription.
 type TopicSubscriptionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        TopicSubscriptionObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               TopicSubscriptionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

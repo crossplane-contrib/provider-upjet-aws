@@ -25,6 +25,6 @@ spec:
       </broker>
     description: Example Configuration
     engineType: ActiveMQ
-    engineVersion: 5.17.6
+    engineVersion: "5.19"
     name: example
     region: us-west-1

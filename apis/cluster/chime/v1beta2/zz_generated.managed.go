@@ -5,54 +5,54 @@
 
 package v1beta2
 
-import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+import xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 
 // GetCondition of this VoiceConnectorStreaming.
-func (mg *VoiceConnectorStreaming) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *VoiceConnectorStreaming) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this VoiceConnectorStreaming.
-func (mg *VoiceConnectorStreaming) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *VoiceConnectorStreaming) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this VoiceConnectorStreaming.
-func (mg *VoiceConnectorStreaming) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *VoiceConnectorStreaming) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this VoiceConnectorStreaming.
-func (mg *VoiceConnectorStreaming) GetProviderConfigReference() *xpv1.Reference {
+func (mg *VoiceConnectorStreaming) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this VoiceConnectorStreaming.
-func (mg *VoiceConnectorStreaming) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *VoiceConnectorStreaming) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this VoiceConnectorStreaming.
-func (mg *VoiceConnectorStreaming) SetConditions(c ...xpv1.Condition) {
+func (mg *VoiceConnectorStreaming) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this VoiceConnectorStreaming.
-func (mg *VoiceConnectorStreaming) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *VoiceConnectorStreaming) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this VoiceConnectorStreaming.
-func (mg *VoiceConnectorStreaming) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *VoiceConnectorStreaming) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this VoiceConnectorStreaming.
-func (mg *VoiceConnectorStreaming) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *VoiceConnectorStreaming) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this VoiceConnectorStreaming.
-func (mg *VoiceConnectorStreaming) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *VoiceConnectorStreaming) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

@@ -109,3 +109,39 @@ func SetupGated_s3(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupWebhookWithManager_s3 registers conversion webhooks for all resource kinds in the group.
+func SetupWebhookWithManager_s3(mgr ctrl.Manager) error {
+	for _, setup := range []func(ctrl.Manager) error{
+		bucket.SetupWebhookWithManager,
+		bucketabac.SetupWebhookWithManager,
+		bucketaccelerateconfiguration.SetupWebhookWithManager,
+		bucketacl.SetupWebhookWithManager,
+		bucketanalyticsconfiguration.SetupWebhookWithManager,
+		bucketcorsconfiguration.SetupWebhookWithManager,
+		bucketintelligenttieringconfiguration.SetupWebhookWithManager,
+		bucketinventory.SetupWebhookWithManager,
+		bucketlifecycleconfiguration.SetupWebhookWithManager,
+		bucketlogging.SetupWebhookWithManager,
+		bucketmetric.SetupWebhookWithManager,
+		bucketnotification.SetupWebhookWithManager,
+		bucketobject.SetupWebhookWithManager,
+		bucketobjectlockconfiguration.SetupWebhookWithManager,
+		bucketownershipcontrols.SetupWebhookWithManager,
+		bucketpolicy.SetupWebhookWithManager,
+		bucketpublicaccessblock.SetupWebhookWithManager,
+		bucketreplicationconfiguration.SetupWebhookWithManager,
+		bucketrequestpaymentconfiguration.SetupWebhookWithManager,
+		bucketserversideencryptionconfiguration.SetupWebhookWithManager,
+		bucketversioning.SetupWebhookWithManager,
+		bucketwebsiteconfiguration.SetupWebhookWithManager,
+		directorybucket.SetupWebhookWithManager,
+		object.SetupWebhookWithManager,
+		objectcopy.SetupWebhookWithManager,
+	} {
+		if err := setup(mgr); err != nil {
+			return err
+		}
+	}
+	return nil
+}

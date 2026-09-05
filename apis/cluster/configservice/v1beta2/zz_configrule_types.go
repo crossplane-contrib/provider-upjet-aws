@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ConfigRuleInitParameters struct {
@@ -283,11 +283,11 @@ type SourceInitParameters struct {
 
 	// Reference to a Function in lambda to populate sourceIdentifier.
 	// +kubebuilder:validation:Optional
-	SourceIdentifierRef *v1.Reference `json:"sourceIdentifierRef,omitempty" tf:"-"`
+	SourceIdentifierRef *v2.Reference `json:"sourceIdentifierRef,omitempty" tf:"-"`
 
 	// Selector for a Function in lambda to populate sourceIdentifier.
 	// +kubebuilder:validation:Optional
-	SourceIdentifierSelector *v1.Selector `json:"sourceIdentifierSelector,omitempty" tf:"-"`
+	SourceIdentifierSelector *v2.Selector `json:"sourceIdentifierSelector,omitempty" tf:"-"`
 }
 
 type SourceObservation struct {
@@ -327,17 +327,17 @@ type SourceParameters struct {
 
 	// Reference to a Function in lambda to populate sourceIdentifier.
 	// +kubebuilder:validation:Optional
-	SourceIdentifierRef *v1.Reference `json:"sourceIdentifierRef,omitempty" tf:"-"`
+	SourceIdentifierRef *v2.Reference `json:"sourceIdentifierRef,omitempty" tf:"-"`
 
 	// Selector for a Function in lambda to populate sourceIdentifier.
 	// +kubebuilder:validation:Optional
-	SourceIdentifierSelector *v1.Selector `json:"sourceIdentifierSelector,omitempty" tf:"-"`
+	SourceIdentifierSelector *v2.Selector `json:"sourceIdentifierSelector,omitempty" tf:"-"`
 }
 
 // ConfigRuleSpec defines the desired state of ConfigRule
 type ConfigRuleSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ConfigRuleParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ConfigRuleParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -353,8 +353,8 @@ type ConfigRuleSpec struct {
 
 // ConfigRuleStatus defines the observed state of ConfigRule.
 type ConfigRuleStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ConfigRuleObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ConfigRuleObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

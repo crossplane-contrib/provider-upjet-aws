@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type DefaultNetworkACLInitParameters struct {
@@ -23,11 +22,11 @@ type DefaultNetworkACLInitParameters struct {
 
 	// Reference to a VPC in ec2 to populate defaultNetworkAclId.
 	// +kubebuilder:validation:Optional
-	DefaultNetworkACLIDRef *v1.NamespacedReference `json:"defaultNetworkAclIdRef,omitempty" tf:"-"`
+	DefaultNetworkACLIDRef *v2.NamespacedReference `json:"defaultNetworkAclIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPC in ec2 to populate defaultNetworkAclId.
 	// +kubebuilder:validation:Optional
-	DefaultNetworkACLIDSelector *v1.NamespacedSelector `json:"defaultNetworkAclIdSelector,omitempty" tf:"-"`
+	DefaultNetworkACLIDSelector *v2.NamespacedSelector `json:"defaultNetworkAclIdSelector,omitempty" tf:"-"`
 
 	// Configuration block for an egress rule. Detailed below.
 	Egress []EgressInitParameters `json:"egress,omitempty" tf:"egress,omitempty"`
@@ -37,11 +36,11 @@ type DefaultNetworkACLInitParameters struct {
 
 	// References to Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIDRefs []v1.NamespacedReference `json:"subnetIdRefs,omitempty" tf:"-"`
+	SubnetIDRefs []v2.NamespacedReference `json:"subnetIdRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// List of Subnet IDs to apply the ACL to. See the notes above on Managing Subnets in the Default Network ACL
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Subnet
@@ -105,11 +104,11 @@ type DefaultNetworkACLParameters struct {
 
 	// Reference to a VPC in ec2 to populate defaultNetworkAclId.
 	// +kubebuilder:validation:Optional
-	DefaultNetworkACLIDRef *v1.NamespacedReference `json:"defaultNetworkAclIdRef,omitempty" tf:"-"`
+	DefaultNetworkACLIDRef *v2.NamespacedReference `json:"defaultNetworkAclIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPC in ec2 to populate defaultNetworkAclId.
 	// +kubebuilder:validation:Optional
-	DefaultNetworkACLIDSelector *v1.NamespacedSelector `json:"defaultNetworkAclIdSelector,omitempty" tf:"-"`
+	DefaultNetworkACLIDSelector *v2.NamespacedSelector `json:"defaultNetworkAclIdSelector,omitempty" tf:"-"`
 
 	// Configuration block for an egress rule. Detailed below.
 	// +kubebuilder:validation:Optional
@@ -126,11 +125,11 @@ type DefaultNetworkACLParameters struct {
 
 	// References to Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIDRefs []v1.NamespacedReference `json:"subnetIdRefs,omitempty" tf:"-"`
+	SubnetIDRefs []v2.NamespacedReference `json:"subnetIdRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// List of Subnet IDs to apply the ACL to. See the notes above on Managing Subnets in the Default Network ACL
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Subnet
@@ -257,11 +256,11 @@ type IngressInitParameters struct {
 
 	// Reference to a DefaultVPC in ec2 to populate cidrBlock.
 	// +kubebuilder:validation:Optional
-	CidrBlockRef *v1.NamespacedReference `json:"cidrBlockRef,omitempty" tf:"-"`
+	CidrBlockRef *v2.NamespacedReference `json:"cidrBlockRef,omitempty" tf:"-"`
 
 	// Selector for a DefaultVPC in ec2 to populate cidrBlock.
 	// +kubebuilder:validation:Optional
-	CidrBlockSelector *v1.NamespacedSelector `json:"cidrBlockSelector,omitempty" tf:"-"`
+	CidrBlockSelector *v2.NamespacedSelector `json:"cidrBlockSelector,omitempty" tf:"-"`
 
 	// The from port to match.
 	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
@@ -329,11 +328,11 @@ type IngressParameters struct {
 
 	// Reference to a DefaultVPC in ec2 to populate cidrBlock.
 	// +kubebuilder:validation:Optional
-	CidrBlockRef *v1.NamespacedReference `json:"cidrBlockRef,omitempty" tf:"-"`
+	CidrBlockRef *v2.NamespacedReference `json:"cidrBlockRef,omitempty" tf:"-"`
 
 	// Selector for a DefaultVPC in ec2 to populate cidrBlock.
 	// +kubebuilder:validation:Optional
-	CidrBlockSelector *v1.NamespacedSelector `json:"cidrBlockSelector,omitempty" tf:"-"`
+	CidrBlockSelector *v2.NamespacedSelector `json:"cidrBlockSelector,omitempty" tf:"-"`
 
 	// The from port to match.
 	// +kubebuilder:validation:Optional
@@ -383,8 +382,8 @@ type DefaultNetworkACLSpec struct {
 
 // DefaultNetworkACLStatus defines the observed state of DefaultNetworkACL.
 type DefaultNetworkACLStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        DefaultNetworkACLObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               DefaultNetworkACLObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

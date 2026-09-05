@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type BandwidthInitParameters struct {
@@ -57,11 +57,11 @@ type LinkInitParameters struct {
 
 	// Reference to a GlobalNetwork in networkmanager to populate globalNetworkId.
 	// +kubebuilder:validation:Optional
-	GlobalNetworkIDRef *v1.Reference `json:"globalNetworkIdRef,omitempty" tf:"-"`
+	GlobalNetworkIDRef *v2.Reference `json:"globalNetworkIdRef,omitempty" tf:"-"`
 
 	// Selector for a GlobalNetwork in networkmanager to populate globalNetworkId.
 	// +kubebuilder:validation:Optional
-	GlobalNetworkIDSelector *v1.Selector `json:"globalNetworkIdSelector,omitempty" tf:"-"`
+	GlobalNetworkIDSelector *v2.Selector `json:"globalNetworkIdSelector,omitempty" tf:"-"`
 
 	// Provider of the link.
 	ProviderName *string `json:"providerName,omitempty" tf:"provider_name,omitempty"`
@@ -72,11 +72,11 @@ type LinkInitParameters struct {
 
 	// Reference to a Site in networkmanager to populate siteId.
 	// +kubebuilder:validation:Optional
-	SiteIDRef *v1.Reference `json:"siteIdRef,omitempty" tf:"-"`
+	SiteIDRef *v2.Reference `json:"siteIdRef,omitempty" tf:"-"`
 
 	// Selector for a Site in networkmanager to populate siteId.
 	// +kubebuilder:validation:Optional
-	SiteIDSelector *v1.Selector `json:"siteIdSelector,omitempty" tf:"-"`
+	SiteIDSelector *v2.Selector `json:"siteIdSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -138,11 +138,11 @@ type LinkParameters struct {
 
 	// Reference to a GlobalNetwork in networkmanager to populate globalNetworkId.
 	// +kubebuilder:validation:Optional
-	GlobalNetworkIDRef *v1.Reference `json:"globalNetworkIdRef,omitempty" tf:"-"`
+	GlobalNetworkIDRef *v2.Reference `json:"globalNetworkIdRef,omitempty" tf:"-"`
 
 	// Selector for a GlobalNetwork in networkmanager to populate globalNetworkId.
 	// +kubebuilder:validation:Optional
-	GlobalNetworkIDSelector *v1.Selector `json:"globalNetworkIdSelector,omitempty" tf:"-"`
+	GlobalNetworkIDSelector *v2.Selector `json:"globalNetworkIdSelector,omitempty" tf:"-"`
 
 	// Provider of the link.
 	// +kubebuilder:validation:Optional
@@ -155,11 +155,11 @@ type LinkParameters struct {
 
 	// Reference to a Site in networkmanager to populate siteId.
 	// +kubebuilder:validation:Optional
-	SiteIDRef *v1.Reference `json:"siteIdRef,omitempty" tf:"-"`
+	SiteIDRef *v2.Reference `json:"siteIdRef,omitempty" tf:"-"`
 
 	// Selector for a Site in networkmanager to populate siteId.
 	// +kubebuilder:validation:Optional
-	SiteIDSelector *v1.Selector `json:"siteIdSelector,omitempty" tf:"-"`
+	SiteIDSelector *v2.Selector `json:"siteIdSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -173,8 +173,8 @@ type LinkParameters struct {
 
 // LinkSpec defines the desired state of Link
 type LinkSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     LinkParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   LinkParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -190,8 +190,8 @@ type LinkSpec struct {
 
 // LinkStatus defines the observed state of Link.
 type LinkStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        LinkObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               LinkObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type SharedDirectoryInitParameters struct {
@@ -22,17 +22,17 @@ type SharedDirectoryInitParameters struct {
 
 	// Reference to a Directory in ds to populate directoryId.
 	// +kubebuilder:validation:Optional
-	DirectoryIDRef *v1.Reference `json:"directoryIdRef,omitempty" tf:"-"`
+	DirectoryIDRef *v2.Reference `json:"directoryIdRef,omitempty" tf:"-"`
 
 	// Selector for a Directory in ds to populate directoryId.
 	// +kubebuilder:validation:Optional
-	DirectoryIDSelector *v1.Selector `json:"directoryIdSelector,omitempty" tf:"-"`
+	DirectoryIDSelector *v2.Selector `json:"directoryIdSelector,omitempty" tf:"-"`
 
 	// Method used when sharing a directory. Valid values are ORGANIZATIONS and HANDSHAKE. Default is HANDSHAKE.
 	Method *string `json:"method,omitempty" tf:"method,omitempty"`
 
 	// Message sent by the directory owner to the directory consumer to help the directory consumer administrator determine whether to approve or reject the share invitation.
-	NotesSecretRef *v1.SecretKeySelector `json:"notesSecretRef,omitempty" tf:"-"`
+	NotesSecretRef *v2.SecretKeySelector `json:"notesSecretRef,omitempty" tf:"-"`
 
 	// Identifier for the directory consumer account with whom the directory is to be shared. See below.
 	Target []TargetInitParameters `json:"target,omitempty" tf:"target,omitempty"`
@@ -70,11 +70,11 @@ type SharedDirectoryParameters struct {
 
 	// Reference to a Directory in ds to populate directoryId.
 	// +kubebuilder:validation:Optional
-	DirectoryIDRef *v1.Reference `json:"directoryIdRef,omitempty" tf:"-"`
+	DirectoryIDRef *v2.Reference `json:"directoryIdRef,omitempty" tf:"-"`
 
 	// Selector for a Directory in ds to populate directoryId.
 	// +kubebuilder:validation:Optional
-	DirectoryIDSelector *v1.Selector `json:"directoryIdSelector,omitempty" tf:"-"`
+	DirectoryIDSelector *v2.Selector `json:"directoryIdSelector,omitempty" tf:"-"`
 
 	// Method used when sharing a directory. Valid values are ORGANIZATIONS and HANDSHAKE. Default is HANDSHAKE.
 	// +kubebuilder:validation:Optional
@@ -82,7 +82,7 @@ type SharedDirectoryParameters struct {
 
 	// Message sent by the directory owner to the directory consumer to help the directory consumer administrator determine whether to approve or reject the share invitation.
 	// +kubebuilder:validation:Optional
-	NotesSecretRef *v1.SecretKeySelector `json:"notesSecretRef,omitempty" tf:"-"`
+	NotesSecretRef *v2.SecretKeySelector `json:"notesSecretRef,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -125,8 +125,8 @@ type TargetParameters struct {
 
 // SharedDirectorySpec defines the desired state of SharedDirectory
 type SharedDirectorySpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     SharedDirectoryParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   SharedDirectoryParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -142,8 +142,8 @@ type SharedDirectorySpec struct {
 
 // SharedDirectoryStatus defines the observed state of SharedDirectory.
 type SharedDirectoryStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SharedDirectoryObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SharedDirectoryObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

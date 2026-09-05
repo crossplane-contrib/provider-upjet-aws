@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AttributePayloadInitParameters struct {
@@ -103,11 +102,11 @@ type ThingGroupInitParameters struct {
 
 	// Reference to a ThingGroup in iot to populate parentGroupName.
 	// +kubebuilder:validation:Optional
-	ParentGroupNameRef *v1.NamespacedReference `json:"parentGroupNameRef,omitempty" tf:"-"`
+	ParentGroupNameRef *v2.NamespacedReference `json:"parentGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ThingGroup in iot to populate parentGroupName.
 	// +kubebuilder:validation:Optional
-	ParentGroupNameSelector *v1.NamespacedSelector `json:"parentGroupNameSelector,omitempty" tf:"-"`
+	ParentGroupNameSelector *v2.NamespacedSelector `json:"parentGroupNameSelector,omitempty" tf:"-"`
 
 	// The Thing Group properties. Defined below.
 	Properties *PropertiesInitParameters `json:"properties,omitempty" tf:"properties,omitempty"`
@@ -157,11 +156,11 @@ type ThingGroupParameters struct {
 
 	// Reference to a ThingGroup in iot to populate parentGroupName.
 	// +kubebuilder:validation:Optional
-	ParentGroupNameRef *v1.NamespacedReference `json:"parentGroupNameRef,omitempty" tf:"-"`
+	ParentGroupNameRef *v2.NamespacedReference `json:"parentGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ThingGroup in iot to populate parentGroupName.
 	// +kubebuilder:validation:Optional
-	ParentGroupNameSelector *v1.NamespacedSelector `json:"parentGroupNameSelector,omitempty" tf:"-"`
+	ParentGroupNameSelector *v2.NamespacedSelector `json:"parentGroupNameSelector,omitempty" tf:"-"`
 
 	// The Thing Group properties. Defined below.
 	// +kubebuilder:validation:Optional
@@ -197,8 +196,8 @@ type ThingGroupSpec struct {
 
 // ThingGroupStatus defines the observed state of ThingGroup.
 type ThingGroupStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ThingGroupObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ThingGroupObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

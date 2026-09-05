@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type NetworkProfileInitParameters struct {
@@ -40,11 +40,11 @@ type NetworkProfileInitParameters struct {
 
 	// Reference to a Project in devicefarm to populate projectArn.
 	// +kubebuilder:validation:Optional
-	ProjectArnRef *v1.Reference `json:"projectArnRef,omitempty" tf:"-"`
+	ProjectArnRef *v2.Reference `json:"projectArnRef,omitempty" tf:"-"`
 
 	// Selector for a Project in devicefarm to populate projectArn.
 	// +kubebuilder:validation:Optional
-	ProjectArnSelector *v1.Selector `json:"projectArnSelector,omitempty" tf:"-"`
+	ProjectArnSelector *v2.Selector `json:"projectArnSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -156,11 +156,11 @@ type NetworkProfileParameters struct {
 
 	// Reference to a Project in devicefarm to populate projectArn.
 	// +kubebuilder:validation:Optional
-	ProjectArnRef *v1.Reference `json:"projectArnRef,omitempty" tf:"-"`
+	ProjectArnRef *v2.Reference `json:"projectArnRef,omitempty" tf:"-"`
 
 	// Selector for a Project in devicefarm to populate projectArn.
 	// +kubebuilder:validation:Optional
-	ProjectArnSelector *v1.Selector `json:"projectArnSelector,omitempty" tf:"-"`
+	ProjectArnSelector *v2.Selector `json:"projectArnSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -195,8 +195,8 @@ type NetworkProfileParameters struct {
 
 // NetworkProfileSpec defines the desired state of NetworkProfile
 type NetworkProfileSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     NetworkProfileParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   NetworkProfileParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -212,8 +212,8 @@ type NetworkProfileSpec struct {
 
 // NetworkProfileStatus defines the observed state of NetworkProfile.
 type NetworkProfileStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        NetworkProfileObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               NetworkProfileObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

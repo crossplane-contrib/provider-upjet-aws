@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type DefinitionInitParameters struct {
@@ -135,8 +135,8 @@ type ServiceActionParameters struct {
 
 // ServiceActionSpec defines the desired state of ServiceAction
 type ServiceActionSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ServiceActionParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ServiceActionParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -152,8 +152,8 @@ type ServiceActionSpec struct {
 
 // ServiceActionStatus defines the observed state of ServiceAction.
 type ServiceActionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ServiceActionObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ServiceActionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

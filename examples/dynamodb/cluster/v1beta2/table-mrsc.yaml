@@ -1,0 +1,26 @@
+# SPDX-FileCopyrightText: 2026 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+# MRSC (multi-Region strong consistency) global table over 3 Regions;
+# every replica must use consistencyMode STRONG.
+apiVersion: dynamodb.aws.upbound.io/v1beta2
+kind: Table
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dynamodb/v1beta2/table
+    uptest.upbound.io/timeout: "1200"
+  name: example-${Rand.RFC1123Subdomain}
+spec:
+  forProvider:
+    region: us-east-1
+    billingMode: PAY_PER_REQUEST
+    hashKey: id
+    attribute:
+    - name: id
+      type: S
+    replica:
+    - regionName: us-east-2
+      consistencyMode: STRONG
+    - regionName: us-west-2
+      consistencyMode: STRONG

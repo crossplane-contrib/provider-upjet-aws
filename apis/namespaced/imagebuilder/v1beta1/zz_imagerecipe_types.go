@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type BlockDeviceMappingEBSInitParameters struct {
@@ -190,11 +189,11 @@ type ImageRecipeComponentInitParameters struct {
 
 	// Reference to a Component in imagebuilder to populate componentArn.
 	// +kubebuilder:validation:Optional
-	ComponentArnRef *v1.NamespacedReference `json:"componentArnRef,omitempty" tf:"-"`
+	ComponentArnRef *v2.NamespacedReference `json:"componentArnRef,omitempty" tf:"-"`
 
 	// Selector for a Component in imagebuilder to populate componentArn.
 	// +kubebuilder:validation:Optional
-	ComponentArnSelector *v1.NamespacedSelector `json:"componentArnSelector,omitempty" tf:"-"`
+	ComponentArnSelector *v2.NamespacedSelector `json:"componentArnSelector,omitempty" tf:"-"`
 
 	// Configuration block(s) for parameters to configure the component. Detailed below.
 	Parameter []ComponentParameterInitParameters `json:"parameter,omitempty" tf:"parameter,omitempty"`
@@ -219,11 +218,11 @@ type ImageRecipeComponentParameters struct {
 
 	// Reference to a Component in imagebuilder to populate componentArn.
 	// +kubebuilder:validation:Optional
-	ComponentArnRef *v1.NamespacedReference `json:"componentArnRef,omitempty" tf:"-"`
+	ComponentArnRef *v2.NamespacedReference `json:"componentArnRef,omitempty" tf:"-"`
 
 	// Selector for a Component in imagebuilder to populate componentArn.
 	// +kubebuilder:validation:Optional
-	ComponentArnSelector *v1.NamespacedSelector `json:"componentArnSelector,omitempty" tf:"-"`
+	ComponentArnSelector *v2.NamespacedSelector `json:"componentArnSelector,omitempty" tf:"-"`
 
 	// Configuration block(s) for parameters to configure the component. Detailed below.
 	// +kubebuilder:validation:Optional
@@ -421,8 +420,8 @@ type ImageRecipeSpec struct {
 
 // ImageRecipeStatus defines the observed state of ImageRecipe.
 type ImageRecipeStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ImageRecipeObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ImageRecipeObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ActionDefinitionInitParameters struct {
@@ -82,6 +82,9 @@ type FirewallPolicyEncryptionConfigurationParameters struct {
 
 type FirewallPolicyFirewallPolicyInitParameters struct {
 
+	// Boolean indicating whether to prevent TCP and TLS packets from reaching destination servers until TLS Inspection has evaluated Server Name Indication (SNI) rules. If true, tls_inspection_configuration_arn is required. Default value: false.
+	EnableTLSSessionHolding *bool `json:"enableTlsSessionHolding,omitempty" tf:"enable_tls_session_holding,omitempty"`
+
 	// . Contains variables that you can use to override default Suricata settings in your firewall policy. See Rule Variables for details.
 	PolicyVariables []PolicyVariablesInitParameters `json:"policyVariables,omitempty" tf:"policy_variables,omitempty"`
 
@@ -117,6 +120,9 @@ type FirewallPolicyFirewallPolicyInitParameters struct {
 
 type FirewallPolicyFirewallPolicyObservation struct {
 
+	// Boolean indicating whether to prevent TCP and TLS packets from reaching destination servers until TLS Inspection has evaluated Server Name Indication (SNI) rules. If true, tls_inspection_configuration_arn is required. Default value: false.
+	EnableTLSSessionHolding *bool `json:"enableTlsSessionHolding,omitempty" tf:"enable_tls_session_holding,omitempty"`
+
 	// . Contains variables that you can use to override default Suricata settings in your firewall policy. See Rule Variables for details.
 	PolicyVariables []PolicyVariablesObservation `json:"policyVariables,omitempty" tf:"policy_variables,omitempty"`
 
@@ -151,6 +157,10 @@ type FirewallPolicyFirewallPolicyObservation struct {
 }
 
 type FirewallPolicyFirewallPolicyParameters struct {
+
+	// Boolean indicating whether to prevent TCP and TLS packets from reaching destination servers until TLS Inspection has evaluated Server Name Indication (SNI) rules. If true, tls_inspection_configuration_arn is required. Default value: false.
+	// +kubebuilder:validation:Optional
+	EnableTLSSessionHolding *bool `json:"enableTlsSessionHolding,omitempty" tf:"enable_tls_session_holding,omitempty"`
 
 	// . Contains variables that you can use to override default Suricata settings in your firewall policy. See Rule Variables for details.
 	// +kubebuilder:validation:Optional
@@ -447,11 +457,11 @@ type StatefulRuleGroupReferenceInitParameters struct {
 
 	// Reference to a RuleGroup in networkfirewall to populate resourceArn.
 	// +kubebuilder:validation:Optional
-	ResourceArnRef *v1.Reference `json:"resourceArnRef,omitempty" tf:"-"`
+	ResourceArnRef *v2.Reference `json:"resourceArnRef,omitempty" tf:"-"`
 
 	// Selector for a RuleGroup in networkfirewall to populate resourceArn.
 	// +kubebuilder:validation:Optional
-	ResourceArnSelector *v1.Selector `json:"resourceArnSelector,omitempty" tf:"-"`
+	ResourceArnSelector *v2.Selector `json:"resourceArnSelector,omitempty" tf:"-"`
 }
 
 type StatefulRuleGroupReferenceObservation struct {
@@ -491,11 +501,11 @@ type StatefulRuleGroupReferenceParameters struct {
 
 	// Reference to a RuleGroup in networkfirewall to populate resourceArn.
 	// +kubebuilder:validation:Optional
-	ResourceArnRef *v1.Reference `json:"resourceArnRef,omitempty" tf:"-"`
+	ResourceArnRef *v2.Reference `json:"resourceArnRef,omitempty" tf:"-"`
 
 	// Selector for a RuleGroup in networkfirewall to populate resourceArn.
 	// +kubebuilder:validation:Optional
-	ResourceArnSelector *v1.Selector `json:"resourceArnSelector,omitempty" tf:"-"`
+	ResourceArnSelector *v2.Selector `json:"resourceArnSelector,omitempty" tf:"-"`
 }
 
 type StatelessCustomActionInitParameters struct {
@@ -539,11 +549,11 @@ type StatelessRuleGroupReferenceInitParameters struct {
 
 	// Reference to a RuleGroup in networkfirewall to populate resourceArn.
 	// +kubebuilder:validation:Optional
-	ResourceArnRef *v1.Reference `json:"resourceArnRef,omitempty" tf:"-"`
+	ResourceArnRef *v2.Reference `json:"resourceArnRef,omitempty" tf:"-"`
 
 	// Selector for a RuleGroup in networkfirewall to populate resourceArn.
 	// +kubebuilder:validation:Optional
-	ResourceArnSelector *v1.Selector `json:"resourceArnSelector,omitempty" tf:"-"`
+	ResourceArnSelector *v2.Selector `json:"resourceArnSelector,omitempty" tf:"-"`
 }
 
 type StatelessRuleGroupReferenceObservation struct {
@@ -569,17 +579,17 @@ type StatelessRuleGroupReferenceParameters struct {
 
 	// Reference to a RuleGroup in networkfirewall to populate resourceArn.
 	// +kubebuilder:validation:Optional
-	ResourceArnRef *v1.Reference `json:"resourceArnRef,omitempty" tf:"-"`
+	ResourceArnRef *v2.Reference `json:"resourceArnRef,omitempty" tf:"-"`
 
 	// Selector for a RuleGroup in networkfirewall to populate resourceArn.
 	// +kubebuilder:validation:Optional
-	ResourceArnSelector *v1.Selector `json:"resourceArnSelector,omitempty" tf:"-"`
+	ResourceArnSelector *v2.Selector `json:"resourceArnSelector,omitempty" tf:"-"`
 }
 
 // FirewallPolicySpec defines the desired state of FirewallPolicy
 type FirewallPolicySpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     FirewallPolicyParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   FirewallPolicyParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -595,8 +605,8 @@ type FirewallPolicySpec struct {
 
 // FirewallPolicyStatus defines the observed state of FirewallPolicy.
 type FirewallPolicyStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        FirewallPolicyObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               FirewallPolicyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

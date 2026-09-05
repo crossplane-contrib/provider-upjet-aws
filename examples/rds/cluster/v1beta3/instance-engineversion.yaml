@@ -1,0 +1,44 @@
+# SPDX-FileCopyrightText: 2026 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+# This example intentionally pins the engine version. When you do so, make sure
+# the parameterGroupName corresponds to the same engine major version: the
+# parameter group family (here postgres16) must match engineVersion, otherwise
+# the instance creation fails with an engine-family mismatch. Keep the two in
+# sync when bumping the version. For examples that should always track a
+# currently-available version, omit both fields and let AWS pick the defaults.
+apiVersion: rds.aws.upbound.io/v1beta3
+kind: Instance
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rds/v1beta3/instance
+    uptest.upbound.io/timeout: "3600"
+  labels:
+    testing.upbound.io/example-name: instance-engineversion
+  name: example-dbinstance-pinned-${Rand.RFC1123Subdomain}
+spec:
+  forProvider:
+    allocatedStorage: 20
+    autoGeneratePassword: true
+    autoMinorVersionUpgrade: true
+    backupRetentionPeriod: 14
+    backupWindow: 09:46-10:16
+    dbName: example
+    engine: postgres
+    engineVersion: "16"
+    instanceClass: db.t3.micro
+    maintenanceWindow: Mon:00:00-Mon:03:00
+    parameterGroupName: default.postgres16
+    passwordSecretRef:
+      key: password
+      name: example-dbinstance-pinned
+      namespace: upbound-system
+    publiclyAccessible: false
+    region: us-west-1
+    skipFinalSnapshot: true
+    storageType: gp2
+    username: adminuser
+  writeConnectionSecretToRef:
+    name: example-dbinstance-pinned-out
+    namespace: default

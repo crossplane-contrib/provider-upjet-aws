@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AuthorizationConfigInitParameters struct {
@@ -104,11 +104,11 @@ type DatasourceInitParameters struct {
 
 	// Reference to a Role in iam to populate serviceRoleArn.
 	// +kubebuilder:validation:Optional
-	ServiceRoleArnRef *v1.Reference `json:"serviceRoleArnRef,omitempty" tf:"-"`
+	ServiceRoleArnRef *v2.Reference `json:"serviceRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate serviceRoleArn.
 	// +kubebuilder:validation:Optional
-	ServiceRoleArnSelector *v1.Selector `json:"serviceRoleArnSelector,omitempty" tf:"-"`
+	ServiceRoleArnSelector *v2.Selector `json:"serviceRoleArnSelector,omitempty" tf:"-"`
 
 	// Type of the Data Source. Valid values: AWS_LAMBDA, AMAZON_DYNAMODB, AMAZON_ELASTICSEARCH, HTTP, NONE, RELATIONAL_DATABASE, AMAZON_EVENTBRIDGE, AMAZON_OPENSEARCH_SERVICE.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
@@ -169,11 +169,11 @@ type DatasourceParameters struct {
 
 	// Reference to a GraphQLAPI in appsync to populate apiId.
 	// +kubebuilder:validation:Optional
-	APIIDRef *v1.Reference `json:"apiIdRef,omitempty" tf:"-"`
+	APIIDRef *v2.Reference `json:"apiIdRef,omitempty" tf:"-"`
 
 	// Selector for a GraphQLAPI in appsync to populate apiId.
 	// +kubebuilder:validation:Optional
-	APIIDSelector *v1.Selector `json:"apiIdSelector,omitempty" tf:"-"`
+	APIIDSelector *v2.Selector `json:"apiIdSelector,omitempty" tf:"-"`
 
 	// Description of the data source.
 	// +kubebuilder:validation:Optional
@@ -220,11 +220,11 @@ type DatasourceParameters struct {
 
 	// Reference to a Role in iam to populate serviceRoleArn.
 	// +kubebuilder:validation:Optional
-	ServiceRoleArnRef *v1.Reference `json:"serviceRoleArnRef,omitempty" tf:"-"`
+	ServiceRoleArnRef *v2.Reference `json:"serviceRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate serviceRoleArn.
 	// +kubebuilder:validation:Optional
-	ServiceRoleArnSelector *v1.Selector `json:"serviceRoleArnSelector,omitempty" tf:"-"`
+	ServiceRoleArnSelector *v2.Selector `json:"serviceRoleArnSelector,omitempty" tf:"-"`
 
 	// Type of the Data Source. Valid values: AWS_LAMBDA, AMAZON_DYNAMODB, AMAZON_ELASTICSEARCH, HTTP, NONE, RELATIONAL_DATABASE, AMAZON_EVENTBRIDGE, AMAZON_OPENSEARCH_SERVICE.
 	// +kubebuilder:validation:Optional
@@ -281,11 +281,11 @@ type DynamodbConfigInitParameters struct {
 
 	// Reference to a Table in dynamodb to populate tableName.
 	// +kubebuilder:validation:Optional
-	TableNameRef *v1.Reference `json:"tableNameRef,omitempty" tf:"-"`
+	TableNameRef *v2.Reference `json:"tableNameRef,omitempty" tf:"-"`
 
 	// Selector for a Table in dynamodb to populate tableName.
 	// +kubebuilder:validation:Optional
-	TableNameSelector *v1.Selector `json:"tableNameSelector,omitempty" tf:"-"`
+	TableNameSelector *v2.Selector `json:"tableNameSelector,omitempty" tf:"-"`
 
 	// Set to true to use Amazon Cognito credentials with this data source.
 	UseCallerCredentials *bool `json:"useCallerCredentials,omitempty" tf:"use_caller_credentials,omitempty"`
@@ -329,11 +329,11 @@ type DynamodbConfigParameters struct {
 
 	// Reference to a Table in dynamodb to populate tableName.
 	// +kubebuilder:validation:Optional
-	TableNameRef *v1.Reference `json:"tableNameRef,omitempty" tf:"-"`
+	TableNameRef *v2.Reference `json:"tableNameRef,omitempty" tf:"-"`
 
 	// Selector for a Table in dynamodb to populate tableName.
 	// +kubebuilder:validation:Optional
-	TableNameSelector *v1.Selector `json:"tableNameSelector,omitempty" tf:"-"`
+	TableNameSelector *v2.Selector `json:"tableNameSelector,omitempty" tf:"-"`
 
 	// Set to true to use Amazon Cognito credentials with this data source.
 	// +kubebuilder:validation:Optional
@@ -550,8 +550,8 @@ type RelationalDatabaseConfigParameters struct {
 
 // DatasourceSpec defines the desired state of Datasource
 type DatasourceSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     DatasourceParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   DatasourceParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -567,8 +567,8 @@ type DatasourceSpec struct {
 
 // DatasourceStatus defines the observed state of Datasource.
 type DatasourceStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        DatasourceObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               DatasourceObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

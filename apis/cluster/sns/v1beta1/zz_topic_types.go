@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type TopicInitParameters struct {
@@ -22,11 +22,11 @@ type TopicInitParameters struct {
 
 	// Reference to a Role in iam to populate applicationFailureFeedbackRoleArn.
 	// +kubebuilder:validation:Optional
-	ApplicationFailureFeedbackRoleArnRef *v1.Reference `json:"applicationFailureFeedbackRoleArnRef,omitempty" tf:"-"`
+	ApplicationFailureFeedbackRoleArnRef *v2.Reference `json:"applicationFailureFeedbackRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate applicationFailureFeedbackRoleArn.
 	// +kubebuilder:validation:Optional
-	ApplicationFailureFeedbackRoleArnSelector *v1.Selector `json:"applicationFailureFeedbackRoleArnSelector,omitempty" tf:"-"`
+	ApplicationFailureFeedbackRoleArnSelector *v2.Selector `json:"applicationFailureFeedbackRoleArnSelector,omitempty" tf:"-"`
 
 	// The IAM role permitted to receive success feedback for this topic
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
@@ -35,11 +35,11 @@ type TopicInitParameters struct {
 
 	// Reference to a Role in iam to populate applicationSuccessFeedbackRoleArn.
 	// +kubebuilder:validation:Optional
-	ApplicationSuccessFeedbackRoleArnRef *v1.Reference `json:"applicationSuccessFeedbackRoleArnRef,omitempty" tf:"-"`
+	ApplicationSuccessFeedbackRoleArnRef *v2.Reference `json:"applicationSuccessFeedbackRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate applicationSuccessFeedbackRoleArn.
 	// +kubebuilder:validation:Optional
-	ApplicationSuccessFeedbackRoleArnSelector *v1.Selector `json:"applicationSuccessFeedbackRoleArnSelector,omitempty" tf:"-"`
+	ApplicationSuccessFeedbackRoleArnSelector *v2.Selector `json:"applicationSuccessFeedbackRoleArnSelector,omitempty" tf:"-"`
 
 	// Percentage of success to sample
 	ApplicationSuccessFeedbackSampleRate *float64 `json:"applicationSuccessFeedbackSampleRate,omitempty" tf:"application_success_feedback_sample_rate,omitempty"`
@@ -69,11 +69,11 @@ type TopicInitParameters struct {
 
 	// Reference to a Role in iam to populate firehoseFailureFeedbackRoleArn.
 	// +kubebuilder:validation:Optional
-	FirehoseFailureFeedbackRoleArnRef *v1.Reference `json:"firehoseFailureFeedbackRoleArnRef,omitempty" tf:"-"`
+	FirehoseFailureFeedbackRoleArnRef *v2.Reference `json:"firehoseFailureFeedbackRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate firehoseFailureFeedbackRoleArn.
 	// +kubebuilder:validation:Optional
-	FirehoseFailureFeedbackRoleArnSelector *v1.Selector `json:"firehoseFailureFeedbackRoleArnSelector,omitempty" tf:"-"`
+	FirehoseFailureFeedbackRoleArnSelector *v2.Selector `json:"firehoseFailureFeedbackRoleArnSelector,omitempty" tf:"-"`
 
 	// The IAM role permitted to receive success feedback for this topic
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
@@ -82,11 +82,11 @@ type TopicInitParameters struct {
 
 	// Reference to a Role in iam to populate firehoseSuccessFeedbackRoleArn.
 	// +kubebuilder:validation:Optional
-	FirehoseSuccessFeedbackRoleArnRef *v1.Reference `json:"firehoseSuccessFeedbackRoleArnRef,omitempty" tf:"-"`
+	FirehoseSuccessFeedbackRoleArnRef *v2.Reference `json:"firehoseSuccessFeedbackRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate firehoseSuccessFeedbackRoleArn.
 	// +kubebuilder:validation:Optional
-	FirehoseSuccessFeedbackRoleArnSelector *v1.Selector `json:"firehoseSuccessFeedbackRoleArnSelector,omitempty" tf:"-"`
+	FirehoseSuccessFeedbackRoleArnSelector *v2.Selector `json:"firehoseSuccessFeedbackRoleArnSelector,omitempty" tf:"-"`
 
 	// Percentage of success to sample
 	FirehoseSuccessFeedbackSampleRate *float64 `json:"firehoseSuccessFeedbackSampleRate,omitempty" tf:"firehose_success_feedback_sample_rate,omitempty"`
@@ -98,11 +98,11 @@ type TopicInitParameters struct {
 
 	// Reference to a Role in iam to populate httpFailureFeedbackRoleArn.
 	// +kubebuilder:validation:Optional
-	HTTPFailureFeedbackRoleArnRef *v1.Reference `json:"httpFailureFeedbackRoleArnRef,omitempty" tf:"-"`
+	HTTPFailureFeedbackRoleArnRef *v2.Reference `json:"httpFailureFeedbackRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate httpFailureFeedbackRoleArn.
 	// +kubebuilder:validation:Optional
-	HTTPFailureFeedbackRoleArnSelector *v1.Selector `json:"httpFailureFeedbackRoleArnSelector,omitempty" tf:"-"`
+	HTTPFailureFeedbackRoleArnSelector *v2.Selector `json:"httpFailureFeedbackRoleArnSelector,omitempty" tf:"-"`
 
 	// The IAM role permitted to receive success feedback for this topic
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
@@ -111,11 +111,11 @@ type TopicInitParameters struct {
 
 	// Reference to a Role in iam to populate httpSuccessFeedbackRoleArn.
 	// +kubebuilder:validation:Optional
-	HTTPSuccessFeedbackRoleArnRef *v1.Reference `json:"httpSuccessFeedbackRoleArnRef,omitempty" tf:"-"`
+	HTTPSuccessFeedbackRoleArnRef *v2.Reference `json:"httpSuccessFeedbackRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate httpSuccessFeedbackRoleArn.
 	// +kubebuilder:validation:Optional
-	HTTPSuccessFeedbackRoleArnSelector *v1.Selector `json:"httpSuccessFeedbackRoleArnSelector,omitempty" tf:"-"`
+	HTTPSuccessFeedbackRoleArnSelector *v2.Selector `json:"httpSuccessFeedbackRoleArnSelector,omitempty" tf:"-"`
 
 	// Percentage of success to sample
 	HTTPSuccessFeedbackSampleRate *float64 `json:"httpSuccessFeedbackSampleRate,omitempty" tf:"http_success_feedback_sample_rate,omitempty"`
@@ -130,11 +130,11 @@ type TopicInitParameters struct {
 
 	// Reference to a Role in iam to populate lambdaFailureFeedbackRoleArn.
 	// +kubebuilder:validation:Optional
-	LambdaFailureFeedbackRoleArnRef *v1.Reference `json:"lambdaFailureFeedbackRoleArnRef,omitempty" tf:"-"`
+	LambdaFailureFeedbackRoleArnRef *v2.Reference `json:"lambdaFailureFeedbackRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate lambdaFailureFeedbackRoleArn.
 	// +kubebuilder:validation:Optional
-	LambdaFailureFeedbackRoleArnSelector *v1.Selector `json:"lambdaFailureFeedbackRoleArnSelector,omitempty" tf:"-"`
+	LambdaFailureFeedbackRoleArnSelector *v2.Selector `json:"lambdaFailureFeedbackRoleArnSelector,omitempty" tf:"-"`
 
 	// The IAM role permitted to receive success feedback for this topic
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
@@ -143,11 +143,11 @@ type TopicInitParameters struct {
 
 	// Reference to a Role in iam to populate lambdaSuccessFeedbackRoleArn.
 	// +kubebuilder:validation:Optional
-	LambdaSuccessFeedbackRoleArnRef *v1.Reference `json:"lambdaSuccessFeedbackRoleArnRef,omitempty" tf:"-"`
+	LambdaSuccessFeedbackRoleArnRef *v2.Reference `json:"lambdaSuccessFeedbackRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate lambdaSuccessFeedbackRoleArn.
 	// +kubebuilder:validation:Optional
-	LambdaSuccessFeedbackRoleArnSelector *v1.Selector `json:"lambdaSuccessFeedbackRoleArnSelector,omitempty" tf:"-"`
+	LambdaSuccessFeedbackRoleArnSelector *v2.Selector `json:"lambdaSuccessFeedbackRoleArnSelector,omitempty" tf:"-"`
 
 	// Percentage of success to sample
 	LambdaSuccessFeedbackSampleRate *float64 `json:"lambdaSuccessFeedbackSampleRate,omitempty" tf:"lambda_success_feedback_sample_rate,omitempty"`
@@ -165,11 +165,11 @@ type TopicInitParameters struct {
 
 	// Reference to a Role in iam to populate sqsFailureFeedbackRoleArn.
 	// +kubebuilder:validation:Optional
-	SqsFailureFeedbackRoleArnRef *v1.Reference `json:"sqsFailureFeedbackRoleArnRef,omitempty" tf:"-"`
+	SqsFailureFeedbackRoleArnRef *v2.Reference `json:"sqsFailureFeedbackRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate sqsFailureFeedbackRoleArn.
 	// +kubebuilder:validation:Optional
-	SqsFailureFeedbackRoleArnSelector *v1.Selector `json:"sqsFailureFeedbackRoleArnSelector,omitempty" tf:"-"`
+	SqsFailureFeedbackRoleArnSelector *v2.Selector `json:"sqsFailureFeedbackRoleArnSelector,omitempty" tf:"-"`
 
 	// The IAM role permitted to receive success feedback for this topic
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
@@ -178,11 +178,11 @@ type TopicInitParameters struct {
 
 	// Reference to a Role in iam to populate sqsSuccessFeedbackRoleArn.
 	// +kubebuilder:validation:Optional
-	SqsSuccessFeedbackRoleArnRef *v1.Reference `json:"sqsSuccessFeedbackRoleArnRef,omitempty" tf:"-"`
+	SqsSuccessFeedbackRoleArnRef *v2.Reference `json:"sqsSuccessFeedbackRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate sqsSuccessFeedbackRoleArn.
 	// +kubebuilder:validation:Optional
-	SqsSuccessFeedbackRoleArnSelector *v1.Selector `json:"sqsSuccessFeedbackRoleArnSelector,omitempty" tf:"-"`
+	SqsSuccessFeedbackRoleArnSelector *v2.Selector `json:"sqsSuccessFeedbackRoleArnSelector,omitempty" tf:"-"`
 
 	// Percentage of success to sample
 	SqsSuccessFeedbackSampleRate *float64 `json:"sqsSuccessFeedbackSampleRate,omitempty" tf:"sqs_success_feedback_sample_rate,omitempty"`
@@ -307,11 +307,11 @@ type TopicParameters struct {
 
 	// Reference to a Role in iam to populate applicationFailureFeedbackRoleArn.
 	// +kubebuilder:validation:Optional
-	ApplicationFailureFeedbackRoleArnRef *v1.Reference `json:"applicationFailureFeedbackRoleArnRef,omitempty" tf:"-"`
+	ApplicationFailureFeedbackRoleArnRef *v2.Reference `json:"applicationFailureFeedbackRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate applicationFailureFeedbackRoleArn.
 	// +kubebuilder:validation:Optional
-	ApplicationFailureFeedbackRoleArnSelector *v1.Selector `json:"applicationFailureFeedbackRoleArnSelector,omitempty" tf:"-"`
+	ApplicationFailureFeedbackRoleArnSelector *v2.Selector `json:"applicationFailureFeedbackRoleArnSelector,omitempty" tf:"-"`
 
 	// The IAM role permitted to receive success feedback for this topic
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
@@ -321,11 +321,11 @@ type TopicParameters struct {
 
 	// Reference to a Role in iam to populate applicationSuccessFeedbackRoleArn.
 	// +kubebuilder:validation:Optional
-	ApplicationSuccessFeedbackRoleArnRef *v1.Reference `json:"applicationSuccessFeedbackRoleArnRef,omitempty" tf:"-"`
+	ApplicationSuccessFeedbackRoleArnRef *v2.Reference `json:"applicationSuccessFeedbackRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate applicationSuccessFeedbackRoleArn.
 	// +kubebuilder:validation:Optional
-	ApplicationSuccessFeedbackRoleArnSelector *v1.Selector `json:"applicationSuccessFeedbackRoleArnSelector,omitempty" tf:"-"`
+	ApplicationSuccessFeedbackRoleArnSelector *v2.Selector `json:"applicationSuccessFeedbackRoleArnSelector,omitempty" tf:"-"`
 
 	// Percentage of success to sample
 	// +kubebuilder:validation:Optional
@@ -363,11 +363,11 @@ type TopicParameters struct {
 
 	// Reference to a Role in iam to populate firehoseFailureFeedbackRoleArn.
 	// +kubebuilder:validation:Optional
-	FirehoseFailureFeedbackRoleArnRef *v1.Reference `json:"firehoseFailureFeedbackRoleArnRef,omitempty" tf:"-"`
+	FirehoseFailureFeedbackRoleArnRef *v2.Reference `json:"firehoseFailureFeedbackRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate firehoseFailureFeedbackRoleArn.
 	// +kubebuilder:validation:Optional
-	FirehoseFailureFeedbackRoleArnSelector *v1.Selector `json:"firehoseFailureFeedbackRoleArnSelector,omitempty" tf:"-"`
+	FirehoseFailureFeedbackRoleArnSelector *v2.Selector `json:"firehoseFailureFeedbackRoleArnSelector,omitempty" tf:"-"`
 
 	// The IAM role permitted to receive success feedback for this topic
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
@@ -377,11 +377,11 @@ type TopicParameters struct {
 
 	// Reference to a Role in iam to populate firehoseSuccessFeedbackRoleArn.
 	// +kubebuilder:validation:Optional
-	FirehoseSuccessFeedbackRoleArnRef *v1.Reference `json:"firehoseSuccessFeedbackRoleArnRef,omitempty" tf:"-"`
+	FirehoseSuccessFeedbackRoleArnRef *v2.Reference `json:"firehoseSuccessFeedbackRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate firehoseSuccessFeedbackRoleArn.
 	// +kubebuilder:validation:Optional
-	FirehoseSuccessFeedbackRoleArnSelector *v1.Selector `json:"firehoseSuccessFeedbackRoleArnSelector,omitempty" tf:"-"`
+	FirehoseSuccessFeedbackRoleArnSelector *v2.Selector `json:"firehoseSuccessFeedbackRoleArnSelector,omitempty" tf:"-"`
 
 	// Percentage of success to sample
 	// +kubebuilder:validation:Optional
@@ -395,11 +395,11 @@ type TopicParameters struct {
 
 	// Reference to a Role in iam to populate httpFailureFeedbackRoleArn.
 	// +kubebuilder:validation:Optional
-	HTTPFailureFeedbackRoleArnRef *v1.Reference `json:"httpFailureFeedbackRoleArnRef,omitempty" tf:"-"`
+	HTTPFailureFeedbackRoleArnRef *v2.Reference `json:"httpFailureFeedbackRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate httpFailureFeedbackRoleArn.
 	// +kubebuilder:validation:Optional
-	HTTPFailureFeedbackRoleArnSelector *v1.Selector `json:"httpFailureFeedbackRoleArnSelector,omitempty" tf:"-"`
+	HTTPFailureFeedbackRoleArnSelector *v2.Selector `json:"httpFailureFeedbackRoleArnSelector,omitempty" tf:"-"`
 
 	// The IAM role permitted to receive success feedback for this topic
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
@@ -409,11 +409,11 @@ type TopicParameters struct {
 
 	// Reference to a Role in iam to populate httpSuccessFeedbackRoleArn.
 	// +kubebuilder:validation:Optional
-	HTTPSuccessFeedbackRoleArnRef *v1.Reference `json:"httpSuccessFeedbackRoleArnRef,omitempty" tf:"-"`
+	HTTPSuccessFeedbackRoleArnRef *v2.Reference `json:"httpSuccessFeedbackRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate httpSuccessFeedbackRoleArn.
 	// +kubebuilder:validation:Optional
-	HTTPSuccessFeedbackRoleArnSelector *v1.Selector `json:"httpSuccessFeedbackRoleArnSelector,omitempty" tf:"-"`
+	HTTPSuccessFeedbackRoleArnSelector *v2.Selector `json:"httpSuccessFeedbackRoleArnSelector,omitempty" tf:"-"`
 
 	// Percentage of success to sample
 	// +kubebuilder:validation:Optional
@@ -431,11 +431,11 @@ type TopicParameters struct {
 
 	// Reference to a Role in iam to populate lambdaFailureFeedbackRoleArn.
 	// +kubebuilder:validation:Optional
-	LambdaFailureFeedbackRoleArnRef *v1.Reference `json:"lambdaFailureFeedbackRoleArnRef,omitempty" tf:"-"`
+	LambdaFailureFeedbackRoleArnRef *v2.Reference `json:"lambdaFailureFeedbackRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate lambdaFailureFeedbackRoleArn.
 	// +kubebuilder:validation:Optional
-	LambdaFailureFeedbackRoleArnSelector *v1.Selector `json:"lambdaFailureFeedbackRoleArnSelector,omitempty" tf:"-"`
+	LambdaFailureFeedbackRoleArnSelector *v2.Selector `json:"lambdaFailureFeedbackRoleArnSelector,omitempty" tf:"-"`
 
 	// The IAM role permitted to receive success feedback for this topic
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
@@ -445,11 +445,11 @@ type TopicParameters struct {
 
 	// Reference to a Role in iam to populate lambdaSuccessFeedbackRoleArn.
 	// +kubebuilder:validation:Optional
-	LambdaSuccessFeedbackRoleArnRef *v1.Reference `json:"lambdaSuccessFeedbackRoleArnRef,omitempty" tf:"-"`
+	LambdaSuccessFeedbackRoleArnRef *v2.Reference `json:"lambdaSuccessFeedbackRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate lambdaSuccessFeedbackRoleArn.
 	// +kubebuilder:validation:Optional
-	LambdaSuccessFeedbackRoleArnSelector *v1.Selector `json:"lambdaSuccessFeedbackRoleArnSelector,omitempty" tf:"-"`
+	LambdaSuccessFeedbackRoleArnSelector *v2.Selector `json:"lambdaSuccessFeedbackRoleArnSelector,omitempty" tf:"-"`
 
 	// Percentage of success to sample
 	// +kubebuilder:validation:Optional
@@ -476,11 +476,11 @@ type TopicParameters struct {
 
 	// Reference to a Role in iam to populate sqsFailureFeedbackRoleArn.
 	// +kubebuilder:validation:Optional
-	SqsFailureFeedbackRoleArnRef *v1.Reference `json:"sqsFailureFeedbackRoleArnRef,omitempty" tf:"-"`
+	SqsFailureFeedbackRoleArnRef *v2.Reference `json:"sqsFailureFeedbackRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate sqsFailureFeedbackRoleArn.
 	// +kubebuilder:validation:Optional
-	SqsFailureFeedbackRoleArnSelector *v1.Selector `json:"sqsFailureFeedbackRoleArnSelector,omitempty" tf:"-"`
+	SqsFailureFeedbackRoleArnSelector *v2.Selector `json:"sqsFailureFeedbackRoleArnSelector,omitempty" tf:"-"`
 
 	// The IAM role permitted to receive success feedback for this topic
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
@@ -490,11 +490,11 @@ type TopicParameters struct {
 
 	// Reference to a Role in iam to populate sqsSuccessFeedbackRoleArn.
 	// +kubebuilder:validation:Optional
-	SqsSuccessFeedbackRoleArnRef *v1.Reference `json:"sqsSuccessFeedbackRoleArnRef,omitempty" tf:"-"`
+	SqsSuccessFeedbackRoleArnRef *v2.Reference `json:"sqsSuccessFeedbackRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate sqsSuccessFeedbackRoleArn.
 	// +kubebuilder:validation:Optional
-	SqsSuccessFeedbackRoleArnSelector *v1.Selector `json:"sqsSuccessFeedbackRoleArnSelector,omitempty" tf:"-"`
+	SqsSuccessFeedbackRoleArnSelector *v2.Selector `json:"sqsSuccessFeedbackRoleArnSelector,omitempty" tf:"-"`
 
 	// Percentage of success to sample
 	// +kubebuilder:validation:Optional
@@ -512,8 +512,8 @@ type TopicParameters struct {
 
 // TopicSpec defines the desired state of Topic
 type TopicSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     TopicParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   TopicParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -529,8 +529,8 @@ type TopicSpec struct {
 
 // TopicStatus defines the observed state of Topic.
 type TopicStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        TopicObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               TopicObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

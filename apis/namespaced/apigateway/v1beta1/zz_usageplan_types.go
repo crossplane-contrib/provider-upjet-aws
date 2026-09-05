@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type APIStagesInitParameters struct {
@@ -23,11 +22,11 @@ type APIStagesInitParameters struct {
 
 	// Reference to a RestAPI in apigateway to populate apiId.
 	// +kubebuilder:validation:Optional
-	APIIDRef *v1.NamespacedReference `json:"apiIdRef,omitempty" tf:"-"`
+	APIIDRef *v2.NamespacedReference `json:"apiIdRef,omitempty" tf:"-"`
 
 	// Selector for a RestAPI in apigateway to populate apiId.
 	// +kubebuilder:validation:Optional
-	APIIDSelector *v1.NamespacedSelector `json:"apiIdSelector,omitempty" tf:"-"`
+	APIIDSelector *v2.NamespacedSelector `json:"apiIdSelector,omitempty" tf:"-"`
 
 	// API stage name of the associated API stage in a usage plan.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/apigateway/v1beta1.Stage
@@ -36,11 +35,11 @@ type APIStagesInitParameters struct {
 
 	// Reference to a Stage in apigateway to populate stage.
 	// +kubebuilder:validation:Optional
-	StageRef *v1.NamespacedReference `json:"stageRef,omitempty" tf:"-"`
+	StageRef *v2.NamespacedReference `json:"stageRef,omitempty" tf:"-"`
 
 	// Selector for a Stage in apigateway to populate stage.
 	// +kubebuilder:validation:Optional
-	StageSelector *v1.NamespacedSelector `json:"stageSelector,omitempty" tf:"-"`
+	StageSelector *v2.NamespacedSelector `json:"stageSelector,omitempty" tf:"-"`
 
 	// The throttling limits of the usage plan.
 	Throttle []ThrottleInitParameters `json:"throttle,omitempty" tf:"throttle,omitempty"`
@@ -68,11 +67,11 @@ type APIStagesParameters struct {
 
 	// Reference to a RestAPI in apigateway to populate apiId.
 	// +kubebuilder:validation:Optional
-	APIIDRef *v1.NamespacedReference `json:"apiIdRef,omitempty" tf:"-"`
+	APIIDRef *v2.NamespacedReference `json:"apiIdRef,omitempty" tf:"-"`
 
 	// Selector for a RestAPI in apigateway to populate apiId.
 	// +kubebuilder:validation:Optional
-	APIIDSelector *v1.NamespacedSelector `json:"apiIdSelector,omitempty" tf:"-"`
+	APIIDSelector *v2.NamespacedSelector `json:"apiIdSelector,omitempty" tf:"-"`
 
 	// API stage name of the associated API stage in a usage plan.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/apigateway/v1beta1.Stage
@@ -82,11 +81,11 @@ type APIStagesParameters struct {
 
 	// Reference to a Stage in apigateway to populate stage.
 	// +kubebuilder:validation:Optional
-	StageRef *v1.NamespacedReference `json:"stageRef,omitempty" tf:"-"`
+	StageRef *v2.NamespacedReference `json:"stageRef,omitempty" tf:"-"`
 
 	// Selector for a Stage in apigateway to populate stage.
 	// +kubebuilder:validation:Optional
-	StageSelector *v1.NamespacedSelector `json:"stageSelector,omitempty" tf:"-"`
+	StageSelector *v2.NamespacedSelector `json:"stageSelector,omitempty" tf:"-"`
 
 	// The throttling limits of the usage plan.
 	// +kubebuilder:validation:Optional
@@ -320,8 +319,8 @@ type UsagePlanSpec struct {
 
 // UsagePlanStatus defines the observed state of UsagePlan.
 type UsagePlanStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        UsagePlanObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               UsagePlanObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

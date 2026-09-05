@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type PreProvisioningHookInitParameters struct {
@@ -61,11 +60,11 @@ type ProvisioningTemplateInitParameters struct {
 
 	// Reference to a Role in iam to populate provisioningRoleArn.
 	// +kubebuilder:validation:Optional
-	ProvisioningRoleArnRef *v1.NamespacedReference `json:"provisioningRoleArnRef,omitempty" tf:"-"`
+	ProvisioningRoleArnRef *v2.NamespacedReference `json:"provisioningRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate provisioningRoleArn.
 	// +kubebuilder:validation:Optional
-	ProvisioningRoleArnSelector *v1.NamespacedSelector `json:"provisioningRoleArnSelector,omitempty" tf:"-"`
+	ProvisioningRoleArnSelector *v2.NamespacedSelector `json:"provisioningRoleArnSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -141,11 +140,11 @@ type ProvisioningTemplateParameters struct {
 
 	// Reference to a Role in iam to populate provisioningRoleArn.
 	// +kubebuilder:validation:Optional
-	ProvisioningRoleArnRef *v1.NamespacedReference `json:"provisioningRoleArnRef,omitempty" tf:"-"`
+	ProvisioningRoleArnRef *v2.NamespacedReference `json:"provisioningRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate provisioningRoleArn.
 	// +kubebuilder:validation:Optional
-	ProvisioningRoleArnSelector *v1.NamespacedSelector `json:"provisioningRoleArnSelector,omitempty" tf:"-"`
+	ProvisioningRoleArnSelector *v2.NamespacedSelector `json:"provisioningRoleArnSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -185,8 +184,8 @@ type ProvisioningTemplateSpec struct {
 
 // ProvisioningTemplateStatus defines the observed state of ProvisioningTemplate.
 type ProvisioningTemplateStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ProvisioningTemplateObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ProvisioningTemplateObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -387,6 +387,9 @@ spec:
                         networkInterfaceId:
                           description: Identifier of an EC2 network interface.
                           type: string
+                        odbNetworkArn:
+                          description: The Amazon Resource Name (ARN) of an ODB network.
+                          type: string
                         transitGatewayId:
                           description: Identifier of an EC2 Transit Gateway.
                           type: string
@@ -464,6 +467,13 @@ spec:
                 x-kubernetes-list-map-keys:
                 - type
                 x-kubernetes-list-type: map
+              lastHandledReconcileAt:
+                description: |-
+                  LastHandledReconcileAt holds the value of the most recent
+                  reconcile-requested-at annotation token that the controller has
+                  processed. Users can compare this to the annotation to determine
+                  whether a reconcile request has been handled.
+                type: string
               observedGeneration:
                 description: |-
                   ObservedGeneration is the latest metadata.generation

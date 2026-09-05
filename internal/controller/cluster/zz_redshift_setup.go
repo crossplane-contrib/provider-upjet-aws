@@ -73,3 +73,27 @@ func SetupGated_redshift(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupWebhookWithManager_redshift registers conversion webhooks for all resource kinds in the group.
+func SetupWebhookWithManager_redshift(mgr ctrl.Manager) error {
+	for _, setup := range []func(ctrl.Manager) error{
+		authenticationprofile.SetupWebhookWithManager,
+		cluster.SetupWebhookWithManager,
+		endpointaccess.SetupWebhookWithManager,
+		eventsubscription.SetupWebhookWithManager,
+		hsmclientcertificate.SetupWebhookWithManager,
+		hsmconfiguration.SetupWebhookWithManager,
+		parametergroup.SetupWebhookWithManager,
+		scheduledaction.SetupWebhookWithManager,
+		snapshotcopygrant.SetupWebhookWithManager,
+		snapshotschedule.SetupWebhookWithManager,
+		snapshotscheduleassociation.SetupWebhookWithManager,
+		subnetgroup.SetupWebhookWithManager,
+		usagelimit.SetupWebhookWithManager,
+	} {
+		if err := setup(mgr); err != nil {
+			return err
+		}
+	}
+	return nil
+}

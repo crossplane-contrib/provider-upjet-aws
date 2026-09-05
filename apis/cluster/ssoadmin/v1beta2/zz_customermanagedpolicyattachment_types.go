@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CustomerManagedPolicyAttachmentInitParameters struct {
@@ -56,11 +56,11 @@ type CustomerManagedPolicyAttachmentParameters struct {
 
 	// Reference to a PermissionSet in ssoadmin to populate permissionSetArn.
 	// +kubebuilder:validation:Optional
-	PermissionSetArnRef *v1.Reference `json:"permissionSetArnRef,omitempty" tf:"-"`
+	PermissionSetArnRef *v2.Reference `json:"permissionSetArnRef,omitempty" tf:"-"`
 
 	// Selector for a PermissionSet in ssoadmin to populate permissionSetArn.
 	// +kubebuilder:validation:Optional
-	PermissionSetArnSelector *v1.Selector `json:"permissionSetArnSelector,omitempty" tf:"-"`
+	PermissionSetArnSelector *v2.Selector `json:"permissionSetArnSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -81,11 +81,11 @@ type CustomerManagedPolicyReferenceInitParameters struct {
 
 	// Reference to a Policy in iam to populate name.
 	// +kubebuilder:validation:Optional
-	PolicyNameRef *v1.Reference `json:"policyNameRef,omitempty" tf:"-"`
+	PolicyNameRef *v2.Reference `json:"policyNameRef,omitempty" tf:"-"`
 
 	// Selector for a Policy in iam to populate name.
 	// +kubebuilder:validation:Optional
-	PolicyNameSelector *v1.Selector `json:"policyNameSelector,omitempty" tf:"-"`
+	PolicyNameSelector *v2.Selector `json:"policyNameSelector,omitempty" tf:"-"`
 }
 
 type CustomerManagedPolicyReferenceObservation struct {
@@ -112,17 +112,17 @@ type CustomerManagedPolicyReferenceParameters struct {
 
 	// Reference to a Policy in iam to populate name.
 	// +kubebuilder:validation:Optional
-	PolicyNameRef *v1.Reference `json:"policyNameRef,omitempty" tf:"-"`
+	PolicyNameRef *v2.Reference `json:"policyNameRef,omitempty" tf:"-"`
 
 	// Selector for a Policy in iam to populate name.
 	// +kubebuilder:validation:Optional
-	PolicyNameSelector *v1.Selector `json:"policyNameSelector,omitempty" tf:"-"`
+	PolicyNameSelector *v2.Selector `json:"policyNameSelector,omitempty" tf:"-"`
 }
 
 // CustomerManagedPolicyAttachmentSpec defines the desired state of CustomerManagedPolicyAttachment
 type CustomerManagedPolicyAttachmentSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     CustomerManagedPolicyAttachmentParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   CustomerManagedPolicyAttachmentParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -138,8 +138,8 @@ type CustomerManagedPolicyAttachmentSpec struct {
 
 // CustomerManagedPolicyAttachmentStatus defines the observed state of CustomerManagedPolicyAttachment.
 type CustomerManagedPolicyAttachmentStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        CustomerManagedPolicyAttachmentObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               CustomerManagedPolicyAttachmentObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type MlflowTrackingServerInitParameters struct {
@@ -18,7 +18,7 @@ type MlflowTrackingServerInitParameters struct {
 	// The S3 URI for a general purpose bucket to use as the MLflow Tracking Server artifact store.
 	ArtifactStoreURI *string `json:"artifactStoreUri,omitempty" tf:"artifact_store_uri,omitempty"`
 
-	// A list of Member Definitions that contains objects that identify the workers that make up the work team.
+	// Whether to enable or disable automatic registration of new MLflow models to the SageMaker Model Registry. Defaults to false.
 	AutomaticModelRegistration *bool `json:"automaticModelRegistration,omitempty" tf:"automatic_model_registration,omitempty"`
 
 	// The version of MLflow that the tracking server uses. To see which MLflow versions are available to use, see How it works.
@@ -31,11 +31,11 @@ type MlflowTrackingServerInitParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.Reference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -56,7 +56,7 @@ type MlflowTrackingServerObservation struct {
 	// The S3 URI for a general purpose bucket to use as the MLflow Tracking Server artifact store.
 	ArtifactStoreURI *string `json:"artifactStoreUri,omitempty" tf:"artifact_store_uri,omitempty"`
 
-	// A list of Member Definitions that contains objects that identify the workers that make up the work team.
+	// Whether to enable or disable automatic registration of new MLflow models to the SageMaker Model Registry. Defaults to false.
 	AutomaticModelRegistration *bool `json:"automaticModelRegistration,omitempty" tf:"automatic_model_registration,omitempty"`
 
 	// The name of the MLFlow Tracking Server.
@@ -96,7 +96,7 @@ type MlflowTrackingServerParameters struct {
 	// +kubebuilder:validation:Optional
 	ArtifactStoreURI *string `json:"artifactStoreUri,omitempty" tf:"artifact_store_uri,omitempty"`
 
-	// A list of Member Definitions that contains objects that identify the workers that make up the work team.
+	// Whether to enable or disable automatic registration of new MLflow models to the SageMaker Model Registry. Defaults to false.
 	// +kubebuilder:validation:Optional
 	AutomaticModelRegistration *bool `json:"automaticModelRegistration,omitempty" tf:"automatic_model_registration,omitempty"`
 
@@ -117,11 +117,11 @@ type MlflowTrackingServerParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.Reference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -139,8 +139,8 @@ type MlflowTrackingServerParameters struct {
 
 // MlflowTrackingServerSpec defines the desired state of MlflowTrackingServer
 type MlflowTrackingServerSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     MlflowTrackingServerParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   MlflowTrackingServerParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -156,8 +156,8 @@ type MlflowTrackingServerSpec struct {
 
 // MlflowTrackingServerStatus defines the observed state of MlflowTrackingServer.
 type MlflowTrackingServerStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        MlflowTrackingServerObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               MlflowTrackingServerObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

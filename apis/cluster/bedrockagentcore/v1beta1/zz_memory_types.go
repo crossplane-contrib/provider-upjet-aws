@@ -10,10 +10,117 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
-type MemoryInitParameters struct {
+type ContentConfigurationInitParameters struct {
+
+	// Level of detail for streamed content. Valid values are METADATA_ONLY and FULL_CONTENT. Defaults to METADATA_ONLY.
+	Level *string `json:"level,omitempty" tf:"level,omitempty"`
+
+	// Type of content to stream. Valid value is MEMORY_RECORDS.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type ContentConfigurationObservation struct {
+
+	// Level of detail for streamed content. Valid values are METADATA_ONLY and FULL_CONTENT. Defaults to METADATA_ONLY.
+	Level *string `json:"level,omitempty" tf:"level,omitempty"`
+
+	// Type of content to stream. Valid value is MEMORY_RECORDS.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type ContentConfigurationParameters struct {
+
+	// Level of detail for streamed content. Valid values are METADATA_ONLY and FULL_CONTENT. Defaults to METADATA_ONLY.
+	// +kubebuilder:validation:Optional
+	Level *string `json:"level,omitempty" tf:"level,omitempty"`
+
+	// Type of content to stream. Valid value is MEMORY_RECORDS.
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type" tf:"type,omitempty"`
+}
+
+type IndexedKeyInitParameters struct {
+
+	// Metadata key name to index.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Data type of the indexed key. Valid values are STRING, STRINGLIST, and NUMBER.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type IndexedKeyObservation struct {
+
+	// Metadata key name to index.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Data type of the indexed key. Valid values are STRING, STRINGLIST, and NUMBER.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type IndexedKeyParameters struct {
+
+	// Metadata key name to index.
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key" tf:"key,omitempty"`
+
+	// Data type of the indexed key. Valid values are STRING, STRINGLIST, and NUMBER.
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type" tf:"type,omitempty"`
+}
+
+type KinesisInitParameters struct {
+
+	// Content configurations for stream delivery. See content_configuration below.
+	ContentConfiguration *ContentConfigurationInitParameters `json:"contentConfiguration,omitempty" tf:"content_configuration,omitempty"`
+
+	// ARN of the Kinesis Data Stream.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kinesis/v1beta2.Stream
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
+	DataStreamArn *string `json:"dataStreamArn,omitempty" tf:"data_stream_arn,omitempty"`
+
+	// Reference to a Stream in kinesis to populate dataStreamArn.
+	// +kubebuilder:validation:Optional
+	DataStreamArnRef *v2.Reference `json:"dataStreamArnRef,omitempty" tf:"-"`
+
+	// Selector for a Stream in kinesis to populate dataStreamArn.
+	// +kubebuilder:validation:Optional
+	DataStreamArnSelector *v2.Selector `json:"dataStreamArnSelector,omitempty" tf:"-"`
+}
+
+type KinesisObservation struct {
+
+	// Content configurations for stream delivery. See content_configuration below.
+	ContentConfiguration *ContentConfigurationObservation `json:"contentConfiguration,omitempty" tf:"content_configuration,omitempty"`
+
+	// ARN of the Kinesis Data Stream.
+	DataStreamArn *string `json:"dataStreamArn,omitempty" tf:"data_stream_arn,omitempty"`
+}
+
+type KinesisParameters struct {
+
+	// Content configurations for stream delivery. See content_configuration below.
+	// +kubebuilder:validation:Optional
+	ContentConfiguration *ContentConfigurationParameters `json:"contentConfiguration,omitempty" tf:"content_configuration,omitempty"`
+
+	// ARN of the Kinesis Data Stream.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kinesis/v1beta2.Stream
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
+	// +kubebuilder:validation:Optional
+	DataStreamArn *string `json:"dataStreamArn,omitempty" tf:"data_stream_arn,omitempty"`
+
+	// Reference to a Stream in kinesis to populate dataStreamArn.
+	// +kubebuilder:validation:Optional
+	DataStreamArnRef *v2.Reference `json:"dataStreamArnRef,omitempty" tf:"-"`
+
+	// Selector for a Stream in kinesis to populate dataStreamArn.
+	// +kubebuilder:validation:Optional
+	DataStreamArnSelector *v2.Selector `json:"dataStreamArnSelector,omitempty" tf:"-"`
+}
+
+type MemoryInitParameters_2 struct {
 
 	// Description of the memory.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
@@ -25,14 +132,17 @@ type MemoryInitParameters struct {
 
 	// Reference to a Key in kms to populate encryptionKeyArn.
 	// +kubebuilder:validation:Optional
-	EncryptionKeyArnRef *v1.Reference `json:"encryptionKeyArnRef,omitempty" tf:"-"`
+	EncryptionKeyArnRef *v2.Reference `json:"encryptionKeyArnRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate encryptionKeyArn.
 	// +kubebuilder:validation:Optional
-	EncryptionKeyArnSelector *v1.Selector `json:"encryptionKeyArnSelector,omitempty" tf:"-"`
+	EncryptionKeyArnSelector *v2.Selector `json:"encryptionKeyArnSelector,omitempty" tf:"-"`
 
 	// Number of days after which memory events expire. Must be a positive integer in the range of 7 to 365.
 	EventExpiryDuration *float64 `json:"eventExpiryDuration,omitempty" tf:"event_expiry_duration,omitempty"`
+
+	// Metadata keys to index for filtering. Up to 10 entries. Changing this forces a new resource to be created. See indexed_key below.
+	IndexedKey []IndexedKeyInitParameters `json:"indexedKey,omitempty" tf:"indexed_key,omitempty"`
 
 	// ARN of the IAM role that the memory service assumes to perform operations. Required when using custom memory strategies with model processing.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
@@ -41,21 +151,24 @@ type MemoryInitParameters struct {
 
 	// Reference to a Role in iam to populate memoryExecutionRoleArn.
 	// +kubebuilder:validation:Optional
-	MemoryExecutionRoleArnRef *v1.Reference `json:"memoryExecutionRoleArnRef,omitempty" tf:"-"`
+	MemoryExecutionRoleArnRef *v2.Reference `json:"memoryExecutionRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate memoryExecutionRoleArn.
 	// +kubebuilder:validation:Optional
-	MemoryExecutionRoleArnSelector *v1.Selector `json:"memoryExecutionRoleArnSelector,omitempty" tf:"-"`
+	MemoryExecutionRoleArnSelector *v2.Selector `json:"memoryExecutionRoleArnSelector,omitempty" tf:"-"`
 
 	// Name of the memory.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Configuration for streaming memory record data to external resources. See stream_delivery_resources below.
+	StreamDeliveryResources *StreamDeliveryResourcesInitParameters `json:"streamDeliveryResources,omitempty" tf:"stream_delivery_resources,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
-type MemoryObservation struct {
+type MemoryObservation_2 struct {
 
 	// ARN of the Memory.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
@@ -72,6 +185,9 @@ type MemoryObservation struct {
 	// Unique identifier of the Memory.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Metadata keys to index for filtering. Up to 10 entries. Changing this forces a new resource to be created. See indexed_key below.
+	IndexedKey []IndexedKeyObservation `json:"indexedKey,omitempty" tf:"indexed_key,omitempty"`
+
 	// ARN of the IAM role that the memory service assumes to perform operations. Required when using custom memory strategies with model processing.
 	MemoryExecutionRoleArn *string `json:"memoryExecutionRoleArn,omitempty" tf:"memory_execution_role_arn,omitempty"`
 
@@ -82,6 +198,9 @@ type MemoryObservation struct {
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
+	// Configuration for streaming memory record data to external resources. See stream_delivery_resources below.
+	StreamDeliveryResources *StreamDeliveryResourcesObservation `json:"streamDeliveryResources,omitempty" tf:"stream_delivery_resources,omitempty"`
+
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -91,7 +210,7 @@ type MemoryObservation struct {
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
-type MemoryParameters struct {
+type MemoryParameters_2 struct {
 
 	// Description of the memory.
 	// +kubebuilder:validation:Optional
@@ -105,15 +224,19 @@ type MemoryParameters struct {
 
 	// Reference to a Key in kms to populate encryptionKeyArn.
 	// +kubebuilder:validation:Optional
-	EncryptionKeyArnRef *v1.Reference `json:"encryptionKeyArnRef,omitempty" tf:"-"`
+	EncryptionKeyArnRef *v2.Reference `json:"encryptionKeyArnRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate encryptionKeyArn.
 	// +kubebuilder:validation:Optional
-	EncryptionKeyArnSelector *v1.Selector `json:"encryptionKeyArnSelector,omitempty" tf:"-"`
+	EncryptionKeyArnSelector *v2.Selector `json:"encryptionKeyArnSelector,omitempty" tf:"-"`
 
 	// Number of days after which memory events expire. Must be a positive integer in the range of 7 to 365.
 	// +kubebuilder:validation:Optional
 	EventExpiryDuration *float64 `json:"eventExpiryDuration,omitempty" tf:"event_expiry_duration,omitempty"`
+
+	// Metadata keys to index for filtering. Up to 10 entries. Changing this forces a new resource to be created. See indexed_key below.
+	// +kubebuilder:validation:Optional
+	IndexedKey []IndexedKeyParameters `json:"indexedKey,omitempty" tf:"indexed_key,omitempty"`
 
 	// ARN of the IAM role that the memory service assumes to perform operations. Required when using custom memory strategies with model processing.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
@@ -123,11 +246,11 @@ type MemoryParameters struct {
 
 	// Reference to a Role in iam to populate memoryExecutionRoleArn.
 	// +kubebuilder:validation:Optional
-	MemoryExecutionRoleArnRef *v1.Reference `json:"memoryExecutionRoleArnRef,omitempty" tf:"-"`
+	MemoryExecutionRoleArnRef *v2.Reference `json:"memoryExecutionRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate memoryExecutionRoleArn.
 	// +kubebuilder:validation:Optional
-	MemoryExecutionRoleArnSelector *v1.Selector `json:"memoryExecutionRoleArnSelector,omitempty" tf:"-"`
+	MemoryExecutionRoleArnSelector *v2.Selector `json:"memoryExecutionRoleArnSelector,omitempty" tf:"-"`
 
 	// Name of the memory.
 	// +kubebuilder:validation:Optional
@@ -138,16 +261,58 @@ type MemoryParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
+	// Configuration for streaming memory record data to external resources. See stream_delivery_resources below.
+	// +kubebuilder:validation:Optional
+	StreamDeliveryResources *StreamDeliveryResourcesParameters `json:"streamDeliveryResources,omitempty" tf:"stream_delivery_resources,omitempty"`
+
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
+type ResourceInitParameters struct {
+
+	// Kinesis Data Stream configuration. See kinesis below.
+	Kinesis *KinesisInitParameters `json:"kinesis,omitempty" tf:"kinesis,omitempty"`
+}
+
+type ResourceObservation struct {
+
+	// Kinesis Data Stream configuration. See kinesis below.
+	Kinesis *KinesisObservation `json:"kinesis,omitempty" tf:"kinesis,omitempty"`
+}
+
+type ResourceParameters struct {
+
+	// Kinesis Data Stream configuration. See kinesis below.
+	// +kubebuilder:validation:Optional
+	Kinesis *KinesisParameters `json:"kinesis,omitempty" tf:"kinesis,omitempty"`
+}
+
+type StreamDeliveryResourcesInitParameters struct {
+
+	// List of stream delivery resource configurations. See resource below.
+	Resource *ResourceInitParameters `json:"resource,omitempty" tf:"resource,omitempty"`
+}
+
+type StreamDeliveryResourcesObservation struct {
+
+	// List of stream delivery resource configurations. See resource below.
+	Resource *ResourceObservation `json:"resource,omitempty" tf:"resource,omitempty"`
+}
+
+type StreamDeliveryResourcesParameters struct {
+
+	// List of stream delivery resource configurations. See resource below.
+	// +kubebuilder:validation:Optional
+	Resource *ResourceParameters `json:"resource,omitempty" tf:"resource,omitempty"`
+}
+
 // MemorySpec defines the desired state of Memory
 type MemorySpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     MemoryParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   MemoryParameters_2 `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -158,13 +323,13 @@ type MemorySpec struct {
 	// required on creation, but we do not desire to update them after creation,
 	// for example because of an external controller is managing them, like an
 	// autoscaler.
-	InitProvider MemoryInitParameters `json:"initProvider,omitempty"`
+	InitProvider MemoryInitParameters_2 `json:"initProvider,omitempty"`
 }
 
 // MemoryStatus defines the observed state of Memory.
 type MemoryStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        MemoryObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               MemoryObservation_2 `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

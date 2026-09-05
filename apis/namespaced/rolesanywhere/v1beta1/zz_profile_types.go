@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ProfileInitParameters struct {
@@ -43,11 +42,11 @@ type ProfileInitParameters struct {
 
 	// References to Role in iam to populate roleArns.
 	// +kubebuilder:validation:Optional
-	RoleArnsRefs []v1.NamespacedReference `json:"roleArnsRefs,omitempty" tf:"-"`
+	RoleArnsRefs []v2.NamespacedReference `json:"roleArnsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Role in iam to populate roleArns.
 	// +kubebuilder:validation:Optional
-	RoleArnsSelector *v1.NamespacedSelector `json:"roleArnsSelector,omitempty" tf:"-"`
+	RoleArnsSelector *v2.NamespacedSelector `json:"roleArnsSelector,omitempty" tf:"-"`
 
 	// A session policy that applies to the trust boundary of the vended session credentials.
 	SessionPolicy *string `json:"sessionPolicy,omitempty" tf:"session_policy,omitempty"`
@@ -136,11 +135,11 @@ type ProfileParameters struct {
 
 	// References to Role in iam to populate roleArns.
 	// +kubebuilder:validation:Optional
-	RoleArnsRefs []v1.NamespacedReference `json:"roleArnsRefs,omitempty" tf:"-"`
+	RoleArnsRefs []v2.NamespacedReference `json:"roleArnsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Role in iam to populate roleArns.
 	// +kubebuilder:validation:Optional
-	RoleArnsSelector *v1.NamespacedSelector `json:"roleArnsSelector,omitempty" tf:"-"`
+	RoleArnsSelector *v2.NamespacedSelector `json:"roleArnsSelector,omitempty" tf:"-"`
 
 	// A session policy that applies to the trust boundary of the vended session credentials.
 	// +kubebuilder:validation:Optional
@@ -171,8 +170,8 @@ type ProfileSpec struct {
 
 // ProfileStatus defines the observed state of Profile.
 type ProfileStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ProfileObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ProfileObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

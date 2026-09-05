@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CriterionInitParameters struct {
@@ -22,16 +21,16 @@ type CriterionInitParameters struct {
 	// The name of the field to be evaluated. The full list of field names can be found in AWS documentation.
 	Field *string `json:"field,omitempty" tf:"field,omitempty"`
 
-	// A value to be evaluated. Accepts either an integer or a date in RFC 3339 format.
+	// A value to be evaluated. Accepts either an integer given as a string (i.e., enclosed in quotations) or a date in RFC 3339 format.
 	GreaterThan *string `json:"greaterThan,omitempty" tf:"greater_than,omitempty"`
 
-	// A value to be evaluated. Accepts either an integer or a date in RFC 3339 format.
+	// A value to be evaluated. Accepts either an integer given as a string (i.e., enclosed in quotations) or a date in RFC 3339 format.
 	GreaterThanOrEqual *string `json:"greaterThanOrEqual,omitempty" tf:"greater_than_or_equal,omitempty"`
 
-	// A value to be evaluated. Accepts either an integer or a date in RFC 3339 format.
+	// A value to be evaluated. Accepts either an integer given as a string (i.e., enclosed in quotations) or a date in RFC 3339 format.
 	LessThan *string `json:"lessThan,omitempty" tf:"less_than,omitempty"`
 
-	// A value to be evaluated. Accepts either an integer or a date in RFC 3339 format.
+	// A value to be evaluated. Accepts either an integer given as a string (i.e., enclosed in quotations) or a date in RFC 3339 format.
 	LessThanOrEqual *string `json:"lessThanOrEqual,omitempty" tf:"less_than_or_equal,omitempty"`
 
 	// List of string values to be evaluated as matching conditions.
@@ -52,16 +51,16 @@ type CriterionObservation struct {
 	// The name of the field to be evaluated. The full list of field names can be found in AWS documentation.
 	Field *string `json:"field,omitempty" tf:"field,omitempty"`
 
-	// A value to be evaluated. Accepts either an integer or a date in RFC 3339 format.
+	// A value to be evaluated. Accepts either an integer given as a string (i.e., enclosed in quotations) or a date in RFC 3339 format.
 	GreaterThan *string `json:"greaterThan,omitempty" tf:"greater_than,omitempty"`
 
-	// A value to be evaluated. Accepts either an integer or a date in RFC 3339 format.
+	// A value to be evaluated. Accepts either an integer given as a string (i.e., enclosed in quotations) or a date in RFC 3339 format.
 	GreaterThanOrEqual *string `json:"greaterThanOrEqual,omitempty" tf:"greater_than_or_equal,omitempty"`
 
-	// A value to be evaluated. Accepts either an integer or a date in RFC 3339 format.
+	// A value to be evaluated. Accepts either an integer given as a string (i.e., enclosed in quotations) or a date in RFC 3339 format.
 	LessThan *string `json:"lessThan,omitempty" tf:"less_than,omitempty"`
 
-	// A value to be evaluated. Accepts either an integer or a date in RFC 3339 format.
+	// A value to be evaluated. Accepts either an integer given as a string (i.e., enclosed in quotations) or a date in RFC 3339 format.
 	LessThanOrEqual *string `json:"lessThanOrEqual,omitempty" tf:"less_than_or_equal,omitempty"`
 
 	// List of string values to be evaluated as matching conditions.
@@ -84,19 +83,19 @@ type CriterionParameters struct {
 	// +kubebuilder:validation:Optional
 	Field *string `json:"field" tf:"field,omitempty"`
 
-	// A value to be evaluated. Accepts either an integer or a date in RFC 3339 format.
+	// A value to be evaluated. Accepts either an integer given as a string (i.e., enclosed in quotations) or a date in RFC 3339 format.
 	// +kubebuilder:validation:Optional
 	GreaterThan *string `json:"greaterThan,omitempty" tf:"greater_than,omitempty"`
 
-	// A value to be evaluated. Accepts either an integer or a date in RFC 3339 format.
+	// A value to be evaluated. Accepts either an integer given as a string (i.e., enclosed in quotations) or a date in RFC 3339 format.
 	// +kubebuilder:validation:Optional
 	GreaterThanOrEqual *string `json:"greaterThanOrEqual,omitempty" tf:"greater_than_or_equal,omitempty"`
 
-	// A value to be evaluated. Accepts either an integer or a date in RFC 3339 format.
+	// A value to be evaluated. Accepts either an integer given as a string (i.e., enclosed in quotations) or a date in RFC 3339 format.
 	// +kubebuilder:validation:Optional
 	LessThan *string `json:"lessThan,omitempty" tf:"less_than,omitempty"`
 
-	// A value to be evaluated. Accepts either an integer or a date in RFC 3339 format.
+	// A value to be evaluated. Accepts either an integer given as a string (i.e., enclosed in quotations) or a date in RFC 3339 format.
 	// +kubebuilder:validation:Optional
 	LessThanOrEqual *string `json:"lessThanOrEqual,omitempty" tf:"less_than_or_equal,omitempty"`
 
@@ -185,11 +184,11 @@ type FilterParameters struct {
 
 	// Reference to a Detector in guardduty to populate detectorId.
 	// +kubebuilder:validation:Optional
-	DetectorIDRef *v1.NamespacedReference `json:"detectorIdRef,omitempty" tf:"-"`
+	DetectorIDRef *v2.NamespacedReference `json:"detectorIdRef,omitempty" tf:"-"`
 
 	// Selector for a Detector in guardduty to populate detectorId.
 	// +kubebuilder:validation:Optional
-	DetectorIDSelector *v1.NamespacedSelector `json:"detectorIdSelector,omitempty" tf:"-"`
+	DetectorIDSelector *v2.NamespacedSelector `json:"detectorIdSelector,omitempty" tf:"-"`
 
 	// Represents the criteria to be used in the filter for querying findings. Contains one or more criterion blocks, documented below.
 	// +kubebuilder:validation:Optional
@@ -243,8 +242,8 @@ type FilterSpec struct {
 
 // FilterStatus defines the observed state of Filter.
 type FilterStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        FilterObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               FilterObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

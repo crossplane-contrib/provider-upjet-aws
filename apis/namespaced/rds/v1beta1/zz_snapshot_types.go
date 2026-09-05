@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type SnapshotInitParameters struct {
@@ -23,11 +22,11 @@ type SnapshotInitParameters struct {
 
 	// Reference to a Instance in rds to populate dbInstanceIdentifier.
 	// +kubebuilder:validation:Optional
-	DBInstanceIdentifierRef *v1.NamespacedReference `json:"dbInstanceIdentifierRef,omitempty" tf:"-"`
+	DBInstanceIdentifierRef *v2.NamespacedReference `json:"dbInstanceIdentifierRef,omitempty" tf:"-"`
 
 	// Selector for a Instance in rds to populate dbInstanceIdentifier.
 	// +kubebuilder:validation:Optional
-	DBInstanceIdentifierSelector *v1.NamespacedSelector `json:"dbInstanceIdentifierSelector,omitempty" tf:"-"`
+	DBInstanceIdentifierSelector *v2.NamespacedSelector `json:"dbInstanceIdentifierSelector,omitempty" tf:"-"`
 
 	// List of AWS Account IDs to share the snapshot with. Use all to make the snapshot public.
 	// +listType=set
@@ -121,11 +120,11 @@ type SnapshotParameters struct {
 
 	// Reference to a Instance in rds to populate dbInstanceIdentifier.
 	// +kubebuilder:validation:Optional
-	DBInstanceIdentifierRef *v1.NamespacedReference `json:"dbInstanceIdentifierRef,omitempty" tf:"-"`
+	DBInstanceIdentifierRef *v2.NamespacedReference `json:"dbInstanceIdentifierRef,omitempty" tf:"-"`
 
 	// Selector for a Instance in rds to populate dbInstanceIdentifier.
 	// +kubebuilder:validation:Optional
-	DBInstanceIdentifierSelector *v1.NamespacedSelector `json:"dbInstanceIdentifierSelector,omitempty" tf:"-"`
+	DBInstanceIdentifierSelector *v2.NamespacedSelector `json:"dbInstanceIdentifierSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -162,8 +161,8 @@ type SnapshotSpec struct {
 
 // SnapshotStatus defines the observed state of Snapshot.
 type SnapshotStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SnapshotObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SnapshotObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

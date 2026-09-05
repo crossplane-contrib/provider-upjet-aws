@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type RuleGroupNamespaceInitParameters struct {
@@ -72,17 +72,17 @@ type RuleGroupNamespaceParameters struct {
 
 	// Reference to a Workspace in amp to populate workspaceId.
 	// +kubebuilder:validation:Optional
-	WorkspaceIDRef *v1.Reference `json:"workspaceIdRef,omitempty" tf:"-"`
+	WorkspaceIDRef *v2.Reference `json:"workspaceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Workspace in amp to populate workspaceId.
 	// +kubebuilder:validation:Optional
-	WorkspaceIDSelector *v1.Selector `json:"workspaceIdSelector,omitempty" tf:"-"`
+	WorkspaceIDSelector *v2.Selector `json:"workspaceIdSelector,omitempty" tf:"-"`
 }
 
 // RuleGroupNamespaceSpec defines the desired state of RuleGroupNamespace
 type RuleGroupNamespaceSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     RuleGroupNamespaceParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   RuleGroupNamespaceParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -98,8 +98,8 @@ type RuleGroupNamespaceSpec struct {
 
 // RuleGroupNamespaceStatus defines the observed state of RuleGroupNamespace.
 type RuleGroupNamespaceStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        RuleGroupNamespaceObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               RuleGroupNamespaceObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

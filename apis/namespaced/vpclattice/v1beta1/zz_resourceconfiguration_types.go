@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ArnResourceInitParameters struct {
@@ -23,11 +22,11 @@ type ArnResourceInitParameters struct {
 
 	// Reference to a ClusterInstance in rds to populate arn.
 	// +kubebuilder:validation:Optional
-	ArnRef *v1.NamespacedReference `json:"arnRef,omitempty" tf:"-"`
+	ArnRef *v2.NamespacedReference `json:"arnRef,omitempty" tf:"-"`
 
 	// Selector for a ClusterInstance in rds to populate arn.
 	// +kubebuilder:validation:Optional
-	ArnSelector *v1.NamespacedSelector `json:"arnSelector,omitempty" tf:"-"`
+	ArnSelector *v2.NamespacedSelector `json:"arnSelector,omitempty" tf:"-"`
 }
 
 type ArnResourceObservation struct {
@@ -46,11 +45,11 @@ type ArnResourceParameters struct {
 
 	// Reference to a ClusterInstance in rds to populate arn.
 	// +kubebuilder:validation:Optional
-	ArnRef *v1.NamespacedReference `json:"arnRef,omitempty" tf:"-"`
+	ArnRef *v2.NamespacedReference `json:"arnRef,omitempty" tf:"-"`
 
 	// Selector for a ClusterInstance in rds to populate arn.
 	// +kubebuilder:validation:Optional
-	ArnSelector *v1.NamespacedSelector `json:"arnSelector,omitempty" tf:"-"`
+	ArnSelector *v2.NamespacedSelector `json:"arnSelector,omitempty" tf:"-"`
 }
 
 type DNSResourceInitParameters struct {
@@ -174,11 +173,11 @@ type ResourceConfigurationInitParameters struct {
 
 	// Reference to a ResourceGateway in vpclattice to populate resourceGatewayIdentifier.
 	// +kubebuilder:validation:Optional
-	ResourceGatewayIdentifierRef *v1.NamespacedReference `json:"resourceGatewayIdentifierRef,omitempty" tf:"-"`
+	ResourceGatewayIdentifierRef *v2.NamespacedReference `json:"resourceGatewayIdentifierRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGateway in vpclattice to populate resourceGatewayIdentifier.
 	// +kubebuilder:validation:Optional
-	ResourceGatewayIdentifierSelector *v1.NamespacedSelector `json:"resourceGatewayIdentifierSelector,omitempty" tf:"-"`
+	ResourceGatewayIdentifierSelector *v2.NamespacedSelector `json:"resourceGatewayIdentifierSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -294,11 +293,11 @@ type ResourceConfigurationParameters struct {
 
 	// Reference to a ResourceGateway in vpclattice to populate resourceGatewayIdentifier.
 	// +kubebuilder:validation:Optional
-	ResourceGatewayIdentifierRef *v1.NamespacedReference `json:"resourceGatewayIdentifierRef,omitempty" tf:"-"`
+	ResourceGatewayIdentifierRef *v2.NamespacedReference `json:"resourceGatewayIdentifierRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGateway in vpclattice to populate resourceGatewayIdentifier.
 	// +kubebuilder:validation:Optional
-	ResourceGatewayIdentifierSelector *v1.NamespacedSelector `json:"resourceGatewayIdentifierSelector,omitempty" tf:"-"`
+	ResourceGatewayIdentifierSelector *v2.NamespacedSelector `json:"resourceGatewayIdentifierSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -329,8 +328,8 @@ type ResourceConfigurationSpec struct {
 
 // ResourceConfigurationStatus defines the observed state of ResourceConfiguration.
 type ResourceConfigurationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ResourceConfigurationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ResourceConfigurationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

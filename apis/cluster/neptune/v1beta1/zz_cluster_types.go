@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ClusterInitParameters struct {
@@ -55,11 +55,11 @@ type ClusterInitParameters struct {
 
 	// References to Role in iam to populate iamRoles.
 	// +kubebuilder:validation:Optional
-	IAMRoleRefs []v1.Reference `json:"iamRoleRefs,omitempty" tf:"-"`
+	IAMRoleRefs []v2.Reference `json:"iamRoleRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Role in iam to populate iamRoles.
 	// +kubebuilder:validation:Optional
-	IAMRoleSelector *v1.Selector `json:"iamRoleSelector,omitempty" tf:"-"`
+	IAMRoleSelector *v2.Selector `json:"iamRoleSelector,omitempty" tf:"-"`
 
 	// List of ARNs for the IAM roles to associate to the Neptune Cluster.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
@@ -74,11 +74,11 @@ type ClusterInitParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnRef *v1.Reference `json:"kmsKeyArnRef,omitempty" tf:"-"`
+	KMSKeyArnRef *v2.Reference `json:"kmsKeyArnRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnSelector *v1.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
+	KMSKeyArnSelector *v2.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
 
 	// Cluster parameter group to associate with the cluster.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/neptune/v1beta1.ClusterParameterGroup
@@ -86,11 +86,11 @@ type ClusterInitParameters struct {
 
 	// Reference to a ClusterParameterGroup in neptune to populate neptuneClusterParameterGroupName.
 	// +kubebuilder:validation:Optional
-	NeptuneClusterParameterGroupNameRef *v1.Reference `json:"neptuneClusterParameterGroupNameRef,omitempty" tf:"-"`
+	NeptuneClusterParameterGroupNameRef *v2.Reference `json:"neptuneClusterParameterGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ClusterParameterGroup in neptune to populate neptuneClusterParameterGroupName.
 	// +kubebuilder:validation:Optional
-	NeptuneClusterParameterGroupNameSelector *v1.Selector `json:"neptuneClusterParameterGroupNameSelector,omitempty" tf:"-"`
+	NeptuneClusterParameterGroupNameSelector *v2.Selector `json:"neptuneClusterParameterGroupNameSelector,omitempty" tf:"-"`
 
 	// –  Name of DB parameter group to apply to all instances in the cluster. When upgrading, AWS does not return this value, so do not reference it in other arguments—either leave it unset, configure each instance directly, or ensure it matches the engine_version.
 	NeptuneInstanceParameterGroupName *string `json:"neptuneInstanceParameterGroupName,omitempty" tf:"neptune_instance_parameter_group_name,omitempty"`
@@ -101,11 +101,11 @@ type ClusterInitParameters struct {
 
 	// Reference to a SubnetGroup in neptune to populate neptuneSubnetGroupName.
 	// +kubebuilder:validation:Optional
-	NeptuneSubnetGroupNameRef *v1.Reference `json:"neptuneSubnetGroupNameRef,omitempty" tf:"-"`
+	NeptuneSubnetGroupNameRef *v2.Reference `json:"neptuneSubnetGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a SubnetGroup in neptune to populate neptuneSubnetGroupName.
 	// +kubebuilder:validation:Optional
-	NeptuneSubnetGroupNameSelector *v1.Selector `json:"neptuneSubnetGroupNameSelector,omitempty" tf:"-"`
+	NeptuneSubnetGroupNameSelector *v2.Selector `json:"neptuneSubnetGroupNameSelector,omitempty" tf:"-"`
 
 	// Port on which the Neptune accepts connections. Default is 8182.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
@@ -122,11 +122,11 @@ type ClusterInitParameters struct {
 
 	// Reference to a Cluster in neptune to populate replicationSourceIdentifier.
 	// +kubebuilder:validation:Optional
-	ReplicationSourceIdentifierRef *v1.Reference `json:"replicationSourceIdentifierRef,omitempty" tf:"-"`
+	ReplicationSourceIdentifierRef *v2.Reference `json:"replicationSourceIdentifierRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in neptune to populate replicationSourceIdentifier.
 	// +kubebuilder:validation:Optional
-	ReplicationSourceIdentifierSelector *v1.Selector `json:"replicationSourceIdentifierSelector,omitempty" tf:"-"`
+	ReplicationSourceIdentifierSelector *v2.Selector `json:"replicationSourceIdentifierSelector,omitempty" tf:"-"`
 
 	// If set, create the Neptune cluster as a serverless one. See Serverless for example block attributes.
 	ServerlessV2ScalingConfiguration []ServerlessV2ScalingConfigurationInitParameters `json:"serverlessV2ScalingConfiguration,omitempty" tf:"serverless_v2_scaling_configuration,omitempty"`
@@ -140,11 +140,11 @@ type ClusterInitParameters struct {
 
 	// Reference to a ClusterSnapshot in neptune to populate snapshotIdentifier.
 	// +kubebuilder:validation:Optional
-	SnapshotIdentifierRef *v1.Reference `json:"snapshotIdentifierRef,omitempty" tf:"-"`
+	SnapshotIdentifierRef *v2.Reference `json:"snapshotIdentifierRef,omitempty" tf:"-"`
 
 	// Selector for a ClusterSnapshot in neptune to populate snapshotIdentifier.
 	// +kubebuilder:validation:Optional
-	SnapshotIdentifierSelector *v1.Selector `json:"snapshotIdentifierSelector,omitempty" tf:"-"`
+	SnapshotIdentifierSelector *v2.Selector `json:"snapshotIdentifierSelector,omitempty" tf:"-"`
 
 	// Whether the Neptune cluster is encrypted. The default is false if not specified.
 	StorageEncrypted *bool `json:"storageEncrypted,omitempty" tf:"storage_encrypted,omitempty"`
@@ -158,11 +158,11 @@ type ClusterInitParameters struct {
 
 	// References to SecurityGroup in ec2 to populate vpcSecurityGroupIds.
 	// +kubebuilder:validation:Optional
-	VPCSecurityGroupIDRefs []v1.Reference `json:"vpcSecurityGroupIdRefs,omitempty" tf:"-"`
+	VPCSecurityGroupIDRefs []v2.Reference `json:"vpcSecurityGroupIdRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate vpcSecurityGroupIds.
 	// +kubebuilder:validation:Optional
-	VPCSecurityGroupIDSelector *v1.Selector `json:"vpcSecurityGroupIdSelector,omitempty" tf:"-"`
+	VPCSecurityGroupIDSelector *v2.Selector `json:"vpcSecurityGroupIdSelector,omitempty" tf:"-"`
 
 	// List of VPC security groups to associate with the Cluster
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.SecurityGroup
@@ -348,11 +348,11 @@ type ClusterParameters struct {
 
 	// References to Role in iam to populate iamRoles.
 	// +kubebuilder:validation:Optional
-	IAMRoleRefs []v1.Reference `json:"iamRoleRefs,omitempty" tf:"-"`
+	IAMRoleRefs []v2.Reference `json:"iamRoleRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Role in iam to populate iamRoles.
 	// +kubebuilder:validation:Optional
-	IAMRoleSelector *v1.Selector `json:"iamRoleSelector,omitempty" tf:"-"`
+	IAMRoleSelector *v2.Selector `json:"iamRoleSelector,omitempty" tf:"-"`
 
 	// List of ARNs for the IAM roles to associate to the Neptune Cluster.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
@@ -369,11 +369,11 @@ type ClusterParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnRef *v1.Reference `json:"kmsKeyArnRef,omitempty" tf:"-"`
+	KMSKeyArnRef *v2.Reference `json:"kmsKeyArnRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnSelector *v1.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
+	KMSKeyArnSelector *v2.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
 
 	// Cluster parameter group to associate with the cluster.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/neptune/v1beta1.ClusterParameterGroup
@@ -382,11 +382,11 @@ type ClusterParameters struct {
 
 	// Reference to a ClusterParameterGroup in neptune to populate neptuneClusterParameterGroupName.
 	// +kubebuilder:validation:Optional
-	NeptuneClusterParameterGroupNameRef *v1.Reference `json:"neptuneClusterParameterGroupNameRef,omitempty" tf:"-"`
+	NeptuneClusterParameterGroupNameRef *v2.Reference `json:"neptuneClusterParameterGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ClusterParameterGroup in neptune to populate neptuneClusterParameterGroupName.
 	// +kubebuilder:validation:Optional
-	NeptuneClusterParameterGroupNameSelector *v1.Selector `json:"neptuneClusterParameterGroupNameSelector,omitempty" tf:"-"`
+	NeptuneClusterParameterGroupNameSelector *v2.Selector `json:"neptuneClusterParameterGroupNameSelector,omitempty" tf:"-"`
 
 	// –  Name of DB parameter group to apply to all instances in the cluster. When upgrading, AWS does not return this value, so do not reference it in other arguments—either leave it unset, configure each instance directly, or ensure it matches the engine_version.
 	// +kubebuilder:validation:Optional
@@ -399,11 +399,11 @@ type ClusterParameters struct {
 
 	// Reference to a SubnetGroup in neptune to populate neptuneSubnetGroupName.
 	// +kubebuilder:validation:Optional
-	NeptuneSubnetGroupNameRef *v1.Reference `json:"neptuneSubnetGroupNameRef,omitempty" tf:"-"`
+	NeptuneSubnetGroupNameRef *v2.Reference `json:"neptuneSubnetGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a SubnetGroup in neptune to populate neptuneSubnetGroupName.
 	// +kubebuilder:validation:Optional
-	NeptuneSubnetGroupNameSelector *v1.Selector `json:"neptuneSubnetGroupNameSelector,omitempty" tf:"-"`
+	NeptuneSubnetGroupNameSelector *v2.Selector `json:"neptuneSubnetGroupNameSelector,omitempty" tf:"-"`
 
 	// Port on which the Neptune accepts connections. Default is 8182.
 	// +kubebuilder:validation:Optional
@@ -429,11 +429,11 @@ type ClusterParameters struct {
 
 	// Reference to a Cluster in neptune to populate replicationSourceIdentifier.
 	// +kubebuilder:validation:Optional
-	ReplicationSourceIdentifierRef *v1.Reference `json:"replicationSourceIdentifierRef,omitempty" tf:"-"`
+	ReplicationSourceIdentifierRef *v2.Reference `json:"replicationSourceIdentifierRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in neptune to populate replicationSourceIdentifier.
 	// +kubebuilder:validation:Optional
-	ReplicationSourceIdentifierSelector *v1.Selector `json:"replicationSourceIdentifierSelector,omitempty" tf:"-"`
+	ReplicationSourceIdentifierSelector *v2.Selector `json:"replicationSourceIdentifierSelector,omitempty" tf:"-"`
 
 	// If set, create the Neptune cluster as a serverless one. See Serverless for example block attributes.
 	// +kubebuilder:validation:Optional
@@ -450,11 +450,11 @@ type ClusterParameters struct {
 
 	// Reference to a ClusterSnapshot in neptune to populate snapshotIdentifier.
 	// +kubebuilder:validation:Optional
-	SnapshotIdentifierRef *v1.Reference `json:"snapshotIdentifierRef,omitempty" tf:"-"`
+	SnapshotIdentifierRef *v2.Reference `json:"snapshotIdentifierRef,omitempty" tf:"-"`
 
 	// Selector for a ClusterSnapshot in neptune to populate snapshotIdentifier.
 	// +kubebuilder:validation:Optional
-	SnapshotIdentifierSelector *v1.Selector `json:"snapshotIdentifierSelector,omitempty" tf:"-"`
+	SnapshotIdentifierSelector *v2.Selector `json:"snapshotIdentifierSelector,omitempty" tf:"-"`
 
 	// Whether the Neptune cluster is encrypted. The default is false if not specified.
 	// +kubebuilder:validation:Optional
@@ -471,11 +471,11 @@ type ClusterParameters struct {
 
 	// References to SecurityGroup in ec2 to populate vpcSecurityGroupIds.
 	// +kubebuilder:validation:Optional
-	VPCSecurityGroupIDRefs []v1.Reference `json:"vpcSecurityGroupIdRefs,omitempty" tf:"-"`
+	VPCSecurityGroupIDRefs []v2.Reference `json:"vpcSecurityGroupIdRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate vpcSecurityGroupIds.
 	// +kubebuilder:validation:Optional
-	VPCSecurityGroupIDSelector *v1.Selector `json:"vpcSecurityGroupIdSelector,omitempty" tf:"-"`
+	VPCSecurityGroupIDSelector *v2.Selector `json:"vpcSecurityGroupIdSelector,omitempty" tf:"-"`
 
 	// List of VPC security groups to associate with the Cluster
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.SecurityGroup
@@ -517,8 +517,8 @@ type ServerlessV2ScalingConfigurationParameters struct {
 
 // ClusterSpec defines the desired state of Cluster
 type ClusterSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ClusterParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ClusterParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -534,8 +534,8 @@ type ClusterSpec struct {
 
 // ClusterStatus defines the observed state of Cluster.
 type ClusterStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ClusterObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ClusterObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

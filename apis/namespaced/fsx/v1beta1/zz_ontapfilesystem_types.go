@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type DiskIopsConfigurationInitParameters struct {
@@ -108,7 +107,7 @@ type OntapFileSystemInitParameters struct {
 	EndpointIPAddressRange *string `json:"endpointIpAddressRange,omitempty" tf:"endpoint_ip_address_range,omitempty"`
 
 	// The ONTAP administrative password for the fsxadmin user that you can use to administer your file system using the ONTAP CLI and REST API.
-	FSXAdminPasswordSecretRef *v1.LocalSecretKeySelector `json:"fsxAdminPasswordSecretRef,omitempty" tf:"-"`
+	FSXAdminPasswordSecretRef *v2.LocalSecretKeySelector `json:"fsxAdminPasswordSecretRef,omitempty" tf:"-"`
 
 	// - The number of ha_pairs to deploy for the file system. Valid value is 1 for SINGLE_AZ_1 or MULTI_AZ_1 and MULTI_AZ_2. Valid values are 1 through 12 for SINGLE_AZ_2.
 	HaPairs *float64 `json:"haPairs,omitempty" tf:"ha_pairs,omitempty"`
@@ -119,11 +118,11 @@ type OntapFileSystemInitParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDRef *v1.NamespacedReference `json:"kmsKeyIdRef,omitempty" tf:"-"`
+	KMSKeyIDRef *v2.NamespacedReference `json:"kmsKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDSelector *v1.NamespacedSelector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
+	KMSKeyIDSelector *v2.NamespacedSelector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
 	// The ID for a subnet. A subnet is a range of IP addresses in your virtual private cloud (VPC).
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Subnet
@@ -132,11 +131,11 @@ type OntapFileSystemInitParameters struct {
 
 	// Reference to a Subnet in ec2 to populate preferredSubnetId.
 	// +kubebuilder:validation:Optional
-	PreferredSubnetIDRef *v1.NamespacedReference `json:"preferredSubnetIdRef,omitempty" tf:"-"`
+	PreferredSubnetIDRef *v2.NamespacedReference `json:"preferredSubnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in ec2 to populate preferredSubnetId.
 	// +kubebuilder:validation:Optional
-	PreferredSubnetIDSelector *v1.NamespacedSelector `json:"preferredSubnetIdSelector,omitempty" tf:"-"`
+	PreferredSubnetIDSelector *v2.NamespacedSelector `json:"preferredSubnetIdSelector,omitempty" tf:"-"`
 
 	// Specifies the VPC route tables in which your file system's endpoints will be created. You should specify all VPC route tables associated with the subnets in which your clients are located. By default, Amazon FSx selects your VPC's default route table.
 	// +listType=set
@@ -144,11 +143,11 @@ type OntapFileSystemInitParameters struct {
 
 	// References to SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIDRefs []v1.NamespacedReference `json:"securityGroupIdRefs,omitempty" tf:"-"`
+	SecurityGroupIDRefs []v2.NamespacedReference `json:"securityGroupIdRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIDSelector *v1.NamespacedSelector `json:"securityGroupIdSelector,omitempty" tf:"-"`
+	SecurityGroupIDSelector *v2.NamespacedSelector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 
 	// A list of IDs for the security groups that apply to the specified network interfaces created for file system access. These security groups will apply to all network interfaces.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
@@ -165,11 +164,11 @@ type OntapFileSystemInitParameters struct {
 
 	// References to Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIDRefs []v1.NamespacedReference `json:"subnetIdRefs,omitempty" tf:"-"`
+	SubnetIDRefs []v2.NamespacedReference `json:"subnetIdRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// A list of IDs for the subnets that the file system will be accessible from. Up to 2 subnets can be provided.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Subnet
@@ -301,7 +300,7 @@ type OntapFileSystemParameters struct {
 
 	// The ONTAP administrative password for the fsxadmin user that you can use to administer your file system using the ONTAP CLI and REST API.
 	// +kubebuilder:validation:Optional
-	FSXAdminPasswordSecretRef *v1.LocalSecretKeySelector `json:"fsxAdminPasswordSecretRef,omitempty" tf:"-"`
+	FSXAdminPasswordSecretRef *v2.LocalSecretKeySelector `json:"fsxAdminPasswordSecretRef,omitempty" tf:"-"`
 
 	// - The number of ha_pairs to deploy for the file system. Valid value is 1 for SINGLE_AZ_1 or MULTI_AZ_1 and MULTI_AZ_2. Valid values are 1 through 12 for SINGLE_AZ_2.
 	// +kubebuilder:validation:Optional
@@ -314,11 +313,11 @@ type OntapFileSystemParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDRef *v1.NamespacedReference `json:"kmsKeyIdRef,omitempty" tf:"-"`
+	KMSKeyIDRef *v2.NamespacedReference `json:"kmsKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDSelector *v1.NamespacedSelector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
+	KMSKeyIDSelector *v2.NamespacedSelector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
 	// The ID for a subnet. A subnet is a range of IP addresses in your virtual private cloud (VPC).
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Subnet
@@ -328,11 +327,11 @@ type OntapFileSystemParameters struct {
 
 	// Reference to a Subnet in ec2 to populate preferredSubnetId.
 	// +kubebuilder:validation:Optional
-	PreferredSubnetIDRef *v1.NamespacedReference `json:"preferredSubnetIdRef,omitempty" tf:"-"`
+	PreferredSubnetIDRef *v2.NamespacedReference `json:"preferredSubnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in ec2 to populate preferredSubnetId.
 	// +kubebuilder:validation:Optional
-	PreferredSubnetIDSelector *v1.NamespacedSelector `json:"preferredSubnetIdSelector,omitempty" tf:"-"`
+	PreferredSubnetIDSelector *v2.NamespacedSelector `json:"preferredSubnetIdSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -346,11 +345,11 @@ type OntapFileSystemParameters struct {
 
 	// References to SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIDRefs []v1.NamespacedReference `json:"securityGroupIdRefs,omitempty" tf:"-"`
+	SecurityGroupIDRefs []v2.NamespacedReference `json:"securityGroupIdRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIDSelector *v1.NamespacedSelector `json:"securityGroupIdSelector,omitempty" tf:"-"`
+	SecurityGroupIDSelector *v2.NamespacedSelector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 
 	// A list of IDs for the security groups that apply to the specified network interfaces created for file system access. These security groups will apply to all network interfaces.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
@@ -370,11 +369,11 @@ type OntapFileSystemParameters struct {
 
 	// References to Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIDRefs []v1.NamespacedReference `json:"subnetIdRefs,omitempty" tf:"-"`
+	SubnetIDRefs []v2.NamespacedReference `json:"subnetIdRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// A list of IDs for the subnets that the file system will be accessible from. Up to 2 subnets can be provided.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Subnet
@@ -420,8 +419,8 @@ type OntapFileSystemSpec struct {
 
 // OntapFileSystemStatus defines the observed state of OntapFileSystem.
 type OntapFileSystemStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        OntapFileSystemObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               OntapFileSystemObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ContributorInsightsInitParameters struct {
@@ -27,11 +27,11 @@ type ContributorInsightsInitParameters struct {
 
 	// Reference to a Table in dynamodb to populate tableName.
 	// +kubebuilder:validation:Optional
-	TableNameRef *v1.Reference `json:"tableNameRef,omitempty" tf:"-"`
+	TableNameRef *v2.Reference `json:"tableNameRef,omitempty" tf:"-"`
 
 	// Selector for a Table in dynamodb to populate tableName.
 	// +kubebuilder:validation:Optional
-	TableNameSelector *v1.Selector `json:"tableNameSelector,omitempty" tf:"-"`
+	TableNameSelector *v2.Selector `json:"tableNameSelector,omitempty" tf:"-"`
 }
 
 type ContributorInsightsObservation struct {
@@ -73,17 +73,17 @@ type ContributorInsightsParameters struct {
 
 	// Reference to a Table in dynamodb to populate tableName.
 	// +kubebuilder:validation:Optional
-	TableNameRef *v1.Reference `json:"tableNameRef,omitempty" tf:"-"`
+	TableNameRef *v2.Reference `json:"tableNameRef,omitempty" tf:"-"`
 
 	// Selector for a Table in dynamodb to populate tableName.
 	// +kubebuilder:validation:Optional
-	TableNameSelector *v1.Selector `json:"tableNameSelector,omitempty" tf:"-"`
+	TableNameSelector *v2.Selector `json:"tableNameSelector,omitempty" tf:"-"`
 }
 
 // ContributorInsightsSpec defines the desired state of ContributorInsights
 type ContributorInsightsSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ContributorInsightsParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ContributorInsightsParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -99,8 +99,8 @@ type ContributorInsightsSpec struct {
 
 // ContributorInsightsStatus defines the observed state of ContributorInsights.
 type ContributorInsightsStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ContributorInsightsObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ContributorInsightsObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

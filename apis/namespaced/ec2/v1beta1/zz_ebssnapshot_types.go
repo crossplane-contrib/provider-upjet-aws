@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type EBSSnapshotInitParameters struct {
@@ -42,11 +41,11 @@ type EBSSnapshotInitParameters struct {
 
 	// Reference to a EBSVolume in ec2 to populate volumeId.
 	// +kubebuilder:validation:Optional
-	VolumeIDRef *v1.NamespacedReference `json:"volumeIdRef,omitempty" tf:"-"`
+	VolumeIDRef *v2.NamespacedReference `json:"volumeIdRef,omitempty" tf:"-"`
 
 	// Selector for a EBSVolume in ec2 to populate volumeId.
 	// +kubebuilder:validation:Optional
-	VolumeIDSelector *v1.NamespacedSelector `json:"volumeIdSelector,omitempty" tf:"-"`
+	VolumeIDSelector *v2.NamespacedSelector `json:"volumeIdSelector,omitempty" tf:"-"`
 }
 
 type EBSSnapshotObservation struct {
@@ -146,11 +145,11 @@ type EBSSnapshotParameters struct {
 
 	// Reference to a EBSVolume in ec2 to populate volumeId.
 	// +kubebuilder:validation:Optional
-	VolumeIDRef *v1.NamespacedReference `json:"volumeIdRef,omitempty" tf:"-"`
+	VolumeIDRef *v2.NamespacedReference `json:"volumeIdRef,omitempty" tf:"-"`
 
 	// Selector for a EBSVolume in ec2 to populate volumeId.
 	// +kubebuilder:validation:Optional
-	VolumeIDSelector *v1.NamespacedSelector `json:"volumeIdSelector,omitempty" tf:"-"`
+	VolumeIDSelector *v2.NamespacedSelector `json:"volumeIdSelector,omitempty" tf:"-"`
 }
 
 // EBSSnapshotSpec defines the desired state of EBSSnapshot
@@ -172,8 +171,8 @@ type EBSSnapshotSpec struct {
 
 // EBSSnapshotStatus defines the observed state of EBSSnapshot.
 type EBSSnapshotStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        EBSSnapshotObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               EBSSnapshotObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

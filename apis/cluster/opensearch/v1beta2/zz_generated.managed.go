@@ -5,104 +5,104 @@
 
 package v1beta2
 
-import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+import xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 
 // GetCondition of this Domain.
-func (mg *Domain) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *Domain) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this Domain.
-func (mg *Domain) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *Domain) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this Domain.
-func (mg *Domain) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *Domain) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this Domain.
-func (mg *Domain) GetProviderConfigReference() *xpv1.Reference {
+func (mg *Domain) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this Domain.
-func (mg *Domain) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *Domain) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this Domain.
-func (mg *Domain) SetConditions(c ...xpv1.Condition) {
+func (mg *Domain) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this Domain.
-func (mg *Domain) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *Domain) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this Domain.
-func (mg *Domain) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *Domain) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this Domain.
-func (mg *Domain) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *Domain) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this Domain.
-func (mg *Domain) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *Domain) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this DomainSAMLOptions.
-func (mg *DomainSAMLOptions) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *DomainSAMLOptions) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this DomainSAMLOptions.
-func (mg *DomainSAMLOptions) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *DomainSAMLOptions) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this DomainSAMLOptions.
-func (mg *DomainSAMLOptions) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *DomainSAMLOptions) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this DomainSAMLOptions.
-func (mg *DomainSAMLOptions) GetProviderConfigReference() *xpv1.Reference {
+func (mg *DomainSAMLOptions) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this DomainSAMLOptions.
-func (mg *DomainSAMLOptions) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *DomainSAMLOptions) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this DomainSAMLOptions.
-func (mg *DomainSAMLOptions) SetConditions(c ...xpv1.Condition) {
+func (mg *DomainSAMLOptions) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this DomainSAMLOptions.
-func (mg *DomainSAMLOptions) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *DomainSAMLOptions) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this DomainSAMLOptions.
-func (mg *DomainSAMLOptions) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *DomainSAMLOptions) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this DomainSAMLOptions.
-func (mg *DomainSAMLOptions) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *DomainSAMLOptions) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this DomainSAMLOptions.
-func (mg *DomainSAMLOptions) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *DomainSAMLOptions) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

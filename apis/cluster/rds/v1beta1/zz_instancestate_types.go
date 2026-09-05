@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type InstanceStateInitParameters struct {
@@ -22,11 +22,11 @@ type InstanceStateInitParameters struct {
 
 	// Reference to a Instance in rds to populate identifier.
 	// +kubebuilder:validation:Optional
-	IdentifierRef *v1.Reference `json:"identifierRef,omitempty" tf:"-"`
+	IdentifierRef *v2.Reference `json:"identifierRef,omitempty" tf:"-"`
 
 	// Selector for a Instance in rds to populate identifier.
 	// +kubebuilder:validation:Optional
-	IdentifierSelector *v1.Selector `json:"identifierSelector,omitempty" tf:"-"`
+	IdentifierSelector *v2.Selector `json:"identifierSelector,omitempty" tf:"-"`
 
 	// Configured state of the DB Instance. Valid values are available and stopped.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
@@ -56,11 +56,11 @@ type InstanceStateParameters struct {
 
 	// Reference to a Instance in rds to populate identifier.
 	// +kubebuilder:validation:Optional
-	IdentifierRef *v1.Reference `json:"identifierRef,omitempty" tf:"-"`
+	IdentifierRef *v2.Reference `json:"identifierRef,omitempty" tf:"-"`
 
 	// Selector for a Instance in rds to populate identifier.
 	// +kubebuilder:validation:Optional
-	IdentifierSelector *v1.Selector `json:"identifierSelector,omitempty" tf:"-"`
+	IdentifierSelector *v2.Selector `json:"identifierSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -74,8 +74,8 @@ type InstanceStateParameters struct {
 
 // InstanceStateSpec defines the desired state of InstanceState
 type InstanceStateSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     InstanceStateParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   InstanceStateParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -91,8 +91,8 @@ type InstanceStateSpec struct {
 
 // InstanceStateStatus defines the observed state of InstanceState.
 type InstanceStateStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        InstanceStateObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               InstanceStateObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

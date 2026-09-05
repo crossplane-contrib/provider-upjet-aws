@@ -574,6 +574,14 @@ spec:
                       authenticate the user account with an identity_provider_type
                       of API_GATEWAY.
                     type: string
+                  ipAddressType:
+                    description: Type of IP addresses for the AWS Transfer Family
+                      endpoint. Valid values are IPV4 and DUALSTACK. The default value
+                      is IPV4. When ip_address_type is set to DUALSTACK, address_allocation_ids
+                      cannot be specified in the endpoint_details block. Updating
+                      ip_address_type stops the server and then restarts it with the
+                      new ip_address_type value.
+                    type: string
                   loggingRole:
                     description: Amazon Resource Name (ARN) of an IAM role that allows
                       the service to write your SFTP users’ activity to your Amazon
@@ -1336,6 +1344,14 @@ spec:
                       authenticate the user account with an identity_provider_type
                       of API_GATEWAY.
                     type: string
+                  ipAddressType:
+                    description: Type of IP addresses for the AWS Transfer Family
+                      endpoint. Valid values are IPV4 and DUALSTACK. The default value
+                      is IPV4. When ip_address_type is set to DUALSTACK, address_allocation_ids
+                      cannot be specified in the endpoint_details block. Updating
+                      ip_address_type stops the server and then restarts it with the
+                      new ip_address_type value.
+                    type: string
                   loggingRole:
                     description: Amazon Resource Name (ARN) of an IAM role that allows
                       the service to write your SFTP users’ activity to your Amazon
@@ -1733,6 +1749,14 @@ spec:
                       authenticate the user account with an identity_provider_type
                       of API_GATEWAY.
                     type: string
+                  ipAddressType:
+                    description: Type of IP addresses for the AWS Transfer Family
+                      endpoint. Valid values are IPV4 and DUALSTACK. The default value
+                      is IPV4. When ip_address_type is set to DUALSTACK, address_allocation_ids
+                      cannot be specified in the endpoint_details block. Updating
+                      ip_address_type stops the server and then restarts it with the
+                      new ip_address_type value.
+                    type: string
                   loggingRole:
                     description: Amazon Resource Name (ARN) of an IAM role that allows
                       the service to write your SFTP users’ activity to your Amazon
@@ -1911,6 +1935,13 @@ spec:
                 x-kubernetes-list-map-keys:
                 - type
                 x-kubernetes-list-type: map
+              lastHandledReconcileAt:
+                description: |-
+                  LastHandledReconcileAt holds the value of the most recent
+                  reconcile-requested-at annotation token that the controller has
+                  processed. Users can compare this to the annotation to determine
+                  whether a reconcile request has been handled.
+                type: string
               observedGeneration:
                 description: |-
                   ObservedGeneration is the latest metadata.generation

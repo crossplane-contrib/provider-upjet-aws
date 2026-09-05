@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type LedgerInitParameters struct {
@@ -25,11 +24,11 @@ type LedgerInitParameters struct {
 
 	// Reference to a Key in kms to populate kmsKey.
 	// +kubebuilder:validation:Optional
-	KMSKeyRef *v1.NamespacedReference `json:"kmsKeyRef,omitempty" tf:"-"`
+	KMSKeyRef *v2.NamespacedReference `json:"kmsKeyRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKey.
 	// +kubebuilder:validation:Optional
-	KMSKeySelector *v1.NamespacedSelector `json:"kmsKeySelector,omitempty" tf:"-"`
+	KMSKeySelector *v2.NamespacedSelector `json:"kmsKeySelector,omitempty" tf:"-"`
 
 	// The permissions mode for the QLDB ledger instance. Specify either ALLOW_ALL or STANDARD.
 	PermissionsMode *string `json:"permissionsMode,omitempty" tf:"permissions_mode,omitempty"`
@@ -82,11 +81,11 @@ type LedgerParameters struct {
 
 	// Reference to a Key in kms to populate kmsKey.
 	// +kubebuilder:validation:Optional
-	KMSKeyRef *v1.NamespacedReference `json:"kmsKeyRef,omitempty" tf:"-"`
+	KMSKeyRef *v2.NamespacedReference `json:"kmsKeyRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKey.
 	// +kubebuilder:validation:Optional
-	KMSKeySelector *v1.NamespacedSelector `json:"kmsKeySelector,omitempty" tf:"-"`
+	KMSKeySelector *v2.NamespacedSelector `json:"kmsKeySelector,omitempty" tf:"-"`
 
 	// The permissions mode for the QLDB ledger instance. Specify either ALLOW_ALL or STANDARD.
 	// +kubebuilder:validation:Optional
@@ -122,8 +121,8 @@ type LedgerSpec struct {
 
 // LedgerStatus defines the observed state of Ledger.
 type LedgerStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        LedgerObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               LedgerObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

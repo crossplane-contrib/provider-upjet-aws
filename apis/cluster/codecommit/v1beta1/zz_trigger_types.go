@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type TriggerInitParameters struct {
@@ -21,11 +21,11 @@ type TriggerInitParameters struct {
 
 	// Reference to a Repository in codecommit to populate repositoryName.
 	// +kubebuilder:validation:Optional
-	RepositoryNameRef *v1.Reference `json:"repositoryNameRef,omitempty" tf:"-"`
+	RepositoryNameRef *v2.Reference `json:"repositoryNameRef,omitempty" tf:"-"`
 
 	// Selector for a Repository in codecommit to populate repositoryName.
 	// +kubebuilder:validation:Optional
-	RepositoryNameSelector *v1.Selector `json:"repositoryNameSelector,omitempty" tf:"-"`
+	RepositoryNameSelector *v2.Selector `json:"repositoryNameSelector,omitempty" tf:"-"`
 
 	// The name of the trigger.
 	Trigger []TriggerTriggerInitParameters `json:"trigger,omitempty" tf:"trigger,omitempty"`
@@ -63,11 +63,11 @@ type TriggerParameters struct {
 
 	// Reference to a Repository in codecommit to populate repositoryName.
 	// +kubebuilder:validation:Optional
-	RepositoryNameRef *v1.Reference `json:"repositoryNameRef,omitempty" tf:"-"`
+	RepositoryNameRef *v2.Reference `json:"repositoryNameRef,omitempty" tf:"-"`
 
 	// Selector for a Repository in codecommit to populate repositoryName.
 	// +kubebuilder:validation:Optional
-	RepositoryNameSelector *v1.Selector `json:"repositoryNameSelector,omitempty" tf:"-"`
+	RepositoryNameSelector *v2.Selector `json:"repositoryNameSelector,omitempty" tf:"-"`
 
 	// The name of the trigger.
 	// +kubebuilder:validation:Optional
@@ -89,11 +89,11 @@ type TriggerTriggerInitParameters struct {
 
 	// Reference to a Topic in sns to populate destinationArn.
 	// +kubebuilder:validation:Optional
-	DestinationArnRef *v1.Reference `json:"destinationArnRef,omitempty" tf:"-"`
+	DestinationArnRef *v2.Reference `json:"destinationArnRef,omitempty" tf:"-"`
 
 	// Selector for a Topic in sns to populate destinationArn.
 	// +kubebuilder:validation:Optional
-	DestinationArnSelector *v1.Selector `json:"destinationArnSelector,omitempty" tf:"-"`
+	DestinationArnSelector *v2.Selector `json:"destinationArnSelector,omitempty" tf:"-"`
 
 	// The repository events that will cause the trigger to run actions in another service, such as sending a notification through Amazon Simple Notification Service (SNS). If no events are specified, the trigger will run for all repository events. Event types include: all, updateReference, createReference, deleteReference.
 	Events []*string `json:"events,omitempty" tf:"events,omitempty"`
@@ -138,11 +138,11 @@ type TriggerTriggerParameters struct {
 
 	// Reference to a Topic in sns to populate destinationArn.
 	// +kubebuilder:validation:Optional
-	DestinationArnRef *v1.Reference `json:"destinationArnRef,omitempty" tf:"-"`
+	DestinationArnRef *v2.Reference `json:"destinationArnRef,omitempty" tf:"-"`
 
 	// Selector for a Topic in sns to populate destinationArn.
 	// +kubebuilder:validation:Optional
-	DestinationArnSelector *v1.Selector `json:"destinationArnSelector,omitempty" tf:"-"`
+	DestinationArnSelector *v2.Selector `json:"destinationArnSelector,omitempty" tf:"-"`
 
 	// The repository events that will cause the trigger to run actions in another service, such as sending a notification through Amazon Simple Notification Service (SNS). If no events are specified, the trigger will run for all repository events. Event types include: all, updateReference, createReference, deleteReference.
 	// +kubebuilder:validation:Optional
@@ -155,8 +155,8 @@ type TriggerTriggerParameters struct {
 
 // TriggerSpec defines the desired state of Trigger
 type TriggerSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     TriggerParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   TriggerParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -172,8 +172,8 @@ type TriggerSpec struct {
 
 // TriggerStatus defines the observed state of Trigger.
 type TriggerStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        TriggerObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               TriggerObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

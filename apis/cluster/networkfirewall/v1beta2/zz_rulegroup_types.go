@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ActionDefinitionPublishMetricActionInitParameters struct {
@@ -206,11 +206,11 @@ type IPSetReferenceInitParameters struct {
 
 	// Reference to a ManagedPrefixList in ec2 to populate referenceArn.
 	// +kubebuilder:validation:Optional
-	ReferenceArnRef *v1.Reference `json:"referenceArnRef,omitempty" tf:"-"`
+	ReferenceArnRef *v2.Reference `json:"referenceArnRef,omitempty" tf:"-"`
 
 	// Selector for a ManagedPrefixList in ec2 to populate referenceArn.
 	// +kubebuilder:validation:Optional
-	ReferenceArnSelector *v1.Selector `json:"referenceArnSelector,omitempty" tf:"-"`
+	ReferenceArnSelector *v2.Selector `json:"referenceArnSelector,omitempty" tf:"-"`
 }
 
 type IPSetReferenceObservation struct {
@@ -229,11 +229,11 @@ type IPSetReferenceParameters struct {
 
 	// Reference to a ManagedPrefixList in ec2 to populate referenceArn.
 	// +kubebuilder:validation:Optional
-	ReferenceArnRef *v1.Reference `json:"referenceArnRef,omitempty" tf:"-"`
+	ReferenceArnRef *v2.Reference `json:"referenceArnRef,omitempty" tf:"-"`
 
 	// Selector for a ManagedPrefixList in ec2 to populate referenceArn.
 	// +kubebuilder:validation:Optional
-	ReferenceArnSelector *v1.Selector `json:"referenceArnSelector,omitempty" tf:"-"`
+	ReferenceArnSelector *v2.Selector `json:"referenceArnSelector,omitempty" tf:"-"`
 }
 
 type IPSetReferencesInitParameters struct {
@@ -1061,8 +1061,8 @@ type TCPFlagParameters struct {
 
 // RuleGroupSpec defines the desired state of RuleGroup
 type RuleGroupSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     RuleGroupParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   RuleGroupParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -1078,8 +1078,8 @@ type RuleGroupSpec struct {
 
 // RuleGroupStatus defines the observed state of RuleGroup.
 type RuleGroupStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        RuleGroupObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               RuleGroupObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

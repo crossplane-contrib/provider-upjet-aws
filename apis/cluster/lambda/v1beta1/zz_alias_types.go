@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AliasInitParameters struct {
@@ -65,11 +65,11 @@ type AliasParameters struct {
 
 	// Reference to a Function in lambda to populate functionName.
 	// +kubebuilder:validation:Optional
-	FunctionNameRef *v1.Reference `json:"functionNameRef,omitempty" tf:"-"`
+	FunctionNameRef *v2.Reference `json:"functionNameRef,omitempty" tf:"-"`
 
 	// Selector for a Function in lambda to populate functionName.
 	// +kubebuilder:validation:Optional
-	FunctionNameSelector *v1.Selector `json:"functionNameSelector,omitempty" tf:"-"`
+	FunctionNameSelector *v2.Selector `json:"functionNameSelector,omitempty" tf:"-"`
 
 	// Lambda function version for which you are creating the alias. Pattern: (\$LATEST|[0-9]+).
 	// +kubebuilder:validation:Optional
@@ -109,8 +109,8 @@ type RoutingConfigParameters struct {
 
 // AliasSpec defines the desired state of Alias
 type AliasSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     AliasParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   AliasParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -126,8 +126,8 @@ type AliasSpec struct {
 
 // AliasStatus defines the observed state of Alias.
 type AliasStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        AliasObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               AliasObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

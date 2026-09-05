@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type SpecListenerPortMappingInitParameters struct {
@@ -51,11 +51,11 @@ type VirtualRouterInitParameters struct {
 
 	// Reference to a Mesh in appmesh to populate meshName.
 	// +kubebuilder:validation:Optional
-	MeshNameRef *v1.Reference `json:"meshNameRef,omitempty" tf:"-"`
+	MeshNameRef *v2.Reference `json:"meshNameRef,omitempty" tf:"-"`
 
 	// Selector for a Mesh in appmesh to populate meshName.
 	// +kubebuilder:validation:Optional
-	MeshNameSelector *v1.Selector `json:"meshNameSelector,omitempty" tf:"-"`
+	MeshNameSelector *v2.Selector `json:"meshNameSelector,omitempty" tf:"-"`
 
 	// AWS account ID of the service mesh's owner. Defaults to the account ID the AWS provider is currently connected to.
 	MeshOwner *string `json:"meshOwner,omitempty" tf:"mesh_owner,omitempty"`
@@ -63,7 +63,7 @@ type VirtualRouterInitParameters struct {
 	// Name to use for the virtual router. Must be between 1 and 255 characters in length.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Virtual router specification to apply.
+	// Virtual router specification to apply. See spec Block for details.
 	Spec *VirtualRouterSpecInitParameters `json:"spec,omitempty" tf:"spec,omitempty"`
 
 	// Key-value map of resource tags.
@@ -101,7 +101,7 @@ type VirtualRouterObservation struct {
 	// Resource owner's AWS account ID.
 	ResourceOwner *string `json:"resourceOwner,omitempty" tf:"resource_owner,omitempty"`
 
-	// Virtual router specification to apply.
+	// Virtual router specification to apply. See spec Block for details.
 	Spec *VirtualRouterSpecObservation `json:"spec,omitempty" tf:"spec,omitempty"`
 
 	// Key-value map of resource tags.
@@ -123,11 +123,11 @@ type VirtualRouterParameters struct {
 
 	// Reference to a Mesh in appmesh to populate meshName.
 	// +kubebuilder:validation:Optional
-	MeshNameRef *v1.Reference `json:"meshNameRef,omitempty" tf:"-"`
+	MeshNameRef *v2.Reference `json:"meshNameRef,omitempty" tf:"-"`
 
 	// Selector for a Mesh in appmesh to populate meshName.
 	// +kubebuilder:validation:Optional
-	MeshNameSelector *v1.Selector `json:"meshNameSelector,omitempty" tf:"-"`
+	MeshNameSelector *v2.Selector `json:"meshNameSelector,omitempty" tf:"-"`
 
 	// AWS account ID of the service mesh's owner. Defaults to the account ID the AWS provider is currently connected to.
 	// +kubebuilder:validation:Optional
@@ -142,7 +142,7 @@ type VirtualRouterParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// Virtual router specification to apply.
+	// Virtual router specification to apply. See spec Block for details.
 	// +kubebuilder:validation:Optional
 	Spec *VirtualRouterSpecParameters `json:"spec,omitempty" tf:"spec,omitempty"`
 
@@ -154,46 +154,46 @@ type VirtualRouterParameters struct {
 
 type VirtualRouterSpecInitParameters struct {
 
-	// configuration block to the spec argument.
+	// Listeners that the virtual router is expected to receive inbound traffic from. Currently only one listener is supported per virtual router. See listener Block for details.
 	Listener []VirtualRouterSpecListenerInitParameters `json:"listener,omitempty" tf:"listener,omitempty"`
 }
 
 type VirtualRouterSpecListenerInitParameters struct {
 
-	// Port mapping information for the listener.
+	// Port mapping information for the listener. See port_mapping Block for details.
 	PortMapping *SpecListenerPortMappingInitParameters `json:"portMapping,omitempty" tf:"port_mapping,omitempty"`
 }
 
 type VirtualRouterSpecListenerObservation struct {
 
-	// Port mapping information for the listener.
+	// Port mapping information for the listener. See port_mapping Block for details.
 	PortMapping *SpecListenerPortMappingObservation `json:"portMapping,omitempty" tf:"port_mapping,omitempty"`
 }
 
 type VirtualRouterSpecListenerParameters struct {
 
-	// Port mapping information for the listener.
+	// Port mapping information for the listener. See port_mapping Block for details.
 	// +kubebuilder:validation:Optional
 	PortMapping *SpecListenerPortMappingParameters `json:"portMapping" tf:"port_mapping,omitempty"`
 }
 
 type VirtualRouterSpecObservation struct {
 
-	// configuration block to the spec argument.
+	// Listeners that the virtual router is expected to receive inbound traffic from. Currently only one listener is supported per virtual router. See listener Block for details.
 	Listener []VirtualRouterSpecListenerObservation `json:"listener,omitempty" tf:"listener,omitempty"`
 }
 
 type VirtualRouterSpecParameters struct {
 
-	// configuration block to the spec argument.
+	// Listeners that the virtual router is expected to receive inbound traffic from. Currently only one listener is supported per virtual router. See listener Block for details.
 	// +kubebuilder:validation:Optional
 	Listener []VirtualRouterSpecListenerParameters `json:"listener,omitempty" tf:"listener,omitempty"`
 }
 
 // VirtualRouterSpec defines the desired state of VirtualRouter
 type VirtualRouterSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     VirtualRouterParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   VirtualRouterParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -209,8 +209,8 @@ type VirtualRouterSpec struct {
 
 // VirtualRouterStatus defines the observed state of VirtualRouter.
 type VirtualRouterStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        VirtualRouterObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               VirtualRouterObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

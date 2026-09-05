@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AuthenticationConfigurationInitParameters struct {
@@ -25,11 +25,11 @@ type AuthenticationConfigurationInitParameters struct {
 
 	// Reference to a Connection in apprunner to populate connectionArn.
 	// +kubebuilder:validation:Optional
-	ConnectionArnRef *v1.Reference `json:"connectionArnRef,omitempty" tf:"-"`
+	ConnectionArnRef *v2.Reference `json:"connectionArnRef,omitempty" tf:"-"`
 
 	// Selector for a Connection in apprunner to populate connectionArn.
 	// +kubebuilder:validation:Optional
-	ConnectionArnSelector *v1.Selector `json:"connectionArnSelector,omitempty" tf:"-"`
+	ConnectionArnSelector *v2.Selector `json:"connectionArnSelector,omitempty" tf:"-"`
 }
 
 type AuthenticationConfigurationObservation struct {
@@ -55,11 +55,11 @@ type AuthenticationConfigurationParameters struct {
 
 	// Reference to a Connection in apprunner to populate connectionArn.
 	// +kubebuilder:validation:Optional
-	ConnectionArnRef *v1.Reference `json:"connectionArnRef,omitempty" tf:"-"`
+	ConnectionArnRef *v2.Reference `json:"connectionArnRef,omitempty" tf:"-"`
 
 	// Selector for a Connection in apprunner to populate connectionArn.
 	// +kubebuilder:validation:Optional
-	ConnectionArnSelector *v1.Selector `json:"connectionArnSelector,omitempty" tf:"-"`
+	ConnectionArnSelector *v2.Selector `json:"connectionArnSelector,omitempty" tf:"-"`
 }
 
 type CodeConfigurationInitParameters struct {
@@ -227,11 +227,11 @@ type EgressConfigurationInitParameters struct {
 
 	// Reference to a VPCConnector in apprunner to populate vpcConnectorArn.
 	// +kubebuilder:validation:Optional
-	VPCConnectorArnRef *v1.Reference `json:"vpcConnectorArnRef,omitempty" tf:"-"`
+	VPCConnectorArnRef *v2.Reference `json:"vpcConnectorArnRef,omitempty" tf:"-"`
 
 	// Selector for a VPCConnector in apprunner to populate vpcConnectorArn.
 	// +kubebuilder:validation:Optional
-	VPCConnectorArnSelector *v1.Selector `json:"vpcConnectorArnSelector,omitempty" tf:"-"`
+	VPCConnectorArnSelector *v2.Selector `json:"vpcConnectorArnSelector,omitempty" tf:"-"`
 }
 
 type EgressConfigurationObservation struct {
@@ -257,11 +257,11 @@ type EgressConfigurationParameters struct {
 
 	// Reference to a VPCConnector in apprunner to populate vpcConnectorArn.
 	// +kubebuilder:validation:Optional
-	VPCConnectorArnRef *v1.Reference `json:"vpcConnectorArnRef,omitempty" tf:"-"`
+	VPCConnectorArnRef *v2.Reference `json:"vpcConnectorArnRef,omitempty" tf:"-"`
 
 	// Selector for a VPCConnector in apprunner to populate vpcConnectorArn.
 	// +kubebuilder:validation:Optional
-	VPCConnectorArnSelector *v1.Selector `json:"vpcConnectorArnSelector,omitempty" tf:"-"`
+	VPCConnectorArnSelector *v2.Selector `json:"vpcConnectorArnSelector,omitempty" tf:"-"`
 }
 
 type EncryptionConfigurationInitParameters struct {
@@ -586,11 +586,11 @@ type ServiceObservabilityConfigurationInitParameters struct {
 
 	// Reference to a ObservabilityConfiguration in apprunner to populate observabilityConfigurationArn.
 	// +kubebuilder:validation:Optional
-	ObservabilityConfigurationArnRef *v1.Reference `json:"observabilityConfigurationArnRef,omitempty" tf:"-"`
+	ObservabilityConfigurationArnRef *v2.Reference `json:"observabilityConfigurationArnRef,omitempty" tf:"-"`
 
 	// Selector for a ObservabilityConfiguration in apprunner to populate observabilityConfigurationArn.
 	// +kubebuilder:validation:Optional
-	ObservabilityConfigurationArnSelector *v1.Selector `json:"observabilityConfigurationArnSelector,omitempty" tf:"-"`
+	ObservabilityConfigurationArnSelector *v2.Selector `json:"observabilityConfigurationArnSelector,omitempty" tf:"-"`
 
 	// When true, an observability configuration resource is associated with the service.
 	ObservabilityEnabled *bool `json:"observabilityEnabled,omitempty" tf:"observability_enabled,omitempty"`
@@ -615,11 +615,11 @@ type ServiceObservabilityConfigurationParameters struct {
 
 	// Reference to a ObservabilityConfiguration in apprunner to populate observabilityConfigurationArn.
 	// +kubebuilder:validation:Optional
-	ObservabilityConfigurationArnRef *v1.Reference `json:"observabilityConfigurationArnRef,omitempty" tf:"-"`
+	ObservabilityConfigurationArnRef *v2.Reference `json:"observabilityConfigurationArnRef,omitempty" tf:"-"`
 
 	// Selector for a ObservabilityConfiguration in apprunner to populate observabilityConfigurationArn.
 	// +kubebuilder:validation:Optional
-	ObservabilityConfigurationArnSelector *v1.Selector `json:"observabilityConfigurationArnSelector,omitempty" tf:"-"`
+	ObservabilityConfigurationArnSelector *v2.Selector `json:"observabilityConfigurationArnSelector,omitempty" tf:"-"`
 
 	// When true, an observability configuration resource is associated with the service.
 	// +kubebuilder:validation:Optional
@@ -804,8 +804,8 @@ type SourceConfigurationParameters struct {
 
 // ServiceSpec defines the desired state of Service
 type ServiceSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ServiceParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ServiceParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -821,8 +821,8 @@ type ServiceSpec struct {
 
 // ServiceStatus defines the observed state of Service.
 type ServiceStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ServiceObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ServiceObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

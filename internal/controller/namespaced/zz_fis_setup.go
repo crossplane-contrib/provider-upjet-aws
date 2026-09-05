@@ -37,3 +37,15 @@ func SetupGated_fis(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupWebhookWithManager_fis registers conversion webhooks for all resource kinds in the group.
+func SetupWebhookWithManager_fis(mgr ctrl.Manager) error {
+	for _, setup := range []func(ctrl.Manager) error{
+		experimenttemplate.SetupWebhookWithManager,
+	} {
+		if err := setup(mgr); err != nil {
+			return err
+		}
+	}
+	return nil
+}

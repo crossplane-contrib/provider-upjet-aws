@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type LBAttachmentInitParameters struct {
@@ -21,11 +21,11 @@ type LBAttachmentInitParameters struct {
 
 	// Reference to a Instance in lightsail to populate instanceName.
 	// +kubebuilder:validation:Optional
-	InstanceNameRef *v1.Reference `json:"instanceNameRef,omitempty" tf:"-"`
+	InstanceNameRef *v2.Reference `json:"instanceNameRef,omitempty" tf:"-"`
 
 	// Selector for a Instance in lightsail to populate instanceName.
 	// +kubebuilder:validation:Optional
-	InstanceNameSelector *v1.Selector `json:"instanceNameSelector,omitempty" tf:"-"`
+	InstanceNameSelector *v2.Selector `json:"instanceNameSelector,omitempty" tf:"-"`
 
 	// Name of the Lightsail load balancer.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/lightsail/v1beta1.LB
@@ -33,11 +33,11 @@ type LBAttachmentInitParameters struct {
 
 	// Reference to a LB in lightsail to populate lbName.
 	// +kubebuilder:validation:Optional
-	LBNameRef *v1.Reference `json:"lbNameRef,omitempty" tf:"-"`
+	LBNameRef *v2.Reference `json:"lbNameRef,omitempty" tf:"-"`
 
 	// Selector for a LB in lightsail to populate lbName.
 	// +kubebuilder:validation:Optional
-	LBNameSelector *v1.Selector `json:"lbNameSelector,omitempty" tf:"-"`
+	LBNameSelector *v2.Selector `json:"lbNameSelector,omitempty" tf:"-"`
 }
 
 type LBAttachmentObservation struct {
@@ -65,11 +65,11 @@ type LBAttachmentParameters struct {
 
 	// Reference to a Instance in lightsail to populate instanceName.
 	// +kubebuilder:validation:Optional
-	InstanceNameRef *v1.Reference `json:"instanceNameRef,omitempty" tf:"-"`
+	InstanceNameRef *v2.Reference `json:"instanceNameRef,omitempty" tf:"-"`
 
 	// Selector for a Instance in lightsail to populate instanceName.
 	// +kubebuilder:validation:Optional
-	InstanceNameSelector *v1.Selector `json:"instanceNameSelector,omitempty" tf:"-"`
+	InstanceNameSelector *v2.Selector `json:"instanceNameSelector,omitempty" tf:"-"`
 
 	// Name of the Lightsail load balancer.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/lightsail/v1beta1.LB
@@ -78,11 +78,11 @@ type LBAttachmentParameters struct {
 
 	// Reference to a LB in lightsail to populate lbName.
 	// +kubebuilder:validation:Optional
-	LBNameRef *v1.Reference `json:"lbNameRef,omitempty" tf:"-"`
+	LBNameRef *v2.Reference `json:"lbNameRef,omitempty" tf:"-"`
 
 	// Selector for a LB in lightsail to populate lbName.
 	// +kubebuilder:validation:Optional
-	LBNameSelector *v1.Selector `json:"lbNameSelector,omitempty" tf:"-"`
+	LBNameSelector *v2.Selector `json:"lbNameSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -92,8 +92,8 @@ type LBAttachmentParameters struct {
 
 // LBAttachmentSpec defines the desired state of LBAttachment
 type LBAttachmentSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     LBAttachmentParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   LBAttachmentParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -109,8 +109,8 @@ type LBAttachmentSpec struct {
 
 // LBAttachmentStatus defines the observed state of LBAttachment.
 type LBAttachmentStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        LBAttachmentObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               LBAttachmentObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ExtensionAssociationInitParameters struct {
@@ -23,11 +22,11 @@ type ExtensionAssociationInitParameters struct {
 
 	// Reference to a Extension in appconfig to populate extensionArn.
 	// +kubebuilder:validation:Optional
-	ExtensionArnRef *v1.NamespacedReference `json:"extensionArnRef,omitempty" tf:"-"`
+	ExtensionArnRef *v2.NamespacedReference `json:"extensionArnRef,omitempty" tf:"-"`
 
 	// Selector for a Extension in appconfig to populate extensionArn.
 	// +kubebuilder:validation:Optional
-	ExtensionArnSelector *v1.NamespacedSelector `json:"extensionArnSelector,omitempty" tf:"-"`
+	ExtensionArnSelector *v2.NamespacedSelector `json:"extensionArnSelector,omitempty" tf:"-"`
 
 	// The parameter names and values defined for the association.
 	// +mapType=granular
@@ -40,11 +39,11 @@ type ExtensionAssociationInitParameters struct {
 
 	// Reference to a Application in appconfig to populate resourceArn.
 	// +kubebuilder:validation:Optional
-	ResourceArnRef *v1.NamespacedReference `json:"resourceArnRef,omitempty" tf:"-"`
+	ResourceArnRef *v2.NamespacedReference `json:"resourceArnRef,omitempty" tf:"-"`
 
 	// Selector for a Application in appconfig to populate resourceArn.
 	// +kubebuilder:validation:Optional
-	ResourceArnSelector *v1.NamespacedSelector `json:"resourceArnSelector,omitempty" tf:"-"`
+	ResourceArnSelector *v2.NamespacedSelector `json:"resourceArnSelector,omitempty" tf:"-"`
 }
 
 type ExtensionAssociationObservation struct {
@@ -83,11 +82,11 @@ type ExtensionAssociationParameters struct {
 
 	// Reference to a Extension in appconfig to populate extensionArn.
 	// +kubebuilder:validation:Optional
-	ExtensionArnRef *v1.NamespacedReference `json:"extensionArnRef,omitempty" tf:"-"`
+	ExtensionArnRef *v2.NamespacedReference `json:"extensionArnRef,omitempty" tf:"-"`
 
 	// Selector for a Extension in appconfig to populate extensionArn.
 	// +kubebuilder:validation:Optional
-	ExtensionArnSelector *v1.NamespacedSelector `json:"extensionArnSelector,omitempty" tf:"-"`
+	ExtensionArnSelector *v2.NamespacedSelector `json:"extensionArnSelector,omitempty" tf:"-"`
 
 	// The parameter names and values defined for the association.
 	// +kubebuilder:validation:Optional
@@ -107,11 +106,11 @@ type ExtensionAssociationParameters struct {
 
 	// Reference to a Application in appconfig to populate resourceArn.
 	// +kubebuilder:validation:Optional
-	ResourceArnRef *v1.NamespacedReference `json:"resourceArnRef,omitempty" tf:"-"`
+	ResourceArnRef *v2.NamespacedReference `json:"resourceArnRef,omitempty" tf:"-"`
 
 	// Selector for a Application in appconfig to populate resourceArn.
 	// +kubebuilder:validation:Optional
-	ResourceArnSelector *v1.NamespacedSelector `json:"resourceArnSelector,omitempty" tf:"-"`
+	ResourceArnSelector *v2.NamespacedSelector `json:"resourceArnSelector,omitempty" tf:"-"`
 }
 
 // ExtensionAssociationSpec defines the desired state of ExtensionAssociation
@@ -133,8 +132,8 @@ type ExtensionAssociationSpec struct {
 
 // ExtensionAssociationStatus defines the observed state of ExtensionAssociation.
 type ExtensionAssociationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ExtensionAssociationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ExtensionAssociationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

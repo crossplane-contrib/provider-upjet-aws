@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type PermissionInitParameters struct {
@@ -26,11 +26,11 @@ type PermissionInitParameters struct {
 
 	// Reference to a CertificateAuthority in acmpca to populate certificateAuthorityArn.
 	// +kubebuilder:validation:Optional
-	CertificateAuthorityArnRef *v1.Reference `json:"certificateAuthorityArnRef,omitempty" tf:"-"`
+	CertificateAuthorityArnRef *v2.Reference `json:"certificateAuthorityArnRef,omitempty" tf:"-"`
 
 	// Selector for a CertificateAuthority in acmpca to populate certificateAuthorityArn.
 	// +kubebuilder:validation:Optional
-	CertificateAuthorityArnSelector *v1.Selector `json:"certificateAuthorityArnSelector,omitempty" tf:"-"`
+	CertificateAuthorityArnSelector *v2.Selector `json:"certificateAuthorityArnSelector,omitempty" tf:"-"`
 
 	// AWS service or identity that receives the permission. At this time, the only valid principal is acm.amazonaws.com.
 	Principal *string `json:"principal,omitempty" tf:"principal,omitempty"`
@@ -79,11 +79,11 @@ type PermissionParameters struct {
 
 	// Reference to a CertificateAuthority in acmpca to populate certificateAuthorityArn.
 	// +kubebuilder:validation:Optional
-	CertificateAuthorityArnRef *v1.Reference `json:"certificateAuthorityArnRef,omitempty" tf:"-"`
+	CertificateAuthorityArnRef *v2.Reference `json:"certificateAuthorityArnRef,omitempty" tf:"-"`
 
 	// Selector for a CertificateAuthority in acmpca to populate certificateAuthorityArn.
 	// +kubebuilder:validation:Optional
-	CertificateAuthorityArnSelector *v1.Selector `json:"certificateAuthorityArnSelector,omitempty" tf:"-"`
+	CertificateAuthorityArnSelector *v2.Selector `json:"certificateAuthorityArnSelector,omitempty" tf:"-"`
 
 	// AWS service or identity that receives the permission. At this time, the only valid principal is acm.amazonaws.com.
 	// +kubebuilder:validation:Optional
@@ -101,8 +101,8 @@ type PermissionParameters struct {
 
 // PermissionSpec defines the desired state of Permission
 type PermissionSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     PermissionParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   PermissionParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -118,8 +118,8 @@ type PermissionSpec struct {
 
 // PermissionStatus defines the observed state of Permission.
 type PermissionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        PermissionObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               PermissionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

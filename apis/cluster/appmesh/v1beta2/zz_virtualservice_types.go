@@ -10,34 +10,34 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ProviderInitParameters struct {
 
-	// Virtual node associated with a virtual service.
+	// Virtual node associated with a virtual service. See virtual_node Block for details.
 	VirtualNode *ProviderVirtualNodeInitParameters `json:"virtualNode,omitempty" tf:"virtual_node,omitempty"`
 
-	// Virtual router associated with a virtual service.
+	// Virtual router associated with a virtual service. See virtual_router Block for details.
 	VirtualRouter *ProviderVirtualRouterInitParameters `json:"virtualRouter,omitempty" tf:"virtual_router,omitempty"`
 }
 
 type ProviderObservation struct {
 
-	// Virtual node associated with a virtual service.
+	// Virtual node associated with a virtual service. See virtual_node Block for details.
 	VirtualNode *ProviderVirtualNodeObservation `json:"virtualNode,omitempty" tf:"virtual_node,omitempty"`
 
-	// Virtual router associated with a virtual service.
+	// Virtual router associated with a virtual service. See virtual_router Block for details.
 	VirtualRouter *ProviderVirtualRouterObservation `json:"virtualRouter,omitempty" tf:"virtual_router,omitempty"`
 }
 
 type ProviderParameters struct {
 
-	// Virtual node associated with a virtual service.
+	// Virtual node associated with a virtual service. See virtual_node Block for details.
 	// +kubebuilder:validation:Optional
 	VirtualNode *ProviderVirtualNodeParameters `json:"virtualNode,omitempty" tf:"virtual_node,omitempty"`
 
-	// Virtual router associated with a virtual service.
+	// Virtual router associated with a virtual service. See virtual_router Block for details.
 	// +kubebuilder:validation:Optional
 	VirtualRouter *ProviderVirtualRouterParameters `json:"virtualRouter,omitempty" tf:"virtual_router,omitempty"`
 }
@@ -51,11 +51,11 @@ type ProviderVirtualNodeInitParameters struct {
 
 	// Reference to a VirtualNode in appmesh to populate virtualNodeName.
 	// +kubebuilder:validation:Optional
-	VirtualNodeNameRef *v1.Reference `json:"virtualNodeNameRef,omitempty" tf:"-"`
+	VirtualNodeNameRef *v2.Reference `json:"virtualNodeNameRef,omitempty" tf:"-"`
 
 	// Selector for a VirtualNode in appmesh to populate virtualNodeName.
 	// +kubebuilder:validation:Optional
-	VirtualNodeNameSelector *v1.Selector `json:"virtualNodeNameSelector,omitempty" tf:"-"`
+	VirtualNodeNameSelector *v2.Selector `json:"virtualNodeNameSelector,omitempty" tf:"-"`
 }
 
 type ProviderVirtualNodeObservation struct {
@@ -74,11 +74,11 @@ type ProviderVirtualNodeParameters struct {
 
 	// Reference to a VirtualNode in appmesh to populate virtualNodeName.
 	// +kubebuilder:validation:Optional
-	VirtualNodeNameRef *v1.Reference `json:"virtualNodeNameRef,omitempty" tf:"-"`
+	VirtualNodeNameRef *v2.Reference `json:"virtualNodeNameRef,omitempty" tf:"-"`
 
 	// Selector for a VirtualNode in appmesh to populate virtualNodeName.
 	// +kubebuilder:validation:Optional
-	VirtualNodeNameSelector *v1.Selector `json:"virtualNodeNameSelector,omitempty" tf:"-"`
+	VirtualNodeNameSelector *v2.Selector `json:"virtualNodeNameSelector,omitempty" tf:"-"`
 }
 
 type ProviderVirtualRouterInitParameters struct {
@@ -90,11 +90,11 @@ type ProviderVirtualRouterInitParameters struct {
 
 	// Reference to a VirtualRouter in appmesh to populate virtualRouterName.
 	// +kubebuilder:validation:Optional
-	VirtualRouterNameRef *v1.Reference `json:"virtualRouterNameRef,omitempty" tf:"-"`
+	VirtualRouterNameRef *v2.Reference `json:"virtualRouterNameRef,omitempty" tf:"-"`
 
 	// Selector for a VirtualRouter in appmesh to populate virtualRouterName.
 	// +kubebuilder:validation:Optional
-	VirtualRouterNameSelector *v1.Selector `json:"virtualRouterNameSelector,omitempty" tf:"-"`
+	VirtualRouterNameSelector *v2.Selector `json:"virtualRouterNameSelector,omitempty" tf:"-"`
 }
 
 type ProviderVirtualRouterObservation struct {
@@ -113,11 +113,11 @@ type ProviderVirtualRouterParameters struct {
 
 	// Reference to a VirtualRouter in appmesh to populate virtualRouterName.
 	// +kubebuilder:validation:Optional
-	VirtualRouterNameRef *v1.Reference `json:"virtualRouterNameRef,omitempty" tf:"-"`
+	VirtualRouterNameRef *v2.Reference `json:"virtualRouterNameRef,omitempty" tf:"-"`
 
 	// Selector for a VirtualRouter in appmesh to populate virtualRouterName.
 	// +kubebuilder:validation:Optional
-	VirtualRouterNameSelector *v1.Selector `json:"virtualRouterNameSelector,omitempty" tf:"-"`
+	VirtualRouterNameSelector *v2.Selector `json:"virtualRouterNameSelector,omitempty" tf:"-"`
 }
 
 type VirtualServiceInitParameters_2 struct {
@@ -129,11 +129,11 @@ type VirtualServiceInitParameters_2 struct {
 
 	// Reference to a Mesh in appmesh to populate meshName.
 	// +kubebuilder:validation:Optional
-	MeshNameRef *v1.Reference `json:"meshNameRef,omitempty" tf:"-"`
+	MeshNameRef *v2.Reference `json:"meshNameRef,omitempty" tf:"-"`
 
 	// Selector for a Mesh in appmesh to populate meshName.
 	// +kubebuilder:validation:Optional
-	MeshNameSelector *v1.Selector `json:"meshNameSelector,omitempty" tf:"-"`
+	MeshNameSelector *v2.Selector `json:"meshNameSelector,omitempty" tf:"-"`
 
 	// AWS account ID of the service mesh's owner. Defaults to the account ID the AWS provider is currently connected to.
 	MeshOwner *string `json:"meshOwner,omitempty" tf:"mesh_owner,omitempty"`
@@ -141,7 +141,7 @@ type VirtualServiceInitParameters_2 struct {
 	// Name to use for the virtual service. Must be between 1 and 255 characters in length.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Virtual service specification to apply.
+	// Virtual service specification to apply. See spec Block for details.
 	Spec *VirtualServiceSpecInitParameters `json:"spec,omitempty" tf:"spec,omitempty"`
 
 	// Key-value map of resource tags.
@@ -179,7 +179,7 @@ type VirtualServiceObservation_2 struct {
 	// Resource owner's AWS account ID.
 	ResourceOwner *string `json:"resourceOwner,omitempty" tf:"resource_owner,omitempty"`
 
-	// Virtual service specification to apply.
+	// Virtual service specification to apply. See spec Block for details.
 	Spec *VirtualServiceSpecObservation `json:"spec,omitempty" tf:"spec,omitempty"`
 
 	// Key-value map of resource tags.
@@ -201,11 +201,11 @@ type VirtualServiceParameters_2 struct {
 
 	// Reference to a Mesh in appmesh to populate meshName.
 	// +kubebuilder:validation:Optional
-	MeshNameRef *v1.Reference `json:"meshNameRef,omitempty" tf:"-"`
+	MeshNameRef *v2.Reference `json:"meshNameRef,omitempty" tf:"-"`
 
 	// Selector for a Mesh in appmesh to populate meshName.
 	// +kubebuilder:validation:Optional
-	MeshNameSelector *v1.Selector `json:"meshNameSelector,omitempty" tf:"-"`
+	MeshNameSelector *v2.Selector `json:"meshNameSelector,omitempty" tf:"-"`
 
 	// AWS account ID of the service mesh's owner. Defaults to the account ID the AWS provider is currently connected to.
 	// +kubebuilder:validation:Optional
@@ -220,7 +220,7 @@ type VirtualServiceParameters_2 struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// Virtual service specification to apply.
+	// Virtual service specification to apply. See spec Block for details.
 	// +kubebuilder:validation:Optional
 	Spec *VirtualServiceSpecParameters `json:"spec,omitempty" tf:"spec,omitempty"`
 
@@ -232,27 +232,27 @@ type VirtualServiceParameters_2 struct {
 
 type VirtualServiceSpecInitParameters struct {
 
-	// App Mesh object that is acting as the provider for a virtual service. You can specify a single virtual node or virtual router.
+	// App Mesh object that is acting as the provider for a virtual service. You can specify a single virtual node or virtual router. See provider Block for details.
 	Provider *ProviderInitParameters `json:"provider,omitempty" tf:"provider,omitempty"`
 }
 
 type VirtualServiceSpecObservation struct {
 
-	// App Mesh object that is acting as the provider for a virtual service. You can specify a single virtual node or virtual router.
+	// App Mesh object that is acting as the provider for a virtual service. You can specify a single virtual node or virtual router. See provider Block for details.
 	Provider *ProviderObservation `json:"provider,omitempty" tf:"provider,omitempty"`
 }
 
 type VirtualServiceSpecParameters struct {
 
-	// App Mesh object that is acting as the provider for a virtual service. You can specify a single virtual node or virtual router.
+	// App Mesh object that is acting as the provider for a virtual service. You can specify a single virtual node or virtual router. See provider Block for details.
 	// +kubebuilder:validation:Optional
 	Provider *ProviderParameters `json:"provider,omitempty" tf:"provider,omitempty"`
 }
 
 // VirtualServiceSpec defines the desired state of VirtualService
 type VirtualServiceSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     VirtualServiceParameters_2 `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   VirtualServiceParameters_2 `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -268,8 +268,8 @@ type VirtualServiceSpec struct {
 
 // VirtualServiceStatus defines the observed state of VirtualService.
 type VirtualServiceStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        VirtualServiceObservation_2 `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               VirtualServiceObservation_2 `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type EncryptionConfigurationInitParameters struct {
@@ -25,11 +25,11 @@ type EncryptionConfigurationInitParameters struct {
 
 	// Reference to a Key in kms to populate kmsKey.
 	// +kubebuilder:validation:Optional
-	KMSKeyRef *v1.Reference `json:"kmsKeyRef,omitempty" tf:"-"`
+	KMSKeyRef *v2.Reference `json:"kmsKeyRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKey.
 	// +kubebuilder:validation:Optional
-	KMSKeySelector *v1.Selector `json:"kmsKeySelector,omitempty" tf:"-"`
+	KMSKeySelector *v2.Selector `json:"kmsKeySelector,omitempty" tf:"-"`
 }
 
 type EncryptionConfigurationObservation struct {
@@ -55,11 +55,11 @@ type EncryptionConfigurationParameters struct {
 
 	// Reference to a Key in kms to populate kmsKey.
 	// +kubebuilder:validation:Optional
-	KMSKeyRef *v1.Reference `json:"kmsKeyRef,omitempty" tf:"-"`
+	KMSKeyRef *v2.Reference `json:"kmsKeyRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKey.
 	// +kubebuilder:validation:Optional
-	KMSKeySelector *v1.Selector `json:"kmsKeySelector,omitempty" tf:"-"`
+	KMSKeySelector *v2.Selector `json:"kmsKeySelector,omitempty" tf:"-"`
 }
 
 type ImageScanningConfigurationInitParameters struct {
@@ -211,8 +211,8 @@ type RepositoryParameters struct {
 
 // RepositorySpec defines the desired state of Repository
 type RepositorySpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     RepositoryParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   RepositoryParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -228,8 +228,8 @@ type RepositorySpec struct {
 
 // RepositoryStatus defines the observed state of Repository.
 type RepositoryStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        RepositoryObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               RepositoryObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ClusterCapacityProvidersInitParameters struct {
@@ -26,11 +25,11 @@ type ClusterCapacityProvidersInitParameters struct {
 
 	// Reference to a Cluster in ecs to populate clusterName.
 	// +kubebuilder:validation:Optional
-	ClusterNameRef *v1.NamespacedReference `json:"clusterNameRef,omitempty" tf:"-"`
+	ClusterNameRef *v2.NamespacedReference `json:"clusterNameRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in ecs to populate clusterName.
 	// +kubebuilder:validation:Optional
-	ClusterNameSelector *v1.NamespacedSelector `json:"clusterNameSelector,omitempty" tf:"-"`
+	ClusterNameSelector *v2.NamespacedSelector `json:"clusterNameSelector,omitempty" tf:"-"`
 
 	// Set of capacity provider strategies to use by default for the cluster. Detailed below.
 	DefaultCapacityProviderStrategy []DefaultCapacityProviderStrategyInitParameters `json:"defaultCapacityProviderStrategy,omitempty" tf:"default_capacity_provider_strategy,omitempty"`
@@ -70,11 +69,11 @@ type ClusterCapacityProvidersParameters struct {
 
 	// Reference to a Cluster in ecs to populate clusterName.
 	// +kubebuilder:validation:Optional
-	ClusterNameRef *v1.NamespacedReference `json:"clusterNameRef,omitempty" tf:"-"`
+	ClusterNameRef *v2.NamespacedReference `json:"clusterNameRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in ecs to populate clusterName.
 	// +kubebuilder:validation:Optional
-	ClusterNameSelector *v1.NamespacedSelector `json:"clusterNameSelector,omitempty" tf:"-"`
+	ClusterNameSelector *v2.NamespacedSelector `json:"clusterNameSelector,omitempty" tf:"-"`
 
 	// Set of capacity provider strategies to use by default for the cluster. Detailed below.
 	// +kubebuilder:validation:Optional
@@ -144,8 +143,8 @@ type ClusterCapacityProvidersSpec struct {
 
 // ClusterCapacityProvidersStatus defines the observed state of ClusterCapacityProviders.
 type ClusterCapacityProvidersStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ClusterCapacityProvidersObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ClusterCapacityProvidersObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

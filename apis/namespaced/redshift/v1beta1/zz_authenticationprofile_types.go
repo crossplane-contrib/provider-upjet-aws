@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AuthenticationProfileInitParameters struct {
@@ -64,8 +63,8 @@ type AuthenticationProfileSpec struct {
 
 // AuthenticationProfileStatus defines the observed state of AuthenticationProfile.
 type AuthenticationProfileStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        AuthenticationProfileObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               AuthenticationProfileObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

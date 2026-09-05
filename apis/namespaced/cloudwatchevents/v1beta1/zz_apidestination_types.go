@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type APIDestinationInitParameters struct {
@@ -23,11 +22,11 @@ type APIDestinationInitParameters struct {
 
 	// Reference to a Connection in cloudwatchevents to populate connectionArn.
 	// +kubebuilder:validation:Optional
-	ConnectionArnRef *v1.NamespacedReference `json:"connectionArnRef,omitempty" tf:"-"`
+	ConnectionArnRef *v2.NamespacedReference `json:"connectionArnRef,omitempty" tf:"-"`
 
 	// Selector for a Connection in cloudwatchevents to populate connectionArn.
 	// +kubebuilder:validation:Optional
-	ConnectionArnSelector *v1.NamespacedSelector `json:"connectionArnSelector,omitempty" tf:"-"`
+	ConnectionArnSelector *v2.NamespacedSelector `json:"connectionArnSelector,omitempty" tf:"-"`
 
 	// The description of the new API Destination. Maximum of 512 characters.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
@@ -79,11 +78,11 @@ type APIDestinationParameters struct {
 
 	// Reference to a Connection in cloudwatchevents to populate connectionArn.
 	// +kubebuilder:validation:Optional
-	ConnectionArnRef *v1.NamespacedReference `json:"connectionArnRef,omitempty" tf:"-"`
+	ConnectionArnRef *v2.NamespacedReference `json:"connectionArnRef,omitempty" tf:"-"`
 
 	// Selector for a Connection in cloudwatchevents to populate connectionArn.
 	// +kubebuilder:validation:Optional
-	ConnectionArnSelector *v1.NamespacedSelector `json:"connectionArnSelector,omitempty" tf:"-"`
+	ConnectionArnSelector *v2.NamespacedSelector `json:"connectionArnSelector,omitempty" tf:"-"`
 
 	// The description of the new API Destination. Maximum of 512 characters.
 	// +kubebuilder:validation:Optional
@@ -126,8 +125,8 @@ type APIDestinationSpec struct {
 
 // APIDestinationStatus defines the observed state of APIDestination.
 type APIDestinationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        APIDestinationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               APIDestinationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

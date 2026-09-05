@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AccessPointInitParameters struct {
@@ -21,11 +21,11 @@ type AccessPointInitParameters struct {
 
 	// Reference to a FileSystem in efs to populate fileSystemId.
 	// +kubebuilder:validation:Optional
-	FileSystemIDRef *v1.Reference `json:"fileSystemIdRef,omitempty" tf:"-"`
+	FileSystemIDRef *v2.Reference `json:"fileSystemIdRef,omitempty" tf:"-"`
 
 	// Selector for a FileSystem in efs to populate fileSystemId.
 	// +kubebuilder:validation:Optional
-	FileSystemIDSelector *v1.Selector `json:"fileSystemIdSelector,omitempty" tf:"-"`
+	FileSystemIDSelector *v2.Selector `json:"fileSystemIdSelector,omitempty" tf:"-"`
 
 	// Operating system user and group applied to all file system requests made using the access point. Detailed below.
 	PosixUser []PosixUserInitParameters `json:"posixUser,omitempty" tf:"posix_user,omitempty"`
@@ -83,11 +83,11 @@ type AccessPointParameters struct {
 
 	// Reference to a FileSystem in efs to populate fileSystemId.
 	// +kubebuilder:validation:Optional
-	FileSystemIDRef *v1.Reference `json:"fileSystemIdRef,omitempty" tf:"-"`
+	FileSystemIDRef *v2.Reference `json:"fileSystemIdRef,omitempty" tf:"-"`
 
 	// Selector for a FileSystem in efs to populate fileSystemId.
 	// +kubebuilder:validation:Optional
-	FileSystemIDSelector *v1.Selector `json:"fileSystemIdSelector,omitempty" tf:"-"`
+	FileSystemIDSelector *v2.Selector `json:"fileSystemIdSelector,omitempty" tf:"-"`
 
 	// Operating system user and group applied to all file system requests made using the access point. Detailed below.
 	// +kubebuilder:validation:Optional
@@ -220,8 +220,8 @@ type RootDirectoryParameters struct {
 
 // AccessPointSpec defines the desired state of AccessPoint
 type AccessPointSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     AccessPointParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   AccessPointParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -237,8 +237,8 @@ type AccessPointSpec struct {
 
 // AccessPointStatus defines the observed state of AccessPoint.
 type AccessPointStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        AccessPointObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               AccessPointObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

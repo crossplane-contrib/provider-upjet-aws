@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type TableReplicaInitParameters_2 struct {
@@ -25,11 +25,11 @@ type TableReplicaInitParameters_2 struct {
 
 	// Reference to a Table in dynamodb to populate globalTableArn.
 	// +kubebuilder:validation:Optional
-	GlobalTableArnRef *v1.Reference `json:"globalTableArnRef,omitempty" tf:"-"`
+	GlobalTableArnRef *v2.Reference `json:"globalTableArnRef,omitempty" tf:"-"`
 
 	// Selector for a Table in dynamodb to populate globalTableArn.
 	// +kubebuilder:validation:Optional
-	GlobalTableArnSelector *v1.Selector `json:"globalTableArnSelector,omitempty" tf:"-"`
+	GlobalTableArnSelector *v2.Selector `json:"globalTableArnSelector,omitempty" tf:"-"`
 
 	// ARN of the CMK that should be used for the AWS KMS encryption. This argument should only be used if the key is different from the default KMS-managed DynamoDB key, alias/aws/dynamodb. Note: This attribute will not be populated with the ARN of default keys.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kms/v1beta1.Key
@@ -37,11 +37,11 @@ type TableReplicaInitParameters_2 struct {
 
 	// Reference to a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnRef *v1.Reference `json:"kmsKeyArnRef,omitempty" tf:"-"`
+	KMSKeyArnRef *v2.Reference `json:"kmsKeyArnRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnSelector *v1.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
+	KMSKeyArnSelector *v2.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
 
 	// Whether to enable Point In Time Recovery for the table replica. Default is false.
 	PointInTimeRecovery *bool `json:"pointInTimeRecovery,omitempty" tf:"point_in_time_recovery,omitempty"`
@@ -104,11 +104,11 @@ type TableReplicaParameters_2 struct {
 
 	// Reference to a Table in dynamodb to populate globalTableArn.
 	// +kubebuilder:validation:Optional
-	GlobalTableArnRef *v1.Reference `json:"globalTableArnRef,omitempty" tf:"-"`
+	GlobalTableArnRef *v2.Reference `json:"globalTableArnRef,omitempty" tf:"-"`
 
 	// Selector for a Table in dynamodb to populate globalTableArn.
 	// +kubebuilder:validation:Optional
-	GlobalTableArnSelector *v1.Selector `json:"globalTableArnSelector,omitempty" tf:"-"`
+	GlobalTableArnSelector *v2.Selector `json:"globalTableArnSelector,omitempty" tf:"-"`
 
 	// ARN of the CMK that should be used for the AWS KMS encryption. This argument should only be used if the key is different from the default KMS-managed DynamoDB key, alias/aws/dynamodb. Note: This attribute will not be populated with the ARN of default keys.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kms/v1beta1.Key
@@ -117,11 +117,11 @@ type TableReplicaParameters_2 struct {
 
 	// Reference to a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnRef *v1.Reference `json:"kmsKeyArnRef,omitempty" tf:"-"`
+	KMSKeyArnRef *v2.Reference `json:"kmsKeyArnRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnSelector *v1.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
+	KMSKeyArnSelector *v2.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
 
 	// Whether to enable Point In Time Recovery for the table replica. Default is false.
 	// +kubebuilder:validation:Optional
@@ -144,8 +144,8 @@ type TableReplicaParameters_2 struct {
 
 // TableReplicaSpec defines the desired state of TableReplica
 type TableReplicaSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     TableReplicaParameters_2 `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   TableReplicaParameters_2 `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -161,8 +161,8 @@ type TableReplicaSpec struct {
 
 // TableReplicaStatus defines the observed state of TableReplica.
 type TableReplicaStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        TableReplicaObservation_2 `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               TableReplicaObservation_2 `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

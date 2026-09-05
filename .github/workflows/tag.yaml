@@ -20,10 +20,10 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Create Tag
-        uses: negz/create-tag@39bae1e0932567a58c20dea5a1a0d18358503320 # v1
+        uses: negz/create-tag@8dce6c9d9b12d161abe01c02d2b03f19e2e9e9bb # v2
         with:
           version: ${{ github.event.inputs.version }}
           message: ${{ github.event.inputs.message }}

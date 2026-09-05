@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ActionInitParameters struct {
@@ -95,11 +94,11 @@ type CloudwatchDashboardInitParameters struct {
 
 	// Reference to a Dashboard in cloudwatch to populate dashboardArn.
 	// +kubebuilder:validation:Optional
-	DashboardArnRef *v1.NamespacedReference `json:"dashboardArnRef,omitempty" tf:"-"`
+	DashboardArnRef *v2.NamespacedReference `json:"dashboardArnRef,omitempty" tf:"-"`
 
 	// Selector for a Dashboard in cloudwatch to populate dashboardArn.
 	// +kubebuilder:validation:Optional
-	DashboardArnSelector *v1.NamespacedSelector `json:"dashboardArnSelector,omitempty" tf:"-"`
+	DashboardArnSelector *v2.NamespacedSelector `json:"dashboardArnSelector,omitempty" tf:"-"`
 }
 
 type CloudwatchDashboardObservation struct {
@@ -118,11 +117,11 @@ type CloudwatchDashboardParameters struct {
 
 	// Reference to a Dashboard in cloudwatch to populate dashboardArn.
 	// +kubebuilder:validation:Optional
-	DashboardArnRef *v1.NamespacedReference `json:"dashboardArnRef,omitempty" tf:"-"`
+	DashboardArnRef *v2.NamespacedReference `json:"dashboardArnRef,omitempty" tf:"-"`
 
 	// Selector for a Dashboard in cloudwatch to populate dashboardArn.
 	// +kubebuilder:validation:Optional
-	DashboardArnSelector *v1.NamespacedSelector `json:"dashboardArnSelector,omitempty" tf:"-"`
+	DashboardArnSelector *v2.NamespacedSelector `json:"dashboardArnSelector,omitempty" tf:"-"`
 }
 
 type CloudwatchLogsConfigurationInitParameters struct {
@@ -265,11 +264,11 @@ type ExperimentTemplateInitParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// When an ongoing experiment should be stopped. See below.
 	StopCondition []StopConditionInitParameters `json:"stopCondition,omitempty" tf:"stop_condition,omitempty"`
@@ -358,11 +357,11 @@ type ExperimentTemplateParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// When an ongoing experiment should be stopped. See below.
 	// +kubebuilder:validation:Optional
@@ -648,11 +647,11 @@ type S3ConfigurationInitParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucketName.
 	// +kubebuilder:validation:Optional
-	BucketNameRef *v1.NamespacedReference `json:"bucketNameRef,omitempty" tf:"-"`
+	BucketNameRef *v2.NamespacedReference `json:"bucketNameRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucketName.
 	// +kubebuilder:validation:Optional
-	BucketNameSelector *v1.NamespacedSelector `json:"bucketNameSelector,omitempty" tf:"-"`
+	BucketNameSelector *v2.NamespacedSelector `json:"bucketNameSelector,omitempty" tf:"-"`
 
 	// The bucket prefix.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
@@ -676,11 +675,11 @@ type S3ConfigurationParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucketName.
 	// +kubebuilder:validation:Optional
-	BucketNameRef *v1.NamespacedReference `json:"bucketNameRef,omitempty" tf:"-"`
+	BucketNameRef *v2.NamespacedReference `json:"bucketNameRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucketName.
 	// +kubebuilder:validation:Optional
-	BucketNameSelector *v1.NamespacedSelector `json:"bucketNameSelector,omitempty" tf:"-"`
+	BucketNameSelector *v2.NamespacedSelector `json:"bucketNameSelector,omitempty" tf:"-"`
 
 	// The bucket prefix.
 	// +kubebuilder:validation:Optional
@@ -764,8 +763,8 @@ type ExperimentTemplateSpec struct {
 
 // ExperimentTemplateStatus defines the observed state of ExperimentTemplate.
 type ExperimentTemplateStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ExperimentTemplateObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ExperimentTemplateObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type MappingRuleInitParameters struct {
@@ -28,11 +28,11 @@ type MappingRuleInitParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.Reference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// A brief string that the claim must match, for example, "paid" or "yes".
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
@@ -71,11 +71,11 @@ type MappingRuleParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.Reference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// A brief string that the claim must match, for example, "paid" or "yes".
 	// +kubebuilder:validation:Optional
@@ -91,11 +91,11 @@ type PoolRolesAttachmentInitParameters struct {
 
 	// Reference to a Pool in cognitoidentity to populate identityPoolId.
 	// +kubebuilder:validation:Optional
-	IdentityPoolIDRef *v1.Reference `json:"identityPoolIdRef,omitempty" tf:"-"`
+	IdentityPoolIDRef *v2.Reference `json:"identityPoolIdRef,omitempty" tf:"-"`
 
 	// Selector for a Pool in cognitoidentity to populate identityPoolId.
 	// +kubebuilder:validation:Optional
-	IdentityPoolIDSelector *v1.Selector `json:"identityPoolIdSelector,omitempty" tf:"-"`
+	IdentityPoolIDSelector *v2.Selector `json:"identityPoolIdSelector,omitempty" tf:"-"`
 
 	// A List of Role Mapping.
 	RoleMapping []RoleMappingInitParameters `json:"roleMapping,omitempty" tf:"role_mapping,omitempty"`
@@ -135,11 +135,11 @@ type PoolRolesAttachmentParameters struct {
 
 	// Reference to a Pool in cognitoidentity to populate identityPoolId.
 	// +kubebuilder:validation:Optional
-	IdentityPoolIDRef *v1.Reference `json:"identityPoolIdRef,omitempty" tf:"-"`
+	IdentityPoolIDRef *v2.Reference `json:"identityPoolIdRef,omitempty" tf:"-"`
 
 	// Selector for a Pool in cognitoidentity to populate identityPoolId.
 	// +kubebuilder:validation:Optional
-	IdentityPoolIDSelector *v1.Selector `json:"identityPoolIdSelector,omitempty" tf:"-"`
+	IdentityPoolIDSelector *v2.Selector `json:"identityPoolIdSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -207,8 +207,8 @@ type RoleMappingParameters struct {
 
 // PoolRolesAttachmentSpec defines the desired state of PoolRolesAttachment
 type PoolRolesAttachmentSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     PoolRolesAttachmentParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   PoolRolesAttachmentParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -224,8 +224,8 @@ type PoolRolesAttachmentSpec struct {
 
 // PoolRolesAttachmentStatus defines the observed state of PoolRolesAttachment.
 type PoolRolesAttachmentStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        PoolRolesAttachmentObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               PoolRolesAttachmentObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

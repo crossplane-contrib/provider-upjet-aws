@@ -5,54 +5,54 @@
 
 package v1beta2
 
-import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+import xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 
 // GetCondition of this Insight.
-func (mg *Insight) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *Insight) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this Insight.
-func (mg *Insight) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *Insight) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this Insight.
-func (mg *Insight) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *Insight) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this Insight.
-func (mg *Insight) GetProviderConfigReference() *xpv1.Reference {
+func (mg *Insight) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this Insight.
-func (mg *Insight) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *Insight) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this Insight.
-func (mg *Insight) SetConditions(c ...xpv1.Condition) {
+func (mg *Insight) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this Insight.
-func (mg *Insight) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *Insight) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this Insight.
-func (mg *Insight) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *Insight) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this Insight.
-func (mg *Insight) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *Insight) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this Insight.
-func (mg *Insight) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *Insight) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

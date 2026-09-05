@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type DeploymentInitParameters struct {
@@ -25,11 +25,11 @@ type DeploymentInitParameters struct {
 
 	// Reference to a RestAPI in apigateway to populate restApiId.
 	// +kubebuilder:validation:Optional
-	RestAPIIDRef *v1.Reference `json:"restApiIdRef,omitempty" tf:"-"`
+	RestAPIIDRef *v2.Reference `json:"restApiIdRef,omitempty" tf:"-"`
 
 	// Selector for a RestAPI in apigateway to populate restApiId.
 	// +kubebuilder:validation:Optional
-	RestAPIIDSelector *v1.Selector `json:"restApiIdSelector,omitempty" tf:"-"`
+	RestAPIIDSelector *v2.Selector `json:"restApiIdSelector,omitempty" tf:"-"`
 
 	// argument or explicit resource references using the resource . The triggers argument should be preferred over depends_on, since depends_on can only capture dependency ordering and will not cause the resource to recreate (redeploy the REST API) with upstream configuration changes.
 	// +mapType=granular
@@ -86,11 +86,11 @@ type DeploymentParameters struct {
 
 	// Reference to a RestAPI in apigateway to populate restApiId.
 	// +kubebuilder:validation:Optional
-	RestAPIIDRef *v1.Reference `json:"restApiIdRef,omitempty" tf:"-"`
+	RestAPIIDRef *v2.Reference `json:"restApiIdRef,omitempty" tf:"-"`
 
 	// Selector for a RestAPI in apigateway to populate restApiId.
 	// +kubebuilder:validation:Optional
-	RestAPIIDSelector *v1.Selector `json:"restApiIdSelector,omitempty" tf:"-"`
+	RestAPIIDSelector *v2.Selector `json:"restApiIdSelector,omitempty" tf:"-"`
 
 	// argument or explicit resource references using the resource . The triggers argument should be preferred over depends_on, since depends_on can only capture dependency ordering and will not cause the resource to recreate (redeploy the REST API) with upstream configuration changes.
 	// +kubebuilder:validation:Optional
@@ -105,8 +105,8 @@ type DeploymentParameters struct {
 
 // DeploymentSpec defines the desired state of Deployment
 type DeploymentSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     DeploymentParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   DeploymentParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -122,8 +122,8 @@ type DeploymentSpec struct {
 
 // DeploymentStatus defines the observed state of Deployment.
 type DeploymentStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        DeploymentObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               DeploymentObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

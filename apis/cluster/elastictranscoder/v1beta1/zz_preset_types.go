@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AudioCodecOptionsInitParameters struct {
@@ -584,8 +584,8 @@ type VideoWatermarksParameters struct {
 
 // PresetSpec defines the desired state of Preset
 type PresetSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     PresetParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   PresetParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -601,8 +601,8 @@ type PresetSpec struct {
 
 // PresetStatus defines the observed state of Preset.
 type PresetStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        PresetObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               PresetObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

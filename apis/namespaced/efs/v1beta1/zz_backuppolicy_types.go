@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type BackupPolicyBackupPolicyInitParameters struct {
@@ -44,11 +43,11 @@ type BackupPolicyInitParameters struct {
 
 	// Reference to a FileSystem in efs to populate fileSystemId.
 	// +kubebuilder:validation:Optional
-	FileSystemIDRef *v1.NamespacedReference `json:"fileSystemIdRef,omitempty" tf:"-"`
+	FileSystemIDRef *v2.NamespacedReference `json:"fileSystemIdRef,omitempty" tf:"-"`
 
 	// Selector for a FileSystem in efs to populate fileSystemId.
 	// +kubebuilder:validation:Optional
-	FileSystemIDSelector *v1.NamespacedSelector `json:"fileSystemIdSelector,omitempty" tf:"-"`
+	FileSystemIDSelector *v2.NamespacedSelector `json:"fileSystemIdSelector,omitempty" tf:"-"`
 }
 
 type BackupPolicyObservation struct {
@@ -80,11 +79,11 @@ type BackupPolicyParameters struct {
 
 	// Reference to a FileSystem in efs to populate fileSystemId.
 	// +kubebuilder:validation:Optional
-	FileSystemIDRef *v1.NamespacedReference `json:"fileSystemIdRef,omitempty" tf:"-"`
+	FileSystemIDRef *v2.NamespacedReference `json:"fileSystemIdRef,omitempty" tf:"-"`
 
 	// Selector for a FileSystem in efs to populate fileSystemId.
 	// +kubebuilder:validation:Optional
-	FileSystemIDSelector *v1.NamespacedSelector `json:"fileSystemIdSelector,omitempty" tf:"-"`
+	FileSystemIDSelector *v2.NamespacedSelector `json:"fileSystemIdSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -111,8 +110,8 @@ type BackupPolicySpec struct {
 
 // BackupPolicyStatus defines the observed state of BackupPolicy.
 type BackupPolicyStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        BackupPolicyObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               BackupPolicyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

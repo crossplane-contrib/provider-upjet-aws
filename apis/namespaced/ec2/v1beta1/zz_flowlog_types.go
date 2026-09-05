@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type DestinationOptionsInitParameters struct {
@@ -62,11 +61,11 @@ type FlowLogInitParameters struct {
 
 	// Reference to a Role in iam to populate deliverCrossAccountRole.
 	// +kubebuilder:validation:Optional
-	DeliverCrossAccountRoleRef *v1.NamespacedReference `json:"deliverCrossAccountRoleRef,omitempty" tf:"-"`
+	DeliverCrossAccountRoleRef *v2.NamespacedReference `json:"deliverCrossAccountRoleRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate deliverCrossAccountRole.
 	// +kubebuilder:validation:Optional
-	DeliverCrossAccountRoleSelector *v1.NamespacedSelector `json:"deliverCrossAccountRoleSelector,omitempty" tf:"-"`
+	DeliverCrossAccountRoleSelector *v2.NamespacedSelector `json:"deliverCrossAccountRoleSelector,omitempty" tf:"-"`
 
 	// Describes the destination options for a flow log. More details below.
 	DestinationOptions *DestinationOptionsInitParameters `json:"destinationOptions,omitempty" tf:"destination_options,omitempty"`
@@ -81,11 +80,11 @@ type FlowLogInitParameters struct {
 
 	// Reference to a Role in iam to populate iamRoleArn.
 	// +kubebuilder:validation:Optional
-	IAMRoleArnRef *v1.NamespacedReference `json:"iamRoleArnRef,omitempty" tf:"-"`
+	IAMRoleArnRef *v2.NamespacedReference `json:"iamRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate iamRoleArn.
 	// +kubebuilder:validation:Optional
-	IAMRoleArnSelector *v1.NamespacedSelector `json:"iamRoleArnSelector,omitempty" tf:"-"`
+	IAMRoleArnSelector *v2.NamespacedSelector `json:"iamRoleArnSelector,omitempty" tf:"-"`
 
 	// ARN of the logging destination.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/cloudwatchlogs/v1beta1.Group
@@ -94,11 +93,11 @@ type FlowLogInitParameters struct {
 
 	// Reference to a Group in cloudwatchlogs to populate logDestination.
 	// +kubebuilder:validation:Optional
-	LogDestinationRef *v1.NamespacedReference `json:"logDestinationRef,omitempty" tf:"-"`
+	LogDestinationRef *v2.NamespacedReference `json:"logDestinationRef,omitempty" tf:"-"`
 
 	// Selector for a Group in cloudwatchlogs to populate logDestination.
 	// +kubebuilder:validation:Optional
-	LogDestinationSelector *v1.NamespacedSelector `json:"logDestinationSelector,omitempty" tf:"-"`
+	LogDestinationSelector *v2.NamespacedSelector `json:"logDestinationSelector,omitempty" tf:"-"`
 
 	// Logging destination type. Valid values: cloud-watch-logs, s3, kinesis-data-firehose. Default: cloud-watch-logs.
 	LogDestinationType *string `json:"logDestinationType,omitempty" tf:"log_destination_type,omitempty"`
@@ -120,11 +119,11 @@ type FlowLogInitParameters struct {
 
 	// Reference to a Subnet in ec2 to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in ec2 to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -145,11 +144,11 @@ type FlowLogInitParameters struct {
 
 	// Reference to a VPC in ec2 to populate vpcId.
 	// +kubebuilder:validation:Optional
-	VPCIDRef *v1.NamespacedReference `json:"vpcIdRef,omitempty" tf:"-"`
+	VPCIDRef *v2.NamespacedReference `json:"vpcIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPC in ec2 to populate vpcId.
 	// +kubebuilder:validation:Optional
-	VPCIDSelector *v1.NamespacedSelector `json:"vpcIdSelector,omitempty" tf:"-"`
+	VPCIDSelector *v2.NamespacedSelector `json:"vpcIdSelector,omitempty" tf:"-"`
 }
 
 type FlowLogObservation struct {
@@ -227,11 +226,11 @@ type FlowLogParameters struct {
 
 	// Reference to a Role in iam to populate deliverCrossAccountRole.
 	// +kubebuilder:validation:Optional
-	DeliverCrossAccountRoleRef *v1.NamespacedReference `json:"deliverCrossAccountRoleRef,omitempty" tf:"-"`
+	DeliverCrossAccountRoleRef *v2.NamespacedReference `json:"deliverCrossAccountRoleRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate deliverCrossAccountRole.
 	// +kubebuilder:validation:Optional
-	DeliverCrossAccountRoleSelector *v1.NamespacedSelector `json:"deliverCrossAccountRoleSelector,omitempty" tf:"-"`
+	DeliverCrossAccountRoleSelector *v2.NamespacedSelector `json:"deliverCrossAccountRoleSelector,omitempty" tf:"-"`
 
 	// Describes the destination options for a flow log. More details below.
 	// +kubebuilder:validation:Optional
@@ -249,11 +248,11 @@ type FlowLogParameters struct {
 
 	// Reference to a Role in iam to populate iamRoleArn.
 	// +kubebuilder:validation:Optional
-	IAMRoleArnRef *v1.NamespacedReference `json:"iamRoleArnRef,omitempty" tf:"-"`
+	IAMRoleArnRef *v2.NamespacedReference `json:"iamRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate iamRoleArn.
 	// +kubebuilder:validation:Optional
-	IAMRoleArnSelector *v1.NamespacedSelector `json:"iamRoleArnSelector,omitempty" tf:"-"`
+	IAMRoleArnSelector *v2.NamespacedSelector `json:"iamRoleArnSelector,omitempty" tf:"-"`
 
 	// ARN of the logging destination.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/cloudwatchlogs/v1beta1.Group
@@ -263,11 +262,11 @@ type FlowLogParameters struct {
 
 	// Reference to a Group in cloudwatchlogs to populate logDestination.
 	// +kubebuilder:validation:Optional
-	LogDestinationRef *v1.NamespacedReference `json:"logDestinationRef,omitempty" tf:"-"`
+	LogDestinationRef *v2.NamespacedReference `json:"logDestinationRef,omitempty" tf:"-"`
 
 	// Selector for a Group in cloudwatchlogs to populate logDestination.
 	// +kubebuilder:validation:Optional
-	LogDestinationSelector *v1.NamespacedSelector `json:"logDestinationSelector,omitempty" tf:"-"`
+	LogDestinationSelector *v2.NamespacedSelector `json:"logDestinationSelector,omitempty" tf:"-"`
 
 	// Logging destination type. Valid values: cloud-watch-logs, s3, kinesis-data-firehose. Default: cloud-watch-logs.
 	// +kubebuilder:validation:Optional
@@ -299,11 +298,11 @@ type FlowLogParameters struct {
 
 	// Reference to a Subnet in ec2 to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in ec2 to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -329,11 +328,11 @@ type FlowLogParameters struct {
 
 	// Reference to a VPC in ec2 to populate vpcId.
 	// +kubebuilder:validation:Optional
-	VPCIDRef *v1.NamespacedReference `json:"vpcIdRef,omitempty" tf:"-"`
+	VPCIDRef *v2.NamespacedReference `json:"vpcIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPC in ec2 to populate vpcId.
 	// +kubebuilder:validation:Optional
-	VPCIDSelector *v1.NamespacedSelector `json:"vpcIdSelector,omitempty" tf:"-"`
+	VPCIDSelector *v2.NamespacedSelector `json:"vpcIdSelector,omitempty" tf:"-"`
 }
 
 // FlowLogSpec defines the desired state of FlowLog
@@ -355,8 +354,8 @@ type FlowLogSpec struct {
 
 // FlowLogStatus defines the observed state of FlowLog.
 type FlowLogStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        FlowLogObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               FlowLogObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

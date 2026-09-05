@@ -9,6 +9,7 @@ package attachment
 import (
 	"time"
 
+	"github.com/crossplane/crossplane-runtime/v2/pkg/errors"
 	"github.com/crossplane/crossplane-runtime/v2/pkg/event"
 	xpfeature "github.com/crossplane/crossplane-runtime/v2/pkg/feature"
 	"github.com/crossplane/crossplane-runtime/v2/pkg/ratelimiter"
@@ -18,12 +19,22 @@ import (
 	tjcontroller "github.com/crossplane/upjet/v2/pkg/controller"
 	"github.com/crossplane/upjet/v2/pkg/controller/handler"
 	"github.com/crossplane/upjet/v2/pkg/metrics"
-	"github.com/pkg/errors"
+	"github.com/crossplane/upjet/v2/pkg/reconciler/reconciliationpolicy"
 	ctrl "sigs.k8s.io/controller-runtime"
 
 	v1beta2 "github.com/upbound/provider-aws/v2/apis/cluster/autoscaling/v1beta2"
+	"github.com/upbound/provider-aws/v2/internal/clients"
 	features "github.com/upbound/provider-aws/v2/internal/features"
 )
+
+// SetupWebhookWithManager registers the conversion webhook for Attachment.
+func SetupWebhookWithManager(mgr ctrl.Manager) error {
+	if err := ctrl.NewWebhookManagedBy(mgr, &v1beta2.Attachment{}).
+		Complete(); err != nil {
+		return errors.Wrap(err, "cannot register webhook for the kind v1beta2.Attachment")
+	}
+	return nil
+}
 
 // SetupGated adds a controller that reconciles Attachment managed resources.
 func SetupGated(mgr ctrl.Manager, o tjcontroller.Options) error {
@@ -39,7 +50,8 @@ func SetupGated(mgr ctrl.Manager, o tjcontroller.Options) error {
 func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
 	name := managed.ControllerName(v1beta2.Attachment_GroupVersionKind.String())
 	var initializers managed.InitializerChain
-	eventHandler := handler.NewEventHandler(handler.WithLogger(o.Logger.WithValues("gvk", v1beta2.Attachment_GroupVersionKind)))
+	rl := reconciliationpolicy.NewExponentialFailureRateLimiter(time.Second, 60*time.Second)
+	eventHandler := handler.NewEventHandler(handler.WithDefaultRateLimiter(rl), handler.WithLogger(o.Logger.WithValues("gvk", v1beta2.Attachment_GroupVersionKind)))
 	ac := tjcontroller.NewAPICallbacks(mgr, xpresource.ManagedKind(v1beta2.Attachment_GroupVersionKind), tjcontroller.WithEventHandler(eventHandler), tjcontroller.WithStatusUpdates(false))
 	opts := []managed.ReconcilerOption{
 		managed.WithExternalConnecter(
@@ -48,14 +60,22 @@ func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
 				tjcontroller.WithTerraformPluginSDKAsyncConnectorEventHandler(eventHandler),
 				tjcontroller.WithTerraformPluginSDKAsyncCallbackProvider(ac),
 				tjcontroller.WithTerraformPluginSDKAsyncMetricRecorder(metrics.NewMetricRecorder(v1beta2.Attachment_GroupVersionKind, mgr, o.PollInterval)),
-				tjcontroller.WithTerraformPluginSDKAsyncManagementPolicies(o.Features.Enabled(features.EnableBetaManagementPolicies)))),
+				tjcontroller.WithTerraformPluginSDKAsyncManagementPolicies(o.Features.Enabled(features.EnableBetaManagementPolicies)),
+			),
+		),
 		managed.WithLogger(o.Logger.WithValues("controller", name)),
 		managed.WithRecorder(event.NewAPIRecorder(mgr.GetEventRecorderFor(name))),
-		managed.WithFinalizer(tjcontroller.NewOperationTrackerFinalizer(o.OperationTrackerStore, xpresource.NewAPIFinalizer(mgr.GetClient(), managed.FinalizerName))),
+		managed.WithFinalizer(
+			reconciliationpolicy.NewFinalizer(
+				tjcontroller.NewOperationTrackerFinalizer(o.OperationTrackerStore, xpresource.NewAPIFinalizer(mgr.GetClient(), managed.FinalizerName)),
+				reconciliationpolicy.WithFinalizerRateLimiter(rl),
+			),
+		),
 		managed.WithTimeout(3 * time.Minute),
 		managed.WithInitializers(initializers),
 		managed.WithPollInterval(o.PollInterval),
 	}
+
 	if o.PollJitter != 0 {
 		opts = append(opts, managed.WithPollJitterHook(o.PollJitter))
 	}
@@ -65,14 +85,8 @@ func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
 	if o.MetricOptions != nil {
 		opts = append(opts, managed.WithMetricRecorder(o.MetricOptions.MRMetrics))
 	}
-
-	// register webhooks for the kind v1beta2.Attachment
-	// if they're enabled.
-	if o.StartWebhooks {
-		if err := ctrl.NewWebhookManagedBy(mgr, &v1beta2.Attachment{}).
-			Complete(); err != nil {
-			return errors.Wrap(err, "cannot register webhook for the kind v1beta2.Attachment")
-		}
+	if o.Features.Enabled(xpfeature.EnableAlphaChangeLogs) {
+		opts = append(opts, managed.WithChangeLogger(o.ChangeLogOptions.ChangeLogger))
 	}
 
 	if o.MetricOptions != nil && o.MetricOptions.MRStateMetrics != nil {
@@ -84,16 +98,22 @@ func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
 		}
 	}
 
-	if o.Features.Enabled(xpfeature.EnableAlphaChangeLogs) {
-		opts = append(opts, managed.WithChangeLogger(o.ChangeLogOptions.ChangeLogger))
-	}
-
 	r := managed.NewReconciler(mgr, xpresource.ManagedKind(v1beta2.Attachment_GroupVersionKind), opts...)
+	co := o.ForControllerRuntime()
+	co.RateLimiter = rl
 
 	return ctrl.NewControllerManagedBy(mgr).
 		Named(name).
-		WithOptions(o.ForControllerRuntime()).
+		WithOptions(co).
 		WithEventFilter(xpresource.DesiredStateChanged()).
 		Watches(&v1beta2.Attachment{}, eventHandler).
-		Complete(ratelimiter.NewReconciler(name, r, o.GlobalRateLimiter))
+		Complete(
+			reconciliationpolicy.NewReconciler(
+				ratelimiter.NewReconciler(name, r, o.GlobalRateLimiter),
+				mgr,
+				v1beta2.Attachment_GroupVersionKind,
+				reconciliationpolicy.WithRateLimiter(rl),
+				reconciliationpolicy.WithSource(clients.ReconciliationPolicy),
+			),
+		)
 }

@@ -10,13 +10,111 @@ import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
 	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
+	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	errors "github.com/pkg/errors"
 	apisresolver "github.com/upbound/provider-aws/v2/internal/apis"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
-func (mg *VPCEndpoint) ResolveReferences( // ResolveReferences of this VPCEndpoint.
+func (mg *Collection) ResolveReferences( // ResolveReferences of this Collection.
 	ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("opensearchserverless.aws.upbound.io", "v1beta1", "CollectionGroup", "CollectionGroupList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CollectionGroupName),
+			Extract:      resource.ExtractParamPath("name", false),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.CollectionGroupNameRef,
+			Selector:     mg.Spec.ForProvider.CollectionGroupNameSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.CollectionGroupName")
+	}
+	mg.Spec.ForProvider.CollectionGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.CollectionGroupNameRef = rsp.ResolvedReference
+
+	if mg.Spec.ForProvider.EncryptionConfig != nil {
+		{
+			m, l, err = apisresolver.GetManagedResource("kms.aws.upbound.io", "v1beta1", "Key", "KeyList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EncryptionConfig.KMSKeyArn),
+				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
+				Reference:    mg.Spec.ForProvider.EncryptionConfig.KMSKeyArnRef,
+				Selector:     mg.Spec.ForProvider.EncryptionConfig.KMSKeyArnSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.EncryptionConfig.KMSKeyArn")
+		}
+		mg.Spec.ForProvider.EncryptionConfig.KMSKeyArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.EncryptionConfig.KMSKeyArnRef = rsp.ResolvedReference
+
+	}
+	{
+		m, l, err = apisresolver.GetManagedResource("opensearchserverless.aws.upbound.io", "v1beta1", "CollectionGroup", "CollectionGroupList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CollectionGroupName),
+			Extract:      resource.ExtractParamPath("name", false),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.CollectionGroupNameRef,
+			Selector:     mg.Spec.InitProvider.CollectionGroupNameSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.CollectionGroupName")
+	}
+	mg.Spec.InitProvider.CollectionGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.CollectionGroupNameRef = rsp.ResolvedReference
+
+	if mg.Spec.InitProvider.EncryptionConfig != nil {
+		{
+			m, l, err = apisresolver.GetManagedResource("kms.aws.upbound.io", "v1beta1", "Key", "KeyList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EncryptionConfig.KMSKeyArn),
+				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
+				Reference:    mg.Spec.InitProvider.EncryptionConfig.KMSKeyArnRef,
+				Selector:     mg.Spec.InitProvider.EncryptionConfig.KMSKeyArnSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.EncryptionConfig.KMSKeyArn")
+		}
+		mg.Spec.InitProvider.EncryptionConfig.KMSKeyArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.EncryptionConfig.KMSKeyArnRef = rsp.ResolvedReference
+
+	}
+
+	return nil
+}
+
+// ResolveReferences of this VPCEndpoint.
+func (mg *VPCEndpoint) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed
 	var l xpresource.ManagedList
 	r := reference.NewAPIResolver(c, mg)

@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ConnectAttachmentInitParameters struct {
@@ -22,11 +21,11 @@ type ConnectAttachmentInitParameters struct {
 
 	// Reference to a CoreNetwork in networkmanager to populate coreNetworkId.
 	// +kubebuilder:validation:Optional
-	CoreNetworkIDRef *v1.NamespacedReference `json:"coreNetworkIdRef,omitempty" tf:"-"`
+	CoreNetworkIDRef *v2.NamespacedReference `json:"coreNetworkIdRef,omitempty" tf:"-"`
 
 	// Selector for a CoreNetwork in networkmanager to populate coreNetworkId.
 	// +kubebuilder:validation:Optional
-	CoreNetworkIDSelector *v1.NamespacedSelector `json:"coreNetworkIdSelector,omitempty" tf:"-"`
+	CoreNetworkIDSelector *v2.NamespacedSelector `json:"coreNetworkIdSelector,omitempty" tf:"-"`
 
 	// Region where the edge is located.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/networkmanager/v1beta1.VPCAttachment
@@ -35,11 +34,11 @@ type ConnectAttachmentInitParameters struct {
 
 	// Reference to a VPCAttachment in networkmanager to populate edgeLocation.
 	// +kubebuilder:validation:Optional
-	EdgeLocationRef *v1.NamespacedReference `json:"edgeLocationRef,omitempty" tf:"-"`
+	EdgeLocationRef *v2.NamespacedReference `json:"edgeLocationRef,omitempty" tf:"-"`
 
 	// Selector for a VPCAttachment in networkmanager to populate edgeLocation.
 	// +kubebuilder:validation:Optional
-	EdgeLocationSelector *v1.NamespacedSelector `json:"edgeLocationSelector,omitempty" tf:"-"`
+	EdgeLocationSelector *v2.NamespacedSelector `json:"edgeLocationSelector,omitempty" tf:"-"`
 
 	// Options block. See options for more information.
 	Options *OptionsInitParameters `json:"options,omitempty" tf:"options,omitempty"`
@@ -58,11 +57,11 @@ type ConnectAttachmentInitParameters struct {
 
 	// Reference to a VPCAttachment in networkmanager to populate transportAttachmentId.
 	// +kubebuilder:validation:Optional
-	TransportAttachmentIDRef *v1.NamespacedReference `json:"transportAttachmentIdRef,omitempty" tf:"-"`
+	TransportAttachmentIDRef *v2.NamespacedReference `json:"transportAttachmentIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPCAttachment in networkmanager to populate transportAttachmentId.
 	// +kubebuilder:validation:Optional
-	TransportAttachmentIDSelector *v1.NamespacedSelector `json:"transportAttachmentIdSelector,omitempty" tf:"-"`
+	TransportAttachmentIDSelector *v2.NamespacedSelector `json:"transportAttachmentIdSelector,omitempty" tf:"-"`
 }
 
 type ConnectAttachmentObservation struct {
@@ -129,11 +128,11 @@ type ConnectAttachmentParameters struct {
 
 	// Reference to a CoreNetwork in networkmanager to populate coreNetworkId.
 	// +kubebuilder:validation:Optional
-	CoreNetworkIDRef *v1.NamespacedReference `json:"coreNetworkIdRef,omitempty" tf:"-"`
+	CoreNetworkIDRef *v2.NamespacedReference `json:"coreNetworkIdRef,omitempty" tf:"-"`
 
 	// Selector for a CoreNetwork in networkmanager to populate coreNetworkId.
 	// +kubebuilder:validation:Optional
-	CoreNetworkIDSelector *v1.NamespacedSelector `json:"coreNetworkIdSelector,omitempty" tf:"-"`
+	CoreNetworkIDSelector *v2.NamespacedSelector `json:"coreNetworkIdSelector,omitempty" tf:"-"`
 
 	// Region where the edge is located.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/networkmanager/v1beta1.VPCAttachment
@@ -143,11 +142,11 @@ type ConnectAttachmentParameters struct {
 
 	// Reference to a VPCAttachment in networkmanager to populate edgeLocation.
 	// +kubebuilder:validation:Optional
-	EdgeLocationRef *v1.NamespacedReference `json:"edgeLocationRef,omitempty" tf:"-"`
+	EdgeLocationRef *v2.NamespacedReference `json:"edgeLocationRef,omitempty" tf:"-"`
 
 	// Selector for a VPCAttachment in networkmanager to populate edgeLocation.
 	// +kubebuilder:validation:Optional
-	EdgeLocationSelector *v1.NamespacedSelector `json:"edgeLocationSelector,omitempty" tf:"-"`
+	EdgeLocationSelector *v2.NamespacedSelector `json:"edgeLocationSelector,omitempty" tf:"-"`
 
 	// Options block. See options for more information.
 	// +kubebuilder:validation:Optional
@@ -170,11 +169,11 @@ type ConnectAttachmentParameters struct {
 
 	// Reference to a VPCAttachment in networkmanager to populate transportAttachmentId.
 	// +kubebuilder:validation:Optional
-	TransportAttachmentIDRef *v1.NamespacedReference `json:"transportAttachmentIdRef,omitempty" tf:"-"`
+	TransportAttachmentIDRef *v2.NamespacedReference `json:"transportAttachmentIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPCAttachment in networkmanager to populate transportAttachmentId.
 	// +kubebuilder:validation:Optional
-	TransportAttachmentIDSelector *v1.NamespacedSelector `json:"transportAttachmentIdSelector,omitempty" tf:"-"`
+	TransportAttachmentIDSelector *v2.NamespacedSelector `json:"transportAttachmentIdSelector,omitempty" tf:"-"`
 }
 
 type OptionsInitParameters struct {
@@ -215,8 +214,8 @@ type ConnectAttachmentSpec struct {
 
 // ConnectAttachmentStatus defines the observed state of ConnectAttachment.
 type ConnectAttachmentStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ConnectAttachmentObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ConnectAttachmentObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

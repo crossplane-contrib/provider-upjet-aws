@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ApplicationInitParameters struct {
@@ -33,6 +32,8 @@ type ApplicationInitParameters struct {
 
 	// Enables the interactive use cases to use when running an application.
 	InteractiveConfiguration *InteractiveConfigurationInitParameters `json:"interactiveConfiguration,omitempty" tf:"interactive_configuration,omitempty"`
+
+	JobLevelCostAllocationConfiguration *JobLevelCostAllocationConfigurationInitParameters `json:"jobLevelCostAllocationConfiguration,omitempty" tf:"job_level_cost_allocation_configuration,omitempty"`
 
 	// The maximum capacity to allocate when the application is created. This is cumulative across all workers at any given point in time, not just when an application is created. No new resources will be created once any one of the defined limits is hit.
 	MaximumCapacity *MaximumCapacityInitParameters `json:"maximumCapacity,omitempty" tf:"maximum_capacity,omitempty"`
@@ -88,6 +89,8 @@ type ApplicationObservation struct {
 
 	// Enables the interactive use cases to use when running an application.
 	InteractiveConfiguration *InteractiveConfigurationObservation `json:"interactiveConfiguration,omitempty" tf:"interactive_configuration,omitempty"`
+
+	JobLevelCostAllocationConfiguration *JobLevelCostAllocationConfigurationObservation `json:"jobLevelCostAllocationConfiguration,omitempty" tf:"job_level_cost_allocation_configuration,omitempty"`
 
 	// The maximum capacity to allocate when the application is created. This is cumulative across all workers at any given point in time, not just when an application is created. No new resources will be created once any one of the defined limits is hit.
 	MaximumCapacity *MaximumCapacityObservation `json:"maximumCapacity,omitempty" tf:"maximum_capacity,omitempty"`
@@ -151,6 +154,9 @@ type ApplicationParameters struct {
 	// Enables the interactive use cases to use when running an application.
 	// +kubebuilder:validation:Optional
 	InteractiveConfiguration *InteractiveConfigurationParameters `json:"interactiveConfiguration,omitempty" tf:"interactive_configuration,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	JobLevelCostAllocationConfiguration *JobLevelCostAllocationConfigurationParameters `json:"jobLevelCostAllocationConfiguration,omitempty" tf:"job_level_cost_allocation_configuration,omitempty"`
 
 	// The maximum capacity to allocate when the application is created. This is cumulative across all workers at any given point in time, not just when an application is created. No new resources will be created once any one of the defined limits is hit.
 	// +kubebuilder:validation:Optional
@@ -406,6 +412,25 @@ type InteractiveConfigurationParameters struct {
 	// Enables you to connect an application to Amazon EMR Studio to run interactive workloads in a notebook.
 	// +kubebuilder:validation:Optional
 	StudioEnabled *bool `json:"studioEnabled,omitempty" tf:"studio_enabled,omitempty"`
+}
+
+type JobLevelCostAllocationConfigurationInitParameters struct {
+
+	// Enables the application to automatically start on job submission. Defaults to true.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+}
+
+type JobLevelCostAllocationConfigurationObservation struct {
+
+	// Enables the application to automatically start on job submission. Defaults to true.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+}
+
+type JobLevelCostAllocationConfigurationParameters struct {
+
+	// Enables the application to automatically start on job submission. Defaults to true.
+	// +kubebuilder:validation:Optional
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 }
 
 type LogTypesInitParameters struct {
@@ -759,8 +784,8 @@ type ApplicationSpec struct {
 
 // ApplicationStatus defines the observed state of Application.
 type ApplicationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ApplicationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ApplicationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

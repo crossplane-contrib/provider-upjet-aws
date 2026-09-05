@@ -13,5 +13,4 @@ metadata:
   namespace: upbound-system
 spec:
   forProvider:
-    email: v2-example@example.com
     region: us-west-1

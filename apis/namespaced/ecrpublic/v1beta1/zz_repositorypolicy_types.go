@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type RepositoryPolicyInitParameters struct {
@@ -25,11 +24,11 @@ type RepositoryPolicyInitParameters struct {
 
 	// Reference to a Repository in ecrpublic to populate repositoryName.
 	// +kubebuilder:validation:Optional
-	RepositoryNameRef *v1.NamespacedReference `json:"repositoryNameRef,omitempty" tf:"-"`
+	RepositoryNameRef *v2.NamespacedReference `json:"repositoryNameRef,omitempty" tf:"-"`
 
 	// Selector for a Repository in ecrpublic to populate repositoryName.
 	// +kubebuilder:validation:Optional
-	RepositoryNameSelector *v1.NamespacedSelector `json:"repositoryNameSelector,omitempty" tf:"-"`
+	RepositoryNameSelector *v2.NamespacedSelector `json:"repositoryNameSelector,omitempty" tf:"-"`
 }
 
 type RepositoryPolicyObservation struct {
@@ -67,11 +66,11 @@ type RepositoryPolicyParameters struct {
 
 	// Reference to a Repository in ecrpublic to populate repositoryName.
 	// +kubebuilder:validation:Optional
-	RepositoryNameRef *v1.NamespacedReference `json:"repositoryNameRef,omitempty" tf:"-"`
+	RepositoryNameRef *v2.NamespacedReference `json:"repositoryNameRef,omitempty" tf:"-"`
 
 	// Selector for a Repository in ecrpublic to populate repositoryName.
 	// +kubebuilder:validation:Optional
-	RepositoryNameSelector *v1.NamespacedSelector `json:"repositoryNameSelector,omitempty" tf:"-"`
+	RepositoryNameSelector *v2.NamespacedSelector `json:"repositoryNameSelector,omitempty" tf:"-"`
 }
 
 // RepositoryPolicySpec defines the desired state of RepositoryPolicy
@@ -93,8 +92,8 @@ type RepositoryPolicySpec struct {
 
 // RepositoryPolicyStatus defines the observed state of RepositoryPolicy.
 type RepositoryPolicyStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        RepositoryPolicyObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               RepositoryPolicyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

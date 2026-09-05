@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ActionFixedResponseInitParameters struct {
@@ -95,11 +94,11 @@ type ForwardTargetGroupsInitParameters struct {
 
 	// Reference to a TargetGroup in vpclattice to populate targetGroupIdentifier.
 	// +kubebuilder:validation:Optional
-	TargetGroupIdentifierRef *v1.NamespacedReference `json:"targetGroupIdentifierRef,omitempty" tf:"-"`
+	TargetGroupIdentifierRef *v2.NamespacedReference `json:"targetGroupIdentifierRef,omitempty" tf:"-"`
 
 	// Selector for a TargetGroup in vpclattice to populate targetGroupIdentifier.
 	// +kubebuilder:validation:Optional
-	TargetGroupIdentifierSelector *v1.NamespacedSelector `json:"targetGroupIdentifierSelector,omitempty" tf:"-"`
+	TargetGroupIdentifierSelector *v2.NamespacedSelector `json:"targetGroupIdentifierSelector,omitempty" tf:"-"`
 
 	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
 }
@@ -119,11 +118,11 @@ type ForwardTargetGroupsParameters struct {
 
 	// Reference to a TargetGroup in vpclattice to populate targetGroupIdentifier.
 	// +kubebuilder:validation:Optional
-	TargetGroupIdentifierRef *v1.NamespacedReference `json:"targetGroupIdentifierRef,omitempty" tf:"-"`
+	TargetGroupIdentifierRef *v2.NamespacedReference `json:"targetGroupIdentifierRef,omitempty" tf:"-"`
 
 	// Selector for a TargetGroup in vpclattice to populate targetGroupIdentifier.
 	// +kubebuilder:validation:Optional
-	TargetGroupIdentifierSelector *v1.NamespacedSelector `json:"targetGroupIdentifierSelector,omitempty" tf:"-"`
+	TargetGroupIdentifierSelector *v2.NamespacedSelector `json:"targetGroupIdentifierSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
 	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
@@ -277,11 +276,11 @@ type ListenerRuleInitParameters struct {
 
 	// Reference to a Listener in vpclattice to populate listenerIdentifier.
 	// +kubebuilder:validation:Optional
-	ListenerIdentifierRef *v1.NamespacedReference `json:"listenerIdentifierRef,omitempty" tf:"-"`
+	ListenerIdentifierRef *v2.NamespacedReference `json:"listenerIdentifierRef,omitempty" tf:"-"`
 
 	// Selector for a Listener in vpclattice to populate listenerIdentifier.
 	// +kubebuilder:validation:Optional
-	ListenerIdentifierSelector *v1.NamespacedSelector `json:"listenerIdentifierSelector,omitempty" tf:"-"`
+	ListenerIdentifierSelector *v2.NamespacedSelector `json:"listenerIdentifierSelector,omitempty" tf:"-"`
 
 	// The rule match.
 	// See match Block
@@ -300,11 +299,11 @@ type ListenerRuleInitParameters struct {
 
 	// Reference to a Service in vpclattice to populate serviceIdentifier.
 	// +kubebuilder:validation:Optional
-	ServiceIdentifierRef *v1.NamespacedReference `json:"serviceIdentifierRef,omitempty" tf:"-"`
+	ServiceIdentifierRef *v2.NamespacedReference `json:"serviceIdentifierRef,omitempty" tf:"-"`
 
 	// Selector for a Service in vpclattice to populate serviceIdentifier.
 	// +kubebuilder:validation:Optional
-	ServiceIdentifierSelector *v1.NamespacedSelector `json:"serviceIdentifierSelector,omitempty" tf:"-"`
+	ServiceIdentifierSelector *v2.NamespacedSelector `json:"serviceIdentifierSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -369,11 +368,11 @@ type ListenerRuleParameters struct {
 
 	// Reference to a Listener in vpclattice to populate listenerIdentifier.
 	// +kubebuilder:validation:Optional
-	ListenerIdentifierRef *v1.NamespacedReference `json:"listenerIdentifierRef,omitempty" tf:"-"`
+	ListenerIdentifierRef *v2.NamespacedReference `json:"listenerIdentifierRef,omitempty" tf:"-"`
 
 	// Selector for a Listener in vpclattice to populate listenerIdentifier.
 	// +kubebuilder:validation:Optional
-	ListenerIdentifierSelector *v1.NamespacedSelector `json:"listenerIdentifierSelector,omitempty" tf:"-"`
+	ListenerIdentifierSelector *v2.NamespacedSelector `json:"listenerIdentifierSelector,omitempty" tf:"-"`
 
 	// The rule match.
 	// See match Block
@@ -401,11 +400,11 @@ type ListenerRuleParameters struct {
 
 	// Reference to a Service in vpclattice to populate serviceIdentifier.
 	// +kubebuilder:validation:Optional
-	ServiceIdentifierRef *v1.NamespacedReference `json:"serviceIdentifierRef,omitempty" tf:"-"`
+	ServiceIdentifierRef *v2.NamespacedReference `json:"serviceIdentifierRef,omitempty" tf:"-"`
 
 	// Selector for a Service in vpclattice to populate serviceIdentifier.
 	// +kubebuilder:validation:Optional
-	ServiceIdentifierSelector *v1.NamespacedSelector `json:"serviceIdentifierSelector,omitempty" tf:"-"`
+	ServiceIdentifierSelector *v2.NamespacedSelector `json:"serviceIdentifierSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -521,8 +520,8 @@ type ListenerRuleSpec struct {
 
 // ListenerRuleStatus defines the observed state of ListenerRule.
 type ListenerRuleStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ListenerRuleObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ListenerRuleObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

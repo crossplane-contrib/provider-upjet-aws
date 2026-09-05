@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type NotificationInitParameters struct {
@@ -23,11 +22,11 @@ type NotificationInitParameters struct {
 
 	// References to AutoscalingGroup in autoscaling to populate groupNames.
 	// +kubebuilder:validation:Optional
-	GroupNamesRefs []v1.NamespacedReference `json:"groupNamesRefs,omitempty" tf:"-"`
+	GroupNamesRefs []v2.NamespacedReference `json:"groupNamesRefs,omitempty" tf:"-"`
 
 	// Selector for a list of AutoscalingGroup in autoscaling to populate groupNames.
 	// +kubebuilder:validation:Optional
-	GroupNamesSelector *v1.NamespacedSelector `json:"groupNamesSelector,omitempty" tf:"-"`
+	GroupNamesSelector *v2.NamespacedSelector `json:"groupNamesSelector,omitempty" tf:"-"`
 
 	// List of Notification Types that trigger
 	// notifications. Acceptable values are documented in the AWS documentation here
@@ -41,11 +40,11 @@ type NotificationInitParameters struct {
 
 	// Reference to a Topic in sns to populate topicArn.
 	// +kubebuilder:validation:Optional
-	TopicArnRef *v1.NamespacedReference `json:"topicArnRef,omitempty" tf:"-"`
+	TopicArnRef *v2.NamespacedReference `json:"topicArnRef,omitempty" tf:"-"`
 
 	// Selector for a Topic in sns to populate topicArn.
 	// +kubebuilder:validation:Optional
-	TopicArnSelector *v1.NamespacedSelector `json:"topicArnSelector,omitempty" tf:"-"`
+	TopicArnSelector *v2.NamespacedSelector `json:"topicArnSelector,omitempty" tf:"-"`
 }
 
 type NotificationObservation struct {
@@ -79,11 +78,11 @@ type NotificationParameters struct {
 
 	// References to AutoscalingGroup in autoscaling to populate groupNames.
 	// +kubebuilder:validation:Optional
-	GroupNamesRefs []v1.NamespacedReference `json:"groupNamesRefs,omitempty" tf:"-"`
+	GroupNamesRefs []v2.NamespacedReference `json:"groupNamesRefs,omitempty" tf:"-"`
 
 	// Selector for a list of AutoscalingGroup in autoscaling to populate groupNames.
 	// +kubebuilder:validation:Optional
-	GroupNamesSelector *v1.NamespacedSelector `json:"groupNamesSelector,omitempty" tf:"-"`
+	GroupNamesSelector *v2.NamespacedSelector `json:"groupNamesSelector,omitempty" tf:"-"`
 
 	// List of Notification Types that trigger
 	// notifications. Acceptable values are documented in the AWS documentation here
@@ -104,11 +103,11 @@ type NotificationParameters struct {
 
 	// Reference to a Topic in sns to populate topicArn.
 	// +kubebuilder:validation:Optional
-	TopicArnRef *v1.NamespacedReference `json:"topicArnRef,omitempty" tf:"-"`
+	TopicArnRef *v2.NamespacedReference `json:"topicArnRef,omitempty" tf:"-"`
 
 	// Selector for a Topic in sns to populate topicArn.
 	// +kubebuilder:validation:Optional
-	TopicArnSelector *v1.NamespacedSelector `json:"topicArnSelector,omitempty" tf:"-"`
+	TopicArnSelector *v2.NamespacedSelector `json:"topicArnSelector,omitempty" tf:"-"`
 }
 
 // NotificationSpec defines the desired state of Notification
@@ -130,8 +129,8 @@ type NotificationSpec struct {
 
 // NotificationStatus defines the observed state of Notification.
 type NotificationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        NotificationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               NotificationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

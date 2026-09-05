@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ActionDefinitionPublishMetricActionInitParameters struct {
@@ -207,11 +206,11 @@ type IPSetReferenceInitParameters struct {
 
 	// Reference to a ManagedPrefixList in ec2 to populate referenceArn.
 	// +kubebuilder:validation:Optional
-	ReferenceArnRef *v1.NamespacedReference `json:"referenceArnRef,omitempty" tf:"-"`
+	ReferenceArnRef *v2.NamespacedReference `json:"referenceArnRef,omitempty" tf:"-"`
 
 	// Selector for a ManagedPrefixList in ec2 to populate referenceArn.
 	// +kubebuilder:validation:Optional
-	ReferenceArnSelector *v1.NamespacedSelector `json:"referenceArnSelector,omitempty" tf:"-"`
+	ReferenceArnSelector *v2.NamespacedSelector `json:"referenceArnSelector,omitempty" tf:"-"`
 }
 
 type IPSetReferenceObservation struct {
@@ -230,11 +229,11 @@ type IPSetReferenceParameters struct {
 
 	// Reference to a ManagedPrefixList in ec2 to populate referenceArn.
 	// +kubebuilder:validation:Optional
-	ReferenceArnRef *v1.NamespacedReference `json:"referenceArnRef,omitempty" tf:"-"`
+	ReferenceArnRef *v2.NamespacedReference `json:"referenceArnRef,omitempty" tf:"-"`
 
 	// Selector for a ManagedPrefixList in ec2 to populate referenceArn.
 	// +kubebuilder:validation:Optional
-	ReferenceArnSelector *v1.NamespacedSelector `json:"referenceArnSelector,omitempty" tf:"-"`
+	ReferenceArnSelector *v2.NamespacedSelector `json:"referenceArnSelector,omitempty" tf:"-"`
 }
 
 type IPSetReferencesInitParameters struct {
@@ -1079,8 +1078,8 @@ type RuleGroupSpec struct {
 
 // RuleGroupStatus defines the observed state of RuleGroup.
 type RuleGroupStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        RuleGroupObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               RuleGroupObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

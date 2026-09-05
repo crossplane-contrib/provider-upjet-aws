@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AlarmsInitParameters struct {
@@ -170,11 +169,11 @@ type EndpointInitParameters struct {
 
 	// Reference to a EndpointConfiguration in sagemaker to populate endpointConfigName.
 	// +kubebuilder:validation:Optional
-	EndpointConfigNameRef *v1.NamespacedReference `json:"endpointConfigNameRef,omitempty" tf:"-"`
+	EndpointConfigNameRef *v2.NamespacedReference `json:"endpointConfigNameRef,omitempty" tf:"-"`
 
 	// Selector for a EndpointConfiguration in sagemaker to populate endpointConfigName.
 	// +kubebuilder:validation:Optional
-	EndpointConfigNameSelector *v1.NamespacedSelector `json:"endpointConfigNameSelector,omitempty" tf:"-"`
+	EndpointConfigNameSelector *v2.NamespacedSelector `json:"endpointConfigNameSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -220,11 +219,11 @@ type EndpointParameters struct {
 
 	// Reference to a EndpointConfiguration in sagemaker to populate endpointConfigName.
 	// +kubebuilder:validation:Optional
-	EndpointConfigNameRef *v1.NamespacedReference `json:"endpointConfigNameRef,omitempty" tf:"-"`
+	EndpointConfigNameRef *v2.NamespacedReference `json:"endpointConfigNameRef,omitempty" tf:"-"`
 
 	// Selector for a EndpointConfiguration in sagemaker to populate endpointConfigName.
 	// +kubebuilder:validation:Optional
-	EndpointConfigNameSelector *v1.NamespacedSelector `json:"endpointConfigNameSelector,omitempty" tf:"-"`
+	EndpointConfigNameSelector *v2.NamespacedSelector `json:"endpointConfigNameSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -441,8 +440,8 @@ type EndpointSpec struct {
 
 // EndpointStatus defines the observed state of Endpoint.
 type EndpointStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        EndpointObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               EndpointObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

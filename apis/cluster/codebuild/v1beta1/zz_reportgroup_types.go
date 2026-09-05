@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ExportConfigInitParameters struct {
@@ -125,11 +125,11 @@ type S3DestinationInitParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketRef *v1.Reference `json:"bucketRef,omitempty" tf:"-"`
+	BucketRef *v2.Reference `json:"bucketRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
+	BucketSelector *v2.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
 	// A boolean value that specifies if the results of a report are encrypted.
 	// Note: the API does not currently allow setting encryption as disabled
@@ -142,11 +142,11 @@ type S3DestinationInitParameters struct {
 
 	// Reference to a Key in kms to populate encryptionKey.
 	// +kubebuilder:validation:Optional
-	EncryptionKeyRef *v1.Reference `json:"encryptionKeyRef,omitempty" tf:"-"`
+	EncryptionKeyRef *v2.Reference `json:"encryptionKeyRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate encryptionKey.
 	// +kubebuilder:validation:Optional
-	EncryptionKeySelector *v1.Selector `json:"encryptionKeySelector,omitempty" tf:"-"`
+	EncryptionKeySelector *v2.Selector `json:"encryptionKeySelector,omitempty" tf:"-"`
 
 	// The type of build output artifact to create. Valid values are: NONE (default) and ZIP.
 	Packaging *string `json:"packaging,omitempty" tf:"packaging,omitempty"`
@@ -184,11 +184,11 @@ type S3DestinationParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketRef *v1.Reference `json:"bucketRef,omitempty" tf:"-"`
+	BucketRef *v2.Reference `json:"bucketRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
+	BucketSelector *v2.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
 	// A boolean value that specifies if the results of a report are encrypted.
 	// Note: the API does not currently allow setting encryption as disabled
@@ -203,11 +203,11 @@ type S3DestinationParameters struct {
 
 	// Reference to a Key in kms to populate encryptionKey.
 	// +kubebuilder:validation:Optional
-	EncryptionKeyRef *v1.Reference `json:"encryptionKeyRef,omitempty" tf:"-"`
+	EncryptionKeyRef *v2.Reference `json:"encryptionKeyRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate encryptionKey.
 	// +kubebuilder:validation:Optional
-	EncryptionKeySelector *v1.Selector `json:"encryptionKeySelector,omitempty" tf:"-"`
+	EncryptionKeySelector *v2.Selector `json:"encryptionKeySelector,omitempty" tf:"-"`
 
 	// The type of build output artifact to create. Valid values are: NONE (default) and ZIP.
 	// +kubebuilder:validation:Optional
@@ -220,8 +220,8 @@ type S3DestinationParameters struct {
 
 // ReportGroupSpec defines the desired state of ReportGroup
 type ReportGroupSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ReportGroupParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ReportGroupParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -237,8 +237,8 @@ type ReportGroupSpec struct {
 
 // ReportGroupStatus defines the observed state of ReportGroup.
 type ReportGroupStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ReportGroupObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ReportGroupObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

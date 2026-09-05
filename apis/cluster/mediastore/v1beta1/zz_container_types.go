@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ContainerInitParameters struct {
@@ -58,8 +58,8 @@ type ContainerParameters struct {
 
 // ContainerSpec defines the desired state of Container
 type ContainerSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ContainerParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ContainerParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -75,8 +75,8 @@ type ContainerSpec struct {
 
 // ContainerStatus defines the observed state of Container.
 type ContainerStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ContainerObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ContainerObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

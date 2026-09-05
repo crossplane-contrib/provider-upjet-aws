@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type StreamInitParameters struct {
@@ -22,11 +21,11 @@ type StreamInitParameters struct {
 
 	// Reference to a Group in cloudwatchlogs to populate logGroupName.
 	// +kubebuilder:validation:Optional
-	LogGroupNameRef *v1.NamespacedReference `json:"logGroupNameRef,omitempty" tf:"-"`
+	LogGroupNameRef *v2.NamespacedReference `json:"logGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a Group in cloudwatchlogs to populate logGroupName.
 	// +kubebuilder:validation:Optional
-	LogGroupNameSelector *v1.NamespacedSelector `json:"logGroupNameSelector,omitempty" tf:"-"`
+	LogGroupNameSelector *v2.NamespacedSelector `json:"logGroupNameSelector,omitempty" tf:"-"`
 
 	// The name of the log stream. Must not be longer than 512 characters and must not contain :
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -59,11 +58,11 @@ type StreamParameters struct {
 
 	// Reference to a Group in cloudwatchlogs to populate logGroupName.
 	// +kubebuilder:validation:Optional
-	LogGroupNameRef *v1.NamespacedReference `json:"logGroupNameRef,omitempty" tf:"-"`
+	LogGroupNameRef *v2.NamespacedReference `json:"logGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a Group in cloudwatchlogs to populate logGroupName.
 	// +kubebuilder:validation:Optional
-	LogGroupNameSelector *v1.NamespacedSelector `json:"logGroupNameSelector,omitempty" tf:"-"`
+	LogGroupNameSelector *v2.NamespacedSelector `json:"logGroupNameSelector,omitempty" tf:"-"`
 
 	// The name of the log stream. Must not be longer than 512 characters and must not contain :
 	// +kubebuilder:validation:Optional
@@ -94,8 +93,8 @@ type StreamSpec struct {
 
 // StreamStatus defines the observed state of Stream.
 type StreamStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        StreamObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               StreamObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

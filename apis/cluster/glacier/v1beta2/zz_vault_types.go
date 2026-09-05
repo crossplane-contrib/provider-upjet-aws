@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type NotificationInitParameters struct {
@@ -26,11 +26,11 @@ type NotificationInitParameters struct {
 
 	// Reference to a Topic in sns to populate snsTopic.
 	// +kubebuilder:validation:Optional
-	SnsTopicRef *v1.Reference `json:"snsTopicRef,omitempty" tf:"-"`
+	SnsTopicRef *v2.Reference `json:"snsTopicRef,omitempty" tf:"-"`
 
 	// Selector for a Topic in sns to populate snsTopic.
 	// +kubebuilder:validation:Optional
-	SnsTopicSelector *v1.Selector `json:"snsTopicSelector,omitempty" tf:"-"`
+	SnsTopicSelector *v2.Selector `json:"snsTopicSelector,omitempty" tf:"-"`
 }
 
 type NotificationObservation struct {
@@ -58,11 +58,11 @@ type NotificationParameters struct {
 
 	// Reference to a Topic in sns to populate snsTopic.
 	// +kubebuilder:validation:Optional
-	SnsTopicRef *v1.Reference `json:"snsTopicRef,omitempty" tf:"-"`
+	SnsTopicRef *v2.Reference `json:"snsTopicRef,omitempty" tf:"-"`
 
 	// Selector for a Topic in sns to populate snsTopic.
 	// +kubebuilder:validation:Optional
-	SnsTopicSelector *v1.Selector `json:"snsTopicSelector,omitempty" tf:"-"`
+	SnsTopicSelector *v2.Selector `json:"snsTopicSelector,omitempty" tf:"-"`
 }
 
 type VaultInitParameters struct {
@@ -133,8 +133,8 @@ type VaultParameters struct {
 
 // VaultSpec defines the desired state of Vault
 type VaultSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     VaultParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   VaultParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -150,8 +150,8 @@ type VaultSpec struct {
 
 // VaultStatus defines the observed state of Vault.
 type VaultStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        VaultObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               VaultObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ArtifactsInitParameters struct {
@@ -283,11 +283,11 @@ type CacheInitParameters struct {
 
 	// Reference to a Bucket in s3 to populate location.
 	// +kubebuilder:validation:Optional
-	LocationRef *v1.Reference `json:"locationRef,omitempty" tf:"-"`
+	LocationRef *v2.Reference `json:"locationRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate location.
 	// +kubebuilder:validation:Optional
-	LocationSelector *v1.Selector `json:"locationSelector,omitempty" tf:"-"`
+	LocationSelector *v2.Selector `json:"locationSelector,omitempty" tf:"-"`
 
 	// Specifies settings that AWS CodeBuild uses to store and reuse build
 	// dependencies. Valid values:  LOCAL_SOURCE_CACHE, LOCAL_DOCKER_LAYER_CACHE, LOCAL_CUSTOM_CACHE.
@@ -330,11 +330,11 @@ type CacheParameters struct {
 
 	// Reference to a Bucket in s3 to populate location.
 	// +kubebuilder:validation:Optional
-	LocationRef *v1.Reference `json:"locationRef,omitempty" tf:"-"`
+	LocationRef *v2.Reference `json:"locationRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate location.
 	// +kubebuilder:validation:Optional
-	LocationSelector *v1.Selector `json:"locationSelector,omitempty" tf:"-"`
+	LocationSelector *v2.Selector `json:"locationSelector,omitempty" tf:"-"`
 
 	// Specifies settings that AWS CodeBuild uses to store and reuse build
 	// dependencies. Valid values:  LOCAL_SOURCE_CACHE, LOCAL_DOCKER_LAYER_CACHE, LOCAL_CUSTOM_CACHE.
@@ -447,6 +447,14 @@ type EnvironmentInitParameters struct {
 	// Configuration block. Detailed below.
 	Fleet *FleetInitParameters `json:"fleet,omitempty" tf:"fleet,omitempty"`
 
+	// Host operating system kernel used for on-demand builds in the build project. This setting
+	// controls the kernel of the underlying build host. It does not change the build environment operating system, which is
+	// determined by the image you specify. Valid values: LINUX_KERNEL_4 (runs on an Amazon Linux 2 host, kernel 4.x),
+	// LINUX_KERNEL_6 (runs on an Amazon Linux 2023 host, kernel 6.x), LINUX_KERNEL_LATEST (runs on the latest supported
+	// host kernel). Applies to the LINUX_CONTAINER, ARM_CONTAINER, LINUX_EC2, and ARM_EC2 environment types; not
+	// applicable to Windows, Lambda, or Mac environment types. If not specified, CodeBuild selects a default.
+	HostKernel *string `json:"hostKernel,omitempty" tf:"host_kernel,omitempty"`
+
 	// Docker image to use for this build project. Valid values
 	// include Docker images provided by CodeBuild (
 	// e.g aws/codebuild/amazonlinux2-x86_64-standard:4.0), Docker Hub images (e.g.g.,
@@ -491,6 +499,14 @@ type EnvironmentObservation struct {
 
 	// Configuration block. Detailed below.
 	Fleet *FleetObservation `json:"fleet,omitempty" tf:"fleet,omitempty"`
+
+	// Host operating system kernel used for on-demand builds in the build project. This setting
+	// controls the kernel of the underlying build host. It does not change the build environment operating system, which is
+	// determined by the image you specify. Valid values: LINUX_KERNEL_4 (runs on an Amazon Linux 2 host, kernel 4.x),
+	// LINUX_KERNEL_6 (runs on an Amazon Linux 2023 host, kernel 6.x), LINUX_KERNEL_LATEST (runs on the latest supported
+	// host kernel). Applies to the LINUX_CONTAINER, ARM_CONTAINER, LINUX_EC2, and ARM_EC2 environment types; not
+	// applicable to Windows, Lambda, or Mac environment types. If not specified, CodeBuild selects a default.
+	HostKernel *string `json:"hostKernel,omitempty" tf:"host_kernel,omitempty"`
 
 	// Docker image to use for this build project. Valid values
 	// include Docker images provided by CodeBuild (
@@ -541,6 +557,15 @@ type EnvironmentParameters struct {
 	// Configuration block. Detailed below.
 	// +kubebuilder:validation:Optional
 	Fleet *FleetParameters `json:"fleet,omitempty" tf:"fleet,omitempty"`
+
+	// Host operating system kernel used for on-demand builds in the build project. This setting
+	// controls the kernel of the underlying build host. It does not change the build environment operating system, which is
+	// determined by the image you specify. Valid values: LINUX_KERNEL_4 (runs on an Amazon Linux 2 host, kernel 4.x),
+	// LINUX_KERNEL_6 (runs on an Amazon Linux 2023 host, kernel 6.x), LINUX_KERNEL_LATEST (runs on the latest supported
+	// host kernel). Applies to the LINUX_CONTAINER, ARM_CONTAINER, LINUX_EC2, and ARM_EC2 environment types; not
+	// applicable to Windows, Lambda, or Mac environment types. If not specified, CodeBuild selects a default.
+	// +kubebuilder:validation:Optional
+	HostKernel *string `json:"hostKernel,omitempty" tf:"host_kernel,omitempty"`
 
 	// Docker image to use for this build project. Valid values
 	// include Docker images provided by CodeBuild (
@@ -825,11 +850,11 @@ type ProjectInitParameters struct {
 
 	// Reference to a Role in iam to populate serviceRole.
 	// +kubebuilder:validation:Optional
-	ServiceRoleRef *v1.Reference `json:"serviceRoleRef,omitempty" tf:"-"`
+	ServiceRoleRef *v2.Reference `json:"serviceRoleRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate serviceRole.
 	// +kubebuilder:validation:Optional
-	ServiceRoleSelector *v1.Selector `json:"serviceRoleSelector,omitempty" tf:"-"`
+	ServiceRoleSelector *v2.Selector `json:"serviceRoleSelector,omitempty" tf:"-"`
 
 	// Configuration block. Detailed below.
 	Source *SourceInitParameters `json:"source,omitempty" tf:"source,omitempty"`
@@ -1053,11 +1078,11 @@ type ProjectParameters struct {
 
 	// Reference to a Role in iam to populate serviceRole.
 	// +kubebuilder:validation:Optional
-	ServiceRoleRef *v1.Reference `json:"serviceRoleRef,omitempty" tf:"-"`
+	ServiceRoleRef *v2.Reference `json:"serviceRoleRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate serviceRole.
 	// +kubebuilder:validation:Optional
-	ServiceRoleSelector *v1.Selector `json:"serviceRoleSelector,omitempty" tf:"-"`
+	ServiceRoleSelector *v2.Selector `json:"serviceRoleSelector,omitempty" tf:"-"`
 
 	// Configuration block. Detailed below.
 	// +kubebuilder:validation:Optional
@@ -1771,11 +1796,11 @@ type VPCConfigInitParameters struct {
 
 	// References to SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIdsRefs []v1.Reference `json:"securityGroupIdsRefs,omitempty" tf:"-"`
+	SecurityGroupIdsRefs []v2.Reference `json:"securityGroupIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIdsSelector *v1.Selector `json:"securityGroupIdsSelector,omitempty" tf:"-"`
+	SecurityGroupIdsSelector *v2.Selector `json:"securityGroupIdsSelector,omitempty" tf:"-"`
 
 	// Subnet IDs within which to run builds.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Subnet
@@ -1785,11 +1810,11 @@ type VPCConfigInitParameters struct {
 
 	// References to Subnet in ec2 to populate subnets.
 	// +kubebuilder:validation:Optional
-	SubnetsRefs []v1.Reference `json:"subnetsRefs,omitempty" tf:"-"`
+	SubnetsRefs []v2.Reference `json:"subnetsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Subnet in ec2 to populate subnets.
 	// +kubebuilder:validation:Optional
-	SubnetsSelector *v1.Selector `json:"subnetsSelector,omitempty" tf:"-"`
+	SubnetsSelector *v2.Selector `json:"subnetsSelector,omitempty" tf:"-"`
 
 	// ID of the VPC within which to run builds.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.VPC
@@ -1798,11 +1823,11 @@ type VPCConfigInitParameters struct {
 
 	// Reference to a VPC in ec2 to populate vpcId.
 	// +kubebuilder:validation:Optional
-	VPCIDRef *v1.Reference `json:"vpcIdRef,omitempty" tf:"-"`
+	VPCIDRef *v2.Reference `json:"vpcIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPC in ec2 to populate vpcId.
 	// +kubebuilder:validation:Optional
-	VPCIDSelector *v1.Selector `json:"vpcIdSelector,omitempty" tf:"-"`
+	VPCIDSelector *v2.Selector `json:"vpcIdSelector,omitempty" tf:"-"`
 }
 
 type VPCConfigObservation struct {
@@ -1830,11 +1855,11 @@ type VPCConfigParameters struct {
 
 	// References to SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIdsRefs []v1.Reference `json:"securityGroupIdsRefs,omitempty" tf:"-"`
+	SecurityGroupIdsRefs []v2.Reference `json:"securityGroupIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIdsSelector *v1.Selector `json:"securityGroupIdsSelector,omitempty" tf:"-"`
+	SecurityGroupIdsSelector *v2.Selector `json:"securityGroupIdsSelector,omitempty" tf:"-"`
 
 	// Subnet IDs within which to run builds.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Subnet
@@ -1845,11 +1870,11 @@ type VPCConfigParameters struct {
 
 	// References to Subnet in ec2 to populate subnets.
 	// +kubebuilder:validation:Optional
-	SubnetsRefs []v1.Reference `json:"subnetsRefs,omitempty" tf:"-"`
+	SubnetsRefs []v2.Reference `json:"subnetsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Subnet in ec2 to populate subnets.
 	// +kubebuilder:validation:Optional
-	SubnetsSelector *v1.Selector `json:"subnetsSelector,omitempty" tf:"-"`
+	SubnetsSelector *v2.Selector `json:"subnetsSelector,omitempty" tf:"-"`
 
 	// ID of the VPC within which to run builds.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.VPC
@@ -1859,17 +1884,17 @@ type VPCConfigParameters struct {
 
 	// Reference to a VPC in ec2 to populate vpcId.
 	// +kubebuilder:validation:Optional
-	VPCIDRef *v1.Reference `json:"vpcIdRef,omitempty" tf:"-"`
+	VPCIDRef *v2.Reference `json:"vpcIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPC in ec2 to populate vpcId.
 	// +kubebuilder:validation:Optional
-	VPCIDSelector *v1.Selector `json:"vpcIdSelector,omitempty" tf:"-"`
+	VPCIDSelector *v2.Selector `json:"vpcIdSelector,omitempty" tf:"-"`
 }
 
 // ProjectSpec defines the desired state of Project
 type ProjectSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ProjectParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ProjectParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -1885,8 +1910,8 @@ type ProjectSpec struct {
 
 // ProjectStatus defines the observed state of Project.
 type ProjectStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ProjectObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ProjectObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

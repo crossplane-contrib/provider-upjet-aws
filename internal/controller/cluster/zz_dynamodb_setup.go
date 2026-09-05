@@ -58,3 +58,22 @@ func SetupGated_dynamodb(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupWebhookWithManager_dynamodb registers conversion webhooks for all resource kinds in the group.
+func SetupWebhookWithManager_dynamodb(mgr ctrl.Manager) error {
+	for _, setup := range []func(ctrl.Manager) error{
+		contributorinsights.SetupWebhookWithManager,
+		globaltable.SetupWebhookWithManager,
+		kinesisstreamingdestination.SetupWebhookWithManager,
+		resourcepolicy.SetupWebhookWithManager,
+		table.SetupWebhookWithManager,
+		tableitem.SetupWebhookWithManager,
+		tablereplica.SetupWebhookWithManager,
+		tag.SetupWebhookWithManager,
+	} {
+		if err := setup(mgr); err != nil {
+			return err
+		}
+	}
+	return nil
+}

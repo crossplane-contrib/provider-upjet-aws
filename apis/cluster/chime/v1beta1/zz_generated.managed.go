@@ -5,354 +5,354 @@
 
 package v1beta1
 
-import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+import xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 
 // GetCondition of this VoiceConnector.
-func (mg *VoiceConnector) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *VoiceConnector) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this VoiceConnector.
-func (mg *VoiceConnector) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *VoiceConnector) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this VoiceConnector.
-func (mg *VoiceConnector) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *VoiceConnector) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this VoiceConnector.
-func (mg *VoiceConnector) GetProviderConfigReference() *xpv1.Reference {
+func (mg *VoiceConnector) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this VoiceConnector.
-func (mg *VoiceConnector) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *VoiceConnector) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this VoiceConnector.
-func (mg *VoiceConnector) SetConditions(c ...xpv1.Condition) {
+func (mg *VoiceConnector) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this VoiceConnector.
-func (mg *VoiceConnector) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *VoiceConnector) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this VoiceConnector.
-func (mg *VoiceConnector) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *VoiceConnector) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this VoiceConnector.
-func (mg *VoiceConnector) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *VoiceConnector) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this VoiceConnector.
-func (mg *VoiceConnector) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *VoiceConnector) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this VoiceConnectorGroup.
-func (mg *VoiceConnectorGroup) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *VoiceConnectorGroup) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this VoiceConnectorGroup.
-func (mg *VoiceConnectorGroup) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *VoiceConnectorGroup) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this VoiceConnectorGroup.
-func (mg *VoiceConnectorGroup) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *VoiceConnectorGroup) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this VoiceConnectorGroup.
-func (mg *VoiceConnectorGroup) GetProviderConfigReference() *xpv1.Reference {
+func (mg *VoiceConnectorGroup) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this VoiceConnectorGroup.
-func (mg *VoiceConnectorGroup) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *VoiceConnectorGroup) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this VoiceConnectorGroup.
-func (mg *VoiceConnectorGroup) SetConditions(c ...xpv1.Condition) {
+func (mg *VoiceConnectorGroup) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this VoiceConnectorGroup.
-func (mg *VoiceConnectorGroup) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *VoiceConnectorGroup) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this VoiceConnectorGroup.
-func (mg *VoiceConnectorGroup) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *VoiceConnectorGroup) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this VoiceConnectorGroup.
-func (mg *VoiceConnectorGroup) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *VoiceConnectorGroup) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this VoiceConnectorGroup.
-func (mg *VoiceConnectorGroup) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *VoiceConnectorGroup) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this VoiceConnectorLogging.
-func (mg *VoiceConnectorLogging) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *VoiceConnectorLogging) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this VoiceConnectorLogging.
-func (mg *VoiceConnectorLogging) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *VoiceConnectorLogging) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this VoiceConnectorLogging.
-func (mg *VoiceConnectorLogging) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *VoiceConnectorLogging) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this VoiceConnectorLogging.
-func (mg *VoiceConnectorLogging) GetProviderConfigReference() *xpv1.Reference {
+func (mg *VoiceConnectorLogging) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this VoiceConnectorLogging.
-func (mg *VoiceConnectorLogging) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *VoiceConnectorLogging) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this VoiceConnectorLogging.
-func (mg *VoiceConnectorLogging) SetConditions(c ...xpv1.Condition) {
+func (mg *VoiceConnectorLogging) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this VoiceConnectorLogging.
-func (mg *VoiceConnectorLogging) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *VoiceConnectorLogging) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this VoiceConnectorLogging.
-func (mg *VoiceConnectorLogging) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *VoiceConnectorLogging) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this VoiceConnectorLogging.
-func (mg *VoiceConnectorLogging) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *VoiceConnectorLogging) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this VoiceConnectorLogging.
-func (mg *VoiceConnectorLogging) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *VoiceConnectorLogging) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this VoiceConnectorOrigination.
-func (mg *VoiceConnectorOrigination) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *VoiceConnectorOrigination) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this VoiceConnectorOrigination.
-func (mg *VoiceConnectorOrigination) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *VoiceConnectorOrigination) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this VoiceConnectorOrigination.
-func (mg *VoiceConnectorOrigination) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *VoiceConnectorOrigination) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this VoiceConnectorOrigination.
-func (mg *VoiceConnectorOrigination) GetProviderConfigReference() *xpv1.Reference {
+func (mg *VoiceConnectorOrigination) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this VoiceConnectorOrigination.
-func (mg *VoiceConnectorOrigination) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *VoiceConnectorOrigination) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this VoiceConnectorOrigination.
-func (mg *VoiceConnectorOrigination) SetConditions(c ...xpv1.Condition) {
+func (mg *VoiceConnectorOrigination) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this VoiceConnectorOrigination.
-func (mg *VoiceConnectorOrigination) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *VoiceConnectorOrigination) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this VoiceConnectorOrigination.
-func (mg *VoiceConnectorOrigination) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *VoiceConnectorOrigination) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this VoiceConnectorOrigination.
-func (mg *VoiceConnectorOrigination) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *VoiceConnectorOrigination) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this VoiceConnectorOrigination.
-func (mg *VoiceConnectorOrigination) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *VoiceConnectorOrigination) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this VoiceConnectorStreaming.
-func (mg *VoiceConnectorStreaming) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *VoiceConnectorStreaming) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this VoiceConnectorStreaming.
-func (mg *VoiceConnectorStreaming) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *VoiceConnectorStreaming) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this VoiceConnectorStreaming.
-func (mg *VoiceConnectorStreaming) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *VoiceConnectorStreaming) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this VoiceConnectorStreaming.
-func (mg *VoiceConnectorStreaming) GetProviderConfigReference() *xpv1.Reference {
+func (mg *VoiceConnectorStreaming) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this VoiceConnectorStreaming.
-func (mg *VoiceConnectorStreaming) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *VoiceConnectorStreaming) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this VoiceConnectorStreaming.
-func (mg *VoiceConnectorStreaming) SetConditions(c ...xpv1.Condition) {
+func (mg *VoiceConnectorStreaming) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this VoiceConnectorStreaming.
-func (mg *VoiceConnectorStreaming) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *VoiceConnectorStreaming) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this VoiceConnectorStreaming.
-func (mg *VoiceConnectorStreaming) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *VoiceConnectorStreaming) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this VoiceConnectorStreaming.
-func (mg *VoiceConnectorStreaming) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *VoiceConnectorStreaming) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this VoiceConnectorStreaming.
-func (mg *VoiceConnectorStreaming) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *VoiceConnectorStreaming) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this VoiceConnectorTermination.
-func (mg *VoiceConnectorTermination) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *VoiceConnectorTermination) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this VoiceConnectorTermination.
-func (mg *VoiceConnectorTermination) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *VoiceConnectorTermination) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this VoiceConnectorTermination.
-func (mg *VoiceConnectorTermination) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *VoiceConnectorTermination) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this VoiceConnectorTermination.
-func (mg *VoiceConnectorTermination) GetProviderConfigReference() *xpv1.Reference {
+func (mg *VoiceConnectorTermination) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this VoiceConnectorTermination.
-func (mg *VoiceConnectorTermination) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *VoiceConnectorTermination) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this VoiceConnectorTermination.
-func (mg *VoiceConnectorTermination) SetConditions(c ...xpv1.Condition) {
+func (mg *VoiceConnectorTermination) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this VoiceConnectorTermination.
-func (mg *VoiceConnectorTermination) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *VoiceConnectorTermination) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this VoiceConnectorTermination.
-func (mg *VoiceConnectorTermination) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *VoiceConnectorTermination) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this VoiceConnectorTermination.
-func (mg *VoiceConnectorTermination) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *VoiceConnectorTermination) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this VoiceConnectorTermination.
-func (mg *VoiceConnectorTermination) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *VoiceConnectorTermination) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this VoiceConnectorTerminationCredentials.
-func (mg *VoiceConnectorTerminationCredentials) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *VoiceConnectorTerminationCredentials) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this VoiceConnectorTerminationCredentials.
-func (mg *VoiceConnectorTerminationCredentials) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *VoiceConnectorTerminationCredentials) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this VoiceConnectorTerminationCredentials.
-func (mg *VoiceConnectorTerminationCredentials) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *VoiceConnectorTerminationCredentials) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this VoiceConnectorTerminationCredentials.
-func (mg *VoiceConnectorTerminationCredentials) GetProviderConfigReference() *xpv1.Reference {
+func (mg *VoiceConnectorTerminationCredentials) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this VoiceConnectorTerminationCredentials.
-func (mg *VoiceConnectorTerminationCredentials) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *VoiceConnectorTerminationCredentials) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this VoiceConnectorTerminationCredentials.
-func (mg *VoiceConnectorTerminationCredentials) SetConditions(c ...xpv1.Condition) {
+func (mg *VoiceConnectorTerminationCredentials) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this VoiceConnectorTerminationCredentials.
-func (mg *VoiceConnectorTerminationCredentials) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *VoiceConnectorTerminationCredentials) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this VoiceConnectorTerminationCredentials.
-func (mg *VoiceConnectorTerminationCredentials) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *VoiceConnectorTerminationCredentials) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this VoiceConnectorTerminationCredentials.
-func (mg *VoiceConnectorTerminationCredentials) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *VoiceConnectorTerminationCredentials) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this VoiceConnectorTerminationCredentials.
-func (mg *VoiceConnectorTerminationCredentials) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *VoiceConnectorTerminationCredentials) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

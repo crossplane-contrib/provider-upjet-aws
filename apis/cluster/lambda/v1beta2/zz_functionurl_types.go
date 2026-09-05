@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CorsInitParameters struct {
@@ -108,11 +108,11 @@ type FunctionURLInitParameters struct {
 
 	// Reference to a Function in lambda to populate functionName.
 	// +kubebuilder:validation:Optional
-	FunctionNameRef *v1.Reference `json:"functionNameRef,omitempty" tf:"-"`
+	FunctionNameRef *v2.Reference `json:"functionNameRef,omitempty" tf:"-"`
 
 	// Selector for a Function in lambda to populate functionName.
 	// +kubebuilder:validation:Optional
-	FunctionNameSelector *v1.Selector `json:"functionNameSelector,omitempty" tf:"-"`
+	FunctionNameSelector *v2.Selector `json:"functionNameSelector,omitempty" tf:"-"`
 
 	// How the Lambda function responds to an invocation. Valid values are BUFFERED (default) and RESPONSE_STREAM.
 	InvokeMode *string `json:"invokeMode,omitempty" tf:"invoke_mode,omitempty"`
@@ -171,11 +171,11 @@ type FunctionURLParameters struct {
 
 	// Reference to a Function in lambda to populate functionName.
 	// +kubebuilder:validation:Optional
-	FunctionNameRef *v1.Reference `json:"functionNameRef,omitempty" tf:"-"`
+	FunctionNameRef *v2.Reference `json:"functionNameRef,omitempty" tf:"-"`
 
 	// Selector for a Function in lambda to populate functionName.
 	// +kubebuilder:validation:Optional
-	FunctionNameSelector *v1.Selector `json:"functionNameSelector,omitempty" tf:"-"`
+	FunctionNameSelector *v2.Selector `json:"functionNameSelector,omitempty" tf:"-"`
 
 	// How the Lambda function responds to an invocation. Valid values are BUFFERED (default) and RESPONSE_STREAM.
 	// +kubebuilder:validation:Optional
@@ -193,8 +193,8 @@ type FunctionURLParameters struct {
 
 // FunctionURLSpec defines the desired state of FunctionURL
 type FunctionURLSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     FunctionURLParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   FunctionURLParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -210,8 +210,8 @@ type FunctionURLSpec struct {
 
 // FunctionURLStatus defines the observed state of FunctionURL.
 type FunctionURLStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        FunctionURLObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               FunctionURLObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

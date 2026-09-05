@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ZoneAssociationInitParameters struct {
@@ -22,11 +21,11 @@ type ZoneAssociationInitParameters struct {
 
 	// Reference to a VPC in ec2 to populate vpcId.
 	// +kubebuilder:validation:Optional
-	VPCIDRef *v1.NamespacedReference `json:"vpcIdRef,omitempty" tf:"-"`
+	VPCIDRef *v2.NamespacedReference `json:"vpcIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPC in ec2 to populate vpcId.
 	// +kubebuilder:validation:Optional
-	VPCIDSelector *v1.NamespacedSelector `json:"vpcIdSelector,omitempty" tf:"-"`
+	VPCIDSelector *v2.NamespacedSelector `json:"vpcIdSelector,omitempty" tf:"-"`
 
 	// The VPC's region. Defaults to the region of the AWS provider.
 	VPCRegion *string `json:"vpcRegion,omitempty" tf:"vpc_region,omitempty"`
@@ -38,11 +37,11 @@ type ZoneAssociationInitParameters struct {
 
 	// Reference to a Zone in route53 to populate zoneId.
 	// +kubebuilder:validation:Optional
-	ZoneIDRef *v1.NamespacedReference `json:"zoneIdRef,omitempty" tf:"-"`
+	ZoneIDRef *v2.NamespacedReference `json:"zoneIdRef,omitempty" tf:"-"`
 
 	// Selector for a Zone in route53 to populate zoneId.
 	// +kubebuilder:validation:Optional
-	ZoneIDSelector *v1.NamespacedSelector `json:"zoneIdSelector,omitempty" tf:"-"`
+	ZoneIDSelector *v2.NamespacedSelector `json:"zoneIdSelector,omitempty" tf:"-"`
 }
 
 type ZoneAssociationObservation struct {
@@ -72,11 +71,11 @@ type ZoneAssociationParameters struct {
 
 	// Reference to a VPC in ec2 to populate vpcId.
 	// +kubebuilder:validation:Optional
-	VPCIDRef *v1.NamespacedReference `json:"vpcIdRef,omitempty" tf:"-"`
+	VPCIDRef *v2.NamespacedReference `json:"vpcIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPC in ec2 to populate vpcId.
 	// +kubebuilder:validation:Optional
-	VPCIDSelector *v1.NamespacedSelector `json:"vpcIdSelector,omitempty" tf:"-"`
+	VPCIDSelector *v2.NamespacedSelector `json:"vpcIdSelector,omitempty" tf:"-"`
 
 	// The VPC's region. Defaults to the region of the AWS provider.
 	// +kubebuilder:validation:Optional
@@ -90,11 +89,11 @@ type ZoneAssociationParameters struct {
 
 	// Reference to a Zone in route53 to populate zoneId.
 	// +kubebuilder:validation:Optional
-	ZoneIDRef *v1.NamespacedReference `json:"zoneIdRef,omitempty" tf:"-"`
+	ZoneIDRef *v2.NamespacedReference `json:"zoneIdRef,omitempty" tf:"-"`
 
 	// Selector for a Zone in route53 to populate zoneId.
 	// +kubebuilder:validation:Optional
-	ZoneIDSelector *v1.NamespacedSelector `json:"zoneIdSelector,omitempty" tf:"-"`
+	ZoneIDSelector *v2.NamespacedSelector `json:"zoneIdSelector,omitempty" tf:"-"`
 }
 
 // ZoneAssociationSpec defines the desired state of ZoneAssociation
@@ -116,8 +115,8 @@ type ZoneAssociationSpec struct {
 
 // ZoneAssociationStatus defines the observed state of ZoneAssociation.
 type ZoneAssociationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ZoneAssociationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ZoneAssociationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

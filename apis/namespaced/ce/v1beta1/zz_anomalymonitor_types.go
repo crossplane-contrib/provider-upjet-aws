@@ -10,13 +10,12 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AnomalyMonitorInitParameters struct {
 
-	// The dimensions to evaluate. Valid values: SERVICE.
+	// The dimensions to evaluate. Valid values: COST_CATEGORY, LINKED_ACCOUNT, SERVICE, TAG.
 	MonitorDimension *string `json:"monitorDimension,omitempty" tf:"monitor_dimension,omitempty"`
 
 	// A valid JSON representation for the Expression object.
@@ -41,7 +40,7 @@ type AnomalyMonitorObservation struct {
 	// Unique ID of the anomaly monitor. Same as arn.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The dimensions to evaluate. Valid values: SERVICE.
+	// The dimensions to evaluate. Valid values: COST_CATEGORY, LINKED_ACCOUNT, SERVICE, TAG.
 	MonitorDimension *string `json:"monitorDimension,omitempty" tf:"monitor_dimension,omitempty"`
 
 	// A valid JSON representation for the Expression object.
@@ -64,7 +63,7 @@ type AnomalyMonitorObservation struct {
 
 type AnomalyMonitorParameters struct {
 
-	// The dimensions to evaluate. Valid values: SERVICE.
+	// The dimensions to evaluate. Valid values: COST_CATEGORY, LINKED_ACCOUNT, SERVICE, TAG.
 	// +kubebuilder:validation:Optional
 	MonitorDimension *string `json:"monitorDimension,omitempty" tf:"monitor_dimension,omitempty"`
 
@@ -105,8 +104,8 @@ type AnomalyMonitorSpec struct {
 
 // AnomalyMonitorStatus defines the observed state of AnomalyMonitor.
 type AnomalyMonitorStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        AnomalyMonitorObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               AnomalyMonitorObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

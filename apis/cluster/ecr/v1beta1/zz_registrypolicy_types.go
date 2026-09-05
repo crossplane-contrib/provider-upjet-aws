@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type RegistryPolicyInitParameters struct {
@@ -47,8 +47,8 @@ type RegistryPolicyParameters struct {
 
 // RegistryPolicySpec defines the desired state of RegistryPolicy
 type RegistryPolicySpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     RegistryPolicyParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   RegistryPolicyParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -64,8 +64,8 @@ type RegistryPolicySpec struct {
 
 // RegistryPolicyStatus defines the observed state of RegistryPolicy.
 type RegistryPolicyStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        RegistryPolicyObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               RegistryPolicyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

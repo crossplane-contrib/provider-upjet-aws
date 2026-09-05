@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type VPCEndpointSecurityGroupAssociationInitParameters struct {
@@ -25,11 +24,11 @@ type VPCEndpointSecurityGroupAssociationInitParameters struct {
 
 	// Reference to a SecurityGroup in ec2 to populate securityGroupId.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIDRef *v1.NamespacedReference `json:"securityGroupIdRef,omitempty" tf:"-"`
+	SecurityGroupIDRef *v2.NamespacedReference `json:"securityGroupIdRef,omitempty" tf:"-"`
 
 	// Selector for a SecurityGroup in ec2 to populate securityGroupId.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIDSelector *v1.NamespacedSelector `json:"securityGroupIdSelector,omitempty" tf:"-"`
+	SecurityGroupIDSelector *v2.NamespacedSelector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 
 	// The ID of the VPC endpoint with which the security group will be associated.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.VPCEndpoint
@@ -38,11 +37,11 @@ type VPCEndpointSecurityGroupAssociationInitParameters struct {
 
 	// Reference to a VPCEndpoint in ec2 to populate vpcEndpointId.
 	// +kubebuilder:validation:Optional
-	VPCEndpointIDRef *v1.NamespacedReference `json:"vpcEndpointIdRef,omitempty" tf:"-"`
+	VPCEndpointIDRef *v2.NamespacedReference `json:"vpcEndpointIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPCEndpoint in ec2 to populate vpcEndpointId.
 	// +kubebuilder:validation:Optional
-	VPCEndpointIDSelector *v1.NamespacedSelector `json:"vpcEndpointIdSelector,omitempty" tf:"-"`
+	VPCEndpointIDSelector *v2.NamespacedSelector `json:"vpcEndpointIdSelector,omitempty" tf:"-"`
 }
 
 type VPCEndpointSecurityGroupAssociationObservation struct {
@@ -82,11 +81,11 @@ type VPCEndpointSecurityGroupAssociationParameters struct {
 
 	// Reference to a SecurityGroup in ec2 to populate securityGroupId.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIDRef *v1.NamespacedReference `json:"securityGroupIdRef,omitempty" tf:"-"`
+	SecurityGroupIDRef *v2.NamespacedReference `json:"securityGroupIdRef,omitempty" tf:"-"`
 
 	// Selector for a SecurityGroup in ec2 to populate securityGroupId.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIDSelector *v1.NamespacedSelector `json:"securityGroupIdSelector,omitempty" tf:"-"`
+	SecurityGroupIDSelector *v2.NamespacedSelector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 
 	// The ID of the VPC endpoint with which the security group will be associated.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.VPCEndpoint
@@ -96,11 +95,11 @@ type VPCEndpointSecurityGroupAssociationParameters struct {
 
 	// Reference to a VPCEndpoint in ec2 to populate vpcEndpointId.
 	// +kubebuilder:validation:Optional
-	VPCEndpointIDRef *v1.NamespacedReference `json:"vpcEndpointIdRef,omitempty" tf:"-"`
+	VPCEndpointIDRef *v2.NamespacedReference `json:"vpcEndpointIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPCEndpoint in ec2 to populate vpcEndpointId.
 	// +kubebuilder:validation:Optional
-	VPCEndpointIDSelector *v1.NamespacedSelector `json:"vpcEndpointIdSelector,omitempty" tf:"-"`
+	VPCEndpointIDSelector *v2.NamespacedSelector `json:"vpcEndpointIdSelector,omitempty" tf:"-"`
 }
 
 // VPCEndpointSecurityGroupAssociationSpec defines the desired state of VPCEndpointSecurityGroupAssociation
@@ -122,8 +121,8 @@ type VPCEndpointSecurityGroupAssociationSpec struct {
 
 // VPCEndpointSecurityGroupAssociationStatus defines the observed state of VPCEndpointSecurityGroupAssociation.
 type VPCEndpointSecurityGroupAssociationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        VPCEndpointSecurityGroupAssociationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               VPCEndpointSecurityGroupAssociationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

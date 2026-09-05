@@ -1,0 +1,33 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: backup.aws.m.upbound.io/v1beta1
+kind: Vault
+metadata:
+  name: vaultlock-${Rand.RFC1123Subdomain}
+  annotations:
+    meta.upbound.io/example-id: backup/v1beta1/vaultlockconfiguration
+  labels:
+    testing.upbound.io/example-name: vaultlockconfiguration
+spec:
+  forProvider:
+    region: us-west-1
+---
+apiVersion: backup.aws.m.upbound.io/v1beta1
+kind: VaultLockConfiguration
+metadata:
+  name: vaultlockconfiguration
+  annotations:
+    meta.upbound.io/example-id: backup/v1beta1/vaultlockconfiguration
+  labels:
+    testing.upbound.io/example-name: vaultlockconfiguration
+spec:
+  forProvider:
+    region: us-west-1
+    backupVaultNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: vaultlockconfiguration
+    changeableForDays: 3
+    maxRetentionDays: 1200
+    minRetentionDays: 7

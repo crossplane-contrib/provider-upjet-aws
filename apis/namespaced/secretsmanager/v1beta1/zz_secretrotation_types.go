@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type RotationRulesInitParameters struct {
@@ -65,11 +64,11 @@ type SecretRotationInitParameters struct {
 
 	// Reference to a Function in lambda to populate rotationLambdaArn.
 	// +kubebuilder:validation:Optional
-	RotationLambdaArnRef *v1.NamespacedReference `json:"rotationLambdaArnRef,omitempty" tf:"-"`
+	RotationLambdaArnRef *v2.NamespacedReference `json:"rotationLambdaArnRef,omitempty" tf:"-"`
 
 	// Selector for a Function in lambda to populate rotationLambdaArn.
 	// +kubebuilder:validation:Optional
-	RotationLambdaArnSelector *v1.NamespacedSelector `json:"rotationLambdaArnSelector,omitempty" tf:"-"`
+	RotationLambdaArnSelector *v2.NamespacedSelector `json:"rotationLambdaArnSelector,omitempty" tf:"-"`
 
 	// A structure that defines the rotation configuration for this secret. Defined below.
 	RotationRules *RotationRulesInitParameters `json:"rotationRules,omitempty" tf:"rotation_rules,omitempty"`
@@ -81,11 +80,11 @@ type SecretRotationInitParameters struct {
 
 	// Reference to a Secret in secretsmanager to populate secretId.
 	// +kubebuilder:validation:Optional
-	SecretIDRef *v1.NamespacedReference `json:"secretIdRef,omitempty" tf:"-"`
+	SecretIDRef *v2.NamespacedReference `json:"secretIdRef,omitempty" tf:"-"`
 
 	// Selector for a Secret in secretsmanager to populate secretId.
 	// +kubebuilder:validation:Optional
-	SecretIDSelector *v1.NamespacedSelector `json:"secretIdSelector,omitempty" tf:"-"`
+	SecretIDSelector *v2.NamespacedSelector `json:"secretIdSelector,omitempty" tf:"-"`
 }
 
 type SecretRotationObservation struct {
@@ -132,11 +131,11 @@ type SecretRotationParameters struct {
 
 	// Reference to a Function in lambda to populate rotationLambdaArn.
 	// +kubebuilder:validation:Optional
-	RotationLambdaArnRef *v1.NamespacedReference `json:"rotationLambdaArnRef,omitempty" tf:"-"`
+	RotationLambdaArnRef *v2.NamespacedReference `json:"rotationLambdaArnRef,omitempty" tf:"-"`
 
 	// Selector for a Function in lambda to populate rotationLambdaArn.
 	// +kubebuilder:validation:Optional
-	RotationLambdaArnSelector *v1.NamespacedSelector `json:"rotationLambdaArnSelector,omitempty" tf:"-"`
+	RotationLambdaArnSelector *v2.NamespacedSelector `json:"rotationLambdaArnSelector,omitempty" tf:"-"`
 
 	// A structure that defines the rotation configuration for this secret. Defined below.
 	// +kubebuilder:validation:Optional
@@ -150,11 +149,11 @@ type SecretRotationParameters struct {
 
 	// Reference to a Secret in secretsmanager to populate secretId.
 	// +kubebuilder:validation:Optional
-	SecretIDRef *v1.NamespacedReference `json:"secretIdRef,omitempty" tf:"-"`
+	SecretIDRef *v2.NamespacedReference `json:"secretIdRef,omitempty" tf:"-"`
 
 	// Selector for a Secret in secretsmanager to populate secretId.
 	// +kubebuilder:validation:Optional
-	SecretIDSelector *v1.NamespacedSelector `json:"secretIdSelector,omitempty" tf:"-"`
+	SecretIDSelector *v2.NamespacedSelector `json:"secretIdSelector,omitempty" tf:"-"`
 }
 
 // SecretRotationSpec defines the desired state of SecretRotation
@@ -176,8 +175,8 @@ type SecretRotationSpec struct {
 
 // SecretRotationStatus defines the observed state of SecretRotation.
 type SecretRotationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SecretRotationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SecretRotationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

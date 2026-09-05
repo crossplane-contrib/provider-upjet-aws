@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AdvancedSecurityOptionsInitParameters struct {
@@ -656,11 +655,11 @@ type LogPublishingOptionsInitParameters struct {
 
 	// Reference to a Group in cloudwatchlogs to populate cloudwatchLogGroupArn.
 	// +kubebuilder:validation:Optional
-	CloudwatchLogGroupArnRef *v1.NamespacedReference `json:"cloudwatchLogGroupArnRef,omitempty" tf:"-"`
+	CloudwatchLogGroupArnRef *v2.NamespacedReference `json:"cloudwatchLogGroupArnRef,omitempty" tf:"-"`
 
 	// Selector for a Group in cloudwatchlogs to populate cloudwatchLogGroupArn.
 	// +kubebuilder:validation:Optional
-	CloudwatchLogGroupArnSelector *v1.NamespacedSelector `json:"cloudwatchLogGroupArnSelector,omitempty" tf:"-"`
+	CloudwatchLogGroupArnSelector *v2.NamespacedSelector `json:"cloudwatchLogGroupArnSelector,omitempty" tf:"-"`
 
 	// Whether given log publishing option is enabled or not.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
@@ -691,11 +690,11 @@ type LogPublishingOptionsParameters struct {
 
 	// Reference to a Group in cloudwatchlogs to populate cloudwatchLogGroupArn.
 	// +kubebuilder:validation:Optional
-	CloudwatchLogGroupArnRef *v1.NamespacedReference `json:"cloudwatchLogGroupArnRef,omitempty" tf:"-"`
+	CloudwatchLogGroupArnRef *v2.NamespacedReference `json:"cloudwatchLogGroupArnRef,omitempty" tf:"-"`
 
 	// Selector for a Group in cloudwatchlogs to populate cloudwatchLogGroupArn.
 	// +kubebuilder:validation:Optional
-	CloudwatchLogGroupArnSelector *v1.NamespacedSelector `json:"cloudwatchLogGroupArnSelector,omitempty" tf:"-"`
+	CloudwatchLogGroupArnSelector *v2.NamespacedSelector `json:"cloudwatchLogGroupArnSelector,omitempty" tf:"-"`
 
 	// Whether given log publishing option is enabled or not.
 	// +kubebuilder:validation:Optional
@@ -754,7 +753,7 @@ type MasterUserOptionsInitParameters struct {
 	MasterUserName *string `json:"masterUserName,omitempty" tf:"master_user_name,omitempty"`
 
 	// Main user's password, which is stored in the Amazon Elasticsearch Service domain's internal database. Only specify if internal_user_database_enabled is set to true.
-	MasterUserPasswordSecretRef *v1.LocalSecretKeySelector `json:"masterUserPasswordSecretRef,omitempty" tf:"-"`
+	MasterUserPasswordSecretRef *v2.LocalSecretKeySelector `json:"masterUserPasswordSecretRef,omitempty" tf:"-"`
 }
 
 type MasterUserOptionsObservation struct {
@@ -778,7 +777,7 @@ type MasterUserOptionsParameters struct {
 
 	// Main user's password, which is stored in the Amazon Elasticsearch Service domain's internal database. Only specify if internal_user_database_enabled is set to true.
 	// +kubebuilder:validation:Optional
-	MasterUserPasswordSecretRef *v1.LocalSecretKeySelector `json:"masterUserPasswordSecretRef,omitempty" tf:"-"`
+	MasterUserPasswordSecretRef *v2.LocalSecretKeySelector `json:"masterUserPasswordSecretRef,omitempty" tf:"-"`
 }
 
 type NodeToNodeEncryptionInitParameters struct {
@@ -829,11 +828,11 @@ type VPCOptionsInitParameters struct {
 
 	// References to SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIdsRefs []v1.NamespacedReference `json:"securityGroupIdsRefs,omitempty" tf:"-"`
+	SecurityGroupIdsRefs []v2.NamespacedReference `json:"securityGroupIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIdsSelector *v1.NamespacedSelector `json:"securityGroupIdsSelector,omitempty" tf:"-"`
+	SecurityGroupIdsSelector *v2.NamespacedSelector `json:"securityGroupIdsSelector,omitempty" tf:"-"`
 
 	// List of VPC Subnet IDs for the Elasticsearch domain endpoints to be created in.
 	// +listType=set
@@ -869,11 +868,11 @@ type VPCOptionsParameters struct {
 
 	// References to SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIdsRefs []v1.NamespacedReference `json:"securityGroupIdsRefs,omitempty" tf:"-"`
+	SecurityGroupIdsRefs []v2.NamespacedReference `json:"securityGroupIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIdsSelector *v1.NamespacedSelector `json:"securityGroupIdsSelector,omitempty" tf:"-"`
+	SecurityGroupIdsSelector *v2.NamespacedSelector `json:"securityGroupIdsSelector,omitempty" tf:"-"`
 
 	// List of VPC Subnet IDs for the Elasticsearch domain endpoints to be created in.
 	// +kubebuilder:validation:Optional
@@ -919,8 +918,8 @@ type DomainSpec struct {
 
 // DomainStatus defines the observed state of Domain.
 type DomainStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        DomainObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               DomainObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

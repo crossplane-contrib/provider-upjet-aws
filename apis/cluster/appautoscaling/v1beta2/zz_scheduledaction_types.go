@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ScalableTargetActionInitParameters struct {
@@ -57,11 +57,11 @@ type ScheduledActionInitParameters struct {
 
 	// Reference to a Target in appautoscaling to populate resourceId.
 	// +kubebuilder:validation:Optional
-	ResourceIDRef *v1.Reference `json:"resourceIdRef,omitempty" tf:"-"`
+	ResourceIDRef *v2.Reference `json:"resourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Target in appautoscaling to populate resourceId.
 	// +kubebuilder:validation:Optional
-	ResourceIDSelector *v1.Selector `json:"resourceIdSelector,omitempty" tf:"-"`
+	ResourceIDSelector *v2.Selector `json:"resourceIdSelector,omitempty" tf:"-"`
 
 	// Scalable dimension. Documentation can be found in the ScalableDimension parameter at: AWS Application Auto Scaling API Reference Example: ecs:service:DesiredCount
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/appautoscaling/v1beta1.Target
@@ -70,11 +70,11 @@ type ScheduledActionInitParameters struct {
 
 	// Reference to a Target in appautoscaling to populate scalableDimension.
 	// +kubebuilder:validation:Optional
-	ScalableDimensionRef *v1.Reference `json:"scalableDimensionRef,omitempty" tf:"-"`
+	ScalableDimensionRef *v2.Reference `json:"scalableDimensionRef,omitempty" tf:"-"`
 
 	// Selector for a Target in appautoscaling to populate scalableDimension.
 	// +kubebuilder:validation:Optional
-	ScalableDimensionSelector *v1.Selector `json:"scalableDimensionSelector,omitempty" tf:"-"`
+	ScalableDimensionSelector *v2.Selector `json:"scalableDimensionSelector,omitempty" tf:"-"`
 
 	// New minimum and maximum capacity. You can set both values or just one. See below
 	ScalableTargetAction *ScalableTargetActionInitParameters `json:"scalableTargetAction,omitempty" tf:"scalable_target_action,omitempty"`
@@ -89,11 +89,11 @@ type ScheduledActionInitParameters struct {
 
 	// Reference to a Target in appautoscaling to populate serviceNamespace.
 	// +kubebuilder:validation:Optional
-	ServiceNamespaceRef *v1.Reference `json:"serviceNamespaceRef,omitempty" tf:"-"`
+	ServiceNamespaceRef *v2.Reference `json:"serviceNamespaceRef,omitempty" tf:"-"`
 
 	// Selector for a Target in appautoscaling to populate serviceNamespace.
 	// +kubebuilder:validation:Optional
-	ServiceNamespaceSelector *v1.Selector `json:"serviceNamespaceSelector,omitempty" tf:"-"`
+	ServiceNamespaceSelector *v2.Selector `json:"serviceNamespaceSelector,omitempty" tf:"-"`
 
 	// Date and time for the scheduled action to start in RFC 3339 format. The timezone is not affected by the setting of timezone.
 	StartTime *string `json:"startTime,omitempty" tf:"start_time,omitempty"`
@@ -164,11 +164,11 @@ type ScheduledActionParameters struct {
 
 	// Reference to a Target in appautoscaling to populate resourceId.
 	// +kubebuilder:validation:Optional
-	ResourceIDRef *v1.Reference `json:"resourceIdRef,omitempty" tf:"-"`
+	ResourceIDRef *v2.Reference `json:"resourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Target in appautoscaling to populate resourceId.
 	// +kubebuilder:validation:Optional
-	ResourceIDSelector *v1.Selector `json:"resourceIdSelector,omitempty" tf:"-"`
+	ResourceIDSelector *v2.Selector `json:"resourceIdSelector,omitempty" tf:"-"`
 
 	// Scalable dimension. Documentation can be found in the ScalableDimension parameter at: AWS Application Auto Scaling API Reference Example: ecs:service:DesiredCount
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/appautoscaling/v1beta1.Target
@@ -178,11 +178,11 @@ type ScheduledActionParameters struct {
 
 	// Reference to a Target in appautoscaling to populate scalableDimension.
 	// +kubebuilder:validation:Optional
-	ScalableDimensionRef *v1.Reference `json:"scalableDimensionRef,omitempty" tf:"-"`
+	ScalableDimensionRef *v2.Reference `json:"scalableDimensionRef,omitempty" tf:"-"`
 
 	// Selector for a Target in appautoscaling to populate scalableDimension.
 	// +kubebuilder:validation:Optional
-	ScalableDimensionSelector *v1.Selector `json:"scalableDimensionSelector,omitempty" tf:"-"`
+	ScalableDimensionSelector *v2.Selector `json:"scalableDimensionSelector,omitempty" tf:"-"`
 
 	// New minimum and maximum capacity. You can set both values or just one. See below
 	// +kubebuilder:validation:Optional
@@ -200,11 +200,11 @@ type ScheduledActionParameters struct {
 
 	// Reference to a Target in appautoscaling to populate serviceNamespace.
 	// +kubebuilder:validation:Optional
-	ServiceNamespaceRef *v1.Reference `json:"serviceNamespaceRef,omitempty" tf:"-"`
+	ServiceNamespaceRef *v2.Reference `json:"serviceNamespaceRef,omitempty" tf:"-"`
 
 	// Selector for a Target in appautoscaling to populate serviceNamespace.
 	// +kubebuilder:validation:Optional
-	ServiceNamespaceSelector *v1.Selector `json:"serviceNamespaceSelector,omitempty" tf:"-"`
+	ServiceNamespaceSelector *v2.Selector `json:"serviceNamespaceSelector,omitempty" tf:"-"`
 
 	// Date and time for the scheduled action to start in RFC 3339 format. The timezone is not affected by the setting of timezone.
 	// +kubebuilder:validation:Optional
@@ -217,8 +217,8 @@ type ScheduledActionParameters struct {
 
 // ScheduledActionSpec defines the desired state of ScheduledAction
 type ScheduledActionSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ScheduledActionParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ScheduledActionParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -234,8 +234,8 @@ type ScheduledActionSpec struct {
 
 // ScheduledActionStatus defines the observed state of ScheduledAction.
 type ScheduledActionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ScheduledActionObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ScheduledActionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

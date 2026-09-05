@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type HostedPrivateVirtualInterfaceAccepterInitParameters struct {
@@ -29,11 +29,11 @@ type HostedPrivateVirtualInterfaceAccepterInitParameters struct {
 
 	// Reference to a VPNGateway in ec2 to populate vpnGatewayId.
 	// +kubebuilder:validation:Optional
-	VPNGatewayIDRef *v1.Reference `json:"vpnGatewayIdRef,omitempty" tf:"-"`
+	VPNGatewayIDRef *v2.Reference `json:"vpnGatewayIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPNGateway in ec2 to populate vpnGatewayId.
 	// +kubebuilder:validation:Optional
-	VPNGatewayIDSelector *v1.Selector `json:"vpnGatewayIdSelector,omitempty" tf:"-"`
+	VPNGatewayIDSelector *v2.Selector `json:"vpnGatewayIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Direct Connect virtual interface to accept.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/directconnect/v1beta1.HostedPrivateVirtualInterface
@@ -41,11 +41,11 @@ type HostedPrivateVirtualInterfaceAccepterInitParameters struct {
 
 	// Reference to a HostedPrivateVirtualInterface in directconnect to populate virtualInterfaceId.
 	// +kubebuilder:validation:Optional
-	VirtualInterfaceIDRef *v1.Reference `json:"virtualInterfaceIdRef,omitempty" tf:"-"`
+	VirtualInterfaceIDRef *v2.Reference `json:"virtualInterfaceIdRef,omitempty" tf:"-"`
 
 	// Selector for a HostedPrivateVirtualInterface in directconnect to populate virtualInterfaceId.
 	// +kubebuilder:validation:Optional
-	VirtualInterfaceIDSelector *v1.Selector `json:"virtualInterfaceIdSelector,omitempty" tf:"-"`
+	VirtualInterfaceIDSelector *v2.Selector `json:"virtualInterfaceIdSelector,omitempty" tf:"-"`
 }
 
 type HostedPrivateVirtualInterfaceAccepterObservation struct {
@@ -102,11 +102,11 @@ type HostedPrivateVirtualInterfaceAccepterParameters struct {
 
 	// Reference to a VPNGateway in ec2 to populate vpnGatewayId.
 	// +kubebuilder:validation:Optional
-	VPNGatewayIDRef *v1.Reference `json:"vpnGatewayIdRef,omitempty" tf:"-"`
+	VPNGatewayIDRef *v2.Reference `json:"vpnGatewayIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPNGateway in ec2 to populate vpnGatewayId.
 	// +kubebuilder:validation:Optional
-	VPNGatewayIDSelector *v1.Selector `json:"vpnGatewayIdSelector,omitempty" tf:"-"`
+	VPNGatewayIDSelector *v2.Selector `json:"vpnGatewayIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Direct Connect virtual interface to accept.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/directconnect/v1beta1.HostedPrivateVirtualInterface
@@ -115,17 +115,17 @@ type HostedPrivateVirtualInterfaceAccepterParameters struct {
 
 	// Reference to a HostedPrivateVirtualInterface in directconnect to populate virtualInterfaceId.
 	// +kubebuilder:validation:Optional
-	VirtualInterfaceIDRef *v1.Reference `json:"virtualInterfaceIdRef,omitempty" tf:"-"`
+	VirtualInterfaceIDRef *v2.Reference `json:"virtualInterfaceIdRef,omitempty" tf:"-"`
 
 	// Selector for a HostedPrivateVirtualInterface in directconnect to populate virtualInterfaceId.
 	// +kubebuilder:validation:Optional
-	VirtualInterfaceIDSelector *v1.Selector `json:"virtualInterfaceIdSelector,omitempty" tf:"-"`
+	VirtualInterfaceIDSelector *v2.Selector `json:"virtualInterfaceIdSelector,omitempty" tf:"-"`
 }
 
 // HostedPrivateVirtualInterfaceAccepterSpec defines the desired state of HostedPrivateVirtualInterfaceAccepter
 type HostedPrivateVirtualInterfaceAccepterSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     HostedPrivateVirtualInterfaceAccepterParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   HostedPrivateVirtualInterfaceAccepterParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -141,8 +141,8 @@ type HostedPrivateVirtualInterfaceAccepterSpec struct {
 
 // HostedPrivateVirtualInterfaceAccepterStatus defines the observed state of HostedPrivateVirtualInterfaceAccepter.
 type HostedPrivateVirtualInterfaceAccepterStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        HostedPrivateVirtualInterfaceAccepterObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               HostedPrivateVirtualInterfaceAccepterObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

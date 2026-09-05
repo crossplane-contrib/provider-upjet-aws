@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type DiscovererInitParameters struct {
@@ -25,11 +25,11 @@ type DiscovererInitParameters struct {
 
 	// Reference to a Bus in cloudwatchevents to populate sourceArn.
 	// +kubebuilder:validation:Optional
-	SourceArnRef *v1.Reference `json:"sourceArnRef,omitempty" tf:"-"`
+	SourceArnRef *v2.Reference `json:"sourceArnRef,omitempty" tf:"-"`
 
 	// Selector for a Bus in cloudwatchevents to populate sourceArn.
 	// +kubebuilder:validation:Optional
-	SourceArnSelector *v1.Selector `json:"sourceArnSelector,omitempty" tf:"-"`
+	SourceArnSelector *v2.Selector `json:"sourceArnSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -82,11 +82,11 @@ type DiscovererParameters struct {
 
 	// Reference to a Bus in cloudwatchevents to populate sourceArn.
 	// +kubebuilder:validation:Optional
-	SourceArnRef *v1.Reference `json:"sourceArnRef,omitempty" tf:"-"`
+	SourceArnRef *v2.Reference `json:"sourceArnRef,omitempty" tf:"-"`
 
 	// Selector for a Bus in cloudwatchevents to populate sourceArn.
 	// +kubebuilder:validation:Optional
-	SourceArnSelector *v1.Selector `json:"sourceArnSelector,omitempty" tf:"-"`
+	SourceArnSelector *v2.Selector `json:"sourceArnSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -96,8 +96,8 @@ type DiscovererParameters struct {
 
 // DiscovererSpec defines the desired state of Discoverer
 type DiscovererSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     DiscovererParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   DiscovererParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -113,8 +113,8 @@ type DiscovererSpec struct {
 
 // DiscovererStatus defines the observed state of Discoverer.
 type DiscovererStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        DiscovererObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               DiscovererObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

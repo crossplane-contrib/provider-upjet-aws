@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type PatchGroupInitParameters struct {
@@ -22,11 +22,11 @@ type PatchGroupInitParameters struct {
 
 	// Reference to a PatchBaseline in ssm to populate baselineId.
 	// +kubebuilder:validation:Optional
-	BaselineIDRef *v1.Reference `json:"baselineIdRef,omitempty" tf:"-"`
+	BaselineIDRef *v2.Reference `json:"baselineIdRef,omitempty" tf:"-"`
 
 	// Selector for a PatchBaseline in ssm to populate baselineId.
 	// +kubebuilder:validation:Optional
-	BaselineIDSelector *v1.Selector `json:"baselineIdSelector,omitempty" tf:"-"`
+	BaselineIDSelector *v2.Selector `json:"baselineIdSelector,omitempty" tf:"-"`
 
 	// The name of the patch group that should be registered with the patch baseline.
 	PatchGroup *string `json:"patchGroup,omitempty" tf:"patch_group,omitempty"`
@@ -58,11 +58,11 @@ type PatchGroupParameters struct {
 
 	// Reference to a PatchBaseline in ssm to populate baselineId.
 	// +kubebuilder:validation:Optional
-	BaselineIDRef *v1.Reference `json:"baselineIdRef,omitempty" tf:"-"`
+	BaselineIDRef *v2.Reference `json:"baselineIdRef,omitempty" tf:"-"`
 
 	// Selector for a PatchBaseline in ssm to populate baselineId.
 	// +kubebuilder:validation:Optional
-	BaselineIDSelector *v1.Selector `json:"baselineIdSelector,omitempty" tf:"-"`
+	BaselineIDSelector *v2.Selector `json:"baselineIdSelector,omitempty" tf:"-"`
 
 	// The name of the patch group that should be registered with the patch baseline.
 	// +kubebuilder:validation:Optional
@@ -76,8 +76,8 @@ type PatchGroupParameters struct {
 
 // PatchGroupSpec defines the desired state of PatchGroup
 type PatchGroupSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     PatchGroupParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   PatchGroupParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -93,8 +93,8 @@ type PatchGroupSpec struct {
 
 // PatchGroupStatus defines the observed state of PatchGroup.
 type PatchGroupStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        PatchGroupObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               PatchGroupObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

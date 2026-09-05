@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AccessControlAllowHeadersInitParameters struct {
@@ -366,7 +365,7 @@ type ResponseHeadersPolicyInitParameters struct {
 	// A comment to describe the response headers policy. The comment cannot be longer than 128 characters.
 	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
 
-	// A configuration for a set of HTTP response headers that are used for Cross-Origin Resource Sharing (CORS). See Cors Config for more information.
+	// A configuration for a set of HTTP response headers that are used for Cross-Origin Resource Sharing (CORS). See CORS Config for more information.
 	CorsConfig *CorsConfigInitParameters `json:"corsConfig,omitempty" tf:"cors_config,omitempty"`
 
 	// Object that contains an attribute items that contains a list of custom headers. See Custom Header for more information.
@@ -393,7 +392,7 @@ type ResponseHeadersPolicyObservation struct {
 	// A comment to describe the response headers policy. The comment cannot be longer than 128 characters.
 	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
 
-	// A configuration for a set of HTTP response headers that are used for Cross-Origin Resource Sharing (CORS). See Cors Config for more information.
+	// A configuration for a set of HTTP response headers that are used for Cross-Origin Resource Sharing (CORS). See CORS Config for more information.
 	CorsConfig *CorsConfigObservation `json:"corsConfig,omitempty" tf:"cors_config,omitempty"`
 
 	// Object that contains an attribute items that contains a list of custom headers. See Custom Header for more information.
@@ -424,7 +423,7 @@ type ResponseHeadersPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
 
-	// A configuration for a set of HTTP response headers that are used for Cross-Origin Resource Sharing (CORS). See Cors Config for more information.
+	// A configuration for a set of HTTP response headers that are used for Cross-Origin Resource Sharing (CORS). See CORS Config for more information.
 	// +kubebuilder:validation:Optional
 	CorsConfig *CorsConfigParameters `json:"corsConfig,omitempty" tf:"cors_config,omitempty"`
 
@@ -664,8 +663,8 @@ type ResponseHeadersPolicySpec struct {
 
 // ResponseHeadersPolicyStatus defines the observed state of ResponseHeadersPolicy.
 type ResponseHeadersPolicyStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ResponseHeadersPolicyObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ResponseHeadersPolicyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

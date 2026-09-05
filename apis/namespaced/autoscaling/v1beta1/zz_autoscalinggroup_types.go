@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AcceleratorCountInitParameters struct {
@@ -168,11 +167,11 @@ type AutoscalingGroupInitParameters struct {
 
 	// Reference to a LaunchConfiguration in autoscaling to populate launchConfiguration.
 	// +kubebuilder:validation:Optional
-	LaunchConfigurationRef *v1.NamespacedReference `json:"launchConfigurationRef,omitempty" tf:"-"`
+	LaunchConfigurationRef *v2.NamespacedReference `json:"launchConfigurationRef,omitempty" tf:"-"`
 
 	// Selector for a LaunchConfiguration in autoscaling to populate launchConfiguration.
 	// +kubebuilder:validation:Optional
-	LaunchConfigurationSelector *v1.NamespacedSelector `json:"launchConfigurationSelector,omitempty" tf:"-"`
+	LaunchConfigurationSelector *v2.NamespacedSelector `json:"launchConfigurationSelector,omitempty" tf:"-"`
 
 	// Nested argument with Launch template specification to use to launch instances. See Launch Template below for more details.
 	LaunchTemplate *LaunchTemplateInitParameters `json:"launchTemplate,omitempty" tf:"launch_template,omitempty"`
@@ -204,11 +203,11 @@ type AutoscalingGroupInitParameters struct {
 
 	// Reference to a PlacementGroup in ec2 to populate placementGroup.
 	// +kubebuilder:validation:Optional
-	PlacementGroupRef *v1.NamespacedReference `json:"placementGroupRef,omitempty" tf:"-"`
+	PlacementGroupRef *v2.NamespacedReference `json:"placementGroupRef,omitempty" tf:"-"`
 
 	// Selector for a PlacementGroup in ec2 to populate placementGroup.
 	// +kubebuilder:validation:Optional
-	PlacementGroupSelector *v1.NamespacedSelector `json:"placementGroupSelector,omitempty" tf:"-"`
+	PlacementGroupSelector *v2.NamespacedSelector `json:"placementGroupSelector,omitempty" tf:"-"`
 
 	// Whether newly launched instances
 	// are automatically protected from termination by Amazon EC2 Auto Scaling when
@@ -224,11 +223,11 @@ type AutoscalingGroupInitParameters struct {
 
 	// Reference to a Role in iam to populate serviceLinkedRoleArn.
 	// +kubebuilder:validation:Optional
-	ServiceLinkedRoleArnRef *v1.NamespacedReference `json:"serviceLinkedRoleArnRef,omitempty" tf:"-"`
+	ServiceLinkedRoleArnRef *v2.NamespacedReference `json:"serviceLinkedRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate serviceLinkedRoleArn.
 	// +kubebuilder:validation:Optional
-	ServiceLinkedRoleArnSelector *v1.NamespacedSelector `json:"serviceLinkedRoleArnSelector,omitempty" tf:"-"`
+	ServiceLinkedRoleArnSelector *v2.NamespacedSelector `json:"serviceLinkedRoleArnSelector,omitempty" tf:"-"`
 
 	// List of processes to suspend for the Auto Scaling Group. The allowed values are Launch, Terminate, HealthCheck, ReplaceUnhealthy, AZRebalance, AlarmNotification, ScheduledActions, AddToLoadBalancer, InstanceRefresh.
 	// Note that if you suspend either the Launch or Terminate process types, it can prevent your Auto Scaling Group from functioning properly.
@@ -251,11 +250,11 @@ type AutoscalingGroupInitParameters struct {
 
 	// References to Subnet in ec2 to populate vpcZoneIdentifier.
 	// +kubebuilder:validation:Optional
-	VPCZoneIdentifierRefs []v1.NamespacedReference `json:"vpcZoneIdentifierRefs,omitempty" tf:"-"`
+	VPCZoneIdentifierRefs []v2.NamespacedReference `json:"vpcZoneIdentifierRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Subnet in ec2 to populate vpcZoneIdentifier.
 	// +kubebuilder:validation:Optional
-	VPCZoneIdentifierSelector *v1.NamespacedSelector `json:"vpcZoneIdentifierSelector,omitempty" tf:"-"`
+	VPCZoneIdentifierSelector *v2.NamespacedSelector `json:"vpcZoneIdentifierSelector,omitempty" tf:"-"`
 
 	// (See also Waiting
 	// for Capacity below.
@@ -534,11 +533,11 @@ type AutoscalingGroupParameters struct {
 
 	// Reference to a LaunchConfiguration in autoscaling to populate launchConfiguration.
 	// +kubebuilder:validation:Optional
-	LaunchConfigurationRef *v1.NamespacedReference `json:"launchConfigurationRef,omitempty" tf:"-"`
+	LaunchConfigurationRef *v2.NamespacedReference `json:"launchConfigurationRef,omitempty" tf:"-"`
 
 	// Selector for a LaunchConfiguration in autoscaling to populate launchConfiguration.
 	// +kubebuilder:validation:Optional
-	LaunchConfigurationSelector *v1.NamespacedSelector `json:"launchConfigurationSelector,omitempty" tf:"-"`
+	LaunchConfigurationSelector *v2.NamespacedSelector `json:"launchConfigurationSelector,omitempty" tf:"-"`
 
 	// Nested argument with Launch template specification to use to launch instances. See Launch Template below for more details.
 	// +kubebuilder:validation:Optional
@@ -578,11 +577,11 @@ type AutoscalingGroupParameters struct {
 
 	// Reference to a PlacementGroup in ec2 to populate placementGroup.
 	// +kubebuilder:validation:Optional
-	PlacementGroupRef *v1.NamespacedReference `json:"placementGroupRef,omitempty" tf:"-"`
+	PlacementGroupRef *v2.NamespacedReference `json:"placementGroupRef,omitempty" tf:"-"`
 
 	// Selector for a PlacementGroup in ec2 to populate placementGroup.
 	// +kubebuilder:validation:Optional
-	PlacementGroupSelector *v1.NamespacedSelector `json:"placementGroupSelector,omitempty" tf:"-"`
+	PlacementGroupSelector *v2.NamespacedSelector `json:"placementGroupSelector,omitempty" tf:"-"`
 
 	// Whether newly launched instances
 	// are automatically protected from termination by Amazon EC2 Auto Scaling when
@@ -605,11 +604,11 @@ type AutoscalingGroupParameters struct {
 
 	// Reference to a Role in iam to populate serviceLinkedRoleArn.
 	// +kubebuilder:validation:Optional
-	ServiceLinkedRoleArnRef *v1.NamespacedReference `json:"serviceLinkedRoleArnRef,omitempty" tf:"-"`
+	ServiceLinkedRoleArnRef *v2.NamespacedReference `json:"serviceLinkedRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate serviceLinkedRoleArn.
 	// +kubebuilder:validation:Optional
-	ServiceLinkedRoleArnSelector *v1.NamespacedSelector `json:"serviceLinkedRoleArnSelector,omitempty" tf:"-"`
+	ServiceLinkedRoleArnSelector *v2.NamespacedSelector `json:"serviceLinkedRoleArnSelector,omitempty" tf:"-"`
 
 	// List of processes to suspend for the Auto Scaling Group. The allowed values are Launch, Terminate, HealthCheck, ReplaceUnhealthy, AZRebalance, AlarmNotification, ScheduledActions, AddToLoadBalancer, InstanceRefresh.
 	// Note that if you suspend either the Launch or Terminate process types, it can prevent your Auto Scaling Group from functioning properly.
@@ -637,11 +636,11 @@ type AutoscalingGroupParameters struct {
 
 	// References to Subnet in ec2 to populate vpcZoneIdentifier.
 	// +kubebuilder:validation:Optional
-	VPCZoneIdentifierRefs []v1.NamespacedReference `json:"vpcZoneIdentifierRefs,omitempty" tf:"-"`
+	VPCZoneIdentifierRefs []v2.NamespacedReference `json:"vpcZoneIdentifierRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Subnet in ec2 to populate vpcZoneIdentifier.
 	// +kubebuilder:validation:Optional
-	VPCZoneIdentifierSelector *v1.NamespacedSelector `json:"vpcZoneIdentifierSelector,omitempty" tf:"-"`
+	VPCZoneIdentifierSelector *v2.NamespacedSelector `json:"vpcZoneIdentifierSelector,omitempty" tf:"-"`
 
 	// (See also Waiting
 	// for Capacity below.
@@ -1272,11 +1271,11 @@ type LaunchTemplateInitParameters struct {
 
 	// Reference to a LaunchTemplate in ec2 to populate id.
 	// +kubebuilder:validation:Optional
-	IDRef *v1.NamespacedReference `json:"idRef,omitempty" tf:"-"`
+	IDRef *v2.NamespacedReference `json:"idRef,omitempty" tf:"-"`
 
 	// Selector for a LaunchTemplate in ec2 to populate id.
 	// +kubebuilder:validation:Optional
-	IDSelector *v1.NamespacedSelector `json:"idSelector,omitempty" tf:"-"`
+	IDSelector *v2.NamespacedSelector `json:"idSelector,omitempty" tf:"-"`
 
 	// Name of the launch template. Conflicts with id.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -1307,11 +1306,11 @@ type LaunchTemplateParameters struct {
 
 	// Reference to a LaunchTemplate in ec2 to populate id.
 	// +kubebuilder:validation:Optional
-	IDRef *v1.NamespacedReference `json:"idRef,omitempty" tf:"-"`
+	IDRef *v2.NamespacedReference `json:"idRef,omitempty" tf:"-"`
 
 	// Selector for a LaunchTemplate in ec2 to populate id.
 	// +kubebuilder:validation:Optional
-	IDSelector *v1.NamespacedSelector `json:"idSelector,omitempty" tf:"-"`
+	IDSelector *v2.NamespacedSelector `json:"idSelector,omitempty" tf:"-"`
 
 	// Name of the launch template. Conflicts with id.
 	// +kubebuilder:validation:Optional
@@ -1331,11 +1330,11 @@ type LaunchTemplateSpecificationInitParameters struct {
 
 	// Reference to a LaunchTemplate in ec2 to populate launchTemplateId.
 	// +kubebuilder:validation:Optional
-	LaunchTemplateIDRef *v1.NamespacedReference `json:"launchTemplateIdRef,omitempty" tf:"-"`
+	LaunchTemplateIDRef *v2.NamespacedReference `json:"launchTemplateIdRef,omitempty" tf:"-"`
 
 	// Selector for a LaunchTemplate in ec2 to populate launchTemplateId.
 	// +kubebuilder:validation:Optional
-	LaunchTemplateIDSelector *v1.NamespacedSelector `json:"launchTemplateIdSelector,omitempty" tf:"-"`
+	LaunchTemplateIDSelector *v2.NamespacedSelector `json:"launchTemplateIdSelector,omitempty" tf:"-"`
 
 	// Name of the launch template. Conflicts with launch_template_id.
 	LaunchTemplateName *string `json:"launchTemplateName,omitempty" tf:"launch_template_name,omitempty"`
@@ -1366,11 +1365,11 @@ type LaunchTemplateSpecificationParameters struct {
 
 	// Reference to a LaunchTemplate in ec2 to populate launchTemplateId.
 	// +kubebuilder:validation:Optional
-	LaunchTemplateIDRef *v1.NamespacedReference `json:"launchTemplateIdRef,omitempty" tf:"-"`
+	LaunchTemplateIDRef *v2.NamespacedReference `json:"launchTemplateIdRef,omitempty" tf:"-"`
 
 	// Selector for a LaunchTemplate in ec2 to populate launchTemplateId.
 	// +kubebuilder:validation:Optional
-	LaunchTemplateIDSelector *v1.NamespacedSelector `json:"launchTemplateIdSelector,omitempty" tf:"-"`
+	LaunchTemplateIDSelector *v2.NamespacedSelector `json:"launchTemplateIdSelector,omitempty" tf:"-"`
 
 	// Name of the launch template. Conflicts with launch_template_id.
 	// +kubebuilder:validation:Optional
@@ -1579,11 +1578,11 @@ type OverrideLaunchTemplateSpecificationInitParameters struct {
 
 	// Reference to a LaunchTemplate in ec2 to populate launchTemplateId.
 	// +kubebuilder:validation:Optional
-	LaunchTemplateIDRef *v1.NamespacedReference `json:"launchTemplateIdRef,omitempty" tf:"-"`
+	LaunchTemplateIDRef *v2.NamespacedReference `json:"launchTemplateIdRef,omitempty" tf:"-"`
 
 	// Selector for a LaunchTemplate in ec2 to populate launchTemplateId.
 	// +kubebuilder:validation:Optional
-	LaunchTemplateIDSelector *v1.NamespacedSelector `json:"launchTemplateIdSelector,omitempty" tf:"-"`
+	LaunchTemplateIDSelector *v2.NamespacedSelector `json:"launchTemplateIdSelector,omitempty" tf:"-"`
 
 	// Name of the launch template. Conflicts with launch_template_id.
 	LaunchTemplateName *string `json:"launchTemplateName,omitempty" tf:"launch_template_name,omitempty"`
@@ -1614,11 +1613,11 @@ type OverrideLaunchTemplateSpecificationParameters struct {
 
 	// Reference to a LaunchTemplate in ec2 to populate launchTemplateId.
 	// +kubebuilder:validation:Optional
-	LaunchTemplateIDRef *v1.NamespacedReference `json:"launchTemplateIdRef,omitempty" tf:"-"`
+	LaunchTemplateIDRef *v2.NamespacedReference `json:"launchTemplateIdRef,omitempty" tf:"-"`
 
 	// Selector for a LaunchTemplate in ec2 to populate launchTemplateId.
 	// +kubebuilder:validation:Optional
-	LaunchTemplateIDSelector *v1.NamespacedSelector `json:"launchTemplateIdSelector,omitempty" tf:"-"`
+	LaunchTemplateIDSelector *v2.NamespacedSelector `json:"launchTemplateIdSelector,omitempty" tf:"-"`
 
 	// Name of the launch template. Conflicts with launch_template_id.
 	// +kubebuilder:validation:Optional
@@ -1984,8 +1983,8 @@ type AutoscalingGroupSpec struct {
 
 // AutoscalingGroupStatus defines the observed state of AutoscalingGroup.
 type AutoscalingGroupStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        AutoscalingGroupObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               AutoscalingGroupObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

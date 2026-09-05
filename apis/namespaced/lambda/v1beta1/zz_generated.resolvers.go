@@ -1168,3 +1168,55 @@ func (mg *Permission) ResolveReferences(ctx context.Context, c client.Reader) er
 
 	return nil
 }
+
+// ResolveReferences of this RuntimeManagementConfig.
+func (mg *RuntimeManagementConfig) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPINamespacedResolver(c, mg)
+
+	var rsp reference.NamespacedResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("lambda.aws.m.upbound.io", "v1beta1", "Function", "FunctionList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.FunctionName),
+			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.FunctionNameRef,
+			Selector:     mg.Spec.ForProvider.FunctionNameSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.FunctionName")
+	}
+	mg.Spec.ForProvider.FunctionName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.FunctionNameRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("lambda.aws.m.upbound.io", "v1beta1", "Function", "FunctionList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FunctionName),
+			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.FunctionNameRef,
+			Selector:     mg.Spec.InitProvider.FunctionNameSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.FunctionName")
+	}
+	mg.Spec.InitProvider.FunctionName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.FunctionNameRef = rsp.ResolvedReference
+
+	return nil
+}

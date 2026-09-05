@@ -36,6 +36,8 @@ func (tr *Queue) GetObservation() (map[string]any, error) {
 
 // SetObservation for this Queue
 func (tr *Queue) SetObservation(obs map[string]any) error {
+	tr.Status.AtProvider.Tags = nil
+	tr.Status.AtProvider.TagsAll = nil
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err

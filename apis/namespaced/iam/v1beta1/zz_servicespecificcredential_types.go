@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ServiceSpecificCredentialInitParameters struct {
@@ -31,11 +30,11 @@ type ServiceSpecificCredentialInitParameters struct {
 
 	// Reference to a User in iam to populate userName.
 	// +kubebuilder:validation:Optional
-	UserNameRef *v1.NamespacedReference `json:"userNameRef,omitempty" tf:"-"`
+	UserNameRef *v2.NamespacedReference `json:"userNameRef,omitempty" tf:"-"`
 
 	// Selector for a User in iam to populate userName.
 	// +kubebuilder:validation:Optional
-	UserNameSelector *v1.NamespacedSelector `json:"userNameSelector,omitempty" tf:"-"`
+	UserNameSelector *v2.NamespacedSelector `json:"userNameSelector,omitempty" tf:"-"`
 }
 
 type ServiceSpecificCredentialObservation struct {
@@ -92,11 +91,11 @@ type ServiceSpecificCredentialParameters struct {
 
 	// Reference to a User in iam to populate userName.
 	// +kubebuilder:validation:Optional
-	UserNameRef *v1.NamespacedReference `json:"userNameRef,omitempty" tf:"-"`
+	UserNameRef *v2.NamespacedReference `json:"userNameRef,omitempty" tf:"-"`
 
 	// Selector for a User in iam to populate userName.
 	// +kubebuilder:validation:Optional
-	UserNameSelector *v1.NamespacedSelector `json:"userNameSelector,omitempty" tf:"-"`
+	UserNameSelector *v2.NamespacedSelector `json:"userNameSelector,omitempty" tf:"-"`
 }
 
 // ServiceSpecificCredentialSpec defines the desired state of ServiceSpecificCredential
@@ -118,8 +117,8 @@ type ServiceSpecificCredentialSpec struct {
 
 // ServiceSpecificCredentialStatus defines the observed state of ServiceSpecificCredential.
 type ServiceSpecificCredentialStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ServiceSpecificCredentialObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ServiceSpecificCredentialObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

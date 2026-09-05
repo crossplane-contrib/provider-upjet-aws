@@ -42,7 +42,7 @@ spec:
     securityGroupRefs:
       - name: example
     engineType: ActiveMQ
-    engineVersion: "5.18"
+    engineVersion: "5.19"
     hostInstanceType: mq.t3.micro
   # bootstrap users must be specified under spec.initProvider if the Broker.mq
   # MR is to be used together with User.mq MRs, as the controllers for these

@@ -43,3 +43,17 @@ func SetupGated_cognitoidentity(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupWebhookWithManager_cognitoidentity registers conversion webhooks for all resource kinds in the group.
+func SetupWebhookWithManager_cognitoidentity(mgr ctrl.Manager) error {
+	for _, setup := range []func(ctrl.Manager) error{
+		cognitoidentitypoolproviderprincipaltag.SetupWebhookWithManager,
+		pool.SetupWebhookWithManager,
+		poolrolesattachment.SetupWebhookWithManager,
+	} {
+		if err := setup(mgr); err != nil {
+			return err
+		}
+	}
+	return nil
+}

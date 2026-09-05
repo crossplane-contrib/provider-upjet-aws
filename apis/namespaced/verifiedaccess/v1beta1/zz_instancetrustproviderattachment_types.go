@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type InstanceTrustProviderAttachmentInitParameters struct {
@@ -23,11 +22,11 @@ type InstanceTrustProviderAttachmentInitParameters struct {
 
 	// Reference to a Instance in verifiedaccess to populate verifiedaccessInstanceId.
 	// +kubebuilder:validation:Optional
-	VerifiedaccessInstanceIDRef *v1.NamespacedReference `json:"verifiedaccessInstanceIdRef,omitempty" tf:"-"`
+	VerifiedaccessInstanceIDRef *v2.NamespacedReference `json:"verifiedaccessInstanceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Instance in verifiedaccess to populate verifiedaccessInstanceId.
 	// +kubebuilder:validation:Optional
-	VerifiedaccessInstanceIDSelector *v1.NamespacedSelector `json:"verifiedaccessInstanceIdSelector,omitempty" tf:"-"`
+	VerifiedaccessInstanceIDSelector *v2.NamespacedSelector `json:"verifiedaccessInstanceIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Verified Access trust provider.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/verifiedaccess/v1beta1.TrustProvider
@@ -36,11 +35,11 @@ type InstanceTrustProviderAttachmentInitParameters struct {
 
 	// Reference to a TrustProvider in verifiedaccess to populate verifiedaccessTrustProviderId.
 	// +kubebuilder:validation:Optional
-	VerifiedaccessTrustProviderIDRef *v1.NamespacedReference `json:"verifiedaccessTrustProviderIdRef,omitempty" tf:"-"`
+	VerifiedaccessTrustProviderIDRef *v2.NamespacedReference `json:"verifiedaccessTrustProviderIdRef,omitempty" tf:"-"`
 
 	// Selector for a TrustProvider in verifiedaccess to populate verifiedaccessTrustProviderId.
 	// +kubebuilder:validation:Optional
-	VerifiedaccessTrustProviderIDSelector *v1.NamespacedSelector `json:"verifiedaccessTrustProviderIdSelector,omitempty" tf:"-"`
+	VerifiedaccessTrustProviderIDSelector *v2.NamespacedSelector `json:"verifiedaccessTrustProviderIdSelector,omitempty" tf:"-"`
 }
 
 type InstanceTrustProviderAttachmentObservation struct {
@@ -74,11 +73,11 @@ type InstanceTrustProviderAttachmentParameters struct {
 
 	// Reference to a Instance in verifiedaccess to populate verifiedaccessInstanceId.
 	// +kubebuilder:validation:Optional
-	VerifiedaccessInstanceIDRef *v1.NamespacedReference `json:"verifiedaccessInstanceIdRef,omitempty" tf:"-"`
+	VerifiedaccessInstanceIDRef *v2.NamespacedReference `json:"verifiedaccessInstanceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Instance in verifiedaccess to populate verifiedaccessInstanceId.
 	// +kubebuilder:validation:Optional
-	VerifiedaccessInstanceIDSelector *v1.NamespacedSelector `json:"verifiedaccessInstanceIdSelector,omitempty" tf:"-"`
+	VerifiedaccessInstanceIDSelector *v2.NamespacedSelector `json:"verifiedaccessInstanceIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Verified Access trust provider.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/verifiedaccess/v1beta1.TrustProvider
@@ -88,11 +87,11 @@ type InstanceTrustProviderAttachmentParameters struct {
 
 	// Reference to a TrustProvider in verifiedaccess to populate verifiedaccessTrustProviderId.
 	// +kubebuilder:validation:Optional
-	VerifiedaccessTrustProviderIDRef *v1.NamespacedReference `json:"verifiedaccessTrustProviderIdRef,omitempty" tf:"-"`
+	VerifiedaccessTrustProviderIDRef *v2.NamespacedReference `json:"verifiedaccessTrustProviderIdRef,omitempty" tf:"-"`
 
 	// Selector for a TrustProvider in verifiedaccess to populate verifiedaccessTrustProviderId.
 	// +kubebuilder:validation:Optional
-	VerifiedaccessTrustProviderIDSelector *v1.NamespacedSelector `json:"verifiedaccessTrustProviderIdSelector,omitempty" tf:"-"`
+	VerifiedaccessTrustProviderIDSelector *v2.NamespacedSelector `json:"verifiedaccessTrustProviderIdSelector,omitempty" tf:"-"`
 }
 
 // InstanceTrustProviderAttachmentSpec defines the desired state of InstanceTrustProviderAttachment
@@ -114,8 +113,8 @@ type InstanceTrustProviderAttachmentSpec struct {
 
 // InstanceTrustProviderAttachmentStatus defines the observed state of InstanceTrustProviderAttachment.
 type InstanceTrustProviderAttachmentStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        InstanceTrustProviderAttachmentObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               InstanceTrustProviderAttachmentObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

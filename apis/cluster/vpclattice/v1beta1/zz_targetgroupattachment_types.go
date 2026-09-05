@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type TargetGroupAttachmentInitParameters struct {
@@ -25,11 +25,11 @@ type TargetGroupAttachmentInitParameters struct {
 
 	// Reference to a TargetGroup in vpclattice to populate targetGroupIdentifier.
 	// +kubebuilder:validation:Optional
-	TargetGroupIdentifierRef *v1.Reference `json:"targetGroupIdentifierRef,omitempty" tf:"-"`
+	TargetGroupIdentifierRef *v2.Reference `json:"targetGroupIdentifierRef,omitempty" tf:"-"`
 
 	// Selector for a TargetGroup in vpclattice to populate targetGroupIdentifier.
 	// +kubebuilder:validation:Optional
-	TargetGroupIdentifierSelector *v1.Selector `json:"targetGroupIdentifierSelector,omitempty" tf:"-"`
+	TargetGroupIdentifierSelector *v2.Selector `json:"targetGroupIdentifierSelector,omitempty" tf:"-"`
 }
 
 type TargetGroupAttachmentObservation struct {
@@ -67,11 +67,11 @@ type TargetGroupAttachmentParameters struct {
 
 	// Reference to a TargetGroup in vpclattice to populate targetGroupIdentifier.
 	// +kubebuilder:validation:Optional
-	TargetGroupIdentifierRef *v1.Reference `json:"targetGroupIdentifierRef,omitempty" tf:"-"`
+	TargetGroupIdentifierRef *v2.Reference `json:"targetGroupIdentifierRef,omitempty" tf:"-"`
 
 	// Selector for a TargetGroup in vpclattice to populate targetGroupIdentifier.
 	// +kubebuilder:validation:Optional
-	TargetGroupIdentifierSelector *v1.Selector `json:"targetGroupIdentifierSelector,omitempty" tf:"-"`
+	TargetGroupIdentifierSelector *v2.Selector `json:"targetGroupIdentifierSelector,omitempty" tf:"-"`
 }
 
 type TargetInitParameters struct {
@@ -105,8 +105,8 @@ type TargetParameters struct {
 
 // TargetGroupAttachmentSpec defines the desired state of TargetGroupAttachment
 type TargetGroupAttachmentSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     TargetGroupAttachmentParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   TargetGroupAttachmentParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -122,8 +122,8 @@ type TargetGroupAttachmentSpec struct {
 
 // TargetGroupAttachmentStatus defines the observed state of TargetGroupAttachment.
 type TargetGroupAttachmentStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        TargetGroupAttachmentObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               TargetGroupAttachmentObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

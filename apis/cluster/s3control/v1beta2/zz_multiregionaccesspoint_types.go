@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type DetailsInitParameters struct {
@@ -63,7 +63,7 @@ type MultiRegionAccessPointObservation struct {
 	// The AWS account ID for the owner of the buckets for which you want to create a Multi-Region Access Point.
 	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
 
-	// The alias for the Multi-Region Access Point.
+	// Alias for the Multi-Region Access Point.
 	Alias *string `json:"alias,omitempty" tf:"alias,omitempty"`
 
 	// Amazon Resource Name (ARN) of the Multi-Region Access Point.
@@ -72,17 +72,20 @@ type MultiRegionAccessPointObservation struct {
 	// A configuration block containing details about the Multi-Region Access Point. See Details Configuration Block below for more details
 	Details *DetailsObservation `json:"details,omitempty" tf:"details,omitempty"`
 
-	// The DNS domain name of the S3 Multi-Region Access Point in the format alias.accesspoint.s3-global.amazonaws.com. For more information, see the documentation on Multi-Region Access Point Requests.
+	// DNS domain name of the S3 Multi-Region Access Point in the format alias.accesspoint.s3-global.amazonaws.com. For more information, see the documentation on Multi-Region Access Point Requests.
 	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
 
-	// The AWS account ID and access point name separated by a colon (:).
+	// AWS account ID and access point name separated by a colon (:).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Name of the Multi-Region Access Point.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The current status of the Multi-Region Access Point. One of: READY, INCONSISTENT_ACROSS_REGIONS, CREATING, PARTIALLY_CREATED, PARTIALLY_DELETED, DELETING.
+	// Region Access Point. One of: READY, INCONSISTENT_ACROSS_REGIONS, CREATING, PARTIALLY_CREATED, PARTIALLY_DELETED, DELETING.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
 
@@ -163,11 +166,11 @@ type RegionInitParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketRef *v1.Reference `json:"bucketRef,omitempty" tf:"-"`
+	BucketRef *v2.Reference `json:"bucketRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
+	BucketSelector *v2.Selector `json:"bucketSelector,omitempty" tf:"-"`
 }
 
 type RegionObservation struct {
@@ -196,17 +199,17 @@ type RegionParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketRef *v1.Reference `json:"bucketRef,omitempty" tf:"-"`
+	BucketRef *v2.Reference `json:"bucketRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
+	BucketSelector *v2.Selector `json:"bucketSelector,omitempty" tf:"-"`
 }
 
 // MultiRegionAccessPointSpec defines the desired state of MultiRegionAccessPoint
 type MultiRegionAccessPointSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     MultiRegionAccessPointParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   MultiRegionAccessPointParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -222,8 +225,8 @@ type MultiRegionAccessPointSpec struct {
 
 // MultiRegionAccessPointStatus defines the observed state of MultiRegionAccessPoint.
 type MultiRegionAccessPointStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        MultiRegionAccessPointObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               MultiRegionAccessPointObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

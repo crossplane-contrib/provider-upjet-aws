@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ConnectionPoolConfigInitParameters struct {
@@ -87,11 +86,11 @@ type ProxyDefaultTargetGroupInitParameters struct {
 
 	// Reference to a Proxy in rds to populate dbProxyName.
 	// +kubebuilder:validation:Optional
-	DBProxyNameRef *v1.NamespacedReference `json:"dbProxyNameRef,omitempty" tf:"-"`
+	DBProxyNameRef *v2.NamespacedReference `json:"dbProxyNameRef,omitempty" tf:"-"`
 
 	// Selector for a Proxy in rds to populate dbProxyName.
 	// +kubebuilder:validation:Optional
-	DBProxyNameSelector *v1.NamespacedSelector `json:"dbProxyNameSelector,omitempty" tf:"-"`
+	DBProxyNameSelector *v2.NamespacedSelector `json:"dbProxyNameSelector,omitempty" tf:"-"`
 }
 
 type ProxyDefaultTargetGroupObservation struct {
@@ -129,11 +128,11 @@ type ProxyDefaultTargetGroupParameters struct {
 
 	// Reference to a Proxy in rds to populate dbProxyName.
 	// +kubebuilder:validation:Optional
-	DBProxyNameRef *v1.NamespacedReference `json:"dbProxyNameRef,omitempty" tf:"-"`
+	DBProxyNameRef *v2.NamespacedReference `json:"dbProxyNameRef,omitempty" tf:"-"`
 
 	// Selector for a Proxy in rds to populate dbProxyName.
 	// +kubebuilder:validation:Optional
-	DBProxyNameSelector *v1.NamespacedSelector `json:"dbProxyNameSelector,omitempty" tf:"-"`
+	DBProxyNameSelector *v2.NamespacedSelector `json:"dbProxyNameSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -160,8 +159,8 @@ type ProxyDefaultTargetGroupSpec struct {
 
 // ProxyDefaultTargetGroupStatus defines the observed state of ProxyDefaultTargetGroup.
 type ProxyDefaultTargetGroupStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ProxyDefaultTargetGroupObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ProxyDefaultTargetGroupObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

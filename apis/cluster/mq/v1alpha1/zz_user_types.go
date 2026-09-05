@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type PendingInitParameters struct {
@@ -39,11 +39,11 @@ type UserInitParameters struct {
 
 	// Reference to a Broker in mq to populate brokerId.
 	// +kubebuilder:validation:Optional
-	BrokerIDRef *v1.Reference `json:"brokerIdRef,omitempty" tf:"-"`
+	BrokerIDRef *v2.Reference `json:"brokerIdRef,omitempty" tf:"-"`
 
 	// Selector for a Broker in mq to populate brokerId.
 	// +kubebuilder:validation:Optional
-	BrokerIDSelector *v1.Selector `json:"brokerIdSelector,omitempty" tf:"-"`
+	BrokerIDSelector *v2.Selector `json:"brokerIdSelector,omitempty" tf:"-"`
 
 	// Whether to enable console access for the user.
 	ConsoleAccess *bool `json:"consoleAccess,omitempty" tf:"console_access,omitempty"`
@@ -52,7 +52,7 @@ type UserInitParameters struct {
 	Groups []*string `json:"groups,omitempty" tf:"groups,omitempty"`
 
 	// The password for the user. Must be at least 12 characters long.
-	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
+	PasswordSecretRef v2.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// Tracks pending modifications returned by the AWS MQ API. This field allows you to monitor changes that are actively being processed before they are fully applied.
 	Pending *PendingInitParameters `json:"pending,omitempty" tf:"pending,omitempty"`
@@ -99,11 +99,11 @@ type UserParameters struct {
 
 	// Reference to a Broker in mq to populate brokerId.
 	// +kubebuilder:validation:Optional
-	BrokerIDRef *v1.Reference `json:"brokerIdRef,omitempty" tf:"-"`
+	BrokerIDRef *v2.Reference `json:"brokerIdRef,omitempty" tf:"-"`
 
 	// Selector for a Broker in mq to populate brokerId.
 	// +kubebuilder:validation:Optional
-	BrokerIDSelector *v1.Selector `json:"brokerIdSelector,omitempty" tf:"-"`
+	BrokerIDSelector *v2.Selector `json:"brokerIdSelector,omitempty" tf:"-"`
 
 	// Whether to enable console access for the user.
 	// +kubebuilder:validation:Optional
@@ -115,7 +115,7 @@ type UserParameters struct {
 
 	// The password for the user. Must be at least 12 characters long.
 	// +kubebuilder:validation:Optional
-	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
+	PasswordSecretRef v2.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// Tracks pending modifications returned by the AWS MQ API. This field allows you to monitor changes that are actively being processed before they are fully applied.
 	// +kubebuilder:validation:Optional
@@ -136,8 +136,8 @@ type UserParameters struct {
 
 // UserSpec defines the desired state of User
 type UserSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     UserParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   UserParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -153,8 +153,8 @@ type UserSpec struct {
 
 // UserStatus defines the observed state of User.
 type UserStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        UserObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               UserObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

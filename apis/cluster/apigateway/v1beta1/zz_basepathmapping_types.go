@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type BasePathMappingInitParameters struct {
@@ -22,11 +22,11 @@ type BasePathMappingInitParameters struct {
 
 	// Reference to a RestAPI in apigateway to populate apiId.
 	// +kubebuilder:validation:Optional
-	APIIDRef *v1.Reference `json:"apiIdRef,omitempty" tf:"-"`
+	APIIDRef *v2.Reference `json:"apiIdRef,omitempty" tf:"-"`
 
 	// Selector for a RestAPI in apigateway to populate apiId.
 	// +kubebuilder:validation:Optional
-	APIIDSelector *v1.Selector `json:"apiIdSelector,omitempty" tf:"-"`
+	APIIDSelector *v2.Selector `json:"apiIdSelector,omitempty" tf:"-"`
 
 	// Path segment that must be prepended to the path when accessing the API via this mapping. If omitted, the API is exposed at the root of the given domain.
 	BasePath *string `json:"basePath,omitempty" tf:"base_path,omitempty"`
@@ -41,11 +41,11 @@ type BasePathMappingInitParameters struct {
 
 	// Reference to a DomainName in apigateway to populate domainName.
 	// +kubebuilder:validation:Optional
-	DomainNameRef *v1.Reference `json:"domainNameRef,omitempty" tf:"-"`
+	DomainNameRef *v2.Reference `json:"domainNameRef,omitempty" tf:"-"`
 
 	// Selector for a DomainName in apigateway to populate domainName.
 	// +kubebuilder:validation:Optional
-	DomainNameSelector *v1.Selector `json:"domainNameSelector,omitempty" tf:"-"`
+	DomainNameSelector *v2.Selector `json:"domainNameSelector,omitempty" tf:"-"`
 
 	// Name of a specific deployment stage to expose at the given path. If omitted, callers may select any stage by including its name as a path element after the base path.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/apigateway/v1beta2.Stage
@@ -54,11 +54,11 @@ type BasePathMappingInitParameters struct {
 
 	// Reference to a Stage in apigateway to populate stageName.
 	// +kubebuilder:validation:Optional
-	StageNameRef *v1.Reference `json:"stageNameRef,omitempty" tf:"-"`
+	StageNameRef *v2.Reference `json:"stageNameRef,omitempty" tf:"-"`
 
 	// Selector for a Stage in apigateway to populate stageName.
 	// +kubebuilder:validation:Optional
-	StageNameSelector *v1.Selector `json:"stageNameSelector,omitempty" tf:"-"`
+	StageNameSelector *v2.Selector `json:"stageNameSelector,omitempty" tf:"-"`
 }
 
 type BasePathMappingObservation struct {
@@ -95,11 +95,11 @@ type BasePathMappingParameters struct {
 
 	// Reference to a RestAPI in apigateway to populate apiId.
 	// +kubebuilder:validation:Optional
-	APIIDRef *v1.Reference `json:"apiIdRef,omitempty" tf:"-"`
+	APIIDRef *v2.Reference `json:"apiIdRef,omitempty" tf:"-"`
 
 	// Selector for a RestAPI in apigateway to populate apiId.
 	// +kubebuilder:validation:Optional
-	APIIDSelector *v1.Selector `json:"apiIdSelector,omitempty" tf:"-"`
+	APIIDSelector *v2.Selector `json:"apiIdSelector,omitempty" tf:"-"`
 
 	// Path segment that must be prepended to the path when accessing the API via this mapping. If omitted, the API is exposed at the root of the given domain.
 	// +kubebuilder:validation:Optional
@@ -117,11 +117,11 @@ type BasePathMappingParameters struct {
 
 	// Reference to a DomainName in apigateway to populate domainName.
 	// +kubebuilder:validation:Optional
-	DomainNameRef *v1.Reference `json:"domainNameRef,omitempty" tf:"-"`
+	DomainNameRef *v2.Reference `json:"domainNameRef,omitempty" tf:"-"`
 
 	// Selector for a DomainName in apigateway to populate domainName.
 	// +kubebuilder:validation:Optional
-	DomainNameSelector *v1.Selector `json:"domainNameSelector,omitempty" tf:"-"`
+	DomainNameSelector *v2.Selector `json:"domainNameSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -136,17 +136,17 @@ type BasePathMappingParameters struct {
 
 	// Reference to a Stage in apigateway to populate stageName.
 	// +kubebuilder:validation:Optional
-	StageNameRef *v1.Reference `json:"stageNameRef,omitempty" tf:"-"`
+	StageNameRef *v2.Reference `json:"stageNameRef,omitempty" tf:"-"`
 
 	// Selector for a Stage in apigateway to populate stageName.
 	// +kubebuilder:validation:Optional
-	StageNameSelector *v1.Selector `json:"stageNameSelector,omitempty" tf:"-"`
+	StageNameSelector *v2.Selector `json:"stageNameSelector,omitempty" tf:"-"`
 }
 
 // BasePathMappingSpec defines the desired state of BasePathMapping
 type BasePathMappingSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     BasePathMappingParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   BasePathMappingParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -162,8 +162,8 @@ type BasePathMappingSpec struct {
 
 // BasePathMappingStatus defines the observed state of BasePathMapping.
 type BasePathMappingStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        BasePathMappingObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               BasePathMappingObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

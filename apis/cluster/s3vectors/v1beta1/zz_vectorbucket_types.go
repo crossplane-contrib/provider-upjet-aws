@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type VectorBucketEncryptionConfigurationInitParameters struct {
@@ -22,11 +22,11 @@ type VectorBucketEncryptionConfigurationInitParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnRef *v1.Reference `json:"kmsKeyArnRef,omitempty" tf:"-"`
+	KMSKeyArnRef *v2.Reference `json:"kmsKeyArnRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnSelector *v1.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
+	KMSKeyArnSelector *v2.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
 
 	// Server-side encryption type to use for the default encryption of the vector bucket. Valid values: AES256, aws:kms.
 	SseType *string `json:"sseType,omitempty" tf:"sse_type"`
@@ -51,11 +51,11 @@ type VectorBucketEncryptionConfigurationParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnRef *v1.Reference `json:"kmsKeyArnRef,omitempty" tf:"-"`
+	KMSKeyArnRef *v2.Reference `json:"kmsKeyArnRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnSelector *v1.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
+	KMSKeyArnSelector *v2.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
 
 	// Server-side encryption type to use for the default encryption of the vector bucket. Valid values: AES256, aws:kms.
 	// +kubebuilder:validation:Optional
@@ -137,8 +137,8 @@ type VectorBucketParameters struct {
 
 // VectorBucketSpec defines the desired state of VectorBucket
 type VectorBucketSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     VectorBucketParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   VectorBucketParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -154,8 +154,8 @@ type VectorBucketSpec struct {
 
 // VectorBucketStatus defines the observed state of VectorBucket.
 type VectorBucketStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        VectorBucketObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               VectorBucketObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

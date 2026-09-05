@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ReceiptFilterInitParameters struct {
@@ -59,8 +59,8 @@ type ReceiptFilterParameters struct {
 
 // ReceiptFilterSpec defines the desired state of ReceiptFilter
 type ReceiptFilterSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ReceiptFilterParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ReceiptFilterParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -76,8 +76,8 @@ type ReceiptFilterSpec struct {
 
 // ReceiptFilterStatus defines the observed state of ReceiptFilter.
 type ReceiptFilterStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ReceiptFilterObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ReceiptFilterObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

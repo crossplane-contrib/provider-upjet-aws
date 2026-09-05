@@ -52,3 +52,20 @@ func SetupGated_macie2(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupWebhookWithManager_macie2 registers conversion webhooks for all resource kinds in the group.
+func SetupWebhookWithManager_macie2(mgr ctrl.Manager) error {
+	for _, setup := range []func(ctrl.Manager) error{
+		account.SetupWebhookWithManager,
+		classificationjob.SetupWebhookWithManager,
+		customdataidentifier.SetupWebhookWithManager,
+		findingsfilter.SetupWebhookWithManager,
+		invitationaccepter.SetupWebhookWithManager,
+		member.SetupWebhookWithManager,
+	} {
+		if err := setup(mgr); err != nil {
+			return err
+		}
+	}
+	return nil
+}

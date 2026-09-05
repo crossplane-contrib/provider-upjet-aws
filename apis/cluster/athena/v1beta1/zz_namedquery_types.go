@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type NamedQueryInitParameters struct {
@@ -21,11 +21,11 @@ type NamedQueryInitParameters struct {
 
 	// Reference to a Database in athena to populate database.
 	// +kubebuilder:validation:Optional
-	DatabaseRef *v1.Reference `json:"databaseRef,omitempty" tf:"-"`
+	DatabaseRef *v2.Reference `json:"databaseRef,omitempty" tf:"-"`
 
 	// Selector for a Database in athena to populate database.
 	// +kubebuilder:validation:Optional
-	DatabaseSelector *v1.Selector `json:"databaseSelector,omitempty" tf:"-"`
+	DatabaseSelector *v2.Selector `json:"databaseSelector,omitempty" tf:"-"`
 
 	// Brief explanation of the query. Maximum length of 1024.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
@@ -43,11 +43,11 @@ type NamedQueryInitParameters struct {
 
 	// Reference to a Workgroup in athena to populate workgroup.
 	// +kubebuilder:validation:Optional
-	WorkgroupRef *v1.Reference `json:"workgroupRef,omitempty" tf:"-"`
+	WorkgroupRef *v2.Reference `json:"workgroupRef,omitempty" tf:"-"`
 
 	// Selector for a Workgroup in athena to populate workgroup.
 	// +kubebuilder:validation:Optional
-	WorkgroupSelector *v1.Selector `json:"workgroupSelector,omitempty" tf:"-"`
+	WorkgroupSelector *v2.Selector `json:"workgroupSelector,omitempty" tf:"-"`
 }
 
 type NamedQueryObservation struct {
@@ -84,11 +84,11 @@ type NamedQueryParameters struct {
 
 	// Reference to a Database in athena to populate database.
 	// +kubebuilder:validation:Optional
-	DatabaseRef *v1.Reference `json:"databaseRef,omitempty" tf:"-"`
+	DatabaseRef *v2.Reference `json:"databaseRef,omitempty" tf:"-"`
 
 	// Selector for a Database in athena to populate database.
 	// +kubebuilder:validation:Optional
-	DatabaseSelector *v1.Selector `json:"databaseSelector,omitempty" tf:"-"`
+	DatabaseSelector *v2.Selector `json:"databaseSelector,omitempty" tf:"-"`
 
 	// Brief explanation of the query. Maximum length of 1024.
 	// +kubebuilder:validation:Optional
@@ -115,17 +115,17 @@ type NamedQueryParameters struct {
 
 	// Reference to a Workgroup in athena to populate workgroup.
 	// +kubebuilder:validation:Optional
-	WorkgroupRef *v1.Reference `json:"workgroupRef,omitempty" tf:"-"`
+	WorkgroupRef *v2.Reference `json:"workgroupRef,omitempty" tf:"-"`
 
 	// Selector for a Workgroup in athena to populate workgroup.
 	// +kubebuilder:validation:Optional
-	WorkgroupSelector *v1.Selector `json:"workgroupSelector,omitempty" tf:"-"`
+	WorkgroupSelector *v2.Selector `json:"workgroupSelector,omitempty" tf:"-"`
 }
 
 // NamedQuerySpec defines the desired state of NamedQuery
 type NamedQuerySpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     NamedQueryParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   NamedQueryParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -141,8 +141,8 @@ type NamedQuerySpec struct {
 
 // NamedQueryStatus defines the observed state of NamedQuery.
 type NamedQueryStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        NamedQueryObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               NamedQueryObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

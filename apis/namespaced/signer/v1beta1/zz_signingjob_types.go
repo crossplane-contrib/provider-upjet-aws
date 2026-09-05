@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type DestinationInitParameters struct {
@@ -117,11 +116,11 @@ type SigningJobInitParameters struct {
 
 	// Reference to a SigningProfile in signer to populate profileName.
 	// +kubebuilder:validation:Optional
-	ProfileNameRef *v1.NamespacedReference `json:"profileNameRef,omitempty" tf:"-"`
+	ProfileNameRef *v2.NamespacedReference `json:"profileNameRef,omitempty" tf:"-"`
 
 	// Selector for a SigningProfile in signer to populate profileName.
 	// +kubebuilder:validation:Optional
-	ProfileNameSelector *v1.NamespacedSelector `json:"profileNameSelector,omitempty" tf:"-"`
+	ProfileNameSelector *v2.NamespacedSelector `json:"profileNameSelector,omitempty" tf:"-"`
 
 	// The S3 bucket that contains the object to sign. See Source below for details.
 	Source *SourceInitParameters `json:"source,omitempty" tf:"source,omitempty"`
@@ -207,11 +206,11 @@ type SigningJobParameters struct {
 
 	// Reference to a SigningProfile in signer to populate profileName.
 	// +kubebuilder:validation:Optional
-	ProfileNameRef *v1.NamespacedReference `json:"profileNameRef,omitempty" tf:"-"`
+	ProfileNameRef *v2.NamespacedReference `json:"profileNameRef,omitempty" tf:"-"`
 
 	// Selector for a SigningProfile in signer to populate profileName.
 	// +kubebuilder:validation:Optional
-	ProfileNameSelector *v1.NamespacedSelector `json:"profileNameSelector,omitempty" tf:"-"`
+	ProfileNameSelector *v2.NamespacedSelector `json:"profileNameSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -300,8 +299,8 @@ type SigningJobSpec struct {
 
 // SigningJobStatus defines the observed state of SigningJob.
 type SigningJobStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SigningJobObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SigningJobObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

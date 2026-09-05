@@ -1,0 +1,21 @@
+# SPDX-FileCopyrightText: 2026 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: CapacityBlockReservation
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/capacityblockreservation
+    upjet.upbound.io/manual-intervention: "Requires a valid Capacity Block offering ID and incurs significant cost when purchased."
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    capacityBlockOfferingId: cb-047c9a7922038d5f4
+    instancePlatform: Linux/UNIX
+    region: us-west-1
+    tags:
+      Environment: dev

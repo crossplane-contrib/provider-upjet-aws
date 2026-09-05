@@ -10,72 +10,72 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AnalyticsConfigurationInitParameters struct {
 
-	// Application ARN for an Amazon Pinpoint application. Conflicts with external_id and role_arn.
+	// Application ARN for an AWS End User Messaging application. Conflicts with external_id and role_arn.
 	ApplicationArn *string `json:"applicationArn,omitempty" tf:"application_arn,omitempty"`
 
-	// Application ID for an Amazon Pinpoint application.
+	// Application ID for an AWS End User Messaging application.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/pinpoint/v1beta2.App
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("application_id",true)
 	ApplicationID *string `json:"applicationId,omitempty" tf:"application_id,omitempty"`
 
 	// Reference to a App in pinpoint to populate applicationId.
 	// +kubebuilder:validation:Optional
-	ApplicationIDRef *v1.Reference `json:"applicationIdRef,omitempty" tf:"-"`
+	ApplicationIDRef *v2.Reference `json:"applicationIdRef,omitempty" tf:"-"`
 
 	// Selector for a App in pinpoint to populate applicationId.
 	// +kubebuilder:validation:Optional
-	ApplicationIDSelector *v1.Selector `json:"applicationIdSelector,omitempty" tf:"-"`
+	ApplicationIDSelector *v2.Selector `json:"applicationIdSelector,omitempty" tf:"-"`
 
 	// ID for the Analytics Configuration. Conflicts with application_arn.
 	ExternalID *string `json:"externalId,omitempty" tf:"external_id,omitempty"`
 
-	// ARN of an IAM role that authorizes Amazon Cognito to publish events to Amazon Pinpoint analytics. Conflicts with application_arn.
+	// ARN of an IAM role that authorizes Amazon Cognito to publish events to AWS End User Messaging analytics. Conflicts with application_arn.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.Reference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
-	// If set to true, Amazon Cognito will include user data in the events it publishes to Amazon Pinpoint analytics.
+	// If set to true, Amazon Cognito will include user data in the events it publishes to AWS End User Messaging analytics.
 	UserDataShared *bool `json:"userDataShared,omitempty" tf:"user_data_shared,omitempty"`
 }
 
 type AnalyticsConfigurationObservation struct {
 
-	// Application ARN for an Amazon Pinpoint application. Conflicts with external_id and role_arn.
+	// Application ARN for an AWS End User Messaging application. Conflicts with external_id and role_arn.
 	ApplicationArn *string `json:"applicationArn,omitempty" tf:"application_arn,omitempty"`
 
-	// Application ID for an Amazon Pinpoint application.
+	// Application ID for an AWS End User Messaging application.
 	ApplicationID *string `json:"applicationId,omitempty" tf:"application_id,omitempty"`
 
 	// ID for the Analytics Configuration. Conflicts with application_arn.
 	ExternalID *string `json:"externalId,omitempty" tf:"external_id,omitempty"`
 
-	// ARN of an IAM role that authorizes Amazon Cognito to publish events to Amazon Pinpoint analytics. Conflicts with application_arn.
+	// ARN of an IAM role that authorizes Amazon Cognito to publish events to AWS End User Messaging analytics. Conflicts with application_arn.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
-	// If set to true, Amazon Cognito will include user data in the events it publishes to Amazon Pinpoint analytics.
+	// If set to true, Amazon Cognito will include user data in the events it publishes to AWS End User Messaging analytics.
 	UserDataShared *bool `json:"userDataShared,omitempty" tf:"user_data_shared,omitempty"`
 }
 
 type AnalyticsConfigurationParameters struct {
 
-	// Application ARN for an Amazon Pinpoint application. Conflicts with external_id and role_arn.
+	// Application ARN for an AWS End User Messaging application. Conflicts with external_id and role_arn.
 	// +kubebuilder:validation:Optional
 	ApplicationArn *string `json:"applicationArn,omitempty" tf:"application_arn,omitempty"`
 
-	// Application ID for an Amazon Pinpoint application.
+	// Application ID for an AWS End User Messaging application.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/pinpoint/v1beta2.App
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("application_id",true)
 	// +kubebuilder:validation:Optional
@@ -83,17 +83,17 @@ type AnalyticsConfigurationParameters struct {
 
 	// Reference to a App in pinpoint to populate applicationId.
 	// +kubebuilder:validation:Optional
-	ApplicationIDRef *v1.Reference `json:"applicationIdRef,omitempty" tf:"-"`
+	ApplicationIDRef *v2.Reference `json:"applicationIdRef,omitempty" tf:"-"`
 
 	// Selector for a App in pinpoint to populate applicationId.
 	// +kubebuilder:validation:Optional
-	ApplicationIDSelector *v1.Selector `json:"applicationIdSelector,omitempty" tf:"-"`
+	ApplicationIDSelector *v2.Selector `json:"applicationIdSelector,omitempty" tf:"-"`
 
 	// ID for the Analytics Configuration. Conflicts with application_arn.
 	// +kubebuilder:validation:Optional
 	ExternalID *string `json:"externalId,omitempty" tf:"external_id,omitempty"`
 
-	// ARN of an IAM role that authorizes Amazon Cognito to publish events to Amazon Pinpoint analytics. Conflicts with application_arn.
+	// ARN of an IAM role that authorizes Amazon Cognito to publish events to AWS End User Messaging analytics. Conflicts with application_arn.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -101,13 +101,13 @@ type AnalyticsConfigurationParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.Reference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
-	// If set to true, Amazon Cognito will include user data in the events it publishes to Amazon Pinpoint analytics.
+	// If set to true, Amazon Cognito will include user data in the events it publishes to AWS End User Messaging analytics.
 	// +kubebuilder:validation:Optional
 	UserDataShared *bool `json:"userDataShared,omitempty" tf:"user_data_shared,omitempty"`
 }
@@ -196,7 +196,7 @@ type UserPoolClientInitParameters struct {
 	// +listType=set
 	AllowedOauthScopes []*string `json:"allowedOauthScopes,omitempty" tf:"allowed_oauth_scopes,omitempty"`
 
-	// Configuration block for Amazon Pinpoint analytics that collects metrics for this user pool. See details below.
+	// Configuration block for AWS End User Messaging analytics that collects metrics for this user pool. See details below.
 	AnalyticsConfiguration []AnalyticsConfigurationInitParameters `json:"analyticsConfiguration,omitempty" tf:"analytics_configuration,omitempty"`
 
 	// Duration, in minutes, of the session token created by Amazon Cognito for each API request in an authentication flow. The session token must be responded to by the native user of the user pool before it expires. Valid values for auth_session_validity are between 3 and 15, with a default value of 3.
@@ -258,11 +258,11 @@ type UserPoolClientInitParameters struct {
 
 	// Reference to a UserPool in cognitoidp to populate userPoolId.
 	// +kubebuilder:validation:Optional
-	UserPoolIDRef *v1.Reference `json:"userPoolIdRef,omitempty" tf:"-"`
+	UserPoolIDRef *v2.Reference `json:"userPoolIdRef,omitempty" tf:"-"`
 
 	// Selector for a UserPool in cognitoidp to populate userPoolId.
 	// +kubebuilder:validation:Optional
-	UserPoolIDSelector *v1.Selector `json:"userPoolIdSelector,omitempty" tf:"-"`
+	UserPoolIDSelector *v2.Selector `json:"userPoolIdSelector,omitempty" tf:"-"`
 
 	// List of user pool attributes that the application client can write to.
 	// +listType=set
@@ -285,7 +285,7 @@ type UserPoolClientObservation struct {
 	// +listType=set
 	AllowedOauthScopes []*string `json:"allowedOauthScopes,omitempty" tf:"allowed_oauth_scopes,omitempty"`
 
-	// Configuration block for Amazon Pinpoint analytics that collects metrics for this user pool. See details below.
+	// Configuration block for AWS End User Messaging analytics that collects metrics for this user pool. See details below.
 	AnalyticsConfiguration []AnalyticsConfigurationObservation `json:"analyticsConfiguration,omitempty" tf:"analytics_configuration,omitempty"`
 
 	// Duration, in minutes, of the session token created by Amazon Cognito for each API request in an authentication flow. The session token must be responded to by the native user of the user pool before it expires. Valid values for auth_session_validity are between 3 and 15, with a default value of 3.
@@ -376,7 +376,7 @@ type UserPoolClientParameters struct {
 	// +listType=set
 	AllowedOauthScopes []*string `json:"allowedOauthScopes,omitempty" tf:"allowed_oauth_scopes,omitempty"`
 
-	// Configuration block for Amazon Pinpoint analytics that collects metrics for this user pool. See details below.
+	// Configuration block for AWS End User Messaging analytics that collects metrics for this user pool. See details below.
 	// +kubebuilder:validation:Optional
 	AnalyticsConfiguration []AnalyticsConfigurationParameters `json:"analyticsConfiguration,omitempty" tf:"analytics_configuration,omitempty"`
 
@@ -461,11 +461,11 @@ type UserPoolClientParameters struct {
 
 	// Reference to a UserPool in cognitoidp to populate userPoolId.
 	// +kubebuilder:validation:Optional
-	UserPoolIDRef *v1.Reference `json:"userPoolIdRef,omitempty" tf:"-"`
+	UserPoolIDRef *v2.Reference `json:"userPoolIdRef,omitempty" tf:"-"`
 
 	// Selector for a UserPool in cognitoidp to populate userPoolId.
 	// +kubebuilder:validation:Optional
-	UserPoolIDSelector *v1.Selector `json:"userPoolIdSelector,omitempty" tf:"-"`
+	UserPoolIDSelector *v2.Selector `json:"userPoolIdSelector,omitempty" tf:"-"`
 
 	// List of user pool attributes that the application client can write to.
 	// +kubebuilder:validation:Optional
@@ -475,8 +475,8 @@ type UserPoolClientParameters struct {
 
 // UserPoolClientSpec defines the desired state of UserPoolClient
 type UserPoolClientSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     UserPoolClientParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   UserPoolClientParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -492,8 +492,8 @@ type UserPoolClientSpec struct {
 
 // UserPoolClientStatus defines the observed state of UserPoolClient.
 type UserPoolClientStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        UserPoolClientObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               UserPoolClientObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

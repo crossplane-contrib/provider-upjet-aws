@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ReplicationTaskInitParameters struct {
@@ -31,11 +31,11 @@ type ReplicationTaskInitParameters struct {
 
 	// Reference to a ReplicationInstance in dms to populate replicationInstanceArn.
 	// +kubebuilder:validation:Optional
-	ReplicationInstanceArnRef *v1.Reference `json:"replicationInstanceArnRef,omitempty" tf:"-"`
+	ReplicationInstanceArnRef *v2.Reference `json:"replicationInstanceArnRef,omitempty" tf:"-"`
 
 	// Selector for a ReplicationInstance in dms to populate replicationInstanceArn.
 	// +kubebuilder:validation:Optional
-	ReplicationInstanceArnSelector *v1.Selector `json:"replicationInstanceArnSelector,omitempty" tf:"-"`
+	ReplicationInstanceArnSelector *v2.Selector `json:"replicationInstanceArnSelector,omitempty" tf:"-"`
 
 	// Escaped JSON string that contains the task settings. For a complete list of task settings, see Task Settings for AWS Database Migration Service Tasks. Note that Logging.CloudWatchLogGroup and Logging.CloudWatchLogStream are read only and should not be defined, even as null, in the configuration since AWS provides a value for these settings.
 	ReplicationTaskSettings *string `json:"replicationTaskSettings,omitempty" tf:"replication_task_settings,omitempty"`
@@ -50,11 +50,11 @@ type ReplicationTaskInitParameters struct {
 
 	// Reference to a Endpoint in dms to populate sourceEndpointArn.
 	// +kubebuilder:validation:Optional
-	SourceEndpointArnRef *v1.Reference `json:"sourceEndpointArnRef,omitempty" tf:"-"`
+	SourceEndpointArnRef *v2.Reference `json:"sourceEndpointArnRef,omitempty" tf:"-"`
 
 	// Selector for a Endpoint in dms to populate sourceEndpointArn.
 	// +kubebuilder:validation:Optional
-	SourceEndpointArnSelector *v1.Selector `json:"sourceEndpointArnSelector,omitempty" tf:"-"`
+	SourceEndpointArnSelector *v2.Selector `json:"sourceEndpointArnSelector,omitempty" tf:"-"`
 
 	// Whether to run or stop the replication task.
 	StartReplicationTask *bool `json:"startReplicationTask,omitempty" tf:"start_replication_task,omitempty"`
@@ -73,11 +73,11 @@ type ReplicationTaskInitParameters struct {
 
 	// Reference to a Endpoint in dms to populate targetEndpointArn.
 	// +kubebuilder:validation:Optional
-	TargetEndpointArnRef *v1.Reference `json:"targetEndpointArnRef,omitempty" tf:"-"`
+	TargetEndpointArnRef *v2.Reference `json:"targetEndpointArnRef,omitempty" tf:"-"`
 
 	// Selector for a Endpoint in dms to populate targetEndpointArn.
 	// +kubebuilder:validation:Optional
-	TargetEndpointArnSelector *v1.Selector `json:"targetEndpointArnSelector,omitempty" tf:"-"`
+	TargetEndpointArnSelector *v2.Selector `json:"targetEndpointArnSelector,omitempty" tf:"-"`
 }
 
 type ReplicationTaskObservation struct {
@@ -160,11 +160,11 @@ type ReplicationTaskParameters struct {
 
 	// Reference to a ReplicationInstance in dms to populate replicationInstanceArn.
 	// +kubebuilder:validation:Optional
-	ReplicationInstanceArnRef *v1.Reference `json:"replicationInstanceArnRef,omitempty" tf:"-"`
+	ReplicationInstanceArnRef *v2.Reference `json:"replicationInstanceArnRef,omitempty" tf:"-"`
 
 	// Selector for a ReplicationInstance in dms to populate replicationInstanceArn.
 	// +kubebuilder:validation:Optional
-	ReplicationInstanceArnSelector *v1.Selector `json:"replicationInstanceArnSelector,omitempty" tf:"-"`
+	ReplicationInstanceArnSelector *v2.Selector `json:"replicationInstanceArnSelector,omitempty" tf:"-"`
 
 	// Escaped JSON string that contains the task settings. For a complete list of task settings, see Task Settings for AWS Database Migration Service Tasks. Note that Logging.CloudWatchLogGroup and Logging.CloudWatchLogStream are read only and should not be defined, even as null, in the configuration since AWS provides a value for these settings.
 	// +kubebuilder:validation:Optional
@@ -182,11 +182,11 @@ type ReplicationTaskParameters struct {
 
 	// Reference to a Endpoint in dms to populate sourceEndpointArn.
 	// +kubebuilder:validation:Optional
-	SourceEndpointArnRef *v1.Reference `json:"sourceEndpointArnRef,omitempty" tf:"-"`
+	SourceEndpointArnRef *v2.Reference `json:"sourceEndpointArnRef,omitempty" tf:"-"`
 
 	// Selector for a Endpoint in dms to populate sourceEndpointArn.
 	// +kubebuilder:validation:Optional
-	SourceEndpointArnSelector *v1.Selector `json:"sourceEndpointArnSelector,omitempty" tf:"-"`
+	SourceEndpointArnSelector *v2.Selector `json:"sourceEndpointArnSelector,omitempty" tf:"-"`
 
 	// Whether to run or stop the replication task.
 	// +kubebuilder:validation:Optional
@@ -209,17 +209,17 @@ type ReplicationTaskParameters struct {
 
 	// Reference to a Endpoint in dms to populate targetEndpointArn.
 	// +kubebuilder:validation:Optional
-	TargetEndpointArnRef *v1.Reference `json:"targetEndpointArnRef,omitempty" tf:"-"`
+	TargetEndpointArnRef *v2.Reference `json:"targetEndpointArnRef,omitempty" tf:"-"`
 
 	// Selector for a Endpoint in dms to populate targetEndpointArn.
 	// +kubebuilder:validation:Optional
-	TargetEndpointArnSelector *v1.Selector `json:"targetEndpointArnSelector,omitempty" tf:"-"`
+	TargetEndpointArnSelector *v2.Selector `json:"targetEndpointArnSelector,omitempty" tf:"-"`
 }
 
 // ReplicationTaskSpec defines the desired state of ReplicationTask
 type ReplicationTaskSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ReplicationTaskParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ReplicationTaskParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -235,8 +235,8 @@ type ReplicationTaskSpec struct {
 
 // ReplicationTaskStatus defines the observed state of ReplicationTask.
 type ReplicationTaskStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ReplicationTaskObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ReplicationTaskObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

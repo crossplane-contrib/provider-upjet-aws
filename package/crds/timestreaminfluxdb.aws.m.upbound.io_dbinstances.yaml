@@ -196,6 +196,21 @@ spec:
                             type: boolean
                         type: object
                     type: object
+                  maintenanceSchedule:
+                    description: |-
+                      Maintenance schedule for the DB instance, including the preferred maintenance window and timezone. This argument is updatable.
+                      The maintenance schedule for the DB instance.
+                    properties:
+                      preferredMaintenanceWindow:
+                        description: Preferred maintenance window in the format ddd:HH:MM-ddd:HH:MM.
+                          Day must be one of Mon, Tue, Wed, Thu, Fri, Sat, or Sun.
+                          Provide an empty string to let the system choose a window.
+                        type: string
+                      timezone:
+                        description: IANA timezone identifier for the maintenance
+                          window. For example, America/New_York or UTC.
+                        type: string
+                    type: object
                   name:
                     description: |-
                       Name that uniquely identifies the DB instance when interacting with the Amazon Timestream for InfluxDB API and CLI commands. This name will also be a prefix included in the endpoint. DB instance names must be unique per customer and per region. The argument must start with a letter, cannot contain consecutive hyphens (-) and cannot end with a hyphen.
@@ -604,6 +619,21 @@ spec:
                               Indicates whether log delivery to the S3 bucket is enabled.
                             type: boolean
                         type: object
+                    type: object
+                  maintenanceSchedule:
+                    description: |-
+                      Maintenance schedule for the DB instance, including the preferred maintenance window and timezone. This argument is updatable.
+                      The maintenance schedule for the DB instance.
+                    properties:
+                      preferredMaintenanceWindow:
+                        description: Preferred maintenance window in the format ddd:HH:MM-ddd:HH:MM.
+                          Day must be one of Mon, Tue, Wed, Thu, Fri, Sat, or Sun.
+                          Provide an empty string to let the system choose a window.
+                        type: string
+                      timezone:
+                        description: IANA timezone identifier for the maintenance
+                          window. For example, America/New_York or UTC.
+                        type: string
                     type: object
                   name:
                     description: |-
@@ -1031,6 +1061,21 @@ spec:
                             type: boolean
                         type: object
                     type: object
+                  maintenanceSchedule:
+                    description: |-
+                      Maintenance schedule for the DB instance, including the preferred maintenance window and timezone. This argument is updatable.
+                      The maintenance schedule for the DB instance.
+                    properties:
+                      preferredMaintenanceWindow:
+                        description: Preferred maintenance window in the format ddd:HH:MM-ddd:HH:MM.
+                          Day must be one of Mon, Tue, Wed, Thu, Fri, Sat, or Sun.
+                          Provide an empty string to let the system choose a window.
+                        type: string
+                      timezone:
+                        description: IANA timezone identifier for the maintenance
+                          window. For example, America/New_York or UTC.
+                        type: string
+                    type: object
                   name:
                     description: |-
                       Name that uniquely identifies the DB instance when interacting with the Amazon Timestream for InfluxDB API and CLI commands. This name will also be a prefix included in the endpoint. DB instance names must be unique per customer and per region. The argument must start with a letter, cannot contain consecutive hyphens (-) and cannot end with a hyphen.
@@ -1161,6 +1206,13 @@ spec:
                 x-kubernetes-list-map-keys:
                 - type
                 x-kubernetes-list-type: map
+              lastHandledReconcileAt:
+                description: |-
+                  LastHandledReconcileAt holds the value of the most recent
+                  reconcile-requested-at annotation token that the controller has
+                  processed. Users can compare this to the annotation to determine
+                  whether a reconcile request has been handled.
+                type: string
               observedGeneration:
                 description: |-
                   ObservedGeneration is the latest metadata.generation

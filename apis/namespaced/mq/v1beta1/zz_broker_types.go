@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type BrokerInitParameters struct {
@@ -41,11 +40,11 @@ type BrokerInitParameters struct {
 
 	// Reference to a Broker in mq to populate dataReplicationPrimaryBrokerArn.
 	// +kubebuilder:validation:Optional
-	DataReplicationPrimaryBrokerArnRef *v1.NamespacedReference `json:"dataReplicationPrimaryBrokerArnRef,omitempty" tf:"-"`
+	DataReplicationPrimaryBrokerArnRef *v2.NamespacedReference `json:"dataReplicationPrimaryBrokerArnRef,omitempty" tf:"-"`
 
 	// Selector for a Broker in mq to populate dataReplicationPrimaryBrokerArn.
 	// +kubebuilder:validation:Optional
-	DataReplicationPrimaryBrokerArnSelector *v1.NamespacedSelector `json:"dataReplicationPrimaryBrokerArnSelector,omitempty" tf:"-"`
+	DataReplicationPrimaryBrokerArnSelector *v2.NamespacedSelector `json:"dataReplicationPrimaryBrokerArnSelector,omitempty" tf:"-"`
 
 	// Deployment mode of the broker. Valid values are SINGLE_INSTANCE, ACTIVE_STANDBY_MULTI_AZ, and CLUSTER_MULTI_AZ. Default is SINGLE_INSTANCE.
 	DeploymentMode *string `json:"deploymentMode,omitempty" tf:"deployment_mode,omitempty"`
@@ -74,13 +73,17 @@ type BrokerInitParameters struct {
 	// Whether to enable connections from applications outside of the VPC that hosts the broker's subnets.
 	PubliclyAccessible *bool `json:"publiclyAccessible,omitempty" tf:"publicly_accessible,omitempty"`
 
+	// Set of AWS RAM resource share ARNs that grant the broker access to shared resources for private networking. Applies to engine_type of RabbitMQ only. Because Amazon MQ applies resource shares during a reboot, set apply_immediately to true for changes to take effect without waiting for the next maintenance window.
+	// +listType=set
+	ResourceShareArns []*string `json:"resourceShareArns,omitempty" tf:"resource_share_arns,omitempty"`
+
 	// References to SecurityGroup in ec2 to populate securityGroups.
 	// +kubebuilder:validation:Optional
-	SecurityGroupRefs []v1.NamespacedReference `json:"securityGroupRefs,omitempty" tf:"-"`
+	SecurityGroupRefs []v2.NamespacedReference `json:"securityGroupRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate securityGroups.
 	// +kubebuilder:validation:Optional
-	SecurityGroupSelector *v1.NamespacedSelector `json:"securityGroupSelector,omitempty" tf:"-"`
+	SecurityGroupSelector *v2.NamespacedSelector `json:"securityGroupSelector,omitempty" tf:"-"`
 
 	// List of security group IDs assigned to the broker.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
@@ -94,11 +97,11 @@ type BrokerInitParameters struct {
 
 	// References to Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIDRefs []v1.NamespacedReference `json:"subnetIdRefs,omitempty" tf:"-"`
+	SubnetIDRefs []v2.NamespacedReference `json:"subnetIdRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// List of subnet IDs in which to launch the broker. A SINGLE_INSTANCE deployment requires one subnet. An ACTIVE_STANDBY_MULTI_AZ deployment requires multiple subnets.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Subnet
@@ -181,9 +184,16 @@ type BrokerObservation struct {
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
+	// Set of AWS RAM resource share ARNs that grant the broker access to shared resources for private networking. Applies to engine_type of RabbitMQ only. Because Amazon MQ applies resource shares during a reboot, set apply_immediately to true for changes to take effect without waiting for the next maintenance window.
+	// +listType=set
+	ResourceShareArns []*string `json:"resourceShareArns,omitempty" tf:"resource_share_arns,omitempty"`
+
 	// List of security group IDs assigned to the broker.
 	// +listType=set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
+
+	// List of resources shared with the broker via resource_share_arns. Only populated for engine_type of RabbitMQ.
+	SharedResources []SharedResourcesObservation `json:"sharedResources,omitempty" tf:"shared_resources,omitempty"`
 
 	// Storage type of the broker. For engine_type ActiveMQ, valid values are efs and ebs (AWS-default is efs). For engine_type RabbitMQ, only ebs is supported. When using ebs, only the mq.m5 broker instance type family is supported.
 	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
@@ -238,11 +248,11 @@ type BrokerParameters struct {
 
 	// Reference to a Broker in mq to populate dataReplicationPrimaryBrokerArn.
 	// +kubebuilder:validation:Optional
-	DataReplicationPrimaryBrokerArnRef *v1.NamespacedReference `json:"dataReplicationPrimaryBrokerArnRef,omitempty" tf:"-"`
+	DataReplicationPrimaryBrokerArnRef *v2.NamespacedReference `json:"dataReplicationPrimaryBrokerArnRef,omitempty" tf:"-"`
 
 	// Selector for a Broker in mq to populate dataReplicationPrimaryBrokerArn.
 	// +kubebuilder:validation:Optional
-	DataReplicationPrimaryBrokerArnSelector *v1.NamespacedSelector `json:"dataReplicationPrimaryBrokerArnSelector,omitempty" tf:"-"`
+	DataReplicationPrimaryBrokerArnSelector *v2.NamespacedSelector `json:"dataReplicationPrimaryBrokerArnSelector,omitempty" tf:"-"`
 
 	// Deployment mode of the broker. Valid values are SINGLE_INSTANCE, ACTIVE_STANDBY_MULTI_AZ, and CLUSTER_MULTI_AZ. Default is SINGLE_INSTANCE.
 	// +kubebuilder:validation:Optional
@@ -285,13 +295,18 @@ type BrokerParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
+	// Set of AWS RAM resource share ARNs that grant the broker access to shared resources for private networking. Applies to engine_type of RabbitMQ only. Because Amazon MQ applies resource shares during a reboot, set apply_immediately to true for changes to take effect without waiting for the next maintenance window.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	ResourceShareArns []*string `json:"resourceShareArns,omitempty" tf:"resource_share_arns,omitempty"`
+
 	// References to SecurityGroup in ec2 to populate securityGroups.
 	// +kubebuilder:validation:Optional
-	SecurityGroupRefs []v1.NamespacedReference `json:"securityGroupRefs,omitempty" tf:"-"`
+	SecurityGroupRefs []v2.NamespacedReference `json:"securityGroupRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate securityGroups.
 	// +kubebuilder:validation:Optional
-	SecurityGroupSelector *v1.NamespacedSelector `json:"securityGroupSelector,omitempty" tf:"-"`
+	SecurityGroupSelector *v2.NamespacedSelector `json:"securityGroupSelector,omitempty" tf:"-"`
 
 	// List of security group IDs assigned to the broker.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
@@ -307,11 +322,11 @@ type BrokerParameters struct {
 
 	// References to Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIDRefs []v1.NamespacedReference `json:"subnetIdRefs,omitempty" tf:"-"`
+	SubnetIDRefs []v2.NamespacedReference `json:"subnetIdRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// List of subnet IDs in which to launch the broker. A SINGLE_INSTANCE deployment requires one subnet. An ACTIVE_STANDBY_MULTI_AZ deployment requires multiple subnets.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Subnet
@@ -340,11 +355,11 @@ type ConfigurationInitParameters struct {
 
 	// Reference to a Configuration in mq to populate id.
 	// +kubebuilder:validation:Optional
-	IDRef *v1.NamespacedReference `json:"idRef,omitempty" tf:"-"`
+	IDRef *v2.NamespacedReference `json:"idRef,omitempty" tf:"-"`
 
 	// Selector for a Configuration in mq to populate id.
 	// +kubebuilder:validation:Optional
-	IDSelector *v1.NamespacedSelector `json:"idSelector,omitempty" tf:"-"`
+	IDSelector *v2.NamespacedSelector `json:"idSelector,omitempty" tf:"-"`
 
 	// Revision of the Configuration.
 	Revision *float64 `json:"revision,omitempty" tf:"revision,omitempty"`
@@ -369,11 +384,11 @@ type ConfigurationParameters struct {
 
 	// Reference to a Configuration in mq to populate id.
 	// +kubebuilder:validation:Optional
-	IDRef *v1.NamespacedReference `json:"idRef,omitempty" tf:"-"`
+	IDRef *v2.NamespacedReference `json:"idRef,omitempty" tf:"-"`
 
 	// Selector for a Configuration in mq to populate id.
 	// +kubebuilder:validation:Optional
-	IDSelector *v1.NamespacedSelector `json:"idSelector,omitempty" tf:"-"`
+	IDSelector *v2.NamespacedSelector `json:"idSelector,omitempty" tf:"-"`
 
 	// Revision of the Configuration.
 	// +kubebuilder:validation:Optional
@@ -417,7 +432,7 @@ type InstancesObservation struct {
 	// URL of the ActiveMQ Web Console or the RabbitMQ Management UI depending on engine_type.
 	ConsoleURL *string `json:"consoleUrl,omitempty" tf:"console_url,omitempty"`
 
-	// Broker's wire-level protocol endpoints in the following order & format referenceable e.g., as instances.0.endpoints.0 (SSL):
+	// Broker's wire-level protocol endpoints referenceable e.g., as instances.0.endpoints.0. Known endpoints are returned in the deterministic order below, based on protocol prefix and port number; any additional endpoint types introduced in the future are appended afterward in the order returned by the API.
 	Endpoints []*string `json:"endpoints,omitempty" tf:"endpoints,omitempty"`
 
 	// IP Address of the broker.
@@ -445,7 +460,7 @@ type LdapServerMetadataInitParameters struct {
 	RoleSearchSubtree *bool `json:"roleSearchSubtree,omitempty" tf:"role_search_subtree,omitempty"`
 
 	// Service account password.
-	ServiceAccountPasswordSecretRef *v1.LocalSecretKeySelector `json:"serviceAccountPasswordSecretRef,omitempty" tf:"-"`
+	ServiceAccountPasswordSecretRef *v2.LocalSecretKeySelector `json:"serviceAccountPasswordSecretRef,omitempty" tf:"-"`
 
 	// Service account username.
 	ServiceAccountUsername *string `json:"serviceAccountUsername,omitempty" tf:"service_account_username,omitempty"`
@@ -520,7 +535,7 @@ type LdapServerMetadataParameters struct {
 
 	// Service account password.
 	// +kubebuilder:validation:Optional
-	ServiceAccountPasswordSecretRef *v1.LocalSecretKeySelector `json:"serviceAccountPasswordSecretRef,omitempty" tf:"-"`
+	ServiceAccountPasswordSecretRef *v2.LocalSecretKeySelector `json:"serviceAccountPasswordSecretRef,omitempty" tf:"-"`
 
 	// Service account username.
 	// +kubebuilder:validation:Optional
@@ -611,6 +626,27 @@ type MaintenanceWindowStartTimeParameters struct {
 	TimeZone *string `json:"timeZone" tf:"time_zone,omitempty"`
 }
 
+type SharedResourcesInitParameters struct {
+}
+
+type SharedResourcesObservation struct {
+
+	// DNS names through which the broker reaches the shared resource.
+	DNSNames []*string `json:"dnsNames,omitempty" tf:"dns_names,omitempty"`
+
+	// ARN of the shared resource.
+	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
+
+	// Status of the shared resource.
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+
+	// Type of the shared resource, either RESOURCE_SHARE or RESOURCE.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type SharedResourcesParameters struct {
+}
+
 type UserInitParameters struct {
 
 	// Whether to enable access to the ActiveMQ Web Console for the user. Applies to engine_type of ActiveMQ only.
@@ -621,7 +657,7 @@ type UserInitParameters struct {
 	Groups []*string `json:"groups,omitempty" tf:"groups,omitempty"`
 
 	// Password of the user. Must be 12 to 250 characters long, contain at least 4 unique characters, and must not contain commas.
-	PasswordSecretRef v1.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
+	PasswordSecretRef v2.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// Whether to set replication user. Defaults to false.
 	ReplicationUser *bool `json:"replicationUser,omitempty" tf:"replication_user,omitempty"`
@@ -659,7 +695,7 @@ type UserParameters struct {
 
 	// Password of the user. Must be 12 to 250 characters long, contain at least 4 unique characters, and must not contain commas.
 	// +kubebuilder:validation:Optional
-	PasswordSecretRef v1.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
+	PasswordSecretRef v2.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// Whether to set replication user. Defaults to false.
 	// +kubebuilder:validation:Optional
@@ -689,8 +725,8 @@ type BrokerSpec struct {
 
 // BrokerStatus defines the observed state of Broker.
 type BrokerStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        BrokerObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               BrokerObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true
@@ -710,7 +746,6 @@ type Broker struct {
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.engineType) || (has(self.initProvider) && has(self.initProvider.engineType))",message="spec.forProvider.engineType is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.engineVersion) || (has(self.initProvider) && has(self.initProvider.engineVersion))",message="spec.forProvider.engineVersion is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.hostInstanceType) || (has(self.initProvider) && has(self.initProvider.hostInstanceType))",message="spec.forProvider.hostInstanceType is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.user) || (has(self.initProvider) && has(self.initProvider.user))",message="spec.forProvider.user is a required parameter"
 	Spec   BrokerSpec   `json:"spec"`
 	Status BrokerStatus `json:"status,omitempty"`
 }

@@ -15,7 +15,7 @@ spec:
   forProvider:
     description: Another Scope
     ipamIdSelector:
-      mathLabels:
+      matchLabels:
         testing.upbound.io/example-name: main
     region: us-west-1
 ---

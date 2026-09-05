@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ProxyProtocolPolicyInitParameters struct {
@@ -27,11 +27,11 @@ type ProxyProtocolPolicyInitParameters struct {
 
 	// Reference to a ELB in elb to populate loadBalancer.
 	// +kubebuilder:validation:Optional
-	LoadBalancerRef *v1.Reference `json:"loadBalancerRef,omitempty" tf:"-"`
+	LoadBalancerRef *v2.Reference `json:"loadBalancerRef,omitempty" tf:"-"`
 
 	// Selector for a ELB in elb to populate loadBalancer.
 	// +kubebuilder:validation:Optional
-	LoadBalancerSelector *v1.Selector `json:"loadBalancerSelector,omitempty" tf:"-"`
+	LoadBalancerSelector *v2.Selector `json:"loadBalancerSelector,omitempty" tf:"-"`
 }
 
 type ProxyProtocolPolicyObservation struct {
@@ -69,11 +69,11 @@ type ProxyProtocolPolicyParameters struct {
 
 	// Reference to a ELB in elb to populate loadBalancer.
 	// +kubebuilder:validation:Optional
-	LoadBalancerRef *v1.Reference `json:"loadBalancerRef,omitempty" tf:"-"`
+	LoadBalancerRef *v2.Reference `json:"loadBalancerRef,omitempty" tf:"-"`
 
 	// Selector for a ELB in elb to populate loadBalancer.
 	// +kubebuilder:validation:Optional
-	LoadBalancerSelector *v1.Selector `json:"loadBalancerSelector,omitempty" tf:"-"`
+	LoadBalancerSelector *v2.Selector `json:"loadBalancerSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -83,8 +83,8 @@ type ProxyProtocolPolicyParameters struct {
 
 // ProxyProtocolPolicySpec defines the desired state of ProxyProtocolPolicy
 type ProxyProtocolPolicySpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ProxyProtocolPolicyParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ProxyProtocolPolicyParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -100,8 +100,8 @@ type ProxyProtocolPolicySpec struct {
 
 // ProxyProtocolPolicyStatus defines the observed state of ProxyProtocolPolicy.
 type ProxyProtocolPolicyStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ProxyProtocolPolicyObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ProxyProtocolPolicyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

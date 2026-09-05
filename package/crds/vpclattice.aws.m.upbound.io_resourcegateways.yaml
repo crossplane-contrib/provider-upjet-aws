@@ -77,6 +77,12 @@ spec:
                       Region where this resource will be managed. Defaults to the Region set in the provider configuration.
                       Region is the region you'd like your resource to be created in.
                     type: string
+                  resourceConfigDnsResolution:
+                    description: Indicates how DNS is resolved for resource configurations
+                      associated to this resource gateway. Valid values are IN_VPC
+                      and PUBLIC. Defaults to PUBLIC. Changing this value will trigger
+                      a resource replacement.
+                    type: string
                   securityGroupIdRefs:
                     description: References to SecurityGroup in ec2 to populate securityGroupIds.
                     items:
@@ -377,6 +383,12 @@ spec:
                     type: number
                   name:
                     description: Name of the resource gateway.
+                    type: string
+                  resourceConfigDnsResolution:
+                    description: Indicates how DNS is resolved for resource configurations
+                      associated to this resource gateway. Valid values are IN_VPC
+                      and PUBLIC. Defaults to PUBLIC. Changing this value will trigger
+                      a resource replacement.
                     type: string
                   securityGroupIdRefs:
                     description: References to SecurityGroup in ec2 to populate securityGroupIds.
@@ -743,6 +755,12 @@ spec:
                       Region where this resource will be managed. Defaults to the Region set in the provider configuration.
                       Region is the region you'd like your resource to be created in.
                     type: string
+                  resourceConfigDnsResolution:
+                    description: Indicates how DNS is resolved for resource configurations
+                      associated to this resource gateway. Valid values are IN_VPC
+                      and PUBLIC. Defaults to PUBLIC. Changing this value will trigger
+                      a resource replacement.
+                    type: string
                   securityGroupIds:
                     description: Security group IDs associated with the resource gateway.
                       The security groups must be in the same VPC.
@@ -823,6 +841,13 @@ spec:
                 x-kubernetes-list-map-keys:
                 - type
                 x-kubernetes-list-type: map
+              lastHandledReconcileAt:
+                description: |-
+                  LastHandledReconcileAt holds the value of the most recent
+                  reconcile-requested-at annotation token that the controller has
+                  processed. Users can compare this to the annotation to determine
+                  whether a reconcile request has been handled.
+                type: string
               observedGeneration:
                 description: |-
                   ObservedGeneration is the latest metadata.generation

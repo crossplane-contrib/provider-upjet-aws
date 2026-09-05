@@ -10,13 +10,13 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CredentialsInitParameters struct {
 
 	// RFC2617 compliant password associated with the SIP credentials.
-	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
+	PasswordSecretRef v2.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// RFC2617 compliant username associated with the SIP credentials.
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
@@ -32,7 +32,7 @@ type CredentialsParameters struct {
 
 	// RFC2617 compliant password associated with the SIP credentials.
 	// +kubebuilder:validation:Optional
-	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
+	PasswordSecretRef v2.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// RFC2617 compliant username associated with the SIP credentials.
 	// +kubebuilder:validation:Optional
@@ -51,11 +51,11 @@ type VoiceConnectorTerminationCredentialsInitParameters struct {
 
 	// Reference to a VoiceConnector in chime to populate voiceConnectorId.
 	// +kubebuilder:validation:Optional
-	VoiceConnectorIDRef *v1.Reference `json:"voiceConnectorIdRef,omitempty" tf:"-"`
+	VoiceConnectorIDRef *v2.Reference `json:"voiceConnectorIdRef,omitempty" tf:"-"`
 
 	// Selector for a VoiceConnector in chime to populate voiceConnectorId.
 	// +kubebuilder:validation:Optional
-	VoiceConnectorIDSelector *v1.Selector `json:"voiceConnectorIdSelector,omitempty" tf:"-"`
+	VoiceConnectorIDSelector *v2.Selector `json:"voiceConnectorIdSelector,omitempty" tf:"-"`
 }
 
 type VoiceConnectorTerminationCredentialsObservation struct {
@@ -93,17 +93,17 @@ type VoiceConnectorTerminationCredentialsParameters struct {
 
 	// Reference to a VoiceConnector in chime to populate voiceConnectorId.
 	// +kubebuilder:validation:Optional
-	VoiceConnectorIDRef *v1.Reference `json:"voiceConnectorIdRef,omitempty" tf:"-"`
+	VoiceConnectorIDRef *v2.Reference `json:"voiceConnectorIdRef,omitempty" tf:"-"`
 
 	// Selector for a VoiceConnector in chime to populate voiceConnectorId.
 	// +kubebuilder:validation:Optional
-	VoiceConnectorIDSelector *v1.Selector `json:"voiceConnectorIdSelector,omitempty" tf:"-"`
+	VoiceConnectorIDSelector *v2.Selector `json:"voiceConnectorIdSelector,omitempty" tf:"-"`
 }
 
 // VoiceConnectorTerminationCredentialsSpec defines the desired state of VoiceConnectorTerminationCredentials
 type VoiceConnectorTerminationCredentialsSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     VoiceConnectorTerminationCredentialsParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   VoiceConnectorTerminationCredentialsParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -119,8 +119,8 @@ type VoiceConnectorTerminationCredentialsSpec struct {
 
 // VoiceConnectorTerminationCredentialsStatus defines the observed state of VoiceConnectorTerminationCredentials.
 type VoiceConnectorTerminationCredentialsStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        VoiceConnectorTerminationCredentialsObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               VoiceConnectorTerminationCredentialsObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

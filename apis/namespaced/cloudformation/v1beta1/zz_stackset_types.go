@@ -10,11 +10,13 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AutoDeploymentInitParameters struct {
+
+	// A list of StackSet ARNs that this StackSet depends on for auto-deployment operations. When auto-deployment is triggered, operations will be sequenced to ensure all dependencies complete successfully before this StackSet's operation begins.
+	DependsOnStackSets []*string `json:"dependsOnStackSets,omitempty" tf:"depends_on_stack_sets,omitempty"`
 
 	// Whether or not auto-deployment is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
@@ -25,6 +27,9 @@ type AutoDeploymentInitParameters struct {
 
 type AutoDeploymentObservation struct {
 
+	// A list of StackSet ARNs that this StackSet depends on for auto-deployment operations. When auto-deployment is triggered, operations will be sequenced to ensure all dependencies complete successfully before this StackSet's operation begins.
+	DependsOnStackSets []*string `json:"dependsOnStackSets,omitempty" tf:"depends_on_stack_sets,omitempty"`
+
 	// Whether or not auto-deployment is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
@@ -33,6 +38,10 @@ type AutoDeploymentObservation struct {
 }
 
 type AutoDeploymentParameters struct {
+
+	// A list of StackSet ARNs that this StackSet depends on for auto-deployment operations. When auto-deployment is triggered, operations will be sequenced to ensure all dependencies complete successfully before this StackSet's operation begins.
+	// +kubebuilder:validation:Optional
+	DependsOnStackSets []*string `json:"dependsOnStackSets,omitempty" tf:"depends_on_stack_sets,omitempty"`
 
 	// Whether or not auto-deployment is enabled.
 	// +kubebuilder:validation:Optional
@@ -140,11 +149,11 @@ type StackSetInitParameters struct {
 
 	// Reference to a Role in iam to populate administrationRoleArn.
 	// +kubebuilder:validation:Optional
-	AdministrationRoleArnRef *v1.NamespacedReference `json:"administrationRoleArnRef,omitempty" tf:"-"`
+	AdministrationRoleArnRef *v2.NamespacedReference `json:"administrationRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate administrationRoleArn.
 	// +kubebuilder:validation:Optional
-	AdministrationRoleArnSelector *v1.NamespacedSelector `json:"administrationRoleArnSelector,omitempty" tf:"-"`
+	AdministrationRoleArnSelector *v2.NamespacedSelector `json:"administrationRoleArnSelector,omitempty" tf:"-"`
 
 	// Configuration block containing the auto-deployment model for your StackSet. This can only be defined when using the SERVICE_MANAGED permission model.
 	AutoDeployment *AutoDeploymentInitParameters `json:"autoDeployment,omitempty" tf:"auto_deployment,omitempty"`
@@ -258,11 +267,11 @@ type StackSetParameters struct {
 
 	// Reference to a Role in iam to populate administrationRoleArn.
 	// +kubebuilder:validation:Optional
-	AdministrationRoleArnRef *v1.NamespacedReference `json:"administrationRoleArnRef,omitempty" tf:"-"`
+	AdministrationRoleArnRef *v2.NamespacedReference `json:"administrationRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate administrationRoleArn.
 	// +kubebuilder:validation:Optional
-	AdministrationRoleArnSelector *v1.NamespacedSelector `json:"administrationRoleArnSelector,omitempty" tf:"-"`
+	AdministrationRoleArnSelector *v2.NamespacedSelector `json:"administrationRoleArnSelector,omitempty" tf:"-"`
 
 	// Configuration block containing the auto-deployment model for your StackSet. This can only be defined when using the SERVICE_MANAGED permission model.
 	// +kubebuilder:validation:Optional
@@ -340,8 +349,8 @@ type StackSetSpec struct {
 
 // StackSetStatus defines the observed state of StackSet.
 type StackSetStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        StackSetObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               StackSetObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

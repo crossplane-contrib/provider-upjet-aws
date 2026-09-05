@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type VPNConnectionRouteInitParameters struct {
@@ -25,11 +25,11 @@ type VPNConnectionRouteInitParameters struct {
 
 	// Reference to a VPNConnection in ec2 to populate vpnConnectionId.
 	// +kubebuilder:validation:Optional
-	VPNConnectionIDRef *v1.Reference `json:"vpnConnectionIdRef,omitempty" tf:"-"`
+	VPNConnectionIDRef *v2.Reference `json:"vpnConnectionIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPNConnection in ec2 to populate vpnConnectionId.
 	// +kubebuilder:validation:Optional
-	VPNConnectionIDSelector *v1.Selector `json:"vpnConnectionIdSelector,omitempty" tf:"-"`
+	VPNConnectionIDSelector *v2.Selector `json:"vpnConnectionIdSelector,omitempty" tf:"-"`
 }
 
 type VPNConnectionRouteObservation struct {
@@ -66,17 +66,17 @@ type VPNConnectionRouteParameters struct {
 
 	// Reference to a VPNConnection in ec2 to populate vpnConnectionId.
 	// +kubebuilder:validation:Optional
-	VPNConnectionIDRef *v1.Reference `json:"vpnConnectionIdRef,omitempty" tf:"-"`
+	VPNConnectionIDRef *v2.Reference `json:"vpnConnectionIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPNConnection in ec2 to populate vpnConnectionId.
 	// +kubebuilder:validation:Optional
-	VPNConnectionIDSelector *v1.Selector `json:"vpnConnectionIdSelector,omitempty" tf:"-"`
+	VPNConnectionIDSelector *v2.Selector `json:"vpnConnectionIdSelector,omitempty" tf:"-"`
 }
 
 // VPNConnectionRouteSpec defines the desired state of VPNConnectionRoute
 type VPNConnectionRouteSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     VPNConnectionRouteParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   VPNConnectionRouteParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -92,8 +92,8 @@ type VPNConnectionRouteSpec struct {
 
 // VPNConnectionRouteStatus defines the observed state of VPNConnectionRoute.
 type VPNConnectionRouteStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        VPNConnectionRouteObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               VPNConnectionRouteObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

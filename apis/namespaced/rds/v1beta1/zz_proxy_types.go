@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AuthInitParameters struct {
@@ -35,11 +34,11 @@ type AuthInitParameters struct {
 
 	// Reference to a Secret in secretsmanager to populate secretArn.
 	// +kubebuilder:validation:Optional
-	SecretArnRef *v1.NamespacedReference `json:"secretArnRef,omitempty" tf:"-"`
+	SecretArnRef *v2.NamespacedReference `json:"secretArnRef,omitempty" tf:"-"`
 
 	// Selector for a Secret in secretsmanager to populate secretArn.
 	// +kubebuilder:validation:Optional
-	SecretArnSelector *v1.NamespacedSelector `json:"secretArnSelector,omitempty" tf:"-"`
+	SecretArnSelector *v2.NamespacedSelector `json:"secretArnSelector,omitempty" tf:"-"`
 
 	// The name of the database user to which the proxy connects.
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
@@ -92,11 +91,11 @@ type AuthParameters struct {
 
 	// Reference to a Secret in secretsmanager to populate secretArn.
 	// +kubebuilder:validation:Optional
-	SecretArnRef *v1.NamespacedReference `json:"secretArnRef,omitempty" tf:"-"`
+	SecretArnRef *v2.NamespacedReference `json:"secretArnRef,omitempty" tf:"-"`
 
 	// Selector for a Secret in secretsmanager to populate secretArn.
 	// +kubebuilder:validation:Optional
-	SecretArnSelector *v1.NamespacedSelector `json:"secretArnSelector,omitempty" tf:"-"`
+	SecretArnSelector *v2.NamespacedSelector `json:"secretArnSelector,omitempty" tf:"-"`
 
 	// The name of the database user to which the proxy connects.
 	// +kubebuilder:validation:Optional
@@ -133,11 +132,11 @@ type ProxyInitParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -148,11 +147,11 @@ type ProxyInitParameters struct {
 
 	// References to SecurityGroup in ec2 to populate vpcSecurityGroupIds.
 	// +kubebuilder:validation:Optional
-	VPCSecurityGroupIDRefs []v1.NamespacedReference `json:"vpcSecurityGroupIdRefs,omitempty" tf:"-"`
+	VPCSecurityGroupIDRefs []v2.NamespacedReference `json:"vpcSecurityGroupIdRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate vpcSecurityGroupIds.
 	// +kubebuilder:validation:Optional
-	VPCSecurityGroupIDSelector *v1.NamespacedSelector `json:"vpcSecurityGroupIdSelector,omitempty" tf:"-"`
+	VPCSecurityGroupIDSelector *v2.NamespacedSelector `json:"vpcSecurityGroupIdSelector,omitempty" tf:"-"`
 
 	// One or more VPC security group IDs to associate with the new proxy.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
@@ -169,11 +168,11 @@ type ProxyInitParameters struct {
 
 	// References to Subnet in ec2 to populate vpcSubnetIds.
 	// +kubebuilder:validation:Optional
-	VPCSubnetIdsRefs []v1.NamespacedReference `json:"vpcSubnetIdsRefs,omitempty" tf:"-"`
+	VPCSubnetIdsRefs []v2.NamespacedReference `json:"vpcSubnetIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Subnet in ec2 to populate vpcSubnetIds.
 	// +kubebuilder:validation:Optional
-	VPCSubnetIdsSelector *v1.NamespacedSelector `json:"vpcSubnetIdsSelector,omitempty" tf:"-"`
+	VPCSubnetIdsSelector *v2.NamespacedSelector `json:"vpcSubnetIdsSelector,omitempty" tf:"-"`
 }
 
 type ProxyObservation struct {
@@ -278,11 +277,11 @@ type ProxyParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -295,11 +294,11 @@ type ProxyParameters struct {
 
 	// References to SecurityGroup in ec2 to populate vpcSecurityGroupIds.
 	// +kubebuilder:validation:Optional
-	VPCSecurityGroupIDRefs []v1.NamespacedReference `json:"vpcSecurityGroupIdRefs,omitempty" tf:"-"`
+	VPCSecurityGroupIDRefs []v2.NamespacedReference `json:"vpcSecurityGroupIdRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate vpcSecurityGroupIds.
 	// +kubebuilder:validation:Optional
-	VPCSecurityGroupIDSelector *v1.NamespacedSelector `json:"vpcSecurityGroupIdSelector,omitempty" tf:"-"`
+	VPCSecurityGroupIDSelector *v2.NamespacedSelector `json:"vpcSecurityGroupIdSelector,omitempty" tf:"-"`
 
 	// One or more VPC security group IDs to associate with the new proxy.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
@@ -318,11 +317,11 @@ type ProxyParameters struct {
 
 	// References to Subnet in ec2 to populate vpcSubnetIds.
 	// +kubebuilder:validation:Optional
-	VPCSubnetIdsRefs []v1.NamespacedReference `json:"vpcSubnetIdsRefs,omitempty" tf:"-"`
+	VPCSubnetIdsRefs []v2.NamespacedReference `json:"vpcSubnetIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Subnet in ec2 to populate vpcSubnetIds.
 	// +kubebuilder:validation:Optional
-	VPCSubnetIdsSelector *v1.NamespacedSelector `json:"vpcSubnetIdsSelector,omitempty" tf:"-"`
+	VPCSubnetIdsSelector *v2.NamespacedSelector `json:"vpcSubnetIdsSelector,omitempty" tf:"-"`
 }
 
 // ProxySpec defines the desired state of Proxy
@@ -344,8 +343,8 @@ type ProxySpec struct {
 
 // ProxyStatus defines the observed state of Proxy.
 type ProxyStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ProxyObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ProxyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

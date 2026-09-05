@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type PublicKeyInitParameters struct {
@@ -19,7 +19,7 @@ type PublicKeyInitParameters struct {
 	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
 
 	// The encoded public key that you want to add to CloudFront to use with features like field-level encryption.
-	EncodedKeySecretRef v1.SecretKeySelector `json:"encodedKeySecretRef" tf:"-"`
+	EncodedKeySecretRef v2.SecretKeySelector `json:"encodedKeySecretRef" tf:"-"`
 
 	// The name for the public key.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -51,7 +51,7 @@ type PublicKeyParameters struct {
 
 	// The encoded public key that you want to add to CloudFront to use with features like field-level encryption.
 	// +kubebuilder:validation:Optional
-	EncodedKeySecretRef v1.SecretKeySelector `json:"encodedKeySecretRef" tf:"-"`
+	EncodedKeySecretRef v2.SecretKeySelector `json:"encodedKeySecretRef" tf:"-"`
 
 	// The name for the public key.
 	// +kubebuilder:validation:Optional
@@ -60,8 +60,8 @@ type PublicKeyParameters struct {
 
 // PublicKeySpec defines the desired state of PublicKey
 type PublicKeySpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     PublicKeyParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   PublicKeyParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -77,8 +77,8 @@ type PublicKeySpec struct {
 
 // PublicKeyStatus defines the observed state of PublicKey.
 type PublicKeyStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        PublicKeyObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               PublicKeyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

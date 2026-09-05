@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type UserInGroupInitParameters struct {
@@ -23,11 +22,11 @@ type UserInGroupInitParameters struct {
 
 	// Reference to a UserGroup in cognitoidp to populate groupName.
 	// +kubebuilder:validation:Optional
-	GroupNameRef *v1.NamespacedReference `json:"groupNameRef,omitempty" tf:"-"`
+	GroupNameRef *v2.NamespacedReference `json:"groupNameRef,omitempty" tf:"-"`
 
 	// Selector for a UserGroup in cognitoidp to populate groupName.
 	// +kubebuilder:validation:Optional
-	GroupNameSelector *v1.NamespacedSelector `json:"groupNameSelector,omitempty" tf:"-"`
+	GroupNameSelector *v2.NamespacedSelector `json:"groupNameSelector,omitempty" tf:"-"`
 
 	// The user pool ID of the user and group.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/cognitoidp/v1beta1.UserPool
@@ -36,11 +35,11 @@ type UserInGroupInitParameters struct {
 
 	// Reference to a UserPool in cognitoidp to populate userPoolId.
 	// +kubebuilder:validation:Optional
-	UserPoolIDRef *v1.NamespacedReference `json:"userPoolIdRef,omitempty" tf:"-"`
+	UserPoolIDRef *v2.NamespacedReference `json:"userPoolIdRef,omitempty" tf:"-"`
 
 	// Selector for a UserPool in cognitoidp to populate userPoolId.
 	// +kubebuilder:validation:Optional
-	UserPoolIDSelector *v1.NamespacedSelector `json:"userPoolIdSelector,omitempty" tf:"-"`
+	UserPoolIDSelector *v2.NamespacedSelector `json:"userPoolIdSelector,omitempty" tf:"-"`
 
 	// The username of the user to be added to the group.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/cognitoidp/v1beta1.User
@@ -48,11 +47,11 @@ type UserInGroupInitParameters struct {
 
 	// Reference to a User in cognitoidp to populate username.
 	// +kubebuilder:validation:Optional
-	UsernameRef *v1.NamespacedReference `json:"usernameRef,omitempty" tf:"-"`
+	UsernameRef *v2.NamespacedReference `json:"usernameRef,omitempty" tf:"-"`
 
 	// Selector for a User in cognitoidp to populate username.
 	// +kubebuilder:validation:Optional
-	UsernameSelector *v1.NamespacedSelector `json:"usernameSelector,omitempty" tf:"-"`
+	UsernameSelector *v2.NamespacedSelector `json:"usernameSelector,omitempty" tf:"-"`
 }
 
 type UserInGroupObservation struct {
@@ -83,11 +82,11 @@ type UserInGroupParameters struct {
 
 	// Reference to a UserGroup in cognitoidp to populate groupName.
 	// +kubebuilder:validation:Optional
-	GroupNameRef *v1.NamespacedReference `json:"groupNameRef,omitempty" tf:"-"`
+	GroupNameRef *v2.NamespacedReference `json:"groupNameRef,omitempty" tf:"-"`
 
 	// Selector for a UserGroup in cognitoidp to populate groupName.
 	// +kubebuilder:validation:Optional
-	GroupNameSelector *v1.NamespacedSelector `json:"groupNameSelector,omitempty" tf:"-"`
+	GroupNameSelector *v2.NamespacedSelector `json:"groupNameSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -102,11 +101,11 @@ type UserInGroupParameters struct {
 
 	// Reference to a UserPool in cognitoidp to populate userPoolId.
 	// +kubebuilder:validation:Optional
-	UserPoolIDRef *v1.NamespacedReference `json:"userPoolIdRef,omitempty" tf:"-"`
+	UserPoolIDRef *v2.NamespacedReference `json:"userPoolIdRef,omitempty" tf:"-"`
 
 	// Selector for a UserPool in cognitoidp to populate userPoolId.
 	// +kubebuilder:validation:Optional
-	UserPoolIDSelector *v1.NamespacedSelector `json:"userPoolIdSelector,omitempty" tf:"-"`
+	UserPoolIDSelector *v2.NamespacedSelector `json:"userPoolIdSelector,omitempty" tf:"-"`
 
 	// The username of the user to be added to the group.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/cognitoidp/v1beta1.User
@@ -115,11 +114,11 @@ type UserInGroupParameters struct {
 
 	// Reference to a User in cognitoidp to populate username.
 	// +kubebuilder:validation:Optional
-	UsernameRef *v1.NamespacedReference `json:"usernameRef,omitempty" tf:"-"`
+	UsernameRef *v2.NamespacedReference `json:"usernameRef,omitempty" tf:"-"`
 
 	// Selector for a User in cognitoidp to populate username.
 	// +kubebuilder:validation:Optional
-	UsernameSelector *v1.NamespacedSelector `json:"usernameSelector,omitempty" tf:"-"`
+	UsernameSelector *v2.NamespacedSelector `json:"usernameSelector,omitempty" tf:"-"`
 }
 
 // UserInGroupSpec defines the desired state of UserInGroup
@@ -141,8 +140,8 @@ type UserInGroupSpec struct {
 
 // UserInGroupStatus defines the observed state of UserInGroup.
 type UserInGroupStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        UserInGroupObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               UserInGroupObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

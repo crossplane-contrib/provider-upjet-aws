@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type VPCEndpointServiceAllowedPrincipalInitParameters struct {
@@ -25,11 +25,11 @@ type VPCEndpointServiceAllowedPrincipalInitParameters struct {
 
 	// Reference to a VPCEndpointService in ec2 to populate vpcEndpointServiceId.
 	// +kubebuilder:validation:Optional
-	VPCEndpointServiceIDRef *v1.Reference `json:"vpcEndpointServiceIdRef,omitempty" tf:"-"`
+	VPCEndpointServiceIDRef *v2.Reference `json:"vpcEndpointServiceIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPCEndpointService in ec2 to populate vpcEndpointServiceId.
 	// +kubebuilder:validation:Optional
-	VPCEndpointServiceIDSelector *v1.Selector `json:"vpcEndpointServiceIdSelector,omitempty" tf:"-"`
+	VPCEndpointServiceIDSelector *v2.Selector `json:"vpcEndpointServiceIdSelector,omitempty" tf:"-"`
 }
 
 type VPCEndpointServiceAllowedPrincipalObservation struct {
@@ -67,17 +67,17 @@ type VPCEndpointServiceAllowedPrincipalParameters struct {
 
 	// Reference to a VPCEndpointService in ec2 to populate vpcEndpointServiceId.
 	// +kubebuilder:validation:Optional
-	VPCEndpointServiceIDRef *v1.Reference `json:"vpcEndpointServiceIdRef,omitempty" tf:"-"`
+	VPCEndpointServiceIDRef *v2.Reference `json:"vpcEndpointServiceIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPCEndpointService in ec2 to populate vpcEndpointServiceId.
 	// +kubebuilder:validation:Optional
-	VPCEndpointServiceIDSelector *v1.Selector `json:"vpcEndpointServiceIdSelector,omitempty" tf:"-"`
+	VPCEndpointServiceIDSelector *v2.Selector `json:"vpcEndpointServiceIdSelector,omitempty" tf:"-"`
 }
 
 // VPCEndpointServiceAllowedPrincipalSpec defines the desired state of VPCEndpointServiceAllowedPrincipal
 type VPCEndpointServiceAllowedPrincipalSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     VPCEndpointServiceAllowedPrincipalParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   VPCEndpointServiceAllowedPrincipalParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -93,8 +93,8 @@ type VPCEndpointServiceAllowedPrincipalSpec struct {
 
 // VPCEndpointServiceAllowedPrincipalStatus defines the observed state of VPCEndpointServiceAllowedPrincipal.
 type VPCEndpointServiceAllowedPrincipalStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        VPCEndpointServiceAllowedPrincipalObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               VPCEndpointServiceAllowedPrincipalObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

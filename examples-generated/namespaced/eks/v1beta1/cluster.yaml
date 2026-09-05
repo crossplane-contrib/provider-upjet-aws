@@ -20,7 +20,7 @@ spec:
     roleArnSelector:
       matchLabels:
         testing.upbound.io/example-name: cluster
-    version: "1.31"
+    version: "1.35"
     vpcConfig:
       subnetIdRefs:
       - name: az1

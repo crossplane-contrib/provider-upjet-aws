@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type TrafficPolicyInstanceInitParameters struct {
@@ -22,11 +21,11 @@ type TrafficPolicyInstanceInitParameters struct {
 
 	// Reference to a Zone in route53 to populate hostedZoneId.
 	// +kubebuilder:validation:Optional
-	HostedZoneIDRef *v1.NamespacedReference `json:"hostedZoneIdRef,omitempty" tf:"-"`
+	HostedZoneIDRef *v2.NamespacedReference `json:"hostedZoneIdRef,omitempty" tf:"-"`
 
 	// Selector for a Zone in route53 to populate hostedZoneId.
 	// +kubebuilder:validation:Optional
-	HostedZoneIDSelector *v1.NamespacedSelector `json:"hostedZoneIdSelector,omitempty" tf:"-"`
+	HostedZoneIDSelector *v2.NamespacedSelector `json:"hostedZoneIdSelector,omitempty" tf:"-"`
 
 	// Domain name for which Amazon Route 53 responds to DNS queries by using the resource record sets that Route 53 creates for this traffic policy instance.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -40,11 +39,11 @@ type TrafficPolicyInstanceInitParameters struct {
 
 	// Reference to a TrafficPolicy in route53 to populate trafficPolicyId.
 	// +kubebuilder:validation:Optional
-	TrafficPolicyIDRef *v1.NamespacedReference `json:"trafficPolicyIdRef,omitempty" tf:"-"`
+	TrafficPolicyIDRef *v2.NamespacedReference `json:"trafficPolicyIdRef,omitempty" tf:"-"`
 
 	// Selector for a TrafficPolicy in route53 to populate trafficPolicyId.
 	// +kubebuilder:validation:Optional
-	TrafficPolicyIDSelector *v1.NamespacedSelector `json:"trafficPolicyIdSelector,omitempty" tf:"-"`
+	TrafficPolicyIDSelector *v2.NamespacedSelector `json:"trafficPolicyIdSelector,omitempty" tf:"-"`
 
 	// Version of the traffic policy
 	TrafficPolicyVersion *float64 `json:"trafficPolicyVersion,omitempty" tf:"traffic_policy_version,omitempty"`
@@ -83,11 +82,11 @@ type TrafficPolicyInstanceParameters struct {
 
 	// Reference to a Zone in route53 to populate hostedZoneId.
 	// +kubebuilder:validation:Optional
-	HostedZoneIDRef *v1.NamespacedReference `json:"hostedZoneIdRef,omitempty" tf:"-"`
+	HostedZoneIDRef *v2.NamespacedReference `json:"hostedZoneIdRef,omitempty" tf:"-"`
 
 	// Selector for a Zone in route53 to populate hostedZoneId.
 	// +kubebuilder:validation:Optional
-	HostedZoneIDSelector *v1.NamespacedSelector `json:"hostedZoneIdSelector,omitempty" tf:"-"`
+	HostedZoneIDSelector *v2.NamespacedSelector `json:"hostedZoneIdSelector,omitempty" tf:"-"`
 
 	// Domain name for which Amazon Route 53 responds to DNS queries by using the resource record sets that Route 53 creates for this traffic policy instance.
 	// +kubebuilder:validation:Optional
@@ -104,11 +103,11 @@ type TrafficPolicyInstanceParameters struct {
 
 	// Reference to a TrafficPolicy in route53 to populate trafficPolicyId.
 	// +kubebuilder:validation:Optional
-	TrafficPolicyIDRef *v1.NamespacedReference `json:"trafficPolicyIdRef,omitempty" tf:"-"`
+	TrafficPolicyIDRef *v2.NamespacedReference `json:"trafficPolicyIdRef,omitempty" tf:"-"`
 
 	// Selector for a TrafficPolicy in route53 to populate trafficPolicyId.
 	// +kubebuilder:validation:Optional
-	TrafficPolicyIDSelector *v1.NamespacedSelector `json:"trafficPolicyIdSelector,omitempty" tf:"-"`
+	TrafficPolicyIDSelector *v2.NamespacedSelector `json:"trafficPolicyIdSelector,omitempty" tf:"-"`
 
 	// Version of the traffic policy
 	// +kubebuilder:validation:Optional
@@ -134,8 +133,8 @@ type TrafficPolicyInstanceSpec struct {
 
 // TrafficPolicyInstanceStatus defines the observed state of TrafficPolicyInstance.
 type TrafficPolicyInstanceStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        TrafficPolicyInstanceObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               TrafficPolicyInstanceObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

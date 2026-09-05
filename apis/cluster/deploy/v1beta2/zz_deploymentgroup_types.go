@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AlarmConfigurationInitParameters struct {
@@ -172,11 +172,11 @@ type DeploymentGroupInitParameters struct {
 
 	// Reference to a Role in iam to populate serviceRoleArn.
 	// +kubebuilder:validation:Optional
-	ServiceRoleArnRef *v1.Reference `json:"serviceRoleArnRef,omitempty" tf:"-"`
+	ServiceRoleArnRef *v2.Reference `json:"serviceRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate serviceRoleArn.
 	// +kubebuilder:validation:Optional
-	ServiceRoleArnSelector *v1.Selector `json:"serviceRoleArnSelector,omitempty" tf:"-"`
+	ServiceRoleArnSelector *v2.Selector `json:"serviceRoleArnSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -278,11 +278,11 @@ type DeploymentGroupParameters struct {
 
 	// Reference to a App in deploy to populate appName.
 	// +kubebuilder:validation:Optional
-	AppNameRef *v1.Reference `json:"appNameRef,omitempty" tf:"-"`
+	AppNameRef *v2.Reference `json:"appNameRef,omitempty" tf:"-"`
 
 	// Selector for a App in deploy to populate appName.
 	// +kubebuilder:validation:Optional
-	AppNameSelector *v1.Selector `json:"appNameSelector,omitempty" tf:"-"`
+	AppNameSelector *v2.Selector `json:"appNameSelector,omitempty" tf:"-"`
 
 	// Configuration block of the automatic rollback configuration associated with the deployment group (documented below).
 	// +kubebuilder:validation:Optional
@@ -342,11 +342,11 @@ type DeploymentGroupParameters struct {
 
 	// Reference to a Role in iam to populate serviceRoleArn.
 	// +kubebuilder:validation:Optional
-	ServiceRoleArnRef *v1.Reference `json:"serviceRoleArnRef,omitempty" tf:"-"`
+	ServiceRoleArnRef *v2.Reference `json:"serviceRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate serviceRoleArn.
 	// +kubebuilder:validation:Optional
-	ServiceRoleArnSelector *v1.Selector `json:"serviceRoleArnSelector,omitempty" tf:"-"`
+	ServiceRoleArnSelector *v2.Selector `json:"serviceRoleArnSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -525,11 +525,11 @@ type ELBInfoInitParameters struct {
 
 	// Reference to a ELB in elb to populate name.
 	// +kubebuilder:validation:Optional
-	NameRef *v1.Reference `json:"nameRef,omitempty" tf:"-"`
+	NameRef *v2.Reference `json:"nameRef,omitempty" tf:"-"`
 
 	// Selector for a ELB in elb to populate name.
 	// +kubebuilder:validation:Optional
-	NameSelector *v1.Selector `json:"nameSelector,omitempty" tf:"-"`
+	NameSelector *v2.Selector `json:"nameSelector,omitempty" tf:"-"`
 }
 
 type ELBInfoObservation struct {
@@ -547,11 +547,11 @@ type ELBInfoParameters struct {
 
 	// Reference to a ELB in elb to populate name.
 	// +kubebuilder:validation:Optional
-	NameRef *v1.Reference `json:"nameRef,omitempty" tf:"-"`
+	NameRef *v2.Reference `json:"nameRef,omitempty" tf:"-"`
 
 	// Selector for a ELB in elb to populate name.
 	// +kubebuilder:validation:Optional
-	NameSelector *v1.Selector `json:"nameSelector,omitempty" tf:"-"`
+	NameSelector *v2.Selector `json:"nameSelector,omitempty" tf:"-"`
 }
 
 type EcsServiceInitParameters struct {
@@ -562,11 +562,11 @@ type EcsServiceInitParameters struct {
 
 	// Reference to a Cluster in ecs to populate clusterName.
 	// +kubebuilder:validation:Optional
-	ClusterNameRef *v1.Reference `json:"clusterNameRef,omitempty" tf:"-"`
+	ClusterNameRef *v2.Reference `json:"clusterNameRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in ecs to populate clusterName.
 	// +kubebuilder:validation:Optional
-	ClusterNameSelector *v1.Selector `json:"clusterNameSelector,omitempty" tf:"-"`
+	ClusterNameSelector *v2.Selector `json:"clusterNameSelector,omitempty" tf:"-"`
 
 	// The name of the ECS service.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ecs/v1beta2.Service
@@ -574,11 +574,11 @@ type EcsServiceInitParameters struct {
 
 	// Reference to a Service in ecs to populate serviceName.
 	// +kubebuilder:validation:Optional
-	ServiceNameRef *v1.Reference `json:"serviceNameRef,omitempty" tf:"-"`
+	ServiceNameRef *v2.Reference `json:"serviceNameRef,omitempty" tf:"-"`
 
 	// Selector for a Service in ecs to populate serviceName.
 	// +kubebuilder:validation:Optional
-	ServiceNameSelector *v1.Selector `json:"serviceNameSelector,omitempty" tf:"-"`
+	ServiceNameSelector *v2.Selector `json:"serviceNameSelector,omitempty" tf:"-"`
 }
 
 type EcsServiceObservation struct {
@@ -599,11 +599,11 @@ type EcsServiceParameters struct {
 
 	// Reference to a Cluster in ecs to populate clusterName.
 	// +kubebuilder:validation:Optional
-	ClusterNameRef *v1.Reference `json:"clusterNameRef,omitempty" tf:"-"`
+	ClusterNameRef *v2.Reference `json:"clusterNameRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in ecs to populate clusterName.
 	// +kubebuilder:validation:Optional
-	ClusterNameSelector *v1.Selector `json:"clusterNameSelector,omitempty" tf:"-"`
+	ClusterNameSelector *v2.Selector `json:"clusterNameSelector,omitempty" tf:"-"`
 
 	// The name of the ECS service.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ecs/v1beta2.Service
@@ -612,11 +612,11 @@ type EcsServiceParameters struct {
 
 	// Reference to a Service in ecs to populate serviceName.
 	// +kubebuilder:validation:Optional
-	ServiceNameRef *v1.Reference `json:"serviceNameRef,omitempty" tf:"-"`
+	ServiceNameRef *v2.Reference `json:"serviceNameRef,omitempty" tf:"-"`
 
 	// Selector for a Service in ecs to populate serviceName.
 	// +kubebuilder:validation:Optional
-	ServiceNameSelector *v1.Selector `json:"serviceNameSelector,omitempty" tf:"-"`
+	ServiceNameSelector *v2.Selector `json:"serviceNameSelector,omitempty" tf:"-"`
 }
 
 type GreenFleetProvisioningOptionInitParameters struct {
@@ -726,11 +726,11 @@ type ProdTrafficRouteInitParameters struct {
 
 	// References to LBListener in elbv2 to populate listenerArns.
 	// +kubebuilder:validation:Optional
-	ListenerArnsRefs []v1.Reference `json:"listenerArnsRefs,omitempty" tf:"-"`
+	ListenerArnsRefs []v2.Reference `json:"listenerArnsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of LBListener in elbv2 to populate listenerArns.
 	// +kubebuilder:validation:Optional
-	ListenerArnsSelector *v1.Selector `json:"listenerArnsSelector,omitempty" tf:"-"`
+	ListenerArnsSelector *v2.Selector `json:"listenerArnsSelector,omitempty" tf:"-"`
 }
 
 type ProdTrafficRouteObservation struct {
@@ -751,11 +751,11 @@ type ProdTrafficRouteParameters struct {
 
 	// References to LBListener in elbv2 to populate listenerArns.
 	// +kubebuilder:validation:Optional
-	ListenerArnsRefs []v1.Reference `json:"listenerArnsRefs,omitempty" tf:"-"`
+	ListenerArnsRefs []v2.Reference `json:"listenerArnsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of LBListener in elbv2 to populate listenerArns.
 	// +kubebuilder:validation:Optional
-	ListenerArnsSelector *v1.Selector `json:"listenerArnsSelector,omitempty" tf:"-"`
+	ListenerArnsSelector *v2.Selector `json:"listenerArnsSelector,omitempty" tf:"-"`
 }
 
 type TargetGroupInfoInitParameters struct {
@@ -786,11 +786,11 @@ type TargetGroupInitParameters struct {
 
 	// Reference to a LBTargetGroup in elbv2 to populate name.
 	// +kubebuilder:validation:Optional
-	NameRef *v1.Reference `json:"nameRef,omitempty" tf:"-"`
+	NameRef *v2.Reference `json:"nameRef,omitempty" tf:"-"`
 
 	// Selector for a LBTargetGroup in elbv2 to populate name.
 	// +kubebuilder:validation:Optional
-	NameSelector *v1.Selector `json:"nameSelector,omitempty" tf:"-"`
+	NameSelector *v2.Selector `json:"nameSelector,omitempty" tf:"-"`
 }
 
 type TargetGroupObservation struct {
@@ -848,11 +848,11 @@ type TargetGroupParameters struct {
 
 	// Reference to a LBTargetGroup in elbv2 to populate name.
 	// +kubebuilder:validation:Optional
-	NameRef *v1.Reference `json:"nameRef,omitempty" tf:"-"`
+	NameRef *v2.Reference `json:"nameRef,omitempty" tf:"-"`
 
 	// Selector for a LBTargetGroup in elbv2 to populate name.
 	// +kubebuilder:validation:Optional
-	NameSelector *v1.Selector `json:"nameSelector,omitempty" tf:"-"`
+	NameSelector *v2.Selector `json:"nameSelector,omitempty" tf:"-"`
 }
 
 type TerminateBlueInstancesOnDeploymentSuccessInitParameters struct {
@@ -922,11 +922,11 @@ type TriggerConfigurationInitParameters struct {
 
 	// Reference to a Topic in sns to populate triggerTargetArn.
 	// +kubebuilder:validation:Optional
-	TriggerTargetArnRef *v1.Reference `json:"triggerTargetArnRef,omitempty" tf:"-"`
+	TriggerTargetArnRef *v2.Reference `json:"triggerTargetArnRef,omitempty" tf:"-"`
 
 	// Selector for a Topic in sns to populate triggerTargetArn.
 	// +kubebuilder:validation:Optional
-	TriggerTargetArnSelector *v1.Selector `json:"triggerTargetArnSelector,omitempty" tf:"-"`
+	TriggerTargetArnSelector *v2.Selector `json:"triggerTargetArnSelector,omitempty" tf:"-"`
 }
 
 type TriggerConfigurationObservation struct {
@@ -961,17 +961,17 @@ type TriggerConfigurationParameters struct {
 
 	// Reference to a Topic in sns to populate triggerTargetArn.
 	// +kubebuilder:validation:Optional
-	TriggerTargetArnRef *v1.Reference `json:"triggerTargetArnRef,omitempty" tf:"-"`
+	TriggerTargetArnRef *v2.Reference `json:"triggerTargetArnRef,omitempty" tf:"-"`
 
 	// Selector for a Topic in sns to populate triggerTargetArn.
 	// +kubebuilder:validation:Optional
-	TriggerTargetArnSelector *v1.Selector `json:"triggerTargetArnSelector,omitempty" tf:"-"`
+	TriggerTargetArnSelector *v2.Selector `json:"triggerTargetArnSelector,omitempty" tf:"-"`
 }
 
 // DeploymentGroupSpec defines the desired state of DeploymentGroup
 type DeploymentGroupSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     DeploymentGroupParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   DeploymentGroupParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -987,8 +987,8 @@ type DeploymentGroupSpec struct {
 
 // DeploymentGroupStatus defines the observed state of DeploymentGroup.
 type DeploymentGroupStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        DeploymentGroupObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               DeploymentGroupObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

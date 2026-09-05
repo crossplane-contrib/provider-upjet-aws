@@ -11,6 +11,7 @@ import (
 
 	accesspolicy "github.com/upbound/provider-aws/v2/internal/controller/cluster/opensearchserverless/accesspolicy"
 	collection "github.com/upbound/provider-aws/v2/internal/controller/cluster/opensearchserverless/collection"
+	collectiongroup "github.com/upbound/provider-aws/v2/internal/controller/cluster/opensearchserverless/collectiongroup"
 	lifecyclepolicy "github.com/upbound/provider-aws/v2/internal/controller/cluster/opensearchserverless/lifecyclepolicy"
 	securityconfig "github.com/upbound/provider-aws/v2/internal/controller/cluster/opensearchserverless/securityconfig"
 	securitypolicy "github.com/upbound/provider-aws/v2/internal/controller/cluster/opensearchserverless/securitypolicy"
@@ -23,6 +24,7 @@ func Setup_opensearchserverless(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		accesspolicy.Setup,
 		collection.Setup,
+		collectiongroup.Setup,
 		lifecyclepolicy.Setup,
 		securityconfig.Setup,
 		securitypolicy.Setup,
@@ -41,12 +43,31 @@ func SetupGated_opensearchserverless(mgr ctrl.Manager, o controller.Options) err
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		accesspolicy.SetupGated,
 		collection.SetupGated,
+		collectiongroup.SetupGated,
 		lifecyclepolicy.SetupGated,
 		securityconfig.SetupGated,
 		securitypolicy.SetupGated,
 		vpcendpoint.SetupGated,
 	} {
 		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+// SetupWebhookWithManager_opensearchserverless registers conversion webhooks for all resource kinds in the group.
+func SetupWebhookWithManager_opensearchserverless(mgr ctrl.Manager) error {
+	for _, setup := range []func(ctrl.Manager) error{
+		accesspolicy.SetupWebhookWithManager,
+		collection.SetupWebhookWithManager,
+		collectiongroup.SetupWebhookWithManager,
+		lifecyclepolicy.SetupWebhookWithManager,
+		securityconfig.SetupWebhookWithManager,
+		securitypolicy.SetupWebhookWithManager,
+		vpcendpoint.SetupWebhookWithManager,
+	} {
+		if err := setup(mgr); err != nil {
 			return err
 		}
 	}

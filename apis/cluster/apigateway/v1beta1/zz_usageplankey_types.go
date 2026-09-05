@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type UsagePlanKeyInitParameters struct {
@@ -22,11 +22,11 @@ type UsagePlanKeyInitParameters struct {
 
 	// Reference to a APIKey in apigateway to populate keyId.
 	// +kubebuilder:validation:Optional
-	KeyIDRef *v1.Reference `json:"keyIdRef,omitempty" tf:"-"`
+	KeyIDRef *v2.Reference `json:"keyIdRef,omitempty" tf:"-"`
 
 	// Selector for a APIKey in apigateway to populate keyId.
 	// +kubebuilder:validation:Optional
-	KeyIDSelector *v1.Selector `json:"keyIdSelector,omitempty" tf:"-"`
+	KeyIDSelector *v2.Selector `json:"keyIdSelector,omitempty" tf:"-"`
 
 	// Type of the API key resource. Currently, the valid key type is API_KEY.
 	KeyType *string `json:"keyType,omitempty" tf:"key_type,omitempty"`
@@ -38,11 +38,11 @@ type UsagePlanKeyInitParameters struct {
 
 	// Reference to a UsagePlan in apigateway to populate usagePlanId.
 	// +kubebuilder:validation:Optional
-	UsagePlanIDRef *v1.Reference `json:"usagePlanIdRef,omitempty" tf:"-"`
+	UsagePlanIDRef *v2.Reference `json:"usagePlanIdRef,omitempty" tf:"-"`
 
 	// Selector for a UsagePlan in apigateway to populate usagePlanId.
 	// +kubebuilder:validation:Optional
-	UsagePlanIDSelector *v1.Selector `json:"usagePlanIdSelector,omitempty" tf:"-"`
+	UsagePlanIDSelector *v2.Selector `json:"usagePlanIdSelector,omitempty" tf:"-"`
 }
 
 type UsagePlanKeyObservation struct {
@@ -80,11 +80,11 @@ type UsagePlanKeyParameters struct {
 
 	// Reference to a APIKey in apigateway to populate keyId.
 	// +kubebuilder:validation:Optional
-	KeyIDRef *v1.Reference `json:"keyIdRef,omitempty" tf:"-"`
+	KeyIDRef *v2.Reference `json:"keyIdRef,omitempty" tf:"-"`
 
 	// Selector for a APIKey in apigateway to populate keyId.
 	// +kubebuilder:validation:Optional
-	KeyIDSelector *v1.Selector `json:"keyIdSelector,omitempty" tf:"-"`
+	KeyIDSelector *v2.Selector `json:"keyIdSelector,omitempty" tf:"-"`
 
 	// Type of the API key resource. Currently, the valid key type is API_KEY.
 	// +kubebuilder:validation:Optional
@@ -103,17 +103,17 @@ type UsagePlanKeyParameters struct {
 
 	// Reference to a UsagePlan in apigateway to populate usagePlanId.
 	// +kubebuilder:validation:Optional
-	UsagePlanIDRef *v1.Reference `json:"usagePlanIdRef,omitempty" tf:"-"`
+	UsagePlanIDRef *v2.Reference `json:"usagePlanIdRef,omitempty" tf:"-"`
 
 	// Selector for a UsagePlan in apigateway to populate usagePlanId.
 	// +kubebuilder:validation:Optional
-	UsagePlanIDSelector *v1.Selector `json:"usagePlanIdSelector,omitempty" tf:"-"`
+	UsagePlanIDSelector *v2.Selector `json:"usagePlanIdSelector,omitempty" tf:"-"`
 }
 
 // UsagePlanKeySpec defines the desired state of UsagePlanKey
 type UsagePlanKeySpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     UsagePlanKeyParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   UsagePlanKeyParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -129,8 +129,8 @@ type UsagePlanKeySpec struct {
 
 // UsagePlanKeyStatus defines the observed state of UsagePlanKey.
 type UsagePlanKeyStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        UsagePlanKeyObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               UsagePlanKeyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

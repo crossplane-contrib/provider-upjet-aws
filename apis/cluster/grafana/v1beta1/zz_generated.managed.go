@@ -5,254 +5,254 @@
 
 package v1beta1
 
-import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+import xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 
 // GetCondition of this LicenseAssociation.
-func (mg *LicenseAssociation) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *LicenseAssociation) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this LicenseAssociation.
-func (mg *LicenseAssociation) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *LicenseAssociation) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this LicenseAssociation.
-func (mg *LicenseAssociation) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *LicenseAssociation) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this LicenseAssociation.
-func (mg *LicenseAssociation) GetProviderConfigReference() *xpv1.Reference {
+func (mg *LicenseAssociation) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this LicenseAssociation.
-func (mg *LicenseAssociation) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *LicenseAssociation) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this LicenseAssociation.
-func (mg *LicenseAssociation) SetConditions(c ...xpv1.Condition) {
+func (mg *LicenseAssociation) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this LicenseAssociation.
-func (mg *LicenseAssociation) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *LicenseAssociation) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this LicenseAssociation.
-func (mg *LicenseAssociation) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *LicenseAssociation) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this LicenseAssociation.
-func (mg *LicenseAssociation) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *LicenseAssociation) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this LicenseAssociation.
-func (mg *LicenseAssociation) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *LicenseAssociation) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this RoleAssociation.
-func (mg *RoleAssociation) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *RoleAssociation) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this RoleAssociation.
-func (mg *RoleAssociation) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *RoleAssociation) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this RoleAssociation.
-func (mg *RoleAssociation) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *RoleAssociation) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this RoleAssociation.
-func (mg *RoleAssociation) GetProviderConfigReference() *xpv1.Reference {
+func (mg *RoleAssociation) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this RoleAssociation.
-func (mg *RoleAssociation) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *RoleAssociation) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this RoleAssociation.
-func (mg *RoleAssociation) SetConditions(c ...xpv1.Condition) {
+func (mg *RoleAssociation) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this RoleAssociation.
-func (mg *RoleAssociation) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *RoleAssociation) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this RoleAssociation.
-func (mg *RoleAssociation) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *RoleAssociation) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this RoleAssociation.
-func (mg *RoleAssociation) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *RoleAssociation) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this RoleAssociation.
-func (mg *RoleAssociation) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *RoleAssociation) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this Workspace.
-func (mg *Workspace) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *Workspace) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this Workspace.
-func (mg *Workspace) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *Workspace) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this Workspace.
-func (mg *Workspace) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *Workspace) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this Workspace.
-func (mg *Workspace) GetProviderConfigReference() *xpv1.Reference {
+func (mg *Workspace) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this Workspace.
-func (mg *Workspace) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *Workspace) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this Workspace.
-func (mg *Workspace) SetConditions(c ...xpv1.Condition) {
+func (mg *Workspace) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this Workspace.
-func (mg *Workspace) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *Workspace) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this Workspace.
-func (mg *Workspace) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *Workspace) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this Workspace.
-func (mg *Workspace) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *Workspace) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this Workspace.
-func (mg *Workspace) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *Workspace) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this WorkspaceAPIKey.
-func (mg *WorkspaceAPIKey) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *WorkspaceAPIKey) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this WorkspaceAPIKey.
-func (mg *WorkspaceAPIKey) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *WorkspaceAPIKey) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this WorkspaceAPIKey.
-func (mg *WorkspaceAPIKey) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *WorkspaceAPIKey) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this WorkspaceAPIKey.
-func (mg *WorkspaceAPIKey) GetProviderConfigReference() *xpv1.Reference {
+func (mg *WorkspaceAPIKey) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this WorkspaceAPIKey.
-func (mg *WorkspaceAPIKey) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *WorkspaceAPIKey) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this WorkspaceAPIKey.
-func (mg *WorkspaceAPIKey) SetConditions(c ...xpv1.Condition) {
+func (mg *WorkspaceAPIKey) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this WorkspaceAPIKey.
-func (mg *WorkspaceAPIKey) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *WorkspaceAPIKey) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this WorkspaceAPIKey.
-func (mg *WorkspaceAPIKey) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *WorkspaceAPIKey) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this WorkspaceAPIKey.
-func (mg *WorkspaceAPIKey) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *WorkspaceAPIKey) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this WorkspaceAPIKey.
-func (mg *WorkspaceAPIKey) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *WorkspaceAPIKey) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this WorkspaceSAMLConfiguration.
-func (mg *WorkspaceSAMLConfiguration) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *WorkspaceSAMLConfiguration) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this WorkspaceSAMLConfiguration.
-func (mg *WorkspaceSAMLConfiguration) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *WorkspaceSAMLConfiguration) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this WorkspaceSAMLConfiguration.
-func (mg *WorkspaceSAMLConfiguration) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *WorkspaceSAMLConfiguration) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this WorkspaceSAMLConfiguration.
-func (mg *WorkspaceSAMLConfiguration) GetProviderConfigReference() *xpv1.Reference {
+func (mg *WorkspaceSAMLConfiguration) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this WorkspaceSAMLConfiguration.
-func (mg *WorkspaceSAMLConfiguration) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *WorkspaceSAMLConfiguration) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this WorkspaceSAMLConfiguration.
-func (mg *WorkspaceSAMLConfiguration) SetConditions(c ...xpv1.Condition) {
+func (mg *WorkspaceSAMLConfiguration) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this WorkspaceSAMLConfiguration.
-func (mg *WorkspaceSAMLConfiguration) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *WorkspaceSAMLConfiguration) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this WorkspaceSAMLConfiguration.
-func (mg *WorkspaceSAMLConfiguration) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *WorkspaceSAMLConfiguration) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this WorkspaceSAMLConfiguration.
-func (mg *WorkspaceSAMLConfiguration) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *WorkspaceSAMLConfiguration) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this WorkspaceSAMLConfiguration.
-func (mg *WorkspaceSAMLConfiguration) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *WorkspaceSAMLConfiguration) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

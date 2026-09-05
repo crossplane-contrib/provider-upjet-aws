@@ -14096,6 +14096,13 @@ spec:
                 x-kubernetes-list-map-keys:
                 - type
                 x-kubernetes-list-type: map
+              lastHandledReconcileAt:
+                description: |-
+                  LastHandledReconcileAt holds the value of the most recent
+                  reconcile-requested-at annotation token that the controller has
+                  processed. Users can compare this to the annotation to determine
+                  whether a reconcile request has been handled.
+                type: string
               observedGeneration:
                 description: |-
                   ObservedGeneration is the latest metadata.generation
@@ -16140,7 +16147,8 @@ spec:
                         type: object
                       url:
                         description: The HTTP endpoint URL to which Kinesis Firehose
-                          sends your data.
+                          sends your data. Refer to the target vendor's documentation
+                          for the correct intake URL (for example, New Relic or Datadog).
                         type: string
                     type: object
                   icebergConfiguration:
@@ -21525,7 +21533,8 @@ spec:
                         type: object
                       url:
                         description: The HTTP endpoint URL to which Kinesis Firehose
-                          sends your data.
+                          sends your data. Refer to the target vendor's documentation
+                          for the correct intake URL (for example, New Relic or Datadog).
                         type: string
                     type: object
                   icebergConfiguration:
@@ -25930,7 +25939,8 @@ spec:
                         type: object
                       url:
                         description: The HTTP endpoint URL to which Kinesis Firehose
-                          sends your data.
+                          sends your data. Refer to the target vendor's documentation
+                          for the correct intake URL (for example, New Relic or Datadog).
                         type: string
                     type: object
                   icebergConfiguration:
@@ -27377,6 +27387,13 @@ spec:
                 x-kubernetes-list-map-keys:
                 - type
                 x-kubernetes-list-type: map
+              lastHandledReconcileAt:
+                description: |-
+                  LastHandledReconcileAt holds the value of the most recent
+                  reconcile-requested-at annotation token that the controller has
+                  processed. Users can compare this to the annotation to determine
+                  whether a reconcile request has been handled.
+                type: string
               observedGeneration:
                 description: |-
                   ObservedGeneration is the latest metadata.generation

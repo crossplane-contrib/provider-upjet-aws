@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type TrafficMirrorFilterRuleDestinationPortRangeInitParameters struct {
@@ -79,11 +78,11 @@ type TrafficMirrorFilterRuleInitParameters struct {
 
 	// Reference to a TrafficMirrorFilter in ec2 to populate trafficMirrorFilterId.
 	// +kubebuilder:validation:Optional
-	TrafficMirrorFilterIDRef *v1.NamespacedReference `json:"trafficMirrorFilterIdRef,omitempty" tf:"-"`
+	TrafficMirrorFilterIDRef *v2.NamespacedReference `json:"trafficMirrorFilterIdRef,omitempty" tf:"-"`
 
 	// Selector for a TrafficMirrorFilter in ec2 to populate trafficMirrorFilterId.
 	// +kubebuilder:validation:Optional
-	TrafficMirrorFilterIDSelector *v1.NamespacedSelector `json:"trafficMirrorFilterIdSelector,omitempty" tf:"-"`
+	TrafficMirrorFilterIDSelector *v2.NamespacedSelector `json:"trafficMirrorFilterIdSelector,omitempty" tf:"-"`
 }
 
 type TrafficMirrorFilterRuleObservation struct {
@@ -180,11 +179,11 @@ type TrafficMirrorFilterRuleParameters struct {
 
 	// Reference to a TrafficMirrorFilter in ec2 to populate trafficMirrorFilterId.
 	// +kubebuilder:validation:Optional
-	TrafficMirrorFilterIDRef *v1.NamespacedReference `json:"trafficMirrorFilterIdRef,omitempty" tf:"-"`
+	TrafficMirrorFilterIDRef *v2.NamespacedReference `json:"trafficMirrorFilterIdRef,omitempty" tf:"-"`
 
 	// Selector for a TrafficMirrorFilter in ec2 to populate trafficMirrorFilterId.
 	// +kubebuilder:validation:Optional
-	TrafficMirrorFilterIDSelector *v1.NamespacedSelector `json:"trafficMirrorFilterIdSelector,omitempty" tf:"-"`
+	TrafficMirrorFilterIDSelector *v2.NamespacedSelector `json:"trafficMirrorFilterIdSelector,omitempty" tf:"-"`
 }
 
 type TrafficMirrorFilterRuleSourcePortRangeInitParameters struct {
@@ -235,8 +234,8 @@ type TrafficMirrorFilterRuleSpec struct {
 
 // TrafficMirrorFilterRuleStatus defines the observed state of TrafficMirrorFilterRule.
 type TrafficMirrorFilterRuleStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        TrafficMirrorFilterRuleObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               TrafficMirrorFilterRuleObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

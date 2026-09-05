@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type DefaultNetworkACLInitParameters struct {
@@ -22,11 +22,11 @@ type DefaultNetworkACLInitParameters struct {
 
 	// Reference to a VPC in ec2 to populate defaultNetworkAclId.
 	// +kubebuilder:validation:Optional
-	DefaultNetworkACLIDRef *v1.Reference `json:"defaultNetworkAclIdRef,omitempty" tf:"-"`
+	DefaultNetworkACLIDRef *v2.Reference `json:"defaultNetworkAclIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPC in ec2 to populate defaultNetworkAclId.
 	// +kubebuilder:validation:Optional
-	DefaultNetworkACLIDSelector *v1.Selector `json:"defaultNetworkAclIdSelector,omitempty" tf:"-"`
+	DefaultNetworkACLIDSelector *v2.Selector `json:"defaultNetworkAclIdSelector,omitempty" tf:"-"`
 
 	// Configuration block for an egress rule. Detailed below.
 	Egress []EgressInitParameters `json:"egress,omitempty" tf:"egress,omitempty"`
@@ -36,11 +36,11 @@ type DefaultNetworkACLInitParameters struct {
 
 	// References to Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIDRefs []v1.Reference `json:"subnetIdRefs,omitempty" tf:"-"`
+	SubnetIDRefs []v2.Reference `json:"subnetIdRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// List of Subnet IDs to apply the ACL to. See the notes above on Managing Subnets in the Default Network ACL
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Subnet
@@ -104,11 +104,11 @@ type DefaultNetworkACLParameters struct {
 
 	// Reference to a VPC in ec2 to populate defaultNetworkAclId.
 	// +kubebuilder:validation:Optional
-	DefaultNetworkACLIDRef *v1.Reference `json:"defaultNetworkAclIdRef,omitempty" tf:"-"`
+	DefaultNetworkACLIDRef *v2.Reference `json:"defaultNetworkAclIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPC in ec2 to populate defaultNetworkAclId.
 	// +kubebuilder:validation:Optional
-	DefaultNetworkACLIDSelector *v1.Selector `json:"defaultNetworkAclIdSelector,omitempty" tf:"-"`
+	DefaultNetworkACLIDSelector *v2.Selector `json:"defaultNetworkAclIdSelector,omitempty" tf:"-"`
 
 	// Configuration block for an egress rule. Detailed below.
 	// +kubebuilder:validation:Optional
@@ -125,11 +125,11 @@ type DefaultNetworkACLParameters struct {
 
 	// References to Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIDRefs []v1.Reference `json:"subnetIdRefs,omitempty" tf:"-"`
+	SubnetIDRefs []v2.Reference `json:"subnetIdRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// List of Subnet IDs to apply the ACL to. See the notes above on Managing Subnets in the Default Network ACL
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Subnet
@@ -256,11 +256,11 @@ type IngressInitParameters struct {
 
 	// Reference to a DefaultVPC in ec2 to populate cidrBlock.
 	// +kubebuilder:validation:Optional
-	CidrBlockRef *v1.Reference `json:"cidrBlockRef,omitempty" tf:"-"`
+	CidrBlockRef *v2.Reference `json:"cidrBlockRef,omitempty" tf:"-"`
 
 	// Selector for a DefaultVPC in ec2 to populate cidrBlock.
 	// +kubebuilder:validation:Optional
-	CidrBlockSelector *v1.Selector `json:"cidrBlockSelector,omitempty" tf:"-"`
+	CidrBlockSelector *v2.Selector `json:"cidrBlockSelector,omitempty" tf:"-"`
 
 	// The from port to match.
 	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
@@ -328,11 +328,11 @@ type IngressParameters struct {
 
 	// Reference to a DefaultVPC in ec2 to populate cidrBlock.
 	// +kubebuilder:validation:Optional
-	CidrBlockRef *v1.Reference `json:"cidrBlockRef,omitempty" tf:"-"`
+	CidrBlockRef *v2.Reference `json:"cidrBlockRef,omitempty" tf:"-"`
 
 	// Selector for a DefaultVPC in ec2 to populate cidrBlock.
 	// +kubebuilder:validation:Optional
-	CidrBlockSelector *v1.Selector `json:"cidrBlockSelector,omitempty" tf:"-"`
+	CidrBlockSelector *v2.Selector `json:"cidrBlockSelector,omitempty" tf:"-"`
 
 	// The from port to match.
 	// +kubebuilder:validation:Optional
@@ -365,8 +365,8 @@ type IngressParameters struct {
 
 // DefaultNetworkACLSpec defines the desired state of DefaultNetworkACL
 type DefaultNetworkACLSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     DefaultNetworkACLParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   DefaultNetworkACLParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -382,8 +382,8 @@ type DefaultNetworkACLSpec struct {
 
 // DefaultNetworkACLStatus defines the observed state of DefaultNetworkACL.
 type DefaultNetworkACLStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        DefaultNetworkACLObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               DefaultNetworkACLObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

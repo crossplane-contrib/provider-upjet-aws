@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type TrackerAssociationInitParameters struct {
@@ -22,11 +22,11 @@ type TrackerAssociationInitParameters struct {
 
 	// Reference to a GeofenceCollection in location to populate consumerArn.
 	// +kubebuilder:validation:Optional
-	ConsumerArnRef *v1.Reference `json:"consumerArnRef,omitempty" tf:"-"`
+	ConsumerArnRef *v2.Reference `json:"consumerArnRef,omitempty" tf:"-"`
 
 	// Selector for a GeofenceCollection in location to populate consumerArn.
 	// +kubebuilder:validation:Optional
-	ConsumerArnSelector *v1.Selector `json:"consumerArnSelector,omitempty" tf:"-"`
+	ConsumerArnSelector *v2.Selector `json:"consumerArnSelector,omitempty" tf:"-"`
 
 	// The name of the tracker resource to be associated with a geofence collection.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/location/v1beta1.Tracker
@@ -34,11 +34,11 @@ type TrackerAssociationInitParameters struct {
 
 	// Reference to a Tracker in location to populate trackerName.
 	// +kubebuilder:validation:Optional
-	TrackerNameRef *v1.Reference `json:"trackerNameRef,omitempty" tf:"-"`
+	TrackerNameRef *v2.Reference `json:"trackerNameRef,omitempty" tf:"-"`
 
 	// Selector for a Tracker in location to populate trackerName.
 	// +kubebuilder:validation:Optional
-	TrackerNameSelector *v1.Selector `json:"trackerNameSelector,omitempty" tf:"-"`
+	TrackerNameSelector *v2.Selector `json:"trackerNameSelector,omitempty" tf:"-"`
 }
 
 type TrackerAssociationObservation struct {
@@ -66,11 +66,11 @@ type TrackerAssociationParameters struct {
 
 	// Reference to a GeofenceCollection in location to populate consumerArn.
 	// +kubebuilder:validation:Optional
-	ConsumerArnRef *v1.Reference `json:"consumerArnRef,omitempty" tf:"-"`
+	ConsumerArnRef *v2.Reference `json:"consumerArnRef,omitempty" tf:"-"`
 
 	// Selector for a GeofenceCollection in location to populate consumerArn.
 	// +kubebuilder:validation:Optional
-	ConsumerArnSelector *v1.Selector `json:"consumerArnSelector,omitempty" tf:"-"`
+	ConsumerArnSelector *v2.Selector `json:"consumerArnSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -84,17 +84,17 @@ type TrackerAssociationParameters struct {
 
 	// Reference to a Tracker in location to populate trackerName.
 	// +kubebuilder:validation:Optional
-	TrackerNameRef *v1.Reference `json:"trackerNameRef,omitempty" tf:"-"`
+	TrackerNameRef *v2.Reference `json:"trackerNameRef,omitempty" tf:"-"`
 
 	// Selector for a Tracker in location to populate trackerName.
 	// +kubebuilder:validation:Optional
-	TrackerNameSelector *v1.Selector `json:"trackerNameSelector,omitempty" tf:"-"`
+	TrackerNameSelector *v2.Selector `json:"trackerNameSelector,omitempty" tf:"-"`
 }
 
 // TrackerAssociationSpec defines the desired state of TrackerAssociation
 type TrackerAssociationSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     TrackerAssociationParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   TrackerAssociationParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -110,8 +110,8 @@ type TrackerAssociationSpec struct {
 
 // TrackerAssociationStatus defines the observed state of TrackerAssociation.
 type TrackerAssociationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        TrackerAssociationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               TrackerAssociationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

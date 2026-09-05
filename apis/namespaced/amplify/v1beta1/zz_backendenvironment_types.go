@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type BackendEnvironmentInitParameters struct {
@@ -55,11 +54,11 @@ type BackendEnvironmentParameters struct {
 
 	// Reference to a App in amplify to populate appId.
 	// +kubebuilder:validation:Optional
-	AppIDRef *v1.NamespacedReference `json:"appIdRef,omitempty" tf:"-"`
+	AppIDRef *v2.NamespacedReference `json:"appIdRef,omitempty" tf:"-"`
 
 	// Selector for a App in amplify to populate appId.
 	// +kubebuilder:validation:Optional
-	AppIDSelector *v1.NamespacedSelector `json:"appIdSelector,omitempty" tf:"-"`
+	AppIDSelector *v2.NamespacedSelector `json:"appIdSelector,omitempty" tf:"-"`
 
 	// Name of deployment artifacts.
 	// +kubebuilder:validation:Optional
@@ -94,8 +93,8 @@ type BackendEnvironmentSpec struct {
 
 // BackendEnvironmentStatus defines the observed state of BackendEnvironment.
 type BackendEnvironmentStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        BackendEnvironmentObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               BackendEnvironmentObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -37,3 +37,15 @@ func SetupGated_servicequotas(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupWebhookWithManager_servicequotas registers conversion webhooks for all resource kinds in the group.
+func SetupWebhookWithManager_servicequotas(mgr ctrl.Manager) error {
+	for _, setup := range []func(ctrl.Manager) error{
+		servicequota.SetupWebhookWithManager,
+	} {
+		if err := setup(mgr); err != nil {
+			return err
+		}
+	}
+	return nil
+}

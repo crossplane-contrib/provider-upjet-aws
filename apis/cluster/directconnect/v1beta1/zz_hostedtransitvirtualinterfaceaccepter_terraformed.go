@@ -36,6 +36,8 @@ func (tr *HostedTransitVirtualInterfaceAccepter) GetObservation() (map[string]an
 
 // SetObservation for this HostedTransitVirtualInterfaceAccepter
 func (tr *HostedTransitVirtualInterfaceAccepter) SetObservation(obs map[string]any) error {
+	tr.Status.AtProvider.Tags = nil
+	tr.Status.AtProvider.TagsAll = nil
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err

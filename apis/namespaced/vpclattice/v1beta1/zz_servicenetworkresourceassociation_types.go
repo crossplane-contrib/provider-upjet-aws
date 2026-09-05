@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ServiceNetworkResourceAssociationDNSEntryInitParameters struct {
@@ -41,11 +40,11 @@ type ServiceNetworkResourceAssociationInitParameters struct {
 
 	// Reference to a ResourceConfiguration in vpclattice to populate resourceConfigurationIdentifier.
 	// +kubebuilder:validation:Optional
-	ResourceConfigurationIdentifierRef *v1.NamespacedReference `json:"resourceConfigurationIdentifierRef,omitempty" tf:"-"`
+	ResourceConfigurationIdentifierRef *v2.NamespacedReference `json:"resourceConfigurationIdentifierRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceConfiguration in vpclattice to populate resourceConfigurationIdentifier.
 	// +kubebuilder:validation:Optional
-	ResourceConfigurationIdentifierSelector *v1.NamespacedSelector `json:"resourceConfigurationIdentifierSelector,omitempty" tf:"-"`
+	ResourceConfigurationIdentifierSelector *v2.NamespacedSelector `json:"resourceConfigurationIdentifierSelector,omitempty" tf:"-"`
 
 	// Identifier of the Service Network to associate the Resource to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/vpclattice/v1beta1.ServiceNetwork
@@ -54,11 +53,11 @@ type ServiceNetworkResourceAssociationInitParameters struct {
 
 	// Reference to a ServiceNetwork in vpclattice to populate serviceNetworkIdentifier.
 	// +kubebuilder:validation:Optional
-	ServiceNetworkIdentifierRef *v1.NamespacedReference `json:"serviceNetworkIdentifierRef,omitempty" tf:"-"`
+	ServiceNetworkIdentifierRef *v2.NamespacedReference `json:"serviceNetworkIdentifierRef,omitempty" tf:"-"`
 
 	// Selector for a ServiceNetwork in vpclattice to populate serviceNetworkIdentifier.
 	// +kubebuilder:validation:Optional
-	ServiceNetworkIdentifierSelector *v1.NamespacedSelector `json:"serviceNetworkIdentifierSelector,omitempty" tf:"-"`
+	ServiceNetworkIdentifierSelector *v2.NamespacedSelector `json:"serviceNetworkIdentifierSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -117,11 +116,11 @@ type ServiceNetworkResourceAssociationParameters struct {
 
 	// Reference to a ResourceConfiguration in vpclattice to populate resourceConfigurationIdentifier.
 	// +kubebuilder:validation:Optional
-	ResourceConfigurationIdentifierRef *v1.NamespacedReference `json:"resourceConfigurationIdentifierRef,omitempty" tf:"-"`
+	ResourceConfigurationIdentifierRef *v2.NamespacedReference `json:"resourceConfigurationIdentifierRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceConfiguration in vpclattice to populate resourceConfigurationIdentifier.
 	// +kubebuilder:validation:Optional
-	ResourceConfigurationIdentifierSelector *v1.NamespacedSelector `json:"resourceConfigurationIdentifierSelector,omitempty" tf:"-"`
+	ResourceConfigurationIdentifierSelector *v2.NamespacedSelector `json:"resourceConfigurationIdentifierSelector,omitempty" tf:"-"`
 
 	// Identifier of the Service Network to associate the Resource to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/vpclattice/v1beta1.ServiceNetwork
@@ -131,11 +130,11 @@ type ServiceNetworkResourceAssociationParameters struct {
 
 	// Reference to a ServiceNetwork in vpclattice to populate serviceNetworkIdentifier.
 	// +kubebuilder:validation:Optional
-	ServiceNetworkIdentifierRef *v1.NamespacedReference `json:"serviceNetworkIdentifierRef,omitempty" tf:"-"`
+	ServiceNetworkIdentifierRef *v2.NamespacedReference `json:"serviceNetworkIdentifierRef,omitempty" tf:"-"`
 
 	// Selector for a ServiceNetwork in vpclattice to populate serviceNetworkIdentifier.
 	// +kubebuilder:validation:Optional
-	ServiceNetworkIdentifierSelector *v1.NamespacedSelector `json:"serviceNetworkIdentifierSelector,omitempty" tf:"-"`
+	ServiceNetworkIdentifierSelector *v2.NamespacedSelector `json:"serviceNetworkIdentifierSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -162,8 +161,8 @@ type ServiceNetworkResourceAssociationSpec struct {
 
 // ServiceNetworkResourceAssociationStatus defines the observed state of ServiceNetworkResourceAssociation.
 type ServiceNetworkResourceAssociationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ServiceNetworkResourceAssociationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ServiceNetworkResourceAssociationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

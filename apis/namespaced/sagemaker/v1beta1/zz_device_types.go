@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type DeviceDeviceInitParameters struct {
@@ -64,11 +63,11 @@ type DeviceInitParameters struct {
 
 	// Reference to a DeviceFleet in sagemaker to populate deviceFleetName.
 	// +kubebuilder:validation:Optional
-	DeviceFleetNameRef *v1.NamespacedReference `json:"deviceFleetNameRef,omitempty" tf:"-"`
+	DeviceFleetNameRef *v2.NamespacedReference `json:"deviceFleetNameRef,omitempty" tf:"-"`
 
 	// Selector for a DeviceFleet in sagemaker to populate deviceFleetName.
 	// +kubebuilder:validation:Optional
-	DeviceFleetNameSelector *v1.NamespacedSelector `json:"deviceFleetNameSelector,omitempty" tf:"-"`
+	DeviceFleetNameSelector *v2.NamespacedSelector `json:"deviceFleetNameSelector,omitempty" tf:"-"`
 }
 
 type DeviceObservation struct {
@@ -104,11 +103,11 @@ type DeviceParameters struct {
 
 	// Reference to a DeviceFleet in sagemaker to populate deviceFleetName.
 	// +kubebuilder:validation:Optional
-	DeviceFleetNameRef *v1.NamespacedReference `json:"deviceFleetNameRef,omitempty" tf:"-"`
+	DeviceFleetNameRef *v2.NamespacedReference `json:"deviceFleetNameRef,omitempty" tf:"-"`
 
 	// Selector for a DeviceFleet in sagemaker to populate deviceFleetName.
 	// +kubebuilder:validation:Optional
-	DeviceFleetNameSelector *v1.NamespacedSelector `json:"deviceFleetNameSelector,omitempty" tf:"-"`
+	DeviceFleetNameSelector *v2.NamespacedSelector `json:"deviceFleetNameSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -135,8 +134,8 @@ type DeviceSpec struct {
 
 // DeviceStatus defines the observed state of Device.
 type DeviceStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        DeviceObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               DeviceObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

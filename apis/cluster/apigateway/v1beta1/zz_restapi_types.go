@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type RestAPIEndpointConfigurationInitParameters struct {
@@ -29,11 +29,11 @@ type RestAPIEndpointConfigurationInitParameters struct {
 
 	// References to VPCEndpoint in ec2 to populate vpcEndpointIds.
 	// +kubebuilder:validation:Optional
-	VPCEndpointIdsRefs []v1.Reference `json:"vpcEndpointIdsRefs,omitempty" tf:"-"`
+	VPCEndpointIdsRefs []v2.Reference `json:"vpcEndpointIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of VPCEndpoint in ec2 to populate vpcEndpointIds.
 	// +kubebuilder:validation:Optional
-	VPCEndpointIdsSelector *v1.Selector `json:"vpcEndpointIdsSelector,omitempty" tf:"-"`
+	VPCEndpointIdsSelector *v2.Selector `json:"vpcEndpointIdsSelector,omitempty" tf:"-"`
 }
 
 type RestAPIEndpointConfigurationObservation struct {
@@ -68,11 +68,11 @@ type RestAPIEndpointConfigurationParameters struct {
 
 	// References to VPCEndpoint in ec2 to populate vpcEndpointIds.
 	// +kubebuilder:validation:Optional
-	VPCEndpointIdsRefs []v1.Reference `json:"vpcEndpointIdsRefs,omitempty" tf:"-"`
+	VPCEndpointIdsRefs []v2.Reference `json:"vpcEndpointIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of VPCEndpoint in ec2 to populate vpcEndpointIds.
 	// +kubebuilder:validation:Optional
-	VPCEndpointIdsSelector *v1.Selector `json:"vpcEndpointIdsSelector,omitempty" tf:"-"`
+	VPCEndpointIdsSelector *v2.Selector `json:"vpcEndpointIdsSelector,omitempty" tf:"-"`
 }
 
 type RestAPIInitParameters struct {
@@ -92,6 +92,9 @@ type RestAPIInitParameters struct {
 	// Whether clients can invoke your API by using the default execute-api endpoint. By default, clients can invoke your API with the default https://{api_id}.execute-api.{region}.amazonaws.com endpoint. To require that clients use a custom domain name to invoke your API, disable the default endpoint. Defaults to false. If importing an OpenAPI specification via the body argument, this corresponds to the x-amazon-apigateway-endpoint-configuration extension disableExecuteApiEndpoint property. If the argument value is true and is different than the OpenAPI value, the argument value will override the OpenAPI value.
 	DisableExecuteAPIEndpoint *bool `json:"disableExecuteApiEndpoint,omitempty" tf:"disable_execute_api_endpoint,omitempty"`
 
+	// Endpoint access mode for the REST API. Valid values are BASIC and STRICT. Only available for REST APIs that use a security_policy value beginning with SecurityPolicy_ and is required when one of those values is configured.
+	EndpointAccessMode *string `json:"endpointAccessMode,omitempty" tf:"endpoint_access_mode,omitempty"`
+
 	// Configuration block defining API endpoint configuration including endpoint type. Defined below.
 	EndpointConfiguration []RestAPIEndpointConfigurationInitParameters `json:"endpointConfiguration,omitempty" tf:"endpoint_configuration,omitempty"`
 
@@ -110,6 +113,9 @@ type RestAPIInitParameters struct {
 
 	// Mode of the PutRestApi operation when importing an OpenAPI specification via the body argument (create or update operation). Valid values are merge and overwrite. If unspecificed, defaults to overwrite (for backwards compatibility). This corresponds to the x-amazon-apigateway-put-integration-method extension. If the argument value is provided and is different than the OpenAPI value, the argument value will override the OpenAPI value.
 	PutRestAPIMode *string `json:"putRestApiMode,omitempty" tf:"put_rest_api_mode,omitempty"`
+
+	// TLS version + cipher suite for the REST API's default execute-api endpoint. Must be configured for drift detection. When set to a value beginning with SecurityPolicy_, endpoint_access_mode must also be configured. For a list of valid security policies, see CreateRestApi in the Amazon API Gateway API Reference.
+	SecurityPolicy *string `json:"securityPolicy,omitempty" tf:"security_policy,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -138,6 +144,9 @@ type RestAPIObservation struct {
 
 	// Whether clients can invoke your API by using the default execute-api endpoint. By default, clients can invoke your API with the default https://{api_id}.execute-api.{region}.amazonaws.com endpoint. To require that clients use a custom domain name to invoke your API, disable the default endpoint. Defaults to false. If importing an OpenAPI specification via the body argument, this corresponds to the x-amazon-apigateway-endpoint-configuration extension disableExecuteApiEndpoint property. If the argument value is true and is different than the OpenAPI value, the argument value will override the OpenAPI value.
 	DisableExecuteAPIEndpoint *bool `json:"disableExecuteApiEndpoint,omitempty" tf:"disable_execute_api_endpoint,omitempty"`
+
+	// Endpoint access mode for the REST API. Valid values are BASIC and STRICT. Only available for REST APIs that use a security_policy value beginning with SecurityPolicy_ and is required when one of those values is configured.
+	EndpointAccessMode *string `json:"endpointAccessMode,omitempty" tf:"endpoint_access_mode,omitempty"`
 
 	// Configuration block defining API endpoint configuration including endpoint type. Defined below.
 	EndpointConfiguration []RestAPIEndpointConfigurationObservation `json:"endpointConfiguration,omitempty" tf:"endpoint_configuration,omitempty"`
@@ -176,6 +185,9 @@ type RestAPIObservation struct {
 	// Resource ID of the REST API's root
 	RootResourceID *string `json:"rootResourceId,omitempty" tf:"root_resource_id,omitempty"`
 
+	// TLS version + cipher suite for the REST API's default execute-api endpoint. Must be configured for drift detection. When set to a value beginning with SecurityPolicy_, endpoint_access_mode must also be configured. For a list of valid security policies, see CreateRestApi in the Amazon API Gateway API Reference.
+	SecurityPolicy *string `json:"securityPolicy,omitempty" tf:"security_policy,omitempty"`
+
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -207,6 +219,10 @@ type RestAPIParameters struct {
 	// +kubebuilder:validation:Optional
 	DisableExecuteAPIEndpoint *bool `json:"disableExecuteApiEndpoint,omitempty" tf:"disable_execute_api_endpoint,omitempty"`
 
+	// Endpoint access mode for the REST API. Valid values are BASIC and STRICT. Only available for REST APIs that use a security_policy value beginning with SecurityPolicy_ and is required when one of those values is configured.
+	// +kubebuilder:validation:Optional
+	EndpointAccessMode *string `json:"endpointAccessMode,omitempty" tf:"endpoint_access_mode,omitempty"`
+
 	// Configuration block defining API endpoint configuration including endpoint type. Defined below.
 	// +kubebuilder:validation:Optional
 	EndpointConfiguration []RestAPIEndpointConfigurationParameters `json:"endpointConfiguration,omitempty" tf:"endpoint_configuration,omitempty"`
@@ -237,6 +253,10 @@ type RestAPIParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
+	// TLS version + cipher suite for the REST API's default execute-api endpoint. Must be configured for drift detection. When set to a value beginning with SecurityPolicy_, endpoint_access_mode must also be configured. For a list of valid security policies, see CreateRestApi in the Amazon API Gateway API Reference.
+	// +kubebuilder:validation:Optional
+	SecurityPolicy *string `json:"securityPolicy,omitempty" tf:"security_policy,omitempty"`
+
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
@@ -245,8 +265,8 @@ type RestAPIParameters struct {
 
 // RestAPISpec defines the desired state of RestAPI
 type RestAPISpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     RestAPIParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   RestAPIParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -262,8 +282,8 @@ type RestAPISpec struct {
 
 // RestAPIStatus defines the observed state of RestAPI.
 type RestAPIStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        RestAPIObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               RestAPIObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -24,9 +24,9 @@ import (
 	"k8s.io/apimachinery/pkg/runtime"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 	"github.com/crossplane/crossplane-runtime/v2/pkg/fieldpath"
 	"github.com/crossplane/crossplane-runtime/v2/pkg/resource"
+	xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 
 	"github.com/upbound/provider-aws/v2/apis/namespaced/v1beta1"
 	"github.com/upbound/provider-aws/v2/internal/version"
@@ -362,8 +362,8 @@ func UseDefault(ctx context.Context, region string) (*aws.Config, error) {
 type xpWebIdentityTokenRetriever struct {
 	ctx           context.Context
 	kube          client.Client
-	tokenSource   v1.CredentialsSource
-	tokenSelector v1.CommonCredentialSelectors
+	tokenSource   xpv2.CredentialsSource
+	tokenSelector xpv2.CommonCredentialSelectors
 }
 
 func (x *xpWebIdentityTokenRetriever) GetIdentityToken() ([]byte, error) {
@@ -420,7 +420,7 @@ func UseWebIdentityToken(ctx context.Context, region string, pcs *v1beta1.Provid
 		ctx:         ctx,
 		kube:        kube,
 		tokenSource: pcs.Credentials.WebIdentity.TokenConfig.Source,
-		tokenSelector: v1.CommonCredentialSelectors{
+		tokenSelector: xpv2.CommonCredentialSelectors{
 			Fs:        pcs.Credentials.WebIdentity.TokenConfig.Fs,
 			SecretRef: pcs.Credentials.WebIdentity.TokenConfig.SecretRef,
 		},

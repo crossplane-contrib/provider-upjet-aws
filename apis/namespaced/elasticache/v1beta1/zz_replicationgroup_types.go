@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type NodeGroupConfigurationInitParameters struct {
@@ -28,7 +27,7 @@ type NodeGroupConfigurationInitParameters struct {
 	// List of availability zones for the replica nodes.
 	ReplicaAvailabilityZones []*string `json:"replicaAvailabilityZones,omitempty" tf:"replica_availability_zones,omitempty"`
 
-	// Number of replica nodes in this node group.
+	// Number of replica nodes in this node group. Default AWS limit is 5. Higher values may be available with a quota increase.
 	ReplicaCount *float64 `json:"replicaCount,omitempty" tf:"replica_count,omitempty"`
 
 	// List of ARNs of the Outposts for the replica nodes.
@@ -52,7 +51,7 @@ type NodeGroupConfigurationObservation struct {
 	// List of availability zones for the replica nodes.
 	ReplicaAvailabilityZones []*string `json:"replicaAvailabilityZones,omitempty" tf:"replica_availability_zones,omitempty"`
 
-	// Number of replica nodes in this node group.
+	// Number of replica nodes in this node group. Default AWS limit is 5. Higher values may be available with a quota increase.
 	ReplicaCount *float64 `json:"replicaCount,omitempty" tf:"replica_count,omitempty"`
 
 	// List of ARNs of the Outposts for the replica nodes.
@@ -80,7 +79,7 @@ type NodeGroupConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	ReplicaAvailabilityZones []*string `json:"replicaAvailabilityZones,omitempty" tf:"replica_availability_zones,omitempty"`
 
-	// Number of replica nodes in this node group.
+	// Number of replica nodes in this node group. Default AWS limit is 5. Higher values may be available with a quota increase.
 	// +kubebuilder:validation:Optional
 	ReplicaCount *float64 `json:"replicaCount,omitempty" tf:"replica_count,omitempty"`
 
@@ -105,7 +104,7 @@ type ReplicationGroupInitParameters struct {
 
 	// Password used to access a password protected server. Can be specified only if transit_encryption_enabled = true.
 	// If you set autoGenerateAuthToken to true, the Secret referenced here will be created or updated with generated auth token if it does not already contain one.
-	AuthTokenSecretRef *v1.LocalSecretKeySelector `json:"authTokenSecretRef,omitempty" tf:"-"`
+	AuthTokenSecretRef *v2.LocalSecretKeySelector `json:"authTokenSecretRef,omitempty" tf:"-"`
 
 	// Strategy used when modifying auth_token on an existing replication group. Not used during initial create. Valid values are SET, ROTATE, and DELETE. If omitted during an auth token change, AWS defaults to ROTATE. If value is DELETE then auth_token must be omitted.
 	AuthTokenUpdateStrategy *string `json:"authTokenUpdateStrategy,omitempty" tf:"auth_token_update_strategy,omitempty"`
@@ -126,6 +125,9 @@ type ReplicationGroupInitParameters struct {
 
 	// User-created description for the replication group. Must not be empty.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Specifies the durability mode for the replication group. Valid values are default, async, sync, or disabled. Requires cluster mode enabled and Valkey 9.0 or higher.
+	Durability *string `json:"durability,omitempty" tf:"durability,omitempty"`
 
 	// Name of the cache engine to be used for the clusters in this replication group.
 	// Valid values are redis or valkey.
@@ -150,11 +152,11 @@ type ReplicationGroupInitParameters struct {
 
 	// Reference to a GlobalReplicationGroup in elasticache to populate globalReplicationGroupId.
 	// +kubebuilder:validation:Optional
-	GlobalReplicationGroupIDRef *v1.NamespacedReference `json:"globalReplicationGroupIdRef,omitempty" tf:"-"`
+	GlobalReplicationGroupIDRef *v2.NamespacedReference `json:"globalReplicationGroupIdRef,omitempty" tf:"-"`
 
 	// Selector for a GlobalReplicationGroup in elasticache to populate globalReplicationGroupId.
 	// +kubebuilder:validation:Optional
-	GlobalReplicationGroupIDSelector *v1.NamespacedSelector `json:"globalReplicationGroupIdSelector,omitempty" tf:"-"`
+	GlobalReplicationGroupIDSelector *v2.NamespacedSelector `json:"globalReplicationGroupIdSelector,omitempty" tf:"-"`
 
 	// The IP version to advertise in the discovery protocol. Valid values are ipv4 or ipv6.
 	IPDiscovery *string `json:"ipDiscovery,omitempty" tf:"ip_discovery,omitempty"`
@@ -165,11 +167,11 @@ type ReplicationGroupInitParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDRef *v1.NamespacedReference `json:"kmsKeyIdRef,omitempty" tf:"-"`
+	KMSKeyIDRef *v2.NamespacedReference `json:"kmsKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDSelector *v1.NamespacedSelector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
+	KMSKeyIDSelector *v2.NamespacedSelector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
 	// Specifies the destination and format of Redis OSS/Valkey SLOWLOG or Redis OSS/Valkey Engine Log. See the documentation on Amazon ElastiCache. See Log Delivery Configuration below for more details.
 	LogDeliveryConfiguration []ReplicationGroupLogDeliveryConfigurationInitParameters `json:"logDeliveryConfiguration,omitempty" tf:"log_delivery_configuration,omitempty"`
@@ -216,18 +218,18 @@ type ReplicationGroupInitParameters struct {
 
 	// Number of replica nodes in each node group.
 	// Changing this number will trigger a resizing operation before other settings modifications.
-	// Valid values are 0 to 5.
+	// Default AWS limit is 5. Higher values may be available with a quota increase.
 	// Conflicts with num_cache_clusters.
 	// Can only be set if num_node_groups is set.
 	ReplicasPerNodeGroup *float64 `json:"replicasPerNodeGroup,omitempty" tf:"replicas_per_node_group,omitempty"`
 
 	// References to SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIDRefs []v1.NamespacedReference `json:"securityGroupIdRefs,omitempty" tf:"-"`
+	SecurityGroupIDRefs []v2.NamespacedReference `json:"securityGroupIdRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIDSelector *v1.NamespacedSelector `json:"securityGroupIdSelector,omitempty" tf:"-"`
+	SecurityGroupIDSelector *v2.NamespacedSelector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 
 	// IDs of one or more Amazon VPC security groups associated with this replication group. Use this parameter only when you are creating a replication group in an Amazon Virtual Private Cloud.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
@@ -259,11 +261,11 @@ type ReplicationGroupInitParameters struct {
 
 	// Reference to a SubnetGroup in elasticache to populate subnetGroupName.
 	// +kubebuilder:validation:Optional
-	SubnetGroupNameRef *v1.NamespacedReference `json:"subnetGroupNameRef,omitempty" tf:"-"`
+	SubnetGroupNameRef *v2.NamespacedReference `json:"subnetGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a SubnetGroup in elasticache to populate subnetGroupName.
 	// +kubebuilder:validation:Optional
-	SubnetGroupNameSelector *v1.NamespacedSelector `json:"subnetGroupNameSelector,omitempty" tf:"-"`
+	SubnetGroupNameSelector *v2.NamespacedSelector `json:"subnetGroupNameSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -373,6 +375,9 @@ type ReplicationGroupObservation struct {
 	// User-created description for the replication group. Must not be empty.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// Specifies the durability mode for the replication group. Valid values are default, async, sync, or disabled. Requires cluster mode enabled and Valkey 9.0 or higher.
+	Durability *string `json:"durability,omitempty" tf:"durability,omitempty"`
+
 	// Name of the cache engine to be used for the clusters in this replication group.
 	// Valid values are redis or valkey.
 	// Default is redis.
@@ -463,7 +468,7 @@ type ReplicationGroupObservation struct {
 
 	// Number of replica nodes in each node group.
 	// Changing this number will trigger a resizing operation before other settings modifications.
-	// Valid values are 0 to 5.
+	// Default AWS limit is 5. Higher values may be available with a quota increase.
 	// Conflicts with num_cache_clusters.
 	// Can only be set if num_node_groups is set.
 	ReplicasPerNodeGroup *float64 `json:"replicasPerNodeGroup,omitempty" tf:"replicas_per_node_group,omitempty"`
@@ -531,7 +536,7 @@ type ReplicationGroupParameters struct {
 	// Password used to access a password protected server. Can be specified only if transit_encryption_enabled = true.
 	// If you set autoGenerateAuthToken to true, the Secret referenced here will be created or updated with generated auth token if it does not already contain one.
 	// +kubebuilder:validation:Optional
-	AuthTokenSecretRef *v1.LocalSecretKeySelector `json:"authTokenSecretRef,omitempty" tf:"-"`
+	AuthTokenSecretRef *v2.LocalSecretKeySelector `json:"authTokenSecretRef,omitempty" tf:"-"`
 
 	// Strategy used when modifying auth_token on an existing replication group. Not used during initial create. Valid values are SET, ROTATE, and DELETE. If omitted during an auth token change, AWS defaults to ROTATE. If value is DELETE then auth_token must be omitted.
 	// +kubebuilder:validation:Optional
@@ -565,6 +570,10 @@ type ReplicationGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// Specifies the durability mode for the replication group. Valid values are default, async, sync, or disabled. Requires cluster mode enabled and Valkey 9.0 or higher.
+	// +kubebuilder:validation:Optional
+	Durability *string `json:"durability,omitempty" tf:"durability,omitempty"`
+
 	// Name of the cache engine to be used for the clusters in this replication group.
 	// Valid values are redis or valkey.
 	// Default is redis.
@@ -592,11 +601,11 @@ type ReplicationGroupParameters struct {
 
 	// Reference to a GlobalReplicationGroup in elasticache to populate globalReplicationGroupId.
 	// +kubebuilder:validation:Optional
-	GlobalReplicationGroupIDRef *v1.NamespacedReference `json:"globalReplicationGroupIdRef,omitempty" tf:"-"`
+	GlobalReplicationGroupIDRef *v2.NamespacedReference `json:"globalReplicationGroupIdRef,omitempty" tf:"-"`
 
 	// Selector for a GlobalReplicationGroup in elasticache to populate globalReplicationGroupId.
 	// +kubebuilder:validation:Optional
-	GlobalReplicationGroupIDSelector *v1.NamespacedSelector `json:"globalReplicationGroupIdSelector,omitempty" tf:"-"`
+	GlobalReplicationGroupIDSelector *v2.NamespacedSelector `json:"globalReplicationGroupIdSelector,omitempty" tf:"-"`
 
 	// The IP version to advertise in the discovery protocol. Valid values are ipv4 or ipv6.
 	// +kubebuilder:validation:Optional
@@ -609,11 +618,11 @@ type ReplicationGroupParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDRef *v1.NamespacedReference `json:"kmsKeyIdRef,omitempty" tf:"-"`
+	KMSKeyIDRef *v2.NamespacedReference `json:"kmsKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDSelector *v1.NamespacedSelector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
+	KMSKeyIDSelector *v2.NamespacedSelector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
 	// Specifies the destination and format of Redis OSS/Valkey SLOWLOG or Redis OSS/Valkey Engine Log. See the documentation on Amazon ElastiCache. See Log Delivery Configuration below for more details.
 	// +kubebuilder:validation:Optional
@@ -677,7 +686,7 @@ type ReplicationGroupParameters struct {
 
 	// Number of replica nodes in each node group.
 	// Changing this number will trigger a resizing operation before other settings modifications.
-	// Valid values are 0 to 5.
+	// Default AWS limit is 5. Higher values may be available with a quota increase.
 	// Conflicts with num_cache_clusters.
 	// Can only be set if num_node_groups is set.
 	// +kubebuilder:validation:Optional
@@ -685,11 +694,11 @@ type ReplicationGroupParameters struct {
 
 	// References to SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIDRefs []v1.NamespacedReference `json:"securityGroupIdRefs,omitempty" tf:"-"`
+	SecurityGroupIDRefs []v2.NamespacedReference `json:"securityGroupIdRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIDSelector *v1.NamespacedSelector `json:"securityGroupIdSelector,omitempty" tf:"-"`
+	SecurityGroupIDSelector *v2.NamespacedSelector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 
 	// IDs of one or more Amazon VPC security groups associated with this replication group. Use this parameter only when you are creating a replication group in an Amazon Virtual Private Cloud.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
@@ -728,11 +737,11 @@ type ReplicationGroupParameters struct {
 
 	// Reference to a SubnetGroup in elasticache to populate subnetGroupName.
 	// +kubebuilder:validation:Optional
-	SubnetGroupNameRef *v1.NamespacedReference `json:"subnetGroupNameRef,omitempty" tf:"-"`
+	SubnetGroupNameRef *v2.NamespacedReference `json:"subnetGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a SubnetGroup in elasticache to populate subnetGroupName.
 	// +kubebuilder:validation:Optional
-	SubnetGroupNameSelector *v1.NamespacedSelector `json:"subnetGroupNameSelector,omitempty" tf:"-"`
+	SubnetGroupNameSelector *v2.NamespacedSelector `json:"subnetGroupNameSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -777,8 +786,8 @@ type ReplicationGroupSpec struct {
 
 // ReplicationGroupStatus defines the observed state of ReplicationGroup.
 type ReplicationGroupStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ReplicationGroupObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ReplicationGroupObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

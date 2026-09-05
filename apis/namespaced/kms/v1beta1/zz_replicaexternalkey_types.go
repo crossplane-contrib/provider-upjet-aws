@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ReplicaExternalKeyInitParameters struct {
@@ -33,7 +32,7 @@ type ReplicaExternalKeyInitParameters struct {
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// Base64 encoded 256-bit symmetric encryption key material to import. The KMS key is permanently associated with this key material. The same key material can be reimported, but you cannot import different key material.
-	KeyMaterialBase64SecretRef *v1.LocalSecretKeySelector `json:"keyMaterialBase64SecretRef,omitempty" tf:"-"`
+	KeyMaterialBase64SecretRef *v2.LocalSecretKeySelector `json:"keyMaterialBase64SecretRef,omitempty" tf:"-"`
 
 	// The key policy to attach to the KMS key. If you do not specify a key policy, AWS KMS attaches the default key policy to the KMS key.
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
@@ -45,11 +44,11 @@ type ReplicaExternalKeyInitParameters struct {
 
 	// Reference to a ExternalKey in kms to populate primaryKeyArn.
 	// +kubebuilder:validation:Optional
-	PrimaryKeyArnRef *v1.NamespacedReference `json:"primaryKeyArnRef,omitempty" tf:"-"`
+	PrimaryKeyArnRef *v2.NamespacedReference `json:"primaryKeyArnRef,omitempty" tf:"-"`
 
 	// Selector for a ExternalKey in kms to populate primaryKeyArn.
 	// +kubebuilder:validation:Optional
-	PrimaryKeyArnSelector *v1.NamespacedSelector `json:"primaryKeyArnSelector,omitempty" tf:"-"`
+	PrimaryKeyArnSelector *v2.NamespacedSelector `json:"primaryKeyArnSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -140,7 +139,7 @@ type ReplicaExternalKeyParameters struct {
 
 	// Base64 encoded 256-bit symmetric encryption key material to import. The KMS key is permanently associated with this key material. The same key material can be reimported, but you cannot import different key material.
 	// +kubebuilder:validation:Optional
-	KeyMaterialBase64SecretRef *v1.LocalSecretKeySelector `json:"keyMaterialBase64SecretRef,omitempty" tf:"-"`
+	KeyMaterialBase64SecretRef *v2.LocalSecretKeySelector `json:"keyMaterialBase64SecretRef,omitempty" tf:"-"`
 
 	// The key policy to attach to the KMS key. If you do not specify a key policy, AWS KMS attaches the default key policy to the KMS key.
 	// +kubebuilder:validation:Optional
@@ -154,11 +153,11 @@ type ReplicaExternalKeyParameters struct {
 
 	// Reference to a ExternalKey in kms to populate primaryKeyArn.
 	// +kubebuilder:validation:Optional
-	PrimaryKeyArnRef *v1.NamespacedReference `json:"primaryKeyArnRef,omitempty" tf:"-"`
+	PrimaryKeyArnRef *v2.NamespacedReference `json:"primaryKeyArnRef,omitempty" tf:"-"`
 
 	// Selector for a ExternalKey in kms to populate primaryKeyArn.
 	// +kubebuilder:validation:Optional
-	PrimaryKeyArnSelector *v1.NamespacedSelector `json:"primaryKeyArnSelector,omitempty" tf:"-"`
+	PrimaryKeyArnSelector *v2.NamespacedSelector `json:"primaryKeyArnSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -194,8 +193,8 @@ type ReplicaExternalKeySpec struct {
 
 // ReplicaExternalKeyStatus defines the observed state of ReplicaExternalKey.
 type ReplicaExternalKeyStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ReplicaExternalKeyObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ReplicaExternalKeyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

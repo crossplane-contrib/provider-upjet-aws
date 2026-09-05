@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AccessConfigInitParameters struct {
@@ -116,11 +116,11 @@ type ClusterInitParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.Reference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// Configuration block with storage configuration for EKS Auto Mode. Detailed below.
 	StorageConfig *StorageConfigInitParameters `json:"storageConfig,omitempty" tf:"storage_config,omitempty"`
@@ -296,11 +296,11 @@ type ClusterParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.Reference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// Configuration block with storage configuration for EKS Auto Mode. Detailed below.
 	// +kubebuilder:validation:Optional
@@ -372,38 +372,48 @@ type ComputeConfigParameters struct {
 
 type ControlPlanePlacementInitParameters struct {
 
-	// The name of the placement group for the Kubernetes control plane instances. This setting can't be changed after cluster creation.
+	// Name of the placement group for the Kubernetes control plane instances. This setting can't be changed after cluster creation.
 	GroupName *string `json:"groupName,omitempty" tf:"group_name,omitempty"`
+
+	// Placement group spread level for etcd instances. Valid values: host, rack.
+	SpreadLevel *string `json:"spreadLevel,omitempty" tf:"spread_level,omitempty"`
 }
 
 type ControlPlanePlacementObservation struct {
 
-	// The name of the placement group for the Kubernetes control plane instances. This setting can't be changed after cluster creation.
+	// Name of the placement group for the Kubernetes control plane instances. This setting can't be changed after cluster creation.
 	GroupName *string `json:"groupName,omitempty" tf:"group_name,omitempty"`
+
+	// Placement group spread level for etcd instances. Valid values: host, rack.
+	SpreadLevel *string `json:"spreadLevel,omitempty" tf:"spread_level,omitempty"`
 }
 
 type ControlPlanePlacementParameters struct {
 
-	// The name of the placement group for the Kubernetes control plane instances. This setting can't be changed after cluster creation.
+	// Name of the placement group for the Kubernetes control plane instances. This setting can't be changed after cluster creation.
 	// +kubebuilder:validation:Optional
-	GroupName *string `json:"groupName" tf:"group_name,omitempty"`
+	GroupName *string `json:"groupName,omitempty" tf:"group_name,omitempty"`
+
+	// Placement group spread level for etcd instances. Valid values: host, rack.
+	// +kubebuilder:validation:Optional
+	SpreadLevel *string `json:"spreadLevel,omitempty" tf:"spread_level,omitempty"`
 }
 
 type ControlPlaneScalingConfigInitParameters struct {
 
-	// The control plane scaling tier. Valid values are standard, tier-xl, tier-2xl, or tier-4xl. Defaults to standard. For more information about each tier, see EKS Provisioned Control Plane.
+	// The control plane scaling tier. Valid values are standard, tier-xl, tier-2xl, tier-4xl, or tier-8xl. Defaults to standard. For more information about each tier, see EKS Provisioned Control Plane.
 	Tier *string `json:"tier,omitempty" tf:"tier,omitempty"`
 }
 
 type ControlPlaneScalingConfigObservation struct {
 
-	// The control plane scaling tier. Valid values are standard, tier-xl, tier-2xl, or tier-4xl. Defaults to standard. For more information about each tier, see EKS Provisioned Control Plane.
+	// The control plane scaling tier. Valid values are standard, tier-xl, tier-2xl, tier-4xl, or tier-8xl. Defaults to standard. For more information about each tier, see EKS Provisioned Control Plane.
 	Tier *string `json:"tier,omitempty" tf:"tier,omitempty"`
 }
 
 type ControlPlaneScalingConfigParameters struct {
 
-	// The control plane scaling tier. Valid values are standard, tier-xl, tier-2xl, or tier-4xl. Defaults to standard. For more information about each tier, see EKS Provisioned Control Plane.
+	// The control plane scaling tier. Valid values are standard, tier-xl, tier-2xl, tier-4xl, or tier-8xl. Defaults to standard. For more information about each tier, see EKS Provisioned Control Plane.
 	// +kubebuilder:validation:Optional
 	Tier *string `json:"tier,omitempty" tf:"tier,omitempty"`
 }
@@ -457,6 +467,25 @@ type EncryptionConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	Resources []*string `json:"resources" tf:"resources,omitempty"`
+}
+
+type EtcdPlacementInitParameters struct {
+
+	// Placement group spread level for etcd instances. Valid values: host, rack.
+	SpreadLevel *string `json:"spreadLevel,omitempty" tf:"spread_level,omitempty"`
+}
+
+type EtcdPlacementObservation struct {
+
+	// Placement group spread level for etcd instances. Valid values: host, rack.
+	SpreadLevel *string `json:"spreadLevel,omitempty" tf:"spread_level,omitempty"`
+}
+
+type EtcdPlacementParameters struct {
+
+	// Placement group spread level for etcd instances. Valid values: host, rack.
+	// +kubebuilder:validation:Optional
+	SpreadLevel *string `json:"spreadLevel,omitempty" tf:"spread_level,omitempty"`
 }
 
 type IdentityInitParameters struct {
@@ -534,6 +563,13 @@ type OutpostConfigInitParameters struct {
 	// The control_plane_placement configuration block supports the following arguments:
 	ControlPlanePlacement *ControlPlanePlacementInitParameters `json:"controlPlanePlacement,omitempty" tf:"control_plane_placement,omitempty"`
 
+	// Amazon EC2 instance type for etcd instances of your local Amazon EKS cluster on AWS Outposts.
+	EtcdInstanceType *string `json:"etcdInstanceType,omitempty" tf:"etcd_instance_type,omitempty"`
+
+	// Placement configuration for the etcd instances of your local Amazon EKS cluster on an AWS Outpost.
+	// The etcd_placement configuration block supports the following arguments:
+	EtcdPlacement *EtcdPlacementInitParameters `json:"etcdPlacement,omitempty" tf:"etcd_placement,omitempty"`
+
 	// The ARN of the Outpost that you want to use for your local Amazon EKS cluster on Outposts. This argument is a list of arns, but only a single Outpost ARN is supported currently.
 	// +listType=set
 	OutpostArns []*string `json:"outpostArns,omitempty" tf:"outpost_arns,omitempty"`
@@ -547,6 +583,13 @@ type OutpostConfigObservation struct {
 	// An object representing the placement configuration for all the control plane instances of your local Amazon EKS cluster on AWS Outpost.
 	// The control_plane_placement configuration block supports the following arguments:
 	ControlPlanePlacement *ControlPlanePlacementObservation `json:"controlPlanePlacement,omitempty" tf:"control_plane_placement,omitempty"`
+
+	// Amazon EC2 instance type for etcd instances of your local Amazon EKS cluster on AWS Outposts.
+	EtcdInstanceType *string `json:"etcdInstanceType,omitempty" tf:"etcd_instance_type,omitempty"`
+
+	// Placement configuration for the etcd instances of your local Amazon EKS cluster on an AWS Outpost.
+	// The etcd_placement configuration block supports the following arguments:
+	EtcdPlacement *EtcdPlacementObservation `json:"etcdPlacement,omitempty" tf:"etcd_placement,omitempty"`
 
 	// The ARN of the Outpost that you want to use for your local Amazon EKS cluster on Outposts. This argument is a list of arns, but only a single Outpost ARN is supported currently.
 	// +listType=set
@@ -563,6 +606,15 @@ type OutpostConfigParameters struct {
 	// The control_plane_placement configuration block supports the following arguments:
 	// +kubebuilder:validation:Optional
 	ControlPlanePlacement *ControlPlanePlacementParameters `json:"controlPlanePlacement,omitempty" tf:"control_plane_placement,omitempty"`
+
+	// Amazon EC2 instance type for etcd instances of your local Amazon EKS cluster on AWS Outposts.
+	// +kubebuilder:validation:Optional
+	EtcdInstanceType *string `json:"etcdInstanceType,omitempty" tf:"etcd_instance_type,omitempty"`
+
+	// Placement configuration for the etcd instances of your local Amazon EKS cluster on an AWS Outpost.
+	// The etcd_placement configuration block supports the following arguments:
+	// +kubebuilder:validation:Optional
+	EtcdPlacement *EtcdPlacementParameters `json:"etcdPlacement,omitempty" tf:"etcd_placement,omitempty"`
 
 	// The ARN of the Outpost that you want to use for your local Amazon EKS cluster on Outposts. This argument is a list of arns, but only a single Outpost ARN is supported currently.
 	// +kubebuilder:validation:Optional
@@ -611,7 +663,7 @@ type RemoteNetworkConfigParameters struct {
 
 	// Configuration block with remote node network configuration for EKS Hybrid Nodes. Detailed below.
 	// +kubebuilder:validation:Optional
-	RemoteNodeNetworks *RemoteNodeNetworksParameters `json:"remoteNodeNetworks" tf:"remote_node_networks,omitempty"`
+	RemoteNodeNetworks *RemoteNodeNetworksParameters `json:"remoteNodeNetworks,omitempty" tf:"remote_node_networks,omitempty"`
 
 	// Configuration block with remote pod network configuration for EKS Hybrid Nodes. Detailed below.
 	// +kubebuilder:validation:Optional
@@ -702,6 +754,9 @@ type UpgradePolicyParameters struct {
 
 type VPCConfigInitParameters struct {
 
+	// Egress mode for the EKS control plane. Valid values are AWS_MANAGED and CUSTOMER_ROUTED. Defaults to AWS_MANAGED. Changing from CUSTOMER_ROUTED back to AWS_MANAGED forces a new resource.
+	ControlPlaneEgressMode *string `json:"controlPlaneEgressMode,omitempty" tf:"control_plane_egress_mode,omitempty"`
+
 	// Whether the Amazon EKS private API server endpoint is enabled. Default is false.
 	EndpointPrivateAccess *bool `json:"endpointPrivateAccess,omitempty" tf:"endpoint_private_access,omitempty"`
 
@@ -714,11 +769,11 @@ type VPCConfigInitParameters struct {
 
 	// References to SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIDRefs []v1.Reference `json:"securityGroupIdRefs,omitempty" tf:"-"`
+	SecurityGroupIDRefs []v2.Reference `json:"securityGroupIdRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIDSelector *v1.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
+	SecurityGroupIDSelector *v2.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 
 	// List of security group IDs for the cross-account elastic network interfaces that Amazon EKS creates to use to allow communication between your worker nodes and the Kubernetes control plane.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.SecurityGroup
@@ -729,11 +784,11 @@ type VPCConfigInitParameters struct {
 
 	// References to Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIDRefs []v1.Reference `json:"subnetIdRefs,omitempty" tf:"-"`
+	SubnetIDRefs []v2.Reference `json:"subnetIdRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// List of subnet IDs. Must be in at least two different availability zones. Amazon EKS creates cross-account elastic network interfaces in these subnets to allow communication between your worker nodes and the Kubernetes control plane.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Subnet
@@ -747,6 +802,9 @@ type VPCConfigObservation struct {
 
 	// (Computed) Cluster security group that is created by Amazon EKS for the cluster. Managed node groups use this security group for control-plane-to-data-plane communication.
 	ClusterSecurityGroupID *string `json:"clusterSecurityGroupId,omitempty" tf:"cluster_security_group_id,omitempty"`
+
+	// Egress mode for the EKS control plane. Valid values are AWS_MANAGED and CUSTOMER_ROUTED. Defaults to AWS_MANAGED. Changing from CUSTOMER_ROUTED back to AWS_MANAGED forces a new resource.
+	ControlPlaneEgressMode *string `json:"controlPlaneEgressMode,omitempty" tf:"control_plane_egress_mode,omitempty"`
 
 	// Whether the Amazon EKS private API server endpoint is enabled. Default is false.
 	EndpointPrivateAccess *bool `json:"endpointPrivateAccess,omitempty" tf:"endpoint_private_access,omitempty"`
@@ -772,6 +830,10 @@ type VPCConfigObservation struct {
 
 type VPCConfigParameters struct {
 
+	// Egress mode for the EKS control plane. Valid values are AWS_MANAGED and CUSTOMER_ROUTED. Defaults to AWS_MANAGED. Changing from CUSTOMER_ROUTED back to AWS_MANAGED forces a new resource.
+	// +kubebuilder:validation:Optional
+	ControlPlaneEgressMode *string `json:"controlPlaneEgressMode,omitempty" tf:"control_plane_egress_mode,omitempty"`
+
 	// Whether the Amazon EKS private API server endpoint is enabled. Default is false.
 	// +kubebuilder:validation:Optional
 	EndpointPrivateAccess *bool `json:"endpointPrivateAccess,omitempty" tf:"endpoint_private_access,omitempty"`
@@ -787,11 +849,11 @@ type VPCConfigParameters struct {
 
 	// References to SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIDRefs []v1.Reference `json:"securityGroupIdRefs,omitempty" tf:"-"`
+	SecurityGroupIDRefs []v2.Reference `json:"securityGroupIdRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIDSelector *v1.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
+	SecurityGroupIDSelector *v2.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 
 	// List of security group IDs for the cross-account elastic network interfaces that Amazon EKS creates to use to allow communication between your worker nodes and the Kubernetes control plane.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.SecurityGroup
@@ -803,11 +865,11 @@ type VPCConfigParameters struct {
 
 	// References to Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIDRefs []v1.Reference `json:"subnetIdRefs,omitempty" tf:"-"`
+	SubnetIDRefs []v2.Reference `json:"subnetIdRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// List of subnet IDs. Must be in at least two different availability zones. Amazon EKS creates cross-account elastic network interfaces in these subnets to allow communication between your worker nodes and the Kubernetes control plane.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Subnet
@@ -839,8 +901,8 @@ type ZonalShiftConfigParameters struct {
 
 // ClusterSpec defines the desired state of Cluster
 type ClusterSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ClusterParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ClusterParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -856,8 +918,8 @@ type ClusterSpec struct {
 
 // ClusterStatus defines the observed state of Cluster.
 type ClusterStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ClusterObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ClusterObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

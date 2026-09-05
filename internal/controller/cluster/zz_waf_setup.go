@@ -67,3 +67,25 @@ func SetupGated_waf(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupWebhookWithManager_waf registers conversion webhooks for all resource kinds in the group.
+func SetupWebhookWithManager_waf(mgr ctrl.Manager) error {
+	for _, setup := range []func(ctrl.Manager) error{
+		bytematchset.SetupWebhookWithManager,
+		geomatchset.SetupWebhookWithManager,
+		ipset.SetupWebhookWithManager,
+		ratebasedrule.SetupWebhookWithManager,
+		regexmatchset.SetupWebhookWithManager,
+		regexpatternset.SetupWebhookWithManager,
+		rule.SetupWebhookWithManager,
+		sizeconstraintset.SetupWebhookWithManager,
+		sqlinjectionmatchset.SetupWebhookWithManager,
+		webacl.SetupWebhookWithManager,
+		xssmatchset.SetupWebhookWithManager,
+	} {
+		if err := setup(mgr); err != nil {
+			return err
+		}
+	}
+	return nil
+}

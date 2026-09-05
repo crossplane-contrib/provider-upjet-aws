@@ -350,6 +350,63 @@ spec:
                           type: object
                       type: object
                     type: array
+                  logDelivery:
+                    description: Configuration block for delivering replicator logs
+                      to customer destinations. Detailed below.
+                    properties:
+                      replicatorLogDelivery:
+                        description: Configuration block for replicator log delivery.
+                          Detailed below.
+                        properties:
+                          cloudwatchLogs:
+                            description: Configuration block for replicator log delivery
+                              to Amazon CloudWatch Logs. Detailed below.
+                            properties:
+                              enabled:
+                                description: Boolean whether to enable log delivery
+                                  to CloudWatch Logs.
+                                type: boolean
+                              logGroup:
+                                description: Name of CloudWatch Logs log group. Required
+                                  if enabled is true. If enabled is false, this value
+                                  must not be set.
+                                type: string
+                            type: object
+                          firehose:
+                            description: Configuration block for replicator log delivery
+                              to Amazon Data Firehose. Detailed below.
+                            properties:
+                              deliveryStream:
+                                description: Name of the Firehose delivery stream.
+                                  Required if enabled is true. If enabled is false,
+                                  this value must not be set.
+                                type: string
+                              enabled:
+                                description: Boolean whether to enable log delivery
+                                  to Firehose.
+                                type: boolean
+                            type: object
+                          s3:
+                            description: Configuration block for replicator log delivery
+                              to Amazon S3. Detailed below.
+                            properties:
+                              bucket:
+                                description: Name of the S3 bucket. Required if enabled
+                                  is true. If enabled is false, this value must not
+                                  be set.
+                                type: string
+                              enabled:
+                                description: Boolean whether to enable log delivery
+                                  to S3.
+                                type: boolean
+                              prefix:
+                                description: Prefix to use when storing replicator
+                                  logs in S3. If enabled is false, this value must
+                                  not be set.
+                                type: string
+                            type: object
+                        type: object
+                    type: object
                   region:
                     description: |-
                       Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -364,6 +421,18 @@ spec:
                         description: Configuration relating to consumer group replication.
                         items:
                           properties:
+                            consumerGroupOffsetSyncMode:
+                              description: Consumer group offset synchronization mode.
+                                Valid values are LEGACY and ENHANCED. With LEGACY,
+                                offsets are synchronized when producers write to the
+                                source cluster. With ENHANCED, consumer offsets are
+                                synchronized regardless of producer location. ENHANCED
+                                requires a corresponding replicator that replicates
+                                data from the target cluster to the source cluster
+                                and requires topic_name_configuration.type to be set
+                                to IDENTICAL. Defaults to LEGACY. Changing this value
+                                will force a new resource.
+                              type: string
                             consumerGroupsToExclude:
                               description: List of regular expression patterns indicating
                                 the consumer groups that should not be replicated.
@@ -1014,6 +1083,63 @@ spec:
                           type: object
                       type: object
                     type: array
+                  logDelivery:
+                    description: Configuration block for delivering replicator logs
+                      to customer destinations. Detailed below.
+                    properties:
+                      replicatorLogDelivery:
+                        description: Configuration block for replicator log delivery.
+                          Detailed below.
+                        properties:
+                          cloudwatchLogs:
+                            description: Configuration block for replicator log delivery
+                              to Amazon CloudWatch Logs. Detailed below.
+                            properties:
+                              enabled:
+                                description: Boolean whether to enable log delivery
+                                  to CloudWatch Logs.
+                                type: boolean
+                              logGroup:
+                                description: Name of CloudWatch Logs log group. Required
+                                  if enabled is true. If enabled is false, this value
+                                  must not be set.
+                                type: string
+                            type: object
+                          firehose:
+                            description: Configuration block for replicator log delivery
+                              to Amazon Data Firehose. Detailed below.
+                            properties:
+                              deliveryStream:
+                                description: Name of the Firehose delivery stream.
+                                  Required if enabled is true. If enabled is false,
+                                  this value must not be set.
+                                type: string
+                              enabled:
+                                description: Boolean whether to enable log delivery
+                                  to Firehose.
+                                type: boolean
+                            type: object
+                          s3:
+                            description: Configuration block for replicator log delivery
+                              to Amazon S3. Detailed below.
+                            properties:
+                              bucket:
+                                description: Name of the S3 bucket. Required if enabled
+                                  is true. If enabled is false, this value must not
+                                  be set.
+                                type: string
+                              enabled:
+                                description: Boolean whether to enable log delivery
+                                  to S3.
+                                type: boolean
+                              prefix:
+                                description: Prefix to use when storing replicator
+                                  logs in S3. If enabled is false, this value must
+                                  not be set.
+                                type: string
+                            type: object
+                        type: object
+                    type: object
                   replicationInfoList:
                     description: A list of replication configurations, where each
                       configuration targets a given source cluster to target cluster
@@ -1023,6 +1149,18 @@ spec:
                         description: Configuration relating to consumer group replication.
                         items:
                           properties:
+                            consumerGroupOffsetSyncMode:
+                              description: Consumer group offset synchronization mode.
+                                Valid values are LEGACY and ENHANCED. With LEGACY,
+                                offsets are synchronized when producers write to the
+                                source cluster. With ENHANCED, consumer offsets are
+                                synchronized regardless of producer location. ENHANCED
+                                requires a corresponding replicator that replicates
+                                data from the target cluster to the source cluster
+                                and requires topic_name_configuration.type to be set
+                                to IDENTICAL. Defaults to LEGACY. Changing this value
+                                will force a new resource.
+                              type: string
                             consumerGroupsToExclude:
                               description: List of regular expression patterns indicating
                                 the consumer groups that should not be replicated.
@@ -1489,6 +1627,63 @@ spec:
                           type: object
                       type: object
                     type: array
+                  logDelivery:
+                    description: Configuration block for delivering replicator logs
+                      to customer destinations. Detailed below.
+                    properties:
+                      replicatorLogDelivery:
+                        description: Configuration block for replicator log delivery.
+                          Detailed below.
+                        properties:
+                          cloudwatchLogs:
+                            description: Configuration block for replicator log delivery
+                              to Amazon CloudWatch Logs. Detailed below.
+                            properties:
+                              enabled:
+                                description: Boolean whether to enable log delivery
+                                  to CloudWatch Logs.
+                                type: boolean
+                              logGroup:
+                                description: Name of CloudWatch Logs log group. Required
+                                  if enabled is true. If enabled is false, this value
+                                  must not be set.
+                                type: string
+                            type: object
+                          firehose:
+                            description: Configuration block for replicator log delivery
+                              to Amazon Data Firehose. Detailed below.
+                            properties:
+                              deliveryStream:
+                                description: Name of the Firehose delivery stream.
+                                  Required if enabled is true. If enabled is false,
+                                  this value must not be set.
+                                type: string
+                              enabled:
+                                description: Boolean whether to enable log delivery
+                                  to Firehose.
+                                type: boolean
+                            type: object
+                          s3:
+                            description: Configuration block for replicator log delivery
+                              to Amazon S3. Detailed below.
+                            properties:
+                              bucket:
+                                description: Name of the S3 bucket. Required if enabled
+                                  is true. If enabled is false, this value must not
+                                  be set.
+                                type: string
+                              enabled:
+                                description: Boolean whether to enable log delivery
+                                  to S3.
+                                type: boolean
+                              prefix:
+                                description: Prefix to use when storing replicator
+                                  logs in S3. If enabled is false, this value must
+                                  not be set.
+                                type: string
+                            type: object
+                        type: object
+                    type: object
                   region:
                     description: |-
                       Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -1503,6 +1698,18 @@ spec:
                         description: Configuration relating to consumer group replication.
                         items:
                           properties:
+                            consumerGroupOffsetSyncMode:
+                              description: Consumer group offset synchronization mode.
+                                Valid values are LEGACY and ENHANCED. With LEGACY,
+                                offsets are synchronized when producers write to the
+                                source cluster. With ENHANCED, consumer offsets are
+                                synchronized regardless of producer location. ENHANCED
+                                requires a corresponding replicator that replicates
+                                data from the target cluster to the source cluster
+                                and requires topic_name_configuration.type to be set
+                                to IDENTICAL. Defaults to LEGACY. Changing this value
+                                will force a new resource.
+                              type: string
                             consumerGroupsToExclude:
                               description: List of regular expression patterns indicating
                                 the consumer groups that should not be replicated.
@@ -1664,6 +1871,13 @@ spec:
                 x-kubernetes-list-map-keys:
                 - type
                 x-kubernetes-list-type: map
+              lastHandledReconcileAt:
+                description: |-
+                  LastHandledReconcileAt holds the value of the most recent
+                  reconcile-requested-at annotation token that the controller has
+                  processed. Users can compare this to the annotation to determine
+                  whether a reconcile request has been handled.
+                type: string
               observedGeneration:
                 description: |-
                   ObservedGeneration is the latest metadata.generation

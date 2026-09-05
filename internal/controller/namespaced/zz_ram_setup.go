@@ -46,3 +46,18 @@ func SetupGated_ram(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupWebhookWithManager_ram registers conversion webhooks for all resource kinds in the group.
+func SetupWebhookWithManager_ram(mgr ctrl.Manager) error {
+	for _, setup := range []func(ctrl.Manager) error{
+		principalassociation.SetupWebhookWithManager,
+		resourceassociation.SetupWebhookWithManager,
+		resourceshare.SetupWebhookWithManager,
+		resourceshareaccepter.SetupWebhookWithManager,
+	} {
+		if err := setup(mgr); err != nil {
+			return err
+		}
+	}
+	return nil
+}

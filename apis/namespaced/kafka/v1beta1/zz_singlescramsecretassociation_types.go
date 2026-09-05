@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type SingleScramSecretAssociationInitParameters struct {
@@ -42,11 +41,11 @@ type SingleScramSecretAssociationParameters struct {
 
 	// Reference to a Cluster in kafka to populate clusterArn.
 	// +kubebuilder:validation:Optional
-	ClusterArnRef *v1.NamespacedReference `json:"clusterArnRef,omitempty" tf:"-"`
+	ClusterArnRef *v2.NamespacedReference `json:"clusterArnRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in kafka to populate clusterArn.
 	// +kubebuilder:validation:Optional
-	ClusterArnSelector *v1.NamespacedSelector `json:"clusterArnSelector,omitempty" tf:"-"`
+	ClusterArnSelector *v2.NamespacedSelector `json:"clusterArnSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -61,11 +60,11 @@ type SingleScramSecretAssociationParameters struct {
 
 	// Reference to a Secret in secretsmanager to populate secretArn.
 	// +kubebuilder:validation:Optional
-	SecretArnRef *v1.NamespacedReference `json:"secretArnRef,omitempty" tf:"-"`
+	SecretArnRef *v2.NamespacedReference `json:"secretArnRef,omitempty" tf:"-"`
 
 	// Selector for a Secret in secretsmanager to populate secretArn.
 	// +kubebuilder:validation:Optional
-	SecretArnSelector *v1.NamespacedSelector `json:"secretArnSelector,omitempty" tf:"-"`
+	SecretArnSelector *v2.NamespacedSelector `json:"secretArnSelector,omitempty" tf:"-"`
 }
 
 // SingleScramSecretAssociationSpec defines the desired state of SingleScramSecretAssociation
@@ -87,8 +86,8 @@ type SingleScramSecretAssociationSpec struct {
 
 // SingleScramSecretAssociationStatus defines the observed state of SingleScramSecretAssociation.
 type SingleScramSecretAssociationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SingleScramSecretAssociationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SingleScramSecretAssociationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

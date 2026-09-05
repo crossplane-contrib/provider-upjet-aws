@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type DefaultActionInitParameters struct {
@@ -101,11 +100,11 @@ type ListenerInitParameters struct {
 
 	// Reference to a Service in vpclattice to populate serviceIdentifier.
 	// +kubebuilder:validation:Optional
-	ServiceIdentifierRef *v1.NamespacedReference `json:"serviceIdentifierRef,omitempty" tf:"-"`
+	ServiceIdentifierRef *v2.NamespacedReference `json:"serviceIdentifierRef,omitempty" tf:"-"`
 
 	// Selector for a Service in vpclattice to populate serviceIdentifier.
 	// +kubebuilder:validation:Optional
-	ServiceIdentifierSelector *v1.NamespacedSelector `json:"serviceIdentifierSelector,omitempty" tf:"-"`
+	ServiceIdentifierSelector *v2.NamespacedSelector `json:"serviceIdentifierSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -195,11 +194,11 @@ type ListenerParameters struct {
 
 	// Reference to a Service in vpclattice to populate serviceIdentifier.
 	// +kubebuilder:validation:Optional
-	ServiceIdentifierRef *v1.NamespacedReference `json:"serviceIdentifierRef,omitempty" tf:"-"`
+	ServiceIdentifierRef *v2.NamespacedReference `json:"serviceIdentifierRef,omitempty" tf:"-"`
 
 	// Selector for a Service in vpclattice to populate serviceIdentifier.
 	// +kubebuilder:validation:Optional
-	ServiceIdentifierSelector *v1.NamespacedSelector `json:"serviceIdentifierSelector,omitempty" tf:"-"`
+	ServiceIdentifierSelector *v2.NamespacedSelector `json:"serviceIdentifierSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -216,11 +215,11 @@ type TargetGroupsInitParameters struct {
 
 	// Reference to a TargetGroup in vpclattice to populate targetGroupIdentifier.
 	// +kubebuilder:validation:Optional
-	TargetGroupIdentifierRef *v1.NamespacedReference `json:"targetGroupIdentifierRef,omitempty" tf:"-"`
+	TargetGroupIdentifierRef *v2.NamespacedReference `json:"targetGroupIdentifierRef,omitempty" tf:"-"`
 
 	// Selector for a TargetGroup in vpclattice to populate targetGroupIdentifier.
 	// +kubebuilder:validation:Optional
-	TargetGroupIdentifierSelector *v1.NamespacedSelector `json:"targetGroupIdentifierSelector,omitempty" tf:"-"`
+	TargetGroupIdentifierSelector *v2.NamespacedSelector `json:"targetGroupIdentifierSelector,omitempty" tf:"-"`
 
 	// Determines how requests are distributed to the target group. Only required if you specify multiple target groups for a forward action. For example, if you specify two target groups, one with a
 	// weight of 10 and the other with a weight of 20, the target group with a weight of 20 receives twice as many requests as the other target group. See Listener rules in the AWS documentation for additional examples. Default: 100.
@@ -247,11 +246,11 @@ type TargetGroupsParameters struct {
 
 	// Reference to a TargetGroup in vpclattice to populate targetGroupIdentifier.
 	// +kubebuilder:validation:Optional
-	TargetGroupIdentifierRef *v1.NamespacedReference `json:"targetGroupIdentifierRef,omitempty" tf:"-"`
+	TargetGroupIdentifierRef *v2.NamespacedReference `json:"targetGroupIdentifierRef,omitempty" tf:"-"`
 
 	// Selector for a TargetGroup in vpclattice to populate targetGroupIdentifier.
 	// +kubebuilder:validation:Optional
-	TargetGroupIdentifierSelector *v1.NamespacedSelector `json:"targetGroupIdentifierSelector,omitempty" tf:"-"`
+	TargetGroupIdentifierSelector *v2.NamespacedSelector `json:"targetGroupIdentifierSelector,omitempty" tf:"-"`
 
 	// Determines how requests are distributed to the target group. Only required if you specify multiple target groups for a forward action. For example, if you specify two target groups, one with a
 	// weight of 10 and the other with a weight of 20, the target group with a weight of 20 receives twice as many requests as the other target group. See Listener rules in the AWS documentation for additional examples. Default: 100.
@@ -278,8 +277,8 @@ type ListenerSpec struct {
 
 // ListenerStatus defines the observed state of Listener.
 type ListenerStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ListenerObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ListenerObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

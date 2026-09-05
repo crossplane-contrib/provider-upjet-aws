@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type DeliveryChannelInitParameters struct {
@@ -21,11 +21,11 @@ type DeliveryChannelInitParameters struct {
 
 	// Reference to a Bucket in s3 to populate s3BucketName.
 	// +kubebuilder:validation:Optional
-	S3BucketNameRef *v1.Reference `json:"s3BucketNameRef,omitempty" tf:"-"`
+	S3BucketNameRef *v2.Reference `json:"s3BucketNameRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate s3BucketName.
 	// +kubebuilder:validation:Optional
-	S3BucketNameSelector *v1.Selector `json:"s3BucketNameSelector,omitempty" tf:"-"`
+	S3BucketNameSelector *v2.Selector `json:"s3BucketNameSelector,omitempty" tf:"-"`
 
 	// The ARN of the AWS KMS key used to encrypt objects delivered by AWS Config. Must belong to the same Region as the destination S3 bucket.
 	S3KMSKeyArn *string `json:"s3KmsKeyArn,omitempty" tf:"s3_kms_key_arn,omitempty"`
@@ -79,11 +79,11 @@ type DeliveryChannelParameters struct {
 
 	// Reference to a Bucket in s3 to populate s3BucketName.
 	// +kubebuilder:validation:Optional
-	S3BucketNameRef *v1.Reference `json:"s3BucketNameRef,omitempty" tf:"-"`
+	S3BucketNameRef *v2.Reference `json:"s3BucketNameRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate s3BucketName.
 	// +kubebuilder:validation:Optional
-	S3BucketNameSelector *v1.Selector `json:"s3BucketNameSelector,omitempty" tf:"-"`
+	S3BucketNameSelector *v2.Selector `json:"s3BucketNameSelector,omitempty" tf:"-"`
 
 	// The ARN of the AWS KMS key used to encrypt objects delivered by AWS Config. Must belong to the same Region as the destination S3 bucket.
 	// +kubebuilder:validation:Optional
@@ -123,8 +123,8 @@ type SnapshotDeliveryPropertiesParameters struct {
 
 // DeliveryChannelSpec defines the desired state of DeliveryChannel
 type DeliveryChannelSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     DeliveryChannelParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   DeliveryChannelParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -140,8 +140,8 @@ type DeliveryChannelSpec struct {
 
 // DeliveryChannelStatus defines the observed state of DeliveryChannel.
 type DeliveryChannelStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        DeliveryChannelObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               DeliveryChannelObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

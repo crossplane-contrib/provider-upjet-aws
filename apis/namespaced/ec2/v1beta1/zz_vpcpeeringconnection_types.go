@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AccepterInitParameters struct {
@@ -59,11 +58,11 @@ type VPCPeeringConnectionInitParameters_2 struct {
 
 	// Reference to a VPC in ec2 to populate peerVpcId.
 	// +kubebuilder:validation:Optional
-	PeerVPCIDRef *v1.NamespacedReference `json:"peerVpcIdRef,omitempty" tf:"-"`
+	PeerVPCIDRef *v2.NamespacedReference `json:"peerVpcIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPC in ec2 to populate peerVpcId.
 	// +kubebuilder:validation:Optional
-	PeerVPCIDSelector *v1.NamespacedSelector `json:"peerVpcIdSelector,omitempty" tf:"-"`
+	PeerVPCIDSelector *v2.NamespacedSelector `json:"peerVpcIdSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -75,11 +74,11 @@ type VPCPeeringConnectionInitParameters_2 struct {
 
 	// Reference to a VPC in ec2 to populate vpcId.
 	// +kubebuilder:validation:Optional
-	VPCIDRef *v1.NamespacedReference `json:"vpcIdRef,omitempty" tf:"-"`
+	VPCIDRef *v2.NamespacedReference `json:"vpcIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPC in ec2 to populate vpcId.
 	// +kubebuilder:validation:Optional
-	VPCIDSelector *v1.NamespacedSelector `json:"vpcIdSelector,omitempty" tf:"-"`
+	VPCIDSelector *v2.NamespacedSelector `json:"vpcIdSelector,omitempty" tf:"-"`
 }
 
 type VPCPeeringConnectionObservation_2 struct {
@@ -151,11 +150,11 @@ type VPCPeeringConnectionParameters_2 struct {
 
 	// Reference to a VPC in ec2 to populate peerVpcId.
 	// +kubebuilder:validation:Optional
-	PeerVPCIDRef *v1.NamespacedReference `json:"peerVpcIdRef,omitempty" tf:"-"`
+	PeerVPCIDRef *v2.NamespacedReference `json:"peerVpcIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPC in ec2 to populate peerVpcId.
 	// +kubebuilder:validation:Optional
-	PeerVPCIDSelector *v1.NamespacedSelector `json:"peerVpcIdSelector,omitempty" tf:"-"`
+	PeerVPCIDSelector *v2.NamespacedSelector `json:"peerVpcIdSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -174,11 +173,11 @@ type VPCPeeringConnectionParameters_2 struct {
 
 	// Reference to a VPC in ec2 to populate vpcId.
 	// +kubebuilder:validation:Optional
-	VPCIDRef *v1.NamespacedReference `json:"vpcIdRef,omitempty" tf:"-"`
+	VPCIDRef *v2.NamespacedReference `json:"vpcIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPC in ec2 to populate vpcId.
 	// +kubebuilder:validation:Optional
-	VPCIDSelector *v1.NamespacedSelector `json:"vpcIdSelector,omitempty" tf:"-"`
+	VPCIDSelector *v2.NamespacedSelector `json:"vpcIdSelector,omitempty" tf:"-"`
 }
 
 // VPCPeeringConnectionSpec defines the desired state of VPCPeeringConnection
@@ -200,8 +199,8 @@ type VPCPeeringConnectionSpec struct {
 
 // VPCPeeringConnectionStatus defines the observed state of VPCPeeringConnection.
 type VPCPeeringConnectionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        VPCPeeringConnectionObservation_2 `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               VPCPeeringConnectionObservation_2 `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

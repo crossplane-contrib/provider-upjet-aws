@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AwsCloudMapInitParameters struct {
@@ -27,11 +27,11 @@ type AwsCloudMapInitParameters struct {
 
 	// Reference to a HTTPNamespace in servicediscovery to populate namespaceName.
 	// +kubebuilder:validation:Optional
-	NamespaceNameRef *v1.Reference `json:"namespaceNameRef,omitempty" tf:"-"`
+	NamespaceNameRef *v2.Reference `json:"namespaceNameRef,omitempty" tf:"-"`
 
 	// Selector for a HTTPNamespace in servicediscovery to populate namespaceName.
 	// +kubebuilder:validation:Optional
-	NamespaceNameSelector *v1.Selector `json:"namespaceNameSelector,omitempty" tf:"-"`
+	NamespaceNameSelector *v2.Selector `json:"namespaceNameSelector,omitempty" tf:"-"`
 
 	// attribute of the dns object to hostname.
 	ServiceName *string `json:"serviceName,omitempty" tf:"service_name,omitempty"`
@@ -67,11 +67,11 @@ type AwsCloudMapParameters struct {
 
 	// Reference to a HTTPNamespace in servicediscovery to populate namespaceName.
 	// +kubebuilder:validation:Optional
-	NamespaceNameRef *v1.Reference `json:"namespaceNameRef,omitempty" tf:"-"`
+	NamespaceNameRef *v2.Reference `json:"namespaceNameRef,omitempty" tf:"-"`
 
 	// Selector for a HTTPNamespace in servicediscovery to populate namespaceName.
 	// +kubebuilder:validation:Optional
-	NamespaceNameSelector *v1.Selector `json:"namespaceNameSelector,omitempty" tf:"-"`
+	NamespaceNameSelector *v2.Selector `json:"namespaceNameSelector,omitempty" tf:"-"`
 
 	// attribute of the dns object to hostname.
 	// +kubebuilder:validation:Optional
@@ -2024,11 +2024,11 @@ type VirtualNodeInitParameters struct {
 
 	// Reference to a Mesh in appmesh to populate meshName.
 	// +kubebuilder:validation:Optional
-	MeshNameRef *v1.Reference `json:"meshNameRef,omitempty" tf:"-"`
+	MeshNameRef *v2.Reference `json:"meshNameRef,omitempty" tf:"-"`
 
 	// Selector for a Mesh in appmesh to populate meshName.
 	// +kubebuilder:validation:Optional
-	MeshNameSelector *v1.Selector `json:"meshNameSelector,omitempty" tf:"-"`
+	MeshNameSelector *v2.Selector `json:"meshNameSelector,omitempty" tf:"-"`
 
 	// AWS account ID of the service mesh's owner. Defaults to the account ID the AWS provider is currently connected to.
 	MeshOwner *string `json:"meshOwner,omitempty" tf:"mesh_owner,omitempty"`
@@ -2096,11 +2096,11 @@ type VirtualNodeParameters struct {
 
 	// Reference to a Mesh in appmesh to populate meshName.
 	// +kubebuilder:validation:Optional
-	MeshNameRef *v1.Reference `json:"meshNameRef,omitempty" tf:"-"`
+	MeshNameRef *v2.Reference `json:"meshNameRef,omitempty" tf:"-"`
 
 	// Selector for a Mesh in appmesh to populate meshName.
 	// +kubebuilder:validation:Optional
-	MeshNameSelector *v1.Selector `json:"meshNameSelector,omitempty" tf:"-"`
+	MeshNameSelector *v2.Selector `json:"meshNameSelector,omitempty" tf:"-"`
 
 	// AWS account ID of the service mesh's owner. Defaults to the account ID the AWS provider is currently connected to.
 	// +kubebuilder:validation:Optional
@@ -2205,8 +2205,8 @@ type VirtualServiceClientPolicyParameters struct {
 
 // VirtualNodeSpec defines the desired state of VirtualNode
 type VirtualNodeSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     VirtualNodeParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   VirtualNodeParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -2222,8 +2222,8 @@ type VirtualNodeSpec struct {
 
 // VirtualNodeStatus defines the observed state of VirtualNode.
 type VirtualNodeStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        VirtualNodeObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               VirtualNodeObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

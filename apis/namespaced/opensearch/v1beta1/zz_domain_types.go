@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AdvancedSecurityOptionsInitParameters struct {
@@ -368,6 +367,25 @@ type ColdStorageOptionsParameters struct {
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 }
 
+type DeploymentStrategyOptionsInitParameters struct {
+
+	// Deployment strategy for the domain. Valid values: Default and CapacityOptimized.
+	DeploymentStrategy *string `json:"deploymentStrategy,omitempty" tf:"deployment_strategy,omitempty"`
+}
+
+type DeploymentStrategyOptionsObservation struct {
+
+	// Deployment strategy for the domain. Valid values: Default and CapacityOptimized.
+	DeploymentStrategy *string `json:"deploymentStrategy,omitempty" tf:"deployment_strategy,omitempty"`
+}
+
+type DeploymentStrategyOptionsParameters struct {
+
+	// Deployment strategy for the domain. Valid values: Default and CapacityOptimized.
+	// +kubebuilder:validation:Optional
+	DeploymentStrategy *string `json:"deploymentStrategy" tf:"deployment_strategy,omitempty"`
+}
+
 type DomainEndpointOptionsInitParameters struct {
 
 	// Fully qualified domain for your custom endpoint.
@@ -448,6 +466,9 @@ type DomainInitParameters struct {
 	// Configuration block for authenticating dashboard with Cognito. Detailed below.
 	CognitoOptions *CognitoOptionsInitParameters `json:"cognitoOptions,omitempty" tf:"cognito_options,omitempty"`
 
+	// Configuration block for the deployment strategy options of the domain. Detailed below.
+	DeploymentStrategyOptions *DeploymentStrategyOptionsInitParameters `json:"deploymentStrategyOptions,omitempty" tf:"deployment_strategy_options,omitempty"`
+
 	// Configuration block for domain endpoint HTTP(S) related options. Detailed below.
 	DomainEndpointOptions *DomainEndpointOptionsInitParameters `json:"domainEndpointOptions,omitempty" tf:"domain_endpoint_options,omitempty"`
 
@@ -460,7 +481,9 @@ type DomainInitParameters struct {
 	// Configuration block for encrypt at rest options. Only available for certain instance types. Detailed below.
 	EncryptAtRest *EncryptAtRestInitParameters `json:"encryptAtRest,omitempty" tf:"encrypt_at_rest,omitempty"`
 
-	// while Elasticsearch has elasticsearch_version
+	// Either Elasticsearch_X.Y or OpenSearch_X.Y to specify the engine version for the Amazon OpenSearch Service domain. For example, OpenSearch_1.0 or Elasticsearch_7.9.
+	// See Creating and managing Amazon OpenSearch Service domains.
+	// Defaults to the lastest version of OpenSearch.
 	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
 
 	// The IP address type for the endpoint. Valid values are ipv4 and dualstack.
@@ -494,7 +517,7 @@ type DomainInitParameters struct {
 
 type DomainObservation struct {
 
-	// , are prefaced with es: for both.
+	// IAM policy document specifying the access policies for the domain.
 	AccessPolicies *string `json:"accessPolicies,omitempty" tf:"access_policies,omitempty"`
 
 	// Key-value string pairs to specify advanced configuration options.
@@ -525,6 +548,9 @@ type DomainObservation struct {
 	// V2 domain endpoint for Dashboard that works with both IPv4 and IPv6 addresses, without https scheme.
 	DashboardEndpointV2 *string `json:"dashboardEndpointV2,omitempty" tf:"dashboard_endpoint_v2,omitempty"`
 
+	// Configuration block for the deployment strategy options of the domain. Detailed below.
+	DeploymentStrategyOptions *DeploymentStrategyOptionsObservation `json:"deploymentStrategyOptions,omitempty" tf:"deployment_strategy_options,omitempty"`
+
 	// Configuration block for domain endpoint HTTP(S) related options. Detailed below.
 	DomainEndpointOptions *DomainEndpointOptionsObservation `json:"domainEndpointOptions,omitempty" tf:"domain_endpoint_options,omitempty"`
 
@@ -549,7 +575,9 @@ type DomainObservation struct {
 	// V2 domain endpoint that works with both IPv4 and IPv6 addresses, used to submit index, search, and data upload requests.
 	EndpointV2 *string `json:"endpointV2,omitempty" tf:"endpoint_v2,omitempty"`
 
-	// while Elasticsearch has elasticsearch_version
+	// Either Elasticsearch_X.Y or OpenSearch_X.Y to specify the engine version for the Amazon OpenSearch Service domain. For example, OpenSearch_1.0 or Elasticsearch_7.9.
+	// See Creating and managing Amazon OpenSearch Service domains.
+	// Defaults to the lastest version of OpenSearch.
 	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -618,6 +646,10 @@ type DomainParameters struct {
 	// +kubebuilder:validation:Optional
 	CognitoOptions *CognitoOptionsParameters `json:"cognitoOptions,omitempty" tf:"cognito_options,omitempty"`
 
+	// Configuration block for the deployment strategy options of the domain. Detailed below.
+	// +kubebuilder:validation:Optional
+	DeploymentStrategyOptions *DeploymentStrategyOptionsParameters `json:"deploymentStrategyOptions,omitempty" tf:"deployment_strategy_options,omitempty"`
+
 	// Configuration block for domain endpoint HTTP(S) related options. Detailed below.
 	// +kubebuilder:validation:Optional
 	DomainEndpointOptions *DomainEndpointOptionsParameters `json:"domainEndpointOptions,omitempty" tf:"domain_endpoint_options,omitempty"`
@@ -634,7 +666,9 @@ type DomainParameters struct {
 	// +kubebuilder:validation:Optional
 	EncryptAtRest *EncryptAtRestParameters `json:"encryptAtRest,omitempty" tf:"encrypt_at_rest,omitempty"`
 
-	// while Elasticsearch has elasticsearch_version
+	// Either Elasticsearch_X.Y or OpenSearch_X.Y to specify the engine version for the Amazon OpenSearch Service domain. For example, OpenSearch_1.0 or Elasticsearch_7.9.
+	// See Creating and managing Amazon OpenSearch Service domains.
+	// Defaults to the lastest version of OpenSearch.
 	// +kubebuilder:validation:Optional
 	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
 
@@ -781,11 +815,11 @@ type EncryptAtRestInitParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDRef *v1.NamespacedReference `json:"kmsKeyIdRef,omitempty" tf:"-"`
+	KMSKeyIDRef *v2.NamespacedReference `json:"kmsKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDSelector *v1.NamespacedSelector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
+	KMSKeyIDSelector *v2.NamespacedSelector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 }
 
 type EncryptAtRestObservation struct {
@@ -811,11 +845,11 @@ type EncryptAtRestParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDRef *v1.NamespacedReference `json:"kmsKeyIdRef,omitempty" tf:"-"`
+	KMSKeyIDRef *v2.NamespacedReference `json:"kmsKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDSelector *v1.NamespacedSelector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
+	KMSKeyIDSelector *v2.NamespacedSelector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 }
 
 type IdentityCenterOptionsInitParameters struct {
@@ -872,7 +906,10 @@ type JwtOptionsInitParameters struct {
 	// Whether JWT authentication is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// PEM-encoded public key used to verify JWT signatures.
+	// URL endpoint that hosts the JSON Web Key Set (JWKS) containing public keys used to verify JWT signatures. This argument can be specified only with OpenSearch versions 3.3 and later. At least one of jwks_url or public_key must be specified when enabled is set to true.
+	JwksURL *string `json:"jwksUrl,omitempty" tf:"jwks_url,omitempty"`
+
+	// PEM-encoded public key used to verify JWT signatures. At least one of jwks_url or public_key must be specified when enabled is set to true. If both jwks_url and public_key are specified, public_key is ignored.
 	PublicKey *string `json:"publicKey,omitempty" tf:"public_key,omitempty"`
 
 	// Element of the JWT assertion to use for roles. Default is roles.
@@ -887,7 +924,10 @@ type JwtOptionsObservation struct {
 	// Whether JWT authentication is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// PEM-encoded public key used to verify JWT signatures.
+	// URL endpoint that hosts the JSON Web Key Set (JWKS) containing public keys used to verify JWT signatures. This argument can be specified only with OpenSearch versions 3.3 and later. At least one of jwks_url or public_key must be specified when enabled is set to true.
+	JwksURL *string `json:"jwksUrl,omitempty" tf:"jwks_url,omitempty"`
+
+	// PEM-encoded public key used to verify JWT signatures. At least one of jwks_url or public_key must be specified when enabled is set to true. If both jwks_url and public_key are specified, public_key is ignored.
 	PublicKey *string `json:"publicKey,omitempty" tf:"public_key,omitempty"`
 
 	// Element of the JWT assertion to use for roles. Default is roles.
@@ -903,7 +943,11 @@ type JwtOptionsParameters struct {
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// PEM-encoded public key used to verify JWT signatures.
+	// URL endpoint that hosts the JSON Web Key Set (JWKS) containing public keys used to verify JWT signatures. This argument can be specified only with OpenSearch versions 3.3 and later. At least one of jwks_url or public_key must be specified when enabled is set to true.
+	// +kubebuilder:validation:Optional
+	JwksURL *string `json:"jwksUrl,omitempty" tf:"jwks_url,omitempty"`
+
+	// PEM-encoded public key used to verify JWT signatures. At least one of jwks_url or public_key must be specified when enabled is set to true. If both jwks_url and public_key are specified, public_key is ignored.
 	// +kubebuilder:validation:Optional
 	PublicKey *string `json:"publicKey,omitempty" tf:"public_key,omitempty"`
 
@@ -925,11 +969,11 @@ type LogPublishingOptionsInitParameters struct {
 
 	// Reference to a Group in cloudwatchlogs to populate cloudwatchLogGroupArn.
 	// +kubebuilder:validation:Optional
-	CloudwatchLogGroupArnRef *v1.NamespacedReference `json:"cloudwatchLogGroupArnRef,omitempty" tf:"-"`
+	CloudwatchLogGroupArnRef *v2.NamespacedReference `json:"cloudwatchLogGroupArnRef,omitempty" tf:"-"`
 
 	// Selector for a Group in cloudwatchlogs to populate cloudwatchLogGroupArn.
 	// +kubebuilder:validation:Optional
-	CloudwatchLogGroupArnSelector *v1.NamespacedSelector `json:"cloudwatchLogGroupArnSelector,omitempty" tf:"-"`
+	CloudwatchLogGroupArnSelector *v2.NamespacedSelector `json:"cloudwatchLogGroupArnSelector,omitempty" tf:"-"`
 
 	// Whether given log publishing option is enabled or not.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
@@ -960,11 +1004,11 @@ type LogPublishingOptionsParameters struct {
 
 	// Reference to a Group in cloudwatchlogs to populate cloudwatchLogGroupArn.
 	// +kubebuilder:validation:Optional
-	CloudwatchLogGroupArnRef *v1.NamespacedReference `json:"cloudwatchLogGroupArnRef,omitempty" tf:"-"`
+	CloudwatchLogGroupArnRef *v2.NamespacedReference `json:"cloudwatchLogGroupArnRef,omitempty" tf:"-"`
 
 	// Selector for a Group in cloudwatchlogs to populate cloudwatchLogGroupArn.
 	// +kubebuilder:validation:Optional
-	CloudwatchLogGroupArnSelector *v1.NamespacedSelector `json:"cloudwatchLogGroupArnSelector,omitempty" tf:"-"`
+	CloudwatchLogGroupArnSelector *v2.NamespacedSelector `json:"cloudwatchLogGroupArnSelector,omitempty" tf:"-"`
 
 	// Whether given log publishing option is enabled or not.
 	// +kubebuilder:validation:Optional
@@ -1023,7 +1067,7 @@ type MasterUserOptionsInitParameters struct {
 	MasterUserName *string `json:"masterUserName,omitempty" tf:"master_user_name,omitempty"`
 
 	// Main user's password, which is stored in the Amazon OpenSearch Service domain's internal database. Only specify if internal_user_database_enabled is set to true.
-	MasterUserPasswordSecretRef *v1.LocalSecretKeySelector `json:"masterUserPasswordSecretRef,omitempty" tf:"-"`
+	MasterUserPasswordSecretRef *v2.LocalSecretKeySelector `json:"masterUserPasswordSecretRef,omitempty" tf:"-"`
 }
 
 type MasterUserOptionsObservation struct {
@@ -1047,7 +1091,7 @@ type MasterUserOptionsParameters struct {
 
 	// Main user's password, which is stored in the Amazon OpenSearch Service domain's internal database. Only specify if internal_user_database_enabled is set to true.
 	// +kubebuilder:validation:Optional
-	MasterUserPasswordSecretRef *v1.LocalSecretKeySelector `json:"masterUserPasswordSecretRef,omitempty" tf:"-"`
+	MasterUserPasswordSecretRef *v2.LocalSecretKeySelector `json:"masterUserPasswordSecretRef,omitempty" tf:"-"`
 }
 
 type NaturalLanguageQueryGenerationOptionsInitParameters struct {
@@ -1281,11 +1325,11 @@ type VPCOptionsInitParameters struct {
 
 	// References to SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIDRefs []v1.NamespacedReference `json:"securityGroupIdRefs,omitempty" tf:"-"`
+	SecurityGroupIDRefs []v2.NamespacedReference `json:"securityGroupIdRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIDSelector *v1.NamespacedSelector `json:"securityGroupIdSelector,omitempty" tf:"-"`
+	SecurityGroupIDSelector *v2.NamespacedSelector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 
 	// List of VPC Security Group IDs to be applied to the OpenSearch domain endpoints. If omitted, the default Security Group for the VPC will be used.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
@@ -1296,11 +1340,11 @@ type VPCOptionsInitParameters struct {
 
 	// References to Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIDRefs []v1.NamespacedReference `json:"subnetIdRefs,omitempty" tf:"-"`
+	SubnetIDRefs []v2.NamespacedReference `json:"subnetIdRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// List of VPC Subnet IDs for the OpenSearch domain endpoints to be created in.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Subnet
@@ -1332,11 +1376,11 @@ type VPCOptionsParameters struct {
 
 	// References to SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIDRefs []v1.NamespacedReference `json:"securityGroupIdRefs,omitempty" tf:"-"`
+	SecurityGroupIDRefs []v2.NamespacedReference `json:"securityGroupIdRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIDSelector *v1.NamespacedSelector `json:"securityGroupIdSelector,omitempty" tf:"-"`
+	SecurityGroupIDSelector *v2.NamespacedSelector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 
 	// List of VPC Security Group IDs to be applied to the OpenSearch domain endpoints. If omitted, the default Security Group for the VPC will be used.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
@@ -1348,11 +1392,11 @@ type VPCOptionsParameters struct {
 
 	// References to Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIDRefs []v1.NamespacedReference `json:"subnetIdRefs,omitempty" tf:"-"`
+	SubnetIDRefs []v2.NamespacedReference `json:"subnetIdRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// List of VPC Subnet IDs for the OpenSearch domain endpoints to be created in.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Subnet
@@ -1430,8 +1474,8 @@ type DomainSpec struct {
 
 // DomainStatus defines the observed state of Domain.
 type DomainStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        DomainObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               DomainObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

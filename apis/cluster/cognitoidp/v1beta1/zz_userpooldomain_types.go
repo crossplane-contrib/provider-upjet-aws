@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type UserPoolDomainInitParameters struct {
@@ -22,11 +22,11 @@ type UserPoolDomainInitParameters struct {
 
 	// Reference to a Certificate in acm to populate certificateArn.
 	// +kubebuilder:validation:Optional
-	CertificateArnRef *v1.Reference `json:"certificateArnRef,omitempty" tf:"-"`
+	CertificateArnRef *v2.Reference `json:"certificateArnRef,omitempty" tf:"-"`
 
 	// Selector for a Certificate in acm to populate certificateArn.
 	// +kubebuilder:validation:Optional
-	CertificateArnSelector *v1.Selector `json:"certificateArnSelector,omitempty" tf:"-"`
+	CertificateArnSelector *v2.Selector `json:"certificateArnSelector,omitempty" tf:"-"`
 
 	// For custom domains, this is the fully-qualified domain name, such as auth.example.com. For Amazon Cognito prefix domains, this is the prefix alone, such as auth.
 	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
@@ -40,11 +40,11 @@ type UserPoolDomainInitParameters struct {
 
 	// Reference to a UserPool in cognitoidp to populate userPoolId.
 	// +kubebuilder:validation:Optional
-	UserPoolIDRef *v1.Reference `json:"userPoolIdRef,omitempty" tf:"-"`
+	UserPoolIDRef *v2.Reference `json:"userPoolIdRef,omitempty" tf:"-"`
 
 	// Selector for a UserPool in cognitoidp to populate userPoolId.
 	// +kubebuilder:validation:Optional
-	UserPoolIDSelector *v1.Selector `json:"userPoolIdSelector,omitempty" tf:"-"`
+	UserPoolIDSelector *v2.Selector `json:"userPoolIdSelector,omitempty" tf:"-"`
 }
 
 type UserPoolDomainObservation struct {
@@ -96,11 +96,11 @@ type UserPoolDomainParameters struct {
 
 	// Reference to a Certificate in acm to populate certificateArn.
 	// +kubebuilder:validation:Optional
-	CertificateArnRef *v1.Reference `json:"certificateArnRef,omitempty" tf:"-"`
+	CertificateArnRef *v2.Reference `json:"certificateArnRef,omitempty" tf:"-"`
 
 	// Selector for a Certificate in acm to populate certificateArn.
 	// +kubebuilder:validation:Optional
-	CertificateArnSelector *v1.Selector `json:"certificateArnSelector,omitempty" tf:"-"`
+	CertificateArnSelector *v2.Selector `json:"certificateArnSelector,omitempty" tf:"-"`
 
 	// For custom domains, this is the fully-qualified domain name, such as auth.example.com. For Amazon Cognito prefix domains, this is the prefix alone, such as auth.
 	// +kubebuilder:validation:Optional
@@ -122,17 +122,17 @@ type UserPoolDomainParameters struct {
 
 	// Reference to a UserPool in cognitoidp to populate userPoolId.
 	// +kubebuilder:validation:Optional
-	UserPoolIDRef *v1.Reference `json:"userPoolIdRef,omitempty" tf:"-"`
+	UserPoolIDRef *v2.Reference `json:"userPoolIdRef,omitempty" tf:"-"`
 
 	// Selector for a UserPool in cognitoidp to populate userPoolId.
 	// +kubebuilder:validation:Optional
-	UserPoolIDSelector *v1.Selector `json:"userPoolIdSelector,omitempty" tf:"-"`
+	UserPoolIDSelector *v2.Selector `json:"userPoolIdSelector,omitempty" tf:"-"`
 }
 
 // UserPoolDomainSpec defines the desired state of UserPoolDomain
 type UserPoolDomainSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     UserPoolDomainParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   UserPoolDomainParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -148,8 +148,8 @@ type UserPoolDomainSpec struct {
 
 // UserPoolDomainStatus defines the observed state of UserPoolDomain.
 type UserPoolDomainStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        UserPoolDomainObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               UserPoolDomainObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

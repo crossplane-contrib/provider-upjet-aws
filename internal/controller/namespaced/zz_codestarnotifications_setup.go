@@ -37,3 +37,15 @@ func SetupGated_codestarnotifications(mgr ctrl.Manager, o controller.Options) er
 	}
 	return nil
 }
+
+// SetupWebhookWithManager_codestarnotifications registers conversion webhooks for all resource kinds in the group.
+func SetupWebhookWithManager_codestarnotifications(mgr ctrl.Manager) error {
+	for _, setup := range []func(ctrl.Manager) error{
+		notificationrule.SetupWebhookWithManager,
+	} {
+		if err := setup(mgr); err != nil {
+			return err
+		}
+	}
+	return nil
+}

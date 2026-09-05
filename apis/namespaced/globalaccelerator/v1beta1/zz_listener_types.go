@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ListenerInitParameters struct {
@@ -22,11 +21,11 @@ type ListenerInitParameters struct {
 
 	// Reference to a Accelerator in globalaccelerator to populate acceleratorArn.
 	// +kubebuilder:validation:Optional
-	AcceleratorArnRef *v1.NamespacedReference `json:"acceleratorArnRef,omitempty" tf:"-"`
+	AcceleratorArnRef *v2.NamespacedReference `json:"acceleratorArnRef,omitempty" tf:"-"`
 
 	// Selector for a Accelerator in globalaccelerator to populate acceleratorArn.
 	// +kubebuilder:validation:Optional
-	AcceleratorArnSelector *v1.NamespacedSelector `json:"acceleratorArnSelector,omitempty" tf:"-"`
+	AcceleratorArnSelector *v2.NamespacedSelector `json:"acceleratorArnSelector,omitempty" tf:"-"`
 
 	// Direct all requests from a user to the same endpoint. Valid values are NONE, SOURCE_IP. Default: NONE. If NONE, Global Accelerator uses the "five-tuple" properties of source IP address, source port, destination IP address, destination port, and protocol to select the hash value. If SOURCE_IP, Global Accelerator uses the "two-tuple" properties of source (client) IP address and destination IP address to select the hash value.
 	ClientAffinity *string `json:"clientAffinity,omitempty" tf:"client_affinity,omitempty"`
@@ -68,11 +67,11 @@ type ListenerParameters struct {
 
 	// Reference to a Accelerator in globalaccelerator to populate acceleratorArn.
 	// +kubebuilder:validation:Optional
-	AcceleratorArnRef *v1.NamespacedReference `json:"acceleratorArnRef,omitempty" tf:"-"`
+	AcceleratorArnRef *v2.NamespacedReference `json:"acceleratorArnRef,omitempty" tf:"-"`
 
 	// Selector for a Accelerator in globalaccelerator to populate acceleratorArn.
 	// +kubebuilder:validation:Optional
-	AcceleratorArnSelector *v1.NamespacedSelector `json:"acceleratorArnSelector,omitempty" tf:"-"`
+	AcceleratorArnSelector *v2.NamespacedSelector `json:"acceleratorArnSelector,omitempty" tf:"-"`
 
 	// Direct all requests from a user to the same endpoint. Valid values are NONE, SOURCE_IP. Default: NONE. If NONE, Global Accelerator uses the "five-tuple" properties of source IP address, source port, destination IP address, destination port, and protocol to select the hash value. If SOURCE_IP, Global Accelerator uses the "two-tuple" properties of source (client) IP address and destination IP address to select the hash value.
 	// +kubebuilder:validation:Optional
@@ -135,8 +134,8 @@ type ListenerSpec struct {
 
 // ListenerStatus defines the observed state of Listener.
 type ListenerStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ListenerObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ListenerObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -98,7 +98,7 @@ spec:
     applyImmediately: true
     brokerName: example-test-broker
     engineType: ActiveMQ
-    engineVersion: "5.18"
+    engineVersion: "5.19"
     autoMinorVersionUpgrade: true
     hostInstanceType: mq.m5.large
     region: us-west-1

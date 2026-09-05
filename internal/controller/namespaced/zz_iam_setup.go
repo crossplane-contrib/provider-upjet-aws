@@ -103,3 +103,37 @@ func SetupGated_iam(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupWebhookWithManager_iam registers conversion webhooks for all resource kinds in the group.
+func SetupWebhookWithManager_iam(mgr ctrl.Manager) error {
+	for _, setup := range []func(ctrl.Manager) error{
+		accesskey.SetupWebhookWithManager,
+		accountalias.SetupWebhookWithManager,
+		accountpasswordpolicy.SetupWebhookWithManager,
+		group.SetupWebhookWithManager,
+		groupmembership.SetupWebhookWithManager,
+		grouppolicyattachment.SetupWebhookWithManager,
+		instanceprofile.SetupWebhookWithManager,
+		openidconnectprovider.SetupWebhookWithManager,
+		policy.SetupWebhookWithManager,
+		role.SetupWebhookWithManager,
+		rolepolicy.SetupWebhookWithManager,
+		rolepolicyattachment.SetupWebhookWithManager,
+		samlprovider.SetupWebhookWithManager,
+		servercertificate.SetupWebhookWithManager,
+		servicelinkedrole.SetupWebhookWithManager,
+		servicespecificcredential.SetupWebhookWithManager,
+		signingcertificate.SetupWebhookWithManager,
+		user.SetupWebhookWithManager,
+		usergroupmembership.SetupWebhookWithManager,
+		userloginprofile.SetupWebhookWithManager,
+		userpolicyattachment.SetupWebhookWithManager,
+		usersshkey.SetupWebhookWithManager,
+		virtualmfadevice.SetupWebhookWithManager,
+	} {
+		if err := setup(mgr); err != nil {
+			return err
+		}
+	}
+	return nil
+}

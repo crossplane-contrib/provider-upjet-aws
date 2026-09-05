@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type SigningProfilePermissionInitParameters struct {
@@ -29,11 +28,11 @@ type SigningProfilePermissionInitParameters struct {
 
 	// Reference to a SigningProfile in signer to populate profileVersion.
 	// +kubebuilder:validation:Optional
-	ProfileVersionRef *v1.NamespacedReference `json:"profileVersionRef,omitempty" tf:"-"`
+	ProfileVersionRef *v2.NamespacedReference `json:"profileVersionRef,omitempty" tf:"-"`
 
 	// Selector for a SigningProfile in signer to populate profileVersion.
 	// +kubebuilder:validation:Optional
-	ProfileVersionSelector *v1.NamespacedSelector `json:"profileVersionSelector,omitempty" tf:"-"`
+	ProfileVersionSelector *v2.NamespacedSelector `json:"profileVersionSelector,omitempty" tf:"-"`
 
 	// A statement identifier prefix. Conflicts with statement_id.
 	StatementIDPrefix *string `json:"statementIdPrefix,omitempty" tf:"statement_id_prefix,omitempty"`
@@ -83,11 +82,11 @@ type SigningProfilePermissionParameters struct {
 
 	// Reference to a SigningProfile in signer to populate profileName.
 	// +kubebuilder:validation:Optional
-	ProfileNameRef *v1.NamespacedReference `json:"profileNameRef,omitempty" tf:"-"`
+	ProfileNameRef *v2.NamespacedReference `json:"profileNameRef,omitempty" tf:"-"`
 
 	// Selector for a SigningProfile in signer to populate profileName.
 	// +kubebuilder:validation:Optional
-	ProfileNameSelector *v1.NamespacedSelector `json:"profileNameSelector,omitempty" tf:"-"`
+	ProfileNameSelector *v2.NamespacedSelector `json:"profileNameSelector,omitempty" tf:"-"`
 
 	// The signing profile version that a permission applies to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/signer/v1beta1.SigningProfile
@@ -97,11 +96,11 @@ type SigningProfilePermissionParameters struct {
 
 	// Reference to a SigningProfile in signer to populate profileVersion.
 	// +kubebuilder:validation:Optional
-	ProfileVersionRef *v1.NamespacedReference `json:"profileVersionRef,omitempty" tf:"-"`
+	ProfileVersionRef *v2.NamespacedReference `json:"profileVersionRef,omitempty" tf:"-"`
 
 	// Selector for a SigningProfile in signer to populate profileVersion.
 	// +kubebuilder:validation:Optional
-	ProfileVersionSelector *v1.NamespacedSelector `json:"profileVersionSelector,omitempty" tf:"-"`
+	ProfileVersionSelector *v2.NamespacedSelector `json:"profileVersionSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -136,8 +135,8 @@ type SigningProfilePermissionSpec struct {
 
 // SigningProfilePermissionStatus defines the observed state of SigningProfilePermission.
 type SigningProfilePermissionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SigningProfilePermissionObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SigningProfilePermissionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

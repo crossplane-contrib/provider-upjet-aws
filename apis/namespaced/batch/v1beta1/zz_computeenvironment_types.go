@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ComputeEnvironmentInitParameters struct {
@@ -29,11 +28,11 @@ type ComputeEnvironmentInitParameters struct {
 
 	// Reference to a Role in iam to populate serviceRole.
 	// +kubebuilder:validation:Optional
-	ServiceRoleRef *v1.NamespacedReference `json:"serviceRoleRef,omitempty" tf:"-"`
+	ServiceRoleRef *v2.NamespacedReference `json:"serviceRoleRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate serviceRole.
 	// +kubebuilder:validation:Optional
-	ServiceRoleSelector *v1.NamespacedSelector `json:"serviceRoleSelector,omitempty" tf:"-"`
+	ServiceRoleSelector *v2.NamespacedSelector `json:"serviceRoleSelector,omitempty" tf:"-"`
 
 	// The state of the compute environment. If the state is ENABLED, then the compute environment accepts jobs from a queue and can scale out automatically based on queues. Valid items are ENABLED or DISABLED. Defaults to ENABLED.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
@@ -119,11 +118,11 @@ type ComputeEnvironmentParameters struct {
 
 	// Reference to a Role in iam to populate serviceRole.
 	// +kubebuilder:validation:Optional
-	ServiceRoleRef *v1.NamespacedReference `json:"serviceRoleRef,omitempty" tf:"-"`
+	ServiceRoleRef *v2.NamespacedReference `json:"serviceRoleRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate serviceRole.
 	// +kubebuilder:validation:Optional
-	ServiceRoleSelector *v1.NamespacedSelector `json:"serviceRoleSelector,omitempty" tf:"-"`
+	ServiceRoleSelector *v2.NamespacedSelector `json:"serviceRoleSelector,omitempty" tf:"-"`
 
 	// The state of the compute environment. If the state is ENABLED, then the compute environment accepts jobs from a queue and can scale out automatically based on queues. Valid items are ENABLED or DISABLED. Defaults to ENABLED.
 	// +kubebuilder:validation:Optional
@@ -170,11 +169,11 @@ type ComputeResourcesInitParameters struct {
 
 	// Reference to a InstanceProfile in iam to populate instanceRole.
 	// +kubebuilder:validation:Optional
-	InstanceRoleRef *v1.NamespacedReference `json:"instanceRoleRef,omitempty" tf:"-"`
+	InstanceRoleRef *v2.NamespacedReference `json:"instanceRoleRef,omitempty" tf:"-"`
 
 	// Selector for a InstanceProfile in iam to populate instanceRole.
 	// +kubebuilder:validation:Optional
-	InstanceRoleSelector *v1.NamespacedSelector `json:"instanceRoleSelector,omitempty" tf:"-"`
+	InstanceRoleSelector *v2.NamespacedSelector `json:"instanceRoleSelector,omitempty" tf:"-"`
 
 	// A list of instance types that may be launched. This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified.
 	// +listType=set
@@ -195,11 +194,11 @@ type ComputeResourcesInitParameters struct {
 
 	// Reference to a PlacementGroup in ec2 to populate placementGroup.
 	// +kubebuilder:validation:Optional
-	PlacementGroupRef *v1.NamespacedReference `json:"placementGroupRef,omitempty" tf:"-"`
+	PlacementGroupRef *v2.NamespacedReference `json:"placementGroupRef,omitempty" tf:"-"`
 
 	// Selector for a PlacementGroup in ec2 to populate placementGroup.
 	// +kubebuilder:validation:Optional
-	PlacementGroupSelector *v1.NamespacedSelector `json:"placementGroupSelector,omitempty" tf:"-"`
+	PlacementGroupSelector *v2.NamespacedSelector `json:"placementGroupSelector,omitempty" tf:"-"`
 
 	// A list of EC2 security group that are associated with instances launched in the compute environment. This parameter is required for Fargate compute environments.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
@@ -208,11 +207,11 @@ type ComputeResourcesInitParameters struct {
 
 	// References to SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIdsRefs []v1.NamespacedReference `json:"securityGroupIdsRefs,omitempty" tf:"-"`
+	SecurityGroupIdsRefs []v2.NamespacedReference `json:"securityGroupIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIdsSelector *v1.NamespacedSelector `json:"securityGroupIdsSelector,omitempty" tf:"-"`
+	SecurityGroupIdsSelector *v2.NamespacedSelector `json:"securityGroupIdsSelector,omitempty" tf:"-"`
 
 	// The Amazon Resource Name (ARN) of the Amazon EC2 Spot Fleet IAM role applied to a SPOT compute environment. This parameter is required for SPOT compute environments. This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified.
 	SpotIAMFleetRole *string `json:"spotIamFleetRole,omitempty" tf:"spot_iam_fleet_role,omitempty"`
@@ -224,11 +223,11 @@ type ComputeResourcesInitParameters struct {
 
 	// References to Subnet in ec2 to populate subnets.
 	// +kubebuilder:validation:Optional
-	SubnetsRefs []v1.NamespacedReference `json:"subnetsRefs,omitempty" tf:"-"`
+	SubnetsRefs []v2.NamespacedReference `json:"subnetsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Subnet in ec2 to populate subnets.
 	// +kubebuilder:validation:Optional
-	SubnetsSelector *v1.NamespacedSelector `json:"subnetsSelector,omitempty" tf:"-"`
+	SubnetsSelector *v2.NamespacedSelector `json:"subnetsSelector,omitempty" tf:"-"`
 
 	// Key-value pair tags to be applied to resources that are launched in the compute environment. This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified.
 	// +mapType=granular
@@ -330,11 +329,11 @@ type ComputeResourcesParameters struct {
 
 	// Reference to a InstanceProfile in iam to populate instanceRole.
 	// +kubebuilder:validation:Optional
-	InstanceRoleRef *v1.NamespacedReference `json:"instanceRoleRef,omitempty" tf:"-"`
+	InstanceRoleRef *v2.NamespacedReference `json:"instanceRoleRef,omitempty" tf:"-"`
 
 	// Selector for a InstanceProfile in iam to populate instanceRole.
 	// +kubebuilder:validation:Optional
-	InstanceRoleSelector *v1.NamespacedSelector `json:"instanceRoleSelector,omitempty" tf:"-"`
+	InstanceRoleSelector *v2.NamespacedSelector `json:"instanceRoleSelector,omitempty" tf:"-"`
 
 	// A list of instance types that may be launched. This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified.
 	// +kubebuilder:validation:Optional
@@ -360,11 +359,11 @@ type ComputeResourcesParameters struct {
 
 	// Reference to a PlacementGroup in ec2 to populate placementGroup.
 	// +kubebuilder:validation:Optional
-	PlacementGroupRef *v1.NamespacedReference `json:"placementGroupRef,omitempty" tf:"-"`
+	PlacementGroupRef *v2.NamespacedReference `json:"placementGroupRef,omitempty" tf:"-"`
 
 	// Selector for a PlacementGroup in ec2 to populate placementGroup.
 	// +kubebuilder:validation:Optional
-	PlacementGroupSelector *v1.NamespacedSelector `json:"placementGroupSelector,omitempty" tf:"-"`
+	PlacementGroupSelector *v2.NamespacedSelector `json:"placementGroupSelector,omitempty" tf:"-"`
 
 	// A list of EC2 security group that are associated with instances launched in the compute environment. This parameter is required for Fargate compute environments.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
@@ -374,11 +373,11 @@ type ComputeResourcesParameters struct {
 
 	// References to SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIdsRefs []v1.NamespacedReference `json:"securityGroupIdsRefs,omitempty" tf:"-"`
+	SecurityGroupIdsRefs []v2.NamespacedReference `json:"securityGroupIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIdsSelector *v1.NamespacedSelector `json:"securityGroupIdsSelector,omitempty" tf:"-"`
+	SecurityGroupIdsSelector *v2.NamespacedSelector `json:"securityGroupIdsSelector,omitempty" tf:"-"`
 
 	// The Amazon Resource Name (ARN) of the Amazon EC2 Spot Fleet IAM role applied to a SPOT compute environment. This parameter is required for SPOT compute environments. This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified.
 	// +kubebuilder:validation:Optional
@@ -392,11 +391,11 @@ type ComputeResourcesParameters struct {
 
 	// References to Subnet in ec2 to populate subnets.
 	// +kubebuilder:validation:Optional
-	SubnetsRefs []v1.NamespacedReference `json:"subnetsRefs,omitempty" tf:"-"`
+	SubnetsRefs []v2.NamespacedReference `json:"subnetsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Subnet in ec2 to populate subnets.
 	// +kubebuilder:validation:Optional
-	SubnetsSelector *v1.NamespacedSelector `json:"subnetsSelector,omitempty" tf:"-"`
+	SubnetsSelector *v2.NamespacedSelector `json:"subnetsSelector,omitempty" tf:"-"`
 
 	// Key-value pair tags to be applied to resources that are launched in the compute environment. This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified.
 	// +kubebuilder:validation:Optional
@@ -563,8 +562,8 @@ type ComputeEnvironmentSpec struct {
 
 // ComputeEnvironmentStatus defines the observed state of ComputeEnvironment.
 type ComputeEnvironmentStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ComputeEnvironmentObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ComputeEnvironmentObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

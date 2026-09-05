@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type DBClusterInitParameters struct {
@@ -61,6 +60,12 @@ type DBClusterInitParameters struct {
 	// Configuration for sending InfluxDB engine logs to a specified S3 bucket.
 	LogDeliveryConfiguration *LogDeliveryConfigurationInitParameters `json:"logDeliveryConfiguration,omitempty" tf:"log_delivery_configuration,omitempty"`
 
+	// Maintenance schedule for the DB cluster, including the preferred maintenance window and timezone. This argument is updatable. This field is only supported for InfluxDB V3 clusters (when using an InfluxDB V3 db parameter group).
+	// Specifies the maintenance schedule for the DB cluster, including the preferred
+	// maintenance window and timezone. This field is only supported for InfluxDB V3 clusters
+	// (when using an InfluxDB V3 db parameter group).
+	MaintenanceSchedule *MaintenanceScheduleInitParameters `json:"maintenanceSchedule,omitempty" tf:"maintenance_schedule,omitempty"`
+
 	// Name that uniquely identifies the DB cluster when interacting with the Amazon Timestream for InfluxDB API and CLI commands. This name will also be a prefix included in the endpoint. Cluster names must be unique per customer and per region. The argument must start with a letter, cannot contain consecutive hyphens (-) and cannot end with a hyphen.
 	// The name that uniquely identifies the DB cluster when interacting with the
 	// Amazon Timestream for InfluxDB API and CLI commands. This name will also be a
@@ -89,7 +94,7 @@ type DBClusterInitParameters struct {
 	// and organization, this argument will be stored in the secret referred to by the
 	// influx_auth_parameters_secret_arn attribute. This field is forbidden for InfluxDB V3 clusters
 	// (when using an InfluxDB V3 db parameter group) as the AWS API rejects it.
-	PasswordSecretRef *v1.LocalSecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+	PasswordSecretRef *v2.LocalSecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// (Default 8086) The port on which the cluster accepts connections. Valid values: 1024-65535. Cannot be 2375-2376, 7788-7799, 8090, or 51678-51680. This argument is updatable.
 	// The port number on which InfluxDB accepts connections.
@@ -120,11 +125,11 @@ type DBClusterInitParameters struct {
 
 	// References to SecurityGroup in ec2 to populate vpcSecurityGroupIds.
 	// +kubebuilder:validation:Optional
-	VPCSecurityGroupIdsRefs []v1.NamespacedReference `json:"vpcSecurityGroupIdsRefs,omitempty" tf:"-"`
+	VPCSecurityGroupIdsRefs []v2.NamespacedReference `json:"vpcSecurityGroupIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate vpcSecurityGroupIds.
 	// +kubebuilder:validation:Optional
-	VPCSecurityGroupIdsSelector *v1.NamespacedSelector `json:"vpcSecurityGroupIdsSelector,omitempty" tf:"-"`
+	VPCSecurityGroupIdsSelector *v2.NamespacedSelector `json:"vpcSecurityGroupIdsSelector,omitempty" tf:"-"`
 
 	// List of VPC subnet IDs to associate with the cluster. Provide at least two VPC subnet IDs in different availability zones when deploying with a Multi-AZ standby.
 	// A list of VPC subnet IDs to associate with the DB cluster. Provide at least
@@ -135,11 +140,11 @@ type DBClusterInitParameters struct {
 
 	// References to Subnet in ec2 to populate vpcSubnetIds.
 	// +kubebuilder:validation:Optional
-	VPCSubnetIdsRefs []v1.NamespacedReference `json:"vpcSubnetIdsRefs,omitempty" tf:"-"`
+	VPCSubnetIdsRefs []v2.NamespacedReference `json:"vpcSubnetIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Subnet in ec2 to populate vpcSubnetIds.
 	// +kubebuilder:validation:Optional
-	VPCSubnetIdsSelector *v1.NamespacedSelector `json:"vpcSubnetIdsSelector,omitempty" tf:"-"`
+	VPCSubnetIdsSelector *v2.NamespacedSelector `json:"vpcSubnetIdsSelector,omitempty" tf:"-"`
 }
 
 type DBClusterObservation struct {
@@ -209,6 +214,12 @@ type DBClusterObservation struct {
 	// Configuration for sending InfluxDB engine logs to a specified S3 bucket. This argument is updatable.
 	// Configuration for sending InfluxDB engine logs to a specified S3 bucket.
 	LogDeliveryConfiguration *LogDeliveryConfigurationObservation `json:"logDeliveryConfiguration,omitempty" tf:"log_delivery_configuration,omitempty"`
+
+	// Maintenance schedule for the DB cluster, including the preferred maintenance window and timezone. This argument is updatable. This field is only supported for InfluxDB V3 clusters (when using an InfluxDB V3 db parameter group).
+	// Specifies the maintenance schedule for the DB cluster, including the preferred
+	// maintenance window and timezone. This field is only supported for InfluxDB V3 clusters
+	// (when using an InfluxDB V3 db parameter group).
+	MaintenanceSchedule *MaintenanceScheduleObservation `json:"maintenanceSchedule,omitempty" tf:"maintenance_schedule,omitempty"`
 
 	// Name that uniquely identifies the DB cluster when interacting with the Amazon Timestream for InfluxDB API and CLI commands. This name will also be a prefix included in the endpoint. Cluster names must be unique per customer and per region. The argument must start with a letter, cannot contain consecutive hyphens (-) and cannot end with a hyphen.
 	// The name that uniquely identifies the DB cluster when interacting with the
@@ -332,6 +343,13 @@ type DBClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	LogDeliveryConfiguration *LogDeliveryConfigurationParameters `json:"logDeliveryConfiguration,omitempty" tf:"log_delivery_configuration,omitempty"`
 
+	// Maintenance schedule for the DB cluster, including the preferred maintenance window and timezone. This argument is updatable. This field is only supported for InfluxDB V3 clusters (when using an InfluxDB V3 db parameter group).
+	// Specifies the maintenance schedule for the DB cluster, including the preferred
+	// maintenance window and timezone. This field is only supported for InfluxDB V3 clusters
+	// (when using an InfluxDB V3 db parameter group).
+	// +kubebuilder:validation:Optional
+	MaintenanceSchedule *MaintenanceScheduleParameters `json:"maintenanceSchedule,omitempty" tf:"maintenance_schedule,omitempty"`
+
 	// Name that uniquely identifies the DB cluster when interacting with the Amazon Timestream for InfluxDB API and CLI commands. This name will also be a prefix included in the endpoint. Cluster names must be unique per customer and per region. The argument must start with a letter, cannot contain consecutive hyphens (-) and cannot end with a hyphen.
 	// The name that uniquely identifies the DB cluster when interacting with the
 	// Amazon Timestream for InfluxDB API and CLI commands. This name will also be a
@@ -364,7 +382,7 @@ type DBClusterParameters struct {
 	// influx_auth_parameters_secret_arn attribute. This field is forbidden for InfluxDB V3 clusters
 	// (when using an InfluxDB V3 db parameter group) as the AWS API rejects it.
 	// +kubebuilder:validation:Optional
-	PasswordSecretRef *v1.LocalSecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+	PasswordSecretRef *v2.LocalSecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// (Default 8086) The port on which the cluster accepts connections. Valid values: 1024-65535. Cannot be 2375-2376, 7788-7799, 8090, or 51678-51680. This argument is updatable.
 	// The port number on which InfluxDB accepts connections.
@@ -405,11 +423,11 @@ type DBClusterParameters struct {
 
 	// References to SecurityGroup in ec2 to populate vpcSecurityGroupIds.
 	// +kubebuilder:validation:Optional
-	VPCSecurityGroupIdsRefs []v1.NamespacedReference `json:"vpcSecurityGroupIdsRefs,omitempty" tf:"-"`
+	VPCSecurityGroupIdsRefs []v2.NamespacedReference `json:"vpcSecurityGroupIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate vpcSecurityGroupIds.
 	// +kubebuilder:validation:Optional
-	VPCSecurityGroupIdsSelector *v1.NamespacedSelector `json:"vpcSecurityGroupIdsSelector,omitempty" tf:"-"`
+	VPCSecurityGroupIdsSelector *v2.NamespacedSelector `json:"vpcSecurityGroupIdsSelector,omitempty" tf:"-"`
 
 	// List of VPC subnet IDs to associate with the cluster. Provide at least two VPC subnet IDs in different availability zones when deploying with a Multi-AZ standby.
 	// A list of VPC subnet IDs to associate with the DB cluster. Provide at least
@@ -421,11 +439,11 @@ type DBClusterParameters struct {
 
 	// References to Subnet in ec2 to populate vpcSubnetIds.
 	// +kubebuilder:validation:Optional
-	VPCSubnetIdsRefs []v1.NamespacedReference `json:"vpcSubnetIdsRefs,omitempty" tf:"-"`
+	VPCSubnetIdsRefs []v2.NamespacedReference `json:"vpcSubnetIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Subnet in ec2 to populate vpcSubnetIds.
 	// +kubebuilder:validation:Optional
-	VPCSubnetIdsSelector *v1.NamespacedSelector `json:"vpcSubnetIdsSelector,omitempty" tf:"-"`
+	VPCSubnetIdsSelector *v2.NamespacedSelector `json:"vpcSubnetIdsSelector,omitempty" tf:"-"`
 }
 
 type LogDeliveryConfigurationInitParameters struct {
@@ -450,6 +468,50 @@ type LogDeliveryConfigurationParameters struct {
 	S3Configuration *S3ConfigurationParameters `json:"s3Configuration,omitempty" tf:"s3_configuration,omitempty"`
 }
 
+type MaintenanceScheduleInitParameters struct {
+
+	// Preferred maintenance window in the format ddd:HH:MM-ddd:HH:MM. Day must be one of Mon, Tue, Wed, Thu, Fri, Sat, or Sun. Provide an empty string to let the system choose a window.
+	// The preferred maintenance window in the format ddd:HH:MM-ddd:HH:MM.
+	// Day must be one of Mon, Tue, Wed, Thu, Fri, Sat, or Sun. Provide an empty
+	// string to let the system choose a window.
+	PreferredMaintenanceWindow *string `json:"preferredMaintenanceWindow,omitempty" tf:"preferred_maintenance_window,omitempty"`
+
+	// IANA timezone identifier for the maintenance window. For example, America/New_York or UTC.
+	// The IANA timezone identifier for the maintenance window. For
+	// example, America/New_York or UTC.
+	Timezone *string `json:"timezone,omitempty" tf:"timezone,omitempty"`
+}
+
+type MaintenanceScheduleObservation struct {
+
+	// Preferred maintenance window in the format ddd:HH:MM-ddd:HH:MM. Day must be one of Mon, Tue, Wed, Thu, Fri, Sat, or Sun. Provide an empty string to let the system choose a window.
+	// The preferred maintenance window in the format ddd:HH:MM-ddd:HH:MM.
+	// Day must be one of Mon, Tue, Wed, Thu, Fri, Sat, or Sun. Provide an empty
+	// string to let the system choose a window.
+	PreferredMaintenanceWindow *string `json:"preferredMaintenanceWindow,omitempty" tf:"preferred_maintenance_window,omitempty"`
+
+	// IANA timezone identifier for the maintenance window. For example, America/New_York or UTC.
+	// The IANA timezone identifier for the maintenance window. For
+	// example, America/New_York or UTC.
+	Timezone *string `json:"timezone,omitempty" tf:"timezone,omitempty"`
+}
+
+type MaintenanceScheduleParameters struct {
+
+	// Preferred maintenance window in the format ddd:HH:MM-ddd:HH:MM. Day must be one of Mon, Tue, Wed, Thu, Fri, Sat, or Sun. Provide an empty string to let the system choose a window.
+	// The preferred maintenance window in the format ddd:HH:MM-ddd:HH:MM.
+	// Day must be one of Mon, Tue, Wed, Thu, Fri, Sat, or Sun. Provide an empty
+	// string to let the system choose a window.
+	// +kubebuilder:validation:Optional
+	PreferredMaintenanceWindow *string `json:"preferredMaintenanceWindow" tf:"preferred_maintenance_window,omitempty"`
+
+	// IANA timezone identifier for the maintenance window. For example, America/New_York or UTC.
+	// The IANA timezone identifier for the maintenance window. For
+	// example, America/New_York or UTC.
+	// +kubebuilder:validation:Optional
+	Timezone *string `json:"timezone" tf:"timezone,omitempty"`
+}
+
 type S3ConfigurationInitParameters struct {
 
 	// Name of the S3 bucket to deliver logs to.
@@ -459,11 +521,11 @@ type S3ConfigurationInitParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucketName.
 	// +kubebuilder:validation:Optional
-	BucketNameRef *v1.NamespacedReference `json:"bucketNameRef,omitempty" tf:"-"`
+	BucketNameRef *v2.NamespacedReference `json:"bucketNameRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucketName.
 	// +kubebuilder:validation:Optional
-	BucketNameSelector *v1.NamespacedSelector `json:"bucketNameSelector,omitempty" tf:"-"`
+	BucketNameSelector *v2.NamespacedSelector `json:"bucketNameSelector,omitempty" tf:"-"`
 
 	// Indicates whether log delivery to the S3 bucket is enabled.
 	// Indicates whether log delivery to the S3 bucket is enabled.
@@ -491,11 +553,11 @@ type S3ConfigurationParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucketName.
 	// +kubebuilder:validation:Optional
-	BucketNameRef *v1.NamespacedReference `json:"bucketNameRef,omitempty" tf:"-"`
+	BucketNameRef *v2.NamespacedReference `json:"bucketNameRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucketName.
 	// +kubebuilder:validation:Optional
-	BucketNameSelector *v1.NamespacedSelector `json:"bucketNameSelector,omitempty" tf:"-"`
+	BucketNameSelector *v2.NamespacedSelector `json:"bucketNameSelector,omitempty" tf:"-"`
 
 	// Indicates whether log delivery to the S3 bucket is enabled.
 	// Indicates whether log delivery to the S3 bucket is enabled.
@@ -522,8 +584,8 @@ type DBClusterSpec struct {
 
 // DBClusterStatus defines the observed state of DBCluster.
 type DBClusterStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        DBClusterObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               DBClusterObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

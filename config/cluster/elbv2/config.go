@@ -5,7 +5,9 @@
 package elbv2
 
 import (
+	"fmt"
 	"regexp"
+	"strconv"
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
@@ -123,6 +125,10 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		}
 	})
 
+	p.AddResourceConfigurator("aws_lb_listener_rule", func(r *config.Resource) {
+		r.TerraformCustomDiff = lbListenerRuleCustomDiff
+	})
+
 	p.AddResourceConfigurator("aws_lb_target_group", func(r *config.Resource) {
 		r.ExternalName.OmittedFields = append(r.ExternalName.OmittedFields, "name_prefix")
 		if s, ok := r.TerraformResource.Schema["name"]; ok {
@@ -159,4 +165,56 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		r.ShortGroup = "elbv2"
 		r.Kind = "LBTrustStore"
 	})
+}
+
+func lbListenerRuleCustomDiff(diff *terraform.InstanceDiff, state *terraform.InstanceState, cfg *terraform.ResourceConfig) (*terraform.InstanceDiff, error) { //nolint:gocyclo // easier to follow as a unit
+	if diff == nil || diff.Empty() || diff.Destroy || diff.Attributes == nil {
+		return diff, nil
+	}
+	for k, attrDiff := range diff.Attributes {
+		if attrDiff == nil || !strings.HasPrefix(k, "action.") || !strings.HasSuffix(k, ".target_group_arn") {
+			continue
+		}
+		idx := strings.TrimPrefix(k, "action.")
+		idx = strings.TrimSuffix(idx, ".target_group_arn")
+
+		// Case A: arn absent from state, present in config — late-init artifact
+		// when the provider's Read took the flattenForwardActionOneOf path because
+		// forward is configured, stripping arn from state while late-init had
+		// already written it to spec.
+		if attrDiff.Old == "" && attrDiff.New != "" && configActionHasForward(cfg, idx) {
+			delete(diff.Attributes, k)
+		}
+
+		// Case B: arn present in state, absent from config — the provider's Read
+		// took the flattenForwardActionBoth path (null RawPlan after Update or
+		// restart), writing arn to state, while spec only declares forward.
+		if attrDiff.Old != "" && attrDiff.New == "" && attrDiff.NewRemoved {
+			forwardKey := fmt.Sprintf("action.%s.forward.#", idx)
+			if state != nil && state.Attributes[forwardKey] != "" && state.Attributes[forwardKey] != "0" {
+				delete(diff.Attributes, k)
+			}
+		}
+	}
+	return diff, nil
+}
+
+func configActionHasForward(cfg *terraform.ResourceConfig, actionIdx string) bool {
+	if cfg == nil || cfg.Config == nil {
+		return false
+	}
+	actions, ok := cfg.Config["action"].([]interface{})
+	if !ok {
+		return false
+	}
+	idx, err := strconv.Atoi(actionIdx)
+	if err != nil || idx < 0 || idx >= len(actions) {
+		return false
+	}
+	actionMap, ok := actions[idx].(map[string]interface{})
+	if !ok {
+		return false
+	}
+	forwards, _ := actionMap["forward"].([]interface{})
+	return len(forwards) > 0
 }

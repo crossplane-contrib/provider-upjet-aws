@@ -21,7 +21,7 @@ func (mg *WindowsFileSystem) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this WindowsFileSystem
 func (tr *WindowsFileSystem) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"self_managed_active_directory[*].password": "selfManagedActiveDirectory.passwordSecretRef"}
+	return map[string]string{"self_managed_active_directory[*].password": "selfManagedActiveDirectory.passwordSecretRef", "self_managed_active_directory[*].password_wo": "selfManagedActiveDirectory.passwordWoSecretRef"}
 }
 
 // GetObservation of this WindowsFileSystem
@@ -36,6 +36,8 @@ func (tr *WindowsFileSystem) GetObservation() (map[string]any, error) {
 
 // SetObservation for this WindowsFileSystem
 func (tr *WindowsFileSystem) SetObservation(obs map[string]any) error {
+	tr.Status.AtProvider.Tags = nil
+	tr.Status.AtProvider.TagsAll = nil
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err

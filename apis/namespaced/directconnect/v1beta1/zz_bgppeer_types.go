@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type BGPPeerInitParameters struct {
@@ -40,11 +39,11 @@ type BGPPeerInitParameters struct {
 
 	// Reference to a PrivateVirtualInterface in directconnect to populate virtualInterfaceId.
 	// +kubebuilder:validation:Optional
-	VirtualInterfaceIDRef *v1.NamespacedReference `json:"virtualInterfaceIdRef,omitempty" tf:"-"`
+	VirtualInterfaceIDRef *v2.NamespacedReference `json:"virtualInterfaceIdRef,omitempty" tf:"-"`
 
 	// Selector for a PrivateVirtualInterface in directconnect to populate virtualInterfaceId.
 	// +kubebuilder:validation:Optional
-	VirtualInterfaceIDSelector *v1.NamespacedSelector `json:"virtualInterfaceIdSelector,omitempty" tf:"-"`
+	VirtualInterfaceIDSelector *v2.NamespacedSelector `json:"virtualInterfaceIdSelector,omitempty" tf:"-"`
 }
 
 type BGPPeerObservation struct {
@@ -123,11 +122,11 @@ type BGPPeerParameters struct {
 
 	// Reference to a PrivateVirtualInterface in directconnect to populate virtualInterfaceId.
 	// +kubebuilder:validation:Optional
-	VirtualInterfaceIDRef *v1.NamespacedReference `json:"virtualInterfaceIdRef,omitempty" tf:"-"`
+	VirtualInterfaceIDRef *v2.NamespacedReference `json:"virtualInterfaceIdRef,omitempty" tf:"-"`
 
 	// Selector for a PrivateVirtualInterface in directconnect to populate virtualInterfaceId.
 	// +kubebuilder:validation:Optional
-	VirtualInterfaceIDSelector *v1.NamespacedSelector `json:"virtualInterfaceIdSelector,omitempty" tf:"-"`
+	VirtualInterfaceIDSelector *v2.NamespacedSelector `json:"virtualInterfaceIdSelector,omitempty" tf:"-"`
 }
 
 // BGPPeerSpec defines the desired state of BGPPeer
@@ -149,8 +148,8 @@ type BGPPeerSpec struct {
 
 // BGPPeerStatus defines the observed state of BGPPeer.
 type BGPPeerStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        BGPPeerObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               BGPPeerObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

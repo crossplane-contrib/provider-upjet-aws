@@ -5,54 +5,54 @@
 
 package v1beta2
 
-import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+import xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 
 // GetCondition of this LanguageModel.
-func (mg *LanguageModel) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *LanguageModel) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this LanguageModel.
-func (mg *LanguageModel) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *LanguageModel) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this LanguageModel.
-func (mg *LanguageModel) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *LanguageModel) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this LanguageModel.
-func (mg *LanguageModel) GetProviderConfigReference() *xpv1.Reference {
+func (mg *LanguageModel) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this LanguageModel.
-func (mg *LanguageModel) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *LanguageModel) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this LanguageModel.
-func (mg *LanguageModel) SetConditions(c ...xpv1.Condition) {
+func (mg *LanguageModel) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this LanguageModel.
-func (mg *LanguageModel) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *LanguageModel) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this LanguageModel.
-func (mg *LanguageModel) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *LanguageModel) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this LanguageModel.
-func (mg *LanguageModel) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *LanguageModel) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this LanguageModel.
-func (mg *LanguageModel) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *LanguageModel) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

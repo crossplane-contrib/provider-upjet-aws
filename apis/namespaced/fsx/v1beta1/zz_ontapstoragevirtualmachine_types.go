@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ActiveDirectoryConfigurationInitParameters struct {
@@ -124,11 +123,11 @@ type OntapStorageVirtualMachineInitParameters struct {
 
 	// Reference to a OntapFileSystem in fsx to populate fileSystemId.
 	// +kubebuilder:validation:Optional
-	FileSystemIDRef *v1.NamespacedReference `json:"fileSystemIdRef,omitempty" tf:"-"`
+	FileSystemIDRef *v2.NamespacedReference `json:"fileSystemIdRef,omitempty" tf:"-"`
 
 	// Selector for a OntapFileSystem in fsx to populate fileSystemId.
 	// +kubebuilder:validation:Optional
-	FileSystemIDSelector *v1.NamespacedSelector `json:"fileSystemIdSelector,omitempty" tf:"-"`
+	FileSystemIDSelector *v2.NamespacedSelector `json:"fileSystemIdSelector,omitempty" tf:"-"`
 
 	// The name of the SVM. You can use a maximum of 47 alphanumeric characters, plus the underscore (_) special character.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -137,7 +136,7 @@ type OntapStorageVirtualMachineInitParameters struct {
 	RootVolumeSecurityStyle *string `json:"rootVolumeSecurityStyle,omitempty" tf:"root_volume_security_style,omitempty"`
 
 	// Specifies the password to use when logging on to the SVM using a secure shell (SSH) connection to the SVM's management endpoint. Doing so enables you to manage the SVM using the NetApp ONTAP CLI or REST API. If you do not specify a password, you can still use the file system's fsxadmin user to manage the SVM.
-	SvmAdminPasswordSecretRef *v1.LocalSecretKeySelector `json:"svmAdminPasswordSecretRef,omitempty" tf:"-"`
+	SvmAdminPasswordSecretRef *v2.LocalSecretKeySelector `json:"svmAdminPasswordSecretRef,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -200,11 +199,11 @@ type OntapStorageVirtualMachineParameters struct {
 
 	// Reference to a OntapFileSystem in fsx to populate fileSystemId.
 	// +kubebuilder:validation:Optional
-	FileSystemIDRef *v1.NamespacedReference `json:"fileSystemIdRef,omitempty" tf:"-"`
+	FileSystemIDRef *v2.NamespacedReference `json:"fileSystemIdRef,omitempty" tf:"-"`
 
 	// Selector for a OntapFileSystem in fsx to populate fileSystemId.
 	// +kubebuilder:validation:Optional
-	FileSystemIDSelector *v1.NamespacedSelector `json:"fileSystemIdSelector,omitempty" tf:"-"`
+	FileSystemIDSelector *v2.NamespacedSelector `json:"fileSystemIdSelector,omitempty" tf:"-"`
 
 	// The name of the SVM. You can use a maximum of 47 alphanumeric characters, plus the underscore (_) special character.
 	// +kubebuilder:validation:Optional
@@ -221,7 +220,7 @@ type OntapStorageVirtualMachineParameters struct {
 
 	// Specifies the password to use when logging on to the SVM using a secure shell (SSH) connection to the SVM's management endpoint. Doing so enables you to manage the SVM using the NetApp ONTAP CLI or REST API. If you do not specify a password, you can still use the file system's fsxadmin user to manage the SVM.
 	// +kubebuilder:validation:Optional
-	SvmAdminPasswordSecretRef *v1.LocalSecretKeySelector `json:"svmAdminPasswordSecretRef,omitempty" tf:"-"`
+	SvmAdminPasswordSecretRef *v2.LocalSecretKeySelector `json:"svmAdminPasswordSecretRef,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -261,7 +260,7 @@ type SelfManagedActiveDirectoryConfigurationInitParameters struct {
 	OrganizationalUnitDistinguishedName *string `json:"organizationalUnitDistinguishedName,omitempty" tf:"organizational_unit_distinguished_name,omitempty"`
 
 	// The password for the service account on your self-managed AD domain that Amazon FSx will use to join to your AD domain.
-	PasswordSecretRef v1.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
+	PasswordSecretRef v2.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// The user name for the service account on your self-managed AD domain that Amazon FSx will use to join to your AD domain.
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
@@ -307,7 +306,7 @@ type SelfManagedActiveDirectoryConfigurationParameters struct {
 
 	// The password for the service account on your self-managed AD domain that Amazon FSx will use to join to your AD domain.
 	// +kubebuilder:validation:Optional
-	PasswordSecretRef v1.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
+	PasswordSecretRef v2.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// The user name for the service account on your self-managed AD domain that Amazon FSx will use to join to your AD domain.
 	// +kubebuilder:validation:Optional
@@ -333,8 +332,8 @@ type OntapStorageVirtualMachineSpec struct {
 
 // OntapStorageVirtualMachineStatus defines the observed state of OntapStorageVirtualMachine.
 type OntapStorageVirtualMachineStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        OntapStorageVirtualMachineObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               OntapStorageVirtualMachineObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -40,3 +40,16 @@ func SetupGated_sfn(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupWebhookWithManager_sfn registers conversion webhooks for all resource kinds in the group.
+func SetupWebhookWithManager_sfn(mgr ctrl.Manager) error {
+	for _, setup := range []func(ctrl.Manager) error{
+		activity.SetupWebhookWithManager,
+		statemachine.SetupWebhookWithManager,
+	} {
+		if err := setup(mgr); err != nil {
+			return err
+		}
+	}
+	return nil
+}

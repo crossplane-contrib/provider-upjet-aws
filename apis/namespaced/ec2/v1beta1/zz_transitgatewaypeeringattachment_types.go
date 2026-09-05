@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type OptionsInitParameters struct {
@@ -51,11 +50,11 @@ type TransitGatewayPeeringAttachmentInitParameters struct {
 
 	// Reference to a TransitGateway in ec2 to populate peerTransitGatewayId.
 	// +kubebuilder:validation:Optional
-	PeerTransitGatewayIDRef *v1.NamespacedReference `json:"peerTransitGatewayIdRef,omitempty" tf:"-"`
+	PeerTransitGatewayIDRef *v2.NamespacedReference `json:"peerTransitGatewayIdRef,omitempty" tf:"-"`
 
 	// Selector for a TransitGateway in ec2 to populate peerTransitGatewayId.
 	// +kubebuilder:validation:Optional
-	PeerTransitGatewayIDSelector *v1.NamespacedSelector `json:"peerTransitGatewayIdSelector,omitempty" tf:"-"`
+	PeerTransitGatewayIDSelector *v2.NamespacedSelector `json:"peerTransitGatewayIdSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -68,11 +67,11 @@ type TransitGatewayPeeringAttachmentInitParameters struct {
 
 	// Reference to a TransitGateway in ec2 to populate transitGatewayId.
 	// +kubebuilder:validation:Optional
-	TransitGatewayIDRef *v1.NamespacedReference `json:"transitGatewayIdRef,omitempty" tf:"-"`
+	TransitGatewayIDRef *v2.NamespacedReference `json:"transitGatewayIdRef,omitempty" tf:"-"`
 
 	// Selector for a TransitGateway in ec2 to populate transitGatewayId.
 	// +kubebuilder:validation:Optional
-	TransitGatewayIDSelector *v1.NamespacedSelector `json:"transitGatewayIdSelector,omitempty" tf:"-"`
+	TransitGatewayIDSelector *v2.NamespacedSelector `json:"transitGatewayIdSelector,omitempty" tf:"-"`
 }
 
 type TransitGatewayPeeringAttachmentObservation struct {
@@ -135,11 +134,11 @@ type TransitGatewayPeeringAttachmentParameters struct {
 
 	// Reference to a TransitGateway in ec2 to populate peerTransitGatewayId.
 	// +kubebuilder:validation:Optional
-	PeerTransitGatewayIDRef *v1.NamespacedReference `json:"peerTransitGatewayIdRef,omitempty" tf:"-"`
+	PeerTransitGatewayIDRef *v2.NamespacedReference `json:"peerTransitGatewayIdRef,omitempty" tf:"-"`
 
 	// Selector for a TransitGateway in ec2 to populate peerTransitGatewayId.
 	// +kubebuilder:validation:Optional
-	PeerTransitGatewayIDSelector *v1.NamespacedSelector `json:"peerTransitGatewayIdSelector,omitempty" tf:"-"`
+	PeerTransitGatewayIDSelector *v2.NamespacedSelector `json:"peerTransitGatewayIdSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -159,11 +158,11 @@ type TransitGatewayPeeringAttachmentParameters struct {
 
 	// Reference to a TransitGateway in ec2 to populate transitGatewayId.
 	// +kubebuilder:validation:Optional
-	TransitGatewayIDRef *v1.NamespacedReference `json:"transitGatewayIdRef,omitempty" tf:"-"`
+	TransitGatewayIDRef *v2.NamespacedReference `json:"transitGatewayIdRef,omitempty" tf:"-"`
 
 	// Selector for a TransitGateway in ec2 to populate transitGatewayId.
 	// +kubebuilder:validation:Optional
-	TransitGatewayIDSelector *v1.NamespacedSelector `json:"transitGatewayIdSelector,omitempty" tf:"-"`
+	TransitGatewayIDSelector *v2.NamespacedSelector `json:"transitGatewayIdSelector,omitempty" tf:"-"`
 }
 
 // TransitGatewayPeeringAttachmentSpec defines the desired state of TransitGatewayPeeringAttachment
@@ -185,8 +184,8 @@ type TransitGatewayPeeringAttachmentSpec struct {
 
 // TransitGatewayPeeringAttachmentStatus defines the observed state of TransitGatewayPeeringAttachment.
 type TransitGatewayPeeringAttachmentStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        TransitGatewayPeeringAttachmentObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               TransitGatewayPeeringAttachmentObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

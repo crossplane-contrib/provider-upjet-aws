@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AuthorizerInitParameters struct {
@@ -23,11 +22,11 @@ type AuthorizerInitParameters struct {
 
 	// Reference to a Function in lambda to populate authorizerFunctionArn.
 	// +kubebuilder:validation:Optional
-	AuthorizerFunctionArnRef *v1.NamespacedReference `json:"authorizerFunctionArnRef,omitempty" tf:"-"`
+	AuthorizerFunctionArnRef *v2.NamespacedReference `json:"authorizerFunctionArnRef,omitempty" tf:"-"`
 
 	// Selector for a Function in lambda to populate authorizerFunctionArn.
 	// +kubebuilder:validation:Optional
-	AuthorizerFunctionArnSelector *v1.NamespacedSelector `json:"authorizerFunctionArnSelector,omitempty" tf:"-"`
+	AuthorizerFunctionArnSelector *v2.NamespacedSelector `json:"authorizerFunctionArnSelector,omitempty" tf:"-"`
 
 	// Specifies whether the HTTP caching is enabled or not. Default: false.
 	EnableCachingForHTTP *bool `json:"enableCachingForHttp,omitempty" tf:"enable_caching_for_http,omitempty"`
@@ -93,11 +92,11 @@ type AuthorizerParameters struct {
 
 	// Reference to a Function in lambda to populate authorizerFunctionArn.
 	// +kubebuilder:validation:Optional
-	AuthorizerFunctionArnRef *v1.NamespacedReference `json:"authorizerFunctionArnRef,omitempty" tf:"-"`
+	AuthorizerFunctionArnRef *v2.NamespacedReference `json:"authorizerFunctionArnRef,omitempty" tf:"-"`
 
 	// Selector for a Function in lambda to populate authorizerFunctionArn.
 	// +kubebuilder:validation:Optional
-	AuthorizerFunctionArnSelector *v1.NamespacedSelector `json:"authorizerFunctionArnSelector,omitempty" tf:"-"`
+	AuthorizerFunctionArnSelector *v2.NamespacedSelector `json:"authorizerFunctionArnSelector,omitempty" tf:"-"`
 
 	// Specifies whether the HTTP caching is enabled or not. Default: false.
 	// +kubebuilder:validation:Optional
@@ -127,7 +126,7 @@ type AuthorizerParameters struct {
 
 	// The public keys used to verify the digital signature returned by your custom authentication service. This value is required if signing is enabled in your authorizer.
 	// +kubebuilder:validation:Optional
-	TokenSigningPublicKeysSecretRef *v1.LocalSecretReference `json:"tokenSigningPublicKeysSecretRef,omitempty" tf:"-"`
+	TokenSigningPublicKeysSecretRef *v2.LocalSecretReference `json:"tokenSigningPublicKeysSecretRef,omitempty" tf:"-"`
 }
 
 // AuthorizerSpec defines the desired state of Authorizer
@@ -149,8 +148,8 @@ type AuthorizerSpec struct {
 
 // AuthorizerStatus defines the observed state of Authorizer.
 type AuthorizerStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        AuthorizerObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               AuthorizerObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

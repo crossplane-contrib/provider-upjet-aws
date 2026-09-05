@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CertificateInitParameters struct {
@@ -21,11 +21,11 @@ type CertificateInitParameters struct {
 
 	// Reference to a CertificateAuthority in acmpca to populate certificateAuthorityArn.
 	// +kubebuilder:validation:Optional
-	CertificateAuthorityArnRef *v1.Reference `json:"certificateAuthorityArnRef,omitempty" tf:"-"`
+	CertificateAuthorityArnRef *v2.Reference `json:"certificateAuthorityArnRef,omitempty" tf:"-"`
 
 	// Selector for a CertificateAuthority in acmpca to populate certificateAuthorityArn.
 	// +kubebuilder:validation:Optional
-	CertificateAuthorityArnSelector *v1.Selector `json:"certificateAuthorityArnSelector,omitempty" tf:"-"`
+	CertificateAuthorityArnSelector *v2.Selector `json:"certificateAuthorityArnSelector,omitempty" tf:"-"`
 
 	// Certificate's PEM-formatted public key
 	CertificateBody *string `json:"certificateBody,omitempty" tf:"certificate_body,omitempty"`
@@ -50,7 +50,13 @@ type CertificateInitParameters struct {
 	Options []OptionsInitParameters `json:"options,omitempty" tf:"options,omitempty"`
 
 	// Certificate's PEM-formatted private key
-	PrivateKeySecretRef *v1.SecretKeySelector `json:"privateKeySecretRef,omitempty" tf:"-"`
+	PrivateKeySecretRef *v2.SecretKeySelector `json:"privateKeySecretRef,omitempty" tf:"-"`
+
+	// Certificate's PEM-formatted private key. Conflicts with private_key. Must be used together with private_key_wo_version.
+	PrivateKeyWo *string `json:"privateKeyWo,omitempty" tf:"private_key_wo,omitempty"`
+
+	// Used together with private_key_wo to trigger an update. Increment this value when an update to private_key_wo is required.
+	PrivateKeyWoVersion *float64 `json:"privateKeyWoVersion,omitempty" tf:"private_key_wo_version,omitempty"`
 
 	// Set of domains that should be SANs in the issued certificate.
 	// +listType=set
@@ -114,6 +120,12 @@ type CertificateObservation struct {
 	// true if a Private certificate eligible for managed renewal is within the early_renewal_duration period.
 	PendingRenewal *bool `json:"pendingRenewal,omitempty" tf:"pending_renewal,omitempty"`
 
+	// Certificate's PEM-formatted private key. Conflicts with private_key. Must be used together with private_key_wo_version.
+	PrivateKeyWo *string `json:"privateKeyWo,omitempty" tf:"private_key_wo,omitempty"`
+
+	// Used together with private_key_wo to trigger an update. Increment this value when an update to private_key_wo is required.
+	PrivateKeyWoVersion *float64 `json:"privateKeyWoVersion,omitempty" tf:"private_key_wo_version,omitempty"`
+
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
@@ -161,11 +173,11 @@ type CertificateParameters struct {
 
 	// Reference to a CertificateAuthority in acmpca to populate certificateAuthorityArn.
 	// +kubebuilder:validation:Optional
-	CertificateAuthorityArnRef *v1.Reference `json:"certificateAuthorityArnRef,omitempty" tf:"-"`
+	CertificateAuthorityArnRef *v2.Reference `json:"certificateAuthorityArnRef,omitempty" tf:"-"`
 
 	// Selector for a CertificateAuthority in acmpca to populate certificateAuthorityArn.
 	// +kubebuilder:validation:Optional
-	CertificateAuthorityArnSelector *v1.Selector `json:"certificateAuthorityArnSelector,omitempty" tf:"-"`
+	CertificateAuthorityArnSelector *v2.Selector `json:"certificateAuthorityArnSelector,omitempty" tf:"-"`
 
 	// Certificate's PEM-formatted public key
 	// +kubebuilder:validation:Optional
@@ -197,7 +209,15 @@ type CertificateParameters struct {
 
 	// Certificate's PEM-formatted private key
 	// +kubebuilder:validation:Optional
-	PrivateKeySecretRef *v1.SecretKeySelector `json:"privateKeySecretRef,omitempty" tf:"-"`
+	PrivateKeySecretRef *v2.SecretKeySelector `json:"privateKeySecretRef,omitempty" tf:"-"`
+
+	// Certificate's PEM-formatted private key. Conflicts with private_key. Must be used together with private_key_wo_version.
+	// +kubebuilder:validation:Optional
+	PrivateKeyWo *string `json:"privateKeyWo,omitempty" tf:"private_key_wo,omitempty"`
+
+	// Used together with private_key_wo to trigger an update. Increment this value when an update to private_key_wo is required.
+	// +kubebuilder:validation:Optional
+	PrivateKeyWoVersion *float64 `json:"privateKeyWoVersion,omitempty" tf:"private_key_wo_version,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -321,8 +341,8 @@ type ValidationOptionParameters struct {
 
 // CertificateSpec defines the desired state of Certificate
 type CertificateSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     CertificateParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   CertificateParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -338,8 +358,8 @@ type CertificateSpec struct {
 
 // CertificateStatus defines the observed state of Certificate.
 type CertificateStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        CertificateObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               CertificateObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

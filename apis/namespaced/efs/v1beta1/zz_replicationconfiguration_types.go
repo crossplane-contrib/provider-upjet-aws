@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type DestinationInitParameters struct {
@@ -75,11 +74,11 @@ type ReplicationConfigurationInitParameters struct {
 
 	// Reference to a FileSystem in efs to populate sourceFileSystemId.
 	// +kubebuilder:validation:Optional
-	SourceFileSystemIDRef *v1.NamespacedReference `json:"sourceFileSystemIdRef,omitempty" tf:"-"`
+	SourceFileSystemIDRef *v2.NamespacedReference `json:"sourceFileSystemIdRef,omitempty" tf:"-"`
 
 	// Selector for a FileSystem in efs to populate sourceFileSystemId.
 	// +kubebuilder:validation:Optional
-	SourceFileSystemIDSelector *v1.NamespacedSelector `json:"sourceFileSystemIdSelector,omitempty" tf:"-"`
+	SourceFileSystemIDSelector *v2.NamespacedSelector `json:"sourceFileSystemIdSelector,omitempty" tf:"-"`
 }
 
 type ReplicationConfigurationObservation struct {
@@ -128,11 +127,11 @@ type ReplicationConfigurationParameters struct {
 
 	// Reference to a FileSystem in efs to populate sourceFileSystemId.
 	// +kubebuilder:validation:Optional
-	SourceFileSystemIDRef *v1.NamespacedReference `json:"sourceFileSystemIdRef,omitempty" tf:"-"`
+	SourceFileSystemIDRef *v2.NamespacedReference `json:"sourceFileSystemIdRef,omitempty" tf:"-"`
 
 	// Selector for a FileSystem in efs to populate sourceFileSystemId.
 	// +kubebuilder:validation:Optional
-	SourceFileSystemIDSelector *v1.NamespacedSelector `json:"sourceFileSystemIdSelector,omitempty" tf:"-"`
+	SourceFileSystemIDSelector *v2.NamespacedSelector `json:"sourceFileSystemIdSelector,omitempty" tf:"-"`
 }
 
 // ReplicationConfigurationSpec defines the desired state of ReplicationConfiguration
@@ -154,8 +153,8 @@ type ReplicationConfigurationSpec struct {
 
 // ReplicationConfigurationStatus defines the observed state of ReplicationConfiguration.
 type ReplicationConfigurationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ReplicationConfigurationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ReplicationConfigurationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

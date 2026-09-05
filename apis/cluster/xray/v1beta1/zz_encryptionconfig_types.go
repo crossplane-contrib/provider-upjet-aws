@@ -10,25 +10,25 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type EncryptionConfigInitParameters struct {
 
-	// An AWS KMS customer master key (CMK) ARN.
+	// AWS KMS customer master key (CMK) ARN.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kms/v1beta1.Key
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
 
 	// Reference to a Key in kms to populate keyId.
 	// +kubebuilder:validation:Optional
-	KeyIDRef *v1.Reference `json:"keyIdRef,omitempty" tf:"-"`
+	KeyIDRef *v2.Reference `json:"keyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate keyId.
 	// +kubebuilder:validation:Optional
-	KeyIDSelector *v1.Selector `json:"keyIdSelector,omitempty" tf:"-"`
+	KeyIDSelector *v2.Selector `json:"keyIdSelector,omitempty" tf:"-"`
 
-	// The type of encryption. Set to KMS to use your own key for encryption. Set to NONE for default encryption.
+	// Type of encryption. Set to KMS to use your own key for encryption. Set to NONE for default encryption.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -37,20 +37,20 @@ type EncryptionConfigObservation struct {
 	// Region name.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// An AWS KMS customer master key (CMK) ARN.
+	// AWS KMS customer master key (CMK) ARN.
 	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The type of encryption. Set to KMS to use your own key for encryption. Set to NONE for default encryption.
+	// Type of encryption. Set to KMS to use your own key for encryption. Set to NONE for default encryption.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type EncryptionConfigParameters struct {
 
-	// An AWS KMS customer master key (CMK) ARN.
+	// AWS KMS customer master key (CMK) ARN.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kms/v1beta1.Key
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -58,26 +58,26 @@ type EncryptionConfigParameters struct {
 
 	// Reference to a Key in kms to populate keyId.
 	// +kubebuilder:validation:Optional
-	KeyIDRef *v1.Reference `json:"keyIdRef,omitempty" tf:"-"`
+	KeyIDRef *v2.Reference `json:"keyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate keyId.
 	// +kubebuilder:validation:Optional
-	KeyIDSelector *v1.Selector `json:"keyIdSelector,omitempty" tf:"-"`
+	KeyIDSelector *v2.Selector `json:"keyIdSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// The type of encryption. Set to KMS to use your own key for encryption. Set to NONE for default encryption.
+	// Type of encryption. Set to KMS to use your own key for encryption. Set to NONE for default encryption.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 // EncryptionConfigSpec defines the desired state of EncryptionConfig
 type EncryptionConfigSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     EncryptionConfigParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   EncryptionConfigParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -93,8 +93,8 @@ type EncryptionConfigSpec struct {
 
 // EncryptionConfigStatus defines the observed state of EncryptionConfig.
 type EncryptionConfigStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        EncryptionConfigObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               EncryptionConfigObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

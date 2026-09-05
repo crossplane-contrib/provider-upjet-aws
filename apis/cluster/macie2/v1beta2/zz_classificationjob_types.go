@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AndInitParameters struct {
@@ -953,8 +953,8 @@ type UserPausedDetailsParameters struct {
 
 // ClassificationJobSpec defines the desired state of ClassificationJob
 type ClassificationJobSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ClassificationJobParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ClassificationJobParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -970,8 +970,8 @@ type ClassificationJobSpec struct {
 
 // ClassificationJobStatus defines the observed state of ClassificationJob.
 type ClassificationJobStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ClassificationJobObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ClassificationJobObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type RepositoryPermissionsPolicyInitParameters struct {
@@ -67,11 +67,11 @@ type RepositoryPermissionsPolicyParameters struct {
 
 	// Reference to a Domain in codeartifact to populate domain.
 	// +kubebuilder:validation:Optional
-	DomainRef *v1.Reference `json:"domainRef,omitempty" tf:"-"`
+	DomainRef *v2.Reference `json:"domainRef,omitempty" tf:"-"`
 
 	// Selector for a Domain in codeartifact to populate domain.
 	// +kubebuilder:validation:Optional
-	DomainSelector *v1.Selector `json:"domainSelector,omitempty" tf:"-"`
+	DomainSelector *v2.Selector `json:"domainSelector,omitempty" tf:"-"`
 
 	// A JSON policy string to be set as the access control resource policy on the provided domain.
 	// +kubebuilder:validation:Optional
@@ -94,17 +94,17 @@ type RepositoryPermissionsPolicyParameters struct {
 
 	// Reference to a Repository in codeartifact to populate repository.
 	// +kubebuilder:validation:Optional
-	RepositoryRef *v1.Reference `json:"repositoryRef,omitempty" tf:"-"`
+	RepositoryRef *v2.Reference `json:"repositoryRef,omitempty" tf:"-"`
 
 	// Selector for a Repository in codeartifact to populate repository.
 	// +kubebuilder:validation:Optional
-	RepositorySelector *v1.Selector `json:"repositorySelector,omitempty" tf:"-"`
+	RepositorySelector *v2.Selector `json:"repositorySelector,omitempty" tf:"-"`
 }
 
 // RepositoryPermissionsPolicySpec defines the desired state of RepositoryPermissionsPolicy
 type RepositoryPermissionsPolicySpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     RepositoryPermissionsPolicyParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   RepositoryPermissionsPolicyParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -120,8 +120,8 @@ type RepositoryPermissionsPolicySpec struct {
 
 // RepositoryPermissionsPolicyStatus defines the observed state of RepositoryPermissionsPolicy.
 type RepositoryPermissionsPolicyStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        RepositoryPermissionsPolicyObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               RepositoryPermissionsPolicyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CiphertextInitParameters struct {
@@ -26,17 +25,17 @@ type CiphertextInitParameters struct {
 
 	// Reference to a Key in kms to populate keyId.
 	// +kubebuilder:validation:Optional
-	KeyIDRef *v1.NamespacedReference `json:"keyIdRef,omitempty" tf:"-"`
+	KeyIDRef *v2.NamespacedReference `json:"keyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate keyId.
 	// +kubebuilder:validation:Optional
-	KeyIDSelector *v1.NamespacedSelector `json:"keyIdSelector,omitempty" tf:"-"`
+	KeyIDSelector *v2.NamespacedSelector `json:"keyIdSelector,omitempty" tf:"-"`
 
 	// (Exactly one of plaintext or plaintext_wo must be set) Data to be encrypted. Note that this may show up in logs, and it will be stored in the state file.
-	PlaintextSecretRef *v1.LocalSecretKeySelector `json:"plaintextSecretRef,omitempty" tf:"-"`
+	PlaintextSecretRef *v2.LocalSecretKeySelector `json:"plaintextSecretRef,omitempty" tf:"-"`
 
 	// (Write-Only, Exactly one of plaintext or plaintext_wo must be set) Data to be encrypted. Note that this may show up in logs. It will not be stored in the state file.
-	PlaintextWoSecretRef *v1.LocalSecretKeySelector `json:"plaintextWoSecretRef,omitempty" tf:"-"`
+	PlaintextWoSecretRef *v2.LocalSecretKeySelector `json:"plaintextWoSecretRef,omitempty" tf:"-"`
 
 	// Used together with plaintext_wo to trigger a replacement. Modify this value when a replacement is required.
 	PlaintextWoVersion *string `json:"plaintextWoVersion,omitempty" tf:"plaintext_wo_version,omitempty"`
@@ -78,19 +77,19 @@ type CiphertextParameters struct {
 
 	// Reference to a Key in kms to populate keyId.
 	// +kubebuilder:validation:Optional
-	KeyIDRef *v1.NamespacedReference `json:"keyIdRef,omitempty" tf:"-"`
+	KeyIDRef *v2.NamespacedReference `json:"keyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate keyId.
 	// +kubebuilder:validation:Optional
-	KeyIDSelector *v1.NamespacedSelector `json:"keyIdSelector,omitempty" tf:"-"`
+	KeyIDSelector *v2.NamespacedSelector `json:"keyIdSelector,omitempty" tf:"-"`
 
 	// (Exactly one of plaintext or plaintext_wo must be set) Data to be encrypted. Note that this may show up in logs, and it will be stored in the state file.
 	// +kubebuilder:validation:Optional
-	PlaintextSecretRef *v1.LocalSecretKeySelector `json:"plaintextSecretRef,omitempty" tf:"-"`
+	PlaintextSecretRef *v2.LocalSecretKeySelector `json:"plaintextSecretRef,omitempty" tf:"-"`
 
 	// (Write-Only, Exactly one of plaintext or plaintext_wo must be set) Data to be encrypted. Note that this may show up in logs. It will not be stored in the state file.
 	// +kubebuilder:validation:Optional
-	PlaintextWoSecretRef *v1.LocalSecretKeySelector `json:"plaintextWoSecretRef,omitempty" tf:"-"`
+	PlaintextWoSecretRef *v2.LocalSecretKeySelector `json:"plaintextWoSecretRef,omitempty" tf:"-"`
 
 	// Used together with plaintext_wo to trigger a replacement. Modify this value when a replacement is required.
 	// +kubebuilder:validation:Optional
@@ -121,8 +120,8 @@ type CiphertextSpec struct {
 
 // CiphertextStatus defines the observed state of Ciphertext.
 type CiphertextStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        CiphertextObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               CiphertextObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

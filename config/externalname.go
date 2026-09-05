@@ -7,6 +7,7 @@ package config
 import (
 	"context"
 	"fmt"
+	"hash/crc32"
 	"strings"
 
 	"github.com/crossplane/crossplane-runtime/v2/pkg/errors"
@@ -40,6 +41,8 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 
 	// bedrock
 	//
+	// Bedrock Guardrail can be imported using the composite ID: guardrail_id,version
+	"aws_bedrock_guardrail": bedrockGuardrail(),
 	// Bedrock inference profile can be imported using the ID: inference_profile-id-12345678
 	"aws_bedrock_inference_profile": identifierFromProviderWithDefaultStub("bedrock12345"),
 
@@ -56,14 +59,26 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	"aws_bedrockagentcore_api_key_credential_provider": frameworkNameAsIdentifier(),
 	"aws_bedrockagentcore_browser":                     config.FrameworkResourceWithComputedIdentifier("browser_id", "stub_browser_xp_szn45-n7uhLDeK0u"),
 	"aws_bedrockagentcore_code_interpreter":            config.FrameworkResourceWithComputedIdentifier("code_interpreter_id", "stub_code_interpreter_tool_xp_123abc-QJBfJmqq7c"),
-	"aws_bedrockagentcore_gateway":                     config.FrameworkResourceWithComputedIdentifier("gateway_id", "gateway-stub-crossplane-x00x0x-xx0x0xx0xx"),
-	"aws_bedrockagentcore_gateway_target":              config.FrameworkResourceWithComputedIdentifier("target_id", "XXXXXXXX11"),
+	// imported via evaluator_id, must match regex [a-zA-Z0-9_-]+|[a-zA-Z][a-zA-Z0-9-_]{0,99}-[a-zA-Z0-9]{10}
+	"aws_bedrockagentcore_evaluator":      config.FrameworkResourceWithComputedIdentifier("evaluator_id", "xp_stub_evaluator-0000000000"),
+	"aws_bedrockagentcore_gateway":        config.FrameworkResourceWithComputedIdentifier("gateway_id", "gateway-stub-crossplane-x00x0x-xx0x0xx0xx"),
+	"aws_bedrockagentcore_gateway_target": config.FrameworkResourceWithComputedIdentifier("target_id", "XXXXXXXX11"),
+	// must match regex [a-zA-Z][a-zA-Z0-9_]{0,39}-[a-zA-Z0-9]{10}
+	"aws_bedrockagentcore_harness": config.FrameworkResourceWithComputedIdentifier("harness_id", "xp_stub_harness-0000000000"),
 	// import using ID of memory, must satisfy regex [a-zA-Z][a-zA-Z0-9-_]{0,99}-[a-zA-Z0-9]{10}
 	"aws_bedrockagentcore_memory":                     identifierFromProviderWithDefaultStub("stub_memory_placeholder_xp-stub123456"),
 	"aws_bedrockagentcore_memory_strategy":            config.FrameworkResourceWithComputedIdentifier("memory_strategy_id", "STUB123456"),
 	"aws_bedrockagentcore_oauth2_credential_provider": frameworkNameAsIdentifier(),
-	"aws_bedrockagentcore_token_vault_cmk":            bedrockAgentCoreTokenVaultCMK(),
-	"aws_bedrockagentcore_workload_identity":          frameworkNameAsIdentifier(),
+	// must match regex [a-zA-Z][a-zA-Z0-9-_]{0,99}-[a-zA-Z0-9]{10}
+	"aws_bedrockagentcore_online_evaluation_config": config.FrameworkResourceWithComputedIdentifier("online_evaluation_config_id", "xp_stub_evalconfig-0000000000"),
+	// must match regex ^[A-Za-z][A-Za-z0-9_]*-[a-z0-9_]{10}$
+	"aws_bedrockagentcore_policy": config.FrameworkResourceWithComputedIdentifier("policy_id", "xp_stub_policy_00000-0000000000"),
+	// must match regex ^[A-Za-z][A-Za-z0-9_]*-[a-z0-9_]{10}$
+	"aws_bedrockagentcore_policy_engine": config.FrameworkResourceWithComputedIdentifier("policy_engine_id", "xp_stub_policy_engine-0000000000"),
+	// import using the resourceArn of the target Gateway or AgentRuntime
+	"aws_bedrockagentcore_resource_policy":   bedrockAgentCoreResourcePolicy(),
+	"aws_bedrockagentcore_token_vault_cmk":   bedrockAgentCoreTokenVaultCMK(),
+	"aws_bedrockagentcore_workload_identity": frameworkNameAsIdentifier(),
 
 	// CodeGuru Profiler
 	// Profiling Group can be imported using the the profiling group name
@@ -93,6 +108,8 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 
 	// ec2
 	//
+	// EC2 Capacity Block Reservations can be imported using the id: cr-06f69c6d91ca1d710
+	"aws_ec2_capacity_block_reservation": identifierFromProviderWithDefaultStub("cr-06f69c6d91ca1d710"),
 	// Imported by using the id: sgr-02108b27edd666983
 	"aws_vpc_security_group_egress_rule": vpcSecurityGroupRule(),
 	// Imported by using the id: sgr-02108b27edd666983
@@ -125,6 +142,11 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	// single MSK SCRAM secret associations can be imported using cluster_arn and secret_arn, separated by a comma (,)
 	"aws_msk_single_scram_secret_association": config.TemplatedStringAsIdentifier("", "{{ .parameters.cluster_arn }},{{ .parameters.secret_arn }}"),
 
+	// lambda
+	//
+	// Lambda Runtime Management Config can be imported using function_name and qualifier, separated by a comma (,)
+	"aws_lambda_runtime_management_config": lambdaRuntimeManagementConfig(),
+
 	// memorydb
 	//
 	// Use the AWS-generated multi_region_cluster_name
@@ -135,12 +157,21 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	// admin
 	"aws_mq_user": mqUser(),
 
+	// networkmonitor
+	//
+	// import by monitor_name
+	"aws_networkmonitor_monitor": config.ParameterAsIdentifier("monitor_name"),
+	// import by probe_id
+	"aws_networkmonitor_probe": networkmonitorProbe(),
+
 	// opensearchserverless
 	//
 	// AccessPolicy can be imported using the policy name
 	"aws_opensearchserverless_access_policy": config.NameAsIdentifier,
 	// Collection can be imported using the AWS-assigned collection ID. i.e. ch9rq91uv4yd8rff1f39
 	"aws_opensearchserverless_collection": opensearchserverlessCollection(),
+	// CollectionGroup can be imported using the AWS-assigned collection group ID
+	"aws_opensearchserverless_collection_group": opensearchserverlessCollectionGroup(),
 	// LifecyclePolicy can be imported using the policy name
 	"aws_opensearchserverless_lifecycle_policy": config.NameAsIdentifier,
 	//  SecurityConfig can be imported using the AWS-assigned security config ID
@@ -238,6 +269,8 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	//
 	// The Alternate Contact for the current account can be imported using the alternate_contact_type
 	"aws_account_alternate_contact": config.TemplatedStringAsIdentifier("", "{{ .parameters.alternate_contact_type }}"),
+	// Imported using "default" (current-account) or the explicit account_id.
+	"aws_account_primary_contact": config.IdentifierFromProvider,
 	// The account region can be imported using region_name or a comma separated account_id and region_name
 	"aws_account_region": config.TemplatedStringAsIdentifier("", "{{ .parameters.region_name }}"),
 
@@ -680,6 +713,8 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"aws_cloudwatch_log_subscription_filter": config.IdentifierFromProvider,
 	// CloudWatch query definitions can be imported using the query definition ARN.
 	"aws_cloudwatch_query_definition": config.IdentifierFromProvider,
+	// CloudWatch Log Account Policy ID format is policy_name
+	"aws_cloudwatch_log_account_policy": config.ParameterAsIdentifier("policy_name"),
 
 	// codeartifact
 	//
@@ -1171,9 +1206,9 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// VPC Endpoint connection notifications can be imported using the VPC endpoint service ID and VPC endpoint ID separated by underscore (_)
 	"aws_vpc_endpoint_connection_accepter": config.TemplatedStringAsIdentifier("", "{{ .parameters.vpc_endpoint_service_id }}_{{ .parameters.vpc_endpoint_id }}"),
 	// VPC Endpoint Route Table Associations can be imported using vpc_endpoint_id together with route_table_id
-	"aws_vpc_endpoint_route_table_association": FormattedIdentifierFromProvider("/", "vpc_endpoint_id", "route_table_id"),
+	"aws_vpc_endpoint_route_table_association": vpcEndpointAssociationIdentifier("route_table_id"),
 	// VPC Endpoint Subnet Associations can be imported using vpc_endpoint_id together with subnet_id
-	"aws_vpc_endpoint_subnet_association": FormattedIdentifierFromProvider("/", "vpc_endpoint_id", "subnet_id"),
+	"aws_vpc_endpoint_subnet_association": vpcEndpointAssociationIdentifier("subnet_id"),
 	// VPC Endpoint security group Associations can be imported using vpc_endpoint_id together with security_group_id
 	"aws_vpc_endpoint_security_group_association": config.IdentifierFromProvider,
 	// IPAMs can be imported using the ipam id
@@ -1263,7 +1298,7 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"aws_ecs_service": config.TemplatedStringAsIdentifier("name", fullARNTemplate("ecs", "service/{{ .parameters.cluster }}/{{ .external_name }}")),
 	// Imported using ARN that has a random substring, revision at the end:
 	// arn:aws:ecs:us-east-1:012345678910:task-definition/mytaskfamily:123
-	"aws_ecs_task_definition": config.IdentifierFromProvider,
+	"aws_ecs_task_definition": ecsTaskDefinition(),
 
 	// efs
 	//
@@ -2636,7 +2671,7 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 
 	// sfn
 	//
-	"aws_sfn_activity": config.TemplatedStringAsIdentifier("name", fullARNTemplate("states", "activity/{{ .external_name }}")),
+	"aws_sfn_activity": config.TemplatedStringAsIdentifier("name", fullARNTemplate("states", "activity:{{ .external_name }}")),
 	//
 	"aws_sfn_state_machine": config.TemplatedStringAsIdentifier("name", fullARNTemplate("states", "stateMachine:{{ .external_name }}")),
 
@@ -3186,6 +3221,18 @@ func opensearchserverlessCollection() config.ExternalName {
 	return e
 }
 
+func opensearchserverlessCollectionGroup() config.ExternalName {
+	e := config.IdentifierFromProvider
+	e.GetIDFn = func(ctx context.Context, externalName string, _ map[string]any, _ map[string]any) (string, error) {
+		// [a-z0-9]{3,40}
+		if len(externalName) == 0 {
+			return "stubcollectiongroup99", nil
+		}
+		return externalName, nil
+	}
+	return e
+}
+
 // PermissionSetIdAsExternalName uses the id of the permission set (ps-80383020jr9302rk) as the external name, with
 // the comma-separated pair permission_set_arn,instance_arn as the terraform id, when both arns are parameters and known
 // ahead of time.
@@ -3259,6 +3306,77 @@ func FormattedIdentifierFromProvider(separator string, keys ...string) config.Ex
 		return strings.Join(vals, separator), nil
 	}
 	return e
+}
+
+// vpcEndpointAssociationIdentifier configures the external name for VPC endpoint
+// association resources (subnet, route table) whose Terraform internal ID format
+// differs from the documented import format. The Terraform AWS provider sets the
+// ID to a-<vpc_endpoint_id><hashcode(child_id)> (see
+// internal/service/ec2.vpcEndpoint*AssociationCreateID) while these resources are
+// imported as vpc_endpoint_id/child_id. FormattedIdentifierFromProvider read the
+// "a-" prefixed internal id as the external name (via IdentifierFromProvider's
+// default GetExternalNameFn) but produced the slash-separated form in GetIDFn, so
+// the external-name annotation oscillated every reconciliation, causing perpetual
+// delete/recreate cycles and AWS 429 throttling. Reconstructing both forms
+// deterministically from the named fields keeps GetExternalNameFn and GetIDFn
+// consistent.
+func vpcEndpointAssociationIdentifier(childKey string) config.ExternalName {
+	e := config.IdentifierFromProvider
+	// External name is the stable import form: vpc_endpoint_id/child_id.
+	e.GetExternalNameFn = func(tfstate map[string]interface{}) (string, error) {
+		vpceID, childID, err := vpcEndpointAndChild(tfstate, childKey)
+		if err != nil {
+			return "", err
+		}
+		return vpceID + "/" + childID, nil
+	}
+	// Terraform id is a-<vpc_endpoint_id><hashcode(child_id)>, matching
+	// terraform-provider-aws internal/service/ec2.vpcEndpoint*AssociationCreateID.
+	e.GetIDFn = func(_ context.Context, _ string, parameters map[string]interface{}, _ map[string]interface{}) (string, error) {
+		vpceID, childID, err := vpcEndpointAndChild(parameters, childKey)
+		if err != nil {
+			return "", err
+		}
+		return fmt.Sprintf("a-%s%d", vpceID, ec2StringHashcode(childID)), nil
+	}
+	return e
+}
+
+// vpcEndpointAndChild reads the vpc_endpoint_id and the association's child id
+// (childKey, e.g. subnet_id or route_table_id) from a tfstate/parameters map,
+// returning an error if either is missing or empty.
+func vpcEndpointAndChild(fields map[string]interface{}, childKey string) (vpceID, childID string, err error) {
+	if vpceID, err = requiredString(fields, "vpc_endpoint_id"); err != nil {
+		return "", "", err
+	}
+	if childID, err = requiredString(fields, childKey); err != nil {
+		return "", "", err
+	}
+	return vpceID, childID, nil
+}
+
+// requiredString returns fields[key] as a non-empty string, erroring if it is
+// missing, not a string, or empty.
+func requiredString(fields map[string]interface{}, key string) (string, error) {
+	s, ok := fields[key].(string)
+	if !ok || s == "" {
+		return "", errors.Errorf("%s cannot be empty", key)
+	}
+	return s, nil
+}
+
+// ec2StringHashcode mirrors terraform-provider-aws internal/create.StringHashcode,
+// which the AWS provider uses to build VPC endpoint association Terraform IDs.
+func ec2StringHashcode(s string) int {
+	v := int(crc32.ChecksumIEEE([]byte(s)))
+	if v >= 0 {
+		return v
+	}
+	if -v >= 0 {
+		return -v
+	}
+	// v == math.MinInt
+	return 0
 }
 
 // FormattedIdentifierUserDefinedNameLast is used in cases where the ID is constructed
@@ -3613,6 +3731,34 @@ func s3BucketIdentifier() config.ExternalName {
 	return e
 }
 
+// lambdaRuntimeManagementConfig handles the external-name of the
+// aws_lambda_runtime_management_config resource. It is a
+// terraform-plugin-framework resource without an "id" attribute, imported
+// using "function_name,qualifier" (qualifier defaults to "$LATEST" when
+// omitted). function_name and qualifier stay regular spec fields so that the
+// function_name reference resolves and an explicit qualifier reaches
+// Terraform; only the external-name computation is customized here.
+func lambdaRuntimeManagementConfig() config.ExternalName {
+	e := config.IdentifierFromProvider
+	// The resource has no monolithic "id" attribute, so do not push one into
+	// the Terraform state.
+	e.GetIDFn = func(_ context.Context, _ string, _ map[string]any, _ map[string]any) (string, error) {
+		return "", nil
+	}
+	e.GetExternalNameFn = func(tfstate map[string]any) (string, error) {
+		functionName, ok := tfstate["function_name"].(string)
+		if !ok || functionName == "" {
+			return "", errors.New("function_name field missing from tfstate")
+		}
+		qualifier, _ := tfstate["qualifier"].(string)
+		if qualifier == "" {
+			qualifier = "$LATEST"
+		}
+		return fmt.Sprintf("%s,%s", functionName, qualifier), nil
+	}
+	return e
+}
+
 func dsqlClusterPeering() config.ExternalName {
 	e := config.IdentifierFromProvider
 	e.GetExternalNameFn = func(tfstate map[string]any) (string, error) {
@@ -3684,6 +3830,54 @@ func wafv2WebACLRuleGroupAssociation() config.ExternalName {
 		}
 
 		return "", errors.New("either rule_group_reference or managed_rule_group must be present in state file")
+	}
+	return e
+}
+
+// bedrockGuardrail configures the external name for aws_bedrock_guardrail, a
+//
+//	. Its Terraform identity is the composite
+//
+// "guardrail_id,version" where both parts are computed by AWS: guardrail_id is
+// the AWS-assigned identifier and version is computed (defaults to "DRAFT").
+// The external name is therefore the joined "guardrail_id,version" string and
+// no user-supplied name is involved.
+func bedrockGuardrail() config.ExternalName { //nolint:gocyclo // easier to follow as a unit
+	const (
+		sep             = ","
+		stubGuardrailID = "xpstubguardrail0"
+		stubVersion     = "DRAFT"
+	)
+	e := config.IdentifierFromProvider
+	e.GetExternalNameFn = func(tfstate map[string]any) (string, error) {
+		id, ok := tfstate["guardrail_id"].(string)
+		if !ok || id == "" {
+			return "", errors.New("cannot find \"guardrail_id\" in tfstate")
+		}
+		version, ok := tfstate["version"].(string)
+		if !ok || version == "" {
+			return "", errors.New("cannot find \"version\" in tfstate")
+		}
+		return id + sep + version, nil
+	}
+	e.SetIdentifierArgumentFn = func(base map[string]any, externalName string) {
+		guardrailID, version := stubGuardrailID, stubVersion
+		if externalName != "" {
+			parts := strings.SplitN(externalName, sep, 2)
+			if len(parts) != 2 {
+				return
+			}
+			guardrailID, version = parts[0], parts[1]
+		}
+		if v, ok := base["guardrail_id"].(string); !ok || v == "" || v == stubGuardrailID {
+			base["guardrail_id"] = guardrailID
+		}
+		if v, ok := base["version"].(string); !ok || v == "" || v == stubVersion {
+			base["version"] = version
+		}
+	}
+	e.TFPluginFrameworkOptions = config.TFPluginFrameworkOptions{
+		ComputedIdentifierAttributes: []string{"guardrail_id", "version"},
 	}
 	return e
 }
@@ -3767,6 +3961,29 @@ func bedrockAgentCoreAgentRuntimeEndpoint() config.ExternalName {
 	return e
 }
 
+func bedrockAgentCoreResourcePolicy() config.ExternalName {
+	e := config.IdentifierFromProvider
+	e.OmittedFields = []string{}
+	e.GetIDFn = func(_ context.Context, _ string, _ map[string]any, _ map[string]any) (string, error) {
+		return "", nil
+	}
+	e.GetExternalNameFn = func(tfstate map[string]any) (string, error) {
+		name, ok := tfstate["resource_arn"].(string)
+		if !ok {
+			return "", errors.New("resource_arn field missing from tfstate")
+		}
+		return name, nil
+	}
+	e.SetIdentifierArgumentFn = func(tfstate map[string]any, externalName string) {
+		if externalName == "" {
+			return
+		}
+		tfstate["resource_arn"] = externalName
+	}
+	e.IdentifierFields = []string{"resource_arn"}
+	return e
+}
+
 func codebuildWebhook() config.ExternalName {
 	e := config.IdentifierFromProvider
 	e.SetIdentifierArgumentFn = func(tfstate map[string]any, externalName string) {
@@ -3803,6 +4020,66 @@ func ecrRepositoryCreationTemplate() config.ExternalName {
 			return "", errors.New("attribute \"prefix\" missing from TF state")
 		}
 		return prefix, nil
+	}
+	return e
+}
+
+func networkmonitorProbe() config.ExternalName {
+	e := config.IdentifierFromProvider
+	// must satisfy regular expression pattern: probe-[a-z0-9A-Z-]{21,64}
+	const placeholderProbeID = "probe-0000000000-xpstub-0000000000"
+	const idSeparator = ","
+	// ID format: monitor_name,probe_id
+	e.GetExternalNameFn = func(tfstate map[string]any) (string, error) {
+		id, ok := tfstate["id"].(string)
+		if !ok || id == "" {
+			return "", errors.New("cannot find id in tfstate")
+		}
+		idParts := strings.Split(id, idSeparator)
+		if len(idParts) != 2 || idParts[0] == "" || idParts[1] == "" {
+			return "", errors.Errorf("unexpected format for ID (%v)", id)
+		}
+		return idParts[1], nil
+	}
+	e.GetIDFn = func(_ context.Context, externalName string, parameters map[string]any, _ map[string]any) (string, error) {
+		monitorName, ok := parameters["monitor_name"].(string)
+		if !ok || monitorName == "" {
+			return "", errors.New("parameter monitor_name missing from resource configuration")
+		}
+		if externalName == "" {
+			return fmt.Sprintf("%s,%s", monitorName, placeholderProbeID), nil
+		}
+		return fmt.Sprintf("%s,%s", monitorName, externalName), nil
+	}
+	e.IdentifierFields = []string{"monitor_name"}
+	return e
+}
+
+func ecsTaskDefinition() config.ExternalName {
+	e := config.IdentifierFromProvider
+	const (
+		arnSections   = 6
+		arnPrefix     = "arn"
+		arnECSService = "ecs"
+	)
+
+	// resourceTaskDefinitionRead uses d.Get("arn") instead of d.Id() to call
+	// DescribeTaskDefinition. On a cold-start observe, "arn" is a computed-only
+	// attribute and is not present in params, so the API call goes out with an
+	// empty identifier and AWS returns a 400 that upjet surfaces as "external
+	// resource does not exist". Seed params["arn"] from the external name so the
+	// read always has a non-empty identifier.
+	e.SetIdentifierArgumentFn = func(base map[string]any, externalName string) {
+		// only set `arn` if the external name is a full ARN
+		arnParts := strings.SplitN(externalName, ":", arnSections)
+		if len(arnParts) != arnSections ||
+			arnParts[0] != arnPrefix ||
+			arnParts[2] != arnECSService {
+			return
+		}
+		if arn, _ := base["arn"].(string); arn == "" && externalName != "" {
+			base["arn"] = externalName
+		}
 	}
 	return e
 }

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type DNSOptionsInitParameters struct {
@@ -55,11 +55,11 @@ type ServiceNetworkVPCAssociationInitParameters struct {
 
 	// References to SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIDRefs []v1.Reference `json:"securityGroupIdRefs,omitempty" tf:"-"`
+	SecurityGroupIDRefs []v2.Reference `json:"securityGroupIdRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIDSelector *v1.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
+	SecurityGroupIDSelector *v2.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 
 	// The IDs of the security groups.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.SecurityGroup
@@ -75,11 +75,11 @@ type ServiceNetworkVPCAssociationInitParameters struct {
 
 	// Reference to a ServiceNetwork in vpclattice to populate serviceNetworkIdentifier.
 	// +kubebuilder:validation:Optional
-	ServiceNetworkIdentifierRef *v1.Reference `json:"serviceNetworkIdentifierRef,omitempty" tf:"-"`
+	ServiceNetworkIdentifierRef *v2.Reference `json:"serviceNetworkIdentifierRef,omitempty" tf:"-"`
 
 	// Selector for a ServiceNetwork in vpclattice to populate serviceNetworkIdentifier.
 	// +kubebuilder:validation:Optional
-	ServiceNetworkIdentifierSelector *v1.Selector `json:"serviceNetworkIdentifierSelector,omitempty" tf:"-"`
+	ServiceNetworkIdentifierSelector *v2.Selector `json:"serviceNetworkIdentifierSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -92,11 +92,11 @@ type ServiceNetworkVPCAssociationInitParameters struct {
 
 	// Reference to a VPC in ec2 to populate vpcIdentifier.
 	// +kubebuilder:validation:Optional
-	VPCIdentifierRef *v1.Reference `json:"vpcIdentifierRef,omitempty" tf:"-"`
+	VPCIdentifierRef *v2.Reference `json:"vpcIdentifierRef,omitempty" tf:"-"`
 
 	// Selector for a VPC in ec2 to populate vpcIdentifier.
 	// +kubebuilder:validation:Optional
-	VPCIdentifierSelector *v1.Selector `json:"vpcIdentifierSelector,omitempty" tf:"-"`
+	VPCIdentifierSelector *v2.Selector `json:"vpcIdentifierSelector,omitempty" tf:"-"`
 }
 
 type ServiceNetworkVPCAssociationObservation struct {
@@ -159,11 +159,11 @@ type ServiceNetworkVPCAssociationParameters struct {
 
 	// References to SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIDRefs []v1.Reference `json:"securityGroupIdRefs,omitempty" tf:"-"`
+	SecurityGroupIDRefs []v2.Reference `json:"securityGroupIdRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIDSelector *v1.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
+	SecurityGroupIDSelector *v2.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 
 	// The IDs of the security groups.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.SecurityGroup
@@ -181,11 +181,11 @@ type ServiceNetworkVPCAssociationParameters struct {
 
 	// Reference to a ServiceNetwork in vpclattice to populate serviceNetworkIdentifier.
 	// +kubebuilder:validation:Optional
-	ServiceNetworkIdentifierRef *v1.Reference `json:"serviceNetworkIdentifierRef,omitempty" tf:"-"`
+	ServiceNetworkIdentifierRef *v2.Reference `json:"serviceNetworkIdentifierRef,omitempty" tf:"-"`
 
 	// Selector for a ServiceNetwork in vpclattice to populate serviceNetworkIdentifier.
 	// +kubebuilder:validation:Optional
-	ServiceNetworkIdentifierSelector *v1.Selector `json:"serviceNetworkIdentifierSelector,omitempty" tf:"-"`
+	ServiceNetworkIdentifierSelector *v2.Selector `json:"serviceNetworkIdentifierSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -200,17 +200,17 @@ type ServiceNetworkVPCAssociationParameters struct {
 
 	// Reference to a VPC in ec2 to populate vpcIdentifier.
 	// +kubebuilder:validation:Optional
-	VPCIdentifierRef *v1.Reference `json:"vpcIdentifierRef,omitempty" tf:"-"`
+	VPCIdentifierRef *v2.Reference `json:"vpcIdentifierRef,omitempty" tf:"-"`
 
 	// Selector for a VPC in ec2 to populate vpcIdentifier.
 	// +kubebuilder:validation:Optional
-	VPCIdentifierSelector *v1.Selector `json:"vpcIdentifierSelector,omitempty" tf:"-"`
+	VPCIdentifierSelector *v2.Selector `json:"vpcIdentifierSelector,omitempty" tf:"-"`
 }
 
 // ServiceNetworkVPCAssociationSpec defines the desired state of ServiceNetworkVPCAssociation
 type ServiceNetworkVPCAssociationSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ServiceNetworkVPCAssociationParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ServiceNetworkVPCAssociationParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -226,8 +226,8 @@ type ServiceNetworkVPCAssociationSpec struct {
 
 // ServiceNetworkVPCAssociationStatus defines the observed state of ServiceNetworkVPCAssociation.
 type ServiceNetworkVPCAssociationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ServiceNetworkVPCAssociationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ServiceNetworkVPCAssociationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

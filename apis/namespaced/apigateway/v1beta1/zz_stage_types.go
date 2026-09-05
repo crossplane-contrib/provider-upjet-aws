@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AccessLogSettingsInitParameters struct {
@@ -122,11 +121,11 @@ type StageInitParameters struct {
 
 	// Reference to a Deployment in apigateway to populate deploymentId.
 	// +kubebuilder:validation:Optional
-	DeploymentIDRef *v1.NamespacedReference `json:"deploymentIdRef,omitempty" tf:"-"`
+	DeploymentIDRef *v2.NamespacedReference `json:"deploymentIdRef,omitempty" tf:"-"`
 
 	// Selector for a Deployment in apigateway to populate deploymentId.
 	// +kubebuilder:validation:Optional
-	DeploymentIDSelector *v1.NamespacedSelector `json:"deploymentIdSelector,omitempty" tf:"-"`
+	DeploymentIDSelector *v2.NamespacedSelector `json:"deploymentIdSelector,omitempty" tf:"-"`
 
 	// Description of the stage.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
@@ -141,11 +140,11 @@ type StageInitParameters struct {
 
 	// Reference to a RestAPI in apigateway to populate restApiId.
 	// +kubebuilder:validation:Optional
-	RestAPIIDRef *v1.NamespacedReference `json:"restApiIdRef,omitempty" tf:"-"`
+	RestAPIIDRef *v2.NamespacedReference `json:"restApiIdRef,omitempty" tf:"-"`
 
 	// Selector for a RestAPI in apigateway to populate restApiId.
 	// +kubebuilder:validation:Optional
-	RestAPIIDSelector *v1.NamespacedSelector `json:"restApiIdSelector,omitempty" tf:"-"`
+	RestAPIIDSelector *v2.NamespacedSelector `json:"restApiIdSelector,omitempty" tf:"-"`
 
 	// Name of the stage
 	StageName *string `json:"stageName,omitempty" tf:"stage_name,omitempty"`
@@ -262,11 +261,11 @@ type StageParameters struct {
 
 	// Reference to a Deployment in apigateway to populate deploymentId.
 	// +kubebuilder:validation:Optional
-	DeploymentIDRef *v1.NamespacedReference `json:"deploymentIdRef,omitempty" tf:"-"`
+	DeploymentIDRef *v2.NamespacedReference `json:"deploymentIdRef,omitempty" tf:"-"`
 
 	// Selector for a Deployment in apigateway to populate deploymentId.
 	// +kubebuilder:validation:Optional
-	DeploymentIDSelector *v1.NamespacedSelector `json:"deploymentIdSelector,omitempty" tf:"-"`
+	DeploymentIDSelector *v2.NamespacedSelector `json:"deploymentIdSelector,omitempty" tf:"-"`
 
 	// Description of the stage.
 	// +kubebuilder:validation:Optional
@@ -289,11 +288,11 @@ type StageParameters struct {
 
 	// Reference to a RestAPI in apigateway to populate restApiId.
 	// +kubebuilder:validation:Optional
-	RestAPIIDRef *v1.NamespacedReference `json:"restApiIdRef,omitempty" tf:"-"`
+	RestAPIIDRef *v2.NamespacedReference `json:"restApiIdRef,omitempty" tf:"-"`
 
 	// Selector for a RestAPI in apigateway to populate restApiId.
 	// +kubebuilder:validation:Optional
-	RestAPIIDSelector *v1.NamespacedSelector `json:"restApiIdSelector,omitempty" tf:"-"`
+	RestAPIIDSelector *v2.NamespacedSelector `json:"restApiIdSelector,omitempty" tf:"-"`
 
 	// Name of the stage
 	// +kubebuilder:validation:Optional
@@ -333,8 +332,8 @@ type StageSpec struct {
 
 // StageStatus defines the observed state of Stage.
 type StageStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        StageObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               StageObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

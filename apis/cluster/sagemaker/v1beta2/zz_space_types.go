@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CodeEditorAppSettingsAppLifecycleManagementIdleSettingsInitParameters struct {
@@ -117,11 +117,11 @@ type SpaceInitParameters struct {
 
 	// Reference to a Domain in sagemaker to populate domainId.
 	// +kubebuilder:validation:Optional
-	DomainIDRef *v1.Reference `json:"domainIdRef,omitempty" tf:"-"`
+	DomainIDRef *v2.Reference `json:"domainIdRef,omitempty" tf:"-"`
 
 	// Selector for a Domain in sagemaker to populate domainId.
 	// +kubebuilder:validation:Optional
-	DomainIDSelector *v1.Selector `json:"domainIdSelector,omitempty" tf:"-"`
+	DomainIDSelector *v2.Selector `json:"domainIdSelector,omitempty" tf:"-"`
 
 	// A collection of ownership settings. Required if space_sharing_settings is set. See ownership_settings Block below.
 	OwnershipSettings *OwnershipSettingsInitParameters `json:"ownershipSettings,omitempty" tf:"ownership_settings,omitempty"`
@@ -198,11 +198,11 @@ type SpaceParameters struct {
 
 	// Reference to a Domain in sagemaker to populate domainId.
 	// +kubebuilder:validation:Optional
-	DomainIDRef *v1.Reference `json:"domainIdRef,omitempty" tf:"-"`
+	DomainIDRef *v2.Reference `json:"domainIdRef,omitempty" tf:"-"`
 
 	// Selector for a Domain in sagemaker to populate domainId.
 	// +kubebuilder:validation:Optional
-	DomainIDSelector *v1.Selector `json:"domainIdSelector,omitempty" tf:"-"`
+	DomainIDSelector *v2.Selector `json:"domainIdSelector,omitempty" tf:"-"`
 
 	// A collection of ownership settings. Required if space_sharing_settings is set. See ownership_settings Block below.
 	// +kubebuilder:validation:Optional
@@ -876,8 +876,8 @@ type SpaceSharingSettingsParameters struct {
 
 // SpaceSpec defines the desired state of Space
 type SpaceSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     SpaceParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   SpaceParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -893,8 +893,8 @@ type SpaceSpec struct {
 
 // SpaceStatus defines the observed state of Space.
 type SpaceStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SpaceObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SpaceObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

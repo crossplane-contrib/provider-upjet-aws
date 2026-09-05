@@ -5,244 +5,244 @@
 
 package v1beta1
 
-import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+import xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 
 // GetCondition of this Backup.
-func (mg *Backup) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *Backup) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this Backup.
-func (mg *Backup) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *Backup) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this Backup.
-func (mg *Backup) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *Backup) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this Backup.
-func (mg *Backup) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *Backup) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this Backup.
-func (mg *Backup) SetConditions(c ...xpv1.Condition) {
+func (mg *Backup) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this Backup.
-func (mg *Backup) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *Backup) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this Backup.
-func (mg *Backup) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *Backup) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this Backup.
-func (mg *Backup) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *Backup) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this DataRepositoryAssociation.
-func (mg *DataRepositoryAssociation) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *DataRepositoryAssociation) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this DataRepositoryAssociation.
-func (mg *DataRepositoryAssociation) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *DataRepositoryAssociation) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this DataRepositoryAssociation.
-func (mg *DataRepositoryAssociation) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *DataRepositoryAssociation) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this DataRepositoryAssociation.
-func (mg *DataRepositoryAssociation) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *DataRepositoryAssociation) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this DataRepositoryAssociation.
-func (mg *DataRepositoryAssociation) SetConditions(c ...xpv1.Condition) {
+func (mg *DataRepositoryAssociation) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this DataRepositoryAssociation.
-func (mg *DataRepositoryAssociation) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *DataRepositoryAssociation) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this DataRepositoryAssociation.
-func (mg *DataRepositoryAssociation) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *DataRepositoryAssociation) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this DataRepositoryAssociation.
-func (mg *DataRepositoryAssociation) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *DataRepositoryAssociation) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this LustreFileSystem.
-func (mg *LustreFileSystem) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *LustreFileSystem) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this LustreFileSystem.
-func (mg *LustreFileSystem) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *LustreFileSystem) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this LustreFileSystem.
-func (mg *LustreFileSystem) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *LustreFileSystem) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this LustreFileSystem.
-func (mg *LustreFileSystem) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *LustreFileSystem) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this LustreFileSystem.
-func (mg *LustreFileSystem) SetConditions(c ...xpv1.Condition) {
+func (mg *LustreFileSystem) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this LustreFileSystem.
-func (mg *LustreFileSystem) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *LustreFileSystem) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this LustreFileSystem.
-func (mg *LustreFileSystem) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *LustreFileSystem) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this LustreFileSystem.
-func (mg *LustreFileSystem) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *LustreFileSystem) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this OntapFileSystem.
-func (mg *OntapFileSystem) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *OntapFileSystem) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this OntapFileSystem.
-func (mg *OntapFileSystem) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *OntapFileSystem) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this OntapFileSystem.
-func (mg *OntapFileSystem) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *OntapFileSystem) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this OntapFileSystem.
-func (mg *OntapFileSystem) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *OntapFileSystem) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this OntapFileSystem.
-func (mg *OntapFileSystem) SetConditions(c ...xpv1.Condition) {
+func (mg *OntapFileSystem) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this OntapFileSystem.
-func (mg *OntapFileSystem) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *OntapFileSystem) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this OntapFileSystem.
-func (mg *OntapFileSystem) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *OntapFileSystem) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this OntapFileSystem.
-func (mg *OntapFileSystem) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *OntapFileSystem) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this OntapStorageVirtualMachine.
-func (mg *OntapStorageVirtualMachine) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *OntapStorageVirtualMachine) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this OntapStorageVirtualMachine.
-func (mg *OntapStorageVirtualMachine) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *OntapStorageVirtualMachine) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this OntapStorageVirtualMachine.
-func (mg *OntapStorageVirtualMachine) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *OntapStorageVirtualMachine) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this OntapStorageVirtualMachine.
-func (mg *OntapStorageVirtualMachine) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *OntapStorageVirtualMachine) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this OntapStorageVirtualMachine.
-func (mg *OntapStorageVirtualMachine) SetConditions(c ...xpv1.Condition) {
+func (mg *OntapStorageVirtualMachine) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this OntapStorageVirtualMachine.
-func (mg *OntapStorageVirtualMachine) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *OntapStorageVirtualMachine) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this OntapStorageVirtualMachine.
-func (mg *OntapStorageVirtualMachine) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *OntapStorageVirtualMachine) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this OntapStorageVirtualMachine.
-func (mg *OntapStorageVirtualMachine) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *OntapStorageVirtualMachine) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this WindowsFileSystem.
-func (mg *WindowsFileSystem) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *WindowsFileSystem) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this WindowsFileSystem.
-func (mg *WindowsFileSystem) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *WindowsFileSystem) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this WindowsFileSystem.
-func (mg *WindowsFileSystem) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *WindowsFileSystem) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this WindowsFileSystem.
-func (mg *WindowsFileSystem) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *WindowsFileSystem) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this WindowsFileSystem.
-func (mg *WindowsFileSystem) SetConditions(c ...xpv1.Condition) {
+func (mg *WindowsFileSystem) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this WindowsFileSystem.
-func (mg *WindowsFileSystem) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *WindowsFileSystem) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this WindowsFileSystem.
-func (mg *WindowsFileSystem) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *WindowsFileSystem) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this WindowsFileSystem.
-func (mg *WindowsFileSystem) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *WindowsFileSystem) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

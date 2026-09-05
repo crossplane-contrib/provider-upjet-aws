@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type LaunchSpecificationEBSBlockDeviceInitParameters struct {
@@ -145,11 +144,11 @@ type LaunchSpecificationInitParameters struct {
 
 	// Reference to a InstanceProfile in iam to populate iamInstanceProfileArn.
 	// +kubebuilder:validation:Optional
-	IAMInstanceProfileArnRef *v1.NamespacedReference `json:"iamInstanceProfileArnRef,omitempty" tf:"-"`
+	IAMInstanceProfileArnRef *v2.NamespacedReference `json:"iamInstanceProfileArnRef,omitempty" tf:"-"`
 
 	// Selector for a InstanceProfile in iam to populate iamInstanceProfileArn.
 	// +kubebuilder:validation:Optional
-	IAMInstanceProfileArnSelector *v1.NamespacedSelector `json:"iamInstanceProfileArnSelector,omitempty" tf:"-"`
+	IAMInstanceProfileArnSelector *v2.NamespacedSelector `json:"iamInstanceProfileArnSelector,omitempty" tf:"-"`
 
 	// The type of instance to request.
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
@@ -268,11 +267,11 @@ type LaunchSpecificationParameters struct {
 
 	// Reference to a InstanceProfile in iam to populate iamInstanceProfileArn.
 	// +kubebuilder:validation:Optional
-	IAMInstanceProfileArnRef *v1.NamespacedReference `json:"iamInstanceProfileArnRef,omitempty" tf:"-"`
+	IAMInstanceProfileArnRef *v2.NamespacedReference `json:"iamInstanceProfileArnRef,omitempty" tf:"-"`
 
 	// Selector for a InstanceProfile in iam to populate iamInstanceProfileArn.
 	// +kubebuilder:validation:Optional
-	IAMInstanceProfileArnSelector *v1.NamespacedSelector `json:"iamInstanceProfileArnSelector,omitempty" tf:"-"`
+	IAMInstanceProfileArnSelector *v2.NamespacedSelector `json:"iamInstanceProfileArnSelector,omitempty" tf:"-"`
 
 	// The type of instance to request.
 	// +kubebuilder:validation:Optional
@@ -387,11 +386,11 @@ type LaunchTemplateConfigLaunchTemplateSpecificationInitParameters struct {
 
 	// Reference to a LaunchTemplate in ec2 to populate id.
 	// +kubebuilder:validation:Optional
-	IDRef *v1.NamespacedReference `json:"idRef,omitempty" tf:"-"`
+	IDRef *v2.NamespacedReference `json:"idRef,omitempty" tf:"-"`
 
 	// Selector for a LaunchTemplate in ec2 to populate id.
 	// +kubebuilder:validation:Optional
-	IDSelector *v1.NamespacedSelector `json:"idSelector,omitempty" tf:"-"`
+	IDSelector *v2.NamespacedSelector `json:"idSelector,omitempty" tf:"-"`
 
 	// The name of the launch template. Conflicts with id.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -403,11 +402,11 @@ type LaunchTemplateConfigLaunchTemplateSpecificationInitParameters struct {
 
 	// Reference to a LaunchTemplate in ec2 to populate version.
 	// +kubebuilder:validation:Optional
-	VersionRef *v1.NamespacedReference `json:"versionRef,omitempty" tf:"-"`
+	VersionRef *v2.NamespacedReference `json:"versionRef,omitempty" tf:"-"`
 
 	// Selector for a LaunchTemplate in ec2 to populate version.
 	// +kubebuilder:validation:Optional
-	VersionSelector *v1.NamespacedSelector `json:"versionSelector,omitempty" tf:"-"`
+	VersionSelector *v2.NamespacedSelector `json:"versionSelector,omitempty" tf:"-"`
 }
 
 type LaunchTemplateConfigLaunchTemplateSpecificationObservation struct {
@@ -432,11 +431,11 @@ type LaunchTemplateConfigLaunchTemplateSpecificationParameters struct {
 
 	// Reference to a LaunchTemplate in ec2 to populate id.
 	// +kubebuilder:validation:Optional
-	IDRef *v1.NamespacedReference `json:"idRef,omitempty" tf:"-"`
+	IDRef *v2.NamespacedReference `json:"idRef,omitempty" tf:"-"`
 
 	// Selector for a LaunchTemplate in ec2 to populate id.
 	// +kubebuilder:validation:Optional
-	IDSelector *v1.NamespacedSelector `json:"idSelector,omitempty" tf:"-"`
+	IDSelector *v2.NamespacedSelector `json:"idSelector,omitempty" tf:"-"`
 
 	// The name of the launch template. Conflicts with id.
 	// +kubebuilder:validation:Optional
@@ -450,11 +449,11 @@ type LaunchTemplateConfigLaunchTemplateSpecificationParameters struct {
 
 	// Reference to a LaunchTemplate in ec2 to populate version.
 	// +kubebuilder:validation:Optional
-	VersionRef *v1.NamespacedReference `json:"versionRef,omitempty" tf:"-"`
+	VersionRef *v2.NamespacedReference `json:"versionRef,omitempty" tf:"-"`
 
 	// Selector for a LaunchTemplate in ec2 to populate version.
 	// +kubebuilder:validation:Optional
-	VersionSelector *v1.NamespacedSelector `json:"versionSelector,omitempty" tf:"-"`
+	VersionSelector *v2.NamespacedSelector `json:"versionSelector,omitempty" tf:"-"`
 }
 
 type OverridesInitParameters struct {
@@ -1492,8 +1491,8 @@ type SpotFleetRequestSpec struct {
 
 // SpotFleetRequestStatus defines the observed state of SpotFleetRequest.
 type SpotFleetRequestStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SpotFleetRequestObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SpotFleetRequestObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type InfrastructureConfigurationInitParameters struct {
@@ -28,11 +27,11 @@ type InfrastructureConfigurationInitParameters struct {
 
 	// Reference to a InstanceProfile in iam to populate instanceProfileName.
 	// +kubebuilder:validation:Optional
-	InstanceProfileNameRef *v1.NamespacedReference `json:"instanceProfileNameRef,omitempty" tf:"-"`
+	InstanceProfileNameRef *v2.NamespacedReference `json:"instanceProfileNameRef,omitempty" tf:"-"`
 
 	// Selector for a InstanceProfile in iam to populate instanceProfileName.
 	// +kubebuilder:validation:Optional
-	InstanceProfileNameSelector *v1.NamespacedSelector `json:"instanceProfileNameSelector,omitempty" tf:"-"`
+	InstanceProfileNameSelector *v2.NamespacedSelector `json:"instanceProfileNameSelector,omitempty" tf:"-"`
 
 	// Set of EC2 Instance Types.
 	// +listType=set
@@ -44,11 +43,11 @@ type InfrastructureConfigurationInitParameters struct {
 
 	// Reference to a KeyPair in ec2 to populate keyPair.
 	// +kubebuilder:validation:Optional
-	KeyPairRef *v1.NamespacedReference `json:"keyPairRef,omitempty" tf:"-"`
+	KeyPairRef *v2.NamespacedReference `json:"keyPairRef,omitempty" tf:"-"`
 
 	// Selector for a KeyPair in ec2 to populate keyPair.
 	// +kubebuilder:validation:Optional
-	KeyPairSelector *v1.NamespacedSelector `json:"keyPairSelector,omitempty" tf:"-"`
+	KeyPairSelector *v2.NamespacedSelector `json:"keyPairSelector,omitempty" tf:"-"`
 
 	// Configuration block with logging settings. Detailed below.
 	Logging *LoggingInitParameters `json:"logging,omitempty" tf:"logging,omitempty"`
@@ -65,11 +64,11 @@ type InfrastructureConfigurationInitParameters struct {
 
 	// References to SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIDRefs []v1.NamespacedReference `json:"securityGroupIdRefs,omitempty" tf:"-"`
+	SecurityGroupIDRefs []v2.NamespacedReference `json:"securityGroupIdRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIDSelector *v1.NamespacedSelector `json:"securityGroupIdSelector,omitempty" tf:"-"`
+	SecurityGroupIDSelector *v2.NamespacedSelector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 
 	// Set of EC2 Security Group identifiers.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
@@ -85,11 +84,11 @@ type InfrastructureConfigurationInitParameters struct {
 
 	// Reference to a Topic in sns to populate snsTopicArn.
 	// +kubebuilder:validation:Optional
-	SnsTopicArnRef *v1.NamespacedReference `json:"snsTopicArnRef,omitempty" tf:"-"`
+	SnsTopicArnRef *v2.NamespacedReference `json:"snsTopicArnRef,omitempty" tf:"-"`
 
 	// Selector for a Topic in sns to populate snsTopicArn.
 	// +kubebuilder:validation:Optional
-	SnsTopicArnSelector *v1.NamespacedSelector `json:"snsTopicArnSelector,omitempty" tf:"-"`
+	SnsTopicArnSelector *v2.NamespacedSelector `json:"snsTopicArnSelector,omitempty" tf:"-"`
 
 	// EC2 Subnet identifier. Also requires security_group_ids argument.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Subnet
@@ -97,11 +96,11 @@ type InfrastructureConfigurationInitParameters struct {
 
 	// Reference to a Subnet in ec2 to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in ec2 to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -197,11 +196,11 @@ type InfrastructureConfigurationParameters struct {
 
 	// Reference to a InstanceProfile in iam to populate instanceProfileName.
 	// +kubebuilder:validation:Optional
-	InstanceProfileNameRef *v1.NamespacedReference `json:"instanceProfileNameRef,omitempty" tf:"-"`
+	InstanceProfileNameRef *v2.NamespacedReference `json:"instanceProfileNameRef,omitempty" tf:"-"`
 
 	// Selector for a InstanceProfile in iam to populate instanceProfileName.
 	// +kubebuilder:validation:Optional
-	InstanceProfileNameSelector *v1.NamespacedSelector `json:"instanceProfileNameSelector,omitempty" tf:"-"`
+	InstanceProfileNameSelector *v2.NamespacedSelector `json:"instanceProfileNameSelector,omitempty" tf:"-"`
 
 	// Set of EC2 Instance Types.
 	// +kubebuilder:validation:Optional
@@ -215,11 +214,11 @@ type InfrastructureConfigurationParameters struct {
 
 	// Reference to a KeyPair in ec2 to populate keyPair.
 	// +kubebuilder:validation:Optional
-	KeyPairRef *v1.NamespacedReference `json:"keyPairRef,omitempty" tf:"-"`
+	KeyPairRef *v2.NamespacedReference `json:"keyPairRef,omitempty" tf:"-"`
 
 	// Selector for a KeyPair in ec2 to populate keyPair.
 	// +kubebuilder:validation:Optional
-	KeyPairSelector *v1.NamespacedSelector `json:"keyPairSelector,omitempty" tf:"-"`
+	KeyPairSelector *v2.NamespacedSelector `json:"keyPairSelector,omitempty" tf:"-"`
 
 	// Configuration block with logging settings. Detailed below.
 	// +kubebuilder:validation:Optional
@@ -245,11 +244,11 @@ type InfrastructureConfigurationParameters struct {
 
 	// References to SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIDRefs []v1.NamespacedReference `json:"securityGroupIdRefs,omitempty" tf:"-"`
+	SecurityGroupIDRefs []v2.NamespacedReference `json:"securityGroupIdRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIDSelector *v1.NamespacedSelector `json:"securityGroupIdSelector,omitempty" tf:"-"`
+	SecurityGroupIDSelector *v2.NamespacedSelector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 
 	// Set of EC2 Security Group identifiers.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
@@ -267,11 +266,11 @@ type InfrastructureConfigurationParameters struct {
 
 	// Reference to a Topic in sns to populate snsTopicArn.
 	// +kubebuilder:validation:Optional
-	SnsTopicArnRef *v1.NamespacedReference `json:"snsTopicArnRef,omitempty" tf:"-"`
+	SnsTopicArnRef *v2.NamespacedReference `json:"snsTopicArnRef,omitempty" tf:"-"`
 
 	// Selector for a Topic in sns to populate snsTopicArn.
 	// +kubebuilder:validation:Optional
-	SnsTopicArnSelector *v1.NamespacedSelector `json:"snsTopicArnSelector,omitempty" tf:"-"`
+	SnsTopicArnSelector *v2.NamespacedSelector `json:"snsTopicArnSelector,omitempty" tf:"-"`
 
 	// EC2 Subnet identifier. Also requires security_group_ids argument.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Subnet
@@ -280,11 +279,11 @@ type InfrastructureConfigurationParameters struct {
 
 	// Reference to a Subnet in ec2 to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in ec2 to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -401,11 +400,11 @@ type S3LogsInitParameters struct {
 
 	// Reference to a Bucket in s3 to populate s3BucketName.
 	// +kubebuilder:validation:Optional
-	S3BucketNameRef *v1.NamespacedReference `json:"s3BucketNameRef,omitempty" tf:"-"`
+	S3BucketNameRef *v2.NamespacedReference `json:"s3BucketNameRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate s3BucketName.
 	// +kubebuilder:validation:Optional
-	S3BucketNameSelector *v1.NamespacedSelector `json:"s3BucketNameSelector,omitempty" tf:"-"`
+	S3BucketNameSelector *v2.NamespacedSelector `json:"s3BucketNameSelector,omitempty" tf:"-"`
 
 	// Prefix to use for S3 logs. Defaults to /.
 	S3KeyPrefix *string `json:"s3KeyPrefix,omitempty" tf:"s3_key_prefix,omitempty"`
@@ -429,11 +428,11 @@ type S3LogsParameters struct {
 
 	// Reference to a Bucket in s3 to populate s3BucketName.
 	// +kubebuilder:validation:Optional
-	S3BucketNameRef *v1.NamespacedReference `json:"s3BucketNameRef,omitempty" tf:"-"`
+	S3BucketNameRef *v2.NamespacedReference `json:"s3BucketNameRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate s3BucketName.
 	// +kubebuilder:validation:Optional
-	S3BucketNameSelector *v1.NamespacedSelector `json:"s3BucketNameSelector,omitempty" tf:"-"`
+	S3BucketNameSelector *v2.NamespacedSelector `json:"s3BucketNameSelector,omitempty" tf:"-"`
 
 	// Prefix to use for S3 logs. Defaults to /.
 	// +kubebuilder:validation:Optional
@@ -459,8 +458,8 @@ type InfrastructureConfigurationSpec struct {
 
 // InfrastructureConfigurationStatus defines the observed state of InfrastructureConfiguration.
 type InfrastructureConfigurationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        InfrastructureConfigurationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               InfrastructureConfigurationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

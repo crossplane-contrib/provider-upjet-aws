@@ -10,11 +10,51 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
+type CertificateLocationInitParameters struct {
+
+	// AWS Secrets Manager location of the certificate. See secrets_manager below.
+	SecretsManager *LocationSecretsManagerInitParameters `json:"secretsManager,omitempty" tf:"secrets_manager,omitempty"`
+}
+
+type CertificateLocationObservation struct {
+
+	// AWS Secrets Manager location of the certificate. See secrets_manager below.
+	SecretsManager *LocationSecretsManagerObservation `json:"secretsManager,omitempty" tf:"secrets_manager,omitempty"`
+}
+
+type CertificateLocationParameters struct {
+
+	// AWS Secrets Manager location of the certificate. See secrets_manager below.
+	// +kubebuilder:validation:Optional
+	SecretsManager *LocationSecretsManagerParameters `json:"secretsManager,omitempty" tf:"secrets_manager,omitempty"`
+}
+
+type CodeInterpreterCertificateInitParameters struct {
+
+	// Location from which to retrieve the certificate. See certificates.location below.
+	Location *CertificateLocationInitParameters `json:"location,omitempty" tf:"location,omitempty"`
+}
+
+type CodeInterpreterCertificateObservation struct {
+
+	// Location from which to retrieve the certificate. See certificates.location below.
+	Location *CertificateLocationObservation `json:"location,omitempty" tf:"location,omitempty"`
+}
+
+type CodeInterpreterCertificateParameters struct {
+
+	// Location from which to retrieve the certificate. See certificates.location below.
+	// +kubebuilder:validation:Optional
+	Location *CertificateLocationParameters `json:"location,omitempty" tf:"location,omitempty"`
+}
+
 type CodeInterpreterInitParameters struct {
+
+	// Certificates to install in the code interpreter. Between 1 and 200 blocks are supported. See certificate below.
+	Certificate []CodeInterpreterCertificateInitParameters `json:"certificate,omitempty" tf:"certificate,omitempty"`
 
 	// Description of the code interpreter.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
@@ -26,11 +66,11 @@ type CodeInterpreterInitParameters struct {
 
 	// Reference to a Role in iam to populate executionRoleArn.
 	// +kubebuilder:validation:Optional
-	ExecutionRoleArnRef *v1.NamespacedReference `json:"executionRoleArnRef,omitempty" tf:"-"`
+	ExecutionRoleArnRef *v2.NamespacedReference `json:"executionRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate executionRoleArn.
 	// +kubebuilder:validation:Optional
-	ExecutionRoleArnSelector *v1.NamespacedSelector `json:"executionRoleArnSelector,omitempty" tf:"-"`
+	ExecutionRoleArnSelector *v2.NamespacedSelector `json:"executionRoleArnSelector,omitempty" tf:"-"`
 
 	// Name of the code interpreter.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -74,6 +114,9 @@ type CodeInterpreterNetworkConfigurationParameters struct {
 
 type CodeInterpreterObservation struct {
 
+	// Certificates to install in the code interpreter. Between 1 and 200 blocks are supported. See certificate below.
+	Certificate []CodeInterpreterCertificateObservation `json:"certificate,omitempty" tf:"certificate,omitempty"`
+
 	// ARN of the Code Interpreter.
 	CodeInterpreterArn *string `json:"codeInterpreterArn,omitempty" tf:"code_interpreter_arn,omitempty"`
 
@@ -109,6 +152,10 @@ type CodeInterpreterObservation struct {
 
 type CodeInterpreterParameters struct {
 
+	// Certificates to install in the code interpreter. Between 1 and 200 blocks are supported. See certificate below.
+	// +kubebuilder:validation:Optional
+	Certificate []CodeInterpreterCertificateParameters `json:"certificate,omitempty" tf:"certificate,omitempty"`
+
 	// Description of the code interpreter.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
@@ -121,11 +168,11 @@ type CodeInterpreterParameters struct {
 
 	// Reference to a Role in iam to populate executionRoleArn.
 	// +kubebuilder:validation:Optional
-	ExecutionRoleArnRef *v1.NamespacedReference `json:"executionRoleArnRef,omitempty" tf:"-"`
+	ExecutionRoleArnRef *v2.NamespacedReference `json:"executionRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate executionRoleArn.
 	// +kubebuilder:validation:Optional
-	ExecutionRoleArnSelector *v1.NamespacedSelector `json:"executionRoleArnSelector,omitempty" tf:"-"`
+	ExecutionRoleArnSelector *v2.NamespacedSelector `json:"executionRoleArnSelector,omitempty" tf:"-"`
 
 	// Name of the code interpreter.
 	// +kubebuilder:validation:Optional
@@ -144,6 +191,45 @@ type CodeInterpreterParameters struct {
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type LocationSecretsManagerInitParameters struct {
+
+	// ARN of the AWS Secrets Manager secret containing the certificate.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/secretsmanager/v1beta1.Secret
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
+	SecretArn *string `json:"secretArn,omitempty" tf:"secret_arn,omitempty"`
+
+	// Reference to a Secret in secretsmanager to populate secretArn.
+	// +kubebuilder:validation:Optional
+	SecretArnRef *v2.NamespacedReference `json:"secretArnRef,omitempty" tf:"-"`
+
+	// Selector for a Secret in secretsmanager to populate secretArn.
+	// +kubebuilder:validation:Optional
+	SecretArnSelector *v2.NamespacedSelector `json:"secretArnSelector,omitempty" tf:"-"`
+}
+
+type LocationSecretsManagerObservation struct {
+
+	// ARN of the AWS Secrets Manager secret containing the certificate.
+	SecretArn *string `json:"secretArn,omitempty" tf:"secret_arn,omitempty"`
+}
+
+type LocationSecretsManagerParameters struct {
+
+	// ARN of the AWS Secrets Manager secret containing the certificate.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/secretsmanager/v1beta1.Secret
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
+	// +kubebuilder:validation:Optional
+	SecretArn *string `json:"secretArn,omitempty" tf:"secret_arn,omitempty"`
+
+	// Reference to a Secret in secretsmanager to populate secretArn.
+	// +kubebuilder:validation:Optional
+	SecretArnRef *v2.NamespacedReference `json:"secretArnRef,omitempty" tf:"-"`
+
+	// Selector for a Secret in secretsmanager to populate secretArn.
+	// +kubebuilder:validation:Optional
+	SecretArnSelector *v2.NamespacedSelector `json:"secretArnSelector,omitempty" tf:"-"`
 }
 
 type NetworkConfigurationVPCConfigInitParameters struct {
@@ -200,8 +286,8 @@ type CodeInterpreterSpec struct {
 
 // CodeInterpreterStatus defines the observed state of CodeInterpreter.
 type CodeInterpreterStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        CodeInterpreterObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               CodeInterpreterObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

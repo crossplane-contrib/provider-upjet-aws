@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ClusterEndpointInitParameters struct {
@@ -22,11 +22,11 @@ type ClusterEndpointInitParameters struct {
 
 	// Reference to a Cluster in rds to populate clusterIdentifier.
 	// +kubebuilder:validation:Optional
-	ClusterIdentifierRef *v1.Reference `json:"clusterIdentifierRef,omitempty" tf:"-"`
+	ClusterIdentifierRef *v2.Reference `json:"clusterIdentifierRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in rds to populate clusterIdentifier.
 	// +kubebuilder:validation:Optional
-	ClusterIdentifierSelector *v1.Selector `json:"clusterIdentifierSelector,omitempty" tf:"-"`
+	ClusterIdentifierSelector *v2.Selector `json:"clusterIdentifierSelector,omitempty" tf:"-"`
 
 	// The type of the endpoint. One of: READER , ANY .
 	CustomEndpointType *string `json:"customEndpointType,omitempty" tf:"custom_endpoint_type,omitempty"`
@@ -39,11 +39,11 @@ type ClusterEndpointInitParameters struct {
 
 	// References to ClusterInstance in rds to populate excludedMembers.
 	// +kubebuilder:validation:Optional
-	ExcludedMembersRefs []v1.Reference `json:"excludedMembersRefs,omitempty" tf:"-"`
+	ExcludedMembersRefs []v2.Reference `json:"excludedMembersRefs,omitempty" tf:"-"`
 
 	// Selector for a list of ClusterInstance in rds to populate excludedMembers.
 	// +kubebuilder:validation:Optional
-	ExcludedMembersSelector *v1.Selector `json:"excludedMembersSelector,omitempty" tf:"-"`
+	ExcludedMembersSelector *v2.Selector `json:"excludedMembersSelector,omitempty" tf:"-"`
 
 	// List of DB instance identifiers that are part of the custom endpoint group. Conflicts with excluded_members.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/rds/v1beta1.ClusterInstance
@@ -53,11 +53,11 @@ type ClusterEndpointInitParameters struct {
 
 	// References to ClusterInstance in rds to populate staticMembers.
 	// +kubebuilder:validation:Optional
-	StaticMembersRefs []v1.Reference `json:"staticMembersRefs,omitempty" tf:"-"`
+	StaticMembersRefs []v2.Reference `json:"staticMembersRefs,omitempty" tf:"-"`
 
 	// Selector for a list of ClusterInstance in rds to populate staticMembers.
 	// +kubebuilder:validation:Optional
-	StaticMembersSelector *v1.Selector `json:"staticMembersSelector,omitempty" tf:"-"`
+	StaticMembersSelector *v2.Selector `json:"staticMembersSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -112,11 +112,11 @@ type ClusterEndpointParameters struct {
 
 	// Reference to a Cluster in rds to populate clusterIdentifier.
 	// +kubebuilder:validation:Optional
-	ClusterIdentifierRef *v1.Reference `json:"clusterIdentifierRef,omitempty" tf:"-"`
+	ClusterIdentifierRef *v2.Reference `json:"clusterIdentifierRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in rds to populate clusterIdentifier.
 	// +kubebuilder:validation:Optional
-	ClusterIdentifierSelector *v1.Selector `json:"clusterIdentifierSelector,omitempty" tf:"-"`
+	ClusterIdentifierSelector *v2.Selector `json:"clusterIdentifierSelector,omitempty" tf:"-"`
 
 	// The type of the endpoint. One of: READER , ANY .
 	// +kubebuilder:validation:Optional
@@ -131,11 +131,11 @@ type ClusterEndpointParameters struct {
 
 	// References to ClusterInstance in rds to populate excludedMembers.
 	// +kubebuilder:validation:Optional
-	ExcludedMembersRefs []v1.Reference `json:"excludedMembersRefs,omitempty" tf:"-"`
+	ExcludedMembersRefs []v2.Reference `json:"excludedMembersRefs,omitempty" tf:"-"`
 
 	// Selector for a list of ClusterInstance in rds to populate excludedMembers.
 	// +kubebuilder:validation:Optional
-	ExcludedMembersSelector *v1.Selector `json:"excludedMembersSelector,omitempty" tf:"-"`
+	ExcludedMembersSelector *v2.Selector `json:"excludedMembersSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -151,11 +151,11 @@ type ClusterEndpointParameters struct {
 
 	// References to ClusterInstance in rds to populate staticMembers.
 	// +kubebuilder:validation:Optional
-	StaticMembersRefs []v1.Reference `json:"staticMembersRefs,omitempty" tf:"-"`
+	StaticMembersRefs []v2.Reference `json:"staticMembersRefs,omitempty" tf:"-"`
 
 	// Selector for a list of ClusterInstance in rds to populate staticMembers.
 	// +kubebuilder:validation:Optional
-	StaticMembersSelector *v1.Selector `json:"staticMembersSelector,omitempty" tf:"-"`
+	StaticMembersSelector *v2.Selector `json:"staticMembersSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -165,8 +165,8 @@ type ClusterEndpointParameters struct {
 
 // ClusterEndpointSpec defines the desired state of ClusterEndpoint
 type ClusterEndpointSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ClusterEndpointParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ClusterEndpointParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -182,8 +182,8 @@ type ClusterEndpointSpec struct {
 
 // ClusterEndpointStatus defines the observed state of ClusterEndpoint.
 type ClusterEndpointStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ClusterEndpointObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ClusterEndpointObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

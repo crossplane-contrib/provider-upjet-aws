@@ -60,7 +60,8 @@ spec:
               forProvider:
                 properties:
                   monitorDimension:
-                    description: 'The dimensions to evaluate. Valid values: SERVICE.'
+                    description: 'The dimensions to evaluate. Valid values: COST_CATEGORY,
+                      LINKED_ACCOUNT, SERVICE, TAG.'
                     type: string
                   monitorSpecification:
                     description: A valid JSON representation for the Expression object.
@@ -93,7 +94,8 @@ spec:
                   autoscaler.
                 properties:
                   monitorDimension:
-                    description: 'The dimensions to evaluate. Valid values: SERVICE.'
+                    description: 'The dimensions to evaluate. Valid values: COST_CATEGORY,
+                      LINKED_ACCOUNT, SERVICE, TAG.'
                     type: string
                   monitorSpecification:
                     description: A valid JSON representation for the Expression object.
@@ -191,7 +193,8 @@ spec:
                     description: Unique ID of the anomaly monitor. Same as arn.
                     type: string
                   monitorDimension:
-                    description: 'The dimensions to evaluate. Valid values: SERVICE.'
+                    description: 'The dimensions to evaluate. Valid values: COST_CATEGORY,
+                      LINKED_ACCOUNT, SERVICE, TAG.'
                     type: string
                   monitorSpecification:
                     description: A valid JSON representation for the Expression object.
@@ -264,6 +267,13 @@ spec:
                 x-kubernetes-list-map-keys:
                 - type
                 x-kubernetes-list-type: map
+              lastHandledReconcileAt:
+                description: |-
+                  LastHandledReconcileAt holds the value of the most recent
+                  reconcile-requested-at annotation token that the controller has
+                  processed. Users can compare this to the annotation to determine
+                  whether a reconcile request has been handled.
+                type: string
               observedGeneration:
                 description: |-
                   ObservedGeneration is the latest metadata.generation

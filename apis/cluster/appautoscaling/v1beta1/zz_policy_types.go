@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CustomizedCapacityMetricSpecificationInitParameters struct {
@@ -986,11 +986,11 @@ type PolicyParameters struct {
 
 	// Reference to a Target in appautoscaling to populate resourceId.
 	// +kubebuilder:validation:Optional
-	ResourceIDRef *v1.Reference `json:"resourceIdRef,omitempty" tf:"-"`
+	ResourceIDRef *v2.Reference `json:"resourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Target in appautoscaling to populate resourceId.
 	// +kubebuilder:validation:Optional
-	ResourceIDSelector *v1.Selector `json:"resourceIdSelector,omitempty" tf:"-"`
+	ResourceIDSelector *v2.Selector `json:"resourceIdSelector,omitempty" tf:"-"`
 
 	// Scalable dimension of the scalable target. Documentation can be found in the ScalableDimension parameter at: AWS Application Auto Scaling API Reference
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/appautoscaling/v1beta1.Target
@@ -1000,11 +1000,11 @@ type PolicyParameters struct {
 
 	// Reference to a Target in appautoscaling to populate scalableDimension.
 	// +kubebuilder:validation:Optional
-	ScalableDimensionRef *v1.Reference `json:"scalableDimensionRef,omitempty" tf:"-"`
+	ScalableDimensionRef *v2.Reference `json:"scalableDimensionRef,omitempty" tf:"-"`
 
 	// Selector for a Target in appautoscaling to populate scalableDimension.
 	// +kubebuilder:validation:Optional
-	ScalableDimensionSelector *v1.Selector `json:"scalableDimensionSelector,omitempty" tf:"-"`
+	ScalableDimensionSelector *v2.Selector `json:"scalableDimensionSelector,omitempty" tf:"-"`
 
 	// AWS service namespace of the scalable target. Documentation can be found in the ServiceNamespace parameter at: AWS Application Auto Scaling API Reference
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/appautoscaling/v1beta1.Target
@@ -1014,11 +1014,11 @@ type PolicyParameters struct {
 
 	// Reference to a Target in appautoscaling to populate serviceNamespace.
 	// +kubebuilder:validation:Optional
-	ServiceNamespaceRef *v1.Reference `json:"serviceNamespaceRef,omitempty" tf:"-"`
+	ServiceNamespaceRef *v2.Reference `json:"serviceNamespaceRef,omitempty" tf:"-"`
 
 	// Selector for a Target in appautoscaling to populate serviceNamespace.
 	// +kubebuilder:validation:Optional
-	ServiceNamespaceSelector *v1.Selector `json:"serviceNamespaceSelector,omitempty" tf:"-"`
+	ServiceNamespaceSelector *v2.Selector `json:"serviceNamespaceSelector,omitempty" tf:"-"`
 
 	// Step scaling policy configuration, requires policy_type = "StepScaling" (default). See supported fields below.
 	// +kubebuilder:validation:Optional
@@ -1373,8 +1373,8 @@ type TargetTrackingScalingPolicyConfigurationParameters struct {
 
 // PolicySpec defines the desired state of Policy
 type PolicySpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     PolicyParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   PolicyParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -1390,8 +1390,8 @@ type PolicySpec struct {
 
 // PolicyStatus defines the observed state of Policy.
 type PolicyStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        PolicyObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               PolicyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

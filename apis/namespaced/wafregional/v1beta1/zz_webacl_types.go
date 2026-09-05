@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ActionInitParameters struct {
@@ -61,11 +60,11 @@ type LoggingConfigurationInitParameters struct {
 
 	// Reference to a DeliveryStream in firehose to populate logDestination.
 	// +kubebuilder:validation:Optional
-	LogDestinationRef *v1.NamespacedReference `json:"logDestinationRef,omitempty" tf:"-"`
+	LogDestinationRef *v2.NamespacedReference `json:"logDestinationRef,omitempty" tf:"-"`
 
 	// Selector for a DeliveryStream in firehose to populate logDestination.
 	// +kubebuilder:validation:Optional
-	LogDestinationSelector *v1.NamespacedSelector `json:"logDestinationSelector,omitempty" tf:"-"`
+	LogDestinationSelector *v2.NamespacedSelector `json:"logDestinationSelector,omitempty" tf:"-"`
 
 	// Configuration block containing parts of the request that you want redacted from the logs. Detailed below.
 	RedactedFields *RedactedFieldsInitParameters `json:"redactedFields,omitempty" tf:"redacted_fields,omitempty"`
@@ -90,11 +89,11 @@ type LoggingConfigurationParameters struct {
 
 	// Reference to a DeliveryStream in firehose to populate logDestination.
 	// +kubebuilder:validation:Optional
-	LogDestinationRef *v1.NamespacedReference `json:"logDestinationRef,omitempty" tf:"-"`
+	LogDestinationRef *v2.NamespacedReference `json:"logDestinationRef,omitempty" tf:"-"`
 
 	// Selector for a DeliveryStream in firehose to populate logDestination.
 	// +kubebuilder:validation:Optional
-	LogDestinationSelector *v1.NamespacedSelector `json:"logDestinationSelector,omitempty" tf:"-"`
+	LogDestinationSelector *v2.NamespacedSelector `json:"logDestinationSelector,omitempty" tf:"-"`
 
 	// Configuration block containing parts of the request that you want redacted from the logs. Detailed below.
 	// +kubebuilder:validation:Optional
@@ -278,11 +277,11 @@ type WebACLRuleInitParameters struct {
 
 	// Reference to a Rule in wafregional to populate ruleId.
 	// +kubebuilder:validation:Optional
-	RuleIDRef *v1.NamespacedReference `json:"ruleIdRef,omitempty" tf:"-"`
+	RuleIDRef *v2.NamespacedReference `json:"ruleIdRef,omitempty" tf:"-"`
 
 	// Selector for a Rule in wafregional to populate ruleId.
 	// +kubebuilder:validation:Optional
-	RuleIDSelector *v1.NamespacedSelector `json:"ruleIdSelector,omitempty" tf:"-"`
+	RuleIDSelector *v2.NamespacedSelector `json:"ruleIdSelector,omitempty" tf:"-"`
 
 	// The rule type, either REGULAR, as defined by Rule, RATE_BASED, as defined by RateBasedRule, or GROUP, as defined by RuleGroup. The default is REGULAR. If you add a RATE_BASED rule, you need to set type as RATE_BASED. If you add a GROUP rule, you need to set type as GROUP.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
@@ -330,11 +329,11 @@ type WebACLRuleParameters struct {
 
 	// Reference to a Rule in wafregional to populate ruleId.
 	// +kubebuilder:validation:Optional
-	RuleIDRef *v1.NamespacedReference `json:"ruleIdRef,omitempty" tf:"-"`
+	RuleIDRef *v2.NamespacedReference `json:"ruleIdRef,omitempty" tf:"-"`
 
 	// Selector for a Rule in wafregional to populate ruleId.
 	// +kubebuilder:validation:Optional
-	RuleIDSelector *v1.NamespacedSelector `json:"ruleIdSelector,omitempty" tf:"-"`
+	RuleIDSelector *v2.NamespacedSelector `json:"ruleIdSelector,omitempty" tf:"-"`
 
 	// The rule type, either REGULAR, as defined by Rule, RATE_BASED, as defined by RateBasedRule, or GROUP, as defined by RuleGroup. The default is REGULAR. If you add a RATE_BASED rule, you need to set type as RATE_BASED. If you add a GROUP rule, you need to set type as GROUP.
 	// +kubebuilder:validation:Optional
@@ -360,8 +359,8 @@ type WebACLSpec struct {
 
 // WebACLStatus defines the observed state of WebACL.
 type WebACLStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        WebACLObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               WebACLObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

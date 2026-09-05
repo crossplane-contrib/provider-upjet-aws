@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type HostedPublicVirtualInterfaceAccepterInitParameters struct {
@@ -25,11 +25,11 @@ type HostedPublicVirtualInterfaceAccepterInitParameters struct {
 
 	// Reference to a HostedPublicVirtualInterface in directconnect to populate virtualInterfaceId.
 	// +kubebuilder:validation:Optional
-	VirtualInterfaceIDRef *v1.Reference `json:"virtualInterfaceIdRef,omitempty" tf:"-"`
+	VirtualInterfaceIDRef *v2.Reference `json:"virtualInterfaceIdRef,omitempty" tf:"-"`
 
 	// Selector for a HostedPublicVirtualInterface in directconnect to populate virtualInterfaceId.
 	// +kubebuilder:validation:Optional
-	VirtualInterfaceIDSelector *v1.Selector `json:"virtualInterfaceIdSelector,omitempty" tf:"-"`
+	VirtualInterfaceIDSelector *v2.Selector `json:"virtualInterfaceIdSelector,omitempty" tf:"-"`
 }
 
 type HostedPublicVirtualInterfaceAccepterObservation struct {
@@ -75,17 +75,17 @@ type HostedPublicVirtualInterfaceAccepterParameters struct {
 
 	// Reference to a HostedPublicVirtualInterface in directconnect to populate virtualInterfaceId.
 	// +kubebuilder:validation:Optional
-	VirtualInterfaceIDRef *v1.Reference `json:"virtualInterfaceIdRef,omitempty" tf:"-"`
+	VirtualInterfaceIDRef *v2.Reference `json:"virtualInterfaceIdRef,omitempty" tf:"-"`
 
 	// Selector for a HostedPublicVirtualInterface in directconnect to populate virtualInterfaceId.
 	// +kubebuilder:validation:Optional
-	VirtualInterfaceIDSelector *v1.Selector `json:"virtualInterfaceIdSelector,omitempty" tf:"-"`
+	VirtualInterfaceIDSelector *v2.Selector `json:"virtualInterfaceIdSelector,omitempty" tf:"-"`
 }
 
 // HostedPublicVirtualInterfaceAccepterSpec defines the desired state of HostedPublicVirtualInterfaceAccepter
 type HostedPublicVirtualInterfaceAccepterSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     HostedPublicVirtualInterfaceAccepterParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   HostedPublicVirtualInterfaceAccepterParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -101,8 +101,8 @@ type HostedPublicVirtualInterfaceAccepterSpec struct {
 
 // HostedPublicVirtualInterfaceAccepterStatus defines the observed state of HostedPublicVirtualInterfaceAccepter.
 type HostedPublicVirtualInterfaceAccepterStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        HostedPublicVirtualInterfaceAccepterObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               HostedPublicVirtualInterfaceAccepterObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

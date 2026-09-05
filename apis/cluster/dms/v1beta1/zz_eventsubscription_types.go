@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type EventSubscriptionInitParameters struct {
@@ -29,11 +29,11 @@ type EventSubscriptionInitParameters struct {
 
 	// Reference to a Topic in sns to populate snsTopicArn.
 	// +kubebuilder:validation:Optional
-	SnsTopicArnRef *v1.Reference `json:"snsTopicArnRef,omitempty" tf:"-"`
+	SnsTopicArnRef *v2.Reference `json:"snsTopicArnRef,omitempty" tf:"-"`
 
 	// Selector for a Topic in sns to populate snsTopicArn.
 	// +kubebuilder:validation:Optional
-	SnsTopicArnSelector *v1.Selector `json:"snsTopicArnSelector,omitempty" tf:"-"`
+	SnsTopicArnSelector *v2.Selector `json:"snsTopicArnSelector,omitempty" tf:"-"`
 
 	// Ids of sources to listen to. If you don't specify a value, notifications are provided for all sources.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/dms/v1beta1.ReplicationTask
@@ -42,11 +42,11 @@ type EventSubscriptionInitParameters struct {
 
 	// References to ReplicationTask in dms to populate sourceIds.
 	// +kubebuilder:validation:Optional
-	SourceIdsRefs []v1.Reference `json:"sourceIdsRefs,omitempty" tf:"-"`
+	SourceIdsRefs []v2.Reference `json:"sourceIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of ReplicationTask in dms to populate sourceIds.
 	// +kubebuilder:validation:Optional
-	SourceIdsSelector *v1.Selector `json:"sourceIdsSelector,omitempty" tf:"-"`
+	SourceIdsSelector *v2.Selector `json:"sourceIdsSelector,omitempty" tf:"-"`
 
 	// Type of source for events. Valid values: replication-instance or replication-task
 	SourceType *string `json:"sourceType,omitempty" tf:"source_type,omitempty"`
@@ -117,11 +117,11 @@ type EventSubscriptionParameters struct {
 
 	// Reference to a Topic in sns to populate snsTopicArn.
 	// +kubebuilder:validation:Optional
-	SnsTopicArnRef *v1.Reference `json:"snsTopicArnRef,omitempty" tf:"-"`
+	SnsTopicArnRef *v2.Reference `json:"snsTopicArnRef,omitempty" tf:"-"`
 
 	// Selector for a Topic in sns to populate snsTopicArn.
 	// +kubebuilder:validation:Optional
-	SnsTopicArnSelector *v1.Selector `json:"snsTopicArnSelector,omitempty" tf:"-"`
+	SnsTopicArnSelector *v2.Selector `json:"snsTopicArnSelector,omitempty" tf:"-"`
 
 	// Ids of sources to listen to. If you don't specify a value, notifications are provided for all sources.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/dms/v1beta1.ReplicationTask
@@ -131,11 +131,11 @@ type EventSubscriptionParameters struct {
 
 	// References to ReplicationTask in dms to populate sourceIds.
 	// +kubebuilder:validation:Optional
-	SourceIdsRefs []v1.Reference `json:"sourceIdsRefs,omitempty" tf:"-"`
+	SourceIdsRefs []v2.Reference `json:"sourceIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of ReplicationTask in dms to populate sourceIds.
 	// +kubebuilder:validation:Optional
-	SourceIdsSelector *v1.Selector `json:"sourceIdsSelector,omitempty" tf:"-"`
+	SourceIdsSelector *v2.Selector `json:"sourceIdsSelector,omitempty" tf:"-"`
 
 	// Type of source for events. Valid values: replication-instance or replication-task
 	// +kubebuilder:validation:Optional
@@ -149,8 +149,8 @@ type EventSubscriptionParameters struct {
 
 // EventSubscriptionSpec defines the desired state of EventSubscription
 type EventSubscriptionSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     EventSubscriptionParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   EventSubscriptionParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -166,8 +166,8 @@ type EventSubscriptionSpec struct {
 
 // EventSubscriptionStatus defines the observed state of EventSubscription.
 type EventSubscriptionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        EventSubscriptionObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               EventSubscriptionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

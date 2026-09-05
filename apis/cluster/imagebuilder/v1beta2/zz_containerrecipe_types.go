@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type BlockDeviceMappingInitParameters struct {
@@ -71,11 +71,11 @@ type ComponentInitParameters struct {
 
 	// Reference to a Component in imagebuilder to populate componentArn.
 	// +kubebuilder:validation:Optional
-	ComponentArnRef *v1.Reference `json:"componentArnRef,omitempty" tf:"-"`
+	ComponentArnRef *v2.Reference `json:"componentArnRef,omitempty" tf:"-"`
 
 	// Selector for a Component in imagebuilder to populate componentArn.
 	// +kubebuilder:validation:Optional
-	ComponentArnSelector *v1.Selector `json:"componentArnSelector,omitempty" tf:"-"`
+	ComponentArnSelector *v2.Selector `json:"componentArnSelector,omitempty" tf:"-"`
 
 	// Configuration block(s) for parameters to configure the component. Detailed below.
 	Parameter []ParameterInitParameters `json:"parameter,omitempty" tf:"parameter,omitempty"`
@@ -100,11 +100,11 @@ type ComponentParameters struct {
 
 	// Reference to a Component in imagebuilder to populate componentArn.
 	// +kubebuilder:validation:Optional
-	ComponentArnRef *v1.Reference `json:"componentArnRef,omitempty" tf:"-"`
+	ComponentArnRef *v2.Reference `json:"componentArnRef,omitempty" tf:"-"`
 
 	// Selector for a Component in imagebuilder to populate componentArn.
 	// +kubebuilder:validation:Optional
-	ComponentArnSelector *v1.Selector `json:"componentArnSelector,omitempty" tf:"-"`
+	ComponentArnSelector *v2.Selector `json:"componentArnSelector,omitempty" tf:"-"`
 
 	// Configuration block(s) for parameters to configure the component. Detailed below.
 	// +kubebuilder:validation:Optional
@@ -137,11 +137,11 @@ type ContainerRecipeInitParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDRef *v1.Reference `json:"kmsKeyIdRef,omitempty" tf:"-"`
+	KMSKeyIDRef *v2.Reference `json:"kmsKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
+	KMSKeyIDSelector *v2.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
 	// The name of the container recipe.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -271,11 +271,11 @@ type ContainerRecipeParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDRef *v1.Reference `json:"kmsKeyIdRef,omitempty" tf:"-"`
+	KMSKeyIDRef *v2.Reference `json:"kmsKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
+	KMSKeyIDSelector *v2.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
 	// The name of the container recipe.
 	// +kubebuilder:validation:Optional
@@ -467,11 +467,11 @@ type TargetRepositoryInitParameters struct {
 
 	// Reference to a Repository in ecr to populate repositoryName.
 	// +kubebuilder:validation:Optional
-	RepositoryNameRef *v1.Reference `json:"repositoryNameRef,omitempty" tf:"-"`
+	RepositoryNameRef *v2.Reference `json:"repositoryNameRef,omitempty" tf:"-"`
 
 	// Selector for a Repository in ecr to populate repositoryName.
 	// +kubebuilder:validation:Optional
-	RepositoryNameSelector *v1.Selector `json:"repositoryNameSelector,omitempty" tf:"-"`
+	RepositoryNameSelector *v2.Selector `json:"repositoryNameSelector,omitempty" tf:"-"`
 
 	// The service in which this image is registered. Valid values: ECR.
 	Service *string `json:"service,omitempty" tf:"service,omitempty"`
@@ -495,11 +495,11 @@ type TargetRepositoryParameters struct {
 
 	// Reference to a Repository in ecr to populate repositoryName.
 	// +kubebuilder:validation:Optional
-	RepositoryNameRef *v1.Reference `json:"repositoryNameRef,omitempty" tf:"-"`
+	RepositoryNameRef *v2.Reference `json:"repositoryNameRef,omitempty" tf:"-"`
 
 	// Selector for a Repository in ecr to populate repositoryName.
 	// +kubebuilder:validation:Optional
-	RepositoryNameSelector *v1.Selector `json:"repositoryNameSelector,omitempty" tf:"-"`
+	RepositoryNameSelector *v2.Selector `json:"repositoryNameSelector,omitempty" tf:"-"`
 
 	// The service in which this image is registered. Valid values: ECR.
 	// +kubebuilder:validation:Optional
@@ -508,8 +508,8 @@ type TargetRepositoryParameters struct {
 
 // ContainerRecipeSpec defines the desired state of ContainerRecipe
 type ContainerRecipeSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ContainerRecipeParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ContainerRecipeParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -525,8 +525,8 @@ type ContainerRecipeSpec struct {
 
 // ContainerRecipeStatus defines the observed state of ContainerRecipe.
 type ContainerRecipeStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ContainerRecipeObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ContainerRecipeObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

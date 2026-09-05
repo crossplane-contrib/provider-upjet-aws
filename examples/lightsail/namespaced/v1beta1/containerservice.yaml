@@ -14,7 +14,6 @@ metadata:
 spec:
   forProvider:
     isDisabled: true
-    name: container-service-1
     power: nano
     region: us-east-1
     scale: 1

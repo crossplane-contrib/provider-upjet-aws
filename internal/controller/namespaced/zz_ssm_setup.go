@@ -70,3 +70,26 @@ func SetupGated_ssm(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupWebhookWithManager_ssm registers conversion webhooks for all resource kinds in the group.
+func SetupWebhookWithManager_ssm(mgr ctrl.Manager) error {
+	for _, setup := range []func(ctrl.Manager) error{
+		activation.SetupWebhookWithManager,
+		association.SetupWebhookWithManager,
+		defaultpatchbaseline.SetupWebhookWithManager,
+		document.SetupWebhookWithManager,
+		maintenancewindow.SetupWebhookWithManager,
+		maintenancewindowtarget.SetupWebhookWithManager,
+		maintenancewindowtask.SetupWebhookWithManager,
+		parameter.SetupWebhookWithManager,
+		patchbaseline.SetupWebhookWithManager,
+		patchgroup.SetupWebhookWithManager,
+		resourcedatasync.SetupWebhookWithManager,
+		servicesetting.SetupWebhookWithManager,
+	} {
+		if err := setup(mgr); err != nil {
+			return err
+		}
+	}
+	return nil
+}

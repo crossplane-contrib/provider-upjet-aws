@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ScramSecretAssociationInitParameters struct {
@@ -22,11 +22,11 @@ type ScramSecretAssociationInitParameters struct {
 
 	// Reference to a Cluster in kafka to populate clusterArn.
 	// +kubebuilder:validation:Optional
-	ClusterArnRef *v1.Reference `json:"clusterArnRef,omitempty" tf:"-"`
+	ClusterArnRef *v2.Reference `json:"clusterArnRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in kafka to populate clusterArn.
 	// +kubebuilder:validation:Optional
-	ClusterArnSelector *v1.Selector `json:"clusterArnSelector,omitempty" tf:"-"`
+	ClusterArnSelector *v2.Selector `json:"clusterArnSelector,omitempty" tf:"-"`
 
 	// List of all AWS Secrets Manager secret ARNs to associate with the cluster. Secrets not referenced, selected or listed here will be disassociated from the cluster.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/secretsmanager/v1beta1.Secret
@@ -37,11 +37,11 @@ type ScramSecretAssociationInitParameters struct {
 
 	// References to Secret in secretsmanager to populate secretArnList.
 	// +kubebuilder:validation:Optional
-	SecretArnRefs []v1.Reference `json:"secretArnRefs,omitempty" tf:"-"`
+	SecretArnRefs []v2.Reference `json:"secretArnRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Secret in secretsmanager to populate secretArnList.
 	// +kubebuilder:validation:Optional
-	SecretArnSelector *v1.Selector `json:"secretArnSelector,omitempty" tf:"-"`
+	SecretArnSelector *v2.Selector `json:"secretArnSelector,omitempty" tf:"-"`
 }
 
 type ScramSecretAssociationObservation struct {
@@ -71,11 +71,11 @@ type ScramSecretAssociationParameters struct {
 
 	// Reference to a Cluster in kafka to populate clusterArn.
 	// +kubebuilder:validation:Optional
-	ClusterArnRef *v1.Reference `json:"clusterArnRef,omitempty" tf:"-"`
+	ClusterArnRef *v2.Reference `json:"clusterArnRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in kafka to populate clusterArn.
 	// +kubebuilder:validation:Optional
-	ClusterArnSelector *v1.Selector `json:"clusterArnSelector,omitempty" tf:"-"`
+	ClusterArnSelector *v2.Selector `json:"clusterArnSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -92,17 +92,17 @@ type ScramSecretAssociationParameters struct {
 
 	// References to Secret in secretsmanager to populate secretArnList.
 	// +kubebuilder:validation:Optional
-	SecretArnRefs []v1.Reference `json:"secretArnRefs,omitempty" tf:"-"`
+	SecretArnRefs []v2.Reference `json:"secretArnRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Secret in secretsmanager to populate secretArnList.
 	// +kubebuilder:validation:Optional
-	SecretArnSelector *v1.Selector `json:"secretArnSelector,omitempty" tf:"-"`
+	SecretArnSelector *v2.Selector `json:"secretArnSelector,omitempty" tf:"-"`
 }
 
 // ScramSecretAssociationSpec defines the desired state of ScramSecretAssociation
 type ScramSecretAssociationSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ScramSecretAssociationParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ScramSecretAssociationParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -118,8 +118,8 @@ type ScramSecretAssociationSpec struct {
 
 // ScramSecretAssociationStatus defines the observed state of ScramSecretAssociation.
 type ScramSecretAssociationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ScramSecretAssociationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ScramSecretAssociationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

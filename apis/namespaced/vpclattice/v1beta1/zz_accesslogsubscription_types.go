@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AccessLogSubscriptionInitParameters struct {
@@ -26,11 +25,11 @@ type AccessLogSubscriptionInitParameters struct {
 
 	// Reference to a ServiceNetwork in vpclattice to populate resourceIdentifier.
 	// +kubebuilder:validation:Optional
-	ResourceIdentifierRef *v1.NamespacedReference `json:"resourceIdentifierRef,omitempty" tf:"-"`
+	ResourceIdentifierRef *v2.NamespacedReference `json:"resourceIdentifierRef,omitempty" tf:"-"`
 
 	// Selector for a ServiceNetwork in vpclattice to populate resourceIdentifier.
 	// +kubebuilder:validation:Optional
-	ResourceIdentifierSelector *v1.NamespacedSelector `json:"resourceIdentifierSelector,omitempty" tf:"-"`
+	ResourceIdentifierSelector *v2.NamespacedSelector `json:"resourceIdentifierSelector,omitempty" tf:"-"`
 
 	// Type of log that monitors your Amazon VPC Lattice service networks. Valid values are: SERVICE, RESOURCE. Defaults to SERVICE.
 	ServiceNetworkLogType *string `json:"serviceNetworkLogType,omitempty" tf:"service_network_log_type,omitempty"`
@@ -89,11 +88,11 @@ type AccessLogSubscriptionParameters struct {
 
 	// Reference to a ServiceNetwork in vpclattice to populate resourceIdentifier.
 	// +kubebuilder:validation:Optional
-	ResourceIdentifierRef *v1.NamespacedReference `json:"resourceIdentifierRef,omitempty" tf:"-"`
+	ResourceIdentifierRef *v2.NamespacedReference `json:"resourceIdentifierRef,omitempty" tf:"-"`
 
 	// Selector for a ServiceNetwork in vpclattice to populate resourceIdentifier.
 	// +kubebuilder:validation:Optional
-	ResourceIdentifierSelector *v1.NamespacedSelector `json:"resourceIdentifierSelector,omitempty" tf:"-"`
+	ResourceIdentifierSelector *v2.NamespacedSelector `json:"resourceIdentifierSelector,omitempty" tf:"-"`
 
 	// Type of log that monitors your Amazon VPC Lattice service networks. Valid values are: SERVICE, RESOURCE. Defaults to SERVICE.
 	// +kubebuilder:validation:Optional
@@ -123,8 +122,8 @@ type AccessLogSubscriptionSpec struct {
 
 // AccessLogSubscriptionStatus defines the observed state of AccessLogSubscription.
 type AccessLogSubscriptionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        AccessLogSubscriptionObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               AccessLogSubscriptionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

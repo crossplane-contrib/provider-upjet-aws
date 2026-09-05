@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type HostedPublicVirtualInterfaceAccepterInitParameters struct {
@@ -26,11 +25,11 @@ type HostedPublicVirtualInterfaceAccepterInitParameters struct {
 
 	// Reference to a HostedPublicVirtualInterface in directconnect to populate virtualInterfaceId.
 	// +kubebuilder:validation:Optional
-	VirtualInterfaceIDRef *v1.NamespacedReference `json:"virtualInterfaceIdRef,omitempty" tf:"-"`
+	VirtualInterfaceIDRef *v2.NamespacedReference `json:"virtualInterfaceIdRef,omitempty" tf:"-"`
 
 	// Selector for a HostedPublicVirtualInterface in directconnect to populate virtualInterfaceId.
 	// +kubebuilder:validation:Optional
-	VirtualInterfaceIDSelector *v1.NamespacedSelector `json:"virtualInterfaceIdSelector,omitempty" tf:"-"`
+	VirtualInterfaceIDSelector *v2.NamespacedSelector `json:"virtualInterfaceIdSelector,omitempty" tf:"-"`
 }
 
 type HostedPublicVirtualInterfaceAccepterObservation struct {
@@ -76,11 +75,11 @@ type HostedPublicVirtualInterfaceAccepterParameters struct {
 
 	// Reference to a HostedPublicVirtualInterface in directconnect to populate virtualInterfaceId.
 	// +kubebuilder:validation:Optional
-	VirtualInterfaceIDRef *v1.NamespacedReference `json:"virtualInterfaceIdRef,omitempty" tf:"-"`
+	VirtualInterfaceIDRef *v2.NamespacedReference `json:"virtualInterfaceIdRef,omitempty" tf:"-"`
 
 	// Selector for a HostedPublicVirtualInterface in directconnect to populate virtualInterfaceId.
 	// +kubebuilder:validation:Optional
-	VirtualInterfaceIDSelector *v1.NamespacedSelector `json:"virtualInterfaceIdSelector,omitempty" tf:"-"`
+	VirtualInterfaceIDSelector *v2.NamespacedSelector `json:"virtualInterfaceIdSelector,omitempty" tf:"-"`
 }
 
 // HostedPublicVirtualInterfaceAccepterSpec defines the desired state of HostedPublicVirtualInterfaceAccepter
@@ -102,8 +101,8 @@ type HostedPublicVirtualInterfaceAccepterSpec struct {
 
 // HostedPublicVirtualInterfaceAccepterStatus defines the observed state of HostedPublicVirtualInterfaceAccepter.
 type HostedPublicVirtualInterfaceAccepterStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        HostedPublicVirtualInterfaceAccepterObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               HostedPublicVirtualInterfaceAccepterObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

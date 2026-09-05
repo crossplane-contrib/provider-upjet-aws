@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AacSettingsInitParameters struct {
@@ -1333,11 +1333,11 @@ type ChannelInitParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.Reference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// Whether to start/stop channel. Default: false
 	StartChannel *bool `json:"startChannel,omitempty" tf:"start_channel,omitempty"`
@@ -1481,11 +1481,11 @@ type ChannelParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.Reference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// Whether to start/stop channel. Default: false
 	// +kubebuilder:validation:Optional
@@ -5176,11 +5176,11 @@ type InputAttachmentsInitParameters struct {
 
 	// Reference to a Input in medialive to populate inputId.
 	// +kubebuilder:validation:Optional
-	InputIDRef *v1.Reference `json:"inputIdRef,omitempty" tf:"-"`
+	InputIDRef *v2.Reference `json:"inputIdRef,omitempty" tf:"-"`
 
 	// Selector for a Input in medialive to populate inputId.
 	// +kubebuilder:validation:Optional
-	InputIDSelector *v1.Selector `json:"inputIdSelector,omitempty" tf:"-"`
+	InputIDSelector *v2.Selector `json:"inputIdSelector,omitempty" tf:"-"`
 
 	// Settings of an input. See Input Settings for more details.
 	InputSettings *InputSettingsInitParameters `json:"inputSettings,omitempty" tf:"input_settings,omitempty"`
@@ -5219,11 +5219,11 @@ type InputAttachmentsParameters struct {
 
 	// Reference to a Input in medialive to populate inputId.
 	// +kubebuilder:validation:Optional
-	InputIDRef *v1.Reference `json:"inputIdRef,omitempty" tf:"-"`
+	InputIDRef *v2.Reference `json:"inputIdRef,omitempty" tf:"-"`
 
 	// Selector for a Input in medialive to populate inputId.
 	// +kubebuilder:validation:Optional
-	InputIDSelector *v1.Selector `json:"inputIdSelector,omitempty" tf:"-"`
+	InputIDSelector *v2.Selector `json:"inputIdSelector,omitempty" tf:"-"`
 
 	// Settings of an input. See Input Settings for more details.
 	// +kubebuilder:validation:Optional
@@ -8152,8 +8152,8 @@ type WebvttDestinationSettingsParameters struct {
 
 // ChannelSpec defines the desired state of Channel
 type ChannelSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ChannelParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ChannelParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -8169,8 +8169,8 @@ type ChannelSpec struct {
 
 // ChannelStatus defines the observed state of Channel.
 type ChannelStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ChannelObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ChannelObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

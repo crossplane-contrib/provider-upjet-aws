@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type SizeConstraintSetInitParameters struct {
@@ -189,8 +188,8 @@ type SizeConstraintSetSpec struct {
 
 // SizeConstraintSetStatus defines the observed state of SizeConstraintSet.
 type SizeConstraintSetStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SizeConstraintSetObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SizeConstraintSetObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

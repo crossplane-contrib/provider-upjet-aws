@@ -571,6 +571,13 @@ spec:
                 x-kubernetes-list-map-keys:
                 - type
                 x-kubernetes-list-type: map
+              lastHandledReconcileAt:
+                description: |-
+                  LastHandledReconcileAt holds the value of the most recent
+                  reconcile-requested-at annotation token that the controller has
+                  processed. Users can compare this to the annotation to determine
+                  whether a reconcile request has been handled.
+                type: string
               observedGeneration:
                 description: |-
                   ObservedGeneration is the latest metadata.generation
@@ -746,19 +753,23 @@ spec:
                               type: string
                             greaterThan:
                               description: A value to be evaluated. Accepts either
-                                an integer or a date in RFC 3339 format.
+                                an integer given as a string (i.e., enclosed in quotations)
+                                or a date in RFC 3339 format.
                               type: string
                             greaterThanOrEqual:
                               description: A value to be evaluated. Accepts either
-                                an integer or a date in RFC 3339 format.
+                                an integer given as a string (i.e., enclosed in quotations)
+                                or a date in RFC 3339 format.
                               type: string
                             lessThan:
                               description: A value to be evaluated. Accepts either
-                                an integer or a date in RFC 3339 format.
+                                an integer given as a string (i.e., enclosed in quotations)
+                                or a date in RFC 3339 format.
                               type: string
                             lessThanOrEqual:
                               description: A value to be evaluated. Accepts either
-                                an integer or a date in RFC 3339 format.
+                                an integer given as a string (i.e., enclosed in quotations)
+                                or a date in RFC 3339 format.
                               type: string
                             matches:
                               description: List of string values to be evaluated as
@@ -838,19 +849,23 @@ spec:
                               type: string
                             greaterThan:
                               description: A value to be evaluated. Accepts either
-                                an integer or a date in RFC 3339 format.
+                                an integer given as a string (i.e., enclosed in quotations)
+                                or a date in RFC 3339 format.
                               type: string
                             greaterThanOrEqual:
                               description: A value to be evaluated. Accepts either
-                                an integer or a date in RFC 3339 format.
+                                an integer given as a string (i.e., enclosed in quotations)
+                                or a date in RFC 3339 format.
                               type: string
                             lessThan:
                               description: A value to be evaluated. Accepts either
-                                an integer or a date in RFC 3339 format.
+                                an integer given as a string (i.e., enclosed in quotations)
+                                or a date in RFC 3339 format.
                               type: string
                             lessThanOrEqual:
                               description: A value to be evaluated. Accepts either
-                                an integer or a date in RFC 3339 format.
+                                an integer given as a string (i.e., enclosed in quotations)
+                                or a date in RFC 3339 format.
                               type: string
                             matches:
                               description: List of string values to be evaluated as
@@ -1020,19 +1035,23 @@ spec:
                               type: string
                             greaterThan:
                               description: A value to be evaluated. Accepts either
-                                an integer or a date in RFC 3339 format.
+                                an integer given as a string (i.e., enclosed in quotations)
+                                or a date in RFC 3339 format.
                               type: string
                             greaterThanOrEqual:
                               description: A value to be evaluated. Accepts either
-                                an integer or a date in RFC 3339 format.
+                                an integer given as a string (i.e., enclosed in quotations)
+                                or a date in RFC 3339 format.
                               type: string
                             lessThan:
                               description: A value to be evaluated. Accepts either
-                                an integer or a date in RFC 3339 format.
+                                an integer given as a string (i.e., enclosed in quotations)
+                                or a date in RFC 3339 format.
                               type: string
                             lessThanOrEqual:
                               description: A value to be evaluated. Accepts either
-                                an integer or a date in RFC 3339 format.
+                                an integer given as a string (i.e., enclosed in quotations)
+                                or a date in RFC 3339 format.
                               type: string
                             matches:
                               description: List of string values to be evaluated as
@@ -1127,6 +1146,13 @@ spec:
                 x-kubernetes-list-map-keys:
                 - type
                 x-kubernetes-list-type: map
+              lastHandledReconcileAt:
+                description: |-
+                  LastHandledReconcileAt holds the value of the most recent
+                  reconcile-requested-at annotation token that the controller has
+                  processed. Users can compare this to the annotation to determine
+                  whether a reconcile request has been handled.
+                type: string
               observedGeneration:
                 description: |-
                   ObservedGeneration is the latest metadata.generation

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type BlockDeviceMappingEBSInitParameters struct {
@@ -189,11 +189,11 @@ type ImageRecipeComponentInitParameters struct {
 
 	// Reference to a Component in imagebuilder to populate componentArn.
 	// +kubebuilder:validation:Optional
-	ComponentArnRef *v1.Reference `json:"componentArnRef,omitempty" tf:"-"`
+	ComponentArnRef *v2.Reference `json:"componentArnRef,omitempty" tf:"-"`
 
 	// Selector for a Component in imagebuilder to populate componentArn.
 	// +kubebuilder:validation:Optional
-	ComponentArnSelector *v1.Selector `json:"componentArnSelector,omitempty" tf:"-"`
+	ComponentArnSelector *v2.Selector `json:"componentArnSelector,omitempty" tf:"-"`
 
 	// Configuration block(s) for parameters to configure the component. Detailed below.
 	Parameter []ComponentParameterInitParameters `json:"parameter,omitempty" tf:"parameter,omitempty"`
@@ -218,11 +218,11 @@ type ImageRecipeComponentParameters struct {
 
 	// Reference to a Component in imagebuilder to populate componentArn.
 	// +kubebuilder:validation:Optional
-	ComponentArnRef *v1.Reference `json:"componentArnRef,omitempty" tf:"-"`
+	ComponentArnRef *v2.Reference `json:"componentArnRef,omitempty" tf:"-"`
 
 	// Selector for a Component in imagebuilder to populate componentArn.
 	// +kubebuilder:validation:Optional
-	ComponentArnSelector *v1.Selector `json:"componentArnSelector,omitempty" tf:"-"`
+	ComponentArnSelector *v2.Selector `json:"componentArnSelector,omitempty" tf:"-"`
 
 	// Configuration block(s) for parameters to configure the component. Detailed below.
 	// +kubebuilder:validation:Optional
@@ -403,8 +403,8 @@ type SystemsManagerAgentParameters struct {
 
 // ImageRecipeSpec defines the desired state of ImageRecipe
 type ImageRecipeSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ImageRecipeParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ImageRecipeParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -420,8 +420,8 @@ type ImageRecipeSpec struct {
 
 // ImageRecipeStatus defines the observed state of ImageRecipe.
 type ImageRecipeStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ImageRecipeObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ImageRecipeObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ResourceInitParameters struct {
@@ -23,11 +22,11 @@ type ResourceInitParameters struct {
 
 	// Reference to a RestAPI in apigateway to populate parentId.
 	// +kubebuilder:validation:Optional
-	ParentIDRef *v1.NamespacedReference `json:"parentIdRef,omitempty" tf:"-"`
+	ParentIDRef *v2.NamespacedReference `json:"parentIdRef,omitempty" tf:"-"`
 
 	// Selector for a RestAPI in apigateway to populate parentId.
 	// +kubebuilder:validation:Optional
-	ParentIDSelector *v1.NamespacedSelector `json:"parentIdSelector,omitempty" tf:"-"`
+	ParentIDSelector *v2.NamespacedSelector `json:"parentIdSelector,omitempty" tf:"-"`
 
 	// Last path segment of this API resource.
 	PathPart *string `json:"pathPart,omitempty" tf:"path_part,omitempty"`
@@ -39,11 +38,11 @@ type ResourceInitParameters struct {
 
 	// Reference to a RestAPI in apigateway to populate restApiId.
 	// +kubebuilder:validation:Optional
-	RestAPIIDRef *v1.NamespacedReference `json:"restApiIdRef,omitempty" tf:"-"`
+	RestAPIIDRef *v2.NamespacedReference `json:"restApiIdRef,omitempty" tf:"-"`
 
 	// Selector for a RestAPI in apigateway to populate restApiId.
 	// +kubebuilder:validation:Optional
-	RestAPIIDSelector *v1.NamespacedSelector `json:"restApiIdSelector,omitempty" tf:"-"`
+	RestAPIIDSelector *v2.NamespacedSelector `json:"restApiIdSelector,omitempty" tf:"-"`
 }
 
 type ResourceObservation struct {
@@ -78,11 +77,11 @@ type ResourceParameters struct {
 
 	// Reference to a RestAPI in apigateway to populate parentId.
 	// +kubebuilder:validation:Optional
-	ParentIDRef *v1.NamespacedReference `json:"parentIdRef,omitempty" tf:"-"`
+	ParentIDRef *v2.NamespacedReference `json:"parentIdRef,omitempty" tf:"-"`
 
 	// Selector for a RestAPI in apigateway to populate parentId.
 	// +kubebuilder:validation:Optional
-	ParentIDSelector *v1.NamespacedSelector `json:"parentIdSelector,omitempty" tf:"-"`
+	ParentIDSelector *v2.NamespacedSelector `json:"parentIdSelector,omitempty" tf:"-"`
 
 	// Last path segment of this API resource.
 	// +kubebuilder:validation:Optional
@@ -101,11 +100,11 @@ type ResourceParameters struct {
 
 	// Reference to a RestAPI in apigateway to populate restApiId.
 	// +kubebuilder:validation:Optional
-	RestAPIIDRef *v1.NamespacedReference `json:"restApiIdRef,omitempty" tf:"-"`
+	RestAPIIDRef *v2.NamespacedReference `json:"restApiIdRef,omitempty" tf:"-"`
 
 	// Selector for a RestAPI in apigateway to populate restApiId.
 	// +kubebuilder:validation:Optional
-	RestAPIIDSelector *v1.NamespacedSelector `json:"restApiIdSelector,omitempty" tf:"-"`
+	RestAPIIDSelector *v2.NamespacedSelector `json:"restApiIdSelector,omitempty" tf:"-"`
 }
 
 // ResourceSpec defines the desired state of Resource
@@ -127,8 +126,8 @@ type ResourceSpec struct {
 
 // ResourceStatus defines the observed state of Resource.
 type ResourceStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ResourceObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ResourceObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

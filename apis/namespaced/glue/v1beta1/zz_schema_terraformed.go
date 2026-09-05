@@ -36,6 +36,8 @@ func (tr *Schema) GetObservation() (map[string]any, error) {
 
 // SetObservation for this Schema
 func (tr *Schema) SetObservation(obs map[string]any) error {
+	tr.Status.AtProvider.Tags = nil
+	tr.Status.AtProvider.TagsAll = nil
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -113,7 +115,7 @@ func (tr *Schema) GetMergedParameters(shouldMergeInitProvider bool) (map[string]
 // LateInitialize this Schema using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *Schema) LateInitialize(attrs []byte) (bool, error) {
-	params := &SchemaParameters{}
+	params := &SchemaParameters_2{}
 	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
 		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
 	}

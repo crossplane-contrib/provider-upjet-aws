@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type DestinationPortRangeInitParameters struct {
@@ -213,11 +213,11 @@ type NetworkInsightsPathInitParameters struct {
 
 	// Reference to a NetworkInterface in ec2 to populate destination.
 	// +kubebuilder:validation:Optional
-	DestinationRef *v1.Reference `json:"destinationRef,omitempty" tf:"-"`
+	DestinationRef *v2.Reference `json:"destinationRef,omitempty" tf:"-"`
 
 	// Selector for a NetworkInterface in ec2 to populate destination.
 	// +kubebuilder:validation:Optional
-	DestinationSelector *v1.Selector `json:"destinationSelector,omitempty" tf:"-"`
+	DestinationSelector *v2.Selector `json:"destinationSelector,omitempty" tf:"-"`
 
 	// Scopes the analysis to network paths that match specific filters at the destination. If you specify this parameter, you can't specify destination_ip. See below for details.
 	FilterAtDestination *FilterAtDestinationInitParameters `json:"filterAtDestination,omitempty" tf:"filter_at_destination,omitempty"`
@@ -238,11 +238,11 @@ type NetworkInsightsPathInitParameters struct {
 
 	// Reference to a NetworkInterface in ec2 to populate source.
 	// +kubebuilder:validation:Optional
-	SourceRef *v1.Reference `json:"sourceRef,omitempty" tf:"-"`
+	SourceRef *v2.Reference `json:"sourceRef,omitempty" tf:"-"`
 
 	// Selector for a NetworkInterface in ec2 to populate source.
 	// +kubebuilder:validation:Optional
-	SourceSelector *v1.Selector `json:"sourceSelector,omitempty" tf:"-"`
+	SourceSelector *v2.Selector `json:"sourceSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -318,11 +318,11 @@ type NetworkInsightsPathParameters struct {
 
 	// Reference to a NetworkInterface in ec2 to populate destination.
 	// +kubebuilder:validation:Optional
-	DestinationRef *v1.Reference `json:"destinationRef,omitempty" tf:"-"`
+	DestinationRef *v2.Reference `json:"destinationRef,omitempty" tf:"-"`
 
 	// Selector for a NetworkInterface in ec2 to populate destination.
 	// +kubebuilder:validation:Optional
-	DestinationSelector *v1.Selector `json:"destinationSelector,omitempty" tf:"-"`
+	DestinationSelector *v2.Selector `json:"destinationSelector,omitempty" tf:"-"`
 
 	// Scopes the analysis to network paths that match specific filters at the destination. If you specify this parameter, you can't specify destination_ip. See below for details.
 	// +kubebuilder:validation:Optional
@@ -353,11 +353,11 @@ type NetworkInsightsPathParameters struct {
 
 	// Reference to a NetworkInterface in ec2 to populate source.
 	// +kubebuilder:validation:Optional
-	SourceRef *v1.Reference `json:"sourceRef,omitempty" tf:"-"`
+	SourceRef *v2.Reference `json:"sourceRef,omitempty" tf:"-"`
 
 	// Selector for a NetworkInterface in ec2 to populate source.
 	// +kubebuilder:validation:Optional
-	SourceSelector *v1.Selector `json:"sourceSelector,omitempty" tf:"-"`
+	SourceSelector *v2.Selector `json:"sourceSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -396,8 +396,8 @@ type SourcePortRangeParameters struct {
 
 // NetworkInsightsPathSpec defines the desired state of NetworkInsightsPath
 type NetworkInsightsPathSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     NetworkInsightsPathParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   NetworkInsightsPathParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -413,8 +413,8 @@ type NetworkInsightsPathSpec struct {
 
 // NetworkInsightsPathStatus defines the observed state of NetworkInsightsPath.
 type NetworkInsightsPathStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        NetworkInsightsPathObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               NetworkInsightsPathObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type FilterGroupInitParameters struct {
@@ -163,11 +162,11 @@ type WebhookInitParameters struct {
 
 	// Reference to a Project in codebuild to populate projectName.
 	// +kubebuilder:validation:Optional
-	ProjectNameRef *v1.NamespacedReference `json:"projectNameRef,omitempty" tf:"-"`
+	ProjectNameRef *v2.NamespacedReference `json:"projectNameRef,omitempty" tf:"-"`
 
 	// Selector for a Project in codebuild to populate projectName.
 	// +kubebuilder:validation:Optional
-	ProjectNameSelector *v1.NamespacedSelector `json:"projectNameSelector,omitempty" tf:"-"`
+	ProjectNameSelector *v2.NamespacedSelector `json:"projectNameSelector,omitempty" tf:"-"`
 
 	// Defines comment-based approval requirements for triggering builds on pull requests. See pull_request_build_policy for details.
 	PullRequestBuildPolicy *PullRequestBuildPolicyInitParameters `json:"pullRequestBuildPolicy,omitempty" tf:"pull_request_build_policy,omitempty"`
@@ -238,11 +237,11 @@ type WebhookParameters struct {
 
 	// Reference to a Project in codebuild to populate projectName.
 	// +kubebuilder:validation:Optional
-	ProjectNameRef *v1.NamespacedReference `json:"projectNameRef,omitempty" tf:"-"`
+	ProjectNameRef *v2.NamespacedReference `json:"projectNameRef,omitempty" tf:"-"`
 
 	// Selector for a Project in codebuild to populate projectName.
 	// +kubebuilder:validation:Optional
-	ProjectNameSelector *v1.NamespacedSelector `json:"projectNameSelector,omitempty" tf:"-"`
+	ProjectNameSelector *v2.NamespacedSelector `json:"projectNameSelector,omitempty" tf:"-"`
 
 	// Defines comment-based approval requirements for triggering builds on pull requests. See pull_request_build_policy for details.
 	// +kubebuilder:validation:Optional
@@ -277,8 +276,8 @@ type WebhookSpec struct {
 
 // WebhookStatus defines the observed state of Webhook.
 type WebhookStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        WebhookObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               WebhookObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

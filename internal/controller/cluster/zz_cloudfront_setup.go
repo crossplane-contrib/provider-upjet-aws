@@ -76,3 +76,28 @@ func SetupGated_cloudfront(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupWebhookWithManager_cloudfront registers conversion webhooks for all resource kinds in the group.
+func SetupWebhookWithManager_cloudfront(mgr ctrl.Manager) error {
+	for _, setup := range []func(ctrl.Manager) error{
+		cachepolicy.SetupWebhookWithManager,
+		distribution.SetupWebhookWithManager,
+		fieldlevelencryptionconfig.SetupWebhookWithManager,
+		fieldlevelencryptionprofile.SetupWebhookWithManager,
+		function.SetupWebhookWithManager,
+		keygroup.SetupWebhookWithManager,
+		monitoringsubscription.SetupWebhookWithManager,
+		originaccesscontrol.SetupWebhookWithManager,
+		originaccessidentity.SetupWebhookWithManager,
+		originrequestpolicy.SetupWebhookWithManager,
+		publickey.SetupWebhookWithManager,
+		realtimelogconfig.SetupWebhookWithManager,
+		responseheaderspolicy.SetupWebhookWithManager,
+		vpcorigin.SetupWebhookWithManager,
+	} {
+		if err := setup(mgr); err != nil {
+			return err
+		}
+	}
+	return nil
+}

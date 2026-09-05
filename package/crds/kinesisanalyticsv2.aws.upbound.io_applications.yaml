@@ -3804,6 +3804,13 @@ spec:
                 x-kubernetes-list-map-keys:
                 - type
                 x-kubernetes-list-type: map
+              lastHandledReconcileAt:
+                description: |-
+                  LastHandledReconcileAt holds the value of the most recent
+                  reconcile-requested-at annotation token that the controller has
+                  processed. Users can compare this to the annotation to determine
+                  whether a reconcile request has been handled.
+                type: string
               observedGeneration:
                 description: |-
                   ObservedGeneration is the latest metadata.generation
@@ -5093,7 +5100,7 @@ spec:
                   runtimeEnvironment:
                     description: 'The runtime environment for the application. Valid
                       values: SQL-1_0, FLINK-1_6, FLINK-1_8, FLINK-1_11, FLINK-1_13,
-                      FLINK-1_15, FLINK-1_18, FLINK-1_19, FLINK-1_20.'
+                      FLINK-1_15, FLINK-1_18, FLINK-1_19, FLINK-1_20, FLINK-2_2.'
                     type: string
                   serviceExecutionRole:
                     description: The ARN of the IAM role used by the application to
@@ -6413,7 +6420,7 @@ spec:
                   runtimeEnvironment:
                     description: 'The runtime environment for the application. Valid
                       values: SQL-1_0, FLINK-1_6, FLINK-1_8, FLINK-1_11, FLINK-1_13,
-                      FLINK-1_15, FLINK-1_18, FLINK-1_19, FLINK-1_20.'
+                      FLINK-1_15, FLINK-1_18, FLINK-1_19, FLINK-1_20, FLINK-2_2.'
                     type: string
                   serviceExecutionRole:
                     description: The ARN of the IAM role used by the application to
@@ -7165,7 +7172,7 @@ spec:
                   runtimeEnvironment:
                     description: 'The runtime environment for the application. Valid
                       values: SQL-1_0, FLINK-1_6, FLINK-1_8, FLINK-1_11, FLINK-1_13,
-                      FLINK-1_15, FLINK-1_18, FLINK-1_19, FLINK-1_20.'
+                      FLINK-1_15, FLINK-1_18, FLINK-1_19, FLINK-1_20, FLINK-2_2.'
                     type: string
                   serviceExecutionRole:
                     description: The ARN of the IAM role used by the application to
@@ -7243,6 +7250,13 @@ spec:
                 x-kubernetes-list-map-keys:
                 - type
                 x-kubernetes-list-type: map
+              lastHandledReconcileAt:
+                description: |-
+                  LastHandledReconcileAt holds the value of the most recent
+                  reconcile-requested-at annotation token that the controller has
+                  processed. Users can compare this to the annotation to determine
+                  whether a reconcile request has been handled.
+                type: string
               observedGeneration:
                 description: |-
                   ObservedGeneration is the latest metadata.generation

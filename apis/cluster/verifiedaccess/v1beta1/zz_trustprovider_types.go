@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type DeviceOptionsInitParameters struct {
@@ -38,7 +38,7 @@ type NativeApplicationOidcOptionsInitParameters struct {
 	// The ID of the AWS Verified Access trust provider.
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
-	ClientSecretSecretRef v1.SecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
+	ClientSecretSecretRef v2.SecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
 
 	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
 
@@ -78,7 +78,7 @@ type NativeApplicationOidcOptionsParameters struct {
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	ClientSecretSecretRef v1.SecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
+	ClientSecretSecretRef v2.SecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
 
 	// +kubebuilder:validation:Optional
 	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
@@ -102,7 +102,7 @@ type OidcOptionsInitParameters struct {
 	// The ID of the AWS Verified Access trust provider.
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
-	ClientSecretSecretRef v1.SecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
+	ClientSecretSecretRef v2.SecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
 
 	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
 
@@ -138,7 +138,7 @@ type OidcOptionsParameters struct {
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	ClientSecretSecretRef v1.SecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
+	ClientSecretSecretRef v2.SecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
 
 	// +kubebuilder:validation:Optional
 	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
@@ -300,8 +300,8 @@ type TrustProviderSseSpecificationParameters struct {
 
 // TrustProviderSpec defines the desired state of TrustProvider
 type TrustProviderSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     TrustProviderParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   TrustProviderParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -317,8 +317,8 @@ type TrustProviderSpec struct {
 
 // TrustProviderStatus defines the observed state of TrustProvider.
 type TrustProviderStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        TrustProviderObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               TrustProviderObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

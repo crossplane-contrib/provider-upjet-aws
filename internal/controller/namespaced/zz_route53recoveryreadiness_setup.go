@@ -46,3 +46,18 @@ func SetupGated_route53recoveryreadiness(mgr ctrl.Manager, o controller.Options)
 	}
 	return nil
 }
+
+// SetupWebhookWithManager_route53recoveryreadiness registers conversion webhooks for all resource kinds in the group.
+func SetupWebhookWithManager_route53recoveryreadiness(mgr ctrl.Manager) error {
+	for _, setup := range []func(ctrl.Manager) error{
+		cell.SetupWebhookWithManager,
+		readinesscheck.SetupWebhookWithManager,
+		recoverygroup.SetupWebhookWithManager,
+		resourceset.SetupWebhookWithManager,
+	} {
+		if err := setup(mgr); err != nil {
+			return err
+		}
+	}
+	return nil
+}

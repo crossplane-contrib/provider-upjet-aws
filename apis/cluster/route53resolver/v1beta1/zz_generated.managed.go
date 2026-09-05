@@ -5,304 +5,304 @@
 
 package v1beta1
 
-import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+import xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 
 // GetCondition of this DNSSECConfig.
-func (mg *DNSSECConfig) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *DNSSECConfig) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this DNSSECConfig.
-func (mg *DNSSECConfig) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *DNSSECConfig) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this DNSSECConfig.
-func (mg *DNSSECConfig) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *DNSSECConfig) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this DNSSECConfig.
-func (mg *DNSSECConfig) GetProviderConfigReference() *xpv1.Reference {
+func (mg *DNSSECConfig) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this DNSSECConfig.
-func (mg *DNSSECConfig) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *DNSSECConfig) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this DNSSECConfig.
-func (mg *DNSSECConfig) SetConditions(c ...xpv1.Condition) {
+func (mg *DNSSECConfig) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this DNSSECConfig.
-func (mg *DNSSECConfig) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *DNSSECConfig) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this DNSSECConfig.
-func (mg *DNSSECConfig) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *DNSSECConfig) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this DNSSECConfig.
-func (mg *DNSSECConfig) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *DNSSECConfig) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this DNSSECConfig.
-func (mg *DNSSECConfig) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *DNSSECConfig) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this Endpoint.
-func (mg *Endpoint) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *Endpoint) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this Endpoint.
-func (mg *Endpoint) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *Endpoint) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this Endpoint.
-func (mg *Endpoint) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *Endpoint) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this Endpoint.
-func (mg *Endpoint) GetProviderConfigReference() *xpv1.Reference {
+func (mg *Endpoint) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this Endpoint.
-func (mg *Endpoint) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *Endpoint) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this Endpoint.
-func (mg *Endpoint) SetConditions(c ...xpv1.Condition) {
+func (mg *Endpoint) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this Endpoint.
-func (mg *Endpoint) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *Endpoint) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this Endpoint.
-func (mg *Endpoint) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *Endpoint) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this Endpoint.
-func (mg *Endpoint) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *Endpoint) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this Endpoint.
-func (mg *Endpoint) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *Endpoint) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this QueryLogConfig.
-func (mg *QueryLogConfig) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *QueryLogConfig) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this QueryLogConfig.
-func (mg *QueryLogConfig) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *QueryLogConfig) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this QueryLogConfig.
-func (mg *QueryLogConfig) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *QueryLogConfig) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this QueryLogConfig.
-func (mg *QueryLogConfig) GetProviderConfigReference() *xpv1.Reference {
+func (mg *QueryLogConfig) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this QueryLogConfig.
-func (mg *QueryLogConfig) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *QueryLogConfig) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this QueryLogConfig.
-func (mg *QueryLogConfig) SetConditions(c ...xpv1.Condition) {
+func (mg *QueryLogConfig) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this QueryLogConfig.
-func (mg *QueryLogConfig) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *QueryLogConfig) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this QueryLogConfig.
-func (mg *QueryLogConfig) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *QueryLogConfig) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this QueryLogConfig.
-func (mg *QueryLogConfig) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *QueryLogConfig) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this QueryLogConfig.
-func (mg *QueryLogConfig) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *QueryLogConfig) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this QueryLogConfigAssociation.
-func (mg *QueryLogConfigAssociation) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *QueryLogConfigAssociation) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this QueryLogConfigAssociation.
-func (mg *QueryLogConfigAssociation) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *QueryLogConfigAssociation) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this QueryLogConfigAssociation.
-func (mg *QueryLogConfigAssociation) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *QueryLogConfigAssociation) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this QueryLogConfigAssociation.
-func (mg *QueryLogConfigAssociation) GetProviderConfigReference() *xpv1.Reference {
+func (mg *QueryLogConfigAssociation) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this QueryLogConfigAssociation.
-func (mg *QueryLogConfigAssociation) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *QueryLogConfigAssociation) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this QueryLogConfigAssociation.
-func (mg *QueryLogConfigAssociation) SetConditions(c ...xpv1.Condition) {
+func (mg *QueryLogConfigAssociation) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this QueryLogConfigAssociation.
-func (mg *QueryLogConfigAssociation) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *QueryLogConfigAssociation) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this QueryLogConfigAssociation.
-func (mg *QueryLogConfigAssociation) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *QueryLogConfigAssociation) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this QueryLogConfigAssociation.
-func (mg *QueryLogConfigAssociation) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *QueryLogConfigAssociation) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this QueryLogConfigAssociation.
-func (mg *QueryLogConfigAssociation) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *QueryLogConfigAssociation) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this Rule.
-func (mg *Rule) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *Rule) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this Rule.
-func (mg *Rule) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *Rule) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this Rule.
-func (mg *Rule) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *Rule) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this Rule.
-func (mg *Rule) GetProviderConfigReference() *xpv1.Reference {
+func (mg *Rule) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this Rule.
-func (mg *Rule) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *Rule) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this Rule.
-func (mg *Rule) SetConditions(c ...xpv1.Condition) {
+func (mg *Rule) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this Rule.
-func (mg *Rule) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *Rule) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this Rule.
-func (mg *Rule) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *Rule) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this Rule.
-func (mg *Rule) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *Rule) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this Rule.
-func (mg *Rule) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *Rule) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this RuleAssociation.
-func (mg *RuleAssociation) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *RuleAssociation) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this RuleAssociation.
-func (mg *RuleAssociation) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *RuleAssociation) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this RuleAssociation.
-func (mg *RuleAssociation) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *RuleAssociation) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this RuleAssociation.
-func (mg *RuleAssociation) GetProviderConfigReference() *xpv1.Reference {
+func (mg *RuleAssociation) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this RuleAssociation.
-func (mg *RuleAssociation) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *RuleAssociation) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this RuleAssociation.
-func (mg *RuleAssociation) SetConditions(c ...xpv1.Condition) {
+func (mg *RuleAssociation) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this RuleAssociation.
-func (mg *RuleAssociation) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *RuleAssociation) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this RuleAssociation.
-func (mg *RuleAssociation) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *RuleAssociation) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this RuleAssociation.
-func (mg *RuleAssociation) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *RuleAssociation) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this RuleAssociation.
-func (mg *RuleAssociation) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *RuleAssociation) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

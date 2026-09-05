@@ -247,6 +247,26 @@ spec:
                                   Kubernetes control plane instances. This setting
                                   can't be changed after cluster creation.
                                 type: string
+                              spreadLevel:
+                                description: 'Placement group spread level for etcd
+                                  instances. Valid values: host, rack.'
+                                type: string
+                            type: object
+                          type: array
+                        etcdInstanceType:
+                          description: Amazon EC2 instance type for etcd instances
+                            of your local Amazon EKS cluster on AWS Outposts.
+                          type: string
+                        etcdPlacement:
+                          description: |-
+                            Placement configuration for the etcd instances of your local Amazon EKS cluster on an AWS Outpost.
+                            The etcd_placement configuration block supports the following arguments:
+                          items:
+                            properties:
+                              spreadLevel:
+                                description: 'Placement group spread level for etcd
+                                  instances. Valid values: host, rack.'
+                                type: string
                             type: object
                           type: array
                         outpostArns:
@@ -441,6 +461,12 @@ spec:
                       attributes detailed in the Attributes section.
                     items:
                       properties:
+                        controlPlaneEgressMode:
+                          description: Egress mode for the EKS control plane. Valid
+                            values are AWS_MANAGED and CUSTOMER_ROUTED. Defaults to
+                            AWS_MANAGED. Changing from CUSTOMER_ROUTED back to AWS_MANAGED
+                            forces a new resource.
+                          type: string
                         endpointPrivateAccess:
                           description: Whether the Amazon EKS private API server endpoint
                             is enabled. Default is false.
@@ -831,6 +857,26 @@ spec:
                                   Kubernetes control plane instances. This setting
                                   can't be changed after cluster creation.
                                 type: string
+                              spreadLevel:
+                                description: 'Placement group spread level for etcd
+                                  instances. Valid values: host, rack.'
+                                type: string
+                            type: object
+                          type: array
+                        etcdInstanceType:
+                          description: Amazon EC2 instance type for etcd instances
+                            of your local Amazon EKS cluster on AWS Outposts.
+                          type: string
+                        etcdPlacement:
+                          description: |-
+                            Placement configuration for the etcd instances of your local Amazon EKS cluster on an AWS Outpost.
+                            The etcd_placement configuration block supports the following arguments:
+                          items:
+                            properties:
+                              spreadLevel:
+                                description: 'Placement group spread level for etcd
+                                  instances. Valid values: host, rack.'
+                                type: string
                             type: object
                           type: array
                         outpostArns:
@@ -1020,6 +1066,12 @@ spec:
                       attributes detailed in the Attributes section.
                     items:
                       properties:
+                        controlPlaneEgressMode:
+                          description: Egress mode for the EKS control plane. Valid
+                            values are AWS_MANAGED and CUSTOMER_ROUTED. Defaults to
+                            AWS_MANAGED. Changing from CUSTOMER_ROUTED back to AWS_MANAGED
+                            forces a new resource.
+                          type: string
                         endpointPrivateAccess:
                           description: Whether the Amazon EKS private API server endpoint
                             is enabled. Default is false.
@@ -1549,6 +1601,26 @@ spec:
                                   Kubernetes control plane instances. This setting
                                   can't be changed after cluster creation.
                                 type: string
+                              spreadLevel:
+                                description: 'Placement group spread level for etcd
+                                  instances. Valid values: host, rack.'
+                                type: string
+                            type: object
+                          type: array
+                        etcdInstanceType:
+                          description: Amazon EC2 instance type for etcd instances
+                            of your local Amazon EKS cluster on AWS Outposts.
+                          type: string
+                        etcdPlacement:
+                          description: |-
+                            Placement configuration for the etcd instances of your local Amazon EKS cluster on an AWS Outpost.
+                            The etcd_placement configuration block supports the following arguments:
+                          items:
+                            properties:
+                              spreadLevel:
+                                description: 'Placement group spread level for etcd
+                                  instances. Valid values: host, rack.'
+                                type: string
                             type: object
                           type: array
                         outpostArns:
@@ -1688,6 +1760,12 @@ spec:
                             by Amazon EKS for the cluster. Managed node groups use
                             this security group for control-plane-to-data-plane communication.
                           type: string
+                        controlPlaneEgressMode:
+                          description: Egress mode for the EKS control plane. Valid
+                            values are AWS_MANAGED and CUSTOMER_ROUTED. Defaults to
+                            AWS_MANAGED. Changing from CUSTOMER_ROUTED back to AWS_MANAGED
+                            forces a new resource.
+                          type: string
                         endpointPrivateAccess:
                           description: Whether the Amazon EKS private API server endpoint
                             is enabled. Default is false.
@@ -1785,6 +1863,13 @@ spec:
                 x-kubernetes-list-map-keys:
                 - type
                 x-kubernetes-list-type: map
+              lastHandledReconcileAt:
+                description: |-
+                  LastHandledReconcileAt holds the value of the most recent
+                  reconcile-requested-at annotation token that the controller has
+                  processed. Users can compare this to the annotation to determine
+                  whether a reconcile request has been handled.
+                type: string
               observedGeneration:
                 description: |-
                   ObservedGeneration is the latest metadata.generation
@@ -1905,9 +1990,9 @@ spec:
                     properties:
                       tier:
                         description: The control plane scaling tier. Valid values
-                          are standard, tier-xl, tier-2xl, or tier-4xl. Defaults to
-                          standard. For more information about each tier, see EKS
-                          Provisioned Control Plane.
+                          are standard, tier-xl, tier-2xl, tier-4xl, or tier-8xl.
+                          Defaults to standard. For more information about each tier,
+                          see EKS Provisioned Control Plane.
                         type: string
                     type: object
                   deletionProtection:
@@ -2003,9 +2088,27 @@ spec:
                           The control_plane_placement configuration block supports the following arguments:
                         properties:
                           groupName:
-                            description: The name of the placement group for the Kubernetes
+                            description: Name of the placement group for the Kubernetes
                               control plane instances. This setting can't be changed
                               after cluster creation.
+                            type: string
+                          spreadLevel:
+                            description: 'Placement group spread level for etcd instances.
+                              Valid values: host, rack.'
+                            type: string
+                        type: object
+                      etcdInstanceType:
+                        description: Amazon EC2 instance type for etcd instances of
+                          your local Amazon EKS cluster on AWS Outposts.
+                        type: string
+                      etcdPlacement:
+                        description: |-
+                          Placement configuration for the etcd instances of your local Amazon EKS cluster on an AWS Outpost.
+                          The etcd_placement configuration block supports the following arguments:
+                        properties:
+                          spreadLevel:
+                            description: 'Placement group spread level for etcd instances.
+                              Valid values: host, rack.'
                             type: string
                         type: object
                       outpostArns:
@@ -2186,6 +2289,12 @@ spec:
                       in the Amazon EKS User Guide. Detailed below. Also contains
                       attributes detailed in the Attributes section.
                     properties:
+                      controlPlaneEgressMode:
+                        description: Egress mode for the EKS control plane. Valid
+                          values are AWS_MANAGED and CUSTOMER_ROUTED. Defaults to
+                          AWS_MANAGED. Changing from CUSTOMER_ROUTED back to AWS_MANAGED
+                          forces a new resource.
+                        type: string
                       endpointPrivateAccess:
                         description: Whether the Amazon EKS private API server endpoint
                           is enabled. Default is false.
@@ -2453,9 +2562,9 @@ spec:
                     properties:
                       tier:
                         description: The control plane scaling tier. Valid values
-                          are standard, tier-xl, tier-2xl, or tier-4xl. Defaults to
-                          standard. For more information about each tier, see EKS
-                          Provisioned Control Plane.
+                          are standard, tier-xl, tier-2xl, tier-4xl, or tier-8xl.
+                          Defaults to standard. For more information about each tier,
+                          see EKS Provisioned Control Plane.
                         type: string
                     type: object
                   deletionProtection:
@@ -2551,9 +2660,27 @@ spec:
                           The control_plane_placement configuration block supports the following arguments:
                         properties:
                           groupName:
-                            description: The name of the placement group for the Kubernetes
+                            description: Name of the placement group for the Kubernetes
                               control plane instances. This setting can't be changed
                               after cluster creation.
+                            type: string
+                          spreadLevel:
+                            description: 'Placement group spread level for etcd instances.
+                              Valid values: host, rack.'
+                            type: string
+                        type: object
+                      etcdInstanceType:
+                        description: Amazon EC2 instance type for etcd instances of
+                          your local Amazon EKS cluster on AWS Outposts.
+                        type: string
+                      etcdPlacement:
+                        description: |-
+                          Placement configuration for the etcd instances of your local Amazon EKS cluster on an AWS Outpost.
+                          The etcd_placement configuration block supports the following arguments:
+                        properties:
+                          spreadLevel:
+                            description: 'Placement group spread level for etcd instances.
+                              Valid values: host, rack.'
                             type: string
                         type: object
                       outpostArns:
@@ -2729,6 +2856,12 @@ spec:
                       in the Amazon EKS User Guide. Detailed below. Also contains
                       attributes detailed in the Attributes section.
                     properties:
+                      controlPlaneEgressMode:
+                        description: Egress mode for the EKS control plane. Valid
+                          values are AWS_MANAGED and CUSTOMER_ROUTED. Defaults to
+                          AWS_MANAGED. Changing from CUSTOMER_ROUTED back to AWS_MANAGED
+                          forces a new resource.
+                        type: string
                       endpointPrivateAccess:
                         description: Whether the Amazon EKS private API server endpoint
                           is enabled. Default is false.
@@ -3097,9 +3230,9 @@ spec:
                     properties:
                       tier:
                         description: The control plane scaling tier. Valid values
-                          are standard, tier-xl, tier-2xl, or tier-4xl. Defaults to
-                          standard. For more information about each tier, see EKS
-                          Provisioned Control Plane.
+                          are standard, tier-xl, tier-2xl, tier-4xl, or tier-8xl.
+                          Defaults to standard. For more information about each tier,
+                          see EKS Provisioned Control Plane.
                         type: string
                     type: object
                   createdAt:
@@ -3233,9 +3366,27 @@ spec:
                           The control_plane_placement configuration block supports the following arguments:
                         properties:
                           groupName:
-                            description: The name of the placement group for the Kubernetes
+                            description: Name of the placement group for the Kubernetes
                               control plane instances. This setting can't be changed
                               after cluster creation.
+                            type: string
+                          spreadLevel:
+                            description: 'Placement group spread level for etcd instances.
+                              Valid values: host, rack.'
+                            type: string
+                        type: object
+                      etcdInstanceType:
+                        description: Amazon EC2 instance type for etcd instances of
+                          your local Amazon EKS cluster on AWS Outposts.
+                        type: string
+                      etcdPlacement:
+                        description: |-
+                          Placement configuration for the etcd instances of your local Amazon EKS cluster on an AWS Outpost.
+                          The etcd_placement configuration block supports the following arguments:
+                        properties:
+                          spreadLevel:
+                            description: 'Placement group spread level for etcd instances.
+                              Valid values: host, rack.'
                             type: string
                         type: object
                       outpostArns:
@@ -3361,6 +3512,12 @@ spec:
                           by Amazon EKS for the cluster. Managed node groups use this
                           security group for control-plane-to-data-plane communication.
                         type: string
+                      controlPlaneEgressMode:
+                        description: Egress mode for the EKS control plane. Valid
+                          values are AWS_MANAGED and CUSTOMER_ROUTED. Defaults to
+                          AWS_MANAGED. Changing from CUSTOMER_ROUTED back to AWS_MANAGED
+                          forces a new resource.
+                        type: string
                       endpointPrivateAccess:
                         description: Whether the Amazon EKS private API server endpoint
                           is enabled. Default is false.
@@ -3455,6 +3612,13 @@ spec:
                 x-kubernetes-list-map-keys:
                 - type
                 x-kubernetes-list-type: map
+              lastHandledReconcileAt:
+                description: |-
+                  LastHandledReconcileAt holds the value of the most recent
+                  reconcile-requested-at annotation token that the controller has
+                  processed. Users can compare this to the annotation to determine
+                  whether a reconcile request has been handled.
+                type: string
               observedGeneration:
                 description: |-
                   ObservedGeneration is the latest metadata.generation

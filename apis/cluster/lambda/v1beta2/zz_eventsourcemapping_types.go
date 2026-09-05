@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AccessConfigInitParameters struct {
@@ -162,11 +162,11 @@ type EventSourceMappingInitParameters struct {
 
 	// Reference to a Function in lambda to populate functionName.
 	// +kubebuilder:validation:Optional
-	FunctionNameRef *v1.Reference `json:"functionNameRef,omitempty" tf:"-"`
+	FunctionNameRef *v2.Reference `json:"functionNameRef,omitempty" tf:"-"`
 
 	// Selector for a Function in lambda to populate functionName.
 	// +kubebuilder:validation:Optional
-	FunctionNameSelector *v1.Selector `json:"functionNameSelector,omitempty" tf:"-"`
+	FunctionNameSelector *v2.Selector `json:"functionNameSelector,omitempty" tf:"-"`
 
 	// List of current response type enums applied to the event source mapping for AWS Lambda checkpointing. Only available for SQS and stream sources (DynamoDB and Kinesis). Valid values: ReportBatchItemFailures.
 	// +listType=set
@@ -178,11 +178,11 @@ type EventSourceMappingInitParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnRef *v1.Reference `json:"kmsKeyArnRef,omitempty" tf:"-"`
+	KMSKeyArnRef *v2.Reference `json:"kmsKeyArnRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnSelector *v1.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
+	KMSKeyArnSelector *v2.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
 
 	// Maximum amount of time to gather records before invoking the function, in seconds (between 0 and 300). Records will continue to buffer until either maximum_batching_window_in_seconds expires or batch_size has been met. For streaming event sources, defaults to as soon as records are available in the stream. Only available for stream sources (DynamoDB and Kinesis) and SQS standard queues.
 	MaximumBatchingWindowInSeconds *float64 `json:"maximumBatchingWindowInSeconds,omitempty" tf:"maximum_batching_window_in_seconds,omitempty"`
@@ -233,6 +233,9 @@ type EventSourceMappingInitParameters struct {
 
 	// Duration in seconds of a processing window for AWS Lambda streaming analytics. The range is between 1 second up to 900 seconds. Only available for stream sources (DynamoDB and Kinesis).
 	TumblingWindowInSeconds *float64 `json:"tumblingWindowInSeconds,omitempty" tf:"tumbling_window_in_seconds,omitempty"`
+
+	// Whether to apply resource level timeout values while retrying eventually consistent API operations. By default the provider uses a 5 minute timeout to allow for propagation in the Lambda service. When set to true, this default value is replaced with the configurable resource timeouts. Increased timeout values may be useful in highly active accounts, or regions where propagation delays are inconsistent.
+	UseResourceTimeoutForPropagation *bool `json:"useResourceTimeoutForPropagation,omitempty" tf:"use_resource_timeout_for_propagation,omitempty"`
 }
 
 type EventSourceMappingObservation struct {
@@ -351,6 +354,9 @@ type EventSourceMappingObservation struct {
 
 	// UUID of the created event source mapping.
 	UUID *string `json:"uuid,omitempty" tf:"uuid,omitempty"`
+
+	// Whether to apply resource level timeout values while retrying eventually consistent API operations. By default the provider uses a 5 minute timeout to allow for propagation in the Lambda service. When set to true, this default value is replaced with the configurable resource timeouts. Increased timeout values may be useful in highly active accounts, or regions where propagation delays are inconsistent.
+	UseResourceTimeoutForPropagation *bool `json:"useResourceTimeoutForPropagation,omitempty" tf:"use_resource_timeout_for_propagation,omitempty"`
 }
 
 type EventSourceMappingParameters struct {
@@ -395,11 +401,11 @@ type EventSourceMappingParameters struct {
 
 	// Reference to a Function in lambda to populate functionName.
 	// +kubebuilder:validation:Optional
-	FunctionNameRef *v1.Reference `json:"functionNameRef,omitempty" tf:"-"`
+	FunctionNameRef *v2.Reference `json:"functionNameRef,omitempty" tf:"-"`
 
 	// Selector for a Function in lambda to populate functionName.
 	// +kubebuilder:validation:Optional
-	FunctionNameSelector *v1.Selector `json:"functionNameSelector,omitempty" tf:"-"`
+	FunctionNameSelector *v2.Selector `json:"functionNameSelector,omitempty" tf:"-"`
 
 	// List of current response type enums applied to the event source mapping for AWS Lambda checkpointing. Only available for SQS and stream sources (DynamoDB and Kinesis). Valid values: ReportBatchItemFailures.
 	// +kubebuilder:validation:Optional
@@ -413,11 +419,11 @@ type EventSourceMappingParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnRef *v1.Reference `json:"kmsKeyArnRef,omitempty" tf:"-"`
+	KMSKeyArnRef *v2.Reference `json:"kmsKeyArnRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnSelector *v1.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
+	KMSKeyArnSelector *v2.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
 
 	// Maximum amount of time to gather records before invoking the function, in seconds (between 0 and 300). Records will continue to buffer until either maximum_batching_window_in_seconds expires or batch_size has been met. For streaming event sources, defaults to as soon as records are available in the stream. Only available for stream sources (DynamoDB and Kinesis) and SQS standard queues.
 	// +kubebuilder:validation:Optional
@@ -489,6 +495,10 @@ type EventSourceMappingParameters struct {
 	// Duration in seconds of a processing window for AWS Lambda streaming analytics. The range is between 1 second up to 900 seconds. Only available for stream sources (DynamoDB and Kinesis).
 	// +kubebuilder:validation:Optional
 	TumblingWindowInSeconds *float64 `json:"tumblingWindowInSeconds,omitempty" tf:"tumbling_window_in_seconds,omitempty"`
+
+	// Whether to apply resource level timeout values while retrying eventually consistent API operations. By default the provider uses a 5 minute timeout to allow for propagation in the Lambda service. When set to true, this default value is replaced with the configurable resource timeouts. Increased timeout values may be useful in highly active accounts, or regions where propagation delays are inconsistent.
+	// +kubebuilder:validation:Optional
+	UseResourceTimeoutForPropagation *bool `json:"useResourceTimeoutForPropagation,omitempty" tf:"use_resource_timeout_for_propagation,omitempty"`
 }
 
 type FilterCriteriaInitParameters struct {
@@ -560,11 +570,11 @@ type OnFailureInitParameters struct {
 
 	// Reference to a Queue in sqs to populate destinationArn.
 	// +kubebuilder:validation:Optional
-	DestinationArnRef *v1.Reference `json:"destinationArnRef,omitempty" tf:"-"`
+	DestinationArnRef *v2.Reference `json:"destinationArnRef,omitempty" tf:"-"`
 
 	// Selector for a Queue in sqs to populate destinationArn.
 	// +kubebuilder:validation:Optional
-	DestinationArnSelector *v1.Selector `json:"destinationArnSelector,omitempty" tf:"-"`
+	DestinationArnSelector *v2.Selector `json:"destinationArnSelector,omitempty" tf:"-"`
 }
 
 type OnFailureObservation struct {
@@ -583,11 +593,11 @@ type OnFailureParameters struct {
 
 	// Reference to a Queue in sqs to populate destinationArn.
 	// +kubebuilder:validation:Optional
-	DestinationArnRef *v1.Reference `json:"destinationArnRef,omitempty" tf:"-"`
+	DestinationArnRef *v2.Reference `json:"destinationArnRef,omitempty" tf:"-"`
 
 	// Selector for a Queue in sqs to populate destinationArn.
 	// +kubebuilder:validation:Optional
-	DestinationArnSelector *v1.Selector `json:"destinationArnSelector,omitempty" tf:"-"`
+	DestinationArnSelector *v2.Selector `json:"destinationArnSelector,omitempty" tf:"-"`
 }
 
 type ProvisionedPollerConfigInitParameters struct {
@@ -895,8 +905,8 @@ type SourceAccessConfigurationParameters struct {
 
 // EventSourceMappingSpec defines the desired state of EventSourceMapping
 type EventSourceMappingSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     EventSourceMappingParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   EventSourceMappingParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -912,8 +922,8 @@ type EventSourceMappingSpec struct {
 
 // EventSourceMappingStatus defines the observed state of EventSourceMapping.
 type EventSourceMappingStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        EventSourceMappingObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               EventSourceMappingObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

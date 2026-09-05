@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type PolicyAttributeInitParameters struct {
@@ -23,11 +22,11 @@ type PolicyAttributeInitParameters struct {
 
 	// Reference to a Policy in elb to populate value.
 	// +kubebuilder:validation:Optional
-	ValueRef *v1.NamespacedReference `json:"valueRef,omitempty" tf:"-"`
+	ValueRef *v2.NamespacedReference `json:"valueRef,omitempty" tf:"-"`
 
 	// Selector for a Policy in elb to populate value.
 	// +kubebuilder:validation:Optional
-	ValueSelector *v1.NamespacedSelector `json:"valueSelector,omitempty" tf:"-"`
+	ValueSelector *v2.NamespacedSelector `json:"valueSelector,omitempty" tf:"-"`
 }
 
 type PolicyAttributeObservation struct {
@@ -48,11 +47,11 @@ type PolicyAttributeParameters struct {
 
 	// Reference to a Policy in elb to populate value.
 	// +kubebuilder:validation:Optional
-	ValueRef *v1.NamespacedReference `json:"valueRef,omitempty" tf:"-"`
+	ValueRef *v2.NamespacedReference `json:"valueRef,omitempty" tf:"-"`
 
 	// Selector for a Policy in elb to populate value.
 	// +kubebuilder:validation:Optional
-	ValueSelector *v1.NamespacedSelector `json:"valueSelector,omitempty" tf:"-"`
+	ValueSelector *v2.NamespacedSelector `json:"valueSelector,omitempty" tf:"-"`
 }
 
 type PolicyInitParameters struct {
@@ -63,11 +62,11 @@ type PolicyInitParameters struct {
 
 	// Reference to a ELB in elb to populate loadBalancerName.
 	// +kubebuilder:validation:Optional
-	LoadBalancerNameRef *v1.NamespacedReference `json:"loadBalancerNameRef,omitempty" tf:"-"`
+	LoadBalancerNameRef *v2.NamespacedReference `json:"loadBalancerNameRef,omitempty" tf:"-"`
 
 	// Selector for a ELB in elb to populate loadBalancerName.
 	// +kubebuilder:validation:Optional
-	LoadBalancerNameSelector *v1.NamespacedSelector `json:"loadBalancerNameSelector,omitempty" tf:"-"`
+	LoadBalancerNameSelector *v2.NamespacedSelector `json:"loadBalancerNameSelector,omitempty" tf:"-"`
 
 	// Policy attribute to apply to the policy.
 	PolicyAttribute []PolicyAttributeInitParameters `json:"policyAttribute,omitempty" tf:"policy_attribute,omitempty"`
@@ -110,11 +109,11 @@ type PolicyParameters struct {
 
 	// Reference to a ELB in elb to populate loadBalancerName.
 	// +kubebuilder:validation:Optional
-	LoadBalancerNameRef *v1.NamespacedReference `json:"loadBalancerNameRef,omitempty" tf:"-"`
+	LoadBalancerNameRef *v2.NamespacedReference `json:"loadBalancerNameRef,omitempty" tf:"-"`
 
 	// Selector for a ELB in elb to populate loadBalancerName.
 	// +kubebuilder:validation:Optional
-	LoadBalancerNameSelector *v1.NamespacedSelector `json:"loadBalancerNameSelector,omitempty" tf:"-"`
+	LoadBalancerNameSelector *v2.NamespacedSelector `json:"loadBalancerNameSelector,omitempty" tf:"-"`
 
 	// Policy attribute to apply to the policy.
 	// +kubebuilder:validation:Optional
@@ -153,8 +152,8 @@ type PolicySpec struct {
 
 // PolicyStatus defines the observed state of Policy.
 type PolicyStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        PolicyObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               PolicyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

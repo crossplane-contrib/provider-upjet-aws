@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type MethodSettingsInitParameters struct {
@@ -26,11 +25,11 @@ type MethodSettingsInitParameters struct {
 
 	// Reference to a RestAPI in apigateway to populate restApiId.
 	// +kubebuilder:validation:Optional
-	RestAPIIDRef *v1.NamespacedReference `json:"restApiIdRef,omitempty" tf:"-"`
+	RestAPIIDRef *v2.NamespacedReference `json:"restApiIdRef,omitempty" tf:"-"`
 
 	// Selector for a RestAPI in apigateway to populate restApiId.
 	// +kubebuilder:validation:Optional
-	RestAPIIDSelector *v1.NamespacedSelector `json:"restApiIdSelector,omitempty" tf:"-"`
+	RestAPIIDSelector *v2.NamespacedSelector `json:"restApiIdSelector,omitempty" tf:"-"`
 
 	// Settings block, see below.
 	Settings *SettingsInitParameters `json:"settings,omitempty" tf:"settings,omitempty"`
@@ -42,11 +41,11 @@ type MethodSettingsInitParameters struct {
 
 	// Reference to a Stage in apigateway to populate stageName.
 	// +kubebuilder:validation:Optional
-	StageNameRef *v1.NamespacedReference `json:"stageNameRef,omitempty" tf:"-"`
+	StageNameRef *v2.NamespacedReference `json:"stageNameRef,omitempty" tf:"-"`
 
 	// Selector for a Stage in apigateway to populate stageName.
 	// +kubebuilder:validation:Optional
-	StageNameSelector *v1.NamespacedSelector `json:"stageNameSelector,omitempty" tf:"-"`
+	StageNameSelector *v2.NamespacedSelector `json:"stageNameSelector,omitempty" tf:"-"`
 }
 
 type MethodSettingsObservation struct {
@@ -88,11 +87,11 @@ type MethodSettingsParameters struct {
 
 	// Reference to a RestAPI in apigateway to populate restApiId.
 	// +kubebuilder:validation:Optional
-	RestAPIIDRef *v1.NamespacedReference `json:"restApiIdRef,omitempty" tf:"-"`
+	RestAPIIDRef *v2.NamespacedReference `json:"restApiIdRef,omitempty" tf:"-"`
 
 	// Selector for a RestAPI in apigateway to populate restApiId.
 	// +kubebuilder:validation:Optional
-	RestAPIIDSelector *v1.NamespacedSelector `json:"restApiIdSelector,omitempty" tf:"-"`
+	RestAPIIDSelector *v2.NamespacedSelector `json:"restApiIdSelector,omitempty" tf:"-"`
 
 	// Settings block, see below.
 	// +kubebuilder:validation:Optional
@@ -106,11 +105,11 @@ type MethodSettingsParameters struct {
 
 	// Reference to a Stage in apigateway to populate stageName.
 	// +kubebuilder:validation:Optional
-	StageNameRef *v1.NamespacedReference `json:"stageNameRef,omitempty" tf:"-"`
+	StageNameRef *v2.NamespacedReference `json:"stageNameRef,omitempty" tf:"-"`
 
 	// Selector for a Stage in apigateway to populate stageName.
 	// +kubebuilder:validation:Optional
-	StageNameSelector *v1.NamespacedSelector `json:"stageNameSelector,omitempty" tf:"-"`
+	StageNameSelector *v2.NamespacedSelector `json:"stageNameSelector,omitempty" tf:"-"`
 }
 
 type SettingsInitParameters struct {
@@ -241,8 +240,8 @@ type MethodSettingsSpec struct {
 
 // MethodSettingsStatus defines the observed state of MethodSettings.
 type MethodSettingsStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        MethodSettingsObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               MethodSettingsObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

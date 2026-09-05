@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AcceleratorCountInitParameters struct {
@@ -64,11 +64,11 @@ type AutoScalingGroupProviderInitParameters struct {
 
 	// Reference to a AutoscalingGroup in autoscaling to populate autoScalingGroupArn.
 	// +kubebuilder:validation:Optional
-	AutoScalingGroupArnRef *v1.Reference `json:"autoScalingGroupArnRef,omitempty" tf:"-"`
+	AutoScalingGroupArnRef *v2.Reference `json:"autoScalingGroupArnRef,omitempty" tf:"-"`
 
 	// Selector for a AutoscalingGroup in autoscaling to populate autoScalingGroupArn.
 	// +kubebuilder:validation:Optional
-	AutoScalingGroupArnSelector *v1.Selector `json:"autoScalingGroupArnSelector,omitempty" tf:"-"`
+	AutoScalingGroupArnSelector *v2.Selector `json:"autoScalingGroupArnSelector,omitempty" tf:"-"`
 
 	// - Enables or disables a graceful shutdown of instances without disturbing workloads. Valid values are ENABLED and DISABLED. The default value is ENABLED when a capacity provider is created.
 	ManagedDraining *string `json:"managedDraining,omitempty" tf:"managed_draining,omitempty"`
@@ -105,11 +105,11 @@ type AutoScalingGroupProviderParameters struct {
 
 	// Reference to a AutoscalingGroup in autoscaling to populate autoScalingGroupArn.
 	// +kubebuilder:validation:Optional
-	AutoScalingGroupArnRef *v1.Reference `json:"autoScalingGroupArnRef,omitempty" tf:"-"`
+	AutoScalingGroupArnRef *v2.Reference `json:"autoScalingGroupArnRef,omitempty" tf:"-"`
 
 	// Selector for a AutoscalingGroup in autoscaling to populate autoScalingGroupArn.
 	// +kubebuilder:validation:Optional
-	AutoScalingGroupArnSelector *v1.Selector `json:"autoScalingGroupArnSelector,omitempty" tf:"-"`
+	AutoScalingGroupArnSelector *v2.Selector `json:"autoScalingGroupArnSelector,omitempty" tf:"-"`
 
 	// - Enables or disables a graceful shutdown of instances without disturbing workloads. Valid values are ENABLED and DISABLED. The default value is ENABLED when a capacity provider is created.
 	// +kubebuilder:validation:Optional
@@ -866,8 +866,8 @@ type VcpuCountParameters struct {
 
 // CapacityProviderSpec defines the desired state of CapacityProvider
 type CapacityProviderSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     CapacityProviderParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   CapacityProviderParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -883,8 +883,8 @@ type CapacityProviderSpec struct {
 
 // CapacityProviderStatus defines the observed state of CapacityProvider.
 type CapacityProviderStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        CapacityProviderObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               CapacityProviderObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

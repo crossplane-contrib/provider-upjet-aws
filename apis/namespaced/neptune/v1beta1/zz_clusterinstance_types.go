@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ClusterInstanceInitParameters struct {
@@ -32,11 +31,11 @@ type ClusterInstanceInitParameters struct {
 
 	// Reference to a Cluster in neptune to populate clusterIdentifier.
 	// +kubebuilder:validation:Optional
-	ClusterIdentifierRef *v1.NamespacedReference `json:"clusterIdentifierRef,omitempty" tf:"-"`
+	ClusterIdentifierRef *v2.NamespacedReference `json:"clusterIdentifierRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in neptune to populate clusterIdentifier.
 	// +kubebuilder:validation:Optional
-	ClusterIdentifierSelector *v1.NamespacedSelector `json:"clusterIdentifierSelector,omitempty" tf:"-"`
+	ClusterIdentifierSelector *v2.NamespacedSelector `json:"clusterIdentifierSelector,omitempty" tf:"-"`
 
 	// The name of the database engine to be used for the neptune instance. Defaults to neptune. Valid Values: neptune.
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
@@ -53,11 +52,11 @@ type ClusterInstanceInitParameters struct {
 
 	// Reference to a ParameterGroup in neptune to populate neptuneParameterGroupName.
 	// +kubebuilder:validation:Optional
-	NeptuneParameterGroupNameRef *v1.NamespacedReference `json:"neptuneParameterGroupNameRef,omitempty" tf:"-"`
+	NeptuneParameterGroupNameRef *v2.NamespacedReference `json:"neptuneParameterGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ParameterGroup in neptune to populate neptuneParameterGroupName.
 	// +kubebuilder:validation:Optional
-	NeptuneParameterGroupNameSelector *v1.NamespacedSelector `json:"neptuneParameterGroupNameSelector,omitempty" tf:"-"`
+	NeptuneParameterGroupNameSelector *v2.NamespacedSelector `json:"neptuneParameterGroupNameSelector,omitempty" tf:"-"`
 
 	// A subnet group to associate with this neptune instance. NOTE: This must match the neptune_subnet_group_name of the attached aws_neptune_cluster.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/neptune/v1beta1.SubnetGroup
@@ -65,11 +64,11 @@ type ClusterInstanceInitParameters struct {
 
 	// Reference to a SubnetGroup in neptune to populate neptuneSubnetGroupName.
 	// +kubebuilder:validation:Optional
-	NeptuneSubnetGroupNameRef *v1.NamespacedReference `json:"neptuneSubnetGroupNameRef,omitempty" tf:"-"`
+	NeptuneSubnetGroupNameRef *v2.NamespacedReference `json:"neptuneSubnetGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a SubnetGroup in neptune to populate neptuneSubnetGroupName.
 	// +kubebuilder:validation:Optional
-	NeptuneSubnetGroupNameSelector *v1.NamespacedSelector `json:"neptuneSubnetGroupNameSelector,omitempty" tf:"-"`
+	NeptuneSubnetGroupNameSelector *v2.NamespacedSelector `json:"neptuneSubnetGroupNameSelector,omitempty" tf:"-"`
 
 	// The port on which the DB accepts connections. Defaults to 8182.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
@@ -206,11 +205,11 @@ type ClusterInstanceParameters struct {
 
 	// Reference to a Cluster in neptune to populate clusterIdentifier.
 	// +kubebuilder:validation:Optional
-	ClusterIdentifierRef *v1.NamespacedReference `json:"clusterIdentifierRef,omitempty" tf:"-"`
+	ClusterIdentifierRef *v2.NamespacedReference `json:"clusterIdentifierRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in neptune to populate clusterIdentifier.
 	// +kubebuilder:validation:Optional
-	ClusterIdentifierSelector *v1.NamespacedSelector `json:"clusterIdentifierSelector,omitempty" tf:"-"`
+	ClusterIdentifierSelector *v2.NamespacedSelector `json:"clusterIdentifierSelector,omitempty" tf:"-"`
 
 	// The name of the database engine to be used for the neptune instance. Defaults to neptune. Valid Values: neptune.
 	// +kubebuilder:validation:Optional
@@ -231,11 +230,11 @@ type ClusterInstanceParameters struct {
 
 	// Reference to a ParameterGroup in neptune to populate neptuneParameterGroupName.
 	// +kubebuilder:validation:Optional
-	NeptuneParameterGroupNameRef *v1.NamespacedReference `json:"neptuneParameterGroupNameRef,omitempty" tf:"-"`
+	NeptuneParameterGroupNameRef *v2.NamespacedReference `json:"neptuneParameterGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ParameterGroup in neptune to populate neptuneParameterGroupName.
 	// +kubebuilder:validation:Optional
-	NeptuneParameterGroupNameSelector *v1.NamespacedSelector `json:"neptuneParameterGroupNameSelector,omitempty" tf:"-"`
+	NeptuneParameterGroupNameSelector *v2.NamespacedSelector `json:"neptuneParameterGroupNameSelector,omitempty" tf:"-"`
 
 	// A subnet group to associate with this neptune instance. NOTE: This must match the neptune_subnet_group_name of the attached aws_neptune_cluster.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/neptune/v1beta1.SubnetGroup
@@ -244,11 +243,11 @@ type ClusterInstanceParameters struct {
 
 	// Reference to a SubnetGroup in neptune to populate neptuneSubnetGroupName.
 	// +kubebuilder:validation:Optional
-	NeptuneSubnetGroupNameRef *v1.NamespacedReference `json:"neptuneSubnetGroupNameRef,omitempty" tf:"-"`
+	NeptuneSubnetGroupNameRef *v2.NamespacedReference `json:"neptuneSubnetGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a SubnetGroup in neptune to populate neptuneSubnetGroupName.
 	// +kubebuilder:validation:Optional
-	NeptuneSubnetGroupNameSelector *v1.NamespacedSelector `json:"neptuneSubnetGroupNameSelector,omitempty" tf:"-"`
+	NeptuneSubnetGroupNameSelector *v2.NamespacedSelector `json:"neptuneSubnetGroupNameSelector,omitempty" tf:"-"`
 
 	// The port on which the DB accepts connections. Defaults to 8182.
 	// +kubebuilder:validation:Optional
@@ -305,8 +304,8 @@ type ClusterInstanceSpec struct {
 
 // ClusterInstanceStatus defines the observed state of ClusterInstance.
 type ClusterInstanceStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ClusterInstanceObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ClusterInstanceObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type VPCPeeringConnectionOptionsAccepterInitParameters struct {
@@ -48,11 +47,11 @@ type VPCPeeringConnectionOptionsInitParameters struct {
 
 	// Reference to a VPCPeeringConnection in ec2 to populate vpcPeeringConnectionId.
 	// +kubebuilder:validation:Optional
-	VPCPeeringConnectionIDRef *v1.NamespacedReference `json:"vpcPeeringConnectionIdRef,omitempty" tf:"-"`
+	VPCPeeringConnectionIDRef *v2.NamespacedReference `json:"vpcPeeringConnectionIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPCPeeringConnection in ec2 to populate vpcPeeringConnectionId.
 	// +kubebuilder:validation:Optional
-	VPCPeeringConnectionIDSelector *v1.NamespacedSelector `json:"vpcPeeringConnectionIdSelector,omitempty" tf:"-"`
+	VPCPeeringConnectionIDSelector *v2.NamespacedSelector `json:"vpcPeeringConnectionIdSelector,omitempty" tf:"-"`
 }
 
 type VPCPeeringConnectionOptionsObservation struct {
@@ -97,11 +96,11 @@ type VPCPeeringConnectionOptionsParameters struct {
 
 	// Reference to a VPCPeeringConnection in ec2 to populate vpcPeeringConnectionId.
 	// +kubebuilder:validation:Optional
-	VPCPeeringConnectionIDRef *v1.NamespacedReference `json:"vpcPeeringConnectionIdRef,omitempty" tf:"-"`
+	VPCPeeringConnectionIDRef *v2.NamespacedReference `json:"vpcPeeringConnectionIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPCPeeringConnection in ec2 to populate vpcPeeringConnectionId.
 	// +kubebuilder:validation:Optional
-	VPCPeeringConnectionIDSelector *v1.NamespacedSelector `json:"vpcPeeringConnectionIdSelector,omitempty" tf:"-"`
+	VPCPeeringConnectionIDSelector *v2.NamespacedSelector `json:"vpcPeeringConnectionIdSelector,omitempty" tf:"-"`
 }
 
 type VPCPeeringConnectionOptionsRequesterInitParameters struct {
@@ -142,8 +141,8 @@ type VPCPeeringConnectionOptionsSpec struct {
 
 // VPCPeeringConnectionOptionsStatus defines the observed state of VPCPeeringConnectionOptions.
 type VPCPeeringConnectionOptionsStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        VPCPeeringConnectionOptionsObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               VPCPeeringConnectionOptionsObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type VPCInitParameters struct {
@@ -22,11 +22,11 @@ type VPCInitParameters struct {
 
 	// Reference to a VPC in ec2 to populate vpcId.
 	// +kubebuilder:validation:Optional
-	VPCIDRef *v1.Reference `json:"vpcIdRef,omitempty" tf:"-"`
+	VPCIDRef *v2.Reference `json:"vpcIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPC in ec2 to populate vpcId.
 	// +kubebuilder:validation:Optional
-	VPCIDSelector *v1.Selector `json:"vpcIdSelector,omitempty" tf:"-"`
+	VPCIDSelector *v2.Selector `json:"vpcIdSelector,omitempty" tf:"-"`
 
 	// Region of the VPC to associate. Defaults to AWS provider region.
 	VPCRegion *string `json:"vpcRegion,omitempty" tf:"vpc_region,omitempty"`
@@ -51,11 +51,11 @@ type VPCParameters struct {
 
 	// Reference to a VPC in ec2 to populate vpcId.
 	// +kubebuilder:validation:Optional
-	VPCIDRef *v1.Reference `json:"vpcIdRef,omitempty" tf:"-"`
+	VPCIDRef *v2.Reference `json:"vpcIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPC in ec2 to populate vpcId.
 	// +kubebuilder:validation:Optional
-	VPCIDSelector *v1.Selector `json:"vpcIdSelector,omitempty" tf:"-"`
+	VPCIDSelector *v2.Selector `json:"vpcIdSelector,omitempty" tf:"-"`
 
 	// Region of the VPC to associate. Defaults to AWS provider region.
 	// +kubebuilder:validation:Optional
@@ -73,11 +73,11 @@ type ZoneInitParameters struct {
 
 	// Reference to a DelegationSet in route53 to populate delegationSetId.
 	// +kubebuilder:validation:Optional
-	DelegationSetIDRef *v1.Reference `json:"delegationSetIdRef,omitempty" tf:"-"`
+	DelegationSetIDRef *v2.Reference `json:"delegationSetIdRef,omitempty" tf:"-"`
 
 	// Selector for a DelegationSet in route53 to populate delegationSetId.
 	// +kubebuilder:validation:Optional
-	DelegationSetIDSelector *v1.Selector `json:"delegationSetIdSelector,omitempty" tf:"-"`
+	DelegationSetIDSelector *v2.Selector `json:"delegationSetIdSelector,omitempty" tf:"-"`
 
 	// Boolean to indicate whether to enable accelerated recovery for the hosted zone. Defaults to false. Once set, switching to false requires explicitly specifying false rather than removing the argument.
 	EnableAcceleratedRecovery *bool `json:"enableAcceleratedRecovery,omitempty" tf:"enable_accelerated_recovery,omitempty"`
@@ -151,11 +151,11 @@ type ZoneParameters struct {
 
 	// Reference to a DelegationSet in route53 to populate delegationSetId.
 	// +kubebuilder:validation:Optional
-	DelegationSetIDRef *v1.Reference `json:"delegationSetIdRef,omitempty" tf:"-"`
+	DelegationSetIDRef *v2.Reference `json:"delegationSetIdRef,omitempty" tf:"-"`
 
 	// Selector for a DelegationSet in route53 to populate delegationSetId.
 	// +kubebuilder:validation:Optional
-	DelegationSetIDSelector *v1.Selector `json:"delegationSetIdSelector,omitempty" tf:"-"`
+	DelegationSetIDSelector *v2.Selector `json:"delegationSetIdSelector,omitempty" tf:"-"`
 
 	// Boolean to indicate whether to enable accelerated recovery for the hosted zone. Defaults to false. Once set, switching to false requires explicitly specifying false rather than removing the argument.
 	// +kubebuilder:validation:Optional
@@ -180,8 +180,8 @@ type ZoneParameters struct {
 
 // ZoneSpec defines the desired state of Zone
 type ZoneSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ZoneParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ZoneParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -197,8 +197,8 @@ type ZoneSpec struct {
 
 // ZoneStatus defines the observed state of Zone.
 type ZoneStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ZoneObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ZoneObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

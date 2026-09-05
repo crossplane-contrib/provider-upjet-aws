@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AdditionalAuthenticationProviderInitParameters struct {
@@ -131,11 +131,11 @@ type GraphQLAPIInitParameters struct {
 
 	// Reference to a Role in iam to populate mergedApiExecutionRoleArn.
 	// +kubebuilder:validation:Optional
-	MergedAPIExecutionRoleArnRef *v1.Reference `json:"mergedApiExecutionRoleArnRef,omitempty" tf:"-"`
+	MergedAPIExecutionRoleArnRef *v2.Reference `json:"mergedApiExecutionRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate mergedApiExecutionRoleArn.
 	// +kubebuilder:validation:Optional
-	MergedAPIExecutionRoleArnSelector *v1.Selector `json:"mergedApiExecutionRoleArnSelector,omitempty" tf:"-"`
+	MergedAPIExecutionRoleArnSelector *v2.Selector `json:"mergedApiExecutionRoleArnSelector,omitempty" tf:"-"`
 
 	// User-supplied name for the GraphQL API.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -365,11 +365,11 @@ type GraphQLAPIParameters struct {
 
 	// Reference to a Role in iam to populate mergedApiExecutionRoleArn.
 	// +kubebuilder:validation:Optional
-	MergedAPIExecutionRoleArnRef *v1.Reference `json:"mergedApiExecutionRoleArnRef,omitempty" tf:"-"`
+	MergedAPIExecutionRoleArnRef *v2.Reference `json:"mergedApiExecutionRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate mergedApiExecutionRoleArn.
 	// +kubebuilder:validation:Optional
-	MergedAPIExecutionRoleArnSelector *v1.Selector `json:"mergedApiExecutionRoleArnSelector,omitempty" tf:"-"`
+	MergedAPIExecutionRoleArnSelector *v2.Selector `json:"mergedApiExecutionRoleArnSelector,omitempty" tf:"-"`
 
 	// User-supplied name for the GraphQL API.
 	// +kubebuilder:validation:Optional
@@ -432,11 +432,11 @@ type GraphQLAPIUserPoolConfigInitParameters struct {
 
 	// Reference to a UserPool in cognitoidp to populate userPoolId.
 	// +kubebuilder:validation:Optional
-	UserPoolIDRef *v1.Reference `json:"userPoolIdRef,omitempty" tf:"-"`
+	UserPoolIDRef *v2.Reference `json:"userPoolIdRef,omitempty" tf:"-"`
 
 	// Selector for a UserPool in cognitoidp to populate userPoolId.
 	// +kubebuilder:validation:Optional
-	UserPoolIDSelector *v1.Selector `json:"userPoolIdSelector,omitempty" tf:"-"`
+	UserPoolIDSelector *v2.Selector `json:"userPoolIdSelector,omitempty" tf:"-"`
 }
 
 type GraphQLAPIUserPoolConfigObservation struct {
@@ -476,11 +476,11 @@ type GraphQLAPIUserPoolConfigParameters struct {
 
 	// Reference to a UserPool in cognitoidp to populate userPoolId.
 	// +kubebuilder:validation:Optional
-	UserPoolIDRef *v1.Reference `json:"userPoolIdRef,omitempty" tf:"-"`
+	UserPoolIDRef *v2.Reference `json:"userPoolIdRef,omitempty" tf:"-"`
 
 	// Selector for a UserPool in cognitoidp to populate userPoolId.
 	// +kubebuilder:validation:Optional
-	UserPoolIDSelector *v1.Selector `json:"userPoolIdSelector,omitempty" tf:"-"`
+	UserPoolIDSelector *v2.Selector `json:"userPoolIdSelector,omitempty" tf:"-"`
 }
 
 type LambdaAuthorizerConfigInitParameters struct {
@@ -531,11 +531,11 @@ type LogConfigInitParameters struct {
 
 	// Reference to a Role in iam to populate cloudwatchLogsRoleArn.
 	// +kubebuilder:validation:Optional
-	CloudwatchLogsRoleArnRef *v1.Reference `json:"cloudwatchLogsRoleArnRef,omitempty" tf:"-"`
+	CloudwatchLogsRoleArnRef *v2.Reference `json:"cloudwatchLogsRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate cloudwatchLogsRoleArn.
 	// +kubebuilder:validation:Optional
-	CloudwatchLogsRoleArnSelector *v1.Selector `json:"cloudwatchLogsRoleArnSelector,omitempty" tf:"-"`
+	CloudwatchLogsRoleArnSelector *v2.Selector `json:"cloudwatchLogsRoleArnSelector,omitempty" tf:"-"`
 
 	// Set to TRUE to exclude sections that contain information such as headers, context, and evaluated mapping templates, regardless of logging  level. Valid values: true, false. Default value: false
 	ExcludeVerboseContent *bool `json:"excludeVerboseContent,omitempty" tf:"exclude_verbose_content,omitempty"`
@@ -566,11 +566,11 @@ type LogConfigParameters struct {
 
 	// Reference to a Role in iam to populate cloudwatchLogsRoleArn.
 	// +kubebuilder:validation:Optional
-	CloudwatchLogsRoleArnRef *v1.Reference `json:"cloudwatchLogsRoleArnRef,omitempty" tf:"-"`
+	CloudwatchLogsRoleArnRef *v2.Reference `json:"cloudwatchLogsRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate cloudwatchLogsRoleArn.
 	// +kubebuilder:validation:Optional
-	CloudwatchLogsRoleArnSelector *v1.Selector `json:"cloudwatchLogsRoleArnSelector,omitempty" tf:"-"`
+	CloudwatchLogsRoleArnSelector *v2.Selector `json:"cloudwatchLogsRoleArnSelector,omitempty" tf:"-"`
 
 	// Set to TRUE to exclude sections that contain information such as headers, context, and evaluated mapping templates, regardless of logging  level. Valid values: true, false. Default value: false
 	// +kubebuilder:validation:Optional
@@ -671,8 +671,8 @@ type UserPoolConfigParameters struct {
 
 // GraphQLAPISpec defines the desired state of GraphQLAPI
 type GraphQLAPISpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     GraphQLAPIParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   GraphQLAPIParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -688,8 +688,8 @@ type GraphQLAPISpec struct {
 
 // GraphQLAPIStatus defines the observed state of GraphQLAPI.
 type GraphQLAPIStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        GraphQLAPIObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               GraphQLAPIObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

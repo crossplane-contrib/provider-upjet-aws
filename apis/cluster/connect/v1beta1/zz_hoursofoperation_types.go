@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ConfigInitParameters struct {
@@ -96,11 +96,11 @@ type HoursOfOperationInitParameters struct {
 
 	// Reference to a Instance in connect to populate instanceId.
 	// +kubebuilder:validation:Optional
-	InstanceIDRef *v1.Reference `json:"instanceIdRef,omitempty" tf:"-"`
+	InstanceIDRef *v2.Reference `json:"instanceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Instance in connect to populate instanceId.
 	// +kubebuilder:validation:Optional
-	InstanceIDSelector *v1.Selector `json:"instanceIdSelector,omitempty" tf:"-"`
+	InstanceIDSelector *v2.Selector `json:"instanceIdSelector,omitempty" tf:"-"`
 
 	// Specifies the name of the Hours of Operation.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -173,11 +173,11 @@ type HoursOfOperationParameters struct {
 
 	// Reference to a Instance in connect to populate instanceId.
 	// +kubebuilder:validation:Optional
-	InstanceIDRef *v1.Reference `json:"instanceIdRef,omitempty" tf:"-"`
+	InstanceIDRef *v2.Reference `json:"instanceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Instance in connect to populate instanceId.
 	// +kubebuilder:validation:Optional
-	InstanceIDSelector *v1.Selector `json:"instanceIdSelector,omitempty" tf:"-"`
+	InstanceIDSelector *v2.Selector `json:"instanceIdSelector,omitempty" tf:"-"`
 
 	// Specifies the name of the Hours of Operation.
 	// +kubebuilder:validation:Optional
@@ -229,8 +229,8 @@ type StartTimeParameters struct {
 
 // HoursOfOperationSpec defines the desired state of HoursOfOperation
 type HoursOfOperationSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     HoursOfOperationParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   HoursOfOperationParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -246,8 +246,8 @@ type HoursOfOperationSpec struct {
 
 // HoursOfOperationStatus defines the observed state of HoursOfOperation.
 type HoursOfOperationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        HoursOfOperationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               HoursOfOperationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

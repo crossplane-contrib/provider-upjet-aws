@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ApplicationInitParameters struct {
@@ -87,11 +86,11 @@ type AppversionLifecycleInitParameters struct {
 
 	// Reference to a Role in iam to populate serviceRole.
 	// +kubebuilder:validation:Optional
-	ServiceRoleRef *v1.NamespacedReference `json:"serviceRoleRef,omitempty" tf:"-"`
+	ServiceRoleRef *v2.NamespacedReference `json:"serviceRoleRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate serviceRole.
 	// +kubebuilder:validation:Optional
-	ServiceRoleSelector *v1.NamespacedSelector `json:"serviceRoleSelector,omitempty" tf:"-"`
+	ServiceRoleSelector *v2.NamespacedSelector `json:"serviceRoleSelector,omitempty" tf:"-"`
 }
 
 type AppversionLifecycleObservation struct {
@@ -131,11 +130,11 @@ type AppversionLifecycleParameters struct {
 
 	// Reference to a Role in iam to populate serviceRole.
 	// +kubebuilder:validation:Optional
-	ServiceRoleRef *v1.NamespacedReference `json:"serviceRoleRef,omitempty" tf:"-"`
+	ServiceRoleRef *v2.NamespacedReference `json:"serviceRoleRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate serviceRole.
 	// +kubebuilder:validation:Optional
-	ServiceRoleSelector *v1.NamespacedSelector `json:"serviceRoleSelector,omitempty" tf:"-"`
+	ServiceRoleSelector *v2.NamespacedSelector `json:"serviceRoleSelector,omitempty" tf:"-"`
 }
 
 // ApplicationSpec defines the desired state of Application
@@ -157,8 +156,8 @@ type ApplicationSpec struct {
 
 // ApplicationStatus defines the observed state of Application.
 type ApplicationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ApplicationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ApplicationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

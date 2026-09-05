@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ConfigurationProfileInitParameters struct {
@@ -23,11 +22,11 @@ type ConfigurationProfileInitParameters struct {
 
 	// Reference to a Application in appconfig to populate applicationId.
 	// +kubebuilder:validation:Optional
-	ApplicationIDRef *v1.NamespacedReference `json:"applicationIdRef,omitempty" tf:"-"`
+	ApplicationIDRef *v2.NamespacedReference `json:"applicationIdRef,omitempty" tf:"-"`
 
 	// Selector for a Application in appconfig to populate applicationId.
 	// +kubebuilder:validation:Optional
-	ApplicationIDSelector *v1.NamespacedSelector `json:"applicationIdSelector,omitempty" tf:"-"`
+	ApplicationIDSelector *v2.NamespacedSelector `json:"applicationIdSelector,omitempty" tf:"-"`
 
 	// Description of the configuration profile. Can be at most 1024 characters.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
@@ -48,11 +47,11 @@ type ConfigurationProfileInitParameters struct {
 
 	// Reference to a Role in iam to populate retrievalRoleArn.
 	// +kubebuilder:validation:Optional
-	RetrievalRoleArnRef *v1.NamespacedReference `json:"retrievalRoleArnRef,omitempty" tf:"-"`
+	RetrievalRoleArnRef *v2.NamespacedReference `json:"retrievalRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate retrievalRoleArn.
 	// +kubebuilder:validation:Optional
-	RetrievalRoleArnSelector *v1.NamespacedSelector `json:"retrievalRoleArnSelector,omitempty" tf:"-"`
+	RetrievalRoleArnSelector *v2.NamespacedSelector `json:"retrievalRoleArnSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -123,11 +122,11 @@ type ConfigurationProfileParameters struct {
 
 	// Reference to a Application in appconfig to populate applicationId.
 	// +kubebuilder:validation:Optional
-	ApplicationIDRef *v1.NamespacedReference `json:"applicationIdRef,omitempty" tf:"-"`
+	ApplicationIDRef *v2.NamespacedReference `json:"applicationIdRef,omitempty" tf:"-"`
 
 	// Selector for a Application in appconfig to populate applicationId.
 	// +kubebuilder:validation:Optional
-	ApplicationIDSelector *v1.NamespacedSelector `json:"applicationIdSelector,omitempty" tf:"-"`
+	ApplicationIDSelector *v2.NamespacedSelector `json:"applicationIdSelector,omitempty" tf:"-"`
 
 	// Description of the configuration profile. Can be at most 1024 characters.
 	// +kubebuilder:validation:Optional
@@ -158,11 +157,11 @@ type ConfigurationProfileParameters struct {
 
 	// Reference to a Role in iam to populate retrievalRoleArn.
 	// +kubebuilder:validation:Optional
-	RetrievalRoleArnRef *v1.NamespacedReference `json:"retrievalRoleArnRef,omitempty" tf:"-"`
+	RetrievalRoleArnRef *v2.NamespacedReference `json:"retrievalRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate retrievalRoleArn.
 	// +kubebuilder:validation:Optional
-	RetrievalRoleArnSelector *v1.NamespacedSelector `json:"retrievalRoleArnSelector,omitempty" tf:"-"`
+	RetrievalRoleArnSelector *v2.NamespacedSelector `json:"retrievalRoleArnSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -181,7 +180,7 @@ type ConfigurationProfileParameters struct {
 type ValidatorInitParameters struct {
 
 	// Either the JSON Schema content or the ARN of an AWS Lambda function.
-	ContentSecretRef *v1.LocalSecretKeySelector `json:"contentSecretRef,omitempty" tf:"-"`
+	ContentSecretRef *v2.LocalSecretKeySelector `json:"contentSecretRef,omitempty" tf:"-"`
 
 	// Type of validator. Valid values: JSON_SCHEMA and LAMBDA.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
@@ -197,7 +196,7 @@ type ValidatorParameters struct {
 
 	// Either the JSON Schema content or the ARN of an AWS Lambda function.
 	// +kubebuilder:validation:Optional
-	ContentSecretRef *v1.LocalSecretKeySelector `json:"contentSecretRef,omitempty" tf:"-"`
+	ContentSecretRef *v2.LocalSecretKeySelector `json:"contentSecretRef,omitempty" tf:"-"`
 
 	// Type of validator. Valid values: JSON_SCHEMA and LAMBDA.
 	// +kubebuilder:validation:Optional
@@ -223,8 +222,8 @@ type ConfigurationProfileSpec struct {
 
 // ConfigurationProfileStatus defines the observed state of ConfigurationProfile.
 type ConfigurationProfileStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ConfigurationProfileObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ConfigurationProfileObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

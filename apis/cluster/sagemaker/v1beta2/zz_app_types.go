@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AppInitParameters struct {
@@ -28,11 +28,11 @@ type AppInitParameters struct {
 
 	// Reference to a Domain in sagemaker to populate domainId.
 	// +kubebuilder:validation:Optional
-	DomainIDRef *v1.Reference `json:"domainIdRef,omitempty" tf:"-"`
+	DomainIDRef *v2.Reference `json:"domainIdRef,omitempty" tf:"-"`
 
 	// Selector for a Domain in sagemaker to populate domainId.
 	// +kubebuilder:validation:Optional
-	DomainIDSelector *v1.Selector `json:"domainIdSelector,omitempty" tf:"-"`
+	DomainIDSelector *v2.Selector `json:"domainIdSelector,omitempty" tf:"-"`
 
 	// The instance type and the Amazon Resource Name (ARN) of the SageMaker AI image created on the instance.See Resource Spec below.
 	ResourceSpec *ResourceSpecInitParameters `json:"resourceSpec,omitempty" tf:"resource_spec,omitempty"`
@@ -51,11 +51,11 @@ type AppInitParameters struct {
 
 	// Reference to a UserProfile in sagemaker to populate userProfileName.
 	// +kubebuilder:validation:Optional
-	UserProfileNameRef *v1.Reference `json:"userProfileNameRef,omitempty" tf:"-"`
+	UserProfileNameRef *v2.Reference `json:"userProfileNameRef,omitempty" tf:"-"`
 
 	// Selector for a UserProfile in sagemaker to populate userProfileName.
 	// +kubebuilder:validation:Optional
-	UserProfileNameSelector *v1.Selector `json:"userProfileNameSelector,omitempty" tf:"-"`
+	UserProfileNameSelector *v2.Selector `json:"userProfileNameSelector,omitempty" tf:"-"`
 }
 
 type AppObservation struct {
@@ -115,11 +115,11 @@ type AppParameters struct {
 
 	// Reference to a Domain in sagemaker to populate domainId.
 	// +kubebuilder:validation:Optional
-	DomainIDRef *v1.Reference `json:"domainIdRef,omitempty" tf:"-"`
+	DomainIDRef *v2.Reference `json:"domainIdRef,omitempty" tf:"-"`
 
 	// Selector for a Domain in sagemaker to populate domainId.
 	// +kubebuilder:validation:Optional
-	DomainIDSelector *v1.Selector `json:"domainIdSelector,omitempty" tf:"-"`
+	DomainIDSelector *v2.Selector `json:"domainIdSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -147,11 +147,11 @@ type AppParameters struct {
 
 	// Reference to a UserProfile in sagemaker to populate userProfileName.
 	// +kubebuilder:validation:Optional
-	UserProfileNameRef *v1.Reference `json:"userProfileNameRef,omitempty" tf:"-"`
+	UserProfileNameRef *v2.Reference `json:"userProfileNameRef,omitempty" tf:"-"`
 
 	// Selector for a UserProfile in sagemaker to populate userProfileName.
 	// +kubebuilder:validation:Optional
-	UserProfileNameSelector *v1.Selector `json:"userProfileNameSelector,omitempty" tf:"-"`
+	UserProfileNameSelector *v2.Selector `json:"userProfileNameSelector,omitempty" tf:"-"`
 }
 
 type ResourceSpecInitParameters struct {
@@ -215,8 +215,8 @@ type ResourceSpecParameters struct {
 
 // AppSpec defines the desired state of App
 type AppSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     AppParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   AppParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -232,8 +232,8 @@ type AppSpec struct {
 
 // AppStatus defines the observed state of App.
 type AppStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        AppObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               AppObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

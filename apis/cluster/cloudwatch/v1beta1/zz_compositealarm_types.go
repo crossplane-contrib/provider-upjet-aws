@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ActionsSuppressorInitParameters struct {
@@ -68,11 +68,11 @@ type CompositeAlarmInitParameters struct {
 
 	// References to Topic in sns to populate alarmActions.
 	// +kubebuilder:validation:Optional
-	AlarmActionsRefs []v1.Reference `json:"alarmActionsRefs,omitempty" tf:"-"`
+	AlarmActionsRefs []v2.Reference `json:"alarmActionsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Topic in sns to populate alarmActions.
 	// +kubebuilder:validation:Optional
-	AlarmActionsSelector *v1.Selector `json:"alarmActionsSelector,omitempty" tf:"-"`
+	AlarmActionsSelector *v2.Selector `json:"alarmActionsSelector,omitempty" tf:"-"`
 
 	// The description for the composite alarm.
 	AlarmDescription *string `json:"alarmDescription,omitempty" tf:"alarm_description,omitempty"`
@@ -92,11 +92,11 @@ type CompositeAlarmInitParameters struct {
 
 	// References to Topic in sns to populate okActions.
 	// +kubebuilder:validation:Optional
-	OkActionsRefs []v1.Reference `json:"okActionsRefs,omitempty" tf:"-"`
+	OkActionsRefs []v2.Reference `json:"okActionsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Topic in sns to populate okActions.
 	// +kubebuilder:validation:Optional
-	OkActionsSelector *v1.Selector `json:"okActionsSelector,omitempty" tf:"-"`
+	OkActionsSelector *v2.Selector `json:"okActionsSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -167,11 +167,11 @@ type CompositeAlarmParameters struct {
 
 	// References to Topic in sns to populate alarmActions.
 	// +kubebuilder:validation:Optional
-	AlarmActionsRefs []v1.Reference `json:"alarmActionsRefs,omitempty" tf:"-"`
+	AlarmActionsRefs []v2.Reference `json:"alarmActionsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Topic in sns to populate alarmActions.
 	// +kubebuilder:validation:Optional
-	AlarmActionsSelector *v1.Selector `json:"alarmActionsSelector,omitempty" tf:"-"`
+	AlarmActionsSelector *v2.Selector `json:"alarmActionsSelector,omitempty" tf:"-"`
 
 	// The description for the composite alarm.
 	// +kubebuilder:validation:Optional
@@ -195,11 +195,11 @@ type CompositeAlarmParameters struct {
 
 	// References to Topic in sns to populate okActions.
 	// +kubebuilder:validation:Optional
-	OkActionsRefs []v1.Reference `json:"okActionsRefs,omitempty" tf:"-"`
+	OkActionsRefs []v2.Reference `json:"okActionsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Topic in sns to populate okActions.
 	// +kubebuilder:validation:Optional
-	OkActionsSelector *v1.Selector `json:"okActionsSelector,omitempty" tf:"-"`
+	OkActionsSelector *v2.Selector `json:"okActionsSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -214,8 +214,8 @@ type CompositeAlarmParameters struct {
 
 // CompositeAlarmSpec defines the desired state of CompositeAlarm
 type CompositeAlarmSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     CompositeAlarmParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   CompositeAlarmParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -231,8 +231,8 @@ type CompositeAlarmSpec struct {
 
 // CompositeAlarmStatus defines the observed state of CompositeAlarm.
 type CompositeAlarmStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        CompositeAlarmObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               CompositeAlarmObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

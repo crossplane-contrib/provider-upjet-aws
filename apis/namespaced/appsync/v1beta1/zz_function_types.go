@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type FunctionInitParameters struct {
@@ -23,11 +22,11 @@ type FunctionInitParameters struct {
 
 	// Reference to a GraphQLAPI in appsync to populate apiId.
 	// +kubebuilder:validation:Optional
-	APIIDRef *v1.NamespacedReference `json:"apiIdRef,omitempty" tf:"-"`
+	APIIDRef *v2.NamespacedReference `json:"apiIdRef,omitempty" tf:"-"`
 
 	// Selector for a GraphQLAPI in appsync to populate apiId.
 	// +kubebuilder:validation:Optional
-	APIIDSelector *v1.NamespacedSelector `json:"apiIdSelector,omitempty" tf:"-"`
+	APIIDSelector *v2.NamespacedSelector `json:"apiIdSelector,omitempty" tf:"-"`
 
 	// The function code that contains the request and response functions. When code is used, the runtime is required. The runtime value must be APPSYNC_JS.
 	Code *string `json:"code,omitempty" tf:"code,omitempty"`
@@ -38,11 +37,11 @@ type FunctionInitParameters struct {
 
 	// Reference to a Datasource in appsync to populate dataSource.
 	// +kubebuilder:validation:Optional
-	DataSourceRef *v1.NamespacedReference `json:"dataSourceRef,omitempty" tf:"-"`
+	DataSourceRef *v2.NamespacedReference `json:"dataSourceRef,omitempty" tf:"-"`
 
 	// Selector for a Datasource in appsync to populate dataSource.
 	// +kubebuilder:validation:Optional
-	DataSourceSelector *v1.NamespacedSelector `json:"dataSourceSelector,omitempty" tf:"-"`
+	DataSourceSelector *v2.NamespacedSelector `json:"dataSourceSelector,omitempty" tf:"-"`
 
 	// Function description.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
@@ -128,11 +127,11 @@ type FunctionParameters struct {
 
 	// Reference to a GraphQLAPI in appsync to populate apiId.
 	// +kubebuilder:validation:Optional
-	APIIDRef *v1.NamespacedReference `json:"apiIdRef,omitempty" tf:"-"`
+	APIIDRef *v2.NamespacedReference `json:"apiIdRef,omitempty" tf:"-"`
 
 	// Selector for a GraphQLAPI in appsync to populate apiId.
 	// +kubebuilder:validation:Optional
-	APIIDSelector *v1.NamespacedSelector `json:"apiIdSelector,omitempty" tf:"-"`
+	APIIDSelector *v2.NamespacedSelector `json:"apiIdSelector,omitempty" tf:"-"`
 
 	// The function code that contains the request and response functions. When code is used, the runtime is required. The runtime value must be APPSYNC_JS.
 	// +kubebuilder:validation:Optional
@@ -145,11 +144,11 @@ type FunctionParameters struct {
 
 	// Reference to a Datasource in appsync to populate dataSource.
 	// +kubebuilder:validation:Optional
-	DataSourceRef *v1.NamespacedReference `json:"dataSourceRef,omitempty" tf:"-"`
+	DataSourceRef *v2.NamespacedReference `json:"dataSourceRef,omitempty" tf:"-"`
 
 	// Selector for a Datasource in appsync to populate dataSource.
 	// +kubebuilder:validation:Optional
-	DataSourceSelector *v1.NamespacedSelector `json:"dataSourceSelector,omitempty" tf:"-"`
+	DataSourceSelector *v2.NamespacedSelector `json:"dataSourceSelector,omitempty" tf:"-"`
 
 	// Function description.
 	// +kubebuilder:validation:Optional
@@ -295,8 +294,8 @@ type FunctionSpec struct {
 
 // FunctionStatus defines the observed state of Function.
 type FunctionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        FunctionObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               FunctionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

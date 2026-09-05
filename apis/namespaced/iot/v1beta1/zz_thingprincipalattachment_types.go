@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ThingPrincipalAttachmentInitParameters struct {
@@ -23,11 +22,11 @@ type ThingPrincipalAttachmentInitParameters struct {
 
 	// Reference to a Certificate in iot to populate principal.
 	// +kubebuilder:validation:Optional
-	PrincipalRef *v1.NamespacedReference `json:"principalRef,omitempty" tf:"-"`
+	PrincipalRef *v2.NamespacedReference `json:"principalRef,omitempty" tf:"-"`
 
 	// Selector for a Certificate in iot to populate principal.
 	// +kubebuilder:validation:Optional
-	PrincipalSelector *v1.NamespacedSelector `json:"principalSelector,omitempty" tf:"-"`
+	PrincipalSelector *v2.NamespacedSelector `json:"principalSelector,omitempty" tf:"-"`
 
 	// The name of the thing.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iot/v1beta1.Thing
@@ -38,11 +37,11 @@ type ThingPrincipalAttachmentInitParameters struct {
 
 	// Reference to a Thing in iot to populate thing.
 	// +kubebuilder:validation:Optional
-	ThingRef *v1.NamespacedReference `json:"thingRef,omitempty" tf:"-"`
+	ThingRef *v2.NamespacedReference `json:"thingRef,omitempty" tf:"-"`
 
 	// Selector for a Thing in iot to populate thing.
 	// +kubebuilder:validation:Optional
-	ThingSelector *v1.NamespacedSelector `json:"thingSelector,omitempty" tf:"-"`
+	ThingSelector *v2.NamespacedSelector `json:"thingSelector,omitempty" tf:"-"`
 }
 
 type ThingPrincipalAttachmentObservation struct {
@@ -72,11 +71,11 @@ type ThingPrincipalAttachmentParameters struct {
 
 	// Reference to a Certificate in iot to populate principal.
 	// +kubebuilder:validation:Optional
-	PrincipalRef *v1.NamespacedReference `json:"principalRef,omitempty" tf:"-"`
+	PrincipalRef *v2.NamespacedReference `json:"principalRef,omitempty" tf:"-"`
 
 	// Selector for a Certificate in iot to populate principal.
 	// +kubebuilder:validation:Optional
-	PrincipalSelector *v1.NamespacedSelector `json:"principalSelector,omitempty" tf:"-"`
+	PrincipalSelector *v2.NamespacedSelector `json:"principalSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -94,11 +93,11 @@ type ThingPrincipalAttachmentParameters struct {
 
 	// Reference to a Thing in iot to populate thing.
 	// +kubebuilder:validation:Optional
-	ThingRef *v1.NamespacedReference `json:"thingRef,omitempty" tf:"-"`
+	ThingRef *v2.NamespacedReference `json:"thingRef,omitempty" tf:"-"`
 
 	// Selector for a Thing in iot to populate thing.
 	// +kubebuilder:validation:Optional
-	ThingSelector *v1.NamespacedSelector `json:"thingSelector,omitempty" tf:"-"`
+	ThingSelector *v2.NamespacedSelector `json:"thingSelector,omitempty" tf:"-"`
 }
 
 // ThingPrincipalAttachmentSpec defines the desired state of ThingPrincipalAttachment
@@ -120,8 +119,8 @@ type ThingPrincipalAttachmentSpec struct {
 
 // ThingPrincipalAttachmentStatus defines the observed state of ThingPrincipalAttachment.
 type ThingPrincipalAttachmentStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ThingPrincipalAttachmentObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ThingPrincipalAttachmentObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

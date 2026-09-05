@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type RequestParameterInitParameters struct {
@@ -50,11 +50,11 @@ type RouteInitParameters struct {
 
 	// Reference to a API in apigatewayv2 to populate apiId.
 	// +kubebuilder:validation:Optional
-	APIIDRef *v1.Reference `json:"apiIdRef,omitempty" tf:"-"`
+	APIIDRef *v2.Reference `json:"apiIdRef,omitempty" tf:"-"`
 
 	// Selector for a API in apigatewayv2 to populate apiId.
 	// +kubebuilder:validation:Optional
-	APIIDSelector *v1.Selector `json:"apiIdSelector,omitempty" tf:"-"`
+	APIIDSelector *v2.Selector `json:"apiIdSelector,omitempty" tf:"-"`
 
 	// Boolean whether an API key is required for the route. Defaults to false. Supported only for WebSocket APIs.
 	APIKeyRequired *bool `json:"apiKeyRequired,omitempty" tf:"api_key_required,omitempty"`
@@ -75,11 +75,11 @@ type RouteInitParameters struct {
 
 	// Reference to a Authorizer in apigatewayv2 to populate authorizerId.
 	// +kubebuilder:validation:Optional
-	AuthorizerIDRef *v1.Reference `json:"authorizerIdRef,omitempty" tf:"-"`
+	AuthorizerIDRef *v2.Reference `json:"authorizerIdRef,omitempty" tf:"-"`
 
 	// Selector for a Authorizer in apigatewayv2 to populate authorizerId.
 	// +kubebuilder:validation:Optional
-	AuthorizerIDSelector *v1.Selector `json:"authorizerIdSelector,omitempty" tf:"-"`
+	AuthorizerIDSelector *v2.Selector `json:"authorizerIdSelector,omitempty" tf:"-"`
 
 	// The model selection expression for the route. Supported only for WebSocket APIs.
 	ModelSelectionExpression *string `json:"modelSelectionExpression,omitempty" tf:"model_selection_expression,omitempty"`
@@ -107,11 +107,11 @@ type RouteInitParameters struct {
 
 	// Reference to a Integration in apigatewayv2 to populate target.
 	// +kubebuilder:validation:Optional
-	TargetRef *v1.Reference `json:"targetRef,omitempty" tf:"-"`
+	TargetRef *v2.Reference `json:"targetRef,omitempty" tf:"-"`
 
 	// Selector for a Integration in apigatewayv2 to populate target.
 	// +kubebuilder:validation:Optional
-	TargetSelector *v1.Selector `json:"targetSelector,omitempty" tf:"-"`
+	TargetSelector *v2.Selector `json:"targetSelector,omitempty" tf:"-"`
 }
 
 type RouteObservation struct {
@@ -174,11 +174,11 @@ type RouteParameters struct {
 
 	// Reference to a API in apigatewayv2 to populate apiId.
 	// +kubebuilder:validation:Optional
-	APIIDRef *v1.Reference `json:"apiIdRef,omitempty" tf:"-"`
+	APIIDRef *v2.Reference `json:"apiIdRef,omitempty" tf:"-"`
 
 	// Selector for a API in apigatewayv2 to populate apiId.
 	// +kubebuilder:validation:Optional
-	APIIDSelector *v1.Selector `json:"apiIdSelector,omitempty" tf:"-"`
+	APIIDSelector *v2.Selector `json:"apiIdSelector,omitempty" tf:"-"`
 
 	// Boolean whether an API key is required for the route. Defaults to false. Supported only for WebSocket APIs.
 	// +kubebuilder:validation:Optional
@@ -203,11 +203,11 @@ type RouteParameters struct {
 
 	// Reference to a Authorizer in apigatewayv2 to populate authorizerId.
 	// +kubebuilder:validation:Optional
-	AuthorizerIDRef *v1.Reference `json:"authorizerIdRef,omitempty" tf:"-"`
+	AuthorizerIDRef *v2.Reference `json:"authorizerIdRef,omitempty" tf:"-"`
 
 	// Selector for a Authorizer in apigatewayv2 to populate authorizerId.
 	// +kubebuilder:validation:Optional
-	AuthorizerIDSelector *v1.Selector `json:"authorizerIdSelector,omitempty" tf:"-"`
+	AuthorizerIDSelector *v2.Selector `json:"authorizerIdSelector,omitempty" tf:"-"`
 
 	// The model selection expression for the route. Supported only for WebSocket APIs.
 	// +kubebuilder:validation:Optional
@@ -247,17 +247,17 @@ type RouteParameters struct {
 
 	// Reference to a Integration in apigatewayv2 to populate target.
 	// +kubebuilder:validation:Optional
-	TargetRef *v1.Reference `json:"targetRef,omitempty" tf:"-"`
+	TargetRef *v2.Reference `json:"targetRef,omitempty" tf:"-"`
 
 	// Selector for a Integration in apigatewayv2 to populate target.
 	// +kubebuilder:validation:Optional
-	TargetSelector *v1.Selector `json:"targetSelector,omitempty" tf:"-"`
+	TargetSelector *v2.Selector `json:"targetSelector,omitempty" tf:"-"`
 }
 
 // RouteSpec defines the desired state of Route
 type RouteSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     RouteParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   RouteParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -273,8 +273,8 @@ type RouteSpec struct {
 
 // RouteStatus defines the observed state of Route.
 type RouteStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        RouteObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               RouteObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

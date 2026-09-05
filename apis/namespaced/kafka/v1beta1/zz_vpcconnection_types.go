@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type VPCConnectionInitParameters struct {
@@ -26,11 +25,11 @@ type VPCConnectionInitParameters struct {
 
 	// References to Subnet in ec2 to populate clientSubnets.
 	// +kubebuilder:validation:Optional
-	ClientSubnetsRefs []v1.NamespacedReference `json:"clientSubnetsRefs,omitempty" tf:"-"`
+	ClientSubnetsRefs []v2.NamespacedReference `json:"clientSubnetsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Subnet in ec2 to populate clientSubnets.
 	// +kubebuilder:validation:Optional
-	ClientSubnetsSelector *v1.NamespacedSelector `json:"clientSubnetsSelector,omitempty" tf:"-"`
+	ClientSubnetsSelector *v2.NamespacedSelector `json:"clientSubnetsSelector,omitempty" tf:"-"`
 
 	// The security groups to attach to the ENIs for the broker nodes.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
@@ -39,11 +38,11 @@ type VPCConnectionInitParameters struct {
 
 	// References to SecurityGroup in ec2 to populate securityGroups.
 	// +kubebuilder:validation:Optional
-	SecurityGroupsRefs []v1.NamespacedReference `json:"securityGroupsRefs,omitempty" tf:"-"`
+	SecurityGroupsRefs []v2.NamespacedReference `json:"securityGroupsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate securityGroups.
 	// +kubebuilder:validation:Optional
-	SecurityGroupsSelector *v1.NamespacedSelector `json:"securityGroupsSelector,omitempty" tf:"-"`
+	SecurityGroupsSelector *v2.NamespacedSelector `json:"securityGroupsSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -56,11 +55,11 @@ type VPCConnectionInitParameters struct {
 
 	// Reference to a Cluster in kafka to populate targetClusterArn.
 	// +kubebuilder:validation:Optional
-	TargetClusterArnRef *v1.NamespacedReference `json:"targetClusterArnRef,omitempty" tf:"-"`
+	TargetClusterArnRef *v2.NamespacedReference `json:"targetClusterArnRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in kafka to populate targetClusterArn.
 	// +kubebuilder:validation:Optional
-	TargetClusterArnSelector *v1.NamespacedSelector `json:"targetClusterArnSelector,omitempty" tf:"-"`
+	TargetClusterArnSelector *v2.NamespacedSelector `json:"targetClusterArnSelector,omitempty" tf:"-"`
 
 	// The VPC ID of the remote client.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.VPC
@@ -68,11 +67,11 @@ type VPCConnectionInitParameters struct {
 
 	// Reference to a VPC in ec2 to populate vpcId.
 	// +kubebuilder:validation:Optional
-	VPCIDRef *v1.NamespacedReference `json:"vpcIdRef,omitempty" tf:"-"`
+	VPCIDRef *v2.NamespacedReference `json:"vpcIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPC in ec2 to populate vpcId.
 	// +kubebuilder:validation:Optional
-	VPCIDSelector *v1.NamespacedSelector `json:"vpcIdSelector,omitempty" tf:"-"`
+	VPCIDSelector *v2.NamespacedSelector `json:"vpcIdSelector,omitempty" tf:"-"`
 }
 
 type VPCConnectionObservation struct {
@@ -126,11 +125,11 @@ type VPCConnectionParameters struct {
 
 	// References to Subnet in ec2 to populate clientSubnets.
 	// +kubebuilder:validation:Optional
-	ClientSubnetsRefs []v1.NamespacedReference `json:"clientSubnetsRefs,omitempty" tf:"-"`
+	ClientSubnetsRefs []v2.NamespacedReference `json:"clientSubnetsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Subnet in ec2 to populate clientSubnets.
 	// +kubebuilder:validation:Optional
-	ClientSubnetsSelector *v1.NamespacedSelector `json:"clientSubnetsSelector,omitempty" tf:"-"`
+	ClientSubnetsSelector *v2.NamespacedSelector `json:"clientSubnetsSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -145,11 +144,11 @@ type VPCConnectionParameters struct {
 
 	// References to SecurityGroup in ec2 to populate securityGroups.
 	// +kubebuilder:validation:Optional
-	SecurityGroupsRefs []v1.NamespacedReference `json:"securityGroupsRefs,omitempty" tf:"-"`
+	SecurityGroupsRefs []v2.NamespacedReference `json:"securityGroupsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate securityGroups.
 	// +kubebuilder:validation:Optional
-	SecurityGroupsSelector *v1.NamespacedSelector `json:"securityGroupsSelector,omitempty" tf:"-"`
+	SecurityGroupsSelector *v2.NamespacedSelector `json:"securityGroupsSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -164,11 +163,11 @@ type VPCConnectionParameters struct {
 
 	// Reference to a Cluster in kafka to populate targetClusterArn.
 	// +kubebuilder:validation:Optional
-	TargetClusterArnRef *v1.NamespacedReference `json:"targetClusterArnRef,omitempty" tf:"-"`
+	TargetClusterArnRef *v2.NamespacedReference `json:"targetClusterArnRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in kafka to populate targetClusterArn.
 	// +kubebuilder:validation:Optional
-	TargetClusterArnSelector *v1.NamespacedSelector `json:"targetClusterArnSelector,omitempty" tf:"-"`
+	TargetClusterArnSelector *v2.NamespacedSelector `json:"targetClusterArnSelector,omitempty" tf:"-"`
 
 	// The VPC ID of the remote client.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.VPC
@@ -177,11 +176,11 @@ type VPCConnectionParameters struct {
 
 	// Reference to a VPC in ec2 to populate vpcId.
 	// +kubebuilder:validation:Optional
-	VPCIDRef *v1.NamespacedReference `json:"vpcIdRef,omitempty" tf:"-"`
+	VPCIDRef *v2.NamespacedReference `json:"vpcIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPC in ec2 to populate vpcId.
 	// +kubebuilder:validation:Optional
-	VPCIDSelector *v1.NamespacedSelector `json:"vpcIdSelector,omitempty" tf:"-"`
+	VPCIDSelector *v2.NamespacedSelector `json:"vpcIdSelector,omitempty" tf:"-"`
 }
 
 // VPCConnectionSpec defines the desired state of VPCConnection
@@ -203,8 +202,8 @@ type VPCConnectionSpec struct {
 
 // VPCConnectionStatus defines the observed state of VPCConnection.
 type VPCConnectionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        VPCConnectionObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               VPCConnectionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

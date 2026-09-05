@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type VaultPolicyInitParameters struct {
@@ -21,11 +21,11 @@ type VaultPolicyInitParameters struct {
 
 	// Reference to a Vault in backup to populate backupVaultName.
 	// +kubebuilder:validation:Optional
-	BackupVaultNameRef *v1.Reference `json:"backupVaultNameRef,omitempty" tf:"-"`
+	BackupVaultNameRef *v2.Reference `json:"backupVaultNameRef,omitempty" tf:"-"`
 
 	// Selector for a Vault in backup to populate backupVaultName.
 	// +kubebuilder:validation:Optional
-	BackupVaultNameSelector *v1.Selector `json:"backupVaultNameSelector,omitempty" tf:"-"`
+	BackupVaultNameSelector *v2.Selector `json:"backupVaultNameSelector,omitempty" tf:"-"`
 
 	// The backup vault access policy document in JSON format.
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
@@ -59,11 +59,11 @@ type VaultPolicyParameters struct {
 
 	// Reference to a Vault in backup to populate backupVaultName.
 	// +kubebuilder:validation:Optional
-	BackupVaultNameRef *v1.Reference `json:"backupVaultNameRef,omitempty" tf:"-"`
+	BackupVaultNameRef *v2.Reference `json:"backupVaultNameRef,omitempty" tf:"-"`
 
 	// Selector for a Vault in backup to populate backupVaultName.
 	// +kubebuilder:validation:Optional
-	BackupVaultNameSelector *v1.Selector `json:"backupVaultNameSelector,omitempty" tf:"-"`
+	BackupVaultNameSelector *v2.Selector `json:"backupVaultNameSelector,omitempty" tf:"-"`
 
 	// The backup vault access policy document in JSON format.
 	// +kubebuilder:validation:Optional
@@ -77,8 +77,8 @@ type VaultPolicyParameters struct {
 
 // VaultPolicySpec defines the desired state of VaultPolicy
 type VaultPolicySpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     VaultPolicyParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   VaultPolicyParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -94,8 +94,8 @@ type VaultPolicySpec struct {
 
 // VaultPolicyStatus defines the observed state of VaultPolicy.
 type VaultPolicyStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        VaultPolicyObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               VaultPolicyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -52,6 +52,15 @@ func (l *CodeInterpreterList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this EvaluatorList.
+func (l *EvaluatorList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this GatewayList.
 func (l *GatewayList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -63,6 +72,15 @@ func (l *GatewayList) GetItems() []resource.Managed {
 
 // GetItems of this GatewayTargetList.
 func (l *GatewayTargetList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this HarnessList.
+func (l *HarnessList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]
@@ -90,6 +108,42 @@ func (l *MemoryStrategyList) GetItems() []resource.Managed {
 
 // GetItems of this Oauth2CredentialProviderList.
 func (l *Oauth2CredentialProviderList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this OnlineEvaluationConfigList.
+func (l *OnlineEvaluationConfigList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this PolicyEngineList.
+func (l *PolicyEngineList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this PolicyList.
+func (l *PolicyList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this ResourcePolicyList.
+func (l *ResourcePolicyList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]

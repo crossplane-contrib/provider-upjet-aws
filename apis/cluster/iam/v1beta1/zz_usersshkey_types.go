@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type UserSSHKeyInitParameters struct {
@@ -30,11 +30,11 @@ type UserSSHKeyInitParameters struct {
 
 	// Reference to a User in iam to populate username.
 	// +kubebuilder:validation:Optional
-	UsernameRef *v1.Reference `json:"usernameRef,omitempty" tf:"-"`
+	UsernameRef *v2.Reference `json:"usernameRef,omitempty" tf:"-"`
 
 	// Selector for a User in iam to populate username.
 	// +kubebuilder:validation:Optional
-	UsernameSelector *v1.Selector `json:"usernameSelector,omitempty" tf:"-"`
+	UsernameSelector *v2.Selector `json:"usernameSelector,omitempty" tf:"-"`
 }
 
 type UserSSHKeyObservation struct {
@@ -81,17 +81,17 @@ type UserSSHKeyParameters struct {
 
 	// Reference to a User in iam to populate username.
 	// +kubebuilder:validation:Optional
-	UsernameRef *v1.Reference `json:"usernameRef,omitempty" tf:"-"`
+	UsernameRef *v2.Reference `json:"usernameRef,omitempty" tf:"-"`
 
 	// Selector for a User in iam to populate username.
 	// +kubebuilder:validation:Optional
-	UsernameSelector *v1.Selector `json:"usernameSelector,omitempty" tf:"-"`
+	UsernameSelector *v2.Selector `json:"usernameSelector,omitempty" tf:"-"`
 }
 
 // UserSSHKeySpec defines the desired state of UserSSHKey
 type UserSSHKeySpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     UserSSHKeyParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   UserSSHKeyParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -107,8 +107,8 @@ type UserSSHKeySpec struct {
 
 // UserSSHKeyStatus defines the observed state of UserSSHKey.
 type UserSSHKeyStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        UserSSHKeyObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               UserSSHKeyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

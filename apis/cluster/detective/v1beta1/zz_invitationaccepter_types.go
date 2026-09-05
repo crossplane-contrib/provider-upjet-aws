@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type InvitationAccepterInitParameters struct {
@@ -22,11 +22,11 @@ type InvitationAccepterInitParameters struct {
 
 	// Reference to a Graph in detective to populate graphArn.
 	// +kubebuilder:validation:Optional
-	GraphArnRef *v1.Reference `json:"graphArnRef,omitempty" tf:"-"`
+	GraphArnRef *v2.Reference `json:"graphArnRef,omitempty" tf:"-"`
 
 	// Selector for a Graph in detective to populate graphArn.
 	// +kubebuilder:validation:Optional
-	GraphArnSelector *v1.Selector `json:"graphArnSelector,omitempty" tf:"-"`
+	GraphArnSelector *v2.Selector `json:"graphArnSelector,omitempty" tf:"-"`
 }
 
 type InvitationAccepterObservation struct {
@@ -52,11 +52,11 @@ type InvitationAccepterParameters struct {
 
 	// Reference to a Graph in detective to populate graphArn.
 	// +kubebuilder:validation:Optional
-	GraphArnRef *v1.Reference `json:"graphArnRef,omitempty" tf:"-"`
+	GraphArnRef *v2.Reference `json:"graphArnRef,omitempty" tf:"-"`
 
 	// Selector for a Graph in detective to populate graphArn.
 	// +kubebuilder:validation:Optional
-	GraphArnSelector *v1.Selector `json:"graphArnSelector,omitempty" tf:"-"`
+	GraphArnSelector *v2.Selector `json:"graphArnSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -66,8 +66,8 @@ type InvitationAccepterParameters struct {
 
 // InvitationAccepterSpec defines the desired state of InvitationAccepter
 type InvitationAccepterSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     InvitationAccepterParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   InvitationAccepterParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -83,8 +83,8 @@ type InvitationAccepterSpec struct {
 
 // InvitationAccepterStatus defines the observed state of InvitationAccepter.
 type InvitationAccepterStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        InvitationAccepterObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               InvitationAccepterObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

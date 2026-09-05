@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type UserSSHKeyInitParameters struct {
@@ -31,11 +30,11 @@ type UserSSHKeyInitParameters struct {
 
 	// Reference to a User in iam to populate username.
 	// +kubebuilder:validation:Optional
-	UsernameRef *v1.NamespacedReference `json:"usernameRef,omitempty" tf:"-"`
+	UsernameRef *v2.NamespacedReference `json:"usernameRef,omitempty" tf:"-"`
 
 	// Selector for a User in iam to populate username.
 	// +kubebuilder:validation:Optional
-	UsernameSelector *v1.NamespacedSelector `json:"usernameSelector,omitempty" tf:"-"`
+	UsernameSelector *v2.NamespacedSelector `json:"usernameSelector,omitempty" tf:"-"`
 }
 
 type UserSSHKeyObservation struct {
@@ -82,11 +81,11 @@ type UserSSHKeyParameters struct {
 
 	// Reference to a User in iam to populate username.
 	// +kubebuilder:validation:Optional
-	UsernameRef *v1.NamespacedReference `json:"usernameRef,omitempty" tf:"-"`
+	UsernameRef *v2.NamespacedReference `json:"usernameRef,omitempty" tf:"-"`
 
 	// Selector for a User in iam to populate username.
 	// +kubebuilder:validation:Optional
-	UsernameSelector *v1.NamespacedSelector `json:"usernameSelector,omitempty" tf:"-"`
+	UsernameSelector *v2.NamespacedSelector `json:"usernameSelector,omitempty" tf:"-"`
 }
 
 // UserSSHKeySpec defines the desired state of UserSSHKey
@@ -108,8 +107,8 @@ type UserSSHKeySpec struct {
 
 // UserSSHKeyStatus defines the observed state of UserSSHKey.
 type UserSSHKeyStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        UserSSHKeyObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               UserSSHKeyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CloudwatchAlarmInitParameters struct {
@@ -1450,11 +1450,11 @@ type SnsInitParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.Reference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// The ARN of the SNS topic.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/sns/v1beta1.Topic
@@ -1463,11 +1463,11 @@ type SnsInitParameters struct {
 
 	// Reference to a Topic in sns to populate targetArn.
 	// +kubebuilder:validation:Optional
-	TargetArnRef *v1.Reference `json:"targetArnRef,omitempty" tf:"-"`
+	TargetArnRef *v2.Reference `json:"targetArnRef,omitempty" tf:"-"`
 
 	// Selector for a Topic in sns to populate targetArn.
 	// +kubebuilder:validation:Optional
-	TargetArnSelector *v1.Selector `json:"targetArnSelector,omitempty" tf:"-"`
+	TargetArnSelector *v2.Selector `json:"targetArnSelector,omitempty" tf:"-"`
 }
 
 type SnsObservation struct {
@@ -1496,11 +1496,11 @@ type SnsParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.Reference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// The ARN of the SNS topic.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/sns/v1beta1.Topic
@@ -1510,11 +1510,11 @@ type SnsParameters struct {
 
 	// Reference to a Topic in sns to populate targetArn.
 	// +kubebuilder:validation:Optional
-	TargetArnRef *v1.Reference `json:"targetArnRef,omitempty" tf:"-"`
+	TargetArnRef *v2.Reference `json:"targetArnRef,omitempty" tf:"-"`
 
 	// Selector for a Topic in sns to populate targetArn.
 	// +kubebuilder:validation:Optional
-	TargetArnSelector *v1.Selector `json:"targetArnSelector,omitempty" tf:"-"`
+	TargetArnSelector *v2.Selector `json:"targetArnSelector,omitempty" tf:"-"`
 }
 
 type SqsInitParameters struct {
@@ -2370,11 +2370,11 @@ type TopicRuleSnsInitParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.Reference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// The ARN of the SNS topic.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/sns/v1beta1.Topic
@@ -2383,11 +2383,11 @@ type TopicRuleSnsInitParameters struct {
 
 	// Reference to a Topic in sns to populate targetArn.
 	// +kubebuilder:validation:Optional
-	TargetArnRef *v1.Reference `json:"targetArnRef,omitempty" tf:"-"`
+	TargetArnRef *v2.Reference `json:"targetArnRef,omitempty" tf:"-"`
 
 	// Selector for a Topic in sns to populate targetArn.
 	// +kubebuilder:validation:Optional
-	TargetArnSelector *v1.Selector `json:"targetArnSelector,omitempty" tf:"-"`
+	TargetArnSelector *v2.Selector `json:"targetArnSelector,omitempty" tf:"-"`
 }
 
 type TopicRuleSnsObservation struct {
@@ -2416,11 +2416,11 @@ type TopicRuleSnsParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.Reference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// The ARN of the SNS topic.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/sns/v1beta1.Topic
@@ -2430,11 +2430,11 @@ type TopicRuleSnsParameters struct {
 
 	// Reference to a Topic in sns to populate targetArn.
 	// +kubebuilder:validation:Optional
-	TargetArnRef *v1.Reference `json:"targetArnRef,omitempty" tf:"-"`
+	TargetArnRef *v2.Reference `json:"targetArnRef,omitempty" tf:"-"`
 
 	// Selector for a Topic in sns to populate targetArn.
 	// +kubebuilder:validation:Optional
-	TargetArnSelector *v1.Selector `json:"targetArnSelector,omitempty" tf:"-"`
+	TargetArnSelector *v2.Selector `json:"targetArnSelector,omitempty" tf:"-"`
 }
 
 type TopicRuleSqsInitParameters struct {
@@ -2576,8 +2576,8 @@ type TopicRuleTimestreamParameters struct {
 
 // TopicRuleSpec defines the desired state of TopicRule
 type TopicRuleSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     TopicRuleParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   TopicRuleParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -2593,8 +2593,8 @@ type TopicRuleSpec struct {
 
 // TopicRuleStatus defines the observed state of TopicRule.
 type TopicRuleStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        TopicRuleObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               TopicRuleObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type EnvironmentInitParameters struct {
@@ -23,11 +22,11 @@ type EnvironmentInitParameters struct {
 
 	// Reference to a Application in appconfig to populate applicationId.
 	// +kubebuilder:validation:Optional
-	ApplicationIDRef *v1.NamespacedReference `json:"applicationIdRef,omitempty" tf:"-"`
+	ApplicationIDRef *v2.NamespacedReference `json:"applicationIdRef,omitempty" tf:"-"`
 
 	// Selector for a Application in appconfig to populate applicationId.
 	// +kubebuilder:validation:Optional
-	ApplicationIDSelector *v1.NamespacedSelector `json:"applicationIdSelector,omitempty" tf:"-"`
+	ApplicationIDSelector *v2.NamespacedSelector `json:"applicationIdSelector,omitempty" tf:"-"`
 
 	// Description of the environment. Can be at most 1024 characters.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
@@ -93,11 +92,11 @@ type EnvironmentParameters struct {
 
 	// Reference to a Application in appconfig to populate applicationId.
 	// +kubebuilder:validation:Optional
-	ApplicationIDRef *v1.NamespacedReference `json:"applicationIdRef,omitempty" tf:"-"`
+	ApplicationIDRef *v2.NamespacedReference `json:"applicationIdRef,omitempty" tf:"-"`
 
 	// Selector for a Application in appconfig to populate applicationId.
 	// +kubebuilder:validation:Optional
-	ApplicationIDSelector *v1.NamespacedSelector `json:"applicationIdSelector,omitempty" tf:"-"`
+	ApplicationIDSelector *v2.NamespacedSelector `json:"applicationIdSelector,omitempty" tf:"-"`
 
 	// Description of the environment. Can be at most 1024 characters.
 	// +kubebuilder:validation:Optional
@@ -131,11 +130,11 @@ type MonitorInitParameters struct {
 
 	// Reference to a MetricAlarm in cloudwatch to populate alarmArn.
 	// +kubebuilder:validation:Optional
-	AlarmArnRef *v1.NamespacedReference `json:"alarmArnRef,omitempty" tf:"-"`
+	AlarmArnRef *v2.NamespacedReference `json:"alarmArnRef,omitempty" tf:"-"`
 
 	// Selector for a MetricAlarm in cloudwatch to populate alarmArn.
 	// +kubebuilder:validation:Optional
-	AlarmArnSelector *v1.NamespacedSelector `json:"alarmArnSelector,omitempty" tf:"-"`
+	AlarmArnSelector *v2.NamespacedSelector `json:"alarmArnSelector,omitempty" tf:"-"`
 
 	// ARN of an IAM role for AWS AppConfig to monitor alarm_arn.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
@@ -144,11 +143,11 @@ type MonitorInitParameters struct {
 
 	// Reference to a Role in iam to populate alarmRoleArn.
 	// +kubebuilder:validation:Optional
-	AlarmRoleArnRef *v1.NamespacedReference `json:"alarmRoleArnRef,omitempty" tf:"-"`
+	AlarmRoleArnRef *v2.NamespacedReference `json:"alarmRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate alarmRoleArn.
 	// +kubebuilder:validation:Optional
-	AlarmRoleArnSelector *v1.NamespacedSelector `json:"alarmRoleArnSelector,omitempty" tf:"-"`
+	AlarmRoleArnSelector *v2.NamespacedSelector `json:"alarmRoleArnSelector,omitempty" tf:"-"`
 }
 
 type MonitorObservation struct {
@@ -170,11 +169,11 @@ type MonitorParameters struct {
 
 	// Reference to a MetricAlarm in cloudwatch to populate alarmArn.
 	// +kubebuilder:validation:Optional
-	AlarmArnRef *v1.NamespacedReference `json:"alarmArnRef,omitempty" tf:"-"`
+	AlarmArnRef *v2.NamespacedReference `json:"alarmArnRef,omitempty" tf:"-"`
 
 	// Selector for a MetricAlarm in cloudwatch to populate alarmArn.
 	// +kubebuilder:validation:Optional
-	AlarmArnSelector *v1.NamespacedSelector `json:"alarmArnSelector,omitempty" tf:"-"`
+	AlarmArnSelector *v2.NamespacedSelector `json:"alarmArnSelector,omitempty" tf:"-"`
 
 	// ARN of an IAM role for AWS AppConfig to monitor alarm_arn.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
@@ -184,11 +183,11 @@ type MonitorParameters struct {
 
 	// Reference to a Role in iam to populate alarmRoleArn.
 	// +kubebuilder:validation:Optional
-	AlarmRoleArnRef *v1.NamespacedReference `json:"alarmRoleArnRef,omitempty" tf:"-"`
+	AlarmRoleArnRef *v2.NamespacedReference `json:"alarmRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate alarmRoleArn.
 	// +kubebuilder:validation:Optional
-	AlarmRoleArnSelector *v1.NamespacedSelector `json:"alarmRoleArnSelector,omitempty" tf:"-"`
+	AlarmRoleArnSelector *v2.NamespacedSelector `json:"alarmRoleArnSelector,omitempty" tf:"-"`
 }
 
 // EnvironmentSpec defines the desired state of Environment
@@ -210,8 +209,8 @@ type EnvironmentSpec struct {
 
 // EnvironmentStatus defines the observed state of Environment.
 type EnvironmentStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        EnvironmentObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               EnvironmentObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

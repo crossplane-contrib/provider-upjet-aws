@@ -52,3 +52,20 @@ func SetupGated_route53resolver(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupWebhookWithManager_route53resolver registers conversion webhooks for all resource kinds in the group.
+func SetupWebhookWithManager_route53resolver(mgr ctrl.Manager) error {
+	for _, setup := range []func(ctrl.Manager) error{
+		dnssecconfig.SetupWebhookWithManager,
+		endpoint.SetupWebhookWithManager,
+		querylogconfig.SetupWebhookWithManager,
+		querylogconfigassociation.SetupWebhookWithManager,
+		rule.SetupWebhookWithManager,
+		ruleassociation.SetupWebhookWithManager,
+	} {
+		if err := setup(mgr); err != nil {
+			return err
+		}
+	}
+	return nil
+}

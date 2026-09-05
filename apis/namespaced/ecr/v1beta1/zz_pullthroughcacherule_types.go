@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type PullThroughCacheRuleInitParameters struct {
@@ -26,11 +25,11 @@ type PullThroughCacheRuleInitParameters struct {
 
 	// Reference to a Role in iam to populate customRoleArn.
 	// +kubebuilder:validation:Optional
-	CustomRoleArnRef *v1.NamespacedReference `json:"customRoleArnRef,omitempty" tf:"-"`
+	CustomRoleArnRef *v2.NamespacedReference `json:"customRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate customRoleArn.
 	// +kubebuilder:validation:Optional
-	CustomRoleArnSelector *v1.NamespacedSelector `json:"customRoleArnSelector,omitempty" tf:"-"`
+	CustomRoleArnSelector *v2.NamespacedSelector `json:"customRoleArnSelector,omitempty" tf:"-"`
 
 	// The repository name prefix to use when caching images from the source registry. Use ROOT as the prefix to apply a template to all repositories in your registry that don't have an associated pull through cache rule.
 	EcrRepositoryPrefix *string `json:"ecrRepositoryPrefix,omitempty" tf:"ecr_repository_prefix,omitempty"`
@@ -83,11 +82,11 @@ type PullThroughCacheRuleParameters struct {
 
 	// Reference to a Role in iam to populate customRoleArn.
 	// +kubebuilder:validation:Optional
-	CustomRoleArnRef *v1.NamespacedReference `json:"customRoleArnRef,omitempty" tf:"-"`
+	CustomRoleArnRef *v2.NamespacedReference `json:"customRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate customRoleArn.
 	// +kubebuilder:validation:Optional
-	CustomRoleArnSelector *v1.NamespacedSelector `json:"customRoleArnSelector,omitempty" tf:"-"`
+	CustomRoleArnSelector *v2.NamespacedSelector `json:"customRoleArnSelector,omitempty" tf:"-"`
 
 	// The repository name prefix to use when caching images from the source registry. Use ROOT as the prefix to apply a template to all repositories in your registry that don't have an associated pull through cache rule.
 	// +kubebuilder:validation:Optional
@@ -126,8 +125,8 @@ type PullThroughCacheRuleSpec struct {
 
 // PullThroughCacheRuleStatus defines the observed state of PullThroughCacheRule.
 type PullThroughCacheRuleStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        PullThroughCacheRuleObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               PullThroughCacheRuleObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

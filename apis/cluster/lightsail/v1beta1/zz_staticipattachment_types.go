@@ -10,36 +10,35 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type StaticIPAttachmentInitParameters struct {
 
 	// Name of the Lightsail instance to attach the IP to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/lightsail/v1beta2.Instance
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	InstanceName *string `json:"instanceName,omitempty" tf:"instance_name,omitempty"`
 
 	// Reference to a Instance in lightsail to populate instanceName.
 	// +kubebuilder:validation:Optional
-	InstanceNameRef *v1.Reference `json:"instanceNameRef,omitempty" tf:"-"`
+	InstanceNameRef *v2.Reference `json:"instanceNameRef,omitempty" tf:"-"`
 
 	// Selector for a Instance in lightsail to populate instanceName.
 	// +kubebuilder:validation:Optional
-	InstanceNameSelector *v1.Selector `json:"instanceNameSelector,omitempty" tf:"-"`
+	InstanceNameSelector *v2.Selector `json:"instanceNameSelector,omitempty" tf:"-"`
 
 	// Name of the allocated static IP.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/lightsail/v1beta1.StaticIP
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	StaticIPName *string `json:"staticIpName,omitempty" tf:"static_ip_name,omitempty"`
 
 	// Reference to a StaticIP in lightsail to populate staticIpName.
 	// +kubebuilder:validation:Optional
-	StaticIPNameRef *v1.Reference `json:"staticIpNameRef,omitempty" tf:"-"`
+	StaticIPNameRef *v2.Reference `json:"staticIpNameRef,omitempty" tf:"-"`
 
 	// Selector for a StaticIP in lightsail to populate staticIpName.
 	// +kubebuilder:validation:Optional
-	StaticIPNameSelector *v1.Selector `json:"staticIpNameSelector,omitempty" tf:"-"`
+	StaticIPNameSelector *v2.Selector `json:"staticIpNameSelector,omitempty" tf:"-"`
 }
 
 type StaticIPAttachmentObservation struct {
@@ -63,17 +62,16 @@ type StaticIPAttachmentParameters struct {
 
 	// Name of the Lightsail instance to attach the IP to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/lightsail/v1beta2.Instance
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	InstanceName *string `json:"instanceName,omitempty" tf:"instance_name,omitempty"`
 
 	// Reference to a Instance in lightsail to populate instanceName.
 	// +kubebuilder:validation:Optional
-	InstanceNameRef *v1.Reference `json:"instanceNameRef,omitempty" tf:"-"`
+	InstanceNameRef *v2.Reference `json:"instanceNameRef,omitempty" tf:"-"`
 
 	// Selector for a Instance in lightsail to populate instanceName.
 	// +kubebuilder:validation:Optional
-	InstanceNameSelector *v1.Selector `json:"instanceNameSelector,omitempty" tf:"-"`
+	InstanceNameSelector *v2.Selector `json:"instanceNameSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -82,23 +80,23 @@ type StaticIPAttachmentParameters struct {
 
 	// Name of the allocated static IP.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/lightsail/v1beta1.StaticIP
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	StaticIPName *string `json:"staticIpName,omitempty" tf:"static_ip_name,omitempty"`
 
 	// Reference to a StaticIP in lightsail to populate staticIpName.
 	// +kubebuilder:validation:Optional
-	StaticIPNameRef *v1.Reference `json:"staticIpNameRef,omitempty" tf:"-"`
+	StaticIPNameRef *v2.Reference `json:"staticIpNameRef,omitempty" tf:"-"`
 
 	// Selector for a StaticIP in lightsail to populate staticIpName.
 	// +kubebuilder:validation:Optional
-	StaticIPNameSelector *v1.Selector `json:"staticIpNameSelector,omitempty" tf:"-"`
+	StaticIPNameSelector *v2.Selector `json:"staticIpNameSelector,omitempty" tf:"-"`
 }
 
 // StaticIPAttachmentSpec defines the desired state of StaticIPAttachment
 type StaticIPAttachmentSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     StaticIPAttachmentParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   StaticIPAttachmentParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -114,8 +112,8 @@ type StaticIPAttachmentSpec struct {
 
 // StaticIPAttachmentStatus defines the observed state of StaticIPAttachment.
 type StaticIPAttachmentStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        StaticIPAttachmentObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               StaticIPAttachmentObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

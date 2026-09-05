@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type MaintenanceWindowTargetInitParameters struct {
@@ -39,11 +38,11 @@ type MaintenanceWindowTargetInitParameters struct {
 
 	// Reference to a MaintenanceWindow in ssm to populate windowId.
 	// +kubebuilder:validation:Optional
-	WindowIDRef *v1.NamespacedReference `json:"windowIdRef,omitempty" tf:"-"`
+	WindowIDRef *v2.NamespacedReference `json:"windowIdRef,omitempty" tf:"-"`
 
 	// Selector for a MaintenanceWindow in ssm to populate windowId.
 	// +kubebuilder:validation:Optional
-	WindowIDSelector *v1.NamespacedSelector `json:"windowIdSelector,omitempty" tf:"-"`
+	WindowIDSelector *v2.NamespacedSelector `json:"windowIdSelector,omitempty" tf:"-"`
 }
 
 type MaintenanceWindowTargetObservation struct {
@@ -111,11 +110,11 @@ type MaintenanceWindowTargetParameters struct {
 
 	// Reference to a MaintenanceWindow in ssm to populate windowId.
 	// +kubebuilder:validation:Optional
-	WindowIDRef *v1.NamespacedReference `json:"windowIdRef,omitempty" tf:"-"`
+	WindowIDRef *v2.NamespacedReference `json:"windowIdRef,omitempty" tf:"-"`
 
 	// Selector for a MaintenanceWindow in ssm to populate windowId.
 	// +kubebuilder:validation:Optional
-	WindowIDSelector *v1.NamespacedSelector `json:"windowIdSelector,omitempty" tf:"-"`
+	WindowIDSelector *v2.NamespacedSelector `json:"windowIdSelector,omitempty" tf:"-"`
 }
 
 type MaintenanceWindowTargetTargetsInitParameters struct {
@@ -158,8 +157,8 @@ type MaintenanceWindowTargetSpec struct {
 
 // MaintenanceWindowTargetStatus defines the observed state of MaintenanceWindowTarget.
 type MaintenanceWindowTargetStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        MaintenanceWindowTargetObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               MaintenanceWindowTargetObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -1887,6 +1887,13 @@ spec:
                 x-kubernetes-list-map-keys:
                 - type
                 x-kubernetes-list-type: map
+              lastHandledReconcileAt:
+                description: |-
+                  LastHandledReconcileAt holds the value of the most recent
+                  reconcile-requested-at annotation token that the controller has
+                  processed. Users can compare this to the annotation to determine
+                  whether a reconcile request has been handled.
+                type: string
               observedGeneration:
                 description: |-
                   ObservedGeneration is the latest metadata.generation
@@ -2369,6 +2376,9 @@ spec:
                             type: string
                         type: object
                     type: object
+                  odbNetworkArn:
+                    description: The Amazon Resource Name (ARN) of an ODB network.
+                    type: string
                   region:
                     description: |-
                       Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -3114,6 +3124,9 @@ spec:
                             type: string
                         type: object
                     type: object
+                  odbNetworkArn:
+                    description: The Amazon Resource Name (ARN) of an ODB network.
+                    type: string
                   routeTableId:
                     description: The ID of the routing table.
                     type: string
@@ -3562,6 +3575,9 @@ spec:
                   networkInterfaceId:
                     description: Identifier of an EC2 network interface.
                     type: string
+                  odbNetworkArn:
+                    description: The Amazon Resource Name (ARN) of an ODB network.
+                    type: string
                   origin:
                     description: How the route was created - CreateRouteTable, CreateRoute
                       or EnableVgwRoutePropagation.
@@ -3633,6 +3649,13 @@ spec:
                 x-kubernetes-list-map-keys:
                 - type
                 x-kubernetes-list-type: map
+              lastHandledReconcileAt:
+                description: |-
+                  LastHandledReconcileAt holds the value of the most recent
+                  reconcile-requested-at annotation token that the controller has
+                  processed. Users can compare this to the annotation to determine
+                  whether a reconcile request has been handled.
+                type: string
               observedGeneration:
                 description: |-
                   ObservedGeneration is the latest metadata.generation

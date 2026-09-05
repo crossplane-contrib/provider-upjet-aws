@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type SnapshotInitParameters struct {
@@ -23,11 +22,11 @@ type SnapshotInitParameters struct {
 
 	// Reference to a Workgroup in redshiftserverless to populate namespaceName.
 	// +kubebuilder:validation:Optional
-	NamespaceNameRef *v1.NamespacedReference `json:"namespaceNameRef,omitempty" tf:"-"`
+	NamespaceNameRef *v2.NamespacedReference `json:"namespaceNameRef,omitempty" tf:"-"`
 
 	// Selector for a Workgroup in redshiftserverless to populate namespaceName.
 	// +kubebuilder:validation:Optional
-	NamespaceNameSelector *v1.NamespacedSelector `json:"namespaceNameSelector,omitempty" tf:"-"`
+	NamespaceNameSelector *v2.NamespacedSelector `json:"namespaceNameSelector,omitempty" tf:"-"`
 
 	// How long to retain the created snapshot. Default value is -1.
 	RetentionPeriod *float64 `json:"retentionPeriod,omitempty" tf:"retention_period,omitempty"`
@@ -82,11 +81,11 @@ type SnapshotParameters struct {
 
 	// Reference to a Workgroup in redshiftserverless to populate namespaceName.
 	// +kubebuilder:validation:Optional
-	NamespaceNameRef *v1.NamespacedReference `json:"namespaceNameRef,omitempty" tf:"-"`
+	NamespaceNameRef *v2.NamespacedReference `json:"namespaceNameRef,omitempty" tf:"-"`
 
 	// Selector for a Workgroup in redshiftserverless to populate namespaceName.
 	// +kubebuilder:validation:Optional
-	NamespaceNameSelector *v1.NamespacedSelector `json:"namespaceNameSelector,omitempty" tf:"-"`
+	NamespaceNameSelector *v2.NamespacedSelector `json:"namespaceNameSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -117,8 +116,8 @@ type SnapshotSpec struct {
 
 // SnapshotStatus defines the observed state of Snapshot.
 type SnapshotStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SnapshotObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SnapshotObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

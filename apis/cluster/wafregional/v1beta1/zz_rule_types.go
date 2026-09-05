@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type RuleInitParameters struct {
@@ -93,11 +93,11 @@ type RulePredicateInitParameters struct {
 
 	// Reference to a IPSet in wafregional to populate dataId.
 	// +kubebuilder:validation:Optional
-	DataIDRef *v1.Reference `json:"dataIdRef,omitempty" tf:"-"`
+	DataIDRef *v2.Reference `json:"dataIdRef,omitempty" tf:"-"`
 
 	// Selector for a IPSet in wafregional to populate dataId.
 	// +kubebuilder:validation:Optional
-	DataIDSelector *v1.Selector `json:"dataIdSelector,omitempty" tf:"-"`
+	DataIDSelector *v2.Selector `json:"dataIdSelector,omitempty" tf:"-"`
 
 	// Whether to use the settings or the negated settings that you specified in the objects.
 	Negated *bool `json:"negated,omitempty" tf:"negated,omitempty"`
@@ -128,11 +128,11 @@ type RulePredicateParameters struct {
 
 	// Reference to a IPSet in wafregional to populate dataId.
 	// +kubebuilder:validation:Optional
-	DataIDRef *v1.Reference `json:"dataIdRef,omitempty" tf:"-"`
+	DataIDRef *v2.Reference `json:"dataIdRef,omitempty" tf:"-"`
 
 	// Selector for a IPSet in wafregional to populate dataId.
 	// +kubebuilder:validation:Optional
-	DataIDSelector *v1.Selector `json:"dataIdSelector,omitempty" tf:"-"`
+	DataIDSelector *v2.Selector `json:"dataIdSelector,omitempty" tf:"-"`
 
 	// Whether to use the settings or the negated settings that you specified in the objects.
 	// +kubebuilder:validation:Optional
@@ -145,8 +145,8 @@ type RulePredicateParameters struct {
 
 // RuleSpec defines the desired state of Rule
 type RuleSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     RuleParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   RuleParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -162,8 +162,8 @@ type RuleSpec struct {
 
 // RuleStatus defines the observed state of Rule.
 type RuleStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        RuleObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               RuleObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

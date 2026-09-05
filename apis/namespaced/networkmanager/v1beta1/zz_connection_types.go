@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ConnectionInitParameters struct {
@@ -23,11 +22,11 @@ type ConnectionInitParameters struct {
 
 	// Reference to a Device in networkmanager to populate connectedDeviceId.
 	// +kubebuilder:validation:Optional
-	ConnectedDeviceIDRef *v1.NamespacedReference `json:"connectedDeviceIdRef,omitempty" tf:"-"`
+	ConnectedDeviceIDRef *v2.NamespacedReference `json:"connectedDeviceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Device in networkmanager to populate connectedDeviceId.
 	// +kubebuilder:validation:Optional
-	ConnectedDeviceIDSelector *v1.NamespacedSelector `json:"connectedDeviceIdSelector,omitempty" tf:"-"`
+	ConnectedDeviceIDSelector *v2.NamespacedSelector `json:"connectedDeviceIdSelector,omitempty" tf:"-"`
 
 	// ID of the link for the second device.
 	ConnectedLinkID *string `json:"connectedLinkId,omitempty" tf:"connected_link_id,omitempty"`
@@ -42,11 +41,11 @@ type ConnectionInitParameters struct {
 
 	// Reference to a Device in networkmanager to populate deviceId.
 	// +kubebuilder:validation:Optional
-	DeviceIDRef *v1.NamespacedReference `json:"deviceIdRef,omitempty" tf:"-"`
+	DeviceIDRef *v2.NamespacedReference `json:"deviceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Device in networkmanager to populate deviceId.
 	// +kubebuilder:validation:Optional
-	DeviceIDSelector *v1.NamespacedSelector `json:"deviceIdSelector,omitempty" tf:"-"`
+	DeviceIDSelector *v2.NamespacedSelector `json:"deviceIdSelector,omitempty" tf:"-"`
 
 	// ID of the global network.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/networkmanager/v1beta1.GlobalNetwork
@@ -55,11 +54,11 @@ type ConnectionInitParameters struct {
 
 	// Reference to a GlobalNetwork in networkmanager to populate globalNetworkId.
 	// +kubebuilder:validation:Optional
-	GlobalNetworkIDRef *v1.NamespacedReference `json:"globalNetworkIdRef,omitempty" tf:"-"`
+	GlobalNetworkIDRef *v2.NamespacedReference `json:"globalNetworkIdRef,omitempty" tf:"-"`
 
 	// Selector for a GlobalNetwork in networkmanager to populate globalNetworkId.
 	// +kubebuilder:validation:Optional
-	GlobalNetworkIDSelector *v1.NamespacedSelector `json:"globalNetworkIdSelector,omitempty" tf:"-"`
+	GlobalNetworkIDSelector *v2.NamespacedSelector `json:"globalNetworkIdSelector,omitempty" tf:"-"`
 
 	// ID of the link for the first device.
 	LinkID *string `json:"linkId,omitempty" tf:"link_id,omitempty"`
@@ -113,11 +112,11 @@ type ConnectionParameters struct {
 
 	// Reference to a Device in networkmanager to populate connectedDeviceId.
 	// +kubebuilder:validation:Optional
-	ConnectedDeviceIDRef *v1.NamespacedReference `json:"connectedDeviceIdRef,omitempty" tf:"-"`
+	ConnectedDeviceIDRef *v2.NamespacedReference `json:"connectedDeviceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Device in networkmanager to populate connectedDeviceId.
 	// +kubebuilder:validation:Optional
-	ConnectedDeviceIDSelector *v1.NamespacedSelector `json:"connectedDeviceIdSelector,omitempty" tf:"-"`
+	ConnectedDeviceIDSelector *v2.NamespacedSelector `json:"connectedDeviceIdSelector,omitempty" tf:"-"`
 
 	// ID of the link for the second device.
 	// +kubebuilder:validation:Optional
@@ -135,11 +134,11 @@ type ConnectionParameters struct {
 
 	// Reference to a Device in networkmanager to populate deviceId.
 	// +kubebuilder:validation:Optional
-	DeviceIDRef *v1.NamespacedReference `json:"deviceIdRef,omitempty" tf:"-"`
+	DeviceIDRef *v2.NamespacedReference `json:"deviceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Device in networkmanager to populate deviceId.
 	// +kubebuilder:validation:Optional
-	DeviceIDSelector *v1.NamespacedSelector `json:"deviceIdSelector,omitempty" tf:"-"`
+	DeviceIDSelector *v2.NamespacedSelector `json:"deviceIdSelector,omitempty" tf:"-"`
 
 	// ID of the global network.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/networkmanager/v1beta1.GlobalNetwork
@@ -149,11 +148,11 @@ type ConnectionParameters struct {
 
 	// Reference to a GlobalNetwork in networkmanager to populate globalNetworkId.
 	// +kubebuilder:validation:Optional
-	GlobalNetworkIDRef *v1.NamespacedReference `json:"globalNetworkIdRef,omitempty" tf:"-"`
+	GlobalNetworkIDRef *v2.NamespacedReference `json:"globalNetworkIdRef,omitempty" tf:"-"`
 
 	// Selector for a GlobalNetwork in networkmanager to populate globalNetworkId.
 	// +kubebuilder:validation:Optional
-	GlobalNetworkIDSelector *v1.NamespacedSelector `json:"globalNetworkIdSelector,omitempty" tf:"-"`
+	GlobalNetworkIDSelector *v2.NamespacedSelector `json:"globalNetworkIdSelector,omitempty" tf:"-"`
 
 	// ID of the link for the first device.
 	// +kubebuilder:validation:Optional
@@ -184,8 +183,8 @@ type ConnectionSpec struct {
 
 // ConnectionStatus defines the observed state of Connection.
 type ConnectionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ConnectionObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ConnectionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

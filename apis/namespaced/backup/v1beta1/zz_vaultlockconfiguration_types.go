@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type VaultLockConfigurationInitParameters struct {
@@ -22,11 +21,11 @@ type VaultLockConfigurationInitParameters struct {
 
 	// Reference to a Vault in backup to populate backupVaultName.
 	// +kubebuilder:validation:Optional
-	BackupVaultNameRef *v1.NamespacedReference `json:"backupVaultNameRef,omitempty" tf:"-"`
+	BackupVaultNameRef *v2.NamespacedReference `json:"backupVaultNameRef,omitempty" tf:"-"`
 
 	// Selector for a Vault in backup to populate backupVaultName.
 	// +kubebuilder:validation:Optional
-	BackupVaultNameSelector *v1.NamespacedSelector `json:"backupVaultNameSelector,omitempty" tf:"-"`
+	BackupVaultNameSelector *v2.NamespacedSelector `json:"backupVaultNameSelector,omitempty" tf:"-"`
 
 	// The number of days before the lock date. If omitted creates a vault lock in governance mode, otherwise it will create a vault lock in compliance mode.
 	ChangeableForDays *float64 `json:"changeableForDays,omitempty" tf:"changeable_for_days,omitempty"`
@@ -51,6 +50,10 @@ type VaultLockConfigurationObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	LockDate *string `json:"lockDate,omitempty" tf:"lock_date,omitempty"`
+
+	Locked *bool `json:"locked,omitempty" tf:"locked,omitempty"`
+
 	// The maximum retention period that the vault retains its recovery points.
 	MaxRetentionDays *float64 `json:"maxRetentionDays,omitempty" tf:"max_retention_days,omitempty"`
 
@@ -71,11 +74,11 @@ type VaultLockConfigurationParameters struct {
 
 	// Reference to a Vault in backup to populate backupVaultName.
 	// +kubebuilder:validation:Optional
-	BackupVaultNameRef *v1.NamespacedReference `json:"backupVaultNameRef,omitempty" tf:"-"`
+	BackupVaultNameRef *v2.NamespacedReference `json:"backupVaultNameRef,omitempty" tf:"-"`
 
 	// Selector for a Vault in backup to populate backupVaultName.
 	// +kubebuilder:validation:Optional
-	BackupVaultNameSelector *v1.NamespacedSelector `json:"backupVaultNameSelector,omitempty" tf:"-"`
+	BackupVaultNameSelector *v2.NamespacedSelector `json:"backupVaultNameSelector,omitempty" tf:"-"`
 
 	// The number of days before the lock date. If omitted creates a vault lock in governance mode, otherwise it will create a vault lock in compliance mode.
 	// +kubebuilder:validation:Optional
@@ -114,8 +117,8 @@ type VaultLockConfigurationSpec struct {
 
 // VaultLockConfigurationStatus defines the observed state of VaultLockConfiguration.
 type VaultLockConfigurationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        VaultLockConfigurationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               VaultLockConfigurationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

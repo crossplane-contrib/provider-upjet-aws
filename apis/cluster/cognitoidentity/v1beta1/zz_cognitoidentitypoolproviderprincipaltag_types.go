@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CognitoIdentityPoolProviderPrincipalTagInitParameters struct {
@@ -22,11 +22,11 @@ type CognitoIdentityPoolProviderPrincipalTagInitParameters struct {
 
 	// Reference to a Pool in cognitoidentity to populate identityPoolId.
 	// +kubebuilder:validation:Optional
-	IdentityPoolIDRef *v1.Reference `json:"identityPoolIdRef,omitempty" tf:"-"`
+	IdentityPoolIDRef *v2.Reference `json:"identityPoolIdRef,omitempty" tf:"-"`
 
 	// Selector for a Pool in cognitoidentity to populate identityPoolId.
 	// +kubebuilder:validation:Optional
-	IdentityPoolIDSelector *v1.Selector `json:"identityPoolIdSelector,omitempty" tf:"-"`
+	IdentityPoolIDSelector *v2.Selector `json:"identityPoolIdSelector,omitempty" tf:"-"`
 
 	// The name of the identity provider.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/cognitoidp/v1beta2.UserPool
@@ -35,11 +35,11 @@ type CognitoIdentityPoolProviderPrincipalTagInitParameters struct {
 
 	// Reference to a UserPool in cognitoidp to populate identityProviderName.
 	// +kubebuilder:validation:Optional
-	IdentityProviderNameRef *v1.Reference `json:"identityProviderNameRef,omitempty" tf:"-"`
+	IdentityProviderNameRef *v2.Reference `json:"identityProviderNameRef,omitempty" tf:"-"`
 
 	// Selector for a UserPool in cognitoidp to populate identityProviderName.
 	// +kubebuilder:validation:Optional
-	IdentityProviderNameSelector *v1.Selector `json:"identityProviderNameSelector,omitempty" tf:"-"`
+	IdentityProviderNameSelector *v2.Selector `json:"identityProviderNameSelector,omitempty" tf:"-"`
 
 	// String to string map of variables.
 	// +mapType=granular
@@ -80,11 +80,11 @@ type CognitoIdentityPoolProviderPrincipalTagParameters struct {
 
 	// Reference to a Pool in cognitoidentity to populate identityPoolId.
 	// +kubebuilder:validation:Optional
-	IdentityPoolIDRef *v1.Reference `json:"identityPoolIdRef,omitempty" tf:"-"`
+	IdentityPoolIDRef *v2.Reference `json:"identityPoolIdRef,omitempty" tf:"-"`
 
 	// Selector for a Pool in cognitoidentity to populate identityPoolId.
 	// +kubebuilder:validation:Optional
-	IdentityPoolIDSelector *v1.Selector `json:"identityPoolIdSelector,omitempty" tf:"-"`
+	IdentityPoolIDSelector *v2.Selector `json:"identityPoolIdSelector,omitempty" tf:"-"`
 
 	// The name of the identity provider.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/cognitoidp/v1beta2.UserPool
@@ -94,11 +94,11 @@ type CognitoIdentityPoolProviderPrincipalTagParameters struct {
 
 	// Reference to a UserPool in cognitoidp to populate identityProviderName.
 	// +kubebuilder:validation:Optional
-	IdentityProviderNameRef *v1.Reference `json:"identityProviderNameRef,omitempty" tf:"-"`
+	IdentityProviderNameRef *v2.Reference `json:"identityProviderNameRef,omitempty" tf:"-"`
 
 	// Selector for a UserPool in cognitoidp to populate identityProviderName.
 	// +kubebuilder:validation:Optional
-	IdentityProviderNameSelector *v1.Selector `json:"identityProviderNameSelector,omitempty" tf:"-"`
+	IdentityProviderNameSelector *v2.Selector `json:"identityProviderNameSelector,omitempty" tf:"-"`
 
 	// String to string map of variables.
 	// +kubebuilder:validation:Optional
@@ -117,8 +117,8 @@ type CognitoIdentityPoolProviderPrincipalTagParameters struct {
 
 // CognitoIdentityPoolProviderPrincipalTagSpec defines the desired state of CognitoIdentityPoolProviderPrincipalTag
 type CognitoIdentityPoolProviderPrincipalTagSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     CognitoIdentityPoolProviderPrincipalTagParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   CognitoIdentityPoolProviderPrincipalTagParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -134,8 +134,8 @@ type CognitoIdentityPoolProviderPrincipalTagSpec struct {
 
 // CognitoIdentityPoolProviderPrincipalTagStatus defines the observed state of CognitoIdentityPoolProviderPrincipalTag.
 type CognitoIdentityPoolProviderPrincipalTagStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        CognitoIdentityPoolProviderPrincipalTagObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               CognitoIdentityPoolProviderPrincipalTagObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

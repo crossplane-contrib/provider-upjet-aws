@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type SnapshotCreateVolumePermissionInitParameters struct {
@@ -25,11 +25,11 @@ type SnapshotCreateVolumePermissionInitParameters struct {
 
 	// Reference to a EBSSnapshot in ec2 to populate snapshotId.
 	// +kubebuilder:validation:Optional
-	SnapshotIDRef *v1.Reference `json:"snapshotIdRef,omitempty" tf:"-"`
+	SnapshotIDRef *v2.Reference `json:"snapshotIdRef,omitempty" tf:"-"`
 
 	// Selector for a EBSSnapshot in ec2 to populate snapshotId.
 	// +kubebuilder:validation:Optional
-	SnapshotIDSelector *v1.Selector `json:"snapshotIdSelector,omitempty" tf:"-"`
+	SnapshotIDSelector *v2.Selector `json:"snapshotIdSelector,omitempty" tf:"-"`
 }
 
 type SnapshotCreateVolumePermissionObservation struct {
@@ -67,17 +67,17 @@ type SnapshotCreateVolumePermissionParameters struct {
 
 	// Reference to a EBSSnapshot in ec2 to populate snapshotId.
 	// +kubebuilder:validation:Optional
-	SnapshotIDRef *v1.Reference `json:"snapshotIdRef,omitempty" tf:"-"`
+	SnapshotIDRef *v2.Reference `json:"snapshotIdRef,omitempty" tf:"-"`
 
 	// Selector for a EBSSnapshot in ec2 to populate snapshotId.
 	// +kubebuilder:validation:Optional
-	SnapshotIDSelector *v1.Selector `json:"snapshotIdSelector,omitempty" tf:"-"`
+	SnapshotIDSelector *v2.Selector `json:"snapshotIdSelector,omitempty" tf:"-"`
 }
 
 // SnapshotCreateVolumePermissionSpec defines the desired state of SnapshotCreateVolumePermission
 type SnapshotCreateVolumePermissionSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     SnapshotCreateVolumePermissionParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   SnapshotCreateVolumePermissionParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -93,8 +93,8 @@ type SnapshotCreateVolumePermissionSpec struct {
 
 // SnapshotCreateVolumePermissionStatus defines the observed state of SnapshotCreateVolumePermission.
 type SnapshotCreateVolumePermissionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SnapshotCreateVolumePermissionObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SnapshotCreateVolumePermissionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

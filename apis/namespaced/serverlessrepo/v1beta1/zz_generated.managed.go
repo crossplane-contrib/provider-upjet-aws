@@ -5,44 +5,44 @@
 
 package v1beta1
 
-import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+import xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 
 // GetCondition of this CloudFormationStack.
-func (mg *CloudFormationStack) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *CloudFormationStack) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this CloudFormationStack.
-func (mg *CloudFormationStack) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *CloudFormationStack) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this CloudFormationStack.
-func (mg *CloudFormationStack) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *CloudFormationStack) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this CloudFormationStack.
-func (mg *CloudFormationStack) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *CloudFormationStack) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this CloudFormationStack.
-func (mg *CloudFormationStack) SetConditions(c ...xpv1.Condition) {
+func (mg *CloudFormationStack) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this CloudFormationStack.
-func (mg *CloudFormationStack) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *CloudFormationStack) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this CloudFormationStack.
-func (mg *CloudFormationStack) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *CloudFormationStack) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this CloudFormationStack.
-func (mg *CloudFormationStack) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *CloudFormationStack) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

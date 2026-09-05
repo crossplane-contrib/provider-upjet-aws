@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type GameSessionQueueInitParameters struct {
@@ -25,11 +25,11 @@ type GameSessionQueueInitParameters struct {
 
 	// References to Fleet in gamelift to populate destinations.
 	// +kubebuilder:validation:Optional
-	DestinationsRefs []v1.Reference `json:"destinationsRefs,omitempty" tf:"-"`
+	DestinationsRefs []v2.Reference `json:"destinationsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Fleet in gamelift to populate destinations.
 	// +kubebuilder:validation:Optional
-	DestinationsSelector *v1.Selector `json:"destinationsSelector,omitempty" tf:"-"`
+	DestinationsSelector *v2.Selector `json:"destinationsSelector,omitempty" tf:"-"`
 
 	// An SNS topic ARN that is set up to receive game session placement notifications.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/sns/v1beta1.Topic
@@ -38,11 +38,11 @@ type GameSessionQueueInitParameters struct {
 
 	// Reference to a Topic in sns to populate notificationTarget.
 	// +kubebuilder:validation:Optional
-	NotificationTargetRef *v1.Reference `json:"notificationTargetRef,omitempty" tf:"-"`
+	NotificationTargetRef *v2.Reference `json:"notificationTargetRef,omitempty" tf:"-"`
 
 	// Selector for a Topic in sns to populate notificationTarget.
 	// +kubebuilder:validation:Optional
-	NotificationTargetSelector *v1.Selector `json:"notificationTargetSelector,omitempty" tf:"-"`
+	NotificationTargetSelector *v2.Selector `json:"notificationTargetSelector,omitempty" tf:"-"`
 
 	// One or more policies used to choose fleet based on player latency. See below.
 	PlayerLatencyPolicy []PlayerLatencyPolicyInitParameters `json:"playerLatencyPolicy,omitempty" tf:"player_latency_policy,omitempty"`
@@ -104,11 +104,11 @@ type GameSessionQueueParameters struct {
 
 	// References to Fleet in gamelift to populate destinations.
 	// +kubebuilder:validation:Optional
-	DestinationsRefs []v1.Reference `json:"destinationsRefs,omitempty" tf:"-"`
+	DestinationsRefs []v2.Reference `json:"destinationsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Fleet in gamelift to populate destinations.
 	// +kubebuilder:validation:Optional
-	DestinationsSelector *v1.Selector `json:"destinationsSelector,omitempty" tf:"-"`
+	DestinationsSelector *v2.Selector `json:"destinationsSelector,omitempty" tf:"-"`
 
 	// An SNS topic ARN that is set up to receive game session placement notifications.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/sns/v1beta1.Topic
@@ -118,11 +118,11 @@ type GameSessionQueueParameters struct {
 
 	// Reference to a Topic in sns to populate notificationTarget.
 	// +kubebuilder:validation:Optional
-	NotificationTargetRef *v1.Reference `json:"notificationTargetRef,omitempty" tf:"-"`
+	NotificationTargetRef *v2.Reference `json:"notificationTargetRef,omitempty" tf:"-"`
 
 	// Selector for a Topic in sns to populate notificationTarget.
 	// +kubebuilder:validation:Optional
-	NotificationTargetSelector *v1.Selector `json:"notificationTargetSelector,omitempty" tf:"-"`
+	NotificationTargetSelector *v2.Selector `json:"notificationTargetSelector,omitempty" tf:"-"`
 
 	// One or more policies used to choose fleet based on player latency. See below.
 	// +kubebuilder:validation:Optional
@@ -174,8 +174,8 @@ type PlayerLatencyPolicyParameters struct {
 
 // GameSessionQueueSpec defines the desired state of GameSessionQueue
 type GameSessionQueueSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     GameSessionQueueParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   GameSessionQueueParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -191,8 +191,8 @@ type GameSessionQueueSpec struct {
 
 // GameSessionQueueStatus defines the observed state of GameSessionQueue.
 type GameSessionQueueStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        GameSessionQueueObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               GameSessionQueueObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

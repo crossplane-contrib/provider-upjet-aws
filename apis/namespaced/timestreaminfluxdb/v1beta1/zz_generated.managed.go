@@ -5,84 +5,84 @@
 
 package v1beta1
 
-import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+import xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 
 // GetCondition of this DBCluster.
-func (mg *DBCluster) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *DBCluster) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this DBCluster.
-func (mg *DBCluster) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *DBCluster) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this DBCluster.
-func (mg *DBCluster) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *DBCluster) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this DBCluster.
-func (mg *DBCluster) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *DBCluster) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this DBCluster.
-func (mg *DBCluster) SetConditions(c ...xpv1.Condition) {
+func (mg *DBCluster) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this DBCluster.
-func (mg *DBCluster) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *DBCluster) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this DBCluster.
-func (mg *DBCluster) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *DBCluster) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this DBCluster.
-func (mg *DBCluster) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *DBCluster) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this DBInstance.
-func (mg *DBInstance) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *DBInstance) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this DBInstance.
-func (mg *DBInstance) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *DBInstance) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this DBInstance.
-func (mg *DBInstance) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *DBInstance) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this DBInstance.
-func (mg *DBInstance) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *DBInstance) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this DBInstance.
-func (mg *DBInstance) SetConditions(c ...xpv1.Condition) {
+func (mg *DBInstance) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this DBInstance.
-func (mg *DBInstance) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *DBInstance) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this DBInstance.
-func (mg *DBInstance) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *DBInstance) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this DBInstance.
-func (mg *DBInstance) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *DBInstance) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

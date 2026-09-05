@@ -149,6 +149,15 @@ spec:
                       model for your StackSet. This can only be defined when using
                       the SERVICE_MANAGED permission model.
                     properties:
+                      dependsOnStackSets:
+                        description: A list of StackSet ARNs that this StackSet depends
+                          on for auto-deployment operations. When auto-deployment
+                          is triggered, operations will be sequenced to ensure all
+                          dependencies complete successfully before this StackSet's
+                          operation begins.
+                        items:
+                          type: string
+                        type: array
                       enabled:
                         description: Whether or not auto-deployment is enabled.
                         type: boolean
@@ -366,6 +375,15 @@ spec:
                       model for your StackSet. This can only be defined when using
                       the SERVICE_MANAGED permission model.
                     properties:
+                      dependsOnStackSets:
+                        description: A list of StackSet ARNs that this StackSet depends
+                          on for auto-deployment operations. When auto-deployment
+                          is triggered, operations will be sequenced to ensure all
+                          dependencies complete successfully before this StackSet's
+                          operation begins.
+                        items:
+                          type: string
+                        type: array
                       enabled:
                         description: Whether or not auto-deployment is enabled.
                         type: boolean
@@ -549,6 +567,15 @@ spec:
                       model for your StackSet. This can only be defined when using
                       the SERVICE_MANAGED permission model.
                     properties:
+                      dependsOnStackSets:
+                        description: A list of StackSet ARNs that this StackSet depends
+                          on for auto-deployment operations. When auto-deployment
+                          is triggered, operations will be sequenced to ensure all
+                          dependencies complete successfully before this StackSet's
+                          operation begins.
+                        items:
+                          type: string
+                        type: array
                       enabled:
                         description: Whether or not auto-deployment is enabled.
                         type: boolean
@@ -721,6 +748,13 @@ spec:
                 x-kubernetes-list-map-keys:
                 - type
                 x-kubernetes-list-type: map
+              lastHandledReconcileAt:
+                description: |-
+                  LastHandledReconcileAt holds the value of the most recent
+                  reconcile-requested-at annotation token that the controller has
+                  processed. Users can compare this to the annotation to determine
+                  whether a reconcile request has been handled.
+                type: string
               observedGeneration:
                 description: |-
                   ObservedGeneration is the latest metadata.generation

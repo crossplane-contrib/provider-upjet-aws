@@ -5,124 +5,124 @@
 
 package v1beta1
 
-import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+import xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 
 // GetCondition of this LanguageModel.
-func (mg *LanguageModel) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *LanguageModel) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this LanguageModel.
-func (mg *LanguageModel) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *LanguageModel) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this LanguageModel.
-func (mg *LanguageModel) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *LanguageModel) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this LanguageModel.
-func (mg *LanguageModel) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *LanguageModel) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this LanguageModel.
-func (mg *LanguageModel) SetConditions(c ...xpv1.Condition) {
+func (mg *LanguageModel) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this LanguageModel.
-func (mg *LanguageModel) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *LanguageModel) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this LanguageModel.
-func (mg *LanguageModel) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *LanguageModel) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this LanguageModel.
-func (mg *LanguageModel) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *LanguageModel) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this Vocabulary.
-func (mg *Vocabulary) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *Vocabulary) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this Vocabulary.
-func (mg *Vocabulary) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *Vocabulary) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this Vocabulary.
-func (mg *Vocabulary) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *Vocabulary) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this Vocabulary.
-func (mg *Vocabulary) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *Vocabulary) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this Vocabulary.
-func (mg *Vocabulary) SetConditions(c ...xpv1.Condition) {
+func (mg *Vocabulary) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this Vocabulary.
-func (mg *Vocabulary) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *Vocabulary) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this Vocabulary.
-func (mg *Vocabulary) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *Vocabulary) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this Vocabulary.
-func (mg *Vocabulary) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *Vocabulary) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this VocabularyFilter.
-func (mg *VocabularyFilter) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *VocabularyFilter) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this VocabularyFilter.
-func (mg *VocabularyFilter) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *VocabularyFilter) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this VocabularyFilter.
-func (mg *VocabularyFilter) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *VocabularyFilter) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this VocabularyFilter.
-func (mg *VocabularyFilter) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *VocabularyFilter) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this VocabularyFilter.
-func (mg *VocabularyFilter) SetConditions(c ...xpv1.Condition) {
+func (mg *VocabularyFilter) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this VocabularyFilter.
-func (mg *VocabularyFilter) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *VocabularyFilter) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this VocabularyFilter.
-func (mg *VocabularyFilter) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *VocabularyFilter) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this VocabularyFilter.
-func (mg *VocabularyFilter) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *VocabularyFilter) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

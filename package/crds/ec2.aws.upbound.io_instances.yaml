@@ -3108,6 +3108,13 @@ spec:
                 x-kubernetes-list-map-keys:
                 - type
                 x-kubernetes-list-type: map
+              lastHandledReconcileAt:
+                description: |-
+                  LastHandledReconcileAt holds the value of the most recent
+                  reconcile-requested-at annotation token that the controller has
+                  processed. Users can compare this to the annotation to determine
+                  whether a reconcile request has been handled.
+                type: string
               observedGeneration:
                 description: |-
                   ObservedGeneration is the latest metadata.generation
@@ -3497,8 +3504,10 @@ spec:
                     properties:
                       marketType:
                         description: Type of market for the instance. Valid values
-                          are spot and capacity-block. Defaults to spot. Required
-                          if spot_options is specified.
+                          are spot, capacity-block, and interruptible-capacity-reservation.
+                          Use interruptible-capacity-reservation to launch instances
+                          into interruptible Capacity Reservations. Defaults to spot.
+                          Required if spot_options is specified.
                         type: string
                       spotOptions:
                         description: Block to configure the options for Spot Instances.
@@ -4559,8 +4568,10 @@ spec:
                     properties:
                       marketType:
                         description: Type of market for the instance. Valid values
-                          are spot and capacity-block. Defaults to spot. Required
-                          if spot_options is specified.
+                          are spot, capacity-block, and interruptible-capacity-reservation.
+                          Use interruptible-capacity-reservation to launch instances
+                          into interruptible Capacity Reservations. Defaults to spot.
+                          Required if spot_options is specified.
                         type: string
                       spotOptions:
                         description: Block to configure the options for Spot Instances.
@@ -5632,8 +5643,10 @@ spec:
                     properties:
                       marketType:
                         description: Type of market for the instance. Valid values
-                          are spot and capacity-block. Defaults to spot. Required
-                          if spot_options is specified.
+                          are spot, capacity-block, and interruptible-capacity-reservation.
+                          Use interruptible-capacity-reservation to launch instances
+                          into interruptible Capacity Reservations. Defaults to spot.
+                          Required if spot_options is specified.
                         type: string
                       spotOptions:
                         description: Block to configure the options for Spot Instances.
@@ -6115,6 +6128,13 @@ spec:
                 x-kubernetes-list-map-keys:
                 - type
                 x-kubernetes-list-type: map
+              lastHandledReconcileAt:
+                description: |-
+                  LastHandledReconcileAt holds the value of the most recent
+                  reconcile-requested-at annotation token that the controller has
+                  processed. Users can compare this to the annotation to determine
+                  whether a reconcile request has been handled.
+                type: string
               observedGeneration:
                 description: |-
                   ObservedGeneration is the latest metadata.generation
