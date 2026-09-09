@@ -175,11 +175,19 @@ spec:
                           description: Unique identifier for each of the notification
                             configurations.
                           type: string
+                        index:
+                          default: "0"
+                          description: This is an injected field with a default value
+                            for being able to merge items of the parent object list.
+                          type: string
                         lambdaFunctionArn:
                           description: Lambda function ARN.
                           type: string
                       type: object
                     type: array
+                    x-kubernetes-list-map-keys:
+                    - index
+                    x-kubernetes-list-type: map
                   queue:
                     description: Notification configuration to SQS Queue. See below.
                     items:
@@ -199,6 +207,11 @@ spec:
                         id:
                           description: Unique identifier for each of the notification
                             configurations.
+                          type: string
+                        index:
+                          default: "0"
+                          description: This is an injected field with a default value
+                            for being able to merge items of the parent object list.
                           type: string
                         queueArn:
                           description: SQS queue ARN.
@@ -279,6 +292,9 @@ spec:
                           type: object
                       type: object
                     type: array
+                    x-kubernetes-list-map-keys:
+                    - index
+                    x-kubernetes-list-type: map
                   region:
                     description: |-
                       Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -303,6 +319,11 @@ spec:
                         id:
                           description: Unique identifier for each of the notification
                             configurations.
+                          type: string
+                        index:
+                          default: "0"
+                          description: This is an injected field with a default value
+                            for being able to merge items of the parent object list.
                           type: string
                         topicArn:
                           description: SNS topic ARN.
@@ -383,6 +404,9 @@ spec:
                           type: object
                       type: object
                     type: array
+                    x-kubernetes-list-map-keys:
+                    - index
+                    x-kubernetes-list-type: map
                 required:
                 - region
                 type: object
@@ -501,11 +525,19 @@ spec:
                           description: Unique identifier for each of the notification
                             configurations.
                           type: string
+                        index:
+                          default: "0"
+                          description: This is an injected field with a default value
+                            for being able to merge items of the parent object list.
+                          type: string
                         lambdaFunctionArn:
                           description: Lambda function ARN.
                           type: string
                       type: object
                     type: array
+                    x-kubernetes-list-map-keys:
+                    - index
+                    x-kubernetes-list-type: map
                   queue:
                     description: Notification configuration to SQS Queue. See below.
                     items:
@@ -525,6 +557,11 @@ spec:
                         id:
                           description: Unique identifier for each of the notification
                             configurations.
+                          type: string
+                        index:
+                          default: "0"
+                          description: This is an injected field with a default value
+                            for being able to merge items of the parent object list.
                           type: string
                         queueArn:
                           description: SQS queue ARN.
@@ -605,6 +642,9 @@ spec:
                           type: object
                       type: object
                     type: array
+                    x-kubernetes-list-map-keys:
+                    - index
+                    x-kubernetes-list-type: map
                   topic:
                     description: Notification configuration to SNS Topic. See below.
                     items:
@@ -624,6 +664,11 @@ spec:
                         id:
                           description: Unique identifier for each of the notification
                             configurations.
+                          type: string
+                        index:
+                          default: "0"
+                          description: This is an injected field with a default value
+                            for being able to merge items of the parent object list.
                           type: string
                         topicArn:
                           description: SNS topic ARN.
@@ -704,6 +749,9 @@ spec:
                           type: object
                       type: object
                     type: array
+                    x-kubernetes-list-map-keys:
+                    - index
+                    x-kubernetes-list-type: map
                 type: object
               managementPolicies:
                 default:
@@ -827,6 +875,10 @@ spec:
                           description: Unique identifier for each of the notification
                             configurations.
                           type: string
+                        index:
+                          description: This is an injected field with a default value
+                            for being able to merge items of the parent object list.
+                          type: string
                         lambdaFunctionArn:
                           description: Lambda function ARN.
                           type: string
@@ -851,6 +903,10 @@ spec:
                         id:
                           description: Unique identifier for each of the notification
                             configurations.
+                          type: string
+                        index:
+                          description: This is an injected field with a default value
+                            for being able to merge items of the parent object list.
                           type: string
                         queueArn:
                           description: SQS queue ARN.
@@ -881,6 +937,10 @@ spec:
                         id:
                           description: Unique identifier for each of the notification
                             configurations.
+                          type: string
+                        index:
+                          description: This is an injected field with a default value
+                            for being able to merge items of the parent object list.
                           type: string
                         topicArn:
                           description: SNS topic ARN.
