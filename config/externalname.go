@@ -204,6 +204,8 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 
 	// rds
 	//
+	// aws_rds_integration can be imported using the integration ARN
+	"aws_rds_integration": rdsIntegration(),
 	// aws_rds_instance_state import format: rdsInstanceId-12345678
 	"aws_rds_instance_state": rdsInstanceState(),
 
@@ -3099,6 +3101,49 @@ func s3vectorsComputedARNIdentifier(identifier, resourcePath string) config.Exte
 		}),
 	)
 	en.TFPluginFrameworkOptions.ComputedIdentifierAttributes = []string{identifier}
+	return en
+}
+
+// rdsIntegration handles aws_rds_integration which uses @ArnIdentity in the
+// Terraform provider: the integration ARN is the identity and the "id"
+// attribute is a deprecated duplicate of it. The resource Read looks up the
+// integration by d.Get("id"), so a valid, region-aware ARN stub must be used
+// as the ID on the initial read so AWS returns IntegrationNotFoundFault
+// (a clean not-found) instead of rejecting an invalid identifier.
+func rdsIntegration() config.ExternalName {
+	en := config.NewExternalNameFrom(config.IdentifierFromProvider,
+		config.WithSetIdentifierArgumentsFn(func(fn config.SetIdentifierArgumentsFn, base map[string]any, externalName string) {
+			if _, ok := base["arn"]; ok {
+				return
+			}
+			if externalName != "" {
+				base["arn"] = externalName
+				return
+			}
+			if region, _ := base["region"].(string); region != "" {
+				base["arn"] = fmt.Sprintf("arn:aws:rds:%s:000000000000:integration", region)
+			}
+		}),
+		config.WithGetExternalNameFn(func(fn config.GetExternalNameFn, tfState map[string]any) (string, error) {
+			if id, ok := tfState["arn"]; ok {
+				idStr := fmt.Sprintf("%v", id)
+				if len(idStr) > 0 {
+					return idStr, nil
+				}
+			}
+			return "", errors.Errorf("cannot find attribute %q in tfstate", "arn")
+		}),
+		config.WithGetIDFn(func(fn config.GetIDFn, _ context.Context, externalName string, parameters map[string]any, _ map[string]any) (string, error) {
+			if externalName != "" {
+				return externalName, nil
+			}
+			if region, _ := parameters["region"].(string); region != "" {
+				return fmt.Sprintf("arn:aws:rds:%s:000000000000:integration", region), nil
+			}
+			return fn(context.Background(), externalName, parameters, nil)
+		}),
+	)
+	en.TFPluginFrameworkOptions.ComputedIdentifierAttributes = []string{"arn"}
 	return en
 }
 

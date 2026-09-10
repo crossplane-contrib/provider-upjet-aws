@@ -767,6 +767,7 @@ import (
 	instancerds "github.com/upbound/provider-aws/v2/internal/controller/cluster/rds/instance"
 	instanceroleassociation "github.com/upbound/provider-aws/v2/internal/controller/cluster/rds/instanceroleassociation"
 	instancestaterds "github.com/upbound/provider-aws/v2/internal/controller/cluster/rds/instancestate"
+	integrationrds "github.com/upbound/provider-aws/v2/internal/controller/cluster/rds/integration"
 	optiongroup "github.com/upbound/provider-aws/v2/internal/controller/cluster/rds/optiongroup"
 	parametergrouprds "github.com/upbound/provider-aws/v2/internal/controller/cluster/rds/parametergroup"
 	proxy "github.com/upbound/provider-aws/v2/internal/controller/cluster/rds/proxy"
@@ -1804,6 +1805,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		instancerds.Setup,
 		instanceroleassociation.Setup,
 		instancestaterds.Setup,
+		integrationrds.Setup,
 		optiongroup.Setup,
 		parametergrouprds.Setup,
 		proxy.Setup,
@@ -2847,6 +2849,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		instancerds.SetupGated,
 		instanceroleassociation.SetupGated,
 		instancestaterds.SetupGated,
+		integrationrds.SetupGated,
 		optiongroup.SetupGated,
 		parametergrouprds.SetupGated,
 		proxy.SetupGated,
@@ -3889,6 +3892,7 @@ func SetupWebhookWithManager_monolith(mgr ctrl.Manager) error {
 		instancerds.SetupWebhookWithManager,
 		instanceroleassociation.SetupWebhookWithManager,
 		instancestaterds.SetupWebhookWithManager,
+		integrationrds.SetupWebhookWithManager,
 		optiongroup.SetupWebhookWithManager,
 		parametergrouprds.SetupWebhookWithManager,
 		proxy.SetupWebhookWithManager,

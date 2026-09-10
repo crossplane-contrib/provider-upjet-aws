@@ -1785,6 +1785,138 @@ func (mg *InstanceState) ResolveReferences(ctx context.Context, c client.Reader)
 	return nil
 }
 
+// ResolveReferences of this Integration.
+func (mg *Integration) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("kms.aws.upbound.io", "v1beta1", "Key", "KeyList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KMSKeyID),
+			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.KMSKeyIDRef,
+			Selector:     mg.Spec.ForProvider.KMSKeyIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.KMSKeyID")
+	}
+	mg.Spec.ForProvider.KMSKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.KMSKeyIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("rds.aws.upbound.io", "v1beta2", "Cluster", "ClusterList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SourceArn),
+			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.SourceArnRef,
+			Selector:     mg.Spec.ForProvider.SourceArnSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.SourceArn")
+	}
+	mg.Spec.ForProvider.SourceArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.SourceArnRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("redshiftserverless.aws.upbound.io", "v1beta1", "RedshiftServerlessNamespace", "RedshiftServerlessNamespaceList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TargetArn),
+			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.TargetArnRef,
+			Selector:     mg.Spec.ForProvider.TargetArnSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.TargetArn")
+	}
+	mg.Spec.ForProvider.TargetArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.TargetArnRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("kms.aws.upbound.io", "v1beta1", "Key", "KeyList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KMSKeyID),
+			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.KMSKeyIDRef,
+			Selector:     mg.Spec.InitProvider.KMSKeyIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.KMSKeyID")
+	}
+	mg.Spec.InitProvider.KMSKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.KMSKeyIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("rds.aws.upbound.io", "v1beta2", "Cluster", "ClusterList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SourceArn),
+			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.SourceArnRef,
+			Selector:     mg.Spec.InitProvider.SourceArnSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.SourceArn")
+	}
+	mg.Spec.InitProvider.SourceArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.SourceArnRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("redshiftserverless.aws.upbound.io", "v1beta1", "RedshiftServerlessNamespace", "RedshiftServerlessNamespaceList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TargetArn),
+			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.TargetArnRef,
+			Selector:     mg.Spec.InitProvider.TargetArnSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.TargetArn")
+	}
+	mg.Spec.InitProvider.TargetArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.TargetArnRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this Proxy.
 func (mg *Proxy) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed
