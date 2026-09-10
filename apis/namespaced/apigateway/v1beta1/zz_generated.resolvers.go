@@ -582,6 +582,98 @@ func (mg *DomainName) ResolveReferences(ctx context.Context, c client.Reader) er
 	return nil
 }
 
+// ResolveReferences of this DomainNameAccessAssociation.
+func (mg *DomainNameAccessAssociation) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPINamespacedResolver(c, mg)
+
+	var rsp reference.NamespacedResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("ec2.aws.m.upbound.io", "v1beta1", "VPCEndpoint", "VPCEndpointList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AccessAssociationSource),
+			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.AccessAssociationSourceRef,
+			Selector:     mg.Spec.ForProvider.AccessAssociationSourceSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.AccessAssociationSource")
+	}
+	mg.Spec.ForProvider.AccessAssociationSource = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.AccessAssociationSourceRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("apigateway.aws.m.upbound.io", "v1beta1", "DomainName", "DomainNameList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DomainNameArn),
+			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.DomainNameArnRef,
+			Selector:     mg.Spec.ForProvider.DomainNameArnSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.DomainNameArn")
+	}
+	mg.Spec.ForProvider.DomainNameArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DomainNameArnRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("ec2.aws.m.upbound.io", "v1beta1", "VPCEndpoint", "VPCEndpointList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AccessAssociationSource),
+			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.AccessAssociationSourceRef,
+			Selector:     mg.Spec.InitProvider.AccessAssociationSourceSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.AccessAssociationSource")
+	}
+	mg.Spec.InitProvider.AccessAssociationSource = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.AccessAssociationSourceRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("apigateway.aws.m.upbound.io", "v1beta1", "DomainName", "DomainNameList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DomainNameArn),
+			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.DomainNameArnRef,
+			Selector:     mg.Spec.InitProvider.DomainNameArnSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.DomainNameArn")
+	}
+	mg.Spec.InitProvider.DomainNameArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.DomainNameArnRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this GatewayResponse.
 func (mg *GatewayResponse) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed
