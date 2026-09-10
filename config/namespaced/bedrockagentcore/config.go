@@ -195,10 +195,6 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 			TerraformName: "aws_bedrockagentcore_memory",
 			Extractor:     common.PathARNExtractor,
 		}
-		r.References["environment.agentcore_runtime_environment.agent_runtime_arn"] = config.Reference{
-			TerraformName: "aws_bedrockagentcore_agent_runtime",
-			Extractor:     `github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("agent_runtime_arn",true)`,
-		}
 		r.References["memory.agentcore_memory_configuration.retrieval_config.strategy_id"] = config.Reference{
 			TerraformName: "aws_bedrockagentcore_memory_strategy",
 			Extractor:     `github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("memory_strategy_id",true)`,
