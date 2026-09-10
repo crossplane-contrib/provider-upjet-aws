@@ -34,7 +34,7 @@ type ParameterGroupInitParameters struct {
 
 type ParameterGroupObservation struct {
 
-	// Amazon Resource Name (ARN) of parameter group
+	// ARN of parameter group
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The description of the Redshift parameter group.

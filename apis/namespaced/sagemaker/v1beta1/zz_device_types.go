@@ -73,7 +73,7 @@ type DeviceInitParameters struct {
 type DeviceObservation struct {
 	AgentVersion *string `json:"agentVersion,omitempty" tf:"agent_version,omitempty"`
 
-	// The Amazon Resource Name (ARN) assigned by AWS to this Device.
+	// ARN assigned by AWS to this Device.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The device to register with SageMaker AI Edge Manager. See Device details below.

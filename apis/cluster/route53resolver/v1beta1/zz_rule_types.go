@@ -49,7 +49,7 @@ type RuleInitParameters struct {
 
 type RuleObservation struct {
 
-	// ARN (Amazon Resource Name) for the resolver rule.
+	// ARN for the resolver rule.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// DNS queries for this domain name are forwarded to the IP addresses that are specified using target_ip.

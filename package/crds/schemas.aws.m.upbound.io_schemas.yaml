@@ -368,7 +368,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The Amazon Resource Name (ARN) of the discoverer.
+                    description: ARN of the discoverer.
                     type: string
                   content:
                     description: The schema specification. Must be a valid Open API

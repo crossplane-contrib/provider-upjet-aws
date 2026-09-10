@@ -1307,8 +1307,7 @@ spec:
               forProvider:
                 properties:
                   awsKmsKeyArn:
-                    description: The AWS Key Management Service (AWS KMS) key that
-                      you want to use with this pipeline.
+                    description: KMS key that you want to use with this pipeline.
                     type: string
                   contentConfig:
                     description: The ContentConfig object specifies information about
@@ -1541,9 +1540,8 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   role:
-                    description: The IAM Amazon Resource Name (ARN) for the role that
-                      you want Elastic Transcoder to use to transcode jobs for this
-                      pipeline.
+                    description: IAM ARN for the role that you want Elastic Transcoder
+                      to use to transcode jobs for this pipeline.
                     type: string
                   roleRef:
                     description: Reference to a Role in iam to populate role.
@@ -1748,8 +1746,7 @@ spec:
                   autoscaler.
                 properties:
                   awsKmsKeyArn:
-                    description: The AWS Key Management Service (AWS KMS) key that
-                      you want to use with this pipeline.
+                    description: KMS key that you want to use with this pipeline.
                     type: string
                   contentConfig:
                     description: The ContentConfig object specifies information about
@@ -1977,9 +1974,8 @@ spec:
                       to save the transcoded files.
                     type: string
                   role:
-                    description: The IAM Amazon Resource Name (ARN) for the role that
-                      you want Elastic Transcoder to use to transcode jobs for this
-                      pipeline.
+                    description: IAM ARN for the role that you want Elastic Transcoder
+                      to use to transcode jobs for this pipeline.
                     type: string
                   roleRef:
                     description: Reference to a Role in iam to populate role.
@@ -2263,8 +2259,7 @@ spec:
                     description: The ARN of the Elastictranscoder pipeline.
                     type: string
                   awsKmsKeyArn:
-                    description: The AWS Key Management Service (AWS KMS) key that
-                      you want to use with this pipeline.
+                    description: KMS key that you want to use with this pipeline.
                     type: string
                   contentConfig:
                     description: The ContentConfig object specifies information about
@@ -2352,9 +2347,8 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   role:
-                    description: The IAM Amazon Resource Name (ARN) for the role that
-                      you want Elastic Transcoder to use to transcode jobs for this
-                      pipeline.
+                    description: IAM ARN for the role that you want Elastic Transcoder
+                      to use to transcode jobs for this pipeline.
                     type: string
                   thumbnailConfig:
                     description: The ThumbnailConfig object specifies information

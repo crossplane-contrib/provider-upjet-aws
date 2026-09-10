@@ -95,7 +95,7 @@ type ProxyDefaultTargetGroupInitParameters struct {
 
 type ProxyDefaultTargetGroupObservation struct {
 
-	// The Amazon Resource Name (ARN) representing the target group.
+	// ARN representing the target group.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The settings that determine the size and behavior of the connection pool for the target group.

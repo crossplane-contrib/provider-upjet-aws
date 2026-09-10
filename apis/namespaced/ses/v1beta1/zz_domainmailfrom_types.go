@@ -15,7 +15,7 @@ import (
 
 type DomainMailFromInitParameters struct {
 
-	// The action that you want Amazon SES to take if it cannot successfully read the required MX record when you send an email. Defaults to UseDefaultValue. See the SES API documentation for more information.
+	// Action that you want Amazon SES to take if it cannot successfully read the required MX record when you send an email. Defaults to UseDefaultValue. See the SES API documentation for more information.
 	BehaviorOnMxFailure *string `json:"behaviorOnMxFailure,omitempty" tf:"behavior_on_mx_failure,omitempty"`
 
 	// Verified domain name or email identity to generate DKIM tokens for.
@@ -36,13 +36,13 @@ type DomainMailFromInitParameters struct {
 
 type DomainMailFromObservation struct {
 
-	// The action that you want Amazon SES to take if it cannot successfully read the required MX record when you send an email. Defaults to UseDefaultValue. See the SES API documentation for more information.
+	// Action that you want Amazon SES to take if it cannot successfully read the required MX record when you send an email. Defaults to UseDefaultValue. See the SES API documentation for more information.
 	BehaviorOnMxFailure *string `json:"behaviorOnMxFailure,omitempty" tf:"behavior_on_mx_failure,omitempty"`
 
 	// Verified domain name or email identity to generate DKIM tokens for.
 	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
 
-	// The domain name.
+	// Domain name.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Subdomain (of above domain) which is to be used as MAIL FROM address
@@ -55,7 +55,7 @@ type DomainMailFromObservation struct {
 
 type DomainMailFromParameters struct {
 
-	// The action that you want Amazon SES to take if it cannot successfully read the required MX record when you send an email. Defaults to UseDefaultValue. See the SES API documentation for more information.
+	// Action that you want Amazon SES to take if it cannot successfully read the required MX record when you send an email. Defaults to UseDefaultValue. See the SES API documentation for more information.
 	// +kubebuilder:validation:Optional
 	BehaviorOnMxFailure *string `json:"behaviorOnMxFailure,omitempty" tf:"behavior_on_mx_failure,omitempty"`
 

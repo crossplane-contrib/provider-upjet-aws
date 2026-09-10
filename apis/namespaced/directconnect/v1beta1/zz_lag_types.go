@@ -73,6 +73,9 @@ type LagObservation struct {
 	// The name of the service provider associated with the LAG.
 	ProviderName *string `json:"providerName,omitempty" tf:"provider_name,omitempty"`
 
+	// Rate limiter status for the LAG. See rate_limiter_status Block below.
+	RateLimiterStatus []LagRateLimiterStatusObservation `json:"rateLimiterStatus,omitempty" tf:"rate_limiter_status,omitempty"`
+
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
@@ -121,6 +124,27 @@ type LagParameters struct {
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type LagRateLimiterStatusInitParameters struct {
+}
+
+type LagRateLimiterStatusObservation struct {
+
+	// Number of rate limiters currently in use.
+	InUse *float64 `json:"inUse,omitempty" tf:"in_use,omitempty"`
+
+	// Maximum number of rate limiters allowed on the LAG.
+	MaxAllowed *float64 `json:"maxAllowed,omitempty" tf:"max_allowed,omitempty"`
+
+	// Number of rate limiters remaining (available).
+	Remaining *float64 `json:"remaining,omitempty" tf:"remaining,omitempty"`
+
+	// Total bandwidth allocated across all rate limiters.
+	TotalBandwidth *string `json:"totalBandwidth,omitempty" tf:"total_bandwidth,omitempty"`
+}
+
+type LagRateLimiterStatusParameters struct {
 }
 
 // LagSpec defines the desired state of Lag

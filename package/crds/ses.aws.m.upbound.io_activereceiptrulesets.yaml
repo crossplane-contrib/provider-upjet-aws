@@ -65,7 +65,7 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   ruleSetName:
-                    description: The name of the rule set
+                    description: Name of the rule set
                     type: string
                 required:
                 - region
@@ -84,7 +84,7 @@ spec:
                   autoscaler.
                 properties:
                   ruleSetName:
-                    description: The name of the rule set
+                    description: Name of the rule set
                     type: string
                 type: object
               managementPolicies:
@@ -157,10 +157,10 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The SES receipt rule set ARN.
+                    description: SES receipt rule set ARN.
                     type: string
                   id:
-                    description: The SES receipt rule set name.
+                    description: SES receipt rule set name.
                     type: string
                   region:
                     description: |-
@@ -168,7 +168,7 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   ruleSetName:
-                    description: The name of the rule set
+                    description: Name of the rule set
                     type: string
                 type: object
               conditions:

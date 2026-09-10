@@ -96,7 +96,7 @@ type CapacityReservationConfigInitParameters struct {
 	// Capacity reservation preference. Valid value is capacity-reservations-only. When set to capacity-reservations-only, SageMaker AI launches instances only into an ML capacity reservation; if no capacity is available, the instances fail to launch.
 	CapacityReservationPreference *string `json:"capacityReservationPreference,omitempty" tf:"capacity_reservation_preference,omitempty"`
 
-	// The Amazon Resource Name (ARN) that uniquely identifies the ML capacity reservation that SageMaker AI applies when it deploys the endpoint.
+	// ARN that uniquely identifies the ML capacity reservation that SageMaker AI applies when it deploys the endpoint.
 	MLReservationArn *string `json:"mlReservationArn,omitempty" tf:"ml_reservation_arn,omitempty"`
 }
 
@@ -105,7 +105,7 @@ type CapacityReservationConfigObservation struct {
 	// Capacity reservation preference. Valid value is capacity-reservations-only. When set to capacity-reservations-only, SageMaker AI launches instances only into an ML capacity reservation; if no capacity is available, the instances fail to launch.
 	CapacityReservationPreference *string `json:"capacityReservationPreference,omitempty" tf:"capacity_reservation_preference,omitempty"`
 
-	// The Amazon Resource Name (ARN) that uniquely identifies the ML capacity reservation that SageMaker AI applies when it deploys the endpoint.
+	// ARN that uniquely identifies the ML capacity reservation that SageMaker AI applies when it deploys the endpoint.
 	MLReservationArn *string `json:"mlReservationArn,omitempty" tf:"ml_reservation_arn,omitempty"`
 }
 
@@ -115,7 +115,7 @@ type CapacityReservationConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	CapacityReservationPreference *string `json:"capacityReservationPreference,omitempty" tf:"capacity_reservation_preference,omitempty"`
 
-	// The Amazon Resource Name (ARN) that uniquely identifies the ML capacity reservation that SageMaker AI applies when it deploys the endpoint.
+	// ARN that uniquely identifies the ML capacity reservation that SageMaker AI applies when it deploys the endpoint.
 	// +kubebuilder:validation:Optional
 	MLReservationArn *string `json:"mlReservationArn,omitempty" tf:"ml_reservation_arn,omitempty"`
 }
@@ -760,7 +760,7 @@ type ShadowProductionVariantsCapacityReservationConfigInitParameters struct {
 	// Capacity reservation preference. Valid value is capacity-reservations-only. When set to capacity-reservations-only, SageMaker AI launches instances only into an ML capacity reservation; if no capacity is available, the instances fail to launch.
 	CapacityReservationPreference *string `json:"capacityReservationPreference,omitempty" tf:"capacity_reservation_preference,omitempty"`
 
-	// The Amazon Resource Name (ARN) that uniquely identifies the ML capacity reservation that SageMaker AI applies when it deploys the endpoint.
+	// ARN that uniquely identifies the ML capacity reservation that SageMaker AI applies when it deploys the endpoint.
 	MLReservationArn *string `json:"mlReservationArn,omitempty" tf:"ml_reservation_arn,omitempty"`
 }
 
@@ -769,7 +769,7 @@ type ShadowProductionVariantsCapacityReservationConfigObservation struct {
 	// Capacity reservation preference. Valid value is capacity-reservations-only. When set to capacity-reservations-only, SageMaker AI launches instances only into an ML capacity reservation; if no capacity is available, the instances fail to launch.
 	CapacityReservationPreference *string `json:"capacityReservationPreference,omitempty" tf:"capacity_reservation_preference,omitempty"`
 
-	// The Amazon Resource Name (ARN) that uniquely identifies the ML capacity reservation that SageMaker AI applies when it deploys the endpoint.
+	// ARN that uniquely identifies the ML capacity reservation that SageMaker AI applies when it deploys the endpoint.
 	MLReservationArn *string `json:"mlReservationArn,omitempty" tf:"ml_reservation_arn,omitempty"`
 }
 
@@ -779,7 +779,7 @@ type ShadowProductionVariantsCapacityReservationConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	CapacityReservationPreference *string `json:"capacityReservationPreference,omitempty" tf:"capacity_reservation_preference,omitempty"`
 
-	// The Amazon Resource Name (ARN) that uniquely identifies the ML capacity reservation that SageMaker AI applies when it deploys the endpoint.
+	// ARN that uniquely identifies the ML capacity reservation that SageMaker AI applies when it deploys the endpoint.
 	// +kubebuilder:validation:Optional
 	MLReservationArn *string `json:"mlReservationArn,omitempty" tf:"ml_reservation_arn,omitempty"`
 }

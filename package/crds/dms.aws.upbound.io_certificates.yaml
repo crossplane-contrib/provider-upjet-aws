@@ -275,7 +275,7 @@ spec:
               atProvider:
                 properties:
                   certificateArn:
-                    description: The Amazon Resource Name (ARN) for the certificate.
+                    description: ARN for the certificate.
                     type: string
                   id:
                     type: string

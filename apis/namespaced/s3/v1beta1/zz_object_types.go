@@ -15,21 +15,21 @@ import (
 
 type DefaultTagsInitParameters struct {
 
-	// Key-value map of resource tags.
+	// Map of tags to override the provider-level default_tags. Must be an empty map to suppress all provider-level default_tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type DefaultTagsObservation struct {
 
-	// Key-value map of resource tags.
+	// Map of tags to override the provider-level default_tags. Must be an empty map to suppress all provider-level default_tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type DefaultTagsParameters struct {
 
-	// Key-value map of resource tags.
+	// Map of tags to override the provider-level default_tags. Must be an empty map to suppress all provider-level default_tags.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -59,7 +59,7 @@ type ObjectInitParameters struct {
 	// Caching behavior along the request/reply chain Read w3c cache_control for further details.
 	CacheControl *string `json:"cacheControl,omitempty" tf:"cache_control,omitempty"`
 
-	// Indicates the algorithm used to create the checksum for the object. If a value is specified and the object is encrypted with KMS, you must have permission to use the kms:Decrypt action. Valid values: CRC32, CRC32C, CRC64NVME, SHA1, SHA256.
+	// Algorithm used to create the checksum for the object. If a value is specified and the object is encrypted with KMS, you must have permission to use the kms:Decrypt action. Valid values: CRC32, CRC32C, CRC64NVME, SHA1, SHA256.
 	ChecksumAlgorithm *string `json:"checksumAlgorithm,omitempty" tf:"checksum_algorithm,omitempty"`
 
 	// Literal string value to use as the object content, which will be uploaded as UTF-8-encoded text.
@@ -114,7 +114,7 @@ type ObjectInitParameters struct {
 	// Date and time, in RFC3339 format, when this object's object lock will expire.
 	ObjectLockRetainUntilDate *string `json:"objectLockRetainUntilDate,omitempty" tf:"object_lock_retain_until_date,omitempty"`
 
-	// Override provider-level configuration options. See Override Provider below for more details.
+	// Override provider-level configuration options. See override_provider Block below for more details.
 	OverrideProvider *OverrideProviderInitParameters `json:"overrideProvider,omitempty" tf:"override_provider,omitempty"`
 
 	// Server-side encryption of the object in S3. Valid values are "AES256", "aws:kms", "aws:kms:dsse", and "aws:fsx".
@@ -154,22 +154,22 @@ type ObjectObservation struct {
 	// Caching behavior along the request/reply chain Read w3c cache_control for further details.
 	CacheControl *string `json:"cacheControl,omitempty" tf:"cache_control,omitempty"`
 
-	// Indicates the algorithm used to create the checksum for the object. If a value is specified and the object is encrypted with KMS, you must have permission to use the kms:Decrypt action. Valid values: CRC32, CRC32C, CRC64NVME, SHA1, SHA256.
+	// Algorithm used to create the checksum for the object. If a value is specified and the object is encrypted with KMS, you must have permission to use the kms:Decrypt action. Valid values: CRC32, CRC32C, CRC64NVME, SHA1, SHA256.
 	ChecksumAlgorithm *string `json:"checksumAlgorithm,omitempty" tf:"checksum_algorithm,omitempty"`
 
-	// The base64-encoded, 32-bit CRC32 checksum of the object.
+	// Base64-encoded, 32-bit CRC32 checksum of the object.
 	ChecksumCrc32 *string `json:"checksumCrc32,omitempty" tf:"checksum_crc32,omitempty"`
 
-	// The base64-encoded, 32-bit CRC32C checksum of the object.
+	// Base64-encoded, 32-bit CRC32C checksum of the object.
 	ChecksumCrc32C *string `json:"checksumCrc32C,omitempty" tf:"checksum_crc32c,omitempty"`
 
-	// The base64-encoded, 64-bit CRC64NVME checksum of the object.
+	// Base64-encoded, 64-bit CRC64NVME checksum of the object.
 	ChecksumCrc64Nvme *string `json:"checksumCrc64Nvme,omitempty" tf:"checksum_crc64nvme,omitempty"`
 
-	// The base64-encoded, 160-bit SHA-1 digest of the object.
+	// Base64-encoded, 160-bit SHA-1 digest of the object.
 	ChecksumSha1 *string `json:"checksumSha1,omitempty" tf:"checksum_sha1,omitempty"`
 
-	// The base64-encoded, 256-bit SHA-256 digest of the object.
+	// Base64-encoded, 256-bit SHA-256 digest of the object.
 	ChecksumSha256 *string `json:"checksumSha256,omitempty" tf:"checksum_sha256,omitempty"`
 
 	// Literal string value to use as the object content, which will be uploaded as UTF-8-encoded text.
@@ -217,7 +217,7 @@ type ObjectObservation struct {
 	// Date and time, in RFC3339 format, when this object's object lock will expire.
 	ObjectLockRetainUntilDate *string `json:"objectLockRetainUntilDate,omitempty" tf:"object_lock_retain_until_date,omitempty"`
 
-	// Override provider-level configuration options. See Override Provider below for more details.
+	// Override provider-level configuration options. See override_provider Block below for more details.
 	OverrideProvider *OverrideProviderObservation `json:"overrideProvider,omitempty" tf:"override_provider,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -279,7 +279,7 @@ type ObjectParameters struct {
 	// +kubebuilder:validation:Optional
 	CacheControl *string `json:"cacheControl,omitempty" tf:"cache_control,omitempty"`
 
-	// Indicates the algorithm used to create the checksum for the object. If a value is specified and the object is encrypted with KMS, you must have permission to use the kms:Decrypt action. Valid values: CRC32, CRC32C, CRC64NVME, SHA1, SHA256.
+	// Algorithm used to create the checksum for the object. If a value is specified and the object is encrypted with KMS, you must have permission to use the kms:Decrypt action. Valid values: CRC32, CRC32C, CRC64NVME, SHA1, SHA256.
 	// +kubebuilder:validation:Optional
 	ChecksumAlgorithm *string `json:"checksumAlgorithm,omitempty" tf:"checksum_algorithm,omitempty"`
 
@@ -349,7 +349,7 @@ type ObjectParameters struct {
 	// +kubebuilder:validation:Optional
 	ObjectLockRetainUntilDate *string `json:"objectLockRetainUntilDate,omitempty" tf:"object_lock_retain_until_date,omitempty"`
 
-	// Override provider-level configuration options. See Override Provider below for more details.
+	// Override provider-level configuration options. See override_provider Block below for more details.
 	// +kubebuilder:validation:Optional
 	OverrideProvider *OverrideProviderParameters `json:"overrideProvider,omitempty" tf:"override_provider,omitempty"`
 
@@ -386,19 +386,19 @@ type ObjectParameters struct {
 
 type OverrideProviderInitParameters struct {
 
-	// Override the provider default_tags configuration block.
+	// Override the provider default_tags configuration block. See default_tags Block below for more details.
 	DefaultTags *DefaultTagsInitParameters `json:"defaultTags,omitempty" tf:"default_tags,omitempty"`
 }
 
 type OverrideProviderObservation struct {
 
-	// Override the provider default_tags configuration block.
+	// Override the provider default_tags configuration block. See default_tags Block below for more details.
 	DefaultTags *DefaultTagsObservation `json:"defaultTags,omitempty" tf:"default_tags,omitempty"`
 }
 
 type OverrideProviderParameters struct {
 
-	// Override the provider default_tags configuration block.
+	// Override the provider default_tags configuration block. See default_tags Block below for more details.
 	// +kubebuilder:validation:Optional
 	DefaultTags *DefaultTagsParameters `json:"defaultTags,omitempty" tf:"default_tags,omitempty"`
 }

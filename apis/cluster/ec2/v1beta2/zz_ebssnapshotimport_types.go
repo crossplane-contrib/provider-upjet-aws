@@ -156,7 +156,7 @@ type EBSSnapshotImportInitParameters struct {
 
 type EBSSnapshotImportObservation struct {
 
-	// Amazon Resource Name (ARN) of the EBS Snapshot.
+	// ARN of the EBS Snapshot.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The client-specific data. Detailed below.
@@ -180,7 +180,7 @@ type EBSSnapshotImportObservation struct {
 	// An identifier for the symmetric KMS key to use when creating the encrypted snapshot. This parameter is only required if you want to use a non-default KMS key; if this parameter is not specified, the default KMS key for EBS is used. If a KmsKeyId is specified, the Encrypted flag must also be set.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
-	// Amazon Resource Name (ARN) of the EBS Snapshot.
+	// ARN of the EBS Snapshot.
 	OutpostArn *string `json:"outpostArn,omitempty" tf:"outpost_arn,omitempty"`
 
 	// Value from an Amazon-maintained list (amazon, aws-marketplace, microsoft) of snapshot owners.

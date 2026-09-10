@@ -287,7 +287,7 @@ spec:
                     type: string
                   encryptionKey:
                     description: |-
-                      AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting
+                      KMS customer master key (CMK) to be used for encrypting
                       the build project's build output artifacts.
                     type: string
                   environment:
@@ -648,7 +648,7 @@ spec:
                     type: array
                   serviceRole:
                     description: |-
-                      Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that
+                      ARN of the AWS Identity and Access Management (IAM) role that
                       enables AWS CodeBuild to interact with dependent AWS services on behalf of the AWS account.
                     type: string
                   serviceRoleRef:
@@ -1291,7 +1291,7 @@ spec:
                     type: string
                   encryptionKey:
                     description: |-
-                      AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting
+                      KMS customer master key (CMK) to be used for encrypting
                       the build project's build output artifacts.
                     type: string
                   environment:
@@ -1647,7 +1647,7 @@ spec:
                     type: array
                   serviceRole:
                     description: |-
-                      Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that
+                      ARN of the AWS Identity and Access Management (IAM) role that
                       enables AWS CodeBuild to interact with dependent AWS services on behalf of the AWS account.
                     type: string
                   serviceRoleRef:
@@ -2311,7 +2311,7 @@ spec:
                     type: string
                   encryptionKey:
                     description: |-
-                      AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting
+                      KMS customer master key (CMK) to be used for encrypting
                       the build project's build output artifacts.
                     type: string
                   environment:
@@ -2678,7 +2678,7 @@ spec:
                     type: array
                   serviceRole:
                     description: |-
-                      Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that
+                      ARN of the AWS Identity and Access Management (IAM) role that
                       enables AWS CodeBuild to interact with dependent AWS services on behalf of the AWS account.
                     type: string
                   source:

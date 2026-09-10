@@ -48,7 +48,7 @@ type DestinationInitParameters struct {
 
 type DestinationObservation struct {
 
-	// The Amazon Resource Name (ARN) specifying the log destination.
+	// ARN specifying the log destination.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`

@@ -299,7 +299,7 @@ type ClusterMasterUserSecretObservation struct {
 	// Amazon Web Services KMS key identifier that is used to encrypt the secret.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
-	// Amazon Resource Name (ARN) of the secret.
+	// ARN of the secret.
 	SecretArn *string `json:"secretArn,omitempty" tf:"secret_arn,omitempty"`
 
 	// Status of the secret. Valid Values: creating | active | rotating | impaired.
@@ -320,7 +320,7 @@ type ClusterObservation struct {
 	// Specifies whether any cluster modifications are applied immediately, or during the next maintenance window. Default is false. See Amazon RDS Documentation for more information.
 	ApplyImmediately *bool `json:"applyImmediately,omitempty" tf:"apply_immediately,omitempty"`
 
-	// Amazon Resource Name (ARN) of cluster
+	// ARN of cluster
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Whether to apply minor engine upgrades automatically to the DB cluster during the maintenance window. Defaults to true.

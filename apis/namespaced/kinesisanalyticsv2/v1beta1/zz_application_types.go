@@ -624,7 +624,7 @@ type InputInitParameters struct {
 	// If the streaming source is a Kinesis Data Firehose delivery stream, identifies the delivery stream's ARN.
 	KinesisFirehoseInput *KinesisFirehoseInputInitParameters `json:"kinesisFirehoseInput,omitempty" tf:"kinesis_firehose_input,omitempty"`
 
-	// If the streaming source is a Kinesis data stream, identifies the stream's Amazon Resource Name (ARN).
+	// If the streaming source is a Kinesis data stream, identifies the stream's ARN.
 	KinesisStreamsInput *KinesisStreamsInputInitParameters `json:"kinesisStreamsInput,omitempty" tf:"kinesis_streams_input,omitempty"`
 
 	// The name prefix to use when creating an in-application stream.
@@ -672,7 +672,7 @@ type InputObservation struct {
 	// If the streaming source is a Kinesis Data Firehose delivery stream, identifies the delivery stream's ARN.
 	KinesisFirehoseInput *KinesisFirehoseInputObservation `json:"kinesisFirehoseInput,omitempty" tf:"kinesis_firehose_input,omitempty"`
 
-	// If the streaming source is a Kinesis data stream, identifies the stream's Amazon Resource Name (ARN).
+	// If the streaming source is a Kinesis data stream, identifies the stream's ARN.
 	KinesisStreamsInput *KinesisStreamsInputObservation `json:"kinesisStreamsInput,omitempty" tf:"kinesis_streams_input,omitempty"`
 
 	// The name prefix to use when creating an in-application stream.
@@ -721,7 +721,7 @@ type InputParameters struct {
 	// +kubebuilder:validation:Optional
 	KinesisFirehoseInput *KinesisFirehoseInputParameters `json:"kinesisFirehoseInput,omitempty" tf:"kinesis_firehose_input,omitempty"`
 
-	// If the streaming source is a Kinesis data stream, identifies the stream's Amazon Resource Name (ARN).
+	// If the streaming source is a Kinesis data stream, identifies the stream's ARN.
 	// +kubebuilder:validation:Optional
 	KinesisStreamsInput *KinesisStreamsInputParameters `json:"kinesisStreamsInput,omitempty" tf:"kinesis_streams_input,omitempty"`
 

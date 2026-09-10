@@ -157,7 +157,7 @@ type CrossRegionCopyInitParameters struct {
 	// Specifies the retention rule for cross-Region snapshot copies. See the retain_rule block. Max of 1 per action.
 	RetainRule *RetainRuleInitParameters `json:"retainRule,omitempty" tf:"retain_rule,omitempty"`
 
-	// The target Region or the Amazon Resource Name (ARN) of the target Outpost for the snapshot copies.
+	// Target Region or the ARN of the target Outpost for the snapshot copies.
 	Target *string `json:"target,omitempty" tf:"target,omitempty"`
 }
 
@@ -169,7 +169,7 @@ type CrossRegionCopyObservation struct {
 	// Specifies the retention rule for cross-Region snapshot copies. See the retain_rule block. Max of 1 per action.
 	RetainRule *RetainRuleObservation `json:"retainRule,omitempty" tf:"retain_rule,omitempty"`
 
-	// The target Region or the Amazon Resource Name (ARN) of the target Outpost for the snapshot copies.
+	// Target Region or the ARN of the target Outpost for the snapshot copies.
 	Target *string `json:"target,omitempty" tf:"target,omitempty"`
 }
 
@@ -183,14 +183,14 @@ type CrossRegionCopyParameters struct {
 	// +kubebuilder:validation:Optional
 	RetainRule *RetainRuleParameters `json:"retainRule,omitempty" tf:"retain_rule,omitempty"`
 
-	// The target Region or the Amazon Resource Name (ARN) of the target Outpost for the snapshot copies.
+	// Target Region or the ARN of the target Outpost for the snapshot copies.
 	// +kubebuilder:validation:Optional
 	Target *string `json:"target" tf:"target,omitempty"`
 }
 
 type CrossRegionCopyRuleInitParameters struct {
 
-	// The Amazon Resource Name (ARN) of the AWS KMS key to use for EBS encryption. If this parameter is not specified, the default KMS key for the account is used.
+	// ARN of the AWS KMS key to use for EBS encryption. If this parameter is not specified, the default KMS key for the account is used.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kms/v1beta1.Key
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	CmkArn *string `json:"cmkArn,omitempty" tf:"cmk_arn,omitempty"`
@@ -215,16 +215,16 @@ type CrossRegionCopyRuleInitParameters struct {
 	// Specifies the retention rule for cross-Region snapshot copies. See the retain_rule block. Max of 1 per action.
 	RetainRule *CrossRegionCopyRuleRetainRuleInitParameters `json:"retainRule,omitempty" tf:"retain_rule,omitempty"`
 
-	// The target Region or the Amazon Resource Name (ARN) of the target Outpost for the snapshot copies.
+	// Target Region or the ARN of the target Outpost for the snapshot copies.
 	Target *string `json:"target,omitempty" tf:"target,omitempty"`
 
-	// Use only for DLM policies of policy_type=IMAGE_MANAGEMENT. The target Region or the Amazon Resource Name (ARN) of the target Outpost for the snapshot copies.
+	// Use only for DLM policies of policy_type=IMAGE_MANAGEMENT. The target Region or the ARN of the target Outpost for the snapshot copies.
 	TargetRegion *string `json:"targetRegion,omitempty" tf:"target_region,omitempty"`
 }
 
 type CrossRegionCopyRuleObservation struct {
 
-	// The Amazon Resource Name (ARN) of the AWS KMS key to use for EBS encryption. If this parameter is not specified, the default KMS key for the account is used.
+	// ARN of the AWS KMS key to use for EBS encryption. If this parameter is not specified, the default KMS key for the account is used.
 	CmkArn *string `json:"cmkArn,omitempty" tf:"cmk_arn,omitempty"`
 
 	// Indicates whether the policy should copy tags from the source resource to the snapshot or AMI. Default value is false.
@@ -239,16 +239,16 @@ type CrossRegionCopyRuleObservation struct {
 	// Specifies the retention rule for cross-Region snapshot copies. See the retain_rule block. Max of 1 per action.
 	RetainRule *CrossRegionCopyRuleRetainRuleObservation `json:"retainRule,omitempty" tf:"retain_rule,omitempty"`
 
-	// The target Region or the Amazon Resource Name (ARN) of the target Outpost for the snapshot copies.
+	// Target Region or the ARN of the target Outpost for the snapshot copies.
 	Target *string `json:"target,omitempty" tf:"target,omitempty"`
 
-	// Use only for DLM policies of policy_type=IMAGE_MANAGEMENT. The target Region or the Amazon Resource Name (ARN) of the target Outpost for the snapshot copies.
+	// Use only for DLM policies of policy_type=IMAGE_MANAGEMENT. The target Region or the ARN of the target Outpost for the snapshot copies.
 	TargetRegion *string `json:"targetRegion,omitempty" tf:"target_region,omitempty"`
 }
 
 type CrossRegionCopyRuleParameters struct {
 
-	// The Amazon Resource Name (ARN) of the AWS KMS key to use for EBS encryption. If this parameter is not specified, the default KMS key for the account is used.
+	// ARN of the AWS KMS key to use for EBS encryption. If this parameter is not specified, the default KMS key for the account is used.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kms/v1beta1.Key
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -278,11 +278,11 @@ type CrossRegionCopyRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	RetainRule *CrossRegionCopyRuleRetainRuleParameters `json:"retainRule,omitempty" tf:"retain_rule,omitempty"`
 
-	// The target Region or the Amazon Resource Name (ARN) of the target Outpost for the snapshot copies.
+	// Target Region or the ARN of the target Outpost for the snapshot copies.
 	// +kubebuilder:validation:Optional
 	Target *string `json:"target,omitempty" tf:"target,omitempty"`
 
-	// Use only for DLM policies of policy_type=IMAGE_MANAGEMENT. The target Region or the Amazon Resource Name (ARN) of the target Outpost for the snapshot copies.
+	// Use only for DLM policies of policy_type=IMAGE_MANAGEMENT. The target Region or the ARN of the target Outpost for the snapshot copies.
 	// +kubebuilder:validation:Optional
 	TargetRegion *string `json:"targetRegion,omitempty" tf:"target_region,omitempty"`
 }
@@ -347,7 +347,7 @@ type DeprecateRuleParameters struct {
 
 type EncryptionConfigurationInitParameters struct {
 
-	// The Amazon Resource Name (ARN) of the AWS KMS key to use for EBS encryption. If this parameter is not specified, the default KMS key for the account is used.
+	// ARN of the AWS KMS key to use for EBS encryption. If this parameter is not specified, the default KMS key for the account is used.
 	CmkArn *string `json:"cmkArn,omitempty" tf:"cmk_arn,omitempty"`
 
 	// To encrypt a copy of an unencrypted snapshot when encryption by default is not enabled, enable encryption using this parameter. Copies of encrypted snapshots are encrypted, even if this parameter is false or when encryption by default is not enabled.
@@ -356,7 +356,7 @@ type EncryptionConfigurationInitParameters struct {
 
 type EncryptionConfigurationObservation struct {
 
-	// The Amazon Resource Name (ARN) of the AWS KMS key to use for EBS encryption. If this parameter is not specified, the default KMS key for the account is used.
+	// ARN of the AWS KMS key to use for EBS encryption. If this parameter is not specified, the default KMS key for the account is used.
 	CmkArn *string `json:"cmkArn,omitempty" tf:"cmk_arn,omitempty"`
 
 	// To encrypt a copy of an unencrypted snapshot when encryption by default is not enabled, enable encryption using this parameter. Copies of encrypted snapshots are encrypted, even if this parameter is false or when encryption by default is not enabled.
@@ -365,7 +365,7 @@ type EncryptionConfigurationObservation struct {
 
 type EncryptionConfigurationParameters struct {
 
-	// The Amazon Resource Name (ARN) of the AWS KMS key to use for EBS encryption. If this parameter is not specified, the default KMS key for the account is used.
+	// ARN of the AWS KMS key to use for EBS encryption. If this parameter is not specified, the default KMS key for the account is used.
 	// +kubebuilder:validation:Optional
 	CmkArn *string `json:"cmkArn,omitempty" tf:"cmk_arn,omitempty"`
 
@@ -531,7 +531,7 @@ type LifecyclePolicyInitParameters struct {
 
 type LifecyclePolicyObservation struct {
 
-	// Amazon Resource Name (ARN) of the DLM Lifecycle Policy.
+	// ARN of the DLM Lifecycle Policy.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Specify the type of default policy to create. valid values are VOLUME or INSTANCE.
@@ -817,6 +817,10 @@ type PolicyDetailsParametersInitParameters struct {
 	// Indicates whether to exclude the root volume from snapshots created using CreateSnapshots. The default is false.
 	ExcludeBootVolume *bool `json:"excludeBootVolume,omitempty" tf:"exclude_boot_volume,omitempty"`
 
+	// Map specifies whether to exclude volumes that have specific tags.
+	// +mapType=granular
+	ExcludeDataVolumeTags map[string]*string `json:"excludeDataVolumeTags,omitempty" tf:"exclude_data_volume_tags,omitempty"`
+
 	// Applies to AMI lifecycle policies only. Indicates whether targeted instances are rebooted when the lifecycle policy runs. true indicates that targeted instances are not rebooted when the policy runs. false indicates that target instances are rebooted when the policy runs. The default is true (instances are not rebooted).
 	NoReboot *bool `json:"noReboot,omitempty" tf:"no_reboot,omitempty"`
 }
@@ -825,6 +829,10 @@ type PolicyDetailsParametersObservation struct {
 
 	// Indicates whether to exclude the root volume from snapshots created using CreateSnapshots. The default is false.
 	ExcludeBootVolume *bool `json:"excludeBootVolume,omitempty" tf:"exclude_boot_volume,omitempty"`
+
+	// Map specifies whether to exclude volumes that have specific tags.
+	// +mapType=granular
+	ExcludeDataVolumeTags map[string]*string `json:"excludeDataVolumeTags,omitempty" tf:"exclude_data_volume_tags,omitempty"`
 
 	// Applies to AMI lifecycle policies only. Indicates whether targeted instances are rebooted when the lifecycle policy runs. true indicates that targeted instances are not rebooted when the policy runs. false indicates that target instances are rebooted when the policy runs. The default is true (instances are not rebooted).
 	NoReboot *bool `json:"noReboot,omitempty" tf:"no_reboot,omitempty"`
@@ -835,6 +843,11 @@ type PolicyDetailsParametersParameters struct {
 	// Indicates whether to exclude the root volume from snapshots created using CreateSnapshots. The default is false.
 	// +kubebuilder:validation:Optional
 	ExcludeBootVolume *bool `json:"excludeBootVolume,omitempty" tf:"exclude_boot_volume,omitempty"`
+
+	// Map specifies whether to exclude volumes that have specific tags.
+	// +kubebuilder:validation:Optional
+	// +mapType=granular
+	ExcludeDataVolumeTags map[string]*string `json:"excludeDataVolumeTags,omitempty" tf:"exclude_data_volume_tags,omitempty"`
 
 	// Applies to AMI lifecycle policies only. Indicates whether targeted instances are rebooted when the lifecycle policy runs. true indicates that targeted instances are not rebooted when the policy runs. false indicates that target instances are rebooted when the policy runs. The default is true (instances are not rebooted).
 	// +kubebuilder:validation:Optional

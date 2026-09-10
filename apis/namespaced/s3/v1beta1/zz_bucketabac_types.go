@@ -15,25 +15,19 @@ import (
 
 type AbacStatusInitParameters struct {
 
-	// ABAC status of the general purpose bucket.
-	// Valid values are Enabled and Disabled.
-	// By default, ABAC is disabled for all Amazon S3 general purpose buckets.
+	// ABAC status of the general purpose bucket. Valid values are Enabled and Disabled. By default, ABAC is disabled for all Amazon S3 general purpose buckets.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
 
 type AbacStatusObservation struct {
 
-	// ABAC status of the general purpose bucket.
-	// Valid values are Enabled and Disabled.
-	// By default, ABAC is disabled for all Amazon S3 general purpose buckets.
+	// ABAC status of the general purpose bucket. Valid values are Enabled and Disabled. By default, ABAC is disabled for all Amazon S3 general purpose buckets.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
 
 type AbacStatusParameters struct {
 
-	// ABAC status of the general purpose bucket.
-	// Valid values are Enabled and Disabled.
-	// By default, ABAC is disabled for all Amazon S3 general purpose buckets.
+	// ABAC status of the general purpose bucket. Valid values are Enabled and Disabled. By default, ABAC is disabled for all Amazon S3 general purpose buckets.
 	// +kubebuilder:validation:Optional
 	Status *string `json:"status" tf:"status,omitempty"`
 }

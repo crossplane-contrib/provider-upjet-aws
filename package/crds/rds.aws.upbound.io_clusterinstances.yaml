@@ -348,8 +348,8 @@ spec:
                   engineVersion:
                     description: Database engine version. Please note that to upgrade
                       the engine_version of the instance, it must be done on the aws_rds_cluster
-                      engine_version. Trying to upgrade in aws_cluster_instance will
-                      not update the engine_version.
+                      engine_version. Trying to upgrade in aws_rds_cluster_instance
+                      will not update the engine_version.
                     type: string
                   forceDestroy:
                     description: 'Forces an instance to be destroyed when a part of
@@ -861,8 +861,8 @@ spec:
                   engineVersion:
                     description: Database engine version. Please note that to upgrade
                       the engine_version of the instance, it must be done on the aws_rds_cluster
-                      engine_version. Trying to upgrade in aws_cluster_instance will
-                      not update the engine_version.
+                      engine_version. Trying to upgrade in aws_rds_cluster_instance
+                      will not update the engine_version.
                     type: string
                   forceDestroy:
                     description: 'Forces an instance to be destroyed when a part of
@@ -1185,7 +1185,7 @@ spec:
                       Default isfalse.
                     type: boolean
                   arn:
-                    description: Amazon Resource Name (ARN) of cluster instance
+                    description: ARN of cluster instance
                     type: string
                   autoMinorVersionUpgrade:
                     description: Indicates that minor engine upgrades will be applied
@@ -1239,8 +1239,8 @@ spec:
                   engineVersion:
                     description: Database engine version. Please note that to upgrade
                       the engine_version of the instance, it must be done on the aws_rds_cluster
-                      engine_version. Trying to upgrade in aws_cluster_instance will
-                      not update the engine_version.
+                      engine_version. Trying to upgrade in aws_rds_cluster_instance
+                      will not update the engine_version.
                     type: string
                   engineVersionActual:
                     description: Database engine version

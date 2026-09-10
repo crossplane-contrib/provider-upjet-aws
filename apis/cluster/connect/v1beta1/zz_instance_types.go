@@ -62,7 +62,7 @@ type InstanceInitParameters struct {
 
 type InstanceObservation struct {
 
-	// Amazon Resource Name (ARN) of the instance.
+	// ARN of the instance.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Specifies whether auto resolve best voices is enabled. Defaults to true.

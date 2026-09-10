@@ -27,7 +27,7 @@ type RouteResponseInitParameters struct {
 	// +kubebuilder:validation:Optional
 	APIIDSelector *v2.Selector `json:"apiIdSelector,omitempty" tf:"-"`
 
-	// The model selection expression for the route response.
+	// Model selection expression for the route response.
 	ModelSelectionExpression *string `json:"modelSelectionExpression,omitempty" tf:"model_selection_expression,omitempty"`
 
 	// Response models for the route response.
@@ -58,7 +58,7 @@ type RouteResponseObservation struct {
 	// Route response identifier.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The model selection expression for the route response.
+	// Model selection expression for the route response.
 	ModelSelectionExpression *string `json:"modelSelectionExpression,omitempty" tf:"model_selection_expression,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -91,7 +91,7 @@ type RouteResponseParameters struct {
 	// +kubebuilder:validation:Optional
 	APIIDSelector *v2.Selector `json:"apiIdSelector,omitempty" tf:"-"`
 
-	// The model selection expression for the route response.
+	// Model selection expression for the route response.
 	// +kubebuilder:validation:Optional
 	ModelSelectionExpression *string `json:"modelSelectionExpression,omitempty" tf:"model_selection_expression,omitempty"`
 

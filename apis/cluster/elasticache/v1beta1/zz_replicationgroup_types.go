@@ -147,6 +147,12 @@ type ReplicationGroupInitParameters struct {
 	// Strategy to use when updating the auth_token. Valid values are SET, ROTATE, and DELETE. Defaults to ROTATE.
 	AuthTokenUpdateStrategy *string `json:"authTokenUpdateStrategy,omitempty" tf:"auth_token_update_strategy,omitempty"`
 
+	// Password used to access a password protected server, whose value will not be stored in state. Can be specified only if transit_encryption_enabled = true. Conflicts with auth_token. Requires auth_token_wo_version.
+	AuthTokenWoSecretRef *v2.SecretKeySelector `json:"authTokenWoSecretRef,omitempty" tf:"-"`
+
+	// Integer that, when changed, triggers a re-send of auth_token_wo to the replication group. Requires auth_token_wo.
+	AuthTokenWoVersion *float64 `json:"authTokenWoVersion,omitempty" tf:"auth_token_wo_version,omitempty"`
+
 	// Specifies whether minor version engine upgrades will be applied automatically to the underlying Cache Cluster instances during the maintenance window.
 	// Only supported for engine type "redis" and if the engine version is 6 or higher.
 	// Defaults to true.
@@ -394,6 +400,9 @@ type ReplicationGroupObservation struct {
 	// Strategy to use when updating the auth_token. Valid values are SET, ROTATE, and DELETE. Defaults to ROTATE.
 	AuthTokenUpdateStrategy *string `json:"authTokenUpdateStrategy,omitempty" tf:"auth_token_update_strategy,omitempty"`
 
+	// Integer that, when changed, triggers a re-send of auth_token_wo to the replication group. Requires auth_token_wo.
+	AuthTokenWoVersion *float64 `json:"authTokenWoVersion,omitempty" tf:"auth_token_wo_version,omitempty"`
+
 	// Specifies whether minor version engine upgrades will be applied automatically to the underlying Cache Cluster instances during the maintenance window.
 	// Only supported for engine type "redis" and if the engine version is 6 or higher.
 	// Defaults to true.
@@ -588,6 +597,14 @@ type ReplicationGroupParameters struct {
 	// Strategy to use when updating the auth_token. Valid values are SET, ROTATE, and DELETE. Defaults to ROTATE.
 	// +kubebuilder:validation:Optional
 	AuthTokenUpdateStrategy *string `json:"authTokenUpdateStrategy,omitempty" tf:"auth_token_update_strategy,omitempty"`
+
+	// Password used to access a password protected server, whose value will not be stored in state. Can be specified only if transit_encryption_enabled = true. Conflicts with auth_token. Requires auth_token_wo_version.
+	// +kubebuilder:validation:Optional
+	AuthTokenWoSecretRef *v2.SecretKeySelector `json:"authTokenWoSecretRef,omitempty" tf:"-"`
+
+	// Integer that, when changed, triggers a re-send of auth_token_wo to the replication group. Requires auth_token_wo.
+	// +kubebuilder:validation:Optional
+	AuthTokenWoVersion *float64 `json:"authTokenWoVersion,omitempty" tf:"auth_token_wo_version,omitempty"`
 
 	// Password used to access a password protected server. Can be specified only if transit_encryption_enabled = true.
 	// If true, the auth token will be auto-generated and stored in the Secret referenced by the authTokenSecretRef field.

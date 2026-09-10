@@ -18,6 +18,9 @@ type ActionInitParameters struct {
 	// A category defines what kind of action can be taken in the stage, and constrains the provider type for the action. Possible values are Approval, Build, Deploy, Invoke, Source and Test.
 	Category *string `json:"category,omitempty" tf:"category,omitempty"`
 
+	// A list of shell commands to run with the compute action.
+	Commands []*string `json:"commands,omitempty" tf:"commands,omitempty"`
+
 	// A map of the action declaration's configuration. Configurations options for action types and providers can be found in the Pipeline Structure Reference and Action Structure Reference documentation. Note: The DetectChanges parameter  in the configuration section causes CodePipeline to automatically start your pipeline upon new commits. Please refer to AWS Documentation for more details: https://docs.aws.amazon.com/codepipeline/latest/userguide/action-reference-CodestarConnectionSource.html#action-reference-CodestarConnectionSource-config.
 	// +mapType=granular
 	Configuration map[string]*string `json:"configuration,omitempty" tf:"configuration,omitempty"`
@@ -33,6 +36,12 @@ type ActionInitParameters struct {
 
 	// A list of artifact names to output. Output artifact names must be unique within a pipeline.
 	OutputArtifacts []*string `json:"outputArtifacts,omitempty" tf:"output_artifacts,omitempty"`
+
+	// A block of output artifacts for the compute action. If the action is not Compute, this argument is ignored.
+	OutputArtifactsForComputeAction []OutputArtifactsForComputeActionInitParameters `json:"outputArtifactsForComputeAction,omitempty" tf:"output_artifacts_for_compute_action,omitempty"`
+
+	// A list of variables that are to be exported from the compute action.
+	OutputVariables []*string `json:"outputVariables,omitempty" tf:"output_variables,omitempty"`
 
 	// The creator of the action being called. Possible values are AWS, Custom and ThirdParty.
 	Owner *string `json:"owner,omitempty" tf:"owner,omitempty"`
@@ -58,6 +67,9 @@ type ActionObservation struct {
 	// A category defines what kind of action can be taken in the stage, and constrains the provider type for the action. Possible values are Approval, Build, Deploy, Invoke, Source and Test.
 	Category *string `json:"category,omitempty" tf:"category,omitempty"`
 
+	// A list of shell commands to run with the compute action.
+	Commands []*string `json:"commands,omitempty" tf:"commands,omitempty"`
+
 	// A map of the action declaration's configuration. Configurations options for action types and providers can be found in the Pipeline Structure Reference and Action Structure Reference documentation. Note: The DetectChanges parameter  in the configuration section causes CodePipeline to automatically start your pipeline upon new commits. Please refer to AWS Documentation for more details: https://docs.aws.amazon.com/codepipeline/latest/userguide/action-reference-CodestarConnectionSource.html#action-reference-CodestarConnectionSource-config.
 	// +mapType=granular
 	Configuration map[string]*string `json:"configuration,omitempty" tf:"configuration,omitempty"`
@@ -73,6 +85,12 @@ type ActionObservation struct {
 
 	// A list of artifact names to output. Output artifact names must be unique within a pipeline.
 	OutputArtifacts []*string `json:"outputArtifacts,omitempty" tf:"output_artifacts,omitempty"`
+
+	// A block of output artifacts for the compute action. If the action is not Compute, this argument is ignored.
+	OutputArtifactsForComputeAction []OutputArtifactsForComputeActionObservation `json:"outputArtifactsForComputeAction,omitempty" tf:"output_artifacts_for_compute_action,omitempty"`
+
+	// A list of variables that are to be exported from the compute action.
+	OutputVariables []*string `json:"outputVariables,omitempty" tf:"output_variables,omitempty"`
 
 	// The creator of the action being called. Possible values are AWS, Custom and ThirdParty.
 	Owner *string `json:"owner,omitempty" tf:"owner,omitempty"`
@@ -102,6 +120,10 @@ type ActionParameters struct {
 	// +kubebuilder:validation:Optional
 	Category *string `json:"category" tf:"category,omitempty"`
 
+	// A list of shell commands to run with the compute action.
+	// +kubebuilder:validation:Optional
+	Commands []*string `json:"commands,omitempty" tf:"commands,omitempty"`
+
 	// A map of the action declaration's configuration. Configurations options for action types and providers can be found in the Pipeline Structure Reference and Action Structure Reference documentation. Note: The DetectChanges parameter  in the configuration section causes CodePipeline to automatically start your pipeline upon new commits. Please refer to AWS Documentation for more details: https://docs.aws.amazon.com/codepipeline/latest/userguide/action-reference-CodestarConnectionSource.html#action-reference-CodestarConnectionSource-config.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
@@ -122,6 +144,14 @@ type ActionParameters struct {
 	// A list of artifact names to output. Output artifact names must be unique within a pipeline.
 	// +kubebuilder:validation:Optional
 	OutputArtifacts []*string `json:"outputArtifacts,omitempty" tf:"output_artifacts,omitempty"`
+
+	// A block of output artifacts for the compute action. If the action is not Compute, this argument is ignored.
+	// +kubebuilder:validation:Optional
+	OutputArtifactsForComputeAction []OutputArtifactsForComputeActionParameters `json:"outputArtifactsForComputeAction,omitempty" tf:"output_artifacts_for_compute_action,omitempty"`
+
+	// A list of variables that are to be exported from the compute action.
+	// +kubebuilder:validation:Optional
+	OutputVariables []*string `json:"outputVariables,omitempty" tf:"output_variables,omitempty"`
 
 	// The creator of the action being called. Possible values are AWS, Custom and ThirdParty.
 	// +kubebuilder:validation:Optional
@@ -931,6 +961,35 @@ type OnSuccessParameters struct {
 	// The conditions that are success conditions. Defined as a condition block below.
 	// +kubebuilder:validation:Optional
 	Condition []OnSuccessConditionParameters `json:"condition" tf:"condition,omitempty"`
+}
+
+type OutputArtifactsForComputeActionInitParameters struct {
+
+	// A list of the files to associate with the output artifact that will be exported from the compute action.
+	Files []*string `json:"files,omitempty" tf:"files,omitempty"`
+
+	// The name of a pipeline-level variable.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+}
+
+type OutputArtifactsForComputeActionObservation struct {
+
+	// A list of the files to associate with the output artifact that will be exported from the compute action.
+	Files []*string `json:"files,omitempty" tf:"files,omitempty"`
+
+	// The name of a pipeline-level variable.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+}
+
+type OutputArtifactsForComputeActionParameters struct {
+
+	// A list of the files to associate with the output artifact that will be exported from the compute action.
+	// +kubebuilder:validation:Optional
+	Files []*string `json:"files,omitempty" tf:"files,omitempty"`
+
+	// The name of a pipeline-level variable.
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name" tf:"name,omitempty"`
 }
 
 type PullRequestBranchesInitParameters struct {

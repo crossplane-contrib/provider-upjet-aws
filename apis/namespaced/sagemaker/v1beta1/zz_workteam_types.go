@@ -283,7 +283,7 @@ type WorkteamInitParameters struct {
 
 type WorkteamObservation struct {
 
-	// The Amazon Resource Name (ARN) assigned by AWS to this Workteam.
+	// ARN assigned by AWS to this Workteam.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// A description of the work team.

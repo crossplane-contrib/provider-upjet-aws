@@ -362,7 +362,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The Amazon Resource Name (ARN) of the event API Destination.
+                    description: ARN of the event API Destination.
                     type: string
                   connectionArn:
                     description: ARN of the EventBridge Connection to use for the

@@ -15,21 +15,21 @@ import (
 
 type EmailIdentityMailFromAttributesInitParameters struct {
 
-	// The action to take if the required MX record isn't found when you send an email. Valid values: USE_DEFAULT_VALUE, REJECT_MESSAGE.
+	// Action to take if the required MX record isn't found when you send an email. Valid values: USE_DEFAULT_VALUE, REJECT_MESSAGE.
 	BehaviorOnMxFailure *string `json:"behaviorOnMxFailure,omitempty" tf:"behavior_on_mx_failure,omitempty"`
 
-	// The custom MAIL FROM domain that you want the verified identity to use. Required if behavior_on_mx_failure is REJECT_MESSAGE.
+	// Custom MAIL FROM domain that you want the verified identity to use. Required if behavior_on_mx_failure is REJECT_MESSAGE.
 	MailFromDomain *string `json:"mailFromDomain,omitempty" tf:"mail_from_domain,omitempty"`
 }
 
 type EmailIdentityMailFromAttributesObservation struct {
 
-	// The action to take if the required MX record isn't found when you send an email. Valid values: USE_DEFAULT_VALUE, REJECT_MESSAGE.
+	// Action to take if the required MX record isn't found when you send an email. Valid values: USE_DEFAULT_VALUE, REJECT_MESSAGE.
 	BehaviorOnMxFailure *string `json:"behaviorOnMxFailure,omitempty" tf:"behavior_on_mx_failure,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The custom MAIL FROM domain that you want the verified identity to use. Required if behavior_on_mx_failure is REJECT_MESSAGE.
+	// Custom MAIL FROM domain that you want the verified identity to use. Required if behavior_on_mx_failure is REJECT_MESSAGE.
 	MailFromDomain *string `json:"mailFromDomain,omitempty" tf:"mail_from_domain,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -39,11 +39,11 @@ type EmailIdentityMailFromAttributesObservation struct {
 
 type EmailIdentityMailFromAttributesParameters struct {
 
-	// The action to take if the required MX record isn't found when you send an email. Valid values: USE_DEFAULT_VALUE, REJECT_MESSAGE.
+	// Action to take if the required MX record isn't found when you send an email. Valid values: USE_DEFAULT_VALUE, REJECT_MESSAGE.
 	// +kubebuilder:validation:Optional
 	BehaviorOnMxFailure *string `json:"behaviorOnMxFailure,omitempty" tf:"behavior_on_mx_failure,omitempty"`
 
-	// The custom MAIL FROM domain that you want the verified identity to use. Required if behavior_on_mx_failure is REJECT_MESSAGE.
+	// Custom MAIL FROM domain that you want the verified identity to use. Required if behavior_on_mx_failure is REJECT_MESSAGE.
 	// +kubebuilder:validation:Optional
 	MailFromDomain *string `json:"mailFromDomain,omitempty" tf:"mail_from_domain,omitempty"`
 

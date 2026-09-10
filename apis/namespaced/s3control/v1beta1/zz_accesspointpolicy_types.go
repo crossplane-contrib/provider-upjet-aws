@@ -15,7 +15,7 @@ import (
 
 type AccessPointPolicyInitParameters struct {
 
-	// The ARN of the access point that you want to associate with the specified policy.
+	// ARN of the access point that you want to associate with the specified policy.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/s3control/v1beta1.AccessPoint
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	AccessPointArn *string `json:"accessPointArn,omitempty" tf:"access_point_arn,omitempty"`
@@ -28,22 +28,22 @@ type AccessPointPolicyInitParameters struct {
 	// +kubebuilder:validation:Optional
 	AccessPointArnSelector *v2.NamespacedSelector `json:"accessPointArnSelector,omitempty" tf:"-"`
 
-	// The policy that you want to apply to the specified access point.
+	// Policy that you want to apply to the specified access point.
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 }
 
 type AccessPointPolicyObservation struct {
 
-	// The ARN of the access point that you want to associate with the specified policy.
+	// ARN of the access point that you want to associate with the specified policy.
 	AccessPointArn *string `json:"accessPointArn,omitempty" tf:"access_point_arn,omitempty"`
 
-	// Indicates whether this access point currently has a policy that allows public access.
+	// Whether this access point currently has a policy that allows public access.
 	HasPublicAccessPolicy *bool `json:"hasPublicAccessPolicy,omitempty" tf:"has_public_access_policy,omitempty"`
 
-	// The AWS account ID and access point name separated by a colon (:).
+	// AWS account ID and access point name separated by a colon (:).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The policy that you want to apply to the specified access point.
+	// Policy that you want to apply to the specified access point.
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -53,7 +53,7 @@ type AccessPointPolicyObservation struct {
 
 type AccessPointPolicyParameters struct {
 
-	// The ARN of the access point that you want to associate with the specified policy.
+	// ARN of the access point that you want to associate with the specified policy.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/s3control/v1beta1.AccessPoint
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -67,7 +67,7 @@ type AccessPointPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	AccessPointArnSelector *v2.NamespacedSelector `json:"accessPointArnSelector,omitempty" tf:"-"`
 
-	// The policy that you want to apply to the specified access point.
+	// Policy that you want to apply to the specified access point.
 	// +kubebuilder:validation:Optional
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 

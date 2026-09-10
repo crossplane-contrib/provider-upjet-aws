@@ -429,7 +429,7 @@ type InstanceRequirementsInitParameters struct {
 	BurstablePerformance *string `json:"burstablePerformance,omitempty" tf:"burstable_performance,omitempty"`
 
 	// The CPU manufacturers to include. Default is any manufacturer.
-	// ~> NOTE: Don't confuse the CPU hardware manufacturer with the CPU hardware architecture. Instances will be launched with a compatible CPU architecture based on the Amazon Machine Image (AMI) that you specify in your launch template.
+	// ~> NOTE: Don't confuse the CPU hardware manufacturer with the CPU hardware architecture. Instances will be launched with a compatible CPU architecture based on the AMI that you specify in your launch template.
 	// +listType=set
 	CPUManufacturers []*string `json:"cpuManufacturers,omitempty" tf:"cpu_manufacturers,omitempty"`
 
@@ -513,7 +513,7 @@ type InstanceRequirementsObservation struct {
 	BurstablePerformance *string `json:"burstablePerformance,omitempty" tf:"burstable_performance,omitempty"`
 
 	// The CPU manufacturers to include. Default is any manufacturer.
-	// ~> NOTE: Don't confuse the CPU hardware manufacturer with the CPU hardware architecture. Instances will be launched with a compatible CPU architecture based on the Amazon Machine Image (AMI) that you specify in your launch template.
+	// ~> NOTE: Don't confuse the CPU hardware manufacturer with the CPU hardware architecture. Instances will be launched with a compatible CPU architecture based on the AMI that you specify in your launch template.
 	// +listType=set
 	CPUManufacturers []*string `json:"cpuManufacturers,omitempty" tf:"cpu_manufacturers,omitempty"`
 
@@ -606,7 +606,7 @@ type InstanceRequirementsParameters struct {
 	BurstablePerformance *string `json:"burstablePerformance,omitempty" tf:"burstable_performance,omitempty"`
 
 	// The CPU manufacturers to include. Default is any manufacturer.
-	// ~> NOTE: Don't confuse the CPU hardware manufacturer with the CPU hardware architecture. Instances will be launched with a compatible CPU architecture based on the Amazon Machine Image (AMI) that you specify in your launch template.
+	// ~> NOTE: Don't confuse the CPU hardware manufacturer with the CPU hardware architecture. Instances will be launched with a compatible CPU architecture based on the AMI that you specify in your launch template.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	CPUManufacturers []*string `json:"cpuManufacturers,omitempty" tf:"cpu_manufacturers,omitempty"`

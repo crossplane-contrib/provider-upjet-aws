@@ -154,7 +154,7 @@ type AppMonitorObservation struct {
 	// The unique ID of the app monitor. Useful for JS templates.
 	AppMonitorID *string `json:"appMonitorId,omitempty" tf:"app_monitor_id,omitempty"`
 
-	// The Amazon Resource Name (ARN) specifying the app monitor.
+	// ARN specifying the app monitor.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Specifies whether this app monitor allows the web client to define and send custom events. If you omit this parameter, custom events are DISABLED. See custom_events below.

@@ -77,7 +77,7 @@ type DomainNameInitParameters struct {
 	// Mode to route traffic for the domain name. Valid values: BASE_PATH_MAPPING_ONLY, ROUTING_RULE_ONLY, ROUTING_RULE_THEN_BASE_PATH_MAPPING.
 	RoutingMode *string `json:"routingMode,omitempty" tf:"routing_mode,omitempty"`
 
-	// Transport Layer Security (TLS) version + cipher suite for this DomainName. Must be configured to perform drift detection. For a list of valid security policies, see DomainName in the Amazon API Gateway API Reference.
+	// TLS version + cipher suite for this DomainName. Must be configured to perform drift detection. For a list of valid security policies, see DomainName in the Amazon API Gateway API Reference.
 	SecurityPolicy *string `json:"securityPolicy,omitempty" tf:"security_policy,omitempty"`
 
 	// Key-value map of resource tags.
@@ -154,7 +154,7 @@ type DomainNameObservation struct {
 	// Mode to route traffic for the domain name. Valid values: BASE_PATH_MAPPING_ONLY, ROUTING_RULE_ONLY, ROUTING_RULE_THEN_BASE_PATH_MAPPING.
 	RoutingMode *string `json:"routingMode,omitempty" tf:"routing_mode,omitempty"`
 
-	// Transport Layer Security (TLS) version + cipher suite for this DomainName. Must be configured to perform drift detection. For a list of valid security policies, see DomainName in the Amazon API Gateway API Reference.
+	// TLS version + cipher suite for this DomainName. Must be configured to perform drift detection. For a list of valid security policies, see DomainName in the Amazon API Gateway API Reference.
 	SecurityPolicy *string `json:"securityPolicy,omitempty" tf:"security_policy,omitempty"`
 
 	// Key-value map of resource tags.
@@ -249,7 +249,7 @@ type DomainNameParameters struct {
 	// +kubebuilder:validation:Optional
 	RoutingMode *string `json:"routingMode,omitempty" tf:"routing_mode,omitempty"`
 
-	// Transport Layer Security (TLS) version + cipher suite for this DomainName. Must be configured to perform drift detection. For a list of valid security policies, see DomainName in the Amazon API Gateway API Reference.
+	// TLS version + cipher suite for this DomainName. Must be configured to perform drift detection. For a list of valid security policies, see DomainName in the Amazon API Gateway API Reference.
 	// +kubebuilder:validation:Optional
 	SecurityPolicy *string `json:"securityPolicy,omitempty" tf:"security_policy,omitempty"`
 

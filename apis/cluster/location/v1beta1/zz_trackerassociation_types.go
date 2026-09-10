@@ -15,7 +15,7 @@ import (
 
 type TrackerAssociationInitParameters struct {
 
-	// The Amazon Resource Name (ARN) for the geofence collection to be associated to tracker resource. Used when you need to specify a resource across all AWS.
+	// ARN for the geofence collection to be associated to tracker resource. Used when you need to specify a resource across all AWS.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/location/v1beta1.GeofenceCollection
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("collection_arn",true)
 	ConsumerArn *string `json:"consumerArn,omitempty" tf:"consumer_arn,omitempty"`
@@ -43,7 +43,7 @@ type TrackerAssociationInitParameters struct {
 
 type TrackerAssociationObservation struct {
 
-	// The Amazon Resource Name (ARN) for the geofence collection to be associated to tracker resource. Used when you need to specify a resource across all AWS.
+	// ARN for the geofence collection to be associated to tracker resource. Used when you need to specify a resource across all AWS.
 	ConsumerArn *string `json:"consumerArn,omitempty" tf:"consumer_arn,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -58,7 +58,7 @@ type TrackerAssociationObservation struct {
 
 type TrackerAssociationParameters struct {
 
-	// The Amazon Resource Name (ARN) for the geofence collection to be associated to tracker resource. Used when you need to specify a resource across all AWS.
+	// ARN for the geofence collection to be associated to tracker resource. Used when you need to specify a resource across all AWS.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/location/v1beta1.GeofenceCollection
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("collection_arn",true)
 	// +kubebuilder:validation:Optional

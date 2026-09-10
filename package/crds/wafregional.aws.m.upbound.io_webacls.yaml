@@ -75,8 +75,7 @@ spec:
                       below.
                     properties:
                       logDestination:
-                        description: Amazon Resource Name (ARN) of Kinesis Firehose
-                          Delivery Stream
+                        description: ARN of Kinesis Firehose Delivery Stream
                         type: string
                       logDestinationRef:
                         description: Reference to a DeliveryStream in firehose to
@@ -368,8 +367,7 @@ spec:
                       below.
                     properties:
                       logDestination:
-                        description: Amazon Resource Name (ARN) of Kinesis Firehose
-                          Delivery Stream
+                        description: ARN of Kinesis Firehose Delivery Stream
                         type: string
                       logDestinationRef:
                         description: Reference to a DeliveryStream in firehose to
@@ -702,7 +700,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: Amazon Resource Name (ARN) of the WAF Regional WebACL.
+                    description: ARN of the WAF Regional WebACL.
                     type: string
                   defaultAction:
                     description: The action that you want AWS WAF Regional to take
@@ -723,8 +721,7 @@ spec:
                       below.
                     properties:
                       logDestination:
-                        description: Amazon Resource Name (ARN) of Kinesis Firehose
-                          Delivery Stream
+                        description: ARN of Kinesis Firehose Delivery Stream
                         type: string
                       redactedFields:
                         description: Configuration block containing parts of the request

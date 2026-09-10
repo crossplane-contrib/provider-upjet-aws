@@ -18,7 +18,7 @@ type BucketObjectInitParameters struct {
 	// Canned ACL to apply. Valid values are private, public-read, public-read-write, aws-exec-read, authenticated-read, bucket-owner-read, and bucket-owner-full-control. Defaults to private.
 	ACL *string `json:"acl,omitempty" tf:"acl,omitempty"`
 
-	// Name of the bucket to put the file in. Alternatively, an S3 access point ARN can be specified.
+	// Name of the bucket to put the file in. Alternatively, an S3 access point ARN can be specified. Use the aws_s3_object resource instead.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/s3/v1beta1.Bucket
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
@@ -73,7 +73,7 @@ type BucketObjectInitParameters struct {
 	// +kubebuilder:validation:Optional
 	KMSKeyIDSelector *v2.NamespacedSelector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
-	// Name of the object once it is in the bucket.
+	// Name of the object once it is in the bucket. Use the aws_s3_object resource instead.
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
 	// Map of keys/values to provision metadata (will be automatically prefixed by x-amz-meta-, note that only lowercase label are currently supported by the AWS Go API).
@@ -117,7 +117,7 @@ type BucketObjectObservation struct {
 	// ARN of the object.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// Name of the bucket to put the file in. Alternatively, an S3 access point ARN can be specified.
+	// Name of the bucket to put the file in. Alternatively, an S3 access point ARN can be specified. Use the aws_s3_object resource instead.
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
 	// Whether or not to use Amazon S3 Bucket Keys for SSE-KMS.
@@ -155,7 +155,7 @@ type BucketObjectObservation struct {
 	// ARN of the KMS Key to use for object encryption. If the S3 Bucket has server-side encryption enabled, that value will automatically be used. If referencing the aws_kms_key resource, use the arn attribute. If referencing the aws_kms_alias data source or resource, use the target_key_arn attribute.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
-	// Name of the object once it is in the bucket.
+	// Name of the object once it is in the bucket. Use the aws_s3_object resource instead.
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
 	// Map of keys/values to provision metadata (will be automatically prefixed by x-amz-meta-, note that only lowercase label are currently supported by the AWS Go API).
@@ -208,7 +208,7 @@ type BucketObjectParameters struct {
 	// +kubebuilder:validation:Optional
 	ACL *string `json:"acl,omitempty" tf:"acl,omitempty"`
 
-	// Name of the bucket to put the file in. Alternatively, an S3 access point ARN can be specified.
+	// Name of the bucket to put the file in. Alternatively, an S3 access point ARN can be specified. Use the aws_s3_object resource instead.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/s3/v1beta1.Bucket
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -275,7 +275,7 @@ type BucketObjectParameters struct {
 	// +kubebuilder:validation:Optional
 	KMSKeyIDSelector *v2.NamespacedSelector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
-	// Name of the object once it is in the bucket.
+	// Name of the object once it is in the bucket. Use the aws_s3_object resource instead.
 	// +kubebuilder:validation:Optional
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 

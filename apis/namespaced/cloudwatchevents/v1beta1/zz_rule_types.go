@@ -39,7 +39,7 @@ type RuleInitParameters struct {
 	// Whether the rule should be enabled. Defaults to true. Conflicts with state.
 	IsEnabled *bool `json:"isEnabled,omitempty" tf:"is_enabled,omitempty"`
 
-	// The Amazon Resource Name (ARN) associated with the role that is used for target invocation.
+	// ARN associated with the role that is used for target invocation.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
@@ -65,7 +65,7 @@ type RuleInitParameters struct {
 
 type RuleObservation struct {
 
-	// The Amazon Resource Name (ARN) of the rule.
+	// ARN of the rule.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The description of the rule.
@@ -90,7 +90,7 @@ type RuleObservation struct {
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The Amazon Resource Name (ARN) associated with the role that is used for target invocation.
+	// ARN associated with the role that is used for target invocation.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
 	// The scheduling expression. For example, cron(0 20 * * ? *) or rate(5 minutes). At least one of schedule_expression or event_pattern is required. Can only be used on the default event bus. For more information, refer to the AWS documentation Schedule Expressions for Rules.
@@ -144,7 +144,7 @@ type RuleParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// The Amazon Resource Name (ARN) associated with the role that is used for target invocation.
+	// ARN associated with the role that is used for target invocation.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional

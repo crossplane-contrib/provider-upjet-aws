@@ -15,7 +15,7 @@ import (
 
 type EndpointDetailsInitParameters struct {
 
-	// A list of address allocation IDs that are required to attach an Elastic IP address to your SFTP server's endpoint. This property can only be used when endpoint_type is set to VPC.
+	// List of address allocation IDs that are required to attach an Elastic IP address to your SFTP server's endpoint. This property can only be used when endpoint_type is set to VPC.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.EIP
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +listType=set
@@ -29,11 +29,11 @@ type EndpointDetailsInitParameters struct {
 	// +kubebuilder:validation:Optional
 	AddressAllocationIdsSelector *v2.NamespacedSelector `json:"addressAllocationIdsSelector,omitempty" tf:"-"`
 
-	// A list of security groups IDs that are available to attach to your server's endpoint. If no security groups are specified, the VPC's default security groups are automatically assigned to your endpoint. This property can only be used when endpoint_type is set to VPC.
+	// List of security groups IDs that are available to attach to your server's endpoint. If no security groups are specified, the VPC's default security groups are automatically assigned to your endpoint. This property can only be used when endpoint_type is set to VPC.
 	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
-	// A list of subnet IDs that are required to host your SFTP server endpoint in your VPC. This property can only be used when endpoint_type is set to VPC.
+	// List of subnet IDs that are required to host your SFTP server endpoint in your VPC. This property can only be used when endpoint_type is set to VPC.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +listType=set
@@ -47,10 +47,10 @@ type EndpointDetailsInitParameters struct {
 	// +kubebuilder:validation:Optional
 	SubnetIdsSelector *v2.NamespacedSelector `json:"subnetIdsSelector,omitempty" tf:"-"`
 
-	// The ID of the VPC endpoint. This property can only be used when endpoint_type is set to VPC_ENDPOINT
+	// ID of the VPC endpoint. This property can only be used when endpoint_type is set to VPC_ENDPOINT
 	VPCEndpointID *string `json:"vpcEndpointId,omitempty" tf:"vpc_endpoint_id,omitempty"`
 
-	// The VPC ID of the virtual private cloud in which the SFTP server's endpoint will be hosted. This property can only be used when endpoint_type is set to VPC.
+	// VPC ID of the VPC in which the SFTP server's endpoint will be hosted. This property can only be used when endpoint_type is set to VPC.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.VPC
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
@@ -66,28 +66,28 @@ type EndpointDetailsInitParameters struct {
 
 type EndpointDetailsObservation struct {
 
-	// A list of address allocation IDs that are required to attach an Elastic IP address to your SFTP server's endpoint. This property can only be used when endpoint_type is set to VPC.
+	// List of address allocation IDs that are required to attach an Elastic IP address to your SFTP server's endpoint. This property can only be used when endpoint_type is set to VPC.
 	// +listType=set
 	AddressAllocationIds []*string `json:"addressAllocationIds,omitempty" tf:"address_allocation_ids,omitempty"`
 
-	// A list of security groups IDs that are available to attach to your server's endpoint. If no security groups are specified, the VPC's default security groups are automatically assigned to your endpoint. This property can only be used when endpoint_type is set to VPC.
+	// List of security groups IDs that are available to attach to your server's endpoint. If no security groups are specified, the VPC's default security groups are automatically assigned to your endpoint. This property can only be used when endpoint_type is set to VPC.
 	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
-	// A list of subnet IDs that are required to host your SFTP server endpoint in your VPC. This property can only be used when endpoint_type is set to VPC.
+	// List of subnet IDs that are required to host your SFTP server endpoint in your VPC. This property can only be used when endpoint_type is set to VPC.
 	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
-	// The ID of the VPC endpoint. This property can only be used when endpoint_type is set to VPC_ENDPOINT
+	// ID of the VPC endpoint. This property can only be used when endpoint_type is set to VPC_ENDPOINT
 	VPCEndpointID *string `json:"vpcEndpointId,omitempty" tf:"vpc_endpoint_id,omitempty"`
 
-	// The VPC ID of the virtual private cloud in which the SFTP server's endpoint will be hosted. This property can only be used when endpoint_type is set to VPC.
+	// VPC ID of the VPC in which the SFTP server's endpoint will be hosted. This property can only be used when endpoint_type is set to VPC.
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 }
 
 type EndpointDetailsParameters struct {
 
-	// A list of address allocation IDs that are required to attach an Elastic IP address to your SFTP server's endpoint. This property can only be used when endpoint_type is set to VPC.
+	// List of address allocation IDs that are required to attach an Elastic IP address to your SFTP server's endpoint. This property can only be used when endpoint_type is set to VPC.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.EIP
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -102,12 +102,12 @@ type EndpointDetailsParameters struct {
 	// +kubebuilder:validation:Optional
 	AddressAllocationIdsSelector *v2.NamespacedSelector `json:"addressAllocationIdsSelector,omitempty" tf:"-"`
 
-	// A list of security groups IDs that are available to attach to your server's endpoint. If no security groups are specified, the VPC's default security groups are automatically assigned to your endpoint. This property can only be used when endpoint_type is set to VPC.
+	// List of security groups IDs that are available to attach to your server's endpoint. If no security groups are specified, the VPC's default security groups are automatically assigned to your endpoint. This property can only be used when endpoint_type is set to VPC.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
-	// A list of subnet IDs that are required to host your SFTP server endpoint in your VPC. This property can only be used when endpoint_type is set to VPC.
+	// List of subnet IDs that are required to host your SFTP server endpoint in your VPC. This property can only be used when endpoint_type is set to VPC.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -122,11 +122,11 @@ type EndpointDetailsParameters struct {
 	// +kubebuilder:validation:Optional
 	SubnetIdsSelector *v2.NamespacedSelector `json:"subnetIdsSelector,omitempty" tf:"-"`
 
-	// The ID of the VPC endpoint. This property can only be used when endpoint_type is set to VPC_ENDPOINT
+	// ID of the VPC endpoint. This property can only be used when endpoint_type is set to VPC_ENDPOINT
 	// +kubebuilder:validation:Optional
 	VPCEndpointID *string `json:"vpcEndpointId,omitempty" tf:"vpc_endpoint_id,omitempty"`
 
-	// The VPC ID of the virtual private cloud in which the SFTP server's endpoint will be hosted. This property can only be used when endpoint_type is set to VPC.
+	// VPC ID of the VPC in which the SFTP server's endpoint will be hosted. This property can only be used when endpoint_type is set to VPC.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.VPC
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -146,7 +146,7 @@ type OnPartialUploadInitParameters struct {
 	// Includes the necessary permissions for S3, EFS, and Lambda operations that Transfer can assume, so that all workflow steps can operate on the required resources.
 	ExecutionRole *string `json:"executionRole,omitempty" tf:"execution_role,omitempty"`
 
-	// A unique identifier for the workflow.
+	// Unique identifier for the workflow.
 	WorkflowID *string `json:"workflowId,omitempty" tf:"workflow_id,omitempty"`
 }
 
@@ -155,7 +155,7 @@ type OnPartialUploadObservation struct {
 	// Includes the necessary permissions for S3, EFS, and Lambda operations that Transfer can assume, so that all workflow steps can operate on the required resources.
 	ExecutionRole *string `json:"executionRole,omitempty" tf:"execution_role,omitempty"`
 
-	// A unique identifier for the workflow.
+	// Unique identifier for the workflow.
 	WorkflowID *string `json:"workflowId,omitempty" tf:"workflow_id,omitempty"`
 }
 
@@ -165,7 +165,7 @@ type OnPartialUploadParameters struct {
 	// +kubebuilder:validation:Optional
 	ExecutionRole *string `json:"executionRole" tf:"execution_role,omitempty"`
 
-	// A unique identifier for the workflow.
+	// Unique identifier for the workflow.
 	// +kubebuilder:validation:Optional
 	WorkflowID *string `json:"workflowId" tf:"workflow_id,omitempty"`
 }
@@ -175,7 +175,7 @@ type OnUploadInitParameters struct {
 	// Includes the necessary permissions for S3, EFS, and Lambda operations that Transfer can assume, so that all workflow steps can operate on the required resources.
 	ExecutionRole *string `json:"executionRole,omitempty" tf:"execution_role,omitempty"`
 
-	// A unique identifier for the workflow.
+	// Unique identifier for the workflow.
 	WorkflowID *string `json:"workflowId,omitempty" tf:"workflow_id,omitempty"`
 }
 
@@ -184,7 +184,7 @@ type OnUploadObservation struct {
 	// Includes the necessary permissions for S3, EFS, and Lambda operations that Transfer can assume, so that all workflow steps can operate on the required resources.
 	ExecutionRole *string `json:"executionRole,omitempty" tf:"execution_role,omitempty"`
 
-	// A unique identifier for the workflow.
+	// Unique identifier for the workflow.
 	WorkflowID *string `json:"workflowId,omitempty" tf:"workflow_id,omitempty"`
 }
 
@@ -194,51 +194,51 @@ type OnUploadParameters struct {
 	// +kubebuilder:validation:Optional
 	ExecutionRole *string `json:"executionRole" tf:"execution_role,omitempty"`
 
-	// A unique identifier for the workflow.
+	// Unique identifier for the workflow.
 	// +kubebuilder:validation:Optional
 	WorkflowID *string `json:"workflowId" tf:"workflow_id,omitempty"`
 }
 
 type ProtocolDetailsInitParameters struct {
 
-	// Indicates the transport method for the AS2 messages. Currently, only HTTP is supported.
+	// Transport method for the AS2 messages. Currently, only HTTP is supported.
 	// +listType=set
 	As2Transports []*string `json:"as2Transports,omitempty" tf:"as2_transports,omitempty"`
 
-	// Indicates passive mode, for FTP and FTPS protocols. Enter a single IPv4 address, such as the public IP address of a firewall, router, or load balancer.
+	// Passive mode, for FTP and FTPS protocols. Enter a single IPv4 address, such as the public IP address of a firewall, router, or load balancer.
 	PassiveIP *string `json:"passiveIp,omitempty" tf:"passive_ip,omitempty"`
 
 	// Use to ignore the error that is generated when the client attempts to use SETSTAT on a file you are uploading to an S3 bucket. Valid values: DEFAULT, ENABLE_NO_OP.
 	SetStatOption *string `json:"setStatOption,omitempty" tf:"set_stat_option,omitempty"`
 
-	// A property used with Transfer Family servers that use the FTPS protocol. Provides a mechanism to resume or share a negotiated secret key between the control and data connection for an FTPS session. Valid values: DISABLED, ENABLED, ENFORCED.
+	// Property used with Transfer Family servers that use the FTPS protocol. Provides a mechanism to resume or share a negotiated secret key between the control and data connection for an FTPS session. Valid values: DISABLED, ENABLED, ENFORCED.
 	TLSSessionResumptionMode *string `json:"tlsSessionResumptionMode,omitempty" tf:"tls_session_resumption_mode,omitempty"`
 }
 
 type ProtocolDetailsObservation struct {
 
-	// Indicates the transport method for the AS2 messages. Currently, only HTTP is supported.
+	// Transport method for the AS2 messages. Currently, only HTTP is supported.
 	// +listType=set
 	As2Transports []*string `json:"as2Transports,omitempty" tf:"as2_transports,omitempty"`
 
-	// Indicates passive mode, for FTP and FTPS protocols. Enter a single IPv4 address, such as the public IP address of a firewall, router, or load balancer.
+	// Passive mode, for FTP and FTPS protocols. Enter a single IPv4 address, such as the public IP address of a firewall, router, or load balancer.
 	PassiveIP *string `json:"passiveIp,omitempty" tf:"passive_ip,omitempty"`
 
 	// Use to ignore the error that is generated when the client attempts to use SETSTAT on a file you are uploading to an S3 bucket. Valid values: DEFAULT, ENABLE_NO_OP.
 	SetStatOption *string `json:"setStatOption,omitempty" tf:"set_stat_option,omitempty"`
 
-	// A property used with Transfer Family servers that use the FTPS protocol. Provides a mechanism to resume or share a negotiated secret key between the control and data connection for an FTPS session. Valid values: DISABLED, ENABLED, ENFORCED.
+	// Property used with Transfer Family servers that use the FTPS protocol. Provides a mechanism to resume or share a negotiated secret key between the control and data connection for an FTPS session. Valid values: DISABLED, ENABLED, ENFORCED.
 	TLSSessionResumptionMode *string `json:"tlsSessionResumptionMode,omitempty" tf:"tls_session_resumption_mode,omitempty"`
 }
 
 type ProtocolDetailsParameters struct {
 
-	// Indicates the transport method for the AS2 messages. Currently, only HTTP is supported.
+	// Transport method for the AS2 messages. Currently, only HTTP is supported.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	As2Transports []*string `json:"as2Transports,omitempty" tf:"as2_transports,omitempty"`
 
-	// Indicates passive mode, for FTP and FTPS protocols. Enter a single IPv4 address, such as the public IP address of a firewall, router, or load balancer.
+	// Passive mode, for FTP and FTPS protocols. Enter a single IPv4 address, such as the public IP address of a firewall, router, or load balancer.
 	// +kubebuilder:validation:Optional
 	PassiveIP *string `json:"passiveIp,omitempty" tf:"passive_ip,omitempty"`
 
@@ -246,33 +246,33 @@ type ProtocolDetailsParameters struct {
 	// +kubebuilder:validation:Optional
 	SetStatOption *string `json:"setStatOption,omitempty" tf:"set_stat_option,omitempty"`
 
-	// A property used with Transfer Family servers that use the FTPS protocol. Provides a mechanism to resume or share a negotiated secret key between the control and data connection for an FTPS session. Valid values: DISABLED, ENABLED, ENFORCED.
+	// Property used with Transfer Family servers that use the FTPS protocol. Provides a mechanism to resume or share a negotiated secret key between the control and data connection for an FTPS session. Valid values: DISABLED, ENABLED, ENFORCED.
 	// +kubebuilder:validation:Optional
 	TLSSessionResumptionMode *string `json:"tlsSessionResumptionMode,omitempty" tf:"tls_session_resumption_mode,omitempty"`
 }
 
 type S3StorageOptionsInitParameters struct {
 
-	// Specifies whether or not performance for your Amazon S3 directories is optimized. Valid values are DISABLED, ENABLED.
+	// Whether performance for your Amazon S3 directories is optimized. Valid values are DISABLED, ENABLED.
 	DirectoryListingOptimization *string `json:"directoryListingOptimization,omitempty" tf:"directory_listing_optimization,omitempty"`
 }
 
 type S3StorageOptionsObservation struct {
 
-	// Specifies whether or not performance for your Amazon S3 directories is optimized. Valid values are DISABLED, ENABLED.
+	// Whether performance for your Amazon S3 directories is optimized. Valid values are DISABLED, ENABLED.
 	DirectoryListingOptimization *string `json:"directoryListingOptimization,omitempty" tf:"directory_listing_optimization,omitempty"`
 }
 
 type S3StorageOptionsParameters struct {
 
-	// Specifies whether or not performance for your Amazon S3 directories is optimized. Valid values are DISABLED, ENABLED.
+	// Whether performance for your Amazon S3 directories is optimized. Valid values are DISABLED, ENABLED.
 	// +kubebuilder:validation:Optional
 	DirectoryListingOptimization *string `json:"directoryListingOptimization,omitempty" tf:"directory_listing_optimization,omitempty"`
 }
 
 type ServerInitParameters struct {
 
-	// The Amazon Resource Name (ARN) of the AWS Certificate Manager (ACM) certificate. This is required when protocols is set to FTPS
+	// ARN of the AWS Certificate Manager (ACM) certificate. Required when protocols is set to FTPS.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/acm/v1beta1.Certificate
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	Certificate *string `json:"certificate,omitempty" tf:"certificate,omitempty"`
@@ -285,7 +285,7 @@ type ServerInitParameters struct {
 	// +kubebuilder:validation:Optional
 	CertificateSelector *v2.NamespacedSelector `json:"certificateSelector,omitempty" tf:"-"`
 
-	// The directory service ID of the directory service you want to connect to with an identity_provider_type of AWS_DIRECTORY_SERVICE.
+	// Directory service ID of the directory service you want to connect to with an identity_provider_type of AWS_DIRECTORY_SERVICE.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ds/v1beta1.Directory
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DirectoryID *string `json:"directoryId,omitempty" tf:"directory_id,omitempty"`
@@ -298,20 +298,30 @@ type ServerInitParameters struct {
 	// +kubebuilder:validation:Optional
 	DirectoryIDSelector *v2.NamespacedSelector `json:"directoryIdSelector,omitempty" tf:"-"`
 
-	// The domain of the storage system that is used for file transfers. Valid values are: S3 and EFS. The default value is S3.
+	// Domain of the storage system that is used for file transfers. Valid values are: S3 and EFS. The default value is S3.
 	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
 
-	// The virtual private cloud (VPC) endpoint settings that you want to configure for your SFTP server. See endpoint_details Block below for details.
+	// VPC endpoint settings that you want to configure for your SFTP server. See endpoint_details Block below for details.
 	EndpointDetails *EndpointDetailsInitParameters `json:"endpointDetails,omitempty" tf:"endpoint_details,omitempty"`
 
-	// The type of endpoint that you want your SFTP server connect to. If you connect to a VPC (or VPC_ENDPOINT), your SFTP server isn't accessible over the public internet. If you want to connect your SFTP server via public internet, set PUBLIC.  Defaults to PUBLIC.
+	// Type of endpoint that you want your SFTP server connect to. If you connect to a VPC (or VPC_ENDPOINT), your SFTP server isn't accessible over the public internet. If you want to connect your SFTP server via public internet, set PUBLIC. Defaults to PUBLIC.
 	EndpointType *string `json:"endpointType,omitempty" tf:"endpoint_type,omitempty"`
 
-	// A boolean that indicates all users associated with the server should be deleted so that the Server can be destroyed without error. The default value is false. This option only applies to servers configured with a SERVICE_MANAGED identity_provider_type.
+	// Boolean that indicates all users associated with the server should be deleted so that the Server can be destroyed without error. The default value is false. This option only applies to servers configured with a SERVICE_MANAGED identity_provider_type.
 	ForceDestroy *bool `json:"forceDestroy,omitempty" tf:"force_destroy,omitempty"`
 
-	// The ARN for a lambda function to use for the Identity provider with an identity_provider_type of AWS_LAMBDA.
+	// ARN for a lambda function to use for the Identity provider with an identity_provider_type of AWS_LAMBDA.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/lambda/v1beta1.Function
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	Function *string `json:"function,omitempty" tf:"function,omitempty"`
+
+	// Reference to a Function in lambda to populate function.
+	// +kubebuilder:validation:Optional
+	FunctionRef *v2.NamespacedReference `json:"functionRef,omitempty" tf:"-"`
+
+	// Selector for a Function in lambda to populate function.
+	// +kubebuilder:validation:Optional
+	FunctionSelector *v2.NamespacedSelector `json:"functionSelector,omitempty" tf:"-"`
 
 	// RSA, ECDSA, or ED25519 private key (e.g., as generated by the ssh-keygen -t rsa -b 2048 -N "" -m PEM -f my-new-server-key, ssh-keygen -t ecdsa -b 256 -N "" -m PEM -f my-new-server-key or ssh-keygen -t ed25519 -N "" -f my-new-server-key commands).
 	HostKeySecretRef *v2.LocalSecretKeySelector `json:"hostKeySecretRef,omitempty" tf:"-"`
@@ -319,13 +329,13 @@ type ServerInitParameters struct {
 	// Type of IP addresses for the AWS Transfer Family endpoint. Valid values are IPV4 and DUALSTACK. The default value is IPV4. When ip_address_type is set to DUALSTACK, address_allocation_ids cannot be specified in the endpoint_details block. Updating ip_address_type stops the server and then restarts it with the new ip_address_type value.
 	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
 
-	// The mode of authentication enabled for this service. The default value is SERVICE_MANAGED, which allows you to store and access SFTP user credentials within the service. API_GATEWAY indicates that user authentication requires a call to an API Gateway endpoint URL provided by you to integrate an identity provider of your choice. Using AWS_DIRECTORY_SERVICE will allow for authentication against AWS Managed Active Directory or Microsoft Active Directory in your on-premises environment, or in AWS using AD Connectors. Use the AWS_LAMBDA value to directly use a Lambda function as your identity provider. If you choose this value, you must specify the ARN for the lambda function in the function argument.
+	// Mode of authentication enabled for this service. The default value is SERVICE_MANAGED, which allows you to store and access SFTP user credentials within the service. API_GATEWAY indicates that user authentication requires a call to an API Gateway endpoint URL provided by you to integrate an identity provider of your choice. Using AWS_DIRECTORY_SERVICE will allow for authentication against AWS Managed Active Directory or Microsoft Active Directory in your on-premises environment, or in AWS using AD Connectors. Use the AWS_LAMBDA value to directly use a Lambda function as your identity provider. If you choose this value, you must specify the ARN for the lambda function in the function argument.
 	IdentityProviderType *string `json:"identityProviderType,omitempty" tf:"identity_provider_type,omitempty"`
 
-	// Amazon Resource Name (ARN) of the IAM role used to authenticate the user account with an identity_provider_type of API_GATEWAY.
+	// ARN of the IAM role used to authenticate the user account with an identity_provider_type of API_GATEWAY.
 	InvocationRole *string `json:"invocationRole,omitempty" tf:"invocation_role,omitempty"`
 
-	// Amazon Resource Name (ARN) of an IAM role that allows the service to write your SFTP users’ activity to your Amazon CloudWatch logs for monitoring and auditing purposes.
+	// ARN of an IAM role that allows the service to write your SFTP users’ activity to your Amazon CloudWatch logs for monitoring and auditing purposes.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	LoggingRole *string `json:"loggingRole,omitempty" tf:"logging_role,omitempty"`
@@ -344,23 +354,23 @@ type ServerInitParameters struct {
 	// Specify a string to display when users connect to a server. This string is displayed before the user authenticates.
 	PreAuthenticationLoginBannerSecretRef *v2.LocalSecretKeySelector `json:"preAuthenticationLoginBannerSecretRef,omitempty" tf:"-"`
 
-	// The protocol settings that are configured for your server. See protocol_details Block below for details.
+	// Protocol settings that are configured for your server. See protocol_details Block below for details.
 	ProtocolDetails *ProtocolDetailsInitParameters `json:"protocolDetails,omitempty" tf:"protocol_details,omitempty"`
 
-	// Specifies the file transfer protocol or protocols over which your file transfer protocol client can connect to your server's endpoint. This defaults to SFTP . The available protocols are:
+	// File transfer protocol or protocols over which your file transfer protocol client can connect to your server's endpoint. This defaults to SFTP. The available protocols are AS2 (file transfer over Applicability Statement 2), SFTP (file transfer over SSH), FTPS (file transfer with TLS encryption), and FTP (unencrypted file transfer).
 	// +listType=set
 	Protocols []*string `json:"protocols,omitempty" tf:"protocols,omitempty"`
 
-	// Specifies whether or not performance for your Amazon S3 directories is optimized. This is disabled by default. See s3_storage_options Block below for details.
+	// Whether performance for your Amazon S3 directories is optimized. This is disabled by default. See s3_storage_options Block below for details.
 	S3StorageOptions *S3StorageOptionsInitParameters `json:"s3StorageOptions,omitempty" tf:"s3_storage_options,omitempty"`
 
-	// Specifies the name of the security policy that is attached to the server. Default value is: TransferSecurityPolicy-2018-11. The available values are:
+	// Name of the security policy that is attached to the server. Default value is: TransferSecurityPolicy-2018-11. The available values are TransferSecurityPolicy-2018-11, TransferSecurityPolicy-2020-06, TransferSecurityPolicy-2022-03, TransferSecurityPolicy-2023-05, TransferSecurityPolicy-2024-01, TransferSecurityPolicy-2025-03, TransferSecurityPolicy-FIPS-2020-06, TransferSecurityPolicy-FIPS-2023-05, TransferSecurityPolicy-FIPS-2024-01, TransferSecurityPolicy-FIPS-2024-05, TransferSecurityPolicy-FIPS-2025-03, TransferSecurityPolicy-PQ-SSH-Experimental-2023-04, TransferSecurityPolicy-PQ-SSH-FIPS-Experimental-2023-04, TransferSecurityPolicy-Restricted-2018-11, TransferSecurityPolicy-Restricted-2020-06, TransferSecurityPolicy-Restricted-2024-06, TransferSecurityPolicy-SshAuditCompliant-2025-02, and TransferSecurityPolicy-AS2Restricted-2025-07. See Security policies for AWS Transfer Family servers for details.
 	SecurityPolicyName *string `json:"securityPolicyName,omitempty" tf:"security_policy_name,omitempty"`
 
 	// For SFTP-enabled servers with an identity_provider_type of API_GATEWAY or AWS_LAMBDA. Valid values are PASSWORD, PUBLIC_KEY, PUBLIC_KEY_OR_PASSWORD and PUBLIC_KEY_AND_PASSWORD. Default value is: PUBLIC_KEY_OR_PASSWORD.
 	SftpAuthenticationMethods *string `json:"sftpAuthenticationMethods,omitempty" tf:"sftp_authentication_methods,omitempty"`
 
-	// A set of ARNs of destinations that will receive structured logs from the transfer server such as CloudWatch Log Group ARNs. If provided this enables the transfer server to emit structured logs to the specified locations.
+	// Set of ARNs of destinations that will receive structured logs from the transfer server such as CloudWatch Log Group ARNs. If provided this enables the transfer server to emit structured logs to the specified locations.
 	// This is a set of arns of destinations that will receive structured logs from the transfer server
 	// +listType=set
 	StructuredLogDestinations []*string `json:"structuredLogDestinations,omitempty" tf:"structured_log_destinations,omitempty"`
@@ -369,64 +379,64 @@ type ServerInitParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// - URL of the service endpoint used to authenticate users with an identity_provider_type of API_GATEWAY.
+	// URL of the service endpoint used to authenticate users with an identity_provider_type of API_GATEWAY.
 	URL *string `json:"url,omitempty" tf:"url,omitempty"`
 
-	// Specifies the workflow details. See workflow_details Block below for details.
+	// Workflow details. See workflow_details Block below for details.
 	WorkflowDetails *WorkflowDetailsInitParameters `json:"workflowDetails,omitempty" tf:"workflow_details,omitempty"`
 }
 
 type ServerObservation struct {
 
-	// Amazon Resource Name (ARN) of Transfer Server
+	// ARN of Transfer Server
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the AWS Certificate Manager (ACM) certificate. This is required when protocols is set to FTPS
+	// ARN of the AWS Certificate Manager (ACM) certificate. Required when protocols is set to FTPS.
 	Certificate *string `json:"certificate,omitempty" tf:"certificate,omitempty"`
 
-	// The directory service ID of the directory service you want to connect to with an identity_provider_type of AWS_DIRECTORY_SERVICE.
+	// Directory service ID of the directory service you want to connect to with an identity_provider_type of AWS_DIRECTORY_SERVICE.
 	DirectoryID *string `json:"directoryId,omitempty" tf:"directory_id,omitempty"`
 
-	// The domain of the storage system that is used for file transfers. Valid values are: S3 and EFS. The default value is S3.
+	// Domain of the storage system that is used for file transfers. Valid values are: S3 and EFS. The default value is S3.
 	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
 
-	// The endpoint of the Transfer Server (e.g., s-12345678.server.transfer.REGION.amazonaws.com)
+	// Endpoint of the Transfer Server (e.g., s-12345678.server.transfer.REGION.amazonaws.com)
 	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 
-	// The virtual private cloud (VPC) endpoint settings that you want to configure for your SFTP server. See endpoint_details Block below for details.
+	// VPC endpoint settings that you want to configure for your SFTP server. See endpoint_details Block below for details.
 	EndpointDetails *EndpointDetailsObservation `json:"endpointDetails,omitempty" tf:"endpoint_details,omitempty"`
 
-	// The type of endpoint that you want your SFTP server connect to. If you connect to a VPC (or VPC_ENDPOINT), your SFTP server isn't accessible over the public internet. If you want to connect your SFTP server via public internet, set PUBLIC.  Defaults to PUBLIC.
+	// Type of endpoint that you want your SFTP server connect to. If you connect to a VPC (or VPC_ENDPOINT), your SFTP server isn't accessible over the public internet. If you want to connect your SFTP server via public internet, set PUBLIC. Defaults to PUBLIC.
 	EndpointType *string `json:"endpointType,omitempty" tf:"endpoint_type,omitempty"`
 
-	// A boolean that indicates all users associated with the server should be deleted so that the Server can be destroyed without error. The default value is false. This option only applies to servers configured with a SERVICE_MANAGED identity_provider_type.
+	// Boolean that indicates all users associated with the server should be deleted so that the Server can be destroyed without error. The default value is false. This option only applies to servers configured with a SERVICE_MANAGED identity_provider_type.
 	ForceDestroy *bool `json:"forceDestroy,omitempty" tf:"force_destroy,omitempty"`
 
-	// The ARN for a lambda function to use for the Identity provider with an identity_provider_type of AWS_LAMBDA.
+	// ARN for a lambda function to use for the Identity provider with an identity_provider_type of AWS_LAMBDA.
 	Function *string `json:"function,omitempty" tf:"function,omitempty"`
 
-	// This value contains the message-digest algorithm (MD5) hash of the server's host key. This value is equivalent to the output of the ssh-keygen -l -E md5 -f my-new-server-key command.
+	// Message-digest algorithm (MD5) hash of the server's host key. This value is equivalent to the output of the ssh-keygen -l -E md5 -f my-new-server-key command.
 	HostKeyFingerprint *string `json:"hostKeyFingerprint,omitempty" tf:"host_key_fingerprint,omitempty"`
 
-	// The Server ID of the Transfer Server (e.g., s-12345678)
+	// Server ID of the Transfer Server (e.g., s-12345678)
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Type of IP addresses for the AWS Transfer Family endpoint. Valid values are IPV4 and DUALSTACK. The default value is IPV4. When ip_address_type is set to DUALSTACK, address_allocation_ids cannot be specified in the endpoint_details block. Updating ip_address_type stops the server and then restarts it with the new ip_address_type value.
 	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
 
-	// The mode of authentication enabled for this service. The default value is SERVICE_MANAGED, which allows you to store and access SFTP user credentials within the service. API_GATEWAY indicates that user authentication requires a call to an API Gateway endpoint URL provided by you to integrate an identity provider of your choice. Using AWS_DIRECTORY_SERVICE will allow for authentication against AWS Managed Active Directory or Microsoft Active Directory in your on-premises environment, or in AWS using AD Connectors. Use the AWS_LAMBDA value to directly use a Lambda function as your identity provider. If you choose this value, you must specify the ARN for the lambda function in the function argument.
+	// Mode of authentication enabled for this service. The default value is SERVICE_MANAGED, which allows you to store and access SFTP user credentials within the service. API_GATEWAY indicates that user authentication requires a call to an API Gateway endpoint URL provided by you to integrate an identity provider of your choice. Using AWS_DIRECTORY_SERVICE will allow for authentication against AWS Managed Active Directory or Microsoft Active Directory in your on-premises environment, or in AWS using AD Connectors. Use the AWS_LAMBDA value to directly use a Lambda function as your identity provider. If you choose this value, you must specify the ARN for the lambda function in the function argument.
 	IdentityProviderType *string `json:"identityProviderType,omitempty" tf:"identity_provider_type,omitempty"`
 
-	// Amazon Resource Name (ARN) of the IAM role used to authenticate the user account with an identity_provider_type of API_GATEWAY.
+	// ARN of the IAM role used to authenticate the user account with an identity_provider_type of API_GATEWAY.
 	InvocationRole *string `json:"invocationRole,omitempty" tf:"invocation_role,omitempty"`
 
-	// Amazon Resource Name (ARN) of an IAM role that allows the service to write your SFTP users’ activity to your Amazon CloudWatch logs for monitoring and auditing purposes.
+	// ARN of an IAM role that allows the service to write your SFTP users’ activity to your Amazon CloudWatch logs for monitoring and auditing purposes.
 	LoggingRole *string `json:"loggingRole,omitempty" tf:"logging_role,omitempty"`
 
-	// The protocol settings that are configured for your server. See protocol_details Block below for details.
+	// Protocol settings that are configured for your server. See protocol_details Block below for details.
 	ProtocolDetails *ProtocolDetailsObservation `json:"protocolDetails,omitempty" tf:"protocol_details,omitempty"`
 
-	// Specifies the file transfer protocol or protocols over which your file transfer protocol client can connect to your server's endpoint. This defaults to SFTP . The available protocols are:
+	// File transfer protocol or protocols over which your file transfer protocol client can connect to your server's endpoint. This defaults to SFTP. The available protocols are AS2 (file transfer over Applicability Statement 2), SFTP (file transfer over SSH), FTPS (file transfer with TLS encryption), and FTP (unencrypted file transfer).
 	// +listType=set
 	Protocols []*string `json:"protocols,omitempty" tf:"protocols,omitempty"`
 
@@ -434,16 +444,16 @@ type ServerObservation struct {
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// Specifies whether or not performance for your Amazon S3 directories is optimized. This is disabled by default. See s3_storage_options Block below for details.
+	// Whether performance for your Amazon S3 directories is optimized. This is disabled by default. See s3_storage_options Block below for details.
 	S3StorageOptions *S3StorageOptionsObservation `json:"s3StorageOptions,omitempty" tf:"s3_storage_options,omitempty"`
 
-	// Specifies the name of the security policy that is attached to the server. Default value is: TransferSecurityPolicy-2018-11. The available values are:
+	// Name of the security policy that is attached to the server. Default value is: TransferSecurityPolicy-2018-11. The available values are TransferSecurityPolicy-2018-11, TransferSecurityPolicy-2020-06, TransferSecurityPolicy-2022-03, TransferSecurityPolicy-2023-05, TransferSecurityPolicy-2024-01, TransferSecurityPolicy-2025-03, TransferSecurityPolicy-FIPS-2020-06, TransferSecurityPolicy-FIPS-2023-05, TransferSecurityPolicy-FIPS-2024-01, TransferSecurityPolicy-FIPS-2024-05, TransferSecurityPolicy-FIPS-2025-03, TransferSecurityPolicy-PQ-SSH-Experimental-2023-04, TransferSecurityPolicy-PQ-SSH-FIPS-Experimental-2023-04, TransferSecurityPolicy-Restricted-2018-11, TransferSecurityPolicy-Restricted-2020-06, TransferSecurityPolicy-Restricted-2024-06, TransferSecurityPolicy-SshAuditCompliant-2025-02, and TransferSecurityPolicy-AS2Restricted-2025-07. See Security policies for AWS Transfer Family servers for details.
 	SecurityPolicyName *string `json:"securityPolicyName,omitempty" tf:"security_policy_name,omitempty"`
 
 	// For SFTP-enabled servers with an identity_provider_type of API_GATEWAY or AWS_LAMBDA. Valid values are PASSWORD, PUBLIC_KEY, PUBLIC_KEY_OR_PASSWORD and PUBLIC_KEY_AND_PASSWORD. Default value is: PUBLIC_KEY_OR_PASSWORD.
 	SftpAuthenticationMethods *string `json:"sftpAuthenticationMethods,omitempty" tf:"sftp_authentication_methods,omitempty"`
 
-	// A set of ARNs of destinations that will receive structured logs from the transfer server such as CloudWatch Log Group ARNs. If provided this enables the transfer server to emit structured logs to the specified locations.
+	// Set of ARNs of destinations that will receive structured logs from the transfer server such as CloudWatch Log Group ARNs. If provided this enables the transfer server to emit structured logs to the specified locations.
 	// This is a set of arns of destinations that will receive structured logs from the transfer server
 	// +listType=set
 	StructuredLogDestinations []*string `json:"structuredLogDestinations,omitempty" tf:"structured_log_destinations,omitempty"`
@@ -452,20 +462,20 @@ type ServerObservation struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// - URL of the service endpoint used to authenticate users with an identity_provider_type of API_GATEWAY.
+	// URL of the service endpoint used to authenticate users with an identity_provider_type of API_GATEWAY.
 	URL *string `json:"url,omitempty" tf:"url,omitempty"`
 
-	// Specifies the workflow details. See workflow_details Block below for details.
+	// Workflow details. See workflow_details Block below for details.
 	WorkflowDetails *WorkflowDetailsObservation `json:"workflowDetails,omitempty" tf:"workflow_details,omitempty"`
 }
 
 type ServerParameters struct {
 
-	// The Amazon Resource Name (ARN) of the AWS Certificate Manager (ACM) certificate. This is required when protocols is set to FTPS
+	// ARN of the AWS Certificate Manager (ACM) certificate. Required when protocols is set to FTPS.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/acm/v1beta1.Certificate
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -479,7 +489,7 @@ type ServerParameters struct {
 	// +kubebuilder:validation:Optional
 	CertificateSelector *v2.NamespacedSelector `json:"certificateSelector,omitempty" tf:"-"`
 
-	// The directory service ID of the directory service you want to connect to with an identity_provider_type of AWS_DIRECTORY_SERVICE.
+	// Directory service ID of the directory service you want to connect to with an identity_provider_type of AWS_DIRECTORY_SERVICE.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ds/v1beta1.Directory
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -493,25 +503,35 @@ type ServerParameters struct {
 	// +kubebuilder:validation:Optional
 	DirectoryIDSelector *v2.NamespacedSelector `json:"directoryIdSelector,omitempty" tf:"-"`
 
-	// The domain of the storage system that is used for file transfers. Valid values are: S3 and EFS. The default value is S3.
+	// Domain of the storage system that is used for file transfers. Valid values are: S3 and EFS. The default value is S3.
 	// +kubebuilder:validation:Optional
 	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
 
-	// The virtual private cloud (VPC) endpoint settings that you want to configure for your SFTP server. See endpoint_details Block below for details.
+	// VPC endpoint settings that you want to configure for your SFTP server. See endpoint_details Block below for details.
 	// +kubebuilder:validation:Optional
 	EndpointDetails *EndpointDetailsParameters `json:"endpointDetails,omitempty" tf:"endpoint_details,omitempty"`
 
-	// The type of endpoint that you want your SFTP server connect to. If you connect to a VPC (or VPC_ENDPOINT), your SFTP server isn't accessible over the public internet. If you want to connect your SFTP server via public internet, set PUBLIC.  Defaults to PUBLIC.
+	// Type of endpoint that you want your SFTP server connect to. If you connect to a VPC (or VPC_ENDPOINT), your SFTP server isn't accessible over the public internet. If you want to connect your SFTP server via public internet, set PUBLIC. Defaults to PUBLIC.
 	// +kubebuilder:validation:Optional
 	EndpointType *string `json:"endpointType,omitempty" tf:"endpoint_type,omitempty"`
 
-	// A boolean that indicates all users associated with the server should be deleted so that the Server can be destroyed without error. The default value is false. This option only applies to servers configured with a SERVICE_MANAGED identity_provider_type.
+	// Boolean that indicates all users associated with the server should be deleted so that the Server can be destroyed without error. The default value is false. This option only applies to servers configured with a SERVICE_MANAGED identity_provider_type.
 	// +kubebuilder:validation:Optional
 	ForceDestroy *bool `json:"forceDestroy,omitempty" tf:"force_destroy,omitempty"`
 
-	// The ARN for a lambda function to use for the Identity provider with an identity_provider_type of AWS_LAMBDA.
+	// ARN for a lambda function to use for the Identity provider with an identity_provider_type of AWS_LAMBDA.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/lambda/v1beta1.Function
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	Function *string `json:"function,omitempty" tf:"function,omitempty"`
+
+	// Reference to a Function in lambda to populate function.
+	// +kubebuilder:validation:Optional
+	FunctionRef *v2.NamespacedReference `json:"functionRef,omitempty" tf:"-"`
+
+	// Selector for a Function in lambda to populate function.
+	// +kubebuilder:validation:Optional
+	FunctionSelector *v2.NamespacedSelector `json:"functionSelector,omitempty" tf:"-"`
 
 	// RSA, ECDSA, or ED25519 private key (e.g., as generated by the ssh-keygen -t rsa -b 2048 -N "" -m PEM -f my-new-server-key, ssh-keygen -t ecdsa -b 256 -N "" -m PEM -f my-new-server-key or ssh-keygen -t ed25519 -N "" -f my-new-server-key commands).
 	// +kubebuilder:validation:Optional
@@ -521,15 +541,15 @@ type ServerParameters struct {
 	// +kubebuilder:validation:Optional
 	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
 
-	// The mode of authentication enabled for this service. The default value is SERVICE_MANAGED, which allows you to store and access SFTP user credentials within the service. API_GATEWAY indicates that user authentication requires a call to an API Gateway endpoint URL provided by you to integrate an identity provider of your choice. Using AWS_DIRECTORY_SERVICE will allow for authentication against AWS Managed Active Directory or Microsoft Active Directory in your on-premises environment, or in AWS using AD Connectors. Use the AWS_LAMBDA value to directly use a Lambda function as your identity provider. If you choose this value, you must specify the ARN for the lambda function in the function argument.
+	// Mode of authentication enabled for this service. The default value is SERVICE_MANAGED, which allows you to store and access SFTP user credentials within the service. API_GATEWAY indicates that user authentication requires a call to an API Gateway endpoint URL provided by you to integrate an identity provider of your choice. Using AWS_DIRECTORY_SERVICE will allow for authentication against AWS Managed Active Directory or Microsoft Active Directory in your on-premises environment, or in AWS using AD Connectors. Use the AWS_LAMBDA value to directly use a Lambda function as your identity provider. If you choose this value, you must specify the ARN for the lambda function in the function argument.
 	// +kubebuilder:validation:Optional
 	IdentityProviderType *string `json:"identityProviderType,omitempty" tf:"identity_provider_type,omitempty"`
 
-	// Amazon Resource Name (ARN) of the IAM role used to authenticate the user account with an identity_provider_type of API_GATEWAY.
+	// ARN of the IAM role used to authenticate the user account with an identity_provider_type of API_GATEWAY.
 	// +kubebuilder:validation:Optional
 	InvocationRole *string `json:"invocationRole,omitempty" tf:"invocation_role,omitempty"`
 
-	// Amazon Resource Name (ARN) of an IAM role that allows the service to write your SFTP users’ activity to your Amazon CloudWatch logs for monitoring and auditing purposes.
+	// ARN of an IAM role that allows the service to write your SFTP users’ activity to your Amazon CloudWatch logs for monitoring and auditing purposes.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -551,11 +571,11 @@ type ServerParameters struct {
 	// +kubebuilder:validation:Optional
 	PreAuthenticationLoginBannerSecretRef *v2.LocalSecretKeySelector `json:"preAuthenticationLoginBannerSecretRef,omitempty" tf:"-"`
 
-	// The protocol settings that are configured for your server. See protocol_details Block below for details.
+	// Protocol settings that are configured for your server. See protocol_details Block below for details.
 	// +kubebuilder:validation:Optional
 	ProtocolDetails *ProtocolDetailsParameters `json:"protocolDetails,omitempty" tf:"protocol_details,omitempty"`
 
-	// Specifies the file transfer protocol or protocols over which your file transfer protocol client can connect to your server's endpoint. This defaults to SFTP . The available protocols are:
+	// File transfer protocol or protocols over which your file transfer protocol client can connect to your server's endpoint. This defaults to SFTP. The available protocols are AS2 (file transfer over Applicability Statement 2), SFTP (file transfer over SSH), FTPS (file transfer with TLS encryption), and FTP (unencrypted file transfer).
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	Protocols []*string `json:"protocols,omitempty" tf:"protocols,omitempty"`
@@ -565,11 +585,11 @@ type ServerParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// Specifies whether or not performance for your Amazon S3 directories is optimized. This is disabled by default. See s3_storage_options Block below for details.
+	// Whether performance for your Amazon S3 directories is optimized. This is disabled by default. See s3_storage_options Block below for details.
 	// +kubebuilder:validation:Optional
 	S3StorageOptions *S3StorageOptionsParameters `json:"s3StorageOptions,omitempty" tf:"s3_storage_options,omitempty"`
 
-	// Specifies the name of the security policy that is attached to the server. Default value is: TransferSecurityPolicy-2018-11. The available values are:
+	// Name of the security policy that is attached to the server. Default value is: TransferSecurityPolicy-2018-11. The available values are TransferSecurityPolicy-2018-11, TransferSecurityPolicy-2020-06, TransferSecurityPolicy-2022-03, TransferSecurityPolicy-2023-05, TransferSecurityPolicy-2024-01, TransferSecurityPolicy-2025-03, TransferSecurityPolicy-FIPS-2020-06, TransferSecurityPolicy-FIPS-2023-05, TransferSecurityPolicy-FIPS-2024-01, TransferSecurityPolicy-FIPS-2024-05, TransferSecurityPolicy-FIPS-2025-03, TransferSecurityPolicy-PQ-SSH-Experimental-2023-04, TransferSecurityPolicy-PQ-SSH-FIPS-Experimental-2023-04, TransferSecurityPolicy-Restricted-2018-11, TransferSecurityPolicy-Restricted-2020-06, TransferSecurityPolicy-Restricted-2024-06, TransferSecurityPolicy-SshAuditCompliant-2025-02, and TransferSecurityPolicy-AS2Restricted-2025-07. See Security policies for AWS Transfer Family servers for details.
 	// +kubebuilder:validation:Optional
 	SecurityPolicyName *string `json:"securityPolicyName,omitempty" tf:"security_policy_name,omitempty"`
 
@@ -577,7 +597,7 @@ type ServerParameters struct {
 	// +kubebuilder:validation:Optional
 	SftpAuthenticationMethods *string `json:"sftpAuthenticationMethods,omitempty" tf:"sftp_authentication_methods,omitempty"`
 
-	// A set of ARNs of destinations that will receive structured logs from the transfer server such as CloudWatch Log Group ARNs. If provided this enables the transfer server to emit structured logs to the specified locations.
+	// Set of ARNs of destinations that will receive structured logs from the transfer server such as CloudWatch Log Group ARNs. If provided this enables the transfer server to emit structured logs to the specified locations.
 	// This is a set of arns of destinations that will receive structured logs from the transfer server
 	// +kubebuilder:validation:Optional
 	// +listType=set
@@ -588,40 +608,40 @@ type ServerParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// - URL of the service endpoint used to authenticate users with an identity_provider_type of API_GATEWAY.
+	// URL of the service endpoint used to authenticate users with an identity_provider_type of API_GATEWAY.
 	// +kubebuilder:validation:Optional
 	URL *string `json:"url,omitempty" tf:"url,omitempty"`
 
-	// Specifies the workflow details. See workflow_details Block below for details.
+	// Workflow details. See workflow_details Block below for details.
 	// +kubebuilder:validation:Optional
 	WorkflowDetails *WorkflowDetailsParameters `json:"workflowDetails,omitempty" tf:"workflow_details,omitempty"`
 }
 
 type WorkflowDetailsInitParameters struct {
 
-	// A trigger that starts a workflow if a file is only partially uploaded. See Workflow Detail below. See on_partial_upload Block below for details.
+	// Trigger that starts a workflow if a file is only partially uploaded. See on_partial_upload Block below for details.
 	OnPartialUpload *OnPartialUploadInitParameters `json:"onPartialUpload,omitempty" tf:"on_partial_upload,omitempty"`
 
-	// A trigger that starts a workflow: the workflow begins to execute after a file is uploaded. See on_upload Block below for details.
+	// Trigger that starts a workflow: the workflow begins to execute after a file is uploaded. See on_upload Block below for details.
 	OnUpload *OnUploadInitParameters `json:"onUpload,omitempty" tf:"on_upload,omitempty"`
 }
 
 type WorkflowDetailsObservation struct {
 
-	// A trigger that starts a workflow if a file is only partially uploaded. See Workflow Detail below. See on_partial_upload Block below for details.
+	// Trigger that starts a workflow if a file is only partially uploaded. See on_partial_upload Block below for details.
 	OnPartialUpload *OnPartialUploadObservation `json:"onPartialUpload,omitempty" tf:"on_partial_upload,omitempty"`
 
-	// A trigger that starts a workflow: the workflow begins to execute after a file is uploaded. See on_upload Block below for details.
+	// Trigger that starts a workflow: the workflow begins to execute after a file is uploaded. See on_upload Block below for details.
 	OnUpload *OnUploadObservation `json:"onUpload,omitempty" tf:"on_upload,omitempty"`
 }
 
 type WorkflowDetailsParameters struct {
 
-	// A trigger that starts a workflow if a file is only partially uploaded. See Workflow Detail below. See on_partial_upload Block below for details.
+	// Trigger that starts a workflow if a file is only partially uploaded. See on_partial_upload Block below for details.
 	// +kubebuilder:validation:Optional
 	OnPartialUpload *OnPartialUploadParameters `json:"onPartialUpload,omitempty" tf:"on_partial_upload,omitempty"`
 
-	// A trigger that starts a workflow: the workflow begins to execute after a file is uploaded. See on_upload Block below for details.
+	// Trigger that starts a workflow: the workflow begins to execute after a file is uploaded. See on_upload Block below for details.
 	// +kubebuilder:validation:Optional
 	OnUpload *OnUploadParameters `json:"onUpload,omitempty" tf:"on_upload,omitempty"`
 }

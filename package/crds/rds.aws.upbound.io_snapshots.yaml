@@ -381,7 +381,7 @@ spec:
                       snapshot.
                     type: string
                   dbSnapshotArn:
-                    description: The Amazon Resource Name (ARN) for the DB snapshot.
+                    description: ARN for the DB snapshot.
                     type: string
                   encrypted:
                     description: Specifies whether the DB snapshot is encrypted.

@@ -34,7 +34,7 @@ type PlacementGroupInitParameters struct {
 
 type PlacementGroupObservation struct {
 
-	// Amazon Resource Name (ARN) of the placement group.
+	// ARN of the placement group.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The name of the placement group.

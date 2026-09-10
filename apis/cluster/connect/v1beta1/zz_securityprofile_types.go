@@ -45,7 +45,7 @@ type SecurityProfileInitParameters struct {
 
 type SecurityProfileObservation struct {
 
-	// The Amazon Resource Name (ARN) of the Security Profile.
+	// ARN of the Security Profile.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Specifies the description of the Security Profile.

@@ -14,43 +14,59 @@ import (
 )
 
 type AcceleratorCountInitParameters struct {
+
+	// Maximum number of accelerators.
 	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
 
+	// Minimum number of accelerators.
 	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
 }
 
 type AcceleratorCountObservation struct {
+
+	// Maximum number of accelerators.
 	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
 
+	// Minimum number of accelerators.
 	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
 }
 
 type AcceleratorCountParameters struct {
 
+	// Maximum number of accelerators.
 	// +kubebuilder:validation:Optional
 	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
 
+	// Minimum number of accelerators.
 	// +kubebuilder:validation:Optional
 	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
 }
 
 type AcceleratorTotalMemoryMibInitParameters struct {
+
+	// Maximum number of accelerators.
 	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
 
+	// Minimum number of accelerators.
 	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
 }
 
 type AcceleratorTotalMemoryMibObservation struct {
+
+	// Maximum number of accelerators.
 	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
 
+	// Minimum number of accelerators.
 	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
 }
 
 type AcceleratorTotalMemoryMibParameters struct {
 
+	// Maximum number of accelerators.
 	// +kubebuilder:validation:Optional
 	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
 
+	// Minimum number of accelerators.
 	// +kubebuilder:validation:Optional
 	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
 }
@@ -125,22 +141,30 @@ type AutoScalingGroupProviderParameters struct {
 }
 
 type BaselineEBSBandwidthMbpsInitParameters struct {
+
+	// Maximum number of accelerators.
 	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
 
+	// Minimum number of accelerators.
 	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
 }
 
 type BaselineEBSBandwidthMbpsObservation struct {
+
+	// Maximum number of accelerators.
 	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
 
+	// Minimum number of accelerators.
 	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
 }
 
 type BaselineEBSBandwidthMbpsParameters struct {
 
+	// Maximum number of accelerators.
 	// +kubebuilder:validation:Optional
 	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
 
+	// Minimum number of accelerators.
 	// +kubebuilder:validation:Optional
 	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
 }
@@ -215,412 +239,480 @@ type CapacityProviderParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
+type CapacityReservationsInitParameters struct {
+
+	// ARN of the Capacity Reservation resource group in which to run instances. Can only be set when reservation_preference is RESERVATIONS_ONLY.
+	ReservationGroupArn *string `json:"reservationGroupArn,omitempty" tf:"reservation_group_arn,omitempty"`
+
+	// Preference for when Capacity Reservations should be used. Valid values are RESERVATIONS_ONLY, RESERVATIONS_FIRST, and RESERVATIONS_EXCLUDED. instance_requirements must be provided when set to RESERVATIONS_ONLY or RESERVATIONS_FIRST.
+	ReservationPreference *string `json:"reservationPreference,omitempty" tf:"reservation_preference,omitempty"`
+}
+
+type CapacityReservationsObservation struct {
+
+	// ARN of the Capacity Reservation resource group in which to run instances. Can only be set when reservation_preference is RESERVATIONS_ONLY.
+	ReservationGroupArn *string `json:"reservationGroupArn,omitempty" tf:"reservation_group_arn,omitempty"`
+
+	// Preference for when Capacity Reservations should be used. Valid values are RESERVATIONS_ONLY, RESERVATIONS_FIRST, and RESERVATIONS_EXCLUDED. instance_requirements must be provided when set to RESERVATIONS_ONLY or RESERVATIONS_FIRST.
+	ReservationPreference *string `json:"reservationPreference,omitempty" tf:"reservation_preference,omitempty"`
+}
+
+type CapacityReservationsParameters struct {
+
+	// ARN of the Capacity Reservation resource group in which to run instances. Can only be set when reservation_preference is RESERVATIONS_ONLY.
+	// +kubebuilder:validation:Optional
+	ReservationGroupArn *string `json:"reservationGroupArn,omitempty" tf:"reservation_group_arn,omitempty"`
+
+	// Preference for when Capacity Reservations should be used. Valid values are RESERVATIONS_ONLY, RESERVATIONS_FIRST, and RESERVATIONS_EXCLUDED. instance_requirements must be provided when set to RESERVATIONS_ONLY or RESERVATIONS_FIRST.
+	// +kubebuilder:validation:Optional
+	ReservationPreference *string `json:"reservationPreference,omitempty" tf:"reservation_preference,omitempty"`
+}
+
 type InfrastructureOptimizationInitParameters struct {
 
-	// This parameter defines the number of seconds Amazon ECS Managed Instances waits before optimizing EC2 instances that have become idle or underutilized. A longer delay increases the likelihood of placing new tasks on idle instances, reducing startup time. A shorter delay helps reduce infrastructure costs by optimizing idle instances more quickly. Valid values are:
+	// Number of seconds Amazon ECS Managed Instances waits before optimizing EC2 instances that have become idle or underutilized. A longer delay increases the likelihood of placing new tasks on idle instances, reducing startup time. A shorter delay helps reduce infrastructure costs by optimizing idle instances more quickly. Valid values are -1 to disable automatic infrastructure optimization, 0 to 3600 (inclusive) to specify the number of seconds to wait before optimizing instances, or leave unset (null) to use the default optimization behavior.
 	ScaleInAfter *float64 `json:"scaleInAfter,omitempty" tf:"scale_in_after,omitempty"`
 }
 
 type InfrastructureOptimizationObservation struct {
 
-	// This parameter defines the number of seconds Amazon ECS Managed Instances waits before optimizing EC2 instances that have become idle or underutilized. A longer delay increases the likelihood of placing new tasks on idle instances, reducing startup time. A shorter delay helps reduce infrastructure costs by optimizing idle instances more quickly. Valid values are:
+	// Number of seconds Amazon ECS Managed Instances waits before optimizing EC2 instances that have become idle or underutilized. A longer delay increases the likelihood of placing new tasks on idle instances, reducing startup time. A shorter delay helps reduce infrastructure costs by optimizing idle instances more quickly. Valid values are -1 to disable automatic infrastructure optimization, 0 to 3600 (inclusive) to specify the number of seconds to wait before optimizing instances, or leave unset (null) to use the default optimization behavior.
 	ScaleInAfter *float64 `json:"scaleInAfter,omitempty" tf:"scale_in_after,omitempty"`
 }
 
 type InfrastructureOptimizationParameters struct {
 
-	// This parameter defines the number of seconds Amazon ECS Managed Instances waits before optimizing EC2 instances that have become idle or underutilized. A longer delay increases the likelihood of placing new tasks on idle instances, reducing startup time. A shorter delay helps reduce infrastructure costs by optimizing idle instances more quickly. Valid values are:
+	// Number of seconds Amazon ECS Managed Instances waits before optimizing EC2 instances that have become idle or underutilized. A longer delay increases the likelihood of placing new tasks on idle instances, reducing startup time. A shorter delay helps reduce infrastructure costs by optimizing idle instances more quickly. Valid values are -1 to disable automatic infrastructure optimization, 0 to 3600 (inclusive) to specify the number of seconds to wait before optimizing instances, or leave unset (null) to use the default optimization behavior.
 	// +kubebuilder:validation:Optional
 	ScaleInAfter *float64 `json:"scaleInAfter,omitempty" tf:"scale_in_after,omitempty"`
 }
 
 type InstanceLaunchTemplateInitParameters struct {
 
-	// The purchasing option for the EC2 instances used in the capacity provider. Determines whether to use On-Demand or Spot instances. Valid values are ON_DEMAND and SPOT. Defaults to ON_DEMAND when not specified. Changing this value will trigger replacement of the capacity provider. For more information, see Amazon EC2 billing and purchasing options in the Amazon EC2 User Guide.
+	// Purchasing option for the EC2 instances used in the capacity provider. Determines whether to use On-Demand, Spot, or Capacity Reservation instances. Valid values are ON_DEMAND, SPOT, and RESERVED. Defaults to ON_DEMAND when not specified. Changing this value will trigger replacement of the capacity provider. For more information, see Amazon EC2 billing and purchasing options in the Amazon EC2 User Guide.
 	CapacityOptionType *string `json:"capacityOptionType,omitempty" tf:"capacity_option_type,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the instance profile that Amazon ECS applies to Amazon ECS Managed Instances. This instance profile must include the necessary permissions for your tasks to access AWS services and resources. For more information, see Amazon ECS instance profile for Managed Instances in the Amazon ECS Developer Guide.
+	// Capacity Reservation configuration used to launch instances. Required when capacity_option_type is RESERVED. Detailed below.
+	CapacityReservations *CapacityReservationsInitParameters `json:"capacityReservations,omitempty" tf:"capacity_reservations,omitempty"`
+
+	// ARN of the instance profile that Amazon ECS applies to Amazon ECS Managed Instances. This instance profile must include the necessary permissions for your tasks to access AWS services and resources. For more information, see Amazon ECS instance profile for Managed Instances in the Amazon ECS Developer Guide.
 	EC2InstanceProfileArn *string `json:"ec2InstanceProfileArn,omitempty" tf:"ec2_instance_profile_arn,omitempty"`
 
-	// The instance requirements. You can specify the instance types and instance requirements such as vCPU count, memory, network performance, and accelerator specifications. Amazon ECS automatically selects the instances that match the specified criteria. Detailed below.
+	// Instance requirements. You can specify the instance types and instance requirements such as vCPU count, memory, network performance, and accelerator specifications. Amazon ECS automatically selects the instances that match the specified criteria. Detailed below.
 	InstanceRequirements *InstanceRequirementsInitParameters `json:"instanceRequirements,omitempty" tf:"instance_requirements,omitempty"`
+
+	// Configuration block for the local storage settings applied to Amazon ECS Managed Instances. Detailed below.
+	LocalStorageConfiguration *LocalStorageConfigurationInitParameters `json:"localStorageConfiguration,omitempty" tf:"local_storage_configuration,omitempty"`
 
 	// CloudWatch provides two categories of monitoring: basic monitoring and detailed monitoring. By default, your managed instance is configured for basic monitoring. You can optionally enable detailed monitoring to help you more quickly identify and act on operational issues. You can enable or turn off detailed monitoring at launch or when the managed instance is running or stopped. For more information, see Detailed monitoring for Amazon ECS Managed Instances in the Amazon ECS Developer Guide. Valid values are BASIC and DETAILED.
 	Monitoring *string `json:"monitoring,omitempty" tf:"monitoring,omitempty"`
 
-	// The network configuration for Amazon ECS Managed Instances. This specifies the subnets and security groups that instances use for network connectivity. Detailed below.
+	// Network configuration for Amazon ECS Managed Instances. This specifies the subnets and security groups that instances use for network connectivity. Detailed below.
 	NetworkConfiguration *NetworkConfigurationInitParameters `json:"networkConfiguration,omitempty" tf:"network_configuration,omitempty"`
 
-	// The storage configuration for Amazon ECS Managed Instances. This defines the root volume size and type for the instances. Detailed below.
+	// Storage configuration for Amazon ECS Managed Instances. This defines the root volume size and type for the instances. Detailed below.
 	StorageConfiguration *StorageConfigurationInitParameters `json:"storageConfiguration,omitempty" tf:"storage_configuration,omitempty"`
 }
 
 type InstanceLaunchTemplateObservation struct {
 
-	// The purchasing option for the EC2 instances used in the capacity provider. Determines whether to use On-Demand or Spot instances. Valid values are ON_DEMAND and SPOT. Defaults to ON_DEMAND when not specified. Changing this value will trigger replacement of the capacity provider. For more information, see Amazon EC2 billing and purchasing options in the Amazon EC2 User Guide.
+	// Purchasing option for the EC2 instances used in the capacity provider. Determines whether to use On-Demand, Spot, or Capacity Reservation instances. Valid values are ON_DEMAND, SPOT, and RESERVED. Defaults to ON_DEMAND when not specified. Changing this value will trigger replacement of the capacity provider. For more information, see Amazon EC2 billing and purchasing options in the Amazon EC2 User Guide.
 	CapacityOptionType *string `json:"capacityOptionType,omitempty" tf:"capacity_option_type,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the instance profile that Amazon ECS applies to Amazon ECS Managed Instances. This instance profile must include the necessary permissions for your tasks to access AWS services and resources. For more information, see Amazon ECS instance profile for Managed Instances in the Amazon ECS Developer Guide.
+	// Capacity Reservation configuration used to launch instances. Required when capacity_option_type is RESERVED. Detailed below.
+	CapacityReservations *CapacityReservationsObservation `json:"capacityReservations,omitempty" tf:"capacity_reservations,omitempty"`
+
+	// ARN of the instance profile that Amazon ECS applies to Amazon ECS Managed Instances. This instance profile must include the necessary permissions for your tasks to access AWS services and resources. For more information, see Amazon ECS instance profile for Managed Instances in the Amazon ECS Developer Guide.
 	EC2InstanceProfileArn *string `json:"ec2InstanceProfileArn,omitempty" tf:"ec2_instance_profile_arn,omitempty"`
 
-	// The instance requirements. You can specify the instance types and instance requirements such as vCPU count, memory, network performance, and accelerator specifications. Amazon ECS automatically selects the instances that match the specified criteria. Detailed below.
+	// Instance requirements. You can specify the instance types and instance requirements such as vCPU count, memory, network performance, and accelerator specifications. Amazon ECS automatically selects the instances that match the specified criteria. Detailed below.
 	InstanceRequirements *InstanceRequirementsObservation `json:"instanceRequirements,omitempty" tf:"instance_requirements,omitempty"`
+
+	// Configuration block for the local storage settings applied to Amazon ECS Managed Instances. Detailed below.
+	LocalStorageConfiguration *LocalStorageConfigurationObservation `json:"localStorageConfiguration,omitempty" tf:"local_storage_configuration,omitempty"`
 
 	// CloudWatch provides two categories of monitoring: basic monitoring and detailed monitoring. By default, your managed instance is configured for basic monitoring. You can optionally enable detailed monitoring to help you more quickly identify and act on operational issues. You can enable or turn off detailed monitoring at launch or when the managed instance is running or stopped. For more information, see Detailed monitoring for Amazon ECS Managed Instances in the Amazon ECS Developer Guide. Valid values are BASIC and DETAILED.
 	Monitoring *string `json:"monitoring,omitempty" tf:"monitoring,omitempty"`
 
-	// The network configuration for Amazon ECS Managed Instances. This specifies the subnets and security groups that instances use for network connectivity. Detailed below.
+	// Network configuration for Amazon ECS Managed Instances. This specifies the subnets and security groups that instances use for network connectivity. Detailed below.
 	NetworkConfiguration *NetworkConfigurationObservation `json:"networkConfiguration,omitempty" tf:"network_configuration,omitempty"`
 
-	// The storage configuration for Amazon ECS Managed Instances. This defines the root volume size and type for the instances. Detailed below.
+	// Storage configuration for Amazon ECS Managed Instances. This defines the root volume size and type for the instances. Detailed below.
 	StorageConfiguration *StorageConfigurationObservation `json:"storageConfiguration,omitempty" tf:"storage_configuration,omitempty"`
 }
 
 type InstanceLaunchTemplateParameters struct {
 
-	// The purchasing option for the EC2 instances used in the capacity provider. Determines whether to use On-Demand or Spot instances. Valid values are ON_DEMAND and SPOT. Defaults to ON_DEMAND when not specified. Changing this value will trigger replacement of the capacity provider. For more information, see Amazon EC2 billing and purchasing options in the Amazon EC2 User Guide.
+	// Purchasing option for the EC2 instances used in the capacity provider. Determines whether to use On-Demand, Spot, or Capacity Reservation instances. Valid values are ON_DEMAND, SPOT, and RESERVED. Defaults to ON_DEMAND when not specified. Changing this value will trigger replacement of the capacity provider. For more information, see Amazon EC2 billing and purchasing options in the Amazon EC2 User Guide.
 	// +kubebuilder:validation:Optional
 	CapacityOptionType *string `json:"capacityOptionType,omitempty" tf:"capacity_option_type,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the instance profile that Amazon ECS applies to Amazon ECS Managed Instances. This instance profile must include the necessary permissions for your tasks to access AWS services and resources. For more information, see Amazon ECS instance profile for Managed Instances in the Amazon ECS Developer Guide.
+	// Capacity Reservation configuration used to launch instances. Required when capacity_option_type is RESERVED. Detailed below.
+	// +kubebuilder:validation:Optional
+	CapacityReservations *CapacityReservationsParameters `json:"capacityReservations,omitempty" tf:"capacity_reservations,omitempty"`
+
+	// ARN of the instance profile that Amazon ECS applies to Amazon ECS Managed Instances. This instance profile must include the necessary permissions for your tasks to access AWS services and resources. For more information, see Amazon ECS instance profile for Managed Instances in the Amazon ECS Developer Guide.
 	// +kubebuilder:validation:Optional
 	EC2InstanceProfileArn *string `json:"ec2InstanceProfileArn" tf:"ec2_instance_profile_arn,omitempty"`
 
-	// The instance requirements. You can specify the instance types and instance requirements such as vCPU count, memory, network performance, and accelerator specifications. Amazon ECS automatically selects the instances that match the specified criteria. Detailed below.
+	// Instance requirements. You can specify the instance types and instance requirements such as vCPU count, memory, network performance, and accelerator specifications. Amazon ECS automatically selects the instances that match the specified criteria. Detailed below.
 	// +kubebuilder:validation:Optional
 	InstanceRequirements *InstanceRequirementsParameters `json:"instanceRequirements,omitempty" tf:"instance_requirements,omitempty"`
+
+	// Configuration block for the local storage settings applied to Amazon ECS Managed Instances. Detailed below.
+	// +kubebuilder:validation:Optional
+	LocalStorageConfiguration *LocalStorageConfigurationParameters `json:"localStorageConfiguration,omitempty" tf:"local_storage_configuration,omitempty"`
 
 	// CloudWatch provides two categories of monitoring: basic monitoring and detailed monitoring. By default, your managed instance is configured for basic monitoring. You can optionally enable detailed monitoring to help you more quickly identify and act on operational issues. You can enable or turn off detailed monitoring at launch or when the managed instance is running or stopped. For more information, see Detailed monitoring for Amazon ECS Managed Instances in the Amazon ECS Developer Guide. Valid values are BASIC and DETAILED.
 	// +kubebuilder:validation:Optional
 	Monitoring *string `json:"monitoring,omitempty" tf:"monitoring,omitempty"`
 
-	// The network configuration for Amazon ECS Managed Instances. This specifies the subnets and security groups that instances use for network connectivity. Detailed below.
+	// Network configuration for Amazon ECS Managed Instances. This specifies the subnets and security groups that instances use for network connectivity. Detailed below.
 	// +kubebuilder:validation:Optional
 	NetworkConfiguration *NetworkConfigurationParameters `json:"networkConfiguration" tf:"network_configuration,omitempty"`
 
-	// The storage configuration for Amazon ECS Managed Instances. This defines the root volume size and type for the instances. Detailed below.
+	// Storage configuration for Amazon ECS Managed Instances. This defines the root volume size and type for the instances. Detailed below.
 	// +kubebuilder:validation:Optional
 	StorageConfiguration *StorageConfigurationParameters `json:"storageConfiguration,omitempty" tf:"storage_configuration,omitempty"`
 }
 
 type InstanceRequirementsInitParameters struct {
 
-	// The minimum and maximum number of accelerators for the instance types. This is used when you need instances with specific numbers of GPUs or other accelerators.
+	// Minimum and maximum number of accelerators for the instance types. This is used when you need instances with specific numbers of GPUs or other accelerators. Detailed below.
 	AcceleratorCount *AcceleratorCountInitParameters `json:"acceleratorCount,omitempty" tf:"accelerator_count,omitempty"`
 
-	// The accelerator manufacturers to include. You can specify nvidia, amd, amazon-web-services, xilinx, or habana depending on your accelerator requirements. Valid values are amazon-web-services, amd, nvidia, xilinx, habana.
+	// Accelerator manufacturers to include. You can specify nvidia, amd, amazon-web-services, xilinx, or habana depending on your accelerator requirements. Valid values are amazon-web-services, amd, nvidia, xilinx, habana.
 	// +listType=set
 	AcceleratorManufacturers []*string `json:"acceleratorManufacturers,omitempty" tf:"accelerator_manufacturers,omitempty"`
 
-	// The specific accelerator names to include. For example, you can specify a100, v100, k80, or other specific accelerator models. Valid values are a100, inferentia, k520, k80, m60, radeon-pro-v520, t4, vu9p, v100, a10g, h100, t4g.
+	// Specific accelerator names to include. For example, you can specify a100, v100, k80, or other specific accelerator models. Valid values are a100, inferentia, k520, k80, m60, radeon-pro-v520, t4, vu9p, v100, a10g, h100, t4g.
 	// +listType=set
 	AcceleratorNames []*string `json:"acceleratorNames,omitempty" tf:"accelerator_names,omitempty"`
 
-	// The minimum and maximum total accelerator memory in mebibytes (MiB). This is important for GPU workloads that require specific amounts of video memory.
+	// Minimum and maximum total accelerator memory in mebibytes (MiB). This is important for GPU workloads that require specific amounts of video memory. Detailed below.
 	AcceleratorTotalMemoryMib *AcceleratorTotalMemoryMibInitParameters `json:"acceleratorTotalMemoryMib,omitempty" tf:"accelerator_total_memory_mib,omitempty"`
 
-	// The accelerator types to include. You can specify gpu for graphics processing units, fpga for field programmable gate arrays, or inference for machine learning inference accelerators. Valid values are gpu, fpga, inference.
+	// Accelerator types to include. You can specify gpu for GPUs, fpga for field programmable gate arrays, or inference for machine learning inference accelerators. Valid values are gpu, fpga, inference.
 	// +listType=set
 	AcceleratorTypes []*string `json:"acceleratorTypes,omitempty" tf:"accelerator_types,omitempty"`
 
-	// The instance types to include in the selection. When specified, Amazon ECS only considers these instance types, subject to the other requirements specified. Maximum of 400 instance types. You can specify instance type patterns using wildcards (e.g., m5.*).
+	// Instance types to include in the selection. When specified, Amazon ECS only considers these instance types, subject to the other requirements specified. Maximum of 400 instance types. You can specify instance type patterns using wildcards (e.g., m5.*).
 	// +listType=set
 	AllowedInstanceTypes []*string `json:"allowedInstanceTypes,omitempty" tf:"allowed_instance_types,omitempty"`
 
-	// Indicates whether to include bare metal instance types. Set to included to allow bare metal instances, excluded to exclude them, or required to use only bare metal instances. Valid values are included, excluded, required.
+	// Whether to include bare metal instance types. Set to included to allow bare metal instances, excluded to exclude them, or required to use only bare metal instances. Valid values are included, excluded, required.
 	BareMetal *string `json:"bareMetal,omitempty" tf:"bare_metal,omitempty"`
 
-	// The minimum and maximum baseline Amazon EBS bandwidth in megabits per second (Mbps). This is important for workloads with high storage I/O requirements.
+	// Minimum and maximum baseline Amazon EBS bandwidth in megabits per second (Mbps). This is important for workloads with high storage I/O requirements. Detailed below.
 	BaselineEBSBandwidthMbps *BaselineEBSBandwidthMbpsInitParameters `json:"baselineEbsBandwidthMbps,omitempty" tf:"baseline_ebs_bandwidth_mbps,omitempty"`
 
-	// Indicates whether to include burstable performance instance types (T2, T3, T3a, T4g). Set to included to allow burstable instances, excluded to exclude them, or required to use only burstable instances. Valid values are included, excluded, required.
+	// Whether to include burstable performance instance types (T2, T3, T3a, T4g). Set to included to allow burstable instances, excluded to exclude them, or required to use only burstable instances. Valid values are included, excluded, required.
 	BurstablePerformance *string `json:"burstablePerformance,omitempty" tf:"burstable_performance,omitempty"`
 
-	// The CPU manufacturers to include or exclude. You can specify intel, amd, or amazon-web-services to control which CPU types are used for your workloads. Valid values are intel, amd, amazon-web-services.
+	// CPU manufacturers to include or exclude. You can specify intel, amd, or amazon-web-services to control which CPU types are used for your workloads. Valid values are intel, amd, amazon-web-services.
 	// +listType=set
 	CPUManufacturers []*string `json:"cpuManufacturers,omitempty" tf:"cpu_manufacturers,omitempty"`
 
-	// The instance types to exclude from selection. Use this to prevent Amazon ECS from selecting specific instance types that may not be suitable for your workloads. Maximum of 400 instance types.
+	// Instance types to exclude from selection. Use this to prevent Amazon ECS from selecting specific instance types that may not be suitable for your workloads. Maximum of 400 instance types.
 	// +listType=set
 	ExcludedInstanceTypes []*string `json:"excludedInstanceTypes,omitempty" tf:"excluded_instance_types,omitempty"`
 
-	// The instance generations to include. You can specify current to use the latest generation instances, or previous to include previous generation instances for cost optimization. Valid values are current, previous.
+	// Instance generations to include. You can specify current to use the latest generation instances, or previous to include previous generation instances for cost optimization. Valid values are current, previous.
 	// +listType=set
 	InstanceGenerations []*string `json:"instanceGenerations,omitempty" tf:"instance_generations,omitempty"`
 
-	// Indicates whether to include instance types with local storage. Set to included to allow local storage, excluded to exclude it, or required to use only instances with local storage. Valid values are included, excluded, required.
+	// Whether to include instance types with local storage. Set to included to allow local storage, excluded to exclude it, or required to use only instances with local storage. Valid values are included, excluded, required.
 	LocalStorage *string `json:"localStorage,omitempty" tf:"local_storage,omitempty"`
 
-	// The local storage types to include. You can specify hdd for hard disk drives, ssd for solid state drives, or both. Valid values are hdd, ssd.
+	// Local storage types to include. You can specify hdd for hard disk drives, ssd for solid state drives, or both. Valid values are hdd, ssd.
 	// +listType=set
 	LocalStorageTypes []*string `json:"localStorageTypes,omitempty" tf:"local_storage_types,omitempty"`
 
-	// The maximum price for Spot instances as a percentage of the optimal On-Demand price. This provides more precise cost control for Spot instance selection.
+	// Maximum price for Spot instances as a percentage of the optimal On-Demand price. This provides more precise cost control for Spot instance selection.
 	MaxSpotPriceAsPercentageOfOptimalOnDemandPrice *float64 `json:"maxSpotPriceAsPercentageOfOptimalOnDemandPrice,omitempty" tf:"max_spot_price_as_percentage_of_optimal_on_demand_price,omitempty"`
 
-	// The minimum and maximum amount of memory per vCPU in gibibytes (GiB). This helps ensure that instance types have the appropriate memory-to-CPU ratio for your workloads.
+	// Minimum and maximum amount of memory per vCPU in gibibytes (GiB). This helps ensure that instance types have the appropriate memory-to-CPU ratio for your workloads. Detailed below.
 	MemoryGibPerVcpu *MemoryGibPerVcpuInitParameters `json:"memoryGibPerVcpu,omitempty" tf:"memory_gib_per_vcpu,omitempty"`
 
-	// The minimum and maximum amount of memory in mebibytes (MiB) for the instance types. Amazon ECS selects instance types that have memory within this range.
+	// Minimum and maximum amount of memory in mebibytes (MiB) for the instance types. Amazon ECS selects instance types that have memory within this range. Detailed below.
 	MemoryMib *MemoryMibInitParameters `json:"memoryMib,omitempty" tf:"memory_mib,omitempty"`
 
-	// The minimum and maximum network bandwidth in gigabits per second (Gbps). This is crucial for network-intensive workloads that require high throughput.
+	// Minimum and maximum network bandwidth in gigabits per second (Gbps). This is crucial for network-intensive workloads that require high throughput. Detailed below.
 	NetworkBandwidthGbps *NetworkBandwidthGbpsInitParameters `json:"networkBandwidthGbps,omitempty" tf:"network_bandwidth_gbps,omitempty"`
 
-	// The minimum and maximum number of network interfaces for the instance types. This is useful for workloads that require multiple network interfaces.
+	// Minimum and maximum number of network interfaces for the instance types. This is useful for workloads that require multiple network interfaces. Detailed below.
 	NetworkInterfaceCount *NetworkInterfaceCountInitParameters `json:"networkInterfaceCount,omitempty" tf:"network_interface_count,omitempty"`
 
-	// The price protection threshold for On-Demand Instances, as a percentage higher than an identified On-Demand price. The identified On-Demand price is the price of the lowest priced current generation C, M, or R instance type with your specified attributes. When Amazon ECS selects instance types with your attributes, it will exclude instance types whose price exceeds your specified threshold.
+	// Price protection threshold for On-Demand Instances, as a percentage higher than an identified On-Demand price. The identified On-Demand price is the price of the lowest priced current generation C, M, or R instance type with your specified attributes. When Amazon ECS selects instance types with your attributes, it will exclude instance types whose price exceeds your specified threshold.
 	OnDemandMaxPricePercentageOverLowestPrice *float64 `json:"onDemandMaxPricePercentageOverLowestPrice,omitempty" tf:"on_demand_max_price_percentage_over_lowest_price,omitempty"`
 
-	// Indicates whether the instance types must support hibernation. When set to true, only instance types that support hibernation are selected.
+	// Whether the instance types must support hibernation. When set to true, only instance types that support hibernation are selected.
 	RequireHibernateSupport *bool `json:"requireHibernateSupport,omitempty" tf:"require_hibernate_support,omitempty"`
 
-	// The maximum price for Spot instances as a percentage over the lowest priced On-Demand instance. This helps control Spot instance costs while maintaining access to capacity.
+	// Maximum price for Spot instances as a percentage over the lowest priced On-Demand instance. This helps control Spot instance costs while maintaining access to capacity.
 	SpotMaxPricePercentageOverLowestPrice *float64 `json:"spotMaxPricePercentageOverLowestPrice,omitempty" tf:"spot_max_price_percentage_over_lowest_price,omitempty"`
 
-	// The minimum and maximum total local storage in gigabytes (GB) for instance types with local storage.
+	// Minimum and maximum total local storage in gigabytes (GB) for instance types with local storage. Detailed below.
 	TotalLocalStorageGb *TotalLocalStorageGbInitParameters `json:"totalLocalStorageGb,omitempty" tf:"total_local_storage_gb,omitempty"`
 
-	// The minimum and maximum number of vCPUs for the instance types. Amazon ECS selects instance types that have vCPU counts within this range.
+	// Minimum and maximum number of vCPUs for the instance types. Amazon ECS selects instance types that have vCPU counts within this range. Detailed below.
 	VcpuCount *VcpuCountInitParameters `json:"vcpuCount,omitempty" tf:"vcpu_count,omitempty"`
 }
 
 type InstanceRequirementsObservation struct {
 
-	// The minimum and maximum number of accelerators for the instance types. This is used when you need instances with specific numbers of GPUs or other accelerators.
+	// Minimum and maximum number of accelerators for the instance types. This is used when you need instances with specific numbers of GPUs or other accelerators. Detailed below.
 	AcceleratorCount *AcceleratorCountObservation `json:"acceleratorCount,omitempty" tf:"accelerator_count,omitempty"`
 
-	// The accelerator manufacturers to include. You can specify nvidia, amd, amazon-web-services, xilinx, or habana depending on your accelerator requirements. Valid values are amazon-web-services, amd, nvidia, xilinx, habana.
+	// Accelerator manufacturers to include. You can specify nvidia, amd, amazon-web-services, xilinx, or habana depending on your accelerator requirements. Valid values are amazon-web-services, amd, nvidia, xilinx, habana.
 	// +listType=set
 	AcceleratorManufacturers []*string `json:"acceleratorManufacturers,omitempty" tf:"accelerator_manufacturers,omitempty"`
 
-	// The specific accelerator names to include. For example, you can specify a100, v100, k80, or other specific accelerator models. Valid values are a100, inferentia, k520, k80, m60, radeon-pro-v520, t4, vu9p, v100, a10g, h100, t4g.
+	// Specific accelerator names to include. For example, you can specify a100, v100, k80, or other specific accelerator models. Valid values are a100, inferentia, k520, k80, m60, radeon-pro-v520, t4, vu9p, v100, a10g, h100, t4g.
 	// +listType=set
 	AcceleratorNames []*string `json:"acceleratorNames,omitempty" tf:"accelerator_names,omitempty"`
 
-	// The minimum and maximum total accelerator memory in mebibytes (MiB). This is important for GPU workloads that require specific amounts of video memory.
+	// Minimum and maximum total accelerator memory in mebibytes (MiB). This is important for GPU workloads that require specific amounts of video memory. Detailed below.
 	AcceleratorTotalMemoryMib *AcceleratorTotalMemoryMibObservation `json:"acceleratorTotalMemoryMib,omitempty" tf:"accelerator_total_memory_mib,omitempty"`
 
-	// The accelerator types to include. You can specify gpu for graphics processing units, fpga for field programmable gate arrays, or inference for machine learning inference accelerators. Valid values are gpu, fpga, inference.
+	// Accelerator types to include. You can specify gpu for GPUs, fpga for field programmable gate arrays, or inference for machine learning inference accelerators. Valid values are gpu, fpga, inference.
 	// +listType=set
 	AcceleratorTypes []*string `json:"acceleratorTypes,omitempty" tf:"accelerator_types,omitempty"`
 
-	// The instance types to include in the selection. When specified, Amazon ECS only considers these instance types, subject to the other requirements specified. Maximum of 400 instance types. You can specify instance type patterns using wildcards (e.g., m5.*).
+	// Instance types to include in the selection. When specified, Amazon ECS only considers these instance types, subject to the other requirements specified. Maximum of 400 instance types. You can specify instance type patterns using wildcards (e.g., m5.*).
 	// +listType=set
 	AllowedInstanceTypes []*string `json:"allowedInstanceTypes,omitempty" tf:"allowed_instance_types,omitempty"`
 
-	// Indicates whether to include bare metal instance types. Set to included to allow bare metal instances, excluded to exclude them, or required to use only bare metal instances. Valid values are included, excluded, required.
+	// Whether to include bare metal instance types. Set to included to allow bare metal instances, excluded to exclude them, or required to use only bare metal instances. Valid values are included, excluded, required.
 	BareMetal *string `json:"bareMetal,omitempty" tf:"bare_metal,omitempty"`
 
-	// The minimum and maximum baseline Amazon EBS bandwidth in megabits per second (Mbps). This is important for workloads with high storage I/O requirements.
+	// Minimum and maximum baseline Amazon EBS bandwidth in megabits per second (Mbps). This is important for workloads with high storage I/O requirements. Detailed below.
 	BaselineEBSBandwidthMbps *BaselineEBSBandwidthMbpsObservation `json:"baselineEbsBandwidthMbps,omitempty" tf:"baseline_ebs_bandwidth_mbps,omitempty"`
 
-	// Indicates whether to include burstable performance instance types (T2, T3, T3a, T4g). Set to included to allow burstable instances, excluded to exclude them, or required to use only burstable instances. Valid values are included, excluded, required.
+	// Whether to include burstable performance instance types (T2, T3, T3a, T4g). Set to included to allow burstable instances, excluded to exclude them, or required to use only burstable instances. Valid values are included, excluded, required.
 	BurstablePerformance *string `json:"burstablePerformance,omitempty" tf:"burstable_performance,omitempty"`
 
-	// The CPU manufacturers to include or exclude. You can specify intel, amd, or amazon-web-services to control which CPU types are used for your workloads. Valid values are intel, amd, amazon-web-services.
+	// CPU manufacturers to include or exclude. You can specify intel, amd, or amazon-web-services to control which CPU types are used for your workloads. Valid values are intel, amd, amazon-web-services.
 	// +listType=set
 	CPUManufacturers []*string `json:"cpuManufacturers,omitempty" tf:"cpu_manufacturers,omitempty"`
 
-	// The instance types to exclude from selection. Use this to prevent Amazon ECS from selecting specific instance types that may not be suitable for your workloads. Maximum of 400 instance types.
+	// Instance types to exclude from selection. Use this to prevent Amazon ECS from selecting specific instance types that may not be suitable for your workloads. Maximum of 400 instance types.
 	// +listType=set
 	ExcludedInstanceTypes []*string `json:"excludedInstanceTypes,omitempty" tf:"excluded_instance_types,omitempty"`
 
-	// The instance generations to include. You can specify current to use the latest generation instances, or previous to include previous generation instances for cost optimization. Valid values are current, previous.
+	// Instance generations to include. You can specify current to use the latest generation instances, or previous to include previous generation instances for cost optimization. Valid values are current, previous.
 	// +listType=set
 	InstanceGenerations []*string `json:"instanceGenerations,omitempty" tf:"instance_generations,omitempty"`
 
-	// Indicates whether to include instance types with local storage. Set to included to allow local storage, excluded to exclude it, or required to use only instances with local storage. Valid values are included, excluded, required.
+	// Whether to include instance types with local storage. Set to included to allow local storage, excluded to exclude it, or required to use only instances with local storage. Valid values are included, excluded, required.
 	LocalStorage *string `json:"localStorage,omitempty" tf:"local_storage,omitempty"`
 
-	// The local storage types to include. You can specify hdd for hard disk drives, ssd for solid state drives, or both. Valid values are hdd, ssd.
+	// Local storage types to include. You can specify hdd for hard disk drives, ssd for solid state drives, or both. Valid values are hdd, ssd.
 	// +listType=set
 	LocalStorageTypes []*string `json:"localStorageTypes,omitempty" tf:"local_storage_types,omitempty"`
 
-	// The maximum price for Spot instances as a percentage of the optimal On-Demand price. This provides more precise cost control for Spot instance selection.
+	// Maximum price for Spot instances as a percentage of the optimal On-Demand price. This provides more precise cost control for Spot instance selection.
 	MaxSpotPriceAsPercentageOfOptimalOnDemandPrice *float64 `json:"maxSpotPriceAsPercentageOfOptimalOnDemandPrice,omitempty" tf:"max_spot_price_as_percentage_of_optimal_on_demand_price,omitempty"`
 
-	// The minimum and maximum amount of memory per vCPU in gibibytes (GiB). This helps ensure that instance types have the appropriate memory-to-CPU ratio for your workloads.
+	// Minimum and maximum amount of memory per vCPU in gibibytes (GiB). This helps ensure that instance types have the appropriate memory-to-CPU ratio for your workloads. Detailed below.
 	MemoryGibPerVcpu *MemoryGibPerVcpuObservation `json:"memoryGibPerVcpu,omitempty" tf:"memory_gib_per_vcpu,omitempty"`
 
-	// The minimum and maximum amount of memory in mebibytes (MiB) for the instance types. Amazon ECS selects instance types that have memory within this range.
+	// Minimum and maximum amount of memory in mebibytes (MiB) for the instance types. Amazon ECS selects instance types that have memory within this range. Detailed below.
 	MemoryMib *MemoryMibObservation `json:"memoryMib,omitempty" tf:"memory_mib,omitempty"`
 
-	// The minimum and maximum network bandwidth in gigabits per second (Gbps). This is crucial for network-intensive workloads that require high throughput.
+	// Minimum and maximum network bandwidth in gigabits per second (Gbps). This is crucial for network-intensive workloads that require high throughput. Detailed below.
 	NetworkBandwidthGbps *NetworkBandwidthGbpsObservation `json:"networkBandwidthGbps,omitempty" tf:"network_bandwidth_gbps,omitempty"`
 
-	// The minimum and maximum number of network interfaces for the instance types. This is useful for workloads that require multiple network interfaces.
+	// Minimum and maximum number of network interfaces for the instance types. This is useful for workloads that require multiple network interfaces. Detailed below.
 	NetworkInterfaceCount *NetworkInterfaceCountObservation `json:"networkInterfaceCount,omitempty" tf:"network_interface_count,omitempty"`
 
-	// The price protection threshold for On-Demand Instances, as a percentage higher than an identified On-Demand price. The identified On-Demand price is the price of the lowest priced current generation C, M, or R instance type with your specified attributes. When Amazon ECS selects instance types with your attributes, it will exclude instance types whose price exceeds your specified threshold.
+	// Price protection threshold for On-Demand Instances, as a percentage higher than an identified On-Demand price. The identified On-Demand price is the price of the lowest priced current generation C, M, or R instance type with your specified attributes. When Amazon ECS selects instance types with your attributes, it will exclude instance types whose price exceeds your specified threshold.
 	OnDemandMaxPricePercentageOverLowestPrice *float64 `json:"onDemandMaxPricePercentageOverLowestPrice,omitempty" tf:"on_demand_max_price_percentage_over_lowest_price,omitempty"`
 
-	// Indicates whether the instance types must support hibernation. When set to true, only instance types that support hibernation are selected.
+	// Whether the instance types must support hibernation. When set to true, only instance types that support hibernation are selected.
 	RequireHibernateSupport *bool `json:"requireHibernateSupport,omitempty" tf:"require_hibernate_support,omitempty"`
 
-	// The maximum price for Spot instances as a percentage over the lowest priced On-Demand instance. This helps control Spot instance costs while maintaining access to capacity.
+	// Maximum price for Spot instances as a percentage over the lowest priced On-Demand instance. This helps control Spot instance costs while maintaining access to capacity.
 	SpotMaxPricePercentageOverLowestPrice *float64 `json:"spotMaxPricePercentageOverLowestPrice,omitempty" tf:"spot_max_price_percentage_over_lowest_price,omitempty"`
 
-	// The minimum and maximum total local storage in gigabytes (GB) for instance types with local storage.
+	// Minimum and maximum total local storage in gigabytes (GB) for instance types with local storage. Detailed below.
 	TotalLocalStorageGb *TotalLocalStorageGbObservation `json:"totalLocalStorageGb,omitempty" tf:"total_local_storage_gb,omitempty"`
 
-	// The minimum and maximum number of vCPUs for the instance types. Amazon ECS selects instance types that have vCPU counts within this range.
+	// Minimum and maximum number of vCPUs for the instance types. Amazon ECS selects instance types that have vCPU counts within this range. Detailed below.
 	VcpuCount *VcpuCountObservation `json:"vcpuCount,omitempty" tf:"vcpu_count,omitempty"`
 }
 
 type InstanceRequirementsParameters struct {
 
-	// The minimum and maximum number of accelerators for the instance types. This is used when you need instances with specific numbers of GPUs or other accelerators.
+	// Minimum and maximum number of accelerators for the instance types. This is used when you need instances with specific numbers of GPUs or other accelerators. Detailed below.
 	// +kubebuilder:validation:Optional
 	AcceleratorCount *AcceleratorCountParameters `json:"acceleratorCount,omitempty" tf:"accelerator_count,omitempty"`
 
-	// The accelerator manufacturers to include. You can specify nvidia, amd, amazon-web-services, xilinx, or habana depending on your accelerator requirements. Valid values are amazon-web-services, amd, nvidia, xilinx, habana.
+	// Accelerator manufacturers to include. You can specify nvidia, amd, amazon-web-services, xilinx, or habana depending on your accelerator requirements. Valid values are amazon-web-services, amd, nvidia, xilinx, habana.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	AcceleratorManufacturers []*string `json:"acceleratorManufacturers,omitempty" tf:"accelerator_manufacturers,omitempty"`
 
-	// The specific accelerator names to include. For example, you can specify a100, v100, k80, or other specific accelerator models. Valid values are a100, inferentia, k520, k80, m60, radeon-pro-v520, t4, vu9p, v100, a10g, h100, t4g.
+	// Specific accelerator names to include. For example, you can specify a100, v100, k80, or other specific accelerator models. Valid values are a100, inferentia, k520, k80, m60, radeon-pro-v520, t4, vu9p, v100, a10g, h100, t4g.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	AcceleratorNames []*string `json:"acceleratorNames,omitempty" tf:"accelerator_names,omitempty"`
 
-	// The minimum and maximum total accelerator memory in mebibytes (MiB). This is important for GPU workloads that require specific amounts of video memory.
+	// Minimum and maximum total accelerator memory in mebibytes (MiB). This is important for GPU workloads that require specific amounts of video memory. Detailed below.
 	// +kubebuilder:validation:Optional
 	AcceleratorTotalMemoryMib *AcceleratorTotalMemoryMibParameters `json:"acceleratorTotalMemoryMib,omitempty" tf:"accelerator_total_memory_mib,omitempty"`
 
-	// The accelerator types to include. You can specify gpu for graphics processing units, fpga for field programmable gate arrays, or inference for machine learning inference accelerators. Valid values are gpu, fpga, inference.
+	// Accelerator types to include. You can specify gpu for GPUs, fpga for field programmable gate arrays, or inference for machine learning inference accelerators. Valid values are gpu, fpga, inference.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	AcceleratorTypes []*string `json:"acceleratorTypes,omitempty" tf:"accelerator_types,omitempty"`
 
-	// The instance types to include in the selection. When specified, Amazon ECS only considers these instance types, subject to the other requirements specified. Maximum of 400 instance types. You can specify instance type patterns using wildcards (e.g., m5.*).
+	// Instance types to include in the selection. When specified, Amazon ECS only considers these instance types, subject to the other requirements specified. Maximum of 400 instance types. You can specify instance type patterns using wildcards (e.g., m5.*).
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	AllowedInstanceTypes []*string `json:"allowedInstanceTypes,omitempty" tf:"allowed_instance_types,omitempty"`
 
-	// Indicates whether to include bare metal instance types. Set to included to allow bare metal instances, excluded to exclude them, or required to use only bare metal instances. Valid values are included, excluded, required.
+	// Whether to include bare metal instance types. Set to included to allow bare metal instances, excluded to exclude them, or required to use only bare metal instances. Valid values are included, excluded, required.
 	// +kubebuilder:validation:Optional
 	BareMetal *string `json:"bareMetal,omitempty" tf:"bare_metal,omitempty"`
 
-	// The minimum and maximum baseline Amazon EBS bandwidth in megabits per second (Mbps). This is important for workloads with high storage I/O requirements.
+	// Minimum and maximum baseline Amazon EBS bandwidth in megabits per second (Mbps). This is important for workloads with high storage I/O requirements. Detailed below.
 	// +kubebuilder:validation:Optional
 	BaselineEBSBandwidthMbps *BaselineEBSBandwidthMbpsParameters `json:"baselineEbsBandwidthMbps,omitempty" tf:"baseline_ebs_bandwidth_mbps,omitempty"`
 
-	// Indicates whether to include burstable performance instance types (T2, T3, T3a, T4g). Set to included to allow burstable instances, excluded to exclude them, or required to use only burstable instances. Valid values are included, excluded, required.
+	// Whether to include burstable performance instance types (T2, T3, T3a, T4g). Set to included to allow burstable instances, excluded to exclude them, or required to use only burstable instances. Valid values are included, excluded, required.
 	// +kubebuilder:validation:Optional
 	BurstablePerformance *string `json:"burstablePerformance,omitempty" tf:"burstable_performance,omitempty"`
 
-	// The CPU manufacturers to include or exclude. You can specify intel, amd, or amazon-web-services to control which CPU types are used for your workloads. Valid values are intel, amd, amazon-web-services.
+	// CPU manufacturers to include or exclude. You can specify intel, amd, or amazon-web-services to control which CPU types are used for your workloads. Valid values are intel, amd, amazon-web-services.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	CPUManufacturers []*string `json:"cpuManufacturers,omitempty" tf:"cpu_manufacturers,omitempty"`
 
-	// The instance types to exclude from selection. Use this to prevent Amazon ECS from selecting specific instance types that may not be suitable for your workloads. Maximum of 400 instance types.
+	// Instance types to exclude from selection. Use this to prevent Amazon ECS from selecting specific instance types that may not be suitable for your workloads. Maximum of 400 instance types.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	ExcludedInstanceTypes []*string `json:"excludedInstanceTypes,omitempty" tf:"excluded_instance_types,omitempty"`
 
-	// The instance generations to include. You can specify current to use the latest generation instances, or previous to include previous generation instances for cost optimization. Valid values are current, previous.
+	// Instance generations to include. You can specify current to use the latest generation instances, or previous to include previous generation instances for cost optimization. Valid values are current, previous.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	InstanceGenerations []*string `json:"instanceGenerations,omitempty" tf:"instance_generations,omitempty"`
 
-	// Indicates whether to include instance types with local storage. Set to included to allow local storage, excluded to exclude it, or required to use only instances with local storage. Valid values are included, excluded, required.
+	// Whether to include instance types with local storage. Set to included to allow local storage, excluded to exclude it, or required to use only instances with local storage. Valid values are included, excluded, required.
 	// +kubebuilder:validation:Optional
 	LocalStorage *string `json:"localStorage,omitempty" tf:"local_storage,omitempty"`
 
-	// The local storage types to include. You can specify hdd for hard disk drives, ssd for solid state drives, or both. Valid values are hdd, ssd.
+	// Local storage types to include. You can specify hdd for hard disk drives, ssd for solid state drives, or both. Valid values are hdd, ssd.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	LocalStorageTypes []*string `json:"localStorageTypes,omitempty" tf:"local_storage_types,omitempty"`
 
-	// The maximum price for Spot instances as a percentage of the optimal On-Demand price. This provides more precise cost control for Spot instance selection.
+	// Maximum price for Spot instances as a percentage of the optimal On-Demand price. This provides more precise cost control for Spot instance selection.
 	// +kubebuilder:validation:Optional
 	MaxSpotPriceAsPercentageOfOptimalOnDemandPrice *float64 `json:"maxSpotPriceAsPercentageOfOptimalOnDemandPrice,omitempty" tf:"max_spot_price_as_percentage_of_optimal_on_demand_price,omitempty"`
 
-	// The minimum and maximum amount of memory per vCPU in gibibytes (GiB). This helps ensure that instance types have the appropriate memory-to-CPU ratio for your workloads.
+	// Minimum and maximum amount of memory per vCPU in gibibytes (GiB). This helps ensure that instance types have the appropriate memory-to-CPU ratio for your workloads. Detailed below.
 	// +kubebuilder:validation:Optional
 	MemoryGibPerVcpu *MemoryGibPerVcpuParameters `json:"memoryGibPerVcpu,omitempty" tf:"memory_gib_per_vcpu,omitempty"`
 
-	// The minimum and maximum amount of memory in mebibytes (MiB) for the instance types. Amazon ECS selects instance types that have memory within this range.
+	// Minimum and maximum amount of memory in mebibytes (MiB) for the instance types. Amazon ECS selects instance types that have memory within this range. Detailed below.
 	// +kubebuilder:validation:Optional
 	MemoryMib *MemoryMibParameters `json:"memoryMib" tf:"memory_mib,omitempty"`
 
-	// The minimum and maximum network bandwidth in gigabits per second (Gbps). This is crucial for network-intensive workloads that require high throughput.
+	// Minimum and maximum network bandwidth in gigabits per second (Gbps). This is crucial for network-intensive workloads that require high throughput. Detailed below.
 	// +kubebuilder:validation:Optional
 	NetworkBandwidthGbps *NetworkBandwidthGbpsParameters `json:"networkBandwidthGbps,omitempty" tf:"network_bandwidth_gbps,omitempty"`
 
-	// The minimum and maximum number of network interfaces for the instance types. This is useful for workloads that require multiple network interfaces.
+	// Minimum and maximum number of network interfaces for the instance types. This is useful for workloads that require multiple network interfaces. Detailed below.
 	// +kubebuilder:validation:Optional
 	NetworkInterfaceCount *NetworkInterfaceCountParameters `json:"networkInterfaceCount,omitempty" tf:"network_interface_count,omitempty"`
 
-	// The price protection threshold for On-Demand Instances, as a percentage higher than an identified On-Demand price. The identified On-Demand price is the price of the lowest priced current generation C, M, or R instance type with your specified attributes. When Amazon ECS selects instance types with your attributes, it will exclude instance types whose price exceeds your specified threshold.
+	// Price protection threshold for On-Demand Instances, as a percentage higher than an identified On-Demand price. The identified On-Demand price is the price of the lowest priced current generation C, M, or R instance type with your specified attributes. When Amazon ECS selects instance types with your attributes, it will exclude instance types whose price exceeds your specified threshold.
 	// +kubebuilder:validation:Optional
 	OnDemandMaxPricePercentageOverLowestPrice *float64 `json:"onDemandMaxPricePercentageOverLowestPrice,omitempty" tf:"on_demand_max_price_percentage_over_lowest_price,omitempty"`
 
-	// Indicates whether the instance types must support hibernation. When set to true, only instance types that support hibernation are selected.
+	// Whether the instance types must support hibernation. When set to true, only instance types that support hibernation are selected.
 	// +kubebuilder:validation:Optional
 	RequireHibernateSupport *bool `json:"requireHibernateSupport,omitempty" tf:"require_hibernate_support,omitempty"`
 
-	// The maximum price for Spot instances as a percentage over the lowest priced On-Demand instance. This helps control Spot instance costs while maintaining access to capacity.
+	// Maximum price for Spot instances as a percentage over the lowest priced On-Demand instance. This helps control Spot instance costs while maintaining access to capacity.
 	// +kubebuilder:validation:Optional
 	SpotMaxPricePercentageOverLowestPrice *float64 `json:"spotMaxPricePercentageOverLowestPrice,omitempty" tf:"spot_max_price_percentage_over_lowest_price,omitempty"`
 
-	// The minimum and maximum total local storage in gigabytes (GB) for instance types with local storage.
+	// Minimum and maximum total local storage in gigabytes (GB) for instance types with local storage. Detailed below.
 	// +kubebuilder:validation:Optional
 	TotalLocalStorageGb *TotalLocalStorageGbParameters `json:"totalLocalStorageGb,omitempty" tf:"total_local_storage_gb,omitempty"`
 
-	// The minimum and maximum number of vCPUs for the instance types. Amazon ECS selects instance types that have vCPU counts within this range.
+	// Minimum and maximum number of vCPUs for the instance types. Amazon ECS selects instance types that have vCPU counts within this range. Detailed below.
 	// +kubebuilder:validation:Optional
 	VcpuCount *VcpuCountParameters `json:"vcpuCount" tf:"vcpu_count,omitempty"`
 }
 
+type LocalStorageConfigurationInitParameters struct {
+
+	// Whether to use the local storage of the instance for Amazon ECS Managed Instances.
+	UseLocalStorage *bool `json:"useLocalStorage,omitempty" tf:"use_local_storage,omitempty"`
+}
+
+type LocalStorageConfigurationObservation struct {
+
+	// Whether to use the local storage of the instance for Amazon ECS Managed Instances.
+	UseLocalStorage *bool `json:"useLocalStorage,omitempty" tf:"use_local_storage,omitempty"`
+}
+
+type LocalStorageConfigurationParameters struct {
+
+	// Whether to use the local storage of the instance for Amazon ECS Managed Instances.
+	// +kubebuilder:validation:Optional
+	UseLocalStorage *bool `json:"useLocalStorage,omitempty" tf:"use_local_storage,omitempty"`
+}
+
 type ManagedInstancesProviderInitParameters struct {
 
-	// Defines how Amazon ECS Managed Instances optimizes the infrastructure in your capacity provider. Configure it to turn on or off the infrastructure optimization in your capacity provider, and to control the idle EC2 instances optimization delay.
+	// Configuration block for how Amazon ECS Managed Instances optimizes the infrastructure in your capacity provider, including whether to turn optimization on or off and how long to delay optimizing idle EC2 instances. Detailed below.
 	InfrastructureOptimization *InfrastructureOptimizationInitParameters `json:"infrastructureOptimization,omitempty" tf:"infrastructure_optimization,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the infrastructure role that Amazon ECS uses to manage instances on your behalf. This role must have permissions to launch, terminate, and manage Amazon EC2 instances, as well as access to other AWS services required for Amazon ECS Managed Instances functionality. For more information, see Amazon ECS infrastructure IAM role in the Amazon ECS Developer Guide.
+	// ARN of the infrastructure role that Amazon ECS uses to manage instances on your behalf. This role must have permissions to launch, terminate, and manage Amazon EC2 instances, as well as access to other AWS services required for Amazon ECS Managed Instances functionality. For more information, see Amazon ECS infrastructure IAM role in the Amazon ECS Developer Guide.
 	InfrastructureRoleArn *string `json:"infrastructureRoleArn,omitempty" tf:"infrastructure_role_arn,omitempty"`
 
-	// The launch template configuration that specifies how Amazon ECS should launch Amazon EC2 instances. This includes the instance profile, network configuration, storage settings, and instance requirements for attribute-based instance type selection. For more information, see Store instance launch parameters in Amazon EC2 launch templates in the Amazon EC2 User Guide. Detailed below.
+	// Launch template configuration that specifies how Amazon ECS should launch Amazon EC2 instances. This includes the instance profile, network configuration, storage settings, and instance requirements for attribute-based instance type selection. For more information, see Store instance launch parameters in Amazon EC2 launch templates in the Amazon EC2 User Guide. Detailed below.
 	InstanceLaunchTemplate *InstanceLaunchTemplateInitParameters `json:"instanceLaunchTemplate,omitempty" tf:"instance_launch_template,omitempty"`
 
-	// Specifies whether to propagate tags from the capacity provider to the Amazon ECS Managed Instances. When enabled, tags applied to the capacity provider are automatically applied to all instances launched by this provider. Valid values are CAPACITY_PROVIDER and NONE.
+	// Whether to propagate tags from the capacity provider to the Amazon ECS Managed Instances. When enabled, tags applied to the capacity provider are automatically applied to all instances launched by this provider. Valid values are CAPACITY_PROVIDER and NONE.
 	PropagateTags *string `json:"propagateTags,omitempty" tf:"propagate_tags,omitempty"`
 }
 
 type ManagedInstancesProviderObservation struct {
 
-	// Defines how Amazon ECS Managed Instances optimizes the infrastructure in your capacity provider. Configure it to turn on or off the infrastructure optimization in your capacity provider, and to control the idle EC2 instances optimization delay.
+	// Configuration block for how Amazon ECS Managed Instances optimizes the infrastructure in your capacity provider, including whether to turn optimization on or off and how long to delay optimizing idle EC2 instances. Detailed below.
 	InfrastructureOptimization *InfrastructureOptimizationObservation `json:"infrastructureOptimization,omitempty" tf:"infrastructure_optimization,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the infrastructure role that Amazon ECS uses to manage instances on your behalf. This role must have permissions to launch, terminate, and manage Amazon EC2 instances, as well as access to other AWS services required for Amazon ECS Managed Instances functionality. For more information, see Amazon ECS infrastructure IAM role in the Amazon ECS Developer Guide.
+	// ARN of the infrastructure role that Amazon ECS uses to manage instances on your behalf. This role must have permissions to launch, terminate, and manage Amazon EC2 instances, as well as access to other AWS services required for Amazon ECS Managed Instances functionality. For more information, see Amazon ECS infrastructure IAM role in the Amazon ECS Developer Guide.
 	InfrastructureRoleArn *string `json:"infrastructureRoleArn,omitempty" tf:"infrastructure_role_arn,omitempty"`
 
-	// The launch template configuration that specifies how Amazon ECS should launch Amazon EC2 instances. This includes the instance profile, network configuration, storage settings, and instance requirements for attribute-based instance type selection. For more information, see Store instance launch parameters in Amazon EC2 launch templates in the Amazon EC2 User Guide. Detailed below.
+	// Launch template configuration that specifies how Amazon ECS should launch Amazon EC2 instances. This includes the instance profile, network configuration, storage settings, and instance requirements for attribute-based instance type selection. For more information, see Store instance launch parameters in Amazon EC2 launch templates in the Amazon EC2 User Guide. Detailed below.
 	InstanceLaunchTemplate *InstanceLaunchTemplateObservation `json:"instanceLaunchTemplate,omitempty" tf:"instance_launch_template,omitempty"`
 
-	// Specifies whether to propagate tags from the capacity provider to the Amazon ECS Managed Instances. When enabled, tags applied to the capacity provider are automatically applied to all instances launched by this provider. Valid values are CAPACITY_PROVIDER and NONE.
+	// Whether to propagate tags from the capacity provider to the Amazon ECS Managed Instances. When enabled, tags applied to the capacity provider are automatically applied to all instances launched by this provider. Valid values are CAPACITY_PROVIDER and NONE.
 	PropagateTags *string `json:"propagateTags,omitempty" tf:"propagate_tags,omitempty"`
 }
 
 type ManagedInstancesProviderParameters struct {
 
-	// Defines how Amazon ECS Managed Instances optimizes the infrastructure in your capacity provider. Configure it to turn on or off the infrastructure optimization in your capacity provider, and to control the idle EC2 instances optimization delay.
+	// Configuration block for how Amazon ECS Managed Instances optimizes the infrastructure in your capacity provider, including whether to turn optimization on or off and how long to delay optimizing idle EC2 instances. Detailed below.
 	// +kubebuilder:validation:Optional
 	InfrastructureOptimization *InfrastructureOptimizationParameters `json:"infrastructureOptimization,omitempty" tf:"infrastructure_optimization,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the infrastructure role that Amazon ECS uses to manage instances on your behalf. This role must have permissions to launch, terminate, and manage Amazon EC2 instances, as well as access to other AWS services required for Amazon ECS Managed Instances functionality. For more information, see Amazon ECS infrastructure IAM role in the Amazon ECS Developer Guide.
+	// ARN of the infrastructure role that Amazon ECS uses to manage instances on your behalf. This role must have permissions to launch, terminate, and manage Amazon EC2 instances, as well as access to other AWS services required for Amazon ECS Managed Instances functionality. For more information, see Amazon ECS infrastructure IAM role in the Amazon ECS Developer Guide.
 	// +kubebuilder:validation:Optional
 	InfrastructureRoleArn *string `json:"infrastructureRoleArn" tf:"infrastructure_role_arn,omitempty"`
 
-	// The launch template configuration that specifies how Amazon ECS should launch Amazon EC2 instances. This includes the instance profile, network configuration, storage settings, and instance requirements for attribute-based instance type selection. For more information, see Store instance launch parameters in Amazon EC2 launch templates in the Amazon EC2 User Guide. Detailed below.
+	// Launch template configuration that specifies how Amazon ECS should launch Amazon EC2 instances. This includes the instance profile, network configuration, storage settings, and instance requirements for attribute-based instance type selection. For more information, see Store instance launch parameters in Amazon EC2 launch templates in the Amazon EC2 User Guide. Detailed below.
 	// +kubebuilder:validation:Optional
 	InstanceLaunchTemplate *InstanceLaunchTemplateParameters `json:"instanceLaunchTemplate" tf:"instance_launch_template,omitempty"`
 
-	// Specifies whether to propagate tags from the capacity provider to the Amazon ECS Managed Instances. When enabled, tags applied to the capacity provider are automatically applied to all instances launched by this provider. Valid values are CAPACITY_PROVIDER and NONE.
+	// Whether to propagate tags from the capacity provider to the Amazon ECS Managed Instances. When enabled, tags applied to the capacity provider are automatically applied to all instances launched by this provider. Valid values are CAPACITY_PROVIDER and NONE.
 	// +kubebuilder:validation:Optional
 	PropagateTags *string `json:"propagateTags,omitempty" tf:"propagate_tags,omitempty"`
 }
@@ -685,181 +777,229 @@ type ManagedScalingParameters struct {
 }
 
 type MemoryGibPerVcpuInitParameters struct {
+
+	// Maximum number of accelerators.
 	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
 
+	// Minimum number of accelerators.
 	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
 }
 
 type MemoryGibPerVcpuObservation struct {
+
+	// Maximum number of accelerators.
 	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
 
+	// Minimum number of accelerators.
 	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
 }
 
 type MemoryGibPerVcpuParameters struct {
 
+	// Maximum number of accelerators.
 	// +kubebuilder:validation:Optional
 	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
 
+	// Minimum number of accelerators.
 	// +kubebuilder:validation:Optional
 	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
 }
 
 type MemoryMibInitParameters struct {
+
+	// Maximum number of accelerators.
 	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
 
+	// Minimum number of accelerators.
 	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
 }
 
 type MemoryMibObservation struct {
+
+	// Maximum number of accelerators.
 	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
 
+	// Minimum number of accelerators.
 	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
 }
 
 type MemoryMibParameters struct {
 
+	// Maximum number of accelerators.
 	// +kubebuilder:validation:Optional
 	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
 
+	// Minimum number of accelerators.
 	// +kubebuilder:validation:Optional
 	Min *float64 `json:"min" tf:"min,omitempty"`
 }
 
 type NetworkBandwidthGbpsInitParameters struct {
+
+	// Maximum number of accelerators.
 	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
 
+	// Minimum number of accelerators.
 	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
 }
 
 type NetworkBandwidthGbpsObservation struct {
+
+	// Maximum number of accelerators.
 	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
 
+	// Minimum number of accelerators.
 	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
 }
 
 type NetworkBandwidthGbpsParameters struct {
 
+	// Maximum number of accelerators.
 	// +kubebuilder:validation:Optional
 	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
 
+	// Minimum number of accelerators.
 	// +kubebuilder:validation:Optional
 	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
 }
 
 type NetworkConfigurationInitParameters struct {
 
-	// The list of security group IDs to apply to Amazon ECS Managed Instances. These security groups control the network traffic allowed to and from the instances.
+	// List of security group IDs to apply to Amazon ECS Managed Instances. These security groups control the network traffic allowed to and from the instances.
 	// +listType=set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
-	// The list of subnet IDs where Amazon ECS can launch Amazon ECS Managed Instances. Instances are distributed across the specified subnets for high availability. All subnets must be in the same VPC.
+	// List of subnet IDs where Amazon ECS can launch Amazon ECS Managed Instances. Instances are distributed across the specified subnets for high availability. All subnets must be in the same VPC.
 	// +listType=set
 	Subnets []*string `json:"subnets,omitempty" tf:"subnets,omitempty"`
 }
 
 type NetworkConfigurationObservation struct {
 
-	// The list of security group IDs to apply to Amazon ECS Managed Instances. These security groups control the network traffic allowed to and from the instances.
+	// List of security group IDs to apply to Amazon ECS Managed Instances. These security groups control the network traffic allowed to and from the instances.
 	// +listType=set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
-	// The list of subnet IDs where Amazon ECS can launch Amazon ECS Managed Instances. Instances are distributed across the specified subnets for high availability. All subnets must be in the same VPC.
+	// List of subnet IDs where Amazon ECS can launch Amazon ECS Managed Instances. Instances are distributed across the specified subnets for high availability. All subnets must be in the same VPC.
 	// +listType=set
 	Subnets []*string `json:"subnets,omitempty" tf:"subnets,omitempty"`
 }
 
 type NetworkConfigurationParameters struct {
 
-	// The list of security group IDs to apply to Amazon ECS Managed Instances. These security groups control the network traffic allowed to and from the instances.
+	// List of security group IDs to apply to Amazon ECS Managed Instances. These security groups control the network traffic allowed to and from the instances.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
-	// The list of subnet IDs where Amazon ECS can launch Amazon ECS Managed Instances. Instances are distributed across the specified subnets for high availability. All subnets must be in the same VPC.
+	// List of subnet IDs where Amazon ECS can launch Amazon ECS Managed Instances. Instances are distributed across the specified subnets for high availability. All subnets must be in the same VPC.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	Subnets []*string `json:"subnets" tf:"subnets,omitempty"`
 }
 
 type NetworkInterfaceCountInitParameters struct {
+
+	// Maximum number of accelerators.
 	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
 
+	// Minimum number of accelerators.
 	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
 }
 
 type NetworkInterfaceCountObservation struct {
+
+	// Maximum number of accelerators.
 	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
 
+	// Minimum number of accelerators.
 	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
 }
 
 type NetworkInterfaceCountParameters struct {
 
+	// Maximum number of accelerators.
 	// +kubebuilder:validation:Optional
 	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
 
+	// Minimum number of accelerators.
 	// +kubebuilder:validation:Optional
 	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
 }
 
 type StorageConfigurationInitParameters struct {
 
-	// The size of the tasks volume in GiB. Must be at least 1.
+	// Size of the tasks volume in GiB. Must be at least 1.
 	StorageSizeGib *float64 `json:"storageSizeGib,omitempty" tf:"storage_size_gib,omitempty"`
 }
 
 type StorageConfigurationObservation struct {
 
-	// The size of the tasks volume in GiB. Must be at least 1.
+	// Size of the tasks volume in GiB. Must be at least 1.
 	StorageSizeGib *float64 `json:"storageSizeGib,omitempty" tf:"storage_size_gib,omitempty"`
 }
 
 type StorageConfigurationParameters struct {
 
-	// The size of the tasks volume in GiB. Must be at least 1.
+	// Size of the tasks volume in GiB. Must be at least 1.
 	// +kubebuilder:validation:Optional
 	StorageSizeGib *float64 `json:"storageSizeGib" tf:"storage_size_gib,omitempty"`
 }
 
 type TotalLocalStorageGbInitParameters struct {
+
+	// Maximum number of accelerators.
 	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
 
+	// Minimum number of accelerators.
 	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
 }
 
 type TotalLocalStorageGbObservation struct {
+
+	// Maximum number of accelerators.
 	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
 
+	// Minimum number of accelerators.
 	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
 }
 
 type TotalLocalStorageGbParameters struct {
 
+	// Maximum number of accelerators.
 	// +kubebuilder:validation:Optional
 	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
 
+	// Minimum number of accelerators.
 	// +kubebuilder:validation:Optional
 	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
 }
 
 type VcpuCountInitParameters struct {
+
+	// Maximum number of accelerators.
 	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
 
+	// Minimum number of accelerators.
 	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
 }
 
 type VcpuCountObservation struct {
+
+	// Maximum number of accelerators.
 	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
 
+	// Minimum number of accelerators.
 	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
 }
 
 type VcpuCountParameters struct {
 
+	// Maximum number of accelerators.
 	// +kubebuilder:validation:Optional
 	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
 
+	// Minimum number of accelerators.
 	// +kubebuilder:validation:Optional
 	Min *float64 `json:"min" tf:"min,omitempty"`
 }

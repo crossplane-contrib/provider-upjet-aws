@@ -1290,8 +1290,7 @@ spec:
                     items:
                       properties:
                         componentArn:
-                          description: Amazon Resource Name (ARN) of the Image Builder
-                            Component to associate.
+                          description: ARN of the Image Builder Component to associate.
                           type: string
                         componentArnRef:
                           description: Reference to a Component in imagebuilder to
@@ -1432,8 +1431,7 @@ spec:
                                     per second to provision for an io1 or io2 volume.
                                   type: number
                                 kmsKeyId:
-                                  description: Amazon Resource Name (ARN) of the Key
-                                    Management Service (KMS) Key for encryption.
+                                  description: ARN of the KMS Key for encryption.
                                   type: string
                                 snapshotId:
                                   description: Identifier of the EC2 Volume Snapshot.
@@ -1684,8 +1682,7 @@ spec:
                     items:
                       properties:
                         componentArn:
-                          description: Amazon Resource Name (ARN) of the Image Builder
-                            Component to associate.
+                          description: ARN of the Image Builder Component to associate.
                           type: string
                         componentArnRef:
                           description: Reference to a Component in imagebuilder to
@@ -1826,8 +1823,7 @@ spec:
                                     per second to provision for an io1 or io2 volume.
                                   type: number
                                 kmsKeyId:
-                                  description: Amazon Resource Name (ARN) of the Key
-                                    Management Service (KMS) Key for encryption.
+                                  description: ARN of the KMS Key for encryption.
                                   type: string
                                 snapshotId:
                                   description: Identifier of the EC2 Volume Snapshot.
@@ -2169,7 +2165,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: Amazon Resource Name (ARN) of the container recipe.
+                    description: ARN of the container recipe.
                     type: string
                   component:
                     description: Ordered configuration block(s) with components for
@@ -2177,8 +2173,7 @@ spec:
                     items:
                       properties:
                         componentArn:
-                          description: Amazon Resource Name (ARN) of the Image Builder
-                            Component to associate.
+                          description: ARN of the Image Builder Component to associate.
                           type: string
                         parameter:
                           description: Configuration block(s) for parameters to configure
@@ -2218,7 +2213,7 @@ spec:
                       encrypted.
                     type: boolean
                   id:
-                    description: Amazon Resource Name (ARN) of the container recipe.
+                    description: ARN of the container recipe.
                     type: string
                   instanceConfiguration:
                     description: Configuration block used to configure an instance
@@ -2253,8 +2248,7 @@ spec:
                                     per second to provision for an io1 or io2 volume.
                                   type: number
                                 kmsKeyId:
-                                  description: Amazon Resource Name (ARN) of the Key
-                                    Management Service (KMS) Key for encryption.
+                                  description: ARN of the KMS Key for encryption.
                                   type: string
                                 snapshotId:
                                   description: Identifier of the EC2 Volume Snapshot.

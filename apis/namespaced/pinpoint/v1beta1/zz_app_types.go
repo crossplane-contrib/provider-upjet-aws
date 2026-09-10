@@ -37,7 +37,7 @@ type AppObservation struct {
 	// Application ID of the End User Messaging App.
 	ApplicationID *string `json:"applicationId,omitempty" tf:"application_id,omitempty"`
 
-	// Amazon Resource Name (ARN) of the PinPoint Application.
+	// ARN of the PinPoint Application.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Settings for invoking an AWS Lambda function that customizes a segment for a campaign. See below.

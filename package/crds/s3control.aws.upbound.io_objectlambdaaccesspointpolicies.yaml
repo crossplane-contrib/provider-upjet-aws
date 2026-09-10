@@ -76,11 +76,11 @@ spec:
               forProvider:
                 properties:
                   accountId:
-                    description: The AWS account ID for the account that owns the
-                      Object Lambda Access Point.
+                    description: AWS account ID for the account that owns the Object
+                      Lambda Access Point.
                     type: string
                   name:
-                    description: The name of the Object Lambda Access Point.
+                    description: Name of the Object Lambda Access Point.
                     type: string
                   nameRef:
                     description: Reference to a ObjectLambdaAccessPoint in s3control
@@ -159,7 +159,7 @@ spec:
                         type: object
                     type: object
                   policy:
-                    description: The Object Lambda Access Point resource policy document.
+                    description: Object Lambda Access Point resource policy document.
                     type: string
                   region:
                     description: |-
@@ -183,11 +183,11 @@ spec:
                   autoscaler.
                 properties:
                   accountId:
-                    description: The AWS account ID for the account that owns the
-                      Object Lambda Access Point.
+                    description: AWS account ID for the account that owns the Object
+                      Lambda Access Point.
                     type: string
                   name:
-                    description: The name of the Object Lambda Access Point.
+                    description: Name of the Object Lambda Access Point.
                     type: string
                   nameRef:
                     description: Reference to a ObjectLambdaAccessPoint in s3control
@@ -266,7 +266,7 @@ spec:
                         type: object
                     type: object
                   policy:
-                    description: The Object Lambda Access Point resource policy document.
+                    description: Object Lambda Access Point resource policy document.
                     type: string
                 type: object
               managementPolicies:
@@ -367,22 +367,22 @@ spec:
               atProvider:
                 properties:
                   accountId:
-                    description: The AWS account ID for the account that owns the
-                      Object Lambda Access Point.
+                    description: AWS account ID for the account that owns the Object
+                      Lambda Access Point.
                     type: string
                   hasPublicAccessPolicy:
-                    description: Indicates whether this access point currently has
-                      a policy that allows public access.
+                    description: Whether this access point currently has a policy
+                      that allows public access.
                     type: boolean
                   id:
-                    description: The AWS account ID and access point name separated
-                      by a colon (:).
+                    description: AWS account ID and access point name separated by
+                      a colon (:).
                     type: string
                   name:
-                    description: The name of the Object Lambda Access Point.
+                    description: Name of the Object Lambda Access Point.
                     type: string
                   policy:
-                    description: The Object Lambda Access Point resource policy document.
+                    description: Object Lambda Access Point resource policy document.
                     type: string
                   region:
                     description: |-

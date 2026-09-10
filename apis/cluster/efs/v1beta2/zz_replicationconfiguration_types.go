@@ -91,14 +91,14 @@ type ReplicationConfigurationObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the original source Amazon EFS file system in the replication configuration.
+	// ARN of the original source Amazon EFS file system in the replication configuration.
 	OriginalSourceFileSystemArn *string `json:"originalSourceFileSystemArn,omitempty" tf:"original_source_file_system_arn,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the current source file system in the replication configuration.
+	// ARN of the current source file system in the replication configuration.
 	SourceFileSystemArn *string `json:"sourceFileSystemArn,omitempty" tf:"source_file_system_arn,omitempty"`
 
 	// The ID of the file system that is to be replicated.

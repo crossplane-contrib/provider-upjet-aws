@@ -1055,7 +1055,7 @@ spec:
                       false.
                     type: boolean
                   arn:
-                    description: Amazon Resource Name (ARN) of cluster
+                    description: ARN of cluster
                     type: string
                   availabilityZones:
                     description: |-
@@ -1120,7 +1120,7 @@ spec:
                     description: The Route53 Hosted Zone ID of the endpoint
                     type: string
                   id:
-                    description: (Deprecated) Amazon Resource Name (ARN) of cluster
+                    description: (Deprecated) ARN of cluster
                     type: string
                   kmsKeyId:
                     description: The ARN for the KMS encryption key. When specifying
@@ -1149,7 +1149,7 @@ spec:
                             kms_key_id, storage_encrypted needs to be set to true.
                           type: string
                         secretArn:
-                          description: Amazon Resource Name (ARN) of cluster
+                          description: ARN of cluster
                           type: string
                         secretStatus:
                           type: string

@@ -74,10 +74,9 @@ spec:
               forProvider:
                 properties:
                   principal:
-                    description: The principal to associate with the resource share.
-                      Possible values are an AWS account ID, an AWS Organizations
-                      Organization ARN, or an AWS Organizations Organization Unit
-                      ARN.
+                    description: Principal to associate with the resource share. Possible
+                      values are an AWS account ID, an AWS Organizations Organization
+                      ARN, or an AWS Organizations Organization Unit ARN.
                     type: string
                   principalRef:
                     description: Reference to a Organization in organizations to populate
@@ -161,7 +160,7 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   resourceShareArn:
-                    description: The Amazon Resource Name (ARN) of the resource share.
+                    description: ARN of the resource share.
                     type: string
                   resourceShareArnRef:
                     description: Reference to a ResourceShare in ram to populate resourceShareArn.
@@ -254,10 +253,9 @@ spec:
                   autoscaler.
                 properties:
                   principal:
-                    description: The principal to associate with the resource share.
-                      Possible values are an AWS account ID, an AWS Organizations
-                      Organization ARN, or an AWS Organizations Organization Unit
-                      ARN.
+                    description: Principal to associate with the resource share. Possible
+                      values are an AWS account ID, an AWS Organizations Organization
+                      ARN, or an AWS Organizations Organization Unit ARN.
                     type: string
                   principalRef:
                     description: Reference to a Organization in organizations to populate
@@ -336,7 +334,7 @@ spec:
                         type: object
                     type: object
                   resourceShareArn:
-                    description: The Amazon Resource Name (ARN) of the resource share.
+                    description: ARN of the resource share.
                     type: string
                   resourceShareArnRef:
                     description: Reference to a ResourceShare in ram to populate resourceShareArn.
@@ -506,14 +504,13 @@ spec:
               atProvider:
                 properties:
                   id:
-                    description: The Amazon Resource Name (ARN) of the Resource Share
-                      and the principal, separated by a comma.
+                    description: ARN of the Resource Share and the principal, separated
+                      by a comma.
                     type: string
                   principal:
-                    description: The principal to associate with the resource share.
-                      Possible values are an AWS account ID, an AWS Organizations
-                      Organization ARN, or an AWS Organizations Organization Unit
-                      ARN.
+                    description: Principal to associate with the resource share. Possible
+                      values are an AWS account ID, an AWS Organizations Organization
+                      ARN, or an AWS Organizations Organization Unit ARN.
                     type: string
                   region:
                     description: |-
@@ -521,7 +518,7 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   resourceShareArn:
-                    description: The Amazon Resource Name (ARN) of the resource share.
+                    description: ARN of the resource share.
                     type: string
                 type: object
               conditions:

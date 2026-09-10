@@ -18,7 +18,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     name: semantic-strategy
-    namespaces:
+    namespaceTemplates:
     - default
     region: us-west-1
     type: SEMANTIC

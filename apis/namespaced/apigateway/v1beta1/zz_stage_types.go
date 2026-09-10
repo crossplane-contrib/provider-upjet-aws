@@ -18,8 +18,7 @@ type AccessLogSettingsInitParameters struct {
 	// ARN of the CloudWatch Logs log group or Kinesis Data Firehose delivery stream to receive access logs. If you specify a Kinesis Data Firehose delivery stream, the stream name must begin with amazon-apigateway-. Automatically removes trailing :* if present.
 	DestinationArn *string `json:"destinationArn,omitempty" tf:"destination_arn,omitempty"`
 
-	// Formatting and values recorded in the logs.
-	// For more information on configuring the log format rules visit the AWS documentation
+	// Formatting and values recorded in the logs. For more information on configuring the log format rules visit the AWS documentation
 	Format *string `json:"format,omitempty" tf:"format,omitempty"`
 }
 
@@ -28,8 +27,7 @@ type AccessLogSettingsObservation struct {
 	// ARN of the CloudWatch Logs log group or Kinesis Data Firehose delivery stream to receive access logs. If you specify a Kinesis Data Firehose delivery stream, the stream name must begin with amazon-apigateway-. Automatically removes trailing :* if present.
 	DestinationArn *string `json:"destinationArn,omitempty" tf:"destination_arn,omitempty"`
 
-	// Formatting and values recorded in the logs.
-	// For more information on configuring the log format rules visit the AWS documentation
+	// Formatting and values recorded in the logs. For more information on configuring the log format rules visit the AWS documentation
 	Format *string `json:"format,omitempty" tf:"format,omitempty"`
 }
 
@@ -39,15 +37,14 @@ type AccessLogSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	DestinationArn *string `json:"destinationArn" tf:"destination_arn,omitempty"`
 
-	// Formatting and values recorded in the logs.
-	// For more information on configuring the log format rules visit the AWS documentation
+	// Formatting and values recorded in the logs. For more information on configuring the log format rules visit the AWS documentation
 	// +kubebuilder:validation:Optional
 	Format *string `json:"format" tf:"format,omitempty"`
 }
 
 type CanarySettingsInitParameters struct {
 
-	// ID of the deployment that the stage points to
+	// ID of the deployment that the canary points to.
 	DeploymentID *string `json:"deploymentId,omitempty" tf:"deployment_id,omitempty"`
 
 	// Percent 0.0 - 100.0 of traffic to divert to the canary deployment.
@@ -63,7 +60,7 @@ type CanarySettingsInitParameters struct {
 
 type CanarySettingsObservation struct {
 
-	// ID of the deployment that the stage points to
+	// ID of the deployment that the canary points to.
 	DeploymentID *string `json:"deploymentId,omitempty" tf:"deployment_id,omitempty"`
 
 	// Percent 0.0 - 100.0 of traffic to divert to the canary deployment.
@@ -79,7 +76,7 @@ type CanarySettingsObservation struct {
 
 type CanarySettingsParameters struct {
 
-	// ID of the deployment that the stage points to
+	// ID of the deployment that the canary points to.
 	// +kubebuilder:validation:Optional
 	DeploymentID *string `json:"deploymentId" tf:"deployment_id,omitempty"`
 
@@ -190,16 +187,13 @@ type StageObservation struct {
 	// Version of the associated API documentation.
 	DocumentationVersion *string `json:"documentationVersion,omitempty" tf:"documentation_version,omitempty"`
 
-	// Execution ARN to be used in lambda_permission's source_arn
-	// when allowing API Gateway to invoke a Lambda function,
-	// e.g., arn:aws:execute-api:eu-west-2:123456789012:z4675bid1j/prod
+	// Execution ARN to be used in lambda_permission's source_arn when allowing API Gateway to invoke a Lambda function, e.g., arn:aws:execute-api:eu-west-2:123456789012:z4675bid1j/prod
 	ExecutionArn *string `json:"executionArn,omitempty" tf:"execution_arn,omitempty"`
 
 	// ID of the stage
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// URL to invoke the API pointing to the stage,
-	// e.g., https://z4675bid1j.execute-api.eu-west-2.amazonaws.com/prod
+	// URL to invoke the API pointing to the stage, e.g., https://z4675bid1j.execute-api.eu-west-2.amazonaws.com/prod
 	InvokeURL *string `json:"invokeUrl,omitempty" tf:"invoke_url,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.

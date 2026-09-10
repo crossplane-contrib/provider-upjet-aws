@@ -96,7 +96,7 @@ type AlternatePathHintsInitParameters struct {
 
 type AlternatePathHintsObservation struct {
 
-	// The Amazon Resource Name (ARN) of the component.
+	// ARN of the component.
 	ComponentArn *string `json:"componentArn,omitempty" tf:"component_arn,omitempty"`
 
 	// The ID of the component.

@@ -15,7 +15,7 @@ import (
 
 type ListenerInitParameters struct {
 
-	// The Amazon Resource Name (ARN) of your accelerator.
+	// ARN of your accelerator.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/globalaccelerator/v1beta1.Accelerator
 	AcceleratorArn *string `json:"acceleratorArn,omitempty" tf:"accelerator_arn,omitempty"`
 
@@ -39,16 +39,16 @@ type ListenerInitParameters struct {
 
 type ListenerObservation struct {
 
-	// The Amazon Resource Name (ARN) of your accelerator.
+	// ARN of your accelerator.
 	AcceleratorArn *string `json:"acceleratorArn,omitempty" tf:"accelerator_arn,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the listener.
+	// ARN of the listener.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Direct all requests from a user to the same endpoint. Valid values are NONE, SOURCE_IP. Default: NONE. If NONE, Global Accelerator uses the "five-tuple" properties of source IP address, source port, destination IP address, destination port, and protocol to select the hash value. If SOURCE_IP, Global Accelerator uses the "two-tuple" properties of source (client) IP address and destination IP address to select the hash value.
 	ClientAffinity *string `json:"clientAffinity,omitempty" tf:"client_affinity,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the listener.
+	// ARN of the listener.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The list of port ranges for the connections from clients to the accelerator. Fields documented below.
@@ -60,7 +60,7 @@ type ListenerObservation struct {
 
 type ListenerParameters struct {
 
-	// The Amazon Resource Name (ARN) of your accelerator.
+	// ARN of your accelerator.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/globalaccelerator/v1beta1.Accelerator
 	// +kubebuilder:validation:Optional
 	AcceleratorArn *string `json:"acceleratorArn,omitempty" tf:"accelerator_arn,omitempty"`

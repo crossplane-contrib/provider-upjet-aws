@@ -73,22 +73,22 @@ type ImagePipelineImageTestsConfigurationParameters struct {
 
 type ImagePipelineInitParameters struct {
 
-	// Amazon Resource Name (ARN) of the container recipe.
+	// ARN of the container recipe.
 	ContainerRecipeArn *string `json:"containerRecipeArn,omitempty" tf:"container_recipe_arn,omitempty"`
 
 	// Description of the image pipeline.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Amazon Resource Name (ARN) of the Image Builder Distribution Configuration.
+	// ARN of the Image Builder Distribution Configuration.
 	DistributionConfigurationArn *string `json:"distributionConfigurationArn,omitempty" tf:"distribution_configuration_arn,omitempty"`
 
 	// Whether additional information about the image being created is collected. Defaults to true.
 	EnhancedImageMetadataEnabled *bool `json:"enhancedImageMetadataEnabled,omitempty" tf:"enhanced_image_metadata_enabled,omitempty"`
 
-	// Amazon Resource Name (ARN) of the service-linked role to be used by Image Builder to execute workflows.
+	// ARN of the service-linked role to be used by Image Builder to execute workflows.
 	ExecutionRole *string `json:"executionRole,omitempty" tf:"execution_role,omitempty"`
 
-	// Amazon Resource Name (ARN) of the image recipe.
+	// ARN of the image recipe.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/imagebuilder/v1beta2.ImageRecipe
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	ImageRecipeArn *string `json:"imageRecipeArn,omitempty" tf:"image_recipe_arn,omitempty"`
@@ -107,7 +107,7 @@ type ImagePipelineInitParameters struct {
 	// Configuration block with image tests configuration. Detailed below.
 	ImageTestsConfiguration *ImagePipelineImageTestsConfigurationInitParameters `json:"imageTestsConfiguration,omitempty" tf:"image_tests_configuration,omitempty"`
 
-	// Amazon Resource Name (ARN) of the Image Builder Infrastructure Configuration.
+	// ARN of the Image Builder Infrastructure Configuration.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/imagebuilder/v1beta2.InfrastructureConfiguration
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	InfrastructureConfigurationArn *string `json:"infrastructureConfigurationArn,omitempty" tf:"infrastructure_configuration_arn,omitempty"`
@@ -171,10 +171,10 @@ type ImagePipelineLoggingConfigurationParameters struct {
 
 type ImagePipelineObservation struct {
 
-	// Amazon Resource Name (ARN) of the image pipeline.
+	// ARN of the image pipeline.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// Amazon Resource Name (ARN) of the container recipe.
+	// ARN of the container recipe.
 	ContainerRecipeArn *string `json:"containerRecipeArn,omitempty" tf:"container_recipe_arn,omitempty"`
 
 	// Date the image pipeline was created.
@@ -192,19 +192,19 @@ type ImagePipelineObservation struct {
 	// Description of the image pipeline.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Amazon Resource Name (ARN) of the Image Builder Distribution Configuration.
+	// ARN of the Image Builder Distribution Configuration.
 	DistributionConfigurationArn *string `json:"distributionConfigurationArn,omitempty" tf:"distribution_configuration_arn,omitempty"`
 
 	// Whether additional information about the image being created is collected. Defaults to true.
 	EnhancedImageMetadataEnabled *bool `json:"enhancedImageMetadataEnabled,omitempty" tf:"enhanced_image_metadata_enabled,omitempty"`
 
-	// Amazon Resource Name (ARN) of the service-linked role to be used by Image Builder to execute workflows.
+	// ARN of the service-linked role to be used by Image Builder to execute workflows.
 	ExecutionRole *string `json:"executionRole,omitempty" tf:"execution_role,omitempty"`
 
-	// Amazon Resource Name (ARN) of the image pipeline.
+	// ARN of the image pipeline.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Amazon Resource Name (ARN) of the image recipe.
+	// ARN of the image recipe.
 	ImageRecipeArn *string `json:"imageRecipeArn,omitempty" tf:"image_recipe_arn,omitempty"`
 
 	// Configuration block with image scanning configuration. Detailed below.
@@ -213,7 +213,7 @@ type ImagePipelineObservation struct {
 	// Configuration block with image tests configuration. Detailed below.
 	ImageTestsConfiguration *ImagePipelineImageTestsConfigurationObservation `json:"imageTestsConfiguration,omitempty" tf:"image_tests_configuration,omitempty"`
 
-	// Amazon Resource Name (ARN) of the Image Builder Infrastructure Configuration.
+	// ARN of the Image Builder Infrastructure Configuration.
 	InfrastructureConfigurationArn *string `json:"infrastructureConfigurationArn,omitempty" tf:"infrastructure_configuration_arn,omitempty"`
 
 	// Configuration block with logging configuration. Detailed below.
@@ -249,7 +249,7 @@ type ImagePipelineObservation struct {
 
 type ImagePipelineParameters struct {
 
-	// Amazon Resource Name (ARN) of the container recipe.
+	// ARN of the container recipe.
 	// +kubebuilder:validation:Optional
 	ContainerRecipeArn *string `json:"containerRecipeArn,omitempty" tf:"container_recipe_arn,omitempty"`
 
@@ -257,7 +257,7 @@ type ImagePipelineParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Amazon Resource Name (ARN) of the Image Builder Distribution Configuration.
+	// ARN of the Image Builder Distribution Configuration.
 	// +kubebuilder:validation:Optional
 	DistributionConfigurationArn *string `json:"distributionConfigurationArn,omitempty" tf:"distribution_configuration_arn,omitempty"`
 
@@ -265,11 +265,11 @@ type ImagePipelineParameters struct {
 	// +kubebuilder:validation:Optional
 	EnhancedImageMetadataEnabled *bool `json:"enhancedImageMetadataEnabled,omitempty" tf:"enhanced_image_metadata_enabled,omitempty"`
 
-	// Amazon Resource Name (ARN) of the service-linked role to be used by Image Builder to execute workflows.
+	// ARN of the service-linked role to be used by Image Builder to execute workflows.
 	// +kubebuilder:validation:Optional
 	ExecutionRole *string `json:"executionRole,omitempty" tf:"execution_role,omitempty"`
 
-	// Amazon Resource Name (ARN) of the image recipe.
+	// ARN of the image recipe.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/imagebuilder/v1beta2.ImageRecipe
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -291,7 +291,7 @@ type ImagePipelineParameters struct {
 	// +kubebuilder:validation:Optional
 	ImageTestsConfiguration *ImagePipelineImageTestsConfigurationParameters `json:"imageTestsConfiguration,omitempty" tf:"image_tests_configuration,omitempty"`
 
-	// Amazon Resource Name (ARN) of the Image Builder Infrastructure Configuration.
+	// ARN of the Image Builder Infrastructure Configuration.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/imagebuilder/v1beta2.InfrastructureConfiguration
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -347,7 +347,7 @@ type ImagePipelineWorkflowInitParameters struct {
 	// Configuration block for the workflow parameters. Detailed below.
 	Parameter []ImagePipelineWorkflowParameterInitParameters `json:"parameter,omitempty" tf:"parameter,omitempty"`
 
-	// Amazon Resource Name (ARN) of the Image Builder Workflow.
+	// ARN of the Image Builder Workflow.
 	WorkflowArn *string `json:"workflowArn,omitempty" tf:"workflow_arn,omitempty"`
 }
 
@@ -362,7 +362,7 @@ type ImagePipelineWorkflowObservation struct {
 	// Configuration block for the workflow parameters. Detailed below.
 	Parameter []ImagePipelineWorkflowParameterObservation `json:"parameter,omitempty" tf:"parameter,omitempty"`
 
-	// Amazon Resource Name (ARN) of the Image Builder Workflow.
+	// ARN of the Image Builder Workflow.
 	WorkflowArn *string `json:"workflowArn,omitempty" tf:"workflow_arn,omitempty"`
 }
 
@@ -409,7 +409,7 @@ type ImagePipelineWorkflowParameters struct {
 	// +kubebuilder:validation:Optional
 	Parameter []ImagePipelineWorkflowParameterParameters `json:"parameter,omitempty" tf:"parameter,omitempty"`
 
-	// Amazon Resource Name (ARN) of the Image Builder Workflow.
+	// ARN of the Image Builder Workflow.
 	// +kubebuilder:validation:Optional
 	WorkflowArn *string `json:"workflowArn" tf:"workflow_arn,omitempty"`
 }

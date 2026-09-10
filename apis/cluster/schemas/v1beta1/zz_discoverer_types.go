@@ -38,7 +38,7 @@ type DiscovererInitParameters struct {
 
 type DiscovererObservation struct {
 
-	// The Amazon Resource Name (ARN) of the discoverer.
+	// ARN of the discoverer.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The description of the discoverer. Maximum of 256 characters.

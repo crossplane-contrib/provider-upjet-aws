@@ -143,8 +143,8 @@ spec:
                         type: object
                     type: object
                   apiKeyRequired:
-                    description: Boolean whether an API key is required for the route.
-                      Defaults to false. Supported only for WebSocket APIs.
+                    description: Whether an API key is required for the route. Defaults
+                      to false. Supported only for WebSocket APIs.
                     type: boolean
                   authorizationScopes:
                     description: Authorization scopes supported by this route. The
@@ -155,11 +155,12 @@ spec:
                     type: array
                     x-kubernetes-list-type: set
                   authorizationType:
-                    description: |-
-                      Authorization type for the route.
-                      For WebSocket APIs, valid values are NONE for open access, AWS_IAM for using AWS IAM permissions, and CUSTOM for using a Lambda authorizer.
-                      For HTTP APIs, valid values are NONE for open access, JWT for using JSON Web Tokens, AWS_IAM for using AWS IAM permissions, and CUSTOM for using a Lambda authorizer.
-                      Defaults to NONE.
+                    description: Authorization type for the route. For WebSocket APIs,
+                      valid values are NONE for open access, AWS_IAM for using AWS
+                      IAM permissions, and CUSTOM for using a Lambda authorizer. For
+                      HTTP APIs, valid values are NONE for open access, JWT for using
+                      JSON Web Tokens, AWS_IAM for using AWS IAM permissions, and
+                      CUSTOM for using a Lambda authorizer. Defaults to NONE.
                     type: string
                   authorizerId:
                     description: Identifier of the aws_apigatewayv2_authorizer resource
@@ -248,7 +249,7 @@ spec:
                         type: object
                     type: object
                   modelSelectionExpression:
-                    description: The model selection expression for the route. Supported
+                    description: Model selection expression for the route. Supported
                       only for WebSocket APIs.
                     type: string
                   operationName:
@@ -269,7 +270,7 @@ spec:
                     x-kubernetes-map-type: granular
                   requestParameter:
                     description: Request parameters for the route. Supported only
-                      for WebSocket APIs.
+                      for WebSocket APIs. See request_parameter Block below.
                     items:
                       properties:
                         requestParameterKey:
@@ -277,7 +278,7 @@ spec:
                             mapping parameter.
                           type: string
                         required:
-                          description: Boolean whether or not the parameter is required.
+                          description: Whether the parameter is required.
                           type: boolean
                       type: object
                     type: array
@@ -287,7 +288,7 @@ spec:
                       and resource path, for example, GET /pets.
                     type: string
                   routeResponseSelectionExpression:
-                    description: The route response selection expression for the route.
+                    description: Route response selection expression for the route.
                       Supported only for WebSocket APIs.
                     type: string
                   target:
@@ -477,8 +478,8 @@ spec:
                         type: object
                     type: object
                   apiKeyRequired:
-                    description: Boolean whether an API key is required for the route.
-                      Defaults to false. Supported only for WebSocket APIs.
+                    description: Whether an API key is required for the route. Defaults
+                      to false. Supported only for WebSocket APIs.
                     type: boolean
                   authorizationScopes:
                     description: Authorization scopes supported by this route. The
@@ -489,11 +490,12 @@ spec:
                     type: array
                     x-kubernetes-list-type: set
                   authorizationType:
-                    description: |-
-                      Authorization type for the route.
-                      For WebSocket APIs, valid values are NONE for open access, AWS_IAM for using AWS IAM permissions, and CUSTOM for using a Lambda authorizer.
-                      For HTTP APIs, valid values are NONE for open access, JWT for using JSON Web Tokens, AWS_IAM for using AWS IAM permissions, and CUSTOM for using a Lambda authorizer.
-                      Defaults to NONE.
+                    description: Authorization type for the route. For WebSocket APIs,
+                      valid values are NONE for open access, AWS_IAM for using AWS
+                      IAM permissions, and CUSTOM for using a Lambda authorizer. For
+                      HTTP APIs, valid values are NONE for open access, JWT for using
+                      JSON Web Tokens, AWS_IAM for using AWS IAM permissions, and
+                      CUSTOM for using a Lambda authorizer. Defaults to NONE.
                     type: string
                   authorizerId:
                     description: Identifier of the aws_apigatewayv2_authorizer resource
@@ -582,7 +584,7 @@ spec:
                         type: object
                     type: object
                   modelSelectionExpression:
-                    description: The model selection expression for the route. Supported
+                    description: Model selection expression for the route. Supported
                       only for WebSocket APIs.
                     type: string
                   operationName:
@@ -598,7 +600,7 @@ spec:
                     x-kubernetes-map-type: granular
                   requestParameter:
                     description: Request parameters for the route. Supported only
-                      for WebSocket APIs.
+                      for WebSocket APIs. See request_parameter Block below.
                     items:
                       properties:
                         requestParameterKey:
@@ -606,7 +608,7 @@ spec:
                             mapping parameter.
                           type: string
                         required:
-                          description: Boolean whether or not the parameter is required.
+                          description: Whether the parameter is required.
                           type: boolean
                       type: object
                     type: array
@@ -616,7 +618,7 @@ spec:
                       and resource path, for example, GET /pets.
                     type: string
                   routeResponseSelectionExpression:
-                    description: The route response selection expression for the route.
+                    description: Route response selection expression for the route.
                       Supported only for WebSocket APIs.
                     type: string
                   target:
@@ -779,8 +781,8 @@ spec:
                     description: API identifier.
                     type: string
                   apiKeyRequired:
-                    description: Boolean whether an API key is required for the route.
-                      Defaults to false. Supported only for WebSocket APIs.
+                    description: Whether an API key is required for the route. Defaults
+                      to false. Supported only for WebSocket APIs.
                     type: boolean
                   authorizationScopes:
                     description: Authorization scopes supported by this route. The
@@ -791,11 +793,12 @@ spec:
                     type: array
                     x-kubernetes-list-type: set
                   authorizationType:
-                    description: |-
-                      Authorization type for the route.
-                      For WebSocket APIs, valid values are NONE for open access, AWS_IAM for using AWS IAM permissions, and CUSTOM for using a Lambda authorizer.
-                      For HTTP APIs, valid values are NONE for open access, JWT for using JSON Web Tokens, AWS_IAM for using AWS IAM permissions, and CUSTOM for using a Lambda authorizer.
-                      Defaults to NONE.
+                    description: Authorization type for the route. For WebSocket APIs,
+                      valid values are NONE for open access, AWS_IAM for using AWS
+                      IAM permissions, and CUSTOM for using a Lambda authorizer. For
+                      HTTP APIs, valid values are NONE for open access, JWT for using
+                      JSON Web Tokens, AWS_IAM for using AWS IAM permissions, and
+                      CUSTOM for using a Lambda authorizer. Defaults to NONE.
                     type: string
                   authorizerId:
                     description: Identifier of the aws_apigatewayv2_authorizer resource
@@ -805,7 +808,7 @@ spec:
                     description: Route identifier.
                     type: string
                   modelSelectionExpression:
-                    description: The model selection expression for the route. Supported
+                    description: Model selection expression for the route. Supported
                       only for WebSocket APIs.
                     type: string
                   operationName:
@@ -826,7 +829,7 @@ spec:
                     x-kubernetes-map-type: granular
                   requestParameter:
                     description: Request parameters for the route. Supported only
-                      for WebSocket APIs.
+                      for WebSocket APIs. See request_parameter Block below.
                     items:
                       properties:
                         requestParameterKey:
@@ -834,7 +837,7 @@ spec:
                             mapping parameter.
                           type: string
                         required:
-                          description: Boolean whether or not the parameter is required.
+                          description: Whether the parameter is required.
                           type: boolean
                       type: object
                     type: array
@@ -844,7 +847,7 @@ spec:
                       and resource path, for example, GET /pets.
                     type: string
                   routeResponseSelectionExpression:
-                    description: The route response selection expression for the route.
+                    description: Route response selection expression for the route.
                       Supported only for WebSocket APIs.
                     type: string
                   target:

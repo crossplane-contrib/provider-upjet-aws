@@ -27,13 +27,10 @@ type AppCookieStickinessPolicyObservation struct {
 	// ID of the policy.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Load balancer port to which the policy
-	// should be applied. This must be an active listener on the load
-	// balancer.
+	// Load balancer port to which the policy should be applied. This must be an active listener on the load balancer.
 	LBPort *float64 `json:"lbPort,omitempty" tf:"lb_port,omitempty"`
 
-	// Name of load balancer to which the policy
-	// should be attached.
+	// Name of load balancer to which the policy should be attached.
 	LoadBalancer *string `json:"loadBalancer,omitempty" tf:"load_balancer,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -47,14 +44,11 @@ type AppCookieStickinessPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	CookieName *string `json:"cookieName,omitempty" tf:"cookie_name,omitempty"`
 
-	// Load balancer port to which the policy
-	// should be applied. This must be an active listener on the load
-	// balancer.
+	// Load balancer port to which the policy should be applied. This must be an active listener on the load balancer.
 	// +kubebuilder:validation:Required
 	LBPort *float64 `json:"lbPort" tf:"lb_port,omitempty"`
 
-	// Name of load balancer to which the policy
-	// should be attached.
+	// Name of load balancer to which the policy should be attached.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/elb/v1beta1.ELB
 	// +kubebuilder:validation:Optional
 	LoadBalancer *string `json:"loadBalancer,omitempty" tf:"load_balancer,omitempty"`

@@ -79,8 +79,8 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   resourceId:
-                    description: The ID of the virtual private cloud (VPC) that you're
-                      updating the DNSSEC validation status for.
+                    description: ID of the VPC that you're updating the DNSSEC validation
+                      status for.
                     type: string
                   resourceIdRef:
                     description: Reference to a VPC in ec2 to populate resourceId.
@@ -173,8 +173,8 @@ spec:
                   autoscaler.
                 properties:
                   resourceId:
-                    description: The ID of the virtual private cloud (VPC) that you're
-                      updating the DNSSEC validation status for.
+                    description: ID of the VPC that you're updating the DNSSEC validation
+                      status for.
                     type: string
                   resourceIdRef:
                     description: Reference to a VPC in ec2 to populate resourceId.
@@ -349,8 +349,8 @@ spec:
                     description: The ID for a configuration for DNSSEC validation.
                     type: string
                   ownerId:
-                    description: The owner account ID of the virtual private cloud
-                      (VPC) for a configuration for DNSSEC validation.
+                    description: Owner account ID of the VPC for a configuration for
+                      DNSSEC validation.
                     type: string
                   region:
                     description: |-
@@ -358,8 +358,8 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   resourceId:
-                    description: The ID of the virtual private cloud (VPC) that you're
-                      updating the DNSSEC validation status for.
+                    description: ID of the VPC that you're updating the DNSSEC validation
+                      status for.
                     type: string
                   validationStatus:
                     description: 'The validation status for a DNSSEC configuration.

@@ -31,7 +31,7 @@ type BucketMetricFilterInitParameters struct {
 	// Object prefix for filtering (singular).
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// Key-value map of resource tags.
+	// Object tags for filtering (up to 10). Unsupported for S3 directory buckets.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
@@ -44,7 +44,7 @@ type BucketMetricFilterObservation struct {
 	// Object prefix for filtering (singular).
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// Key-value map of resource tags.
+	// Object tags for filtering (up to 10). Unsupported for S3 directory buckets.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
@@ -69,7 +69,7 @@ type BucketMetricFilterParameters struct {
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// Key-value map of resource tags.
+	// Object tags for filtering (up to 10). Unsupported for S3 directory buckets.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -90,7 +90,7 @@ type BucketMetricInitParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketSelector *v2.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
-	// Object filtering that accepts a prefix, tags, or a logical AND of prefix and tags (documented below).
+	// Object filtering that accepts a prefix, tags, or a logical AND of prefix and tags. See below.
 	Filter *BucketMetricFilterInitParameters `json:"filter,omitempty" tf:"filter,omitempty"`
 
 	// Unique identifier of the metrics configuration for the bucket. Must be less than or equal to 64 characters in length.
@@ -102,7 +102,7 @@ type BucketMetricObservation struct {
 	// Name of the bucket to put metric configuration.
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
-	// Object filtering that accepts a prefix, tags, or a logical AND of prefix and tags (documented below).
+	// Object filtering that accepts a prefix, tags, or a logical AND of prefix and tags. See below.
 	Filter *BucketMetricFilterObservation `json:"filter,omitempty" tf:"filter,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -131,7 +131,7 @@ type BucketMetricParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketSelector *v2.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
-	// Object filtering that accepts a prefix, tags, or a logical AND of prefix and tags (documented below).
+	// Object filtering that accepts a prefix, tags, or a logical AND of prefix and tags. See below.
 	// +kubebuilder:validation:Optional
 	Filter *BucketMetricFilterParameters `json:"filter,omitempty" tf:"filter,omitempty"`
 

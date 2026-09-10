@@ -254,7 +254,7 @@ type CloudwatchLoggingConfigurationInitParameters struct {
 	// Enables the application to automatically start on job submission. Defaults to true.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The AWS Key Management Service (KMS) key ARN to encrypt the logs that you store in CloudWatch Logs.
+	// KMS key ARN to encrypt the logs that you store in CloudWatch Logs.
 	EncryptionKeyArn *string `json:"encryptionKeyArn,omitempty" tf:"encryption_key_arn,omitempty"`
 
 	// The name of the log group in Amazon CloudWatch Logs where you want to publish your logs.
@@ -272,7 +272,7 @@ type CloudwatchLoggingConfigurationObservation struct {
 	// Enables the application to automatically start on job submission. Defaults to true.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The AWS Key Management Service (KMS) key ARN to encrypt the logs that you store in CloudWatch Logs.
+	// KMS key ARN to encrypt the logs that you store in CloudWatch Logs.
 	EncryptionKeyArn *string `json:"encryptionKeyArn,omitempty" tf:"encryption_key_arn,omitempty"`
 
 	// The name of the log group in Amazon CloudWatch Logs where you want to publish your logs.
@@ -291,7 +291,7 @@ type CloudwatchLoggingConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 
-	// The AWS Key Management Service (KMS) key ARN to encrypt the logs that you store in CloudWatch Logs.
+	// KMS key ARN to encrypt the logs that you store in CloudWatch Logs.
 	// +kubebuilder:validation:Optional
 	EncryptionKeyArn *string `json:"encryptionKeyArn,omitempty" tf:"encryption_key_arn,omitempty"`
 
@@ -470,7 +470,7 @@ type ManagedPersistenceMonitoringConfigurationInitParameters struct {
 	// Enables the application to automatically start on job submission. Defaults to true.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The AWS Key Management Service (KMS) key ARN to encrypt the logs that you store in CloudWatch Logs.
+	// KMS key ARN to encrypt the logs that you store in CloudWatch Logs.
 	EncryptionKeyArn *string `json:"encryptionKeyArn,omitempty" tf:"encryption_key_arn,omitempty"`
 }
 
@@ -479,7 +479,7 @@ type ManagedPersistenceMonitoringConfigurationObservation struct {
 	// Enables the application to automatically start on job submission. Defaults to true.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The AWS Key Management Service (KMS) key ARN to encrypt the logs that you store in CloudWatch Logs.
+	// KMS key ARN to encrypt the logs that you store in CloudWatch Logs.
 	EncryptionKeyArn *string `json:"encryptionKeyArn,omitempty" tf:"encryption_key_arn,omitempty"`
 }
 
@@ -489,7 +489,7 @@ type ManagedPersistenceMonitoringConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The AWS Key Management Service (KMS) key ARN to encrypt the logs that you store in CloudWatch Logs.
+	// KMS key ARN to encrypt the logs that you store in CloudWatch Logs.
 	// +kubebuilder:validation:Optional
 	EncryptionKeyArn *string `json:"encryptionKeyArn,omitempty" tf:"encryption_key_arn,omitempty"`
 }
@@ -670,7 +670,7 @@ type RuntimeConfigurationParameters struct {
 
 type S3MonitoringConfigurationInitParameters struct {
 
-	// The AWS Key Management Service (KMS) key ARN to encrypt the logs that you store in CloudWatch Logs.
+	// KMS key ARN to encrypt the logs that you store in CloudWatch Logs.
 	EncryptionKeyArn *string `json:"encryptionKeyArn,omitempty" tf:"encryption_key_arn,omitempty"`
 
 	// The Amazon S3 destination URI for log publishing.
@@ -679,7 +679,7 @@ type S3MonitoringConfigurationInitParameters struct {
 
 type S3MonitoringConfigurationObservation struct {
 
-	// The AWS Key Management Service (KMS) key ARN to encrypt the logs that you store in CloudWatch Logs.
+	// KMS key ARN to encrypt the logs that you store in CloudWatch Logs.
 	EncryptionKeyArn *string `json:"encryptionKeyArn,omitempty" tf:"encryption_key_arn,omitempty"`
 
 	// The Amazon S3 destination URI for log publishing.
@@ -688,7 +688,7 @@ type S3MonitoringConfigurationObservation struct {
 
 type S3MonitoringConfigurationParameters struct {
 
-	// The AWS Key Management Service (KMS) key ARN to encrypt the logs that you store in CloudWatch Logs.
+	// KMS key ARN to encrypt the logs that you store in CloudWatch Logs.
 	// +kubebuilder:validation:Optional
 	EncryptionKeyArn *string `json:"encryptionKeyArn,omitempty" tf:"encryption_key_arn,omitempty"`
 

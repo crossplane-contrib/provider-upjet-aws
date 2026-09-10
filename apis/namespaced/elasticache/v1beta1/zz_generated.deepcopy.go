@@ -2435,6 +2435,16 @@ func (in *ReplicationGroupInitParameters) DeepCopyInto(out *ReplicationGroupInit
 		*out = new(string)
 		**out = **in
 	}
+	if in.AuthTokenWoSecretRef != nil {
+		in, out := &in.AuthTokenWoSecretRef, &out.AuthTokenWoSecretRef
+		*out = new(v2.LocalSecretKeySelector)
+		**out = **in
+	}
+	if in.AuthTokenWoVersion != nil {
+		in, out := &in.AuthTokenWoVersion, &out.AuthTokenWoVersion
+		*out = new(float64)
+		**out = **in
+	}
 	if in.AutoMinorVersionUpgrade != nil {
 		in, out := &in.AutoMinorVersionUpgrade, &out.AutoMinorVersionUpgrade
 		*out = new(string)
@@ -2874,6 +2884,11 @@ func (in *ReplicationGroupObservation) DeepCopyInto(out *ReplicationGroupObserva
 		*out = new(string)
 		**out = **in
 	}
+	if in.AuthTokenWoVersion != nil {
+		in, out := &in.AuthTokenWoVersion, &out.AuthTokenWoVersion
+		*out = new(float64)
+		**out = **in
+	}
 	if in.AutoMinorVersionUpgrade != nil {
 		in, out := &in.AutoMinorVersionUpgrade, &out.AutoMinorVersionUpgrade
 		*out = new(string)
@@ -3194,6 +3209,16 @@ func (in *ReplicationGroupParameters) DeepCopyInto(out *ReplicationGroupParamete
 	if in.AuthTokenUpdateStrategy != nil {
 		in, out := &in.AuthTokenUpdateStrategy, &out.AuthTokenUpdateStrategy
 		*out = new(string)
+		**out = **in
+	}
+	if in.AuthTokenWoSecretRef != nil {
+		in, out := &in.AuthTokenWoSecretRef, &out.AuthTokenWoSecretRef
+		*out = new(v2.LocalSecretKeySelector)
+		**out = **in
+	}
+	if in.AuthTokenWoVersion != nil {
+		in, out := &in.AuthTokenWoVersion, &out.AuthTokenWoVersion
+		*out = new(float64)
 		**out = **in
 	}
 	if in.AutoGenerateAuthToken != nil {

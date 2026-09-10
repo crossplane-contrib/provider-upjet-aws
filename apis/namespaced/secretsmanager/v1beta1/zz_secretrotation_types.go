@@ -13,33 +13,82 @@ import (
 	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
+type ExternalSecretRotationMetadataInitParameters struct {
+
+	// Metadata key name. Partner-specific keys are required for each external secret type. See partner documentation for required keys.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Metadata value for the specified key.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/secretsmanager/v1beta1.Secret
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+
+	// Reference to a Secret in secretsmanager to populate value.
+	// +kubebuilder:validation:Optional
+	ValueRef *v2.NamespacedReference `json:"valueRef,omitempty" tf:"-"`
+
+	// Selector for a Secret in secretsmanager to populate value.
+	// +kubebuilder:validation:Optional
+	ValueSelector *v2.NamespacedSelector `json:"valueSelector,omitempty" tf:"-"`
+}
+
+type ExternalSecretRotationMetadataObservation struct {
+
+	// Metadata key name. Partner-specific keys are required for each external secret type. See partner documentation for required keys.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Metadata value for the specified key.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type ExternalSecretRotationMetadataParameters struct {
+
+	// Metadata key name. Partner-specific keys are required for each external secret type. See partner documentation for required keys.
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key" tf:"key,omitempty"`
+
+	// Metadata value for the specified key.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/secretsmanager/v1beta1.Secret
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
+	// +kubebuilder:validation:Optional
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+
+	// Reference to a Secret in secretsmanager to populate value.
+	// +kubebuilder:validation:Optional
+	ValueRef *v2.NamespacedReference `json:"valueRef,omitempty" tf:"-"`
+
+	// Selector for a Secret in secretsmanager to populate value.
+	// +kubebuilder:validation:Optional
+	ValueSelector *v2.NamespacedSelector `json:"valueSelector,omitempty" tf:"-"`
+}
+
 type RotationRulesInitParameters struct {
 
-	// Specifies the number of days between automatic scheduled rotations of the secret. Either automatically_after_days or schedule_expression must be specified.
+	// Number of days between automatic scheduled rotations of the secret. Either automatically_after_days or schedule_expression must be specified.
 	AutomaticallyAfterDays *float64 `json:"automaticallyAfterDays,omitempty" tf:"automatically_after_days,omitempty"`
 
 	// - The length of the rotation window in hours. For example, 3h for a three hour window.
 	Duration *string `json:"duration,omitempty" tf:"duration,omitempty"`
 
-	// A cron() or rate() expression that defines the schedule for rotating your secret. Either automatically_after_days or schedule_expression must be specified.
+	// cron() or rate() expression that defines the schedule for rotating your secret. Either automatically_after_days or schedule_expression must be specified.
 	ScheduleExpression *string `json:"scheduleExpression,omitempty" tf:"schedule_expression,omitempty"`
 }
 
 type RotationRulesObservation struct {
 
-	// Specifies the number of days between automatic scheduled rotations of the secret. Either automatically_after_days or schedule_expression must be specified.
+	// Number of days between automatic scheduled rotations of the secret. Either automatically_after_days or schedule_expression must be specified.
 	AutomaticallyAfterDays *float64 `json:"automaticallyAfterDays,omitempty" tf:"automatically_after_days,omitempty"`
 
 	// - The length of the rotation window in hours. For example, 3h for a three hour window.
 	Duration *string `json:"duration,omitempty" tf:"duration,omitempty"`
 
-	// A cron() or rate() expression that defines the schedule for rotating your secret. Either automatically_after_days or schedule_expression must be specified.
+	// cron() or rate() expression that defines the schedule for rotating your secret. Either automatically_after_days or schedule_expression must be specified.
 	ScheduleExpression *string `json:"scheduleExpression,omitempty" tf:"schedule_expression,omitempty"`
 }
 
 type RotationRulesParameters struct {
 
-	// Specifies the number of days between automatic scheduled rotations of the secret. Either automatically_after_days or schedule_expression must be specified.
+	// Number of days between automatic scheduled rotations of the secret. Either automatically_after_days or schedule_expression must be specified.
 	// +kubebuilder:validation:Optional
 	AutomaticallyAfterDays *float64 `json:"automaticallyAfterDays,omitempty" tf:"automatically_after_days,omitempty"`
 
@@ -47,17 +96,36 @@ type RotationRulesParameters struct {
 	// +kubebuilder:validation:Optional
 	Duration *string `json:"duration,omitempty" tf:"duration,omitempty"`
 
-	// A cron() or rate() expression that defines the schedule for rotating your secret. Either automatically_after_days or schedule_expression must be specified.
+	// cron() or rate() expression that defines the schedule for rotating your secret. Either automatically_after_days or schedule_expression must be specified.
 	// +kubebuilder:validation:Optional
 	ScheduleExpression *string `json:"scheduleExpression,omitempty" tf:"schedule_expression,omitempty"`
 }
 
 type SecretRotationInitParameters struct {
 
-	// Specifies whether to rotate the secret immediately or wait until the next scheduled rotation window. The rotation schedule is defined in rotation_rules. For secrets that use a Lambda rotation function to rotate, if you don't immediately rotate the secret, Secrets Manager tests the rotation configuration by running the testSecret step (https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotate-secrets_how.html) of the Lambda rotation function. The test creates an AWSPENDING version of the secret and then removes it. Defaults to true.
+	// Configuration block for metadata required by the external secret partner. Required for managed external secrets. See details below.
+	ExternalSecretRotationMetadata []ExternalSecretRotationMetadataInitParameters `json:"externalSecretRotationMetadata,omitempty" tf:"external_secret_rotation_metadata,omitempty"`
+
+	// ARN of the IAM role that allows Secrets Manager to rotate the secret held by a third-party partner. Required for managed external secrets.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
+	ExternalSecretRotationRoleArn *string `json:"externalSecretRotationRoleArn,omitempty" tf:"external_secret_rotation_role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate externalSecretRotationRoleArn.
+	// +kubebuilder:validation:Optional
+	ExternalSecretRotationRoleArnRef *v2.NamespacedReference `json:"externalSecretRotationRoleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate externalSecretRotationRoleArn.
+	// +kubebuilder:validation:Optional
+	ExternalSecretRotationRoleArnSelector *v2.NamespacedSelector `json:"externalSecretRotationRoleArnSelector,omitempty" tf:"-"`
+
+	// Whether to rotate the secret immediately or wait until the next scheduled rotation window. The rotation schedule is defined in rotation_rules. For secrets that use a Lambda rotation function to rotate, if you don't immediately rotate the secret, Secrets Manager tests the rotation configuration by running the testSecret step (https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotate-secrets_how.html) of the Lambda rotation function. The test creates an AWSPENDING version of the secret and then removes it. Defaults to true.
 	RotateImmediately *bool `json:"rotateImmediately,omitempty" tf:"rotate_immediately,omitempty"`
 
-	// Specifies the ARN of the Lambda function that can rotate the secret. Must be supplied if the secret is not managed by AWS.
+	// Whether automatic rotation is enabled for the secret. Set to false to disable rotation on a secret whose rotation is otherwise managed by AWS (for example, an RDS master user password secret). When false, rotation_rules must be omitted. Defaults to enabled when rotation_rules is configured. Destroying this resource does not re-enable the automatic rotation that AWS configured.
+	RotationEnabled *bool `json:"rotationEnabled,omitempty" tf:"rotation_enabled,omitempty"`
+
+	// ARN of the Lambda function that can rotate the secret. Must be supplied if the secret is not managed by AWS.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/lambda/v1beta1.Function
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	RotationLambdaArn *string `json:"rotationLambdaArn,omitempty" tf:"rotation_lambda_arn,omitempty"`
@@ -70,10 +138,10 @@ type SecretRotationInitParameters struct {
 	// +kubebuilder:validation:Optional
 	RotationLambdaArnSelector *v2.NamespacedSelector `json:"rotationLambdaArnSelector,omitempty" tf:"-"`
 
-	// A structure that defines the rotation configuration for this secret. Defined below.
+	// Structure that defines the rotation configuration for this secret. Required unless rotation_enabled is false. Defined below.
 	RotationRules *RotationRulesInitParameters `json:"rotationRules,omitempty" tf:"rotation_rules,omitempty"`
 
-	// Specifies the secret to which you want to add a new version. You can specify either the Amazon Resource Name (ARN) or the friendly name of the secret. The secret must already exist.
+	// Secret to which you want to add a new version. You can specify either the ARN or the friendly name of the secret. The secret must already exist.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/secretsmanager/v1beta1.Secret
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SecretID *string `json:"secretId,omitempty" tf:"secret_id,omitempty"`
@@ -89,41 +157,69 @@ type SecretRotationInitParameters struct {
 
 type SecretRotationObservation struct {
 
-	// Amazon Resource Name (ARN) of the secret.
+	// Configuration block for metadata required by the external secret partner. Required for managed external secrets. See details below.
+	ExternalSecretRotationMetadata []ExternalSecretRotationMetadataObservation `json:"externalSecretRotationMetadata,omitempty" tf:"external_secret_rotation_metadata,omitempty"`
+
+	// ARN of the IAM role that allows Secrets Manager to rotate the secret held by a third-party partner. Required for managed external secrets.
+	ExternalSecretRotationRoleArn *string `json:"externalSecretRotationRoleArn,omitempty" tf:"external_secret_rotation_role_arn,omitempty"`
+
+	// ARN of the secret.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// Specifies whether to rotate the secret immediately or wait until the next scheduled rotation window. The rotation schedule is defined in rotation_rules. For secrets that use a Lambda rotation function to rotate, if you don't immediately rotate the secret, Secrets Manager tests the rotation configuration by running the testSecret step (https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotate-secrets_how.html) of the Lambda rotation function. The test creates an AWSPENDING version of the secret and then removes it. Defaults to true.
+	// Whether to rotate the secret immediately or wait until the next scheduled rotation window. The rotation schedule is defined in rotation_rules. For secrets that use a Lambda rotation function to rotate, if you don't immediately rotate the secret, Secrets Manager tests the rotation configuration by running the testSecret step (https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotate-secrets_how.html) of the Lambda rotation function. The test creates an AWSPENDING version of the secret and then removes it. Defaults to true.
 	RotateImmediately *bool `json:"rotateImmediately,omitempty" tf:"rotate_immediately,omitempty"`
 
-	// Specifies whether automatic rotation is enabled for this secret.
+	// Whether automatic rotation is enabled for the secret. Set to false to disable rotation on a secret whose rotation is otherwise managed by AWS (for example, an RDS master user password secret). When false, rotation_rules must be omitted. Defaults to enabled when rotation_rules is configured. Destroying this resource does not re-enable the automatic rotation that AWS configured.
 	RotationEnabled *bool `json:"rotationEnabled,omitempty" tf:"rotation_enabled,omitempty"`
 
-	// Specifies the ARN of the Lambda function that can rotate the secret. Must be supplied if the secret is not managed by AWS.
+	// ARN of the Lambda function that can rotate the secret. Must be supplied if the secret is not managed by AWS.
 	RotationLambdaArn *string `json:"rotationLambdaArn,omitempty" tf:"rotation_lambda_arn,omitempty"`
 
-	// A structure that defines the rotation configuration for this secret. Defined below.
+	// Structure that defines the rotation configuration for this secret. Required unless rotation_enabled is false. Defined below.
 	RotationRules *RotationRulesObservation `json:"rotationRules,omitempty" tf:"rotation_rules,omitempty"`
 
-	// Specifies the secret to which you want to add a new version. You can specify either the Amazon Resource Name (ARN) or the friendly name of the secret. The secret must already exist.
+	// Secret to which you want to add a new version. You can specify either the ARN or the friendly name of the secret. The secret must already exist.
 	SecretID *string `json:"secretId,omitempty" tf:"secret_id,omitempty"`
 }
 
 type SecretRotationParameters struct {
+
+	// Configuration block for metadata required by the external secret partner. Required for managed external secrets. See details below.
+	// +kubebuilder:validation:Optional
+	ExternalSecretRotationMetadata []ExternalSecretRotationMetadataParameters `json:"externalSecretRotationMetadata,omitempty" tf:"external_secret_rotation_metadata,omitempty"`
+
+	// ARN of the IAM role that allows Secrets Manager to rotate the secret held by a third-party partner. Required for managed external secrets.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
+	// +kubebuilder:validation:Optional
+	ExternalSecretRotationRoleArn *string `json:"externalSecretRotationRoleArn,omitempty" tf:"external_secret_rotation_role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate externalSecretRotationRoleArn.
+	// +kubebuilder:validation:Optional
+	ExternalSecretRotationRoleArnRef *v2.NamespacedReference `json:"externalSecretRotationRoleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate externalSecretRotationRoleArn.
+	// +kubebuilder:validation:Optional
+	ExternalSecretRotationRoleArnSelector *v2.NamespacedSelector `json:"externalSecretRotationRoleArnSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// Specifies whether to rotate the secret immediately or wait until the next scheduled rotation window. The rotation schedule is defined in rotation_rules. For secrets that use a Lambda rotation function to rotate, if you don't immediately rotate the secret, Secrets Manager tests the rotation configuration by running the testSecret step (https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotate-secrets_how.html) of the Lambda rotation function. The test creates an AWSPENDING version of the secret and then removes it. Defaults to true.
+	// Whether to rotate the secret immediately or wait until the next scheduled rotation window. The rotation schedule is defined in rotation_rules. For secrets that use a Lambda rotation function to rotate, if you don't immediately rotate the secret, Secrets Manager tests the rotation configuration by running the testSecret step (https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotate-secrets_how.html) of the Lambda rotation function. The test creates an AWSPENDING version of the secret and then removes it. Defaults to true.
 	// +kubebuilder:validation:Optional
 	RotateImmediately *bool `json:"rotateImmediately,omitempty" tf:"rotate_immediately,omitempty"`
 
-	// Specifies the ARN of the Lambda function that can rotate the secret. Must be supplied if the secret is not managed by AWS.
+	// Whether automatic rotation is enabled for the secret. Set to false to disable rotation on a secret whose rotation is otherwise managed by AWS (for example, an RDS master user password secret). When false, rotation_rules must be omitted. Defaults to enabled when rotation_rules is configured. Destroying this resource does not re-enable the automatic rotation that AWS configured.
+	// +kubebuilder:validation:Optional
+	RotationEnabled *bool `json:"rotationEnabled,omitempty" tf:"rotation_enabled,omitempty"`
+
+	// ARN of the Lambda function that can rotate the secret. Must be supplied if the secret is not managed by AWS.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/lambda/v1beta1.Function
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -137,11 +233,11 @@ type SecretRotationParameters struct {
 	// +kubebuilder:validation:Optional
 	RotationLambdaArnSelector *v2.NamespacedSelector `json:"rotationLambdaArnSelector,omitempty" tf:"-"`
 
-	// A structure that defines the rotation configuration for this secret. Defined below.
+	// Structure that defines the rotation configuration for this secret. Required unless rotation_enabled is false. Defined below.
 	// +kubebuilder:validation:Optional
 	RotationRules *RotationRulesParameters `json:"rotationRules,omitempty" tf:"rotation_rules,omitempty"`
 
-	// Specifies the secret to which you want to add a new version. You can specify either the Amazon Resource Name (ARN) or the friendly name of the secret. The secret must already exist.
+	// Secret to which you want to add a new version. You can specify either the ARN or the friendly name of the secret. The secret must already exist.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/secretsmanager/v1beta1.Secret
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -192,9 +288,8 @@ type SecretRotationStatus struct {
 type SecretRotation struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.rotationRules) || (has(self.initProvider) && has(self.initProvider.rotationRules))",message="spec.forProvider.rotationRules is a required parameter"
-	Spec   SecretRotationSpec   `json:"spec"`
-	Status SecretRotationStatus `json:"status,omitempty"`
+	Spec              SecretRotationSpec   `json:"spec"`
+	Status            SecretRotationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

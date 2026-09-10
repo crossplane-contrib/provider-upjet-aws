@@ -74,73 +74,76 @@ spec:
               forProvider:
                 properties:
                   addHeaderAction:
-                    description: A list of Add Header Action blocks. Documented below.
+                    description: Configuration block for adding a header to received
+                      emails. Detailed below.
                     items:
                       properties:
                         headerName:
-                          description: The name of the header to add
+                          description: Name of the header to add.
                           type: string
                         headerValue:
-                          description: The value of the header to add
+                          description: Value of the header to add.
                           type: string
                         position:
-                          description: The position of the action in the receipt rule
+                          description: Position of the action in the receipt rule.
                           type: number
                       type: object
                     type: array
                   after:
-                    description: The name of the rule to place this rule after
+                    description: Name of the rule to place this rule after.
                     type: string
                   bounceAction:
-                    description: A list of Bounce Action blocks. Documented below.
+                    description: Configuration block for rejecting received emails.
+                      Detailed below.
                     items:
                       properties:
                         message:
-                          description: The message to send
+                          description: Message to send.
                           type: string
                         position:
-                          description: The position of the action in the receipt rule
+                          description: Position of the action in the receipt rule.
                           type: number
                         sender:
-                          description: The email address of the sender
+                          description: Email address of the sender.
                           type: string
                         smtpReplyCode:
-                          description: The RFC 5321 SMTP reply code
+                          description: RFC 5321 SMTP reply code.
                           type: string
                         statusCode:
-                          description: The RFC 3463 SMTP enhanced status code
+                          description: RFC 3463 SMTP enhanced status code.
                           type: string
                         topicArn:
-                          description: The ARN of an SNS topic to notify
+                          description: ARN of an SNS topic to notify.
                           type: string
                       type: object
                     type: array
                   enabled:
-                    description: If true, the rule will be enabled
+                    description: If true, the rule will be enabled.
                     type: boolean
                   lambdaAction:
-                    description: A list of Lambda Action blocks. Documented below.
+                    description: Configuration block for calling an AWS Lambda function.
+                      Detailed below.
                     items:
                       properties:
                         functionArn:
-                          description: The ARN of the Lambda function to invoke
+                          description: ARN of the Lambda function to invoke.
                           type: string
                         invocationType:
-                          description: Event or RequestResponse
+                          description: Event or RequestResponse.
                           type: string
                         position:
-                          description: The position of the action in the receipt rule
+                          description: Position of the action in the receipt rule.
                           type: number
                         topicArn:
-                          description: The ARN of an SNS topic to notify
+                          description: ARN of an SNS topic to notify.
                           type: string
                       type: object
                     type: array
                   name:
-                    description: The name of the rule
+                    description: Name of the rule.
                     type: string
                   recipients:
-                    description: A list of email addresses
+                    description: List of email addresses.
                     items:
                       type: string
                     type: array
@@ -151,86 +154,90 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   ruleSetName:
-                    description: The name of the rule set
+                    description: Name of the rule set.
                     type: string
                   s3Action:
-                    description: A list of S3 Action blocks. Documented below.
+                    description: Configuration block for storing received emails in
+                      an S3 bucket. Detailed below.
                     items:
                       properties:
                         bucketName:
-                          description: The name of the S3 bucket
+                          description: Name of the S3 bucket.
                           type: string
                         iamRoleArn:
-                          description: The ARN of the IAM role to be used by Amazon
-                            Simple Email Service while writing to the Amazon S3 bucket,
-                            optionally encrypting your mail via the provided customer
-                            managed key, and publishing to the Amazon SNS topic
+                          description: ARN of the IAM role to be used by Amazon Simple
+                            Email Service while writing to the Amazon S3 bucket, optionally
+                            encrypting your mail via the provided customer managed
+                            key, and publishing to the Amazon SNS topic.
                           type: string
                         kmsKeyArn:
-                          description: The ARN of the KMS key
+                          description: ARN of the KMS key.
                           type: string
                         objectKeyPrefix:
-                          description: The key prefix of the S3 bucket
+                          description: Key prefix of the S3 bucket.
                           type: string
                         position:
-                          description: The position of the action in the receipt rule
+                          description: Position of the action in the receipt rule.
                           type: number
                         topicArn:
-                          description: The ARN of an SNS topic to notify
+                          description: ARN of an SNS topic to notify.
                           type: string
                       type: object
                     type: array
                   scanEnabled:
                     description: If true, incoming emails will be scanned for spam
-                      and viruses
+                      and viruses.
                     type: boolean
                   snsAction:
-                    description: A list of SNS Action blocks. Documented below.
+                    description: Configuration block for publishing to an SNS topic.
+                      Detailed below.
                     items:
                       properties:
                         encoding:
-                          description: The encoding to use for the email within the
-                            Amazon SNS notification. Default value is UTF-8.
+                          description: Encoding to use for the email within the Amazon
+                            SNS notification. Default value is UTF-8.
                           type: string
                         position:
-                          description: The position of the action in the receipt rule
+                          description: Position of the action in the receipt rule.
                           type: number
                         topicArn:
-                          description: The ARN of an SNS topic to notify
+                          description: ARN of an SNS topic to notify.
                           type: string
                       type: object
                     type: array
                   stopAction:
-                    description: A list of Stop Action blocks. Documented below.
+                    description: Configuration block for terminating the evaluation
+                      of the receipt rule set. Detailed below.
                     items:
                       properties:
                         position:
-                          description: The position of the action in the receipt rule
+                          description: Position of the action in the receipt rule.
                           type: number
                         scope:
-                          description: The scope to apply. The only acceptable value
-                            is RuleSet.
+                          description: Scope to apply. The only acceptable value is
+                            RuleSet.
                           type: string
                         topicArn:
-                          description: The ARN of an SNS topic to notify
+                          description: ARN of an SNS topic to notify.
                           type: string
                       type: object
                     type: array
                   tlsPolicy:
-                    description: Require or Optional
+                    description: Require or Optional.
                     type: string
                   workmailAction:
-                    description: A list of WorkMail Action blocks. Documented below.
+                    description: Configuration block for calling Amazon WorkMail.
+                      Detailed below.
                     items:
                       properties:
                         organizationArn:
-                          description: The ARN of the WorkMail organization
+                          description: ARN of the WorkMail organization.
                           type: string
                         position:
-                          description: The position of the action in the receipt rule
+                          description: Position of the action in the receipt rule.
                           type: number
                         topicArn:
-                          description: The ARN of an SNS topic to notify
+                          description: ARN of an SNS topic to notify.
                           type: string
                       type: object
                     type: array
@@ -251,158 +258,165 @@ spec:
                   autoscaler.
                 properties:
                   addHeaderAction:
-                    description: A list of Add Header Action blocks. Documented below.
+                    description: Configuration block for adding a header to received
+                      emails. Detailed below.
                     items:
                       properties:
                         headerName:
-                          description: The name of the header to add
+                          description: Name of the header to add.
                           type: string
                         headerValue:
-                          description: The value of the header to add
+                          description: Value of the header to add.
                           type: string
                         position:
-                          description: The position of the action in the receipt rule
+                          description: Position of the action in the receipt rule.
                           type: number
                       type: object
                     type: array
                   after:
-                    description: The name of the rule to place this rule after
+                    description: Name of the rule to place this rule after.
                     type: string
                   bounceAction:
-                    description: A list of Bounce Action blocks. Documented below.
+                    description: Configuration block for rejecting received emails.
+                      Detailed below.
                     items:
                       properties:
                         message:
-                          description: The message to send
+                          description: Message to send.
                           type: string
                         position:
-                          description: The position of the action in the receipt rule
+                          description: Position of the action in the receipt rule.
                           type: number
                         sender:
-                          description: The email address of the sender
+                          description: Email address of the sender.
                           type: string
                         smtpReplyCode:
-                          description: The RFC 5321 SMTP reply code
+                          description: RFC 5321 SMTP reply code.
                           type: string
                         statusCode:
-                          description: The RFC 3463 SMTP enhanced status code
+                          description: RFC 3463 SMTP enhanced status code.
                           type: string
                         topicArn:
-                          description: The ARN of an SNS topic to notify
+                          description: ARN of an SNS topic to notify.
                           type: string
                       type: object
                     type: array
                   enabled:
-                    description: If true, the rule will be enabled
+                    description: If true, the rule will be enabled.
                     type: boolean
                   lambdaAction:
-                    description: A list of Lambda Action blocks. Documented below.
+                    description: Configuration block for calling an AWS Lambda function.
+                      Detailed below.
                     items:
                       properties:
                         functionArn:
-                          description: The ARN of the Lambda function to invoke
+                          description: ARN of the Lambda function to invoke.
                           type: string
                         invocationType:
-                          description: Event or RequestResponse
+                          description: Event or RequestResponse.
                           type: string
                         position:
-                          description: The position of the action in the receipt rule
+                          description: Position of the action in the receipt rule.
                           type: number
                         topicArn:
-                          description: The ARN of an SNS topic to notify
+                          description: ARN of an SNS topic to notify.
                           type: string
                       type: object
                     type: array
                   name:
-                    description: The name of the rule
+                    description: Name of the rule.
                     type: string
                   recipients:
-                    description: A list of email addresses
+                    description: List of email addresses.
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
                   ruleSetName:
-                    description: The name of the rule set
+                    description: Name of the rule set.
                     type: string
                   s3Action:
-                    description: A list of S3 Action blocks. Documented below.
+                    description: Configuration block for storing received emails in
+                      an S3 bucket. Detailed below.
                     items:
                       properties:
                         bucketName:
-                          description: The name of the S3 bucket
+                          description: Name of the S3 bucket.
                           type: string
                         iamRoleArn:
-                          description: The ARN of the IAM role to be used by Amazon
-                            Simple Email Service while writing to the Amazon S3 bucket,
-                            optionally encrypting your mail via the provided customer
-                            managed key, and publishing to the Amazon SNS topic
+                          description: ARN of the IAM role to be used by Amazon Simple
+                            Email Service while writing to the Amazon S3 bucket, optionally
+                            encrypting your mail via the provided customer managed
+                            key, and publishing to the Amazon SNS topic.
                           type: string
                         kmsKeyArn:
-                          description: The ARN of the KMS key
+                          description: ARN of the KMS key.
                           type: string
                         objectKeyPrefix:
-                          description: The key prefix of the S3 bucket
+                          description: Key prefix of the S3 bucket.
                           type: string
                         position:
-                          description: The position of the action in the receipt rule
+                          description: Position of the action in the receipt rule.
                           type: number
                         topicArn:
-                          description: The ARN of an SNS topic to notify
+                          description: ARN of an SNS topic to notify.
                           type: string
                       type: object
                     type: array
                   scanEnabled:
                     description: If true, incoming emails will be scanned for spam
-                      and viruses
+                      and viruses.
                     type: boolean
                   snsAction:
-                    description: A list of SNS Action blocks. Documented below.
+                    description: Configuration block for publishing to an SNS topic.
+                      Detailed below.
                     items:
                       properties:
                         encoding:
-                          description: The encoding to use for the email within the
-                            Amazon SNS notification. Default value is UTF-8.
+                          description: Encoding to use for the email within the Amazon
+                            SNS notification. Default value is UTF-8.
                           type: string
                         position:
-                          description: The position of the action in the receipt rule
+                          description: Position of the action in the receipt rule.
                           type: number
                         topicArn:
-                          description: The ARN of an SNS topic to notify
+                          description: ARN of an SNS topic to notify.
                           type: string
                       type: object
                     type: array
                   stopAction:
-                    description: A list of Stop Action blocks. Documented below.
+                    description: Configuration block for terminating the evaluation
+                      of the receipt rule set. Detailed below.
                     items:
                       properties:
                         position:
-                          description: The position of the action in the receipt rule
+                          description: Position of the action in the receipt rule.
                           type: number
                         scope:
-                          description: The scope to apply. The only acceptable value
-                            is RuleSet.
+                          description: Scope to apply. The only acceptable value is
+                            RuleSet.
                           type: string
                         topicArn:
-                          description: The ARN of an SNS topic to notify
+                          description: ARN of an SNS topic to notify.
                           type: string
                       type: object
                     type: array
                   tlsPolicy:
-                    description: Require or Optional
+                    description: Require or Optional.
                     type: string
                   workmailAction:
-                    description: A list of WorkMail Action blocks. Documented below.
+                    description: Configuration block for calling Amazon WorkMail.
+                      Detailed below.
                     items:
                       properties:
                         organizationArn:
-                          description: The ARN of the WorkMail organization
+                          description: ARN of the WorkMail organization.
                           type: string
                         position:
-                          description: The position of the action in the receipt rule
+                          description: Position of the action in the receipt rule.
                           type: number
                         topicArn:
-                          description: The ARN of an SNS topic to notify
+                          description: ARN of an SNS topic to notify.
                           type: string
                       type: object
                     type: array
@@ -508,79 +522,82 @@ spec:
               atProvider:
                 properties:
                   addHeaderAction:
-                    description: A list of Add Header Action blocks. Documented below.
+                    description: Configuration block for adding a header to received
+                      emails. Detailed below.
                     items:
                       properties:
                         headerName:
-                          description: The name of the header to add
+                          description: Name of the header to add.
                           type: string
                         headerValue:
-                          description: The value of the header to add
+                          description: Value of the header to add.
                           type: string
                         position:
-                          description: The position of the action in the receipt rule
+                          description: Position of the action in the receipt rule.
                           type: number
                       type: object
                     type: array
                   after:
-                    description: The name of the rule to place this rule after
+                    description: Name of the rule to place this rule after.
                     type: string
                   arn:
-                    description: The SES receipt rule ARN.
+                    description: SES receipt rule ARN.
                     type: string
                   bounceAction:
-                    description: A list of Bounce Action blocks. Documented below.
+                    description: Configuration block for rejecting received emails.
+                      Detailed below.
                     items:
                       properties:
                         message:
-                          description: The message to send
+                          description: Message to send.
                           type: string
                         position:
-                          description: The position of the action in the receipt rule
+                          description: Position of the action in the receipt rule.
                           type: number
                         sender:
-                          description: The email address of the sender
+                          description: Email address of the sender.
                           type: string
                         smtpReplyCode:
-                          description: The RFC 5321 SMTP reply code
+                          description: RFC 5321 SMTP reply code.
                           type: string
                         statusCode:
-                          description: The RFC 3463 SMTP enhanced status code
+                          description: RFC 3463 SMTP enhanced status code.
                           type: string
                         topicArn:
-                          description: The ARN of an SNS topic to notify
+                          description: ARN of an SNS topic to notify.
                           type: string
                       type: object
                     type: array
                   enabled:
-                    description: If true, the rule will be enabled
+                    description: If true, the rule will be enabled.
                     type: boolean
                   id:
-                    description: The SES receipt rule name.
+                    description: SES receipt rule name.
                     type: string
                   lambdaAction:
-                    description: A list of Lambda Action blocks. Documented below.
+                    description: Configuration block for calling an AWS Lambda function.
+                      Detailed below.
                     items:
                       properties:
                         functionArn:
-                          description: The ARN of the Lambda function to invoke
+                          description: ARN of the Lambda function to invoke.
                           type: string
                         invocationType:
-                          description: Event or RequestResponse
+                          description: Event or RequestResponse.
                           type: string
                         position:
-                          description: The position of the action in the receipt rule
+                          description: Position of the action in the receipt rule.
                           type: number
                         topicArn:
-                          description: The ARN of an SNS topic to notify
+                          description: ARN of an SNS topic to notify.
                           type: string
                       type: object
                     type: array
                   name:
-                    description: The name of the rule
+                    description: Name of the rule.
                     type: string
                   recipients:
-                    description: A list of email addresses
+                    description: List of email addresses.
                     items:
                       type: string
                     type: array
@@ -591,86 +608,90 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   ruleSetName:
-                    description: The name of the rule set
+                    description: Name of the rule set.
                     type: string
                   s3Action:
-                    description: A list of S3 Action blocks. Documented below.
+                    description: Configuration block for storing received emails in
+                      an S3 bucket. Detailed below.
                     items:
                       properties:
                         bucketName:
-                          description: The name of the S3 bucket
+                          description: Name of the S3 bucket.
                           type: string
                         iamRoleArn:
-                          description: The ARN of the IAM role to be used by Amazon
-                            Simple Email Service while writing to the Amazon S3 bucket,
-                            optionally encrypting your mail via the provided customer
-                            managed key, and publishing to the Amazon SNS topic
+                          description: ARN of the IAM role to be used by Amazon Simple
+                            Email Service while writing to the Amazon S3 bucket, optionally
+                            encrypting your mail via the provided customer managed
+                            key, and publishing to the Amazon SNS topic.
                           type: string
                         kmsKeyArn:
-                          description: The ARN of the KMS key
+                          description: ARN of the KMS key.
                           type: string
                         objectKeyPrefix:
-                          description: The key prefix of the S3 bucket
+                          description: Key prefix of the S3 bucket.
                           type: string
                         position:
-                          description: The position of the action in the receipt rule
+                          description: Position of the action in the receipt rule.
                           type: number
                         topicArn:
-                          description: The ARN of an SNS topic to notify
+                          description: ARN of an SNS topic to notify.
                           type: string
                       type: object
                     type: array
                   scanEnabled:
                     description: If true, incoming emails will be scanned for spam
-                      and viruses
+                      and viruses.
                     type: boolean
                   snsAction:
-                    description: A list of SNS Action blocks. Documented below.
+                    description: Configuration block for publishing to an SNS topic.
+                      Detailed below.
                     items:
                       properties:
                         encoding:
-                          description: The encoding to use for the email within the
-                            Amazon SNS notification. Default value is UTF-8.
+                          description: Encoding to use for the email within the Amazon
+                            SNS notification. Default value is UTF-8.
                           type: string
                         position:
-                          description: The position of the action in the receipt rule
+                          description: Position of the action in the receipt rule.
                           type: number
                         topicArn:
-                          description: The ARN of an SNS topic to notify
+                          description: ARN of an SNS topic to notify.
                           type: string
                       type: object
                     type: array
                   stopAction:
-                    description: A list of Stop Action blocks. Documented below.
+                    description: Configuration block for terminating the evaluation
+                      of the receipt rule set. Detailed below.
                     items:
                       properties:
                         position:
-                          description: The position of the action in the receipt rule
+                          description: Position of the action in the receipt rule.
                           type: number
                         scope:
-                          description: The scope to apply. The only acceptable value
-                            is RuleSet.
+                          description: Scope to apply. The only acceptable value is
+                            RuleSet.
                           type: string
                         topicArn:
-                          description: The ARN of an SNS topic to notify
+                          description: ARN of an SNS topic to notify.
                           type: string
                       type: object
                     type: array
                   tlsPolicy:
-                    description: Require or Optional
+                    description: Require or Optional.
                     type: string
                   workmailAction:
-                    description: A list of WorkMail Action blocks. Documented below.
+                    description: Configuration block for calling Amazon WorkMail.
+                      Detailed below.
                     items:
                       properties:
                         organizationArn:
-                          description: The ARN of the WorkMail organization
+                          description: ARN of the WorkMail organization.
                           type: string
                         position:
-                          description: The position of the action in the receipt rule
+                          description: Position of the action in the receipt rule.
                           type: number
                         topicArn:
-                          description: The ARN of an SNS topic to notify
+                          description: ARN of an SNS topic to notify.
                           type: string
                       type: object
                     type: array

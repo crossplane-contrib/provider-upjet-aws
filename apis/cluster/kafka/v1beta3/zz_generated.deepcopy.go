@@ -820,6 +820,11 @@ func (in *ClusterObservation) DeepCopyInto(out *ClusterObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.BootstrapBrokersIPv6 != nil {
+		in, out := &in.BootstrapBrokersIPv6, &out.BootstrapBrokersIPv6
+		*out = new(string)
+		**out = **in
+	}
 	if in.BootstrapBrokersPublicSaslIAM != nil {
 		in, out := &in.BootstrapBrokersPublicSaslIAM, &out.BootstrapBrokersPublicSaslIAM
 		*out = new(string)
@@ -840,13 +845,28 @@ func (in *ClusterObservation) DeepCopyInto(out *ClusterObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.BootstrapBrokersSaslIAMIPv6 != nil {
+		in, out := &in.BootstrapBrokersSaslIAMIPv6, &out.BootstrapBrokersSaslIAMIPv6
+		*out = new(string)
+		**out = **in
+	}
 	if in.BootstrapBrokersSaslScram != nil {
 		in, out := &in.BootstrapBrokersSaslScram, &out.BootstrapBrokersSaslScram
 		*out = new(string)
 		**out = **in
 	}
+	if in.BootstrapBrokersSaslScramIPv6 != nil {
+		in, out := &in.BootstrapBrokersSaslScramIPv6, &out.BootstrapBrokersSaslScramIPv6
+		*out = new(string)
+		**out = **in
+	}
 	if in.BootstrapBrokersTLS != nil {
 		in, out := &in.BootstrapBrokersTLS, &out.BootstrapBrokersTLS
+		*out = new(string)
+		**out = **in
+	}
+	if in.BootstrapBrokersTLSIPv6 != nil {
+		in, out := &in.BootstrapBrokersTLSIPv6, &out.BootstrapBrokersTLSIPv6
 		*out = new(string)
 		**out = **in
 	}

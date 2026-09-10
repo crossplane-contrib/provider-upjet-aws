@@ -72,8 +72,8 @@ spec:
                     description: The description of the environment.
                     type: string
                   imageId:
-                    description: The identifier for the Amazon Machine Image (AMI)
-                      that's used to create the EC2 instance. Valid values are
+                    description: Identifier for the AMI that's used to create the
+                      EC2 instance. Valid values are
                     type: string
                   instanceType:
                     description: The type of instance to connect to the environment,
@@ -210,8 +210,8 @@ spec:
                     description: The description of the environment.
                     type: string
                   imageId:
-                    description: The identifier for the Amazon Machine Image (AMI)
-                      that's used to create the EC2 instance. Valid values are
+                    description: Identifier for the AMI that's used to create the
+                      EC2 instance. Valid values are
                     type: string
                   instanceType:
                     description: The type of instance to connect to the environment,
@@ -410,8 +410,8 @@ spec:
                     description: The ID of the environment.
                     type: string
                   imageId:
-                    description: The identifier for the Amazon Machine Image (AMI)
-                      that's used to create the EC2 instance. Valid values are
+                    description: Identifier for the AMI that's used to create the
+                      EC2 instance. Valid values are
                     type: string
                   instanceType:
                     description: The type of instance to connect to the environment,

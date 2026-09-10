@@ -15,16 +15,16 @@ import (
 
 type EmailIdentityInitParameters struct {
 
-	// The email address to assign to SES.
+	// Email address to assign to SES.
 	Email *string `json:"email,omitempty" tf:"email,omitempty"`
 }
 
 type EmailIdentityObservation struct {
 
-	// The ARN of the email identity.
+	// ARN of the email identity.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The email address to assign to SES.
+	// Email address to assign to SES.
 	Email *string `json:"email,omitempty" tf:"email,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -36,7 +36,7 @@ type EmailIdentityObservation struct {
 
 type EmailIdentityParameters struct {
 
-	// The email address to assign to SES.
+	// Email address to assign to SES.
 	// +kubebuilder:validation:Optional
 	Email *string `json:"email,omitempty" tf:"email,omitempty"`
 

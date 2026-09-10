@@ -79,8 +79,8 @@ spec:
                       false.
                     type: boolean
                   gatewayLoadBalancerArns:
-                    description: Amazon Resource Names (ARNs) of one or more Gateway
-                      Load Balancers for the endpoint service.
+                    description: ARNs of one or more Gateway Load Balancers for the
+                      endpoint service.
                     items:
                       type: string
                     type: array
@@ -163,8 +163,8 @@ spec:
                         type: object
                     type: object
                   networkLoadBalancerArns:
-                    description: Amazon Resource Names (ARNs) of one or more Network
-                      Load Balancers for the endpoint service.
+                    description: ARNs of one or more Network Load Balancers for the
+                      endpoint service.
                     items:
                       type: string
                     type: array
@@ -296,8 +296,8 @@ spec:
                       false.
                     type: boolean
                   gatewayLoadBalancerArns:
-                    description: Amazon Resource Names (ARNs) of one or more Gateway
-                      Load Balancers for the endpoint service.
+                    description: ARNs of one or more Gateway Load Balancers for the
+                      endpoint service.
                     items:
                       type: string
                     type: array
@@ -380,8 +380,8 @@ spec:
                         type: object
                     type: object
                   networkLoadBalancerArns:
-                    description: Amazon Resource Names (ARNs) of one or more Network
-                      Load Balancers for the endpoint service.
+                    description: ARNs of one or more Network Load Balancers for the
+                      endpoint service.
                     items:
                       type: string
                     type: array
@@ -596,8 +596,7 @@ spec:
                     type: array
                     x-kubernetes-list-type: set
                   arn:
-                    description: The Amazon Resource Name (ARN) of the VPC endpoint
-                      service.
+                    description: ARN of the VPC endpoint service.
                     type: string
                   availabilityZones:
                     description: A set of Availability Zones in which the service
@@ -613,8 +612,8 @@ spec:
                     type: array
                     x-kubernetes-list-type: set
                   gatewayLoadBalancerArns:
-                    description: Amazon Resource Names (ARNs) of one or more Gateway
-                      Load Balancers for the endpoint service.
+                    description: ARNs of one or more Gateway Load Balancers for the
+                      endpoint service.
                     items:
                       type: string
                     type: array
@@ -627,8 +626,8 @@ spec:
                       - true or false.
                     type: boolean
                   networkLoadBalancerArns:
-                    description: Amazon Resource Names (ARNs) of one or more Network
-                      Load Balancers for the endpoint service.
+                    description: ARNs of one or more Network Load Balancers for the
+                      endpoint service.
                     items:
                       type: string
                     type: array

@@ -21,7 +21,7 @@ type StreamInitParameters struct {
 	// The name of the device that is writing to the stream. In the current implementation, Kinesis Video Streams does not use this name.
 	DeviceName *string `json:"deviceName,omitempty" tf:"device_name,omitempty"`
 
-	// The ID of the AWS Key Management Service (AWS KMS) key that you want Kinesis Video Streams to use to encrypt stream data. If no key ID is specified, the default, Kinesis Video-managed key (aws/kinesisvideo) is used.
+	// ID of the KMS key that you want Kinesis Video Streams to use to encrypt stream data. If no key ID is specified, the default, Kinesis Video-managed key (aws/kinesisvideo) is used.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kms/v1beta1.Key
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
@@ -47,7 +47,7 @@ type StreamInitParameters struct {
 
 type StreamObservation struct {
 
-	// The Amazon Resource Name (ARN) specifying the Stream (same as id)
+	// ARN specifying the Stream (same as id)
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// A time stamp that indicates when the stream was created.
@@ -62,7 +62,7 @@ type StreamObservation struct {
 	// The unique Stream id
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The ID of the AWS Key Management Service (AWS KMS) key that you want Kinesis Video Streams to use to encrypt stream data. If no key ID is specified, the default, Kinesis Video-managed key (aws/kinesisvideo) is used.
+	// ID of the KMS key that you want Kinesis Video Streams to use to encrypt stream data. If no key ID is specified, the default, Kinesis Video-managed key (aws/kinesisvideo) is used.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
 	// The media type of the stream. Consumers of the stream can use this information when processing the stream. For more information about media types, see Media Types. If you choose to specify the MediaType, see Naming Requirements for guidelines.
@@ -98,7 +98,7 @@ type StreamParameters struct {
 	// +kubebuilder:validation:Optional
 	DeviceName *string `json:"deviceName,omitempty" tf:"device_name,omitempty"`
 
-	// The ID of the AWS Key Management Service (AWS KMS) key that you want Kinesis Video Streams to use to encrypt stream data. If no key ID is specified, the default, Kinesis Video-managed key (aws/kinesisvideo) is used.
+	// ID of the KMS key that you want Kinesis Video Streams to use to encrypt stream data. If no key ID is specified, the default, Kinesis Video-managed key (aws/kinesisvideo) is used.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kms/v1beta1.Key
 	// +kubebuilder:validation:Optional
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`

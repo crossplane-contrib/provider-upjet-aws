@@ -60,12 +60,11 @@ spec:
               forProvider:
                 properties:
                   bypassPolicyLockoutSafetyCheck:
-                    description: Specifies whether to disable the policy lockout check
-                      performed when creating or updating the key's policy. Setting
-                      this value to true increases the risk that the key becomes unmanageable.
+                    description: Whether to disable the policy lockout check performed
+                      when creating or updating the key's policy. Setting this value
+                      to true increases the risk that the key becomes unmanageable.
                       For more information, refer to the scenario in the Default Key
-                      Policy section in the AWS Key Management Service Developer Guide.
-                      Defaults to false.
+                      Policy section in the KMS Developer Guide. Defaults to false.
                     type: boolean
                   deletionWindowInDays:
                     description: Duration in days after which the key is deleted after
@@ -152,12 +151,11 @@ spec:
                   autoscaler.
                 properties:
                   bypassPolicyLockoutSafetyCheck:
-                    description: Specifies whether to disable the policy lockout check
-                      performed when creating or updating the key's policy. Setting
-                      this value to true increases the risk that the key becomes unmanageable.
+                    description: Whether to disable the policy lockout check performed
+                      when creating or updating the key's policy. Setting this value
+                      to true increases the risk that the key becomes unmanageable.
                       For more information, refer to the scenario in the Default Key
-                      Policy section in the AWS Key Management Service Developer Guide.
-                      Defaults to false.
+                      Policy section in the KMS Developer Guide. Defaults to false.
                     type: boolean
                   deletionWindowInDays:
                     description: Duration in days after which the key is deleted after
@@ -287,15 +285,14 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The Amazon Resource Name (ARN) of the key.
+                    description: ARN of the key.
                     type: string
                   bypassPolicyLockoutSafetyCheck:
-                    description: Specifies whether to disable the policy lockout check
-                      performed when creating or updating the key's policy. Setting
-                      this value to true increases the risk that the key becomes unmanageable.
+                    description: Whether to disable the policy lockout check performed
+                      when creating or updating the key's policy. Setting this value
+                      to true increases the risk that the key becomes unmanageable.
                       For more information, refer to the scenario in the Default Key
-                      Policy section in the AWS Key Management Service Developer Guide.
-                      Defaults to false.
+                      Policy section in the KMS Developer Guide. Defaults to false.
                     type: boolean
                   deletionWindowInDays:
                     description: Duration in days after which the key is deleted after

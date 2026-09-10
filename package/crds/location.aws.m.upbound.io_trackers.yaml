@@ -378,8 +378,8 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   trackerArn:
-                    description: The Amazon Resource Name (ARN) for the tracker resource.
-                      Used when you need to specify a resource across all AWS.
+                    description: ARN for the tracker resource. Used when you need
+                      to specify a resource across all AWS.
                     type: string
                   updateTime:
                     description: The timestamp for when the tracker resource was last

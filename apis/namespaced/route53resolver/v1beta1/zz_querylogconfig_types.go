@@ -29,7 +29,7 @@ type QueryLogConfigInitParameters struct {
 
 type QueryLogConfigObservation struct {
 
-	// The ARN (Amazon Resource Name) of the Route 53 Resolver query logging configuration.
+	// ARN of the Route 53 Resolver query logging configuration.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The ARN of the resource that you want Route 53 Resolver to send query logs.

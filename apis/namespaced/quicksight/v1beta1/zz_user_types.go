@@ -42,7 +42,7 @@ type UserInitParameters struct {
 
 type UserObservation struct {
 
-	// Amazon Resource Name (ARN) for the user.
+	// ARN for the user.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// AWS account ID.

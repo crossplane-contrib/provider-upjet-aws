@@ -82,7 +82,7 @@ type AdvancedSecurityAdditionalFlowsParameters struct {
 
 type CustomEmailSenderInitParameters struct {
 
-	// The Lambda Amazon Resource Name of the Lambda function that Amazon Cognito triggers to send email notifications to users.
+	// Lambda ARN of the Lambda function that Amazon Cognito triggers to send email notifications to users.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/lambda/v1beta2.Function
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	LambdaArn *string `json:"lambdaArn,omitempty" tf:"lambda_arn,omitempty"`
@@ -101,7 +101,7 @@ type CustomEmailSenderInitParameters struct {
 
 type CustomEmailSenderObservation struct {
 
-	// The Lambda Amazon Resource Name of the Lambda function that Amazon Cognito triggers to send email notifications to users.
+	// Lambda ARN of the Lambda function that Amazon Cognito triggers to send email notifications to users.
 	LambdaArn *string `json:"lambdaArn,omitempty" tf:"lambda_arn,omitempty"`
 
 	// The Lambda version represents the signature of the "request" attribute in the "event" information Amazon Cognito passes to your custom email Lambda function. The only supported value is V1_0.
@@ -110,7 +110,7 @@ type CustomEmailSenderObservation struct {
 
 type CustomEmailSenderParameters struct {
 
-	// The Lambda Amazon Resource Name of the Lambda function that Amazon Cognito triggers to send email notifications to users.
+	// Lambda ARN of the Lambda function that Amazon Cognito triggers to send email notifications to users.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/lambda/v1beta2.Function
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -131,7 +131,7 @@ type CustomEmailSenderParameters struct {
 
 type CustomSMSSenderInitParameters struct {
 
-	// The Lambda Amazon Resource Name of the Lambda function that Amazon Cognito triggers to send SMS notifications to users.
+	// Lambda ARN of the Lambda function that Amazon Cognito triggers to send SMS notifications to users.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/lambda/v1beta2.Function
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	LambdaArn *string `json:"lambdaArn,omitempty" tf:"lambda_arn,omitempty"`
@@ -150,7 +150,7 @@ type CustomSMSSenderInitParameters struct {
 
 type CustomSMSSenderObservation struct {
 
-	// The Lambda Amazon Resource Name of the Lambda function that Amazon Cognito triggers to send SMS notifications to users.
+	// Lambda ARN of the Lambda function that Amazon Cognito triggers to send SMS notifications to users.
 	LambdaArn *string `json:"lambdaArn,omitempty" tf:"lambda_arn,omitempty"`
 
 	// The Lambda version represents the signature of the "request" attribute in the "event" information Amazon Cognito passes to your custom SMS Lambda function. The only supported value is V1_0.
@@ -159,7 +159,7 @@ type CustomSMSSenderObservation struct {
 
 type CustomSMSSenderParameters struct {
 
-	// The Lambda Amazon Resource Name of the Lambda function that Amazon Cognito triggers to send SMS notifications to users.
+	// Lambda ARN of the Lambda function that Amazon Cognito triggers to send SMS notifications to users.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/lambda/v1beta2.Function
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -381,7 +381,7 @@ type LambdaConfigInitParameters struct {
 	// +kubebuilder:validation:Optional
 	DefineAuthChallengeSelector *v2.Selector `json:"defineAuthChallengeSelector,omitempty" tf:"-"`
 
-	// The Amazon Resource Name of Key Management Service Customer master keys. Amazon Cognito uses the key to encrypt codes and temporary passwords sent to CustomEmailSender and CustomSMSSender.
+	// ARN of KMS Customer master keys. Amazon Cognito uses the key to encrypt codes and temporary passwords sent to CustomEmailSender and CustomSMSSender.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kms/v1beta1.Key
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
@@ -506,7 +506,7 @@ type LambdaConfigObservation struct {
 	// Defines the authentication challenge.
 	DefineAuthChallenge *string `json:"defineAuthChallenge,omitempty" tf:"define_auth_challenge,omitempty"`
 
-	// The Amazon Resource Name of Key Management Service Customer master keys. Amazon Cognito uses the key to encrypt codes and temporary passwords sent to CustomEmailSender and CustomSMSSender.
+	// ARN of KMS Customer master keys. Amazon Cognito uses the key to encrypt codes and temporary passwords sent to CustomEmailSender and CustomSMSSender.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
 	// Post-authentication AWS Lambda trigger.
@@ -586,7 +586,7 @@ type LambdaConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	DefineAuthChallengeSelector *v2.Selector `json:"defineAuthChallengeSelector,omitempty" tf:"-"`
 
-	// The Amazon Resource Name of Key Management Service Customer master keys. Amazon Cognito uses the key to encrypt codes and temporary passwords sent to CustomEmailSender and CustomSMSSender.
+	// ARN of KMS Customer master keys. Amazon Cognito uses the key to encrypt codes and temporary passwords sent to CustomEmailSender and CustomSMSSender.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kms/v1beta1.Key
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -813,7 +813,7 @@ type PasswordPolicyParameters struct {
 
 type PreTokenGenerationConfigInitParameters struct {
 
-	// The Lambda Amazon Resource Name of the Lambda function that Amazon Cognito triggers to send SMS notifications to users.
+	// Lambda ARN of the Lambda function that Amazon Cognito triggers to send SMS notifications to users.
 	LambdaArn *string `json:"lambdaArn,omitempty" tf:"lambda_arn,omitempty"`
 
 	// The Lambda version represents the signature of the "version" attribute in the "event" information Amazon Cognito passes to your pre Token Generation Lambda function. The supported values are V1_0, V2_0, V3_0.
@@ -822,7 +822,7 @@ type PreTokenGenerationConfigInitParameters struct {
 
 type PreTokenGenerationConfigObservation struct {
 
-	// The Lambda Amazon Resource Name of the Lambda function that Amazon Cognito triggers to send SMS notifications to users.
+	// Lambda ARN of the Lambda function that Amazon Cognito triggers to send SMS notifications to users.
 	LambdaArn *string `json:"lambdaArn,omitempty" tf:"lambda_arn,omitempty"`
 
 	// The Lambda version represents the signature of the "version" attribute in the "event" information Amazon Cognito passes to your pre Token Generation Lambda function. The supported values are V1_0, V2_0, V3_0.
@@ -831,7 +831,7 @@ type PreTokenGenerationConfigObservation struct {
 
 type PreTokenGenerationConfigParameters struct {
 
-	// The Lambda Amazon Resource Name of the Lambda function that Amazon Cognito triggers to send SMS notifications to users.
+	// Lambda ARN of the Lambda function that Amazon Cognito triggers to send SMS notifications to users.
 	// +kubebuilder:validation:Optional
 	LambdaArn *string `json:"lambdaArn" tf:"lambda_arn,omitempty"`
 

@@ -426,7 +426,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The Amazon Resource Name (ARN) of the Hours of Operation.
+                    description: ARN of the Hours of Operation.
                     type: string
                   config:
                     description: 'One or more config blocks which define the configuration

@@ -359,8 +359,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: EC2 Transit Gateway Policy Table Amazon Resource
-                      Name (ARN).
+                    description: EC2 Transit Gateway Policy Table ARN.
                     type: string
                   id:
                     description: EC2 Transit Gateway Policy Table identifier.

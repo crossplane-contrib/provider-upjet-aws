@@ -15,7 +15,7 @@ import (
 
 type ResourceInitParameters struct {
 
-	// Amazon Resource Name (ARN) of the resource.
+	// ARN of the resource.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Flag to enable AWS LakeFormation hybrid access permission mode.
@@ -46,7 +46,7 @@ type ResourceInitParameters struct {
 
 type ResourceObservation struct {
 
-	// Amazon Resource Name (ARN) of the resource.
+	// ARN of the resource.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Flag to enable AWS LakeFormation hybrid access permission mode.
@@ -76,7 +76,7 @@ type ResourceObservation struct {
 
 type ResourceParameters struct {
 
-	// Amazon Resource Name (ARN) of the resource.
+	// ARN of the resource.
 	// +kubebuilder:validation:Optional
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 

@@ -199,9 +199,9 @@ spec:
                   kmsKeyIdentifier:
                     description: Identifier of the AWS KMS customer managed key for
                       EventBridge to use, if you choose to use a customer managed
-                      key to encrypt pipe data. The identifier can be the key Amazon
-                      Resource Name (ARN), KeyId, key alias, or key alias ARN. If
-                      not set, EventBridge uses an AWS owned key to encrypt pipe data.
+                      key to encrypt pipe data. The identifier can be the key ARN,
+                      KeyId, key alias, or key alias ARN. If not set, EventBridge
+                      uses an AWS owned key to encrypt pipe data.
                     type: string
                   logConfiguration:
                     description: Logging configuration settings for the pipe. Detailed
@@ -304,9 +304,8 @@ spec:
                           settings for the pipe. Detailed below.
                         properties:
                           deliveryStreamArn:
-                            description: Amazon Resource Name (ARN) of the Kinesis
-                              Data Firehose delivery stream to which EventBridge delivers
-                              the pipe log records.
+                            description: ARN of the Kinesis Data Firehose delivery
+                              stream to which EventBridge delivers the pipe log records.
                             type: string
                         type: object
                       includeExecutionData:
@@ -437,10 +436,9 @@ spec:
                     type: object
                   source:
                     description: Source resource of the pipe. This field typically
-                      requires an ARN (Amazon Resource Name). However, when using
-                      a self-managed Kafka cluster, you should use a different format.
-                      Instead of an ARN, use 'smk://' followed by the bootstrap server's
-                      address.
+                      requires an ARN. However, when using a self-managed Kafka cluster,
+                      you should use a different format. Instead of an ARN, use 'smk://'
+                      followed by the bootstrap server's address.
                     type: string
                   sourceParameters:
                     description: Parameters to configure a source for the pipe. Detailed
@@ -952,11 +950,10 @@ spec:
                               type: object
                             type: array
                           jobDefinition:
-                            description: The job definition used by this job. This
-                              value can be one of name, name:revision, or the Amazon
-                              Resource Name (ARN) for the job definition. If name
-                              is specified without a revision then the latest active
-                              revision is used.
+                            description: Job definition used by this job. This value
+                              can be one of name, name:revision, or the ARN for the
+                              job definition. If name is specified without a revision
+                              then the latest active revision is used.
                             type: string
                           jobName:
                             description: The name of the job. It can be up to 128
@@ -1162,9 +1159,9 @@ spec:
                                               only supported value is s3.
                                             type: string
                                           value:
-                                            description: The Amazon Resource Name
-                                              (ARN) of the Amazon S3 object containing
-                                              the environment variable file.
+                                            description: ARN of the Amazon S3 object
+                                              containing the environment variable
+                                              file.
                                             type: string
                                         type: object
                                       type: array
@@ -1233,8 +1230,8 @@ spec:
                                     type: number
                                 type: object
                               executionRoleArn:
-                                description: The Amazon Resource Name (ARN) of the
-                                  task execution IAM role override for the task.
+                                description: ARN of the task execution IAM role override
+                                  for the task.
                                 type: string
                               inferenceAcceleratorOverride:
                                 description: List of Elastic Inference accelerator
@@ -1257,10 +1254,10 @@ spec:
                                 description: The memory override for the task.
                                 type: string
                               taskRoleArn:
-                                description: The Amazon Resource Name (ARN) of the
-                                  IAM role that containers in this task can assume.
-                                  All containers in this task are granted the permissions
-                                  that are specified in this role.
+                                description: ARN of the IAM role that containers in
+                                  this task can assume. All containers in this task
+                                  are granted the permissions that are specified in
+                                  this role.
                                 type: string
                             type: object
                           placementConstraint:
@@ -1368,9 +1365,9 @@ spec:
                               then the EndpointId is abcde.veo.
                             type: string
                           resources:
-                            description: List of AWS resources, identified by Amazon
-                              Resource Name (ARN), which the event primarily concerns.
-                              Any number, including zero, may be present.
+                            description: List of AWS resources, identified by ARN,
+                              which the event primarily concerns. Any number, including
+                              zero, may be present.
                             items:
                               type: string
                             type: array
@@ -1764,9 +1761,9 @@ spec:
                   kmsKeyIdentifier:
                     description: Identifier of the AWS KMS customer managed key for
                       EventBridge to use, if you choose to use a customer managed
-                      key to encrypt pipe data. The identifier can be the key Amazon
-                      Resource Name (ARN), KeyId, key alias, or key alias ARN. If
-                      not set, EventBridge uses an AWS owned key to encrypt pipe data.
+                      key to encrypt pipe data. The identifier can be the key ARN,
+                      KeyId, key alias, or key alias ARN. If not set, EventBridge
+                      uses an AWS owned key to encrypt pipe data.
                     type: string
                   logConfiguration:
                     description: Logging configuration settings for the pipe. Detailed
@@ -1869,9 +1866,8 @@ spec:
                           settings for the pipe. Detailed below.
                         properties:
                           deliveryStreamArn:
-                            description: Amazon Resource Name (ARN) of the Kinesis
-                              Data Firehose delivery stream to which EventBridge delivers
-                              the pipe log records.
+                            description: ARN of the Kinesis Data Firehose delivery
+                              stream to which EventBridge delivers the pipe log records.
                             type: string
                         type: object
                       includeExecutionData:
@@ -1997,10 +1993,9 @@ spec:
                     type: object
                   source:
                     description: Source resource of the pipe. This field typically
-                      requires an ARN (Amazon Resource Name). However, when using
-                      a self-managed Kafka cluster, you should use a different format.
-                      Instead of an ARN, use 'smk://' followed by the bootstrap server's
-                      address.
+                      requires an ARN. However, when using a self-managed Kafka cluster,
+                      you should use a different format. Instead of an ARN, use 'smk://'
+                      followed by the bootstrap server's address.
                     type: string
                   sourceParameters:
                     description: Parameters to configure a source for the pipe. Detailed
@@ -2512,11 +2507,10 @@ spec:
                               type: object
                             type: array
                           jobDefinition:
-                            description: The job definition used by this job. This
-                              value can be one of name, name:revision, or the Amazon
-                              Resource Name (ARN) for the job definition. If name
-                              is specified without a revision then the latest active
-                              revision is used.
+                            description: Job definition used by this job. This value
+                              can be one of name, name:revision, or the ARN for the
+                              job definition. If name is specified without a revision
+                              then the latest active revision is used.
                             type: string
                           jobName:
                             description: The name of the job. It can be up to 128
@@ -2722,9 +2716,9 @@ spec:
                                               only supported value is s3.
                                             type: string
                                           value:
-                                            description: The Amazon Resource Name
-                                              (ARN) of the Amazon S3 object containing
-                                              the environment variable file.
+                                            description: ARN of the Amazon S3 object
+                                              containing the environment variable
+                                              file.
                                             type: string
                                         type: object
                                       type: array
@@ -2793,8 +2787,8 @@ spec:
                                     type: number
                                 type: object
                               executionRoleArn:
-                                description: The Amazon Resource Name (ARN) of the
-                                  task execution IAM role override for the task.
+                                description: ARN of the task execution IAM role override
+                                  for the task.
                                 type: string
                               inferenceAcceleratorOverride:
                                 description: List of Elastic Inference accelerator
@@ -2817,10 +2811,10 @@ spec:
                                 description: The memory override for the task.
                                 type: string
                               taskRoleArn:
-                                description: The Amazon Resource Name (ARN) of the
-                                  IAM role that containers in this task can assume.
-                                  All containers in this task are granted the permissions
-                                  that are specified in this role.
+                                description: ARN of the IAM role that containers in
+                                  this task can assume. All containers in this task
+                                  are granted the permissions that are specified in
+                                  this role.
                                 type: string
                             type: object
                           placementConstraint:
@@ -2928,9 +2922,9 @@ spec:
                               then the EndpointId is abcde.veo.
                             type: string
                           resources:
-                            description: List of AWS resources, identified by Amazon
-                              Resource Name (ARN), which the event primarily concerns.
-                              Any number, including zero, may be present.
+                            description: List of AWS resources, identified by ARN,
+                              which the event primarily concerns. Any number, including
+                              zero, may be present.
                             items:
                               type: string
                             type: array
@@ -3296,9 +3290,9 @@ spec:
                   kmsKeyIdentifier:
                     description: Identifier of the AWS KMS customer managed key for
                       EventBridge to use, if you choose to use a customer managed
-                      key to encrypt pipe data. The identifier can be the key Amazon
-                      Resource Name (ARN), KeyId, key alias, or key alias ARN. If
-                      not set, EventBridge uses an AWS owned key to encrypt pipe data.
+                      key to encrypt pipe data. The identifier can be the key ARN,
+                      KeyId, key alias, or key alias ARN. If not set, EventBridge
+                      uses an AWS owned key to encrypt pipe data.
                     type: string
                   logConfiguration:
                     description: Logging configuration settings for the pipe. Detailed
@@ -3319,9 +3313,8 @@ spec:
                           settings for the pipe. Detailed below.
                         properties:
                           deliveryStreamArn:
-                            description: Amazon Resource Name (ARN) of the Kinesis
-                              Data Firehose delivery stream to which EventBridge delivers
-                              the pipe log records.
+                            description: ARN of the Kinesis Data Firehose delivery
+                              stream to which EventBridge delivers the pipe log records.
                             type: string
                         type: object
                       includeExecutionData:
@@ -3372,10 +3365,9 @@ spec:
                     type: string
                   source:
                     description: Source resource of the pipe. This field typically
-                      requires an ARN (Amazon Resource Name). However, when using
-                      a self-managed Kafka cluster, you should use a different format.
-                      Instead of an ARN, use 'smk://' followed by the bootstrap server's
-                      address.
+                      requires an ARN. However, when using a self-managed Kafka cluster,
+                      you should use a different format. Instead of an ARN, use 'smk://'
+                      followed by the bootstrap server's address.
                     type: string
                   sourceParameters:
                     description: Parameters to configure a source for the pipe. Detailed
@@ -3814,11 +3806,10 @@ spec:
                               type: object
                             type: array
                           jobDefinition:
-                            description: The job definition used by this job. This
-                              value can be one of name, name:revision, or the Amazon
-                              Resource Name (ARN) for the job definition. If name
-                              is specified without a revision then the latest active
-                              revision is used.
+                            description: Job definition used by this job. This value
+                              can be one of name, name:revision, or the ARN for the
+                              job definition. If name is specified without a revision
+                              then the latest active revision is used.
                             type: string
                           jobName:
                             description: The name of the job. It can be up to 128
@@ -4024,9 +4015,9 @@ spec:
                                               only supported value is s3.
                                             type: string
                                           value:
-                                            description: The Amazon Resource Name
-                                              (ARN) of the Amazon S3 object containing
-                                              the environment variable file.
+                                            description: ARN of the Amazon S3 object
+                                              containing the environment variable
+                                              file.
                                             type: string
                                         type: object
                                       type: array
@@ -4095,8 +4086,8 @@ spec:
                                     type: number
                                 type: object
                               executionRoleArn:
-                                description: The Amazon Resource Name (ARN) of the
-                                  task execution IAM role override for the task.
+                                description: ARN of the task execution IAM role override
+                                  for the task.
                                 type: string
                               inferenceAcceleratorOverride:
                                 description: List of Elastic Inference accelerator
@@ -4119,10 +4110,10 @@ spec:
                                 description: The memory override for the task.
                                 type: string
                               taskRoleArn:
-                                description: The Amazon Resource Name (ARN) of the
-                                  IAM role that containers in this task can assume.
-                                  All containers in this task are granted the permissions
-                                  that are specified in this role.
+                                description: ARN of the IAM role that containers in
+                                  this task can assume. All containers in this task
+                                  are granted the permissions that are specified in
+                                  this role.
                                 type: string
                             type: object
                           placementConstraint:
@@ -4230,9 +4221,9 @@ spec:
                               then the EndpointId is abcde.veo.
                             type: string
                           resources:
-                            description: List of AWS resources, identified by Amazon
-                              Resource Name (ARN), which the event primarily concerns.
-                              Any number, including zero, may be present.
+                            description: List of AWS resources, identified by ARN,
+                              which the event primarily concerns. Any number, including
+                              zero, may be present.
                             items:
                               type: string
                             type: array

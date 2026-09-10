@@ -61,7 +61,7 @@ type ProfileObservation struct {
 	// Whether or not a custom role session name is accepted.
 	AcceptRoleSessionName *bool `json:"acceptRoleSessionName,omitempty" tf:"accept_role_session_name,omitempty"`
 
-	// Amazon Resource Name (ARN) of the Profile
+	// ARN of the Profile
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The number of seconds the vended session credentials are valid for. Defaults to 3600.

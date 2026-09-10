@@ -348,11 +348,10 @@ spec:
                       image_uri, or s3_bucket must be specified.
                     type: string
                   kmsKeyArn:
-                    description: ARN of the AWS Key Management Service key used to
-                      encrypt environment variables. If not provided when environment
-                      variables are in use, AWS Lambda uses a default service key.
-                      If provided when environment variables are not in use, the AWS
-                      Lambda API does not save this configuration.
+                    description: ARN of the KMS key used to encrypt environment variables.
+                      If not provided when environment variables are in use, AWS Lambda
+                      uses a default service key. If provided when environment variables
+                      are not in use, the AWS Lambda API does not save this configuration.
                     type: string
                   kmsKeyArnRef:
                     description: Reference to a Key in kms to populate kmsKeyArn.
@@ -952,9 +951,8 @@ spec:
                       function specified in the filename, image_uri, s3_bucket fields.
                     type: string
                   sourceKmsKeyArn:
-                    description: ARN of the AWS Key Management Service key used to
-                      encrypt the function's .zip deployment package. Conflicts with
-                      image_uri.
+                    description: ARN of the KMS key used to encrypt the function's
+                      .zip deployment package. Conflicts with image_uri.
                     type: string
                   tags:
                     additionalProperties:
@@ -1485,11 +1483,10 @@ spec:
                       image_uri, or s3_bucket must be specified.
                     type: string
                   kmsKeyArn:
-                    description: ARN of the AWS Key Management Service key used to
-                      encrypt environment variables. If not provided when environment
-                      variables are in use, AWS Lambda uses a default service key.
-                      If provided when environment variables are not in use, the AWS
-                      Lambda API does not save this configuration.
+                    description: ARN of the KMS key used to encrypt environment variables.
+                      If not provided when environment variables are in use, AWS Lambda
+                      uses a default service key. If provided when environment variables
+                      are not in use, the AWS Lambda API does not save this configuration.
                     type: string
                   kmsKeyArnRef:
                     description: Reference to a Key in kms to populate kmsKeyArn.
@@ -2084,9 +2081,8 @@ spec:
                       function specified in the filename, image_uri, s3_bucket fields.
                     type: string
                   sourceKmsKeyArn:
-                    description: ARN of the AWS Key Management Service key used to
-                      encrypt the function's .zip deployment package. Conflicts with
-                      image_uri.
+                    description: ARN of the KMS key used to encrypt the function's
+                      .zip deployment package. Conflicts with image_uri.
                     type: string
                   tags:
                     additionalProperties:
@@ -2512,11 +2508,10 @@ spec:
                       API Gateway - to be used in aws_api_gateway_integration's uri.
                     type: string
                   kmsKeyArn:
-                    description: ARN of the AWS Key Management Service key used to
-                      encrypt environment variables. If not provided when environment
-                      variables are in use, AWS Lambda uses a default service key.
-                      If provided when environment variables are not in use, the AWS
-                      Lambda API does not save this configuration.
+                    description: ARN of the KMS key used to encrypt environment variables.
+                      If not provided when environment variables are in use, AWS Lambda
+                      uses a default service key. If provided when environment variables
+                      are not in use, the AWS Lambda API does not save this configuration.
                     type: string
                   lastModified:
                     description: Date this resource was last modified.
@@ -2655,9 +2650,8 @@ spec:
                     description: Size in bytes of the function .zip file.
                     type: number
                   sourceKmsKeyArn:
-                    description: ARN of the AWS Key Management Service key used to
-                      encrypt the function's .zip deployment package. Conflicts with
-                      image_uri.
+                    description: ARN of the KMS key used to encrypt the function's
+                      .zip deployment package. Conflicts with image_uri.
                     type: string
                   tags:
                     additionalProperties:

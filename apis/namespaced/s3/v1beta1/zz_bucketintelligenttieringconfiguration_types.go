@@ -18,7 +18,7 @@ type BucketIntelligentTieringConfigurationFilterInitParameters struct {
 	// Object key name prefix that identifies the subset of objects to which the configuration applies.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// Key-value map of resource tags.
+	// All of these tags must exist in the object's tag set in order for the configuration to apply.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
@@ -28,7 +28,7 @@ type BucketIntelligentTieringConfigurationFilterObservation struct {
 	// Object key name prefix that identifies the subset of objects to which the configuration applies.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// Key-value map of resource tags.
+	// All of these tags must exist in the object's tag set in order for the configuration to apply.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
@@ -39,7 +39,7 @@ type BucketIntelligentTieringConfigurationFilterParameters struct {
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// Key-value map of resource tags.
+	// All of these tags must exist in the object's tag set in order for the configuration to apply.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -60,16 +60,16 @@ type BucketIntelligentTieringConfigurationInitParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketSelector *v2.NamespacedSelector `json:"bucketSelector,omitempty" tf:"-"`
 
-	// Bucket filter. The configuration only includes objects that meet the filter's criteria (documented below).
+	// Bucket filter. The configuration only includes objects that meet the filter's criteria. See filter Block below.
 	Filter *BucketIntelligentTieringConfigurationFilterInitParameters `json:"filter,omitempty" tf:"filter,omitempty"`
 
 	// Unique name used to identify the S3 Intelligent-Tiering configuration for the bucket.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Specifies the status of the configuration. Valid values: Enabled, Disabled.
+	// Status of the configuration. Valid values: Enabled, Disabled.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
-	// S3 Intelligent-Tiering storage class tiers of the configuration (documented below).
+	// S3 Intelligent-Tiering storage class tiers of the configuration. See tiering Block below.
 	Tiering []TieringInitParameters `json:"tiering,omitempty" tf:"tiering,omitempty"`
 }
 
@@ -78,7 +78,7 @@ type BucketIntelligentTieringConfigurationObservation struct {
 	// Name of the bucket this intelligent tiering configuration is associated with.
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
-	// Bucket filter. The configuration only includes objects that meet the filter's criteria (documented below).
+	// Bucket filter. The configuration only includes objects that meet the filter's criteria. See filter Block below.
 	Filter *BucketIntelligentTieringConfigurationFilterObservation `json:"filter,omitempty" tf:"filter,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -90,10 +90,10 @@ type BucketIntelligentTieringConfigurationObservation struct {
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// Specifies the status of the configuration. Valid values: Enabled, Disabled.
+	// Status of the configuration. Valid values: Enabled, Disabled.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
-	// S3 Intelligent-Tiering storage class tiers of the configuration (documented below).
+	// S3 Intelligent-Tiering storage class tiers of the configuration. See tiering Block below.
 	Tiering []TieringObservation `json:"tiering,omitempty" tf:"tiering,omitempty"`
 }
 
@@ -113,7 +113,7 @@ type BucketIntelligentTieringConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketSelector *v2.NamespacedSelector `json:"bucketSelector,omitempty" tf:"-"`
 
-	// Bucket filter. The configuration only includes objects that meet the filter's criteria (documented below).
+	// Bucket filter. The configuration only includes objects that meet the filter's criteria. See filter Block below.
 	// +kubebuilder:validation:Optional
 	Filter *BucketIntelligentTieringConfigurationFilterParameters `json:"filter,omitempty" tf:"filter,omitempty"`
 
@@ -126,11 +126,11 @@ type BucketIntelligentTieringConfigurationParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// Specifies the status of the configuration. Valid values: Enabled, Disabled.
+	// Status of the configuration. Valid values: Enabled, Disabled.
 	// +kubebuilder:validation:Optional
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
-	// S3 Intelligent-Tiering storage class tiers of the configuration (documented below).
+	// S3 Intelligent-Tiering storage class tiers of the configuration. See tiering Block below.
 	// +kubebuilder:validation:Optional
 	Tiering []TieringParameters `json:"tiering,omitempty" tf:"tiering,omitempty"`
 }

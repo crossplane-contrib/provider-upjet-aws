@@ -64,7 +64,7 @@ type BlockDeviceMappingParameters struct {
 
 type ContainerRecipeComponentInitParameters struct {
 
-	// Amazon Resource Name (ARN) of the Image Builder Component to associate.
+	// ARN of the Image Builder Component to associate.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/imagebuilder/v1beta1.Component
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	ComponentArn *string `json:"componentArn,omitempty" tf:"component_arn,omitempty"`
@@ -83,7 +83,7 @@ type ContainerRecipeComponentInitParameters struct {
 
 type ContainerRecipeComponentObservation struct {
 
-	// Amazon Resource Name (ARN) of the Image Builder Component to associate.
+	// ARN of the Image Builder Component to associate.
 	ComponentArn *string `json:"componentArn,omitempty" tf:"component_arn,omitempty"`
 
 	// Configuration block(s) for parameters to configure the component. Detailed below.
@@ -92,7 +92,7 @@ type ContainerRecipeComponentObservation struct {
 
 type ContainerRecipeComponentParameters struct {
 
-	// Amazon Resource Name (ARN) of the Image Builder Component to associate.
+	// ARN of the Image Builder Component to associate.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/imagebuilder/v1beta1.Component
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -168,7 +168,7 @@ type ContainerRecipeInitParameters struct {
 
 type ContainerRecipeObservation struct {
 
-	// Amazon Resource Name (ARN) of the container recipe.
+	// ARN of the container recipe.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Ordered configuration block(s) with components for the container recipe. Detailed below.
@@ -192,7 +192,7 @@ type ContainerRecipeObservation struct {
 	// A flag that indicates if the target container is encrypted.
 	Encrypted *bool `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
 
-	// Amazon Resource Name (ARN) of the container recipe.
+	// ARN of the container recipe.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Configuration block used to configure an instance for building and testing container images. Detailed below.
@@ -323,7 +323,7 @@ type EBSInitParameters struct {
 	// Number of Input/Output (I/O) operations per second to provision for an io1 or io2 volume.
 	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
-	// Amazon Resource Name (ARN) of the Key Management Service (KMS) Key for encryption.
+	// ARN of the KMS Key for encryption.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
 	// Identifier of the EC2 Volume Snapshot.
@@ -350,7 +350,7 @@ type EBSObservation struct {
 	// Number of Input/Output (I/O) operations per second to provision for an io1 or io2 volume.
 	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
-	// Amazon Resource Name (ARN) of the Key Management Service (KMS) Key for encryption.
+	// ARN of the KMS Key for encryption.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
 	// Identifier of the EC2 Volume Snapshot.
@@ -380,7 +380,7 @@ type EBSParameters struct {
 	// +kubebuilder:validation:Optional
 	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
-	// Amazon Resource Name (ARN) of the Key Management Service (KMS) Key for encryption.
+	// ARN of the KMS Key for encryption.
 	// +kubebuilder:validation:Optional
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 

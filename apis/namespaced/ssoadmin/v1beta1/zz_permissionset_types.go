@@ -18,7 +18,7 @@ type PermissionSetInitParameters struct {
 	// The description of the Permission Set.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the SSO Instance under which the operation will be executed.
+	// ARN of the SSO Instance under which the operation will be executed.
 	InstanceArn *string `json:"instanceArn,omitempty" tf:"instance_arn,omitempty"`
 
 	// The name of the Permission Set.
@@ -37,7 +37,7 @@ type PermissionSetInitParameters struct {
 
 type PermissionSetObservation struct {
 
-	// The Amazon Resource Name (ARN) of the Permission Set.
+	// ARN of the Permission Set.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The date the Permission Set was created in RFC3339 format.
@@ -46,10 +46,10 @@ type PermissionSetObservation struct {
 	// The description of the Permission Set.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The Amazon Resource Names (ARNs) of the Permission Set and SSO Instance, separated by a comma (,).
+	// ARNs of the Permission Set and SSO Instance, separated by a comma (,).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the SSO Instance under which the operation will be executed.
+	// ARN of the SSO Instance under which the operation will be executed.
 	InstanceArn *string `json:"instanceArn,omitempty" tf:"instance_arn,omitempty"`
 
 	// The name of the Permission Set.
@@ -80,7 +80,7 @@ type PermissionSetParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the SSO Instance under which the operation will be executed.
+	// ARN of the SSO Instance under which the operation will be executed.
 	// +kubebuilder:validation:Optional
 	InstanceArn *string `json:"instanceArn,omitempty" tf:"instance_arn,omitempty"`
 

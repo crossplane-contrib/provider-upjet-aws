@@ -79,11 +79,11 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   resourceArn:
-                    description: Amazon Resource Name (ARN) of the resource to associate
-                      with the RAM Resource Share.
+                    description: ARN of the resource to associate with the RAM Resource
+                      Share.
                     type: string
                   resourceShareArn:
-                    description: Amazon Resource Name (ARN) of the RAM Resource Share.
+                    description: ARN of the RAM Resource Share.
                     type: string
                   resourceShareArnRef:
                     description: Reference to a ResourceShare in ram to populate resourceShareArn.
@@ -176,11 +176,11 @@ spec:
                   autoscaler.
                 properties:
                   resourceArn:
-                    description: Amazon Resource Name (ARN) of the resource to associate
-                      with the RAM Resource Share.
+                    description: ARN of the resource to associate with the RAM Resource
+                      Share.
                     type: string
                   resourceShareArn:
-                    description: Amazon Resource Name (ARN) of the RAM Resource Share.
+                    description: ARN of the RAM Resource Share.
                     type: string
                   resourceShareArnRef:
                     description: Reference to a ResourceShare in ram to populate resourceShareArn.
@@ -354,7 +354,7 @@ spec:
               atProvider:
                 properties:
                   id:
-                    description: The Amazon Resource Name (ARN) of the resource share.
+                    description: ARN of the resource share.
                     type: string
                   region:
                     description: |-
@@ -362,11 +362,11 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   resourceArn:
-                    description: Amazon Resource Name (ARN) of the resource to associate
-                      with the RAM Resource Share.
+                    description: ARN of the resource to associate with the RAM Resource
+                      Share.
                     type: string
                   resourceShareArn:
-                    description: Amazon Resource Name (ARN) of the RAM Resource Share.
+                    description: ARN of the RAM Resource Share.
                     type: string
                 type: object
               conditions:

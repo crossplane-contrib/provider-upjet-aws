@@ -1097,8 +1097,7 @@ spec:
                           The level block is documented below.
                         properties:
                           arn:
-                            description: The Amazon Resource Name (ARN) of the hierarchy
-                              level.
+                            description: The ARN of the hierarchy level.
                             type: string
                           id:
                             description: The identifier of the hosting Amazon Connect
@@ -1114,8 +1113,7 @@ spec:
                           The level block is documented below.
                         properties:
                           arn:
-                            description: The Amazon Resource Name (ARN) of the hierarchy
-                              level.
+                            description: The ARN of the hierarchy level.
                             type: string
                           id:
                             description: The identifier of the hosting Amazon Connect
@@ -1131,8 +1129,7 @@ spec:
                           The level block is documented below.
                         properties:
                           arn:
-                            description: The Amazon Resource Name (ARN) of the hierarchy
-                              level.
+                            description: The ARN of the hierarchy level.
                             type: string
                           id:
                             description: The identifier of the hosting Amazon Connect
@@ -1148,8 +1145,7 @@ spec:
                           The level block is documented below.
                         properties:
                           arn:
-                            description: The Amazon Resource Name (ARN) of the hierarchy
-                              level.
+                            description: The ARN of the hierarchy level.
                             type: string
                           id:
                             description: The identifier of the hosting Amazon Connect
@@ -1165,8 +1161,7 @@ spec:
                           The level block is documented below.
                         properties:
                           arn:
-                            description: The Amazon Resource Name (ARN) of the hierarchy
-                              level.
+                            description: The ARN of the hierarchy level.
                             type: string
                           id:
                             description: The identifier of the hosting Amazon Connect

@@ -15,7 +15,7 @@ import (
 
 type ExtensionAssociationInitParameters struct {
 
-	// The ARN of the extension defined in the association.
+	// ARN of the extension defined in the association.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/appconfig/v1beta1.Extension
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	ExtensionArn *string `json:"extensionArn,omitempty" tf:"extension_arn,omitempty"`
@@ -28,11 +28,11 @@ type ExtensionAssociationInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ExtensionArnSelector *v2.Selector `json:"extensionArnSelector,omitempty" tf:"-"`
 
-	// The parameter names and values defined for the association.
+	// Parameter names and values defined for the association.
 	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
-	// The ARN of the application, configuration profile, or environment to associate with the extension.
+	// ARN of the application, configuration profile, or environment to associate with the extension.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/appconfig/v1beta1.Application
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
@@ -51,16 +51,16 @@ type ExtensionAssociationObservation struct {
 	// ARN of the AppConfig Extension Association.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The ARN of the extension defined in the association.
+	// ARN of the extension defined in the association.
 	ExtensionArn *string `json:"extensionArn,omitempty" tf:"extension_arn,omitempty"`
 
-	// The version number for the extension defined in the association.
+	// Version number for the extension defined in the association.
 	ExtensionVersion *float64 `json:"extensionVersion,omitempty" tf:"extension_version,omitempty"`
 
 	// AppConfig Extension Association ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The parameter names and values defined for the association.
+	// Parameter names and values defined for the association.
 	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
@@ -68,13 +68,13 @@ type ExtensionAssociationObservation struct {
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The ARN of the application, configuration profile, or environment to associate with the extension.
+	// ARN of the application, configuration profile, or environment to associate with the extension.
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
 }
 
 type ExtensionAssociationParameters struct {
 
-	// The ARN of the extension defined in the association.
+	// ARN of the extension defined in the association.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/appconfig/v1beta1.Extension
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -88,7 +88,7 @@ type ExtensionAssociationParameters struct {
 	// +kubebuilder:validation:Optional
 	ExtensionArnSelector *v2.Selector `json:"extensionArnSelector,omitempty" tf:"-"`
 
-	// The parameter names and values defined for the association.
+	// Parameter names and values defined for the association.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
@@ -98,7 +98,7 @@ type ExtensionAssociationParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// The ARN of the application, configuration profile, or environment to associate with the extension.
+	// ARN of the application, configuration profile, or environment to associate with the extension.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/appconfig/v1beta1.Application
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional

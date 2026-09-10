@@ -415,8 +415,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The Amazon Resource Name (ARN) assigned by AWS to
-                      this App Image Config.
+                    description: ARN assigned by AWS to this App Image Config.
                     type: string
                   codeEditorAppImageConfig:
                     description: The CodeEditorAppImageConfig. See Code Editor App

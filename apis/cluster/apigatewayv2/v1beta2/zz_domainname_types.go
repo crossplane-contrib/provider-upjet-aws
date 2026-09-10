@@ -31,13 +31,13 @@ type DomainNameConfigurationInitParameters struct {
 	// Endpoint type. Valid values: REGIONAL.
 	EndpointType *string `json:"endpointType,omitempty" tf:"endpoint_type,omitempty"`
 
-	// The IP address types that can invoke the domain name. Valid values: ipv4, dualstack. Use ipv4 to allow only IPv4 addresses to invoke your domain name, or use dualstack to allow both IPv4 and IPv6 addresses to invoke your domain name. Defaults to ipv4.
+	// IP address types that can invoke the domain name. Valid values: ipv4, dualstack. Use ipv4 to allow only IPv4 addresses to invoke your domain name, or use dualstack to allow both IPv4 and IPv6 addresses to invoke your domain name. Defaults to ipv4.
 	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
 
 	// ARN of the AWS-issued certificate used to validate custom domain ownership (when certificate_arn is issued via an ACM Private CA or mutual_tls_authentication is configured with an ACM-imported certificate.)
 	OwnershipVerificationCertificateArn *string `json:"ownershipVerificationCertificateArn,omitempty" tf:"ownership_verification_certificate_arn,omitempty"`
 
-	// Transport Layer Security (TLS) version of the security policy for the domain name. Valid values: TLS_1_2.
+	// TLS version of the security policy for the domain name. Valid values: TLS_1_2.
 	SecurityPolicy *string `json:"securityPolicy,omitempty" tf:"security_policy,omitempty"`
 }
 
@@ -49,19 +49,19 @@ type DomainNameConfigurationObservation struct {
 	// Endpoint type. Valid values: REGIONAL.
 	EndpointType *string `json:"endpointType,omitempty" tf:"endpoint_type,omitempty"`
 
-	// (Computed) Amazon Route 53 Hosted Zone ID of the endpoint.
+	// Amazon Route 53 Hosted Zone ID of the endpoint.
 	HostedZoneID *string `json:"hostedZoneId,omitempty" tf:"hosted_zone_id,omitempty"`
 
-	// The IP address types that can invoke the domain name. Valid values: ipv4, dualstack. Use ipv4 to allow only IPv4 addresses to invoke your domain name, or use dualstack to allow both IPv4 and IPv6 addresses to invoke your domain name. Defaults to ipv4.
+	// IP address types that can invoke the domain name. Valid values: ipv4, dualstack. Use ipv4 to allow only IPv4 addresses to invoke your domain name, or use dualstack to allow both IPv4 and IPv6 addresses to invoke your domain name. Defaults to ipv4.
 	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
 
 	// ARN of the AWS-issued certificate used to validate custom domain ownership (when certificate_arn is issued via an ACM Private CA or mutual_tls_authentication is configured with an ACM-imported certificate.)
 	OwnershipVerificationCertificateArn *string `json:"ownershipVerificationCertificateArn,omitempty" tf:"ownership_verification_certificate_arn,omitempty"`
 
-	// Transport Layer Security (TLS) version of the security policy for the domain name. Valid values: TLS_1_2.
+	// TLS version of the security policy for the domain name. Valid values: TLS_1_2.
 	SecurityPolicy *string `json:"securityPolicy,omitempty" tf:"security_policy,omitempty"`
 
-	// (Computed) Target domain name.
+	// Target domain name.
 	TargetDomainName *string `json:"targetDomainName,omitempty" tf:"target_domain_name,omitempty"`
 }
 
@@ -85,7 +85,7 @@ type DomainNameConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	EndpointType *string `json:"endpointType" tf:"endpoint_type,omitempty"`
 
-	// The IP address types that can invoke the domain name. Valid values: ipv4, dualstack. Use ipv4 to allow only IPv4 addresses to invoke your domain name, or use dualstack to allow both IPv4 and IPv6 addresses to invoke your domain name. Defaults to ipv4.
+	// IP address types that can invoke the domain name. Valid values: ipv4, dualstack. Use ipv4 to allow only IPv4 addresses to invoke your domain name, or use dualstack to allow both IPv4 and IPv6 addresses to invoke your domain name. Defaults to ipv4.
 	// +kubebuilder:validation:Optional
 	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
 
@@ -93,7 +93,7 @@ type DomainNameConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	OwnershipVerificationCertificateArn *string `json:"ownershipVerificationCertificateArn,omitempty" tf:"ownership_verification_certificate_arn,omitempty"`
 
-	// Transport Layer Security (TLS) version of the security policy for the domain name. Valid values: TLS_1_2.
+	// TLS version of the security policy for the domain name. Valid values: TLS_1_2.
 	// +kubebuilder:validation:Optional
 	SecurityPolicy *string `json:"securityPolicy" tf:"security_policy,omitempty"`
 }

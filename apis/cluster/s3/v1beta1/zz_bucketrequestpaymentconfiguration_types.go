@@ -31,7 +31,7 @@ type BucketRequestPaymentConfigurationInitParameters struct {
 	// Account ID of the expected bucket owner.
 	ExpectedBucketOwner *string `json:"expectedBucketOwner,omitempty" tf:"expected_bucket_owner,omitempty"`
 
-	// Specifies who pays for the download and request fees. Valid values: BucketOwner, Requester.
+	// Who pays for the download and request fees. Valid values: BucketOwner, Requester.
 	Payer *string `json:"payer,omitempty" tf:"payer,omitempty"`
 }
 
@@ -43,10 +43,10 @@ type BucketRequestPaymentConfigurationObservation struct {
 	// Account ID of the expected bucket owner.
 	ExpectedBucketOwner *string `json:"expectedBucketOwner,omitempty" tf:"expected_bucket_owner,omitempty"`
 
-	// The bucket or bucket and expected_bucket_owner separated by a comma (,) if the latter is provided.
+	// bucket or bucket and expected_bucket_owner separated by a comma (,) if the latter is provided.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Specifies who pays for the download and request fees. Valid values: BucketOwner, Requester.
+	// Who pays for the download and request fees. Valid values: BucketOwner, Requester.
 	Payer *string `json:"payer,omitempty" tf:"payer,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -74,7 +74,7 @@ type BucketRequestPaymentConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	ExpectedBucketOwner *string `json:"expectedBucketOwner,omitempty" tf:"expected_bucket_owner,omitempty"`
 
-	// Specifies who pays for the download and request fees. Valid values: BucketOwner, Requester.
+	// Who pays for the download and request fees. Valid values: BucketOwner, Requester.
 	// +kubebuilder:validation:Optional
 	Payer *string `json:"payer,omitempty" tf:"payer,omitempty"`
 

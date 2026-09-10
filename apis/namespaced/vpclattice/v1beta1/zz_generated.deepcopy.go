@@ -48,6 +48,16 @@ func (in *AccessLogSubscriptionInitParameters) DeepCopyInto(out *AccessLogSubscr
 		*out = new(string)
 		**out = **in
 	}
+	if in.DestinationArnRef != nil {
+		in, out := &in.DestinationArnRef, &out.DestinationArnRef
+		*out = new(v2.NamespacedReference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.DestinationArnSelector != nil {
+		in, out := &in.DestinationArnSelector, &out.DestinationArnSelector
+		*out = new(v2.NamespacedSelector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.ResourceIdentifier != nil {
 		in, out := &in.ResourceIdentifier, &out.ResourceIdentifier
 		*out = new(string)
@@ -217,6 +227,16 @@ func (in *AccessLogSubscriptionParameters) DeepCopyInto(out *AccessLogSubscripti
 		in, out := &in.DestinationArn, &out.DestinationArn
 		*out = new(string)
 		**out = **in
+	}
+	if in.DestinationArnRef != nil {
+		in, out := &in.DestinationArnRef, &out.DestinationArnRef
+		*out = new(v2.NamespacedReference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.DestinationArnSelector != nil {
+		in, out := &in.DestinationArnSelector, &out.DestinationArnSelector
+		*out = new(v2.NamespacedSelector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
@@ -4229,6 +4249,11 @@ func (in *ServiceInitParameters) DeepCopyInto(out *ServiceInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.IdleTimeoutSeconds != nil {
+		in, out := &in.IdleTimeoutSeconds, &out.IdleTimeoutSeconds
+		*out = new(float64)
+		**out = **in
+	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
@@ -5712,6 +5737,11 @@ func (in *ServiceObservation) DeepCopyInto(out *ServiceObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.IdleTimeoutSeconds != nil {
+		in, out := &in.IdleTimeoutSeconds, &out.IdleTimeoutSeconds
+		*out = new(float64)
+		**out = **in
+	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
@@ -5787,6 +5817,11 @@ func (in *ServiceParameters) DeepCopyInto(out *ServiceParameters) {
 	if in.CustomDomainName != nil {
 		in, out := &in.CustomDomainName, &out.CustomDomainName
 		*out = new(string)
+		**out = **in
+	}
+	if in.IdleTimeoutSeconds != nil {
+		in, out := &in.IdleTimeoutSeconds, &out.IdleTimeoutSeconds
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Name != nil {

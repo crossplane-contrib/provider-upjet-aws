@@ -51,7 +51,7 @@ type ClusterSnapshotObservation struct {
 	// The DB Cluster Identifier from which to take the snapshot.
 	DBClusterIdentifier *string `json:"dbClusterIdentifier,omitempty" tf:"db_cluster_identifier,omitempty"`
 
-	// The Amazon Resource Name (ARN) for the DB Cluster Snapshot.
+	// ARN for the DB Cluster Snapshot.
 	DBClusterSnapshotArn *string `json:"dbClusterSnapshotArn,omitempty" tf:"db_cluster_snapshot_arn,omitempty"`
 
 	// The Identifier for the snapshot.
@@ -84,7 +84,7 @@ type ClusterSnapshotObservation struct {
 
 	SnapshotType *string `json:"snapshotType,omitempty" tf:"snapshot_type,omitempty"`
 
-	// The Amazon Resource Name (ARN) for the DB Cluster Snapshot.
+	// ARN for the DB Cluster Snapshot.
 	SourceDBClusterSnapshotArn *string `json:"sourceDbClusterSnapshotArn,omitempty" tf:"source_db_cluster_snapshot_arn,omitempty"`
 
 	// The status of this DB Cluster Snapshot.

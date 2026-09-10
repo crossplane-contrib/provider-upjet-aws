@@ -164,8 +164,7 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   roleArn:
-                    description: Amazon Resource Name (ARN) of the IAM Role to associate
-                      with the DB Instance.
+                    description: ARN of the IAM Role to associate with the DB Instance.
                     type: string
                   roleArnRef:
                     description: Reference to a Role in iam to populate roleArn.
@@ -342,8 +341,7 @@ spec:
                       by AWS CLI rds describe-db-engine-versions.
                     type: string
                   roleArn:
-                    description: Amazon Resource Name (ARN) of the IAM Role to associate
-                      with the DB Instance.
+                    description: ARN of the IAM Role to associate with the DB Instance.
                     type: string
                   roleArnRef:
                     description: Reference to a Role in iam to populate roleArn.
@@ -537,8 +535,7 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   roleArn:
-                    description: Amazon Resource Name (ARN) of the IAM Role to associate
-                      with the DB Instance.
+                    description: ARN of the IAM Role to associate with the DB Instance.
                     type: string
                 type: object
               conditions:

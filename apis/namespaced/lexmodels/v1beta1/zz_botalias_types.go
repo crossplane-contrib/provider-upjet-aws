@@ -87,7 +87,7 @@ type BotAliasParameters struct {
 
 type ConversationLogsInitParameters struct {
 
-	// The Amazon Resource Name (ARN) of the IAM role used to write your logs to CloudWatch Logs or an S3 bucket. Must be between 20 and 2048 characters in length.
+	// ARN of the IAM role used to write your logs to CloudWatch Logs or an S3 bucket. Must be between 20 and 2048 characters in length.
 	IAMRoleArn *string `json:"iamRoleArn,omitempty" tf:"iam_role_arn,omitempty"`
 
 	// The settings for your conversation logs. You can log text, audio, or both. Attributes are documented under log_settings.
@@ -96,7 +96,7 @@ type ConversationLogsInitParameters struct {
 
 type ConversationLogsObservation struct {
 
-	// The Amazon Resource Name (ARN) of the IAM role used to write your logs to CloudWatch Logs or an S3 bucket. Must be between 20 and 2048 characters in length.
+	// ARN of the IAM role used to write your logs to CloudWatch Logs or an S3 bucket. Must be between 20 and 2048 characters in length.
 	IAMRoleArn *string `json:"iamRoleArn,omitempty" tf:"iam_role_arn,omitempty"`
 
 	// The settings for your conversation logs. You can log text, audio, or both. Attributes are documented under log_settings.
@@ -105,7 +105,7 @@ type ConversationLogsObservation struct {
 
 type ConversationLogsParameters struct {
 
-	// The Amazon Resource Name (ARN) of the IAM role used to write your logs to CloudWatch Logs or an S3 bucket. Must be between 20 and 2048 characters in length.
+	// ARN of the IAM role used to write your logs to CloudWatch Logs or an S3 bucket. Must be between 20 and 2048 characters in length.
 	// +kubebuilder:validation:Optional
 	IAMRoleArn *string `json:"iamRoleArn" tf:"iam_role_arn,omitempty"`
 
@@ -119,13 +119,13 @@ type LogSettingsInitParameters struct {
 	// The destination where logs are delivered. Options are CLOUDWATCH_LOGS or S3.
 	Destination *string `json:"destination,omitempty" tf:"destination,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the key used to encrypt audio logs in an S3 bucket. This can only be specified when destination is set to S3. Must be between 20 and 2048 characters in length.
+	// ARN of the key used to encrypt audio logs in an S3 bucket. This can only be specified when destination is set to S3. Must be between 20 and 2048 characters in length.
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
 	// The type of logging that is enabled. Options are AUDIO or TEXT.
 	LogType *string `json:"logType,omitempty" tf:"log_type,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the CloudWatch Logs log group or S3 bucket where the logs are delivered. Must be less than or equal to 2048 characters in length.
+	// ARN of the CloudWatch Logs log group or S3 bucket where the logs are delivered. Must be less than or equal to 2048 characters in length.
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
 }
 
@@ -134,13 +134,13 @@ type LogSettingsObservation struct {
 	// The destination where logs are delivered. Options are CLOUDWATCH_LOGS or S3.
 	Destination *string `json:"destination,omitempty" tf:"destination,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the key used to encrypt audio logs in an S3 bucket. This can only be specified when destination is set to S3. Must be between 20 and 2048 characters in length.
+	// ARN of the key used to encrypt audio logs in an S3 bucket. This can only be specified when destination is set to S3. Must be between 20 and 2048 characters in length.
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
 	// The type of logging that is enabled. Options are AUDIO or TEXT.
 	LogType *string `json:"logType,omitempty" tf:"log_type,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the CloudWatch Logs log group or S3 bucket where the logs are delivered. Must be less than or equal to 2048 characters in length.
+	// ARN of the CloudWatch Logs log group or S3 bucket where the logs are delivered. Must be less than or equal to 2048 characters in length.
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
 
 	// (Computed) The prefix of the S3 object key for AUDIO logs or the log stream name for TEXT logs.
@@ -153,7 +153,7 @@ type LogSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	Destination *string `json:"destination" tf:"destination,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the key used to encrypt audio logs in an S3 bucket. This can only be specified when destination is set to S3. Must be between 20 and 2048 characters in length.
+	// ARN of the key used to encrypt audio logs in an S3 bucket. This can only be specified when destination is set to S3. Must be between 20 and 2048 characters in length.
 	// +kubebuilder:validation:Optional
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
@@ -161,7 +161,7 @@ type LogSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	LogType *string `json:"logType" tf:"log_type,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the CloudWatch Logs log group or S3 bucket where the logs are delivered. Must be less than or equal to 2048 characters in length.
+	// ARN of the CloudWatch Logs log group or S3 bucket where the logs are delivered. Must be less than or equal to 2048 characters in length.
 	// +kubebuilder:validation:Optional
 	ResourceArn *string `json:"resourceArn" tf:"resource_arn,omitempty"`
 }

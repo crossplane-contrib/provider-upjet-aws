@@ -47,7 +47,7 @@ type AdvancedBackupSettingParameters struct {
 
 type CopyActionInitParameters struct {
 
-	// An Amazon Resource Name (ARN) that uniquely identifies the destination backup vault for the copied backup.
+	// ARN that uniquely identifies the destination backup vault for the copied backup.
 	DestinationVaultArn *string `json:"destinationVaultArn,omitempty" tf:"destination_vault_arn,omitempty"`
 
 	// The lifecycle defines when a protected resource is transitioned to cold storage and when it expires.  Fields documented below.
@@ -56,7 +56,7 @@ type CopyActionInitParameters struct {
 
 type CopyActionObservation struct {
 
-	// An Amazon Resource Name (ARN) that uniquely identifies the destination backup vault for the copied backup.
+	// ARN that uniquely identifies the destination backup vault for the copied backup.
 	DestinationVaultArn *string `json:"destinationVaultArn,omitempty" tf:"destination_vault_arn,omitempty"`
 
 	// The lifecycle defines when a protected resource is transitioned to cold storage and when it expires.  Fields documented below.
@@ -65,7 +65,7 @@ type CopyActionObservation struct {
 
 type CopyActionParameters struct {
 
-	// An Amazon Resource Name (ARN) that uniquely identifies the destination backup vault for the copied backup.
+	// ARN that uniquely identifies the destination backup vault for the copied backup.
 	// +kubebuilder:validation:Optional
 	DestinationVaultArn *string `json:"destinationVaultArn" tf:"destination_vault_arn,omitempty"`
 

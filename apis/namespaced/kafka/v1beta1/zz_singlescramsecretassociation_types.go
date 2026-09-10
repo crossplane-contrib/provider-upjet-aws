@@ -18,7 +18,7 @@ type SingleScramSecretAssociationInitParameters struct {
 
 type SingleScramSecretAssociationObservation struct {
 
-	// Amazon Resource Name (ARN) of the MSK cluster.
+	// ARN of the MSK cluster.
 	ClusterArn *string `json:"clusterArn,omitempty" tf:"cluster_arn,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -33,7 +33,7 @@ type SingleScramSecretAssociationObservation struct {
 
 type SingleScramSecretAssociationParameters struct {
 
-	// Amazon Resource Name (ARN) of the MSK cluster.
+	// ARN of the MSK cluster.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kafka/v1beta1.Cluster
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional

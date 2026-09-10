@@ -15,10 +15,10 @@ import (
 
 type ResourceAssociationInitParameters struct {
 
-	// Amazon Resource Name (ARN) of the resource to associate with the RAM Resource Share.
+	// ARN of the resource to associate with the RAM Resource Share.
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
 
-	// Amazon Resource Name (ARN) of the RAM Resource Share.
+	// ARN of the RAM Resource Share.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ram/v1beta1.ResourceShare
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	ResourceShareArn *string `json:"resourceShareArn,omitempty" tf:"resource_share_arn,omitempty"`
@@ -34,17 +34,17 @@ type ResourceAssociationInitParameters struct {
 
 type ResourceAssociationObservation struct {
 
-	// The Amazon Resource Name (ARN) of the resource share.
+	// ARN of the resource share.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// Amazon Resource Name (ARN) of the resource to associate with the RAM Resource Share.
+	// ARN of the resource to associate with the RAM Resource Share.
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
 
-	// Amazon Resource Name (ARN) of the RAM Resource Share.
+	// ARN of the RAM Resource Share.
 	ResourceShareArn *string `json:"resourceShareArn,omitempty" tf:"resource_share_arn,omitempty"`
 }
 
@@ -55,11 +55,11 @@ type ResourceAssociationParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// Amazon Resource Name (ARN) of the resource to associate with the RAM Resource Share.
+	// ARN of the resource to associate with the RAM Resource Share.
 	// +kubebuilder:validation:Optional
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
 
-	// Amazon Resource Name (ARN) of the RAM Resource Share.
+	// ARN of the RAM Resource Share.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ram/v1beta1.ResourceShare
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional

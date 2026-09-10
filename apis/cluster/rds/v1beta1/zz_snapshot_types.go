@@ -48,7 +48,7 @@ type SnapshotObservation struct {
 	// The DB Instance Identifier from which to take the snapshot.
 	DBInstanceIdentifier *string `json:"dbInstanceIdentifier,omitempty" tf:"db_instance_identifier,omitempty"`
 
-	// The Amazon Resource Name (ARN) for the DB snapshot.
+	// ARN for the DB snapshot.
 	DBSnapshotArn *string `json:"dbSnapshotArn,omitempty" tf:"db_snapshot_arn,omitempty"`
 
 	// Specifies whether the DB snapshot is encrypted.

@@ -579,11 +579,10 @@ spec:
                         description: The URL where the Git repository is located.
                         type: string
                       secretArn:
-                        description: 'The Amazon Resource Name (ARN) of the AWS Secrets
-                          Manager secret that contains the credentials used to access
-                          the git repository. The secret must have a staging label
-                          of AWSCURRENT and must be in the following format: {"username":
-                          UserName, "password": Password}'
+                        description: 'ARN of the AWS Secrets Manager secret that contains
+                          the credentials used to access the git repository. The secret
+                          must have a staging label of AWSCURRENT and must be in the
+                          following format: {"username": UserName, "password": Password}'
                         type: string
                       secretArnRef:
                         description: Reference to a Secret in secretsmanager to populate
@@ -700,11 +699,10 @@ spec:
                         description: The URL where the Git repository is located.
                         type: string
                       secretArn:
-                        description: 'The Amazon Resource Name (ARN) of the AWS Secrets
-                          Manager secret that contains the credentials used to access
-                          the git repository. The secret must have a staging label
-                          of AWSCURRENT and must be in the following format: {"username":
-                          UserName, "password": Password}'
+                        description: 'ARN of the AWS Secrets Manager secret that contains
+                          the credentials used to access the git repository. The secret
+                          must have a staging label of AWSCURRENT and must be in the
+                          following format: {"username": UserName, "password": Password}'
                         type: string
                       secretArnRef:
                         description: Reference to a Secret in secretsmanager to populate
@@ -887,8 +885,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The Amazon Resource Name (ARN) assigned by AWS to
-                      this Code Repository.
+                    description: ARN assigned by AWS to this Code Repository.
                     type: string
                   gitConfig:
                     description: Specifies details about the repository. see Git Config
@@ -901,11 +898,10 @@ spec:
                         description: The URL where the Git repository is located.
                         type: string
                       secretArn:
-                        description: 'The Amazon Resource Name (ARN) of the AWS Secrets
-                          Manager secret that contains the credentials used to access
-                          the git repository. The secret must have a staging label
-                          of AWSCURRENT and must be in the following format: {"username":
-                          UserName, "password": Password}'
+                        description: 'ARN of the AWS Secrets Manager secret that contains
+                          the credentials used to access the git repository. The secret
+                          must have a staging label of AWSCURRENT and must be in the
+                          following format: {"username": UserName, "password": Password}'
                         type: string
                     type: object
                   id:

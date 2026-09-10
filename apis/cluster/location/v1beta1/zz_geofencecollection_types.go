@@ -37,7 +37,7 @@ type GeofenceCollectionInitParameters struct {
 
 type GeofenceCollectionObservation struct {
 
-	// The Amazon Resource Name (ARN) for the geofence collection resource. Used when you need to specify a resource across all AWS.
+	// ARN for the geofence collection resource. Used when you need to specify a resource across all AWS.
 	CollectionArn *string `json:"collectionArn,omitempty" tf:"collection_arn,omitempty"`
 
 	// The timestamp for when the geofence collection resource was created in ISO 8601 format.

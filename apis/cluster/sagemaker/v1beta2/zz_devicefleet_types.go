@@ -24,7 +24,7 @@ type DeviceFleetInitParameters struct {
 	// Specifies details about the repository. see Output Config details below.
 	OutputConfig *OutputConfigInitParameters `json:"outputConfig,omitempty" tf:"output_config,omitempty"`
 
-	// The Amazon Resource Name (ARN) that has access to AWS Internet of Things (IoT).
+	// ARN that has access to AWS Internet of Things (IoT).
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
@@ -44,7 +44,7 @@ type DeviceFleetInitParameters struct {
 
 type DeviceFleetObservation struct {
 
-	// The Amazon Resource Name (ARN) assigned by AWS to this Device Fleet.
+	// ARN assigned by AWS to this Device Fleet.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// A description of the fleet.
@@ -65,7 +65,7 @@ type DeviceFleetObservation struct {
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The Amazon Resource Name (ARN) that has access to AWS Internet of Things (IoT).
+	// ARN that has access to AWS Internet of Things (IoT).
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
 	// Key-value map of resource tags.
@@ -96,7 +96,7 @@ type DeviceFleetParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// The Amazon Resource Name (ARN) that has access to AWS Internet of Things (IoT).
+	// ARN that has access to AWS Internet of Things (IoT).
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -118,7 +118,7 @@ type DeviceFleetParameters struct {
 
 type OutputConfigInitParameters struct {
 
-	// The AWS Key Management Service (AWS KMS) key that Amazon SageMaker AI uses to encrypt data on the storage volume after compilation job. If you don't provide a KMS key ID, Amazon SageMaker AI uses the default KMS key for Amazon S3 for your role's account.
+	// KMS key that Amazon SageMaker AI uses to encrypt data on the storage volume after compilation job. If you don't provide a KMS key ID, Amazon SageMaker AI uses the default KMS key for Amazon S3 for your role's account.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
 	// The Amazon Simple Storage (S3) bucker URI.
@@ -127,7 +127,7 @@ type OutputConfigInitParameters struct {
 
 type OutputConfigObservation struct {
 
-	// The AWS Key Management Service (AWS KMS) key that Amazon SageMaker AI uses to encrypt data on the storage volume after compilation job. If you don't provide a KMS key ID, Amazon SageMaker AI uses the default KMS key for Amazon S3 for your role's account.
+	// KMS key that Amazon SageMaker AI uses to encrypt data on the storage volume after compilation job. If you don't provide a KMS key ID, Amazon SageMaker AI uses the default KMS key for Amazon S3 for your role's account.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
 	// The Amazon Simple Storage (S3) bucker URI.
@@ -136,7 +136,7 @@ type OutputConfigObservation struct {
 
 type OutputConfigParameters struct {
 
-	// The AWS Key Management Service (AWS KMS) key that Amazon SageMaker AI uses to encrypt data on the storage volume after compilation job. If you don't provide a KMS key ID, Amazon SageMaker AI uses the default KMS key for Amazon S3 for your role's account.
+	// KMS key that Amazon SageMaker AI uses to encrypt data on the storage volume after compilation job. If you don't provide a KMS key ID, Amazon SageMaker AI uses the default KMS key for Amazon S3 for your role's account.
 	// +kubebuilder:validation:Optional
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 

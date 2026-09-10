@@ -127,7 +127,7 @@ type FeatureGroupInitParameters struct {
 	// The name of the Feature whose value uniquely identifies a Record defined in the Feature Store. Only the latest record per identifier value will be stored in the Online Store.
 	RecordIdentifierFeatureName *string `json:"recordIdentifierFeatureName,omitempty" tf:"record_identifier_feature_name,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the IAM execution role used to persist data into the Offline Store if an offline_store_config is provided.
+	// The ARN of the IAM execution role used to persist data into the Offline Store if an offline_store_config is provided.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
@@ -149,7 +149,7 @@ type FeatureGroupInitParameters struct {
 
 type FeatureGroupObservation struct {
 
-	// The Amazon Resource Name (ARN) assigned by AWS to this feature_group.
+	// ARN assigned by AWS to this feature_group.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// A free-form description of a Feature Group.
@@ -176,7 +176,7 @@ type FeatureGroupObservation struct {
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the IAM execution role used to persist data into the Offline Store if an offline_store_config is provided.
+	// The ARN of the IAM execution role used to persist data into the Offline Store if an offline_store_config is provided.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
 	// Key-value map of resource tags.
@@ -221,7 +221,7 @@ type FeatureGroupParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the IAM execution role used to persist data into the Offline Store if an offline_store_config is provided.
+	// The ARN of the IAM execution role used to persist data into the Offline Store if an offline_store_config is provided.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -344,7 +344,7 @@ type OnlineStoreConfigParameters struct {
 
 type S3StorageConfigInitParameters struct {
 
-	// The AWS Key Management Service (KMS) key ID of the key used to encrypt any objects written into the OfflineStore S3 location.
+	// KMS key ID of the key used to encrypt any objects written into the OfflineStore S3 location.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
 	// The S3 path where offline records are written.
@@ -356,7 +356,7 @@ type S3StorageConfigInitParameters struct {
 
 type S3StorageConfigObservation struct {
 
-	// The AWS Key Management Service (KMS) key ID of the key used to encrypt any objects written into the OfflineStore S3 location.
+	// KMS key ID of the key used to encrypt any objects written into the OfflineStore S3 location.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
 	// The S3 path where offline records are written.
@@ -368,7 +368,7 @@ type S3StorageConfigObservation struct {
 
 type S3StorageConfigParameters struct {
 
-	// The AWS Key Management Service (KMS) key ID of the key used to encrypt any objects written into the OfflineStore S3 location.
+	// KMS key ID of the key used to encrypt any objects written into the OfflineStore S3 location.
 	// +kubebuilder:validation:Optional
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
@@ -383,19 +383,19 @@ type S3StorageConfigParameters struct {
 
 type SecurityConfigInitParameters struct {
 
-	// The AWS Key Management Service (KMS) key ID of the key used to encrypt any objects written into the OfflineStore S3 location.
+	// KMS key ID of the key used to encrypt any objects written into the OfflineStore S3 location.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 }
 
 type SecurityConfigObservation struct {
 
-	// The AWS Key Management Service (KMS) key ID of the key used to encrypt any objects written into the OfflineStore S3 location.
+	// KMS key ID of the key used to encrypt any objects written into the OfflineStore S3 location.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 }
 
 type SecurityConfigParameters struct {
 
-	// The AWS Key Management Service (KMS) key ID of the key used to encrypt any objects written into the OfflineStore S3 location.
+	// KMS key ID of the key used to encrypt any objects written into the OfflineStore S3 location.
 	// +kubebuilder:validation:Optional
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 }

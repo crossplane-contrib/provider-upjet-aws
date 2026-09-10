@@ -15,7 +15,7 @@ import (
 
 type VectorBucketPolicyInitParameters struct {
 
-	// The policy document.
+	// Policy document.
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
 	// ARN of the vector bucket.
@@ -35,7 +35,7 @@ type VectorBucketPolicyInitParameters struct {
 type VectorBucketPolicyObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The policy document.
+	// Policy document.
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -48,7 +48,7 @@ type VectorBucketPolicyObservation struct {
 
 type VectorBucketPolicyParameters struct {
 
-	// The policy document.
+	// Policy document.
 	// +kubebuilder:validation:Optional
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 

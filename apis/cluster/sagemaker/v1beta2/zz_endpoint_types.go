@@ -182,7 +182,7 @@ type EndpointInitParameters struct {
 
 type EndpointObservation struct {
 
-	// The Amazon Resource Name (ARN) assigned by AWS to this endpoint.
+	// ARN assigned by AWS to this endpoint.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The deployment configuration for an endpoint, which contains the desired deployment strategy and rollback configurations. See Deployment Config.

@@ -150,12 +150,10 @@ spec:
                       at most 1024 characters.
                     type: string
                   kmsKeyIdentifier:
-                    description: The identifier for an Key Management Service key
-                      to encrypt new configuration data versions in the AppConfig
-                      hosted configuration store. This attribute is only used for
-                      hosted configuration types. The identifier can be an KMS key
-                      ID, alias, or the Amazon Resource Name (ARN) of the key ID or
-                      alias.
+                    description: Identifier for a KMS key to encrypt new configuration
+                      data versions in the AppConfig hosted configuration store. This
+                      attribute is only used for hosted configuration types. The identifier
+                      can be an KMS key ID, alias, or the ARN of the key ID or alias.
                     type: string
                   locationUri:
                     description: 'URI to locate the configuration. You can specify
@@ -277,7 +275,7 @@ spec:
                     type: string
                   validator:
                     description: Set of methods for validating the configuration.
-                      Maximum of 2. See Validator below for more details.
+                      Maximum of 2. See validator Block below for more details.
                     items:
                       properties:
                         contentSecretRef:
@@ -406,12 +404,10 @@ spec:
                       at most 1024 characters.
                     type: string
                   kmsKeyIdentifier:
-                    description: The identifier for an Key Management Service key
-                      to encrypt new configuration data versions in the AppConfig
-                      hosted configuration store. This attribute is only used for
-                      hosted configuration types. The identifier can be an KMS key
-                      ID, alias, or the Amazon Resource Name (ARN) of the key ID or
-                      alias.
+                    description: Identifier for a KMS key to encrypt new configuration
+                      data versions in the AppConfig hosted configuration store. This
+                      attribute is only used for hosted configuration types. The identifier
+                      can be an KMS key ID, alias, or the ARN of the key ID or alias.
                     type: string
                   locationUri:
                     description: 'URI to locate the configuration. You can specify
@@ -528,7 +524,7 @@ spec:
                     type: string
                   validator:
                     description: Set of methods for validating the configuration.
-                      Maximum of 2. See Validator below for more details.
+                      Maximum of 2. See validator Block below for more details.
                     items:
                       properties:
                         contentSecretRef:
@@ -632,7 +628,7 @@ spec:
                     description: ARN of the AppConfig Configuration Profile.
                     type: string
                   configurationProfileId:
-                    description: The configuration profile ID.
+                    description: Configuration profile ID.
                     type: string
                   description:
                     description: Description of the configuration profile. Can be
@@ -643,12 +639,10 @@ spec:
                       ID separated by a colon (:).
                     type: string
                   kmsKeyIdentifier:
-                    description: The identifier for an Key Management Service key
-                      to encrypt new configuration data versions in the AppConfig
-                      hosted configuration store. This attribute is only used for
-                      hosted configuration types. The identifier can be an KMS key
-                      ID, alias, or the Amazon Resource Name (ARN) of the key ID or
-                      alias.
+                    description: Identifier for a KMS key to encrypt new configuration
+                      data versions in the AppConfig hosted configuration store. This
+                      attribute is only used for hosted configuration types. The identifier
+                      can be an KMS key ID, alias, or the ARN of the key ID or alias.
                     type: string
                   locationUri:
                     description: 'URI to locate the configuration. You can specify
@@ -697,7 +691,7 @@ spec:
                     type: string
                   validator:
                     description: Set of methods for validating the configuration.
-                      Maximum of 2. See Validator below for more details.
+                      Maximum of 2. See validator Block below for more details.
                     items:
                       properties:
                         type:

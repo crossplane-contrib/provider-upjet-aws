@@ -31,7 +31,7 @@ type DataSetInitParameters struct {
 
 type DataSetObservation struct {
 
-	// The Amazon Resource Name of this data set.
+	// ARN of this data set.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The type of asset that is added to a data set. Valid values include API_GATEWAY_API, LAKE_FORMATION_DATA_PERMISSION, REDSHIFT_DATA_SHARE, S3_DATA_ACCESS, S3_SNAPSHOT.

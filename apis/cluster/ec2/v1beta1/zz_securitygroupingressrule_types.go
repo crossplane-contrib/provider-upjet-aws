@@ -76,7 +76,7 @@ type SecurityGroupIngressRuleInitParameters struct {
 
 type SecurityGroupIngressRuleObservation struct {
 
-	// The Amazon Resource Name (ARN) of the security group rule.
+	// ARN of the security group rule.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The source IPv4 CIDR range.

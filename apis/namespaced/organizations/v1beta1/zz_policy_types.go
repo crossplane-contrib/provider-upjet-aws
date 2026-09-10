@@ -49,7 +49,7 @@ type PolicyInitParameters struct {
 
 type PolicyObservation struct {
 
-	// Amazon Resource Name (ARN) of the policy.
+	// ARN of the policy.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The policy content to add to the new policy.

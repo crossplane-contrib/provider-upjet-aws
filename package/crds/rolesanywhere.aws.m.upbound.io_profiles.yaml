@@ -392,7 +392,7 @@ spec:
                     description: Whether or not a custom role session name is accepted.
                     type: boolean
                   arn:
-                    description: Amazon Resource Name (ARN) of the Profile
+                    description: ARN of the Profile
                     type: string
                   durationSeconds:
                     description: The number of seconds the vended session credentials

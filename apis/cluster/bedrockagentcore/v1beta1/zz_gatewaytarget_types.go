@@ -15,7 +15,7 @@ import (
 
 type APIGatewayInitParameters struct {
 
-	// Configuration for API Gateway tools. See api_gateway_tool_configuration below.
+	// Configuration for API Gateway tools. See api_gateway_tool_configuration Block below.
 	APIGatewayToolConfiguration *APIGatewayToolConfigurationInitParameters `json:"apiGatewayToolConfiguration,omitempty" tf:"api_gateway_tool_configuration,omitempty"`
 
 	// ID of the API Gateway REST API to invoke.
@@ -37,7 +37,7 @@ type APIGatewayInitParameters struct {
 
 type APIGatewayObservation struct {
 
-	// Configuration for API Gateway tools. See api_gateway_tool_configuration below.
+	// Configuration for API Gateway tools. See api_gateway_tool_configuration Block below.
 	APIGatewayToolConfiguration *APIGatewayToolConfigurationObservation `json:"apiGatewayToolConfiguration,omitempty" tf:"api_gateway_tool_configuration,omitempty"`
 
 	// ID of the API Gateway REST API to invoke.
@@ -49,7 +49,7 @@ type APIGatewayObservation struct {
 
 type APIGatewayParameters struct {
 
-	// Configuration for API Gateway tools. See api_gateway_tool_configuration below.
+	// Configuration for API Gateway tools. See api_gateway_tool_configuration Block below.
 	// +kubebuilder:validation:Optional
 	APIGatewayToolConfiguration *APIGatewayToolConfigurationParameters `json:"apiGatewayToolConfiguration,omitempty" tf:"api_gateway_tool_configuration,omitempty"`
 
@@ -74,29 +74,29 @@ type APIGatewayParameters struct {
 
 type APIGatewayToolConfigurationInitParameters struct {
 
-	// Repeatable block of path and method patterns to expose as tools. See tool_filter below.
+	// Repeatable block of path and method patterns to expose as tools. See tool_filter Block below.
 	ToolFilter []ToolFilterInitParameters `json:"toolFilter,omitempty" tf:"tool_filter,omitempty"`
 
-	// Repeatable block of explicit tool definitions with optional custom names and descriptions. See tool_override below.
+	// Repeatable block of explicit tool definitions with optional custom names and descriptions. See tool_override Block below.
 	ToolOverride []ToolOverrideInitParameters `json:"toolOverride,omitempty" tf:"tool_override,omitempty"`
 }
 
 type APIGatewayToolConfigurationObservation struct {
 
-	// Repeatable block of path and method patterns to expose as tools. See tool_filter below.
+	// Repeatable block of path and method patterns to expose as tools. See tool_filter Block below.
 	ToolFilter []ToolFilterObservation `json:"toolFilter,omitempty" tf:"tool_filter,omitempty"`
 
-	// Repeatable block of explicit tool definitions with optional custom names and descriptions. See tool_override below.
+	// Repeatable block of explicit tool definitions with optional custom names and descriptions. See tool_override Block below.
 	ToolOverride []ToolOverrideObservation `json:"toolOverride,omitempty" tf:"tool_override,omitempty"`
 }
 
 type APIGatewayToolConfigurationParameters struct {
 
-	// Repeatable block of path and method patterns to expose as tools. See tool_filter below.
+	// Repeatable block of path and method patterns to expose as tools. See tool_filter Block below.
 	// +kubebuilder:validation:Optional
 	ToolFilter []ToolFilterParameters `json:"toolFilter,omitempty" tf:"tool_filter,omitempty"`
 
-	// Repeatable block of explicit tool definitions with optional custom names and descriptions. See tool_override below.
+	// Repeatable block of explicit tool definitions with optional custom names and descriptions. See tool_override Block below.
 	// +kubebuilder:validation:Optional
 	ToolOverride []ToolOverrideParameters `json:"toolOverride,omitempty" tf:"tool_override,omitempty"`
 }
@@ -187,6 +187,9 @@ type AgentcoreRuntimeInitParameters struct {
 
 	// Runtime qualifier identifying a specific endpoint version. Defaults to DEFAULT when not set.
 	Qualifier *string `json:"qualifier,omitempty" tf:"qualifier,omitempty"`
+
+	// API schema configuration that defines the structure of the runtime target's API. See schema Block below.
+	Schema *SchemaInitParameters `json:"schema,omitempty" tf:"schema,omitempty"`
 }
 
 type AgentcoreRuntimeObservation struct {
@@ -196,6 +199,9 @@ type AgentcoreRuntimeObservation struct {
 
 	// Runtime qualifier identifying a specific endpoint version. Defaults to DEFAULT when not set.
 	Qualifier *string `json:"qualifier,omitempty" tf:"qualifier,omitempty"`
+
+	// API schema configuration that defines the structure of the runtime target's API. See schema Block below.
+	Schema *SchemaObservation `json:"schema,omitempty" tf:"schema,omitempty"`
 }
 
 type AgentcoreRuntimeParameters struct {
@@ -217,11 +223,15 @@ type AgentcoreRuntimeParameters struct {
 	// Runtime qualifier identifying a specific endpoint version. Defaults to DEFAULT when not set.
 	// +kubebuilder:validation:Optional
 	Qualifier *string `json:"qualifier,omitempty" tf:"qualifier,omitempty"`
+
+	// API schema configuration that defines the structure of the runtime target's API. See schema Block below.
+	// +kubebuilder:validation:Optional
+	Schema *SchemaParameters `json:"schema,omitempty" tf:"schema,omitempty"`
 }
 
 type CallerIAMCredentialsInitParameters struct {
 
-	// The target AWS service name used for SigV4 signing of upstream requests. Required when calling SigV4-protected endpoints such as another Bedrock AgentCore Runtime (use bedrock-agentcore). Omit for non-SigV4 IAM-role-based authentication, in which case the block can be empty (gateway_iam_role {}).
+	// Target AWS service name used for SigV4 signing of upstream requests. Required when calling SigV4-protected endpoints such as another Bedrock AgentCore Runtime (use bedrock-agentcore). Omit for non-SigV4 IAM-role-based authentication, in which case the block can be empty (gateway_iam_role {}).
 	Service *string `json:"service,omitempty" tf:"service,omitempty"`
 }
 
@@ -230,7 +240,7 @@ type CallerIAMCredentialsObservation struct {
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The target AWS service name used for SigV4 signing of upstream requests. Required when calling SigV4-protected endpoints such as another Bedrock AgentCore Runtime (use bedrock-agentcore). Omit for non-SigV4 IAM-role-based authentication, in which case the block can be empty (gateway_iam_role {}).
+	// Target AWS service name used for SigV4 signing of upstream requests. Required when calling SigV4-protected endpoints such as another Bedrock AgentCore Runtime (use bedrock-agentcore). Omit for non-SigV4 IAM-role-based authentication, in which case the block can be empty (gateway_iam_role {}).
 	Service *string `json:"service,omitempty" tf:"service,omitempty"`
 }
 
@@ -240,58 +250,145 @@ type CallerIAMCredentialsParameters struct {
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The target AWS service name used for SigV4 signing of upstream requests. Required when calling SigV4-protected endpoints such as another Bedrock AgentCore Runtime (use bedrock-agentcore). Omit for non-SigV4 IAM-role-based authentication, in which case the block can be empty (gateway_iam_role {}).
+	// Target AWS service name used for SigV4 signing of upstream requests. Required when calling SigV4-protected endpoints such as another Bedrock AgentCore Runtime (use bedrock-agentcore). Omit for non-SigV4 IAM-role-based authentication, in which case the block can be empty (gateway_iam_role {}).
 	// +kubebuilder:validation:Optional
 	Service *string `json:"service" tf:"service,omitempty"`
 }
 
+type ConfigurationInitParameters struct {
+
+	// Description of the tool. Provides information about the purpose and usage of the tool. If not provided, uses the description from the API's OpenAPI specification.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Name of tool. Identifies the tool in the Model Context Protocol.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Parameter overrides to control parameter visibility and descriptions. See parameter_override Block below.
+	ParameterOverride []ParameterOverrideInitParameters `json:"parameterOverride,omitempty" tf:"parameter_override,omitempty"`
+
+	// JSON-encoded parameters to set as fixed or default values when provisioning this tool. Free-form JSON whose schema is defined by the connector.
+	ParameterValues *string `json:"parameterValues,omitempty" tf:"parameter_values,omitempty"`
+}
+
+type ConfigurationObservation struct {
+
+	// Description of the tool. Provides information about the purpose and usage of the tool. If not provided, uses the description from the API's OpenAPI specification.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Name of tool. Identifies the tool in the Model Context Protocol.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Parameter overrides to control parameter visibility and descriptions. See parameter_override Block below.
+	ParameterOverride []ParameterOverrideObservation `json:"parameterOverride,omitempty" tf:"parameter_override,omitempty"`
+
+	// JSON-encoded parameters to set as fixed or default values when provisioning this tool. Free-form JSON whose schema is defined by the connector.
+	ParameterValues *string `json:"parameterValues,omitempty" tf:"parameter_values,omitempty"`
+}
+
+type ConfigurationParameters struct {
+
+	// Description of the tool. Provides information about the purpose and usage of the tool. If not provided, uses the description from the API's OpenAPI specification.
+	// +kubebuilder:validation:Optional
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Name of tool. Identifies the tool in the Model Context Protocol.
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name" tf:"name,omitempty"`
+
+	// Parameter overrides to control parameter visibility and descriptions. See parameter_override Block below.
+	// +kubebuilder:validation:Optional
+	ParameterOverride []ParameterOverrideParameters `json:"parameterOverride,omitempty" tf:"parameter_override,omitempty"`
+
+	// JSON-encoded parameters to set as fixed or default values when provisioning this tool. Free-form JSON whose schema is defined by the connector.
+	// +kubebuilder:validation:Optional
+	ParameterValues *string `json:"parameterValues,omitempty" tf:"parameter_values,omitempty"`
+}
+
+type ConnectorInitParameters struct {
+
+	// Configuration for API schema. See api_schema_configuration Block below.
+	Source *ConnectorSourceInitParameters `json:"source,omitempty" tf:"source,omitempty"`
+}
+
+type ConnectorObservation struct {
+
+	// Configuration for API schema. See api_schema_configuration Block below.
+	Source *ConnectorSourceObservation `json:"source,omitempty" tf:"source,omitempty"`
+}
+
+type ConnectorParameters struct {
+
+	// Configuration for API schema. See api_schema_configuration Block below.
+	// +kubebuilder:validation:Optional
+	Source *ConnectorSourceParameters `json:"source,omitempty" tf:"source,omitempty"`
+}
+
+type ConnectorSourceInitParameters struct {
+
+	// Identifier for the connector integration (for example, bedrock-knowledge-bases).
+	ConnectorID *string `json:"connectorId,omitempty" tf:"connector_id,omitempty"`
+}
+
+type ConnectorSourceObservation struct {
+
+	// Identifier for the connector integration (for example, bedrock-knowledge-bases).
+	ConnectorID *string `json:"connectorId,omitempty" tf:"connector_id,omitempty"`
+}
+
+type ConnectorSourceParameters struct {
+
+	// Identifier for the connector integration (for example, bedrock-knowledge-bases).
+	// +kubebuilder:validation:Optional
+	ConnectorID *string `json:"connectorId" tf:"connector_id,omitempty"`
+}
+
 type CredentialProviderConfigurationInitParameters struct {
 
-	// API key-based authentication configuration. See api_key below.
+	// API key-based authentication configuration. See api_key Block below.
 	APIKey *APIKeyInitParameters `json:"apiKey,omitempty" tf:"api_key,omitempty"`
 
-	// Caller IAM credentials-based authentication configuration. See caller_iam_credentials below.
+	// Caller IAM credentials-based authentication configuration. See caller_iam_credentials Block below.
 	CallerIAMCredentials *CallerIAMCredentialsInitParameters `json:"callerIamCredentials,omitempty" tf:"caller_iam_credentials,omitempty"`
 
-	// Use the gateway's IAM role for authentication. See gateway_iam_role below.
+	// Use the gateway's IAM role for authentication. See gateway_iam_role Block below.
 	GatewayIAMRole *GatewayIAMRoleInitParameters `json:"gatewayIamRole,omitempty" tf:"gateway_iam_role,omitempty"`
 
 	// JWT passthrough-based authentication configuration. This is an empty configuration block.
 	JwtPassthrough *JwtPassthroughInitParameters `json:"jwtPassthrough,omitempty" tf:"jwt_passthrough,omitempty"`
 
-	// OAuth-based authentication configuration. See oauth below.
+	// OAuth-based authentication configuration. See oauth Block below.
 	Oauth *OauthInitParameters `json:"oauth,omitempty" tf:"oauth,omitempty"`
 }
 
 type CredentialProviderConfigurationObservation struct {
 
-	// API key-based authentication configuration. See api_key below.
+	// API key-based authentication configuration. See api_key Block below.
 	APIKey *APIKeyObservation `json:"apiKey,omitempty" tf:"api_key,omitempty"`
 
-	// Caller IAM credentials-based authentication configuration. See caller_iam_credentials below.
+	// Caller IAM credentials-based authentication configuration. See caller_iam_credentials Block below.
 	CallerIAMCredentials *CallerIAMCredentialsObservation `json:"callerIamCredentials,omitempty" tf:"caller_iam_credentials,omitempty"`
 
-	// Use the gateway's IAM role for authentication. See gateway_iam_role below.
+	// Use the gateway's IAM role for authentication. See gateway_iam_role Block below.
 	GatewayIAMRole *GatewayIAMRoleObservation `json:"gatewayIamRole,omitempty" tf:"gateway_iam_role,omitempty"`
 
 	// JWT passthrough-based authentication configuration. This is an empty configuration block.
 	JwtPassthrough *JwtPassthroughParameters `json:"jwtPassthrough,omitempty" tf:"jwt_passthrough,omitempty"`
 
-	// OAuth-based authentication configuration. See oauth below.
+	// OAuth-based authentication configuration. See oauth Block below.
 	Oauth *OauthObservation `json:"oauth,omitempty" tf:"oauth,omitempty"`
 }
 
 type CredentialProviderConfigurationParameters struct {
 
-	// API key-based authentication configuration. See api_key below.
+	// API key-based authentication configuration. See api_key Block below.
 	// +kubebuilder:validation:Optional
 	APIKey *APIKeyParameters `json:"apiKey,omitempty" tf:"api_key,omitempty"`
 
-	// Caller IAM credentials-based authentication configuration. See caller_iam_credentials below.
+	// Caller IAM credentials-based authentication configuration. See caller_iam_credentials Block below.
 	// +kubebuilder:validation:Optional
 	CallerIAMCredentials *CallerIAMCredentialsParameters `json:"callerIamCredentials,omitempty" tf:"caller_iam_credentials,omitempty"`
 
-	// Use the gateway's IAM role for authentication. See gateway_iam_role below.
+	// Use the gateway's IAM role for authentication. See gateway_iam_role Block below.
 	// +kubebuilder:validation:Optional
 	GatewayIAMRole *GatewayIAMRoleParameters `json:"gatewayIamRole,omitempty" tf:"gateway_iam_role,omitempty"`
 
@@ -299,14 +396,14 @@ type CredentialProviderConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	JwtPassthrough *JwtPassthroughParameters `json:"jwtPassthrough,omitempty" tf:"jwt_passthrough,omitempty"`
 
-	// OAuth-based authentication configuration. See oauth below.
+	// OAuth-based authentication configuration. See oauth Block below.
 	// +kubebuilder:validation:Optional
 	Oauth *OauthParameters `json:"oauth,omitempty" tf:"oauth,omitempty"`
 }
 
 type GatewayIAMRoleInitParameters struct {
 
-	// The target AWS service name used for SigV4 signing of upstream requests. Required when calling SigV4-protected endpoints such as another Bedrock AgentCore Runtime (use bedrock-agentcore). Omit for non-SigV4 IAM-role-based authentication, in which case the block can be empty (gateway_iam_role {}).
+	// Target AWS service name used for SigV4 signing of upstream requests. Required when calling SigV4-protected endpoints such as another Bedrock AgentCore Runtime (use bedrock-agentcore). Omit for non-SigV4 IAM-role-based authentication, in which case the block can be empty (gateway_iam_role {}).
 	// The target AWS service name used for SigV4 signing of upstream requests. Required when calling SigV4-protected endpoints such as another Bedrock AgentCore Runtime (use `bedrock-agentcore`). Omit for non-SigV4 IAM-role-based authentication.
 	Service *string `json:"service,omitempty" tf:"service,omitempty"`
 }
@@ -317,7 +414,7 @@ type GatewayIAMRoleObservation struct {
 	// AWS Region used for SigV4 signing of upstream requests. Defaults to the gateway's Region when omitted. Only meaningful when `service` is set.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The target AWS service name used for SigV4 signing of upstream requests. Required when calling SigV4-protected endpoints such as another Bedrock AgentCore Runtime (use bedrock-agentcore). Omit for non-SigV4 IAM-role-based authentication, in which case the block can be empty (gateway_iam_role {}).
+	// Target AWS service name used for SigV4 signing of upstream requests. Required when calling SigV4-protected endpoints such as another Bedrock AgentCore Runtime (use bedrock-agentcore). Omit for non-SigV4 IAM-role-based authentication, in which case the block can be empty (gateway_iam_role {}).
 	// The target AWS service name used for SigV4 signing of upstream requests. Required when calling SigV4-protected endpoints such as another Bedrock AgentCore Runtime (use `bedrock-agentcore`). Omit for non-SigV4 IAM-role-based authentication.
 	Service *string `json:"service,omitempty" tf:"service,omitempty"`
 }
@@ -329,7 +426,7 @@ type GatewayIAMRoleParameters struct {
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The target AWS service name used for SigV4 signing of upstream requests. Required when calling SigV4-protected endpoints such as another Bedrock AgentCore Runtime (use bedrock-agentcore). Omit for non-SigV4 IAM-role-based authentication, in which case the block can be empty (gateway_iam_role {}).
+	// Target AWS service name used for SigV4 signing of upstream requests. Required when calling SigV4-protected endpoints such as another Bedrock AgentCore Runtime (use bedrock-agentcore). Omit for non-SigV4 IAM-role-based authentication, in which case the block can be empty (gateway_iam_role {}).
 	// The target AWS service name used for SigV4 signing of upstream requests. Required when calling SigV4-protected endpoints such as another Bedrock AgentCore Runtime (use `bedrock-agentcore`). Omit for non-SigV4 IAM-role-based authentication.
 	// +kubebuilder:validation:Optional
 	Service *string `json:"service,omitempty" tf:"service,omitempty"`
@@ -337,7 +434,7 @@ type GatewayIAMRoleParameters struct {
 
 type GatewayTargetInitParameters struct {
 
-	// Configuration for authenticating requests to the target. Required when using lambda, open_api_schema and smithy_model in mcp block. If using mcp_server in mcp block with no authorization, it should not be specified. See credential_provider_configuration below.
+	// Configuration for authenticating requests to the target. Required when using lambda, open_api_schema and smithy_model in mcp block. If using mcp_server in mcp block with no authorization, it should not be specified. See credential_provider_configuration Block below.
 	CredentialProviderConfiguration *CredentialProviderConfigurationInitParameters `json:"credentialProviderConfiguration,omitempty" tf:"credential_provider_configuration,omitempty"`
 
 	// Description of the gateway target.
@@ -356,22 +453,22 @@ type GatewayTargetInitParameters struct {
 	// +kubebuilder:validation:Optional
 	GatewayIdentifierSelector *v2.Selector `json:"gatewayIdentifierSelector,omitempty" tf:"-"`
 
-	// Configuration for HTTP header and query parameter propagation between the gateway and target servers. See metadata_configuration below.
+	// Configuration for HTTP header and query parameter propagation between the gateway and target servers. See metadata_configuration Block below.
 	MetadataConfiguration *MetadataConfigurationInitParameters `json:"metadataConfiguration,omitempty" tf:"metadata_configuration,omitempty"`
 
 	// Name of the gateway target.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Configuration for private connectivity from AgentCore Gateway to a resource inside your VPC. Traffic is routed through Amazon VPC Lattice and never traverses the public internet. See private_endpoint below.
+	// Configuration for private connectivity from AgentCore Gateway to a resource inside your VPC. Traffic is routed through Amazon VPC Lattice and never traverses the public internet. See private_endpoint Block below.
 	PrivateEndpoint *GatewayTargetPrivateEndpointInitParameters `json:"privateEndpoint,omitempty" tf:"private_endpoint,omitempty"`
 
-	// Configuration for the target endpoint. See target_configuration below.
+	// Configuration for the target endpoint. See target_configuration Block below.
 	TargetConfiguration *TargetConfigurationInitParameters `json:"targetConfiguration,omitempty" tf:"target_configuration,omitempty"`
 }
 
 type GatewayTargetObservation struct {
 
-	// Configuration for authenticating requests to the target. Required when using lambda, open_api_schema and smithy_model in mcp block. If using mcp_server in mcp block with no authorization, it should not be specified. See credential_provider_configuration below.
+	// Configuration for authenticating requests to the target. Required when using lambda, open_api_schema and smithy_model in mcp block. If using mcp_server in mcp block with no authorization, it should not be specified. See credential_provider_configuration Block below.
 	CredentialProviderConfiguration *CredentialProviderConfigurationObservation `json:"credentialProviderConfiguration,omitempty" tf:"credential_provider_configuration,omitempty"`
 
 	// Description of the gateway target.
@@ -382,20 +479,20 @@ type GatewayTargetObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Configuration for HTTP header and query parameter propagation between the gateway and target servers. See metadata_configuration below.
+	// Configuration for HTTP header and query parameter propagation between the gateway and target servers. See metadata_configuration Block below.
 	MetadataConfiguration *MetadataConfigurationObservation `json:"metadataConfiguration,omitempty" tf:"metadata_configuration,omitempty"`
 
 	// Name of the gateway target.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Configuration for private connectivity from AgentCore Gateway to a resource inside your VPC. Traffic is routed through Amazon VPC Lattice and never traverses the public internet. See private_endpoint below.
+	// Configuration for private connectivity from AgentCore Gateway to a resource inside your VPC. Traffic is routed through Amazon VPC Lattice and never traverses the public internet. See private_endpoint Block below.
 	PrivateEndpoint *GatewayTargetPrivateEndpointObservation `json:"privateEndpoint,omitempty" tf:"private_endpoint,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// Configuration for the target endpoint. See target_configuration below.
+	// Configuration for the target endpoint. See target_configuration Block below.
 	TargetConfiguration *TargetConfigurationObservation `json:"targetConfiguration,omitempty" tf:"target_configuration,omitempty"`
 
 	// Unique identifier of the gateway target.
@@ -404,7 +501,7 @@ type GatewayTargetObservation struct {
 
 type GatewayTargetParameters struct {
 
-	// Configuration for authenticating requests to the target. Required when using lambda, open_api_schema and smithy_model in mcp block. If using mcp_server in mcp block with no authorization, it should not be specified. See credential_provider_configuration below.
+	// Configuration for authenticating requests to the target. Required when using lambda, open_api_schema and smithy_model in mcp block. If using mcp_server in mcp block with no authorization, it should not be specified. See credential_provider_configuration Block below.
 	// +kubebuilder:validation:Optional
 	CredentialProviderConfiguration *CredentialProviderConfigurationParameters `json:"credentialProviderConfiguration,omitempty" tf:"credential_provider_configuration,omitempty"`
 
@@ -426,7 +523,7 @@ type GatewayTargetParameters struct {
 	// +kubebuilder:validation:Optional
 	GatewayIdentifierSelector *v2.Selector `json:"gatewayIdentifierSelector,omitempty" tf:"-"`
 
-	// Configuration for HTTP header and query parameter propagation between the gateway and target servers. See metadata_configuration below.
+	// Configuration for HTTP header and query parameter propagation between the gateway and target servers. See metadata_configuration Block below.
 	// +kubebuilder:validation:Optional
 	MetadataConfiguration *MetadataConfigurationParameters `json:"metadataConfiguration,omitempty" tf:"metadata_configuration,omitempty"`
 
@@ -434,7 +531,7 @@ type GatewayTargetParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Configuration for private connectivity from AgentCore Gateway to a resource inside your VPC. Traffic is routed through Amazon VPC Lattice and never traverses the public internet. See private_endpoint below.
+	// Configuration for private connectivity from AgentCore Gateway to a resource inside your VPC. Traffic is routed through Amazon VPC Lattice and never traverses the public internet. See private_endpoint Block below.
 	// +kubebuilder:validation:Optional
 	PrivateEndpoint *GatewayTargetPrivateEndpointParameters `json:"privateEndpoint,omitempty" tf:"private_endpoint,omitempty"`
 
@@ -443,17 +540,17 @@ type GatewayTargetParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// Configuration for the target endpoint. See target_configuration below.
+	// Configuration for the target endpoint. See target_configuration Block below.
 	// +kubebuilder:validation:Optional
 	TargetConfiguration *TargetConfigurationParameters `json:"targetConfiguration,omitempty" tf:"target_configuration,omitempty"`
 }
 
 type GatewayTargetPrivateEndpointInitParameters struct {
 
-	// AWS creates and manages the VPC Lattice resource gateway and resource configuration on your behalf using a service-linked role. See managed_vpc_resource below.
+	// AWS creates and manages the VPC Lattice resource gateway and resource configuration on your behalf using a service-linked role. See managed_vpc_resource Block below.
 	ManagedVPCResource *GatewayTargetPrivateEndpointManagedVPCResourceInitParameters `json:"managedVpcResource,omitempty" tf:"managed_vpc_resource,omitempty"`
 
-	// Use an existing VPC Lattice resource configuration that you manage yourself. Useful for cross-account setups or advanced Lattice configurations. See self_managed_lattice_resource below.
+	// Use an existing VPC Lattice resource configuration that you manage yourself. Useful for cross-account setups or advanced Lattice configurations. See self_managed_lattice_resource Block below.
 	SelfManagedLatticeResource *GatewayTargetPrivateEndpointSelfManagedLatticeResourceInitParameters `json:"selfManagedLatticeResource,omitempty" tf:"self_managed_lattice_resource,omitempty"`
 }
 
@@ -597,20 +694,20 @@ type GatewayTargetPrivateEndpointManagedVPCResourceParameters struct {
 
 type GatewayTargetPrivateEndpointObservation struct {
 
-	// AWS creates and manages the VPC Lattice resource gateway and resource configuration on your behalf using a service-linked role. See managed_vpc_resource below.
+	// AWS creates and manages the VPC Lattice resource gateway and resource configuration on your behalf using a service-linked role. See managed_vpc_resource Block below.
 	ManagedVPCResource *GatewayTargetPrivateEndpointManagedVPCResourceObservation `json:"managedVpcResource,omitempty" tf:"managed_vpc_resource,omitempty"`
 
-	// Use an existing VPC Lattice resource configuration that you manage yourself. Useful for cross-account setups or advanced Lattice configurations. See self_managed_lattice_resource below.
+	// Use an existing VPC Lattice resource configuration that you manage yourself. Useful for cross-account setups or advanced Lattice configurations. See self_managed_lattice_resource Block below.
 	SelfManagedLatticeResource *GatewayTargetPrivateEndpointSelfManagedLatticeResourceObservation `json:"selfManagedLatticeResource,omitempty" tf:"self_managed_lattice_resource,omitempty"`
 }
 
 type GatewayTargetPrivateEndpointParameters struct {
 
-	// AWS creates and manages the VPC Lattice resource gateway and resource configuration on your behalf using a service-linked role. See managed_vpc_resource below.
+	// AWS creates and manages the VPC Lattice resource gateway and resource configuration on your behalf using a service-linked role. See managed_vpc_resource Block below.
 	// +kubebuilder:validation:Optional
 	ManagedVPCResource *GatewayTargetPrivateEndpointManagedVPCResourceParameters `json:"managedVpcResource,omitempty" tf:"managed_vpc_resource,omitempty"`
 
-	// Use an existing VPC Lattice resource configuration that you manage yourself. Useful for cross-account setups or advanced Lattice configurations. See self_managed_lattice_resource below.
+	// Use an existing VPC Lattice resource configuration that you manage yourself. Useful for cross-account setups or advanced Lattice configurations. See self_managed_lattice_resource Block below.
 	// +kubebuilder:validation:Optional
 	SelfManagedLatticeResource *GatewayTargetPrivateEndpointSelfManagedLatticeResourceParameters `json:"selfManagedLatticeResource,omitempty" tf:"self_managed_lattice_resource,omitempty"`
 }
@@ -656,70 +753,79 @@ type GatewayTargetPrivateEndpointSelfManagedLatticeResourceParameters struct {
 
 type HTTPInitParameters struct {
 
-	// AgentCore Runtime target configuration. See agentcore_runtime below.
+	// AgentCore Runtime target configuration. See agentcore_runtime Block below.
 	AgentcoreRuntime *AgentcoreRuntimeInitParameters `json:"agentcoreRuntime,omitempty" tf:"agentcore_runtime,omitempty"`
+
+	// Passthrough target configuration that forwards requests to an external HTTPS endpoint. See passthrough Block below.
+	Passthrough *PassthroughInitParameters `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
 }
 
 type HTTPObservation struct {
 
-	// AgentCore Runtime target configuration. See agentcore_runtime below.
+	// AgentCore Runtime target configuration. See agentcore_runtime Block below.
 	AgentcoreRuntime *AgentcoreRuntimeObservation `json:"agentcoreRuntime,omitempty" tf:"agentcore_runtime,omitempty"`
+
+	// Passthrough target configuration that forwards requests to an external HTTPS endpoint. See passthrough Block below.
+	Passthrough *PassthroughObservation `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
 }
 
 type HTTPParameters struct {
 
-	// AgentCore Runtime target configuration. See agentcore_runtime below.
+	// AgentCore Runtime target configuration. See agentcore_runtime Block below.
 	// +kubebuilder:validation:Optional
 	AgentcoreRuntime *AgentcoreRuntimeParameters `json:"agentcoreRuntime,omitempty" tf:"agentcore_runtime,omitempty"`
+
+	// Passthrough target configuration that forwards requests to an external HTTPS endpoint. See passthrough Block below.
+	// +kubebuilder:validation:Optional
+	Passthrough *PassthroughParameters `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type InferenceInitParameters struct {
+
+	// Connector integration target configuration. Connectors provide pre-built integrations with AWS services and third-party tools. See connector Block below.
+	Connector *ConnectorInitParameters `json:"connector,omitempty" tf:"connector,omitempty"`
+
+	// Provider-based inference configuration that explicitly defines the endpoint, model mapping, and operations used to route requests to an LLM provider. See provider Block below.
+	Provider *ProviderInitParameters `json:"provider,omitempty" tf:"provider,omitempty"`
+}
+
+type InferenceObservation struct {
+
+	// Connector integration target configuration. Connectors provide pre-built integrations with AWS services and third-party tools. See connector Block below.
+	Connector *ConnectorObservation `json:"connector,omitempty" tf:"connector,omitempty"`
+
+	// Provider-based inference configuration that explicitly defines the endpoint, model mapping, and operations used to route requests to an LLM provider. See provider Block below.
+	Provider *ProviderObservation `json:"provider,omitempty" tf:"provider,omitempty"`
+}
+
+type InferenceParameters struct {
+
+	// Connector integration target configuration. Connectors provide pre-built integrations with AWS services and third-party tools. See connector Block below.
+	// +kubebuilder:validation:Optional
+	Connector *ConnectorParameters `json:"connector,omitempty" tf:"connector,omitempty"`
+
+	// Provider-based inference configuration that explicitly defines the endpoint, model mapping, and operations used to route requests to an LLM provider. See provider Block below.
+	// +kubebuilder:validation:Optional
+	Provider *ProviderParameters `json:"provider,omitempty" tf:"provider,omitempty"`
 }
 
 type InlinePayloadInitParameters struct {
 
-	// Description of the tool. Provides information about the purpose and usage of the tool. If not provided, uses the description from the API's OpenAPI specification.
-	Description *string `json:"description,omitempty" tf:"description,omitempty"`
-
-	// Schema for the tool's input. See schema_definition below.
-	InputSchema *InputSchemaInitParameters `json:"inputSchema,omitempty" tf:"input_schema,omitempty"`
-
-	// Name of tool. Identifies the tool in the Model Context Protocol.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// Schema for the tool's output. See schema_definition below.
-	OutputSchema *OutputSchemaInitParameters `json:"outputSchema,omitempty" tf:"output_schema,omitempty"`
+	// Inline schema payload content.
+	Payload *string `json:"payload,omitempty" tf:"payload,omitempty"`
 }
 
 type InlinePayloadObservation struct {
 
-	// Description of the tool. Provides information about the purpose and usage of the tool. If not provided, uses the description from the API's OpenAPI specification.
-	Description *string `json:"description,omitempty" tf:"description,omitempty"`
-
-	// Schema for the tool's input. See schema_definition below.
-	InputSchema *InputSchemaObservation `json:"inputSchema,omitempty" tf:"input_schema,omitempty"`
-
-	// Name of tool. Identifies the tool in the Model Context Protocol.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// Schema for the tool's output. See schema_definition below.
-	OutputSchema *OutputSchemaObservation `json:"outputSchema,omitempty" tf:"output_schema,omitempty"`
+	// Inline schema payload content.
+	Payload *string `json:"payload,omitempty" tf:"payload,omitempty"`
 }
 
 type InlinePayloadParameters struct {
 
-	// Description of the tool. Provides information about the purpose and usage of the tool. If not provided, uses the description from the API's OpenAPI specification.
+	// Inline schema payload content.
 	// +kubebuilder:validation:Optional
-	Description *string `json:"description" tf:"description,omitempty"`
-
-	// Schema for the tool's input. See schema_definition below.
-	// +kubebuilder:validation:Optional
-	InputSchema *InputSchemaParameters `json:"inputSchema,omitempty" tf:"input_schema,omitempty"`
-
-	// Name of tool. Identifies the tool in the Model Context Protocol.
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name" tf:"name,omitempty"`
-
-	// Schema for the tool's output. See schema_definition below.
-	// +kubebuilder:validation:Optional
-	OutputSchema *OutputSchemaParameters `json:"outputSchema,omitempty" tf:"output_schema,omitempty"`
+	Payload *string `json:"payload" tf:"payload,omitempty"`
 }
 
 type InputSchemaInitParameters struct {
@@ -727,10 +833,10 @@ type InputSchemaInitParameters struct {
 	// Description of the tool. Provides information about the purpose and usage of the tool. If not provided, uses the description from the API's OpenAPI specification.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Items definition for array properties. See items above.
+	// Items definition for array properties. See items Block above.
 	Items *ItemsInitParameters `json:"items,omitempty" tf:"items,omitempty"`
 
-	// Set of property definitions for object types. Can only be used when type is object. See property below.
+	// Set of property definitions for object types. Can only be used when type is object. See property Block below.
 	Property []InputSchemaPropertyInitParameters `json:"property,omitempty" tf:"property,omitempty"`
 
 	// Data type of the schema. Valid values: string, number, integer, boolean, array, object.
@@ -742,10 +848,10 @@ type InputSchemaObservation struct {
 	// Description of the tool. Provides information about the purpose and usage of the tool. If not provided, uses the description from the API's OpenAPI specification.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Items definition for array properties. See items above.
+	// Items definition for array properties. See items Block above.
 	Items *ItemsObservation `json:"items,omitempty" tf:"items,omitempty"`
 
-	// Set of property definitions for object types. Can only be used when type is object. See property below.
+	// Set of property definitions for object types. Can only be used when type is object. See property Block below.
 	Property []InputSchemaPropertyObservation `json:"property,omitempty" tf:"property,omitempty"`
 
 	// Data type of the schema. Valid values: string, number, integer, boolean, array, object.
@@ -758,11 +864,11 @@ type InputSchemaParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Items definition for array properties. See items above.
+	// Items definition for array properties. See items Block above.
 	// +kubebuilder:validation:Optional
 	Items *ItemsParameters `json:"items,omitempty" tf:"items,omitempty"`
 
-	// Set of property definitions for object types. Can only be used when type is object. See property below.
+	// Set of property definitions for object types. Can only be used when type is object. See property Block below.
 	// +kubebuilder:validation:Optional
 	Property []InputSchemaPropertyParameters `json:"property,omitempty" tf:"property,omitempty"`
 
@@ -776,13 +882,13 @@ type InputSchemaPropertyInitParameters struct {
 	// Description of the tool. Provides information about the purpose and usage of the tool. If not provided, uses the description from the API's OpenAPI specification.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Items definition for array properties. See items above.
+	// Items definition for array properties. See items Block above.
 	Items *PropertyItemsInitParameters `json:"items,omitempty" tf:"items,omitempty"`
 
 	// Name of tool. Identifies the tool in the Model Context Protocol.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Set of property definitions for object types. Can only be used when type is object. See property below.
+	// Set of property definitions for object types. Can only be used when type is object. See property Block below.
 	Property []PropertyPropertyInitParameters `json:"property,omitempty" tf:"property,omitempty"`
 
 	// Whether this property is required. Defaults to false.
@@ -797,13 +903,13 @@ type InputSchemaPropertyObservation struct {
 	// Description of the tool. Provides information about the purpose and usage of the tool. If not provided, uses the description from the API's OpenAPI specification.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Items definition for array properties. See items above.
+	// Items definition for array properties. See items Block above.
 	Items *PropertyItemsObservation `json:"items,omitempty" tf:"items,omitempty"`
 
 	// Name of tool. Identifies the tool in the Model Context Protocol.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Set of property definitions for object types. Can only be used when type is object. See property below.
+	// Set of property definitions for object types. Can only be used when type is object. See property Block below.
 	Property []PropertyPropertyObservation `json:"property,omitempty" tf:"property,omitempty"`
 
 	// Whether this property is required. Defaults to false.
@@ -819,7 +925,7 @@ type InputSchemaPropertyParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Items definition for array properties. See items above.
+	// Items definition for array properties. See items Block above.
 	// +kubebuilder:validation:Optional
 	Items *PropertyItemsParameters `json:"items,omitempty" tf:"items,omitempty"`
 
@@ -827,7 +933,7 @@ type InputSchemaPropertyParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// Set of property definitions for object types. Can only be used when type is object. See property below.
+	// Set of property definitions for object types. Can only be used when type is object. See property Block below.
 	// +kubebuilder:validation:Optional
 	Property []PropertyPropertyParameters `json:"property,omitempty" tf:"property,omitempty"`
 
@@ -845,10 +951,10 @@ type ItemsInitParameters struct {
 	// Description of the tool. Provides information about the purpose and usage of the tool. If not provided, uses the description from the API's OpenAPI specification.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Items definition for array properties. See items above.
+	// Items definition for array properties. See items Block above.
 	Items *ItemsItemsInitParameters `json:"items,omitempty" tf:"items,omitempty"`
 
-	// Set of property definitions for object types. Can only be used when type is object. See property below.
+	// Set of property definitions for object types. Can only be used when type is object. See property Block below.
 	Property []PropertyInitParameters `json:"property,omitempty" tf:"property,omitempty"`
 
 	// Data type of the schema. Valid values: string, number, integer, boolean, array, object.
@@ -909,10 +1015,10 @@ type ItemsObservation struct {
 	// Description of the tool. Provides information about the purpose and usage of the tool. If not provided, uses the description from the API's OpenAPI specification.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Items definition for array properties. See items above.
+	// Items definition for array properties. See items Block above.
 	Items *ItemsItemsObservation `json:"items,omitempty" tf:"items,omitempty"`
 
-	// Set of property definitions for object types. Can only be used when type is object. See property below.
+	// Set of property definitions for object types. Can only be used when type is object. See property Block below.
 	Property []PropertyObservation `json:"property,omitempty" tf:"property,omitempty"`
 
 	// Data type of the schema. Valid values: string, number, integer, boolean, array, object.
@@ -925,11 +1031,11 @@ type ItemsParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Items definition for array properties. See items above.
+	// Items definition for array properties. See items Block above.
 	// +kubebuilder:validation:Optional
 	Items *ItemsItemsParameters `json:"items,omitempty" tf:"items,omitempty"`
 
-	// Set of property definitions for object types. Can only be used when type is object. See property below.
+	// Set of property definitions for object types. Can only be used when type is object. See property Block below.
 	// +kubebuilder:validation:Optional
 	Property []PropertyParameters `json:"property,omitempty" tf:"property,omitempty"`
 
@@ -1016,6 +1122,74 @@ type JwtPassthroughObservation struct {
 type JwtPassthroughParameters struct {
 }
 
+type McpConnectorInitParameters struct {
+
+	// Per-tool configurations for the connector. See configuration Block below.
+	Configuration []ConfigurationInitParameters `json:"configuration,omitempty" tf:"configuration,omitempty"`
+
+	// List of tool names to enable from this connector. If omitted, all tools provided by the connector are enabled.
+	Enabled []*string `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// Configuration for API schema. See api_schema_configuration Block below.
+	Source *McpConnectorSourceInitParameters `json:"source,omitempty" tf:"source,omitempty"`
+}
+
+type McpConnectorObservation struct {
+
+	// Per-tool configurations for the connector. See configuration Block below.
+	Configuration []ConfigurationObservation `json:"configuration,omitempty" tf:"configuration,omitempty"`
+
+	// List of tool names to enable from this connector. If omitted, all tools provided by the connector are enabled.
+	Enabled []*string `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// Configuration for API schema. See api_schema_configuration Block below.
+	Source *McpConnectorSourceObservation `json:"source,omitempty" tf:"source,omitempty"`
+}
+
+type McpConnectorParameters struct {
+
+	// Per-tool configurations for the connector. See configuration Block below.
+	// +kubebuilder:validation:Optional
+	Configuration []ConfigurationParameters `json:"configuration,omitempty" tf:"configuration,omitempty"`
+
+	// List of tool names to enable from this connector. If omitted, all tools provided by the connector are enabled.
+	// +kubebuilder:validation:Optional
+	Enabled []*string `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// Configuration for API schema. See api_schema_configuration Block below.
+	// +kubebuilder:validation:Optional
+	Source *McpConnectorSourceParameters `json:"source,omitempty" tf:"source,omitempty"`
+}
+
+type McpConnectorSourceInitParameters struct {
+
+	// Identifier for the connector integration (for example, bedrock-knowledge-bases).
+	ConnectorID *string `json:"connectorId,omitempty" tf:"connector_id,omitempty"`
+
+	// Version of the connector to use (for example, 1.2.0).
+	Version *string `json:"version,omitempty" tf:"version,omitempty"`
+}
+
+type McpConnectorSourceObservation struct {
+
+	// Identifier for the connector integration (for example, bedrock-knowledge-bases).
+	ConnectorID *string `json:"connectorId,omitempty" tf:"connector_id,omitempty"`
+
+	// Version of the connector to use (for example, 1.2.0).
+	Version *string `json:"version,omitempty" tf:"version,omitempty"`
+}
+
+type McpConnectorSourceParameters struct {
+
+	// Identifier for the connector integration (for example, bedrock-knowledge-bases).
+	// +kubebuilder:validation:Optional
+	ConnectorID *string `json:"connectorId" tf:"connector_id,omitempty"`
+
+	// Version of the connector to use (for example, 1.2.0).
+	// +kubebuilder:validation:Optional
+	Version *string `json:"version,omitempty" tf:"version,omitempty"`
+}
+
 type McpLambdaInitParameters struct {
 
 	// ARN of the Lambda function to invoke.
@@ -1031,7 +1205,7 @@ type McpLambdaInitParameters struct {
 	// +kubebuilder:validation:Optional
 	LambdaArnSelector *v2.Selector `json:"lambdaArnSelector,omitempty" tf:"-"`
 
-	// Schema definition for the tool. See tool_schema below.
+	// Schema definition for the tool. See tool_schema Block below.
 	ToolSchema *ToolSchemaInitParameters `json:"toolSchema,omitempty" tf:"tool_schema,omitempty"`
 }
 
@@ -1040,7 +1214,7 @@ type McpLambdaObservation struct {
 	// ARN of the Lambda function to invoke.
 	LambdaArn *string `json:"lambdaArn,omitempty" tf:"lambda_arn,omitempty"`
 
-	// Schema definition for the tool. See tool_schema below.
+	// Schema definition for the tool. See tool_schema Block below.
 	ToolSchema *ToolSchemaObservation `json:"toolSchema,omitempty" tf:"tool_schema,omitempty"`
 }
 
@@ -1060,53 +1234,150 @@ type McpLambdaParameters struct {
 	// +kubebuilder:validation:Optional
 	LambdaArnSelector *v2.Selector `json:"lambdaArnSelector,omitempty" tf:"-"`
 
-	// Schema definition for the tool. See tool_schema below.
+	// Schema definition for the tool. See tool_schema Block below.
 	// +kubebuilder:validation:Optional
 	ToolSchema *ToolSchemaParameters `json:"toolSchema,omitempty" tf:"tool_schema,omitempty"`
 }
 
 type McpServerInitParameters struct {
 
-	// Endpoint for the MCP server target configuration.
+	// HTTPS endpoint of the inference provider that the gateway forwards requests to.
 	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 
 	// Listing mode for the MCP server target. Valid values are DEFAULT and DYNAMIC. MCP resources for DEFAULT targets are cached at the control plane for faster access, while resources for DYNAMIC targets are retrieved dynamically when listing tools.
 	ListingMode *string `json:"listingMode,omitempty" tf:"listing_mode,omitempty"`
+
+	// Tool schema configuration for the MCP server target. Supported only when the credential provider is configured with an authorization code grant type. When set, dynamic tool discovery and synchronization are disabled. See mcp_tool_schema Block below.
+	McpToolSchema *McpToolSchemaInitParameters `json:"mcpToolSchema,omitempty" tf:"mcp_tool_schema,omitempty"`
+
+	// Priority for resolving MCP server targets with shared resource URIs. Lower values take precedence. Defaults to 1000 when not set.
+	ResourcePriority *float64 `json:"resourcePriority,omitempty" tf:"resource_priority,omitempty"`
 }
 
 type McpServerObservation struct {
 
-	// Endpoint for the MCP server target configuration.
+	// HTTPS endpoint of the inference provider that the gateway forwards requests to.
 	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 
 	// Listing mode for the MCP server target. Valid values are DEFAULT and DYNAMIC. MCP resources for DEFAULT targets are cached at the control plane for faster access, while resources for DYNAMIC targets are retrieved dynamically when listing tools.
 	ListingMode *string `json:"listingMode,omitempty" tf:"listing_mode,omitempty"`
+
+	// Tool schema configuration for the MCP server target. Supported only when the credential provider is configured with an authorization code grant type. When set, dynamic tool discovery and synchronization are disabled. See mcp_tool_schema Block below.
+	McpToolSchema *McpToolSchemaObservation `json:"mcpToolSchema,omitempty" tf:"mcp_tool_schema,omitempty"`
+
+	// Priority for resolving MCP server targets with shared resource URIs. Lower values take precedence. Defaults to 1000 when not set.
+	ResourcePriority *float64 `json:"resourcePriority,omitempty" tf:"resource_priority,omitempty"`
 }
 
 type McpServerParameters struct {
 
-	// Endpoint for the MCP server target configuration.
+	// HTTPS endpoint of the inference provider that the gateway forwards requests to.
 	// +kubebuilder:validation:Optional
 	Endpoint *string `json:"endpoint" tf:"endpoint,omitempty"`
 
 	// Listing mode for the MCP server target. Valid values are DEFAULT and DYNAMIC. MCP resources for DEFAULT targets are cached at the control plane for faster access, while resources for DYNAMIC targets are retrieved dynamically when listing tools.
 	// +kubebuilder:validation:Optional
 	ListingMode *string `json:"listingMode,omitempty" tf:"listing_mode,omitempty"`
+
+	// Tool schema configuration for the MCP server target. Supported only when the credential provider is configured with an authorization code grant type. When set, dynamic tool discovery and synchronization are disabled. See mcp_tool_schema Block below.
+	// +kubebuilder:validation:Optional
+	McpToolSchema *McpToolSchemaParameters `json:"mcpToolSchema,omitempty" tf:"mcp_tool_schema,omitempty"`
+
+	// Priority for resolving MCP server targets with shared resource URIs. Lower values take precedence. Defaults to 1000 when not set.
+	// +kubebuilder:validation:Optional
+	ResourcePriority *float64 `json:"resourcePriority,omitempty" tf:"resource_priority,omitempty"`
+}
+
+type McpToolSchemaInitParameters struct {
+
+	// Inline tool schema payload. The inline_payload block requires a payload (string) containing the MCP tool schema definition.
+	InlinePayload *McpToolSchemaInlinePayloadInitParameters `json:"inlinePayload,omitempty" tf:"inline_payload,omitempty"`
+
+	// S3 location of the tool schema. See s3 Block below.
+	S3 *McpToolSchemaS3InitParameters `json:"s3,omitempty" tf:"s3,omitempty"`
+}
+
+type McpToolSchemaInlinePayloadInitParameters struct {
+
+	// Inline schema payload content.
+	Payload *string `json:"payload,omitempty" tf:"payload,omitempty"`
+}
+
+type McpToolSchemaInlinePayloadObservation struct {
+
+	// Inline schema payload content.
+	Payload *string `json:"payload,omitempty" tf:"payload,omitempty"`
+}
+
+type McpToolSchemaInlinePayloadParameters struct {
+
+	// Inline schema payload content.
+	// +kubebuilder:validation:Optional
+	Payload *string `json:"payload" tf:"payload,omitempty"`
+}
+
+type McpToolSchemaObservation struct {
+
+	// Inline tool schema payload. The inline_payload block requires a payload (string) containing the MCP tool schema definition.
+	InlinePayload *McpToolSchemaInlinePayloadObservation `json:"inlinePayload,omitempty" tf:"inline_payload,omitempty"`
+
+	// S3 location of the tool schema. See s3 Block below.
+	S3 *McpToolSchemaS3Observation `json:"s3,omitempty" tf:"s3,omitempty"`
+}
+
+type McpToolSchemaParameters struct {
+
+	// Inline tool schema payload. The inline_payload block requires a payload (string) containing the MCP tool schema definition.
+	// +kubebuilder:validation:Optional
+	InlinePayload *McpToolSchemaInlinePayloadParameters `json:"inlinePayload,omitempty" tf:"inline_payload,omitempty"`
+
+	// S3 location of the tool schema. See s3 Block below.
+	// +kubebuilder:validation:Optional
+	S3 *McpToolSchemaS3Parameters `json:"s3,omitempty" tf:"s3,omitempty"`
+}
+
+type McpToolSchemaS3InitParameters struct {
+
+	// Account ID of the S3 bucket owner.
+	BucketOwnerAccountID *string `json:"bucketOwnerAccountId,omitempty" tf:"bucket_owner_account_id,omitempty"`
+
+	// S3 URI where the tool schema is stored.
+	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
+}
+
+type McpToolSchemaS3Observation struct {
+
+	// Account ID of the S3 bucket owner.
+	BucketOwnerAccountID *string `json:"bucketOwnerAccountId,omitempty" tf:"bucket_owner_account_id,omitempty"`
+
+	// S3 URI where the tool schema is stored.
+	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
+}
+
+type McpToolSchemaS3Parameters struct {
+
+	// Account ID of the S3 bucket owner.
+	// +kubebuilder:validation:Optional
+	BucketOwnerAccountID *string `json:"bucketOwnerAccountId,omitempty" tf:"bucket_owner_account_id,omitempty"`
+
+	// S3 URI where the tool schema is stored.
+	// +kubebuilder:validation:Optional
+	URI *string `json:"uri" tf:"uri,omitempty"`
 }
 
 type MetadataConfigurationInitParameters struct {
 
-	// A set of URL query parameters that are allowed to be propagated from incoming gateway URL to the target. Maximum of 10 parameters.
+	// Set of URL query parameters that are allowed to be propagated from incoming gateway URL to the target. Maximum of 10 parameters.
 	// A list of URL query parameters that are allowed to be propagated from incoming gateway URL to the target.
 	// +listType=set
 	AllowedQueryParameters []*string `json:"allowedQueryParameters,omitempty" tf:"allowed_query_parameters,omitempty"`
 
-	// A set of HTTP headers that are allowed to be propagated from incoming client requests to the target. Maximum of 10 headers.
+	// Set of HTTP headers that are allowed to be propagated from incoming client requests to the target. Maximum of 10 headers.
 	// A list of HTTP headers that are allowed to be propagated from incoming client requests to the target.
 	// +listType=set
 	AllowedRequestHeaders []*string `json:"allowedRequestHeaders,omitempty" tf:"allowed_request_headers,omitempty"`
 
-	// A set of HTTP headers that are allowed to be propagated from the target response back to the client. Maximum of 10 headers.
+	// Set of HTTP headers that are allowed to be propagated from the target response back to the client. Maximum of 10 headers.
 	// A list of HTTP headers that are allowed to be propagated from the target response back to the client.
 	// +listType=set
 	AllowedResponseHeaders []*string `json:"allowedResponseHeaders,omitempty" tf:"allowed_response_headers,omitempty"`
@@ -1114,17 +1385,17 @@ type MetadataConfigurationInitParameters struct {
 
 type MetadataConfigurationObservation struct {
 
-	// A set of URL query parameters that are allowed to be propagated from incoming gateway URL to the target. Maximum of 10 parameters.
+	// Set of URL query parameters that are allowed to be propagated from incoming gateway URL to the target. Maximum of 10 parameters.
 	// A list of URL query parameters that are allowed to be propagated from incoming gateway URL to the target.
 	// +listType=set
 	AllowedQueryParameters []*string `json:"allowedQueryParameters,omitempty" tf:"allowed_query_parameters,omitempty"`
 
-	// A set of HTTP headers that are allowed to be propagated from incoming client requests to the target. Maximum of 10 headers.
+	// Set of HTTP headers that are allowed to be propagated from incoming client requests to the target. Maximum of 10 headers.
 	// A list of HTTP headers that are allowed to be propagated from incoming client requests to the target.
 	// +listType=set
 	AllowedRequestHeaders []*string `json:"allowedRequestHeaders,omitempty" tf:"allowed_request_headers,omitempty"`
 
-	// A set of HTTP headers that are allowed to be propagated from the target response back to the client. Maximum of 10 headers.
+	// Set of HTTP headers that are allowed to be propagated from the target response back to the client. Maximum of 10 headers.
 	// A list of HTTP headers that are allowed to be propagated from the target response back to the client.
 	// +listType=set
 	AllowedResponseHeaders []*string `json:"allowedResponseHeaders,omitempty" tf:"allowed_response_headers,omitempty"`
@@ -1132,23 +1403,61 @@ type MetadataConfigurationObservation struct {
 
 type MetadataConfigurationParameters struct {
 
-	// A set of URL query parameters that are allowed to be propagated from incoming gateway URL to the target. Maximum of 10 parameters.
+	// Set of URL query parameters that are allowed to be propagated from incoming gateway URL to the target. Maximum of 10 parameters.
 	// A list of URL query parameters that are allowed to be propagated from incoming gateway URL to the target.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	AllowedQueryParameters []*string `json:"allowedQueryParameters,omitempty" tf:"allowed_query_parameters,omitempty"`
 
-	// A set of HTTP headers that are allowed to be propagated from incoming client requests to the target. Maximum of 10 headers.
+	// Set of HTTP headers that are allowed to be propagated from incoming client requests to the target. Maximum of 10 headers.
 	// A list of HTTP headers that are allowed to be propagated from incoming client requests to the target.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	AllowedRequestHeaders []*string `json:"allowedRequestHeaders,omitempty" tf:"allowed_request_headers,omitempty"`
 
-	// A set of HTTP headers that are allowed to be propagated from the target response back to the client. Maximum of 10 headers.
+	// Set of HTTP headers that are allowed to be propagated from the target response back to the client. Maximum of 10 headers.
 	// A list of HTTP headers that are allowed to be propagated from the target response back to the client.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	AllowedResponseHeaders []*string `json:"allowedResponseHeaders,omitempty" tf:"allowed_response_headers,omitempty"`
+}
+
+type ModelInitParameters struct {
+
+	// List of models supported for this operation. See model Block below.
+	Model *string `json:"model,omitempty" tf:"model,omitempty"`
+}
+
+type ModelMappingInitParameters struct {
+
+	// Provider prefix configuration used for model ID translation. See provider_prefix Block below.
+	ProviderPrefix *ProviderPrefixInitParameters `json:"providerPrefix,omitempty" tf:"provider_prefix,omitempty"`
+}
+
+type ModelMappingObservation struct {
+
+	// Provider prefix configuration used for model ID translation. See provider_prefix Block below.
+	ProviderPrefix *ProviderPrefixObservation `json:"providerPrefix,omitempty" tf:"provider_prefix,omitempty"`
+}
+
+type ModelMappingParameters struct {
+
+	// Provider prefix configuration used for model ID translation. See provider_prefix Block below.
+	// +kubebuilder:validation:Optional
+	ProviderPrefix *ProviderPrefixParameters `json:"providerPrefix,omitempty" tf:"provider_prefix,omitempty"`
+}
+
+type ModelObservation struct {
+
+	// List of models supported for this operation. See model Block below.
+	Model *string `json:"model,omitempty" tf:"model,omitempty"`
+}
+
+type ModelParameters struct {
+
+	// List of models supported for this operation. See model Block below.
+	// +kubebuilder:validation:Optional
+	Model *string `json:"model" tf:"model,omitempty"`
 }
 
 type OauthInitParameters struct {
@@ -1157,11 +1466,11 @@ type OauthInitParameters struct {
 	// +mapType=granular
 	CustomParameters map[string]*string `json:"customParameters,omitempty" tf:"custom_parameters,omitempty"`
 
-	// The URL where the end user's browser is redirected after obtaining the authorization code. Required when grant_type is AUTHORIZATION_CODE.
+	// URL where the end user's browser is redirected after obtaining the authorization code. Required when grant_type is AUTHORIZATION_CODE.
 	// The URL where the end user's browser is redirected after obtaining the authorization code. Required when grant_type is AUTHORIZATION_CODE.
 	DefaultReturnURL *string `json:"defaultReturnUrl,omitempty" tf:"default_return_url,omitempty"`
 
-	// The OAuth grant type. Valid values: CLIENT_CREDENTIALS (machine-to-machine authentication), AUTHORIZATION_CODE (user-delegated access).
+	// OAuth grant type. Valid values: CLIENT_CREDENTIALS (machine-to-machine authentication), AUTHORIZATION_CODE (user-delegated access).
 	// The OAuth grant type. Valid values are AUTHORIZATION_CODE and CLIENT_CREDENTIALS.
 	GrantType *string `json:"grantType,omitempty" tf:"grant_type,omitempty"`
 
@@ -1189,11 +1498,11 @@ type OauthObservation struct {
 	// +mapType=granular
 	CustomParameters map[string]*string `json:"customParameters,omitempty" tf:"custom_parameters,omitempty"`
 
-	// The URL where the end user's browser is redirected after obtaining the authorization code. Required when grant_type is AUTHORIZATION_CODE.
+	// URL where the end user's browser is redirected after obtaining the authorization code. Required when grant_type is AUTHORIZATION_CODE.
 	// The URL where the end user's browser is redirected after obtaining the authorization code. Required when grant_type is AUTHORIZATION_CODE.
 	DefaultReturnURL *string `json:"defaultReturnUrl,omitempty" tf:"default_return_url,omitempty"`
 
-	// The OAuth grant type. Valid values: CLIENT_CREDENTIALS (machine-to-machine authentication), AUTHORIZATION_CODE (user-delegated access).
+	// OAuth grant type. Valid values: CLIENT_CREDENTIALS (machine-to-machine authentication), AUTHORIZATION_CODE (user-delegated access).
 	// The OAuth grant type. Valid values are AUTHORIZATION_CODE and CLIENT_CREDENTIALS.
 	GrantType *string `json:"grantType,omitempty" tf:"grant_type,omitempty"`
 
@@ -1212,12 +1521,12 @@ type OauthParameters struct {
 	// +mapType=granular
 	CustomParameters map[string]*string `json:"customParameters,omitempty" tf:"custom_parameters,omitempty"`
 
-	// The URL where the end user's browser is redirected after obtaining the authorization code. Required when grant_type is AUTHORIZATION_CODE.
+	// URL where the end user's browser is redirected after obtaining the authorization code. Required when grant_type is AUTHORIZATION_CODE.
 	// The URL where the end user's browser is redirected after obtaining the authorization code. Required when grant_type is AUTHORIZATION_CODE.
 	// +kubebuilder:validation:Optional
 	DefaultReturnURL *string `json:"defaultReturnUrl,omitempty" tf:"default_return_url,omitempty"`
 
-	// The OAuth grant type. Valid values: CLIENT_CREDENTIALS (machine-to-machine authentication), AUTHORIZATION_CODE (user-delegated access).
+	// OAuth grant type. Valid values: CLIENT_CREDENTIALS (machine-to-machine authentication), AUTHORIZATION_CODE (user-delegated access).
 	// The OAuth grant type. Valid values are AUTHORIZATION_CODE and CLIENT_CREDENTIALS.
 	// +kubebuilder:validation:Optional
 	GrantType *string `json:"grantType,omitempty" tf:"grant_type,omitempty"`
@@ -1244,48 +1553,48 @@ type OauthParameters struct {
 
 type OpenAPISchemaInitParameters struct {
 
-	// Inline tool definition. See inline_payload below.
+	// Inline tool schema payload. The inline_payload block requires a payload (string) containing the MCP tool schema definition.
 	InlinePayload *OpenAPISchemaInlinePayloadInitParameters `json:"inlinePayload,omitempty" tf:"inline_payload,omitempty"`
 
-	// S3-based tool definition. See s3 below.
+	// S3 location of the tool schema. See s3 Block below.
 	S3 *OpenAPISchemaS3InitParameters `json:"s3,omitempty" tf:"s3,omitempty"`
 }
 
 type OpenAPISchemaInlinePayloadInitParameters struct {
 
-	// The inline schema payload content.
+	// Inline schema payload content.
 	Payload *string `json:"payload,omitempty" tf:"payload,omitempty"`
 }
 
 type OpenAPISchemaInlinePayloadObservation struct {
 
-	// The inline schema payload content.
+	// Inline schema payload content.
 	Payload *string `json:"payload,omitempty" tf:"payload,omitempty"`
 }
 
 type OpenAPISchemaInlinePayloadParameters struct {
 
-	// The inline schema payload content.
+	// Inline schema payload content.
 	// +kubebuilder:validation:Optional
 	Payload *string `json:"payload" tf:"payload,omitempty"`
 }
 
 type OpenAPISchemaObservation struct {
 
-	// Inline tool definition. See inline_payload below.
+	// Inline tool schema payload. The inline_payload block requires a payload (string) containing the MCP tool schema definition.
 	InlinePayload *OpenAPISchemaInlinePayloadObservation `json:"inlinePayload,omitempty" tf:"inline_payload,omitempty"`
 
-	// S3-based tool definition. See s3 below.
+	// S3 location of the tool schema. See s3 Block below.
 	S3 *OpenAPISchemaS3Observation `json:"s3,omitempty" tf:"s3,omitempty"`
 }
 
 type OpenAPISchemaParameters struct {
 
-	// Inline tool definition. See inline_payload below.
+	// Inline tool schema payload. The inline_payload block requires a payload (string) containing the MCP tool schema definition.
 	// +kubebuilder:validation:Optional
 	InlinePayload *OpenAPISchemaInlinePayloadParameters `json:"inlinePayload,omitempty" tf:"inline_payload,omitempty"`
 
-	// S3-based tool definition. See s3 below.
+	// S3 location of the tool schema. See s3 Block below.
 	// +kubebuilder:validation:Optional
 	S3 *OpenAPISchemaS3Parameters `json:"s3,omitempty" tf:"s3,omitempty"`
 }
@@ -1319,15 +1628,54 @@ type OpenAPISchemaS3Parameters struct {
 	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
 }
 
+type OperationInitParameters struct {
+
+	// List of models supported for this operation. See model Block below.
+	Model []ModelInitParameters `json:"model,omitempty" tf:"model,omitempty"`
+
+	// Resource path in the REST API (e.g., /pets). Must explicitly match an existing path in the REST API.
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
+	// Provider path to forward requests to, if it differs from the request path. For example, /anthropic/v1/messages when the provider expects a different path than the client-facing /v1/messages.
+	ProviderPath *string `json:"providerPath,omitempty" tf:"provider_path,omitempty"`
+}
+
+type OperationObservation struct {
+
+	// List of models supported for this operation. See model Block below.
+	Model []ModelObservation `json:"model,omitempty" tf:"model,omitempty"`
+
+	// Resource path in the REST API (e.g., /pets). Must explicitly match an existing path in the REST API.
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
+	// Provider path to forward requests to, if it differs from the request path. For example, /anthropic/v1/messages when the provider expects a different path than the client-facing /v1/messages.
+	ProviderPath *string `json:"providerPath,omitempty" tf:"provider_path,omitempty"`
+}
+
+type OperationParameters struct {
+
+	// List of models supported for this operation. See model Block below.
+	// +kubebuilder:validation:Optional
+	Model []ModelParameters `json:"model,omitempty" tf:"model,omitempty"`
+
+	// Resource path in the REST API (e.g., /pets). Must explicitly match an existing path in the REST API.
+	// +kubebuilder:validation:Optional
+	Path *string `json:"path" tf:"path,omitempty"`
+
+	// Provider path to forward requests to, if it differs from the request path. For example, /anthropic/v1/messages when the provider expects a different path than the client-facing /v1/messages.
+	// +kubebuilder:validation:Optional
+	ProviderPath *string `json:"providerPath,omitempty" tf:"provider_path,omitempty"`
+}
+
 type OutputSchemaInitParameters struct {
 
 	// Description of the tool. Provides information about the purpose and usage of the tool. If not provided, uses the description from the API's OpenAPI specification.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Items definition for array properties. See items above.
+	// Items definition for array properties. See items Block above.
 	Items *OutputSchemaItemsInitParameters `json:"items,omitempty" tf:"items,omitempty"`
 
-	// Set of property definitions for object types. Can only be used when type is object. See property below.
+	// Set of property definitions for object types. Can only be used when type is object. See property Block below.
 	Property []OutputSchemaPropertyInitParameters `json:"property,omitempty" tf:"property,omitempty"`
 
 	// Data type of the schema. Valid values: string, number, integer, boolean, array, object.
@@ -1339,10 +1687,10 @@ type OutputSchemaItemsInitParameters struct {
 	// Description of the tool. Provides information about the purpose and usage of the tool. If not provided, uses the description from the API's OpenAPI specification.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Items definition for array properties. See items above.
+	// Items definition for array properties. See items Block above.
 	Items *OutputSchemaItemsItemsInitParameters `json:"items,omitempty" tf:"items,omitempty"`
 
-	// Set of property definitions for object types. Can only be used when type is object. See property below.
+	// Set of property definitions for object types. Can only be used when type is object. See property Block below.
 	Property []OutputSchemaItemsPropertyInitParameters `json:"property,omitempty" tf:"property,omitempty"`
 
 	// Data type of the schema. Valid values: string, number, integer, boolean, array, object.
@@ -1403,10 +1751,10 @@ type OutputSchemaItemsObservation struct {
 	// Description of the tool. Provides information about the purpose and usage of the tool. If not provided, uses the description from the API's OpenAPI specification.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Items definition for array properties. See items above.
+	// Items definition for array properties. See items Block above.
 	Items *OutputSchemaItemsItemsObservation `json:"items,omitempty" tf:"items,omitempty"`
 
-	// Set of property definitions for object types. Can only be used when type is object. See property below.
+	// Set of property definitions for object types. Can only be used when type is object. See property Block below.
 	Property []OutputSchemaItemsPropertyObservation `json:"property,omitempty" tf:"property,omitempty"`
 
 	// Data type of the schema. Valid values: string, number, integer, boolean, array, object.
@@ -1419,11 +1767,11 @@ type OutputSchemaItemsParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Items definition for array properties. See items above.
+	// Items definition for array properties. See items Block above.
 	// +kubebuilder:validation:Optional
 	Items *OutputSchemaItemsItemsParameters `json:"items,omitempty" tf:"items,omitempty"`
 
-	// Set of property definitions for object types. Can only be used when type is object. See property below.
+	// Set of property definitions for object types. Can only be used when type is object. See property Block below.
 	// +kubebuilder:validation:Optional
 	Property []OutputSchemaItemsPropertyParameters `json:"property,omitempty" tf:"property,omitempty"`
 
@@ -1506,10 +1854,10 @@ type OutputSchemaObservation struct {
 	// Description of the tool. Provides information about the purpose and usage of the tool. If not provided, uses the description from the API's OpenAPI specification.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Items definition for array properties. See items above.
+	// Items definition for array properties. See items Block above.
 	Items *OutputSchemaItemsObservation `json:"items,omitempty" tf:"items,omitempty"`
 
-	// Set of property definitions for object types. Can only be used when type is object. See property below.
+	// Set of property definitions for object types. Can only be used when type is object. See property Block below.
 	Property []OutputSchemaPropertyObservation `json:"property,omitempty" tf:"property,omitempty"`
 
 	// Data type of the schema. Valid values: string, number, integer, boolean, array, object.
@@ -1522,11 +1870,11 @@ type OutputSchemaParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Items definition for array properties. See items above.
+	// Items definition for array properties. See items Block above.
 	// +kubebuilder:validation:Optional
 	Items *OutputSchemaItemsParameters `json:"items,omitempty" tf:"items,omitempty"`
 
-	// Set of property definitions for object types. Can only be used when type is object. See property below.
+	// Set of property definitions for object types. Can only be used when type is object. See property Block below.
 	// +kubebuilder:validation:Optional
 	Property []OutputSchemaPropertyParameters `json:"property,omitempty" tf:"property,omitempty"`
 
@@ -1540,13 +1888,13 @@ type OutputSchemaPropertyInitParameters struct {
 	// Description of the tool. Provides information about the purpose and usage of the tool. If not provided, uses the description from the API's OpenAPI specification.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Items definition for array properties. See items above.
+	// Items definition for array properties. See items Block above.
 	Items *OutputSchemaPropertyItemsInitParameters `json:"items,omitempty" tf:"items,omitempty"`
 
 	// Name of tool. Identifies the tool in the Model Context Protocol.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Set of property definitions for object types. Can only be used when type is object. See property below.
+	// Set of property definitions for object types. Can only be used when type is object. See property Block below.
 	Property []OutputSchemaPropertyPropertyInitParameters `json:"property,omitempty" tf:"property,omitempty"`
 
 	// Whether this property is required. Defaults to false.
@@ -1561,10 +1909,10 @@ type OutputSchemaPropertyItemsInitParameters struct {
 	// Description of the tool. Provides information about the purpose and usage of the tool. If not provided, uses the description from the API's OpenAPI specification.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Items definition for array properties. See items above.
+	// Items definition for array properties. See items Block above.
 	Items *OutputSchemaPropertyItemsItemsInitParameters `json:"items,omitempty" tf:"items,omitempty"`
 
-	// Set of property definitions for object types. Can only be used when type is object. See property below.
+	// Set of property definitions for object types. Can only be used when type is object. See property Block below.
 	Property []PropertyItemsPropertyInitParameters `json:"property,omitempty" tf:"property,omitempty"`
 
 	// Data type of the schema. Valid values: string, number, integer, boolean, array, object.
@@ -1625,10 +1973,10 @@ type OutputSchemaPropertyItemsObservation struct {
 	// Description of the tool. Provides information about the purpose and usage of the tool. If not provided, uses the description from the API's OpenAPI specification.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Items definition for array properties. See items above.
+	// Items definition for array properties. See items Block above.
 	Items *OutputSchemaPropertyItemsItemsObservation `json:"items,omitempty" tf:"items,omitempty"`
 
-	// Set of property definitions for object types. Can only be used when type is object. See property below.
+	// Set of property definitions for object types. Can only be used when type is object. See property Block below.
 	Property []PropertyItemsPropertyObservation `json:"property,omitempty" tf:"property,omitempty"`
 
 	// Data type of the schema. Valid values: string, number, integer, boolean, array, object.
@@ -1641,11 +1989,11 @@ type OutputSchemaPropertyItemsParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Items definition for array properties. See items above.
+	// Items definition for array properties. See items Block above.
 	// +kubebuilder:validation:Optional
 	Items *OutputSchemaPropertyItemsItemsParameters `json:"items,omitempty" tf:"items,omitempty"`
 
-	// Set of property definitions for object types. Can only be used when type is object. See property below.
+	// Set of property definitions for object types. Can only be used when type is object. See property Block below.
 	// +kubebuilder:validation:Optional
 	Property []PropertyItemsPropertyParameters `json:"property,omitempty" tf:"property,omitempty"`
 
@@ -1659,13 +2007,13 @@ type OutputSchemaPropertyObservation struct {
 	// Description of the tool. Provides information about the purpose and usage of the tool. If not provided, uses the description from the API's OpenAPI specification.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Items definition for array properties. See items above.
+	// Items definition for array properties. See items Block above.
 	Items *OutputSchemaPropertyItemsObservation `json:"items,omitempty" tf:"items,omitempty"`
 
 	// Name of tool. Identifies the tool in the Model Context Protocol.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Set of property definitions for object types. Can only be used when type is object. See property below.
+	// Set of property definitions for object types. Can only be used when type is object. See property Block below.
 	Property []OutputSchemaPropertyPropertyObservation `json:"property,omitempty" tf:"property,omitempty"`
 
 	// Whether this property is required. Defaults to false.
@@ -1681,7 +2029,7 @@ type OutputSchemaPropertyParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Items definition for array properties. See items above.
+	// Items definition for array properties. See items Block above.
 	// +kubebuilder:validation:Optional
 	Items *OutputSchemaPropertyItemsParameters `json:"items,omitempty" tf:"items,omitempty"`
 
@@ -1689,7 +2037,7 @@ type OutputSchemaPropertyParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// Set of property definitions for object types. Can only be used when type is object. See property below.
+	// Set of property definitions for object types. Can only be used when type is object. See property Block below.
 	// +kubebuilder:validation:Optional
 	Property []OutputSchemaPropertyPropertyParameters `json:"property,omitempty" tf:"property,omitempty"`
 
@@ -1771,6 +2119,136 @@ type OutputSchemaPropertyPropertyParameters struct {
 	Type *string `json:"type" tf:"type,omitempty"`
 }
 
+type ParameterOverrideInitParameters struct {
+
+	// Description of the tool. Provides information about the purpose and usage of the tool. If not provided, uses the description from the API's OpenAPI specification.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Resource path in the REST API (e.g., /pets). Must explicitly match an existing path in the REST API.
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
+	// Whether this parameter is visible to the agent. If not specified, uses the service default.
+	Visible *bool `json:"visible,omitempty" tf:"visible,omitempty"`
+}
+
+type ParameterOverrideObservation struct {
+
+	// Description of the tool. Provides information about the purpose and usage of the tool. If not provided, uses the description from the API's OpenAPI specification.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Resource path in the REST API (e.g., /pets). Must explicitly match an existing path in the REST API.
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
+	// Whether this parameter is visible to the agent. If not specified, uses the service default.
+	Visible *bool `json:"visible,omitempty" tf:"visible,omitempty"`
+}
+
+type ParameterOverrideParameters struct {
+
+	// Description of the tool. Provides information about the purpose and usage of the tool. If not provided, uses the description from the API's OpenAPI specification.
+	// +kubebuilder:validation:Optional
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Resource path in the REST API (e.g., /pets). Must explicitly match an existing path in the REST API.
+	// +kubebuilder:validation:Optional
+	Path *string `json:"path" tf:"path,omitempty"`
+
+	// Whether this parameter is visible to the agent. If not specified, uses the service default.
+	// +kubebuilder:validation:Optional
+	Visible *bool `json:"visible,omitempty" tf:"visible,omitempty"`
+}
+
+type PassthroughInitParameters struct {
+
+	// HTTPS endpoint of the inference provider that the gateway forwards requests to.
+	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
+
+	// Application protocol the passthrough target implements. Valid values: MCP, A2A, INFERENCE, CUSTOM.
+	ProtocolType *string `json:"protocolType,omitempty" tf:"protocol_type,omitempty"`
+
+	// API schema configuration that defines the structure of the runtime target's API. See schema Block below.
+	Schema *PassthroughSchemaInitParameters `json:"schema,omitempty" tf:"schema,omitempty"`
+
+	// Controls precedence when a client request supplies a query parameter whose name matches a configured static query parameter. Valid values: CLIENT_OVERRIDE, STATIC_OVERRIDE.
+	StaticQueryParameterConflictResolution *string `json:"staticQueryParameterConflictResolution,omitempty" tf:"static_query_parameter_conflict_resolution,omitempty"`
+
+	// Map of static query parameters that the gateway always appends to the outbound URL when forwarding requests to the target.
+	// +mapType=granular
+	StaticQueryParameters map[string]*string `json:"staticQueryParameters,omitempty" tf:"static_query_parameters,omitempty"`
+
+	// Session stickiness configuration routing requests within the same session to the same target. See stickiness_configuration below.
+	StickinessConfiguration *StickinessConfigurationInitParameters `json:"stickinessConfiguration,omitempty" tf:"stickiness_configuration,omitempty"`
+}
+
+type PassthroughObservation struct {
+
+	// HTTPS endpoint of the inference provider that the gateway forwards requests to.
+	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
+
+	// Application protocol the passthrough target implements. Valid values: MCP, A2A, INFERENCE, CUSTOM.
+	ProtocolType *string `json:"protocolType,omitempty" tf:"protocol_type,omitempty"`
+
+	// API schema configuration that defines the structure of the runtime target's API. See schema Block below.
+	Schema *PassthroughSchemaObservation `json:"schema,omitempty" tf:"schema,omitempty"`
+
+	// Controls precedence when a client request supplies a query parameter whose name matches a configured static query parameter. Valid values: CLIENT_OVERRIDE, STATIC_OVERRIDE.
+	StaticQueryParameterConflictResolution *string `json:"staticQueryParameterConflictResolution,omitempty" tf:"static_query_parameter_conflict_resolution,omitempty"`
+
+	// Map of static query parameters that the gateway always appends to the outbound URL when forwarding requests to the target.
+	// +mapType=granular
+	StaticQueryParameters map[string]*string `json:"staticQueryParameters,omitempty" tf:"static_query_parameters,omitempty"`
+
+	// Session stickiness configuration routing requests within the same session to the same target. See stickiness_configuration below.
+	StickinessConfiguration *StickinessConfigurationObservation `json:"stickinessConfiguration,omitempty" tf:"stickiness_configuration,omitempty"`
+}
+
+type PassthroughParameters struct {
+
+	// HTTPS endpoint of the inference provider that the gateway forwards requests to.
+	// +kubebuilder:validation:Optional
+	Endpoint *string `json:"endpoint" tf:"endpoint,omitempty"`
+
+	// Application protocol the passthrough target implements. Valid values: MCP, A2A, INFERENCE, CUSTOM.
+	// +kubebuilder:validation:Optional
+	ProtocolType *string `json:"protocolType" tf:"protocol_type,omitempty"`
+
+	// API schema configuration that defines the structure of the runtime target's API. See schema Block below.
+	// +kubebuilder:validation:Optional
+	Schema *PassthroughSchemaParameters `json:"schema,omitempty" tf:"schema,omitempty"`
+
+	// Controls precedence when a client request supplies a query parameter whose name matches a configured static query parameter. Valid values: CLIENT_OVERRIDE, STATIC_OVERRIDE.
+	// +kubebuilder:validation:Optional
+	StaticQueryParameterConflictResolution *string `json:"staticQueryParameterConflictResolution,omitempty" tf:"static_query_parameter_conflict_resolution,omitempty"`
+
+	// Map of static query parameters that the gateway always appends to the outbound URL when forwarding requests to the target.
+	// +kubebuilder:validation:Optional
+	// +mapType=granular
+	StaticQueryParameters map[string]*string `json:"staticQueryParameters,omitempty" tf:"static_query_parameters,omitempty"`
+
+	// Session stickiness configuration routing requests within the same session to the same target. See stickiness_configuration below.
+	// +kubebuilder:validation:Optional
+	StickinessConfiguration *StickinessConfigurationParameters `json:"stickinessConfiguration,omitempty" tf:"stickiness_configuration,omitempty"`
+}
+
+type PassthroughSchemaInitParameters struct {
+
+	// Configuration for API schema. See api_schema_configuration Block below.
+	Source *SchemaSourceInitParameters `json:"source,omitempty" tf:"source,omitempty"`
+}
+
+type PassthroughSchemaObservation struct {
+
+	// Configuration for API schema. See api_schema_configuration Block below.
+	Source *SchemaSourceObservation `json:"source,omitempty" tf:"source,omitempty"`
+}
+
+type PassthroughSchemaParameters struct {
+
+	// Configuration for API schema. See api_schema_configuration Block below.
+	// +kubebuilder:validation:Optional
+	Source *SchemaSourceParameters `json:"source,omitempty" tf:"source,omitempty"`
+}
+
 type PropertyInitParameters struct {
 
 	// Description of the tool. Provides information about the purpose and usage of the tool. If not provided, uses the description from the API's OpenAPI specification.
@@ -1797,10 +2275,10 @@ type PropertyItemsInitParameters struct {
 	// Description of the tool. Provides information about the purpose and usage of the tool. If not provided, uses the description from the API's OpenAPI specification.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Items definition for array properties. See items above.
+	// Items definition for array properties. See items Block above.
 	Items *PropertyItemsItemsInitParameters `json:"items,omitempty" tf:"items,omitempty"`
 
-	// Set of property definitions for object types. Can only be used when type is object. See property below.
+	// Set of property definitions for object types. Can only be used when type is object. See property Block below.
 	Property []ItemsPropertyInitParameters `json:"property,omitempty" tf:"property,omitempty"`
 
 	// Data type of the schema. Valid values: string, number, integer, boolean, array, object.
@@ -1861,10 +2339,10 @@ type PropertyItemsObservation struct {
 	// Description of the tool. Provides information about the purpose and usage of the tool. If not provided, uses the description from the API's OpenAPI specification.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Items definition for array properties. See items above.
+	// Items definition for array properties. See items Block above.
 	Items *PropertyItemsItemsObservation `json:"items,omitempty" tf:"items,omitempty"`
 
-	// Set of property definitions for object types. Can only be used when type is object. See property below.
+	// Set of property definitions for object types. Can only be used when type is object. See property Block below.
 	Property []ItemsPropertyObservation `json:"property,omitempty" tf:"property,omitempty"`
 
 	// Data type of the schema. Valid values: string, number, integer, boolean, array, object.
@@ -1877,11 +2355,11 @@ type PropertyItemsParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Items definition for array properties. See items above.
+	// Items definition for array properties. See items Block above.
 	// +kubebuilder:validation:Optional
 	Items *PropertyItemsItemsParameters `json:"items,omitempty" tf:"items,omitempty"`
 
-	// Set of property definitions for object types. Can only be used when type is object. See property below.
+	// Set of property definitions for object types. Can only be used when type is object. See property Block below.
 	// +kubebuilder:validation:Optional
 	Property []ItemsPropertyParameters `json:"property,omitempty" tf:"property,omitempty"`
 
@@ -2076,50 +2554,195 @@ type PropertyPropertyParameters struct {
 	Type *string `json:"type" tf:"type,omitempty"`
 }
 
+type ProviderInitParameters struct {
+
+	// HTTPS endpoint of the inference provider that the gateway forwards requests to.
+	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
+
+	// Configuration that translates client-facing model IDs to the model IDs expected by the provider. See model_mapping Block below.
+	ModelMapping *ModelMappingInitParameters `json:"modelMapping,omitempty" tf:"model_mapping,omitempty"`
+
+	// List of per-operation configurations that map request paths to the models supported for each operation. See operation below.
+	Operation []OperationInitParameters `json:"operation,omitempty" tf:"operation,omitempty"`
+}
+
+type ProviderObservation struct {
+
+	// HTTPS endpoint of the inference provider that the gateway forwards requests to.
+	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
+
+	// Configuration that translates client-facing model IDs to the model IDs expected by the provider. See model_mapping Block below.
+	ModelMapping *ModelMappingObservation `json:"modelMapping,omitempty" tf:"model_mapping,omitempty"`
+
+	// List of per-operation configurations that map request paths to the models supported for each operation. See operation below.
+	Operation []OperationObservation `json:"operation,omitempty" tf:"operation,omitempty"`
+}
+
+type ProviderParameters struct {
+
+	// HTTPS endpoint of the inference provider that the gateway forwards requests to.
+	// +kubebuilder:validation:Optional
+	Endpoint *string `json:"endpoint" tf:"endpoint,omitempty"`
+
+	// Configuration that translates client-facing model IDs to the model IDs expected by the provider. See model_mapping Block below.
+	// +kubebuilder:validation:Optional
+	ModelMapping *ModelMappingParameters `json:"modelMapping,omitempty" tf:"model_mapping,omitempty"`
+
+	// List of per-operation configurations that map request paths to the models supported for each operation. See operation below.
+	// +kubebuilder:validation:Optional
+	Operation []OperationParameters `json:"operation,omitempty" tf:"operation,omitempty"`
+}
+
+type ProviderPrefixInitParameters struct {
+
+	// Single character that separates the provider prefix from the model name (for example, .). Defaults to ..
+	Separator *string `json:"separator,omitempty" tf:"separator,omitempty"`
+
+	// Whether clients can omit the provider prefix from model IDs. If true, the gateway accepts model IDs without the prefix and restores the full prefixed form before forwarding to the provider. Defaults to false.
+	Strip *bool `json:"strip,omitempty" tf:"strip,omitempty"`
+}
+
+type ProviderPrefixObservation struct {
+
+	// Single character that separates the provider prefix from the model name (for example, .). Defaults to ..
+	Separator *string `json:"separator,omitempty" tf:"separator,omitempty"`
+
+	// Whether clients can omit the provider prefix from model IDs. If true, the gateway accepts model IDs without the prefix and restores the full prefixed form before forwarding to the provider. Defaults to false.
+	Strip *bool `json:"strip,omitempty" tf:"strip,omitempty"`
+}
+
+type ProviderPrefixParameters struct {
+
+	// Single character that separates the provider prefix from the model name (for example, .). Defaults to ..
+	// +kubebuilder:validation:Optional
+	Separator *string `json:"separator,omitempty" tf:"separator,omitempty"`
+
+	// Whether clients can omit the provider prefix from model IDs. If true, the gateway accepts model IDs without the prefix and restores the full prefixed form before forwarding to the provider. Defaults to false.
+	// +kubebuilder:validation:Optional
+	Strip *bool `json:"strip,omitempty" tf:"strip,omitempty"`
+}
+
+type SchemaInitParameters struct {
+
+	// Configuration for API schema. See api_schema_configuration Block below.
+	Source *SourceInitParameters `json:"source,omitempty" tf:"source,omitempty"`
+}
+
+type SchemaObservation struct {
+
+	// Configuration for API schema. See api_schema_configuration Block below.
+	Source *SourceObservation `json:"source,omitempty" tf:"source,omitempty"`
+}
+
+type SchemaParameters struct {
+
+	// Configuration for API schema. See api_schema_configuration Block below.
+	// +kubebuilder:validation:Optional
+	Source *SourceParameters `json:"source,omitempty" tf:"source,omitempty"`
+}
+
+type SchemaSourceInitParameters struct {
+
+	// Inline tool schema payload. The inline_payload block requires a payload (string) containing the MCP tool schema definition.
+	InlinePayload *SourceInlinePayloadInitParameters `json:"inlinePayload,omitempty" tf:"inline_payload,omitempty"`
+
+	// S3 location of the tool schema. See s3 Block below.
+	S3 *SchemaSourceS3InitParameters `json:"s3,omitempty" tf:"s3,omitempty"`
+}
+
+type SchemaSourceObservation struct {
+
+	// Inline tool schema payload. The inline_payload block requires a payload (string) containing the MCP tool schema definition.
+	InlinePayload *SourceInlinePayloadObservation `json:"inlinePayload,omitempty" tf:"inline_payload,omitempty"`
+
+	// S3 location of the tool schema. See s3 Block below.
+	S3 *SchemaSourceS3Observation `json:"s3,omitempty" tf:"s3,omitempty"`
+}
+
+type SchemaSourceParameters struct {
+
+	// Inline tool schema payload. The inline_payload block requires a payload (string) containing the MCP tool schema definition.
+	// +kubebuilder:validation:Optional
+	InlinePayload *SourceInlinePayloadParameters `json:"inlinePayload,omitempty" tf:"inline_payload,omitempty"`
+
+	// S3 location of the tool schema. See s3 Block below.
+	// +kubebuilder:validation:Optional
+	S3 *SchemaSourceS3Parameters `json:"s3,omitempty" tf:"s3,omitempty"`
+}
+
+type SchemaSourceS3InitParameters struct {
+
+	// Account ID of the S3 bucket owner.
+	BucketOwnerAccountID *string `json:"bucketOwnerAccountId,omitempty" tf:"bucket_owner_account_id,omitempty"`
+
+	// S3 URI where the tool schema is stored.
+	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
+}
+
+type SchemaSourceS3Observation struct {
+
+	// Account ID of the S3 bucket owner.
+	BucketOwnerAccountID *string `json:"bucketOwnerAccountId,omitempty" tf:"bucket_owner_account_id,omitempty"`
+
+	// S3 URI where the tool schema is stored.
+	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
+}
+
+type SchemaSourceS3Parameters struct {
+
+	// Account ID of the S3 bucket owner.
+	// +kubebuilder:validation:Optional
+	BucketOwnerAccountID *string `json:"bucketOwnerAccountId,omitempty" tf:"bucket_owner_account_id,omitempty"`
+
+	// S3 URI where the tool schema is stored.
+	// +kubebuilder:validation:Optional
+	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
+}
+
 type SmithyModelInitParameters struct {
 
-	// Inline tool definition. See inline_payload below.
+	// Inline tool schema payload. The inline_payload block requires a payload (string) containing the MCP tool schema definition.
 	InlinePayload *SmithyModelInlinePayloadInitParameters `json:"inlinePayload,omitempty" tf:"inline_payload,omitempty"`
 
-	// S3-based tool definition. See s3 below.
+	// S3 location of the tool schema. See s3 Block below.
 	S3 *SmithyModelS3InitParameters `json:"s3,omitempty" tf:"s3,omitempty"`
 }
 
 type SmithyModelInlinePayloadInitParameters struct {
 
-	// The inline schema payload content.
+	// Inline schema payload content.
 	Payload *string `json:"payload,omitempty" tf:"payload,omitempty"`
 }
 
 type SmithyModelInlinePayloadObservation struct {
 
-	// The inline schema payload content.
+	// Inline schema payload content.
 	Payload *string `json:"payload,omitempty" tf:"payload,omitempty"`
 }
 
 type SmithyModelInlinePayloadParameters struct {
 
-	// The inline schema payload content.
+	// Inline schema payload content.
 	// +kubebuilder:validation:Optional
 	Payload *string `json:"payload" tf:"payload,omitempty"`
 }
 
 type SmithyModelObservation struct {
 
-	// Inline tool definition. See inline_payload below.
+	// Inline tool schema payload. The inline_payload block requires a payload (string) containing the MCP tool schema definition.
 	InlinePayload *SmithyModelInlinePayloadObservation `json:"inlinePayload,omitempty" tf:"inline_payload,omitempty"`
 
-	// S3-based tool definition. See s3 below.
+	// S3 location of the tool schema. See s3 Block below.
 	S3 *SmithyModelS3Observation `json:"s3,omitempty" tf:"s3,omitempty"`
 }
 
 type SmithyModelParameters struct {
 
-	// Inline tool definition. See inline_payload below.
+	// Inline tool schema payload. The inline_payload block requires a payload (string) containing the MCP tool schema definition.
 	// +kubebuilder:validation:Optional
 	InlinePayload *SmithyModelInlinePayloadParameters `json:"inlinePayload,omitempty" tf:"inline_payload,omitempty"`
 
-	// S3-based tool definition. See s3 below.
+	// S3 location of the tool schema. See s3 Block below.
 	// +kubebuilder:validation:Optional
 	S3 *SmithyModelS3Parameters `json:"s3,omitempty" tf:"s3,omitempty"`
 }
@@ -2153,90 +2776,229 @@ type SmithyModelS3Parameters struct {
 	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
 }
 
+type SourceInitParameters struct {
+
+	// Inline tool schema payload. The inline_payload block requires a payload (string) containing the MCP tool schema definition.
+	InlinePayload *InlinePayloadInitParameters `json:"inlinePayload,omitempty" tf:"inline_payload,omitempty"`
+
+	// S3 location of the tool schema. See s3 Block below.
+	S3 *SourceS3InitParameters `json:"s3,omitempty" tf:"s3,omitempty"`
+}
+
+type SourceInlinePayloadInitParameters struct {
+
+	// Inline schema payload content.
+	Payload *string `json:"payload,omitempty" tf:"payload,omitempty"`
+}
+
+type SourceInlinePayloadObservation struct {
+
+	// Inline schema payload content.
+	Payload *string `json:"payload,omitempty" tf:"payload,omitempty"`
+}
+
+type SourceInlinePayloadParameters struct {
+
+	// Inline schema payload content.
+	// +kubebuilder:validation:Optional
+	Payload *string `json:"payload" tf:"payload,omitempty"`
+}
+
+type SourceObservation struct {
+
+	// Inline tool schema payload. The inline_payload block requires a payload (string) containing the MCP tool schema definition.
+	InlinePayload *InlinePayloadObservation `json:"inlinePayload,omitempty" tf:"inline_payload,omitempty"`
+
+	// S3 location of the tool schema. See s3 Block below.
+	S3 *SourceS3Observation `json:"s3,omitempty" tf:"s3,omitempty"`
+}
+
+type SourceParameters struct {
+
+	// Inline tool schema payload. The inline_payload block requires a payload (string) containing the MCP tool schema definition.
+	// +kubebuilder:validation:Optional
+	InlinePayload *InlinePayloadParameters `json:"inlinePayload,omitempty" tf:"inline_payload,omitempty"`
+
+	// S3 location of the tool schema. See s3 Block below.
+	// +kubebuilder:validation:Optional
+	S3 *SourceS3Parameters `json:"s3,omitempty" tf:"s3,omitempty"`
+}
+
+type SourceS3InitParameters struct {
+
+	// Account ID of the S3 bucket owner.
+	BucketOwnerAccountID *string `json:"bucketOwnerAccountId,omitempty" tf:"bucket_owner_account_id,omitempty"`
+
+	// S3 URI where the tool schema is stored.
+	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
+}
+
+type SourceS3Observation struct {
+
+	// Account ID of the S3 bucket owner.
+	BucketOwnerAccountID *string `json:"bucketOwnerAccountId,omitempty" tf:"bucket_owner_account_id,omitempty"`
+
+	// S3 URI where the tool schema is stored.
+	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
+}
+
+type SourceS3Parameters struct {
+
+	// Account ID of the S3 bucket owner.
+	// +kubebuilder:validation:Optional
+	BucketOwnerAccountID *string `json:"bucketOwnerAccountId,omitempty" tf:"bucket_owner_account_id,omitempty"`
+
+	// S3 URI where the tool schema is stored.
+	// +kubebuilder:validation:Optional
+	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
+}
+
+type StickinessConfigurationInitParameters struct {
+
+	// Additional headers to include in session affinity routing.
+	// +listType=set
+	CompositeIdentifier []*string `json:"compositeIdentifier,omitempty" tf:"composite_identifier,omitempty"`
+
+	// Expression identifying where to extract the session identifier from the request (for example, $context.header.x-session-id).
+	Identifier *string `json:"identifier,omitempty" tf:"identifier,omitempty"`
+
+	// Session stickiness timeout, in seconds. Valid values range from 1 to 86400.
+	Timeout *float64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
+}
+
+type StickinessConfigurationObservation struct {
+
+	// Additional headers to include in session affinity routing.
+	// +listType=set
+	CompositeIdentifier []*string `json:"compositeIdentifier,omitempty" tf:"composite_identifier,omitempty"`
+
+	// Expression identifying where to extract the session identifier from the request (for example, $context.header.x-session-id).
+	Identifier *string `json:"identifier,omitempty" tf:"identifier,omitempty"`
+
+	// Session stickiness timeout, in seconds. Valid values range from 1 to 86400.
+	Timeout *float64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
+}
+
+type StickinessConfigurationParameters struct {
+
+	// Additional headers to include in session affinity routing.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	CompositeIdentifier []*string `json:"compositeIdentifier,omitempty" tf:"composite_identifier,omitempty"`
+
+	// Expression identifying where to extract the session identifier from the request (for example, $context.header.x-session-id).
+	// +kubebuilder:validation:Optional
+	Identifier *string `json:"identifier" tf:"identifier,omitempty"`
+
+	// Session stickiness timeout, in seconds. Valid values range from 1 to 86400.
+	// +kubebuilder:validation:Optional
+	Timeout *float64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
+}
+
 type TargetConfigurationInitParameters struct {
 
-	// HTTP target configuration for routing requests directly to an AgentCore Runtime agent. See http below.
+	// HTTP target configuration for routing requests directly to an AgentCore Runtime agent. See http Block below.
 	HTTP *HTTPInitParameters `json:"http,omitempty" tf:"http,omitempty"`
 
-	// Model Context Protocol (MCP) configuration. See mcp below.
+	// Inference target configuration for routing requests to a large language model (LLM) provider, either through a built-in connector or an explicitly configured provider. See inference Block below.
+	Inference *InferenceInitParameters `json:"inference,omitempty" tf:"inference,omitempty"`
+
+	// Model Context Protocol (MCP) configuration. See mcp Block below.
 	Mcp *TargetConfigurationMcpInitParameters `json:"mcp,omitempty" tf:"mcp,omitempty"`
 }
 
 type TargetConfigurationMcpInitParameters struct {
 
-	// API Gateway target configuration. See api_gateway below.
+	// API Gateway target configuration. See api_gateway Block below.
 	APIGateway *APIGatewayInitParameters `json:"apiGateway,omitempty" tf:"api_gateway,omitempty"`
 
-	// Lambda function target configuration. See lambda below.
+	// Connector integration target configuration. Connectors provide pre-built integrations with AWS services and third-party tools. See connector Block below.
+	Connector *McpConnectorInitParameters `json:"connector,omitempty" tf:"connector,omitempty"`
+
+	// Lambda function target configuration. See lambda Block below.
 	Lambda *McpLambdaInitParameters `json:"lambda,omitempty" tf:"lambda,omitempty"`
 
-	// MCP server target configuration. See mcp_server below.
+	// MCP server target configuration. See mcp_server Block below.
 	McpServer *McpServerInitParameters `json:"mcpServer,omitempty" tf:"mcp_server,omitempty"`
 
-	// OpenAPI schema-based target configuration. See api_schema_configuration below.
+	// OpenAPI schema-based target configuration. See api_schema_configuration Block below.
 	OpenAPISchema *OpenAPISchemaInitParameters `json:"openApiSchema,omitempty" tf:"open_api_schema,omitempty"`
 
-	// Smithy model-based target configuration. See api_schema_configuration below.
+	// Smithy model-based target configuration. See api_schema_configuration Block below.
 	SmithyModel *SmithyModelInitParameters `json:"smithyModel,omitempty" tf:"smithy_model,omitempty"`
 }
 
 type TargetConfigurationMcpObservation struct {
 
-	// API Gateway target configuration. See api_gateway below.
+	// API Gateway target configuration. See api_gateway Block below.
 	APIGateway *APIGatewayObservation `json:"apiGateway,omitempty" tf:"api_gateway,omitempty"`
 
-	// Lambda function target configuration. See lambda below.
+	// Connector integration target configuration. Connectors provide pre-built integrations with AWS services and third-party tools. See connector Block below.
+	Connector *McpConnectorObservation `json:"connector,omitempty" tf:"connector,omitempty"`
+
+	// Lambda function target configuration. See lambda Block below.
 	Lambda *McpLambdaObservation `json:"lambda,omitempty" tf:"lambda,omitempty"`
 
-	// MCP server target configuration. See mcp_server below.
+	// MCP server target configuration. See mcp_server Block below.
 	McpServer *McpServerObservation `json:"mcpServer,omitempty" tf:"mcp_server,omitempty"`
 
-	// OpenAPI schema-based target configuration. See api_schema_configuration below.
+	// OpenAPI schema-based target configuration. See api_schema_configuration Block below.
 	OpenAPISchema *OpenAPISchemaObservation `json:"openApiSchema,omitempty" tf:"open_api_schema,omitempty"`
 
-	// Smithy model-based target configuration. See api_schema_configuration below.
+	// Smithy model-based target configuration. See api_schema_configuration Block below.
 	SmithyModel *SmithyModelObservation `json:"smithyModel,omitempty" tf:"smithy_model,omitempty"`
 }
 
 type TargetConfigurationMcpParameters struct {
 
-	// API Gateway target configuration. See api_gateway below.
+	// API Gateway target configuration. See api_gateway Block below.
 	// +kubebuilder:validation:Optional
 	APIGateway *APIGatewayParameters `json:"apiGateway,omitempty" tf:"api_gateway,omitempty"`
 
-	// Lambda function target configuration. See lambda below.
+	// Connector integration target configuration. Connectors provide pre-built integrations with AWS services and third-party tools. See connector Block below.
+	// +kubebuilder:validation:Optional
+	Connector *McpConnectorParameters `json:"connector,omitempty" tf:"connector,omitempty"`
+
+	// Lambda function target configuration. See lambda Block below.
 	// +kubebuilder:validation:Optional
 	Lambda *McpLambdaParameters `json:"lambda,omitempty" tf:"lambda,omitempty"`
 
-	// MCP server target configuration. See mcp_server below.
+	// MCP server target configuration. See mcp_server Block below.
 	// +kubebuilder:validation:Optional
 	McpServer *McpServerParameters `json:"mcpServer,omitempty" tf:"mcp_server,omitempty"`
 
-	// OpenAPI schema-based target configuration. See api_schema_configuration below.
+	// OpenAPI schema-based target configuration. See api_schema_configuration Block below.
 	// +kubebuilder:validation:Optional
 	OpenAPISchema *OpenAPISchemaParameters `json:"openApiSchema,omitempty" tf:"open_api_schema,omitempty"`
 
-	// Smithy model-based target configuration. See api_schema_configuration below.
+	// Smithy model-based target configuration. See api_schema_configuration Block below.
 	// +kubebuilder:validation:Optional
 	SmithyModel *SmithyModelParameters `json:"smithyModel,omitempty" tf:"smithy_model,omitempty"`
 }
 
 type TargetConfigurationObservation struct {
 
-	// HTTP target configuration for routing requests directly to an AgentCore Runtime agent. See http below.
+	// HTTP target configuration for routing requests directly to an AgentCore Runtime agent. See http Block below.
 	HTTP *HTTPObservation `json:"http,omitempty" tf:"http,omitempty"`
 
-	// Model Context Protocol (MCP) configuration. See mcp below.
+	// Inference target configuration for routing requests to a large language model (LLM) provider, either through a built-in connector or an explicitly configured provider. See inference Block below.
+	Inference *InferenceObservation `json:"inference,omitempty" tf:"inference,omitempty"`
+
+	// Model Context Protocol (MCP) configuration. See mcp Block below.
 	Mcp *TargetConfigurationMcpObservation `json:"mcp,omitempty" tf:"mcp,omitempty"`
 }
 
 type TargetConfigurationParameters struct {
 
-	// HTTP target configuration for routing requests directly to an AgentCore Runtime agent. See http below.
+	// HTTP target configuration for routing requests directly to an AgentCore Runtime agent. See http Block below.
 	// +kubebuilder:validation:Optional
 	HTTP *HTTPParameters `json:"http,omitempty" tf:"http,omitempty"`
 
-	// Model Context Protocol (MCP) configuration. See mcp below.
+	// Inference target configuration for routing requests to a large language model (LLM) provider, either through a built-in connector or an explicitly configured provider. See inference Block below.
+	// +kubebuilder:validation:Optional
+	Inference *InferenceParameters `json:"inference,omitempty" tf:"inference,omitempty"`
+
+	// Model Context Protocol (MCP) configuration. See mcp Block below.
 	// +kubebuilder:validation:Optional
 	Mcp *TargetConfigurationMcpParameters `json:"mcp,omitempty" tf:"mcp,omitempty"`
 }
@@ -2324,29 +3086,78 @@ type ToolOverrideParameters struct {
 
 type ToolSchemaInitParameters struct {
 
-	// Inline tool definition. See inline_payload below.
-	InlinePayload []InlinePayloadInitParameters `json:"inlinePayload,omitempty" tf:"inline_payload,omitempty"`
+	// Inline tool schema payload. The inline_payload block requires a payload (string) containing the MCP tool schema definition.
+	InlinePayload []ToolSchemaInlinePayloadInitParameters `json:"inlinePayload,omitempty" tf:"inline_payload,omitempty"`
 
-	// S3-based tool definition. See s3 below.
+	// S3 location of the tool schema. See s3 Block below.
 	S3 *ToolSchemaS3InitParameters `json:"s3,omitempty" tf:"s3,omitempty"`
+}
+
+type ToolSchemaInlinePayloadInitParameters struct {
+
+	// Description of the tool. Provides information about the purpose and usage of the tool. If not provided, uses the description from the API's OpenAPI specification.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Schema for the tool's input. See schema_definition Block below.
+	InputSchema *InputSchemaInitParameters `json:"inputSchema,omitempty" tf:"input_schema,omitempty"`
+
+	// Name of tool. Identifies the tool in the Model Context Protocol.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Schema for the tool's output. See schema_definition Block below.
+	OutputSchema *OutputSchemaInitParameters `json:"outputSchema,omitempty" tf:"output_schema,omitempty"`
+}
+
+type ToolSchemaInlinePayloadObservation struct {
+
+	// Description of the tool. Provides information about the purpose and usage of the tool. If not provided, uses the description from the API's OpenAPI specification.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Schema for the tool's input. See schema_definition Block below.
+	InputSchema *InputSchemaObservation `json:"inputSchema,omitempty" tf:"input_schema,omitempty"`
+
+	// Name of tool. Identifies the tool in the Model Context Protocol.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Schema for the tool's output. See schema_definition Block below.
+	OutputSchema *OutputSchemaObservation `json:"outputSchema,omitempty" tf:"output_schema,omitempty"`
+}
+
+type ToolSchemaInlinePayloadParameters struct {
+
+	// Description of the tool. Provides information about the purpose and usage of the tool. If not provided, uses the description from the API's OpenAPI specification.
+	// +kubebuilder:validation:Optional
+	Description *string `json:"description" tf:"description,omitempty"`
+
+	// Schema for the tool's input. See schema_definition Block below.
+	// +kubebuilder:validation:Optional
+	InputSchema *InputSchemaParameters `json:"inputSchema,omitempty" tf:"input_schema,omitempty"`
+
+	// Name of tool. Identifies the tool in the Model Context Protocol.
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name" tf:"name,omitempty"`
+
+	// Schema for the tool's output. See schema_definition Block below.
+	// +kubebuilder:validation:Optional
+	OutputSchema *OutputSchemaParameters `json:"outputSchema,omitempty" tf:"output_schema,omitempty"`
 }
 
 type ToolSchemaObservation struct {
 
-	// Inline tool definition. See inline_payload below.
-	InlinePayload []InlinePayloadObservation `json:"inlinePayload,omitempty" tf:"inline_payload,omitempty"`
+	// Inline tool schema payload. The inline_payload block requires a payload (string) containing the MCP tool schema definition.
+	InlinePayload []ToolSchemaInlinePayloadObservation `json:"inlinePayload,omitempty" tf:"inline_payload,omitempty"`
 
-	// S3-based tool definition. See s3 below.
+	// S3 location of the tool schema. See s3 Block below.
 	S3 *ToolSchemaS3Observation `json:"s3,omitempty" tf:"s3,omitempty"`
 }
 
 type ToolSchemaParameters struct {
 
-	// Inline tool definition. See inline_payload below.
+	// Inline tool schema payload. The inline_payload block requires a payload (string) containing the MCP tool schema definition.
 	// +kubebuilder:validation:Optional
-	InlinePayload []InlinePayloadParameters `json:"inlinePayload,omitempty" tf:"inline_payload,omitempty"`
+	InlinePayload []ToolSchemaInlinePayloadParameters `json:"inlinePayload,omitempty" tf:"inline_payload,omitempty"`
 
-	// S3-based tool definition. See s3 below.
+	// S3 location of the tool schema. See s3 Block below.
 	// +kubebuilder:validation:Optional
 	S3 *ToolSchemaS3Parameters `json:"s3,omitempty" tf:"s3,omitempty"`
 }

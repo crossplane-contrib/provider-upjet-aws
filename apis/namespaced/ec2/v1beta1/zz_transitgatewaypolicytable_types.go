@@ -35,7 +35,7 @@ type TransitGatewayPolicyTableInitParameters struct {
 
 type TransitGatewayPolicyTableObservation struct {
 
-	// EC2 Transit Gateway Policy Table Amazon Resource Name (ARN).
+	// EC2 Transit Gateway Policy Table ARN.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// EC2 Transit Gateway Policy Table identifier.

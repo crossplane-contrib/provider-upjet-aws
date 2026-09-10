@@ -105,6 +105,30 @@ spec:
                     description: Strategy to use when updating the auth_token. Valid
                       values are SET, ROTATE, and DELETE. Defaults to ROTATE.
                     type: string
+                  authTokenWoSecretRef:
+                    description: Password used to access a password protected server,
+                      whose value will not be stored in state. Can be specified only
+                      if transit_encryption_enabled = true. Conflicts with auth_token.
+                      Requires auth_token_wo_version.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
+                  authTokenWoVersion:
+                    description: Integer that, when changed, triggers a re-send of
+                      auth_token_wo to the replication group. Requires auth_token_wo.
+                    type: number
                   autoGenerateAuthToken:
                     description: |-
                       Password used to access a password protected server. Can be specified only if transit_encryption_enabled = true.
@@ -774,6 +798,30 @@ spec:
                     description: Strategy to use when updating the auth_token. Valid
                       values are SET, ROTATE, and DELETE. Defaults to ROTATE.
                     type: string
+                  authTokenWoSecretRef:
+                    description: Password used to access a password protected server,
+                      whose value will not be stored in state. Can be specified only
+                      if transit_encryption_enabled = true. Conflicts with auth_token.
+                      Requires auth_token_wo_version.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
+                  authTokenWoVersion:
+                    description: Integer that, when changed, triggers a re-send of
+                      auth_token_wo to the replication group. Requires auth_token_wo.
+                    type: number
                   autoMinorVersionUpgrade:
                     description: |-
                       Specifies whether minor version engine upgrades will be applied automatically to the underlying Cache Cluster instances during the maintenance window.
@@ -1493,6 +1541,10 @@ spec:
                     description: Strategy to use when updating the auth_token. Valid
                       values are SET, ROTATE, and DELETE. Defaults to ROTATE.
                     type: string
+                  authTokenWoVersion:
+                    description: Integer that, when changed, triggers a re-send of
+                      auth_token_wo to the replication group. Requires auth_token_wo.
+                    type: number
                   autoMinorVersionUpgrade:
                     description: |-
                       Specifies whether minor version engine upgrades will be applied automatically to the underlying Cache Cluster instances during the maintenance window.
@@ -1997,12 +2049,36 @@ spec:
                     - namespace
                     type: object
                   authTokenUpdateStrategy:
-                    description: Strategy used when modifying auth_token on an existing
-                      replication group. Not used during initial create. Valid values
-                      are SET, ROTATE, and DELETE. If omitted during an auth token
-                      change, AWS defaults to ROTATE. If value is DELETE then auth_token
-                      must be omitted.
+                    description: Strategy used when modifying auth_token or auth_token_wo
+                      on an existing replication group. Not used during initial create.
+                      Valid values are SET, ROTATE, and DELETE. If omitted during
+                      an auth token change, AWS defaults to ROTATE. If value is DELETE
+                      then auth_token and auth_token_wo must be omitted.
                     type: string
+                  authTokenWoSecretRef:
+                    description: Password used to access a password protected server,
+                      whose value will not be stored in state. Can be specified only
+                      if transit_encryption_enabled = true. Conflicts with auth_token.
+                      Requires auth_token_wo_version.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
+                  authTokenWoVersion:
+                    description: Integer that, when changed, triggers a re-send of
+                      auth_token_wo to the replication group. Requires auth_token_wo.
+                    type: number
                   autoGenerateAuthToken:
                     description: |-
                       Password used to access a password protected server. Can be specified only if transit_encryption_enabled = true.
@@ -2012,7 +2088,6 @@ spec:
                     description: |-
                       Specifies whether minor version engine upgrades will be applied automatically to the underlying Cache Cluster instances during the maintenance window.
                       Only supported for engine types "redis" and "valkey" and if the engine version is 6 or higher.
-                      Defaults to true.
                     type: string
                   automaticFailoverEnabled:
                     description: Specifies whether a read-only replica will be automatically
@@ -2444,8 +2519,7 @@ spec:
                   securityGroupIds:
                     description: IDs of one or more Amazon VPC security groups associated
                       with this replication group. Use this parameter only when you
-                      are creating a replication group in an Amazon Virtual Private
-                      Cloud.
+                      are creating a replication group in a VPC.
                     items:
                       type: string
                     type: array
@@ -2453,8 +2527,7 @@ spec:
                   securityGroupNames:
                     description: Names of one or more Amazon VPC security groups associated
                       with this replication group. Use this parameter only when you
-                      are creating a replication group in an Amazon Virtual Private
-                      Cloud.
+                      are creating a replication group in a VPC.
                     items:
                       type: string
                     type: array
@@ -2642,17 +2715,40 @@ spec:
                     - namespace
                     type: object
                   authTokenUpdateStrategy:
-                    description: Strategy used when modifying auth_token on an existing
-                      replication group. Not used during initial create. Valid values
-                      are SET, ROTATE, and DELETE. If omitted during an auth token
-                      change, AWS defaults to ROTATE. If value is DELETE then auth_token
-                      must be omitted.
+                    description: Strategy used when modifying auth_token or auth_token_wo
+                      on an existing replication group. Not used during initial create.
+                      Valid values are SET, ROTATE, and DELETE. If omitted during
+                      an auth token change, AWS defaults to ROTATE. If value is DELETE
+                      then auth_token and auth_token_wo must be omitted.
                     type: string
+                  authTokenWoSecretRef:
+                    description: Password used to access a password protected server,
+                      whose value will not be stored in state. Can be specified only
+                      if transit_encryption_enabled = true. Conflicts with auth_token.
+                      Requires auth_token_wo_version.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
+                  authTokenWoVersion:
+                    description: Integer that, when changed, triggers a re-send of
+                      auth_token_wo to the replication group. Requires auth_token_wo.
+                    type: number
                   autoMinorVersionUpgrade:
                     description: |-
                       Specifies whether minor version engine upgrades will be applied automatically to the underlying Cache Cluster instances during the maintenance window.
                       Only supported for engine types "redis" and "valkey" and if the engine version is 6 or higher.
-                      Defaults to true.
                     type: string
                   automaticFailoverEnabled:
                     description: Specifies whether a read-only replica will be automatically
@@ -3079,8 +3175,7 @@ spec:
                   securityGroupIds:
                     description: IDs of one or more Amazon VPC security groups associated
                       with this replication group. Use this parameter only when you
-                      are creating a replication group in an Amazon Virtual Private
-                      Cloud.
+                      are creating a replication group in a VPC.
                     items:
                       type: string
                     type: array
@@ -3088,8 +3183,7 @@ spec:
                   securityGroupNames:
                     description: Names of one or more Amazon VPC security groups associated
                       with this replication group. Use this parameter only when you
-                      are creating a replication group in an Amazon Virtual Private
-                      Cloud.
+                      are creating a replication group in a VPC.
                     items:
                       type: string
                     type: array
@@ -3342,17 +3436,20 @@ spec:
                       When engine is valkey, default is true.
                     type: string
                   authTokenUpdateStrategy:
-                    description: Strategy used when modifying auth_token on an existing
-                      replication group. Not used during initial create. Valid values
-                      are SET, ROTATE, and DELETE. If omitted during an auth token
-                      change, AWS defaults to ROTATE. If value is DELETE then auth_token
-                      must be omitted.
+                    description: Strategy used when modifying auth_token or auth_token_wo
+                      on an existing replication group. Not used during initial create.
+                      Valid values are SET, ROTATE, and DELETE. If omitted during
+                      an auth token change, AWS defaults to ROTATE. If value is DELETE
+                      then auth_token and auth_token_wo must be omitted.
                     type: string
+                  authTokenWoVersion:
+                    description: Integer that, when changed, triggers a re-send of
+                      auth_token_wo to the replication group. Requires auth_token_wo.
+                    type: number
                   autoMinorVersionUpgrade:
                     description: |-
                       Specifies whether minor version engine upgrades will be applied automatically to the underlying Cache Cluster instances during the maintenance window.
                       Only supported for engine types "redis" and "valkey" and if the engine version is 6 or higher.
-                      Defaults to true.
                     type: string
                   automaticFailoverEnabled:
                     description: Specifies whether a read-only replica will be automatically
@@ -3586,8 +3683,7 @@ spec:
                   securityGroupIds:
                     description: IDs of one or more Amazon VPC security groups associated
                       with this replication group. Use this parameter only when you
-                      are creating a replication group in an Amazon Virtual Private
-                      Cloud.
+                      are creating a replication group in a VPC.
                     items:
                       type: string
                     type: array
@@ -3595,8 +3691,7 @@ spec:
                   securityGroupNames:
                     description: Names of one or more Amazon VPC security groups associated
                       with this replication group. Use this parameter only when you
-                      are creating a replication group in an Amazon Virtual Private
-                      Cloud.
+                      are creating a replication group in a VPC.
                     items:
                       type: string
                     type: array

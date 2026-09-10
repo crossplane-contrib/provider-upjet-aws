@@ -59,8 +59,7 @@ spec:
               forProvider:
                 properties:
                   clusterArn:
-                    description: The Amazon Resource Name (ARN) that uniquely identifies
-                      the cluster.
+                    description: ARN that uniquely identifies the cluster.
                     type: string
                   clusterArnRef:
                     description: Reference to a Cluster in kafka to populate clusterArn.
@@ -239,8 +238,7 @@ spec:
               atProvider:
                 properties:
                   clusterArn:
-                    description: The Amazon Resource Name (ARN) that uniquely identifies
-                      the cluster.
+                    description: ARN that uniquely identifies the cluster.
                     type: string
                   currentVersion:
                     type: string

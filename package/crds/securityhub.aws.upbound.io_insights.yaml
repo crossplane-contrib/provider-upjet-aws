@@ -6377,8 +6377,8 @@ spec:
                           type: object
                         type: array
                       resourceAwsEc2InstanceImageId:
-                        description: The Amazon Machine Image (AMI) ID of the instance.
-                          See String Filter below for more details.
+                        description: AMI ID of the instance. See String Filter below
+                          for more details.
                         items:
                           properties:
                             comparison:
@@ -8041,8 +8041,8 @@ spec:
                           type: object
                         type: array
                       resourceAwsEc2InstanceImageId:
-                        description: The Amazon Machine Image (AMI) ID of the instance.
-                          See String Filter below for more details.
+                        description: AMI ID of the instance. See String Filter below
+                          for more details.
                         items:
                           properties:
                             comparison:
@@ -9792,8 +9792,8 @@ spec:
                           type: object
                         type: array
                       resourceAwsEc2InstanceImageId:
-                        description: The Amazon Machine Image (AMI) ID of the instance.
-                          See String Filter below for more details.
+                        description: AMI ID of the instance. See String Filter below
+                          for more details.
                         items:
                           properties:
                             comparison:

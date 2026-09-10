@@ -18,7 +18,7 @@ type StreamConsumerInitParameters struct {
 	// Name of the stream consumer.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Amazon Resource Name (ARN) of the data stream the consumer is registered with.
+	// ARN of the data stream the consumer is registered with.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kinesis/v1beta1.Stream
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.TerraformID()
 	StreamArn *string `json:"streamArn,omitempty" tf:"stream_arn,omitempty"`
@@ -37,13 +37,13 @@ type StreamConsumerInitParameters struct {
 
 type StreamConsumerObservation struct {
 
-	// Amazon Resource Name (ARN) of the stream consumer.
+	// ARN of the stream consumer.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Approximate timestamp in RFC3339 format of when the stream consumer was created.
 	CreationTimestamp *string `json:"creationTimestamp,omitempty" tf:"creation_timestamp,omitempty"`
 
-	// Amazon Resource Name (ARN) of the stream consumer.
+	// ARN of the stream consumer.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Name of the stream consumer.
@@ -53,7 +53,7 @@ type StreamConsumerObservation struct {
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// Amazon Resource Name (ARN) of the data stream the consumer is registered with.
+	// ARN of the data stream the consumer is registered with.
 	StreamArn *string `json:"streamArn,omitempty" tf:"stream_arn,omitempty"`
 
 	// +mapType=granular
@@ -74,7 +74,7 @@ type StreamConsumerParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// Amazon Resource Name (ARN) of the data stream the consumer is registered with.
+	// ARN of the data stream the consumer is registered with.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kinesis/v1beta1.Stream
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.TerraformID()
 	// +kubebuilder:validation:Optional

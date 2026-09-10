@@ -28,7 +28,7 @@ type PhoneNumberInitParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The Amazon Resource Name (ARN) for Amazon Connect instances that phone numbers are claimed to.
+	// ARN for Amazon Connect instances that phone numbers are claimed to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/connect/v1beta1.Instance
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	TargetArn *string `json:"targetArn,omitempty" tf:"target_arn,omitempty"`
@@ -80,7 +80,7 @@ type PhoneNumberObservation struct {
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// The Amazon Resource Name (ARN) for Amazon Connect instances that phone numbers are claimed to.
+	// ARN for Amazon Connect instances that phone numbers are claimed to.
 	TargetArn *string `json:"targetArn,omitempty" tf:"target_arn,omitempty"`
 
 	// The type of phone number. Valid Values: TOLL_FREE | DID.
@@ -111,7 +111,7 @@ type PhoneNumberParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The Amazon Resource Name (ARN) for Amazon Connect instances that phone numbers are claimed to.
+	// ARN for Amazon Connect instances that phone numbers are claimed to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/connect/v1beta1.Instance
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional

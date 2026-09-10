@@ -50,7 +50,7 @@ type SchemaInitParameters struct {
 
 type SchemaObservation struct {
 
-	// Amazon Resource Name (ARN) of the schema.
+	// ARN of the schema.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The compatibility mode of the schema. Values values are: NONE, DISABLED, BACKWARD, BACKWARD_ALL, FORWARD, FORWARD_ALL, FULL, and FULL_ALL.
@@ -62,7 +62,7 @@ type SchemaObservation struct {
 	// A description of the schema.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Amazon Resource Name (ARN) of the schema.
+	// ARN of the schema.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The latest version of the schema associated with the returned schema definition.

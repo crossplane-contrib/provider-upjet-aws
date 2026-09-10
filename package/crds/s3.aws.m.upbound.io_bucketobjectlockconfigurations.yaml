@@ -147,8 +147,8 @@ spec:
                     description: Account ID of the expected bucket owner.
                     type: string
                   objectLockEnabled:
-                    description: 'Indicates whether this bucket has an Object Lock
-                      configuration enabled. Defaults to Enabled. Valid values: Enabled.'
+                    description: 'Whether this bucket has an Object Lock configuration
+                      enabled. Defaults to Enabled. Valid values: Enabled.'
                     type: string
                   region:
                     description: |-
@@ -180,9 +180,11 @@ spec:
                         type: object
                     type: object
                   tokenSecretRef:
-                    description: |-
-                      This argument is deprecated and no longer needed to enable Object Lock.
-                      To enable Object Lock for an existing bucket, you must first enable versioning on the bucket and then enable Object Lock. For more details on versioning, see the aws_s3_bucket_versioning resource.
+                    description: Token to allow Object Lock to be enabled for an existing
+                      bucket. To enable Object Lock for an existing bucket, you must
+                      first enable versioning on the bucket and then enable Object
+                      Lock. For more details on versioning, see the aws_s3_bucket_versioning
+                      resource.
                     properties:
                       key:
                         type: string
@@ -296,8 +298,8 @@ spec:
                     description: Account ID of the expected bucket owner.
                     type: string
                   objectLockEnabled:
-                    description: 'Indicates whether this bucket has an Object Lock
-                      configuration enabled. Defaults to Enabled. Valid values: Enabled.'
+                    description: 'Whether this bucket has an Object Lock configuration
+                      enabled. Defaults to Enabled. Valid values: Enabled.'
                     type: string
                   rule:
                     description: Configuration block for specifying the Object Lock
@@ -324,9 +326,11 @@ spec:
                         type: object
                     type: object
                   tokenSecretRef:
-                    description: |-
-                      This argument is deprecated and no longer needed to enable Object Lock.
-                      To enable Object Lock for an existing bucket, you must first enable versioning on the bucket and then enable Object Lock. For more details on versioning, see the aws_s3_bucket_versioning resource.
+                    description: Token to allow Object Lock to be enabled for an existing
+                      bucket. To enable Object Lock for an existing bucket, you must
+                      first enable versioning on the bucket and then enable Object
+                      Lock. For more details on versioning, see the aws_s3_bucket_versioning
+                      resource.
                     properties:
                       key:
                         type: string
@@ -409,12 +413,12 @@ spec:
                     description: Account ID of the expected bucket owner.
                     type: string
                   id:
-                    description: The bucket or bucket and expected_bucket_owner separated
+                    description: bucket or bucket and expected_bucket_owner separated
                       by a comma (,) if the latter is provided.
                     type: string
                   objectLockEnabled:
-                    description: 'Indicates whether this bucket has an Object Lock
-                      configuration enabled. Defaults to Enabled. Valid values: Enabled.'
+                    description: 'Whether this bucket has an Object Lock configuration
+                      enabled. Defaults to Enabled. Valid values: Enabled.'
                     type: string
                   region:
                     description: |-

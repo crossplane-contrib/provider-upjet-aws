@@ -440,7 +440,7 @@ type CustomJwtAuthorizerPrivateEndpointSelfManagedLatticeResourceParameters stru
 
 	// Identifier of the VPC Lattice resource configuration.
 	// +kubebuilder:validation:Optional
-	ResourceConfigurationIdentifier *string `json:"resourceConfigurationIdentifier" tf:"resource_configuration_identifier,omitempty"`
+	ResourceConfigurationIdentifier *string `json:"resourceConfigurationIdentifier,omitempty" tf:"resource_configuration_identifier,omitempty"`
 }
 
 type GatewayAuthorizerConfigurationInitParameters struct {
@@ -467,7 +467,7 @@ type GatewayInitParameters struct {
 	// Configuration for request authorization. Required when authorizer_type is set to CUSTOM_JWT. See authorizer_configuration below.
 	AuthorizerConfiguration *GatewayAuthorizerConfigurationInitParameters `json:"authorizerConfiguration,omitempty" tf:"authorizer_configuration,omitempty"`
 
-	// Type of authorizer to use. Valid values: CUSTOM_JWT, AWS_IAM. When set to CUSTOM_JWT, authorizer_configuration block is required.
+	// Type of authorizer to use. Valid values: CUSTOM_JWT, AWS_IAM, NONE, AUTHENTICATE_ONLY. When set to CUSTOM_JWT, authorizer_configuration block is required.
 	AuthorizerType *string `json:"authorizerType,omitempty" tf:"authorizer_type,omitempty"`
 
 	// Description of the gateway.
@@ -526,7 +526,7 @@ type GatewayObservation struct {
 	// Configuration for request authorization. Required when authorizer_type is set to CUSTOM_JWT. See authorizer_configuration below.
 	AuthorizerConfiguration *GatewayAuthorizerConfigurationObservation `json:"authorizerConfiguration,omitempty" tf:"authorizer_configuration,omitempty"`
 
-	// Type of authorizer to use. Valid values: CUSTOM_JWT, AWS_IAM. When set to CUSTOM_JWT, authorizer_configuration block is required.
+	// Type of authorizer to use. Valid values: CUSTOM_JWT, AWS_IAM, NONE, AUTHENTICATE_ONLY. When set to CUSTOM_JWT, authorizer_configuration block is required.
 	AuthorizerType *string `json:"authorizerType,omitempty" tf:"authorizer_type,omitempty"`
 
 	// Description of the gateway.
@@ -589,7 +589,7 @@ type GatewayParameters struct {
 	// +kubebuilder:validation:Optional
 	AuthorizerConfiguration *GatewayAuthorizerConfigurationParameters `json:"authorizerConfiguration,omitempty" tf:"authorizer_configuration,omitempty"`
 
-	// Type of authorizer to use. Valid values: CUSTOM_JWT, AWS_IAM. When set to CUSTOM_JWT, authorizer_configuration block is required.
+	// Type of authorizer to use. Valid values: CUSTOM_JWT, AWS_IAM, NONE, AUTHENTICATE_ONLY. When set to CUSTOM_JWT, authorizer_configuration block is required.
 	// +kubebuilder:validation:Optional
 	AuthorizerType *string `json:"authorizerType,omitempty" tf:"authorizer_type,omitempty"`
 
@@ -1014,7 +1014,7 @@ type PrivateEndpointOverridesPrivateEndpointSelfManagedLatticeResourceParameters
 
 	// Identifier of the VPC Lattice resource configuration.
 	// +kubebuilder:validation:Optional
-	ResourceConfigurationIdentifier *string `json:"resourceConfigurationIdentifier" tf:"resource_configuration_identifier,omitempty"`
+	ResourceConfigurationIdentifier *string `json:"resourceConfigurationIdentifier,omitempty" tf:"resource_configuration_identifier,omitempty"`
 }
 
 type SessionConfigurationInitParameters struct {

@@ -182,10 +182,10 @@ spec:
                         type: object
                     type: object
                   keyId:
-                    description: The unique identifier for the customer master key
-                      (CMK) that the grant applies to. Specify the key ID or the Amazon
-                      Resource Name (ARN) of the CMK. To specify a CMK in a different
-                      AWS account, you must use the key ARN.
+                    description: Unique identifier for the customer master key (CMK)
+                      that the grant applies to. Specify the key ID or the ARN of
+                      the CMK. To specify a CMK in a different AWS account, you must
+                      use the key ARN.
                     type: string
                   keyIdRef:
                     description: Reference to a Key in kms to populate keyId.
@@ -432,10 +432,10 @@ spec:
                         type: object
                     type: object
                   keyId:
-                    description: The unique identifier for the customer master key
-                      (CMK) that the grant applies to. Specify the key ID or the Amazon
-                      Resource Name (ARN) of the CMK. To specify a CMK in a different
-                      AWS account, you must use the key ARN.
+                    description: Unique identifier for the customer master key (CMK)
+                      that the grant applies to. Specify the key ID or the ARN of
+                      the CMK. To specify a CMK in a different AWS account, you must
+                      use the key ARN.
                     type: string
                   keyIdRef:
                     description: Reference to a Key in kms to populate keyId.
@@ -655,10 +655,10 @@ spec:
                   id:
                     type: string
                   keyId:
-                    description: The unique identifier for the customer master key
-                      (CMK) that the grant applies to. Specify the key ID or the Amazon
-                      Resource Name (ARN) of the CMK. To specify a CMK in a different
-                      AWS account, you must use the key ARN.
+                    description: Unique identifier for the customer master key (CMK)
+                      that the grant applies to. Specify the key ID or the ARN of
+                      the CMK. To specify a CMK in a different AWS account, you must
+                      use the key ARN.
                     type: string
                   name:
                     description: A friendly name for identifying the grant.

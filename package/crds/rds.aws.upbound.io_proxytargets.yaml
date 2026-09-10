@@ -543,8 +543,8 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   targetArn:
-                    description: Amazon Resource Name (ARN) for the DB instance or
-                      DB cluster. Currently not returned by the RDS API.
+                    description: ARN for the DB instance or DB cluster. Currently
+                      not returned by the RDS API.
                     type: string
                   targetGroupName:
                     description: The name of the target group.

@@ -43,9 +43,7 @@ type AndInitParameters struct {
 	// Prefix identifying one or more objects to which the rule applies.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// Key-value map of resource tags.
-	// All of these tags must exist in the object's tag set in order for the rule to apply.
-	// If set, must contain at least one key-value pair.
+	// Key-value map of resource tags. All of these tags must exist in the object's tag set in order for the rule to apply. If set, must contain at least one key-value pair.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
@@ -61,9 +59,7 @@ type AndObservation struct {
 	// Prefix identifying one or more objects to which the rule applies.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// Key-value map of resource tags.
-	// All of these tags must exist in the object's tag set in order for the rule to apply.
-	// If set, must contain at least one key-value pair.
+	// Key-value map of resource tags. All of these tags must exist in the object's tag set in order for the rule to apply. If set, must contain at least one key-value pair.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
@@ -82,9 +78,7 @@ type AndParameters struct {
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// Key-value map of resource tags.
-	// All of these tags must exist in the object's tag set in order for the rule to apply.
-	// If set, must contain at least one key-value pair.
+	// Key-value map of resource tags. All of these tags must exist in the object's tag set in order for the rule to apply. If set, must contain at least one key-value pair.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -110,7 +104,7 @@ type BucketLifecycleConfigurationInitParameters struct {
 	// List of configuration blocks describing the rules managing the replication. See below.
 	Rule []BucketLifecycleConfigurationRuleInitParameters `json:"rule,omitempty" tf:"rule,omitempty"`
 
-	// The default minimum object size behavior applied to the lifecycle configuration. Valid values: all_storage_classes_128K (default), varies_by_storage_class. To customize the minimum object size for any transition you can add a filter that specifies a custom object_size_greater_than or object_size_less_than value. Custom filters always take precedence over the default transition behavior.
+	// Default minimum object size behavior applied to the lifecycle configuration. Valid values: all_storage_classes_128K (default), varies_by_storage_class. To customize the minimum object size for any transition you can add a filter that specifies a custom object_size_greater_than or object_size_less_than value. Custom filters always take precedence over the default transition behavior.
 	TransitionDefaultMinimumObjectSize *string `json:"transitionDefaultMinimumObjectSize,omitempty" tf:"transition_default_minimum_object_size,omitempty"`
 }
 
@@ -132,7 +126,7 @@ type BucketLifecycleConfigurationObservation struct {
 	// List of configuration blocks describing the rules managing the replication. See below.
 	Rule []BucketLifecycleConfigurationRuleObservation `json:"rule,omitempty" tf:"rule,omitempty"`
 
-	// The default minimum object size behavior applied to the lifecycle configuration. Valid values: all_storage_classes_128K (default), varies_by_storage_class. To customize the minimum object size for any transition you can add a filter that specifies a custom object_size_greater_than or object_size_less_than value. Custom filters always take precedence over the default transition behavior.
+	// Default minimum object size behavior applied to the lifecycle configuration. Valid values: all_storage_classes_128K (default), varies_by_storage_class. To customize the minimum object size for any transition you can add a filter that specifies a custom object_size_greater_than or object_size_less_than value. Custom filters always take precedence over the default transition behavior.
 	TransitionDefaultMinimumObjectSize *string `json:"transitionDefaultMinimumObjectSize,omitempty" tf:"transition_default_minimum_object_size,omitempty"`
 }
 
@@ -164,7 +158,7 @@ type BucketLifecycleConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	Rule []BucketLifecycleConfigurationRuleParameters `json:"rule,omitempty" tf:"rule,omitempty"`
 
-	// The default minimum object size behavior applied to the lifecycle configuration. Valid values: all_storage_classes_128K (default), varies_by_storage_class. To customize the minimum object size for any transition you can add a filter that specifies a custom object_size_greater_than or object_size_less_than value. Custom filters always take precedence over the default transition behavior.
+	// Default minimum object size behavior applied to the lifecycle configuration. Valid values: all_storage_classes_128K (default), varies_by_storage_class. To customize the minimum object size for any transition you can add a filter that specifies a custom object_size_greater_than or object_size_less_than value. Custom filters always take precedence over the default transition behavior.
 	// +kubebuilder:validation:Optional
 	TransitionDefaultMinimumObjectSize *string `json:"transitionDefaultMinimumObjectSize,omitempty" tf:"transition_default_minimum_object_size,omitempty"`
 }
@@ -177,8 +171,7 @@ type BucketLifecycleConfigurationRuleInitParameters struct {
 	// Configuration block that specifies the expiration for the lifecycle of the object in the form of date, days and, whether the object has a delete marker. See below.
 	Expiration []RuleExpirationInitParameters `json:"expiration,omitempty" tf:"expiration,omitempty"`
 
-	// Configuration block used to identify objects that a Lifecycle Rule applies to.
-	// See below.
+	// Configuration block used to identify objects that a Lifecycle Rule applies to. See below.
 	Filter []RuleFilterInitParameters `json:"filter,omitempty" tf:"filter,omitempty"`
 
 	// Unique identifier for the rule. The value cannot be longer than 255 characters.
@@ -190,9 +183,7 @@ type BucketLifecycleConfigurationRuleInitParameters struct {
 	// Set of configuration blocks that specify the transition rule for the lifecycle rule that describes when noncurrent objects transition to a specific storage class. See below.
 	NoncurrentVersionTransition []RuleNoncurrentVersionTransitionInitParameters `json:"noncurrentVersionTransition,omitempty" tf:"noncurrent_version_transition,omitempty"`
 
-	// DEPRECATED Use filter instead.
-	// This has been deprecated by Amazon S3.
-	// Prefix identifying one or more objects to which the rule applies.
+	// Prefix identifying one or more objects to which the rule applies. Use filter instead, as this has been deprecated by Amazon S3.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
 	// Whether the rule is currently being applied. Valid values: Enabled or Disabled.
@@ -210,8 +201,7 @@ type BucketLifecycleConfigurationRuleObservation struct {
 	// Configuration block that specifies the expiration for the lifecycle of the object in the form of date, days and, whether the object has a delete marker. See below.
 	Expiration []RuleExpirationObservation `json:"expiration,omitempty" tf:"expiration,omitempty"`
 
-	// Configuration block used to identify objects that a Lifecycle Rule applies to.
-	// See below.
+	// Configuration block used to identify objects that a Lifecycle Rule applies to. See below.
 	Filter []RuleFilterObservation `json:"filter,omitempty" tf:"filter,omitempty"`
 
 	// Unique identifier for the rule. The value cannot be longer than 255 characters.
@@ -223,9 +213,7 @@ type BucketLifecycleConfigurationRuleObservation struct {
 	// Set of configuration blocks that specify the transition rule for the lifecycle rule that describes when noncurrent objects transition to a specific storage class. See below.
 	NoncurrentVersionTransition []RuleNoncurrentVersionTransitionObservation `json:"noncurrentVersionTransition,omitempty" tf:"noncurrent_version_transition,omitempty"`
 
-	// DEPRECATED Use filter instead.
-	// This has been deprecated by Amazon S3.
-	// Prefix identifying one or more objects to which the rule applies.
+	// Prefix identifying one or more objects to which the rule applies. Use filter instead, as this has been deprecated by Amazon S3.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
 	// Whether the rule is currently being applied. Valid values: Enabled or Disabled.
@@ -245,8 +233,7 @@ type BucketLifecycleConfigurationRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	Expiration []RuleExpirationParameters `json:"expiration,omitempty" tf:"expiration,omitempty"`
 
-	// Configuration block used to identify objects that a Lifecycle Rule applies to.
-	// See below.
+	// Configuration block used to identify objects that a Lifecycle Rule applies to. See below.
 	// +kubebuilder:validation:Optional
 	Filter []RuleFilterParameters `json:"filter,omitempty" tf:"filter,omitempty"`
 
@@ -262,9 +249,7 @@ type BucketLifecycleConfigurationRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	NoncurrentVersionTransition []RuleNoncurrentVersionTransitionParameters `json:"noncurrentVersionTransition,omitempty" tf:"noncurrent_version_transition,omitempty"`
 
-	// DEPRECATED Use filter instead.
-	// This has been deprecated by Amazon S3.
-	// Prefix identifying one or more objects to which the rule applies.
+	// Prefix identifying one or more objects to which the rule applies. Use filter instead, as this has been deprecated by Amazon S3.
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
@@ -285,7 +270,7 @@ type RuleExpirationInitParameters struct {
 	// Number of days after creation when objects are transitioned to the specified storage class. The value must be a positive integer. If both days and date are not specified, defaults to 0. Valid values depend on storage_class, see Transition objects using Amazon S3 Lifecycle for more details.
 	Days *float64 `json:"days,omitempty" tf:"days,omitempty"`
 
-	// Indicates whether Amazon S3 will remove a delete marker with no noncurrent versions. If set to true, the delete marker will be expired; if set to false the policy takes no action.
+	// Whether Amazon S3 will remove a delete marker with no noncurrent versions. If set to true, the delete marker will be expired; if set to false the policy takes no action.
 	ExpiredObjectDeleteMarker *bool `json:"expiredObjectDeleteMarker,omitempty" tf:"expired_object_delete_marker,omitempty"`
 }
 
@@ -297,7 +282,7 @@ type RuleExpirationObservation struct {
 	// Number of days after creation when objects are transitioned to the specified storage class. The value must be a positive integer. If both days and date are not specified, defaults to 0. Valid values depend on storage_class, see Transition objects using Amazon S3 Lifecycle for more details.
 	Days *float64 `json:"days,omitempty" tf:"days,omitempty"`
 
-	// Indicates whether Amazon S3 will remove a delete marker with no noncurrent versions. If set to true, the delete marker will be expired; if set to false the policy takes no action.
+	// Whether Amazon S3 will remove a delete marker with no noncurrent versions. If set to true, the delete marker will be expired; if set to false the policy takes no action.
 	ExpiredObjectDeleteMarker *bool `json:"expiredObjectDeleteMarker,omitempty" tf:"expired_object_delete_marker,omitempty"`
 }
 
@@ -311,7 +296,7 @@ type RuleExpirationParameters struct {
 	// +kubebuilder:validation:Optional
 	Days *float64 `json:"days,omitempty" tf:"days,omitempty"`
 
-	// Indicates whether Amazon S3 will remove a delete marker with no noncurrent versions. If set to true, the delete marker will be expired; if set to false the policy takes no action.
+	// Whether Amazon S3 will remove a delete marker with no noncurrent versions. If set to true, the delete marker will be expired; if set to false the policy takes no action.
 	// +kubebuilder:validation:Optional
 	ExpiredObjectDeleteMarker *bool `json:"expiredObjectDeleteMarker,omitempty" tf:"expired_object_delete_marker,omitempty"`
 }

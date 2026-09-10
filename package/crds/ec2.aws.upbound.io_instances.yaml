@@ -3296,9 +3296,8 @@ spec:
                             volume_type of io1, io2 or gp3.
                           type: number
                         kmsKeyId:
-                          description: Amazon Resource Name (ARN) of the KMS Key to
-                            use when encrypting the volume. Must be configured to
-                            perform drift detection.
+                          description: ARN of the KMS Key to use when encrypting the
+                            volume. Must be configured to perform drift detection.
                           type: string
                         kmsKeyIdRef:
                           description: Reference to a Key in kms to populate kmsKeyId.
@@ -3867,9 +3866,8 @@ spec:
                           of io1, io2 or gp3.
                         type: number
                       kmsKeyId:
-                        description: Amazon Resource Name (ARN) of the KMS Key to
-                          use when encrypting the volume. Must be configured to perform
-                          drift detection.
+                        description: ARN of the KMS Key to use when encrypting the
+                          volume. Must be configured to perform drift detection.
                         type: string
                       kmsKeyIdRef:
                         description: Reference to a Key in kms to populate kmsKeyId.
@@ -4360,9 +4358,8 @@ spec:
                             volume_type of io1, io2 or gp3.
                           type: number
                         kmsKeyId:
-                          description: Amazon Resource Name (ARN) of the KMS Key to
-                            use when encrypting the volume. Must be configured to
-                            perform drift detection.
+                          description: ARN of the KMS Key to use when encrypting the
+                            volume. Must be configured to perform drift detection.
                           type: string
                         kmsKeyIdRef:
                           description: Reference to a Key in kms to populate kmsKeyId.
@@ -4926,9 +4923,8 @@ spec:
                           of io1, io2 or gp3.
                         type: number
                       kmsKeyId:
-                        description: Amazon Resource Name (ARN) of the KMS Key to
-                          use when encrypting the volume. Must be configured to perform
-                          drift detection.
+                        description: ARN of the KMS Key to use when encrypting the
+                          volume. Must be configured to perform drift detection.
                         type: string
                       kmsKeyIdRef:
                         description: Reference to a Key in kms to populate kmsKeyId.
@@ -5498,9 +5494,8 @@ spec:
                             volume_type of io1, io2 or gp3.
                           type: number
                         kmsKeyId:
-                          description: Amazon Resource Name (ARN) of the KMS Key to
-                            use when encrypting the volume. Must be configured to
-                            perform drift detection.
+                          description: ARN of the KMS Key to use when encrypting the
+                            volume. Must be configured to perform drift detection.
                           type: string
                         snapshotId:
                           description: Snapshot ID to mount.
@@ -5896,9 +5891,8 @@ spec:
                           of io1, io2 or gp3.
                         type: number
                       kmsKeyId:
-                        description: Amazon Resource Name (ARN) of the KMS Key to
-                          use when encrypting the volume. Must be configured to perform
-                          drift detection.
+                        description: ARN of the KMS Key to use when encrypting the
+                          volume. Must be configured to perform drift detection.
                         type: string
                       tags:
                         additionalProperties:

@@ -476,7 +476,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The Amazon Resource Name (ARN) for the proxy endpoint.
+                    description: ARN for the proxy endpoint.
                     type: string
                   dbProxyName:
                     description: The name of the DB proxy associated with the DB proxy

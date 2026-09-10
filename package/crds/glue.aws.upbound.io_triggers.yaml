@@ -2364,7 +2364,7 @@ spec:
                       type: object
                     type: array
                   arn:
-                    description: Amazon Resource Name (ARN) of Glue Trigger
+                    description: ARN of Glue Trigger
                     type: string
                   description:
                     description: A description of the new trigger.

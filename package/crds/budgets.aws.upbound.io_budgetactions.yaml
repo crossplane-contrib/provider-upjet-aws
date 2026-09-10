@@ -1472,8 +1472,7 @@ spec:
                             type: array
                             x-kubernetes-list-type: set
                           policyArn:
-                            description: The Amazon Resource Name (ARN) of the policy
-                              to be attached.
+                            description: ARN of the policy to be attached.
                             type: string
                           policyArnRef:
                             description: Reference to a Policy in iam to populate
@@ -1913,8 +1912,7 @@ spec:
                             type: array
                             x-kubernetes-list-type: set
                           policyArn:
-                            description: The Amazon Resource Name (ARN) of the policy
-                              to be attached.
+                            description: ARN of the policy to be attached.
                             type: string
                           policyArnRef:
                             description: Reference to a Policy in iam to populate
@@ -2384,8 +2382,7 @@ spec:
                             type: array
                             x-kubernetes-list-type: set
                           policyArn:
-                            description: The Amazon Resource Name (ARN) of the policy
-                              to be attached.
+                            description: ARN of the policy to be attached.
                             type: string
                           roles:
                             description: A list of roles to be attached. There must

@@ -40,7 +40,7 @@ type SubnetGroupInitParameters struct {
 
 type SubnetGroupObservation struct {
 
-	// Amazon Resource Name (ARN) of the Redshift Subnet group name
+	// ARN of the Redshift Subnet group name
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The description of the Redshift Subnet group.

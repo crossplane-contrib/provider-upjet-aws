@@ -378,7 +378,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The Amazon Resource Name (ARN) of the vocabulary.
+                    description: ARN of the vocabulary.
                     type: string
                   content:
                     description: The content of the custom vocabulary in plain-text

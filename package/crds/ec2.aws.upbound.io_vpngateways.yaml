@@ -374,7 +374,7 @@ spec:
                       private gateway is created with the default ASN.
                     type: string
                   arn:
-                    description: Amazon Resource Name (ARN) of the VPN Gateway.
+                    description: ARN of the VPN Gateway.
                     type: string
                   availabilityZone:
                     description: The Availability Zone for the virtual private gateway.

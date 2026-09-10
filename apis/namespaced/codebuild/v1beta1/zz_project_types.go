@@ -806,7 +806,7 @@ type ProjectInitParameters struct {
 	// Short description of the project.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting
+	// KMS customer master key (CMK) to be used for encrypting
 	// the build project's build output artifacts.
 	EncryptionKey *string `json:"encryptionKey,omitempty" tf:"encryption_key,omitempty"`
 
@@ -842,7 +842,7 @@ type ProjectInitParameters struct {
 	// Configuration block. Detailed below.
 	SecondarySources []SecondarySourcesInitParameters `json:"secondarySources,omitempty" tf:"secondary_sources,omitempty"`
 
-	// Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that
+	// ARN of the AWS Identity and Access Management (IAM) role that
 	// enables AWS CodeBuild to interact with dependent AWS services on behalf of the AWS account.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
@@ -909,7 +909,7 @@ type ProjectObservation struct {
 	// Short description of the project.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting
+	// KMS customer master key (CMK) to be used for encrypting
 	// the build project's build output artifacts.
 	EncryptionKey *string `json:"encryptionKey,omitempty" tf:"encryption_key,omitempty"`
 
@@ -954,7 +954,7 @@ type ProjectObservation struct {
 	// Configuration block. Detailed below.
 	SecondarySources []SecondarySourcesObservation `json:"secondarySources,omitempty" tf:"secondary_sources,omitempty"`
 
-	// Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that
+	// ARN of the AWS Identity and Access Management (IAM) role that
 	// enables AWS CodeBuild to interact with dependent AWS services on behalf of the AWS account.
 	ServiceRole *string `json:"serviceRole,omitempty" tf:"service_role,omitempty"`
 
@@ -1018,7 +1018,7 @@ type ProjectParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting
+	// KMS customer master key (CMK) to be used for encrypting
 	// the build project's build output artifacts.
 	// +kubebuilder:validation:Optional
 	EncryptionKey *string `json:"encryptionKey,omitempty" tf:"encryption_key,omitempty"`
@@ -1069,7 +1069,7 @@ type ProjectParameters struct {
 	// +kubebuilder:validation:Optional
 	SecondarySources []SecondarySourcesParameters `json:"secondarySources,omitempty" tf:"secondary_sources,omitempty"`
 
-	// Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that
+	// ARN of the AWS Identity and Access Management (IAM) role that
 	// enables AWS CodeBuild to interact with dependent AWS services on behalf of the AWS account.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)

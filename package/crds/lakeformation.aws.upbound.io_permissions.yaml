@@ -1394,8 +1394,8 @@ spec:
                       Detailed below.
                     properties:
                       arn:
-                        description: Amazon Resource Name (ARN) that uniquely identifies
-                          the data location resource.
+                        description: ARN that uniquely identifies the data location
+                          resource.
                         type: string
                       arnRef:
                         description: Reference to a Resource in lakeformation to populate
@@ -1820,8 +1820,8 @@ spec:
                       Detailed below.
                     properties:
                       arn:
-                        description: Amazon Resource Name (ARN) that uniquely identifies
-                          the data location resource.
+                        description: ARN that uniquely identifies the data location
+                          resource.
                         type: string
                       arnRef:
                         description: Reference to a Resource in lakeformation to populate
@@ -2326,8 +2326,8 @@ spec:
                       Detailed below.
                     properties:
                       arn:
-                        description: Amazon Resource Name (ARN) that uniquely identifies
-                          the data location resource.
+                        description: ARN that uniquely identifies the data location
+                          resource.
                         type: string
                       catalogId:
                         description: Identifier for the Data Catalog where the location

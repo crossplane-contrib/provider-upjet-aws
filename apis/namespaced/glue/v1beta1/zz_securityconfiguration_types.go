@@ -18,7 +18,7 @@ type CloudwatchEncryptionInitParameters struct {
 	// Encryption mode to use for CloudWatch data. Valid values: DISABLED, SSE-KMS. Default value: DISABLED.
 	CloudwatchEncryptionMode *string `json:"cloudwatchEncryptionMode,omitempty" tf:"cloudwatch_encryption_mode,omitempty"`
 
-	// Amazon Resource Name (ARN) of the KMS key to be used to encrypt the data.
+	// ARN of the KMS key to be used to encrypt the data.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kms/v1beta1.Key
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
@@ -37,7 +37,7 @@ type CloudwatchEncryptionObservation struct {
 	// Encryption mode to use for CloudWatch data. Valid values: DISABLED, SSE-KMS. Default value: DISABLED.
 	CloudwatchEncryptionMode *string `json:"cloudwatchEncryptionMode,omitempty" tf:"cloudwatch_encryption_mode,omitempty"`
 
-	// Amazon Resource Name (ARN) of the KMS key to be used to encrypt the data.
+	// ARN of the KMS key to be used to encrypt the data.
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 }
 
@@ -47,7 +47,7 @@ type CloudwatchEncryptionParameters struct {
 	// +kubebuilder:validation:Optional
 	CloudwatchEncryptionMode *string `json:"cloudwatchEncryptionMode,omitempty" tf:"cloudwatch_encryption_mode,omitempty"`
 
-	// Amazon Resource Name (ARN) of the KMS key to be used to encrypt the data.
+	// ARN of the KMS key to be used to encrypt the data.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kms/v1beta1.Key
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -98,7 +98,7 @@ type JobBookmarksEncryptionInitParameters struct {
 	// Encryption mode to use for job bookmarks data. Valid values: CSE-KMS, DISABLED. Default value: DISABLED.
 	JobBookmarksEncryptionMode *string `json:"jobBookmarksEncryptionMode,omitempty" tf:"job_bookmarks_encryption_mode,omitempty"`
 
-	// Amazon Resource Name (ARN) of the KMS key to be used to encrypt the data.
+	// ARN of the KMS key to be used to encrypt the data.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kms/v1beta1.Key
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
@@ -117,7 +117,7 @@ type JobBookmarksEncryptionObservation struct {
 	// Encryption mode to use for job bookmarks data. Valid values: CSE-KMS, DISABLED. Default value: DISABLED.
 	JobBookmarksEncryptionMode *string `json:"jobBookmarksEncryptionMode,omitempty" tf:"job_bookmarks_encryption_mode,omitempty"`
 
-	// Amazon Resource Name (ARN) of the KMS key to be used to encrypt the data.
+	// ARN of the KMS key to be used to encrypt the data.
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 }
 
@@ -127,7 +127,7 @@ type JobBookmarksEncryptionParameters struct {
 	// +kubebuilder:validation:Optional
 	JobBookmarksEncryptionMode *string `json:"jobBookmarksEncryptionMode,omitempty" tf:"job_bookmarks_encryption_mode,omitempty"`
 
-	// Amazon Resource Name (ARN) of the KMS key to be used to encrypt the data.
+	// ARN of the KMS key to be used to encrypt the data.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kms/v1beta1.Key
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -144,7 +144,7 @@ type JobBookmarksEncryptionParameters struct {
 
 type S3EncryptionInitParameters struct {
 
-	// Amazon Resource Name (ARN) of the KMS key to be used to encrypt the data.
+	// ARN of the KMS key to be used to encrypt the data.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kms/v1beta1.Key
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
@@ -163,7 +163,7 @@ type S3EncryptionInitParameters struct {
 
 type S3EncryptionObservation struct {
 
-	// Amazon Resource Name (ARN) of the KMS key to be used to encrypt the data.
+	// ARN of the KMS key to be used to encrypt the data.
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
 	// Encryption mode to use for S3 data. Valid values: DISABLED, SSE-KMS, SSE-S3. Default value: DISABLED.
@@ -172,7 +172,7 @@ type S3EncryptionObservation struct {
 
 type S3EncryptionParameters struct {
 
-	// Amazon Resource Name (ARN) of the KMS key to be used to encrypt the data.
+	// ARN of the KMS key to be used to encrypt the data.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kms/v1beta1.Key
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	// +kubebuilder:validation:Optional

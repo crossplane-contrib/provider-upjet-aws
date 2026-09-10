@@ -21,10 +21,10 @@ type AccountAssignmentObservation struct {
 	// The identifier of the Account Assignment i.e., principal_id, principal_type, target_id, target_type, permission_set_arn, instance_arn separated by commas (,).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the SSO Instance.
+	// ARN of the SSO Instance.
 	InstanceArn *string `json:"instanceArn,omitempty" tf:"instance_arn,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the Permission Set that the admin wants to grant the principal access to.
+	// ARN of the Permission Set that the admin wants to grant the principal access to.
 	PermissionSetArn *string `json:"permissionSetArn,omitempty" tf:"permission_set_arn,omitempty"`
 
 	// An identifier for an object in SSO, such as a user or group. PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). This can be set to the crossplane external-name of either a Group or User in the identitystore api group, but the Ref and Selector fields will only work with a Group.
@@ -46,11 +46,11 @@ type AccountAssignmentObservation struct {
 
 type AccountAssignmentParameters struct {
 
-	// The Amazon Resource Name (ARN) of the SSO Instance.
+	// ARN of the SSO Instance.
 	// +kubebuilder:validation:Required
 	InstanceArn *string `json:"instanceArn" tf:"instance_arn,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the Permission Set that the admin wants to grant the principal access to.
+	// ARN of the Permission Set that the admin wants to grant the principal access to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ssoadmin/v1beta1.PermissionSet
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional

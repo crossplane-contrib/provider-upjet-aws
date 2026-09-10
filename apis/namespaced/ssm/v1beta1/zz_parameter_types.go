@@ -21,7 +21,7 @@ type ParameterInitParameters_2 struct {
 	// ARN of the parameter.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// Data type of the parameter. Valid values: text, aws:ssm:integration and aws:ec2:image for AMI format, see the Native parameter support for Amazon Machine Image IDs.
+	// Data type of the parameter. Valid values: text, aws:ssm:integration and aws:ec2:image for AMI format, see the Native parameter support for AMI IDs.
 	DataType *string `json:"dataType,omitempty" tf:"data_type,omitempty"`
 
 	// Description of the parameter.
@@ -64,7 +64,7 @@ type ParameterObservation_2 struct {
 	// ARN of the parameter.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// Data type of the parameter. Valid values: text, aws:ssm:integration and aws:ec2:image for AMI format, see the Native parameter support for Amazon Machine Image IDs.
+	// Data type of the parameter. Valid values: text, aws:ssm:integration and aws:ec2:image for AMI format, see the Native parameter support for AMI IDs.
 	DataType *string `json:"dataType,omitempty" tf:"data_type,omitempty"`
 
 	// Description of the parameter.
@@ -119,7 +119,7 @@ type ParameterParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// Data type of the parameter. Valid values: text, aws:ssm:integration and aws:ec2:image for AMI format, see the Native parameter support for Amazon Machine Image IDs.
+	// Data type of the parameter. Valid values: text, aws:ssm:integration and aws:ec2:image for AMI format, see the Native parameter support for AMI IDs.
 	// +kubebuilder:validation:Optional
 	DataType *string `json:"dataType,omitempty" tf:"data_type,omitempty"`
 

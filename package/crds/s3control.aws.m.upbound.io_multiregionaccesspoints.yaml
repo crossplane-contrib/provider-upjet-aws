@@ -61,67 +61,73 @@ spec:
               forProvider:
                 properties:
                   accountId:
-                    description: The AWS account ID for the owner of the buckets for
-                      which you want to create a Multi-Region Access Point.
+                    description: AWS account ID for the owner of the buckets for which
+                      you want to create a Multi-Region Access Point.
                     type: string
                   details:
-                    description: A configuration block containing details about the
-                      Multi-Region Access Point. See Details Configuration Block below
-                      for more details
+                    description: Configuration block containing details about the
+                      Multi-Region Access Point. See details Block below.
                     properties:
                       name:
-                        description: The name of the Multi-Region Access Point.
+                        description: Name of the Multi-Region Access Point.
                         type: string
                       publicAccessBlock:
                         description: Configuration block to manage the PublicAccessBlock
                           configuration that you want to apply to this Multi-Region
                           Access Point. You can enable the configuration options in
-                          any combination. See Public Access Block Configuration below
-                          for more details.
+                          any combination. See public_access_block Block below.
                         properties:
                           blockPublicAcls:
-                            description: 'Whether Amazon S3 should block public ACLs
+                            description: Whether Amazon S3 should block public ACLs
                               for buckets in this account. Defaults to true. Enabling
                               this setting does not affect existing policies or ACLs.
-                              When set to true causes the following behavior:'
+                              When set to true, PUT Bucket acl and PUT Object acl
+                              calls fail if the specified ACL is public, PUT Object
+                              calls fail if the request includes a public ACL, and
+                              PUT Bucket calls fail if the request includes a public
+                              ACL.
                             type: boolean
                           blockPublicPolicy:
-                            description: 'Whether Amazon S3 should block public bucket
+                            description: Whether Amazon S3 should block public bucket
                               policies for buckets in this account. Defaults to true.
                               Enabling this setting does not affect existing bucket
-                              policies. When set to true causes Amazon S3 to:'
+                              policies. When set to true, Amazon S3 rejects calls
+                              to PUT Bucket policy if the specified bucket policy
+                              allows public access.
                             type: boolean
                           ignorePublicAcls:
-                            description: 'Whether Amazon S3 should ignore public ACLs
+                            description: Whether Amazon S3 should ignore public ACLs
                               for buckets in this account. Defaults to true. Enabling
                               this setting does not affect the persistence of any
-                              existing ACLs and doesn''t prevent new public ACLs from
-                              being set. When set to true causes Amazon S3 to:'
+                              existing ACLs and doesn't prevent new public ACLs from
+                              being set. When set to true, Amazon S3 ignores all public
+                              ACLs on buckets in this account and any objects that
+                              they contain.
                             type: boolean
                           restrictPublicBuckets:
-                            description: 'Whether Amazon S3 should restrict public
+                            description: Whether Amazon S3 should restrict public
                               bucket policies for buckets in this account. Defaults
                               to true. Enabling this setting does not affect previously
                               stored bucket policies, except that public and cross-account
                               access within any public bucket policy, including non-public
                               delegation to specific accounts, is blocked. When set
-                              to true:'
+                              to true, only the bucket owner and AWS Services can
+                              access buckets with public policies.
                             type: boolean
                         type: object
                       region:
-                        description: The Region configuration block to specify the
-                          bucket associated with the Multi-Region Access Point. See
-                          Region Configuration below for more details.
+                        description: Region configuration block to specify the bucket
+                          associated with the Multi-Region Access Point. See region
+                          Block below.
                         items:
                           properties:
                             bucket:
-                              description: The name of the associated bucket for the
-                                Region.
+                              description: Name of the associated bucket for the Region.
                               type: string
                             bucketAccountId:
-                              description: The AWS account ID that owns the Amazon
-                                S3 bucket that's associated with this Multi-Region
-                                Access Point.
+                              description: AWS account ID that owns the Amazon S3
+                                bucket that's associated with this Multi-Region Access
+                                Point.
                               type: string
                             bucketRef:
                               description: Reference to a Bucket in s3 to populate
@@ -232,51 +238,58 @@ spec:
                   autoscaler.
                 properties:
                   accountId:
-                    description: The AWS account ID for the owner of the buckets for
-                      which you want to create a Multi-Region Access Point.
+                    description: AWS account ID for the owner of the buckets for which
+                      you want to create a Multi-Region Access Point.
                     type: string
                   details:
-                    description: A configuration block containing details about the
-                      Multi-Region Access Point. See Details Configuration Block below
-                      for more details
+                    description: Configuration block containing details about the
+                      Multi-Region Access Point. See details Block below.
                     properties:
                       name:
-                        description: The name of the Multi-Region Access Point.
+                        description: Name of the Multi-Region Access Point.
                         type: string
                       publicAccessBlock:
                         description: Configuration block to manage the PublicAccessBlock
                           configuration that you want to apply to this Multi-Region
                           Access Point. You can enable the configuration options in
-                          any combination. See Public Access Block Configuration below
-                          for more details.
+                          any combination. See public_access_block Block below.
                         properties:
                           blockPublicAcls:
-                            description: 'Whether Amazon S3 should block public ACLs
+                            description: Whether Amazon S3 should block public ACLs
                               for buckets in this account. Defaults to true. Enabling
                               this setting does not affect existing policies or ACLs.
-                              When set to true causes the following behavior:'
+                              When set to true, PUT Bucket acl and PUT Object acl
+                              calls fail if the specified ACL is public, PUT Object
+                              calls fail if the request includes a public ACL, and
+                              PUT Bucket calls fail if the request includes a public
+                              ACL.
                             type: boolean
                           blockPublicPolicy:
-                            description: 'Whether Amazon S3 should block public bucket
+                            description: Whether Amazon S3 should block public bucket
                               policies for buckets in this account. Defaults to true.
                               Enabling this setting does not affect existing bucket
-                              policies. When set to true causes Amazon S3 to:'
+                              policies. When set to true, Amazon S3 rejects calls
+                              to PUT Bucket policy if the specified bucket policy
+                              allows public access.
                             type: boolean
                           ignorePublicAcls:
-                            description: 'Whether Amazon S3 should ignore public ACLs
+                            description: Whether Amazon S3 should ignore public ACLs
                               for buckets in this account. Defaults to true. Enabling
                               this setting does not affect the persistence of any
-                              existing ACLs and doesn''t prevent new public ACLs from
-                              being set. When set to true causes Amazon S3 to:'
+                              existing ACLs and doesn't prevent new public ACLs from
+                              being set. When set to true, Amazon S3 ignores all public
+                              ACLs on buckets in this account and any objects that
+                              they contain.
                             type: boolean
                           restrictPublicBuckets:
-                            description: 'Whether Amazon S3 should restrict public
+                            description: Whether Amazon S3 should restrict public
                               bucket policies for buckets in this account. Defaults
                               to true. Enabling this setting does not affect previously
                               stored bucket policies, except that public and cross-account
                               access within any public bucket policy, including non-public
                               delegation to specific accounts, is blocked. When set
-                              to true:'
+                              to true, only the bucket owner and AWS Services can
+                              access buckets with public policies.
                             type: boolean
                         type: object
                     type: object
@@ -351,78 +364,82 @@ spec:
               atProvider:
                 properties:
                   accountId:
-                    description: The AWS account ID for the owner of the buckets for
-                      which you want to create a Multi-Region Access Point.
+                    description: AWS account ID for the owner of the buckets for which
+                      you want to create a Multi-Region Access Point.
                     type: string
                   alias:
                     description: Alias for the Multi-Region Access Point.
                     type: string
                   arn:
-                    description: Amazon Resource Name (ARN) of the Multi-Region Access
-                      Point.
+                    description: ARN of the Multi-Region Access Point.
                     type: string
                   details:
-                    description: A configuration block containing details about the
-                      Multi-Region Access Point. See Details Configuration Block below
-                      for more details
+                    description: Configuration block containing details about the
+                      Multi-Region Access Point. See details Block below.
                     properties:
                       name:
-                        description: The name of the Multi-Region Access Point.
+                        description: Name of the Multi-Region Access Point.
                         type: string
                       publicAccessBlock:
                         description: Configuration block to manage the PublicAccessBlock
                           configuration that you want to apply to this Multi-Region
                           Access Point. You can enable the configuration options in
-                          any combination. See Public Access Block Configuration below
-                          for more details.
+                          any combination. See public_access_block Block below.
                         properties:
                           blockPublicAcls:
-                            description: 'Whether Amazon S3 should block public ACLs
+                            description: Whether Amazon S3 should block public ACLs
                               for buckets in this account. Defaults to true. Enabling
                               this setting does not affect existing policies or ACLs.
-                              When set to true causes the following behavior:'
+                              When set to true, PUT Bucket acl and PUT Object acl
+                              calls fail if the specified ACL is public, PUT Object
+                              calls fail if the request includes a public ACL, and
+                              PUT Bucket calls fail if the request includes a public
+                              ACL.
                             type: boolean
                           blockPublicPolicy:
-                            description: 'Whether Amazon S3 should block public bucket
+                            description: Whether Amazon S3 should block public bucket
                               policies for buckets in this account. Defaults to true.
                               Enabling this setting does not affect existing bucket
-                              policies. When set to true causes Amazon S3 to:'
+                              policies. When set to true, Amazon S3 rejects calls
+                              to PUT Bucket policy if the specified bucket policy
+                              allows public access.
                             type: boolean
                           ignorePublicAcls:
-                            description: 'Whether Amazon S3 should ignore public ACLs
+                            description: Whether Amazon S3 should ignore public ACLs
                               for buckets in this account. Defaults to true. Enabling
                               this setting does not affect the persistence of any
-                              existing ACLs and doesn''t prevent new public ACLs from
-                              being set. When set to true causes Amazon S3 to:'
+                              existing ACLs and doesn't prevent new public ACLs from
+                              being set. When set to true, Amazon S3 ignores all public
+                              ACLs on buckets in this account and any objects that
+                              they contain.
                             type: boolean
                           restrictPublicBuckets:
-                            description: 'Whether Amazon S3 should restrict public
+                            description: Whether Amazon S3 should restrict public
                               bucket policies for buckets in this account. Defaults
                               to true. Enabling this setting does not affect previously
                               stored bucket policies, except that public and cross-account
                               access within any public bucket policy, including non-public
                               delegation to specific accounts, is blocked. When set
-                              to true:'
+                              to true, only the bucket owner and AWS Services can
+                              access buckets with public policies.
                             type: boolean
                         type: object
                       region:
-                        description: The Region configuration block to specify the
-                          bucket associated with the Multi-Region Access Point. See
-                          Region Configuration below for more details.
+                        description: Region configuration block to specify the bucket
+                          associated with the Multi-Region Access Point. See region
+                          Block below.
                         items:
                           properties:
                             bucket:
-                              description: The name of the associated bucket for the
-                                Region.
+                              description: Name of the associated bucket for the Region.
                               type: string
                             bucketAccountId:
-                              description: The AWS account ID that owns the Amazon
-                                S3 bucket that's associated with this Multi-Region
-                                Access Point.
+                              description: AWS account ID that owns the Amazon S3
+                                bucket that's associated with this Multi-Region Access
+                                Point.
                               type: string
                             region:
-                              description: Region where this resource will be managed.
-                                Defaults to the Region set in the provider configuration.
+                              description: Name of the Region.
                               type: string
                           type: object
                         type: array
@@ -446,8 +463,9 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   status:
-                    description: 'Region Access Point. One of: READY, INCONSISTENT_ACROSS_REGIONS,
-                      CREATING, PARTIALLY_CREATED, PARTIALLY_DELETED, DELETING.'
+                    description: 'Status of the Multi-Region Access Point. One of:
+                      READY, INCONSISTENT_ACROSS_REGIONS, CREATING, PARTIALLY_CREATED,
+                      PARTIALLY_DELETED, DELETING.'
                     type: string
                 type: object
               conditions:

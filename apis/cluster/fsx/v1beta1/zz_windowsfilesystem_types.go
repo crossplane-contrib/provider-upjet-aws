@@ -254,6 +254,9 @@ type WindowsFileSystemInitParameters struct {
 	// +kubebuilder:validation:Optional
 	KMSKeyIDSelector *v2.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
+	// Network type. Valid values are IPV4 and DUAL. Default value is IPV4.
+	NetworkType *string `json:"networkType,omitempty" tf:"network_type,omitempty"`
+
 	// Specifies the subnet in which you want the preferred file server to be located. Required for when deployment type is MULTI_AZ_1.
 	PreferredSubnetID *string `json:"preferredSubnetId,omitempty" tf:"preferred_subnet_id,omitempty"`
 
@@ -358,6 +361,9 @@ type WindowsFileSystemObservation struct {
 	// Set of Elastic Network Interface identifiers from which the file system is accessible.
 	// +listType=set
 	NetworkInterfaceIds []*string `json:"networkInterfaceIds,omitempty" tf:"network_interface_ids,omitempty"`
+
+	// Network type. Valid values are IPV4 and DUAL. Default value is IPV4.
+	NetworkType *string `json:"networkType,omitempty" tf:"network_type,omitempty"`
 
 	// AWS account identifier that created the file system.
 	OwnerID *string `json:"ownerId,omitempty" tf:"owner_id,omitempty"`
@@ -479,6 +485,10 @@ type WindowsFileSystemParameters struct {
 	// Selector for a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
 	KMSKeyIDSelector *v2.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
+
+	// Network type. Valid values are IPV4 and DUAL. Default value is IPV4.
+	// +kubebuilder:validation:Optional
+	NetworkType *string `json:"networkType,omitempty" tf:"network_type,omitempty"`
 
 	// Specifies the subnet in which you want the preferred file server to be located. Required for when deployment type is MULTI_AZ_1.
 	// +kubebuilder:validation:Optional

@@ -60,7 +60,7 @@ spec:
               forProvider:
                 properties:
                   customerId:
-                    description: An Amazon Web Services Marketplace customer identifier,
+                    description: Amazon Web Services Marketplace customer identifier,
                       when integrating with the Amazon Web Services SaaS Marketplace.
                     type: string
                   description:
@@ -116,7 +116,7 @@ spec:
                   autoscaler.
                 properties:
                   customerId:
-                    description: An Amazon Web Services Marketplace customer identifier,
+                    description: Amazon Web Services Marketplace customer identifier,
                       when integrating with the Amazon Web Services SaaS Marketplace.
                     type: string
                   description:
@@ -226,7 +226,7 @@ spec:
                     description: Creation date of the API key
                     type: string
                   customerId:
-                    description: An Amazon Web Services Marketplace customer identifier,
+                    description: Amazon Web Services Marketplace customer identifier,
                       when integrating with the Amazon Web Services SaaS Marketplace.
                     type: string
                   description:

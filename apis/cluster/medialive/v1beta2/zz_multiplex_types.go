@@ -89,6 +89,7 @@ type MultiplexObservation struct {
 	// A list of availability zones. You must specify exactly two.
 	AvailabilityZones []*string `json:"availabilityZones,omitempty" tf:"availability_zones,omitempty"`
 
+	// (String) ID of the MediaLive Multiplex.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Multiplex settings. See Multiplex Settings for more details.

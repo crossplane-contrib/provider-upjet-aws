@@ -313,7 +313,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The Amazon Resource Name (ARN) of the key alias.
+                    description: ARN of the key alias.
                     type: string
                   id:
                     type: string
@@ -323,8 +323,7 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   targetKeyArn:
-                    description: The Amazon Resource Name (ARN) of the target key
-                      identifier.
+                    description: ARN of the target key identifier.
                     type: string
                   targetKeyId:
                     description: Identifier for the key for which the alias is for,

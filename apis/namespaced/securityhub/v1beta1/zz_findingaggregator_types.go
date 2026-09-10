@@ -25,7 +25,7 @@ type FindingAggregatorInitParameters struct {
 
 type FindingAggregatorObservation struct {
 
-	// Amazon Resource Name (ARN) of the Security Hub finding aggregator.
+	// ARN of the Security Hub finding aggregator.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`

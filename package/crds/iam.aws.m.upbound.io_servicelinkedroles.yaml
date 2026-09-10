@@ -183,7 +183,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The Amazon Resource Name (ARN) specifying the role.
+                    description: ARN specifying the role.
                     type: string
                   awsServiceName:
                     description: 'The AWS service to which this role is attached.
@@ -203,7 +203,7 @@ spec:
                     description: The description of the role.
                     type: string
                   id:
-                    description: The Amazon Resource Name (ARN) of the role.
+                    description: ARN of the role.
                     type: string
                   name:
                     description: The name of the role.

@@ -82,8 +82,8 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   resourceArn:
-                    description: The Amazon Resource Name (ARN) of the Amazon Redshift
-                      Serverless resource to create the usage limit for.
+                    description: ARN of the Amazon Redshift Serverless resource to
+                      create the usage limit for.
                     type: string
                   resourceArnRef:
                     description: Reference to a Workgroup in redshiftserverless to
@@ -205,8 +205,8 @@ spec:
                       monthly. The default is monthly.
                     type: string
                   resourceArn:
-                    description: The Amazon Resource Name (ARN) of the Amazon Redshift
-                      Serverless resource to create the usage limit for.
+                    description: ARN of the Amazon Redshift Serverless resource to
+                      create the usage limit for.
                     type: string
                   resourceArnRef:
                     description: Reference to a Workgroup in redshiftserverless to
@@ -375,8 +375,7 @@ spec:
                       number.
                     type: number
                   arn:
-                    description: Amazon Resource Name (ARN) of the Redshift Serverless
-                      Usage Limit.
+                    description: ARN of the Redshift Serverless Usage Limit.
                     type: string
                   breachAction:
                     description: The action that Amazon Redshift Serverless takes
@@ -397,8 +396,8 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   resourceArn:
-                    description: The Amazon Resource Name (ARN) of the Amazon Redshift
-                      Serverless resource to create the usage limit for.
+                    description: ARN of the Amazon Redshift Serverless resource to
+                      create the usage limit for.
                     type: string
                   usageType:
                     description: The type of Amazon Redshift Serverless usage to create

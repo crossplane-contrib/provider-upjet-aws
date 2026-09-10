@@ -63,7 +63,7 @@ type ImageVersionObservation struct {
 	// +listType=set
 	Aliases []*string `json:"aliases,omitempty" tf:"aliases,omitempty"`
 
-	// The Amazon Resource Name (ARN) assigned by AWS to this Image Version.
+	// ARN assigned by AWS to this Image Version.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The registry path of the container image on which this image version is based.
@@ -77,7 +77,7 @@ type ImageVersionObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The Amazon Resource Name (ARN) assigned by AWS to this Image Version.
+	// ARN assigned by AWS to this Image Version.
 	ImageArn *string `json:"imageArn,omitempty" tf:"image_arn,omitempty"`
 
 	// The name of the image. Must be unique to your account.

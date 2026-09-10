@@ -364,8 +364,7 @@ spec:
                       snapshot.
                     type: string
                   dbClusterSnapshotArn:
-                    description: The Amazon Resource Name (ARN) for the DB Cluster
-                      Snapshot.
+                    description: ARN for the DB Cluster Snapshot.
                     type: string
                   dbClusterSnapshotIdentifier:
                     description: The Identifier for the snapshot.
@@ -405,8 +404,7 @@ spec:
                   snapshotType:
                     type: string
                   sourceDbClusterSnapshotArn:
-                    description: The Amazon Resource Name (ARN) for the DB Cluster
-                      Snapshot.
+                    description: ARN for the DB Cluster Snapshot.
                     type: string
                   status:
                     description: The status of this DB Cluster Snapshot.

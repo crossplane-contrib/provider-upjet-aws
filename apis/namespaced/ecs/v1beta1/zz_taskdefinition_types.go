@@ -168,87 +168,87 @@ type EFSVolumeConfigurationParameters struct {
 
 type EphemeralStorageInitParameters struct {
 
-	// The total amount, in GiB, of ephemeral storage to set for the task. The minimum supported value is 21 GiB and the maximum supported value is 200 GiB.
+	// Total amount, in GiB, of ephemeral storage to set for the task. The minimum supported value is 21 GiB and the maximum supported value is 200 GiB.
 	SizeInGib *float64 `json:"sizeInGib,omitempty" tf:"size_in_gib,omitempty"`
 }
 
 type EphemeralStorageObservation struct {
 
-	// The total amount, in GiB, of ephemeral storage to set for the task. The minimum supported value is 21 GiB and the maximum supported value is 200 GiB.
+	// Total amount, in GiB, of ephemeral storage to set for the task. The minimum supported value is 21 GiB and the maximum supported value is 200 GiB.
 	SizeInGib *float64 `json:"sizeInGib,omitempty" tf:"size_in_gib,omitempty"`
 }
 
 type EphemeralStorageParameters struct {
 
-	// The total amount, in GiB, of ephemeral storage to set for the task. The minimum supported value is 21 GiB and the maximum supported value is 200 GiB.
+	// Total amount, in GiB, of ephemeral storage to set for the task. The minimum supported value is 21 GiB and the maximum supported value is 200 GiB.
 	// +kubebuilder:validation:Optional
 	SizeInGib *float64 `json:"sizeInGib" tf:"size_in_gib,omitempty"`
 }
 
 type FSXWindowsFileServerVolumeConfigurationAuthorizationConfigInitParameters struct {
 
-	// The authorization credential option to use. The authorization credential options can be provided using either the Amazon Resource Name (ARN) of an AWS Secrets Manager secret or AWS Systems Manager Parameter Store parameter. The ARNs refer to the stored credentials.
+	// Authorization credential option to use. The authorization credential options can be provided using either the ARN of an AWS Secrets Manager secret or AWS Systems Manager Parameter Store parameter. The ARNs refer to the stored credentials.
 	CredentialsParameter *string `json:"credentialsParameter,omitempty" tf:"credentials_parameter,omitempty"`
 
-	// A fully qualified domain name hosted by an AWS Directory Service Managed Microsoft AD (Active Directory) or self-hosted AD on Amazon EC2.
+	// Fully qualified domain name hosted by an AWS Directory Service Managed Microsoft AD (Active Directory) or self-hosted AD on Amazon EC2.
 	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
 }
 
 type FSXWindowsFileServerVolumeConfigurationAuthorizationConfigObservation struct {
 
-	// The authorization credential option to use. The authorization credential options can be provided using either the Amazon Resource Name (ARN) of an AWS Secrets Manager secret or AWS Systems Manager Parameter Store parameter. The ARNs refer to the stored credentials.
+	// Authorization credential option to use. The authorization credential options can be provided using either the ARN of an AWS Secrets Manager secret or AWS Systems Manager Parameter Store parameter. The ARNs refer to the stored credentials.
 	CredentialsParameter *string `json:"credentialsParameter,omitempty" tf:"credentials_parameter,omitempty"`
 
-	// A fully qualified domain name hosted by an AWS Directory Service Managed Microsoft AD (Active Directory) or self-hosted AD on Amazon EC2.
+	// Fully qualified domain name hosted by an AWS Directory Service Managed Microsoft AD (Active Directory) or self-hosted AD on Amazon EC2.
 	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
 }
 
 type FSXWindowsFileServerVolumeConfigurationAuthorizationConfigParameters struct {
 
-	// The authorization credential option to use. The authorization credential options can be provided using either the Amazon Resource Name (ARN) of an AWS Secrets Manager secret or AWS Systems Manager Parameter Store parameter. The ARNs refer to the stored credentials.
+	// Authorization credential option to use. The authorization credential options can be provided using either the ARN of an AWS Secrets Manager secret or AWS Systems Manager Parameter Store parameter. The ARNs refer to the stored credentials.
 	// +kubebuilder:validation:Optional
 	CredentialsParameter *string `json:"credentialsParameter" tf:"credentials_parameter,omitempty"`
 
-	// A fully qualified domain name hosted by an AWS Directory Service Managed Microsoft AD (Active Directory) or self-hosted AD on Amazon EC2.
+	// Fully qualified domain name hosted by an AWS Directory Service Managed Microsoft AD (Active Directory) or self-hosted AD on Amazon EC2.
 	// +kubebuilder:validation:Optional
 	Domain *string `json:"domain" tf:"domain,omitempty"`
 }
 
 type FSXWindowsFileServerVolumeConfigurationInitParameters struct {
 
-	// Configuration block for authorization for the Amazon FSx for Windows File Server file system detailed below.
+	// Configuration block for authorization for the Amazon EFS file system. Detailed below.
 	AuthorizationConfig *FSXWindowsFileServerVolumeConfigurationAuthorizationConfigInitParameters `json:"authorizationConfig,omitempty" tf:"authorization_config,omitempty"`
 
-	// The Amazon FSx for Windows File Server file system ID to use.
+	// ID of the EFS File System.
 	FileSystemID *string `json:"fileSystemId,omitempty" tf:"file_system_id,omitempty"`
 
-	// The directory within the Amazon FSx for Windows File Server file system to mount as the root directory inside the host.
+	// Directory within the Amazon EFS file system to mount as the root directory inside the host. If this parameter is omitted, the root of the Amazon EFS volume will be used. Specifying / will have the same effect as omitting this parameter. This argument is ignored when using authorization_config.
 	RootDirectory *string `json:"rootDirectory,omitempty" tf:"root_directory,omitempty"`
 }
 
 type FSXWindowsFileServerVolumeConfigurationObservation struct {
 
-	// Configuration block for authorization for the Amazon FSx for Windows File Server file system detailed below.
+	// Configuration block for authorization for the Amazon EFS file system. Detailed below.
 	AuthorizationConfig *FSXWindowsFileServerVolumeConfigurationAuthorizationConfigObservation `json:"authorizationConfig,omitempty" tf:"authorization_config,omitempty"`
 
-	// The Amazon FSx for Windows File Server file system ID to use.
+	// ID of the EFS File System.
 	FileSystemID *string `json:"fileSystemId,omitempty" tf:"file_system_id,omitempty"`
 
-	// The directory within the Amazon FSx for Windows File Server file system to mount as the root directory inside the host.
+	// Directory within the Amazon EFS file system to mount as the root directory inside the host. If this parameter is omitted, the root of the Amazon EFS volume will be used. Specifying / will have the same effect as omitting this parameter. This argument is ignored when using authorization_config.
 	RootDirectory *string `json:"rootDirectory,omitempty" tf:"root_directory,omitempty"`
 }
 
 type FSXWindowsFileServerVolumeConfigurationParameters struct {
 
-	// Configuration block for authorization for the Amazon FSx for Windows File Server file system detailed below.
+	// Configuration block for authorization for the Amazon EFS file system. Detailed below.
 	// +kubebuilder:validation:Optional
 	AuthorizationConfig *FSXWindowsFileServerVolumeConfigurationAuthorizationConfigParameters `json:"authorizationConfig" tf:"authorization_config,omitempty"`
 
-	// The Amazon FSx for Windows File Server file system ID to use.
+	// ID of the EFS File System.
 	// +kubebuilder:validation:Optional
 	FileSystemID *string `json:"fileSystemId" tf:"file_system_id,omitempty"`
 
-	// The directory within the Amazon FSx for Windows File Server file system to mount as the root directory inside the host.
+	// Directory within the Amazon EFS file system to mount as the root directory inside the host. If this parameter is omitted, the root of the Amazon EFS volume will be used. Specifying / will have the same effect as omitting this parameter. This argument is ignored when using authorization_config.
 	// +kubebuilder:validation:Optional
 	RootDirectory *string `json:"rootDirectory" tf:"root_directory,omitempty"`
 }
@@ -332,10 +332,10 @@ type S3FilesVolumeConfigurationInitParameters struct {
 	// Full ARN of the S3 Files file system to mount.
 	FileSystemArn *string `json:"fileSystemArn,omitempty" tf:"file_system_arn,omitempty"`
 
-	// Directory within the Amazon S3 Files file system to mount as the root directory.
+	// Directory within the Amazon EFS file system to mount as the root directory inside the host. If this parameter is omitted, the root of the Amazon EFS volume will be used. Specifying / will have the same effect as omitting this parameter. This argument is ignored when using authorization_config.
 	RootDirectory *string `json:"rootDirectory,omitempty" tf:"root_directory,omitempty"`
 
-	// Port to use for sending encrypted data between the ECS host and the S3 Files file system.
+	// Port to use for transit encryption. If you do not specify a transit encryption port, it will use the port selection strategy that the Amazon EFS mount helper uses.
 	TransitEncryptionPort *float64 `json:"transitEncryptionPort,omitempty" tf:"transit_encryption_port,omitempty"`
 }
 
@@ -347,10 +347,10 @@ type S3FilesVolumeConfigurationObservation struct {
 	// Full ARN of the S3 Files file system to mount.
 	FileSystemArn *string `json:"fileSystemArn,omitempty" tf:"file_system_arn,omitempty"`
 
-	// Directory within the Amazon S3 Files file system to mount as the root directory.
+	// Directory within the Amazon EFS file system to mount as the root directory inside the host. If this parameter is omitted, the root of the Amazon EFS volume will be used. Specifying / will have the same effect as omitting this parameter. This argument is ignored when using authorization_config.
 	RootDirectory *string `json:"rootDirectory,omitempty" tf:"root_directory,omitempty"`
 
-	// Port to use for sending encrypted data between the ECS host and the S3 Files file system.
+	// Port to use for transit encryption. If you do not specify a transit encryption port, it will use the port selection strategy that the Amazon EFS mount helper uses.
 	TransitEncryptionPort *float64 `json:"transitEncryptionPort,omitempty" tf:"transit_encryption_port,omitempty"`
 }
 
@@ -364,11 +364,11 @@ type S3FilesVolumeConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	FileSystemArn *string `json:"fileSystemArn" tf:"file_system_arn,omitempty"`
 
-	// Directory within the Amazon S3 Files file system to mount as the root directory.
+	// Directory within the Amazon EFS file system to mount as the root directory inside the host. If this parameter is omitted, the root of the Amazon EFS volume will be used. Specifying / will have the same effect as omitting this parameter. This argument is ignored when using authorization_config.
 	// +kubebuilder:validation:Optional
 	RootDirectory *string `json:"rootDirectory,omitempty" tf:"root_directory,omitempty"`
 
-	// Port to use for sending encrypted data between the ECS host and the S3 Files file system.
+	// Port to use for transit encryption. If you do not specify a transit encryption port, it will use the port selection strategy that the Amazon EFS mount helper uses.
 	// +kubebuilder:validation:Optional
 	TransitEncryptionPort *float64 `json:"transitEncryptionPort,omitempty" tf:"transit_encryption_port,omitempty"`
 }
@@ -378,13 +378,13 @@ type TaskDefinitionInitParameters struct {
 	// Number of cpu units used by the task. If the requires_compatibilities is FARGATE this field is required.
 	CPU *string `json:"cpu,omitempty" tf:"cpu,omitempty"`
 
-	// A list of valid container definitions provided as a single valid JSON document. Please note that you should only provide values that are part of the container definition document. For a detailed description of what parameters are available, see the Task Definition Parameters section from the official Developer Guide.
+	// List of valid container definitions provided as a single valid JSON document. Please note that you should only provide values that are part of the container definition document. For a detailed description of what parameters are available, see the Task Definition Parameters section from the official Developer Guide.
 	ContainerDefinitions *string `json:"containerDefinitions,omitempty" tf:"container_definitions,omitempty"`
 
 	// Enables fault injection and allows for fault injection requests to be accepted from the task's containers. Default is false.
 	EnableFaultInjection *bool `json:"enableFaultInjection,omitempty" tf:"enable_fault_injection,omitempty"`
 
-	// The amount of ephemeral storage to allocate for the task. This parameter is used to expand the total amount of ephemeral storage available, beyond the default amount, for tasks hosted on AWS Fargate. See Ephemeral Storage.
+	// Amount of ephemeral storage to allocate for the task. This parameter is used to expand the total amount of ephemeral storage available, beyond the default amount, for tasks hosted on AWS Fargate. See Ephemeral Storage.
 	EphemeralStorage *EphemeralStorageInitParameters `json:"ephemeralStorage,omitempty" tf:"ephemeral_storage,omitempty"`
 
 	// ARN of the task execution role that the Amazon ECS container agent and the Docker daemon can assume.
@@ -400,7 +400,7 @@ type TaskDefinitionInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ExecutionRoleArnSelector *v2.NamespacedSelector `json:"executionRoleArnSelector,omitempty" tf:"-"`
 
-	// A unique name for your task definition.
+	// Unique name for your task definition.
 	Family *string `json:"family,omitempty" tf:"family,omitempty"`
 
 	// IPC resource namespace to be used for the containers in the task. Valid values: host, task, none.
@@ -456,19 +456,19 @@ type TaskDefinitionObservation struct {
 	// Number of cpu units used by the task. If the requires_compatibilities is FARGATE this field is required.
 	CPU *string `json:"cpu,omitempty" tf:"cpu,omitempty"`
 
-	// A list of valid container definitions provided as a single valid JSON document. Please note that you should only provide values that are part of the container definition document. For a detailed description of what parameters are available, see the Task Definition Parameters section from the official Developer Guide.
+	// List of valid container definitions provided as a single valid JSON document. Please note that you should only provide values that are part of the container definition document. For a detailed description of what parameters are available, see the Task Definition Parameters section from the official Developer Guide.
 	ContainerDefinitions *string `json:"containerDefinitions,omitempty" tf:"container_definitions,omitempty"`
 
 	// Enables fault injection and allows for fault injection requests to be accepted from the task's containers. Default is false.
 	EnableFaultInjection *bool `json:"enableFaultInjection,omitempty" tf:"enable_fault_injection,omitempty"`
 
-	// The amount of ephemeral storage to allocate for the task. This parameter is used to expand the total amount of ephemeral storage available, beyond the default amount, for tasks hosted on AWS Fargate. See Ephemeral Storage.
+	// Amount of ephemeral storage to allocate for the task. This parameter is used to expand the total amount of ephemeral storage available, beyond the default amount, for tasks hosted on AWS Fargate. See Ephemeral Storage.
 	EphemeralStorage *EphemeralStorageObservation `json:"ephemeralStorage,omitempty" tf:"ephemeral_storage,omitempty"`
 
 	// ARN of the task execution role that the Amazon ECS container agent and the Docker daemon can assume.
 	ExecutionRoleArn *string `json:"executionRoleArn,omitempty" tf:"execution_role_arn,omitempty"`
 
-	// A unique name for your task definition.
+	// Unique name for your task definition.
 	Family *string `json:"family,omitempty" tf:"family,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -532,7 +532,7 @@ type TaskDefinitionParameters struct {
 	// +kubebuilder:validation:Optional
 	CPU *string `json:"cpu,omitempty" tf:"cpu,omitempty"`
 
-	// A list of valid container definitions provided as a single valid JSON document. Please note that you should only provide values that are part of the container definition document. For a detailed description of what parameters are available, see the Task Definition Parameters section from the official Developer Guide.
+	// List of valid container definitions provided as a single valid JSON document. Please note that you should only provide values that are part of the container definition document. For a detailed description of what parameters are available, see the Task Definition Parameters section from the official Developer Guide.
 	// +kubebuilder:validation:Optional
 	ContainerDefinitions *string `json:"containerDefinitions,omitempty" tf:"container_definitions,omitempty"`
 
@@ -540,7 +540,7 @@ type TaskDefinitionParameters struct {
 	// +kubebuilder:validation:Optional
 	EnableFaultInjection *bool `json:"enableFaultInjection,omitempty" tf:"enable_fault_injection,omitempty"`
 
-	// The amount of ephemeral storage to allocate for the task. This parameter is used to expand the total amount of ephemeral storage available, beyond the default amount, for tasks hosted on AWS Fargate. See Ephemeral Storage.
+	// Amount of ephemeral storage to allocate for the task. This parameter is used to expand the total amount of ephemeral storage available, beyond the default amount, for tasks hosted on AWS Fargate. See Ephemeral Storage.
 	// +kubebuilder:validation:Optional
 	EphemeralStorage *EphemeralStorageParameters `json:"ephemeralStorage,omitempty" tf:"ephemeral_storage,omitempty"`
 
@@ -558,7 +558,7 @@ type TaskDefinitionParameters struct {
 	// +kubebuilder:validation:Optional
 	ExecutionRoleArnSelector *v2.NamespacedSelector `json:"executionRoleArnSelector,omitempty" tf:"-"`
 
-	// A unique name for your task definition.
+	// Unique name for your task definition.
 	// +kubebuilder:validation:Optional
 	Family *string `json:"family,omitempty" tf:"family,omitempty"`
 
@@ -668,8 +668,7 @@ type VolumeInitParameters struct {
 	// Path on the host container instance that is presented to the container. If not set, ECS will create a nonpersistent data volume that starts empty and is deleted after the task has finished.
 	HostPath *string `json:"hostPath,omitempty" tf:"host_path,omitempty"`
 
-	// Name of the volume. This name is referenced in the sourceVolume
-	// parameter of container definition in the mountPoints section.
+	// Name of the volume. This name is referenced in the sourceVolume parameter of container definition in the mountPoints section.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Configuration block for an S3 Files volume. Detailed below.
@@ -693,8 +692,7 @@ type VolumeObservation struct {
 	// Path on the host container instance that is presented to the container. If not set, ECS will create a nonpersistent data volume that starts empty and is deleted after the task has finished.
 	HostPath *string `json:"hostPath,omitempty" tf:"host_path,omitempty"`
 
-	// Name of the volume. This name is referenced in the sourceVolume
-	// parameter of container definition in the mountPoints section.
+	// Name of the volume. This name is referenced in the sourceVolume parameter of container definition in the mountPoints section.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Configuration block for an S3 Files volume. Detailed below.
@@ -723,8 +721,7 @@ type VolumeParameters struct {
 	// +kubebuilder:validation:Optional
 	HostPath *string `json:"hostPath,omitempty" tf:"host_path,omitempty"`
 
-	// Name of the volume. This name is referenced in the sourceVolume
-	// parameter of container definition in the mountPoints section.
+	// Name of the volume. This name is referenced in the sourceVolume parameter of container definition in the mountPoints section.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 

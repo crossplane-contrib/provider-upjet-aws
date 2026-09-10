@@ -60,8 +60,8 @@ spec:
               forProvider:
                 properties:
                   html:
-                    description: The HTML body of the email. Must be less than 500KB
-                      in size, including both the text and HTML parts.
+                    description: HTML body of the email. Must be less than 500KB in
+                      size, including both the text and HTML parts.
                     type: string
                   region:
                     description: |-
@@ -69,12 +69,12 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   subject:
-                    description: The subject line of the email.
+                    description: Subject line of the email.
                     type: string
                   text:
-                    description: The email body that will be visible to recipients
-                      whose email clients do not display HTML. Must be less than 500KB
-                      in size, including both the text and HTML parts.
+                    description: Email body that will be visible to recipients whose
+                      email clients do not display HTML. Must be less than 500KB in
+                      size, including both the text and HTML parts.
                     type: string
                 required:
                 - region
@@ -93,16 +93,16 @@ spec:
                   autoscaler.
                 properties:
                   html:
-                    description: The HTML body of the email. Must be less than 500KB
-                      in size, including both the text and HTML parts.
+                    description: HTML body of the email. Must be less than 500KB in
+                      size, including both the text and HTML parts.
                     type: string
                   subject:
-                    description: The subject line of the email.
+                    description: Subject line of the email.
                     type: string
                   text:
-                    description: The email body that will be visible to recipients
-                      whose email clients do not display HTML. Must be less than 500KB
-                      in size, including both the text and HTML parts.
+                    description: Email body that will be visible to recipients whose
+                      email clients do not display HTML. Must be less than 500KB in
+                      size, including both the text and HTML parts.
                     type: string
                 type: object
               managementPolicies:
@@ -169,14 +169,14 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The ARN of the SES template
+                    description: ARN of the SES template
                     type: string
                   html:
-                    description: The HTML body of the email. Must be less than 500KB
-                      in size, including both the text and HTML parts.
+                    description: HTML body of the email. Must be less than 500KB in
+                      size, including both the text and HTML parts.
                     type: string
                   id:
-                    description: The name of the SES template
+                    description: Name of the SES template
                     type: string
                   region:
                     description: |-
@@ -184,12 +184,12 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   subject:
-                    description: The subject line of the email.
+                    description: Subject line of the email.
                     type: string
                   text:
-                    description: The email body that will be visible to recipients
-                      whose email clients do not display HTML. Must be less than 500KB
-                      in size, including both the text and HTML parts.
+                    description: Email body that will be visible to recipients whose
+                      email clients do not display HTML. Must be less than 500KB in
+                      size, including both the text and HTML parts.
                     type: string
                 type: object
               conditions:

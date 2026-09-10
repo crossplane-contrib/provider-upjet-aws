@@ -44,8 +44,7 @@ type BucketReplicationConfigurationInitParameters struct {
 	// List of configuration blocks describing the rules managing the replication. See below.
 	Rule []BucketReplicationConfigurationRuleInitParameters `json:"rule,omitempty" tf:"rule,omitempty"`
 
-	// Token to allow replication to be enabled on an Object Lock-enabled bucket. You must contact AWS support for the bucket's "Object Lock token".
-	// For more details, see Using S3 Object Lock with replication.
+	// Token to allow replication to be enabled on an Object Lock-enabled bucket. You must contact AWS support for the bucket's "Object Lock token". For more details, see Using S3 Object Lock with replication.
 	TokenSecretRef *v2.LocalSecretKeySelector `json:"tokenSecretRef,omitempty" tf:"-"`
 }
 
@@ -107,8 +106,7 @@ type BucketReplicationConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	Rule []BucketReplicationConfigurationRuleParameters `json:"rule,omitempty" tf:"rule,omitempty"`
 
-	// Token to allow replication to be enabled on an Object Lock-enabled bucket. You must contact AWS support for the bucket's "Object Lock token".
-	// For more details, see Using S3 Object Lock with replication.
+	// Token to allow replication to be enabled on an Object Lock-enabled bucket. You must contact AWS support for the bucket's "Object Lock token". For more details, see Using S3 Object Lock with replication.
 	// +kubebuilder:validation:Optional
 	TokenSecretRef *v2.LocalSecretKeySelector `json:"tokenSecretRef,omitempty" tf:"-"`
 }
@@ -157,7 +155,7 @@ type BucketReplicationConfigurationRuleInitParameters struct {
 	// Whether delete markers are replicated. This argument is only valid with V2 replication configurations (i.e., when filter is used)documented below.
 	DeleteMarkerReplication *DeleteMarkerReplicationInitParameters `json:"deleteMarkerReplication,omitempty" tf:"delete_marker_replication,omitempty"`
 
-	// Specifies the destination for the rule. See below.
+	// Destination for the rule. See below.
 	Destination *RuleDestinationInitParameters `json:"destination,omitempty" tf:"destination,omitempty"`
 
 	// Replicate existing objects in the source bucket according to the rule configurations. See below.
@@ -175,7 +173,7 @@ type BucketReplicationConfigurationRuleInitParameters struct {
 	// Priority associated with the rule. Priority should only be set if filter is configured. If not provided, defaults to 0. Priority must be unique between multiple rules.
 	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
-	// Specifies special object selection criteria. See below.
+	// Special object selection criteria. See below.
 	SourceSelectionCriteria *RuleSourceSelectionCriteriaInitParameters `json:"sourceSelectionCriteria,omitempty" tf:"source_selection_criteria,omitempty"`
 
 	// Status of the rule. Either "Enabled" or "Disabled". The rule is ignored if status is not "Enabled".
@@ -187,7 +185,7 @@ type BucketReplicationConfigurationRuleObservation struct {
 	// Whether delete markers are replicated. This argument is only valid with V2 replication configurations (i.e., when filter is used)documented below.
 	DeleteMarkerReplication *DeleteMarkerReplicationObservation `json:"deleteMarkerReplication,omitempty" tf:"delete_marker_replication,omitempty"`
 
-	// Specifies the destination for the rule. See below.
+	// Destination for the rule. See below.
 	Destination *RuleDestinationObservation `json:"destination,omitempty" tf:"destination,omitempty"`
 
 	// Replicate existing objects in the source bucket according to the rule configurations. See below.
@@ -205,7 +203,7 @@ type BucketReplicationConfigurationRuleObservation struct {
 	// Priority associated with the rule. Priority should only be set if filter is configured. If not provided, defaults to 0. Priority must be unique between multiple rules.
 	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
-	// Specifies special object selection criteria. See below.
+	// Special object selection criteria. See below.
 	SourceSelectionCriteria *RuleSourceSelectionCriteriaObservation `json:"sourceSelectionCriteria,omitempty" tf:"source_selection_criteria,omitempty"`
 
 	// Status of the rule. Either "Enabled" or "Disabled". The rule is ignored if status is not "Enabled".
@@ -218,7 +216,7 @@ type BucketReplicationConfigurationRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	DeleteMarkerReplication *DeleteMarkerReplicationParameters `json:"deleteMarkerReplication,omitempty" tf:"delete_marker_replication,omitempty"`
 
-	// Specifies the destination for the rule. See below.
+	// Destination for the rule. See below.
 	// +kubebuilder:validation:Optional
 	Destination *RuleDestinationParameters `json:"destination" tf:"destination,omitempty"`
 
@@ -242,7 +240,7 @@ type BucketReplicationConfigurationRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
-	// Specifies special object selection criteria. See below.
+	// Special object selection criteria. See below.
 	// +kubebuilder:validation:Optional
 	SourceSelectionCriteria *RuleSourceSelectionCriteriaParameters `json:"sourceSelectionCriteria,omitempty" tf:"source_selection_criteria,omitempty"`
 
@@ -272,19 +270,19 @@ type DeleteMarkerReplicationParameters struct {
 
 type DestinationAccessControlTranslationInitParameters struct {
 
-	// Specifies the replica ownership. For default and valid values, see PUT bucket replication in the Amazon S3 API Reference. Valid values: Destination.
+	// Replica ownership. For default and valid values, see PUT bucket replication in the Amazon S3 API Reference. Valid values: Destination.
 	Owner *string `json:"owner,omitempty" tf:"owner,omitempty"`
 }
 
 type DestinationAccessControlTranslationObservation struct {
 
-	// Specifies the replica ownership. For default and valid values, see PUT bucket replication in the Amazon S3 API Reference. Valid values: Destination.
+	// Replica ownership. For default and valid values, see PUT bucket replication in the Amazon S3 API Reference. Valid values: Destination.
 	Owner *string `json:"owner,omitempty" tf:"owner,omitempty"`
 }
 
 type DestinationAccessControlTranslationParameters struct {
 
-	// Specifies the replica ownership. For default and valid values, see PUT bucket replication in the Amazon S3 API Reference. Valid values: Destination.
+	// Replica ownership. For default and valid values, see PUT bucket replication in the Amazon S3 API Reference. Valid values: Destination.
 	// +kubebuilder:validation:Optional
 	Owner *string `json:"owner" tf:"owner,omitempty"`
 }
@@ -349,7 +347,7 @@ type DestinationReplicationTimeParameters struct {
 
 type EncryptionConfigurationInitParameters struct {
 
-	// ID (Key ARN or Alias ARN) of the customer managed AWS KMS key stored in AWS Key Management Service (KMS) for the destination bucket.
+	// ID (Key ARN or Alias ARN) of the customer managed AWS KMS key stored in KMS for the destination bucket.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kms/v1beta1.Key
 	ReplicaKMSKeyID *string `json:"replicaKmsKeyId,omitempty" tf:"replica_kms_key_id,omitempty"`
 
@@ -364,13 +362,13 @@ type EncryptionConfigurationInitParameters struct {
 
 type EncryptionConfigurationObservation struct {
 
-	// ID (Key ARN or Alias ARN) of the customer managed AWS KMS key stored in AWS Key Management Service (KMS) for the destination bucket.
+	// ID (Key ARN or Alias ARN) of the customer managed AWS KMS key stored in KMS for the destination bucket.
 	ReplicaKMSKeyID *string `json:"replicaKmsKeyId,omitempty" tf:"replica_kms_key_id,omitempty"`
 }
 
 type EncryptionConfigurationParameters struct {
 
-	// ID (Key ARN or Alias ARN) of the customer managed AWS KMS key stored in AWS Key Management Service (KMS) for the destination bucket.
+	// ID (Key ARN or Alias ARN) of the customer managed AWS KMS key stored in KMS for the destination bucket.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kms/v1beta1.Key
 	// +kubebuilder:validation:Optional
 	ReplicaKMSKeyID *string `json:"replicaKmsKeyId,omitempty" tf:"replica_kms_key_id,omitempty"`
@@ -532,7 +530,7 @@ type RuleDestinationInitParameters struct {
 	// Configuration block that specifies S3 Replication Time Control (S3 RTC), including whether S3 RTC is enabled and the time when all objects and operations on objects must be replicated. See below. Replication Time Control must be used in conjunction with metrics.
 	ReplicationTime *DestinationReplicationTimeInitParameters `json:"replicationTime,omitempty" tf:"replication_time,omitempty"`
 
-	// The storage class used to store the object. By default, Amazon S3 uses the storage class of the source object to create the object replica.
+	// Storage class used to store the object. By default, Amazon S3 uses the storage class of the source object to create the object replica.
 	StorageClass *string `json:"storageClass,omitempty" tf:"storage_class,omitempty"`
 }
 
@@ -556,7 +554,7 @@ type RuleDestinationObservation struct {
 	// Configuration block that specifies S3 Replication Time Control (S3 RTC), including whether S3 RTC is enabled and the time when all objects and operations on objects must be replicated. See below. Replication Time Control must be used in conjunction with metrics.
 	ReplicationTime *DestinationReplicationTimeObservation `json:"replicationTime,omitempty" tf:"replication_time,omitempty"`
 
-	// The storage class used to store the object. By default, Amazon S3 uses the storage class of the source object to create the object replica.
+	// Storage class used to store the object. By default, Amazon S3 uses the storage class of the source object to create the object replica.
 	StorageClass *string `json:"storageClass,omitempty" tf:"storage_class,omitempty"`
 }
 
@@ -596,7 +594,7 @@ type RuleDestinationParameters struct {
 	// +kubebuilder:validation:Optional
 	ReplicationTime *DestinationReplicationTimeParameters `json:"replicationTime,omitempty" tf:"replication_time,omitempty"`
 
-	// The storage class used to store the object. By default, Amazon S3 uses the storage class of the source object to create the object replica.
+	// Storage class used to store the object. By default, Amazon S3 uses the storage class of the source object to create the object replica.
 	// +kubebuilder:validation:Optional
 	StorageClass *string `json:"storageClass,omitempty" tf:"storage_class,omitempty"`
 }

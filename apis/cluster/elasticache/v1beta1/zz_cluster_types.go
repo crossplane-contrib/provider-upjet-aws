@@ -144,7 +144,7 @@ type ClusterInitParameters struct {
 	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
-	// Single-element string list containing an Amazon Resource Name (ARN) of a Redis RDB snapshot file stored in Amazon S3. The object name cannot contain any commas. Changing snapshot_arns forces a new resource.
+	// Single-element string list containing an ARN of a Redis RDB snapshot file stored in Amazon S3. The object name cannot contain any commas. Changing snapshot_arns forces a new resource.
 	SnapshotArns []*string `json:"snapshotArns,omitempty" tf:"snapshot_arns,omitempty"`
 
 	// Name of a snapshot from which to restore data into the new node group. Changing snapshot_name forces a new resource.
@@ -172,7 +172,7 @@ type ClusterInitParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Enable encryption in-transit. Supported with Memcached versions 1.6.12 and later, Redis OSS versions 3.2.6, 4.0.10 and later, running in a VPC. See the ElastiCache in-transit encryption documentation for more details.
+	// Enable encryption in-transit. Supported only with Memcached versions 1.6.12 and later, running in a VPC. For Redis or Valkey transit encryption, use aws_elasticache_replication_group instead. See the ElastiCache in-transit encryption documentation for more details.
 	TransitEncryptionEnabled *bool `json:"transitEncryptionEnabled,omitempty" tf:"transit_encryption_enabled,omitempty"`
 }
 
@@ -277,7 +277,7 @@ type ClusterObservation struct {
 	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
-	// Single-element string list containing an Amazon Resource Name (ARN) of a Redis RDB snapshot file stored in Amazon S3. The object name cannot contain any commas. Changing snapshot_arns forces a new resource.
+	// Single-element string list containing an ARN of a Redis RDB snapshot file stored in Amazon S3. The object name cannot contain any commas. Changing snapshot_arns forces a new resource.
 	SnapshotArns []*string `json:"snapshotArns,omitempty" tf:"snapshot_arns,omitempty"`
 
 	// Name of a snapshot from which to restore data into the new node group. Changing snapshot_name forces a new resource.
@@ -300,7 +300,7 @@ type ClusterObservation struct {
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// Enable encryption in-transit. Supported with Memcached versions 1.6.12 and later, Redis OSS versions 3.2.6, 4.0.10 and later, running in a VPC. See the ElastiCache in-transit encryption documentation for more details.
+	// Enable encryption in-transit. Supported only with Memcached versions 1.6.12 and later, running in a VPC. For Redis or Valkey transit encryption, use aws_elasticache_replication_group instead. See the ElastiCache in-transit encryption documentation for more details.
 	TransitEncryptionEnabled *bool `json:"transitEncryptionEnabled,omitempty" tf:"transit_encryption_enabled,omitempty"`
 }
 
@@ -440,7 +440,7 @@ type ClusterParameters struct {
 	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
-	// Single-element string list containing an Amazon Resource Name (ARN) of a Redis RDB snapshot file stored in Amazon S3. The object name cannot contain any commas. Changing snapshot_arns forces a new resource.
+	// Single-element string list containing an ARN of a Redis RDB snapshot file stored in Amazon S3. The object name cannot contain any commas. Changing snapshot_arns forces a new resource.
 	// +kubebuilder:validation:Optional
 	SnapshotArns []*string `json:"snapshotArns,omitempty" tf:"snapshot_arns,omitempty"`
 
@@ -474,7 +474,7 @@ type ClusterParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Enable encryption in-transit. Supported with Memcached versions 1.6.12 and later, Redis OSS versions 3.2.6, 4.0.10 and later, running in a VPC. See the ElastiCache in-transit encryption documentation for more details.
+	// Enable encryption in-transit. Supported only with Memcached versions 1.6.12 and later, running in a VPC. For Redis or Valkey transit encryption, use aws_elasticache_replication_group instead. See the ElastiCache in-transit encryption documentation for more details.
 	// +kubebuilder:validation:Optional
 	TransitEncryptionEnabled *bool `json:"transitEncryptionEnabled,omitempty" tf:"transit_encryption_enabled,omitempty"`
 }

@@ -25,7 +25,7 @@ type ActivityInitParameters struct {
 
 type ActivityObservation struct {
 
-	// Amazon Resource Name (ARN) of the activity.
+	// ARN of the activity.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Date the activity was created.
@@ -34,7 +34,7 @@ type ActivityObservation struct {
 	// Defines what encryption configuration is used to encrypt data in the Activity. For more information see the section Data at rest encyption in the AWS Step Functions User Guide.
 	EncryptionConfiguration *EncryptionConfigurationObservation `json:"encryptionConfiguration,omitempty" tf:"encryption_configuration,omitempty"`
 
-	// Amazon Resource Name (ARN) of the activity.
+	// ARN of the activity.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.

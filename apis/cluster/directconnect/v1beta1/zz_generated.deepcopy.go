@@ -709,10 +709,37 @@ func (in *ConnectionObservation) DeepCopyInto(out *ConnectionObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.PrefixPoolSizeIPv4 != nil {
+		in, out := &in.PrefixPoolSizeIPv4, &out.PrefixPoolSizeIPv4
+		*out = new(float64)
+		**out = **in
+	}
+	if in.PrefixPoolSizeIPv6 != nil {
+		in, out := &in.PrefixPoolSizeIPv6, &out.PrefixPoolSizeIPv6
+		*out = new(float64)
+		**out = **in
+	}
+	if in.PrefixPoolUnallocatedCountIPv4 != nil {
+		in, out := &in.PrefixPoolUnallocatedCountIPv4, &out.PrefixPoolUnallocatedCountIPv4
+		*out = new(float64)
+		**out = **in
+	}
+	if in.PrefixPoolUnallocatedCountIPv6 != nil {
+		in, out := &in.PrefixPoolUnallocatedCountIPv6, &out.PrefixPoolUnallocatedCountIPv6
+		*out = new(float64)
+		**out = **in
+	}
 	if in.ProviderName != nil {
 		in, out := &in.ProviderName, &out.ProviderName
 		*out = new(string)
 		**out = **in
+	}
+	if in.RateLimiterStatus != nil {
+		in, out := &in.RateLimiterStatus, &out.RateLimiterStatus
+		*out = make([]RateLimiterStatusObservation, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
 	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
@@ -727,6 +754,11 @@ func (in *ConnectionObservation) DeepCopyInto(out *ConnectionObservation) {
 	if in.SkipDestroy != nil {
 		in, out := &in.SkipDestroy, &out.SkipDestroy
 		*out = new(bool)
+		**out = **in
+	}
+	if in.State != nil {
+		in, out := &in.State, &out.State
+		*out = new(string)
 		**out = **in
 	}
 	if in.Tags != nil {
@@ -1803,6 +1835,16 @@ func (in *HostedPrivateVirtualInterfaceAccepterInitParameters) DeepCopyInto(out 
 		*out = new(string)
 		**out = **in
 	}
+	if in.PrefixPoolAllocatedCountIPv4 != nil {
+		in, out := &in.PrefixPoolAllocatedCountIPv4, &out.PrefixPoolAllocatedCountIPv4
+		*out = new(float64)
+		**out = **in
+	}
+	if in.PrefixPoolAllocatedCountIPv6 != nil {
+		in, out := &in.PrefixPoolAllocatedCountIPv6, &out.PrefixPoolAllocatedCountIPv6
+		*out = new(float64)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -1911,6 +1953,16 @@ func (in *HostedPrivateVirtualInterfaceAccepterObservation) DeepCopyInto(out *Ho
 		*out = new(string)
 		**out = **in
 	}
+	if in.PrefixPoolAllocatedCountIPv4 != nil {
+		in, out := &in.PrefixPoolAllocatedCountIPv4, &out.PrefixPoolAllocatedCountIPv4
+		*out = new(float64)
+		**out = **in
+	}
+	if in.PrefixPoolAllocatedCountIPv6 != nil {
+		in, out := &in.PrefixPoolAllocatedCountIPv6, &out.PrefixPoolAllocatedCountIPv6
+		*out = new(float64)
+		**out = **in
+	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
 		*out = new(string)
@@ -1976,6 +2028,16 @@ func (in *HostedPrivateVirtualInterfaceAccepterParameters) DeepCopyInto(out *Hos
 	if in.DxGatewayID != nil {
 		in, out := &in.DxGatewayID, &out.DxGatewayID
 		*out = new(string)
+		**out = **in
+	}
+	if in.PrefixPoolAllocatedCountIPv4 != nil {
+		in, out := &in.PrefixPoolAllocatedCountIPv4, &out.PrefixPoolAllocatedCountIPv4
+		*out = new(float64)
+		**out = **in
+	}
+	if in.PrefixPoolAllocatedCountIPv6 != nil {
+		in, out := &in.PrefixPoolAllocatedCountIPv6, &out.PrefixPoolAllocatedCountIPv6
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Region != nil {
@@ -2134,6 +2196,11 @@ func (in *HostedPrivateVirtualInterfaceInitParameters) DeepCopyInto(out *HostedP
 		*out = new(string)
 		**out = **in
 	}
+	if in.RateLimit != nil {
+		in, out := &in.RateLimit, &out.RateLimit
+		*out = new(string)
+		**out = **in
+	}
 	if in.Vlan != nil {
 		in, out := &in.Vlan, &out.Vlan
 		*out = new(float64)
@@ -2256,6 +2323,21 @@ func (in *HostedPrivateVirtualInterfaceObservation) DeepCopyInto(out *HostedPriv
 		*out = new(string)
 		**out = **in
 	}
+	if in.PrefixPoolAllocatedCountIPv4 != nil {
+		in, out := &in.PrefixPoolAllocatedCountIPv4, &out.PrefixPoolAllocatedCountIPv4
+		*out = new(float64)
+		**out = **in
+	}
+	if in.PrefixPoolAllocatedCountIPv6 != nil {
+		in, out := &in.PrefixPoolAllocatedCountIPv6, &out.PrefixPoolAllocatedCountIPv6
+		*out = new(float64)
+		**out = **in
+	}
+	if in.RateLimit != nil {
+		in, out := &in.RateLimit, &out.RateLimit
+		*out = new(string)
+		**out = **in
+	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
 		*out = new(string)
@@ -2333,6 +2415,11 @@ func (in *HostedPrivateVirtualInterfaceParameters) DeepCopyInto(out *HostedPriva
 	}
 	if in.OwnerAccountID != nil {
 		in, out := &in.OwnerAccountID, &out.OwnerAccountID
+		*out = new(string)
+		**out = **in
+	}
+	if in.RateLimit != nil {
+		in, out := &in.RateLimit, &out.RateLimit
 		*out = new(string)
 		**out = **in
 	}
@@ -2731,6 +2818,11 @@ func (in *HostedPublicVirtualInterfaceInitParameters) DeepCopyInto(out *HostedPu
 		*out = new(string)
 		**out = **in
 	}
+	if in.RateLimit != nil {
+		in, out := &in.RateLimit, &out.RateLimit
+		*out = new(string)
+		**out = **in
+	}
 	if in.RouteFilterPrefixes != nil {
 		in, out := &in.RouteFilterPrefixes, &out.RouteFilterPrefixes
 		*out = make([]*string, len(*in))
@@ -2854,6 +2946,11 @@ func (in *HostedPublicVirtualInterfaceObservation) DeepCopyInto(out *HostedPubli
 		*out = new(string)
 		**out = **in
 	}
+	if in.RateLimit != nil {
+		in, out := &in.RateLimit, &out.RateLimit
+		*out = new(string)
+		**out = **in
+	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
 		*out = new(string)
@@ -2937,6 +3034,11 @@ func (in *HostedPublicVirtualInterfaceParameters) DeepCopyInto(out *HostedPublic
 	}
 	if in.OwnerAccountID != nil {
 		in, out := &in.OwnerAccountID, &out.OwnerAccountID
+		*out = new(string)
+		**out = **in
+	}
+	if in.RateLimit != nil {
+		in, out := &in.RateLimit, &out.RateLimit
 		*out = new(string)
 		**out = **in
 	}
@@ -3080,6 +3182,16 @@ func (in *HostedTransitVirtualInterfaceAccepterInitParameters) DeepCopyInto(out 
 		*out = new(v2.Selector)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.PrefixPoolAllocatedCountIPv4 != nil {
+		in, out := &in.PrefixPoolAllocatedCountIPv4, &out.PrefixPoolAllocatedCountIPv4
+		*out = new(float64)
+		**out = **in
+	}
+	if in.PrefixPoolAllocatedCountIPv6 != nil {
+		in, out := &in.PrefixPoolAllocatedCountIPv6, &out.PrefixPoolAllocatedCountIPv6
+		*out = new(float64)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -3173,6 +3285,16 @@ func (in *HostedTransitVirtualInterfaceAccepterObservation) DeepCopyInto(out *Ho
 		*out = new(string)
 		**out = **in
 	}
+	if in.PrefixPoolAllocatedCountIPv4 != nil {
+		in, out := &in.PrefixPoolAllocatedCountIPv4, &out.PrefixPoolAllocatedCountIPv4
+		*out = new(float64)
+		**out = **in
+	}
+	if in.PrefixPoolAllocatedCountIPv6 != nil {
+		in, out := &in.PrefixPoolAllocatedCountIPv6, &out.PrefixPoolAllocatedCountIPv6
+		*out = new(float64)
+		**out = **in
+	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
 		*out = new(string)
@@ -3244,6 +3366,16 @@ func (in *HostedTransitVirtualInterfaceAccepterParameters) DeepCopyInto(out *Hos
 		in, out := &in.DxGatewayIDSelector, &out.DxGatewayIDSelector
 		*out = new(v2.Selector)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.PrefixPoolAllocatedCountIPv4 != nil {
+		in, out := &in.PrefixPoolAllocatedCountIPv4, &out.PrefixPoolAllocatedCountIPv4
+		*out = new(float64)
+		**out = **in
+	}
+	if in.PrefixPoolAllocatedCountIPv6 != nil {
+		in, out := &in.PrefixPoolAllocatedCountIPv6, &out.PrefixPoolAllocatedCountIPv6
+		*out = new(float64)
+		**out = **in
 	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
@@ -3386,6 +3518,11 @@ func (in *HostedTransitVirtualInterfaceInitParameters) DeepCopyInto(out *HostedT
 		*out = new(string)
 		**out = **in
 	}
+	if in.RateLimit != nil {
+		in, out := &in.RateLimit, &out.RateLimit
+		*out = new(string)
+		**out = **in
+	}
 	if in.Vlan != nil {
 		in, out := &in.Vlan, &out.Vlan
 		*out = new(float64)
@@ -3508,6 +3645,21 @@ func (in *HostedTransitVirtualInterfaceObservation) DeepCopyInto(out *HostedTran
 		*out = new(string)
 		**out = **in
 	}
+	if in.PrefixPoolAllocatedCountIPv4 != nil {
+		in, out := &in.PrefixPoolAllocatedCountIPv4, &out.PrefixPoolAllocatedCountIPv4
+		*out = new(float64)
+		**out = **in
+	}
+	if in.PrefixPoolAllocatedCountIPv6 != nil {
+		in, out := &in.PrefixPoolAllocatedCountIPv6, &out.PrefixPoolAllocatedCountIPv6
+		*out = new(float64)
+		**out = **in
+	}
+	if in.RateLimit != nil {
+		in, out := &in.RateLimit, &out.RateLimit
+		*out = new(string)
+		**out = **in
+	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
 		*out = new(string)
@@ -3585,6 +3737,11 @@ func (in *HostedTransitVirtualInterfaceParameters) DeepCopyInto(out *HostedTrans
 	}
 	if in.OwnerAccountID != nil {
 		in, out := &in.OwnerAccountID, &out.OwnerAccountID
+		*out = new(string)
+		**out = **in
+	}
+	if in.RateLimit != nil {
+		in, out := &in.RateLimit, &out.RateLimit
 		*out = new(string)
 		**out = **in
 	}
@@ -3823,6 +3980,13 @@ func (in *LagObservation) DeepCopyInto(out *LagObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.RateLimiterStatus != nil {
+		in, out := &in.RateLimiterStatus, &out.RateLimiterStatus
+		*out = make([]LagRateLimiterStatusObservation, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
 		*out = new(string)
@@ -3939,6 +4103,71 @@ func (in *LagParameters) DeepCopy() *LagParameters {
 }
 
 // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LagRateLimiterStatusInitParameters) DeepCopyInto(out *LagRateLimiterStatusInitParameters) {
+	*out = *in
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LagRateLimiterStatusInitParameters.
+func (in *LagRateLimiterStatusInitParameters) DeepCopy() *LagRateLimiterStatusInitParameters {
+	if in == nil {
+		return nil
+	}
+	out := new(LagRateLimiterStatusInitParameters)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LagRateLimiterStatusObservation) DeepCopyInto(out *LagRateLimiterStatusObservation) {
+	*out = *in
+	if in.InUse != nil {
+		in, out := &in.InUse, &out.InUse
+		*out = new(float64)
+		**out = **in
+	}
+	if in.MaxAllowed != nil {
+		in, out := &in.MaxAllowed, &out.MaxAllowed
+		*out = new(float64)
+		**out = **in
+	}
+	if in.Remaining != nil {
+		in, out := &in.Remaining, &out.Remaining
+		*out = new(float64)
+		**out = **in
+	}
+	if in.TotalBandwidth != nil {
+		in, out := &in.TotalBandwidth, &out.TotalBandwidth
+		*out = new(string)
+		**out = **in
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LagRateLimiterStatusObservation.
+func (in *LagRateLimiterStatusObservation) DeepCopy() *LagRateLimiterStatusObservation {
+	if in == nil {
+		return nil
+	}
+	out := new(LagRateLimiterStatusObservation)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LagRateLimiterStatusParameters) DeepCopyInto(out *LagRateLimiterStatusParameters) {
+	*out = *in
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LagRateLimiterStatusParameters.
+func (in *LagRateLimiterStatusParameters) DeepCopy() *LagRateLimiterStatusParameters {
+	if in == nil {
+		return nil
+	}
+	out := new(LagRateLimiterStatusParameters)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
 func (in *LagSpec) DeepCopyInto(out *LagSpec) {
 	*out = *in
 	in.ClusterManagedResourceSpec.DeepCopyInto(&out.ClusterManagedResourceSpec)
@@ -4018,6 +4247,11 @@ func (in *PrivateVirtualInterfaceInitParameters) DeepCopyInto(out *PrivateVirtua
 		*out = new(float64)
 		**out = **in
 	}
+	if in.BGPAsnLong != nil {
+		in, out := &in.BGPAsnLong, &out.BGPAsnLong
+		*out = new(string)
+		**out = **in
+	}
 	if in.BGPAuthKey != nil {
 		in, out := &in.BGPAuthKey, &out.BGPAuthKey
 		*out = new(string)
@@ -4055,6 +4289,21 @@ func (in *PrivateVirtualInterfaceInitParameters) DeepCopyInto(out *PrivateVirtua
 	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
+		*out = new(string)
+		**out = **in
+	}
+	if in.PrefixPoolAllocatedCountIPv4 != nil {
+		in, out := &in.PrefixPoolAllocatedCountIPv4, &out.PrefixPoolAllocatedCountIPv4
+		*out = new(float64)
+		**out = **in
+	}
+	if in.PrefixPoolAllocatedCountIPv6 != nil {
+		in, out := &in.PrefixPoolAllocatedCountIPv6, &out.PrefixPoolAllocatedCountIPv6
+		*out = new(float64)
+		**out = **in
+	}
+	if in.RateLimit != nil {
+		in, out := &in.RateLimit, &out.RateLimit
 		*out = new(string)
 		**out = **in
 	}
@@ -4176,6 +4425,11 @@ func (in *PrivateVirtualInterfaceObservation) DeepCopyInto(out *PrivateVirtualIn
 		*out = new(float64)
 		**out = **in
 	}
+	if in.BGPAsnLong != nil {
+		in, out := &in.BGPAsnLong, &out.BGPAsnLong
+		*out = new(string)
+		**out = **in
+	}
 	if in.BGPAuthKey != nil {
 		in, out := &in.BGPAuthKey, &out.BGPAuthKey
 		*out = new(string)
@@ -4213,6 +4467,21 @@ func (in *PrivateVirtualInterfaceObservation) DeepCopyInto(out *PrivateVirtualIn
 	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
+		*out = new(string)
+		**out = **in
+	}
+	if in.PrefixPoolAllocatedCountIPv4 != nil {
+		in, out := &in.PrefixPoolAllocatedCountIPv4, &out.PrefixPoolAllocatedCountIPv4
+		*out = new(float64)
+		**out = **in
+	}
+	if in.PrefixPoolAllocatedCountIPv6 != nil {
+		in, out := &in.PrefixPoolAllocatedCountIPv6, &out.PrefixPoolAllocatedCountIPv6
+		*out = new(float64)
+		**out = **in
+	}
+	if in.RateLimit != nil {
+		in, out := &in.RateLimit, &out.RateLimit
 		*out = new(string)
 		**out = **in
 	}
@@ -4298,6 +4567,11 @@ func (in *PrivateVirtualInterfaceParameters) DeepCopyInto(out *PrivateVirtualInt
 		*out = new(float64)
 		**out = **in
 	}
+	if in.BGPAsnLong != nil {
+		in, out := &in.BGPAsnLong, &out.BGPAsnLong
+		*out = new(string)
+		**out = **in
+	}
 	if in.BGPAuthKey != nil {
 		in, out := &in.BGPAuthKey, &out.BGPAuthKey
 		*out = new(string)
@@ -4335,6 +4609,21 @@ func (in *PrivateVirtualInterfaceParameters) DeepCopyInto(out *PrivateVirtualInt
 	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
+		*out = new(string)
+		**out = **in
+	}
+	if in.PrefixPoolAllocatedCountIPv4 != nil {
+		in, out := &in.PrefixPoolAllocatedCountIPv4, &out.PrefixPoolAllocatedCountIPv4
+		*out = new(float64)
+		**out = **in
+	}
+	if in.PrefixPoolAllocatedCountIPv6 != nil {
+		in, out := &in.PrefixPoolAllocatedCountIPv6, &out.PrefixPoolAllocatedCountIPv6
+		*out = new(float64)
+		**out = **in
+	}
+	if in.RateLimit != nil {
+		in, out := &in.RateLimit, &out.RateLimit
 		*out = new(string)
 		**out = **in
 	}
@@ -4506,6 +4795,11 @@ func (in *PublicVirtualInterfaceInitParameters) DeepCopyInto(out *PublicVirtualI
 		*out = new(string)
 		**out = **in
 	}
+	if in.RateLimit != nil {
+		in, out := &in.RateLimit, &out.RateLimit
+		*out = new(string)
+		**out = **in
+	}
 	if in.RouteFilterPrefixes != nil {
 		in, out := &in.RouteFilterPrefixes, &out.RouteFilterPrefixes
 		*out = make([]*string, len(*in))
@@ -4640,6 +4934,11 @@ func (in *PublicVirtualInterfaceObservation) DeepCopyInto(out *PublicVirtualInte
 		*out = new(string)
 		**out = **in
 	}
+	if in.RateLimit != nil {
+		in, out := &in.RateLimit, &out.RateLimit
+		*out = new(string)
+		**out = **in
+	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
 		*out = new(string)
@@ -4753,6 +5052,11 @@ func (in *PublicVirtualInterfaceParameters) DeepCopyInto(out *PublicVirtualInter
 		*out = new(string)
 		**out = **in
 	}
+	if in.RateLimit != nil {
+		in, out := &in.RateLimit, &out.RateLimit
+		*out = new(string)
+		**out = **in
+	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
 		*out = new(string)
@@ -4838,6 +5142,71 @@ func (in *PublicVirtualInterfaceStatus) DeepCopy() *PublicVirtualInterfaceStatus
 }
 
 // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *RateLimiterStatusInitParameters) DeepCopyInto(out *RateLimiterStatusInitParameters) {
+	*out = *in
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new RateLimiterStatusInitParameters.
+func (in *RateLimiterStatusInitParameters) DeepCopy() *RateLimiterStatusInitParameters {
+	if in == nil {
+		return nil
+	}
+	out := new(RateLimiterStatusInitParameters)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *RateLimiterStatusObservation) DeepCopyInto(out *RateLimiterStatusObservation) {
+	*out = *in
+	if in.InUse != nil {
+		in, out := &in.InUse, &out.InUse
+		*out = new(float64)
+		**out = **in
+	}
+	if in.MaxAllowed != nil {
+		in, out := &in.MaxAllowed, &out.MaxAllowed
+		*out = new(float64)
+		**out = **in
+	}
+	if in.Remaining != nil {
+		in, out := &in.Remaining, &out.Remaining
+		*out = new(float64)
+		**out = **in
+	}
+	if in.TotalBandwidth != nil {
+		in, out := &in.TotalBandwidth, &out.TotalBandwidth
+		*out = new(string)
+		**out = **in
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new RateLimiterStatusObservation.
+func (in *RateLimiterStatusObservation) DeepCopy() *RateLimiterStatusObservation {
+	if in == nil {
+		return nil
+	}
+	out := new(RateLimiterStatusObservation)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *RateLimiterStatusParameters) DeepCopyInto(out *RateLimiterStatusParameters) {
+	*out = *in
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new RateLimiterStatusParameters.
+func (in *RateLimiterStatusParameters) DeepCopy() *RateLimiterStatusParameters {
+	if in == nil {
+		return nil
+	}
+	out := new(RateLimiterStatusParameters)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
 func (in *TransitVirtualInterface) DeepCopyInto(out *TransitVirtualInterface) {
 	*out = *in
 	out.TypeMeta = in.TypeMeta
@@ -4880,6 +5249,11 @@ func (in *TransitVirtualInterfaceInitParameters) DeepCopyInto(out *TransitVirtua
 	if in.BGPAsn != nil {
 		in, out := &in.BGPAsn, &out.BGPAsn
 		*out = new(float64)
+		**out = **in
+	}
+	if in.BGPAsnLong != nil {
+		in, out := &in.BGPAsnLong, &out.BGPAsnLong
+		*out = new(string)
 		**out = **in
 	}
 	if in.BGPAuthKey != nil {
@@ -4929,6 +5303,21 @@ func (in *TransitVirtualInterfaceInitParameters) DeepCopyInto(out *TransitVirtua
 	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
+		*out = new(string)
+		**out = **in
+	}
+	if in.PrefixPoolAllocatedCountIPv4 != nil {
+		in, out := &in.PrefixPoolAllocatedCountIPv4, &out.PrefixPoolAllocatedCountIPv4
+		*out = new(float64)
+		**out = **in
+	}
+	if in.PrefixPoolAllocatedCountIPv6 != nil {
+		in, out := &in.PrefixPoolAllocatedCountIPv6, &out.PrefixPoolAllocatedCountIPv6
+		*out = new(float64)
+		**out = **in
+	}
+	if in.RateLimit != nil {
+		in, out := &in.RateLimit, &out.RateLimit
 		*out = new(string)
 		**out = **in
 	}
@@ -5035,6 +5424,11 @@ func (in *TransitVirtualInterfaceObservation) DeepCopyInto(out *TransitVirtualIn
 		*out = new(float64)
 		**out = **in
 	}
+	if in.BGPAsnLong != nil {
+		in, out := &in.BGPAsnLong, &out.BGPAsnLong
+		*out = new(string)
+		**out = **in
+	}
 	if in.BGPAuthKey != nil {
 		in, out := &in.BGPAuthKey, &out.BGPAuthKey
 		*out = new(string)
@@ -5072,6 +5466,21 @@ func (in *TransitVirtualInterfaceObservation) DeepCopyInto(out *TransitVirtualIn
 	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
+		*out = new(string)
+		**out = **in
+	}
+	if in.PrefixPoolAllocatedCountIPv4 != nil {
+		in, out := &in.PrefixPoolAllocatedCountIPv4, &out.PrefixPoolAllocatedCountIPv4
+		*out = new(float64)
+		**out = **in
+	}
+	if in.PrefixPoolAllocatedCountIPv6 != nil {
+		in, out := &in.PrefixPoolAllocatedCountIPv6, &out.PrefixPoolAllocatedCountIPv6
+		*out = new(float64)
+		**out = **in
+	}
+	if in.RateLimit != nil {
+		in, out := &in.RateLimit, &out.RateLimit
 		*out = new(string)
 		**out = **in
 	}
@@ -5152,6 +5561,11 @@ func (in *TransitVirtualInterfaceParameters) DeepCopyInto(out *TransitVirtualInt
 		*out = new(float64)
 		**out = **in
 	}
+	if in.BGPAsnLong != nil {
+		in, out := &in.BGPAsnLong, &out.BGPAsnLong
+		*out = new(string)
+		**out = **in
+	}
 	if in.BGPAuthKey != nil {
 		in, out := &in.BGPAuthKey, &out.BGPAuthKey
 		*out = new(string)
@@ -5199,6 +5613,21 @@ func (in *TransitVirtualInterfaceParameters) DeepCopyInto(out *TransitVirtualInt
 	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
+		*out = new(string)
+		**out = **in
+	}
+	if in.PrefixPoolAllocatedCountIPv4 != nil {
+		in, out := &in.PrefixPoolAllocatedCountIPv4, &out.PrefixPoolAllocatedCountIPv4
+		*out = new(float64)
+		**out = **in
+	}
+	if in.PrefixPoolAllocatedCountIPv6 != nil {
+		in, out := &in.PrefixPoolAllocatedCountIPv6, &out.PrefixPoolAllocatedCountIPv6
+		*out = new(float64)
+		**out = **in
+	}
+	if in.RateLimit != nil {
+		in, out := &in.RateLimit, &out.RateLimit
 		*out = new(string)
 		**out = **in
 	}

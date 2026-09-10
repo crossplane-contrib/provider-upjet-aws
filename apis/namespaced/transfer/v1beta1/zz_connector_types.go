@@ -15,96 +15,96 @@ import (
 
 type As2ConfigInitParameters struct {
 
-	// Specifies weather AS2 file is compressed. The valud values are ZLIB and  DISABLED.
+	// Whether AS2 file is compressed. The valid values are ZLIB and DISABLED.
 	Compression *string `json:"compression,omitempty" tf:"compression,omitempty"`
 
-	// The algorithm that is used to encrypt the file. The valid values are AES128_CBC | AES192_CBC | AES256_CBC | NONE.
+	// Algorithm that is used to encrypt the file. The valid values are AES128_CBC | AES192_CBC | AES256_CBC | NONE.
 	EncryptionAlgorithm *string `json:"encryptionAlgorithm,omitempty" tf:"encryption_algorithm,omitempty"`
 
-	// The unique identifier for the AS2 local profile.
+	// Unique identifier for the AS2 local profile.
 	LocalProfileID *string `json:"localProfileId,omitempty" tf:"local_profile_id,omitempty"`
 
-	// Used for outbound requests to determine if a partner response for transfers is synchronous or asynchronous. The valid values are SYNC and NONE.
+	// Determines, for outbound requests, if a partner response for transfers is synchronous or asynchronous. The valid values are SYNC and NONE.
 	MdnResponse *string `json:"mdnResponse,omitempty" tf:"mdn_response,omitempty"`
 
-	// The signing algorithm for the Mdn response. The valid values are SHA256 | SHA384 | SHA512 | SHA1 | NONE | DEFAULT.
+	// Signing algorithm for the MDN response. The valid values are SHA256 | SHA384 | SHA512 | SHA1 | NONE | DEFAULT.
 	MdnSigningAlgorithm *string `json:"mdnSigningAlgorithm,omitempty" tf:"mdn_signing_algorithm,omitempty"`
 
-	// Used as the subject HTTP header attribute in AS2 messages that are being sent with the connector.
+	// Subject HTTP header attribute used in AS2 messages that are being sent with the connector.
 	MessageSubject *string `json:"messageSubject,omitempty" tf:"message_subject,omitempty"`
 
-	// The unique identifier for the AS2 partner profile.
+	// Unique identifier for the AS2 partner profile.
 	PartnerProfileID *string `json:"partnerProfileId,omitempty" tf:"partner_profile_id,omitempty"`
 
-	// The algorithm that is used to sign AS2 messages sent with the connector. The valid values are SHA256 | SHA384 | SHA512 | SHA1 | NONE .
+	// Algorithm that is used to sign AS2 messages sent with the connector. The valid values are SHA256 | SHA384 | SHA512 | SHA1 | NONE .
 	SigningAlgorithm *string `json:"signingAlgorithm,omitempty" tf:"signing_algorithm,omitempty"`
 }
 
 type As2ConfigObservation struct {
 
-	// Specifies weather AS2 file is compressed. The valud values are ZLIB and  DISABLED.
+	// Whether AS2 file is compressed. The valid values are ZLIB and DISABLED.
 	Compression *string `json:"compression,omitempty" tf:"compression,omitempty"`
 
-	// The algorithm that is used to encrypt the file. The valid values are AES128_CBC | AES192_CBC | AES256_CBC | NONE.
+	// Algorithm that is used to encrypt the file. The valid values are AES128_CBC | AES192_CBC | AES256_CBC | NONE.
 	EncryptionAlgorithm *string `json:"encryptionAlgorithm,omitempty" tf:"encryption_algorithm,omitempty"`
 
-	// The unique identifier for the AS2 local profile.
+	// Unique identifier for the AS2 local profile.
 	LocalProfileID *string `json:"localProfileId,omitempty" tf:"local_profile_id,omitempty"`
 
-	// Used for outbound requests to determine if a partner response for transfers is synchronous or asynchronous. The valid values are SYNC and NONE.
+	// Determines, for outbound requests, if a partner response for transfers is synchronous or asynchronous. The valid values are SYNC and NONE.
 	MdnResponse *string `json:"mdnResponse,omitempty" tf:"mdn_response,omitempty"`
 
-	// The signing algorithm for the Mdn response. The valid values are SHA256 | SHA384 | SHA512 | SHA1 | NONE | DEFAULT.
+	// Signing algorithm for the MDN response. The valid values are SHA256 | SHA384 | SHA512 | SHA1 | NONE | DEFAULT.
 	MdnSigningAlgorithm *string `json:"mdnSigningAlgorithm,omitempty" tf:"mdn_signing_algorithm,omitempty"`
 
-	// Used as the subject HTTP header attribute in AS2 messages that are being sent with the connector.
+	// Subject HTTP header attribute used in AS2 messages that are being sent with the connector.
 	MessageSubject *string `json:"messageSubject,omitempty" tf:"message_subject,omitempty"`
 
-	// The unique identifier for the AS2 partner profile.
+	// Unique identifier for the AS2 partner profile.
 	PartnerProfileID *string `json:"partnerProfileId,omitempty" tf:"partner_profile_id,omitempty"`
 
-	// The algorithm that is used to sign AS2 messages sent with the connector. The valid values are SHA256 | SHA384 | SHA512 | SHA1 | NONE .
+	// Algorithm that is used to sign AS2 messages sent with the connector. The valid values are SHA256 | SHA384 | SHA512 | SHA1 | NONE .
 	SigningAlgorithm *string `json:"signingAlgorithm,omitempty" tf:"signing_algorithm,omitempty"`
 }
 
 type As2ConfigParameters struct {
 
-	// Specifies weather AS2 file is compressed. The valud values are ZLIB and  DISABLED.
+	// Whether AS2 file is compressed. The valid values are ZLIB and DISABLED.
 	// +kubebuilder:validation:Optional
 	Compression *string `json:"compression" tf:"compression,omitempty"`
 
-	// The algorithm that is used to encrypt the file. The valid values are AES128_CBC | AES192_CBC | AES256_CBC | NONE.
+	// Algorithm that is used to encrypt the file. The valid values are AES128_CBC | AES192_CBC | AES256_CBC | NONE.
 	// +kubebuilder:validation:Optional
 	EncryptionAlgorithm *string `json:"encryptionAlgorithm" tf:"encryption_algorithm,omitempty"`
 
-	// The unique identifier for the AS2 local profile.
+	// Unique identifier for the AS2 local profile.
 	// +kubebuilder:validation:Optional
 	LocalProfileID *string `json:"localProfileId" tf:"local_profile_id,omitempty"`
 
-	// Used for outbound requests to determine if a partner response for transfers is synchronous or asynchronous. The valid values are SYNC and NONE.
+	// Determines, for outbound requests, if a partner response for transfers is synchronous or asynchronous. The valid values are SYNC and NONE.
 	// +kubebuilder:validation:Optional
 	MdnResponse *string `json:"mdnResponse" tf:"mdn_response,omitempty"`
 
-	// The signing algorithm for the Mdn response. The valid values are SHA256 | SHA384 | SHA512 | SHA1 | NONE | DEFAULT.
+	// Signing algorithm for the MDN response. The valid values are SHA256 | SHA384 | SHA512 | SHA1 | NONE | DEFAULT.
 	// +kubebuilder:validation:Optional
 	MdnSigningAlgorithm *string `json:"mdnSigningAlgorithm,omitempty" tf:"mdn_signing_algorithm,omitempty"`
 
-	// Used as the subject HTTP header attribute in AS2 messages that are being sent with the connector.
+	// Subject HTTP header attribute used in AS2 messages that are being sent with the connector.
 	// +kubebuilder:validation:Optional
 	MessageSubject *string `json:"messageSubject,omitempty" tf:"message_subject,omitempty"`
 
-	// The unique identifier for the AS2 partner profile.
+	// Unique identifier for the AS2 partner profile.
 	// +kubebuilder:validation:Optional
 	PartnerProfileID *string `json:"partnerProfileId" tf:"partner_profile_id,omitempty"`
 
-	// The algorithm that is used to sign AS2 messages sent with the connector. The valid values are SHA256 | SHA384 | SHA512 | SHA1 | NONE .
+	// Algorithm that is used to sign AS2 messages sent with the connector. The valid values are SHA256 | SHA384 | SHA512 | SHA1 | NONE .
 	// +kubebuilder:validation:Optional
 	SigningAlgorithm *string `json:"signingAlgorithm" tf:"signing_algorithm,omitempty"`
 }
 
 type ConnectorInitParameters struct {
 
-	// The IAM Role which provides read and write access to the parent directory of the file location mentioned in the StartFileTransfer request.
+	// IAM Role which provides read and write access to the parent directory of the file location mentioned in the StartFileTransfer request.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	AccessRole *string `json:"accessRole,omitempty" tf:"access_role,omitempty"`
@@ -117,49 +117,49 @@ type ConnectorInitParameters struct {
 	// +kubebuilder:validation:Optional
 	AccessRoleSelector *v2.NamespacedSelector `json:"accessRoleSelector,omitempty" tf:"-"`
 
-	// Either SFTP or AS2 is configured.The parameters to configure for the connector object. Fields documented below.
+	// Either SFTP or AS2 is configured. Parameters to configure for the connector object. See as2_config Block below.
 	As2Config *As2ConfigInitParameters `json:"as2Config,omitempty" tf:"as2_config,omitempty"`
 
-	// Specifies the egress configuration for the connector. When set, enables routing through customer VPCs using VPC Lattice for private connectivity. Fields documented below.
+	// Egress configuration for the connector. When set, enables routing through customer VPCs using VPC Lattice for private connectivity. See egress_config Block below.
 	EgressConfig *EgressConfigInitParameters `json:"egressConfig,omitempty" tf:"egress_config,omitempty"`
 
-	// The IAM Role which is required for allowing the connector to turn on CloudWatch logging for Amazon S3 events.
+	// IAM Role which is required for allowing the connector to turn on CloudWatch logging for Amazon S3 events.
 	LoggingRole *string `json:"loggingRole,omitempty" tf:"logging_role,omitempty"`
 
 	// Name of the security policy for the connector.
 	SecurityPolicyName *string `json:"securityPolicyName,omitempty" tf:"security_policy_name,omitempty"`
 
-	// Either SFTP or AS2 is configured.The parameters to configure for the connector object. Fields documented below.
+	// Either SFTP or AS2 is configured. Parameters to configure for the connector object. See sftp_config Block below.
 	SftpConfig *SftpConfigInitParameters `json:"sftpConfig,omitempty" tf:"sftp_config,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The URL of the partners AS2 endpoint or SFTP endpoint. Required for AS2 connectors and service-managed SFTP connectors. Must be null when using VPC Lattice egress configuration.
+	// URL of the partners AS2 endpoint or SFTP endpoint. Required for AS2 connectors and service-managed SFTP connectors. Must be null when using VPC Lattice egress configuration.
 	URL *string `json:"url,omitempty" tf:"url,omitempty"`
 }
 
 type ConnectorObservation struct {
 
-	// The IAM Role which provides read and write access to the parent directory of the file location mentioned in the StartFileTransfer request.
+	// IAM Role which provides read and write access to the parent directory of the file location mentioned in the StartFileTransfer request.
 	AccessRole *string `json:"accessRole,omitempty" tf:"access_role,omitempty"`
 
-	// The ARN of the connector.
+	// ARN of the connector.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// Either SFTP or AS2 is configured.The parameters to configure for the connector object. Fields documented below.
+	// Either SFTP or AS2 is configured. Parameters to configure for the connector object. See as2_config Block below.
 	As2Config *As2ConfigObservation `json:"as2Config,omitempty" tf:"as2_config,omitempty"`
 
-	// The unique identifier for the AS2 profile or SFTP Profile.
+	// Unique identifier for the AS2 profile or SFTP Profile.
 	ConnectorID *string `json:"connectorId,omitempty" tf:"connector_id,omitempty"`
 
-	// Specifies the egress configuration for the connector. When set, enables routing through customer VPCs using VPC Lattice for private connectivity. Fields documented below.
+	// Egress configuration for the connector. When set, enables routing through customer VPCs using VPC Lattice for private connectivity. See egress_config Block below.
 	EgressConfig *EgressConfigObservation `json:"egressConfig,omitempty" tf:"egress_config,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The IAM Role which is required for allowing the connector to turn on CloudWatch logging for Amazon S3 events.
+	// IAM Role which is required for allowing the connector to turn on CloudWatch logging for Amazon S3 events.
 	LoggingRole *string `json:"loggingRole,omitempty" tf:"logging_role,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -169,7 +169,7 @@ type ConnectorObservation struct {
 	// Name of the security policy for the connector.
 	SecurityPolicyName *string `json:"securityPolicyName,omitempty" tf:"security_policy_name,omitempty"`
 
-	// Either SFTP or AS2 is configured.The parameters to configure for the connector object. Fields documented below.
+	// Either SFTP or AS2 is configured. Parameters to configure for the connector object. See sftp_config Block below.
 	SftpConfig *SftpConfigObservation `json:"sftpConfig,omitempty" tf:"sftp_config,omitempty"`
 
 	// Key-value map of resource tags.
@@ -179,13 +179,13 @@ type ConnectorObservation struct {
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// The URL of the partners AS2 endpoint or SFTP endpoint. Required for AS2 connectors and service-managed SFTP connectors. Must be null when using VPC Lattice egress configuration.
+	// URL of the partners AS2 endpoint or SFTP endpoint. Required for AS2 connectors and service-managed SFTP connectors. Must be null when using VPC Lattice egress configuration.
 	URL *string `json:"url,omitempty" tf:"url,omitempty"`
 }
 
 type ConnectorParameters struct {
 
-	// The IAM Role which provides read and write access to the parent directory of the file location mentioned in the StartFileTransfer request.
+	// IAM Role which provides read and write access to the parent directory of the file location mentioned in the StartFileTransfer request.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -199,15 +199,15 @@ type ConnectorParameters struct {
 	// +kubebuilder:validation:Optional
 	AccessRoleSelector *v2.NamespacedSelector `json:"accessRoleSelector,omitempty" tf:"-"`
 
-	// Either SFTP or AS2 is configured.The parameters to configure for the connector object. Fields documented below.
+	// Either SFTP or AS2 is configured. Parameters to configure for the connector object. See as2_config Block below.
 	// +kubebuilder:validation:Optional
 	As2Config *As2ConfigParameters `json:"as2Config,omitempty" tf:"as2_config,omitempty"`
 
-	// Specifies the egress configuration for the connector. When set, enables routing through customer VPCs using VPC Lattice for private connectivity. Fields documented below.
+	// Egress configuration for the connector. When set, enables routing through customer VPCs using VPC Lattice for private connectivity. See egress_config Block below.
 	// +kubebuilder:validation:Optional
 	EgressConfig *EgressConfigParameters `json:"egressConfig,omitempty" tf:"egress_config,omitempty"`
 
-	// The IAM Role which is required for allowing the connector to turn on CloudWatch logging for Amazon S3 events.
+	// IAM Role which is required for allowing the connector to turn on CloudWatch logging for Amazon S3 events.
 	// +kubebuilder:validation:Optional
 	LoggingRole *string `json:"loggingRole,omitempty" tf:"logging_role,omitempty"`
 
@@ -220,7 +220,7 @@ type ConnectorParameters struct {
 	// +kubebuilder:validation:Optional
 	SecurityPolicyName *string `json:"securityPolicyName,omitempty" tf:"security_policy_name,omitempty"`
 
-	// Either SFTP or AS2 is configured.The parameters to configure for the connector object. Fields documented below.
+	// Either SFTP or AS2 is configured. Parameters to configure for the connector object. See sftp_config Block below.
 	// +kubebuilder:validation:Optional
 	SftpConfig *SftpConfigParameters `json:"sftpConfig,omitempty" tf:"sftp_config,omitempty"`
 
@@ -229,37 +229,37 @@ type ConnectorParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The URL of the partners AS2 endpoint or SFTP endpoint. Required for AS2 connectors and service-managed SFTP connectors. Must be null when using VPC Lattice egress configuration.
+	// URL of the partners AS2 endpoint or SFTP endpoint. Required for AS2 connectors and service-managed SFTP connectors. Must be null when using VPC Lattice egress configuration.
 	// +kubebuilder:validation:Optional
 	URL *string `json:"url,omitempty" tf:"url,omitempty"`
 }
 
 type EgressConfigInitParameters struct {
 
-	// VPC Lattice configuration for routing connector traffic through customer VPCs. Fields documented below.
+	// VPC Lattice configuration for routing connector traffic through customer VPCs. See vpc_lattice Block below.
 	VPCLattice *VPCLatticeInitParameters `json:"vpcLattice,omitempty" tf:"vpc_lattice,omitempty"`
 }
 
 type EgressConfigObservation struct {
 
-	// VPC Lattice configuration for routing connector traffic through customer VPCs. Fields documented below.
+	// VPC Lattice configuration for routing connector traffic through customer VPCs. See vpc_lattice Block below.
 	VPCLattice *VPCLatticeObservation `json:"vpcLattice,omitempty" tf:"vpc_lattice,omitempty"`
 }
 
 type EgressConfigParameters struct {
 
-	// VPC Lattice configuration for routing connector traffic through customer VPCs. Fields documented below.
+	// VPC Lattice configuration for routing connector traffic through customer VPCs. See vpc_lattice Block below.
 	// +kubebuilder:validation:Optional
 	VPCLattice *VPCLatticeParameters `json:"vpcLattice,omitempty" tf:"vpc_lattice,omitempty"`
 }
 
 type SftpConfigInitParameters struct {
 
-	// A list of public portion of the host key, or keys, that are used to authenticate the user to the external server to which you are connecting.(https://docs.aws.amazon.com/transfer/latest/userguide/API_SftpConnectorConfig.html)
+	// List of public portion of the host key, or keys, that are used to authenticate the user to the external server to which you are connecting.(https://docs.aws.amazon.com/transfer/latest/userguide/API_SftpConnectorConfig.html)
 	// +listType=set
 	TrustedHostKeys []*string `json:"trustedHostKeys,omitempty" tf:"trusted_host_keys,omitempty"`
 
-	// The identifier for the secret (in AWS Secrets Manager) that contains the SFTP user's private key, password, or both. The identifier can be either the Amazon Resource Name (ARN) or the name of the secret.
+	// Identifier for the secret (in AWS Secrets Manager) that contains the SFTP user's private key, password, or both. The identifier can be either the ARN or the name of the secret.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/secretsmanager/v1beta1.Secret
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	UserSecretID *string `json:"userSecretId,omitempty" tf:"user_secret_id,omitempty"`
@@ -275,22 +275,22 @@ type SftpConfigInitParameters struct {
 
 type SftpConfigObservation struct {
 
-	// A list of public portion of the host key, or keys, that are used to authenticate the user to the external server to which you are connecting.(https://docs.aws.amazon.com/transfer/latest/userguide/API_SftpConnectorConfig.html)
+	// List of public portion of the host key, or keys, that are used to authenticate the user to the external server to which you are connecting.(https://docs.aws.amazon.com/transfer/latest/userguide/API_SftpConnectorConfig.html)
 	// +listType=set
 	TrustedHostKeys []*string `json:"trustedHostKeys,omitempty" tf:"trusted_host_keys,omitempty"`
 
-	// The identifier for the secret (in AWS Secrets Manager) that contains the SFTP user's private key, password, or both. The identifier can be either the Amazon Resource Name (ARN) or the name of the secret.
+	// Identifier for the secret (in AWS Secrets Manager) that contains the SFTP user's private key, password, or both. The identifier can be either the ARN or the name of the secret.
 	UserSecretID *string `json:"userSecretId,omitempty" tf:"user_secret_id,omitempty"`
 }
 
 type SftpConfigParameters struct {
 
-	// A list of public portion of the host key, or keys, that are used to authenticate the user to the external server to which you are connecting.(https://docs.aws.amazon.com/transfer/latest/userguide/API_SftpConnectorConfig.html)
+	// List of public portion of the host key, or keys, that are used to authenticate the user to the external server to which you are connecting.(https://docs.aws.amazon.com/transfer/latest/userguide/API_SftpConnectorConfig.html)
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	TrustedHostKeys []*string `json:"trustedHostKeys,omitempty" tf:"trusted_host_keys,omitempty"`
 
-	// The identifier for the secret (in AWS Secrets Manager) that contains the SFTP user's private key, password, or both. The identifier can be either the Amazon Resource Name (ARN) or the name of the secret.
+	// Identifier for the secret (in AWS Secrets Manager) that contains the SFTP user's private key, password, or both. The identifier can be either the ARN or the name of the secret.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/secretsmanager/v1beta1.Secret
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional

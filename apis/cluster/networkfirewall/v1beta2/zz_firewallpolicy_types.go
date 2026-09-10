@@ -222,7 +222,7 @@ type FirewallPolicyInitParameters struct {
 
 type FirewallPolicyObservation struct {
 
-	// The Amazon Resource Name (ARN) that identifies the firewall policy.
+	// ARN that identifies the firewall policy.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// A friendly description of the firewall policy.
@@ -234,7 +234,7 @@ type FirewallPolicyObservation struct {
 	// A configuration block describing the rule groups and policy actions to use in the firewall policy. See Firewall Policy below for details.
 	FirewallPolicy *FirewallPolicyFirewallPolicyObservation `json:"firewallPolicy,omitempty" tf:"firewall_policy,omitempty"`
 
-	// The Amazon Resource Name (ARN) that identifies the firewall policy.
+	// ARN that identifies the firewall policy.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -450,7 +450,7 @@ type StatefulRuleGroupReferenceInitParameters struct {
 	// An integer setting that indicates the order in which to run the stateless rule groups in a single policy. AWS Network Firewall applies each stateless rule group to a packet starting with the group that has the lowest priority setting.
 	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the stateless rule group.
+	// ARN of the stateless rule group.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/networkfirewall/v1beta2.RuleGroup
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
@@ -475,7 +475,7 @@ type StatefulRuleGroupReferenceObservation struct {
 	// An integer setting that indicates the order in which to run the stateless rule groups in a single policy. AWS Network Firewall applies each stateless rule group to a packet starting with the group that has the lowest priority setting.
 	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the stateless rule group.
+	// ARN of the stateless rule group.
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
 }
 
@@ -493,7 +493,7 @@ type StatefulRuleGroupReferenceParameters struct {
 	// +kubebuilder:validation:Optional
 	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the stateless rule group.
+	// ARN of the stateless rule group.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/networkfirewall/v1beta2.RuleGroup
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -542,7 +542,7 @@ type StatelessRuleGroupReferenceInitParameters struct {
 	// An integer setting that indicates the order in which to run the stateless rule groups in a single policy. AWS Network Firewall applies each stateless rule group to a packet starting with the group that has the lowest priority setting.
 	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the stateless rule group.
+	// ARN of the stateless rule group.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/networkfirewall/v1beta2.RuleGroup
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
@@ -561,7 +561,7 @@ type StatelessRuleGroupReferenceObservation struct {
 	// An integer setting that indicates the order in which to run the stateless rule groups in a single policy. AWS Network Firewall applies each stateless rule group to a packet starting with the group that has the lowest priority setting.
 	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the stateless rule group.
+	// ARN of the stateless rule group.
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
 }
 
@@ -571,7 +571,7 @@ type StatelessRuleGroupReferenceParameters struct {
 	// +kubebuilder:validation:Optional
 	Priority *float64 `json:"priority" tf:"priority,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the stateless rule group.
+	// ARN of the stateless rule group.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/networkfirewall/v1beta2.RuleGroup
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional

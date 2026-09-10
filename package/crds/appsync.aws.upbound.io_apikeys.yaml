@@ -285,7 +285,7 @@ spec:
                     description: ID of the associated AppSync API
                     type: string
                   apiKeyId:
-                    description: API Key ID (Formatted as ApiId:Key)
+                    description: ID of the API key.
                     type: string
                   description:
                     description: API key description.

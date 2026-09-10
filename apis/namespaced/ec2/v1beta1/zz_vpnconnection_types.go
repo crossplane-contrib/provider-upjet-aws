@@ -18,7 +18,7 @@ type CloudwatchLogOptionsInitParameters struct {
 	// Enable or disable BGP logging feature. The default is false.
 	BGPLogEnabled *bool `json:"bgpLogEnabled,omitempty" tf:"bgp_log_enabled,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the CloudWatch log group to send BGP logs to.
+	// ARN of the CloudWatch log group to send BGP logs to.
 	BGPLogGroupArn *string `json:"bgpLogGroupArn,omitempty" tf:"bgp_log_group_arn,omitempty"`
 
 	// Set BGP log format. Default format is json. Possible values are: json and text. The default is json.
@@ -27,7 +27,7 @@ type CloudwatchLogOptionsInitParameters struct {
 	// Enable or disable VPN tunnel logging feature. The default is false.
 	LogEnabled *bool `json:"logEnabled,omitempty" tf:"log_enabled,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the CloudWatch log group to send logs to.
+	// ARN of the CloudWatch log group to send logs to.
 	LogGroupArn *string `json:"logGroupArn,omitempty" tf:"log_group_arn,omitempty"`
 
 	// Set log format. Default format is json. Possible values are: json and text. The default is json.
@@ -39,7 +39,7 @@ type CloudwatchLogOptionsObservation struct {
 	// Enable or disable BGP logging feature. The default is false.
 	BGPLogEnabled *bool `json:"bgpLogEnabled,omitempty" tf:"bgp_log_enabled,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the CloudWatch log group to send BGP logs to.
+	// ARN of the CloudWatch log group to send BGP logs to.
 	BGPLogGroupArn *string `json:"bgpLogGroupArn,omitempty" tf:"bgp_log_group_arn,omitempty"`
 
 	// Set BGP log format. Default format is json. Possible values are: json and text. The default is json.
@@ -48,7 +48,7 @@ type CloudwatchLogOptionsObservation struct {
 	// Enable or disable VPN tunnel logging feature. The default is false.
 	LogEnabled *bool `json:"logEnabled,omitempty" tf:"log_enabled,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the CloudWatch log group to send logs to.
+	// ARN of the CloudWatch log group to send logs to.
 	LogGroupArn *string `json:"logGroupArn,omitempty" tf:"log_group_arn,omitempty"`
 
 	// Set log format. Default format is json. Possible values are: json and text. The default is json.
@@ -61,7 +61,7 @@ type CloudwatchLogOptionsParameters struct {
 	// +kubebuilder:validation:Optional
 	BGPLogEnabled *bool `json:"bgpLogEnabled,omitempty" tf:"bgp_log_enabled,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the CloudWatch log group to send BGP logs to.
+	// ARN of the CloudWatch log group to send BGP logs to.
 	// +kubebuilder:validation:Optional
 	BGPLogGroupArn *string `json:"bgpLogGroupArn,omitempty" tf:"bgp_log_group_arn,omitempty"`
 
@@ -73,7 +73,7 @@ type CloudwatchLogOptionsParameters struct {
 	// +kubebuilder:validation:Optional
 	LogEnabled *bool `json:"logEnabled,omitempty" tf:"log_enabled,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the CloudWatch log group to send logs to.
+	// ARN of the CloudWatch log group to send logs to.
 	// +kubebuilder:validation:Optional
 	LogGroupArn *string `json:"logGroupArn,omitempty" tf:"log_group_arn,omitempty"`
 
@@ -124,7 +124,7 @@ type Tunnel2LogOptionsCloudwatchLogOptionsInitParameters struct {
 	// Enable or disable BGP logging feature. The default is false.
 	BGPLogEnabled *bool `json:"bgpLogEnabled,omitempty" tf:"bgp_log_enabled,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the CloudWatch log group to send BGP logs to.
+	// ARN of the CloudWatch log group to send BGP logs to.
 	BGPLogGroupArn *string `json:"bgpLogGroupArn,omitempty" tf:"bgp_log_group_arn,omitempty"`
 
 	// Set BGP log format. Default format is json. Possible values are: json and text. The default is json.
@@ -133,7 +133,7 @@ type Tunnel2LogOptionsCloudwatchLogOptionsInitParameters struct {
 	// Enable or disable VPN tunnel logging feature. The default is false.
 	LogEnabled *bool `json:"logEnabled,omitempty" tf:"log_enabled,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the CloudWatch log group to send logs to.
+	// ARN of the CloudWatch log group to send logs to.
 	LogGroupArn *string `json:"logGroupArn,omitempty" tf:"log_group_arn,omitempty"`
 
 	// Set log format. Default format is json. Possible values are: json and text. The default is json.
@@ -145,7 +145,7 @@ type Tunnel2LogOptionsCloudwatchLogOptionsObservation struct {
 	// Enable or disable BGP logging feature. The default is false.
 	BGPLogEnabled *bool `json:"bgpLogEnabled,omitempty" tf:"bgp_log_enabled,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the CloudWatch log group to send BGP logs to.
+	// ARN of the CloudWatch log group to send BGP logs to.
 	BGPLogGroupArn *string `json:"bgpLogGroupArn,omitempty" tf:"bgp_log_group_arn,omitempty"`
 
 	// Set BGP log format. Default format is json. Possible values are: json and text. The default is json.
@@ -154,7 +154,7 @@ type Tunnel2LogOptionsCloudwatchLogOptionsObservation struct {
 	// Enable or disable VPN tunnel logging feature. The default is false.
 	LogEnabled *bool `json:"logEnabled,omitempty" tf:"log_enabled,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the CloudWatch log group to send logs to.
+	// ARN of the CloudWatch log group to send logs to.
 	LogGroupArn *string `json:"logGroupArn,omitempty" tf:"log_group_arn,omitempty"`
 
 	// Set log format. Default format is json. Possible values are: json and text. The default is json.
@@ -167,7 +167,7 @@ type Tunnel2LogOptionsCloudwatchLogOptionsParameters struct {
 	// +kubebuilder:validation:Optional
 	BGPLogEnabled *bool `json:"bgpLogEnabled,omitempty" tf:"bgp_log_enabled,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the CloudWatch log group to send BGP logs to.
+	// ARN of the CloudWatch log group to send BGP logs to.
 	// +kubebuilder:validation:Optional
 	BGPLogGroupArn *string `json:"bgpLogGroupArn,omitempty" tf:"bgp_log_group_arn,omitempty"`
 
@@ -179,7 +179,7 @@ type Tunnel2LogOptionsCloudwatchLogOptionsParameters struct {
 	// +kubebuilder:validation:Optional
 	LogEnabled *bool `json:"logEnabled,omitempty" tf:"log_enabled,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the CloudWatch log group to send logs to.
+	// ARN of the CloudWatch log group to send logs to.
 	// +kubebuilder:validation:Optional
 	LogGroupArn *string `json:"logGroupArn,omitempty" tf:"log_group_arn,omitempty"`
 
@@ -437,7 +437,7 @@ type VPNConnectionInitParameters_2 struct {
 
 type VPNConnectionObservation_2 struct {
 
-	// Amazon Resource Name (ARN) of the VPN Connection.
+	// ARN of the VPN Connection.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The ARN of the core network.
@@ -978,7 +978,7 @@ type VgwTelemetryObservation struct {
 	// The number of accepted routes.
 	AcceptedRouteCount *float64 `json:"acceptedRouteCount,omitempty" tf:"accepted_route_count,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the VPN tunnel endpoint certificate.
+	// ARN of the VPN tunnel endpoint certificate.
 	CertificateArn *string `json:"certificateArn,omitempty" tf:"certificate_arn,omitempty"`
 
 	// The date and time of the last change in status.

@@ -9,8 +9,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: sagemaker/v1beta2/endpointconfiguration
   labels:
-    testing.upbound.io/example-name: ec
-  name: ec
+    testing.upbound.io/example-name: example
+  name: example
 spec:
   forProvider:
     productionVariants:
@@ -18,8 +18,6 @@ spec:
       instanceType: ml.t2.medium
       modelNameSelector:
         matchLabels:
-          testing.upbound.io/example-name: m
+          testing.upbound.io/example-name: example
       variantName: variant-1
     region: us-west-1
-    tags:
-      Name: foo

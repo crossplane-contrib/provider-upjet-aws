@@ -1521,8 +1521,7 @@ spec:
                           data from Requester Pays buckets, and queries that retrieve
                           data from Requester Pays buckets cause an error. The default
                           is false . For more information about Requester Pays buckets,
-                          see Requester Pays Buckets in the Amazon Simple Storage
-                          Service Developer Guide.
+                          see Requester Pays Buckets in the S3 Developer Guide.
                         type: boolean
                       resultConfiguration:
                         description: Configuration block with result settings. See
@@ -1865,8 +1864,7 @@ spec:
                           data from Requester Pays buckets, and queries that retrieve
                           data from Requester Pays buckets cause an error. The default
                           is false . For more information about Requester Pays buckets,
-                          see Requester Pays Buckets in the Amazon Simple Storage
-                          Service Developer Guide.
+                          see Requester Pays Buckets in the S3 Developer Guide.
                         type: boolean
                       resultConfiguration:
                         description: Configuration block with result settings. See
@@ -2288,8 +2286,7 @@ spec:
                           data from Requester Pays buckets, and queries that retrieve
                           data from Requester Pays buckets cause an error. The default
                           is false . For more information about Requester Pays buckets,
-                          see Requester Pays Buckets in the Amazon Simple Storage
-                          Service Developer Guide.
+                          see Requester Pays Buckets in the S3 Developer Guide.
                         type: boolean
                       resultConfiguration:
                         description: Configuration block with result settings. See

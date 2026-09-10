@@ -18,10 +18,10 @@ type ServiceNetworkServiceAssociationDNSEntryInitParameters struct {
 
 type ServiceNetworkServiceAssociationDNSEntryObservation struct {
 
-	// The domain name of the service.
+	// Domain name of the service.
 	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
 
-	// The ID of the hosted zone.
+	// ID of the hosted zone.
 	HostedZoneID *string `json:"hostedZoneId,omitempty" tf:"hosted_zone_id,omitempty"`
 }
 
@@ -30,7 +30,7 @@ type ServiceNetworkServiceAssociationDNSEntryParameters struct {
 
 type ServiceNetworkServiceAssociationInitParameters struct {
 
-	// The ID or Amazon Resource Identifier (ARN) of the service.
+	// ID or Amazon Resource Identifier (ARN) of the service.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/vpclattice/v1beta1.Service
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ServiceIdentifier *string `json:"serviceIdentifier,omitempty" tf:"service_identifier,omitempty"`
@@ -43,7 +43,7 @@ type ServiceNetworkServiceAssociationInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ServiceIdentifierSelector *v2.NamespacedSelector `json:"serviceIdentifierSelector,omitempty" tf:"-"`
 
-	// The ID or Amazon Resource Identifier (ARN) of the service network. You must use the ARN if the resources specified in the operation are in different accounts.
+	// ID or Amazon Resource Identifier (ARN) of the service network. You must use the ARN if the resources specified in the operation are in different accounts.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/vpclattice/v1beta1.ServiceNetwork
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ServiceNetworkIdentifier *string `json:"serviceNetworkIdentifier,omitempty" tf:"service_network_identifier,omitempty"`
@@ -63,32 +63,32 @@ type ServiceNetworkServiceAssociationInitParameters struct {
 
 type ServiceNetworkServiceAssociationObservation struct {
 
-	// The ARN of the Association.
+	// ARN of the Association.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The account that created the association.
+	// Account that created the association.
 	CreatedBy *string `json:"createdBy,omitempty" tf:"created_by,omitempty"`
 
-	// The custom domain name of the service.
+	// Custom domain name of the service.
 	CustomDomainName *string `json:"customDomainName,omitempty" tf:"custom_domain_name,omitempty"`
 
-	// The DNS name of the service.
+	// DNS name of the service.
 	DNSEntry []ServiceNetworkServiceAssociationDNSEntryObservation `json:"dnsEntry,omitempty" tf:"dns_entry,omitempty"`
 
-	// The ID of the association.
+	// ID of the association.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The ID or Amazon Resource Identifier (ARN) of the service.
+	// ID or Amazon Resource Identifier (ARN) of the service.
 	ServiceIdentifier *string `json:"serviceIdentifier,omitempty" tf:"service_identifier,omitempty"`
 
-	// The ID or Amazon Resource Identifier (ARN) of the service network. You must use the ARN if the resources specified in the operation are in different accounts.
+	// ID or Amazon Resource Identifier (ARN) of the service network. You must use the ARN if the resources specified in the operation are in different accounts.
 	ServiceNetworkIdentifier *string `json:"serviceNetworkIdentifier,omitempty" tf:"service_network_identifier,omitempty"`
 
-	// The operations status. Valid Values are CREATE_IN_PROGRESS | ACTIVE | DELETE_IN_PROGRESS | CREATE_FAILED | DELETE_FAILED
+	// Operations status. Valid Values are CREATE_IN_PROGRESS | ACTIVE | DELETE_IN_PROGRESS | CREATE_FAILED | DELETE_FAILED
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
 	// Key-value map of resource tags.
@@ -107,7 +107,7 @@ type ServiceNetworkServiceAssociationParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// The ID or Amazon Resource Identifier (ARN) of the service.
+	// ID or Amazon Resource Identifier (ARN) of the service.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/vpclattice/v1beta1.Service
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -121,7 +121,7 @@ type ServiceNetworkServiceAssociationParameters struct {
 	// +kubebuilder:validation:Optional
 	ServiceIdentifierSelector *v2.NamespacedSelector `json:"serviceIdentifierSelector,omitempty" tf:"-"`
 
-	// The ID or Amazon Resource Identifier (ARN) of the service network. You must use the ARN if the resources specified in the operation are in different accounts.
+	// ID or Amazon Resource Identifier (ARN) of the service network. You must use the ARN if the resources specified in the operation are in different accounts.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/vpclattice/v1beta1.ServiceNetwork
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional

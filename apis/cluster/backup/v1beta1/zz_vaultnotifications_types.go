@@ -31,7 +31,7 @@ type VaultNotificationsInitParameters struct {
 	// +kubebuilder:validation:Optional
 	BackupVaultNameSelector *v2.Selector `json:"backupVaultNameSelector,omitempty" tf:"-"`
 
-	// The Amazon Resource Name (ARN) that specifies the topic for a backup vault’s events
+	// ARN that specifies the topic for a backup vault’s events
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/sns/v1beta1.Topic
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	SnsTopicArn *string `json:"snsTopicArn,omitempty" tf:"sns_topic_arn,omitempty"`
@@ -64,7 +64,7 @@ type VaultNotificationsObservation struct {
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The Amazon Resource Name (ARN) that specifies the topic for a backup vault’s events
+	// ARN that specifies the topic for a backup vault’s events
 	SnsTopicArn *string `json:"snsTopicArn,omitempty" tf:"sns_topic_arn,omitempty"`
 }
 
@@ -93,7 +93,7 @@ type VaultNotificationsParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// The Amazon Resource Name (ARN) that specifies the topic for a backup vault’s events
+	// ARN that specifies the topic for a backup vault’s events
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/sns/v1beta1.Topic
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional

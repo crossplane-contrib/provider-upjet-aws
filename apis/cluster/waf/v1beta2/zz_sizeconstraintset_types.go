@@ -24,7 +24,7 @@ type SizeConstraintSetInitParameters struct {
 
 type SizeConstraintSetObservation struct {
 
-	// Amazon Resource Name (ARN).
+	// ARN.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// ID of the WAF Size Constraint Set.

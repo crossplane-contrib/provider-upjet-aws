@@ -136,7 +136,7 @@ type WorkgroupInitParameters struct {
 	// An array of parameters to set for more control over a serverless database. See Config Parameter below.
 	ConfigParameter []ConfigParameterInitParameters `json:"configParameter,omitempty" tf:"config_parameter,omitempty"`
 
-	// The value that specifies whether to turn on enhanced virtual private cloud (VPC) routing, which forces Amazon Redshift Serverless to route traffic through your VPC instead of over the internet.
+	// Value that specifies whether to turn on enhanced VPC routing, which forces Amazon Redshift Serverless to route traffic through your VPC instead of over the internet.
 	EnhancedVPCRouting *bool `json:"enhancedVpcRouting,omitempty" tf:"enhanced_vpc_routing,omitempty"`
 
 	// The maximum data-warehouse capacity Amazon Redshift Serverless uses to serve queries, specified in Redshift Processing Units (RPUs).
@@ -194,7 +194,7 @@ type WorkgroupInitParameters struct {
 
 type WorkgroupObservation struct {
 
-	// Amazon Resource Name (ARN) of the Redshift Serverless Workgroup.
+	// ARN of the Redshift Serverless Workgroup.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The base data warehouse capacity of the workgroup in Redshift Processing Units (RPUs).
@@ -206,7 +206,7 @@ type WorkgroupObservation struct {
 	// The endpoint that is created from the workgroup. See Endpoint below.
 	Endpoint []EndpointObservation `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 
-	// The value that specifies whether to turn on enhanced virtual private cloud (VPC) routing, which forces Amazon Redshift Serverless to route traffic through your VPC instead of over the internet.
+	// Value that specifies whether to turn on enhanced VPC routing, which forces Amazon Redshift Serverless to route traffic through your VPC instead of over the internet.
 	EnhancedVPCRouting *bool `json:"enhancedVpcRouting,omitempty" tf:"enhanced_vpc_routing,omitempty"`
 
 	// The Redshift Workgroup Name.
@@ -264,7 +264,7 @@ type WorkgroupParameters struct {
 	// +kubebuilder:validation:Optional
 	ConfigParameter []ConfigParameterParameters `json:"configParameter,omitempty" tf:"config_parameter,omitempty"`
 
-	// The value that specifies whether to turn on enhanced virtual private cloud (VPC) routing, which forces Amazon Redshift Serverless to route traffic through your VPC instead of over the internet.
+	// Value that specifies whether to turn on enhanced VPC routing, which forces Amazon Redshift Serverless to route traffic through your VPC instead of over the internet.
 	// +kubebuilder:validation:Optional
 	EnhancedVPCRouting *bool `json:"enhancedVpcRouting,omitempty" tf:"enhanced_vpc_routing,omitempty"`
 

@@ -15,7 +15,7 @@ import (
 
 type BackupInitParameters struct {
 
-	// The ID of the file system to back up. Required if backing up Lustre or Windows file systems.
+	// ID of the file system to back up. Required if backing up Lustre or Windows file systems.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/fsx/v1beta2.LustreFileSystem
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	FileSystemID *string `json:"fileSystemId,omitempty" tf:"file_system_id,omitempty"`
@@ -32,22 +32,22 @@ type BackupInitParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The ID of the volume to back up. Required if backing up a ONTAP Volume.
+	// ID of the volume to back up. Required if backing up a ONTAP Volume.
 	VolumeID *string `json:"volumeId,omitempty" tf:"volume_id,omitempty"`
 }
 
 type BackupObservation struct {
 
-	// Amazon Resource Name of the backup.
+	// ARN of the backup.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The ID of the file system to back up. Required if backing up Lustre or Windows file systems.
+	// ID of the file system to back up. Required if backing up Lustre or Windows file systems.
 	FileSystemID *string `json:"fileSystemId,omitempty" tf:"file_system_id,omitempty"`
 
 	// Identifier of the backup, e.g., fs-12345678
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The ID of the AWS Key Management Service (AWS KMS) key used to encrypt the backup of the Amazon FSx file system's data at rest.
+	// ID of the KMS key used to encrypt the backup of the Amazon FSx file system's data at rest.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
 	// AWS account identifier that created the file system.
@@ -61,20 +61,20 @@ type BackupObservation struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// The type of the file system backup.
+	// Type of the file system backup.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
-	// The ID of the volume to back up. Required if backing up a ONTAP Volume.
+	// ID of the volume to back up. Required if backing up a ONTAP Volume.
 	VolumeID *string `json:"volumeId,omitempty" tf:"volume_id,omitempty"`
 }
 
 type BackupParameters struct {
 
-	// The ID of the file system to back up. Required if backing up Lustre or Windows file systems.
+	// ID of the file system to back up. Required if backing up Lustre or Windows file systems.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/fsx/v1beta2.LustreFileSystem
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -98,7 +98,7 @@ type BackupParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The ID of the volume to back up. Required if backing up a ONTAP Volume.
+	// ID of the volume to back up. Required if backing up a ONTAP Volume.
 	// +kubebuilder:validation:Optional
 	VolumeID *string `json:"volumeId,omitempty" tf:"volume_id,omitempty"`
 }

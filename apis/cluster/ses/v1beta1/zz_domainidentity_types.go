@@ -18,7 +18,7 @@ type DomainIdentityInitParameters struct {
 
 type DomainIdentityObservation struct {
 
-	// The ARN of the domain identity.
+	// ARN of the domain identity.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -27,7 +27,7 @@ type DomainIdentityObservation struct {
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// A code which when added to the domain as a TXT record will signal to SES that the owner of the domain has authorized SES to act on their behalf. The domain identity will be in state "verification pending" until this is done.  Find out more about verifying domains in Amazon SES in the AWS SES docs.
+	// Code which when added to the domain as a TXT record will signal to SES that the owner of the domain has authorized SES to act on their behalf. The domain identity will be in state "verification pending" until this is done.  Find out more about verifying domains in Amazon SES in the AWS SES docs.
 	VerificationToken *string `json:"verificationToken,omitempty" tf:"verification_token,omitempty"`
 }
 

@@ -77,7 +77,7 @@ type InfrastructureConfigurationInitParameters struct {
 	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
-	// Amazon Resource Name (ARN) of SNS Topic.
+	// ARN of SNS Topic.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/sns/v1beta1.Topic
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	SnsTopicArn *string `json:"snsTopicArn,omitempty" tf:"sns_topic_arn,omitempty"`
@@ -112,7 +112,7 @@ type InfrastructureConfigurationInitParameters struct {
 
 type InfrastructureConfigurationObservation struct {
 
-	// Amazon Resource Name (ARN) of the configuration.
+	// ARN of the configuration.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Date when the configuration was created.
@@ -124,7 +124,7 @@ type InfrastructureConfigurationObservation struct {
 	// Description for the configuration.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Amazon Resource Name (ARN) of the configuration.
+	// ARN of the configuration.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Configuration block with instance metadata options for the HTTP requests that pipeline builds use to launch EC2 build and test instances. Detailed below.
@@ -161,7 +161,7 @@ type InfrastructureConfigurationObservation struct {
 	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
-	// Amazon Resource Name (ARN) of SNS Topic.
+	// ARN of SNS Topic.
 	SnsTopicArn *string `json:"snsTopicArn,omitempty" tf:"sns_topic_arn,omitempty"`
 
 	// EC2 Subnet identifier. Also requires security_group_ids argument.
@@ -258,7 +258,7 @@ type InfrastructureConfigurationParameters struct {
 	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
-	// Amazon Resource Name (ARN) of SNS Topic.
+	// ARN of SNS Topic.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/sns/v1beta1.Topic
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional

@@ -75,16 +75,19 @@ spec:
               forProvider:
                 properties:
                   blockPublicAcls:
-                    description: 'Whether Amazon S3 should block public ACLs for this
+                    description: Whether Amazon S3 should block public ACLs for this
                       bucket. Defaults to false. Enabling this setting does not affect
-                      existing policies or ACLs. When set to true causes the following
-                      behavior:'
+                      existing policies or ACLs. When set to true, PUT Bucket ACL
+                      and PUT Object ACL calls fail if the specified ACL allows public
+                      access, and PUT Object calls fail if the request includes an
+                      object ACL.
                     type: boolean
                   blockPublicPolicy:
-                    description: 'Whether Amazon S3 should block public bucket policies
+                    description: Whether Amazon S3 should block public bucket policies
                       for this bucket. Defaults to false. Enabling this setting does
-                      not affect the existing bucket policy. When set to true causes
-                      Amazon S3 to:'
+                      not affect the existing bucket policy. When set to true, Amazon
+                      S3 rejects calls to PUT Bucket policy if the specified bucket
+                      policy allows public access.
                     type: boolean
                   bucket:
                     description: S3 Bucket to which this Public Access Block configuration
@@ -165,11 +168,11 @@ spec:
                         type: object
                     type: object
                   ignorePublicAcls:
-                    description: 'Whether Amazon S3 should ignore public ACLs for
-                      this bucket. Defaults to false. Enabling this setting does not
-                      affect the persistence of any existing ACLs and doesn''t prevent
-                      new public ACLs from being set. When set to true causes Amazon
-                      S3 to:'
+                    description: Whether Amazon S3 should ignore public ACLs for this
+                      bucket. Defaults to false. Enabling this setting does not affect
+                      the persistence of any existing ACLs and doesn't prevent new
+                      public ACLs from being set. When set to true, Amazon S3 ignores
+                      public ACLs on this bucket and any objects that it contains.
                     type: boolean
                   region:
                     description: |-
@@ -177,12 +180,13 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   restrictPublicBuckets:
-                    description: 'Whether Amazon S3 should restrict public bucket
-                      policies for this bucket. Defaults to false. Enabling this setting
-                      does not affect the previously stored bucket policy, except
-                      that public and cross-account access within the public bucket
-                      policy, including non-public delegation to specific accounts,
-                      is blocked. When set to true:'
+                    description: Whether Amazon S3 should restrict public bucket policies
+                      for this bucket. Defaults to false. Enabling this setting does
+                      not affect the previously stored bucket policy, except that
+                      public and cross-account access within the public bucket policy,
+                      including non-public delegation to specific accounts, is blocked.
+                      When set to true, only the bucket owner and AWS services can
+                      access this bucket if it has a public policy.
                     type: boolean
                   skipDestroy:
                     description: Whether to retain the public access block upon destruction.
@@ -207,16 +211,19 @@ spec:
                   autoscaler.
                 properties:
                   blockPublicAcls:
-                    description: 'Whether Amazon S3 should block public ACLs for this
+                    description: Whether Amazon S3 should block public ACLs for this
                       bucket. Defaults to false. Enabling this setting does not affect
-                      existing policies or ACLs. When set to true causes the following
-                      behavior:'
+                      existing policies or ACLs. When set to true, PUT Bucket ACL
+                      and PUT Object ACL calls fail if the specified ACL allows public
+                      access, and PUT Object calls fail if the request includes an
+                      object ACL.
                     type: boolean
                   blockPublicPolicy:
-                    description: 'Whether Amazon S3 should block public bucket policies
+                    description: Whether Amazon S3 should block public bucket policies
                       for this bucket. Defaults to false. Enabling this setting does
-                      not affect the existing bucket policy. When set to true causes
-                      Amazon S3 to:'
+                      not affect the existing bucket policy. When set to true, Amazon
+                      S3 rejects calls to PUT Bucket policy if the specified bucket
+                      policy allows public access.
                     type: boolean
                   bucket:
                     description: S3 Bucket to which this Public Access Block configuration
@@ -297,19 +304,20 @@ spec:
                         type: object
                     type: object
                   ignorePublicAcls:
-                    description: 'Whether Amazon S3 should ignore public ACLs for
-                      this bucket. Defaults to false. Enabling this setting does not
-                      affect the persistence of any existing ACLs and doesn''t prevent
-                      new public ACLs from being set. When set to true causes Amazon
-                      S3 to:'
+                    description: Whether Amazon S3 should ignore public ACLs for this
+                      bucket. Defaults to false. Enabling this setting does not affect
+                      the persistence of any existing ACLs and doesn't prevent new
+                      public ACLs from being set. When set to true, Amazon S3 ignores
+                      public ACLs on this bucket and any objects that it contains.
                     type: boolean
                   restrictPublicBuckets:
-                    description: 'Whether Amazon S3 should restrict public bucket
-                      policies for this bucket. Defaults to false. Enabling this setting
-                      does not affect the previously stored bucket policy, except
-                      that public and cross-account access within the public bucket
-                      policy, including non-public delegation to specific accounts,
-                      is blocked. When set to true:'
+                    description: Whether Amazon S3 should restrict public bucket policies
+                      for this bucket. Defaults to false. Enabling this setting does
+                      not affect the previously stored bucket policy, except that
+                      public and cross-account access within the public bucket policy,
+                      including non-public delegation to specific accounts, is blocked.
+                      When set to true, only the bucket owner and AWS services can
+                      access this bucket if it has a public policy.
                     type: boolean
                   skipDestroy:
                     description: Whether to retain the public access block upon destruction.
@@ -411,16 +419,19 @@ spec:
               atProvider:
                 properties:
                   blockPublicAcls:
-                    description: 'Whether Amazon S3 should block public ACLs for this
+                    description: Whether Amazon S3 should block public ACLs for this
                       bucket. Defaults to false. Enabling this setting does not affect
-                      existing policies or ACLs. When set to true causes the following
-                      behavior:'
+                      existing policies or ACLs. When set to true, PUT Bucket ACL
+                      and PUT Object ACL calls fail if the specified ACL allows public
+                      access, and PUT Object calls fail if the request includes an
+                      object ACL.
                     type: boolean
                   blockPublicPolicy:
-                    description: 'Whether Amazon S3 should block public bucket policies
+                    description: Whether Amazon S3 should block public bucket policies
                       for this bucket. Defaults to false. Enabling this setting does
-                      not affect the existing bucket policy. When set to true causes
-                      Amazon S3 to:'
+                      not affect the existing bucket policy. When set to true, Amazon
+                      S3 rejects calls to PUT Bucket policy if the specified bucket
+                      policy allows public access.
                     type: boolean
                   bucket:
                     description: S3 Bucket to which this Public Access Block configuration
@@ -431,11 +442,11 @@ spec:
                       to
                     type: string
                   ignorePublicAcls:
-                    description: 'Whether Amazon S3 should ignore public ACLs for
-                      this bucket. Defaults to false. Enabling this setting does not
-                      affect the persistence of any existing ACLs and doesn''t prevent
-                      new public ACLs from being set. When set to true causes Amazon
-                      S3 to:'
+                    description: Whether Amazon S3 should ignore public ACLs for this
+                      bucket. Defaults to false. Enabling this setting does not affect
+                      the persistence of any existing ACLs and doesn't prevent new
+                      public ACLs from being set. When set to true, Amazon S3 ignores
+                      public ACLs on this bucket and any objects that it contains.
                     type: boolean
                   region:
                     description: |-
@@ -443,12 +454,13 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   restrictPublicBuckets:
-                    description: 'Whether Amazon S3 should restrict public bucket
-                      policies for this bucket. Defaults to false. Enabling this setting
-                      does not affect the previously stored bucket policy, except
-                      that public and cross-account access within the public bucket
-                      policy, including non-public delegation to specific accounts,
-                      is blocked. When set to true:'
+                    description: Whether Amazon S3 should restrict public bucket policies
+                      for this bucket. Defaults to false. Enabling this setting does
+                      not affect the previously stored bucket policy, except that
+                      public and cross-account access within the public bucket policy,
+                      including non-public delegation to specific accounts, is blocked.
+                      When set to true, only the bucket owner and AWS services can
+                      access this bucket if it has a public policy.
                     type: boolean
                   skipDestroy:
                     description: Whether to retain the public access block upon destruction.

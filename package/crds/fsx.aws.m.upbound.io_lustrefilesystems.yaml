@@ -66,22 +66,22 @@ spec:
                       PERSISTENT_1 deployment types.
                     type: string
                   automaticBackupRetentionDays:
-                    description: The number of days to retain automatic backups. Setting
+                    description: Number of days to retain automatic backups. Setting
                       this to 0 disables automatic backups. You can retain automatic
                       backups for a maximum of 90 days. only valid for PERSISTENT_1
                       and PERSISTENT_2 deployment_type.
                     type: number
                   backupId:
-                    description: The ID of the source backup to create the filesystem
+                    description: ID of the source backup to create the filesystem
                       from.
                     type: string
                   copyTagsToBackups:
-                    description: A boolean flag indicating whether tags for the file
-                      system should be copied to backups. Applicable for PERSISTENT_1
-                      and PERSISTENT_2 deployment_type. The default value is false.
+                    description: Whether to copy tags for the file system to backups.
+                      Applicable for PERSISTENT_1 and PERSISTENT_2 deployment_type.
+                      The default value is false.
                     type: boolean
                   dailyAutomaticBackupStartTime:
-                    description: A recurring daily time, in the format HH:MM. HH is
+                    description: Recurring daily time, in the format HH:MM. HH is
                       the zero-padded hour of the day (0-23), and MM is the zero-padded
                       minute of the hour. For example, 05:00 specifies 5 AM daily.
                       only valid for PERSISTENT_1 and PERSISTENT_2 deployment_type.
@@ -104,13 +104,13 @@ spec:
                         type: string
                     type: object
                   deploymentType:
-                    description: '- The filesystem deployment type. One of: SCRATCH_1,
-                      SCRATCH_2, PERSISTENT_1, PERSISTENT_2.'
+                    description: 'Filesystem deployment type. One of: SCRATCH_1, SCRATCH_2,
+                      PERSISTENT_1, PERSISTENT_2.'
                     type: string
                   driveCacheType:
-                    description: '- The type of drive cache used by PERSISTENT_1 filesystems
+                    description: Type of drive cache used by PERSISTENT_1 filesystems
                       that are provisioned with HDD storage_type. Required for HDD
-                      storage_type, set to either READ or NONE.'
+                      storage_type, set to either READ or NONE.
                     type: string
                   efaEnabled:
                     description: Adds support for Elastic Fabric Adapter (EFA) and
@@ -140,8 +140,7 @@ spec:
                   finalBackupTags:
                     additionalProperties:
                       type: string
-                    description: A map of tags to apply to the file system's final
-                      backup.
+                    description: Map of tags to apply to the file system's final backup.
                     type: object
                     x-kubernetes-map-type: granular
                   importPath:
@@ -244,19 +243,18 @@ spec:
                         type: object
                     type: object
                   logConfiguration:
-                    description: The Lustre logging configuration used when creating
-                      an Amazon FSx for Lustre file system. When logging is enabled,
+                    description: Lustre logging configuration used when creating an
+                      Amazon FSx for Lustre file system. When logging is enabled,
                       Lustre logs error and warning events for data repositories associated
                       with your file system to Amazon CloudWatch Logs. See log_configuration
                       Block for details.
                     properties:
                       destination:
-                        description: The Amazon Resource Name (ARN) that specifies
-                          the destination of the logs. The name of the Amazon CloudWatch
-                          Logs log group must begin with the /aws/fsx prefix. If you
-                          do not provide a destination, Amazon FSx will create and
-                          use a log stream in the CloudWatch Logs /aws/fsx/lustre
-                          log group.
+                        description: ARN that specifies the destination of the logs.
+                          The name of the Amazon CloudWatch Logs log group must begin
+                          with the /aws/fsx prefix. If you do not provide a destination,
+                          Amazon FSx will create and use a log stream in the CloudWatch
+                          Logs /aws/fsx/lustre log group.
                         type: string
                       level:
                         description: Sets which data repository events are logged
@@ -265,7 +263,7 @@ spec:
                         type: string
                     type: object
                   metadataConfiguration:
-                    description: The Lustre metadata configuration used when creating
+                    description: Lustre metadata configuration used when creating
                       an Amazon FSx for Lustre file system. This can be used to specify
                       a user provisioned metadata scale. This is only supported when
                       deployment_type is set to PERSISTENT_2. See metadata_configuration
@@ -286,13 +284,13 @@ spec:
                         type: string
                     type: object
                   perUnitStorageThroughput:
-                    description: '- Describes the amount of read and write throughput
-                      for each 1 tebibyte of storage, in MB/s/TiB, required for the
-                      PERSISTENT_1 and PERSISTENT_2 deployment_type. Valid values
-                      for PERSISTENT_1 deployment_type and SSD storage_type are 50,
-                      100, 200. Valid values for PERSISTENT_1 deployment_type and
-                      HDD storage_type are 12, 40. Valid values for PERSISTENT_2 deployment_type
-                      and  SSD storage_type are 125, 250, 500, 1000.'
+                    description: Amount of read and write throughput for each 1 tebibyte
+                      of storage, in MB/s/TiB, required for the PERSISTENT_1 and PERSISTENT_2
+                      deployment_type. Valid values for PERSISTENT_1 deployment_type
+                      and SSD storage_type are 50, 100, 200. Valid values for PERSISTENT_1
+                      deployment_type and HDD storage_type are 12, 40. Valid values
+                      for PERSISTENT_2 deployment_type and  SSD storage_type are 125,
+                      250, 500, 1000.
                     type: number
                   region:
                     description: |-
@@ -300,7 +298,7 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   rootSquashConfiguration:
-                    description: The Lustre root squash configuration used when creating
+                    description: Lustre root squash configuration used when creating
                       an Amazon FSx for Lustre file system. When enabled, root squash
                       restricts root-level access from clients that try to access
                       your file system as a root user. See root_squash_configuration
@@ -413,9 +411,9 @@ spec:
                         type: object
                     type: object
                   securityGroupIds:
-                    description: A list of IDs for the security groups that apply
-                      to the specified network interfaces created for file system
-                      access. These security groups will apply to all network interfaces.
+                    description: List of IDs for the security groups that apply to
+                      the specified network interfaces created for file system access.
+                      These security groups will apply to all network interfaces.
                     items:
                       type: string
                     type: array
@@ -427,7 +425,7 @@ spec:
                       to have the desired behavior. Defaults to true.
                     type: boolean
                   storageCapacity:
-                    description: The storage capacity (GiB) of the file system. Minimum
+                    description: Storage capacity (GiB) of the file system. Minimum
                       of 1200. See more details at Allowed values for Fsx storage
                       capacity. Update is allowed only for SCRATCH_2, PERSISTENT_1
                       and PERSISTENT_2 deployment types, See more details at Fsx Storage
@@ -435,11 +433,11 @@ spec:
                       backup.
                     type: number
                   storageType:
-                    description: '- The filesystem storage type. One of SSD, HDD or
-                      INTELLIGENT_TIERING, defaults to SSD. HDD is only supported
-                      on PERSISTENT_1 deployment types. INTELLIGENT_TIERING requires
-                      data_read_cache_configuration and metadata_configuration to
-                      be set and is only supported for PERSISTENT_2 deployment types.'
+                    description: Filesystem storage type. One of SSD, HDD or INTELLIGENT_TIERING,
+                      defaults to SSD. HDD is only supported on PERSISTENT_1 deployment
+                      types. INTELLIGENT_TIERING requires data_read_cache_configuration
+                      and metadata_configuration to be set and is only supported for
+                      PERSISTENT_2 deployment types.
                     type: string
                   subnetIdRefs:
                     description: References to Subnet in ec2 to populate subnetIds.
@@ -526,7 +524,7 @@ spec:
                         type: object
                     type: object
                   subnetIds:
-                    description: A list of IDs for the subnets that the file system
+                    description: List of IDs for the subnets that the file system
                       will be accessible from. File systems currently support only
                       one subnet. The file server is also launched in that subnet's
                       Availability Zone.
@@ -544,7 +542,7 @@ spec:
                       storage type. Must be 4000 or multiples of 4000.
                     type: number
                   weeklyMaintenanceStartTime:
-                    description: The preferred start time (in d:HH:MM format) to perform
+                    description: Preferred start time (in d:HH:MM format) to perform
                       weekly maintenance, in the UTC time zone.
                     type: string
                 required:
@@ -570,22 +568,22 @@ spec:
                       PERSISTENT_1 deployment types.
                     type: string
                   automaticBackupRetentionDays:
-                    description: The number of days to retain automatic backups. Setting
+                    description: Number of days to retain automatic backups. Setting
                       this to 0 disables automatic backups. You can retain automatic
                       backups for a maximum of 90 days. only valid for PERSISTENT_1
                       and PERSISTENT_2 deployment_type.
                     type: number
                   backupId:
-                    description: The ID of the source backup to create the filesystem
+                    description: ID of the source backup to create the filesystem
                       from.
                     type: string
                   copyTagsToBackups:
-                    description: A boolean flag indicating whether tags for the file
-                      system should be copied to backups. Applicable for PERSISTENT_1
-                      and PERSISTENT_2 deployment_type. The default value is false.
+                    description: Whether to copy tags for the file system to backups.
+                      Applicable for PERSISTENT_1 and PERSISTENT_2 deployment_type.
+                      The default value is false.
                     type: boolean
                   dailyAutomaticBackupStartTime:
-                    description: A recurring daily time, in the format HH:MM. HH is
+                    description: Recurring daily time, in the format HH:MM. HH is
                       the zero-padded hour of the day (0-23), and MM is the zero-padded
                       minute of the hour. For example, 05:00 specifies 5 AM daily.
                       only valid for PERSISTENT_1 and PERSISTENT_2 deployment_type.
@@ -608,13 +606,13 @@ spec:
                         type: string
                     type: object
                   deploymentType:
-                    description: '- The filesystem deployment type. One of: SCRATCH_1,
-                      SCRATCH_2, PERSISTENT_1, PERSISTENT_2.'
+                    description: 'Filesystem deployment type. One of: SCRATCH_1, SCRATCH_2,
+                      PERSISTENT_1, PERSISTENT_2.'
                     type: string
                   driveCacheType:
-                    description: '- The type of drive cache used by PERSISTENT_1 filesystems
+                    description: Type of drive cache used by PERSISTENT_1 filesystems
                       that are provisioned with HDD storage_type. Required for HDD
-                      storage_type, set to either READ or NONE.'
+                      storage_type, set to either READ or NONE.
                     type: string
                   efaEnabled:
                     description: Adds support for Elastic Fabric Adapter (EFA) and
@@ -644,8 +642,7 @@ spec:
                   finalBackupTags:
                     additionalProperties:
                       type: string
-                    description: A map of tags to apply to the file system's final
-                      backup.
+                    description: Map of tags to apply to the file system's final backup.
                     type: object
                     x-kubernetes-map-type: granular
                   importPath:
@@ -748,19 +745,18 @@ spec:
                         type: object
                     type: object
                   logConfiguration:
-                    description: The Lustre logging configuration used when creating
-                      an Amazon FSx for Lustre file system. When logging is enabled,
+                    description: Lustre logging configuration used when creating an
+                      Amazon FSx for Lustre file system. When logging is enabled,
                       Lustre logs error and warning events for data repositories associated
                       with your file system to Amazon CloudWatch Logs. See log_configuration
                       Block for details.
                     properties:
                       destination:
-                        description: The Amazon Resource Name (ARN) that specifies
-                          the destination of the logs. The name of the Amazon CloudWatch
-                          Logs log group must begin with the /aws/fsx prefix. If you
-                          do not provide a destination, Amazon FSx will create and
-                          use a log stream in the CloudWatch Logs /aws/fsx/lustre
-                          log group.
+                        description: ARN that specifies the destination of the logs.
+                          The name of the Amazon CloudWatch Logs log group must begin
+                          with the /aws/fsx prefix. If you do not provide a destination,
+                          Amazon FSx will create and use a log stream in the CloudWatch
+                          Logs /aws/fsx/lustre log group.
                         type: string
                       level:
                         description: Sets which data repository events are logged
@@ -769,7 +765,7 @@ spec:
                         type: string
                     type: object
                   metadataConfiguration:
-                    description: The Lustre metadata configuration used when creating
+                    description: Lustre metadata configuration used when creating
                       an Amazon FSx for Lustre file system. This can be used to specify
                       a user provisioned metadata scale. This is only supported when
                       deployment_type is set to PERSISTENT_2. See metadata_configuration
@@ -790,16 +786,16 @@ spec:
                         type: string
                     type: object
                   perUnitStorageThroughput:
-                    description: '- Describes the amount of read and write throughput
-                      for each 1 tebibyte of storage, in MB/s/TiB, required for the
-                      PERSISTENT_1 and PERSISTENT_2 deployment_type. Valid values
-                      for PERSISTENT_1 deployment_type and SSD storage_type are 50,
-                      100, 200. Valid values for PERSISTENT_1 deployment_type and
-                      HDD storage_type are 12, 40. Valid values for PERSISTENT_2 deployment_type
-                      and  SSD storage_type are 125, 250, 500, 1000.'
+                    description: Amount of read and write throughput for each 1 tebibyte
+                      of storage, in MB/s/TiB, required for the PERSISTENT_1 and PERSISTENT_2
+                      deployment_type. Valid values for PERSISTENT_1 deployment_type
+                      and SSD storage_type are 50, 100, 200. Valid values for PERSISTENT_1
+                      deployment_type and HDD storage_type are 12, 40. Valid values
+                      for PERSISTENT_2 deployment_type and  SSD storage_type are 125,
+                      250, 500, 1000.
                     type: number
                   rootSquashConfiguration:
-                    description: The Lustre root squash configuration used when creating
+                    description: Lustre root squash configuration used when creating
                       an Amazon FSx for Lustre file system. When enabled, root squash
                       restricts root-level access from clients that try to access
                       your file system as a root user. See root_squash_configuration
@@ -912,9 +908,9 @@ spec:
                         type: object
                     type: object
                   securityGroupIds:
-                    description: A list of IDs for the security groups that apply
-                      to the specified network interfaces created for file system
-                      access. These security groups will apply to all network interfaces.
+                    description: List of IDs for the security groups that apply to
+                      the specified network interfaces created for file system access.
+                      These security groups will apply to all network interfaces.
                     items:
                       type: string
                     type: array
@@ -926,7 +922,7 @@ spec:
                       to have the desired behavior. Defaults to true.
                     type: boolean
                   storageCapacity:
-                    description: The storage capacity (GiB) of the file system. Minimum
+                    description: Storage capacity (GiB) of the file system. Minimum
                       of 1200. See more details at Allowed values for Fsx storage
                       capacity. Update is allowed only for SCRATCH_2, PERSISTENT_1
                       and PERSISTENT_2 deployment types, See more details at Fsx Storage
@@ -934,11 +930,11 @@ spec:
                       backup.
                     type: number
                   storageType:
-                    description: '- The filesystem storage type. One of SSD, HDD or
-                      INTELLIGENT_TIERING, defaults to SSD. HDD is only supported
-                      on PERSISTENT_1 deployment types. INTELLIGENT_TIERING requires
-                      data_read_cache_configuration and metadata_configuration to
-                      be set and is only supported for PERSISTENT_2 deployment types.'
+                    description: Filesystem storage type. One of SSD, HDD or INTELLIGENT_TIERING,
+                      defaults to SSD. HDD is only supported on PERSISTENT_1 deployment
+                      types. INTELLIGENT_TIERING requires data_read_cache_configuration
+                      and metadata_configuration to be set and is only supported for
+                      PERSISTENT_2 deployment types.
                     type: string
                   subnetIdRefs:
                     description: References to Subnet in ec2 to populate subnetIds.
@@ -1025,7 +1021,7 @@ spec:
                         type: object
                     type: object
                   subnetIds:
-                    description: A list of IDs for the subnets that the file system
+                    description: List of IDs for the subnets that the file system
                       will be accessible from. File systems currently support only
                       one subnet. The file server is also launched in that subnet's
                       Availability Zone.
@@ -1043,7 +1039,7 @@ spec:
                       storage type. Must be 4000 or multiples of 4000.
                     type: number
                   weeklyMaintenanceStartTime:
-                    description: The preferred start time (in d:HH:MM format) to perform
+                    description: Preferred start time (in d:HH:MM format) to perform
                       weekly maintenance, in the UTC time zone.
                     type: string
                 type: object
@@ -1111,7 +1107,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: Amazon Resource Name of the file system.
+                    description: ARN of the file system.
                     type: string
                   autoImportPolicy:
                     description: How Amazon FSx keeps your file and directory listings
@@ -1120,22 +1116,22 @@ spec:
                       PERSISTENT_1 deployment types.
                     type: string
                   automaticBackupRetentionDays:
-                    description: The number of days to retain automatic backups. Setting
+                    description: Number of days to retain automatic backups. Setting
                       this to 0 disables automatic backups. You can retain automatic
                       backups for a maximum of 90 days. only valid for PERSISTENT_1
                       and PERSISTENT_2 deployment_type.
                     type: number
                   backupId:
-                    description: The ID of the source backup to create the filesystem
+                    description: ID of the source backup to create the filesystem
                       from.
                     type: string
                   copyTagsToBackups:
-                    description: A boolean flag indicating whether tags for the file
-                      system should be copied to backups. Applicable for PERSISTENT_1
-                      and PERSISTENT_2 deployment_type. The default value is false.
+                    description: Whether to copy tags for the file system to backups.
+                      Applicable for PERSISTENT_1 and PERSISTENT_2 deployment_type.
+                      The default value is false.
                     type: boolean
                   dailyAutomaticBackupStartTime:
-                    description: A recurring daily time, in the format HH:MM. HH is
+                    description: Recurring daily time, in the format HH:MM. HH is
                       the zero-padded hour of the day (0-23), and MM is the zero-padded
                       minute of the hour. For example, 05:00 specifies 5 AM daily.
                       only valid for PERSISTENT_1 and PERSISTENT_2 deployment_type.
@@ -1158,16 +1154,16 @@ spec:
                         type: string
                     type: object
                   deploymentType:
-                    description: '- The filesystem deployment type. One of: SCRATCH_1,
-                      SCRATCH_2, PERSISTENT_1, PERSISTENT_2.'
+                    description: 'Filesystem deployment type. One of: SCRATCH_1, SCRATCH_2,
+                      PERSISTENT_1, PERSISTENT_2.'
                     type: string
                   dnsName:
                     description: DNS name for the file system, e.g., fs-12345678.fsx.us-west-2.amazonaws.com
                     type: string
                   driveCacheType:
-                    description: '- The type of drive cache used by PERSISTENT_1 filesystems
+                    description: Type of drive cache used by PERSISTENT_1 filesystems
                       that are provisioned with HDD storage_type. Required for HDD
-                      storage_type, set to either READ or NONE.'
+                      storage_type, set to either READ or NONE.
                     type: string
                   efaEnabled:
                     description: Adds support for Elastic Fabric Adapter (EFA) and
@@ -1197,8 +1193,7 @@ spec:
                   finalBackupTags:
                     additionalProperties:
                       type: string
-                    description: A map of tags to apply to the file system's final
-                      backup.
+                    description: Map of tags to apply to the file system's final backup.
                     type: object
                     x-kubernetes-map-type: granular
                   id:
@@ -1224,19 +1219,18 @@ spec:
                       Defaults to an AWS managed KMS Key.
                     type: string
                   logConfiguration:
-                    description: The Lustre logging configuration used when creating
-                      an Amazon FSx for Lustre file system. When logging is enabled,
+                    description: Lustre logging configuration used when creating an
+                      Amazon FSx for Lustre file system. When logging is enabled,
                       Lustre logs error and warning events for data repositories associated
                       with your file system to Amazon CloudWatch Logs. See log_configuration
                       Block for details.
                     properties:
                       destination:
-                        description: The Amazon Resource Name (ARN) that specifies
-                          the destination of the logs. The name of the Amazon CloudWatch
-                          Logs log group must begin with the /aws/fsx prefix. If you
-                          do not provide a destination, Amazon FSx will create and
-                          use a log stream in the CloudWatch Logs /aws/fsx/lustre
-                          log group.
+                        description: ARN that specifies the destination of the logs.
+                          The name of the Amazon CloudWatch Logs log group must begin
+                          with the /aws/fsx prefix. If you do not provide a destination,
+                          Amazon FSx will create and use a log stream in the CloudWatch
+                          Logs /aws/fsx/lustre log group.
                         type: string
                       level:
                         description: Sets which data repository events are logged
@@ -1245,7 +1239,7 @@ spec:
                         type: string
                     type: object
                   metadataConfiguration:
-                    description: The Lustre metadata configuration used when creating
+                    description: Lustre metadata configuration used when creating
                       an Amazon FSx for Lustre file system. This can be used to specify
                       a user provisioned metadata scale. This is only supported when
                       deployment_type is set to PERSISTENT_2. See metadata_configuration
@@ -1266,7 +1260,7 @@ spec:
                         type: string
                     type: object
                   mountName:
-                    description: The value to be used when mounting the filesystem.
+                    description: Value to be used when mounting the filesystem.
                     type: string
                   networkInterfaceIds:
                     description: Set of Elastic Network Interface identifiers from
@@ -1280,13 +1274,13 @@ spec:
                     description: AWS account identifier that created the file system.
                     type: string
                   perUnitStorageThroughput:
-                    description: '- Describes the amount of read and write throughput
-                      for each 1 tebibyte of storage, in MB/s/TiB, required for the
-                      PERSISTENT_1 and PERSISTENT_2 deployment_type. Valid values
-                      for PERSISTENT_1 deployment_type and SSD storage_type are 50,
-                      100, 200. Valid values for PERSISTENT_1 deployment_type and
-                      HDD storage_type are 12, 40. Valid values for PERSISTENT_2 deployment_type
-                      and  SSD storage_type are 125, 250, 500, 1000.'
+                    description: Amount of read and write throughput for each 1 tebibyte
+                      of storage, in MB/s/TiB, required for the PERSISTENT_1 and PERSISTENT_2
+                      deployment_type. Valid values for PERSISTENT_1 deployment_type
+                      and SSD storage_type are 50, 100, 200. Valid values for PERSISTENT_1
+                      deployment_type and HDD storage_type are 12, 40. Valid values
+                      for PERSISTENT_2 deployment_type and  SSD storage_type are 125,
+                      250, 500, 1000.
                     type: number
                   region:
                     description: |-
@@ -1294,7 +1288,7 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   rootSquashConfiguration:
-                    description: The Lustre root squash configuration used when creating
+                    description: Lustre root squash configuration used when creating
                       an Amazon FSx for Lustre file system. When enabled, root squash
                       restricts root-level access from clients that try to access
                       your file system as a root user. See root_squash_configuration
@@ -1323,9 +1317,9 @@ spec:
                         type: string
                     type: object
                   securityGroupIds:
-                    description: A list of IDs for the security groups that apply
-                      to the specified network interfaces created for file system
-                      access. These security groups will apply to all network interfaces.
+                    description: List of IDs for the security groups that apply to
+                      the specified network interfaces created for file system access.
+                      These security groups will apply to all network interfaces.
                     items:
                       type: string
                     type: array
@@ -1337,7 +1331,7 @@ spec:
                       to have the desired behavior. Defaults to true.
                     type: boolean
                   storageCapacity:
-                    description: The storage capacity (GiB) of the file system. Minimum
+                    description: Storage capacity (GiB) of the file system. Minimum
                       of 1200. See more details at Allowed values for Fsx storage
                       capacity. Update is allowed only for SCRATCH_2, PERSISTENT_1
                       and PERSISTENT_2 deployment types, See more details at Fsx Storage
@@ -1345,14 +1339,14 @@ spec:
                       backup.
                     type: number
                   storageType:
-                    description: '- The filesystem storage type. One of SSD, HDD or
-                      INTELLIGENT_TIERING, defaults to SSD. HDD is only supported
-                      on PERSISTENT_1 deployment types. INTELLIGENT_TIERING requires
-                      data_read_cache_configuration and metadata_configuration to
-                      be set and is only supported for PERSISTENT_2 deployment types.'
+                    description: Filesystem storage type. One of SSD, HDD or INTELLIGENT_TIERING,
+                      defaults to SSD. HDD is only supported on PERSISTENT_1 deployment
+                      types. INTELLIGENT_TIERING requires data_read_cache_configuration
+                      and metadata_configuration to be set and is only supported for
+                      PERSISTENT_2 deployment types.
                     type: string
                   subnetIds:
-                    description: A list of IDs for the subnets that the file system
+                    description: List of IDs for the subnets that the file system
                       will be accessible from. File systems currently support only
                       one subnet. The file server is also launched in that subnet's
                       Availability Zone.
@@ -1368,9 +1362,8 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
                   throughputCapacity:
@@ -1378,11 +1371,10 @@ spec:
                       storage type. Must be 4000 or multiples of 4000.
                     type: number
                   vpcId:
-                    description: Identifier of the Virtual Private Cloud for the file
-                      system.
+                    description: Identifier of the VPC for the file system.
                     type: string
                   weeklyMaintenanceStartTime:
-                    description: The preferred start time (in d:HH:MM format) to perform
+                    description: Preferred start time (in d:HH:MM format) to perform
                       weekly maintenance, in the UTC time zone.
                     type: string
                 type: object

@@ -15,7 +15,7 @@ import (
 
 type ExternalKeyInitParameters struct {
 
-	// Specifies whether to disable the policy lockout check performed when creating or updating the key's policy. Setting this value to true increases the risk that the key becomes unmanageable. For more information, refer to the scenario in the Default Key Policy section in the AWS Key Management Service Developer Guide. Defaults to false.
+	// Whether to disable the policy lockout check performed when creating or updating the key's policy. Setting this value to true increases the risk that the key becomes unmanageable. For more information, refer to the scenario in the Default Key Policy section in the KMS Developer Guide. Defaults to false.
 	BypassPolicyLockoutSafetyCheck *bool `json:"bypassPolicyLockoutSafetyCheck,omitempty" tf:"bypass_policy_lockout_safety_check,omitempty"`
 
 	// Duration in days after which the key is deleted after destruction of the resource. Must be between 7 and 30 days. Defaults to 30.
@@ -52,10 +52,10 @@ type ExternalKeyInitParameters struct {
 
 type ExternalKeyObservation struct {
 
-	// The Amazon Resource Name (ARN) of the key.
+	// ARN of the key.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// Specifies whether to disable the policy lockout check performed when creating or updating the key's policy. Setting this value to true increases the risk that the key becomes unmanageable. For more information, refer to the scenario in the Default Key Policy section in the AWS Key Management Service Developer Guide. Defaults to false.
+	// Whether to disable the policy lockout check performed when creating or updating the key's policy. Setting this value to true increases the risk that the key becomes unmanageable. For more information, refer to the scenario in the Default Key Policy section in the KMS Developer Guide. Defaults to false.
 	BypassPolicyLockoutSafetyCheck *bool `json:"bypassPolicyLockoutSafetyCheck,omitempty" tf:"bypass_policy_lockout_safety_check,omitempty"`
 
 	// Duration in days after which the key is deleted after destruction of the resource. Must be between 7 and 30 days. Defaults to 30.
@@ -106,7 +106,7 @@ type ExternalKeyObservation struct {
 
 type ExternalKeyParameters struct {
 
-	// Specifies whether to disable the policy lockout check performed when creating or updating the key's policy. Setting this value to true increases the risk that the key becomes unmanageable. For more information, refer to the scenario in the Default Key Policy section in the AWS Key Management Service Developer Guide. Defaults to false.
+	// Whether to disable the policy lockout check performed when creating or updating the key's policy. Setting this value to true increases the risk that the key becomes unmanageable. For more information, refer to the scenario in the Default Key Policy section in the KMS Developer Guide. Defaults to false.
 	// +kubebuilder:validation:Optional
 	BypassPolicyLockoutSafetyCheck *bool `json:"bypassPolicyLockoutSafetyCheck,omitempty" tf:"bypass_policy_lockout_safety_check,omitempty"`
 

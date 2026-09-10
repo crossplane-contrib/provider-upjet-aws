@@ -83,7 +83,7 @@ type DocumentInitParameters struct {
 
 type DocumentObservation struct {
 
-	// The Amazon Resource Name (ARN) of the document.
+	// ARN of the document.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// One or more configuration blocks describing attachments sources to a version of a document. See attachments_source block below for details.

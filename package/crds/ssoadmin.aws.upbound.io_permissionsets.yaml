@@ -77,8 +77,8 @@ spec:
                     description: The description of the Permission Set.
                     type: string
                   instanceArn:
-                    description: The Amazon Resource Name (ARN) of the SSO Instance
-                      under which the operation will be executed.
+                    description: ARN of the SSO Instance under which the operation
+                      will be executed.
                     type: string
                   name:
                     description: The name of the Permission Set.
@@ -122,8 +122,8 @@ spec:
                     description: The description of the Permission Set.
                     type: string
                   instanceArn:
-                    description: The Amazon Resource Name (ARN) of the SSO Instance
-                      under which the operation will be executed.
+                    description: ARN of the SSO Instance under which the operation
+                      will be executed.
                     type: string
                   name:
                     description: The name of the Permission Set.
@@ -244,8 +244,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The Amazon Resource Name (ARN) of the Permission
-                      Set.
+                    description: ARN of the Permission Set.
                     type: string
                   createdDate:
                     description: The date the Permission Set was created in RFC3339
@@ -255,12 +254,12 @@ spec:
                     description: The description of the Permission Set.
                     type: string
                   id:
-                    description: The Amazon Resource Names (ARNs) of the Permission
-                      Set and SSO Instance, separated by a comma (,).
+                    description: ARNs of the Permission Set and SSO Instance, separated
+                      by a comma (,).
                     type: string
                   instanceArn:
-                    description: The Amazon Resource Name (ARN) of the SSO Instance
-                      under which the operation will be executed.
+                    description: ARN of the SSO Instance under which the operation
+                      will be executed.
                     type: string
                   name:
                     description: The name of the Permission Set.

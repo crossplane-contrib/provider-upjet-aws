@@ -28,7 +28,7 @@ type StudioLifecycleConfigInitParameters struct {
 
 type StudioLifecycleConfigObservation struct {
 
-	// The Amazon Resource Name (ARN) assigned by AWS to this Studio Lifecycle Config.
+	// The ARN assigned by AWS to this Studio Lifecycle Config.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The name of the Studio Lifecycle Config.

@@ -44,7 +44,7 @@ type DataReadCacheConfigurationParameters struct {
 
 type LogConfigurationInitParameters struct {
 
-	// The Amazon Resource Name (ARN) that specifies the destination of the logs. The name of the Amazon CloudWatch Logs log group must begin with the /aws/fsx prefix. If you do not provide a destination, Amazon FSx will create and use a log stream in the CloudWatch Logs /aws/fsx/lustre log group.
+	// ARN that specifies the destination of the logs. The name of the Amazon CloudWatch Logs log group must begin with the /aws/fsx prefix. If you do not provide a destination, Amazon FSx will create and use a log stream in the CloudWatch Logs /aws/fsx/lustre log group.
 	Destination *string `json:"destination,omitempty" tf:"destination,omitempty"`
 
 	// Sets which data repository events are logged by Amazon FSx. Valid values are WARN_ONLY, FAILURE_ONLY, ERROR_ONLY, WARN_ERROR and DISABLED. Default value is DISABLED.
@@ -53,7 +53,7 @@ type LogConfigurationInitParameters struct {
 
 type LogConfigurationObservation struct {
 
-	// The Amazon Resource Name (ARN) that specifies the destination of the logs. The name of the Amazon CloudWatch Logs log group must begin with the /aws/fsx prefix. If you do not provide a destination, Amazon FSx will create and use a log stream in the CloudWatch Logs /aws/fsx/lustre log group.
+	// ARN that specifies the destination of the logs. The name of the Amazon CloudWatch Logs log group must begin with the /aws/fsx prefix. If you do not provide a destination, Amazon FSx will create and use a log stream in the CloudWatch Logs /aws/fsx/lustre log group.
 	Destination *string `json:"destination,omitempty" tf:"destination,omitempty"`
 
 	// Sets which data repository events are logged by Amazon FSx. Valid values are WARN_ONLY, FAILURE_ONLY, ERROR_ONLY, WARN_ERROR and DISABLED. Default value is DISABLED.
@@ -62,7 +62,7 @@ type LogConfigurationObservation struct {
 
 type LogConfigurationParameters struct {
 
-	// The Amazon Resource Name (ARN) that specifies the destination of the logs. The name of the Amazon CloudWatch Logs log group must begin with the /aws/fsx prefix. If you do not provide a destination, Amazon FSx will create and use a log stream in the CloudWatch Logs /aws/fsx/lustre log group.
+	// ARN that specifies the destination of the logs. The name of the Amazon CloudWatch Logs log group must begin with the /aws/fsx prefix. If you do not provide a destination, Amazon FSx will create and use a log stream in the CloudWatch Logs /aws/fsx/lustre log group.
 	// +kubebuilder:validation:Optional
 	Destination *string `json:"destination,omitempty" tf:"destination,omitempty"`
 
@@ -76,16 +76,16 @@ type LustreFileSystemInitParameters struct {
 	// How Amazon FSx keeps your file and directory listings up to date as you add or modify objects in your linked S3 bucket. see Auto Import Data Repo for more details. Only supported on PERSISTENT_1 deployment types.
 	AutoImportPolicy *string `json:"autoImportPolicy,omitempty" tf:"auto_import_policy,omitempty"`
 
-	// The number of days to retain automatic backups. Setting this to 0 disables automatic backups. You can retain automatic backups for a maximum of 90 days. only valid for PERSISTENT_1 and PERSISTENT_2 deployment_type.
+	// Number of days to retain automatic backups. Setting this to 0 disables automatic backups. You can retain automatic backups for a maximum of 90 days. only valid for PERSISTENT_1 and PERSISTENT_2 deployment_type.
 	AutomaticBackupRetentionDays *float64 `json:"automaticBackupRetentionDays,omitempty" tf:"automatic_backup_retention_days,omitempty"`
 
-	// The ID of the source backup to create the filesystem from.
+	// ID of the source backup to create the filesystem from.
 	BackupID *string `json:"backupId,omitempty" tf:"backup_id,omitempty"`
 
-	// A boolean flag indicating whether tags for the file system should be copied to backups. Applicable for PERSISTENT_1 and PERSISTENT_2 deployment_type. The default value is false.
+	// Whether to copy tags for the file system to backups. Applicable for PERSISTENT_1 and PERSISTENT_2 deployment_type. The default value is false.
 	CopyTagsToBackups *bool `json:"copyTagsToBackups,omitempty" tf:"copy_tags_to_backups,omitempty"`
 
-	// A recurring daily time, in the format HH:MM. HH is the zero-padded hour of the day (0-23), and MM is the zero-padded minute of the hour. For example, 05:00 specifies 5 AM daily. only valid for PERSISTENT_1 and PERSISTENT_2 deployment_type. Requires automatic_backup_retention_days to be set.
+	// Recurring daily time, in the format HH:MM. HH is the zero-padded hour of the day (0-23), and MM is the zero-padded minute of the hour. For example, 05:00 specifies 5 AM daily. only valid for PERSISTENT_1 and PERSISTENT_2 deployment_type. Requires automatic_backup_retention_days to be set.
 	DailyAutomaticBackupStartTime *string `json:"dailyAutomaticBackupStartTime,omitempty" tf:"daily_automatic_backup_start_time,omitempty"`
 
 	// Sets the data compression configuration for the file system. Valid values are LZ4 and NONE. Default value is NONE. Unsetting this value reverts the compression type back to NONE.
@@ -93,10 +93,10 @@ type LustreFileSystemInitParameters struct {
 
 	DataReadCacheConfiguration *DataReadCacheConfigurationInitParameters `json:"dataReadCacheConfiguration,omitempty" tf:"data_read_cache_configuration,omitempty"`
 
-	// - The filesystem deployment type. One of: SCRATCH_1, SCRATCH_2, PERSISTENT_1, PERSISTENT_2.
+	// Filesystem deployment type. One of: SCRATCH_1, SCRATCH_2, PERSISTENT_1, PERSISTENT_2.
 	DeploymentType *string `json:"deploymentType,omitempty" tf:"deployment_type,omitempty"`
 
-	// - The type of drive cache used by PERSISTENT_1 filesystems that are provisioned with HDD storage_type. Required for HDD storage_type, set to either READ or NONE.
+	// Type of drive cache used by PERSISTENT_1 filesystems that are provisioned with HDD storage_type. Required for HDD storage_type, set to either READ or NONE.
 	DriveCacheType *string `json:"driveCacheType,omitempty" tf:"drive_cache_type,omitempty"`
 
 	// Adds support for Elastic Fabric Adapter (EFA) and GPUDirect Storage (GDS) to Lustre. This must be set at creation. If set this cannot be changed and this prevents changes to per_unit_storage_throughput. This is only supported when deployment_type is set to PERSISTENT_2, metadata_configuration is used, and an EFA-enabled security group is attached.
@@ -108,7 +108,7 @@ type LustreFileSystemInitParameters struct {
 	// Sets the Lustre version for the file system. Valid values are 2.10, 2.12, and 2.15. When creating a file system, 2.10 is valid for SCRATCH_1, SCRATCH_2, and PERSISTENT_1 deployment types; 2.12 and 2.15 are valid for all deployment types. Changing this value to a higher version triggers an in-place upgrade. Changing to a lower version forces resource replacement (destroy and recreate).
 	FileSystemTypeVersion *string `json:"fileSystemTypeVersion,omitempty" tf:"file_system_type_version,omitempty"`
 
-	// A map of tags to apply to the file system's final backup.
+	// Map of tags to apply to the file system's final backup.
 	// +mapType=granular
 	FinalBackupTags map[string]*string `json:"finalBackupTags,omitempty" tf:"final_backup_tags,omitempty"`
 
@@ -130,16 +130,16 @@ type LustreFileSystemInitParameters struct {
 	// +kubebuilder:validation:Optional
 	KMSKeyIDSelector *v2.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
-	// The Lustre logging configuration used when creating an Amazon FSx for Lustre file system. When logging is enabled, Lustre logs error and warning events for data repositories associated with your file system to Amazon CloudWatch Logs. See log_configuration Block for details.
+	// Lustre logging configuration used when creating an Amazon FSx for Lustre file system. When logging is enabled, Lustre logs error and warning events for data repositories associated with your file system to Amazon CloudWatch Logs. See log_configuration Block for details.
 	LogConfiguration *LogConfigurationInitParameters `json:"logConfiguration,omitempty" tf:"log_configuration,omitempty"`
 
-	// The Lustre metadata configuration used when creating an Amazon FSx for Lustre file system. This can be used to specify a user provisioned metadata scale. This is only supported when deployment_type is set to PERSISTENT_2. See metadata_configuration Block for details.
+	// Lustre metadata configuration used when creating an Amazon FSx for Lustre file system. This can be used to specify a user provisioned metadata scale. This is only supported when deployment_type is set to PERSISTENT_2. See metadata_configuration Block for details.
 	MetadataConfiguration *MetadataConfigurationInitParameters `json:"metadataConfiguration,omitempty" tf:"metadata_configuration,omitempty"`
 
-	// - Describes the amount of read and write throughput for each 1 tebibyte of storage, in MB/s/TiB, required for the PERSISTENT_1 and PERSISTENT_2 deployment_type. Valid values for PERSISTENT_1 deployment_type and SSD storage_type are 50, 100, 200. Valid values for PERSISTENT_1 deployment_type and HDD storage_type are 12, 40. Valid values for PERSISTENT_2 deployment_type and  SSD storage_type are 125, 250, 500, 1000.
+	// Amount of read and write throughput for each 1 tebibyte of storage, in MB/s/TiB, required for the PERSISTENT_1 and PERSISTENT_2 deployment_type. Valid values for PERSISTENT_1 deployment_type and SSD storage_type are 50, 100, 200. Valid values for PERSISTENT_1 deployment_type and HDD storage_type are 12, 40. Valid values for PERSISTENT_2 deployment_type and  SSD storage_type are 125, 250, 500, 1000.
 	PerUnitStorageThroughput *float64 `json:"perUnitStorageThroughput,omitempty" tf:"per_unit_storage_throughput,omitempty"`
 
-	// The Lustre root squash configuration used when creating an Amazon FSx for Lustre file system. When enabled, root squash restricts root-level access from clients that try to access your file system as a root user. See root_squash_configuration Block for details.
+	// Lustre root squash configuration used when creating an Amazon FSx for Lustre file system. When enabled, root squash restricts root-level access from clients that try to access your file system as a root user. See root_squash_configuration Block for details.
 	RootSquashConfiguration *RootSquashConfigurationInitParameters `json:"rootSquashConfiguration,omitempty" tf:"root_squash_configuration,omitempty"`
 
 	// References to SecurityGroup in ec2 to populate securityGroupIds.
@@ -150,7 +150,7 @@ type LustreFileSystemInitParameters struct {
 	// +kubebuilder:validation:Optional
 	SecurityGroupIDSelector *v2.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 
-	// A list of IDs for the security groups that apply to the specified network interfaces created for file system access. These security groups will apply to all network interfaces.
+	// List of IDs for the security groups that apply to the specified network interfaces created for file system access. These security groups will apply to all network interfaces.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=SecurityGroupIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SecurityGroupIDSelector
@@ -160,10 +160,10 @@ type LustreFileSystemInitParameters struct {
 	// When enabled, will skip the default final backup taken when the file system is deleted. This configuration must be applied separately before attempting to delete the resource to have the desired behavior. Defaults to true.
 	SkipFinalBackup *bool `json:"skipFinalBackup,omitempty" tf:"skip_final_backup,omitempty"`
 
-	// The storage capacity (GiB) of the file system. Minimum of 1200. See more details at Allowed values for Fsx storage capacity. Update is allowed only for SCRATCH_2, PERSISTENT_1 and PERSISTENT_2 deployment types, See more details at Fsx Storage Capacity Update. Required when not creating filesystem for a backup.
+	// Storage capacity (GiB) of the file system. Minimum of 1200. See more details at Allowed values for Fsx storage capacity. Update is allowed only for SCRATCH_2, PERSISTENT_1 and PERSISTENT_2 deployment types, See more details at Fsx Storage Capacity Update. Required when not creating filesystem for a backup.
 	StorageCapacity *float64 `json:"storageCapacity,omitempty" tf:"storage_capacity,omitempty"`
 
-	// - The filesystem storage type. One of SSD, HDD or INTELLIGENT_TIERING, defaults to SSD. HDD is only supported on PERSISTENT_1 deployment types. INTELLIGENT_TIERING requires data_read_cache_configuration and metadata_configuration to be set and is only supported for PERSISTENT_2 deployment types.
+	// Filesystem storage type. One of SSD, HDD or INTELLIGENT_TIERING, defaults to SSD. HDD is only supported on PERSISTENT_1 deployment types. INTELLIGENT_TIERING requires data_read_cache_configuration and metadata_configuration to be set and is only supported for PERSISTENT_2 deployment types.
 	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
 
 	// References to Subnet in ec2 to populate subnetIds.
@@ -174,7 +174,7 @@ type LustreFileSystemInitParameters struct {
 	// +kubebuilder:validation:Optional
 	SubnetIDSelector *v2.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
-	// A list of IDs for the subnets that the file system will be accessible from. File systems currently support only one subnet. The file server is also launched in that subnet's Availability Zone.
+	// List of IDs for the subnets that the file system will be accessible from. File systems currently support only one subnet. The file server is also launched in that subnet's Availability Zone.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:refFieldName=SubnetIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SubnetIDSelector
@@ -187,31 +187,31 @@ type LustreFileSystemInitParameters struct {
 	// Throughput in MBps required for the INTELLIGENT_TIERING storage type. Must be 4000 or multiples of 4000.
 	ThroughputCapacity *float64 `json:"throughputCapacity,omitempty" tf:"throughput_capacity,omitempty"`
 
-	// The preferred start time (in d:HH:MM format) to perform weekly maintenance, in the UTC time zone.
+	// Preferred start time (in d:HH:MM format) to perform weekly maintenance, in the UTC time zone.
 	WeeklyMaintenanceStartTime *string `json:"weeklyMaintenanceStartTime,omitempty" tf:"weekly_maintenance_start_time,omitempty"`
 }
 
 type LustreFileSystemObservation struct {
 
-	// Amazon Resource Name of the file system.
+	// ARN of the file system.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// How Amazon FSx keeps your file and directory listings up to date as you add or modify objects in your linked S3 bucket. see Auto Import Data Repo for more details. Only supported on PERSISTENT_1 deployment types.
 	AutoImportPolicy *string `json:"autoImportPolicy,omitempty" tf:"auto_import_policy,omitempty"`
 
-	// The number of days to retain automatic backups. Setting this to 0 disables automatic backups. You can retain automatic backups for a maximum of 90 days. only valid for PERSISTENT_1 and PERSISTENT_2 deployment_type.
+	// Number of days to retain automatic backups. Setting this to 0 disables automatic backups. You can retain automatic backups for a maximum of 90 days. only valid for PERSISTENT_1 and PERSISTENT_2 deployment_type.
 	AutomaticBackupRetentionDays *float64 `json:"automaticBackupRetentionDays,omitempty" tf:"automatic_backup_retention_days,omitempty"`
 
-	// The ID of the source backup to create the filesystem from.
+	// ID of the source backup to create the filesystem from.
 	BackupID *string `json:"backupId,omitempty" tf:"backup_id,omitempty"`
 
-	// A boolean flag indicating whether tags for the file system should be copied to backups. Applicable for PERSISTENT_1 and PERSISTENT_2 deployment_type. The default value is false.
+	// Whether to copy tags for the file system to backups. Applicable for PERSISTENT_1 and PERSISTENT_2 deployment_type. The default value is false.
 	CopyTagsToBackups *bool `json:"copyTagsToBackups,omitempty" tf:"copy_tags_to_backups,omitempty"`
 
 	// DNS name for the file system, e.g., fs-12345678.fsx.us-west-2.amazonaws.com
 	DNSName *string `json:"dnsName,omitempty" tf:"dns_name,omitempty"`
 
-	// A recurring daily time, in the format HH:MM. HH is the zero-padded hour of the day (0-23), and MM is the zero-padded minute of the hour. For example, 05:00 specifies 5 AM daily. only valid for PERSISTENT_1 and PERSISTENT_2 deployment_type. Requires automatic_backup_retention_days to be set.
+	// Recurring daily time, in the format HH:MM. HH is the zero-padded hour of the day (0-23), and MM is the zero-padded minute of the hour. For example, 05:00 specifies 5 AM daily. only valid for PERSISTENT_1 and PERSISTENT_2 deployment_type. Requires automatic_backup_retention_days to be set.
 	DailyAutomaticBackupStartTime *string `json:"dailyAutomaticBackupStartTime,omitempty" tf:"daily_automatic_backup_start_time,omitempty"`
 
 	// Sets the data compression configuration for the file system. Valid values are LZ4 and NONE. Default value is NONE. Unsetting this value reverts the compression type back to NONE.
@@ -219,10 +219,10 @@ type LustreFileSystemObservation struct {
 
 	DataReadCacheConfiguration *DataReadCacheConfigurationObservation `json:"dataReadCacheConfiguration,omitempty" tf:"data_read_cache_configuration,omitempty"`
 
-	// - The filesystem deployment type. One of: SCRATCH_1, SCRATCH_2, PERSISTENT_1, PERSISTENT_2.
+	// Filesystem deployment type. One of: SCRATCH_1, SCRATCH_2, PERSISTENT_1, PERSISTENT_2.
 	DeploymentType *string `json:"deploymentType,omitempty" tf:"deployment_type,omitempty"`
 
-	// - The type of drive cache used by PERSISTENT_1 filesystems that are provisioned with HDD storage_type. Required for HDD storage_type, set to either READ or NONE.
+	// Type of drive cache used by PERSISTENT_1 filesystems that are provisioned with HDD storage_type. Required for HDD storage_type, set to either READ or NONE.
 	DriveCacheType *string `json:"driveCacheType,omitempty" tf:"drive_cache_type,omitempty"`
 
 	// Adds support for Elastic Fabric Adapter (EFA) and GPUDirect Storage (GDS) to Lustre. This must be set at creation. If set this cannot be changed and this prevents changes to per_unit_storage_throughput. This is only supported when deployment_type is set to PERSISTENT_2, metadata_configuration is used, and an EFA-enabled security group is attached.
@@ -234,7 +234,7 @@ type LustreFileSystemObservation struct {
 	// Sets the Lustre version for the file system. Valid values are 2.10, 2.12, and 2.15. When creating a file system, 2.10 is valid for SCRATCH_1, SCRATCH_2, and PERSISTENT_1 deployment types; 2.12 and 2.15 are valid for all deployment types. Changing this value to a higher version triggers an in-place upgrade. Changing to a lower version forces resource replacement (destroy and recreate).
 	FileSystemTypeVersion *string `json:"fileSystemTypeVersion,omitempty" tf:"file_system_type_version,omitempty"`
 
-	// A map of tags to apply to the file system's final backup.
+	// Map of tags to apply to the file system's final backup.
 	// +mapType=granular
 	FinalBackupTags map[string]*string `json:"finalBackupTags,omitempty" tf:"final_backup_tags,omitempty"`
 
@@ -250,13 +250,13 @@ type LustreFileSystemObservation struct {
 	// ARN for the KMS Key to encrypt the file system at rest, applicable for PERSISTENT_1 and PERSISTENT_2 deployment_type. Defaults to an AWS managed KMS Key.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
-	// The Lustre logging configuration used when creating an Amazon FSx for Lustre file system. When logging is enabled, Lustre logs error and warning events for data repositories associated with your file system to Amazon CloudWatch Logs. See log_configuration Block for details.
+	// Lustre logging configuration used when creating an Amazon FSx for Lustre file system. When logging is enabled, Lustre logs error and warning events for data repositories associated with your file system to Amazon CloudWatch Logs. See log_configuration Block for details.
 	LogConfiguration *LogConfigurationObservation `json:"logConfiguration,omitempty" tf:"log_configuration,omitempty"`
 
-	// The Lustre metadata configuration used when creating an Amazon FSx for Lustre file system. This can be used to specify a user provisioned metadata scale. This is only supported when deployment_type is set to PERSISTENT_2. See metadata_configuration Block for details.
+	// Lustre metadata configuration used when creating an Amazon FSx for Lustre file system. This can be used to specify a user provisioned metadata scale. This is only supported when deployment_type is set to PERSISTENT_2. See metadata_configuration Block for details.
 	MetadataConfiguration *MetadataConfigurationObservation `json:"metadataConfiguration,omitempty" tf:"metadata_configuration,omitempty"`
 
-	// The value to be used when mounting the filesystem.
+	// Value to be used when mounting the filesystem.
 	MountName *string `json:"mountName,omitempty" tf:"mount_name,omitempty"`
 
 	// Set of Elastic Network Interface identifiers from which the file system is accessible. As explained in the documentation, the first network interface returned is the primary network interface.
@@ -265,47 +265,47 @@ type LustreFileSystemObservation struct {
 	// AWS account identifier that created the file system.
 	OwnerID *string `json:"ownerId,omitempty" tf:"owner_id,omitempty"`
 
-	// - Describes the amount of read and write throughput for each 1 tebibyte of storage, in MB/s/TiB, required for the PERSISTENT_1 and PERSISTENT_2 deployment_type. Valid values for PERSISTENT_1 deployment_type and SSD storage_type are 50, 100, 200. Valid values for PERSISTENT_1 deployment_type and HDD storage_type are 12, 40. Valid values for PERSISTENT_2 deployment_type and  SSD storage_type are 125, 250, 500, 1000.
+	// Amount of read and write throughput for each 1 tebibyte of storage, in MB/s/TiB, required for the PERSISTENT_1 and PERSISTENT_2 deployment_type. Valid values for PERSISTENT_1 deployment_type and SSD storage_type are 50, 100, 200. Valid values for PERSISTENT_1 deployment_type and HDD storage_type are 12, 40. Valid values for PERSISTENT_2 deployment_type and  SSD storage_type are 125, 250, 500, 1000.
 	PerUnitStorageThroughput *float64 `json:"perUnitStorageThroughput,omitempty" tf:"per_unit_storage_throughput,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The Lustre root squash configuration used when creating an Amazon FSx for Lustre file system. When enabled, root squash restricts root-level access from clients that try to access your file system as a root user. See root_squash_configuration Block for details.
+	// Lustre root squash configuration used when creating an Amazon FSx for Lustre file system. When enabled, root squash restricts root-level access from clients that try to access your file system as a root user. See root_squash_configuration Block for details.
 	RootSquashConfiguration *RootSquashConfigurationObservation `json:"rootSquashConfiguration,omitempty" tf:"root_squash_configuration,omitempty"`
 
-	// A list of IDs for the security groups that apply to the specified network interfaces created for file system access. These security groups will apply to all network interfaces.
+	// List of IDs for the security groups that apply to the specified network interfaces created for file system access. These security groups will apply to all network interfaces.
 	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// When enabled, will skip the default final backup taken when the file system is deleted. This configuration must be applied separately before attempting to delete the resource to have the desired behavior. Defaults to true.
 	SkipFinalBackup *bool `json:"skipFinalBackup,omitempty" tf:"skip_final_backup,omitempty"`
 
-	// The storage capacity (GiB) of the file system. Minimum of 1200. See more details at Allowed values for Fsx storage capacity. Update is allowed only for SCRATCH_2, PERSISTENT_1 and PERSISTENT_2 deployment types, See more details at Fsx Storage Capacity Update. Required when not creating filesystem for a backup.
+	// Storage capacity (GiB) of the file system. Minimum of 1200. See more details at Allowed values for Fsx storage capacity. Update is allowed only for SCRATCH_2, PERSISTENT_1 and PERSISTENT_2 deployment types, See more details at Fsx Storage Capacity Update. Required when not creating filesystem for a backup.
 	StorageCapacity *float64 `json:"storageCapacity,omitempty" tf:"storage_capacity,omitempty"`
 
-	// - The filesystem storage type. One of SSD, HDD or INTELLIGENT_TIERING, defaults to SSD. HDD is only supported on PERSISTENT_1 deployment types. INTELLIGENT_TIERING requires data_read_cache_configuration and metadata_configuration to be set and is only supported for PERSISTENT_2 deployment types.
+	// Filesystem storage type. One of SSD, HDD or INTELLIGENT_TIERING, defaults to SSD. HDD is only supported on PERSISTENT_1 deployment types. INTELLIGENT_TIERING requires data_read_cache_configuration and metadata_configuration to be set and is only supported for PERSISTENT_2 deployment types.
 	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
 
-	// A list of IDs for the subnets that the file system will be accessible from. File systems currently support only one subnet. The file server is also launched in that subnet's Availability Zone.
+	// List of IDs for the subnets that the file system will be accessible from. File systems currently support only one subnet. The file server is also launched in that subnet's Availability Zone.
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Throughput in MBps required for the INTELLIGENT_TIERING storage type. Must be 4000 or multiples of 4000.
 	ThroughputCapacity *float64 `json:"throughputCapacity,omitempty" tf:"throughput_capacity,omitempty"`
 
-	// Identifier of the Virtual Private Cloud for the file system.
+	// Identifier of the VPC for the file system.
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 
-	// The preferred start time (in d:HH:MM format) to perform weekly maintenance, in the UTC time zone.
+	// Preferred start time (in d:HH:MM format) to perform weekly maintenance, in the UTC time zone.
 	WeeklyMaintenanceStartTime *string `json:"weeklyMaintenanceStartTime,omitempty" tf:"weekly_maintenance_start_time,omitempty"`
 }
 
@@ -315,19 +315,19 @@ type LustreFileSystemParameters struct {
 	// +kubebuilder:validation:Optional
 	AutoImportPolicy *string `json:"autoImportPolicy,omitempty" tf:"auto_import_policy,omitempty"`
 
-	// The number of days to retain automatic backups. Setting this to 0 disables automatic backups. You can retain automatic backups for a maximum of 90 days. only valid for PERSISTENT_1 and PERSISTENT_2 deployment_type.
+	// Number of days to retain automatic backups. Setting this to 0 disables automatic backups. You can retain automatic backups for a maximum of 90 days. only valid for PERSISTENT_1 and PERSISTENT_2 deployment_type.
 	// +kubebuilder:validation:Optional
 	AutomaticBackupRetentionDays *float64 `json:"automaticBackupRetentionDays,omitempty" tf:"automatic_backup_retention_days,omitempty"`
 
-	// The ID of the source backup to create the filesystem from.
+	// ID of the source backup to create the filesystem from.
 	// +kubebuilder:validation:Optional
 	BackupID *string `json:"backupId,omitempty" tf:"backup_id,omitempty"`
 
-	// A boolean flag indicating whether tags for the file system should be copied to backups. Applicable for PERSISTENT_1 and PERSISTENT_2 deployment_type. The default value is false.
+	// Whether to copy tags for the file system to backups. Applicable for PERSISTENT_1 and PERSISTENT_2 deployment_type. The default value is false.
 	// +kubebuilder:validation:Optional
 	CopyTagsToBackups *bool `json:"copyTagsToBackups,omitempty" tf:"copy_tags_to_backups,omitempty"`
 
-	// A recurring daily time, in the format HH:MM. HH is the zero-padded hour of the day (0-23), and MM is the zero-padded minute of the hour. For example, 05:00 specifies 5 AM daily. only valid for PERSISTENT_1 and PERSISTENT_2 deployment_type. Requires automatic_backup_retention_days to be set.
+	// Recurring daily time, in the format HH:MM. HH is the zero-padded hour of the day (0-23), and MM is the zero-padded minute of the hour. For example, 05:00 specifies 5 AM daily. only valid for PERSISTENT_1 and PERSISTENT_2 deployment_type. Requires automatic_backup_retention_days to be set.
 	// +kubebuilder:validation:Optional
 	DailyAutomaticBackupStartTime *string `json:"dailyAutomaticBackupStartTime,omitempty" tf:"daily_automatic_backup_start_time,omitempty"`
 
@@ -338,11 +338,11 @@ type LustreFileSystemParameters struct {
 	// +kubebuilder:validation:Optional
 	DataReadCacheConfiguration *DataReadCacheConfigurationParameters `json:"dataReadCacheConfiguration,omitempty" tf:"data_read_cache_configuration,omitempty"`
 
-	// - The filesystem deployment type. One of: SCRATCH_1, SCRATCH_2, PERSISTENT_1, PERSISTENT_2.
+	// Filesystem deployment type. One of: SCRATCH_1, SCRATCH_2, PERSISTENT_1, PERSISTENT_2.
 	// +kubebuilder:validation:Optional
 	DeploymentType *string `json:"deploymentType,omitempty" tf:"deployment_type,omitempty"`
 
-	// - The type of drive cache used by PERSISTENT_1 filesystems that are provisioned with HDD storage_type. Required for HDD storage_type, set to either READ or NONE.
+	// Type of drive cache used by PERSISTENT_1 filesystems that are provisioned with HDD storage_type. Required for HDD storage_type, set to either READ or NONE.
 	// +kubebuilder:validation:Optional
 	DriveCacheType *string `json:"driveCacheType,omitempty" tf:"drive_cache_type,omitempty"`
 
@@ -358,7 +358,7 @@ type LustreFileSystemParameters struct {
 	// +kubebuilder:validation:Optional
 	FileSystemTypeVersion *string `json:"fileSystemTypeVersion,omitempty" tf:"file_system_type_version,omitempty"`
 
-	// A map of tags to apply to the file system's final backup.
+	// Map of tags to apply to the file system's final backup.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	FinalBackupTags map[string]*string `json:"finalBackupTags,omitempty" tf:"final_backup_tags,omitempty"`
@@ -384,15 +384,15 @@ type LustreFileSystemParameters struct {
 	// +kubebuilder:validation:Optional
 	KMSKeyIDSelector *v2.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
-	// The Lustre logging configuration used when creating an Amazon FSx for Lustre file system. When logging is enabled, Lustre logs error and warning events for data repositories associated with your file system to Amazon CloudWatch Logs. See log_configuration Block for details.
+	// Lustre logging configuration used when creating an Amazon FSx for Lustre file system. When logging is enabled, Lustre logs error and warning events for data repositories associated with your file system to Amazon CloudWatch Logs. See log_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	LogConfiguration *LogConfigurationParameters `json:"logConfiguration,omitempty" tf:"log_configuration,omitempty"`
 
-	// The Lustre metadata configuration used when creating an Amazon FSx for Lustre file system. This can be used to specify a user provisioned metadata scale. This is only supported when deployment_type is set to PERSISTENT_2. See metadata_configuration Block for details.
+	// Lustre metadata configuration used when creating an Amazon FSx for Lustre file system. This can be used to specify a user provisioned metadata scale. This is only supported when deployment_type is set to PERSISTENT_2. See metadata_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	MetadataConfiguration *MetadataConfigurationParameters `json:"metadataConfiguration,omitempty" tf:"metadata_configuration,omitempty"`
 
-	// - Describes the amount of read and write throughput for each 1 tebibyte of storage, in MB/s/TiB, required for the PERSISTENT_1 and PERSISTENT_2 deployment_type. Valid values for PERSISTENT_1 deployment_type and SSD storage_type are 50, 100, 200. Valid values for PERSISTENT_1 deployment_type and HDD storage_type are 12, 40. Valid values for PERSISTENT_2 deployment_type and  SSD storage_type are 125, 250, 500, 1000.
+	// Amount of read and write throughput for each 1 tebibyte of storage, in MB/s/TiB, required for the PERSISTENT_1 and PERSISTENT_2 deployment_type. Valid values for PERSISTENT_1 deployment_type and SSD storage_type are 50, 100, 200. Valid values for PERSISTENT_1 deployment_type and HDD storage_type are 12, 40. Valid values for PERSISTENT_2 deployment_type and  SSD storage_type are 125, 250, 500, 1000.
 	// +kubebuilder:validation:Optional
 	PerUnitStorageThroughput *float64 `json:"perUnitStorageThroughput,omitempty" tf:"per_unit_storage_throughput,omitempty"`
 
@@ -401,7 +401,7 @@ type LustreFileSystemParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// The Lustre root squash configuration used when creating an Amazon FSx for Lustre file system. When enabled, root squash restricts root-level access from clients that try to access your file system as a root user. See root_squash_configuration Block for details.
+	// Lustre root squash configuration used when creating an Amazon FSx for Lustre file system. When enabled, root squash restricts root-level access from clients that try to access your file system as a root user. See root_squash_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	RootSquashConfiguration *RootSquashConfigurationParameters `json:"rootSquashConfiguration,omitempty" tf:"root_squash_configuration,omitempty"`
 
@@ -413,7 +413,7 @@ type LustreFileSystemParameters struct {
 	// +kubebuilder:validation:Optional
 	SecurityGroupIDSelector *v2.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 
-	// A list of IDs for the security groups that apply to the specified network interfaces created for file system access. These security groups will apply to all network interfaces.
+	// List of IDs for the security groups that apply to the specified network interfaces created for file system access. These security groups will apply to all network interfaces.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=SecurityGroupIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SecurityGroupIDSelector
@@ -425,11 +425,11 @@ type LustreFileSystemParameters struct {
 	// +kubebuilder:validation:Optional
 	SkipFinalBackup *bool `json:"skipFinalBackup,omitempty" tf:"skip_final_backup,omitempty"`
 
-	// The storage capacity (GiB) of the file system. Minimum of 1200. See more details at Allowed values for Fsx storage capacity. Update is allowed only for SCRATCH_2, PERSISTENT_1 and PERSISTENT_2 deployment types, See more details at Fsx Storage Capacity Update. Required when not creating filesystem for a backup.
+	// Storage capacity (GiB) of the file system. Minimum of 1200. See more details at Allowed values for Fsx storage capacity. Update is allowed only for SCRATCH_2, PERSISTENT_1 and PERSISTENT_2 deployment types, See more details at Fsx Storage Capacity Update. Required when not creating filesystem for a backup.
 	// +kubebuilder:validation:Optional
 	StorageCapacity *float64 `json:"storageCapacity,omitempty" tf:"storage_capacity,omitempty"`
 
-	// - The filesystem storage type. One of SSD, HDD or INTELLIGENT_TIERING, defaults to SSD. HDD is only supported on PERSISTENT_1 deployment types. INTELLIGENT_TIERING requires data_read_cache_configuration and metadata_configuration to be set and is only supported for PERSISTENT_2 deployment types.
+	// Filesystem storage type. One of SSD, HDD or INTELLIGENT_TIERING, defaults to SSD. HDD is only supported on PERSISTENT_1 deployment types. INTELLIGENT_TIERING requires data_read_cache_configuration and metadata_configuration to be set and is only supported for PERSISTENT_2 deployment types.
 	// +kubebuilder:validation:Optional
 	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
 
@@ -441,7 +441,7 @@ type LustreFileSystemParameters struct {
 	// +kubebuilder:validation:Optional
 	SubnetIDSelector *v2.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
-	// A list of IDs for the subnets that the file system will be accessible from. File systems currently support only one subnet. The file server is also launched in that subnet's Availability Zone.
+	// List of IDs for the subnets that the file system will be accessible from. File systems currently support only one subnet. The file server is also launched in that subnet's Availability Zone.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:refFieldName=SubnetIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SubnetIDSelector
@@ -457,7 +457,7 @@ type LustreFileSystemParameters struct {
 	// +kubebuilder:validation:Optional
 	ThroughputCapacity *float64 `json:"throughputCapacity,omitempty" tf:"throughput_capacity,omitempty"`
 
-	// The preferred start time (in d:HH:MM format) to perform weekly maintenance, in the UTC time zone.
+	// Preferred start time (in d:HH:MM format) to perform weekly maintenance, in the UTC time zone.
 	// +kubebuilder:validation:Optional
 	WeeklyMaintenanceStartTime *string `json:"weeklyMaintenanceStartTime,omitempty" tf:"weekly_maintenance_start_time,omitempty"`
 }

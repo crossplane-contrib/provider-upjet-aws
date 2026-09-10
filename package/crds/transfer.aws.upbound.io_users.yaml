@@ -847,11 +847,11 @@ spec:
               forProvider:
                 properties:
                   homeDirectory:
-                    description: The landing directory (folder) for a user when they
-                      log in to the server using their SFTP client.  It should begin
-                      with a /.  The first item in the path is the name of the home
-                      bucket (accessible as ${Transfer:HomeBucket} in the policy)
-                      and the rest is the home directory (accessible as ${Transfer:HomeDirectory}
+                    description: Landing directory (folder) for a user when they log
+                      in to the server using their SFTP client.  It should begin with
+                      a /.  The first item in the path is the name of the home bucket
+                      (accessible as ${Transfer:HomeBucket} in the policy) and the
+                      rest is the home directory (accessible as ${Transfer:HomeDirectory}
                       in the policy). For example, /example-bucket-1234/username would
                       set the home bucket to example-bucket-1234 and the home directory
                       to username.
@@ -859,48 +859,50 @@ spec:
                   homeDirectoryMappings:
                     description: Logical directory mappings that specify what S3 paths
                       and keys should be visible to your user and how you want to
-                      make them visible. See Home Directory Mappings below.
+                      make them visible. See home_directory_mappings Block below.
                     items:
                       properties:
                         entry:
-                          description: Represents an entry and a target.
+                          description: Logical directory entry that appears to your
+                            user.
                           type: string
                         target:
-                          description: Represents the map target.
+                          description: Map target that maps the entry to an actual
+                            S3 path.
                           type: string
                       type: object
                     type: array
                   homeDirectoryType:
-                    description: The type of landing directory (folder) you mapped
-                      for your users' home directory. Valid values are PATH and LOGICAL.
+                    description: Type of landing directory (folder) you mapped for
+                      your users' home directory. Valid values are PATH and LOGICAL.
                     type: string
                   policy:
-                    description: An IAM JSON policy document that scopes down user
-                      access to portions of their Amazon S3 bucket. IAM variables
-                      you can use inside this policy include ${Transfer:UserName},
-                      ${Transfer:HomeDirectory}, and ${Transfer:HomeBucket}.  These
-                      are evaluated on-the-fly when navigating the bucket.
+                    description: IAM JSON policy document that scopes down user access
+                      to portions of their Amazon S3 bucket. IAM variables you can
+                      use inside this policy include ${Transfer:UserName}, ${Transfer:HomeDirectory},
+                      and ${Transfer:HomeBucket}.  These are evaluated on-the-fly
+                      when navigating the bucket.
                     type: string
                   posixProfile:
-                    description: Specifies the full POSIX identity, including user
-                      ID (Uid), group ID (Gid), and any secondary groups IDs (SecondaryGids),
-                      that controls your users' access to your Amazon EFS file systems.
-                      See Posix Profile below.
+                    description: Full POSIX identity, including user ID (Uid), group
+                      ID (Gid), and any secondary groups IDs (SecondaryGids), that
+                      controls your users' access to your Amazon EFS file systems.
+                      See posix_profile Block below.
                     properties:
                       gid:
-                        description: The POSIX group ID used for all EFS operations
-                          by this user.
+                        description: POSIX group ID used for all EFS operations by
+                          this user.
                         type: number
                       secondaryGids:
-                        description: The secondary POSIX group IDs used for all EFS
-                          operations by this user.
+                        description: Secondary POSIX group IDs used for all EFS operations
+                          by this user.
                         items:
                           type: number
                         type: array
                         x-kubernetes-list-type: set
                       uid:
-                        description: The POSIX user ID used for all EFS operations
-                          by this user.
+                        description: POSIX user ID used for all EFS operations by
+                          this user.
                         type: number
                     type: object
                   region:
@@ -909,9 +911,8 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   role:
-                    description: Amazon Resource Name (ARN) of an IAM role that allows
-                      the service to control your user’s access to your Amazon S3
-                      bucket.
+                    description: ARN of an IAM role that allows the service to control
+                      your user’s access to your Amazon S3 bucket.
                     type: string
                   roleRef:
                     description: Reference to a Role in iam to populate role.
@@ -988,7 +989,7 @@ spec:
                         type: object
                     type: object
                   serverId:
-                    description: The Server ID of the Transfer Server (e.g., s-12345678)
+                    description: Server ID of the Transfer Server (e.g., s-12345678)
                     type: string
                   serverIdRef:
                     description: Reference to a Server in transfer to populate serverId.
@@ -1087,11 +1088,11 @@ spec:
                   autoscaler.
                 properties:
                   homeDirectory:
-                    description: The landing directory (folder) for a user when they
-                      log in to the server using their SFTP client.  It should begin
-                      with a /.  The first item in the path is the name of the home
-                      bucket (accessible as ${Transfer:HomeBucket} in the policy)
-                      and the rest is the home directory (accessible as ${Transfer:HomeDirectory}
+                    description: Landing directory (folder) for a user when they log
+                      in to the server using their SFTP client.  It should begin with
+                      a /.  The first item in the path is the name of the home bucket
+                      (accessible as ${Transfer:HomeBucket} in the policy) and the
+                      rest is the home directory (accessible as ${Transfer:HomeDirectory}
                       in the policy). For example, /example-bucket-1234/username would
                       set the home bucket to example-bucket-1234 and the home directory
                       to username.
@@ -1099,54 +1100,55 @@ spec:
                   homeDirectoryMappings:
                     description: Logical directory mappings that specify what S3 paths
                       and keys should be visible to your user and how you want to
-                      make them visible. See Home Directory Mappings below.
+                      make them visible. See home_directory_mappings Block below.
                     items:
                       properties:
                         entry:
-                          description: Represents an entry and a target.
+                          description: Logical directory entry that appears to your
+                            user.
                           type: string
                         target:
-                          description: Represents the map target.
+                          description: Map target that maps the entry to an actual
+                            S3 path.
                           type: string
                       type: object
                     type: array
                   homeDirectoryType:
-                    description: The type of landing directory (folder) you mapped
-                      for your users' home directory. Valid values are PATH and LOGICAL.
+                    description: Type of landing directory (folder) you mapped for
+                      your users' home directory. Valid values are PATH and LOGICAL.
                     type: string
                   policy:
-                    description: An IAM JSON policy document that scopes down user
-                      access to portions of their Amazon S3 bucket. IAM variables
-                      you can use inside this policy include ${Transfer:UserName},
-                      ${Transfer:HomeDirectory}, and ${Transfer:HomeBucket}.  These
-                      are evaluated on-the-fly when navigating the bucket.
+                    description: IAM JSON policy document that scopes down user access
+                      to portions of their Amazon S3 bucket. IAM variables you can
+                      use inside this policy include ${Transfer:UserName}, ${Transfer:HomeDirectory},
+                      and ${Transfer:HomeBucket}.  These are evaluated on-the-fly
+                      when navigating the bucket.
                     type: string
                   posixProfile:
-                    description: Specifies the full POSIX identity, including user
-                      ID (Uid), group ID (Gid), and any secondary groups IDs (SecondaryGids),
-                      that controls your users' access to your Amazon EFS file systems.
-                      See Posix Profile below.
+                    description: Full POSIX identity, including user ID (Uid), group
+                      ID (Gid), and any secondary groups IDs (SecondaryGids), that
+                      controls your users' access to your Amazon EFS file systems.
+                      See posix_profile Block below.
                     properties:
                       gid:
-                        description: The POSIX group ID used for all EFS operations
-                          by this user.
+                        description: POSIX group ID used for all EFS operations by
+                          this user.
                         type: number
                       secondaryGids:
-                        description: The secondary POSIX group IDs used for all EFS
-                          operations by this user.
+                        description: Secondary POSIX group IDs used for all EFS operations
+                          by this user.
                         items:
                           type: number
                         type: array
                         x-kubernetes-list-type: set
                       uid:
-                        description: The POSIX user ID used for all EFS operations
-                          by this user.
+                        description: POSIX user ID used for all EFS operations by
+                          this user.
                         type: number
                     type: object
                   role:
-                    description: Amazon Resource Name (ARN) of an IAM role that allows
-                      the service to control your user’s access to your Amazon S3
-                      bucket.
+                    description: ARN of an IAM role that allows the service to control
+                      your user’s access to your Amazon S3 bucket.
                     type: string
                   roleRef:
                     description: Reference to a Role in iam to populate role.
@@ -1223,7 +1225,7 @@ spec:
                         type: object
                     type: object
                   serverId:
-                    description: The Server ID of the Transfer Server (e.g., s-12345678)
+                    description: Server ID of the Transfer Server (e.g., s-12345678)
                     type: string
                   serverIdRef:
                     description: Reference to a Server in transfer to populate serverId.
@@ -1398,14 +1400,14 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: Amazon Resource Name (ARN) of Transfer User
+                    description: ARN of Transfer User
                     type: string
                   homeDirectory:
-                    description: The landing directory (folder) for a user when they
-                      log in to the server using their SFTP client.  It should begin
-                      with a /.  The first item in the path is the name of the home
-                      bucket (accessible as ${Transfer:HomeBucket} in the policy)
-                      and the rest is the home directory (accessible as ${Transfer:HomeDirectory}
+                    description: Landing directory (folder) for a user when they log
+                      in to the server using their SFTP client.  It should begin with
+                      a /.  The first item in the path is the name of the home bucket
+                      (accessible as ${Transfer:HomeBucket} in the policy) and the
+                      rest is the home directory (accessible as ${Transfer:HomeDirectory}
                       in the policy). For example, /example-bucket-1234/username would
                       set the home bucket to example-bucket-1234 and the home directory
                       to username.
@@ -1413,50 +1415,52 @@ spec:
                   homeDirectoryMappings:
                     description: Logical directory mappings that specify what S3 paths
                       and keys should be visible to your user and how you want to
-                      make them visible. See Home Directory Mappings below.
+                      make them visible. See home_directory_mappings Block below.
                     items:
                       properties:
                         entry:
-                          description: Represents an entry and a target.
+                          description: Logical directory entry that appears to your
+                            user.
                           type: string
                         target:
-                          description: Represents the map target.
+                          description: Map target that maps the entry to an actual
+                            S3 path.
                           type: string
                       type: object
                     type: array
                   homeDirectoryType:
-                    description: The type of landing directory (folder) you mapped
-                      for your users' home directory. Valid values are PATH and LOGICAL.
+                    description: Type of landing directory (folder) you mapped for
+                      your users' home directory. Valid values are PATH and LOGICAL.
                     type: string
                   id:
                     type: string
                   policy:
-                    description: An IAM JSON policy document that scopes down user
-                      access to portions of their Amazon S3 bucket. IAM variables
-                      you can use inside this policy include ${Transfer:UserName},
-                      ${Transfer:HomeDirectory}, and ${Transfer:HomeBucket}.  These
-                      are evaluated on-the-fly when navigating the bucket.
+                    description: IAM JSON policy document that scopes down user access
+                      to portions of their Amazon S3 bucket. IAM variables you can
+                      use inside this policy include ${Transfer:UserName}, ${Transfer:HomeDirectory},
+                      and ${Transfer:HomeBucket}.  These are evaluated on-the-fly
+                      when navigating the bucket.
                     type: string
                   posixProfile:
-                    description: Specifies the full POSIX identity, including user
-                      ID (Uid), group ID (Gid), and any secondary groups IDs (SecondaryGids),
-                      that controls your users' access to your Amazon EFS file systems.
-                      See Posix Profile below.
+                    description: Full POSIX identity, including user ID (Uid), group
+                      ID (Gid), and any secondary groups IDs (SecondaryGids), that
+                      controls your users' access to your Amazon EFS file systems.
+                      See posix_profile Block below.
                     properties:
                       gid:
-                        description: The POSIX group ID used for all EFS operations
-                          by this user.
+                        description: POSIX group ID used for all EFS operations by
+                          this user.
                         type: number
                       secondaryGids:
-                        description: The secondary POSIX group IDs used for all EFS
-                          operations by this user.
+                        description: Secondary POSIX group IDs used for all EFS operations
+                          by this user.
                         items:
                           type: number
                         type: array
                         x-kubernetes-list-type: set
                       uid:
-                        description: The POSIX user ID used for all EFS operations
-                          by this user.
+                        description: POSIX user ID used for all EFS operations by
+                          this user.
                         type: number
                     type: object
                   region:
@@ -1465,12 +1469,11 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   role:
-                    description: Amazon Resource Name (ARN) of an IAM role that allows
-                      the service to control your user’s access to your Amazon S3
-                      bucket.
+                    description: ARN of an IAM role that allows the service to control
+                      your user’s access to your Amazon S3 bucket.
                     type: string
                   serverId:
-                    description: The Server ID of the Transfer Server (e.g., s-12345678)
+                    description: Server ID of the Transfer Server (e.g., s-12345678)
                     type: string
                   tags:
                     additionalProperties:
@@ -1481,9 +1484,8 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
                 type: object

@@ -115,7 +115,7 @@ type HoursOfOperationInitParameters struct {
 
 type HoursOfOperationObservation struct {
 
-	// The Amazon Resource Name (ARN) of the Hours of Operation.
+	// ARN of the Hours of Operation.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// One or more config blocks which define the configuration information for the hours of operation: day, start time, and end time . Config blocks are documented below.

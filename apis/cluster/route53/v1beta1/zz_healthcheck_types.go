@@ -88,7 +88,7 @@ type HealthCheckInitParameters struct {
 	// The path that you want Amazon Route 53 to request when performing health checks.
 	ResourcePath *string `json:"resourcePath,omitempty" tf:"resource_path,omitempty"`
 
-	// The Amazon Resource Name (ARN) for the Route 53 Application Recovery Controller routing control. This is used when health check type is RECOVERY_CONTROL
+	// ARN for the Route 53 Application Recovery Controller routing control. This is used when health check type is RECOVERY_CONTROL
 	RoutingControlArn *string `json:"routingControlArn,omitempty" tf:"routing_control_arn,omitempty"`
 
 	// String searched in the first 5120 bytes of the response body for check to be considered healthy. Only valid with HTTP_STR_MATCH and HTTPS_STR_MATCH.
@@ -108,7 +108,7 @@ type HealthCheckInitParameters struct {
 
 type HealthCheckObservation struct {
 
-	// The Amazon Resource Name (ARN) of the Health Check.
+	// ARN of the Health Check.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The minimum number of child health checks that must be healthy for Route 53 to consider the parent health check to be healthy. Valid values are integers between 0 and 256, inclusive
@@ -168,7 +168,7 @@ type HealthCheckObservation struct {
 	// The path that you want Amazon Route 53 to request when performing health checks.
 	ResourcePath *string `json:"resourcePath,omitempty" tf:"resource_path,omitempty"`
 
-	// The Amazon Resource Name (ARN) for the Route 53 Application Recovery Controller routing control. This is used when health check type is RECOVERY_CONTROL
+	// ARN for the Route 53 Application Recovery Controller routing control. This is used when health check type is RECOVERY_CONTROL
 	RoutingControlArn *string `json:"routingControlArn,omitempty" tf:"routing_control_arn,omitempty"`
 
 	// String searched in the first 5120 bytes of the response body for check to be considered healthy. Only valid with HTTP_STR_MATCH and HTTPS_STR_MATCH.
@@ -282,7 +282,7 @@ type HealthCheckParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourcePath *string `json:"resourcePath,omitempty" tf:"resource_path,omitempty"`
 
-	// The Amazon Resource Name (ARN) for the Route 53 Application Recovery Controller routing control. This is used when health check type is RECOVERY_CONTROL
+	// ARN for the Route 53 Application Recovery Controller routing control. This is used when health check type is RECOVERY_CONTROL
 	// +kubebuilder:validation:Optional
 	RoutingControlArn *string `json:"routingControlArn,omitempty" tf:"routing_control_arn,omitempty"`
 

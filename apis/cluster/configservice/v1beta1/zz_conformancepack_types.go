@@ -33,7 +33,7 @@ type ConformancePackInitParameters struct {
 
 type ConformancePackObservation struct {
 
-	// Amazon Resource Name (ARN) of the conformance pack.
+	// ARN of the conformance pack.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Amazon S3 bucket where AWS Config stores conformance pack templates. Maximum length of 63.

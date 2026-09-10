@@ -46,7 +46,7 @@ type ServiceQuotaObservation struct {
 	// Whether the service quota can be increased.
 	Adjustable *bool `json:"adjustable,omitempty" tf:"adjustable,omitempty"`
 
-	// Amazon Resource Name (ARN) of the service quota.
+	// ARN of the service quota.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Default value of the service quota.
