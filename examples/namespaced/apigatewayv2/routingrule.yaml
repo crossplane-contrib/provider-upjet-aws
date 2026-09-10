@@ -1,0 +1,30 @@
+# SPDX-FileCopyrightText: 2026 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: apigatewayv2.aws.m.upbound.io/v1beta1
+kind: RoutingRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apigatewayv2/v1beta1/routingrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+    # A wildcard custom domain name (*.example.com) routes every subdomain by
+    # its own routing rules, so one domain can front many REST APIs instead of
+    # consuming one custom-domain-name quota slot per service.
+    domainName: example.com
+    condition:
+      - matchHeaders:
+          - anyOf:
+              - header: Host
+                valueGlob: my-service.*
+    action:
+      - invokeApi:
+          - apiId: example-api-id
+            stage: example-stage
+            stripBasePath: false
+    priority: 1
