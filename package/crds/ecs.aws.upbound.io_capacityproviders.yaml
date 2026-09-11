@@ -2066,6 +2066,15 @@ spec:
                       Detailed below. Exactly one of auto_scaling_group_provider or
                       managed_instances_provider must be specified.
                     properties:
+                      autoRepairConfiguration:
+                        description: Configuration block for the auto repair configuration.
+                          Detailed below.
+                        properties:
+                          actionsStatus:
+                            description: Whether to use Amazon ECS managed auto repair.
+                              Valid values are ENABLED and DISABLED.
+                            type: string
+                        type: object
                       infrastructureOptimization:
                         description: Configuration block for how Amazon ECS Managed
                           Instances optimizes the infrastructure in your capacity
@@ -2614,6 +2623,15 @@ spec:
                       Detailed below. Exactly one of auto_scaling_group_provider or
                       managed_instances_provider must be specified.
                     properties:
+                      autoRepairConfiguration:
+                        description: Configuration block for the auto repair configuration.
+                          Detailed below.
+                        properties:
+                          actionsStatus:
+                            description: Whether to use Amazon ECS managed auto repair.
+                              Valid values are ENABLED and DISABLED.
+                            type: string
+                        type: object
                       infrastructureOptimization:
                         description: Configuration block for how Amazon ECS Managed
                           Instances optimizes the infrastructure in your capacity
@@ -3162,6 +3180,15 @@ spec:
                       Detailed below. Exactly one of auto_scaling_group_provider or
                       managed_instances_provider must be specified.
                     properties:
+                      autoRepairConfiguration:
+                        description: Configuration block for the auto repair configuration.
+                          Detailed below.
+                        properties:
+                          actionsStatus:
+                            description: Whether to use Amazon ECS managed auto repair.
+                              Valid values are ENABLED and DISABLED.
+                            type: string
+                        type: object
                       infrastructureOptimization:
                         description: Configuration block for how Amazon ECS Managed
                           Instances optimizes the infrastructure in your capacity

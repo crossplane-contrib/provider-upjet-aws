@@ -7180,6 +7180,16 @@ spec:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
+                  warningEventCategories:
+                    description: Set of RDS event categories (for example failure,
+                      maintenance) to check for after create and update operations.
+                      Has no effect if unset; see DescribeEvents and the aws_rds_events
+                      data source for the source of these events. Requires the rds:DescribeEvents
+                      IAM permission when set.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
                 required:
                 - region
                 type: object
@@ -8279,6 +8289,16 @@ spec:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
+                  warningEventCategories:
+                    description: Set of RDS event categories (for example failure,
+                      maintenance) to check for after create and update operations.
+                      Has no effect if unset; see DescribeEvents and the aws_rds_events
+                      data source for the source of these events. Requires the rds:DescribeEvents
+                      IAM permission when set.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
                 type: object
               managementPolicies:
                 default:
@@ -8909,6 +8929,16 @@ spec:
                     description: |-
                       List of VPC security groups to
                       associate.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
+                  warningEventCategories:
+                    description: Set of RDS event categories (for example failure,
+                      maintenance) to check for after create and update operations.
+                      Has no effect if unset; see DescribeEvents and the aws_rds_events
+                      data source for the source of these events. Requires the rds:DescribeEvents
+                      IAM permission when set.
                     items:
                       type: string
                     type: array

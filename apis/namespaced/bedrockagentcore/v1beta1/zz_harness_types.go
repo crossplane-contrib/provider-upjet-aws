@@ -437,6 +437,35 @@ type AgentcoreRuntimeEnvironmentParameters struct {
 	NetworkConfiguration []AgentcoreRuntimeEnvironmentNetworkConfigurationParameters `json:"networkConfiguration,omitempty" tf:"network_configuration,omitempty"`
 }
 
+type AuthInitParameters struct {
+
+	// ARN of the credential in AgentCore Identity containing the password or personal access token.
+	CredentialArn *string `json:"credentialArn,omitempty" tf:"credential_arn,omitempty"`
+
+	// Username for authentication. Defaults to oauth2 if not specified.
+	Username *string `json:"username,omitempty" tf:"username,omitempty"`
+}
+
+type AuthObservation struct {
+
+	// ARN of the credential in AgentCore Identity containing the password or personal access token.
+	CredentialArn *string `json:"credentialArn,omitempty" tf:"credential_arn,omitempty"`
+
+	// Username for authentication. Defaults to oauth2 if not specified.
+	Username *string `json:"username,omitempty" tf:"username,omitempty"`
+}
+
+type AuthParameters struct {
+
+	// ARN of the credential in AgentCore Identity containing the password or personal access token.
+	// +kubebuilder:validation:Optional
+	CredentialArn *string `json:"credentialArn" tf:"credential_arn,omitempty"`
+
+	// Username for authentication. Defaults to oauth2 if not specified.
+	// +kubebuilder:validation:Optional
+	Username *string `json:"username,omitempty" tf:"username,omitempty"`
+}
+
 type AuthorizerConfigurationCustomJwtAuthorizerAllowedWorkloadConfigurationInitParameters struct {
 
 	// Hosting environments allowed to use the authorizer. Between 1 and 10 entries. See hosting_environment Block below.
@@ -689,7 +718,32 @@ type AuthorizerConfigurationCustomJwtAuthorizerPrivateEndpointSelfManagedLattice
 	ResourceConfigurationIdentifier *string `json:"resourceConfigurationIdentifier,omitempty" tf:"resource_configuration_identifier,omitempty"`
 }
 
+type AwsSkillsInitParameters struct {
+
+	// List of glob patterns to filter allowed skills (e.g., ["core-skills/*"]).
+	Paths []*string `json:"paths,omitempty" tf:"paths,omitempty"`
+}
+
+type AwsSkillsObservation struct {
+
+	// List of glob patterns to filter allowed skills (e.g., ["core-skills/*"]).
+	Paths []*string `json:"paths,omitempty" tf:"paths,omitempty"`
+}
+
+type AwsSkillsParameters struct {
+
+	// List of glob patterns to filter allowed skills (e.g., ["core-skills/*"]).
+	// +kubebuilder:validation:Optional
+	Paths []*string `json:"paths,omitempty" tf:"paths,omitempty"`
+}
+
 type BedrockModelConfigInitParameters struct {
+
+	// API format for the model. Valid values are converse_stream, responses, and chat_completions.
+	APIFormat *string `json:"apiFormat,omitempty" tf:"api_format,omitempty"`
+
+	// JSON string containing provider-specific parameters to pass through to the Bedrock model provider unchanged.
+	AdditionalParams *string `json:"additionalParams,omitempty" tf:"additional_params,omitempty"`
 
 	// Maximum number of tokens in the model response.
 	MaxTokens *float64 `json:"maxTokens,omitempty" tf:"max_tokens,omitempty"`
@@ -706,6 +760,12 @@ type BedrockModelConfigInitParameters struct {
 
 type BedrockModelConfigObservation struct {
 
+	// API format for the model. Valid values are converse_stream, responses, and chat_completions.
+	APIFormat *string `json:"apiFormat,omitempty" tf:"api_format,omitempty"`
+
+	// JSON string containing provider-specific parameters to pass through to the Bedrock model provider unchanged.
+	AdditionalParams *string `json:"additionalParams,omitempty" tf:"additional_params,omitempty"`
+
 	// Maximum number of tokens in the model response.
 	MaxTokens *float64 `json:"maxTokens,omitempty" tf:"max_tokens,omitempty"`
 
@@ -720,6 +780,14 @@ type BedrockModelConfigObservation struct {
 }
 
 type BedrockModelConfigParameters struct {
+
+	// API format for the model. Valid values are converse_stream, responses, and chat_completions.
+	// +kubebuilder:validation:Optional
+	APIFormat *string `json:"apiFormat,omitempty" tf:"api_format,omitempty"`
+
+	// JSON string containing provider-specific parameters to pass through to the Bedrock model provider unchanged.
+	// +kubebuilder:validation:Optional
+	AdditionalParams *string `json:"additionalParams,omitempty" tf:"additional_params,omitempty"`
 
 	// Maximum number of tokens in the model response.
 	// +kubebuilder:validation:Optional
@@ -1259,6 +1327,9 @@ type GeminiModelConfigInitParameters struct {
 	// +kubebuilder:validation:Optional
 	APIKeyArnSelector *v2.NamespacedSelector `json:"apiKeyArnSelector,omitempty" tf:"-"`
 
+	// JSON string containing provider-specific parameters to pass through to the Bedrock model provider unchanged.
+	AdditionalParams *string `json:"additionalParams,omitempty" tf:"additional_params,omitempty"`
+
 	// Maximum number of tokens in the model response.
 	MaxTokens *float64 `json:"maxTokens,omitempty" tf:"max_tokens,omitempty"`
 
@@ -1279,6 +1350,9 @@ type GeminiModelConfigObservation struct {
 
 	// ARN of the secret containing the API key.
 	APIKeyArn *string `json:"apiKeyArn,omitempty" tf:"api_key_arn,omitempty"`
+
+	// JSON string containing provider-specific parameters to pass through to the Bedrock model provider unchanged.
+	AdditionalParams *string `json:"additionalParams,omitempty" tf:"additional_params,omitempty"`
 
 	// Maximum number of tokens in the model response.
 	MaxTokens *float64 `json:"maxTokens,omitempty" tf:"max_tokens,omitempty"`
@@ -1312,6 +1386,10 @@ type GeminiModelConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	APIKeyArnSelector *v2.NamespacedSelector `json:"apiKeyArnSelector,omitempty" tf:"-"`
 
+	// JSON string containing provider-specific parameters to pass through to the Bedrock model provider unchanged.
+	// +kubebuilder:validation:Optional
+	AdditionalParams *string `json:"additionalParams,omitempty" tf:"additional_params,omitempty"`
+
 	// Maximum number of tokens in the model response.
 	// +kubebuilder:validation:Optional
 	MaxTokens *float64 `json:"maxTokens,omitempty" tf:"max_tokens,omitempty"`
@@ -1331,6 +1409,45 @@ type GeminiModelConfigParameters struct {
 	// Top-p (nucleus) sampling parameter. Must be between 0 and 1.
 	// +kubebuilder:validation:Optional
 	TopP *float64 `json:"topP,omitempty" tf:"top_p,omitempty"`
+}
+
+type GitInitParameters struct {
+
+	// Authentication configuration for private repositories. See auth Block below.
+	Auth []AuthInitParameters `json:"auth,omitempty" tf:"auth,omitempty"`
+
+	// Path to the skill.
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
+	// URL of the remote MCP server.
+	URL *string `json:"url,omitempty" tf:"url,omitempty"`
+}
+
+type GitObservation struct {
+
+	// Authentication configuration for private repositories. See auth Block below.
+	Auth []AuthObservation `json:"auth,omitempty" tf:"auth,omitempty"`
+
+	// Path to the skill.
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
+	// URL of the remote MCP server.
+	URL *string `json:"url,omitempty" tf:"url,omitempty"`
+}
+
+type GitParameters struct {
+
+	// Authentication configuration for private repositories. See auth Block below.
+	// +kubebuilder:validation:Optional
+	Auth []AuthParameters `json:"auth,omitempty" tf:"auth,omitempty"`
+
+	// Path to the skill.
+	// +kubebuilder:validation:Optional
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
+	// URL of the remote MCP server.
+	// +kubebuilder:validation:Optional
+	URL *string `json:"url" tf:"url,omitempty"`
 }
 
 type HarnessAuthorizerConfigurationCustomJwtAuthorizerInitParameters struct {
@@ -1522,6 +1639,9 @@ type HarnessModelInitParameters struct {
 	// Gemini model configuration. See gemini_model_config Block below.
 	GeminiModelConfig *GeminiModelConfigInitParameters `json:"geminiModelConfig,omitempty" tf:"gemini_model_config,omitempty"`
 
+	// LiteLLM model configuration. See litellm_model_config Block below.
+	LitellmModelConfig []LitellmModelConfigInitParameters `json:"litellmModelConfig,omitempty" tf:"litellm_model_config,omitempty"`
+
 	// OpenAI model configuration. See openai_model_config Block below.
 	OpenaiModelConfig *OpenaiModelConfigInitParameters `json:"openaiModelConfig,omitempty" tf:"openai_model_config,omitempty"`
 }
@@ -1533,6 +1653,9 @@ type HarnessModelObservation struct {
 
 	// Gemini model configuration. See gemini_model_config Block below.
 	GeminiModelConfig *GeminiModelConfigObservation `json:"geminiModelConfig,omitempty" tf:"gemini_model_config,omitempty"`
+
+	// LiteLLM model configuration. See litellm_model_config Block below.
+	LitellmModelConfig []LitellmModelConfigObservation `json:"litellmModelConfig,omitempty" tf:"litellm_model_config,omitempty"`
 
 	// OpenAI model configuration. See openai_model_config Block below.
 	OpenaiModelConfig *OpenaiModelConfigObservation `json:"openaiModelConfig,omitempty" tf:"openai_model_config,omitempty"`
@@ -1547,6 +1670,10 @@ type HarnessModelParameters struct {
 	// Gemini model configuration. See gemini_model_config Block below.
 	// +kubebuilder:validation:Optional
 	GeminiModelConfig *GeminiModelConfigParameters `json:"geminiModelConfig,omitempty" tf:"gemini_model_config,omitempty"`
+
+	// LiteLLM model configuration. See litellm_model_config Block below.
+	// +kubebuilder:validation:Optional
+	LitellmModelConfig []LitellmModelConfigParameters `json:"litellmModelConfig,omitempty" tf:"litellm_model_config,omitempty"`
 
 	// OpenAI model configuration. See openai_model_config Block below.
 	// +kubebuilder:validation:Optional
@@ -1738,6 +1865,85 @@ type InlineFunctionParameters struct {
 	// JSON string defining the input schema for the function.
 	// +kubebuilder:validation:Optional
 	InputSchemaSecretRef v2.LocalSecretKeySelector `json:"inputSchemaSecretRef" tf:"-"`
+}
+
+type LitellmModelConfigInitParameters struct {
+
+	// Base URL of the LiteLLM-compatible API endpoint.
+	APIBase *string `json:"apiBase,omitempty" tf:"api_base,omitempty"`
+
+	// ARN of the secret containing the API key.
+	APIKeyArn *string `json:"apiKeyArn,omitempty" tf:"api_key_arn,omitempty"`
+
+	// JSON string containing provider-specific parameters to pass through to the Bedrock model provider unchanged.
+	AdditionalParams *string `json:"additionalParams,omitempty" tf:"additional_params,omitempty"`
+
+	// Maximum number of tokens in the model response.
+	MaxTokens *float64 `json:"maxTokens,omitempty" tf:"max_tokens,omitempty"`
+
+	// Bedrock model ID (e.g., anthropic.claude-sonnet-4-20250514).
+	ModelID *string `json:"modelId,omitempty" tf:"model_id,omitempty"`
+
+	// Temperature for sampling. Must be between 0 and 2.
+	Temperature *float64 `json:"temperature,omitempty" tf:"temperature,omitempty"`
+
+	// Top-p (nucleus) sampling parameter. Must be between 0 and 1.
+	TopP *float64 `json:"topP,omitempty" tf:"top_p,omitempty"`
+}
+
+type LitellmModelConfigObservation struct {
+
+	// Base URL of the LiteLLM-compatible API endpoint.
+	APIBase *string `json:"apiBase,omitempty" tf:"api_base,omitempty"`
+
+	// ARN of the secret containing the API key.
+	APIKeyArn *string `json:"apiKeyArn,omitempty" tf:"api_key_arn,omitempty"`
+
+	// JSON string containing provider-specific parameters to pass through to the Bedrock model provider unchanged.
+	AdditionalParams *string `json:"additionalParams,omitempty" tf:"additional_params,omitempty"`
+
+	// Maximum number of tokens in the model response.
+	MaxTokens *float64 `json:"maxTokens,omitempty" tf:"max_tokens,omitempty"`
+
+	// Bedrock model ID (e.g., anthropic.claude-sonnet-4-20250514).
+	ModelID *string `json:"modelId,omitempty" tf:"model_id,omitempty"`
+
+	// Temperature for sampling. Must be between 0 and 2.
+	Temperature *float64 `json:"temperature,omitempty" tf:"temperature,omitempty"`
+
+	// Top-p (nucleus) sampling parameter. Must be between 0 and 1.
+	TopP *float64 `json:"topP,omitempty" tf:"top_p,omitempty"`
+}
+
+type LitellmModelConfigParameters struct {
+
+	// Base URL of the LiteLLM-compatible API endpoint.
+	// +kubebuilder:validation:Optional
+	APIBase *string `json:"apiBase,omitempty" tf:"api_base,omitempty"`
+
+	// ARN of the secret containing the API key.
+	// +kubebuilder:validation:Optional
+	APIKeyArn *string `json:"apiKeyArn,omitempty" tf:"api_key_arn,omitempty"`
+
+	// JSON string containing provider-specific parameters to pass through to the Bedrock model provider unchanged.
+	// +kubebuilder:validation:Optional
+	AdditionalParams *string `json:"additionalParams,omitempty" tf:"additional_params,omitempty"`
+
+	// Maximum number of tokens in the model response.
+	// +kubebuilder:validation:Optional
+	MaxTokens *float64 `json:"maxTokens,omitempty" tf:"max_tokens,omitempty"`
+
+	// Bedrock model ID (e.g., anthropic.claude-sonnet-4-20250514).
+	// +kubebuilder:validation:Optional
+	ModelID *string `json:"modelId" tf:"model_id,omitempty"`
+
+	// Temperature for sampling. Must be between 0 and 2.
+	// +kubebuilder:validation:Optional
+	Temperature *float64 `json:"temperature,omitempty" tf:"temperature,omitempty"`
+
+	// Top-p (nucleus) sampling parameter. Must be between 0 and 1.
+	// +kubebuilder:validation:Optional
+	TopP *float64 `json:"topP,omitempty" tf:"top_p,omitempty"`
 }
 
 type ManagedMemoryConfigurationInitParameters struct {
@@ -1934,6 +2140,9 @@ type NetworkConfigurationNetworkModeConfigParameters struct {
 
 type OpenaiModelConfigInitParameters struct {
 
+	// API format for the model. Valid values are converse_stream, responses, and chat_completions.
+	APIFormat *string `json:"apiFormat,omitempty" tf:"api_format,omitempty"`
+
 	// ARN of the secret containing the API key.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/secretsmanager/v1beta1.Secret
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
@@ -1946,6 +2155,9 @@ type OpenaiModelConfigInitParameters struct {
 	// Selector for a Secret in secretsmanager to populate apiKeyArn.
 	// +kubebuilder:validation:Optional
 	APIKeyArnSelector *v2.NamespacedSelector `json:"apiKeyArnSelector,omitempty" tf:"-"`
+
+	// JSON string containing provider-specific parameters to pass through to the Bedrock model provider unchanged.
+	AdditionalParams *string `json:"additionalParams,omitempty" tf:"additional_params,omitempty"`
 
 	// Maximum number of tokens in the model response.
 	MaxTokens *float64 `json:"maxTokens,omitempty" tf:"max_tokens,omitempty"`
@@ -1962,8 +2174,14 @@ type OpenaiModelConfigInitParameters struct {
 
 type OpenaiModelConfigObservation struct {
 
+	// API format for the model. Valid values are converse_stream, responses, and chat_completions.
+	APIFormat *string `json:"apiFormat,omitempty" tf:"api_format,omitempty"`
+
 	// ARN of the secret containing the API key.
 	APIKeyArn *string `json:"apiKeyArn,omitempty" tf:"api_key_arn,omitempty"`
+
+	// JSON string containing provider-specific parameters to pass through to the Bedrock model provider unchanged.
+	AdditionalParams *string `json:"additionalParams,omitempty" tf:"additional_params,omitempty"`
 
 	// Maximum number of tokens in the model response.
 	MaxTokens *float64 `json:"maxTokens,omitempty" tf:"max_tokens,omitempty"`
@@ -1980,6 +2198,10 @@ type OpenaiModelConfigObservation struct {
 
 type OpenaiModelConfigParameters struct {
 
+	// API format for the model. Valid values are converse_stream, responses, and chat_completions.
+	// +kubebuilder:validation:Optional
+	APIFormat *string `json:"apiFormat,omitempty" tf:"api_format,omitempty"`
+
 	// ARN of the secret containing the API key.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/secretsmanager/v1beta1.Secret
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
@@ -1993,6 +2215,10 @@ type OpenaiModelConfigParameters struct {
 	// Selector for a Secret in secretsmanager to populate apiKeyArn.
 	// +kubebuilder:validation:Optional
 	APIKeyArnSelector *v2.NamespacedSelector `json:"apiKeyArnSelector,omitempty" tf:"-"`
+
+	// JSON string containing provider-specific parameters to pass through to the Bedrock model provider unchanged.
+	// +kubebuilder:validation:Optional
+	AdditionalParams *string `json:"additionalParams,omitempty" tf:"additional_params,omitempty"`
 
 	// Maximum number of tokens in the model response.
 	// +kubebuilder:validation:Optional
@@ -2224,21 +2450,70 @@ type RetrievalConfigParameters struct {
 
 type SkillInitParameters struct {
 
+	// AWS Skills baked into the harness's underlying runtime. See aws_skills Block below.
+	AwsSkills []AwsSkillsInitParameters `json:"awsSkills,omitempty" tf:"aws_skills,omitempty"`
+
+	// Git repository source for the skill. See git Block below.
+	Git []GitInitParameters `json:"git,omitempty" tf:"git,omitempty"`
+
 	// Path to the skill.
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
+	// S3 source for the skill. See s3 Block below.
+	S3 []SkillS3InitParameters `json:"s3,omitempty" tf:"s3,omitempty"`
 }
 
 type SkillObservation struct {
 
+	// AWS Skills baked into the harness's underlying runtime. See aws_skills Block below.
+	AwsSkills []AwsSkillsObservation `json:"awsSkills,omitempty" tf:"aws_skills,omitempty"`
+
+	// Git repository source for the skill. See git Block below.
+	Git []GitObservation `json:"git,omitempty" tf:"git,omitempty"`
+
 	// Path to the skill.
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
+	// S3 source for the skill. See s3 Block below.
+	S3 []SkillS3Observation `json:"s3,omitempty" tf:"s3,omitempty"`
 }
 
 type SkillParameters struct {
 
+	// AWS Skills baked into the harness's underlying runtime. See aws_skills Block below.
+	// +kubebuilder:validation:Optional
+	AwsSkills []AwsSkillsParameters `json:"awsSkills,omitempty" tf:"aws_skills,omitempty"`
+
+	// Git repository source for the skill. See git Block below.
+	// +kubebuilder:validation:Optional
+	Git []GitParameters `json:"git,omitempty" tf:"git,omitempty"`
+
 	// Path to the skill.
 	// +kubebuilder:validation:Optional
-	Path *string `json:"path" tf:"path,omitempty"`
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
+	// S3 source for the skill. See s3 Block below.
+	// +kubebuilder:validation:Optional
+	S3 []SkillS3Parameters `json:"s3,omitempty" tf:"s3,omitempty"`
+}
+
+type SkillS3InitParameters struct {
+
+	// S3 URI of the skill source. Must begin with s3://.
+	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
+}
+
+type SkillS3Observation struct {
+
+	// S3 URI of the skill source. Must begin with s3://.
+	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
+}
+
+type SkillS3Parameters struct {
+
+	// S3 URI of the skill source. Must begin with s3://.
+	// +kubebuilder:validation:Optional
+	URI *string `json:"uri" tf:"uri,omitempty"`
 }
 
 type SlidingWindowInitParameters struct {
@@ -2302,7 +2577,7 @@ type SummarizationParameters struct {
 type SystemPromptInitParameters struct {
 
 	// Text content of the system prompt.
-	TextSecretRef v2.LocalSecretKeySelector `json:"textSecretRef" tf:"-"`
+	TextSecretRef *v2.LocalSecretKeySelector `json:"textSecretRef,omitempty" tf:"-"`
 }
 
 type SystemPromptObservation struct {
@@ -2312,7 +2587,7 @@ type SystemPromptParameters struct {
 
 	// Text content of the system prompt.
 	// +kubebuilder:validation:Optional
-	TextSecretRef v2.LocalSecretKeySelector `json:"textSecretRef" tf:"-"`
+	TextSecretRef *v2.LocalSecretKeySelector `json:"textSecretRef,omitempty" tf:"-"`
 }
 
 type ToolInitParameters struct {
