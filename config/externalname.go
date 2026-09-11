@@ -641,8 +641,8 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"aws_cloudfront_origin_access_control": config.IdentifierFromProvider,
 	// Cloudfront Origin Access Identities can be imported using the id
 	"aws_cloudfront_origin_access_identity": config.IdentifierFromProvider,
-	// No import documented, but https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudfront_origin_request_policy#name
-	"aws_cloudfront_origin_request_policy": config.NameAsIdentifier,
+	// Cloudfront Origin Request Policies can be imported using the id
+	"aws_cloudfront_origin_request_policy": config.IdentifierFromProvider,
 	// CloudFront Public Key can be imported using the id
 	"aws_cloudfront_public_key": config.IdentifierFromProvider,
 	// CloudFront real-time log configurations can be imported using the ARN,
