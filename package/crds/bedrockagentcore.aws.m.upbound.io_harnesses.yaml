@@ -1066,36 +1066,33 @@ spec:
                       litellmModelConfig:
                         description: LiteLLM model configuration. See litellm_model_config
                           Block below.
-                        items:
-                          properties:
-                            additionalParams:
-                              description: JSON string containing provider-specific
-                                parameters to pass through to the Bedrock model provider
-                                unchanged.
-                              type: string
-                            apiBase:
-                              description: Base URL of the LiteLLM-compatible API
-                                endpoint.
-                              type: string
-                            apiKeyArn:
-                              description: ARN of the secret containing the API key.
-                              type: string
-                            maxTokens:
-                              description: Maximum number of tokens in the model response.
-                              type: number
-                            modelId:
-                              description: Bedrock model ID (e.g., anthropic.claude-sonnet-4-20250514).
-                              type: string
-                            temperature:
-                              description: Temperature for sampling. Must be between
-                                0 and 2.
-                              type: number
-                            topP:
-                              description: Top-p (nucleus) sampling parameter. Must
-                                be between 0 and 1.
-                              type: number
-                          type: object
-                        type: array
+                        properties:
+                          additionalParams:
+                            description: JSON string containing provider-specific
+                              parameters to pass through to the Bedrock model provider
+                              unchanged.
+                            type: string
+                          apiBase:
+                            description: Base URL of the LiteLLM-compatible API endpoint.
+                            type: string
+                          apiKeyArn:
+                            description: ARN of the secret containing the API key.
+                            type: string
+                          maxTokens:
+                            description: Maximum number of tokens in the model response.
+                            type: number
+                          modelId:
+                            description: Bedrock model ID (e.g., anthropic.claude-sonnet-4-20250514).
+                            type: string
+                          temperature:
+                            description: Temperature for sampling. Must be between
+                              0 and 2.
+                            type: number
+                          topP:
+                            description: Top-p (nucleus) sampling parameter. Must
+                              be between 0 and 1.
+                            type: number
+                        type: object
                       openaiModelConfig:
                         description: OpenAI model configuration. See openai_model_config
                           Block below.
@@ -1222,58 +1219,50 @@ spec:
                         awsSkills:
                           description: AWS Skills baked into the harness's underlying
                             runtime. See aws_skills Block below.
-                          items:
-                            properties:
-                              paths:
-                                description: List of glob patterns to filter allowed
-                                  skills (e.g., ["core-skills/*"]).
-                                items:
-                                  type: string
-                                type: array
-                            type: object
-                          type: array
+                          properties:
+                            paths:
+                              description: List of glob patterns to filter allowed
+                                skills (e.g., ["core-skills/*"]).
+                              items:
+                                type: string
+                              type: array
+                          type: object
                         git:
                           description: Git repository source for the skill. See git
                             Block below.
-                          items:
-                            properties:
-                              auth:
-                                description: Authentication configuration for private
-                                  repositories. See auth Block below.
-                                items:
-                                  properties:
-                                    credentialArn:
-                                      description: ARN of the credential in AgentCore
-                                        Identity containing the password or personal
-                                        access token.
-                                      type: string
-                                    username:
-                                      description: Username for authentication. Defaults
-                                        to oauth2 if not specified.
-                                      type: string
-                                  type: object
-                                type: array
-                              path:
-                                description: Path to the skill.
-                                type: string
-                              url:
-                                description: URL of the remote MCP server.
-                                type: string
-                            type: object
-                          type: array
+                          properties:
+                            auth:
+                              description: Authentication configuration for private
+                                repositories. See auth Block below.
+                              properties:
+                                credentialArn:
+                                  description: ARN of the credential in AgentCore
+                                    Identity containing the password or personal access
+                                    token.
+                                  type: string
+                                username:
+                                  description: Username for authentication. Defaults
+                                    to oauth2 if not specified.
+                                  type: string
+                              type: object
+                            path:
+                              description: Path to the skill.
+                              type: string
+                            url:
+                              description: URL of the remote MCP server.
+                              type: string
+                          type: object
                         path:
                           description: Path to the skill.
                           type: string
                         s3:
                           description: S3 source for the skill. See s3 Block below.
-                          items:
-                            properties:
-                              uri:
-                                description: S3 URI of the skill source. Must begin
-                                  with s3://.
-                                type: string
-                            type: object
-                          type: array
+                          properties:
+                            uri:
+                              description: S3 URI of the skill source. Must begin
+                                with s3://.
+                              type: string
+                          type: object
                       type: object
                     type: array
                   systemPrompt:
@@ -2827,36 +2816,33 @@ spec:
                       litellmModelConfig:
                         description: LiteLLM model configuration. See litellm_model_config
                           Block below.
-                        items:
-                          properties:
-                            additionalParams:
-                              description: JSON string containing provider-specific
-                                parameters to pass through to the Bedrock model provider
-                                unchanged.
-                              type: string
-                            apiBase:
-                              description: Base URL of the LiteLLM-compatible API
-                                endpoint.
-                              type: string
-                            apiKeyArn:
-                              description: ARN of the secret containing the API key.
-                              type: string
-                            maxTokens:
-                              description: Maximum number of tokens in the model response.
-                              type: number
-                            modelId:
-                              description: Bedrock model ID (e.g., anthropic.claude-sonnet-4-20250514).
-                              type: string
-                            temperature:
-                              description: Temperature for sampling. Must be between
-                                0 and 2.
-                              type: number
-                            topP:
-                              description: Top-p (nucleus) sampling parameter. Must
-                                be between 0 and 1.
-                              type: number
-                          type: object
-                        type: array
+                        properties:
+                          additionalParams:
+                            description: JSON string containing provider-specific
+                              parameters to pass through to the Bedrock model provider
+                              unchanged.
+                            type: string
+                          apiBase:
+                            description: Base URL of the LiteLLM-compatible API endpoint.
+                            type: string
+                          apiKeyArn:
+                            description: ARN of the secret containing the API key.
+                            type: string
+                          maxTokens:
+                            description: Maximum number of tokens in the model response.
+                            type: number
+                          modelId:
+                            description: Bedrock model ID (e.g., anthropic.claude-sonnet-4-20250514).
+                            type: string
+                          temperature:
+                            description: Temperature for sampling. Must be between
+                              0 and 2.
+                            type: number
+                          topP:
+                            description: Top-p (nucleus) sampling parameter. Must
+                              be between 0 and 1.
+                            type: number
+                        type: object
                       openaiModelConfig:
                         description: OpenAI model configuration. See openai_model_config
                           Block below.
@@ -2978,58 +2964,50 @@ spec:
                         awsSkills:
                           description: AWS Skills baked into the harness's underlying
                             runtime. See aws_skills Block below.
-                          items:
-                            properties:
-                              paths:
-                                description: List of glob patterns to filter allowed
-                                  skills (e.g., ["core-skills/*"]).
-                                items:
-                                  type: string
-                                type: array
-                            type: object
-                          type: array
+                          properties:
+                            paths:
+                              description: List of glob patterns to filter allowed
+                                skills (e.g., ["core-skills/*"]).
+                              items:
+                                type: string
+                              type: array
+                          type: object
                         git:
                           description: Git repository source for the skill. See git
                             Block below.
-                          items:
-                            properties:
-                              auth:
-                                description: Authentication configuration for private
-                                  repositories. See auth Block below.
-                                items:
-                                  properties:
-                                    credentialArn:
-                                      description: ARN of the credential in AgentCore
-                                        Identity containing the password or personal
-                                        access token.
-                                      type: string
-                                    username:
-                                      description: Username for authentication. Defaults
-                                        to oauth2 if not specified.
-                                      type: string
-                                  type: object
-                                type: array
-                              path:
-                                description: Path to the skill.
-                                type: string
-                              url:
-                                description: URL of the remote MCP server.
-                                type: string
-                            type: object
-                          type: array
+                          properties:
+                            auth:
+                              description: Authentication configuration for private
+                                repositories. See auth Block below.
+                              properties:
+                                credentialArn:
+                                  description: ARN of the credential in AgentCore
+                                    Identity containing the password or personal access
+                                    token.
+                                  type: string
+                                username:
+                                  description: Username for authentication. Defaults
+                                    to oauth2 if not specified.
+                                  type: string
+                              type: object
+                            path:
+                              description: Path to the skill.
+                              type: string
+                            url:
+                              description: URL of the remote MCP server.
+                              type: string
+                          type: object
                         path:
                           description: Path to the skill.
                           type: string
                         s3:
                           description: S3 source for the skill. See s3 Block below.
-                          items:
-                            properties:
-                              uri:
-                                description: S3 URI of the skill source. Must begin
-                                  with s3://.
-                                type: string
-                            type: object
-                          type: array
+                          properties:
+                            uri:
+                              description: S3 URI of the skill source. Must begin
+                                with s3://.
+                              type: string
+                          type: object
                       type: object
                     type: array
                   systemPrompt:
@@ -4381,36 +4359,33 @@ spec:
                       litellmModelConfig:
                         description: LiteLLM model configuration. See litellm_model_config
                           Block below.
-                        items:
-                          properties:
-                            additionalParams:
-                              description: JSON string containing provider-specific
-                                parameters to pass through to the Bedrock model provider
-                                unchanged.
-                              type: string
-                            apiBase:
-                              description: Base URL of the LiteLLM-compatible API
-                                endpoint.
-                              type: string
-                            apiKeyArn:
-                              description: ARN of the secret containing the API key.
-                              type: string
-                            maxTokens:
-                              description: Maximum number of tokens in the model response.
-                              type: number
-                            modelId:
-                              description: Bedrock model ID (e.g., anthropic.claude-sonnet-4-20250514).
-                              type: string
-                            temperature:
-                              description: Temperature for sampling. Must be between
-                                0 and 2.
-                              type: number
-                            topP:
-                              description: Top-p (nucleus) sampling parameter. Must
-                                be between 0 and 1.
-                              type: number
-                          type: object
-                        type: array
+                        properties:
+                          additionalParams:
+                            description: JSON string containing provider-specific
+                              parameters to pass through to the Bedrock model provider
+                              unchanged.
+                            type: string
+                          apiBase:
+                            description: Base URL of the LiteLLM-compatible API endpoint.
+                            type: string
+                          apiKeyArn:
+                            description: ARN of the secret containing the API key.
+                            type: string
+                          maxTokens:
+                            description: Maximum number of tokens in the model response.
+                            type: number
+                          modelId:
+                            description: Bedrock model ID (e.g., anthropic.claude-sonnet-4-20250514).
+                            type: string
+                          temperature:
+                            description: Temperature for sampling. Must be between
+                              0 and 2.
+                            type: number
+                          topP:
+                            description: Top-p (nucleus) sampling parameter. Must
+                              be between 0 and 1.
+                            type: number
+                        type: object
                       openaiModelConfig:
                         description: OpenAI model configuration. See openai_model_config
                           Block below.
@@ -4455,58 +4430,50 @@ spec:
                         awsSkills:
                           description: AWS Skills baked into the harness's underlying
                             runtime. See aws_skills Block below.
-                          items:
-                            properties:
-                              paths:
-                                description: List of glob patterns to filter allowed
-                                  skills (e.g., ["core-skills/*"]).
-                                items:
-                                  type: string
-                                type: array
-                            type: object
-                          type: array
+                          properties:
+                            paths:
+                              description: List of glob patterns to filter allowed
+                                skills (e.g., ["core-skills/*"]).
+                              items:
+                                type: string
+                              type: array
+                          type: object
                         git:
                           description: Git repository source for the skill. See git
                             Block below.
-                          items:
-                            properties:
-                              auth:
-                                description: Authentication configuration for private
-                                  repositories. See auth Block below.
-                                items:
-                                  properties:
-                                    credentialArn:
-                                      description: ARN of the credential in AgentCore
-                                        Identity containing the password or personal
-                                        access token.
-                                      type: string
-                                    username:
-                                      description: Username for authentication. Defaults
-                                        to oauth2 if not specified.
-                                      type: string
-                                  type: object
-                                type: array
-                              path:
-                                description: Path to the skill.
-                                type: string
-                              url:
-                                description: URL of the remote MCP server.
-                                type: string
-                            type: object
-                          type: array
+                          properties:
+                            auth:
+                              description: Authentication configuration for private
+                                repositories. See auth Block below.
+                              properties:
+                                credentialArn:
+                                  description: ARN of the credential in AgentCore
+                                    Identity containing the password or personal access
+                                    token.
+                                  type: string
+                                username:
+                                  description: Username for authentication. Defaults
+                                    to oauth2 if not specified.
+                                  type: string
+                              type: object
+                            path:
+                              description: Path to the skill.
+                              type: string
+                            url:
+                              description: URL of the remote MCP server.
+                              type: string
+                          type: object
                         path:
                           description: Path to the skill.
                           type: string
                         s3:
                           description: S3 source for the skill. See s3 Block below.
-                          items:
-                            properties:
-                              uri:
-                                description: S3 URI of the skill source. Must begin
-                                  with s3://.
-                                type: string
-                            type: object
-                          type: array
+                          properties:
+                            uri:
+                              description: S3 URI of the skill source. Must begin
+                                with s3://.
+                              type: string
+                          type: object
                       type: object
                     type: array
                   systemPrompt:

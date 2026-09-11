@@ -12328,10 +12328,8 @@ func (in *GitInitParameters) DeepCopyInto(out *GitInitParameters) {
 	*out = *in
 	if in.Auth != nil {
 		in, out := &in.Auth, &out.Auth
-		*out = make([]AuthInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(AuthInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Path != nil {
 		in, out := &in.Path, &out.Path
@@ -12360,10 +12358,8 @@ func (in *GitObservation) DeepCopyInto(out *GitObservation) {
 	*out = *in
 	if in.Auth != nil {
 		in, out := &in.Auth, &out.Auth
-		*out = make([]AuthObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(AuthObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Path != nil {
 		in, out := &in.Path, &out.Path
@@ -12392,10 +12388,8 @@ func (in *GitParameters) DeepCopyInto(out *GitParameters) {
 	*out = *in
 	if in.Auth != nil {
 		in, out := &in.Auth, &out.Auth
-		*out = make([]AuthParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(AuthParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Path != nil {
 		in, out := &in.Path, &out.Path
@@ -13612,10 +13606,8 @@ func (in *HarnessModelInitParameters) DeepCopyInto(out *HarnessModelInitParamete
 	}
 	if in.LitellmModelConfig != nil {
 		in, out := &in.LitellmModelConfig, &out.LitellmModelConfig
-		*out = make([]LitellmModelConfigInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(LitellmModelConfigInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.OpenaiModelConfig != nil {
 		in, out := &in.OpenaiModelConfig, &out.OpenaiModelConfig
@@ -13649,10 +13641,8 @@ func (in *HarnessModelObservation) DeepCopyInto(out *HarnessModelObservation) {
 	}
 	if in.LitellmModelConfig != nil {
 		in, out := &in.LitellmModelConfig, &out.LitellmModelConfig
-		*out = make([]LitellmModelConfigObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(LitellmModelConfigObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.OpenaiModelConfig != nil {
 		in, out := &in.OpenaiModelConfig, &out.OpenaiModelConfig
@@ -13686,10 +13676,8 @@ func (in *HarnessModelParameters) DeepCopyInto(out *HarnessModelParameters) {
 	}
 	if in.LitellmModelConfig != nil {
 		in, out := &in.LitellmModelConfig, &out.LitellmModelConfig
-		*out = make([]LitellmModelConfigParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(LitellmModelConfigParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.OpenaiModelConfig != nil {
 		in, out := &in.OpenaiModelConfig, &out.OpenaiModelConfig
@@ -28027,17 +28015,13 @@ func (in *SkillInitParameters) DeepCopyInto(out *SkillInitParameters) {
 	*out = *in
 	if in.AwsSkills != nil {
 		in, out := &in.AwsSkills, &out.AwsSkills
-		*out = make([]AwsSkillsInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(AwsSkillsInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Git != nil {
 		in, out := &in.Git, &out.Git
-		*out = make([]GitInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(GitInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Path != nil {
 		in, out := &in.Path, &out.Path
@@ -28046,10 +28030,8 @@ func (in *SkillInitParameters) DeepCopyInto(out *SkillInitParameters) {
 	}
 	if in.S3 != nil {
 		in, out := &in.S3, &out.S3
-		*out = make([]SkillS3InitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(SkillS3InitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -28068,17 +28050,13 @@ func (in *SkillObservation) DeepCopyInto(out *SkillObservation) {
 	*out = *in
 	if in.AwsSkills != nil {
 		in, out := &in.AwsSkills, &out.AwsSkills
-		*out = make([]AwsSkillsObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(AwsSkillsObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Git != nil {
 		in, out := &in.Git, &out.Git
-		*out = make([]GitObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(GitObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Path != nil {
 		in, out := &in.Path, &out.Path
@@ -28087,10 +28065,8 @@ func (in *SkillObservation) DeepCopyInto(out *SkillObservation) {
 	}
 	if in.S3 != nil {
 		in, out := &in.S3, &out.S3
-		*out = make([]SkillS3Observation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(SkillS3Observation)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -28109,17 +28085,13 @@ func (in *SkillParameters) DeepCopyInto(out *SkillParameters) {
 	*out = *in
 	if in.AwsSkills != nil {
 		in, out := &in.AwsSkills, &out.AwsSkills
-		*out = make([]AwsSkillsParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(AwsSkillsParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Git != nil {
 		in, out := &in.Git, &out.Git
-		*out = make([]GitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(GitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Path != nil {
 		in, out := &in.Path, &out.Path
@@ -28128,10 +28100,8 @@ func (in *SkillParameters) DeepCopyInto(out *SkillParameters) {
 	}
 	if in.S3 != nil {
 		in, out := &in.S3, &out.S3
-		*out = make([]SkillS3Parameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(SkillS3Parameters)
+		(*in).DeepCopyInto(*out)
 	}
 }
 

@@ -1414,7 +1414,7 @@ type GeminiModelConfigParameters struct {
 type GitInitParameters struct {
 
 	// Authentication configuration for private repositories. See auth Block below.
-	Auth []AuthInitParameters `json:"auth,omitempty" tf:"auth,omitempty"`
+	Auth *AuthInitParameters `json:"auth,omitempty" tf:"auth,omitempty"`
 
 	// Path to the skill.
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
@@ -1426,7 +1426,7 @@ type GitInitParameters struct {
 type GitObservation struct {
 
 	// Authentication configuration for private repositories. See auth Block below.
-	Auth []AuthObservation `json:"auth,omitempty" tf:"auth,omitempty"`
+	Auth *AuthObservation `json:"auth,omitempty" tf:"auth,omitempty"`
 
 	// Path to the skill.
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
@@ -1439,7 +1439,7 @@ type GitParameters struct {
 
 	// Authentication configuration for private repositories. See auth Block below.
 	// +kubebuilder:validation:Optional
-	Auth []AuthParameters `json:"auth,omitempty" tf:"auth,omitempty"`
+	Auth *AuthParameters `json:"auth,omitempty" tf:"auth,omitempty"`
 
 	// Path to the skill.
 	// +kubebuilder:validation:Optional
@@ -1640,7 +1640,7 @@ type HarnessModelInitParameters struct {
 	GeminiModelConfig *GeminiModelConfigInitParameters `json:"geminiModelConfig,omitempty" tf:"gemini_model_config,omitempty"`
 
 	// LiteLLM model configuration. See litellm_model_config Block below.
-	LitellmModelConfig []LitellmModelConfigInitParameters `json:"litellmModelConfig,omitempty" tf:"litellm_model_config,omitempty"`
+	LitellmModelConfig *LitellmModelConfigInitParameters `json:"litellmModelConfig,omitempty" tf:"litellm_model_config,omitempty"`
 
 	// OpenAI model configuration. See openai_model_config Block below.
 	OpenaiModelConfig *OpenaiModelConfigInitParameters `json:"openaiModelConfig,omitempty" tf:"openai_model_config,omitempty"`
@@ -1655,7 +1655,7 @@ type HarnessModelObservation struct {
 	GeminiModelConfig *GeminiModelConfigObservation `json:"geminiModelConfig,omitempty" tf:"gemini_model_config,omitempty"`
 
 	// LiteLLM model configuration. See litellm_model_config Block below.
-	LitellmModelConfig []LitellmModelConfigObservation `json:"litellmModelConfig,omitempty" tf:"litellm_model_config,omitempty"`
+	LitellmModelConfig *LitellmModelConfigObservation `json:"litellmModelConfig,omitempty" tf:"litellm_model_config,omitempty"`
 
 	// OpenAI model configuration. See openai_model_config Block below.
 	OpenaiModelConfig *OpenaiModelConfigObservation `json:"openaiModelConfig,omitempty" tf:"openai_model_config,omitempty"`
@@ -1673,7 +1673,7 @@ type HarnessModelParameters struct {
 
 	// LiteLLM model configuration. See litellm_model_config Block below.
 	// +kubebuilder:validation:Optional
-	LitellmModelConfig []LitellmModelConfigParameters `json:"litellmModelConfig,omitempty" tf:"litellm_model_config,omitempty"`
+	LitellmModelConfig *LitellmModelConfigParameters `json:"litellmModelConfig,omitempty" tf:"litellm_model_config,omitempty"`
 
 	// OpenAI model configuration. See openai_model_config Block below.
 	// +kubebuilder:validation:Optional
@@ -2451,42 +2451,42 @@ type RetrievalConfigParameters struct {
 type SkillInitParameters struct {
 
 	// AWS Skills baked into the harness's underlying runtime. See aws_skills Block below.
-	AwsSkills []AwsSkillsInitParameters `json:"awsSkills,omitempty" tf:"aws_skills,omitempty"`
+	AwsSkills *AwsSkillsInitParameters `json:"awsSkills,omitempty" tf:"aws_skills,omitempty"`
 
 	// Git repository source for the skill. See git Block below.
-	Git []GitInitParameters `json:"git,omitempty" tf:"git,omitempty"`
+	Git *GitInitParameters `json:"git,omitempty" tf:"git,omitempty"`
 
 	// Path to the skill.
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
 	// S3 source for the skill. See s3 Block below.
-	S3 []SkillS3InitParameters `json:"s3,omitempty" tf:"s3,omitempty"`
+	S3 *SkillS3InitParameters `json:"s3,omitempty" tf:"s3,omitempty"`
 }
 
 type SkillObservation struct {
 
 	// AWS Skills baked into the harness's underlying runtime. See aws_skills Block below.
-	AwsSkills []AwsSkillsObservation `json:"awsSkills,omitempty" tf:"aws_skills,omitempty"`
+	AwsSkills *AwsSkillsObservation `json:"awsSkills,omitempty" tf:"aws_skills,omitempty"`
 
 	// Git repository source for the skill. See git Block below.
-	Git []GitObservation `json:"git,omitempty" tf:"git,omitempty"`
+	Git *GitObservation `json:"git,omitempty" tf:"git,omitempty"`
 
 	// Path to the skill.
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
 	// S3 source for the skill. See s3 Block below.
-	S3 []SkillS3Observation `json:"s3,omitempty" tf:"s3,omitempty"`
+	S3 *SkillS3Observation `json:"s3,omitempty" tf:"s3,omitempty"`
 }
 
 type SkillParameters struct {
 
 	// AWS Skills baked into the harness's underlying runtime. See aws_skills Block below.
 	// +kubebuilder:validation:Optional
-	AwsSkills []AwsSkillsParameters `json:"awsSkills,omitempty" tf:"aws_skills,omitempty"`
+	AwsSkills *AwsSkillsParameters `json:"awsSkills,omitempty" tf:"aws_skills,omitempty"`
 
 	// Git repository source for the skill. See git Block below.
 	// +kubebuilder:validation:Optional
-	Git []GitParameters `json:"git,omitempty" tf:"git,omitempty"`
+	Git *GitParameters `json:"git,omitempty" tf:"git,omitempty"`
 
 	// Path to the skill.
 	// +kubebuilder:validation:Optional
@@ -2494,7 +2494,7 @@ type SkillParameters struct {
 
 	// S3 source for the skill. See s3 Block below.
 	// +kubebuilder:validation:Optional
-	S3 []SkillS3Parameters `json:"s3,omitempty" tf:"s3,omitempty"`
+	S3 *SkillS3Parameters `json:"s3,omitempty" tf:"s3,omitempty"`
 }
 
 type SkillS3InitParameters struct {
