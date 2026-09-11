@@ -5,6 +5,8 @@
 apiVersion: apigateway.aws.upbound.io/v1beta1
 kind: VPCLink
 metadata:
+  annotations:
+    meta.upbound.io/example-id: apigateway/v1beta1/vpclink
   name: example
 spec:
   forProvider:

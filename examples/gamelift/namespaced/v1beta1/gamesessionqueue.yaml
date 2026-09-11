@@ -5,6 +5,8 @@
 apiVersion: gamelift.aws.m.upbound.io/v1beta1
 kind: GameSessionQueue
 metadata:
+  annotations:
+    meta.upbound.io/example-id: gamelift/v1beta1/gamesessionqueue
   name: example
   namespace: upbound-system
 spec:

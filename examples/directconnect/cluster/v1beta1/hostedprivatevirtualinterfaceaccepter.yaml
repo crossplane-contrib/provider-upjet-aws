@@ -46,7 +46,7 @@ apiVersion: directconnect.aws.upbound.io/v1beta1
 kind: HostedPrivateVirtualInterface
 metadata:
   annotations:
-    meta.upbound.io/example-id: directconnect/v1beta1/hostedprivatevirtualinterface
+    meta.upbound.io/example-id: directconnect/v1beta1/hostedprivatevirtualinterfaceaccepter
   labels:
     testing.upbound.io/example-name: foo
   name: foo
@@ -68,7 +68,7 @@ apiVersion: directconnect.aws.upbound.io/v1beta1
 kind: Connection
 metadata:
   annotations:
-    meta.upbound.io/example-id: directconnect/v1beta1/publicvirtualinterface
+    meta.upbound.io/example-id: directconnect/v1beta1/hostedprivatevirtualinterfaceaccepter
   labels:
     testing.upbound.io/example-name: example
   name: example

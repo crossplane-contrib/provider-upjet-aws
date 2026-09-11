@@ -18,6 +18,8 @@
 apiVersion: neptune.aws.upbound.io/v1beta1
 kind: ParameterGroup
 metadata:
+  annotations:
+    meta.upbound.io/example-id: neptune/v1beta1/parametergroup
   name: j-neptune13-querytimeout-immediate
 spec:
   forProvider:

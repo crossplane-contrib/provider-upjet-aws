@@ -5,6 +5,8 @@
 apiVersion: licensemanager.aws.m.upbound.io/v1beta1
 kind: LicenseConfiguration
 metadata:
+  annotations:
+    meta.upbound.io/example-id: licensemanager/v1beta1/licenseconfiguration
   name: example
   namespace: upbound-system
 spec:

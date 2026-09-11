@@ -5,6 +5,8 @@
 apiVersion: backup.aws.m.upbound.io/v1beta1
 kind: Vault
 metadata:
+  annotations:
+    meta.upbound.io/example-id: backup/v1beta1/vault
   name: test-${Rand.RFC1123Subdomain}
   labels:
     testing.upbound.io/example-name: vault

@@ -5,6 +5,8 @@
 apiVersion: ecr.aws.upbound.io/v1beta1
 kind: RepositoryPolicy
 metadata:
+  annotations:
+    meta.upbound.io/example-id: ecr/v1beta1/repositorypolicy
   name: example
 spec:
   forProvider:

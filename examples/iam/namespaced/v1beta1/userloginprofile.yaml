@@ -7,6 +7,7 @@ kind: UserLoginProfile
 metadata:
   annotations:
     upjet.upbound.io/manual-intervention: "Deleting this resource causes problems with the method used during the user's login."
+    meta.upbound.io/example-id: iam/v1beta1/userloginprofile
   name: example
   namespace: upbound-system
 spec:

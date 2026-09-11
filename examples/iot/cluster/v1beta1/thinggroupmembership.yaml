@@ -23,7 +23,7 @@ apiVersion: iot.aws.upbound.io/v1beta1
 kind: ThingGroup
 metadata:
   annotations:
-    meta.upbound.io/example-id: iot/v1beta1/thinggroup
+    meta.upbound.io/example-id: iot/v1beta1/thinggroupmembership
   labels:
     testing.upbound.io/example-name: parent
   name: parent

@@ -5,6 +5,8 @@
 apiVersion: cloudfront.aws.upbound.io/v1beta1
 kind: ResponseHeadersPolicy
 metadata:
+  annotations:
+    meta.upbound.io/example-id: cloudfront/v1beta1/responseheaderspolicy
   name: example-response-headers-policy
 spec:
   forProvider:

@@ -5,6 +5,8 @@
 apiVersion: globalaccelerator.aws.m.upbound.io/v1beta1
 kind: Listener
 metadata:
+  annotations:
+    meta.upbound.io/example-id: globalaccelerator/v1beta1/listener
   name: sample-listener
   namespace: upbound-system
 spec:
@@ -18,3 +20,19 @@ spec:
         toPort: 80
   writeConnectionSecretToRef:
     name: listener
+
+---
+
+apiVersion: globalaccelerator.aws.m.upbound.io/v1beta1
+kind: Accelerator
+metadata:
+  annotations:
+    meta.upbound.io/example-id: globalaccelerator/v1beta1/listener
+  name: sample-accelerator
+  namespace: upbound-system
+spec:
+  forProvider:
+    ipAddressType: IPV4
+    name: sample-accelerator
+  writeConnectionSecretToRef:
+    name: accelerator

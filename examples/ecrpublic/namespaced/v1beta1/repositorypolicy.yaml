@@ -5,6 +5,8 @@
 apiVersion: ecrpublic.aws.m.upbound.io/v1beta1
 kind: RepositoryPolicy
 metadata:
+  annotations:
+    meta.upbound.io/example-id: ecrpublic/v1beta1/repositorypolicy
   name: example
   namespace: upbound-system
 spec:

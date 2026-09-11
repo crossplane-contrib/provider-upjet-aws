@@ -7,6 +7,7 @@ kind: TransitGatewayRouteTablePropagation
 metadata:
   annotations:
     upjet.upbound.io/manual-intervention: "For testing this resource, firstly delete the default propagation."
+    meta.upbound.io/example-id: ec2/v1beta1/transitgatewayroutetablepropagation
   name: example
 spec:
   forProvider:

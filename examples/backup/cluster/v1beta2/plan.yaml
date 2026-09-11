@@ -5,6 +5,8 @@
 apiVersion: backup.aws.upbound.io/v1beta2
 kind: Plan
 metadata:
+  annotations:
+    meta.upbound.io/example-id: backup/v1beta2/plan
   name: example
   labels:
     testing.upbound.io/example-name: vault

@@ -5,6 +5,8 @@
 apiVersion: s3.aws.upbound.io/v1beta1
 kind: Bucket
 metadata:
+  annotations:
+    meta.upbound.io/example-id: s3/v1beta1/bucket
   name: ${Rand.RFC1123Subdomain}
   labels:
     testing.upbound.io/example-name: s3

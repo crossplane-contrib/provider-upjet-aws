@@ -5,6 +5,8 @@
 apiVersion: kinesisvideo.aws.upbound.io/v1beta1
 kind: Stream
 metadata:
+  annotations:
+    meta.upbound.io/example-id: kinesisvideo/v1beta1/stream
   name: example
 spec:
   forProvider:

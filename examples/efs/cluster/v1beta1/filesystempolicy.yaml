@@ -8,6 +8,7 @@ metadata:
   name: example
   annotations:
     upjet.upbound.io/manual-intervention: "User needs to add the ARN of the FileSystem to the policy manually."
+    meta.upbound.io/example-id: efs/v1beta1/filesystempolicy
 spec:
   forProvider:
     bypassPolicyLockoutSafetyCheck: true

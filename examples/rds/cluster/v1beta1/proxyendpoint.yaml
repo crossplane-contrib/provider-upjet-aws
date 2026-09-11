@@ -5,9 +5,10 @@
 apiVersion: rds.aws.upbound.io/v1beta1
 kind: ProxyEndpoint
 metadata:
-  name: example
+  name: exampleproxyendpoint
   annotations:
     upjet.upbound.io/manual-intervention: "This resource has a reference to Proxy, which needs manual intervention."
+    meta.upbound.io/example-id: rds/v1beta1/proxyendpoint
 spec:
   forProvider:
     region: us-west-1

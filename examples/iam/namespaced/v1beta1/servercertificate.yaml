@@ -7,6 +7,7 @@ kind: ServerCertificate
 metadata:
   annotations:
     upjet.upbound.io/manual-intervention: "This resource requires a valid certificate and private key."
+    meta.upbound.io/example-id: iam/v1beta1/servercertificate
   name: example
   namespace: upbound-system
 spec:

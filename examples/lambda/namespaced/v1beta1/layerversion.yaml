@@ -5,6 +5,8 @@
 apiVersion: lambda.aws.m.upbound.io/v1beta1
 kind: LayerVersion
 metadata:
+  annotations:
+    meta.upbound.io/example-id: lambda/v1beta1/layerversion
   name: example
   namespace: upbound-system
 spec:
