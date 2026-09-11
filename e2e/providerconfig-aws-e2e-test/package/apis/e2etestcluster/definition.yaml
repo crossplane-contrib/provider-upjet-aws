@@ -1,18 +1,13 @@
-apiVersion: apiextensions.crossplane.io/v1
+apiVersion: apiextensions.crossplane.io/v2
 kind: CompositeResourceDefinition
 metadata:
-  name: xe2etestclusters.aws.platformref.upbound.io
+  name: e2etestclusters.aws.platformref.upbound.io
 spec:
   defaultCompositeDeletePolicy: Foreground
   group: aws.platformref.upbound.io
   names:
-    kind: XE2ETestCluster
-    plural: xe2etestclusters
-  claimNames:
     kind: E2ETestCluster
     plural: e2etestclusters
-  connectionSecretKeys:
-    - kubeconfig
   versions:
     - name: v1alpha1
       served: true
@@ -34,45 +29,63 @@ spec:
                     region:
                       type: string
                       description: Region is the region you'd like your resource to be created in.
+                    accessConfig:
+                      type: object
+                      properties:
+                        bootstrapClusterCreatorAdminPermissions:
+                          type: boolean
+                          description: Whether or not to bootstrap the access config values to the cluster. Default is false.
+                        authenticationMode:
+                          type: string
+                          enum:
+                            - CONFIG_MAP
+                            - API
+                            - API_AND_CONFIG_MAP
+                      default:
+                        bootstrapClusterCreatorAdminPermissions: true
+                        authenticationMode: API_AND_CONFIG_MAP
                     iam:
                       type: object
                       description: IAM configuration to connect as ClusterAdmin.
                       properties:
-                        roleArn:
-                          description: The IAM Role ARN to connect as ClusterAdmin.
+                        principalArn:
+                          description: The principal ARN to connect as ClusterAdmin.
                           type: string
-                        userArn:
-                          description: The IAM User ARN to connect as ClusterAdmin.
-                          type: string
+                    managementPolicies:
+                      description: ManagementPolicies for AWS EC2 resources. Defaults to ["*"] which includes all operations (Create, Observe, Update, Delete, LateInitialize). To orphan resources on deletion, use ["Create", "Observe", "Update", "LateInitialize"].
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - "*"
+                          - Create
+                          - Observe
+                          - Update
+                          - Delete
+                          - LateInitialize
+                        default: "*"
                     networkSelector:
+                      description: Value of the "type" label used to select which Network Composition backs this cluster's network. When unset, the default Composition for the Network XR is used.
                       type: string
-                      description: NetworkSelector employs a specific type of network architecture.
-                      enum:
-                        - basic
-                      default: basic
-                    deletionPolicy:
-                      description: Delete the external resources when the Claim/XR is deleted. Defaults to Delete
-                      enum:
-                        - Delete
-                        - Orphan
-                      type: string
-                      default: Delete
                     providerConfigName:
                       description: Crossplane ProviderConfig to use for provisioning this resources
                       type: string
                       default: default
+                    providerConfigKind:
+                      description: Crossplane ProviderConfig's kind to use for provisioning this resources
+                      type: string
+                      default: ProviderConfig
                     version:
                       type: string
                       description: Kubernetes version of the Cluster
                       enum:
-                        - "1.28"
-                        - "1.27"
-                        - "1.26"
-                        - "1.25"
-                      default: "1.27"
+                        - "1.36"
+                        - "1.35"
+                        - "1.34"
+                      default: "1.35"
                     nodes:
                       type: object
-                      description: Cluster node configuration parameters.
+                      description: EKS node configuration parameters.
                       properties:
                         count:
                           type: integer
@@ -143,15 +156,15 @@ spec:
                         crossplaneVersion:
                           type: string
                           description: crossplane version to be deployed on the cluster
-                          default: "1.15.2"
+                          default: "2.4.0"
                       required:
                         - crossplaneVersion
                         - provider
                   required:
-                    - deletionPolicy
                     - id
                     - nodes
                     - providerConfigName
+                    - providerConfigKind
                     - region
                     - irsa
                     - targetClusterParameters
@@ -167,6 +180,9 @@ spec:
                 eks:
                   x-kubernetes-preserve-unknown-fields: true
                   type: object
+                eksOIDC:
+                  x-kubernetes-preserve-unknown-fields: true
+                  type: object
                 irsa:
                   type: object
                   properties:
@@ -178,6 +194,9 @@ spec:
                       type: array
                       items:
                         type: string
+                    observed:
+                      x-kubernetes-preserve-unknown-fields: true
+                      type: object
                 webIdentity:
                   type: object
                   properties:
