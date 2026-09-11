@@ -52,6 +52,35 @@ type AmazonMskClusterParameters struct {
 	MskClusterArnSelector *v2.Selector `json:"mskClusterArnSelector,omitempty" tf:"-"`
 }
 
+type ApacheKafkaClusterInitParameters struct {
+
+	// The Kafka cluster.id of the self-managed or on-premises Apache Kafka cluster (as reported by the cluster itself, e.g. via the Kafka admin tooling), not an arbitrary name. MSK Replicator validates this value against the source cluster. See Migrate third-party and self-managed Apache Kafka clusters to Amazon MSK for how to obtain the cluster ID and the other required inputs.
+	ApacheKafkaClusterID *string `json:"apacheKafkaClusterId,omitempty" tf:"apache_kafka_cluster_id,omitempty"`
+
+	// The bootstrap broker connection string used to connect to the Apache Kafka cluster.
+	BootstrapBrokerString *string `json:"bootstrapBrokerString,omitempty" tf:"bootstrap_broker_string,omitempty"`
+}
+
+type ApacheKafkaClusterObservation struct {
+
+	// The Kafka cluster.id of the self-managed or on-premises Apache Kafka cluster (as reported by the cluster itself, e.g. via the Kafka admin tooling), not an arbitrary name. MSK Replicator validates this value against the source cluster. See Migrate third-party and self-managed Apache Kafka clusters to Amazon MSK for how to obtain the cluster ID and the other required inputs.
+	ApacheKafkaClusterID *string `json:"apacheKafkaClusterId,omitempty" tf:"apache_kafka_cluster_id,omitempty"`
+
+	// The bootstrap broker connection string used to connect to the Apache Kafka cluster.
+	BootstrapBrokerString *string `json:"bootstrapBrokerString,omitempty" tf:"bootstrap_broker_string,omitempty"`
+}
+
+type ApacheKafkaClusterParameters struct {
+
+	// The Kafka cluster.id of the self-managed or on-premises Apache Kafka cluster (as reported by the cluster itself, e.g. via the Kafka admin tooling), not an arbitrary name. MSK Replicator validates this value against the source cluster. See Migrate third-party and self-managed Apache Kafka clusters to Amazon MSK for how to obtain the cluster ID and the other required inputs.
+	// +kubebuilder:validation:Optional
+	ApacheKafkaClusterID *string `json:"apacheKafkaClusterId" tf:"apache_kafka_cluster_id,omitempty"`
+
+	// The bootstrap broker connection string used to connect to the Apache Kafka cluster.
+	// +kubebuilder:validation:Optional
+	BootstrapBrokerString *string `json:"bootstrapBrokerString" tf:"bootstrap_broker_string,omitempty"`
+}
+
 type ConsumerGroupReplicationInitParameters struct {
 
 	// Consumer group offset synchronization mode. Valid values are LEGACY and ENHANCED. With LEGACY, offsets are synchronized when producers write to the source cluster. With ENHANCED, consumer offsets are synchronized regardless of producer location. ENHANCED requires a corresponding replicator that replicates data from the target cluster to the source cluster and requires topic_name_configuration.type to be set to IDENTICAL. Defaults to LEGACY. Changing this value will force a new resource.
@@ -117,33 +146,131 @@ type ConsumerGroupReplicationParameters struct {
 	SynchroniseConsumerGroupOffsets *bool `json:"synchroniseConsumerGroupOffsets,omitempty" tf:"synchronise_consumer_group_offsets,omitempty"`
 }
 
+type KafkaClusterClientAuthenticationInitParameters struct {
+
+	// Details of the mTLS client authentication used by the Kafka cluster. Detailed below.
+	Mtls *MtlsInitParameters `json:"mtls,omitempty" tf:"mtls,omitempty"`
+
+	// Details of the SASL/SCRAM client authentication used by the Kafka cluster. Detailed below.
+	SaslScram *SaslScramInitParameters `json:"saslScram,omitempty" tf:"sasl_scram,omitempty"`
+}
+
+type KafkaClusterClientAuthenticationObservation struct {
+
+	// Details of the mTLS client authentication used by the Kafka cluster. Detailed below.
+	Mtls *MtlsObservation `json:"mtls,omitempty" tf:"mtls,omitempty"`
+
+	// Details of the SASL/SCRAM client authentication used by the Kafka cluster. Detailed below.
+	SaslScram *SaslScramObservation `json:"saslScram,omitempty" tf:"sasl_scram,omitempty"`
+}
+
+type KafkaClusterClientAuthenticationParameters struct {
+
+	// Details of the mTLS client authentication used by the Kafka cluster. Detailed below.
+	// +kubebuilder:validation:Optional
+	Mtls *MtlsParameters `json:"mtls,omitempty" tf:"mtls,omitempty"`
+
+	// Details of the SASL/SCRAM client authentication used by the Kafka cluster. Detailed below.
+	// +kubebuilder:validation:Optional
+	SaslScram *SaslScramParameters `json:"saslScram,omitempty" tf:"sasl_scram,omitempty"`
+}
+
+type KafkaClusterEncryptionInTransitInitParameters struct {
+
+	// The ARN of the AWS Secrets Manager secret that stores the custom root CA certificate chain used to trust the certificate authority of the Apache Kafka cluster. See Set up prerequisites for MSK Replicator with self-managed Apache Kafka clusters for the required secret contents and format.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/secretsmanager/v1beta1.Secret
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
+	RootCACertificate *string `json:"rootCaCertificate,omitempty" tf:"root_ca_certificate,omitempty"`
+
+	// Reference to a Secret in secretsmanager to populate rootCaCertificate.
+	// +kubebuilder:validation:Optional
+	RootCACertificateRef *v2.Reference `json:"rootCaCertificateRef,omitempty" tf:"-"`
+
+	// Selector for a Secret in secretsmanager to populate rootCaCertificate.
+	// +kubebuilder:validation:Optional
+	RootCACertificateSelector *v2.Selector `json:"rootCaCertificateSelector,omitempty" tf:"-"`
+}
+
+type KafkaClusterEncryptionInTransitObservation struct {
+
+	// The ARN of the AWS Secrets Manager secret that stores the custom root CA certificate chain used to trust the certificate authority of the Apache Kafka cluster. See Set up prerequisites for MSK Replicator with self-managed Apache Kafka clusters for the required secret contents and format.
+	RootCACertificate *string `json:"rootCaCertificate,omitempty" tf:"root_ca_certificate,omitempty"`
+}
+
+type KafkaClusterEncryptionInTransitParameters struct {
+
+	// The ARN of the AWS Secrets Manager secret that stores the custom root CA certificate chain used to trust the certificate authority of the Apache Kafka cluster. See Set up prerequisites for MSK Replicator with self-managed Apache Kafka clusters for the required secret contents and format.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/secretsmanager/v1beta1.Secret
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
+	// +kubebuilder:validation:Optional
+	RootCACertificate *string `json:"rootCaCertificate,omitempty" tf:"root_ca_certificate,omitempty"`
+
+	// Reference to a Secret in secretsmanager to populate rootCaCertificate.
+	// +kubebuilder:validation:Optional
+	RootCACertificateRef *v2.Reference `json:"rootCaCertificateRef,omitempty" tf:"-"`
+
+	// Selector for a Secret in secretsmanager to populate rootCaCertificate.
+	// +kubebuilder:validation:Optional
+	RootCACertificateSelector *v2.Selector `json:"rootCaCertificateSelector,omitempty" tf:"-"`
+}
+
 type KafkaClusterInitParameters struct {
 
-	// Details of an Amazon MSK cluster.
+	// Details of an Amazon MSK cluster. Exactly one of amazon_msk_cluster or apache_kafka_cluster must be specified. Detailed below.
 	AmazonMskCluster *AmazonMskClusterInitParameters `json:"amazonMskCluster,omitempty" tf:"amazon_msk_cluster,omitempty"`
 
-	// Details of an Amazon VPC which has network connectivity to the Apache Kafka cluster.
+	// Details of a self-managed or on-premises Apache Kafka cluster. Exactly one of amazon_msk_cluster or apache_kafka_cluster must be specified. Detailed below.
+	ApacheKafkaCluster *ApacheKafkaClusterInitParameters `json:"apacheKafkaCluster,omitempty" tf:"apache_kafka_cluster,omitempty"`
+
+	// Details of the client authentication used by the Kafka cluster. Only valid for an apache_kafka_cluster. Detailed below.
+	ClientAuthentication *KafkaClusterClientAuthenticationInitParameters `json:"clientAuthentication,omitempty" tf:"client_authentication,omitempty"`
+
+	// Details of encryption in transit to the Kafka cluster. Only valid for an apache_kafka_cluster. TLS encryption in transit is always applied to an apache_kafka_cluster; this block is only required to supply a custom root CA chain (for a cluster using a private or self-signed certificate). Detailed below.
+	EncryptionInTransit *KafkaClusterEncryptionInTransitInitParameters `json:"encryptionInTransit,omitempty" tf:"encryption_in_transit,omitempty"`
+
+	// Details of an Amazon VPC which has network connectivity to the Kafka cluster. Provide this on the amazon_msk_cluster entry only; the replicator reaches the Apache Kafka cluster through that VPC.
 	VPCConfig *VPCConfigInitParameters `json:"vpcConfig,omitempty" tf:"vpc_config,omitempty"`
 }
 
 type KafkaClusterObservation struct {
 
-	// Details of an Amazon MSK cluster.
+	// Details of an Amazon MSK cluster. Exactly one of amazon_msk_cluster or apache_kafka_cluster must be specified. Detailed below.
 	AmazonMskCluster *AmazonMskClusterObservation `json:"amazonMskCluster,omitempty" tf:"amazon_msk_cluster,omitempty"`
 
-	// Details of an Amazon VPC which has network connectivity to the Apache Kafka cluster.
+	// Details of a self-managed or on-premises Apache Kafka cluster. Exactly one of amazon_msk_cluster or apache_kafka_cluster must be specified. Detailed below.
+	ApacheKafkaCluster *ApacheKafkaClusterObservation `json:"apacheKafkaCluster,omitempty" tf:"apache_kafka_cluster,omitempty"`
+
+	// Details of the client authentication used by the Kafka cluster. Only valid for an apache_kafka_cluster. Detailed below.
+	ClientAuthentication *KafkaClusterClientAuthenticationObservation `json:"clientAuthentication,omitempty" tf:"client_authentication,omitempty"`
+
+	// Details of encryption in transit to the Kafka cluster. Only valid for an apache_kafka_cluster. TLS encryption in transit is always applied to an apache_kafka_cluster; this block is only required to supply a custom root CA chain (for a cluster using a private or self-signed certificate). Detailed below.
+	EncryptionInTransit *KafkaClusterEncryptionInTransitObservation `json:"encryptionInTransit,omitempty" tf:"encryption_in_transit,omitempty"`
+
+	// Details of an Amazon VPC which has network connectivity to the Kafka cluster. Provide this on the amazon_msk_cluster entry only; the replicator reaches the Apache Kafka cluster through that VPC.
 	VPCConfig *VPCConfigObservation `json:"vpcConfig,omitempty" tf:"vpc_config,omitempty"`
 }
 
 type KafkaClusterParameters struct {
 
-	// Details of an Amazon MSK cluster.
+	// Details of an Amazon MSK cluster. Exactly one of amazon_msk_cluster or apache_kafka_cluster must be specified. Detailed below.
 	// +kubebuilder:validation:Optional
-	AmazonMskCluster *AmazonMskClusterParameters `json:"amazonMskCluster" tf:"amazon_msk_cluster,omitempty"`
+	AmazonMskCluster *AmazonMskClusterParameters `json:"amazonMskCluster,omitempty" tf:"amazon_msk_cluster,omitempty"`
 
-	// Details of an Amazon VPC which has network connectivity to the Apache Kafka cluster.
+	// Details of a self-managed or on-premises Apache Kafka cluster. Exactly one of amazon_msk_cluster or apache_kafka_cluster must be specified. Detailed below.
 	// +kubebuilder:validation:Optional
-	VPCConfig *VPCConfigParameters `json:"vpcConfig" tf:"vpc_config,omitempty"`
+	ApacheKafkaCluster *ApacheKafkaClusterParameters `json:"apacheKafkaCluster,omitempty" tf:"apache_kafka_cluster,omitempty"`
+
+	// Details of the client authentication used by the Kafka cluster. Only valid for an apache_kafka_cluster. Detailed below.
+	// +kubebuilder:validation:Optional
+	ClientAuthentication *KafkaClusterClientAuthenticationParameters `json:"clientAuthentication,omitempty" tf:"client_authentication,omitempty"`
+
+	// Details of encryption in transit to the Kafka cluster. Only valid for an apache_kafka_cluster. TLS encryption in transit is always applied to an apache_kafka_cluster; this block is only required to supply a custom root CA chain (for a cluster using a private or self-signed certificate). Detailed below.
+	// +kubebuilder:validation:Optional
+	EncryptionInTransit *KafkaClusterEncryptionInTransitParameters `json:"encryptionInTransit,omitempty" tf:"encryption_in_transit,omitempty"`
+
+	// Details of an Amazon VPC which has network connectivity to the Kafka cluster. Provide this on the amazon_msk_cluster entry only; the replicator reaches the Apache Kafka cluster through that VPC.
+	// +kubebuilder:validation:Optional
+	VPCConfig *VPCConfigParameters `json:"vpcConfig,omitempty" tf:"vpc_config,omitempty"`
 }
 
 type LogDeliveryInitParameters struct {
@@ -165,12 +292,31 @@ type LogDeliveryParameters struct {
 	ReplicatorLogDelivery *ReplicatorLogDeliveryParameters `json:"replicatorLogDelivery,omitempty" tf:"replicator_log_delivery,omitempty"`
 }
 
+type MtlsInitParameters struct {
+
+	// The ARN of the AWS Secrets Manager secret that stores the private key and certificate used for mTLS authentication. See Set up prerequisites for MSK Replicator with self-managed Apache Kafka clusters for the required secret contents and format.
+	SecretArn *string `json:"secretArn,omitempty" tf:"secret_arn,omitempty"`
+}
+
+type MtlsObservation struct {
+
+	// The ARN of the AWS Secrets Manager secret that stores the private key and certificate used for mTLS authentication. See Set up prerequisites for MSK Replicator with self-managed Apache Kafka clusters for the required secret contents and format.
+	SecretArn *string `json:"secretArn,omitempty" tf:"secret_arn,omitempty"`
+}
+
+type MtlsParameters struct {
+
+	// The ARN of the AWS Secrets Manager secret that stores the private key and certificate used for mTLS authentication. See Set up prerequisites for MSK Replicator with self-managed Apache Kafka clusters for the required secret contents and format.
+	// +kubebuilder:validation:Optional
+	SecretArn *string `json:"secretArn" tf:"secret_arn,omitempty"`
+}
+
 type ReplicationInfoListInitParameters struct {
 
 	// Configuration relating to consumer group replication.
 	ConsumerGroupReplication []ConsumerGroupReplicationInitParameters `json:"consumerGroupReplication,omitempty" tf:"consumer_group_replication,omitempty"`
 
-	// The ARN of the source Kafka cluster.
+	// The ARN of the source Kafka cluster. Use for an Amazon MSK source. Exactly one of source_kafka_cluster_arn or source_kafka_cluster_id must be specified.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kafka/v1beta3.Cluster
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	SourceKafkaClusterArn *string `json:"sourceKafkaClusterArn,omitempty" tf:"source_kafka_cluster_arn,omitempty"`
@@ -183,10 +329,13 @@ type ReplicationInfoListInitParameters struct {
 	// +kubebuilder:validation:Optional
 	SourceKafkaClusterArnSelector *v2.Selector `json:"sourceKafkaClusterArnSelector,omitempty" tf:"-"`
 
+	// The identifier of the source Kafka cluster. Use for a self-managed / on-premises Apache Kafka source (matches apache_kafka_cluster_id). Exactly one of source_kafka_cluster_arn or source_kafka_cluster_id must be specified.
+	SourceKafkaClusterID *string `json:"sourceKafkaClusterId,omitempty" tf:"source_kafka_cluster_id,omitempty"`
+
 	// The type of compression to use writing records to target Kafka cluster.
 	TargetCompressionType *string `json:"targetCompressionType,omitempty" tf:"target_compression_type,omitempty"`
 
-	// The ARN of the target Kafka cluster.
+	// The ARN of the target Kafka cluster. Use for an Amazon MSK target. Exactly one of target_kafka_cluster_arn or target_kafka_cluster_id must be specified.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kafka/v1beta3.Cluster
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	TargetKafkaClusterArn *string `json:"targetKafkaClusterArn,omitempty" tf:"target_kafka_cluster_arn,omitempty"`
@@ -198,6 +347,9 @@ type ReplicationInfoListInitParameters struct {
 	// Selector for a Cluster in kafka to populate targetKafkaClusterArn.
 	// +kubebuilder:validation:Optional
 	TargetKafkaClusterArnSelector *v2.Selector `json:"targetKafkaClusterArnSelector,omitempty" tf:"-"`
+
+	// The identifier of the target Kafka cluster. Use for a self-managed / on-premises Apache Kafka target (matches apache_kafka_cluster_id). Exactly one of target_kafka_cluster_arn or target_kafka_cluster_id must be specified.
+	TargetKafkaClusterID *string `json:"targetKafkaClusterId,omitempty" tf:"target_kafka_cluster_id,omitempty"`
 
 	// Configuration relating to topic replication.
 	TopicReplication []TopicReplicationInitParameters `json:"topicReplication,omitempty" tf:"topic_replication,omitempty"`
@@ -210,16 +362,22 @@ type ReplicationInfoListObservation struct {
 
 	SourceKafkaClusterAlias *string `json:"sourceKafkaClusterAlias,omitempty" tf:"source_kafka_cluster_alias,omitempty"`
 
-	// The ARN of the source Kafka cluster.
+	// The ARN of the source Kafka cluster. Use for an Amazon MSK source. Exactly one of source_kafka_cluster_arn or source_kafka_cluster_id must be specified.
 	SourceKafkaClusterArn *string `json:"sourceKafkaClusterArn,omitempty" tf:"source_kafka_cluster_arn,omitempty"`
+
+	// The identifier of the source Kafka cluster. Use for a self-managed / on-premises Apache Kafka source (matches apache_kafka_cluster_id). Exactly one of source_kafka_cluster_arn or source_kafka_cluster_id must be specified.
+	SourceKafkaClusterID *string `json:"sourceKafkaClusterId,omitempty" tf:"source_kafka_cluster_id,omitempty"`
 
 	// The type of compression to use writing records to target Kafka cluster.
 	TargetCompressionType *string `json:"targetCompressionType,omitempty" tf:"target_compression_type,omitempty"`
 
 	TargetKafkaClusterAlias *string `json:"targetKafkaClusterAlias,omitempty" tf:"target_kafka_cluster_alias,omitempty"`
 
-	// The ARN of the target Kafka cluster.
+	// The ARN of the target Kafka cluster. Use for an Amazon MSK target. Exactly one of target_kafka_cluster_arn or target_kafka_cluster_id must be specified.
 	TargetKafkaClusterArn *string `json:"targetKafkaClusterArn,omitempty" tf:"target_kafka_cluster_arn,omitempty"`
+
+	// The identifier of the target Kafka cluster. Use for a self-managed / on-premises Apache Kafka target (matches apache_kafka_cluster_id). Exactly one of target_kafka_cluster_arn or target_kafka_cluster_id must be specified.
+	TargetKafkaClusterID *string `json:"targetKafkaClusterId,omitempty" tf:"target_kafka_cluster_id,omitempty"`
 
 	// Configuration relating to topic replication.
 	TopicReplication []TopicReplicationObservation `json:"topicReplication,omitempty" tf:"topic_replication,omitempty"`
@@ -231,7 +389,7 @@ type ReplicationInfoListParameters struct {
 	// +kubebuilder:validation:Optional
 	ConsumerGroupReplication []ConsumerGroupReplicationParameters `json:"consumerGroupReplication" tf:"consumer_group_replication,omitempty"`
 
-	// The ARN of the source Kafka cluster.
+	// The ARN of the source Kafka cluster. Use for an Amazon MSK source. Exactly one of source_kafka_cluster_arn or source_kafka_cluster_id must be specified.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kafka/v1beta3.Cluster
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -245,11 +403,15 @@ type ReplicationInfoListParameters struct {
 	// +kubebuilder:validation:Optional
 	SourceKafkaClusterArnSelector *v2.Selector `json:"sourceKafkaClusterArnSelector,omitempty" tf:"-"`
 
+	// The identifier of the source Kafka cluster. Use for a self-managed / on-premises Apache Kafka source (matches apache_kafka_cluster_id). Exactly one of source_kafka_cluster_arn or source_kafka_cluster_id must be specified.
+	// +kubebuilder:validation:Optional
+	SourceKafkaClusterID *string `json:"sourceKafkaClusterId,omitempty" tf:"source_kafka_cluster_id,omitempty"`
+
 	// The type of compression to use writing records to target Kafka cluster.
 	// +kubebuilder:validation:Optional
 	TargetCompressionType *string `json:"targetCompressionType" tf:"target_compression_type,omitempty"`
 
-	// The ARN of the target Kafka cluster.
+	// The ARN of the target Kafka cluster. Use for an Amazon MSK target. Exactly one of target_kafka_cluster_arn or target_kafka_cluster_id must be specified.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kafka/v1beta3.Cluster
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -263,6 +425,10 @@ type ReplicationInfoListParameters struct {
 	// +kubebuilder:validation:Optional
 	TargetKafkaClusterArnSelector *v2.Selector `json:"targetKafkaClusterArnSelector,omitempty" tf:"-"`
 
+	// The identifier of the target Kafka cluster. Use for a self-managed / on-premises Apache Kafka target (matches apache_kafka_cluster_id). Exactly one of target_kafka_cluster_arn or target_kafka_cluster_id must be specified.
+	// +kubebuilder:validation:Optional
+	TargetKafkaClusterID *string `json:"targetKafkaClusterId,omitempty" tf:"target_kafka_cluster_id,omitempty"`
+
 	// Configuration relating to topic replication.
 	// +kubebuilder:validation:Optional
 	TopicReplication []TopicReplicationParameters `json:"topicReplication" tf:"topic_replication,omitempty"`
@@ -273,7 +439,7 @@ type ReplicatorInitParameters struct {
 	// A summary description of the replicator.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// A list of Kafka clusters which are targets of the replicator.
+	// The source and target Kafka clusters for the replicator. Exactly two blocks are required. Detailed below.
 	KafkaCluster []KafkaClusterInitParameters `json:"kafkaCluster,omitempty" tf:"kafka_cluster,omitempty"`
 
 	// Configuration block for delivering replicator logs to customer destinations. Detailed below.
@@ -309,7 +475,16 @@ type ReplicatorLogDeliveryCloudwatchLogsInitParameters struct {
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// Name of CloudWatch Logs log group. Required if enabled is true. If enabled is false, this value must not be set.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/cloudwatchlogs/v1beta1.Group
 	LogGroup *string `json:"logGroup,omitempty" tf:"log_group,omitempty"`
+
+	// Reference to a Group in cloudwatchlogs to populate logGroup.
+	// +kubebuilder:validation:Optional
+	LogGroupRef *v2.Reference `json:"logGroupRef,omitempty" tf:"-"`
+
+	// Selector for a Group in cloudwatchlogs to populate logGroup.
+	// +kubebuilder:validation:Optional
+	LogGroupSelector *v2.Selector `json:"logGroupSelector,omitempty" tf:"-"`
 }
 
 type ReplicatorLogDeliveryCloudwatchLogsObservation struct {
@@ -328,14 +503,33 @@ type ReplicatorLogDeliveryCloudwatchLogsParameters struct {
 	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 
 	// Name of CloudWatch Logs log group. Required if enabled is true. If enabled is false, this value must not be set.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/cloudwatchlogs/v1beta1.Group
 	// +kubebuilder:validation:Optional
 	LogGroup *string `json:"logGroup,omitempty" tf:"log_group,omitempty"`
+
+	// Reference to a Group in cloudwatchlogs to populate logGroup.
+	// +kubebuilder:validation:Optional
+	LogGroupRef *v2.Reference `json:"logGroupRef,omitempty" tf:"-"`
+
+	// Selector for a Group in cloudwatchlogs to populate logGroup.
+	// +kubebuilder:validation:Optional
+	LogGroupSelector *v2.Selector `json:"logGroupSelector,omitempty" tf:"-"`
 }
 
 type ReplicatorLogDeliveryFirehoseInitParameters struct {
 
 	// Name of the Firehose delivery stream. Required if enabled is true. If enabled is false, this value must not be set.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/firehose/v1beta2.DeliveryStream
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	DeliveryStream *string `json:"deliveryStream,omitempty" tf:"delivery_stream,omitempty"`
+
+	// Reference to a DeliveryStream in firehose to populate deliveryStream.
+	// +kubebuilder:validation:Optional
+	DeliveryStreamRef *v2.Reference `json:"deliveryStreamRef,omitempty" tf:"-"`
+
+	// Selector for a DeliveryStream in firehose to populate deliveryStream.
+	// +kubebuilder:validation:Optional
+	DeliveryStreamSelector *v2.Selector `json:"deliveryStreamSelector,omitempty" tf:"-"`
 
 	// Boolean whether to enable log delivery to Firehose.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
@@ -353,8 +547,18 @@ type ReplicatorLogDeliveryFirehoseObservation struct {
 type ReplicatorLogDeliveryFirehoseParameters struct {
 
 	// Name of the Firehose delivery stream. Required if enabled is true. If enabled is false, this value must not be set.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/firehose/v1beta2.DeliveryStream
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	DeliveryStream *string `json:"deliveryStream,omitempty" tf:"delivery_stream,omitempty"`
+
+	// Reference to a DeliveryStream in firehose to populate deliveryStream.
+	// +kubebuilder:validation:Optional
+	DeliveryStreamRef *v2.Reference `json:"deliveryStreamRef,omitempty" tf:"-"`
+
+	// Selector for a DeliveryStream in firehose to populate deliveryStream.
+	// +kubebuilder:validation:Optional
+	DeliveryStreamSelector *v2.Selector `json:"deliveryStreamSelector,omitempty" tf:"-"`
 
 	// Boolean whether to enable log delivery to Firehose.
 	// +kubebuilder:validation:Optional
@@ -403,7 +607,16 @@ type ReplicatorLogDeliveryParameters struct {
 type ReplicatorLogDeliveryS3InitParameters struct {
 
 	// Name of the S3 bucket. Required if enabled is true. If enabled is false, this value must not be set.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3/v1beta2.Bucket
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+
+	// Reference to a Bucket in s3 to populate bucket.
+	// +kubebuilder:validation:Optional
+	BucketRef *v2.Reference `json:"bucketRef,omitempty" tf:"-"`
+
+	// Selector for a Bucket in s3 to populate bucket.
+	// +kubebuilder:validation:Optional
+	BucketSelector *v2.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
 	// Boolean whether to enable log delivery to S3.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
@@ -427,8 +640,17 @@ type ReplicatorLogDeliveryS3Observation struct {
 type ReplicatorLogDeliveryS3Parameters struct {
 
 	// Name of the S3 bucket. Required if enabled is true. If enabled is false, this value must not be set.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3/v1beta2.Bucket
 	// +kubebuilder:validation:Optional
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+
+	// Reference to a Bucket in s3 to populate bucket.
+	// +kubebuilder:validation:Optional
+	BucketRef *v2.Reference `json:"bucketRef,omitempty" tf:"-"`
+
+	// Selector for a Bucket in s3 to populate bucket.
+	// +kubebuilder:validation:Optional
+	BucketSelector *v2.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
 	// Boolean whether to enable log delivery to S3.
 	// +kubebuilder:validation:Optional
@@ -451,7 +673,7 @@ type ReplicatorObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// A list of Kafka clusters which are targets of the replicator.
+	// The source and target Kafka clusters for the replicator. Exactly two blocks are required. Detailed below.
 	KafkaCluster []KafkaClusterObservation `json:"kafkaCluster,omitempty" tf:"kafka_cluster,omitempty"`
 
 	// Configuration block for delivering replicator logs to customer destinations. Detailed below.
@@ -485,7 +707,7 @@ type ReplicatorParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// A list of Kafka clusters which are targets of the replicator.
+	// The source and target Kafka clusters for the replicator. Exactly two blocks are required. Detailed below.
 	// +kubebuilder:validation:Optional
 	KafkaCluster []KafkaClusterParameters `json:"kafkaCluster,omitempty" tf:"kafka_cluster,omitempty"`
 
@@ -524,6 +746,55 @@ type ReplicatorParameters struct {
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type SaslScramInitParameters struct {
+
+	// The SASL/SCRAM mechanism used for authentication. Valid values are SHA256 and SHA512.
+	Mechanism *string `json:"mechanism,omitempty" tf:"mechanism,omitempty"`
+
+	// The ARN of the AWS Secrets Manager secret that stores the private key and certificate used for mTLS authentication. See Set up prerequisites for MSK Replicator with self-managed Apache Kafka clusters for the required secret contents and format.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/secretsmanager/v1beta1.Secret
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
+	SecretArn *string `json:"secretArn,omitempty" tf:"secret_arn,omitempty"`
+
+	// Reference to a Secret in secretsmanager to populate secretArn.
+	// +kubebuilder:validation:Optional
+	SecretArnRef *v2.Reference `json:"secretArnRef,omitempty" tf:"-"`
+
+	// Selector for a Secret in secretsmanager to populate secretArn.
+	// +kubebuilder:validation:Optional
+	SecretArnSelector *v2.Selector `json:"secretArnSelector,omitempty" tf:"-"`
+}
+
+type SaslScramObservation struct {
+
+	// The SASL/SCRAM mechanism used for authentication. Valid values are SHA256 and SHA512.
+	Mechanism *string `json:"mechanism,omitempty" tf:"mechanism,omitempty"`
+
+	// The ARN of the AWS Secrets Manager secret that stores the private key and certificate used for mTLS authentication. See Set up prerequisites for MSK Replicator with self-managed Apache Kafka clusters for the required secret contents and format.
+	SecretArn *string `json:"secretArn,omitempty" tf:"secret_arn,omitempty"`
+}
+
+type SaslScramParameters struct {
+
+	// The SASL/SCRAM mechanism used for authentication. Valid values are SHA256 and SHA512.
+	// +kubebuilder:validation:Optional
+	Mechanism *string `json:"mechanism" tf:"mechanism,omitempty"`
+
+	// The ARN of the AWS Secrets Manager secret that stores the private key and certificate used for mTLS authentication. See Set up prerequisites for MSK Replicator with self-managed Apache Kafka clusters for the required secret contents and format.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/secretsmanager/v1beta1.Secret
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
+	// +kubebuilder:validation:Optional
+	SecretArn *string `json:"secretArn,omitempty" tf:"secret_arn,omitempty"`
+
+	// Reference to a Secret in secretsmanager to populate secretArn.
+	// +kubebuilder:validation:Optional
+	SecretArnRef *v2.Reference `json:"secretArnRef,omitempty" tf:"-"`
+
+	// Selector for a Secret in secretsmanager to populate secretArn.
+	// +kubebuilder:validation:Optional
+	SecretArnSelector *v2.Selector `json:"secretArnSelector,omitempty" tf:"-"`
 }
 
 type StartingPositionInitParameters struct {

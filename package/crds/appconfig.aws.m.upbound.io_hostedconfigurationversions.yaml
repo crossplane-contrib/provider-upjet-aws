@@ -255,6 +255,10 @@ spec:
                       Region where this resource will be managed. Defaults to the Region set in the provider configuration.
                       Region is the region you'd like your resource to be created in.
                     type: string
+                  versionLabel:
+                    description: User-defined label for the AppConfig hosted configuration
+                      version. This value must contain at least one non-numeric character.
+                    type: string
                 required:
                 - region
                 type: object
@@ -461,6 +465,10 @@ spec:
                   description:
                     description: Description of the configuration.
                     type: string
+                  versionLabel:
+                    description: User-defined label for the AppConfig hosted configuration
+                      version. This value must contain at least one non-numeric character.
+                    type: string
                 required:
                 - contentSecretRef
                 type: object
@@ -560,6 +568,10 @@ spec:
                     description: |-
                       Region where this resource will be managed. Defaults to the Region set in the provider configuration.
                       Region is the region you'd like your resource to be created in.
+                    type: string
+                  versionLabel:
+                    description: User-defined label for the AppConfig hosted configuration
+                      version. This value must contain at least one non-numeric character.
                     type: string
                   versionNumber:
                     description: Version number of the hosted configuration.

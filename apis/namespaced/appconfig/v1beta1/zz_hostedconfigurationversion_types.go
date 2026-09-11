@@ -49,6 +49,9 @@ type HostedConfigurationVersionInitParameters struct {
 
 	// Description of the configuration.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// User-defined label for the AppConfig hosted configuration version. This value must contain at least one non-numeric character.
+	VersionLabel *string `json:"versionLabel,omitempty" tf:"version_label,omitempty"`
 }
 
 type HostedConfigurationVersionObservation struct {
@@ -74,6 +77,9 @@ type HostedConfigurationVersionObservation struct {
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
+	// User-defined label for the AppConfig hosted configuration version. This value must contain at least one non-numeric character.
+	VersionLabel *string `json:"versionLabel,omitempty" tf:"version_label,omitempty"`
 
 	// Version number of the hosted configuration.
 	VersionNumber *float64 `json:"versionNumber,omitempty" tf:"version_number,omitempty"`
@@ -125,6 +131,10 @@ type HostedConfigurationVersionParameters struct {
 	// Region is the region you'd like your resource to be created in.
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
+
+	// User-defined label for the AppConfig hosted configuration version. This value must contain at least one non-numeric character.
+	// +kubebuilder:validation:Optional
+	VersionLabel *string `json:"versionLabel,omitempty" tf:"version_label,omitempty"`
 }
 
 // HostedConfigurationVersionSpec defines the desired state of HostedConfigurationVersion
