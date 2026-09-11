@@ -859,6 +859,11 @@ import (
 	objectlambdaaccesspoint "github.com/upbound/provider-aws/v2/internal/controller/cluster/s3control/objectlambdaaccesspoint"
 	objectlambdaaccesspointpolicy "github.com/upbound/provider-aws/v2/internal/controller/cluster/s3control/objectlambdaaccesspointpolicy"
 	storagelensconfiguration "github.com/upbound/provider-aws/v2/internal/controller/cluster/s3control/storagelensconfiguration"
+	accesspoints3files "github.com/upbound/provider-aws/v2/internal/controller/cluster/s3files/accesspoint"
+	filesystems3files "github.com/upbound/provider-aws/v2/internal/controller/cluster/s3files/filesystem"
+	filesystempolicys3files "github.com/upbound/provider-aws/v2/internal/controller/cluster/s3files/filesystempolicy"
+	mounttargets3files "github.com/upbound/provider-aws/v2/internal/controller/cluster/s3files/mounttarget"
+	synchronizationconfiguration "github.com/upbound/provider-aws/v2/internal/controller/cluster/s3files/synchronizationconfiguration"
 	indexs3vectors "github.com/upbound/provider-aws/v2/internal/controller/cluster/s3vectors/index"
 	vectorbucket "github.com/upbound/provider-aws/v2/internal/controller/cluster/s3vectors/vectorbucket"
 	vectorbucketpolicy "github.com/upbound/provider-aws/v2/internal/controller/cluster/s3vectors/vectorbucketpolicy"
@@ -1896,6 +1901,11 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		objectlambdaaccesspoint.Setup,
 		objectlambdaaccesspointpolicy.Setup,
 		storagelensconfiguration.Setup,
+		accesspoints3files.Setup,
+		filesystems3files.Setup,
+		filesystempolicys3files.Setup,
+		mounttargets3files.Setup,
+		synchronizationconfiguration.Setup,
 		indexs3vectors.Setup,
 		vectorbucket.Setup,
 		vectorbucketpolicy.Setup,
@@ -2939,6 +2949,11 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		objectlambdaaccesspoint.SetupGated,
 		objectlambdaaccesspointpolicy.SetupGated,
 		storagelensconfiguration.SetupGated,
+		accesspoints3files.SetupGated,
+		filesystems3files.SetupGated,
+		filesystempolicys3files.SetupGated,
+		mounttargets3files.SetupGated,
+		synchronizationconfiguration.SetupGated,
 		indexs3vectors.SetupGated,
 		vectorbucket.SetupGated,
 		vectorbucketpolicy.SetupGated,
@@ -3981,6 +3996,11 @@ func SetupWebhookWithManager_monolith(mgr ctrl.Manager) error {
 		objectlambdaaccesspoint.SetupWebhookWithManager,
 		objectlambdaaccesspointpolicy.SetupWebhookWithManager,
 		storagelensconfiguration.SetupWebhookWithManager,
+		accesspoints3files.SetupWebhookWithManager,
+		filesystems3files.SetupWebhookWithManager,
+		filesystempolicys3files.SetupWebhookWithManager,
+		mounttargets3files.SetupWebhookWithManager,
+		synchronizationconfiguration.SetupWebhookWithManager,
 		indexs3vectors.SetupWebhookWithManager,
 		vectorbucket.SetupWebhookWithManager,
 		vectorbucketpolicy.SetupWebhookWithManager,
