@@ -461,6 +461,26 @@ spec:
                   unit:
                     description: The unit for the alarm's associated metric.
                     type: string
+                  warmUpConfiguration:
+                    description: Warm-up period that delays alarm evaluation after
+                      the alarm is created. During the warm-up period the alarm stays
+                      in INSUFFICIENT_DATA and does not perform alarm actions. See
+                      warm_up_configuration below.
+                    items:
+                      properties:
+                        onlyStartEvaluatingAfterWarmUpPeriodEnds:
+                          description: Whether to wait for the full warm-up period
+                            before evaluation begins, even if metric data arrives
+                            earlier. When false, the warm-up period ends early as
+                            soon as the alarm has enough data to fill its evaluation
+                            window. Defaults to false.
+                          type: boolean
+                        warmUpPeriodDurationInMinutes:
+                          description: Length of the warm-up period, in minutes. Valid
+                            values are 1 to 2880.
+                          type: number
+                      type: object
+                    type: array
                 required:
                 - region
                 type: object
@@ -857,6 +877,26 @@ spec:
                   unit:
                     description: The unit for the alarm's associated metric.
                     type: string
+                  warmUpConfiguration:
+                    description: Warm-up period that delays alarm evaluation after
+                      the alarm is created. During the warm-up period the alarm stays
+                      in INSUFFICIENT_DATA and does not perform alarm actions. See
+                      warm_up_configuration below.
+                    items:
+                      properties:
+                        onlyStartEvaluatingAfterWarmUpPeriodEnds:
+                          description: Whether to wait for the full warm-up period
+                            before evaluation begins, even if metric data arrives
+                            earlier. When false, the warm-up period ends early as
+                            soon as the alarm has enough data to fill its evaluation
+                            window. Defaults to false.
+                          type: boolean
+                        warmUpPeriodDurationInMinutes:
+                          description: Length of the warm-up period, in minutes. Valid
+                            values are 1 to 2880.
+                          type: number
+                      type: object
+                    type: array
                 type: object
               managementPolicies:
                 default:
@@ -1202,6 +1242,26 @@ spec:
                   unit:
                     description: The unit for the alarm's associated metric.
                     type: string
+                  warmUpConfiguration:
+                    description: Warm-up period that delays alarm evaluation after
+                      the alarm is created. During the warm-up period the alarm stays
+                      in INSUFFICIENT_DATA and does not perform alarm actions. See
+                      warm_up_configuration below.
+                    items:
+                      properties:
+                        onlyStartEvaluatingAfterWarmUpPeriodEnds:
+                          description: Whether to wait for the full warm-up period
+                            before evaluation begins, even if metric data arrives
+                            earlier. When false, the warm-up period ends early as
+                            soon as the alarm has enough data to fill its evaluation
+                            window. Defaults to false.
+                          type: boolean
+                        warmUpPeriodDurationInMinutes:
+                          description: Length of the warm-up period, in minutes. Valid
+                            values are 1 to 2880.
+                          type: number
+                      type: object
+                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.

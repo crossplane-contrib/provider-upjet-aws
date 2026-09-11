@@ -55,6 +55,25 @@ type AcceleratorTotalMemoryMibParameters struct {
 	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
 }
 
+type AutoRepairConfigurationInitParameters struct {
+
+	// Whether to use Amazon ECS managed auto repair. Valid values are ENABLED and DISABLED.
+	ActionsStatus *string `json:"actionsStatus,omitempty" tf:"actions_status,omitempty"`
+}
+
+type AutoRepairConfigurationObservation struct {
+
+	// Whether to use Amazon ECS managed auto repair. Valid values are ENABLED and DISABLED.
+	ActionsStatus *string `json:"actionsStatus,omitempty" tf:"actions_status,omitempty"`
+}
+
+type AutoRepairConfigurationParameters struct {
+
+	// Whether to use Amazon ECS managed auto repair. Valid values are ENABLED and DISABLED.
+	// +kubebuilder:validation:Optional
+	ActionsStatus *string `json:"actionsStatus,omitempty" tf:"actions_status,omitempty"`
+}
+
 type AutoScalingGroupProviderInitParameters struct {
 
 	// - ARN of the associated auto scaling group.
@@ -646,6 +665,9 @@ type LocalStorageConfigurationParameters struct {
 
 type ManagedInstancesProviderInitParameters struct {
 
+	// Configuration block for the auto repair configuration. Detailed below.
+	AutoRepairConfiguration []AutoRepairConfigurationInitParameters `json:"autoRepairConfiguration,omitempty" tf:"auto_repair_configuration,omitempty"`
+
 	// Defines how Amazon ECS Managed Instances optimizes the infrastructure in your capacity provider. Configure it to turn on or off the infrastructure optimization in your capacity provider, and to control the idle EC2 instances optimization delay.
 	InfrastructureOptimization []InfrastructureOptimizationInitParameters `json:"infrastructureOptimization,omitempty" tf:"infrastructure_optimization,omitempty"`
 
@@ -661,6 +683,9 @@ type ManagedInstancesProviderInitParameters struct {
 
 type ManagedInstancesProviderObservation struct {
 
+	// Configuration block for the auto repair configuration. Detailed below.
+	AutoRepairConfiguration []AutoRepairConfigurationObservation `json:"autoRepairConfiguration,omitempty" tf:"auto_repair_configuration,omitempty"`
+
 	// Defines how Amazon ECS Managed Instances optimizes the infrastructure in your capacity provider. Configure it to turn on or off the infrastructure optimization in your capacity provider, and to control the idle EC2 instances optimization delay.
 	InfrastructureOptimization []InfrastructureOptimizationObservation `json:"infrastructureOptimization,omitempty" tf:"infrastructure_optimization,omitempty"`
 
@@ -675,6 +700,10 @@ type ManagedInstancesProviderObservation struct {
 }
 
 type ManagedInstancesProviderParameters struct {
+
+	// Configuration block for the auto repair configuration. Detailed below.
+	// +kubebuilder:validation:Optional
+	AutoRepairConfiguration []AutoRepairConfigurationParameters `json:"autoRepairConfiguration,omitempty" tf:"auto_repair_configuration,omitempty"`
 
 	// Defines how Amazon ECS Managed Instances optimizes the infrastructure in your capacity provider. Configure it to turn on or off the infrastructure optimization in your capacity provider, and to control the idle EC2 instances optimization delay.
 	// +kubebuilder:validation:Optional
