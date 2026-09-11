@@ -20954,7 +20954,8 @@ resources:
                 For example: E2QWRUHAPOMQZL.
             iam_arn: |-
                 - A pre-generated ARN for use in S3 bucket policies (see below).
-                Example: arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity E2QWRUHAPOMQZL.
+                Example: arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity
+                 E2QWRUHAPOMQZL.
             id: '- The identifier for the origin access identity.'
             s3_canonical_user_id: |-
                 - The Amazon S3 canonical user ID for the origin
