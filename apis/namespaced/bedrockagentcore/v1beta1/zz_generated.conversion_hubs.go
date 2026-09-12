@@ -19,6 +19,9 @@ func (tr *APIKeyCredentialProvider) Hub() {}
 func (tr *Browser) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *BrowserProfile) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *CodeInterpreter) Hub() {}
 
 // Hub marks this type as a conversion hub.
@@ -26,6 +29,9 @@ func (tr *Evaluator) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *Gateway) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *GatewayRule) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *GatewayTarget) Hub() {}
