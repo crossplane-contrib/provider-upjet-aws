@@ -138,9 +138,11 @@ import (
 	agentruntimeendpoint "github.com/upbound/provider-aws/v2/internal/controller/cluster/bedrockagentcore/agentruntimeendpoint"
 	apikeycredentialprovider "github.com/upbound/provider-aws/v2/internal/controller/cluster/bedrockagentcore/apikeycredentialprovider"
 	browser "github.com/upbound/provider-aws/v2/internal/controller/cluster/bedrockagentcore/browser"
+	browserprofile "github.com/upbound/provider-aws/v2/internal/controller/cluster/bedrockagentcore/browserprofile"
 	codeinterpreter "github.com/upbound/provider-aws/v2/internal/controller/cluster/bedrockagentcore/codeinterpreter"
 	evaluator "github.com/upbound/provider-aws/v2/internal/controller/cluster/bedrockagentcore/evaluator"
 	gateway "github.com/upbound/provider-aws/v2/internal/controller/cluster/bedrockagentcore/gateway"
+	gatewayrule "github.com/upbound/provider-aws/v2/internal/controller/cluster/bedrockagentcore/gatewayrule"
 	gatewaytarget "github.com/upbound/provider-aws/v2/internal/controller/cluster/bedrockagentcore/gatewaytarget"
 	harness "github.com/upbound/provider-aws/v2/internal/controller/cluster/bedrockagentcore/harness"
 	memory "github.com/upbound/provider-aws/v2/internal/controller/cluster/bedrockagentcore/memory"
@@ -1175,9 +1177,11 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		agentruntimeendpoint.Setup,
 		apikeycredentialprovider.Setup,
 		browser.Setup,
+		browserprofile.Setup,
 		codeinterpreter.Setup,
 		evaluator.Setup,
 		gateway.Setup,
+		gatewayrule.Setup,
 		gatewaytarget.Setup,
 		harness.Setup,
 		memory.Setup,
@@ -2218,9 +2222,11 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		agentruntimeendpoint.SetupGated,
 		apikeycredentialprovider.SetupGated,
 		browser.SetupGated,
+		browserprofile.SetupGated,
 		codeinterpreter.SetupGated,
 		evaluator.SetupGated,
 		gateway.SetupGated,
+		gatewayrule.SetupGated,
 		gatewaytarget.SetupGated,
 		harness.SetupGated,
 		memory.SetupGated,
@@ -3260,9 +3266,11 @@ func SetupWebhookWithManager_monolith(mgr ctrl.Manager) error {
 		agentruntimeendpoint.SetupWebhookWithManager,
 		apikeycredentialprovider.SetupWebhookWithManager,
 		browser.SetupWebhookWithManager,
+		browserprofile.SetupWebhookWithManager,
 		codeinterpreter.SetupWebhookWithManager,
 		evaluator.SetupWebhookWithManager,
 		gateway.SetupWebhookWithManager,
+		gatewayrule.SetupWebhookWithManager,
 		gatewaytarget.SetupWebhookWithManager,
 		harness.SetupWebhookWithManager,
 		memory.SetupWebhookWithManager,

@@ -431,6 +431,56 @@ func (mg *Replicator) ResolveReferences(ctx context.Context, c client.Reader) er
 		}
 	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.KafkaCluster); i3++ {
+		if mg.Spec.ForProvider.KafkaCluster[i3].ClientAuthentication != nil {
+			if mg.Spec.ForProvider.KafkaCluster[i3].ClientAuthentication.SaslScram != nil {
+				{
+					m, l, err = apisresolver.GetManagedResource("secretsmanager.aws.m.upbound.io", "v1beta1", "Secret", "SecretList")
+					if err != nil {
+						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					}
+					rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KafkaCluster[i3].ClientAuthentication.SaslScram.SecretArn),
+						Extract:      resource.ExtractParamPath("arn", true),
+						Namespace:    mg.GetNamespace(),
+						Reference:    mg.Spec.ForProvider.KafkaCluster[i3].ClientAuthentication.SaslScram.SecretArnRef,
+						Selector:     mg.Spec.ForProvider.KafkaCluster[i3].ClientAuthentication.SaslScram.SecretArnSelector,
+						To:           reference.To{List: l, Managed: m},
+					})
+				}
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.ForProvider.KafkaCluster[i3].ClientAuthentication.SaslScram.SecretArn")
+				}
+				mg.Spec.ForProvider.KafkaCluster[i3].ClientAuthentication.SaslScram.SecretArn = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.ForProvider.KafkaCluster[i3].ClientAuthentication.SaslScram.SecretArnRef = rsp.ResolvedReference
+
+			}
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.KafkaCluster); i3++ {
+		if mg.Spec.ForProvider.KafkaCluster[i3].EncryptionInTransit != nil {
+			{
+				m, l, err = apisresolver.GetManagedResource("secretsmanager.aws.m.upbound.io", "v1beta1", "Secret", "SecretList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KafkaCluster[i3].EncryptionInTransit.RootCACertificate),
+					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
+					Reference:    mg.Spec.ForProvider.KafkaCluster[i3].EncryptionInTransit.RootCACertificateRef,
+					Selector:     mg.Spec.ForProvider.KafkaCluster[i3].EncryptionInTransit.RootCACertificateSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.KafkaCluster[i3].EncryptionInTransit.RootCACertificate")
+			}
+			mg.Spec.ForProvider.KafkaCluster[i3].EncryptionInTransit.RootCACertificate = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.KafkaCluster[i3].EncryptionInTransit.RootCACertificateRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.KafkaCluster); i3++ {
 		if mg.Spec.ForProvider.KafkaCluster[i3].VPCConfig != nil {
 			{
 				m, l, err = apisresolver.GetManagedResource("ec2.aws.m.upbound.io", "v1beta1", "SecurityGroup", "SecurityGroupList")
@@ -476,6 +526,84 @@ func (mg *Replicator) ResolveReferences(ctx context.Context, c client.Reader) er
 			mg.Spec.ForProvider.KafkaCluster[i3].VPCConfig.SubnetIds = reference.ToPtrValues(mrsp.ResolvedValues)
 			mg.Spec.ForProvider.KafkaCluster[i3].VPCConfig.SubnetIdsRefs = mrsp.ResolvedReferences
 
+		}
+	}
+	if mg.Spec.ForProvider.LogDelivery != nil {
+		if mg.Spec.ForProvider.LogDelivery.ReplicatorLogDelivery != nil {
+			if mg.Spec.ForProvider.LogDelivery.ReplicatorLogDelivery.CloudwatchLogs != nil {
+				{
+					m, l, err = apisresolver.GetManagedResource("cloudwatchlogs.aws.m.upbound.io", "v1beta1", "Group", "GroupList")
+					if err != nil {
+						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					}
+					rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LogDelivery.ReplicatorLogDelivery.CloudwatchLogs.LogGroup),
+						Extract:      reference.ExternalName(),
+						Namespace:    mg.GetNamespace(),
+						Reference:    mg.Spec.ForProvider.LogDelivery.ReplicatorLogDelivery.CloudwatchLogs.LogGroupRef,
+						Selector:     mg.Spec.ForProvider.LogDelivery.ReplicatorLogDelivery.CloudwatchLogs.LogGroupSelector,
+						To:           reference.To{List: l, Managed: m},
+					})
+				}
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.ForProvider.LogDelivery.ReplicatorLogDelivery.CloudwatchLogs.LogGroup")
+				}
+				mg.Spec.ForProvider.LogDelivery.ReplicatorLogDelivery.CloudwatchLogs.LogGroup = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.ForProvider.LogDelivery.ReplicatorLogDelivery.CloudwatchLogs.LogGroupRef = rsp.ResolvedReference
+
+			}
+		}
+	}
+	if mg.Spec.ForProvider.LogDelivery != nil {
+		if mg.Spec.ForProvider.LogDelivery.ReplicatorLogDelivery != nil {
+			if mg.Spec.ForProvider.LogDelivery.ReplicatorLogDelivery.Firehose != nil {
+				{
+					m, l, err = apisresolver.GetManagedResource("firehose.aws.m.upbound.io", "v1beta1", "DeliveryStream", "DeliveryStreamList")
+					if err != nil {
+						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					}
+					rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LogDelivery.ReplicatorLogDelivery.Firehose.DeliveryStream),
+						Extract:      resource.ExtractParamPath("name", false),
+						Namespace:    mg.GetNamespace(),
+						Reference:    mg.Spec.ForProvider.LogDelivery.ReplicatorLogDelivery.Firehose.DeliveryStreamRef,
+						Selector:     mg.Spec.ForProvider.LogDelivery.ReplicatorLogDelivery.Firehose.DeliveryStreamSelector,
+						To:           reference.To{List: l, Managed: m},
+					})
+				}
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.ForProvider.LogDelivery.ReplicatorLogDelivery.Firehose.DeliveryStream")
+				}
+				mg.Spec.ForProvider.LogDelivery.ReplicatorLogDelivery.Firehose.DeliveryStream = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.ForProvider.LogDelivery.ReplicatorLogDelivery.Firehose.DeliveryStreamRef = rsp.ResolvedReference
+
+			}
+		}
+	}
+	if mg.Spec.ForProvider.LogDelivery != nil {
+		if mg.Spec.ForProvider.LogDelivery.ReplicatorLogDelivery != nil {
+			if mg.Spec.ForProvider.LogDelivery.ReplicatorLogDelivery.S3 != nil {
+				{
+					m, l, err = apisresolver.GetManagedResource("s3.aws.m.upbound.io", "v1beta1", "Bucket", "BucketList")
+					if err != nil {
+						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					}
+					rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LogDelivery.ReplicatorLogDelivery.S3.Bucket),
+						Extract:      reference.ExternalName(),
+						Namespace:    mg.GetNamespace(),
+						Reference:    mg.Spec.ForProvider.LogDelivery.ReplicatorLogDelivery.S3.BucketRef,
+						Selector:     mg.Spec.ForProvider.LogDelivery.ReplicatorLogDelivery.S3.BucketSelector,
+						To:           reference.To{List: l, Managed: m},
+					})
+				}
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.ForProvider.LogDelivery.ReplicatorLogDelivery.S3.Bucket")
+				}
+				mg.Spec.ForProvider.LogDelivery.ReplicatorLogDelivery.S3.Bucket = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.ForProvider.LogDelivery.ReplicatorLogDelivery.S3.BucketRef = rsp.ResolvedReference
+
+			}
 		}
 	}
 	if mg.Spec.ForProvider.ReplicationInfoList != nil {
@@ -567,6 +695,56 @@ func (mg *Replicator) ResolveReferences(ctx context.Context, c client.Reader) er
 		}
 	}
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.KafkaCluster); i3++ {
+		if mg.Spec.InitProvider.KafkaCluster[i3].ClientAuthentication != nil {
+			if mg.Spec.InitProvider.KafkaCluster[i3].ClientAuthentication.SaslScram != nil {
+				{
+					m, l, err = apisresolver.GetManagedResource("secretsmanager.aws.m.upbound.io", "v1beta1", "Secret", "SecretList")
+					if err != nil {
+						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					}
+					rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KafkaCluster[i3].ClientAuthentication.SaslScram.SecretArn),
+						Extract:      resource.ExtractParamPath("arn", true),
+						Namespace:    mg.GetNamespace(),
+						Reference:    mg.Spec.InitProvider.KafkaCluster[i3].ClientAuthentication.SaslScram.SecretArnRef,
+						Selector:     mg.Spec.InitProvider.KafkaCluster[i3].ClientAuthentication.SaslScram.SecretArnSelector,
+						To:           reference.To{List: l, Managed: m},
+					})
+				}
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.InitProvider.KafkaCluster[i3].ClientAuthentication.SaslScram.SecretArn")
+				}
+				mg.Spec.InitProvider.KafkaCluster[i3].ClientAuthentication.SaslScram.SecretArn = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.InitProvider.KafkaCluster[i3].ClientAuthentication.SaslScram.SecretArnRef = rsp.ResolvedReference
+
+			}
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.KafkaCluster); i3++ {
+		if mg.Spec.InitProvider.KafkaCluster[i3].EncryptionInTransit != nil {
+			{
+				m, l, err = apisresolver.GetManagedResource("secretsmanager.aws.m.upbound.io", "v1beta1", "Secret", "SecretList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KafkaCluster[i3].EncryptionInTransit.RootCACertificate),
+					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
+					Reference:    mg.Spec.InitProvider.KafkaCluster[i3].EncryptionInTransit.RootCACertificateRef,
+					Selector:     mg.Spec.InitProvider.KafkaCluster[i3].EncryptionInTransit.RootCACertificateSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.KafkaCluster[i3].EncryptionInTransit.RootCACertificate")
+			}
+			mg.Spec.InitProvider.KafkaCluster[i3].EncryptionInTransit.RootCACertificate = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.KafkaCluster[i3].EncryptionInTransit.RootCACertificateRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.KafkaCluster); i3++ {
 		if mg.Spec.InitProvider.KafkaCluster[i3].VPCConfig != nil {
 			{
 				m, l, err = apisresolver.GetManagedResource("ec2.aws.m.upbound.io", "v1beta1", "SecurityGroup", "SecurityGroupList")
@@ -612,6 +790,84 @@ func (mg *Replicator) ResolveReferences(ctx context.Context, c client.Reader) er
 			mg.Spec.InitProvider.KafkaCluster[i3].VPCConfig.SubnetIds = reference.ToPtrValues(mrsp.ResolvedValues)
 			mg.Spec.InitProvider.KafkaCluster[i3].VPCConfig.SubnetIdsRefs = mrsp.ResolvedReferences
 
+		}
+	}
+	if mg.Spec.InitProvider.LogDelivery != nil {
+		if mg.Spec.InitProvider.LogDelivery.ReplicatorLogDelivery != nil {
+			if mg.Spec.InitProvider.LogDelivery.ReplicatorLogDelivery.CloudwatchLogs != nil {
+				{
+					m, l, err = apisresolver.GetManagedResource("cloudwatchlogs.aws.m.upbound.io", "v1beta1", "Group", "GroupList")
+					if err != nil {
+						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					}
+					rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LogDelivery.ReplicatorLogDelivery.CloudwatchLogs.LogGroup),
+						Extract:      reference.ExternalName(),
+						Namespace:    mg.GetNamespace(),
+						Reference:    mg.Spec.InitProvider.LogDelivery.ReplicatorLogDelivery.CloudwatchLogs.LogGroupRef,
+						Selector:     mg.Spec.InitProvider.LogDelivery.ReplicatorLogDelivery.CloudwatchLogs.LogGroupSelector,
+						To:           reference.To{List: l, Managed: m},
+					})
+				}
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.InitProvider.LogDelivery.ReplicatorLogDelivery.CloudwatchLogs.LogGroup")
+				}
+				mg.Spec.InitProvider.LogDelivery.ReplicatorLogDelivery.CloudwatchLogs.LogGroup = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.InitProvider.LogDelivery.ReplicatorLogDelivery.CloudwatchLogs.LogGroupRef = rsp.ResolvedReference
+
+			}
+		}
+	}
+	if mg.Spec.InitProvider.LogDelivery != nil {
+		if mg.Spec.InitProvider.LogDelivery.ReplicatorLogDelivery != nil {
+			if mg.Spec.InitProvider.LogDelivery.ReplicatorLogDelivery.Firehose != nil {
+				{
+					m, l, err = apisresolver.GetManagedResource("firehose.aws.m.upbound.io", "v1beta1", "DeliveryStream", "DeliveryStreamList")
+					if err != nil {
+						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					}
+					rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LogDelivery.ReplicatorLogDelivery.Firehose.DeliveryStream),
+						Extract:      resource.ExtractParamPath("name", false),
+						Namespace:    mg.GetNamespace(),
+						Reference:    mg.Spec.InitProvider.LogDelivery.ReplicatorLogDelivery.Firehose.DeliveryStreamRef,
+						Selector:     mg.Spec.InitProvider.LogDelivery.ReplicatorLogDelivery.Firehose.DeliveryStreamSelector,
+						To:           reference.To{List: l, Managed: m},
+					})
+				}
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.InitProvider.LogDelivery.ReplicatorLogDelivery.Firehose.DeliveryStream")
+				}
+				mg.Spec.InitProvider.LogDelivery.ReplicatorLogDelivery.Firehose.DeliveryStream = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.InitProvider.LogDelivery.ReplicatorLogDelivery.Firehose.DeliveryStreamRef = rsp.ResolvedReference
+
+			}
+		}
+	}
+	if mg.Spec.InitProvider.LogDelivery != nil {
+		if mg.Spec.InitProvider.LogDelivery.ReplicatorLogDelivery != nil {
+			if mg.Spec.InitProvider.LogDelivery.ReplicatorLogDelivery.S3 != nil {
+				{
+					m, l, err = apisresolver.GetManagedResource("s3.aws.m.upbound.io", "v1beta1", "Bucket", "BucketList")
+					if err != nil {
+						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					}
+					rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LogDelivery.ReplicatorLogDelivery.S3.Bucket),
+						Extract:      reference.ExternalName(),
+						Namespace:    mg.GetNamespace(),
+						Reference:    mg.Spec.InitProvider.LogDelivery.ReplicatorLogDelivery.S3.BucketRef,
+						Selector:     mg.Spec.InitProvider.LogDelivery.ReplicatorLogDelivery.S3.BucketSelector,
+						To:           reference.To{List: l, Managed: m},
+					})
+				}
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.InitProvider.LogDelivery.ReplicatorLogDelivery.S3.Bucket")
+				}
+				mg.Spec.InitProvider.LogDelivery.ReplicatorLogDelivery.S3.Bucket = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.InitProvider.LogDelivery.ReplicatorLogDelivery.S3.BucketRef = rsp.ResolvedReference
+
+			}
 		}
 	}
 	if mg.Spec.InitProvider.ReplicationInfoList != nil {
