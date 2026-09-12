@@ -43,6 +43,15 @@ func (l *BrowserList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this BrowserProfileList.
+func (l *BrowserProfileList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this CodeInterpreterList.
 func (l *CodeInterpreterList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -63,6 +72,15 @@ func (l *EvaluatorList) GetItems() []resource.Managed {
 
 // GetItems of this GatewayList.
 func (l *GatewayList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this GatewayRuleList.
+func (l *GatewayRuleList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]

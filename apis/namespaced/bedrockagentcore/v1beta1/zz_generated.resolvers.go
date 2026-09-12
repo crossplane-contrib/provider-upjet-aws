@@ -747,6 +747,166 @@ func (mg *Gateway) ResolveReferences(ctx context.Context, c client.Reader) error
 	return nil
 }
 
+// ResolveReferences of this GatewayRule.
+func (mg *GatewayRule) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPINamespacedResolver(c, mg)
+
+	var rsp reference.NamespacedResolutionResponse
+	var err error
+
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Action); i3++ {
+		if mg.Spec.ForProvider.Action[i3].RouteToTarget != nil {
+			if mg.Spec.ForProvider.Action[i3].RouteToTarget.StaticRoute != nil {
+				{
+					m, l, err = apisresolver.GetManagedResource("bedrockagentcore.aws.m.upbound.io", "v1beta1", "GatewayTarget", "GatewayTargetList")
+					if err != nil {
+						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					}
+					rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Action[i3].RouteToTarget.StaticRoute.TargetName),
+						Extract:      resource.ExtractParamPath("name", false),
+						Namespace:    mg.GetNamespace(),
+						Reference:    mg.Spec.ForProvider.Action[i3].RouteToTarget.StaticRoute.TargetNameRef,
+						Selector:     mg.Spec.ForProvider.Action[i3].RouteToTarget.StaticRoute.TargetNameSelector,
+						To:           reference.To{List: l, Managed: m},
+					})
+				}
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.ForProvider.Action[i3].RouteToTarget.StaticRoute.TargetName")
+				}
+				mg.Spec.ForProvider.Action[i3].RouteToTarget.StaticRoute.TargetName = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.ForProvider.Action[i3].RouteToTarget.StaticRoute.TargetNameRef = rsp.ResolvedReference
+
+			}
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Action); i3++ {
+		if mg.Spec.ForProvider.Action[i3].RouteToTarget != nil {
+			if mg.Spec.ForProvider.Action[i3].RouteToTarget.WeightedRoute != nil {
+				for i6 := 0; i6 < len(mg.Spec.ForProvider.Action[i3].RouteToTarget.WeightedRoute.TrafficSplit); i6++ {
+					{
+						m, l, err = apisresolver.GetManagedResource("bedrockagentcore.aws.m.upbound.io", "v1beta1", "GatewayTarget", "GatewayTargetList")
+						if err != nil {
+							return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+						}
+						rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+							CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Action[i3].RouteToTarget.WeightedRoute.TrafficSplit[i6].TargetName),
+							Extract:      resource.ExtractParamPath("name", false),
+							Namespace:    mg.GetNamespace(),
+							Reference:    mg.Spec.ForProvider.Action[i3].RouteToTarget.WeightedRoute.TrafficSplit[i6].TargetNameRef,
+							Selector:     mg.Spec.ForProvider.Action[i3].RouteToTarget.WeightedRoute.TrafficSplit[i6].TargetNameSelector,
+							To:           reference.To{List: l, Managed: m},
+						})
+					}
+					if err != nil {
+						return errors.Wrap(err, "mg.Spec.ForProvider.Action[i3].RouteToTarget.WeightedRoute.TrafficSplit[i6].TargetName")
+					}
+					mg.Spec.ForProvider.Action[i3].RouteToTarget.WeightedRoute.TrafficSplit[i6].TargetName = reference.ToPtrValue(rsp.ResolvedValue)
+					mg.Spec.ForProvider.Action[i3].RouteToTarget.WeightedRoute.TrafficSplit[i6].TargetNameRef = rsp.ResolvedReference
+
+				}
+			}
+		}
+	}
+	{
+		m, l, err = apisresolver.GetManagedResource("bedrockagentcore.aws.m.upbound.io", "v1beta1", "Gateway", "GatewayList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.GatewayIdentifier),
+			Extract:      resource.ExtractParamPath("gateway_id", true),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.GatewayIdentifierRef,
+			Selector:     mg.Spec.ForProvider.GatewayIdentifierSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.GatewayIdentifier")
+	}
+	mg.Spec.ForProvider.GatewayIdentifier = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.GatewayIdentifierRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Action); i3++ {
+		if mg.Spec.InitProvider.Action[i3].RouteToTarget != nil {
+			if mg.Spec.InitProvider.Action[i3].RouteToTarget.StaticRoute != nil {
+				{
+					m, l, err = apisresolver.GetManagedResource("bedrockagentcore.aws.m.upbound.io", "v1beta1", "GatewayTarget", "GatewayTargetList")
+					if err != nil {
+						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					}
+					rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Action[i3].RouteToTarget.StaticRoute.TargetName),
+						Extract:      resource.ExtractParamPath("name", false),
+						Namespace:    mg.GetNamespace(),
+						Reference:    mg.Spec.InitProvider.Action[i3].RouteToTarget.StaticRoute.TargetNameRef,
+						Selector:     mg.Spec.InitProvider.Action[i3].RouteToTarget.StaticRoute.TargetNameSelector,
+						To:           reference.To{List: l, Managed: m},
+					})
+				}
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.InitProvider.Action[i3].RouteToTarget.StaticRoute.TargetName")
+				}
+				mg.Spec.InitProvider.Action[i3].RouteToTarget.StaticRoute.TargetName = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.InitProvider.Action[i3].RouteToTarget.StaticRoute.TargetNameRef = rsp.ResolvedReference
+
+			}
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Action); i3++ {
+		if mg.Spec.InitProvider.Action[i3].RouteToTarget != nil {
+			if mg.Spec.InitProvider.Action[i3].RouteToTarget.WeightedRoute != nil {
+				for i6 := 0; i6 < len(mg.Spec.InitProvider.Action[i3].RouteToTarget.WeightedRoute.TrafficSplit); i6++ {
+					{
+						m, l, err = apisresolver.GetManagedResource("bedrockagentcore.aws.m.upbound.io", "v1beta1", "GatewayTarget", "GatewayTargetList")
+						if err != nil {
+							return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+						}
+						rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+							CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Action[i3].RouteToTarget.WeightedRoute.TrafficSplit[i6].TargetName),
+							Extract:      resource.ExtractParamPath("name", false),
+							Namespace:    mg.GetNamespace(),
+							Reference:    mg.Spec.InitProvider.Action[i3].RouteToTarget.WeightedRoute.TrafficSplit[i6].TargetNameRef,
+							Selector:     mg.Spec.InitProvider.Action[i3].RouteToTarget.WeightedRoute.TrafficSplit[i6].TargetNameSelector,
+							To:           reference.To{List: l, Managed: m},
+						})
+					}
+					if err != nil {
+						return errors.Wrap(err, "mg.Spec.InitProvider.Action[i3].RouteToTarget.WeightedRoute.TrafficSplit[i6].TargetName")
+					}
+					mg.Spec.InitProvider.Action[i3].RouteToTarget.WeightedRoute.TrafficSplit[i6].TargetName = reference.ToPtrValue(rsp.ResolvedValue)
+					mg.Spec.InitProvider.Action[i3].RouteToTarget.WeightedRoute.TrafficSplit[i6].TargetNameRef = rsp.ResolvedReference
+
+				}
+			}
+		}
+	}
+	{
+		m, l, err = apisresolver.GetManagedResource("bedrockagentcore.aws.m.upbound.io", "v1beta1", "Gateway", "GatewayList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.GatewayIdentifier),
+			Extract:      resource.ExtractParamPath("gateway_id", true),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.GatewayIdentifierRef,
+			Selector:     mg.Spec.InitProvider.GatewayIdentifierSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.GatewayIdentifier")
+	}
+	mg.Spec.InitProvider.GatewayIdentifier = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.GatewayIdentifierRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this GatewayTarget.
 func (mg *GatewayTarget) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed

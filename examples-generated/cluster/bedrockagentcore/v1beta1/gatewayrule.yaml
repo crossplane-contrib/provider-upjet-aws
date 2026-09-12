@@ -1,0 +1,27 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
+apiVersion: bedrockagentcore.aws.upbound.io/v1beta1
+kind: GatewayRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrockagentcore/v1beta1/gatewayrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    action:
+    - routeToTarget:
+        staticRoute:
+          targetNameSelector:
+            matchLabels:
+              testing.upbound.io/example-name: example
+    description: Route all requests to the primary target
+    gatewayIdentifierSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    priority: 100
+    region: us-west-1
