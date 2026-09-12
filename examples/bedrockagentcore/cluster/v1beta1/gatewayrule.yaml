@@ -1,0 +1,108 @@
+# SPDX-FileCopyrightText: 2026 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+# Gateway Rule Example
+# Routes matching requests of a Bedrock AgentCore Gateway to a single HTTP
+# gateway target, restricted to the /api/* path prefix.
+
+apiVersion: bedrockagentcore.aws.upbound.io/v1beta1
+kind: GatewayRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrockagentcore/v1beta1/gatewayrule
+  labels:
+    testing.upbound.io/example-name: gatewayrule
+  name: gatewayrule
+spec:
+  forProvider:
+    region: us-west-2
+    description: Route all /api requests to the primary target
+    priority: 100
+    gatewayIdentifierSelector:
+      matchLabels:
+        testing.upbound.io/example-name: gateway
+    action:
+    - routeToTarget:
+        staticRoute:
+          targetName: example-target-gr17348
+    # matchPaths patterns must be of the form /<segment>/* and must match a path
+    # exposed by a target on the gateway, otherwise the create call fails with a
+    # ValidationException. The target below serves /api/users/{userId}.
+    condition:
+    - matchPrincipals:
+        anyOf:
+          - iamPrincipal:
+              arn: "arn:aws:iam::123456789012:role/some-xp-role"
+              operator: StringEquals
+---
+apiVersion: bedrockagentcore.aws.upbound.io/v1beta1
+kind: GatewayTarget
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrockagentcore/v1beta1/gatewayrule
+  labels:
+    testing.upbound.io/example-name: gatewaytarget
+  name: gatewayrule-target
+spec:
+  forProvider:
+    region: us-west-2
+    name: example-target-gr17348
+    description: HTTP passthrough target routed to by the gateway rule
+    gatewayIdentifierSelector:
+      matchLabels:
+        testing.upbound.io/example-name: gateway
+    credentialProviderConfiguration:
+      apiKey:
+        providerArn: "arn:aws:iam::123456789012:oidc-provider/example.com"
+    targetConfiguration:
+      http:
+        passthrough:
+          endpoint: https://example.com/api
+          protocolType: CUSTOM
+          schema:
+            source:
+              inlinePayload:
+                payload: |
+                  {"openapi":"3.0.0","info":{"title":"User Service API","version":"1.0.0"},"servers":[{"url":"https://example.com"}],"paths":{"/api/users/{userId}":{"get":{"operationId":"getUserById","summary":"Get a user by ID","parameters":[{"name":"userId","in":"path","required":true,"schema":{"type":"string"},"description":"ID of the user"}],"responses":{"200":{"description":"User response","content":{"application/json":{"schema":{"$ref":"#/components/schemas/User"}}}}}}}},"components":{"schemas":{"User":{"type":"object","required":["id","name"],"properties":{"id":{"type":"string"},"name":{"type":"string"},"email":{"type":"string"}}}}}}
+---
+apiVersion: bedrockagentcore.aws.upbound.io/v1beta1
+kind: Gateway
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrockagentcore/v1beta1/gatewayrule
+  labels:
+    testing.upbound.io/example-name: gateway
+  name: gatewayrule-gateway
+spec:
+  forProvider:
+    region: us-west-2
+    name: example-gateway-gr
+    authorizerType: AWS_IAM
+    # protocolType is intentionally omitted: HTTP targets can only be attached
+    # to gateways without a protocol type, they are not supported on MCP gateways.
+    roleArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: bedrock-agentcore-gateway-role
+---
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrockagentcore/v1beta1/gatewayrule
+  labels:
+    testing.upbound.io/example-name: bedrock-agentcore-gateway-role
+  name: bedrock-agentcore-gateway-role-gr
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {"Service": "bedrock-agentcore.amazonaws.com"},
+            "Action": "sts:AssumeRole"
+          }
+        ]
+      }
