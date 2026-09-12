@@ -117,6 +117,20 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		r.AddSingletonListConversion("protocol_configuration[*].mcp[*].session_configuration", "protocolConfiguration[*].mcp[*].sessionConfiguration")
 		r.AddSingletonListConversion("protocol_configuration[*].mcp[*].streaming_configuration", "protocolConfiguration[*].mcp[*].streamingConfiguration")
 	})
+	// aws_bedrockagentcore_gateway_rule
+	p.AddResourceConfigurator("aws_bedrockagentcore_gateway_rule", func(r *config.Resource) {
+		r.AddSingletonListConversion("action[*].configuration_bundle", "action[*].configurationBundle")
+		r.AddSingletonListConversion("action[*].configuration_bundle[*].static_override", "action[*].configurationBundle[*].staticOverride")
+		r.AddSingletonListConversion("action[*].configuration_bundle[*].weighted_override", "action[*].configurationBundle[*].weightedOverride")
+		r.AddSingletonListConversion("action[*].configuration_bundle[*].weighted_override[*].traffic_split[*].configuration_bundle", "action[*].configurationBundle[*].weightedOverride[*].trafficSplit[*].configurationBundle")
+		r.AddSingletonListConversion("action[*].route_to_target", "action[*].routeToTarget")
+		r.AddSingletonListConversion("action[*].route_to_target[*].static_route", "action[*].routeToTarget[*].staticRoute")
+		r.AddSingletonListConversion("action[*].route_to_target[*].weighted_route", "action[*].routeToTarget[*].weightedRoute")
+		r.AddSingletonListConversion("condition[*].match_paths", "condition[*].matchPaths")
+		r.AddSingletonListConversion("condition[*].match_principals", "condition[*].matchPrincipals")
+		r.AddSingletonListConversion("condition[*].match_principals[*].any_of[*].iam_principal", "condition[*].matchPrincipals[*].anyOf[*].iamPrincipal")
+	})
+
 	// aws_bedrockagentcore_gateway_target
 	p.AddResourceConfigurator("aws_bedrockagentcore_gateway_target", func(r *config.Resource) {
 		r.References["credential_provider_configuration.oauth.provider_arn"] = config.Reference{
