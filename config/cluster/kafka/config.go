@@ -8,6 +8,7 @@ import (
 	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	"github.com/crossplane/upjet/v2/pkg/config"
 	"github.com/crossplane/upjet/v2/pkg/config/conversion"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
 
 	"github.com/upbound/provider-aws/v2/apis/cluster/kafka/v1beta1"
 	"github.com/upbound/provider-aws/v2/apis/cluster/kafka/v1beta2"
@@ -265,6 +266,13 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 			TerraformName: "aws_secretsmanager_secret",
 			Extractor:     common.PathARNExtractor,
 		}
+		r.TerraformCustomDiff = func(diff *terraform.InstanceDiff, _ *terraform.InstanceState, _ *terraform.ResourceConfig) (*terraform.InstanceDiff, error) {
+			if diff == nil || len(diff.Attributes) == 0 || diff.Destroy {
+				return diff, nil
+			}
+			suppressKafkaReplicatorDiff(diff)
+			return diff, nil
+		}
 	})
 	p.AddResourceConfigurator("aws_msk_vpc_connection", func(r *config.Resource) {
 		r.References["target_cluster_arn"] = config.Reference{
@@ -281,4 +289,20 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 			TerraformName: "aws_security_group",
 		}
 	})
+}
+
+func suppressKafkaReplicatorDiff(diff *terraform.InstanceDiff) {
+	fields := []string{
+		"kafka_cluster.0.apache_kafka_cluster.#",
+		"kafka_cluster.0.client_authentication.#",
+		"kafka_cluster.0.encryption_in_transit.#",
+		"kafka_cluster.1.apache_kafka_cluster.#",
+		"kafka_cluster.1.client_authentication.#",
+		"kafka_cluster.1.encryption_in_transit.#",
+	}
+	for _, field := range fields {
+		if fd, ok := diff.Attributes[field]; ok && fd.Old == "1" && fd.New == "0" && fd.RequiresNew {
+			delete(diff.Attributes, field)
+		}
+	}
 }
