@@ -63,6 +63,10 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		r.References["kafka_cluster.vpc_config.subnet_ids"] = config.Reference{
 			TerraformName: "aws_subnet",
 		}
+		r.References["kafka_cluster.client_authentication.mtls.secret_arn"] = config.Reference{
+			TerraformName: "aws_secretsmanager_secret",
+			Extractor:     common.PathARNExtractor,
+		}
 	})
 	p.AddResourceConfigurator("aws_msk_vpc_connection", func(r *config.Resource) {
 		r.References["target_cluster_arn"] = config.Reference{
