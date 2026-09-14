@@ -313,6 +313,121 @@ resources:
             tags_all: '- Map of tags assigned to the Application, including those inherited from the provider default_tags configuration block.'
             tenant_id: '- Internal tenant identifier returned by the service.'
         importStatements: []
+    aws_accountaccess_entitlement:
+        subCategory: Account Access
+        description: Manages an AWS Account Access Entitlement granting an Identity Center principal access to an IAM role in a target account.
+        name: aws_accountaccess_entitlement
+        title: aws_accountaccess_entitlement
+        examples:
+            - name: example
+              manifest: |-
+                {
+                  "application_arn": "${aws_accountaccess_application.example.arn}",
+                  "entitlement": [
+                    {
+                      "principal_role": [
+                        {
+                          "principal": [
+                            {
+                              "identity_center": [
+                                {
+                                  "user_id": "11111111-2222-3333-4444-555555555555"
+                                }
+                              ]
+                            }
+                          ],
+                          "role_arn": "arn:aws:iam::123456789012:role/Developer"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              references:
+                application_arn: aws_accountaccess_application.example.arn
+            - name: example
+              manifest: |-
+                {
+                  "application_arn": "${aws_accountaccess_application.example.arn}",
+                  "entitlement": [
+                    {
+                      "principal_role": [
+                        {
+                          "principal": [
+                            {
+                              "identity_center": [
+                                {
+                                  "group_id": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
+                                }
+                              ]
+                            }
+                          ],
+                          "role_arn": "arn:aws:iam::123456789012:role/Engineering"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              references:
+                application_arn: aws_accountaccess_application.example.arn
+            - name: example
+              manifest: |-
+                {
+                  "application_arn": "${aws_accountaccess_application.example.arn}",
+                  "entitlement": [
+                    {
+                      "principal_role": [
+                        {
+                          "principal": [
+                            {
+                              "identity_center": [
+                                {
+                                  "user_id": "11111111-2222-3333-4444-555555555555"
+                                }
+                              ]
+                            }
+                          ],
+                          "role_arn": "${aws_iam_role.target.arn}"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              references:
+                application_arn: aws_accountaccess_application.example.arn
+                entitlement.principal_role.role_arn: aws_iam_role.target.arn
+              dependencies:
+                aws_accountaccess_application.example: |-
+                    {
+                      "identity_source": [
+                        {
+                          "identity_center": [
+                            {
+                              "instance_arn": "${tolist(data.aws_ssoadmin_instances.example.arns)[0]}"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                aws_iam_role.target: |-
+                    {
+                      "assume_role_policy": "${jsonencode({\n    Version = \"2012-10-17\"\n    Statement = [\n      {\n        Effect = \"Allow\"\n        Principal = {\n          Service = \"account-access.amazonaws.com\"\n        }\n        Action = [\n          \"sts:AssumeRole\",\n          \"sts:SetContext\",\n          \"sts:TagSession\",\n        ]\n      },\n    ]\n  })}",
+                      "name": "example-account-access-developer"
+                    }
+        argumentDocs:
+            account_id: (String) AWS Account where this resource is managed.
+            application_arn: '- (Required) ARN of the parent Account Access Application. Forces replacement when changed.'
+            entitlement: '- (Required) Entitlement configuration. See entitlement Block below.'
+            entitlement.principal_role: '- (Required) Principal role entitlement configuration. See entitlement.principal_role Block below.'
+            entitlement.principal_role.account_id: '- Target AWS account ID.'
+            entitlement.principal_role.account_name: '- Target AWS account name.'
+            entitlement.principal_role.principal: '- (Required) Principal configuration. See entitlement.principal_role.principal Block below.'
+            entitlement.principal_role.principal.identity_center: '- (Required) IAM Identity Center principal configuration. See entitlement.principal_role.principal.identity_center Block below.'
+            entitlement.principal_role.principal.identity_center.group_id: '- (Optional) IAM Identity Center group ID.'
+            entitlement.principal_role.principal.identity_center.user_id: '- (Optional) IAM Identity Center user ID.'
+            entitlement.principal_role.role_arn: '- (Required) ARN of the IAM role in the target AWS account that the principal is granted access to.'
+            entitlement_id: '- Service-assigned unique identifier for this Entitlement.'
+            region: '- (Optional) Region where this resource will be managed. Defaults to the Region set in the provider configuration.'
+        importStatements: []
     aws_acm_certificate:
         subCategory: ACM (Certificate Manager)
         description: Requests and manages a certificate from Amazon Certificate Manager (ACM).
@@ -938,6 +1053,132 @@ resources:
             policy: '- (Required) JSON-formatted IAM policy to attach to the specified private CA resource.'
             region: '- (Optional) Region where this resource will be managed. Defaults to the Region set in the provider configuration.'
             resource_arn: '- (Required) ARN of the private CA to associate with the policy.'
+        importStatements: []
+    aws_agentregistry_registry:
+        subCategory: Agent Registry
+        description: Manages an AWS Agent Registry registry.
+        name: aws_agentregistry_registry
+        title: aws_agentregistry_registry
+        examples:
+            - name: example
+              manifest: |-
+                {
+                  "discovery_configuration": [
+                    {
+                      "authorizer_type": "AWS_IAM"
+                    }
+                  ],
+                  "name": "example-registry"
+                }
+            - name: example
+              manifest: |-
+                {
+                  "description": "Example agent registry",
+                  "discovery_configuration": [
+                    {
+                      "authorizer_type": "AWS_IAM"
+                    }
+                  ],
+                  "name": "example-registry"
+                }
+            - name: example
+              manifest: |-
+                {
+                  "approval_configuration": [
+                    {
+                      "auto_approval_rules": [
+                        "APPROVE_ALL"
+                      ]
+                    }
+                  ],
+                  "discovery_configuration": [
+                    {
+                      "authorizer_type": "AWS_IAM"
+                    }
+                  ],
+                  "name": "example-registry"
+                }
+            - name: example
+              manifest: |-
+                {
+                  "discovery_configuration": [
+                    {
+                      "authorizer_configuration": [
+                        {
+                          "custom_jwt_authorizer": [
+                            {
+                              "allowed_audience": [
+                                "https://api.example.com"
+                              ],
+                              "allowed_clients": [
+                                "client-id-1"
+                              ],
+                              "allowed_scopes": [
+                                "read",
+                                "write"
+                              ],
+                              "custom_claim": [
+                                {
+                                  "authorizing_claim_match_value": [
+                                    {
+                                      "claim_match_operator": "EQUALS",
+                                      "claim_match_value": [
+                                        {
+                                          "match_value_string": "authorized-user"
+                                        }
+                                      ]
+                                    }
+                                  ],
+                                  "inbound_token_claim_name": "sub",
+                                  "inbound_token_claim_value_type": "STRING"
+                                }
+                              ],
+                              "discovery_url": "https://example.com/.well-known/openid-configuration"
+                            }
+                          ]
+                        }
+                      ],
+                      "authorizer_type": "CUSTOM_JWT"
+                    }
+                  ],
+                  "name": "example-registry"
+                }
+            - name: example
+              manifest: '{}'
+        argumentDocs:
+            account_id: (String) AWS Account where this resource is managed.
+            approval_configuration: '- (Optional) Approval configuration for registry records. See below.'
+            approval_configuration.auto_approval_rules: '- (Optional) Set of rules that determine which registry records are automatically approved on submission. Valid values: APPROVE_ALL. When omitted or empty, submitted records require manual review.'
+            create: '- (Default 30m)'
+            delete: '- (Default 30m)'
+            description: '- (Optional) Description of the registry. Maximum length of 4096 characters.'
+            discovery_configuration: '- (Required) Discovery configuration for the registry. See below.'
+            discovery_configuration.authorizer_configuration: '- (Optional) Authorizer configuration for the registry. Required when authorizer_type is CUSTOM_JWT. See below.'
+            discovery_configuration.authorizer_configuration.custom_jwt_authorizer: '- (Optional) Configuration for a custom JWT authorizer.'
+            discovery_configuration.authorizer_configuration.custom_jwt_authorizer.allowed_audience: '- (Optional) Audience values accepted during JWT validation. A token is rejected if none of its audience claims match.'
+            discovery_configuration.authorizer_configuration.custom_jwt_authorizer.allowed_clients: '- (Optional) Client identifiers accepted during JWT validation. A token is rejected if it was not issued to one of these clients.'
+            discovery_configuration.authorizer_configuration.custom_jwt_authorizer.allowed_scopes: '- (Optional) Scopes accepted during JWT validation. A token is rejected if it does not carry one of these scopes.'
+            discovery_configuration.authorizer_configuration.custom_jwt_authorizer.custom_claim: '- (Optional) Custom claims for additional JWT validation beyond standard OIDC claims. See below.'
+            discovery_configuration.authorizer_configuration.custom_jwt_authorizer.custom_claim.authorizing_claim_match_value: '- (Required) Claim match criteria. See below.'
+            ? discovery_configuration.authorizer_configuration.custom_jwt_authorizer.custom_claim.authorizing_claim_match_value.claim_match_operator
+            : '- (Required) Operator used to match claim values. Valid values: EQUALS, CONTAINS, CONTAINS_ANY.'
+            ? discovery_configuration.authorizer_configuration.custom_jwt_authorizer.custom_claim.authorizing_claim_match_value.claim_match_value
+            : '- (Required) Value to match against. See below.'
+            ? discovery_configuration.authorizer_configuration.custom_jwt_authorizer.custom_claim.authorizing_claim_match_value.claim_match_value.match_value_string
+            : '- (Optional) Single string value to match. Must contain only letters, numbers, and the characters _, ., -, :.'
+            ? discovery_configuration.authorizer_configuration.custom_jwt_authorizer.custom_claim.authorizing_claim_match_value.claim_match_value.match_value_string_list
+            : '- (Optional) Set of string values to match. Each value must contain only letters, numbers, and the characters _, ., -, :.'
+            discovery_configuration.authorizer_configuration.custom_jwt_authorizer.custom_claim.inbound_token_claim_name: '- (Required) Name of the claim to validate in the inbound JWT token. Must contain only letters, numbers, and the characters _, ., -, :.'
+            discovery_configuration.authorizer_configuration.custom_jwt_authorizer.custom_claim.inbound_token_claim_value_type: '- (Required) Type of the claim value. Valid values: STRING, STRING_ARRAY.'
+            discovery_configuration.authorizer_configuration.custom_jwt_authorizer.discovery_url: '- (Required) OpenID Connect discovery URL used to retrieve the identity provider''s metadata and signing keys.'
+            discovery_configuration.authorizer_type: '- (Required, Forces new resource) Type of authorizer that controls how consumers access the registry''s search and MCP invoke operations. Valid values: AWS_IAM, CUSTOM_JWT.'
+            name: '- (Required) Name of the registry. Must start with a letter or digit. Valid characters are a-z, A-Z, 0-9, _ (underscore), - (hyphen), . (dot), and / (forward slash). The name can have up to 64 characters.'
+            region: '- (Optional) Region where this resource will be managed. Defaults to the Region set in the provider configuration.'
+            registry_arn: '- ARN of the registry.'
+            registry_id: '- Unique identifier of the registry.'
+            tags: '- (Optional) Map of tags assigned to the resource. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.'
+            tags_all: '- Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.'
+            update: '- (Default 30m)'
         importStatements: []
     aws_ami:
         subCategory: EC2 (Elastic Compute Cloud)
@@ -5102,6 +5343,7 @@ resources:
             description: '- (Optional, Forces new resource) Description of the configuration.'
             id: '- AppConfig application ID, configuration profile ID, and version number separated by a slash (/).'
             region: '- (Optional) Region where this resource will be managed. Defaults to the Region set in the provider configuration.'
+            version_label: '- (Optional, Forces new resource) User-defined label for the AppConfig hosted configuration version. This value must contain at least one non-numeric character.'
             version_number: '- Version number of the hosted configuration.'
         importStatements: []
     aws_appfabric_app_authorization:
@@ -12729,6 +12971,74 @@ resources:
             update: '- (Default 5m)'
             updated_at: '- The time at which the inference profile was last updated.'
         importStatements: []
+    aws_bedrock_model_invocation_job:
+        subCategory: Bedrock
+        description: Manages an Amazon Bedrock model invocation job.
+        name: aws_bedrock_model_invocation_job
+        title: aws_bedrock_model_invocation_job
+        examples:
+            - name: example
+              manifest: |-
+                {
+                  "input_data_config": [
+                    {
+                      "s3_input_data_config": [
+                        {
+                          "s3_uri": "s3://${aws_s3_bucket.example.id}/input/"
+                        }
+                      ]
+                    }
+                  ],
+                  "job_name": "example-job",
+                  "model_id": "us.amazon.nova-2-lite-v1:0",
+                  "output_data_config": [
+                    {
+                      "s3_output_data_config": [
+                        {
+                          "s3_uri": "s3://${aws_s3_bucket.example.id}/output/"
+                        }
+                      ]
+                    }
+                  ],
+                  "role_arn": "${aws_iam_role.example.arn}"
+                }
+              references:
+                role_arn: aws_iam_role.example.arn
+            - name: example
+              manifest: '{}'
+        argumentDocs:
+            create: '- (Default 5m)'
+            delete: '- (Default 5m)'
+            end_time: '- Time at which the batch inference job ended.'
+            error_record_count: '- Number of records that failed to process in the batch inference job.'
+            input_data_config: '- (Required) Location of the input data for the batch inference job. See input_data_config Block below.'
+            input_data_config.s3_input_data_config: '- (Required) Location of the S3 input data. See s3_input_data_config Block below.'
+            input_data_config.s3_input_data_config.s3_bucket_owner: '- (Optional) ID of the AWS account that owns the S3 bucket containing the input data.'
+            input_data_config.s3_input_data_config.s3_input_format: '- (Optional) Format of the input data. Valid values: JSONL.'
+            input_data_config.s3_input_data_config.s3_uri: '- (Required) S3 location of the input data.'
+            job_arn: '- ARN of the batch inference job.'
+            job_expiration_time: '- Time at which the batch inference job times or timed out.'
+            job_name: '- (Required) Name for the batch inference job.'
+            model_id: '- (Required) Identifier of the foundation model, or inference profile, to use for the batch inference job.'
+            model_invocation_type: '- Invocation endpoint used for the batch inference job.'
+            output_data_config: '- (Required) Location where the results of the batch inference job are stored. See output_data_config Block below.'
+            output_data_config.s3_output_data_config: '- (Required) Location of the S3 output data. See s3_output_data_config Block below.'
+            output_data_config.s3_output_data_config.s3_bucket_owner: '- (Optional) ID of the AWS account that owns the S3 bucket containing the output data.'
+            output_data_config.s3_output_data_config.s3_encryption_key_id: '- (Optional) ARN of the KMS key that encrypts the S3 location of the output data.'
+            output_data_config.s3_output_data_config.s3_uri: '- (Required) S3 location where the results of the batch inference job are stored.'
+            processed_record_count: '- Number of records that have been processed in the batch inference job.'
+            region: '- (Optional) Region where this resource will be managed. Defaults to the Region set in the provider configuration.'
+            role_arn: '- (Required) ARN of the IAM service role that Amazon Bedrock can assume to carry out and manage the batch inference job. See Create a service role for batch inference.'
+            skip_destroy: '- (Optional) Whether to leave the batch inference job in its current state when destroying the resource, instead of stopping it.'
+            status: '- Status of the batch inference job.'
+            submit_time: '- Time at which the batch inference job was submitted.'
+            success_record_count: '- Number of records that were successfully processed in the batch inference job.'
+            timeout_duration_in_hours: '- (Optional) Number of hours after which to force the batch inference job to time out.'
+            total_record_count: '- Total number of records in the batch inference job.'
+            vpc_config: '- (Optional) VPC configuration for the data used by the batch inference job. See vpc_config Block below.'
+            vpc_config.security_group_ids: '- (Required) IDs of the security groups in the VPC to use.'
+            vpc_config.subnet_ids: '- (Required) IDs of the subnets in the VPC to use.'
+        importStatements: []
     aws_bedrock_model_invocation_logging_configuration:
         subCategory: Bedrock
         description: Manages Bedrock model invocation logging configuration.
@@ -16112,12 +16422,18 @@ resources:
         argumentDocs:
             account_id: (String) AWS Account where this resource is managed.
             actor_id: '- (Optional) Actor ID for memory sessions.'
+            additional_params: '- (Optional) JSON string containing provider-specific parameters to pass through to the Bedrock model provider unchanged.'
             agent_runtime_arn: '- ARN of the agent runtime the service provisions for the harness.'
             agent_runtime_id: '- ID of the agent runtime the service provisions for the harness.'
             agent_runtime_name: '- Name of the agent runtime the service derives for the harness.'
             allowed_tools: '- (Optional) List of tool names allowed for the harness. Use ["*"] to allow all tools.'
+            api_base: '- (Optional) Base URL of the LiteLLM-compatible API endpoint.'
+            api_format: '- (Optional) API format for the model. Valid values are converse_stream, responses, and chat_completions.'
             api_key_arn: '- (Required) ARN of the secret containing the API key.'
             arn: '- (Required) ARN of the AgentCore memory resource.'
+            auth: '- (Optional) Authentication configuration for private repositories. See auth Block below.'
+            auth.credential_arn: '- (Required) ARN of the credential in AgentCore Identity containing the password or personal access token.'
+            auth.username: '- (Optional) Username for authentication. Defaults to oauth2 if not specified.'
             authorizer_configuration: '- (Optional) Authorization configuration for authenticating requests. See authorizer_configuration Block below.'
             authorizer_configuration.custom_jwt_authorizer: '- (Optional) JWT-based authorization configuration block. See custom_jwt_authorizer Block below.'
             authorizer_configuration.custom_jwt_authorizer.allowed_audience: '- (Optional) Set of allowed audience values for JWT token validation.'
@@ -16183,6 +16499,7 @@ resources:
             model: '- (Required) Model configuration for the harness. See model Block below.'
             model.bedrock_model_config: '- (Optional) Amazon Bedrock model configuration. See bedrock_model_config Block below.'
             model.gemini_model_config: '- (Optional) Gemini model configuration. See gemini_model_config Block below.'
+            model.litellm_model_config: '- (Optional) LiteLLM model configuration. See litellm_model_config Block below.'
             model.openai_model_config: '- (Optional) OpenAI model configuration. See openai_model_config Block below.'
             model_id: '- (Required) Bedrock model ID (e.g., anthropic.claude-sonnet-4-20250514).'
             network_configuration: '- (Optional) Network configuration. See network_configuration Block below.'
@@ -16192,6 +16509,8 @@ resources:
             outbound_auth.aws_iam: '- (Optional) Set to true to use AWS IAM authentication.'
             outbound_auth.none: '- (Optional) Set to true to disable authentication.'
             outbound_auth.oauth: '- (Optional) OAuth credential provider configuration. See oauth Block below.'
+            path: '- (Optional) Subdirectory within the repository containing the skill.'
+            paths: '- (Optional) List of glob patterns to filter allowed skills (e.g., ["core-skills/*"]).'
             preserve_recent_messages: '- (Optional) Number of recent messages to preserve without summarization.'
             private_endpoint: '- (Required) Private endpoint configuration. See private_endpoint Block below.'
             private_endpoint.managed_vpc_resource: '- (Optional) Managed VPC resource configuration. See managed_vpc_resource Block below.'
@@ -16212,13 +16531,16 @@ resources:
             security_group_ids: '- (Optional) IDs of the security groups for the endpoint.'
             security_groups: '- (Required) Security groups for the VPC.'
             skill: '- (Optional) Skill configurations. See skill Block below.'
-            skill.path: '- (Required) Path to the skill.'
+            skill.aws_skills: '- (Optional) AWS Skills baked into the harness''s underlying runtime. See aws_skills Block below.'
+            skill.git: '- (Optional) Git repository source for the skill. See git Block below.'
+            skill.path: '- (Optional) Path to the skill.'
+            skill.s3: '- (Optional) S3 source for the skill. See s3 Block below.'
             strategies: '- (Optional, Computed) Set of strategy types to enable. Valid values are SEMANTIC, SUMMARIZATION, and USER_PREFERENCE. Defaults to ["SEMANTIC", "SUMMARIZATION"].'
             subnet_ids: '- (Required) IDs of the subnets for the endpoint.'
             subnets: '- (Required) Subnets for the VPC.'
             summarization_system_prompt: '- (Optional) Custom system prompt for the summarization model.'
             summary_ratio: '- (Optional) Ratio of the conversation to summarize (0 to 1).'
-            system_prompt: '- (Optional) System prompt blocks for the harness. See system_prompt Block below.'
+            system_prompt: '- (Required) System prompt blocks for the harness. See system_prompt Block below.'
             system_prompt.text: '- (Required, Sensitive) Text content of the system prompt.'
             tags: '- (Optional) Key-value map of resource tags. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.'
             tags_all: '- A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.'
@@ -16241,6 +16563,7 @@ resources:
             truncation.config.summarization: '- (Optional) Summarization truncation configuration. See summarization Block below.'
             truncation.strategy: '- (Required) Truncation strategy. Valid values: sliding_window, summarization, none.'
             update: '- (Default 30m)'
+            uri: '- (Required) S3 URI of the skill source. Must begin with s3://.'
             url: '- (Required, Sensitive) URL of the remote MCP server.'
             vpc_identifier: '- (Required) Identifier of the VPC for the endpoint.'
             workload_identities: '- (Optional) List of workload identity names allowed to use the authorizer. Between 1 and 10 entries.'
@@ -16713,15 +17036,20 @@ resources:
                     }
                   ]
                 }
+            - name: example
+              manifest: '{}'
         argumentDocs:
+            account_id: (String) Account ID where this resource is managed.
             client_credentials_wo_version: '- (Optional) Used together with write-only credentials to trigger an update. Increment this value when an update to client_id_wo or client_secret_wo is required.'
             client_id: '- (Optional) OAuth2 client ID. Cannot be used with client_id_wo. Must be used together with client_secret.'
             client_id_wo: '- (Optional) Write-only OAuth2 client ID. Cannot be used with client_id. Must be used together with client_secret_wo and client_credentials_wo_version.'
             client_secret: '- (Optional) OAuth2 client secret. Cannot be used with client_secret_wo. Must be used together with client_id.'
             client_secret_arn: '- ARN of the AWS Secrets Manager secret containing the client secret.'
             client_secret_wo: '- (Optional) Write-only OAuth2 client secret. Cannot be used with client_secret. Must be used together with client_id_wo and client_credentials_wo_version.'
+            create: '- (Default 5m)'
             credential_provider_arn: '- ARN of the OAuth2 credential provider.'
             credential_provider_vendor: '- (Required) Vendor of the OAuth2 credential provider. Valid values: CustomOauth2, GithubOauth2, GoogleOauth2, Microsoft, SalesforceOauth2, SlackOauth2.'
+            delete: '- (Default 5m)'
             name: '- (Required) Name of the OAuth2 credential provider.'
             oauth_discovery.authorization_server_metadata: '- (Optional) Manual OAuth2 authorization server metadata configuration. Cannot be used together with discovery_url. See authorization_server_metadata below.'
             oauth_discovery.authorization_server_metadata.authorization_endpoint: '- (Required) OAuth2 authorization endpoint URL.'
@@ -16746,6 +17074,7 @@ resources:
             secret_arn: '- ARN of the secret in AWS Secrets Manager.'
             tags: '- (Optional) Key-value map of resource tags. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.'
             tags_all: '- A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.'
+            update: '- (Default 5m)'
         importStatements: []
     aws_bedrockagentcore_online_evaluation_config:
         subCategory: Bedrock AgentCore
@@ -24321,6 +24650,29 @@ resources:
                 ok_actions: aws_sns_topic.sns.arn
                 threshold: var.logstash_servers_count
             - name: example
+              manifest: |-
+                {
+                  "alarm_actions": [
+                    "${aws_sns_topic.example.arn}"
+                  ],
+                  "alarm_name": "example-service-errors",
+                  "comparison_operator": "GreaterThanThreshold",
+                  "evaluation_periods": 3,
+                  "metric_name": "Errors",
+                  "namespace": "ExampleApp",
+                  "period": 60,
+                  "statistic": "Sum",
+                  "threshold": 0,
+                  "treat_missing_data": "breaching",
+                  "warm_up_configuration": [
+                    {
+                      "warm_up_period_duration_in_minutes": 30
+                    }
+                  ]
+                }
+              references:
+                alarm_actions: aws_sns_topic.example.arn
+            - name: example
               manifest: '{}'
         argumentDocs:
             account_id: (String) AWS Account where this resource is managed.
@@ -24396,6 +24748,9 @@ resources:
             threshold_metric_id: '- (Optional) If this is an alarm based on an anomaly detection model, make this value match the ID of the ANOMALY_DETECTION_BAND function.'
             treat_missing_data: '- (Optional) Sets how this alarm is to handle missing data points. The following values are supported: missing, ignore, breaching and notBreaching. Defaults to missing.'
             unit: '- (Optional) The unit for the alarm''s associated metric.'
+            warm_up_configuration: '- (Optional) Warm-up period that delays alarm evaluation after the alarm is created. During the warm-up period the alarm stays in INSUFFICIENT_DATA and does not perform alarm actions. See warm_up_configuration below.'
+            warm_up_configuration.only_start_evaluating_after_warm_up_period_ends: '- (Optional) Whether to wait for the full warm-up period before evaluation begins, even if metric data arrives earlier. When false, the warm-up period ends early as soon as the alarm has enough data to fill its evaluation window. Defaults to false.'
+            warm_up_configuration.warm_up_period_duration_in_minutes: '- (Required) Length of the warm-up period, in minutes. Valid values are 1 to 2880.'
         importStatements: []
     aws_cloudwatch_metric_stream:
         subCategory: CloudWatch
@@ -33129,6 +33484,7 @@ resources:
             vpc_security_group_ids: |-
                 - (Optional) List of VPC security groups to
                 associate.
+            warning_event_categories: '- (Optional) Set of RDS event categories (for example failure, maintenance) to check for after create and update operations. If set, Terraform describes RDS events reported for this instance during the operation and surfaces a warning diagnostic, with the RDS event message, for each one found in these categories. Has no effect if unset; see DescribeEvents and the aws_rds_events data source for the source of these events. Requires the rds:DescribeEvents IAM permission when set.'
         importStatements: []
     aws_db_instance_automated_backups_replication:
         subCategory: RDS (Relational Database)
@@ -35554,6 +35910,151 @@ resources:
             tags: '- (Optional) A map of tags to assign to the resource. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.'
             tags_all: '- A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.'
         importStatements: []
+    aws_dms_data_provider:
+        subCategory: DMS (Database Migration)
+        description: Manages an AWS DMS (Database Migration) Data Provider.
+        name: aws_dms_data_provider
+        title: aws_dms_data_provider
+        examples:
+            - name: example
+              manifest: |-
+                {
+                  "engine": "postgres",
+                  "settings": [
+                    {
+                      "postgresql_settings": [
+                        {
+                          "database_name": "example",
+                          "port": 5432,
+                          "server_name": "example.com",
+                          "ssl_mode": "none"
+                        }
+                      ]
+                    }
+                  ]
+                }
+            - name: example
+              manifest: |-
+                {
+                  "description": "Example MySQL data provider",
+                  "engine": "mysql",
+                  "name": "example-mysql",
+                  "settings": [
+                    {
+                      "mysql_settings": [
+                        {
+                          "port": 3306,
+                          "server_name": "mysql.example.com",
+                          "ssl_mode": "require"
+                        }
+                      ]
+                    }
+                  ],
+                  "tags": {
+                    "Environment": "example"
+                  }
+                }
+        argumentDocs:
+            arn: '- ARN of the data provider.'
+            creation_time: '- Creation time of the data provider in RFC3339 format.'
+            description: '- (Optional) Description of the data provider.'
+            doc_db_settings: '- (Optional) Settings for the docdb engine. See doc_db_settings Block below.'
+            doc_db_settings.certificate_arn: '- (Optional) ARN of the DMS certificate used for the SSL connection.'
+            doc_db_settings.database_name: '- (Optional) Database name on the DocumentDB data provider.'
+            doc_db_settings.port: '- (Optional) Port of the DocumentDB server. Valid values are between 1 and 65535.'
+            doc_db_settings.server_name: '- (Optional) Hostname of the DocumentDB server.'
+            doc_db_settings.ssl_mode: '- (Optional) SSL mode for the connection. Valid values: none, require, verify-ca, and verify-full. Defaults to none.'
+            engine: '- (Required) Database engine for the data provider. Valid values: aurora, aurora-postgresql, db2, db2-zos, docdb, mariadb, mongodb, mysql, oracle, postgres, redshift, sqlserver, and sybase. Use aurora for Amazon Aurora MySQL-Compatible Edition.'
+            ibm_db2_luw_settings: '- (Optional) Settings for the db2 engine. See ibm_db2_luw_settings Block below.'
+            ibm_db2_luw_settings.certificate_arn: '- (Optional) ARN of the DMS certificate used for the SSL connection.'
+            ibm_db2_luw_settings.database_name: '- (Optional) Database name on the IBM DB2 LUW data provider.'
+            ibm_db2_luw_settings.encryption_algorithm: '- (Optional) Integer identifying the encryption algorithm for the connection. When omitted, AWS uses its default behavior.'
+            ibm_db2_luw_settings.port: '- (Optional) Port of the IBM DB2 LUW server. Valid values are between 1 and 65535.'
+            ibm_db2_luw_settings.s3_access_role_arn: '- (Optional) ARN of the IAM role used to access the S3 bucket containing the user-defined schema.'
+            ibm_db2_luw_settings.s3_path: '- (Optional) S3 path containing the user-defined schema.'
+            ibm_db2_luw_settings.security_mechanism: '- (Optional) Integer identifying the authentication mechanism for the connection. When omitted, AWS uses its default behavior.'
+            ibm_db2_luw_settings.server_name: '- (Optional) Hostname of the IBM DB2 LUW server.'
+            ibm_db2_luw_settings.ssl_mode: '- (Optional) SSL mode for the connection. Valid values: none and verify-ca. Defaults to none.'
+            ibm_db2_zos_settings: '- (Optional) Settings for the db2-zos engine. See ibm_db2_zos_settings Block below.'
+            ibm_db2_zos_settings.certificate_arn: '- (Optional) ARN of the DMS certificate used for the SSL connection.'
+            ibm_db2_zos_settings.database_name: '- (Optional) Database name on the IBM DB2 for z/OS data provider.'
+            ibm_db2_zos_settings.port: '- (Optional) Port of the IBM DB2 for z/OS server. Valid values are between 1 and 65535.'
+            ibm_db2_zos_settings.s3_access_role_arn: '- (Optional) ARN of the IAM role used to access the S3 bucket containing the user-defined schema.'
+            ibm_db2_zos_settings.s3_path: '- (Optional) S3 path containing the user-defined schema.'
+            ibm_db2_zos_settings.server_name: '- (Optional) Hostname of the IBM DB2 for z/OS server.'
+            ibm_db2_zos_settings.ssl_mode: '- (Optional) SSL mode for the connection. Valid values: none and verify-ca. Defaults to none.'
+            maria_db_settings: '- (Optional) Settings for the mariadb engine. See maria_db_settings Block below.'
+            maria_db_settings.certificate_arn: '- (Optional) ARN of the DMS certificate used for the SSL connection.'
+            maria_db_settings.port: '- (Optional) Port of the MariaDB server. Valid values are between 1 and 65535.'
+            maria_db_settings.s3_access_role_arn: '- (Optional) ARN of the IAM role used to access the S3 bucket containing the user-defined schema.'
+            maria_db_settings.s3_path: '- (Optional) S3 path containing the user-defined schema.'
+            maria_db_settings.server_name: '- (Optional) Hostname of the MariaDB server.'
+            maria_db_settings.ssl_mode: '- (Optional) SSL mode for the connection. Valid values: none, require, verify-ca, and verify-full. Defaults to none.'
+            microsoft_sql_server_settings: '- (Optional) Settings for the sqlserver engine. See microsoft_sql_server_settings Block below.'
+            microsoft_sql_server_settings.certificate_arn: '- (Optional) ARN of the DMS certificate used for the SSL connection.'
+            microsoft_sql_server_settings.database_name: '- (Optional) Database name on the Microsoft SQL Server data provider.'
+            microsoft_sql_server_settings.port: '- (Optional) Port of the Microsoft SQL Server instance. Valid values are between 1 and 65535.'
+            microsoft_sql_server_settings.s3_access_role_arn: '- (Optional) ARN of the IAM role used to access the S3 bucket containing the user-defined schema.'
+            microsoft_sql_server_settings.s3_path: '- (Optional) S3 path containing the user-defined schema.'
+            microsoft_sql_server_settings.server_name: '- (Optional) Hostname of the Microsoft SQL Server instance.'
+            microsoft_sql_server_settings.ssl_mode: '- (Optional) SSL mode for the connection. Valid values: none, require, verify-ca, and verify-full. Defaults to none.'
+            mongo_db_settings: '- (Optional) Settings for the mongodb engine. See mongo_db_settings Block below.'
+            mongo_db_settings.auth_mechanism: '- (Optional) Authentication mechanism for the connection. Valid values: default, mongodb_cr, and scram_sha_1.'
+            mongo_db_settings.auth_source: '- (Optional) Database used to verify credentials. Defaults to admin. Not used when auth_type is no.'
+            mongo_db_settings.auth_type: '- (Optional) Authentication type for the connection. Valid values: no and password.'
+            mongo_db_settings.certificate_arn: '- (Optional) ARN of the DMS certificate used for the SSL connection.'
+            mongo_db_settings.database_name: '- (Optional) Database name on the MongoDB data provider.'
+            mongo_db_settings.port: '- (Optional) Port of the MongoDB server. Valid values are between 1 and 65535.'
+            mongo_db_settings.server_name: '- (Optional) Hostname of the MongoDB server.'
+            mongo_db_settings.ssl_mode: '- (Optional) SSL mode for the connection. Valid values: none, require, verify-ca, and verify-full. Defaults to none.'
+            mysql_settings: '- (Optional) Settings for the mysql and aurora engines. See mysql_settings Block below.'
+            mysql_settings.certificate_arn: '- (Optional) ARN of the DMS certificate used for the SSL connection.'
+            mysql_settings.port: '- (Optional) Port of the MySQL server. Valid values are between 1 and 65535.'
+            mysql_settings.s3_access_role_arn: '- (Optional) ARN of the IAM role used to access the S3 bucket containing the user-defined schema.'
+            mysql_settings.s3_path: '- (Optional) S3 path containing the user-defined schema.'
+            mysql_settings.server_name: '- (Optional) Hostname of the MySQL server.'
+            mysql_settings.ssl_mode: '- (Optional) SSL mode for the connection. Valid values: none, require, verify-ca, and verify-full. Defaults to none.'
+            name: '- (Optional) Name of the data provider. AWS generates a name when omitted.'
+            oracle_settings: '- (Optional) Settings for the oracle engine. See oracle_settings Block below.'
+            oracle_settings.asm_server: '- (Optional) Address of the Oracle Automatic Storage Management (ASM) server used with Binary Reader. See Oracle change data capture configuration.'
+            oracle_settings.certificate_arn: '- (Optional) ARN of the DMS certificate used for the SSL connection.'
+            oracle_settings.database_name: '- (Optional) Database name on the Oracle data provider.'
+            oracle_settings.port: '- (Optional) Port of the Oracle server. Valid values are between 1 and 65535.'
+            oracle_settings.s3_access_role_arn: '- (Optional) ARN of the IAM role used to access the S3 bucket containing the user-defined schema.'
+            oracle_settings.s3_path: '- (Optional) S3 path containing the user-defined schema.'
+            oracle_settings.secrets_manager_oracle_asm_access_role_arn: '- (Optional) ARN of the IAM role that grants access to the Secrets Manager secret containing Oracle ASM connection details.'
+            oracle_settings.secrets_manager_oracle_asm_secret_id: '- (Optional) Identifier of the Secrets Manager secret containing Oracle ASM connection details. Required when the data provider uses an Oracle ASM server.'
+            oracle_settings.secrets_manager_security_db_encryption_access_role_arn: '- (Optional) ARN of the IAM role that grants access to the Secrets Manager secret containing the transparent data encryption (TDE) password.'
+            oracle_settings.secrets_manager_security_db_encryption_secret_id: '- (Optional) Identifier of the Secrets Manager secret containing the TDE password used by Binary Reader to access encrypted Oracle redo logs.'
+            oracle_settings.server_name: '- (Optional) Hostname of the Oracle server.'
+            oracle_settings.ssl_mode: '- (Optional) SSL mode for the connection. Valid values: none, require, verify-ca, and verify-full. Defaults to none.'
+            postgresql_settings: '- (Optional) Settings for the postgres and aurora-postgresql engines. See postgresql_settings Block below.'
+            postgresql_settings.certificate_arn: '- (Optional) ARN of the DMS certificate used for the SSL connection.'
+            postgresql_settings.database_name: '- (Optional) Database name on the PostgreSQL data provider.'
+            postgresql_settings.port: '- (Optional) Port of the PostgreSQL server. Valid values are between 1 and 65535.'
+            postgresql_settings.s3_access_role_arn: '- (Optional) ARN of the IAM role used to access the S3 bucket containing the user-defined schema.'
+            postgresql_settings.s3_path: '- (Optional) S3 path containing the user-defined schema.'
+            postgresql_settings.server_name: '- (Optional) Hostname of the PostgreSQL server.'
+            postgresql_settings.ssl_mode: '- (Optional) SSL mode for the connection. Valid values: none, require, verify-ca, and verify-full. Defaults to none.'
+            redshift_settings: '- (Optional) Settings for the redshift engine. See redshift_settings Block below.'
+            redshift_settings.database_name: '- (Optional) Database name on the Amazon Redshift data provider.'
+            redshift_settings.port: '- (Optional) Port of the Amazon Redshift server. Valid values are between 1 and 65535.'
+            redshift_settings.s3_access_role_arn: '- (Optional) ARN of the IAM role used to access the S3 bucket containing the user-defined schema.'
+            redshift_settings.s3_path: '- (Optional) S3 path containing the user-defined schema.'
+            redshift_settings.server_name: '- (Optional) Hostname of the Amazon Redshift server.'
+            region: '- (Optional) Region where this resource will be managed. Defaults to the Region set in the provider configuration.'
+            settings: '- (Required) Database connection settings. Configure exactly one block matching engine. See settings Block below.'
+            sybase_ase_settings: '- (Optional) Settings for the sybase engine. See sybase_ase_settings Block below.'
+            sybase_ase_settings.certificate_arn: '- (Optional) ARN of the DMS certificate used for the SSL connection.'
+            sybase_ase_settings.database_name: '- (Optional) Database name on the SAP ASE data provider.'
+            sybase_ase_settings.encrypt_password: '- (Optional) Whether to encrypt the connection password during transmission. Defaults to true.'
+            sybase_ase_settings.port: '- (Optional) Port of the SAP ASE server. Valid values are between 1 and 65535.'
+            sybase_ase_settings.server_name: '- (Optional) Hostname of the SAP ASE server.'
+            sybase_ase_settings.ssl_mode: '- (Optional) SSL mode for the connection. Valid values: none, require, verify-ca, and verify-full. Defaults to none.'
+            tags: '- (Optional) Map of tags assigned to the resource. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.'
+            tags_all: '- Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.'
+            virtual: '- (Optional) Whether to create a virtual data provider, which does not require a connection to a database. Defaults to false.'
+        importStatements: []
     aws_dms_endpoint:
         subCategory: DMS (Database Migration)
         description: Provides a DMS (Data Migration Service) endpoint resource.
@@ -35768,6 +36269,53 @@ resources:
             tags: '- (Optional) Map of resource tags to assign to the resource. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.'
             tags_all: '- A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.'
             update: '- (Default 10m)'
+        importStatements: []
+    aws_dms_instance_profile:
+        subCategory: DMS (Database Migration)
+        description: Manages an AWS DMS (Database Migration) Instance Profile.
+        name: aws_dms_instance_profile
+        title: aws_dms_instance_profile
+        examples:
+            - name: example
+              manifest: |-
+                {
+                  "name": "example"
+                }
+            - name: example
+              manifest: |-
+                {
+                  "description": "example instance profile",
+                  "kms_key_arn": "${aws_kms_key.example.arn}",
+                  "name": "example",
+                  "network_type": "IPV4",
+                  "publicly_accessible": false,
+                  "subnet_group_identifier": "${aws_dms_replication_subnet_group.example.id}",
+                  "tags": {
+                    "Name": "example"
+                  },
+                  "vpc_security_group_ids": [
+                    "${aws_security_group.example.id}"
+                  ]
+                }
+              references:
+                kms_key_arn: aws_kms_key.example.arn
+                subnet_group_identifier: aws_dms_replication_subnet_group.example.id
+                vpc_security_group_ids: aws_security_group.example.id
+            - name: example
+              manifest: '{}'
+        argumentDocs:
+            arn: '- ARN of the instance profile.'
+            availability_zone: '- (Optional) Availability Zone where the instance profile runs. Default is a random, system-chosen Availability Zone.'
+            description: '- (Optional) Description for the instance profile.'
+            kms_key_arn: '- (Optional) ARN of the KMS key used to encrypt the connection parameters for the instance profile. If you don''t specify a value, DMS uses your default encryption key.'
+            name: '- (Optional) Name for the instance profile. If omitted, DMS assigns a generated name.'
+            network_type: '- (Optional) Network type for the instance profile. Valid values are IPV4, IPV6, and DUAL.'
+            publicly_accessible: '- (Optional) Whether the instance profile is publicly accessible. Default is true.'
+            region: '- (Optional) Region where this resource will be managed. Defaults to the Region set in the provider configuration.'
+            subnet_group_identifier: '- (Optional) Subnet group to associate with the instance profile.'
+            tags: '- (Optional) Map of tags assigned to the resource. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.'
+            tags_all: '- Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.'
+            vpc_security_group_ids: '- (Optional) VPC security group IDs to be used with the instance profile. The VPC security groups must work with the VPC containing the instance profile.'
         importStatements: []
     aws_dms_replication_config:
         subCategory: DMS (Database Migration)
@@ -41937,6 +42485,7 @@ resources:
             - name: example
               manifest: '{}'
         argumentDocs:
+            actions_status: '- (Optional) Whether to use Amazon ECS managed auto repair. Valid values are ENABLED and DISABLED.'
             arn: '- ARN that identifies the capacity provider.'
             auto_scaling_group_provider: '- (Optional) Configuration block for the provider for the ECS auto scaling group. Detailed below. Exactly one of auto_scaling_group_provider or managed_instances_provider must be specified.'
             auto_scaling_group_provider.auto_scaling_group_arn: '- (Required) - ARN of the associated auto scaling group.'
@@ -41978,6 +42527,7 @@ resources:
             local_storage_configuration: '- (Optional) Configuration block for the local storage settings applied to Amazon ECS Managed Instances. Detailed below.'
             local_storage_configuration.use_local_storage: '- (Optional) Whether to use the local storage of the instance for Amazon ECS Managed Instances.'
             managed_instances_provider: '- (Optional) Configuration block for the managed instances provider. Detailed below. Exactly one of auto_scaling_group_provider or managed_instances_provider must be specified.'
+            managed_instances_provider.auto_repair_configuration: '- (Optional) Configuration block for the auto repair configuration. Detailed below.'
             managed_instances_provider.infrastructure_optimization: '- (Optional) Configuration block for how Amazon ECS Managed Instances optimizes the infrastructure in your capacity provider, including whether to turn optimization on or off and how long to delay optimizing idle EC2 instances. Detailed below.'
             managed_instances_provider.infrastructure_role_arn: '- (Required) ARN of the infrastructure role that Amazon ECS uses to manage instances on your behalf. This role must have permissions to launch, terminate, and manage Amazon EC2 instances, as well as access to other AWS services required for Amazon ECS Managed Instances functionality. For more information, see Amazon ECS infrastructure IAM role in the Amazon ECS Developer Guide.'
             managed_instances_provider.instance_launch_template: '- (Required) Launch template configuration that specifies how Amazon ECS should launch Amazon EC2 instances. This includes the instance profile, network configuration, storage settings, and instance requirements for attribute-based instance type selection. For more information, see Store instance launch parameters in Amazon EC2 launch templates in the Amazon EC2 User Guide. Detailed below.'
@@ -48875,6 +49425,34 @@ resources:
             update: '- (Default 30m)'
             value: '- (Required) Parameter value.'
             values: '- (Required) Set of attribute values for the filter.'
+        importStatements: []
+    aws_fis_safety_lever_state:
+        subCategory: FIS (Fault Injection Simulator)
+        description: Manages the state of an AWS FIS (Fault Injection Simulator) account safety lever.
+        name: aws_fis_safety_lever_state
+        title: aws_fis_safety_lever_state
+        examples:
+            - name: example
+              manifest: |-
+                {
+                  "state": [
+                    {
+                      "reason": "Managed by Terraform",
+                      "status": "disengaged"
+                    }
+                  ]
+                }
+            - name: example
+              manifest: '{}'
+        argumentDocs:
+            account_id: (String) AWS Account where this resource is managed.
+            arn: '- ARN of the safety lever.'
+            create: '- (Default 5m)'
+            region: '- (Optional) Region where this resource will be managed. Defaults to the Region set in the provider configuration.'
+            state: '- (Required) State of the safety lever. See below.'
+            state.reason: '- (Required) Reason for the current status of the safety lever.'
+            state.status: '- (Required) Status of the safety lever. Valid values: engaged, disengaged. Engaging the lever immediately stops all running experiments in the account and Region, and prevents new ones from starting.'
+            update: '- (Default 5m)'
         importStatements: []
     aws_fis_target_account_configuration:
         subCategory: FIS (Fault Injection Simulator)
@@ -62624,6 +63202,7 @@ resources:
               references:
                 function_name: aws_lambda_function.example.function_name
         argumentDocs:
+            account_id: (String) AWS Account where this resource is managed.
             arn: '- ARN identifying your Lambda function alias.'
             description: '- (Optional) Description of the alias.'
             function_name: '- (Required) Name or ARN of the Lambda function.'
@@ -72531,11 +73110,195 @@ resources:
                 replication_info_list.source_kafka_cluster_arn: aws_msk_cluster.source.arn
                 replication_info_list.target_kafka_cluster_arn: aws_msk_cluster.target.arn
                 service_execution_role_arn: aws_iam_role.source.arn
+            - name: test
+              manifest: |-
+                {
+                  "description": "test-description",
+                  "kafka_cluster": [
+                    {
+                      "amazon_msk_cluster": [
+                        {
+                          "msk_cluster_arn": "${aws_msk_cluster.source.arn}"
+                        }
+                      ],
+                      "vpc_config": [
+                        {
+                          "security_groups_ids": [
+                            "${aws_security_group.source.id}"
+                          ],
+                          "subnet_ids": "${aws_subnet.source[*].id}"
+                        }
+                      ]
+                    },
+                    {
+                      "apache_kafka_cluster": [
+                        {
+                          "apache_kafka_cluster_id": "target-apache-kafka-cluster",
+                          "bootstrap_broker_string": "b-1.example.com:9096,b-2.example.com:9096"
+                        }
+                      ],
+                      "client_authentication": [
+                        {
+                          "sasl_scram": [
+                            {
+                              "mechanism": "SHA512",
+                              "secret_arn": "${aws_secretsmanager_secret.target.arn}"
+                            }
+                          ]
+                        }
+                      ],
+                      "encryption_in_transit": [
+                        {
+                          "root_ca_certificate": "${aws_secretsmanager_secret.root_ca.arn}"
+                        }
+                      ]
+                    }
+                  ],
+                  "replication_info_list": [
+                    {
+                      "consumer_group_replication": [
+                        {
+                          "consumer_groups_to_replicate": [
+                            ".*"
+                          ]
+                        }
+                      ],
+                      "source_kafka_cluster_arn": "${aws_msk_cluster.source.arn}",
+                      "target_compression_type": "NONE",
+                      "target_kafka_cluster_id": "target-apache-kafka-cluster",
+                      "topic_replication": [
+                        {
+                          "starting_position": [
+                            {
+                              "type": "LATEST"
+                            }
+                          ],
+                          "topic_name_configuration": [
+                            {
+                              "type": "PREFIXED_WITH_SOURCE_CLUSTER_ALIAS"
+                            }
+                          ],
+                          "topics_to_replicate": [
+                            ".*"
+                          ]
+                        }
+                      ]
+                    }
+                  ],
+                  "replicator_name": "test-name",
+                  "service_execution_role_arn": "${aws_iam_role.source.arn}"
+                }
+              references:
+                kafka_cluster.amazon_msk_cluster.msk_cluster_arn: aws_msk_cluster.source.arn
+                kafka_cluster.client_authentication.sasl_scram.secret_arn: aws_secretsmanager_secret.target.arn
+                kafka_cluster.encryption_in_transit.root_ca_certificate: aws_secretsmanager_secret.root_ca.arn
+                kafka_cluster.vpc_config.security_groups_ids: aws_security_group.source.id
+                replication_info_list.source_kafka_cluster_arn: aws_msk_cluster.source.arn
+                service_execution_role_arn: aws_iam_role.source.arn
+            - name: test
+              manifest: |-
+                {
+                  "kafka_cluster": [
+                    {
+                      "amazon_msk_cluster": [
+                        {
+                          "msk_cluster_arn": "${aws_msk_cluster.source.arn}"
+                        }
+                      ],
+                      "vpc_config": [
+                        {
+                          "security_groups_ids": [
+                            "${aws_security_group.source.id}"
+                          ],
+                          "subnet_ids": "${aws_subnet.source[*].id}"
+                        }
+                      ]
+                    },
+                    {
+                      "amazon_msk_cluster": [
+                        {
+                          "msk_cluster_arn": "${aws_msk_cluster.target.arn}"
+                        }
+                      ],
+                      "vpc_config": [
+                        {
+                          "security_groups_ids": [
+                            "${aws_security_group.target.id}"
+                          ],
+                          "subnet_ids": "${aws_subnet.target[*].id}"
+                        }
+                      ]
+                    }
+                  ],
+                  "log_delivery": [
+                    {
+                      "replicator_log_delivery": [
+                        {
+                          "cloudwatch_logs": [
+                            {
+                              "enabled": true,
+                              "log_group": "${aws_cloudwatch_log_group.test.name}"
+                            }
+                          ],
+                          "firehose": [
+                            {
+                              "delivery_stream": "${aws_kinesis_firehose_delivery_stream.test.name}",
+                              "enabled": true
+                            }
+                          ],
+                          "s3": [
+                            {
+                              "bucket": "${aws_s3_bucket.test.bucket}",
+                              "enabled": true,
+                              "prefix": "replicator-logs"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ],
+                  "replication_info_list": [
+                    {
+                      "consumer_group_replication": [
+                        {
+                          "consumer_groups_to_replicate": [
+                            ".*"
+                          ]
+                        }
+                      ],
+                      "source_kafka_cluster_arn": "${aws_msk_cluster.source.arn}",
+                      "target_compression_type": "NONE",
+                      "target_kafka_cluster_arn": "${aws_msk_cluster.target.arn}",
+                      "topic_replication": [
+                        {
+                          "topics_to_replicate": [
+                            ".*"
+                          ]
+                        }
+                      ]
+                    }
+                  ],
+                  "replicator_name": "test-name",
+                  "service_execution_role_arn": "${aws_iam_role.source.arn}"
+                }
+              references:
+                kafka_cluster.amazon_msk_cluster.msk_cluster_arn: aws_msk_cluster.target.arn
+                kafka_cluster.vpc_config.security_groups_ids: aws_security_group.target.id
+                log_delivery.replicator_log_delivery.cloudwatch_logs.log_group: aws_cloudwatch_log_group.test.name
+                log_delivery.replicator_log_delivery.firehose.delivery_stream: aws_kinesis_firehose_delivery_stream.test.name
+                log_delivery.replicator_log_delivery.s3.bucket: aws_s3_bucket.test.bucket
+                replication_info_list.source_kafka_cluster_arn: aws_msk_cluster.source.arn
+                replication_info_list.target_kafka_cluster_arn: aws_msk_cluster.target.arn
+                service_execution_role_arn: aws_iam_role.source.arn
             - name: example
               manifest: '{}'
         argumentDocs:
-            amazon_msk_cluster: '- (Required) Details of an Amazon MSK cluster.'
+            amazon_msk_cluster: '- (Optional) Details of an Amazon MSK cluster. Exactly one of amazon_msk_cluster or apache_kafka_cluster must be specified. Detailed below.'
+            apache_kafka_cluster: '- (Optional) Details of a self-managed or on-premises Apache Kafka cluster. Exactly one of amazon_msk_cluster or apache_kafka_cluster must be specified. Detailed below.'
+            apache_kafka_cluster_id: '- (Required) The Kafka cluster.id of the self-managed or on-premises Apache Kafka cluster (as reported by the cluster itself, e.g. via the Kafka admin tooling), not an arbitrary name. MSK Replicator validates this value against the source cluster. See Migrate third-party and self-managed Apache Kafka clusters to Amazon MSK for how to obtain the cluster ID and the other required inputs.'
             arn: '- ARN of the Replicator.'
+            bootstrap_broker_string: '- (Required) The bootstrap broker connection string used to connect to the Apache Kafka cluster.'
+            client_authentication: '- (Optional) Details of the client authentication used by the Kafka cluster. Only valid for an apache_kafka_cluster. Detailed below.'
             consumer_group_offset_sync_mode: '- (Optional) Consumer group offset synchronization mode. Valid values are LEGACY and ENHANCED. With LEGACY, offsets are synchronized when producers write to the source cluster. With ENHANCED, consumer offsets are synchronized regardless of producer location. ENHANCED requires a corresponding replicator that replicates data from the target cluster to the source cluster and requires topic_name_configuration.type to be set to IDENTICAL. Defaults to LEGACY. Changing this value will force a new resource.'
             consumer_group_replication: '- (Required) Configuration relating to consumer group replication.'
             consumer_groups_to_exclude: '- (Optional) List of regular expression patterns indicating the consumer groups that should not be replicated.'
@@ -72547,7 +73310,8 @@ resources:
             description: '- (Optional) A summary description of the replicator.'
             detect_and_copy_new_consumer_groups: '- (Optional) Whether to periodically check for new consumer groups.'
             detect_and_copy_new_topics: '- (Optional) Whether to periodically check for new topics and partitions.'
-            kafka_cluster: '- (Required) A list of Kafka clusters which are targets of the replicator.'
+            encryption_in_transit: '- (Optional) Details of encryption in transit to the Kafka cluster. Only valid for an apache_kafka_cluster. TLS encryption in transit is always applied to an apache_kafka_cluster; this block is only required to supply a custom root CA chain (for a cluster using a private or self-signed certificate). Detailed below.'
+            kafka_cluster: '- (Required) The source and target Kafka clusters for the replicator. Exactly two blocks are required. Detailed below.'
             log_delivery: '- (Optional) Configuration block for delivering replicator logs to customer destinations. Detailed below.'
             log_delivery.replicator_log_delivery: '- (Optional) Configuration block for replicator log delivery. Detailed below.'
             log_delivery.replicator_log_delivery.cloudwatch_logs: '- (Optional) Configuration block for replicator log delivery to Amazon CloudWatch Logs. Detailed below.'
@@ -72560,13 +73324,19 @@ resources:
             log_delivery.replicator_log_delivery.s3.bucket: '- (Optional) Name of the S3 bucket. Required if enabled is true. If enabled is false, this value must not be set.'
             log_delivery.replicator_log_delivery.s3.enabled: '- (Required) Boolean whether to enable log delivery to S3.'
             log_delivery.replicator_log_delivery.s3.prefix: '- (Optional) Prefix to use when storing replicator logs in S3. If enabled is false, this value must not be set.'
+            mechanism: '- (Required) The SASL/SCRAM mechanism used for authentication. Valid values are SHA256 and SHA512.'
             msk_cluster_arn: '- (Required) The ARN of an Amazon MSK cluster.'
+            mtls: '- (Optional) Details of the mTLS client authentication used by the Kafka cluster. Detailed below.'
             region: '- (Optional) Region where this resource will be managed. Defaults to the Region set in the provider configuration.'
             replication_info_list: '- (Required) A list of replication configurations, where each configuration targets a given source cluster to target cluster replication flow.'
             replicator_name: '- (Required) The name of the replicator.'
+            root_ca_certificate: '- (Required) The ARN of the AWS Secrets Manager secret that stores the custom root CA certificate chain used to trust the certificate authority of the Apache Kafka cluster. See Set up prerequisites for MSK Replicator with self-managed Apache Kafka clusters for the required secret contents and format.'
+            sasl_scram: '- (Optional) Details of the SASL/SCRAM client authentication used by the Kafka cluster. Detailed below.'
+            secret_arn: '- (Required) The ARN of the AWS Secrets Manager secret that stores the private key and certificate used for mTLS authentication. See Set up prerequisites for MSK Replicator with self-managed Apache Kafka clusters for the required secret contents and format.'
             security_groups_ids: '- (Required) The AWS security groups to associate with the ENIs used by the replicator. If a security group is not specified, the default security group associated with the VPC is used.'
             service_execution_role_arn: '- (Required) The ARN of the IAM role used by the replicator to access resources in the customer''s account (e.g source and target clusters).'
-            source_kafka_cluster_arn: '- (Required) The ARN of the source Kafka cluster.'
+            source_kafka_cluster_arn: '- (Optional) The ARN of the source Kafka cluster. Use for an Amazon MSK source. Exactly one of source_kafka_cluster_arn or source_kafka_cluster_id must be specified.'
+            source_kafka_cluster_id: '- (Optional) The identifier of the source Kafka cluster. Use for a self-managed / on-premises Apache Kafka source (matches apache_kafka_cluster_id). Exactly one of source_kafka_cluster_arn or source_kafka_cluster_id must be specified.'
             starting_position: '- (Optional) Configuration for specifying the position in the topics to start replicating from.'
             starting_position.type: '- (Optional) The type of replication starting position. Supports LATEST and EARLIEST.'
             subnet_ids: '- (Required) List of subnets to connect to in the VPC. AWS creates elastic network interfaces inside these subnets to allow communication between your Kafka Cluster and the replicator.'
@@ -72574,14 +73344,15 @@ resources:
             tags: '- (Optional) A map of tags to assign to the resource. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.'
             tags_all: '- A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.'
             target_compression_type: '- (Required) The type of compression to use writing records to target Kafka cluster.'
-            target_kafka_cluster_arn: '- (Required) The ARN of the target Kafka cluster.'
+            target_kafka_cluster_arn: '- (Optional) The ARN of the target Kafka cluster. Use for an Amazon MSK target. Exactly one of target_kafka_cluster_arn or target_kafka_cluster_id must be specified.'
+            target_kafka_cluster_id: '- (Optional) The identifier of the target Kafka cluster. Use for a self-managed / on-premises Apache Kafka target (matches apache_kafka_cluster_id). Exactly one of target_kafka_cluster_arn or target_kafka_cluster_id must be specified.'
             topic_name_configuration: '- (Optional) Configuration for specifying replicated topic names should be the same as their corresponding upstream topics or prefixed with source cluster alias.'
             topic_name_configuration.type: '- (optional) The type of topic configuration name. Supports PREFIXED_WITH_SOURCE_CLUSTER_ALIAS and IDENTICAL.'
             topic_replication: '- (Required) Configuration relating to topic replication.'
             topics_to_exclude: '- (Optional) List of regular expression patterns indicating the topics that should not be replica.'
             topics_to_replicate: '- (Required) List of regular expression patterns indicating the topics to copy.'
             update: '- (Default 180m)'
-            vpc_config: '- (Required) Details of an Amazon VPC which has network connectivity to the Apache Kafka cluster.'
+            vpc_config: '- (Optional) Details of an Amazon VPC which has network connectivity to the Kafka cluster. Provide this on the amazon_msk_cluster entry only; the replicator reaches the Apache Kafka cluster through that VPC.'
         importStatements: []
     aws_msk_scram_secret_association:
         subCategory: Managed Streaming for Kafka
@@ -84875,6 +85646,7 @@ resources:
             upgrade_rollout_order: '- Order in which the clusters are upgraded (first, second, last). See the AWS documentation for details.'
             use_latest_restorable_time: '- (Optional) Set to true to restore the database cluster to the latest restorable backup time. Defaults to false. Conflicts with restore_to_time.'
             vpc_security_group_ids: '- (Optional) List of VPC security groups to associate with the Cluster'
+            warning_event_categories: '- (Optional) Set of RDS event categories (for example failure, maintenance) to check for after create and update operations. If set, Terraform describes RDS events reported for this cluster during the operation and surfaces a warning diagnostic, with the RDS event message, for each one found in these categories. Has no effect if unset; see DescribeEvents and the aws_rds_events data source for the source of these events. Requires the rds:DescribeEvents IAM permission when set.'
         importStatements: []
     aws_rds_cluster_activity_stream:
         subCategory: RDS (Relational Database)
@@ -85136,6 +85908,7 @@ resources:
             tags: '- (Optional) Map of tags to assign to the instance. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.'
             tags_all: '- Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.'
             update: '- (Default 90m)'
+            warning_event_categories: '- (Optional) Set of RDS event categories (for example failure, maintenance) to check for after create and update operations. If set, Terraform describes RDS events reported for this instance during the operation and surfaces a warning diagnostic, with the RDS event message, for each one found in these categories. Has no effect if unset; see DescribeEvents and the aws_rds_events data source for the source of these events. Requires the rds:DescribeEvents IAM permission when set.'
             writer: '- Boolean indicating if this instance is writable. False indicates this instance is a read replica.'
         importStatements: []
     aws_rds_cluster_parameter_group:

@@ -132,6 +132,10 @@ type ClusterInstanceInitParameters struct {
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Set of RDS event categories (for example failure, maintenance) to check for after create and update operations. Has no effect if unset; see DescribeEvents and the aws_rds_events data source for the source of these events. Requires the rds:DescribeEvents IAM permission when set.
+	// +listType=set
+	WarningEventCategories []*string `json:"warningEventCategories,omitempty" tf:"warning_event_categories,omitempty"`
 }
 
 type ClusterInstanceObservation struct {
@@ -241,6 +245,10 @@ type ClusterInstanceObservation struct {
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// Set of RDS event categories (for example failure, maintenance) to check for after create and update operations. Has no effect if unset; see DescribeEvents and the aws_rds_events data source for the source of these events. Requires the rds:DescribeEvents IAM permission when set.
+	// +listType=set
+	WarningEventCategories []*string `json:"warningEventCategories,omitempty" tf:"warning_event_categories,omitempty"`
 
 	// Boolean indicating if this instance is writable. False indicates this instance is a read replica.
 	Writer *bool `json:"writer,omitempty" tf:"writer,omitempty"`
@@ -393,6 +401,11 @@ type ClusterInstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Set of RDS event categories (for example failure, maintenance) to check for after create and update operations. Has no effect if unset; see DescribeEvents and the aws_rds_events data source for the source of these events. Requires the rds:DescribeEvents IAM permission when set.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	WarningEventCategories []*string `json:"warningEventCategories,omitempty" tf:"warning_event_categories,omitempty"`
 }
 
 // ClusterInstanceSpec defines the desired state of ClusterInstance

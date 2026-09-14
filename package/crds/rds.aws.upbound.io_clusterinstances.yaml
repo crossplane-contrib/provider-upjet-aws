@@ -570,6 +570,16 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                     x-kubernetes-map-type: granular
+                  warningEventCategories:
+                    description: Set of RDS event categories (for example failure,
+                      maintenance) to check for after create and update operations.
+                      Has no effect if unset; see DescribeEvents and the aws_rds_events
+                      data source for the source of these events. Requires the rds:DescribeEvents
+                      IAM permission when set.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
                 required:
                 - region
                 type: object
@@ -1078,6 +1088,16 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                     x-kubernetes-map-type: granular
+                  warningEventCategories:
+                    description: Set of RDS event categories (for example failure,
+                      maintenance) to check for after create and update operations.
+                      Has no effect if unset; see DescribeEvents and the aws_rds_events
+                      data source for the source of these events. Requires the rds:DescribeEvents
+                      IAM permission when set.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
                 type: object
               managementPolicies:
                 default:
@@ -1339,6 +1359,16 @@ spec:
                       inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
+                  warningEventCategories:
+                    description: Set of RDS event categories (for example failure,
+                      maintenance) to check for after create and update operations.
+                      Has no effect if unset; see DescribeEvents and the aws_rds_events
+                      data source for the source of these events. Requires the rds:DescribeEvents
+                      IAM permission when set.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
                   writer:
                     description: Boolean indicating if this instance is writable.
                       False indicates this instance is a read replica.
