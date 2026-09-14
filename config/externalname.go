@@ -58,10 +58,16 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	"aws_bedrockagentcore_agent_runtime_endpoint":      bedrockAgentCoreAgentRuntimeEndpoint(),
 	"aws_bedrockagentcore_api_key_credential_provider": frameworkNameAsIdentifier(),
 	"aws_bedrockagentcore_browser":                     config.FrameworkResourceWithComputedIdentifier("browser_id", "stub_browser_xp_szn45-n7uhLDeK0u"),
-	"aws_bedrockagentcore_code_interpreter":            config.FrameworkResourceWithComputedIdentifier("code_interpreter_id", "stub_code_interpreter_tool_xp_123abc-QJBfJmqq7c"),
+	// imported via profile_id, in the form <name>-<10 alphanumerics>
+	"aws_bedrockagentcore_browser_profile":  config.FrameworkResourceWithComputedIdentifier("profile_id", "stub_browser_profile_xp-n7uhLDeK0u"),
+	"aws_bedrockagentcore_code_interpreter": config.FrameworkResourceWithComputedIdentifier("code_interpreter_id", "stub_code_interpreter_tool_xp_123abc-QJBfJmqq7c"),
 	// imported via evaluator_id, must match regex [a-zA-Z0-9_-]+|[a-zA-Z][a-zA-Z0-9-_]{0,99}-[a-zA-Z0-9]{10}
-	"aws_bedrockagentcore_evaluator":      config.FrameworkResourceWithComputedIdentifier("evaluator_id", "xp_stub_evaluator-0000000000"),
-	"aws_bedrockagentcore_gateway":        config.FrameworkResourceWithComputedIdentifier("gateway_id", "gateway-stub-crossplane-x00x0x-xx0x0xx0xx"),
+	"aws_bedrockagentcore_evaluator": config.FrameworkResourceWithComputedIdentifier("evaluator_id", "xp_stub_evaluator-0000000000"),
+	"aws_bedrockagentcore_gateway":   config.FrameworkResourceWithComputedIdentifier("gateway_id", "gateway-stub-crossplane-x00x0x-xx0x0xx0xx"),
+	// imported via gateway_identifier,rule_id. gateway_identifier is already a
+	// required spec field, so only the provider-assigned rule_id (a UUID) is
+	// used as the external name.
+	"aws_bedrockagentcore_gateway_rule":   config.FrameworkResourceWithComputedIdentifier("rule_id", "00000000-0000-0000-0000-000000000000"),
 	"aws_bedrockagentcore_gateway_target": config.FrameworkResourceWithComputedIdentifier("target_id", "XXXXXXXX11"),
 	// must match regex [a-zA-Z][a-zA-Z0-9_]{0,39}-[a-zA-Z0-9]{10}
 	"aws_bedrockagentcore_harness": config.FrameworkResourceWithComputedIdentifier("harness_id", "xp_stub_harness-0000000000"),
