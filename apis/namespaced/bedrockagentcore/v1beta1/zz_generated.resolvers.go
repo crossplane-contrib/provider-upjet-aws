@@ -1405,6 +1405,30 @@ func (mg *Harness) ResolveReferences(ctx context.Context, c client.Reader) error
 		}
 	}
 	if mg.Spec.ForProvider.Model != nil {
+		if mg.Spec.ForProvider.Model.LitellmModelConfig != nil {
+			{
+				m, l, err = apisresolver.GetManagedResource("secretsmanager.aws.m.upbound.io", "v1beta1", "Secret", "SecretList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Model.LitellmModelConfig.APIKeyArn),
+					Extract:      common.ARNExtractor(),
+					Namespace:    mg.GetNamespace(),
+					Reference:    mg.Spec.ForProvider.Model.LitellmModelConfig.APIKeyArnRef,
+					Selector:     mg.Spec.ForProvider.Model.LitellmModelConfig.APIKeyArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.Model.LitellmModelConfig.APIKeyArn")
+			}
+			mg.Spec.ForProvider.Model.LitellmModelConfig.APIKeyArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.Model.LitellmModelConfig.APIKeyArnRef = rsp.ResolvedReference
+
+		}
+	}
+	if mg.Spec.ForProvider.Model != nil {
 		if mg.Spec.ForProvider.Model.OpenaiModelConfig != nil {
 			{
 				m, l, err = apisresolver.GetManagedResource("secretsmanager.aws.m.upbound.io", "v1beta1", "Secret", "SecretList")
@@ -1683,6 +1707,30 @@ func (mg *Harness) ResolveReferences(ctx context.Context, c client.Reader) error
 			}
 			mg.Spec.InitProvider.Model.GeminiModelConfig.APIKeyArn = reference.ToPtrValue(rsp.ResolvedValue)
 			mg.Spec.InitProvider.Model.GeminiModelConfig.APIKeyArnRef = rsp.ResolvedReference
+
+		}
+	}
+	if mg.Spec.InitProvider.Model != nil {
+		if mg.Spec.InitProvider.Model.LitellmModelConfig != nil {
+			{
+				m, l, err = apisresolver.GetManagedResource("secretsmanager.aws.m.upbound.io", "v1beta1", "Secret", "SecretList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Model.LitellmModelConfig.APIKeyArn),
+					Extract:      common.ARNExtractor(),
+					Namespace:    mg.GetNamespace(),
+					Reference:    mg.Spec.InitProvider.Model.LitellmModelConfig.APIKeyArnRef,
+					Selector:     mg.Spec.InitProvider.Model.LitellmModelConfig.APIKeyArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.Model.LitellmModelConfig.APIKeyArn")
+			}
+			mg.Spec.InitProvider.Model.LitellmModelConfig.APIKeyArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.Model.LitellmModelConfig.APIKeyArnRef = rsp.ResolvedReference
 
 		}
 	}

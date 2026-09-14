@@ -15936,6 +15936,16 @@ func (in *LitellmModelConfigInitParameters) DeepCopyInto(out *LitellmModelConfig
 		*out = new(string)
 		**out = **in
 	}
+	if in.APIKeyArnRef != nil {
+		in, out := &in.APIKeyArnRef, &out.APIKeyArnRef
+		*out = new(v2.NamespacedReference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.APIKeyArnSelector != nil {
+		in, out := &in.APIKeyArnSelector, &out.APIKeyArnSelector
+		*out = new(v2.NamespacedSelector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.AdditionalParams != nil {
 		in, out := &in.AdditionalParams, &out.AdditionalParams
 		*out = new(string)
@@ -16035,6 +16045,16 @@ func (in *LitellmModelConfigParameters) DeepCopyInto(out *LitellmModelConfigPara
 		in, out := &in.APIKeyArn, &out.APIKeyArn
 		*out = new(string)
 		**out = **in
+	}
+	if in.APIKeyArnRef != nil {
+		in, out := &in.APIKeyArnRef, &out.APIKeyArnRef
+		*out = new(v2.NamespacedReference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.APIKeyArnSelector != nil {
+		in, out := &in.APIKeyArnSelector, &out.APIKeyArnSelector
+		*out = new(v2.NamespacedSelector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.AdditionalParams != nil {
 		in, out := &in.AdditionalParams, &out.AdditionalParams

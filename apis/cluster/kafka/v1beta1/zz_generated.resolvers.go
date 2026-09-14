@@ -431,6 +431,32 @@ func (mg *Replicator) ResolveReferences(ctx context.Context, c client.Reader) er
 	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.KafkaCluster); i3++ {
 		if mg.Spec.ForProvider.KafkaCluster[i3].ClientAuthentication != nil {
+			if mg.Spec.ForProvider.KafkaCluster[i3].ClientAuthentication.Mtls != nil {
+				{
+					m, l, err = apisresolver.GetManagedResource("secretsmanager.aws.upbound.io", "v1beta1", "Secret", "SecretList")
+					if err != nil {
+						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					}
+					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KafkaCluster[i3].ClientAuthentication.Mtls.SecretArn),
+						Extract:      common.ARNExtractor(),
+						Namespace:    mg.GetNamespace(),
+						Reference:    mg.Spec.ForProvider.KafkaCluster[i3].ClientAuthentication.Mtls.SecretArnRef,
+						Selector:     mg.Spec.ForProvider.KafkaCluster[i3].ClientAuthentication.Mtls.SecretArnSelector,
+						To:           reference.To{List: l, Managed: m},
+					})
+				}
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.ForProvider.KafkaCluster[i3].ClientAuthentication.Mtls.SecretArn")
+				}
+				mg.Spec.ForProvider.KafkaCluster[i3].ClientAuthentication.Mtls.SecretArn = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.ForProvider.KafkaCluster[i3].ClientAuthentication.Mtls.SecretArnRef = rsp.ResolvedReference
+
+			}
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.KafkaCluster); i3++ {
+		if mg.Spec.ForProvider.KafkaCluster[i3].ClientAuthentication != nil {
 			if mg.Spec.ForProvider.KafkaCluster[i3].ClientAuthentication.SaslScram != nil {
 				{
 					m, l, err = apisresolver.GetManagedResource("secretsmanager.aws.upbound.io", "v1beta1", "Secret", "SecretList")
@@ -691,6 +717,32 @@ func (mg *Replicator) ResolveReferences(ctx context.Context, c client.Reader) er
 			mg.Spec.InitProvider.KafkaCluster[i3].AmazonMskCluster.MskClusterArn = reference.ToPtrValue(rsp.ResolvedValue)
 			mg.Spec.InitProvider.KafkaCluster[i3].AmazonMskCluster.MskClusterArnRef = rsp.ResolvedReference
 
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.KafkaCluster); i3++ {
+		if mg.Spec.InitProvider.KafkaCluster[i3].ClientAuthentication != nil {
+			if mg.Spec.InitProvider.KafkaCluster[i3].ClientAuthentication.Mtls != nil {
+				{
+					m, l, err = apisresolver.GetManagedResource("secretsmanager.aws.upbound.io", "v1beta1", "Secret", "SecretList")
+					if err != nil {
+						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					}
+					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KafkaCluster[i3].ClientAuthentication.Mtls.SecretArn),
+						Extract:      common.ARNExtractor(),
+						Namespace:    mg.GetNamespace(),
+						Reference:    mg.Spec.InitProvider.KafkaCluster[i3].ClientAuthentication.Mtls.SecretArnRef,
+						Selector:     mg.Spec.InitProvider.KafkaCluster[i3].ClientAuthentication.Mtls.SecretArnSelector,
+						To:           reference.To{List: l, Managed: m},
+					})
+				}
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.InitProvider.KafkaCluster[i3].ClientAuthentication.Mtls.SecretArn")
+				}
+				mg.Spec.InitProvider.KafkaCluster[i3].ClientAuthentication.Mtls.SecretArn = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.InitProvider.KafkaCluster[i3].ClientAuthentication.Mtls.SecretArnRef = rsp.ResolvedReference
+
+			}
 		}
 	}
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.KafkaCluster); i3++ {

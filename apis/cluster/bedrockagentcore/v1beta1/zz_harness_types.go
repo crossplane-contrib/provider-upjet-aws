@@ -1873,7 +1873,17 @@ type LitellmModelConfigInitParameters struct {
 	APIBase *string `json:"apiBase,omitempty" tf:"api_base,omitempty"`
 
 	// ARN of the secret containing the API key.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/secretsmanager/v1beta1.Secret
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	APIKeyArn *string `json:"apiKeyArn,omitempty" tf:"api_key_arn,omitempty"`
+
+	// Reference to a Secret in secretsmanager to populate apiKeyArn.
+	// +kubebuilder:validation:Optional
+	APIKeyArnRef *v2.Reference `json:"apiKeyArnRef,omitempty" tf:"-"`
+
+	// Selector for a Secret in secretsmanager to populate apiKeyArn.
+	// +kubebuilder:validation:Optional
+	APIKeyArnSelector *v2.Selector `json:"apiKeyArnSelector,omitempty" tf:"-"`
 
 	// JSON string containing provider-specific parameters to pass through to the Bedrock model provider unchanged.
 	AdditionalParams *string `json:"additionalParams,omitempty" tf:"additional_params,omitempty"`
@@ -1922,8 +1932,18 @@ type LitellmModelConfigParameters struct {
 	APIBase *string `json:"apiBase,omitempty" tf:"api_base,omitempty"`
 
 	// ARN of the secret containing the API key.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/secretsmanager/v1beta1.Secret
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	APIKeyArn *string `json:"apiKeyArn,omitempty" tf:"api_key_arn,omitempty"`
+
+	// Reference to a Secret in secretsmanager to populate apiKeyArn.
+	// +kubebuilder:validation:Optional
+	APIKeyArnRef *v2.Reference `json:"apiKeyArnRef,omitempty" tf:"-"`
+
+	// Selector for a Secret in secretsmanager to populate apiKeyArn.
+	// +kubebuilder:validation:Optional
+	APIKeyArnSelector *v2.Selector `json:"apiKeyArnSelector,omitempty" tf:"-"`
 
 	// JSON string containing provider-specific parameters to pass through to the Bedrock model provider unchanged.
 	// +kubebuilder:validation:Optional
