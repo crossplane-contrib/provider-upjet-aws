@@ -235,7 +235,7 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	// Required (not Computed), so it must NOT be in ComputedIdentifierAttributes.
 	"aws_s3files_file_system_policy": frameworkParameterAsIdentifier("file_system_id"),
 	// S3 Files Synchronization Configuration can be imported using the file system ID
-	"aws_s3files_synchronization_configuration": frameworkParameterAsIdentifier("file_system_id"),
+	"aws_s3files_synchronization_configuration": s3filesSynchronizationConfig("file_system_id"),
 
 	// s3vectors
 	//
@@ -3156,6 +3156,9 @@ func s3vectorsPolicyIdentifier() config.ExternalName {
 // field from the resource config.
 func frameworkParameterAsIdentifier(param string) config.ExternalName {
 	return config.NewExternalNameFrom(config.IdentifierFromProvider,
+		config.WithGetIDFn(func(fn config.GetIDFn, _ context.Context, _ string, _ map[string]any, _ map[string]any) (string, error) {
+			return "", nil
+		}),
 		config.WithSetIdentifierArgumentsFn(func(fn config.SetIdentifierArgumentsFn, base map[string]any, externalName string) {
 			if externalName != "" {
 				if v, ok := base[param].(string); !ok || v == "" {
@@ -3171,6 +3174,40 @@ func frameworkParameterAsIdentifier(param string) config.ExternalName {
 				}
 			}
 			return "", errors.Errorf("cannot find attribute %q in tfstate", param)
+		}),
+	)
+}
+
+// `SynchronizationConfig.s3files` resource controls an
+// existing `FileSystem.s3files` settings. `FileSystem.s3files` has
+// a default synchronization config returned from AWS API.
+// Due to its stable identifier, SynchronizationConfig MR always
+// starts with a valid prior state even on fresh MR creation.
+// Therefore, it triggers an "Update" API call rather than "Create"
+// in the initial reconcile.
+// `importDataRule[*].sizeLessThan` parameter is "RequiresReplace" in
+// TF schema during Update calls, therefore causes Upjet to reject
+// the plan.
+// At fresh MR creates, set a non-existent `fileSystemId` so that
+// the initial Observe results in an empty state, then TF Create call
+// is triggered
+func s3filesSynchronizationConfig(param string) config.ExternalName {
+	const stubFileSystemID = "fs-00000000000000000"
+	return config.NewExternalNameFrom(frameworkParameterAsIdentifier("file_system_id"),
+		config.WithSetIdentifierArgumentsFn(func(fn config.SetIdentifierArgumentsFn, base map[string]any, externalName string) {
+			v, ok := base[param].(string)
+			if ok && v != "" {
+				return
+			}
+			if externalName == "" {
+				// no external name and no "fileSystemId" in status.atProvider
+				// i.e. fresh MR creation.
+				// set non-existent `fileSystemId`, so that the initial Observe
+				// results in an empty state.
+				base[param] = stubFileSystemID
+				return
+			}
+			base[param] = externalName
 		}),
 	)
 }
