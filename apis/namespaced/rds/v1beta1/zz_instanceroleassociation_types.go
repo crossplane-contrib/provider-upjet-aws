@@ -31,7 +31,7 @@ type InstanceRoleAssociationInitParameters struct {
 	// Name of the feature for association. This can be found in the AWS documentation relevant to the integration or a full list is available in the SupportedFeatureNames list returned by AWS CLI rds describe-db-engine-versions.
 	FeatureName *string `json:"featureName,omitempty" tf:"feature_name,omitempty"`
 
-	// Amazon Resource Name (ARN) of the IAM Role to associate with the DB Instance.
+	// ARN of the IAM Role to associate with the DB Instance.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
@@ -60,7 +60,7 @@ type InstanceRoleAssociationObservation struct {
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// Amazon Resource Name (ARN) of the IAM Role to associate with the DB Instance.
+	// ARN of the IAM Role to associate with the DB Instance.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
 
@@ -89,7 +89,7 @@ type InstanceRoleAssociationParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// Amazon Resource Name (ARN) of the IAM Role to associate with the DB Instance.
+	// ARN of the IAM Role to associate with the DB Instance.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional

@@ -28,7 +28,7 @@ type NotebookInstanceLifecycleConfigurationInitParameters struct {
 
 type NotebookInstanceLifecycleConfigurationObservation struct {
 
-	// The Amazon Resource Name (ARN) assigned by AWS to this lifecycle configuration.
+	// ARN assigned by AWS to this lifecycle configuration.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`

@@ -75,12 +75,12 @@ spec:
               forProvider:
                 properties:
                   behaviorOnMxFailure:
-                    description: 'The action to take if the required MX record isn''t
+                    description: 'Action to take if the required MX record isn''t
                       found when you send an email. Valid values: USE_DEFAULT_VALUE,
                       REJECT_MESSAGE.'
                     type: string
                   mailFromDomain:
-                    description: The custom MAIL FROM domain that you want the verified
+                    description: Custom MAIL FROM domain that you want the verified
                       identity to use. Required if behavior_on_mx_failure is REJECT_MESSAGE.
                     type: string
                   region:
@@ -105,12 +105,12 @@ spec:
                   autoscaler.
                 properties:
                   behaviorOnMxFailure:
-                    description: 'The action to take if the required MX record isn''t
+                    description: 'Action to take if the required MX record isn''t
                       found when you send an email. Valid values: USE_DEFAULT_VALUE,
                       REJECT_MESSAGE.'
                     type: string
                   mailFromDomain:
-                    description: The custom MAIL FROM domain that you want the verified
+                    description: Custom MAIL FROM domain that you want the verified
                       identity to use. Required if behavior_on_mx_failure is REJECT_MESSAGE.
                     type: string
                 type: object
@@ -207,14 +207,14 @@ spec:
               atProvider:
                 properties:
                   behaviorOnMxFailure:
-                    description: 'The action to take if the required MX record isn''t
+                    description: 'Action to take if the required MX record isn''t
                       found when you send an email. Valid values: USE_DEFAULT_VALUE,
                       REJECT_MESSAGE.'
                     type: string
                   id:
                     type: string
                   mailFromDomain:
-                    description: The custom MAIL FROM domain that you want the verified
+                    description: Custom MAIL FROM domain that you want the verified
                       identity to use. Required if behavior_on_mx_failure is REJECT_MESSAGE.
                     type: string
                   region:

@@ -135,6 +135,30 @@ func (mg *Scraper) ResolveReferences(ctx context.Context, c client.Reader) error
 
 		}
 	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Exporter); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.Exporter[i3].Opensearch); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("opensearch.aws.m.upbound.io", "v1beta1", "Domain", "DomainList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Exporter[i3].Opensearch[i4].DomainArn),
+					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
+					Reference:    mg.Spec.ForProvider.Exporter[i3].Opensearch[i4].DomainArnRef,
+					Selector:     mg.Spec.ForProvider.Exporter[i3].Opensearch[i4].DomainArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.Exporter[i3].Opensearch[i4].DomainArn")
+			}
+			mg.Spec.ForProvider.Exporter[i3].Opensearch[i4].DomainArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.Exporter[i3].Opensearch[i4].DomainArnRef = rsp.ResolvedReference
+
+		}
+	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.RoleConfiguration); i3++ {
 		{
 			m, l, err = apisresolver.GetManagedResource("iam.aws.m.upbound.io", "v1beta1", "Role", "RoleList")
@@ -298,6 +322,30 @@ func (mg *Scraper) ResolveReferences(ctx context.Context, c client.Reader) error
 			}
 			mg.Spec.InitProvider.Destination[i3].Amp[i4].WorkspaceArn = reference.ToPtrValue(rsp.ResolvedValue)
 			mg.Spec.InitProvider.Destination[i3].Amp[i4].WorkspaceArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Exporter); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.Exporter[i3].Opensearch); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("opensearch.aws.m.upbound.io", "v1beta1", "Domain", "DomainList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Exporter[i3].Opensearch[i4].DomainArn),
+					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
+					Reference:    mg.Spec.InitProvider.Exporter[i3].Opensearch[i4].DomainArnRef,
+					Selector:     mg.Spec.InitProvider.Exporter[i3].Opensearch[i4].DomainArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.Exporter[i3].Opensearch[i4].DomainArn")
+			}
+			mg.Spec.InitProvider.Exporter[i3].Opensearch[i4].DomainArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.Exporter[i3].Opensearch[i4].DomainArnRef = rsp.ResolvedReference
 
 		}
 	}

@@ -141,7 +141,7 @@ type QuickConnectInitParameters struct {
 
 type QuickConnectObservation struct {
 
-	// The Amazon Resource Name (ARN) of the Quick Connect.
+	// ARN of the Quick Connect.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Specifies the description of the Quick Connect.

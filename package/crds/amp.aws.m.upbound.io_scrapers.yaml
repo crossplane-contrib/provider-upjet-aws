@@ -60,22 +60,21 @@ spec:
               forProvider:
                 properties:
                   alias:
-                    description: a name to associate with the managed scraper. This
+                    description: Name to associate with the managed scraper. This
                       is for your use, and does not need to be unique.
                     type: string
                   destination:
                     description: Configuration block for the managed scraper to send
-                      metrics to. See destination.
+                      metrics to. See destination Block for details.
                     items:
                       properties:
                         amp:
                           description: Configuration block for an Amazon Managed Prometheus
-                            workspace destination. See amp.
+                            workspace destination. See amp Block for details.
                           items:
                             properties:
                               workspaceArn:
-                                description: The Amazon Resource Name (ARN) of the
-                                  prometheus workspace.
+                                description: ARN of the prometheus workspace.
                                 type: string
                               workspaceArnRef:
                                 description: Reference to a Workspace in amp to populate
@@ -118,6 +117,116 @@ spec:
                               workspaceArnSelector:
                                 description: Selector for a Workspace in amp to populate
                                   workspaceArn.
+                                properties:
+                                  matchControllerRef:
+                                    description: |-
+                                      MatchControllerRef ensures an object with the same controller reference
+                                      as the selecting object is selected.
+                                    type: boolean
+                                  matchLabels:
+                                    additionalProperties:
+                                      type: string
+                                    description: MatchLabels ensures an object with
+                                      matching labels is selected.
+                                    type: object
+                                  namespace:
+                                    description: Namespace for the selector
+                                    type: string
+                                  policy:
+                                    description: Policies for selection.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: |-
+                                          Resolution specifies whether resolution of this reference is required.
+                                          The default is 'Required', which means the reconcile will fail if the
+                                          reference cannot be resolved. 'Optional' means this reference will be
+                                          a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: |-
+                                          Resolve specifies when this reference should be resolved. The default
+                                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                                          the corresponding field is not present. Use 'Always' to resolve the
+                                          reference on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                type: object
+                            type: object
+                          type: array
+                        cloudwatch:
+                          description: Configuration block for a CloudWatch Metrics
+                            destination. See cloudwatch Block for details.
+                          items:
+                            properties:
+                              datasetArn:
+                                description: ARN of the CloudWatch dataset. Use arn:aws:cloudwatch:{region}:{account}:dataset/default
+                                  for the default dataset.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  exporter:
+                    description: Configuration block for additional exporters. See
+                      exporter Block for details.
+                    items:
+                      properties:
+                        opensearch:
+                          description: Configuration block for an OpenSearch exporter.
+                            See opensearch Block for details.
+                          items:
+                            properties:
+                              domainArn:
+                                description: ARN of the OpenSearch domain.
+                                type: string
+                              domainArnRef:
+                                description: Reference to a Domain in opensearch to
+                                  populate domainArn.
+                                properties:
+                                  name:
+                                    description: Name of the referenced object.
+                                    type: string
+                                  namespace:
+                                    description: Namespace of the referenced object
+                                    type: string
+                                  policy:
+                                    description: Policies for referencing.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: |-
+                                          Resolution specifies whether resolution of this reference is required.
+                                          The default is 'Required', which means the reconcile will fail if the
+                                          reference cannot be resolved. 'Optional' means this reference will be
+                                          a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: |-
+                                          Resolve specifies when this reference should be resolved. The default
+                                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                                          the corresponding field is not present. Use 'Always' to resolve the
+                                          reference on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                required:
+                                - name
+                                type: object
+                              domainArnSelector:
+                                description: Selector for a Domain in opensearch to
+                                  populate domainArn.
                                 properties:
                                   matchControllerRef:
                                     description: |-
@@ -171,12 +280,12 @@ spec:
                   roleConfiguration:
                     description: Configuration block to enable writing to an Amazon
                       Managed Service for Prometheus workspace in a different account.
-                      See role_configuration below.
+                      See role_configuration Block for details.
                     items:
                       properties:
                         sourceRoleArn:
-                          description: The Amazon Resource Name (ARN) of the source
-                            role configuration. Must be an IAM role ARN.
+                          description: ARN of the source role configuration. Must
+                            be an IAM role ARN.
                           type: string
                         sourceRoleArnRef:
                           description: Reference to a Role in iam to populate sourceRoleArn.
@@ -259,28 +368,27 @@ spec:
                               type: object
                           type: object
                         targetRoleArn:
-                          description: The Amazon Resource Name (ARN) of the target
-                            role configuration. Must be an IAM role ARN.
+                          description: ARN of the target role configuration. Must
+                            be an IAM role ARN.
                           type: string
                       type: object
                     type: array
                   scrapeConfiguration:
-                    description: The configuration file to use in the new scraper.
-                      For more information, see Scraper configuration.
+                    description: Configuration file to use in the new scraper. For
+                      more information, see Scraper configuration.
                     type: string
                   source:
                     description: Configuration block to specify where the managed
-                      scraper will collect metrics from. See source.
+                      scraper will collect metrics from. See source Block for details.
                     items:
                       properties:
                         eks:
                           description: Configuration block for an EKS cluster source.
-                            See eks.
+                            See eks Block for details.
                           items:
                             properties:
                               clusterArn:
-                                description: The Amazon Resource Name (ARN) of the
-                                  source EKS cluster.
+                                description: ARN of the source EKS cluster.
                                 type: string
                               clusterArnRef:
                                 description: Reference to a Cluster in eks to populate
@@ -551,7 +659,8 @@ spec:
                             type: object
                           type: array
                         vpc:
-                          description: Configuration block for a VPC source. See vpc.
+                          description: Configuration block for a VPC source. See vpc
+                            Block for details.
                           items:
                             properties:
                               securityGroupIds:
@@ -745,6 +854,7 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: Key-value map of resource tags.
                     type: object
                     x-kubernetes-map-type: granular
                 required:
@@ -764,22 +874,21 @@ spec:
                   autoscaler.
                 properties:
                   alias:
-                    description: a name to associate with the managed scraper. This
+                    description: Name to associate with the managed scraper. This
                       is for your use, and does not need to be unique.
                     type: string
                   destination:
                     description: Configuration block for the managed scraper to send
-                      metrics to. See destination.
+                      metrics to. See destination Block for details.
                     items:
                       properties:
                         amp:
                           description: Configuration block for an Amazon Managed Prometheus
-                            workspace destination. See amp.
+                            workspace destination. See amp Block for details.
                           items:
                             properties:
                               workspaceArn:
-                                description: The Amazon Resource Name (ARN) of the
-                                  prometheus workspace.
+                                description: ARN of the prometheus workspace.
                                 type: string
                               workspaceArnRef:
                                 description: Reference to a Workspace in amp to populate
@@ -865,17 +974,127 @@ spec:
                                 type: object
                             type: object
                           type: array
+                        cloudwatch:
+                          description: Configuration block for a CloudWatch Metrics
+                            destination. See cloudwatch Block for details.
+                          items:
+                            properties:
+                              datasetArn:
+                                description: ARN of the CloudWatch dataset. Use arn:aws:cloudwatch:{region}:{account}:dataset/default
+                                  for the default dataset.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  exporter:
+                    description: Configuration block for additional exporters. See
+                      exporter Block for details.
+                    items:
+                      properties:
+                        opensearch:
+                          description: Configuration block for an OpenSearch exporter.
+                            See opensearch Block for details.
+                          items:
+                            properties:
+                              domainArn:
+                                description: ARN of the OpenSearch domain.
+                                type: string
+                              domainArnRef:
+                                description: Reference to a Domain in opensearch to
+                                  populate domainArn.
+                                properties:
+                                  name:
+                                    description: Name of the referenced object.
+                                    type: string
+                                  namespace:
+                                    description: Namespace of the referenced object
+                                    type: string
+                                  policy:
+                                    description: Policies for referencing.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: |-
+                                          Resolution specifies whether resolution of this reference is required.
+                                          The default is 'Required', which means the reconcile will fail if the
+                                          reference cannot be resolved. 'Optional' means this reference will be
+                                          a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: |-
+                                          Resolve specifies when this reference should be resolved. The default
+                                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                                          the corresponding field is not present. Use 'Always' to resolve the
+                                          reference on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                required:
+                                - name
+                                type: object
+                              domainArnSelector:
+                                description: Selector for a Domain in opensearch to
+                                  populate domainArn.
+                                properties:
+                                  matchControllerRef:
+                                    description: |-
+                                      MatchControllerRef ensures an object with the same controller reference
+                                      as the selecting object is selected.
+                                    type: boolean
+                                  matchLabels:
+                                    additionalProperties:
+                                      type: string
+                                    description: MatchLabels ensures an object with
+                                      matching labels is selected.
+                                    type: object
+                                  namespace:
+                                    description: Namespace for the selector
+                                    type: string
+                                  policy:
+                                    description: Policies for selection.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: |-
+                                          Resolution specifies whether resolution of this reference is required.
+                                          The default is 'Required', which means the reconcile will fail if the
+                                          reference cannot be resolved. 'Optional' means this reference will be
+                                          a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: |-
+                                          Resolve specifies when this reference should be resolved. The default
+                                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                                          the corresponding field is not present. Use 'Always' to resolve the
+                                          reference on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                type: object
+                            type: object
+                          type: array
                       type: object
                     type: array
                   roleConfiguration:
                     description: Configuration block to enable writing to an Amazon
                       Managed Service for Prometheus workspace in a different account.
-                      See role_configuration below.
+                      See role_configuration Block for details.
                     items:
                       properties:
                         sourceRoleArn:
-                          description: The Amazon Resource Name (ARN) of the source
-                            role configuration. Must be an IAM role ARN.
+                          description: ARN of the source role configuration. Must
+                            be an IAM role ARN.
                           type: string
                         sourceRoleArnRef:
                           description: Reference to a Role in iam to populate sourceRoleArn.
@@ -958,28 +1177,27 @@ spec:
                               type: object
                           type: object
                         targetRoleArn:
-                          description: The Amazon Resource Name (ARN) of the target
-                            role configuration. Must be an IAM role ARN.
+                          description: ARN of the target role configuration. Must
+                            be an IAM role ARN.
                           type: string
                       type: object
                     type: array
                   scrapeConfiguration:
-                    description: The configuration file to use in the new scraper.
-                      For more information, see Scraper configuration.
+                    description: Configuration file to use in the new scraper. For
+                      more information, see Scraper configuration.
                     type: string
                   source:
                     description: Configuration block to specify where the managed
-                      scraper will collect metrics from. See source.
+                      scraper will collect metrics from. See source Block for details.
                     items:
                       properties:
                         eks:
                           description: Configuration block for an EKS cluster source.
-                            See eks.
+                            See eks Block for details.
                           items:
                             properties:
                               clusterArn:
-                                description: The Amazon Resource Name (ARN) of the
-                                  source EKS cluster.
+                                description: ARN of the source EKS cluster.
                                 type: string
                               clusterArnRef:
                                 description: Reference to a Cluster in eks to populate
@@ -1250,7 +1468,8 @@ spec:
                             type: object
                           type: array
                         vpc:
-                          description: Configuration block for a VPC source. See vpc.
+                          description: Configuration block for a VPC source. See vpc
+                            Block for details.
                           items:
                             properties:
                               securityGroupIds:
@@ -1444,6 +1663,7 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: Key-value map of resource tags.
                     type: object
                     x-kubernetes-map-type: granular
                 type: object
@@ -1516,31 +1736,59 @@ spec:
               atProvider:
                 properties:
                   alias:
-                    description: a name to associate with the managed scraper. This
+                    description: Name to associate with the managed scraper. This
                       is for your use, and does not need to be unique.
                     type: string
                   arn:
-                    description: The Amazon Resource Name (ARN) of the new scraper.
+                    description: ARN of the scraper.
                     type: string
                   destination:
                     description: Configuration block for the managed scraper to send
-                      metrics to. See destination.
+                      metrics to. See destination Block for details.
                     items:
                       properties:
                         amp:
                           description: Configuration block for an Amazon Managed Prometheus
-                            workspace destination. See amp.
+                            workspace destination. See amp Block for details.
                           items:
                             properties:
                               workspaceArn:
-                                description: The Amazon Resource Name (ARN) of the
-                                  prometheus workspace.
+                                description: ARN of the prometheus workspace.
+                                type: string
+                            type: object
+                          type: array
+                        cloudwatch:
+                          description: Configuration block for a CloudWatch Metrics
+                            destination. See cloudwatch Block for details.
+                          items:
+                            properties:
+                              datasetArn:
+                                description: ARN of the CloudWatch dataset. Use arn:aws:cloudwatch:{region}:{account}:dataset/default
+                                  for the default dataset.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  exporter:
+                    description: Configuration block for additional exporters. See
+                      exporter Block for details.
+                    items:
+                      properties:
+                        opensearch:
+                          description: Configuration block for an OpenSearch exporter.
+                            See opensearch Block for details.
+                          items:
+                            properties:
+                              domainArn:
+                                description: ARN of the OpenSearch domain.
                                 type: string
                             type: object
                           type: array
                       type: object
                     type: array
                   id:
+                    description: (String) ID of the scraper.
                     type: string
                   region:
                     description: |-
@@ -1548,43 +1796,41 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   roleArn:
-                    description: The Amazon Resource Name (ARN) of the IAM role that
-                      provides permissions for the scraper to discover, collect, and
-                      produce metrics
+                    description: ARN of the IAM role that provides permissions for
+                      the scraper to discover, collect, and produce metrics
                     type: string
                   roleConfiguration:
                     description: Configuration block to enable writing to an Amazon
                       Managed Service for Prometheus workspace in a different account.
-                      See role_configuration below.
+                      See role_configuration Block for details.
                     items:
                       properties:
                         sourceRoleArn:
-                          description: The Amazon Resource Name (ARN) of the source
-                            role configuration. Must be an IAM role ARN.
+                          description: ARN of the source role configuration. Must
+                            be an IAM role ARN.
                           type: string
                         targetRoleArn:
-                          description: The Amazon Resource Name (ARN) of the target
-                            role configuration. Must be an IAM role ARN.
+                          description: ARN of the target role configuration. Must
+                            be an IAM role ARN.
                           type: string
                       type: object
                     type: array
                   scrapeConfiguration:
-                    description: The configuration file to use in the new scraper.
-                      For more information, see Scraper configuration.
+                    description: Configuration file to use in the new scraper. For
+                      more information, see Scraper configuration.
                     type: string
                   source:
                     description: Configuration block to specify where the managed
-                      scraper will collect metrics from. See source.
+                      scraper will collect metrics from. See source Block for details.
                     items:
                       properties:
                         eks:
                           description: Configuration block for an EKS cluster source.
-                            See eks.
+                            See eks Block for details.
                           items:
                             properties:
                               clusterArn:
-                                description: The Amazon Resource Name (ARN) of the
-                                  source EKS cluster.
+                                description: ARN of the source EKS cluster.
                                 type: string
                               securityGroupIds:
                                 description: List of the security group IDs for the
@@ -1603,7 +1849,8 @@ spec:
                             type: object
                           type: array
                         vpc:
-                          description: Configuration block for a VPC source. See vpc.
+                          description: Configuration block for a VPC source. See vpc
+                            Block for details.
                           items:
                             properties:
                               securityGroupIds:
@@ -1627,11 +1874,14 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: Key-value map of resource tags.
                     type: object
                     x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
                 type: object

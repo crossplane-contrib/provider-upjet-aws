@@ -31,7 +31,7 @@ type BucketNotificationInitParameters struct {
 	// Whether to enable Amazon EventBridge notifications. Defaults to false.
 	Eventbridge *bool `json:"eventbridge,omitempty" tf:"eventbridge,omitempty"`
 
-	// Used to configure notifications to a Lambda Function. See below.
+	// Notification configuration to a Lambda Function. See below.
 	LambdaFunction []LambdaFunctionInitParameters `json:"lambdaFunction,omitempty" tf:"lambda_function,omitempty"`
 
 	// Notification configuration to SQS Queue. See below.
@@ -52,7 +52,7 @@ type BucketNotificationObservation struct {
 	// Unique identifier for each of the notification configurations.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Used to configure notifications to a Lambda Function. See below.
+	// Notification configuration to a Lambda Function. See below.
 	LambdaFunction []LambdaFunctionObservation `json:"lambdaFunction,omitempty" tf:"lambda_function,omitempty"`
 
 	// Notification configuration to SQS Queue. See below.
@@ -86,7 +86,7 @@ type BucketNotificationParameters struct {
 	// +kubebuilder:validation:Optional
 	Eventbridge *bool `json:"eventbridge,omitempty" tf:"eventbridge,omitempty"`
 
-	// Used to configure notifications to a Lambda Function. See below.
+	// Notification configuration to a Lambda Function. See below.
 	// +kubebuilder:validation:Optional
 	LambdaFunction []LambdaFunctionParameters `json:"lambdaFunction,omitempty" tf:"lambda_function,omitempty"`
 
@@ -168,7 +168,7 @@ type LambdaFunctionParameters struct {
 
 type QueueInitParameters struct {
 
-	// Specifies event for which to send notifications.
+	// Event for which to send notifications.
 	// +listType=set
 	Events []*string `json:"events,omitempty" tf:"events,omitempty"`
 
@@ -197,7 +197,7 @@ type QueueInitParameters struct {
 
 type QueueObservation struct {
 
-	// Specifies event for which to send notifications.
+	// Event for which to send notifications.
 	// +listType=set
 	Events []*string `json:"events,omitempty" tf:"events,omitempty"`
 
@@ -216,7 +216,7 @@ type QueueObservation struct {
 
 type QueueParameters struct {
 
-	// Specifies event for which to send notifications.
+	// Event for which to send notifications.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	Events []*string `json:"events" tf:"events,omitempty"`

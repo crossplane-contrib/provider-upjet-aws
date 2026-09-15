@@ -143,16 +143,16 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The ARN assigned by AWS for this group.
+                    description: ARN assigned by AWS for this group.
                     type: string
                   id:
-                    description: The group's name.
+                    description: Group's name.
                     type: string
                   path:
                     description: Path in which to create the group.
                     type: string
                   uniqueId:
-                    description: The unique ID assigned by AWS.
+                    description: Unique ID assigned by AWS.
                     type: string
                 type: object
               conditions:

@@ -21,16 +21,16 @@ type PermissionSetInlinePolicyInitParameters struct {
 
 type PermissionSetInlinePolicyObservation struct {
 
-	// The Amazon Resource Names (ARNs) of the Permission Set and SSO Instance, separated by a comma (,).
+	// ARNs of the Permission Set and SSO Instance, separated by a comma (,).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The IAM inline policy to attach to a Permission Set.
 	InlinePolicy *string `json:"inlinePolicy,omitempty" tf:"inline_policy,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the SSO Instance under which the operation will be executed.
+	// ARN of the SSO Instance under which the operation will be executed.
 	InstanceArn *string `json:"instanceArn,omitempty" tf:"instance_arn,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the Permission Set.
+	// ARN of the Permission Set.
 	PermissionSetArn *string `json:"permissionSetArn,omitempty" tf:"permission_set_arn,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -44,11 +44,11 @@ type PermissionSetInlinePolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	InlinePolicy *string `json:"inlinePolicy,omitempty" tf:"inline_policy,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the SSO Instance under which the operation will be executed.
+	// ARN of the SSO Instance under which the operation will be executed.
 	// +kubebuilder:validation:Required
 	InstanceArn *string `json:"instanceArn" tf:"instance_arn,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the Permission Set.
+	// ARN of the Permission Set.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ssoadmin/v1beta1.PermissionSet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional

@@ -230,7 +230,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: Amazon Resource Name (ARN) of the configuration.
+                    description: ARN of the configuration.
                     type: string
                   description:
                     description: Description of the configuration.

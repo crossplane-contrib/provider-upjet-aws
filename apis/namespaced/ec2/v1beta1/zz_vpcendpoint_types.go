@@ -224,7 +224,7 @@ type VPCEndpointInitParameters_2 struct {
 
 type VPCEndpointObservation_2 struct {
 
-	// The Amazon Resource Name (ARN) of the VPC endpoint.
+	// ARN of the VPC endpoint.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Accept the VPC endpoint (the VPC endpoint and service need to be in the same AWS account).

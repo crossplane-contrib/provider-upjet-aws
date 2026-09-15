@@ -78,7 +78,7 @@ type DBSnapshotCopyObservation struct {
 	// Whether to copy existing tags. Defaults to false.
 	CopyTags *bool `json:"copyTags,omitempty" tf:"copy_tags,omitempty"`
 
-	// The Amazon Resource Name (ARN) for the DB snapshot.
+	// ARN for the DB snapshot.
 	DBSnapshotArn *string `json:"dbSnapshotArn,omitempty" tf:"db_snapshot_arn,omitempty"`
 
 	// The Destination region to place snapshot copy.

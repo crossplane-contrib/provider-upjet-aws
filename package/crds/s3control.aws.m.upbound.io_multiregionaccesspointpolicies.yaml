@@ -62,19 +62,19 @@ spec:
               forProvider:
                 properties:
                   accountId:
-                    description: The AWS account ID for the owner of the Multi-Region
+                    description: AWS account ID for the owner of the Multi-Region
                       Access Point.
                     type: string
                   details:
-                    description: A configuration block containing details about the
-                      policy for the Multi-Region Access Point. See Details Configuration
-                      Block below for more details
+                    description: Configuration block containing details about the
+                      policy for the Multi-Region Access Point. See details Block
+                      below for more details
                     properties:
                       name:
-                        description: The name of the Multi-Region Access Point.
+                        description: Name of the Multi-Region Access Point.
                         type: string
                       policy:
-                        description: A valid JSON document that specifies the policy
+                        description: Valid JSON document that specifies the policy
                           that you want to associate with this Multi-Region Access
                           Point. Once applied, the policy can be edited, but not deleted.
                           For more information, see the documentation on Multi-Region
@@ -103,19 +103,19 @@ spec:
                   autoscaler.
                 properties:
                   accountId:
-                    description: The AWS account ID for the owner of the Multi-Region
+                    description: AWS account ID for the owner of the Multi-Region
                       Access Point.
                     type: string
                   details:
-                    description: A configuration block containing details about the
-                      policy for the Multi-Region Access Point. See Details Configuration
-                      Block below for more details
+                    description: Configuration block containing details about the
+                      policy for the Multi-Region Access Point. See details Block
+                      below for more details
                     properties:
                       name:
-                        description: The name of the Multi-Region Access Point.
+                        description: Name of the Multi-Region Access Point.
                         type: string
                       policy:
-                        description: A valid JSON document that specifies the policy
+                        description: Valid JSON document that specifies the policy
                           that you want to associate with this Multi-Region Access
                           Point. Once applied, the policy can be edited, but not deleted.
                           For more information, see the documentation on Multi-Region
@@ -193,19 +193,19 @@ spec:
               atProvider:
                 properties:
                   accountId:
-                    description: The AWS account ID for the owner of the Multi-Region
+                    description: AWS account ID for the owner of the Multi-Region
                       Access Point.
                     type: string
                   details:
-                    description: A configuration block containing details about the
-                      policy for the Multi-Region Access Point. See Details Configuration
-                      Block below for more details
+                    description: Configuration block containing details about the
+                      policy for the Multi-Region Access Point. See details Block
+                      below for more details
                     properties:
                       name:
-                        description: The name of the Multi-Region Access Point.
+                        description: Name of the Multi-Region Access Point.
                         type: string
                       policy:
-                        description: A valid JSON document that specifies the policy
+                        description: Valid JSON document that specifies the policy
                           that you want to associate with this Multi-Region Access
                           Point. Once applied, the policy can be edited, but not deleted.
                           For more information, see the documentation on Multi-Region
@@ -213,15 +213,15 @@ spec:
                         type: string
                     type: object
                   established:
-                    description: The last established policy for the Multi-Region
-                      Access Point.
+                    description: Last established policy for the Multi-Region Access
+                      Point.
                     type: string
                   id:
-                    description: The AWS account ID and access point name separated
-                      by a colon (:).
+                    description: AWS account ID and access point name separated by
+                      a colon (:).
                     type: string
                   proposed:
-                    description: The proposed policy for the Multi-Region Access Point.
+                    description: Proposed policy for the Multi-Region Access Point.
                     type: string
                   region:
                     description: |-

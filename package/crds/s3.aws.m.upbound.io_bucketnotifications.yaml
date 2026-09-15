@@ -147,7 +147,7 @@ spec:
                       Defaults to false.
                     type: boolean
                   lambdaFunction:
-                    description: Used to configure notifications to a Lambda Function.
+                    description: Notification configuration to a Lambda Function.
                       See below.
                     items:
                       properties:
@@ -177,7 +177,7 @@ spec:
                     items:
                       properties:
                         events:
-                          description: Specifies event for which to send notifications.
+                          description: Event for which to send notifications.
                           items:
                             type: string
                           type: array
@@ -491,7 +491,7 @@ spec:
                       Defaults to false.
                     type: boolean
                   lambdaFunction:
-                    description: Used to configure notifications to a Lambda Function.
+                    description: Notification configuration to a Lambda Function.
                       See below.
                     items:
                       properties:
@@ -521,7 +521,7 @@ spec:
                     items:
                       properties:
                         events:
-                          description: Specifies event for which to send notifications.
+                          description: Event for which to send notifications.
                           items:
                             type: string
                           type: array
@@ -801,7 +801,7 @@ spec:
                     description: Unique identifier for each of the notification configurations.
                     type: string
                   lambdaFunction:
-                    description: Used to configure notifications to a Lambda Function.
+                    description: Notification configuration to a Lambda Function.
                       See below.
                     items:
                       properties:
@@ -831,7 +831,7 @@ spec:
                     items:
                       properties:
                         events:
-                          description: Specifies event for which to send notifications.
+                          description: Event for which to send notifications.
                           items:
                             type: string
                           type: array

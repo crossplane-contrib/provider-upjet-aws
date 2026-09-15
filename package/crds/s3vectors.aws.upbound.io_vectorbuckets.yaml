@@ -74,7 +74,7 @@ spec:
                 properties:
                   encryptionConfiguration:
                     description: Encryption configuration for the vector bucket. See
-                      Encryption Configuration below for more details.
+                      encryption_configuration below for more details.
                     properties:
                       kmsKeyArn:
                         description: AWS KMS CMK ARN to use for the default encryption
@@ -200,7 +200,7 @@ spec:
                 properties:
                   encryptionConfiguration:
                     description: Encryption configuration for the vector bucket. See
-                      Encryption Configuration below for more details.
+                      encryption_configuration below for more details.
                     properties:
                       kmsKeyArn:
                         description: AWS KMS CMK ARN to use for the default encryption
@@ -405,7 +405,7 @@ spec:
                     type: string
                   encryptionConfiguration:
                     description: Encryption configuration for the vector bucket. See
-                      Encryption Configuration below for more details.
+                      encryption_configuration below for more details.
                     properties:
                       kmsKeyArn:
                         description: AWS KMS CMK ARN to use for the default encryption
@@ -441,9 +441,8 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
                   vectorBucketArn:

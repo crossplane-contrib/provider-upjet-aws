@@ -1803,6 +1803,9 @@ type NetworkInterfacesInitParameters struct {
 	// The integer index of the network interface attachment.
 	DeviceIndex *float64 `json:"deviceIndex,omitempty" tf:"device_index,omitempty"`
 
+	// The number of ENA queues to be created with the instance. Requires an instance type and operating system that support ENA queue configuration.
+	EnaQueueCount *float64 `json:"enaQueueCount,omitempty" tf:"ena_queue_count,omitempty"`
+
 	// Configuration for Elastic Network Adapter (ENA) Express settings. Applies to network interfaces that use the ena Express feature. See details below.
 	EnaSrdSpecification []EnaSrdSpecificationInitParameters `json:"enaSrdSpecification,omitempty" tf:"ena_srd_specification,omitempty"`
 
@@ -1906,6 +1909,9 @@ type NetworkInterfacesObservation struct {
 	// The integer index of the network interface attachment.
 	DeviceIndex *float64 `json:"deviceIndex,omitempty" tf:"device_index,omitempty"`
 
+	// The number of ENA queues to be created with the instance. Requires an instance type and operating system that support ENA queue configuration.
+	EnaQueueCount *float64 `json:"enaQueueCount,omitempty" tf:"ena_queue_count,omitempty"`
+
 	// Configuration for Elastic Network Adapter (ENA) Express settings. Applies to network interfaces that use the ena Express feature. See details below.
 	EnaSrdSpecification []EnaSrdSpecificationObservation `json:"enaSrdSpecification,omitempty" tf:"ena_srd_specification,omitempty"`
 
@@ -1985,6 +1991,10 @@ type NetworkInterfacesParameters struct {
 	// The integer index of the network interface attachment.
 	// +kubebuilder:validation:Optional
 	DeviceIndex *float64 `json:"deviceIndex,omitempty" tf:"device_index,omitempty"`
+
+	// The number of ENA queues to be created with the instance. Requires an instance type and operating system that support ENA queue configuration.
+	// +kubebuilder:validation:Optional
+	EnaQueueCount *float64 `json:"enaQueueCount,omitempty" tf:"ena_queue_count,omitempty"`
 
 	// Configuration for Elastic Network Adapter (ENA) Express settings. Applies to network interfaces that use the ena Express feature. See details below.
 	// +kubebuilder:validation:Optional

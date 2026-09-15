@@ -1314,9 +1314,8 @@ spec:
                     description: The name of ML compute instance type.
                     type: string
                   kmsKeyId:
-                    description: The AWS Key Management Service (AWS KMS) key that
-                      Amazon SageMaker AI uses to encrypt the model artifacts at rest
-                      using Amazon S3 server-side encryption.
+                    description: KMS key that Amazon SageMaker AI uses to encrypt
+                      the model artifacts at rest using Amazon S3 server-side encryption.
                     type: string
                   kmsKeyIdRef:
                     description: Reference to a Key in kms to populate kmsKeyId.
@@ -1716,9 +1715,8 @@ spec:
                     description: The name of ML compute instance type.
                     type: string
                   kmsKeyId:
-                    description: The AWS Key Management Service (AWS KMS) key that
-                      Amazon SageMaker AI uses to encrypt the model artifacts at rest
-                      using Amazon S3 server-side encryption.
+                    description: KMS key that Amazon SageMaker AI uses to encrypt
+                      the model artifacts at rest using Amazon S3 server-side encryption.
                     type: string
                   kmsKeyIdRef:
                     description: Reference to a Key in kms to populate kmsKeyId.
@@ -2087,8 +2085,7 @@ spec:
                     type: array
                     x-kubernetes-list-type: set
                   arn:
-                    description: The Amazon Resource Name (ARN) assigned by AWS to
-                      this notebook instance.
+                    description: ARN assigned by AWS to this notebook instance.
                     type: string
                   defaultCodeRepository:
                     description: The Git repository associated with the notebook instance
@@ -2125,9 +2122,8 @@ spec:
                     description: The name of ML compute instance type.
                     type: string
                   kmsKeyId:
-                    description: The AWS Key Management Service (AWS KMS) key that
-                      Amazon SageMaker AI uses to encrypt the model artifacts at rest
-                      using Amazon S3 server-side encryption.
+                    description: KMS key that Amazon SageMaker AI uses to encrypt
+                      the model artifacts at rest using Amazon S3 server-side encryption.
                     type: string
                   lifecycleConfigName:
                     description: The name of a lifecycle configuration to associate

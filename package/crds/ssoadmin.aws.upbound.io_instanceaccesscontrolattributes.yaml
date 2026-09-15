@@ -101,7 +101,7 @@ spec:
                       type: object
                     type: array
                   instanceArn:
-                    description: The Amazon Resource Name (ARN) of the SSO Instance.
+                    description: ARN of the SSO Instance.
                     type: string
                   region:
                     description: |-
@@ -280,7 +280,7 @@ spec:
                       instance_arn.
                     type: string
                   instanceArn:
-                    description: The Amazon Resource Name (ARN) of the SSO Instance.
+                    description: ARN of the SSO Instance.
                     type: string
                   region:
                     description: |-

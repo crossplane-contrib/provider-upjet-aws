@@ -200,7 +200,7 @@ type StackSetObservation struct {
 	// Amazon Resource Number (ARN) of the IAM Role in the administrator account. This must be defined when using the SELF_MANAGED permission model.
 	AdministrationRoleArn *string `json:"administrationRoleArn,omitempty" tf:"administration_role_arn,omitempty"`
 
-	// Amazon Resource Name (ARN) of the StackSet.
+	// ARN of the StackSet.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Configuration block containing the auto-deployment model for your StackSet. This can only be defined when using the SERVICE_MANAGED permission model.

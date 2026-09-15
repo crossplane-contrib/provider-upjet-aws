@@ -15,8 +15,11 @@ import (
 
 type ActionInitParameters struct {
 
-	// A category defines what kind of action can be taken in the stage, and constrains the provider type for the action. Possible values are Approval, Build, Deploy, Invoke, Source and Test.
+	// A category defines what kind of action can be taken in the stage, and constrains the provider type for the action. Possible values are Approval, Build, Deploy, Invoke, Source, Compute and Test.
 	Category *string `json:"category,omitempty" tf:"category,omitempty"`
+
+	// A list of shell commands to run with the compute action.
+	Commands []*string `json:"commands,omitempty" tf:"commands,omitempty"`
 
 	// A map of the action declaration's configuration. Configurations options for action types and providers can be found in the Pipeline Structure Reference and Action Structure Reference documentation. Note: The DetectChanges parameter  in the configuration section causes CodePipeline to automatically start your pipeline upon new commits. Please refer to AWS Documentation for more details: https://docs.aws.amazon.com/codepipeline/latest/userguide/action-reference-CodestarConnectionSource.html#action-reference-CodestarConnectionSource-config.
 	// +mapType=granular
@@ -31,8 +34,14 @@ type ActionInitParameters struct {
 	// The namespace all output variables will be accessed from.
 	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
 
-	// A list of artifact names to output. Output artifact names must be unique within a pipeline.
+	// A list of artifact names to output. Output artifact names must be unique within a pipeline. If the action is Compute, this argument is ignored.
 	OutputArtifacts []*string `json:"outputArtifacts,omitempty" tf:"output_artifacts,omitempty"`
+
+	// A block of output artifacts for the compute action. If the action is not Compute, this argument is ignored.
+	OutputArtifactsForComputeAction []OutputArtifactsForComputeActionInitParameters `json:"outputArtifactsForComputeAction,omitempty" tf:"output_artifacts_for_compute_action,omitempty"`
+
+	// A list of variables that are to be exported from the compute action.
+	OutputVariables []*string `json:"outputVariables,omitempty" tf:"output_variables,omitempty"`
 
 	// The creator of the action being called. Possible values are AWS, Custom and ThirdParty.
 	Owner *string `json:"owner,omitempty" tf:"owner,omitempty"`
@@ -55,8 +64,11 @@ type ActionInitParameters struct {
 
 type ActionObservation struct {
 
-	// A category defines what kind of action can be taken in the stage, and constrains the provider type for the action. Possible values are Approval, Build, Deploy, Invoke, Source and Test.
+	// A category defines what kind of action can be taken in the stage, and constrains the provider type for the action. Possible values are Approval, Build, Deploy, Invoke, Source, Compute and Test.
 	Category *string `json:"category,omitempty" tf:"category,omitempty"`
+
+	// A list of shell commands to run with the compute action.
+	Commands []*string `json:"commands,omitempty" tf:"commands,omitempty"`
 
 	// A map of the action declaration's configuration. Configurations options for action types and providers can be found in the Pipeline Structure Reference and Action Structure Reference documentation. Note: The DetectChanges parameter  in the configuration section causes CodePipeline to automatically start your pipeline upon new commits. Please refer to AWS Documentation for more details: https://docs.aws.amazon.com/codepipeline/latest/userguide/action-reference-CodestarConnectionSource.html#action-reference-CodestarConnectionSource-config.
 	// +mapType=granular
@@ -71,8 +83,14 @@ type ActionObservation struct {
 	// The namespace all output variables will be accessed from.
 	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
 
-	// A list of artifact names to output. Output artifact names must be unique within a pipeline.
+	// A list of artifact names to output. Output artifact names must be unique within a pipeline. If the action is Compute, this argument is ignored.
 	OutputArtifacts []*string `json:"outputArtifacts,omitempty" tf:"output_artifacts,omitempty"`
+
+	// A block of output artifacts for the compute action. If the action is not Compute, this argument is ignored.
+	OutputArtifactsForComputeAction []OutputArtifactsForComputeActionObservation `json:"outputArtifactsForComputeAction,omitempty" tf:"output_artifacts_for_compute_action,omitempty"`
+
+	// A list of variables that are to be exported from the compute action.
+	OutputVariables []*string `json:"outputVariables,omitempty" tf:"output_variables,omitempty"`
 
 	// The creator of the action being called. Possible values are AWS, Custom and ThirdParty.
 	Owner *string `json:"owner,omitempty" tf:"owner,omitempty"`
@@ -98,9 +116,13 @@ type ActionObservation struct {
 
 type ActionParameters struct {
 
-	// A category defines what kind of action can be taken in the stage, and constrains the provider type for the action. Possible values are Approval, Build, Deploy, Invoke, Source and Test.
+	// A category defines what kind of action can be taken in the stage, and constrains the provider type for the action. Possible values are Approval, Build, Deploy, Invoke, Source, Compute and Test.
 	// +kubebuilder:validation:Optional
 	Category *string `json:"category" tf:"category,omitempty"`
+
+	// A list of shell commands to run with the compute action.
+	// +kubebuilder:validation:Optional
+	Commands []*string `json:"commands,omitempty" tf:"commands,omitempty"`
 
 	// A map of the action declaration's configuration. Configurations options for action types and providers can be found in the Pipeline Structure Reference and Action Structure Reference documentation. Note: The DetectChanges parameter  in the configuration section causes CodePipeline to automatically start your pipeline upon new commits. Please refer to AWS Documentation for more details: https://docs.aws.amazon.com/codepipeline/latest/userguide/action-reference-CodestarConnectionSource.html#action-reference-CodestarConnectionSource-config.
 	// +kubebuilder:validation:Optional
@@ -119,9 +141,17 @@ type ActionParameters struct {
 	// +kubebuilder:validation:Optional
 	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
 
-	// A list of artifact names to output. Output artifact names must be unique within a pipeline.
+	// A list of artifact names to output. Output artifact names must be unique within a pipeline. If the action is Compute, this argument is ignored.
 	// +kubebuilder:validation:Optional
 	OutputArtifacts []*string `json:"outputArtifacts,omitempty" tf:"output_artifacts,omitempty"`
+
+	// A block of output artifacts for the compute action. If the action is not Compute, this argument is ignored.
+	// +kubebuilder:validation:Optional
+	OutputArtifactsForComputeAction []OutputArtifactsForComputeActionParameters `json:"outputArtifactsForComputeAction,omitempty" tf:"output_artifacts_for_compute_action,omitempty"`
+
+	// A list of variables that are to be exported from the compute action.
+	// +kubebuilder:validation:Optional
+	OutputVariables []*string `json:"outputVariables,omitempty" tf:"output_variables,omitempty"`
 
 	// The creator of the action being called. Possible values are AWS, Custom and ThirdParty.
 	// +kubebuilder:validation:Optional
@@ -154,7 +184,7 @@ type ActionParameters struct {
 
 type ArtifactStoreInitParameters struct {
 
-	// The encryption key block AWS CodePipeline uses to encrypt the data in the artifact store, such as an AWS Key Management Service (AWS KMS) key. If you don't specify a key, AWS CodePipeline uses the default key for Amazon Simple Storage Service (Amazon S3). An encryption_key block is documented below.
+	// Encryption key block AWS CodePipeline uses to encrypt the data in the artifact store, such as a KMS key. If you don't specify a key, AWS CodePipeline uses the default key for S3. An encryption_key block is documented below.
 	EncryptionKey *EncryptionKeyInitParameters `json:"encryptionKey,omitempty" tf:"encryption_key,omitempty"`
 
 	// The location where AWS CodePipeline stores artifacts for a pipeline; currently only S3 is supported.
@@ -175,7 +205,7 @@ type ArtifactStoreInitParameters struct {
 
 type ArtifactStoreObservation struct {
 
-	// The encryption key block AWS CodePipeline uses to encrypt the data in the artifact store, such as an AWS Key Management Service (AWS KMS) key. If you don't specify a key, AWS CodePipeline uses the default key for Amazon Simple Storage Service (Amazon S3). An encryption_key block is documented below.
+	// Encryption key block AWS CodePipeline uses to encrypt the data in the artifact store, such as a KMS key. If you don't specify a key, AWS CodePipeline uses the default key for S3. An encryption_key block is documented below.
 	EncryptionKey *EncryptionKeyObservation `json:"encryptionKey,omitempty" tf:"encryption_key,omitempty"`
 
 	// The location where AWS CodePipeline stores artifacts for a pipeline; currently only S3 is supported.
@@ -190,7 +220,7 @@ type ArtifactStoreObservation struct {
 
 type ArtifactStoreParameters struct {
 
-	// The encryption key block AWS CodePipeline uses to encrypt the data in the artifact store, such as an AWS Key Management Service (AWS KMS) key. If you don't specify a key, AWS CodePipeline uses the default key for Amazon Simple Storage Service (Amazon S3). An encryption_key block is documented below.
+	// Encryption key block AWS CodePipeline uses to encrypt the data in the artifact store, such as a KMS key. If you don't specify a key, AWS CodePipeline uses the default key for S3. An encryption_key block is documented below.
 	// +kubebuilder:validation:Optional
 	EncryptionKey *EncryptionKeyParameters `json:"encryptionKey,omitempty" tf:"encryption_key,omitempty"`
 
@@ -275,7 +305,7 @@ type CodepipelineInitParameters struct {
 	// Type of the pipeline. Possible values are: V1 and V2. Default value is V1.
 	PipelineType *string `json:"pipelineType,omitempty" tf:"pipeline_type,omitempty"`
 
-	// A service role Amazon Resource Name (ARN) that grants AWS CodePipeline permission to make calls to AWS services on your behalf.
+	// Service role ARN that grants AWS CodePipeline permission to make calls to AWS services on your behalf.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
@@ -323,7 +353,7 @@ type CodepipelineObservation struct {
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// A service role Amazon Resource Name (ARN) that grants AWS CodePipeline permission to make calls to AWS services on your behalf.
+	// Service role ARN that grants AWS CodePipeline permission to make calls to AWS services on your behalf.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
 	// (Minimum of at least two stage blocks is required) A stage block. Stages are documented below.
@@ -366,7 +396,7 @@ type CodepipelineParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// A service role Amazon Resource Name (ARN) that grants AWS CodePipeline permission to make calls to AWS services on your behalf.
+	// Service role ARN that grants AWS CodePipeline permission to make calls to AWS services on your behalf.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -429,7 +459,7 @@ type ConditionParameters struct {
 
 type ConditionRuleInitParameters struct {
 
-	// The shell commands to run with your commands rule in CodePipeline. All commands are supported except multi-line formats.
+	// A list of shell commands to run with the compute action.
 	Commands []*string `json:"commands,omitempty" tf:"commands,omitempty"`
 
 	// A map of the action declaration's configuration. Configurations options for action types and providers can be found in the Pipeline Structure Reference and Action Structure Reference documentation. Note: The DetectChanges parameter  in the configuration section causes CodePipeline to automatically start your pipeline upon new commits. Please refer to AWS Documentation for more details: https://docs.aws.amazon.com/codepipeline/latest/userguide/action-reference-CodestarConnectionSource.html#action-reference-CodestarConnectionSource-config.
@@ -454,7 +484,7 @@ type ConditionRuleInitParameters struct {
 
 type ConditionRuleObservation struct {
 
-	// The shell commands to run with your commands rule in CodePipeline. All commands are supported except multi-line formats.
+	// A list of shell commands to run with the compute action.
 	Commands []*string `json:"commands,omitempty" tf:"commands,omitempty"`
 
 	// A map of the action declaration's configuration. Configurations options for action types and providers can be found in the Pipeline Structure Reference and Action Structure Reference documentation. Note: The DetectChanges parameter  in the configuration section causes CodePipeline to automatically start your pipeline upon new commits. Please refer to AWS Documentation for more details: https://docs.aws.amazon.com/codepipeline/latest/userguide/action-reference-CodestarConnectionSource.html#action-reference-CodestarConnectionSource-config.
@@ -482,7 +512,7 @@ type ConditionRuleObservation struct {
 
 type ConditionRuleParameters struct {
 
-	// The shell commands to run with your commands rule in CodePipeline. All commands are supported except multi-line formats.
+	// A list of shell commands to run with the compute action.
 	// +kubebuilder:validation:Optional
 	Commands []*string `json:"commands,omitempty" tf:"commands,omitempty"`
 
@@ -518,7 +548,7 @@ type ConditionRuleParameters struct {
 
 type ConditionRuleRuleTypeIDInitParameters struct {
 
-	// A category defines what kind of action can be taken in the stage, and constrains the provider type for the action. Possible values are Approval, Build, Deploy, Invoke, Source and Test.
+	// A category defines what kind of action can be taken in the stage, and constrains the provider type for the action. Possible values are Approval, Build, Deploy, Invoke, Source, Compute and Test.
 	Category *string `json:"category,omitempty" tf:"category,omitempty"`
 
 	// The creator of the action being called. Possible values are AWS, Custom and ThirdParty.
@@ -533,7 +563,7 @@ type ConditionRuleRuleTypeIDInitParameters struct {
 
 type ConditionRuleRuleTypeIDObservation struct {
 
-	// A category defines what kind of action can be taken in the stage, and constrains the provider type for the action. Possible values are Approval, Build, Deploy, Invoke, Source and Test.
+	// A category defines what kind of action can be taken in the stage, and constrains the provider type for the action. Possible values are Approval, Build, Deploy, Invoke, Source, Compute and Test.
 	Category *string `json:"category,omitempty" tf:"category,omitempty"`
 
 	// The creator of the action being called. Possible values are AWS, Custom and ThirdParty.
@@ -548,7 +578,7 @@ type ConditionRuleRuleTypeIDObservation struct {
 
 type ConditionRuleRuleTypeIDParameters struct {
 
-	// A category defines what kind of action can be taken in the stage, and constrains the provider type for the action. Possible values are Approval, Build, Deploy, Invoke, Source and Test.
+	// A category defines what kind of action can be taken in the stage, and constrains the provider type for the action. Possible values are Approval, Build, Deploy, Invoke, Source, Compute and Test.
 	// +kubebuilder:validation:Optional
 	Category *string `json:"category" tf:"category,omitempty"`
 
@@ -827,7 +857,7 @@ type OnSuccessConditionParameters struct {
 
 type OnSuccessConditionRuleInitParameters struct {
 
-	// The shell commands to run with your commands rule in CodePipeline. All commands are supported except multi-line formats.
+	// A list of shell commands to run with the compute action.
 	Commands []*string `json:"commands,omitempty" tf:"commands,omitempty"`
 
 	// A map of the action declaration's configuration. Configurations options for action types and providers can be found in the Pipeline Structure Reference and Action Structure Reference documentation. Note: The DetectChanges parameter  in the configuration section causes CodePipeline to automatically start your pipeline upon new commits. Please refer to AWS Documentation for more details: https://docs.aws.amazon.com/codepipeline/latest/userguide/action-reference-CodestarConnectionSource.html#action-reference-CodestarConnectionSource-config.
@@ -852,7 +882,7 @@ type OnSuccessConditionRuleInitParameters struct {
 
 type OnSuccessConditionRuleObservation struct {
 
-	// The shell commands to run with your commands rule in CodePipeline. All commands are supported except multi-line formats.
+	// A list of shell commands to run with the compute action.
 	Commands []*string `json:"commands,omitempty" tf:"commands,omitempty"`
 
 	// A map of the action declaration's configuration. Configurations options for action types and providers can be found in the Pipeline Structure Reference and Action Structure Reference documentation. Note: The DetectChanges parameter  in the configuration section causes CodePipeline to automatically start your pipeline upon new commits. Please refer to AWS Documentation for more details: https://docs.aws.amazon.com/codepipeline/latest/userguide/action-reference-CodestarConnectionSource.html#action-reference-CodestarConnectionSource-config.
@@ -880,7 +910,7 @@ type OnSuccessConditionRuleObservation struct {
 
 type OnSuccessConditionRuleParameters struct {
 
-	// The shell commands to run with your commands rule in CodePipeline. All commands are supported except multi-line formats.
+	// A list of shell commands to run with the compute action.
 	// +kubebuilder:validation:Optional
 	Commands []*string `json:"commands,omitempty" tf:"commands,omitempty"`
 
@@ -931,6 +961,35 @@ type OnSuccessParameters struct {
 	// The conditions that are success conditions. Defined as a condition block below.
 	// +kubebuilder:validation:Optional
 	Condition *OnSuccessConditionParameters `json:"condition" tf:"condition,omitempty"`
+}
+
+type OutputArtifactsForComputeActionInitParameters struct {
+
+	// A list of the files to associate with the output artifact that will be exported from the compute action.
+	Files []*string `json:"files,omitempty" tf:"files,omitempty"`
+
+	// The name of a pipeline-level variable.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+}
+
+type OutputArtifactsForComputeActionObservation struct {
+
+	// A list of the files to associate with the output artifact that will be exported from the compute action.
+	Files []*string `json:"files,omitempty" tf:"files,omitempty"`
+
+	// The name of a pipeline-level variable.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+}
+
+type OutputArtifactsForComputeActionParameters struct {
+
+	// A list of the files to associate with the output artifact that will be exported from the compute action.
+	// +kubebuilder:validation:Optional
+	Files []*string `json:"files,omitempty" tf:"files,omitempty"`
+
+	// The name of a pipeline-level variable.
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name" tf:"name,omitempty"`
 }
 
 type PullRequestBranchesInitParameters struct {
@@ -1135,7 +1194,7 @@ type RetryConfigurationParameters struct {
 
 type RuleInitParameters struct {
 
-	// The shell commands to run with your commands rule in CodePipeline. All commands are supported except multi-line formats.
+	// A list of shell commands to run with the compute action.
 	Commands []*string `json:"commands,omitempty" tf:"commands,omitempty"`
 
 	// A map of the action declaration's configuration. Configurations options for action types and providers can be found in the Pipeline Structure Reference and Action Structure Reference documentation. Note: The DetectChanges parameter  in the configuration section causes CodePipeline to automatically start your pipeline upon new commits. Please refer to AWS Documentation for more details: https://docs.aws.amazon.com/codepipeline/latest/userguide/action-reference-CodestarConnectionSource.html#action-reference-CodestarConnectionSource-config.
@@ -1160,7 +1219,7 @@ type RuleInitParameters struct {
 
 type RuleObservation struct {
 
-	// The shell commands to run with your commands rule in CodePipeline. All commands are supported except multi-line formats.
+	// A list of shell commands to run with the compute action.
 	Commands []*string `json:"commands,omitempty" tf:"commands,omitempty"`
 
 	// A map of the action declaration's configuration. Configurations options for action types and providers can be found in the Pipeline Structure Reference and Action Structure Reference documentation. Note: The DetectChanges parameter  in the configuration section causes CodePipeline to automatically start your pipeline upon new commits. Please refer to AWS Documentation for more details: https://docs.aws.amazon.com/codepipeline/latest/userguide/action-reference-CodestarConnectionSource.html#action-reference-CodestarConnectionSource-config.
@@ -1188,7 +1247,7 @@ type RuleObservation struct {
 
 type RuleParameters struct {
 
-	// The shell commands to run with your commands rule in CodePipeline. All commands are supported except multi-line formats.
+	// A list of shell commands to run with the compute action.
 	// +kubebuilder:validation:Optional
 	Commands []*string `json:"commands,omitempty" tf:"commands,omitempty"`
 
@@ -1224,7 +1283,7 @@ type RuleParameters struct {
 
 type RuleRuleTypeIDInitParameters struct {
 
-	// A category defines what kind of action can be taken in the stage, and constrains the provider type for the action. Possible values are Approval, Build, Deploy, Invoke, Source and Test.
+	// A category defines what kind of action can be taken in the stage, and constrains the provider type for the action. Possible values are Approval, Build, Deploy, Invoke, Source, Compute and Test.
 	Category *string `json:"category,omitempty" tf:"category,omitempty"`
 
 	// The creator of the action being called. Possible values are AWS, Custom and ThirdParty.
@@ -1239,7 +1298,7 @@ type RuleRuleTypeIDInitParameters struct {
 
 type RuleRuleTypeIDObservation struct {
 
-	// A category defines what kind of action can be taken in the stage, and constrains the provider type for the action. Possible values are Approval, Build, Deploy, Invoke, Source and Test.
+	// A category defines what kind of action can be taken in the stage, and constrains the provider type for the action. Possible values are Approval, Build, Deploy, Invoke, Source, Compute and Test.
 	Category *string `json:"category,omitempty" tf:"category,omitempty"`
 
 	// The creator of the action being called. Possible values are AWS, Custom and ThirdParty.
@@ -1254,7 +1313,7 @@ type RuleRuleTypeIDObservation struct {
 
 type RuleRuleTypeIDParameters struct {
 
-	// A category defines what kind of action can be taken in the stage, and constrains the provider type for the action. Possible values are Approval, Build, Deploy, Invoke, Source and Test.
+	// A category defines what kind of action can be taken in the stage, and constrains the provider type for the action. Possible values are Approval, Build, Deploy, Invoke, Source, Compute and Test.
 	// +kubebuilder:validation:Optional
 	Category *string `json:"category" tf:"category,omitempty"`
 
@@ -1273,7 +1332,7 @@ type RuleRuleTypeIDParameters struct {
 
 type RuleTypeIDInitParameters struct {
 
-	// A category defines what kind of action can be taken in the stage, and constrains the provider type for the action. Possible values are Approval, Build, Deploy, Invoke, Source and Test.
+	// A category defines what kind of action can be taken in the stage, and constrains the provider type for the action. Possible values are Approval, Build, Deploy, Invoke, Source, Compute and Test.
 	Category *string `json:"category,omitempty" tf:"category,omitempty"`
 
 	// The creator of the action being called. Possible values are AWS, Custom and ThirdParty.
@@ -1288,7 +1347,7 @@ type RuleTypeIDInitParameters struct {
 
 type RuleTypeIDObservation struct {
 
-	// A category defines what kind of action can be taken in the stage, and constrains the provider type for the action. Possible values are Approval, Build, Deploy, Invoke, Source and Test.
+	// A category defines what kind of action can be taken in the stage, and constrains the provider type for the action. Possible values are Approval, Build, Deploy, Invoke, Source, Compute and Test.
 	Category *string `json:"category,omitempty" tf:"category,omitempty"`
 
 	// The creator of the action being called. Possible values are AWS, Custom and ThirdParty.
@@ -1303,7 +1362,7 @@ type RuleTypeIDObservation struct {
 
 type RuleTypeIDParameters struct {
 
-	// A category defines what kind of action can be taken in the stage, and constrains the provider type for the action. Possible values are Approval, Build, Deploy, Invoke, Source and Test.
+	// A category defines what kind of action can be taken in the stage, and constrains the provider type for the action. Possible values are Approval, Build, Deploy, Invoke, Source, Compute and Test.
 	// +kubebuilder:validation:Optional
 	Category *string `json:"category" tf:"category,omitempty"`
 

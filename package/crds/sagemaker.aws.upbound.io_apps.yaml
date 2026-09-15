@@ -888,17 +888,16 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   resourceSpec:
-                    description: The instance type and the Amazon Resource Name (ARN)
-                      of the SageMaker AI image created on the instance.See Resource
-                      Spec below.
+                    description: Instance type and the ARN of the SageMaker AI image
+                      created on the instance. See Resource Spec below.
                     properties:
                       instanceType:
                         description: The instance type that the image version runs
                           on. For valid values see SageMaker AI Instance Types.
                         type: string
                       lifecycleConfigArn:
-                        description: The Amazon Resource Name (ARN) of the Lifecycle
-                          Configuration attached to the Resource.
+                        description: ARN of the Lifecycle Configuration attached to
+                          the Resource.
                         type: string
                       sagemakerImageArn:
                         description: The ARN of the SageMaker AI image that the image
@@ -1103,17 +1102,16 @@ spec:
                         type: object
                     type: object
                   resourceSpec:
-                    description: The instance type and the Amazon Resource Name (ARN)
-                      of the SageMaker AI image created on the instance.See Resource
-                      Spec below.
+                    description: Instance type and the ARN of the SageMaker AI image
+                      created on the instance. See Resource Spec below.
                     properties:
                       instanceType:
                         description: The instance type that the image version runs
                           on. For valid values see SageMaker AI Instance Types.
                         type: string
                       lifecycleConfigArn:
-                        description: The Amazon Resource Name (ARN) of the Lifecycle
-                          Configuration attached to the Resource.
+                        description: ARN of the Lifecycle Configuration attached to
+                          the Resource.
                         type: string
                       sagemakerImageArn:
                         description: The ARN of the SageMaker AI image that the image
@@ -1326,13 +1324,13 @@ spec:
                       CodeEditor, JupyterLab, DetailedProfiler, and Canvas.
                     type: string
                   arn:
-                    description: The Amazon Resource Name (ARN) of the app.
+                    description: ARN of the app.
                     type: string
                   domainId:
                     description: The domain ID.
                     type: string
                   id:
-                    description: The Amazon Resource Name (ARN) of the app.
+                    description: ARN of the app.
                     type: string
                   region:
                     description: |-
@@ -1340,17 +1338,16 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   resourceSpec:
-                    description: The instance type and the Amazon Resource Name (ARN)
-                      of the SageMaker AI image created on the instance.See Resource
-                      Spec below.
+                    description: Instance type and the ARN of the SageMaker AI image
+                      created on the instance. See Resource Spec below.
                     properties:
                       instanceType:
                         description: The instance type that the image version runs
                           on. For valid values see SageMaker AI Instance Types.
                         type: string
                       lifecycleConfigArn:
-                        description: The Amazon Resource Name (ARN) of the Lifecycle
-                          Configuration attached to the Resource.
+                        description: ARN of the Lifecycle Configuration attached to
+                          the Resource.
                         type: string
                       sagemakerImageArn:
                         description: The ARN of the SageMaker AI image that the image

@@ -163,7 +163,7 @@ spec:
                       Multi-Attach is supported on io1 and io2 volumes.
                     type: boolean
                   outpostArn:
-                    description: Amazon Resource Name (ARN) of the Outpost.
+                    description: ARN of the Outpost.
                     type: string
                   region:
                     description: |-
@@ -316,7 +316,7 @@ spec:
                       Multi-Attach is supported on io1 and io2 volumes.
                     type: boolean
                   outpostArn:
-                    description: Amazon Resource Name (ARN) of the Outpost.
+                    description: ARN of the Outpost.
                     type: string
                   size:
                     description: Size of the drive in GiBs.
@@ -446,7 +446,7 @@ spec:
                       Multi-Attach is supported on io1 and io2 volumes.
                     type: boolean
                   outpostArn:
-                    description: Amazon Resource Name (ARN) of the Outpost.
+                    description: ARN of the Outpost.
                     type: string
                   region:
                     description: |-

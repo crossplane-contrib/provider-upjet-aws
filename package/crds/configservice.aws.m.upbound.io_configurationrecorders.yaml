@@ -144,10 +144,9 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   roleArn:
-                    description: Amazon Resource Name (ARN) of the IAM role. Used
-                      to make read or write requests to the delivery channel and to
-                      describe the AWS resources associated with the account. See
-                      AWS Docs for more details.
+                    description: ARN of the IAM role. Used to make read or write requests
+                      to the delivery channel and to describe the AWS resources associated
+                      with the account. See AWS Docs for more details.
                     type: string
                   roleArnRef:
                     description: Reference to a Role in iam to populate roleArn.
@@ -325,10 +324,9 @@ spec:
                         type: object
                     type: object
                   roleArn:
-                    description: Amazon Resource Name (ARN) of the IAM role. Used
-                      to make read or write requests to the delivery channel and to
-                      describe the AWS resources associated with the account. See
-                      AWS Docs for more details.
+                    description: ARN of the IAM role. Used to make read or write requests
+                      to the delivery channel and to describe the AWS resources associated
+                      with the account. See AWS Docs for more details.
                     type: string
                   roleArnRef:
                     description: Reference to a Role in iam to populate roleArn.
@@ -562,10 +560,9 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   roleArn:
-                    description: Amazon Resource Name (ARN) of the IAM role. Used
-                      to make read or write requests to the delivery channel and to
-                      describe the AWS resources associated with the account. See
-                      AWS Docs for more details.
+                    description: ARN of the IAM role. Used to make read or write requests
+                      to the delivery channel and to describe the AWS resources associated
+                      with the account. See AWS Docs for more details.
                     type: string
                 type: object
               conditions:

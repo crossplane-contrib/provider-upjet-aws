@@ -24,7 +24,7 @@ type UsageLimitInitParameters struct {
 	// The time period that the amount applies to. A weekly period begins on Sunday. Valid values are daily, weekly, and monthly. The default is monthly.
 	Period *string `json:"period,omitempty" tf:"period,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the Amazon Redshift Serverless resource to create the usage limit for.
+	// ARN of the Amazon Redshift Serverless resource to create the usage limit for.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/redshiftserverless/v1beta1.Workgroup
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
@@ -46,7 +46,7 @@ type UsageLimitObservation struct {
 	// The limit amount. If time-based, this amount is in Redshift Processing Units (RPU) consumed per hour. If data-based, this amount is in terabytes (TB) of data transferred between Regions in cross-account sharing. The value must be a positive number.
 	Amount *float64 `json:"amount,omitempty" tf:"amount,omitempty"`
 
-	// Amazon Resource Name (ARN) of the Redshift Serverless Usage Limit.
+	// ARN of the Redshift Serverless Usage Limit.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The action that Amazon Redshift Serverless takes when the limit is reached. Valid values are log, emit-metric, and deactivate. The default is log.
@@ -62,7 +62,7 @@ type UsageLimitObservation struct {
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the Amazon Redshift Serverless resource to create the usage limit for.
+	// ARN of the Amazon Redshift Serverless resource to create the usage limit for.
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
 
 	// The type of Amazon Redshift Serverless usage to create a usage limit for. Valid values are serverless-compute or cross-region-datasharing.
@@ -88,7 +88,7 @@ type UsageLimitParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the Amazon Redshift Serverless resource to create the usage limit for.
+	// ARN of the Amazon Redshift Serverless resource to create the usage limit for.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/redshiftserverless/v1beta1.Workgroup
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional

@@ -76,8 +76,7 @@ spec:
                       below.
                     properties:
                       logDestination:
-                        description: Amazon Resource Name (ARN) of Kinesis Firehose
-                          Delivery Stream
+                        description: ARN of Kinesis Firehose Delivery Stream
                         type: string
                       logDestinationRef:
                         description: Reference to a DeliveryStream in firehose to
@@ -349,8 +348,7 @@ spec:
                       below.
                     properties:
                       logDestination:
-                        description: Amazon Resource Name (ARN) of Kinesis Firehose
-                          Delivery Stream
+                        description: ARN of Kinesis Firehose Delivery Stream
                         type: string
                       logDestinationRef:
                         description: Reference to a DeliveryStream in firehose to
@@ -691,8 +689,7 @@ spec:
                       below.
                     properties:
                       logDestination:
-                        description: Amazon Resource Name (ARN) of Kinesis Firehose
-                          Delivery Stream
+                        description: ARN of Kinesis Firehose Delivery Stream
                         type: string
                       redactedFields:
                         description: Configuration block containing parts of the request

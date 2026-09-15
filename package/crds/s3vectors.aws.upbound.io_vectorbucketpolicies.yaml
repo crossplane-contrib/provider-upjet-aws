@@ -74,7 +74,7 @@ spec:
               forProvider:
                 properties:
                   policy:
-                    description: The policy document.
+                    description: Policy document.
                     type: string
                   region:
                     description: |-
@@ -177,7 +177,7 @@ spec:
                   autoscaler.
                 properties:
                   policy:
-                    description: The policy document.
+                    description: Policy document.
                     type: string
                   vectorBucketArn:
                     description: ARN of the vector bucket.
@@ -358,7 +358,7 @@ spec:
                   id:
                     type: string
                   policy:
-                    description: The policy document.
+                    description: Policy document.
                     type: string
                   region:
                     description: |-

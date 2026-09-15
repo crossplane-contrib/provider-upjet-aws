@@ -42,7 +42,7 @@ type EBSVolumeInitParameters struct {
 	// Specifies whether to enable Amazon EBS Multi-Attach. Multi-Attach is supported on io1 and io2 volumes.
 	MultiAttachEnabled *bool `json:"multiAttachEnabled,omitempty" tf:"multi_attach_enabled,omitempty"`
 
-	// Amazon Resource Name (ARN) of the Outpost.
+	// ARN of the Outpost.
 	OutpostArn *string `json:"outpostArn,omitempty" tf:"outpost_arn,omitempty"`
 
 	// Size of the drive in GiBs.
@@ -94,7 +94,7 @@ type EBSVolumeObservation struct {
 	// Specifies whether to enable Amazon EBS Multi-Attach. Multi-Attach is supported on io1 and io2 volumes.
 	MultiAttachEnabled *bool `json:"multiAttachEnabled,omitempty" tf:"multi_attach_enabled,omitempty"`
 
-	// Amazon Resource Name (ARN) of the Outpost.
+	// ARN of the Outpost.
 	OutpostArn *string `json:"outpostArn,omitempty" tf:"outpost_arn,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -160,7 +160,7 @@ type EBSVolumeParameters struct {
 	// +kubebuilder:validation:Optional
 	MultiAttachEnabled *bool `json:"multiAttachEnabled,omitempty" tf:"multi_attach_enabled,omitempty"`
 
-	// Amazon Resource Name (ARN) of the Outpost.
+	// ARN of the Outpost.
 	// +kubebuilder:validation:Optional
 	OutpostArn *string `json:"outpostArn,omitempty" tf:"outpost_arn,omitempty"`
 

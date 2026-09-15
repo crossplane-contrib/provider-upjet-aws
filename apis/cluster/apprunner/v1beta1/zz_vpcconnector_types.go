@@ -86,7 +86,7 @@ type VPCConnectorObservation struct {
 	// Name for the VPC connector.
 	VPCConnectorName *string `json:"vpcConnectorName,omitempty" tf:"vpc_connector_name,omitempty"`
 
-	// The revision of VPC connector. It's unique among all the active connectors ("Status": "ACTIVE") that share the same Name.
+	// Revision of VPC connector. It's unique among all the active connectors ("Status": "ACTIVE") that share the same Name.
 	VPCConnectorRevision *float64 `json:"vpcConnectorRevision,omitempty" tf:"vpc_connector_revision,omitempty"`
 }
 

@@ -73,8 +73,8 @@ spec:
               forProvider:
                 properties:
                   policy:
-                    description: An IAM policy. The policy string in JSON must not
-                      contain newlines or blank lines.
+                    description: IAM policy. The policy string in JSON must not contain
+                      newlines or blank lines.
                     type: string
                   region:
                     description: |-
@@ -82,8 +82,8 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   resourceArn:
-                    description: The ID or Amazon Resource Name (ARN) of the service
-                      network or service for which the policy is created.
+                    description: ID or ARN of the service network or service for which
+                      the policy is created.
                     type: string
                   resourceArnRef:
                     description: Reference to a ServiceNetwork in vpclattice to populate
@@ -178,12 +178,12 @@ spec:
                   autoscaler.
                 properties:
                   policy:
-                    description: An IAM policy. The policy string in JSON must not
-                      contain newlines or blank lines.
+                    description: IAM policy. The policy string in JSON must not contain
+                      newlines or blank lines.
                     type: string
                   resourceArn:
-                    description: The ID or Amazon Resource Name (ARN) of the service
-                      network or service for which the policy is created.
+                    description: ID or ARN of the service network or service for which
+                      the policy is created.
                     type: string
                   resourceArnRef:
                     description: Reference to a ServiceNetwork in vpclattice to populate
@@ -361,8 +361,8 @@ spec:
                   id:
                     type: string
                   policy:
-                    description: An IAM policy. The policy string in JSON must not
-                      contain newlines or blank lines.
+                    description: IAM policy. The policy string in JSON must not contain
+                      newlines or blank lines.
                     type: string
                   region:
                     description: |-
@@ -370,8 +370,8 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   resourceArn:
-                    description: The ID or Amazon Resource Name (ARN) of the service
-                      network or service for which the policy is created.
+                    description: ID or ARN of the service network or service for which
+                      the policy is created.
                     type: string
                 type: object
               conditions:

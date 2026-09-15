@@ -32,7 +32,7 @@ type AccessEntryInitParameters struct {
 
 type AccessEntryObservation struct {
 
-	// Amazon Resource Name (ARN) of the Access Entry.
+	// ARN of the Access Entry.
 	AccessEntryArn *string `json:"accessEntryArn,omitempty" tf:"access_entry_arn,omitempty"`
 
 	// Name of the EKS Cluster.

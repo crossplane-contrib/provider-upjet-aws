@@ -37,7 +37,7 @@ type AccountObservation struct {
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the service-linked role that allows Macie to monitor and analyze data in AWS resources for the account.
+	// ARN of the service-linked role that allows Macie to monitor and analyze data in AWS resources for the account.
 	ServiceRole *string `json:"serviceRole,omitempty" tf:"service_role,omitempty"`
 
 	// Specifies the status for the account. To enable Amazon Macie and start all Macie activities for the account, set this value to ENABLED. Valid values are ENABLED or PAUSED.

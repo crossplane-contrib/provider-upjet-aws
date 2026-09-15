@@ -21,8 +21,11 @@ type TransitVirtualInterfaceInitParameters struct {
 	// The IPv4 CIDR address to use to send traffic to Amazon. Required for IPv4 BGP peers.
 	AmazonAddress *string `json:"amazonAddress,omitempty" tf:"amazon_address,omitempty"`
 
-	// The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.
+	// BGP autonomous system number as an integer between 1 and 2147483646. For larger values, use bgp_asn_long. Exactly one of bgp_asn or bgp_asn_long must be specified.
 	BGPAsn *float64 `json:"bgpAsn,omitempty" tf:"bgp_asn,omitempty"`
+
+	// BGP autonomous system number as an asplain decimal string between 1 and 4294967294. This argument also accepts values in the bgp_asn range. Exactly one of bgp_asn or bgp_asn_long must be specified.
+	BGPAsnLong *string `json:"bgpAsnLong,omitempty" tf:"bgp_asn_long,omitempty"`
 
 	// The authentication key for BGP configuration.
 	BGPAuthKey *string `json:"bgpAuthKey,omitempty" tf:"bgp_auth_key,omitempty"`
@@ -63,6 +66,15 @@ type TransitVirtualInterfaceInitParameters struct {
 	// The name for the virtual interface.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// The number of inbound IPv4 route prefixes to allocate to the virtual interface. Valid values are 0 to 1000. If not specified, AWS applies the default allocation of 100.
+	PrefixPoolAllocatedCountIPv4 *float64 `json:"prefixPoolAllocatedCountIpv4,omitempty" tf:"prefix_pool_allocated_count_ipv4,omitempty"`
+
+	// The number of inbound IPv6 route prefixes to allocate to the virtual interface. Valid values are 0 to 1000. If not specified, AWS applies the default allocation of 100.
+	PrefixPoolAllocatedCountIPv6 *float64 `json:"prefixPoolAllocatedCountIpv6,omitempty" tf:"prefix_pool_allocated_count_ipv6,omitempty"`
+
+	// Maximum bandwidth allocation for the virtual interface, restricting the bandwidth it can use on the parent connection. Specify a supported bandwidth value without a space (for example, 50Mbps, 1Gbps, or 10Gbps); the value cannot exceed the bandwidth of the parent connection or link aggregation group (LAG), and supported values range up to 1.6Tbps. See the VIF Rate Limiters documentation for the full list of supported values. Rate Limiters are supported only on Direct Connect dedicated connections (including LAGs); they are not supported on hosted connections.
+	RateLimit *string `json:"rateLimit,omitempty" tf:"rate_limit,omitempty"`
+
 	// Indicates whether to enable or disable SiteLink.
 	SitelinkEnabled *bool `json:"sitelinkEnabled,omitempty" tf:"sitelink_enabled,omitempty"`
 
@@ -90,8 +102,11 @@ type TransitVirtualInterfaceObservation struct {
 	// The Direct Connect endpoint on which the virtual interface terminates.
 	AwsDevice *string `json:"awsDevice,omitempty" tf:"aws_device,omitempty"`
 
-	// The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.
+	// BGP autonomous system number as an integer between 1 and 2147483646. For larger values, use bgp_asn_long. Exactly one of bgp_asn or bgp_asn_long must be specified.
 	BGPAsn *float64 `json:"bgpAsn,omitempty" tf:"bgp_asn,omitempty"`
+
+	// BGP autonomous system number as an asplain decimal string between 1 and 4294967294. This argument also accepts values in the bgp_asn range. Exactly one of bgp_asn or bgp_asn_long must be specified.
+	BGPAsnLong *string `json:"bgpAsnLong,omitempty" tf:"bgp_asn_long,omitempty"`
 
 	// The authentication key for BGP configuration.
 	BGPAuthKey *string `json:"bgpAuthKey,omitempty" tf:"bgp_auth_key,omitempty"`
@@ -117,6 +132,15 @@ type TransitVirtualInterfaceObservation struct {
 
 	// The name for the virtual interface.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The number of inbound IPv4 route prefixes to allocate to the virtual interface. Valid values are 0 to 1000. If not specified, AWS applies the default allocation of 100.
+	PrefixPoolAllocatedCountIPv4 *float64 `json:"prefixPoolAllocatedCountIpv4,omitempty" tf:"prefix_pool_allocated_count_ipv4,omitempty"`
+
+	// The number of inbound IPv6 route prefixes to allocate to the virtual interface. Valid values are 0 to 1000. If not specified, AWS applies the default allocation of 100.
+	PrefixPoolAllocatedCountIPv6 *float64 `json:"prefixPoolAllocatedCountIpv6,omitempty" tf:"prefix_pool_allocated_count_ipv6,omitempty"`
+
+	// Maximum bandwidth allocation for the virtual interface, restricting the bandwidth it can use on the parent connection. Specify a supported bandwidth value without a space (for example, 50Mbps, 1Gbps, or 10Gbps); the value cannot exceed the bandwidth of the parent connection or link aggregation group (LAG), and supported values range up to 1.6Tbps. See the VIF Rate Limiters documentation for the full list of supported values. Rate Limiters are supported only on Direct Connect dedicated connections (including LAGs); they are not supported on hosted connections.
+	RateLimit *string `json:"rateLimit,omitempty" tf:"rate_limit,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -147,9 +171,13 @@ type TransitVirtualInterfaceParameters struct {
 	// +kubebuilder:validation:Optional
 	AmazonAddress *string `json:"amazonAddress,omitempty" tf:"amazon_address,omitempty"`
 
-	// The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.
+	// BGP autonomous system number as an integer between 1 and 2147483646. For larger values, use bgp_asn_long. Exactly one of bgp_asn or bgp_asn_long must be specified.
 	// +kubebuilder:validation:Optional
 	BGPAsn *float64 `json:"bgpAsn,omitempty" tf:"bgp_asn,omitempty"`
+
+	// BGP autonomous system number as an asplain decimal string between 1 and 4294967294. This argument also accepts values in the bgp_asn range. Exactly one of bgp_asn or bgp_asn_long must be specified.
+	// +kubebuilder:validation:Optional
+	BGPAsnLong *string `json:"bgpAsnLong,omitempty" tf:"bgp_asn_long,omitempty"`
 
 	// The authentication key for BGP configuration.
 	// +kubebuilder:validation:Optional
@@ -195,6 +223,18 @@ type TransitVirtualInterfaceParameters struct {
 	// The name for the virtual interface.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The number of inbound IPv4 route prefixes to allocate to the virtual interface. Valid values are 0 to 1000. If not specified, AWS applies the default allocation of 100.
+	// +kubebuilder:validation:Optional
+	PrefixPoolAllocatedCountIPv4 *float64 `json:"prefixPoolAllocatedCountIpv4,omitempty" tf:"prefix_pool_allocated_count_ipv4,omitempty"`
+
+	// The number of inbound IPv6 route prefixes to allocate to the virtual interface. Valid values are 0 to 1000. If not specified, AWS applies the default allocation of 100.
+	// +kubebuilder:validation:Optional
+	PrefixPoolAllocatedCountIPv6 *float64 `json:"prefixPoolAllocatedCountIpv6,omitempty" tf:"prefix_pool_allocated_count_ipv6,omitempty"`
+
+	// Maximum bandwidth allocation for the virtual interface, restricting the bandwidth it can use on the parent connection. Specify a supported bandwidth value without a space (for example, 50Mbps, 1Gbps, or 10Gbps); the value cannot exceed the bandwidth of the parent connection or link aggregation group (LAG), and supported values range up to 1.6Tbps. See the VIF Rate Limiters documentation for the full list of supported values. Rate Limiters are supported only on Direct Connect dedicated connections (including LAGs); they are not supported on hosted connections.
+	// +kubebuilder:validation:Optional
+	RateLimit *string `json:"rateLimit,omitempty" tf:"rate_limit,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -252,7 +292,6 @@ type TransitVirtualInterface struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.addressFamily) || (has(self.initProvider) && has(self.initProvider.addressFamily))",message="spec.forProvider.addressFamily is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.bgpAsn) || (has(self.initProvider) && has(self.initProvider.bgpAsn))",message="spec.forProvider.bgpAsn is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || (has(self.initProvider) && has(self.initProvider.name))",message="spec.forProvider.name is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.vlan) || (has(self.initProvider) && has(self.initProvider.vlan))",message="spec.forProvider.vlan is a required parameter"
 	Spec   TransitVirtualInterfaceSpec   `json:"spec"`

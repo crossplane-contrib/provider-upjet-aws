@@ -59,84 +59,90 @@ spec:
               forProvider:
                 properties:
                   config:
-                    description: The target group configuration.
+                    description: Target group configuration. See config Block below.
                     properties:
                       healthCheck:
-                        description: The health check configuration.
+                        description: Health check configuration. See health_check
+                          Block below.
                         properties:
                           enabled:
-                            description: Indicates whether health checking is enabled.
-                              Defaults to true.
+                            description: Whether health checking is enabled. Defaults
+                              to true.
                             type: boolean
                           healthCheckIntervalSeconds:
-                            description: The approximate amount of time, in seconds,
-                              between health checks of an individual target. The range
-                              is 5–300 seconds. The default is 30 seconds.
+                            description: Approximate amount of time, in seconds, between
+                              health checks of an individual target. The range is
+                              5–300 seconds. The default is 30 seconds.
                             type: number
                           healthCheckTimeoutSeconds:
-                            description: The amount of time, in seconds, to wait before
+                            description: Amount of time, in seconds, to wait before
                               reporting a target as unhealthy. The range is 1–120
                               seconds. The default is 5 seconds.
                             type: number
                           healthyThresholdCount:
+                            description: Number of consecutive successful health checks
+                              required before considering an unhealthy target healthy.
+                              The range is 2–10. The default is 5.
                             type: number
                           matcher:
-                            description: The codes to use when checking for a successful
-                              response from a target. These are called Success codes
-                              in the console.
+                            description: Codes to use when checking for a successful
+                              response from a target. See matcher Block below.
                             properties:
                               value:
-                                description: The HTTP codes to use when checking for
-                                  a successful response from a target.
+                                description: HTTP codes to use when checking for a
+                                  successful response from a target.
                                 type: string
                             type: object
                           path:
-                            description: The destination for health checks on the
-                              targets. If the protocol version is HTTP/1.1 or HTTP/2,
-                              specify a valid URI (for example, /path?query). The
-                              default path is /. Health checks are not supported if
-                              the protocol version is gRPC, however, you can choose
-                              HTTP/1.1 or HTTP/2 and specify a valid URI.
+                            description: Destination for health checks on the targets.
+                              If the protocol version is HTTP/1.1 or HTTP/2, specify
+                              a valid URI (for example, /path?query). The default
+                              path is /. Health checks are not supported if the protocol
+                              version is gRPC, however, you can choose HTTP/1.1 or
+                              HTTP/2 and specify a valid URI.
                             type: string
                           port:
-                            description: The port on which the targets are listening.
+                            description: Port used when performing health checks on
+                              targets. The default setting is the port that a target
+                              receives traffic on.
                             type: number
                           protocol:
-                            description: The protocol to use for routing traffic to
-                              the targets. Valid Values are HTTP | HTTPS.
+                            description: Protocol used when performing health checks
+                              on targets. The possible protocols are HTTP and HTTPS.
                             type: string
                           protocolVersion:
-                            description: The protocol version. Valid Values are HTTP1
-                              | HTTP2 | GRPC. Default value is HTTP1.
+                            description: Protocol version used when performing health
+                              checks on targets. The possible protocol versions are
+                              HTTP1 and HTTP2. The default is HTTP1.
                             type: string
                           unhealthyThresholdCount:
-                            description: The number of consecutive failed health checks
+                            description: Number of consecutive failed health checks
                               required before considering a target unhealthy. The
                               range is 2–10. The default is 2.
                             type: number
                         type: object
                       ipAddressType:
-                        description: 'The type of IP address used for the target group.
-                          Valid values: IPV4 | IPV6.'
+                        description: 'Type of IP address used for the target group.
+                          Valid values: IPV4 or IPV6.'
                         type: string
                       lambdaEventStructureVersion:
-                        description: The version of the event structure that the Lambda
+                        description: Version of the event structure that the Lambda
                           function receives. Supported only if type is LAMBDA. Valid
-                          Values are V1 | V2.
+                          values are V1 or V2.
                         type: string
                       port:
-                        description: The port on which the targets are listening.
+                        description: Port on which the targets are listening.
                         type: number
                       protocol:
-                        description: The protocol to use for routing traffic to the
-                          targets. Valid Values are HTTP | HTTPS.
+                        description: Protocol to use for routing traffic to the targets.
+                          Valid values are HTTP or HTTPS.
                         type: string
                       protocolVersion:
-                        description: The protocol version. Valid Values are HTTP1
-                          | HTTP2 | GRPC. Default value is HTTP1.
+                        description: Protocol version. Valid values are HTTP1, HTTP2,
+                          or GRPC. Default value is HTTP1.
                         type: string
                       vpcIdentifier:
-                        description: The ID of the VPC.
+                        description: ID of the VPC.
                         type: string
                       vpcIdentifierRef:
                         description: Reference to a VPC in ec2 to populate vpcIdentifier.
@@ -220,7 +226,7 @@ spec:
                         type: object
                     type: object
                   name:
-                    description: The name of the target group. The name must be unique
+                    description: Name of the target group. The name must be unique
                       within the account. The valid characters are a-z, 0-9, and hyphens
                       (-). You can't use a hyphen as the first or last character,
                       or immediately after another hyphen.
@@ -237,8 +243,8 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   type:
-                    description: The type of target group. Valid Values are IP | LAMBDA
-                      | INSTANCE | ALB
+                    description: Type of target group. Valid values are IP, LAMBDA,
+                      INSTANCE, or ALB.
                     type: string
                 required:
                 - region
@@ -257,84 +263,90 @@ spec:
                   autoscaler.
                 properties:
                   config:
-                    description: The target group configuration.
+                    description: Target group configuration. See config Block below.
                     properties:
                       healthCheck:
-                        description: The health check configuration.
+                        description: Health check configuration. See health_check
+                          Block below.
                         properties:
                           enabled:
-                            description: Indicates whether health checking is enabled.
-                              Defaults to true.
+                            description: Whether health checking is enabled. Defaults
+                              to true.
                             type: boolean
                           healthCheckIntervalSeconds:
-                            description: The approximate amount of time, in seconds,
-                              between health checks of an individual target. The range
-                              is 5–300 seconds. The default is 30 seconds.
+                            description: Approximate amount of time, in seconds, between
+                              health checks of an individual target. The range is
+                              5–300 seconds. The default is 30 seconds.
                             type: number
                           healthCheckTimeoutSeconds:
-                            description: The amount of time, in seconds, to wait before
+                            description: Amount of time, in seconds, to wait before
                               reporting a target as unhealthy. The range is 1–120
                               seconds. The default is 5 seconds.
                             type: number
                           healthyThresholdCount:
+                            description: Number of consecutive successful health checks
+                              required before considering an unhealthy target healthy.
+                              The range is 2–10. The default is 5.
                             type: number
                           matcher:
-                            description: The codes to use when checking for a successful
-                              response from a target. These are called Success codes
-                              in the console.
+                            description: Codes to use when checking for a successful
+                              response from a target. See matcher Block below.
                             properties:
                               value:
-                                description: The HTTP codes to use when checking for
-                                  a successful response from a target.
+                                description: HTTP codes to use when checking for a
+                                  successful response from a target.
                                 type: string
                             type: object
                           path:
-                            description: The destination for health checks on the
-                              targets. If the protocol version is HTTP/1.1 or HTTP/2,
-                              specify a valid URI (for example, /path?query). The
-                              default path is /. Health checks are not supported if
-                              the protocol version is gRPC, however, you can choose
-                              HTTP/1.1 or HTTP/2 and specify a valid URI.
+                            description: Destination for health checks on the targets.
+                              If the protocol version is HTTP/1.1 or HTTP/2, specify
+                              a valid URI (for example, /path?query). The default
+                              path is /. Health checks are not supported if the protocol
+                              version is gRPC, however, you can choose HTTP/1.1 or
+                              HTTP/2 and specify a valid URI.
                             type: string
                           port:
-                            description: The port on which the targets are listening.
+                            description: Port used when performing health checks on
+                              targets. The default setting is the port that a target
+                              receives traffic on.
                             type: number
                           protocol:
-                            description: The protocol to use for routing traffic to
-                              the targets. Valid Values are HTTP | HTTPS.
+                            description: Protocol used when performing health checks
+                              on targets. The possible protocols are HTTP and HTTPS.
                             type: string
                           protocolVersion:
-                            description: The protocol version. Valid Values are HTTP1
-                              | HTTP2 | GRPC. Default value is HTTP1.
+                            description: Protocol version used when performing health
+                              checks on targets. The possible protocol versions are
+                              HTTP1 and HTTP2. The default is HTTP1.
                             type: string
                           unhealthyThresholdCount:
-                            description: The number of consecutive failed health checks
+                            description: Number of consecutive failed health checks
                               required before considering a target unhealthy. The
                               range is 2–10. The default is 2.
                             type: number
                         type: object
                       ipAddressType:
-                        description: 'The type of IP address used for the target group.
-                          Valid values: IPV4 | IPV6.'
+                        description: 'Type of IP address used for the target group.
+                          Valid values: IPV4 or IPV6.'
                         type: string
                       lambdaEventStructureVersion:
-                        description: The version of the event structure that the Lambda
+                        description: Version of the event structure that the Lambda
                           function receives. Supported only if type is LAMBDA. Valid
-                          Values are V1 | V2.
+                          values are V1 or V2.
                         type: string
                       port:
-                        description: The port on which the targets are listening.
+                        description: Port on which the targets are listening.
                         type: number
                       protocol:
-                        description: The protocol to use for routing traffic to the
-                          targets. Valid Values are HTTP | HTTPS.
+                        description: Protocol to use for routing traffic to the targets.
+                          Valid values are HTTP or HTTPS.
                         type: string
                       protocolVersion:
-                        description: The protocol version. Valid Values are HTTP1
-                          | HTTP2 | GRPC. Default value is HTTP1.
+                        description: Protocol version. Valid values are HTTP1, HTTP2,
+                          or GRPC. Default value is HTTP1.
                         type: string
                       vpcIdentifier:
-                        description: The ID of the VPC.
+                        description: ID of the VPC.
                         type: string
                       vpcIdentifierRef:
                         description: Reference to a VPC in ec2 to populate vpcIdentifier.
@@ -418,7 +430,7 @@ spec:
                         type: object
                     type: object
                   name:
-                    description: The name of the target group. The name must be unique
+                    description: Name of the target group. The name must be unique
                       within the account. The valid characters are a-z, 0-9, and hyphens
                       (-). You can't use a hyphen as the first or last character,
                       or immediately after another hyphen.
@@ -430,8 +442,8 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   type:
-                    description: The type of target group. Valid Values are IP | LAMBDA
-                      | INSTANCE | ALB
+                    description: Type of target group. Valid values are IP, LAMBDA,
+                      INSTANCE, or ALB.
                     type: string
                 type: object
               managementPolicies:
@@ -510,91 +522,97 @@ spec:
                     description: ARN of the target group.
                     type: string
                   config:
-                    description: The target group configuration.
+                    description: Target group configuration. See config Block below.
                     properties:
                       healthCheck:
-                        description: The health check configuration.
+                        description: Health check configuration. See health_check
+                          Block below.
                         properties:
                           enabled:
-                            description: Indicates whether health checking is enabled.
-                              Defaults to true.
+                            description: Whether health checking is enabled. Defaults
+                              to true.
                             type: boolean
                           healthCheckIntervalSeconds:
-                            description: The approximate amount of time, in seconds,
-                              between health checks of an individual target. The range
-                              is 5–300 seconds. The default is 30 seconds.
+                            description: Approximate amount of time, in seconds, between
+                              health checks of an individual target. The range is
+                              5–300 seconds. The default is 30 seconds.
                             type: number
                           healthCheckTimeoutSeconds:
-                            description: The amount of time, in seconds, to wait before
+                            description: Amount of time, in seconds, to wait before
                               reporting a target as unhealthy. The range is 1–120
                               seconds. The default is 5 seconds.
                             type: number
                           healthyThresholdCount:
+                            description: Number of consecutive successful health checks
+                              required before considering an unhealthy target healthy.
+                              The range is 2–10. The default is 5.
                             type: number
                           matcher:
-                            description: The codes to use when checking for a successful
-                              response from a target. These are called Success codes
-                              in the console.
+                            description: Codes to use when checking for a successful
+                              response from a target. See matcher Block below.
                             properties:
                               value:
-                                description: The HTTP codes to use when checking for
-                                  a successful response from a target.
+                                description: HTTP codes to use when checking for a
+                                  successful response from a target.
                                 type: string
                             type: object
                           path:
-                            description: The destination for health checks on the
-                              targets. If the protocol version is HTTP/1.1 or HTTP/2,
-                              specify a valid URI (for example, /path?query). The
-                              default path is /. Health checks are not supported if
-                              the protocol version is gRPC, however, you can choose
-                              HTTP/1.1 or HTTP/2 and specify a valid URI.
+                            description: Destination for health checks on the targets.
+                              If the protocol version is HTTP/1.1 or HTTP/2, specify
+                              a valid URI (for example, /path?query). The default
+                              path is /. Health checks are not supported if the protocol
+                              version is gRPC, however, you can choose HTTP/1.1 or
+                              HTTP/2 and specify a valid URI.
                             type: string
                           port:
-                            description: The port on which the targets are listening.
+                            description: Port used when performing health checks on
+                              targets. The default setting is the port that a target
+                              receives traffic on.
                             type: number
                           protocol:
-                            description: The protocol to use for routing traffic to
-                              the targets. Valid Values are HTTP | HTTPS.
+                            description: Protocol used when performing health checks
+                              on targets. The possible protocols are HTTP and HTTPS.
                             type: string
                           protocolVersion:
-                            description: The protocol version. Valid Values are HTTP1
-                              | HTTP2 | GRPC. Default value is HTTP1.
+                            description: Protocol version used when performing health
+                              checks on targets. The possible protocol versions are
+                              HTTP1 and HTTP2. The default is HTTP1.
                             type: string
                           unhealthyThresholdCount:
-                            description: The number of consecutive failed health checks
+                            description: Number of consecutive failed health checks
                               required before considering a target unhealthy. The
                               range is 2–10. The default is 2.
                             type: number
                         type: object
                       ipAddressType:
-                        description: 'The type of IP address used for the target group.
-                          Valid values: IPV4 | IPV6.'
+                        description: 'Type of IP address used for the target group.
+                          Valid values: IPV4 or IPV6.'
                         type: string
                       lambdaEventStructureVersion:
-                        description: The version of the event structure that the Lambda
+                        description: Version of the event structure that the Lambda
                           function receives. Supported only if type is LAMBDA. Valid
-                          Values are V1 | V2.
+                          values are V1 or V2.
                         type: string
                       port:
-                        description: The port on which the targets are listening.
+                        description: Port on which the targets are listening.
                         type: number
                       protocol:
-                        description: The protocol to use for routing traffic to the
-                          targets. Valid Values are HTTP | HTTPS.
+                        description: Protocol to use for routing traffic to the targets.
+                          Valid values are HTTP or HTTPS.
                         type: string
                       protocolVersion:
-                        description: The protocol version. Valid Values are HTTP1
-                          | HTTP2 | GRPC. Default value is HTTP1.
+                        description: Protocol version. Valid values are HTTP1, HTTP2,
+                          or GRPC. Default value is HTTP1.
                         type: string
                       vpcIdentifier:
-                        description: The ID of the VPC.
+                        description: ID of the VPC.
                         type: string
                     type: object
                   id:
                     description: Unique identifier for the target group.
                     type: string
                   name:
-                    description: The name of the target group. The name must be unique
+                    description: Name of the target group. The name must be unique
                       within the account. The valid characters are a-z, 0-9, and hyphens
                       (-). You can't use a hyphen as the first or last character,
                       or immediately after another hyphen.
@@ -621,8 +639,8 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   type:
-                    description: The type of target group. Valid Values are IP | LAMBDA
-                      | INSTANCE | ALB
+                    description: Type of target group. Valid values are IP, LAMBDA,
+                      INSTANCE, or ALB.
                     type: string
                 type: object
               conditions:

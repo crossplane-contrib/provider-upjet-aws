@@ -281,7 +281,7 @@ type ReportOverridesParameters struct {
 
 type S3DestinationInitParameters struct {
 
-	// Specifies the Amazon Resource Name (ARN) of the IAM policy that allows DataSync to upload a task report to your S3 bucket.
+	// ARN of the IAM policy that allows DataSync to upload a task report to your S3 bucket.
 	BucketAccessRoleArn *string `json:"bucketAccessRoleArn,omitempty" tf:"bucket_access_role_arn,omitempty"`
 
 	// Specifies the ARN of the S3 bucket where DataSync uploads your report.
@@ -293,7 +293,7 @@ type S3DestinationInitParameters struct {
 
 type S3DestinationObservation struct {
 
-	// Specifies the Amazon Resource Name (ARN) of the IAM policy that allows DataSync to upload a task report to your S3 bucket.
+	// ARN of the IAM policy that allows DataSync to upload a task report to your S3 bucket.
 	BucketAccessRoleArn *string `json:"bucketAccessRoleArn,omitempty" tf:"bucket_access_role_arn,omitempty"`
 
 	// Specifies the ARN of the S3 bucket where DataSync uploads your report.
@@ -305,7 +305,7 @@ type S3DestinationObservation struct {
 
 type S3DestinationParameters struct {
 
-	// Specifies the Amazon Resource Name (ARN) of the IAM policy that allows DataSync to upload a task report to your S3 bucket.
+	// ARN of the IAM policy that allows DataSync to upload a task report to your S3 bucket.
 	// +kubebuilder:validation:Optional
 	BucketAccessRoleArn *string `json:"bucketAccessRoleArn" tf:"bucket_access_role_arn,omitempty"`
 
@@ -349,7 +349,7 @@ type ScheduleParameters struct {
 
 type TaskInitParameters struct {
 
-	// Amazon Resource Name (ARN) of the CloudWatch Log Group that is used to monitor and log events in the sync task.
+	// ARN of the CloudWatch Log Group that is used to monitor and log events in the sync task.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/cloudwatchlogs/v1beta1.Group
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	CloudwatchLogGroupArn *string `json:"cloudwatchLogGroupArn,omitempty" tf:"cloudwatch_log_group_arn,omitempty"`
@@ -362,7 +362,7 @@ type TaskInitParameters struct {
 	// +kubebuilder:validation:Optional
 	CloudwatchLogGroupArnSelector *v2.Selector `json:"cloudwatchLogGroupArnSelector,omitempty" tf:"-"`
 
-	// Amazon Resource Name (ARN) of destination DataSync Location.
+	// ARN of destination DataSync Location.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/datasync/v1beta2.LocationS3
 	DestinationLocationArn *string `json:"destinationLocationArn,omitempty" tf:"destination_location_arn,omitempty"`
 
@@ -389,7 +389,7 @@ type TaskInitParameters struct {
 	// Specifies a schedule used to periodically transfer files from a source to a destination location.
 	Schedule *ScheduleInitParameters `json:"schedule,omitempty" tf:"schedule,omitempty"`
 
-	// Amazon Resource Name (ARN) of source DataSync Location.
+	// ARN of source DataSync Location.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/datasync/v1beta2.LocationS3
 	SourceLocationArn *string `json:"sourceLocationArn,omitempty" tf:"source_location_arn,omitempty"`
 
@@ -414,19 +414,19 @@ type TaskInitParameters struct {
 
 type TaskObservation struct {
 
-	// Amazon Resource Name (ARN) of the DataSync Task.
+	// ARN of the DataSync Task.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// Amazon Resource Name (ARN) of the CloudWatch Log Group that is used to monitor and log events in the sync task.
+	// ARN of the CloudWatch Log Group that is used to monitor and log events in the sync task.
 	CloudwatchLogGroupArn *string `json:"cloudwatchLogGroupArn,omitempty" tf:"cloudwatch_log_group_arn,omitempty"`
 
-	// Amazon Resource Name (ARN) of destination DataSync Location.
+	// ARN of destination DataSync Location.
 	DestinationLocationArn *string `json:"destinationLocationArn,omitempty" tf:"destination_location_arn,omitempty"`
 
 	// Filter rules that determines which files to exclude from a task.
 	Excludes *ExcludesObservation `json:"excludes,omitempty" tf:"excludes,omitempty"`
 
-	// Amazon Resource Name (ARN) of the DataSync Task.
+	// ARN of the DataSync Task.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Filter rules that determines which files to include in a task.
@@ -445,7 +445,7 @@ type TaskObservation struct {
 	// Specifies a schedule used to periodically transfer files from a source to a destination location.
 	Schedule *ScheduleObservation `json:"schedule,omitempty" tf:"schedule,omitempty"`
 
-	// Amazon Resource Name (ARN) of source DataSync Location.
+	// ARN of source DataSync Location.
 	SourceLocationArn *string `json:"sourceLocationArn,omitempty" tf:"source_location_arn,omitempty"`
 
 	// Key-value map of resource tags.
@@ -465,7 +465,7 @@ type TaskObservation struct {
 
 type TaskParameters struct {
 
-	// Amazon Resource Name (ARN) of the CloudWatch Log Group that is used to monitor and log events in the sync task.
+	// ARN of the CloudWatch Log Group that is used to monitor and log events in the sync task.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/cloudwatchlogs/v1beta1.Group
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -479,7 +479,7 @@ type TaskParameters struct {
 	// +kubebuilder:validation:Optional
 	CloudwatchLogGroupArnSelector *v2.Selector `json:"cloudwatchLogGroupArnSelector,omitempty" tf:"-"`
 
-	// Amazon Resource Name (ARN) of destination DataSync Location.
+	// ARN of destination DataSync Location.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/datasync/v1beta2.LocationS3
 	// +kubebuilder:validation:Optional
 	DestinationLocationArn *string `json:"destinationLocationArn,omitempty" tf:"destination_location_arn,omitempty"`
@@ -517,7 +517,7 @@ type TaskParameters struct {
 	// +kubebuilder:validation:Optional
 	Schedule *ScheduleParameters `json:"schedule,omitempty" tf:"schedule,omitempty"`
 
-	// Amazon Resource Name (ARN) of source DataSync Location.
+	// ARN of source DataSync Location.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/datasync/v1beta2.LocationS3
 	// +kubebuilder:validation:Optional
 	SourceLocationArn *string `json:"sourceLocationArn,omitempty" tf:"source_location_arn,omitempty"`

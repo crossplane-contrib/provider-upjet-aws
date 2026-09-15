@@ -230,9 +230,8 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   serviceRole:
-                    description: The Amazon Resource Name (ARN) of the service-linked
-                      role that allows Macie to monitor and analyze data in AWS resources
-                      for the account.
+                    description: ARN of the service-linked role that allows Macie
+                      to monitor and analyze data in AWS resources for the account.
                     type: string
                   status:
                     description: Specifies the status for the account. To enable Amazon

@@ -16,7 +16,12 @@ spec:
   forProvider:
     catalogId: "123456789012"
     configuration:
-    - enabled: true
+    - compactionConfiguration:
+      - icebergConfiguration:
+        - deleteFileThreshold: 1
+          minInputFiles: 5
+          strategy: binpack
+      enabled: true
       roleArn: arn:aws:iam::123456789012:role/example-role
     databaseNameSelector:
       matchLabels:

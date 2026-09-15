@@ -24,7 +24,7 @@ type ComponentInitParameters struct {
 	// Description of the component.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Amazon Resource Name (ARN) of the Key Management Service (KMS) Key used to encrypt the component.
+	// ARN of the KMS Key used to encrypt the component.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kms/v1beta1.Key
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
@@ -62,7 +62,7 @@ type ComponentInitParameters struct {
 
 type ComponentObservation struct {
 
-	// Amazon Resource Name (ARN) of the component.
+	// ARN of the component.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Change description of the component.
@@ -80,10 +80,10 @@ type ComponentObservation struct {
 	// Encryption status of the component.
 	Encrypted *bool `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
 
-	// Amazon Resource Name (ARN) of the component.
+	// ARN of the component.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Amazon Resource Name (ARN) of the Key Management Service (KMS) Key used to encrypt the component.
+	// ARN of the KMS Key used to encrypt the component.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
 	// Name of the component.
@@ -138,7 +138,7 @@ type ComponentParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Amazon Resource Name (ARN) of the Key Management Service (KMS) Key used to encrypt the component.
+	// ARN of the KMS Key used to encrypt the component.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kms/v1beta1.Key
 	// +kubebuilder:validation:Optional
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`

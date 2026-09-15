@@ -162,7 +162,7 @@ type WorkspaceObservation struct {
 	// The type of account access for the workspace. Valid values are CURRENT_ACCOUNT and ORGANIZATION. If ORGANIZATION is specified, then organizational_units must also be present.
 	AccountAccessType *string `json:"accountAccessType,omitempty" tf:"account_access_type,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the Grafana workspace.
+	// ARN of the Grafana workspace.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The authentication providers for the workspace. Valid values are AWS_SSO, SAML, or both.

@@ -24,7 +24,7 @@ type AdditionalAuthenticationProviderInitParameters struct {
 	// Nested argument containing OpenID Connect configuration. See openid_connect_config Block for details.
 	OpenIDConnectConfig *OpenIDConnectConfigInitParameters `json:"openidConnectConfig,omitempty" tf:"openid_connect_config,omitempty"`
 
-	// Amazon Cognito User Pool configuration. See user_pool_config Block for details.
+	// Amazon Cognito User Pool configuration. See additional_authentication_provider.user_pool_config Block for details.
 	UserPoolConfig *UserPoolConfigInitParameters `json:"userPoolConfig,omitempty" tf:"user_pool_config,omitempty"`
 }
 
@@ -39,7 +39,7 @@ type AdditionalAuthenticationProviderObservation struct {
 	// Nested argument containing OpenID Connect configuration. See openid_connect_config Block for details.
 	OpenIDConnectConfig *OpenIDConnectConfigObservation `json:"openidConnectConfig,omitempty" tf:"openid_connect_config,omitempty"`
 
-	// Amazon Cognito User Pool configuration. See user_pool_config Block for details.
+	// Amazon Cognito User Pool configuration. See additional_authentication_provider.user_pool_config Block for details.
 	UserPoolConfig *UserPoolConfigObservation `json:"userPoolConfig,omitempty" tf:"user_pool_config,omitempty"`
 }
 
@@ -57,7 +57,7 @@ type AdditionalAuthenticationProviderParameters struct {
 	// +kubebuilder:validation:Optional
 	OpenIDConnectConfig *OpenIDConnectConfigParameters `json:"openidConnectConfig,omitempty" tf:"openid_connect_config,omitempty"`
 
-	// Amazon Cognito User Pool configuration. See user_pool_config Block for details.
+	// Amazon Cognito User Pool configuration. See additional_authentication_provider.user_pool_config Block for details.
 	// +kubebuilder:validation:Optional
 	UserPoolConfig *UserPoolConfigParameters `json:"userPoolConfig,omitempty" tf:"user_pool_config,omitempty"`
 }
@@ -143,10 +143,10 @@ type GraphQLAPIInitParameters struct {
 	// Nested argument containing OpenID Connect configuration. See openid_connect_config Block for details.
 	OpenIDConnectConfig *GraphQLAPIOpenIDConnectConfigInitParameters `json:"openidConnectConfig,omitempty" tf:"openid_connect_config,omitempty"`
 
-	// The maximum depth a query can have in a single request. Depth refers to the amount of nested levels allowed in the body of query. The default value is 0 (or unspecified), which indicates there's no depth limit. If you set a limit, it can be between 1 and 75 nested levels. This field will produce a limit error if the operation falls out of bounds.
+	// Maximum depth a query can have in a single request. Depth refers to the amount of nested levels allowed in the body of query. The default value is 0 (or unspecified), which indicates there's no depth limit. If you set a limit, it can be between 1 and 75 nested levels. This field will produce a limit error if the operation falls out of bounds.
 	QueryDepthLimit *float64 `json:"queryDepthLimit,omitempty" tf:"query_depth_limit,omitempty"`
 
-	// The maximum number of resolvers that can be invoked in a single request. The default value is 0 (or unspecified), which will set the limit to 10000. When specified, the limit value can be between 1 and 10000. This field will produce a limit error if the operation falls out of bounds.
+	// Maximum number of resolvers that can be invoked in a single request. The default value is 0 (or unspecified), which will set the limit to 10000. When specified, the limit value can be between 1 and 10000. This field will produce a limit error if the operation falls out of bounds.
 	ResolverCountLimit *float64 `json:"resolverCountLimit,omitempty" tf:"resolver_count_limit,omitempty"`
 
 	// Schema definition, in GraphQL schema language format.
@@ -243,14 +243,14 @@ type GraphQLAPIObservation struct {
 	// Nested argument containing OpenID Connect configuration. See openid_connect_config Block for details.
 	OpenIDConnectConfig *GraphQLAPIOpenIDConnectConfigObservation `json:"openidConnectConfig,omitempty" tf:"openid_connect_config,omitempty"`
 
-	// The maximum depth a query can have in a single request. Depth refers to the amount of nested levels allowed in the body of query. The default value is 0 (or unspecified), which indicates there's no depth limit. If you set a limit, it can be between 1 and 75 nested levels. This field will produce a limit error if the operation falls out of bounds.
+	// Maximum depth a query can have in a single request. Depth refers to the amount of nested levels allowed in the body of query. The default value is 0 (or unspecified), which indicates there's no depth limit. If you set a limit, it can be between 1 and 75 nested levels. This field will produce a limit error if the operation falls out of bounds.
 	QueryDepthLimit *float64 `json:"queryDepthLimit,omitempty" tf:"query_depth_limit,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The maximum number of resolvers that can be invoked in a single request. The default value is 0 (or unspecified), which will set the limit to 10000. When specified, the limit value can be between 1 and 10000. This field will produce a limit error if the operation falls out of bounds.
+	// Maximum number of resolvers that can be invoked in a single request. The default value is 0 (or unspecified), which will set the limit to 10000. When specified, the limit value can be between 1 and 10000. This field will produce a limit error if the operation falls out of bounds.
 	ResolverCountLimit *float64 `json:"resolverCountLimit,omitempty" tf:"resolver_count_limit,omitempty"`
 
 	// Schema definition, in GraphQL schema language format.
@@ -379,7 +379,7 @@ type GraphQLAPIParameters struct {
 	// +kubebuilder:validation:Optional
 	OpenIDConnectConfig *GraphQLAPIOpenIDConnectConfigParameters `json:"openidConnectConfig,omitempty" tf:"openid_connect_config,omitempty"`
 
-	// The maximum depth a query can have in a single request. Depth refers to the amount of nested levels allowed in the body of query. The default value is 0 (or unspecified), which indicates there's no depth limit. If you set a limit, it can be between 1 and 75 nested levels. This field will produce a limit error if the operation falls out of bounds.
+	// Maximum depth a query can have in a single request. Depth refers to the amount of nested levels allowed in the body of query. The default value is 0 (or unspecified), which indicates there's no depth limit. If you set a limit, it can be between 1 and 75 nested levels. This field will produce a limit error if the operation falls out of bounds.
 	// +kubebuilder:validation:Optional
 	QueryDepthLimit *float64 `json:"queryDepthLimit,omitempty" tf:"query_depth_limit,omitempty"`
 
@@ -388,7 +388,7 @@ type GraphQLAPIParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// The maximum number of resolvers that can be invoked in a single request. The default value is 0 (or unspecified), which will set the limit to 10000. When specified, the limit value can be between 1 and 10000. This field will produce a limit error if the operation falls out of bounds.
+	// Maximum number of resolvers that can be invoked in a single request. The default value is 0 (or unspecified), which will set the limit to 10000. When specified, the limit value can be between 1 and 10000. This field will produce a limit error if the operation falls out of bounds.
 	// +kubebuilder:validation:Optional
 	ResolverCountLimit *float64 `json:"resolverCountLimit,omitempty" tf:"resolver_count_limit,omitempty"`
 
@@ -524,7 +524,7 @@ type LambdaAuthorizerConfigParameters struct {
 
 type LogConfigInitParameters struct {
 
-	// Amazon Resource Name of the service role that AWS AppSync will assume to publish to Amazon CloudWatch logs in your account.
+	// ARN of the service role that AWS AppSync will assume to publish to Amazon CloudWatch logs in your account.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	CloudwatchLogsRoleArn *string `json:"cloudwatchLogsRoleArn,omitempty" tf:"cloudwatch_logs_role_arn,omitempty"`
@@ -546,7 +546,7 @@ type LogConfigInitParameters struct {
 
 type LogConfigObservation struct {
 
-	// Amazon Resource Name of the service role that AWS AppSync will assume to publish to Amazon CloudWatch logs in your account.
+	// ARN of the service role that AWS AppSync will assume to publish to Amazon CloudWatch logs in your account.
 	CloudwatchLogsRoleArn *string `json:"cloudwatchLogsRoleArn,omitempty" tf:"cloudwatch_logs_role_arn,omitempty"`
 
 	// Set to TRUE to exclude sections that contain information such as headers, context, and evaluated mapping templates, regardless of logging  level. Valid values: true, false. Default value: false
@@ -558,7 +558,7 @@ type LogConfigObservation struct {
 
 type LogConfigParameters struct {
 
-	// Amazon Resource Name of the service role that AWS AppSync will assume to publish to Amazon CloudWatch logs in your account.
+	// ARN of the service role that AWS AppSync will assume to publish to Amazon CloudWatch logs in your account.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional

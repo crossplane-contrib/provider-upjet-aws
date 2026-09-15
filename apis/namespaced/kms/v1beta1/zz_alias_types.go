@@ -30,7 +30,7 @@ type AliasInitParameters struct {
 
 type AliasObservation struct {
 
-	// The Amazon Resource Name (ARN) of the key alias.
+	// ARN of the key alias.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -39,7 +39,7 @@ type AliasObservation struct {
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the target key identifier.
+	// ARN of the target key identifier.
 	TargetKeyArn *string `json:"targetKeyArn,omitempty" tf:"target_key_arn,omitempty"`
 
 	// Identifier for the key for which the alias is for, can be either an ARN or key_id.

@@ -53,7 +53,7 @@ type AddonInitParameters struct {
 	// How to resolve field value conflicts for an Amazon EKS add-on if you've changed a value from the Amazon EKS default value. Valid values are NONE, OVERWRITE, and PRESERVE. For more details see the UpdateAddon API Documentation.
 	ResolveConflictsOnUpdate *string `json:"resolveConflictsOnUpdate,omitempty" tf:"resolve_conflicts_on_update,omitempty"`
 
-	// The Amazon Resource Name (ARN) of an
+	// ARN of an
 	// existing IAM role to bind to the add-on's service account. The role must be
 	// assigned the IAM permissions required by the add-on. If you don't specify
 	// an existing IAM role, then the add-on uses the permissions assigned to the node
@@ -86,7 +86,7 @@ type AddonObservation struct {
 	// match one of the versions returned by describe-addon-versions.
 	AddonVersion *string `json:"addonVersion,omitempty" tf:"addon_version,omitempty"`
 
-	// Amazon Resource Name (ARN) of the EKS add-on.
+	// ARN of the EKS add-on.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Name of the EKS Cluster.
@@ -123,7 +123,7 @@ type AddonObservation struct {
 	// How to resolve field value conflicts for an Amazon EKS add-on if you've changed a value from the Amazon EKS default value. Valid values are NONE, OVERWRITE, and PRESERVE. For more details see the UpdateAddon API Documentation.
 	ResolveConflictsOnUpdate *string `json:"resolveConflictsOnUpdate,omitempty" tf:"resolve_conflicts_on_update,omitempty"`
 
-	// The Amazon Resource Name (ARN) of an
+	// ARN of an
 	// existing IAM role to bind to the add-on's service account. The role must be
 	// assigned the IAM permissions required by the add-on. If you don't specify
 	// an existing IAM role, then the add-on uses the permissions assigned to the node
@@ -194,7 +194,7 @@ type AddonParameters struct {
 	// +kubebuilder:validation:Optional
 	ResolveConflictsOnUpdate *string `json:"resolveConflictsOnUpdate,omitempty" tf:"resolve_conflicts_on_update,omitempty"`
 
-	// The Amazon Resource Name (ARN) of an
+	// ARN of an
 	// existing IAM role to bind to the add-on's service account. The role must be
 	// assigned the IAM permissions required by the add-on. If you don't specify
 	// an existing IAM role, then the add-on uses the permissions assigned to the node
@@ -240,7 +240,7 @@ type NamespaceConfigParameters struct {
 
 type PodIdentityAssociationInitParameters struct {
 
-	// The Amazon Resource Name (ARN) of the IAM role to associate with the service account. The EKS Pod Identity agent manages credentials to assume this role for applications in the containers in the pods that use this service account.
+	// ARN of the IAM role to associate with the service account. The EKS Pod Identity agent manages credentials to assume this role for applications in the containers in the pods that use this service account.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
 	// The name of the Kubernetes service account inside the cluster to associate the IAM credentials with.
@@ -249,7 +249,7 @@ type PodIdentityAssociationInitParameters struct {
 
 type PodIdentityAssociationObservation struct {
 
-	// The Amazon Resource Name (ARN) of the IAM role to associate with the service account. The EKS Pod Identity agent manages credentials to assume this role for applications in the containers in the pods that use this service account.
+	// ARN of the IAM role to associate with the service account. The EKS Pod Identity agent manages credentials to assume this role for applications in the containers in the pods that use this service account.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
 	// The name of the Kubernetes service account inside the cluster to associate the IAM credentials with.
@@ -258,7 +258,7 @@ type PodIdentityAssociationObservation struct {
 
 type PodIdentityAssociationParameters struct {
 
-	// The Amazon Resource Name (ARN) of the IAM role to associate with the service account. The EKS Pod Identity agent manages credentials to assume this role for applications in the containers in the pods that use this service account.
+	// ARN of the IAM role to associate with the service account. The EKS Pod Identity agent manages credentials to assume this role for applications in the containers in the pods that use this service account.
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn" tf:"role_arn,omitempty"`
 

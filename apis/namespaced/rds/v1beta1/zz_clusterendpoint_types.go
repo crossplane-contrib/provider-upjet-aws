@@ -66,7 +66,7 @@ type ClusterEndpointInitParameters struct {
 
 type ClusterEndpointObservation struct {
 
-	// Amazon Resource Name (ARN) of cluster
+	// ARN of cluster
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The cluster identifier.

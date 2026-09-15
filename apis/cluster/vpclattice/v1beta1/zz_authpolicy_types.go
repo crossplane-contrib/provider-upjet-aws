@@ -15,10 +15,10 @@ import (
 
 type AuthPolicyInitParameters struct {
 
-	// The auth policy. The policy string in JSON must not contain newlines or blank lines.
+	// Auth policy. The policy string in JSON must not contain newlines or blank lines.
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
-	// The ID or Amazon Resource Name (ARN) of the service network or service for which the policy is created.
+	// ID or ARN of the service network or service for which the policy is created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/vpclattice/v1beta1.Service
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	ResourceIdentifier *string `json:"resourceIdentifier,omitempty" tf:"resource_identifier,omitempty"`
@@ -31,32 +31,32 @@ type AuthPolicyInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceIdentifierSelector *v2.Selector `json:"resourceIdentifierSelector,omitempty" tf:"-"`
 
-	// The state of the auth policy. The auth policy is only active when the auth type is set to AWS_IAM. If you provide a policy, then authentication and authorization decisions are made based on this policy and the client's IAM policy. If the Auth type is NONE, then, any auth policy you provide will remain inactive.
+	// State of the auth policy. The auth policy is only active when the auth type is set to AWS_IAM. If you provide a policy, then authentication and authorization decisions are made based on this policy and the client's IAM policy. If the Auth type is NONE, then, any auth policy you provide will remain inactive.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 }
 
 type AuthPolicyObservation struct {
 
-	// The ID or Amazon Resource Name (ARN) of the service network or service for which the policy is created.
+	// ID or ARN of the service network or service for which the policy is created.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The auth policy. The policy string in JSON must not contain newlines or blank lines.
+	// Auth policy. The policy string in JSON must not contain newlines or blank lines.
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The ID or Amazon Resource Name (ARN) of the service network or service for which the policy is created.
+	// ID or ARN of the service network or service for which the policy is created.
 	ResourceIdentifier *string `json:"resourceIdentifier,omitempty" tf:"resource_identifier,omitempty"`
 
-	// The state of the auth policy. The auth policy is only active when the auth type is set to AWS_IAM. If you provide a policy, then authentication and authorization decisions are made based on this policy and the client's IAM policy. If the Auth type is NONE, then, any auth policy you provide will remain inactive.
+	// State of the auth policy. The auth policy is only active when the auth type is set to AWS_IAM. If you provide a policy, then authentication and authorization decisions are made based on this policy and the client's IAM policy. If the Auth type is NONE, then, any auth policy you provide will remain inactive.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 }
 
 type AuthPolicyParameters struct {
 
-	// The auth policy. The policy string in JSON must not contain newlines or blank lines.
+	// Auth policy. The policy string in JSON must not contain newlines or blank lines.
 	// +kubebuilder:validation:Optional
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
@@ -65,7 +65,7 @@ type AuthPolicyParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// The ID or Amazon Resource Name (ARN) of the service network or service for which the policy is created.
+	// ID or ARN of the service network or service for which the policy is created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/vpclattice/v1beta1.Service
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -79,7 +79,7 @@ type AuthPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceIdentifierSelector *v2.Selector `json:"resourceIdentifierSelector,omitempty" tf:"-"`
 
-	// The state of the auth policy. The auth policy is only active when the auth type is set to AWS_IAM. If you provide a policy, then authentication and authorization decisions are made based on this policy and the client's IAM policy. If the Auth type is NONE, then, any auth policy you provide will remain inactive.
+	// State of the auth policy. The auth policy is only active when the auth type is set to AWS_IAM. If you provide a policy, then authentication and authorization decisions are made based on this policy and the client's IAM policy. If the Auth type is NONE, then, any auth policy you provide will remain inactive.
 	// +kubebuilder:validation:Optional
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 }

@@ -65,7 +65,7 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   shareArn:
-                    description: The ARN of the resource share.
+                    description: ARN of the resource share.
                     type: string
                   shareArnRef:
                     description: Reference to a PrincipalAssociation in ram to populate
@@ -166,7 +166,7 @@ spec:
                   autoscaler.
                 properties:
                   shareArn:
-                    description: The ARN of the resource share.
+                    description: ARN of the resource share.
                     type: string
                   shareArnRef:
                     description: Reference to a PrincipalAssociation in ram to populate
@@ -318,10 +318,10 @@ spec:
                   id:
                     type: string
                   invitationArn:
-                    description: The ARN of the resource share invitation.
+                    description: ARN of the resource share invitation.
                     type: string
                   receiverAccountId:
-                    description: The account ID of the receiver account which accepts
+                    description: Account ID of the receiver account which accepts
                       the invitation.
                     type: string
                   region:
@@ -330,28 +330,27 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   resources:
-                    description: A list of the resource ARNs shared via the resource
+                    description: List of the resource ARNs shared via the resource
                       share.
                     items:
                       type: string
                     type: array
                   senderAccountId:
-                    description: The account ID of the sender account which submits
-                      the invitation.
+                    description: Account ID of the sender account which submits the
+                      invitation.
                     type: string
                   shareArn:
-                    description: The ARN of the resource share.
+                    description: ARN of the resource share.
                     type: string
                   shareId:
-                    description: The ID of the resource share as displayed in the
-                      console.
+                    description: ID of the resource share as displayed in the console.
                     type: string
                   shareName:
-                    description: The name of the resource share.
+                    description: Name of the resource share.
                     type: string
                   status:
-                    description: The status of the resource share (ACTIVE, PENDING,
-                      FAILED, DELETING, DELETED).
+                    description: Status of the resource share (ACTIVE, PENDING, FAILED,
+                      DELETING, DELETED).
                     type: string
                 type: object
               conditions:

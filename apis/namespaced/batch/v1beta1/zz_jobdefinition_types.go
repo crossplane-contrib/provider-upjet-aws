@@ -21,7 +21,7 @@ type ContainersInitParameters struct {
 	// Entrypoint for the container. This isn't run within a shell. If this isn't specified, the ENTRYPOINT of the container image is used. Environment variable references are expanded using the container's environment.
 	Command []*string `json:"command,omitempty" tf:"command,omitempty"`
 
-	// Environment variables to pass to a container. See EKS Environment below.
+	// Environment variables to pass to a container. See env below.
 	Env []EnvInitParameters `json:"env,omitempty" tf:"env,omitempty"`
 
 	// Docker image used to start the container.
@@ -30,16 +30,16 @@ type ContainersInitParameters struct {
 	// Image pull policy for the container. Supported values are Always, IfNotPresent, and Never.
 	ImagePullPolicy *string `json:"imagePullPolicy,omitempty" tf:"image_pull_policy,omitempty"`
 
-	// Name of the container. If the name isn't specified, the default name "Default" is used. Each container in a pod must have a unique name.
+	// Name of the volume. The name must be allowed as a DNS subdomain name.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Type and amount of resources to assign to a container. The supported resources include memory, cpu, and nvidia.com/gpu.
+	// Type and amount of resources to assign to a container. See resources below.
 	Resources *ResourcesInitParameters `json:"resources,omitempty" tf:"resources,omitempty"`
 
 	// Security context for a job. See security_context below.
 	SecurityContext *SecurityContextInitParameters `json:"securityContext,omitempty" tf:"security_context,omitempty"`
 
-	// Volume mounts for the container.
+	// Volume mounts for the container. See volume_mounts below.
 	VolumeMounts []VolumeMountsInitParameters `json:"volumeMounts,omitempty" tf:"volume_mounts,omitempty"`
 }
 
@@ -51,7 +51,7 @@ type ContainersObservation struct {
 	// Entrypoint for the container. This isn't run within a shell. If this isn't specified, the ENTRYPOINT of the container image is used. Environment variable references are expanded using the container's environment.
 	Command []*string `json:"command,omitempty" tf:"command,omitempty"`
 
-	// Environment variables to pass to a container. See EKS Environment below.
+	// Environment variables to pass to a container. See env below.
 	Env []EnvObservation `json:"env,omitempty" tf:"env,omitempty"`
 
 	// Docker image used to start the container.
@@ -60,16 +60,16 @@ type ContainersObservation struct {
 	// Image pull policy for the container. Supported values are Always, IfNotPresent, and Never.
 	ImagePullPolicy *string `json:"imagePullPolicy,omitempty" tf:"image_pull_policy,omitempty"`
 
-	// Name of the container. If the name isn't specified, the default name "Default" is used. Each container in a pod must have a unique name.
+	// Name of the volume. The name must be allowed as a DNS subdomain name.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Type and amount of resources to assign to a container. The supported resources include memory, cpu, and nvidia.com/gpu.
+	// Type and amount of resources to assign to a container. See resources below.
 	Resources *ResourcesObservation `json:"resources,omitempty" tf:"resources,omitempty"`
 
 	// Security context for a job. See security_context below.
 	SecurityContext *SecurityContextObservation `json:"securityContext,omitempty" tf:"security_context,omitempty"`
 
-	// Volume mounts for the container.
+	// Volume mounts for the container. See volume_mounts below.
 	VolumeMounts []VolumeMountsObservation `json:"volumeMounts,omitempty" tf:"volume_mounts,omitempty"`
 }
 
@@ -83,7 +83,7 @@ type ContainersParameters struct {
 	// +kubebuilder:validation:Optional
 	Command []*string `json:"command,omitempty" tf:"command,omitempty"`
 
-	// Environment variables to pass to a container. See EKS Environment below.
+	// Environment variables to pass to a container. See env below.
 	// +kubebuilder:validation:Optional
 	Env []EnvParameters `json:"env,omitempty" tf:"env,omitempty"`
 
@@ -95,11 +95,11 @@ type ContainersParameters struct {
 	// +kubebuilder:validation:Optional
 	ImagePullPolicy *string `json:"imagePullPolicy,omitempty" tf:"image_pull_policy,omitempty"`
 
-	// Name of the container. If the name isn't specified, the default name "Default" is used. Each container in a pod must have a unique name.
+	// Name of the volume. The name must be allowed as a DNS subdomain name.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Type and amount of resources to assign to a container. The supported resources include memory, cpu, and nvidia.com/gpu.
+	// Type and amount of resources to assign to a container. See resources below.
 	// +kubebuilder:validation:Optional
 	Resources *ResourcesParameters `json:"resources,omitempty" tf:"resources,omitempty"`
 
@@ -107,7 +107,7 @@ type ContainersParameters struct {
 	// +kubebuilder:validation:Optional
 	SecurityContext *SecurityContextParameters `json:"securityContext,omitempty" tf:"security_context,omitempty"`
 
-	// Volume mounts for the container.
+	// Volume mounts for the container. See volume_mounts below.
 	// +kubebuilder:validation:Optional
 	VolumeMounts []VolumeMountsParameters `json:"volumeMounts,omitempty" tf:"volume_mounts,omitempty"`
 }
@@ -162,7 +162,7 @@ type EmptyDirParameters struct {
 
 type EnvInitParameters struct {
 
-	// Name of the job definition.
+	// Name of the volume. The name must be allowed as a DNS subdomain name.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Value of the environment variable.
@@ -171,7 +171,7 @@ type EnvInitParameters struct {
 
 type EnvObservation struct {
 
-	// Name of the job definition.
+	// Name of the volume. The name must be allowed as a DNS subdomain name.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Value of the environment variable.
@@ -180,7 +180,7 @@ type EnvObservation struct {
 
 type EnvParameters struct {
 
-	// Name of the job definition.
+	// Name of the volume. The name must be allowed as a DNS subdomain name.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -259,26 +259,26 @@ type HostPathParameters struct {
 
 type ImagePullSecretInitParameters struct {
 
-	// Unique identifier.
+	// Name of the volume. The name must be allowed as a DNS subdomain name.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type ImagePullSecretObservation struct {
 
-	// Unique identifier.
+	// Name of the volume. The name must be allowed as a DNS subdomain name.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type ImagePullSecretParameters struct {
 
-	// Unique identifier.
+	// Name of the volume. The name must be allowed as a DNS subdomain name.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 }
 
 type InitContainersEnvInitParameters struct {
 
-	// Name of the job definition.
+	// Name of the volume. The name must be allowed as a DNS subdomain name.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Value of the environment variable.
@@ -287,7 +287,7 @@ type InitContainersEnvInitParameters struct {
 
 type InitContainersEnvObservation struct {
 
-	// Name of the job definition.
+	// Name of the volume. The name must be allowed as a DNS subdomain name.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Value of the environment variable.
@@ -296,7 +296,7 @@ type InitContainersEnvObservation struct {
 
 type InitContainersEnvParameters struct {
 
-	// Name of the job definition.
+	// Name of the volume. The name must be allowed as a DNS subdomain name.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -313,7 +313,7 @@ type InitContainersInitParameters struct {
 	// Entrypoint for the container. This isn't run within a shell. If this isn't specified, the ENTRYPOINT of the container image is used. Environment variable references are expanded using the container's environment.
 	Command []*string `json:"command,omitempty" tf:"command,omitempty"`
 
-	// Environment variables to pass to a container. See EKS Environment below.
+	// Environment variables to pass to a container. See env below.
 	Env []InitContainersEnvInitParameters `json:"env,omitempty" tf:"env,omitempty"`
 
 	// Docker image used to start the container.
@@ -322,16 +322,16 @@ type InitContainersInitParameters struct {
 	// Image pull policy for the container. Supported values are Always, IfNotPresent, and Never.
 	ImagePullPolicy *string `json:"imagePullPolicy,omitempty" tf:"image_pull_policy,omitempty"`
 
-	// Name of the job definition.
+	// Name of the volume. The name must be allowed as a DNS subdomain name.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Type and amount of resources to assign to a container. The supported resources include memory, cpu, and nvidia.com/gpu.
+	// Type and amount of resources to assign to a container. See resources below.
 	Resources *InitContainersResourcesInitParameters `json:"resources,omitempty" tf:"resources,omitempty"`
 
 	// Security context for a job. See security_context below.
 	SecurityContext *InitContainersSecurityContextInitParameters `json:"securityContext,omitempty" tf:"security_context,omitempty"`
 
-	// Volume mounts for the container.
+	// Volume mounts for the container. See volume_mounts below.
 	VolumeMounts []InitContainersVolumeMountsInitParameters `json:"volumeMounts,omitempty" tf:"volume_mounts,omitempty"`
 }
 
@@ -343,7 +343,7 @@ type InitContainersObservation struct {
 	// Entrypoint for the container. This isn't run within a shell. If this isn't specified, the ENTRYPOINT of the container image is used. Environment variable references are expanded using the container's environment.
 	Command []*string `json:"command,omitempty" tf:"command,omitempty"`
 
-	// Environment variables to pass to a container. See EKS Environment below.
+	// Environment variables to pass to a container. See env below.
 	Env []InitContainersEnvObservation `json:"env,omitempty" tf:"env,omitempty"`
 
 	// Docker image used to start the container.
@@ -352,16 +352,16 @@ type InitContainersObservation struct {
 	// Image pull policy for the container. Supported values are Always, IfNotPresent, and Never.
 	ImagePullPolicy *string `json:"imagePullPolicy,omitempty" tf:"image_pull_policy,omitempty"`
 
-	// Name of the job definition.
+	// Name of the volume. The name must be allowed as a DNS subdomain name.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Type and amount of resources to assign to a container. The supported resources include memory, cpu, and nvidia.com/gpu.
+	// Type and amount of resources to assign to a container. See resources below.
 	Resources *InitContainersResourcesObservation `json:"resources,omitempty" tf:"resources,omitempty"`
 
 	// Security context for a job. See security_context below.
 	SecurityContext *InitContainersSecurityContextObservation `json:"securityContext,omitempty" tf:"security_context,omitempty"`
 
-	// Volume mounts for the container.
+	// Volume mounts for the container. See volume_mounts below.
 	VolumeMounts []InitContainersVolumeMountsObservation `json:"volumeMounts,omitempty" tf:"volume_mounts,omitempty"`
 }
 
@@ -375,7 +375,7 @@ type InitContainersParameters struct {
 	// +kubebuilder:validation:Optional
 	Command []*string `json:"command,omitempty" tf:"command,omitempty"`
 
-	// Environment variables to pass to a container. See EKS Environment below.
+	// Environment variables to pass to a container. See env below.
 	// +kubebuilder:validation:Optional
 	Env []InitContainersEnvParameters `json:"env,omitempty" tf:"env,omitempty"`
 
@@ -387,11 +387,11 @@ type InitContainersParameters struct {
 	// +kubebuilder:validation:Optional
 	ImagePullPolicy *string `json:"imagePullPolicy,omitempty" tf:"image_pull_policy,omitempty"`
 
-	// Name of the job definition.
+	// Name of the volume. The name must be allowed as a DNS subdomain name.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Type and amount of resources to assign to a container. The supported resources include memory, cpu, and nvidia.com/gpu.
+	// Type and amount of resources to assign to a container. See resources below.
 	// +kubebuilder:validation:Optional
 	Resources *InitContainersResourcesParameters `json:"resources,omitempty" tf:"resources,omitempty"`
 
@@ -399,35 +399,41 @@ type InitContainersParameters struct {
 	// +kubebuilder:validation:Optional
 	SecurityContext *InitContainersSecurityContextParameters `json:"securityContext,omitempty" tf:"security_context,omitempty"`
 
-	// Volume mounts for the container.
+	// Volume mounts for the container. See volume_mounts below.
 	// +kubebuilder:validation:Optional
 	VolumeMounts []InitContainersVolumeMountsParameters `json:"volumeMounts,omitempty" tf:"volume_mounts,omitempty"`
 }
 
 type InitContainersResourcesInitParameters struct {
 
+	// Type and quantity of the resources to reserve for the container. The values vary based on the name that's specified. Limits must be equal to or greater than requests.
 	// +mapType=granular
 	Limits map[string]*string `json:"limits,omitempty" tf:"limits,omitempty"`
 
+	// Type and quantity of the resources to request for the container. The values vary based on the name that's specified.
 	// +mapType=granular
 	Requests map[string]*string `json:"requests,omitempty" tf:"requests,omitempty"`
 }
 
 type InitContainersResourcesObservation struct {
 
+	// Type and quantity of the resources to reserve for the container. The values vary based on the name that's specified. Limits must be equal to or greater than requests.
 	// +mapType=granular
 	Limits map[string]*string `json:"limits,omitempty" tf:"limits,omitempty"`
 
+	// Type and quantity of the resources to request for the container. The values vary based on the name that's specified.
 	// +mapType=granular
 	Requests map[string]*string `json:"requests,omitempty" tf:"requests,omitempty"`
 }
 
 type InitContainersResourcesParameters struct {
 
+	// Type and quantity of the resources to reserve for the container. The values vary based on the name that's specified. Limits must be equal to or greater than requests.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Limits map[string]*string `json:"limits,omitempty" tf:"limits,omitempty"`
 
+	// Type and quantity of the resources to request for the container. The values vary based on the name that's specified.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Requests map[string]*string `json:"requests,omitempty" tf:"requests,omitempty"`
@@ -441,6 +447,7 @@ type InitContainersSecurityContextInitParameters struct {
 	// When this parameter is true, the container is given elevated permissions on the host container instance. The level of permissions are similar to the root user permissions. The default value is false.
 	Privileged *bool `json:"privileged,omitempty" tf:"privileged,omitempty"`
 
+	// When this parameter is true, the container is given read-only access to its root file system. The default value is false.
 	ReadOnlyRootFileSystem *bool `json:"readOnlyRootFileSystem,omitempty" tf:"read_only_root_file_system,omitempty"`
 
 	// When this parameter is specified, the container is run as the specified group ID (gid). If this parameter isn't specified, the default is the group that's specified in the image metadata.
@@ -461,6 +468,7 @@ type InitContainersSecurityContextObservation struct {
 	// When this parameter is true, the container is given elevated permissions on the host container instance. The level of permissions are similar to the root user permissions. The default value is false.
 	Privileged *bool `json:"privileged,omitempty" tf:"privileged,omitempty"`
 
+	// When this parameter is true, the container is given read-only access to its root file system. The default value is false.
 	ReadOnlyRootFileSystem *bool `json:"readOnlyRootFileSystem,omitempty" tf:"read_only_root_file_system,omitempty"`
 
 	// When this parameter is specified, the container is run as the specified group ID (gid). If this parameter isn't specified, the default is the group that's specified in the image metadata.
@@ -483,6 +491,7 @@ type InitContainersSecurityContextParameters struct {
 	// +kubebuilder:validation:Optional
 	Privileged *bool `json:"privileged,omitempty" tf:"privileged,omitempty"`
 
+	// When this parameter is true, the container is given read-only access to its root file system. The default value is false.
 	// +kubebuilder:validation:Optional
 	ReadOnlyRootFileSystem *bool `json:"readOnlyRootFileSystem,omitempty" tf:"read_only_root_file_system,omitempty"`
 
@@ -501,36 +510,39 @@ type InitContainersSecurityContextParameters struct {
 
 type InitContainersVolumeMountsInitParameters struct {
 
-	// Path of the file or directory on the host to mount into containers on the pod.
+	// Path on the container where the volume is mounted.
 	MountPath *string `json:"mountPath,omitempty" tf:"mount_path,omitempty"`
 
-	// Name of the job definition.
+	// Name of the volume. The name must be allowed as a DNS subdomain name.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Whether the container has read-only access to the volume. The default value is false.
 	ReadOnly *bool `json:"readOnly,omitempty" tf:"read_only,omitempty"`
 }
 
 type InitContainersVolumeMountsObservation struct {
 
-	// Path of the file or directory on the host to mount into containers on the pod.
+	// Path on the container where the volume is mounted.
 	MountPath *string `json:"mountPath,omitempty" tf:"mount_path,omitempty"`
 
-	// Name of the job definition.
+	// Name of the volume. The name must be allowed as a DNS subdomain name.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Whether the container has read-only access to the volume. The default value is false.
 	ReadOnly *bool `json:"readOnly,omitempty" tf:"read_only,omitempty"`
 }
 
 type InitContainersVolumeMountsParameters struct {
 
-	// Path of the file or directory on the host to mount into containers on the pod.
+	// Path on the container where the volume is mounted.
 	// +kubebuilder:validation:Optional
 	MountPath *string `json:"mountPath" tf:"mount_path,omitempty"`
 
-	// Name of the job definition.
+	// Name of the volume. The name must be allowed as a DNS subdomain name.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 
+	// Whether the container has read-only access to the volume. The default value is false.
 	// +kubebuilder:validation:Optional
 	ReadOnly *bool `json:"readOnly,omitempty" tf:"read_only,omitempty"`
 }
@@ -753,19 +765,19 @@ type PodPropertiesInitParameters struct {
 	// List of Kubernetes secret resources. See image_pull_secret below.
 	ImagePullSecret []ImagePullSecretInitParameters `json:"imagePullSecret,omitempty" tf:"image_pull_secret,omitempty"`
 
-	// Containers which run before application containers, always runs to completion, and must complete successfully before the next container starts. These containers are registered with the Amazon EKS Connector agent and persists the registration information in the Kubernetes backend data store. See containers below.
+	// Containers which run before application containers, always runs to completion, and must complete successfully before the next container starts. These containers are registered with the Amazon EKS Connector agent and persists the registration information in the Kubernetes backend data store. See init_containers below.
 	InitContainers []InitContainersInitParameters `json:"initContainers,omitempty" tf:"init_containers,omitempty"`
 
-	// Metadata about the Kubernetes pod.
+	// Metadata about the Kubernetes pod. See metadata below.
 	Metadata *MetadataInitParameters `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
 	// Name of the service account that's used to run the pod.
 	ServiceAccountName *string `json:"serviceAccountName,omitempty" tf:"service_account_name,omitempty"`
 
-	// Indicates if the processes in a container are shared, or visible, to other containers in the same pod.
+	// Whether the processes in a container are shared, or visible, to other containers in the same pod.
 	ShareProcessNamespace *bool `json:"shareProcessNamespace,omitempty" tf:"share_process_namespace,omitempty"`
 
-	// Volumes for a job definition that uses Amazon EKS resources. AWS Batch supports emptyDir, hostPath, and secret volume types.
+	// Volumes for a job definition that uses Amazon EKS resources. See volumes below.
 	Volumes []VolumesInitParameters `json:"volumes,omitempty" tf:"volumes,omitempty"`
 }
 
@@ -783,19 +795,19 @@ type PodPropertiesObservation struct {
 	// List of Kubernetes secret resources. See image_pull_secret below.
 	ImagePullSecret []ImagePullSecretObservation `json:"imagePullSecret,omitempty" tf:"image_pull_secret,omitempty"`
 
-	// Containers which run before application containers, always runs to completion, and must complete successfully before the next container starts. These containers are registered with the Amazon EKS Connector agent and persists the registration information in the Kubernetes backend data store. See containers below.
+	// Containers which run before application containers, always runs to completion, and must complete successfully before the next container starts. These containers are registered with the Amazon EKS Connector agent and persists the registration information in the Kubernetes backend data store. See init_containers below.
 	InitContainers []InitContainersObservation `json:"initContainers,omitempty" tf:"init_containers,omitempty"`
 
-	// Metadata about the Kubernetes pod.
+	// Metadata about the Kubernetes pod. See metadata below.
 	Metadata *MetadataObservation `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
 	// Name of the service account that's used to run the pod.
 	ServiceAccountName *string `json:"serviceAccountName,omitempty" tf:"service_account_name,omitempty"`
 
-	// Indicates if the processes in a container are shared, or visible, to other containers in the same pod.
+	// Whether the processes in a container are shared, or visible, to other containers in the same pod.
 	ShareProcessNamespace *bool `json:"shareProcessNamespace,omitempty" tf:"share_process_namespace,omitempty"`
 
-	// Volumes for a job definition that uses Amazon EKS resources. AWS Batch supports emptyDir, hostPath, and secret volume types.
+	// Volumes for a job definition that uses Amazon EKS resources. See volumes below.
 	Volumes []VolumesObservation `json:"volumes,omitempty" tf:"volumes,omitempty"`
 }
 
@@ -817,11 +829,11 @@ type PodPropertiesParameters struct {
 	// +kubebuilder:validation:Optional
 	ImagePullSecret []ImagePullSecretParameters `json:"imagePullSecret,omitempty" tf:"image_pull_secret,omitempty"`
 
-	// Containers which run before application containers, always runs to completion, and must complete successfully before the next container starts. These containers are registered with the Amazon EKS Connector agent and persists the registration information in the Kubernetes backend data store. See containers below.
+	// Containers which run before application containers, always runs to completion, and must complete successfully before the next container starts. These containers are registered with the Amazon EKS Connector agent and persists the registration information in the Kubernetes backend data store. See init_containers below.
 	// +kubebuilder:validation:Optional
 	InitContainers []InitContainersParameters `json:"initContainers,omitempty" tf:"init_containers,omitempty"`
 
-	// Metadata about the Kubernetes pod.
+	// Metadata about the Kubernetes pod. See metadata below.
 	// +kubebuilder:validation:Optional
 	Metadata *MetadataParameters `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
@@ -829,39 +841,45 @@ type PodPropertiesParameters struct {
 	// +kubebuilder:validation:Optional
 	ServiceAccountName *string `json:"serviceAccountName,omitempty" tf:"service_account_name,omitempty"`
 
-	// Indicates if the processes in a container are shared, or visible, to other containers in the same pod.
+	// Whether the processes in a container are shared, or visible, to other containers in the same pod.
 	// +kubebuilder:validation:Optional
 	ShareProcessNamespace *bool `json:"shareProcessNamespace,omitempty" tf:"share_process_namespace,omitempty"`
 
-	// Volumes for a job definition that uses Amazon EKS resources. AWS Batch supports emptyDir, hostPath, and secret volume types.
+	// Volumes for a job definition that uses Amazon EKS resources. See volumes below.
 	// +kubebuilder:validation:Optional
 	Volumes []VolumesParameters `json:"volumes,omitempty" tf:"volumes,omitempty"`
 }
 
 type ResourcesInitParameters struct {
 
+	// Type and quantity of the resources to reserve for the container. The values vary based on the name that's specified. Limits must be equal to or greater than requests.
 	// +mapType=granular
 	Limits map[string]*string `json:"limits,omitempty" tf:"limits,omitempty"`
 
+	// Type and quantity of the resources to request for the container. The values vary based on the name that's specified.
 	// +mapType=granular
 	Requests map[string]*string `json:"requests,omitempty" tf:"requests,omitempty"`
 }
 
 type ResourcesObservation struct {
 
+	// Type and quantity of the resources to reserve for the container. The values vary based on the name that's specified. Limits must be equal to or greater than requests.
 	// +mapType=granular
 	Limits map[string]*string `json:"limits,omitempty" tf:"limits,omitempty"`
 
+	// Type and quantity of the resources to request for the container. The values vary based on the name that's specified.
 	// +mapType=granular
 	Requests map[string]*string `json:"requests,omitempty" tf:"requests,omitempty"`
 }
 
 type ResourcesParameters struct {
 
+	// Type and quantity of the resources to reserve for the container. The values vary based on the name that's specified. Limits must be equal to or greater than requests.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Limits map[string]*string `json:"limits,omitempty" tf:"limits,omitempty"`
 
+	// Type and quantity of the resources to request for the container. The values vary based on the name that's specified.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Requests map[string]*string `json:"requests,omitempty" tf:"requests,omitempty"`
@@ -933,6 +951,7 @@ type SecurityContextInitParameters struct {
 	// When this parameter is true, the container is given elevated permissions on the host container instance. The level of permissions are similar to the root user permissions. The default value is false.
 	Privileged *bool `json:"privileged,omitempty" tf:"privileged,omitempty"`
 
+	// When this parameter is true, the container is given read-only access to its root file system. The default value is false.
 	ReadOnlyRootFileSystem *bool `json:"readOnlyRootFileSystem,omitempty" tf:"read_only_root_file_system,omitempty"`
 
 	// When this parameter is specified, the container is run as the specified group ID (gid). If this parameter isn't specified, the default is the group that's specified in the image metadata.
@@ -953,6 +972,7 @@ type SecurityContextObservation struct {
 	// When this parameter is true, the container is given elevated permissions on the host container instance. The level of permissions are similar to the root user permissions. The default value is false.
 	Privileged *bool `json:"privileged,omitempty" tf:"privileged,omitempty"`
 
+	// When this parameter is true, the container is given read-only access to its root file system. The default value is false.
 	ReadOnlyRootFileSystem *bool `json:"readOnlyRootFileSystem,omitempty" tf:"read_only_root_file_system,omitempty"`
 
 	// When this parameter is specified, the container is run as the specified group ID (gid). If this parameter isn't specified, the default is the group that's specified in the image metadata.
@@ -975,6 +995,7 @@ type SecurityContextParameters struct {
 	// +kubebuilder:validation:Optional
 	Privileged *bool `json:"privileged,omitempty" tf:"privileged,omitempty"`
 
+	// When this parameter is true, the container is given read-only access to its root file system. The default value is false.
 	// +kubebuilder:validation:Optional
 	ReadOnlyRootFileSystem *bool `json:"readOnlyRootFileSystem,omitempty" tf:"read_only_root_file_system,omitempty"`
 
@@ -1012,77 +1033,88 @@ type TimeoutParameters struct {
 
 type VolumeMountsInitParameters struct {
 
-	// Path of the file or directory on the host to mount into containers on the pod.
+	// Path on the container where the volume is mounted.
 	MountPath *string `json:"mountPath,omitempty" tf:"mount_path,omitempty"`
 
-	// Name of the job definition.
+	// Name of the volume. The name must be allowed as a DNS subdomain name.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Whether the container has read-only access to the volume. The default value is false.
 	ReadOnly *bool `json:"readOnly,omitempty" tf:"read_only,omitempty"`
 }
 
 type VolumeMountsObservation struct {
 
-	// Path of the file or directory on the host to mount into containers on the pod.
+	// Path on the container where the volume is mounted.
 	MountPath *string `json:"mountPath,omitempty" tf:"mount_path,omitempty"`
 
-	// Name of the job definition.
+	// Name of the volume. The name must be allowed as a DNS subdomain name.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Whether the container has read-only access to the volume. The default value is false.
 	ReadOnly *bool `json:"readOnly,omitempty" tf:"read_only,omitempty"`
 }
 
 type VolumeMountsParameters struct {
 
-	// Path of the file or directory on the host to mount into containers on the pod.
+	// Path on the container where the volume is mounted.
 	// +kubebuilder:validation:Optional
 	MountPath *string `json:"mountPath" tf:"mount_path,omitempty"`
 
-	// Name of the job definition.
+	// Name of the volume. The name must be allowed as a DNS subdomain name.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 
+	// Whether the container has read-only access to the volume. The default value is false.
 	// +kubebuilder:validation:Optional
 	ReadOnly *bool `json:"readOnly,omitempty" tf:"read_only,omitempty"`
 }
 
 type VolumesInitParameters struct {
+
+	// Empty directory to mount on the pod. See empty_dir below.
 	EmptyDir *EmptyDirInitParameters `json:"emptyDir,omitempty" tf:"empty_dir,omitempty"`
 
-	// Path of the file or directory on the host to mount into containers on the pod.
+	// Path on the host that's mounted to the pod. See host_path below.
 	HostPath *HostPathInitParameters `json:"hostPath,omitempty" tf:"host_path,omitempty"`
 
-	// Name of the job definition.
+	// Name of the volume. The name must be allowed as a DNS subdomain name.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Secret to mount as a volume. See secret below.
 	Secret *SecretInitParameters `json:"secret,omitempty" tf:"secret,omitempty"`
 }
 
 type VolumesObservation struct {
+
+	// Empty directory to mount on the pod. See empty_dir below.
 	EmptyDir *EmptyDirObservation `json:"emptyDir,omitempty" tf:"empty_dir,omitempty"`
 
-	// Path of the file or directory on the host to mount into containers on the pod.
+	// Path on the host that's mounted to the pod. See host_path below.
 	HostPath *HostPathObservation `json:"hostPath,omitempty" tf:"host_path,omitempty"`
 
-	// Name of the job definition.
+	// Name of the volume. The name must be allowed as a DNS subdomain name.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Secret to mount as a volume. See secret below.
 	Secret *SecretObservation `json:"secret,omitempty" tf:"secret,omitempty"`
 }
 
 type VolumesParameters struct {
 
+	// Empty directory to mount on the pod. See empty_dir below.
 	// +kubebuilder:validation:Optional
 	EmptyDir *EmptyDirParameters `json:"emptyDir,omitempty" tf:"empty_dir,omitempty"`
 
-	// Path of the file or directory on the host to mount into containers on the pod.
+	// Path on the host that's mounted to the pod. See host_path below.
 	// +kubebuilder:validation:Optional
 	HostPath *HostPathParameters `json:"hostPath,omitempty" tf:"host_path,omitempty"`
 
-	// Name of the job definition.
+	// Name of the volume. The name must be allowed as a DNS subdomain name.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Secret to mount as a volume. See secret below.
 	// +kubebuilder:validation:Optional
 	Secret *SecretParameters `json:"secret,omitempty" tf:"secret,omitempty"`
 }

@@ -76,11 +76,16 @@ spec:
                     description: Type of IAM policy. Either NONE or AWS_IAM.
                     type: string
                   certificateArn:
-                    description: Amazon Resource Name (ARN) of the certificate.
+                    description: ARN of the certificate.
                     type: string
                   customDomainName:
                     description: Custom domain name of the service.
                     type: string
+                  idleTimeoutSeconds:
+                    description: Amount of time, in seconds, that a connection can
+                      remain idle (no data sent) before VPC Lattice closes it. The
+                      valid range is 60 to 600 seconds. Default is 60 seconds.
+                    type: number
                   name:
                     description: Name of the service. The name must be unique within
                       the account. The valid characters are a-z, 0-9, and hyphens
@@ -119,11 +124,16 @@ spec:
                     description: Type of IAM policy. Either NONE or AWS_IAM.
                     type: string
                   certificateArn:
-                    description: Amazon Resource Name (ARN) of the certificate.
+                    description: ARN of the certificate.
                     type: string
                   customDomainName:
                     description: Custom domain name of the service.
                     type: string
+                  idleTimeoutSeconds:
+                    description: Amount of time, in seconds, that a connection can
+                      remain idle (no data sent) before VPC Lattice closes it. The
+                      valid range is 60 to 600 seconds. Default is 60 seconds.
+                    type: number
                   name:
                     description: Name of the service. The name must be unique within
                       the account. The valid characters are a-z, 0-9, and hyphens
@@ -241,7 +251,7 @@ spec:
                     description: Type of IAM policy. Either NONE or AWS_IAM.
                     type: string
                   certificateArn:
-                    description: Amazon Resource Name (ARN) of the certificate.
+                    description: ARN of the certificate.
                     type: string
                   customDomainName:
                     description: Custom domain name of the service.
@@ -251,20 +261,21 @@ spec:
                     items:
                       properties:
                         domainName:
-                          description: Name of the service. The name must be unique
-                            within the account. The valid characters are a-z, 0-9,
-                            and hyphens (-). You can't use a hyphen as the first or
-                            last character, or immediately after another hyphen.Must
-                            be between 3 and 40 characters in length.
+                          description: Domain name of the service.
                           type: string
                         hostedZoneId:
-                          description: Unique identifier for the service.
+                          description: ID of the hosted zone.
                           type: string
                       type: object
                     type: array
                   id:
                     description: Unique identifier for the service.
                     type: string
+                  idleTimeoutSeconds:
+                    description: Amount of time, in seconds, that a connection can
+                      remain idle (no data sent) before VPC Lattice closes it. The
+                      valid range is 60 to 600 seconds. Default is 60 seconds.
+                    type: number
                   name:
                     description: Name of the service. The name must be unique within
                       the account. The valid characters are a-z, 0-9, and hyphens

@@ -156,7 +156,7 @@ type PresetInitParameters struct {
 
 type PresetObservation struct {
 
-	// Amazon Resource Name (ARN) of the Elastic Transcoder Preset.
+	// ARN of the Elastic Transcoder Preset.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Audio parameters object (documented below).

@@ -15,7 +15,7 @@ import (
 
 type ArnResourceInitParameters struct {
 
-	// The ARN of the Resource for this configuration.
+	// ARN of the Resource for this configuration.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/rds/v1beta1.ClusterInstance
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
@@ -31,13 +31,13 @@ type ArnResourceInitParameters struct {
 
 type ArnResourceObservation struct {
 
-	// The ARN of the Resource for this configuration.
+	// ARN of the Resource for this configuration.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 }
 
 type ArnResourceParameters struct {
 
-	// The ARN of the Resource for this configuration.
+	// ARN of the Resource for this configuration.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/rds/v1beta1.ClusterInstance
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -54,48 +54,48 @@ type ArnResourceParameters struct {
 
 type DNSResourceInitParameters struct {
 
-	// The hostname of the Resource for this configuration.
+	// Hostname of the Resource for this configuration.
 	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
 
-	// The IP Address type either IPV4 or IPV6
+	// IP Address type either IPV4 or IPV6
 	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
 }
 
 type DNSResourceObservation struct {
 
-	// The hostname of the Resource for this configuration.
+	// Hostname of the Resource for this configuration.
 	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
 
-	// The IP Address type either IPV4 or IPV6
+	// IP Address type either IPV4 or IPV6
 	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
 }
 
 type DNSResourceParameters struct {
 
-	// The hostname of the Resource for this configuration.
+	// Hostname of the Resource for this configuration.
 	// +kubebuilder:validation:Optional
 	DomainName *string `json:"domainName" tf:"domain_name,omitempty"`
 
-	// The IP Address type either IPV4 or IPV6
+	// IP Address type either IPV4 or IPV6
 	// +kubebuilder:validation:Optional
 	IPAddressType *string `json:"ipAddressType" tf:"ip_address_type,omitempty"`
 }
 
 type IPResourceInitParameters struct {
 
-	// The IP Address of the Resource for this configuration.
+	// IP Address of the Resource for this configuration.
 	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
 }
 
 type IPResourceObservation struct {
 
-	// The IP Address of the Resource for this configuration.
+	// IP Address of the Resource for this configuration.
 	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
 }
 
 type IPResourceParameters struct {
 
-	// The IP Address of the Resource for this configuration.
+	// IP Address of the Resource for this configuration.
 	// +kubebuilder:validation:Optional
 	IPAddress *string `json:"ipAddress" tf:"ip_address,omitempty"`
 }
@@ -147,7 +147,7 @@ type ResourceConfigurationInitParameters struct {
 	// Custom domain name for your resource configuration. Additionally, provide a domain_verification_id to prove your ownership of a domain.
 	CustomDomainName *string `json:"customDomainName,omitempty" tf:"custom_domain_name,omitempty"`
 
-	// The domain verification ID of your verified custom domain name. If you don't provide an ID, you must configure the DNS settings yourself.
+	// Domain verification ID of your verified custom domain name. If you don't provide an ID, you must configure the DNS settings yourself.
 	DomainVerificationID *string `json:"domainVerificationId,omitempty" tf:"domain_verification_id,omitempty"`
 
 	// Name for the Resource Configuration.
@@ -192,7 +192,7 @@ type ResourceConfigurationObservation struct {
 	// Allow or Deny the association of this resource to a shareable service network.
 	AllowAssociationToShareableServiceNetwork *bool `json:"allowAssociationToShareableServiceNetwork,omitempty" tf:"allow_association_to_shareable_service_network,omitempty"`
 
-	// The ARN of the Resource for this configuration.
+	// ARN of the Resource for this configuration.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Custom domain name for your resource configuration. Additionally, provide a domain_verification_id to prove your ownership of a domain.
@@ -201,7 +201,7 @@ type ResourceConfigurationObservation struct {
 	// ARN of the domain verification.
 	DomainVerificationArn *string `json:"domainVerificationArn,omitempty" tf:"domain_verification_arn,omitempty"`
 
-	// The domain verification ID of your verified custom domain name. If you don't provide an ID, you must configure the DNS settings yourself.
+	// Domain verification ID of your verified custom domain name. If you don't provide an ID, you must configure the DNS settings yourself.
 	DomainVerificationID *string `json:"domainVerificationId,omitempty" tf:"domain_verification_id,omitempty"`
 
 	// Domain verification status.
@@ -255,7 +255,7 @@ type ResourceConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	CustomDomainName *string `json:"customDomainName,omitempty" tf:"custom_domain_name,omitempty"`
 
-	// The domain verification ID of your verified custom domain name. If you don't provide an ID, you must configure the DNS settings yourself.
+	// Domain verification ID of your verified custom domain name. If you don't provide an ID, you must configure the DNS settings yourself.
 	// +kubebuilder:validation:Optional
 	DomainVerificationID *string `json:"domainVerificationId,omitempty" tf:"domain_verification_id,omitempty"`
 

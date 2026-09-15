@@ -18,13 +18,13 @@ type ResourceGatewayInitParameters struct {
 	// IP address type used by the resource gateway. Valid values are IPV4, IPV6, and DUALSTACK. The IP address type of a resource gateway must be compatible with the subnets of the resource gateway and the IP address type of the resource.
 	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
 
-	// The number of IPv4 addresses per ENI for your resource. This argument is only applicable to IPV4 and DUALSTACK IP address types. Defaults to 16.
+	// Number of IPv4 addresses per ENI for your resource. This argument is only applicable to IPV4 and DUALSTACK IP address types. Defaults to 16.
 	IPv4AddressesPerEni *float64 `json:"ipv4AddressesPerEni,omitempty" tf:"ipv4_addresses_per_eni,omitempty"`
 
 	// Name of the resource gateway.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Indicates how DNS is resolved for resource configurations associated to this resource gateway. Valid values are IN_VPC and PUBLIC. Defaults to PUBLIC. Changing this value will trigger a resource replacement.
+	// How DNS is resolved for resource configurations associated to this resource gateway. Valid values are IN_VPC and PUBLIC. Defaults to PUBLIC. Changing this value will trigger a resource replacement.
 	ResourceConfigDNSResolution *string `json:"resourceConfigDnsResolution,omitempty" tf:"resource_config_dns_resolution,omitempty"`
 
 	// References to SecurityGroup in ec2 to populate securityGroupIds.
@@ -85,7 +85,7 @@ type ResourceGatewayObservation struct {
 	// IP address type used by the resource gateway. Valid values are IPV4, IPV6, and DUALSTACK. The IP address type of a resource gateway must be compatible with the subnets of the resource gateway and the IP address type of the resource.
 	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
 
-	// The number of IPv4 addresses per ENI for your resource. This argument is only applicable to IPV4 and DUALSTACK IP address types. Defaults to 16.
+	// Number of IPv4 addresses per ENI for your resource. This argument is only applicable to IPV4 and DUALSTACK IP address types. Defaults to 16.
 	IPv4AddressesPerEni *float64 `json:"ipv4AddressesPerEni,omitempty" tf:"ipv4_addresses_per_eni,omitempty"`
 
 	// Name of the resource gateway.
@@ -95,7 +95,7 @@ type ResourceGatewayObservation struct {
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// Indicates how DNS is resolved for resource configurations associated to this resource gateway. Valid values are IN_VPC and PUBLIC. Defaults to PUBLIC. Changing this value will trigger a resource replacement.
+	// How DNS is resolved for resource configurations associated to this resource gateway. Valid values are IN_VPC and PUBLIC. Defaults to PUBLIC. Changing this value will trigger a resource replacement.
 	ResourceConfigDNSResolution *string `json:"resourceConfigDnsResolution,omitempty" tf:"resource_config_dns_resolution,omitempty"`
 
 	// Security group IDs associated with the resource gateway. The security groups must be in the same VPC.
@@ -127,7 +127,7 @@ type ResourceGatewayParameters struct {
 	// +kubebuilder:validation:Optional
 	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
 
-	// The number of IPv4 addresses per ENI for your resource. This argument is only applicable to IPV4 and DUALSTACK IP address types. Defaults to 16.
+	// Number of IPv4 addresses per ENI for your resource. This argument is only applicable to IPV4 and DUALSTACK IP address types. Defaults to 16.
 	// +kubebuilder:validation:Optional
 	IPv4AddressesPerEni *float64 `json:"ipv4AddressesPerEni,omitempty" tf:"ipv4_addresses_per_eni,omitempty"`
 
@@ -140,7 +140,7 @@ type ResourceGatewayParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// Indicates how DNS is resolved for resource configurations associated to this resource gateway. Valid values are IN_VPC and PUBLIC. Defaults to PUBLIC. Changing this value will trigger a resource replacement.
+	// How DNS is resolved for resource configurations associated to this resource gateway. Valid values are IN_VPC and PUBLIC. Defaults to PUBLIC. Changing this value will trigger a resource replacement.
 	// +kubebuilder:validation:Optional
 	ResourceConfigDNSResolution *string `json:"resourceConfigDnsResolution,omitempty" tf:"resource_config_dns_resolution,omitempty"`
 

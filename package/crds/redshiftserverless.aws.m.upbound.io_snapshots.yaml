@@ -340,7 +340,7 @@ spec:
                     description: The username of the database within a snapshot.
                     type: string
                   arn:
-                    description: The Amazon Resource Name (ARN) of the snapshot.
+                    description: ARN of the snapshot.
                     type: string
                   id:
                     description: The name of the snapshot.
@@ -350,8 +350,7 @@ spec:
                       the snapshot.
                     type: string
                   namespaceArn:
-                    description: The Amazon Resource Name (ARN) of the namespace the
-                      snapshot was created from.
+                    description: ARN of the namespace the snapshot was created from.
                     type: string
                   namespaceName:
                     description: The namespace to create a snapshot for.

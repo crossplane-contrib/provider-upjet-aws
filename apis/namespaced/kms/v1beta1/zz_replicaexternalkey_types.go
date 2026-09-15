@@ -17,7 +17,7 @@ type ReplicaExternalKeyInitParameters struct {
 
 	// A flag to indicate whether to bypass the key policy lockout safety check.
 	// Setting this value to true increases the risk that the KMS key becomes unmanageable. Do not set this value to true indiscriminately.
-	// For more information, refer to the scenario in the Default Key Policy section in the AWS Key Management Service Developer Guide.
+	// For more information, refer to the scenario in the Default Key Policy section in the AWS KMS Developer Guide.
 	// The default value is false.
 	BypassPolicyLockoutSafetyCheck *bool `json:"bypassPolicyLockoutSafetyCheck,omitempty" tf:"bypass_policy_lockout_safety_check,omitempty"`
 
@@ -60,12 +60,12 @@ type ReplicaExternalKeyInitParameters struct {
 
 type ReplicaExternalKeyObservation struct {
 
-	// The Amazon Resource Name (ARN) of the replica key. The key ARNs of related multi-Region keys differ only in the Region value.
+	// ARN of the replica key. The key ARNs of related multi-Region keys differ only in the Region value.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// A flag to indicate whether to bypass the key policy lockout safety check.
 	// Setting this value to true increases the risk that the KMS key becomes unmanageable. Do not set this value to true indiscriminately.
-	// For more information, refer to the scenario in the Default Key Policy section in the AWS Key Management Service Developer Guide.
+	// For more information, refer to the scenario in the Default Key Policy section in the AWS KMS Developer Guide.
 	// The default value is false.
 	BypassPolicyLockoutSafetyCheck *bool `json:"bypassPolicyLockoutSafetyCheck,omitempty" tf:"bypass_policy_lockout_safety_check,omitempty"`
 
@@ -119,7 +119,7 @@ type ReplicaExternalKeyParameters struct {
 
 	// A flag to indicate whether to bypass the key policy lockout safety check.
 	// Setting this value to true increases the risk that the KMS key becomes unmanageable. Do not set this value to true indiscriminately.
-	// For more information, refer to the scenario in the Default Key Policy section in the AWS Key Management Service Developer Guide.
+	// For more information, refer to the scenario in the Default Key Policy section in the AWS KMS Developer Guide.
 	// The default value is false.
 	// +kubebuilder:validation:Optional
 	BypassPolicyLockoutSafetyCheck *bool `json:"bypassPolicyLockoutSafetyCheck,omitempty" tf:"bypass_policy_lockout_safety_check,omitempty"`

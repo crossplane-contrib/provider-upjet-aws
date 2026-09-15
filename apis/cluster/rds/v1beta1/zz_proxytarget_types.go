@@ -74,7 +74,7 @@ type ProxyTargetObservation struct {
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// Amazon Resource Name (ARN) for the DB instance or DB cluster. Currently not returned by the RDS API.
+	// ARN for the DB instance or DB cluster. Currently not returned by the RDS API.
 	TargetArn *string `json:"targetArn,omitempty" tf:"target_arn,omitempty"`
 
 	// The name of the target group.

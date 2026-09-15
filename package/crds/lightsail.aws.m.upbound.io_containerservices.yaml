@@ -313,7 +313,7 @@ spec:
                   privateDomainName:
                     description: Private domain name of the container service. The
                       private domain name is accessible only by other resources within
-                      the default virtual private cloud (VPC) of your Lightsail account.
+                      the default VPC of your Lightsail account.
                     type: string
                   privateRegistryAccess:
                     description: Configuration for the container service to access

@@ -57,7 +57,7 @@ type EndpointAccessObservation struct {
 	// The DNS address of the VPC endpoint.
 	Address *string `json:"address,omitempty" tf:"address,omitempty"`
 
-	// Amazon Resource Name (ARN) of the Redshift Serverless Endpoint Access.
+	// ARN of the Redshift Serverless Endpoint Access.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The Redshift Endpoint Access Name.

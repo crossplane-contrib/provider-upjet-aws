@@ -15,34 +15,34 @@ import (
 
 type DKIMSigningAttributesInitParameters struct {
 
-	// [Bring Your Own DKIM] A private key that's used to generate a DKIM signature. The private key must use 1024 or 2048-bit RSA encryption, and must be encoded using base64 encoding.
+	// [Bring Your Own DKIM] Private key used to generate a DKIM signature. The private key must use 1024 or 2048-bit RSA encryption, and must be encoded using base64 encoding.
 	DomainSigningPrivateKeySecretRef *v2.SecretKeySelector `json:"domainSigningPrivateKeySecretRef,omitempty" tf:"-"`
 
-	// [Bring Your Own DKIM] A string that's used to identify a public key in the DNS configuration for a domain.
+	// [Bring Your Own DKIM] String used to identify a public key in the DNS configuration for a domain.
 	DomainSigningSelector *string `json:"domainSigningSelector,omitempty" tf:"domain_signing_selector,omitempty"`
 
-	// [Easy DKIM] The key length of the future DKIM key pair to be generated. This can be changed at most once per day. Valid values: RSA_1024_BIT, RSA_2048_BIT.
+	// [Easy DKIM] Key length of the future DKIM key pair to be generated. This can be changed at most once per day. Valid values: RSA_1024_BIT, RSA_2048_BIT.
 	NextSigningKeyLength *string `json:"nextSigningKeyLength,omitempty" tf:"next_signing_key_length,omitempty"`
 }
 
 type DKIMSigningAttributesObservation struct {
 
-	// [Easy DKIM] The key length of the DKIM key pair in use.
+	// [Easy DKIM] Key length of the DKIM key pair in use.
 	CurrentSigningKeyLength *string `json:"currentSigningKeyLength,omitempty" tf:"current_signing_key_length,omitempty"`
 
-	// [Bring Your Own DKIM] A string that's used to identify a public key in the DNS configuration for a domain.
+	// [Bring Your Own DKIM] String used to identify a public key in the DNS configuration for a domain.
 	DomainSigningSelector *string `json:"domainSigningSelector,omitempty" tf:"domain_signing_selector,omitempty"`
 
-	// [Easy DKIM] The last time a key pair was generated for this identity.
+	// [Easy DKIM] Last time a key pair was generated for this identity.
 	LastKeyGenerationTimestamp *string `json:"lastKeyGenerationTimestamp,omitempty" tf:"last_key_generation_timestamp,omitempty"`
 
-	// [Easy DKIM] The key length of the future DKIM key pair to be generated. This can be changed at most once per day. Valid values: RSA_1024_BIT, RSA_2048_BIT.
+	// [Easy DKIM] Key length of the future DKIM key pair to be generated. This can be changed at most once per day. Valid values: RSA_1024_BIT, RSA_2048_BIT.
 	NextSigningKeyLength *string `json:"nextSigningKeyLength,omitempty" tf:"next_signing_key_length,omitempty"`
 
-	// A string that indicates how DKIM was configured for the identity. AWS_SES indicates that DKIM was configured for the identity by using Easy DKIM. EXTERNAL indicates that DKIM was configured for the identity by using Bring Your Own DKIM (BYODKIM).
+	// How DKIM was configured for the identity. AWS_SES indicates that DKIM was configured for the identity by using Easy DKIM. EXTERNAL indicates that DKIM was configured for the identity by using Bring Your Own DKIM (BYODKIM).
 	SigningAttributesOrigin *string `json:"signingAttributesOrigin,omitempty" tf:"signing_attributes_origin,omitempty"`
 
-	// Describes whether or not Amazon SES has successfully located the DKIM records in the DNS records for the domain. See the AWS SES API v2 Reference for supported statuses.
+	// Whether Amazon SES has successfully located the DKIM records in the DNS records for the domain. See the AWS SES API v2 Reference for supported statuses.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
 	// If you used Easy DKIM to configure DKIM authentication for the domain, then this object contains a set of unique strings that you use to create a set of CNAME records that you add to the DNS configuration for your domain. When Amazon SES detects these records in the DNS configuration for your domain, the DKIM authentication process is complete. If you configured DKIM authentication for the domain by providing your own public-private key pair, then this object contains the selector for the public key.
@@ -51,22 +51,22 @@ type DKIMSigningAttributesObservation struct {
 
 type DKIMSigningAttributesParameters struct {
 
-	// [Bring Your Own DKIM] A private key that's used to generate a DKIM signature. The private key must use 1024 or 2048-bit RSA encryption, and must be encoded using base64 encoding.
+	// [Bring Your Own DKIM] Private key used to generate a DKIM signature. The private key must use 1024 or 2048-bit RSA encryption, and must be encoded using base64 encoding.
 	// +kubebuilder:validation:Optional
 	DomainSigningPrivateKeySecretRef *v2.SecretKeySelector `json:"domainSigningPrivateKeySecretRef,omitempty" tf:"-"`
 
-	// [Bring Your Own DKIM] A string that's used to identify a public key in the DNS configuration for a domain.
+	// [Bring Your Own DKIM] String used to identify a public key in the DNS configuration for a domain.
 	// +kubebuilder:validation:Optional
 	DomainSigningSelector *string `json:"domainSigningSelector,omitempty" tf:"domain_signing_selector,omitempty"`
 
-	// [Easy DKIM] The key length of the future DKIM key pair to be generated. This can be changed at most once per day. Valid values: RSA_1024_BIT, RSA_2048_BIT.
+	// [Easy DKIM] Key length of the future DKIM key pair to be generated. This can be changed at most once per day. Valid values: RSA_1024_BIT, RSA_2048_BIT.
 	// +kubebuilder:validation:Optional
 	NextSigningKeyLength *string `json:"nextSigningKeyLength,omitempty" tf:"next_signing_key_length,omitempty"`
 }
 
 type EmailIdentityInitParameters struct {
 
-	// The configuration set to use by default when sending from this identity. Note that any configuration set defined in the email sending request takes precedence.
+	// Configuration set to use by default when sending from this identity. Any configuration set defined in the email sending request takes precedence.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/sesv2/v1beta2.ConfigurationSet
 	ConfigurationSetName *string `json:"configurationSetName,omitempty" tf:"configuration_set_name,omitempty"`
 
@@ -78,7 +78,7 @@ type EmailIdentityInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ConfigurationSetNameSelector *v2.Selector `json:"configurationSetNameSelector,omitempty" tf:"-"`
 
-	// The configuration of the DKIM authentication settings for an email domain identity.
+	// Configuration block for the DKIM authentication settings for an email domain identity. See dkim_signing_attributes Block below.
 	DKIMSigningAttributes *DKIMSigningAttributesInitParameters `json:"dkimSigningAttributes,omitempty" tf:"dkim_signing_attributes,omitempty"`
 
 	// Key-value map of resource tags.
@@ -91,15 +91,15 @@ type EmailIdentityObservation struct {
 	// ARN of the Email Identity.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The configuration set to use by default when sending from this identity. Note that any configuration set defined in the email sending request takes precedence.
+	// Configuration set to use by default when sending from this identity. Any configuration set defined in the email sending request takes precedence.
 	ConfigurationSetName *string `json:"configurationSetName,omitempty" tf:"configuration_set_name,omitempty"`
 
-	// The configuration of the DKIM authentication settings for an email domain identity.
+	// Configuration block for the DKIM authentication settings for an email domain identity. See dkim_signing_attributes Block below.
 	DKIMSigningAttributes *DKIMSigningAttributesObservation `json:"dkimSigningAttributes,omitempty" tf:"dkim_signing_attributes,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The email identity type. Valid values: EMAIL_ADDRESS, DOMAIN.
+	// Email identity type. Valid values: EMAIL_ADDRESS, DOMAIN.
 	IdentityType *string `json:"identityType,omitempty" tf:"identity_type,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -114,16 +114,16 @@ type EmailIdentityObservation struct {
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// The verification status of the identity. The status can be one of the following: PENDING, SUCCESS, FAILED, TEMPORARY_FAILURE, and NOT_STARTED.
+	// Verification status of the identity. One of PENDING, SUCCESS, FAILED, TEMPORARY_FAILURE, and NOT_STARTED.
 	VerificationStatus *string `json:"verificationStatus,omitempty" tf:"verification_status,omitempty"`
 
-	// Specifies whether or not the identity is verified.
+	// Whether the identity is verified.
 	VerifiedForSendingStatus *bool `json:"verifiedForSendingStatus,omitempty" tf:"verified_for_sending_status,omitempty"`
 }
 
 type EmailIdentityParameters struct {
 
-	// The configuration set to use by default when sending from this identity. Note that any configuration set defined in the email sending request takes precedence.
+	// Configuration set to use by default when sending from this identity. Any configuration set defined in the email sending request takes precedence.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/sesv2/v1beta2.ConfigurationSet
 	// +kubebuilder:validation:Optional
 	ConfigurationSetName *string `json:"configurationSetName,omitempty" tf:"configuration_set_name,omitempty"`
@@ -136,7 +136,7 @@ type EmailIdentityParameters struct {
 	// +kubebuilder:validation:Optional
 	ConfigurationSetNameSelector *v2.Selector `json:"configurationSetNameSelector,omitempty" tf:"-"`
 
-	// The configuration of the DKIM authentication settings for an email domain identity.
+	// Configuration block for the DKIM authentication settings for an email domain identity. See dkim_signing_attributes Block below.
 	// +kubebuilder:validation:Optional
 	DKIMSigningAttributes *DKIMSigningAttributesParameters `json:"dkimSigningAttributes,omitempty" tf:"dkim_signing_attributes,omitempty"`
 

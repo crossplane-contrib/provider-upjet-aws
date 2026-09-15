@@ -17,7 +17,7 @@ type KeyInitParameters struct {
 
 	// A flag to indicate whether to bypass the key policy lockout safety check.
 	// Setting this value to true increases the risk that the KMS key becomes unmanageable. Do not set this value to true indiscriminately.
-	// For more information, refer to the scenario in the Default Key Policy section in the AWS Key Management Service Developer Guide.
+	// For more information, refer to the scenario in the Default Key Policy section in the AWS KMS Developer Guide.
 	// The default value is false.
 	BypassPolicyLockoutSafetyCheck *bool `json:"bypassPolicyLockoutSafetyCheck,omitempty" tf:"bypass_policy_lockout_safety_check,omitempty"`
 
@@ -65,12 +65,12 @@ type KeyInitParameters struct {
 
 type KeyObservation struct {
 
-	// The Amazon Resource Name (ARN) of the key.
+	// ARN of the key.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// A flag to indicate whether to bypass the key policy lockout safety check.
 	// Setting this value to true increases the risk that the KMS key becomes unmanageable. Do not set this value to true indiscriminately.
-	// For more information, refer to the scenario in the Default Key Policy section in the AWS Key Management Service Developer Guide.
+	// For more information, refer to the scenario in the Default Key Policy section in the AWS KMS Developer Guide.
 	// The default value is false.
 	BypassPolicyLockoutSafetyCheck *bool `json:"bypassPolicyLockoutSafetyCheck,omitempty" tf:"bypass_policy_lockout_safety_check,omitempty"`
 
@@ -134,7 +134,7 @@ type KeyParameters struct {
 
 	// A flag to indicate whether to bypass the key policy lockout safety check.
 	// Setting this value to true increases the risk that the KMS key becomes unmanageable. Do not set this value to true indiscriminately.
-	// For more information, refer to the scenario in the Default Key Policy section in the AWS Key Management Service Developer Guide.
+	// For more information, refer to the scenario in the Default Key Policy section in the AWS KMS Developer Guide.
 	// The default value is false.
 	// +kubebuilder:validation:Optional
 	BypassPolicyLockoutSafetyCheck *bool `json:"bypassPolicyLockoutSafetyCheck,omitempty" tf:"bypass_policy_lockout_safety_check,omitempty"`

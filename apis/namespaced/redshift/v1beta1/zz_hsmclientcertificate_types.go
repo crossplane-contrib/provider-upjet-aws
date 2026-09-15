@@ -22,7 +22,7 @@ type HSMClientCertificateInitParameters struct {
 
 type HSMClientCertificateObservation struct {
 
-	// Amazon Resource Name (ARN) of the Hsm Client Certificate.
+	// ARN of the Hsm Client Certificate.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The public key that the Amazon Redshift cluster will use to connect to the HSM. You must register the public key in the HSM.

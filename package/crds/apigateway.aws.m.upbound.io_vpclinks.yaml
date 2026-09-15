@@ -352,6 +352,7 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: ARN of the VPC link.
                     type: string
                   description:
                     description: Description of the VPC link.

@@ -61,11 +61,10 @@ spec:
               forProvider:
                 properties:
                   kmsKeyId:
-                    description: The unique identifier for the customer master key
-                      (CMK) that the grant applies to. Specify the key ID or the Amazon
-                      Resource Name (ARN) of the CMK. To specify a CMK in a different
-                      AWS account, you must use the key ARN. If not specified, the
-                      default key is used.
+                    description: Unique identifier for the customer master key (CMK)
+                      that the grant applies to. Specify the key ID or the ARN of
+                      the CMK. To specify a CMK in a different AWS account, you must
+                      use the key ARN. If not specified, the default key is used.
                     type: string
                   kmsKeyIdRef:
                     description: Reference to a Key in kms to populate kmsKeyId.
@@ -178,11 +177,10 @@ spec:
                   autoscaler.
                 properties:
                   kmsKeyId:
-                    description: The unique identifier for the customer master key
-                      (CMK) that the grant applies to. Specify the key ID or the Amazon
-                      Resource Name (ARN) of the CMK. To specify a CMK in a different
-                      AWS account, you must use the key ARN. If not specified, the
-                      default key is used.
+                    description: Unique identifier for the customer master key (CMK)
+                      that the grant applies to. Specify the key ID or the ARN of
+                      the CMK. To specify a CMK in a different AWS account, you must
+                      use the key ARN. If not specified, the default key is used.
                     type: string
                   kmsKeyIdRef:
                     description: Reference to a Key in kms to populate kmsKeyId.
@@ -343,16 +341,15 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: Amazon Resource Name (ARN) of snapshot copy grant
+                    description: ARN of snapshot copy grant
                     type: string
                   id:
                     type: string
                   kmsKeyId:
-                    description: The unique identifier for the customer master key
-                      (CMK) that the grant applies to. Specify the key ID or the Amazon
-                      Resource Name (ARN) of the CMK. To specify a CMK in a different
-                      AWS account, you must use the key ARN. If not specified, the
-                      default key is used.
+                    description: Unique identifier for the customer master key (CMK)
+                      that the grant applies to. Specify the key ID or the ARN of
+                      the CMK. To specify a CMK in a different AWS account, you must
+                      use the key ARN. If not specified, the default key is used.
                     type: string
                   region:
                     description: |-

@@ -34,7 +34,7 @@ type RegexPatternSetInitParameters struct {
 
 type RegexPatternSetObservation struct {
 
-	// The Amazon Resource Name (ARN) that identifies the cluster.
+	// ARN that identifies the cluster.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// A friendly description of the regular expression pattern set.

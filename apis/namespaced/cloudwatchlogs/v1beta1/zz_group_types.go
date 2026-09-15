@@ -50,7 +50,7 @@ type GroupInitParameters struct {
 
 type GroupObservation struct {
 
-	// The Amazon Resource Name (ARN) specifying the log group. Any :* suffix added by the API, denoting all CloudWatch Log Streams under the CloudWatch Log Group, is removed for greater compatibility with other AWS services that do not accept the suffix.
+	// ARN specifying the log group. Any :* suffix added by the API, denoting all CloudWatch Log Streams under the CloudWatch Log Group, is removed for greater compatibility with other AWS services that do not accept the suffix.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// –  Boolean to indicate whether deletion protection is enabled. Defaults to false. Once set, switching to false requires explicitly specifying false rather than removing this argument.

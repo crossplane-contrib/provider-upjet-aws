@@ -65,7 +65,7 @@ spec:
                     type: string
                   bootMode:
                     description: Boot mode of the AMI. For more information, see Boot
-                      modes in the Amazon Elastic Compute Cloud User Guide.
+                      modes in the EC2 User Guide.
                     type: string
                   deprecationTime:
                     description: 'Date and time to deprecate the AMI. If you specified
@@ -275,7 +275,7 @@ spec:
                   tpmSupport:
                     description: If the image is configured for NitroTPM support,
                       the value is v2.0. For more information, see NitroTPM in the
-                      Amazon Elastic Compute Cloud User Guide.
+                      EC2 User Guide.
                     type: string
                   uefiData:
                     description: Base64 representation of the non-volatile UEFI variable
@@ -309,7 +309,7 @@ spec:
                     type: string
                   bootMode:
                     description: Boot mode of the AMI. For more information, see Boot
-                      modes in the Amazon Elastic Compute Cloud User Guide.
+                      modes in the EC2 User Guide.
                     type: string
                   deprecationTime:
                     description: 'Date and time to deprecate the AMI. If you specified
@@ -514,7 +514,7 @@ spec:
                   tpmSupport:
                     description: If the image is configured for NitroTPM support,
                       the value is v2.0. For more information, see NitroTPM in the
-                      Amazon Elastic Compute Cloud User Guide.
+                      EC2 User Guide.
                     type: string
                   uefiData:
                     description: Base64 representation of the non-volatile UEFI variable
@@ -604,7 +604,7 @@ spec:
                     type: string
                   bootMode:
                     description: Boot mode of the AMI. For more information, see Boot
-                      modes in the Amazon Elastic Compute Cloud User Guide.
+                      modes in the EC2 User Guide.
                     type: string
                   deprecationTime:
                     description: 'Date and time to deprecate the AMI. If you specified
@@ -778,7 +778,7 @@ spec:
                   tpmSupport:
                     description: If the image is configured for NitroTPM support,
                       the value is v2.0. For more information, see NitroTPM in the
-                      Amazon Elastic Compute Cloud User Guide.
+                      EC2 User Guide.
                     type: string
                   uefiData:
                     description: Base64 representation of the non-volatile UEFI variable

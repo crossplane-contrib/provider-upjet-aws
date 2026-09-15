@@ -29,7 +29,7 @@ type ResourcePolicyObservation struct {
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// Amazon Resource Name (ARN) of the resource for which to create or update the resource policy.
+	// ARN of the resource for which to create or update the resource policy.
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
 }
 
@@ -44,7 +44,7 @@ type ResourcePolicyParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// Amazon Resource Name (ARN) of the resource for which to create or update the resource policy.
+	// ARN of the resource for which to create or update the resource policy.
 	// +kubebuilder:validation:Required
 	ResourceArn *string `json:"resourceArn" tf:"resource_arn,omitempty"`
 }

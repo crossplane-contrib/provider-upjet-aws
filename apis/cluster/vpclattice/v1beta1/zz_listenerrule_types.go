@@ -15,79 +15,74 @@ import (
 
 type ActionFixedResponseInitParameters struct {
 
-	// The HTTP response code.
+	// HTTP response code.
 	StatusCode *float64 `json:"statusCode,omitempty" tf:"status_code,omitempty"`
 }
 
 type ActionFixedResponseObservation struct {
 
-	// The HTTP response code.
+	// HTTP response code.
 	StatusCode *float64 `json:"statusCode,omitempty" tf:"status_code,omitempty"`
 }
 
 type ActionFixedResponseParameters struct {
 
-	// The HTTP response code.
+	// HTTP response code.
 	// +kubebuilder:validation:Optional
 	StatusCode *float64 `json:"statusCode" tf:"status_code,omitempty"`
 }
 
 type ActionForwardInitParameters struct {
 
-	// The target groups. Traffic matching the rule is forwarded to the specified target groups. With forward actions, you can assign a weight that controls the prioritization and selection of each target group. This means that requests are distributed to individual target groups based on their weights. For example, if two target groups have the same weight, each target group receives half of the traffic.
+	// Target groups that traffic matching the rule is forwarded to. See target_groups Block for details.
 	TargetGroups []ForwardTargetGroupsInitParameters `json:"targetGroups,omitempty" tf:"target_groups,omitempty"`
 }
 
 type ActionForwardObservation struct {
 
-	// The target groups. Traffic matching the rule is forwarded to the specified target groups. With forward actions, you can assign a weight that controls the prioritization and selection of each target group. This means that requests are distributed to individual target groups based on their weights. For example, if two target groups have the same weight, each target group receives half of the traffic.
+	// Target groups that traffic matching the rule is forwarded to. See target_groups Block for details.
 	TargetGroups []ForwardTargetGroupsObservation `json:"targetGroups,omitempty" tf:"target_groups,omitempty"`
 }
 
 type ActionForwardParameters struct {
 
-	// The target groups. Traffic matching the rule is forwarded to the specified target groups. With forward actions, you can assign a weight that controls the prioritization and selection of each target group. This means that requests are distributed to individual target groups based on their weights. For example, if two target groups have the same weight, each target group receives half of the traffic.
+	// Target groups that traffic matching the rule is forwarded to. See target_groups Block for details.
 	// +kubebuilder:validation:Optional
 	TargetGroups []ForwardTargetGroupsParameters `json:"targetGroups" tf:"target_groups,omitempty"`
 }
 
 type ActionInitParameters struct {
 
-	// Describes the rule action that returns a custom HTTP response.
-	// See fixed_response Block for details.
+	// Rule action that returns a custom HTTP response. See fixed_response Block for details.
 	FixedResponse *ActionFixedResponseInitParameters `json:"fixedResponse,omitempty" tf:"fixed_response,omitempty"`
 
-	// The forward action. Traffic that matches the rule is forwarded to the specified target groups.
-	// See forward Block for details.
+	// Forward action. Traffic that matches the rule is forwarded to the specified target groups. See forward Block for details.
 	Forward *ActionForwardInitParameters `json:"forward,omitempty" tf:"forward,omitempty"`
 }
 
 type ActionObservation struct {
 
-	// Describes the rule action that returns a custom HTTP response.
-	// See fixed_response Block for details.
+	// Rule action that returns a custom HTTP response. See fixed_response Block for details.
 	FixedResponse *ActionFixedResponseObservation `json:"fixedResponse,omitempty" tf:"fixed_response,omitempty"`
 
-	// The forward action. Traffic that matches the rule is forwarded to the specified target groups.
-	// See forward Block for details.
+	// Forward action. Traffic that matches the rule is forwarded to the specified target groups. See forward Block for details.
 	Forward *ActionForwardObservation `json:"forward,omitempty" tf:"forward,omitempty"`
 }
 
 type ActionParameters struct {
 
-	// Describes the rule action that returns a custom HTTP response.
-	// See fixed_response Block for details.
+	// Rule action that returns a custom HTTP response. See fixed_response Block for details.
 	// +kubebuilder:validation:Optional
 	FixedResponse *ActionFixedResponseParameters `json:"fixedResponse,omitempty" tf:"fixed_response,omitempty"`
 
-	// The forward action. Traffic that matches the rule is forwarded to the specified target groups.
-	// See forward Block for details.
+	// Forward action. Traffic that matches the rule is forwarded to the specified target groups. See forward Block for details.
 	// +kubebuilder:validation:Optional
 	Forward *ActionForwardParameters `json:"forward,omitempty" tf:"forward,omitempty"`
 }
 
 type ForwardTargetGroupsInitParameters struct {
 
+	// ID or ARN of the target group.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/vpclattice/v1beta1.TargetGroup
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	TargetGroupIdentifier *string `json:"targetGroupIdentifier,omitempty" tf:"target_group_identifier,omitempty"`
@@ -100,17 +95,22 @@ type ForwardTargetGroupsInitParameters struct {
 	// +kubebuilder:validation:Optional
 	TargetGroupIdentifierSelector *v2.Selector `json:"targetGroupIdentifierSelector,omitempty" tf:"-"`
 
+	// Weight assigned to the target group, controlling the prioritization and selection of each target group so that requests are distributed based on their weights. Default is 100.
 	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
 }
 
 type ForwardTargetGroupsObservation struct {
+
+	// ID or ARN of the target group.
 	TargetGroupIdentifier *string `json:"targetGroupIdentifier,omitempty" tf:"target_group_identifier,omitempty"`
 
+	// Weight assigned to the target group, controlling the prioritization and selection of each target group so that requests are distributed based on their weights. Default is 100.
 	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
 }
 
 type ForwardTargetGroupsParameters struct {
 
+	// ID or ARN of the target group.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/vpclattice/v1beta1.TargetGroup
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -124,152 +124,134 @@ type ForwardTargetGroupsParameters struct {
 	// +kubebuilder:validation:Optional
 	TargetGroupIdentifierSelector *v2.Selector `json:"targetGroupIdentifierSelector,omitempty" tf:"-"`
 
+	// Weight assigned to the target group, controlling the prioritization and selection of each target group so that requests are distributed based on their weights. Default is 100.
 	// +kubebuilder:validation:Optional
 	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
 }
 
 type HTTPMatchInitParameters struct {
 
-	// The header matches.
-	// Matches incoming requests with rule based on request header value before applying rule action.
-	// See header_matches Block for details.
+	// Header matches that match incoming requests based on the request header value before applying the rule action. See header_matches Block for details.
 	HeaderMatches []HeaderMatchesInitParameters `json:"headerMatches,omitempty" tf:"header_matches,omitempty"`
 
-	// The HTTP method type.
+	// HTTP method type.
 	Method *string `json:"method,omitempty" tf:"method,omitempty"`
 
-	// The path match.
-	// See path_match Block for details.
+	// Path match. See path_match Block for details.
 	PathMatch *PathMatchInitParameters `json:"pathMatch,omitempty" tf:"path_match,omitempty"`
 }
 
 type HTTPMatchObservation struct {
 
-	// The header matches.
-	// Matches incoming requests with rule based on request header value before applying rule action.
-	// See header_matches Block for details.
+	// Header matches that match incoming requests based on the request header value before applying the rule action. See header_matches Block for details.
 	HeaderMatches []HeaderMatchesObservation `json:"headerMatches,omitempty" tf:"header_matches,omitempty"`
 
-	// The HTTP method type.
+	// HTTP method type.
 	Method *string `json:"method,omitempty" tf:"method,omitempty"`
 
-	// The path match.
-	// See path_match Block for details.
+	// Path match. See path_match Block for details.
 	PathMatch *PathMatchObservation `json:"pathMatch,omitempty" tf:"path_match,omitempty"`
 }
 
 type HTTPMatchParameters struct {
 
-	// The header matches.
-	// Matches incoming requests with rule based on request header value before applying rule action.
-	// See header_matches Block for details.
+	// Header matches that match incoming requests based on the request header value before applying the rule action. See header_matches Block for details.
 	// +kubebuilder:validation:Optional
 	HeaderMatches []HeaderMatchesParameters `json:"headerMatches,omitempty" tf:"header_matches,omitempty"`
 
-	// The HTTP method type.
+	// HTTP method type.
 	// +kubebuilder:validation:Optional
 	Method *string `json:"method,omitempty" tf:"method,omitempty"`
 
-	// The path match.
-	// See path_match Block for details.
+	// Path match. See path_match Block for details.
 	// +kubebuilder:validation:Optional
 	PathMatch *PathMatchParameters `json:"pathMatch,omitempty" tf:"path_match,omitempty"`
 }
 
 type HeaderMatchesInitParameters struct {
 
-	// Indicates whether the match is case sensitive.
-	// Default is false.
+	// Whether the match is case sensitive. Default is false.
 	CaseSensitive *bool `json:"caseSensitive,omitempty" tf:"case_sensitive,omitempty"`
 
-	// The header match type.
-	// See Header Match  for details.
+	// Header match type. See match.http_match.header_matches.match Block for details.
 	Match *HeaderMatchesMatchInitParameters `json:"match,omitempty" tf:"match,omitempty"`
 
-	// The name of the header.
+	// Name of the header.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type HeaderMatchesMatchInitParameters struct {
 
-	// Specifies a contains type match.
+	// Value that the header must contain to match.
 	Contains *string `json:"contains,omitempty" tf:"contains,omitempty"`
 
-	// Specifies an exact type match.
+	// Exact type match.
 	Exact *string `json:"exact,omitempty" tf:"exact,omitempty"`
 
-	// Specifies a prefix type match.
-	// Matches the value with the prefix.
+	// Prefix type match. Matches the value with the prefix.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 }
 
 type HeaderMatchesMatchObservation struct {
 
-	// Specifies a contains type match.
+	// Value that the header must contain to match.
 	Contains *string `json:"contains,omitempty" tf:"contains,omitempty"`
 
-	// Specifies an exact type match.
+	// Exact type match.
 	Exact *string `json:"exact,omitempty" tf:"exact,omitempty"`
 
-	// Specifies a prefix type match.
-	// Matches the value with the prefix.
+	// Prefix type match. Matches the value with the prefix.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 }
 
 type HeaderMatchesMatchParameters struct {
 
-	// Specifies a contains type match.
+	// Value that the header must contain to match.
 	// +kubebuilder:validation:Optional
 	Contains *string `json:"contains,omitempty" tf:"contains,omitempty"`
 
-	// Specifies an exact type match.
+	// Exact type match.
 	// +kubebuilder:validation:Optional
 	Exact *string `json:"exact,omitempty" tf:"exact,omitempty"`
 
-	// Specifies a prefix type match.
-	// Matches the value with the prefix.
+	// Prefix type match. Matches the value with the prefix.
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 }
 
 type HeaderMatchesObservation struct {
 
-	// Indicates whether the match is case sensitive.
-	// Default is false.
+	// Whether the match is case sensitive. Default is false.
 	CaseSensitive *bool `json:"caseSensitive,omitempty" tf:"case_sensitive,omitempty"`
 
-	// The header match type.
-	// See Header Match  for details.
+	// Header match type. See match.http_match.header_matches.match Block for details.
 	Match *HeaderMatchesMatchObservation `json:"match,omitempty" tf:"match,omitempty"`
 
-	// The name of the header.
+	// Name of the header.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type HeaderMatchesParameters struct {
 
-	// Indicates whether the match is case sensitive.
-	// Default is false.
+	// Whether the match is case sensitive. Default is false.
 	// +kubebuilder:validation:Optional
 	CaseSensitive *bool `json:"caseSensitive,omitempty" tf:"case_sensitive,omitempty"`
 
-	// The header match type.
-	// See Header Match  for details.
+	// Header match type. See match.http_match.header_matches.match Block for details.
 	// +kubebuilder:validation:Optional
 	Match *HeaderMatchesMatchParameters `json:"match" tf:"match,omitempty"`
 
-	// The name of the header.
+	// Name of the header.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 }
 
 type ListenerRuleInitParameters struct {
 
-	// The action for the listener rule.
-	// See action Block for details.
+	// Action for the listener rule. See action Block for details.
 	Action *ActionInitParameters `json:"action,omitempty" tf:"action,omitempty"`
 
-	// The ID or Amazon Resource Name (ARN) of the listener.
+	// ID or ARN of the listener.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/vpclattice/v1beta1.Listener
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("listener_id",true)
 	ListenerIdentifier *string `json:"listenerIdentifier,omitempty" tf:"listener_identifier,omitempty"`
@@ -282,17 +264,16 @@ type ListenerRuleInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ListenerIdentifierSelector *v2.Selector `json:"listenerIdentifierSelector,omitempty" tf:"-"`
 
-	// The rule match.
-	// See match Block
+	// Rule match. See match Block for details.
 	Match *MatchInitParameters `json:"match,omitempty" tf:"match,omitempty"`
 
-	// The name of the rule. The name must be unique within the listener. The valid characters are a-z, 0-9, and hyphens (-). You can't use a hyphen as the first or last character, or immediately after another hyphen.
+	// Name of the rule. Must be unique within the listener. Valid characters are a-z, 0-9, and hyphens (-). You can't use a hyphen as the first or last character, or immediately after another hyphen.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The priority assigned to the rule. Each rule for a specific listener must have a unique priority. The lower the priority number the higher the priority.
+	// Priority assigned to the rule. Each rule for a specific listener must have a unique priority. The lower the priority number the higher the priority.
 	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
-	// The ID or Amazon Resource Identifier (ARN) of the service.
+	// ID or ARN of the service.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/vpclattice/v1beta1.Service
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ServiceIdentifier *string `json:"serviceIdentifier,omitempty" tf:"service_identifier,omitempty"`
@@ -312,26 +293,24 @@ type ListenerRuleInitParameters struct {
 
 type ListenerRuleObservation struct {
 
-	// The action for the listener rule.
-	// See action Block for details.
+	// Action for the listener rule. See action Block for details.
 	Action *ActionObservation `json:"action,omitempty" tf:"action,omitempty"`
 
-	// The ARN for the listener rule.
+	// ARN for the listener rule.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The ID or Amazon Resource Name (ARN) of the listener.
+	// ID or ARN of the listener.
 	ListenerIdentifier *string `json:"listenerIdentifier,omitempty" tf:"listener_identifier,omitempty"`
 
-	// The rule match.
-	// See match Block
+	// Rule match. See match Block for details.
 	Match *MatchObservation `json:"match,omitempty" tf:"match,omitempty"`
 
-	// The name of the rule. The name must be unique within the listener. The valid characters are a-z, 0-9, and hyphens (-). You can't use a hyphen as the first or last character, or immediately after another hyphen.
+	// Name of the rule. Must be unique within the listener. Valid characters are a-z, 0-9, and hyphens (-). You can't use a hyphen as the first or last character, or immediately after another hyphen.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The priority assigned to the rule. Each rule for a specific listener must have a unique priority. The lower the priority number the higher the priority.
+	// Priority assigned to the rule. Each rule for a specific listener must have a unique priority. The lower the priority number the higher the priority.
 	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -341,7 +320,7 @@ type ListenerRuleObservation struct {
 	// Unique identifier for the listener rule.
 	RuleID *string `json:"ruleId,omitempty" tf:"rule_id,omitempty"`
 
-	// The ID or Amazon Resource Identifier (ARN) of the service.
+	// ID or ARN of the service.
 	ServiceIdentifier *string `json:"serviceIdentifier,omitempty" tf:"service_identifier,omitempty"`
 
 	// Key-value map of resource tags.
@@ -355,12 +334,11 @@ type ListenerRuleObservation struct {
 
 type ListenerRuleParameters struct {
 
-	// The action for the listener rule.
-	// See action Block for details.
+	// Action for the listener rule. See action Block for details.
 	// +kubebuilder:validation:Optional
 	Action *ActionParameters `json:"action,omitempty" tf:"action,omitempty"`
 
-	// The ID or Amazon Resource Name (ARN) of the listener.
+	// ID or ARN of the listener.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/vpclattice/v1beta1.Listener
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("listener_id",true)
 	// +kubebuilder:validation:Optional
@@ -374,16 +352,15 @@ type ListenerRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	ListenerIdentifierSelector *v2.Selector `json:"listenerIdentifierSelector,omitempty" tf:"-"`
 
-	// The rule match.
-	// See match Block
+	// Rule match. See match Block for details.
 	// +kubebuilder:validation:Optional
 	Match *MatchParameters `json:"match,omitempty" tf:"match,omitempty"`
 
-	// The name of the rule. The name must be unique within the listener. The valid characters are a-z, 0-9, and hyphens (-). You can't use a hyphen as the first or last character, or immediately after another hyphen.
+	// Name of the rule. Must be unique within the listener. Valid characters are a-z, 0-9, and hyphens (-). You can't use a hyphen as the first or last character, or immediately after another hyphen.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The priority assigned to the rule. Each rule for a specific listener must have a unique priority. The lower the priority number the higher the priority.
+	// Priority assigned to the rule. Each rule for a specific listener must have a unique priority. The lower the priority number the higher the priority.
 	// +kubebuilder:validation:Optional
 	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
@@ -392,7 +369,7 @@ type ListenerRuleParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// The ID or Amazon Resource Identifier (ARN) of the service.
+	// ID or ARN of the service.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/vpclattice/v1beta1.Service
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -414,89 +391,77 @@ type ListenerRuleParameters struct {
 
 type MatchInitParameters struct {
 
-	// The HTTP criteria that a rule must match.
-	// See http_match Block for details.
+	// HTTP criteria that a rule must match. See http_match Block for details.
 	HTTPMatch *HTTPMatchInitParameters `json:"httpMatch,omitempty" tf:"http_match,omitempty"`
 }
 
 type MatchObservation struct {
 
-	// The HTTP criteria that a rule must match.
-	// See http_match Block for details.
+	// HTTP criteria that a rule must match. See http_match Block for details.
 	HTTPMatch *HTTPMatchObservation `json:"httpMatch,omitempty" tf:"http_match,omitempty"`
 }
 
 type MatchParameters struct {
 
-	// The HTTP criteria that a rule must match.
-	// See http_match Block for details.
+	// HTTP criteria that a rule must match. See http_match Block for details.
 	// +kubebuilder:validation:Optional
 	HTTPMatch *HTTPMatchParameters `json:"httpMatch" tf:"http_match,omitempty"`
 }
 
 type PathMatchInitParameters struct {
 
-	// Indicates whether the match is case sensitive.
-	// Default is false.
+	// Whether the match is case sensitive. Default is false.
 	CaseSensitive *bool `json:"caseSensitive,omitempty" tf:"case_sensitive,omitempty"`
 
-	// The header match type.
-	// See Path Match  for details.
+	// Path match type. See match.http_match.path_match.match Block for details.
 	Match *PathMatchMatchInitParameters `json:"match,omitempty" tf:"match,omitempty"`
 }
 
 type PathMatchMatchInitParameters struct {
 
-	// Specifies an exact type match.
+	// Exact type match.
 	Exact *string `json:"exact,omitempty" tf:"exact,omitempty"`
 
-	// Specifies a prefix type match.
-	// Matches the value with the prefix.
+	// Prefix type match. Matches the value with the prefix.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 }
 
 type PathMatchMatchObservation struct {
 
-	// Specifies an exact type match.
+	// Exact type match.
 	Exact *string `json:"exact,omitempty" tf:"exact,omitempty"`
 
-	// Specifies a prefix type match.
-	// Matches the value with the prefix.
+	// Prefix type match. Matches the value with the prefix.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 }
 
 type PathMatchMatchParameters struct {
 
-	// Specifies an exact type match.
+	// Exact type match.
 	// +kubebuilder:validation:Optional
 	Exact *string `json:"exact,omitempty" tf:"exact,omitempty"`
 
-	// Specifies a prefix type match.
-	// Matches the value with the prefix.
+	// Prefix type match. Matches the value with the prefix.
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 }
 
 type PathMatchObservation struct {
 
-	// Indicates whether the match is case sensitive.
-	// Default is false.
+	// Whether the match is case sensitive. Default is false.
 	CaseSensitive *bool `json:"caseSensitive,omitempty" tf:"case_sensitive,omitempty"`
 
-	// The header match type.
-	// See Path Match  for details.
+	// Path match type. See match.http_match.path_match.match Block for details.
 	Match *PathMatchMatchObservation `json:"match,omitempty" tf:"match,omitempty"`
 }
 
 type PathMatchParameters struct {
 
-	// Indicates whether the match is case sensitive.
-	// Default is false.
+	// Whether the match is case sensitive. Default is false.
 	// +kubebuilder:validation:Optional
 	CaseSensitive *bool `json:"caseSensitive,omitempty" tf:"case_sensitive,omitempty"`
 
-	// The header match type.
-	// See Path Match  for details.
+	// Path match type. See match.http_match.path_match.match Block for details.
 	// +kubebuilder:validation:Optional
 	Match *PathMatchMatchParameters `json:"match" tf:"match,omitempty"`
 }

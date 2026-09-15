@@ -1044,8 +1044,8 @@ spec:
                           Conflicts with simple_prefix. See below.
                         properties:
                           partitionDateSource:
-                            description: 'Specifies the partition date source for
-                              the partitioned prefix. Valid values: EventTime, DeliveryTime.'
+                            description: 'Partition date source for the partitioned
+                              prefix. Valid values: EventTime, DeliveryTime.'
                             type: string
                         type: object
                       simplePrefix:
@@ -1271,8 +1271,8 @@ spec:
                           Conflicts with simple_prefix. See below.
                         properties:
                           partitionDateSource:
-                            description: 'Specifies the partition date source for
-                              the partitioned prefix. Valid values: EventTime, DeliveryTime.'
+                            description: 'Partition date source for the partitioned
+                              prefix. Valid values: EventTime, DeliveryTime.'
                             type: string
                         type: object
                       simplePrefix:
@@ -1388,7 +1388,7 @@ spec:
                     description: Account ID of the expected bucket owner.
                     type: string
                   id:
-                    description: The bucket or bucket and expected_bucket_owner separated
+                    description: bucket or bucket and expected_bucket_owner separated
                       by a comma (,) if the latter is provided.
                     type: string
                   region:
@@ -1442,8 +1442,8 @@ spec:
                           Conflicts with simple_prefix. See below.
                         properties:
                           partitionDateSource:
-                            description: 'Specifies the partition date source for
-                              the partitioned prefix. Valid values: EventTime, DeliveryTime.'
+                            description: 'Partition date source for the partitioned
+                              prefix. Valid values: EventTime, DeliveryTime.'
                             type: string
                         type: object
                       simplePrefix:

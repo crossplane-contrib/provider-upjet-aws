@@ -31,7 +31,7 @@ type TestGridProjectInitParameters struct {
 
 type TestGridProjectObservation struct {
 
-	// The Amazon Resource Name of this Test Grid Project.
+	// ARN of this Test Grid Project.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Human-readable description of the project.

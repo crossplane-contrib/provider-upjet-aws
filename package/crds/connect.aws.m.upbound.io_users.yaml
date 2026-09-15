@@ -874,7 +874,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The Amazon Resource Name (ARN) of the user.
+                    description: ARN of the user.
                     type: string
                   directoryUserId:
                     description: The identifier of the user account in the directory

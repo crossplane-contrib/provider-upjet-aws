@@ -15,7 +15,7 @@ import (
 
 type DNSSECConfigInitParameters struct {
 
-	// The ID of the virtual private cloud (VPC) that you're updating the DNSSEC validation status for.
+	// ID of the VPC that you're updating the DNSSEC validation status for.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.VPC
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
@@ -37,14 +37,14 @@ type DNSSECConfigObservation struct {
 	// The ID for a configuration for DNSSEC validation.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The owner account ID of the virtual private cloud (VPC) for a configuration for DNSSEC validation.
+	// Owner account ID of the VPC for a configuration for DNSSEC validation.
 	OwnerID *string `json:"ownerId,omitempty" tf:"owner_id,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The ID of the virtual private cloud (VPC) that you're updating the DNSSEC validation status for.
+	// ID of the VPC that you're updating the DNSSEC validation status for.
 	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
 
 	// The validation status for a DNSSEC configuration. The status can be one of the following: ENABLING, ENABLED, DISABLING and DISABLED.
@@ -58,7 +58,7 @@ type DNSSECConfigParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// The ID of the virtual private cloud (VPC) that you're updating the DNSSEC validation status for.
+	// ID of the VPC that you're updating the DNSSEC validation status for.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.VPC
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional

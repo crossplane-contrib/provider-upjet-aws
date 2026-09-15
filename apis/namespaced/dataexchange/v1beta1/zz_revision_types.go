@@ -38,7 +38,7 @@ type RevisionInitParameters struct {
 
 type RevisionObservation struct {
 
-	// The Amazon Resource Name of this data set.
+	// ARN of this data set.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// An optional comment about the revision.

@@ -786,7 +786,6 @@ type TableObservation struct {
 	// Attribute to use as the hash (partition) key. Must also be defined as an attribute. See below.
 	HashKey *string `json:"hashKey,omitempty" tf:"hash_key,omitempty"`
 
-	// Name of the table
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Import Amazon S3 data into a new table. See below.
@@ -1017,58 +1016,58 @@ type TableParameters struct {
 
 type TableWarmThroughputInitParameters struct {
 
-	// Number of read operations a table or index can instantaneously support. For the base table, decreasing this value will force a new resource. For a global secondary index, this value can be increased or decreased without recreation. Minimum value of 12000 (default).
+	// Number of read operations a table or index can instantaneously support. For the base table, this value cannot be decreased. For a global secondary index, this value can be increased or decreased. Minimum value of 12000 (default).
 	ReadUnitsPerSecond *float64 `json:"readUnitsPerSecond,omitempty" tf:"read_units_per_second,omitempty"`
 
-	// Number of write operations a table or index can instantaneously support. For the base table, decreasing this value will force a new resource. For a global secondary index, this value can be increased or decreased without recreation. Minimum value of 4000 (default).
+	// Number of write operations a table or index can instantaneously support. For the base table, this value cannot be decreased. For a global secondary index, this value can be increased or decreased. Minimum value of 4000 (default).
 	WriteUnitsPerSecond *float64 `json:"writeUnitsPerSecond,omitempty" tf:"write_units_per_second,omitempty"`
 }
 
 type TableWarmThroughputObservation struct {
 
-	// Number of read operations a table or index can instantaneously support. For the base table, decreasing this value will force a new resource. For a global secondary index, this value can be increased or decreased without recreation. Minimum value of 12000 (default).
+	// Number of read operations a table or index can instantaneously support. For the base table, this value cannot be decreased. For a global secondary index, this value can be increased or decreased. Minimum value of 12000 (default).
 	ReadUnitsPerSecond *float64 `json:"readUnitsPerSecond,omitempty" tf:"read_units_per_second,omitempty"`
 
-	// Number of write operations a table or index can instantaneously support. For the base table, decreasing this value will force a new resource. For a global secondary index, this value can be increased or decreased without recreation. Minimum value of 4000 (default).
+	// Number of write operations a table or index can instantaneously support. For the base table, this value cannot be decreased. For a global secondary index, this value can be increased or decreased. Minimum value of 4000 (default).
 	WriteUnitsPerSecond *float64 `json:"writeUnitsPerSecond,omitempty" tf:"write_units_per_second,omitempty"`
 }
 
 type TableWarmThroughputParameters struct {
 
-	// Number of read operations a table or index can instantaneously support. For the base table, decreasing this value will force a new resource. For a global secondary index, this value can be increased or decreased without recreation. Minimum value of 12000 (default).
+	// Number of read operations a table or index can instantaneously support. For the base table, this value cannot be decreased. For a global secondary index, this value can be increased or decreased. Minimum value of 12000 (default).
 	// +kubebuilder:validation:Optional
 	ReadUnitsPerSecond *float64 `json:"readUnitsPerSecond,omitempty" tf:"read_units_per_second,omitempty"`
 
-	// Number of write operations a table or index can instantaneously support. For the base table, decreasing this value will force a new resource. For a global secondary index, this value can be increased or decreased without recreation. Minimum value of 4000 (default).
+	// Number of write operations a table or index can instantaneously support. For the base table, this value cannot be decreased. For a global secondary index, this value can be increased or decreased. Minimum value of 4000 (default).
 	// +kubebuilder:validation:Optional
 	WriteUnitsPerSecond *float64 `json:"writeUnitsPerSecond,omitempty" tf:"write_units_per_second,omitempty"`
 }
 
 type WarmThroughputInitParameters struct {
 
-	// Number of read operations a table or index can instantaneously support. For the base table, decreasing this value will force a new resource. For a global secondary index, this value can be increased or decreased without recreation. Minimum value of 12000 (default).
+	// Number of read operations a table or index can instantaneously support. For the base table, this value cannot be decreased. For a global secondary index, this value can be increased or decreased. Minimum value of 12000 (default).
 	ReadUnitsPerSecond *float64 `json:"readUnitsPerSecond,omitempty" tf:"read_units_per_second,omitempty"`
 
-	// Number of write operations a table or index can instantaneously support. For the base table, decreasing this value will force a new resource. For a global secondary index, this value can be increased or decreased without recreation. Minimum value of 4000 (default).
+	// Number of write operations a table or index can instantaneously support. For the base table, this value cannot be decreased. For a global secondary index, this value can be increased or decreased. Minimum value of 4000 (default).
 	WriteUnitsPerSecond *float64 `json:"writeUnitsPerSecond,omitempty" tf:"write_units_per_second,omitempty"`
 }
 
 type WarmThroughputObservation struct {
 
-	// Number of read operations a table or index can instantaneously support. For the base table, decreasing this value will force a new resource. For a global secondary index, this value can be increased or decreased without recreation. Minimum value of 12000 (default).
+	// Number of read operations a table or index can instantaneously support. For the base table, this value cannot be decreased. For a global secondary index, this value can be increased or decreased. Minimum value of 12000 (default).
 	ReadUnitsPerSecond *float64 `json:"readUnitsPerSecond,omitempty" tf:"read_units_per_second,omitempty"`
 
-	// Number of write operations a table or index can instantaneously support. For the base table, decreasing this value will force a new resource. For a global secondary index, this value can be increased or decreased without recreation. Minimum value of 4000 (default).
+	// Number of write operations a table or index can instantaneously support. For the base table, this value cannot be decreased. For a global secondary index, this value can be increased or decreased. Minimum value of 4000 (default).
 	WriteUnitsPerSecond *float64 `json:"writeUnitsPerSecond,omitempty" tf:"write_units_per_second,omitempty"`
 }
 
 type WarmThroughputParameters struct {
 
-	// Number of read operations a table or index can instantaneously support. For the base table, decreasing this value will force a new resource. For a global secondary index, this value can be increased or decreased without recreation. Minimum value of 12000 (default).
+	// Number of read operations a table or index can instantaneously support. For the base table, this value cannot be decreased. For a global secondary index, this value can be increased or decreased. Minimum value of 12000 (default).
 	// +kubebuilder:validation:Optional
 	ReadUnitsPerSecond *float64 `json:"readUnitsPerSecond,omitempty" tf:"read_units_per_second,omitempty"`
 
-	// Number of write operations a table or index can instantaneously support. For the base table, decreasing this value will force a new resource. For a global secondary index, this value can be increased or decreased without recreation. Minimum value of 4000 (default).
+	// Number of write operations a table or index can instantaneously support. For the base table, this value cannot be decreased. For a global secondary index, this value can be increased or decreased. Minimum value of 4000 (default).
 	// +kubebuilder:validation:Optional
 	WriteUnitsPerSecond *float64 `json:"writeUnitsPerSecond,omitempty" tf:"write_units_per_second,omitempty"`
 }

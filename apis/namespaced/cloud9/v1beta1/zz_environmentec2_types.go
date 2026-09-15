@@ -24,7 +24,7 @@ type EnvironmentEC2InitParameters struct {
 	// The description of the environment.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The identifier for the Amazon Machine Image (AMI) that's used to create the EC2 instance. Valid values are
+	// Identifier for the AMI that's used to create the EC2 instance. Valid values are
 	ImageID *string `json:"imageId,omitempty" tf:"image_id,omitempty"`
 
 	// The type of instance to connect to the environment, e.g., t2.micro.
@@ -70,7 +70,7 @@ type EnvironmentEC2Observation struct {
 	// The ID of the environment.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The identifier for the Amazon Machine Image (AMI) that's used to create the EC2 instance. Valid values are
+	// Identifier for the AMI that's used to create the EC2 instance. Valid values are
 	ImageID *string `json:"imageId,omitempty" tf:"image_id,omitempty"`
 
 	// The type of instance to connect to the environment, e.g., t2.micro.
@@ -115,7 +115,7 @@ type EnvironmentEC2Parameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The identifier for the Amazon Machine Image (AMI) that's used to create the EC2 instance. Valid values are
+	// Identifier for the AMI that's used to create the EC2 instance. Valid values are
 	// +kubebuilder:validation:Optional
 	ImageID *string `json:"imageId,omitempty" tf:"image_id,omitempty"`
 

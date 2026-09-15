@@ -710,7 +710,7 @@ spec:
                     description: The DNS name for the EFS file system.
                     type: string
                   fileSystemArn:
-                    description: Amazon Resource Name of the file system.
+                    description: ARN of the file system.
                     type: string
                   fileSystemId:
                     description: The ID of the file system for which the mount target

@@ -14,25 +14,30 @@ import (
 )
 
 type DefaultActionInitParameters struct {
+
+	// Configuration block for returning a fixed response. See fixed_response Block below.
 	FixedResponse *FixedResponseInitParameters `json:"fixedResponse,omitempty" tf:"fixed_response,omitempty"`
 
-	// Route requests to one or more target groups. See Forward blocks below.
+	// Route requests to one or more target groups. See forward Block below.
 	Forward []ForwardInitParameters `json:"forward,omitempty" tf:"forward,omitempty"`
 }
 
 type DefaultActionObservation struct {
+
+	// Configuration block for returning a fixed response. See fixed_response Block below.
 	FixedResponse *FixedResponseObservation `json:"fixedResponse,omitempty" tf:"fixed_response,omitempty"`
 
-	// Route requests to one or more target groups. See Forward blocks below.
+	// Route requests to one or more target groups. See forward Block below.
 	Forward []ForwardObservation `json:"forward,omitempty" tf:"forward,omitempty"`
 }
 
 type DefaultActionParameters struct {
 
+	// Configuration block for returning a fixed response. See fixed_response Block below.
 	// +kubebuilder:validation:Optional
 	FixedResponse *FixedResponseParameters `json:"fixedResponse,omitempty" tf:"fixed_response,omitempty"`
 
-	// Route requests to one or more target groups. See Forward blocks below.
+	// Route requests to one or more target groups. See forward Block below.
 	// +kubebuilder:validation:Optional
 	Forward []ForwardParameters `json:"forward,omitempty" tf:"forward,omitempty"`
 }
@@ -58,19 +63,19 @@ type FixedResponseParameters struct {
 
 type ForwardInitParameters struct {
 
-	// One or more target group blocks.
+	// One or more target group blocks. See target_groups Block below.
 	TargetGroups []TargetGroupsInitParameters `json:"targetGroups,omitempty" tf:"target_groups,omitempty"`
 }
 
 type ForwardObservation struct {
 
-	// One or more target group blocks.
+	// One or more target group blocks. See target_groups Block below.
 	TargetGroups []TargetGroupsObservation `json:"targetGroups,omitempty" tf:"target_groups,omitempty"`
 }
 
 type ForwardParameters struct {
 
-	// One or more target group blocks.
+	// One or more target group blocks. See target_groups Block below.
 	// +kubebuilder:validation:Optional
 	TargetGroups []TargetGroupsParameters `json:"targetGroups,omitempty" tf:"target_groups,omitempty"`
 }
@@ -89,7 +94,7 @@ type ListenerInitParameters struct {
 	// Protocol for the listener. Supported values are HTTP, HTTPS or TLS_PASSTHROUGH
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
-	// Amazon Resource Name (ARN) of the VPC Lattice service. You must include either the service_arn or service_identifier arguments.
+	// ARN of the VPC Lattice service. You must include either the service_arn or service_identifier arguments.
 	ServiceArn *string `json:"serviceArn,omitempty" tf:"service_arn,omitempty"`
 
 	// ID of the VPC Lattice service. You must include either the service_arn or service_identifier arguments.
@@ -143,7 +148,7 @@ type ListenerObservation struct {
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// Amazon Resource Name (ARN) of the VPC Lattice service. You must include either the service_arn or service_identifier arguments.
+	// ARN of the VPC Lattice service. You must include either the service_arn or service_identifier arguments.
 	ServiceArn *string `json:"serviceArn,omitempty" tf:"service_arn,omitempty"`
 
 	// ID of the VPC Lattice service. You must include either the service_arn or service_identifier arguments.
@@ -181,7 +186,7 @@ type ListenerParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// Amazon Resource Name (ARN) of the VPC Lattice service. You must include either the service_arn or service_identifier arguments.
+	// ARN of the VPC Lattice service. You must include either the service_arn or service_identifier arguments.
 	// +kubebuilder:validation:Optional
 	ServiceArn *string `json:"serviceArn,omitempty" tf:"service_arn,omitempty"`
 
@@ -208,7 +213,7 @@ type ListenerParameters struct {
 
 type TargetGroupsInitParameters struct {
 
-	// ID or Amazon Resource Name (ARN) of the target group.
+	// ID or ARN of the target group.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/vpclattice/v1beta1.TargetGroup
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	TargetGroupIdentifier *string `json:"targetGroupIdentifier,omitempty" tf:"target_group_identifier,omitempty"`
@@ -221,24 +226,22 @@ type TargetGroupsInitParameters struct {
 	// +kubebuilder:validation:Optional
 	TargetGroupIdentifierSelector *v2.NamespacedSelector `json:"targetGroupIdentifierSelector,omitempty" tf:"-"`
 
-	// Determines how requests are distributed to the target group. Only required if you specify multiple target groups for a forward action. For example, if you specify two target groups, one with a
-	// weight of 10 and the other with a weight of 20, the target group with a weight of 20 receives twice as many requests as the other target group. See Listener rules in the AWS documentation for additional examples. Default: 100.
+	// Weight that controls how requests are distributed to the target group. Only required if you specify multiple target groups for a forward action. For example, if you specify two target groups, one with a weight of 10 and the other with a weight of 20, the target group with a weight of 20 receives twice as many requests as the other target group. See Listener rules in the AWS documentation for additional examples. Default: 100.
 	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
 }
 
 type TargetGroupsObservation struct {
 
-	// ID or Amazon Resource Name (ARN) of the target group.
+	// ID or ARN of the target group.
 	TargetGroupIdentifier *string `json:"targetGroupIdentifier,omitempty" tf:"target_group_identifier,omitempty"`
 
-	// Determines how requests are distributed to the target group. Only required if you specify multiple target groups for a forward action. For example, if you specify two target groups, one with a
-	// weight of 10 and the other with a weight of 20, the target group with a weight of 20 receives twice as many requests as the other target group. See Listener rules in the AWS documentation for additional examples. Default: 100.
+	// Weight that controls how requests are distributed to the target group. Only required if you specify multiple target groups for a forward action. For example, if you specify two target groups, one with a weight of 10 and the other with a weight of 20, the target group with a weight of 20 receives twice as many requests as the other target group. See Listener rules in the AWS documentation for additional examples. Default: 100.
 	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
 }
 
 type TargetGroupsParameters struct {
 
-	// ID or Amazon Resource Name (ARN) of the target group.
+	// ID or ARN of the target group.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/vpclattice/v1beta1.TargetGroup
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -252,8 +255,7 @@ type TargetGroupsParameters struct {
 	// +kubebuilder:validation:Optional
 	TargetGroupIdentifierSelector *v2.NamespacedSelector `json:"targetGroupIdentifierSelector,omitempty" tf:"-"`
 
-	// Determines how requests are distributed to the target group. Only required if you specify multiple target groups for a forward action. For example, if you specify two target groups, one with a
-	// weight of 10 and the other with a weight of 20, the target group with a weight of 20 receives twice as many requests as the other target group. See Listener rules in the AWS documentation for additional examples. Default: 100.
+	// Weight that controls how requests are distributed to the target group. Only required if you specify multiple target groups for a forward action. For example, if you specify two target groups, one with a weight of 10 and the other with a weight of 20, the target group with a weight of 20 receives twice as many requests as the other target group. See Listener rules in the AWS documentation for additional examples. Default: 100.
 	// +kubebuilder:validation:Optional
 	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
 }

@@ -81,8 +81,23 @@ type ConnectionObservation struct {
 	// The MAC Security (MACsec) port link status of the connection.
 	PortEncryptionStatus *string `json:"portEncryptionStatus,omitempty" tf:"port_encryption_status,omitempty"`
 
+	// The total number of inbound IPv4 route prefixes that can be allocated across the virtual interfaces on the connection.
+	PrefixPoolSizeIPv4 *float64 `json:"prefixPoolSizeIpv4,omitempty" tf:"prefix_pool_size_ipv4,omitempty"`
+
+	// The total number of inbound IPv6 route prefixes that can be allocated across the virtual interfaces on the connection.
+	PrefixPoolSizeIPv6 *float64 `json:"prefixPoolSizeIpv6,omitempty" tf:"prefix_pool_size_ipv6,omitempty"`
+
+	// The number of inbound IPv4 route prefixes in the connection prefix pool not yet allocated to a virtual interface.
+	PrefixPoolUnallocatedCountIPv4 *float64 `json:"prefixPoolUnallocatedCountIpv4,omitempty" tf:"prefix_pool_unallocated_count_ipv4,omitempty"`
+
+	// The number of inbound IPv6 route prefixes in the connection prefix pool not yet allocated to a virtual interface.
+	PrefixPoolUnallocatedCountIPv6 *float64 `json:"prefixPoolUnallocatedCountIpv6,omitempty" tf:"prefix_pool_unallocated_count_ipv6,omitempty"`
+
 	// The name of the service provider associated with the connection.
 	ProviderName *string `json:"providerName,omitempty" tf:"provider_name,omitempty"`
+
+	// Rate limiter status for the connection. See rate_limiter_status Block below.
+	RateLimiterStatus []RateLimiterStatusObservation `json:"rateLimiterStatus,omitempty" tf:"rate_limiter_status,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -92,6 +107,9 @@ type ConnectionObservation struct {
 	RequestMacsec *bool `json:"requestMacsec,omitempty" tf:"request_macsec,omitempty"`
 
 	SkipDestroy *bool `json:"skipDestroy,omitempty" tf:"skip_destroy,omitempty"`
+
+	// State of the connection. See CreateConnection for list of possible state values.
+	State *string `json:"state,omitempty" tf:"state,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -143,6 +161,27 @@ type ConnectionParameters struct {
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type RateLimiterStatusInitParameters struct {
+}
+
+type RateLimiterStatusObservation struct {
+
+	// Number of rate limiters currently in use.
+	InUse *float64 `json:"inUse,omitempty" tf:"in_use,omitempty"`
+
+	// Maximum number of rate limiters allowed on the connection.
+	MaxAllowed *float64 `json:"maxAllowed,omitempty" tf:"max_allowed,omitempty"`
+
+	// Number of rate limiters remaining (available).
+	Remaining *float64 `json:"remaining,omitempty" tf:"remaining,omitempty"`
+
+	// Total bandwidth allocated across all rate limiters.
+	TotalBandwidth *string `json:"totalBandwidth,omitempty" tf:"total_bandwidth,omitempty"`
+}
+
+type RateLimiterStatusParameters struct {
 }
 
 // ConnectionSpec defines the desired state of Connection

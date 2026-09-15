@@ -24,7 +24,7 @@ type BlockDeviceMappingEBSInitParameters struct {
 	// Number of Input/Output (I/O) operations per second to provision for an io1 or io2 volume.
 	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
-	// Amazon Resource Name (ARN) of the Key Management Service (KMS) Key for encryption.
+	// ARN of the KMS Key for encryption.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
 	// Identifier of the EC2 Volume Snapshot.
@@ -51,7 +51,7 @@ type BlockDeviceMappingEBSObservation struct {
 	// Number of Input/Output (I/O) operations per second to provision for an io1 or io2 volume.
 	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
-	// Amazon Resource Name (ARN) of the Key Management Service (KMS) Key for encryption.
+	// ARN of the KMS Key for encryption.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
 	// Identifier of the EC2 Volume Snapshot.
@@ -81,7 +81,7 @@ type BlockDeviceMappingEBSParameters struct {
 	// +kubebuilder:validation:Optional
 	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
-	// Amazon Resource Name (ARN) of the Key Management Service (KMS) Key for encryption.
+	// ARN of the KMS Key for encryption.
 	// +kubebuilder:validation:Optional
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
@@ -182,7 +182,7 @@ type ImageRecipeBlockDeviceMappingParameters struct {
 
 type ImageRecipeComponentInitParameters struct {
 
-	// Amazon Resource Name (ARN) of the Image Builder Component to associate.
+	// ARN of the Image Builder Component to associate.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/imagebuilder/v1beta1.Component
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	ComponentArn *string `json:"componentArn,omitempty" tf:"component_arn,omitempty"`
@@ -201,7 +201,7 @@ type ImageRecipeComponentInitParameters struct {
 
 type ImageRecipeComponentObservation struct {
 
-	// Amazon Resource Name (ARN) of the Image Builder Component to associate.
+	// ARN of the Image Builder Component to associate.
 	ComponentArn *string `json:"componentArn,omitempty" tf:"component_arn,omitempty"`
 
 	// Configuration block(s) for parameters to configure the component. Detailed below.
@@ -210,7 +210,7 @@ type ImageRecipeComponentObservation struct {
 
 type ImageRecipeComponentParameters struct {
 
-	// Amazon Resource Name (ARN) of the Image Builder Component to associate.
+	// ARN of the Image Builder Component to associate.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/imagebuilder/v1beta1.Component
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -273,7 +273,7 @@ type ImageRecipeObservation struct {
 	// +mapType=granular
 	AMITags map[string]*string `json:"amiTags,omitempty" tf:"ami_tags,omitempty"`
 
-	// Amazon Resource Name (ARN) of the image recipe.
+	// ARN of the image recipe.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Configuration block(s) with block device mappings for the image recipe. Detailed below.
@@ -288,7 +288,7 @@ type ImageRecipeObservation struct {
 	// Description of the image recipe.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Amazon Resource Name (ARN) of the image recipe.
+	// ARN of the image recipe.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Name of the image recipe.

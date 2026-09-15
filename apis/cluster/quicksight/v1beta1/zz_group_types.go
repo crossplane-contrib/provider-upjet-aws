@@ -30,7 +30,7 @@ type GroupInitParameters struct {
 
 type GroupObservation struct {
 
-	// Amazon Resource Name (ARN) of group
+	// ARN of group
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// AWS account ID.

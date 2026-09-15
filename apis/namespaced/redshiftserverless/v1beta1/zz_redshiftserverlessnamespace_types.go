@@ -35,7 +35,7 @@ type RedshiftServerlessNamespaceInitParameters struct {
 	// The name of the first database created in the namespace.
 	DBName *string `json:"dbName,omitempty" tf:"db_name,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the IAM role to set as a default in the namespace. When specifying default_iam_role_arn, it also must be part of iam_roles.
+	// ARN of the IAM role to set as a default in the namespace. When specifying default_iam_role_arn, it also must be part of iam_roles.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	DefaultIAMRoleArn *string `json:"defaultIamRoleArn,omitempty" tf:"default_iam_role_arn,omitempty"`
@@ -63,7 +63,7 @@ type RedshiftServerlessNamespaceInitParameters struct {
 	// +listType=set
 	IAMRoles []*string `json:"iamRoles,omitempty" tf:"iam_roles,omitempty"`
 
-	// The ARN of the Amazon Web Services Key Management Service key used to encrypt your data.
+	// ARN of the Amazon Web Services KMS key used to encrypt your data.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kms/v1beta1.Key
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
@@ -90,7 +90,7 @@ type RedshiftServerlessNamespaceInitParameters struct {
 
 type RedshiftServerlessNamespaceObservation struct {
 
-	// Amazon Resource Name (ARN) of namespace's admin user credentials secret.
+	// ARN of namespace's admin user credentials secret.
 	AdminPasswordSecretArn *string `json:"adminPasswordSecretArn,omitempty" tf:"admin_password_secret_arn,omitempty"`
 
 	// ID of the KMS key used to encrypt the namespace's admin credentials secret.
@@ -103,13 +103,13 @@ type RedshiftServerlessNamespaceObservation struct {
 	// Used together with admin_user_password_wo to trigger an update. Increment this value when an update to the admin_user_password_wo is required
 	AdminUserPasswordWoVersion *float64 `json:"adminUserPasswordWoVersion,omitempty" tf:"admin_user_password_wo_version,omitempty"`
 
-	// Amazon Resource Name (ARN) of the Redshift Serverless Namespace.
+	// ARN of the Redshift Serverless Namespace.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The name of the first database created in the namespace.
 	DBName *string `json:"dbName,omitempty" tf:"db_name,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the IAM role to set as a default in the namespace. When specifying default_iam_role_arn, it also must be part of iam_roles.
+	// ARN of the IAM role to set as a default in the namespace. When specifying default_iam_role_arn, it also must be part of iam_roles.
 	DefaultIAMRoleArn *string `json:"defaultIamRoleArn,omitempty" tf:"default_iam_role_arn,omitempty"`
 
 	// A list of IAM roles to associate with the namespace.
@@ -119,7 +119,7 @@ type RedshiftServerlessNamespaceObservation struct {
 	// The Redshift Namespace Name.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The ARN of the Amazon Web Services Key Management Service key used to encrypt your data.
+	// ARN of the Amazon Web Services KMS key used to encrypt your data.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
 	// The types of logs the namespace can export. Available export types are userlog, connectionlog, and useractivitylog.
@@ -174,7 +174,7 @@ type RedshiftServerlessNamespaceParameters struct {
 	// +kubebuilder:validation:Optional
 	DBName *string `json:"dbName,omitempty" tf:"db_name,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the IAM role to set as a default in the namespace. When specifying default_iam_role_arn, it also must be part of iam_roles.
+	// ARN of the IAM role to set as a default in the namespace. When specifying default_iam_role_arn, it also must be part of iam_roles.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -204,7 +204,7 @@ type RedshiftServerlessNamespaceParameters struct {
 	// +listType=set
 	IAMRoles []*string `json:"iamRoles,omitempty" tf:"iam_roles,omitempty"`
 
-	// The ARN of the Amazon Web Services Key Management Service key used to encrypt your data.
+	// ARN of the Amazon Web Services KMS key used to encrypt your data.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kms/v1beta1.Key
 	// +kubebuilder:validation:Optional
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`

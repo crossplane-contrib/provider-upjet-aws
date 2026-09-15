@@ -15,7 +15,7 @@ import (
 
 type EncryptionConfigurationInitParameters struct {
 
-	// AWS Key Management Service (KMS) customer managed key ID to use for the encryption configuration. This parameter is allowed if and only if sse_type is set to aws:kms. To specify the KMS key, you must use the format of the KMS key Amazon Resource Name (ARN).
+	// KMS customer managed key ID to use for the encryption configuration. This parameter is allowed if and only if sse_type is set to aws:kms. To specify the KMS key, you must use the format of the KMS key ARN.
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn"`
 
 	// Type of encryption to use. Valid values: AES256, aws:kms. Defaults to AES256.
@@ -24,7 +24,7 @@ type EncryptionConfigurationInitParameters struct {
 
 type EncryptionConfigurationObservation struct {
 
-	// AWS Key Management Service (KMS) customer managed key ID to use for the encryption configuration. This parameter is allowed if and only if sse_type is set to aws:kms. To specify the KMS key, you must use the format of the KMS key Amazon Resource Name (ARN).
+	// KMS customer managed key ID to use for the encryption configuration. This parameter is allowed if and only if sse_type is set to aws:kms. To specify the KMS key, you must use the format of the KMS key ARN.
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
 	// Type of encryption to use. Valid values: AES256, aws:kms. Defaults to AES256.
@@ -33,7 +33,7 @@ type EncryptionConfigurationObservation struct {
 
 type EncryptionConfigurationParameters struct {
 
-	// AWS Key Management Service (KMS) customer managed key ID to use for the encryption configuration. This parameter is allowed if and only if sse_type is set to aws:kms. To specify the KMS key, you must use the format of the KMS key Amazon Resource Name (ARN).
+	// KMS customer managed key ID to use for the encryption configuration. This parameter is allowed if and only if sse_type is set to aws:kms. To specify the KMS key, you must use the format of the KMS key ARN.
 	// +kubebuilder:validation:Optional
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn"`
 
@@ -53,13 +53,13 @@ type IndexInitParameters struct {
 	// Distance metric to be used for similarity search. Valid values: cosine, euclidean.
 	DistanceMetric *string `json:"distanceMetric,omitempty" tf:"distance_metric,omitempty"`
 
-	// Block for encryption configuration for the vector index. See encyption_configuration block below.
+	// Block for encryption configuration for the vector index. See encryption_configuration Block below.
 	EncryptionConfiguration *EncryptionConfigurationInitParameters `json:"encryptionConfiguration,omitempty" tf:"encryption_configuration,omitempty"`
 
 	// Name of the vector index.
 	IndexName *string `json:"indexName,omitempty" tf:"index_name,omitempty"`
 
-	// Block for metadata configuration for the vector index. See metadata_configuration block below.
+	// Block for metadata configuration for the vector index. See metadata_configuration Block below.
 	MetadataConfiguration *MetadataConfigurationInitParameters `json:"metadataConfiguration,omitempty" tf:"metadata_configuration,omitempty"`
 
 	// Key-value map of resource tags.
@@ -94,7 +94,7 @@ type IndexObservation struct {
 	// Distance metric to be used for similarity search. Valid values: cosine, euclidean.
 	DistanceMetric *string `json:"distanceMetric,omitempty" tf:"distance_metric,omitempty"`
 
-	// Block for encryption configuration for the vector index. See encyption_configuration block below.
+	// Block for encryption configuration for the vector index. See encryption_configuration Block below.
 	EncryptionConfiguration *EncryptionConfigurationObservation `json:"encryptionConfiguration,omitempty" tf:"encryption_configuration,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -105,7 +105,7 @@ type IndexObservation struct {
 	// Name of the vector index.
 	IndexName *string `json:"indexName,omitempty" tf:"index_name,omitempty"`
 
-	// Block for metadata configuration for the vector index. See metadata_configuration block below.
+	// Block for metadata configuration for the vector index. See metadata_configuration Block below.
 	MetadataConfiguration *MetadataConfigurationObservation `json:"metadataConfiguration,omitempty" tf:"metadata_configuration,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -116,7 +116,7 @@ type IndexObservation struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
@@ -138,7 +138,7 @@ type IndexParameters struct {
 	// +kubebuilder:validation:Optional
 	DistanceMetric *string `json:"distanceMetric,omitempty" tf:"distance_metric,omitempty"`
 
-	// Block for encryption configuration for the vector index. See encyption_configuration block below.
+	// Block for encryption configuration for the vector index. See encryption_configuration Block below.
 	// +kubebuilder:validation:Optional
 	EncryptionConfiguration *EncryptionConfigurationParameters `json:"encryptionConfiguration,omitempty" tf:"encryption_configuration,omitempty"`
 
@@ -146,7 +146,7 @@ type IndexParameters struct {
 	// +kubebuilder:validation:Optional
 	IndexName *string `json:"indexName,omitempty" tf:"index_name,omitempty"`
 
-	// Block for metadata configuration for the vector index. See metadata_configuration block below.
+	// Block for metadata configuration for the vector index. See metadata_configuration Block below.
 	// +kubebuilder:validation:Optional
 	MetadataConfiguration *MetadataConfigurationParameters `json:"metadataConfiguration,omitempty" tf:"metadata_configuration,omitempty"`
 

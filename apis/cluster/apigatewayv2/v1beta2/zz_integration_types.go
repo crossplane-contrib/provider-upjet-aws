@@ -68,12 +68,10 @@ type IntegrationInitParameters struct {
 	// AWS service action to invoke. Supported only for HTTP APIs when integration_type is AWS_PROXY. See the AWS service integration reference documentation for supported values. Must be between 1 and 128 characters in length.
 	IntegrationSubtype *string `json:"integrationSubtype,omitempty" tf:"integration_subtype,omitempty"`
 
-	// Integration type of an integration.
-	// Valid values: AWS (supported only for WebSocket APIs), AWS_PROXY, HTTP (supported only for WebSocket APIs), HTTP_PROXY, MOCK (supported only for WebSocket APIs). For an HTTP API private integration, use HTTP_PROXY.
+	// Integration type of an integration. Valid values: AWS (supported only for WebSocket APIs), AWS_PROXY, HTTP (supported only for WebSocket APIs), HTTP_PROXY, MOCK (supported only for WebSocket APIs). For an HTTP API private integration, use HTTP_PROXY.
 	IntegrationType *string `json:"integrationType,omitempty" tf:"integration_type,omitempty"`
 
-	// URI of the Lambda function for a Lambda proxy integration, when integration_type is AWS_PROXY.
-	// For an HTTP integration, specify a fully-qualified URL. For an HTTP API private integration, specify the ARN of an Application Load Balancer listener, Network Load Balancer listener, or AWS Cloud Map service.
+	// URI of the Lambda function for a Lambda proxy integration, when integration_type is AWS_PROXY. For an HTTP integration, specify a fully-qualified URL. For an HTTP API private integration, specify the ARN of an Application Load Balancer listener, Network Load Balancer listener, or AWS Cloud Map service.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/lambda/v1beta2.Function
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("invoke_arn",true)
 	IntegrationURI *string `json:"integrationUri,omitempty" tf:"integration_uri,omitempty"`
@@ -86,17 +84,13 @@ type IntegrationInitParameters struct {
 	// +kubebuilder:validation:Optional
 	IntegrationURISelector *v2.Selector `json:"integrationUriSelector,omitempty" tf:"-"`
 
-	// Pass-through behavior for incoming requests based on the Content-Type header in the request, and the available mapping templates specified as the request_templates attribute.
-	// Valid values: WHEN_NO_MATCH, WHEN_NO_TEMPLATES, NEVER. Default is WHEN_NO_MATCH. Supported only for WebSocket APIs.
+	// Pass-through behavior for incoming requests based on the Content-Type header in the request, and the available mapping templates specified as the request_templates attribute. Valid values: WHEN_NO_MATCH, WHEN_NO_TEMPLATES, NEVER. Default is WHEN_NO_MATCH. Supported only for WebSocket APIs.
 	PassthroughBehavior *string `json:"passthroughBehavior,omitempty" tf:"passthrough_behavior,omitempty"`
 
-	// The format of the payload sent to an integration. Valid values: 1.0, 2.0. Default is 1.0.
+	// Format of the payload sent to an integration. Valid values: 1.0, 2.0. Default is 1.0.
 	PayloadFormatVersion *string `json:"payloadFormatVersion,omitempty" tf:"payload_format_version,omitempty"`
 
-	// For WebSocket APIs, a key-value map specifying request parameters that are passed from the method request to the backend.
-	// For HTTP APIs with a specified integration_subtype, a key-value map specifying parameters that are passed to AWS_PROXY integrations.
-	// For HTTP APIs without a specified integration_subtype, a key-value map specifying how to transform HTTP requests before sending them to the backend.
-	// See the Amazon API Gateway Developer Guide for details.
+	// For WebSocket APIs, a key-value map specifying request parameters that are passed from the method request to the backend. For HTTP APIs with a specified integration_subtype, a key-value map specifying parameters that are passed to AWS_PROXY integrations. For HTTP APIs without a specified integration_subtype, a key-value map specifying how to transform HTTP requests before sending them to the backend. See the Amazon API Gateway Developer Guide for details.
 	// +mapType=granular
 	RequestParameters map[string]*string `json:"requestParameters,omitempty" tf:"request_parameters,omitempty"`
 
@@ -110,11 +104,10 @@ type IntegrationInitParameters struct {
 	// TLS configuration for a private integration. Supported only for HTTP APIs.
 	TLSConfig *TLSConfigInitParameters `json:"tlsConfig,omitempty" tf:"tls_config,omitempty"`
 
-	// The template selection expression for the integration.
+	// Template selection expression for the integration.
 	TemplateSelectionExpression *string `json:"templateSelectionExpression,omitempty" tf:"template_selection_expression,omitempty"`
 
-	// Custom timeout between 50 and 29,000 milliseconds for WebSocket APIs and between 50 and 30,000 milliseconds for HTTP APIs.
-	// The default timeout is 29 seconds for WebSocket APIs and 30 seconds for HTTP APIs.
+	// Custom timeout between 50 and 29,000 milliseconds for WebSocket APIs and between 50 and 30,000 milliseconds for HTTP APIs. The default timeout is 29 seconds for WebSocket APIs and 30 seconds for HTTP APIs.
 	TimeoutMilliseconds *float64 `json:"timeoutMilliseconds,omitempty" tf:"timeout_milliseconds,omitempty"`
 }
 
@@ -144,35 +137,29 @@ type IntegrationObservation struct {
 	// Integration's HTTP method. Must be specified if integration_type is not MOCK.
 	IntegrationMethod *string `json:"integrationMethod,omitempty" tf:"integration_method,omitempty"`
 
-	// The integration response selection expression for the integration.
+	// Integration response selection expression for the integration.
 	IntegrationResponseSelectionExpression *string `json:"integrationResponseSelectionExpression,omitempty" tf:"integration_response_selection_expression,omitempty"`
 
 	// AWS service action to invoke. Supported only for HTTP APIs when integration_type is AWS_PROXY. See the AWS service integration reference documentation for supported values. Must be between 1 and 128 characters in length.
 	IntegrationSubtype *string `json:"integrationSubtype,omitempty" tf:"integration_subtype,omitempty"`
 
-	// Integration type of an integration.
-	// Valid values: AWS (supported only for WebSocket APIs), AWS_PROXY, HTTP (supported only for WebSocket APIs), HTTP_PROXY, MOCK (supported only for WebSocket APIs). For an HTTP API private integration, use HTTP_PROXY.
+	// Integration type of an integration. Valid values: AWS (supported only for WebSocket APIs), AWS_PROXY, HTTP (supported only for WebSocket APIs), HTTP_PROXY, MOCK (supported only for WebSocket APIs). For an HTTP API private integration, use HTTP_PROXY.
 	IntegrationType *string `json:"integrationType,omitempty" tf:"integration_type,omitempty"`
 
-	// URI of the Lambda function for a Lambda proxy integration, when integration_type is AWS_PROXY.
-	// For an HTTP integration, specify a fully-qualified URL. For an HTTP API private integration, specify the ARN of an Application Load Balancer listener, Network Load Balancer listener, or AWS Cloud Map service.
+	// URI of the Lambda function for a Lambda proxy integration, when integration_type is AWS_PROXY. For an HTTP integration, specify a fully-qualified URL. For an HTTP API private integration, specify the ARN of an Application Load Balancer listener, Network Load Balancer listener, or AWS Cloud Map service.
 	IntegrationURI *string `json:"integrationUri,omitempty" tf:"integration_uri,omitempty"`
 
-	// Pass-through behavior for incoming requests based on the Content-Type header in the request, and the available mapping templates specified as the request_templates attribute.
-	// Valid values: WHEN_NO_MATCH, WHEN_NO_TEMPLATES, NEVER. Default is WHEN_NO_MATCH. Supported only for WebSocket APIs.
+	// Pass-through behavior for incoming requests based on the Content-Type header in the request, and the available mapping templates specified as the request_templates attribute. Valid values: WHEN_NO_MATCH, WHEN_NO_TEMPLATES, NEVER. Default is WHEN_NO_MATCH. Supported only for WebSocket APIs.
 	PassthroughBehavior *string `json:"passthroughBehavior,omitempty" tf:"passthrough_behavior,omitempty"`
 
-	// The format of the payload sent to an integration. Valid values: 1.0, 2.0. Default is 1.0.
+	// Format of the payload sent to an integration. Valid values: 1.0, 2.0. Default is 1.0.
 	PayloadFormatVersion *string `json:"payloadFormatVersion,omitempty" tf:"payload_format_version,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// For WebSocket APIs, a key-value map specifying request parameters that are passed from the method request to the backend.
-	// For HTTP APIs with a specified integration_subtype, a key-value map specifying parameters that are passed to AWS_PROXY integrations.
-	// For HTTP APIs without a specified integration_subtype, a key-value map specifying how to transform HTTP requests before sending them to the backend.
-	// See the Amazon API Gateway Developer Guide for details.
+	// For WebSocket APIs, a key-value map specifying request parameters that are passed from the method request to the backend. For HTTP APIs with a specified integration_subtype, a key-value map specifying parameters that are passed to AWS_PROXY integrations. For HTTP APIs without a specified integration_subtype, a key-value map specifying how to transform HTTP requests before sending them to the backend. See the Amazon API Gateway Developer Guide for details.
 	// +mapType=granular
 	RequestParameters map[string]*string `json:"requestParameters,omitempty" tf:"request_parameters,omitempty"`
 
@@ -186,11 +173,10 @@ type IntegrationObservation struct {
 	// TLS configuration for a private integration. Supported only for HTTP APIs.
 	TLSConfig *TLSConfigObservation `json:"tlsConfig,omitempty" tf:"tls_config,omitempty"`
 
-	// The template selection expression for the integration.
+	// Template selection expression for the integration.
 	TemplateSelectionExpression *string `json:"templateSelectionExpression,omitempty" tf:"template_selection_expression,omitempty"`
 
-	// Custom timeout between 50 and 29,000 milliseconds for WebSocket APIs and between 50 and 30,000 milliseconds for HTTP APIs.
-	// The default timeout is 29 seconds for WebSocket APIs and 30 seconds for HTTP APIs.
+	// Custom timeout between 50 and 29,000 milliseconds for WebSocket APIs and between 50 and 30,000 milliseconds for HTTP APIs. The default timeout is 29 seconds for WebSocket APIs and 30 seconds for HTTP APIs.
 	TimeoutMilliseconds *float64 `json:"timeoutMilliseconds,omitempty" tf:"timeout_milliseconds,omitempty"`
 }
 
@@ -257,13 +243,11 @@ type IntegrationParameters struct {
 	// +kubebuilder:validation:Optional
 	IntegrationSubtype *string `json:"integrationSubtype,omitempty" tf:"integration_subtype,omitempty"`
 
-	// Integration type of an integration.
-	// Valid values: AWS (supported only for WebSocket APIs), AWS_PROXY, HTTP (supported only for WebSocket APIs), HTTP_PROXY, MOCK (supported only for WebSocket APIs). For an HTTP API private integration, use HTTP_PROXY.
+	// Integration type of an integration. Valid values: AWS (supported only for WebSocket APIs), AWS_PROXY, HTTP (supported only for WebSocket APIs), HTTP_PROXY, MOCK (supported only for WebSocket APIs). For an HTTP API private integration, use HTTP_PROXY.
 	// +kubebuilder:validation:Optional
 	IntegrationType *string `json:"integrationType,omitempty" tf:"integration_type,omitempty"`
 
-	// URI of the Lambda function for a Lambda proxy integration, when integration_type is AWS_PROXY.
-	// For an HTTP integration, specify a fully-qualified URL. For an HTTP API private integration, specify the ARN of an Application Load Balancer listener, Network Load Balancer listener, or AWS Cloud Map service.
+	// URI of the Lambda function for a Lambda proxy integration, when integration_type is AWS_PROXY. For an HTTP integration, specify a fully-qualified URL. For an HTTP API private integration, specify the ARN of an Application Load Balancer listener, Network Load Balancer listener, or AWS Cloud Map service.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/lambda/v1beta2.Function
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("invoke_arn",true)
 	// +kubebuilder:validation:Optional
@@ -277,12 +261,11 @@ type IntegrationParameters struct {
 	// +kubebuilder:validation:Optional
 	IntegrationURISelector *v2.Selector `json:"integrationUriSelector,omitempty" tf:"-"`
 
-	// Pass-through behavior for incoming requests based on the Content-Type header in the request, and the available mapping templates specified as the request_templates attribute.
-	// Valid values: WHEN_NO_MATCH, WHEN_NO_TEMPLATES, NEVER. Default is WHEN_NO_MATCH. Supported only for WebSocket APIs.
+	// Pass-through behavior for incoming requests based on the Content-Type header in the request, and the available mapping templates specified as the request_templates attribute. Valid values: WHEN_NO_MATCH, WHEN_NO_TEMPLATES, NEVER. Default is WHEN_NO_MATCH. Supported only for WebSocket APIs.
 	// +kubebuilder:validation:Optional
 	PassthroughBehavior *string `json:"passthroughBehavior,omitempty" tf:"passthrough_behavior,omitempty"`
 
-	// The format of the payload sent to an integration. Valid values: 1.0, 2.0. Default is 1.0.
+	// Format of the payload sent to an integration. Valid values: 1.0, 2.0. Default is 1.0.
 	// +kubebuilder:validation:Optional
 	PayloadFormatVersion *string `json:"payloadFormatVersion,omitempty" tf:"payload_format_version,omitempty"`
 
@@ -291,10 +274,7 @@ type IntegrationParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// For WebSocket APIs, a key-value map specifying request parameters that are passed from the method request to the backend.
-	// For HTTP APIs with a specified integration_subtype, a key-value map specifying parameters that are passed to AWS_PROXY integrations.
-	// For HTTP APIs without a specified integration_subtype, a key-value map specifying how to transform HTTP requests before sending them to the backend.
-	// See the Amazon API Gateway Developer Guide for details.
+	// For WebSocket APIs, a key-value map specifying request parameters that are passed from the method request to the backend. For HTTP APIs with a specified integration_subtype, a key-value map specifying parameters that are passed to AWS_PROXY integrations. For HTTP APIs without a specified integration_subtype, a key-value map specifying how to transform HTTP requests before sending them to the backend. See the Amazon API Gateway Developer Guide for details.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	RequestParameters map[string]*string `json:"requestParameters,omitempty" tf:"request_parameters,omitempty"`
@@ -312,20 +292,18 @@ type IntegrationParameters struct {
 	// +kubebuilder:validation:Optional
 	TLSConfig *TLSConfigParameters `json:"tlsConfig,omitempty" tf:"tls_config,omitempty"`
 
-	// The template selection expression for the integration.
+	// Template selection expression for the integration.
 	// +kubebuilder:validation:Optional
 	TemplateSelectionExpression *string `json:"templateSelectionExpression,omitempty" tf:"template_selection_expression,omitempty"`
 
-	// Custom timeout between 50 and 29,000 milliseconds for WebSocket APIs and between 50 and 30,000 milliseconds for HTTP APIs.
-	// The default timeout is 29 seconds for WebSocket APIs and 30 seconds for HTTP APIs.
+	// Custom timeout between 50 and 29,000 milliseconds for WebSocket APIs and between 50 and 30,000 milliseconds for HTTP APIs. The default timeout is 29 seconds for WebSocket APIs and 30 seconds for HTTP APIs.
 	// +kubebuilder:validation:Optional
 	TimeoutMilliseconds *float64 `json:"timeoutMilliseconds,omitempty" tf:"timeout_milliseconds,omitempty"`
 }
 
 type ResponseParametersInitParameters struct {
 
-	// Key-value map. The key of this map identifies the location of the request parameter to change, and how to change it. The corresponding value specifies the new data for the parameter.
-	// See the Amazon API Gateway Developer Guide for details.
+	// Key-value map. The key of this map identifies the location of the request parameter to change, and how to change it. The corresponding value specifies the new data for the parameter. See the Amazon API Gateway Developer Guide for details.
 	// +mapType=granular
 	Mappings map[string]*string `json:"mappings,omitempty" tf:"mappings,omitempty"`
 
@@ -335,8 +313,7 @@ type ResponseParametersInitParameters struct {
 
 type ResponseParametersObservation struct {
 
-	// Key-value map. The key of this map identifies the location of the request parameter to change, and how to change it. The corresponding value specifies the new data for the parameter.
-	// See the Amazon API Gateway Developer Guide for details.
+	// Key-value map. The key of this map identifies the location of the request parameter to change, and how to change it. The corresponding value specifies the new data for the parameter. See the Amazon API Gateway Developer Guide for details.
 	// +mapType=granular
 	Mappings map[string]*string `json:"mappings,omitempty" tf:"mappings,omitempty"`
 
@@ -346,8 +323,7 @@ type ResponseParametersObservation struct {
 
 type ResponseParametersParameters struct {
 
-	// Key-value map. The key of this map identifies the location of the request parameter to change, and how to change it. The corresponding value specifies the new data for the parameter.
-	// See the Amazon API Gateway Developer Guide for details.
+	// Key-value map. The key of this map identifies the location of the request parameter to change, and how to change it. The corresponding value specifies the new data for the parameter. See the Amazon API Gateway Developer Guide for details.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Mappings map[string]*string `json:"mappings" tf:"mappings,omitempty"`

@@ -21,11 +21,13 @@ type DomainValidationRecordsObservation struct {
 	// Domain name (e.g., example.com) for your SSL/TLS certificate.
 	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
 
-	// SSL/TLS certificate name.
+	// Name of the DNS record to create to validate the certificate.
 	ResourceRecordName *string `json:"resourceRecordName,omitempty" tf:"resource_record_name,omitempty"`
 
+	// Type of DNS record to create to validate the certificate.
 	ResourceRecordType *string `json:"resourceRecordType,omitempty" tf:"resource_record_type,omitempty"`
 
+	// Value of the DNS record to create to validate the certificate.
 	ResourceRecordValue *string `json:"resourceRecordValue,omitempty" tf:"resource_record_value,omitempty"`
 }
 
@@ -53,7 +55,7 @@ type LBCertificateObservation struct {
 	// Domain name (e.g., example.com) for your SSL/TLS certificate.
 	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
 
-	// Set of domain validation objects which can be used to complete certificate validation. Can have more than one element, e.g., if SANs are defined.
+	// Set of domain validation objects which can be used to complete certificate validation. Can have more than one element, e.g., if SANs are defined. Each element contains the following attributes:
 	DomainValidationRecords []DomainValidationRecordsObservation `json:"domainValidationRecords,omitempty" tf:"domain_validation_records,omitempty"`
 
 	// Combination of attributes to create a unique id: lb_name,name

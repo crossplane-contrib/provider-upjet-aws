@@ -44,15 +44,13 @@ type AccessLogSettingsParameters struct {
 
 type DefaultRouteSettingsInitParameters struct {
 
-	// Whether data trace logging is enabled for the default route. Affects the log entries pushed to Amazon CloudWatch Logs.
-	// Defaults to false. Supported only for WebSocket APIs.
+	// Whether data trace logging is enabled for the default route. Affects the log entries pushed to Amazon CloudWatch Logs. Defaults to false. Supported only for WebSocket APIs.
 	DataTraceEnabled *bool `json:"dataTraceEnabled,omitempty" tf:"data_trace_enabled,omitempty"`
 
 	// Whether detailed metrics are enabled for the default route. Defaults to false.
 	DetailedMetricsEnabled *bool `json:"detailedMetricsEnabled,omitempty" tf:"detailed_metrics_enabled,omitempty"`
 
-	// Logging level for the default route. Affects the log entries pushed to Amazon CloudWatch Logs.
-	// Valid values: ERROR, INFO, OFF. Defaults to OFF. Supported only for WebSocket APIs.
+	// Logging level for the default route. Affects the log entries pushed to Amazon CloudWatch Logs. Valid values: ERROR, INFO, OFF. Defaults to OFF. Supported only for WebSocket APIs.
 	LoggingLevel *string `json:"loggingLevel,omitempty" tf:"logging_level,omitempty"`
 
 	// Throttling burst limit for the default route.
@@ -64,15 +62,13 @@ type DefaultRouteSettingsInitParameters struct {
 
 type DefaultRouteSettingsObservation struct {
 
-	// Whether data trace logging is enabled for the default route. Affects the log entries pushed to Amazon CloudWatch Logs.
-	// Defaults to false. Supported only for WebSocket APIs.
+	// Whether data trace logging is enabled for the default route. Affects the log entries pushed to Amazon CloudWatch Logs. Defaults to false. Supported only for WebSocket APIs.
 	DataTraceEnabled *bool `json:"dataTraceEnabled,omitempty" tf:"data_trace_enabled,omitempty"`
 
 	// Whether detailed metrics are enabled for the default route. Defaults to false.
 	DetailedMetricsEnabled *bool `json:"detailedMetricsEnabled,omitempty" tf:"detailed_metrics_enabled,omitempty"`
 
-	// Logging level for the default route. Affects the log entries pushed to Amazon CloudWatch Logs.
-	// Valid values: ERROR, INFO, OFF. Defaults to OFF. Supported only for WebSocket APIs.
+	// Logging level for the default route. Affects the log entries pushed to Amazon CloudWatch Logs. Valid values: ERROR, INFO, OFF. Defaults to OFF. Supported only for WebSocket APIs.
 	LoggingLevel *string `json:"loggingLevel,omitempty" tf:"logging_level,omitempty"`
 
 	// Throttling burst limit for the default route.
@@ -84,8 +80,7 @@ type DefaultRouteSettingsObservation struct {
 
 type DefaultRouteSettingsParameters struct {
 
-	// Whether data trace logging is enabled for the default route. Affects the log entries pushed to Amazon CloudWatch Logs.
-	// Defaults to false. Supported only for WebSocket APIs.
+	// Whether data trace logging is enabled for the default route. Affects the log entries pushed to Amazon CloudWatch Logs. Defaults to false. Supported only for WebSocket APIs.
 	// +kubebuilder:validation:Optional
 	DataTraceEnabled *bool `json:"dataTraceEnabled,omitempty" tf:"data_trace_enabled,omitempty"`
 
@@ -93,8 +88,7 @@ type DefaultRouteSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	DetailedMetricsEnabled *bool `json:"detailedMetricsEnabled,omitempty" tf:"detailed_metrics_enabled,omitempty"`
 
-	// Logging level for the default route. Affects the log entries pushed to Amazon CloudWatch Logs.
-	// Valid values: ERROR, INFO, OFF. Defaults to OFF. Supported only for WebSocket APIs.
+	// Logging level for the default route. Affects the log entries pushed to Amazon CloudWatch Logs. Valid values: ERROR, INFO, OFF. Defaults to OFF. Supported only for WebSocket APIs.
 	// +kubebuilder:validation:Optional
 	LoggingLevel *string `json:"loggingLevel,omitempty" tf:"logging_level,omitempty"`
 
@@ -109,15 +103,13 @@ type DefaultRouteSettingsParameters struct {
 
 type RouteSettingsInitParameters struct {
 
-	// Whether data trace logging is enabled for the route. Affects the log entries pushed to Amazon CloudWatch Logs.
-	// Defaults to false. Supported only for WebSocket APIs.
+	// Whether data trace logging is enabled for the route. Affects the log entries pushed to Amazon CloudWatch Logs. Defaults to false. Supported only for WebSocket APIs.
 	DataTraceEnabled *bool `json:"dataTraceEnabled,omitempty" tf:"data_trace_enabled,omitempty"`
 
 	// Whether detailed metrics are enabled for the route. Defaults to false.
 	DetailedMetricsEnabled *bool `json:"detailedMetricsEnabled,omitempty" tf:"detailed_metrics_enabled,omitempty"`
 
-	// Logging level for the route. Affects the log entries pushed to Amazon CloudWatch Logs.
-	// Valid values: ERROR, INFO, OFF. Defaults to OFF. Supported only for WebSocket APIs.
+	// Logging level for the route. Affects the log entries pushed to Amazon CloudWatch Logs. Valid values: ERROR, INFO, OFF. Defaults to OFF. Supported only for WebSocket APIs.
 	LoggingLevel *string `json:"loggingLevel,omitempty" tf:"logging_level,omitempty"`
 
 	// Route key.
@@ -132,15 +124,13 @@ type RouteSettingsInitParameters struct {
 
 type RouteSettingsObservation struct {
 
-	// Whether data trace logging is enabled for the route. Affects the log entries pushed to Amazon CloudWatch Logs.
-	// Defaults to false. Supported only for WebSocket APIs.
+	// Whether data trace logging is enabled for the route. Affects the log entries pushed to Amazon CloudWatch Logs. Defaults to false. Supported only for WebSocket APIs.
 	DataTraceEnabled *bool `json:"dataTraceEnabled,omitempty" tf:"data_trace_enabled,omitempty"`
 
 	// Whether detailed metrics are enabled for the route. Defaults to false.
 	DetailedMetricsEnabled *bool `json:"detailedMetricsEnabled,omitempty" tf:"detailed_metrics_enabled,omitempty"`
 
-	// Logging level for the route. Affects the log entries pushed to Amazon CloudWatch Logs.
-	// Valid values: ERROR, INFO, OFF. Defaults to OFF. Supported only for WebSocket APIs.
+	// Logging level for the route. Affects the log entries pushed to Amazon CloudWatch Logs. Valid values: ERROR, INFO, OFF. Defaults to OFF. Supported only for WebSocket APIs.
 	LoggingLevel *string `json:"loggingLevel,omitempty" tf:"logging_level,omitempty"`
 
 	// Route key.
@@ -155,8 +145,7 @@ type RouteSettingsObservation struct {
 
 type RouteSettingsParameters struct {
 
-	// Whether data trace logging is enabled for the route. Affects the log entries pushed to Amazon CloudWatch Logs.
-	// Defaults to false. Supported only for WebSocket APIs.
+	// Whether data trace logging is enabled for the route. Affects the log entries pushed to Amazon CloudWatch Logs. Defaults to false. Supported only for WebSocket APIs.
 	// +kubebuilder:validation:Optional
 	DataTraceEnabled *bool `json:"dataTraceEnabled,omitempty" tf:"data_trace_enabled,omitempty"`
 
@@ -164,8 +153,7 @@ type RouteSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	DetailedMetricsEnabled *bool `json:"detailedMetricsEnabled,omitempty" tf:"detailed_metrics_enabled,omitempty"`
 
-	// Logging level for the route. Affects the log entries pushed to Amazon CloudWatch Logs.
-	// Valid values: ERROR, INFO, OFF. Defaults to OFF. Supported only for WebSocket APIs.
+	// Logging level for the route. Affects the log entries pushed to Amazon CloudWatch Logs. Valid values: ERROR, INFO, OFF. Defaults to OFF. Supported only for WebSocket APIs.
 	// +kubebuilder:validation:Optional
 	LoggingLevel *string `json:"loggingLevel,omitempty" tf:"logging_level,omitempty"`
 
@@ -196,15 +184,13 @@ type StageInitParameters struct {
 	// +kubebuilder:validation:Optional
 	APIIDSelector *v2.NamespacedSelector `json:"apiIdSelector,omitempty" tf:"-"`
 
-	// Settings for logging access in this stage.
-	// Use the aws_api_gateway_account resource to configure permissions for CloudWatch Logging.
+	// Settings for logging access in this stage. Use the aws_api_gateway_account resource to configure permissions for CloudWatch Logging.
 	AccessLogSettings *AccessLogSettingsInitParameters `json:"accessLogSettings,omitempty" tf:"access_log_settings,omitempty"`
 
 	// Whether updates to an API automatically trigger a new deployment. Defaults to false. Applicable for HTTP APIs.
 	AutoDeploy *bool `json:"autoDeploy,omitempty" tf:"auto_deploy,omitempty"`
 
-	// Identifier of a client certificate for the stage. Use the aws_api_gateway_client_certificate resource to configure a client certificate.
-	// Supported only for WebSocket APIs.
+	// Identifier of a client certificate for the stage. Use the aws_api_gateway_client_certificate resource to configure a client certificate. Supported only for WebSocket APIs.
 	ClientCertificateID *string `json:"clientCertificateId,omitempty" tf:"client_certificate_id,omitempty"`
 
 	// Default route settings for the stage.
@@ -242,8 +228,7 @@ type StageObservation struct {
 	// API identifier.
 	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
 
-	// Settings for logging access in this stage.
-	// Use the aws_api_gateway_account resource to configure permissions for CloudWatch Logging.
+	// Settings for logging access in this stage. Use the aws_api_gateway_account resource to configure permissions for CloudWatch Logging.
 	AccessLogSettings *AccessLogSettingsObservation `json:"accessLogSettings,omitempty" tf:"access_log_settings,omitempty"`
 
 	// ARN of the stage.
@@ -252,8 +237,7 @@ type StageObservation struct {
 	// Whether updates to an API automatically trigger a new deployment. Defaults to false. Applicable for HTTP APIs.
 	AutoDeploy *bool `json:"autoDeploy,omitempty" tf:"auto_deploy,omitempty"`
 
-	// Identifier of a client certificate for the stage. Use the aws_api_gateway_client_certificate resource to configure a client certificate.
-	// Supported only for WebSocket APIs.
+	// Identifier of a client certificate for the stage. Use the aws_api_gateway_client_certificate resource to configure a client certificate. Supported only for WebSocket APIs.
 	ClientCertificateID *string `json:"clientCertificateId,omitempty" tf:"client_certificate_id,omitempty"`
 
 	// Default route settings for the stage.
@@ -265,16 +249,13 @@ type StageObservation struct {
 	// Description for the stage. Must be less than or equal to 1024 characters in length.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// ARN prefix to be used in an aws_lambda_permission's source_arn attribute.
-	// For WebSocket APIs this attribute can additionally be used in an aws_iam_policy to authorize access to the @connections API.
-	// See the Amazon API Gateway Developer Guide for details.
+	// ARN prefix to be used in an aws_lambda_permission's source_arn attribute. For WebSocket APIs this attribute can additionally be used in an aws_iam_policy to authorize access to the @connections API. See the Amazon API Gateway Developer Guide for details.
 	ExecutionArn *string `json:"executionArn,omitempty" tf:"execution_arn,omitempty"`
 
 	// Stage identifier.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// URL to invoke the API pointing to the stage,
-	// e.g., wss://z4675bid1j.execute-api.eu-west-2.amazonaws.com/example-stage, or https://z4675bid1j.execute-api.eu-west-2.amazonaws.com/
+	// URL to invoke the API pointing to the stage, e.g., wss://z4675bid1j.execute-api.eu-west-2.amazonaws.com/example-stage, or https://z4675bid1j.execute-api.eu-west-2.amazonaws.com/
 	InvokeURL *string `json:"invokeUrl,omitempty" tf:"invoke_url,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -312,8 +293,7 @@ type StageParameters struct {
 	// +kubebuilder:validation:Optional
 	APIIDSelector *v2.NamespacedSelector `json:"apiIdSelector,omitempty" tf:"-"`
 
-	// Settings for logging access in this stage.
-	// Use the aws_api_gateway_account resource to configure permissions for CloudWatch Logging.
+	// Settings for logging access in this stage. Use the aws_api_gateway_account resource to configure permissions for CloudWatch Logging.
 	// +kubebuilder:validation:Optional
 	AccessLogSettings *AccessLogSettingsParameters `json:"accessLogSettings,omitempty" tf:"access_log_settings,omitempty"`
 
@@ -321,8 +301,7 @@ type StageParameters struct {
 	// +kubebuilder:validation:Optional
 	AutoDeploy *bool `json:"autoDeploy,omitempty" tf:"auto_deploy,omitempty"`
 
-	// Identifier of a client certificate for the stage. Use the aws_api_gateway_client_certificate resource to configure a client certificate.
-	// Supported only for WebSocket APIs.
+	// Identifier of a client certificate for the stage. Use the aws_api_gateway_client_certificate resource to configure a client certificate. Supported only for WebSocket APIs.
 	// +kubebuilder:validation:Optional
 	ClientCertificateID *string `json:"clientCertificateId,omitempty" tf:"client_certificate_id,omitempty"`
 

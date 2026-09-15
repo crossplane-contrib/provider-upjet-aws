@@ -27,13 +27,16 @@ type PodIdentityAssociationInitParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	ClusterNameSelector *v2.NamespacedSelector `json:"clusterNameSelector,omitempty" tf:"-"`
 
-	// Disable the tags that are automatically added to role session by Amazon EKS.
+	// Disable the tags that are automatically added to role session by Amazon EKS. Must be set to true when policy is specified.
 	DisableSessionTags *bool `json:"disableSessionTags,omitempty" tf:"disable_session_tags,omitempty"`
 
 	// The name of the Kubernetes namespace inside the cluster to create the association in. The service account and the pods that use the service account must be in this namespace.
 	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the IAM role to associate with the service account. The EKS Pod Identity agent manages credentials to assume this role for applications in the containers in the pods that use this service account.
+	// An IAM policy in JSON format (as an escaped string) that applies additional restrictions to this Pod Identity association beyond the IAM policies attached to the IAM role. The effective permissions are the intersection of the role's policies and this policy, allowing you to enforce least privilege across multiple associations that share the same role. Requires disable_session_tags = true.
+	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
+
+	// ARN of the IAM role to associate with the service account. The EKS Pod Identity agent manages credentials to assume this role for applications in the containers in the pods that use this service account.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
@@ -53,7 +56,7 @@ type PodIdentityAssociationInitParameters_2 struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the IAM role to be chained to the the IAM role specified as role_arn.
+	// ARN of the IAM role to be chained to the the IAM role specified as role_arn.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	TargetRoleArn *string `json:"targetRoleArn,omitempty" tf:"target_role_arn,omitempty"`
@@ -69,7 +72,7 @@ type PodIdentityAssociationInitParameters_2 struct {
 
 type PodIdentityAssociationObservation_2 struct {
 
-	// The Amazon Resource Name (ARN) of the association.
+	// ARN of the association.
 	AssociationArn *string `json:"associationArn,omitempty" tf:"association_arn,omitempty"`
 
 	// The ID of the association.
@@ -78,7 +81,7 @@ type PodIdentityAssociationObservation_2 struct {
 	// The name of the cluster to create the association in.
 	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
 
-	// Disable the tags that are automatically added to role session by Amazon EKS.
+	// Disable the tags that are automatically added to role session by Amazon EKS. Must be set to true when policy is specified.
 	DisableSessionTags *bool `json:"disableSessionTags,omitempty" tf:"disable_session_tags,omitempty"`
 
 	// The unique identifier for this association for a target IAM role. You put this value in the trust policy of the target role, in a Condition to match the sts.ExternalId.
@@ -89,11 +92,14 @@ type PodIdentityAssociationObservation_2 struct {
 	// The name of the Kubernetes namespace inside the cluster to create the association in. The service account and the pods that use the service account must be in this namespace.
 	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
 
+	// An IAM policy in JSON format (as an escaped string) that applies additional restrictions to this Pod Identity association beyond the IAM policies attached to the IAM role. The effective permissions are the intersection of the role's policies and this policy, allowing you to enforce least privilege across multiple associations that share the same role. Requires disable_session_tags = true.
+	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
+
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the IAM role to associate with the service account. The EKS Pod Identity agent manages credentials to assume this role for applications in the containers in the pods that use this service account.
+	// ARN of the IAM role to associate with the service account. The EKS Pod Identity agent manages credentials to assume this role for applications in the containers in the pods that use this service account.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
 	// The name of the Kubernetes service account inside the cluster to associate the IAM credentials with.
@@ -107,7 +113,7 @@ type PodIdentityAssociationObservation_2 struct {
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the IAM role to be chained to the the IAM role specified as role_arn.
+	// ARN of the IAM role to be chained to the the IAM role specified as role_arn.
 	TargetRoleArn *string `json:"targetRoleArn,omitempty" tf:"target_role_arn,omitempty"`
 }
 
@@ -126,7 +132,7 @@ type PodIdentityAssociationParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	ClusterNameSelector *v2.NamespacedSelector `json:"clusterNameSelector,omitempty" tf:"-"`
 
-	// Disable the tags that are automatically added to role session by Amazon EKS.
+	// Disable the tags that are automatically added to role session by Amazon EKS. Must be set to true when policy is specified.
 	// +kubebuilder:validation:Optional
 	DisableSessionTags *bool `json:"disableSessionTags,omitempty" tf:"disable_session_tags,omitempty"`
 
@@ -134,12 +140,16 @@ type PodIdentityAssociationParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
 
+	// An IAM policy in JSON format (as an escaped string) that applies additional restrictions to this Pod Identity association beyond the IAM policies attached to the IAM role. The effective permissions are the intersection of the role's policies and this policy, allowing you to enforce least privilege across multiple associations that share the same role. Requires disable_session_tags = true.
+	// +kubebuilder:validation:Optional
+	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
+
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the IAM role to associate with the service account. The EKS Pod Identity agent manages credentials to assume this role for applications in the containers in the pods that use this service account.
+	// ARN of the IAM role to associate with the service account. The EKS Pod Identity agent manages credentials to assume this role for applications in the containers in the pods that use this service account.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -162,7 +172,7 @@ type PodIdentityAssociationParameters_2 struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the IAM role to be chained to the the IAM role specified as role_arn.
+	// ARN of the IAM role to be chained to the the IAM role specified as role_arn.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional

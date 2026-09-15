@@ -44,7 +44,7 @@ type ProxyEndpointInitParameters struct {
 
 type ProxyEndpointObservation struct {
 
-	// The Amazon Resource Name (ARN) for the proxy endpoint.
+	// ARN for the proxy endpoint.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The name of the DB proxy associated with the DB proxy endpoint that you create.

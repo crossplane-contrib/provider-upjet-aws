@@ -194,8 +194,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: Amazon Resource Name (ARN) of the Redshift Snapshot
-                      Schedule.
+                    description: ARN of the Redshift Snapshot Schedule.
                     type: string
                   definitions:
                     description: The definition of the snapshot schedule. The definition

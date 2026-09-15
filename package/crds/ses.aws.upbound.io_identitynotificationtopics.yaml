@@ -75,9 +75,9 @@ spec:
               forProvider:
                 properties:
                   identity:
-                    description: The identity for which the Amazon SNS topic will
-                      be set. You can specify an identity by using its name or by
-                      using its Amazon Resource Name (ARN).
+                    description: Identity for which the Amazon SNS topic will be set.
+                      You can specify an identity by using its name or by using its
+                      ARN.
                     type: string
                   identityRef:
                     description: Reference to a DomainIdentity in ses to populate
@@ -160,8 +160,8 @@ spec:
                       in SNS notifications of this type. false by default.
                     type: boolean
                   notificationType:
-                    description: 'The type of notifications that will be published
-                      to the specified Amazon SNS topic. Valid Values: Bounce, Complaint
+                    description: 'Type of notifications that will be published to
+                      the specified Amazon SNS topic. Valid Values: Bounce, Complaint
                       or Delivery.'
                     type: string
                   region:
@@ -170,8 +170,8 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   topicArn:
-                    description: The Amazon Resource Name (ARN) of the Amazon SNS
-                      topic. Can be set to "" (an empty string) to disable publishing.
+                    description: ARN of the Amazon SNS topic. Can be set to "" (an
+                      empty string) to disable publishing.
                     type: string
                   topicArnRef:
                     description: Reference to a Topic in sns to populate topicArn.
@@ -264,9 +264,9 @@ spec:
                   autoscaler.
                 properties:
                   identity:
-                    description: The identity for which the Amazon SNS topic will
-                      be set. You can specify an identity by using its name or by
-                      using its Amazon Resource Name (ARN).
+                    description: Identity for which the Amazon SNS topic will be set.
+                      You can specify an identity by using its name or by using its
+                      ARN.
                     type: string
                   identityRef:
                     description: Reference to a DomainIdentity in ses to populate
@@ -349,13 +349,13 @@ spec:
                       in SNS notifications of this type. false by default.
                     type: boolean
                   notificationType:
-                    description: 'The type of notifications that will be published
-                      to the specified Amazon SNS topic. Valid Values: Bounce, Complaint
+                    description: 'Type of notifications that will be published to
+                      the specified Amazon SNS topic. Valid Values: Bounce, Complaint
                       or Delivery.'
                     type: string
                   topicArn:
-                    description: The Amazon Resource Name (ARN) of the Amazon SNS
-                      topic. Can be set to "" (an empty string) to disable publishing.
+                    description: ARN of the Amazon SNS topic. Can be set to "" (an
+                      empty string) to disable publishing.
                     type: string
                   topicArnRef:
                     description: Reference to a Topic in sns to populate topicArn.
@@ -532,17 +532,17 @@ spec:
                   id:
                     type: string
                   identity:
-                    description: The identity for which the Amazon SNS topic will
-                      be set. You can specify an identity by using its name or by
-                      using its Amazon Resource Name (ARN).
+                    description: Identity for which the Amazon SNS topic will be set.
+                      You can specify an identity by using its name or by using its
+                      ARN.
                     type: string
                   includeOriginalHeaders:
                     description: Whether SES should include original email headers
                       in SNS notifications of this type. false by default.
                     type: boolean
                   notificationType:
-                    description: 'The type of notifications that will be published
-                      to the specified Amazon SNS topic. Valid Values: Bounce, Complaint
+                    description: 'Type of notifications that will be published to
+                      the specified Amazon SNS topic. Valid Values: Bounce, Complaint
                       or Delivery.'
                     type: string
                   region:
@@ -551,8 +551,8 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   topicArn:
-                    description: The Amazon Resource Name (ARN) of the Amazon SNS
-                      topic. Can be set to "" (an empty string) to disable publishing.
+                    description: ARN of the Amazon SNS topic. Can be set to "" (an
+                      empty string) to disable publishing.
                     type: string
                 type: object
               conditions:

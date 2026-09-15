@@ -60,13 +60,13 @@ spec:
               forProvider:
                 properties:
                   description:
-                    description: The description of the report plan with a maximum
-                      of 1,024 characters
+                    description: Description of the report plan with a maximum of
+                      1,024 characters.
                     type: string
                   name:
-                    description: The unique name of the report plan. The name must
-                      be between 1 and 256 characters, starting with a letter, and
-                      consisting of letters, numbers, and underscores.
+                    description: Unique name of the report plan. The name must be
+                      between 1 and 256 characters, starting with a letter, and consisting
+                      of letters, numbers, and underscores.
                     type: string
                   region:
                     description: |-
@@ -74,68 +74,66 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   reportDeliveryChannel:
-                    description: An object that contains information about where and
+                    description: Object that contains information about where and
                       how to deliver your reports, specifically your Amazon S3 bucket
                       name, S3 key prefix, and the formats of your reports. Detailed
                       below.
                     properties:
                       formats:
-                        description: 'A list of the format of your reports: CSV, JSON,
+                        description: 'List of the format of your reports: CSV, JSON,
                           or both. If not specified, the default format is CSV.'
                         items:
                           type: string
                         type: array
                         x-kubernetes-list-type: set
                       s3BucketName:
-                        description: The unique name of the S3 bucket that receives
-                          your reports.
+                        description: Unique name of the S3 bucket that receives your
+                          reports.
                         type: string
                       s3KeyPrefix:
-                        description: 'The prefix for where Backup Audit Manager delivers
+                        description: 'Prefix for where Backup Audit Manager delivers
                           your reports to Amazon S3. The prefix is this part of the
                           following path: s3://your-bucket-name/prefix/Backup/us-west-2/year/month/day/report-name.
                           If not specified, there is no prefix.'
                         type: string
                     type: object
                   reportSetting:
-                    description: An object that identifies the report template for
-                      the report. Reports are built using a report template. Detailed
+                    description: Object that identifies the report template for the
+                      report. Reports are built using a report template. Detailed
                       below.
                     properties:
                       accounts:
-                        description: Specifies the list of accounts a report covers.
+                        description: List of accounts a report covers.
                         items:
                           type: string
                         type: array
                         x-kubernetes-list-type: set
                       frameworkArns:
-                        description: Specifies the Amazon Resource Names (ARNs) of
-                          the frameworks a report covers.
+                        description: ARNs of the frameworks a report covers.
                         items:
                           type: string
                         type: array
                         x-kubernetes-list-type: set
                       numberOfFrameworks:
-                        description: Specifies the number of frameworks a report covers.
+                        description: Number of frameworks a report covers.
                         type: number
                       organizationUnits:
-                        description: Specifies the list of Organizational Units a
-                          report covers.
+                        description: List of Organizational Units a report covers.
                         items:
                           type: string
                         type: array
                         x-kubernetes-list-type: set
                       regions:
-                        description: Specifies the list of regions a report covers.
+                        description: List of regions a report covers.
                         items:
                           type: string
                         type: array
                         x-kubernetes-list-type: set
                       reportTemplate:
-                        description: 'Identifies the report template for the report.
-                          Reports are built using a report template. The report templates
-                          are: RESOURCE_COMPLIANCE_REPORT | CONTROL_COMPLIANCE_REPORT
-                          | BACKUP_JOB_REPORT | COPY_JOB_REPORT | RESTORE_JOB_REPORT.'
+                        description: 'Report template for the report. Reports are
+                          built using a report template. The report templates are:
+                          RESOURCE_COMPLIANCE_REPORT | CONTROL_COMPLIANCE_REPORT |
+                          BACKUP_JOB_REPORT | COPY_JOB_REPORT | RESTORE_JOB_REPORT.'
                         type: string
                     type: object
                   tags:
@@ -161,77 +159,75 @@ spec:
                   autoscaler.
                 properties:
                   description:
-                    description: The description of the report plan with a maximum
-                      of 1,024 characters
+                    description: Description of the report plan with a maximum of
+                      1,024 characters.
                     type: string
                   name:
-                    description: The unique name of the report plan. The name must
-                      be between 1 and 256 characters, starting with a letter, and
-                      consisting of letters, numbers, and underscores.
+                    description: Unique name of the report plan. The name must be
+                      between 1 and 256 characters, starting with a letter, and consisting
+                      of letters, numbers, and underscores.
                     type: string
                   reportDeliveryChannel:
-                    description: An object that contains information about where and
+                    description: Object that contains information about where and
                       how to deliver your reports, specifically your Amazon S3 bucket
                       name, S3 key prefix, and the formats of your reports. Detailed
                       below.
                     properties:
                       formats:
-                        description: 'A list of the format of your reports: CSV, JSON,
+                        description: 'List of the format of your reports: CSV, JSON,
                           or both. If not specified, the default format is CSV.'
                         items:
                           type: string
                         type: array
                         x-kubernetes-list-type: set
                       s3BucketName:
-                        description: The unique name of the S3 bucket that receives
-                          your reports.
+                        description: Unique name of the S3 bucket that receives your
+                          reports.
                         type: string
                       s3KeyPrefix:
-                        description: 'The prefix for where Backup Audit Manager delivers
+                        description: 'Prefix for where Backup Audit Manager delivers
                           your reports to Amazon S3. The prefix is this part of the
                           following path: s3://your-bucket-name/prefix/Backup/us-west-2/year/month/day/report-name.
                           If not specified, there is no prefix.'
                         type: string
                     type: object
                   reportSetting:
-                    description: An object that identifies the report template for
-                      the report. Reports are built using a report template. Detailed
+                    description: Object that identifies the report template for the
+                      report. Reports are built using a report template. Detailed
                       below.
                     properties:
                       accounts:
-                        description: Specifies the list of accounts a report covers.
+                        description: List of accounts a report covers.
                         items:
                           type: string
                         type: array
                         x-kubernetes-list-type: set
                       frameworkArns:
-                        description: Specifies the Amazon Resource Names (ARNs) of
-                          the frameworks a report covers.
+                        description: ARNs of the frameworks a report covers.
                         items:
                           type: string
                         type: array
                         x-kubernetes-list-type: set
                       numberOfFrameworks:
-                        description: Specifies the number of frameworks a report covers.
+                        description: Number of frameworks a report covers.
                         type: number
                       organizationUnits:
-                        description: Specifies the list of Organizational Units a
-                          report covers.
+                        description: List of Organizational Units a report covers.
                         items:
                           type: string
                         type: array
                         x-kubernetes-list-type: set
                       regions:
-                        description: Specifies the list of regions a report covers.
+                        description: List of regions a report covers.
                         items:
                           type: string
                         type: array
                         x-kubernetes-list-type: set
                       reportTemplate:
-                        description: 'Identifies the report template for the report.
-                          Reports are built using a report template. The report templates
-                          are: RESOURCE_COMPLIANCE_REPORT | CONTROL_COMPLIANCE_REPORT
-                          | BACKUP_JOB_REPORT | COPY_JOB_REPORT | RESTORE_JOB_REPORT.'
+                        description: 'Report template for the report. Reports are
+                          built using a report template. The report templates are:
+                          RESOURCE_COMPLIANCE_REPORT | CONTROL_COMPLIANCE_REPORT |
+                          BACKUP_JOB_REPORT | COPY_JOB_REPORT | RESTORE_JOB_REPORT.'
                         type: string
                     type: object
                   tags:
@@ -318,28 +314,28 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The ARN of the backup report plan.
+                    description: ARN of the backup report plan.
                     type: string
                   creationTime:
-                    description: The date and time that a report plan is created,
-                      in Unix format and Coordinated Universal Time (UTC).
+                    description: Date and time that a report plan is created, in Unix
+                      format and Coordinated Universal Time (UTC).
                     type: string
                   deploymentStatus:
-                    description: 'The deployment status of a report plan. The statuses
+                    description: 'Deployment status of a report plan. The statuses
                       are: CREATE_IN_PROGRESS | UPDATE_IN_PROGRESS | DELETE_IN_PROGRESS
                       | COMPLETED.'
                     type: string
                   description:
-                    description: The description of the report plan with a maximum
-                      of 1,024 characters
+                    description: Description of the report plan with a maximum of
+                      1,024 characters.
                     type: string
                   id:
-                    description: The id of the backup report plan.
+                    description: ID of the backup report plan.
                     type: string
                   name:
-                    description: The unique name of the report plan. The name must
-                      be between 1 and 256 characters, starting with a letter, and
-                      consisting of letters, numbers, and underscores.
+                    description: Unique name of the report plan. The name must be
+                      between 1 and 256 characters, starting with a letter, and consisting
+                      of letters, numbers, and underscores.
                     type: string
                   region:
                     description: |-
@@ -347,68 +343,66 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   reportDeliveryChannel:
-                    description: An object that contains information about where and
+                    description: Object that contains information about where and
                       how to deliver your reports, specifically your Amazon S3 bucket
                       name, S3 key prefix, and the formats of your reports. Detailed
                       below.
                     properties:
                       formats:
-                        description: 'A list of the format of your reports: CSV, JSON,
+                        description: 'List of the format of your reports: CSV, JSON,
                           or both. If not specified, the default format is CSV.'
                         items:
                           type: string
                         type: array
                         x-kubernetes-list-type: set
                       s3BucketName:
-                        description: The unique name of the S3 bucket that receives
-                          your reports.
+                        description: Unique name of the S3 bucket that receives your
+                          reports.
                         type: string
                       s3KeyPrefix:
-                        description: 'The prefix for where Backup Audit Manager delivers
+                        description: 'Prefix for where Backup Audit Manager delivers
                           your reports to Amazon S3. The prefix is this part of the
                           following path: s3://your-bucket-name/prefix/Backup/us-west-2/year/month/day/report-name.
                           If not specified, there is no prefix.'
                         type: string
                     type: object
                   reportSetting:
-                    description: An object that identifies the report template for
-                      the report. Reports are built using a report template. Detailed
+                    description: Object that identifies the report template for the
+                      report. Reports are built using a report template. Detailed
                       below.
                     properties:
                       accounts:
-                        description: Specifies the list of accounts a report covers.
+                        description: List of accounts a report covers.
                         items:
                           type: string
                         type: array
                         x-kubernetes-list-type: set
                       frameworkArns:
-                        description: Specifies the Amazon Resource Names (ARNs) of
-                          the frameworks a report covers.
+                        description: ARNs of the frameworks a report covers.
                         items:
                           type: string
                         type: array
                         x-kubernetes-list-type: set
                       numberOfFrameworks:
-                        description: Specifies the number of frameworks a report covers.
+                        description: Number of frameworks a report covers.
                         type: number
                       organizationUnits:
-                        description: Specifies the list of Organizational Units a
-                          report covers.
+                        description: List of Organizational Units a report covers.
                         items:
                           type: string
                         type: array
                         x-kubernetes-list-type: set
                       regions:
-                        description: Specifies the list of regions a report covers.
+                        description: List of regions a report covers.
                         items:
                           type: string
                         type: array
                         x-kubernetes-list-type: set
                       reportTemplate:
-                        description: 'Identifies the report template for the report.
-                          Reports are built using a report template. The report templates
-                          are: RESOURCE_COMPLIANCE_REPORT | CONTROL_COMPLIANCE_REPORT
-                          | BACKUP_JOB_REPORT | COPY_JOB_REPORT | RESTORE_JOB_REPORT.'
+                        description: 'Report template for the report. Reports are
+                          built using a report template. The report templates are:
+                          RESOURCE_COMPLIANCE_REPORT | CONTROL_COMPLIANCE_REPORT |
+                          BACKUP_JOB_REPORT | COPY_JOB_REPORT | RESTORE_JOB_REPORT.'
                         type: string
                     type: object
                   tags:
@@ -420,9 +414,8 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
                 type: object

@@ -18,7 +18,7 @@ type TopicRuleDestinationInitParameters struct {
 	// Whether or not to enable the destination. Default: true.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Configuration of the virtual private cloud (VPC) connection. For more info, see the AWS documentation.
+	// Configuration of the VPC connection. For more info, see the AWS documentation.
 	VPCConfiguration *VPCConfigurationInitParameters `json:"vpcConfiguration,omitempty" tf:"vpc_configuration,omitempty"`
 }
 
@@ -36,7 +36,7 @@ type TopicRuleDestinationObservation struct {
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// Configuration of the virtual private cloud (VPC) connection. For more info, see the AWS documentation.
+	// Configuration of the VPC connection. For more info, see the AWS documentation.
 	VPCConfiguration *VPCConfigurationObservation `json:"vpcConfiguration,omitempty" tf:"vpc_configuration,omitempty"`
 }
 
@@ -51,7 +51,7 @@ type TopicRuleDestinationParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// Configuration of the virtual private cloud (VPC) connection. For more info, see the AWS documentation.
+	// Configuration of the VPC connection. For more info, see the AWS documentation.
 	// +kubebuilder:validation:Optional
 	VPCConfiguration *VPCConfigurationParameters `json:"vpcConfiguration,omitempty" tf:"vpc_configuration,omitempty"`
 }

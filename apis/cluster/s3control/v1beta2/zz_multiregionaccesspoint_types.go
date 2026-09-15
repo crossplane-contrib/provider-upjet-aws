@@ -15,61 +15,61 @@ import (
 
 type DetailsInitParameters struct {
 
-	// The name of the Multi-Region Access Point.
+	// Name of the Multi-Region Access Point.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Configuration block to manage the PublicAccessBlock configuration that you want to apply to this Multi-Region Access Point. You can enable the configuration options in any combination. See Public Access Block Configuration below for more details.
+	// Configuration block to manage the PublicAccessBlock configuration that you want to apply to this Multi-Region Access Point. You can enable the configuration options in any combination. See public_access_block Block below.
 	PublicAccessBlock *PublicAccessBlockInitParameters `json:"publicAccessBlock,omitempty" tf:"public_access_block,omitempty"`
 }
 
 type DetailsObservation struct {
 
-	// The name of the Multi-Region Access Point.
+	// Name of the Multi-Region Access Point.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Configuration block to manage the PublicAccessBlock configuration that you want to apply to this Multi-Region Access Point. You can enable the configuration options in any combination. See Public Access Block Configuration below for more details.
+	// Configuration block to manage the PublicAccessBlock configuration that you want to apply to this Multi-Region Access Point. You can enable the configuration options in any combination. See public_access_block Block below.
 	PublicAccessBlock *PublicAccessBlockObservation `json:"publicAccessBlock,omitempty" tf:"public_access_block,omitempty"`
 
-	// The Region configuration block to specify the bucket associated with the Multi-Region Access Point. See Region Configuration below for more details.
+	// Region configuration block to specify the bucket associated with the Multi-Region Access Point. See region Block below.
 	Region []RegionObservation `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type DetailsParameters struct {
 
-	// The name of the Multi-Region Access Point.
+	// Name of the Multi-Region Access Point.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// Configuration block to manage the PublicAccessBlock configuration that you want to apply to this Multi-Region Access Point. You can enable the configuration options in any combination. See Public Access Block Configuration below for more details.
+	// Configuration block to manage the PublicAccessBlock configuration that you want to apply to this Multi-Region Access Point. You can enable the configuration options in any combination. See public_access_block Block below.
 	// +kubebuilder:validation:Optional
 	PublicAccessBlock *PublicAccessBlockParameters `json:"publicAccessBlock,omitempty" tf:"public_access_block,omitempty"`
 
-	// The Region configuration block to specify the bucket associated with the Multi-Region Access Point. See Region Configuration below for more details.
+	// Region configuration block to specify the bucket associated with the Multi-Region Access Point. See region Block below.
 	// +kubebuilder:validation:Required
 	Region []RegionParameters `json:"region" tf:"region,omitempty"`
 }
 
 type MultiRegionAccessPointInitParameters struct {
 
-	// The AWS account ID for the owner of the buckets for which you want to create a Multi-Region Access Point.
+	// AWS account ID for the owner of the buckets for which you want to create a Multi-Region Access Point.
 	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
 
-	// A configuration block containing details about the Multi-Region Access Point. See Details Configuration Block below for more details
+	// Configuration block containing details about the Multi-Region Access Point. See details Block below.
 	Details *DetailsInitParameters `json:"details,omitempty" tf:"details,omitempty"`
 }
 
 type MultiRegionAccessPointObservation struct {
 
-	// The AWS account ID for the owner of the buckets for which you want to create a Multi-Region Access Point.
+	// AWS account ID for the owner of the buckets for which you want to create a Multi-Region Access Point.
 	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
 
 	// Alias for the Multi-Region Access Point.
 	Alias *string `json:"alias,omitempty" tf:"alias,omitempty"`
 
-	// Amazon Resource Name (ARN) of the Multi-Region Access Point.
+	// ARN of the Multi-Region Access Point.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// A configuration block containing details about the Multi-Region Access Point. See Details Configuration Block below for more details
+	// Configuration block containing details about the Multi-Region Access Point. See details Block below.
 	Details *DetailsObservation `json:"details,omitempty" tf:"details,omitempty"`
 
 	// DNS domain name of the S3 Multi-Region Access Point in the format alias.accesspoint.s3-global.amazonaws.com. For more information, see the documentation on Multi-Region Access Point Requests.
@@ -85,17 +85,17 @@ type MultiRegionAccessPointObservation struct {
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// Region Access Point. One of: READY, INCONSISTENT_ACROSS_REGIONS, CREATING, PARTIALLY_CREATED, PARTIALLY_DELETED, DELETING.
+	// Status of the Multi-Region Access Point. One of: READY, INCONSISTENT_ACROSS_REGIONS, CREATING, PARTIALLY_CREATED, PARTIALLY_DELETED, DELETING.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
 
 type MultiRegionAccessPointParameters struct {
 
-	// The AWS account ID for the owner of the buckets for which you want to create a Multi-Region Access Point.
+	// AWS account ID for the owner of the buckets for which you want to create a Multi-Region Access Point.
 	// +kubebuilder:validation:Optional
 	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
 
-	// A configuration block containing details about the Multi-Region Access Point. See Details Configuration Block below for more details
+	// Configuration block containing details about the Multi-Region Access Point. See details Block below.
 	// +kubebuilder:validation:Optional
 	Details *DetailsParameters `json:"details,omitempty" tf:"details,omitempty"`
 
@@ -107,61 +107,61 @@ type MultiRegionAccessPointParameters struct {
 
 type PublicAccessBlockInitParameters struct {
 
-	// Whether Amazon S3 should block public ACLs for buckets in this account. Defaults to true. Enabling this setting does not affect existing policies or ACLs. When set to true causes the following behavior:
+	// Whether Amazon S3 should block public ACLs for buckets in this account. Defaults to true. Enabling this setting does not affect existing policies or ACLs. When set to true, PUT Bucket acl and PUT Object acl calls fail if the specified ACL is public, PUT Object calls fail if the request includes a public ACL, and PUT Bucket calls fail if the request includes a public ACL.
 	BlockPublicAcls *bool `json:"blockPublicAcls,omitempty" tf:"block_public_acls,omitempty"`
 
-	// Whether Amazon S3 should block public bucket policies for buckets in this account. Defaults to true. Enabling this setting does not affect existing bucket policies. When set to true causes Amazon S3 to:
+	// Whether Amazon S3 should block public bucket policies for buckets in this account. Defaults to true. Enabling this setting does not affect existing bucket policies. When set to true, Amazon S3 rejects calls to PUT Bucket policy if the specified bucket policy allows public access.
 	BlockPublicPolicy *bool `json:"blockPublicPolicy,omitempty" tf:"block_public_policy,omitempty"`
 
-	// Whether Amazon S3 should ignore public ACLs for buckets in this account. Defaults to true. Enabling this setting does not affect the persistence of any existing ACLs and doesn't prevent new public ACLs from being set. When set to true causes Amazon S3 to:
+	// Whether Amazon S3 should ignore public ACLs for buckets in this account. Defaults to true. Enabling this setting does not affect the persistence of any existing ACLs and doesn't prevent new public ACLs from being set. When set to true, Amazon S3 ignores all public ACLs on buckets in this account and any objects that they contain.
 	IgnorePublicAcls *bool `json:"ignorePublicAcls,omitempty" tf:"ignore_public_acls,omitempty"`
 
-	// Whether Amazon S3 should restrict public bucket policies for buckets in this account. Defaults to true. Enabling this setting does not affect previously stored bucket policies, except that public and cross-account access within any public bucket policy, including non-public delegation to specific accounts, is blocked. When set to true:
+	// Whether Amazon S3 should restrict public bucket policies for buckets in this account. Defaults to true. Enabling this setting does not affect previously stored bucket policies, except that public and cross-account access within any public bucket policy, including non-public delegation to specific accounts, is blocked. When set to true, only the bucket owner and AWS Services can access buckets with public policies.
 	RestrictPublicBuckets *bool `json:"restrictPublicBuckets,omitempty" tf:"restrict_public_buckets,omitempty"`
 }
 
 type PublicAccessBlockObservation struct {
 
-	// Whether Amazon S3 should block public ACLs for buckets in this account. Defaults to true. Enabling this setting does not affect existing policies or ACLs. When set to true causes the following behavior:
+	// Whether Amazon S3 should block public ACLs for buckets in this account. Defaults to true. Enabling this setting does not affect existing policies or ACLs. When set to true, PUT Bucket acl and PUT Object acl calls fail if the specified ACL is public, PUT Object calls fail if the request includes a public ACL, and PUT Bucket calls fail if the request includes a public ACL.
 	BlockPublicAcls *bool `json:"blockPublicAcls,omitempty" tf:"block_public_acls,omitempty"`
 
-	// Whether Amazon S3 should block public bucket policies for buckets in this account. Defaults to true. Enabling this setting does not affect existing bucket policies. When set to true causes Amazon S3 to:
+	// Whether Amazon S3 should block public bucket policies for buckets in this account. Defaults to true. Enabling this setting does not affect existing bucket policies. When set to true, Amazon S3 rejects calls to PUT Bucket policy if the specified bucket policy allows public access.
 	BlockPublicPolicy *bool `json:"blockPublicPolicy,omitempty" tf:"block_public_policy,omitempty"`
 
-	// Whether Amazon S3 should ignore public ACLs for buckets in this account. Defaults to true. Enabling this setting does not affect the persistence of any existing ACLs and doesn't prevent new public ACLs from being set. When set to true causes Amazon S3 to:
+	// Whether Amazon S3 should ignore public ACLs for buckets in this account. Defaults to true. Enabling this setting does not affect the persistence of any existing ACLs and doesn't prevent new public ACLs from being set. When set to true, Amazon S3 ignores all public ACLs on buckets in this account and any objects that they contain.
 	IgnorePublicAcls *bool `json:"ignorePublicAcls,omitempty" tf:"ignore_public_acls,omitempty"`
 
-	// Whether Amazon S3 should restrict public bucket policies for buckets in this account. Defaults to true. Enabling this setting does not affect previously stored bucket policies, except that public and cross-account access within any public bucket policy, including non-public delegation to specific accounts, is blocked. When set to true:
+	// Whether Amazon S3 should restrict public bucket policies for buckets in this account. Defaults to true. Enabling this setting does not affect previously stored bucket policies, except that public and cross-account access within any public bucket policy, including non-public delegation to specific accounts, is blocked. When set to true, only the bucket owner and AWS Services can access buckets with public policies.
 	RestrictPublicBuckets *bool `json:"restrictPublicBuckets,omitempty" tf:"restrict_public_buckets,omitempty"`
 }
 
 type PublicAccessBlockParameters struct {
 
-	// Whether Amazon S3 should block public ACLs for buckets in this account. Defaults to true. Enabling this setting does not affect existing policies or ACLs. When set to true causes the following behavior:
+	// Whether Amazon S3 should block public ACLs for buckets in this account. Defaults to true. Enabling this setting does not affect existing policies or ACLs. When set to true, PUT Bucket acl and PUT Object acl calls fail if the specified ACL is public, PUT Object calls fail if the request includes a public ACL, and PUT Bucket calls fail if the request includes a public ACL.
 	// +kubebuilder:validation:Optional
 	BlockPublicAcls *bool `json:"blockPublicAcls,omitempty" tf:"block_public_acls,omitempty"`
 
-	// Whether Amazon S3 should block public bucket policies for buckets in this account. Defaults to true. Enabling this setting does not affect existing bucket policies. When set to true causes Amazon S3 to:
+	// Whether Amazon S3 should block public bucket policies for buckets in this account. Defaults to true. Enabling this setting does not affect existing bucket policies. When set to true, Amazon S3 rejects calls to PUT Bucket policy if the specified bucket policy allows public access.
 	// +kubebuilder:validation:Optional
 	BlockPublicPolicy *bool `json:"blockPublicPolicy,omitempty" tf:"block_public_policy,omitempty"`
 
-	// Whether Amazon S3 should ignore public ACLs for buckets in this account. Defaults to true. Enabling this setting does not affect the persistence of any existing ACLs and doesn't prevent new public ACLs from being set. When set to true causes Amazon S3 to:
+	// Whether Amazon S3 should ignore public ACLs for buckets in this account. Defaults to true. Enabling this setting does not affect the persistence of any existing ACLs and doesn't prevent new public ACLs from being set. When set to true, Amazon S3 ignores all public ACLs on buckets in this account and any objects that they contain.
 	// +kubebuilder:validation:Optional
 	IgnorePublicAcls *bool `json:"ignorePublicAcls,omitempty" tf:"ignore_public_acls,omitempty"`
 
-	// Whether Amazon S3 should restrict public bucket policies for buckets in this account. Defaults to true. Enabling this setting does not affect previously stored bucket policies, except that public and cross-account access within any public bucket policy, including non-public delegation to specific accounts, is blocked. When set to true:
+	// Whether Amazon S3 should restrict public bucket policies for buckets in this account. Defaults to true. Enabling this setting does not affect previously stored bucket policies, except that public and cross-account access within any public bucket policy, including non-public delegation to specific accounts, is blocked. When set to true, only the bucket owner and AWS Services can access buckets with public policies.
 	// +kubebuilder:validation:Optional
 	RestrictPublicBuckets *bool `json:"restrictPublicBuckets,omitempty" tf:"restrict_public_buckets,omitempty"`
 }
 
 type RegionInitParameters struct {
 
-	// The name of the associated bucket for the Region.
+	// Name of the associated bucket for the Region.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3/v1beta2.Bucket
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
-	// The AWS account ID that owns the Amazon S3 bucket that's associated with this Multi-Region Access Point.
+	// AWS account ID that owns the Amazon S3 bucket that's associated with this Multi-Region Access Point.
 	BucketAccountID *string `json:"bucketAccountId,omitempty" tf:"bucket_account_id,omitempty"`
 
 	// Reference to a Bucket in s3 to populate bucket.
@@ -175,25 +175,25 @@ type RegionInitParameters struct {
 
 type RegionObservation struct {
 
-	// The name of the associated bucket for the Region.
+	// Name of the associated bucket for the Region.
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
-	// The AWS account ID that owns the Amazon S3 bucket that's associated with this Multi-Region Access Point.
+	// AWS account ID that owns the Amazon S3 bucket that's associated with this Multi-Region Access Point.
 	BucketAccountID *string `json:"bucketAccountId,omitempty" tf:"bucket_account_id,omitempty"`
 
-	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Name of the Region.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type RegionParameters struct {
 
-	// The name of the associated bucket for the Region.
+	// Name of the associated bucket for the Region.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3/v1beta2.Bucket
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
-	// The AWS account ID that owns the Amazon S3 bucket that's associated with this Multi-Region Access Point.
+	// AWS account ID that owns the Amazon S3 bucket that's associated with this Multi-Region Access Point.
 	// +kubebuilder:validation:Optional
 	BucketAccountID *string `json:"bucketAccountId,omitempty" tf:"bucket_account_id,omitempty"`
 

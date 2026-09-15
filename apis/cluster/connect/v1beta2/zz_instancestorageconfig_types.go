@@ -138,7 +138,7 @@ type InstanceStorageConfigParameters struct {
 
 type KinesisFirehoseConfigInitParameters struct {
 
-	// The Amazon Resource Name (ARN) of the delivery stream.
+	// ARN of the delivery stream.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/firehose/v1beta2.DeliveryStream
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",false)
 	FirehoseArn *string `json:"firehoseArn,omitempty" tf:"firehose_arn,omitempty"`
@@ -154,13 +154,13 @@ type KinesisFirehoseConfigInitParameters struct {
 
 type KinesisFirehoseConfigObservation struct {
 
-	// The Amazon Resource Name (ARN) of the delivery stream.
+	// ARN of the delivery stream.
 	FirehoseArn *string `json:"firehoseArn,omitempty" tf:"firehose_arn,omitempty"`
 }
 
 type KinesisFirehoseConfigParameters struct {
 
-	// The Amazon Resource Name (ARN) of the delivery stream.
+	// ARN of the delivery stream.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/firehose/v1beta2.DeliveryStream
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",false)
 	// +kubebuilder:validation:Optional
@@ -177,7 +177,7 @@ type KinesisFirehoseConfigParameters struct {
 
 type KinesisStreamConfigInitParameters struct {
 
-	// The Amazon Resource Name (ARN) of the data stream.
+	// ARN of the data stream.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kinesis/v1beta2.Stream
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",false)
 	StreamArn *string `json:"streamArn,omitempty" tf:"stream_arn,omitempty"`
@@ -193,13 +193,13 @@ type KinesisStreamConfigInitParameters struct {
 
 type KinesisStreamConfigObservation struct {
 
-	// The Amazon Resource Name (ARN) of the data stream.
+	// ARN of the data stream.
 	StreamArn *string `json:"streamArn,omitempty" tf:"stream_arn,omitempty"`
 }
 
 type KinesisStreamConfigParameters struct {
 
-	// The Amazon Resource Name (ARN) of the data stream.
+	// ARN of the data stream.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kinesis/v1beta2.Stream
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",false)
 	// +kubebuilder:validation:Optional

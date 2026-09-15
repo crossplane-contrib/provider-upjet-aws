@@ -74,11 +74,11 @@ spec:
               forProvider:
                 properties:
                   instanceArn:
-                    description: The Amazon Resource Name (ARN) of the SSO Instance.
+                    description: ARN of the SSO Instance.
                     type: string
                   permissionSetArn:
-                    description: The Amazon Resource Name (ARN) of the Permission
-                      Set that the admin wants to grant the principal access to.
+                    description: ARN of the Permission Set that the admin wants to
+                      grant the principal access to.
                     type: string
                   permissionSetArnRef:
                     description: Reference to a PermissionSet in ssoadmin to populate
@@ -373,11 +373,11 @@ spec:
                       instance_arn separated by commas (,).
                     type: string
                   instanceArn:
-                    description: The Amazon Resource Name (ARN) of the SSO Instance.
+                    description: ARN of the SSO Instance.
                     type: string
                   permissionSetArn:
-                    description: The Amazon Resource Name (ARN) of the Permission
-                      Set that the admin wants to grant the principal access to.
+                    description: ARN of the Permission Set that the admin wants to
+                      grant the principal access to.
                     type: string
                   principalId:
                     description: An identifier for an object in SSO, such as a user

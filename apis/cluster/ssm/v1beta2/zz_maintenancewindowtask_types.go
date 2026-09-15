@@ -360,7 +360,7 @@ type MaintenanceWindowTaskTargetsParameters struct {
 
 type NotificationConfigInitParameters struct {
 
-	// An Amazon Resource Name (ARN) for a Simple Notification Service (SNS) topic. Run Command pushes notifications about command status changes to this topic.
+	// ARN for a Simple Notification Service (SNS) topic. Run Command pushes notifications about command status changes to this topic.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/sns/v1beta1.Topic
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	NotificationArn *string `json:"notificationArn,omitempty" tf:"notification_arn,omitempty"`
@@ -382,7 +382,7 @@ type NotificationConfigInitParameters struct {
 
 type NotificationConfigObservation struct {
 
-	// An Amazon Resource Name (ARN) for a Simple Notification Service (SNS) topic. Run Command pushes notifications about command status changes to this topic.
+	// ARN for a Simple Notification Service (SNS) topic. Run Command pushes notifications about command status changes to this topic.
 	NotificationArn *string `json:"notificationArn,omitempty" tf:"notification_arn,omitempty"`
 
 	// The different events for which you can receive notifications. Valid values: All, InProgress, Success, TimedOut, Cancelled, and Failed
@@ -394,7 +394,7 @@ type NotificationConfigObservation struct {
 
 type NotificationConfigParameters struct {
 
-	// An Amazon Resource Name (ARN) for a Simple Notification Service (SNS) topic. Run Command pushes notifications about command status changes to this topic.
+	// ARN for a Simple Notification Service (SNS) topic. Run Command pushes notifications about command status changes to this topic.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/sns/v1beta1.Topic
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional

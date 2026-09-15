@@ -2512,8 +2512,8 @@ spec:
                               default is false.
                             type: boolean
                           bgpLogGroupArn:
-                            description: The Amazon Resource Name (ARN) of the CloudWatch
-                              log group to send BGP logs to.
+                            description: ARN of the CloudWatch log group to send BGP
+                              logs to.
                             type: string
                           bgpLogOutputFormat:
                             description: 'Set BGP log format. Default format is json.
@@ -2524,8 +2524,8 @@ spec:
                               The default is false.
                             type: boolean
                           logGroupArn:
-                            description: The Amazon Resource Name (ARN) of the CloudWatch
-                              log group to send logs to.
+                            description: ARN of the CloudWatch log group to send logs
+                              to.
                             type: string
                           logOutputFormat:
                             description: 'Set log format. Default format is json.
@@ -2682,8 +2682,8 @@ spec:
                               default is false.
                             type: boolean
                           bgpLogGroupArn:
-                            description: The Amazon Resource Name (ARN) of the CloudWatch
-                              log group to send BGP logs to.
+                            description: ARN of the CloudWatch log group to send BGP
+                              logs to.
                             type: string
                           bgpLogOutputFormat:
                             description: 'Set BGP log format. Default format is json.
@@ -2694,8 +2694,8 @@ spec:
                               The default is false.
                             type: boolean
                           logGroupArn:
-                            description: The Amazon Resource Name (ARN) of the CloudWatch
-                              log group to send logs to.
+                            description: ARN of the CloudWatch log group to send logs
+                              to.
                             type: string
                           logOutputFormat:
                             description: 'Set log format. Default format is json.
@@ -3241,8 +3241,8 @@ spec:
                               default is false.
                             type: boolean
                           bgpLogGroupArn:
-                            description: The Amazon Resource Name (ARN) of the CloudWatch
-                              log group to send BGP logs to.
+                            description: ARN of the CloudWatch log group to send BGP
+                              logs to.
                             type: string
                           bgpLogOutputFormat:
                             description: 'Set BGP log format. Default format is json.
@@ -3253,8 +3253,8 @@ spec:
                               The default is false.
                             type: boolean
                           logGroupArn:
-                            description: The Amazon Resource Name (ARN) of the CloudWatch
-                              log group to send logs to.
+                            description: ARN of the CloudWatch log group to send logs
+                              to.
                             type: string
                           logOutputFormat:
                             description: 'Set log format. Default format is json.
@@ -3411,8 +3411,8 @@ spec:
                               default is false.
                             type: boolean
                           bgpLogGroupArn:
-                            description: The Amazon Resource Name (ARN) of the CloudWatch
-                              log group to send BGP logs to.
+                            description: ARN of the CloudWatch log group to send BGP
+                              logs to.
                             type: string
                           bgpLogOutputFormat:
                             description: 'Set BGP log format. Default format is json.
@@ -3423,8 +3423,8 @@ spec:
                               The default is false.
                             type: boolean
                           logGroupArn:
-                            description: The Amazon Resource Name (ARN) of the CloudWatch
-                              log group to send logs to.
+                            description: ARN of the CloudWatch log group to send logs
+                              to.
                             type: string
                           logOutputFormat:
                             description: 'Set log format. Default format is json.
@@ -3802,7 +3802,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: Amazon Resource Name (ARN) of the VPN Connection.
+                    description: ARN of the VPN Connection.
                     type: string
                   coreNetworkArn:
                     description: The ARN of the core network.
@@ -3961,8 +3961,8 @@ spec:
                               default is false.
                             type: boolean
                           bgpLogGroupArn:
-                            description: The Amazon Resource Name (ARN) of the CloudWatch
-                              log group to send BGP logs to.
+                            description: ARN of the CloudWatch log group to send BGP
+                              logs to.
                             type: string
                           bgpLogOutputFormat:
                             description: 'Set BGP log format. Default format is json.
@@ -3973,8 +3973,8 @@ spec:
                               The default is false.
                             type: boolean
                           logGroupArn:
-                            description: The Amazon Resource Name (ARN) of the CloudWatch
-                              log group to send logs to.
+                            description: ARN of the CloudWatch log group to send logs
+                              to.
                             type: string
                           logOutputFormat:
                             description: 'Set log format. Default format is json.
@@ -4128,8 +4128,8 @@ spec:
                               default is false.
                             type: boolean
                           bgpLogGroupArn:
-                            description: The Amazon Resource Name (ARN) of the CloudWatch
-                              log group to send BGP logs to.
+                            description: ARN of the CloudWatch log group to send BGP
+                              logs to.
                             type: string
                           bgpLogOutputFormat:
                             description: 'Set BGP log format. Default format is json.
@@ -4140,8 +4140,8 @@ spec:
                               The default is false.
                             type: boolean
                           logGroupArn:
-                            description: The Amazon Resource Name (ARN) of the CloudWatch
-                              log group to send logs to.
+                            description: ARN of the CloudWatch log group to send logs
+                              to.
                             type: string
                           logOutputFormat:
                             description: 'Set log format. Default format is json.
@@ -4261,8 +4261,7 @@ spec:
                           description: The number of accepted routes.
                           type: number
                         certificateArn:
-                          description: The Amazon Resource Name (ARN) of the VPN tunnel
-                            endpoint certificate.
+                          description: ARN of the VPN tunnel endpoint certificate.
                           type: string
                         lastStatusChange:
                           description: The date and time of the last change in status.

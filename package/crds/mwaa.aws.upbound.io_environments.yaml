@@ -112,9 +112,9 @@ spec:
                       information about the environment classes.
                     type: string
                   executionRoleArn:
-                    description: The Amazon Resource Name (ARN) of the task execution
-                      role that the Amazon MWAA and its environment can assume. Check
-                      the official AWS documentation for the detailed role specification.
+                    description: ARN of the task execution role that the Amazon MWAA
+                      and its environment can assume. Check the official AWS documentation
+                      for the detailed role specification.
                     type: string
                   executionRoleArnRef:
                     description: Reference to a Role in iam to populate executionRoleArn.
@@ -191,10 +191,9 @@ spec:
                         type: object
                     type: object
                   kmsKey:
-                    description: The Amazon Resource Name (ARN) of your KMS key that
-                      you want to use for encryption. Will be set to the ARN of the
-                      managed KMS key aws/airflow by default. Please check the Official
-                      Documentation for more information.
+                    description: ARN of your KMS key that you want to use for encryption.
+                      Will be set to the ARN of the managed KMS key aws/airflow by
+                      default. Please check the Official Documentation for more information.
                     type: string
                   kmsKeyRef:
                     description: Reference to a Key in kms to populate kmsKey.
@@ -570,8 +569,8 @@ spec:
                       v1.10.12 accepts 1.
                     type: number
                   sourceBucketArn:
-                    description: The Amazon Resource Name (ARN) of your Amazon S3
-                      storage bucket. For example, arn:aws:s3:::airflow-mybucketname.
+                    description: ARN of your Amazon S3 storage bucket. For example,
+                      arn:aws:s3:::airflow-mybucketname.
                     type: string
                   sourceBucketArnRef:
                     description: Reference to a Bucket in s3 to populate sourceBucketArn.
@@ -723,9 +722,9 @@ spec:
                       information about the environment classes.
                     type: string
                   executionRoleArn:
-                    description: The Amazon Resource Name (ARN) of the task execution
-                      role that the Amazon MWAA and its environment can assume. Check
-                      the official AWS documentation for the detailed role specification.
+                    description: ARN of the task execution role that the Amazon MWAA
+                      and its environment can assume. Check the official AWS documentation
+                      for the detailed role specification.
                     type: string
                   executionRoleArnRef:
                     description: Reference to a Role in iam to populate executionRoleArn.
@@ -802,10 +801,9 @@ spec:
                         type: object
                     type: object
                   kmsKey:
-                    description: The Amazon Resource Name (ARN) of your KMS key that
-                      you want to use for encryption. Will be set to the ARN of the
-                      managed KMS key aws/airflow by default. Please check the Official
-                      Documentation for more information.
+                    description: ARN of your KMS key that you want to use for encryption.
+                      Will be set to the ARN of the managed KMS key aws/airflow by
+                      default. Please check the Official Documentation for more information.
                     type: string
                   kmsKeyRef:
                     description: Reference to a Key in kms to populate kmsKey.
@@ -1176,8 +1174,8 @@ spec:
                       v1.10.12 accepts 1.
                     type: number
                   sourceBucketArn:
-                    description: The Amazon Resource Name (ARN) of your Amazon S3
-                      storage bucket. For example, arn:aws:s3:::airflow-mybucketname.
+                    description: ARN of your Amazon S3 storage bucket. For example,
+                      arn:aws:s3:::airflow-mybucketname.
                     type: string
                   sourceBucketArnRef:
                     description: Reference to a Bucket in s3 to populate sourceBucketArn.
@@ -1420,17 +1418,16 @@ spec:
                       information about the environment classes.
                     type: string
                   executionRoleArn:
-                    description: The Amazon Resource Name (ARN) of the task execution
-                      role that the Amazon MWAA and its environment can assume. Check
-                      the official AWS documentation for the detailed role specification.
+                    description: ARN of the task execution role that the Amazon MWAA
+                      and its environment can assume. Check the official AWS documentation
+                      for the detailed role specification.
                     type: string
                   id:
                     type: string
                   kmsKey:
-                    description: The Amazon Resource Name (ARN) of your KMS key that
-                      you want to use for encryption. Will be set to the ARN of the
-                      managed KMS key aws/airflow by default. Please check the Official
-                      Documentation for more information.
+                    description: ARN of your KMS key that you want to use for encryption.
+                      Will be set to the ARN of the managed KMS key aws/airflow by
+                      default. Please check the Official Documentation for more information.
                     type: string
                   lastUpdated:
                     items:
@@ -1618,8 +1615,8 @@ spec:
                     description: The Service Role ARN of the Amazon MWAA Environment
                     type: string
                   sourceBucketArn:
-                    description: The Amazon Resource Name (ARN) of your Amazon S3
-                      storage bucket. For example, arn:aws:s3:::airflow-mybucketname.
+                    description: ARN of your Amazon S3 storage bucket. For example,
+                      arn:aws:s3:::airflow-mybucketname.
                     type: string
                   startupScriptS3ObjectVersion:
                     description: The version of the startup shell script you want

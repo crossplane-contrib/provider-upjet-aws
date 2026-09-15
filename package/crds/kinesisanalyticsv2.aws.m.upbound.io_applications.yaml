@@ -553,8 +553,7 @@ spec:
                                 type: object
                               kinesisStreamsInput:
                                 description: If the streaming source is a Kinesis
-                                  data stream, identifies the stream's Amazon Resource
-                                  Name (ARN).
+                                  data stream, identifies the stream's ARN.
                                 properties:
                                   resourceArn:
                                     description: The ARN of the Lambda function that
@@ -1940,8 +1939,7 @@ spec:
                                 type: object
                               kinesisStreamsInput:
                                 description: If the streaming source is a Kinesis
-                                  data stream, identifies the stream's Amazon Resource
-                                  Name (ARN).
+                                  data stream, identifies the stream's ARN.
                                 properties:
                                   resourceArn:
                                     description: The ARN of the Lambda function that
@@ -3218,8 +3216,7 @@ spec:
                                 type: object
                               kinesisStreamsInput:
                                 description: If the streaming source is a Kinesis
-                                  data stream, identifies the stream's Amazon Resource
-                                  Name (ARN).
+                                  data stream, identifies the stream's ARN.
                                 properties:
                                   resourceArn:
                                     description: The ARN of the Lambda function that

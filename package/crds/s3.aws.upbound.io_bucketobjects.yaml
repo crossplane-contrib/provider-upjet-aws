@@ -80,7 +80,8 @@ spec:
                     type: string
                   bucket:
                     description: Name of the bucket to put the file in. Alternatively,
-                      an S3 access point ARN can be specified.
+                      an S3 access point ARN can be specified. Use the aws_s3_object
+                      resource instead.
                     type: string
                   bucketKeyEnabled:
                     description: Whether or not to use Amazon S3 Bucket Keys for SSE-KMS.
@@ -206,7 +207,8 @@ spec:
                       lock enabled.
                     type: boolean
                   key:
-                    description: Name of the object once it is in the bucket.
+                    description: Name of the object once it is in the bucket. Use
+                      the aws_s3_object resource instead.
                     type: string
                   kmsKeyId:
                     description: ARN of the KMS Key to use for object encryption.
@@ -362,7 +364,8 @@ spec:
                     type: string
                   bucket:
                     description: Name of the bucket to put the file in. Alternatively,
-                      an S3 access point ARN can be specified.
+                      an S3 access point ARN can be specified. Use the aws_s3_object
+                      resource instead.
                     type: string
                   bucketKeyEnabled:
                     description: Whether or not to use Amazon S3 Bucket Keys for SSE-KMS.
@@ -488,7 +491,8 @@ spec:
                       lock enabled.
                     type: boolean
                   key:
-                    description: Name of the object once it is in the bucket.
+                    description: Name of the object once it is in the bucket. Use
+                      the aws_s3_object resource instead.
                     type: string
                   kmsKeyId:
                     description: ARN of the KMS Key to use for object encryption.
@@ -723,7 +727,8 @@ spec:
                     type: string
                   bucket:
                     description: Name of the bucket to put the file in. Alternatively,
-                      an S3 access point ARN can be specified.
+                      an S3 access point ARN can be specified. Use the aws_s3_object
+                      resource instead.
                     type: string
                   bucketKeyEnabled:
                     description: Whether or not to use Amazon S3 Bucket Keys for SSE-KMS.
@@ -777,7 +782,8 @@ spec:
                   id:
                     type: string
                   key:
-                    description: Name of the object once it is in the bucket.
+                    description: Name of the object once it is in the bucket. Use
+                      the aws_s3_object resource instead.
                     type: string
                   kmsKeyId:
                     description: ARN of the KMS Key to use for object encryption.

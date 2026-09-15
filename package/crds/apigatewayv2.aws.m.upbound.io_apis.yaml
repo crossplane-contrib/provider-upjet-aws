@@ -60,19 +60,18 @@ spec:
               forProvider:
                 properties:
                   apiKeySelectionExpression:
-                    description: |-
-                      An API key selection expression.
-                      Valid values: $context.authorizer.usageIdentifierKey, $request.header.x-api-key. Defaults to $request.header.x-api-key.
-                      Applicable for WebSocket APIs.
+                    description: 'API key selection expression. Valid values: $context.authorizer.usageIdentifierKey,
+                      $request.header.x-api-key. Defaults to $request.header.x-api-key.
+                      Applicable for WebSocket APIs.'
                     type: string
                   body:
-                    description: An OpenAPI specification that defines the set of
-                      routes and integrations to create as part of the HTTP APIs.
-                      Supported only for HTTP APIs.
+                    description: OpenAPI specification that defines the set of routes
+                      and integrations to create as part of the HTTP APIs. Supported
+                      only for HTTP APIs.
                     type: string
                   corsConfiguration:
                     description: Cross-origin resource sharing (CORS) configuration.
-                      Applicable for HTTP APIs.
+                      Applicable for HTTP APIs. See cors_configuration Block below.
                     properties:
                       allowCredentials:
                         description: Whether credentials are included in the CORS
@@ -116,10 +115,11 @@ spec:
                       to 1024 characters in length.
                     type: string
                   disableExecuteApiEndpoint:
-                    description: |-
-                      Whether clients can invoke the API by using the default execute-api endpoint.
-                      By default, clients can invoke the API with the default {api_id}.execute-api.{region}.amazonaws.com endpoint.
-                      To require that clients use a custom domain name to invoke the API, disable the default endpoint.
+                    description: Whether clients can invoke the API by using the default
+                      execute-api endpoint. By default, clients can invoke the API
+                      with the default {api_id}.execute-api.{region}.amazonaws.com
+                      endpoint. To require that clients use a custom domain name to
+                      invoke the API, disable the default endpoint.
                     type: boolean
                   failOnWarnings:
                     description: Whether warnings should return an error while API
@@ -127,7 +127,7 @@ spec:
                       specification. Defaults to false. Applicable for HTTP APIs.
                     type: boolean
                   ipAddressType:
-                    description: 'The IP address types that can invoke the API. Valid
+                    description: 'IP address types that can invoke the API. Valid
                       values: ipv4, dualstack. Use ipv4 to allow only IPv4 addresses
                       to invoke your API, or use dualstack to allow both IPv4 and
                       IPv6 addresses to invoke your API. Defaults to ipv4.'
@@ -149,9 +149,8 @@ spec:
                       for HTTP APIs.
                     type: string
                   routeSelectionExpression:
-                    description: |-
-                      The route selection expression for the API.
-                      Defaults to $request.method $request.path.
+                    description: Route selection expression for the API. Defaults
+                      to $request.method $request.path.
                     type: string
                   tags:
                     additionalProperties:
@@ -160,10 +159,13 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   target:
-                    description: |-
-                      Part of quick create. Quick create produces an API with an integration, a default catch-all route, and a default stage which is configured to automatically deploy changes.
-                      For HTTP integrations, specify a fully qualified URL. For Lambda integrations, specify a function ARN.
-                      The type of the integration will be HTTP_PROXY or AWS_PROXY, respectively. Applicable for HTTP APIs.
+                    description: Part of quick create. Quick create produces an API
+                      with an integration, a default catch-all route, and a default
+                      stage which is configured to automatically deploy changes. For
+                      HTTP integrations, specify a fully qualified URL. For Lambda
+                      integrations, specify a function ARN. The type of the integration
+                      will be HTTP_PROXY or AWS_PROXY, respectively. Applicable for
+                      HTTP APIs.
                     type: string
                   version:
                     description: Version identifier for the API. Must be between 1
@@ -186,19 +188,18 @@ spec:
                   autoscaler.
                 properties:
                   apiKeySelectionExpression:
-                    description: |-
-                      An API key selection expression.
-                      Valid values: $context.authorizer.usageIdentifierKey, $request.header.x-api-key. Defaults to $request.header.x-api-key.
-                      Applicable for WebSocket APIs.
+                    description: 'API key selection expression. Valid values: $context.authorizer.usageIdentifierKey,
+                      $request.header.x-api-key. Defaults to $request.header.x-api-key.
+                      Applicable for WebSocket APIs.'
                     type: string
                   body:
-                    description: An OpenAPI specification that defines the set of
-                      routes and integrations to create as part of the HTTP APIs.
-                      Supported only for HTTP APIs.
+                    description: OpenAPI specification that defines the set of routes
+                      and integrations to create as part of the HTTP APIs. Supported
+                      only for HTTP APIs.
                     type: string
                   corsConfiguration:
                     description: Cross-origin resource sharing (CORS) configuration.
-                      Applicable for HTTP APIs.
+                      Applicable for HTTP APIs. See cors_configuration Block below.
                     properties:
                       allowCredentials:
                         description: Whether credentials are included in the CORS
@@ -242,10 +243,11 @@ spec:
                       to 1024 characters in length.
                     type: string
                   disableExecuteApiEndpoint:
-                    description: |-
-                      Whether clients can invoke the API by using the default execute-api endpoint.
-                      By default, clients can invoke the API with the default {api_id}.execute-api.{region}.amazonaws.com endpoint.
-                      To require that clients use a custom domain name to invoke the API, disable the default endpoint.
+                    description: Whether clients can invoke the API by using the default
+                      execute-api endpoint. By default, clients can invoke the API
+                      with the default {api_id}.execute-api.{region}.amazonaws.com
+                      endpoint. To require that clients use a custom domain name to
+                      invoke the API, disable the default endpoint.
                     type: boolean
                   failOnWarnings:
                     description: Whether warnings should return an error while API
@@ -253,7 +255,7 @@ spec:
                       specification. Defaults to false. Applicable for HTTP APIs.
                     type: boolean
                   ipAddressType:
-                    description: 'The IP address types that can invoke the API. Valid
+                    description: 'IP address types that can invoke the API. Valid
                       values: ipv4, dualstack. Use ipv4 to allow only IPv4 addresses
                       to invoke your API, or use dualstack to allow both IPv4 and
                       IPv6 addresses to invoke your API. Defaults to ipv4.'
@@ -270,9 +272,8 @@ spec:
                       for HTTP APIs.
                     type: string
                   routeSelectionExpression:
-                    description: |-
-                      The route selection expression for the API.
-                      Defaults to $request.method $request.path.
+                    description: Route selection expression for the API. Defaults
+                      to $request.method $request.path.
                     type: string
                   tags:
                     additionalProperties:
@@ -281,10 +282,13 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   target:
-                    description: |-
-                      Part of quick create. Quick create produces an API with an integration, a default catch-all route, and a default stage which is configured to automatically deploy changes.
-                      For HTTP integrations, specify a fully qualified URL. For Lambda integrations, specify a function ARN.
-                      The type of the integration will be HTTP_PROXY or AWS_PROXY, respectively. Applicable for HTTP APIs.
+                    description: Part of quick create. Quick create produces an API
+                      with an integration, a default catch-all route, and a default
+                      stage which is configured to automatically deploy changes. For
+                      HTTP integrations, specify a fully qualified URL. For Lambda
+                      integrations, specify a function ARN. The type of the integration
+                      will be HTTP_PROXY or AWS_PROXY, respectively. Applicable for
+                      HTTP APIs.
                     type: string
                   version:
                     description: Version identifier for the API. Must be between 1
@@ -369,22 +373,21 @@ spec:
                       for WebSocket APIs.
                     type: string
                   apiKeySelectionExpression:
-                    description: |-
-                      An API key selection expression.
-                      Valid values: $context.authorizer.usageIdentifierKey, $request.header.x-api-key. Defaults to $request.header.x-api-key.
-                      Applicable for WebSocket APIs.
+                    description: 'API key selection expression. Valid values: $context.authorizer.usageIdentifierKey,
+                      $request.header.x-api-key. Defaults to $request.header.x-api-key.
+                      Applicable for WebSocket APIs.'
                     type: string
                   arn:
                     description: ARN of the API.
                     type: string
                   body:
-                    description: An OpenAPI specification that defines the set of
-                      routes and integrations to create as part of the HTTP APIs.
-                      Supported only for HTTP APIs.
+                    description: OpenAPI specification that defines the set of routes
+                      and integrations to create as part of the HTTP APIs. Supported
+                      only for HTTP APIs.
                     type: string
                   corsConfiguration:
                     description: Cross-origin resource sharing (CORS) configuration.
-                      Applicable for HTTP APIs.
+                      Applicable for HTTP APIs. See cors_configuration Block below.
                     properties:
                       allowCredentials:
                         description: Whether credentials are included in the CORS
@@ -428,16 +431,17 @@ spec:
                       to 1024 characters in length.
                     type: string
                   disableExecuteApiEndpoint:
-                    description: |-
-                      Whether clients can invoke the API by using the default execute-api endpoint.
-                      By default, clients can invoke the API with the default {api_id}.execute-api.{region}.amazonaws.com endpoint.
-                      To require that clients use a custom domain name to invoke the API, disable the default endpoint.
+                    description: Whether clients can invoke the API by using the default
+                      execute-api endpoint. By default, clients can invoke the API
+                      with the default {api_id}.execute-api.{region}.amazonaws.com
+                      endpoint. To require that clients use a custom domain name to
+                      invoke the API, disable the default endpoint.
                     type: boolean
                   executionArn:
-                    description: |-
-                      ARN prefix to be used in an aws_lambda_permission's source_arn attribute
-                      or in an aws_iam_policy to authorize access to the @connections API.
-                      See the Amazon API Gateway Developer Guide for details.
+                    description: ARN prefix to be used in an aws_lambda_permission's
+                      source_arn attribute or in an aws_iam_policy to authorize access
+                      to the @connections API. See the Amazon API Gateway Developer
+                      Guide for details.
                     type: string
                   failOnWarnings:
                     description: Whether warnings should return an error while API
@@ -448,7 +452,7 @@ spec:
                     description: API identifier.
                     type: string
                   ipAddressType:
-                    description: 'The IP address types that can invoke the API. Valid
+                    description: 'IP address types that can invoke the API. Valid
                       values: ipv4, dualstack. Use ipv4 to allow only IPv4 addresses
                       to invoke your API, or use dualstack to allow both IPv4 and
                       IPv6 addresses to invoke your API. Defaults to ipv4.'
@@ -470,9 +474,8 @@ spec:
                       for HTTP APIs.
                     type: string
                   routeSelectionExpression:
-                    description: |-
-                      The route selection expression for the API.
-                      Defaults to $request.method $request.path.
+                    description: Route selection expression for the API. Defaults
+                      to $request.method $request.path.
                     type: string
                   tags:
                     additionalProperties:
@@ -488,10 +491,13 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   target:
-                    description: |-
-                      Part of quick create. Quick create produces an API with an integration, a default catch-all route, and a default stage which is configured to automatically deploy changes.
-                      For HTTP integrations, specify a fully qualified URL. For Lambda integrations, specify a function ARN.
-                      The type of the integration will be HTTP_PROXY or AWS_PROXY, respectively. Applicable for HTTP APIs.
+                    description: Part of quick create. Quick create produces an API
+                      with an integration, a default catch-all route, and a default
+                      stage which is configured to automatically deploy changes. For
+                      HTTP integrations, specify a fully qualified URL. For Lambda
+                      integrations, specify a function ARN. The type of the integration
+                      will be HTTP_PROXY or AWS_PROXY, respectively. Applicable for
+                      HTTP APIs.
                     type: string
                   version:
                     description: Version identifier for the API. Must be between 1

@@ -42,6 +42,8 @@ type VPCLinkInitParameters struct {
 }
 
 type VPCLinkObservation struct {
+
+	// ARN of the VPC link.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Description of the VPC link.

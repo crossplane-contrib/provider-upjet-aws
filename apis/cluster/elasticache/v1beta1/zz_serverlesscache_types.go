@@ -219,7 +219,7 @@ type ServerlessCacheInitParameters struct {
 
 type ServerlessCacheObservation struct {
 
-	// The Amazon Resource Name (ARN) of the serverless cache.
+	// ARN of the serverless cache.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Sets the cache usage limits for storage and ElastiCache Processing Units for the cache. See cache_usage_limits Block for details.

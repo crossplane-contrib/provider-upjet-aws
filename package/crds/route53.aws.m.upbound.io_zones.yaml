@@ -549,7 +549,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The Amazon Resource Name (ARN) of the Hosted Zone.
+                    description: ARN of the Hosted Zone.
                     type: string
                   comment:
                     description: A comment for the hosted zone.

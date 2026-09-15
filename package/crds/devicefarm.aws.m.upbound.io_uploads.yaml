@@ -352,7 +352,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The Amazon Resource Name of this upload.
+                    description: ARN of this upload.
                     type: string
                   category:
                     description: The upload's category.

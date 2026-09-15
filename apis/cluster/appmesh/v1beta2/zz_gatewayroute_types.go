@@ -15,87 +15,87 @@ import (
 
 type ActionInitParameters struct {
 
-	// Target that traffic is routed to when a request matches the gateway route. See target Block for details.
+	// Target that traffic is routed to when a request matches the gateway route. See spec.grpc_route.action.target Block for details.
 	Target *TargetInitParameters `json:"target,omitempty" tf:"target,omitempty"`
 }
 
 type ActionObservation struct {
 
-	// Target that traffic is routed to when a request matches the gateway route. See target Block for details.
+	// Target that traffic is routed to when a request matches the gateway route. See spec.grpc_route.action.target Block for details.
 	Target *TargetObservation `json:"target,omitempty" tf:"target,omitempty"`
 }
 
 type ActionParameters struct {
 
-	// Target that traffic is routed to when a request matches the gateway route. See target Block for details.
+	// Target that traffic is routed to when a request matches the gateway route. See spec.grpc_route.action.target Block for details.
 	// +kubebuilder:validation:Optional
 	Target *TargetParameters `json:"target" tf:"target,omitempty"`
 }
 
 type ActionRewriteInitParameters struct {
 
-	// Host name to match on. See hostname Block for details.
+	// Host name to rewrite. See spec.http_route.action.rewrite.hostname Block for details.
 	Hostname *RewriteHostnameInitParameters `json:"hostname,omitempty" tf:"hostname,omitempty"`
 
-	// Exact path to rewrite. See path Block for details.
+	// Exact path to rewrite. See spec.http_route.action.rewrite.path Block for details.
 	Path *RewritePathInitParameters `json:"path,omitempty" tf:"path,omitempty"`
 
-	// Specified beginning characters to rewrite. See prefix Block for details.
+	// Specified beginning characters to rewrite. See spec.http_route.action.rewrite.prefix Block for details.
 	Prefix *RewritePrefixInitParameters `json:"prefix,omitempty" tf:"prefix,omitempty"`
 }
 
 type ActionRewriteObservation struct {
 
-	// Host name to match on. See hostname Block for details.
+	// Host name to rewrite. See spec.http_route.action.rewrite.hostname Block for details.
 	Hostname *RewriteHostnameObservation `json:"hostname,omitempty" tf:"hostname,omitempty"`
 
-	// Exact path to rewrite. See path Block for details.
+	// Exact path to rewrite. See spec.http_route.action.rewrite.path Block for details.
 	Path *RewritePathObservation `json:"path,omitempty" tf:"path,omitempty"`
 
-	// Specified beginning characters to rewrite. See prefix Block for details.
+	// Specified beginning characters to rewrite. See spec.http_route.action.rewrite.prefix Block for details.
 	Prefix *RewritePrefixObservation `json:"prefix,omitempty" tf:"prefix,omitempty"`
 }
 
 type ActionRewriteParameters struct {
 
-	// Host name to match on. See hostname Block for details.
+	// Host name to rewrite. See spec.http_route.action.rewrite.hostname Block for details.
 	// +kubebuilder:validation:Optional
 	Hostname *RewriteHostnameParameters `json:"hostname,omitempty" tf:"hostname,omitempty"`
 
-	// Exact path to rewrite. See path Block for details.
+	// Exact path to rewrite. See spec.http_route.action.rewrite.path Block for details.
 	// +kubebuilder:validation:Optional
 	Path *RewritePathParameters `json:"path,omitempty" tf:"path,omitempty"`
 
-	// Specified beginning characters to rewrite. See prefix Block for details.
+	// Specified beginning characters to rewrite. See spec.http_route.action.rewrite.prefix Block for details.
 	// +kubebuilder:validation:Optional
 	Prefix *RewritePrefixParameters `json:"prefix,omitempty" tf:"prefix,omitempty"`
 }
 
 type ActionTargetInitParameters struct {
 
-	// The port number that corresponds to the target for Virtual Service provider port. This is required when the provider (router or node) of the Virtual Service has multiple listeners.
+	// Port number that corresponds to the target for Virtual Service provider port. This is required when the provider (router or node) of the Virtual Service has multiple listeners.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
-	// Virtual service gateway route target. See virtual_service Block for details.
+	// Virtual service gateway route target. See spec.grpc_route.action.target.virtual_service Block for details.
 	VirtualService *TargetVirtualServiceInitParameters `json:"virtualService,omitempty" tf:"virtual_service,omitempty"`
 }
 
 type ActionTargetObservation struct {
 
-	// The port number that corresponds to the target for Virtual Service provider port. This is required when the provider (router or node) of the Virtual Service has multiple listeners.
+	// Port number that corresponds to the target for Virtual Service provider port. This is required when the provider (router or node) of the Virtual Service has multiple listeners.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
-	// Virtual service gateway route target. See virtual_service Block for details.
+	// Virtual service gateway route target. See spec.grpc_route.action.target.virtual_service Block for details.
 	VirtualService *TargetVirtualServiceObservation `json:"virtualService,omitempty" tf:"virtual_service,omitempty"`
 }
 
 type ActionTargetParameters struct {
 
-	// The port number that corresponds to the target for Virtual Service provider port. This is required when the provider (router or node) of the Virtual Service has multiple listeners.
+	// Port number that corresponds to the target for Virtual Service provider port. This is required when the provider (router or node) of the Virtual Service has multiple listeners.
 	// +kubebuilder:validation:Optional
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
-	// Virtual service gateway route target. See virtual_service Block for details.
+	// Virtual service gateway route target. See spec.grpc_route.action.target.virtual_service Block for details.
 	// +kubebuilder:validation:Optional
 	VirtualService *TargetVirtualServiceParameters `json:"virtualService" tf:"virtual_service,omitempty"`
 }
@@ -141,29 +141,29 @@ type ActionTargetVirtualServiceParameters struct {
 
 type GRPCRouteInitParameters struct {
 
-	// Action to take if a match is determined. See action Block for details.
+	// Action to take if a match is determined. See spec.grpc_route.action Block for details.
 	Action *ActionInitParameters `json:"action,omitempty" tf:"action,omitempty"`
 
-	// Criteria for determining a request match. See match Block for details.
+	// Criteria for determining a request match. See spec.grpc_route.match Block for details.
 	Match *MatchInitParameters `json:"match,omitempty" tf:"match,omitempty"`
 }
 
 type GRPCRouteObservation struct {
 
-	// Action to take if a match is determined. See action Block for details.
+	// Action to take if a match is determined. See spec.grpc_route.action Block for details.
 	Action *ActionObservation `json:"action,omitempty" tf:"action,omitempty"`
 
-	// Criteria for determining a request match. See match Block for details.
+	// Criteria for determining a request match. See spec.grpc_route.match Block for details.
 	Match *MatchObservation `json:"match,omitempty" tf:"match,omitempty"`
 }
 
 type GRPCRouteParameters struct {
 
-	// Action to take if a match is determined. See action Block for details.
+	// Action to take if a match is determined. See spec.grpc_route.action Block for details.
 	// +kubebuilder:validation:Optional
 	Action *ActionParameters `json:"action" tf:"action,omitempty"`
 
-	// Criteria for determining a request match. See match Block for details.
+	// Criteria for determining a request match. See spec.grpc_route.match Block for details.
 	// +kubebuilder:validation:Optional
 	Match *MatchParameters `json:"match" tf:"match,omitempty"`
 }
@@ -290,68 +290,68 @@ type GatewayRouteParameters struct {
 
 type HTTPRouteActionInitParameters struct {
 
-	// Gateway route action to rewrite. See rewrite Block for details.
+	// Gateway route action to rewrite. See spec.http_route.action.rewrite Block for details.
 	Rewrite *ActionRewriteInitParameters `json:"rewrite,omitempty" tf:"rewrite,omitempty"`
 
-	// Target that traffic is routed to when a request matches the gateway route. See target Block for details.
+	// Target that traffic is routed to when a request matches the gateway route. See spec.grpc_route.action.target Block for details.
 	Target *HTTPRouteActionTargetInitParameters `json:"target,omitempty" tf:"target,omitempty"`
 }
 
 type HTTPRouteActionObservation struct {
 
-	// Gateway route action to rewrite. See rewrite Block for details.
+	// Gateway route action to rewrite. See spec.http_route.action.rewrite Block for details.
 	Rewrite *ActionRewriteObservation `json:"rewrite,omitempty" tf:"rewrite,omitempty"`
 
-	// Target that traffic is routed to when a request matches the gateway route. See target Block for details.
+	// Target that traffic is routed to when a request matches the gateway route. See spec.grpc_route.action.target Block for details.
 	Target *HTTPRouteActionTargetObservation `json:"target,omitempty" tf:"target,omitempty"`
 }
 
 type HTTPRouteActionParameters struct {
 
-	// Gateway route action to rewrite. See rewrite Block for details.
+	// Gateway route action to rewrite. See spec.http_route.action.rewrite Block for details.
 	// +kubebuilder:validation:Optional
 	Rewrite *ActionRewriteParameters `json:"rewrite,omitempty" tf:"rewrite,omitempty"`
 
-	// Target that traffic is routed to when a request matches the gateway route. See target Block for details.
+	// Target that traffic is routed to when a request matches the gateway route. See spec.grpc_route.action.target Block for details.
 	// +kubebuilder:validation:Optional
 	Target *HTTPRouteActionTargetParameters `json:"target" tf:"target,omitempty"`
 }
 
 type HTTPRouteActionTargetInitParameters struct {
 
-	// The port number that corresponds to the target for Virtual Service provider port. This is required when the provider (router or node) of the Virtual Service has multiple listeners.
+	// Port number that corresponds to the target for Virtual Service provider port. This is required when the provider (router or node) of the Virtual Service has multiple listeners.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
-	// Virtual service gateway route target. See virtual_service Block for details.
+	// Virtual service gateway route target. See spec.grpc_route.action.target.virtual_service Block for details.
 	VirtualService *ActionTargetVirtualServiceInitParameters `json:"virtualService,omitempty" tf:"virtual_service,omitempty"`
 }
 
 type HTTPRouteActionTargetObservation struct {
 
-	// The port number that corresponds to the target for Virtual Service provider port. This is required when the provider (router or node) of the Virtual Service has multiple listeners.
+	// Port number that corresponds to the target for Virtual Service provider port. This is required when the provider (router or node) of the Virtual Service has multiple listeners.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
-	// Virtual service gateway route target. See virtual_service Block for details.
+	// Virtual service gateway route target. See spec.grpc_route.action.target.virtual_service Block for details.
 	VirtualService *ActionTargetVirtualServiceObservation `json:"virtualService,omitempty" tf:"virtual_service,omitempty"`
 }
 
 type HTTPRouteActionTargetParameters struct {
 
-	// The port number that corresponds to the target for Virtual Service provider port. This is required when the provider (router or node) of the Virtual Service has multiple listeners.
+	// Port number that corresponds to the target for Virtual Service provider port. This is required when the provider (router or node) of the Virtual Service has multiple listeners.
 	// +kubebuilder:validation:Optional
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
-	// Virtual service gateway route target. See virtual_service Block for details.
+	// Virtual service gateway route target. See spec.grpc_route.action.target.virtual_service Block for details.
 	// +kubebuilder:validation:Optional
 	VirtualService *ActionTargetVirtualServiceParameters `json:"virtualService" tf:"virtual_service,omitempty"`
 }
 
 type HTTPRouteInitParameters struct {
 
-	// Action to take if a match is determined. See action Block for details.
+	// Action to take if a match is determined. See spec.grpc_route.action Block for details.
 	Action *HTTPRouteActionInitParameters `json:"action,omitempty" tf:"action,omitempty"`
 
-	// Criteria for determining a request match. See match Block for details.
+	// Criteria for determining a request match. See spec.grpc_route.match Block for details.
 	Match *HTTPRouteMatchInitParameters `json:"match,omitempty" tf:"match,omitempty"`
 }
 
@@ -386,69 +386,69 @@ type HTTPRouteMatchHostnameParameters struct {
 
 type HTTPRouteMatchInitParameters struct {
 
-	// Client request headers to match on. See header Block for details.
+	// Client request headers to match on. See spec.http_route.match.header Block for details.
 	Header []MatchHeaderInitParameters `json:"header,omitempty" tf:"header,omitempty"`
 
-	// Host name to match on. See hostname Block for details.
+	// Host name to rewrite. See spec.http_route.action.rewrite.hostname Block for details.
 	Hostname *HTTPRouteMatchHostnameInitParameters `json:"hostname,omitempty" tf:"hostname,omitempty"`
 
-	// Exact path to rewrite. See path Block for details.
+	// Exact path to rewrite. See spec.http_route.action.rewrite.path Block for details.
 	Path *HTTPRouteMatchPathInitParameters `json:"path,omitempty" tf:"path,omitempty"`
 
-	// The port number that corresponds to the target for Virtual Service provider port. This is required when the provider (router or node) of the Virtual Service has multiple listeners.
+	// Port number that corresponds to the target for Virtual Service provider port. This is required when the provider (router or node) of the Virtual Service has multiple listeners.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
-	// Specified beginning characters to rewrite. See prefix Block for details.
+	// Specified beginning characters to rewrite. See spec.http_route.action.rewrite.prefix Block for details.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// Client request query parameters to match on. See query_parameter Block for details.
+	// Client request query parameters to match on. See spec.http_route.match.query_parameter Block for details.
 	QueryParameter []MatchQueryParameterInitParameters `json:"queryParameter,omitempty" tf:"query_parameter,omitempty"`
 }
 
 type HTTPRouteMatchObservation struct {
 
-	// Client request headers to match on. See header Block for details.
+	// Client request headers to match on. See spec.http_route.match.header Block for details.
 	Header []MatchHeaderObservation `json:"header,omitempty" tf:"header,omitempty"`
 
-	// Host name to match on. See hostname Block for details.
+	// Host name to rewrite. See spec.http_route.action.rewrite.hostname Block for details.
 	Hostname *HTTPRouteMatchHostnameObservation `json:"hostname,omitempty" tf:"hostname,omitempty"`
 
-	// Exact path to rewrite. See path Block for details.
+	// Exact path to rewrite. See spec.http_route.action.rewrite.path Block for details.
 	Path *HTTPRouteMatchPathObservation `json:"path,omitempty" tf:"path,omitempty"`
 
-	// The port number that corresponds to the target for Virtual Service provider port. This is required when the provider (router or node) of the Virtual Service has multiple listeners.
+	// Port number that corresponds to the target for Virtual Service provider port. This is required when the provider (router or node) of the Virtual Service has multiple listeners.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
-	// Specified beginning characters to rewrite. See prefix Block for details.
+	// Specified beginning characters to rewrite. See spec.http_route.action.rewrite.prefix Block for details.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// Client request query parameters to match on. See query_parameter Block for details.
+	// Client request query parameters to match on. See spec.http_route.match.query_parameter Block for details.
 	QueryParameter []MatchQueryParameterObservation `json:"queryParameter,omitempty" tf:"query_parameter,omitempty"`
 }
 
 type HTTPRouteMatchParameters struct {
 
-	// Client request headers to match on. See header Block for details.
+	// Client request headers to match on. See spec.http_route.match.header Block for details.
 	// +kubebuilder:validation:Optional
 	Header []MatchHeaderParameters `json:"header,omitempty" tf:"header,omitempty"`
 
-	// Host name to match on. See hostname Block for details.
+	// Host name to rewrite. See spec.http_route.action.rewrite.hostname Block for details.
 	// +kubebuilder:validation:Optional
 	Hostname *HTTPRouteMatchHostnameParameters `json:"hostname,omitempty" tf:"hostname,omitempty"`
 
-	// Exact path to rewrite. See path Block for details.
+	// Exact path to rewrite. See spec.http_route.action.rewrite.path Block for details.
 	// +kubebuilder:validation:Optional
 	Path *HTTPRouteMatchPathParameters `json:"path,omitempty" tf:"path,omitempty"`
 
-	// The port number that corresponds to the target for Virtual Service provider port. This is required when the provider (router or node) of the Virtual Service has multiple listeners.
+	// Port number that corresponds to the target for Virtual Service provider port. This is required when the provider (router or node) of the Virtual Service has multiple listeners.
 	// +kubebuilder:validation:Optional
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
-	// Specified beginning characters to rewrite. See prefix Block for details.
+	// Specified beginning characters to rewrite. See spec.http_route.action.rewrite.prefix Block for details.
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// Client request query parameters to match on. See query_parameter Block for details.
+	// Client request query parameters to match on. See spec.http_route.match.query_parameter Block for details.
 	// +kubebuilder:validation:Optional
 	QueryParameter []MatchQueryParameterParameters `json:"queryParameter,omitempty" tf:"query_parameter,omitempty"`
 }
@@ -458,7 +458,7 @@ type HTTPRouteMatchPathInitParameters struct {
 	// Value used to replace matched path.
 	Exact *string `json:"exact,omitempty" tf:"exact,omitempty"`
 
-	// The regex used to match the path.
+	// Header value sent by the client must include the specified characters.
 	Regex *string `json:"regex,omitempty" tf:"regex,omitempty"`
 }
 
@@ -467,7 +467,7 @@ type HTTPRouteMatchPathObservation struct {
 	// Value used to replace matched path.
 	Exact *string `json:"exact,omitempty" tf:"exact,omitempty"`
 
-	// The regex used to match the path.
+	// Header value sent by the client must include the specified characters.
 	Regex *string `json:"regex,omitempty" tf:"regex,omitempty"`
 }
 
@@ -477,27 +477,27 @@ type HTTPRouteMatchPathParameters struct {
 	// +kubebuilder:validation:Optional
 	Exact *string `json:"exact,omitempty" tf:"exact,omitempty"`
 
-	// The regex used to match the path.
+	// Header value sent by the client must include the specified characters.
 	// +kubebuilder:validation:Optional
 	Regex *string `json:"regex,omitempty" tf:"regex,omitempty"`
 }
 
 type HTTPRouteObservation struct {
 
-	// Action to take if a match is determined. See action Block for details.
+	// Action to take if a match is determined. See spec.grpc_route.action Block for details.
 	Action *HTTPRouteActionObservation `json:"action,omitempty" tf:"action,omitempty"`
 
-	// Criteria for determining a request match. See match Block for details.
+	// Criteria for determining a request match. See spec.grpc_route.match Block for details.
 	Match *HTTPRouteMatchObservation `json:"match,omitempty" tf:"match,omitempty"`
 }
 
 type HTTPRouteParameters struct {
 
-	// Action to take if a match is determined. See action Block for details.
+	// Action to take if a match is determined. See spec.grpc_route.action Block for details.
 	// +kubebuilder:validation:Optional
 	Action *HTTPRouteActionParameters `json:"action" tf:"action,omitempty"`
 
-	// Criteria for determining a request match. See match Block for details.
+	// Criteria for determining a request match. See spec.grpc_route.match Block for details.
 	// +kubebuilder:validation:Optional
 	Match *HTTPRouteMatchParameters `json:"match" tf:"match,omitempty"`
 }
@@ -507,7 +507,7 @@ type HeaderInitParameters struct {
 	// If true, the match is on the opposite of the match method and value. Default is false.
 	Invert *bool `json:"invert,omitempty" tf:"invert,omitempty"`
 
-	// Criteria for determining a request match. See match Block for details.
+	// Criteria for determining a request match. See spec.grpc_route.match Block for details.
 	Match *HeaderMatchInitParameters `json:"match,omitempty" tf:"match,omitempty"`
 
 	// Name to use for the gateway route. Must be between 1 and 255 characters in length.
@@ -519,13 +519,13 @@ type HeaderMatchInitParameters struct {
 	// Value used to replace matched path.
 	Exact *string `json:"exact,omitempty" tf:"exact,omitempty"`
 
-	// Specified beginning characters to rewrite. See prefix Block for details.
+	// Specified beginning characters to rewrite. See spec.http_route.action.rewrite.prefix Block for details.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// Object that specifies the range of numbers that the header value sent by the client must be included in.
+	// Object that specifies the range of numbers that the header value sent by the client must be included in. See spec.http_route.match.header.match.range Block for details.
 	Range *RangeInitParameters `json:"range,omitempty" tf:"range,omitempty"`
 
-	// The regex used to match the path.
+	// Header value sent by the client must include the specified characters.
 	Regex *string `json:"regex,omitempty" tf:"regex,omitempty"`
 
 	// Header value sent by the client must end with the specified characters.
@@ -537,13 +537,13 @@ type HeaderMatchObservation struct {
 	// Value used to replace matched path.
 	Exact *string `json:"exact,omitempty" tf:"exact,omitempty"`
 
-	// Specified beginning characters to rewrite. See prefix Block for details.
+	// Specified beginning characters to rewrite. See spec.http_route.action.rewrite.prefix Block for details.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// Object that specifies the range of numbers that the header value sent by the client must be included in.
+	// Object that specifies the range of numbers that the header value sent by the client must be included in. See spec.http_route.match.header.match.range Block for details.
 	Range *RangeObservation `json:"range,omitempty" tf:"range,omitempty"`
 
-	// The regex used to match the path.
+	// Header value sent by the client must include the specified characters.
 	Regex *string `json:"regex,omitempty" tf:"regex,omitempty"`
 
 	// Header value sent by the client must end with the specified characters.
@@ -556,15 +556,15 @@ type HeaderMatchParameters struct {
 	// +kubebuilder:validation:Optional
 	Exact *string `json:"exact,omitempty" tf:"exact,omitempty"`
 
-	// Specified beginning characters to rewrite. See prefix Block for details.
+	// Specified beginning characters to rewrite. See spec.http_route.action.rewrite.prefix Block for details.
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// Object that specifies the range of numbers that the header value sent by the client must be included in.
+	// Object that specifies the range of numbers that the header value sent by the client must be included in. See spec.http_route.match.header.match.range Block for details.
 	// +kubebuilder:validation:Optional
 	Range *RangeParameters `json:"range,omitempty" tf:"range,omitempty"`
 
-	// The regex used to match the path.
+	// Header value sent by the client must include the specified characters.
 	// +kubebuilder:validation:Optional
 	Regex *string `json:"regex,omitempty" tf:"regex,omitempty"`
 
@@ -578,7 +578,7 @@ type HeaderObservation struct {
 	// If true, the match is on the opposite of the match method and value. Default is false.
 	Invert *bool `json:"invert,omitempty" tf:"invert,omitempty"`
 
-	// Criteria for determining a request match. See match Block for details.
+	// Criteria for determining a request match. See spec.grpc_route.match Block for details.
 	Match *HeaderMatchObservation `json:"match,omitempty" tf:"match,omitempty"`
 
 	// Name to use for the gateway route. Must be between 1 and 255 characters in length.
@@ -591,7 +591,7 @@ type HeaderParameters struct {
 	// +kubebuilder:validation:Optional
 	Invert *bool `json:"invert,omitempty" tf:"invert,omitempty"`
 
-	// Criteria for determining a request match. See match Block for details.
+	// Criteria for determining a request match. See spec.grpc_route.match Block for details.
 	// +kubebuilder:validation:Optional
 	Match *HeaderMatchParameters `json:"match,omitempty" tf:"match,omitempty"`
 
@@ -621,127 +621,127 @@ type HostnameParameters struct {
 
 type Http2RouteActionInitParameters struct {
 
-	// Gateway route action to rewrite. See rewrite Block for details.
+	// Gateway route action to rewrite. See spec.http_route.action.rewrite Block for details.
 	Rewrite *RewriteInitParameters `json:"rewrite,omitempty" tf:"rewrite,omitempty"`
 
-	// Target that traffic is routed to when a request matches the gateway route. See target Block for details.
+	// Target that traffic is routed to when a request matches the gateway route. See spec.grpc_route.action.target Block for details.
 	Target *ActionTargetInitParameters `json:"target,omitempty" tf:"target,omitempty"`
 }
 
 type Http2RouteActionObservation struct {
 
-	// Gateway route action to rewrite. See rewrite Block for details.
+	// Gateway route action to rewrite. See spec.http_route.action.rewrite Block for details.
 	Rewrite *RewriteObservation `json:"rewrite,omitempty" tf:"rewrite,omitempty"`
 
-	// Target that traffic is routed to when a request matches the gateway route. See target Block for details.
+	// Target that traffic is routed to when a request matches the gateway route. See spec.grpc_route.action.target Block for details.
 	Target *ActionTargetObservation `json:"target,omitempty" tf:"target,omitempty"`
 }
 
 type Http2RouteActionParameters struct {
 
-	// Gateway route action to rewrite. See rewrite Block for details.
+	// Gateway route action to rewrite. See spec.http_route.action.rewrite Block for details.
 	// +kubebuilder:validation:Optional
 	Rewrite *RewriteParameters `json:"rewrite,omitempty" tf:"rewrite,omitempty"`
 
-	// Target that traffic is routed to when a request matches the gateway route. See target Block for details.
+	// Target that traffic is routed to when a request matches the gateway route. See spec.grpc_route.action.target Block for details.
 	// +kubebuilder:validation:Optional
 	Target *ActionTargetParameters `json:"target" tf:"target,omitempty"`
 }
 
 type Http2RouteInitParameters struct {
 
-	// Action to take if a match is determined. See action Block for details.
+	// Action to take if a match is determined. See spec.grpc_route.action Block for details.
 	Action *Http2RouteActionInitParameters `json:"action,omitempty" tf:"action,omitempty"`
 
-	// Criteria for determining a request match. See match Block for details.
+	// Criteria for determining a request match. See spec.grpc_route.match Block for details.
 	Match *Http2RouteMatchInitParameters `json:"match,omitempty" tf:"match,omitempty"`
 }
 
 type Http2RouteMatchInitParameters struct {
 
-	// Client request headers to match on. See header Block for details.
+	// Client request headers to match on. See spec.http_route.match.header Block for details.
 	Header []HeaderInitParameters `json:"header,omitempty" tf:"header,omitempty"`
 
-	// Host name to match on. See hostname Block for details.
+	// Host name to rewrite. See spec.http_route.action.rewrite.hostname Block for details.
 	Hostname *MatchHostnameInitParameters `json:"hostname,omitempty" tf:"hostname,omitempty"`
 
-	// Exact path to rewrite. See path Block for details.
+	// Exact path to rewrite. See spec.http_route.action.rewrite.path Block for details.
 	Path *MatchPathInitParameters `json:"path,omitempty" tf:"path,omitempty"`
 
-	// The port number that corresponds to the target for Virtual Service provider port. This is required when the provider (router or node) of the Virtual Service has multiple listeners.
+	// Port number that corresponds to the target for Virtual Service provider port. This is required when the provider (router or node) of the Virtual Service has multiple listeners.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
-	// Specified beginning characters to rewrite. See prefix Block for details.
+	// Specified beginning characters to rewrite. See spec.http_route.action.rewrite.prefix Block for details.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// Client request query parameters to match on. See query_parameter Block for details.
+	// Client request query parameters to match on. See spec.http_route.match.query_parameter Block for details.
 	QueryParameter []QueryParameterInitParameters `json:"queryParameter,omitempty" tf:"query_parameter,omitempty"`
 }
 
 type Http2RouteMatchObservation struct {
 
-	// Client request headers to match on. See header Block for details.
+	// Client request headers to match on. See spec.http_route.match.header Block for details.
 	Header []HeaderObservation `json:"header,omitempty" tf:"header,omitempty"`
 
-	// Host name to match on. See hostname Block for details.
+	// Host name to rewrite. See spec.http_route.action.rewrite.hostname Block for details.
 	Hostname *MatchHostnameObservation `json:"hostname,omitempty" tf:"hostname,omitempty"`
 
-	// Exact path to rewrite. See path Block for details.
+	// Exact path to rewrite. See spec.http_route.action.rewrite.path Block for details.
 	Path *MatchPathObservation `json:"path,omitempty" tf:"path,omitempty"`
 
-	// The port number that corresponds to the target for Virtual Service provider port. This is required when the provider (router or node) of the Virtual Service has multiple listeners.
+	// Port number that corresponds to the target for Virtual Service provider port. This is required when the provider (router or node) of the Virtual Service has multiple listeners.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
-	// Specified beginning characters to rewrite. See prefix Block for details.
+	// Specified beginning characters to rewrite. See spec.http_route.action.rewrite.prefix Block for details.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// Client request query parameters to match on. See query_parameter Block for details.
+	// Client request query parameters to match on. See spec.http_route.match.query_parameter Block for details.
 	QueryParameter []QueryParameterObservation `json:"queryParameter,omitempty" tf:"query_parameter,omitempty"`
 }
 
 type Http2RouteMatchParameters struct {
 
-	// Client request headers to match on. See header Block for details.
+	// Client request headers to match on. See spec.http_route.match.header Block for details.
 	// +kubebuilder:validation:Optional
 	Header []HeaderParameters `json:"header,omitempty" tf:"header,omitempty"`
 
-	// Host name to match on. See hostname Block for details.
+	// Host name to rewrite. See spec.http_route.action.rewrite.hostname Block for details.
 	// +kubebuilder:validation:Optional
 	Hostname *MatchHostnameParameters `json:"hostname,omitempty" tf:"hostname,omitempty"`
 
-	// Exact path to rewrite. See path Block for details.
+	// Exact path to rewrite. See spec.http_route.action.rewrite.path Block for details.
 	// +kubebuilder:validation:Optional
 	Path *MatchPathParameters `json:"path,omitempty" tf:"path,omitempty"`
 
-	// The port number that corresponds to the target for Virtual Service provider port. This is required when the provider (router or node) of the Virtual Service has multiple listeners.
+	// Port number that corresponds to the target for Virtual Service provider port. This is required when the provider (router or node) of the Virtual Service has multiple listeners.
 	// +kubebuilder:validation:Optional
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
-	// Specified beginning characters to rewrite. See prefix Block for details.
+	// Specified beginning characters to rewrite. See spec.http_route.action.rewrite.prefix Block for details.
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// Client request query parameters to match on. See query_parameter Block for details.
+	// Client request query parameters to match on. See spec.http_route.match.query_parameter Block for details.
 	// +kubebuilder:validation:Optional
 	QueryParameter []QueryParameterParameters `json:"queryParameter,omitempty" tf:"query_parameter,omitempty"`
 }
 
 type Http2RouteObservation struct {
 
-	// Action to take if a match is determined. See action Block for details.
+	// Action to take if a match is determined. See spec.grpc_route.action Block for details.
 	Action *Http2RouteActionObservation `json:"action,omitempty" tf:"action,omitempty"`
 
-	// Criteria for determining a request match. See match Block for details.
+	// Criteria for determining a request match. See spec.grpc_route.match Block for details.
 	Match *Http2RouteMatchObservation `json:"match,omitempty" tf:"match,omitempty"`
 }
 
 type Http2RouteParameters struct {
 
-	// Action to take if a match is determined. See action Block for details.
+	// Action to take if a match is determined. See spec.grpc_route.action Block for details.
 	// +kubebuilder:validation:Optional
 	Action *Http2RouteActionParameters `json:"action" tf:"action,omitempty"`
 
-	// Criteria for determining a request match. See match Block for details.
+	// Criteria for determining a request match. See spec.grpc_route.match Block for details.
 	// +kubebuilder:validation:Optional
 	Match *Http2RouteMatchParameters `json:"match" tf:"match,omitempty"`
 }
@@ -751,7 +751,7 @@ type MatchHeaderInitParameters struct {
 	// If true, the match is on the opposite of the match method and value. Default is false.
 	Invert *bool `json:"invert,omitempty" tf:"invert,omitempty"`
 
-	// Criteria for determining a request match. See match Block for details.
+	// Criteria for determining a request match. See spec.grpc_route.match Block for details.
 	Match *MatchHeaderMatchInitParameters `json:"match,omitempty" tf:"match,omitempty"`
 
 	// Name to use for the gateway route. Must be between 1 and 255 characters in length.
@@ -763,13 +763,13 @@ type MatchHeaderMatchInitParameters struct {
 	// Value used to replace matched path.
 	Exact *string `json:"exact,omitempty" tf:"exact,omitempty"`
 
-	// Specified beginning characters to rewrite. See prefix Block for details.
+	// Specified beginning characters to rewrite. See spec.http_route.action.rewrite.prefix Block for details.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// Object that specifies the range of numbers that the header value sent by the client must be included in.
+	// Object that specifies the range of numbers that the header value sent by the client must be included in. See spec.http_route.match.header.match.range Block for details.
 	Range *MatchRangeInitParameters `json:"range,omitempty" tf:"range,omitempty"`
 
-	// The regex used to match the path.
+	// Header value sent by the client must include the specified characters.
 	Regex *string `json:"regex,omitempty" tf:"regex,omitempty"`
 
 	// Header value sent by the client must end with the specified characters.
@@ -781,13 +781,13 @@ type MatchHeaderMatchObservation struct {
 	// Value used to replace matched path.
 	Exact *string `json:"exact,omitempty" tf:"exact,omitempty"`
 
-	// Specified beginning characters to rewrite. See prefix Block for details.
+	// Specified beginning characters to rewrite. See spec.http_route.action.rewrite.prefix Block for details.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// Object that specifies the range of numbers that the header value sent by the client must be included in.
+	// Object that specifies the range of numbers that the header value sent by the client must be included in. See spec.http_route.match.header.match.range Block for details.
 	Range *MatchRangeObservation `json:"range,omitempty" tf:"range,omitempty"`
 
-	// The regex used to match the path.
+	// Header value sent by the client must include the specified characters.
 	Regex *string `json:"regex,omitempty" tf:"regex,omitempty"`
 
 	// Header value sent by the client must end with the specified characters.
@@ -800,15 +800,15 @@ type MatchHeaderMatchParameters struct {
 	// +kubebuilder:validation:Optional
 	Exact *string `json:"exact,omitempty" tf:"exact,omitempty"`
 
-	// Specified beginning characters to rewrite. See prefix Block for details.
+	// Specified beginning characters to rewrite. See spec.http_route.action.rewrite.prefix Block for details.
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// Object that specifies the range of numbers that the header value sent by the client must be included in.
+	// Object that specifies the range of numbers that the header value sent by the client must be included in. See spec.http_route.match.header.match.range Block for details.
 	// +kubebuilder:validation:Optional
 	Range *MatchRangeParameters `json:"range,omitempty" tf:"range,omitempty"`
 
-	// The regex used to match the path.
+	// Header value sent by the client must include the specified characters.
 	// +kubebuilder:validation:Optional
 	Regex *string `json:"regex,omitempty" tf:"regex,omitempty"`
 
@@ -822,7 +822,7 @@ type MatchHeaderObservation struct {
 	// If true, the match is on the opposite of the match method and value. Default is false.
 	Invert *bool `json:"invert,omitempty" tf:"invert,omitempty"`
 
-	// Criteria for determining a request match. See match Block for details.
+	// Criteria for determining a request match. See spec.grpc_route.match Block for details.
 	Match *MatchHeaderMatchObservation `json:"match,omitempty" tf:"match,omitempty"`
 
 	// Name to use for the gateway route. Must be between 1 and 255 characters in length.
@@ -835,7 +835,7 @@ type MatchHeaderParameters struct {
 	// +kubebuilder:validation:Optional
 	Invert *bool `json:"invert,omitempty" tf:"invert,omitempty"`
 
-	// Criteria for determining a request match. See match Block for details.
+	// Criteria for determining a request match. See spec.grpc_route.match Block for details.
 	// +kubebuilder:validation:Optional
 	Match *MatchHeaderMatchParameters `json:"match,omitempty" tf:"match,omitempty"`
 
@@ -875,7 +875,7 @@ type MatchHostnameParameters struct {
 
 type MatchInitParameters struct {
 
-	// The port number that corresponds to the target for Virtual Service provider port. This is required when the provider (router or node) of the Virtual Service has multiple listeners.
+	// Port number that corresponds to the target for Virtual Service provider port. This is required when the provider (router or node) of the Virtual Service has multiple listeners.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// Fully qualified domain name for the service to match from the request.
@@ -884,7 +884,7 @@ type MatchInitParameters struct {
 
 type MatchObservation struct {
 
-	// The port number that corresponds to the target for Virtual Service provider port. This is required when the provider (router or node) of the Virtual Service has multiple listeners.
+	// Port number that corresponds to the target for Virtual Service provider port. This is required when the provider (router or node) of the Virtual Service has multiple listeners.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// Fully qualified domain name for the service to match from the request.
@@ -893,7 +893,7 @@ type MatchObservation struct {
 
 type MatchParameters struct {
 
-	// The port number that corresponds to the target for Virtual Service provider port. This is required when the provider (router or node) of the Virtual Service has multiple listeners.
+	// Port number that corresponds to the target for Virtual Service provider port. This is required when the provider (router or node) of the Virtual Service has multiple listeners.
 	// +kubebuilder:validation:Optional
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
@@ -907,7 +907,7 @@ type MatchPathInitParameters struct {
 	// Value used to replace matched path.
 	Exact *string `json:"exact,omitempty" tf:"exact,omitempty"`
 
-	// The regex used to match the path.
+	// Header value sent by the client must include the specified characters.
 	Regex *string `json:"regex,omitempty" tf:"regex,omitempty"`
 }
 
@@ -916,7 +916,7 @@ type MatchPathObservation struct {
 	// Value used to replace matched path.
 	Exact *string `json:"exact,omitempty" tf:"exact,omitempty"`
 
-	// The regex used to match the path.
+	// Header value sent by the client must include the specified characters.
 	Regex *string `json:"regex,omitempty" tf:"regex,omitempty"`
 }
 
@@ -926,14 +926,14 @@ type MatchPathParameters struct {
 	// +kubebuilder:validation:Optional
 	Exact *string `json:"exact,omitempty" tf:"exact,omitempty"`
 
-	// The regex used to match the path.
+	// Header value sent by the client must include the specified characters.
 	// +kubebuilder:validation:Optional
 	Regex *string `json:"regex,omitempty" tf:"regex,omitempty"`
 }
 
 type MatchQueryParameterInitParameters struct {
 
-	// Criteria for determining a request match. See match Block for details.
+	// Criteria for determining a request match. See spec.grpc_route.match Block for details.
 	Match *MatchQueryParameterMatchInitParameters `json:"match,omitempty" tf:"match,omitempty"`
 
 	// Name to use for the gateway route. Must be between 1 and 255 characters in length.
@@ -961,7 +961,7 @@ type MatchQueryParameterMatchParameters struct {
 
 type MatchQueryParameterObservation struct {
 
-	// Criteria for determining a request match. See match Block for details.
+	// Criteria for determining a request match. See spec.grpc_route.match Block for details.
 	Match *MatchQueryParameterMatchObservation `json:"match,omitempty" tf:"match,omitempty"`
 
 	// Name to use for the gateway route. Must be between 1 and 255 characters in length.
@@ -970,7 +970,7 @@ type MatchQueryParameterObservation struct {
 
 type MatchQueryParameterParameters struct {
 
-	// Criteria for determining a request match. See match Block for details.
+	// Criteria for determining a request match. See spec.grpc_route.match Block for details.
 	// +kubebuilder:validation:Optional
 	Match *MatchQueryParameterMatchParameters `json:"match,omitempty" tf:"match,omitempty"`
 
@@ -1058,7 +1058,7 @@ type PrefixParameters struct {
 
 type QueryParameterInitParameters struct {
 
-	// Criteria for determining a request match. See match Block for details.
+	// Criteria for determining a request match. See spec.grpc_route.match Block for details.
 	Match *QueryParameterMatchInitParameters `json:"match,omitempty" tf:"match,omitempty"`
 
 	// Name to use for the gateway route. Must be between 1 and 255 characters in length.
@@ -1086,7 +1086,7 @@ type QueryParameterMatchParameters struct {
 
 type QueryParameterObservation struct {
 
-	// Criteria for determining a request match. See match Block for details.
+	// Criteria for determining a request match. See spec.grpc_route.match Block for details.
 	Match *QueryParameterMatchObservation `json:"match,omitempty" tf:"match,omitempty"`
 
 	// Name to use for the gateway route. Must be between 1 and 255 characters in length.
@@ -1095,7 +1095,7 @@ type QueryParameterObservation struct {
 
 type QueryParameterParameters struct {
 
-	// Criteria for determining a request match. See match Block for details.
+	// Criteria for determining a request match. See spec.grpc_route.match Block for details.
 	// +kubebuilder:validation:Optional
 	Match *QueryParameterMatchParameters `json:"match,omitempty" tf:"match,omitempty"`
 
@@ -1154,39 +1154,39 @@ type RewriteHostnameParameters struct {
 
 type RewriteInitParameters struct {
 
-	// Host name to match on. See hostname Block for details.
+	// Host name to rewrite. See spec.http_route.action.rewrite.hostname Block for details.
 	Hostname *HostnameInitParameters `json:"hostname,omitempty" tf:"hostname,omitempty"`
 
-	// Exact path to rewrite. See path Block for details.
+	// Exact path to rewrite. See spec.http_route.action.rewrite.path Block for details.
 	Path *PathInitParameters `json:"path,omitempty" tf:"path,omitempty"`
 
-	// Specified beginning characters to rewrite. See prefix Block for details.
+	// Specified beginning characters to rewrite. See spec.http_route.action.rewrite.prefix Block for details.
 	Prefix *PrefixInitParameters `json:"prefix,omitempty" tf:"prefix,omitempty"`
 }
 
 type RewriteObservation struct {
 
-	// Host name to match on. See hostname Block for details.
+	// Host name to rewrite. See spec.http_route.action.rewrite.hostname Block for details.
 	Hostname *HostnameObservation `json:"hostname,omitempty" tf:"hostname,omitempty"`
 
-	// Exact path to rewrite. See path Block for details.
+	// Exact path to rewrite. See spec.http_route.action.rewrite.path Block for details.
 	Path *PathObservation `json:"path,omitempty" tf:"path,omitempty"`
 
-	// Specified beginning characters to rewrite. See prefix Block for details.
+	// Specified beginning characters to rewrite. See spec.http_route.action.rewrite.prefix Block for details.
 	Prefix *PrefixObservation `json:"prefix,omitempty" tf:"prefix,omitempty"`
 }
 
 type RewriteParameters struct {
 
-	// Host name to match on. See hostname Block for details.
+	// Host name to rewrite. See spec.http_route.action.rewrite.hostname Block for details.
 	// +kubebuilder:validation:Optional
 	Hostname *HostnameParameters `json:"hostname,omitempty" tf:"hostname,omitempty"`
 
-	// Exact path to rewrite. See path Block for details.
+	// Exact path to rewrite. See spec.http_route.action.rewrite.path Block for details.
 	// +kubebuilder:validation:Optional
 	Path *PathParameters `json:"path,omitempty" tf:"path,omitempty"`
 
-	// Specified beginning characters to rewrite. See prefix Block for details.
+	// Specified beginning characters to rewrite. See spec.http_route.action.rewrite.prefix Block for details.
 	// +kubebuilder:validation:Optional
 	Prefix *PrefixParameters `json:"prefix,omitempty" tf:"prefix,omitempty"`
 }
@@ -1290,29 +1290,29 @@ type SpecParameters struct {
 
 type TargetInitParameters struct {
 
-	// The port number that corresponds to the target for Virtual Service provider port. This is required when the provider (router or node) of the Virtual Service has multiple listeners.
+	// Port number that corresponds to the target for Virtual Service provider port. This is required when the provider (router or node) of the Virtual Service has multiple listeners.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
-	// Virtual service gateway route target. See virtual_service Block for details.
+	// Virtual service gateway route target. See spec.grpc_route.action.target.virtual_service Block for details.
 	VirtualService *VirtualServiceInitParameters `json:"virtualService,omitempty" tf:"virtual_service,omitempty"`
 }
 
 type TargetObservation struct {
 
-	// The port number that corresponds to the target for Virtual Service provider port. This is required when the provider (router or node) of the Virtual Service has multiple listeners.
+	// Port number that corresponds to the target for Virtual Service provider port. This is required when the provider (router or node) of the Virtual Service has multiple listeners.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
-	// Virtual service gateway route target. See virtual_service Block for details.
+	// Virtual service gateway route target. See spec.grpc_route.action.target.virtual_service Block for details.
 	VirtualService *VirtualServiceObservation `json:"virtualService,omitempty" tf:"virtual_service,omitempty"`
 }
 
 type TargetParameters struct {
 
-	// The port number that corresponds to the target for Virtual Service provider port. This is required when the provider (router or node) of the Virtual Service has multiple listeners.
+	// Port number that corresponds to the target for Virtual Service provider port. This is required when the provider (router or node) of the Virtual Service has multiple listeners.
 	// +kubebuilder:validation:Optional
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
-	// Virtual service gateway route target. See virtual_service Block for details.
+	// Virtual service gateway route target. See spec.grpc_route.action.target.virtual_service Block for details.
 	// +kubebuilder:validation:Optional
 	VirtualService *VirtualServiceParameters `json:"virtualService" tf:"virtual_service,omitempty"`
 }

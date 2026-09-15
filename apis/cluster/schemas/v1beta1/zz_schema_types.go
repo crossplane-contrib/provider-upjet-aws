@@ -46,7 +46,7 @@ type SchemaInitParameters struct {
 
 type SchemaObservation struct {
 
-	// The Amazon Resource Name (ARN) of the discoverer.
+	// ARN of the discoverer.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The schema specification. Must be a valid Open API 3.0 spec.

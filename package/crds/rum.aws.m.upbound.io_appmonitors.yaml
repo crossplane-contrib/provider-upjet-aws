@@ -419,8 +419,7 @@ spec:
                     description: The unique ID of the app monitor. Useful for JS templates.
                     type: string
                   arn:
-                    description: The Amazon Resource Name (ARN) specifying the app
-                      monitor.
+                    description: ARN specifying the app monitor.
                     type: string
                   customEvents:
                     description: Specifies whether this app monitor allows the web

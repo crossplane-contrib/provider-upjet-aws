@@ -27,7 +27,7 @@ type ModelInitParameters struct {
 	// +kubebuilder:validation:Optional
 	APIIDSelector *v2.NamespacedSelector `json:"apiIdSelector,omitempty" tf:"-"`
 
-	// The content-type for the model, for example, application/json. Must be between 1 and 256 characters in length.
+	// Content-type for the model, for example, application/json. Must be between 1 and 256 characters in length.
 	ContentType *string `json:"contentType,omitempty" tf:"content_type,omitempty"`
 
 	// Description of the model. Must be between 1 and 128 characters in length.
@@ -45,7 +45,7 @@ type ModelObservation struct {
 	// API identifier.
 	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
 
-	// The content-type for the model, for example, application/json. Must be between 1 and 256 characters in length.
+	// Content-type for the model, for example, application/json. Must be between 1 and 256 characters in length.
 	ContentType *string `json:"contentType,omitempty" tf:"content_type,omitempty"`
 
 	// Description of the model. Must be between 1 and 128 characters in length.
@@ -80,7 +80,7 @@ type ModelParameters struct {
 	// +kubebuilder:validation:Optional
 	APIIDSelector *v2.NamespacedSelector `json:"apiIdSelector,omitempty" tf:"-"`
 
-	// The content-type for the model, for example, application/json. Must be between 1 and 256 characters in length.
+	// Content-type for the model, for example, application/json. Must be between 1 and 256 characters in length.
 	// +kubebuilder:validation:Optional
 	ContentType *string `json:"contentType,omitempty" tf:"content_type,omitempty"`
 

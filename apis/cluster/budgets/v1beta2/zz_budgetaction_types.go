@@ -253,7 +253,7 @@ type IAMActionDefinitionInitParameters struct {
 	// +listType=set
 	Groups []*string `json:"groups,omitempty" tf:"groups,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the policy to be attached.
+	// ARN of the policy to be attached.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Policy
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	PolicyArn *string `json:"policyArn,omitempty" tf:"policy_arn,omitempty"`
@@ -290,7 +290,7 @@ type IAMActionDefinitionObservation struct {
 	// +listType=set
 	Groups []*string `json:"groups,omitempty" tf:"groups,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the policy to be attached.
+	// ARN of the policy to be attached.
 	PolicyArn *string `json:"policyArn,omitempty" tf:"policy_arn,omitempty"`
 
 	// A list of roles to be attached. There must be at least one role.
@@ -309,7 +309,7 @@ type IAMActionDefinitionParameters struct {
 	// +listType=set
 	Groups []*string `json:"groups,omitempty" tf:"groups,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the policy to be attached.
+	// ARN of the policy to be attached.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Policy
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional

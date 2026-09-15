@@ -163,13 +163,13 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: Amazon Resource Name (ARN) of Glue Registry.
+                    description: ARN of Glue Registry.
                     type: string
                   description:
                     description: A description of the registry.
                     type: string
                   id:
-                    description: Amazon Resource Name (ARN) of Glue Registry.
+                    description: ARN of Glue Registry.
                     type: string
                   region:
                     description: |-

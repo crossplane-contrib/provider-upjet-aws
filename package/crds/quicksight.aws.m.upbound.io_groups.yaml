@@ -176,7 +176,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: Amazon Resource Name (ARN) of group
+                    description: ARN of group
                     type: string
                   awsAccountId:
                     description: AWS account ID.

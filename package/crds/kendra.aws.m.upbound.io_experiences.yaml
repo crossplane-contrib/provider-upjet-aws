@@ -194,10 +194,10 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   roleArn:
-                    description: The Amazon Resource Name (ARN) of a role with permission
-                      to access Query API, QuerySuggestions API, SubmitFeedback API,
-                      and AWS SSO that stores your user and group information. For
-                      more information, see IAM roles for Amazon Kendra.
+                    description: ARN of a role with permission to access Query API,
+                      QuerySuggestions API, SubmitFeedback API, and AWS SSO that stores
+                      your user and group information. For more information, see IAM
+                      roles for Amazon Kendra.
                     type: string
                   roleArnRef:
                     description: Reference to a Role in iam to populate roleArn.
@@ -426,10 +426,10 @@ spec:
                     description: A name for your Amazon Kendra experience.
                     type: string
                   roleArn:
-                    description: The Amazon Resource Name (ARN) of a role with permission
-                      to access Query API, QuerySuggestions API, SubmitFeedback API,
-                      and AWS SSO that stores your user and group information. For
-                      more information, see IAM roles for Amazon Kendra.
+                    description: ARN of a role with permission to access Query API,
+                      QuerySuggestions API, SubmitFeedback API, and AWS SSO that stores
+                      your user and group information. For more information, see IAM
+                      roles for Amazon Kendra.
                     type: string
                   roleArnRef:
                     description: Reference to a Role in iam to populate roleArn.
@@ -660,10 +660,10 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   roleArn:
-                    description: The Amazon Resource Name (ARN) of a role with permission
-                      to access Query API, QuerySuggestions API, SubmitFeedback API,
-                      and AWS SSO that stores your user and group information. For
-                      more information, see IAM roles for Amazon Kendra.
+                    description: ARN of a role with permission to access Query API,
+                      QuerySuggestions API, SubmitFeedback API, and AWS SSO that stores
+                      your user and group information. For more information, see IAM
+                      roles for Amazon Kendra.
                     type: string
                   status:
                     description: The current processing status of your Amazon Kendra

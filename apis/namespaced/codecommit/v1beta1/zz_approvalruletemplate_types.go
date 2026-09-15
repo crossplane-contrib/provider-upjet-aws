@@ -41,7 +41,7 @@ type ApprovalRuleTemplateObservation struct {
 	// The date the approval rule template was most recently changed, in RFC3339 format.
 	LastModifiedDate *string `json:"lastModifiedDate,omitempty" tf:"last_modified_date,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the user who made the most recent changes to the approval rule template.
+	// ARN of the user who made the most recent changes to the approval rule template.
 	LastModifiedUser *string `json:"lastModifiedUser,omitempty" tf:"last_modified_user,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.

@@ -74,7 +74,7 @@ type ClusterInstanceInitParameters struct {
 	// Valid Values: aurora-mysql, aurora-postgresql, mysql, postgres.(Note that mysql and postgres are Multi-AZ RDS clusters).
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
 
-	// Database engine version. Please note that to upgrade the engine_version of the instance, it must be done on the aws_rds_cluster engine_version. Trying to upgrade in aws_cluster_instance will not update the engine_version.
+	// Database engine version. Please note that to upgrade the engine_version of the instance, it must be done on the aws_rds_cluster engine_version. Trying to upgrade in aws_rds_cluster_instance will not update the engine_version.
 	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
 
 	// Forces an instance to be destroyed when a part of a read replica cluster. Note: will promote the read replica to a standalone cluster before instance deletion.
@@ -132,6 +132,10 @@ type ClusterInstanceInitParameters struct {
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Set of RDS event categories (for example failure, maintenance) to check for after create and update operations. Has no effect if unset; see DescribeEvents and the aws_rds_events data source for the source of these events. Requires the rds:DescribeEvents IAM permission when set.
+	// +listType=set
+	WarningEventCategories []*string `json:"warningEventCategories,omitempty" tf:"warning_event_categories,omitempty"`
 }
 
 type ClusterInstanceObservation struct {
@@ -139,7 +143,7 @@ type ClusterInstanceObservation struct {
 	// Specifies whether any database modifications are applied immediately, or during the next maintenance window. Default isfalse.
 	ApplyImmediately *bool `json:"applyImmediately,omitempty" tf:"apply_immediately,omitempty"`
 
-	// Amazon Resource Name (ARN) of cluster instance
+	// ARN of cluster instance
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Indicates that minor engine upgrades will be applied automatically to the DB instance during the maintenance window. Default true.
@@ -176,7 +180,7 @@ type ClusterInstanceObservation struct {
 	// Valid Values: aurora-mysql, aurora-postgresql, mysql, postgres.(Note that mysql and postgres are Multi-AZ RDS clusters).
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
 
-	// Database engine version. Please note that to upgrade the engine_version of the instance, it must be done on the aws_rds_cluster engine_version. Trying to upgrade in aws_cluster_instance will not update the engine_version.
+	// Database engine version. Please note that to upgrade the engine_version of the instance, it must be done on the aws_rds_cluster engine_version. Trying to upgrade in aws_rds_cluster_instance will not update the engine_version.
 	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
 
 	// Database engine version
@@ -241,6 +245,10 @@ type ClusterInstanceObservation struct {
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// Set of RDS event categories (for example failure, maintenance) to check for after create and update operations. Has no effect if unset; see DescribeEvents and the aws_rds_events data source for the source of these events. Requires the rds:DescribeEvents IAM permission when set.
+	// +listType=set
+	WarningEventCategories []*string `json:"warningEventCategories,omitempty" tf:"warning_event_categories,omitempty"`
 
 	// Boolean indicating if this instance is writable. False indicates this instance is a read replica.
 	Writer *bool `json:"writer,omitempty" tf:"writer,omitempty"`
@@ -317,7 +325,7 @@ type ClusterInstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
 
-	// Database engine version. Please note that to upgrade the engine_version of the instance, it must be done on the aws_rds_cluster engine_version. Trying to upgrade in aws_cluster_instance will not update the engine_version.
+	// Database engine version. Please note that to upgrade the engine_version of the instance, it must be done on the aws_rds_cluster engine_version. Trying to upgrade in aws_rds_cluster_instance will not update the engine_version.
 	// +kubebuilder:validation:Optional
 	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
 
@@ -393,6 +401,11 @@ type ClusterInstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Set of RDS event categories (for example failure, maintenance) to check for after create and update operations. Has no effect if unset; see DescribeEvents and the aws_rds_events data source for the source of these events. Requires the rds:DescribeEvents IAM permission when set.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	WarningEventCategories []*string `json:"warningEventCategories,omitempty" tf:"warning_event_categories,omitempty"`
 }
 
 // ClusterInstanceSpec defines the desired state of ClusterInstance

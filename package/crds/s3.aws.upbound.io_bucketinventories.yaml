@@ -1026,13 +1026,12 @@ spec:
                         type: object
                     type: object
                   destination:
-                    description: Contains information about where to publish the inventory
-                      results (documented below).
+                    description: Where to publish the inventory results. See destination
+                      Block below.
                     properties:
                       bucket:
-                        description: Name of the source bucket that inventory lists
-                          the objects for. Both general purpose and directory buckets
-                          are supported.
+                        description: S3 bucket configuration where inventory results
+                          are published. See bucket Block below.
                         properties:
                           accountId:
                             description: ID of the account that owns the destination
@@ -1118,13 +1117,13 @@ spec:
                                 type: object
                             type: object
                           encryption:
-                            description: Contains the type of server-side encryption
-                              to use to encrypt the inventory (documented below).
+                            description: Type of server-side encryption to use to
+                              encrypt the inventory. See encryption Block below.
                             properties:
                               sseKms:
-                                description: Specifies to use server-side encryption
-                                  with AWS KMS-managed keys to encrypt the inventory
-                                  file (documented below).
+                                description: Server-side encryption with AWS KMS-managed
+                                  keys to encrypt the inventory file. See sse_kms
+                                  Block below.
                                 properties:
                                   keyId:
                                     description: ARN of the KMS customer master key
@@ -1132,14 +1131,13 @@ spec:
                                     type: string
                                 type: object
                               sseS3:
-                                description: Specifies to use server-side encryption
-                                  with Amazon S3-managed keys (SSE-S3) to encrypt
-                                  the inventory file.
+                                description: Server-side encryption with Amazon S3-managed
+                                  keys (SSE-S3) to encrypt the inventory file.
                                 type: object
                             type: object
                           format:
-                            description: Specifies the output format of the inventory
-                              results. Can be CSV, ORC or Parquet.
+                            description: 'Output format of the inventory results.
+                              Valid values: CSV, ORC, Parquet.'
                             type: string
                           prefix:
                             description: Prefix that an object must have to be included
@@ -1148,12 +1146,11 @@ spec:
                         type: object
                     type: object
                   enabled:
-                    description: Specifies whether the inventory is enabled or disabled.
+                    description: Whether to enable the inventory.
                     type: boolean
                   filter:
-                    description: Specifies an inventory filter. The inventory only
-                      includes objects that meet the filter's criteria (documented
-                      below).
+                    description: Inventory filter. The inventory only includes objects
+                      that meet the filter's criteria. See filter Block below.
                     properties:
                       prefix:
                         description: Prefix that an object must have to be included
@@ -1182,12 +1179,12 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   schedule:
-                    description: Specifies the schedule for generating inventory results
-                      (documented below).
+                    description: Schedule for generating inventory results. See schedule
+                      Block below.
                     properties:
                       frequency:
-                        description: 'Specifies how frequently inventory results are
-                          produced. Valid values: Daily, Weekly.'
+                        description: 'How frequently inventory results are produced.
+                          Valid values: Daily, Weekly.'
                         type: string
                     type: object
                 required:
@@ -1286,13 +1283,12 @@ spec:
                         type: object
                     type: object
                   destination:
-                    description: Contains information about where to publish the inventory
-                      results (documented below).
+                    description: Where to publish the inventory results. See destination
+                      Block below.
                     properties:
                       bucket:
-                        description: Name of the source bucket that inventory lists
-                          the objects for. Both general purpose and directory buckets
-                          are supported.
+                        description: S3 bucket configuration where inventory results
+                          are published. See bucket Block below.
                         properties:
                           accountId:
                             description: ID of the account that owns the destination
@@ -1378,13 +1374,13 @@ spec:
                                 type: object
                             type: object
                           encryption:
-                            description: Contains the type of server-side encryption
-                              to use to encrypt the inventory (documented below).
+                            description: Type of server-side encryption to use to
+                              encrypt the inventory. See encryption Block below.
                             properties:
                               sseKms:
-                                description: Specifies to use server-side encryption
-                                  with AWS KMS-managed keys to encrypt the inventory
-                                  file (documented below).
+                                description: Server-side encryption with AWS KMS-managed
+                                  keys to encrypt the inventory file. See sse_kms
+                                  Block below.
                                 properties:
                                   keyId:
                                     description: ARN of the KMS customer master key
@@ -1392,14 +1388,13 @@ spec:
                                     type: string
                                 type: object
                               sseS3:
-                                description: Specifies to use server-side encryption
-                                  with Amazon S3-managed keys (SSE-S3) to encrypt
-                                  the inventory file.
+                                description: Server-side encryption with Amazon S3-managed
+                                  keys (SSE-S3) to encrypt the inventory file.
                                 type: object
                             type: object
                           format:
-                            description: Specifies the output format of the inventory
-                              results. Can be CSV, ORC or Parquet.
+                            description: 'Output format of the inventory results.
+                              Valid values: CSV, ORC, Parquet.'
                             type: string
                           prefix:
                             description: Prefix that an object must have to be included
@@ -1408,12 +1403,11 @@ spec:
                         type: object
                     type: object
                   enabled:
-                    description: Specifies whether the inventory is enabled or disabled.
+                    description: Whether to enable the inventory.
                     type: boolean
                   filter:
-                    description: Specifies an inventory filter. The inventory only
-                      includes objects that meet the filter's criteria (documented
-                      below).
+                    description: Inventory filter. The inventory only includes objects
+                      that meet the filter's criteria. See filter Block below.
                     properties:
                       prefix:
                         description: Prefix that an object must have to be included
@@ -1437,12 +1431,12 @@ spec:
                     type: array
                     x-kubernetes-list-type: set
                   schedule:
-                    description: Specifies the schedule for generating inventory results
-                      (documented below).
+                    description: Schedule for generating inventory results. See schedule
+                      Block below.
                     properties:
                       frequency:
-                        description: 'Specifies how frequently inventory results are
-                          produced. Valid values: Daily, Weekly.'
+                        description: 'How frequently inventory results are produced.
+                          Valid values: Daily, Weekly.'
                         type: string
                     type: object
                 type: object
@@ -1560,13 +1554,12 @@ spec:
                       supported.
                     type: string
                   destination:
-                    description: Contains information about where to publish the inventory
-                      results (documented below).
+                    description: Where to publish the inventory results. See destination
+                      Block below.
                     properties:
                       bucket:
-                        description: Name of the source bucket that inventory lists
-                          the objects for. Both general purpose and directory buckets
-                          are supported.
+                        description: S3 bucket configuration where inventory results
+                          are published. See bucket Block below.
                         properties:
                           accountId:
                             description: ID of the account that owns the destination
@@ -1578,13 +1571,13 @@ spec:
                               Only general purpose buckets are supported.
                             type: string
                           encryption:
-                            description: Contains the type of server-side encryption
-                              to use to encrypt the inventory (documented below).
+                            description: Type of server-side encryption to use to
+                              encrypt the inventory. See encryption Block below.
                             properties:
                               sseKms:
-                                description: Specifies to use server-side encryption
-                                  with AWS KMS-managed keys to encrypt the inventory
-                                  file (documented below).
+                                description: Server-side encryption with AWS KMS-managed
+                                  keys to encrypt the inventory file. See sse_kms
+                                  Block below.
                                 properties:
                                   keyId:
                                     description: ARN of the KMS customer master key
@@ -1592,14 +1585,13 @@ spec:
                                     type: string
                                 type: object
                               sseS3:
-                                description: Specifies to use server-side encryption
-                                  with Amazon S3-managed keys (SSE-S3) to encrypt
-                                  the inventory file.
+                                description: Server-side encryption with Amazon S3-managed
+                                  keys (SSE-S3) to encrypt the inventory file.
                                 type: object
                             type: object
                           format:
-                            description: Specifies the output format of the inventory
-                              results. Can be CSV, ORC or Parquet.
+                            description: 'Output format of the inventory results.
+                              Valid values: CSV, ORC, Parquet.'
                             type: string
                           prefix:
                             description: Prefix that an object must have to be included
@@ -1608,12 +1600,11 @@ spec:
                         type: object
                     type: object
                   enabled:
-                    description: Specifies whether the inventory is enabled or disabled.
+                    description: Whether to enable the inventory.
                     type: boolean
                   filter:
-                    description: Specifies an inventory filter. The inventory only
-                      includes objects that meet the filter's criteria (documented
-                      below).
+                    description: Inventory filter. The inventory only includes objects
+                      that meet the filter's criteria. See filter Block below.
                     properties:
                       prefix:
                         description: Prefix that an object must have to be included
@@ -1644,12 +1635,12 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   schedule:
-                    description: Specifies the schedule for generating inventory results
-                      (documented below).
+                    description: Schedule for generating inventory results. See schedule
+                      Block below.
                     properties:
                       frequency:
-                        description: 'Specifies how frequently inventory results are
-                          produced. Valid values: Daily, Weekly.'
+                        description: 'How frequently inventory results are produced.
+                          Valid values: Daily, Weekly.'
                         type: string
                     type: object
                 type: object

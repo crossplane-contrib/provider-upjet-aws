@@ -208,7 +208,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: Amazon Resource Name (ARN) of parameter group
+                    description: ARN of parameter group
                     type: string
                   description:
                     description: The description of the Redshift parameter group.

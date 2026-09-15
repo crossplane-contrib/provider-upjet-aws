@@ -244,7 +244,10 @@ spec:
                     type: object
                   fields:
                     description: The fields that are included in each real-time log
-                      record. See the AWS documentation for supported values.
+                      record. See the AWS documentation for supported values. This
+                      includes viewer-request-log-data and viewer-response-log-data,
+                      which carry the custom data that a CloudFront Function logs
+                      with cf.logCustomData().
                     items:
                       type: string
                     type: array
@@ -457,7 +460,10 @@ spec:
                     type: object
                   fields:
                     description: The fields that are included in each real-time log
-                      record. See the AWS documentation for supported values.
+                      record. See the AWS documentation for supported values. This
+                      includes viewer-request-log-data and viewer-response-log-data,
+                      which carry the custom data that a CloudFront Function logs
+                      with cf.logCustomData().
                     items:
                       type: string
                     type: array
@@ -553,8 +559,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The ARN (Amazon Resource Name) of the CloudFront
-                      real-time log configuration.
+                    description: ARN of the CloudFront real-time log configuration.
                     type: string
                   endpoint:
                     description: The Amazon Kinesis data streams where real-time log
@@ -579,7 +584,10 @@ spec:
                     type: object
                   fields:
                     description: The fields that are included in each real-time log
-                      record. See the AWS documentation for supported values.
+                      record. See the AWS documentation for supported values. This
+                      includes viewer-request-log-data and viewer-response-log-data,
+                      which carry the custom data that a CloudFront Function logs
+                      with cf.logCustomData().
                     items:
                       type: string
                     type: array

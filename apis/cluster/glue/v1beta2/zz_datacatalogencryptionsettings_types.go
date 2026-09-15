@@ -138,7 +138,17 @@ type EncryptionAtRestInitParameters struct {
 	CatalogEncryptionMode *string `json:"catalogEncryptionMode,omitempty" tf:"catalog_encryption_mode,omitempty"`
 
 	// The ARN of the AWS IAM role used for accessing encrypted Data Catalog data.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	CatalogEncryptionServiceRole *string `json:"catalogEncryptionServiceRole,omitempty" tf:"catalog_encryption_service_role,omitempty"`
+
+	// Reference to a Role in iam to populate catalogEncryptionServiceRole.
+	// +kubebuilder:validation:Optional
+	CatalogEncryptionServiceRoleRef *v2.Reference `json:"catalogEncryptionServiceRoleRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate catalogEncryptionServiceRole.
+	// +kubebuilder:validation:Optional
+	CatalogEncryptionServiceRoleSelector *v2.Selector `json:"catalogEncryptionServiceRoleSelector,omitempty" tf:"-"`
 
 	// The ARN of the AWS KMS key to use for encryption at rest.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kms/v1beta1.Key
@@ -173,8 +183,18 @@ type EncryptionAtRestParameters struct {
 	CatalogEncryptionMode *string `json:"catalogEncryptionMode" tf:"catalog_encryption_mode,omitempty"`
 
 	// The ARN of the AWS IAM role used for accessing encrypted Data Catalog data.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	CatalogEncryptionServiceRole *string `json:"catalogEncryptionServiceRole,omitempty" tf:"catalog_encryption_service_role,omitempty"`
+
+	// Reference to a Role in iam to populate catalogEncryptionServiceRole.
+	// +kubebuilder:validation:Optional
+	CatalogEncryptionServiceRoleRef *v2.Reference `json:"catalogEncryptionServiceRoleRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate catalogEncryptionServiceRole.
+	// +kubebuilder:validation:Optional
+	CatalogEncryptionServiceRoleSelector *v2.Selector `json:"catalogEncryptionServiceRoleSelector,omitempty" tf:"-"`
 
 	// The ARN of the AWS KMS key to use for encryption at rest.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kms/v1beta1.Key

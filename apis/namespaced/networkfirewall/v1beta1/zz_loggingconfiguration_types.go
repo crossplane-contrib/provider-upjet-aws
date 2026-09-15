@@ -60,7 +60,7 @@ type LoggingConfigurationInitParameters struct {
 	// Whether to enable the detailed firewall monitoring dashboard on the firewall. Defaults to false.
 	EnableMonitoringDashboard *bool `json:"enableMonitoringDashboard,omitempty" tf:"enable_monitoring_dashboard,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the Network Firewall firewall.
+	// ARN of the Network Firewall firewall.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/networkfirewall/v1beta1.Firewall
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	FirewallArn *string `json:"firewallArn,omitempty" tf:"firewall_arn,omitempty"`
@@ -101,10 +101,10 @@ type LoggingConfigurationObservation struct {
 	// Whether to enable the detailed firewall monitoring dashboard on the firewall. Defaults to false.
 	EnableMonitoringDashboard *bool `json:"enableMonitoringDashboard,omitempty" tf:"enable_monitoring_dashboard,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the Network Firewall firewall.
+	// ARN of the Network Firewall firewall.
 	FirewallArn *string `json:"firewallArn,omitempty" tf:"firewall_arn,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the associated firewall.
+	// ARN of the associated firewall.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// A configuration block describing how AWS Network Firewall performs logging for a firewall. See Logging Configuration below for details.
@@ -121,7 +121,7 @@ type LoggingConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	EnableMonitoringDashboard *bool `json:"enableMonitoringDashboard,omitempty" tf:"enable_monitoring_dashboard,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the Network Firewall firewall.
+	// ARN of the Network Firewall firewall.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/networkfirewall/v1beta1.Firewall
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional

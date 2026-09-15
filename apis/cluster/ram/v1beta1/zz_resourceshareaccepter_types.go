@@ -15,7 +15,7 @@ import (
 
 type ResourceShareAccepterInitParameters struct {
 
-	// The ARN of the resource share.
+	// ARN of the resource share.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ram/v1beta1.PrincipalAssociation
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("resource_share_arn",false)
 	ShareArn *string `json:"shareArn,omitempty" tf:"share_arn,omitempty"`
@@ -32,32 +32,32 @@ type ResourceShareAccepterInitParameters struct {
 type ResourceShareAccepterObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The ARN of the resource share invitation.
+	// ARN of the resource share invitation.
 	InvitationArn *string `json:"invitationArn,omitempty" tf:"invitation_arn,omitempty"`
 
-	// The account ID of the receiver account which accepts the invitation.
+	// Account ID of the receiver account which accepts the invitation.
 	ReceiverAccountID *string `json:"receiverAccountId,omitempty" tf:"receiver_account_id,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// A list of the resource ARNs shared via the resource share.
+	// List of the resource ARNs shared via the resource share.
 	Resources []*string `json:"resources,omitempty" tf:"resources,omitempty"`
 
-	// The account ID of the sender account which submits the invitation.
+	// Account ID of the sender account which submits the invitation.
 	SenderAccountID *string `json:"senderAccountId,omitempty" tf:"sender_account_id,omitempty"`
 
-	// The ARN of the resource share.
+	// ARN of the resource share.
 	ShareArn *string `json:"shareArn,omitempty" tf:"share_arn,omitempty"`
 
-	// The ID of the resource share as displayed in the console.
+	// ID of the resource share as displayed in the console.
 	ShareID *string `json:"shareId,omitempty" tf:"share_id,omitempty"`
 
-	// The name of the resource share.
+	// Name of the resource share.
 	ShareName *string `json:"shareName,omitempty" tf:"share_name,omitempty"`
 
-	// The status of the resource share (ACTIVE, PENDING, FAILED, DELETING, DELETED).
+	// Status of the resource share (ACTIVE, PENDING, FAILED, DELETING, DELETED).
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
 
@@ -68,7 +68,7 @@ type ResourceShareAccepterParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// The ARN of the resource share.
+	// ARN of the resource share.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ram/v1beta1.PrincipalAssociation
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("resource_share_arn",false)
 	// +kubebuilder:validation:Optional

@@ -83,8 +83,7 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   roleArn:
-                    description: Amazon Resource Name (ARN) of the IAM Role to assume
-                      for operations.
+                    description: ARN of the IAM Role to assume for operations.
                     type: string
                   roleArnRef:
                     description: Reference to a Role in iam to populate roleArn.
@@ -211,8 +210,7 @@ spec:
                       type schema with desired configuration.
                     type: string
                   roleArn:
-                    description: Amazon Resource Name (ARN) of the IAM Role to assume
-                      for operations.
+                    description: ARN of the IAM Role to assume for operations.
                     type: string
                   roleArnRef:
                     description: Reference to a Role in iam to populate roleArn.
@@ -437,8 +435,7 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   roleArn:
-                    description: Amazon Resource Name (ARN) of the IAM Role to assume
-                      for operations.
+                    description: ARN of the IAM Role to assume for operations.
                     type: string
                   typeName:
                     description: CloudFormation resource type name. For example, AWS::EC2::VPC.

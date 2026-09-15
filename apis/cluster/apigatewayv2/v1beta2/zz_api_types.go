@@ -15,15 +15,13 @@ import (
 
 type APIInitParameters struct {
 
-	// An API key selection expression.
-	// Valid values: $context.authorizer.usageIdentifierKey, $request.header.x-api-key. Defaults to $request.header.x-api-key.
-	// Applicable for WebSocket APIs.
+	// API key selection expression. Valid values: $context.authorizer.usageIdentifierKey, $request.header.x-api-key. Defaults to $request.header.x-api-key. Applicable for WebSocket APIs.
 	APIKeySelectionExpression *string `json:"apiKeySelectionExpression,omitempty" tf:"api_key_selection_expression,omitempty"`
 
-	// An OpenAPI specification that defines the set of routes and integrations to create as part of the HTTP APIs. Supported only for HTTP APIs.
+	// OpenAPI specification that defines the set of routes and integrations to create as part of the HTTP APIs. Supported only for HTTP APIs.
 	Body *string `json:"body,omitempty" tf:"body,omitempty"`
 
-	// Cross-origin resource sharing (CORS) configuration. Applicable for HTTP APIs.
+	// Cross-origin resource sharing (CORS) configuration. Applicable for HTTP APIs. See cors_configuration Block below.
 	CorsConfiguration *CorsConfigurationInitParameters `json:"corsConfiguration,omitempty" tf:"cors_configuration,omitempty"`
 
 	// Part of quick create. Specifies any credentials required for the integration. Applicable for HTTP APIs.
@@ -32,15 +30,13 @@ type APIInitParameters struct {
 	// Description of the API. Must be less than or equal to 1024 characters in length.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Whether clients can invoke the API by using the default execute-api endpoint.
-	// By default, clients can invoke the API with the default {api_id}.execute-api.{region}.amazonaws.com endpoint.
-	// To require that clients use a custom domain name to invoke the API, disable the default endpoint.
+	// Whether clients can invoke the API by using the default execute-api endpoint. By default, clients can invoke the API with the default {api_id}.execute-api.{region}.amazonaws.com endpoint. To require that clients use a custom domain name to invoke the API, disable the default endpoint.
 	DisableExecuteAPIEndpoint *bool `json:"disableExecuteApiEndpoint,omitempty" tf:"disable_execute_api_endpoint,omitempty"`
 
 	// Whether warnings should return an error while API Gateway is creating or updating the resource using an OpenAPI specification. Defaults to false. Applicable for HTTP APIs.
 	FailOnWarnings *bool `json:"failOnWarnings,omitempty" tf:"fail_on_warnings,omitempty"`
 
-	// The IP address types that can invoke the API. Valid values: ipv4, dualstack. Use ipv4 to allow only IPv4 addresses to invoke your API, or use dualstack to allow both IPv4 and IPv6 addresses to invoke your API. Defaults to ipv4.
+	// IP address types that can invoke the API. Valid values: ipv4, dualstack. Use ipv4 to allow only IPv4 addresses to invoke your API, or use dualstack to allow both IPv4 and IPv6 addresses to invoke your API. Defaults to ipv4.
 	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
 
 	// Name of the API. Must be less than or equal to 128 characters in length.
@@ -52,17 +48,14 @@ type APIInitParameters struct {
 	// Part of quick create. Specifies any route key. Applicable for HTTP APIs.
 	RouteKey *string `json:"routeKey,omitempty" tf:"route_key,omitempty"`
 
-	// The route selection expression for the API.
-	// Defaults to $request.method $request.path.
+	// Route selection expression for the API. Defaults to $request.method $request.path.
 	RouteSelectionExpression *string `json:"routeSelectionExpression,omitempty" tf:"route_selection_expression,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Part of quick create. Quick create produces an API with an integration, a default catch-all route, and a default stage which is configured to automatically deploy changes.
-	// For HTTP integrations, specify a fully qualified URL. For Lambda integrations, specify a function ARN.
-	// The type of the integration will be HTTP_PROXY or AWS_PROXY, respectively. Applicable for HTTP APIs.
+	// Part of quick create. Quick create produces an API with an integration, a default catch-all route, and a default stage which is configured to automatically deploy changes. For HTTP integrations, specify a fully qualified URL. For Lambda integrations, specify a function ARN. The type of the integration will be HTTP_PROXY or AWS_PROXY, respectively. Applicable for HTTP APIs.
 	Target *string `json:"target,omitempty" tf:"target,omitempty"`
 
 	// Version identifier for the API. Must be between 1 and 64 characters in length.
@@ -74,18 +67,16 @@ type APIObservation struct {
 	// URI of the API, of the form https://{api-id}.execute-api.{region}.amazonaws.com for HTTP APIs and wss://{api-id}.execute-api.{region}.amazonaws.com for WebSocket APIs.
 	APIEndpoint *string `json:"apiEndpoint,omitempty" tf:"api_endpoint,omitempty"`
 
-	// An API key selection expression.
-	// Valid values: $context.authorizer.usageIdentifierKey, $request.header.x-api-key. Defaults to $request.header.x-api-key.
-	// Applicable for WebSocket APIs.
+	// API key selection expression. Valid values: $context.authorizer.usageIdentifierKey, $request.header.x-api-key. Defaults to $request.header.x-api-key. Applicable for WebSocket APIs.
 	APIKeySelectionExpression *string `json:"apiKeySelectionExpression,omitempty" tf:"api_key_selection_expression,omitempty"`
 
 	// ARN of the API.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// An OpenAPI specification that defines the set of routes and integrations to create as part of the HTTP APIs. Supported only for HTTP APIs.
+	// OpenAPI specification that defines the set of routes and integrations to create as part of the HTTP APIs. Supported only for HTTP APIs.
 	Body *string `json:"body,omitempty" tf:"body,omitempty"`
 
-	// Cross-origin resource sharing (CORS) configuration. Applicable for HTTP APIs.
+	// Cross-origin resource sharing (CORS) configuration. Applicable for HTTP APIs. See cors_configuration Block below.
 	CorsConfiguration *CorsConfigurationObservation `json:"corsConfiguration,omitempty" tf:"cors_configuration,omitempty"`
 
 	// Part of quick create. Specifies any credentials required for the integration. Applicable for HTTP APIs.
@@ -94,14 +85,10 @@ type APIObservation struct {
 	// Description of the API. Must be less than or equal to 1024 characters in length.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Whether clients can invoke the API by using the default execute-api endpoint.
-	// By default, clients can invoke the API with the default {api_id}.execute-api.{region}.amazonaws.com endpoint.
-	// To require that clients use a custom domain name to invoke the API, disable the default endpoint.
+	// Whether clients can invoke the API by using the default execute-api endpoint. By default, clients can invoke the API with the default {api_id}.execute-api.{region}.amazonaws.com endpoint. To require that clients use a custom domain name to invoke the API, disable the default endpoint.
 	DisableExecuteAPIEndpoint *bool `json:"disableExecuteApiEndpoint,omitempty" tf:"disable_execute_api_endpoint,omitempty"`
 
-	// ARN prefix to be used in an aws_lambda_permission's source_arn attribute
-	// or in an aws_iam_policy to authorize access to the @connections API.
-	// See the Amazon API Gateway Developer Guide for details.
+	// ARN prefix to be used in an aws_lambda_permission's source_arn attribute or in an aws_iam_policy to authorize access to the @connections API. See the Amazon API Gateway Developer Guide for details.
 	ExecutionArn *string `json:"executionArn,omitempty" tf:"execution_arn,omitempty"`
 
 	// Whether warnings should return an error while API Gateway is creating or updating the resource using an OpenAPI specification. Defaults to false. Applicable for HTTP APIs.
@@ -110,7 +97,7 @@ type APIObservation struct {
 	// API identifier.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The IP address types that can invoke the API. Valid values: ipv4, dualstack. Use ipv4 to allow only IPv4 addresses to invoke your API, or use dualstack to allow both IPv4 and IPv6 addresses to invoke your API. Defaults to ipv4.
+	// IP address types that can invoke the API. Valid values: ipv4, dualstack. Use ipv4 to allow only IPv4 addresses to invoke your API, or use dualstack to allow both IPv4 and IPv6 addresses to invoke your API. Defaults to ipv4.
 	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
 
 	// Name of the API. Must be less than or equal to 128 characters in length.
@@ -126,8 +113,7 @@ type APIObservation struct {
 	// Part of quick create. Specifies any route key. Applicable for HTTP APIs.
 	RouteKey *string `json:"routeKey,omitempty" tf:"route_key,omitempty"`
 
-	// The route selection expression for the API.
-	// Defaults to $request.method $request.path.
+	// Route selection expression for the API. Defaults to $request.method $request.path.
 	RouteSelectionExpression *string `json:"routeSelectionExpression,omitempty" tf:"route_selection_expression,omitempty"`
 
 	// Key-value map of resource tags.
@@ -138,9 +124,7 @@ type APIObservation struct {
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// Part of quick create. Quick create produces an API with an integration, a default catch-all route, and a default stage which is configured to automatically deploy changes.
-	// For HTTP integrations, specify a fully qualified URL. For Lambda integrations, specify a function ARN.
-	// The type of the integration will be HTTP_PROXY or AWS_PROXY, respectively. Applicable for HTTP APIs.
+	// Part of quick create. Quick create produces an API with an integration, a default catch-all route, and a default stage which is configured to automatically deploy changes. For HTTP integrations, specify a fully qualified URL. For Lambda integrations, specify a function ARN. The type of the integration will be HTTP_PROXY or AWS_PROXY, respectively. Applicable for HTTP APIs.
 	Target *string `json:"target,omitempty" tf:"target,omitempty"`
 
 	// Version identifier for the API. Must be between 1 and 64 characters in length.
@@ -149,17 +133,15 @@ type APIObservation struct {
 
 type APIParameters struct {
 
-	// An API key selection expression.
-	// Valid values: $context.authorizer.usageIdentifierKey, $request.header.x-api-key. Defaults to $request.header.x-api-key.
-	// Applicable for WebSocket APIs.
+	// API key selection expression. Valid values: $context.authorizer.usageIdentifierKey, $request.header.x-api-key. Defaults to $request.header.x-api-key. Applicable for WebSocket APIs.
 	// +kubebuilder:validation:Optional
 	APIKeySelectionExpression *string `json:"apiKeySelectionExpression,omitempty" tf:"api_key_selection_expression,omitempty"`
 
-	// An OpenAPI specification that defines the set of routes and integrations to create as part of the HTTP APIs. Supported only for HTTP APIs.
+	// OpenAPI specification that defines the set of routes and integrations to create as part of the HTTP APIs. Supported only for HTTP APIs.
 	// +kubebuilder:validation:Optional
 	Body *string `json:"body,omitempty" tf:"body,omitempty"`
 
-	// Cross-origin resource sharing (CORS) configuration. Applicable for HTTP APIs.
+	// Cross-origin resource sharing (CORS) configuration. Applicable for HTTP APIs. See cors_configuration Block below.
 	// +kubebuilder:validation:Optional
 	CorsConfiguration *CorsConfigurationParameters `json:"corsConfiguration,omitempty" tf:"cors_configuration,omitempty"`
 
@@ -171,9 +153,7 @@ type APIParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Whether clients can invoke the API by using the default execute-api endpoint.
-	// By default, clients can invoke the API with the default {api_id}.execute-api.{region}.amazonaws.com endpoint.
-	// To require that clients use a custom domain name to invoke the API, disable the default endpoint.
+	// Whether clients can invoke the API by using the default execute-api endpoint. By default, clients can invoke the API with the default {api_id}.execute-api.{region}.amazonaws.com endpoint. To require that clients use a custom domain name to invoke the API, disable the default endpoint.
 	// +kubebuilder:validation:Optional
 	DisableExecuteAPIEndpoint *bool `json:"disableExecuteApiEndpoint,omitempty" tf:"disable_execute_api_endpoint,omitempty"`
 
@@ -181,7 +161,7 @@ type APIParameters struct {
 	// +kubebuilder:validation:Optional
 	FailOnWarnings *bool `json:"failOnWarnings,omitempty" tf:"fail_on_warnings,omitempty"`
 
-	// The IP address types that can invoke the API. Valid values: ipv4, dualstack. Use ipv4 to allow only IPv4 addresses to invoke your API, or use dualstack to allow both IPv4 and IPv6 addresses to invoke your API. Defaults to ipv4.
+	// IP address types that can invoke the API. Valid values: ipv4, dualstack. Use ipv4 to allow only IPv4 addresses to invoke your API, or use dualstack to allow both IPv4 and IPv6 addresses to invoke your API. Defaults to ipv4.
 	// +kubebuilder:validation:Optional
 	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
 
@@ -202,8 +182,7 @@ type APIParameters struct {
 	// +kubebuilder:validation:Optional
 	RouteKey *string `json:"routeKey,omitempty" tf:"route_key,omitempty"`
 
-	// The route selection expression for the API.
-	// Defaults to $request.method $request.path.
+	// Route selection expression for the API. Defaults to $request.method $request.path.
 	// +kubebuilder:validation:Optional
 	RouteSelectionExpression *string `json:"routeSelectionExpression,omitempty" tf:"route_selection_expression,omitempty"`
 
@@ -212,9 +191,7 @@ type APIParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Part of quick create. Quick create produces an API with an integration, a default catch-all route, and a default stage which is configured to automatically deploy changes.
-	// For HTTP integrations, specify a fully qualified URL. For Lambda integrations, specify a function ARN.
-	// The type of the integration will be HTTP_PROXY or AWS_PROXY, respectively. Applicable for HTTP APIs.
+	// Part of quick create. Quick create produces an API with an integration, a default catch-all route, and a default stage which is configured to automatically deploy changes. For HTTP integrations, specify a fully qualified URL. For Lambda integrations, specify a function ARN. The type of the integration will be HTTP_PROXY or AWS_PROXY, respectively. Applicable for HTTP APIs.
 	// +kubebuilder:validation:Optional
 	Target *string `json:"target,omitempty" tf:"target,omitempty"`
 

@@ -80,7 +80,7 @@ type LevelFiveInitParameters struct {
 
 type LevelFiveObservation struct {
 
-	// The Amazon Resource Name (ARN) of the hierarchy level.
+	// The ARN of the hierarchy level.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The identifier of the hosting Amazon Connect Instance.
@@ -105,7 +105,7 @@ type LevelFourInitParameters struct {
 
 type LevelFourObservation struct {
 
-	// The Amazon Resource Name (ARN) of the hierarchy level.
+	// The ARN of the hierarchy level.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The identifier of the hosting Amazon Connect Instance.
@@ -130,7 +130,7 @@ type LevelOneInitParameters struct {
 
 type LevelOneObservation struct {
 
-	// The Amazon Resource Name (ARN) of the hierarchy level.
+	// The ARN of the hierarchy level.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The identifier of the hosting Amazon Connect Instance.
@@ -155,7 +155,7 @@ type LevelThreeInitParameters struct {
 
 type LevelThreeObservation struct {
 
-	// The Amazon Resource Name (ARN) of the hierarchy level.
+	// The ARN of the hierarchy level.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The identifier of the hosting Amazon Connect Instance.
@@ -180,7 +180,7 @@ type LevelTwoInitParameters struct {
 
 type LevelTwoObservation struct {
 
-	// The Amazon Resource Name (ARN) of the hierarchy level.
+	// The ARN of the hierarchy level.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The identifier of the hosting Amazon Connect Instance.

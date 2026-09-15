@@ -79,7 +79,7 @@ type SubnetInitParameters_2 struct {
 	// Specify true to indicate that instances launched into the subnet should be assigned a public IP address. Default is false.
 	MapPublicIPOnLaunch *bool `json:"mapPublicIpOnLaunch,omitempty" tf:"map_public_ip_on_launch,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the Outpost.
+	// ARN of the Outpost.
 	OutpostArn *string `json:"outpostArn,omitempty" tf:"outpost_arn,omitempty"`
 
 	// The type of hostnames to assign to instances in the subnet at launch. For IPv6-only subnets, an instance DNS name must be based on the instance ID. For dual-stack and IPv4-only subnets, you can specify whether DNS names use the instance IPv4 address or the instance ID. Valid values: ip-name, resource-name.
@@ -167,7 +167,7 @@ type SubnetObservation_2 struct {
 	// Specify true to indicate that instances launched into the subnet should be assigned a public IP address. Default is false.
 	MapPublicIPOnLaunch *bool `json:"mapPublicIpOnLaunch,omitempty" tf:"map_public_ip_on_launch,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the Outpost.
+	// ARN of the Outpost.
 	OutpostArn *string `json:"outpostArn,omitempty" tf:"outpost_arn,omitempty"`
 
 	// The ID of the AWS account that owns the subnet.
@@ -275,7 +275,7 @@ type SubnetParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	MapPublicIPOnLaunch *bool `json:"mapPublicIpOnLaunch,omitempty" tf:"map_public_ip_on_launch,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the Outpost.
+	// ARN of the Outpost.
 	// +kubebuilder:validation:Optional
 	OutpostArn *string `json:"outpostArn,omitempty" tf:"outpost_arn,omitempty"`
 

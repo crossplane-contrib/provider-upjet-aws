@@ -18,10 +18,10 @@ type DNSEntryInitParameters struct {
 
 type DNSEntryObservation struct {
 
-	// Name of the service. The name must be unique within the account. The valid characters are a-z, 0-9, and hyphens (-). You can't use a hyphen as the first or last character, or immediately after another hyphen.Must be between 3 and 40 characters in length.
+	// Domain name of the service.
 	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
 
-	// Unique identifier for the service.
+	// ID of the hosted zone.
 	HostedZoneID *string `json:"hostedZoneId,omitempty" tf:"hosted_zone_id,omitempty"`
 }
 
@@ -33,11 +33,14 @@ type ServiceInitParameters struct {
 	// Type of IAM policy. Either NONE or AWS_IAM.
 	AuthType *string `json:"authType,omitempty" tf:"auth_type,omitempty"`
 
-	// Amazon Resource Name (ARN) of the certificate.
+	// ARN of the certificate.
 	CertificateArn *string `json:"certificateArn,omitempty" tf:"certificate_arn,omitempty"`
 
 	// Custom domain name of the service.
 	CustomDomainName *string `json:"customDomainName,omitempty" tf:"custom_domain_name,omitempty"`
+
+	// Amount of time, in seconds, that a connection can remain idle (no data sent) before VPC Lattice closes it. The valid range is 60 to 600 seconds. Default is 60 seconds.
+	IdleTimeoutSeconds *float64 `json:"idleTimeoutSeconds,omitempty" tf:"idle_timeout_seconds,omitempty"`
 
 	// Name of the service. The name must be unique within the account. The valid characters are a-z, 0-9, and hyphens (-). You can't use a hyphen as the first or last character, or immediately after another hyphen.Must be between 3 and 40 characters in length.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -55,7 +58,7 @@ type ServiceObservation struct {
 	// Type of IAM policy. Either NONE or AWS_IAM.
 	AuthType *string `json:"authType,omitempty" tf:"auth_type,omitempty"`
 
-	// Amazon Resource Name (ARN) of the certificate.
+	// ARN of the certificate.
 	CertificateArn *string `json:"certificateArn,omitempty" tf:"certificate_arn,omitempty"`
 
 	// Custom domain name of the service.
@@ -66,6 +69,9 @@ type ServiceObservation struct {
 
 	// Unique identifier for the service.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Amount of time, in seconds, that a connection can remain idle (no data sent) before VPC Lattice closes it. The valid range is 60 to 600 seconds. Default is 60 seconds.
+	IdleTimeoutSeconds *float64 `json:"idleTimeoutSeconds,omitempty" tf:"idle_timeout_seconds,omitempty"`
 
 	// Name of the service. The name must be unique within the account. The valid characters are a-z, 0-9, and hyphens (-). You can't use a hyphen as the first or last character, or immediately after another hyphen.Must be between 3 and 40 characters in length.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -92,13 +98,17 @@ type ServiceParameters struct {
 	// +kubebuilder:validation:Optional
 	AuthType *string `json:"authType,omitempty" tf:"auth_type,omitempty"`
 
-	// Amazon Resource Name (ARN) of the certificate.
+	// ARN of the certificate.
 	// +kubebuilder:validation:Optional
 	CertificateArn *string `json:"certificateArn,omitempty" tf:"certificate_arn,omitempty"`
 
 	// Custom domain name of the service.
 	// +kubebuilder:validation:Optional
 	CustomDomainName *string `json:"customDomainName,omitempty" tf:"custom_domain_name,omitempty"`
+
+	// Amount of time, in seconds, that a connection can remain idle (no data sent) before VPC Lattice closes it. The valid range is 60 to 600 seconds. Default is 60 seconds.
+	// +kubebuilder:validation:Optional
+	IdleTimeoutSeconds *float64 `json:"idleTimeoutSeconds,omitempty" tf:"idle_timeout_seconds,omitempty"`
 
 	// Name of the service. The name must be unique within the account. The valid characters are a-z, 0-9, and hyphens (-). You can't use a hyphen as the first or last character, or immediately after another hyphen.Must be between 3 and 40 characters in length.
 	// +kubebuilder:validation:Optional

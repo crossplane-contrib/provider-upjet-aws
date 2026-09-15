@@ -77,8 +77,7 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   snsTopicArn:
-                    description: The Amazon Resource Name of the DocumentDB event
-                      notification subscription
+                    description: ARN of the DocumentDB event notification subscription
                     type: string
                   snsTopicArnRef:
                     description: Reference to a Topic in sns to populate snsTopicArn.
@@ -294,8 +293,7 @@ spec:
                     type: array
                     x-kubernetes-list-type: set
                   snsTopicArn:
-                    description: The Amazon Resource Name of the DocumentDB event
-                      notification subscription
+                    description: ARN of the DocumentDB event notification subscription
                     type: string
                   snsTopicArnRef:
                     description: Reference to a Topic in sns to populate snsTopicArn.
@@ -547,8 +545,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The Amazon Resource Name of the DocumentDB event
-                      notification subscription
+                    description: ARN of the DocumentDB event notification subscription
                     type: string
                   customerAwsId:
                     description: The AWS customer account associated with the DocumentDB
@@ -575,8 +572,7 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   snsTopicArn:
-                    description: The Amazon Resource Name of the DocumentDB event
-                      notification subscription
+                    description: ARN of the DocumentDB event notification subscription
                     type: string
                   sourceIds:
                     description: A list of identifiers of the event sources for which

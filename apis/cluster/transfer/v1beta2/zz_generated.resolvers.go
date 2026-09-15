@@ -231,10 +231,30 @@ func (mg *Server) ResolveReferences(ctx context.Context, c client.Reader) error 
 
 	}
 	{
+		m, l, err = apisresolver.GetManagedResource("lambda.aws.upbound.io", "v1beta2", "Function", "FunctionList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Function),
+			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.FunctionRef,
+			Selector:     mg.Spec.ForProvider.FunctionSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.Function")
+	}
+	mg.Spec.ForProvider.Function = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.FunctionRef = rsp.ResolvedReference
+	{
 		m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
+
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LoggingRole),
 			Extract:      resource.ExtractParamPath("arn", true),
@@ -357,10 +377,30 @@ func (mg *Server) ResolveReferences(ctx context.Context, c client.Reader) error 
 
 	}
 	{
+		m, l, err = apisresolver.GetManagedResource("lambda.aws.upbound.io", "v1beta2", "Function", "FunctionList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Function),
+			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.FunctionRef,
+			Selector:     mg.Spec.InitProvider.FunctionSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.Function")
+	}
+	mg.Spec.InitProvider.Function = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.FunctionRef = rsp.ResolvedReference
+	{
 		m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
+
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LoggingRole),
 			Extract:      resource.ExtractParamPath("arn", true),

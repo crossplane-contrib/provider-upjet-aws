@@ -37,7 +37,7 @@ type VPCIpamScopeInitParameters struct {
 
 type VPCIpamScopeObservation struct {
 
-	// The Amazon Resource Name (ARN) of the scope.
+	// ARN of the scope.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// A description for the scope you're creating.

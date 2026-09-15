@@ -100,6 +100,15 @@ type ClusterInitParameters struct {
 	// Force version update by overriding upgrade-blocking readiness checks when updating a cluster.
 	ForceUpdateVersion *bool `json:"forceUpdateVersion,omitempty" tf:"force_update_version,omitempty"`
 
+	// Configuration block for customizing the Kubernetes API server. Detailed below.
+	KubeAPIServerConfig []KubeAPIServerConfigInitParameters `json:"kubeApiServerConfig,omitempty" tf:"kube_api_server_config,omitempty"`
+
+	// Configuration block for customizing the Kubernetes controller manager. Detailed below.
+	KubeControllerManagerConfig []KubeControllerManagerConfigInitParameters `json:"kubeControllerManagerConfig,omitempty" tf:"kube_controller_manager_config,omitempty"`
+
+	// Configuration block for customizing the Kubernetes scheduler. Detailed below.
+	KubeSchedulerConfig []KubeSchedulerConfigInitParameters `json:"kubeSchedulerConfig,omitempty" tf:"kube_scheduler_config,omitempty"`
+
 	// Configuration block with kubernetes network configuration for the cluster. Detailed below.
 	KubernetesNetworkConfig []KubernetesNetworkConfigInitParameters `json:"kubernetesNetworkConfig,omitempty" tf:"kubernetes_network_config,omitempty"`
 
@@ -190,6 +199,15 @@ type ClusterObservation struct {
 	// Attribute block containing identity provider information for your cluster. Only available on Kubernetes version 1.13 and 1.14 clusters created or upgraded on or after September 3, 2019. Detailed below.
 	Identity []IdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
 
+	// Configuration block for customizing the Kubernetes API server. Detailed below.
+	KubeAPIServerConfig []KubeAPIServerConfigObservation `json:"kubeApiServerConfig,omitempty" tf:"kube_api_server_config,omitempty"`
+
+	// Configuration block for customizing the Kubernetes controller manager. Detailed below.
+	KubeControllerManagerConfig []KubeControllerManagerConfigObservation `json:"kubeControllerManagerConfig,omitempty" tf:"kube_controller_manager_config,omitempty"`
+
+	// Configuration block for customizing the Kubernetes scheduler. Detailed below.
+	KubeSchedulerConfig []KubeSchedulerConfigObservation `json:"kubeSchedulerConfig,omitempty" tf:"kube_scheduler_config,omitempty"`
+
 	// Configuration block with kubernetes network configuration for the cluster. Detailed below.
 	KubernetesNetworkConfig []KubernetesNetworkConfigObservation `json:"kubernetesNetworkConfig,omitempty" tf:"kubernetes_network_config,omitempty"`
 
@@ -270,6 +288,18 @@ type ClusterParameters struct {
 	// Force version update by overriding upgrade-blocking readiness checks when updating a cluster.
 	// +kubebuilder:validation:Optional
 	ForceUpdateVersion *bool `json:"forceUpdateVersion,omitempty" tf:"force_update_version,omitempty"`
+
+	// Configuration block for customizing the Kubernetes API server. Detailed below.
+	// +kubebuilder:validation:Optional
+	KubeAPIServerConfig []KubeAPIServerConfigParameters `json:"kubeApiServerConfig,omitempty" tf:"kube_api_server_config,omitempty"`
+
+	// Configuration block for customizing the Kubernetes controller manager. Detailed below.
+	// +kubebuilder:validation:Optional
+	KubeControllerManagerConfig []KubeControllerManagerConfigParameters `json:"kubeControllerManagerConfig,omitempty" tf:"kube_controller_manager_config,omitempty"`
+
+	// Configuration block for customizing the Kubernetes scheduler. Detailed below.
+	// +kubebuilder:validation:Optional
+	KubeSchedulerConfig []KubeSchedulerConfigParameters `json:"kubeSchedulerConfig,omitempty" tf:"kube_scheduler_config,omitempty"`
 
 	// Configuration block with kubernetes network configuration for the cluster. Detailed below.
 	// +kubebuilder:validation:Optional
@@ -488,6 +518,25 @@ type EtcdPlacementParameters struct {
 	SpreadLevel *string `json:"spreadLevel,omitempty" tf:"spread_level,omitempty"`
 }
 
+type HorizontalPodAutoscalerControllerConfigInitParameters struct {
+
+	// The interval between each sync of the horizontal pod autoscaler. Must be a single-unit duration (e.g., 10s, 15s). Valid range: 10s to 15s. Default is 15s.
+	HorizontalPodAutoscalerSyncPeriod *string `json:"horizontalPodAutoscalerSyncPeriod,omitempty" tf:"horizontal_pod_autoscaler_sync_period,omitempty"`
+}
+
+type HorizontalPodAutoscalerControllerConfigObservation struct {
+
+	// The interval between each sync of the horizontal pod autoscaler. Must be a single-unit duration (e.g., 10s, 15s). Valid range: 10s to 15s. Default is 15s.
+	HorizontalPodAutoscalerSyncPeriod *string `json:"horizontalPodAutoscalerSyncPeriod,omitempty" tf:"horizontal_pod_autoscaler_sync_period,omitempty"`
+}
+
+type HorizontalPodAutoscalerControllerConfigParameters struct {
+
+	// The interval between each sync of the horizontal pod autoscaler. Must be a single-unit duration (e.g., 10s, 15s). Valid range: 10s to 15s. Default is 15s.
+	// +kubebuilder:validation:Optional
+	HorizontalPodAutoscalerSyncPeriod *string `json:"horizontalPodAutoscalerSyncPeriod,omitempty" tf:"horizontal_pod_autoscaler_sync_period,omitempty"`
+}
+
 type IdentityInitParameters struct {
 }
 
@@ -498,6 +547,83 @@ type IdentityObservation struct {
 }
 
 type IdentityParameters struct {
+}
+
+type KubeAPIServerConfigInitParameters struct {
+
+	// The duration that Kubernetes events are retained. Must be a single-unit duration (e.g., 30m, 1h). Valid range: 10m to 60m. Default is 1h.
+	EventTTL *string `json:"eventTtl,omitempty" tf:"event_ttl,omitempty"`
+
+	// Configuration block for the port range available for NodePort services. Detailed below.
+	ServiceNodePortRange []ServiceNodePortRangeInitParameters `json:"serviceNodePortRange,omitempty" tf:"service_node_port_range,omitempty"`
+}
+
+type KubeAPIServerConfigObservation struct {
+
+	// The duration that Kubernetes events are retained. Must be a single-unit duration (e.g., 30m, 1h). Valid range: 10m to 60m. Default is 1h.
+	EventTTL *string `json:"eventTtl,omitempty" tf:"event_ttl,omitempty"`
+
+	// Configuration block for the port range available for NodePort services. Detailed below.
+	ServiceNodePortRange []ServiceNodePortRangeObservation `json:"serviceNodePortRange,omitempty" tf:"service_node_port_range,omitempty"`
+}
+
+type KubeAPIServerConfigParameters struct {
+
+	// The duration that Kubernetes events are retained. Must be a single-unit duration (e.g., 30m, 1h). Valid range: 10m to 60m. Default is 1h.
+	// +kubebuilder:validation:Optional
+	EventTTL *string `json:"eventTtl,omitempty" tf:"event_ttl,omitempty"`
+
+	// Configuration block for the port range available for NodePort services. Detailed below.
+	// +kubebuilder:validation:Optional
+	ServiceNodePortRange []ServiceNodePortRangeParameters `json:"serviceNodePortRange,omitempty" tf:"service_node_port_range,omitempty"`
+}
+
+type KubeControllerManagerConfigInitParameters struct {
+
+	// Configuration block for the horizontal pod autoscaler controller. Detailed below.
+	HorizontalPodAutoscalerControllerConfig []HorizontalPodAutoscalerControllerConfigInitParameters `json:"horizontalPodAutoscalerControllerConfig,omitempty" tf:"horizontal_pod_autoscaler_controller_config,omitempty"`
+
+	// Configuration block for the pod garbage collection controller. Detailed below.
+	PodGcControllerConfig []PodGcControllerConfigInitParameters `json:"podGcControllerConfig,omitempty" tf:"pod_gc_controller_config,omitempty"`
+}
+
+type KubeControllerManagerConfigObservation struct {
+
+	// Configuration block for the horizontal pod autoscaler controller. Detailed below.
+	HorizontalPodAutoscalerControllerConfig []HorizontalPodAutoscalerControllerConfigObservation `json:"horizontalPodAutoscalerControllerConfig,omitempty" tf:"horizontal_pod_autoscaler_controller_config,omitempty"`
+
+	// Configuration block for the pod garbage collection controller. Detailed below.
+	PodGcControllerConfig []PodGcControllerConfigObservation `json:"podGcControllerConfig,omitempty" tf:"pod_gc_controller_config,omitempty"`
+}
+
+type KubeControllerManagerConfigParameters struct {
+
+	// Configuration block for the horizontal pod autoscaler controller. Detailed below.
+	// +kubebuilder:validation:Optional
+	HorizontalPodAutoscalerControllerConfig []HorizontalPodAutoscalerControllerConfigParameters `json:"horizontalPodAutoscalerControllerConfig,omitempty" tf:"horizontal_pod_autoscaler_controller_config,omitempty"`
+
+	// Configuration block for the pod garbage collection controller. Detailed below.
+	// +kubebuilder:validation:Optional
+	PodGcControllerConfig []PodGcControllerConfigParameters `json:"podGcControllerConfig,omitempty" tf:"pod_gc_controller_config,omitempty"`
+}
+
+type KubeSchedulerConfigInitParameters struct {
+
+	// Configuration block for the NodeResourcesFit scheduler plugin. Detailed below.
+	NodeResourcesFit []NodeResourcesFitInitParameters `json:"nodeResourcesFit,omitempty" tf:"node_resources_fit,omitempty"`
+}
+
+type KubeSchedulerConfigObservation struct {
+
+	// Configuration block for the NodeResourcesFit scheduler plugin. Detailed below.
+	NodeResourcesFit []NodeResourcesFitObservation `json:"nodeResourcesFit,omitempty" tf:"node_resources_fit,omitempty"`
+}
+
+type KubeSchedulerConfigParameters struct {
+
+	// Configuration block for the NodeResourcesFit scheduler plugin. Detailed below.
+	// +kubebuilder:validation:Optional
+	NodeResourcesFit []NodeResourcesFitParameters `json:"nodeResourcesFit,omitempty" tf:"node_resources_fit,omitempty"`
 }
 
 type KubernetesNetworkConfigInitParameters struct {
@@ -540,6 +666,25 @@ type KubernetesNetworkConfigParameters struct {
 	// The CIDR block to assign Kubernetes pod and service IP addresses from. If you don't specify a block, Kubernetes assigns addresses from either the 10.100.0.0/16 or 172.20.0.0/16 CIDR blocks. We recommend that you specify a block that does not overlap with resources in other networks that are peered or connected to your VPC. You can only specify a custom CIDR block when you create a cluster, changing this value will force a new cluster to be created. The block must meet the following requirements:
 	// +kubebuilder:validation:Optional
 	ServiceIPv4Cidr *string `json:"serviceIpv4Cidr,omitempty" tf:"service_ipv4_cidr,omitempty"`
+}
+
+type NodeResourcesFitInitParameters struct {
+
+	// Configuration block for the scoring strategy used to rank nodes during scheduling. Detailed below.
+	ScoringStrategy []ScoringStrategyInitParameters `json:"scoringStrategy,omitempty" tf:"scoring_strategy,omitempty"`
+}
+
+type NodeResourcesFitObservation struct {
+
+	// Configuration block for the scoring strategy used to rank nodes during scheduling. Detailed below.
+	ScoringStrategy []ScoringStrategyObservation `json:"scoringStrategy,omitempty" tf:"scoring_strategy,omitempty"`
+}
+
+type NodeResourcesFitParameters struct {
+
+	// Configuration block for the scoring strategy used to rank nodes during scheduling. Detailed below.
+	// +kubebuilder:validation:Optional
+	ScoringStrategy []ScoringStrategyParameters `json:"scoringStrategy,omitempty" tf:"scoring_strategy,omitempty"`
 }
 
 type OidcInitParameters struct {
@@ -620,6 +765,25 @@ type OutpostConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	OutpostArns []*string `json:"outpostArns" tf:"outpost_arns,omitempty"`
+}
+
+type PodGcControllerConfigInitParameters struct {
+
+	// The number of terminated pods that can exist before the pod garbage collector starts deleting them. Valid range: 0 to 12500. Refer to the aws_eks_cluster_versions data source for any version-specific constraints.
+	TerminatedPodGcThreshold *float64 `json:"terminatedPodGcThreshold,omitempty" tf:"terminated_pod_gc_threshold,omitempty"`
+}
+
+type PodGcControllerConfigObservation struct {
+
+	// The number of terminated pods that can exist before the pod garbage collector starts deleting them. Valid range: 0 to 12500. Refer to the aws_eks_cluster_versions data source for any version-specific constraints.
+	TerminatedPodGcThreshold *float64 `json:"terminatedPodGcThreshold,omitempty" tf:"terminated_pod_gc_threshold,omitempty"`
+}
+
+type PodGcControllerConfigParameters struct {
+
+	// The number of terminated pods that can exist before the pod garbage collector starts deleting them. Valid range: 0 to 12500. Refer to the aws_eks_cluster_versions data source for any version-specific constraints.
+	// +kubebuilder:validation:Optional
+	TerminatedPodGcThreshold *float64 `json:"terminatedPodGcThreshold,omitempty" tf:"terminated_pod_gc_threshold,omitempty"`
 }
 
 type ProviderInitParameters struct {
@@ -712,6 +876,93 @@ type RemotePodNetworksParameters struct {
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	Cidrs []*string `json:"cidrs,omitempty" tf:"cidrs,omitempty"`
+}
+
+type ResourceInitParameters struct {
+
+	// The name of the resource (e.g., cpu, memory, nvidia.com/gpu).
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The weight assigned to the resource for scoring. Must be between 1 and 100.
+	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
+}
+
+type ResourceObservation struct {
+
+	// The name of the resource (e.g., cpu, memory, nvidia.com/gpu).
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The weight assigned to the resource for scoring. Must be between 1 and 100.
+	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
+}
+
+type ResourceParameters struct {
+
+	// The name of the resource (e.g., cpu, memory, nvidia.com/gpu).
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The weight assigned to the resource for scoring. Must be between 1 and 100.
+	// +kubebuilder:validation:Optional
+	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
+}
+
+type ScoringStrategyInitParameters struct {
+
+	// List of resource weight configuration blocks for scoring nodes. Detailed below.
+	Resource []ResourceInitParameters `json:"resource,omitempty" tf:"resource,omitempty"`
+
+	// The scoring strategy type. Valid values are LeastAllocated and MostAllocated. Default is LeastAllocated.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type ScoringStrategyObservation struct {
+
+	// List of resource weight configuration blocks for scoring nodes. Detailed below.
+	Resource []ResourceObservation `json:"resource,omitempty" tf:"resource,omitempty"`
+
+	// The scoring strategy type. Valid values are LeastAllocated and MostAllocated. Default is LeastAllocated.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type ScoringStrategyParameters struct {
+
+	// List of resource weight configuration blocks for scoring nodes. Detailed below.
+	// +kubebuilder:validation:Optional
+	Resource []ResourceParameters `json:"resource,omitempty" tf:"resource,omitempty"`
+
+	// The scoring strategy type. Valid values are LeastAllocated and MostAllocated. Default is LeastAllocated.
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type ServiceNodePortRangeInitParameters struct {
+
+	// The maximum port number in the range. Valid range: 10260 to 32767. Default is 32767. Must be greater than or equal to min_port.
+	MaxPort *float64 `json:"maxPort,omitempty" tf:"max_port,omitempty"`
+
+	// The minimum port number in the range. Valid range: 10260 to 32767. Default is 30000.
+	MinPort *float64 `json:"minPort,omitempty" tf:"min_port,omitempty"`
+}
+
+type ServiceNodePortRangeObservation struct {
+
+	// The maximum port number in the range. Valid range: 10260 to 32767. Default is 32767. Must be greater than or equal to min_port.
+	MaxPort *float64 `json:"maxPort,omitempty" tf:"max_port,omitempty"`
+
+	// The minimum port number in the range. Valid range: 10260 to 32767. Default is 30000.
+	MinPort *float64 `json:"minPort,omitempty" tf:"min_port,omitempty"`
+}
+
+type ServiceNodePortRangeParameters struct {
+
+	// The maximum port number in the range. Valid range: 10260 to 32767. Default is 32767. Must be greater than or equal to min_port.
+	// +kubebuilder:validation:Optional
+	MaxPort *float64 `json:"maxPort,omitempty" tf:"max_port,omitempty"`
+
+	// The minimum port number in the range. Valid range: 10260 to 32767. Default is 30000.
+	// +kubebuilder:validation:Optional
+	MinPort *float64 `json:"minPort,omitempty" tf:"min_port,omitempty"`
 }
 
 type StorageConfigInitParameters struct {

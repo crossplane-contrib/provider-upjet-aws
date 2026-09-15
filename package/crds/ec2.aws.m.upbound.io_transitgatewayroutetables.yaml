@@ -329,8 +329,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: EC2 Transit Gateway Route Table Amazon Resource Name
-                      (ARN).
+                    description: EC2 Transit Gateway Route Table ARN.
                     type: string
                   defaultAssociationRouteTable:
                     description: Boolean whether this is the default association route

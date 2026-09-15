@@ -75,7 +75,7 @@ type MountTargetObservation struct {
 	// The DNS name for the EFS file system.
 	DNSName *string `json:"dnsName,omitempty" tf:"dns_name,omitempty"`
 
-	// Amazon Resource Name of the file system.
+	// ARN of the file system.
 	FileSystemArn *string `json:"fileSystemArn,omitempty" tf:"file_system_arn,omitempty"`
 
 	// The ID of the file system for which the mount target is intended.

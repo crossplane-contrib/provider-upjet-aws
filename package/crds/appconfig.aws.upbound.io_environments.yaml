@@ -752,9 +752,8 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   state:
-                    description: |-
-                      State of the environment. Possible values are READY_FOR_DEPLOYMENT, DEPLOYING, ROLLING_BACK
-                      or ROLLED_BACK.
+                    description: State of the environment. Possible values are READY_FOR_DEPLOYMENT,
+                      DEPLOYING, ROLLING_BACK or ROLLED_BACK.
                     type: string
                   tags:
                     additionalProperties:

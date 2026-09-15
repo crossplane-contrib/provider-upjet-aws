@@ -200,7 +200,7 @@ type ConnectionInitParameters struct {
 	// Parameters to use for invoking a private API. Documented below.
 	InvocationConnectivityParameters *InvocationConnectivityParametersInitParameters `json:"invocationConnectivityParameters,omitempty" tf:"invocation_connectivity_parameters,omitempty"`
 
-	// Identifier of the AWS KMS customer managed key for EventBridge to use, if you choose to use a customer managed key to encrypt this connection. The identifier can be the key Amazon Resource Name (ARN), KeyId, key alias, or key alias ARN.
+	// Identifier of the AWS KMS customer managed key for EventBridge to use, if you choose to use a customer managed key to encrypt this connection. The identifier can be the key ARN, KeyId, key alias, or key alias ARN.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kms/v1beta1.Key
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	KMSKeyIdentifier *string `json:"kmsKeyIdentifier,omitempty" tf:"kms_key_identifier,omitempty"`
@@ -216,7 +216,7 @@ type ConnectionInitParameters struct {
 
 type ConnectionObservation struct {
 
-	// The Amazon Resource Name (ARN) of the connection.
+	// ARN of the connection.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Parameters used for authorization. A maximum of 1 are allowed. Documented below.
@@ -233,14 +233,14 @@ type ConnectionObservation struct {
 	// Parameters to use for invoking a private API. Documented below.
 	InvocationConnectivityParameters *InvocationConnectivityParametersObservation `json:"invocationConnectivityParameters,omitempty" tf:"invocation_connectivity_parameters,omitempty"`
 
-	// Identifier of the AWS KMS customer managed key for EventBridge to use, if you choose to use a customer managed key to encrypt this connection. The identifier can be the key Amazon Resource Name (ARN), KeyId, key alias, or key alias ARN.
+	// Identifier of the AWS KMS customer managed key for EventBridge to use, if you choose to use a customer managed key to encrypt this connection. The identifier can be the key ARN, KeyId, key alias, or key alias ARN.
 	KMSKeyIdentifier *string `json:"kmsKeyIdentifier,omitempty" tf:"kms_key_identifier,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the secret created from the authorization parameters specified for the connection.
+	// ARN of the secret created from the authorization parameters specified for the connection.
 	SecretArn *string `json:"secretArn,omitempty" tf:"secret_arn,omitempty"`
 }
 
@@ -262,7 +262,7 @@ type ConnectionParameters struct {
 	// +kubebuilder:validation:Optional
 	InvocationConnectivityParameters *InvocationConnectivityParametersParameters `json:"invocationConnectivityParameters,omitempty" tf:"invocation_connectivity_parameters,omitempty"`
 
-	// Identifier of the AWS KMS customer managed key for EventBridge to use, if you choose to use a customer managed key to encrypt this connection. The identifier can be the key Amazon Resource Name (ARN), KeyId, key alias, or key alias ARN.
+	// Identifier of the AWS KMS customer managed key for EventBridge to use, if you choose to use a customer managed key to encrypt this connection. The identifier can be the key ARN, KeyId, key alias, or key alias ARN.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kms/v1beta1.Key
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -364,7 +364,7 @@ type InvocationConnectivityParametersResourceParametersInitParameters struct {
 
 type InvocationConnectivityParametersResourceParametersObservation struct {
 
-	// The Amazon Resource Name (ARN) of the connection.
+	// ARN of the connection.
 	ResourceAssociationArn *string `json:"resourceAssociationArn,omitempty" tf:"resource_association_arn,omitempty"`
 
 	// ARN of the Amazon VPC Lattice resource configuration for the resource endpoint.
@@ -657,7 +657,7 @@ type ResourceParametersInitParameters struct {
 
 type ResourceParametersObservation struct {
 
-	// The Amazon Resource Name (ARN) of the connection.
+	// ARN of the connection.
 	ResourceAssociationArn *string `json:"resourceAssociationArn,omitempty" tf:"resource_association_arn,omitempty"`
 
 	// ARN of the Amazon VPC Lattice resource configuration for the resource endpoint.

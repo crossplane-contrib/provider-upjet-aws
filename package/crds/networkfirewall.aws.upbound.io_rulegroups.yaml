@@ -2556,9 +2556,8 @@ spec:
                                             protocols:
                                               description: Set of protocols to inspect
                                                 for, specified using the protocol's
-                                                assigned internet protocol number
-                                                (IANA). If not specified, this matches
-                                                with any protocol.
+                                                assigned IP number (IANA). If not
+                                                specified, this matches with any protocol.
                                               items:
                                                 type: number
                                               type: array
@@ -3114,9 +3113,8 @@ spec:
                                             protocols:
                                               description: Set of protocols to inspect
                                                 for, specified using the protocol's
-                                                assigned internet protocol number
-                                                (IANA). If not specified, this matches
-                                                with any protocol.
+                                                assigned IP number (IANA). If not
+                                                specified, this matches with any protocol.
                                               items:
                                                 type: number
                                               type: array
@@ -3326,8 +3324,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The Amazon Resource Name (ARN) that identifies the
-                      rule group.
+                    description: ARN that identifies the rule group.
                     type: string
                   capacity:
                     description: The maximum number of operating resources that this
@@ -3357,8 +3354,7 @@ spec:
                         type: string
                     type: object
                   id:
-                    description: The Amazon Resource Name (ARN) that identifies the
-                      rule group.
+                    description: ARN that identifies the rule group.
                     type: string
                   name:
                     description: A friendly name of the rule group.
@@ -3698,9 +3694,8 @@ spec:
                                             protocols:
                                               description: Set of protocols to inspect
                                                 for, specified using the protocol's
-                                                assigned internet protocol number
-                                                (IANA). If not specified, this matches
-                                                with any protocol.
+                                                assigned IP number (IANA). If not
+                                                specified, this matches with any protocol.
                                               items:
                                                 type: number
                                               type: array

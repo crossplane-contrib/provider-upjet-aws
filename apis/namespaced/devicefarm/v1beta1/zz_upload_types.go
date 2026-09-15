@@ -40,7 +40,7 @@ type UploadInitParameters struct {
 
 type UploadObservation struct {
 
-	// The Amazon Resource Name of this upload.
+	// ARN of this upload.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The upload's category.

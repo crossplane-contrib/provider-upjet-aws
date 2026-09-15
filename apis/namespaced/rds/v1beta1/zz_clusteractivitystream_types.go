@@ -33,7 +33,7 @@ type ClusterActivityStreamInitParameters struct {
 	// Specifies the mode of the database activity stream. Database events such as a change or access generate an activity stream event. The database session can handle these events either synchronously or asynchronously. One of: sync, async.
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the DB cluster.
+	// ARN of the DB cluster.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/rds/v1beta1.Cluster
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
@@ -52,7 +52,7 @@ type ClusterActivityStreamObservation struct {
 	// Specifies whether the database activity stream includes engine-native audit fields. This option only applies to an Oracle DB instance. By default, no engine-native audit fields are included. Defaults false.
 	EngineNativeAuditFieldsIncluded *bool `json:"engineNativeAuditFieldsIncluded,omitempty" tf:"engine_native_audit_fields_included,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the DB cluster.
+	// ARN of the DB cluster.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The AWS KMS key identifier for encrypting messages in the database activity stream. The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key.
@@ -68,7 +68,7 @@ type ClusterActivityStreamObservation struct {
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the DB cluster.
+	// ARN of the DB cluster.
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
 }
 
@@ -100,7 +100,7 @@ type ClusterActivityStreamParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the DB cluster.
+	// ARN of the DB cluster.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/rds/v1beta1.Cluster
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional

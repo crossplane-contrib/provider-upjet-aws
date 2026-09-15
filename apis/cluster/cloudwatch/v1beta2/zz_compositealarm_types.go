@@ -15,7 +15,7 @@ import (
 
 type ActionsSuppressorInitParameters struct {
 
-	// Can be an AlarmName or an Amazon Resource Name (ARN) from an existing alarm.
+	// Can be an AlarmName or an ARN from an existing alarm.
 	Alarm *string `json:"alarm,omitempty" tf:"alarm,omitempty"`
 
 	// The maximum time in seconds that the composite alarm waits after suppressor alarm goes out of the ALARM state. After this time, the composite alarm performs its actions.
@@ -27,7 +27,7 @@ type ActionsSuppressorInitParameters struct {
 
 type ActionsSuppressorObservation struct {
 
-	// Can be an AlarmName or an Amazon Resource Name (ARN) from an existing alarm.
+	// Can be an AlarmName or an ARN from an existing alarm.
 	Alarm *string `json:"alarm,omitempty" tf:"alarm,omitempty"`
 
 	// The maximum time in seconds that the composite alarm waits after suppressor alarm goes out of the ALARM state. After this time, the composite alarm performs its actions.
@@ -39,7 +39,7 @@ type ActionsSuppressorObservation struct {
 
 type ActionsSuppressorParameters struct {
 
-	// Can be an AlarmName or an Amazon Resource Name (ARN) from an existing alarm.
+	// Can be an AlarmName or an ARN from an existing alarm.
 	// +kubebuilder:validation:Optional
 	Alarm *string `json:"alarm" tf:"alarm,omitempty"`
 

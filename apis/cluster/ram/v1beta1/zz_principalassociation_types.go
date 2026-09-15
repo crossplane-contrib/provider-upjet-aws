@@ -15,7 +15,7 @@ import (
 
 type PrincipalAssociationInitParameters struct {
 
-	// The principal to associate with the resource share. Possible values are an AWS account ID, an AWS Organizations Organization ARN, or an AWS Organizations Organization Unit ARN.
+	// Principal to associate with the resource share. Possible values are an AWS account ID, an AWS Organizations Organization ARN, or an AWS Organizations Organization Unit ARN.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/organizations/v1beta1.Organization
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	Principal *string `json:"principal,omitempty" tf:"principal,omitempty"`
@@ -28,7 +28,7 @@ type PrincipalAssociationInitParameters struct {
 	// +kubebuilder:validation:Optional
 	PrincipalSelector *v2.Selector `json:"principalSelector,omitempty" tf:"-"`
 
-	// The Amazon Resource Name (ARN) of the resource share.
+	// ARN of the resource share.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ram/v1beta1.ResourceShare
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	ResourceShareArn *string `json:"resourceShareArn,omitempty" tf:"resource_share_arn,omitempty"`
@@ -44,23 +44,23 @@ type PrincipalAssociationInitParameters struct {
 
 type PrincipalAssociationObservation struct {
 
-	// The Amazon Resource Name (ARN) of the Resource Share and the principal, separated by a comma.
+	// ARN of the Resource Share and the principal, separated by a comma.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The principal to associate with the resource share. Possible values are an AWS account ID, an AWS Organizations Organization ARN, or an AWS Organizations Organization Unit ARN.
+	// Principal to associate with the resource share. Possible values are an AWS account ID, an AWS Organizations Organization ARN, or an AWS Organizations Organization Unit ARN.
 	Principal *string `json:"principal,omitempty" tf:"principal,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the resource share.
+	// ARN of the resource share.
 	ResourceShareArn *string `json:"resourceShareArn,omitempty" tf:"resource_share_arn,omitempty"`
 }
 
 type PrincipalAssociationParameters struct {
 
-	// The principal to associate with the resource share. Possible values are an AWS account ID, an AWS Organizations Organization ARN, or an AWS Organizations Organization Unit ARN.
+	// Principal to associate with the resource share. Possible values are an AWS account ID, an AWS Organizations Organization ARN, or an AWS Organizations Organization Unit ARN.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/organizations/v1beta1.Organization
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -79,7 +79,7 @@ type PrincipalAssociationParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the resource share.
+	// ARN of the resource share.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ram/v1beta1.ResourceShare
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional

@@ -15,17 +15,17 @@ import (
 
 type VocabularyInitParameters struct {
 
-	// The language code you selected for your vocabulary.
+	// Language code you selected for your vocabulary.
 	LanguageCode *string `json:"languageCode,omitempty" tf:"language_code,omitempty"`
 
-	// - A list of terms to include in the vocabulary. Conflicts with vocabulary_file_uri
+	// List of terms to include in the vocabulary. Conflicts with vocabulary_file_uri
 	Phrases []*string `json:"phrases,omitempty" tf:"phrases,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The Amazon S3 location (URI) of the text file that contains your custom vocabulary. Conflicts wth phrases.
+	// Amazon S3 location (URI) of the text file that contains your custom vocabulary. Conflicts wth phrases.
 	VocabularyFileURI *string `json:"vocabularyFileUri,omitempty" tf:"vocabulary_file_uri,omitempty"`
 }
 
@@ -40,10 +40,10 @@ type VocabularyObservation struct {
 	// Name of the Vocabulary.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The language code you selected for your vocabulary.
+	// Language code you selected for your vocabulary.
 	LanguageCode *string `json:"languageCode,omitempty" tf:"language_code,omitempty"`
 
-	// - A list of terms to include in the vocabulary. Conflicts with vocabulary_file_uri
+	// List of terms to include in the vocabulary. Conflicts with vocabulary_file_uri
 	Phrases []*string `json:"phrases,omitempty" tf:"phrases,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -57,17 +57,17 @@ type VocabularyObservation struct {
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// The Amazon S3 location (URI) of the text file that contains your custom vocabulary. Conflicts wth phrases.
+	// Amazon S3 location (URI) of the text file that contains your custom vocabulary. Conflicts wth phrases.
 	VocabularyFileURI *string `json:"vocabularyFileUri,omitempty" tf:"vocabulary_file_uri,omitempty"`
 }
 
 type VocabularyParameters struct {
 
-	// The language code you selected for your vocabulary.
+	// Language code you selected for your vocabulary.
 	// +kubebuilder:validation:Optional
 	LanguageCode *string `json:"languageCode,omitempty" tf:"language_code,omitempty"`
 
-	// - A list of terms to include in the vocabulary. Conflicts with vocabulary_file_uri
+	// List of terms to include in the vocabulary. Conflicts with vocabulary_file_uri
 	// +kubebuilder:validation:Optional
 	Phrases []*string `json:"phrases,omitempty" tf:"phrases,omitempty"`
 
@@ -81,7 +81,7 @@ type VocabularyParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The Amazon S3 location (URI) of the text file that contains your custom vocabulary. Conflicts wth phrases.
+	// Amazon S3 location (URI) of the text file that contains your custom vocabulary. Conflicts wth phrases.
 	// +kubebuilder:validation:Optional
 	VocabularyFileURI *string `json:"vocabularyFileUri,omitempty" tf:"vocabulary_file_uri,omitempty"`
 }

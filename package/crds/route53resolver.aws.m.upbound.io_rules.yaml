@@ -412,7 +412,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: ARN (Amazon Resource Name) for the resolver rule.
+                    description: ARN for the resolver rule.
                     type: string
                   domainName:
                     description: DNS queries for this domain name are forwarded to

@@ -375,8 +375,7 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   vpcId:
-                    description: The Amazon Virtual Private Cloud identifier (VPC
-                      ID) of the cache subnet group.
+                    description: VPC identifier (VPC ID) of the cache subnet group.
                     type: string
                 type: object
               conditions:

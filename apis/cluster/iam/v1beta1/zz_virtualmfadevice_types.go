@@ -28,7 +28,7 @@ type VirtualMfaDeviceInitParameters struct {
 
 type VirtualMfaDeviceObservation struct {
 
-	// Amazon Resource Name (ARN), which is also the serial number, of the virtual MFA device.
+	// ARN, which is also the serial number, of the virtual MFA device.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Base32 seed defined as specified in RFC3548. The base_32_string_seed is base64-encoded.

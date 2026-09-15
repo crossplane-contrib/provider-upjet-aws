@@ -83,7 +83,7 @@ spec:
                   dataType:
                     description: 'Data type of the parameter. Valid values: text,
                       aws:ssm:integration and aws:ec2:image for AMI format, see the
-                      Native parameter support for Amazon Machine Image IDs.'
+                      Native parameter support for AMI IDs.'
                     type: string
                   description:
                     description: Description of the parameter.
@@ -192,7 +192,7 @@ spec:
                   dataType:
                     description: 'Data type of the parameter. Valid values: text,
                       aws:ssm:integration and aws:ec2:image for AMI format, see the
-                      Native parameter support for Amazon Machine Image IDs.'
+                      Native parameter support for AMI IDs.'
                     type: string
                   description:
                     description: Description of the parameter.
@@ -377,7 +377,7 @@ spec:
                   dataType:
                     description: 'Data type of the parameter. Valid values: text,
                       aws:ssm:integration and aws:ec2:image for AMI format, see the
-                      Native parameter support for Amazon Machine Image IDs.'
+                      Native parameter support for AMI IDs.'
                     type: string
                   description:
                     description: Description of the parameter.

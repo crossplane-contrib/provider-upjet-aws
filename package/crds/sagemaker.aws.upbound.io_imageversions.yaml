@@ -424,8 +424,7 @@ spec:
                     type: array
                     x-kubernetes-list-type: set
                   arn:
-                    description: The Amazon Resource Name (ARN) assigned by AWS to
-                      this Image Version.
+                    description: ARN assigned by AWS to this Image Version.
                     type: string
                   baseImage:
                     description: The registry path of the container image on which
@@ -441,8 +440,7 @@ spec:
                   id:
                     type: string
                   imageArn:
-                    description: The Amazon Resource Name (ARN) assigned by AWS to
-                      this Image Version.
+                    description: ARN assigned by AWS to this Image Version.
                     type: string
                   imageName:
                     description: The name of the image. Must be unique to your account.

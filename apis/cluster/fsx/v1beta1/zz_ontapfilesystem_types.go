@@ -124,6 +124,9 @@ type OntapFileSystemInitParameters struct {
 	// +kubebuilder:validation:Optional
 	KMSKeyIDSelector *v2.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
+	// Network type. Valid values are IPV4 and DUAL. Default value is IPV4.
+	NetworkType *string `json:"networkType,omitempty" tf:"network_type,omitempty"`
+
 	// The ID for a subnet. A subnet is a range of IP addresses in your virtual private cloud (VPC).
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
@@ -228,6 +231,9 @@ type OntapFileSystemObservation struct {
 	// Set of Elastic Network Interface identifiers from which the file system is accessible The first network interface returned is the primary network interface.
 	NetworkInterfaceIds []*string `json:"networkInterfaceIds,omitempty" tf:"network_interface_ids,omitempty"`
 
+	// Network type. Valid values are IPV4 and DUAL. Default value is IPV4.
+	NetworkType *string `json:"networkType,omitempty" tf:"network_type,omitempty"`
+
 	// AWS account identifier that created the file system.
 	OwnerID *string `json:"ownerId,omitempty" tf:"owner_id,omitempty"`
 
@@ -318,6 +324,10 @@ type OntapFileSystemParameters struct {
 	// Selector for a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
 	KMSKeyIDSelector *v2.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
+
+	// Network type. Valid values are IPV4 and DUAL. Default value is IPV4.
+	// +kubebuilder:validation:Optional
+	NetworkType *string `json:"networkType,omitempty" tf:"network_type,omitempty"`
 
 	// The ID for a subnet. A subnet is a range of IP addresses in your virtual private cloud (VPC).
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Subnet

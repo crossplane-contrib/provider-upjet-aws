@@ -689,8 +689,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The Amazon Resource Name (ARN) assigned by AWS to
-                      this Workforce.
+                    description: ARN assigned by AWS to this Workforce.
                     type: string
                   cognitoConfig:
                     description: Use this parameter to configure an Amazon Cognito

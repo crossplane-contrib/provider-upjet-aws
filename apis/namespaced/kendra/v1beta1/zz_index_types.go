@@ -152,7 +152,7 @@ type IndexInitParameters struct {
 
 type IndexObservation struct {
 
-	// The Amazon Resource Name (ARN) of the Index.
+	// ARN of the Index.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// A block that sets the number of additional document storage and query capacity units that should be used by the index. Detailed below.
@@ -337,7 +337,7 @@ type JwtTokenTypeConfigurationInitParameters struct {
 	// The location of the key. Valid values are URL or SECRET_MANAGER
 	KeyLocation *string `json:"keyLocation,omitempty" tf:"key_location,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the secret.
+	// ARN of the secret.
 	SecretsManagerArn *string `json:"secretsManagerArn,omitempty" tf:"secrets_manager_arn,omitempty"`
 
 	// The signing key URL. Valid pattern is ^(https?|ftp|file):\/\/([^\s]*)
@@ -361,7 +361,7 @@ type JwtTokenTypeConfigurationObservation struct {
 	// The location of the key. Valid values are URL or SECRET_MANAGER
 	KeyLocation *string `json:"keyLocation,omitempty" tf:"key_location,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the secret.
+	// ARN of the secret.
 	SecretsManagerArn *string `json:"secretsManagerArn,omitempty" tf:"secrets_manager_arn,omitempty"`
 
 	// The signing key URL. Valid pattern is ^(https?|ftp|file):\/\/([^\s]*)
@@ -389,7 +389,7 @@ type JwtTokenTypeConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	KeyLocation *string `json:"keyLocation" tf:"key_location,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the secret.
+	// ARN of the secret.
 	// +kubebuilder:validation:Optional
 	SecretsManagerArn *string `json:"secretsManagerArn,omitempty" tf:"secrets_manager_arn,omitempty"`
 

@@ -21,13 +21,13 @@ type PermissionsBoundaryAttachmentInitParameters struct {
 
 type PermissionsBoundaryAttachmentObservation struct {
 
-	// Permission Set Amazon Resource Name (ARN) and SSO Instance ARN, separated by a comma (,).
+	// Permission Set ARN and SSO Instance ARN, separated by a comma (,).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the SSO Instance under which the operation will be executed.
+	// ARN of the SSO Instance under which the operation will be executed.
 	InstanceArn *string `json:"instanceArn,omitempty" tf:"instance_arn,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the Permission Set.
+	// ARN of the Permission Set.
 	PermissionSetArn *string `json:"permissionSetArn,omitempty" tf:"permission_set_arn,omitempty"`
 
 	// The permissions boundary policy. See below.
@@ -40,11 +40,11 @@ type PermissionsBoundaryAttachmentObservation struct {
 
 type PermissionsBoundaryAttachmentParameters struct {
 
-	// The Amazon Resource Name (ARN) of the SSO Instance under which the operation will be executed.
+	// ARN of the SSO Instance under which the operation will be executed.
 	// +kubebuilder:validation:Required
 	InstanceArn *string `json:"instanceArn" tf:"instance_arn,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the Permission Set.
+	// ARN of the Permission Set.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ssoadmin/v1beta1.PermissionSet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional

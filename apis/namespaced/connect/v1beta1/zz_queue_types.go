@@ -106,7 +106,7 @@ type QueueInitParameters struct {
 
 type QueueObservation struct {
 
-	// The Amazon Resource Name (ARN) of the Queue.
+	// ARN of the Queue.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Specifies the description of the Queue.

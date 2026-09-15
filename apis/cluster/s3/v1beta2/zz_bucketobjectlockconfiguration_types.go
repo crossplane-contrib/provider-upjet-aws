@@ -31,14 +31,13 @@ type BucketObjectLockConfigurationInitParameters struct {
 	// Account ID of the expected bucket owner.
 	ExpectedBucketOwner *string `json:"expectedBucketOwner,omitempty" tf:"expected_bucket_owner,omitempty"`
 
-	// Indicates whether this bucket has an Object Lock configuration enabled. Defaults to Enabled. Valid values: Enabled.
+	// Whether this bucket has an Object Lock configuration enabled. Defaults to Enabled. Valid values: Enabled.
 	ObjectLockEnabled *string `json:"objectLockEnabled,omitempty" tf:"object_lock_enabled,omitempty"`
 
 	// Configuration block for specifying the Object Lock rule for the specified object. See below.
 	Rule *BucketObjectLockConfigurationRuleInitParameters `json:"rule,omitempty" tf:"rule,omitempty"`
 
-	// This argument is deprecated and no longer needed to enable Object Lock.
-	// To enable Object Lock for an existing bucket, you must first enable versioning on the bucket and then enable Object Lock. For more details on versioning, see the aws_s3_bucket_versioning resource.
+	// Token to allow Object Lock to be enabled for an existing bucket. To enable Object Lock for an existing bucket, you must first enable versioning on the bucket and then enable Object Lock. For more details on versioning, see the aws_s3_bucket_versioning resource.
 	TokenSecretRef *v2.SecretKeySelector `json:"tokenSecretRef,omitempty" tf:"-"`
 }
 
@@ -50,10 +49,10 @@ type BucketObjectLockConfigurationObservation struct {
 	// Account ID of the expected bucket owner.
 	ExpectedBucketOwner *string `json:"expectedBucketOwner,omitempty" tf:"expected_bucket_owner,omitempty"`
 
-	// The bucket or bucket and expected_bucket_owner separated by a comma (,) if the latter is provided.
+	// bucket or bucket and expected_bucket_owner separated by a comma (,) if the latter is provided.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Indicates whether this bucket has an Object Lock configuration enabled. Defaults to Enabled. Valid values: Enabled.
+	// Whether this bucket has an Object Lock configuration enabled. Defaults to Enabled. Valid values: Enabled.
 	ObjectLockEnabled *string `json:"objectLockEnabled,omitempty" tf:"object_lock_enabled,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -84,7 +83,7 @@ type BucketObjectLockConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	ExpectedBucketOwner *string `json:"expectedBucketOwner,omitempty" tf:"expected_bucket_owner,omitempty"`
 
-	// Indicates whether this bucket has an Object Lock configuration enabled. Defaults to Enabled. Valid values: Enabled.
+	// Whether this bucket has an Object Lock configuration enabled. Defaults to Enabled. Valid values: Enabled.
 	// +kubebuilder:validation:Optional
 	ObjectLockEnabled *string `json:"objectLockEnabled,omitempty" tf:"object_lock_enabled,omitempty"`
 
@@ -97,8 +96,7 @@ type BucketObjectLockConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	Rule *BucketObjectLockConfigurationRuleParameters `json:"rule,omitempty" tf:"rule,omitempty"`
 
-	// This argument is deprecated and no longer needed to enable Object Lock.
-	// To enable Object Lock for an existing bucket, you must first enable versioning on the bucket and then enable Object Lock. For more details on versioning, see the aws_s3_bucket_versioning resource.
+	// Token to allow Object Lock to be enabled for an existing bucket. To enable Object Lock for an existing bucket, you must first enable versioning on the bucket and then enable Object Lock. For more details on versioning, see the aws_s3_bucket_versioning resource.
 	// +kubebuilder:validation:Optional
 	TokenSecretRef *v2.SecretKeySelector `json:"tokenSecretRef,omitempty" tf:"-"`
 }

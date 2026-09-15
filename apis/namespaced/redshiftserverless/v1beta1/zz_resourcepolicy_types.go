@@ -18,7 +18,7 @@ type ResourcePolicyInitParameters struct {
 	// The policy to create or update. For example, the following policy grants a user authorization to restore a snapshot.
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the account to create or update a resource policy for.
+	// ARN of the account to create or update a resource policy for.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/redshiftserverless/v1beta1.Snapshot
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
@@ -34,7 +34,7 @@ type ResourcePolicyInitParameters struct {
 
 type ResourcePolicyObservation struct {
 
-	// The Amazon Resource Name (ARN) of the account to create or update a resource policy for.
+	// ARN of the account to create or update a resource policy for.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The policy to create or update. For example, the following policy grants a user authorization to restore a snapshot.
@@ -44,7 +44,7 @@ type ResourcePolicyObservation struct {
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the account to create or update a resource policy for.
+	// ARN of the account to create or update a resource policy for.
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
 }
 
@@ -59,7 +59,7 @@ type ResourcePolicyParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the account to create or update a resource policy for.
+	// ARN of the account to create or update a resource policy for.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/redshiftserverless/v1beta1.Snapshot
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional

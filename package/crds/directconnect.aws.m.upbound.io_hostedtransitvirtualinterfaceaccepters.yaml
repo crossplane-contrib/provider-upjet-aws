@@ -147,6 +147,16 @@ spec:
                             type: string
                         type: object
                     type: object
+                  prefixPoolAllocatedCountIpv4:
+                    description: The number of inbound IPv4 route prefixes to allocate
+                      to the virtual interface. Valid values are 0 to 1000. If not
+                      specified, AWS applies the default allocation of 100.
+                    type: number
+                  prefixPoolAllocatedCountIpv6:
+                    description: The number of inbound IPv6 route prefixes to allocate
+                      to the virtual interface. Valid values are 0 to 1000. If not
+                      specified, AWS applies the default allocation of 100.
+                    type: number
                   region:
                     description: |-
                       Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -346,6 +356,16 @@ spec:
                             type: string
                         type: object
                     type: object
+                  prefixPoolAllocatedCountIpv4:
+                    description: The number of inbound IPv4 route prefixes to allocate
+                      to the virtual interface. Valid values are 0 to 1000. If not
+                      specified, AWS applies the default allocation of 100.
+                    type: number
+                  prefixPoolAllocatedCountIpv6:
+                    description: The number of inbound IPv6 route prefixes to allocate
+                      to the virtual interface. Valid values are 0 to 1000. If not
+                      specified, AWS applies the default allocation of 100.
+                    type: number
                   tags:
                     additionalProperties:
                       type: string
@@ -513,6 +533,16 @@ spec:
                   id:
                     description: The ID of the virtual interface.
                     type: string
+                  prefixPoolAllocatedCountIpv4:
+                    description: The number of inbound IPv4 route prefixes to allocate
+                      to the virtual interface. Valid values are 0 to 1000. If not
+                      specified, AWS applies the default allocation of 100.
+                    type: number
+                  prefixPoolAllocatedCountIpv6:
+                    description: The number of inbound IPv6 route prefixes to allocate
+                      to the virtual interface. Valid values are 0 to 1000. If not
+                      specified, AWS applies the default allocation of 100.
+                    type: number
                   region:
                     description: |-
                       Region where this resource will be managed. Defaults to the Region set in the provider configuration.

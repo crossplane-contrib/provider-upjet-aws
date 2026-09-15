@@ -15,23 +15,23 @@ import (
 
 type ActiveReceiptRuleSetInitParameters struct {
 
-	// The name of the rule set
+	// Name of the rule set
 	RuleSetName *string `json:"ruleSetName,omitempty" tf:"rule_set_name,omitempty"`
 }
 
 type ActiveReceiptRuleSetObservation struct {
 
-	// The SES receipt rule set ARN.
+	// SES receipt rule set ARN.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The SES receipt rule set name.
+	// SES receipt rule set name.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The name of the rule set
+	// Name of the rule set
 	RuleSetName *string `json:"ruleSetName,omitempty" tf:"rule_set_name,omitempty"`
 }
 
@@ -42,7 +42,7 @@ type ActiveReceiptRuleSetParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// The name of the rule set
+	// Name of the rule set
 	// +kubebuilder:validation:Optional
 	RuleSetName *string `json:"ruleSetName,omitempty" tf:"rule_set_name,omitempty"`
 }

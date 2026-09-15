@@ -15,29 +15,29 @@ import (
 
 type AccessLogConfigurationInitParameters struct {
 
-	// The format for Service Connect access log output. Valid values: TEXT, JSON. See AWS documentation for format details.
+	// Format for Service Connect access log output. Valid values: TEXT, JSON. See AWS documentation for format details.
 	Format *string `json:"format,omitempty" tf:"format,omitempty"`
 
-	// Specifies whether to include query parameters in Service Connect access logs. Valid values: ENABLED, DISABLED. Default: DISABLED. Query parameters may contain sensitive information.
+	// Whether to include query parameters in Service Connect access logs. Valid values: ENABLED, DISABLED. Default: DISABLED. Query parameters may contain sensitive information.
 	IncludeQueryParameters *string `json:"includeQueryParameters,omitempty" tf:"include_query_parameters,omitempty"`
 }
 
 type AccessLogConfigurationObservation struct {
 
-	// The format for Service Connect access log output. Valid values: TEXT, JSON. See AWS documentation for format details.
+	// Format for Service Connect access log output. Valid values: TEXT, JSON. See AWS documentation for format details.
 	Format *string `json:"format,omitempty" tf:"format,omitempty"`
 
-	// Specifies whether to include query parameters in Service Connect access logs. Valid values: ENABLED, DISABLED. Default: DISABLED. Query parameters may contain sensitive information.
+	// Whether to include query parameters in Service Connect access logs. Valid values: ENABLED, DISABLED. Default: DISABLED. Query parameters may contain sensitive information.
 	IncludeQueryParameters *string `json:"includeQueryParameters,omitempty" tf:"include_query_parameters,omitempty"`
 }
 
 type AccessLogConfigurationParameters struct {
 
-	// The format for Service Connect access log output. Valid values: TEXT, JSON. See AWS documentation for format details.
+	// Format for Service Connect access log output. Valid values: TEXT, JSON. See AWS documentation for format details.
 	// +kubebuilder:validation:Optional
 	Format *string `json:"format" tf:"format,omitempty"`
 
-	// Specifies whether to include query parameters in Service Connect access logs. Valid values: ENABLED, DISABLED. Default: DISABLED. Query parameters may contain sensitive information.
+	// Whether to include query parameters in Service Connect access logs. Valid values: ENABLED, DISABLED. Default: DISABLED. Query parameters may contain sensitive information.
 	// +kubebuilder:validation:Optional
 	IncludeQueryParameters *string `json:"includeQueryParameters,omitempty" tf:"include_query_parameters,omitempty"`
 }
@@ -206,7 +206,7 @@ type ClientAliasInitParameters struct {
 	// Name that you use in the applications of client tasks to connect to this service.
 	DNSName *string `json:"dnsName,omitempty" tf:"dns_name,omitempty"`
 
-	// Listening port number for the Service Connect proxy. This port is available inside of all of the tasks within the same namespace.
+	// Port value used if your Service Discovery service specified an SRV record.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// Configuration block for test traffic routing rules. See below.
@@ -218,7 +218,7 @@ type ClientAliasObservation struct {
 	// Name that you use in the applications of client tasks to connect to this service.
 	DNSName *string `json:"dnsName,omitempty" tf:"dns_name,omitempty"`
 
-	// Listening port number for the Service Connect proxy. This port is available inside of all of the tasks within the same namespace.
+	// Port value used if your Service Discovery service specified an SRV record.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// Configuration block for test traffic routing rules. See below.
@@ -231,7 +231,7 @@ type ClientAliasParameters struct {
 	// +kubebuilder:validation:Optional
 	DNSName *string `json:"dnsName,omitempty" tf:"dns_name,omitempty"`
 
-	// Listening port number for the Service Connect proxy. This port is available inside of all of the tasks within the same namespace.
+	// Port value used if your Service Discovery service specified an SRV record.
 	// +kubebuilder:validation:Optional
 	Port *float64 `json:"port" tf:"port,omitempty"`
 
@@ -349,7 +349,7 @@ type DeploymentControllerParameters struct {
 
 type HeaderInitParameters struct {
 
-	// Name of the HTTP header to match.
+	// Name of the volume.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Configuration block for header value matching criteria. See below.
@@ -358,7 +358,7 @@ type HeaderInitParameters struct {
 
 type HeaderObservation struct {
 
-	// Name of the HTTP header to match.
+	// Name of the volume.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Configuration block for header value matching criteria. See below.
@@ -367,7 +367,7 @@ type HeaderObservation struct {
 
 type HeaderParameters struct {
 
-	// Name of the HTTP header to match.
+	// Name of the volume.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -484,10 +484,10 @@ type LoadBalancerInitParameters struct {
 	// Port on the container to associate with the load balancer.
 	ContainerPort *float64 `json:"containerPort,omitempty" tf:"container_port,omitempty"`
 
-	// Name of the ELB (Classic) to associate with the service.
+	// Name of the ELB (Classic) to associate with the service. Required for ELB Classic.
 	ELBName *string `json:"elbName,omitempty" tf:"elb_name,omitempty"`
 
-	// ARN of the Load Balancer target group to associate with the service.
+	// ARN of the Load Balancer target group to associate with the service. Required for ALB/NLB.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/elbv2/v1beta2.LBTargetGroup
 	TargetGroupArn *string `json:"targetGroupArn,omitempty" tf:"target_group_arn,omitempty"`
 
@@ -511,10 +511,10 @@ type LoadBalancerObservation struct {
 	// Port on the container to associate with the load balancer.
 	ContainerPort *float64 `json:"containerPort,omitempty" tf:"container_port,omitempty"`
 
-	// Name of the ELB (Classic) to associate with the service.
+	// Name of the ELB (Classic) to associate with the service. Required for ELB Classic.
 	ELBName *string `json:"elbName,omitempty" tf:"elb_name,omitempty"`
 
-	// ARN of the Load Balancer target group to associate with the service.
+	// ARN of the Load Balancer target group to associate with the service. Required for ALB/NLB.
 	TargetGroupArn *string `json:"targetGroupArn,omitempty" tf:"target_group_arn,omitempty"`
 }
 
@@ -532,11 +532,11 @@ type LoadBalancerParameters struct {
 	// +kubebuilder:validation:Optional
 	ContainerPort *float64 `json:"containerPort" tf:"container_port,omitempty"`
 
-	// Name of the ELB (Classic) to associate with the service.
+	// Name of the ELB (Classic) to associate with the service. Required for ELB Classic.
 	// +kubebuilder:validation:Optional
 	ELBName *string `json:"elbName,omitempty" tf:"elb_name,omitempty"`
 
-	// ARN of the Load Balancer target group to associate with the service.
+	// ARN of the Load Balancer target group to associate with the service. Required for ALB/NLB.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/elbv2/v1beta2.LBTargetGroup
 	// +kubebuilder:validation:Optional
 	TargetGroupArn *string `json:"targetGroupArn,omitempty" tf:"target_group_arn,omitempty"`
@@ -561,10 +561,10 @@ type ManagedEBSVolumeInitParameters struct {
 	// Number of I/O operations per second (IOPS).
 	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
-	// Amazon Resource Name (ARN) identifier of the Amazon Web Services Key Management Service key to use for Amazon EBS encryption.
+	// ARN identifier of the Amazon Web Services KMS key to use for Amazon EBS encryption.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
-	// The ARN of the IAM role to associate with this volume. This is the Amazon ECS infrastructure IAM role that is used to manage your AWS infrastructure.
+	// ARN of the IAM role to associate with this volume. This is the Amazon ECS infrastructure IAM role that is used to manage your AWS infrastructure.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
 	// Size of the volume in GiB. You must specify either a size_in_gb or a snapshot_id. You can optionally specify a volume size greater than or equal to the snapshot size.
@@ -573,7 +573,7 @@ type ManagedEBSVolumeInitParameters struct {
 	// Snapshot that Amazon ECS uses to create the volume. You must specify either a size_in_gb or a snapshot_id.
 	SnapshotID *string `json:"snapshotId,omitempty" tf:"snapshot_id,omitempty"`
 
-	// The tags to apply to the volume. See below.
+	// Tags to apply to the volume. See below.
 	TagSpecifications []TagSpecificationsInitParameters `json:"tagSpecifications,omitempty" tf:"tag_specifications,omitempty"`
 
 	// Throughput to provision for a volume, in MiB/s, with a maximum of 1,000 MiB/s.
@@ -597,10 +597,10 @@ type ManagedEBSVolumeObservation struct {
 	// Number of I/O operations per second (IOPS).
 	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
-	// Amazon Resource Name (ARN) identifier of the Amazon Web Services Key Management Service key to use for Amazon EBS encryption.
+	// ARN identifier of the Amazon Web Services KMS key to use for Amazon EBS encryption.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
-	// The ARN of the IAM role to associate with this volume. This is the Amazon ECS infrastructure IAM role that is used to manage your AWS infrastructure.
+	// ARN of the IAM role to associate with this volume. This is the Amazon ECS infrastructure IAM role that is used to manage your AWS infrastructure.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
 	// Size of the volume in GiB. You must specify either a size_in_gb or a snapshot_id. You can optionally specify a volume size greater than or equal to the snapshot size.
@@ -609,7 +609,7 @@ type ManagedEBSVolumeObservation struct {
 	// Snapshot that Amazon ECS uses to create the volume. You must specify either a size_in_gb or a snapshot_id.
 	SnapshotID *string `json:"snapshotId,omitempty" tf:"snapshot_id,omitempty"`
 
-	// The tags to apply to the volume. See below.
+	// Tags to apply to the volume. See below.
 	TagSpecifications []TagSpecificationsObservation `json:"tagSpecifications,omitempty" tf:"tag_specifications,omitempty"`
 
 	// Throughput to provision for a volume, in MiB/s, with a maximum of 1,000 MiB/s.
@@ -636,11 +636,11 @@ type ManagedEBSVolumeParameters struct {
 	// +kubebuilder:validation:Optional
 	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
-	// Amazon Resource Name (ARN) identifier of the Amazon Web Services Key Management Service key to use for Amazon EBS encryption.
+	// ARN identifier of the Amazon Web Services KMS key to use for Amazon EBS encryption.
 	// +kubebuilder:validation:Optional
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
-	// The ARN of the IAM role to associate with this volume. This is the Amazon ECS infrastructure IAM role that is used to manage your AWS infrastructure.
+	// ARN of the IAM role to associate with this volume. This is the Amazon ECS infrastructure IAM role that is used to manage your AWS infrastructure.
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn" tf:"role_arn,omitempty"`
 
@@ -652,7 +652,7 @@ type ManagedEBSVolumeParameters struct {
 	// +kubebuilder:validation:Optional
 	SnapshotID *string `json:"snapshotId,omitempty" tf:"snapshot_id,omitempty"`
 
-	// The tags to apply to the volume. See below.
+	// Tags to apply to the volume. See below.
 	// +kubebuilder:validation:Optional
 	TagSpecifications []TagSpecificationsParameters `json:"tagSpecifications,omitempty" tf:"tag_specifications,omitempty"`
 
@@ -729,7 +729,7 @@ type PlacementConstraintsParameters struct {
 
 type SecretOptionInitParameters struct {
 
-	// Name of the secret.
+	// Name of the volume.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Secret to expose to the container. The supported values are either the full ARN of the AWS Secrets Manager secret or the full ARN of the parameter in the SSM Parameter Store.
@@ -738,7 +738,7 @@ type SecretOptionInitParameters struct {
 
 type SecretOptionObservation struct {
 
-	// Name of the secret.
+	// Name of the volume.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Secret to expose to the container. The supported values are either the full ARN of the AWS Secrets Manager secret or the full ARN of the parameter in the SSM Parameter Store.
@@ -747,7 +747,7 @@ type SecretOptionObservation struct {
 
 type SecretOptionParameters struct {
 
-	// Name of the secret.
+	// Name of the volume.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -868,10 +868,10 @@ type ServiceConnectConfigurationServiceInitParameters struct {
 	// Port number for the Service Connect proxy to listen on.
 	IngressPortOverride *float64 `json:"ingressPortOverride,omitempty" tf:"ingress_port_override,omitempty"`
 
-	// Name of one of the portMappings from all the containers in the task definition of this Amazon ECS service.
+	// Name of the port for a target group associated with the VPC Lattice configuration.
 	PortName *string `json:"portName,omitempty" tf:"port_name,omitempty"`
 
-	// Configuration for enabling Transport Layer Security (TLS)
+	// Configuration for enabling TLS
 	TLS *TLSInitParameters `json:"tls,omitempty" tf:"tls,omitempty"`
 
 	// Configuration timeouts for Service Connect
@@ -889,10 +889,10 @@ type ServiceConnectConfigurationServiceObservation struct {
 	// Port number for the Service Connect proxy to listen on.
 	IngressPortOverride *float64 `json:"ingressPortOverride,omitempty" tf:"ingress_port_override,omitempty"`
 
-	// Name of one of the portMappings from all the containers in the task definition of this Amazon ECS service.
+	// Name of the port for a target group associated with the VPC Lattice configuration.
 	PortName *string `json:"portName,omitempty" tf:"port_name,omitempty"`
 
-	// Configuration for enabling Transport Layer Security (TLS)
+	// Configuration for enabling TLS
 	TLS *TLSObservation `json:"tls,omitempty" tf:"tls,omitempty"`
 
 	// Configuration timeouts for Service Connect
@@ -913,11 +913,11 @@ type ServiceConnectConfigurationServiceParameters struct {
 	// +kubebuilder:validation:Optional
 	IngressPortOverride *float64 `json:"ingressPortOverride,omitempty" tf:"ingress_port_override,omitempty"`
 
-	// Name of one of the portMappings from all the containers in the task definition of this Amazon ECS service.
+	// Name of the port for a target group associated with the VPC Lattice configuration.
 	// +kubebuilder:validation:Optional
 	PortName *string `json:"portName" tf:"port_name,omitempty"`
 
-	// Configuration for enabling Transport Layer Security (TLS)
+	// Configuration for enabling TLS
 	// +kubebuilder:validation:Optional
 	TLS *TLSParameters `json:"tls,omitempty" tf:"tls,omitempty"`
 
@@ -1037,7 +1037,7 @@ type ServiceInitParameters struct {
 	// +mapType=granular
 	Triggers map[string]*string `json:"triggers,omitempty" tf:"triggers,omitempty"`
 
-	// The VPC Lattice configuration for your service that allows Lattice to connect, secure, and monitor your service across multiple accounts and VPCs. See below.
+	// VPC Lattice configuration for your service that allows Lattice to connect, secure, and monitor your service across multiple accounts and VPCs. See below.
 	VPCLatticeConfigurations []VPCLatticeConfigurationsInitParameters `json:"vpcLatticeConfigurations,omitempty" tf:"vpc_lattice_configurations,omitempty"`
 
 	// Configuration for a volume specified in the task definition as a volume that is configured at launch time. Currently, the only supported volume type is an Amazon EBS volume. See below.
@@ -1232,7 +1232,7 @@ type ServiceObservation struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
@@ -1243,7 +1243,7 @@ type ServiceObservation struct {
 	// +mapType=granular
 	Triggers map[string]*string `json:"triggers,omitempty" tf:"triggers,omitempty"`
 
-	// The VPC Lattice configuration for your service that allows Lattice to connect, secure, and monitor your service across multiple accounts and VPCs. See below.
+	// VPC Lattice configuration for your service that allows Lattice to connect, secure, and monitor your service across multiple accounts and VPCs. See below.
 	VPCLatticeConfigurations []VPCLatticeConfigurationsObservation `json:"vpcLatticeConfigurations,omitempty" tf:"vpc_lattice_configurations,omitempty"`
 
 	// Configuration for a volume specified in the task definition as a volume that is configured at launch time. Currently, the only supported volume type is an Amazon EBS volume. See below.
@@ -1411,7 +1411,7 @@ type ServiceParameters struct {
 	// +mapType=granular
 	Triggers map[string]*string `json:"triggers,omitempty" tf:"triggers,omitempty"`
 
-	// The VPC Lattice configuration for your service that allows Lattice to connect, secure, and monitor your service across multiple accounts and VPCs. See below.
+	// VPC Lattice configuration for your service that allows Lattice to connect, secure, and monitor your service across multiple accounts and VPCs. See below.
 	// +kubebuilder:validation:Optional
 	VPCLatticeConfigurations []VPCLatticeConfigurationsParameters `json:"vpcLatticeConfigurations,omitempty" tf:"vpc_lattice_configurations,omitempty"`
 
@@ -1481,7 +1481,7 @@ type TLSInitParameters struct {
 	// KMS key used to encrypt the private key in Secrets Manager.
 	KMSKey *string `json:"kmsKey,omitempty" tf:"kms_key,omitempty"`
 
-	// ARN of the IAM Role that's associated with the Service Connect TLS.
+	// ARN of the IAM role to associate with this volume. This is the Amazon ECS infrastructure IAM role that is used to manage your AWS infrastructure.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
 
@@ -1493,7 +1493,7 @@ type TLSObservation struct {
 	// KMS key used to encrypt the private key in Secrets Manager.
 	KMSKey *string `json:"kmsKey,omitempty" tf:"kms_key,omitempty"`
 
-	// ARN of the IAM Role that's associated with the Service Connect TLS.
+	// ARN of the IAM role to associate with this volume. This is the Amazon ECS infrastructure IAM role that is used to manage your AWS infrastructure.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
 
@@ -1507,7 +1507,7 @@ type TLSParameters struct {
 	// +kubebuilder:validation:Optional
 	KMSKey *string `json:"kmsKey,omitempty" tf:"kms_key,omitempty"`
 
-	// ARN of the IAM Role that's associated with the Service Connect TLS.
+	// ARN of the IAM role to associate with this volume. This is the Amazon ECS infrastructure IAM role that is used to manage your AWS infrastructure.
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
@@ -1517,7 +1517,7 @@ type TagSpecificationsInitParameters struct {
 	// Whether to propagate the tags from the task definition or the service to the tasks. The valid values are SERVICE and TASK_DEFINITION.
 	PropagateTags *string `json:"propagateTags,omitempty" tf:"propagate_tags,omitempty"`
 
-	// The type of volume resource. Valid values, volume.
+	// Type of volume resource. Valid values, volume.
 	ResourceType *string `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
 
 	// Key-value map of resource tags.
@@ -1530,7 +1530,7 @@ type TagSpecificationsObservation struct {
 	// Whether to propagate the tags from the task definition or the service to the tasks. The valid values are SERVICE and TASK_DEFINITION.
 	PropagateTags *string `json:"propagateTags,omitempty" tf:"propagate_tags,omitempty"`
 
-	// The type of volume resource. Valid values, volume.
+	// Type of volume resource. Valid values, volume.
 	ResourceType *string `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
 
 	// Key-value map of resource tags.
@@ -1544,7 +1544,7 @@ type TagSpecificationsParameters struct {
 	// +kubebuilder:validation:Optional
 	PropagateTags *string `json:"propagateTags,omitempty" tf:"propagate_tags,omitempty"`
 
-	// The type of volume resource. Valid values, volume.
+	// Type of volume resource. Valid values, volume.
 	// +kubebuilder:validation:Optional
 	ResourceType *string `json:"resourceType" tf:"resource_type,omitempty"`
 
@@ -1604,39 +1604,39 @@ type TimeoutParameters struct {
 
 type VPCLatticeConfigurationsInitParameters struct {
 
-	// The name of the port for a target group associated with the VPC Lattice configuration.
+	// Name of the port for a target group associated with the VPC Lattice configuration.
 	PortName *string `json:"portName,omitempty" tf:"port_name,omitempty"`
 
-	// The ARN of the IAM role to associate with this volume. This is the Amazon ECS infrastructure IAM role that is used to manage your AWS infrastructure.
+	// ARN of the IAM role to associate with this volume. This is the Amazon ECS infrastructure IAM role that is used to manage your AWS infrastructure.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
-	// The full ARN of the target group or groups associated with the VPC Lattice configuration.
+	// Full ARN of the target group or groups associated with the VPC Lattice configuration.
 	TargetGroupArn *string `json:"targetGroupArn,omitempty" tf:"target_group_arn,omitempty"`
 }
 
 type VPCLatticeConfigurationsObservation struct {
 
-	// The name of the port for a target group associated with the VPC Lattice configuration.
+	// Name of the port for a target group associated with the VPC Lattice configuration.
 	PortName *string `json:"portName,omitempty" tf:"port_name,omitempty"`
 
-	// The ARN of the IAM role to associate with this volume. This is the Amazon ECS infrastructure IAM role that is used to manage your AWS infrastructure.
+	// ARN of the IAM role to associate with this volume. This is the Amazon ECS infrastructure IAM role that is used to manage your AWS infrastructure.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
-	// The full ARN of the target group or groups associated with the VPC Lattice configuration.
+	// Full ARN of the target group or groups associated with the VPC Lattice configuration.
 	TargetGroupArn *string `json:"targetGroupArn,omitempty" tf:"target_group_arn,omitempty"`
 }
 
 type VPCLatticeConfigurationsParameters struct {
 
-	// The name of the port for a target group associated with the VPC Lattice configuration.
+	// Name of the port for a target group associated with the VPC Lattice configuration.
 	// +kubebuilder:validation:Optional
 	PortName *string `json:"portName" tf:"port_name,omitempty"`
 
-	// The ARN of the IAM role to associate with this volume. This is the Amazon ECS infrastructure IAM role that is used to manage your AWS infrastructure.
+	// ARN of the IAM role to associate with this volume. This is the Amazon ECS infrastructure IAM role that is used to manage your AWS infrastructure.
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn" tf:"role_arn,omitempty"`
 
-	// The full ARN of the target group or groups associated with the VPC Lattice configuration.
+	// Full ARN of the target group or groups associated with the VPC Lattice configuration.
 	// +kubebuilder:validation:Optional
 	TargetGroupArn *string `json:"targetGroupArn" tf:"target_group_arn,omitempty"`
 }

@@ -105,9 +105,9 @@ spec:
                     description: The name of the first database created in the namespace.
                     type: string
                   defaultIamRoleArn:
-                    description: The Amazon Resource Name (ARN) of the IAM role to
-                      set as a default in the namespace. When specifying default_iam_role_arn,
-                      it also must be part of iam_roles.
+                    description: ARN of the IAM role to set as a default in the namespace.
+                      When specifying default_iam_role_arn, it also must be part of
+                      iam_roles.
                     type: string
                   defaultIamRoleArnRef:
                     description: Reference to a Role in iam to populate defaultIamRoleArn.
@@ -279,8 +279,8 @@ spec:
                     type: array
                     x-kubernetes-list-type: set
                   kmsKeyId:
-                    description: The ARN of the Amazon Web Services Key Management
-                      Service key used to encrypt your data.
+                    description: ARN of the Amazon Web Services KMS key used to encrypt
+                      your data.
                     type: string
                   kmsKeyIdRef:
                     description: Reference to a Key in kms to populate kmsKeyId.
@@ -446,9 +446,9 @@ spec:
                     description: The name of the first database created in the namespace.
                     type: string
                   defaultIamRoleArn:
-                    description: The Amazon Resource Name (ARN) of the IAM role to
-                      set as a default in the namespace. When specifying default_iam_role_arn,
-                      it also must be part of iam_roles.
+                    description: ARN of the IAM role to set as a default in the namespace.
+                      When specifying default_iam_role_arn, it also must be part of
+                      iam_roles.
                     type: string
                   defaultIamRoleArnRef:
                     description: Reference to a Role in iam to populate defaultIamRoleArn.
@@ -620,8 +620,8 @@ spec:
                     type: array
                     x-kubernetes-list-type: set
                   kmsKeyId:
-                    description: The ARN of the Amazon Web Services Key Management
-                      Service key used to encrypt your data.
+                    description: ARN of the Amazon Web Services KMS key used to encrypt
+                      your data.
                     type: string
                   kmsKeyIdRef:
                     description: Reference to a Key in kms to populate kmsKeyId.
@@ -787,8 +787,7 @@ spec:
               atProvider:
                 properties:
                   adminPasswordSecretArn:
-                    description: Amazon Resource Name (ARN) of namespace's admin user
-                      credentials secret.
+                    description: ARN of namespace's admin user credentials secret.
                     type: string
                   adminPasswordSecretKmsKeyId:
                     description: ID of the KMS key used to encrypt the namespace's
@@ -805,16 +804,15 @@ spec:
                       is required
                     type: number
                   arn:
-                    description: Amazon Resource Name (ARN) of the Redshift Serverless
-                      Namespace.
+                    description: ARN of the Redshift Serverless Namespace.
                     type: string
                   dbName:
                     description: The name of the first database created in the namespace.
                     type: string
                   defaultIamRoleArn:
-                    description: The Amazon Resource Name (ARN) of the IAM role to
-                      set as a default in the namespace. When specifying default_iam_role_arn,
-                      it also must be part of iam_roles.
+                    description: ARN of the IAM role to set as a default in the namespace.
+                      When specifying default_iam_role_arn, it also must be part of
+                      iam_roles.
                     type: string
                   iamRoles:
                     description: A list of IAM roles to associate with the namespace.
@@ -826,8 +824,8 @@ spec:
                     description: The Redshift Namespace Name.
                     type: string
                   kmsKeyId:
-                    description: The ARN of the Amazon Web Services Key Management
-                      Service key used to encrypt your data.
+                    description: ARN of the Amazon Web Services KMS key used to encrypt
+                      your data.
                     type: string
                   logExports:
                     description: The types of logs the namespace can export. Available

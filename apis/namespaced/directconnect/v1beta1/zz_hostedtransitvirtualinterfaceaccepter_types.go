@@ -28,6 +28,12 @@ type HostedTransitVirtualInterfaceAccepterInitParameters struct {
 	// +kubebuilder:validation:Optional
 	DxGatewayIDSelector *v2.NamespacedSelector `json:"dxGatewayIdSelector,omitempty" tf:"-"`
 
+	// The number of inbound IPv4 route prefixes to allocate to the virtual interface. Valid values are 0 to 1000. If not specified, AWS applies the default allocation of 100.
+	PrefixPoolAllocatedCountIPv4 *float64 `json:"prefixPoolAllocatedCountIpv4,omitempty" tf:"prefix_pool_allocated_count_ipv4,omitempty"`
+
+	// The number of inbound IPv6 route prefixes to allocate to the virtual interface. Valid values are 0 to 1000. If not specified, AWS applies the default allocation of 100.
+	PrefixPoolAllocatedCountIPv6 *float64 `json:"prefixPoolAllocatedCountIpv6,omitempty" tf:"prefix_pool_allocated_count_ipv6,omitempty"`
+
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -55,6 +61,12 @@ type HostedTransitVirtualInterfaceAccepterObservation struct {
 
 	// The ID of the virtual interface.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The number of inbound IPv4 route prefixes to allocate to the virtual interface. Valid values are 0 to 1000. If not specified, AWS applies the default allocation of 100.
+	PrefixPoolAllocatedCountIPv4 *float64 `json:"prefixPoolAllocatedCountIpv4,omitempty" tf:"prefix_pool_allocated_count_ipv4,omitempty"`
+
+	// The number of inbound IPv6 route prefixes to allocate to the virtual interface. Valid values are 0 to 1000. If not specified, AWS applies the default allocation of 100.
+	PrefixPoolAllocatedCountIPv6 *float64 `json:"prefixPoolAllocatedCountIpv6,omitempty" tf:"prefix_pool_allocated_count_ipv6,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -87,6 +99,14 @@ type HostedTransitVirtualInterfaceAccepterParameters struct {
 	// Selector for a Gateway in directconnect to populate dxGatewayId.
 	// +kubebuilder:validation:Optional
 	DxGatewayIDSelector *v2.NamespacedSelector `json:"dxGatewayIdSelector,omitempty" tf:"-"`
+
+	// The number of inbound IPv4 route prefixes to allocate to the virtual interface. Valid values are 0 to 1000. If not specified, AWS applies the default allocation of 100.
+	// +kubebuilder:validation:Optional
+	PrefixPoolAllocatedCountIPv4 *float64 `json:"prefixPoolAllocatedCountIpv4,omitempty" tf:"prefix_pool_allocated_count_ipv4,omitempty"`
+
+	// The number of inbound IPv6 route prefixes to allocate to the virtual interface. Valid values are 0 to 1000. If not specified, AWS applies the default allocation of 100.
+	// +kubebuilder:validation:Optional
+	PrefixPoolAllocatedCountIPv6 *float64 `json:"prefixPoolAllocatedCountIpv6,omitempty" tf:"prefix_pool_allocated_count_ipv6,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.

@@ -64,29 +64,29 @@ type AuthenticationConfigurationParameters struct {
 
 type CodeConfigurationInitParameters struct {
 
-	// Basic configuration for building and running the App Runner service. Use this parameter to quickly launch an App Runner service without providing an apprunner.yaml file in the source code repository (or ignoring the file if it exists). See Code Configuration Values below for more details.
+	// Basic configuration for building and running the App Runner service. Use this parameter to quickly launch an App Runner service without providing an apprunner.yaml file in the source code repository (or ignoring the file if it exists). See code_configuration_values below.
 	CodeConfigurationValues *CodeConfigurationValuesInitParameters `json:"codeConfigurationValues,omitempty" tf:"code_configuration_values,omitempty"`
 
-	// Source of the App Runner configuration. Valid values: REPOSITORY, API. Values are interpreted as follows:
+	// Source of the App Runner configuration. Valid values: REPOSITORY, API. Use REPOSITORY to have App Runner read configuration values from the apprunner.yaml file in the source code repository and ignore code_configuration_values. Use API to have App Runner use the configuration values provided in code_configuration_values and ignore the apprunner.yaml file in the source code repository.
 	ConfigurationSource *string `json:"configurationSource,omitempty" tf:"configuration_source,omitempty"`
 }
 
 type CodeConfigurationObservation struct {
 
-	// Basic configuration for building and running the App Runner service. Use this parameter to quickly launch an App Runner service without providing an apprunner.yaml file in the source code repository (or ignoring the file if it exists). See Code Configuration Values below for more details.
+	// Basic configuration for building and running the App Runner service. Use this parameter to quickly launch an App Runner service without providing an apprunner.yaml file in the source code repository (or ignoring the file if it exists). See code_configuration_values below.
 	CodeConfigurationValues *CodeConfigurationValuesObservation `json:"codeConfigurationValues,omitempty" tf:"code_configuration_values,omitempty"`
 
-	// Source of the App Runner configuration. Valid values: REPOSITORY, API. Values are interpreted as follows:
+	// Source of the App Runner configuration. Valid values: REPOSITORY, API. Use REPOSITORY to have App Runner read configuration values from the apprunner.yaml file in the source code repository and ignore code_configuration_values. Use API to have App Runner use the configuration values provided in code_configuration_values and ignore the apprunner.yaml file in the source code repository.
 	ConfigurationSource *string `json:"configurationSource,omitempty" tf:"configuration_source,omitempty"`
 }
 
 type CodeConfigurationParameters struct {
 
-	// Basic configuration for building and running the App Runner service. Use this parameter to quickly launch an App Runner service without providing an apprunner.yaml file in the source code repository (or ignoring the file if it exists). See Code Configuration Values below for more details.
+	// Basic configuration for building and running the App Runner service. Use this parameter to quickly launch an App Runner service without providing an apprunner.yaml file in the source code repository (or ignoring the file if it exists). See code_configuration_values below.
 	// +kubebuilder:validation:Optional
 	CodeConfigurationValues *CodeConfigurationValuesParameters `json:"codeConfigurationValues,omitempty" tf:"code_configuration_values,omitempty"`
 
-	// Source of the App Runner configuration. Valid values: REPOSITORY, API. Values are interpreted as follows:
+	// Source of the App Runner configuration. Valid values: REPOSITORY, API. Use REPOSITORY to have App Runner read configuration values from the apprunner.yaml file in the source code repository and ignore code_configuration_values. Use API to have App Runner use the configuration values provided in code_configuration_values and ignore the apprunner.yaml file in the source code repository.
 	// +kubebuilder:validation:Optional
 	ConfigurationSource *string `json:"configurationSource" tf:"configuration_source,omitempty"`
 }
@@ -168,37 +168,37 @@ type CodeConfigurationValuesParameters struct {
 
 type CodeRepositoryInitParameters struct {
 
-	// Configuration for building and running the service from a source code repository. See Code Configuration below for more details.
+	// Configuration for building and running the service from a source code repository. See code_configuration below.
 	CodeConfiguration *CodeConfigurationInitParameters `json:"codeConfiguration,omitempty" tf:"code_configuration,omitempty"`
 
 	// Location of the repository that contains the source code.
 	RepositoryURL *string `json:"repositoryUrl,omitempty" tf:"repository_url,omitempty"`
 
-	// Version that should be used within the source code repository. See Source Code Version below for more details.
+	// Version that should be used within the source code repository. See source_code_version below.
 	SourceCodeVersion *SourceCodeVersionInitParameters `json:"sourceCodeVersion,omitempty" tf:"source_code_version,omitempty"`
 
-	// The path of the directory that stores source code and configuration files. The build and start commands also execute from here. The path is absolute from root and, if not specified, defaults to the repository root.
+	// Path of the directory that stores source code and configuration files. The build and start commands also execute from here. The path is absolute from root and, if not specified, defaults to the repository root.
 	SourceDirectory *string `json:"sourceDirectory,omitempty" tf:"source_directory,omitempty"`
 }
 
 type CodeRepositoryObservation struct {
 
-	// Configuration for building and running the service from a source code repository. See Code Configuration below for more details.
+	// Configuration for building and running the service from a source code repository. See code_configuration below.
 	CodeConfiguration *CodeConfigurationObservation `json:"codeConfiguration,omitempty" tf:"code_configuration,omitempty"`
 
 	// Location of the repository that contains the source code.
 	RepositoryURL *string `json:"repositoryUrl,omitempty" tf:"repository_url,omitempty"`
 
-	// Version that should be used within the source code repository. See Source Code Version below for more details.
+	// Version that should be used within the source code repository. See source_code_version below.
 	SourceCodeVersion *SourceCodeVersionObservation `json:"sourceCodeVersion,omitempty" tf:"source_code_version,omitempty"`
 
-	// The path of the directory that stores source code and configuration files. The build and start commands also execute from here. The path is absolute from root and, if not specified, defaults to the repository root.
+	// Path of the directory that stores source code and configuration files. The build and start commands also execute from here. The path is absolute from root and, if not specified, defaults to the repository root.
 	SourceDirectory *string `json:"sourceDirectory,omitempty" tf:"source_directory,omitempty"`
 }
 
 type CodeRepositoryParameters struct {
 
-	// Configuration for building and running the service from a source code repository. See Code Configuration below for more details.
+	// Configuration for building and running the service from a source code repository. See code_configuration below.
 	// +kubebuilder:validation:Optional
 	CodeConfiguration *CodeConfigurationParameters `json:"codeConfiguration,omitempty" tf:"code_configuration,omitempty"`
 
@@ -206,21 +206,21 @@ type CodeRepositoryParameters struct {
 	// +kubebuilder:validation:Optional
 	RepositoryURL *string `json:"repositoryUrl" tf:"repository_url,omitempty"`
 
-	// Version that should be used within the source code repository. See Source Code Version below for more details.
+	// Version that should be used within the source code repository. See source_code_version below.
 	// +kubebuilder:validation:Optional
 	SourceCodeVersion *SourceCodeVersionParameters `json:"sourceCodeVersion" tf:"source_code_version,omitempty"`
 
-	// The path of the directory that stores source code and configuration files. The build and start commands also execute from here. The path is absolute from root and, if not specified, defaults to the repository root.
+	// Path of the directory that stores source code and configuration files. The build and start commands also execute from here. The path is absolute from root and, if not specified, defaults to the repository root.
 	// +kubebuilder:validation:Optional
 	SourceDirectory *string `json:"sourceDirectory,omitempty" tf:"source_directory,omitempty"`
 }
 
 type EgressConfigurationInitParameters struct {
 
-	// The type of egress configuration. Valid values are: DEFAULT and VPC.
+	// Type of egress configuration. Valid values are: DEFAULT and VPC.
 	EgressType *string `json:"egressType,omitempty" tf:"egress_type,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the App Runner VPC connector that you want to associate with your App Runner service. Only valid when EgressType = VPC.
+	// ARN of the App Runner VPC connector that you want to associate with your App Runner service. Only valid when EgressType = VPC.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/apprunner/v1beta1.VPCConnector
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	VPCConnectorArn *string `json:"vpcConnectorArn,omitempty" tf:"vpc_connector_arn,omitempty"`
@@ -236,20 +236,20 @@ type EgressConfigurationInitParameters struct {
 
 type EgressConfigurationObservation struct {
 
-	// The type of egress configuration. Valid values are: DEFAULT and VPC.
+	// Type of egress configuration. Valid values are: DEFAULT and VPC.
 	EgressType *string `json:"egressType,omitempty" tf:"egress_type,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the App Runner VPC connector that you want to associate with your App Runner service. Only valid when EgressType = VPC.
+	// ARN of the App Runner VPC connector that you want to associate with your App Runner service. Only valid when EgressType = VPC.
 	VPCConnectorArn *string `json:"vpcConnectorArn,omitempty" tf:"vpc_connector_arn,omitempty"`
 }
 
 type EgressConfigurationParameters struct {
 
-	// The type of egress configuration. Valid values are: DEFAULT and VPC.
+	// Type of egress configuration. Valid values are: DEFAULT and VPC.
 	// +kubebuilder:validation:Optional
 	EgressType *string `json:"egressType,omitempty" tf:"egress_type,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the App Runner VPC connector that you want to associate with your App Runner service. Only valid when EgressType = VPC.
+	// ARN of the App Runner VPC connector that you want to associate with your App Runner service. Only valid when EgressType = VPC.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/apprunner/v1beta1.VPCConnector
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -409,61 +409,58 @@ type ImageConfigurationParameters struct {
 
 type ImageRepositoryInitParameters struct {
 
-	// Configuration for running the identified image. See Image Configuration below for more details.
+	// Configuration for running the identified image. See image_configuration below.
 	ImageConfiguration *ImageConfigurationInitParameters `json:"imageConfiguration,omitempty" tf:"image_configuration,omitempty"`
 
-	// Identifier of an image. For an image in Amazon Elastic Container Registry (Amazon ECR), this is an image name. For the
-	// image name format, see Pulling an image in the Amazon ECR User Guide.
+	// Identifier of an image. For an image in Amazon Elastic Container Registry (Amazon ECR), this is an image name. For the image name format, see Pulling an image in the Amazon ECR User Guide.
 	ImageIdentifier *string `json:"imageIdentifier,omitempty" tf:"image_identifier,omitempty"`
 
-	// Type of the image repository. This reflects the repository provider and whether the repository is private or public. Valid values: ECR , ECR_PUBLIC.
+	// Type of the image repository. This reflects the repository provider and whether the repository is private or public. Valid values: ECR, ECR_PUBLIC.
 	ImageRepositoryType *string `json:"imageRepositoryType,omitempty" tf:"image_repository_type,omitempty"`
 }
 
 type ImageRepositoryObservation struct {
 
-	// Configuration for running the identified image. See Image Configuration below for more details.
+	// Configuration for running the identified image. See image_configuration below.
 	ImageConfiguration *ImageConfigurationObservation `json:"imageConfiguration,omitempty" tf:"image_configuration,omitempty"`
 
-	// Identifier of an image. For an image in Amazon Elastic Container Registry (Amazon ECR), this is an image name. For the
-	// image name format, see Pulling an image in the Amazon ECR User Guide.
+	// Identifier of an image. For an image in Amazon Elastic Container Registry (Amazon ECR), this is an image name. For the image name format, see Pulling an image in the Amazon ECR User Guide.
 	ImageIdentifier *string `json:"imageIdentifier,omitempty" tf:"image_identifier,omitempty"`
 
-	// Type of the image repository. This reflects the repository provider and whether the repository is private or public. Valid values: ECR , ECR_PUBLIC.
+	// Type of the image repository. This reflects the repository provider and whether the repository is private or public. Valid values: ECR, ECR_PUBLIC.
 	ImageRepositoryType *string `json:"imageRepositoryType,omitempty" tf:"image_repository_type,omitempty"`
 }
 
 type ImageRepositoryParameters struct {
 
-	// Configuration for running the identified image. See Image Configuration below for more details.
+	// Configuration for running the identified image. See image_configuration below.
 	// +kubebuilder:validation:Optional
 	ImageConfiguration *ImageConfigurationParameters `json:"imageConfiguration,omitempty" tf:"image_configuration,omitempty"`
 
-	// Identifier of an image. For an image in Amazon Elastic Container Registry (Amazon ECR), this is an image name. For the
-	// image name format, see Pulling an image in the Amazon ECR User Guide.
+	// Identifier of an image. For an image in Amazon Elastic Container Registry (Amazon ECR), this is an image name. For the image name format, see Pulling an image in the Amazon ECR User Guide.
 	// +kubebuilder:validation:Optional
 	ImageIdentifier *string `json:"imageIdentifier" tf:"image_identifier,omitempty"`
 
-	// Type of the image repository. This reflects the repository provider and whether the repository is private or public. Valid values: ECR , ECR_PUBLIC.
+	// Type of the image repository. This reflects the repository provider and whether the repository is private or public. Valid values: ECR, ECR_PUBLIC.
 	// +kubebuilder:validation:Optional
 	ImageRepositoryType *string `json:"imageRepositoryType" tf:"image_repository_type,omitempty"`
 }
 
 type IngressConfigurationInitParameters struct {
 
-	// Specifies whether your App Runner service is publicly accessible. To make the service publicly accessible set it to True. To make the service privately accessible, from only within an Amazon VPC set it to False.
+	// Whether your App Runner service is publicly accessible. To make the service publicly accessible set it to true. To make the service privately accessible, from only within an Amazon VPC, set it to false.
 	IsPubliclyAccessible *bool `json:"isPubliclyAccessible,omitempty" tf:"is_publicly_accessible,omitempty"`
 }
 
 type IngressConfigurationObservation struct {
 
-	// Specifies whether your App Runner service is publicly accessible. To make the service publicly accessible set it to True. To make the service privately accessible, from only within an Amazon VPC set it to False.
+	// Whether your App Runner service is publicly accessible. To make the service publicly accessible set it to true. To make the service privately accessible, from only within an Amazon VPC, set it to false.
 	IsPubliclyAccessible *bool `json:"isPubliclyAccessible,omitempty" tf:"is_publicly_accessible,omitempty"`
 }
 
 type IngressConfigurationParameters struct {
 
-	// Specifies whether your App Runner service is publicly accessible. To make the service publicly accessible set it to True. To make the service privately accessible, from only within an Amazon VPC set it to False.
+	// Whether your App Runner service is publicly accessible. To make the service publicly accessible set it to true. To make the service privately accessible, from only within an Amazon VPC, set it to false.
 	// +kubebuilder:validation:Optional
 	IsPubliclyAccessible *bool `json:"isPubliclyAccessible,omitempty" tf:"is_publicly_accessible,omitempty"`
 }
@@ -509,39 +506,39 @@ type InstanceConfigurationParameters struct {
 
 type NetworkConfigurationInitParameters struct {
 
-	// Network configuration settings for outbound message traffic. See Egress Configuration below for more details.
+	// Network configuration settings for outbound message traffic. See egress_configuration below.
 	EgressConfiguration *EgressConfigurationInitParameters `json:"egressConfiguration,omitempty" tf:"egress_configuration,omitempty"`
 
-	// App Runner provides you with the option to choose between Internet Protocol version 4 (IPv4) and dual stack (IPv4 and IPv6) for your incoming public network configuration. Valid values: IPV4, DUAL_STACK. Default: IPV4.
+	// App Runner provides you with the option to choose between IP version 4 (IPv4) and dual stack (IPv4 and IPv6) for your incoming public network configuration. Valid values: IPV4, DUAL_STACK. Default: IPV4.
 	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
 
-	// Network configuration settings for inbound network traffic. See Ingress Configuration below for more details.
+	// Network configuration settings for inbound network traffic. See ingress_configuration below.
 	IngressConfiguration *IngressConfigurationInitParameters `json:"ingressConfiguration,omitempty" tf:"ingress_configuration,omitempty"`
 }
 
 type NetworkConfigurationObservation struct {
 
-	// Network configuration settings for outbound message traffic. See Egress Configuration below for more details.
+	// Network configuration settings for outbound message traffic. See egress_configuration below.
 	EgressConfiguration *EgressConfigurationObservation `json:"egressConfiguration,omitempty" tf:"egress_configuration,omitempty"`
 
-	// App Runner provides you with the option to choose between Internet Protocol version 4 (IPv4) and dual stack (IPv4 and IPv6) for your incoming public network configuration. Valid values: IPV4, DUAL_STACK. Default: IPV4.
+	// App Runner provides you with the option to choose between IP version 4 (IPv4) and dual stack (IPv4 and IPv6) for your incoming public network configuration. Valid values: IPV4, DUAL_STACK. Default: IPV4.
 	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
 
-	// Network configuration settings for inbound network traffic. See Ingress Configuration below for more details.
+	// Network configuration settings for inbound network traffic. See ingress_configuration below.
 	IngressConfiguration *IngressConfigurationObservation `json:"ingressConfiguration,omitempty" tf:"ingress_configuration,omitempty"`
 }
 
 type NetworkConfigurationParameters struct {
 
-	// Network configuration settings for outbound message traffic. See Egress Configuration below for more details.
+	// Network configuration settings for outbound message traffic. See egress_configuration below.
 	// +kubebuilder:validation:Optional
 	EgressConfiguration *EgressConfigurationParameters `json:"egressConfiguration,omitempty" tf:"egress_configuration,omitempty"`
 
-	// App Runner provides you with the option to choose between Internet Protocol version 4 (IPv4) and dual stack (IPv4 and IPv6) for your incoming public network configuration. Valid values: IPV4, DUAL_STACK. Default: IPV4.
+	// App Runner provides you with the option to choose between IP version 4 (IPv4) and dual stack (IPv4 and IPv6) for your incoming public network configuration. Valid values: IPV4, DUAL_STACK. Default: IPV4.
 	// +kubebuilder:validation:Optional
 	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
 
-	// Network configuration settings for inbound network traffic. See Ingress Configuration below for more details.
+	// Network configuration settings for inbound network traffic. See ingress_configuration below.
 	// +kubebuilder:validation:Optional
 	IngressConfiguration *IngressConfigurationParameters `json:"ingressConfiguration,omitempty" tf:"ingress_configuration,omitempty"`
 }
@@ -551,25 +548,25 @@ type ServiceInitParameters struct {
 	// ARN of an App Runner automatic scaling configuration resource that you want to associate with your service. If not provided, App Runner associates the latest revision of a default auto scaling configuration.
 	AutoScalingConfigurationArn *string `json:"autoScalingConfigurationArn,omitempty" tf:"auto_scaling_configuration_arn,omitempty"`
 
-	// (Forces new resource) An optional custom encryption key that App Runner uses to encrypt the copy of your source repository that it maintains and your service logs. By default, App Runner uses an AWS managed CMK. See Encryption Configuration below for more details.
+	// Custom encryption key that App Runner uses to encrypt the copy of your source repository that it maintains and your service logs. By default, App Runner uses an AWS managed CMK. See encryption_configuration below.
 	EncryptionConfiguration *EncryptionConfigurationInitParameters `json:"encryptionConfiguration,omitempty" tf:"encryption_configuration,omitempty"`
 
-	// Settings of the health check that AWS App Runner performs to monitor the health of your service. See Health Check Configuration below for more details.
+	// Settings of the health check that AWS App Runner performs to monitor the health of your service. See health_check_configuration below.
 	HealthCheckConfiguration *HealthCheckConfigurationInitParameters `json:"healthCheckConfiguration,omitempty" tf:"health_check_configuration,omitempty"`
 
-	// The runtime configuration of instances (scaling units) of the App Runner service. See Instance Configuration below for more details.
+	// Runtime configuration of instances (scaling units) of the App Runner service. See instance_configuration below.
 	InstanceConfiguration *InstanceConfigurationInitParameters `json:"instanceConfiguration,omitempty" tf:"instance_configuration,omitempty"`
 
-	// Configuration settings related to network traffic of the web application that the App Runner service runs. See Network Configuration below for more details.
+	// Configuration settings related to network traffic of the web application that the App Runner service runs. See network_configuration below.
 	NetworkConfiguration *NetworkConfigurationInitParameters `json:"networkConfiguration,omitempty" tf:"network_configuration,omitempty"`
 
-	// The observability configuration of your service. See Observability Configuration below for more details.
+	// Observability configuration of your service. See observability_configuration below.
 	ObservabilityConfiguration *ServiceObservabilityConfigurationInitParameters `json:"observabilityConfiguration,omitempty" tf:"observability_configuration,omitempty"`
 
-	// (Forces new resource) Name of the service.
+	// Name of the service.
 	ServiceName *string `json:"serviceName,omitempty" tf:"service_name,omitempty"`
 
-	// The source to deploy to the App Runner service. Can be a code or an image repository. See Source Configuration below for more details.
+	// Source to deploy to the App Runner service. Can be a code or an image repository. See source_configuration below.
 	SourceConfiguration *SourceConfigurationInitParameters `json:"sourceConfiguration,omitempty" tf:"source_configuration,omitempty"`
 
 	// Key-value map of resource tags.
@@ -634,37 +631,37 @@ type ServiceObservation struct {
 	// ARN of an App Runner automatic scaling configuration resource that you want to associate with your service. If not provided, App Runner associates the latest revision of a default auto scaling configuration.
 	AutoScalingConfigurationArn *string `json:"autoScalingConfigurationArn,omitempty" tf:"auto_scaling_configuration_arn,omitempty"`
 
-	// (Forces new resource) An optional custom encryption key that App Runner uses to encrypt the copy of your source repository that it maintains and your service logs. By default, App Runner uses an AWS managed CMK. See Encryption Configuration below for more details.
+	// Custom encryption key that App Runner uses to encrypt the copy of your source repository that it maintains and your service logs. By default, App Runner uses an AWS managed CMK. See encryption_configuration below.
 	EncryptionConfiguration *EncryptionConfigurationObservation `json:"encryptionConfiguration,omitempty" tf:"encryption_configuration,omitempty"`
 
-	// Settings of the health check that AWS App Runner performs to monitor the health of your service. See Health Check Configuration below for more details.
+	// Settings of the health check that AWS App Runner performs to monitor the health of your service. See health_check_configuration below.
 	HealthCheckConfiguration *HealthCheckConfigurationObservation `json:"healthCheckConfiguration,omitempty" tf:"health_check_configuration,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The runtime configuration of instances (scaling units) of the App Runner service. See Instance Configuration below for more details.
+	// Runtime configuration of instances (scaling units) of the App Runner service. See instance_configuration below.
 	InstanceConfiguration *InstanceConfigurationObservation `json:"instanceConfiguration,omitempty" tf:"instance_configuration,omitempty"`
 
-	// Configuration settings related to network traffic of the web application that the App Runner service runs. See Network Configuration below for more details.
+	// Configuration settings related to network traffic of the web application that the App Runner service runs. See network_configuration below.
 	NetworkConfiguration *NetworkConfigurationObservation `json:"networkConfiguration,omitempty" tf:"network_configuration,omitempty"`
 
-	// The observability configuration of your service. See Observability Configuration below for more details.
+	// Observability configuration of your service. See observability_configuration below.
 	ObservabilityConfiguration *ServiceObservabilityConfigurationObservation `json:"observabilityConfiguration,omitempty" tf:"observability_configuration,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// An alphanumeric ID that App Runner generated for this service. Unique within the AWS Region.
+	// Alphanumeric ID that App Runner generated for this service. Unique within the AWS Region.
 	ServiceID *string `json:"serviceId,omitempty" tf:"service_id,omitempty"`
 
-	// (Forces new resource) Name of the service.
+	// Name of the service.
 	ServiceName *string `json:"serviceName,omitempty" tf:"service_name,omitempty"`
 
 	// Subdomain URL that App Runner generated for this service. You can use this URL to access your service web application.
 	ServiceURL *string `json:"serviceUrl,omitempty" tf:"service_url,omitempty"`
 
-	// The source to deploy to the App Runner service. Can be a code or an image repository. See Source Configuration below for more details.
+	// Source to deploy to the App Runner service. Can be a code or an image repository. See source_configuration below.
 	SourceConfiguration *SourceConfigurationObservation `json:"sourceConfiguration,omitempty" tf:"source_configuration,omitempty"`
 
 	// Current state of the App Runner service.
@@ -685,23 +682,23 @@ type ServiceParameters struct {
 	// +kubebuilder:validation:Optional
 	AutoScalingConfigurationArn *string `json:"autoScalingConfigurationArn,omitempty" tf:"auto_scaling_configuration_arn,omitempty"`
 
-	// (Forces new resource) An optional custom encryption key that App Runner uses to encrypt the copy of your source repository that it maintains and your service logs. By default, App Runner uses an AWS managed CMK. See Encryption Configuration below for more details.
+	// Custom encryption key that App Runner uses to encrypt the copy of your source repository that it maintains and your service logs. By default, App Runner uses an AWS managed CMK. See encryption_configuration below.
 	// +kubebuilder:validation:Optional
 	EncryptionConfiguration *EncryptionConfigurationParameters `json:"encryptionConfiguration,omitempty" tf:"encryption_configuration,omitempty"`
 
-	// Settings of the health check that AWS App Runner performs to monitor the health of your service. See Health Check Configuration below for more details.
+	// Settings of the health check that AWS App Runner performs to monitor the health of your service. See health_check_configuration below.
 	// +kubebuilder:validation:Optional
 	HealthCheckConfiguration *HealthCheckConfigurationParameters `json:"healthCheckConfiguration,omitempty" tf:"health_check_configuration,omitempty"`
 
-	// The runtime configuration of instances (scaling units) of the App Runner service. See Instance Configuration below for more details.
+	// Runtime configuration of instances (scaling units) of the App Runner service. See instance_configuration below.
 	// +kubebuilder:validation:Optional
 	InstanceConfiguration *InstanceConfigurationParameters `json:"instanceConfiguration,omitempty" tf:"instance_configuration,omitempty"`
 
-	// Configuration settings related to network traffic of the web application that the App Runner service runs. See Network Configuration below for more details.
+	// Configuration settings related to network traffic of the web application that the App Runner service runs. See network_configuration below.
 	// +kubebuilder:validation:Optional
 	NetworkConfiguration *NetworkConfigurationParameters `json:"networkConfiguration,omitempty" tf:"network_configuration,omitempty"`
 
-	// The observability configuration of your service. See Observability Configuration below for more details.
+	// Observability configuration of your service. See observability_configuration below.
 	// +kubebuilder:validation:Optional
 	ObservabilityConfiguration *ServiceObservabilityConfigurationParameters `json:"observabilityConfiguration,omitempty" tf:"observability_configuration,omitempty"`
 
@@ -710,11 +707,11 @@ type ServiceParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// (Forces new resource) Name of the service.
+	// Name of the service.
 	// +kubebuilder:validation:Optional
 	ServiceName *string `json:"serviceName,omitempty" tf:"service_name,omitempty"`
 
-	// The source to deploy to the App Runner service. Can be a code or an image repository. See Source Configuration below for more details.
+	// Source to deploy to the App Runner service. Can be a code or an image repository. See source_configuration below.
 	// +kubebuilder:validation:Optional
 	SourceConfiguration *SourceConfigurationParameters `json:"sourceConfiguration,omitempty" tf:"source_configuration,omitempty"`
 
@@ -755,37 +752,37 @@ type SourceCodeVersionParameters struct {
 
 type SourceConfigurationInitParameters struct {
 
-	// Describes resources needed to authenticate access to some source repositories. See Authentication Configuration below for more details.
+	// Configuration for resources needed to authenticate access to some source repositories. See authentication_configuration below.
 	AuthenticationConfiguration *AuthenticationConfigurationInitParameters `json:"authenticationConfiguration,omitempty" tf:"authentication_configuration,omitempty"`
 
 	// Whether continuous integration from the source repository is enabled for the App Runner service. If set to true, each repository change (source code commit or new image version) starts a deployment. Defaults to true.
 	AutoDeploymentsEnabled *bool `json:"autoDeploymentsEnabled,omitempty" tf:"auto_deployments_enabled,omitempty"`
 
-	// Description of a source code repository. See Code Repository below for more details.
+	// Description of a source code repository. See code_repository below.
 	CodeRepository *CodeRepositoryInitParameters `json:"codeRepository,omitempty" tf:"code_repository,omitempty"`
 
-	// Description of a source image repository. See Image Repository below for more details.
+	// Description of a source image repository. See image_repository below.
 	ImageRepository *ImageRepositoryInitParameters `json:"imageRepository,omitempty" tf:"image_repository,omitempty"`
 }
 
 type SourceConfigurationObservation struct {
 
-	// Describes resources needed to authenticate access to some source repositories. See Authentication Configuration below for more details.
+	// Configuration for resources needed to authenticate access to some source repositories. See authentication_configuration below.
 	AuthenticationConfiguration *AuthenticationConfigurationObservation `json:"authenticationConfiguration,omitempty" tf:"authentication_configuration,omitempty"`
 
 	// Whether continuous integration from the source repository is enabled for the App Runner service. If set to true, each repository change (source code commit or new image version) starts a deployment. Defaults to true.
 	AutoDeploymentsEnabled *bool `json:"autoDeploymentsEnabled,omitempty" tf:"auto_deployments_enabled,omitempty"`
 
-	// Description of a source code repository. See Code Repository below for more details.
+	// Description of a source code repository. See code_repository below.
 	CodeRepository *CodeRepositoryObservation `json:"codeRepository,omitempty" tf:"code_repository,omitempty"`
 
-	// Description of a source image repository. See Image Repository below for more details.
+	// Description of a source image repository. See image_repository below.
 	ImageRepository *ImageRepositoryObservation `json:"imageRepository,omitempty" tf:"image_repository,omitempty"`
 }
 
 type SourceConfigurationParameters struct {
 
-	// Describes resources needed to authenticate access to some source repositories. See Authentication Configuration below for more details.
+	// Configuration for resources needed to authenticate access to some source repositories. See authentication_configuration below.
 	// +kubebuilder:validation:Optional
 	AuthenticationConfiguration *AuthenticationConfigurationParameters `json:"authenticationConfiguration,omitempty" tf:"authentication_configuration,omitempty"`
 
@@ -793,11 +790,11 @@ type SourceConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	AutoDeploymentsEnabled *bool `json:"autoDeploymentsEnabled,omitempty" tf:"auto_deployments_enabled,omitempty"`
 
-	// Description of a source code repository. See Code Repository below for more details.
+	// Description of a source code repository. See code_repository below.
 	// +kubebuilder:validation:Optional
 	CodeRepository *CodeRepositoryParameters `json:"codeRepository,omitempty" tf:"code_repository,omitempty"`
 
-	// Description of a source image repository. See Image Repository below for more details.
+	// Description of a source image repository. See image_repository below.
 	// +kubebuilder:validation:Optional
 	ImageRepository *ImageRepositoryParameters `json:"imageRepository,omitempty" tf:"image_repository,omitempty"`
 }

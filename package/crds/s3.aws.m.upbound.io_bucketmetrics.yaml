@@ -144,7 +144,7 @@ spec:
                     type: object
                   filter:
                     description: Object filtering that accepts a prefix, tags, or
-                      a logical AND of prefix and tags (documented below).
+                      a logical AND of prefix and tags. See below.
                     properties:
                       accessPoint:
                         description: S3 Access Point ARN for filtering (singular).
@@ -237,7 +237,8 @@ spec:
                       tags:
                         additionalProperties:
                           type: string
-                        description: Key-value map of resource tags.
+                        description: Object tags for filtering (up to 10). Unsupported
+                          for S3 directory buckets.
                         type: object
                         x-kubernetes-map-type: granular
                     type: object
@@ -351,7 +352,7 @@ spec:
                     type: object
                   filter:
                     description: Object filtering that accepts a prefix, tags, or
-                      a logical AND of prefix and tags (documented below).
+                      a logical AND of prefix and tags. See below.
                     properties:
                       accessPoint:
                         description: S3 Access Point ARN for filtering (singular).
@@ -444,7 +445,8 @@ spec:
                       tags:
                         additionalProperties:
                           type: string
-                        description: Key-value map of resource tags.
+                        description: Object tags for filtering (up to 10). Unsupported
+                          for S3 directory buckets.
                         type: object
                         x-kubernetes-map-type: granular
                     type: object
@@ -526,7 +528,7 @@ spec:
                     type: string
                   filter:
                     description: Object filtering that accepts a prefix, tags, or
-                      a logical AND of prefix and tags (documented below).
+                      a logical AND of prefix and tags. See below.
                     properties:
                       accessPoint:
                         description: S3 Access Point ARN for filtering (singular).
@@ -537,7 +539,8 @@ spec:
                       tags:
                         additionalProperties:
                           type: string
-                        description: Key-value map of resource tags.
+                        description: Object tags for filtering (up to 10). Unsupported
+                          for S3 directory buckets.
                         type: object
                         x-kubernetes-map-type: granular
                     type: object

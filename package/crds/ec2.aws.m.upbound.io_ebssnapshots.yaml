@@ -63,8 +63,7 @@ spec:
                     description: A description of what the snapshot is.
                     type: string
                   outpostArn:
-                    description: The Amazon Resource Name (ARN) of the Outpost on
-                      which to create a local snapshot.
+                    description: ARN of the Outpost on which to create a local snapshot.
                     type: string
                   permanentRestore:
                     description: Indicates whether to permanently restore an archived
@@ -194,8 +193,7 @@ spec:
                     description: A description of what the snapshot is.
                     type: string
                   outpostArn:
-                    description: The Amazon Resource Name (ARN) of the Outpost on
-                      which to create a local snapshot.
+                    description: ARN of the Outpost on which to create a local snapshot.
                     type: string
                   permanentRestore:
                     description: Indicates whether to permanently restore an archived
@@ -365,7 +363,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: Amazon Resource Name (ARN) of the EBS Snapshot.
+                    description: ARN of the EBS Snapshot.
                     type: string
                   dataEncryptionKeyId:
                     description: The data encryption key identifier for the snapshot.
@@ -383,8 +381,7 @@ spec:
                     description: The ARN for the KMS encryption key.
                     type: string
                   outpostArn:
-                    description: The Amazon Resource Name (ARN) of the Outpost on
-                      which to create a local snapshot.
+                    description: ARN of the Outpost on which to create a local snapshot.
                     type: string
                   ownerAlias:
                     description: Value from an Amazon-maintained list (amazon, aws-marketplace,

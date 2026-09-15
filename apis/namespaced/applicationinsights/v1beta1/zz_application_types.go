@@ -15,13 +15,13 @@ import (
 
 type ApplicationInitParameters struct {
 
-	// Indicates whether Application Insights automatically configures unmonitored resources in the resource group.
+	// Whether to automatically configure unmonitored resources in the resource group.
 	AutoConfigEnabled *bool `json:"autoConfigEnabled,omitempty" tf:"auto_config_enabled,omitempty"`
 
 	// Configures all of the resources in the resource group by applying the recommended configurations.
 	AutoCreate *bool `json:"autoCreate,omitempty" tf:"auto_create,omitempty"`
 
-	// Indicates whether Application Insights can listen to CloudWatch events for the application resources, such as instance terminated, failed deployment, and others.
+	// Whether to enable Application Insights to listen to CloudWatch events for the application resources, such as instance terminated, failed deployment, and others.
 	CweMonitorEnabled *bool `json:"cweMonitorEnabled,omitempty" tf:"cwe_monitor_enabled,omitempty"`
 
 	// Application Insights can create applications based on a resource group or on an account. To create an account-based application using all of the resources in the account, set this parameter to ACCOUNT_BASED.
@@ -43,13 +43,13 @@ type ApplicationObservation struct {
 	// ARN of the Application.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// Indicates whether Application Insights automatically configures unmonitored resources in the resource group.
+	// Whether to automatically configure unmonitored resources in the resource group.
 	AutoConfigEnabled *bool `json:"autoConfigEnabled,omitempty" tf:"auto_config_enabled,omitempty"`
 
 	// Configures all of the resources in the resource group by applying the recommended configurations.
 	AutoCreate *bool `json:"autoCreate,omitempty" tf:"auto_create,omitempty"`
 
-	// Indicates whether Application Insights can listen to CloudWatch events for the application resources, such as instance terminated, failed deployment, and others.
+	// Whether to enable Application Insights to listen to CloudWatch events for the application resources, such as instance terminated, failed deployment, and others.
 	CweMonitorEnabled *bool `json:"cweMonitorEnabled,omitempty" tf:"cwe_monitor_enabled,omitempty"`
 
 	// Application Insights can create applications based on a resource group or on an account. To create an account-based application using all of the resources in the account, set this parameter to ACCOUNT_BASED.
@@ -79,7 +79,7 @@ type ApplicationObservation struct {
 
 type ApplicationParameters struct {
 
-	// Indicates whether Application Insights automatically configures unmonitored resources in the resource group.
+	// Whether to automatically configure unmonitored resources in the resource group.
 	// +kubebuilder:validation:Optional
 	AutoConfigEnabled *bool `json:"autoConfigEnabled,omitempty" tf:"auto_config_enabled,omitempty"`
 
@@ -87,7 +87,7 @@ type ApplicationParameters struct {
 	// +kubebuilder:validation:Optional
 	AutoCreate *bool `json:"autoCreate,omitempty" tf:"auto_create,omitempty"`
 
-	// Indicates whether Application Insights can listen to CloudWatch events for the application resources, such as instance terminated, failed deployment, and others.
+	// Whether to enable Application Insights to listen to CloudWatch events for the application resources, such as instance terminated, failed deployment, and others.
 	// +kubebuilder:validation:Optional
 	CweMonitorEnabled *bool `json:"cweMonitorEnabled,omitempty" tf:"cwe_monitor_enabled,omitempty"`
 

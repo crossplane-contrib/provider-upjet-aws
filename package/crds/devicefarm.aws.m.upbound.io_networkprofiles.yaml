@@ -416,7 +416,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The Amazon Resource Name of this network profile.
+                    description: ARN of this network profile.
                     type: string
                   description:
                     description: The description of the network profile.

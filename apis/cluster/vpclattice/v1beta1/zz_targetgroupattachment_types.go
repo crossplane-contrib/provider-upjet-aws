@@ -15,10 +15,10 @@ import (
 
 type TargetGroupAttachmentInitParameters struct {
 
-	// The target.
+	// Target to register with the target group. See target Block for details.
 	Target *TargetInitParameters `json:"target,omitempty" tf:"target,omitempty"`
 
-	// The ID or Amazon Resource Name (ARN) of the target group.
+	// ID or ARN of the target group.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/vpclattice/v1beta1.TargetGroup
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	TargetGroupIdentifier *string `json:"targetGroupIdentifier,omitempty" tf:"target_group_identifier,omitempty"`
@@ -34,17 +34,17 @@ type TargetGroupAttachmentInitParameters struct {
 
 type TargetGroupAttachmentObservation struct {
 
-	// The ID of the target. If the target type of the target group is INSTANCE, this is an instance ID. If the target type is IP , this is an IP address. If the target type is LAMBDA, this is the ARN of the Lambda function. If the target type is ALB, this is the ARN of the Application Load Balancer.
+	// ID of the target. If the target type of the target group is INSTANCE, this is an instance ID. If the target type is IP , this is an IP address. If the target type is LAMBDA, this is the ARN of the Lambda function. If the target type is ALB, this is the ARN of the Application Load Balancer.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The target.
+	// Target to register with the target group. See target Block for details.
 	Target *TargetObservation `json:"target,omitempty" tf:"target,omitempty"`
 
-	// The ID or Amazon Resource Name (ARN) of the target group.
+	// ID or ARN of the target group.
 	TargetGroupIdentifier *string `json:"targetGroupIdentifier,omitempty" tf:"target_group_identifier,omitempty"`
 }
 
@@ -55,11 +55,11 @@ type TargetGroupAttachmentParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// The target.
+	// Target to register with the target group. See target Block for details.
 	// +kubebuilder:validation:Optional
 	Target *TargetParameters `json:"target,omitempty" tf:"target,omitempty"`
 
-	// The ID or Amazon Resource Name (ARN) of the target group.
+	// ID or ARN of the target group.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/vpclattice/v1beta1.TargetGroup
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -76,29 +76,29 @@ type TargetGroupAttachmentParameters struct {
 
 type TargetInitParameters struct {
 
-	// The ID of the target. If the target type of the target group is INSTANCE, this is an instance ID. If the target type is IP , this is an IP address. If the target type is LAMBDA, this is the ARN of the Lambda function. If the target type is ALB, this is the ARN of the Application Load Balancer.
+	// ID of the target. If the target type of the target group is INSTANCE, this is an instance ID. If the target type is IP , this is an IP address. If the target type is LAMBDA, this is the ARN of the Lambda function. If the target type is ALB, this is the ARN of the Application Load Balancer.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// This port is used for routing traffic to the target, and defaults to the target group port. However, you can override the default and specify a custom port.
+	// Port used for routing traffic to the target, and defaults to the target group port. However, you can override the default and specify a custom port.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 }
 
 type TargetObservation struct {
 
-	// The ID of the target. If the target type of the target group is INSTANCE, this is an instance ID. If the target type is IP , this is an IP address. If the target type is LAMBDA, this is the ARN of the Lambda function. If the target type is ALB, this is the ARN of the Application Load Balancer.
+	// ID of the target. If the target type of the target group is INSTANCE, this is an instance ID. If the target type is IP , this is an IP address. If the target type is LAMBDA, this is the ARN of the Lambda function. If the target type is ALB, this is the ARN of the Application Load Balancer.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// This port is used for routing traffic to the target, and defaults to the target group port. However, you can override the default and specify a custom port.
+	// Port used for routing traffic to the target, and defaults to the target group port. However, you can override the default and specify a custom port.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 }
 
 type TargetParameters struct {
 
-	// The ID of the target. If the target type of the target group is INSTANCE, this is an instance ID. If the target type is IP , this is an IP address. If the target type is LAMBDA, this is the ARN of the Lambda function. If the target type is ALB, this is the ARN of the Application Load Balancer.
+	// ID of the target. If the target type of the target group is INSTANCE, this is an instance ID. If the target type is IP , this is an IP address. If the target type is LAMBDA, this is the ARN of the Lambda function. If the target type is ALB, this is the ARN of the Application Load Balancer.
 	// +kubebuilder:validation:Optional
 	ID *string `json:"id" tf:"id,omitempty"`
 
-	// This port is used for routing traffic to the target, and defaults to the target group port. However, you can override the default and specify a custom port.
+	// Port used for routing traffic to the target, and defaults to the target group port. However, you can override the default and specify a custom port.
 	// +kubebuilder:validation:Optional
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 }

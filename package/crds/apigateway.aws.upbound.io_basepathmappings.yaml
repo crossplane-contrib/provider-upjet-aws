@@ -162,7 +162,7 @@ spec:
                       to.
                     type: string
                   domainNameId:
-                    description: The identifier for the domain name resource. Supported
+                    description: Identifier for the domain name resource. Supported
                       only for private custom domain names.
                     type: string
                   domainNameRef:
@@ -430,7 +430,7 @@ spec:
                       to.
                     type: string
                   domainNameId:
-                    description: The identifier for the domain name resource. Supported
+                    description: Identifier for the domain name resource. Supported
                       only for private custom domain names.
                     type: string
                   domainNameRef:
@@ -693,7 +693,7 @@ spec:
                       to.
                     type: string
                   domainNameId:
-                    description: The identifier for the domain name resource. Supported
+                    description: Identifier for the domain name resource. Supported
                       only for private custom domain names.
                     type: string
                   id:

@@ -22,7 +22,7 @@ type ObservabilityConfigurationInitParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Configuration of the tracing feature within this observability configuration. If you don't specify it, App Runner doesn't enable tracing. See Trace Configuration below for more details.
+	// Configuration of the tracing feature within this observability configuration. If you don't specify it, App Runner doesn't enable tracing. See trace_configuration Block below for more details.
 	TraceConfiguration *TraceConfigurationInitParameters `json:"traceConfiguration,omitempty" tf:"trace_configuration,omitempty"`
 }
 
@@ -39,7 +39,7 @@ type ObservabilityConfigurationObservation struct {
 	// Name of the observability configuration.
 	ObservabilityConfigurationName *string `json:"observabilityConfigurationName,omitempty" tf:"observability_configuration_name,omitempty"`
 
-	// The revision of this observability configuration.
+	// Revision of this observability configuration.
 	ObservabilityConfigurationRevision *float64 `json:"observabilityConfigurationRevision,omitempty" tf:"observability_configuration_revision,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -57,7 +57,7 @@ type ObservabilityConfigurationObservation struct {
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// Configuration of the tracing feature within this observability configuration. If you don't specify it, App Runner doesn't enable tracing. See Trace Configuration below for more details.
+	// Configuration of the tracing feature within this observability configuration. If you don't specify it, App Runner doesn't enable tracing. See trace_configuration Block below for more details.
 	TraceConfiguration *TraceConfigurationObservation `json:"traceConfiguration,omitempty" tf:"trace_configuration,omitempty"`
 }
 
@@ -77,7 +77,7 @@ type ObservabilityConfigurationParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Configuration of the tracing feature within this observability configuration. If you don't specify it, App Runner doesn't enable tracing. See Trace Configuration below for more details.
+	// Configuration of the tracing feature within this observability configuration. If you don't specify it, App Runner doesn't enable tracing. See trace_configuration Block below for more details.
 	// +kubebuilder:validation:Optional
 	TraceConfiguration *TraceConfigurationParameters `json:"traceConfiguration,omitempty" tf:"trace_configuration,omitempty"`
 }
