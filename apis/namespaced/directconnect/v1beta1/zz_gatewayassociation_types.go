@@ -52,7 +52,16 @@ type GatewayAssociationInitParameters struct {
 
 	// The ID of the Direct Connect gateway association proposal.
 	// Used for cross-account Direct Connect gateway associations.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/directconnect/v1beta1.GatewayAssociationProposal
 	ProposalID *string `json:"proposalId,omitempty" tf:"proposal_id,omitempty"`
+
+	// Reference to a GatewayAssociationProposal in directconnect to populate proposalId.
+	// +kubebuilder:validation:Optional
+	ProposalIDRef *v2.NamespacedReference `json:"proposalIdRef,omitempty" tf:"-"`
+
+	// Selector for a GatewayAssociationProposal in directconnect to populate proposalId.
+	// +kubebuilder:validation:Optional
+	ProposalIDSelector *v2.NamespacedSelector `json:"proposalIdSelector,omitempty" tf:"-"`
 }
 
 type GatewayAssociationObservation struct {
@@ -138,8 +147,17 @@ type GatewayAssociationParameters struct {
 
 	// The ID of the Direct Connect gateway association proposal.
 	// Used for cross-account Direct Connect gateway associations.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/directconnect/v1beta1.GatewayAssociationProposal
 	// +kubebuilder:validation:Optional
 	ProposalID *string `json:"proposalId,omitempty" tf:"proposal_id,omitempty"`
+
+	// Reference to a GatewayAssociationProposal in directconnect to populate proposalId.
+	// +kubebuilder:validation:Optional
+	ProposalIDRef *v2.NamespacedReference `json:"proposalIdRef,omitempty" tf:"-"`
+
+	// Selector for a GatewayAssociationProposal in directconnect to populate proposalId.
+	// +kubebuilder:validation:Optional
+	ProposalIDSelector *v2.NamespacedSelector `json:"proposalIdSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
