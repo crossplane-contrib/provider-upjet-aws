@@ -23,3 +23,17 @@ spec:
         keyPrefixEquals: docs/
       redirect:
         replaceKeyPrefixWith: documents/
+
+---
+
+apiVersion: s3.aws.upbound.io/v1beta2
+kind: Bucket
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s3/v1beta2/bucketwebsiteconfiguration
+  labels:
+    testing.upbound.io/example-name: s3
+  name: s3-${Rand.RFC1123Subdomain}
+spec:
+  forProvider:
+    region: us-west-1

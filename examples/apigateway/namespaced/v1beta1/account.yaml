@@ -5,6 +5,8 @@
 apiVersion: apigateway.aws.m.upbound.io/v1beta1
 kind: Account
 metadata:
+  annotations:
+    meta.upbound.io/example-id: apigateway/v1beta1/account
   name: demo
   labels:
     testing.upbound.io/example-name-subgroup: account

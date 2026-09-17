@@ -5,6 +5,8 @@
 apiVersion: transfer.aws.upbound.io/v1beta1
 kind: User
 metadata:
+  annotations:
+    meta.upbound.io/example-id: transfer/v1beta1/user
   name: example
 spec:
   forProvider:

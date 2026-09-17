@@ -5,6 +5,8 @@
 apiVersion: iot.aws.upbound.io/v1beta1
 kind: Thing
 metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1beta1/thing
   name: example
 spec:
   forProvider:

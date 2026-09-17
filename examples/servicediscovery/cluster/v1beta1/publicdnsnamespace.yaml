@@ -5,6 +5,8 @@
 apiVersion: servicediscovery.aws.upbound.io/v1beta1
 kind: PublicDNSNamespace
 metadata:
+  annotations:
+    meta.upbound.io/example-id: servicediscovery/v1beta1/publicdnsnamespace
   name: example
 spec:
   forProvider:

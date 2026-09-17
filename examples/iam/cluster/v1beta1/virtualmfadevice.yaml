@@ -5,6 +5,8 @@
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: VirtualMfaDevice
 metadata:
+  annotations:
+    meta.upbound.io/example-id: iam/v1beta1/virtualmfadevice
   name: example
 spec:
   forProvider:

@@ -3,25 +3,10 @@
 # SPDX-License-Identifier: CC0-1.0
 
 apiVersion: elbv2.aws.upbound.io/v1beta1
-kind: LBTargetGroup
-metadata:
-  name: test
-  labels:
-    testing.upbound.io/example-name: elbv2
-spec:
-  forProvider:
-    name: example-lb-tg
-    targetType: ip
-    port: 80
-    protocol: HTTP
-    region: us-west-1
-    vpcIdSelector:
-      matchLabels:
-        testing.upbound.io/example-name: elbv2
----
-apiVersion: elbv2.aws.upbound.io/v1beta1
 kind: LBTargetGroupAttachment
 metadata:
+  annotations:
+    meta.upbound.io/example-id: elbv2/v1beta1/lbtargetgroupattachment
   name: test
   labels:
     testing.upbound.io/example-name: elbv2
@@ -36,12 +21,31 @@ spec:
     availabilityZone: us-west-1a
 
 ---
+apiVersion: elbv2.aws.upbound.io/v1beta1
+kind: LBTargetGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: elbv2/v1beta1/lbtargetgroupattachment
+  name: test
+  labels:
+    testing.upbound.io/example-name: elbv2
+spec:
+  forProvider:
+    name: example-lb-tg
+    targetType: ip
+    port: 80
+    protocol: HTTP
+    region: us-west-1
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: elbv2
+---
 
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: VPC
 metadata:
   annotations:
-    meta.upbound.io/example-id: elbv2/v1beta2/lblistenerrule
+    meta.upbound.io/example-id: elbv2/v1beta1/lbtargetgroupattachment
   labels:
     testing.upbound.io/example-name: elbv2
   name: elbv2-vpc

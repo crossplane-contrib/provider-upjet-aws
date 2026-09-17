@@ -5,6 +5,8 @@
 apiVersion: cloudwatchlogs.aws.m.upbound.io/v1beta1
 kind: Group
 metadata:
+  annotations:
+    meta.upbound.io/example-id: cloudwatchlogs/v1beta1/group
   name: example
   namespace: upbound-system
 spec:

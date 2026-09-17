@@ -5,6 +5,8 @@
 apiVersion: cloudwatchevents.aws.upbound.io/v1beta1
 kind: Permission
 metadata:
+  annotations:
+    meta.upbound.io/example-id: cloudwatchevents/v1beta1/permission
   name: devaccountaccess
 spec:
   forProvider:

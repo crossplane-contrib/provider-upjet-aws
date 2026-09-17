@@ -5,6 +5,8 @@
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: EBSSnapshot
 metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/ebssnapshot
   labels:
     testing.upbound.io/example-name: example_snapshot
   name: example-snapshot

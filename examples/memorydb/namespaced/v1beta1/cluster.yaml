@@ -33,7 +33,7 @@ apiVersion: ec2.aws.m.upbound.io/v1beta1
 kind: SecurityGroup
 metadata:
   annotations:
-    meta.upbound.io/example-id: devicefarm/v1beta1/testgridproject
+    meta.upbound.io/example-id: memorydb/v1beta1/cluster
   name: example
   labels:
     testing.upbound.io/example-name: example
@@ -49,7 +49,7 @@ apiVersion: ec2.aws.m.upbound.io/v1beta1
 kind: VPC
 metadata:
   annotations:
-    meta.upbound.io/example-id: devicefarm/v1beta1/testgridproject
+    meta.upbound.io/example-id: memorydb/v1beta1/cluster
   name: sample-vpc
   labels:
     testing.upbound.io/example-name: example
@@ -65,7 +65,7 @@ apiVersion: memorydb.aws.m.upbound.io/v1beta1
 kind: SubnetGroup
 metadata:
   annotations:
-    meta.upbound.io/example-id: memorydb/v1beta1/subnetgroup
+    meta.upbound.io/example-id: memorydb/v1beta1/cluster
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -81,7 +81,7 @@ apiVersion: ec2.aws.m.upbound.io/v1beta1
 kind: Subnet
 metadata:
   annotations:
-    meta.upbound.io/example-id: memorydb/v1beta1/subnetgroup
+    meta.upbound.io/example-id: memorydb/v1beta1/cluster
   labels:
     testing.upbound.io/example-name: example1
   name: example1
@@ -99,7 +99,7 @@ apiVersion: ec2.aws.m.upbound.io/v1beta1
 kind: Subnet
 metadata:
   annotations:
-    meta.upbound.io/example-id: memorydb/v1beta1/subnetgroup
+    meta.upbound.io/example-id: memorydb/v1beta1/cluster
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -117,7 +117,7 @@ apiVersion: memorydb.aws.m.upbound.io/v1beta1
 kind: ACL
 metadata:
   annotations:
-    meta.upbound.io/example-id: memorydb/v1beta1/acl
+    meta.upbound.io/example-id: memorydb/v1beta1/cluster
   labels:
     testing.upbound.io/example-name: example
   name: example

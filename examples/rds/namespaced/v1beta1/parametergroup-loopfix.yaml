@@ -6,6 +6,8 @@
 apiVersion: rds.aws.m.upbound.io/v1beta1
 kind: ParameterGroup
 metadata:
+  annotations:
+    meta.upbound.io/example-id: rds/v1beta1/parametergroup
   name: a-pg16-forcessl-immediate
   namespace: upbound-system
 spec:
