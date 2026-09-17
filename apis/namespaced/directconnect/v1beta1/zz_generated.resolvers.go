@@ -209,6 +209,26 @@ func (mg *GatewayAssociation) ResolveReferences(ctx context.Context, c client.Re
 	mg.Spec.ForProvider.DxGatewayID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DxGatewayIDRef = rsp.ResolvedReference
 	{
+		m, l, err = apisresolver.GetManagedResource("directconnect.aws.m.upbound.io", "v1beta1", "GatewayAssociationProposal", "GatewayAssociationProposalList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ProposalID),
+			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.ProposalIDRef,
+			Selector:     mg.Spec.ForProvider.ProposalIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ProposalID")
+	}
+	mg.Spec.ForProvider.ProposalID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ProposalIDRef = rsp.ResolvedReference
+	{
 		m, l, err = apisresolver.GetManagedResource("ec2.aws.m.upbound.io", "v1beta1", "VPNGateway", "VPNGatewayList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
@@ -248,6 +268,26 @@ func (mg *GatewayAssociation) ResolveReferences(ctx context.Context, c client.Re
 	}
 	mg.Spec.InitProvider.DxGatewayID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.DxGatewayIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("directconnect.aws.m.upbound.io", "v1beta1", "GatewayAssociationProposal", "GatewayAssociationProposalList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ProposalID),
+			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.ProposalIDRef,
+			Selector:     mg.Spec.InitProvider.ProposalIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ProposalID")
+	}
+	mg.Spec.InitProvider.ProposalID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ProposalIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -445,6 +485,26 @@ func (mg *HostedPrivateVirtualInterfaceAccepter) ResolveReferences(ctx context.C
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
+		m, l, err = apisresolver.GetManagedResource("directconnect.aws.m.upbound.io", "v1beta1", "Gateway", "GatewayList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DxGatewayID),
+			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.DxGatewayIDRef,
+			Selector:     mg.Spec.ForProvider.DxGatewayIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.DxGatewayID")
+	}
+	mg.Spec.ForProvider.DxGatewayID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DxGatewayIDRef = rsp.ResolvedReference
+	{
 		m, l, err = apisresolver.GetManagedResource("ec2.aws.m.upbound.io", "v1beta1", "VPNGateway", "VPNGatewayList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
@@ -484,6 +544,26 @@ func (mg *HostedPrivateVirtualInterfaceAccepter) ResolveReferences(ctx context.C
 	}
 	mg.Spec.ForProvider.VirtualInterfaceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.VirtualInterfaceIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("directconnect.aws.m.upbound.io", "v1beta1", "Gateway", "GatewayList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DxGatewayID),
+			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.DxGatewayIDRef,
+			Selector:     mg.Spec.InitProvider.DxGatewayIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.DxGatewayID")
+	}
+	mg.Spec.InitProvider.DxGatewayID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.DxGatewayIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("ec2.aws.m.upbound.io", "v1beta1", "VPNGateway", "VPNGatewayList")
 		if err != nil {
@@ -805,6 +885,26 @@ func (mg *PrivateVirtualInterface) ResolveReferences(ctx context.Context, c clie
 	mg.Spec.ForProvider.ConnectionID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ConnectionIDRef = rsp.ResolvedReference
 	{
+		m, l, err = apisresolver.GetManagedResource("directconnect.aws.m.upbound.io", "v1beta1", "Gateway", "GatewayList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DxGatewayID),
+			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.DxGatewayIDRef,
+			Selector:     mg.Spec.ForProvider.DxGatewayIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.DxGatewayID")
+	}
+	mg.Spec.ForProvider.DxGatewayID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DxGatewayIDRef = rsp.ResolvedReference
+	{
 		m, l, err = apisresolver.GetManagedResource("ec2.aws.m.upbound.io", "v1beta1", "VPNGateway", "VPNGatewayList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
@@ -844,6 +944,26 @@ func (mg *PrivateVirtualInterface) ResolveReferences(ctx context.Context, c clie
 	}
 	mg.Spec.InitProvider.ConnectionID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ConnectionIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("directconnect.aws.m.upbound.io", "v1beta1", "Gateway", "GatewayList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DxGatewayID),
+			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.DxGatewayIDRef,
+			Selector:     mg.Spec.InitProvider.DxGatewayIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.DxGatewayID")
+	}
+	mg.Spec.InitProvider.DxGatewayID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.DxGatewayIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("ec2.aws.m.upbound.io", "v1beta1", "VPNGateway", "VPNGatewayList")
 		if err != nil {

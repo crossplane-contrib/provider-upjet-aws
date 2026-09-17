@@ -46,7 +46,16 @@ type PrivateVirtualInterfaceInitParameters struct {
 	CustomerAddress *string `json:"customerAddress,omitempty" tf:"customer_address,omitempty"`
 
 	// The ID of the Direct Connect gateway to which to connect the virtual interface.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/directconnect/v1beta1.Gateway
 	DxGatewayID *string `json:"dxGatewayId,omitempty" tf:"dx_gateway_id,omitempty"`
+
+	// Reference to a Gateway in directconnect to populate dxGatewayId.
+	// +kubebuilder:validation:Optional
+	DxGatewayIDRef *v2.NamespacedReference `json:"dxGatewayIdRef,omitempty" tf:"-"`
+
+	// Selector for a Gateway in directconnect to populate dxGatewayId.
+	// +kubebuilder:validation:Optional
+	DxGatewayIDSelector *v2.NamespacedSelector `json:"dxGatewayIdSelector,omitempty" tf:"-"`
 
 	// The maximum transmission unit (MTU) is the size, in bytes, of the largest permissible packet that can be passed over the connection.
 	// The MTU of a virtual private interface can be either 1500 or 9001 (jumbo frames). Default is 1500.
@@ -205,8 +214,17 @@ type PrivateVirtualInterfaceParameters struct {
 	CustomerAddress *string `json:"customerAddress,omitempty" tf:"customer_address,omitempty"`
 
 	// The ID of the Direct Connect gateway to which to connect the virtual interface.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/directconnect/v1beta1.Gateway
 	// +kubebuilder:validation:Optional
 	DxGatewayID *string `json:"dxGatewayId,omitempty" tf:"dx_gateway_id,omitempty"`
+
+	// Reference to a Gateway in directconnect to populate dxGatewayId.
+	// +kubebuilder:validation:Optional
+	DxGatewayIDRef *v2.NamespacedReference `json:"dxGatewayIdRef,omitempty" tf:"-"`
+
+	// Selector for a Gateway in directconnect to populate dxGatewayId.
+	// +kubebuilder:validation:Optional
+	DxGatewayIDSelector *v2.NamespacedSelector `json:"dxGatewayIdSelector,omitempty" tf:"-"`
 
 	// The maximum transmission unit (MTU) is the size, in bytes, of the largest permissible packet that can be passed over the connection.
 	// The MTU of a virtual private interface can be either 1500 or 9001 (jumbo frames). Default is 1500.

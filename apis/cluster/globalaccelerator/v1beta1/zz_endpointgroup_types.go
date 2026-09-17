@@ -84,6 +84,7 @@ type EndpointGroupInitParameters struct {
 
 	// ARN of the listener.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/globalaccelerator/v1beta1.Listener
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.TerraformID()
 	ListenerArn *string `json:"listenerArn,omitempty" tf:"listener_arn,omitempty"`
 
 	// Reference to a Listener in globalaccelerator to populate listenerArn.
@@ -171,6 +172,7 @@ type EndpointGroupParameters struct {
 
 	// ARN of the listener.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/globalaccelerator/v1beta1.Listener
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.TerraformID()
 	// +kubebuilder:validation:Optional
 	ListenerArn *string `json:"listenerArn,omitempty" tf:"listener_arn,omitempty"`
 
