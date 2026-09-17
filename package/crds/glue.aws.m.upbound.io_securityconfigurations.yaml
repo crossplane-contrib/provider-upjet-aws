@@ -70,8 +70,8 @@ spec:
                               Valid values: DISABLED, SSE-KMS. Default value: DISABLED.'
                             type: string
                           kmsKeyArn:
-                            description: Amazon Resource Name (ARN) of the KMS key
-                              to be used to encrypt the data.
+                            description: ARN of the KMS key to be used to encrypt
+                              the data.
                             type: string
                           kmsKeyArnRef:
                             description: Reference to a Key in kms to populate kmsKeyArn.
@@ -162,8 +162,8 @@ spec:
                               DISABLED.'
                             type: string
                           kmsKeyArn:
-                            description: Amazon Resource Name (ARN) of the KMS key
-                              to be used to encrypt the data.
+                            description: ARN of the KMS key to be used to encrypt
+                              the data.
                             type: string
                           kmsKeyArnRef:
                             description: Reference to a Key in kms to populate kmsKeyArn.
@@ -251,8 +251,8 @@ spec:
                           contains encryption configuration for S3 data.
                         properties:
                           kmsKeyArn:
-                            description: Amazon Resource Name (ARN) of the KMS key
-                              to be used to encrypt the data.
+                            description: ARN of the KMS key to be used to encrypt
+                              the data.
                             type: string
                           kmsKeyArnRef:
                             description: Reference to a Key in kms to populate kmsKeyArn.
@@ -372,8 +372,8 @@ spec:
                               Valid values: DISABLED, SSE-KMS. Default value: DISABLED.'
                             type: string
                           kmsKeyArn:
-                            description: Amazon Resource Name (ARN) of the KMS key
-                              to be used to encrypt the data.
+                            description: ARN of the KMS key to be used to encrypt
+                              the data.
                             type: string
                           kmsKeyArnRef:
                             description: Reference to a Key in kms to populate kmsKeyArn.
@@ -464,8 +464,8 @@ spec:
                               DISABLED.'
                             type: string
                           kmsKeyArn:
-                            description: Amazon Resource Name (ARN) of the KMS key
-                              to be used to encrypt the data.
+                            description: ARN of the KMS key to be used to encrypt
+                              the data.
                             type: string
                           kmsKeyArnRef:
                             description: Reference to a Key in kms to populate kmsKeyArn.
@@ -553,8 +553,8 @@ spec:
                           contains encryption configuration for S3 data.
                         properties:
                           kmsKeyArn:
-                            description: Amazon Resource Name (ARN) of the KMS key
-                              to be used to encrypt the data.
+                            description: ARN of the KMS key to be used to encrypt
+                              the data.
                             type: string
                           kmsKeyArnRef:
                             description: Reference to a Key in kms to populate kmsKeyArn.
@@ -723,8 +723,8 @@ spec:
                               Valid values: DISABLED, SSE-KMS. Default value: DISABLED.'
                             type: string
                           kmsKeyArn:
-                            description: Amazon Resource Name (ARN) of the KMS key
-                              to be used to encrypt the data.
+                            description: ARN of the KMS key to be used to encrypt
+                              the data.
                             type: string
                         type: object
                       jobBookmarksEncryption:
@@ -735,8 +735,8 @@ spec:
                               DISABLED.'
                             type: string
                           kmsKeyArn:
-                            description: Amazon Resource Name (ARN) of the KMS key
-                              to be used to encrypt the data.
+                            description: ARN of the KMS key to be used to encrypt
+                              the data.
                             type: string
                         type: object
                       s3Encryption:
@@ -744,8 +744,8 @@ spec:
                           contains encryption configuration for S3 data.
                         properties:
                           kmsKeyArn:
-                            description: Amazon Resource Name (ARN) of the KMS key
-                              to be used to encrypt the data.
+                            description: ARN of the KMS key to be used to encrypt
+                              the data.
                             type: string
                           s3EncryptionMode:
                             description: 'Encryption mode to use for S3 data. Valid

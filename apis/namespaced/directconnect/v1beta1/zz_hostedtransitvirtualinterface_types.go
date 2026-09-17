@@ -51,6 +51,9 @@ type HostedTransitVirtualInterfaceInitParameters struct {
 	// The AWS account that will own the new virtual interface.
 	OwnerAccountID *string `json:"ownerAccountId,omitempty" tf:"owner_account_id,omitempty"`
 
+	// Maximum bandwidth allocation for the virtual interface, restricting the bandwidth it can use on the parent connection. Specify a supported bandwidth value without a space (for example, 50Mbps, 1Gbps, or 10Gbps); the value cannot exceed the bandwidth of the parent connection or link aggregation group (LAG), and supported values range up to 1.6Tbps. See the VIF Rate Limiters documentation for the full list of supported values. Changing this forces a new resource to be created. Rate Limiters are supported only on Direct Connect dedicated connections (including LAGs); they are not supported on hosted connections.
+	RateLimit *string `json:"rateLimit,omitempty" tf:"rate_limit,omitempty"`
+
 	// The VLAN ID.
 	Vlan *float64 `json:"vlan,omitempty" tf:"vlan,omitempty"`
 }
@@ -97,6 +100,15 @@ type HostedTransitVirtualInterfaceObservation struct {
 
 	// The AWS account that will own the new virtual interface.
 	OwnerAccountID *string `json:"ownerAccountId,omitempty" tf:"owner_account_id,omitempty"`
+
+	// The number of inbound IPv4 route prefixes allocated to the virtual interface.
+	PrefixPoolAllocatedCountIPv4 *float64 `json:"prefixPoolAllocatedCountIpv4,omitempty" tf:"prefix_pool_allocated_count_ipv4,omitempty"`
+
+	// The number of inbound IPv6 route prefixes allocated to the virtual interface.
+	PrefixPoolAllocatedCountIPv6 *float64 `json:"prefixPoolAllocatedCountIpv6,omitempty" tf:"prefix_pool_allocated_count_ipv6,omitempty"`
+
+	// Maximum bandwidth allocation for the virtual interface, restricting the bandwidth it can use on the parent connection. Specify a supported bandwidth value without a space (for example, 50Mbps, 1Gbps, or 10Gbps); the value cannot exceed the bandwidth of the parent connection or link aggregation group (LAG), and supported values range up to 1.6Tbps. See the VIF Rate Limiters documentation for the full list of supported values. Changing this forces a new resource to be created. Rate Limiters are supported only on Direct Connect dedicated connections (including LAGs); they are not supported on hosted connections.
+	RateLimit *string `json:"rateLimit,omitempty" tf:"rate_limit,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -152,6 +164,10 @@ type HostedTransitVirtualInterfaceParameters struct {
 	// The AWS account that will own the new virtual interface.
 	// +kubebuilder:validation:Optional
 	OwnerAccountID *string `json:"ownerAccountId,omitempty" tf:"owner_account_id,omitempty"`
+
+	// Maximum bandwidth allocation for the virtual interface, restricting the bandwidth it can use on the parent connection. Specify a supported bandwidth value without a space (for example, 50Mbps, 1Gbps, or 10Gbps); the value cannot exceed the bandwidth of the parent connection or link aggregation group (LAG), and supported values range up to 1.6Tbps. See the VIF Rate Limiters documentation for the full list of supported values. Changing this forces a new resource to be created. Rate Limiters are supported only on Direct Connect dedicated connections (including LAGs); they are not supported on hosted connections.
+	// +kubebuilder:validation:Optional
+	RateLimit *string `json:"rateLimit,omitempty" tf:"rate_limit,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.

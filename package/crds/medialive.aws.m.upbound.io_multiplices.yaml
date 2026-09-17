@@ -232,6 +232,7 @@ spec:
                       type: string
                     type: array
                   id:
+                    description: (String) ID of the MediaLive Multiplex.
                     type: string
                   multiplexSettings:
                     description: Multiplex settings. See Multiplex Settings for more

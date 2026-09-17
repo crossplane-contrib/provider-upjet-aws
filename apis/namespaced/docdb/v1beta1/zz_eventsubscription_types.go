@@ -22,7 +22,7 @@ type EventSubscriptionInitParameters struct {
 	// +listType=set
 	EventCategories []*string `json:"eventCategories,omitempty" tf:"event_categories,omitempty"`
 
-	// The Amazon Resource Name of the DocumentDB event notification subscription
+	// ARN of the DocumentDB event notification subscription
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/sns/v1beta1.Topic
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	SnsTopicArn *string `json:"snsTopicArn,omitempty" tf:"sns_topic_arn,omitempty"`
@@ -59,7 +59,7 @@ type EventSubscriptionInitParameters struct {
 
 type EventSubscriptionObservation struct {
 
-	// The Amazon Resource Name of the DocumentDB event notification subscription
+	// ARN of the DocumentDB event notification subscription
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The AWS customer account associated with the DocumentDB event notification subscription
@@ -79,7 +79,7 @@ type EventSubscriptionObservation struct {
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The Amazon Resource Name of the DocumentDB event notification subscription
+	// ARN of the DocumentDB event notification subscription
 	SnsTopicArn *string `json:"snsTopicArn,omitempty" tf:"sns_topic_arn,omitempty"`
 
 	// A list of identifiers of the event sources for which events will be returned. If not specified, then all sources are included in the response. If specified, a source_type must also be specified.
@@ -114,7 +114,7 @@ type EventSubscriptionParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// The Amazon Resource Name of the DocumentDB event notification subscription
+	// ARN of the DocumentDB event notification subscription
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/sns/v1beta1.Topic
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional

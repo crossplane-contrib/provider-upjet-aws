@@ -114,7 +114,7 @@ type ConfigurationParameters struct {
 
 type ExecuteCommandConfigurationInitParameters struct {
 
-	// AWS Key Management Service key ID to encrypt the data between the local client and the container.
+	// KMS key ID to encrypt the data between the local client and the container.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
 	// Log configuration for the results of the execute command actions. Required when logging is OVERRIDE. See log_configuration Block for details.
@@ -126,7 +126,7 @@ type ExecuteCommandConfigurationInitParameters struct {
 
 type ExecuteCommandConfigurationObservation struct {
 
-	// AWS Key Management Service key ID to encrypt the data between the local client and the container.
+	// KMS key ID to encrypt the data between the local client and the container.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
 	// Log configuration for the results of the execute command actions. Required when logging is OVERRIDE. See log_configuration Block for details.
@@ -138,7 +138,7 @@ type ExecuteCommandConfigurationObservation struct {
 
 type ExecuteCommandConfigurationParameters struct {
 
-	// AWS Key Management Service key ID to encrypt the data between the local client and the container.
+	// KMS key ID to encrypt the data between the local client and the container.
 	// +kubebuilder:validation:Optional
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
@@ -156,7 +156,7 @@ type LogConfigurationInitParameters struct {
 	// Whether to enable encryption on the CloudWatch logs. If not specified, encryption will be disabled.
 	CloudWatchEncryptionEnabled *bool `json:"cloudWatchEncryptionEnabled,omitempty" tf:"cloud_watch_encryption_enabled,omitempty"`
 
-	// The name of the CloudWatch log group to send logs to.
+	// Name of the CloudWatch log group to send logs to.
 	CloudWatchLogGroupName *string `json:"cloudWatchLogGroupName,omitempty" tf:"cloud_watch_log_group_name,omitempty"`
 
 	// Whether to enable encryption on the logs sent to S3. If not specified, encryption will be disabled.
@@ -174,7 +174,7 @@ type LogConfigurationObservation struct {
 	// Whether to enable encryption on the CloudWatch logs. If not specified, encryption will be disabled.
 	CloudWatchEncryptionEnabled *bool `json:"cloudWatchEncryptionEnabled,omitempty" tf:"cloud_watch_encryption_enabled,omitempty"`
 
-	// The name of the CloudWatch log group to send logs to.
+	// Name of the CloudWatch log group to send logs to.
 	CloudWatchLogGroupName *string `json:"cloudWatchLogGroupName,omitempty" tf:"cloud_watch_log_group_name,omitempty"`
 
 	// Whether to enable encryption on the logs sent to S3. If not specified, encryption will be disabled.
@@ -193,7 +193,7 @@ type LogConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	CloudWatchEncryptionEnabled *bool `json:"cloudWatchEncryptionEnabled,omitempty" tf:"cloud_watch_encryption_enabled,omitempty"`
 
-	// The name of the CloudWatch log group to send logs to.
+	// Name of the CloudWatch log group to send logs to.
 	// +kubebuilder:validation:Optional
 	CloudWatchLogGroupName *string `json:"cloudWatchLogGroupName,omitempty" tf:"cloud_watch_log_group_name,omitempty"`
 
@@ -212,29 +212,29 @@ type LogConfigurationParameters struct {
 
 type ManagedStorageConfigurationInitParameters struct {
 
-	// AWS Key Management Service key ARN for the Fargate ephemeral storage.
+	// KMS key ARN for the Fargate ephemeral storage.
 	FargateEphemeralStorageKMSKeyID *string `json:"fargateEphemeralStorageKmsKeyId,omitempty" tf:"fargate_ephemeral_storage_kms_key_id,omitempty"`
 
-	// AWS Key Management Service key ARN to encrypt the managed storage.
+	// KMS key ARN to encrypt the managed storage.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 }
 
 type ManagedStorageConfigurationObservation struct {
 
-	// AWS Key Management Service key ARN for the Fargate ephemeral storage.
+	// KMS key ARN for the Fargate ephemeral storage.
 	FargateEphemeralStorageKMSKeyID *string `json:"fargateEphemeralStorageKmsKeyId,omitempty" tf:"fargate_ephemeral_storage_kms_key_id,omitempty"`
 
-	// AWS Key Management Service key ARN to encrypt the managed storage.
+	// KMS key ARN to encrypt the managed storage.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 }
 
 type ManagedStorageConfigurationParameters struct {
 
-	// AWS Key Management Service key ARN for the Fargate ephemeral storage.
+	// KMS key ARN for the Fargate ephemeral storage.
 	// +kubebuilder:validation:Optional
 	FargateEphemeralStorageKMSKeyID *string `json:"fargateEphemeralStorageKmsKeyId,omitempty" tf:"fargate_ephemeral_storage_kms_key_id,omitempty"`
 
-	// AWS Key Management Service key ARN to encrypt the managed storage.
+	// KMS key ARN to encrypt the managed storage.
 	// +kubebuilder:validation:Optional
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 }

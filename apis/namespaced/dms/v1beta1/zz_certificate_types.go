@@ -28,7 +28,7 @@ type CertificateInitParameters struct {
 
 type CertificateObservation struct {
 
-	// The Amazon Resource Name (ARN) for the certificate.
+	// ARN for the certificate.
 	CertificateArn *string `json:"certificateArn,omitempty" tf:"certificate_arn,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`

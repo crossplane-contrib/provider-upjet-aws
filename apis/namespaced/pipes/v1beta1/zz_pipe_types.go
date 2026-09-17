@@ -137,7 +137,7 @@ type BatchJobParametersInitParameters struct {
 	// A list of dependencies for the job. A job can depend upon a maximum of 20 jobs. You can specify a SEQUENTIAL type dependency without specifying a job ID for array jobs so that each child array job completes sequentially, starting at index 0. You can also specify an N_TO_N type dependency with a job ID for array jobs. In that case, each index child of this job must wait for the corresponding index child of each dependency to complete before it can begin. Detailed below.
 	DependsOn []DependsOnInitParameters `json:"dependsOn,omitempty" tf:"depends_on,omitempty"`
 
-	// The job definition used by this job. This value can be one of name, name:revision, or the Amazon Resource Name (ARN) for the job definition. If name is specified without a revision then the latest active revision is used.
+	// Job definition used by this job. This value can be one of name, name:revision, or the ARN for the job definition. If name is specified without a revision then the latest active revision is used.
 	JobDefinition *string `json:"jobDefinition,omitempty" tf:"job_definition,omitempty"`
 
 	// The name of the job. It can be up to 128 letters long.
@@ -162,7 +162,7 @@ type BatchJobParametersObservation struct {
 	// A list of dependencies for the job. A job can depend upon a maximum of 20 jobs. You can specify a SEQUENTIAL type dependency without specifying a job ID for array jobs so that each child array job completes sequentially, starting at index 0. You can also specify an N_TO_N type dependency with a job ID for array jobs. In that case, each index child of this job must wait for the corresponding index child of each dependency to complete before it can begin. Detailed below.
 	DependsOn []DependsOnObservation `json:"dependsOn,omitempty" tf:"depends_on,omitempty"`
 
-	// The job definition used by this job. This value can be one of name, name:revision, or the Amazon Resource Name (ARN) for the job definition. If name is specified without a revision then the latest active revision is used.
+	// Job definition used by this job. This value can be one of name, name:revision, or the ARN for the job definition. If name is specified without a revision then the latest active revision is used.
 	JobDefinition *string `json:"jobDefinition,omitempty" tf:"job_definition,omitempty"`
 
 	// The name of the job. It can be up to 128 letters long.
@@ -190,7 +190,7 @@ type BatchJobParametersParameters struct {
 	// +kubebuilder:validation:Optional
 	DependsOn []DependsOnParameters `json:"dependsOn,omitempty" tf:"depends_on,omitempty"`
 
-	// The job definition used by this job. This value can be one of name, name:revision, or the Amazon Resource Name (ARN) for the job definition. If name is specified without a revision then the latest active revision is used.
+	// Job definition used by this job. This value can be one of name, name:revision, or the ARN for the job definition. If name is specified without a revision then the latest active revision is used.
 	// +kubebuilder:validation:Optional
 	JobDefinition *string `json:"jobDefinition" tf:"job_definition,omitempty"`
 
@@ -863,7 +863,7 @@ type EnvironmentFileInitParameters struct {
 	// The file type to use. The only supported value is s3.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the Amazon S3 object containing the environment variable file.
+	// ARN of the Amazon S3 object containing the environment variable file.
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
@@ -872,7 +872,7 @@ type EnvironmentFileObservation struct {
 	// The file type to use. The only supported value is s3.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the Amazon S3 object containing the environment variable file.
+	// ARN of the Amazon S3 object containing the environment variable file.
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
@@ -882,7 +882,7 @@ type EnvironmentFileParameters struct {
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the Amazon S3 object containing the environment variable file.
+	// ARN of the Amazon S3 object containing the environment variable file.
 	// +kubebuilder:validation:Optional
 	Value *string `json:"value" tf:"value,omitempty"`
 }
@@ -943,7 +943,7 @@ type EventbridgeEventBusParametersInitParameters struct {
 	// The URL subdomain of the endpoint. For example, if the URL for Endpoint is https://abcde.veo.endpoints.event.amazonaws.com, then the EndpointId is abcde.veo.
 	EndpointID *string `json:"endpointId,omitempty" tf:"endpoint_id,omitempty"`
 
-	// List of AWS resources, identified by Amazon Resource Name (ARN), which the event primarily concerns. Any number, including zero, may be present.
+	// List of AWS resources, identified by ARN, which the event primarily concerns. Any number, including zero, may be present.
 	// +listType=set
 	Resources []*string `json:"resources,omitempty" tf:"resources,omitempty"`
 
@@ -962,7 +962,7 @@ type EventbridgeEventBusParametersObservation struct {
 	// The URL subdomain of the endpoint. For example, if the URL for Endpoint is https://abcde.veo.endpoints.event.amazonaws.com, then the EndpointId is abcde.veo.
 	EndpointID *string `json:"endpointId,omitempty" tf:"endpoint_id,omitempty"`
 
-	// List of AWS resources, identified by Amazon Resource Name (ARN), which the event primarily concerns. Any number, including zero, may be present.
+	// List of AWS resources, identified by ARN, which the event primarily concerns. Any number, including zero, may be present.
 	// +listType=set
 	Resources []*string `json:"resources,omitempty" tf:"resources,omitempty"`
 
@@ -983,7 +983,7 @@ type EventbridgeEventBusParametersParameters struct {
 	// +kubebuilder:validation:Optional
 	EndpointID *string `json:"endpointId,omitempty" tf:"endpoint_id,omitempty"`
 
-	// List of AWS resources, identified by Amazon Resource Name (ARN), which the event primarily concerns. Any number, including zero, may be present.
+	// List of AWS resources, identified by ARN, which the event primarily concerns. Any number, including zero, may be present.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	Resources []*string `json:"resources,omitempty" tf:"resources,omitempty"`
@@ -1037,19 +1037,19 @@ type FilterParameters struct {
 
 type FirehoseLogDestinationInitParameters struct {
 
-	// Amazon Resource Name (ARN) of the Kinesis Data Firehose delivery stream to which EventBridge delivers the pipe log records.
+	// ARN of the Kinesis Data Firehose delivery stream to which EventBridge delivers the pipe log records.
 	DeliveryStreamArn *string `json:"deliveryStreamArn,omitempty" tf:"delivery_stream_arn,omitempty"`
 }
 
 type FirehoseLogDestinationObservation struct {
 
-	// Amazon Resource Name (ARN) of the Kinesis Data Firehose delivery stream to which EventBridge delivers the pipe log records.
+	// ARN of the Kinesis Data Firehose delivery stream to which EventBridge delivers the pipe log records.
 	DeliveryStreamArn *string `json:"deliveryStreamArn,omitempty" tf:"delivery_stream_arn,omitempty"`
 }
 
 type FirehoseLogDestinationParameters struct {
 
-	// Amazon Resource Name (ARN) of the Kinesis Data Firehose delivery stream to which EventBridge delivers the pipe log records.
+	// ARN of the Kinesis Data Firehose delivery stream to which EventBridge delivers the pipe log records.
 	// +kubebuilder:validation:Optional
 	DeliveryStreamArn *string `json:"deliveryStreamArn" tf:"delivery_stream_arn,omitempty"`
 }
@@ -1455,7 +1455,7 @@ type OverridesInitParameters struct {
 	// The ephemeral storage setting override for the task.  Detailed below.
 	EphemeralStorage *EphemeralStorageInitParameters `json:"ephemeralStorage,omitempty" tf:"ephemeral_storage,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the task execution IAM role override for the task.
+	// ARN of the task execution IAM role override for the task.
 	ExecutionRoleArn *string `json:"executionRoleArn,omitempty" tf:"execution_role_arn,omitempty"`
 
 	// List of Elastic Inference accelerator overrides for the task. Detailed below.
@@ -1464,7 +1464,7 @@ type OverridesInitParameters struct {
 	// The memory override for the task.
 	Memory *string `json:"memory,omitempty" tf:"memory,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the IAM role that containers in this task can assume. All containers in this task are granted the permissions that are specified in this role.
+	// ARN of the IAM role that containers in this task can assume. All containers in this task are granted the permissions that are specified in this role.
 	TaskRoleArn *string `json:"taskRoleArn,omitempty" tf:"task_role_arn,omitempty"`
 }
 
@@ -1479,7 +1479,7 @@ type OverridesObservation struct {
 	// The ephemeral storage setting override for the task.  Detailed below.
 	EphemeralStorage *EphemeralStorageObservation `json:"ephemeralStorage,omitempty" tf:"ephemeral_storage,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the task execution IAM role override for the task.
+	// ARN of the task execution IAM role override for the task.
 	ExecutionRoleArn *string `json:"executionRoleArn,omitempty" tf:"execution_role_arn,omitempty"`
 
 	// List of Elastic Inference accelerator overrides for the task. Detailed below.
@@ -1488,7 +1488,7 @@ type OverridesObservation struct {
 	// The memory override for the task.
 	Memory *string `json:"memory,omitempty" tf:"memory,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the IAM role that containers in this task can assume. All containers in this task are granted the permissions that are specified in this role.
+	// ARN of the IAM role that containers in this task can assume. All containers in this task are granted the permissions that are specified in this role.
 	TaskRoleArn *string `json:"taskRoleArn,omitempty" tf:"task_role_arn,omitempty"`
 }
 
@@ -1506,7 +1506,7 @@ type OverridesParameters struct {
 	// +kubebuilder:validation:Optional
 	EphemeralStorage *EphemeralStorageParameters `json:"ephemeralStorage,omitempty" tf:"ephemeral_storage,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the task execution IAM role override for the task.
+	// ARN of the task execution IAM role override for the task.
 	// +kubebuilder:validation:Optional
 	ExecutionRoleArn *string `json:"executionRoleArn,omitempty" tf:"execution_role_arn,omitempty"`
 
@@ -1518,7 +1518,7 @@ type OverridesParameters struct {
 	// +kubebuilder:validation:Optional
 	Memory *string `json:"memory,omitempty" tf:"memory,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the IAM role that containers in this task can assume. All containers in this task are granted the permissions that are specified in this role.
+	// ARN of the IAM role that containers in this task can assume. All containers in this task are granted the permissions that are specified in this role.
 	// +kubebuilder:validation:Optional
 	TaskRoleArn *string `json:"taskRoleArn,omitempty" tf:"task_role_arn,omitempty"`
 }
@@ -1547,7 +1547,7 @@ type PipeInitParameters struct {
 	// +kubebuilder:validation:Optional
 	EnrichmentSelector *v2.NamespacedSelector `json:"enrichmentSelector,omitempty" tf:"-"`
 
-	// Identifier of the AWS KMS customer managed key for EventBridge to use, if you choose to use a customer managed key to encrypt pipe data. The identifier can be the key Amazon Resource Name (ARN), KeyId, key alias, or key alias ARN. If not set, EventBridge uses an AWS owned key to encrypt pipe data.
+	// Identifier of the AWS KMS customer managed key for EventBridge to use, if you choose to use a customer managed key to encrypt pipe data. The identifier can be the key ARN, KeyId, key alias, or key alias ARN. If not set, EventBridge uses an AWS owned key to encrypt pipe data.
 	KMSKeyIdentifier *string `json:"kmsKeyIdentifier,omitempty" tf:"kms_key_identifier,omitempty"`
 
 	// Logging configuration settings for the pipe. Detailed below.
@@ -1566,7 +1566,7 @@ type PipeInitParameters struct {
 	// +kubebuilder:validation:Optional
 	RoleArnSelector *v2.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
 
-	// Source resource of the pipe. This field typically requires an ARN (Amazon Resource Name). However, when using a self-managed Kafka cluster, you should use a different format. Instead of an ARN, use 'smk://' followed by the bootstrap server's address.
+	// Source resource of the pipe. This field typically requires an ARN. However, when using a self-managed Kafka cluster, you should use a different format. Instead of an ARN, use 'smk://' followed by the bootstrap server's address.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/sqs/v1beta1.Queue
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	Source *string `json:"source,omitempty" tf:"source,omitempty"`
@@ -1623,7 +1623,7 @@ type PipeObservation struct {
 	// Same as name.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Identifier of the AWS KMS customer managed key for EventBridge to use, if you choose to use a customer managed key to encrypt pipe data. The identifier can be the key Amazon Resource Name (ARN), KeyId, key alias, or key alias ARN. If not set, EventBridge uses an AWS owned key to encrypt pipe data.
+	// Identifier of the AWS KMS customer managed key for EventBridge to use, if you choose to use a customer managed key to encrypt pipe data. The identifier can be the key ARN, KeyId, key alias, or key alias ARN. If not set, EventBridge uses an AWS owned key to encrypt pipe data.
 	KMSKeyIdentifier *string `json:"kmsKeyIdentifier,omitempty" tf:"kms_key_identifier,omitempty"`
 
 	// Logging configuration settings for the pipe. Detailed below.
@@ -1636,7 +1636,7 @@ type PipeObservation struct {
 	// ARN of the role that allows the pipe to send data to the target.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
-	// Source resource of the pipe. This field typically requires an ARN (Amazon Resource Name). However, when using a self-managed Kafka cluster, you should use a different format. Instead of an ARN, use 'smk://' followed by the bootstrap server's address.
+	// Source resource of the pipe. This field typically requires an ARN. However, when using a self-managed Kafka cluster, you should use a different format. Instead of an ARN, use 'smk://' followed by the bootstrap server's address.
 	Source *string `json:"source,omitempty" tf:"source,omitempty"`
 
 	// Parameters to configure a source for the pipe. Detailed below.
@@ -1685,7 +1685,7 @@ type PipeParameters struct {
 	// +kubebuilder:validation:Optional
 	EnrichmentSelector *v2.NamespacedSelector `json:"enrichmentSelector,omitempty" tf:"-"`
 
-	// Identifier of the AWS KMS customer managed key for EventBridge to use, if you choose to use a customer managed key to encrypt pipe data. The identifier can be the key Amazon Resource Name (ARN), KeyId, key alias, or key alias ARN. If not set, EventBridge uses an AWS owned key to encrypt pipe data.
+	// Identifier of the AWS KMS customer managed key for EventBridge to use, if you choose to use a customer managed key to encrypt pipe data. The identifier can be the key ARN, KeyId, key alias, or key alias ARN. If not set, EventBridge uses an AWS owned key to encrypt pipe data.
 	// +kubebuilder:validation:Optional
 	KMSKeyIdentifier *string `json:"kmsKeyIdentifier,omitempty" tf:"kms_key_identifier,omitempty"`
 
@@ -1712,7 +1712,7 @@ type PipeParameters struct {
 	// +kubebuilder:validation:Optional
 	RoleArnSelector *v2.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
 
-	// Source resource of the pipe. This field typically requires an ARN (Amazon Resource Name). However, when using a self-managed Kafka cluster, you should use a different format. Instead of an ARN, use 'smk://' followed by the bootstrap server's address.
+	// Source resource of the pipe. This field typically requires an ARN. However, when using a self-managed Kafka cluster, you should use a different format. Instead of an ARN, use 'smk://' followed by the bootstrap server's address.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/sqs/v1beta1.Queue
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional

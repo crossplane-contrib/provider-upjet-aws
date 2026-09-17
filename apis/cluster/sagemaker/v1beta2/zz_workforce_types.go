@@ -230,7 +230,7 @@ type WorkforceInitParameters struct {
 
 type WorkforceObservation struct {
 
-	// The Amazon Resource Name (ARN) assigned by AWS to this Workforce.
+	// ARN assigned by AWS to this Workforce.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Use this parameter to configure an Amazon Cognito private workforce. A single Cognito workforce is created using and corresponds to a single Amazon Cognito user pool. Conflicts with oidc_config. see Cognito Config details below.

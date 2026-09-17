@@ -59,8 +59,8 @@ spec:
               forProvider:
                 properties:
                   fileSystemId:
-                    description: The ID of the file system to back up. Required if
-                      backing up Lustre or Windows file systems.
+                    description: ID of the file system to back up. Required if backing
+                      up Lustre or Windows file systems.
                     type: string
                   fileSystemIdRef:
                     description: Reference to a LustreFileSystem in fsx to populate
@@ -156,7 +156,7 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   volumeId:
-                    description: The ID of the volume to back up. Required if backing
+                    description: ID of the volume to back up. Required if backing
                       up a ONTAP Volume.
                     type: string
                 required:
@@ -176,8 +176,8 @@ spec:
                   autoscaler.
                 properties:
                   fileSystemId:
-                    description: The ID of the file system to back up. Required if
-                      backing up Lustre or Windows file systems.
+                    description: ID of the file system to back up. Required if backing
+                      up Lustre or Windows file systems.
                     type: string
                   fileSystemIdRef:
                     description: Reference to a LustreFileSystem in fsx to populate
@@ -268,7 +268,7 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   volumeId:
-                    description: The ID of the volume to back up. Required if backing
+                    description: ID of the volume to back up. Required if backing
                       up a ONTAP Volume.
                     type: string
                 type: object
@@ -336,19 +336,18 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: Amazon Resource Name of the backup.
+                    description: ARN of the backup.
                     type: string
                   fileSystemId:
-                    description: The ID of the file system to back up. Required if
-                      backing up Lustre or Windows file systems.
+                    description: ID of the file system to back up. Required if backing
+                      up Lustre or Windows file systems.
                     type: string
                   id:
                     description: Identifier of the backup, e.g., fs-12345678
                     type: string
                   kmsKeyId:
-                    description: The ID of the AWS Key Management Service (AWS KMS)
-                      key used to encrypt the backup of the Amazon FSx file system's
-                      data at rest.
+                    description: ID of the KMS key used to encrypt the backup of the
+                      Amazon FSx file system's data at rest.
                     type: string
                   ownerId:
                     description: AWS account identifier that created the file system.
@@ -367,16 +366,15 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
                   type:
-                    description: The type of the file system backup.
+                    description: Type of the file system backup.
                     type: string
                   volumeId:
-                    description: The ID of the volume to back up. Required if backing
+                    description: ID of the volume to back up. Required if backing
                       up a ONTAP Volume.
                     type: string
                 type: object

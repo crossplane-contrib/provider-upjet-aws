@@ -79,13 +79,12 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   resourceArn:
-                    description: The Amazon Resource Name (ARN) of the resource to
-                      associate with the web ACL. This must be an ARN of an Application
-                      Load Balancer, an Amazon API Gateway stage (REST only, HTTP
-                      is unsupported), an Amazon Cognito User Pool, an Amazon AppSync
-                      GraphQL API, an Amazon App Runner service, an AWS Amplify application,
-                      an Amazon Bedrock AgentCore Gateway, or an Amazon Verified Access
-                      instance.
+                    description: ARN of the resource to associate with the web ACL.
+                      This must be an ARN of an Application Load Balancer, an Amazon
+                      API Gateway stage (REST only, HTTP is unsupported), an Amazon
+                      Cognito User Pool, an Amazon AppSync GraphQL API, an Amazon
+                      App Runner service, an AWS Amplify application, an Amazon Bedrock
+                      AgentCore Gateway, or an Amazon Verified Access instance.
                     type: string
                   resourceArnRef:
                     description: Reference to a Stage in apigateway to populate resourceArn.
@@ -162,8 +161,8 @@ spec:
                         type: object
                     type: object
                   webAclArn:
-                    description: The Amazon Resource Name (ARN) of the Web ACL that
-                      you want to associate with the resource.
+                    description: ARN of the Web ACL that you want to associate with
+                      the resource.
                     type: string
                   webAclArnRef:
                     description: Reference to a WebACL in wafv2 to populate webAclArn.
@@ -354,17 +353,16 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   resourceArn:
-                    description: The Amazon Resource Name (ARN) of the resource to
-                      associate with the web ACL. This must be an ARN of an Application
-                      Load Balancer, an Amazon API Gateway stage (REST only, HTTP
-                      is unsupported), an Amazon Cognito User Pool, an Amazon AppSync
-                      GraphQL API, an Amazon App Runner service, an AWS Amplify application,
-                      an Amazon Bedrock AgentCore Gateway, or an Amazon Verified Access
-                      instance.
+                    description: ARN of the resource to associate with the web ACL.
+                      This must be an ARN of an Application Load Balancer, an Amazon
+                      API Gateway stage (REST only, HTTP is unsupported), an Amazon
+                      Cognito User Pool, an Amazon AppSync GraphQL API, an Amazon
+                      App Runner service, an AWS Amplify application, an Amazon Bedrock
+                      AgentCore Gateway, or an Amazon Verified Access instance.
                     type: string
                   webAclArn:
-                    description: The Amazon Resource Name (ARN) of the Web ACL that
-                      you want to associate with the resource.
+                    description: ARN of the Web ACL that you want to associate with
+                      the resource.
                     type: string
                 type: object
               conditions:

@@ -31,13 +31,13 @@ type AccountInitParameters struct {
 
 type AccountObservation struct {
 
-	// The version of the API keys used for the account.
+	// Version of the API keys used for the account.
 	APIKeyVersion *string `json:"apiKeyVersion,omitempty" tf:"api_key_version,omitempty"`
 
 	// ARN of an IAM role for CloudWatch (to allow logging & monitoring). See more in AWS Docs. Logging & monitoring can be enabled/disabled and otherwise tuned on the API Gateway Stage level.
 	CloudwatchRoleArn *string `json:"cloudwatchRoleArn,omitempty" tf:"cloudwatch_role_arn,omitempty"`
 
-	// A list of features supported for the account.
+	// List of features supported for the account.
 	// +listType=set
 	Features []*string `json:"features,omitempty" tf:"features,omitempty"`
 
@@ -47,7 +47,7 @@ type AccountObservation struct {
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// Account-Level throttle settings. See exported fields below.
+	// Account-Level throttle settings. See throttle_settings Block below.
 	ThrottleSettings []ThrottleSettingsObservation `json:"throttleSettings,omitempty" tf:"throttle_settings,omitempty"`
 }
 
@@ -78,10 +78,10 @@ type ThrottleSettingsInitParameters struct {
 
 type ThrottleSettingsObservation struct {
 
-	// Absolute maximum number of times API Gateway allows the API to be called per second (RPS).
+	// Absolute maximum number of times API Gateway allows the API to be called per second.
 	BurstLimit *float64 `json:"burstLimit,omitempty" tf:"burst_limit,omitempty"`
 
-	// Number of times API Gateway allows the API to be called per second on average (RPS).
+	// Number of times API Gateway allows the API to be called per second on average.
 	RateLimit *float64 `json:"rateLimit,omitempty" tf:"rate_limit,omitempty"`
 }
 

@@ -113,8 +113,7 @@ spec:
                         type: string
                     type: object
                   firewallPolicyArn:
-                    description: The Amazon Resource Name (ARN) of the VPC Firewall
-                      policy.
+                    description: ARN of the VPC Firewall policy.
                     type: string
                   firewallPolicyArnRef:
                     description: Reference to a FirewallPolicy in networkfirewall
@@ -565,8 +564,7 @@ spec:
                         type: string
                     type: object
                   firewallPolicyArn:
-                    description: The Amazon Resource Name (ARN) of the VPC Firewall
-                      policy.
+                    description: ARN of the VPC Firewall policy.
                     type: string
                   firewallPolicyArnRef:
                     description: Reference to a FirewallPolicy in networkfirewall
@@ -1012,8 +1010,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The Amazon Resource Name (ARN) that identifies the
-                      firewall.
+                    description: ARN that identifies the firewall.
                     type: string
                   availabilityZoneChangeProtection:
                     description: A setting indicating whether the firewall is protected
@@ -1069,8 +1066,7 @@ spec:
                         type: string
                     type: object
                   firewallPolicyArn:
-                    description: The Amazon Resource Name (ARN) of the VPC Firewall
-                      policy.
+                    description: ARN of the VPC Firewall policy.
                     type: string
                   firewallPolicyChangeProtection:
                     description: A flag indicating whether the firewall is protected
@@ -1126,8 +1122,7 @@ spec:
                       type: object
                     type: array
                   id:
-                    description: The Amazon Resource Name (ARN) that identifies the
-                      firewall.
+                    description: ARN that identifies the firewall.
                     type: string
                   name:
                     description: A friendly name of the firewall.

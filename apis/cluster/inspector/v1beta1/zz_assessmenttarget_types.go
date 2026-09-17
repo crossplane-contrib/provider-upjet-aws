@@ -18,7 +18,7 @@ type AssessmentTargetInitParameters struct {
 	// The name of the assessment target.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Inspector Resource Group Amazon Resource Name (ARN) stating tags for instance matching. If not specified, all EC2 instances in the current AWS account and region are included in the assessment target.
+	// Inspector Resource Group ARN stating tags for instance matching. If not specified, all EC2 instances in the current AWS account and region are included in the assessment target.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/inspector/v1beta1.ResourceGroup
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	ResourceGroupArn *string `json:"resourceGroupArn,omitempty" tf:"resource_group_arn,omitempty"`
@@ -46,7 +46,7 @@ type AssessmentTargetObservation struct {
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// Inspector Resource Group Amazon Resource Name (ARN) stating tags for instance matching. If not specified, all EC2 instances in the current AWS account and region are included in the assessment target.
+	// Inspector Resource Group ARN stating tags for instance matching. If not specified, all EC2 instances in the current AWS account and region are included in the assessment target.
 	ResourceGroupArn *string `json:"resourceGroupArn,omitempty" tf:"resource_group_arn,omitempty"`
 }
 
@@ -61,7 +61,7 @@ type AssessmentTargetParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// Inspector Resource Group Amazon Resource Name (ARN) stating tags for instance matching. If not specified, all EC2 instances in the current AWS account and region are included in the assessment target.
+	// Inspector Resource Group ARN stating tags for instance matching. If not specified, all EC2 instances in the current AWS account and region are included in the assessment target.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/inspector/v1beta1.ResourceGroup
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional

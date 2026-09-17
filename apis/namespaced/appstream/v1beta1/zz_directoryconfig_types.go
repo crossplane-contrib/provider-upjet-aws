@@ -15,29 +15,29 @@ import (
 
 type CertificateBasedAuthPropertiesInitParameters struct {
 
-	// The ARN of the AWS Certificate Manager Private CA resource.
+	// ARN of the AWS Certificate Manager Private CA resource.
 	CertificateAuthorityArn *string `json:"certificateAuthorityArn,omitempty" tf:"certificate_authority_arn,omitempty"`
 
-	// The status of the certificate-based authentication properties. Valid values - ["DISABLED", "ENABLED", "ENABLED_NO_DIRECTORY_LOGIN_FALLBACK"].
+	// Status of the certificate-based authentication properties. Valid values - ["DISABLED", "ENABLED", "ENABLED_NO_DIRECTORY_LOGIN_FALLBACK"].
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
 
 type CertificateBasedAuthPropertiesObservation struct {
 
-	// The ARN of the AWS Certificate Manager Private CA resource.
+	// ARN of the AWS Certificate Manager Private CA resource.
 	CertificateAuthorityArn *string `json:"certificateAuthorityArn,omitempty" tf:"certificate_authority_arn,omitempty"`
 
-	// The status of the certificate-based authentication properties. Valid values - ["DISABLED", "ENABLED", "ENABLED_NO_DIRECTORY_LOGIN_FALLBACK"].
+	// Status of the certificate-based authentication properties. Valid values - ["DISABLED", "ENABLED", "ENABLED_NO_DIRECTORY_LOGIN_FALLBACK"].
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
 
 type CertificateBasedAuthPropertiesParameters struct {
 
-	// The ARN of the AWS Certificate Manager Private CA resource.
+	// ARN of the AWS Certificate Manager Private CA resource.
 	// +kubebuilder:validation:Optional
 	CertificateAuthorityArn *string `json:"certificateAuthorityArn,omitempty" tf:"certificate_authority_arn,omitempty"`
 
-	// The status of the certificate-based authentication properties. Valid values - ["DISABLED", "ENABLED", "ENABLED_NO_DIRECTORY_LOGIN_FALLBACK"].
+	// Status of the certificate-based authentication properties. Valid values - ["DISABLED", "ENABLED", "ENABLED_NO_DIRECTORY_LOGIN_FALLBACK"].
 	// +kubebuilder:validation:Optional
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }

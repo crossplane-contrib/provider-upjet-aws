@@ -73,7 +73,7 @@ type IndexedKeyParameters struct {
 
 type KinesisInitParameters struct {
 
-	// Content configurations for stream delivery. See content_configuration below.
+	// Content configurations for stream delivery. See content_configuration Block below.
 	ContentConfiguration *ContentConfigurationInitParameters `json:"contentConfiguration,omitempty" tf:"content_configuration,omitempty"`
 
 	// ARN of the Kinesis Data Stream.
@@ -92,7 +92,7 @@ type KinesisInitParameters struct {
 
 type KinesisObservation struct {
 
-	// Content configurations for stream delivery. See content_configuration below.
+	// Content configurations for stream delivery. See content_configuration Block below.
 	ContentConfiguration *ContentConfigurationObservation `json:"contentConfiguration,omitempty" tf:"content_configuration,omitempty"`
 
 	// ARN of the Kinesis Data Stream.
@@ -101,7 +101,7 @@ type KinesisObservation struct {
 
 type KinesisParameters struct {
 
-	// Content configurations for stream delivery. See content_configuration below.
+	// Content configurations for stream delivery. See content_configuration Block below.
 	// +kubebuilder:validation:Optional
 	ContentConfiguration *ContentConfigurationParameters `json:"contentConfiguration,omitempty" tf:"content_configuration,omitempty"`
 
@@ -141,7 +141,7 @@ type MemoryInitParameters_2 struct {
 	// Number of days after which memory events expire. Must be a positive integer in the range of 7 to 365.
 	EventExpiryDuration *float64 `json:"eventExpiryDuration,omitempty" tf:"event_expiry_duration,omitempty"`
 
-	// Metadata keys to index for filtering. Up to 10 entries. Changing this forces a new resource to be created. See indexed_key below.
+	// Metadata keys to index for filtering. Up to 10 entries. Additional keys can be added in place; removing or changing an existing key forces a new resource to be created, because previously indexed keys cannot be removed. See indexed_key Block below.
 	IndexedKey []IndexedKeyInitParameters `json:"indexedKey,omitempty" tf:"indexed_key,omitempty"`
 
 	// ARN of the IAM role that the memory service assumes to perform operations. Required when using custom memory strategies with model processing.
@@ -160,7 +160,7 @@ type MemoryInitParameters_2 struct {
 	// Name of the memory.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Configuration for streaming memory record data to external resources. See stream_delivery_resources below.
+	// Configuration for streaming memory record data to external resources. See stream_delivery_resources Block below.
 	StreamDeliveryResources *StreamDeliveryResourcesInitParameters `json:"streamDeliveryResources,omitempty" tf:"stream_delivery_resources,omitempty"`
 
 	// Key-value map of resource tags.
@@ -185,7 +185,7 @@ type MemoryObservation_2 struct {
 	// Unique identifier of the Memory.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Metadata keys to index for filtering. Up to 10 entries. Changing this forces a new resource to be created. See indexed_key below.
+	// Metadata keys to index for filtering. Up to 10 entries. Additional keys can be added in place; removing or changing an existing key forces a new resource to be created, because previously indexed keys cannot be removed. See indexed_key Block below.
 	IndexedKey []IndexedKeyObservation `json:"indexedKey,omitempty" tf:"indexed_key,omitempty"`
 
 	// ARN of the IAM role that the memory service assumes to perform operations. Required when using custom memory strategies with model processing.
@@ -198,14 +198,14 @@ type MemoryObservation_2 struct {
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// Configuration for streaming memory record data to external resources. See stream_delivery_resources below.
+	// Configuration for streaming memory record data to external resources. See stream_delivery_resources Block below.
 	StreamDeliveryResources *StreamDeliveryResourcesObservation `json:"streamDeliveryResources,omitempty" tf:"stream_delivery_resources,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
@@ -234,7 +234,7 @@ type MemoryParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	EventExpiryDuration *float64 `json:"eventExpiryDuration,omitempty" tf:"event_expiry_duration,omitempty"`
 
-	// Metadata keys to index for filtering. Up to 10 entries. Changing this forces a new resource to be created. See indexed_key below.
+	// Metadata keys to index for filtering. Up to 10 entries. Additional keys can be added in place; removing or changing an existing key forces a new resource to be created, because previously indexed keys cannot be removed. See indexed_key Block below.
 	// +kubebuilder:validation:Optional
 	IndexedKey []IndexedKeyParameters `json:"indexedKey,omitempty" tf:"indexed_key,omitempty"`
 
@@ -261,7 +261,7 @@ type MemoryParameters_2 struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// Configuration for streaming memory record data to external resources. See stream_delivery_resources below.
+	// Configuration for streaming memory record data to external resources. See stream_delivery_resources Block below.
 	// +kubebuilder:validation:Optional
 	StreamDeliveryResources *StreamDeliveryResourcesParameters `json:"streamDeliveryResources,omitempty" tf:"stream_delivery_resources,omitempty"`
 
@@ -273,38 +273,38 @@ type MemoryParameters_2 struct {
 
 type ResourceInitParameters struct {
 
-	// Kinesis Data Stream configuration. See kinesis below.
+	// Kinesis Data Stream configuration. See kinesis Block below.
 	Kinesis *KinesisInitParameters `json:"kinesis,omitempty" tf:"kinesis,omitempty"`
 }
 
 type ResourceObservation struct {
 
-	// Kinesis Data Stream configuration. See kinesis below.
+	// Kinesis Data Stream configuration. See kinesis Block below.
 	Kinesis *KinesisObservation `json:"kinesis,omitempty" tf:"kinesis,omitempty"`
 }
 
 type ResourceParameters struct {
 
-	// Kinesis Data Stream configuration. See kinesis below.
+	// Kinesis Data Stream configuration. See kinesis Block below.
 	// +kubebuilder:validation:Optional
 	Kinesis *KinesisParameters `json:"kinesis,omitempty" tf:"kinesis,omitempty"`
 }
 
 type StreamDeliveryResourcesInitParameters struct {
 
-	// List of stream delivery resource configurations. See resource below.
+	// List of stream delivery resource configurations. See resource Block below.
 	Resource *ResourceInitParameters `json:"resource,omitempty" tf:"resource,omitempty"`
 }
 
 type StreamDeliveryResourcesObservation struct {
 
-	// List of stream delivery resource configurations. See resource below.
+	// List of stream delivery resource configurations. See resource Block below.
 	Resource *ResourceObservation `json:"resource,omitempty" tf:"resource,omitempty"`
 }
 
 type StreamDeliveryResourcesParameters struct {
 
-	// List of stream delivery resource configurations. See resource below.
+	// List of stream delivery resource configurations. See resource Block below.
 	// +kubebuilder:validation:Optional
 	Resource *ResourceParameters `json:"resource,omitempty" tf:"resource,omitempty"`
 }

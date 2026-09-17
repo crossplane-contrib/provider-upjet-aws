@@ -43,7 +43,7 @@ type APIDestinationInitParameters struct {
 
 type APIDestinationObservation struct {
 
-	// The Amazon Resource Name (ARN) of the event API Destination.
+	// ARN of the event API Destination.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// ARN of the EventBridge Connection to use for the API Destination.

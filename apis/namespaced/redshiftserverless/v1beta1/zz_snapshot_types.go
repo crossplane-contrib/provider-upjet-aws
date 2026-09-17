@@ -45,7 +45,7 @@ type SnapshotObservation struct {
 	// The username of the database within a snapshot.
 	AdminUsername *string `json:"adminUsername,omitempty" tf:"admin_username,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the snapshot.
+	// ARN of the snapshot.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The name of the snapshot.
@@ -54,7 +54,7 @@ type SnapshotObservation struct {
 	// The unique identifier of the KMS key used to encrypt the snapshot.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the namespace the snapshot was created from.
+	// ARN of the namespace the snapshot was created from.
 	NamespaceArn *string `json:"namespaceArn,omitempty" tf:"namespace_arn,omitempty"`
 
 	// The namespace to create a snapshot for.

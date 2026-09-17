@@ -15,25 +15,25 @@ import (
 
 type ConfigInitParameters struct {
 
-	// The health check configuration.
+	// Health check configuration. See health_check Block below.
 	HealthCheck *HealthCheckInitParameters `json:"healthCheck,omitempty" tf:"health_check,omitempty"`
 
-	// The type of IP address used for the target group. Valid values: IPV4 | IPV6.
+	// Type of IP address used for the target group. Valid values: IPV4 or IPV6.
 	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
 
-	// The version of the event structure that the Lambda function receives. Supported only if type is LAMBDA. Valid Values are V1 | V2.
+	// Version of the event structure that the Lambda function receives. Supported only if type is LAMBDA. Valid values are V1 or V2.
 	LambdaEventStructureVersion *string `json:"lambdaEventStructureVersion,omitempty" tf:"lambda_event_structure_version,omitempty"`
 
-	// The port on which the targets are listening.
+	// Port on which the targets are listening.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
-	// The protocol to use for routing traffic to the targets. Valid Values are HTTP | HTTPS.
+	// Protocol to use for routing traffic to the targets. Valid values are HTTP or HTTPS.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
-	// The protocol version. Valid Values are HTTP1 | HTTP2 | GRPC. Default value is HTTP1.
+	// Protocol version. Valid values are HTTP1, HTTP2, or GRPC. Default value is HTTP1.
 	ProtocolVersion *string `json:"protocolVersion,omitempty" tf:"protocol_version,omitempty"`
 
-	// The ID of the VPC.
+	// ID of the VPC.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.VPC
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	VPCIdentifier *string `json:"vpcIdentifier,omitempty" tf:"vpc_identifier,omitempty"`
@@ -49,55 +49,55 @@ type ConfigInitParameters struct {
 
 type ConfigObservation struct {
 
-	// The health check configuration.
+	// Health check configuration. See health_check Block below.
 	HealthCheck *HealthCheckObservation `json:"healthCheck,omitempty" tf:"health_check,omitempty"`
 
-	// The type of IP address used for the target group. Valid values: IPV4 | IPV6.
+	// Type of IP address used for the target group. Valid values: IPV4 or IPV6.
 	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
 
-	// The version of the event structure that the Lambda function receives. Supported only if type is LAMBDA. Valid Values are V1 | V2.
+	// Version of the event structure that the Lambda function receives. Supported only if type is LAMBDA. Valid values are V1 or V2.
 	LambdaEventStructureVersion *string `json:"lambdaEventStructureVersion,omitempty" tf:"lambda_event_structure_version,omitempty"`
 
-	// The port on which the targets are listening.
+	// Port on which the targets are listening.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
-	// The protocol to use for routing traffic to the targets. Valid Values are HTTP | HTTPS.
+	// Protocol to use for routing traffic to the targets. Valid values are HTTP or HTTPS.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
-	// The protocol version. Valid Values are HTTP1 | HTTP2 | GRPC. Default value is HTTP1.
+	// Protocol version. Valid values are HTTP1, HTTP2, or GRPC. Default value is HTTP1.
 	ProtocolVersion *string `json:"protocolVersion,omitempty" tf:"protocol_version,omitempty"`
 
-	// The ID of the VPC.
+	// ID of the VPC.
 	VPCIdentifier *string `json:"vpcIdentifier,omitempty" tf:"vpc_identifier,omitempty"`
 }
 
 type ConfigParameters struct {
 
-	// The health check configuration.
+	// Health check configuration. See health_check Block below.
 	// +kubebuilder:validation:Optional
 	HealthCheck *HealthCheckParameters `json:"healthCheck,omitempty" tf:"health_check,omitempty"`
 
-	// The type of IP address used for the target group. Valid values: IPV4 | IPV6.
+	// Type of IP address used for the target group. Valid values: IPV4 or IPV6.
 	// +kubebuilder:validation:Optional
 	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
 
-	// The version of the event structure that the Lambda function receives. Supported only if type is LAMBDA. Valid Values are V1 | V2.
+	// Version of the event structure that the Lambda function receives. Supported only if type is LAMBDA. Valid values are V1 or V2.
 	// +kubebuilder:validation:Optional
 	LambdaEventStructureVersion *string `json:"lambdaEventStructureVersion,omitempty" tf:"lambda_event_structure_version,omitempty"`
 
-	// The port on which the targets are listening.
+	// Port on which the targets are listening.
 	// +kubebuilder:validation:Optional
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
-	// The protocol to use for routing traffic to the targets. Valid Values are HTTP | HTTPS.
+	// Protocol to use for routing traffic to the targets. Valid values are HTTP or HTTPS.
 	// +kubebuilder:validation:Optional
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
-	// The protocol version. Valid Values are HTTP1 | HTTP2 | GRPC. Default value is HTTP1.
+	// Protocol version. Valid values are HTTP1, HTTP2, or GRPC. Default value is HTTP1.
 	// +kubebuilder:validation:Optional
 	ProtocolVersion *string `json:"protocolVersion,omitempty" tf:"protocol_version,omitempty"`
 
-	// The ID of the VPC.
+	// ID of the VPC.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.VPC
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -114,142 +114,145 @@ type ConfigParameters struct {
 
 type HealthCheckInitParameters struct {
 
-	// Indicates whether health checking is enabled. Defaults to true.
+	// Whether health checking is enabled. Defaults to true.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The approximate amount of time, in seconds, between health checks of an individual target. The range is 5–300 seconds. The default is 30 seconds.
+	// Approximate amount of time, in seconds, between health checks of an individual target. The range is 5–300 seconds. The default is 30 seconds.
 	HealthCheckIntervalSeconds *float64 `json:"healthCheckIntervalSeconds,omitempty" tf:"health_check_interval_seconds,omitempty"`
 
-	// The amount of time, in seconds, to wait before reporting a target as unhealthy. The range is 1–120 seconds. The default is 5 seconds.
+	// Amount of time, in seconds, to wait before reporting a target as unhealthy. The range is 1–120 seconds. The default is 5 seconds.
 	HealthCheckTimeoutSeconds *float64 `json:"healthCheckTimeoutSeconds,omitempty" tf:"health_check_timeout_seconds,omitempty"`
 
+	// Number of consecutive successful health checks required before considering an unhealthy target healthy. The range is 2–10. The default is 5.
 	HealthyThresholdCount *float64 `json:"healthyThresholdCount,omitempty" tf:"healthy_threshold_count,omitempty"`
 
-	// The codes to use when checking for a successful response from a target. These are called Success codes in the console.
+	// Codes to use when checking for a successful response from a target. See matcher Block below.
 	Matcher *MatcherInitParameters `json:"matcher,omitempty" tf:"matcher,omitempty"`
 
-	// The destination for health checks on the targets. If the protocol version is HTTP/1.1 or HTTP/2, specify a valid URI (for example, /path?query). The default path is /. Health checks are not supported if the protocol version is gRPC, however, you can choose HTTP/1.1 or HTTP/2 and specify a valid URI.
+	// Destination for health checks on the targets. If the protocol version is HTTP/1.1 or HTTP/2, specify a valid URI (for example, /path?query). The default path is /. Health checks are not supported if the protocol version is gRPC, however, you can choose HTTP/1.1 or HTTP/2 and specify a valid URI.
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
-	// The port on which the targets are listening.
+	// Port used when performing health checks on targets. The default setting is the port that a target receives traffic on.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
-	// The protocol to use for routing traffic to the targets. Valid Values are HTTP | HTTPS.
+	// Protocol used when performing health checks on targets. The possible protocols are HTTP and HTTPS.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
-	// The protocol version. Valid Values are HTTP1 | HTTP2 | GRPC. Default value is HTTP1.
+	// Protocol version used when performing health checks on targets. The possible protocol versions are HTTP1 and HTTP2. The default is HTTP1.
 	ProtocolVersion *string `json:"protocolVersion,omitempty" tf:"protocol_version,omitempty"`
 
-	// The number of consecutive failed health checks required before considering a target unhealthy. The range is 2–10. The default is 2.
+	// Number of consecutive failed health checks required before considering a target unhealthy. The range is 2–10. The default is 2.
 	UnhealthyThresholdCount *float64 `json:"unhealthyThresholdCount,omitempty" tf:"unhealthy_threshold_count,omitempty"`
 }
 
 type HealthCheckObservation struct {
 
-	// Indicates whether health checking is enabled. Defaults to true.
+	// Whether health checking is enabled. Defaults to true.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The approximate amount of time, in seconds, between health checks of an individual target. The range is 5–300 seconds. The default is 30 seconds.
+	// Approximate amount of time, in seconds, between health checks of an individual target. The range is 5–300 seconds. The default is 30 seconds.
 	HealthCheckIntervalSeconds *float64 `json:"healthCheckIntervalSeconds,omitempty" tf:"health_check_interval_seconds,omitempty"`
 
-	// The amount of time, in seconds, to wait before reporting a target as unhealthy. The range is 1–120 seconds. The default is 5 seconds.
+	// Amount of time, in seconds, to wait before reporting a target as unhealthy. The range is 1–120 seconds. The default is 5 seconds.
 	HealthCheckTimeoutSeconds *float64 `json:"healthCheckTimeoutSeconds,omitempty" tf:"health_check_timeout_seconds,omitempty"`
 
+	// Number of consecutive successful health checks required before considering an unhealthy target healthy. The range is 2–10. The default is 5.
 	HealthyThresholdCount *float64 `json:"healthyThresholdCount,omitempty" tf:"healthy_threshold_count,omitempty"`
 
-	// The codes to use when checking for a successful response from a target. These are called Success codes in the console.
+	// Codes to use when checking for a successful response from a target. See matcher Block below.
 	Matcher *MatcherObservation `json:"matcher,omitempty" tf:"matcher,omitempty"`
 
-	// The destination for health checks on the targets. If the protocol version is HTTP/1.1 or HTTP/2, specify a valid URI (for example, /path?query). The default path is /. Health checks are not supported if the protocol version is gRPC, however, you can choose HTTP/1.1 or HTTP/2 and specify a valid URI.
+	// Destination for health checks on the targets. If the protocol version is HTTP/1.1 or HTTP/2, specify a valid URI (for example, /path?query). The default path is /. Health checks are not supported if the protocol version is gRPC, however, you can choose HTTP/1.1 or HTTP/2 and specify a valid URI.
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
-	// The port on which the targets are listening.
+	// Port used when performing health checks on targets. The default setting is the port that a target receives traffic on.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
-	// The protocol to use for routing traffic to the targets. Valid Values are HTTP | HTTPS.
+	// Protocol used when performing health checks on targets. The possible protocols are HTTP and HTTPS.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
-	// The protocol version. Valid Values are HTTP1 | HTTP2 | GRPC. Default value is HTTP1.
+	// Protocol version used when performing health checks on targets. The possible protocol versions are HTTP1 and HTTP2. The default is HTTP1.
 	ProtocolVersion *string `json:"protocolVersion,omitempty" tf:"protocol_version,omitempty"`
 
-	// The number of consecutive failed health checks required before considering a target unhealthy. The range is 2–10. The default is 2.
+	// Number of consecutive failed health checks required before considering a target unhealthy. The range is 2–10. The default is 2.
 	UnhealthyThresholdCount *float64 `json:"unhealthyThresholdCount,omitempty" tf:"unhealthy_threshold_count,omitempty"`
 }
 
 type HealthCheckParameters struct {
 
-	// Indicates whether health checking is enabled. Defaults to true.
+	// Whether health checking is enabled. Defaults to true.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The approximate amount of time, in seconds, between health checks of an individual target. The range is 5–300 seconds. The default is 30 seconds.
+	// Approximate amount of time, in seconds, between health checks of an individual target. The range is 5–300 seconds. The default is 30 seconds.
 	// +kubebuilder:validation:Optional
 	HealthCheckIntervalSeconds *float64 `json:"healthCheckIntervalSeconds,omitempty" tf:"health_check_interval_seconds,omitempty"`
 
-	// The amount of time, in seconds, to wait before reporting a target as unhealthy. The range is 1–120 seconds. The default is 5 seconds.
+	// Amount of time, in seconds, to wait before reporting a target as unhealthy. The range is 1–120 seconds. The default is 5 seconds.
 	// +kubebuilder:validation:Optional
 	HealthCheckTimeoutSeconds *float64 `json:"healthCheckTimeoutSeconds,omitempty" tf:"health_check_timeout_seconds,omitempty"`
 
+	// Number of consecutive successful health checks required before considering an unhealthy target healthy. The range is 2–10. The default is 5.
 	// +kubebuilder:validation:Optional
 	HealthyThresholdCount *float64 `json:"healthyThresholdCount,omitempty" tf:"healthy_threshold_count,omitempty"`
 
-	// The codes to use when checking for a successful response from a target. These are called Success codes in the console.
+	// Codes to use when checking for a successful response from a target. See matcher Block below.
 	// +kubebuilder:validation:Optional
 	Matcher *MatcherParameters `json:"matcher,omitempty" tf:"matcher,omitempty"`
 
-	// The destination for health checks on the targets. If the protocol version is HTTP/1.1 or HTTP/2, specify a valid URI (for example, /path?query). The default path is /. Health checks are not supported if the protocol version is gRPC, however, you can choose HTTP/1.1 or HTTP/2 and specify a valid URI.
+	// Destination for health checks on the targets. If the protocol version is HTTP/1.1 or HTTP/2, specify a valid URI (for example, /path?query). The default path is /. Health checks are not supported if the protocol version is gRPC, however, you can choose HTTP/1.1 or HTTP/2 and specify a valid URI.
 	// +kubebuilder:validation:Optional
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
-	// The port on which the targets are listening.
+	// Port used when performing health checks on targets. The default setting is the port that a target receives traffic on.
 	// +kubebuilder:validation:Optional
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
-	// The protocol to use for routing traffic to the targets. Valid Values are HTTP | HTTPS.
+	// Protocol used when performing health checks on targets. The possible protocols are HTTP and HTTPS.
 	// +kubebuilder:validation:Optional
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
-	// The protocol version. Valid Values are HTTP1 | HTTP2 | GRPC. Default value is HTTP1.
+	// Protocol version used when performing health checks on targets. The possible protocol versions are HTTP1 and HTTP2. The default is HTTP1.
 	// +kubebuilder:validation:Optional
 	ProtocolVersion *string `json:"protocolVersion,omitempty" tf:"protocol_version,omitempty"`
 
-	// The number of consecutive failed health checks required before considering a target unhealthy. The range is 2–10. The default is 2.
+	// Number of consecutive failed health checks required before considering a target unhealthy. The range is 2–10. The default is 2.
 	// +kubebuilder:validation:Optional
 	UnhealthyThresholdCount *float64 `json:"unhealthyThresholdCount,omitempty" tf:"unhealthy_threshold_count,omitempty"`
 }
 
 type MatcherInitParameters struct {
 
-	// The HTTP codes to use when checking for a successful response from a target.
+	// HTTP codes to use when checking for a successful response from a target.
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type MatcherObservation struct {
 
-	// The HTTP codes to use when checking for a successful response from a target.
+	// HTTP codes to use when checking for a successful response from a target.
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type MatcherParameters struct {
 
-	// The HTTP codes to use when checking for a successful response from a target.
+	// HTTP codes to use when checking for a successful response from a target.
 	// +kubebuilder:validation:Optional
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type TargetGroupInitParameters struct {
 
-	// The target group configuration.
+	// Target group configuration. See config Block below.
 	Config *ConfigInitParameters `json:"config,omitempty" tf:"config,omitempty"`
 
-	// The name of the target group. The name must be unique within the account. The valid characters are a-z, 0-9, and hyphens (-). You can't use a hyphen as the first or last character, or immediately after another hyphen.
+	// Name of the target group. The name must be unique within the account. The valid characters are a-z, 0-9, and hyphens (-). You can't use a hyphen as the first or last character, or immediately after another hyphen.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The type of target group. Valid Values are IP | LAMBDA | INSTANCE | ALB
+	// Type of target group. Valid values are IP, LAMBDA, INSTANCE, or ALB.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -258,13 +261,13 @@ type TargetGroupObservation struct {
 	// ARN of the target group.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The target group configuration.
+	// Target group configuration. See config Block below.
 	Config *ConfigObservation `json:"config,omitempty" tf:"config,omitempty"`
 
 	// Unique identifier for the target group.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The name of the target group. The name must be unique within the account. The valid characters are a-z, 0-9, and hyphens (-). You can't use a hyphen as the first or last character, or immediately after another hyphen.
+	// Name of the target group. The name must be unique within the account. The valid characters are a-z, 0-9, and hyphens (-). You can't use a hyphen as the first or last character, or immediately after another hyphen.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -282,17 +285,17 @@ type TargetGroupObservation struct {
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// The type of target group. Valid Values are IP | LAMBDA | INSTANCE | ALB
+	// Type of target group. Valid values are IP, LAMBDA, INSTANCE, or ALB.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type TargetGroupParameters struct {
 
-	// The target group configuration.
+	// Target group configuration. See config Block below.
 	// +kubebuilder:validation:Optional
 	Config *ConfigParameters `json:"config,omitempty" tf:"config,omitempty"`
 
-	// The name of the target group. The name must be unique within the account. The valid characters are a-z, 0-9, and hyphens (-). You can't use a hyphen as the first or last character, or immediately after another hyphen.
+	// Name of the target group. The name must be unique within the account. The valid characters are a-z, 0-9, and hyphens (-). You can't use a hyphen as the first or last character, or immediately after another hyphen.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -306,7 +309,7 @@ type TargetGroupParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The type of target group. Valid Values are IP | LAMBDA | INSTANCE | ALB
+	// Type of target group. Valid values are IP, LAMBDA, INSTANCE, or ALB.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }

@@ -25,7 +25,7 @@ type ModelPackageGroupInitParameters struct {
 
 type ModelPackageGroupObservation struct {
 
-	// The Amazon Resource Name (ARN) assigned by AWS to this Model Package Group.
+	// ARN assigned by AWS to this Model Package Group.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The name of the Model Package Group.

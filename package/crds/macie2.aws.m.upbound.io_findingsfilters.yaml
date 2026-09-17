@@ -328,7 +328,7 @@ spec:
                       perform any action on the findings.'
                     type: string
                   arn:
-                    description: The Amazon Resource Name (ARN) of the Findings Filter.
+                    description: ARN of the Findings Filter.
                     type: string
                   description:
                     description: A custom description of the filter. The description

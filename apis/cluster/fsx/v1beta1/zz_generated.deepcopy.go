@@ -2553,6 +2553,11 @@ func (in *OntapFileSystemInitParameters) DeepCopyInto(out *OntapFileSystemInitPa
 		*out = new(v2.Selector)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.NetworkType != nil {
+		in, out := &in.NetworkType, &out.NetworkType
+		*out = new(string)
+		**out = **in
+	}
 	if in.PreferredSubnetID != nil {
 		in, out := &in.PreferredSubnetID, &out.PreferredSubnetID
 		*out = new(string)
@@ -2783,6 +2788,11 @@ func (in *OntapFileSystemObservation) DeepCopyInto(out *OntapFileSystemObservati
 			}
 		}
 	}
+	if in.NetworkType != nil {
+		in, out := &in.NetworkType, &out.NetworkType
+		*out = new(string)
+		**out = **in
+	}
 	if in.OwnerID != nil {
 		in, out := &in.OwnerID, &out.OwnerID
 		*out = new(string)
@@ -2959,6 +2969,11 @@ func (in *OntapFileSystemParameters) DeepCopyInto(out *OntapFileSystemParameters
 		in, out := &in.KMSKeyIDSelector, &out.KMSKeyIDSelector
 		*out = new(v2.Selector)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.NetworkType != nil {
+		in, out := &in.NetworkType, &out.NetworkType
+		*out = new(string)
+		**out = **in
 	}
 	if in.PreferredSubnetID != nil {
 		in, out := &in.PreferredSubnetID, &out.PreferredSubnetID
@@ -4324,6 +4339,11 @@ func (in *WindowsFileSystemInitParameters) DeepCopyInto(out *WindowsFileSystemIn
 		*out = new(v2.Selector)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.NetworkType != nil {
+		in, out := &in.NetworkType, &out.NetworkType
+		*out = new(string)
+		**out = **in
+	}
 	if in.PreferredSubnetID != nil {
 		in, out := &in.PreferredSubnetID, &out.PreferredSubnetID
 		*out = new(string)
@@ -4572,6 +4592,11 @@ func (in *WindowsFileSystemObservation) DeepCopyInto(out *WindowsFileSystemObser
 			}
 		}
 	}
+	if in.NetworkType != nil {
+		in, out := &in.NetworkType, &out.NetworkType
+		*out = new(string)
+		**out = **in
+	}
 	if in.OwnerID != nil {
 		in, out := &in.OwnerID, &out.OwnerID
 		*out = new(string)
@@ -4798,6 +4823,11 @@ func (in *WindowsFileSystemParameters) DeepCopyInto(out *WindowsFileSystemParame
 		in, out := &in.KMSKeyIDSelector, &out.KMSKeyIDSelector
 		*out = new(v2.Selector)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.NetworkType != nil {
+		in, out := &in.NetworkType, &out.NetworkType
+		*out = new(string)
+		**out = **in
 	}
 	if in.PreferredSubnetID != nil {
 		in, out := &in.PreferredSubnetID, &out.PreferredSubnetID

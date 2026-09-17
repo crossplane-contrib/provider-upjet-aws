@@ -76,7 +76,7 @@ metadata:
 spec:
   forProvider:
     automaticFailoverEnabled: true
-    atRestEncryptionEnabled: true
+    atRestEncryptionEnabled: "true"
     autoGenerateAuthToken: true
     authTokenSecretRef:
       name: redis-auth-token

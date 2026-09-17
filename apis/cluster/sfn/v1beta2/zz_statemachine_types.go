@@ -80,7 +80,7 @@ type LoggingConfigurationInitParameters struct {
 	// Defines which category of execution history events are logged. Valid values: ALL, ERROR, FATAL, OFF
 	Level *string `json:"level,omitempty" tf:"level,omitempty"`
 
-	// Amazon Resource Name (ARN) of a CloudWatch log group. Make sure the State Machine has the correct IAM policies for logging. The ARN must end with :*
+	// ARN of a CloudWatch log group. Make sure the State Machine has the correct IAM policies for logging. The ARN must end with :*
 	LogDestination *string `json:"logDestination,omitempty" tf:"log_destination,omitempty"`
 }
 
@@ -92,7 +92,7 @@ type LoggingConfigurationObservation struct {
 	// Defines which category of execution history events are logged. Valid values: ALL, ERROR, FATAL, OFF
 	Level *string `json:"level,omitempty" tf:"level,omitempty"`
 
-	// Amazon Resource Name (ARN) of a CloudWatch log group. Make sure the State Machine has the correct IAM policies for logging. The ARN must end with :*
+	// ARN of a CloudWatch log group. Make sure the State Machine has the correct IAM policies for logging. The ARN must end with :*
 	LogDestination *string `json:"logDestination,omitempty" tf:"log_destination,omitempty"`
 }
 
@@ -106,7 +106,7 @@ type LoggingConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	Level *string `json:"level,omitempty" tf:"level,omitempty"`
 
-	// Amazon Resource Name (ARN) of a CloudWatch log group. Make sure the State Machine has the correct IAM policies for logging. The ARN must end with :*
+	// ARN of a CloudWatch log group. Make sure the State Machine has the correct IAM policies for logging. The ARN must end with :*
 	// +kubebuilder:validation:Optional
 	LogDestination *string `json:"logDestination,omitempty" tf:"log_destination,omitempty"`
 }
@@ -125,7 +125,7 @@ type StateMachineInitParameters struct {
 	// Set to true to publish a version of the state machine during creation. Default: false.
 	Publish *bool `json:"publish,omitempty" tf:"publish,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the IAM role to use for this state machine.
+	// ARN of the IAM role to use for this state machine.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
@@ -181,7 +181,7 @@ type StateMachineObservation struct {
 	// The ARN of the state machine.
 	RevisionID *string `json:"revisionId,omitempty" tf:"revision_id,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the IAM role to use for this state machine.
+	// ARN of the IAM role to use for this state machine.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
 	// The ARN of the state machine version.
@@ -230,7 +230,7 @@ type StateMachineParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the IAM role to use for this state machine.
+	// ARN of the IAM role to use for this state machine.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional

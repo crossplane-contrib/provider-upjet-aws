@@ -15,19 +15,19 @@ import (
 
 type BucketInventoryDestinationInitParameters struct {
 
-	// Name of the source bucket that inventory lists the objects for. Both general purpose and directory buckets are supported.
+	// S3 bucket configuration where inventory results are published. See bucket Block below.
 	Bucket *DestinationBucketInitParameters `json:"bucket,omitempty" tf:"bucket,omitempty"`
 }
 
 type BucketInventoryDestinationObservation struct {
 
-	// Name of the source bucket that inventory lists the objects for. Both general purpose and directory buckets are supported.
+	// S3 bucket configuration where inventory results are published. See bucket Block below.
 	Bucket *DestinationBucketObservation `json:"bucket,omitempty" tf:"bucket,omitempty"`
 }
 
 type BucketInventoryDestinationParameters struct {
 
-	// Name of the source bucket that inventory lists the objects for. Both general purpose and directory buckets are supported.
+	// S3 bucket configuration where inventory results are published. See bucket Block below.
 	// +kubebuilder:validation:Optional
 	Bucket *DestinationBucketParameters `json:"bucket" tf:"bucket,omitempty"`
 }
@@ -66,13 +66,13 @@ type BucketInventoryInitParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketSelector *v2.NamespacedSelector `json:"bucketSelector,omitempty" tf:"-"`
 
-	// Contains information about where to publish the inventory results (documented below).
+	// Where to publish the inventory results. See destination Block below.
 	Destination *BucketInventoryDestinationInitParameters `json:"destination,omitempty" tf:"destination,omitempty"`
 
-	// Specifies whether the inventory is enabled or disabled.
+	// Whether to enable the inventory.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Specifies an inventory filter. The inventory only includes objects that meet the filter's criteria (documented below).
+	// Inventory filter. The inventory only includes objects that meet the filter's criteria. See filter Block below.
 	Filter *BucketInventoryFilterInitParameters `json:"filter,omitempty" tf:"filter,omitempty"`
 
 	// Object versions to include in the inventory list. Valid values: All, Current.
@@ -85,7 +85,7 @@ type BucketInventoryInitParameters struct {
 	// +listType=set
 	OptionalFields []*string `json:"optionalFields,omitempty" tf:"optional_fields,omitempty"`
 
-	// Specifies the schedule for generating inventory results (documented below).
+	// Schedule for generating inventory results. See schedule Block below.
 	Schedule *ScheduleInitParameters `json:"schedule,omitempty" tf:"schedule,omitempty"`
 }
 
@@ -94,13 +94,13 @@ type BucketInventoryObservation struct {
 	// Name of the source bucket that inventory lists the objects for. Both general purpose and directory buckets are supported.
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
-	// Contains information about where to publish the inventory results (documented below).
+	// Where to publish the inventory results. See destination Block below.
 	Destination *BucketInventoryDestinationObservation `json:"destination,omitempty" tf:"destination,omitempty"`
 
-	// Specifies whether the inventory is enabled or disabled.
+	// Whether to enable the inventory.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Specifies an inventory filter. The inventory only includes objects that meet the filter's criteria (documented below).
+	// Inventory filter. The inventory only includes objects that meet the filter's criteria. See filter Block below.
 	Filter *BucketInventoryFilterObservation `json:"filter,omitempty" tf:"filter,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -119,7 +119,7 @@ type BucketInventoryObservation struct {
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// Specifies the schedule for generating inventory results (documented below).
+	// Schedule for generating inventory results. See schedule Block below.
 	Schedule *ScheduleObservation `json:"schedule,omitempty" tf:"schedule,omitempty"`
 }
 
@@ -139,15 +139,15 @@ type BucketInventoryParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketSelector *v2.NamespacedSelector `json:"bucketSelector,omitempty" tf:"-"`
 
-	// Contains information about where to publish the inventory results (documented below).
+	// Where to publish the inventory results. See destination Block below.
 	// +kubebuilder:validation:Optional
 	Destination *BucketInventoryDestinationParameters `json:"destination,omitempty" tf:"destination,omitempty"`
 
-	// Specifies whether the inventory is enabled or disabled.
+	// Whether to enable the inventory.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Specifies an inventory filter. The inventory only includes objects that meet the filter's criteria (documented below).
+	// Inventory filter. The inventory only includes objects that meet the filter's criteria. See filter Block below.
 	// +kubebuilder:validation:Optional
 	Filter *BucketInventoryFilterParameters `json:"filter,omitempty" tf:"filter,omitempty"`
 
@@ -169,7 +169,7 @@ type BucketInventoryParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// Specifies the schedule for generating inventory results (documented below).
+	// Schedule for generating inventory results. See schedule Block below.
 	// +kubebuilder:validation:Optional
 	Schedule *ScheduleParameters `json:"schedule,omitempty" tf:"schedule,omitempty"`
 }
@@ -192,10 +192,10 @@ type DestinationBucketInitParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketArnSelector *v2.NamespacedSelector `json:"bucketArnSelector,omitempty" tf:"-"`
 
-	// Contains the type of server-side encryption to use to encrypt the inventory (documented below).
+	// Type of server-side encryption to use to encrypt the inventory. See encryption Block below.
 	Encryption *EncryptionInitParameters `json:"encryption,omitempty" tf:"encryption,omitempty"`
 
-	// Specifies the output format of the inventory results. Can be CSV, ORC or Parquet.
+	// Output format of the inventory results. Valid values: CSV, ORC, Parquet.
 	Format *string `json:"format,omitempty" tf:"format,omitempty"`
 
 	// Prefix that an object must have to be included in the inventory results.
@@ -210,10 +210,10 @@ type DestinationBucketObservation struct {
 	// Amazon S3 bucket ARN of the destination. Only general purpose buckets are supported.
 	BucketArn *string `json:"bucketArn,omitempty" tf:"bucket_arn,omitempty"`
 
-	// Contains the type of server-side encryption to use to encrypt the inventory (documented below).
+	// Type of server-side encryption to use to encrypt the inventory. See encryption Block below.
 	Encryption *EncryptionObservation `json:"encryption,omitempty" tf:"encryption,omitempty"`
 
-	// Specifies the output format of the inventory results. Can be CSV, ORC or Parquet.
+	// Output format of the inventory results. Valid values: CSV, ORC, Parquet.
 	Format *string `json:"format,omitempty" tf:"format,omitempty"`
 
 	// Prefix that an object must have to be included in the inventory results.
@@ -240,11 +240,11 @@ type DestinationBucketParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketArnSelector *v2.NamespacedSelector `json:"bucketArnSelector,omitempty" tf:"-"`
 
-	// Contains the type of server-side encryption to use to encrypt the inventory (documented below).
+	// Type of server-side encryption to use to encrypt the inventory. See encryption Block below.
 	// +kubebuilder:validation:Optional
 	Encryption *EncryptionParameters `json:"encryption,omitempty" tf:"encryption,omitempty"`
 
-	// Specifies the output format of the inventory results. Can be CSV, ORC or Parquet.
+	// Output format of the inventory results. Valid values: CSV, ORC, Parquet.
 	// +kubebuilder:validation:Optional
 	Format *string `json:"format" tf:"format,omitempty"`
 
@@ -255,48 +255,48 @@ type DestinationBucketParameters struct {
 
 type EncryptionInitParameters struct {
 
-	// Specifies to use server-side encryption with AWS KMS-managed keys to encrypt the inventory file (documented below).
+	// Server-side encryption with AWS KMS-managed keys to encrypt the inventory file. See sse_kms Block below.
 	SseKMS *SseKMSInitParameters `json:"sseKms,omitempty" tf:"sse_kms,omitempty"`
 
-	// Specifies to use server-side encryption with Amazon S3-managed keys (SSE-S3) to encrypt the inventory file.
+	// Server-side encryption with Amazon S3-managed keys (SSE-S3) to encrypt the inventory file.
 	SseS3 *SseS3InitParameters `json:"sseS3,omitempty" tf:"sse_s3,omitempty"`
 }
 
 type EncryptionObservation struct {
 
-	// Specifies to use server-side encryption with AWS KMS-managed keys to encrypt the inventory file (documented below).
+	// Server-side encryption with AWS KMS-managed keys to encrypt the inventory file. See sse_kms Block below.
 	SseKMS *SseKMSObservation `json:"sseKms,omitempty" tf:"sse_kms,omitempty"`
 
-	// Specifies to use server-side encryption with Amazon S3-managed keys (SSE-S3) to encrypt the inventory file.
+	// Server-side encryption with Amazon S3-managed keys (SSE-S3) to encrypt the inventory file.
 	SseS3 *SseS3Parameters `json:"sseS3,omitempty" tf:"sse_s3,omitempty"`
 }
 
 type EncryptionParameters struct {
 
-	// Specifies to use server-side encryption with AWS KMS-managed keys to encrypt the inventory file (documented below).
+	// Server-side encryption with AWS KMS-managed keys to encrypt the inventory file. See sse_kms Block below.
 	// +kubebuilder:validation:Optional
 	SseKMS *SseKMSParameters `json:"sseKms,omitempty" tf:"sse_kms,omitempty"`
 
-	// Specifies to use server-side encryption with Amazon S3-managed keys (SSE-S3) to encrypt the inventory file.
+	// Server-side encryption with Amazon S3-managed keys (SSE-S3) to encrypt the inventory file.
 	// +kubebuilder:validation:Optional
 	SseS3 *SseS3Parameters `json:"sseS3,omitempty" tf:"sse_s3,omitempty"`
 }
 
 type ScheduleInitParameters struct {
 
-	// Specifies how frequently inventory results are produced. Valid values: Daily, Weekly.
+	// How frequently inventory results are produced. Valid values: Daily, Weekly.
 	Frequency *string `json:"frequency,omitempty" tf:"frequency,omitempty"`
 }
 
 type ScheduleObservation struct {
 
-	// Specifies how frequently inventory results are produced. Valid values: Daily, Weekly.
+	// How frequently inventory results are produced. Valid values: Daily, Weekly.
 	Frequency *string `json:"frequency,omitempty" tf:"frequency,omitempty"`
 }
 
 type ScheduleParameters struct {
 
-	// Specifies how frequently inventory results are produced. Valid values: Daily, Weekly.
+	// How frequently inventory results are produced. Valid values: Daily, Weekly.
 	// +kubebuilder:validation:Optional
 	Frequency *string `json:"frequency" tf:"frequency,omitempty"`
 }

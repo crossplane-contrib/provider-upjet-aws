@@ -483,8 +483,7 @@ spec:
                     type: array
                     x-kubernetes-list-type: set
                   arn:
-                    description: The Amazon Resource Name (ARN) specifying the cur
-                      report.
+                    description: ARN specifying the cur report.
                     type: string
                   compression:
                     description: 'Compression format for report. Valid values are:

@@ -46,7 +46,7 @@ type BucketVersioningObservation struct {
 	// Account ID of the expected bucket owner.
 	ExpectedBucketOwner *string `json:"expectedBucketOwner,omitempty" tf:"expected_bucket_owner,omitempty"`
 
-	// The bucket or bucket and expected_bucket_owner separated by a comma (,) if the latter is provided.
+	// bucket or bucket and expected_bucket_owner separated by a comma (,) if the latter is provided.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Concatenation of the authentication device's serial number, a space, and the value that is displayed on your authentication device.
@@ -96,7 +96,7 @@ type BucketVersioningParameters struct {
 
 type VersioningConfigurationInitParameters struct {
 
-	// Specifies whether MFA delete is enabled in the bucket versioning configuration. Valid values: Enabled or Disabled.
+	// Whether MFA delete is enabled in the bucket versioning configuration. Valid values: Enabled or Disabled.
 	MfaDelete *string `json:"mfaDelete,omitempty" tf:"mfa_delete,omitempty"`
 
 	// Versioning state of the bucket. Valid values: Enabled, Suspended, or Disabled. Disabled should only be used when creating or importing resources that correspond to unversioned S3 buckets.
@@ -105,7 +105,7 @@ type VersioningConfigurationInitParameters struct {
 
 type VersioningConfigurationObservation struct {
 
-	// Specifies whether MFA delete is enabled in the bucket versioning configuration. Valid values: Enabled or Disabled.
+	// Whether MFA delete is enabled in the bucket versioning configuration. Valid values: Enabled or Disabled.
 	MfaDelete *string `json:"mfaDelete,omitempty" tf:"mfa_delete,omitempty"`
 
 	// Versioning state of the bucket. Valid values: Enabled, Suspended, or Disabled. Disabled should only be used when creating or importing resources that correspond to unversioned S3 buckets.
@@ -114,7 +114,7 @@ type VersioningConfigurationObservation struct {
 
 type VersioningConfigurationParameters struct {
 
-	// Specifies whether MFA delete is enabled in the bucket versioning configuration. Valid values: Enabled or Disabled.
+	// Whether MFA delete is enabled in the bucket versioning configuration. Valid values: Enabled or Disabled.
 	// +kubebuilder:validation:Optional
 	MfaDelete *string `json:"mfaDelete,omitempty" tf:"mfa_delete,omitempty"`
 

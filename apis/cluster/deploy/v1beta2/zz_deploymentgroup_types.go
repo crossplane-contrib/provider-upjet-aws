@@ -718,7 +718,7 @@ type OnPremisesInstanceTagFilterParameters struct {
 
 type ProdTrafficRouteInitParameters struct {
 
-	// List of Amazon Resource Names (ARNs) of the load balancer listeners.
+	// List of ARNs of the load balancer listeners.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/elbv2/v1beta2.LBListener
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +listType=set
@@ -735,14 +735,14 @@ type ProdTrafficRouteInitParameters struct {
 
 type ProdTrafficRouteObservation struct {
 
-	// List of Amazon Resource Names (ARNs) of the load balancer listeners.
+	// List of ARNs of the load balancer listeners.
 	// +listType=set
 	ListenerArns []*string `json:"listenerArns,omitempty" tf:"listener_arns,omitempty"`
 }
 
 type ProdTrafficRouteParameters struct {
 
-	// List of Amazon Resource Names (ARNs) of the load balancer listeners.
+	// List of ARNs of the load balancer listeners.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/elbv2/v1beta2.LBListener
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -886,21 +886,21 @@ type TerminateBlueInstancesOnDeploymentSuccessParameters struct {
 
 type TestTrafficRouteInitParameters struct {
 
-	// List of Amazon Resource Names (ARNs) of the load balancer listeners.
+	// List of ARNs of the load balancer listeners.
 	// +listType=set
 	ListenerArns []*string `json:"listenerArns,omitempty" tf:"listener_arns,omitempty"`
 }
 
 type TestTrafficRouteObservation struct {
 
-	// List of Amazon Resource Names (ARNs) of the load balancer listeners.
+	// List of ARNs of the load balancer listeners.
 	// +listType=set
 	ListenerArns []*string `json:"listenerArns,omitempty" tf:"listener_arns,omitempty"`
 }
 
 type TestTrafficRouteParameters struct {
 
-	// List of Amazon Resource Names (ARNs) of the load balancer listeners.
+	// List of ARNs of the load balancer listeners.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	ListenerArns []*string `json:"listenerArns" tf:"listener_arns,omitempty"`

@@ -30,7 +30,7 @@ type GlobalClusterInitParameters struct {
 	// The global cluster identifier.
 	GlobalClusterIdentifier *string `json:"globalClusterIdentifier,omitempty" tf:"global_cluster_identifier,omitempty"`
 
-	// Amazon Resource Name (ARN) to use as the primary DB Cluster of the Global Cluster on creation.
+	// ARN to use as the primary DB Cluster of the Global Cluster on creation.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/docdb/v1beta1.Cluster
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	SourceDBClusterIdentifier *string `json:"sourceDbClusterIdentifier,omitempty" tf:"source_db_cluster_identifier,omitempty"`
@@ -52,7 +52,7 @@ type GlobalClusterMembersInitParameters struct {
 
 type GlobalClusterMembersObservation struct {
 
-	// Amazon Resource Name (ARN) of member DB Cluster.
+	// ARN of member DB Cluster.
 	DBClusterArn *string `json:"dbClusterArn,omitempty" tf:"db_cluster_arn,omitempty"`
 
 	// Whether the member is the primary DB Cluster.
@@ -64,7 +64,7 @@ type GlobalClusterMembersParameters struct {
 
 type GlobalClusterObservation struct {
 
-	// Global Cluster Amazon Resource Name (ARN)
+	// Global Cluster ARN
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Name for an automatically created database on cluster creation.
@@ -95,7 +95,7 @@ type GlobalClusterObservation struct {
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// Amazon Resource Name (ARN) to use as the primary DB Cluster of the Global Cluster on creation.
+	// ARN to use as the primary DB Cluster of the Global Cluster on creation.
 	SourceDBClusterIdentifier *string `json:"sourceDbClusterIdentifier,omitempty" tf:"source_db_cluster_identifier,omitempty"`
 
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
@@ -131,7 +131,7 @@ type GlobalClusterParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// Amazon Resource Name (ARN) to use as the primary DB Cluster of the Global Cluster on creation.
+	// ARN to use as the primary DB Cluster of the Global Cluster on creation.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/docdb/v1beta1.Cluster
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional

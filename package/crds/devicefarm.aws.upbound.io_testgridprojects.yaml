@@ -1550,7 +1550,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The Amazon Resource Name of this Test Grid Project.
+                    description: ARN of this Test Grid Project.
                     type: string
                   description:
                     description: Human-readable description of the project.

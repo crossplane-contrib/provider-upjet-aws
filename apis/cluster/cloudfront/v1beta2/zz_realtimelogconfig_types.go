@@ -119,7 +119,7 @@ type RealtimeLogConfigInitParameters struct {
 	// The Amazon Kinesis data streams where real-time log data is sent.
 	Endpoint *EndpointInitParameters `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 
-	// The fields that are included in each real-time log record. See the AWS documentation for supported values.
+	// The fields that are included in each real-time log record. See the AWS documentation for supported values. This includes viewer-request-log-data and viewer-response-log-data, which carry the custom data that a CloudFront Function logs with cf.logCustomData().
 	// +listType=set
 	Fields []*string `json:"fields,omitempty" tf:"fields,omitempty"`
 
@@ -132,13 +132,13 @@ type RealtimeLogConfigInitParameters struct {
 
 type RealtimeLogConfigObservation struct {
 
-	// The ARN (Amazon Resource Name) of the CloudFront real-time log configuration.
+	// ARN of the CloudFront real-time log configuration.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The Amazon Kinesis data streams where real-time log data is sent.
 	Endpoint *EndpointObservation `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 
-	// The fields that are included in each real-time log record. See the AWS documentation for supported values.
+	// The fields that are included in each real-time log record. See the AWS documentation for supported values. This includes viewer-request-log-data and viewer-response-log-data, which carry the custom data that a CloudFront Function logs with cf.logCustomData().
 	// +listType=set
 	Fields []*string `json:"fields,omitempty" tf:"fields,omitempty"`
 
@@ -158,7 +158,7 @@ type RealtimeLogConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	Endpoint *EndpointParameters `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 
-	// The fields that are included in each real-time log record. See the AWS documentation for supported values.
+	// The fields that are included in each real-time log record. See the AWS documentation for supported values. This includes viewer-request-log-data and viewer-response-log-data, which carry the custom data that a CloudFront Function logs with cf.logCustomData().
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	Fields []*string `json:"fields,omitempty" tf:"fields,omitempty"`

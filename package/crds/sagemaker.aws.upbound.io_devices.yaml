@@ -853,8 +853,7 @@ spec:
                   agentVersion:
                     type: string
                   arn:
-                    description: The Amazon Resource Name (ARN) assigned by AWS to
-                      this Device.
+                    description: ARN assigned by AWS to this Device.
                     type: string
                   device:
                     description: The device to register with SageMaker AI Edge Manager.

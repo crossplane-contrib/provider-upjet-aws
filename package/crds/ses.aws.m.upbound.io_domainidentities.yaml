@@ -144,7 +144,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The ARN of the domain identity.
+                    description: ARN of the domain identity.
                     type: string
                   id:
                     type: string
@@ -154,7 +154,7 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   verificationToken:
-                    description: A code which when added to the domain as a TXT record
+                    description: Code which when added to the domain as a TXT record
                       will signal to SES that the owner of the domain has authorized
                       SES to act on their behalf. The domain identity will be in state
                       "verification pending" until this is done.  Find out more about

@@ -28,7 +28,7 @@ type WorkerConfigurationInitParameters_2 struct {
 
 type WorkerConfigurationObservation_2 struct {
 
-	// the Amazon Resource Name (ARN) of the worker configuration.
+	// the ARN of the worker configuration.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// A summary description of the worker configuration.

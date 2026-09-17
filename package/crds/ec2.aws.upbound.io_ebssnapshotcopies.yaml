@@ -570,7 +570,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: Amazon Resource Name (ARN) of the EBS Snapshot.
+                    description: ARN of the EBS Snapshot.
                     type: string
                   completionDurationMinutes:
                     description: Specifies a completion duration to initiate a time-based
@@ -594,7 +594,7 @@ spec:
                     description: The ARN for the KMS encryption key.
                     type: string
                   outpostArn:
-                    description: Amazon Resource Name (ARN) of the EBS Snapshot.
+                    description: ARN of the EBS Snapshot.
                     type: string
                   ownerAlias:
                     description: Value from an Amazon-maintained list (amazon, aws-marketplace,

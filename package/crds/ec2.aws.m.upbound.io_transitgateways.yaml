@@ -271,7 +271,7 @@ spec:
                       64512.'
                     type: number
                   arn:
-                    description: EC2 Transit Gateway Amazon Resource Name (ARN)
+                    description: EC2 Transit Gateway ARN
                     type: string
                   associationDefaultRouteTableId:
                     description: Identifier of the default association route table

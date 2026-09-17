@@ -32,7 +32,7 @@ type SnapshotScheduleInitParameters struct {
 
 type SnapshotScheduleObservation struct {
 
-	// Amazon Resource Name (ARN) of the Redshift Snapshot Schedule.
+	// ARN of the Redshift Snapshot Schedule.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The definition of the snapshot schedule. The definition is made up of schedule expressions, for example cron(30 12 *) or rate(12 hours).

@@ -172,6 +172,7 @@ spec:
                     description: Name of the account setting to set.
                     type: string
                   principalArn:
+                    description: ARN that identifies the account setting.
                     type: string
                   region:
                     description: |-

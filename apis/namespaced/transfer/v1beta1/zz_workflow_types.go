@@ -15,149 +15,149 @@ import (
 
 type CopyStepDetailsDestinationFileLocationEFSFileLocationInitParameters struct {
 
-	// The ID of the file system, assigned by Amazon EFS.
+	// ID of the file system, assigned by Amazon EFS.
 	FileSystemID *string `json:"fileSystemId,omitempty" tf:"file_system_id,omitempty"`
 
-	// The pathname for the folder being used by a workflow.
+	// Pathname for the folder being used by a workflow.
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 }
 
 type CopyStepDetailsDestinationFileLocationEFSFileLocationObservation struct {
 
-	// The ID of the file system, assigned by Amazon EFS.
+	// ID of the file system, assigned by Amazon EFS.
 	FileSystemID *string `json:"fileSystemId,omitempty" tf:"file_system_id,omitempty"`
 
-	// The pathname for the folder being used by a workflow.
+	// Pathname for the folder being used by a workflow.
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 }
 
 type CopyStepDetailsDestinationFileLocationEFSFileLocationParameters struct {
 
-	// The ID of the file system, assigned by Amazon EFS.
+	// ID of the file system, assigned by Amazon EFS.
 	// +kubebuilder:validation:Optional
 	FileSystemID *string `json:"fileSystemId,omitempty" tf:"file_system_id,omitempty"`
 
-	// The pathname for the folder being used by a workflow.
+	// Pathname for the folder being used by a workflow.
 	// +kubebuilder:validation:Optional
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 }
 
 type CopyStepDetailsDestinationFileLocationInitParameters struct {
 
-	// Specifies the details for the EFS file being copied.
+	// Details for the EFS file being copied. See efs_file_location Block below.
 	EFSFileLocation *CopyStepDetailsDestinationFileLocationEFSFileLocationInitParameters `json:"efsFileLocation,omitempty" tf:"efs_file_location,omitempty"`
 
-	// Specifies the details for the S3 file being copied.
+	// Details for the S3 file being copied. See s3_file_location Block below.
 	S3FileLocation *CopyStepDetailsDestinationFileLocationS3FileLocationInitParameters `json:"s3FileLocation,omitempty" tf:"s3_file_location,omitempty"`
 }
 
 type CopyStepDetailsDestinationFileLocationObservation struct {
 
-	// Specifies the details for the EFS file being copied.
+	// Details for the EFS file being copied. See efs_file_location Block below.
 	EFSFileLocation *CopyStepDetailsDestinationFileLocationEFSFileLocationObservation `json:"efsFileLocation,omitempty" tf:"efs_file_location,omitempty"`
 
-	// Specifies the details for the S3 file being copied.
+	// Details for the S3 file being copied. See s3_file_location Block below.
 	S3FileLocation *CopyStepDetailsDestinationFileLocationS3FileLocationObservation `json:"s3FileLocation,omitempty" tf:"s3_file_location,omitempty"`
 }
 
 type CopyStepDetailsDestinationFileLocationParameters struct {
 
-	// Specifies the details for the EFS file being copied.
+	// Details for the EFS file being copied. See efs_file_location Block below.
 	// +kubebuilder:validation:Optional
 	EFSFileLocation *CopyStepDetailsDestinationFileLocationEFSFileLocationParameters `json:"efsFileLocation,omitempty" tf:"efs_file_location,omitempty"`
 
-	// Specifies the details for the S3 file being copied.
+	// Details for the S3 file being copied. See s3_file_location Block below.
 	// +kubebuilder:validation:Optional
 	S3FileLocation *CopyStepDetailsDestinationFileLocationS3FileLocationParameters `json:"s3FileLocation,omitempty" tf:"s3_file_location,omitempty"`
 }
 
 type CopyStepDetailsDestinationFileLocationS3FileLocationInitParameters struct {
 
-	// Specifies the S3 bucket for the customer input file.
+	// S3 bucket for the customer input file.
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
-	// The name assigned to the file when it was created in S3. You use the object key to retrieve the object.
+	// Name assigned to the tag that you create.
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 }
 
 type CopyStepDetailsDestinationFileLocationS3FileLocationObservation struct {
 
-	// Specifies the S3 bucket for the customer input file.
+	// S3 bucket for the customer input file.
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
-	// The name assigned to the file when it was created in S3. You use the object key to retrieve the object.
+	// Name assigned to the tag that you create.
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 }
 
 type CopyStepDetailsDestinationFileLocationS3FileLocationParameters struct {
 
-	// Specifies the S3 bucket for the customer input file.
+	// S3 bucket for the customer input file.
 	// +kubebuilder:validation:Optional
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
-	// The name assigned to the file when it was created in S3. You use the object key to retrieve the object.
+	// Name assigned to the tag that you create.
 	// +kubebuilder:validation:Optional
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 }
 
 type CopyStepDetailsInitParameters struct {
 
-	// Specifies the location for the file being copied. Use ${Transfer:username} in this field to parametrize the destination prefix by username.
+	// Location for the file being copied. Use ${Transfer:username} in this field to parametrize the destination prefix by username. See destination_file_location Block below.
 	DestinationFileLocation *DestinationFileLocationInitParameters `json:"destinationFileLocation,omitempty" tf:"destination_file_location,omitempty"`
 
-	// The name of the step, used as an identifier.
+	// Name of the step, used as an identifier.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// A flag that indicates whether or not to overwrite an existing file of the same name. The default is FALSE. Valid values are TRUE and FALSE.
+	// Flag that indicates whether or not to overwrite an existing file of the same name. The default is FALSE. Valid values are TRUE and FALSE.
 	OverwriteExisting *string `json:"overwriteExisting,omitempty" tf:"overwrite_existing,omitempty"`
 
-	// Specifies which file to use as input to the workflow step: either the output from the previous step, or the originally uploaded file for the workflow. Enter ${previous.file} to use the previous file as the input. In this case, this workflow step uses the output file from the previous workflow step as input. This is the default value. Enter ${original.file} to use the originally-uploaded file location as input for this step.
+	// File to use as input to the workflow step: either the output from the previous step, or the originally uploaded file for the workflow. Enter ${previous.file} to use the previous file as the input. In this case, this workflow step uses the output file from the previous workflow step as input. This is the default value. Enter ${original.file} to use the originally-uploaded file location as input for this step.
 	SourceFileLocation *string `json:"sourceFileLocation,omitempty" tf:"source_file_location,omitempty"`
 }
 
 type CopyStepDetailsObservation struct {
 
-	// Specifies the location for the file being copied. Use ${Transfer:username} in this field to parametrize the destination prefix by username.
+	// Location for the file being copied. Use ${Transfer:username} in this field to parametrize the destination prefix by username. See destination_file_location Block below.
 	DestinationFileLocation *DestinationFileLocationObservation `json:"destinationFileLocation,omitempty" tf:"destination_file_location,omitempty"`
 
-	// The name of the step, used as an identifier.
+	// Name of the step, used as an identifier.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// A flag that indicates whether or not to overwrite an existing file of the same name. The default is FALSE. Valid values are TRUE and FALSE.
+	// Flag that indicates whether or not to overwrite an existing file of the same name. The default is FALSE. Valid values are TRUE and FALSE.
 	OverwriteExisting *string `json:"overwriteExisting,omitempty" tf:"overwrite_existing,omitempty"`
 
-	// Specifies which file to use as input to the workflow step: either the output from the previous step, or the originally uploaded file for the workflow. Enter ${previous.file} to use the previous file as the input. In this case, this workflow step uses the output file from the previous workflow step as input. This is the default value. Enter ${original.file} to use the originally-uploaded file location as input for this step.
+	// File to use as input to the workflow step: either the output from the previous step, or the originally uploaded file for the workflow. Enter ${previous.file} to use the previous file as the input. In this case, this workflow step uses the output file from the previous workflow step as input. This is the default value. Enter ${original.file} to use the originally-uploaded file location as input for this step.
 	SourceFileLocation *string `json:"sourceFileLocation,omitempty" tf:"source_file_location,omitempty"`
 }
 
 type CopyStepDetailsParameters struct {
 
-	// Specifies the location for the file being copied. Use ${Transfer:username} in this field to parametrize the destination prefix by username.
+	// Location for the file being copied. Use ${Transfer:username} in this field to parametrize the destination prefix by username. See destination_file_location Block below.
 	// +kubebuilder:validation:Optional
 	DestinationFileLocation *DestinationFileLocationParameters `json:"destinationFileLocation,omitempty" tf:"destination_file_location,omitempty"`
 
-	// The name of the step, used as an identifier.
+	// Name of the step, used as an identifier.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// A flag that indicates whether or not to overwrite an existing file of the same name. The default is FALSE. Valid values are TRUE and FALSE.
+	// Flag that indicates whether or not to overwrite an existing file of the same name. The default is FALSE. Valid values are TRUE and FALSE.
 	// +kubebuilder:validation:Optional
 	OverwriteExisting *string `json:"overwriteExisting,omitempty" tf:"overwrite_existing,omitempty"`
 
-	// Specifies which file to use as input to the workflow step: either the output from the previous step, or the originally uploaded file for the workflow. Enter ${previous.file} to use the previous file as the input. In this case, this workflow step uses the output file from the previous workflow step as input. This is the default value. Enter ${original.file} to use the originally-uploaded file location as input for this step.
+	// File to use as input to the workflow step: either the output from the previous step, or the originally uploaded file for the workflow. Enter ${previous.file} to use the previous file as the input. In this case, this workflow step uses the output file from the previous workflow step as input. This is the default value. Enter ${original.file} to use the originally-uploaded file location as input for this step.
 	// +kubebuilder:validation:Optional
 	SourceFileLocation *string `json:"sourceFileLocation,omitempty" tf:"source_file_location,omitempty"`
 }
 
 type CustomStepDetailsInitParameters struct {
 
-	// The name of the step, used as an identifier.
+	// Name of the step, used as an identifier.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Specifies which file to use as input to the workflow step: either the output from the previous step, or the originally uploaded file for the workflow. Enter ${previous.file} to use the previous file as the input. In this case, this workflow step uses the output file from the previous workflow step as input. This is the default value. Enter ${original.file} to use the originally-uploaded file location as input for this step.
+	// File to use as input to the workflow step: either the output from the previous step, or the originally uploaded file for the workflow. Enter ${previous.file} to use the previous file as the input. In this case, this workflow step uses the output file from the previous workflow step as input. This is the default value. Enter ${original.file} to use the originally-uploaded file location as input for this step.
 	SourceFileLocation *string `json:"sourceFileLocation,omitempty" tf:"source_file_location,omitempty"`
 
-	// The ARN for the lambda function that is being called.
+	// ARN for the lambda function that is being called.
 	Target *string `json:"target,omitempty" tf:"target,omitempty"`
 
 	// Timeout, in seconds, for the step.
@@ -166,13 +166,13 @@ type CustomStepDetailsInitParameters struct {
 
 type CustomStepDetailsObservation struct {
 
-	// The name of the step, used as an identifier.
+	// Name of the step, used as an identifier.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Specifies which file to use as input to the workflow step: either the output from the previous step, or the originally uploaded file for the workflow. Enter ${previous.file} to use the previous file as the input. In this case, this workflow step uses the output file from the previous workflow step as input. This is the default value. Enter ${original.file} to use the originally-uploaded file location as input for this step.
+	// File to use as input to the workflow step: either the output from the previous step, or the originally uploaded file for the workflow. Enter ${previous.file} to use the previous file as the input. In this case, this workflow step uses the output file from the previous workflow step as input. This is the default value. Enter ${original.file} to use the originally-uploaded file location as input for this step.
 	SourceFileLocation *string `json:"sourceFileLocation,omitempty" tf:"source_file_location,omitempty"`
 
-	// The ARN for the lambda function that is being called.
+	// ARN for the lambda function that is being called.
 	Target *string `json:"target,omitempty" tf:"target,omitempty"`
 
 	// Timeout, in seconds, for the step.
@@ -181,15 +181,15 @@ type CustomStepDetailsObservation struct {
 
 type CustomStepDetailsParameters struct {
 
-	// The name of the step, used as an identifier.
+	// Name of the step, used as an identifier.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Specifies which file to use as input to the workflow step: either the output from the previous step, or the originally uploaded file for the workflow. Enter ${previous.file} to use the previous file as the input. In this case, this workflow step uses the output file from the previous workflow step as input. This is the default value. Enter ${original.file} to use the originally-uploaded file location as input for this step.
+	// File to use as input to the workflow step: either the output from the previous step, or the originally uploaded file for the workflow. Enter ${previous.file} to use the previous file as the input. In this case, this workflow step uses the output file from the previous workflow step as input. This is the default value. Enter ${original.file} to use the originally-uploaded file location as input for this step.
 	// +kubebuilder:validation:Optional
 	SourceFileLocation *string `json:"sourceFileLocation,omitempty" tf:"source_file_location,omitempty"`
 
-	// The ARN for the lambda function that is being called.
+	// ARN for the lambda function that is being called.
 	// +kubebuilder:validation:Optional
 	Target *string `json:"target,omitempty" tf:"target,omitempty"`
 
@@ -200,451 +200,451 @@ type CustomStepDetailsParameters struct {
 
 type DecryptStepDetailsDestinationFileLocationEFSFileLocationInitParameters struct {
 
-	// The ID of the file system, assigned by Amazon EFS.
+	// ID of the file system, assigned by Amazon EFS.
 	FileSystemID *string `json:"fileSystemId,omitempty" tf:"file_system_id,omitempty"`
 
-	// The pathname for the folder being used by a workflow.
+	// Pathname for the folder being used by a workflow.
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 }
 
 type DecryptStepDetailsDestinationFileLocationEFSFileLocationObservation struct {
 
-	// The ID of the file system, assigned by Amazon EFS.
+	// ID of the file system, assigned by Amazon EFS.
 	FileSystemID *string `json:"fileSystemId,omitempty" tf:"file_system_id,omitempty"`
 
-	// The pathname for the folder being used by a workflow.
+	// Pathname for the folder being used by a workflow.
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 }
 
 type DecryptStepDetailsDestinationFileLocationEFSFileLocationParameters struct {
 
-	// The ID of the file system, assigned by Amazon EFS.
+	// ID of the file system, assigned by Amazon EFS.
 	// +kubebuilder:validation:Optional
 	FileSystemID *string `json:"fileSystemId,omitempty" tf:"file_system_id,omitempty"`
 
-	// The pathname for the folder being used by a workflow.
+	// Pathname for the folder being used by a workflow.
 	// +kubebuilder:validation:Optional
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 }
 
 type DecryptStepDetailsDestinationFileLocationInitParameters struct {
 
-	// Specifies the details for the EFS file being copied.
+	// Details for the EFS file being copied. See efs_file_location Block below.
 	EFSFileLocation *DestinationFileLocationEFSFileLocationInitParameters `json:"efsFileLocation,omitempty" tf:"efs_file_location,omitempty"`
 
-	// Specifies the details for the S3 file being copied.
+	// Details for the S3 file being copied. See s3_file_location Block below.
 	S3FileLocation *DestinationFileLocationS3FileLocationInitParameters `json:"s3FileLocation,omitempty" tf:"s3_file_location,omitempty"`
 }
 
 type DecryptStepDetailsDestinationFileLocationObservation struct {
 
-	// Specifies the details for the EFS file being copied.
+	// Details for the EFS file being copied. See efs_file_location Block below.
 	EFSFileLocation *DestinationFileLocationEFSFileLocationObservation `json:"efsFileLocation,omitempty" tf:"efs_file_location,omitempty"`
 
-	// Specifies the details for the S3 file being copied.
+	// Details for the S3 file being copied. See s3_file_location Block below.
 	S3FileLocation *DestinationFileLocationS3FileLocationObservation `json:"s3FileLocation,omitempty" tf:"s3_file_location,omitempty"`
 }
 
 type DecryptStepDetailsDestinationFileLocationParameters struct {
 
-	// Specifies the details for the EFS file being copied.
+	// Details for the EFS file being copied. See efs_file_location Block below.
 	// +kubebuilder:validation:Optional
 	EFSFileLocation *DestinationFileLocationEFSFileLocationParameters `json:"efsFileLocation,omitempty" tf:"efs_file_location,omitempty"`
 
-	// Specifies the details for the S3 file being copied.
+	// Details for the S3 file being copied. See s3_file_location Block below.
 	// +kubebuilder:validation:Optional
 	S3FileLocation *DestinationFileLocationS3FileLocationParameters `json:"s3FileLocation,omitempty" tf:"s3_file_location,omitempty"`
 }
 
 type DecryptStepDetailsDestinationFileLocationS3FileLocationInitParameters struct {
 
-	// Specifies the S3 bucket for the customer input file.
+	// S3 bucket for the customer input file.
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
-	// The name assigned to the file when it was created in S3. You use the object key to retrieve the object.
+	// Name assigned to the tag that you create.
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 }
 
 type DecryptStepDetailsDestinationFileLocationS3FileLocationObservation struct {
 
-	// Specifies the S3 bucket for the customer input file.
+	// S3 bucket for the customer input file.
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
-	// The name assigned to the file when it was created in S3. You use the object key to retrieve the object.
+	// Name assigned to the tag that you create.
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 }
 
 type DecryptStepDetailsDestinationFileLocationS3FileLocationParameters struct {
 
-	// Specifies the S3 bucket for the customer input file.
+	// S3 bucket for the customer input file.
 	// +kubebuilder:validation:Optional
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
-	// The name assigned to the file when it was created in S3. You use the object key to retrieve the object.
+	// Name assigned to the tag that you create.
 	// +kubebuilder:validation:Optional
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 }
 
 type DecryptStepDetailsInitParameters struct {
 
-	// Specifies the location for the file being copied. Use ${Transfer:username} in this field to parametrize the destination prefix by username.
+	// Location for the file being copied. Use ${Transfer:username} in this field to parametrize the destination prefix by username. See destination_file_location Block below.
 	DestinationFileLocation *DecryptStepDetailsDestinationFileLocationInitParameters `json:"destinationFileLocation,omitempty" tf:"destination_file_location,omitempty"`
 
-	// The name of the step, used as an identifier.
+	// Name of the step, used as an identifier.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// A flag that indicates whether or not to overwrite an existing file of the same name. The default is FALSE. Valid values are TRUE and FALSE.
+	// Flag that indicates whether or not to overwrite an existing file of the same name. The default is FALSE. Valid values are TRUE and FALSE.
 	OverwriteExisting *string `json:"overwriteExisting,omitempty" tf:"overwrite_existing,omitempty"`
 
-	// Specifies which file to use as input to the workflow step: either the output from the previous step, or the originally uploaded file for the workflow. Enter ${previous.file} to use the previous file as the input. In this case, this workflow step uses the output file from the previous workflow step as input. This is the default value. Enter ${original.file} to use the originally-uploaded file location as input for this step.
+	// File to use as input to the workflow step: either the output from the previous step, or the originally uploaded file for the workflow. Enter ${previous.file} to use the previous file as the input. In this case, this workflow step uses the output file from the previous workflow step as input. This is the default value. Enter ${original.file} to use the originally-uploaded file location as input for this step.
 	SourceFileLocation *string `json:"sourceFileLocation,omitempty" tf:"source_file_location,omitempty"`
 
-	// One of the following step types are supported. COPY, CUSTOM, DECRYPT, DELETE, and TAG.
+	// Type of encryption used. Currently, this value must be "PGP".
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type DecryptStepDetailsObservation struct {
 
-	// Specifies the location for the file being copied. Use ${Transfer:username} in this field to parametrize the destination prefix by username.
+	// Location for the file being copied. Use ${Transfer:username} in this field to parametrize the destination prefix by username. See destination_file_location Block below.
 	DestinationFileLocation *DecryptStepDetailsDestinationFileLocationObservation `json:"destinationFileLocation,omitempty" tf:"destination_file_location,omitempty"`
 
-	// The name of the step, used as an identifier.
+	// Name of the step, used as an identifier.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// A flag that indicates whether or not to overwrite an existing file of the same name. The default is FALSE. Valid values are TRUE and FALSE.
+	// Flag that indicates whether or not to overwrite an existing file of the same name. The default is FALSE. Valid values are TRUE and FALSE.
 	OverwriteExisting *string `json:"overwriteExisting,omitempty" tf:"overwrite_existing,omitempty"`
 
-	// Specifies which file to use as input to the workflow step: either the output from the previous step, or the originally uploaded file for the workflow. Enter ${previous.file} to use the previous file as the input. In this case, this workflow step uses the output file from the previous workflow step as input. This is the default value. Enter ${original.file} to use the originally-uploaded file location as input for this step.
+	// File to use as input to the workflow step: either the output from the previous step, or the originally uploaded file for the workflow. Enter ${previous.file} to use the previous file as the input. In this case, this workflow step uses the output file from the previous workflow step as input. This is the default value. Enter ${original.file} to use the originally-uploaded file location as input for this step.
 	SourceFileLocation *string `json:"sourceFileLocation,omitempty" tf:"source_file_location,omitempty"`
 
-	// One of the following step types are supported. COPY, CUSTOM, DECRYPT, DELETE, and TAG.
+	// Type of encryption used. Currently, this value must be "PGP".
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type DecryptStepDetailsParameters struct {
 
-	// Specifies the location for the file being copied. Use ${Transfer:username} in this field to parametrize the destination prefix by username.
+	// Location for the file being copied. Use ${Transfer:username} in this field to parametrize the destination prefix by username. See destination_file_location Block below.
 	// +kubebuilder:validation:Optional
 	DestinationFileLocation *DecryptStepDetailsDestinationFileLocationParameters `json:"destinationFileLocation,omitempty" tf:"destination_file_location,omitempty"`
 
-	// The name of the step, used as an identifier.
+	// Name of the step, used as an identifier.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// A flag that indicates whether or not to overwrite an existing file of the same name. The default is FALSE. Valid values are TRUE and FALSE.
+	// Flag that indicates whether or not to overwrite an existing file of the same name. The default is FALSE. Valid values are TRUE and FALSE.
 	// +kubebuilder:validation:Optional
 	OverwriteExisting *string `json:"overwriteExisting,omitempty" tf:"overwrite_existing,omitempty"`
 
-	// Specifies which file to use as input to the workflow step: either the output from the previous step, or the originally uploaded file for the workflow. Enter ${previous.file} to use the previous file as the input. In this case, this workflow step uses the output file from the previous workflow step as input. This is the default value. Enter ${original.file} to use the originally-uploaded file location as input for this step.
+	// File to use as input to the workflow step: either the output from the previous step, or the originally uploaded file for the workflow. Enter ${previous.file} to use the previous file as the input. In this case, this workflow step uses the output file from the previous workflow step as input. This is the default value. Enter ${original.file} to use the originally-uploaded file location as input for this step.
 	// +kubebuilder:validation:Optional
 	SourceFileLocation *string `json:"sourceFileLocation,omitempty" tf:"source_file_location,omitempty"`
 
-	// One of the following step types are supported. COPY, CUSTOM, DECRYPT, DELETE, and TAG.
+	// Type of encryption used. Currently, this value must be "PGP".
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type DeleteStepDetailsInitParameters struct {
 
-	// The name of the step, used as an identifier.
+	// Name of the step, used as an identifier.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Specifies which file to use as input to the workflow step: either the output from the previous step, or the originally uploaded file for the workflow. Enter ${previous.file} to use the previous file as the input. In this case, this workflow step uses the output file from the previous workflow step as input. This is the default value. Enter ${original.file} to use the originally-uploaded file location as input for this step.
+	// File to use as input to the workflow step: either the output from the previous step, or the originally uploaded file for the workflow. Enter ${previous.file} to use the previous file as the input. In this case, this workflow step uses the output file from the previous workflow step as input. This is the default value. Enter ${original.file} to use the originally-uploaded file location as input for this step.
 	SourceFileLocation *string `json:"sourceFileLocation,omitempty" tf:"source_file_location,omitempty"`
 }
 
 type DeleteStepDetailsObservation struct {
 
-	// The name of the step, used as an identifier.
+	// Name of the step, used as an identifier.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Specifies which file to use as input to the workflow step: either the output from the previous step, or the originally uploaded file for the workflow. Enter ${previous.file} to use the previous file as the input. In this case, this workflow step uses the output file from the previous workflow step as input. This is the default value. Enter ${original.file} to use the originally-uploaded file location as input for this step.
+	// File to use as input to the workflow step: either the output from the previous step, or the originally uploaded file for the workflow. Enter ${previous.file} to use the previous file as the input. In this case, this workflow step uses the output file from the previous workflow step as input. This is the default value. Enter ${original.file} to use the originally-uploaded file location as input for this step.
 	SourceFileLocation *string `json:"sourceFileLocation,omitempty" tf:"source_file_location,omitempty"`
 }
 
 type DeleteStepDetailsParameters struct {
 
-	// The name of the step, used as an identifier.
+	// Name of the step, used as an identifier.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Specifies which file to use as input to the workflow step: either the output from the previous step, or the originally uploaded file for the workflow. Enter ${previous.file} to use the previous file as the input. In this case, this workflow step uses the output file from the previous workflow step as input. This is the default value. Enter ${original.file} to use the originally-uploaded file location as input for this step.
+	// File to use as input to the workflow step: either the output from the previous step, or the originally uploaded file for the workflow. Enter ${previous.file} to use the previous file as the input. In this case, this workflow step uses the output file from the previous workflow step as input. This is the default value. Enter ${original.file} to use the originally-uploaded file location as input for this step.
 	// +kubebuilder:validation:Optional
 	SourceFileLocation *string `json:"sourceFileLocation,omitempty" tf:"source_file_location,omitempty"`
 }
 
 type DestinationFileLocationEFSFileLocationInitParameters struct {
 
-	// The ID of the file system, assigned by Amazon EFS.
+	// ID of the file system, assigned by Amazon EFS.
 	FileSystemID *string `json:"fileSystemId,omitempty" tf:"file_system_id,omitempty"`
 
-	// The pathname for the folder being used by a workflow.
+	// Pathname for the folder being used by a workflow.
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 }
 
 type DestinationFileLocationEFSFileLocationObservation struct {
 
-	// The ID of the file system, assigned by Amazon EFS.
+	// ID of the file system, assigned by Amazon EFS.
 	FileSystemID *string `json:"fileSystemId,omitempty" tf:"file_system_id,omitempty"`
 
-	// The pathname for the folder being used by a workflow.
+	// Pathname for the folder being used by a workflow.
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 }
 
 type DestinationFileLocationEFSFileLocationParameters struct {
 
-	// The ID of the file system, assigned by Amazon EFS.
+	// ID of the file system, assigned by Amazon EFS.
 	// +kubebuilder:validation:Optional
 	FileSystemID *string `json:"fileSystemId,omitempty" tf:"file_system_id,omitempty"`
 
-	// The pathname for the folder being used by a workflow.
+	// Pathname for the folder being used by a workflow.
 	// +kubebuilder:validation:Optional
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 }
 
 type DestinationFileLocationInitParameters struct {
 
-	// Specifies the details for the EFS file being copied.
+	// Details for the EFS file being copied. See efs_file_location Block below.
 	EFSFileLocation *EFSFileLocationInitParameters `json:"efsFileLocation,omitempty" tf:"efs_file_location,omitempty"`
 
-	// Specifies the details for the S3 file being copied.
+	// Details for the S3 file being copied. See s3_file_location Block below.
 	S3FileLocation *S3FileLocationInitParameters `json:"s3FileLocation,omitempty" tf:"s3_file_location,omitempty"`
 }
 
 type DestinationFileLocationObservation struct {
 
-	// Specifies the details for the EFS file being copied.
+	// Details for the EFS file being copied. See efs_file_location Block below.
 	EFSFileLocation *EFSFileLocationObservation `json:"efsFileLocation,omitempty" tf:"efs_file_location,omitempty"`
 
-	// Specifies the details for the S3 file being copied.
+	// Details for the S3 file being copied. See s3_file_location Block below.
 	S3FileLocation *S3FileLocationObservation `json:"s3FileLocation,omitempty" tf:"s3_file_location,omitempty"`
 }
 
 type DestinationFileLocationParameters struct {
 
-	// Specifies the details for the EFS file being copied.
+	// Details for the EFS file being copied. See efs_file_location Block below.
 	// +kubebuilder:validation:Optional
 	EFSFileLocation *EFSFileLocationParameters `json:"efsFileLocation,omitempty" tf:"efs_file_location,omitempty"`
 
-	// Specifies the details for the S3 file being copied.
+	// Details for the S3 file being copied. See s3_file_location Block below.
 	// +kubebuilder:validation:Optional
 	S3FileLocation *S3FileLocationParameters `json:"s3FileLocation,omitempty" tf:"s3_file_location,omitempty"`
 }
 
 type DestinationFileLocationS3FileLocationInitParameters struct {
 
-	// Specifies the S3 bucket for the customer input file.
+	// S3 bucket for the customer input file.
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
-	// The name assigned to the file when it was created in S3. You use the object key to retrieve the object.
+	// Name assigned to the tag that you create.
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 }
 
 type DestinationFileLocationS3FileLocationObservation struct {
 
-	// Specifies the S3 bucket for the customer input file.
+	// S3 bucket for the customer input file.
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
-	// The name assigned to the file when it was created in S3. You use the object key to retrieve the object.
+	// Name assigned to the tag that you create.
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 }
 
 type DestinationFileLocationS3FileLocationParameters struct {
 
-	// Specifies the S3 bucket for the customer input file.
+	// S3 bucket for the customer input file.
 	// +kubebuilder:validation:Optional
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
-	// The name assigned to the file when it was created in S3. You use the object key to retrieve the object.
+	// Name assigned to the tag that you create.
 	// +kubebuilder:validation:Optional
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 }
 
 type EFSFileLocationInitParameters struct {
 
-	// The ID of the file system, assigned by Amazon EFS.
+	// ID of the file system, assigned by Amazon EFS.
 	FileSystemID *string `json:"fileSystemId,omitempty" tf:"file_system_id,omitempty"`
 
-	// The pathname for the folder being used by a workflow.
+	// Pathname for the folder being used by a workflow.
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 }
 
 type EFSFileLocationObservation struct {
 
-	// The ID of the file system, assigned by Amazon EFS.
+	// ID of the file system, assigned by Amazon EFS.
 	FileSystemID *string `json:"fileSystemId,omitempty" tf:"file_system_id,omitempty"`
 
-	// The pathname for the folder being used by a workflow.
+	// Pathname for the folder being used by a workflow.
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 }
 
 type EFSFileLocationParameters struct {
 
-	// The ID of the file system, assigned by Amazon EFS.
+	// ID of the file system, assigned by Amazon EFS.
 	// +kubebuilder:validation:Optional
 	FileSystemID *string `json:"fileSystemId,omitempty" tf:"file_system_id,omitempty"`
 
-	// The pathname for the folder being used by a workflow.
+	// Pathname for the folder being used by a workflow.
 	// +kubebuilder:validation:Optional
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 }
 
 type OnExceptionStepsInitParameters struct {
 
-	// Details for a step that performs a file copy. See Copy Step Details below.
+	// Details for a step that performs a file copy. See copy_step_details Block below.
 	CopyStepDetails *CopyStepDetailsInitParameters `json:"copyStepDetails,omitempty" tf:"copy_step_details,omitempty"`
 
-	// Details for a step that invokes a lambda function.
+	// Details for a step that invokes a lambda function. See custom_step_details Block below.
 	CustomStepDetails *CustomStepDetailsInitParameters `json:"customStepDetails,omitempty" tf:"custom_step_details,omitempty"`
 
-	// Details for a step that decrypts the file.
+	// Details for a step that decrypts the file. See decrypt_step_details Block below.
 	DecryptStepDetails *DecryptStepDetailsInitParameters `json:"decryptStepDetails,omitempty" tf:"decrypt_step_details,omitempty"`
 
-	// Details for a step that deletes the file.
+	// Details for a step that deletes the file. See delete_step_details Block below.
 	DeleteStepDetails *DeleteStepDetailsInitParameters `json:"deleteStepDetails,omitempty" tf:"delete_step_details,omitempty"`
 
-	// Details for a step that creates one or more tags.
+	// Details for a step that creates one or more tags. See tag_step_details Block below.
 	TagStepDetails *TagStepDetailsInitParameters `json:"tagStepDetails,omitempty" tf:"tag_step_details,omitempty"`
 
-	// One of the following step types are supported. COPY, CUSTOM, DECRYPT, DELETE, and TAG.
+	// Step type. Valid values are COPY, CUSTOM, DECRYPT, DELETE, and TAG.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type OnExceptionStepsObservation struct {
 
-	// Details for a step that performs a file copy. See Copy Step Details below.
+	// Details for a step that performs a file copy. See copy_step_details Block below.
 	CopyStepDetails *CopyStepDetailsObservation `json:"copyStepDetails,omitempty" tf:"copy_step_details,omitempty"`
 
-	// Details for a step that invokes a lambda function.
+	// Details for a step that invokes a lambda function. See custom_step_details Block below.
 	CustomStepDetails *CustomStepDetailsObservation `json:"customStepDetails,omitempty" tf:"custom_step_details,omitempty"`
 
-	// Details for a step that decrypts the file.
+	// Details for a step that decrypts the file. See decrypt_step_details Block below.
 	DecryptStepDetails *DecryptStepDetailsObservation `json:"decryptStepDetails,omitempty" tf:"decrypt_step_details,omitempty"`
 
-	// Details for a step that deletes the file.
+	// Details for a step that deletes the file. See delete_step_details Block below.
 	DeleteStepDetails *DeleteStepDetailsObservation `json:"deleteStepDetails,omitempty" tf:"delete_step_details,omitempty"`
 
-	// Details for a step that creates one or more tags.
+	// Details for a step that creates one or more tags. See tag_step_details Block below.
 	TagStepDetails *TagStepDetailsObservation `json:"tagStepDetails,omitempty" tf:"tag_step_details,omitempty"`
 
-	// One of the following step types are supported. COPY, CUSTOM, DECRYPT, DELETE, and TAG.
+	// Step type. Valid values are COPY, CUSTOM, DECRYPT, DELETE, and TAG.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type OnExceptionStepsParameters struct {
 
-	// Details for a step that performs a file copy. See Copy Step Details below.
+	// Details for a step that performs a file copy. See copy_step_details Block below.
 	// +kubebuilder:validation:Optional
 	CopyStepDetails *CopyStepDetailsParameters `json:"copyStepDetails,omitempty" tf:"copy_step_details,omitempty"`
 
-	// Details for a step that invokes a lambda function.
+	// Details for a step that invokes a lambda function. See custom_step_details Block below.
 	// +kubebuilder:validation:Optional
 	CustomStepDetails *CustomStepDetailsParameters `json:"customStepDetails,omitempty" tf:"custom_step_details,omitempty"`
 
-	// Details for a step that decrypts the file.
+	// Details for a step that decrypts the file. See decrypt_step_details Block below.
 	// +kubebuilder:validation:Optional
 	DecryptStepDetails *DecryptStepDetailsParameters `json:"decryptStepDetails,omitempty" tf:"decrypt_step_details,omitempty"`
 
-	// Details for a step that deletes the file.
+	// Details for a step that deletes the file. See delete_step_details Block below.
 	// +kubebuilder:validation:Optional
 	DeleteStepDetails *DeleteStepDetailsParameters `json:"deleteStepDetails,omitempty" tf:"delete_step_details,omitempty"`
 
-	// Details for a step that creates one or more tags.
+	// Details for a step that creates one or more tags. See tag_step_details Block below.
 	// +kubebuilder:validation:Optional
 	TagStepDetails *TagStepDetailsParameters `json:"tagStepDetails,omitempty" tf:"tag_step_details,omitempty"`
 
-	// One of the following step types are supported. COPY, CUSTOM, DECRYPT, DELETE, and TAG.
+	// Step type. Valid values are COPY, CUSTOM, DECRYPT, DELETE, and TAG.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type S3FileLocationInitParameters struct {
 
-	// Specifies the S3 bucket for the customer input file.
+	// S3 bucket for the customer input file.
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
-	// The name assigned to the file when it was created in S3. You use the object key to retrieve the object.
+	// Name assigned to the tag that you create.
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 }
 
 type S3FileLocationObservation struct {
 
-	// Specifies the S3 bucket for the customer input file.
+	// S3 bucket for the customer input file.
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
-	// The name assigned to the file when it was created in S3. You use the object key to retrieve the object.
+	// Name assigned to the tag that you create.
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 }
 
 type S3FileLocationParameters struct {
 
-	// Specifies the S3 bucket for the customer input file.
+	// S3 bucket for the customer input file.
 	// +kubebuilder:validation:Optional
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
-	// The name assigned to the file when it was created in S3. You use the object key to retrieve the object.
+	// Name assigned to the tag that you create.
 	// +kubebuilder:validation:Optional
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 }
 
 type StepsCopyStepDetailsInitParameters struct {
 
-	// Specifies the location for the file being copied. Use ${Transfer:username} in this field to parametrize the destination prefix by username.
+	// Location for the file being copied. Use ${Transfer:username} in this field to parametrize the destination prefix by username. See destination_file_location Block below.
 	DestinationFileLocation *CopyStepDetailsDestinationFileLocationInitParameters `json:"destinationFileLocation,omitempty" tf:"destination_file_location,omitempty"`
 
-	// The name of the step, used as an identifier.
+	// Name of the step, used as an identifier.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// A flag that indicates whether or not to overwrite an existing file of the same name. The default is FALSE. Valid values are TRUE and FALSE.
+	// Flag that indicates whether or not to overwrite an existing file of the same name. The default is FALSE. Valid values are TRUE and FALSE.
 	OverwriteExisting *string `json:"overwriteExisting,omitempty" tf:"overwrite_existing,omitempty"`
 
-	// Specifies which file to use as input to the workflow step: either the output from the previous step, or the originally uploaded file for the workflow. Enter ${previous.file} to use the previous file as the input. In this case, this workflow step uses the output file from the previous workflow step as input. This is the default value. Enter ${original.file} to use the originally-uploaded file location as input for this step.
+	// File to use as input to the workflow step: either the output from the previous step, or the originally uploaded file for the workflow. Enter ${previous.file} to use the previous file as the input. In this case, this workflow step uses the output file from the previous workflow step as input. This is the default value. Enter ${original.file} to use the originally-uploaded file location as input for this step.
 	SourceFileLocation *string `json:"sourceFileLocation,omitempty" tf:"source_file_location,omitempty"`
 }
 
 type StepsCopyStepDetailsObservation struct {
 
-	// Specifies the location for the file being copied. Use ${Transfer:username} in this field to parametrize the destination prefix by username.
+	// Location for the file being copied. Use ${Transfer:username} in this field to parametrize the destination prefix by username. See destination_file_location Block below.
 	DestinationFileLocation *CopyStepDetailsDestinationFileLocationObservation `json:"destinationFileLocation,omitempty" tf:"destination_file_location,omitempty"`
 
-	// The name of the step, used as an identifier.
+	// Name of the step, used as an identifier.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// A flag that indicates whether or not to overwrite an existing file of the same name. The default is FALSE. Valid values are TRUE and FALSE.
+	// Flag that indicates whether or not to overwrite an existing file of the same name. The default is FALSE. Valid values are TRUE and FALSE.
 	OverwriteExisting *string `json:"overwriteExisting,omitempty" tf:"overwrite_existing,omitempty"`
 
-	// Specifies which file to use as input to the workflow step: either the output from the previous step, or the originally uploaded file for the workflow. Enter ${previous.file} to use the previous file as the input. In this case, this workflow step uses the output file from the previous workflow step as input. This is the default value. Enter ${original.file} to use the originally-uploaded file location as input for this step.
+	// File to use as input to the workflow step: either the output from the previous step, or the originally uploaded file for the workflow. Enter ${previous.file} to use the previous file as the input. In this case, this workflow step uses the output file from the previous workflow step as input. This is the default value. Enter ${original.file} to use the originally-uploaded file location as input for this step.
 	SourceFileLocation *string `json:"sourceFileLocation,omitempty" tf:"source_file_location,omitempty"`
 }
 
 type StepsCopyStepDetailsParameters struct {
 
-	// Specifies the location for the file being copied. Use ${Transfer:username} in this field to parametrize the destination prefix by username.
+	// Location for the file being copied. Use ${Transfer:username} in this field to parametrize the destination prefix by username. See destination_file_location Block below.
 	// +kubebuilder:validation:Optional
 	DestinationFileLocation *CopyStepDetailsDestinationFileLocationParameters `json:"destinationFileLocation,omitempty" tf:"destination_file_location,omitempty"`
 
-	// The name of the step, used as an identifier.
+	// Name of the step, used as an identifier.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// A flag that indicates whether or not to overwrite an existing file of the same name. The default is FALSE. Valid values are TRUE and FALSE.
+	// Flag that indicates whether or not to overwrite an existing file of the same name. The default is FALSE. Valid values are TRUE and FALSE.
 	// +kubebuilder:validation:Optional
 	OverwriteExisting *string `json:"overwriteExisting,omitempty" tf:"overwrite_existing,omitempty"`
 
-	// Specifies which file to use as input to the workflow step: either the output from the previous step, or the originally uploaded file for the workflow. Enter ${previous.file} to use the previous file as the input. In this case, this workflow step uses the output file from the previous workflow step as input. This is the default value. Enter ${original.file} to use the originally-uploaded file location as input for this step.
+	// File to use as input to the workflow step: either the output from the previous step, or the originally uploaded file for the workflow. Enter ${previous.file} to use the previous file as the input. In this case, this workflow step uses the output file from the previous workflow step as input. This is the default value. Enter ${original.file} to use the originally-uploaded file location as input for this step.
 	// +kubebuilder:validation:Optional
 	SourceFileLocation *string `json:"sourceFileLocation,omitempty" tf:"source_file_location,omitempty"`
 }
 
 type StepsCustomStepDetailsInitParameters struct {
 
-	// The name of the step, used as an identifier.
+	// Name of the step, used as an identifier.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Specifies which file to use as input to the workflow step: either the output from the previous step, or the originally uploaded file for the workflow. Enter ${previous.file} to use the previous file as the input. In this case, this workflow step uses the output file from the previous workflow step as input. This is the default value. Enter ${original.file} to use the originally-uploaded file location as input for this step.
+	// File to use as input to the workflow step: either the output from the previous step, or the originally uploaded file for the workflow. Enter ${previous.file} to use the previous file as the input. In this case, this workflow step uses the output file from the previous workflow step as input. This is the default value. Enter ${original.file} to use the originally-uploaded file location as input for this step.
 	SourceFileLocation *string `json:"sourceFileLocation,omitempty" tf:"source_file_location,omitempty"`
 
-	// The ARN for the lambda function that is being called.
+	// ARN for the lambda function that is being called.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/lambda/v1beta1.Function
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	Target *string `json:"target,omitempty" tf:"target,omitempty"`
@@ -663,13 +663,13 @@ type StepsCustomStepDetailsInitParameters struct {
 
 type StepsCustomStepDetailsObservation struct {
 
-	// The name of the step, used as an identifier.
+	// Name of the step, used as an identifier.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Specifies which file to use as input to the workflow step: either the output from the previous step, or the originally uploaded file for the workflow. Enter ${previous.file} to use the previous file as the input. In this case, this workflow step uses the output file from the previous workflow step as input. This is the default value. Enter ${original.file} to use the originally-uploaded file location as input for this step.
+	// File to use as input to the workflow step: either the output from the previous step, or the originally uploaded file for the workflow. Enter ${previous.file} to use the previous file as the input. In this case, this workflow step uses the output file from the previous workflow step as input. This is the default value. Enter ${original.file} to use the originally-uploaded file location as input for this step.
 	SourceFileLocation *string `json:"sourceFileLocation,omitempty" tf:"source_file_location,omitempty"`
 
-	// The ARN for the lambda function that is being called.
+	// ARN for the lambda function that is being called.
 	Target *string `json:"target,omitempty" tf:"target,omitempty"`
 
 	// Timeout, in seconds, for the step.
@@ -678,15 +678,15 @@ type StepsCustomStepDetailsObservation struct {
 
 type StepsCustomStepDetailsParameters struct {
 
-	// The name of the step, used as an identifier.
+	// Name of the step, used as an identifier.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Specifies which file to use as input to the workflow step: either the output from the previous step, or the originally uploaded file for the workflow. Enter ${previous.file} to use the previous file as the input. In this case, this workflow step uses the output file from the previous workflow step as input. This is the default value. Enter ${original.file} to use the originally-uploaded file location as input for this step.
+	// File to use as input to the workflow step: either the output from the previous step, or the originally uploaded file for the workflow. Enter ${previous.file} to use the previous file as the input. In this case, this workflow step uses the output file from the previous workflow step as input. This is the default value. Enter ${original.file} to use the originally-uploaded file location as input for this step.
 	// +kubebuilder:validation:Optional
 	SourceFileLocation *string `json:"sourceFileLocation,omitempty" tf:"source_file_location,omitempty"`
 
-	// The ARN for the lambda function that is being called.
+	// ARN for the lambda function that is being called.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/lambda/v1beta1.Function
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -707,196 +707,196 @@ type StepsCustomStepDetailsParameters struct {
 
 type StepsDecryptStepDetailsDestinationFileLocationInitParameters struct {
 
-	// Specifies the details for the EFS file being copied.
+	// Details for the EFS file being copied. See efs_file_location Block below.
 	EFSFileLocation *DecryptStepDetailsDestinationFileLocationEFSFileLocationInitParameters `json:"efsFileLocation,omitempty" tf:"efs_file_location,omitempty"`
 
-	// Specifies the details for the S3 file being copied.
+	// Details for the S3 file being copied. See s3_file_location Block below.
 	S3FileLocation *DecryptStepDetailsDestinationFileLocationS3FileLocationInitParameters `json:"s3FileLocation,omitempty" tf:"s3_file_location,omitempty"`
 }
 
 type StepsDecryptStepDetailsDestinationFileLocationObservation struct {
 
-	// Specifies the details for the EFS file being copied.
+	// Details for the EFS file being copied. See efs_file_location Block below.
 	EFSFileLocation *DecryptStepDetailsDestinationFileLocationEFSFileLocationObservation `json:"efsFileLocation,omitempty" tf:"efs_file_location,omitempty"`
 
-	// Specifies the details for the S3 file being copied.
+	// Details for the S3 file being copied. See s3_file_location Block below.
 	S3FileLocation *DecryptStepDetailsDestinationFileLocationS3FileLocationObservation `json:"s3FileLocation,omitempty" tf:"s3_file_location,omitempty"`
 }
 
 type StepsDecryptStepDetailsDestinationFileLocationParameters struct {
 
-	// Specifies the details for the EFS file being copied.
+	// Details for the EFS file being copied. See efs_file_location Block below.
 	// +kubebuilder:validation:Optional
 	EFSFileLocation *DecryptStepDetailsDestinationFileLocationEFSFileLocationParameters `json:"efsFileLocation,omitempty" tf:"efs_file_location,omitempty"`
 
-	// Specifies the details for the S3 file being copied.
+	// Details for the S3 file being copied. See s3_file_location Block below.
 	// +kubebuilder:validation:Optional
 	S3FileLocation *DecryptStepDetailsDestinationFileLocationS3FileLocationParameters `json:"s3FileLocation,omitempty" tf:"s3_file_location,omitempty"`
 }
 
 type StepsDecryptStepDetailsInitParameters struct {
 
-	// Specifies the location for the file being copied. Use ${Transfer:username} in this field to parametrize the destination prefix by username.
+	// Location for the file being copied. Use ${Transfer:username} in this field to parametrize the destination prefix by username. See destination_file_location Block below.
 	DestinationFileLocation *StepsDecryptStepDetailsDestinationFileLocationInitParameters `json:"destinationFileLocation,omitempty" tf:"destination_file_location,omitempty"`
 
-	// The name of the step, used as an identifier.
+	// Name of the step, used as an identifier.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// A flag that indicates whether or not to overwrite an existing file of the same name. The default is FALSE. Valid values are TRUE and FALSE.
+	// Flag that indicates whether or not to overwrite an existing file of the same name. The default is FALSE. Valid values are TRUE and FALSE.
 	OverwriteExisting *string `json:"overwriteExisting,omitempty" tf:"overwrite_existing,omitempty"`
 
-	// Specifies which file to use as input to the workflow step: either the output from the previous step, or the originally uploaded file for the workflow. Enter ${previous.file} to use the previous file as the input. In this case, this workflow step uses the output file from the previous workflow step as input. This is the default value. Enter ${original.file} to use the originally-uploaded file location as input for this step.
+	// File to use as input to the workflow step: either the output from the previous step, or the originally uploaded file for the workflow. Enter ${previous.file} to use the previous file as the input. In this case, this workflow step uses the output file from the previous workflow step as input. This is the default value. Enter ${original.file} to use the originally-uploaded file location as input for this step.
 	SourceFileLocation *string `json:"sourceFileLocation,omitempty" tf:"source_file_location,omitempty"`
 
-	// One of the following step types are supported. COPY, CUSTOM, DECRYPT, DELETE, and TAG.
+	// Type of encryption used. Currently, this value must be "PGP".
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type StepsDecryptStepDetailsObservation struct {
 
-	// Specifies the location for the file being copied. Use ${Transfer:username} in this field to parametrize the destination prefix by username.
+	// Location for the file being copied. Use ${Transfer:username} in this field to parametrize the destination prefix by username. See destination_file_location Block below.
 	DestinationFileLocation *StepsDecryptStepDetailsDestinationFileLocationObservation `json:"destinationFileLocation,omitempty" tf:"destination_file_location,omitempty"`
 
-	// The name of the step, used as an identifier.
+	// Name of the step, used as an identifier.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// A flag that indicates whether or not to overwrite an existing file of the same name. The default is FALSE. Valid values are TRUE and FALSE.
+	// Flag that indicates whether or not to overwrite an existing file of the same name. The default is FALSE. Valid values are TRUE and FALSE.
 	OverwriteExisting *string `json:"overwriteExisting,omitempty" tf:"overwrite_existing,omitempty"`
 
-	// Specifies which file to use as input to the workflow step: either the output from the previous step, or the originally uploaded file for the workflow. Enter ${previous.file} to use the previous file as the input. In this case, this workflow step uses the output file from the previous workflow step as input. This is the default value. Enter ${original.file} to use the originally-uploaded file location as input for this step.
+	// File to use as input to the workflow step: either the output from the previous step, or the originally uploaded file for the workflow. Enter ${previous.file} to use the previous file as the input. In this case, this workflow step uses the output file from the previous workflow step as input. This is the default value. Enter ${original.file} to use the originally-uploaded file location as input for this step.
 	SourceFileLocation *string `json:"sourceFileLocation,omitempty" tf:"source_file_location,omitempty"`
 
-	// One of the following step types are supported. COPY, CUSTOM, DECRYPT, DELETE, and TAG.
+	// Type of encryption used. Currently, this value must be "PGP".
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type StepsDecryptStepDetailsParameters struct {
 
-	// Specifies the location for the file being copied. Use ${Transfer:username} in this field to parametrize the destination prefix by username.
+	// Location for the file being copied. Use ${Transfer:username} in this field to parametrize the destination prefix by username. See destination_file_location Block below.
 	// +kubebuilder:validation:Optional
 	DestinationFileLocation *StepsDecryptStepDetailsDestinationFileLocationParameters `json:"destinationFileLocation,omitempty" tf:"destination_file_location,omitempty"`
 
-	// The name of the step, used as an identifier.
+	// Name of the step, used as an identifier.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// A flag that indicates whether or not to overwrite an existing file of the same name. The default is FALSE. Valid values are TRUE and FALSE.
+	// Flag that indicates whether or not to overwrite an existing file of the same name. The default is FALSE. Valid values are TRUE and FALSE.
 	// +kubebuilder:validation:Optional
 	OverwriteExisting *string `json:"overwriteExisting,omitempty" tf:"overwrite_existing,omitempty"`
 
-	// Specifies which file to use as input to the workflow step: either the output from the previous step, or the originally uploaded file for the workflow. Enter ${previous.file} to use the previous file as the input. In this case, this workflow step uses the output file from the previous workflow step as input. This is the default value. Enter ${original.file} to use the originally-uploaded file location as input for this step.
+	// File to use as input to the workflow step: either the output from the previous step, or the originally uploaded file for the workflow. Enter ${previous.file} to use the previous file as the input. In this case, this workflow step uses the output file from the previous workflow step as input. This is the default value. Enter ${original.file} to use the originally-uploaded file location as input for this step.
 	// +kubebuilder:validation:Optional
 	SourceFileLocation *string `json:"sourceFileLocation,omitempty" tf:"source_file_location,omitempty"`
 
-	// One of the following step types are supported. COPY, CUSTOM, DECRYPT, DELETE, and TAG.
+	// Type of encryption used. Currently, this value must be "PGP".
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type StepsDeleteStepDetailsInitParameters struct {
 
-	// The name of the step, used as an identifier.
+	// Name of the step, used as an identifier.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Specifies which file to use as input to the workflow step: either the output from the previous step, or the originally uploaded file for the workflow. Enter ${previous.file} to use the previous file as the input. In this case, this workflow step uses the output file from the previous workflow step as input. This is the default value. Enter ${original.file} to use the originally-uploaded file location as input for this step.
+	// File to use as input to the workflow step: either the output from the previous step, or the originally uploaded file for the workflow. Enter ${previous.file} to use the previous file as the input. In this case, this workflow step uses the output file from the previous workflow step as input. This is the default value. Enter ${original.file} to use the originally-uploaded file location as input for this step.
 	SourceFileLocation *string `json:"sourceFileLocation,omitempty" tf:"source_file_location,omitempty"`
 }
 
 type StepsDeleteStepDetailsObservation struct {
 
-	// The name of the step, used as an identifier.
+	// Name of the step, used as an identifier.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Specifies which file to use as input to the workflow step: either the output from the previous step, or the originally uploaded file for the workflow. Enter ${previous.file} to use the previous file as the input. In this case, this workflow step uses the output file from the previous workflow step as input. This is the default value. Enter ${original.file} to use the originally-uploaded file location as input for this step.
+	// File to use as input to the workflow step: either the output from the previous step, or the originally uploaded file for the workflow. Enter ${previous.file} to use the previous file as the input. In this case, this workflow step uses the output file from the previous workflow step as input. This is the default value. Enter ${original.file} to use the originally-uploaded file location as input for this step.
 	SourceFileLocation *string `json:"sourceFileLocation,omitempty" tf:"source_file_location,omitempty"`
 }
 
 type StepsDeleteStepDetailsParameters struct {
 
-	// The name of the step, used as an identifier.
+	// Name of the step, used as an identifier.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Specifies which file to use as input to the workflow step: either the output from the previous step, or the originally uploaded file for the workflow. Enter ${previous.file} to use the previous file as the input. In this case, this workflow step uses the output file from the previous workflow step as input. This is the default value. Enter ${original.file} to use the originally-uploaded file location as input for this step.
+	// File to use as input to the workflow step: either the output from the previous step, or the originally uploaded file for the workflow. Enter ${previous.file} to use the previous file as the input. In this case, this workflow step uses the output file from the previous workflow step as input. This is the default value. Enter ${original.file} to use the originally-uploaded file location as input for this step.
 	// +kubebuilder:validation:Optional
 	SourceFileLocation *string `json:"sourceFileLocation,omitempty" tf:"source_file_location,omitempty"`
 }
 
 type StepsInitParameters struct {
 
-	// Details for a step that performs a file copy. See Copy Step Details below.
+	// Details for a step that performs a file copy. See copy_step_details Block below.
 	CopyStepDetails *StepsCopyStepDetailsInitParameters `json:"copyStepDetails,omitempty" tf:"copy_step_details,omitempty"`
 
-	// Details for a step that invokes a lambda function.
+	// Details for a step that invokes a lambda function. See custom_step_details Block below.
 	CustomStepDetails *StepsCustomStepDetailsInitParameters `json:"customStepDetails,omitempty" tf:"custom_step_details,omitempty"`
 
-	// Details for a step that decrypts the file.
+	// Details for a step that decrypts the file. See decrypt_step_details Block below.
 	DecryptStepDetails *StepsDecryptStepDetailsInitParameters `json:"decryptStepDetails,omitempty" tf:"decrypt_step_details,omitempty"`
 
-	// Details for a step that deletes the file.
+	// Details for a step that deletes the file. See delete_step_details Block below.
 	DeleteStepDetails *StepsDeleteStepDetailsInitParameters `json:"deleteStepDetails,omitempty" tf:"delete_step_details,omitempty"`
 
-	// Details for a step that creates one or more tags.
+	// Details for a step that creates one or more tags. See tag_step_details Block below.
 	TagStepDetails *StepsTagStepDetailsInitParameters `json:"tagStepDetails,omitempty" tf:"tag_step_details,omitempty"`
 
-	// One of the following step types are supported. COPY, CUSTOM, DECRYPT, DELETE, and TAG.
+	// Step type. Valid values are COPY, CUSTOM, DECRYPT, DELETE, and TAG.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type StepsObservation struct {
 
-	// Details for a step that performs a file copy. See Copy Step Details below.
+	// Details for a step that performs a file copy. See copy_step_details Block below.
 	CopyStepDetails *StepsCopyStepDetailsObservation `json:"copyStepDetails,omitempty" tf:"copy_step_details,omitempty"`
 
-	// Details for a step that invokes a lambda function.
+	// Details for a step that invokes a lambda function. See custom_step_details Block below.
 	CustomStepDetails *StepsCustomStepDetailsObservation `json:"customStepDetails,omitempty" tf:"custom_step_details,omitempty"`
 
-	// Details for a step that decrypts the file.
+	// Details for a step that decrypts the file. See decrypt_step_details Block below.
 	DecryptStepDetails *StepsDecryptStepDetailsObservation `json:"decryptStepDetails,omitempty" tf:"decrypt_step_details,omitempty"`
 
-	// Details for a step that deletes the file.
+	// Details for a step that deletes the file. See delete_step_details Block below.
 	DeleteStepDetails *StepsDeleteStepDetailsObservation `json:"deleteStepDetails,omitempty" tf:"delete_step_details,omitempty"`
 
-	// Details for a step that creates one or more tags.
+	// Details for a step that creates one or more tags. See tag_step_details Block below.
 	TagStepDetails *StepsTagStepDetailsObservation `json:"tagStepDetails,omitempty" tf:"tag_step_details,omitempty"`
 
-	// One of the following step types are supported. COPY, CUSTOM, DECRYPT, DELETE, and TAG.
+	// Step type. Valid values are COPY, CUSTOM, DECRYPT, DELETE, and TAG.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type StepsParameters struct {
 
-	// Details for a step that performs a file copy. See Copy Step Details below.
+	// Details for a step that performs a file copy. See copy_step_details Block below.
 	// +kubebuilder:validation:Optional
 	CopyStepDetails *StepsCopyStepDetailsParameters `json:"copyStepDetails,omitempty" tf:"copy_step_details,omitempty"`
 
-	// Details for a step that invokes a lambda function.
+	// Details for a step that invokes a lambda function. See custom_step_details Block below.
 	// +kubebuilder:validation:Optional
 	CustomStepDetails *StepsCustomStepDetailsParameters `json:"customStepDetails,omitempty" tf:"custom_step_details,omitempty"`
 
-	// Details for a step that decrypts the file.
+	// Details for a step that decrypts the file. See decrypt_step_details Block below.
 	// +kubebuilder:validation:Optional
 	DecryptStepDetails *StepsDecryptStepDetailsParameters `json:"decryptStepDetails,omitempty" tf:"decrypt_step_details,omitempty"`
 
-	// Details for a step that deletes the file.
+	// Details for a step that deletes the file. See delete_step_details Block below.
 	// +kubebuilder:validation:Optional
 	DeleteStepDetails *StepsDeleteStepDetailsParameters `json:"deleteStepDetails,omitempty" tf:"delete_step_details,omitempty"`
 
-	// Details for a step that creates one or more tags.
+	// Details for a step that creates one or more tags. See tag_step_details Block below.
 	// +kubebuilder:validation:Optional
 	TagStepDetails *StepsTagStepDetailsParameters `json:"tagStepDetails,omitempty" tf:"tag_step_details,omitempty"`
 
-	// One of the following step types are supported. COPY, CUSTOM, DECRYPT, DELETE, and TAG.
+	// Step type. Valid values are COPY, CUSTOM, DECRYPT, DELETE, and TAG.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type StepsTagStepDetailsInitParameters struct {
 
-	// The name of the step, used as an identifier.
+	// Name of the step, used as an identifier.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Specifies which file to use as input to the workflow step: either the output from the previous step, or the originally uploaded file for the workflow. Enter ${previous.file} to use the previous file as the input. In this case, this workflow step uses the output file from the previous workflow step as input. This is the default value. Enter ${original.file} to use the originally-uploaded file location as input for this step.
+	// File to use as input to the workflow step: either the output from the previous step, or the originally uploaded file for the workflow. Enter ${previous.file} to use the previous file as the input. In this case, this workflow step uses the output file from the previous workflow step as input. This is the default value. Enter ${original.file} to use the originally-uploaded file location as input for this step.
 	SourceFileLocation *string `json:"sourceFileLocation,omitempty" tf:"source_file_location,omitempty"`
 
 	// Key-value map of resource tags.
@@ -905,10 +905,10 @@ type StepsTagStepDetailsInitParameters struct {
 
 type StepsTagStepDetailsObservation struct {
 
-	// The name of the step, used as an identifier.
+	// Name of the step, used as an identifier.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Specifies which file to use as input to the workflow step: either the output from the previous step, or the originally uploaded file for the workflow. Enter ${previous.file} to use the previous file as the input. In this case, this workflow step uses the output file from the previous workflow step as input. This is the default value. Enter ${original.file} to use the originally-uploaded file location as input for this step.
+	// File to use as input to the workflow step: either the output from the previous step, or the originally uploaded file for the workflow. Enter ${previous.file} to use the previous file as the input. In this case, this workflow step uses the output file from the previous workflow step as input. This is the default value. Enter ${original.file} to use the originally-uploaded file location as input for this step.
 	SourceFileLocation *string `json:"sourceFileLocation,omitempty" tf:"source_file_location,omitempty"`
 
 	// Key-value map of resource tags.
@@ -917,11 +917,11 @@ type StepsTagStepDetailsObservation struct {
 
 type StepsTagStepDetailsParameters struct {
 
-	// The name of the step, used as an identifier.
+	// Name of the step, used as an identifier.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Specifies which file to use as input to the workflow step: either the output from the previous step, or the originally uploaded file for the workflow. Enter ${previous.file} to use the previous file as the input. In this case, this workflow step uses the output file from the previous workflow step as input. This is the default value. Enter ${original.file} to use the originally-uploaded file location as input for this step.
+	// File to use as input to the workflow step: either the output from the previous step, or the originally uploaded file for the workflow. Enter ${previous.file} to use the previous file as the input. In this case, this workflow step uses the output file from the previous workflow step as input. This is the default value. Enter ${original.file} to use the originally-uploaded file location as input for this step.
 	// +kubebuilder:validation:Optional
 	SourceFileLocation *string `json:"sourceFileLocation,omitempty" tf:"source_file_location,omitempty"`
 
@@ -932,10 +932,10 @@ type StepsTagStepDetailsParameters struct {
 
 type TagStepDetailsInitParameters struct {
 
-	// The name of the step, used as an identifier.
+	// Name of the step, used as an identifier.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Specifies which file to use as input to the workflow step: either the output from the previous step, or the originally uploaded file for the workflow. Enter ${previous.file} to use the previous file as the input. In this case, this workflow step uses the output file from the previous workflow step as input. This is the default value. Enter ${original.file} to use the originally-uploaded file location as input for this step.
+	// File to use as input to the workflow step: either the output from the previous step, or the originally uploaded file for the workflow. Enter ${previous.file} to use the previous file as the input. In this case, this workflow step uses the output file from the previous workflow step as input. This is the default value. Enter ${original.file} to use the originally-uploaded file location as input for this step.
 	SourceFileLocation *string `json:"sourceFileLocation,omitempty" tf:"source_file_location,omitempty"`
 
 	// Key-value map of resource tags.
@@ -944,10 +944,10 @@ type TagStepDetailsInitParameters struct {
 
 type TagStepDetailsObservation struct {
 
-	// The name of the step, used as an identifier.
+	// Name of the step, used as an identifier.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Specifies which file to use as input to the workflow step: either the output from the previous step, or the originally uploaded file for the workflow. Enter ${previous.file} to use the previous file as the input. In this case, this workflow step uses the output file from the previous workflow step as input. This is the default value. Enter ${original.file} to use the originally-uploaded file location as input for this step.
+	// File to use as input to the workflow step: either the output from the previous step, or the originally uploaded file for the workflow. Enter ${previous.file} to use the previous file as the input. In this case, this workflow step uses the output file from the previous workflow step as input. This is the default value. Enter ${original.file} to use the originally-uploaded file location as input for this step.
 	SourceFileLocation *string `json:"sourceFileLocation,omitempty" tf:"source_file_location,omitempty"`
 
 	// Key-value map of resource tags.
@@ -956,11 +956,11 @@ type TagStepDetailsObservation struct {
 
 type TagStepDetailsParameters struct {
 
-	// The name of the step, used as an identifier.
+	// Name of the step, used as an identifier.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Specifies which file to use as input to the workflow step: either the output from the previous step, or the originally uploaded file for the workflow. Enter ${previous.file} to use the previous file as the input. In this case, this workflow step uses the output file from the previous workflow step as input. This is the default value. Enter ${original.file} to use the originally-uploaded file location as input for this step.
+	// File to use as input to the workflow step: either the output from the previous step, or the originally uploaded file for the workflow. Enter ${previous.file} to use the previous file as the input. In this case, this workflow step uses the output file from the previous workflow step as input. This is the default value. Enter ${original.file} to use the originally-uploaded file location as input for this step.
 	// +kubebuilder:validation:Optional
 	SourceFileLocation *string `json:"sourceFileLocation,omitempty" tf:"source_file_location,omitempty"`
 
@@ -971,71 +971,71 @@ type TagStepDetailsParameters struct {
 
 type TagStepDetailsTagsInitParameters struct {
 
-	// The name assigned to the file when it was created in S3. You use the object key to retrieve the object.
+	// Name assigned to the tag that you create.
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
-	// The value that corresponds to the key.
+	// Value that corresponds to the key.
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type TagStepDetailsTagsObservation struct {
 
-	// The name assigned to the file when it was created in S3. You use the object key to retrieve the object.
+	// Name assigned to the tag that you create.
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
-	// The value that corresponds to the key.
+	// Value that corresponds to the key.
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type TagStepDetailsTagsParameters struct {
 
-	// The name assigned to the file when it was created in S3. You use the object key to retrieve the object.
+	// Name assigned to the tag that you create.
 	// +kubebuilder:validation:Optional
 	Key *string `json:"key" tf:"key,omitempty"`
 
-	// The value that corresponds to the key.
+	// Value that corresponds to the key.
 	// +kubebuilder:validation:Optional
 	Value *string `json:"value" tf:"value,omitempty"`
 }
 
 type TagsInitParameters struct {
 
-	// The name assigned to the file when it was created in S3. You use the object key to retrieve the object.
+	// Name assigned to the tag that you create.
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
-	// The value that corresponds to the key.
+	// Value that corresponds to the key.
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type TagsObservation struct {
 
-	// The name assigned to the file when it was created in S3. You use the object key to retrieve the object.
+	// Name assigned to the tag that you create.
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
-	// The value that corresponds to the key.
+	// Value that corresponds to the key.
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type TagsParameters struct {
 
-	// The name assigned to the file when it was created in S3. You use the object key to retrieve the object.
+	// Name assigned to the tag that you create.
 	// +kubebuilder:validation:Optional
 	Key *string `json:"key" tf:"key,omitempty"`
 
-	// The value that corresponds to the key.
+	// Value that corresponds to the key.
 	// +kubebuilder:validation:Optional
 	Value *string `json:"value" tf:"value,omitempty"`
 }
 
 type WorkflowInitParameters struct {
 
-	// A textual description for the workflow.
+	// Textual description for the workflow.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Specifies the steps (actions) to take if errors are encountered during execution of the workflow. See Workflow Steps below.
+	// Steps (actions) to take if errors are encountered during execution of the workflow. See on_exception_steps Block below.
 	OnExceptionSteps []OnExceptionStepsInitParameters `json:"onExceptionSteps,omitempty" tf:"on_exception_steps,omitempty"`
 
-	// Specifies the details for the steps that are in the specified workflow. See Workflow Steps below.
+	// Details for the steps that are in the specified workflow. See steps Block below.
 	Steps []StepsInitParameters `json:"steps,omitempty" tf:"steps,omitempty"`
 
 	// Key-value map of resource tags.
@@ -1045,41 +1045,41 @@ type WorkflowInitParameters struct {
 
 type WorkflowObservation struct {
 
-	// The Workflow ARN.
+	// Workflow ARN.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// A textual description for the workflow.
+	// Textual description for the workflow.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The Workflow id.
+	// Workflow ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Specifies the steps (actions) to take if errors are encountered during execution of the workflow. See Workflow Steps below.
+	// Steps (actions) to take if errors are encountered during execution of the workflow. See on_exception_steps Block below.
 	OnExceptionSteps []OnExceptionStepsObservation `json:"onExceptionSteps,omitempty" tf:"on_exception_steps,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// Specifies the details for the steps that are in the specified workflow. See Workflow Steps below.
+	// Details for the steps that are in the specified workflow. See steps Block below.
 	Steps []StepsObservation `json:"steps,omitempty" tf:"steps,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type WorkflowParameters struct {
 
-	// A textual description for the workflow.
+	// Textual description for the workflow.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Specifies the steps (actions) to take if errors are encountered during execution of the workflow. See Workflow Steps below.
+	// Steps (actions) to take if errors are encountered during execution of the workflow. See on_exception_steps Block below.
 	// +kubebuilder:validation:Optional
 	OnExceptionSteps []OnExceptionStepsParameters `json:"onExceptionSteps,omitempty" tf:"on_exception_steps,omitempty"`
 
@@ -1088,7 +1088,7 @@ type WorkflowParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// Specifies the details for the steps that are in the specified workflow. See Workflow Steps below.
+	// Details for the steps that are in the specified workflow. See steps Block below.
 	// +kubebuilder:validation:Optional
 	Steps []StepsParameters `json:"steps,omitempty" tf:"steps,omitempty"`
 

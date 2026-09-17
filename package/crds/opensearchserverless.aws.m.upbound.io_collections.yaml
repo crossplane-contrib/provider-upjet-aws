@@ -582,7 +582,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: Amazon Resource Name (ARN) of the collection.
+                    description: ARN of the collection.
                     type: string
                   collectionEndpoint:
                     description: |-

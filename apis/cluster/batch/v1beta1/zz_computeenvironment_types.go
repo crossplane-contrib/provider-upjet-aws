@@ -21,7 +21,7 @@ type ComputeEnvironmentInitParameters struct {
 	// Details for the Amazon EKS cluster that supports the compute environment. See details below.
 	EksConfiguration *EksConfigurationInitParameters `json:"eksConfiguration,omitempty" tf:"eks_configuration,omitempty"`
 
-	// The full Amazon Resource Name (ARN) of the IAM role that allows AWS Batch to make calls to other AWS services on your behalf.
+	// Full ARN of the IAM role that allows AWS Batch to make calls to other AWS services on your behalf.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	ServiceRole *string `json:"serviceRole,omitempty" tf:"service_role,omitempty"`
@@ -50,13 +50,13 @@ type ComputeEnvironmentInitParameters struct {
 
 type ComputeEnvironmentObservation struct {
 
-	// The Amazon Resource Name (ARN) of the compute environment.
+	// ARN of the compute environment.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Details of the compute resources managed by the compute environment. This parameter is required for managed compute environments. See details below.
 	ComputeResources *ComputeResourcesObservation `json:"computeResources,omitempty" tf:"compute_resources,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the underlying Amazon ECS cluster used by the compute environment.
+	// ARN of the underlying Amazon ECS cluster used by the compute environment.
 	EcsClusterArn *string `json:"ecsClusterArn,omitempty" tf:"ecs_cluster_arn,omitempty"`
 
 	// Details for the Amazon EKS cluster that supports the compute environment. See details below.
@@ -68,7 +68,7 @@ type ComputeEnvironmentObservation struct {
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The full Amazon Resource Name (ARN) of the IAM role that allows AWS Batch to make calls to other AWS services on your behalf.
+	// Full ARN of the IAM role that allows AWS Batch to make calls to other AWS services on your behalf.
 	ServiceRole *string `json:"serviceRole,omitempty" tf:"service_role,omitempty"`
 
 	// The state of the compute environment. If the state is ENABLED, then the compute environment accepts jobs from a queue and can scale out automatically based on queues. Valid items are ENABLED or DISABLED. Defaults to ENABLED.
@@ -110,7 +110,7 @@ type ComputeEnvironmentParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// The full Amazon Resource Name (ARN) of the IAM role that allows AWS Batch to make calls to other AWS services on your behalf.
+	// Full ARN of the IAM role that allows AWS Batch to make calls to other AWS services on your behalf.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -153,13 +153,13 @@ type ComputeResourcesInitParameters struct {
 	// The desired number of EC2 vCPUS in the compute environment. This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified.
 	DesiredVcpus *float64 `json:"desiredVcpus,omitempty" tf:"desired_vcpus,omitempty"`
 
-	// Provides information used to select Amazon Machine Images (AMIs) for EC2 instances in the compute environment. If Ec2Configuration isn't specified, the default is ECS_AL2. This parameter isn't applicable to jobs that are running on Fargate resources, and shouldn't be specified.
+	// Provides information used to select AMIs for EC2 instances in the compute environment. If Ec2Configuration isn't specified, the default is ECS_AL2. This parameter isn't applicable to jobs that are running on Fargate resources, and shouldn't be specified.
 	EC2Configuration []EC2ConfigurationInitParameters `json:"ec2Configuration,omitempty" tf:"ec2_configuration,omitempty"`
 
 	// The EC2 key pair that is used for instances launched in the compute environment. This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified.
 	EC2KeyPair *string `json:"ec2KeyPair,omitempty" tf:"ec2_key_pair,omitempty"`
 
-	// The Amazon Machine Image (AMI) ID used for instances launched in the compute environment. This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified. (Deprecated, use ec2_configuration image_id_override instead)
+	// AMI ID used for instances launched in the compute environment. This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified. (Deprecated, use ec2_configuration image_id_override instead)
 	ImageID *string `json:"imageId,omitempty" tf:"image_id,omitempty"`
 
 	// The Amazon ECS instance role applied to Amazon EC2 instances in a compute environment. This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified.
@@ -213,7 +213,7 @@ type ComputeResourcesInitParameters struct {
 	// +kubebuilder:validation:Optional
 	SecurityGroupIdsSelector *v2.Selector `json:"securityGroupIdsSelector,omitempty" tf:"-"`
 
-	// The Amazon Resource Name (ARN) of the Amazon EC2 Spot Fleet IAM role applied to a SPOT compute environment. This parameter is required for SPOT compute environments. This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified.
+	// ARN of the Amazon EC2 Spot Fleet IAM role applied to a SPOT compute environment. This parameter is required for SPOT compute environments. This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified.
 	SpotIAMFleetRole *string `json:"spotIamFleetRole,omitempty" tf:"spot_iam_fleet_role,omitempty"`
 
 	// A list of VPC subnets into which the compute resources are launched.
@@ -248,13 +248,13 @@ type ComputeResourcesObservation struct {
 	// The desired number of EC2 vCPUS in the compute environment. This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified.
 	DesiredVcpus *float64 `json:"desiredVcpus,omitempty" tf:"desired_vcpus,omitempty"`
 
-	// Provides information used to select Amazon Machine Images (AMIs) for EC2 instances in the compute environment. If Ec2Configuration isn't specified, the default is ECS_AL2. This parameter isn't applicable to jobs that are running on Fargate resources, and shouldn't be specified.
+	// Provides information used to select AMIs for EC2 instances in the compute environment. If Ec2Configuration isn't specified, the default is ECS_AL2. This parameter isn't applicable to jobs that are running on Fargate resources, and shouldn't be specified.
 	EC2Configuration []EC2ConfigurationObservation `json:"ec2Configuration,omitempty" tf:"ec2_configuration,omitempty"`
 
 	// The EC2 key pair that is used for instances launched in the compute environment. This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified.
 	EC2KeyPair *string `json:"ec2KeyPair,omitempty" tf:"ec2_key_pair,omitempty"`
 
-	// The Amazon Machine Image (AMI) ID used for instances launched in the compute environment. This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified. (Deprecated, use ec2_configuration image_id_override instead)
+	// AMI ID used for instances launched in the compute environment. This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified. (Deprecated, use ec2_configuration image_id_override instead)
 	ImageID *string `json:"imageId,omitempty" tf:"image_id,omitempty"`
 
 	// The Amazon ECS instance role applied to Amazon EC2 instances in a compute environment. This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified.
@@ -280,7 +280,7 @@ type ComputeResourcesObservation struct {
 	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the Amazon EC2 Spot Fleet IAM role applied to a SPOT compute environment. This parameter is required for SPOT compute environments. This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified.
+	// ARN of the Amazon EC2 Spot Fleet IAM role applied to a SPOT compute environment. This parameter is required for SPOT compute environments. This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified.
 	SpotIAMFleetRole *string `json:"spotIamFleetRole,omitempty" tf:"spot_iam_fleet_role,omitempty"`
 
 	// A list of VPC subnets into which the compute resources are launched.
@@ -309,7 +309,7 @@ type ComputeResourcesParameters struct {
 	// +kubebuilder:validation:Optional
 	DesiredVcpus *float64 `json:"desiredVcpus,omitempty" tf:"desired_vcpus,omitempty"`
 
-	// Provides information used to select Amazon Machine Images (AMIs) for EC2 instances in the compute environment. If Ec2Configuration isn't specified, the default is ECS_AL2. This parameter isn't applicable to jobs that are running on Fargate resources, and shouldn't be specified.
+	// Provides information used to select AMIs for EC2 instances in the compute environment. If Ec2Configuration isn't specified, the default is ECS_AL2. This parameter isn't applicable to jobs that are running on Fargate resources, and shouldn't be specified.
 	// +kubebuilder:validation:Optional
 	EC2Configuration []EC2ConfigurationParameters `json:"ec2Configuration,omitempty" tf:"ec2_configuration,omitempty"`
 
@@ -317,7 +317,7 @@ type ComputeResourcesParameters struct {
 	// +kubebuilder:validation:Optional
 	EC2KeyPair *string `json:"ec2KeyPair,omitempty" tf:"ec2_key_pair,omitempty"`
 
-	// The Amazon Machine Image (AMI) ID used for instances launched in the compute environment. This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified. (Deprecated, use ec2_configuration image_id_override instead)
+	// AMI ID used for instances launched in the compute environment. This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified. (Deprecated, use ec2_configuration image_id_override instead)
 	// +kubebuilder:validation:Optional
 	ImageID *string `json:"imageId,omitempty" tf:"image_id,omitempty"`
 
@@ -379,7 +379,7 @@ type ComputeResourcesParameters struct {
 	// +kubebuilder:validation:Optional
 	SecurityGroupIdsSelector *v2.Selector `json:"securityGroupIdsSelector,omitempty" tf:"-"`
 
-	// The Amazon Resource Name (ARN) of the Amazon EC2 Spot Fleet IAM role applied to a SPOT compute environment. This parameter is required for SPOT compute environments. This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified.
+	// ARN of the Amazon EC2 Spot Fleet IAM role applied to a SPOT compute environment. This parameter is required for SPOT compute environments. This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified.
 	// +kubebuilder:validation:Optional
 	SpotIAMFleetRole *string `json:"spotIamFleetRole,omitempty" tf:"spot_iam_fleet_role,omitempty"`
 
@@ -448,7 +448,7 @@ type EC2ConfigurationParameters struct {
 
 type EksConfigurationInitParameters struct {
 
-	// The Amazon Resource Name (ARN) of the Amazon EKS cluster.
+	// ARN of the Amazon EKS cluster.
 	EksClusterArn *string `json:"eksClusterArn,omitempty" tf:"eks_cluster_arn,omitempty"`
 
 	// The namespace of the Amazon EKS cluster. AWS Batch manages pods in this namespace.
@@ -457,7 +457,7 @@ type EksConfigurationInitParameters struct {
 
 type EksConfigurationObservation struct {
 
-	// The Amazon Resource Name (ARN) of the Amazon EKS cluster.
+	// ARN of the Amazon EKS cluster.
 	EksClusterArn *string `json:"eksClusterArn,omitempty" tf:"eks_cluster_arn,omitempty"`
 
 	// The namespace of the Amazon EKS cluster. AWS Batch manages pods in this namespace.
@@ -466,7 +466,7 @@ type EksConfigurationObservation struct {
 
 type EksConfigurationParameters struct {
 
-	// The Amazon Resource Name (ARN) of the Amazon EKS cluster.
+	// ARN of the Amazon EKS cluster.
 	// +kubebuilder:validation:Optional
 	EksClusterArn *string `json:"eksClusterArn" tf:"eks_cluster_arn,omitempty"`
 

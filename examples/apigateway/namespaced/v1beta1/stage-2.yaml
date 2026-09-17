@@ -46,13 +46,13 @@ spec:
     name: my-usage-plan
     productCode: MYCODE
     quotaSettings:
-      - limit: 20
-        offset: 2
-        period: WEEK
+      limit: 20
+      offset: 2
+      period: WEEK
     region: us-west-1
     throttleSettings:
-      - burstLimit: 5
-        rateLimit: 10
+      burstLimit: 5
+      rateLimit: 10
 ---
 apiVersion: apigateway.aws.m.upbound.io/v1beta1
 kind: APIKey
@@ -163,7 +163,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: stage
     settings:
-      - metricsEnabled: true
+      metricsEnabled: true
     stageNameSelector:
       matchLabels:
         testing.upbound.io/example-name: stage

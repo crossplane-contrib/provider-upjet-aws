@@ -4137,6 +4137,16 @@ func (in *EncryptionAtRestInitParameters) DeepCopyInto(out *EncryptionAtRestInit
 		*out = new(string)
 		**out = **in
 	}
+	if in.CatalogEncryptionServiceRoleRef != nil {
+		in, out := &in.CatalogEncryptionServiceRoleRef, &out.CatalogEncryptionServiceRoleRef
+		*out = new(v2.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.CatalogEncryptionServiceRoleSelector != nil {
+		in, out := &in.CatalogEncryptionServiceRoleSelector, &out.CatalogEncryptionServiceRoleSelector
+		*out = new(v2.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.SseAwsKMSKeyID != nil {
 		in, out := &in.SseAwsKMSKeyID, &out.SseAwsKMSKeyID
 		*out = new(string)
@@ -4206,6 +4216,16 @@ func (in *EncryptionAtRestParameters) DeepCopyInto(out *EncryptionAtRestParamete
 		in, out := &in.CatalogEncryptionServiceRole, &out.CatalogEncryptionServiceRole
 		*out = new(string)
 		**out = **in
+	}
+	if in.CatalogEncryptionServiceRoleRef != nil {
+		in, out := &in.CatalogEncryptionServiceRoleRef, &out.CatalogEncryptionServiceRoleRef
+		*out = new(v2.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.CatalogEncryptionServiceRoleSelector != nil {
+		in, out := &in.CatalogEncryptionServiceRoleSelector, &out.CatalogEncryptionServiceRoleSelector
+		*out = new(v2.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.SseAwsKMSKeyID != nil {
 		in, out := &in.SseAwsKMSKeyID, &out.SseAwsKMSKeyID

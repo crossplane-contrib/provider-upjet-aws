@@ -720,8 +720,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The Amazon Resource Name (ARN) of the security group
-                      rule.
+                    description: ARN of the security group rule.
                     type: string
                   cidrIpv4:
                     description: The source IPv4 CIDR range.

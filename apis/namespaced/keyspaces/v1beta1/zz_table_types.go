@@ -150,7 +150,7 @@ type CommentParameters struct {
 
 type EncryptionSpecificationInitParameters struct {
 
-	// The Amazon Resource Name (ARN) of the customer managed KMS key.
+	// ARN of the customer managed KMS key.
 	KMSKeyIdentifier *string `json:"kmsKeyIdentifier,omitempty" tf:"kms_key_identifier,omitempty"`
 
 	// The encryption option specified for the table. Valid values: AWS_OWNED_KMS_KEY, CUSTOMER_MANAGED_KMS_KEY. The default value is AWS_OWNED_KMS_KEY.
@@ -159,7 +159,7 @@ type EncryptionSpecificationInitParameters struct {
 
 type EncryptionSpecificationObservation struct {
 
-	// The Amazon Resource Name (ARN) of the customer managed KMS key.
+	// ARN of the customer managed KMS key.
 	KMSKeyIdentifier *string `json:"kmsKeyIdentifier,omitempty" tf:"kms_key_identifier,omitempty"`
 
 	// The encryption option specified for the table. Valid values: AWS_OWNED_KMS_KEY, CUSTOMER_MANAGED_KMS_KEY. The default value is AWS_OWNED_KMS_KEY.
@@ -168,7 +168,7 @@ type EncryptionSpecificationObservation struct {
 
 type EncryptionSpecificationParameters struct {
 
-	// The Amazon Resource Name (ARN) of the customer managed KMS key.
+	// ARN of the customer managed KMS key.
 	// +kubebuilder:validation:Optional
 	KMSKeyIdentifier *string `json:"kmsKeyIdentifier,omitempty" tf:"kms_key_identifier,omitempty"`
 

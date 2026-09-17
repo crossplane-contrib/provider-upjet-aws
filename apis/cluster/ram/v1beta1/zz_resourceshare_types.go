@@ -15,36 +15,36 @@ import (
 
 type ResourceShareConfigurationInitParameters struct {
 
-	// Specifies whether consumer account retains access to resource share after leaving AWS organization.
+	// Whether consumer account retains access to resource share after leaving AWS organization.
 	RetainSharingOnAccountLeaveOrganization *bool `json:"retainSharingOnAccountLeaveOrganization,omitempty" tf:"retain_sharing_on_account_leave_organization,omitempty"`
 }
 
 type ResourceShareConfigurationObservation struct {
 
-	// Specifies whether consumer account retains access to resource share after leaving AWS organization.
+	// Whether consumer account retains access to resource share after leaving AWS organization.
 	RetainSharingOnAccountLeaveOrganization *bool `json:"retainSharingOnAccountLeaveOrganization,omitempty" tf:"retain_sharing_on_account_leave_organization,omitempty"`
 }
 
 type ResourceShareConfigurationParameters struct {
 
-	// Specifies whether consumer account retains access to resource share after leaving AWS organization.
+	// Whether consumer account retains access to resource share after leaving AWS organization.
 	// +kubebuilder:validation:Optional
 	RetainSharingOnAccountLeaveOrganization *bool `json:"retainSharingOnAccountLeaveOrganization,omitempty" tf:"retain_sharing_on_account_leave_organization,omitempty"`
 }
 
 type ResourceShareInitParameters struct {
 
-	// Indicates whether principals outside your organization can be associated with a resource share.
+	// Whether principals outside your organization can be associated with a resource share.
 	AllowExternalPrincipals *bool `json:"allowExternalPrincipals,omitempty" tf:"allow_external_principals,omitempty"`
 
-	// The name of the resource share.
+	// Name of the resource share.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Specifies the Amazon Resource Names (ARNs) of the RAM permission to associate with the resource share. If you do not specify an ARN for the permission, RAM automatically attaches the default version of the permission for each resource type. You can associate only one permission with each resource type included in the resource share.
+	// ARNs of the RAM permission to associate with the resource share. If you do not specify an ARN for the permission, RAM automatically attaches the default version of the permission for each resource type. You can associate only one permission with each resource type included in the resource share.
 	// +listType=set
 	PermissionArns []*string `json:"permissionArns,omitempty" tf:"permission_arns,omitempty"`
 
-	// A block that specifies the configuration of the resource share. See resource_share_configuration Block for details.
+	// Configuration block for the resource share. See resource_share_configuration Block for details.
 	ResourceShareConfiguration *ResourceShareConfigurationInitParameters `json:"resourceShareConfiguration,omitempty" tf:"resource_share_configuration,omitempty"`
 
 	// Key-value map of resource tags.
@@ -54,19 +54,19 @@ type ResourceShareInitParameters struct {
 
 type ResourceShareObservation struct {
 
-	// Indicates whether principals outside your organization can be associated with a resource share.
+	// Whether principals outside your organization can be associated with a resource share.
 	AllowExternalPrincipals *bool `json:"allowExternalPrincipals,omitempty" tf:"allow_external_principals,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the resource share.
+	// ARN of the resource share.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the resource share.
+	// ARN of the resource share.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The name of the resource share.
+	// Name of the resource share.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Specifies the Amazon Resource Names (ARNs) of the RAM permission to associate with the resource share. If you do not specify an ARN for the permission, RAM automatically attaches the default version of the permission for each resource type. You can associate only one permission with each resource type included in the resource share.
+	// ARNs of the RAM permission to associate with the resource share. If you do not specify an ARN for the permission, RAM automatically attaches the default version of the permission for each resource type. You can associate only one permission with each resource type included in the resource share.
 	// +listType=set
 	PermissionArns []*string `json:"permissionArns,omitempty" tf:"permission_arns,omitempty"`
 
@@ -74,29 +74,29 @@ type ResourceShareObservation struct {
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// A block that specifies the configuration of the resource share. See resource_share_configuration Block for details.
+	// Configuration block for the resource share. See resource_share_configuration Block for details.
 	ResourceShareConfiguration *ResourceShareConfigurationObservation `json:"resourceShareConfiguration,omitempty" tf:"resource_share_configuration,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type ResourceShareParameters struct {
 
-	// Indicates whether principals outside your organization can be associated with a resource share.
+	// Whether principals outside your organization can be associated with a resource share.
 	// +kubebuilder:validation:Optional
 	AllowExternalPrincipals *bool `json:"allowExternalPrincipals,omitempty" tf:"allow_external_principals,omitempty"`
 
-	// The name of the resource share.
+	// Name of the resource share.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Specifies the Amazon Resource Names (ARNs) of the RAM permission to associate with the resource share. If you do not specify an ARN for the permission, RAM automatically attaches the default version of the permission for each resource type. You can associate only one permission with each resource type included in the resource share.
+	// ARNs of the RAM permission to associate with the resource share. If you do not specify an ARN for the permission, RAM automatically attaches the default version of the permission for each resource type. You can associate only one permission with each resource type included in the resource share.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	PermissionArns []*string `json:"permissionArns,omitempty" tf:"permission_arns,omitempty"`
@@ -106,7 +106,7 @@ type ResourceShareParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// A block that specifies the configuration of the resource share. See resource_share_configuration Block for details.
+	// Configuration block for the resource share. See resource_share_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	ResourceShareConfiguration *ResourceShareConfigurationParameters `json:"resourceShareConfiguration,omitempty" tf:"resource_share_configuration,omitempty"`
 

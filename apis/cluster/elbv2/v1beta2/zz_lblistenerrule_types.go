@@ -620,7 +620,7 @@ type ConditionInitParameters struct {
 	// Query strings to match. Query String block fields documented below.
 	QueryString []QueryStringInitParameters `json:"queryString,omitempty" tf:"query_string,omitempty"`
 
-	// Contains a single values item which is a list of source IP CIDR notations to match. You can use both IPv4 and IPv6 addresses. Wildcards are not supported. Condition is satisfied if the source IP address of the request matches one of the CIDR blocks. Condition is not satisfied by the addresses in the X-Forwarded-For header, use http_header condition instead.
+	// Source IP address to match. For ALB, use values to specify CIDR ranges. For NLB, use ip_address_type to match the IP address type (ipv4 or ipv6). Source IP block fields documented below.
 	SourceIP *SourceIPInitParameters `json:"sourceIp,omitempty" tf:"source_ip,omitempty"`
 }
 
@@ -641,7 +641,7 @@ type ConditionObservation struct {
 	// Query strings to match. Query String block fields documented below.
 	QueryString []QueryStringObservation `json:"queryString,omitempty" tf:"query_string,omitempty"`
 
-	// Contains a single values item which is a list of source IP CIDR notations to match. You can use both IPv4 and IPv6 addresses. Wildcards are not supported. Condition is satisfied if the source IP address of the request matches one of the CIDR blocks. Condition is not satisfied by the addresses in the X-Forwarded-For header, use http_header condition instead.
+	// Source IP address to match. For ALB, use values to specify CIDR ranges. For NLB, use ip_address_type to match the IP address type (ipv4 or ipv6). Source IP block fields documented below.
 	SourceIP *SourceIPObservation `json:"sourceIp,omitempty" tf:"source_ip,omitempty"`
 }
 
@@ -667,7 +667,7 @@ type ConditionParameters struct {
 	// +kubebuilder:validation:Optional
 	QueryString []QueryStringParameters `json:"queryString,omitempty" tf:"query_string,omitempty"`
 
-	// Contains a single values item which is a list of source IP CIDR notations to match. You can use both IPv4 and IPv6 addresses. Wildcards are not supported. Condition is satisfied if the source IP address of the request matches one of the CIDR blocks. Condition is not satisfied by the addresses in the X-Forwarded-For header, use http_header condition instead.
+	// Source IP address to match. For ALB, use values to specify CIDR ranges. For NLB, use ip_address_type to match the IP address type (ipv4 or ipv6). Source IP block fields documented below.
 	// +kubebuilder:validation:Optional
 	SourceIP *SourceIPParameters `json:"sourceIp,omitempty" tf:"source_ip,omitempty"`
 }
@@ -703,7 +703,7 @@ type ForwardStickinessParameters struct {
 
 type ForwardTargetGroupInitParameters struct {
 
-	// The Amazon Resource Name (ARN) of the target group.
+	// ARN of the target group.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/elbv2/v1beta2.LBTargetGroup
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
@@ -722,7 +722,7 @@ type ForwardTargetGroupInitParameters struct {
 
 type ForwardTargetGroupObservation struct {
 
-	// The Amazon Resource Name (ARN) of the target group.
+	// ARN of the target group.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The weight. The range is 0 to 999.
@@ -731,7 +731,7 @@ type ForwardTargetGroupObservation struct {
 
 type ForwardTargetGroupParameters struct {
 
-	// The Amazon Resource Name (ARN) of the target group.
+	// ARN of the target group.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/elbv2/v1beta2.LBTargetGroup
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -759,7 +759,7 @@ type HTTPHeaderInitParameters struct {
 	// +listType=set
 	RegexValues []*string `json:"regexValues,omitempty" tf:"regex_values,omitempty"`
 
-	// Query string pairs or values to match. Query String Value blocks documented below. Multiple values blocks can be specified, see example above. Maximum size of each string is 128 characters. Comparison is case insensitive. Wildcard characters supported: * (matches 0 or more characters) and ? (matches exactly 1 character). To search for a literal '*' or '?' character in a query string, escape the character with a backslash (\). Only one pair needs to match for the condition to be satisfied.
+	// List of source IP addresses in CIDR format for Application Load Balancers. Both IPv4 and IPv6 addresses can be used. Wildcards are not supported. Condition is satisfied if the source IP address of the request matches one of the CIDR blocks. Condition is not satisfied by the addresses in the X-Forwarded-For header, use http_header condition instead.
 	// +listType=set
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
@@ -773,7 +773,7 @@ type HTTPHeaderObservation struct {
 	// +listType=set
 	RegexValues []*string `json:"regexValues,omitempty" tf:"regex_values,omitempty"`
 
-	// Query string pairs or values to match. Query String Value blocks documented below. Multiple values blocks can be specified, see example above. Maximum size of each string is 128 characters. Comparison is case insensitive. Wildcard characters supported: * (matches 0 or more characters) and ? (matches exactly 1 character). To search for a literal '*' or '?' character in a query string, escape the character with a backslash (\). Only one pair needs to match for the condition to be satisfied.
+	// List of source IP addresses in CIDR format for Application Load Balancers. Both IPv4 and IPv6 addresses can be used. Wildcards are not supported. Condition is satisfied if the source IP address of the request matches one of the CIDR blocks. Condition is not satisfied by the addresses in the X-Forwarded-For header, use http_header condition instead.
 	// +listType=set
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
@@ -789,7 +789,7 @@ type HTTPHeaderParameters struct {
 	// +listType=set
 	RegexValues []*string `json:"regexValues,omitempty" tf:"regex_values,omitempty"`
 
-	// Query string pairs or values to match. Query String Value blocks documented below. Multiple values blocks can be specified, see example above. Maximum size of each string is 128 characters. Comparison is case insensitive. Wildcard characters supported: * (matches 0 or more characters) and ? (matches exactly 1 character). To search for a literal '*' or '?' character in a query string, escape the character with a backslash (\). Only one pair needs to match for the condition to be satisfied.
+	// List of source IP addresses in CIDR format for Application Load Balancers. Both IPv4 and IPv6 addresses can be used. Wildcards are not supported. Condition is satisfied if the source IP address of the request matches one of the CIDR blocks. Condition is not satisfied by the addresses in the X-Forwarded-For header, use http_header condition instead.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
@@ -797,21 +797,21 @@ type HTTPHeaderParameters struct {
 
 type HTTPRequestMethodInitParameters struct {
 
-	// Query string pairs or values to match. Query String Value blocks documented below. Multiple values blocks can be specified, see example above. Maximum size of each string is 128 characters. Comparison is case insensitive. Wildcard characters supported: * (matches 0 or more characters) and ? (matches exactly 1 character). To search for a literal '*' or '?' character in a query string, escape the character with a backslash (\). Only one pair needs to match for the condition to be satisfied.
+	// List of source IP addresses in CIDR format for Application Load Balancers. Both IPv4 and IPv6 addresses can be used. Wildcards are not supported. Condition is satisfied if the source IP address of the request matches one of the CIDR blocks. Condition is not satisfied by the addresses in the X-Forwarded-For header, use http_header condition instead.
 	// +listType=set
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
 type HTTPRequestMethodObservation struct {
 
-	// Query string pairs or values to match. Query String Value blocks documented below. Multiple values blocks can be specified, see example above. Maximum size of each string is 128 characters. Comparison is case insensitive. Wildcard characters supported: * (matches 0 or more characters) and ? (matches exactly 1 character). To search for a literal '*' or '?' character in a query string, escape the character with a backslash (\). Only one pair needs to match for the condition to be satisfied.
+	// List of source IP addresses in CIDR format for Application Load Balancers. Both IPv4 and IPv6 addresses can be used. Wildcards are not supported. Condition is satisfied if the source IP address of the request matches one of the CIDR blocks. Condition is not satisfied by the addresses in the X-Forwarded-For header, use http_header condition instead.
 	// +listType=set
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
 type HTTPRequestMethodParameters struct {
 
-	// Query string pairs or values to match. Query String Value blocks documented below. Multiple values blocks can be specified, see example above. Maximum size of each string is 128 characters. Comparison is case insensitive. Wildcard characters supported: * (matches 0 or more characters) and ? (matches exactly 1 character). To search for a literal '*' or '?' character in a query string, escape the character with a backslash (\). Only one pair needs to match for the condition to be satisfied.
+	// List of source IP addresses in CIDR format for Application Load Balancers. Both IPv4 and IPv6 addresses can be used. Wildcards are not supported. Condition is satisfied if the source IP address of the request matches one of the CIDR blocks. Condition is not satisfied by the addresses in the X-Forwarded-For header, use http_header condition instead.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	Values []*string `json:"values" tf:"values,omitempty"`
@@ -823,7 +823,7 @@ type HostHeaderInitParameters struct {
 	// +listType=set
 	RegexValues []*string `json:"regexValues,omitempty" tf:"regex_values,omitempty"`
 
-	// List of host header value patterns to match. Maximum size of each pattern is 128 characters. Comparison is case-insensitive. Wildcard characters supported: * (matches 0 or more characters) and ? (matches exactly 1 character). Only one pattern needs to match for the condition to be satisfied. Conflicts with regex_values.
+	// List of host header value patterns to match. Maximum size of each pattern is 128 characters. Comparison is case-insensitive. Wildcard characters supported: * (matches 0 or more characters) and ? (matches exactly 1 character). Only one pattern needs to match for the condition to be satisfied. To match host headers containing a non-standard port (for example, example.com:8443), use regex_values. Conflicts with regex_values.
 	// +listType=set
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
@@ -834,7 +834,7 @@ type HostHeaderObservation struct {
 	// +listType=set
 	RegexValues []*string `json:"regexValues,omitempty" tf:"regex_values,omitempty"`
 
-	// List of host header value patterns to match. Maximum size of each pattern is 128 characters. Comparison is case-insensitive. Wildcard characters supported: * (matches 0 or more characters) and ? (matches exactly 1 character). Only one pattern needs to match for the condition to be satisfied. Conflicts with regex_values.
+	// List of host header value patterns to match. Maximum size of each pattern is 128 characters. Comparison is case-insensitive. Wildcard characters supported: * (matches 0 or more characters) and ? (matches exactly 1 character). Only one pattern needs to match for the condition to be satisfied. To match host headers containing a non-standard port (for example, example.com:8443), use regex_values. Conflicts with regex_values.
 	// +listType=set
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
@@ -846,7 +846,7 @@ type HostHeaderParameters struct {
 	// +listType=set
 	RegexValues []*string `json:"regexValues,omitempty" tf:"regex_values,omitempty"`
 
-	// List of host header value patterns to match. Maximum size of each pattern is 128 characters. Comparison is case-insensitive. Wildcard characters supported: * (matches 0 or more characters) and ? (matches exactly 1 character). Only one pattern needs to match for the condition to be satisfied. Conflicts with regex_values.
+	// List of host header value patterns to match. Maximum size of each pattern is 128 characters. Comparison is case-insensitive. Wildcard characters supported: * (matches 0 or more characters) and ? (matches exactly 1 character). Only one pattern needs to match for the condition to be satisfied. To match host headers containing a non-standard port (for example, example.com:8443), use regex_values. Conflicts with regex_values.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
@@ -879,7 +879,7 @@ type JwtValidationAdditionalClaimInitParameters struct {
 	// Name of the claim to validate. exp, iss, nbf, or iat cannot be specified because they are validated by default.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Query string pairs or values to match. Query String Value blocks documented below. Multiple values blocks can be specified, see example above. Maximum size of each string is 128 characters. Comparison is case insensitive. Wildcard characters supported: * (matches 0 or more characters) and ? (matches exactly 1 character). To search for a literal '*' or '?' character in a query string, escape the character with a backslash (\). Only one pair needs to match for the condition to be satisfied.
+	// List of source IP addresses in CIDR format for Application Load Balancers. Both IPv4 and IPv6 addresses can be used. Wildcards are not supported. Condition is satisfied if the source IP address of the request matches one of the CIDR blocks. Condition is not satisfied by the addresses in the X-Forwarded-For header, use http_header condition instead.
 	// +listType=set
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
@@ -892,7 +892,7 @@ type JwtValidationAdditionalClaimObservation struct {
 	// Name of the claim to validate. exp, iss, nbf, or iat cannot be specified because they are validated by default.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Query string pairs or values to match. Query String Value blocks documented below. Multiple values blocks can be specified, see example above. Maximum size of each string is 128 characters. Comparison is case insensitive. Wildcard characters supported: * (matches 0 or more characters) and ? (matches exactly 1 character). To search for a literal '*' or '?' character in a query string, escape the character with a backslash (\). Only one pair needs to match for the condition to be satisfied.
+	// List of source IP addresses in CIDR format for Application Load Balancers. Both IPv4 and IPv6 addresses can be used. Wildcards are not supported. Condition is satisfied if the source IP address of the request matches one of the CIDR blocks. Condition is not satisfied by the addresses in the X-Forwarded-For header, use http_header condition instead.
 	// +listType=set
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
@@ -907,7 +907,7 @@ type JwtValidationAdditionalClaimParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// Query string pairs or values to match. Query String Value blocks documented below. Multiple values blocks can be specified, see example above. Maximum size of each string is 128 characters. Comparison is case insensitive. Wildcard characters supported: * (matches 0 or more characters) and ? (matches exactly 1 character). To search for a literal '*' or '?' character in a query string, escape the character with a backslash (\). Only one pair needs to match for the condition to be satisfied.
+	// List of source IP addresses in CIDR format for Application Load Balancers. Both IPv4 and IPv6 addresses can be used. Wildcards are not supported. Condition is satisfied if the source IP address of the request matches one of the CIDR blocks. Condition is not satisfied by the addresses in the X-Forwarded-For header, use http_header condition instead.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	Values []*string `json:"values" tf:"values,omitempty"`
@@ -1030,7 +1030,7 @@ type PathPatternInitParameters struct {
 	// +listType=set
 	RegexValues []*string `json:"regexValues,omitempty" tf:"regex_values,omitempty"`
 
-	// Query string pairs or values to match. Query String Value blocks documented below. Multiple values blocks can be specified, see example above. Maximum size of each string is 128 characters. Comparison is case insensitive. Wildcard characters supported: * (matches 0 or more characters) and ? (matches exactly 1 character). To search for a literal '*' or '?' character in a query string, escape the character with a backslash (\). Only one pair needs to match for the condition to be satisfied.
+	// List of source IP addresses in CIDR format for Application Load Balancers. Both IPv4 and IPv6 addresses can be used. Wildcards are not supported. Condition is satisfied if the source IP address of the request matches one of the CIDR blocks. Condition is not satisfied by the addresses in the X-Forwarded-For header, use http_header condition instead.
 	// +listType=set
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
@@ -1041,7 +1041,7 @@ type PathPatternObservation struct {
 	// +listType=set
 	RegexValues []*string `json:"regexValues,omitempty" tf:"regex_values,omitempty"`
 
-	// Query string pairs or values to match. Query String Value blocks documented below. Multiple values blocks can be specified, see example above. Maximum size of each string is 128 characters. Comparison is case insensitive. Wildcard characters supported: * (matches 0 or more characters) and ? (matches exactly 1 character). To search for a literal '*' or '?' character in a query string, escape the character with a backslash (\). Only one pair needs to match for the condition to be satisfied.
+	// List of source IP addresses in CIDR format for Application Load Balancers. Both IPv4 and IPv6 addresses can be used. Wildcards are not supported. Condition is satisfied if the source IP address of the request matches one of the CIDR blocks. Condition is not satisfied by the addresses in the X-Forwarded-For header, use http_header condition instead.
 	// +listType=set
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
@@ -1053,7 +1053,7 @@ type PathPatternParameters struct {
 	// +listType=set
 	RegexValues []*string `json:"regexValues,omitempty" tf:"regex_values,omitempty"`
 
-	// Query string pairs or values to match. Query String Value blocks documented below. Multiple values blocks can be specified, see example above. Maximum size of each string is 128 characters. Comparison is case insensitive. Wildcard characters supported: * (matches 0 or more characters) and ? (matches exactly 1 character). To search for a literal '*' or '?' character in a query string, escape the character with a backslash (\). Only one pair needs to match for the condition to be satisfied.
+	// List of source IP addresses in CIDR format for Application Load Balancers. Both IPv4 and IPv6 addresses can be used. Wildcards are not supported. Condition is satisfied if the source IP address of the request matches one of the CIDR blocks. Condition is not satisfied by the addresses in the X-Forwarded-For header, use http_header condition instead.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
@@ -1119,24 +1119,34 @@ type RewriteParameters struct {
 
 type SourceIPInitParameters struct {
 
-	// Query string pairs or values to match. Query String Value blocks documented below. Multiple values blocks can be specified, see example above. Maximum size of each string is 128 characters. Comparison is case insensitive. Wildcard characters supported: * (matches 0 or more characters) and ? (matches exactly 1 character). To search for a literal '*' or '?' character in a query string, escape the character with a backslash (\). Only one pair needs to match for the condition to be satisfied.
+	// IP address type for Network Load Balancers. Valid values are ipv4 and ipv6.
+	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
+
+	// List of source IP addresses in CIDR format for Application Load Balancers. Both IPv4 and IPv6 addresses can be used. Wildcards are not supported. Condition is satisfied if the source IP address of the request matches one of the CIDR blocks. Condition is not satisfied by the addresses in the X-Forwarded-For header, use http_header condition instead.
 	// +listType=set
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
 type SourceIPObservation struct {
 
-	// Query string pairs or values to match. Query String Value blocks documented below. Multiple values blocks can be specified, see example above. Maximum size of each string is 128 characters. Comparison is case insensitive. Wildcard characters supported: * (matches 0 or more characters) and ? (matches exactly 1 character). To search for a literal '*' or '?' character in a query string, escape the character with a backslash (\). Only one pair needs to match for the condition to be satisfied.
+	// IP address type for Network Load Balancers. Valid values are ipv4 and ipv6.
+	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
+
+	// List of source IP addresses in CIDR format for Application Load Balancers. Both IPv4 and IPv6 addresses can be used. Wildcards are not supported. Condition is satisfied if the source IP address of the request matches one of the CIDR blocks. Condition is not satisfied by the addresses in the X-Forwarded-For header, use http_header condition instead.
 	// +listType=set
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
 type SourceIPParameters struct {
 
-	// Query string pairs or values to match. Query String Value blocks documented below. Multiple values blocks can be specified, see example above. Maximum size of each string is 128 characters. Comparison is case insensitive. Wildcard characters supported: * (matches 0 or more characters) and ? (matches exactly 1 character). To search for a literal '*' or '?' character in a query string, escape the character with a backslash (\). Only one pair needs to match for the condition to be satisfied.
+	// IP address type for Network Load Balancers. Valid values are ipv4 and ipv6.
+	// +kubebuilder:validation:Optional
+	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
+
+	// List of source IP addresses in CIDR format for Application Load Balancers. Both IPv4 and IPv6 addresses can be used. Wildcards are not supported. Condition is satisfied if the source IP address of the request matches one of the CIDR blocks. Condition is not satisfied by the addresses in the X-Forwarded-For header, use http_header condition instead.
 	// +kubebuilder:validation:Optional
 	// +listType=set
-	Values []*string `json:"values" tf:"values,omitempty"`
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
 type TransformInitParameters struct {

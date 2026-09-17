@@ -1191,7 +1191,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The Amazon Resource Name (ARN) of the VPC endpoint.
+                    description: ARN of the VPC endpoint.
                     type: string
                   autoAccept:
                     description: Accept the VPC endpoint (the VPC endpoint and service

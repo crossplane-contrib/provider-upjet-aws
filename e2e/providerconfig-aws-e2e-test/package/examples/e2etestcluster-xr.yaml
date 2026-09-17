@@ -1,0 +1,52 @@
+apiVersion: aws.platformref.upbound.io/v1alpha1
+kind: E2ETestCluster
+metadata:
+  name: aws-pc-e2e-test
+  namespace: upbound-system
+spec:
+  parameters:
+    id: aws-pc-e2e-test
+    region: us-west-2
+    version: "1.35"
+    # iam:
+      # (optional) replace with your custom roleArn that will administer the EKS cluster:
+      # principalArn: "arn:aws:iam::123456789012:role/myeksadminrole"
+    nodes:
+      count: 1
+      instanceType: t3.medium
+    irsa:
+      condition: StringEquals
+      policyDocument: |
+        {
+            "Version": "2012-10-17",
+            "Statement": [
+                {
+                    "Action": [
+                        "ec2:*"
+                    ],
+                    "Effect": "Allow",
+                    "Resource": "*"
+                }
+            ]
+        }
+      serviceAccount:
+        name: my-xpsa
+        namespace: upbound-system
+    targetClusterParameters:
+      provider:
+        familyPackage: "xpkg.upbound.io/upbound/provider-family-aws:v2.7.0"
+        ec2Package: "xpkg.upbound.io/upbound/provider-aws-ec2:v2.7.0"
+        rdsPackage: "xpkg.upbound.io/upbound/provider-aws-rds:v2.7.0"
+        kafkaPackage: "xpkg.upbound.io/upbound/provider-aws-kafka:v2.7.0"
+      crossplaneVersion: 2.4.0
+status:
+  irsa:
+    roleArn: abc
+    chainedRoleARNs:
+      - "chained-role-arn"
+  webIdentity:
+    roleArn: webid-role-arn
+    chainedRoleARNs:
+      - "chained-role-arn"
+  podIdentity:
+    roleArn: podidentity-role-arn

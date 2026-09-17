@@ -593,9 +593,9 @@ spec:
                     description: Name for the VPC connector.
                     type: string
                   vpcConnectorRevision:
-                    description: 'The revision of VPC connector. It''s unique among
-                      all the active connectors ("Status": "ACTIVE") that share the
-                      same Name.'
+                    description: 'Revision of VPC connector. It''s unique among all
+                      the active connectors ("Status": "ACTIVE") that share the same
+                      Name.'
                     type: number
                 type: object
               conditions:

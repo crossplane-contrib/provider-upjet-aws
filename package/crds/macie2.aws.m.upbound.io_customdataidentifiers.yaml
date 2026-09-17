@@ -240,8 +240,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The Amazon Resource Name (ARN) of the custom data
-                      identifier.
+                    description: ARN of the custom data identifier.
                     type: string
                   createdAt:
                     description: The date and time, in UTC and extended RFC 3339 format,

@@ -358,8 +358,7 @@ spec:
                       organization to register as a delegated administrator.
                     type: string
                   arn:
-                    description: The Amazon Resource Name (ARN) of the delegated administrator's
-                      account.
+                    description: ARN of the delegated administrator's account.
                     type: string
                   delegationEnabledDate:
                     description: The date when the account was made a delegated administrator.

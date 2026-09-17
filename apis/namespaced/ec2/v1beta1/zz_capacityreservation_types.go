@@ -42,10 +42,10 @@ type CapacityReservationInitParameters struct {
 	// The instance type for which to reserve capacity.
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the Outpost on which to create the Capacity Reservation.
+	// ARN of the Outpost on which to create the Capacity Reservation.
 	OutpostArn *string `json:"outpostArn,omitempty" tf:"outpost_arn,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the cluster placement group in which to create the Capacity Reservation.
+	// ARN of the cluster placement group in which to create the Capacity Reservation.
 	PlacementGroupArn *string `json:"placementGroupArn,omitempty" tf:"placement_group_arn,omitempty"`
 
 	// Key-value map of resource tags.
@@ -91,13 +91,13 @@ type CapacityReservationObservation struct {
 	// The instance type for which to reserve capacity.
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the Outpost on which to create the Capacity Reservation.
+	// ARN of the Outpost on which to create the Capacity Reservation.
 	OutpostArn *string `json:"outpostArn,omitempty" tf:"outpost_arn,omitempty"`
 
 	// The ID of the AWS account that owns the Capacity Reservation.
 	OwnerID *string `json:"ownerId,omitempty" tf:"owner_id,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the cluster placement group in which to create the Capacity Reservation.
+	// ARN of the cluster placement group in which to create the Capacity Reservation.
 	PlacementGroupArn *string `json:"placementGroupArn,omitempty" tf:"placement_group_arn,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -154,11 +154,11 @@ type CapacityReservationParameters struct {
 	// +kubebuilder:validation:Optional
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the Outpost on which to create the Capacity Reservation.
+	// ARN of the Outpost on which to create the Capacity Reservation.
 	// +kubebuilder:validation:Optional
 	OutpostArn *string `json:"outpostArn,omitempty" tf:"outpost_arn,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the cluster placement group in which to create the Capacity Reservation.
+	// ARN of the cluster placement group in which to create the Capacity Reservation.
 	// +kubebuilder:validation:Optional
 	PlacementGroupArn *string `json:"placementGroupArn,omitempty" tf:"placement_group_arn,omitempty"`
 

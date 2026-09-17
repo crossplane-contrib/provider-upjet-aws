@@ -1009,7 +1009,7 @@ type PrivateEndpointSelfManagedLatticeResourceParameters struct {
 
 	// Identifier of the VPC Lattice resource configuration.
 	// +kubebuilder:validation:Optional
-	ResourceConfigurationIdentifier *string `json:"resourceConfigurationIdentifier" tf:"resource_configuration_identifier,omitempty"`
+	ResourceConfigurationIdentifier *string `json:"resourceConfigurationIdentifier,omitempty" tf:"resource_configuration_identifier,omitempty"`
 }
 
 type ProtocolConfigurationInitParameters struct {
@@ -1157,7 +1157,7 @@ type SelfManagedLatticeResourceParameters struct {
 
 	// Identifier of the VPC Lattice resource configuration.
 	// +kubebuilder:validation:Optional
-	ResourceConfigurationIdentifier *string `json:"resourceConfigurationIdentifier" tf:"resource_configuration_identifier,omitempty"`
+	ResourceConfigurationIdentifier *string `json:"resourceConfigurationIdentifier,omitempty" tf:"resource_configuration_identifier,omitempty"`
 }
 
 type SessionStorageInitParameters struct {

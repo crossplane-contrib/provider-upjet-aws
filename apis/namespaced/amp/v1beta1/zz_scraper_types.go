@@ -15,7 +15,7 @@ import (
 
 type AmpInitParameters struct {
 
-	// The Amazon Resource Name (ARN) of the prometheus workspace.
+	// ARN of the prometheus workspace.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/amp/v1beta1.Workspace
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	WorkspaceArn *string `json:"workspaceArn,omitempty" tf:"workspace_arn,omitempty"`
@@ -31,13 +31,13 @@ type AmpInitParameters struct {
 
 type AmpObservation struct {
 
-	// The Amazon Resource Name (ARN) of the prometheus workspace.
+	// ARN of the prometheus workspace.
 	WorkspaceArn *string `json:"workspaceArn,omitempty" tf:"workspace_arn,omitempty"`
 }
 
 type AmpParameters struct {
 
-	// The Amazon Resource Name (ARN) of the prometheus workspace.
+	// ARN of the prometheus workspace.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/amp/v1beta1.Workspace
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -52,28 +52,57 @@ type AmpParameters struct {
 	WorkspaceArnSelector *v2.NamespacedSelector `json:"workspaceArnSelector,omitempty" tf:"-"`
 }
 
+type CloudwatchInitParameters struct {
+
+	// ARN of the CloudWatch dataset. Use arn:aws:cloudwatch:{region}:{account}:dataset/default for the default dataset.
+	DatasetArn *string `json:"datasetArn,omitempty" tf:"dataset_arn,omitempty"`
+}
+
+type CloudwatchObservation struct {
+
+	// ARN of the CloudWatch dataset. Use arn:aws:cloudwatch:{region}:{account}:dataset/default for the default dataset.
+	DatasetArn *string `json:"datasetArn,omitempty" tf:"dataset_arn,omitempty"`
+}
+
+type CloudwatchParameters struct {
+
+	// ARN of the CloudWatch dataset. Use arn:aws:cloudwatch:{region}:{account}:dataset/default for the default dataset.
+	// +kubebuilder:validation:Optional
+	DatasetArn *string `json:"datasetArn" tf:"dataset_arn,omitempty"`
+}
+
 type DestinationInitParameters struct {
 
-	// Configuration block for an Amazon Managed Prometheus workspace destination. See amp.
+	// Configuration block for an Amazon Managed Prometheus workspace destination. See amp Block for details.
 	Amp []AmpInitParameters `json:"amp,omitempty" tf:"amp,omitempty"`
+
+	// Configuration block for a CloudWatch Metrics destination. See cloudwatch Block for details.
+	Cloudwatch []CloudwatchInitParameters `json:"cloudwatch,omitempty" tf:"cloudwatch,omitempty"`
 }
 
 type DestinationObservation struct {
 
-	// Configuration block for an Amazon Managed Prometheus workspace destination. See amp.
+	// Configuration block for an Amazon Managed Prometheus workspace destination. See amp Block for details.
 	Amp []AmpObservation `json:"amp,omitempty" tf:"amp,omitempty"`
+
+	// Configuration block for a CloudWatch Metrics destination. See cloudwatch Block for details.
+	Cloudwatch []CloudwatchObservation `json:"cloudwatch,omitempty" tf:"cloudwatch,omitempty"`
 }
 
 type DestinationParameters struct {
 
-	// Configuration block for an Amazon Managed Prometheus workspace destination. See amp.
+	// Configuration block for an Amazon Managed Prometheus workspace destination. See amp Block for details.
 	// +kubebuilder:validation:Optional
 	Amp []AmpParameters `json:"amp,omitempty" tf:"amp,omitempty"`
+
+	// Configuration block for a CloudWatch Metrics destination. See cloudwatch Block for details.
+	// +kubebuilder:validation:Optional
+	Cloudwatch []CloudwatchParameters `json:"cloudwatch,omitempty" tf:"cloudwatch,omitempty"`
 }
 
 type EksInitParameters struct {
 
-	// The Amazon Resource Name (ARN) of the source EKS cluster.
+	// ARN of the source EKS cluster.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/eks/v1beta1.Cluster
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	ClusterArn *string `json:"clusterArn,omitempty" tf:"cluster_arn,omitempty"`
@@ -115,7 +144,7 @@ type EksInitParameters struct {
 
 type EksObservation struct {
 
-	// The Amazon Resource Name (ARN) of the source EKS cluster.
+	// ARN of the source EKS cluster.
 	ClusterArn *string `json:"clusterArn,omitempty" tf:"cluster_arn,omitempty"`
 
 	// List of the security group IDs for the Amazon EKS cluster VPC configuration.
@@ -129,7 +158,7 @@ type EksObservation struct {
 
 type EksParameters struct {
 
-	// The Amazon Resource Name (ARN) of the source EKS cluster.
+	// ARN of the source EKS cluster.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/eks/v1beta1.Cluster
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -172,9 +201,67 @@ type EksParameters struct {
 	SubnetIdsSelector *v2.NamespacedSelector `json:"subnetIdsSelector,omitempty" tf:"-"`
 }
 
+type ExporterInitParameters struct {
+
+	// Configuration block for an OpenSearch exporter. See opensearch Block for details.
+	Opensearch []OpensearchInitParameters `json:"opensearch,omitempty" tf:"opensearch,omitempty"`
+}
+
+type ExporterObservation struct {
+
+	// Configuration block for an OpenSearch exporter. See opensearch Block for details.
+	Opensearch []OpensearchObservation `json:"opensearch,omitempty" tf:"opensearch,omitempty"`
+}
+
+type ExporterParameters struct {
+
+	// Configuration block for an OpenSearch exporter. See opensearch Block for details.
+	// +kubebuilder:validation:Optional
+	Opensearch []OpensearchParameters `json:"opensearch,omitempty" tf:"opensearch,omitempty"`
+}
+
+type OpensearchInitParameters struct {
+
+	// ARN of the OpenSearch domain.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/opensearch/v1beta1.Domain
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
+	DomainArn *string `json:"domainArn,omitempty" tf:"domain_arn,omitempty"`
+
+	// Reference to a Domain in opensearch to populate domainArn.
+	// +kubebuilder:validation:Optional
+	DomainArnRef *v2.NamespacedReference `json:"domainArnRef,omitempty" tf:"-"`
+
+	// Selector for a Domain in opensearch to populate domainArn.
+	// +kubebuilder:validation:Optional
+	DomainArnSelector *v2.NamespacedSelector `json:"domainArnSelector,omitempty" tf:"-"`
+}
+
+type OpensearchObservation struct {
+
+	// ARN of the OpenSearch domain.
+	DomainArn *string `json:"domainArn,omitempty" tf:"domain_arn,omitempty"`
+}
+
+type OpensearchParameters struct {
+
+	// ARN of the OpenSearch domain.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/opensearch/v1beta1.Domain
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
+	// +kubebuilder:validation:Optional
+	DomainArn *string `json:"domainArn,omitempty" tf:"domain_arn,omitempty"`
+
+	// Reference to a Domain in opensearch to populate domainArn.
+	// +kubebuilder:validation:Optional
+	DomainArnRef *v2.NamespacedReference `json:"domainArnRef,omitempty" tf:"-"`
+
+	// Selector for a Domain in opensearch to populate domainArn.
+	// +kubebuilder:validation:Optional
+	DomainArnSelector *v2.NamespacedSelector `json:"domainArnSelector,omitempty" tf:"-"`
+}
+
 type RoleConfigurationInitParameters struct {
 
-	// The Amazon Resource Name (ARN) of the source role configuration. Must be an IAM role ARN.
+	// ARN of the source role configuration. Must be an IAM role ARN.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	SourceRoleArn *string `json:"sourceRoleArn,omitempty" tf:"source_role_arn,omitempty"`
@@ -187,22 +274,22 @@ type RoleConfigurationInitParameters struct {
 	// +kubebuilder:validation:Optional
 	SourceRoleArnSelector *v2.NamespacedSelector `json:"sourceRoleArnSelector,omitempty" tf:"-"`
 
-	// The Amazon Resource Name (ARN) of the target role configuration. Must be an IAM role ARN.
+	// ARN of the target role configuration. Must be an IAM role ARN.
 	TargetRoleArn *string `json:"targetRoleArn,omitempty" tf:"target_role_arn,omitempty"`
 }
 
 type RoleConfigurationObservation struct {
 
-	// The Amazon Resource Name (ARN) of the source role configuration. Must be an IAM role ARN.
+	// ARN of the source role configuration. Must be an IAM role ARN.
 	SourceRoleArn *string `json:"sourceRoleArn,omitempty" tf:"source_role_arn,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the target role configuration. Must be an IAM role ARN.
+	// ARN of the target role configuration. Must be an IAM role ARN.
 	TargetRoleArn *string `json:"targetRoleArn,omitempty" tf:"target_role_arn,omitempty"`
 }
 
 type RoleConfigurationParameters struct {
 
-	// The Amazon Resource Name (ARN) of the source role configuration. Must be an IAM role ARN.
+	// ARN of the source role configuration. Must be an IAM role ARN.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -216,95 +303,110 @@ type RoleConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	SourceRoleArnSelector *v2.NamespacedSelector `json:"sourceRoleArnSelector,omitempty" tf:"-"`
 
-	// The Amazon Resource Name (ARN) of the target role configuration. Must be an IAM role ARN.
+	// ARN of the target role configuration. Must be an IAM role ARN.
 	// +kubebuilder:validation:Optional
 	TargetRoleArn *string `json:"targetRoleArn,omitempty" tf:"target_role_arn,omitempty"`
 }
 
 type ScraperInitParameters struct {
 
-	// a name to associate with the managed scraper. This is for your use, and does not need to be unique.
+	// Name to associate with the managed scraper. This is for your use, and does not need to be unique.
 	Alias *string `json:"alias,omitempty" tf:"alias,omitempty"`
 
-	// Configuration block for the managed scraper to send metrics to. See destination.
+	// Configuration block for the managed scraper to send metrics to. See destination Block for details.
 	Destination []DestinationInitParameters `json:"destination,omitempty" tf:"destination,omitempty"`
 
-	// Configuration block to enable writing to an Amazon Managed Service for Prometheus workspace in a different account. See role_configuration below.
+	// Configuration block for additional exporters. See exporter Block for details.
+	Exporter []ExporterInitParameters `json:"exporter,omitempty" tf:"exporter,omitempty"`
+
+	// Configuration block to enable writing to an Amazon Managed Service for Prometheus workspace in a different account. See role_configuration Block for details.
 	RoleConfiguration []RoleConfigurationInitParameters `json:"roleConfiguration,omitempty" tf:"role_configuration,omitempty"`
 
-	// The configuration file to use in the new scraper. For more information, see Scraper configuration.
+	// Configuration file to use in the new scraper. For more information, see Scraper configuration.
 	ScrapeConfiguration *string `json:"scrapeConfiguration,omitempty" tf:"scrape_configuration,omitempty"`
 
-	// Configuration block to specify where the managed scraper will collect metrics from. See source.
+	// Configuration block to specify where the managed scraper will collect metrics from. See source Block for details.
 	Source []SourceInitParameters `json:"source,omitempty" tf:"source,omitempty"`
 
+	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type ScraperObservation struct {
 
-	// a name to associate with the managed scraper. This is for your use, and does not need to be unique.
+	// Name to associate with the managed scraper. This is for your use, and does not need to be unique.
 	Alias *string `json:"alias,omitempty" tf:"alias,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the new scraper.
+	// ARN of the scraper.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// Configuration block for the managed scraper to send metrics to. See destination.
+	// Configuration block for the managed scraper to send metrics to. See destination Block for details.
 	Destination []DestinationObservation `json:"destination,omitempty" tf:"destination,omitempty"`
 
+	// Configuration block for additional exporters. See exporter Block for details.
+	Exporter []ExporterObservation `json:"exporter,omitempty" tf:"exporter,omitempty"`
+
+	// (String) ID of the scraper.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the IAM role that provides permissions for the scraper to discover, collect, and produce metrics
+	// ARN of the IAM role that provides permissions for the scraper to discover, collect, and produce metrics
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
-	// Configuration block to enable writing to an Amazon Managed Service for Prometheus workspace in a different account. See role_configuration below.
+	// Configuration block to enable writing to an Amazon Managed Service for Prometheus workspace in a different account. See role_configuration Block for details.
 	RoleConfiguration []RoleConfigurationObservation `json:"roleConfiguration,omitempty" tf:"role_configuration,omitempty"`
 
-	// The configuration file to use in the new scraper. For more information, see Scraper configuration.
+	// Configuration file to use in the new scraper. For more information, see Scraper configuration.
 	ScrapeConfiguration *string `json:"scrapeConfiguration,omitempty" tf:"scrape_configuration,omitempty"`
 
-	// Configuration block to specify where the managed scraper will collect metrics from. See source.
+	// Configuration block to specify where the managed scraper will collect metrics from. See source Block for details.
 	Source []SourceObservation `json:"source,omitempty" tf:"source,omitempty"`
 
+	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type ScraperParameters struct {
 
-	// a name to associate with the managed scraper. This is for your use, and does not need to be unique.
+	// Name to associate with the managed scraper. This is for your use, and does not need to be unique.
 	// +kubebuilder:validation:Optional
 	Alias *string `json:"alias,omitempty" tf:"alias,omitempty"`
 
-	// Configuration block for the managed scraper to send metrics to. See destination.
+	// Configuration block for the managed scraper to send metrics to. See destination Block for details.
 	// +kubebuilder:validation:Optional
 	Destination []DestinationParameters `json:"destination,omitempty" tf:"destination,omitempty"`
+
+	// Configuration block for additional exporters. See exporter Block for details.
+	// +kubebuilder:validation:Optional
+	Exporter []ExporterParameters `json:"exporter,omitempty" tf:"exporter,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// Configuration block to enable writing to an Amazon Managed Service for Prometheus workspace in a different account. See role_configuration below.
+	// Configuration block to enable writing to an Amazon Managed Service for Prometheus workspace in a different account. See role_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	RoleConfiguration []RoleConfigurationParameters `json:"roleConfiguration,omitempty" tf:"role_configuration,omitempty"`
 
-	// The configuration file to use in the new scraper. For more information, see Scraper configuration.
+	// Configuration file to use in the new scraper. For more information, see Scraper configuration.
 	// +kubebuilder:validation:Optional
 	ScrapeConfiguration *string `json:"scrapeConfiguration,omitempty" tf:"scrape_configuration,omitempty"`
 
-	// Configuration block to specify where the managed scraper will collect metrics from. See source.
+	// Configuration block to specify where the managed scraper will collect metrics from. See source Block for details.
 	// +kubebuilder:validation:Optional
 	Source []SourceParameters `json:"source,omitempty" tf:"source,omitempty"`
 
+	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -312,29 +414,29 @@ type ScraperParameters struct {
 
 type SourceInitParameters struct {
 
-	// Configuration block for an EKS cluster source. See eks.
+	// Configuration block for an EKS cluster source. See eks Block for details.
 	Eks []EksInitParameters `json:"eks,omitempty" tf:"eks,omitempty"`
 
-	// Configuration block for a VPC source. See vpc.
+	// Configuration block for a VPC source. See vpc Block for details.
 	VPC []VPCInitParameters `json:"vpc,omitempty" tf:"vpc,omitempty"`
 }
 
 type SourceObservation struct {
 
-	// Configuration block for an EKS cluster source. See eks.
+	// Configuration block for an EKS cluster source. See eks Block for details.
 	Eks []EksObservation `json:"eks,omitempty" tf:"eks,omitempty"`
 
-	// Configuration block for a VPC source. See vpc.
+	// Configuration block for a VPC source. See vpc Block for details.
 	VPC []VPCObservation `json:"vpc,omitempty" tf:"vpc,omitempty"`
 }
 
 type SourceParameters struct {
 
-	// Configuration block for an EKS cluster source. See eks.
+	// Configuration block for an EKS cluster source. See eks Block for details.
 	// +kubebuilder:validation:Optional
 	Eks []EksParameters `json:"eks,omitempty" tf:"eks,omitempty"`
 
-	// Configuration block for a VPC source. See vpc.
+	// Configuration block for a VPC source. See vpc Block for details.
 	// +kubebuilder:validation:Optional
 	VPC []VPCParameters `json:"vpc,omitempty" tf:"vpc,omitempty"`
 }

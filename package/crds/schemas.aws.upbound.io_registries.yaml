@@ -207,7 +207,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The Amazon Resource Name (ARN) of the discoverer.
+                    description: ARN of the discoverer.
                     type: string
                   description:
                     description: The description of the discoverer. Maximum of 256

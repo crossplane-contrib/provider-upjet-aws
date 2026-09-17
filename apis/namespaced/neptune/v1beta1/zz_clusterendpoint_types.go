@@ -45,7 +45,7 @@ type ClusterEndpointInitParameters struct {
 
 type ClusterEndpointObservation struct {
 
-	// The Neptune Cluster Endpoint Amazon Resource Name (ARN).
+	// Neptune Cluster Endpoint ARN.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The DB cluster identifier of the DB cluster associated with the endpoint.

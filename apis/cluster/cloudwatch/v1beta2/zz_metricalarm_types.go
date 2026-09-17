@@ -37,7 +37,7 @@ type MetricAlarmInitParameters struct {
 	// Indicates whether or not actions should be executed during any changes to the alarm's state. Defaults to true.
 	ActionsEnabled *bool `json:"actionsEnabled,omitempty" tf:"actions_enabled,omitempty"`
 
-	// The list of actions to execute when this alarm transitions into an ALARM state from any other state. Each action is specified as an Amazon Resource Name (ARN).
+	// List of actions to execute when this alarm transitions into an ALARM state from any other state. Each action is specified as an ARN.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/autoscaling/v1beta2.Policy
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +listType=set
@@ -82,7 +82,7 @@ type MetricAlarmInitParameters struct {
 	// The percentile statistic for the metric associated with the alarm. Specify a value between p0.0 and p100.
 	ExtendedStatistic *string `json:"extendedStatistic,omitempty" tf:"extended_statistic,omitempty"`
 
-	// The list of actions to execute when this alarm transitions into an INSUFFICIENT_DATA state from any other state. Each action is specified as an Amazon Resource Name (ARN).
+	// List of actions to execute when this alarm transitions into an INSUFFICIENT_DATA state from any other state. Each action is specified as an ARN.
 	// +listType=set
 	InsufficientDataActions []*string `json:"insufficientDataActions,omitempty" tf:"insufficient_data_actions,omitempty"`
 
@@ -97,7 +97,7 @@ type MetricAlarmInitParameters struct {
 	// See docs for supported metrics.
 	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
 
-	// The list of actions to execute when this alarm transitions into an OK state from any other state. Each action is specified as an Amazon Resource Name (ARN).
+	// List of actions to execute when this alarm transitions into an OK state from any other state. Each action is specified as an ARN.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/sns/v1beta1.Topic
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +listType=set
@@ -134,6 +134,9 @@ type MetricAlarmInitParameters struct {
 
 	// The unit for the alarm's associated metric.
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
+
+	// Warm-up period that delays alarm evaluation after the alarm is created. During the warm-up period the alarm stays in INSUFFICIENT_DATA and does not perform alarm actions. See warm_up_configuration below.
+	WarmUpConfiguration *WarmUpConfigurationInitParameters `json:"warmUpConfiguration,omitempty" tf:"warm_up_configuration,omitempty"`
 }
 
 type MetricAlarmObservation struct {
@@ -141,7 +144,7 @@ type MetricAlarmObservation struct {
 	// Indicates whether or not actions should be executed during any changes to the alarm's state. Defaults to true.
 	ActionsEnabled *bool `json:"actionsEnabled,omitempty" tf:"actions_enabled,omitempty"`
 
-	// The list of actions to execute when this alarm transitions into an ALARM state from any other state. Each action is specified as an Amazon Resource Name (ARN).
+	// List of actions to execute when this alarm transitions into an ALARM state from any other state. Each action is specified as an ARN.
 	// +listType=set
 	AlarmActions []*string `json:"alarmActions,omitempty" tf:"alarm_actions,omitempty"`
 
@@ -182,7 +185,7 @@ type MetricAlarmObservation struct {
 	// The ID of the health check.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The list of actions to execute when this alarm transitions into an INSUFFICIENT_DATA state from any other state. Each action is specified as an Amazon Resource Name (ARN).
+	// List of actions to execute when this alarm transitions into an INSUFFICIENT_DATA state from any other state. Each action is specified as an ARN.
 	// +listType=set
 	InsufficientDataActions []*string `json:"insufficientDataActions,omitempty" tf:"insufficient_data_actions,omitempty"`
 
@@ -197,7 +200,7 @@ type MetricAlarmObservation struct {
 	// See docs for supported metrics.
 	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
 
-	// The list of actions to execute when this alarm transitions into an OK state from any other state. Each action is specified as an Amazon Resource Name (ARN).
+	// List of actions to execute when this alarm transitions into an OK state from any other state. Each action is specified as an ARN.
 	// +listType=set
 	OkActions []*string `json:"okActions,omitempty" tf:"ok_actions,omitempty"`
 
@@ -232,6 +235,9 @@ type MetricAlarmObservation struct {
 
 	// The unit for the alarm's associated metric.
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
+
+	// Warm-up period that delays alarm evaluation after the alarm is created. During the warm-up period the alarm stays in INSUFFICIENT_DATA and does not perform alarm actions. See warm_up_configuration below.
+	WarmUpConfiguration *WarmUpConfigurationObservation `json:"warmUpConfiguration,omitempty" tf:"warm_up_configuration,omitempty"`
 }
 
 type MetricAlarmParameters struct {
@@ -240,7 +246,7 @@ type MetricAlarmParameters struct {
 	// +kubebuilder:validation:Optional
 	ActionsEnabled *bool `json:"actionsEnabled,omitempty" tf:"actions_enabled,omitempty"`
 
-	// The list of actions to execute when this alarm transitions into an ALARM state from any other state. Each action is specified as an Amazon Resource Name (ARN).
+	// List of actions to execute when this alarm transitions into an ALARM state from any other state. Each action is specified as an ARN.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/autoscaling/v1beta2.Policy
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -295,7 +301,7 @@ type MetricAlarmParameters struct {
 	// +kubebuilder:validation:Optional
 	ExtendedStatistic *string `json:"extendedStatistic,omitempty" tf:"extended_statistic,omitempty"`
 
-	// The list of actions to execute when this alarm transitions into an INSUFFICIENT_DATA state from any other state. Each action is specified as an Amazon Resource Name (ARN).
+	// List of actions to execute when this alarm transitions into an INSUFFICIENT_DATA state from any other state. Each action is specified as an ARN.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	InsufficientDataActions []*string `json:"insufficientDataActions,omitempty" tf:"insufficient_data_actions,omitempty"`
@@ -314,7 +320,7 @@ type MetricAlarmParameters struct {
 	// +kubebuilder:validation:Optional
 	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
 
-	// The list of actions to execute when this alarm transitions into an OK state from any other state. Each action is specified as an Amazon Resource Name (ARN).
+	// List of actions to execute when this alarm transitions into an OK state from any other state. Each action is specified as an ARN.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/sns/v1beta1.Topic
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -364,6 +370,10 @@ type MetricAlarmParameters struct {
 	// The unit for the alarm's associated metric.
 	// +kubebuilder:validation:Optional
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
+
+	// Warm-up period that delays alarm evaluation after the alarm is created. During the warm-up period the alarm stays in INSUFFICIENT_DATA and does not perform alarm actions. See warm_up_configuration below.
+	// +kubebuilder:validation:Optional
+	WarmUpConfiguration *WarmUpConfigurationParameters `json:"warmUpConfiguration,omitempty" tf:"warm_up_configuration,omitempty"`
 }
 
 type MetricInitParameters struct {
@@ -581,6 +591,35 @@ type PromqlCriteriaParameters struct {
 	// The duration, in seconds, that a contributor must continuously not be breaching before it transitions back to the OK state. Valid range: 0-86400.
 	// +kubebuilder:validation:Optional
 	RecoveryPeriod *float64 `json:"recoveryPeriod,omitempty" tf:"recovery_period,omitempty"`
+}
+
+type WarmUpConfigurationInitParameters struct {
+
+	// Whether to wait for the full warm-up period before evaluation begins, even if metric data arrives earlier. When false, the warm-up period ends early as soon as the alarm has enough data to fill its evaluation window. Defaults to false.
+	OnlyStartEvaluatingAfterWarmUpPeriodEnds *bool `json:"onlyStartEvaluatingAfterWarmUpPeriodEnds,omitempty" tf:"only_start_evaluating_after_warm_up_period_ends,omitempty"`
+
+	// Length of the warm-up period, in minutes. Valid values are 1 to 2880.
+	WarmUpPeriodDurationInMinutes *float64 `json:"warmUpPeriodDurationInMinutes,omitempty" tf:"warm_up_period_duration_in_minutes,omitempty"`
+}
+
+type WarmUpConfigurationObservation struct {
+
+	// Whether to wait for the full warm-up period before evaluation begins, even if metric data arrives earlier. When false, the warm-up period ends early as soon as the alarm has enough data to fill its evaluation window. Defaults to false.
+	OnlyStartEvaluatingAfterWarmUpPeriodEnds *bool `json:"onlyStartEvaluatingAfterWarmUpPeriodEnds,omitempty" tf:"only_start_evaluating_after_warm_up_period_ends,omitempty"`
+
+	// Length of the warm-up period, in minutes. Valid values are 1 to 2880.
+	WarmUpPeriodDurationInMinutes *float64 `json:"warmUpPeriodDurationInMinutes,omitempty" tf:"warm_up_period_duration_in_minutes,omitempty"`
+}
+
+type WarmUpConfigurationParameters struct {
+
+	// Whether to wait for the full warm-up period before evaluation begins, even if metric data arrives earlier. When false, the warm-up period ends early as soon as the alarm has enough data to fill its evaluation window. Defaults to false.
+	// +kubebuilder:validation:Optional
+	OnlyStartEvaluatingAfterWarmUpPeriodEnds *bool `json:"onlyStartEvaluatingAfterWarmUpPeriodEnds,omitempty" tf:"only_start_evaluating_after_warm_up_period_ends,omitempty"`
+
+	// Length of the warm-up period, in minutes. Valid values are 1 to 2880.
+	// +kubebuilder:validation:Optional
+	WarmUpPeriodDurationInMinutes *float64 `json:"warmUpPeriodDurationInMinutes" tf:"warm_up_period_duration_in_minutes,omitempty"`
 }
 
 // MetricAlarmSpec defines the desired state of MetricAlarm

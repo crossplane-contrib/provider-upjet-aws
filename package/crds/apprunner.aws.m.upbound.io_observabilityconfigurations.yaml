@@ -77,8 +77,8 @@ spec:
                   traceConfiguration:
                     description: Configuration of the tracing feature within this
                       observability configuration. If you don't specify it, App Runner
-                      doesn't enable tracing. See Trace Configuration below for more
-                      details.
+                      doesn't enable tracing. See trace_configuration Block below
+                      for more details.
                     properties:
                       vendor:
                         description: 'Implementation provider chosen for tracing App
@@ -113,8 +113,8 @@ spec:
                   traceConfiguration:
                     description: Configuration of the tracing feature within this
                       observability configuration. If you don't specify it, App Runner
-                      doesn't enable tracing. See Trace Configuration below for more
-                      details.
+                      doesn't enable tracing. See trace_configuration Block below
+                      for more details.
                     properties:
                       vendor:
                         description: 'Implementation provider chosen for tracing App
@@ -206,7 +206,7 @@ spec:
                     description: Name of the observability configuration.
                     type: string
                   observabilityConfigurationRevision:
-                    description: The revision of this observability configuration.
+                    description: Revision of this observability configuration.
                     type: number
                   region:
                     description: |-
@@ -234,8 +234,8 @@ spec:
                   traceConfiguration:
                     description: Configuration of the tracing feature within this
                       observability configuration. If you don't specify it, App Runner
-                      doesn't enable tracing. See Trace Configuration below for more
-                      details.
+                      doesn't enable tracing. See trace_configuration Block below
+                      for more details.
                     properties:
                       vendor:
                         description: 'Implementation provider chosen for tracing App

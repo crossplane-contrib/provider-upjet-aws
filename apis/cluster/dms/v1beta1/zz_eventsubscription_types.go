@@ -58,7 +58,7 @@ type EventSubscriptionInitParameters struct {
 
 type EventSubscriptionObservation struct {
 
-	// Amazon Resource Name (ARN) of the DMS Event Subscription.
+	// ARN of the DMS Event Subscription.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Whether the event subscription should be enabled.

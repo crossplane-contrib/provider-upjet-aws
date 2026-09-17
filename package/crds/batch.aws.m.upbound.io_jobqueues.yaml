@@ -69,8 +69,7 @@ spec:
                     items:
                       properties:
                         computeEnvironment:
-                          description: The Amazon Resource Name (ARN) of the compute
-                            environment.
+                          description: ARN of the compute environment.
                           type: string
                         computeEnvironmentRef:
                           description: Reference to a ComputeEnvironment in batch
@@ -326,8 +325,7 @@ spec:
                     items:
                       properties:
                         computeEnvironment:
-                          description: The Amazon Resource Name (ARN) of the compute
-                            environment.
+                          description: ARN of the compute environment.
                           type: string
                         computeEnvironmentRef:
                           description: Reference to a ComputeEnvironment in batch
@@ -626,7 +624,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The Amazon Resource Name of the job queue.
+                    description: ARN of the job queue.
                     type: string
                   computeEnvironmentOrder:
                     description: The set of compute environments mapped to a job queue
@@ -638,8 +636,7 @@ spec:
                     items:
                       properties:
                         computeEnvironment:
-                          description: The Amazon Resource Name (ARN) of the compute
-                            environment.
+                          description: ARN of the compute environment.
                           type: string
                         order:
                           description: The order of the compute environment. Compute

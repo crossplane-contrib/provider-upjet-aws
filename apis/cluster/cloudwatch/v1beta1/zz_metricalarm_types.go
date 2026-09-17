@@ -71,6 +71,35 @@ type PromqlCriteriaParameters struct {
 	RecoveryPeriod *float64 `json:"recoveryPeriod,omitempty" tf:"recovery_period,omitempty"`
 }
 
+type WarmUpConfigurationInitParameters struct {
+
+	// Whether to wait for the full warm-up period before evaluation begins, even if metric data arrives earlier. When false, the warm-up period ends early as soon as the alarm has enough data to fill its evaluation window. Defaults to false.
+	OnlyStartEvaluatingAfterWarmUpPeriodEnds *bool `json:"onlyStartEvaluatingAfterWarmUpPeriodEnds,omitempty" tf:"only_start_evaluating_after_warm_up_period_ends,omitempty"`
+
+	// Length of the warm-up period, in minutes. Valid values are 1 to 2880.
+	WarmUpPeriodDurationInMinutes *float64 `json:"warmUpPeriodDurationInMinutes,omitempty" tf:"warm_up_period_duration_in_minutes,omitempty"`
+}
+
+type WarmUpConfigurationObservation struct {
+
+	// Whether to wait for the full warm-up period before evaluation begins, even if metric data arrives earlier. When false, the warm-up period ends early as soon as the alarm has enough data to fill its evaluation window. Defaults to false.
+	OnlyStartEvaluatingAfterWarmUpPeriodEnds *bool `json:"onlyStartEvaluatingAfterWarmUpPeriodEnds,omitempty" tf:"only_start_evaluating_after_warm_up_period_ends,omitempty"`
+
+	// Length of the warm-up period, in minutes. Valid values are 1 to 2880.
+	WarmUpPeriodDurationInMinutes *float64 `json:"warmUpPeriodDurationInMinutes,omitempty" tf:"warm_up_period_duration_in_minutes,omitempty"`
+}
+
+type WarmUpConfigurationParameters struct {
+
+	// Whether to wait for the full warm-up period before evaluation begins, even if metric data arrives earlier. When false, the warm-up period ends early as soon as the alarm has enough data to fill its evaluation window. Defaults to false.
+	// +kubebuilder:validation:Optional
+	OnlyStartEvaluatingAfterWarmUpPeriodEnds *bool `json:"onlyStartEvaluatingAfterWarmUpPeriodEnds,omitempty" tf:"only_start_evaluating_after_warm_up_period_ends,omitempty"`
+
+	// Length of the warm-up period, in minutes. Valid values are 1 to 2880.
+	// +kubebuilder:validation:Optional
+	WarmUpPeriodDurationInMinutes *float64 `json:"warmUpPeriodDurationInMinutes" tf:"warm_up_period_duration_in_minutes,omitempty"`
+}
+
 type MetricAlarmInitParameters struct {
 
 	// Indicates whether or not actions should be executed during any changes to the alarm's state. Defaults to true.
@@ -173,6 +202,9 @@ type MetricAlarmInitParameters struct {
 
 	// The unit for the alarm's associated metric.
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
+
+	// Warm-up period that delays alarm evaluation after the alarm is created. During the warm-up period the alarm stays in INSUFFICIENT_DATA and does not perform alarm actions. See warm_up_configuration below.
+	WarmUpConfiguration []WarmUpConfigurationInitParameters `json:"warmUpConfiguration,omitempty" tf:"warm_up_configuration,omitempty"`
 }
 
 type MetricAlarmObservation struct {
@@ -271,6 +303,9 @@ type MetricAlarmObservation struct {
 
 	// The unit for the alarm's associated metric.
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
+
+	// Warm-up period that delays alarm evaluation after the alarm is created. During the warm-up period the alarm stays in INSUFFICIENT_DATA and does not perform alarm actions. See warm_up_configuration below.
+	WarmUpConfiguration []WarmUpConfigurationObservation `json:"warmUpConfiguration,omitempty" tf:"warm_up_configuration,omitempty"`
 }
 
 type MetricAlarmParameters struct {
@@ -403,6 +438,10 @@ type MetricAlarmParameters struct {
 	// The unit for the alarm's associated metric.
 	// +kubebuilder:validation:Optional
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
+
+	// Warm-up period that delays alarm evaluation after the alarm is created. During the warm-up period the alarm stays in INSUFFICIENT_DATA and does not perform alarm actions. See warm_up_configuration below.
+	// +kubebuilder:validation:Optional
+	WarmUpConfiguration []WarmUpConfigurationParameters `json:"warmUpConfiguration,omitempty" tf:"warm_up_configuration,omitempty"`
 }
 
 type MetricInitParameters struct {

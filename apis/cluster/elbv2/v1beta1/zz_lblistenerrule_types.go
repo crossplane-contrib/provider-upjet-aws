@@ -1119,12 +1119,18 @@ type RewriteParameters struct {
 
 type SourceIPInitParameters struct {
 
+	// IP address type for Network Load Balancers. Valid values are ipv4 and ipv6.
+	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
+
 	// Query string pairs or values to match. Query String Value blocks documented below. Multiple values blocks can be specified, see example above. Maximum size of each string is 128 characters. Comparison is case insensitive. Wildcard characters supported: * (matches 0 or more characters) and ? (matches exactly 1 character). To search for a literal '*' or '?' character in a query string, escape the character with a backslash (\). Only one pair needs to match for the condition to be satisfied.
 	// +listType=set
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
 type SourceIPObservation struct {
+
+	// IP address type for Network Load Balancers. Valid values are ipv4 and ipv6.
+	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
 
 	// Query string pairs or values to match. Query String Value blocks documented below. Multiple values blocks can be specified, see example above. Maximum size of each string is 128 characters. Comparison is case insensitive. Wildcard characters supported: * (matches 0 or more characters) and ? (matches exactly 1 character). To search for a literal '*' or '?' character in a query string, escape the character with a backslash (\). Only one pair needs to match for the condition to be satisfied.
 	// +listType=set
@@ -1133,10 +1139,14 @@ type SourceIPObservation struct {
 
 type SourceIPParameters struct {
 
+	// IP address type for Network Load Balancers. Valid values are ipv4 and ipv6.
+	// +kubebuilder:validation:Optional
+	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
+
 	// Query string pairs or values to match. Query String Value blocks documented below. Multiple values blocks can be specified, see example above. Maximum size of each string is 128 characters. Comparison is case insensitive. Wildcard characters supported: * (matches 0 or more characters) and ? (matches exactly 1 character). To search for a literal '*' or '?' character in a query string, escape the character with a backslash (\). Only one pair needs to match for the condition to be satisfied.
 	// +kubebuilder:validation:Optional
 	// +listType=set
-	Values []*string `json:"values" tf:"values,omitempty"`
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
 type TransformInitParameters struct {

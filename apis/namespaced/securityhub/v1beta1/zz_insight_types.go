@@ -596,7 +596,7 @@ type FiltersInitParameters struct {
 	// The IPv6 addresses associated with the instance. See Ip Filter below for more details.
 	ResourceAwsEC2InstanceIPv6Addresses []ResourceAwsEC2InstanceIPv6AddressesInitParameters `json:"resourceAwsEc2InstanceIpv6Addresses,omitempty" tf:"resource_aws_ec2_instance_ipv6_addresses,omitempty"`
 
-	// The Amazon Machine Image (AMI) ID of the instance. See String Filter below for more details.
+	// AMI ID of the instance. See String Filter below for more details.
 	ResourceAwsEC2InstanceImageID []ResourceAwsEC2InstanceImageIDInitParameters `json:"resourceAwsEc2InstanceImageId,omitempty" tf:"resource_aws_ec2_instance_image_id,omitempty"`
 
 	// The key name associated with the instance. See String Filter below for more details.
@@ -878,7 +878,7 @@ type FiltersObservation struct {
 	// The IPv6 addresses associated with the instance. See Ip Filter below for more details.
 	ResourceAwsEC2InstanceIPv6Addresses []ResourceAwsEC2InstanceIPv6AddressesObservation `json:"resourceAwsEc2InstanceIpv6Addresses,omitempty" tf:"resource_aws_ec2_instance_ipv6_addresses,omitempty"`
 
-	// The Amazon Machine Image (AMI) ID of the instance. See String Filter below for more details.
+	// AMI ID of the instance. See String Filter below for more details.
 	ResourceAwsEC2InstanceImageID []ResourceAwsEC2InstanceImageIDObservation `json:"resourceAwsEc2InstanceImageId,omitempty" tf:"resource_aws_ec2_instance_image_id,omitempty"`
 
 	// The key name associated with the instance. See String Filter below for more details.
@@ -1218,7 +1218,7 @@ type FiltersParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceAwsEC2InstanceIPv6Addresses []ResourceAwsEC2InstanceIPv6AddressesParameters `json:"resourceAwsEc2InstanceIpv6Addresses,omitempty" tf:"resource_aws_ec2_instance_ipv6_addresses,omitempty"`
 
-	// The Amazon Machine Image (AMI) ID of the instance. See String Filter below for more details.
+	// AMI ID of the instance. See String Filter below for more details.
 	// +kubebuilder:validation:Optional
 	ResourceAwsEC2InstanceImageID []ResourceAwsEC2InstanceImageIDParameters `json:"resourceAwsEc2InstanceImageId,omitempty" tf:"resource_aws_ec2_instance_image_id,omitempty"`
 

@@ -37,7 +37,7 @@ type AcceleratorInitParameters struct {
 
 type AcceleratorObservation struct {
 
-	// The Amazon Resource Name (ARN) of the accelerator.
+	// ARN of the accelerator.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The attributes of the accelerator. Fields documented below.
@@ -46,7 +46,7 @@ type AcceleratorObservation struct {
 	// The DNS name of the accelerator. For example, a5d53ff5ee6bca4ce.awsglobalaccelerator.com.
 	DNSName *string `json:"dnsName,omitempty" tf:"dns_name,omitempty"`
 
-	// The Domain Name System (DNS) name that Global Accelerator creates that points to a dual-stack accelerator's four static IP addresses: two IPv4 addresses and two IPv6 addresses. For example, a1234567890abcdef.dualstack.awsglobalaccelerator.com.
+	// DNS name that Global Accelerator creates that points to a dual-stack accelerator's four static IP addresses: two IPv4 addresses and two IPv6 addresses. For example, a1234567890abcdef.dualstack.awsglobalaccelerator.com.
 	DualStackDNSName *string `json:"dualStackDnsName,omitempty" tf:"dual_stack_dns_name,omitempty"`
 
 	// Indicates whether the accelerator is enabled. Defaults to true. Valid values: true, false.
@@ -57,7 +57,7 @@ type AcceleratorObservation struct {
 	// is simply an alias for the zone ID Z2BJ6XQ5FK7U4H.
 	HostedZoneID *string `json:"hostedZoneId,omitempty" tf:"hosted_zone_id,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the accelerator.
+	// ARN of the accelerator.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The value for the address type. Defaults to IPV4. Valid values: IPV4, DUAL_STACK.

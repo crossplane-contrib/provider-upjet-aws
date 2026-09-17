@@ -197,8 +197,7 @@ spec:
                                 has the lowest priority setting.
                               type: number
                             resourceArn:
-                              description: The Amazon Resource Name (ARN) of the stateless
-                                rule group.
+                              description: ARN of the stateless rule group.
                               type: string
                             resourceArnRef:
                               description: Reference to a RuleGroup in networkfirewall
@@ -354,8 +353,7 @@ spec:
                                 has the lowest priority setting.
                               type: number
                             resourceArn:
-                              description: The Amazon Resource Name (ARN) of the stateless
-                                rule group.
+                              description: ARN of the stateless rule group.
                               type: string
                             resourceArnRef:
                               description: Reference to a RuleGroup in networkfirewall
@@ -614,8 +612,7 @@ spec:
                                 has the lowest priority setting.
                               type: number
                             resourceArn:
-                              description: The Amazon Resource Name (ARN) of the stateless
-                                rule group.
+                              description: ARN of the stateless rule group.
                               type: string
                             resourceArnRef:
                               description: Reference to a RuleGroup in networkfirewall
@@ -771,8 +768,7 @@ spec:
                                 has the lowest priority setting.
                               type: number
                             resourceArn:
-                              description: The Amazon Resource Name (ARN) of the stateless
-                                rule group.
+                              description: ARN of the stateless rule group.
                               type: string
                             resourceArnRef:
                               description: Reference to a RuleGroup in networkfirewall
@@ -942,8 +938,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The Amazon Resource Name (ARN) that identifies the
-                      firewall policy.
+                    description: ARN that identifies the firewall policy.
                     type: string
                   description:
                     description: A friendly description of the firewall policy.
@@ -1083,8 +1078,7 @@ spec:
                                 has the lowest priority setting.
                               type: number
                             resourceArn:
-                              description: The Amazon Resource Name (ARN) of the stateless
-                                rule group.
+                              description: ARN of the stateless rule group.
                               type: string
                           type: object
                         type: array
@@ -1158,8 +1152,7 @@ spec:
                                 has the lowest priority setting.
                               type: number
                             resourceArn:
-                              description: The Amazon Resource Name (ARN) of the stateless
-                                rule group.
+                              description: ARN of the stateless rule group.
                               type: string
                           type: object
                         type: array
@@ -1172,8 +1165,7 @@ spec:
                         type: string
                     type: object
                   id:
-                    description: The Amazon Resource Name (ARN) that identifies the
-                      firewall policy.
+                    description: ARN that identifies the firewall policy.
                     type: string
                   region:
                     description: |-

@@ -226,7 +226,7 @@ spec:
                     description: The AWS account ID for the administrator account.
                     type: string
                   arn:
-                    description: The Amazon Resource Name (ARN) of the account.
+                    description: ARN of the account.
                     type: string
                   email:
                     description: The email address for the account.

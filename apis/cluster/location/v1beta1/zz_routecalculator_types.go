@@ -28,7 +28,7 @@ type RouteCalculatorInitParameters struct {
 
 type RouteCalculatorObservation struct {
 
-	// The Amazon Resource Name (ARN) for the Route calculator resource. Use the ARN when you specify a resource across AWS.
+	// ARN for the Route calculator resource. Use the ARN when you specify a resource across AWS.
 	CalculatorArn *string `json:"calculatorArn,omitempty" tf:"calculator_arn,omitempty"`
 
 	// The timestamp for when the route calculator resource was created in ISO 8601 format.

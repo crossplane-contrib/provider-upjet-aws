@@ -24,10 +24,16 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		r.References["vpn_gateway_id"] = config.Reference{
 			TerraformName: "aws_vpn_gateway",
 		}
+		r.References["dx_gateway_id"] = config.Reference{
+			TerraformName: "aws_dx_gateway",
+		}
 		r.UseAsync = true
 	})
 	p.AddResourceConfigurator("aws_dx_gateway_association", func(r *config.Resource) {
 		r.TerraformResource.Schema["associated_gateway_id"].Required = true
+		r.References["proposal_id"] = config.Reference{
+			TerraformName: "aws_dx_gateway_association_proposal",
+		}
 		r.LateInitializer = config.LateInitializer{
 			IgnoredFields: []string{"associated_gateway_owner_account_id"},
 		}
@@ -54,6 +60,9 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_dx_hosted_private_virtual_interface_accepter", func(r *config.Resource) {
 		r.References["virtual_interface_id"] = config.Reference{
 			TerraformName: "aws_dx_hosted_private_virtual_interface",
+		}
+		r.References["dx_gateway_id"] = config.Reference{
+			TerraformName: "aws_dx_gateway",
 		}
 	})
 

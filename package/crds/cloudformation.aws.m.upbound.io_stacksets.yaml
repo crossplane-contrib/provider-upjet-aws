@@ -560,7 +560,7 @@ spec:
                       permission model.
                     type: string
                   arn:
-                    description: Amazon Resource Name (ARN) of the StackSet.
+                    description: ARN of the StackSet.
                     type: string
                   autoDeployment:
                     description: Configuration block containing the auto-deployment

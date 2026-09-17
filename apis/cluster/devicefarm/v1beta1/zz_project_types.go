@@ -28,7 +28,7 @@ type ProjectInitParameters struct {
 
 type ProjectObservation struct {
 
-	// The Amazon Resource Name of this project
+	// ARN of this project
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Sets the execution timeout value (in minutes) for a project. All test runs in this project use the specified execution timeout value unless overridden when scheduling a run.

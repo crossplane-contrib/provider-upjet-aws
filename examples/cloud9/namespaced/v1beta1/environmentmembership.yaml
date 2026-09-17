@@ -33,6 +33,7 @@ metadata:
   namespace: upbound-system
 spec:
   forProvider:
+    imageId: ami-0454207e5367abf01
     instanceType: t2.micro
     name: some-env
     region: us-west-1

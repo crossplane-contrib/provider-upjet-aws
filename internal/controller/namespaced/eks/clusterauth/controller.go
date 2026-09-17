@@ -18,6 +18,7 @@ import (
 	xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 	"github.com/pkg/errors"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	"k8s.io/apimachinery/pkg/util/sets"
 	ctrl "sigs.k8s.io/controller-runtime"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
@@ -26,6 +27,7 @@ import (
 
 	"github.com/upbound/provider-aws/v2/apis/namespaced/eks/v1beta1"
 	"github.com/upbound/provider-aws/v2/internal/clients"
+	"github.com/upbound/provider-aws/v2/internal/features"
 )
 
 const (
@@ -46,9 +48,43 @@ func SetupWebhookWithManager(mgr ctrl.Manager) error {
 	return nil
 }
 
+// supportedManagementPolicies lists the management policy sets ClusterAuth
+// can honour. The resource mints a short-lived token in Create and can only
+// refresh it in Update, so every explicit set must include both actions.
+// LateInitialize and Delete are no-ops for this resource.
+func supportedManagementPolicies() []sets.Set[xpv2.ManagementAction] {
+	return []sets.Set[xpv2.ManagementAction]{
+		sets.New(xpv2.ManagementActionAll),
+		sets.New[xpv2.ManagementAction](),
+		sets.New(xpv2.ManagementActionObserve, xpv2.ManagementActionCreate, xpv2.ManagementActionUpdate),
+		sets.New(xpv2.ManagementActionObserve, xpv2.ManagementActionCreate, xpv2.ManagementActionUpdate, xpv2.ManagementActionLateInitialize),
+		sets.New(xpv2.ManagementActionObserve, xpv2.ManagementActionCreate, xpv2.ManagementActionUpdate, xpv2.ManagementActionDelete),
+		sets.New(xpv2.ManagementActionObserve, xpv2.ManagementActionCreate, xpv2.ManagementActionUpdate, xpv2.ManagementActionLateInitialize, xpv2.ManagementActionDelete),
+	}
+}
+
 // Setup adds a controller that reconciles ClusterAuth.
 func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
 	name := managed.ControllerName(v1beta1.ClusterAuth_GroupKind)
+
+	opts := []managed.ReconcilerOption{
+		managed.WithExternalConnector(&connector{
+			kube:               mgr.GetClient(),
+			newEKSClientFn:     eks.NewFromConfig,
+			newPresignClientFn: newPresignClient,
+		}),
+		// We use a constant poll interval here to make sure we get a chance
+		// to refresh the token before it expires.
+		managed.WithPollInterval(time.Minute * 1),
+		managed.WithLogger(o.Logger.WithValues("controller", name)),
+		managed.WithRecorder(event.NewAPIRecorder(mgr.GetEventRecorderFor(name))),
+	}
+	if o.Features.Enabled(features.EnableBetaManagementPolicies) {
+		opts = append(opts,
+			managed.WithManagementPolicies(),
+			managed.WithReconcilerSupportedManagementPolicies(supportedManagementPolicies()),
+		)
+	}
 
 	return ctrl.NewControllerManagedBy(mgr).
 		Named(name).
@@ -56,16 +92,7 @@ func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
 		For(&v1beta1.ClusterAuth{}).
 		Complete(managed.NewReconciler(mgr,
 			resource.ManagedKind(v1beta1.ClusterAuth_GroupVersionKind),
-			managed.WithExternalConnector(&connector{
-				kube:               mgr.GetClient(),
-				newEKSClientFn:     eks.NewFromConfig,
-				newPresignClientFn: newPresignClient,
-			}),
-			// We use a constant poll interval here to make sure we get a chance
-			// to refresh the token before it expires.
-			managed.WithPollInterval(time.Minute*1),
-			managed.WithLogger(o.Logger.WithValues("controller", name)),
-			managed.WithRecorder(event.NewAPIRecorder(mgr.GetEventRecorderFor(name)))))
+			opts...))
 }
 
 // SetupGated adds a controller that reconciles ClusterAuth.

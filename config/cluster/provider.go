@@ -93,6 +93,7 @@ import (
 	"github.com/upbound/provider-aws/v2/config/cluster/route53recoverycontrolconfig"
 	"github.com/upbound/provider-aws/v2/config/cluster/route53resolver"
 	"github.com/upbound/provider-aws/v2/config/cluster/s3"
+	"github.com/upbound/provider-aws/v2/config/cluster/s3files"
 	"github.com/upbound/provider-aws/v2/config/cluster/s3vectors"
 	"github.com/upbound/provider-aws/v2/config/cluster/sagemaker"
 	"github.com/upbound/provider-aws/v2/config/cluster/secretsmanager"
@@ -182,6 +183,7 @@ func init() {
 	ProviderConfiguration.AddConfig(route53resolver.Configure)
 	ProviderConfiguration.AddConfig(route53recoverycontrolconfig.Configure)
 	ProviderConfiguration.AddConfig(s3.Configure)
+	ProviderConfiguration.AddConfig(s3files.Configure)
 	ProviderConfiguration.AddConfig(s3vectors.Configure)
 	ProviderConfiguration.AddConfig(secretsmanager.Configure)
 	ProviderConfiguration.AddConfig(servicecatalog.Configure)

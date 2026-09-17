@@ -173,7 +173,7 @@ type VPCIpamPoolObservation struct {
 	// +mapType=granular
 	AllocationResourceTags map[string]*string `json:"allocationResourceTags,omitempty" tf:"allocation_resource_tags,omitempty"`
 
-	// Amazon Resource Name (ARN) of IPAM
+	// ARN of IPAM
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// If you include this argument, IPAM automatically imports any VPCs you have in your scope that fall

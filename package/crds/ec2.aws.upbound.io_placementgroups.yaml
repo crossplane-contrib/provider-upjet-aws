@@ -234,7 +234,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: Amazon Resource Name (ARN) of the placement group.
+                    description: ARN of the placement group.
                     type: string
                   id:
                     description: The name of the placement group.

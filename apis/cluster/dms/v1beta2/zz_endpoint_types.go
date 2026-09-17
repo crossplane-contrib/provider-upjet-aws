@@ -459,7 +459,7 @@ type KafkaSettingsInitParameters struct {
 	// Secure user name you created when you first set up your MSK cluster to validate a client identity and make an encrypted connection between server and client using SASL-SSL authentication.
 	SaslUsername *string `json:"saslUsername,omitempty" tf:"sasl_username,omitempty"`
 
-	// Set secure connection to a Kafka target endpoint using Transport Layer Security (TLS). Options include ssl-encryption, ssl-authentication, and sasl-ssl. sasl-ssl requires sasl_username and sasl_password.
+	// Set secure connection to a Kafka target endpoint using TLS. Options include ssl-encryption, ssl-authentication, and sasl-ssl. sasl-ssl requires sasl_username and sasl_password.
 	SecurityProtocol *string `json:"securityProtocol,omitempty" tf:"security_protocol,omitempty"`
 
 	// Kafka topic for migration. Default is kafka-default-topic.
@@ -513,7 +513,7 @@ type KafkaSettingsObservation struct {
 	// Secure user name you created when you first set up your MSK cluster to validate a client identity and make an encrypted connection between server and client using SASL-SSL authentication.
 	SaslUsername *string `json:"saslUsername,omitempty" tf:"sasl_username,omitempty"`
 
-	// Set secure connection to a Kafka target endpoint using Transport Layer Security (TLS). Options include ssl-encryption, ssl-authentication, and sasl-ssl. sasl-ssl requires sasl_username and sasl_password.
+	// Set secure connection to a Kafka target endpoint using TLS. Options include ssl-encryption, ssl-authentication, and sasl-ssl. sasl-ssl requires sasl_username and sasl_password.
 	SecurityProtocol *string `json:"securityProtocol,omitempty" tf:"security_protocol,omitempty"`
 
 	// Kafka topic for migration. Default is kafka-default-topic.
@@ -590,7 +590,7 @@ type KafkaSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	SaslUsername *string `json:"saslUsername,omitempty" tf:"sasl_username,omitempty"`
 
-	// Set secure connection to a Kafka target endpoint using Transport Layer Security (TLS). Options include ssl-encryption, ssl-authentication, and sasl-ssl. sasl-ssl requires sasl_username and sasl_password.
+	// Set secure connection to a Kafka target endpoint using TLS. Options include ssl-encryption, ssl-authentication, and sasl-ssl. sasl-ssl requires sasl_username and sasl_password.
 	// +kubebuilder:validation:Optional
 	SecurityProtocol *string `json:"securityProtocol,omitempty" tf:"security_protocol,omitempty"`
 
@@ -1472,10 +1472,10 @@ type RedisSettingsInitParameters struct {
 	// Port used by the endpoint database.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
-	// The Amazon Resource Name (ARN) for the certificate authority (CA) that DMS uses to connect to your Redis target endpoint.
+	// ARN for the certificate authority (CA) that DMS uses to connect to your Redis target endpoint.
 	SSLCACertificateArn *string `json:"sslCaCertificateArn,omitempty" tf:"ssl_ca_certificate_arn,omitempty"`
 
-	// The plaintext option doesn't provide Transport Layer Security (TLS) encryption for traffic between endpoint and database. Options include plaintext, ssl-encryption. The default is ssl-encryption.
+	// The plaintext option doesn't provide TLS encryption for traffic between endpoint and database. Options include plaintext, ssl-encryption. The default is ssl-encryption.
 	SSLSecurityProtocol *string `json:"sslSecurityProtocol,omitempty" tf:"ssl_security_protocol,omitempty"`
 
 	// Host name of the server.
@@ -1493,10 +1493,10 @@ type RedisSettingsObservation struct {
 	// Port used by the endpoint database.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
-	// The Amazon Resource Name (ARN) for the certificate authority (CA) that DMS uses to connect to your Redis target endpoint.
+	// ARN for the certificate authority (CA) that DMS uses to connect to your Redis target endpoint.
 	SSLCACertificateArn *string `json:"sslCaCertificateArn,omitempty" tf:"ssl_ca_certificate_arn,omitempty"`
 
-	// The plaintext option doesn't provide Transport Layer Security (TLS) encryption for traffic between endpoint and database. Options include plaintext, ssl-encryption. The default is ssl-encryption.
+	// The plaintext option doesn't provide TLS encryption for traffic between endpoint and database. Options include plaintext, ssl-encryption. The default is ssl-encryption.
 	SSLSecurityProtocol *string `json:"sslSecurityProtocol,omitempty" tf:"ssl_security_protocol,omitempty"`
 
 	// Host name of the server.
@@ -1521,11 +1521,11 @@ type RedisSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	Port *float64 `json:"port" tf:"port,omitempty"`
 
-	// The Amazon Resource Name (ARN) for the certificate authority (CA) that DMS uses to connect to your Redis target endpoint.
+	// ARN for the certificate authority (CA) that DMS uses to connect to your Redis target endpoint.
 	// +kubebuilder:validation:Optional
 	SSLCACertificateArn *string `json:"sslCaCertificateArn,omitempty" tf:"ssl_ca_certificate_arn,omitempty"`
 
-	// The plaintext option doesn't provide Transport Layer Security (TLS) encryption for traffic between endpoint and database. Options include plaintext, ssl-encryption. The default is ssl-encryption.
+	// The plaintext option doesn't provide TLS encryption for traffic between endpoint and database. Options include plaintext, ssl-encryption. The default is ssl-encryption.
 	// +kubebuilder:validation:Optional
 	SSLSecurityProtocol *string `json:"sslSecurityProtocol,omitempty" tf:"ssl_security_protocol,omitempty"`
 
@@ -1548,7 +1548,7 @@ type RedshiftSettingsInitParameters struct {
 	// ARN or Id of KMS Key to use when encryption_mode is SSE_KMS.
 	ServerSideEncryptionKMSKeyID *string `json:"serverSideEncryptionKmsKeyId,omitempty" tf:"server_side_encryption_kms_key_id,omitempty"`
 
-	// Amazon Resource Name (ARN) of the IAM Role with permissions to read from or write to the S3 Bucket for intermediate storage.
+	// ARN of the IAM Role with permissions to read from or write to the S3 Bucket for intermediate storage.
 	ServiceAccessRoleArn *string `json:"serviceAccessRoleArn,omitempty" tf:"service_access_role_arn,omitempty"`
 }
 
@@ -1566,7 +1566,7 @@ type RedshiftSettingsObservation struct {
 	// ARN or Id of KMS Key to use when encryption_mode is SSE_KMS.
 	ServerSideEncryptionKMSKeyID *string `json:"serverSideEncryptionKmsKeyId,omitempty" tf:"server_side_encryption_kms_key_id,omitempty"`
 
-	// Amazon Resource Name (ARN) of the IAM Role with permissions to read from or write to the S3 Bucket for intermediate storage.
+	// ARN of the IAM Role with permissions to read from or write to the S3 Bucket for intermediate storage.
 	ServiceAccessRoleArn *string `json:"serviceAccessRoleArn,omitempty" tf:"service_access_role_arn,omitempty"`
 }
 
@@ -1588,7 +1588,7 @@ type RedshiftSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	ServerSideEncryptionKMSKeyID *string `json:"serverSideEncryptionKmsKeyId,omitempty" tf:"server_side_encryption_kms_key_id,omitempty"`
 
-	// Amazon Resource Name (ARN) of the IAM Role with permissions to read from or write to the S3 Bucket for intermediate storage.
+	// ARN of the IAM Role with permissions to read from or write to the S3 Bucket for intermediate storage.
 	// +kubebuilder:validation:Optional
 	ServiceAccessRoleArn *string `json:"serviceAccessRoleArn,omitempty" tf:"service_access_role_arn,omitempty"`
 }

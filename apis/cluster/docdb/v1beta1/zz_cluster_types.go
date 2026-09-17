@@ -159,7 +159,7 @@ type ClusterObservation struct {
 	// false.
 	ApplyImmediately *bool `json:"applyImmediately,omitempty" tf:"apply_immediately,omitempty"`
 
-	// Amazon Resource Name (ARN) of cluster
+	// ARN of cluster
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// A list of EC2 Availability Zones that instances in the DB cluster can be created in.
@@ -210,7 +210,7 @@ type ClusterObservation struct {
 	// The Route53 Hosted Zone ID of the endpoint
 	HostedZoneID *string `json:"hostedZoneId,omitempty" tf:"hosted_zone_id,omitempty"`
 
-	// (Deprecated) Amazon Resource Name (ARN) of cluster
+	// (Deprecated) ARN of cluster
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The ARN for the KMS encryption key. When specifying kms_key_id, storage_encrypted needs to be set to true.
@@ -467,7 +467,7 @@ type MasterUserSecretObservation struct {
 	// The ARN for the KMS encryption key. When specifying kms_key_id, storage_encrypted needs to be set to true.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
-	// Amazon Resource Name (ARN) of cluster
+	// ARN of cluster
 	SecretArn *string `json:"secretArn,omitempty" tf:"secret_arn,omitempty"`
 
 	SecretStatus *string `json:"secretStatus,omitempty" tf:"secret_status,omitempty"`

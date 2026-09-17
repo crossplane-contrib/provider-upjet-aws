@@ -15,7 +15,7 @@ import (
 
 type MethodResponseInitParameters struct {
 
-	// The HTTP verb of the method resource (GET, POST, PUT, DELETE, HEAD, OPTIONS, ANY).
+	// HTTP verb of the method resource (GET, POST, PUT, DELETE, HEAD, OPTIONS, ANY).
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/apigateway/v1beta1.Method
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("http_method",false)
 	HTTPMethod *string `json:"httpMethod,omitempty" tf:"http_method,omitempty"`
@@ -28,7 +28,7 @@ type MethodResponseInitParameters struct {
 	// +kubebuilder:validation:Optional
 	HTTPMethodSelector *v2.Selector `json:"httpMethodSelector,omitempty" tf:"-"`
 
-	// The Resource identifier for the method resource.
+	// Resource identifier for the method resource.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/apigateway/v1beta1.Resource
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
@@ -41,15 +41,15 @@ type MethodResponseInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceIDSelector *v2.Selector `json:"resourceIdSelector,omitempty" tf:"-"`
 
-	// A map specifying the model resources used for the response's content type. Response models are represented as a key/value map, with a content type as the key and a Model name as the value.
+	// Map specifying the model resources used for the response's content type. Response models are represented as a key/value map, with a content type as the key and a Model name as the value.
 	// +mapType=granular
 	ResponseModels map[string]*string `json:"responseModels,omitempty" tf:"response_models,omitempty"`
 
-	// A map specifying required or optional response parameters that API Gateway can send back to the caller. A key defines a method response header name and the associated value is a boolean flag indicating whether the method response parameter is required. The method response header names must match the pattern of method.response.header.{name}, where name is a valid and unique header name.
+	// Map specifying required or optional response parameters that API Gateway can send back to the caller. A key defines a method response header name and the associated value is a boolean flag indicating whether the method response parameter is required. The method response header names must match the pattern of method.response.header.{name}, where name is a valid and unique header name. The response parameter names defined here are available in the integration response to be mapped from an integration response header expressed in integration.response.header.{name}, a static value enclosed within a pair of single quotes (e.g., 'application/json'), or a JSON expression from the back-end response payload in the form of integration.response.body.{JSON-expression}, where JSON-expression is a valid JSON expression without the $ prefix.)
 	// +mapType=granular
 	ResponseParameters map[string]*bool `json:"responseParameters,omitempty" tf:"response_parameters,omitempty"`
 
-	// The string identifier of the associated REST API.
+	// String identifier of the associated REST API.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/apigateway/v1beta2.RestAPI
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	RestAPIID *string `json:"restApiId,omitempty" tf:"rest_api_id,omitempty"`
@@ -62,13 +62,13 @@ type MethodResponseInitParameters struct {
 	// +kubebuilder:validation:Optional
 	RestAPIIDSelector *v2.Selector `json:"restApiIdSelector,omitempty" tf:"-"`
 
-	// The method response's status code.
+	// Method response's status code.
 	StatusCode *string `json:"statusCode,omitempty" tf:"status_code,omitempty"`
 }
 
 type MethodResponseObservation struct {
 
-	// The HTTP verb of the method resource (GET, POST, PUT, DELETE, HEAD, OPTIONS, ANY).
+	// HTTP verb of the method resource (GET, POST, PUT, DELETE, HEAD, OPTIONS, ANY).
 	HTTPMethod *string `json:"httpMethod,omitempty" tf:"http_method,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -77,27 +77,27 @@ type MethodResponseObservation struct {
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The Resource identifier for the method resource.
+	// Resource identifier for the method resource.
 	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
 
-	// A map specifying the model resources used for the response's content type. Response models are represented as a key/value map, with a content type as the key and a Model name as the value.
+	// Map specifying the model resources used for the response's content type. Response models are represented as a key/value map, with a content type as the key and a Model name as the value.
 	// +mapType=granular
 	ResponseModels map[string]*string `json:"responseModels,omitempty" tf:"response_models,omitempty"`
 
-	// A map specifying required or optional response parameters that API Gateway can send back to the caller. A key defines a method response header name and the associated value is a boolean flag indicating whether the method response parameter is required. The method response header names must match the pattern of method.response.header.{name}, where name is a valid and unique header name.
+	// Map specifying required or optional response parameters that API Gateway can send back to the caller. A key defines a method response header name and the associated value is a boolean flag indicating whether the method response parameter is required. The method response header names must match the pattern of method.response.header.{name}, where name is a valid and unique header name. The response parameter names defined here are available in the integration response to be mapped from an integration response header expressed in integration.response.header.{name}, a static value enclosed within a pair of single quotes (e.g., 'application/json'), or a JSON expression from the back-end response payload in the form of integration.response.body.{JSON-expression}, where JSON-expression is a valid JSON expression without the $ prefix.)
 	// +mapType=granular
 	ResponseParameters map[string]*bool `json:"responseParameters,omitempty" tf:"response_parameters,omitempty"`
 
-	// The string identifier of the associated REST API.
+	// String identifier of the associated REST API.
 	RestAPIID *string `json:"restApiId,omitempty" tf:"rest_api_id,omitempty"`
 
-	// The method response's status code.
+	// Method response's status code.
 	StatusCode *string `json:"statusCode,omitempty" tf:"status_code,omitempty"`
 }
 
 type MethodResponseParameters struct {
 
-	// The HTTP verb of the method resource (GET, POST, PUT, DELETE, HEAD, OPTIONS, ANY).
+	// HTTP verb of the method resource (GET, POST, PUT, DELETE, HEAD, OPTIONS, ANY).
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/apigateway/v1beta1.Method
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("http_method",false)
 	// +kubebuilder:validation:Optional
@@ -116,7 +116,7 @@ type MethodResponseParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// The Resource identifier for the method resource.
+	// Resource identifier for the method resource.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/apigateway/v1beta1.Resource
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -130,17 +130,17 @@ type MethodResponseParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceIDSelector *v2.Selector `json:"resourceIdSelector,omitempty" tf:"-"`
 
-	// A map specifying the model resources used for the response's content type. Response models are represented as a key/value map, with a content type as the key and a Model name as the value.
+	// Map specifying the model resources used for the response's content type. Response models are represented as a key/value map, with a content type as the key and a Model name as the value.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	ResponseModels map[string]*string `json:"responseModels,omitempty" tf:"response_models,omitempty"`
 
-	// A map specifying required or optional response parameters that API Gateway can send back to the caller. A key defines a method response header name and the associated value is a boolean flag indicating whether the method response parameter is required. The method response header names must match the pattern of method.response.header.{name}, where name is a valid and unique header name.
+	// Map specifying required or optional response parameters that API Gateway can send back to the caller. A key defines a method response header name and the associated value is a boolean flag indicating whether the method response parameter is required. The method response header names must match the pattern of method.response.header.{name}, where name is a valid and unique header name. The response parameter names defined here are available in the integration response to be mapped from an integration response header expressed in integration.response.header.{name}, a static value enclosed within a pair of single quotes (e.g., 'application/json'), or a JSON expression from the back-end response payload in the form of integration.response.body.{JSON-expression}, where JSON-expression is a valid JSON expression without the $ prefix.)
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	ResponseParameters map[string]*bool `json:"responseParameters,omitempty" tf:"response_parameters,omitempty"`
 
-	// The string identifier of the associated REST API.
+	// String identifier of the associated REST API.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/apigateway/v1beta2.RestAPI
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -154,7 +154,7 @@ type MethodResponseParameters struct {
 	// +kubebuilder:validation:Optional
 	RestAPIIDSelector *v2.Selector `json:"restApiIdSelector,omitempty" tf:"-"`
 
-	// The method response's status code.
+	// Method response's status code.
 	// +kubebuilder:validation:Optional
 	StatusCode *string `json:"statusCode,omitempty" tf:"status_code,omitempty"`
 }

@@ -43,7 +43,7 @@ type TransitGatewayMulticastDomainInitParameters struct {
 
 type TransitGatewayMulticastDomainObservation struct {
 
-	// EC2 Transit Gateway Multicast Domain Amazon Resource Name (ARN).
+	// EC2 Transit Gateway Multicast Domain ARN.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Whether to automatically accept cross-account subnet associations that are associated with the EC2 Transit Gateway Multicast Domain. Valid values: disable, enable. Default value: disable.

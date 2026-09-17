@@ -21,4 +21,20 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_fsx_ontap_file_system", func(r *config.Resource) {
 		r.LateInitializer.IgnoredFields = []string{"disk_iops_configuration"}
 	})
+
+	p.AddResourceConfigurator("aws_fsx_lustre_file_system", func(r *config.Resource) {
+		r.TerraformCustomDiff = common.RemoveDiffIfEmpty([]string{"final_backup_tags.%"})
+	})
+
+	p.AddResourceConfigurator("aws_fsx_ontap_volume", func(r *config.Resource) {
+		r.TerraformCustomDiff = common.RemoveDiffIfEmpty([]string{"final_backup_tags.%"})
+	})
+
+	p.AddResourceConfigurator("aws_fsx_openzfs_file_system", func(r *config.Resource) {
+		r.TerraformCustomDiff = common.RemoveDiffIfEmpty([]string{"final_backup_tags.%"})
+	})
+
+	p.AddResourceConfigurator("aws_fsx_windows_file_system", func(r *config.Resource) {
+		r.TerraformCustomDiff = common.RemoveDiffIfEmpty([]string{"final_backup_tags.%"})
+	})
 }

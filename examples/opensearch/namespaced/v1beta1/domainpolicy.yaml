@@ -41,8 +41,8 @@ spec:
     engineVersion: OpenSearch_1.0
     region: us-west-2
     clusterConfig:
-      - instanceType: t3.small.search
+      instanceType: t3.small.search
     ebsOptions:
-      - ebsEnabled: true
-        volumeType: gp2
-        volumeSize: 10
+      ebsEnabled: true
+      volumeType: gp2
+      volumeSize: 10

@@ -203,13 +203,17 @@ spec:
                     description: Name of the auto scaling configuration.
                     type: string
                   autoScalingConfigurationRevision:
-                    description: The revision of this auto scaling configuration.
+                    description: Revision of this auto scaling configuration.
                     type: number
                   hasAssociatedService:
+                    description: Whether there is an App Runner service associated
+                      with this auto scaling configuration.
                     type: boolean
                   id:
                     type: string
                   isDefault:
+                    description: Whether the auto scaling configuration is the default
+                      for the AWS account and Region.
                     type: boolean
                   latest:
                     description: Whether the auto scaling configuration has the highest

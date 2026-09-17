@@ -104,7 +104,7 @@ type DetectorObservation struct {
 	// The AWS account ID of the GuardDuty detector
 	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
 
-	// Amazon Resource Name (ARN) of the GuardDuty detector
+	// ARN of the GuardDuty detector
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Describes which data sources will be enabled for the detector. See Data Sources below for more details. Deprecated in favor of aws_guardduty_detector_feature resources.

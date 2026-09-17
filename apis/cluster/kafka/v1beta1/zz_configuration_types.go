@@ -31,7 +31,7 @@ type ConfigurationInitParameters struct {
 
 type ConfigurationObservation struct {
 
-	// Amazon Resource Name (ARN) of the configuration.
+	// ARN of the configuration.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Description of the configuration.

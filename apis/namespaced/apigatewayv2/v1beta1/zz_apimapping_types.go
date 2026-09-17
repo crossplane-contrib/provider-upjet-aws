@@ -27,7 +27,7 @@ type APIMappingInitParameters struct {
 	// +kubebuilder:validation:Optional
 	APIIDSelector *v2.NamespacedSelector `json:"apiIdSelector,omitempty" tf:"-"`
 
-	// The API mapping key. Refer to REST API, HTTP API or WebSocket API.
+	// API mapping key. Refer to REST API, HTTP API or WebSocket API.
 	APIMappingKey *string `json:"apiMappingKey,omitempty" tf:"api_mapping_key,omitempty"`
 
 	// Domain name. Use the aws_apigatewayv2_domain_name resource to configure a domain name.
@@ -61,7 +61,7 @@ type APIMappingObservation struct {
 	// API identifier.
 	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
 
-	// The API mapping key. Refer to REST API, HTTP API or WebSocket API.
+	// API mapping key. Refer to REST API, HTTP API or WebSocket API.
 	APIMappingKey *string `json:"apiMappingKey,omitempty" tf:"api_mapping_key,omitempty"`
 
 	// Domain name. Use the aws_apigatewayv2_domain_name resource to configure a domain name.
@@ -93,7 +93,7 @@ type APIMappingParameters struct {
 	// +kubebuilder:validation:Optional
 	APIIDSelector *v2.NamespacedSelector `json:"apiIdSelector,omitempty" tf:"-"`
 
-	// The API mapping key. Refer to REST API, HTTP API or WebSocket API.
+	// API mapping key. Refer to REST API, HTTP API or WebSocket API.
 	// +kubebuilder:validation:Optional
 	APIMappingKey *string `json:"apiMappingKey,omitempty" tf:"api_mapping_key,omitempty"`
 

@@ -184,6 +184,109 @@ spec:
                     description: Force version update by overriding upgrade-blocking
                       readiness checks when updating a cluster.
                     type: boolean
+                  kubeApiServerConfig:
+                    description: Configuration block for customizing the Kubernetes
+                      API server. Detailed below.
+                    items:
+                      properties:
+                        eventTtl:
+                          description: 'The duration that Kubernetes events are retained.
+                            Must be a single-unit duration (e.g., 30m, 1h). Valid
+                            range: 10m to 60m. Default is 1h.'
+                          type: string
+                        serviceNodePortRange:
+                          description: Configuration block for the port range available
+                            for NodePort services. Detailed below.
+                          items:
+                            properties:
+                              maxPort:
+                                description: 'The maximum port number in the range.
+                                  Valid range: 10260 to 32767. Default is 32767. Must
+                                  be greater than or equal to min_port.'
+                                type: number
+                              minPort:
+                                description: 'The minimum port number in the range.
+                                  Valid range: 10260 to 32767. Default is 30000.'
+                                type: number
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  kubeControllerManagerConfig:
+                    description: Configuration block for customizing the Kubernetes
+                      controller manager. Detailed below.
+                    items:
+                      properties:
+                        horizontalPodAutoscalerControllerConfig:
+                          description: Configuration block for the horizontal pod
+                            autoscaler controller. Detailed below.
+                          items:
+                            properties:
+                              horizontalPodAutoscalerSyncPeriod:
+                                description: 'The interval between each sync of the
+                                  horizontal pod autoscaler. Must be a single-unit
+                                  duration (e.g., 10s, 15s). Valid range: 10s to 15s.
+                                  Default is 15s.'
+                                type: string
+                            type: object
+                          type: array
+                        podGcControllerConfig:
+                          description: Configuration block for the pod garbage collection
+                            controller. Detailed below.
+                          items:
+                            properties:
+                              terminatedPodGcThreshold:
+                                description: 'The number of terminated pods that can
+                                  exist before the pod garbage collector starts deleting
+                                  them. Valid range: 0 to 12500. Refer to the aws_eks_cluster_versions
+                                  data source for any version-specific constraints.'
+                                type: number
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  kubeSchedulerConfig:
+                    description: Configuration block for customizing the Kubernetes
+                      scheduler. Detailed below.
+                    items:
+                      properties:
+                        nodeResourcesFit:
+                          description: Configuration block for the NodeResourcesFit
+                            scheduler plugin. Detailed below.
+                          items:
+                            properties:
+                              scoringStrategy:
+                                description: Configuration block for the scoring strategy
+                                  used to rank nodes during scheduling. Detailed below.
+                                items:
+                                  properties:
+                                    resource:
+                                      description: List of resource weight configuration
+                                        blocks for scoring nodes. Detailed below.
+                                      items:
+                                        properties:
+                                          name:
+                                            description: The name of the resource
+                                              (e.g., cpu, memory, nvidia.com/gpu).
+                                            type: string
+                                          weight:
+                                            description: The weight assigned to the
+                                              resource for scoring. Must be between
+                                              1 and 100.
+                                            type: number
+                                        type: object
+                                      type: array
+                                    type:
+                                      description: The scoring strategy type. Valid
+                                        values are LeastAllocated and MostAllocated.
+                                        Default is LeastAllocated.
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   kubernetesNetworkConfig:
                     description: Configuration block with kubernetes network configuration
                       for the cluster. Detailed below.
@@ -794,6 +897,109 @@ spec:
                     description: Force version update by overriding upgrade-blocking
                       readiness checks when updating a cluster.
                     type: boolean
+                  kubeApiServerConfig:
+                    description: Configuration block for customizing the Kubernetes
+                      API server. Detailed below.
+                    items:
+                      properties:
+                        eventTtl:
+                          description: 'The duration that Kubernetes events are retained.
+                            Must be a single-unit duration (e.g., 30m, 1h). Valid
+                            range: 10m to 60m. Default is 1h.'
+                          type: string
+                        serviceNodePortRange:
+                          description: Configuration block for the port range available
+                            for NodePort services. Detailed below.
+                          items:
+                            properties:
+                              maxPort:
+                                description: 'The maximum port number in the range.
+                                  Valid range: 10260 to 32767. Default is 32767. Must
+                                  be greater than or equal to min_port.'
+                                type: number
+                              minPort:
+                                description: 'The minimum port number in the range.
+                                  Valid range: 10260 to 32767. Default is 30000.'
+                                type: number
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  kubeControllerManagerConfig:
+                    description: Configuration block for customizing the Kubernetes
+                      controller manager. Detailed below.
+                    items:
+                      properties:
+                        horizontalPodAutoscalerControllerConfig:
+                          description: Configuration block for the horizontal pod
+                            autoscaler controller. Detailed below.
+                          items:
+                            properties:
+                              horizontalPodAutoscalerSyncPeriod:
+                                description: 'The interval between each sync of the
+                                  horizontal pod autoscaler. Must be a single-unit
+                                  duration (e.g., 10s, 15s). Valid range: 10s to 15s.
+                                  Default is 15s.'
+                                type: string
+                            type: object
+                          type: array
+                        podGcControllerConfig:
+                          description: Configuration block for the pod garbage collection
+                            controller. Detailed below.
+                          items:
+                            properties:
+                              terminatedPodGcThreshold:
+                                description: 'The number of terminated pods that can
+                                  exist before the pod garbage collector starts deleting
+                                  them. Valid range: 0 to 12500. Refer to the aws_eks_cluster_versions
+                                  data source for any version-specific constraints.'
+                                type: number
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  kubeSchedulerConfig:
+                    description: Configuration block for customizing the Kubernetes
+                      scheduler. Detailed below.
+                    items:
+                      properties:
+                        nodeResourcesFit:
+                          description: Configuration block for the NodeResourcesFit
+                            scheduler plugin. Detailed below.
+                          items:
+                            properties:
+                              scoringStrategy:
+                                description: Configuration block for the scoring strategy
+                                  used to rank nodes during scheduling. Detailed below.
+                                items:
+                                  properties:
+                                    resource:
+                                      description: List of resource weight configuration
+                                        blocks for scoring nodes. Detailed below.
+                                      items:
+                                        properties:
+                                          name:
+                                            description: The name of the resource
+                                              (e.g., cpu, memory, nvidia.com/gpu).
+                                            type: string
+                                          weight:
+                                            description: The weight assigned to the
+                                              resource for scoring. Must be between
+                                              1 and 100.
+                                            type: number
+                                        type: object
+                                      type: array
+                                    type:
+                                      description: The scoring strategy type. Valid
+                                        values are LeastAllocated and MostAllocated.
+                                        Default is LeastAllocated.
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   kubernetesNetworkConfig:
                     description: Configuration block with kubernetes network configuration
                       for the cluster. Detailed below.
@@ -1526,6 +1732,109 @@ spec:
                                 description: Issuer URL for the OpenID Connect identity
                                   provider.
                                 type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  kubeApiServerConfig:
+                    description: Configuration block for customizing the Kubernetes
+                      API server. Detailed below.
+                    items:
+                      properties:
+                        eventTtl:
+                          description: 'The duration that Kubernetes events are retained.
+                            Must be a single-unit duration (e.g., 30m, 1h). Valid
+                            range: 10m to 60m. Default is 1h.'
+                          type: string
+                        serviceNodePortRange:
+                          description: Configuration block for the port range available
+                            for NodePort services. Detailed below.
+                          items:
+                            properties:
+                              maxPort:
+                                description: 'The maximum port number in the range.
+                                  Valid range: 10260 to 32767. Default is 32767. Must
+                                  be greater than or equal to min_port.'
+                                type: number
+                              minPort:
+                                description: 'The minimum port number in the range.
+                                  Valid range: 10260 to 32767. Default is 30000.'
+                                type: number
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  kubeControllerManagerConfig:
+                    description: Configuration block for customizing the Kubernetes
+                      controller manager. Detailed below.
+                    items:
+                      properties:
+                        horizontalPodAutoscalerControllerConfig:
+                          description: Configuration block for the horizontal pod
+                            autoscaler controller. Detailed below.
+                          items:
+                            properties:
+                              horizontalPodAutoscalerSyncPeriod:
+                                description: 'The interval between each sync of the
+                                  horizontal pod autoscaler. Must be a single-unit
+                                  duration (e.g., 10s, 15s). Valid range: 10s to 15s.
+                                  Default is 15s.'
+                                type: string
+                            type: object
+                          type: array
+                        podGcControllerConfig:
+                          description: Configuration block for the pod garbage collection
+                            controller. Detailed below.
+                          items:
+                            properties:
+                              terminatedPodGcThreshold:
+                                description: 'The number of terminated pods that can
+                                  exist before the pod garbage collector starts deleting
+                                  them. Valid range: 0 to 12500. Refer to the aws_eks_cluster_versions
+                                  data source for any version-specific constraints.'
+                                type: number
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  kubeSchedulerConfig:
+                    description: Configuration block for customizing the Kubernetes
+                      scheduler. Detailed below.
+                    items:
+                      properties:
+                        nodeResourcesFit:
+                          description: Configuration block for the NodeResourcesFit
+                            scheduler plugin. Detailed below.
+                          items:
+                            properties:
+                              scoringStrategy:
+                                description: Configuration block for the scoring strategy
+                                  used to rank nodes during scheduling. Detailed below.
+                                items:
+                                  properties:
+                                    resource:
+                                      description: List of resource weight configuration
+                                        blocks for scoring nodes. Detailed below.
+                                      items:
+                                        properties:
+                                          name:
+                                            description: The name of the resource
+                                              (e.g., cpu, memory, nvidia.com/gpu).
+                                            type: string
+                                          weight:
+                                            description: The weight assigned to the
+                                              resource for scoring. Must be between
+                                              1 and 100.
+                                            type: number
+                                        type: object
+                                      type: array
+                                    type:
+                                      description: The scoring strategy type. Valid
+                                        values are LeastAllocated and MostAllocated.
+                                        Default is LeastAllocated.
+                                      type: string
+                                  type: object
+                                type: array
                             type: object
                           type: array
                       type: object
@@ -2016,13 +2325,12 @@ spec:
                           Detailed below.
                         properties:
                           keyArn:
-                            description: ARN of the Key Management Service (KMS) customer
-                              master key (CMK). The CMK must be symmetric, created
-                              in the same region as the cluster, and if the CMK was
-                              created in a different account, the user must have access
-                              to the CMK. For more information, see Allowing Users
-                              in Other Accounts to Use a CMK in the AWS Key Management
-                              Service Developer Guide.
+                            description: ARN of the KMS customer master key (CMK).
+                              The CMK must be symmetric, created in the same region
+                              as the cluster, and if the CMK was created in a different
+                              account, the user must have access to the CMK. For more
+                              information, see Allowing Users in Other Accounts to
+                              Use a CMK in the KMS Developer Guide.
                             type: string
                         type: object
                       resources:
@@ -2037,6 +2345,91 @@ spec:
                     description: Force version update by overriding upgrade-blocking
                       readiness checks when updating a cluster.
                     type: boolean
+                  kubeApiServerConfig:
+                    description: Configuration block for customizing the Kubernetes
+                      API server. Detailed below.
+                    properties:
+                      eventTtl:
+                        description: 'The duration that Kubernetes events are retained.
+                          Must be a single-unit duration (e.g., 30m, 1h). Valid range:
+                          10m to 60m. Default is 1h.'
+                        type: string
+                      serviceNodePortRange:
+                        description: Configuration block for the port range available
+                          for NodePort services. Detailed below.
+                        properties:
+                          maxPort:
+                            description: 'The maximum port number in the range. Valid
+                              range: 10260 to 32767. Default is 32767. Must be greater
+                              than or equal to min_port.'
+                            type: number
+                          minPort:
+                            description: 'The minimum port number in the range. Valid
+                              range: 10260 to 32767. Default is 30000.'
+                            type: number
+                        type: object
+                    type: object
+                  kubeControllerManagerConfig:
+                    description: Configuration block for customizing the Kubernetes
+                      controller manager. Detailed below.
+                    properties:
+                      horizontalPodAutoscalerControllerConfig:
+                        description: Configuration block for the horizontal pod autoscaler
+                          controller. Detailed below.
+                        properties:
+                          horizontalPodAutoscalerSyncPeriod:
+                            description: 'The interval between each sync of the horizontal
+                              pod autoscaler. Must be a single-unit duration (e.g.,
+                              10s, 15s). Valid range: 10s to 15s. Default is 15s.'
+                            type: string
+                        type: object
+                      podGcControllerConfig:
+                        description: Configuration block for the pod garbage collection
+                          controller. Detailed below.
+                        properties:
+                          terminatedPodGcThreshold:
+                            description: 'The number of terminated pods that can exist
+                              before the pod garbage collector starts deleting them.
+                              Valid range: 0 to 12500. Refer to the aws_eks_cluster_versions
+                              data source for any version-specific constraints.'
+                            type: number
+                        type: object
+                    type: object
+                  kubeSchedulerConfig:
+                    description: Configuration block for customizing the Kubernetes
+                      scheduler. Detailed below.
+                    properties:
+                      nodeResourcesFit:
+                        description: Configuration block for the NodeResourcesFit
+                          scheduler plugin. Detailed below.
+                        properties:
+                          scoringStrategy:
+                            description: Configuration block for the scoring strategy
+                              used to rank nodes during scheduling. Detailed below.
+                            properties:
+                              resource:
+                                description: List of resource weight configuration
+                                  blocks for scoring nodes. Detailed below.
+                                items:
+                                  properties:
+                                    name:
+                                      description: The name of the resource (e.g.,
+                                        cpu, memory, nvidia.com/gpu).
+                                      type: string
+                                    weight:
+                                      description: The weight assigned to the resource
+                                        for scoring. Must be between 1 and 100.
+                                      type: number
+                                  type: object
+                                type: array
+                              type:
+                                description: The scoring strategy type. Valid values
+                                  are LeastAllocated and MostAllocated. Default is
+                                  LeastAllocated.
+                                type: string
+                            type: object
+                        type: object
+                    type: object
                   kubernetesNetworkConfig:
                     description: Configuration block with kubernetes network configuration
                       for the cluster. Detailed below.
@@ -2588,13 +2981,12 @@ spec:
                           Detailed below.
                         properties:
                           keyArn:
-                            description: ARN of the Key Management Service (KMS) customer
-                              master key (CMK). The CMK must be symmetric, created
-                              in the same region as the cluster, and if the CMK was
-                              created in a different account, the user must have access
-                              to the CMK. For more information, see Allowing Users
-                              in Other Accounts to Use a CMK in the AWS Key Management
-                              Service Developer Guide.
+                            description: ARN of the KMS customer master key (CMK).
+                              The CMK must be symmetric, created in the same region
+                              as the cluster, and if the CMK was created in a different
+                              account, the user must have access to the CMK. For more
+                              information, see Allowing Users in Other Accounts to
+                              Use a CMK in the KMS Developer Guide.
                             type: string
                         type: object
                       resources:
@@ -2609,6 +3001,91 @@ spec:
                     description: Force version update by overriding upgrade-blocking
                       readiness checks when updating a cluster.
                     type: boolean
+                  kubeApiServerConfig:
+                    description: Configuration block for customizing the Kubernetes
+                      API server. Detailed below.
+                    properties:
+                      eventTtl:
+                        description: 'The duration that Kubernetes events are retained.
+                          Must be a single-unit duration (e.g., 30m, 1h). Valid range:
+                          10m to 60m. Default is 1h.'
+                        type: string
+                      serviceNodePortRange:
+                        description: Configuration block for the port range available
+                          for NodePort services. Detailed below.
+                        properties:
+                          maxPort:
+                            description: 'The maximum port number in the range. Valid
+                              range: 10260 to 32767. Default is 32767. Must be greater
+                              than or equal to min_port.'
+                            type: number
+                          minPort:
+                            description: 'The minimum port number in the range. Valid
+                              range: 10260 to 32767. Default is 30000.'
+                            type: number
+                        type: object
+                    type: object
+                  kubeControllerManagerConfig:
+                    description: Configuration block for customizing the Kubernetes
+                      controller manager. Detailed below.
+                    properties:
+                      horizontalPodAutoscalerControllerConfig:
+                        description: Configuration block for the horizontal pod autoscaler
+                          controller. Detailed below.
+                        properties:
+                          horizontalPodAutoscalerSyncPeriod:
+                            description: 'The interval between each sync of the horizontal
+                              pod autoscaler. Must be a single-unit duration (e.g.,
+                              10s, 15s). Valid range: 10s to 15s. Default is 15s.'
+                            type: string
+                        type: object
+                      podGcControllerConfig:
+                        description: Configuration block for the pod garbage collection
+                          controller. Detailed below.
+                        properties:
+                          terminatedPodGcThreshold:
+                            description: 'The number of terminated pods that can exist
+                              before the pod garbage collector starts deleting them.
+                              Valid range: 0 to 12500. Refer to the aws_eks_cluster_versions
+                              data source for any version-specific constraints.'
+                            type: number
+                        type: object
+                    type: object
+                  kubeSchedulerConfig:
+                    description: Configuration block for customizing the Kubernetes
+                      scheduler. Detailed below.
+                    properties:
+                      nodeResourcesFit:
+                        description: Configuration block for the NodeResourcesFit
+                          scheduler plugin. Detailed below.
+                        properties:
+                          scoringStrategy:
+                            description: Configuration block for the scoring strategy
+                              used to rank nodes during scheduling. Detailed below.
+                            properties:
+                              resource:
+                                description: List of resource weight configuration
+                                  blocks for scoring nodes. Detailed below.
+                                items:
+                                  properties:
+                                    name:
+                                      description: The name of the resource (e.g.,
+                                        cpu, memory, nvidia.com/gpu).
+                                      type: string
+                                    weight:
+                                      description: The weight assigned to the resource
+                                        for scoring. Must be between 1 and 100.
+                                      type: number
+                                  type: object
+                                type: array
+                              type:
+                                description: The scoring strategy type. Valid values
+                                  are LeastAllocated and MostAllocated. Default is
+                                  LeastAllocated.
+                                type: string
+                            type: object
+                        type: object
+                    type: object
                   kubernetesNetworkConfig:
                     description: Configuration block with kubernetes network configuration
                       for the cluster. Detailed below.
@@ -3260,13 +3737,12 @@ spec:
                           Detailed below.
                         properties:
                           keyArn:
-                            description: ARN of the Key Management Service (KMS) customer
-                              master key (CMK). The CMK must be symmetric, created
-                              in the same region as the cluster, and if the CMK was
-                              created in a different account, the user must have access
-                              to the CMK. For more information, see Allowing Users
-                              in Other Accounts to Use a CMK in the AWS Key Management
-                              Service Developer Guide.
+                            description: ARN of the KMS customer master key (CMK).
+                              The CMK must be symmetric, created in the same region
+                              as the cluster, and if the CMK was created in a different
+                              account, the user must have access to the CMK. For more
+                              information, see Allowing Users in Other Accounts to
+                              Use a CMK in the KMS Developer Guide.
                             type: string
                         type: object
                       resources:
@@ -3307,6 +3783,91 @@ spec:
                           type: array
                       type: object
                     type: array
+                  kubeApiServerConfig:
+                    description: Configuration block for customizing the Kubernetes
+                      API server. Detailed below.
+                    properties:
+                      eventTtl:
+                        description: 'The duration that Kubernetes events are retained.
+                          Must be a single-unit duration (e.g., 30m, 1h). Valid range:
+                          10m to 60m. Default is 1h.'
+                        type: string
+                      serviceNodePortRange:
+                        description: Configuration block for the port range available
+                          for NodePort services. Detailed below.
+                        properties:
+                          maxPort:
+                            description: 'The maximum port number in the range. Valid
+                              range: 10260 to 32767. Default is 32767. Must be greater
+                              than or equal to min_port.'
+                            type: number
+                          minPort:
+                            description: 'The minimum port number in the range. Valid
+                              range: 10260 to 32767. Default is 30000.'
+                            type: number
+                        type: object
+                    type: object
+                  kubeControllerManagerConfig:
+                    description: Configuration block for customizing the Kubernetes
+                      controller manager. Detailed below.
+                    properties:
+                      horizontalPodAutoscalerControllerConfig:
+                        description: Configuration block for the horizontal pod autoscaler
+                          controller. Detailed below.
+                        properties:
+                          horizontalPodAutoscalerSyncPeriod:
+                            description: 'The interval between each sync of the horizontal
+                              pod autoscaler. Must be a single-unit duration (e.g.,
+                              10s, 15s). Valid range: 10s to 15s. Default is 15s.'
+                            type: string
+                        type: object
+                      podGcControllerConfig:
+                        description: Configuration block for the pod garbage collection
+                          controller. Detailed below.
+                        properties:
+                          terminatedPodGcThreshold:
+                            description: 'The number of terminated pods that can exist
+                              before the pod garbage collector starts deleting them.
+                              Valid range: 0 to 12500. Refer to the aws_eks_cluster_versions
+                              data source for any version-specific constraints.'
+                            type: number
+                        type: object
+                    type: object
+                  kubeSchedulerConfig:
+                    description: Configuration block for customizing the Kubernetes
+                      scheduler. Detailed below.
+                    properties:
+                      nodeResourcesFit:
+                        description: Configuration block for the NodeResourcesFit
+                          scheduler plugin. Detailed below.
+                        properties:
+                          scoringStrategy:
+                            description: Configuration block for the scoring strategy
+                              used to rank nodes during scheduling. Detailed below.
+                            properties:
+                              resource:
+                                description: List of resource weight configuration
+                                  blocks for scoring nodes. Detailed below.
+                                items:
+                                  properties:
+                                    name:
+                                      description: The name of the resource (e.g.,
+                                        cpu, memory, nvidia.com/gpu).
+                                      type: string
+                                    weight:
+                                      description: The weight assigned to the resource
+                                        for scoring. Must be between 1 and 100.
+                                      type: number
+                                  type: object
+                                type: array
+                              type:
+                                description: The scoring strategy type. Valid values
+                                  are LeastAllocated and MostAllocated. Default is
+                                  LeastAllocated.
+                                type: string
+                            type: object
+                        type: object
+                    type: object
                   kubernetesNetworkConfig:
                     description: Configuration block with kubernetes network configuration
                       for the cluster. Detailed below.

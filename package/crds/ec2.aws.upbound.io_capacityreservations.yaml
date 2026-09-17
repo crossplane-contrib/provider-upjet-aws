@@ -114,12 +114,12 @@ spec:
                     description: The instance type for which to reserve capacity.
                     type: string
                   outpostArn:
-                    description: The Amazon Resource Name (ARN) of the Outpost on
-                      which to create the Capacity Reservation.
+                    description: ARN of the Outpost on which to create the Capacity
+                      Reservation.
                     type: string
                   placementGroupArn:
-                    description: The Amazon Resource Name (ARN) of the cluster placement
-                      group in which to create the Capacity Reservation.
+                    description: ARN of the cluster placement group in which to create
+                      the Capacity Reservation.
                     type: string
                   region:
                     description: |-
@@ -192,12 +192,12 @@ spec:
                     description: The instance type for which to reserve capacity.
                     type: string
                   outpostArn:
-                    description: The Amazon Resource Name (ARN) of the Outpost on
-                      which to create the Capacity Reservation.
+                    description: ARN of the Outpost on which to create the Capacity
+                      Reservation.
                     type: string
                   placementGroupArn:
-                    description: The Amazon Resource Name (ARN) of the cluster placement
-                      group in which to create the Capacity Reservation.
+                    description: ARN of the cluster placement group in which to create
+                      the Capacity Reservation.
                     type: string
                   tags:
                     additionalProperties:
@@ -364,16 +364,16 @@ spec:
                     description: The instance type for which to reserve capacity.
                     type: string
                   outpostArn:
-                    description: The Amazon Resource Name (ARN) of the Outpost on
-                      which to create the Capacity Reservation.
+                    description: ARN of the Outpost on which to create the Capacity
+                      Reservation.
                     type: string
                   ownerId:
                     description: The ID of the AWS account that owns the Capacity
                       Reservation.
                     type: string
                   placementGroupArn:
-                    description: The Amazon Resource Name (ARN) of the cluster placement
-                      group in which to create the Capacity Reservation.
+                    description: ARN of the cluster placement group in which to create
+                      the Capacity Reservation.
                     type: string
                   region:
                     description: |-

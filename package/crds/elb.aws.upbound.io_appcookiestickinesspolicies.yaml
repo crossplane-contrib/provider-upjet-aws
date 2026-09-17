@@ -80,15 +80,12 @@ spec:
                       should follow.
                     type: string
                   lbPort:
-                    description: |-
-                      Load balancer port to which the policy
-                      should be applied. This must be an active listener on the load
-                      balancer.
+                    description: Load balancer port to which the policy should be
+                      applied. This must be an active listener on the load balancer.
                     type: number
                   loadBalancer:
-                    description: |-
-                      Name of load balancer to which the policy
-                      should be attached.
+                    description: Name of load balancer to which the policy should
+                      be attached.
                     type: string
                   loadBalancerRef:
                     description: Reference to a ELB in elb to populate loadBalancer.
@@ -296,15 +293,12 @@ spec:
                     description: ID of the policy.
                     type: string
                   lbPort:
-                    description: |-
-                      Load balancer port to which the policy
-                      should be applied. This must be an active listener on the load
-                      balancer.
+                    description: Load balancer port to which the policy should be
+                      applied. This must be an active listener on the load balancer.
                     type: number
                   loadBalancer:
-                    description: |-
-                      Name of load balancer to which the policy
-                      should be attached.
+                    description: Name of load balancer to which the policy should
+                      be attached.
                     type: string
                   region:
                     description: |-

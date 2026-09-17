@@ -113,11 +113,10 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   sourceDbClusterIdentifier:
-                    description: 'Amazon Resource Name (ARN) to use as the primary
-                      DB Cluster of the Global Cluster on creation. NOTE: After initial
-                      creation, this argument can be removed and replaced with engine
-                      and engine_version. This allows upgrading the engine version
-                      of the Global Cluster.'
+                    description: 'ARN to use as the primary DB Cluster of the Global
+                      Cluster on creation. NOTE: After initial creation, this argument
+                      can be removed and replaced with engine and engine_version.
+                      This allows upgrading the engine version of the Global Cluster.'
                     type: string
                   sourceDbClusterIdentifierRef:
                     description: Reference to a Cluster in rds to populate sourceDbClusterIdentifier.
@@ -255,11 +254,10 @@ spec:
                       on destroy. Required with source_db_cluster_identifier.
                     type: boolean
                   sourceDbClusterIdentifier:
-                    description: 'Amazon Resource Name (ARN) to use as the primary
-                      DB Cluster of the Global Cluster on creation. NOTE: After initial
-                      creation, this argument can be removed and replaced with engine
-                      and engine_version. This allows upgrading the engine version
-                      of the Global Cluster.'
+                    description: 'ARN to use as the primary DB Cluster of the Global
+                      Cluster on creation. NOTE: After initial creation, this argument
+                      can be removed and replaced with engine and engine_version.
+                      This allows upgrading the engine version of the Global Cluster.'
                     type: string
                   sourceDbClusterIdentifierRef:
                     description: Reference to a Cluster in rds to populate sourceDbClusterIdentifier.
@@ -439,7 +437,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: RDS Global Cluster Amazon Resource Name (ARN).
+                    description: RDS Global Cluster ARN.
                     type: string
                   databaseName:
                     description: Name for an automatically created database on cluster
@@ -487,7 +485,7 @@ spec:
                     items:
                       properties:
                         dbClusterArn:
-                          description: Amazon Resource Name (ARN) of member DB Cluster.
+                          description: ARN of member DB Cluster.
                           type: string
                         isWriter:
                           description: Whether the member is the primary DB Cluster.
@@ -508,11 +506,10 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   sourceDbClusterIdentifier:
-                    description: 'Amazon Resource Name (ARN) to use as the primary
-                      DB Cluster of the Global Cluster on creation. NOTE: After initial
-                      creation, this argument can be removed and replaced with engine
-                      and engine_version. This allows upgrading the engine version
-                      of the Global Cluster.'
+                    description: 'ARN to use as the primary DB Cluster of the Global
+                      Cluster on creation. NOTE: After initial creation, this argument
+                      can be removed and replaced with engine and engine_version.
+                      This allows upgrading the engine version of the Global Cluster.'
                     type: string
                   storageEncrypted:
                     description: Specifies whether the DB cluster is encrypted. The

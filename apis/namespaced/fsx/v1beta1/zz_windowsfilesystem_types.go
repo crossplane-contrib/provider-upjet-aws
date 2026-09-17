@@ -15,7 +15,7 @@ import (
 
 type AuditLogConfigurationInitParameters struct {
 
-	// The Amazon Resource Name (ARN) for the destination of the audit logs. The destination can be any Amazon CloudWatch Logs log group ARN or Amazon Kinesis Data Firehose delivery stream ARN. Can be specified when file_access_audit_log_level and file_share_access_audit_log_level are not set to DISABLED. The name of the Amazon CloudWatch Logs log group must begin with the /aws/fsx prefix. The name of the Amazon Kinesis Data Firehouse delivery stream must begin with the aws-fsx prefix. If you do not provide a destination in audit_log_destionation, Amazon FSx will create and use a log stream in the CloudWatch Logs /aws/fsx/windows log group.
+	// ARN for the destination of the audit logs. The destination can be any Amazon CloudWatch Logs log group ARN or Amazon Kinesis Data Firehose delivery stream ARN. Can be specified when file_access_audit_log_level and file_share_access_audit_log_level are not set to DISABLED. The name of the Amazon CloudWatch Logs log group must begin with the /aws/fsx prefix. The name of the Amazon Kinesis Data Firehouse delivery stream must begin with the aws-fsx prefix. If you do not provide a destination in audit_log_destionation, Amazon FSx will create and use a log stream in the CloudWatch Logs /aws/fsx/windows log group.
 	AuditLogDestination *string `json:"auditLogDestination,omitempty" tf:"audit_log_destination,omitempty"`
 
 	// Sets which attempt type is logged by Amazon FSx for file and folder accesses. Valid values are SUCCESS_ONLY, FAILURE_ONLY, SUCCESS_AND_FAILURE, and DISABLED. Default value is DISABLED.
@@ -27,7 +27,7 @@ type AuditLogConfigurationInitParameters struct {
 
 type AuditLogConfigurationObservation struct {
 
-	// The Amazon Resource Name (ARN) for the destination of the audit logs. The destination can be any Amazon CloudWatch Logs log group ARN or Amazon Kinesis Data Firehose delivery stream ARN. Can be specified when file_access_audit_log_level and file_share_access_audit_log_level are not set to DISABLED. The name of the Amazon CloudWatch Logs log group must begin with the /aws/fsx prefix. The name of the Amazon Kinesis Data Firehouse delivery stream must begin with the aws-fsx prefix. If you do not provide a destination in audit_log_destionation, Amazon FSx will create and use a log stream in the CloudWatch Logs /aws/fsx/windows log group.
+	// ARN for the destination of the audit logs. The destination can be any Amazon CloudWatch Logs log group ARN or Amazon Kinesis Data Firehose delivery stream ARN. Can be specified when file_access_audit_log_level and file_share_access_audit_log_level are not set to DISABLED. The name of the Amazon CloudWatch Logs log group must begin with the /aws/fsx prefix. The name of the Amazon Kinesis Data Firehouse delivery stream must begin with the aws-fsx prefix. If you do not provide a destination in audit_log_destionation, Amazon FSx will create and use a log stream in the CloudWatch Logs /aws/fsx/windows log group.
 	AuditLogDestination *string `json:"auditLogDestination,omitempty" tf:"audit_log_destination,omitempty"`
 
 	// Sets which attempt type is logged by Amazon FSx for file and folder accesses. Valid values are SUCCESS_ONLY, FAILURE_ONLY, SUCCESS_AND_FAILURE, and DISABLED. Default value is DISABLED.
@@ -39,7 +39,7 @@ type AuditLogConfigurationObservation struct {
 
 type AuditLogConfigurationParameters struct {
 
-	// The Amazon Resource Name (ARN) for the destination of the audit logs. The destination can be any Amazon CloudWatch Logs log group ARN or Amazon Kinesis Data Firehose delivery stream ARN. Can be specified when file_access_audit_log_level and file_share_access_audit_log_level are not set to DISABLED. The name of the Amazon CloudWatch Logs log group must begin with the /aws/fsx prefix. The name of the Amazon Kinesis Data Firehouse delivery stream must begin with the aws-fsx prefix. If you do not provide a destination in audit_log_destionation, Amazon FSx will create and use a log stream in the CloudWatch Logs /aws/fsx/windows log group.
+	// ARN for the destination of the audit logs. The destination can be any Amazon CloudWatch Logs log group ARN or Amazon Kinesis Data Firehose delivery stream ARN. Can be specified when file_access_audit_log_level and file_share_access_audit_log_level are not set to DISABLED. The name of the Amazon CloudWatch Logs log group must begin with the /aws/fsx prefix. The name of the Amazon Kinesis Data Firehouse delivery stream must begin with the aws-fsx prefix. If you do not provide a destination in audit_log_destionation, Amazon FSx will create and use a log stream in the CloudWatch Logs /aws/fsx/windows log group.
 	// +kubebuilder:validation:Optional
 	AuditLogDestination *string `json:"auditLogDestination,omitempty" tf:"audit_log_destination,omitempty"`
 
@@ -54,11 +54,11 @@ type AuditLogConfigurationParameters struct {
 
 type SelfManagedActiveDirectoryInitParameters struct {
 
-	// A list of up to two IP addresses of DNS servers or domain controllers in the self-managed AD directory. The IP addresses need to be either in the same VPC CIDR range as the file system or in the private IP version 4 (IPv4) address ranges as specified in RFC 1918.
+	// List of up to two IP addresses of DNS servers or domain controllers in the self-managed AD directory. The IP addresses need to be either in the same VPC CIDR range as the file system or in the private IP version 4 (IPv4) address ranges as specified in RFC 1918.
 	// +listType=set
 	DNSIps []*string `json:"dnsIps,omitempty" tf:"dns_ips,omitempty"`
 
-	// The Amazon Resource Name (ARN) for the AWS Secrets Manager secret that contains the credentials for the service account on your self-managed AD domain. Conflicts with username and password.
+	// ARN for the AWS Secrets Manager secret that contains the credentials for the service account on your self-managed AD domain. Conflicts with username and password.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/secretsmanager/v1beta1.Secret
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	DomainJoinServiceAccountSecret *string `json:"domainJoinServiceAccountSecret,omitempty" tf:"domain_join_service_account_secret,omitempty"`
@@ -71,61 +71,61 @@ type SelfManagedActiveDirectoryInitParameters struct {
 	// +kubebuilder:validation:Optional
 	DomainJoinServiceAccountSecretSelector *v2.NamespacedSelector `json:"domainJoinServiceAccountSecretSelector,omitempty" tf:"-"`
 
-	// The fully qualified domain name of the self-managed AD directory. For example, corp.example.com.
+	// Fully qualified domain name of the self-managed AD directory. For example, corp.example.com.
 	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
 
-	// The name of the domain group whose members are granted administrative privileges for the file system. Administrative privileges include taking ownership of files and folders, and setting audit controls (audit ACLs) on files and folders. The group that you specify must already exist in your domain. Defaults to Domain Admins.
+	// Name of the domain group whose members are granted administrative privileges for the file system. Administrative privileges include taking ownership of files and folders, and setting audit controls (audit ACLs) on files and folders. The group that you specify must already exist in your domain. Defaults to Domain Admins.
 	FileSystemAdministratorsGroup *string `json:"fileSystemAdministratorsGroup,omitempty" tf:"file_system_administrators_group,omitempty"`
 
-	// The fully qualified distinguished name of the organizational unit within your self-managed AD directory that the Windows File Server instance will join. For example, OU=FSx,DC=yourdomain,DC=corp,DC=com. Only accepts OU as the direct parent of the file system. If none is provided, the FSx file system is created in the default location of your self-managed AD directory. To learn more, see RFC 2253.
+	// Fully qualified distinguished name of the organizational unit within your self-managed AD directory that the Windows File Server instance will join. For example, OU=FSx,DC=yourdomain,DC=corp,DC=com. Only accepts OU as the direct parent of the file system. If none is provided, the FSx file system is created in the default location of your self-managed AD directory. To learn more, see RFC 2253.
 	OrganizationalUnitDistinguishedName *string `json:"organizationalUnitDistinguishedName,omitempty" tf:"organizational_unit_distinguished_name,omitempty"`
 
-	// The password for the service account on your self-managed AD domain that Amazon FSx will use to join to your AD domain. Conflicts with domain_join_service_account_secret and password_wo.
+	// Password for the service account on your self-managed AD domain that Amazon FSx will use to join to your AD domain. Conflicts with domain_join_service_account_secret and password_wo.
 	PasswordSecretRef *v2.LocalSecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
-	// The password for the service account on your self-managed AD domain that Amazon FSx will use to join to your AD domain. This is a write-only argument which is not persisted to state. Conflicts with domain_join_service_account_secret and password. Required with password_wo_version.
+	// Password for the service account on your self-managed AD domain that Amazon FSx will use to join to your AD domain. This is a write-only argument which is not persisted to state. Conflicts with domain_join_service_account_secret and password. Required with password_wo_version.
 	PasswordWoSecretRef *v2.LocalSecretKeySelector `json:"passwordWoSecretRef,omitempty" tf:"-"`
 
 	// Version of the password. Required with password_wo. Update this argument when the value of password_wo has changed to trigger an update to the remote password.
 	PasswordWoVersion *float64 `json:"passwordWoVersion,omitempty" tf:"password_wo_version,omitempty"`
 
-	// The user name for the service account on your self-managed AD domain that Amazon FSx will use to join to your AD domain. Conflicts with domain_join_service_account_secret.
+	// User name for the service account on your self-managed AD domain that Amazon FSx will use to join to your AD domain. Conflicts with domain_join_service_account_secret.
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 
 type SelfManagedActiveDirectoryObservation struct {
 
-	// A list of up to two IP addresses of DNS servers or domain controllers in the self-managed AD directory. The IP addresses need to be either in the same VPC CIDR range as the file system or in the private IP version 4 (IPv4) address ranges as specified in RFC 1918.
+	// List of up to two IP addresses of DNS servers or domain controllers in the self-managed AD directory. The IP addresses need to be either in the same VPC CIDR range as the file system or in the private IP version 4 (IPv4) address ranges as specified in RFC 1918.
 	// +listType=set
 	DNSIps []*string `json:"dnsIps,omitempty" tf:"dns_ips,omitempty"`
 
-	// The Amazon Resource Name (ARN) for the AWS Secrets Manager secret that contains the credentials for the service account on your self-managed AD domain. Conflicts with username and password.
+	// ARN for the AWS Secrets Manager secret that contains the credentials for the service account on your self-managed AD domain. Conflicts with username and password.
 	DomainJoinServiceAccountSecret *string `json:"domainJoinServiceAccountSecret,omitempty" tf:"domain_join_service_account_secret,omitempty"`
 
-	// The fully qualified domain name of the self-managed AD directory. For example, corp.example.com.
+	// Fully qualified domain name of the self-managed AD directory. For example, corp.example.com.
 	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
 
-	// The name of the domain group whose members are granted administrative privileges for the file system. Administrative privileges include taking ownership of files and folders, and setting audit controls (audit ACLs) on files and folders. The group that you specify must already exist in your domain. Defaults to Domain Admins.
+	// Name of the domain group whose members are granted administrative privileges for the file system. Administrative privileges include taking ownership of files and folders, and setting audit controls (audit ACLs) on files and folders. The group that you specify must already exist in your domain. Defaults to Domain Admins.
 	FileSystemAdministratorsGroup *string `json:"fileSystemAdministratorsGroup,omitempty" tf:"file_system_administrators_group,omitempty"`
 
-	// The fully qualified distinguished name of the organizational unit within your self-managed AD directory that the Windows File Server instance will join. For example, OU=FSx,DC=yourdomain,DC=corp,DC=com. Only accepts OU as the direct parent of the file system. If none is provided, the FSx file system is created in the default location of your self-managed AD directory. To learn more, see RFC 2253.
+	// Fully qualified distinguished name of the organizational unit within your self-managed AD directory that the Windows File Server instance will join. For example, OU=FSx,DC=yourdomain,DC=corp,DC=com. Only accepts OU as the direct parent of the file system. If none is provided, the FSx file system is created in the default location of your self-managed AD directory. To learn more, see RFC 2253.
 	OrganizationalUnitDistinguishedName *string `json:"organizationalUnitDistinguishedName,omitempty" tf:"organizational_unit_distinguished_name,omitempty"`
 
 	// Version of the password. Required with password_wo. Update this argument when the value of password_wo has changed to trigger an update to the remote password.
 	PasswordWoVersion *float64 `json:"passwordWoVersion,omitempty" tf:"password_wo_version,omitempty"`
 
-	// The user name for the service account on your self-managed AD domain that Amazon FSx will use to join to your AD domain. Conflicts with domain_join_service_account_secret.
+	// User name for the service account on your self-managed AD domain that Amazon FSx will use to join to your AD domain. Conflicts with domain_join_service_account_secret.
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 
 type SelfManagedActiveDirectoryParameters struct {
 
-	// A list of up to two IP addresses of DNS servers or domain controllers in the self-managed AD directory. The IP addresses need to be either in the same VPC CIDR range as the file system or in the private IP version 4 (IPv4) address ranges as specified in RFC 1918.
+	// List of up to two IP addresses of DNS servers or domain controllers in the self-managed AD directory. The IP addresses need to be either in the same VPC CIDR range as the file system or in the private IP version 4 (IPv4) address ranges as specified in RFC 1918.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	DNSIps []*string `json:"dnsIps" tf:"dns_ips,omitempty"`
 
-	// The Amazon Resource Name (ARN) for the AWS Secrets Manager secret that contains the credentials for the service account on your self-managed AD domain. Conflicts with username and password.
+	// ARN for the AWS Secrets Manager secret that contains the credentials for the service account on your self-managed AD domain. Conflicts with username and password.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/secretsmanager/v1beta1.Secret
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -139,23 +139,23 @@ type SelfManagedActiveDirectoryParameters struct {
 	// +kubebuilder:validation:Optional
 	DomainJoinServiceAccountSecretSelector *v2.NamespacedSelector `json:"domainJoinServiceAccountSecretSelector,omitempty" tf:"-"`
 
-	// The fully qualified domain name of the self-managed AD directory. For example, corp.example.com.
+	// Fully qualified domain name of the self-managed AD directory. For example, corp.example.com.
 	// +kubebuilder:validation:Optional
 	DomainName *string `json:"domainName" tf:"domain_name,omitempty"`
 
-	// The name of the domain group whose members are granted administrative privileges for the file system. Administrative privileges include taking ownership of files and folders, and setting audit controls (audit ACLs) on files and folders. The group that you specify must already exist in your domain. Defaults to Domain Admins.
+	// Name of the domain group whose members are granted administrative privileges for the file system. Administrative privileges include taking ownership of files and folders, and setting audit controls (audit ACLs) on files and folders. The group that you specify must already exist in your domain. Defaults to Domain Admins.
 	// +kubebuilder:validation:Optional
 	FileSystemAdministratorsGroup *string `json:"fileSystemAdministratorsGroup,omitempty" tf:"file_system_administrators_group,omitempty"`
 
-	// The fully qualified distinguished name of the organizational unit within your self-managed AD directory that the Windows File Server instance will join. For example, OU=FSx,DC=yourdomain,DC=corp,DC=com. Only accepts OU as the direct parent of the file system. If none is provided, the FSx file system is created in the default location of your self-managed AD directory. To learn more, see RFC 2253.
+	// Fully qualified distinguished name of the organizational unit within your self-managed AD directory that the Windows File Server instance will join. For example, OU=FSx,DC=yourdomain,DC=corp,DC=com. Only accepts OU as the direct parent of the file system. If none is provided, the FSx file system is created in the default location of your self-managed AD directory. To learn more, see RFC 2253.
 	// +kubebuilder:validation:Optional
 	OrganizationalUnitDistinguishedName *string `json:"organizationalUnitDistinguishedName,omitempty" tf:"organizational_unit_distinguished_name,omitempty"`
 
-	// The password for the service account on your self-managed AD domain that Amazon FSx will use to join to your AD domain. Conflicts with domain_join_service_account_secret and password_wo.
+	// Password for the service account on your self-managed AD domain that Amazon FSx will use to join to your AD domain. Conflicts with domain_join_service_account_secret and password_wo.
 	// +kubebuilder:validation:Optional
 	PasswordSecretRef *v2.LocalSecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
-	// The password for the service account on your self-managed AD domain that Amazon FSx will use to join to your AD domain. This is a write-only argument which is not persisted to state. Conflicts with domain_join_service_account_secret and password. Required with password_wo_version.
+	// Password for the service account on your self-managed AD domain that Amazon FSx will use to join to your AD domain. This is a write-only argument which is not persisted to state. Conflicts with domain_join_service_account_secret and password. Required with password_wo_version.
 	// +kubebuilder:validation:Optional
 	PasswordWoSecretRef *v2.LocalSecretKeySelector `json:"passwordWoSecretRef,omitempty" tf:"-"`
 
@@ -163,43 +163,43 @@ type SelfManagedActiveDirectoryParameters struct {
 	// +kubebuilder:validation:Optional
 	PasswordWoVersion *float64 `json:"passwordWoVersion,omitempty" tf:"password_wo_version,omitempty"`
 
-	// The user name for the service account on your self-managed AD domain that Amazon FSx will use to join to your AD domain. Conflicts with domain_join_service_account_secret.
+	// User name for the service account on your self-managed AD domain that Amazon FSx will use to join to your AD domain. Conflicts with domain_join_service_account_secret.
 	// +kubebuilder:validation:Optional
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 
 type WindowsFileSystemDiskIopsConfigurationInitParameters struct {
 
-	// The total number of SSD IOPS provisioned for the file system.
+	// Total number of SSD IOPS provisioned for the file system.
 	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
-	// Specifies whether the number of IOPS for the file system is using the system. Valid values are AUTOMATIC and USER_PROVISIONED. Default value is AUTOMATIC.
+	// Mode for the number of IOPS for the file system. Valid values are AUTOMATIC and USER_PROVISIONED. Default value is AUTOMATIC.
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 }
 
 type WindowsFileSystemDiskIopsConfigurationObservation struct {
 
-	// The total number of SSD IOPS provisioned for the file system.
+	// Total number of SSD IOPS provisioned for the file system.
 	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
-	// Specifies whether the number of IOPS for the file system is using the system. Valid values are AUTOMATIC and USER_PROVISIONED. Default value is AUTOMATIC.
+	// Mode for the number of IOPS for the file system. Valid values are AUTOMATIC and USER_PROVISIONED. Default value is AUTOMATIC.
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 }
 
 type WindowsFileSystemDiskIopsConfigurationParameters struct {
 
-	// The total number of SSD IOPS provisioned for the file system.
+	// Total number of SSD IOPS provisioned for the file system.
 	// +kubebuilder:validation:Optional
 	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
-	// Specifies whether the number of IOPS for the file system is using the system. Valid values are AUTOMATIC and USER_PROVISIONED. Default value is AUTOMATIC.
+	// Mode for the number of IOPS for the file system. Valid values are AUTOMATIC and USER_PROVISIONED. Default value is AUTOMATIC.
 	// +kubebuilder:validation:Optional
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 }
 
 type WindowsFileSystemInitParameters struct {
 
-	// The ID for an existing Microsoft Active Directory instance that the file system should join when it's created. Cannot be specified with self_managed_active_directory.
+	// ID for an existing Microsoft Active Directory instance that the file system should join when it's created. Cannot be specified with self_managed_active_directory.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ds/v1beta1.Directory
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ActiveDirectoryID *string `json:"activeDirectoryId,omitempty" tf:"active_directory_id,omitempty"`
@@ -212,32 +212,32 @@ type WindowsFileSystemInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ActiveDirectoryIDSelector *v2.NamespacedSelector `json:"activeDirectoryIdSelector,omitempty" tf:"-"`
 
-	// An array DNS alias names that you want to associate with the Amazon FSx file system.  For more information, see Working with DNS Aliases
+	// Array DNS alias names that you want to associate with the Amazon FSx file system.  For more information, see Working with DNS Aliases
 	// +listType=set
 	Aliases []*string `json:"aliases,omitempty" tf:"aliases,omitempty"`
 
-	// The configuration that Amazon FSx for Windows File Server uses to audit and log user accesses of files, folders, and file shares on the Amazon FSx for Windows File Server file system. See audit_log_configuration Block for details.
+	// Configuration that Amazon FSx for Windows File Server uses to audit and log user accesses of files, folders, and file shares on the Amazon FSx for Windows File Server file system. See audit_log_configuration Block for details.
 	AuditLogConfiguration *AuditLogConfigurationInitParameters `json:"auditLogConfiguration,omitempty" tf:"audit_log_configuration,omitempty"`
 
-	// The number of days to retain automatic backups. Minimum of 0 and maximum of 90. Defaults to 7. Set to 0 to disable.
+	// Number of days to retain automatic backups. Minimum of 0 and maximum of 90. Defaults to 7. Set to 0 to disable.
 	AutomaticBackupRetentionDays *float64 `json:"automaticBackupRetentionDays,omitempty" tf:"automatic_backup_retention_days,omitempty"`
 
-	// The ID of the source backup to create the filesystem from.
+	// ID of the source backup to create the filesystem from.
 	BackupID *string `json:"backupId,omitempty" tf:"backup_id,omitempty"`
 
-	// A boolean flag indicating whether tags on the file system should be copied to backups. Defaults to false.
+	// Whether to copy tags on the file system to backups. Defaults to false.
 	CopyTagsToBackups *bool `json:"copyTagsToBackups,omitempty" tf:"copy_tags_to_backups,omitempty"`
 
-	// The preferred time (in HH:MM format) to take daily automatic backups, in the UTC time zone.
+	// Preferred time (in HH:MM format) to take daily automatic backups, in the UTC time zone.
 	DailyAutomaticBackupStartTime *string `json:"dailyAutomaticBackupStartTime,omitempty" tf:"daily_automatic_backup_start_time,omitempty"`
 
-	// Specifies the file system deployment type, valid values are MULTI_AZ_1, SINGLE_AZ_1 and SINGLE_AZ_2. Default value is SINGLE_AZ_1.
+	// File system deployment type. Valid values are MULTI_AZ_1, SINGLE_AZ_1 and SINGLE_AZ_2. Default value is SINGLE_AZ_1.
 	DeploymentType *string `json:"deploymentType,omitempty" tf:"deployment_type,omitempty"`
 
-	// The SSD IOPS configuration for the Amazon FSx for Windows File Server file system. See disk_iops_configuration Block for details.
+	// SSD IOPS configuration for the Amazon FSx for Windows File Server file system. See disk_iops_configuration Block for details.
 	DiskIopsConfiguration *WindowsFileSystemDiskIopsConfigurationInitParameters `json:"diskIopsConfiguration,omitempty" tf:"disk_iops_configuration,omitempty"`
 
-	// A map of tags to apply to the file system's final backup.
+	// Map of tags to apply to the file system's final backup.
 	// +mapType=granular
 	FinalBackupTags map[string]*string `json:"finalBackupTags,omitempty" tf:"final_backup_tags,omitempty"`
 
@@ -254,7 +254,10 @@ type WindowsFileSystemInitParameters struct {
 	// +kubebuilder:validation:Optional
 	KMSKeyIDSelector *v2.NamespacedSelector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
-	// Specifies the subnet in which you want the preferred file server to be located. Required for when deployment type is MULTI_AZ_1.
+	// Network type. Valid values are IPV4 and DUAL. Default value is IPV4.
+	NetworkType *string `json:"networkType,omitempty" tf:"network_type,omitempty"`
+
+	// Subnet in which you want the preferred file server to be located. Required for when deployment type is MULTI_AZ_1.
 	PreferredSubnetID *string `json:"preferredSubnetId,omitempty" tf:"preferred_subnet_id,omitempty"`
 
 	// References to SecurityGroup in ec2 to populate securityGroupIds.
@@ -265,7 +268,7 @@ type WindowsFileSystemInitParameters struct {
 	// +kubebuilder:validation:Optional
 	SecurityGroupIDSelector *v2.NamespacedSelector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 
-	// A list of IDs for the security groups that apply to the specified network interfaces created for file system access. These security groups will apply to all network interfaces.
+	// List of IDs for the security groups that apply to the specified network interfaces created for file system access. These security groups will apply to all network interfaces.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=SecurityGroupIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SecurityGroupIDSelector
@@ -281,7 +284,7 @@ type WindowsFileSystemInitParameters struct {
 	// Storage capacity (GiB) of the file system. Minimum of 32 and maximum of 65536. If the storage type is set to HDD the minimum value is 2000. Required when not creating filesystem for a backup.
 	StorageCapacity *float64 `json:"storageCapacity,omitempty" tf:"storage_capacity,omitempty"`
 
-	// Specifies the storage type, Valid values are SSD and HDD. HDD is supported on SINGLE_AZ_2 and MULTI_AZ_1 Windows file system deployment types. Default value is SSD.
+	// Storage type. Valid values are SSD and HDD. HDD is supported on SINGLE_AZ_2 and MULTI_AZ_1 Windows file system deployment types. Default value is SSD.
 	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
 
 	// References to Subnet in ec2 to populate subnetIds.
@@ -292,7 +295,7 @@ type WindowsFileSystemInitParameters struct {
 	// +kubebuilder:validation:Optional
 	SubnetIDSelector *v2.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 
-	// A list of IDs for the subnets that the file system will be accessible from. To specify more than a single subnet set deployment_type to MULTI_AZ_1.
+	// List of IDs for the subnets that the file system will be accessible from. To specify more than a single subnet set deployment_type to MULTI_AZ_1.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:refFieldName=SubnetIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SubnetIDSelector
@@ -305,47 +308,47 @@ type WindowsFileSystemInitParameters struct {
 	// Throughput (megabytes per second) of the file system. For valid values, refer to the AWS documentation.
 	ThroughputCapacity *float64 `json:"throughputCapacity,omitempty" tf:"throughput_capacity,omitempty"`
 
-	// The preferred start time (in d:HH:MM format) to perform weekly maintenance, in the UTC time zone.
+	// Preferred start time (in d:HH:MM format) to perform weekly maintenance, in the UTC time zone.
 	WeeklyMaintenanceStartTime *string `json:"weeklyMaintenanceStartTime,omitempty" tf:"weekly_maintenance_start_time,omitempty"`
 }
 
 type WindowsFileSystemObservation struct {
 
-	// The ID for an existing Microsoft Active Directory instance that the file system should join when it's created. Cannot be specified with self_managed_active_directory.
+	// ID for an existing Microsoft Active Directory instance that the file system should join when it's created. Cannot be specified with self_managed_active_directory.
 	ActiveDirectoryID *string `json:"activeDirectoryId,omitempty" tf:"active_directory_id,omitempty"`
 
-	// An array DNS alias names that you want to associate with the Amazon FSx file system.  For more information, see Working with DNS Aliases
+	// Array DNS alias names that you want to associate with the Amazon FSx file system.  For more information, see Working with DNS Aliases
 	// +listType=set
 	Aliases []*string `json:"aliases,omitempty" tf:"aliases,omitempty"`
 
-	// Amazon Resource Name of the file system.
+	// ARN of the file system.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The configuration that Amazon FSx for Windows File Server uses to audit and log user accesses of files, folders, and file shares on the Amazon FSx for Windows File Server file system. See audit_log_configuration Block for details.
+	// Configuration that Amazon FSx for Windows File Server uses to audit and log user accesses of files, folders, and file shares on the Amazon FSx for Windows File Server file system. See audit_log_configuration Block for details.
 	AuditLogConfiguration *AuditLogConfigurationObservation `json:"auditLogConfiguration,omitempty" tf:"audit_log_configuration,omitempty"`
 
-	// The number of days to retain automatic backups. Minimum of 0 and maximum of 90. Defaults to 7. Set to 0 to disable.
+	// Number of days to retain automatic backups. Minimum of 0 and maximum of 90. Defaults to 7. Set to 0 to disable.
 	AutomaticBackupRetentionDays *float64 `json:"automaticBackupRetentionDays,omitempty" tf:"automatic_backup_retention_days,omitempty"`
 
-	// The ID of the source backup to create the filesystem from.
+	// ID of the source backup to create the filesystem from.
 	BackupID *string `json:"backupId,omitempty" tf:"backup_id,omitempty"`
 
-	// A boolean flag indicating whether tags on the file system should be copied to backups. Defaults to false.
+	// Whether to copy tags on the file system to backups. Defaults to false.
 	CopyTagsToBackups *bool `json:"copyTagsToBackups,omitempty" tf:"copy_tags_to_backups,omitempty"`
 
 	// DNS name for the file system, e.g., fs-12345678.corp.example.com (domain name matching the Active Directory domain name)
 	DNSName *string `json:"dnsName,omitempty" tf:"dns_name,omitempty"`
 
-	// The preferred time (in HH:MM format) to take daily automatic backups, in the UTC time zone.
+	// Preferred time (in HH:MM format) to take daily automatic backups, in the UTC time zone.
 	DailyAutomaticBackupStartTime *string `json:"dailyAutomaticBackupStartTime,omitempty" tf:"daily_automatic_backup_start_time,omitempty"`
 
-	// Specifies the file system deployment type, valid values are MULTI_AZ_1, SINGLE_AZ_1 and SINGLE_AZ_2. Default value is SINGLE_AZ_1.
+	// File system deployment type. Valid values are MULTI_AZ_1, SINGLE_AZ_1 and SINGLE_AZ_2. Default value is SINGLE_AZ_1.
 	DeploymentType *string `json:"deploymentType,omitempty" tf:"deployment_type,omitempty"`
 
-	// The SSD IOPS configuration for the Amazon FSx for Windows File Server file system. See disk_iops_configuration Block for details.
+	// SSD IOPS configuration for the Amazon FSx for Windows File Server file system. See disk_iops_configuration Block for details.
 	DiskIopsConfiguration *WindowsFileSystemDiskIopsConfigurationObservation `json:"diskIopsConfiguration,omitempty" tf:"disk_iops_configuration,omitempty"`
 
-	// A map of tags to apply to the file system's final backup.
+	// Map of tags to apply to the file system's final backup.
 	// +mapType=granular
 	FinalBackupTags map[string]*string `json:"finalBackupTags,omitempty" tf:"final_backup_tags,omitempty"`
 
@@ -359,13 +362,16 @@ type WindowsFileSystemObservation struct {
 	// +listType=set
 	NetworkInterfaceIds []*string `json:"networkInterfaceIds,omitempty" tf:"network_interface_ids,omitempty"`
 
+	// Network type. Valid values are IPV4 and DUAL. Default value is IPV4.
+	NetworkType *string `json:"networkType,omitempty" tf:"network_type,omitempty"`
+
 	// AWS account identifier that created the file system.
 	OwnerID *string `json:"ownerId,omitempty" tf:"owner_id,omitempty"`
 
-	// The IP address of the primary, or preferred, file server.
+	// IP address of the primary, or preferred, file server.
 	PreferredFileServerIP *string `json:"preferredFileServerIp,omitempty" tf:"preferred_file_server_ip,omitempty"`
 
-	// Specifies the subnet in which you want the preferred file server to be located. Required for when deployment type is MULTI_AZ_1.
+	// Subnet in which you want the preferred file server to be located. Required for when deployment type is MULTI_AZ_1.
 	PreferredSubnetID *string `json:"preferredSubnetId,omitempty" tf:"preferred_subnet_id,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -375,7 +381,7 @@ type WindowsFileSystemObservation struct {
 	// For MULTI_AZ_1 deployment types, use this endpoint when performing administrative tasks on the file system using Amazon FSx Remote PowerShell. For SINGLE_AZ_1 deployment types, this is the DNS name of the file system.
 	RemoteAdministrationEndpoint *string `json:"remoteAdministrationEndpoint,omitempty" tf:"remote_administration_endpoint,omitempty"`
 
-	// A list of IDs for the security groups that apply to the specified network interfaces created for file system access. These security groups will apply to all network interfaces.
+	// List of IDs for the security groups that apply to the specified network interfaces created for file system access. These security groups will apply to all network interfaces.
 	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
@@ -388,33 +394,33 @@ type WindowsFileSystemObservation struct {
 	// Storage capacity (GiB) of the file system. Minimum of 32 and maximum of 65536. If the storage type is set to HDD the minimum value is 2000. Required when not creating filesystem for a backup.
 	StorageCapacity *float64 `json:"storageCapacity,omitempty" tf:"storage_capacity,omitempty"`
 
-	// Specifies the storage type, Valid values are SSD and HDD. HDD is supported on SINGLE_AZ_2 and MULTI_AZ_1 Windows file system deployment types. Default value is SSD.
+	// Storage type. Valid values are SSD and HDD. HDD is supported on SINGLE_AZ_2 and MULTI_AZ_1 Windows file system deployment types. Default value is SSD.
 	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
 
-	// A list of IDs for the subnets that the file system will be accessible from. To specify more than a single subnet set deployment_type to MULTI_AZ_1.
+	// List of IDs for the subnets that the file system will be accessible from. To specify more than a single subnet set deployment_type to MULTI_AZ_1.
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Throughput (megabytes per second) of the file system. For valid values, refer to the AWS documentation.
 	ThroughputCapacity *float64 `json:"throughputCapacity,omitempty" tf:"throughput_capacity,omitempty"`
 
-	// Identifier of the Virtual Private Cloud for the file system.
+	// Identifier of the VPC for the file system.
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 
-	// The preferred start time (in d:HH:MM format) to perform weekly maintenance, in the UTC time zone.
+	// Preferred start time (in d:HH:MM format) to perform weekly maintenance, in the UTC time zone.
 	WeeklyMaintenanceStartTime *string `json:"weeklyMaintenanceStartTime,omitempty" tf:"weekly_maintenance_start_time,omitempty"`
 }
 
 type WindowsFileSystemParameters struct {
 
-	// The ID for an existing Microsoft Active Directory instance that the file system should join when it's created. Cannot be specified with self_managed_active_directory.
+	// ID for an existing Microsoft Active Directory instance that the file system should join when it's created. Cannot be specified with self_managed_active_directory.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ds/v1beta1.Directory
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -428,40 +434,40 @@ type WindowsFileSystemParameters struct {
 	// +kubebuilder:validation:Optional
 	ActiveDirectoryIDSelector *v2.NamespacedSelector `json:"activeDirectoryIdSelector,omitempty" tf:"-"`
 
-	// An array DNS alias names that you want to associate with the Amazon FSx file system.  For more information, see Working with DNS Aliases
+	// Array DNS alias names that you want to associate with the Amazon FSx file system.  For more information, see Working with DNS Aliases
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	Aliases []*string `json:"aliases,omitempty" tf:"aliases,omitempty"`
 
-	// The configuration that Amazon FSx for Windows File Server uses to audit and log user accesses of files, folders, and file shares on the Amazon FSx for Windows File Server file system. See audit_log_configuration Block for details.
+	// Configuration that Amazon FSx for Windows File Server uses to audit and log user accesses of files, folders, and file shares on the Amazon FSx for Windows File Server file system. See audit_log_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	AuditLogConfiguration *AuditLogConfigurationParameters `json:"auditLogConfiguration,omitempty" tf:"audit_log_configuration,omitempty"`
 
-	// The number of days to retain automatic backups. Minimum of 0 and maximum of 90. Defaults to 7. Set to 0 to disable.
+	// Number of days to retain automatic backups. Minimum of 0 and maximum of 90. Defaults to 7. Set to 0 to disable.
 	// +kubebuilder:validation:Optional
 	AutomaticBackupRetentionDays *float64 `json:"automaticBackupRetentionDays,omitempty" tf:"automatic_backup_retention_days,omitempty"`
 
-	// The ID of the source backup to create the filesystem from.
+	// ID of the source backup to create the filesystem from.
 	// +kubebuilder:validation:Optional
 	BackupID *string `json:"backupId,omitempty" tf:"backup_id,omitempty"`
 
-	// A boolean flag indicating whether tags on the file system should be copied to backups. Defaults to false.
+	// Whether to copy tags on the file system to backups. Defaults to false.
 	// +kubebuilder:validation:Optional
 	CopyTagsToBackups *bool `json:"copyTagsToBackups,omitempty" tf:"copy_tags_to_backups,omitempty"`
 
-	// The preferred time (in HH:MM format) to take daily automatic backups, in the UTC time zone.
+	// Preferred time (in HH:MM format) to take daily automatic backups, in the UTC time zone.
 	// +kubebuilder:validation:Optional
 	DailyAutomaticBackupStartTime *string `json:"dailyAutomaticBackupStartTime,omitempty" tf:"daily_automatic_backup_start_time,omitempty"`
 
-	// Specifies the file system deployment type, valid values are MULTI_AZ_1, SINGLE_AZ_1 and SINGLE_AZ_2. Default value is SINGLE_AZ_1.
+	// File system deployment type. Valid values are MULTI_AZ_1, SINGLE_AZ_1 and SINGLE_AZ_2. Default value is SINGLE_AZ_1.
 	// +kubebuilder:validation:Optional
 	DeploymentType *string `json:"deploymentType,omitempty" tf:"deployment_type,omitempty"`
 
-	// The SSD IOPS configuration for the Amazon FSx for Windows File Server file system. See disk_iops_configuration Block for details.
+	// SSD IOPS configuration for the Amazon FSx for Windows File Server file system. See disk_iops_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	DiskIopsConfiguration *WindowsFileSystemDiskIopsConfigurationParameters `json:"diskIopsConfiguration,omitempty" tf:"disk_iops_configuration,omitempty"`
 
-	// A map of tags to apply to the file system's final backup.
+	// Map of tags to apply to the file system's final backup.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	FinalBackupTags map[string]*string `json:"finalBackupTags,omitempty" tf:"final_backup_tags,omitempty"`
@@ -480,7 +486,11 @@ type WindowsFileSystemParameters struct {
 	// +kubebuilder:validation:Optional
 	KMSKeyIDSelector *v2.NamespacedSelector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
-	// Specifies the subnet in which you want the preferred file server to be located. Required for when deployment type is MULTI_AZ_1.
+	// Network type. Valid values are IPV4 and DUAL. Default value is IPV4.
+	// +kubebuilder:validation:Optional
+	NetworkType *string `json:"networkType,omitempty" tf:"network_type,omitempty"`
+
+	// Subnet in which you want the preferred file server to be located. Required for when deployment type is MULTI_AZ_1.
 	// +kubebuilder:validation:Optional
 	PreferredSubnetID *string `json:"preferredSubnetId,omitempty" tf:"preferred_subnet_id,omitempty"`
 
@@ -497,7 +507,7 @@ type WindowsFileSystemParameters struct {
 	// +kubebuilder:validation:Optional
 	SecurityGroupIDSelector *v2.NamespacedSelector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 
-	// A list of IDs for the security groups that apply to the specified network interfaces created for file system access. These security groups will apply to all network interfaces.
+	// List of IDs for the security groups that apply to the specified network interfaces created for file system access. These security groups will apply to all network interfaces.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=SecurityGroupIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SecurityGroupIDSelector
@@ -517,7 +527,7 @@ type WindowsFileSystemParameters struct {
 	// +kubebuilder:validation:Optional
 	StorageCapacity *float64 `json:"storageCapacity,omitempty" tf:"storage_capacity,omitempty"`
 
-	// Specifies the storage type, Valid values are SSD and HDD. HDD is supported on SINGLE_AZ_2 and MULTI_AZ_1 Windows file system deployment types. Default value is SSD.
+	// Storage type. Valid values are SSD and HDD. HDD is supported on SINGLE_AZ_2 and MULTI_AZ_1 Windows file system deployment types. Default value is SSD.
 	// +kubebuilder:validation:Optional
 	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
 
@@ -529,7 +539,7 @@ type WindowsFileSystemParameters struct {
 	// +kubebuilder:validation:Optional
 	SubnetIDSelector *v2.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 
-	// A list of IDs for the subnets that the file system will be accessible from. To specify more than a single subnet set deployment_type to MULTI_AZ_1.
+	// List of IDs for the subnets that the file system will be accessible from. To specify more than a single subnet set deployment_type to MULTI_AZ_1.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:refFieldName=SubnetIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SubnetIDSelector
@@ -545,7 +555,7 @@ type WindowsFileSystemParameters struct {
 	// +kubebuilder:validation:Optional
 	ThroughputCapacity *float64 `json:"throughputCapacity,omitempty" tf:"throughput_capacity,omitempty"`
 
-	// The preferred start time (in d:HH:MM format) to perform weekly maintenance, in the UTC time zone.
+	// Preferred start time (in d:HH:MM format) to perform weekly maintenance, in the UTC time zone.
 	// +kubebuilder:validation:Optional
 	WeeklyMaintenanceStartTime *string `json:"weeklyMaintenanceStartTime,omitempty" tf:"weekly_maintenance_start_time,omitempty"`
 }

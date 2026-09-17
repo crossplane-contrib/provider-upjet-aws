@@ -157,7 +157,7 @@ type FindingsFilterObservation struct {
 	// The action to perform on findings that meet the filter criteria (finding_criteria). Valid values are: ARCHIVE, suppress (automatically archive) the findings; and, NOOP, don't perform any action on the findings.
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the Findings Filter.
+	// ARN of the Findings Filter.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// A custom description of the filter. The description can contain as many as 512 characters.

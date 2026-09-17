@@ -24,7 +24,7 @@ type SQLInjectionMatchSetInitParameters struct {
 
 type SQLInjectionMatchSetObservation struct {
 
-	// Amazon Resource Name (ARN) of the SQL injection match set.
+	// ARN of the SQL injection match set.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The ID of the WAF SQL Injection Match Set.

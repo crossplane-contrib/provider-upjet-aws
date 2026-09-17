@@ -15,10 +15,10 @@ import (
 
 type SSHKeyInitParameters struct {
 
-	// (Requirement) The public key portion of an SSH key pair.
+	// Public key portion of an SSH key pair.
 	Body *string `json:"body,omitempty" tf:"body,omitempty"`
 
-	// (Requirement) The Server ID of the Transfer Server (e.g., s-12345678)
+	// Server ID of the Transfer Server (e.g., s-12345678)
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/transfer/v1beta1.Server
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ServerID *string `json:"serverId,omitempty" tf:"server_id,omitempty"`
@@ -31,7 +31,7 @@ type SSHKeyInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ServerIDSelector *v2.NamespacedSelector `json:"serverIdSelector,omitempty" tf:"-"`
 
-	// (Requirement) The name of the user account that is assigned to one or more servers.
+	// Name of the user account that is assigned to one or more servers.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/transfer/v1beta1.User
 	UserName *string `json:"userName,omitempty" tf:"user_name,omitempty"`
 
@@ -46,7 +46,7 @@ type SSHKeyInitParameters struct {
 
 type SSHKeyObservation struct {
 
-	// (Requirement) The public key portion of an SSH key pair.
+	// Public key portion of an SSH key pair.
 	Body *string `json:"body,omitempty" tf:"body,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -55,18 +55,19 @@ type SSHKeyObservation struct {
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
+	// ID of the SSH public key.
 	SSHKeyID *string `json:"sshKeyId,omitempty" tf:"ssh_key_id,omitempty"`
 
-	// (Requirement) The Server ID of the Transfer Server (e.g., s-12345678)
+	// Server ID of the Transfer Server (e.g., s-12345678)
 	ServerID *string `json:"serverId,omitempty" tf:"server_id,omitempty"`
 
-	// (Requirement) The name of the user account that is assigned to one or more servers.
+	// Name of the user account that is assigned to one or more servers.
 	UserName *string `json:"userName,omitempty" tf:"user_name,omitempty"`
 }
 
 type SSHKeyParameters struct {
 
-	// (Requirement) The public key portion of an SSH key pair.
+	// Public key portion of an SSH key pair.
 	// +kubebuilder:validation:Optional
 	Body *string `json:"body,omitempty" tf:"body,omitempty"`
 
@@ -75,7 +76,7 @@ type SSHKeyParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// (Requirement) The Server ID of the Transfer Server (e.g., s-12345678)
+	// Server ID of the Transfer Server (e.g., s-12345678)
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/transfer/v1beta1.Server
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -89,7 +90,7 @@ type SSHKeyParameters struct {
 	// +kubebuilder:validation:Optional
 	ServerIDSelector *v2.NamespacedSelector `json:"serverIdSelector,omitempty" tf:"-"`
 
-	// (Requirement) The name of the user account that is assigned to one or more servers.
+	// Name of the user account that is assigned to one or more servers.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/transfer/v1beta1.User
 	// +kubebuilder:validation:Optional
 	UserName *string `json:"userName,omitempty" tf:"user_name,omitempty"`

@@ -75,10 +75,9 @@ spec:
               forProvider:
                 properties:
                   kmsKeyId:
-                    description: The AWS KMS key identifier for encryption of the
-                      replicated automated backups. The KMS key ID is the Amazon Resource
-                      Name (ARN) for the KMS encryption key in the destination AWS
-                      Region, for example, arn:aws:kms:us-east-1:123456789012:key/AKIAIOSFODNN7EXAMPLE.
+                    description: AWS KMS key identifier for encryption of the replicated
+                      automated backups. The KMS key ID is the ARN for the KMS encryption
+                      key in the destination AWS Region, for example, arn:aws:kms:us-east-1:123456789012:key/AKIAIOSFODNN7EXAMPLE.
                     type: string
                   kmsKeyIdRef:
                     description: Reference to a Key in kms to populate kmsKeyId.
@@ -169,8 +168,8 @@ spec:
                       backups, defaults to 7.
                     type: number
                   sourceDbInstanceArn:
-                    description: The Amazon Resource Name (ARN) of the source DB instance
-                      for the replicated automated backups, for example, arn:aws:rds:us-west-2:123456789012:db:mydatabase.
+                    description: ARN of the source DB instance for the replicated
+                      automated backups, for example, arn:aws:rds:us-west-2:123456789012:db:mydatabase.
                     type: string
                   sourceDbInstanceArnRef:
                     description: Reference to a Instance in rds to populate sourceDbInstanceArn.
@@ -263,10 +262,9 @@ spec:
                   autoscaler.
                 properties:
                   kmsKeyId:
-                    description: The AWS KMS key identifier for encryption of the
-                      replicated automated backups. The KMS key ID is the Amazon Resource
-                      Name (ARN) for the KMS encryption key in the destination AWS
-                      Region, for example, arn:aws:kms:us-east-1:123456789012:key/AKIAIOSFODNN7EXAMPLE.
+                    description: AWS KMS key identifier for encryption of the replicated
+                      automated backups. The KMS key ID is the ARN for the KMS encryption
+                      key in the destination AWS Region, for example, arn:aws:kms:us-east-1:123456789012:key/AKIAIOSFODNN7EXAMPLE.
                     type: string
                   kmsKeyIdRef:
                     description: Reference to a Key in kms to populate kmsKeyId.
@@ -352,8 +350,8 @@ spec:
                       backups, defaults to 7.
                     type: number
                   sourceDbInstanceArn:
-                    description: The Amazon Resource Name (ARN) of the source DB instance
-                      for the replicated automated backups, for example, arn:aws:rds:us-west-2:123456789012:db:mydatabase.
+                    description: ARN of the source DB instance for the replicated
+                      automated backups, for example, arn:aws:rds:us-west-2:123456789012:db:mydatabase.
                     type: string
                   sourceDbInstanceArnRef:
                     description: Reference to a Instance in rds to populate sourceDbInstanceArn.
@@ -523,14 +521,12 @@ spec:
               atProvider:
                 properties:
                   id:
-                    description: The Amazon Resource Name (ARN) of the replicated
-                      automated backups.
+                    description: ARN of the replicated automated backups.
                     type: string
                   kmsKeyId:
-                    description: The AWS KMS key identifier for encryption of the
-                      replicated automated backups. The KMS key ID is the Amazon Resource
-                      Name (ARN) for the KMS encryption key in the destination AWS
-                      Region, for example, arn:aws:kms:us-east-1:123456789012:key/AKIAIOSFODNN7EXAMPLE.
+                    description: AWS KMS key identifier for encryption of the replicated
+                      automated backups. The KMS key ID is the ARN for the KMS encryption
+                      key in the destination AWS Region, for example, arn:aws:kms:us-east-1:123456789012:key/AKIAIOSFODNN7EXAMPLE.
                     type: string
                   preSignedUrl:
                     description: A URL that contains a Signature Version 4 signed
@@ -547,8 +543,8 @@ spec:
                       backups, defaults to 7.
                     type: number
                   sourceDbInstanceArn:
-                    description: The Amazon Resource Name (ARN) of the source DB instance
-                      for the replicated automated backups, for example, arn:aws:rds:us-west-2:123456789012:db:mydatabase.
+                    description: ARN of the source DB instance for the replicated
+                      automated backups, for example, arn:aws:rds:us-west-2:123456789012:db:mydatabase.
                     type: string
                 type: object
               conditions:

@@ -35,8 +35,8 @@ metadata:
 spec:
   forProvider:
     bandwidth:
-      - downloadSpeed: 50
-        uploadSpeed: 10
+      downloadSpeed: 50
+      uploadSpeed: 10
     globalNetworkIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -70,7 +70,7 @@ metadata:
   name: example
   namespace: upbound-system
 spec:
-  forProvider:
+  forProvider: {}
 ---
 apiVersion: networkmanager.aws.m.upbound.io/v1beta1
 kind: Device

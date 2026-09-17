@@ -68,8 +68,8 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   resourceArn:
-                    description: Amazon Resource Name (ARN) of the resource for which
-                      to create or update the resource policy.
+                    description: ARN of the resource for which to create or update
+                      the resource policy.
                     type: string
                 required:
                 - region
@@ -171,8 +171,8 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   resourceArn:
-                    description: Amazon Resource Name (ARN) of the resource for which
-                      to create or update the resource policy.
+                    description: ARN of the resource for which to create or update
+                      the resource policy.
                     type: string
                 type: object
               conditions:

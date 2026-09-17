@@ -81,7 +81,7 @@ spec:
                     items:
                       properties:
                         copyFrom:
-                          description: The Amazon Resource Name (ARN) of the model.
+                          description: The ARN of the model.
                           type: string
                       type: object
                     type: array
@@ -124,7 +124,7 @@ spec:
                     items:
                       properties:
                         copyFrom:
-                          description: The Amazon Resource Name (ARN) of the model.
+                          description: The ARN of the model.
                           type: string
                       type: object
                     type: array
@@ -235,7 +235,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The Amazon Resource Name (ARN) of the inference profile.
+                    description: The ARN of the inference profile.
                     type: string
                   createdAt:
                     description: The time at which the inference profile was created.
@@ -252,7 +252,7 @@ spec:
                     items:
                       properties:
                         copyFrom:
-                          description: The Amazon Resource Name (ARN) of the model.
+                          description: The ARN of the model.
                           type: string
                       type: object
                     type: array
@@ -262,7 +262,7 @@ spec:
                     items:
                       properties:
                         modelArn:
-                          description: The Amazon Resource Name (ARN) of the model.
+                          description: The ARN of the model.
                           type: string
                       type: object
                     type: array

@@ -97,7 +97,7 @@ type ConfigurationInitParameters struct {
 	// Configuration block for S3 access grants. See Query Results S3 Access Grants Configuration below.
 	QueryResultsS3AccessGrantsConfiguration *QueryResultsS3AccessGrantsConfigurationInitParameters `json:"queryResultsS3AccessGrantsConfiguration,omitempty" tf:"query_results_s3_access_grants_configuration,omitempty"`
 
-	// If set to true , allows members assigned to a workgroup to reference Amazon S3 Requester Pays buckets in queries. If set to false , workgroup members cannot query data from Requester Pays buckets, and queries that retrieve data from Requester Pays buckets cause an error. The default is false . For more information about Requester Pays buckets, see Requester Pays Buckets in the Amazon Simple Storage Service Developer Guide.
+	// If set to true , allows members assigned to a workgroup to reference Amazon S3 Requester Pays buckets in queries. If set to false , workgroup members cannot query data from Requester Pays buckets, and queries that retrieve data from Requester Pays buckets cause an error. The default is false . For more information about Requester Pays buckets, see Requester Pays Buckets in the S3 Developer Guide.
 	RequesterPaysEnabled *bool `json:"requesterPaysEnabled,omitempty" tf:"requester_pays_enabled,omitempty"`
 
 	// Configuration block with result settings. See Result Configuration below.
@@ -139,7 +139,7 @@ type ConfigurationObservation struct {
 	// Configuration block for S3 access grants. See Query Results S3 Access Grants Configuration below.
 	QueryResultsS3AccessGrantsConfiguration *QueryResultsS3AccessGrantsConfigurationObservation `json:"queryResultsS3AccessGrantsConfiguration,omitempty" tf:"query_results_s3_access_grants_configuration,omitempty"`
 
-	// If set to true , allows members assigned to a workgroup to reference Amazon S3 Requester Pays buckets in queries. If set to false , workgroup members cannot query data from Requester Pays buckets, and queries that retrieve data from Requester Pays buckets cause an error. The default is false . For more information about Requester Pays buckets, see Requester Pays Buckets in the Amazon Simple Storage Service Developer Guide.
+	// If set to true , allows members assigned to a workgroup to reference Amazon S3 Requester Pays buckets in queries. If set to false , workgroup members cannot query data from Requester Pays buckets, and queries that retrieve data from Requester Pays buckets cause an error. The default is false . For more information about Requester Pays buckets, see Requester Pays Buckets in the S3 Developer Guide.
 	RequesterPaysEnabled *bool `json:"requesterPaysEnabled,omitempty" tf:"requester_pays_enabled,omitempty"`
 
 	// Configuration block with result settings. See Result Configuration below.
@@ -192,7 +192,7 @@ type ConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	QueryResultsS3AccessGrantsConfiguration *QueryResultsS3AccessGrantsConfigurationParameters `json:"queryResultsS3AccessGrantsConfiguration,omitempty" tf:"query_results_s3_access_grants_configuration,omitempty"`
 
-	// If set to true , allows members assigned to a workgroup to reference Amazon S3 Requester Pays buckets in queries. If set to false , workgroup members cannot query data from Requester Pays buckets, and queries that retrieve data from Requester Pays buckets cause an error. The default is false . For more information about Requester Pays buckets, see Requester Pays Buckets in the Amazon Simple Storage Service Developer Guide.
+	// If set to true , allows members assigned to a workgroup to reference Amazon S3 Requester Pays buckets in queries. If set to false , workgroup members cannot query data from Requester Pays buckets, and queries that retrieve data from Requester Pays buckets cause an error. The default is false . For more information about Requester Pays buckets, see Requester Pays Buckets in the S3 Developer Guide.
 	// +kubebuilder:validation:Optional
 	RequesterPaysEnabled *bool `json:"requesterPaysEnabled,omitempty" tf:"requester_pays_enabled,omitempty"`
 

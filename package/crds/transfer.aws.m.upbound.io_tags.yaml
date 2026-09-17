@@ -68,8 +68,7 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   resourceArn:
-                    description: Amazon Resource Name (ARN) of the Transfer Family
-                      resource to tag.
+                    description: ARN of the Transfer Family resource to tag.
                     type: string
                   resourceArnRef:
                     description: Reference to a Server in transfer to populate resourceArn.
@@ -174,8 +173,7 @@ spec:
                     description: Tag name.
                     type: string
                   resourceArn:
-                    description: Amazon Resource Name (ARN) of the Transfer Family
-                      resource to tag.
+                    description: ARN of the Transfer Family resource to tag.
                     type: string
                   resourceArnRef:
                     description: Reference to a Server in transfer to populate resourceArn.
@@ -346,8 +344,7 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   resourceArn:
-                    description: Amazon Resource Name (ARN) of the Transfer Family
-                      resource to tag.
+                    description: ARN of the Transfer Family resource to tag.
                     type: string
                   value:
                     description: Tag value.

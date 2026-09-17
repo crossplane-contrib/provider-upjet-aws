@@ -46,7 +46,7 @@ spec:
     name: test-${Rand.RFC1123Subdomain}
     rule:
       - lifecycle:
-          - deleteAfter: 14
+          deleteAfter: 14
         ruleName: up_example_backup_rule
         schedule: cron(0 12 * * ? *)
         targetVaultNameSelector:

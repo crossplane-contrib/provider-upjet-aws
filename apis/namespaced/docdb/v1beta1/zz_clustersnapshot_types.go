@@ -37,7 +37,7 @@ type ClusterSnapshotObservation struct {
 	// The DocumentDB Cluster Identifier from which to take the snapshot.
 	DBClusterIdentifier *string `json:"dbClusterIdentifier,omitempty" tf:"db_cluster_identifier,omitempty"`
 
-	// The Amazon Resource Name (ARN) for the DocumentDB Cluster Snapshot.
+	// ARN for the DocumentDB Cluster Snapshot.
 	DBClusterSnapshotArn *string `json:"dbClusterSnapshotArn,omitempty" tf:"db_cluster_snapshot_arn,omitempty"`
 
 	// Specifies the name of the database engine.
@@ -60,7 +60,7 @@ type ClusterSnapshotObservation struct {
 
 	SnapshotType *string `json:"snapshotType,omitempty" tf:"snapshot_type,omitempty"`
 
-	// The Amazon Resource Name (ARN) for the DocumentDB Cluster Snapshot.
+	// ARN for the DocumentDB Cluster Snapshot.
 	SourceDBClusterSnapshotArn *string `json:"sourceDbClusterSnapshotArn,omitempty" tf:"source_db_cluster_snapshot_arn,omitempty"`
 
 	// The status of this DocumentDB Cluster Snapshot.

@@ -37,7 +37,7 @@ type IdentityProviderConfigInitParameters struct {
 
 type IdentityProviderConfigObservation struct {
 
-	// Amazon Resource Name (ARN) of the EKS Identity Provider Configuration.
+	// ARN of the EKS Identity Provider Configuration.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Name of the EKS Cluster.

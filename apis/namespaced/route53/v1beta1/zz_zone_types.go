@@ -97,7 +97,7 @@ type ZoneInitParameters struct {
 
 type ZoneObservation struct {
 
-	// The Amazon Resource Name (ARN) of the Hosted Zone.
+	// ARN of the Hosted Zone.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// A comment for the hosted zone.

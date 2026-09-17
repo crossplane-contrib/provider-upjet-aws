@@ -653,7 +653,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: Amazon Resource Name (ARN).
+                    description: ARN.
                     type: string
                   id:
                     description: ID of the WAF Size Constraint Set.

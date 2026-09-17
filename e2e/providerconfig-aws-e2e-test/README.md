@@ -143,12 +143,11 @@ aws_secret_access_key = your-aws-secret-access-key
 ```
 
 ```shell
-export AWS_FAMILY_PACKAGE_IMAGE="xpkg.upbound.io/upbound/provider-family-aws:v1.16.0"
-export AWS_EC2_PACKAGE_IMAGE="xpkg.upbound.io/upbound/provider-aws-ec2:v1.16.0"
-export AWS_RDS_PACKAGE_IMAGE="xpkg.upbound.io/upbound/provider-aws-rds:v1.16.0"
-export AWS_KAFKA_PACKAGE_IMAGE="xpkg.upbound.io/upbound/provider-aws-kafka:v1.16.0"
-export AWS_EKS_IAM_DEFAULT_ADMIN_ROLE="arn:aws:iam::123456789012:role/mydefaulteksadminrole"
-export TARGET_CROSSPLANE_VERSION="1.17.2"
+export AWS_FAMILY_PACKAGE_IMAGE="xpkg.upbound.io/upbound/provider-family-aws:v2.7.1"
+export AWS_EC2_PACKAGE_IMAGE="xpkg.upbound.io/upbound/provider-aws-ec2:v2.7.1"
+export AWS_RDS_PACKAGE_IMAGE="xpkg.upbound.io/upbound/provider-aws-rds:v2.7.1"
+export AWS_KAFKA_PACKAGE_IMAGE="xpkg.upbound.io/upbound/provider-aws-kafka:v2.7.1"
+export TARGET_CROSSPLANE_VERSION="2.4.0"
 export UPTEST_CLOUD_CREDENTIALS="$(cat my-aws-creds.txt)"
 # from repo root
 make -C e2e/providerconfig-aws-e2e-test e2e

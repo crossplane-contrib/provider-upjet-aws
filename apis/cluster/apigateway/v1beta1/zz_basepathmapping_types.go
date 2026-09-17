@@ -36,7 +36,7 @@ type BasePathMappingInitParameters struct {
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("domain_name",false)
 	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
 
-	// The identifier for the domain name resource. Supported only for private custom domain names.
+	// Identifier for the domain name resource. Supported only for private custom domain names.
 	DomainNameID *string `json:"domainNameId,omitempty" tf:"domain_name_id,omitempty"`
 
 	// Reference to a DomainName in apigateway to populate domainName.
@@ -72,7 +72,7 @@ type BasePathMappingObservation struct {
 	// Already-registered domain name to connect the API to.
 	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
 
-	// The identifier for the domain name resource. Supported only for private custom domain names.
+	// Identifier for the domain name resource. Supported only for private custom domain names.
 	DomainNameID *string `json:"domainNameId,omitempty" tf:"domain_name_id,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -111,7 +111,7 @@ type BasePathMappingParameters struct {
 	// +kubebuilder:validation:Optional
 	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
 
-	// The identifier for the domain name resource. Supported only for private custom domain names.
+	// Identifier for the domain name resource. Supported only for private custom domain names.
 	// +kubebuilder:validation:Optional
 	DomainNameID *string `json:"domainNameId,omitempty" tf:"domain_name_id,omitempty"`
 

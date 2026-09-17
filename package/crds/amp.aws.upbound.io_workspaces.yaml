@@ -880,7 +880,7 @@ spec:
                       AWS Docs.
                     type: string
                   arn:
-                    description: Amazon Resource Name (ARN) of the workspace.
+                    description: ARN of the workspace.
                     type: string
                   id:
                     description: Identifier of the workspace

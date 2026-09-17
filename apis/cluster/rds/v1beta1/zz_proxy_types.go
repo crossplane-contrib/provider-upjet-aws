@@ -15,19 +15,19 @@ import (
 
 type AuthInitParameters struct {
 
-	// The type of authentication that the proxy uses for connections from the proxy to the underlying database. One of SECRETS.
+	// Type of authentication that the proxy uses for connections from the proxy to the underlying database. One of SECRETS.
 	AuthScheme *string `json:"authScheme,omitempty" tf:"auth_scheme,omitempty"`
 
-	// The type of authentication the proxy uses for connections from clients. Valid values are MYSQL_CACHING_SHA2_PASSWORD, MYSQL_NATIVE_PASSWORD, POSTGRES_SCRAM_SHA_256, POSTGRES_MD5, and SQL_SERVER_AUTHENTICATION.
+	// Type of authentication the proxy uses for connections from clients. Valid values are MYSQL_CACHING_SHA2_PASSWORD, MYSQL_NATIVE_PASSWORD, POSTGRES_SCRAM_SHA_256, POSTGRES_MD5, and SQL_SERVER_AUTHENTICATION.
 	ClientPasswordAuthType *string `json:"clientPasswordAuthType,omitempty" tf:"client_password_auth_type,omitempty"`
 
-	// A user-specified description about the authentication used by a proxy to log in as a specific database user.
+	// User-specified description about the authentication used by a proxy to log in as a specific database user.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Whether to require or disallow AWS Identity and Access Management (IAM) authentication for connections to the proxy. One of DISABLED, REQUIRED.
 	IAMAuth *string `json:"iamAuth,omitempty" tf:"iam_auth,omitempty"`
 
-	// The Amazon Resource Name (ARN) representing the secret that the proxy uses to authenticate to the RDS DB instance or Aurora DB cluster. These secrets are stored within Amazon Secrets Manager.
+	// ARN representing the secret that the proxy uses to authenticate to the RDS DB instance or Aurora DB cluster. These secrets are stored within Amazon Secrets Manager.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/secretsmanager/v1beta1.Secret
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	SecretArn *string `json:"secretArn,omitempty" tf:"secret_arn,omitempty"`
@@ -40,42 +40,42 @@ type AuthInitParameters struct {
 	// +kubebuilder:validation:Optional
 	SecretArnSelector *v2.Selector `json:"secretArnSelector,omitempty" tf:"-"`
 
-	// The name of the database user to which the proxy connects.
+	// Name of the database user to which the proxy connects.
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 
 type AuthObservation struct {
 
-	// The type of authentication that the proxy uses for connections from the proxy to the underlying database. One of SECRETS.
+	// Type of authentication that the proxy uses for connections from the proxy to the underlying database. One of SECRETS.
 	AuthScheme *string `json:"authScheme,omitempty" tf:"auth_scheme,omitempty"`
 
-	// The type of authentication the proxy uses for connections from clients. Valid values are MYSQL_CACHING_SHA2_PASSWORD, MYSQL_NATIVE_PASSWORD, POSTGRES_SCRAM_SHA_256, POSTGRES_MD5, and SQL_SERVER_AUTHENTICATION.
+	// Type of authentication the proxy uses for connections from clients. Valid values are MYSQL_CACHING_SHA2_PASSWORD, MYSQL_NATIVE_PASSWORD, POSTGRES_SCRAM_SHA_256, POSTGRES_MD5, and SQL_SERVER_AUTHENTICATION.
 	ClientPasswordAuthType *string `json:"clientPasswordAuthType,omitempty" tf:"client_password_auth_type,omitempty"`
 
-	// A user-specified description about the authentication used by a proxy to log in as a specific database user.
+	// User-specified description about the authentication used by a proxy to log in as a specific database user.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Whether to require or disallow AWS Identity and Access Management (IAM) authentication for connections to the proxy. One of DISABLED, REQUIRED.
 	IAMAuth *string `json:"iamAuth,omitempty" tf:"iam_auth,omitempty"`
 
-	// The Amazon Resource Name (ARN) representing the secret that the proxy uses to authenticate to the RDS DB instance or Aurora DB cluster. These secrets are stored within Amazon Secrets Manager.
+	// ARN representing the secret that the proxy uses to authenticate to the RDS DB instance or Aurora DB cluster. These secrets are stored within Amazon Secrets Manager.
 	SecretArn *string `json:"secretArn,omitempty" tf:"secret_arn,omitempty"`
 
-	// The name of the database user to which the proxy connects.
+	// Name of the database user to which the proxy connects.
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 
 type AuthParameters struct {
 
-	// The type of authentication that the proxy uses for connections from the proxy to the underlying database. One of SECRETS.
+	// Type of authentication that the proxy uses for connections from the proxy to the underlying database. One of SECRETS.
 	// +kubebuilder:validation:Optional
 	AuthScheme *string `json:"authScheme,omitempty" tf:"auth_scheme,omitempty"`
 
-	// The type of authentication the proxy uses for connections from clients. Valid values are MYSQL_CACHING_SHA2_PASSWORD, MYSQL_NATIVE_PASSWORD, POSTGRES_SCRAM_SHA_256, POSTGRES_MD5, and SQL_SERVER_AUTHENTICATION.
+	// Type of authentication the proxy uses for connections from clients. Valid values are MYSQL_CACHING_SHA2_PASSWORD, MYSQL_NATIVE_PASSWORD, POSTGRES_SCRAM_SHA_256, POSTGRES_MD5, and SQL_SERVER_AUTHENTICATION.
 	// +kubebuilder:validation:Optional
 	ClientPasswordAuthType *string `json:"clientPasswordAuthType,omitempty" tf:"client_password_auth_type,omitempty"`
 
-	// A user-specified description about the authentication used by a proxy to log in as a specific database user.
+	// User-specified description about the authentication used by a proxy to log in as a specific database user.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
@@ -83,7 +83,7 @@ type AuthParameters struct {
 	// +kubebuilder:validation:Optional
 	IAMAuth *string `json:"iamAuth,omitempty" tf:"iam_auth,omitempty"`
 
-	// The Amazon Resource Name (ARN) representing the secret that the proxy uses to authenticate to the RDS DB instance or Aurora DB cluster. These secrets are stored within Amazon Secrets Manager.
+	// ARN representing the secret that the proxy uses to authenticate to the RDS DB instance or Aurora DB cluster. These secrets are stored within Amazon Secrets Manager.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/secretsmanager/v1beta1.Secret
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -97,14 +97,14 @@ type AuthParameters struct {
 	// +kubebuilder:validation:Optional
 	SecretArnSelector *v2.Selector `json:"secretArnSelector,omitempty" tf:"-"`
 
-	// The name of the database user to which the proxy connects.
+	// Name of the database user to which the proxy connects.
 	// +kubebuilder:validation:Optional
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 
 type ProxyInitParameters struct {
 
-	// Configuration block(s) with authorization mechanisms to connect to the associated instances or clusters. Required when default_auth_scheme is NONE or unspecified. Described below.
+	// Configuration block(s) with authorization mechanisms to connect to the associated instances or clusters. Required when default_auth_scheme is NONE or unspecified. See the auth block below.
 	Auth []AuthInitParameters `json:"auth,omitempty" tf:"auth,omitempty"`
 
 	// Whether the proxy includes detailed information about SQL statements in its logs. This information helps you to debug issues involving SQL behavior or the performance and scalability of the proxy connections. The debug information includes the text of SQL statements that you submit through the proxy. Thus, only enable this setting when needed for debugging, and only when you have security measures in place to safeguard any sensitive information that appears in the logs.
@@ -116,16 +116,16 @@ type ProxyInitParameters struct {
 	// Network type of the DB proxy endpoint. Valid values are IPV4, IPV6 and DUAL. Defaults to IPV4. If IPV6 is specified, the subnets associated with the proxy must be IPv6-only, and target_connection_network_type must be IPV6.
 	EndpointNetworkType *string `json:"endpointNetworkType,omitempty" tf:"endpoint_network_type,omitempty"`
 
-	// The kinds of databases that the proxy can connect to. This value determines which database network protocol the proxy recognizes when it interprets network traffic to and from the database. For Aurora MySQL, RDS for MariaDB, and RDS for MySQL databases, specify MYSQL. For Aurora PostgreSQL and RDS for PostgreSQL databases, specify POSTGRESQL. For RDS for Microsoft SQL Server, specify SQLSERVER. Valid values are MYSQL, POSTGRESQL, and SQLSERVER.
+	// Kinds of databases that the proxy can connect to. This value determines which database network protocol the proxy recognizes when it interprets network traffic to and from the database. For Aurora MySQL, RDS for MariaDB, and RDS for MySQL databases, specify MYSQL. For Aurora PostgreSQL and RDS for PostgreSQL databases, specify POSTGRESQL. For RDS for Microsoft SQL Server, specify SQLSERVER. Valid values are MYSQL, POSTGRESQL, and SQLSERVER.
 	EngineFamily *string `json:"engineFamily,omitempty" tf:"engine_family,omitempty"`
 
-	// The number of seconds that a connection to the proxy can be inactive before the proxy disconnects it. You can set this value higher or lower than the connection timeout limit for the associated database.
+	// Number of seconds that a connection to the proxy can be inactive before the proxy disconnects it. You can set this value higher or lower than the connection timeout limit for the associated database.
 	IdleClientTimeout *float64 `json:"idleClientTimeout,omitempty" tf:"idle_client_timeout,omitempty"`
 
-	// A Boolean parameter that specifies whether Transport Layer Security (TLS) encryption is required for connections to the proxy. By enabling this setting, you can enforce encrypted TLS connections to the proxy.
+	// Whether TLS encryption is required for connections to the proxy. Enabling this setting enforces encrypted TLS connections to the proxy.
 	RequireTLS *bool `json:"requireTls,omitempty" tf:"require_tls,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the IAM role that the proxy uses to access secrets in AWS Secrets Manager.
+	// ARN of the IAM role that the proxy uses to access secrets in AWS Secrets Manager.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
@@ -177,10 +177,10 @@ type ProxyInitParameters struct {
 
 type ProxyObservation struct {
 
-	// The Amazon Resource Name (ARN) for the proxy.
+	// ARN for the proxy.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// Configuration block(s) with authorization mechanisms to connect to the associated instances or clusters. Required when default_auth_scheme is NONE or unspecified. Described below.
+	// Configuration block(s) with authorization mechanisms to connect to the associated instances or clusters. Required when default_auth_scheme is NONE or unspecified. See the auth block below.
 	Auth []AuthObservation `json:"auth,omitempty" tf:"auth,omitempty"`
 
 	// Whether the proxy includes detailed information about SQL statements in its logs. This information helps you to debug issues involving SQL behavior or the performance and scalability of the proxy connections. The debug information includes the text of SQL statements that you submit through the proxy. Thus, only enable this setting when needed for debugging, and only when you have security measures in place to safeguard any sensitive information that appears in the logs.
@@ -189,36 +189,36 @@ type ProxyObservation struct {
 	// Default authentication scheme that the proxy uses for client connections to the proxy and connections from the proxy to the underlying database. Valid values are NONE and IAM_AUTH. Defaults to NONE.
 	DefaultAuthScheme *string `json:"defaultAuthScheme,omitempty" tf:"default_auth_scheme,omitempty"`
 
-	// The endpoint that you can use to connect to the proxy. You include the endpoint value in the connection string for a database client application.
+	// Endpoint that you can use to connect to the proxy. You include the endpoint value in the connection string for a database client application.
 	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 
 	// Network type of the DB proxy endpoint. Valid values are IPV4, IPV6 and DUAL. Defaults to IPV4. If IPV6 is specified, the subnets associated with the proxy must be IPv6-only, and target_connection_network_type must be IPV6.
 	EndpointNetworkType *string `json:"endpointNetworkType,omitempty" tf:"endpoint_network_type,omitempty"`
 
-	// The kinds of databases that the proxy can connect to. This value determines which database network protocol the proxy recognizes when it interprets network traffic to and from the database. For Aurora MySQL, RDS for MariaDB, and RDS for MySQL databases, specify MYSQL. For Aurora PostgreSQL and RDS for PostgreSQL databases, specify POSTGRESQL. For RDS for Microsoft SQL Server, specify SQLSERVER. Valid values are MYSQL, POSTGRESQL, and SQLSERVER.
+	// Kinds of databases that the proxy can connect to. This value determines which database network protocol the proxy recognizes when it interprets network traffic to and from the database. For Aurora MySQL, RDS for MariaDB, and RDS for MySQL databases, specify MYSQL. For Aurora PostgreSQL and RDS for PostgreSQL databases, specify POSTGRESQL. For RDS for Microsoft SQL Server, specify SQLSERVER. Valid values are MYSQL, POSTGRESQL, and SQLSERVER.
 	EngineFamily *string `json:"engineFamily,omitempty" tf:"engine_family,omitempty"`
 
-	// The Amazon Resource Name (ARN) for the proxy.
+	// ARN for the proxy.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The number of seconds that a connection to the proxy can be inactive before the proxy disconnects it. You can set this value higher or lower than the connection timeout limit for the associated database.
+	// Number of seconds that a connection to the proxy can be inactive before the proxy disconnects it. You can set this value higher or lower than the connection timeout limit for the associated database.
 	IdleClientTimeout *float64 `json:"idleClientTimeout,omitempty" tf:"idle_client_timeout,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// A Boolean parameter that specifies whether Transport Layer Security (TLS) encryption is required for connections to the proxy. By enabling this setting, you can enforce encrypted TLS connections to the proxy.
+	// Whether TLS encryption is required for connections to the proxy. Enabling this setting enforces encrypted TLS connections to the proxy.
 	RequireTLS *bool `json:"requireTls,omitempty" tf:"require_tls,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the IAM role that the proxy uses to access secrets in AWS Secrets Manager.
+	// ARN of the IAM role that the proxy uses to access secrets in AWS Secrets Manager.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
@@ -236,7 +236,7 @@ type ProxyObservation struct {
 
 type ProxyParameters struct {
 
-	// Configuration block(s) with authorization mechanisms to connect to the associated instances or clusters. Required when default_auth_scheme is NONE or unspecified. Described below.
+	// Configuration block(s) with authorization mechanisms to connect to the associated instances or clusters. Required when default_auth_scheme is NONE or unspecified. See the auth block below.
 	// +kubebuilder:validation:Optional
 	Auth []AuthParameters `json:"auth,omitempty" tf:"auth,omitempty"`
 
@@ -252,11 +252,11 @@ type ProxyParameters struct {
 	// +kubebuilder:validation:Optional
 	EndpointNetworkType *string `json:"endpointNetworkType,omitempty" tf:"endpoint_network_type,omitempty"`
 
-	// The kinds of databases that the proxy can connect to. This value determines which database network protocol the proxy recognizes when it interprets network traffic to and from the database. For Aurora MySQL, RDS for MariaDB, and RDS for MySQL databases, specify MYSQL. For Aurora PostgreSQL and RDS for PostgreSQL databases, specify POSTGRESQL. For RDS for Microsoft SQL Server, specify SQLSERVER. Valid values are MYSQL, POSTGRESQL, and SQLSERVER.
+	// Kinds of databases that the proxy can connect to. This value determines which database network protocol the proxy recognizes when it interprets network traffic to and from the database. For Aurora MySQL, RDS for MariaDB, and RDS for MySQL databases, specify MYSQL. For Aurora PostgreSQL and RDS for PostgreSQL databases, specify POSTGRESQL. For RDS for Microsoft SQL Server, specify SQLSERVER. Valid values are MYSQL, POSTGRESQL, and SQLSERVER.
 	// +kubebuilder:validation:Optional
 	EngineFamily *string `json:"engineFamily,omitempty" tf:"engine_family,omitempty"`
 
-	// The number of seconds that a connection to the proxy can be inactive before the proxy disconnects it. You can set this value higher or lower than the connection timeout limit for the associated database.
+	// Number of seconds that a connection to the proxy can be inactive before the proxy disconnects it. You can set this value higher or lower than the connection timeout limit for the associated database.
 	// +kubebuilder:validation:Optional
 	IdleClientTimeout *float64 `json:"idleClientTimeout,omitempty" tf:"idle_client_timeout,omitempty"`
 
@@ -265,11 +265,11 @@ type ProxyParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// A Boolean parameter that specifies whether Transport Layer Security (TLS) encryption is required for connections to the proxy. By enabling this setting, you can enforce encrypted TLS connections to the proxy.
+	// Whether TLS encryption is required for connections to the proxy. Enabling this setting enforces encrypted TLS connections to the proxy.
 	// +kubebuilder:validation:Optional
 	RequireTLS *bool `json:"requireTls,omitempty" tf:"require_tls,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the IAM role that the proxy uses to access secrets in AWS Secrets Manager.
+	// ARN of the IAM role that the proxy uses to access secrets in AWS Secrets Manager.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional

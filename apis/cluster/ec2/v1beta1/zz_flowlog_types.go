@@ -125,6 +125,9 @@ type FlowLogInitParameters struct {
 	// +kubebuilder:validation:Optional
 	SubnetIDSelector *v2.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
+	// Tag configuration for the Flow Logs Amazon EC2 Tags feature fields (e.g., $${instance-tag}) used in log_format. More details below.
+	TagFieldSpecification []TagFieldSpecificationInitParameters `json:"tagFieldSpecification,omitempty" tf:"tag_field_specification,omitempty"`
+
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -194,6 +197,9 @@ type FlowLogObservation struct {
 
 	// Subnet ID to attach to.
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Tag configuration for the Flow Logs Amazon EC2 Tags feature fields (e.g., $${instance-tag}) used in log_format. More details below.
+	TagFieldSpecification []TagFieldSpecificationObservation `json:"tagFieldSpecification,omitempty" tf:"tag_field_specification,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -304,6 +310,10 @@ type FlowLogParameters struct {
 	// +kubebuilder:validation:Optional
 	SubnetIDSelector *v2.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
+	// Tag configuration for the Flow Logs Amazon EC2 Tags feature fields (e.g., $${instance-tag}) used in log_format. More details below.
+	// +kubebuilder:validation:Optional
+	TagFieldSpecification []TagFieldSpecificationParameters `json:"tagFieldSpecification,omitempty" tf:"tag_field_specification,omitempty"`
+
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
@@ -333,6 +343,35 @@ type FlowLogParameters struct {
 	// Selector for a VPC in ec2 to populate vpcId.
 	// +kubebuilder:validation:Optional
 	VPCIDSelector *v2.Selector `json:"vpcIdSelector,omitempty" tf:"-"`
+}
+
+type TagFieldSpecificationInitParameters struct {
+
+	// Resource type to associate the tag keys with. Valid values: instance, network-interface, auto-scaling-group.
+	ResourceType *string `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
+
+	// Ordered list of tag keys, on resources of resource_type, to display in Flow Log records. The position of each key determines which field it populates in log_format (e.g., the first instance tag key populates $${instance-tag} and the second populates $${instance-tag-2}).
+	TagKeys []*string `json:"tagKeys,omitempty" tf:"tag_keys,omitempty"`
+}
+
+type TagFieldSpecificationObservation struct {
+
+	// Resource type to associate the tag keys with. Valid values: instance, network-interface, auto-scaling-group.
+	ResourceType *string `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
+
+	// Ordered list of tag keys, on resources of resource_type, to display in Flow Log records. The position of each key determines which field it populates in log_format (e.g., the first instance tag key populates $${instance-tag} and the second populates $${instance-tag-2}).
+	TagKeys []*string `json:"tagKeys,omitempty" tf:"tag_keys,omitempty"`
+}
+
+type TagFieldSpecificationParameters struct {
+
+	// Resource type to associate the tag keys with. Valid values: instance, network-interface, auto-scaling-group.
+	// +kubebuilder:validation:Optional
+	ResourceType *string `json:"resourceType" tf:"resource_type,omitempty"`
+
+	// Ordered list of tag keys, on resources of resource_type, to display in Flow Log records. The position of each key determines which field it populates in log_format (e.g., the first instance tag key populates $${instance-tag} and the second populates $${instance-tag-2}).
+	// +kubebuilder:validation:Optional
+	TagKeys []*string `json:"tagKeys" tf:"tag_keys,omitempty"`
 }
 
 // FlowLogSpec defines the desired state of FlowLog

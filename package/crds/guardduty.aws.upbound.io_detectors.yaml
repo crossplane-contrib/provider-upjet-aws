@@ -874,7 +874,7 @@ spec:
                     description: The AWS account ID of the GuardDuty detector
                     type: string
                   arn:
-                    description: Amazon Resource Name (ARN) of the GuardDuty detector
+                    description: ARN of the GuardDuty detector
                     type: string
                   datasources:
                     description: Describes which data sources will be enabled for

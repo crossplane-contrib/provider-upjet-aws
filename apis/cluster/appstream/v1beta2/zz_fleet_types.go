@@ -128,7 +128,7 @@ type FleetInitParameters struct {
 	// Instance type to use when launching fleet instances.
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
-	// The maximum number of user sessions on an instance. This only applies to multi-session fleets.
+	// Maximum number of user sessions on an instance. This only applies to multi-session fleets.
 	MaxSessionsPerInstance *float64 `json:"maxSessionsPerInstance,omitempty" tf:"max_sessions_per_instance,omitempty"`
 
 	// Maximum amount of time that a streaming session can remain active, in seconds.
@@ -195,7 +195,7 @@ type FleetObservation struct {
 	// Instance type to use when launching fleet instances.
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
-	// The maximum number of user sessions on an instance. This only applies to multi-session fleets.
+	// Maximum number of user sessions on an instance. This only applies to multi-session fleets.
 	MaxSessionsPerInstance *float64 `json:"maxSessionsPerInstance,omitempty" tf:"max_sessions_per_instance,omitempty"`
 
 	// Maximum amount of time that a streaming session can remain active, in seconds.
@@ -285,7 +285,7 @@ type FleetParameters struct {
 	// +kubebuilder:validation:Optional
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
-	// The maximum number of user sessions on an instance. This only applies to multi-session fleets.
+	// Maximum number of user sessions on an instance. This only applies to multi-session fleets.
 	// +kubebuilder:validation:Optional
 	MaxSessionsPerInstance *float64 `json:"maxSessionsPerInstance,omitempty" tf:"max_sessions_per_instance,omitempty"`
 

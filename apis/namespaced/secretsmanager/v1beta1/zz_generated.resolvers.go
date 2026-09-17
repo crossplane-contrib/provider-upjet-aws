@@ -12,6 +12,7 @@ import (
 	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	errors "github.com/pkg/errors"
+	common "github.com/upbound/provider-aws/v2/config/cluster/common"
 	apisresolver "github.com/upbound/provider-aws/v2/internal/apis"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
@@ -128,6 +129,48 @@ func (mg *SecretRotation) ResolveReferences(ctx context.Context, c client.Reader
 
 	var rsp reference.NamespacedResolutionResponse
 	var err error
+
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.ExternalSecretRotationMetadata); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("secretsmanager.aws.m.upbound.io", "v1beta1", "Secret", "SecretList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExternalSecretRotationMetadata[i3].Value),
+				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
+				Reference:    mg.Spec.ForProvider.ExternalSecretRotationMetadata[i3].ValueRef,
+				Selector:     mg.Spec.ForProvider.ExternalSecretRotationMetadata[i3].ValueSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.ExternalSecretRotationMetadata[i3].Value")
+		}
+		mg.Spec.ForProvider.ExternalSecretRotationMetadata[i3].Value = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.ExternalSecretRotationMetadata[i3].ValueRef = rsp.ResolvedReference
+
+	}
+	{
+		m, l, err = apisresolver.GetManagedResource("iam.aws.m.upbound.io", "v1beta1", "Role", "RoleList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExternalSecretRotationRoleArn),
+			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.ExternalSecretRotationRoleArnRef,
+			Selector:     mg.Spec.ForProvider.ExternalSecretRotationRoleArnSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ExternalSecretRotationRoleArn")
+	}
+	mg.Spec.ForProvider.ExternalSecretRotationRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ExternalSecretRotationRoleArnRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("lambda.aws.m.upbound.io", "v1beta1", "Function", "FunctionList")
 		if err != nil {
@@ -168,6 +211,48 @@ func (mg *SecretRotation) ResolveReferences(ctx context.Context, c client.Reader
 	}
 	mg.Spec.ForProvider.SecretID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SecretIDRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.ExternalSecretRotationMetadata); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("secretsmanager.aws.m.upbound.io", "v1beta1", "Secret", "SecretList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ExternalSecretRotationMetadata[i3].Value),
+				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
+				Reference:    mg.Spec.InitProvider.ExternalSecretRotationMetadata[i3].ValueRef,
+				Selector:     mg.Spec.InitProvider.ExternalSecretRotationMetadata[i3].ValueSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.ExternalSecretRotationMetadata[i3].Value")
+		}
+		mg.Spec.InitProvider.ExternalSecretRotationMetadata[i3].Value = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.ExternalSecretRotationMetadata[i3].ValueRef = rsp.ResolvedReference
+
+	}
+	{
+		m, l, err = apisresolver.GetManagedResource("iam.aws.m.upbound.io", "v1beta1", "Role", "RoleList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ExternalSecretRotationRoleArn),
+			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.ExternalSecretRotationRoleArnRef,
+			Selector:     mg.Spec.InitProvider.ExternalSecretRotationRoleArnSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ExternalSecretRotationRoleArn")
+	}
+	mg.Spec.InitProvider.ExternalSecretRotationRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ExternalSecretRotationRoleArnRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("lambda.aws.m.upbound.io", "v1beta1", "Function", "FunctionList")
 		if err != nil {

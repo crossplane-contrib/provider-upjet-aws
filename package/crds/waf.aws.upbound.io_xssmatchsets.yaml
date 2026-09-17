@@ -610,7 +610,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: Amazon Resource Name (ARN)
+                    description: ARN
                     type: string
                   id:
                     description: The ID of the WAF XssMatchSet.

@@ -332,7 +332,7 @@ type TriggerObservation struct {
 	// List of actions initiated by this trigger when it fires. See Actions Below.
 	Actions []ActionsObservation `json:"actions,omitempty" tf:"actions,omitempty"`
 
-	// Amazon Resource Name (ARN) of Glue Trigger
+	// ARN of Glue Trigger
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// A description of the new trigger.

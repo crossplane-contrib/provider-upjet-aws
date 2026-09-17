@@ -154,6 +154,9 @@ type AutoscalingGroupInitParameters struct {
 	// a new Auto Scaling Group. For all other use-cases, please use aws_autoscaling_lifecycle_hook resource.
 	InitialLifecycleHook []InitialLifecycleHookInitParameters `json:"initialLifecycleHook,omitempty" tf:"initial_lifecycle_hook,omitempty"`
 
+	// If this block is configured, adds an instance lifecycle policy to the specified Auto Scaling Group. Defined below.
+	InstanceLifecyclePolicy []InstanceLifecyclePolicyInitParameters `json:"instanceLifecyclePolicy,omitempty" tf:"instance_lifecycle_policy,omitempty"`
+
 	// If this block is configured, add a instance maintenance policy to the specified Auto Scaling group. Defined below.
 	InstanceMaintenancePolicy []InstanceMaintenancePolicyInitParameters `json:"instanceMaintenancePolicy,omitempty" tf:"instance_maintenance_policy,omitempty"`
 
@@ -341,6 +344,9 @@ type AutoscalingGroupObservation struct {
 	// a new Auto Scaling Group. For all other use-cases, please use aws_autoscaling_lifecycle_hook resource.
 	InitialLifecycleHook []InitialLifecycleHookObservation `json:"initialLifecycleHook,omitempty" tf:"initial_lifecycle_hook,omitempty"`
 
+	// If this block is configured, adds an instance lifecycle policy to the specified Auto Scaling Group. Defined below.
+	InstanceLifecyclePolicy []InstanceLifecyclePolicyObservation `json:"instanceLifecyclePolicy,omitempty" tf:"instance_lifecycle_policy,omitempty"`
+
 	// If this block is configured, add a instance maintenance policy to the specified Auto Scaling group. Defined below.
 	InstanceMaintenancePolicy []InstanceMaintenancePolicyObservation `json:"instanceMaintenancePolicy,omitempty" tf:"instance_maintenance_policy,omitempty"`
 
@@ -518,6 +524,10 @@ type AutoscalingGroupParameters struct {
 	// a new Auto Scaling Group. For all other use-cases, please use aws_autoscaling_lifecycle_hook resource.
 	// +kubebuilder:validation:Optional
 	InitialLifecycleHook []InitialLifecycleHookParameters `json:"initialLifecycleHook,omitempty" tf:"initial_lifecycle_hook,omitempty"`
+
+	// If this block is configured, adds an instance lifecycle policy to the specified Auto Scaling Group. Defined below.
+	// +kubebuilder:validation:Optional
+	InstanceLifecyclePolicy []InstanceLifecyclePolicyParameters `json:"instanceLifecyclePolicy,omitempty" tf:"instance_lifecycle_policy,omitempty"`
 
 	// If this block is configured, add a instance maintenance policy to the specified Auto Scaling group. Defined below.
 	// +kubebuilder:validation:Optional
@@ -832,6 +842,25 @@ type InitialLifecycleHookParameters struct {
 	// ARN for this Auto Scaling Group
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+}
+
+type InstanceLifecyclePolicyInitParameters struct {
+
+	// Conditions that trigger instance retention behavior. Defined below.
+	RetentionTriggers []RetentionTriggersInitParameters `json:"retentionTriggers,omitempty" tf:"retention_triggers,omitempty"`
+}
+
+type InstanceLifecyclePolicyObservation struct {
+
+	// Conditions that trigger instance retention behavior. Defined below.
+	RetentionTriggers []RetentionTriggersObservation `json:"retentionTriggers,omitempty" tf:"retention_triggers,omitempty"`
+}
+
+type InstanceLifecyclePolicyParameters struct {
+
+	// Conditions that trigger instance retention behavior. Defined below.
+	// +kubebuilder:validation:Optional
+	RetentionTriggers []RetentionTriggersParameters `json:"retentionTriggers,omitempty" tf:"retention_triggers,omitempty"`
 }
 
 type InstanceMaintenancePolicyInitParameters struct {
@@ -1773,6 +1802,25 @@ type PreferencesParameters struct {
 	// Behavior when encountering instances in the Standby state in are found. Available behaviors are Terminate, Ignore, and Wait. Default is Ignore.
 	// +kubebuilder:validation:Optional
 	StandbyInstances *string `json:"standbyInstances,omitempty" tf:"standby_instances,omitempty"`
+}
+
+type RetentionTriggersInitParameters struct {
+
+	// Action to take when a termination lifecycle hook is abandoned due to failure, timeout, or explicit abandonment. Valid values are retain and terminate. Set to retain to move instances to a retained state instead of terminating them. Retained instances don't count toward desired capacity and remain until you terminate them.
+	TerminateHookAbandon *string `json:"terminateHookAbandon,omitempty" tf:"terminate_hook_abandon,omitempty"`
+}
+
+type RetentionTriggersObservation struct {
+
+	// Action to take when a termination lifecycle hook is abandoned due to failure, timeout, or explicit abandonment. Valid values are retain and terminate. Set to retain to move instances to a retained state instead of terminating them. Retained instances don't count toward desired capacity and remain until you terminate them.
+	TerminateHookAbandon *string `json:"terminateHookAbandon,omitempty" tf:"terminate_hook_abandon,omitempty"`
+}
+
+type RetentionTriggersParameters struct {
+
+	// Action to take when a termination lifecycle hook is abandoned due to failure, timeout, or explicit abandonment. Valid values are retain and terminate. Set to retain to move instances to a retained state instead of terminating them. Retained instances don't count toward desired capacity and remain until you terminate them.
+	// +kubebuilder:validation:Optional
+	TerminateHookAbandon *string `json:"terminateHookAbandon,omitempty" tf:"terminate_hook_abandon,omitempty"`
 }
 
 type TagInitParameters struct {

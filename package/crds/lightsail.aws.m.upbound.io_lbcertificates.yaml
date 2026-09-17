@@ -263,9 +263,10 @@ spec:
                       certificate.
                     type: string
                   domainValidationRecords:
-                    description: Set of domain validation objects which can be used
+                    description: 'Set of domain validation objects which can be used
                       to complete certificate validation. Can have more than one element,
-                      e.g., if SANs are defined.
+                      e.g., if SANs are defined. Each element contains the following
+                      attributes:'
                     items:
                       properties:
                         domainName:
@@ -273,11 +274,16 @@ spec:
                             certificate.
                           type: string
                         resourceRecordName:
-                          description: SSL/TLS certificate name.
+                          description: Name of the DNS record to create to validate
+                            the certificate.
                           type: string
                         resourceRecordType:
+                          description: Type of DNS record to create to validate the
+                            certificate.
                           type: string
                         resourceRecordValue:
+                          description: Value of the DNS record to create to validate
+                            the certificate.
                           type: string
                       type: object
                     type: array

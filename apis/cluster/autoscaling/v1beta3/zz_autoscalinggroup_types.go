@@ -92,7 +92,7 @@ type AlarmSpecificationParameters struct {
 
 type AutoscalingGroupInitParameters struct {
 
-	// The instance capacity distribution across Availability Zones. See Availability Zone Distribution below for more details.
+	// The instance capacity distribution across Availability Zones. See availability_zone_distribution Block below for more details.
 	AvailabilityZoneDistribution *AvailabilityZoneDistributionInitParameters `json:"availabilityZoneDistribution,omitempty" tf:"availability_zone_distribution,omitempty"`
 
 	// A list of Availability Zones where instances in the Auto Scaling group can be created. Used for launching into the default VPC subnet in each Availability Zone when not using the vpc_zone_identifier attribute, or for attaching a network interface when an existing network interface ID is specified in a launch template. Conflicts with vpc_zone_identifier.
@@ -102,7 +102,7 @@ type AutoscalingGroupInitParameters struct {
 	// Whether capacity rebalance is enabled. Otherwise, capacity rebalance is disabled.
 	CapacityRebalance *bool `json:"capacityRebalance,omitempty" tf:"capacity_rebalance,omitempty"`
 
-	// Demand Capacity Reservations. See Capacity Reservation Specification below for more details.
+	// Demand Capacity Reservations. See capacity_reservation_specification Block below for more details.
 	CapacityReservationSpecification *CapacityReservationSpecificationInitParameters `json:"capacityReservationSpecification,omitempty" tf:"capacity_reservation_specification,omitempty"`
 
 	// Reserved.
@@ -153,6 +153,9 @@ type AutoscalingGroupInitParameters struct {
 	// a new Auto Scaling Group. For all other use-cases, please use aws_autoscaling_lifecycle_hook resource.
 	InitialLifecycleHook []InitialLifecycleHookInitParameters `json:"initialLifecycleHook,omitempty" tf:"initial_lifecycle_hook,omitempty"`
 
+	// If this block is configured, adds an instance lifecycle policy to the specified Auto Scaling Group. Defined below.
+	InstanceLifecyclePolicy *InstanceLifecyclePolicyInitParameters `json:"instanceLifecyclePolicy,omitempty" tf:"instance_lifecycle_policy,omitempty"`
+
 	// If this block is configured, add a instance maintenance policy to the specified Auto Scaling group. Defined below.
 	InstanceMaintenancePolicy *InstanceMaintenancePolicyInitParameters `json:"instanceMaintenancePolicy,omitempty" tf:"instance_maintenance_policy,omitempty"`
 
@@ -173,7 +176,7 @@ type AutoscalingGroupInitParameters struct {
 	// +kubebuilder:validation:Optional
 	LaunchConfigurationSelector *v2.Selector `json:"launchConfigurationSelector,omitempty" tf:"-"`
 
-	// Nested argument with Launch template specification to use to launch instances. See Launch Template below for more details.
+	// Nested argument with Launch template specification to use to launch instances. See launch_template Block below for more details.
 	LaunchTemplate *LaunchTemplateInitParameters `json:"launchTemplate,omitempty" tf:"launch_template,omitempty"`
 
 	// Maximum amount of time, in seconds, that an instance can be in service, values must be either equal to 0 or between 86400 and 31536000 seconds.
@@ -193,7 +196,7 @@ type AutoscalingGroupInitParameters struct {
 	// (See also Waiting for Capacity below.)
 	MinSize *float64 `json:"minSize,omitempty" tf:"min_size,omitempty"`
 
-	// Configuration block containing settings to define launch targets for Auto Scaling groups. See Mixed Instances Policy below for more details.
+	// Configuration block containing settings to define launch targets for Auto Scaling groups. See mixed_instances_policy Block below for more details.
 	MixedInstancesPolicy *MixedInstancesPolicyInitParameters `json:"mixedInstancesPolicy,omitempty" tf:"mixed_instances_policy,omitempty"`
 
 	// Name of the placement group into which you'll launch your instances, if any.
@@ -234,7 +237,7 @@ type AutoscalingGroupInitParameters struct {
 	// +listType=set
 	SuspendedProcesses []*string `json:"suspendedProcesses,omitempty" tf:"suspended_processes,omitempty"`
 
-	// Configuration block(s) containing resource tags. See Tag below for more details.
+	// Configuration block(s) containing resource tags. See tag Block below for more details.
 	Tag []TagInitParameters `json:"tag,omitempty" tf:"tag,omitempty"`
 
 	// List of policies to decide how the instances in the Auto Scaling Group should be terminated. The allowed values are OldestInstance, NewestInstance, OldestLaunchConfiguration, ClosestToNextInstanceHour, OldestLaunchTemplate, AllocationStrategy, Default. Additionally, the ARN of a Lambda function can be specified for custom termination policies.
@@ -275,7 +278,7 @@ type AutoscalingGroupObservation struct {
 	// ARN for this Auto Scaling Group
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The instance capacity distribution across Availability Zones. See Availability Zone Distribution below for more details.
+	// The instance capacity distribution across Availability Zones. See availability_zone_distribution Block below for more details.
 	AvailabilityZoneDistribution *AvailabilityZoneDistributionObservation `json:"availabilityZoneDistribution,omitempty" tf:"availability_zone_distribution,omitempty"`
 
 	// A list of Availability Zones where instances in the Auto Scaling group can be created. Used for launching into the default VPC subnet in each Availability Zone when not using the vpc_zone_identifier attribute, or for attaching a network interface when an existing network interface ID is specified in a launch template. Conflicts with vpc_zone_identifier.
@@ -285,7 +288,7 @@ type AutoscalingGroupObservation struct {
 	// Whether capacity rebalance is enabled. Otherwise, capacity rebalance is disabled.
 	CapacityRebalance *bool `json:"capacityRebalance,omitempty" tf:"capacity_rebalance,omitempty"`
 
-	// Demand Capacity Reservations. See Capacity Reservation Specification below for more details.
+	// Demand Capacity Reservations. See capacity_reservation_specification Block below for more details.
 	CapacityReservationSpecification *CapacityReservationSpecificationObservation `json:"capacityReservationSpecification,omitempty" tf:"capacity_reservation_specification,omitempty"`
 
 	// Reserved.
@@ -339,6 +342,9 @@ type AutoscalingGroupObservation struct {
 	// a new Auto Scaling Group. For all other use-cases, please use aws_autoscaling_lifecycle_hook resource.
 	InitialLifecycleHook []InitialLifecycleHookObservation `json:"initialLifecycleHook,omitempty" tf:"initial_lifecycle_hook,omitempty"`
 
+	// If this block is configured, adds an instance lifecycle policy to the specified Auto Scaling Group. Defined below.
+	InstanceLifecyclePolicy *InstanceLifecyclePolicyObservation `json:"instanceLifecyclePolicy,omitempty" tf:"instance_lifecycle_policy,omitempty"`
+
 	// If this block is configured, add a instance maintenance policy to the specified Auto Scaling group. Defined below.
 	InstanceMaintenancePolicy *InstanceMaintenancePolicyObservation `json:"instanceMaintenancePolicy,omitempty" tf:"instance_maintenance_policy,omitempty"`
 
@@ -350,7 +356,7 @@ type AutoscalingGroupObservation struct {
 	// Name of the launch configuration to use.
 	LaunchConfiguration *string `json:"launchConfiguration,omitempty" tf:"launch_configuration,omitempty"`
 
-	// Nested argument with Launch template specification to use to launch instances. See Launch Template below for more details.
+	// Nested argument with Launch template specification to use to launch instances. See launch_template Block below for more details.
 	LaunchTemplate *LaunchTemplateObservation `json:"launchTemplate,omitempty" tf:"launch_template,omitempty"`
 
 	// List of elastic load balancer names to add to the autoscaling
@@ -375,7 +381,7 @@ type AutoscalingGroupObservation struct {
 	// (See also Waiting for Capacity below.)
 	MinSize *float64 `json:"minSize,omitempty" tf:"min_size,omitempty"`
 
-	// Configuration block containing settings to define launch targets for Auto Scaling groups. See Mixed Instances Policy below for more details.
+	// Configuration block containing settings to define launch targets for Auto Scaling groups. See mixed_instances_policy Block below for more details.
 	MixedInstancesPolicy *MixedInstancesPolicyObservation `json:"mixedInstancesPolicy,omitempty" tf:"mixed_instances_policy,omitempty"`
 
 	// Name of the placement group into which you'll launch your instances, if any.
@@ -403,7 +409,7 @@ type AutoscalingGroupObservation struct {
 	// +listType=set
 	SuspendedProcesses []*string `json:"suspendedProcesses,omitempty" tf:"suspended_processes,omitempty"`
 
-	// Configuration block(s) containing resource tags. See Tag below for more details.
+	// Configuration block(s) containing resource tags. See tag Block below for more details.
 	Tag []TagObservation `json:"tag,omitempty" tf:"tag,omitempty"`
 
 	// Set of aws_lb_target_group ARNs, for use with Application or Network Load Balancing. To remove all target group attachments an empty list should be specified.
@@ -439,7 +445,7 @@ type AutoscalingGroupObservation struct {
 
 type AutoscalingGroupParameters struct {
 
-	// The instance capacity distribution across Availability Zones. See Availability Zone Distribution below for more details.
+	// The instance capacity distribution across Availability Zones. See availability_zone_distribution Block below for more details.
 	// +kubebuilder:validation:Optional
 	AvailabilityZoneDistribution *AvailabilityZoneDistributionParameters `json:"availabilityZoneDistribution,omitempty" tf:"availability_zone_distribution,omitempty"`
 
@@ -452,7 +458,7 @@ type AutoscalingGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	CapacityRebalance *bool `json:"capacityRebalance,omitempty" tf:"capacity_rebalance,omitempty"`
 
-	// Demand Capacity Reservations. See Capacity Reservation Specification below for more details.
+	// Demand Capacity Reservations. See capacity_reservation_specification Block below for more details.
 	// +kubebuilder:validation:Optional
 	CapacityReservationSpecification *CapacityReservationSpecificationParameters `json:"capacityReservationSpecification,omitempty" tf:"capacity_reservation_specification,omitempty"`
 
@@ -516,6 +522,10 @@ type AutoscalingGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	InitialLifecycleHook []InitialLifecycleHookParameters `json:"initialLifecycleHook,omitempty" tf:"initial_lifecycle_hook,omitempty"`
 
+	// If this block is configured, adds an instance lifecycle policy to the specified Auto Scaling Group. Defined below.
+	// +kubebuilder:validation:Optional
+	InstanceLifecyclePolicy *InstanceLifecyclePolicyParameters `json:"instanceLifecyclePolicy,omitempty" tf:"instance_lifecycle_policy,omitempty"`
+
 	// If this block is configured, add a instance maintenance policy to the specified Auto Scaling group. Defined below.
 	// +kubebuilder:validation:Optional
 	InstanceMaintenancePolicy *InstanceMaintenancePolicyParameters `json:"instanceMaintenancePolicy,omitempty" tf:"instance_maintenance_policy,omitempty"`
@@ -539,7 +549,7 @@ type AutoscalingGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	LaunchConfigurationSelector *v2.Selector `json:"launchConfigurationSelector,omitempty" tf:"-"`
 
-	// Nested argument with Launch template specification to use to launch instances. See Launch Template below for more details.
+	// Nested argument with Launch template specification to use to launch instances. See launch_template Block below for more details.
 	// +kubebuilder:validation:Optional
 	LaunchTemplate *LaunchTemplateParameters `json:"launchTemplate,omitempty" tf:"launch_template,omitempty"`
 
@@ -565,7 +575,7 @@ type AutoscalingGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	MinSize *float64 `json:"minSize,omitempty" tf:"min_size,omitempty"`
 
-	// Configuration block containing settings to define launch targets for Auto Scaling groups. See Mixed Instances Policy below for more details.
+	// Configuration block containing settings to define launch targets for Auto Scaling groups. See mixed_instances_policy Block below for more details.
 	// +kubebuilder:validation:Optional
 	MixedInstancesPolicy *MixedInstancesPolicyParameters `json:"mixedInstancesPolicy,omitempty" tf:"mixed_instances_policy,omitempty"`
 
@@ -616,7 +626,7 @@ type AutoscalingGroupParameters struct {
 	// +listType=set
 	SuspendedProcesses []*string `json:"suspendedProcesses,omitempty" tf:"suspended_processes,omitempty"`
 
-	// Configuration block(s) containing resource tags. See Tag below for more details.
+	// Configuration block(s) containing resource tags. See tag Block below for more details.
 	// +kubebuilder:validation:Optional
 	Tag []TagParameters `json:"tag,omitempty" tf:"tag,omitempty"`
 
@@ -661,19 +671,19 @@ type AutoscalingGroupParameters struct {
 
 type AvailabilityZoneDistributionInitParameters struct {
 
-	// The strategy to use for distributing capacity across the Availability Zones. Valid values are balanced-only and balanced-best-effort. Default is balanced-best-effort.
+	// The strategy to use for distributing capacity across the Availability Zones. Valid values are balanced-only, balanced-best-effort, and reservations-then-balanced. Default is balanced-best-effort. When reservations-then-balanced is set, you must also specify Capacity Reservations to prioritize through capacity_reservation_specification (or via a launch template) using a Capacity Reservation ID or Capacity Reservation resource group ARN.
 	CapacityDistributionStrategy *string `json:"capacityDistributionStrategy,omitempty" tf:"capacity_distribution_strategy,omitempty"`
 }
 
 type AvailabilityZoneDistributionObservation struct {
 
-	// The strategy to use for distributing capacity across the Availability Zones. Valid values are balanced-only and balanced-best-effort. Default is balanced-best-effort.
+	// The strategy to use for distributing capacity across the Availability Zones. Valid values are balanced-only, balanced-best-effort, and reservations-then-balanced. Default is balanced-best-effort. When reservations-then-balanced is set, you must also specify Capacity Reservations to prioritize through capacity_reservation_specification (or via a launch template) using a Capacity Reservation ID or Capacity Reservation resource group ARN.
 	CapacityDistributionStrategy *string `json:"capacityDistributionStrategy,omitempty" tf:"capacity_distribution_strategy,omitempty"`
 }
 
 type AvailabilityZoneDistributionParameters struct {
 
-	// The strategy to use for distributing capacity across the Availability Zones. Valid values are balanced-only and balanced-best-effort. Default is balanced-best-effort.
+	// The strategy to use for distributing capacity across the Availability Zones. Valid values are balanced-only, balanced-best-effort, and reservations-then-balanced. Default is balanced-best-effort. When reservations-then-balanced is set, you must also specify Capacity Reservations to prioritize through capacity_reservation_specification (or via a launch template) using a Capacity Reservation ID or Capacity Reservation resource group ARN.
 	// +kubebuilder:validation:Optional
 	CapacityDistributionStrategy *string `json:"capacityDistributionStrategy,omitempty" tf:"capacity_distribution_strategy,omitempty"`
 }
@@ -828,6 +838,25 @@ type InitialLifecycleHookParameters struct {
 	// ARN for this Auto Scaling Group
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+}
+
+type InstanceLifecyclePolicyInitParameters struct {
+
+	// Conditions that trigger instance retention behavior. Defined below.
+	RetentionTriggers *RetentionTriggersInitParameters `json:"retentionTriggers,omitempty" tf:"retention_triggers,omitempty"`
+}
+
+type InstanceLifecyclePolicyObservation struct {
+
+	// Conditions that trigger instance retention behavior. Defined below.
+	RetentionTriggers *RetentionTriggersObservation `json:"retentionTriggers,omitempty" tf:"retention_triggers,omitempty"`
+}
+
+type InstanceLifecyclePolicyParameters struct {
+
+	// Conditions that trigger instance retention behavior. Defined below.
+	// +kubebuilder:validation:Optional
+	RetentionTriggers *RetentionTriggersParameters `json:"retentionTriggers,omitempty" tf:"retention_triggers,omitempty"`
 }
 
 type InstanceMaintenancePolicyInitParameters struct {
@@ -1771,6 +1800,25 @@ type PreferencesParameters struct {
 	StandbyInstances *string `json:"standbyInstances,omitempty" tf:"standby_instances,omitempty"`
 }
 
+type RetentionTriggersInitParameters struct {
+
+	// Action to take when a termination lifecycle hook is abandoned due to failure, timeout, or explicit abandonment. Valid values are retain and terminate. Set to retain to move instances to a retained state instead of terminating them. Retained instances don't count toward desired capacity and remain until you terminate them.
+	TerminateHookAbandon *string `json:"terminateHookAbandon,omitempty" tf:"terminate_hook_abandon,omitempty"`
+}
+
+type RetentionTriggersObservation struct {
+
+	// Action to take when a termination lifecycle hook is abandoned due to failure, timeout, or explicit abandonment. Valid values are retain and terminate. Set to retain to move instances to a retained state instead of terminating them. Retained instances don't count toward desired capacity and remain until you terminate them.
+	TerminateHookAbandon *string `json:"terminateHookAbandon,omitempty" tf:"terminate_hook_abandon,omitempty"`
+}
+
+type RetentionTriggersParameters struct {
+
+	// Action to take when a termination lifecycle hook is abandoned due to failure, timeout, or explicit abandonment. Valid values are retain and terminate. Set to retain to move instances to a retained state instead of terminating them. Retained instances don't count toward desired capacity and remain until you terminate them.
+	// +kubebuilder:validation:Optional
+	TerminateHookAbandon *string `json:"terminateHookAbandon,omitempty" tf:"terminate_hook_abandon,omitempty"`
+}
+
 type TagInitParameters struct {
 
 	// Key
@@ -1844,7 +1892,7 @@ type TotalLocalStorageGbParameters struct {
 
 type TrafficSourceInitParameters struct {
 
-	// Identifies the traffic source. For Application Load Balancers, Gateway Load Balancers, Network Load Balancers, and VPC Lattice, this will be the Amazon Resource Name (ARN) for a target group in this account and Region. For Classic Load Balancers, this will be the name of the Classic Load Balancer in this account and Region.
+	// Identifies the traffic source. For Application Load Balancers, Gateway Load Balancers, Network Load Balancers, and VPC Lattice, this will be the ARN for a target group in this account and Region. For Classic Load Balancers, this will be the name of the Classic Load Balancer in this account and Region.
 	Identifier *string `json:"identifier,omitempty" tf:"identifier,omitempty"`
 
 	// Provides additional context for the value of Identifier.
@@ -1857,7 +1905,7 @@ type TrafficSourceInitParameters struct {
 
 type TrafficSourceObservation struct {
 
-	// Identifies the traffic source. For Application Load Balancers, Gateway Load Balancers, Network Load Balancers, and VPC Lattice, this will be the Amazon Resource Name (ARN) for a target group in this account and Region. For Classic Load Balancers, this will be the name of the Classic Load Balancer in this account and Region.
+	// Identifies the traffic source. For Application Load Balancers, Gateway Load Balancers, Network Load Balancers, and VPC Lattice, this will be the ARN for a target group in this account and Region. For Classic Load Balancers, this will be the name of the Classic Load Balancer in this account and Region.
 	Identifier *string `json:"identifier,omitempty" tf:"identifier,omitempty"`
 
 	// Provides additional context for the value of Identifier.
@@ -1870,7 +1918,7 @@ type TrafficSourceObservation struct {
 
 type TrafficSourceParameters struct {
 
-	// Identifies the traffic source. For Application Load Balancers, Gateway Load Balancers, Network Load Balancers, and VPC Lattice, this will be the Amazon Resource Name (ARN) for a target group in this account and Region. For Classic Load Balancers, this will be the name of the Classic Load Balancer in this account and Region.
+	// Identifies the traffic source. For Application Load Balancers, Gateway Load Balancers, Network Load Balancers, and VPC Lattice, this will be the ARN for a target group in this account and Region. For Classic Load Balancers, this will be the name of the Classic Load Balancer in this account and Region.
 	// +kubebuilder:validation:Optional
 	Identifier *string `json:"identifier" tf:"identifier,omitempty"`
 

@@ -21,7 +21,7 @@ type CustomerGatewayInitParameters struct {
 	// The gateway's Border Gateway Protocol (BGP) Autonomous System Number (ASN). Valid values are from  2147483648 to 4294967295 Conflicts with bgp_asn.
 	BGPAsnExtended *string `json:"bgpAsnExtended,omitempty" tf:"bgp_asn_extended,omitempty"`
 
-	// The Amazon Resource Name (ARN) for the customer gateway certificate.
+	// ARN for the customer gateway certificate.
 	CertificateArn *string `json:"certificateArn,omitempty" tf:"certificate_arn,omitempty"`
 
 	// A name for the customer gateway device.
@@ -50,7 +50,7 @@ type CustomerGatewayObservation struct {
 	// The gateway's Border Gateway Protocol (BGP) Autonomous System Number (ASN). Valid values are from  2147483648 to 4294967295 Conflicts with bgp_asn.
 	BGPAsnExtended *string `json:"bgpAsnExtended,omitempty" tf:"bgp_asn_extended,omitempty"`
 
-	// The Amazon Resource Name (ARN) for the customer gateway certificate.
+	// ARN for the customer gateway certificate.
 	CertificateArn *string `json:"certificateArn,omitempty" tf:"certificate_arn,omitempty"`
 
 	// A name for the customer gateway device.
@@ -89,7 +89,7 @@ type CustomerGatewayParameters struct {
 	// +kubebuilder:validation:Optional
 	BGPAsnExtended *string `json:"bgpAsnExtended,omitempty" tf:"bgp_asn_extended,omitempty"`
 
-	// The Amazon Resource Name (ARN) for the customer gateway certificate.
+	// ARN for the customer gateway certificate.
 	// +kubebuilder:validation:Optional
 	CertificateArn *string `json:"certificateArn,omitempty" tf:"certificate_arn,omitempty"`
 

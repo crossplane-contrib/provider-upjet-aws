@@ -1,0 +1,23 @@
+# SPDX-FileCopyrightText: 2026 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+# Basic Browser Profile Example
+# Creates a Bedrock AgentCore Browser Profile holding re-usable browser state
+# (cookies and local storage) shared across AgentCore Browser sessions.
+
+apiVersion: bedrockagentcore.aws.upbound.io/v1beta1
+kind: BrowserProfile
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrockagentcore/v1beta1/browserprofile
+  labels:
+    testing.upbound.io/example-name: browserprofile
+  name: browserprofile
+spec:
+  forProvider:
+    region: us-west-2
+    name: example_browser_profile_xp
+    description: Example browser profile for web data extraction
+    tags:
+      Environment: production

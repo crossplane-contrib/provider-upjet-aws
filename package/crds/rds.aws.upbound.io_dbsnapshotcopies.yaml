@@ -577,7 +577,7 @@ spec:
                     description: Whether to copy existing tags. Defaults to false.
                     type: boolean
                   dbSnapshotArn:
-                    description: The Amazon Resource Name (ARN) for the DB snapshot.
+                    description: ARN for the DB snapshot.
                     type: string
                   destinationRegion:
                     description: The Destination region to place snapshot copy.

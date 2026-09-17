@@ -150,6 +150,9 @@ type NodeGroupInitParameters struct {
 	// Selector for a Cluster in eks to populate version.
 	// +kubebuilder:validation:Optional
 	VersionSelector *v2.Selector `json:"versionSelector,omitempty" tf:"-"`
+
+	// Configuration block with EC2 Auto Scaling warm pool settings. Including this block enables the warm pool; removing it disables and removes the warm pool. See warm_pool_config below for details.
+	WarmPoolConfig []WarmPoolConfigInitParameters `json:"warmPoolConfig,omitempty" tf:"warm_pool_config,omitempty"`
 }
 
 type NodeGroupObservation struct {
@@ -230,6 +233,9 @@ type NodeGroupObservation struct {
 
 	// Kubernetes version. Defaults to EKS Cluster Kubernetes version.
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
+
+	// Configuration block with EC2 Auto Scaling warm pool settings. Including this block enables the warm pool; removing it disables and removes the warm pool. See warm_pool_config below for details.
+	WarmPoolConfig []WarmPoolConfigObservation `json:"warmPoolConfig,omitempty" tf:"warm_pool_config,omitempty"`
 }
 
 type NodeGroupParameters struct {
@@ -354,6 +360,10 @@ type NodeGroupParameters struct {
 	// Selector for a Cluster in eks to populate version.
 	// +kubebuilder:validation:Optional
 	VersionSelector *v2.Selector `json:"versionSelector,omitempty" tf:"-"`
+
+	// Configuration block with EC2 Auto Scaling warm pool settings. Including this block enables the warm pool; removing it disables and removes the warm pool. See warm_pool_config below for details.
+	// +kubebuilder:validation:Optional
+	WarmPoolConfig []WarmPoolConfigParameters `json:"warmPoolConfig,omitempty" tf:"warm_pool_config,omitempty"`
 }
 
 type NodeRepairConfigInitParameters struct {
@@ -658,6 +668,55 @@ type UpdateConfigParameters struct {
 	// Strategy to use for updating the node group. Valid values: MINIMAL and DEFAULT.
 	// +kubebuilder:validation:Optional
 	UpdateStrategy *string `json:"updateStrategy,omitempty" tf:"update_strategy,omitempty"`
+}
+
+type WarmPoolConfigInitParameters struct {
+
+	// Maximum number of instances that are allowed to be in the warm pool combined with the Auto Scaling Group. Use -1 to specify an unlimited capacity.
+	MaxGroupPreparedCapacity *float64 `json:"maxGroupPreparedCapacity,omitempty" tf:"max_group_prepared_capacity,omitempty"`
+
+	// Minimum number of instances to maintain in the warm pool. Defaults to 0.
+	MinSize *float64 `json:"minSize,omitempty" tf:"min_size,omitempty"`
+
+	// Instance state to transition warm pool instances to. Valid values: STOPPED, RUNNING, HIBERNATED. Defaults to STOPPED.
+	PoolState *string `json:"poolState,omitempty" tf:"pool_state,omitempty"`
+
+	// Whether to return instances in the Auto Scaling Group to the warm pool on scale in. Not supported on Bottlerocket. Defaults to false.
+	ReuseOnScaleIn *bool `json:"reuseOnScaleIn,omitempty" tf:"reuse_on_scale_in,omitempty"`
+}
+
+type WarmPoolConfigObservation struct {
+
+	// Maximum number of instances that are allowed to be in the warm pool combined with the Auto Scaling Group. Use -1 to specify an unlimited capacity.
+	MaxGroupPreparedCapacity *float64 `json:"maxGroupPreparedCapacity,omitempty" tf:"max_group_prepared_capacity,omitempty"`
+
+	// Minimum number of instances to maintain in the warm pool. Defaults to 0.
+	MinSize *float64 `json:"minSize,omitempty" tf:"min_size,omitempty"`
+
+	// Instance state to transition warm pool instances to. Valid values: STOPPED, RUNNING, HIBERNATED. Defaults to STOPPED.
+	PoolState *string `json:"poolState,omitempty" tf:"pool_state,omitempty"`
+
+	// Whether to return instances in the Auto Scaling Group to the warm pool on scale in. Not supported on Bottlerocket. Defaults to false.
+	ReuseOnScaleIn *bool `json:"reuseOnScaleIn,omitempty" tf:"reuse_on_scale_in,omitempty"`
+}
+
+type WarmPoolConfigParameters struct {
+
+	// Maximum number of instances that are allowed to be in the warm pool combined with the Auto Scaling Group. Use -1 to specify an unlimited capacity.
+	// +kubebuilder:validation:Optional
+	MaxGroupPreparedCapacity *float64 `json:"maxGroupPreparedCapacity,omitempty" tf:"max_group_prepared_capacity,omitempty"`
+
+	// Minimum number of instances to maintain in the warm pool. Defaults to 0.
+	// +kubebuilder:validation:Optional
+	MinSize *float64 `json:"minSize,omitempty" tf:"min_size,omitempty"`
+
+	// Instance state to transition warm pool instances to. Valid values: STOPPED, RUNNING, HIBERNATED. Defaults to STOPPED.
+	// +kubebuilder:validation:Optional
+	PoolState *string `json:"poolState,omitempty" tf:"pool_state,omitempty"`
+
+	// Whether to return instances in the Auto Scaling Group to the warm pool on scale in. Not supported on Bottlerocket. Defaults to false.
+	// +kubebuilder:validation:Optional
+	ReuseOnScaleIn *bool `json:"reuseOnScaleIn,omitempty" tf:"reuse_on_scale_in,omitempty"`
 }
 
 // NodeGroupSpec defines the desired state of NodeGroup

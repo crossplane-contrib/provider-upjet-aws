@@ -28,7 +28,7 @@ type DomainInitParameters struct {
 
 type DomainObservation struct {
 
-	// Amazon Resource Name (ARN)
+	// ARN
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The domain description.

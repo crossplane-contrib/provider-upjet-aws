@@ -56,7 +56,7 @@ type InstanceAccessControlAttributesObservation struct {
 	// The identifier of the Instance Access Control Attribute instance_arn.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the SSO Instance.
+	// ARN of the SSO Instance.
 	InstanceArn *string `json:"instanceArn,omitempty" tf:"instance_arn,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -74,7 +74,7 @@ type InstanceAccessControlAttributesParameters struct {
 	// +kubebuilder:validation:Optional
 	Attribute []AttributeParameters `json:"attribute,omitempty" tf:"attribute,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the SSO Instance.
+	// ARN of the SSO Instance.
 	// +kubebuilder:validation:Required
 	InstanceArn *string `json:"instanceArn" tf:"instance_arn,omitempty"`
 

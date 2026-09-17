@@ -289,6 +289,10 @@ type ClusterInitParameters struct {
 	// +crossplane:generate:reference:selectorFieldName=VPCSecurityGroupIDSelector
 	// +listType=set
 	VPCSecurityGroupIds []*string `json:"vpcSecurityGroupIds,omitempty" tf:"vpc_security_group_ids,omitempty"`
+
+	// Set of RDS event categories (for example failure, maintenance) to check for after create and update operations. Has no effect if unset; see DescribeEvents and the aws_rds_events data source for the source of these events. Requires the rds:DescribeEvents IAM permission when set.
+	// +listType=set
+	WarningEventCategories []*string `json:"warningEventCategories,omitempty" tf:"warning_event_categories,omitempty"`
 }
 
 type ClusterMasterUserSecretInitParameters struct {
@@ -299,7 +303,7 @@ type ClusterMasterUserSecretObservation struct {
 	// Amazon Web Services KMS key identifier that is used to encrypt the secret.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
-	// Amazon Resource Name (ARN) of the secret.
+	// ARN of the secret.
 	SecretArn *string `json:"secretArn,omitempty" tf:"secret_arn,omitempty"`
 
 	// Status of the secret. Valid Values: creating | active | rotating | impaired.
@@ -320,7 +324,7 @@ type ClusterObservation struct {
 	// Specifies whether any cluster modifications are applied immediately, or during the next maintenance window. Default is false. See Amazon RDS Documentation for more information.
 	ApplyImmediately *bool `json:"applyImmediately,omitempty" tf:"apply_immediately,omitempty"`
 
-	// Amazon Resource Name (ARN) of cluster
+	// ARN of cluster
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Whether to apply minor engine upgrades automatically to the DB cluster during the maintenance window. Defaults to true.
@@ -544,6 +548,10 @@ type ClusterObservation struct {
 	// List of VPC security groups to associate with the Cluster
 	// +listType=set
 	VPCSecurityGroupIds []*string `json:"vpcSecurityGroupIds,omitempty" tf:"vpc_security_group_ids,omitempty"`
+
+	// Set of RDS event categories (for example failure, maintenance) to check for after create and update operations. Has no effect if unset; see DescribeEvents and the aws_rds_events data source for the source of these events. Requires the rds:DescribeEvents IAM permission when set.
+	// +listType=set
+	WarningEventCategories []*string `json:"warningEventCategories,omitempty" tf:"warning_event_categories,omitempty"`
 }
 
 type ClusterParameters struct {
@@ -894,6 +902,11 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	VPCSecurityGroupIds []*string `json:"vpcSecurityGroupIds,omitempty" tf:"vpc_security_group_ids,omitempty"`
+
+	// Set of RDS event categories (for example failure, maintenance) to check for after create and update operations. Has no effect if unset; see DescribeEvents and the aws_rds_events data source for the source of these events. Requires the rds:DescribeEvents IAM permission when set.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	WarningEventCategories []*string `json:"warningEventCategories,omitempty" tf:"warning_event_categories,omitempty"`
 }
 
 type ClusterRestoreToPointInTimeInitParameters struct {

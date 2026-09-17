@@ -211,7 +211,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: Amazon Resource Name (ARN) of the traffic policy.
+                    description: ARN of the traffic policy.
                     type: string
                   comment:
                     description: Comment for the traffic policy.

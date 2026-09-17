@@ -15,11 +15,11 @@ import (
 
 type LocationS3InitParameters struct {
 
-	// (Amazon S3 on Outposts only) Amazon Resource Name (ARN) of the DataSync agent on the Outpost.
+	// (Amazon S3 on Outposts only) ARN of the DataSync agent on the Outpost.
 	// +listType=set
 	AgentArns []*string `json:"agentArns,omitempty" tf:"agent_arns,omitempty"`
 
-	// Amazon Resource Name (ARN) of the S3 bucket, or the Amazon S3 access point if the S3 bucket is located on an AWS Outposts resource.
+	// ARN of the S3 bucket, or the Amazon S3 access point if the S3 bucket is located on an AWS Outposts resource.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3/v1beta2.Bucket
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	S3BucketArn *string `json:"s3BucketArn,omitempty" tf:"s3_bucket_arn,omitempty"`
@@ -48,21 +48,21 @@ type LocationS3InitParameters struct {
 
 type LocationS3Observation struct {
 
-	// (Amazon S3 on Outposts only) Amazon Resource Name (ARN) of the DataSync agent on the Outpost.
+	// (Amazon S3 on Outposts only) ARN of the DataSync agent on the Outpost.
 	// +listType=set
 	AgentArns []*string `json:"agentArns,omitempty" tf:"agent_arns,omitempty"`
 
-	// Amazon Resource Name (ARN) of the DataSync Location.
+	// ARN of the DataSync Location.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// Amazon Resource Name (ARN) of the DataSync Location.
+	// ARN of the DataSync Location.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// Amazon Resource Name (ARN) of the S3 bucket, or the Amazon S3 access point if the S3 bucket is located on an AWS Outposts resource.
+	// ARN of the S3 bucket, or the Amazon S3 access point if the S3 bucket is located on an AWS Outposts resource.
 	S3BucketArn *string `json:"s3BucketArn,omitempty" tf:"s3_bucket_arn,omitempty"`
 
 	// Configuration block containing information for connecting to S3.
@@ -87,7 +87,7 @@ type LocationS3Observation struct {
 
 type LocationS3Parameters struct {
 
-	// (Amazon S3 on Outposts only) Amazon Resource Name (ARN) of the DataSync agent on the Outpost.
+	// (Amazon S3 on Outposts only) ARN of the DataSync agent on the Outpost.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	AgentArns []*string `json:"agentArns,omitempty" tf:"agent_arns,omitempty"`
@@ -97,7 +97,7 @@ type LocationS3Parameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// Amazon Resource Name (ARN) of the S3 bucket, or the Amazon S3 access point if the S3 bucket is located on an AWS Outposts resource.
+	// ARN of the S3 bucket, or the Amazon S3 access point if the S3 bucket is located on an AWS Outposts resource.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3/v1beta2.Bucket
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional

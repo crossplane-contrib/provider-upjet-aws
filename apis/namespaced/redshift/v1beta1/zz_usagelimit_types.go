@@ -53,7 +53,7 @@ type UsageLimitObservation struct {
 	// The limit amount. If time-based, this amount is in minutes. If data-based, this amount is in terabytes (TB). The value must be a positive number.
 	Amount *float64 `json:"amount,omitempty" tf:"amount,omitempty"`
 
-	// Amazon Resource Name (ARN) of the Redshift Usage Limit.
+	// ARN of the Redshift Usage Limit.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The action that Amazon Redshift takes when the limit is reached. The default is log. Valid values are log, emit-metric, and disable.

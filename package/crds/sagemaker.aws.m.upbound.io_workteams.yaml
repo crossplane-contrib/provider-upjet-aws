@@ -1030,8 +1030,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The Amazon Resource Name (ARN) assigned by AWS to
-                      this Workteam.
+                    description: ARN assigned by AWS to this Workteam.
                     type: string
                   description:
                     description: A description of the work team.

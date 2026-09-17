@@ -18,7 +18,7 @@ type BucketAnalyticsConfigurationFilterInitParameters struct {
 	// Object prefix for filtering.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// Key-value map of resource tags.
+	// Set of object tags for filtering.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
@@ -28,7 +28,7 @@ type BucketAnalyticsConfigurationFilterObservation struct {
 	// Object prefix for filtering.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// Key-value map of resource tags.
+	// Set of object tags for filtering.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
@@ -39,7 +39,7 @@ type BucketAnalyticsConfigurationFilterParameters struct {
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// Key-value map of resource tags.
+	// Set of object tags for filtering.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -146,7 +146,7 @@ type DataExportDestinationParameters struct {
 
 type DataExportInitParameters struct {
 
-	// Specifies the destination for the exported analytics data (documented below).
+	// Destination for the exported analytics data (documented below).
 	Destination *DataExportDestinationInitParameters `json:"destination,omitempty" tf:"destination,omitempty"`
 
 	// Schema version of exported analytics data. Allowed values: V_1. Default value: V_1.
@@ -155,7 +155,7 @@ type DataExportInitParameters struct {
 
 type DataExportObservation struct {
 
-	// Specifies the destination for the exported analytics data (documented below).
+	// Destination for the exported analytics data (documented below).
 	Destination *DataExportDestinationObservation `json:"destination,omitempty" tf:"destination,omitempty"`
 
 	// Schema version of exported analytics data. Allowed values: V_1. Default value: V_1.
@@ -164,7 +164,7 @@ type DataExportObservation struct {
 
 type DataExportParameters struct {
 
-	// Specifies the destination for the exported analytics data (documented below).
+	// Destination for the exported analytics data (documented below).
 	// +kubebuilder:validation:Optional
 	Destination *DataExportDestinationParameters `json:"destination" tf:"destination,omitempty"`
 
@@ -194,7 +194,7 @@ type S3BucketDestinationInitParameters struct {
 	// Output format of exported analytics data. Allowed values: CSV. Default value: CSV.
 	Format *string `json:"format,omitempty" tf:"format,omitempty"`
 
-	// Object prefix for filtering.
+	// Prefix to append to exported analytics data.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 }
 
@@ -209,7 +209,7 @@ type S3BucketDestinationObservation struct {
 	// Output format of exported analytics data. Allowed values: CSV. Default value: CSV.
 	Format *string `json:"format,omitempty" tf:"format,omitempty"`
 
-	// Object prefix for filtering.
+	// Prefix to append to exported analytics data.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 }
 
@@ -237,7 +237,7 @@ type S3BucketDestinationParameters struct {
 	// +kubebuilder:validation:Optional
 	Format *string `json:"format,omitempty" tf:"format,omitempty"`
 
-	// Object prefix for filtering.
+	// Prefix to append to exported analytics data.
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 }

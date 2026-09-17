@@ -22,7 +22,7 @@ type AMIDistributionConfigurationInitParameters struct {
 	// Description to apply to the distributed AMI.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Amazon Resource Name (ARN) of the Key Management Service (KMS) Key to encrypt the distributed AMI.
+	// ARN of the KMS Key to encrypt the distributed AMI.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
 	// Configuration block of EC2 launch permissions to apply to the distributed AMI. Detailed below.
@@ -45,7 +45,7 @@ type AMIDistributionConfigurationObservation struct {
 	// Description to apply to the distributed AMI.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Amazon Resource Name (ARN) of the Key Management Service (KMS) Key to encrypt the distributed AMI.
+	// ARN of the KMS Key to encrypt the distributed AMI.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
 	// Configuration block of EC2 launch permissions to apply to the distributed AMI. Detailed below.
@@ -70,7 +70,7 @@ type AMIDistributionConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Amazon Resource Name (ARN) of the Key Management Service (KMS) Key to encrypt the distributed AMI.
+	// ARN of the KMS Key to encrypt the distributed AMI.
 	// +kubebuilder:validation:Optional
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
@@ -177,7 +177,7 @@ type DistributionConfigurationInitParameters struct {
 
 type DistributionConfigurationObservation struct {
 
-	// Amazon Resource Name (ARN) of the distribution configuration.
+	// ARN of the distribution configuration.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Date the distribution configuration was created.
@@ -192,7 +192,7 @@ type DistributionConfigurationObservation struct {
 	// One or more configuration blocks with distribution settings. Detailed below.
 	Distribution []DistributionObservation `json:"distribution,omitempty" tf:"distribution,omitempty"`
 
-	// Amazon Resource Name (ARN) of the distribution configuration.
+	// ARN of the distribution configuration.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Name of the distribution configuration.
@@ -238,7 +238,7 @@ type DistributionConfigurationParameters struct {
 
 type DistributionInitParameters struct {
 
-	// Configuration block with Amazon Machine Image (AMI) distribution settings. Detailed below.
+	// Configuration block with AMI distribution settings. Detailed below.
 	AMIDistributionConfiguration *AMIDistributionConfigurationInitParameters `json:"amiDistributionConfiguration,omitempty" tf:"ami_distribution_configuration,omitempty"`
 
 	// Configuration block with container distribution settings. Detailed below.
@@ -250,7 +250,7 @@ type DistributionInitParameters struct {
 	// Set of launch template configuration settings that apply to image distribution. Detailed below.
 	LaunchTemplateConfiguration []LaunchTemplateConfigurationInitParameters `json:"launchTemplateConfiguration,omitempty" tf:"launch_template_configuration,omitempty"`
 
-	// Set of Amazon Resource Names (ARNs) of License Manager License Configurations.
+	// Set of ARNs of License Manager License Configurations.
 	// +listType=set
 	LicenseConfigurationArns []*string `json:"licenseConfigurationArns,omitempty" tf:"license_configuration_arns,omitempty"`
 
@@ -263,7 +263,7 @@ type DistributionInitParameters struct {
 
 type DistributionObservation struct {
 
-	// Configuration block with Amazon Machine Image (AMI) distribution settings. Detailed below.
+	// Configuration block with AMI distribution settings. Detailed below.
 	AMIDistributionConfiguration *AMIDistributionConfigurationObservation `json:"amiDistributionConfiguration,omitempty" tf:"ami_distribution_configuration,omitempty"`
 
 	// Configuration block with container distribution settings. Detailed below.
@@ -275,7 +275,7 @@ type DistributionObservation struct {
 	// Set of launch template configuration settings that apply to image distribution. Detailed below.
 	LaunchTemplateConfiguration []LaunchTemplateConfigurationObservation `json:"launchTemplateConfiguration,omitempty" tf:"launch_template_configuration,omitempty"`
 
-	// Set of Amazon Resource Names (ARNs) of License Manager License Configurations.
+	// Set of ARNs of License Manager License Configurations.
 	// +listType=set
 	LicenseConfigurationArns []*string `json:"licenseConfigurationArns,omitempty" tf:"license_configuration_arns,omitempty"`
 
@@ -291,7 +291,7 @@ type DistributionObservation struct {
 
 type DistributionParameters struct {
 
-	// Configuration block with Amazon Machine Image (AMI) distribution settings. Detailed below.
+	// Configuration block with AMI distribution settings. Detailed below.
 	// +kubebuilder:validation:Optional
 	AMIDistributionConfiguration *AMIDistributionConfigurationParameters `json:"amiDistributionConfiguration,omitempty" tf:"ami_distribution_configuration,omitempty"`
 
@@ -307,7 +307,7 @@ type DistributionParameters struct {
 	// +kubebuilder:validation:Optional
 	LaunchTemplateConfiguration []LaunchTemplateConfigurationParameters `json:"launchTemplateConfiguration,omitempty" tf:"launch_template_configuration,omitempty"`
 
-	// Set of Amazon Resource Names (ARNs) of License Manager License Configurations.
+	// Set of ARNs of License Manager License Configurations.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	LicenseConfigurationArns []*string `json:"licenseConfigurationArns,omitempty" tf:"license_configuration_arns,omitempty"`

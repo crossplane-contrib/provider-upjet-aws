@@ -164,7 +164,7 @@ type PipelineObservation struct {
 	// The minimum pipeline capacity, in Ingestion Compute Units (ICUs).
 	MinUnits *float64 `json:"minUnits,omitempty" tf:"min_units,omitempty"`
 
-	// Amazon Resource Name (ARN) of the pipeline.
+	// ARN of the pipeline.
 	PipelineArn *string `json:"pipelineArn,omitempty" tf:"pipeline_arn,omitempty"`
 
 	// The pipeline configuration in YAML format. This argument accepts the pipeline configuration as a string or within a .yaml file. If you provide the configuration as a string, each new line must be escaped with \n.

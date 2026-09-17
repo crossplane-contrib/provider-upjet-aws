@@ -154,7 +154,7 @@ spec:
                         description: 'Endpoint type. Valid values: REGIONAL.'
                         type: string
                       ipAddressType:
-                        description: 'The IP address types that can invoke the domain
+                        description: 'IP address types that can invoke the domain
                           name. Valid values: ipv4, dualstack. Use ipv4 to allow only
                           IPv4 addresses to invoke your domain name, or use dualstack
                           to allow both IPv4 and IPv6 addresses to invoke your domain
@@ -167,8 +167,8 @@ spec:
                           with an ACM-imported certificate.)
                         type: string
                       securityPolicy:
-                        description: 'Transport Layer Security (TLS) version of the
-                          security policy for the domain name. Valid values: TLS_1_2.'
+                        description: 'TLS version of the security policy for the domain
+                          name. Valid values: TLS_1_2.'
                         type: string
                     type: object
                   mutualTlsAuthentication:
@@ -315,7 +315,7 @@ spec:
                         description: 'Endpoint type. Valid values: REGIONAL.'
                         type: string
                       ipAddressType:
-                        description: 'The IP address types that can invoke the domain
+                        description: 'IP address types that can invoke the domain
                           name. Valid values: ipv4, dualstack. Use ipv4 to allow only
                           IPv4 addresses to invoke your domain name, or use dualstack
                           to allow both IPv4 and IPv6 addresses to invoke your domain
@@ -328,8 +328,8 @@ spec:
                           with an ACM-imported certificate.)
                         type: string
                       securityPolicy:
-                        description: 'Transport Layer Security (TLS) version of the
-                          security policy for the domain name. Valid values: TLS_1_2.'
+                        description: 'TLS version of the security policy for the domain
+                          name. Valid values: TLS_1_2.'
                         type: string
                     type: object
                   mutualTlsAuthentication:
@@ -448,11 +448,10 @@ spec:
                         description: 'Endpoint type. Valid values: REGIONAL.'
                         type: string
                       hostedZoneId:
-                        description: (Computed) Amazon Route 53 Hosted Zone ID of
-                          the endpoint.
+                        description: Amazon Route 53 Hosted Zone ID of the endpoint.
                         type: string
                       ipAddressType:
-                        description: 'The IP address types that can invoke the domain
+                        description: 'IP address types that can invoke the domain
                           name. Valid values: ipv4, dualstack. Use ipv4 to allow only
                           IPv4 addresses to invoke your domain name, or use dualstack
                           to allow both IPv4 and IPv6 addresses to invoke your domain
@@ -465,11 +464,11 @@ spec:
                           with an ACM-imported certificate.)
                         type: string
                       securityPolicy:
-                        description: 'Transport Layer Security (TLS) version of the
-                          security policy for the domain name. Valid values: TLS_1_2.'
+                        description: 'TLS version of the security policy for the domain
+                          name. Valid values: TLS_1_2.'
                         type: string
                       targetDomainName:
-                        description: (Computed) Target domain name.
+                        description: Target domain name.
                         type: string
                     type: object
                   id:

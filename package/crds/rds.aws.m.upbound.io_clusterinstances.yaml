@@ -352,8 +352,8 @@ spec:
                   engineVersion:
                     description: Database engine version. Please note that to upgrade
                       the engine_version of the instance, it must be done on the aws_rds_cluster
-                      engine_version. Trying to upgrade in aws_cluster_instance will
-                      not update the engine_version.
+                      engine_version. Trying to upgrade in aws_rds_cluster_instance
+                      will not update the engine_version.
                     type: string
                   forceDestroy:
                     description: 'Forces an instance to be destroyed when a part of
@@ -586,6 +586,16 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                     x-kubernetes-map-type: granular
+                  warningEventCategories:
+                    description: Set of RDS event categories (for example failure,
+                      maintenance) to check for after create and update operations.
+                      Has no effect if unset; see DescribeEvents and the aws_rds_events
+                      data source for the source of these events. Requires the rds:DescribeEvents
+                      IAM permission when set.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
                 required:
                 - region
                 type: object
@@ -895,8 +905,8 @@ spec:
                   engineVersion:
                     description: Database engine version. Please note that to upgrade
                       the engine_version of the instance, it must be done on the aws_rds_cluster
-                      engine_version. Trying to upgrade in aws_cluster_instance will
-                      not update the engine_version.
+                      engine_version. Trying to upgrade in aws_rds_cluster_instance
+                      will not update the engine_version.
                     type: string
                   forceDestroy:
                     description: 'Forces an instance to be destroyed when a part of
@@ -1124,6 +1134,16 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                     x-kubernetes-map-type: granular
+                  warningEventCategories:
+                    description: Set of RDS event categories (for example failure,
+                      maintenance) to check for after create and update operations.
+                      Has no effect if unset; see DescribeEvents and the aws_rds_events
+                      data source for the source of these events. Requires the rds:DescribeEvents
+                      IAM permission when set.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
                 type: object
               managementPolicies:
                 default:
@@ -1203,7 +1223,7 @@ spec:
                       Default isfalse.
                     type: boolean
                   arn:
-                    description: Amazon Resource Name (ARN) of cluster instance
+                    description: ARN of cluster instance
                     type: string
                   autoMinorVersionUpgrade:
                     description: Indicates that minor engine upgrades will be applied
@@ -1257,8 +1277,8 @@ spec:
                   engineVersion:
                     description: Database engine version. Please note that to upgrade
                       the engine_version of the instance, it must be done on the aws_rds_cluster
-                      engine_version. Trying to upgrade in aws_cluster_instance will
-                      not update the engine_version.
+                      engine_version. Trying to upgrade in aws_rds_cluster_instance
+                      will not update the engine_version.
                     type: string
                   engineVersionActual:
                     description: Database engine version
@@ -1357,6 +1377,16 @@ spec:
                       inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
+                  warningEventCategories:
+                    description: Set of RDS event categories (for example failure,
+                      maintenance) to check for after create and update operations.
+                      Has no effect if unset; see DescribeEvents and the aws_rds_events
+                      data source for the source of these events. Requires the rds:DescribeEvents
+                      IAM permission when set.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
                   writer:
                     description: Boolean indicating if this instance is writable.
                       False indicates this instance is a read replica.

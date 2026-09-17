@@ -41,12 +41,12 @@ spec:
     runtime: python3.9
     timeout: 60
     vpcConfig:
-      - securityGroupIdSelector:
-          matchLabels:
-            testing.upbound.io/example-name: example
-        subnetIdSelector:
-          matchLabels:
-            testing.upbound.io/example-name: example
+      securityGroupIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+      subnetIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
 ---
 apiVersion: iam.aws.m.upbound.io/v1beta1
 kind: Role

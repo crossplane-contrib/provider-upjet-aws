@@ -44,7 +44,7 @@ type QueryLogInitParameters struct {
 
 type QueryLogObservation struct {
 
-	// The Amazon Resource Name (ARN) of the Query Logging Config.
+	// ARN of the Query Logging Config.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// CloudWatch log group ARN to send query logs.

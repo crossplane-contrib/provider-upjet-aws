@@ -74,17 +74,91 @@ spec:
               forProvider:
                 properties:
                   destinationArn:
-                    description: Amazon Resource Name (ARN) of the log destination.
+                    description: ARN of the log destination.
                     type: string
+                  destinationArnRef:
+                    description: Reference to a Bucket in s3 to populate destinationArn.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  destinationArnSelector:
+                    description: Selector for a Bucket in s3 to populate destinationArn.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                   region:
                     description: |-
                       Region where this resource will be managed. Defaults to the Region set in the provider configuration.
                       Region is the region you'd like your resource to be created in.
                     type: string
                   resourceIdentifier:
-                    description: The ID or Amazon Resource Identifier (ARN) of the
-                      service network or service. You must use the ARN if the resources
-                      specified in the operation are in different accounts.
+                    description: ID or Amazon Resource Identifier (ARN) of the service
+                      network or service. You must use the ARN if the resources specified
+                      in the operation are in different accounts.
                     type: string
                   resourceIdentifierRef:
                     description: Reference to a ServiceNetwork in vpclattice to populate
@@ -170,6 +244,7 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: Key-value map of resource tags.
                     type: object
                     x-kubernetes-map-type: granular
                 required:
@@ -189,12 +264,86 @@ spec:
                   autoscaler.
                 properties:
                   destinationArn:
-                    description: Amazon Resource Name (ARN) of the log destination.
+                    description: ARN of the log destination.
                     type: string
+                  destinationArnRef:
+                    description: Reference to a Bucket in s3 to populate destinationArn.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  destinationArnSelector:
+                    description: Selector for a Bucket in s3 to populate destinationArn.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                   resourceIdentifier:
-                    description: The ID or Amazon Resource Identifier (ARN) of the
-                      service network or service. You must use the ARN if the resources
-                      specified in the operation are in different accounts.
+                    description: ID or Amazon Resource Identifier (ARN) of the service
+                      network or service. You must use the ARN if the resources specified
+                      in the operation are in different accounts.
                     type: string
                   resourceIdentifierRef:
                     description: Reference to a ServiceNetwork in vpclattice to populate
@@ -280,6 +429,7 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: Key-value map of resource tags.
                     type: object
                     x-kubernetes-map-type: granular
                 type: object
@@ -369,11 +519,6 @@ spec:
             required:
             - forProvider
             type: object
-            x-kubernetes-validations:
-            - message: spec.forProvider.destinationArn is a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.destinationArn)
-                || (has(self.initProvider) && has(self.initProvider.destinationArn))'
           status:
             description: AccessLogSubscriptionStatus defines the observed state of
               AccessLogSubscription.
@@ -381,10 +526,10 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: Amazon Resource Name (ARN) of the access log subscription.
+                    description: ARN of the access log subscription.
                     type: string
                   destinationArn:
-                    description: Amazon Resource Name (ARN) of the log destination.
+                    description: ARN of the log destination.
                     type: string
                   id:
                     description: ID of the access log subscription.
@@ -395,13 +540,12 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   resourceArn:
-                    description: Amazon Resource Name (ARN) of the service network
-                      or service.
+                    description: ARN of the service network or service.
                     type: string
                   resourceIdentifier:
-                    description: The ID or Amazon Resource Identifier (ARN) of the
-                      service network or service. You must use the ARN if the resources
-                      specified in the operation are in different accounts.
+                    description: ID or Amazon Resource Identifier (ARN) of the service
+                      network or service. You must use the ARN if the resources specified
+                      in the operation are in different accounts.
                     type: string
                   serviceNetworkLogType:
                     description: 'Type of log that monitors your Amazon VPC Lattice
@@ -411,6 +555,7 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: Key-value map of resource tags.
                     type: object
                     x-kubernetes-map-type: granular
                   tagsAll:

@@ -24,7 +24,7 @@ type XSSMatchSetInitParameters struct {
 
 type XSSMatchSetObservation struct {
 
-	// Amazon Resource Name (ARN)
+	// ARN
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The ID of the WAF XssMatchSet.

@@ -62,7 +62,7 @@ metadata:
     testing.upbound.io/example-name: example
   name: example
 spec:
-  forProvider:
+  forProvider: {}
 ---
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: TransitGatewayConnectPeer

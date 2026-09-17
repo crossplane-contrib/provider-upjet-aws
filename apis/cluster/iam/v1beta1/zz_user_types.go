@@ -15,10 +15,7 @@ import (
 
 type UserInitParameters struct {
 
-	// when destroying this user, destroy even if it
-	// has non-provider-managed iam access keys, login profile or mfa devices. without force_destroy
-	// a user with non-provider-managed access keys and login profile will fail to be destroyed.
-	// delete user even if it has non-provider-managed iam access keys, login profile or mfa devices
+	// This only deletes objects when the user is destroyed, not when setting this parameter to true. If setting this field in the same operation that would require replacing the user or destroying the user, this flag will not work
 	ForceDestroy *bool `json:"forceDestroy,omitempty" tf:"force_destroy,omitempty"`
 
 	// Path in which to create the user.
@@ -37,10 +34,7 @@ type UserObservation struct {
 	// The ARN assigned by AWS for this user.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// when destroying this user, destroy even if it
-	// has non-provider-managed iam access keys, login profile or mfa devices. without force_destroy
-	// a user with non-provider-managed access keys and login profile will fail to be destroyed.
-	// delete user even if it has non-provider-managed iam access keys, login profile or mfa devices
+	// This only deletes objects when the user is destroyed, not when setting this parameter to true. If setting this field in the same operation that would require replacing the user or destroying the user, this flag will not work
 	ForceDestroy *bool `json:"forceDestroy,omitempty" tf:"force_destroy,omitempty"`
 
 	// The user's name.
@@ -66,10 +60,7 @@ type UserObservation struct {
 
 type UserParameters struct {
 
-	// when destroying this user, destroy even if it
-	// has non-provider-managed iam access keys, login profile or mfa devices. without force_destroy
-	// a user with non-provider-managed access keys and login profile will fail to be destroyed.
-	// delete user even if it has non-provider-managed iam access keys, login profile or mfa devices
+	// This only deletes objects when the user is destroyed, not when setting this parameter to true. If setting this field in the same operation that would require replacing the user or destroying the user, this flag will not work
 	// +kubebuilder:validation:Optional
 	ForceDestroy *bool `json:"forceDestroy,omitempty" tf:"force_destroy,omitempty"`
 

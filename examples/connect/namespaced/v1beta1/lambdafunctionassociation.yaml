@@ -34,8 +34,8 @@ spec:
   forProvider:
     region: us-east-1
     environment:
-      - variables:
-          foo: bar
+      variables:
+        foo: bar
     s3Bucket: upbound-provider-test-data
     s3Key: hello-python.zip
     handler: index.py

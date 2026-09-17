@@ -42,7 +42,7 @@ type IPSetObservation struct {
 	// +listType=set
 	Addresses []*string `json:"addresses,omitempty" tf:"addresses,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the IP set.
+	// ARN of the IP set.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// A friendly description of the IP set.

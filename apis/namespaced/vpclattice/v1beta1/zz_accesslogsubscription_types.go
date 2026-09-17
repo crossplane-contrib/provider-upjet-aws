@@ -15,10 +15,20 @@ import (
 
 type AccessLogSubscriptionInitParameters struct {
 
-	// Amazon Resource Name (ARN) of the log destination.
+	// ARN of the log destination.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/s3/v1beta1.Bucket
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	DestinationArn *string `json:"destinationArn,omitempty" tf:"destination_arn,omitempty"`
 
-	// The ID or Amazon Resource Identifier (ARN) of the service network or service. You must use the ARN if the resources specified in the operation are in different accounts.
+	// Reference to a Bucket in s3 to populate destinationArn.
+	// +kubebuilder:validation:Optional
+	DestinationArnRef *v2.NamespacedReference `json:"destinationArnRef,omitempty" tf:"-"`
+
+	// Selector for a Bucket in s3 to populate destinationArn.
+	// +kubebuilder:validation:Optional
+	DestinationArnSelector *v2.NamespacedSelector `json:"destinationArnSelector,omitempty" tf:"-"`
+
+	// ID or Amazon Resource Identifier (ARN) of the service network or service. You must use the ARN if the resources specified in the operation are in different accounts.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/vpclattice/v1beta1.ServiceNetwork
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ResourceIdentifier *string `json:"resourceIdentifier,omitempty" tf:"resource_identifier,omitempty"`
@@ -34,16 +44,17 @@ type AccessLogSubscriptionInitParameters struct {
 	// Type of log that monitors your Amazon VPC Lattice service networks. Valid values are: SERVICE, RESOURCE. Defaults to SERVICE.
 	ServiceNetworkLogType *string `json:"serviceNetworkLogType,omitempty" tf:"service_network_log_type,omitempty"`
 
+	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type AccessLogSubscriptionObservation struct {
 
-	// Amazon Resource Name (ARN) of the access log subscription.
+	// ARN of the access log subscription.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// Amazon Resource Name (ARN) of the log destination.
+	// ARN of the log destination.
 	DestinationArn *string `json:"destinationArn,omitempty" tf:"destination_arn,omitempty"`
 
 	// ID of the access log subscription.
@@ -53,15 +64,16 @@ type AccessLogSubscriptionObservation struct {
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// Amazon Resource Name (ARN) of the service network or service.
+	// ARN of the service network or service.
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
 
-	// The ID or Amazon Resource Identifier (ARN) of the service network or service. You must use the ARN if the resources specified in the operation are in different accounts.
+	// ID or Amazon Resource Identifier (ARN) of the service network or service. You must use the ARN if the resources specified in the operation are in different accounts.
 	ResourceIdentifier *string `json:"resourceIdentifier,omitempty" tf:"resource_identifier,omitempty"`
 
 	// Type of log that monitors your Amazon VPC Lattice service networks. Valid values are: SERVICE, RESOURCE. Defaults to SERVICE.
 	ServiceNetworkLogType *string `json:"serviceNetworkLogType,omitempty" tf:"service_network_log_type,omitempty"`
 
+	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
@@ -71,16 +83,26 @@ type AccessLogSubscriptionObservation struct {
 
 type AccessLogSubscriptionParameters struct {
 
-	// Amazon Resource Name (ARN) of the log destination.
+	// ARN of the log destination.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/s3/v1beta1.Bucket
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	DestinationArn *string `json:"destinationArn,omitempty" tf:"destination_arn,omitempty"`
+
+	// Reference to a Bucket in s3 to populate destinationArn.
+	// +kubebuilder:validation:Optional
+	DestinationArnRef *v2.NamespacedReference `json:"destinationArnRef,omitempty" tf:"-"`
+
+	// Selector for a Bucket in s3 to populate destinationArn.
+	// +kubebuilder:validation:Optional
+	DestinationArnSelector *v2.NamespacedSelector `json:"destinationArnSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// The ID or Amazon Resource Identifier (ARN) of the service network or service. You must use the ARN if the resources specified in the operation are in different accounts.
+	// ID or Amazon Resource Identifier (ARN) of the service network or service. You must use the ARN if the resources specified in the operation are in different accounts.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/vpclattice/v1beta1.ServiceNetwork
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -98,6 +120,7 @@ type AccessLogSubscriptionParameters struct {
 	// +kubebuilder:validation:Optional
 	ServiceNetworkLogType *string `json:"serviceNetworkLogType,omitempty" tf:"service_network_log_type,omitempty"`
 
+	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -139,9 +162,8 @@ type AccessLogSubscriptionStatus struct {
 type AccessLogSubscription struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.destinationArn) || (has(self.initProvider) && has(self.initProvider.destinationArn))",message="spec.forProvider.destinationArn is a required parameter"
-	Spec   AccessLogSubscriptionSpec   `json:"spec"`
-	Status AccessLogSubscriptionStatus `json:"status,omitempty"`
+	Spec              AccessLogSubscriptionSpec   `json:"spec"`
+	Status            AccessLogSubscriptionStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

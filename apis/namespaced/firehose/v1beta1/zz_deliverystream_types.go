@@ -178,7 +178,7 @@ type DeliveryStreamInitParameters struct {
 	// Configuration options when destination is iceberg. See iceberg_configuration block below for details.
 	IcebergConfiguration *IcebergConfigurationInitParameters `json:"icebergConfiguration,omitempty" tf:"iceberg_configuration,omitempty"`
 
-	// The stream and role Amazon Resource Names (ARNs) for a Kinesis data stream used as the source for a delivery stream. See kinesis_source_configuration block below for details.
+	// Stream and role ARNs for a Kinesis data stream used as the source for a delivery stream. See kinesis_source_configuration block below for details.
 	KinesisSourceConfiguration *KinesisSourceConfigurationInitParameters `json:"kinesisSourceConfiguration,omitempty" tf:"kinesis_source_configuration,omitempty"`
 
 	// The configuration for the Amazon MSK cluster to be used as the source for a delivery stream. See msk_source_configuration block below for details.
@@ -215,7 +215,7 @@ type DeliveryStreamInitParameters struct {
 
 type DeliveryStreamObservation struct {
 
-	// The Amazon Resource Name (ARN) specifying the Stream
+	// ARN specifying the Stream
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// This is the destination to where the data is delivered. The only options are s3 (Deprecated, use extended_s3 instead), extended_s3, redshift, elasticsearch, splunk, http_endpoint, opensearch, opensearchserverless and snowflake.
@@ -237,7 +237,7 @@ type DeliveryStreamObservation struct {
 	// Configuration options when destination is iceberg. See iceberg_configuration block below for details.
 	IcebergConfiguration *IcebergConfigurationObservation `json:"icebergConfiguration,omitempty" tf:"iceberg_configuration,omitempty"`
 
-	// The stream and role Amazon Resource Names (ARNs) for a Kinesis data stream used as the source for a delivery stream. See kinesis_source_configuration block below for details.
+	// Stream and role ARNs for a Kinesis data stream used as the source for a delivery stream. See kinesis_source_configuration block below for details.
 	KinesisSourceConfiguration *KinesisSourceConfigurationObservation `json:"kinesisSourceConfiguration,omitempty" tf:"kinesis_source_configuration,omitempty"`
 
 	// The configuration for the Amazon MSK cluster to be used as the source for a delivery stream. See msk_source_configuration block below for details.
@@ -305,7 +305,7 @@ type DeliveryStreamParameters struct {
 	// +kubebuilder:validation:Optional
 	IcebergConfiguration *IcebergConfigurationParameters `json:"icebergConfiguration,omitempty" tf:"iceberg_configuration,omitempty"`
 
-	// The stream and role Amazon Resource Names (ARNs) for a Kinesis data stream used as the source for a delivery stream. See kinesis_source_configuration block below for details.
+	// Stream and role ARNs for a Kinesis data stream used as the source for a delivery stream. See kinesis_source_configuration block below for details.
 	// +kubebuilder:validation:Optional
 	KinesisSourceConfiguration *KinesisSourceConfigurationParameters `json:"kinesisSourceConfiguration,omitempty" tf:"kinesis_source_configuration,omitempty"`
 
@@ -2708,7 +2708,7 @@ type OpensearchserverlessConfigurationInitParameters struct {
 	// After an initial failure to deliver to the Serverless offering for Amazon OpenSearch Service, the total amount of time, in seconds between 0 to 7200, during which Kinesis Data Firehose retries delivery (including the first attempt).  After this time has elapsed, the failed documents are written to Amazon S3.  The default value is 300s.  There will be no retry if the value is 0.
 	RetryDuration *float64 `json:"retryDuration,omitempty" tf:"retry_duration,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the IAM role to be assumed by Kinesis Data Firehose for calling the Serverless offering for Amazon OpenSearch Service Configuration API and for indexing documents.  The pattern needs to be arn:.*.
+	// ARN of the IAM role to be assumed by Kinesis Data Firehose for calling the Serverless offering for Amazon OpenSearch Service Configuration API and for indexing documents.  The pattern needs to be arn:.*.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
@@ -2754,7 +2754,7 @@ type OpensearchserverlessConfigurationObservation struct {
 	// After an initial failure to deliver to the Serverless offering for Amazon OpenSearch Service, the total amount of time, in seconds between 0 to 7200, during which Kinesis Data Firehose retries delivery (including the first attempt).  After this time has elapsed, the failed documents are written to Amazon S3.  The default value is 300s.  There will be no retry if the value is 0.
 	RetryDuration *float64 `json:"retryDuration,omitempty" tf:"retry_duration,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the IAM role to be assumed by Kinesis Data Firehose for calling the Serverless offering for Amazon OpenSearch Service Configuration API and for indexing documents.  The pattern needs to be arn:.*.
+	// ARN of the IAM role to be assumed by Kinesis Data Firehose for calling the Serverless offering for Amazon OpenSearch Service Configuration API and for indexing documents.  The pattern needs to be arn:.*.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
 	// Defines how documents should be delivered to Amazon S3.  Valid values are FailedDocumentsOnly and AllDocuments.  Default value is FailedDocumentsOnly.
@@ -2807,7 +2807,7 @@ type OpensearchserverlessConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	RetryDuration *float64 `json:"retryDuration,omitempty" tf:"retry_duration,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the IAM role to be assumed by Kinesis Data Firehose for calling the Serverless offering for Amazon OpenSearch Service Configuration API and for indexing documents.  The pattern needs to be arn:.*.
+	// ARN of the IAM role to be assumed by Kinesis Data Firehose for calling the Serverless offering for Amazon OpenSearch Service Configuration API and for indexing documents.  The pattern needs to be arn:.*.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -4744,7 +4744,7 @@ type ServerSideEncryptionInitParameters struct {
 	// Whether to enable encryption at rest. Default is false.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Amazon Resource Name (ARN) of the encryption key. Required when key_type is CUSTOMER_MANAGED_CMK.
+	// ARN of the encryption key. Required when key_type is CUSTOMER_MANAGED_CMK.
 	KeyArn *string `json:"keyArn,omitempty" tf:"key_arn,omitempty"`
 
 	// Type of encryption key. Default is AWS_OWNED_CMK. Valid values are AWS_OWNED_CMK and CUSTOMER_MANAGED_CMK
@@ -4756,7 +4756,7 @@ type ServerSideEncryptionObservation struct {
 	// Whether to enable encryption at rest. Default is false.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Amazon Resource Name (ARN) of the encryption key. Required when key_type is CUSTOMER_MANAGED_CMK.
+	// ARN of the encryption key. Required when key_type is CUSTOMER_MANAGED_CMK.
 	KeyArn *string `json:"keyArn,omitempty" tf:"key_arn,omitempty"`
 
 	// Type of encryption key. Default is AWS_OWNED_CMK. Valid values are AWS_OWNED_CMK and CUSTOMER_MANAGED_CMK
@@ -4769,7 +4769,7 @@ type ServerSideEncryptionParameters struct {
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Amazon Resource Name (ARN) of the encryption key. Required when key_type is CUSTOMER_MANAGED_CMK.
+	// ARN of the encryption key. Required when key_type is CUSTOMER_MANAGED_CMK.
 	// +kubebuilder:validation:Optional
 	KeyArn *string `json:"keyArn,omitempty" tf:"key_arn,omitempty"`
 

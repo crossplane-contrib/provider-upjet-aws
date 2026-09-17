@@ -36,7 +36,7 @@ type DelegatedAdministratorObservation struct {
 	// The account ID number of the member account in the organization to register as a delegated administrator.
 	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the delegated administrator's account.
+	// ARN of the delegated administrator's account.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The date when the account was made a delegated administrator.

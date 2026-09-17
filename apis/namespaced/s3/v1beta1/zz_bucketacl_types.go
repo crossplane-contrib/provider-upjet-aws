@@ -73,7 +73,7 @@ type AccessControlPolicyParameters struct {
 
 type BucketACLInitParameters struct {
 
-	// Specifies the Canned ACL to apply to the bucket. Valid values: private, public-read, public-read-write, aws-exec-read, authenticated-read, bucket-owner-read, bucket-owner-full-control, log-delivery-write. Full details are available on the AWS documentation.
+	// Canned ACL to apply to the bucket. Valid values: private, public-read, public-read-write, aws-exec-read, authenticated-read, bucket-owner-read, bucket-owner-full-control, log-delivery-write. Full details are available on the AWS documentation.
 	ACL *string `json:"acl,omitempty" tf:"acl,omitempty"`
 
 	// Configuration block that sets the ACL permissions for an object per grantee. See below.
@@ -98,7 +98,7 @@ type BucketACLInitParameters struct {
 
 type BucketACLObservation struct {
 
-	// Specifies the Canned ACL to apply to the bucket. Valid values: private, public-read, public-read-write, aws-exec-read, authenticated-read, bucket-owner-read, bucket-owner-full-control, log-delivery-write. Full details are available on the AWS documentation.
+	// Canned ACL to apply to the bucket. Valid values: private, public-read, public-read-write, aws-exec-read, authenticated-read, bucket-owner-read, bucket-owner-full-control, log-delivery-write. Full details are available on the AWS documentation.
 	ACL *string `json:"acl,omitempty" tf:"acl,omitempty"`
 
 	// Configuration block that sets the ACL permissions for an object per grantee. See below.
@@ -110,7 +110,7 @@ type BucketACLObservation struct {
 	// Account ID of the expected bucket owner.
 	ExpectedBucketOwner *string `json:"expectedBucketOwner,omitempty" tf:"expected_bucket_owner,omitempty"`
 
-	// The bucket, expected_bucket_owner (if configured), and acl (if configured) separated by commas (,).
+	// bucket, expected_bucket_owner (if configured), and acl (if configured) separated by commas (,).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -120,7 +120,7 @@ type BucketACLObservation struct {
 
 type BucketACLParameters struct {
 
-	// Specifies the Canned ACL to apply to the bucket. Valid values: private, public-read, public-read-write, aws-exec-read, authenticated-read, bucket-owner-read, bucket-owner-full-control, log-delivery-write. Full details are available on the AWS documentation.
+	// Canned ACL to apply to the bucket. Valid values: private, public-read, public-read-write, aws-exec-read, authenticated-read, bucket-owner-read, bucket-owner-full-control, log-delivery-write. Full details are available on the AWS documentation.
 	// +kubebuilder:validation:Optional
 	ACL *string `json:"acl,omitempty" tf:"acl,omitempty"`
 

@@ -511,8 +511,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The Amazon Resource Name (ARN) specifying the log
-                      destination.
+                    description: ARN specifying the log destination.
                     type: string
                   id:
                     type: string

@@ -20,7 +20,7 @@ type CodeHookInitParameters struct {
 	// Using Lambda Functions. Must be less than or equal to 5 characters in length.
 	MessageVersion *string `json:"messageVersion,omitempty" tf:"message_version,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the Lambda function.
+	// ARN of the Lambda function.
 	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
 }
 
@@ -31,7 +31,7 @@ type CodeHookObservation struct {
 	// Using Lambda Functions. Must be less than or equal to 5 characters in length.
 	MessageVersion *string `json:"messageVersion,omitempty" tf:"message_version,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the Lambda function.
+	// ARN of the Lambda function.
 	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
 }
 
@@ -43,7 +43,7 @@ type CodeHookParameters struct {
 	// +kubebuilder:validation:Optional
 	MessageVersion *string `json:"messageVersion" tf:"message_version,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the Lambda function.
+	// ARN of the Lambda function.
 	// +kubebuilder:validation:Optional
 	URI *string `json:"uri" tf:"uri,omitempty"`
 }
@@ -231,7 +231,7 @@ type DialogCodeHookInitParameters struct {
 	// Using Lambda Functions. Must be less than or equal to 5 characters in length.
 	MessageVersion *string `json:"messageVersion,omitempty" tf:"message_version,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the Lambda function.
+	// ARN of the Lambda function.
 	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
 }
 
@@ -242,7 +242,7 @@ type DialogCodeHookObservation struct {
 	// Using Lambda Functions. Must be less than or equal to 5 characters in length.
 	MessageVersion *string `json:"messageVersion,omitempty" tf:"message_version,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the Lambda function.
+	// ARN of the Lambda function.
 	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
 }
 
@@ -254,7 +254,7 @@ type DialogCodeHookParameters struct {
 	// +kubebuilder:validation:Optional
 	MessageVersion *string `json:"messageVersion" tf:"message_version,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the Lambda function.
+	// ARN of the Lambda function.
 	// +kubebuilder:validation:Optional
 	URI *string `json:"uri" tf:"uri,omitempty"`
 }

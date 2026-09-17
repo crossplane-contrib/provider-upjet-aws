@@ -353,7 +353,7 @@ type NotifyConfigurationInitParameters struct {
 	// The destination to which the receiver of an email should reply to.
 	ReplyTo *string `json:"replyTo,omitempty" tf:"reply_to,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the identity that is associated with the sending authorization policy. This identity permits Amazon Cognito to send for the email address specified in the From parameter.
+	// ARN of the identity that is associated with the sending authorization policy. This identity permits Amazon Cognito to send for the email address specified in the From parameter.
 	SourceArn *string `json:"sourceArn,omitempty" tf:"source_arn,omitempty"`
 }
 
@@ -374,7 +374,7 @@ type NotifyConfigurationObservation struct {
 	// The destination to which the receiver of an email should reply to.
 	ReplyTo *string `json:"replyTo,omitempty" tf:"reply_to,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the identity that is associated with the sending authorization policy. This identity permits Amazon Cognito to send for the email address specified in the From parameter.
+	// ARN of the identity that is associated with the sending authorization policy. This identity permits Amazon Cognito to send for the email address specified in the From parameter.
 	SourceArn *string `json:"sourceArn,omitempty" tf:"source_arn,omitempty"`
 }
 
@@ -400,7 +400,7 @@ type NotifyConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	ReplyTo *string `json:"replyTo,omitempty" tf:"reply_to,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the identity that is associated with the sending authorization policy. This identity permits Amazon Cognito to send for the email address specified in the From parameter.
+	// ARN of the identity that is associated with the sending authorization policy. This identity permits Amazon Cognito to send for the email address specified in the From parameter.
 	// +kubebuilder:validation:Optional
 	SourceArn *string `json:"sourceArn" tf:"source_arn,omitempty"`
 }

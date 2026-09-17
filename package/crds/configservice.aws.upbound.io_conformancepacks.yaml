@@ -257,7 +257,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: Amazon Resource Name (ARN) of the conformance pack.
+                    description: ARN of the conformance pack.
                     type: string
                   deliveryS3Bucket:
                     description: Amazon S3 bucket where AWS Config stores conformance

@@ -82,19 +82,19 @@ type ConfigurationSetParameters struct {
 
 type DeliveryOptionsInitParameters struct {
 
-	// Whether messages that use the configuration set are required to use Transport Layer Security (TLS). If the value is Require, messages are only delivered if a TLS connection can be established. If the value is Optional, messages can be delivered in plain text if a TLS connection can't be established. Valid values: Require or Optional. Defaults to Optional.
+	// Whether messages that use the configuration set are required to use TLS. If the value is Require, messages are only delivered if a TLS connection can be established. If the value is Optional, messages can be delivered in plain text if a TLS connection can't be established. Valid values: Require or Optional. Defaults to Optional.
 	TLSPolicy *string `json:"tlsPolicy,omitempty" tf:"tls_policy,omitempty"`
 }
 
 type DeliveryOptionsObservation struct {
 
-	// Whether messages that use the configuration set are required to use Transport Layer Security (TLS). If the value is Require, messages are only delivered if a TLS connection can be established. If the value is Optional, messages can be delivered in plain text if a TLS connection can't be established. Valid values: Require or Optional. Defaults to Optional.
+	// Whether messages that use the configuration set are required to use TLS. If the value is Require, messages are only delivered if a TLS connection can be established. If the value is Optional, messages can be delivered in plain text if a TLS connection can't be established. Valid values: Require or Optional. Defaults to Optional.
 	TLSPolicy *string `json:"tlsPolicy,omitempty" tf:"tls_policy,omitempty"`
 }
 
 type DeliveryOptionsParameters struct {
 
-	// Whether messages that use the configuration set are required to use Transport Layer Security (TLS). If the value is Require, messages are only delivered if a TLS connection can be established. If the value is Optional, messages can be delivered in plain text if a TLS connection can't be established. Valid values: Require or Optional. Defaults to Optional.
+	// Whether messages that use the configuration set are required to use TLS. If the value is Require, messages are only delivered if a TLS connection can be established. If the value is Optional, messages can be delivered in plain text if a TLS connection can't be established. Valid values: Require or Optional. Defaults to Optional.
 	// +kubebuilder:validation:Optional
 	TLSPolicy *string `json:"tlsPolicy,omitempty" tf:"tls_policy,omitempty"`
 }

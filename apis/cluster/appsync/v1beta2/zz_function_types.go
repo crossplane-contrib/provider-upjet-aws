@@ -28,7 +28,7 @@ type FunctionInitParameters struct {
 	// +kubebuilder:validation:Optional
 	APIIDSelector *v2.Selector `json:"apiIdSelector,omitempty" tf:"-"`
 
-	// The function code that contains the request and response functions. When code is used, the runtime is required. The runtime value must be APPSYNC_JS.
+	// Function code that contains the request and response functions. When code is used, the runtime is required. The runtime value must be APPSYNC_JS.
 	Code *string `json:"code,omitempty" tf:"code,omitempty"`
 
 	// Function data source name.
@@ -61,10 +61,10 @@ type FunctionInitParameters struct {
 	// Function response mapping template.
 	ResponseMappingTemplate *string `json:"responseMappingTemplate,omitempty" tf:"response_mapping_template,omitempty"`
 
-	// Describes a runtime used by an AWS AppSync pipeline resolver or AWS AppSync function. Specifies the name and version of the runtime to use. Note that if a runtime is specified, code must also be specified. See runtime Block for details.
+	// Runtime used by an AWS AppSync pipeline resolver or AWS AppSync function. Specifies the name and version of the runtime to use. Note that if a runtime is specified, code must also be specified. See runtime Block for details.
 	Runtime *RuntimeInitParameters `json:"runtime,omitempty" tf:"runtime,omitempty"`
 
-	// Describes a Sync configuration for a resolver. See sync_config Block for details.
+	// Sync configuration for a resolver. See sync_config Block for details.
 	SyncConfig *SyncConfigInitParameters `json:"syncConfig,omitempty" tf:"sync_config,omitempty"`
 }
 
@@ -76,7 +76,7 @@ type FunctionObservation struct {
 	// ARN of the Function object.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The function code that contains the request and response functions. When code is used, the runtime is required. The runtime value must be APPSYNC_JS.
+	// Function code that contains the request and response functions. When code is used, the runtime is required. The runtime value must be APPSYNC_JS.
 	Code *string `json:"code,omitempty" tf:"code,omitempty"`
 
 	// Function data source name.
@@ -110,10 +110,10 @@ type FunctionObservation struct {
 	// Function response mapping template.
 	ResponseMappingTemplate *string `json:"responseMappingTemplate,omitempty" tf:"response_mapping_template,omitempty"`
 
-	// Describes a runtime used by an AWS AppSync pipeline resolver or AWS AppSync function. Specifies the name and version of the runtime to use. Note that if a runtime is specified, code must also be specified. See runtime Block for details.
+	// Runtime used by an AWS AppSync pipeline resolver or AWS AppSync function. Specifies the name and version of the runtime to use. Note that if a runtime is specified, code must also be specified. See runtime Block for details.
 	Runtime *RuntimeObservation `json:"runtime,omitempty" tf:"runtime,omitempty"`
 
-	// Describes a Sync configuration for a resolver. See sync_config Block for details.
+	// Sync configuration for a resolver. See sync_config Block for details.
 	SyncConfig *SyncConfigObservation `json:"syncConfig,omitempty" tf:"sync_config,omitempty"`
 }
 
@@ -133,7 +133,7 @@ type FunctionParameters struct {
 	// +kubebuilder:validation:Optional
 	APIIDSelector *v2.Selector `json:"apiIdSelector,omitempty" tf:"-"`
 
-	// The function code that contains the request and response functions. When code is used, the runtime is required. The runtime value must be APPSYNC_JS.
+	// Function code that contains the request and response functions. When code is used, the runtime is required. The runtime value must be APPSYNC_JS.
 	// +kubebuilder:validation:Optional
 	Code *string `json:"code,omitempty" tf:"code,omitempty"`
 
@@ -179,11 +179,11 @@ type FunctionParameters struct {
 	// +kubebuilder:validation:Optional
 	ResponseMappingTemplate *string `json:"responseMappingTemplate,omitempty" tf:"response_mapping_template,omitempty"`
 
-	// Describes a runtime used by an AWS AppSync pipeline resolver or AWS AppSync function. Specifies the name and version of the runtime to use. Note that if a runtime is specified, code must also be specified. See runtime Block for details.
+	// Runtime used by an AWS AppSync pipeline resolver or AWS AppSync function. Specifies the name and version of the runtime to use. Note that if a runtime is specified, code must also be specified. See runtime Block for details.
 	// +kubebuilder:validation:Optional
 	Runtime *RuntimeParameters `json:"runtime,omitempty" tf:"runtime,omitempty"`
 
-	// Describes a Sync configuration for a resolver. See sync_config Block for details.
+	// Sync configuration for a resolver. See sync_config Block for details.
 	// +kubebuilder:validation:Optional
 	SyncConfig *SyncConfigParameters `json:"syncConfig,omitempty" tf:"sync_config,omitempty"`
 }
@@ -209,29 +209,29 @@ type LambdaConflictHandlerConfigParameters struct {
 
 type RuntimeInitParameters struct {
 
-	// The name of the runtime to use. Currently, the only allowed value is APPSYNC_JS.
+	// Name of the runtime to use. Currently, the only allowed value is APPSYNC_JS.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The version of the runtime to use. Currently, the only allowed version is 1.0.0.
+	// Version of the runtime to use. Currently, the only allowed version is 1.0.0.
 	RuntimeVersion *string `json:"runtimeVersion,omitempty" tf:"runtime_version,omitempty"`
 }
 
 type RuntimeObservation struct {
 
-	// The name of the runtime to use. Currently, the only allowed value is APPSYNC_JS.
+	// Name of the runtime to use. Currently, the only allowed value is APPSYNC_JS.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The version of the runtime to use. Currently, the only allowed version is 1.0.0.
+	// Version of the runtime to use. Currently, the only allowed version is 1.0.0.
 	RuntimeVersion *string `json:"runtimeVersion,omitempty" tf:"runtime_version,omitempty"`
 }
 
 type RuntimeParameters struct {
 
-	// The name of the runtime to use. Currently, the only allowed value is APPSYNC_JS.
+	// Name of the runtime to use. Currently, the only allowed value is APPSYNC_JS.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// The version of the runtime to use. Currently, the only allowed version is 1.0.0.
+	// Version of the runtime to use. Currently, the only allowed version is 1.0.0.
 	// +kubebuilder:validation:Optional
 	RuntimeVersion *string `json:"runtimeVersion" tf:"runtime_version,omitempty"`
 }

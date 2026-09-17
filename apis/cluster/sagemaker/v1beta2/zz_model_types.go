@@ -125,7 +125,7 @@ type ContainerInitParameters struct {
 	// Registry path where the inference code image is stored in Amazon ECR.
 	Image *string `json:"image,omitempty" tf:"image,omitempty"`
 
-	// Specifies whether the model container is in Amazon ECR or a private Docker registry accessible from your Amazon Virtual Private Cloud (VPC). For more information see Using a Private Docker Registry for Real-Time Inference Containers. see Image Config.
+	// Whether the model container is in Amazon ECR or a private Docker registry accessible from your VPC. For more information see Using a Private Docker Registry for Real-Time Inference Containers. see Image Config.
 	ImageConfig *ImageConfigInitParameters `json:"imageConfig,omitempty" tf:"image_config,omitempty"`
 
 	// Inference specification name in the model package version.
@@ -140,7 +140,7 @@ type ContainerInitParameters struct {
 	// URL for the S3 location where model artifacts are stored.
 	ModelDataURL *string `json:"modelDataUrl,omitempty" tf:"model_data_url,omitempty"`
 
-	// Amazon Resource Name (ARN) of the model package to use to create the model.
+	// ARN of the model package to use to create the model.
 	// A list of key value pairs.
 	ModelPackageName *string `json:"modelPackageName,omitempty" tf:"model_package_name,omitempty"`
 
@@ -163,7 +163,7 @@ type ContainerObservation struct {
 	// Registry path where the inference code image is stored in Amazon ECR.
 	Image *string `json:"image,omitempty" tf:"image,omitempty"`
 
-	// Specifies whether the model container is in Amazon ECR or a private Docker registry accessible from your Amazon Virtual Private Cloud (VPC). For more information see Using a Private Docker Registry for Real-Time Inference Containers. see Image Config.
+	// Whether the model container is in Amazon ECR or a private Docker registry accessible from your VPC. For more information see Using a Private Docker Registry for Real-Time Inference Containers. see Image Config.
 	ImageConfig *ImageConfigObservation `json:"imageConfig,omitempty" tf:"image_config,omitempty"`
 
 	// Inference specification name in the model package version.
@@ -178,7 +178,7 @@ type ContainerObservation struct {
 	// URL for the S3 location where model artifacts are stored.
 	ModelDataURL *string `json:"modelDataUrl,omitempty" tf:"model_data_url,omitempty"`
 
-	// Amazon Resource Name (ARN) of the model package to use to create the model.
+	// ARN of the model package to use to create the model.
 	// A list of key value pairs.
 	ModelPackageName *string `json:"modelPackageName,omitempty" tf:"model_package_name,omitempty"`
 
@@ -205,7 +205,7 @@ type ContainerParameters struct {
 	// +kubebuilder:validation:Optional
 	Image *string `json:"image,omitempty" tf:"image,omitempty"`
 
-	// Specifies whether the model container is in Amazon ECR or a private Docker registry accessible from your Amazon Virtual Private Cloud (VPC). For more information see Using a Private Docker Registry for Real-Time Inference Containers. see Image Config.
+	// Whether the model container is in Amazon ECR or a private Docker registry accessible from your VPC. For more information see Using a Private Docker Registry for Real-Time Inference Containers. see Image Config.
 	// +kubebuilder:validation:Optional
 	ImageConfig *ImageConfigParameters `json:"imageConfig,omitempty" tf:"image_config,omitempty"`
 
@@ -225,7 +225,7 @@ type ContainerParameters struct {
 	// +kubebuilder:validation:Optional
 	ModelDataURL *string `json:"modelDataUrl,omitempty" tf:"model_data_url,omitempty"`
 
-	// Amazon Resource Name (ARN) of the model package to use to create the model.
+	// ARN of the model package to use to create the model.
 	// A list of key value pairs.
 	// +kubebuilder:validation:Optional
 	ModelPackageName *string `json:"modelPackageName,omitempty" tf:"model_package_name,omitempty"`
@@ -237,7 +237,7 @@ type ContainerParameters struct {
 
 type ImageConfigInitParameters struct {
 
-	// Specifies whether the model container is in Amazon ECR or a private Docker registry accessible from your Amazon Virtual Private Cloud (VPC). Allowed values are: Platform and Vpc.
+	// Whether the model container is in Amazon ECR or a private Docker registry accessible from your VPC. Allowed values are: Platform and Vpc.
 	RepositoryAccessMode *string `json:"repositoryAccessMode,omitempty" tf:"repository_access_mode,omitempty"`
 
 	// Specifies an authentication configuration for the private docker registry where your model image is hosted. Specify a value for this property only if you specified Vpc as the value for the RepositoryAccessMode field, and the private Docker registry where the model image is hosted requires authentication. see Repository Auth Config.
@@ -246,7 +246,7 @@ type ImageConfigInitParameters struct {
 
 type ImageConfigObservation struct {
 
-	// Specifies whether the model container is in Amazon ECR or a private Docker registry accessible from your Amazon Virtual Private Cloud (VPC). Allowed values are: Platform and Vpc.
+	// Whether the model container is in Amazon ECR or a private Docker registry accessible from your VPC. Allowed values are: Platform and Vpc.
 	RepositoryAccessMode *string `json:"repositoryAccessMode,omitempty" tf:"repository_access_mode,omitempty"`
 
 	// Specifies an authentication configuration for the private docker registry where your model image is hosted. Specify a value for this property only if you specified Vpc as the value for the RepositoryAccessMode field, and the private Docker registry where the model image is hosted requires authentication. see Repository Auth Config.
@@ -255,7 +255,7 @@ type ImageConfigObservation struct {
 
 type ImageConfigParameters struct {
 
-	// Specifies whether the model container is in Amazon ECR or a private Docker registry accessible from your Amazon Virtual Private Cloud (VPC). Allowed values are: Platform and Vpc.
+	// Whether the model container is in Amazon ECR or a private Docker registry accessible from your VPC. Allowed values are: Platform and Vpc.
 	// +kubebuilder:validation:Optional
 	RepositoryAccessMode *string `json:"repositoryAccessMode" tf:"repository_access_mode,omitempty"`
 
@@ -266,19 +266,19 @@ type ImageConfigParameters struct {
 
 type ImageConfigRepositoryAuthConfigInitParameters struct {
 
-	// Amazon Resource Name (ARN) of an AWS Lambda function that provides credentials to authenticate to the private Docker registry where your model image is hosted. For information about how to create an AWS Lambda function, see Create a Lambda function with the console in the AWS Lambda Developer Guide.
+	// ARN of an AWS Lambda function that provides credentials to authenticate to the private Docker registry where your model image is hosted. For information about how to create an AWS Lambda function, see Create a Lambda function with the console in the AWS Lambda Developer Guide.
 	RepositoryCredentialsProviderArn *string `json:"repositoryCredentialsProviderArn,omitempty" tf:"repository_credentials_provider_arn,omitempty"`
 }
 
 type ImageConfigRepositoryAuthConfigObservation struct {
 
-	// Amazon Resource Name (ARN) of an AWS Lambda function that provides credentials to authenticate to the private Docker registry where your model image is hosted. For information about how to create an AWS Lambda function, see Create a Lambda function with the console in the AWS Lambda Developer Guide.
+	// ARN of an AWS Lambda function that provides credentials to authenticate to the private Docker registry where your model image is hosted. For information about how to create an AWS Lambda function, see Create a Lambda function with the console in the AWS Lambda Developer Guide.
 	RepositoryCredentialsProviderArn *string `json:"repositoryCredentialsProviderArn,omitempty" tf:"repository_credentials_provider_arn,omitempty"`
 }
 
 type ImageConfigRepositoryAuthConfigParameters struct {
 
-	// Amazon Resource Name (ARN) of an AWS Lambda function that provides credentials to authenticate to the private Docker registry where your model image is hosted. For information about how to create an AWS Lambda function, see Create a Lambda function with the console in the AWS Lambda Developer Guide.
+	// ARN of an AWS Lambda function that provides credentials to authenticate to the private Docker registry where your model image is hosted. For information about how to create an AWS Lambda function, see Create a Lambda function with the console in the AWS Lambda Developer Guide.
 	// +kubebuilder:validation:Optional
 	RepositoryCredentialsProviderArn *string `json:"repositoryCredentialsProviderArn" tf:"repository_credentials_provider_arn,omitempty"`
 }
@@ -445,7 +445,7 @@ type ModelInitParameters struct {
 
 type ModelObservation struct {
 
-	// Amazon Resource Name (ARN) assigned by AWS to this model.
+	// ARN assigned by AWS to this model.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Specifies containers in the inference pipeline. If not specified, the primary_container argument is required. Fields are documented below.
@@ -578,7 +578,7 @@ type PrimaryContainerAdditionalModelDataSourceParameters struct {
 
 type PrimaryContainerImageConfigInitParameters struct {
 
-	// Specifies whether the model container is in Amazon ECR or a private Docker registry accessible from your Amazon Virtual Private Cloud (VPC). Allowed values are: Platform and Vpc.
+	// Whether the model container is in Amazon ECR or a private Docker registry accessible from your VPC. Allowed values are: Platform and Vpc.
 	RepositoryAccessMode *string `json:"repositoryAccessMode,omitempty" tf:"repository_access_mode,omitempty"`
 
 	// Specifies an authentication configuration for the private docker registry where your model image is hosted. Specify a value for this property only if you specified Vpc as the value for the RepositoryAccessMode field, and the private Docker registry where the model image is hosted requires authentication. see Repository Auth Config.
@@ -587,7 +587,7 @@ type PrimaryContainerImageConfigInitParameters struct {
 
 type PrimaryContainerImageConfigObservation struct {
 
-	// Specifies whether the model container is in Amazon ECR or a private Docker registry accessible from your Amazon Virtual Private Cloud (VPC). Allowed values are: Platform and Vpc.
+	// Whether the model container is in Amazon ECR or a private Docker registry accessible from your VPC. Allowed values are: Platform and Vpc.
 	RepositoryAccessMode *string `json:"repositoryAccessMode,omitempty" tf:"repository_access_mode,omitempty"`
 
 	// Specifies an authentication configuration for the private docker registry where your model image is hosted. Specify a value for this property only if you specified Vpc as the value for the RepositoryAccessMode field, and the private Docker registry where the model image is hosted requires authentication. see Repository Auth Config.
@@ -596,7 +596,7 @@ type PrimaryContainerImageConfigObservation struct {
 
 type PrimaryContainerImageConfigParameters struct {
 
-	// Specifies whether the model container is in Amazon ECR or a private Docker registry accessible from your Amazon Virtual Private Cloud (VPC). Allowed values are: Platform and Vpc.
+	// Whether the model container is in Amazon ECR or a private Docker registry accessible from your VPC. Allowed values are: Platform and Vpc.
 	// +kubebuilder:validation:Optional
 	RepositoryAccessMode *string `json:"repositoryAccessMode" tf:"repository_access_mode,omitempty"`
 
@@ -620,7 +620,7 @@ type PrimaryContainerInitParameters struct {
 	// Registry path where the inference code image is stored in Amazon ECR.
 	Image *string `json:"image,omitempty" tf:"image,omitempty"`
 
-	// Specifies whether the model container is in Amazon ECR or a private Docker registry accessible from your Amazon Virtual Private Cloud (VPC). For more information see Using a Private Docker Registry for Real-Time Inference Containers. see Image Config.
+	// Whether the model container is in Amazon ECR or a private Docker registry accessible from your VPC. For more information see Using a Private Docker Registry for Real-Time Inference Containers. see Image Config.
 	ImageConfig *PrimaryContainerImageConfigInitParameters `json:"imageConfig,omitempty" tf:"image_config,omitempty"`
 
 	// Inference specification name in the model package version.
@@ -635,7 +635,7 @@ type PrimaryContainerInitParameters struct {
 	// URL for the S3 location where model artifacts are stored.
 	ModelDataURL *string `json:"modelDataUrl,omitempty" tf:"model_data_url,omitempty"`
 
-	// Amazon Resource Name (ARN) of the model package to use to create the model.
+	// ARN of the model package to use to create the model.
 	// A list of key value pairs.
 	ModelPackageName *string `json:"modelPackageName,omitempty" tf:"model_package_name,omitempty"`
 
@@ -745,7 +745,7 @@ type PrimaryContainerObservation struct {
 	// Registry path where the inference code image is stored in Amazon ECR.
 	Image *string `json:"image,omitempty" tf:"image,omitempty"`
 
-	// Specifies whether the model container is in Amazon ECR or a private Docker registry accessible from your Amazon Virtual Private Cloud (VPC). For more information see Using a Private Docker Registry for Real-Time Inference Containers. see Image Config.
+	// Whether the model container is in Amazon ECR or a private Docker registry accessible from your VPC. For more information see Using a Private Docker Registry for Real-Time Inference Containers. see Image Config.
 	ImageConfig *PrimaryContainerImageConfigObservation `json:"imageConfig,omitempty" tf:"image_config,omitempty"`
 
 	// Inference specification name in the model package version.
@@ -760,7 +760,7 @@ type PrimaryContainerObservation struct {
 	// URL for the S3 location where model artifacts are stored.
 	ModelDataURL *string `json:"modelDataUrl,omitempty" tf:"model_data_url,omitempty"`
 
-	// Amazon Resource Name (ARN) of the model package to use to create the model.
+	// ARN of the model package to use to create the model.
 	// A list of key value pairs.
 	ModelPackageName *string `json:"modelPackageName,omitempty" tf:"model_package_name,omitempty"`
 
@@ -787,7 +787,7 @@ type PrimaryContainerParameters struct {
 	// +kubebuilder:validation:Optional
 	Image *string `json:"image,omitempty" tf:"image,omitempty"`
 
-	// Specifies whether the model container is in Amazon ECR or a private Docker registry accessible from your Amazon Virtual Private Cloud (VPC). For more information see Using a Private Docker Registry for Real-Time Inference Containers. see Image Config.
+	// Whether the model container is in Amazon ECR or a private Docker registry accessible from your VPC. For more information see Using a Private Docker Registry for Real-Time Inference Containers. see Image Config.
 	// +kubebuilder:validation:Optional
 	ImageConfig *PrimaryContainerImageConfigParameters `json:"imageConfig,omitempty" tf:"image_config,omitempty"`
 
@@ -807,7 +807,7 @@ type PrimaryContainerParameters struct {
 	// +kubebuilder:validation:Optional
 	ModelDataURL *string `json:"modelDataUrl,omitempty" tf:"model_data_url,omitempty"`
 
-	// Amazon Resource Name (ARN) of the model package to use to create the model.
+	// ARN of the model package to use to create the model.
 	// A list of key value pairs.
 	// +kubebuilder:validation:Optional
 	ModelPackageName *string `json:"modelPackageName,omitempty" tf:"model_package_name,omitempty"`
@@ -819,19 +819,19 @@ type PrimaryContainerParameters struct {
 
 type RepositoryAuthConfigInitParameters struct {
 
-	// Amazon Resource Name (ARN) of an AWS Lambda function that provides credentials to authenticate to the private Docker registry where your model image is hosted. For information about how to create an AWS Lambda function, see Create a Lambda function with the console in the AWS Lambda Developer Guide.
+	// ARN of an AWS Lambda function that provides credentials to authenticate to the private Docker registry where your model image is hosted. For information about how to create an AWS Lambda function, see Create a Lambda function with the console in the AWS Lambda Developer Guide.
 	RepositoryCredentialsProviderArn *string `json:"repositoryCredentialsProviderArn,omitempty" tf:"repository_credentials_provider_arn,omitempty"`
 }
 
 type RepositoryAuthConfigObservation struct {
 
-	// Amazon Resource Name (ARN) of an AWS Lambda function that provides credentials to authenticate to the private Docker registry where your model image is hosted. For information about how to create an AWS Lambda function, see Create a Lambda function with the console in the AWS Lambda Developer Guide.
+	// ARN of an AWS Lambda function that provides credentials to authenticate to the private Docker registry where your model image is hosted. For information about how to create an AWS Lambda function, see Create a Lambda function with the console in the AWS Lambda Developer Guide.
 	RepositoryCredentialsProviderArn *string `json:"repositoryCredentialsProviderArn,omitempty" tf:"repository_credentials_provider_arn,omitempty"`
 }
 
 type RepositoryAuthConfigParameters struct {
 
-	// Amazon Resource Name (ARN) of an AWS Lambda function that provides credentials to authenticate to the private Docker registry where your model image is hosted. For information about how to create an AWS Lambda function, see Create a Lambda function with the console in the AWS Lambda Developer Guide.
+	// ARN of an AWS Lambda function that provides credentials to authenticate to the private Docker registry where your model image is hosted. For information about how to create an AWS Lambda function, see Create a Lambda function with the console in the AWS Lambda Developer Guide.
 	// +kubebuilder:validation:Optional
 	RepositoryCredentialsProviderArn *string `json:"repositoryCredentialsProviderArn" tf:"repository_credentials_provider_arn,omitempty"`
 }

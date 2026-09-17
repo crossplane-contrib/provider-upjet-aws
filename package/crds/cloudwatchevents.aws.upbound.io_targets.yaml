@@ -2125,7 +2125,7 @@ spec:
                         type: string
                     type: object
                   arn:
-                    description: The Amazon Resource Name (ARN) of the target.
+                    description: ARN of the target.
                     type: string
                   batchTarget:
                     description: Parameters used when you are using the rule to invoke
@@ -2579,11 +2579,10 @@ spec:
                         type: number
                     type: object
                   roleArn:
-                    description: The Amazon Resource Name (ARN) of the IAM role to
-                      be used for this target when the rule is triggered. Required
-                      if ecs_target is used or target in arn is EC2 instance, Kinesis
-                      data stream, Step Functions state machine, or Event Bus in different
-                      account or region.
+                    description: ARN of the IAM role to be used for this target when
+                      the rule is triggered. Required if ecs_target is used or target
+                      in arn is EC2 instance, Kinesis data stream, Step Functions
+                      state machine, or Event Bus in different account or region.
                     type: string
                   roleArnRef:
                     description: Reference to a Role in iam to populate roleArn.
@@ -2816,7 +2815,7 @@ spec:
                         type: string
                     type: object
                   arn:
-                    description: The Amazon Resource Name (ARN) of the target.
+                    description: ARN of the target.
                     type: string
                   batchTarget:
                     description: Parameters used when you are using the rule to invoke
@@ -3265,11 +3264,10 @@ spec:
                         type: number
                     type: object
                   roleArn:
-                    description: The Amazon Resource Name (ARN) of the IAM role to
-                      be used for this target when the rule is triggered. Required
-                      if ecs_target is used or target in arn is EC2 instance, Kinesis
-                      data stream, Step Functions state machine, or Event Bus in different
-                      account or region.
+                    description: ARN of the IAM role to be used for this target when
+                      the rule is triggered. Required if ecs_target is used or target
+                      in arn is EC2 instance, Kinesis data stream, Step Functions
+                      state machine, or Event Bus in different account or region.
                     type: string
                   roleArnRef:
                     description: Reference to a Role in iam to populate roleArn.
@@ -3583,7 +3581,7 @@ spec:
                         type: string
                     type: object
                   arn:
-                    description: The Amazon Resource Name (ARN) of the target.
+                    description: ARN of the target.
                     type: string
                   batchTarget:
                     description: Parameters used when you are using the rule to invoke
@@ -3887,11 +3885,10 @@ spec:
                         type: number
                     type: object
                   roleArn:
-                    description: The Amazon Resource Name (ARN) of the IAM role to
-                      be used for this target when the rule is triggered. Required
-                      if ecs_target is used or target in arn is EC2 instance, Kinesis
-                      data stream, Step Functions state machine, or Event Bus in different
-                      account or region.
+                    description: ARN of the IAM role to be used for this target when
+                      the rule is triggered. Required if ecs_target is used or target
+                      in arn is EC2 instance, Kinesis data stream, Step Functions
+                      state machine, or Event Bus in different account or region.
                     type: string
                   rule:
                     description: The name of the rule you want to add targets to.

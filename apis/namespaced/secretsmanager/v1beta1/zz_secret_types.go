@@ -80,6 +80,9 @@ type SecretInitParameters struct {
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Type of secret for managed external secrets. Valid values are SalesforceClientSecret, BigIDClientSecret, and SnowflakeKeyPairAuthentication. For more information about supported partners and their specific requirements, see Managed external secret partners. This attribute cannot be changed after creation.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type SecretObservation struct {
@@ -122,6 +125,9 @@ type SecretObservation struct {
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// Type of secret for managed external secrets. Valid values are SalesforceClientSecret, BigIDClientSecret, and SnowflakeKeyPairAuthentication. For more information about supported partners and their specific requirements, see Managed external secret partners. This attribute cannot be changed after creation.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type SecretParameters struct {
@@ -168,6 +174,10 @@ type SecretParameters struct {
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Type of secret for managed external secrets. Valid values are SalesforceClientSecret, BigIDClientSecret, and SnowflakeKeyPairAuthentication. For more information about supported partners and their specific requirements, see Managed external secret partners. This attribute cannot be changed after creation.
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 // SecretSpec defines the desired state of Secret

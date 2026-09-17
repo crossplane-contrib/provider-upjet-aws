@@ -15,10 +15,10 @@ import (
 
 type FunctionInitParameters struct {
 
-	// Source code of the function
+	// Source code of the function. Must be between 1 and 40960 bytes.
 	CodeSecretRef v2.SecretKeySelector `json:"codeSecretRef" tf:"-"`
 
-	// Comment.
+	// Comment. Must not exceed 128 characters.
 	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
 
 	// List of aws_cloudfront_key_value_store ARNs to be associated to the function. AWS limits associations to one key value store per function.
@@ -38,10 +38,10 @@ type FunctionInitParameters struct {
 
 type FunctionObservation struct {
 
-	// Amazon Resource Name (ARN) identifying your CloudFront Function.
+	// ARN identifying your CloudFront Function.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// Comment.
+	// Comment. Must not exceed 128 characters.
 	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
 
 	// ETag hash of the function. This is the value for the DEVELOPMENT stage of the function.
@@ -76,11 +76,11 @@ type FunctionObservation struct {
 
 type FunctionParameters struct {
 
-	// Source code of the function
+	// Source code of the function. Must be between 1 and 40960 bytes.
 	// +kubebuilder:validation:Optional
 	CodeSecretRef v2.SecretKeySelector `json:"codeSecretRef" tf:"-"`
 
-	// Comment.
+	// Comment. Must not exceed 128 characters.
 	// +kubebuilder:validation:Optional
 	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
 

@@ -185,7 +185,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: Amazon Resource Name (ARN)
+                    description: ARN
                     type: string
                   geoMatchConstraint:
                     description: The GeoMatchConstraint objects which contain the

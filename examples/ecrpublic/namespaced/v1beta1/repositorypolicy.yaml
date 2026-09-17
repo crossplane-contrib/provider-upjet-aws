@@ -51,13 +51,13 @@ spec:
   forProvider:
     region: us-east-1
     catalogData:
-      - aboutText: About Text
-        architectures:
-          - ARM
-        description: Description
-        operatingSystems:
-          - Linux
-        usageText: Usage Text
+      aboutText: About Text
+      architectures:
+        - ARM
+      description: Description
+      operatingSystems:
+        - Linux
+      usageText: Usage Text
   providerConfigRef:
     name: default
     kind: ClusterProviderConfig

@@ -60,8 +60,7 @@ spec:
               forProvider:
                 properties:
                   cidr:
-                    description: The IP address or address range to filter, in CIDR
-                      notation
+                    description: IP address or address range to filter, in CIDR notation
                     type: string
                   policy:
                     description: Block or Allow
@@ -88,8 +87,7 @@ spec:
                   autoscaler.
                 properties:
                   cidr:
-                    description: The IP address or address range to filter, in CIDR
-                      notation
+                    description: IP address or address range to filter, in CIDR notation
                     type: string
                   policy:
                     description: Block or Allow
@@ -168,14 +166,13 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The SES receipt filter ARN.
+                    description: SES receipt filter ARN.
                     type: string
                   cidr:
-                    description: The IP address or address range to filter, in CIDR
-                      notation
+                    description: IP address or address range to filter, in CIDR notation
                     type: string
                   id:
-                    description: The SES receipt filter name.
+                    description: SES receipt filter name.
                     type: string
                   policy:
                     description: Block or Allow

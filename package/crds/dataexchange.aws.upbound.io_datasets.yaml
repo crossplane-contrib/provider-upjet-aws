@@ -234,7 +234,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The Amazon Resource Name of this data set.
+                    description: ARN of this data set.
                     type: string
                   assetType:
                     description: The type of asset that is added to a data set. Valid

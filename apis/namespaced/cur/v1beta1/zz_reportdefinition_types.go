@@ -71,7 +71,7 @@ type ReportDefinitionObservation struct {
 	// +listType=set
 	AdditionalSchemaElements []*string `json:"additionalSchemaElements,omitempty" tf:"additional_schema_elements,omitempty"`
 
-	// The Amazon Resource Name (ARN) specifying the cur report.
+	// ARN specifying the cur report.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Compression format for report. Valid values are: GZIP, ZIP, Parquet. If Parquet is used, then format must also be Parquet.

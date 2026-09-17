@@ -40,7 +40,7 @@ type ClientCertificateObservation struct {
 	// Identifier of the client certificate.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The PEM-encoded public key of the client certificate.
+	// PEM-encoded public key of the client certificate.
 	PemEncodedCertificate *string `json:"pemEncodedCertificate,omitempty" tf:"pem_encoded_certificate,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.

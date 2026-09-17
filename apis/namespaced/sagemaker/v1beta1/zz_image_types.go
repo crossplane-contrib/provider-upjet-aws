@@ -21,7 +21,7 @@ type ImageInitParameters struct {
 	// The display name of the image. When the image is added to a domain (must be unique to the domain).
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
-	// The Amazon Resource Name (ARN) of an IAM role that enables Amazon SageMaker AI to perform tasks on your behalf.
+	// ARN of an IAM role that enables Amazon SageMaker AI to perform tasks on your behalf.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
@@ -41,7 +41,7 @@ type ImageInitParameters struct {
 
 type ImageObservation struct {
 
-	// The Amazon Resource Name (ARN) assigned by AWS to this Image.
+	// ARN assigned by AWS to this Image.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The description of the image.
@@ -57,7 +57,7 @@ type ImageObservation struct {
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The Amazon Resource Name (ARN) of an IAM role that enables Amazon SageMaker AI to perform tasks on your behalf.
+	// ARN of an IAM role that enables Amazon SageMaker AI to perform tasks on your behalf.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
 	// Key-value map of resource tags.
@@ -84,7 +84,7 @@ type ImageParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// The Amazon Resource Name (ARN) of an IAM role that enables Amazon SageMaker AI to perform tasks on your behalf.
+	// ARN of an IAM role that enables Amazon SageMaker AI to perform tasks on your behalf.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional

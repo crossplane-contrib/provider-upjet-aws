@@ -97,7 +97,7 @@ type FirewallInitParameters struct {
 	// KMS encryption configuration settings. See Encryption Configuration below for details.
 	EncryptionConfiguration *EncryptionConfigurationInitParameters `json:"encryptionConfiguration,omitempty" tf:"encryption_configuration,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the VPC Firewall policy.
+	// ARN of the VPC Firewall policy.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/networkfirewall/v1beta1.FirewallPolicy
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	FirewallPolicyArn *string `json:"firewallPolicyArn,omitempty" tf:"firewall_policy_arn,omitempty"`
@@ -154,7 +154,7 @@ type FirewallInitParameters struct {
 
 type FirewallObservation struct {
 
-	// The Amazon Resource Name (ARN) that identifies the firewall.
+	// ARN that identifies the firewall.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// A setting indicating whether the firewall is protected against changes to its Availability Zone configuration. When set to true, you must first disable this protection before adding or removing Availability Zones.
@@ -176,7 +176,7 @@ type FirewallObservation struct {
 	// KMS encryption configuration settings. See Encryption Configuration below for details.
 	EncryptionConfiguration *EncryptionConfigurationObservation `json:"encryptionConfiguration,omitempty" tf:"encryption_configuration,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the VPC Firewall policy.
+	// ARN of the VPC Firewall policy.
 	FirewallPolicyArn *string `json:"firewallPolicyArn,omitempty" tf:"firewall_policy_arn,omitempty"`
 
 	// A flag indicating whether the firewall is protected against a change to the firewall policy association. Use this setting to protect against accidentally modifying the firewall policy for a firewall that is in use. Defaults to false.
@@ -185,7 +185,7 @@ type FirewallObservation struct {
 	// Nested list of information about the current status of the firewall.
 	FirewallStatus []FirewallStatusObservation `json:"firewallStatus,omitempty" tf:"firewall_status,omitempty"`
 
-	// The Amazon Resource Name (ARN) that identifies the firewall.
+	// ARN that identifies the firewall.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// A friendly name of the firewall.
@@ -249,7 +249,7 @@ type FirewallParameters struct {
 	// +kubebuilder:validation:Optional
 	EncryptionConfiguration *EncryptionConfigurationParameters `json:"encryptionConfiguration,omitempty" tf:"encryption_configuration,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the VPC Firewall policy.
+	// ARN of the VPC Firewall policy.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/networkfirewall/v1beta1.FirewallPolicy
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional

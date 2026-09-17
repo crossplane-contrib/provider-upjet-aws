@@ -75,8 +75,8 @@ spec:
               forProvider:
                 properties:
                   functionArn:
-                    description: Amazon Resource Name (ARN) of the Lambda Function,
-                      omitting any version or alias qualifier.
+                    description: ARN of the Lambda Function, omitting any version
+                      or alias qualifier.
                     type: string
                   functionArnRef:
                     description: Reference to a Function in lambda to populate functionArn.
@@ -344,8 +344,8 @@ spec:
               atProvider:
                 properties:
                   functionArn:
-                    description: Amazon Resource Name (ARN) of the Lambda Function,
-                      omitting any version or alias qualifier.
+                    description: ARN of the Lambda Function, omitting any version
+                      or alias qualifier.
                     type: string
                   id:
                     description: The Amazon Connect instance ID and Lambda Function

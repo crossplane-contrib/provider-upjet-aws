@@ -59,11 +59,11 @@ spec:
               forProvider:
                 properties:
                   languageCode:
-                    description: The language code you selected for your vocabulary.
+                    description: Language code you selected for your vocabulary.
                     type: string
                   phrases:
-                    description: '- A list of terms to include in the vocabulary.
-                      Conflicts with vocabulary_file_uri'
+                    description: List of terms to include in the vocabulary. Conflicts
+                      with vocabulary_file_uri
                     items:
                       type: string
                     type: array
@@ -79,8 +79,8 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   vocabularyFileUri:
-                    description: The Amazon S3 location (URI) of the text file that
-                      contains your custom vocabulary. Conflicts wth phrases.
+                    description: Amazon S3 location (URI) of the text file that contains
+                      your custom vocabulary. Conflicts wth phrases.
                     type: string
                 required:
                 - region
@@ -99,11 +99,11 @@ spec:
                   autoscaler.
                 properties:
                   languageCode:
-                    description: The language code you selected for your vocabulary.
+                    description: Language code you selected for your vocabulary.
                     type: string
                   phrases:
-                    description: '- A list of terms to include in the vocabulary.
-                      Conflicts with vocabulary_file_uri'
+                    description: List of terms to include in the vocabulary. Conflicts
+                      with vocabulary_file_uri
                     items:
                       type: string
                     type: array
@@ -114,8 +114,8 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   vocabularyFileUri:
-                    description: The Amazon S3 location (URI) of the text file that
-                      contains your custom vocabulary. Conflicts wth phrases.
+                    description: Amazon S3 location (URI) of the text file that contains
+                      your custom vocabulary. Conflicts wth phrases.
                     type: string
                 type: object
               managementPolicies:
@@ -196,11 +196,11 @@ spec:
                     description: Name of the Vocabulary.
                     type: string
                   languageCode:
-                    description: The language code you selected for your vocabulary.
+                    description: Language code you selected for your vocabulary.
                     type: string
                   phrases:
-                    description: '- A list of terms to include in the vocabulary.
-                      Conflicts with vocabulary_file_uri'
+                    description: List of terms to include in the vocabulary. Conflicts
+                      with vocabulary_file_uri
                     items:
                       type: string
                     type: array
@@ -221,8 +221,8 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   vocabularyFileUri:
-                    description: The Amazon S3 location (URI) of the text file that
-                      contains your custom vocabulary. Conflicts wth phrases.
+                    description: Amazon S3 location (URI) of the text file that contains
+                      your custom vocabulary. Conflicts wth phrases.
                     type: string
                 type: object
               conditions:

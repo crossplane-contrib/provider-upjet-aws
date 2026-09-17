@@ -43,8 +43,7 @@ type BucketWebsiteConfigurationInitParameters struct {
 	// List of rules that define when a redirect is applied and the redirect behavior. See below.
 	RoutingRule []RoutingRuleInitParameters `json:"routingRule,omitempty" tf:"routing_rule,omitempty"`
 
-	// JSON array containing routing rules
-	// describing redirect behavior and when redirects are applied. Use this parameter when your routing rules contain empty String values ("") as seen in the example above.
+	// JSON array containing routing rules describing redirect behavior and when redirects are applied. Use this parameter when your routing rules contain empty String values ("") as seen in the example above.
 	RoutingRules *string `json:"routingRules,omitempty" tf:"routing_rules,omitempty"`
 }
 
@@ -59,7 +58,7 @@ type BucketWebsiteConfigurationObservation struct {
 	// Account ID of the expected bucket owner.
 	ExpectedBucketOwner *string `json:"expectedBucketOwner,omitempty" tf:"expected_bucket_owner,omitempty"`
 
-	// The bucket or bucket and expected_bucket_owner separated by a comma (,) if the latter is provided.
+	// bucket or bucket and expected_bucket_owner separated by a comma (,) if the latter is provided.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Name of the index document for the website. See below.
@@ -75,8 +74,7 @@ type BucketWebsiteConfigurationObservation struct {
 	// List of rules that define when a redirect is applied and the redirect behavior. See below.
 	RoutingRule []RoutingRuleObservation `json:"routingRule,omitempty" tf:"routing_rule,omitempty"`
 
-	// JSON array containing routing rules
-	// describing redirect behavior and when redirects are applied. Use this parameter when your routing rules contain empty String values ("") as seen in the example above.
+	// JSON array containing routing rules describing redirect behavior and when redirects are applied. Use this parameter when your routing rules contain empty String values ("") as seen in the example above.
 	RoutingRules *string `json:"routingRules,omitempty" tf:"routing_rules,omitempty"`
 
 	// Domain of the website endpoint. This is used to create Route 53 alias records.
@@ -127,8 +125,7 @@ type BucketWebsiteConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	RoutingRule []RoutingRuleParameters `json:"routingRule,omitempty" tf:"routing_rule,omitempty"`
 
-	// JSON array containing routing rules
-	// describing redirect behavior and when redirects are applied. Use this parameter when your routing rules contain empty String values ("") as seen in the example above.
+	// JSON array containing routing rules describing redirect behavior and when redirects are applied. Use this parameter when your routing rules contain empty String values ("") as seen in the example above.
 	// +kubebuilder:validation:Optional
 	RoutingRules *string `json:"routingRules,omitempty" tf:"routing_rules,omitempty"`
 }
@@ -183,25 +180,19 @@ type ErrorDocumentParameters struct {
 
 type IndexDocumentInitParameters struct {
 
-	// Suffix that is appended to a request that is for a directory on the website endpoint.
-	// For example, if the suffix is index.html and you make a request to samplebucket/images/, the data that is returned will be for the object with the key name images/index.html.
-	// The suffix must not be empty and must not include a slash character.
+	// Suffix that is appended to a request that is for a directory on the website endpoint. The suffix must not be empty and must not include a slash character. For example, if the suffix is index.html and you make a request to samplebucket/images/, the data that is returned will be for the object with the key name images/index.html.
 	Suffix *string `json:"suffix,omitempty" tf:"suffix,omitempty"`
 }
 
 type IndexDocumentObservation struct {
 
-	// Suffix that is appended to a request that is for a directory on the website endpoint.
-	// For example, if the suffix is index.html and you make a request to samplebucket/images/, the data that is returned will be for the object with the key name images/index.html.
-	// The suffix must not be empty and must not include a slash character.
+	// Suffix that is appended to a request that is for a directory on the website endpoint. The suffix must not be empty and must not include a slash character. For example, if the suffix is index.html and you make a request to samplebucket/images/, the data that is returned will be for the object with the key name images/index.html.
 	Suffix *string `json:"suffix,omitempty" tf:"suffix,omitempty"`
 }
 
 type IndexDocumentParameters struct {
 
-	// Suffix that is appended to a request that is for a directory on the website endpoint.
-	// For example, if the suffix is index.html and you make a request to samplebucket/images/, the data that is returned will be for the object with the key name images/index.html.
-	// The suffix must not be empty and must not include a slash character.
+	// Suffix that is appended to a request that is for a directory on the website endpoint. The suffix must not be empty and must not include a slash character. For example, if the suffix is index.html and you make a request to samplebucket/images/, the data that is returned will be for the object with the key name images/index.html.
 	// +kubebuilder:validation:Optional
 	Suffix *string `json:"suffix" tf:"suffix,omitempty"`
 }

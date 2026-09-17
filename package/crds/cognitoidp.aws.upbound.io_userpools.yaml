@@ -4396,9 +4396,8 @@ spec:
                           custom_email_sender Below.
                         properties:
                           lambdaArn:
-                            description: The Lambda Amazon Resource Name of the Lambda
-                              function that Amazon Cognito triggers to send email
-                              notifications to users.
+                            description: Lambda ARN of the Lambda function that Amazon
+                              Cognito triggers to send email notifications to users.
                             type: string
                           lambdaArnRef:
                             description: Reference to a Function in lambda to populate
@@ -4567,9 +4566,8 @@ spec:
                           Below.
                         properties:
                           lambdaArn:
-                            description: The Lambda Amazon Resource Name of the Lambda
-                              function that Amazon Cognito triggers to send SMS notifications
-                              to users.
+                            description: Lambda ARN of the Lambda function that Amazon
+                              Cognito triggers to send SMS notifications to users.
                             type: string
                           lambdaArnRef:
                             description: Reference to a Function in lambda to populate
@@ -4734,10 +4732,9 @@ spec:
                             type: object
                         type: object
                       kmsKeyId:
-                        description: The Amazon Resource Name of Key Management Service
-                          Customer master keys. Amazon Cognito uses the key to encrypt
-                          codes and temporary passwords sent to CustomEmailSender
-                          and CustomSMSSender.
+                        description: ARN of KMS Customer master keys. Amazon Cognito
+                          uses the key to encrypt codes and temporary passwords sent
+                          to CustomEmailSender and CustomSMSSender.
                         type: string
                       kmsKeyIdRef:
                         description: Reference to a Key in kms to populate kmsKeyId.
@@ -5139,9 +5136,8 @@ spec:
                         description: Allow to customize access tokens. See pre_token_configuration_type
                         properties:
                           lambdaArn:
-                            description: The Lambda Amazon Resource Name of the Lambda
-                              function that Amazon Cognito triggers to send SMS notifications
-                              to users.
+                            description: Lambda ARN of the Lambda function that Amazon
+                              Cognito triggers to send SMS notifications to users.
                             type: string
                           lambdaVersion:
                             description: The Lambda version represents the signature
@@ -5987,9 +5983,8 @@ spec:
                           custom_email_sender Below.
                         properties:
                           lambdaArn:
-                            description: The Lambda Amazon Resource Name of the Lambda
-                              function that Amazon Cognito triggers to send email
-                              notifications to users.
+                            description: Lambda ARN of the Lambda function that Amazon
+                              Cognito triggers to send email notifications to users.
                             type: string
                           lambdaArnRef:
                             description: Reference to a Function in lambda to populate
@@ -6158,9 +6153,8 @@ spec:
                           Below.
                         properties:
                           lambdaArn:
-                            description: The Lambda Amazon Resource Name of the Lambda
-                              function that Amazon Cognito triggers to send SMS notifications
-                              to users.
+                            description: Lambda ARN of the Lambda function that Amazon
+                              Cognito triggers to send SMS notifications to users.
                             type: string
                           lambdaArnRef:
                             description: Reference to a Function in lambda to populate
@@ -6325,10 +6319,9 @@ spec:
                             type: object
                         type: object
                       kmsKeyId:
-                        description: The Amazon Resource Name of Key Management Service
-                          Customer master keys. Amazon Cognito uses the key to encrypt
-                          codes and temporary passwords sent to CustomEmailSender
-                          and CustomSMSSender.
+                        description: ARN of KMS Customer master keys. Amazon Cognito
+                          uses the key to encrypt codes and temporary passwords sent
+                          to CustomEmailSender and CustomSMSSender.
                         type: string
                       kmsKeyIdRef:
                         description: Reference to a Key in kms to populate kmsKeyId.
@@ -6730,9 +6723,8 @@ spec:
                         description: Allow to customize access tokens. See pre_token_configuration_type
                         properties:
                           lambdaArn:
-                            description: The Lambda Amazon Resource Name of the Lambda
-                              function that Amazon Cognito triggers to send SMS notifications
-                              to users.
+                            description: Lambda ARN of the Lambda function that Amazon
+                              Cognito triggers to send SMS notifications to users.
                             type: string
                           lambdaVersion:
                             description: The Lambda version represents the signature
@@ -7604,9 +7596,8 @@ spec:
                           custom_email_sender Below.
                         properties:
                           lambdaArn:
-                            description: The Lambda Amazon Resource Name of the Lambda
-                              function that Amazon Cognito triggers to send email
-                              notifications to users.
+                            description: Lambda ARN of the Lambda function that Amazon
+                              Cognito triggers to send email notifications to users.
                             type: string
                           lambdaVersion:
                             description: The Lambda version represents the signature
@@ -7623,9 +7614,8 @@ spec:
                           Below.
                         properties:
                           lambdaArn:
-                            description: The Lambda Amazon Resource Name of the Lambda
-                              function that Amazon Cognito triggers to send SMS notifications
-                              to users.
+                            description: Lambda ARN of the Lambda function that Amazon
+                              Cognito triggers to send SMS notifications to users.
                             type: string
                           lambdaVersion:
                             description: The Lambda version represents the signature
@@ -7638,10 +7628,9 @@ spec:
                         description: Defines the authentication challenge.
                         type: string
                       kmsKeyId:
-                        description: The Amazon Resource Name of Key Management Service
-                          Customer master keys. Amazon Cognito uses the key to encrypt
-                          codes and temporary passwords sent to CustomEmailSender
-                          and CustomSMSSender.
+                        description: ARN of KMS Customer master keys. Amazon Cognito
+                          uses the key to encrypt codes and temporary passwords sent
+                          to CustomEmailSender and CustomSMSSender.
                         type: string
                       postAuthentication:
                         description: Post-authentication AWS Lambda trigger.
@@ -7665,9 +7654,8 @@ spec:
                         description: Allow to customize access tokens. See pre_token_configuration_type
                         properties:
                           lambdaArn:
-                            description: The Lambda Amazon Resource Name of the Lambda
-                              function that Amazon Cognito triggers to send SMS notifications
-                              to users.
+                            description: Lambda ARN of the Lambda function that Amazon
+                              Cognito triggers to send SMS notifications to users.
                             type: string
                           lambdaVersion:
                             description: The Lambda version represents the signature

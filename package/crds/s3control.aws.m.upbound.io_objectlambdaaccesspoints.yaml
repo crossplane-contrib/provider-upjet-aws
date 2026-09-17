@@ -61,13 +61,13 @@ spec:
               forProvider:
                 properties:
                   accountId:
-                    description: The AWS account ID for the owner of the bucket for
-                      which you want to create an Object Lambda Access Point.
+                    description: AWS account ID for the owner of the bucket for which
+                      you want to create an Object Lambda Access Point.
                     type: string
                   configuration:
-                    description: A configuration block containing details about the
-                      Object Lambda Access Point. See Configuration below for more
-                      details.
+                    description: Configuration block containing details about the
+                      Object Lambda Access Point. See configuration Block below for
+                      more details.
                     properties:
                       allowedFeatures:
                         description: 'Allowed features. Valid values: GetObject-Range,
@@ -168,29 +168,28 @@ spec:
                         type: object
                       transformationConfiguration:
                         description: List of transformation configurations for the
-                          Object Lambda Access Point. See Transformation Configuration
-                          below for more details.
+                          Object Lambda Access Point. See transformation_configuration
+                          Block below for more details.
                         items:
                           properties:
                             actions:
-                              description: 'The actions of an Object Lambda Access
-                                Point configuration. Valid values: GetObject.'
+                              description: 'Actions of an Object Lambda Access Point
+                                configuration. Valid values: GetObject.'
                               items:
                                 type: string
                               type: array
                               x-kubernetes-list-type: set
                             contentTransformation:
-                              description: The content transformation of an Object
-                                Lambda Access Point configuration. See Content Transformation
-                                below for more details.
+                              description: Content transformation of an Object Lambda
+                                Access Point configuration. See content_transformation
+                                Block below for more details.
                               properties:
                                 awsLambda:
                                   description: Configuration for an AWS Lambda function.
-                                    See AWS Lambda below for more details.
+                                    See aws_lambda Block below for more details.
                                   properties:
                                     functionArn:
-                                      description: The Amazon Resource Name (ARN)
-                                        of the AWS Lambda function.
+                                      description: ARN of the AWS Lambda function.
                                       type: string
                                     functionArnRef:
                                       description: Reference to a Function in lambda
@@ -286,7 +285,7 @@ spec:
                         type: array
                     type: object
                   name:
-                    description: The name for this Object Lambda Access Point.
+                    description: Name for this Object Lambda Access Point.
                     type: string
                   region:
                     description: |-
@@ -310,13 +309,13 @@ spec:
                   autoscaler.
                 properties:
                   accountId:
-                    description: The AWS account ID for the owner of the bucket for
-                      which you want to create an Object Lambda Access Point.
+                    description: AWS account ID for the owner of the bucket for which
+                      you want to create an Object Lambda Access Point.
                     type: string
                   configuration:
-                    description: A configuration block containing details about the
-                      Object Lambda Access Point. See Configuration below for more
-                      details.
+                    description: Configuration block containing details about the
+                      Object Lambda Access Point. See configuration Block below for
+                      more details.
                     properties:
                       allowedFeatures:
                         description: 'Allowed features. Valid values: GetObject-Range,
@@ -417,29 +416,28 @@ spec:
                         type: object
                       transformationConfiguration:
                         description: List of transformation configurations for the
-                          Object Lambda Access Point. See Transformation Configuration
-                          below for more details.
+                          Object Lambda Access Point. See transformation_configuration
+                          Block below for more details.
                         items:
                           properties:
                             actions:
-                              description: 'The actions of an Object Lambda Access
-                                Point configuration. Valid values: GetObject.'
+                              description: 'Actions of an Object Lambda Access Point
+                                configuration. Valid values: GetObject.'
                               items:
                                 type: string
                               type: array
                               x-kubernetes-list-type: set
                             contentTransformation:
-                              description: The content transformation of an Object
-                                Lambda Access Point configuration. See Content Transformation
-                                below for more details.
+                              description: Content transformation of an Object Lambda
+                                Access Point configuration. See content_transformation
+                                Block below for more details.
                               properties:
                                 awsLambda:
                                   description: Configuration for an AWS Lambda function.
-                                    See AWS Lambda below for more details.
+                                    See aws_lambda Block below for more details.
                                   properties:
                                     functionArn:
-                                      description: The Amazon Resource Name (ARN)
-                                        of the AWS Lambda function.
+                                      description: ARN of the AWS Lambda function.
                                       type: string
                                     functionArnRef:
                                       description: Reference to a Function in lambda
@@ -535,7 +533,7 @@ spec:
                         type: array
                     type: object
                   name:
-                    description: The name for this Object Lambda Access Point.
+                    description: Name for this Object Lambda Access Point.
                     type: string
                 type: object
               managementPolicies:
@@ -612,20 +610,19 @@ spec:
               atProvider:
                 properties:
                   accountId:
-                    description: The AWS account ID for the owner of the bucket for
-                      which you want to create an Object Lambda Access Point.
+                    description: AWS account ID for the owner of the bucket for which
+                      you want to create an Object Lambda Access Point.
                     type: string
                   alias:
                     description: Alias for the S3 Object Lambda Access Point.
                     type: string
                   arn:
-                    description: Amazon Resource Name (ARN) of the Object Lambda Access
-                      Point.
+                    description: ARN of the Object Lambda Access Point.
                     type: string
                   configuration:
-                    description: A configuration block containing details about the
-                      Object Lambda Access Point. See Configuration below for more
-                      details.
+                    description: Configuration block containing details about the
+                      Object Lambda Access Point. See configuration Block below for
+                      more details.
                     properties:
                       allowedFeatures:
                         description: 'Allowed features. Valid values: GetObject-Range,
@@ -644,29 +641,28 @@ spec:
                         type: string
                       transformationConfiguration:
                         description: List of transformation configurations for the
-                          Object Lambda Access Point. See Transformation Configuration
-                          below for more details.
+                          Object Lambda Access Point. See transformation_configuration
+                          Block below for more details.
                         items:
                           properties:
                             actions:
-                              description: 'The actions of an Object Lambda Access
-                                Point configuration. Valid values: GetObject.'
+                              description: 'Actions of an Object Lambda Access Point
+                                configuration. Valid values: GetObject.'
                               items:
                                 type: string
                               type: array
                               x-kubernetes-list-type: set
                             contentTransformation:
-                              description: The content transformation of an Object
-                                Lambda Access Point configuration. See Content Transformation
-                                below for more details.
+                              description: Content transformation of an Object Lambda
+                                Access Point configuration. See content_transformation
+                                Block below for more details.
                               properties:
                                 awsLambda:
                                   description: Configuration for an AWS Lambda function.
-                                    See AWS Lambda below for more details.
+                                    See aws_lambda Block below for more details.
                                   properties:
                                     functionArn:
-                                      description: The Amazon Resource Name (ARN)
-                                        of the AWS Lambda function.
+                                      description: ARN of the AWS Lambda function.
                                       type: string
                                     functionPayload:
                                       description: Additional JSON that provides supplemental
@@ -679,11 +675,11 @@ spec:
                         type: array
                     type: object
                   id:
-                    description: The AWS account ID and access point name separated
-                      by a colon (:).
+                    description: AWS account ID and access point name separated by
+                      a colon (:).
                     type: string
                   name:
-                    description: The name for this Object Lambda Access Point.
+                    description: Name for this Object Lambda Access Point.
                     type: string
                   region:
                     description: |-

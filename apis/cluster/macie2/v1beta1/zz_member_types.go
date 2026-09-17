@@ -46,7 +46,7 @@ type MemberObservation struct {
 	// The AWS account ID for the administrator account.
 	AdministratorAccountID *string `json:"administratorAccountId,omitempty" tf:"administrator_account_id,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the account.
+	// ARN of the account.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The email address for the account.

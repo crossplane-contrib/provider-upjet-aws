@@ -14,33 +14,45 @@ import (
 )
 
 type AccessPolicyAssociationInitParameters struct {
+
+	// The configuration block to determine the scope of the access. See access_scope Block below.
 	AccessScope *AccessScopeInitParameters `json:"accessScope,omitempty" tf:"access_scope,omitempty"`
 }
 
 type AccessPolicyAssociationObservation struct {
+
+	// The configuration block to determine the scope of the access. See access_scope Block below.
 	AccessScope *AccessScopeObservation `json:"accessScope,omitempty" tf:"access_scope,omitempty"`
 
+	// Date and time in RFC3339 format that the policy was associated.
 	AssociatedAt *string `json:"associatedAt,omitempty" tf:"associated_at,omitempty"`
 
+	// Name of the EKS Cluster.
 	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Date and time in RFC3339 format that the policy was updated.
 	ModifiedAt *string `json:"modifiedAt,omitempty" tf:"modified_at,omitempty"`
 
+	// The ARN of the access policy that you're associating.
 	PolicyArn *string `json:"policyArn,omitempty" tf:"policy_arn,omitempty"`
 
+	// The IAM Principal ARN which requires Authentication access to the EKS cluster.
 	PrincipalArn *string `json:"principalArn,omitempty" tf:"principal_arn,omitempty"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type AccessPolicyAssociationParameters struct {
 
+	// The configuration block to determine the scope of the access. See access_scope Block below.
 	// +kubebuilder:validation:Optional
 	AccessScope *AccessScopeParameters `json:"accessScope,omitempty" tf:"access_scope,omitempty"`
 
+	// Name of the EKS Cluster.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/eks/v1beta2.Cluster
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.TerraformID()
 	// +kubebuilder:validation:Optional
@@ -54,9 +66,11 @@ type AccessPolicyAssociationParameters struct {
 	// +kubebuilder:validation:Optional
 	ClusterNameSelector *v2.Selector `json:"clusterNameSelector,omitempty" tf:"-"`
 
+	// The ARN of the access policy that you're associating.
 	// +kubebuilder:validation:Required
 	PolicyArn *string `json:"policyArn" tf:"policy_arn,omitempty"`
 
+	// The IAM Principal ARN which requires Authentication access to the EKS cluster.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/eks/v1beta1.AccessEntry
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("principal_arn",true)
 	// +kubebuilder:validation:Optional
@@ -70,6 +84,7 @@ type AccessPolicyAssociationParameters struct {
 	// +kubebuilder:validation:Optional
 	PrincipalArnSelector *v2.Selector `json:"principalArnSelector,omitempty" tf:"-"`
 
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
@@ -77,26 +92,32 @@ type AccessPolicyAssociationParameters struct {
 
 type AccessScopeInitParameters struct {
 
+	// The namespaces to which the access scope applies when type is namespace.
 	// +listType=set
 	Namespaces []*string `json:"namespaces,omitempty" tf:"namespaces,omitempty"`
 
+	// Valid values are namespace or cluster.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type AccessScopeObservation struct {
 
+	// The namespaces to which the access scope applies when type is namespace.
 	// +listType=set
 	Namespaces []*string `json:"namespaces,omitempty" tf:"namespaces,omitempty"`
 
+	// Valid values are namespace or cluster.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type AccessScopeParameters struct {
 
+	// The namespaces to which the access scope applies when type is namespace.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	Namespaces []*string `json:"namespaces,omitempty" tf:"namespaces,omitempty"`
 
+	// Valid values are namespace or cluster.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
 }
@@ -128,7 +149,7 @@ type AccessPolicyAssociationStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// AccessPolicyAssociation is the Schema for the AccessPolicyAssociations API. <no value>
+// AccessPolicyAssociation is the Schema for the AccessPolicyAssociations API. Access Entry Policy Association for an EKS Cluster.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

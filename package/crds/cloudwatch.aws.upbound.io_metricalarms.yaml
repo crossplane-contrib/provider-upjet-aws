@@ -461,6 +461,26 @@ spec:
                   unit:
                     description: The unit for the alarm's associated metric.
                     type: string
+                  warmUpConfiguration:
+                    description: Warm-up period that delays alarm evaluation after
+                      the alarm is created. During the warm-up period the alarm stays
+                      in INSUFFICIENT_DATA and does not perform alarm actions. See
+                      warm_up_configuration below.
+                    items:
+                      properties:
+                        onlyStartEvaluatingAfterWarmUpPeriodEnds:
+                          description: Whether to wait for the full warm-up period
+                            before evaluation begins, even if metric data arrives
+                            earlier. When false, the warm-up period ends early as
+                            soon as the alarm has enough data to fill its evaluation
+                            window. Defaults to false.
+                          type: boolean
+                        warmUpPeriodDurationInMinutes:
+                          description: Length of the warm-up period, in minutes. Valid
+                            values are 1 to 2880.
+                          type: number
+                      type: object
+                    type: array
                 required:
                 - region
                 type: object
@@ -857,6 +877,26 @@ spec:
                   unit:
                     description: The unit for the alarm's associated metric.
                     type: string
+                  warmUpConfiguration:
+                    description: Warm-up period that delays alarm evaluation after
+                      the alarm is created. During the warm-up period the alarm stays
+                      in INSUFFICIENT_DATA and does not perform alarm actions. See
+                      warm_up_configuration below.
+                    items:
+                      properties:
+                        onlyStartEvaluatingAfterWarmUpPeriodEnds:
+                          description: Whether to wait for the full warm-up period
+                            before evaluation begins, even if metric data arrives
+                            earlier. When false, the warm-up period ends early as
+                            soon as the alarm has enough data to fill its evaluation
+                            window. Defaults to false.
+                          type: boolean
+                        warmUpPeriodDurationInMinutes:
+                          description: Length of the warm-up period, in minutes. Valid
+                            values are 1 to 2880.
+                          type: number
+                      type: object
+                    type: array
                 type: object
               managementPolicies:
                 default:
@@ -1202,6 +1242,26 @@ spec:
                   unit:
                     description: The unit for the alarm's associated metric.
                     type: string
+                  warmUpConfiguration:
+                    description: Warm-up period that delays alarm evaluation after
+                      the alarm is created. During the warm-up period the alarm stays
+                      in INSUFFICIENT_DATA and does not perform alarm actions. See
+                      warm_up_configuration below.
+                    items:
+                      properties:
+                        onlyStartEvaluatingAfterWarmUpPeriodEnds:
+                          description: Whether to wait for the full warm-up period
+                            before evaluation begins, even if metric data arrives
+                            earlier. When false, the warm-up period ends early as
+                            soon as the alarm has enough data to fill its evaluation
+                            window. Defaults to false.
+                          type: boolean
+                        warmUpPeriodDurationInMinutes:
+                          description: Length of the warm-up period, in minutes. Valid
+                            values are 1 to 2880.
+                          type: number
+                      type: object
+                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -1331,9 +1391,9 @@ spec:
                       during any changes to the alarm's state. Defaults to true.
                     type: boolean
                   alarmActions:
-                    description: The list of actions to execute when this alarm transitions
+                    description: List of actions to execute when this alarm transitions
                       into an ALARM state from any other state. Each action is specified
-                      as an Amazon Resource Name (ARN).
+                      as an ARN.
                     items:
                       type: string
                     type: array
@@ -1485,9 +1545,9 @@ spec:
                       with the alarm. Specify a value between p0.0 and p100.
                     type: string
                   insufficientDataActions:
-                    description: The list of actions to execute when this alarm transitions
+                    description: List of actions to execute when this alarm transitions
                       into an INSUFFICIENT_DATA state from any other state. Each action
-                      is specified as an Amazon Resource Name (ARN).
+                      is specified as an ARN.
                     items:
                       type: string
                     type: array
@@ -1582,9 +1642,9 @@ spec:
                       See docs for supported metrics.
                     type: string
                   okActions:
-                    description: The list of actions to execute when this alarm transitions
+                    description: List of actions to execute when this alarm transitions
                       into an OK state from any other state. Each action is specified
-                      as an Amazon Resource Name (ARN).
+                      as an ARN.
                     items:
                       type: string
                     type: array
@@ -1706,6 +1766,24 @@ spec:
                   unit:
                     description: The unit for the alarm's associated metric.
                     type: string
+                  warmUpConfiguration:
+                    description: Warm-up period that delays alarm evaluation after
+                      the alarm is created. During the warm-up period the alarm stays
+                      in INSUFFICIENT_DATA and does not perform alarm actions. See
+                      warm_up_configuration below.
+                    properties:
+                      onlyStartEvaluatingAfterWarmUpPeriodEnds:
+                        description: Whether to wait for the full warm-up period before
+                          evaluation begins, even if metric data arrives earlier.
+                          When false, the warm-up period ends early as soon as the
+                          alarm has enough data to fill its evaluation window. Defaults
+                          to false.
+                        type: boolean
+                      warmUpPeriodDurationInMinutes:
+                        description: Length of the warm-up period, in minutes. Valid
+                          values are 1 to 2880.
+                        type: number
+                    type: object
                 required:
                 - region
                 type: object
@@ -1727,9 +1805,9 @@ spec:
                       during any changes to the alarm's state. Defaults to true.
                     type: boolean
                   alarmActions:
-                    description: The list of actions to execute when this alarm transitions
+                    description: List of actions to execute when this alarm transitions
                       into an ALARM state from any other state. Each action is specified
-                      as an Amazon Resource Name (ARN).
+                      as an ARN.
                     items:
                       type: string
                     type: array
@@ -1881,9 +1959,9 @@ spec:
                       with the alarm. Specify a value between p0.0 and p100.
                     type: string
                   insufficientDataActions:
-                    description: The list of actions to execute when this alarm transitions
+                    description: List of actions to execute when this alarm transitions
                       into an INSUFFICIENT_DATA state from any other state. Each action
-                      is specified as an Amazon Resource Name (ARN).
+                      is specified as an ARN.
                     items:
                       type: string
                     type: array
@@ -1978,9 +2056,9 @@ spec:
                       See docs for supported metrics.
                     type: string
                   okActions:
-                    description: The list of actions to execute when this alarm transitions
+                    description: List of actions to execute when this alarm transitions
                       into an OK state from any other state. Each action is specified
-                      as an Amazon Resource Name (ARN).
+                      as an ARN.
                     items:
                       type: string
                     type: array
@@ -2097,6 +2175,24 @@ spec:
                   unit:
                     description: The unit for the alarm's associated metric.
                     type: string
+                  warmUpConfiguration:
+                    description: Warm-up period that delays alarm evaluation after
+                      the alarm is created. During the warm-up period the alarm stays
+                      in INSUFFICIENT_DATA and does not perform alarm actions. See
+                      warm_up_configuration below.
+                    properties:
+                      onlyStartEvaluatingAfterWarmUpPeriodEnds:
+                        description: Whether to wait for the full warm-up period before
+                          evaluation begins, even if metric data arrives earlier.
+                          When false, the warm-up period ends early as soon as the
+                          alarm has enough data to fill its evaluation window. Defaults
+                          to false.
+                        type: boolean
+                      warmUpPeriodDurationInMinutes:
+                        description: Length of the warm-up period, in minutes. Valid
+                          values are 1 to 2880.
+                        type: number
+                    type: object
                 type: object
               managementPolicies:
                 default:
@@ -2194,9 +2290,9 @@ spec:
                       during any changes to the alarm's state. Defaults to true.
                     type: boolean
                   alarmActions:
-                    description: The list of actions to execute when this alarm transitions
+                    description: List of actions to execute when this alarm transitions
                       into an ALARM state from any other state. Each action is specified
-                      as an Amazon Resource Name (ARN).
+                      as an ARN.
                     items:
                       type: string
                     type: array
@@ -2276,9 +2372,9 @@ spec:
                     description: The ID of the health check.
                     type: string
                   insufficientDataActions:
-                    description: The list of actions to execute when this alarm transitions
+                    description: List of actions to execute when this alarm transitions
                       into an INSUFFICIENT_DATA state from any other state. Each action
-                      is specified as an Amazon Resource Name (ARN).
+                      is specified as an ARN.
                     items:
                       type: string
                     type: array
@@ -2373,9 +2469,9 @@ spec:
                       See docs for supported metrics.
                     type: string
                   okActions:
-                    description: The list of actions to execute when this alarm transitions
+                    description: List of actions to execute when this alarm transitions
                       into an OK state from any other state. Each action is specified
-                      as an Amazon Resource Name (ARN).
+                      as an ARN.
                     items:
                       type: string
                     type: array
@@ -2428,6 +2524,24 @@ spec:
                   unit:
                     description: The unit for the alarm's associated metric.
                     type: string
+                  warmUpConfiguration:
+                    description: Warm-up period that delays alarm evaluation after
+                      the alarm is created. During the warm-up period the alarm stays
+                      in INSUFFICIENT_DATA and does not perform alarm actions. See
+                      warm_up_configuration below.
+                    properties:
+                      onlyStartEvaluatingAfterWarmUpPeriodEnds:
+                        description: Whether to wait for the full warm-up period before
+                          evaluation begins, even if metric data arrives earlier.
+                          When false, the warm-up period ends early as soon as the
+                          alarm has enough data to fill its evaluation window. Defaults
+                          to false.
+                        type: boolean
+                      warmUpPeriodDurationInMinutes:
+                        description: Length of the warm-up period, in minutes. Valid
+                          values are 1 to 2880.
+                        type: number
+                    type: object
                 type: object
               conditions:
                 description: Conditions of the resource.

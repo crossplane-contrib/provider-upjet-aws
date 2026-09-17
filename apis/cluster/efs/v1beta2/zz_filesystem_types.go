@@ -56,13 +56,13 @@ type FileSystemInitParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Throughput mode for the file system. Defaults to bursting. Valid values: bursting, provisioned, or elastic. When using provisioned, also set provisioned_throughput_in_mibps.
+	// Throughput mode for the file system. Defaults to bursting, matching the CreateFileSystem API default. Note that AWS recommends , and elastic is the default in the Amazon EFS console. Valid values: bursting, provisioned, or elastic. When using provisioned, also set provisioned_throughput_in_mibps.
 	ThroughputMode *string `json:"throughputMode,omitempty" tf:"throughput_mode,omitempty"`
 }
 
 type FileSystemObservation struct {
 
-	// Amazon Resource Name of the file system.
+	// ARN of the file system.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The identifier of the Availability Zone in which the file system's One Zone storage classes exist.
@@ -125,7 +125,7 @@ type FileSystemObservation struct {
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// Throughput mode for the file system. Defaults to bursting. Valid values: bursting, provisioned, or elastic. When using provisioned, also set provisioned_throughput_in_mibps.
+	// Throughput mode for the file system. Defaults to bursting, matching the CreateFileSystem API default. Note that AWS recommends , and elastic is the default in the Amazon EFS console. Valid values: bursting, provisioned, or elastic. When using provisioned, also set provisioned_throughput_in_mibps.
 	ThroughputMode *string `json:"throughputMode,omitempty" tf:"throughput_mode,omitempty"`
 }
 
@@ -186,7 +186,7 @@ type FileSystemParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Throughput mode for the file system. Defaults to bursting. Valid values: bursting, provisioned, or elastic. When using provisioned, also set provisioned_throughput_in_mibps.
+	// Throughput mode for the file system. Defaults to bursting, matching the CreateFileSystem API default. Note that AWS recommends , and elastic is the default in the Amazon EFS console. Valid values: bursting, provisioned, or elastic. When using provisioned, also set provisioned_throughput_in_mibps.
 	// +kubebuilder:validation:Optional
 	ThroughputMode *string `json:"throughputMode,omitempty" tf:"throughput_mode,omitempty"`
 }

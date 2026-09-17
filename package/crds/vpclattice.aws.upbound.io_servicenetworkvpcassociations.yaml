@@ -183,14 +183,14 @@ spec:
                         type: object
                     type: object
                   securityGroupIds:
-                    description: The IDs of the security groups.
+                    description: IDs of the security groups.
                     items:
                       type: string
                     type: array
                   serviceNetworkIdentifier:
-                    description: |-
-                      The ID or Amazon Resource Identifier (ARN) of the service network. You must use the ARN if the resources specified in the operation are in different accounts.
-                      The following arguments are optional:
+                    description: ID or Amazon Resource Identifier (ARN) of the service
+                      network. You must use the ARN if the resources specified in
+                      the operation are in different accounts.
                     type: string
                   serviceNetworkIdentifierRef:
                     description: Reference to a ServiceNetwork in vpclattice to populate
@@ -275,7 +275,7 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   vpcIdentifier:
-                    description: The ID of the VPC.
+                    description: ID of the VPC.
                     type: string
                   vpcIdentifierRef:
                     description: Reference to a VPC in ec2 to populate vpcIdentifier.
@@ -471,14 +471,14 @@ spec:
                         type: object
                     type: object
                   securityGroupIds:
-                    description: The IDs of the security groups.
+                    description: IDs of the security groups.
                     items:
                       type: string
                     type: array
                   serviceNetworkIdentifier:
-                    description: |-
-                      The ID or Amazon Resource Identifier (ARN) of the service network. You must use the ARN if the resources specified in the operation are in different accounts.
-                      The following arguments are optional:
+                    description: ID or Amazon Resource Identifier (ARN) of the service
+                      network. You must use the ARN if the resources specified in
+                      the operation are in different accounts.
                     type: string
                   serviceNetworkIdentifierRef:
                     description: Reference to a ServiceNetwork in vpclattice to populate
@@ -563,7 +563,7 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   vpcIdentifier:
-                    description: The ID of the VPC.
+                    description: ID of the VPC.
                     type: string
                   vpcIdentifierRef:
                     description: Reference to a VPC in ec2 to populate vpcIdentifier.
@@ -733,10 +733,10 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The ARN of the Association.
+                    description: ARN of the Association.
                     type: string
                   createdBy:
-                    description: The account that created the association.
+                    description: Account that created the association.
                     type: string
                   dnsOptions:
                     description: Configuration block for DNS option. See dns_options
@@ -760,7 +760,7 @@ spec:
                         x-kubernetes-list-type: set
                     type: object
                   id:
-                    description: The ID of the association.
+                    description: ID of the association.
                     type: string
                   privateDnsEnabled:
                     description: Boolean to indicate whether to enable private DNS
@@ -772,17 +772,17 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   securityGroupIds:
-                    description: The IDs of the security groups.
+                    description: IDs of the security groups.
                     items:
                       type: string
                     type: array
                   serviceNetworkIdentifier:
-                    description: |-
-                      The ID or Amazon Resource Identifier (ARN) of the service network. You must use the ARN if the resources specified in the operation are in different accounts.
-                      The following arguments are optional:
+                    description: ID or Amazon Resource Identifier (ARN) of the service
+                      network. You must use the ARN if the resources specified in
+                      the operation are in different accounts.
                     type: string
                   status:
-                    description: The operations status. Valid Values are CREATE_IN_PROGRESS
+                    description: Operations status. Valid Values are CREATE_IN_PROGRESS
                       | ACTIVE | DELETE_IN_PROGRESS | CREATE_FAILED | DELETE_FAILED
                     type: string
                   tags:
@@ -799,7 +799,7 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   vpcIdentifier:
-                    description: The ID of the VPC.
+                    description: ID of the VPC.
                     type: string
                 type: object
               conditions:

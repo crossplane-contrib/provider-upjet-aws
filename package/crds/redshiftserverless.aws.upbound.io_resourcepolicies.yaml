@@ -83,8 +83,8 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   resourceArn:
-                    description: The Amazon Resource Name (ARN) of the account to
-                      create or update a resource policy for.
+                    description: ARN of the account to create or update a resource
+                      policy for.
                     type: string
                   resourceArnRef:
                     description: Reference to a Snapshot in redshiftserverless to
@@ -183,8 +183,8 @@ spec:
                       following policy grants a user authorization to restore a snapshot.
                     type: string
                   resourceArn:
-                    description: The Amazon Resource Name (ARN) of the account to
-                      create or update a resource policy for.
+                    description: ARN of the account to create or update a resource
+                      policy for.
                     type: string
                   resourceArnRef:
                     description: Reference to a Snapshot in redshiftserverless to
@@ -360,8 +360,8 @@ spec:
               atProvider:
                 properties:
                   id:
-                    description: The Amazon Resource Name (ARN) of the account to
-                      create or update a resource policy for.
+                    description: ARN of the account to create or update a resource
+                      policy for.
                     type: string
                   policy:
                     description: The policy to create or update. For example, the
@@ -373,8 +373,8 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   resourceArn:
-                    description: The Amazon Resource Name (ARN) of the account to
-                      create or update a resource policy for.
+                    description: ARN of the account to create or update a resource
+                      policy for.
                     type: string
                 type: object
               conditions:

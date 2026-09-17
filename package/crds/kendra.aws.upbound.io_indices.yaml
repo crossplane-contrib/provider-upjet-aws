@@ -1497,7 +1497,7 @@ spec:
                               URL or SECRET_MANAGER
                             type: string
                           secretsManagerArn:
-                            description: The Amazon Resource Name (ARN) of the secret.
+                            description: ARN of the secret.
                             type: string
                           url:
                             description: The signing key URL. Valid pattern is ^(https?|ftp|file):\/\/([^\s]*)
@@ -1795,7 +1795,7 @@ spec:
                               URL or SECRET_MANAGER
                             type: string
                           secretsManagerArn:
-                            description: The Amazon Resource Name (ARN) of the secret.
+                            description: ARN of the secret.
                             type: string
                           url:
                             description: The signing key URL. Valid pattern is ^(https?|ftp|file):\/\/([^\s]*)
@@ -1904,7 +1904,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The Amazon Resource Name (ARN) of the Index.
+                    description: ARN of the Index.
                     type: string
                   capacityUnits:
                     description: A block that sets the number of additional document
@@ -2168,7 +2168,7 @@ spec:
                               URL or SECRET_MANAGER
                             type: string
                           secretsManagerArn:
-                            description: The Amazon Resource Name (ARN) of the secret.
+                            description: ARN of the secret.
                             type: string
                           url:
                             description: The signing key URL. Valid pattern is ^(https?|ftp|file):\/\/([^\s]*)

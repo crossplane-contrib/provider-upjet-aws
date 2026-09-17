@@ -15,10 +15,10 @@ import (
 
 type ObjectLambdaAccessPointPolicyInitParameters struct {
 
-	// The AWS account ID for the account that owns the Object Lambda Access Point.
+	// AWS account ID for the account that owns the Object Lambda Access Point.
 	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
 
-	// The name of the Object Lambda Access Point.
+	// Name of the Object Lambda Access Point.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/s3control/v1beta1.ObjectLambdaAccessPoint
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -31,25 +31,25 @@ type ObjectLambdaAccessPointPolicyInitParameters struct {
 	// +kubebuilder:validation:Optional
 	NameSelector *v2.NamespacedSelector `json:"nameSelector,omitempty" tf:"-"`
 
-	// The Object Lambda Access Point resource policy document.
+	// Object Lambda Access Point resource policy document.
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 }
 
 type ObjectLambdaAccessPointPolicyObservation struct {
 
-	// The AWS account ID for the account that owns the Object Lambda Access Point.
+	// AWS account ID for the account that owns the Object Lambda Access Point.
 	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
 
-	// Indicates whether this access point currently has a policy that allows public access.
+	// Whether this access point currently has a policy that allows public access.
 	HasPublicAccessPolicy *bool `json:"hasPublicAccessPolicy,omitempty" tf:"has_public_access_policy,omitempty"`
 
-	// The AWS account ID and access point name separated by a colon (:).
+	// AWS account ID and access point name separated by a colon (:).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The name of the Object Lambda Access Point.
+	// Name of the Object Lambda Access Point.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The Object Lambda Access Point resource policy document.
+	// Object Lambda Access Point resource policy document.
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -59,11 +59,11 @@ type ObjectLambdaAccessPointPolicyObservation struct {
 
 type ObjectLambdaAccessPointPolicyParameters struct {
 
-	// The AWS account ID for the account that owns the Object Lambda Access Point.
+	// AWS account ID for the account that owns the Object Lambda Access Point.
 	// +kubebuilder:validation:Optional
 	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
 
-	// The name of the Object Lambda Access Point.
+	// Name of the Object Lambda Access Point.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/s3control/v1beta1.ObjectLambdaAccessPoint
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
@@ -77,7 +77,7 @@ type ObjectLambdaAccessPointPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	NameSelector *v2.NamespacedSelector `json:"nameSelector,omitempty" tf:"-"`
 
-	// The Object Lambda Access Point resource policy document.
+	// Object Lambda Access Point resource policy document.
 	// +kubebuilder:validation:Optional
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 

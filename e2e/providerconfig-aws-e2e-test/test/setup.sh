@@ -5,7 +5,7 @@ echo "Running setup.sh"
 echo "Waiting until all configuration packages are healthy/installed..."
 "${KUBECTL}" wait configuration.pkg --all --for=condition=Healthy --timeout 5m
 "${KUBECTL}" wait configuration.pkg --all --for=condition=Installed --timeout 5m
-"${KUBECTL}" wait configurationrevisions.pkg --all --for=condition=Healthy --timeout 5m
+"${KUBECTL}" wait configurationrevisions.pkg --all --for=condition=RevisionHealthy --timeout 5m
 
 echo "Creating cloud credential secret..."
 "${KUBECTL}" -n upbound-system create secret generic aws-creds --from-literal=credentials="${UPTEST_CLOUD_CREDENTIALS}" \
@@ -26,6 +26,37 @@ apiVersion: aws.upbound.io/v1beta1
 kind: ProviderConfig
 metadata:
   name: default
+spec:
+  credentials:
+    secretRef:
+      key: credentials
+      name: aws-creds
+      namespace: upbound-system
+    source: Secret
+EOF
+
+echo "Creating a default ClusterProviderConfig..."
+cat <<EOF | "${KUBECTL}" apply -f -
+apiVersion: aws.m.upbound.io/v1beta1
+kind: ClusterProviderConfig
+metadata:
+  name: default
+spec:
+  credentials:
+    source: Secret
+    secretRef:
+      name: aws-creds
+      namespace: upbound-system
+      key: credentials
+EOF
+
+echo "Creating a default provider config..."
+cat <<EOF | "${KUBECTL}" apply -f -
+apiVersion: aws.m.upbound.io/v1beta1
+kind: ProviderConfig
+metadata:
+  name: default
+  namespace: upbound-system
 spec:
   credentials:
     secretRef:

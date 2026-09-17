@@ -547,8 +547,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The Amazon Resource Name of the Neptune event notification
-                      subscription.
+                    description: ARN of the Neptune event notification subscription.
                     type: string
                   customerAwsId:
                     description: The AWS customer account associated with the Neptune

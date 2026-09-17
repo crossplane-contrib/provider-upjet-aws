@@ -15,7 +15,7 @@ import (
 
 type ConnectionInitParameters struct {
 
-	// The Amazon Resource Name (ARN) of the host associated with the connection. Conflicts with provider_type
+	// ARN of the host associated with the connection. Conflicts with provider_type
 	HostArn *string `json:"hostArn,omitempty" tf:"host_arn,omitempty"`
 
 	// The name of the connection to be created. The name must be unique in the calling AWS account. Changing name will create a new resource.
@@ -37,7 +37,7 @@ type ConnectionObservation struct {
 	// The codestar connection status. Possible values are PENDING, AVAILABLE and ERROR.
 	ConnectionStatus *string `json:"connectionStatus,omitempty" tf:"connection_status,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the host associated with the connection. Conflicts with provider_type
+	// ARN of the host associated with the connection. Conflicts with provider_type
 	HostArn *string `json:"hostArn,omitempty" tf:"host_arn,omitempty"`
 
 	// The codestar connection ARN.
@@ -64,7 +64,7 @@ type ConnectionObservation struct {
 
 type ConnectionParameters struct {
 
-	// The Amazon Resource Name (ARN) of the host associated with the connection. Conflicts with provider_type
+	// ARN of the host associated with the connection. Conflicts with provider_type
 	// +kubebuilder:validation:Optional
 	HostArn *string `json:"hostArn,omitempty" tf:"host_arn,omitempty"`
 

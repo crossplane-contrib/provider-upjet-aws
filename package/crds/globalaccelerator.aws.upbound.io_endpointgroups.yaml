@@ -88,11 +88,10 @@ spec:
                             value is false.
                           type: boolean
                         endpointId:
-                          description: An ID for the endpoint. If the endpoint is
-                            a Network Load Balancer or Application Load Balancer,
-                            this is the Amazon Resource Name (ARN) of the resource.
-                            If the endpoint is an Elastic IP address, this is the
-                            Elastic IP address allocation ID.
+                          description: ID for the endpoint. If the endpoint is a Network
+                            Load Balancer or Application Load Balancer, this is the
+                            ARN of the resource. If the endpoint is an Elastic IP
+                            address, this is the Elastic IP address allocation ID.
                           type: string
                         weight:
                           description: The weight associated with the endpoint. When
@@ -128,7 +127,7 @@ spec:
                       group. The default value is TCP.
                     type: string
                   listenerArn:
-                    description: The Amazon Resource Name (ARN) of the listener.
+                    description: ARN of the listener.
                     type: string
                   listenerArnRef:
                     description: Reference to a Listener in globalaccelerator to populate
@@ -263,11 +262,10 @@ spec:
                             value is false.
                           type: boolean
                         endpointId:
-                          description: An ID for the endpoint. If the endpoint is
-                            a Network Load Balancer or Application Load Balancer,
-                            this is the Amazon Resource Name (ARN) of the resource.
-                            If the endpoint is an Elastic IP address, this is the
-                            Elastic IP address allocation ID.
+                          description: ID for the endpoint. If the endpoint is a Network
+                            Load Balancer or Application Load Balancer, this is the
+                            ARN of the resource. If the endpoint is an Elastic IP
+                            address, this is the Elastic IP address allocation ID.
                           type: string
                         weight:
                           description: The weight associated with the endpoint. When
@@ -303,7 +301,7 @@ spec:
                       group. The default value is TCP.
                     type: string
                   listenerArn:
-                    description: The Amazon Resource Name (ARN) of the listener.
+                    description: ARN of the listener.
                     type: string
                   listenerArnRef:
                     description: Reference to a Listener in globalaccelerator to populate
@@ -502,7 +500,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The Amazon Resource Name (ARN) of the endpoint group.
+                    description: ARN of the endpoint group.
                     type: string
                   endpointConfiguration:
                     description: The list of endpoint objects. Fields documented below.
@@ -519,11 +517,10 @@ spec:
                             value is false.
                           type: boolean
                         endpointId:
-                          description: An ID for the endpoint. If the endpoint is
-                            a Network Load Balancer or Application Load Balancer,
-                            this is the Amazon Resource Name (ARN) of the resource.
-                            If the endpoint is an Elastic IP address, this is the
-                            Elastic IP address allocation ID.
+                          description: ID for the endpoint. If the endpoint is a Network
+                            Load Balancer or Application Load Balancer, this is the
+                            ARN of the resource. If the endpoint is an Elastic IP
+                            address, this is the Elastic IP address allocation ID.
                           type: string
                         weight:
                           description: The weight associated with the endpoint. When
@@ -559,10 +556,10 @@ spec:
                       group. The default value is TCP.
                     type: string
                   id:
-                    description: The Amazon Resource Name (ARN) of the endpoint group.
+                    description: ARN of the endpoint group.
                     type: string
                   listenerArn:
-                    description: The Amazon Resource Name (ARN) of the listener.
+                    description: ARN of the listener.
                     type: string
                   portOverride:
                     description: Override specific listener ports used to route traffic
