@@ -2059,7 +2059,7 @@ spec:
                     description: Password used to access a password protected server,
                       whose value will not be stored in state. Can be specified only
                       if transit_encryption_enabled = true. Conflicts with auth_token.
-                      Requires auth_token_wo_version.
+                      If set, requires auth_token_wo_version to be set.
                     properties:
                       key:
                         description: The key to select.
@@ -2076,8 +2076,8 @@ spec:
                     - namespace
                     type: object
                   authTokenWoVersion:
-                    description: Integer that, when changed, triggers a re-send of
-                      auth_token_wo to the replication group. Requires auth_token_wo.
+                    description: Required when auth_token_wo is set. Changing this
+                      value triggers an update to auth_token_wo.
                     type: number
                   autoGenerateAuthToken:
                     description: |-
@@ -2725,7 +2725,7 @@ spec:
                     description: Password used to access a password protected server,
                       whose value will not be stored in state. Can be specified only
                       if transit_encryption_enabled = true. Conflicts with auth_token.
-                      Requires auth_token_wo_version.
+                      If set, requires auth_token_wo_version to be set.
                     properties:
                       key:
                         description: The key to select.
@@ -2742,8 +2742,8 @@ spec:
                     - namespace
                     type: object
                   authTokenWoVersion:
-                    description: Integer that, when changed, triggers a re-send of
-                      auth_token_wo to the replication group. Requires auth_token_wo.
+                    description: Required when auth_token_wo is set. Changing this
+                      value triggers an update to auth_token_wo.
                     type: number
                   autoMinorVersionUpgrade:
                     description: |-
@@ -3443,8 +3443,8 @@ spec:
                       then auth_token and auth_token_wo must be omitted.
                     type: string
                   authTokenWoVersion:
-                    description: Integer that, when changed, triggers a re-send of
-                      auth_token_wo to the replication group. Requires auth_token_wo.
+                    description: Required when auth_token_wo is set. Changing this
+                      value triggers an update to auth_token_wo.
                     type: number
                   autoMinorVersionUpgrade:
                     description: |-

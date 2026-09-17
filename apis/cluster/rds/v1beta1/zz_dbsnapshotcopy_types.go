@@ -18,7 +18,7 @@ type DBSnapshotCopyInitParameters struct {
 	// Whether to copy existing tags. Defaults to false.
 	CopyTags *bool `json:"copyTags,omitempty" tf:"copy_tags,omitempty"`
 
-	// The Destination region to place snapshot copy.
+	// Destination Region to place snapshot copy.
 	DestinationRegion *string `json:"destinationRegion,omitempty" tf:"destination_region,omitempty"`
 
 	// KMS key ID.
@@ -33,10 +33,10 @@ type DBSnapshotCopyInitParameters struct {
 	// +kubebuilder:validation:Optional
 	KMSKeyIDSelector *v2.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
-	// The name of an option group to associate with the copy of the snapshot.
+	// Name of an option group to associate with the copy of the snapshot.
 	OptionGroupName *string `json:"optionGroupName,omitempty" tf:"option_group_name,omitempty"`
 
-	// he URL that contains a Signature Version 4 signed request.
+	// URL that contains a Signature Version 4 signed request.
 	PresignedURL *string `json:"presignedUrl,omitempty" tf:"presigned_url,omitempty"`
 
 	// List of AWS Account IDs to share the snapshot with. Use all to make the snapshot public.
@@ -60,19 +60,19 @@ type DBSnapshotCopyInitParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The external custom Availability Zone.
+	// External custom Availability Zone.
 	TargetCustomAvailabilityZone *string `json:"targetCustomAvailabilityZone,omitempty" tf:"target_custom_availability_zone,omitempty"`
 
-	// The Identifier for the snapshot.
+	// Identifier for the snapshot.
 	TargetDBSnapshotIdentifier *string `json:"targetDbSnapshotIdentifier,omitempty" tf:"target_db_snapshot_identifier,omitempty"`
 }
 
 type DBSnapshotCopyObservation struct {
 
-	// Specifies the allocated storage size in gigabytes (GB).
+	// Allocated storage size in gigabytes (GB).
 	AllocatedStorage *float64 `json:"allocatedStorage,omitempty" tf:"allocated_storage,omitempty"`
 
-	// Specifies the name of the Availability Zone the DB instance was located in at the time of the DB snapshot.
+	// Name of the Availability Zone the DB instance was located in at the time of the DB snapshot.
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
 	// Whether to copy existing tags. Defaults to false.
@@ -81,22 +81,22 @@ type DBSnapshotCopyObservation struct {
 	// ARN for the DB snapshot.
 	DBSnapshotArn *string `json:"dbSnapshotArn,omitempty" tf:"db_snapshot_arn,omitempty"`
 
-	// The Destination region to place snapshot copy.
+	// Destination Region to place snapshot copy.
 	DestinationRegion *string `json:"destinationRegion,omitempty" tf:"destination_region,omitempty"`
 
-	// Specifies whether the DB snapshot is encrypted.
+	// Whether the DB snapshot is encrypted.
 	Encrypted *bool `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
 
-	// Specifies the name of the database engine.
+	// Name of the database engine.
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
 
-	// Specifies the version of the database engine.
+	// Version of the database engine.
 	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
 
 	// Snapshot Identifier.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Specifies the Provisioned IOPS (I/O operations per second) value of the DB instance at the time of the snapshot.
+	// Provisioned IOPS (I/O operations per second) value of the DB instance at the time of the snapshot.
 	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
 	// KMS key ID.
@@ -105,12 +105,13 @@ type DBSnapshotCopyObservation struct {
 	// License model information for the restored DB instance.
 	LicenseModel *string `json:"licenseModel,omitempty" tf:"license_model,omitempty"`
 
-	// The name of an option group to associate with the copy of the snapshot.
+	// Name of an option group to associate with the copy of the snapshot.
 	OptionGroupName *string `json:"optionGroupName,omitempty" tf:"option_group_name,omitempty"`
 
+	// Port that the database engine is listening on.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
-	// he URL that contains a Signature Version 4 signed request.
+	// URL that contains a Signature Version 4 signed request.
 	PresignedURL *string `json:"presignedUrl,omitempty" tf:"presigned_url,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -121,29 +122,30 @@ type DBSnapshotCopyObservation struct {
 	// +listType=set
 	SharedAccounts []*string `json:"sharedAccounts,omitempty" tf:"shared_accounts,omitempty"`
 
+	// Type of the DB snapshot.
 	SnapshotType *string `json:"snapshotType,omitempty" tf:"snapshot_type,omitempty"`
 
 	// Snapshot identifier of the source snapshot.
 	SourceDBSnapshotIdentifier *string `json:"sourceDbSnapshotIdentifier,omitempty" tf:"source_db_snapshot_identifier,omitempty"`
 
-	// The region that the DB snapshot was created in or copied from.
+	// Region that the DB snapshot was created in or copied from.
 	SourceRegion *string `json:"sourceRegion,omitempty" tf:"source_region,omitempty"`
 
-	// Specifies the storage type associated with DB snapshot.
+	// Storage type associated with DB snapshot.
 	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// The external custom Availability Zone.
+	// External custom Availability Zone.
 	TargetCustomAvailabilityZone *string `json:"targetCustomAvailabilityZone,omitempty" tf:"target_custom_availability_zone,omitempty"`
 
-	// The Identifier for the snapshot.
+	// Identifier for the snapshot.
 	TargetDBSnapshotIdentifier *string `json:"targetDbSnapshotIdentifier,omitempty" tf:"target_db_snapshot_identifier,omitempty"`
 
 	// Provides the VPC ID associated with the DB snapshot.
@@ -156,7 +158,7 @@ type DBSnapshotCopyParameters struct {
 	// +kubebuilder:validation:Optional
 	CopyTags *bool `json:"copyTags,omitempty" tf:"copy_tags,omitempty"`
 
-	// The Destination region to place snapshot copy.
+	// Destination Region to place snapshot copy.
 	// +kubebuilder:validation:Optional
 	DestinationRegion *string `json:"destinationRegion,omitempty" tf:"destination_region,omitempty"`
 
@@ -173,11 +175,11 @@ type DBSnapshotCopyParameters struct {
 	// +kubebuilder:validation:Optional
 	KMSKeyIDSelector *v2.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
-	// The name of an option group to associate with the copy of the snapshot.
+	// Name of an option group to associate with the copy of the snapshot.
 	// +kubebuilder:validation:Optional
 	OptionGroupName *string `json:"optionGroupName,omitempty" tf:"option_group_name,omitempty"`
 
-	// he URL that contains a Signature Version 4 signed request.
+	// URL that contains a Signature Version 4 signed request.
 	// +kubebuilder:validation:Optional
 	PresignedURL *string `json:"presignedUrl,omitempty" tf:"presigned_url,omitempty"`
 
@@ -210,11 +212,11 @@ type DBSnapshotCopyParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The external custom Availability Zone.
+	// External custom Availability Zone.
 	// +kubebuilder:validation:Optional
 	TargetCustomAvailabilityZone *string `json:"targetCustomAvailabilityZone,omitempty" tf:"target_custom_availability_zone,omitempty"`
 
-	// The Identifier for the snapshot.
+	// Identifier for the snapshot.
 	// +kubebuilder:validation:Optional
 	TargetDBSnapshotIdentifier *string `json:"targetDbSnapshotIdentifier,omitempty" tf:"target_db_snapshot_identifier,omitempty"`
 }

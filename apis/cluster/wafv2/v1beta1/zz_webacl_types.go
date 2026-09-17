@@ -408,7 +408,7 @@ type ImmunityTimePropertyParameters struct {
 
 type InsertHeaderInitParameters struct {
 
-	// Name of the query header to inspect. This setting must be provided as lower case characters.
+	// Name of the query argument to inspect. Maximum length of 30. AWS returns query argument names in lower case, so provide the name as lower case characters to avoid a perpetual diff.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Value of the custom header.
@@ -417,7 +417,7 @@ type InsertHeaderInitParameters struct {
 
 type InsertHeaderObservation struct {
 
-	// Name of the query header to inspect. This setting must be provided as lower case characters.
+	// Name of the query argument to inspect. Maximum length of 30. AWS returns query argument names in lower case, so provide the name as lower case characters to avoid a perpetual diff.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Value of the custom header.
@@ -426,7 +426,7 @@ type InsertHeaderObservation struct {
 
 type InsertHeaderParameters struct {
 
-	// Name of the query header to inspect. This setting must be provided as lower case characters.
+	// Name of the query argument to inspect. Maximum length of 30. AWS returns query argument names in lower case, so provide the name as lower case characters to avoid a perpetual diff.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -496,7 +496,7 @@ type RequestBodyParameters struct {
 
 type ResponseHeaderInitParameters struct {
 
-	// Name of the query header to inspect. This setting must be provided as lower case characters.
+	// Name of the query argument to inspect. Maximum length of 30. AWS returns query argument names in lower case, so provide the name as lower case characters to avoid a perpetual diff.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Value of the custom header.
@@ -505,7 +505,7 @@ type ResponseHeaderInitParameters struct {
 
 type ResponseHeaderObservation struct {
 
-	// Name of the query header to inspect. This setting must be provided as lower case characters.
+	// Name of the query argument to inspect. Maximum length of 30. AWS returns query argument names in lower case, so provide the name as lower case characters to avoid a perpetual diff.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Value of the custom header.
@@ -514,7 +514,7 @@ type ResponseHeaderObservation struct {
 
 type ResponseHeaderParameters struct {
 
-	// Name of the query header to inspect. This setting must be provided as lower case characters.
+	// Name of the query argument to inspect. Maximum length of 30. AWS returns query argument names in lower case, so provide the name as lower case characters to avoid a perpetual diff.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 

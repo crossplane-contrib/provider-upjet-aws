@@ -15,10 +15,10 @@ import (
 
 type ClusterInstanceInitParameters struct {
 
-	// Specifies whether any database modifications are applied immediately, or during the next maintenance window. Default isfalse.
+	// Whether any database modifications are applied immediately, or during the next maintenance window. Default is false.
 	ApplyImmediately *bool `json:"applyImmediately,omitempty" tf:"apply_immediately,omitempty"`
 
-	// Indicates that minor engine upgrades will be applied automatically to the DB instance during the maintenance window. Default true.
+	// Whether minor engine upgrades will be applied automatically to the DB instance during the maintenance window. Default true.
 	AutoMinorVersionUpgrade *bool `json:"autoMinorVersionUpgrade,omitempty" tf:"auto_minor_version_upgrade,omitempty"`
 
 	// EC2 Availability Zone that the DB instance is created in. See docs about the details.
@@ -40,7 +40,7 @@ type ClusterInstanceInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ClusterIdentifierSelector *v2.NamespacedSelector `json:"clusterIdentifierSelector,omitempty" tf:"-"`
 
-	// Indicates whether to copy all of the user-defined tags from the DB instance to snapshots of the DB instance. Default false.
+	// Whether to copy all of the user-defined tags from the DB instance to snapshots of the DB instance. Default false.
 	CopyTagsToSnapshot *bool `json:"copyTagsToSnapshot,omitempty" tf:"copy_tags_to_snapshot,omitempty"`
 
 	// Instance profile associated with the underlying Amazon EC2 instance of an RDS Custom DB instance.
@@ -58,7 +58,7 @@ type ClusterInstanceInitParameters struct {
 	// +kubebuilder:validation:Optional
 	DBParameterGroupNameSelector *v2.NamespacedSelector `json:"dbParameterGroupNameSelector,omitempty" tf:"-"`
 
-	// Specifies the DB subnet group to associate with this DB instance. The default behavior varies depending on whether db_subnet_group_name is specified. Please refer to official AWS documentation to understand how db_subnet_group_name and publicly_accessible parameters affect DB instance behaviour. NOTE: This must match the db_subnet_group_name of the attached aws_rds_cluster.
+	// DB subnet group to associate with this DB instance. The default behavior varies depending on whether db_subnet_group_name is specified. Please refer to official AWS documentation to understand how db_subnet_group_name and publicly_accessible parameters affect DB instance behaviour. NOTE: This must match the db_subnet_group_name of the attached aws_rds_cluster.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/rds/v1beta1.SubnetGroup
 	DBSubnetGroupName *string `json:"dbSubnetGroupName,omitempty" tf:"db_subnet_group_name,omitempty"`
 
@@ -70,8 +70,7 @@ type ClusterInstanceInitParameters struct {
 	// +kubebuilder:validation:Optional
 	DBSubnetGroupNameSelector *v2.NamespacedSelector `json:"dbSubnetGroupNameSelector,omitempty" tf:"-"`
 
-	// Name of the database engine to be used for the RDS cluster instance.
-	// Valid Values: aurora-mysql, aurora-postgresql, mysql, postgres.(Note that mysql and postgres are Multi-AZ RDS clusters).
+	// Name of the database engine to be used for the RDS cluster instance. Valid Values: aurora-mysql, aurora-postgresql, mysql, postgres. (Note that mysql and postgres are Multi-AZ RDS clusters).
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
 
 	// Database engine version. Please note that to upgrade the engine_version of the instance, it must be done on the aws_rds_cluster engine_version. Trying to upgrade in aws_rds_cluster_instance will not update the engine_version.
@@ -99,7 +98,7 @@ type ClusterInstanceInitParameters struct {
 	// +kubebuilder:validation:Optional
 	MonitoringRoleArnSelector *v2.NamespacedSelector `json:"monitoringRoleArnSelector,omitempty" tf:"-"`
 
-	// Specifies whether Performance Insights is enabled or not. NOTE: When Performance Insights is configured at the cluster level through aws_rds_cluster, this argument cannot be set to a value that conflicts with the cluster's configuration.
+	// Whether Performance Insights is enabled. NOTE: When Performance Insights is configured at the cluster level through aws_rds_cluster, this argument cannot be set to a value that conflicts with the cluster's configuration.
 	PerformanceInsightsEnabled *bool `json:"performanceInsightsEnabled,omitempty" tf:"performance_insights_enabled,omitempty"`
 
 	// ARN for the KMS key to encrypt Performance Insights data. When specifying performance_insights_kms_key_id, performance_insights_enabled needs to be set to true.
@@ -140,13 +139,13 @@ type ClusterInstanceInitParameters struct {
 
 type ClusterInstanceObservation struct {
 
-	// Specifies whether any database modifications are applied immediately, or during the next maintenance window. Default isfalse.
+	// Whether any database modifications are applied immediately, or during the next maintenance window. Default is false.
 	ApplyImmediately *bool `json:"applyImmediately,omitempty" tf:"apply_immediately,omitempty"`
 
 	// ARN of cluster instance
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// Indicates that minor engine upgrades will be applied automatically to the DB instance during the maintenance window. Default true.
+	// Whether minor engine upgrades will be applied automatically to the DB instance during the maintenance window. Default true.
 	AutoMinorVersionUpgrade *bool `json:"autoMinorVersionUpgrade,omitempty" tf:"auto_minor_version_upgrade,omitempty"`
 
 	// EC2 Availability Zone that the DB instance is created in. See docs about the details.
@@ -158,7 +157,7 @@ type ClusterInstanceObservation struct {
 	// Identifier of the aws_rds_cluster in which to launch this instance.
 	ClusterIdentifier *string `json:"clusterIdentifier,omitempty" tf:"cluster_identifier,omitempty"`
 
-	// Indicates whether to copy all of the user-defined tags from the DB instance to snapshots of the DB instance. Default false.
+	// Whether to copy all of the user-defined tags from the DB instance to snapshots of the DB instance. Default false.
 	CopyTagsToSnapshot *bool `json:"copyTagsToSnapshot,omitempty" tf:"copy_tags_to_snapshot,omitempty"`
 
 	// Instance profile associated with the underlying Amazon EC2 instance of an RDS Custom DB instance.
@@ -167,7 +166,7 @@ type ClusterInstanceObservation struct {
 	// Name of the DB parameter group to associate with this instance.
 	DBParameterGroupName *string `json:"dbParameterGroupName,omitempty" tf:"db_parameter_group_name,omitempty"`
 
-	// Specifies the DB subnet group to associate with this DB instance. The default behavior varies depending on whether db_subnet_group_name is specified. Please refer to official AWS documentation to understand how db_subnet_group_name and publicly_accessible parameters affect DB instance behaviour. NOTE: This must match the db_subnet_group_name of the attached aws_rds_cluster.
+	// DB subnet group to associate with this DB instance. The default behavior varies depending on whether db_subnet_group_name is specified. Please refer to official AWS documentation to understand how db_subnet_group_name and publicly_accessible parameters affect DB instance behaviour. NOTE: This must match the db_subnet_group_name of the attached aws_rds_cluster.
 	DBSubnetGroupName *string `json:"dbSubnetGroupName,omitempty" tf:"db_subnet_group_name,omitempty"`
 
 	// Region-unique, immutable identifier for the DB instance.
@@ -176,8 +175,7 @@ type ClusterInstanceObservation struct {
 	// DNS address for this instance. May not be writable
 	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 
-	// Name of the database engine to be used for the RDS cluster instance.
-	// Valid Values: aurora-mysql, aurora-postgresql, mysql, postgres.(Note that mysql and postgres are Multi-AZ RDS clusters).
+	// Name of the database engine to be used for the RDS cluster instance. Valid Values: aurora-mysql, aurora-postgresql, mysql, postgres. (Note that mysql and postgres are Multi-AZ RDS clusters).
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
 
 	// Database engine version. Please note that to upgrade the engine_version of the instance, it must be done on the aws_rds_cluster engine_version. Trying to upgrade in aws_rds_cluster_instance will not update the engine_version.
@@ -207,7 +205,7 @@ type ClusterInstanceObservation struct {
 	// Network type of the DB instance.
 	NetworkType *string `json:"networkType,omitempty" tf:"network_type,omitempty"`
 
-	// Specifies whether Performance Insights is enabled or not. NOTE: When Performance Insights is configured at the cluster level through aws_rds_cluster, this argument cannot be set to a value that conflicts with the cluster's configuration.
+	// Whether Performance Insights is enabled. NOTE: When Performance Insights is configured at the cluster level through aws_rds_cluster, this argument cannot be set to a value that conflicts with the cluster's configuration.
 	PerformanceInsightsEnabled *bool `json:"performanceInsightsEnabled,omitempty" tf:"performance_insights_enabled,omitempty"`
 
 	// ARN for the KMS key to encrypt Performance Insights data. When specifying performance_insights_kms_key_id, performance_insights_enabled needs to be set to true.
@@ -235,7 +233,7 @@ type ClusterInstanceObservation struct {
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// Specifies whether the DB cluster is encrypted.
+	// Whether the DB cluster is encrypted.
 	StorageEncrypted *bool `json:"storageEncrypted,omitempty" tf:"storage_encrypted,omitempty"`
 
 	// Key-value map of resource tags.
@@ -256,11 +254,11 @@ type ClusterInstanceObservation struct {
 
 type ClusterInstanceParameters struct {
 
-	// Specifies whether any database modifications are applied immediately, or during the next maintenance window. Default isfalse.
+	// Whether any database modifications are applied immediately, or during the next maintenance window. Default is false.
 	// +kubebuilder:validation:Optional
 	ApplyImmediately *bool `json:"applyImmediately,omitempty" tf:"apply_immediately,omitempty"`
 
-	// Indicates that minor engine upgrades will be applied automatically to the DB instance during the maintenance window. Default true.
+	// Whether minor engine upgrades will be applied automatically to the DB instance during the maintenance window. Default true.
 	// +kubebuilder:validation:Optional
 	AutoMinorVersionUpgrade *bool `json:"autoMinorVersionUpgrade,omitempty" tf:"auto_minor_version_upgrade,omitempty"`
 
@@ -286,7 +284,7 @@ type ClusterInstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	ClusterIdentifierSelector *v2.NamespacedSelector `json:"clusterIdentifierSelector,omitempty" tf:"-"`
 
-	// Indicates whether to copy all of the user-defined tags from the DB instance to snapshots of the DB instance. Default false.
+	// Whether to copy all of the user-defined tags from the DB instance to snapshots of the DB instance. Default false.
 	// +kubebuilder:validation:Optional
 	CopyTagsToSnapshot *bool `json:"copyTagsToSnapshot,omitempty" tf:"copy_tags_to_snapshot,omitempty"`
 
@@ -307,7 +305,7 @@ type ClusterInstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	DBParameterGroupNameSelector *v2.NamespacedSelector `json:"dbParameterGroupNameSelector,omitempty" tf:"-"`
 
-	// Specifies the DB subnet group to associate with this DB instance. The default behavior varies depending on whether db_subnet_group_name is specified. Please refer to official AWS documentation to understand how db_subnet_group_name and publicly_accessible parameters affect DB instance behaviour. NOTE: This must match the db_subnet_group_name of the attached aws_rds_cluster.
+	// DB subnet group to associate with this DB instance. The default behavior varies depending on whether db_subnet_group_name is specified. Please refer to official AWS documentation to understand how db_subnet_group_name and publicly_accessible parameters affect DB instance behaviour. NOTE: This must match the db_subnet_group_name of the attached aws_rds_cluster.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/rds/v1beta1.SubnetGroup
 	// +kubebuilder:validation:Optional
 	DBSubnetGroupName *string `json:"dbSubnetGroupName,omitempty" tf:"db_subnet_group_name,omitempty"`
@@ -320,8 +318,7 @@ type ClusterInstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	DBSubnetGroupNameSelector *v2.NamespacedSelector `json:"dbSubnetGroupNameSelector,omitempty" tf:"-"`
 
-	// Name of the database engine to be used for the RDS cluster instance.
-	// Valid Values: aurora-mysql, aurora-postgresql, mysql, postgres.(Note that mysql and postgres are Multi-AZ RDS clusters).
+	// Name of the database engine to be used for the RDS cluster instance. Valid Values: aurora-mysql, aurora-postgresql, mysql, postgres. (Note that mysql and postgres are Multi-AZ RDS clusters).
 	// +kubebuilder:validation:Optional
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
 
@@ -355,7 +352,7 @@ type ClusterInstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	MonitoringRoleArnSelector *v2.NamespacedSelector `json:"monitoringRoleArnSelector,omitempty" tf:"-"`
 
-	// Specifies whether Performance Insights is enabled or not. NOTE: When Performance Insights is configured at the cluster level through aws_rds_cluster, this argument cannot be set to a value that conflicts with the cluster's configuration.
+	// Whether Performance Insights is enabled. NOTE: When Performance Insights is configured at the cluster level through aws_rds_cluster, this argument cannot be set to a value that conflicts with the cluster's configuration.
 	// +kubebuilder:validation:Optional
 	PerformanceInsightsEnabled *bool `json:"performanceInsightsEnabled,omitempty" tf:"performance_insights_enabled,omitempty"`
 

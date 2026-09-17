@@ -15,7 +15,7 @@ import (
 
 type SnapshotInitParameters struct {
 
-	// The DB Instance Identifier from which to take the snapshot.
+	// DB instance identifier from which to take the snapshot.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/rds/v1beta1.Instance
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("identifier",false)
 	DBInstanceIdentifier *string `json:"dbInstanceIdentifier,omitempty" tf:"db_instance_identifier,omitempty"`
@@ -39,33 +39,33 @@ type SnapshotInitParameters struct {
 
 type SnapshotObservation struct {
 
-	// Specifies the allocated storage size in gigabytes (GB).
+	// Allocated storage size in gigabytes (GB).
 	AllocatedStorage *float64 `json:"allocatedStorage,omitempty" tf:"allocated_storage,omitempty"`
 
-	// Specifies the name of the Availability Zone the DB instance was located in at the time of the DB snapshot.
+	// Name of the Availability Zone the DB instance was located in at the time of the DB snapshot.
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
-	// The DB Instance Identifier from which to take the snapshot.
+	// DB instance identifier from which to take the snapshot.
 	DBInstanceIdentifier *string `json:"dbInstanceIdentifier,omitempty" tf:"db_instance_identifier,omitempty"`
 
 	// ARN for the DB snapshot.
 	DBSnapshotArn *string `json:"dbSnapshotArn,omitempty" tf:"db_snapshot_arn,omitempty"`
 
-	// Specifies whether the DB snapshot is encrypted.
+	// Whether the DB snapshot is encrypted.
 	Encrypted *bool `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
 
-	// Specifies the name of the database engine.
+	// Name of the database engine.
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
 
-	// Specifies the version of the database engine.
+	// Version of the database engine.
 	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Specifies the Provisioned IOPS (I/O operations per second) value of the DB instance at the time of the snapshot.
+	// Provisioned IOPS (I/O operations per second) value of the DB instance at the time of the snapshot.
 	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
-	// The ARN for the KMS encryption key.
+	// ARN for the KMS encryption key.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
 	// License model information for the restored DB instance.
@@ -74,6 +74,7 @@ type SnapshotObservation struct {
 	// Provides the option group name for the DB snapshot.
 	OptionGroupName *string `json:"optionGroupName,omitempty" tf:"option_group_name,omitempty"`
 
+	// Port that the DB snapshot listens on.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -84,25 +85,26 @@ type SnapshotObservation struct {
 	// +listType=set
 	SharedAccounts []*string `json:"sharedAccounts,omitempty" tf:"shared_accounts,omitempty"`
 
+	// Type of the DB snapshot.
 	SnapshotType *string `json:"snapshotType,omitempty" tf:"snapshot_type,omitempty"`
 
-	// The DB snapshot Arn that the DB snapshot was copied from. It only has value in case of cross customer or cross region copy.
+	// DB snapshot ARN that the DB snapshot was copied from. It only has value in case of cross customer or cross region copy.
 	SourceDBSnapshotIdentifier *string `json:"sourceDbSnapshotIdentifier,omitempty" tf:"source_db_snapshot_identifier,omitempty"`
 
-	// The region that the DB snapshot was created in or copied from.
+	// Region that the DB snapshot was created in or copied from.
 	SourceRegion *string `json:"sourceRegion,omitempty" tf:"source_region,omitempty"`
 
-	// Specifies the status of this DB snapshot.
+	// Status of this DB snapshot.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
-	// Specifies the storage type associated with DB snapshot.
+	// Storage type associated with DB snapshot.
 	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
@@ -112,7 +114,7 @@ type SnapshotObservation struct {
 
 type SnapshotParameters struct {
 
-	// The DB Instance Identifier from which to take the snapshot.
+	// DB instance identifier from which to take the snapshot.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/rds/v1beta1.Instance
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("identifier",false)
 	// +kubebuilder:validation:Optional

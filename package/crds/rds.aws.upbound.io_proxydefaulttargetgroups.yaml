@@ -651,15 +651,15 @@ spec:
               forProvider:
                 properties:
                   connectionPoolConfig:
-                    description: The settings that determine the size and behavior
-                      of the connection pool for the target group.
+                    description: Settings that determine the size and behavior of
+                      the connection pool for the target group. See connection_pool_config
+                      Block for details.
                     properties:
                       connectionBorrowTimeout:
-                        description: The number of seconds for a proxy to wait for
-                          a connection to become available in the connection pool.
-                          Only applies when the proxy has opened its maximum number
-                          of connections and all connections are busy with client
-                          sessions.
+                        description: Number of seconds for a proxy to wait for a connection
+                          to become available in the connection pool. Only applies
+                          when the proxy has opened its maximum number of connections
+                          and all connections are busy with client sessions.
                         type: number
                       initQuery:
                         description: One or more SQL statements for the proxy to run
@@ -671,7 +671,7 @@ spec:
                           variables in a single SET statement, such as SET x=1, y=2.
                         type: string
                       maxConnectionsPercent:
-                        description: The maximum size of the connection pool for each
+                        description: Maximum size of the connection pool for each
                           target in a target group. For Aurora MySQL, it is expressed
                           as a percentage of the max_connections setting for the RDS
                           DB instance or Aurora DB cluster used by the target group.
@@ -798,15 +798,15 @@ spec:
                   autoscaler.
                 properties:
                   connectionPoolConfig:
-                    description: The settings that determine the size and behavior
-                      of the connection pool for the target group.
+                    description: Settings that determine the size and behavior of
+                      the connection pool for the target group. See connection_pool_config
+                      Block for details.
                     properties:
                       connectionBorrowTimeout:
-                        description: The number of seconds for a proxy to wait for
-                          a connection to become available in the connection pool.
-                          Only applies when the proxy has opened its maximum number
-                          of connections and all connections are busy with client
-                          sessions.
+                        description: Number of seconds for a proxy to wait for a connection
+                          to become available in the connection pool. Only applies
+                          when the proxy has opened its maximum number of connections
+                          and all connections are busy with client sessions.
                         type: number
                       initQuery:
                         description: One or more SQL statements for the proxy to run
@@ -818,7 +818,7 @@ spec:
                           variables in a single SET statement, such as SET x=1, y=2.
                         type: string
                       maxConnectionsPercent:
-                        description: The maximum size of the connection pool for each
+                        description: Maximum size of the connection pool for each
                           target in a target group. For Aurora MySQL, it is expressed
                           as a percentage of the max_connections setting for the RDS
                           DB instance or Aurora DB cluster used by the target group.
@@ -1020,15 +1020,15 @@ spec:
                     description: ARN representing the target group.
                     type: string
                   connectionPoolConfig:
-                    description: The settings that determine the size and behavior
-                      of the connection pool for the target group.
+                    description: Settings that determine the size and behavior of
+                      the connection pool for the target group. See connection_pool_config
+                      Block for details.
                     properties:
                       connectionBorrowTimeout:
-                        description: The number of seconds for a proxy to wait for
-                          a connection to become available in the connection pool.
-                          Only applies when the proxy has opened its maximum number
-                          of connections and all connections are busy with client
-                          sessions.
+                        description: Number of seconds for a proxy to wait for a connection
+                          to become available in the connection pool. Only applies
+                          when the proxy has opened its maximum number of connections
+                          and all connections are busy with client sessions.
                         type: number
                       initQuery:
                         description: One or more SQL statements for the proxy to run
@@ -1040,7 +1040,7 @@ spec:
                           variables in a single SET statement, such as SET x=1, y=2.
                         type: string
                       maxConnectionsPercent:
-                        description: The maximum size of the connection pool for each
+                        description: Maximum size of the connection pool for each
                           target in a target group. For Aurora MySQL, it is expressed
                           as a percentage of the max_connections setting for the RDS
                           DB instance or Aurora DB cluster used by the target group.
@@ -1075,7 +1075,7 @@ spec:
                     description: Name of the RDS DB Proxy.
                     type: string
                   name:
-                    description: The name of the default target group.
+                    description: Name of the default target group.
                     type: string
                   region:
                     description: |-

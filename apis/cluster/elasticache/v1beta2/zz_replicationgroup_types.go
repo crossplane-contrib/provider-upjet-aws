@@ -158,10 +158,10 @@ type ReplicationGroupInitParameters struct {
 	// Strategy used when modifying auth_token or auth_token_wo on an existing replication group. Not used during initial create. Valid values are SET, ROTATE, and DELETE. If omitted during an auth token change, AWS defaults to ROTATE. If value is DELETE then auth_token and auth_token_wo must be omitted.
 	AuthTokenUpdateStrategy *string `json:"authTokenUpdateStrategy,omitempty" tf:"auth_token_update_strategy,omitempty"`
 
-	// Password used to access a password protected server, whose value will not be stored in state. Can be specified only if transit_encryption_enabled = true. Conflicts with auth_token. Requires auth_token_wo_version.
+	// Password used to access a password protected server, whose value will not be stored in state. Can be specified only if transit_encryption_enabled = true. Conflicts with auth_token. If set, requires auth_token_wo_version to be set.
 	AuthTokenWoSecretRef *v2.SecretKeySelector `json:"authTokenWoSecretRef,omitempty" tf:"-"`
 
-	// Integer that, when changed, triggers a re-send of auth_token_wo to the replication group. Requires auth_token_wo.
+	// Required when auth_token_wo is set. Changing this value triggers an update to auth_token_wo.
 	AuthTokenWoVersion *float64 `json:"authTokenWoVersion,omitempty" tf:"auth_token_wo_version,omitempty"`
 
 	// Specifies whether minor version engine upgrades will be applied automatically to the underlying Cache Cluster instances during the maintenance window.
@@ -357,7 +357,7 @@ type ReplicationGroupObservation struct {
 	// Strategy used when modifying auth_token or auth_token_wo on an existing replication group. Not used during initial create. Valid values are SET, ROTATE, and DELETE. If omitted during an auth token change, AWS defaults to ROTATE. If value is DELETE then auth_token and auth_token_wo must be omitted.
 	AuthTokenUpdateStrategy *string `json:"authTokenUpdateStrategy,omitempty" tf:"auth_token_update_strategy,omitempty"`
 
-	// Integer that, when changed, triggers a re-send of auth_token_wo to the replication group. Requires auth_token_wo.
+	// Required when auth_token_wo is set. Changing this value triggers an update to auth_token_wo.
 	AuthTokenWoVersion *float64 `json:"authTokenWoVersion,omitempty" tf:"auth_token_wo_version,omitempty"`
 
 	// Specifies whether minor version engine upgrades will be applied automatically to the underlying Cache Cluster instances during the maintenance window.
@@ -549,11 +549,11 @@ type ReplicationGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	AuthTokenUpdateStrategy *string `json:"authTokenUpdateStrategy,omitempty" tf:"auth_token_update_strategy,omitempty"`
 
-	// Password used to access a password protected server, whose value will not be stored in state. Can be specified only if transit_encryption_enabled = true. Conflicts with auth_token. Requires auth_token_wo_version.
+	// Password used to access a password protected server, whose value will not be stored in state. Can be specified only if transit_encryption_enabled = true. Conflicts with auth_token. If set, requires auth_token_wo_version to be set.
 	// +kubebuilder:validation:Optional
 	AuthTokenWoSecretRef *v2.SecretKeySelector `json:"authTokenWoSecretRef,omitempty" tf:"-"`
 
-	// Integer that, when changed, triggers a re-send of auth_token_wo to the replication group. Requires auth_token_wo.
+	// Required when auth_token_wo is set. Changing this value triggers an update to auth_token_wo.
 	// +kubebuilder:validation:Optional
 	AuthTokenWoVersion *float64 `json:"authTokenWoVersion,omitempty" tf:"auth_token_wo_version,omitempty"`
 

@@ -16,15 +16,15 @@ import (
 type APIKeyCredentialProviderInitParameters struct {
 	APIKeySecretConfig *APIKeySecretConfigInitParameters `json:"apiKeySecretConfig,omitempty" tf:"api_key_secret_config,omitempty"`
 
-	// API key value. Cannot be used with api_key_wo.
+	// API key value. Conflicts with api_key_wo.
 	APIKeySecretRef *v2.SecretKeySelector `json:"apiKeySecretRef,omitempty" tf:"-"`
 
 	APIKeySecretSource *string `json:"apiKeySecretSource,omitempty" tf:"api_key_secret_source,omitempty"`
 
-	// Write-only API key value. Cannot be used with api_key. Must be used together with api_key_wo_version.
+	// Write-only API key value. Conflicts with api_key. If set, requires api_key_wo_version to be set.
 	APIKeyWoSecretRef *v2.SecretKeySelector `json:"apiKeyWoSecretRef,omitempty" tf:"-"`
 
-	// Used together with api_key_wo to trigger an update. Increment this value when an update to api_key_wo is required.
+	// Required when api_key_wo is set. Changing this value triggers an update to api_key_wo.
 	APIKeyWoVersion *float64 `json:"apiKeyWoVersion,omitempty" tf:"api_key_wo_version,omitempty"`
 
 	// Key-value map of resource tags.
@@ -41,7 +41,7 @@ type APIKeyCredentialProviderObservation struct {
 
 	APIKeySecretSource *string `json:"apiKeySecretSource,omitempty" tf:"api_key_secret_source,omitempty"`
 
-	// Used together with api_key_wo to trigger an update. Increment this value when an update to api_key_wo is required.
+	// Required when api_key_wo is set. Changing this value triggers an update to api_key_wo.
 	APIKeyWoVersion *float64 `json:"apiKeyWoVersion,omitempty" tf:"api_key_wo_version,omitempty"`
 
 	// ARN of the API Key credential provider.
@@ -70,18 +70,18 @@ type APIKeyCredentialProviderParameters struct {
 	// +kubebuilder:validation:Optional
 	APIKeySecretConfig *APIKeySecretConfigParameters `json:"apiKeySecretConfig,omitempty" tf:"api_key_secret_config,omitempty"`
 
-	// API key value. Cannot be used with api_key_wo.
+	// API key value. Conflicts with api_key_wo.
 	// +kubebuilder:validation:Optional
 	APIKeySecretRef *v2.SecretKeySelector `json:"apiKeySecretRef,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
 	APIKeySecretSource *string `json:"apiKeySecretSource,omitempty" tf:"api_key_secret_source,omitempty"`
 
-	// Write-only API key value. Cannot be used with api_key. Must be used together with api_key_wo_version.
+	// Write-only API key value. Conflicts with api_key. If set, requires api_key_wo_version to be set.
 	// +kubebuilder:validation:Optional
 	APIKeyWoSecretRef *v2.SecretKeySelector `json:"apiKeyWoSecretRef,omitempty" tf:"-"`
 
-	// Used together with api_key_wo to trigger an update. Increment this value when an update to api_key_wo is required.
+	// Required when api_key_wo is set. Changing this value triggers an update to api_key_wo.
 	// +kubebuilder:validation:Optional
 	APIKeyWoVersion *float64 `json:"apiKeyWoVersion,omitempty" tf:"api_key_wo_version,omitempty"`
 

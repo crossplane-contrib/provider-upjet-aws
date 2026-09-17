@@ -15,7 +15,7 @@ import (
 
 type SubnetGroupInitParameters struct {
 
-	// The description of the DB subnet group.
+	// Description of the DB subnet group.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// References to Subnet in ec2 to populate subnetIds.
@@ -26,7 +26,7 @@ type SubnetGroupInitParameters struct {
 	// +kubebuilder:validation:Optional
 	SubnetIDSelector *v2.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 
-	// A list of VPC subnet IDs.
+	// List of VPC subnet IDs.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:refFieldName=SubnetIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SubnetIDSelector
@@ -40,24 +40,24 @@ type SubnetGroupInitParameters struct {
 
 type SubnetGroupObservation struct {
 
-	// The ARN of the db subnet group.
+	// ARN of the db subnet group.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The description of the DB subnet group.
+	// Description of the DB subnet group.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The db subnet group name.
+	// DB subnet group name.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// A list of VPC subnet IDs.
+	// List of VPC subnet IDs.
 	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
-	// The network type of the db subnet group.
+	// Network type of the db subnet group.
 	// +listType=set
 	SupportedNetworkTypes []*string `json:"supportedNetworkTypes,omitempty" tf:"supported_network_types,omitempty"`
 
@@ -65,7 +65,7 @@ type SubnetGroupObservation struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
@@ -75,7 +75,7 @@ type SubnetGroupObservation struct {
 
 type SubnetGroupParameters struct {
 
-	// The description of the DB subnet group.
+	// Description of the DB subnet group.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
@@ -92,7 +92,7 @@ type SubnetGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	SubnetIDSelector *v2.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 
-	// A list of VPC subnet IDs.
+	// List of VPC subnet IDs.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:refFieldName=SubnetIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SubnetIDSelector
