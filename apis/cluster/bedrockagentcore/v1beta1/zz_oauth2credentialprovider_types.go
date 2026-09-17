@@ -126,7 +126,17 @@ type ClientSecretConfigInitParameters struct {
 	JSONKey *string `json:"jsonKey,omitempty" tf:"json_key,omitempty"`
 
 	// ID of the AWS Secrets Manager secret that stores the client secret value.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/secretsmanager/v1beta1.Secret
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	SecretID *string `json:"secretId,omitempty" tf:"secret_id,omitempty"`
+
+	// Reference to a Secret in secretsmanager to populate secretId.
+	// +kubebuilder:validation:Optional
+	SecretIDRef *v2.Reference `json:"secretIdRef,omitempty" tf:"-"`
+
+	// Selector for a Secret in secretsmanager to populate secretId.
+	// +kubebuilder:validation:Optional
+	SecretIDSelector *v2.Selector `json:"secretIdSelector,omitempty" tf:"-"`
 }
 
 type ClientSecretConfigObservation struct {
@@ -145,8 +155,18 @@ type ClientSecretConfigParameters struct {
 	JSONKey *string `json:"jsonKey" tf:"json_key,omitempty"`
 
 	// ID of the AWS Secrets Manager secret that stores the client secret value.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/secretsmanager/v1beta1.Secret
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
-	SecretID *string `json:"secretId" tf:"secret_id,omitempty"`
+	SecretID *string `json:"secretId,omitempty" tf:"secret_id,omitempty"`
+
+	// Reference to a Secret in secretsmanager to populate secretId.
+	// +kubebuilder:validation:Optional
+	SecretIDRef *v2.Reference `json:"secretIdRef,omitempty" tf:"-"`
+
+	// Selector for a Secret in secretsmanager to populate secretId.
+	// +kubebuilder:validation:Optional
+	SecretIDSelector *v2.Selector `json:"secretIdSelector,omitempty" tf:"-"`
 }
 
 type CustomOauth2ProviderConfigClientSecretConfigInitParameters struct {
@@ -155,7 +175,17 @@ type CustomOauth2ProviderConfigClientSecretConfigInitParameters struct {
 	JSONKey *string `json:"jsonKey,omitempty" tf:"json_key,omitempty"`
 
 	// ID of the AWS Secrets Manager secret that stores the client secret value.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/secretsmanager/v1beta1.Secret
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	SecretID *string `json:"secretId,omitempty" tf:"secret_id,omitempty"`
+
+	// Reference to a Secret in secretsmanager to populate secretId.
+	// +kubebuilder:validation:Optional
+	SecretIDRef *v2.Reference `json:"secretIdRef,omitempty" tf:"-"`
+
+	// Selector for a Secret in secretsmanager to populate secretId.
+	// +kubebuilder:validation:Optional
+	SecretIDSelector *v2.Selector `json:"secretIdSelector,omitempty" tf:"-"`
 }
 
 type CustomOauth2ProviderConfigClientSecretConfigObservation struct {
@@ -174,8 +204,18 @@ type CustomOauth2ProviderConfigClientSecretConfigParameters struct {
 	JSONKey *string `json:"jsonKey" tf:"json_key,omitempty"`
 
 	// ID of the AWS Secrets Manager secret that stores the client secret value.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/secretsmanager/v1beta1.Secret
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
-	SecretID *string `json:"secretId" tf:"secret_id,omitempty"`
+	SecretID *string `json:"secretId,omitempty" tf:"secret_id,omitempty"`
+
+	// Reference to a Secret in secretsmanager to populate secretId.
+	// +kubebuilder:validation:Optional
+	SecretIDRef *v2.Reference `json:"secretIdRef,omitempty" tf:"-"`
+
+	// Selector for a Secret in secretsmanager to populate secretId.
+	// +kubebuilder:validation:Optional
+	SecretIDSelector *v2.Selector `json:"secretIdSelector,omitempty" tf:"-"`
 }
 
 type CustomOauth2ProviderConfigInitParameters struct {
@@ -463,7 +503,17 @@ type GithubOauth2ProviderConfigClientSecretConfigInitParameters struct {
 	JSONKey *string `json:"jsonKey,omitempty" tf:"json_key,omitempty"`
 
 	// ID of the AWS Secrets Manager secret that stores the client secret value.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/secretsmanager/v1beta1.Secret
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	SecretID *string `json:"secretId,omitempty" tf:"secret_id,omitempty"`
+
+	// Reference to a Secret in secretsmanager to populate secretId.
+	// +kubebuilder:validation:Optional
+	SecretIDRef *v2.Reference `json:"secretIdRef,omitempty" tf:"-"`
+
+	// Selector for a Secret in secretsmanager to populate secretId.
+	// +kubebuilder:validation:Optional
+	SecretIDSelector *v2.Selector `json:"secretIdSelector,omitempty" tf:"-"`
 }
 
 type GithubOauth2ProviderConfigClientSecretConfigObservation struct {
@@ -482,8 +532,18 @@ type GithubOauth2ProviderConfigClientSecretConfigParameters struct {
 	JSONKey *string `json:"jsonKey" tf:"json_key,omitempty"`
 
 	// ID of the AWS Secrets Manager secret that stores the client secret value.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/secretsmanager/v1beta1.Secret
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
-	SecretID *string `json:"secretId" tf:"secret_id,omitempty"`
+	SecretID *string `json:"secretId,omitempty" tf:"secret_id,omitempty"`
+
+	// Reference to a Secret in secretsmanager to populate secretId.
+	// +kubebuilder:validation:Optional
+	SecretIDRef *v2.Reference `json:"secretIdRef,omitempty" tf:"-"`
+
+	// Selector for a Secret in secretsmanager to populate secretId.
+	// +kubebuilder:validation:Optional
+	SecretIDSelector *v2.Selector `json:"secretIdSelector,omitempty" tf:"-"`
 }
 
 type GithubOauth2ProviderConfigInitParameters struct {
@@ -602,7 +662,17 @@ type GoogleOauth2ProviderConfigClientSecretConfigInitParameters struct {
 	JSONKey *string `json:"jsonKey,omitempty" tf:"json_key,omitempty"`
 
 	// ID of the AWS Secrets Manager secret that stores the client secret value.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/secretsmanager/v1beta1.Secret
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	SecretID *string `json:"secretId,omitempty" tf:"secret_id,omitempty"`
+
+	// Reference to a Secret in secretsmanager to populate secretId.
+	// +kubebuilder:validation:Optional
+	SecretIDRef *v2.Reference `json:"secretIdRef,omitempty" tf:"-"`
+
+	// Selector for a Secret in secretsmanager to populate secretId.
+	// +kubebuilder:validation:Optional
+	SecretIDSelector *v2.Selector `json:"secretIdSelector,omitempty" tf:"-"`
 }
 
 type GoogleOauth2ProviderConfigClientSecretConfigObservation struct {
@@ -621,8 +691,18 @@ type GoogleOauth2ProviderConfigClientSecretConfigParameters struct {
 	JSONKey *string `json:"jsonKey" tf:"json_key,omitempty"`
 
 	// ID of the AWS Secrets Manager secret that stores the client secret value.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/secretsmanager/v1beta1.Secret
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
-	SecretID *string `json:"secretId" tf:"secret_id,omitempty"`
+	SecretID *string `json:"secretId,omitempty" tf:"secret_id,omitempty"`
+
+	// Reference to a Secret in secretsmanager to populate secretId.
+	// +kubebuilder:validation:Optional
+	SecretIDRef *v2.Reference `json:"secretIdRef,omitempty" tf:"-"`
+
+	// Selector for a Secret in secretsmanager to populate secretId.
+	// +kubebuilder:validation:Optional
+	SecretIDSelector *v2.Selector `json:"secretIdSelector,omitempty" tf:"-"`
 }
 
 type GoogleOauth2ProviderConfigInitParameters struct {
@@ -741,7 +821,17 @@ type IncludedOauth2ProviderConfigClientSecretConfigInitParameters struct {
 	JSONKey *string `json:"jsonKey,omitempty" tf:"json_key,omitempty"`
 
 	// ID of the AWS Secrets Manager secret that stores the client secret value.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/secretsmanager/v1beta1.Secret
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	SecretID *string `json:"secretId,omitempty" tf:"secret_id,omitempty"`
+
+	// Reference to a Secret in secretsmanager to populate secretId.
+	// +kubebuilder:validation:Optional
+	SecretIDRef *v2.Reference `json:"secretIdRef,omitempty" tf:"-"`
+
+	// Selector for a Secret in secretsmanager to populate secretId.
+	// +kubebuilder:validation:Optional
+	SecretIDSelector *v2.Selector `json:"secretIdSelector,omitempty" tf:"-"`
 }
 
 type IncludedOauth2ProviderConfigClientSecretConfigObservation struct {
@@ -760,8 +850,18 @@ type IncludedOauth2ProviderConfigClientSecretConfigParameters struct {
 	JSONKey *string `json:"jsonKey" tf:"json_key,omitempty"`
 
 	// ID of the AWS Secrets Manager secret that stores the client secret value.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/secretsmanager/v1beta1.Secret
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
-	SecretID *string `json:"secretId" tf:"secret_id,omitempty"`
+	SecretID *string `json:"secretId,omitempty" tf:"secret_id,omitempty"`
+
+	// Reference to a Secret in secretsmanager to populate secretId.
+	// +kubebuilder:validation:Optional
+	SecretIDRef *v2.Reference `json:"secretIdRef,omitempty" tf:"-"`
+
+	// Selector for a Secret in secretsmanager to populate secretId.
+	// +kubebuilder:validation:Optional
+	SecretIDSelector *v2.Selector `json:"secretIdSelector,omitempty" tf:"-"`
 }
 
 type IncludedOauth2ProviderConfigInitParameters struct {
@@ -924,7 +1024,17 @@ type LinkedinOauth2ProviderConfigClientSecretConfigInitParameters struct {
 	JSONKey *string `json:"jsonKey,omitempty" tf:"json_key,omitempty"`
 
 	// ID of the AWS Secrets Manager secret that stores the client secret value.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/secretsmanager/v1beta1.Secret
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	SecretID *string `json:"secretId,omitempty" tf:"secret_id,omitempty"`
+
+	// Reference to a Secret in secretsmanager to populate secretId.
+	// +kubebuilder:validation:Optional
+	SecretIDRef *v2.Reference `json:"secretIdRef,omitempty" tf:"-"`
+
+	// Selector for a Secret in secretsmanager to populate secretId.
+	// +kubebuilder:validation:Optional
+	SecretIDSelector *v2.Selector `json:"secretIdSelector,omitempty" tf:"-"`
 }
 
 type LinkedinOauth2ProviderConfigClientSecretConfigObservation struct {
@@ -943,8 +1053,18 @@ type LinkedinOauth2ProviderConfigClientSecretConfigParameters struct {
 	JSONKey *string `json:"jsonKey" tf:"json_key,omitempty"`
 
 	// ID of the AWS Secrets Manager secret that stores the client secret value.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/secretsmanager/v1beta1.Secret
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
-	SecretID *string `json:"secretId" tf:"secret_id,omitempty"`
+	SecretID *string `json:"secretId,omitempty" tf:"secret_id,omitempty"`
+
+	// Reference to a Secret in secretsmanager to populate secretId.
+	// +kubebuilder:validation:Optional
+	SecretIDRef *v2.Reference `json:"secretIdRef,omitempty" tf:"-"`
+
+	// Selector for a Secret in secretsmanager to populate secretId.
+	// +kubebuilder:validation:Optional
+	SecretIDSelector *v2.Selector `json:"secretIdSelector,omitempty" tf:"-"`
 }
 
 type LinkedinOauth2ProviderConfigInitParameters struct {
@@ -1063,7 +1183,17 @@ type MicrosoftOauth2ProviderConfigClientSecretConfigInitParameters struct {
 	JSONKey *string `json:"jsonKey,omitempty" tf:"json_key,omitempty"`
 
 	// ID of the AWS Secrets Manager secret that stores the client secret value.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/secretsmanager/v1beta1.Secret
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	SecretID *string `json:"secretId,omitempty" tf:"secret_id,omitempty"`
+
+	// Reference to a Secret in secretsmanager to populate secretId.
+	// +kubebuilder:validation:Optional
+	SecretIDRef *v2.Reference `json:"secretIdRef,omitempty" tf:"-"`
+
+	// Selector for a Secret in secretsmanager to populate secretId.
+	// +kubebuilder:validation:Optional
+	SecretIDSelector *v2.Selector `json:"secretIdSelector,omitempty" tf:"-"`
 }
 
 type MicrosoftOauth2ProviderConfigClientSecretConfigObservation struct {
@@ -1082,8 +1212,18 @@ type MicrosoftOauth2ProviderConfigClientSecretConfigParameters struct {
 	JSONKey *string `json:"jsonKey" tf:"json_key,omitempty"`
 
 	// ID of the AWS Secrets Manager secret that stores the client secret value.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/secretsmanager/v1beta1.Secret
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
-	SecretID *string `json:"secretId" tf:"secret_id,omitempty"`
+	SecretID *string `json:"secretId,omitempty" tf:"secret_id,omitempty"`
+
+	// Reference to a Secret in secretsmanager to populate secretId.
+	// +kubebuilder:validation:Optional
+	SecretIDRef *v2.Reference `json:"secretIdRef,omitempty" tf:"-"`
+
+	// Selector for a Secret in secretsmanager to populate secretId.
+	// +kubebuilder:validation:Optional
+	SecretIDSelector *v2.Selector `json:"secretIdSelector,omitempty" tf:"-"`
 }
 
 type MicrosoftOauth2ProviderConfigInitParameters struct {
@@ -1712,7 +1852,17 @@ type SalesforceOauth2ProviderConfigClientSecretConfigInitParameters struct {
 	JSONKey *string `json:"jsonKey,omitempty" tf:"json_key,omitempty"`
 
 	// ID of the AWS Secrets Manager secret that stores the client secret value.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/secretsmanager/v1beta1.Secret
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	SecretID *string `json:"secretId,omitempty" tf:"secret_id,omitempty"`
+
+	// Reference to a Secret in secretsmanager to populate secretId.
+	// +kubebuilder:validation:Optional
+	SecretIDRef *v2.Reference `json:"secretIdRef,omitempty" tf:"-"`
+
+	// Selector for a Secret in secretsmanager to populate secretId.
+	// +kubebuilder:validation:Optional
+	SecretIDSelector *v2.Selector `json:"secretIdSelector,omitempty" tf:"-"`
 }
 
 type SalesforceOauth2ProviderConfigClientSecretConfigObservation struct {
@@ -1731,8 +1881,18 @@ type SalesforceOauth2ProviderConfigClientSecretConfigParameters struct {
 	JSONKey *string `json:"jsonKey" tf:"json_key,omitempty"`
 
 	// ID of the AWS Secrets Manager secret that stores the client secret value.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/secretsmanager/v1beta1.Secret
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
-	SecretID *string `json:"secretId" tf:"secret_id,omitempty"`
+	SecretID *string `json:"secretId,omitempty" tf:"secret_id,omitempty"`
+
+	// Reference to a Secret in secretsmanager to populate secretId.
+	// +kubebuilder:validation:Optional
+	SecretIDRef *v2.Reference `json:"secretIdRef,omitempty" tf:"-"`
+
+	// Selector for a Secret in secretsmanager to populate secretId.
+	// +kubebuilder:validation:Optional
+	SecretIDSelector *v2.Selector `json:"secretIdSelector,omitempty" tf:"-"`
 }
 
 type SalesforceOauth2ProviderConfigInitParameters struct {
@@ -1851,7 +2011,17 @@ type SlackOauth2ProviderConfigClientSecretConfigInitParameters struct {
 	JSONKey *string `json:"jsonKey,omitempty" tf:"json_key,omitempty"`
 
 	// ID of the AWS Secrets Manager secret that stores the client secret value.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/secretsmanager/v1beta1.Secret
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	SecretID *string `json:"secretId,omitempty" tf:"secret_id,omitempty"`
+
+	// Reference to a Secret in secretsmanager to populate secretId.
+	// +kubebuilder:validation:Optional
+	SecretIDRef *v2.Reference `json:"secretIdRef,omitempty" tf:"-"`
+
+	// Selector for a Secret in secretsmanager to populate secretId.
+	// +kubebuilder:validation:Optional
+	SecretIDSelector *v2.Selector `json:"secretIdSelector,omitempty" tf:"-"`
 }
 
 type SlackOauth2ProviderConfigClientSecretConfigObservation struct {
@@ -1870,8 +2040,18 @@ type SlackOauth2ProviderConfigClientSecretConfigParameters struct {
 	JSONKey *string `json:"jsonKey" tf:"json_key,omitempty"`
 
 	// ID of the AWS Secrets Manager secret that stores the client secret value.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/secretsmanager/v1beta1.Secret
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
-	SecretID *string `json:"secretId" tf:"secret_id,omitempty"`
+	SecretID *string `json:"secretId,omitempty" tf:"secret_id,omitempty"`
+
+	// Reference to a Secret in secretsmanager to populate secretId.
+	// +kubebuilder:validation:Optional
+	SecretIDRef *v2.Reference `json:"secretIdRef,omitempty" tf:"-"`
+
+	// Selector for a Secret in secretsmanager to populate secretId.
+	// +kubebuilder:validation:Optional
+	SecretIDSelector *v2.Selector `json:"secretIdSelector,omitempty" tf:"-"`
 }
 
 type SlackOauth2ProviderConfigInitParameters struct {

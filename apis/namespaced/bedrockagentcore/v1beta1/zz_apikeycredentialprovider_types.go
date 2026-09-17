@@ -35,7 +35,7 @@ type APIKeyCredentialProviderInitParameters struct {
 type APIKeyCredentialProviderObservation struct {
 
 	// ARN of the AWS Secrets Manager secret containing the API key.
-	APIKeySecretArn []APIKeySecretArnObservation `json:"apiKeySecretArn,omitempty" tf:"api_key_secret_arn,omitempty"`
+	APIKeySecretArn *APIKeySecretArnObservation `json:"apiKeySecretArn,omitempty" tf:"api_key_secret_arn,omitempty"`
 
 	APIKeySecretConfig *APIKeySecretConfigObservation `json:"apiKeySecretConfig,omitempty" tf:"api_key_secret_config,omitempty"`
 
@@ -111,7 +111,17 @@ type APIKeySecretArnParameters struct {
 type APIKeySecretConfigInitParameters struct {
 	JSONKey *string `json:"jsonKey,omitempty" tf:"json_key,omitempty"`
 
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/secretsmanager/v1beta1.Secret
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	SecretID *string `json:"secretId,omitempty" tf:"secret_id,omitempty"`
+
+	// Reference to a Secret in secretsmanager to populate secretId.
+	// +kubebuilder:validation:Optional
+	SecretIDRef *v2.NamespacedReference `json:"secretIdRef,omitempty" tf:"-"`
+
+	// Selector for a Secret in secretsmanager to populate secretId.
+	// +kubebuilder:validation:Optional
+	SecretIDSelector *v2.NamespacedSelector `json:"secretIdSelector,omitempty" tf:"-"`
 }
 
 type APIKeySecretConfigObservation struct {
@@ -125,8 +135,18 @@ type APIKeySecretConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	JSONKey *string `json:"jsonKey" tf:"json_key,omitempty"`
 
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/secretsmanager/v1beta1.Secret
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
-	SecretID *string `json:"secretId" tf:"secret_id,omitempty"`
+	SecretID *string `json:"secretId,omitempty" tf:"secret_id,omitempty"`
+
+	// Reference to a Secret in secretsmanager to populate secretId.
+	// +kubebuilder:validation:Optional
+	SecretIDRef *v2.NamespacedReference `json:"secretIdRef,omitempty" tf:"-"`
+
+	// Selector for a Secret in secretsmanager to populate secretId.
+	// +kubebuilder:validation:Optional
+	SecretIDSelector *v2.NamespacedSelector `json:"secretIdSelector,omitempty" tf:"-"`
 }
 
 // APIKeyCredentialProviderSpec defines the desired state of APIKeyCredentialProvider
