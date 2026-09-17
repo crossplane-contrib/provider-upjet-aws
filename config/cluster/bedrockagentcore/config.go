@@ -49,7 +49,12 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_bedrockagentcore_api_key_credential_provider", func(r *config.Resource) {
 		r.TerraformResource.Schema["name"].Computed = true
 		r.TerraformResource.Schema["name"].Optional = false
+		r.AddSingletonListConversion("api_key_secret_arn", "apiKeySecretArn")
 		r.AddSingletonListConversion("api_key_secret_config", "apiKeySecretConfig")
+		r.References["api_key_secret_config.secret_id"] = config.Reference{
+			TerraformName: "aws_secretsmanager_secret",
+			Extractor:     common.PathARNExtractor,
+		}
 	})
 
 	// aws_bedrockagentcore_browser
@@ -337,6 +342,44 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_bedrockagentcore_oauth2_credential_provider", func(r *config.Resource) {
 		r.TerraformResource.Schema["name"].Computed = true
 		r.TerraformResource.Schema["name"].Optional = false
+
+		r.References["oauth2_provider_config.atlassian_oauth2_provider_config.client_secret_config.secret_id"] = config.Reference{
+			TerraformName: "aws_secretsmanager_secret",
+			Extractor:     common.PathARNExtractor,
+		}
+
+		r.References["oauth2_provider_config.custom_oauth2_provider_config.client_secret_config.secret_id"] = config.Reference{
+			TerraformName: "aws_secretsmanager_secret",
+			Extractor:     common.PathARNExtractor,
+		}
+		r.References["oauth2_provider_config.github_oauth2_provider_config.client_secret_config.secret_id"] = config.Reference{
+			TerraformName: "aws_secretsmanager_secret",
+			Extractor:     common.PathARNExtractor,
+		}
+		r.References["oauth2_provider_config.google_oauth2_provider_config.client_secret_config.secret_id"] = config.Reference{
+			TerraformName: "aws_secretsmanager_secret",
+			Extractor:     common.PathARNExtractor,
+		}
+		r.References["oauth2_provider_config.included_oauth2_provider_config.client_secret_config.secret_id"] = config.Reference{
+			TerraformName: "aws_secretsmanager_secret",
+			Extractor:     common.PathARNExtractor,
+		}
+		r.References["oauth2_provider_config.linkedin_oauth2_provider_config.client_secret_config.secret_id"] = config.Reference{
+			TerraformName: "aws_secretsmanager_secret",
+			Extractor:     common.PathARNExtractor,
+		}
+		r.References["oauth2_provider_config.microsoft_oauth2_provider_config.client_secret_config.secret_id"] = config.Reference{
+			TerraformName: "aws_secretsmanager_secret",
+			Extractor:     common.PathARNExtractor,
+		}
+		r.References["oauth2_provider_config.salesforce_oauth2_provider_config.client_secret_config.secret_id"] = config.Reference{
+			TerraformName: "aws_secretsmanager_secret",
+			Extractor:     common.PathARNExtractor,
+		}
+		r.References["oauth2_provider_config.slack_oauth2_provider_config.client_secret_config.secret_id"] = config.Reference{
+			TerraformName: "aws_secretsmanager_secret",
+			Extractor:     common.PathARNExtractor,
+		}
 
 		r.AddSingletonListConversion("oauth2_provider_config", "oauth2ProviderConfig")
 		r.AddSingletonListConversion("oauth2_provider_config[*].atlassian_oauth2_provider_config", "oauth2ProviderConfig[*].atlassianOauth2ProviderConfig")
