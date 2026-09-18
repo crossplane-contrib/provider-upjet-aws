@@ -51,3 +51,21 @@ func (l *WorkspaceSAMLConfigurationList) GetItems() []resource.Managed {
 	}
 	return items
 }
+
+// GetItems of this WorkspaceServiceAccountList.
+func (l *WorkspaceServiceAccountList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this WorkspaceServiceAccountTokenList.
+func (l *WorkspaceServiceAccountTokenList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}

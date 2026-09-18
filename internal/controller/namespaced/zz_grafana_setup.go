@@ -14,6 +14,8 @@ import (
 	workspace "github.com/upbound/provider-aws/v2/internal/controller/namespaced/grafana/workspace"
 	workspaceapikey "github.com/upbound/provider-aws/v2/internal/controller/namespaced/grafana/workspaceapikey"
 	workspacesamlconfiguration "github.com/upbound/provider-aws/v2/internal/controller/namespaced/grafana/workspacesamlconfiguration"
+	workspaceserviceaccount "github.com/upbound/provider-aws/v2/internal/controller/namespaced/grafana/workspaceserviceaccount"
+	workspaceserviceaccounttoken "github.com/upbound/provider-aws/v2/internal/controller/namespaced/grafana/workspaceserviceaccounttoken"
 )
 
 // Setup_grafana creates all controllers with the supplied logger and adds them to
@@ -25,6 +27,8 @@ func Setup_grafana(mgr ctrl.Manager, o controller.Options) error {
 		workspace.Setup,
 		workspaceapikey.Setup,
 		workspacesamlconfiguration.Setup,
+		workspaceserviceaccount.Setup,
+		workspaceserviceaccounttoken.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err
@@ -42,6 +46,8 @@ func SetupGated_grafana(mgr ctrl.Manager, o controller.Options) error {
 		workspace.SetupGated,
 		workspaceapikey.SetupGated,
 		workspacesamlconfiguration.SetupGated,
+		workspaceserviceaccount.SetupGated,
+		workspaceserviceaccounttoken.SetupGated,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err
@@ -58,6 +64,8 @@ func SetupWebhookWithManager_grafana(mgr ctrl.Manager) error {
 		workspace.SetupWebhookWithManager,
 		workspaceapikey.SetupWebhookWithManager,
 		workspacesamlconfiguration.SetupWebhookWithManager,
+		workspaceserviceaccount.SetupWebhookWithManager,
+		workspaceserviceaccounttoken.SetupWebhookWithManager,
 	} {
 		if err := setup(mgr); err != nil {
 			return err

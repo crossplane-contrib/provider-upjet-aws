@@ -206,3 +206,83 @@ func (mg *WorkspaceSAMLConfiguration) SetProviderConfigReference(r *xpv2.Provide
 func (mg *WorkspaceSAMLConfiguration) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
+
+// GetCondition of this WorkspaceServiceAccount.
+func (mg *WorkspaceServiceAccount) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetManagementPolicies of this WorkspaceServiceAccount.
+func (mg *WorkspaceServiceAccount) GetManagementPolicies() xpv2.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this WorkspaceServiceAccount.
+func (mg *WorkspaceServiceAccount) GetProviderConfigReference() *xpv2.ProviderConfigReference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetWriteConnectionSecretToReference of this WorkspaceServiceAccount.
+func (mg *WorkspaceServiceAccount) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this WorkspaceServiceAccount.
+func (mg *WorkspaceServiceAccount) SetConditions(c ...xpv2.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetManagementPolicies of this WorkspaceServiceAccount.
+func (mg *WorkspaceServiceAccount) SetManagementPolicies(r xpv2.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this WorkspaceServiceAccount.
+func (mg *WorkspaceServiceAccount) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetWriteConnectionSecretToReference of this WorkspaceServiceAccount.
+func (mg *WorkspaceServiceAccount) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this WorkspaceServiceAccountToken.
+func (mg *WorkspaceServiceAccountToken) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetManagementPolicies of this WorkspaceServiceAccountToken.
+func (mg *WorkspaceServiceAccountToken) GetManagementPolicies() xpv2.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this WorkspaceServiceAccountToken.
+func (mg *WorkspaceServiceAccountToken) GetProviderConfigReference() *xpv2.ProviderConfigReference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetWriteConnectionSecretToReference of this WorkspaceServiceAccountToken.
+func (mg *WorkspaceServiceAccountToken) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this WorkspaceServiceAccountToken.
+func (mg *WorkspaceServiceAccountToken) SetConditions(c ...xpv2.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetManagementPolicies of this WorkspaceServiceAccountToken.
+func (mg *WorkspaceServiceAccountToken) SetManagementPolicies(r xpv2.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this WorkspaceServiceAccountToken.
+func (mg *WorkspaceServiceAccountToken) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetWriteConnectionSecretToReference of this WorkspaceServiceAccountToken.
+func (mg *WorkspaceServiceAccountToken) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}

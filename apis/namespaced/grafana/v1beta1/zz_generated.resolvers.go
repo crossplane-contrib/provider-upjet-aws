@@ -316,3 +316,147 @@ func (mg *WorkspaceSAMLConfiguration) ResolveReferences(ctx context.Context, c c
 
 	return nil
 }
+
+// ResolveReferences of this WorkspaceServiceAccount.
+func (mg *WorkspaceServiceAccount) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPINamespacedResolver(c, mg)
+
+	var rsp reference.NamespacedResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("grafana.aws.m.upbound.io", "v1beta1", "Workspace", "WorkspaceList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.WorkspaceID),
+			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.WorkspaceIDRef,
+			Selector:     mg.Spec.ForProvider.WorkspaceIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.WorkspaceID")
+	}
+	mg.Spec.ForProvider.WorkspaceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.WorkspaceIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("grafana.aws.m.upbound.io", "v1beta1", "Workspace", "WorkspaceList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.WorkspaceID),
+			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.WorkspaceIDRef,
+			Selector:     mg.Spec.InitProvider.WorkspaceIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.WorkspaceID")
+	}
+	mg.Spec.InitProvider.WorkspaceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.WorkspaceIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this WorkspaceServiceAccountToken.
+func (mg *WorkspaceServiceAccountToken) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPINamespacedResolver(c, mg)
+
+	var rsp reference.NamespacedResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("grafana.aws.m.upbound.io", "v1beta1", "WorkspaceServiceAccount", "WorkspaceServiceAccountList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ServiceAccountID),
+			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.ServiceAccountIDRef,
+			Selector:     mg.Spec.ForProvider.ServiceAccountIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ServiceAccountID")
+	}
+	mg.Spec.ForProvider.ServiceAccountID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ServiceAccountIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("grafana.aws.m.upbound.io", "v1beta1", "Workspace", "WorkspaceList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.WorkspaceID),
+			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.WorkspaceIDRef,
+			Selector:     mg.Spec.ForProvider.WorkspaceIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.WorkspaceID")
+	}
+	mg.Spec.ForProvider.WorkspaceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.WorkspaceIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("grafana.aws.m.upbound.io", "v1beta1", "WorkspaceServiceAccount", "WorkspaceServiceAccountList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ServiceAccountID),
+			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.ServiceAccountIDRef,
+			Selector:     mg.Spec.InitProvider.ServiceAccountIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ServiceAccountID")
+	}
+	mg.Spec.InitProvider.ServiceAccountID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ServiceAccountIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("grafana.aws.m.upbound.io", "v1beta1", "Workspace", "WorkspaceList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.WorkspaceID),
+			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.WorkspaceIDRef,
+			Selector:     mg.Spec.InitProvider.WorkspaceIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.WorkspaceID")
+	}
+	mg.Spec.InitProvider.WorkspaceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.WorkspaceIDRef = rsp.ResolvedReference
+
+	return nil
+}
