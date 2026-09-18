@@ -6,6 +6,9 @@ package efs
 
 import (
 	"github.com/crossplane/upjet/v2/pkg/config"
+	awspolicy "github.com/hashicorp/awspolicyequivalence"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
+	"github.com/pkg/errors"
 
 	"github.com/upbound/provider-aws/v2/config/namespaced/common"
 )
@@ -43,6 +46,7 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		r.References["file_system_id"] = config.Reference{
 			TerraformName: "aws_efs_file_system",
 		}
+		r.TerraformCustomDiff = fileSystemPolicyCustomDiff
 	})
 
 	p.AddResourceConfigurator("aws_efs_file_system", func(r *config.Resource) {
@@ -51,4 +55,34 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 			Extractor:     common.PathARNExtractor,
 		}
 	})
+}
+
+// fileSystemPolicyCustomDiff suppresses spurious "policy" diffs for
+// aws_efs_file_system_policy. AWS can return the policy document with a
+// different but semantically equivalent JSON representation (e.g. reordered
+// statements) than what was submitted. Without this, every observe sees a
+// diff, triggering an update on every reconcile and exhausting the EFS API
+// rate limit.
+func fileSystemPolicyCustomDiff(diff *terraform.InstanceDiff, _ *terraform.InstanceState, _ *terraform.ResourceConfig) (*terraform.InstanceDiff, error) {
+	if diff == nil || diff.Attributes["policy"] == nil || diff.Attributes["policy"].Old == "" || diff.Attributes["policy"].New == "" {
+		return diff, nil
+	}
+
+	vOld, err := common.RemovePolicyVersion(diff.Attributes["policy"].Old)
+	if err != nil {
+		return nil, errors.Wrap(err, "failed to remove Version from the old AWS policy document")
+	}
+	vNew, err := common.RemovePolicyVersion(diff.Attributes["policy"].New)
+	if err != nil {
+		return nil, errors.Wrap(err, "failed to remove Version from the new AWS policy document")
+	}
+
+	ok, err := awspolicy.PoliciesAreEquivalent(vOld, vNew)
+	if err != nil {
+		return nil, errors.Wrap(err, "failed to compare the old and the new AWS policy documents")
+	}
+	if ok {
+		delete(diff.Attributes, "policy")
+	}
+	return diff, nil
 }
