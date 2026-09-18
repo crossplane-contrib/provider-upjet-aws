@@ -35,4 +35,19 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_grafana_license_association", func(r *config.Resource) {
 		r.UseAsync = true
 	})
+
+	p.AddResourceConfigurator("aws_grafana_workspace_service_account", func(r *config.Resource) {
+		r.References["workspace_id"] = config.Reference{
+			TerraformName: "aws_grafana_workspace",
+		}
+	})
+
+	p.AddResourceConfigurator("aws_grafana_workspace_service_account_token", func(r *config.Resource) {
+		r.References["workspace_id"] = config.Reference{
+			TerraformName: "aws_grafana_workspace",
+		}
+		r.References["service_account_id"] = config.Reference{
+			TerraformName: "aws_grafana_workspace_service_account",
+		}
+	})
 }
