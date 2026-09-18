@@ -561,6 +561,8 @@ import (
 	workspacegrafana "github.com/upbound/provider-aws/v2/internal/controller/namespaced/grafana/workspace"
 	workspaceapikey "github.com/upbound/provider-aws/v2/internal/controller/namespaced/grafana/workspaceapikey"
 	workspacesamlconfiguration "github.com/upbound/provider-aws/v2/internal/controller/namespaced/grafana/workspacesamlconfiguration"
+	workspaceserviceaccount "github.com/upbound/provider-aws/v2/internal/controller/namespaced/grafana/workspaceserviceaccount"
+	workspaceserviceaccounttoken "github.com/upbound/provider-aws/v2/internal/controller/namespaced/grafana/workspaceserviceaccounttoken"
 	detector "github.com/upbound/provider-aws/v2/internal/controller/namespaced/guardduty/detector"
 	filter "github.com/upbound/provider-aws/v2/internal/controller/namespaced/guardduty/filter"
 	malwareprotectionplan "github.com/upbound/provider-aws/v2/internal/controller/namespaced/guardduty/malwareprotectionplan"
@@ -1629,6 +1631,8 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		workspacegrafana.Setup,
 		workspaceapikey.Setup,
 		workspacesamlconfiguration.Setup,
+		workspaceserviceaccount.Setup,
+		workspaceserviceaccounttoken.Setup,
 		detector.Setup,
 		filter.Setup,
 		malwareprotectionplan.Setup,
@@ -2703,6 +2707,8 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		workspacegrafana.SetupGated,
 		workspaceapikey.SetupGated,
 		workspacesamlconfiguration.SetupGated,
+		workspaceserviceaccount.SetupGated,
+		workspaceserviceaccounttoken.SetupGated,
 		detector.SetupGated,
 		filter.SetupGated,
 		malwareprotectionplan.SetupGated,
@@ -3776,6 +3782,8 @@ func SetupWebhookWithManager_monolith(mgr ctrl.Manager) error {
 		workspacegrafana.SetupWebhookWithManager,
 		workspaceapikey.SetupWebhookWithManager,
 		workspacesamlconfiguration.SetupWebhookWithManager,
+		workspaceserviceaccount.SetupWebhookWithManager,
+		workspaceserviceaccounttoken.SetupWebhookWithManager,
 		detector.SetupWebhookWithManager,
 		filter.SetupWebhookWithManager,
 		malwareprotectionplan.SetupWebhookWithManager,
