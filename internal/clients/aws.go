@@ -382,13 +382,11 @@ func configureNoForkAWSClient(ctx context.Context, ps *terraform.Setup, config *
 	if diags.HasError() {
 		return errors.Errorf("cannot construct TF AWS Client from TF AWS Config, %v", diags)
 	}
-	// accountID is already calculated/retrieved from Caller ID cache while
-	// obtaining AWS config. The terraform config is explicitly constructed
-	// to skip requesting account ID to prevent the extra STS call. Therefore,
-	// the resulting TF AWS Client has empty account ID.
-	// Fill with previously calculated account ID.
-	// No need for nil check on ps.ClientMetadata per golang spec.
-	tfAwsConnsClient.SetAccountID(ps.ClientMetadata[keyAccountID])
+	// Keep the Terraform client's account ID empty when explicitly requested
+	// by the ProviderConfig.
+	if !pc.Spec.SkipReqAccountId {
+		tfAwsConnsClient.SetAccountID(ps.ClientMetadata[keyAccountID])
+	}
 	ps.Meta = tfAwsConnsClient
 	fwProvider := xpprovider.GetFrameworkProviderWithMeta(&metaOnlyPrimary{meta: tfAwsConnsClient})
 	ps.FrameworkProvider = fwProvider
