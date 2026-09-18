@@ -1,0 +1,32 @@
+# SPDX-FileCopyrightText: 2026 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: apigatewayv2.aws.upbound.io/v1beta1
+kind: RoutingRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apigatewayv2/v1beta1/routingrule
+    upjet.upbound.io/manual-intervention: "Requires a custom domain name with a validated ACM certificate."
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+    # Routing rules dispatch requests arriving at a single custom domain name to
+    # different target REST APIs based on the Host header or the base path, so
+    # one domain can front many APIs instead of consuming one custom domain name
+    # quota slot per service.
+    domainName: example.com
+    condition:
+      - matchHeaders:
+          anyOf:
+            header: Host
+            valueGlob: my-service.*
+    action:
+      - invokeApi:
+          apiId: example-api-id
+          stage: example-stage
+          stripBasePath: false
+    priority: 1

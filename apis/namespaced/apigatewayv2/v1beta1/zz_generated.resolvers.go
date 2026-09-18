@@ -892,6 +892,106 @@ func (mg *RouteResponse) ResolveReferences(ctx context.Context, c client.Reader)
 	return nil
 }
 
+// ResolveReferences of this RoutingRule.
+func (mg *RoutingRule) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPINamespacedResolver(c, mg)
+
+	var rsp reference.NamespacedResolutionResponse
+	var err error
+
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Action); i3++ {
+		if mg.Spec.ForProvider.Action[i3].InvokeAPI != nil {
+			{
+				m, l, err = apisresolver.GetManagedResource("apigateway.aws.m.upbound.io", "v1beta1", "RestAPI", "RestAPIList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Action[i3].InvokeAPI.APIID),
+					Extract:      reference.ExternalName(),
+					Namespace:    mg.GetNamespace(),
+					Reference:    mg.Spec.ForProvider.Action[i3].InvokeAPI.APIIDRef,
+					Selector:     mg.Spec.ForProvider.Action[i3].InvokeAPI.APIIDSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.Action[i3].InvokeAPI.APIID")
+			}
+			mg.Spec.ForProvider.Action[i3].InvokeAPI.APIID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.Action[i3].InvokeAPI.APIIDRef = rsp.ResolvedReference
+
+		}
+	}
+	{
+		m, l, err = apisresolver.GetManagedResource("apigatewayv2.aws.m.upbound.io", "v1beta1", "DomainName", "DomainNameList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DomainName),
+			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.DomainNameRef,
+			Selector:     mg.Spec.ForProvider.DomainNameSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.DomainName")
+	}
+	mg.Spec.ForProvider.DomainName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DomainNameRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Action); i3++ {
+		if mg.Spec.InitProvider.Action[i3].InvokeAPI != nil {
+			{
+				m, l, err = apisresolver.GetManagedResource("apigateway.aws.m.upbound.io", "v1beta1", "RestAPI", "RestAPIList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Action[i3].InvokeAPI.APIID),
+					Extract:      reference.ExternalName(),
+					Namespace:    mg.GetNamespace(),
+					Reference:    mg.Spec.InitProvider.Action[i3].InvokeAPI.APIIDRef,
+					Selector:     mg.Spec.InitProvider.Action[i3].InvokeAPI.APIIDSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.Action[i3].InvokeAPI.APIID")
+			}
+			mg.Spec.InitProvider.Action[i3].InvokeAPI.APIID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.Action[i3].InvokeAPI.APIIDRef = rsp.ResolvedReference
+
+		}
+	}
+	{
+		m, l, err = apisresolver.GetManagedResource("apigatewayv2.aws.m.upbound.io", "v1beta1", "DomainName", "DomainNameList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DomainName),
+			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.DomainNameRef,
+			Selector:     mg.Spec.InitProvider.DomainNameSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.DomainName")
+	}
+	mg.Spec.InitProvider.DomainName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.DomainNameRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this Stage.
 func (mg *Stage) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed
