@@ -79,9 +79,9 @@ spec:
                       admin credentials secret.
                     type: string
                   adminUserPasswordSecretRef:
-                    description: |-
-                      The password of the administrator for the first database created in the namespace.
-                      Conflicts with manage_admin_password and admin_user_password_wo.
+                    description: The password of the administrator for the first database
+                      created in the namespace. Conflicts with manage_admin_password
+                      and admin_user_password_wo.
                     properties:
                       key:
                         description: The key to select.
@@ -98,14 +98,14 @@ spec:
                     - namespace
                     type: object
                   adminUserPasswordWo:
-                    description: |-
-                      The password of the administrator for the first database created in the namespace.
-                      Conflicts with manage_admin_password and admin_user_password.
+                    description: The password of the administrator for the first database
+                      created in the namespace. Conflicts with manage_admin_password
+                      and admin_user_password. If set, requires admin_user_password_wo_version
+                      to be set.
                     type: string
                   adminUserPasswordWoVersion:
-                    description: Used together with admin_user_password_wo to trigger
-                      an update. Increment this value when an update to the admin_user_password_wo
-                      is required
+                    description: Required when admin_user_password_wo is set. Changing
+                      this value triggers an update to admin_user_password_wo.
                     type: number
                   adminUsernameSecretRef:
                     description: The username of the administrator for the first database
@@ -376,9 +376,8 @@ spec:
                     type: array
                     x-kubernetes-list-type: set
                   manageAdminPassword:
-                    description: |-
-                      Whether to use AWS SecretManager to manage namespace's admin credentials.
-                      Conflicts with admin_user_password and admin_user_password_wo.
+                    description: Whether to use AWS SecretManager to manage namespace's
+                      admin credentials. Conflicts with admin_user_password and admin_user_password_wo.
                     type: boolean
                   region:
                     description: |-
@@ -412,9 +411,9 @@ spec:
                       admin credentials secret.
                     type: string
                   adminUserPasswordSecretRef:
-                    description: |-
-                      The password of the administrator for the first database created in the namespace.
-                      Conflicts with manage_admin_password and admin_user_password_wo.
+                    description: The password of the administrator for the first database
+                      created in the namespace. Conflicts with manage_admin_password
+                      and admin_user_password_wo.
                     properties:
                       key:
                         description: The key to select.
@@ -431,14 +430,14 @@ spec:
                     - namespace
                     type: object
                   adminUserPasswordWo:
-                    description: |-
-                      The password of the administrator for the first database created in the namespace.
-                      Conflicts with manage_admin_password and admin_user_password.
+                    description: The password of the administrator for the first database
+                      created in the namespace. Conflicts with manage_admin_password
+                      and admin_user_password. If set, requires admin_user_password_wo_version
+                      to be set.
                     type: string
                   adminUserPasswordWoVersion:
-                    description: Used together with admin_user_password_wo to trigger
-                      an update. Increment this value when an update to the admin_user_password_wo
-                      is required
+                    description: Required when admin_user_password_wo is set. Changing
+                      this value triggers an update to admin_user_password_wo.
                     type: number
                   adminUsernameSecretRef:
                     description: The username of the administrator for the first database
@@ -709,9 +708,8 @@ spec:
                     type: array
                     x-kubernetes-list-type: set
                   manageAdminPassword:
-                    description: |-
-                      Whether to use AWS SecretManager to manage namespace's admin credentials.
-                      Conflicts with admin_user_password and admin_user_password_wo.
+                    description: Whether to use AWS SecretManager to manage namespace's
+                      admin credentials. Conflicts with admin_user_password and admin_user_password_wo.
                     type: boolean
                   tags:
                     additionalProperties:
@@ -820,14 +818,14 @@ spec:
                       admin credentials secret.
                     type: string
                   adminUserPasswordWo:
-                    description: |-
-                      The password of the administrator for the first database created in the namespace.
-                      Conflicts with manage_admin_password and admin_user_password.
+                    description: The password of the administrator for the first database
+                      created in the namespace. Conflicts with manage_admin_password
+                      and admin_user_password. If set, requires admin_user_password_wo_version
+                      to be set.
                     type: string
                   adminUserPasswordWoVersion:
-                    description: Used together with admin_user_password_wo to trigger
-                      an update. Increment this value when an update to the admin_user_password_wo
-                      is required
+                    description: Required when admin_user_password_wo is set. Changing
+                      this value triggers an update to admin_user_password_wo.
                     type: number
                   arn:
                     description: ARN of the Redshift Serverless Namespace.
@@ -861,9 +859,8 @@ spec:
                     type: array
                     x-kubernetes-list-type: set
                   manageAdminPassword:
-                    description: |-
-                      Whether to use AWS SecretManager to manage namespace's admin credentials.
-                      Conflicts with admin_user_password and admin_user_password_wo.
+                    description: Whether to use AWS SecretManager to manage namespace's
+                      admin credentials. Conflicts with admin_user_password and admin_user_password_wo.
                     type: boolean
                   namespaceId:
                     description: The Redshift Namespace ID.

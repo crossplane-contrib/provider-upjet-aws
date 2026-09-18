@@ -15,13 +15,13 @@ import (
 
 type OptionGroupInitParameters struct {
 
-	// Specifies the name of the engine that this option group should be associated with.
+	// Name of the engine that this option group should be associated with.
 	EngineName *string `json:"engineName,omitempty" tf:"engine_name,omitempty"`
 
-	// Specifies the major version of the engine that this option group should be associated with.
+	// Major version of the engine that this option group should be associated with.
 	MajorEngineVersion *string `json:"majorEngineVersion,omitempty" tf:"major_engine_version,omitempty"`
 
-	// The options to apply. See option Block below for more details.
+	// Options to apply. See option Block below for more details.
 	Option []OptionInitParameters `json:"option,omitempty" tf:"option,omitempty"`
 
 	// Description of the option group.
@@ -39,16 +39,16 @@ type OptionGroupObservation struct {
 	// ARN of the DB option group.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// Specifies the name of the engine that this option group should be associated with.
+	// Name of the engine that this option group should be associated with.
 	EngineName *string `json:"engineName,omitempty" tf:"engine_name,omitempty"`
 
 	// DB option group name.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Specifies the major version of the engine that this option group should be associated with.
+	// Major version of the engine that this option group should be associated with.
 	MajorEngineVersion *string `json:"majorEngineVersion,omitempty" tf:"major_engine_version,omitempty"`
 
-	// The options to apply. See option Block below for more details.
+	// Options to apply. See option Block below for more details.
 	Option []OptionObservation `json:"option,omitempty" tf:"option,omitempty"`
 
 	// Description of the option group.
@@ -71,15 +71,15 @@ type OptionGroupObservation struct {
 
 type OptionGroupParameters struct {
 
-	// Specifies the name of the engine that this option group should be associated with.
+	// Name of the engine that this option group should be associated with.
 	// +kubebuilder:validation:Optional
 	EngineName *string `json:"engineName,omitempty" tf:"engine_name,omitempty"`
 
-	// Specifies the major version of the engine that this option group should be associated with.
+	// Major version of the engine that this option group should be associated with.
 	// +kubebuilder:validation:Optional
 	MajorEngineVersion *string `json:"majorEngineVersion,omitempty" tf:"major_engine_version,omitempty"`
 
-	// The options to apply. See option Block below for more details.
+	// Options to apply. See option Block below for more details.
 	// +kubebuilder:validation:Optional
 	Option []OptionParameters `json:"option,omitempty" tf:"option,omitempty"`
 
@@ -110,7 +110,7 @@ type OptionInitParameters struct {
 	// Name of the option (e.g., MEMCACHED).
 	OptionName *string `json:"optionName,omitempty" tf:"option_name,omitempty"`
 
-	// The option settings to apply. See option_settings Block below for more details.
+	// Option settings to apply. See option_settings Block below for more details.
 	OptionSettings []OptionSettingsInitParameters `json:"optionSettings,omitempty" tf:"option_settings,omitempty"`
 
 	// Port number when connecting to the option (e.g., 11211). Leaving out or removing port from your configuration does not remove or clear a port from the option in AWS. AWS may assign a default port. Not including port in your configuration means that the AWS provider will ignore a previously set value, a value set by AWS, and any port changes.
@@ -133,7 +133,7 @@ type OptionObservation struct {
 	// Name of the option (e.g., MEMCACHED).
 	OptionName *string `json:"optionName,omitempty" tf:"option_name,omitempty"`
 
-	// The option settings to apply. See option_settings Block below for more details.
+	// Option settings to apply. See option_settings Block below for more details.
 	OptionSettings []OptionSettingsObservation `json:"optionSettings,omitempty" tf:"option_settings,omitempty"`
 
 	// Port number when connecting to the option (e.g., 11211). Leaving out or removing port from your configuration does not remove or clear a port from the option in AWS. AWS may assign a default port. Not including port in your configuration means that the AWS provider will ignore a previously set value, a value set by AWS, and any port changes.
@@ -158,7 +158,7 @@ type OptionParameters struct {
 	// +kubebuilder:validation:Optional
 	OptionName *string `json:"optionName" tf:"option_name,omitempty"`
 
-	// The option settings to apply. See option_settings Block below for more details.
+	// Option settings to apply. See option_settings Block below for more details.
 	// +kubebuilder:validation:Optional
 	OptionSettings []OptionSettingsParameters `json:"optionSettings,omitempty" tf:"option_settings,omitempty"`
 

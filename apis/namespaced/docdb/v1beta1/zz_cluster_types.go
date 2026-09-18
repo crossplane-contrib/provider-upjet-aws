@@ -59,9 +59,7 @@ type ClusterInitParameters struct {
 	// The database engine version. Updating this argument results in an outage.
 	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
 
-	// The name of your final DB snapshot
-	// when this DB cluster is deleted. If omitted, no final snapshot will be
-	// made.
+	// The name of your final DB snapshot when this DB cluster is deleted. If omitted, no final snapshot will be made.
 	FinalSnapshotIdentifier *string `json:"finalSnapshotIdentifier,omitempty" tf:"final_snapshot_identifier,omitempty"`
 
 	// The global cluster identifier specified on aws_docdb_global_cluster.
@@ -82,16 +80,14 @@ type ClusterInitParameters struct {
 	// Set to true to allow Amazon DocumentDB to manage the master user password in AWS Secrets Manager. Cannot be set if master_password or master_password_wo is provided.
 	ManageMasterUserPassword *bool `json:"manageMasterUserPassword,omitempty" tf:"manage_master_user_password,omitempty"`
 
-	// Password for the master DB user. Note that this may
-	// show up in logs, and it will be stored in the state file. Please refer to the DocumentDB Naming Constraints. Conflicts with master_password_wo and manage_master_user_password.
+	// Password for the master DB user. Note that this may show up in logs, and it will be stored in the state file. Please refer to the DocumentDB Naming Constraints. Conflicts with master_password_wo and manage_master_user_password.
 	// Password for the master DB user. If you set autoGeneratePassword to true, the Secret referenced here will be created or updated with generated password if it does not already contain one.
 	MasterPasswordSecretRef *v2.LocalSecretKeySelector `json:"masterPasswordSecretRef,omitempty" tf:"-"`
 
-	// Password for the master DB user. Note that this may
-	// show up in logs. Please refer to the DocumentDB Naming Constraints. Conflicts with master_password and manage_master_user_password.
+	// Password for the master DB user. Note that this will show up in logs. Please refer to the DocumentDB Naming Constraints. Conflicts with master_password and manage_master_user_password. If set, requires master_password_wo_version to be set.
 	MasterPasswordWo *string `json:"masterPasswordWo,omitempty" tf:"master_password_wo,omitempty"`
 
-	// Used together with master_password_wo to trigger an update. Increment this value when an update to the master_password_wo is required.
+	// Required when master_password_wo is set. Changing this value triggers an update to master_password_wo.
 	MasterPasswordWoVersion *float64 `json:"masterPasswordWoVersion,omitempty" tf:"master_password_wo_version,omitempty"`
 
 	// Username for the master DB user.
@@ -199,9 +195,7 @@ type ClusterObservation struct {
 	// The database engine version. Updating this argument results in an outage.
 	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
 
-	// The name of your final DB snapshot
-	// when this DB cluster is deleted. If omitted, no final snapshot will be
-	// made.
+	// The name of your final DB snapshot when this DB cluster is deleted. If omitted, no final snapshot will be made.
 	FinalSnapshotIdentifier *string `json:"finalSnapshotIdentifier,omitempty" tf:"final_snapshot_identifier,omitempty"`
 
 	// The global cluster identifier specified on aws_docdb_global_cluster.
@@ -219,11 +213,10 @@ type ClusterObservation struct {
 	// Set to true to allow Amazon DocumentDB to manage the master user password in AWS Secrets Manager. Cannot be set if master_password or master_password_wo is provided.
 	ManageMasterUserPassword *bool `json:"manageMasterUserPassword,omitempty" tf:"manage_master_user_password,omitempty"`
 
-	// Password for the master DB user. Note that this may
-	// show up in logs. Please refer to the DocumentDB Naming Constraints. Conflicts with master_password and manage_master_user_password.
+	// Password for the master DB user. Note that this will show up in logs. Please refer to the DocumentDB Naming Constraints. Conflicts with master_password and manage_master_user_password. If set, requires master_password_wo_version to be set.
 	MasterPasswordWo *string `json:"masterPasswordWo,omitempty" tf:"master_password_wo,omitempty"`
 
-	// Used together with master_password_wo to trigger an update. Increment this value when an update to the master_password_wo is required.
+	// Required when master_password_wo is set. Changing this value triggers an update to master_password_wo.
 	MasterPasswordWoVersion *float64 `json:"masterPasswordWoVersion,omitempty" tf:"master_password_wo_version,omitempty"`
 
 	MasterUserSecret []MasterUserSecretObservation `json:"masterUserSecret,omitempty" tf:"master_user_secret,omitempty"`
@@ -344,9 +337,7 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
 
-	// The name of your final DB snapshot
-	// when this DB cluster is deleted. If omitted, no final snapshot will be
-	// made.
+	// The name of your final DB snapshot when this DB cluster is deleted. If omitted, no final snapshot will be made.
 	// +kubebuilder:validation:Optional
 	FinalSnapshotIdentifier *string `json:"finalSnapshotIdentifier,omitempty" tf:"final_snapshot_identifier,omitempty"`
 
@@ -371,18 +362,16 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	ManageMasterUserPassword *bool `json:"manageMasterUserPassword,omitempty" tf:"manage_master_user_password,omitempty"`
 
-	// Password for the master DB user. Note that this may
-	// show up in logs, and it will be stored in the state file. Please refer to the DocumentDB Naming Constraints. Conflicts with master_password_wo and manage_master_user_password.
+	// Password for the master DB user. Note that this may show up in logs, and it will be stored in the state file. Please refer to the DocumentDB Naming Constraints. Conflicts with master_password_wo and manage_master_user_password.
 	// Password for the master DB user. If you set autoGeneratePassword to true, the Secret referenced here will be created or updated with generated password if it does not already contain one.
 	// +kubebuilder:validation:Optional
 	MasterPasswordSecretRef *v2.LocalSecretKeySelector `json:"masterPasswordSecretRef,omitempty" tf:"-"`
 
-	// Password for the master DB user. Note that this may
-	// show up in logs. Please refer to the DocumentDB Naming Constraints. Conflicts with master_password and manage_master_user_password.
+	// Password for the master DB user. Note that this will show up in logs. Please refer to the DocumentDB Naming Constraints. Conflicts with master_password and manage_master_user_password. If set, requires master_password_wo_version to be set.
 	// +kubebuilder:validation:Optional
 	MasterPasswordWo *string `json:"masterPasswordWo,omitempty" tf:"master_password_wo,omitempty"`
 
-	// Used together with master_password_wo to trigger an update. Increment this value when an update to the master_password_wo is required.
+	// Required when master_password_wo is set. Changing this value triggers an update to master_password_wo.
 	// +kubebuilder:validation:Optional
 	MasterPasswordWoVersion *float64 `json:"masterPasswordWoVersion,omitempty" tf:"master_password_wo_version,omitempty"`
 

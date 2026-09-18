@@ -58,6 +58,11 @@ func (in *BGPPeerInitParameters) DeepCopyInto(out *BGPPeerInitParameters) {
 		*out = new(float64)
 		**out = **in
 	}
+	if in.BGPAsnLong != nil {
+		in, out := &in.BGPAsnLong, &out.BGPAsnLong
+		*out = new(string)
+		**out = **in
+	}
 	if in.BGPAuthKey != nil {
 		in, out := &in.BGPAuthKey, &out.BGPAuthKey
 		*out = new(string)
@@ -150,6 +155,11 @@ func (in *BGPPeerObservation) DeepCopyInto(out *BGPPeerObservation) {
 		*out = new(float64)
 		**out = **in
 	}
+	if in.BGPAsnLong != nil {
+		in, out := &in.BGPAsnLong, &out.BGPAsnLong
+		*out = new(string)
+		**out = **in
+	}
 	if in.BGPAuthKey != nil {
 		in, out := &in.BGPAuthKey, &out.BGPAuthKey
 		*out = new(string)
@@ -213,6 +223,11 @@ func (in *BGPPeerParameters) DeepCopyInto(out *BGPPeerParameters) {
 	if in.BGPAsn != nil {
 		in, out := &in.BGPAsn, &out.BGPAsn
 		*out = new(float64)
+		**out = **in
+	}
+	if in.BGPAsnLong != nil {
+		in, out := &in.BGPAsnLong, &out.BGPAsnLong
+		*out = new(string)
 		**out = **in
 	}
 	if in.BGPAuthKey != nil {
@@ -2196,6 +2211,11 @@ func (in *HostedPrivateVirtualInterfaceInitParameters) DeepCopyInto(out *HostedP
 		*out = new(float64)
 		**out = **in
 	}
+	if in.BGPAsnLong != nil {
+		in, out := &in.BGPAsnLong, &out.BGPAsnLong
+		*out = new(string)
+		**out = **in
+	}
 	if in.BGPAuthKey != nil {
 		in, out := &in.BGPAuthKey, &out.BGPAuthKey
 		*out = new(string)
@@ -2323,6 +2343,11 @@ func (in *HostedPrivateVirtualInterfaceObservation) DeepCopyInto(out *HostedPriv
 		*out = new(float64)
 		**out = **in
 	}
+	if in.BGPAsnLong != nil {
+		in, out := &in.BGPAsnLong, &out.BGPAsnLong
+		*out = new(string)
+		**out = **in
+	}
 	if in.BGPAuthKey != nil {
 		in, out := &in.BGPAuthKey, &out.BGPAuthKey
 		*out = new(string)
@@ -2416,6 +2441,11 @@ func (in *HostedPrivateVirtualInterfaceParameters) DeepCopyInto(out *HostedPriva
 	if in.BGPAsn != nil {
 		in, out := &in.BGPAsn, &out.BGPAsn
 		*out = new(float64)
+		**out = **in
+	}
+	if in.BGPAsnLong != nil {
+		in, out := &in.BGPAsnLong, &out.BGPAsnLong
+		*out = new(string)
 		**out = **in
 	}
 	if in.BGPAuthKey != nil {
@@ -2823,6 +2853,11 @@ func (in *HostedPublicVirtualInterfaceInitParameters) DeepCopyInto(out *HostedPu
 		*out = new(float64)
 		**out = **in
 	}
+	if in.BGPAsnLong != nil {
+		in, out := &in.BGPAsnLong, &out.BGPAsnLong
+		*out = new(string)
+		**out = **in
+	}
 	if in.BGPAuthKey != nil {
 		in, out := &in.BGPAuthKey, &out.BGPAuthKey
 		*out = new(string)
@@ -2956,6 +2991,11 @@ func (in *HostedPublicVirtualInterfaceObservation) DeepCopyInto(out *HostedPubli
 		*out = new(float64)
 		**out = **in
 	}
+	if in.BGPAsnLong != nil {
+		in, out := &in.BGPAsnLong, &out.BGPAsnLong
+		*out = new(string)
+		**out = **in
+	}
 	if in.BGPAuthKey != nil {
 		in, out := &in.BGPAuthKey, &out.BGPAuthKey
 		*out = new(string)
@@ -3040,6 +3080,11 @@ func (in *HostedPublicVirtualInterfaceParameters) DeepCopyInto(out *HostedPublic
 	if in.BGPAsn != nil {
 		in, out := &in.BGPAsn, &out.BGPAsn
 		*out = new(float64)
+		**out = **in
+	}
+	if in.BGPAsnLong != nil {
+		in, out := &in.BGPAsnLong, &out.BGPAsnLong
+		*out = new(string)
 		**out = **in
 	}
 	if in.BGPAuthKey != nil {
@@ -3518,6 +3563,11 @@ func (in *HostedTransitVirtualInterfaceInitParameters) DeepCopyInto(out *HostedT
 		*out = new(float64)
 		**out = **in
 	}
+	if in.BGPAsnLong != nil {
+		in, out := &in.BGPAsnLong, &out.BGPAsnLong
+		*out = new(string)
+		**out = **in
+	}
 	if in.BGPAuthKey != nil {
 		in, out := &in.BGPAuthKey, &out.BGPAuthKey
 		*out = new(string)
@@ -3645,6 +3695,11 @@ func (in *HostedTransitVirtualInterfaceObservation) DeepCopyInto(out *HostedTran
 		*out = new(float64)
 		**out = **in
 	}
+	if in.BGPAsnLong != nil {
+		in, out := &in.BGPAsnLong, &out.BGPAsnLong
+		*out = new(string)
+		**out = **in
+	}
 	if in.BGPAuthKey != nil {
 		in, out := &in.BGPAuthKey, &out.BGPAuthKey
 		*out = new(string)
@@ -3738,6 +3793,11 @@ func (in *HostedTransitVirtualInterfaceParameters) DeepCopyInto(out *HostedTrans
 	if in.BGPAsn != nil {
 		in, out := &in.BGPAsn, &out.BGPAsn
 		*out = new(float64)
+		**out = **in
+	}
+	if in.BGPAsnLong != nil {
+		in, out := &in.BGPAsnLong, &out.BGPAsnLong
+		*out = new(string)
 		**out = **in
 	}
 	if in.BGPAuthKey != nil {

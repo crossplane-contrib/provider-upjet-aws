@@ -21,7 +21,7 @@ type PublicVirtualInterfaceInitParameters struct {
 	// The IPv4 CIDR address to use to send traffic to Amazon. Required for IPv4 BGP peers.
 	AmazonAddress *string `json:"amazonAddress,omitempty" tf:"amazon_address,omitempty"`
 
-	// The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.
+	// BGP autonomous system number as an integer between 1 and 2147483646. For larger values, use bgp_asn_long. Exactly one of bgp_asn or bgp_asn_long must be specified.
 	BGPAsn *float64 `json:"bgpAsn,omitempty" tf:"bgp_asn,omitempty"`
 
 	// The authentication key for BGP configuration.
@@ -76,7 +76,7 @@ type PublicVirtualInterfaceObservation struct {
 	// The Direct Connect endpoint on which the virtual interface terminates.
 	AwsDevice *string `json:"awsDevice,omitempty" tf:"aws_device,omitempty"`
 
-	// The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.
+	// BGP autonomous system number as an integer between 1 and 2147483646. For larger values, use bgp_asn_long. Exactly one of bgp_asn or bgp_asn_long must be specified.
 	BGPAsn *float64 `json:"bgpAsn,omitempty" tf:"bgp_asn,omitempty"`
 
 	// The authentication key for BGP configuration.
@@ -127,7 +127,7 @@ type PublicVirtualInterfaceParameters struct {
 	// +kubebuilder:validation:Optional
 	AmazonAddress *string `json:"amazonAddress,omitempty" tf:"amazon_address,omitempty"`
 
-	// The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.
+	// BGP autonomous system number as an integer between 1 and 2147483646. For larger values, use bgp_asn_long. Exactly one of bgp_asn or bgp_asn_long must be specified.
 	// +kubebuilder:validation:Optional
 	BGPAsn *float64 `json:"bgpAsn,omitempty" tf:"bgp_asn,omitempty"`
 

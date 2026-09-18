@@ -67,8 +67,9 @@ spec:
                       Required for IPv4 BGP peers.
                     type: string
                   bgpAsn:
-                    description: The autonomous system (AS) number for Border Gateway
-                      Protocol (BGP) configuration.
+                    description: BGP autonomous system number as an integer between
+                      1 and 2147483646. For larger values, use bgp_asn_long. Exactly
+                      one of bgp_asn or bgp_asn_long must be specified.
                     type: number
                   bgpAuthKey:
                     description: The authentication key for BGP configuration.
@@ -222,8 +223,9 @@ spec:
                       Required for IPv4 BGP peers.
                     type: string
                   bgpAsn:
-                    description: The autonomous system (AS) number for Border Gateway
-                      Protocol (BGP) configuration.
+                    description: BGP autonomous system number as an integer between
+                      1 and 2147483646. For larger values, use bgp_asn_long. Exactly
+                      one of bgp_asn or bgp_asn_long must be specified.
                     type: number
                   bgpAuthKey:
                     description: The authentication key for BGP configuration.
@@ -451,8 +453,9 @@ spec:
                       interface terminates.
                     type: string
                   bgpAsn:
-                    description: The autonomous system (AS) number for Border Gateway
-                      Protocol (BGP) configuration.
+                    description: BGP autonomous system number as an integer between
+                      1 and 2147483646. For larger values, use bgp_asn_long. Exactly
+                      one of bgp_asn or bgp_asn_long must be specified.
                     type: number
                   bgpAuthKey:
                     description: The authentication key for BGP configuration.

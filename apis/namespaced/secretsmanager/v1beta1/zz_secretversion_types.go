@@ -34,10 +34,10 @@ type SecretVersionInitParameters struct {
 	// Text data that you want to encrypt and store in this version of the secret. This is required if secret_binary or secret_string_wo is not set.
 	SecretStringSecretRef *v2.LocalSecretKeySelector `json:"secretStringSecretRef,omitempty" tf:"-"`
 
-	// Text data that you want to encrypt and store in this version of the secret. This is required if secret_binary or secret_string is not set.
+	// Text data that you want to encrypt and store in this version of the secret. This is required if secret_binary or secret_string is not set. If set, requires secret_string_wo_version to be set.
 	SecretStringWoSecretRef *v2.LocalSecretKeySelector `json:"secretStringWoSecretRef,omitempty" tf:"-"`
 
-	// Version identifier that works together with secret_string_wo to trigger an update. Increment this value when an update to secret_string_wo is required.
+	// Required when secret_string_wo is set. Changing this value triggers an update to secret_string_wo.
 	SecretStringWoVersion *float64 `json:"secretStringWoVersion,omitempty" tf:"secret_string_wo_version,omitempty"`
 
 	// List of staging labels that are attached to this version of the secret. A staging label must be unique to a single version of the secret. If you specify a staging label that's already associated with a different version of the same secret then that staging label is automatically removed from the other version and attached to this version. If you do not specify a value, then AWS Secrets Manager automatically moves the staging label AWSCURRENT to this new version on creation.
@@ -65,7 +65,7 @@ type SecretVersionObservation struct {
 	// Secret to which you want to add a new version. You can specify either the ARN or the friendly name of the secret. The secret must already exist.
 	SecretID *string `json:"secretId,omitempty" tf:"secret_id,omitempty"`
 
-	// Version identifier that works together with secret_string_wo to trigger an update. Increment this value when an update to secret_string_wo is required.
+	// Required when secret_string_wo is set. Changing this value triggers an update to secret_string_wo.
 	SecretStringWoVersion *float64 `json:"secretStringWoVersion,omitempty" tf:"secret_string_wo_version,omitempty"`
 
 	// Unique identifier of the version of the secret.
@@ -105,11 +105,11 @@ type SecretVersionParameters struct {
 	// +kubebuilder:validation:Optional
 	SecretStringSecretRef *v2.LocalSecretKeySelector `json:"secretStringSecretRef,omitempty" tf:"-"`
 
-	// Text data that you want to encrypt and store in this version of the secret. This is required if secret_binary or secret_string is not set.
+	// Text data that you want to encrypt and store in this version of the secret. This is required if secret_binary or secret_string is not set. If set, requires secret_string_wo_version to be set.
 	// +kubebuilder:validation:Optional
 	SecretStringWoSecretRef *v2.LocalSecretKeySelector `json:"secretStringWoSecretRef,omitempty" tf:"-"`
 
-	// Version identifier that works together with secret_string_wo to trigger an update. Increment this value when an update to secret_string_wo is required.
+	// Required when secret_string_wo is set. Changing this value triggers an update to secret_string_wo.
 	// +kubebuilder:validation:Optional
 	SecretStringWoVersion *float64 `json:"secretStringWoVersion,omitempty" tf:"secret_string_wo_version,omitempty"`
 

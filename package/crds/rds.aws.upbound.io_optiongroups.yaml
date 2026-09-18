@@ -74,16 +74,16 @@ spec:
               forProvider:
                 properties:
                   engineName:
-                    description: Specifies the name of the engine that this option
-                      group should be associated with.
+                    description: Name of the engine that this option group should
+                      be associated with.
                     type: string
                   majorEngineVersion:
-                    description: Specifies the major version of the engine that this
-                      option group should be associated with.
+                    description: Major version of the engine that this option group
+                      should be associated with.
                     type: string
                   option:
-                    description: The options to apply. See option Block below for
-                      more details.
+                    description: Options to apply. See option Block below for more
+                      details.
                     items:
                       properties:
                         dbSecurityGroupMemberships:
@@ -97,7 +97,7 @@ spec:
                           description: Name of the option (e.g., MEMCACHED).
                           type: string
                         optionSettings:
-                          description: The option settings to apply. See option_settings
+                          description: Option settings to apply. See option_settings
                             Block below for more details.
                           items:
                             properties:
@@ -169,16 +169,16 @@ spec:
                   autoscaler.
                 properties:
                   engineName:
-                    description: Specifies the name of the engine that this option
-                      group should be associated with.
+                    description: Name of the engine that this option group should
+                      be associated with.
                     type: string
                   majorEngineVersion:
-                    description: Specifies the major version of the engine that this
-                      option group should be associated with.
+                    description: Major version of the engine that this option group
+                      should be associated with.
                     type: string
                   option:
-                    description: The options to apply. See option Block below for
-                      more details.
+                    description: Options to apply. See option Block below for more
+                      details.
                     items:
                       properties:
                         dbSecurityGroupMemberships:
@@ -192,7 +192,7 @@ spec:
                           description: Name of the option (e.g., MEMCACHED).
                           type: string
                         optionSettings:
-                          description: The option settings to apply. See option_settings
+                          description: Option settings to apply. See option_settings
                             Block below for more details.
                           items:
                             properties:
@@ -347,19 +347,19 @@ spec:
                     description: ARN of the DB option group.
                     type: string
                   engineName:
-                    description: Specifies the name of the engine that this option
-                      group should be associated with.
+                    description: Name of the engine that this option group should
+                      be associated with.
                     type: string
                   id:
                     description: DB option group name.
                     type: string
                   majorEngineVersion:
-                    description: Specifies the major version of the engine that this
-                      option group should be associated with.
+                    description: Major version of the engine that this option group
+                      should be associated with.
                     type: string
                   option:
-                    description: The options to apply. See option Block below for
-                      more details.
+                    description: Options to apply. See option Block below for more
+                      details.
                     items:
                       properties:
                         dbSecurityGroupMemberships:
@@ -373,7 +373,7 @@ spec:
                           description: Name of the option (e.g., MEMCACHED).
                           type: string
                         optionSettings:
-                          description: The option settings to apply. See option_settings
+                          description: Option settings to apply. See option_settings
                             Block below for more details.
                           items:
                             properties:

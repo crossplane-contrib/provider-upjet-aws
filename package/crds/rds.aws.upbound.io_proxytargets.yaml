@@ -154,7 +154,7 @@ spec:
                         type: object
                     type: object
                   dbProxyName:
-                    description: The name of the DB proxy.
+                    description: Name of the DB proxy.
                     type: string
                   dbProxyNameRef:
                     description: Reference to a Proxy in rds to populate dbProxyName.
@@ -236,7 +236,7 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   targetGroupName:
-                    description: The name of the target group.
+                    description: Name of the target group.
                     type: string
                 required:
                 - region
@@ -335,7 +335,7 @@ spec:
                         type: object
                     type: object
                   dbProxyName:
-                    description: The name of the DB proxy.
+                    description: Name of the DB proxy.
                     type: string
                   dbProxyNameRef:
                     description: Reference to a Proxy in rds to populate dbProxyName.
@@ -412,7 +412,7 @@ spec:
                         type: object
                     type: object
                   targetGroupName:
-                    description: The name of the target group.
+                    description: Name of the target group.
                     type: string
                 type: object
               managementPolicies:
@@ -518,7 +518,7 @@ spec:
                     description: DB instance identifier.
                     type: string
                   dbProxyName:
-                    description: The name of the DB proxy.
+                    description: Name of the DB proxy.
                     type: string
                   endpoint:
                     description: Hostname for the target RDS DB Instance. Only returned
@@ -547,7 +547,7 @@ spec:
                       not returned by the RDS API.
                     type: string
                   targetGroupName:
-                    description: The name of the target group.
+                    description: Name of the target group.
                     type: string
                   trackedClusterId:
                     description: DB Cluster identifier for the DB Instance target.

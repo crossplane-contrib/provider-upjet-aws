@@ -49,7 +49,12 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_bedrockagentcore_api_key_credential_provider", func(r *config.Resource) {
 		r.TerraformResource.Schema["name"].Computed = true
 		r.TerraformResource.Schema["name"].Optional = false
+		r.AddSingletonListConversion("api_key_secret_arn", "apiKeySecretArn")
 		r.AddSingletonListConversion("api_key_secret_config", "apiKeySecretConfig")
+		r.References["api_key_secret_config.secret_id"] = config.Reference{
+			TerraformName: "aws_secretsmanager_secret",
+			Extractor:     common.PathARNExtractor,
+		}
 	})
 
 	// aws_bedrockagentcore_browser
@@ -338,15 +343,70 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		r.TerraformResource.Schema["name"].Computed = true
 		r.TerraformResource.Schema["name"].Optional = false
 
+		r.References["oauth2_provider_config.atlassian_oauth2_provider_config.client_secret_config.secret_id"] = config.Reference{
+			TerraformName: "aws_secretsmanager_secret",
+			Extractor:     common.PathARNExtractor,
+		}
+
+		r.References["oauth2_provider_config.custom_oauth2_provider_config.client_secret_config.secret_id"] = config.Reference{
+			TerraformName: "aws_secretsmanager_secret",
+			Extractor:     common.PathARNExtractor,
+		}
+		r.References["oauth2_provider_config.github_oauth2_provider_config.client_secret_config.secret_id"] = config.Reference{
+			TerraformName: "aws_secretsmanager_secret",
+			Extractor:     common.PathARNExtractor,
+		}
+		r.References["oauth2_provider_config.google_oauth2_provider_config.client_secret_config.secret_id"] = config.Reference{
+			TerraformName: "aws_secretsmanager_secret",
+			Extractor:     common.PathARNExtractor,
+		}
+		r.References["oauth2_provider_config.included_oauth2_provider_config.client_secret_config.secret_id"] = config.Reference{
+			TerraformName: "aws_secretsmanager_secret",
+			Extractor:     common.PathARNExtractor,
+		}
+		r.References["oauth2_provider_config.linkedin_oauth2_provider_config.client_secret_config.secret_id"] = config.Reference{
+			TerraformName: "aws_secretsmanager_secret",
+			Extractor:     common.PathARNExtractor,
+		}
+		r.References["oauth2_provider_config.microsoft_oauth2_provider_config.client_secret_config.secret_id"] = config.Reference{
+			TerraformName: "aws_secretsmanager_secret",
+			Extractor:     common.PathARNExtractor,
+		}
+		r.References["oauth2_provider_config.salesforce_oauth2_provider_config.client_secret_config.secret_id"] = config.Reference{
+			TerraformName: "aws_secretsmanager_secret",
+			Extractor:     common.PathARNExtractor,
+		}
+		r.References["oauth2_provider_config.slack_oauth2_provider_config.client_secret_config.secret_id"] = config.Reference{
+			TerraformName: "aws_secretsmanager_secret",
+			Extractor:     common.PathARNExtractor,
+		}
+
 		r.AddSingletonListConversion("oauth2_provider_config", "oauth2ProviderConfig")
+		r.AddSingletonListConversion("oauth2_provider_config[*].atlassian_oauth2_provider_config", "oauth2ProviderConfig[*].atlassianOauth2ProviderConfig")
+		r.AddSingletonListConversion("oauth2_provider_config[*].atlassian_oauth2_provider_config[*].client_secret_config", "oauth2ProviderConfig[*].atlassianOauth2ProviderConfig[*].clientSecretConfig")
 		r.AddSingletonListConversion("oauth2_provider_config[*].custom_oauth2_provider_config", "oauth2ProviderConfig[*].customOauth2ProviderConfig")
 		r.AddSingletonListConversion("oauth2_provider_config[*].custom_oauth2_provider_config[*].client_secret_config", "oauth2ProviderConfig[*].customOauth2ProviderConfig[*].clientSecretConfig")
 		r.AddSingletonListConversion("oauth2_provider_config[*].custom_oauth2_provider_config[*].oauth_discovery", "oauth2ProviderConfig[*].customOauth2ProviderConfig[*].oauthDiscovery")
 		r.AddSingletonListConversion("oauth2_provider_config[*].custom_oauth2_provider_config[*].oauth_discovery[*].authorization_server_metadata", "oauth2ProviderConfig[*].customOauth2ProviderConfig[*].oauthDiscovery[*].authorizationServerMetadata")
+		r.AddSingletonListConversion("oauth2_provider_config[*].custom_oauth2_provider_config[*].on_behalf_of_token_exchange_config", "oauth2ProviderConfig[*].customOauth2ProviderConfig[*].onBehalfOfTokenExchangeConfig")
+		r.AddSingletonListConversion("oauth2_provider_config[*].custom_oauth2_provider_config[*].on_behalf_of_token_exchange_config[*].token_exchange_grant_type_config", "oauth2ProviderConfig[*].customOauth2ProviderConfig[*].onBehalfOfTokenExchangeConfig[*].tokenExchangeGrantTypeConfig")
+		r.AddSingletonListConversion("oauth2_provider_config[*].custom_oauth2_provider_config[*].private_endpoint", "oauth2ProviderConfig[*].customOauth2ProviderConfig[*].privateEndpoint")
+		r.AddSingletonListConversion("oauth2_provider_config[*].custom_oauth2_provider_config[*].private_endpoint[*].managed_vpc_resource", "oauth2ProviderConfig[*].customOauth2ProviderConfig[*].privateEndpoint[*].managedVpcResource")
+		r.AddSingletonListConversion("oauth2_provider_config[*].custom_oauth2_provider_config[*].private_endpoint[*].self_managed_lattice_resource", "oauth2ProviderConfig[*].customOauth2ProviderConfig[*].privateEndpoint[*].selfManagedLatticeResource")
+		r.AddSingletonListConversion("oauth2_provider_config[*].custom_oauth2_provider_config[*].private_endpoint_override[*].private_endpoint", "oauth2ProviderConfig[*].customOauth2ProviderConfig[*].privateEndpointOverride[*].privateEndpoint")
+		r.AddSingletonListConversion("oauth2_provider_config[*].custom_oauth2_provider_config[*].private_endpoint_override[*].private_endpoint[*].managed_vpc_resource", "oauth2ProviderConfig[*].customOauth2ProviderConfig[*].privateEndpointOverride[*].privateEndpoint[*].managedVpcResource")
+		r.AddSingletonListConversion("oauth2_provider_config[*].custom_oauth2_provider_config[*].private_endpoint_override[*].private_endpoint[*].self_managed_lattice_resource", "oauth2ProviderConfig[*].customOauth2ProviderConfig[*].privateEndpointOverride[*].privateEndpoint[*].selfManagedLatticeResource")
+		r.AddSingletonListConversion("oauth2_provider_config[*].custom_oauth2_provider_config[*].private_key_jwt_config", "oauth2ProviderConfig[*].customOauth2ProviderConfig[*].privateKeyJwtConfig")
+		r.AddSingletonListConversion("oauth2_provider_config[*].custom_oauth2_provider_config[*].private_key_jwt_config[*].private_key_source", "oauth2ProviderConfig[*].customOauth2ProviderConfig[*].privateKeyJwtConfig[*].privateKeySource")
+		r.AddSingletonListConversion("oauth2_provider_config[*].custom_oauth2_provider_config[*].private_key_jwt_config[*].private_key_source[*].kms_key_source", "oauth2ProviderConfig[*].customOauth2ProviderConfig[*].privateKeyJwtConfig[*].privateKeySource[*].kmsKeySource")
 		r.AddSingletonListConversion("oauth2_provider_config[*].github_oauth2_provider_config", "oauth2ProviderConfig[*].githubOauth2ProviderConfig")
 		r.AddSingletonListConversion("oauth2_provider_config[*].github_oauth2_provider_config[*].client_secret_config", "oauth2ProviderConfig[*].githubOauth2ProviderConfig[*].clientSecretConfig")
 		r.AddSingletonListConversion("oauth2_provider_config[*].google_oauth2_provider_config", "oauth2ProviderConfig[*].googleOauth2ProviderConfig")
 		r.AddSingletonListConversion("oauth2_provider_config[*].google_oauth2_provider_config[*].client_secret_config", "oauth2ProviderConfig[*].googleOauth2ProviderConfig[*].clientSecretConfig")
+		r.AddSingletonListConversion("oauth2_provider_config[*].included_oauth2_provider_config", "oauth2ProviderConfig[*].includedOauth2ProviderConfig")
+		r.AddSingletonListConversion("oauth2_provider_config[*].included_oauth2_provider_config[*].client_secret_config", "oauth2ProviderConfig[*].includedOauth2ProviderConfig[*].clientSecretConfig")
+		r.AddSingletonListConversion("oauth2_provider_config[*].linkedin_oauth2_provider_config", "oauth2ProviderConfig[*].linkedinOauth2ProviderConfig")
+		r.AddSingletonListConversion("oauth2_provider_config[*].linkedin_oauth2_provider_config[*].client_secret_config", "oauth2ProviderConfig[*].linkedinOauth2ProviderConfig[*].clientSecretConfig")
 		r.AddSingletonListConversion("oauth2_provider_config[*].microsoft_oauth2_provider_config", "oauth2ProviderConfig[*].microsoftOauth2ProviderConfig")
 		r.AddSingletonListConversion("oauth2_provider_config[*].microsoft_oauth2_provider_config[*].client_secret_config", "oauth2ProviderConfig[*].microsoftOauth2ProviderConfig[*].clientSecretConfig")
 		r.AddSingletonListConversion("oauth2_provider_config[*].salesforce_oauth2_provider_config", "oauth2ProviderConfig[*].salesforceOauth2ProviderConfig")
