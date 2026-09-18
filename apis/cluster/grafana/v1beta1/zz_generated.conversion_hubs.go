@@ -17,3 +17,9 @@ func (tr *WorkspaceAPIKey) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *WorkspaceSAMLConfiguration) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *WorkspaceServiceAccount) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *WorkspaceServiceAccountToken) Hub() {}
