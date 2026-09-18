@@ -138,6 +138,19 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	//
 	"aws_glue_catalog_table_optimizer": config.TemplatedStringAsIdentifier("name", "{{ .parameters.catalog_id }}:{{ .parameters.database_name }}:{{ .external_name }}"),
 
+	// grafana
+	//
+	// Grafana Workspace Service Account can be imported using the workspace_id
+	// and the provider-assigned service_account_id, e.g. g-abc12345,1. The
+	// workspace_id is already a required spec field, so only the
+	// provider-assigned service_account_id is used as the external name.
+	"aws_grafana_workspace_service_account": config.FrameworkResourceWithComputedIdentifier("service_account_id", "1"),
+	// No import documented for the token resource, since the token value is
+	// only returned once at creation time. workspace_id and service_account_id
+	// are already required spec fields, so only the provider-assigned
+	// service_account_token_id is used as the external name.
+	"aws_grafana_workspace_service_account_token": config.FrameworkResourceWithComputedIdentifier("service_account_token_id", "1"),
+
 	// guardduty
 	//
 	// GuardDuty Malware Protection Plans can be imported using the malware protection plan ID
