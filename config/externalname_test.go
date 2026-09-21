@@ -29,9 +29,9 @@ func TestSNSPlatformApplicationImportID(t *testing.T) {
 		expectedID  string
 		expectedErr string
 	}{
-		"DefaultGCM": {
-			parameters: map[string]any{},
-			expectedID: "arn:aws:sns:eu-west-1:123456789012:app/GCM/example-application",
+		"MissingPlatform": {
+			parameters:  map[string]any{},
+			expectedErr: "platform is required to build the SNS platform application import id",
 		},
 		"ADM": {
 			parameters: map[string]any{"platform": "ADM"},
@@ -49,9 +49,9 @@ func TestSNSPlatformApplicationImportID(t *testing.T) {
 			parameters: map[string]any{"platform": "GCM"},
 			expectedID: "arn:aws:sns:eu-west-1:123456789012:app/GCM/example-application",
 		},
-		"UnsupportedPlatform": {
-			parameters:  map[string]any{"platform": "WNS"},
-			expectedErr: `unsupported SNS platform "WNS"`,
+		"WNS": {
+			parameters: map[string]any{"platform": "WNS"},
+			expectedID: "arn:aws:sns:eu-west-1:123456789012:app/WNS/example-application",
 		},
 	}
 

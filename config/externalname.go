@@ -3699,27 +3699,15 @@ func genericARNTemplate(service string, resource string, elideRegion bool) strin
 	return fmt.Sprintf("arn:{{ .setup.client_metadata.partition }}:%s:%s:{{ .setup.client_metadata.account_id }}:%s", service, region, resource)
 }
 
-const defaultSNSPlatform = "GCM"
-
-var supportedSNSPlatforms = map[string]struct{}{
-	"ADM":          {},
-	"APNS":         {},
-	"APNS_SANDBOX": {},
-	"GCM":          {},
-}
-
 func snsPlatformApplicationExternalName() config.ExternalName {
 	e := config.TemplatedStringAsIdentifier("name", fullARNTemplate("sns", "app/{{ .parameters.platform }}/{{ .external_name }}"))
 	// Platform participates in the import ID but is not an external identifier.
 	e.IdentifierFields = nil
 	getID := e.GetIDFn
 	e.GetIDFn = func(ctx context.Context, externalName string, parameters map[string]any, setup map[string]any) (string, error) {
-		platform := defaultSNSPlatform
-		if value, ok := parameters["platform"].(string); ok && value != "" {
-			platform = value
-		}
-		if _, ok := supportedSNSPlatforms[platform]; !ok {
-			return "", errors.Errorf("unsupported SNS platform %q", platform)
+		platform, ok := parameters["platform"].(string)
+		if !ok || platform == "" {
+			return "", errors.New("platform is required to build the SNS platform application import id")
 		}
 
 		withPlatform := make(map[string]any, len(parameters)+1)
