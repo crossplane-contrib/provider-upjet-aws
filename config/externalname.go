@@ -3705,17 +3705,10 @@ func snsPlatformApplicationExternalName() config.ExternalName {
 	e.IdentifierFields = nil
 	getID := e.GetIDFn
 	e.GetIDFn = func(ctx context.Context, externalName string, parameters map[string]any, setup map[string]any) (string, error) {
-		platform, ok := parameters["platform"].(string)
-		if !ok || platform == "" {
+		if platform, ok := parameters["platform"].(string); !ok || platform == "" {
 			return "", errors.New("platform is required to build the SNS platform application import id")
 		}
-
-		withPlatform := make(map[string]any, len(parameters)+1)
-		for key, value := range parameters {
-			withPlatform[key] = value
-		}
-		withPlatform["platform"] = platform
-		return getID(ctx, externalName, withPlatform, setup)
+		return getID(ctx, externalName, parameters, setup)
 	}
 	return e
 }

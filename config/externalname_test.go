@@ -33,6 +33,14 @@ func TestSNSPlatformApplicationImportID(t *testing.T) {
 			parameters:  map[string]any{},
 			expectedErr: "platform is required to build the SNS platform application import id",
 		},
+		"EmptyPlatform": {
+			parameters:  map[string]any{"platform": ""},
+			expectedErr: "platform is required to build the SNS platform application import id",
+		},
+		"NonStringPlatform": {
+			parameters:  map[string]any{"platform": 1},
+			expectedErr: "platform is required to build the SNS platform application import id",
+		},
 		"ADM": {
 			parameters: map[string]any{"platform": "ADM"},
 			expectedID: "arn:aws:sns:eu-west-1:123456789012:app/ADM/example-application",
