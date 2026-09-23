@@ -1,12 +1,12 @@
 apiVersion: apiextensions.crossplane.io/v1
 kind: Composition
 metadata:
-  name: xe2etestclusters.aws.platformref.upbound.io
+  name: e2etestclusters.aws.platformref.upbound.io
 spec:
   writeConnectionSecretsToNamespace: upbound-system
   compositeTypeRef:
     apiVersion: aws.platformref.upbound.io/v1alpha1
-    kind: XE2ETestCluster
+    kind: E2ETestCluster
   mode: Pipeline
   pipeline:
     - step: patch-and-transform
@@ -17,10 +17,10 @@ spec:
         kind: Resources
         resources:
           # Network Setup
-          - name: XNetwork
+          - name: Network
             base:
               apiVersion: aws.platform.upbound.io/v1alpha1
-              kind: XNetwork
+              kind: Network
             patches:
               - type: FromCompositeFieldPath
                 fromFieldPath: spec.parameters.id
@@ -29,8 +29,8 @@ spec:
                 fromFieldPath: spec.parameters.region
                 toFieldPath: spec.parameters.region
               - type: FromCompositeFieldPath
-                fromFieldPath: spec.parameters.deletionPolicy
-                toFieldPath: spec.parameters.deletionPolicy
+                fromFieldPath: spec.parameters.managementPolicies
+                toFieldPath: spec.parameters.managementPolicies
               - type: FromCompositeFieldPath
                 fromFieldPath: spec.parameters.providerConfigName
                 toFieldPath: spec.parameters.providerConfigName
@@ -44,10 +44,10 @@ spec:
                 toFieldPath: status.subnetIds
 
           # EKS Cluster
-          - name: XEKS
+          - name: EKS
             base:
               apiVersion: aws.platform.upbound.io/v1alpha1
-              kind: XEKS
+              kind: EKS
             connectionDetails:
               - type: FromConnectionSecretKey
                 fromConnectionSecretKey: kubeconfig
@@ -63,25 +63,17 @@ spec:
                 fromFieldPath: spec.parameters.region
                 toFieldPath: spec.parameters.region
               - type: FromCompositeFieldPath
-                fromFieldPath: spec.parameters.deletionPolicy
-                toFieldPath: spec.parameters.deletionPolicy
-              - type: FromCompositeFieldPath
                 fromFieldPath: spec.parameters.providerConfigName
                 toFieldPath: spec.parameters.providerConfigName
               - type: FromCompositeFieldPath
                 fromFieldPath: spec.parameters.id
                 toFieldPath: metadata.annotations[crossplane.io/external-name]
               - type: FromCompositeFieldPath
-                fromFieldPath: metadata.uid
-                toFieldPath: spec.writeConnectionSecretToRef.name
-                transforms:
-                  - type: string
-                    string:
-                      fmt: '%s-eks'
-                      type: Format
+                fromFieldPath: spec.parameters.accessConfig.bootstrapClusterCreatorAdminPermissions
+                toFieldPath: spec.parameters.accessConfig.bootstrapClusterCreatorAdminPermissions
               - type: FromCompositeFieldPath
-                fromFieldPath: spec.writeConnectionSecretToRef.namespace
-                toFieldPath: spec.writeConnectionSecretToRef.namespace
+                fromFieldPath: spec.parameters.accessConfig.authenticationMode
+                toFieldPath: spec.parameters.accessConfig.authenticationMode
               - type: FromCompositeFieldPath
                 fromFieldPath: spec.parameters.version
                 toFieldPath: spec.parameters.version
@@ -92,21 +84,55 @@ spec:
                 fromFieldPath: spec.parameters.nodes.instanceType
                 toFieldPath: spec.parameters.nodes.instanceType
               - type: FromCompositeFieldPath
-                fromFieldPath: spec.parameters.iam.roleArn
-                toFieldPath: spec.parameters.iam.roleArn
-              - type: FromCompositeFieldPath
-                fromFieldPath: spec.parameters.iam.userArn
-                toFieldPath: spec.parameters.iam.userArn
+                fromFieldPath: spec.parameters.iam.principalArn
+                toFieldPath: spec.parameters.iam.principalArn
               - type: ToCompositeFieldPath
                 fromFieldPath: status.eks
                 toFieldPath: status.eks
+              - type: ToCompositeFieldPath
+                fromFieldPath: status.eks.oidcIssuerUrl
+                toFieldPath: status.eksOIDC.oidcHost
+                policy:
+                  fromFieldPath: Required
+                transforms:
+                  - type: string
+                    string:
+                      type: TrimPrefix
+                      trim: 'https://'
 
-          ### Role and policies for EKS IRSA testing
-          # XIRSA for IRSA-related role configuration
-          - name: XIRSA
+          - name: oidcProviderForEks
+            base:
+              apiVersion: iam.aws.m.upbound.io/v1beta1
+              kind: OpenIDConnectProvider
+              metadata:
+                labels:
+                  component: eks-oidc-provider
+              spec:
+                forProvider:
+                  # url: "to-be-patched"
+                  clientIdList: ["sts.amazonaws.com"]
+            patches:
+              - fromFieldPath: spec.parameters.providerConfigName
+                toFieldPath: spec.providerConfigRef.name
+                type: FromCompositeFieldPath
+              - fromFieldPath: spec.parameters.providerConfigKind
+                toFieldPath: spec.providerConfigRef.kind
+                type: FromCompositeFieldPath
+              - type: FromCompositeFieldPath
+                fromFieldPath: status.eks.oidcIssuerUrl
+                policy:
+                  fromFieldPath: Required
+                toFieldPath: spec.forProvider.url
+              - type: ToCompositeFieldPath
+                fromFieldPath: status.atProvider.arn
+                toFieldPath: status.eks.oidcProviderArn
+                policy:
+                  fromFieldPath: Required
+
+          - name: IRSA
             base:
               apiVersion: aws.platform.upbound.io/v1alpha1
-              kind: XIRSA
+              kind: IRSA
               metadata:
                 labels:
                   component: irsa-bundle
@@ -115,8 +141,14 @@ spec:
                   condition: StringEquals
             patches:
               - type: FromCompositeFieldPath
-                fromFieldPath: spec.parameters.deletionPolicy
-                toFieldPath: spec.parameters.deletionPolicy
+                fromFieldPath: spec.parameters.managementPolicies
+                toFieldPath: spec.parameters.managementPolicies
+              - fromFieldPath: spec.parameters.providerConfigName
+                toFieldPath: spec.parameters.providerConfigName
+                type: FromCompositeFieldPath
+              - fromFieldPath: spec.parameters.providerConfigKind
+                toFieldPath: spec.parameters.providerConfigKind
+                type: FromCompositeFieldPath
               - type: FromCompositeFieldPath
                 fromFieldPath: spec.parameters.id
                 toFieldPath: spec.parameters.id
@@ -132,6 +164,12 @@ spec:
               - type: FromCompositeFieldPath
                 fromFieldPath: spec.parameters.irsa.condition
                 toFieldPath: spec.parameters.condition
+              - type: FromCompositeFieldPath
+                fromFieldPath: status.eks.oidcProviderArn
+                toFieldPath: spec.parameters.oidcProviderArn
+              - type: FromCompositeFieldPath
+                fromFieldPath: status.eksOIDC.oidcHost
+                toFieldPath: spec.parameters.oidcHost
               - type: ToCompositeFieldPath
                 fromFieldPath: status.roleArn
                 policy:
@@ -146,7 +184,7 @@ spec:
           # chain role for IRSA - to be assumed by IRSA role
           - name: chainedRoleIRSA
             base:
-              apiVersion: iam.aws.upbound.io/v1beta1
+              apiVersion: iam.aws.m.upbound.io/v1beta1
               kind: Role
               metadata:
                 labels:
@@ -170,8 +208,8 @@ spec:
                         }
             patches:
               - type: FromCompositeFieldPath
-                fromFieldPath: spec.parameters.deletionPolicy
-                toFieldPath: spec.deletionPolicy
+                fromFieldPath: spec.parameters.managementPolicies
+                toFieldPath: spec.managementPolicies
               - fromFieldPath: spec.parameters.id
                 policy:
                   fromFieldPath: Required
@@ -215,7 +253,7 @@ spec:
           - name: XIRSA-PseudoWebIdentity
             base:
               apiVersion: aws.platform.upbound.io/v1alpha1
-              kind: XIRSA
+              kind: IRSA
               metadata:
                 labels:
                   component: webidentity-bundle
@@ -237,8 +275,8 @@ spec:
                     }
             patches:
               - type: FromCompositeFieldPath
-                fromFieldPath: spec.parameters.deletionPolicy
-                toFieldPath: spec.parameters.deletionPolicy
+                fromFieldPath: spec.parameters.managementPolicies
+                toFieldPath: spec.parameters.managementPolicies
               - type: FromCompositeFieldPath
                 fromFieldPath: spec.parameters.id
                 toFieldPath: spec.parameters.id
@@ -258,6 +296,12 @@ spec:
               - type: FromCompositeFieldPath
                 fromFieldPath: spec.parameters.irsa.condition
                 toFieldPath: spec.parameters.condition
+              - type: FromCompositeFieldPath
+                fromFieldPath: status.eks.oidcProviderArn
+                toFieldPath: spec.parameters.oidcProviderArn
+              - type: FromCompositeFieldPath
+                fromFieldPath: status.eksOIDC.oidcHost
+                toFieldPath: spec.parameters.oidcHost
               - type: ToCompositeFieldPath
                 fromFieldPath: status.roleArn
                 policy:
@@ -272,7 +316,7 @@ spec:
           # chain role for WebIdentity starting role
           - name: chainedRoleWebIdentity
             base:
-              apiVersion: iam.aws.upbound.io/v1beta1
+              apiVersion: iam.aws.m.upbound.io/v1beta1
               kind: Role
               metadata:
                 labels:
@@ -296,8 +340,8 @@ spec:
                         }
             patches:
               - type: FromCompositeFieldPath
-                fromFieldPath: spec.parameters.deletionPolicy
-                toFieldPath: spec.deletionPolicy
+                fromFieldPath: spec.parameters.managementPolicies
+                toFieldPath: spec.managementPolicies
               - fromFieldPath: status.atProvider.arn
                 policy:
                   fromFieldPath: Required
@@ -340,7 +384,7 @@ spec:
           # EKS pod identity addon
           - name: eksPodIdentityAddon
             base:
-              apiVersion: eks.aws.upbound.io/v1beta1
+              apiVersion: eks.aws.m.upbound.io/v1beta1
               kind: Addon
               metadata:
                 labels:
@@ -370,7 +414,7 @@ spec:
           # IAM role for PodIdentity
           - name: podIdentityRole
             base:
-              apiVersion: iam.aws.upbound.io/v1beta1
+              apiVersion: iam.aws.m.upbound.io/v1beta1
               kind: Role
               metadata:
                 labels:
@@ -410,8 +454,8 @@ spec:
                         }
             patches:
               - type: FromCompositeFieldPath
-                fromFieldPath: spec.parameters.deletionPolicy
-                toFieldPath: spec.deletionPolicy
+                fromFieldPath: spec.parameters.managementPolicies
+                toFieldPath: spec.managementPolicies
               - fromFieldPath: spec.parameters.id
                 policy:
                   fromFieldPath: Required
@@ -431,7 +475,7 @@ spec:
           # EKS pod identity association
           - name: podIdentityAssociationForEks
             base:
-              apiVersion: eks.aws.upbound.io/v1beta1
+              apiVersion: eks.aws.m.upbound.io/v1beta1
               kind: PodIdentityAssociation
               metadata:
                 labels:
@@ -467,7 +511,7 @@ spec:
           # Crossplane Helm Deployment
           - name: CrossplaneDeploy
             base:
-              apiVersion: helm.crossplane.io/v1beta1
+              apiVersion: helm.m.crossplane.io/v1beta1
               kind: Release
               metadata:
                 name: crossplane
@@ -481,13 +525,14 @@ spec:
                   chart:
                     name: crossplane
                     repository: https://charts.crossplane.io/stable
-                    version: 1.15.2
+                    version: 2.4.0
                   namespace: upbound-system
                 providerConfigRef:
-                  name: configuration-aws-eks
+                  kind: ProviderConfig
+                  # name: configuration-aws-eks
             patches:
               - type: FromCompositeFieldPath
-                fromFieldPath: spec.parameters.targetCluster.crossplaneVersion
+                fromFieldPath: spec.parameters.targetClusterParameters.crossplaneVersion
                 toFieldPath: spec.forProvider.chart.version
               - type: FromCompositeFieldPath
                 fromFieldPath: spec.parameters.id
@@ -497,14 +542,16 @@ spec:
           # Deployment Runtime Config with IRSA-annotated k8s service account for providers
           - name: IRSARuntimeConfig
             base:
-              apiVersion: kubernetes.crossplane.io/v1alpha2
+              apiVersion: kubernetes.m.crossplane.io/v1alpha1
               kind: Object
               metadata:
                 name: irsa-runtime-config
                 labels:
                   component: irsa-runtime-config
               spec:
-                deletionPolicy: Delete
+                providerConfigRef:
+                  kind: ProviderConfig
+                  # name: configuration-aws-eks
                 forProvider:
                   manifest:
                     apiVersion: pkg.crossplane.io/v1beta1
@@ -518,8 +565,8 @@ spec:
                           name: my-xpsa
             patches:
               - type: FromCompositeFieldPath
-                fromFieldPath: spec.parameters.deletionPolicy
-                toFieldPath: spec.deletionPolicy
+                fromFieldPath: spec.parameters.managementPolicies
+                toFieldPath: spec.managementPolicies
               - type: FromCompositeFieldPath
                 fromFieldPath: spec.parameters.id
                 toFieldPath: spec.providerConfigRef.name
@@ -557,14 +604,16 @@ spec:
           # Deployment Runtime Config for non-IRSA k8s service account for providers
           - name: WebIdentityRuntimeConfig
             base:
-              apiVersion: kubernetes.crossplane.io/v1alpha2
+              apiVersion: kubernetes.m.crossplane.io/v1alpha1
               kind: Object
               metadata:
                 name: webidentity-runtime-config
                 labels:
                   component: webidentity-runtime-config
               spec:
-                deletionPolicy: Delete
+                providerConfigRef:
+                  kind: ProviderConfig
+                  # name: configuration-aws-eks
                 forProvider:
                   manifest:
                     apiVersion: pkg.crossplane.io/v1beta1
@@ -598,8 +647,8 @@ spec:
                                       audience: sts.amazonaws.com
             patches:
               - type: FromCompositeFieldPath
-                fromFieldPath: spec.parameters.deletionPolicy
-                toFieldPath: spec.deletionPolicy
+                fromFieldPath: spec.parameters.managementPolicies
+                toFieldPath: spec.managementPolicies
               - type: FromCompositeFieldPath
                 fromFieldPath: spec.parameters.id
                 toFieldPath: spec.providerConfigRef.name
@@ -637,14 +686,16 @@ spec:
           # Deployment Runtime Config with dedicated AWS PodIdentity-configured k8s service account
           - name: PodIdentityRuntimeConfig
             base:
-              apiVersion: kubernetes.crossplane.io/v1alpha2
+              apiVersion: kubernetes.m.crossplane.io/v1alpha1
               kind: Object
               metadata:
                 name: podidentity-runtime-config
                 labels:
                   component: podidentity-runtime-config
               spec:
-                deletionPolicy: Delete
+                providerConfigRef:
+                  kind: ProviderConfig
+                  # name: configuration-aws-eks
                 forProvider:
                   manifest:
                     apiVersion: pkg.crossplane.io/v1beta1
@@ -659,8 +710,8 @@ spec:
                       deploymentTemplate: {}
             patches:
               - type: FromCompositeFieldPath
-                fromFieldPath: spec.parameters.deletionPolicy
-                toFieldPath: spec.deletionPolicy
+                fromFieldPath: spec.parameters.managementPolicies
+                toFieldPath: spec.managementPolicies
               - type: FromCompositeFieldPath
                 fromFieldPath: spec.parameters.id
                 toFieldPath: spec.providerConfigRef.name
@@ -699,7 +750,7 @@ spec:
           # AWS Family provider
           - name: AWSFamilyProvider
             base:
-              apiVersion: kubernetes.crossplane.io/v1alpha2
+              apiVersion: kubernetes.m.crossplane.io/v1alpha1
               kind: Object
               metadata:
                 name: aws-family-provider
@@ -707,6 +758,9 @@ spec:
                 labels:
                   component: aws-family-provider
               spec:
+                providerConfigRef:
+                  kind: ProviderConfig
+                  # name: configuration-aws-eks
                 readiness:
                   policy: AllTrue
                 forProvider:
@@ -717,7 +771,7 @@ spec:
                       name: provider-family-aws
                     spec:
                       ignoreCrossplaneConstraints: false
-                      # package: xpkg.upbound.io/upbound/provider-family-aws:v1.3.1
+                      # package: xpkg.upbound.io/upbound/provider-family-aws:v2.7.0
                       packagePullPolicy: IfNotPresent
                       revisionActivationPolicy: Automatic
                       revisionHistoryLimit: 1
@@ -726,8 +780,8 @@ spec:
                         name: my-runtime-config
             patches:
               - type: FromCompositeFieldPath
-                fromFieldPath: spec.parameters.deletionPolicy
-                toFieldPath: spec.deletionPolicy
+                fromFieldPath: spec.parameters.managementPolicies
+                toFieldPath: spec.managementPolicies
               - type: FromCompositeFieldPath
                 fromFieldPath: spec.parameters.id
                 toFieldPath: spec.providerConfigRef.name
@@ -760,13 +814,16 @@ spec:
           # AWS EC2 provider - for IRSA provider config testing
           - name: ProviderAWSEC2
             base:
-              apiVersion: kubernetes.crossplane.io/v1alpha2
+              apiVersion: kubernetes.m.crossplane.io/v1alpha1
               kind: Object
               metadata:
                 name: aws-provider-ec2
                 labels:
                   component: aws-provider-ec2
               spec:
+                providerConfigRef:
+                  kind: ProviderConfig
+                  # name: configuration-aws-eks
                 readiness:
                   policy: AllTrue
                 forProvider:
@@ -777,7 +834,7 @@ spec:
                       name: provider-aws-ec2
                     spec:
                       ignoreCrossplaneConstraints: false
-                      # package: xpkg.upbound.io/upbound/provider-aws-ec2:v1.3.1
+                      # package: xpkg.upbound.io/upbound/provider-aws-ec2:v2.7.0
                       packagePullPolicy: IfNotPresent
                       revisionActivationPolicy: Automatic
                       revisionHistoryLimit: 1
@@ -786,8 +843,8 @@ spec:
                         name: my-runtime-config
             patches:
               - type: FromCompositeFieldPath
-                fromFieldPath: spec.parameters.deletionPolicy
-                toFieldPath: spec.deletionPolicy
+                fromFieldPath: spec.parameters.managementPolicies
+                toFieldPath: spec.managementPolicies
               - type: FromCompositeFieldPath
                 fromFieldPath: spec.parameters.id
                 toFieldPath: spec.providerConfigRef.name
@@ -820,13 +877,16 @@ spec:
           # AWS RDS provider - for non-IRSA provider config testing
           - name: ProviderAWSRDS
             base:
-              apiVersion: kubernetes.crossplane.io/v1alpha2
+              apiVersion: kubernetes.m.crossplane.io/v1alpha1
               kind: Object
               metadata:
                 name: aws-provider-rds
                 labels:
                   component: aws-provider-rds
               spec:
+                providerConfigRef:
+                  kind: ProviderConfig
+                  # name: configuration-aws-eks
                 readiness:
                   policy: AllTrue
                 forProvider:
@@ -837,7 +897,7 @@ spec:
                       name: provider-aws-rds
                     spec:
                       ignoreCrossplaneConstraints: false
-                      # package: xpkg.upbound.io/upbound/provider-aws-rds:v1.3.1
+                      # package: xpkg.upbound.io/upbound/provider-aws-rds:v2.7.0
                       packagePullPolicy: IfNotPresent
                       revisionActivationPolicy: Automatic
                       revisionHistoryLimit: 1
@@ -846,8 +906,8 @@ spec:
                         name: my-webid-runtime-config
             patches:
               - type: FromCompositeFieldPath
-                fromFieldPath: spec.parameters.deletionPolicy
-                toFieldPath: spec.deletionPolicy
+                fromFieldPath: spec.parameters.managementPolicies
+                toFieldPath: spec.managementPolicies
               - type: FromCompositeFieldPath
                 fromFieldPath: spec.parameters.id
                 toFieldPath: spec.providerConfigRef.name
@@ -880,13 +940,16 @@ spec:
           # AWS RDS provider - for non-IRSA provider config testing
           - name: ProviderAWSKafka
             base:
-              apiVersion: kubernetes.crossplane.io/v1alpha2
+              apiVersion: kubernetes.m.crossplane.io/v1alpha1
               kind: Object
               metadata:
                 name: aws-provider-kafka
                 labels:
                   component: aws-provider-kafka
               spec:
+                providerConfigRef:
+                  kind: ProviderConfig
+                  # name: configuration-aws-eks
                 readiness:
                   policy: AllTrue
                 forProvider:
@@ -897,7 +960,7 @@ spec:
                       name: provider-aws-kafka
                     spec:
                       ignoreCrossplaneConstraints: false
-                      # package: xpkg.upbound.io/upbound/provider-aws-kafka:v1.3.1
+                      # package: xpkg.upbound.io/upbound/provider-aws-kafka:v2.7.0
                       packagePullPolicy: IfNotPresent
                       revisionActivationPolicy: Automatic
                       revisionHistoryLimit: 1
@@ -906,8 +969,8 @@ spec:
                         name: my-podidentity-runtime-config
             patches:
               - type: FromCompositeFieldPath
-                fromFieldPath: spec.parameters.deletionPolicy
-                toFieldPath: spec.deletionPolicy
+                fromFieldPath: spec.parameters.managementPolicies
+                toFieldPath: spec.managementPolicies
               - type: FromCompositeFieldPath
                 fromFieldPath: spec.parameters.id
                 toFieldPath: spec.providerConfigRef.name
@@ -941,7 +1004,7 @@ spec:
           # IRSA-enabled Provider Config
           - name: IRSAProviderConfig
             base:
-              apiVersion: kubernetes.crossplane.io/v1alpha2
+              apiVersion: kubernetes.m.crossplane.io/v1alpha1
               kind: Object
               metadata:
                 name: irsa-provider-config
@@ -949,6 +1012,9 @@ spec:
                   component: aws-irsa-provider-config
                   component-type: aws-provider-config
               spec:
+                providerConfigRef:
+                  kind: ProviderConfig
+                  # name: configuration-aws-eks
                 forProvider:
                   manifest:
                     apiVersion: aws.upbound.io/v1beta1
@@ -960,8 +1026,8 @@ spec:
                         source: IRSA
             patches:
               - type: FromCompositeFieldPath
-                fromFieldPath: spec.parameters.deletionPolicy
-                toFieldPath: spec.deletionPolicy
+                fromFieldPath: spec.parameters.managementPolicies
+                toFieldPath: spec.managementPolicies
               - type: FromCompositeFieldPath
                 fromFieldPath: spec.parameters.id
                 toFieldPath: spec.providerConfigRef.name
@@ -969,7 +1035,7 @@ spec:
           # IRSA-enabled Provider Config - with chained role
           - name: IRSAProviderConfigWithChain
             base:
-              apiVersion: kubernetes.crossplane.io/v1alpha2
+              apiVersion: kubernetes.m.crossplane.io/v1alpha1
               kind: Object
               metadata:
                 name: irsa-with-chain-provider-config
@@ -977,6 +1043,9 @@ spec:
                   component: aws-irsa-chain-provider-config
                   component-type: aws-provider-config
               spec:
+                providerConfigRef:
+                  kind: ProviderConfig
+                  # name: configuration-aws-eks
                 forProvider:
                   manifest:
                     apiVersion: aws.upbound.io/v1beta1
@@ -990,8 +1059,8 @@ spec:
                         source: IRSA
             patches:
               - type: FromCompositeFieldPath
-                fromFieldPath: spec.parameters.deletionPolicy
-                toFieldPath: spec.deletionPolicy
+                fromFieldPath: spec.parameters.managementPolicies
+                toFieldPath: spec.managementPolicies
               - type: FromCompositeFieldPath
                 fromFieldPath: spec.parameters.id
                 toFieldPath: spec.providerConfigRef.name
@@ -1004,7 +1073,7 @@ spec:
           # WebIdentity Provider Config - Legacy config with IRSA-dependency
           - name: WebIdentityProviderConfigLegacy
             base:
-              apiVersion: kubernetes.crossplane.io/v1alpha2
+              apiVersion: kubernetes.m.crossplane.io/v1alpha1
               kind: Object
               metadata:
                 name: webidentity-with-legacy-config
@@ -1012,6 +1081,9 @@ spec:
                   component-type: aws-provider-config
                   component: aws-webidentity-legacy-config
               spec:
+                providerConfigRef:
+                  kind: ProviderConfig
+                  # name: configuration-aws-eks
                 forProvider:
                   manifest:
                     apiVersion: aws.upbound.io/v1beta1
@@ -1025,8 +1097,8 @@ spec:
                           roleARN: to-be-patched
             patches:
               - type: FromCompositeFieldPath
-                fromFieldPath: spec.parameters.deletionPolicy
-                toFieldPath: spec.deletionPolicy
+                fromFieldPath: spec.parameters.managementPolicies
+                toFieldPath: spec.managementPolicies
               - type: FromCompositeFieldPath
                 fromFieldPath: spec.parameters.id
                 toFieldPath: spec.providerConfigRef.name
@@ -1039,7 +1111,7 @@ spec:
           # WebIdentity Provider Config with token at FileSystem
           - name: WebIdentityProviderConfigFs
             base:
-              apiVersion: kubernetes.crossplane.io/v1alpha2
+              apiVersion: kubernetes.m.crossplane.io/v1alpha1
               kind: Object
               metadata:
                 name: webidentity-with-fs-config
@@ -1047,6 +1119,9 @@ spec:
                   component-type: aws-provider-config
                   component: aws-webidentity-fs-config
               spec:
+                providerConfigRef:
+                  kind: ProviderConfig
+                  # name: configuration-aws-eks
                 forProvider:
                   manifest:
                     apiVersion: aws.upbound.io/v1beta1
@@ -1065,8 +1140,8 @@ spec:
 
             patches:
               - type: FromCompositeFieldPath
-                fromFieldPath: spec.parameters.deletionPolicy
-                toFieldPath: spec.deletionPolicy
+                fromFieldPath: spec.parameters.managementPolicies
+                toFieldPath: spec.managementPolicies
               - type: FromCompositeFieldPath
                 fromFieldPath: spec.parameters.id
                 toFieldPath: spec.providerConfigRef.name
@@ -1079,7 +1154,7 @@ spec:
           # WebIdentity Provider Config with token at secret
           - name: WebIdentityProviderConfigTokenAtSecret
             base:
-              apiVersion: kubernetes.crossplane.io/v1alpha2
+              apiVersion: kubernetes.m.crossplane.io/v1alpha1
               kind: Object
               metadata:
                 name: webidentity-with-secret-config
@@ -1087,6 +1162,9 @@ spec:
                   component-type: aws-provider-config
                   component: aws-webidentity-secret-config
               spec:
+                providerConfigRef:
+                  kind: ProviderConfig
+                  # name: configuration-aws-eks
                 forProvider:
                   manifest:
                     apiVersion: aws.upbound.io/v1beta1
@@ -1097,7 +1175,7 @@ spec:
                       credentials:
                         source: WebIdentity
                         webIdentity:
-                          roleArn: to-be-patched
+                          roleARN: to-be-patched
                           tokenConfig:
                             source: Secret
                             secretRef:
@@ -1106,16 +1184,21 @@ spec:
                               namespace: upbound-system
             patches:
               - type: FromCompositeFieldPath
-                fromFieldPath: spec.parameters.deletionPolicy
-                toFieldPath: spec.deletionPolicy
+                fromFieldPath: spec.parameters.managementPolicies
+                toFieldPath: spec.managementPolicies
               - type: FromCompositeFieldPath
                 fromFieldPath: spec.parameters.id
                 toFieldPath: spec.providerConfigRef.name
+              - type: FromCompositeFieldPath
+                fromFieldPath: status.webIdentity.roleArn
+                policy:
+                  fromFieldPath: Required
+                toFieldPath: spec.forProvider.manifest.spec.credentials.webIdentity.roleARN
 
           # WebIdentity Provider Config with token at FileSystem - with chained role
           - name: WebIdentityProviderConfigFsWithChain
             base:
-              apiVersion: kubernetes.crossplane.io/v1alpha2
+              apiVersion: kubernetes.m.crossplane.io/v1alpha1
               kind: Object
               metadata:
                 name: webidentity-with-fs-chain-config
@@ -1123,6 +1206,9 @@ spec:
                   component-type: aws-provider-config
                   component: aws-webidentity-fs-chain-config
               spec:
+                providerConfigRef:
+                  kind: ProviderConfig
+                  # name: configuration-aws-eks
                 forProvider:
                   manifest:
                     apiVersion: aws.upbound.io/v1beta1
@@ -1143,8 +1229,8 @@ spec:
 
             patches:
               - type: FromCompositeFieldPath
-                fromFieldPath: spec.parameters.deletionPolicy
-                toFieldPath: spec.deletionPolicy
+                fromFieldPath: spec.parameters.managementPolicies
+                toFieldPath: spec.managementPolicies
               - type: FromCompositeFieldPath
                 fromFieldPath: spec.parameters.id
                 toFieldPath: spec.providerConfigRef.name
@@ -1162,7 +1248,7 @@ spec:
           # PodIdentity provider config
           - name: PodIdentityProviderConfig
             base:
-              apiVersion: kubernetes.crossplane.io/v1alpha2
+              apiVersion: kubernetes.m.crossplane.io/v1alpha1
               kind: Object
               metadata:
                 name: podidentity-provider-config
@@ -1170,6 +1256,9 @@ spec:
                   component: aws-podidentity-provider-config
                   component-type: aws-provider-config
               spec:
+                providerConfigRef:
+                  kind: ProviderConfig
+                  # name: configuration-aws-eks
                 forProvider:
                   manifest:
                     apiVersion: aws.upbound.io/v1beta1
@@ -1181,8 +1270,8 @@ spec:
                         source: PodIdentity
             patches:
               - type: FromCompositeFieldPath
-                fromFieldPath: spec.parameters.deletionPolicy
-                toFieldPath: spec.deletionPolicy
+                fromFieldPath: spec.parameters.managementPolicies
+                toFieldPath: spec.managementPolicies
               - type: FromCompositeFieldPath
                 fromFieldPath: spec.parameters.id
                 toFieldPath: spec.providerConfigRef.name
@@ -1191,7 +1280,7 @@ spec:
           # Demo VPC MR for testing IRSA
           - name: DemoVPC
             base:
-              apiVersion: kubernetes.crossplane.io/v1alpha2
+              apiVersion: kubernetes.m.crossplane.io/v1alpha1
               kind: Object
               metadata:
                 name: demo-vpc-mr
@@ -1199,6 +1288,9 @@ spec:
                   resource-provider: aws-provider-ec2
                   component: demo-vpc
               spec:
+                providerConfigRef:
+                  kind: ProviderConfig
+                  # name: configuration-aws-eks
                 readiness:
                   policy: AllTrue
                 forProvider:
@@ -1219,8 +1311,8 @@ spec:
                           Name: PCTesting-Demo
             patches:
               - type: FromCompositeFieldPath
-                fromFieldPath: spec.parameters.deletionPolicy
-                toFieldPath: spec.deletionPolicy
+                fromFieldPath: spec.parameters.managementPolicies
+                toFieldPath: spec.managementPolicies
               - type: FromCompositeFieldPath
                 fromFieldPath: spec.parameters.id
                 toFieldPath: spec.providerConfigRef.name
@@ -1238,7 +1330,7 @@ spec:
           # Demo VPC MR for testing IRSA with chained Role
           - name: DemoVPCIRSAChain
             base:
-              apiVersion: kubernetes.crossplane.io/v1alpha2
+              apiVersion: kubernetes.m.crossplane.io/v1alpha1
               kind: Object
               metadata:
                 name: demo-vpc-irsa-chain-mr
@@ -1246,6 +1338,9 @@ spec:
                   resource-provider: aws-provider-ec2
                   component: demo-vpc-irsa-chain
               spec:
+                providerConfigRef:
+                  kind: ProviderConfig
+                  # name: configuration-aws-eks
                 readiness:
                   policy: AllTrue
                 forProvider:
@@ -1266,8 +1361,8 @@ spec:
                           Name: PCTesting-IRSA-Chain-Demo
             patches:
               - type: FromCompositeFieldPath
-                fromFieldPath: spec.parameters.deletionPolicy
-                toFieldPath: spec.deletionPolicy
+                fromFieldPath: spec.parameters.managementPolicies
+                toFieldPath: spec.managementPolicies
               - type: FromCompositeFieldPath
                 fromFieldPath: spec.parameters.id
                 toFieldPath: spec.providerConfigRef.name
@@ -1285,7 +1380,7 @@ spec:
           # Demo VPC MR for testing Legacy WebIdentity
           - name: DemoVPCLegacyWebID
             base:
-              apiVersion: kubernetes.crossplane.io/v1alpha2
+              apiVersion: kubernetes.m.crossplane.io/v1alpha1
               kind: Object
               metadata:
                 name: demo-vpc-legacy-webid-mr
@@ -1293,6 +1388,9 @@ spec:
                   resource-provider: aws-provider-ec2
                   component: demo-vpc-legacy-webid
               spec:
+                providerConfigRef:
+                  kind: ProviderConfig
+                  # name: configuration-aws-eks
                 readiness:
                   policy: AllTrue
                 forProvider:
@@ -1313,8 +1411,8 @@ spec:
                           Name: PCTesting-Demo-WebIDLegacy
             patches:
               - type: FromCompositeFieldPath
-                fromFieldPath: spec.parameters.deletionPolicy
-                toFieldPath: spec.deletionPolicy
+                fromFieldPath: spec.parameters.managementPolicies
+                toFieldPath: spec.managementPolicies
               - type: FromCompositeFieldPath
                 fromFieldPath: spec.parameters.id
                 toFieldPath: spec.providerConfigRef.name
@@ -1332,7 +1430,7 @@ spec:
           # Demo RDS Parameter Group MR for testing WebIdentity
           - name: DemoRDSParameterGroupWebIDFs
             base:
-              apiVersion: kubernetes.crossplane.io/v1alpha2
+              apiVersion: kubernetes.m.crossplane.io/v1alpha1
               kind: Object
               metadata:
                 name: demo-parametergroup-webidfs-mr
@@ -1340,6 +1438,9 @@ spec:
                   resource-provider: aws-provider-rds
                   component: demo-pg-webidfs
               spec:
+                providerConfigRef:
+                  kind: ProviderConfig
+                  # name: configuration-aws-eks
                 readiness:
                   policy: AllTrue
                 forProvider:
@@ -1366,8 +1467,8 @@ spec:
 
             patches:
               - type: FromCompositeFieldPath
-                fromFieldPath: spec.parameters.deletionPolicy
-                toFieldPath: spec.deletionPolicy
+                fromFieldPath: spec.parameters.managementPolicies
+                toFieldPath: spec.managementPolicies
               - type: FromCompositeFieldPath
                 fromFieldPath: spec.parameters.id
                 toFieldPath: spec.providerConfigRef.name
@@ -1385,7 +1486,7 @@ spec:
           # Demo RDS Parameter Group MR for testing WebIdentity config with Chain
           - name: DemoRDSParameterGroupWebIDFsChain
             base:
-              apiVersion: kubernetes.crossplane.io/v1alpha2
+              apiVersion: kubernetes.m.crossplane.io/v1alpha1
               kind: Object
               metadata:
                 name: demo-parametergroup-webidfs-chain-mr
@@ -1393,6 +1494,9 @@ spec:
                   resource-provider: aws-provider-rds
                   component: demo-pg-webidfs-chain
               spec:
+                providerConfigRef:
+                  kind: ProviderConfig
+                  # name: configuration-aws-eks
                 readiness:
                   policy: AllTrue
                 forProvider:
@@ -1418,8 +1522,8 @@ spec:
                             applyMethod: immediate
             patches:
               - type: FromCompositeFieldPath
-                fromFieldPath: spec.parameters.deletionPolicy
-                toFieldPath: spec.deletionPolicy
+                fromFieldPath: spec.parameters.managementPolicies
+                toFieldPath: spec.managementPolicies
               - type: FromCompositeFieldPath
                 fromFieldPath: spec.parameters.id
                 toFieldPath: spec.providerConfigRef.name
@@ -1437,7 +1541,7 @@ spec:
           # Demo Kafka Configuration MR for testing PodIdentity
           - name: DemoKafkaConfigurationPodIdentity
             base:
-              apiVersion: kubernetes.crossplane.io/v1alpha2
+              apiVersion: kubernetes.m.crossplane.io/v1alpha1
               kind: Object
               metadata:
                 name: demo-kafkacfg-podidentity-mr
@@ -1445,6 +1549,9 @@ spec:
                   resource-provider: aws-provider-kafka
                   component: demo-kafkaconfiguration-podidentity
               spec:
+                providerConfigRef:
+                  kind: ProviderConfig
+                  # name: configuration-aws-eks
                 readiness:
                   policy: AllTrue
                 forProvider:
@@ -1469,8 +1576,8 @@ spec:
 
             patches:
               - type: FromCompositeFieldPath
-                fromFieldPath: spec.parameters.deletionPolicy
-                toFieldPath: spec.deletionPolicy
+                fromFieldPath: spec.parameters.managementPolicies
+                toFieldPath: spec.managementPolicies
               - type: FromCompositeFieldPath
                 fromFieldPath: spec.parameters.id
                 toFieldPath: spec.providerConfigRef.name
@@ -1499,100 +1606,170 @@ spec:
           ###    USAGES    ###
           ####################
 
-          # XEKS uses XNetwork
+          # EKS uses Network
           - name: usageXNetworkByXEKS
             base:
-              apiVersion: apiextensions.crossplane.io/v1alpha1
+              apiVersion: protection.crossplane.io/v1beta1
               kind: Usage
               spec:
                 replayDeletion: true
                 by:
                   apiVersion: aws.platform.upbound.io/v1alpha1
-                  kind: XEKS
+                  kind: EKS
                   resourceSelector:
                     matchControllerRef: true
                 of:
                   apiVersion: aws.platform.upbound.io/v1alpha1
-                  kind: XNetwork
+                  kind: Network
                   resourceSelector:
                     matchControllerRef: true
             readinessChecks:
               - type: None
 
-          # XIRSAs uses XEKS
+          # OIDC provider uses EKS - its url comes from status.eks.oidcIssuerUrl
+          - name: usageXEksByOidcProvider
+            base:
+              apiVersion: protection.crossplane.io/v1beta1
+              kind: Usage
+              spec:
+                replayDeletion: true
+                by:
+                  apiVersion: iam.aws.m.upbound.io/v1beta1
+                  kind: OpenIDConnectProvider
+                  resourceSelector:
+                    matchControllerRef: true
+                    matchLabels:
+                      component: eks-oidc-provider
+                of:
+                  apiVersion: aws.platform.upbound.io/v1alpha1
+                  kind: EKS
+                  resourceSelector:
+                    matchControllerRef: true
+            readinessChecks:
+              - type: None
+
+          # XIRSAs uses EKS
           - name: usageXEksByXIRSA
             base:
-              apiVersion: apiextensions.crossplane.io/v1alpha1
+              apiVersion: protection.crossplane.io/v1beta1
               kind: Usage
               spec:
                 replayDeletion: true
                 by:
                   apiVersion: aws.platform.upbound.io/v1alpha1
-                  kind: XIRSA
+                  kind: IRSA
                   resourceSelector:
                     matchControllerRef: true
                     matchLabels:
                       component: irsa-bundle
                 of:
                   apiVersion: aws.platform.upbound.io/v1alpha1
-                  kind: XEKS
+                  kind: EKS
                   resourceSelector:
                     matchControllerRef: true
             readinessChecks:
               - type: None
 
-          # pseudo-XIRSA for WebIdentity uses XEKS
-          - name: usageXEksByPseudoXIRSA
+          # XIRSA uses the OIDC provider - its role trusts the provider ARN
+          - name: usageOidcProviderByXIRSA
             base:
-              apiVersion: apiextensions.crossplane.io/v1alpha1
+              apiVersion: protection.crossplane.io/v1beta1
               kind: Usage
               spec:
                 replayDeletion: true
                 by:
                   apiVersion: aws.platform.upbound.io/v1alpha1
-                  kind: XIRSA
+                  kind: IRSA
+                  resourceSelector:
+                    matchControllerRef: true
+                    matchLabels:
+                      component: irsa-bundle
+                of:
+                  apiVersion: iam.aws.m.upbound.io/v1beta1
+                  kind: OpenIDConnectProvider
+                  resourceSelector:
+                    matchControllerRef: true
+                    matchLabels:
+                      component: eks-oidc-provider
+            readinessChecks:
+              - type: None
+
+          # pseudo-XIRSA for WebIdentity uses EKS
+          - name: usageXEksByPseudoXIRSA
+            base:
+              apiVersion: protection.crossplane.io/v1beta1
+              kind: Usage
+              spec:
+                replayDeletion: true
+                by:
+                  apiVersion: aws.platform.upbound.io/v1alpha1
+                  kind: IRSA
                   resourceSelector:
                     matchControllerRef: true
                     matchLabels:
                       component: webidentity-bundle
                 of:
                   apiVersion: aws.platform.upbound.io/v1alpha1
-                  kind: XEKS
+                  kind: EKS
                   resourceSelector:
                     matchControllerRef: true
             readinessChecks:
               - type: None
 
-          # Crossplane Helm deployment uses XEKS
-          - name: usageXEksByCrossplaneDeployment
+          # pseudo-XIRSA uses the OIDC provider - its role trusts the provider ARN
+          - name: usageOidcProviderByPseudoXIRSA
             base:
-              apiVersion: apiextensions.crossplane.io/v1alpha1
+              apiVersion: protection.crossplane.io/v1beta1
               kind: Usage
               spec:
                 replayDeletion: true
                 by:
-                  apiVersion: helm.crossplane.io/v1beta1
+                  apiVersion: aws.platform.upbound.io/v1alpha1
+                  kind: IRSA
+                  resourceSelector:
+                    matchControllerRef: true
+                    matchLabels:
+                      component: webidentity-bundle
+                of:
+                  apiVersion: iam.aws.m.upbound.io/v1beta1
+                  kind: OpenIDConnectProvider
+                  resourceSelector:
+                    matchControllerRef: true
+                    matchLabels:
+                      component: eks-oidc-provider
+            readinessChecks:
+              - type: None
+
+          # Crossplane Helm deployment uses EKS
+          - name: usageXEksByCrossplaneDeployment
+            base:
+              apiVersion: protection.crossplane.io/v1beta1
+              kind: Usage
+              spec:
+                replayDeletion: true
+                by:
+                  apiVersion: helm.m.crossplane.io/v1beta1
                   kind: Release
                   resourceSelector:
                     matchLabels:
                       component: crossplane-deployment
                 of:
                   apiVersion: aws.platform.upbound.io/v1alpha1
-                  kind: XEKS
+                  kind: EKS
                   resourceSelector:
                     matchControllerRef: true
             readinessChecks:
               - type: None
 
-          # PodIdentityAddon uses XEKS
+          # PodIdentityAddon uses EKS
           - name: usageXEksByPodIdentityAddon
             base:
-              apiVersion: apiextensions.crossplane.io/v1alpha1
+              apiVersion: protection.crossplane.io/v1beta1
               kind: Usage
               spec:
                 replayDeletion: true
                 by:
-                  apiVersion: eks.aws.upbound.io/v1beta1
+                  apiVersion: eks.aws.m.upbound.io/v1beta1
                   kind: Addon
                   resourceSelector:
                     matchControllerRef: true
@@ -1600,21 +1777,21 @@ spec:
                       component: eks-podidentity-addon
                 of:
                   apiVersion: aws.platform.upbound.io/v1alpha1
-                  kind: XEKS
+                  kind: EKS
                   resourceSelector:
                     matchControllerRef: true
             readinessChecks:
               - type: None
 
-          # PodIdentityAssociation uses XEKS
+          # PodIdentityAssociation uses EKS
           - name: usageXEksByPodIdentityAssociation
             base:
-              apiVersion: apiextensions.crossplane.io/v1alpha1
+              apiVersion: protection.crossplane.io/v1beta1
               kind: Usage
               spec:
                 replayDeletion: true
                 by:
-                  apiVersion: eks.aws.upbound.io/v1beta1
+                  apiVersion: eks.aws.m.upbound.io/v1beta1
                   kind: PodIdentityAssociation
                   resourceSelector:
                     matchControllerRef: true
@@ -1622,7 +1799,7 @@ spec:
                       component: eks-pod-identity-association
                 of:
                   apiVersion: aws.platform.upbound.io/v1alpha1
-                  kind: XEKS
+                  kind: EKS
                   resourceSelector:
                     matchControllerRef: true
             readinessChecks:
@@ -1631,19 +1808,19 @@ spec:
           # PodIdentityAssociation uses PodIdentity IAM role
           - name: usagePodIdentityIAMRoleByPodIdentityAssociation
             base:
-              apiVersion: apiextensions.crossplane.io/v1alpha1
+              apiVersion: protection.crossplane.io/v1beta1
               kind: Usage
               spec:
                 replayDeletion: true
                 by:
-                  apiVersion: eks.aws.upbound.io/v1beta1
+                  apiVersion: eks.aws.m.upbound.io/v1beta1
                   kind: PodIdentityAssociation
                   resourceSelector:
                     matchControllerRef: true
                     matchLabels:
                       component: eks-pod-identity-association
                 of:
-                  apiVersion: iam.aws.upbound.io/v1beta1
+                  apiVersion: iam.aws.m.upbound.io/v1beta1
                   kind: Role
                   resourceSelector:
                     matchLabels:
@@ -1655,12 +1832,12 @@ spec:
           # IRSA Deployment Runtime Config depends on XIRSA
           - name: usageXIRSAByIRSADeploymentRuntime
             base:
-              apiVersion: apiextensions.crossplane.io/v1alpha1
+              apiVersion: protection.crossplane.io/v1beta1
               kind: Usage
               spec:
                 replayDeletion: true
                 by:
-                  apiVersion: kubernetes.crossplane.io/v1alpha2
+                  apiVersion: kubernetes.m.crossplane.io/v1alpha1
                   kind: Object
                   resourceSelector:
                     matchControllerRef: true
@@ -1668,7 +1845,7 @@ spec:
                       component: irsa-runtime-config
                 of:
                   apiVersion: aws.platform.upbound.io/v1alpha1
-                  kind: XIRSA
+                  kind: IRSA
                   resourceSelector:
                     matchControllerRef: true
                     matchLabels:
@@ -1679,12 +1856,12 @@ spec:
           # WebIdDeployment Runtime Config depends on pseudo-XIRSA
           - name: usageXIRSAByWebIDDeploymentRuntime
             base:
-              apiVersion: apiextensions.crossplane.io/v1alpha1
+              apiVersion: protection.crossplane.io/v1beta1
               kind: Usage
               spec:
                 replayDeletion: true
                 by:
-                  apiVersion: kubernetes.crossplane.io/v1alpha2
+                  apiVersion: kubernetes.m.crossplane.io/v1alpha1
                   kind: Object
                   resourceSelector:
                     matchControllerRef: true
@@ -1692,7 +1869,7 @@ spec:
                       component: webidentity-runtime-config
                 of:
                   apiVersion: aws.platform.upbound.io/v1alpha1
-                  kind: XIRSA
+                  kind: IRSA
                   resourceSelector:
                     matchControllerRef: true
                     matchLabels:
@@ -1703,19 +1880,19 @@ spec:
           # PodIdentity Deployment Runtime config depends on EKS PodIdentityAssociation
           - name: usagePodIdentityAssociationByPodIDDeploymentRuntime
             base:
-              apiVersion: apiextensions.crossplane.io/v1alpha1
+              apiVersion: protection.crossplane.io/v1beta1
               kind: Usage
               spec:
                 replayDeletion: true
                 by:
-                  apiVersion: kubernetes.crossplane.io/v1alpha2
+                  apiVersion: kubernetes.m.crossplane.io/v1alpha1
                   kind: Object
                   resourceSelector:
                     matchControllerRef: true
                     matchLabels:
                       component: podidentity-runtime-config
                 of:
-                  apiVersion: eks.aws.upbound.io/v1beta1
+                  apiVersion: eks.aws.m.upbound.io/v1beta1
                   kind: PodIdentityAssociation
                   resourceSelector:
                     matchControllerRef: true
@@ -1727,19 +1904,19 @@ spec:
           # PodIdentity Deployment Runtime config depends on EKS PodIdentity Addon
           - name: usageEksPodIdentityAddonByPodIDDeploymentRuntime
             base:
-              apiVersion: apiextensions.crossplane.io/v1alpha1
+              apiVersion: protection.crossplane.io/v1beta1
               kind: Usage
               spec:
                 replayDeletion: true
                 by:
-                  apiVersion: kubernetes.crossplane.io/v1alpha2
+                  apiVersion: kubernetes.m.crossplane.io/v1alpha1
                   kind: Object
                   resourceSelector:
                     matchControllerRef: true
                     matchLabels:
                       component: podidentity-runtime-config
                 of:
-                  apiVersion: eks.aws.upbound.io/v1beta1
+                  apiVersion: eks.aws.m.upbound.io/v1beta1
                   kind: Addon
                   resourceSelector:
                     matchControllerRef: true
@@ -1751,19 +1928,19 @@ spec:
           # IRSA Deployment Runtime Config depends on Crossplane Deployment
           - name: usageCrossplaneByDeploymentRuntime
             base:
-              apiVersion: apiextensions.crossplane.io/v1alpha1
+              apiVersion: protection.crossplane.io/v1beta1
               kind: Usage
               spec:
                 replayDeletion: true
                 by:
-                  apiVersion: kubernetes.crossplane.io/v1alpha2
+                  apiVersion: kubernetes.m.crossplane.io/v1alpha1
                   kind: Object
                   resourceSelector:
                     matchControllerRef: true
                     matchLabels:
                       component: irsa-runtime-config
                 of:
-                  apiVersion: helm.crossplane.io/v1alpha1
+                  apiVersion: helm.m.crossplane.io/v1beta1
                   kind: Release
                   resourceSelector:
                     matchLabels:
@@ -1775,19 +1952,19 @@ spec:
           # WebIdentity Deployment Runtime Config depends on Crossplane Deployment
           - name: usageCrossplaneByWebIDDeploymentRuntime
             base:
-              apiVersion: apiextensions.crossplane.io/v1alpha1
+              apiVersion: protection.crossplane.io/v1beta1
               kind: Usage
               spec:
                 replayDeletion: true
                 by:
-                  apiVersion: kubernetes.crossplane.io/v1alpha2
+                  apiVersion: kubernetes.m.crossplane.io/v1alpha1
                   kind: Object
                   resourceSelector:
                     matchControllerRef: true
                     matchLabels:
                       component: webidentity-runtime-config
                 of:
-                  apiVersion: helm.crossplane.io/v1alpha1
+                  apiVersion: helm.m.crossplane.io/v1beta1
                   kind: Release
                   resourceSelector:
                     matchLabels:
@@ -1799,19 +1976,19 @@ spec:
           # PodIdentity Deployment Runtime config depends on Crossplane Deployment
           - name: usageCrossplaneByPodIDDeploymentRuntime
             base:
-              apiVersion: apiextensions.crossplane.io/v1alpha1
+              apiVersion: protection.crossplane.io/v1beta1
               kind: Usage
               spec:
                 replayDeletion: true
                 by:
-                  apiVersion: kubernetes.crossplane.io/v1alpha2
+                  apiVersion: kubernetes.m.crossplane.io/v1alpha1
                   kind: Object
                   resourceSelector:
                     matchControllerRef: true
                     matchLabels:
                       component: podidentity-runtime-config
                 of:
-                  apiVersion: helm.crossplane.io/v1alpha1
+                  apiVersion: helm.m.crossplane.io/v1beta1
                   kind: Release
                   resourceSelector:
                     matchLabels:
@@ -1823,19 +2000,19 @@ spec:
           # AWS Family Provider uses Crossplane Deployment
           - name: usageCrossplaneByFamilyProvider
             base:
-              apiVersion: apiextensions.crossplane.io/v1alpha1
+              apiVersion: protection.crossplane.io/v1beta1
               kind: Usage
               spec:
                 replayDeletion: true
                 by:
-                  apiVersion: kubernetes.crossplane.io/v1alpha2
+                  apiVersion: kubernetes.m.crossplane.io/v1alpha1
                   kind: Object
                   resourceSelector:
                     matchControllerRef: true
                     matchLabels:
                       component: aws-family-provider
                 of:
-                  apiVersion: helm.crossplane.io/v1alpha1
+                  apiVersion: helm.m.crossplane.io/v1beta1
                   kind: Release
                   resourceSelector:
                     matchLabels:
@@ -1849,19 +2026,19 @@ spec:
           # AWS Family Provider uses IRSA Deployment Runtime Config
           - name: usageRuntimeConfigByFamilyProvider
             base:
-              apiVersion: apiextensions.crossplane.io/v1alpha1
+              apiVersion: protection.crossplane.io/v1beta1
               kind: Usage
               spec:
                 replayDeletion: true
                 by:
-                  apiVersion: kubernetes.crossplane.io/v1alpha2
+                  apiVersion: kubernetes.m.crossplane.io/v1alpha1
                   kind: Object
                   resourceSelector:
                     matchControllerRef: true
                     matchLabels:
                       component: aws-family-provider
                 of:
-                  apiVersion: kubernetes.crossplane.io/v1alpha2
+                  apiVersion: kubernetes.m.crossplane.io/v1alpha1
                   kind: Object
                   resourceSelector:
                     matchControllerRef: true
@@ -1873,19 +2050,19 @@ spec:
           # AWS EC2 Provider depends on IRSA Deployment Runtime Config
           - name: usageRuntimeConfigByEC2Provider
             base:
-              apiVersion: apiextensions.crossplane.io/v1alpha1
+              apiVersion: protection.crossplane.io/v1beta1
               kind: Usage
               spec:
                 replayDeletion: true
                 by:
-                  apiVersion: kubernetes.crossplane.io/v1alpha2
+                  apiVersion: kubernetes.m.crossplane.io/v1alpha1
                   kind: Object
                   resourceSelector:
                     matchControllerRef: true
                     matchLabels:
                       component: aws-provider-ec2
                 of:
-                  apiVersion: kubernetes.crossplane.io/v1alpha2
+                  apiVersion: kubernetes.m.crossplane.io/v1alpha1
                   kind: Object
                   resourceSelector:
                     matchControllerRef: true
@@ -1898,19 +2075,19 @@ spec:
           # AWS RDS Provider depends on WebIdentity Deployment Runtime Config
           - name: usageRuntimeConfigByRDSProvider
             base:
-              apiVersion: apiextensions.crossplane.io/v1alpha1
+              apiVersion: protection.crossplane.io/v1beta1
               kind: Usage
               spec:
                 replayDeletion: true
                 by:
-                  apiVersion: kubernetes.crossplane.io/v1alpha2
+                  apiVersion: kubernetes.m.crossplane.io/v1alpha1
                   kind: Object
                   resourceSelector:
                     matchControllerRef: true
                     matchLabels:
                       component: aws-provider-rds
                 of:
-                  apiVersion: kubernetes.crossplane.io/v1alpha2
+                  apiVersion: kubernetes.m.crossplane.io/v1alpha1
                   kind: Object
                   resourceSelector:
                     matchControllerRef: true
@@ -1923,19 +2100,19 @@ spec:
           # AWS Kafka Provider depends on PodIdentity Deployment Runtime Config
           - name: usageRuntimeConfigByKafkaProvider
             base:
-              apiVersion: apiextensions.crossplane.io/v1alpha1
+              apiVersion: protection.crossplane.io/v1beta1
               kind: Usage
               spec:
                 replayDeletion: true
                 by:
-                  apiVersion: kubernetes.crossplane.io/v1alpha2
+                  apiVersion: kubernetes.m.crossplane.io/v1alpha1
                   kind: Object
                   resourceSelector:
                     matchControllerRef: true
                     matchLabels:
                       component: aws-provider-kafka
                 of:
-                  apiVersion: kubernetes.crossplane.io/v1alpha2
+                  apiVersion: kubernetes.m.crossplane.io/v1alpha1
                   kind: Object
                   resourceSelector:
                     matchControllerRef: true
@@ -1949,19 +2126,19 @@ spec:
           # AWS EC2 Provider depends on AWS Family Provider
           - name: usageFamilyProviderByEC2Provider
             base:
-              apiVersion: apiextensions.crossplane.io/v1alpha1
+              apiVersion: protection.crossplane.io/v1beta1
               kind: Usage
               spec:
                 replayDeletion: true
                 by:
-                  apiVersion: kubernetes.crossplane.io/v1alpha2
+                  apiVersion: kubernetes.m.crossplane.io/v1alpha1
                   kind: Object
                   resourceSelector:
                     matchControllerRef: true
                     matchLabels:
                       component: aws-provider-ec2
                 of:
-                  apiVersion: kubernetes.crossplane.io/v1alpha2
+                  apiVersion: kubernetes.m.crossplane.io/v1alpha1
                   kind: Object
                   resourceSelector:
                     matchControllerRef: true
@@ -1974,19 +2151,19 @@ spec:
           # AWS RDS Provider depends on AWS Family Provider
           - name: usageFamilyProviderByRDSProvider
             base:
-              apiVersion: apiextensions.crossplane.io/v1alpha1
+              apiVersion: protection.crossplane.io/v1beta1
               kind: Usage
               spec:
                 replayDeletion: true
                 by:
-                  apiVersion: kubernetes.crossplane.io/v1alpha2
+                  apiVersion: kubernetes.m.crossplane.io/v1alpha1
                   kind: Object
                   resourceSelector:
                     matchControllerRef: true
                     matchLabels:
                       component: aws-provider-rds
                 of:
-                  apiVersion: kubernetes.crossplane.io/v1alpha2
+                  apiVersion: kubernetes.m.crossplane.io/v1alpha1
                   kind: Object
                   resourceSelector:
                     matchControllerRef: true
@@ -1999,19 +2176,19 @@ spec:
           # AWS Kafka Provider depends on AWS Family Provider
           - name: usageFamilyProviderByKafkaProvider
             base:
-              apiVersion: apiextensions.crossplane.io/v1alpha1
+              apiVersion: protection.crossplane.io/v1beta1
               kind: Usage
               spec:
                 replayDeletion: true
                 by:
-                  apiVersion: kubernetes.crossplane.io/v1alpha2
+                  apiVersion: kubernetes.m.crossplane.io/v1alpha1
                   kind: Object
                   resourceSelector:
                     matchControllerRef: true
                     matchLabels:
                       component: aws-provider-kafka
                 of:
-                  apiVersion: kubernetes.crossplane.io/v1alpha2
+                  apiVersion: kubernetes.m.crossplane.io/v1alpha1
                   kind: Object
                   resourceSelector:
                     matchControllerRef: true
@@ -2027,19 +2204,19 @@ spec:
           # IRSA provider config depend on Family Provider
           - name: usageFamilyProviderByIRSAProviderConfig
             base:
-              apiVersion: apiextensions.crossplane.io/v1alpha1
+              apiVersion: protection.crossplane.io/v1beta1
               kind: Usage
               spec:
                 replayDeletion: true
                 by:
-                  apiVersion: kubernetes.crossplane.io/v1alpha2
+                  apiVersion: kubernetes.m.crossplane.io/v1alpha1
                   kind: Object
                   resourceSelector:
                     matchControllerRef: true
                     matchLabels:
                       component: aws-irsa-provider-config
                 of:
-                  apiVersion: kubernetes.crossplane.io/v1alpha2
+                  apiVersion: kubernetes.m.crossplane.io/v1alpha1
                   kind: Object
                   resourceSelector:
                     matchControllerRef: true
@@ -2051,19 +2228,19 @@ spec:
           # IRSA with Chain
           - name: usageFamilyProviderByIRSAChainProviderConfig
             base:
-              apiVersion: apiextensions.crossplane.io/v1alpha1
+              apiVersion: protection.crossplane.io/v1beta1
               kind: Usage
               spec:
                 replayDeletion: true
                 by:
-                  apiVersion: kubernetes.crossplane.io/v1alpha2
+                  apiVersion: kubernetes.m.crossplane.io/v1alpha1
                   kind: Object
                   resourceSelector:
                     matchControllerRef: true
                     matchLabels:
                       component: aws-irsa-chain-provider-config
                 of:
-                  apiVersion: kubernetes.crossplane.io/v1alpha2
+                  apiVersion: kubernetes.m.crossplane.io/v1alpha1
                   kind: Object
                   resourceSelector:
                     matchControllerRef: true
@@ -2075,19 +2252,19 @@ spec:
           # Legacy WebIdentity
           - name: usageFamilyProviderByLegacyWebIdentityProviderConfig
             base:
-              apiVersion: apiextensions.crossplane.io/v1alpha1
+              apiVersion: protection.crossplane.io/v1beta1
               kind: Usage
               spec:
                 replayDeletion: true
                 by:
-                  apiVersion: kubernetes.crossplane.io/v1alpha2
+                  apiVersion: kubernetes.m.crossplane.io/v1alpha1
                   kind: Object
                   resourceSelector:
                     matchControllerRef: true
                     matchLabels:
                       component: aws-webidentity-legacy-config
                 of:
-                  apiVersion: kubernetes.crossplane.io/v1alpha2
+                  apiVersion: kubernetes.m.crossplane.io/v1alpha1
                   kind: Object
                   resourceSelector:
                     matchControllerRef: true
@@ -2099,19 +2276,19 @@ spec:
           # WebIdentity with token at FS
           - name: usageFamilyProviderByWebIdentityFSProviderConfig
             base:
-              apiVersion: apiextensions.crossplane.io/v1alpha1
+              apiVersion: protection.crossplane.io/v1beta1
               kind: Usage
               spec:
                 replayDeletion: true
                 by:
-                  apiVersion: kubernetes.crossplane.io/v1alpha2
+                  apiVersion: kubernetes.m.crossplane.io/v1alpha1
                   kind: Object
                   resourceSelector:
                     matchControllerRef: true
                     matchLabels:
                       component: aws-webidentity-fs-config
                 of:
-                  apiVersion: kubernetes.crossplane.io/v1alpha2
+                  apiVersion: kubernetes.m.crossplane.io/v1alpha1
                   kind: Object
                   resourceSelector:
                     matchControllerRef: true
@@ -2123,19 +2300,19 @@ spec:
           # WebIdentity with token at Secret
           - name: usageFamilyProviderByWebIdentitySecretProviderConfig
             base:
-              apiVersion: apiextensions.crossplane.io/v1alpha1
+              apiVersion: protection.crossplane.io/v1beta1
               kind: Usage
               spec:
                 replayDeletion: true
                 by:
-                  apiVersion: kubernetes.crossplane.io/v1alpha2
+                  apiVersion: kubernetes.m.crossplane.io/v1alpha1
                   kind: Object
                   resourceSelector:
                     matchControllerRef: true
                     matchLabels:
                       component: aws-webidentity-secret-config
                 of:
-                  apiVersion: kubernetes.crossplane.io/v1alpha2
+                  apiVersion: kubernetes.m.crossplane.io/v1alpha1
                   kind: Object
                   resourceSelector:
                     matchControllerRef: true
@@ -2147,19 +2324,19 @@ spec:
           # WebIdentity with token at FS with Chain
           - name: usageFamilyProviderByWebIdentityFSChainProviderConfig
             base:
-              apiVersion: apiextensions.crossplane.io/v1alpha1
+              apiVersion: protection.crossplane.io/v1beta1
               kind: Usage
               spec:
                 replayDeletion: true
                 by:
-                  apiVersion: kubernetes.crossplane.io/v1alpha2
+                  apiVersion: kubernetes.m.crossplane.io/v1alpha1
                   kind: Object
                   resourceSelector:
                     matchControllerRef: true
                     matchLabels:
                       component: aws-webidentity-fs-chain-config
                 of:
-                  apiVersion: kubernetes.crossplane.io/v1alpha2
+                  apiVersion: kubernetes.m.crossplane.io/v1alpha1
                   kind: Object
                   resourceSelector:
                     matchControllerRef: true
@@ -2171,19 +2348,19 @@ spec:
           # PodIdentity provider config depend on Family Provider
           - name: usageFamilyProviderByPodIdProviderConfig
             base:
-              apiVersion: apiextensions.crossplane.io/v1alpha1
+              apiVersion: protection.crossplane.io/v1beta1
               kind: Usage
               spec:
                 replayDeletion: true
                 by:
-                  apiVersion: kubernetes.crossplane.io/v1alpha2
+                  apiVersion: kubernetes.m.crossplane.io/v1alpha1
                   kind: Object
                   resourceSelector:
                     matchControllerRef: true
                     matchLabels:
                       component: aws-podidentity-provider-config
                 of:
-                  apiVersion: kubernetes.crossplane.io/v1alpha2
+                  apiVersion: kubernetes.m.crossplane.io/v1alpha1
                   kind: Object
                   resourceSelector:
                     matchControllerRef: true
@@ -2198,19 +2375,19 @@ spec:
 
           - name: usageEC2ProviderByDemoVPC
             base:
-              apiVersion: apiextensions.crossplane.io/v1alpha1
+              apiVersion: protection.crossplane.io/v1beta1
               kind: Usage
               spec:
                 replayDeletion: true
                 by:
-                  apiVersion: kubernetes.crossplane.io/v1alpha2
+                  apiVersion: kubernetes.m.crossplane.io/v1alpha1
                   kind: Object
                   resourceSelector:
                     matchControllerRef: true
                     matchLabels:
                       component: demo-vpc
                 of:
-                  apiVersion: kubernetes.crossplane.io/v1alpha2
+                  apiVersion: kubernetes.m.crossplane.io/v1alpha1
                   kind: Object
                   resourceSelector:
                     matchControllerRef: true
@@ -2221,19 +2398,19 @@ spec:
 
           - name: usageEC2ProviderByDemoVpcIrsaChain
             base:
-              apiVersion: apiextensions.crossplane.io/v1alpha1
+              apiVersion: protection.crossplane.io/v1beta1
               kind: Usage
               spec:
                 replayDeletion: true
                 by:
-                  apiVersion: kubernetes.crossplane.io/v1alpha2
+                  apiVersion: kubernetes.m.crossplane.io/v1alpha1
                   kind: Object
                   resourceSelector:
                     matchControllerRef: true
                     matchLabels:
                       component: demo-vpc-irsa-chain
                 of:
-                  apiVersion: kubernetes.crossplane.io/v1alpha2
+                  apiVersion: kubernetes.m.crossplane.io/v1alpha1
                   kind: Object
                   resourceSelector:
                     matchControllerRef: true
@@ -2244,19 +2421,19 @@ spec:
 
           - name: usageEC2ProviderByDemoVpcLegacyWebID
             base:
-              apiVersion: apiextensions.crossplane.io/v1alpha1
+              apiVersion: protection.crossplane.io/v1beta1
               kind: Usage
               spec:
                 replayDeletion: true
                 by:
-                  apiVersion: kubernetes.crossplane.io/v1alpha2
+                  apiVersion: kubernetes.m.crossplane.io/v1alpha1
                   kind: Object
                   resourceSelector:
                     matchControllerRef: true
                     matchLabels:
                       component: demo-vpc-legacy-webid
                 of:
-                  apiVersion: kubernetes.crossplane.io/v1alpha2
+                  apiVersion: kubernetes.m.crossplane.io/v1alpha1
                   kind: Object
                   resourceSelector:
                     matchControllerRef: true
@@ -2267,19 +2444,19 @@ spec:
 
           - name: usageRDSProviderByPgWebIdFsMR
             base:
-              apiVersion: apiextensions.crossplane.io/v1alpha1
+              apiVersion: protection.crossplane.io/v1beta1
               kind: Usage
               spec:
                 replayDeletion: true
                 by:
-                  apiVersion: kubernetes.crossplane.io/v1alpha2
+                  apiVersion: kubernetes.m.crossplane.io/v1alpha1
                   kind: Object
                   resourceSelector:
                     matchControllerRef: true
                     matchLabels:
                       component: demo-pg-webidfs
                 of:
-                  apiVersion: kubernetes.crossplane.io/v1alpha2
+                  apiVersion: kubernetes.m.crossplane.io/v1alpha1
                   kind: Object
                   resourceSelector:
                     matchControllerRef: true
@@ -2290,19 +2467,19 @@ spec:
 
           - name: usageRDSProviderByPgWebIdFsChainMR
             base:
-              apiVersion: apiextensions.crossplane.io/v1alpha1
+              apiVersion: protection.crossplane.io/v1beta1
               kind: Usage
               spec:
                 replayDeletion: true
                 by:
-                  apiVersion: kubernetes.crossplane.io/v1alpha2
+                  apiVersion: kubernetes.m.crossplane.io/v1alpha1
                   kind: Object
                   resourceSelector:
                     matchControllerRef: true
                     matchLabels:
                       component: demo-pg-webidfs-chain
                 of:
-                  apiVersion: kubernetes.crossplane.io/v1alpha2
+                  apiVersion: kubernetes.m.crossplane.io/v1alpha1
                   kind: Object
                   resourceSelector:
                     matchControllerRef: true
@@ -2313,19 +2490,19 @@ spec:
 
           - name: usageKafkaProviderByKafkaCfgPodIdentityMR
             base:
-              apiVersion: apiextensions.crossplane.io/v1alpha1
+              apiVersion: protection.crossplane.io/v1beta1
               kind: Usage
               spec:
                 replayDeletion: true
                 by:
-                  apiVersion: kubernetes.crossplane.io/v1alpha2
+                  apiVersion: kubernetes.m.crossplane.io/v1alpha1
                   kind: Object
                   resourceSelector:
                     matchControllerRef: true
                     matchLabels:
                       component: demo-kafkaconfiguration-podidentity
                 of:
-                  apiVersion: kubernetes.crossplane.io/v1alpha2
+                  apiVersion: kubernetes.m.crossplane.io/v1alpha1
                   kind: Object
                   resourceSelector:
                     matchControllerRef: true
@@ -2340,19 +2517,19 @@ spec:
 
           - name: usageIrsaProviderConfigByDemoVPC
             base:
-              apiVersion: apiextensions.crossplane.io/v1alpha1
+              apiVersion: protection.crossplane.io/v1beta1
               kind: Usage
               spec:
                 replayDeletion: true
                 by:
-                  apiVersion: kubernetes.crossplane.io/v1alpha2
+                  apiVersion: kubernetes.m.crossplane.io/v1alpha1
                   kind: Object
                   resourceSelector:
                     matchControllerRef: true
                     matchLabels:
                       component: demo-vpc
                 of:
-                  apiVersion: kubernetes.crossplane.io/v1alpha2
+                  apiVersion: kubernetes.m.crossplane.io/v1alpha1
                   kind: Object
                   resourceSelector:
                     matchControllerRef: true
@@ -2363,19 +2540,19 @@ spec:
 
           - name: usageIrsaChainByDemoVpcIrsaChain
             base:
-              apiVersion: apiextensions.crossplane.io/v1alpha1
+              apiVersion: protection.crossplane.io/v1beta1
               kind: Usage
               spec:
                 replayDeletion: true
                 by:
-                  apiVersion: kubernetes.crossplane.io/v1alpha2
+                  apiVersion: kubernetes.m.crossplane.io/v1alpha1
                   kind: Object
                   resourceSelector:
                     matchControllerRef: true
                     matchLabels:
                       component: demo-vpc-irsa-chain
                 of:
-                  apiVersion: kubernetes.crossplane.io/v1alpha2
+                  apiVersion: kubernetes.m.crossplane.io/v1alpha1
                   kind: Object
                   resourceSelector:
                     matchControllerRef: true
@@ -2386,19 +2563,19 @@ spec:
 
           - name: usageLegacyWebIdentityProviderConfigByDemoVpc
             base:
-              apiVersion: apiextensions.crossplane.io/v1alpha1
+              apiVersion: protection.crossplane.io/v1beta1
               kind: Usage
               spec:
                 replayDeletion: true
                 by:
-                  apiVersion: kubernetes.crossplane.io/v1alpha2
+                  apiVersion: kubernetes.m.crossplane.io/v1alpha1
                   kind: Object
                   resourceSelector:
                     matchControllerRef: true
                     matchLabels:
                       component: demo-vpc-legacy-webid
                 of:
-                  apiVersion: kubernetes.crossplane.io/v1alpha2
+                  apiVersion: kubernetes.m.crossplane.io/v1alpha1
                   kind: Object
                   resourceSelector:
                     matchControllerRef: true
@@ -2409,19 +2586,19 @@ spec:
 
           - name: usageWebIdentityFsProviderConfigByPgMR
             base:
-              apiVersion: apiextensions.crossplane.io/v1alpha1
+              apiVersion: protection.crossplane.io/v1beta1
               kind: Usage
               spec:
                 replayDeletion: true
                 by:
-                  apiVersion: kubernetes.crossplane.io/v1alpha2
+                  apiVersion: kubernetes.m.crossplane.io/v1alpha1
                   kind: Object
                   resourceSelector:
                     matchControllerRef: true
                     matchLabels:
                       component: demo-pg-webidfs
                 of:
-                  apiVersion: kubernetes.crossplane.io/v1alpha2
+                  apiVersion: kubernetes.m.crossplane.io/v1alpha1
                   kind: Object
                   resourceSelector:
                     matchControllerRef: true
@@ -2432,19 +2609,19 @@ spec:
 
           - name: usageWebIdentityFsChainProviderConfigByPgMR
             base:
-              apiVersion: apiextensions.crossplane.io/v1alpha1
+              apiVersion: protection.crossplane.io/v1beta1
               kind: Usage
               spec:
                 replayDeletion: true
                 by:
-                  apiVersion: kubernetes.crossplane.io/v1alpha2
+                  apiVersion: kubernetes.m.crossplane.io/v1alpha1
                   kind: Object
                   resourceSelector:
                     matchControllerRef: true
                     matchLabels:
                       component: demo-pg-webidfs-chain
                 of:
-                  apiVersion: kubernetes.crossplane.io/v1alpha2
+                  apiVersion: kubernetes.m.crossplane.io/v1alpha1
                   kind: Object
                   resourceSelector:
                     matchControllerRef: true
@@ -2455,19 +2632,19 @@ spec:
 
           - name: usagePodIdentityProviderConfigByKafkaConfigMR
             base:
-              apiVersion: apiextensions.crossplane.io/v1alpha1
+              apiVersion: protection.crossplane.io/v1beta1
               kind: Usage
               spec:
                 replayDeletion: true
                 by:
-                  apiVersion: kubernetes.crossplane.io/v1alpha2
+                  apiVersion: kubernetes.m.crossplane.io/v1alpha1
                   kind: Object
                   resourceSelector:
                     matchControllerRef: true
                     matchLabels:
                       component: demo-kafkaconfiguration-podidentity
                 of:
-                  apiVersion: kubernetes.crossplane.io/v1alpha2
+                  apiVersion: kubernetes.m.crossplane.io/v1alpha1
                   kind: Object
                   resourceSelector:
                     matchControllerRef: true

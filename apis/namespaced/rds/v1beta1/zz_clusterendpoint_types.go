@@ -15,7 +15,7 @@ import (
 
 type ClusterEndpointInitParameters struct {
 
-	// The cluster identifier.
+	// Cluster identifier.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/rds/v1beta1.Cluster
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ClusterIdentifier *string `json:"clusterIdentifier,omitempty" tf:"cluster_identifier,omitempty"`
@@ -28,7 +28,7 @@ type ClusterEndpointInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ClusterIdentifierSelector *v2.NamespacedSelector `json:"clusterIdentifierSelector,omitempty" tf:"-"`
 
-	// The type of the endpoint. One of: READER , ANY .
+	// Type of the endpoint. One of: READER , ANY .
 	CustomEndpointType *string `json:"customEndpointType,omitempty" tf:"custom_endpoint_type,omitempty"`
 
 	// List of DB instance identifiers that aren't part of the custom endpoint group. All other eligible instances are reachable through the custom endpoint. Only relevant if the list of static members is empty. Conflicts with static_members.
@@ -69,20 +69,20 @@ type ClusterEndpointObservation struct {
 	// ARN of cluster
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The cluster identifier.
+	// Cluster identifier.
 	ClusterIdentifier *string `json:"clusterIdentifier,omitempty" tf:"cluster_identifier,omitempty"`
 
-	// The type of the endpoint. One of: READER , ANY .
+	// Type of the endpoint. One of: READER , ANY .
 	CustomEndpointType *string `json:"customEndpointType,omitempty" tf:"custom_endpoint_type,omitempty"`
 
-	// A custom endpoint for the Aurora cluster
+	// Custom endpoint for the Aurora cluster
 	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 
 	// List of DB instance identifiers that aren't part of the custom endpoint group. All other eligible instances are reachable through the custom endpoint. Only relevant if the list of static members is empty. Conflicts with static_members.
 	// +listType=set
 	ExcludedMembers []*string `json:"excludedMembers,omitempty" tf:"excluded_members,omitempty"`
 
-	// The RDS Cluster Endpoint Identifier
+	// RDS Cluster Endpoint Identifier
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -97,14 +97,14 @@ type ClusterEndpointObservation struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type ClusterEndpointParameters struct {
 
-	// The cluster identifier.
+	// Cluster identifier.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/rds/v1beta1.Cluster
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -118,7 +118,7 @@ type ClusterEndpointParameters struct {
 	// +kubebuilder:validation:Optional
 	ClusterIdentifierSelector *v2.NamespacedSelector `json:"clusterIdentifierSelector,omitempty" tf:"-"`
 
-	// The type of the endpoint. One of: READER , ANY .
+	// Type of the endpoint. One of: READER , ANY .
 	// +kubebuilder:validation:Optional
 	CustomEndpointType *string `json:"customEndpointType,omitempty" tf:"custom_endpoint_type,omitempty"`
 

@@ -31,7 +31,7 @@ type ProxyTargetInitParameters struct {
 	// +kubebuilder:validation:Optional
 	DBInstanceIdentifierSelector *v2.NamespacedSelector `json:"dbInstanceIdentifierSelector,omitempty" tf:"-"`
 
-	// The name of the DB proxy.
+	// Name of the DB proxy.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/rds/v1beta1.Proxy
 	DBProxyName *string `json:"dbProxyName,omitempty" tf:"db_proxy_name,omitempty"`
 
@@ -43,7 +43,7 @@ type ProxyTargetInitParameters struct {
 	// +kubebuilder:validation:Optional
 	DBProxyNameSelector *v2.NamespacedSelector `json:"dbProxyNameSelector,omitempty" tf:"-"`
 
-	// The name of the target group.
+	// Name of the target group.
 	TargetGroupName *string `json:"targetGroupName,omitempty" tf:"target_group_name,omitempty"`
 }
 
@@ -55,7 +55,7 @@ type ProxyTargetObservation struct {
 	// DB instance identifier.
 	DBInstanceIdentifier *string `json:"dbInstanceIdentifier,omitempty" tf:"db_instance_identifier,omitempty"`
 
-	// The name of the DB proxy.
+	// Name of the DB proxy.
 	DBProxyName *string `json:"dbProxyName,omitempty" tf:"db_proxy_name,omitempty"`
 
 	// Hostname for the target RDS DB Instance. Only returned for RDS_INSTANCE type.
@@ -77,7 +77,7 @@ type ProxyTargetObservation struct {
 	// ARN for the DB instance or DB cluster. Currently not returned by the RDS API.
 	TargetArn *string `json:"targetArn,omitempty" tf:"target_arn,omitempty"`
 
-	// The name of the target group.
+	// Name of the target group.
 	TargetGroupName *string `json:"targetGroupName,omitempty" tf:"target_group_name,omitempty"`
 
 	// DB Cluster identifier for the DB Instance target. Not returned unless manually importing an RDS_INSTANCE target that is part of a DB Cluster.
@@ -107,7 +107,7 @@ type ProxyTargetParameters struct {
 	// +kubebuilder:validation:Optional
 	DBInstanceIdentifierSelector *v2.NamespacedSelector `json:"dbInstanceIdentifierSelector,omitempty" tf:"-"`
 
-	// The name of the DB proxy.
+	// Name of the DB proxy.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/rds/v1beta1.Proxy
 	// +kubebuilder:validation:Optional
 	DBProxyName *string `json:"dbProxyName,omitempty" tf:"db_proxy_name,omitempty"`
@@ -125,7 +125,7 @@ type ProxyTargetParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// The name of the target group.
+	// Name of the target group.
 	// +kubebuilder:validation:Optional
 	TargetGroupName *string `json:"targetGroupName,omitempty" tf:"target_group_name,omitempty"`
 }

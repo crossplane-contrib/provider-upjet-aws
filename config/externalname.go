@@ -58,10 +58,16 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	"aws_bedrockagentcore_agent_runtime_endpoint":      bedrockAgentCoreAgentRuntimeEndpoint(),
 	"aws_bedrockagentcore_api_key_credential_provider": frameworkNameAsIdentifier(),
 	"aws_bedrockagentcore_browser":                     config.FrameworkResourceWithComputedIdentifier("browser_id", "stub_browser_xp_szn45-n7uhLDeK0u"),
-	"aws_bedrockagentcore_code_interpreter":            config.FrameworkResourceWithComputedIdentifier("code_interpreter_id", "stub_code_interpreter_tool_xp_123abc-QJBfJmqq7c"),
+	// imported via profile_id, in the form <name>-<10 alphanumerics>
+	"aws_bedrockagentcore_browser_profile":  config.FrameworkResourceWithComputedIdentifier("profile_id", "stub_browser_profile_xp-n7uhLDeK0u"),
+	"aws_bedrockagentcore_code_interpreter": config.FrameworkResourceWithComputedIdentifier("code_interpreter_id", "stub_code_interpreter_tool_xp_123abc-QJBfJmqq7c"),
 	// imported via evaluator_id, must match regex [a-zA-Z0-9_-]+|[a-zA-Z][a-zA-Z0-9-_]{0,99}-[a-zA-Z0-9]{10}
-	"aws_bedrockagentcore_evaluator":      config.FrameworkResourceWithComputedIdentifier("evaluator_id", "xp_stub_evaluator-0000000000"),
-	"aws_bedrockagentcore_gateway":        config.FrameworkResourceWithComputedIdentifier("gateway_id", "gateway-stub-crossplane-x00x0x-xx0x0xx0xx"),
+	"aws_bedrockagentcore_evaluator": config.FrameworkResourceWithComputedIdentifier("evaluator_id", "xp_stub_evaluator-0000000000"),
+	"aws_bedrockagentcore_gateway":   config.FrameworkResourceWithComputedIdentifier("gateway_id", "gateway-stub-crossplane-x00x0x-xx0x0xx0xx"),
+	// imported via gateway_identifier,rule_id. gateway_identifier is already a
+	// required spec field, so only the provider-assigned rule_id (a UUID) is
+	// used as the external name.
+	"aws_bedrockagentcore_gateway_rule":   config.FrameworkResourceWithComputedIdentifier("rule_id", "00000000-0000-0000-0000-000000000000"),
 	"aws_bedrockagentcore_gateway_target": config.FrameworkResourceWithComputedIdentifier("target_id", "XXXXXXXX11"),
 	// must match regex [a-zA-Z][a-zA-Z0-9_]{0,39}-[a-zA-Z0-9]{10}
 	"aws_bedrockagentcore_harness": config.FrameworkResourceWithComputedIdentifier("harness_id", "xp_stub_harness-0000000000"),
@@ -111,9 +117,9 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	// EC2 Capacity Block Reservations can be imported using the id: cr-06f69c6d91ca1d710
 	"aws_ec2_capacity_block_reservation": identifierFromProviderWithDefaultStub("cr-06f69c6d91ca1d710"),
 	// Imported by using the id: sgr-02108b27edd666983
-	"aws_vpc_security_group_egress_rule": vpcSecurityGroupRule(),
+	"aws_vpc_security_group_egress_rule": identifierFromProviderWithDefaultStub("sgr-stub"),
 	// Imported by using the id: sgr-02108b27edd666983
-	"aws_vpc_security_group_ingress_rule": vpcSecurityGroupRule(),
+	"aws_vpc_security_group_ingress_rule": identifierFromProviderWithDefaultStub("sgr-stub"),
 
 	// elasticache
 	//
@@ -168,18 +174,18 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	//
 	// AccessPolicy can be imported using the policy name
 	"aws_opensearchserverless_access_policy": config.NameAsIdentifier,
-	// Collection can be imported using the AWS-assigned collection ID. i.e. ch9rq91uv4yd8rff1f39
-	"aws_opensearchserverless_collection": opensearchserverlessCollection(),
+	// Collection can be imported using the AWS-assigned collection ID. i.e. ch9rq91uv4yd8rff1f39 , must conform regex [a-z0-9]{3,40}
+	"aws_opensearchserverless_collection": identifierFromProviderWithDefaultStub("stubcollection9999"),
 	// CollectionGroup can be imported using the AWS-assigned collection group ID
-	"aws_opensearchserverless_collection_group": opensearchserverlessCollectionGroup(),
+	"aws_opensearchserverless_collection_group": identifierFromProviderWithDefaultStub("stubcollectiongroup99"),
 	// LifecyclePolicy can be imported using the policy name
 	"aws_opensearchserverless_lifecycle_policy": config.NameAsIdentifier,
 	//  SecurityConfig can be imported using the AWS-assigned security config ID
 	"aws_opensearchserverless_security_config": config.TemplatedStringAsIdentifier("name", "{{ .parameters.type }}/{{ .setup.client_metadata.account_id }}/{{ .external_name }}"),
 	// SecurityPolicy can be imported using the policy name
 	"aws_opensearchserverless_security_policy": config.NameAsIdentifier,
-	// VPCEndpoint can be imported using the AWS-assigned VPC Endpoint ID, i.e. vpce-0a957ae9ed5aee308
-	"aws_opensearchserverless_vpc_endpoint": opensearchserverlessVpcEndpoint(),
+	// VPCEndpoint can be imported using the AWS-assigned VPC Endpoint ID, i.e. vpce-0a957ae9ed5aee308, must match regex vpce-[0-9a-z]
+	"aws_opensearchserverless_vpc_endpoint": identifierFromProviderWithDefaultStub("vpce-stubvpcendpoint999999"),
 
 	// osis
 	//
@@ -215,6 +221,21 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	"aws_s3_bucket_abac": s3BucketIdentifier(),
 	// The S3 bucket lifecycle configuration resource should be imported using the bucket
 	"aws_s3_bucket_lifecycle_configuration": s3BucketIdentifier(),
+
+	// s3files
+	//
+	// S3 Files File System can be imported using the file system ID
+	"aws_s3files_file_system": identifierFromProviderWithDefaultStub("fs-0123456789abcdef0"),
+	// S3 Files Access Point can be imported using the access point ID
+	"aws_s3files_access_point": identifierFromProviderWithDefaultStub("fsap-0123456789abcdef0"),
+	// S3 Files Mount Target can be imported using the mount target ID
+	"aws_s3files_mount_target": identifierFromProviderWithDefaultStub("fsmt-0123456789abcdef0"),
+	// S3 Files File System Policy can be imported using the file system ID.
+	// The resource has no id attribute, file_system_id is its identity and it is
+	// Required (not Computed), so it must NOT be in ComputedIdentifierAttributes.
+	"aws_s3files_file_system_policy": frameworkParameterAsIdentifier("file_system_id"),
+	// S3 Files Synchronization Configuration can be imported using the file system ID
+	"aws_s3files_synchronization_configuration": s3filesSynchronizationConfig("file_system_id"),
 
 	// s3vectors
 	//
@@ -3127,6 +3148,81 @@ func s3vectorsPolicyIdentifier() config.ExternalName {
 	)
 }
 
+// frameworkParameterAsIdentifier handles Terraform Plugin Framework resources
+// whose identity is a Required (not Computed) parameter rather than a computed
+// "id" attribute. Unlike config.ParameterAsIdentifier, it does not omit the
+// field from the CRD spec, so it stays configurable and referenceable. It also
+// does not set ComputedIdentifierAttributes, which would strip the required
+// field from the resource config.
+func frameworkParameterAsIdentifier(param string) config.ExternalName {
+	return config.NewExternalNameFrom(config.IdentifierFromProvider,
+		config.WithGetIDFn(func(fn config.GetIDFn, _ context.Context, _ string, _ map[string]any, _ map[string]any) (string, error) {
+			return "", nil
+		}),
+		config.WithSetIdentifierArgumentsFn(func(fn config.SetIdentifierArgumentsFn, base map[string]any, externalName string) {
+			if externalName != "" {
+				if v, ok := base[param].(string); !ok || v == "" {
+					base[param] = externalName
+				}
+			}
+		}),
+		config.WithGetExternalNameFn(func(fn config.GetExternalNameFn, tfState map[string]any) (string, error) {
+			if id, ok := tfState[param]; ok {
+				idStr := fmt.Sprintf("%v", id)
+				if len(idStr) > 0 {
+					return idStr, nil
+				}
+			}
+			return "", errors.Errorf("cannot find attribute %q in tfstate", param)
+		}),
+	)
+}
+
+// `SynchronizationConfig.s3files` resource controls an
+// existing `FileSystem.s3files` settings. `FileSystem.s3files` has
+// a default synchronization config returned from AWS API.
+// Due to its stable identifier, SynchronizationConfig MR always
+// starts with a valid prior state even on fresh MR creation.
+// Therefore, it triggers an "Update" API call rather than "Create"
+// in the initial reconcile.
+// `importDataRule[*].sizeLessThan` parameter is "RequiresReplace" in
+// TF schema during Update calls, therefore causes Upjet to reject
+// the plan.
+// At fresh MR creates, set a non-existent `fileSystemId` so that
+// the initial Observe results in an empty state, then TF Create call
+// is triggered
+func s3filesSynchronizationConfig(param string) config.ExternalName {
+	const stubFileSystemID = "fs-00000000000000000"
+	return config.NewExternalNameFrom(frameworkParameterAsIdentifier("file_system_id"),
+		config.WithSetIdentifierArgumentsFn(func(fn config.SetIdentifierArgumentsFn, base map[string]any, externalName string) {
+			v, ok := base[param].(string)
+			if ok && v != "" {
+				return
+			}
+			if externalName == "" {
+				// no external name and no "fileSystemId" in status.atProvider
+				// i.e. fresh MR creation.
+				// set non-existent `fileSystemId`, so that the initial Observe
+				// results in an empty state.
+				base[param] = stubFileSystemID
+				return
+			}
+			base[param] = externalName
+		}),
+	)
+}
+
+// identifierFromProviderWithDefaultStub is the external name configuration for
+// TF Plugin Framework resources with:
+// - `id` attribute in their schema
+// - `id` is provider-assigned
+// - `id` is the only attribute used to read the resource from external API
+// It is similar to `IdentifierFromProvider`
+// For the initial Observe operations (no external-name), empty `id`
+// can cause TF read errors. A default stub value is used to pass the validation
+// and trigger a "resource not-found" result.
+// The provided default stub value must conform the validation requirements
+// of the external API and result in a "Not Found" response without read errors.
 func identifierFromProviderWithDefaultStub(defaultstub string) config.ExternalName {
 	// Terraform does not always allow id to be empty.
 	// Using a stub value to pass validation.
@@ -3137,18 +3233,15 @@ func identifierFromProviderWithDefaultStub(defaultstub string) config.ExternalNa
 		}
 		return externalName, nil
 	}
-	return e
-}
-
-func vpcSecurityGroupRule() config.ExternalName {
-	// Terraform does not allow security group rule id to be empty.
-	// Using a stub value to pass validation.
-	e := config.IdentifierFromProvider
-	e.GetIDFn = func(_ context.Context, externalName string, _ map[string]any, _ map[string]any) (string, error) {
-		if len(externalName) == 0 {
-			return "sgr-stub", nil
+	e.GetExternalNameFn = func(tfstate map[string]any) (string, error) {
+		id, ok := tfstate["id"].(string)
+		if !ok || id == "" {
+			return "", errors.New("cannot find id in tfstate")
+		} else if id == defaultstub {
+			// treat the stub value as an invalid external name
+			return "", errors.New("found unexpected stub value at id in tfstate")
 		}
-		return externalName, nil
+		return id, nil
 	}
 	return e
 }
@@ -3193,42 +3286,6 @@ func route() config.ExternalName {
 			return fmt.Sprintf("%s_%s", rtb.(string), parameters["destination_prefix_list_id"].(string)), nil
 		}
 		return "", errors.New("destination_cidr_block or destination_ipv6_cidr_block or destination_prefix_list_id has to be given")
-	}
-	return e
-}
-
-func opensearchserverlessVpcEndpoint() config.ExternalName {
-	e := config.IdentifierFromProvider
-	e.GetIDFn = func(ctx context.Context, externalName string, _ map[string]any, _ map[string]any) (string, error) {
-		// must match regex vpce-[0-9a-z]
-		if len(externalName) == 0 {
-			return "vpce-stubvpcendpoint999999", nil
-		}
-		return externalName, nil
-	}
-	return e
-}
-
-func opensearchserverlessCollection() config.ExternalName {
-	e := config.IdentifierFromProvider
-	e.GetIDFn = func(ctx context.Context, externalName string, _ map[string]any, _ map[string]any) (string, error) {
-		// [a-z0-9]{3,40}
-		if len(externalName) == 0 {
-			return "stubcollection9999", nil
-		}
-		return externalName, nil
-	}
-	return e
-}
-
-func opensearchserverlessCollectionGroup() config.ExternalName {
-	e := config.IdentifierFromProvider
-	e.GetIDFn = func(ctx context.Context, externalName string, _ map[string]any, _ map[string]any) (string, error) {
-		// [a-z0-9]{3,40}
-		if len(externalName) == 0 {
-			return "stubcollectiongroup99", nil
-		}
-		return externalName, nil
 	}
 	return e
 }

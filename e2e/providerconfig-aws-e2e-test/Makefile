@@ -11,11 +11,11 @@ PLATFORMS ?= linux_amd64
 # ====================================================================================
 # Setup Kubernetes tools
 
-KIND_VERSION = v0.22.0
-UPTEST_VERSION = v0.13.0
+KIND_VERSION = v0.32.0
+UPTEST_VERSION = v2.2.0
 YQ_VERSION = v4.40.5
-CROSSPLANE_VERSION = 2.0.2
-CROSSPLANE_CLI_VERSION = v2.0.2
+CROSSPLANE_VERSION = 2.4.0
+CROSSPLANE_CLI_VERSION = v2.3.0
 
 -include ../../build/makelib/k8s_tools.mk
 # ====================================================================================
@@ -68,7 +68,7 @@ build.init: $(CROSSPLANE_CLI)
 # - UPTEST_DATASOURCE_PATH (optional), see https://github.com/crossplane/uptest#injecting-dynamic-values-and-datasource
 uptest: $(UPTEST) $(KUBECTL) $(KUTTL) $(YQ)
 	@$(INFO) running automated tests
-	@KUBECTL=$(KUBECTL) KUTTL=$(KUTTL) CROSSPLANE_NAMESPACE=$(CROSSPLANE_NAMESPACE) $(UPTEST) e2e package/examples/e2etestcluster-claim.yaml --data-source="${UPTEST_DATASOURCE_PATH}" --setup-script=test/setup.sh --default-timeout=5400 || $(FAIL)
+	@KUBECTL=$(KUBECTL) KUTTL=$(KUTTL) CROSSPLANE_NAMESPACE=$(CROSSPLANE_NAMESPACE) $(UPTEST) e2e package/examples/e2etestcluster-xr.yaml --data-source="${UPTEST_DATASOURCE_PATH}" --setup-script=test/setup.sh --default-timeout=5400 || $(FAIL)
 	@$(OK) running automated tests
 
 # This target requires the following environment variables to be set:
@@ -89,7 +89,7 @@ e2e-lite: build controlplane.up local.xpkg.deploy.configuration.$(PROJECT_NAME)
 #     TARGET_CROSSPLANE_VERSION="1.17.2"
 # cloud credentials
 #     UPTEST_CLOUD_CREDENTIALS="$(cat my-aws-creds.txt)"
-uptest-e2e: $(UPTEST) $(KUBECTL) $(KUTTL) $(YQ)
+uptest-e2e: $(UPTEST) $(KUBECTL) $(CHAINSAW) $(CROSSPLANE_CLI) $(YQ)
 	@$(INFO) dump e2e claim:
 	@mkdir -p "_output"
 	@$(YQ) '(.spec.parameters.targetClusterParameters.provider.familyPackage = env(AWS_FAMILY_PACKAGE_IMAGE)) | \
@@ -97,23 +97,23 @@ uptest-e2e: $(UPTEST) $(KUBECTL) $(KUTTL) $(YQ)
 		   (.spec.parameters.targetClusterParameters.provider.rdsPackage = env(AWS_RDS_PACKAGE_IMAGE)) | \
 		   (.spec.parameters.targetClusterParameters.provider.kafkaPackage = env(AWS_KAFKA_PACKAGE_IMAGE)) | \
 		   (.spec.parameters.targetClusterParameters.crossplaneVersion = env(TARGET_CROSSPLANE_VERSION)) ' \
-				package/examples/e2etestcluster-claim.yaml > '_output/e2etestcluster-claim.yaml'
+				package/examples/e2etestcluster-xr.yaml > '_output/e2etestcluster-xr.yaml'
 	if [ -n "${AWS_EKS_IAM_DEFAULT_ADMIN_ROLE}" ]; \
 	then \
   		echo "overriding EKS cluster default IAM role from environment";\
-  		$(YQ) -i '(.spec.parameters.iam.roleArn = env(AWS_EKS_IAM_DEFAULT_ADMIN_ROLE)) ' _output/e2etestcluster-claim.yaml;\
+  		$(YQ) -i '(.spec.parameters.iam.principalArn = env(AWS_EKS_IAM_DEFAULT_ADMIN_ROLE)) ' _output/e2etestcluster-xr.yaml;\
   	fi
-	@cat _output/e2etestcluster-claim.yaml
+	@cat _output/e2etestcluster-xr.yaml
 	@$(INFO) running automated tests
-	@KUBECTL=$(KUBECTL) KUTTL=$(KUTTL) CROSSPLANE_NAMESPACE=$(CROSSPLANE_NAMESPACE) $(UPTEST) e2e _output/e2etestcluster-claim.yaml --data-source="${UPTEST_DATASOURCE_PATH}" --setup-script=test/setup.sh --default-timeout=5400 || $(FAIL)
+	@KUBECTL=$(KUBECTL) CHAINSAW=$(CHAINSAW) CROSSPLANE_CLI=$(CROSSPLANE_CLI) CROSSPLANE_NAMESPACE=$(CROSSPLANE_NAMESPACE) $(UPTEST) e2e _output/e2etestcluster-xr.yaml --data-source="${UPTEST_DATASOURCE_PATH}" --setup-script=test/setup.sh --default-timeout=5400s || $(FAIL)
 	@$(OK) running automated tests
 
-render:
-	crossplane beta render package/examples/e2etestcluster-claim.yaml package/apis/e2etestcluster/composition.yaml package/examples/functions.yaml -r
+render: $(CROSSPLANE_CLI)
+	$(CROSSPLANE_CLI) composition render package/examples/e2etestcluster-xr.yaml package/apis/e2etestcluster/composition.yaml package/examples/functions.yaml -r
 
 yamllint:
 	@$(INFO) running yamllint
-	@yamllint ./apis || $(FAIL)
+	@yamllint ./package/apis || $(FAIL)
 	@$(OK) running yamllint
 
 .PHONY: uptest e2e render yamllint

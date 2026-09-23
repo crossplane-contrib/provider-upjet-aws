@@ -49,7 +49,12 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_bedrockagentcore_api_key_credential_provider", func(r *config.Resource) {
 		r.TerraformResource.Schema["name"].Computed = true
 		r.TerraformResource.Schema["name"].Optional = false
+		r.AddSingletonListConversion("api_key_secret_arn", "apiKeySecretArn")
 		r.AddSingletonListConversion("api_key_secret_config", "apiKeySecretConfig")
+		r.References["api_key_secret_config.secret_id"] = config.Reference{
+			TerraformName: "aws_secretsmanager_secret",
+			Extractor:     common.PathARNExtractor,
+		}
 	})
 
 	// aws_bedrockagentcore_browser
@@ -117,6 +122,20 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		r.AddSingletonListConversion("protocol_configuration[*].mcp[*].session_configuration", "protocolConfiguration[*].mcp[*].sessionConfiguration")
 		r.AddSingletonListConversion("protocol_configuration[*].mcp[*].streaming_configuration", "protocolConfiguration[*].mcp[*].streamingConfiguration")
 	})
+	// aws_bedrockagentcore_gateway_rule
+	p.AddResourceConfigurator("aws_bedrockagentcore_gateway_rule", func(r *config.Resource) {
+		r.AddSingletonListConversion("action[*].configuration_bundle", "action[*].configurationBundle")
+		r.AddSingletonListConversion("action[*].configuration_bundle[*].static_override", "action[*].configurationBundle[*].staticOverride")
+		r.AddSingletonListConversion("action[*].configuration_bundle[*].weighted_override", "action[*].configurationBundle[*].weightedOverride")
+		r.AddSingletonListConversion("action[*].configuration_bundle[*].weighted_override[*].traffic_split[*].configuration_bundle", "action[*].configurationBundle[*].weightedOverride[*].trafficSplit[*].configurationBundle")
+		r.AddSingletonListConversion("action[*].route_to_target", "action[*].routeToTarget")
+		r.AddSingletonListConversion("action[*].route_to_target[*].static_route", "action[*].routeToTarget[*].staticRoute")
+		r.AddSingletonListConversion("action[*].route_to_target[*].weighted_route", "action[*].routeToTarget[*].weightedRoute")
+		r.AddSingletonListConversion("condition[*].match_paths", "condition[*].matchPaths")
+		r.AddSingletonListConversion("condition[*].match_principals", "condition[*].matchPrincipals")
+		r.AddSingletonListConversion("condition[*].match_principals[*].any_of[*].iam_principal", "condition[*].matchPrincipals[*].anyOf[*].iamPrincipal")
+	})
+
 	// aws_bedrockagentcore_gateway_target
 	p.AddResourceConfigurator("aws_bedrockagentcore_gateway_target", func(r *config.Resource) {
 		r.References["credential_provider_configuration.oauth.provider_arn"] = config.Reference{
@@ -231,6 +250,10 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 			TerraformName: "aws_secretsmanager_secret",
 			Extractor:     common.PathARNExtractor,
 		}
+		r.References["model.litellm_model_config.api_key_arn"] = config.Reference{
+			TerraformName: "aws_secretsmanager_secret",
+			Extractor:     common.PathARNExtractor,
+		}
 		r.AddSingletonListConversion("authorizer_configuration", "authorizerConfiguration")
 		r.AddSingletonListConversion("authorizer_configuration[*].custom_jwt_authorizer", "authorizerConfiguration[*].customJwtAuthorizer")
 		r.AddSingletonListConversion("authorizer_configuration[*].custom_jwt_authorizer[*].allowed_workload_configuration", "authorizerConfiguration[*].customJwtAuthorizer[*].allowedWorkloadConfiguration")
@@ -267,7 +290,12 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		r.AddSingletonListConversion("model", "model")
 		r.AddSingletonListConversion("model[*].bedrock_model_config", "model[*].bedrockModelConfig")
 		r.AddSingletonListConversion("model[*].gemini_model_config", "model[*].geminiModelConfig")
+		r.AddSingletonListConversion("model[*].litellm_model_config", "model[*].litellmModelConfig")
 		r.AddSingletonListConversion("model[*].openai_model_config", "model[*].openaiModelConfig")
+		r.AddSingletonListConversion("skill[*].aws_skills", "skill[*].awsSkills")
+		r.AddSingletonListConversion("skill[*].git", "skill[*].git")
+		r.AddSingletonListConversion("skill[*].git[*].auth", "skill[*].git[*].auth")
+		r.AddSingletonListConversion("skill[*].s3", "skill[*].s3")
 		r.AddSingletonListConversion("tool[*].config", "tool[*].config")
 		r.AddSingletonListConversion("tool[*].config[*].agentcore_browser", "tool[*].config[*].agentcoreBrowser")
 		r.AddSingletonListConversion("tool[*].config[*].agentcore_code_interpreter", "tool[*].config[*].agentcoreCodeInterpreter")
@@ -315,15 +343,70 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		r.TerraformResource.Schema["name"].Computed = true
 		r.TerraformResource.Schema["name"].Optional = false
 
+		r.References["oauth2_provider_config.atlassian_oauth2_provider_config.client_secret_config.secret_id"] = config.Reference{
+			TerraformName: "aws_secretsmanager_secret",
+			Extractor:     common.PathARNExtractor,
+		}
+
+		r.References["oauth2_provider_config.custom_oauth2_provider_config.client_secret_config.secret_id"] = config.Reference{
+			TerraformName: "aws_secretsmanager_secret",
+			Extractor:     common.PathARNExtractor,
+		}
+		r.References["oauth2_provider_config.github_oauth2_provider_config.client_secret_config.secret_id"] = config.Reference{
+			TerraformName: "aws_secretsmanager_secret",
+			Extractor:     common.PathARNExtractor,
+		}
+		r.References["oauth2_provider_config.google_oauth2_provider_config.client_secret_config.secret_id"] = config.Reference{
+			TerraformName: "aws_secretsmanager_secret",
+			Extractor:     common.PathARNExtractor,
+		}
+		r.References["oauth2_provider_config.included_oauth2_provider_config.client_secret_config.secret_id"] = config.Reference{
+			TerraformName: "aws_secretsmanager_secret",
+			Extractor:     common.PathARNExtractor,
+		}
+		r.References["oauth2_provider_config.linkedin_oauth2_provider_config.client_secret_config.secret_id"] = config.Reference{
+			TerraformName: "aws_secretsmanager_secret",
+			Extractor:     common.PathARNExtractor,
+		}
+		r.References["oauth2_provider_config.microsoft_oauth2_provider_config.client_secret_config.secret_id"] = config.Reference{
+			TerraformName: "aws_secretsmanager_secret",
+			Extractor:     common.PathARNExtractor,
+		}
+		r.References["oauth2_provider_config.salesforce_oauth2_provider_config.client_secret_config.secret_id"] = config.Reference{
+			TerraformName: "aws_secretsmanager_secret",
+			Extractor:     common.PathARNExtractor,
+		}
+		r.References["oauth2_provider_config.slack_oauth2_provider_config.client_secret_config.secret_id"] = config.Reference{
+			TerraformName: "aws_secretsmanager_secret",
+			Extractor:     common.PathARNExtractor,
+		}
+
 		r.AddSingletonListConversion("oauth2_provider_config", "oauth2ProviderConfig")
+		r.AddSingletonListConversion("oauth2_provider_config[*].atlassian_oauth2_provider_config", "oauth2ProviderConfig[*].atlassianOauth2ProviderConfig")
+		r.AddSingletonListConversion("oauth2_provider_config[*].atlassian_oauth2_provider_config[*].client_secret_config", "oauth2ProviderConfig[*].atlassianOauth2ProviderConfig[*].clientSecretConfig")
 		r.AddSingletonListConversion("oauth2_provider_config[*].custom_oauth2_provider_config", "oauth2ProviderConfig[*].customOauth2ProviderConfig")
 		r.AddSingletonListConversion("oauth2_provider_config[*].custom_oauth2_provider_config[*].client_secret_config", "oauth2ProviderConfig[*].customOauth2ProviderConfig[*].clientSecretConfig")
 		r.AddSingletonListConversion("oauth2_provider_config[*].custom_oauth2_provider_config[*].oauth_discovery", "oauth2ProviderConfig[*].customOauth2ProviderConfig[*].oauthDiscovery")
 		r.AddSingletonListConversion("oauth2_provider_config[*].custom_oauth2_provider_config[*].oauth_discovery[*].authorization_server_metadata", "oauth2ProviderConfig[*].customOauth2ProviderConfig[*].oauthDiscovery[*].authorizationServerMetadata")
+		r.AddSingletonListConversion("oauth2_provider_config[*].custom_oauth2_provider_config[*].on_behalf_of_token_exchange_config", "oauth2ProviderConfig[*].customOauth2ProviderConfig[*].onBehalfOfTokenExchangeConfig")
+		r.AddSingletonListConversion("oauth2_provider_config[*].custom_oauth2_provider_config[*].on_behalf_of_token_exchange_config[*].token_exchange_grant_type_config", "oauth2ProviderConfig[*].customOauth2ProviderConfig[*].onBehalfOfTokenExchangeConfig[*].tokenExchangeGrantTypeConfig")
+		r.AddSingletonListConversion("oauth2_provider_config[*].custom_oauth2_provider_config[*].private_endpoint", "oauth2ProviderConfig[*].customOauth2ProviderConfig[*].privateEndpoint")
+		r.AddSingletonListConversion("oauth2_provider_config[*].custom_oauth2_provider_config[*].private_endpoint[*].managed_vpc_resource", "oauth2ProviderConfig[*].customOauth2ProviderConfig[*].privateEndpoint[*].managedVpcResource")
+		r.AddSingletonListConversion("oauth2_provider_config[*].custom_oauth2_provider_config[*].private_endpoint[*].self_managed_lattice_resource", "oauth2ProviderConfig[*].customOauth2ProviderConfig[*].privateEndpoint[*].selfManagedLatticeResource")
+		r.AddSingletonListConversion("oauth2_provider_config[*].custom_oauth2_provider_config[*].private_endpoint_override[*].private_endpoint", "oauth2ProviderConfig[*].customOauth2ProviderConfig[*].privateEndpointOverride[*].privateEndpoint")
+		r.AddSingletonListConversion("oauth2_provider_config[*].custom_oauth2_provider_config[*].private_endpoint_override[*].private_endpoint[*].managed_vpc_resource", "oauth2ProviderConfig[*].customOauth2ProviderConfig[*].privateEndpointOverride[*].privateEndpoint[*].managedVpcResource")
+		r.AddSingletonListConversion("oauth2_provider_config[*].custom_oauth2_provider_config[*].private_endpoint_override[*].private_endpoint[*].self_managed_lattice_resource", "oauth2ProviderConfig[*].customOauth2ProviderConfig[*].privateEndpointOverride[*].privateEndpoint[*].selfManagedLatticeResource")
+		r.AddSingletonListConversion("oauth2_provider_config[*].custom_oauth2_provider_config[*].private_key_jwt_config", "oauth2ProviderConfig[*].customOauth2ProviderConfig[*].privateKeyJwtConfig")
+		r.AddSingletonListConversion("oauth2_provider_config[*].custom_oauth2_provider_config[*].private_key_jwt_config[*].private_key_source", "oauth2ProviderConfig[*].customOauth2ProviderConfig[*].privateKeyJwtConfig[*].privateKeySource")
+		r.AddSingletonListConversion("oauth2_provider_config[*].custom_oauth2_provider_config[*].private_key_jwt_config[*].private_key_source[*].kms_key_source", "oauth2ProviderConfig[*].customOauth2ProviderConfig[*].privateKeyJwtConfig[*].privateKeySource[*].kmsKeySource")
 		r.AddSingletonListConversion("oauth2_provider_config[*].github_oauth2_provider_config", "oauth2ProviderConfig[*].githubOauth2ProviderConfig")
 		r.AddSingletonListConversion("oauth2_provider_config[*].github_oauth2_provider_config[*].client_secret_config", "oauth2ProviderConfig[*].githubOauth2ProviderConfig[*].clientSecretConfig")
 		r.AddSingletonListConversion("oauth2_provider_config[*].google_oauth2_provider_config", "oauth2ProviderConfig[*].googleOauth2ProviderConfig")
 		r.AddSingletonListConversion("oauth2_provider_config[*].google_oauth2_provider_config[*].client_secret_config", "oauth2ProviderConfig[*].googleOauth2ProviderConfig[*].clientSecretConfig")
+		r.AddSingletonListConversion("oauth2_provider_config[*].included_oauth2_provider_config", "oauth2ProviderConfig[*].includedOauth2ProviderConfig")
+		r.AddSingletonListConversion("oauth2_provider_config[*].included_oauth2_provider_config[*].client_secret_config", "oauth2ProviderConfig[*].includedOauth2ProviderConfig[*].clientSecretConfig")
+		r.AddSingletonListConversion("oauth2_provider_config[*].linkedin_oauth2_provider_config", "oauth2ProviderConfig[*].linkedinOauth2ProviderConfig")
+		r.AddSingletonListConversion("oauth2_provider_config[*].linkedin_oauth2_provider_config[*].client_secret_config", "oauth2ProviderConfig[*].linkedinOauth2ProviderConfig[*].clientSecretConfig")
 		r.AddSingletonListConversion("oauth2_provider_config[*].microsoft_oauth2_provider_config", "oauth2ProviderConfig[*].microsoftOauth2ProviderConfig")
 		r.AddSingletonListConversion("oauth2_provider_config[*].microsoft_oauth2_provider_config[*].client_secret_config", "oauth2ProviderConfig[*].microsoftOauth2ProviderConfig[*].clientSecretConfig")
 		r.AddSingletonListConversion("oauth2_provider_config[*].salesforce_oauth2_provider_config", "oauth2ProviderConfig[*].salesforceOauth2ProviderConfig")

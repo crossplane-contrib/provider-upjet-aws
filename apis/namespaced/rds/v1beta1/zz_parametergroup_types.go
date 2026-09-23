@@ -15,13 +15,13 @@ import (
 
 type ParameterGroupInitParameters struct {
 
-	// The description of the DB parameter group.
+	// Description of the DB parameter group.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The family of the DB parameter group.
+	// Family of the DB parameter group.
 	Family *string `json:"family,omitempty" tf:"family,omitempty"`
 
-	// The DB parameters to apply. See parameter Block below for more details. Note that parameters may differ from a family to an other. Full list of all parameters can be discovered via aws rds describe-db-parameters after initial creation of the group.
+	// DB parameters to apply. See parameter Block below for more details. Note that parameters may differ from a family to an other. Full list of all parameters can be discovered via aws rds describe-db-parameters after initial creation of the group.
 	Parameter []ParameterInitParameters `json:"parameter,omitempty" tf:"parameter,omitempty"`
 
 	SkipDestroy *bool `json:"skipDestroy,omitempty" tf:"skip_destroy,omitempty"`
@@ -33,19 +33,19 @@ type ParameterGroupInitParameters struct {
 
 type ParameterGroupObservation struct {
 
-	// The ARN of the db parameter group.
+	// ARN of the db parameter group.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The description of the DB parameter group.
+	// Description of the DB parameter group.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The family of the DB parameter group.
+	// Family of the DB parameter group.
 	Family *string `json:"family,omitempty" tf:"family,omitempty"`
 
-	// The db parameter group name.
+	// DB parameter group name.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The DB parameters to apply. See parameter Block below for more details. Note that parameters may differ from a family to an other. Full list of all parameters can be discovered via aws rds describe-db-parameters after initial creation of the group.
+	// DB parameters to apply. See parameter Block below for more details. Note that parameters may differ from a family to an other. Full list of all parameters can be discovered via aws rds describe-db-parameters after initial creation of the group.
 	Parameter []ParameterObservation `json:"parameter,omitempty" tf:"parameter,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -58,22 +58,22 @@ type ParameterGroupObservation struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type ParameterGroupParameters struct {
 
-	// The description of the DB parameter group.
+	// Description of the DB parameter group.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The family of the DB parameter group.
+	// Family of the DB parameter group.
 	// +kubebuilder:validation:Optional
 	Family *string `json:"family,omitempty" tf:"family,omitempty"`
 
-	// The DB parameters to apply. See parameter Block below for more details. Note that parameters may differ from a family to an other. Full list of all parameters can be discovered via aws rds describe-db-parameters after initial creation of the group.
+	// DB parameters to apply. See parameter Block below for more details. Note that parameters may differ from a family to an other. Full list of all parameters can be discovered via aws rds describe-db-parameters after initial creation of the group.
 	// +kubebuilder:validation:Optional
 	Parameter []ParameterParameters `json:"parameter,omitempty" tf:"parameter,omitempty"`
 
@@ -93,45 +93,39 @@ type ParameterGroupParameters struct {
 
 type ParameterInitParameters struct {
 
-	// "immediate" (default), or "pending-reboot". Some
-	// engines can't apply some parameters without a reboot, and you will need to
-	// specify "pending-reboot" here.
+	// "immediate" (default), or "pending-reboot". Some engines can't apply some parameters without a reboot, and you will need to specify "pending-reboot" here.
 	ApplyMethod *string `json:"applyMethod,omitempty" tf:"apply_method,omitempty"`
 
-	// The name of the DB parameter.
+	// Name of the DB parameter.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The value of the DB parameter.
+	// Value of the DB parameter.
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type ParameterObservation struct {
 
-	// "immediate" (default), or "pending-reboot". Some
-	// engines can't apply some parameters without a reboot, and you will need to
-	// specify "pending-reboot" here.
+	// "immediate" (default), or "pending-reboot". Some engines can't apply some parameters without a reboot, and you will need to specify "pending-reboot" here.
 	ApplyMethod *string `json:"applyMethod,omitempty" tf:"apply_method,omitempty"`
 
-	// The name of the DB parameter.
+	// Name of the DB parameter.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The value of the DB parameter.
+	// Value of the DB parameter.
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type ParameterParameters struct {
 
-	// "immediate" (default), or "pending-reboot". Some
-	// engines can't apply some parameters without a reboot, and you will need to
-	// specify "pending-reboot" here.
+	// "immediate" (default), or "pending-reboot". Some engines can't apply some parameters without a reboot, and you will need to specify "pending-reboot" here.
 	// +kubebuilder:validation:Optional
 	ApplyMethod *string `json:"applyMethod,omitempty" tf:"apply_method,omitempty"`
 
-	// The name of the DB parameter.
+	// Name of the DB parameter.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// The value of the DB parameter.
+	// Value of the DB parameter.
 	// +kubebuilder:validation:Optional
 	Value *string `json:"value" tf:"value,omitempty"`
 }

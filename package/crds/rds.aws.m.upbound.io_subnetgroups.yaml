@@ -60,7 +60,7 @@ spec:
               forProvider:
                 properties:
                   description:
-                    description: The description of the DB subnet group.
+                    description: Description of the DB subnet group.
                     type: string
                   region:
                     description: |-
@@ -152,7 +152,7 @@ spec:
                         type: object
                     type: object
                   subnetIds:
-                    description: A list of VPC subnet IDs.
+                    description: List of VPC subnet IDs.
                     items:
                       type: string
                     type: array
@@ -180,7 +180,7 @@ spec:
                   autoscaler.
                 properties:
                   description:
-                    description: The description of the DB subnet group.
+                    description: Description of the DB subnet group.
                     type: string
                   subnetIdRefs:
                     description: References to Subnet in ec2 to populate subnetIds.
@@ -267,7 +267,7 @@ spec:
                         type: object
                     type: object
                   subnetIds:
-                    description: A list of VPC subnet IDs.
+                    description: List of VPC subnet IDs.
                     items:
                       type: string
                     type: array
@@ -343,13 +343,13 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The ARN of the db subnet group.
+                    description: ARN of the db subnet group.
                     type: string
                   description:
-                    description: The description of the DB subnet group.
+                    description: Description of the DB subnet group.
                     type: string
                   id:
-                    description: The db subnet group name.
+                    description: DB subnet group name.
                     type: string
                   region:
                     description: |-
@@ -357,13 +357,13 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   subnetIds:
-                    description: A list of VPC subnet IDs.
+                    description: List of VPC subnet IDs.
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
                   supportedNetworkTypes:
-                    description: The network type of the db subnet group.
+                    description: Network type of the db subnet group.
                     items:
                       type: string
                     type: array
@@ -377,9 +377,8 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
                   vpcId:

@@ -1196,6 +1196,16 @@ spec:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
+                  warningEventCategories:
+                    description: Set of RDS event categories (for example failure,
+                      maintenance) to check for after create and update operations.
+                      Has no effect if unset; see DescribeEvents and the aws_rds_events
+                      data source for the source of these events. Requires the rds:DescribeEvents
+                      IAM permission when set.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
                 required:
                 - region
                 type: object
@@ -2321,6 +2331,16 @@ spec:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
+                  warningEventCategories:
+                    description: Set of RDS event categories (for example failure,
+                      maintenance) to check for after create and update operations.
+                      Has no effect if unset; see DescribeEvents and the aws_rds_events
+                      data source for the source of these events. Requires the rds:DescribeEvents
+                      IAM permission when set.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
                 type: object
               managementPolicies:
                 default:
@@ -2976,6 +2996,16 @@ spec:
                     description: |-
                       List of VPC security groups to
                       associate.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
+                  warningEventCategories:
+                    description: Set of RDS event categories (for example failure,
+                      maintenance) to check for after create and update operations.
+                      Has no effect if unset; see DescribeEvents and the aws_rds_events
+                      data source for the source of these events. Requires the rds:DescribeEvents
+                      IAM permission when set.
                     items:
                       type: string
                     type: array
@@ -4211,6 +4241,16 @@ spec:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
+                  warningEventCategories:
+                    description: Set of RDS event categories (for example failure,
+                      maintenance) to check for after create and update operations.
+                      Has no effect if unset; see DescribeEvents and the aws_rds_events
+                      data source for the source of these events. Requires the rds:DescribeEvents
+                      IAM permission when set.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
                 required:
                 - region
                 type: object
@@ -5320,6 +5360,16 @@ spec:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
+                  warningEventCategories:
+                    description: Set of RDS event categories (for example failure,
+                      maintenance) to check for after create and update operations.
+                      Has no effect if unset; see DescribeEvents and the aws_rds_events
+                      data source for the source of these events. Requires the rds:DescribeEvents
+                      IAM permission when set.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
                 type: object
               managementPolicies:
                 default:
@@ -5963,6 +6013,16 @@ spec:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
+                  warningEventCategories:
+                    description: Set of RDS event categories (for example failure,
+                      maintenance) to check for after create and update operations.
+                      Has no effect if unset; see DescribeEvents and the aws_rds_events
+                      data source for the source of these events. Requires the rds:DescribeEvents
+                      IAM permission when set.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -6088,24 +6148,21 @@ spec:
               forProvider:
                 properties:
                   allocatedStorage:
-                    description: The allocated storage in gibibytes. If max_allocated_storage
+                    description: Allocated storage in gibibytes. If max_allocated_storage
                       is configured, this argument represents the initial storage
                       allocation and differences from the configuration will be ignored
                       automatically when Storage Autoscaling occurs. If replicate_source_db
                       is set, the value is ignored during the creation of the instance.
                     type: number
                   allowMajorVersionUpgrade:
-                    description: |-
-                      Indicates that major version
-                      upgrades are allowed. Changing this parameter does not result in an outage and
-                      the change is asynchronously applied as soon as possible.
+                    description: Whether major version upgrades are allowed. Changing
+                      this parameter does not result in an outage and the change is
+                      asynchronously applied as soon as possible.
                     type: boolean
                   applyImmediately:
-                    description: |-
-                      Specifies whether any database modifications
-                      are applied immediately, or during the next maintenance window. Default is
-                      false. See Amazon RDS Documentation for more
-                      information.
+                    description: Whether any database modifications are applied immediately,
+                      or during the next maintenance window. Default is false. See
+                      Amazon RDS Documentation for more information.
                     type: boolean
                   autoGeneratePassword:
                     description: |-
@@ -6113,73 +6170,67 @@ spec:
                       If true, the password will be auto-generated and stored in the Secret referenced by the passwordSecretRef field.
                     type: boolean
                   autoMinorVersionUpgrade:
-                    description: |-
-                      Indicates that minor engine upgrades
-                      will be applied automatically to the DB instance during the maintenance window.
-                      Defaults to true.
+                    description: Whether minor engine upgrades will be applied automatically
+                      to the DB instance during the maintenance window. Defaults to
+                      true.
                     type: boolean
                   availabilityZone:
-                    description: The AZ for the RDS instance.
+                    description: AZ for the RDS instance.
                     type: string
                   backupRetentionPeriod:
-                    description: |-
-                      The days to retain backups for.
-                      Must be between 0 and 35.
-                      Default is 0.
-                      Must be greater than 0 if the database is used as a source for a Read Replica,
-                      uses low-downtime updates,
+                    description: Days to retain backups for. Must be between 0 and
+                      35. Default is 0. Must be greater than 0 if the database is
+                      used as a source for a Read Replica, uses low-downtime updates,
                       or will use RDS Blue/Green deployments.
                     type: number
                   backupTarget:
-                    description: Specifies where automated backups and manual snapshots
-                      are stored. Possible values are region (default) and outposts.
-                      See Working with Amazon RDS on AWS Outposts for more information.
+                    description: Where automated backups and manual snapshots are
+                      stored. Possible values are region (default) and outposts. See
+                      Working with Amazon RDS on AWS Outposts for more information.
                     type: string
                   backupWindow:
-                    description: |-
-                      The daily time range (in UTC) during which automated backups are created if they are enabled.
-                      Example: "09:46-10:16". Must not overlap with maintenance_window.
+                    description: 'Daily time range (in UTC) during which automated
+                      backups are created if they are enabled. Example: "09:46-10:16".
+                      Must not overlap with maintenance_window.'
                     type: string
                   blueGreenUpdate:
-                    description: |-
-                      Enables low-downtime updates using RDS Blue/Green deployments.
-                      See blue_green_update below.
+                    description: Enables low-downtime updates using RDS Blue/Green
+                      deployments. See blue_green_update Block below.
                     properties:
                       enabled:
-                        description: |-
-                          Enables low-downtime updates when true.
-                          Default is false.
+                        description: Enables low-downtime updates when true. Default
+                          is false.
                         type: boolean
                     type: object
                   caCertIdentifier:
-                    description: The identifier of the CA certificate for the DB instance.
+                    description: Identifier of the CA certificate for the DB instance.
                     type: string
                   characterSetName:
-                    description: |-
-                      The character set name to use for DB encoding in Oracle and Microsoft SQL instances (collation).
-                      This can't be changed.
-                      See Oracle Character Sets Supported in Amazon RDS or
-                      Server-Level Collation for Microsoft SQL Server for more information.
-                      Cannot be set  with replicate_source_db, restore_to_point_in_time, s3_import, or snapshot_identifier.
+                    description: Character set name to use for DB encoding in Oracle
+                      and Microsoft SQL instances (collation). This can't be changed.
+                      See Oracle Character Sets Supported in Amazon RDS or Server-Level
+                      Collation for Microsoft SQL Server for more information. Cannot
+                      be set with replicate_source_db, restore_to_point_in_time, s3_import,
+                      or snapshot_identifier.
                     type: string
                   copyTagsToSnapshot:
                     description: Copy all Instance tags to snapshots. Default is false.
                     type: boolean
                   customIamInstanceProfile:
-                    description: The instance profile associated with the underlying
-                      Amazon EC2 instance of an RDS Custom DB instance.
+                    description: Instance profile associated with the underlying Amazon
+                      EC2 instance of an RDS Custom DB instance.
                     type: string
                   customerOwnedIpEnabled:
-                    description: Indicates whether to enable a customer-owned IP address
-                      (CoIP) for an RDS on Outposts DB instance. See CoIP for RDS
-                      on Outposts for more information.
+                    description: Whether to enable a customer-owned IP address (CoIP)
+                      for an RDS on Outposts DB instance. See CoIP for RDS on Outposts
+                      for more information.
                     type: boolean
                   databaseInsightsMode:
-                    description: 'The mode of Database Insights that is enabled for
-                      the instance. Valid values: standard, advanced .'
+                    description: 'Mode of Database Insights that is enabled for the
+                      instance. Valid values: standard, advanced .'
                     type: string
                   dbName:
-                    description: The name of the database to create when the DB instance
+                    description: Name of the database to create when the DB instance
                       is created. If this parameter is not specified, no database
                       is created in the DB instance. Note that this does not apply
                       for Oracle or SQL Server engines. See the AWS documentation
@@ -6188,13 +6239,14 @@ spec:
                       Cannot be specified for a replica.
                     type: string
                   dbSubnetGroupName:
-                    description: |-
-                      Name of DB subnet group.
-                      DB instance will be created in the VPC associated with the DB subnet group.
-                      If unspecified, will be created in the default Subnet Group.
-                      When working with read replicas created in the same region, defaults to the Subnet Group Name of the source DB.
-                      When working with read replicas created in a different region, defaults to the default Subnet Group.
-                      See DBSubnetGroupName in API action CreateDBInstanceReadReplica for additional read replica constraints.
+                    description: Name of DB subnet group. DB instance will be created
+                      in the VPC associated with the DB subnet group. If unspecified,
+                      will be created in the default Subnet Group. When working with
+                      read replicas created in the same region, defaults to the Subnet
+                      Group Name of the source DB. When working with read replicas
+                      created in a different region, defaults to the default Subnet
+                      Group. See DBSubnetGroupName in API action CreateDBInstanceReadReplica
+                      for additional read replica constraints.
                     type: string
                   dbSubnetGroupNameRef:
                     description: Reference to a SubnetGroup in rds to populate dbSubnetGroupName.
@@ -6276,8 +6328,8 @@ spec:
                       details.
                     type: boolean
                   deleteAutomatedBackups:
-                    description: Specifies whether to remove automated backups immediately
-                      after the DB instance is deleted. Default is true.
+                    description: Whether to remove automated backups immediately after
+                      the DB instance is deleted. Default is true.
                     type: boolean
                   deletionProtection:
                     description: If the DB instance should have deletion protection
@@ -6285,17 +6337,17 @@ spec:
                       to true. The default is false.
                     type: boolean
                   domain:
-                    description: The ID of the Directory Service Active Directory
-                      domain to create the instance in. Conflicts with domain_fqdn,
-                      domain_ou, domain_auth_secret_arn and a domain_dns_ips.
+                    description: ID of the Directory Service Active Directory domain
+                      to create the instance in. Conflicts with domain_fqdn, domain_ou,
+                      domain_auth_secret_arn and a domain_dns_ips.
                     type: string
                   domainAuthSecretArn:
-                    description: The ARN for the Secrets Manager secret with the self
+                    description: ARN for the Secrets Manager secret with the self
                       managed Active Directory credentials for the user joining the
                       domain. Conflicts with domain and domain_iam_role_name.
                     type: string
                   domainDnsIps:
-                    description: The IPv4 DNS IP addresses of your primary and secondary
+                    description: IPv4 DNS IP addresses of your primary and secondary
                       self managed Active Directory domain controllers. Two IP addresses
                       must be provided. If there isn't a secondary domain controller,
                       use the IP address of the primary domain controller for both
@@ -6304,18 +6356,17 @@ spec:
                       type: string
                     type: array
                   domainFqdn:
-                    description: The fully qualified domain name (FQDN) of the self
-                      managed Active Directory domain. Conflicts with domain and domain_iam_role_name.
+                    description: Fully qualified domain name (FQDN) of the self managed
+                      Active Directory domain. Conflicts with domain and domain_iam_role_name.
                     type: string
                   domainIamRoleName:
-                    description: The name of the IAM role to be used when making API
-                      calls to the Directory Service. Conflicts with domain_fqdn,
-                      domain_ou, domain_auth_secret_arn and a domain_dns_ips.
+                    description: Name of the IAM role to be used when making API calls
+                      to the Directory Service. Conflicts with domain_fqdn, domain_ou,
+                      domain_auth_secret_arn and a domain_dns_ips.
                     type: string
                   domainOu:
-                    description: The self managed Active Directory organizational
-                      unit for your DB instance to join. Conflicts with domain and
-                      domain_iam_role_name.
+                    description: Self managed Active Directory organizational unit
+                      for your DB instance to join. Conflicts with domain and domain_iam_role_name.
                     type: string
                   enabledCloudwatchLogsExports:
                     description: Set of log types to enable for exporting to CloudWatch
@@ -6336,7 +6387,7 @@ spec:
                       Notes](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraMySQLReleaseNotes/Welcome.html).
                     type: string
                   engineLifecycleSupport:
-                    description: 'The life cycle type for this DB instance. This setting
+                    description: 'Life cycle type for this DB instance. This setting
                       applies only to RDS for MySQL and RDS for PostgreSQL. Valid
                       values are open-source-rds-extended-support, open-source-rds-extended-support-disabled.
                       Default value is open-source-rds-extended-support. [Using Amazon
@@ -6354,15 +6405,16 @@ spec:
                       engine version'.
                     type: string
                   finalSnapshotIdentifier:
-                    description: |-
-                      The name of your final DB snapshot
-                      when this DB instance is deleted. Must be provided if skip_final_snapshot is
-                      set to false. The value must begin with a letter, only contain alphanumeric characters and hyphens, and not end with a hyphen or contain two consecutive hyphens. Must not be provided when deleting a read replica.
+                    description: Name of your final DB snapshot when this DB instance
+                      is deleted. Must be provided if skip_final_snapshot is set to
+                      false. The value must begin with a letter, only contain alphanumeric
+                      characters and hyphens, and not end with a hyphen or contain
+                      two consecutive hyphens. Must not be provided when deleting
+                      a read replica.
                     type: string
                   iamDatabaseAuthenticationEnabled:
-                    description: |-
-                      Specifies whether mappings of AWS Identity and Access Management (IAM) accounts to database
-                      accounts is enabled.
+                    description: Whether mappings of AWS Identity and Access Management
+                      (IAM) accounts to database accounts is enabled.
                     type: boolean
                   identifier:
                     description: Required if restore_to_point_in_time is specified.
@@ -6372,19 +6424,18 @@ spec:
                       prefix. Conflicts with identifier.
                     type: string
                   instanceClass:
-                    description: The instance type of the RDS instance.
+                    description: Instance type of the RDS instance.
                     type: string
                   iops:
-                    description: |-
-                      The amount of provisioned IOPS. Setting this implies a
-                      storage_type of "io1" or "io2". Can only be set when storage_type is "io1", "io2 or "gp3".
-                      Cannot be specified for gp3 storage if the allocated_storage value is below a per-engine threshold.
+                    description: Amount of provisioned IOPS. Setting this implies
+                      a storage_type of "io1" or "io2". Can only be set when storage_type
+                      is "io1", "io2 or "gp3". Cannot be specified for gp3 storage
+                      if the allocated_storage value is below a per-engine threshold.
                       See the RDS User Guide for details.
                     type: number
                   kmsKeyId:
-                    description: |-
-                      The ARN for the KMS encryption key. If creating an
-                      encrypted replica, set this to the destination KMS ARN.
+                    description: ARN for the KMS encryption key. If creating an encrypted
+                      replica, set this to the destination KMS ARN.
                     type: string
                   kmsKeyIdRef:
                     description: Reference to a Key in kms to populate kmsKeyId.
@@ -6462,15 +6513,15 @@ spec:
                     type: object
                   licenseModel:
                     description: 'License model information for this DB instance.
-                      Valid values for this field are as follows:'
+                      Valid values for this field are as follows: RDS for MariaDB:
+                      general-public-license; RDS for Microsoft SQL Server: license-included;
+                      RDS for MySQL: general-public-license; RDS for Oracle: bring-your-own-license
+                      | license-included; RDS for PostgreSQL: postgresql-license.'
                     type: string
                   maintenanceWindow:
-                    description: |-
-                      The window to perform maintenance in.
-                      Syntax: "ddd:hh24:mi-ddd:hh24:mi". Eg: "Mon:00:00-Mon:03:00". See RDS
-                      Maintenance Window
-                      docs
-                      for more information.
+                    description: 'Window to perform maintenance in. Syntax: "ddd:hh24:mi-ddd:hh24:mi".
+                      Eg: "Mon:00:00-Mon:03:00". See RDS Maintenance Window docs for
+                      more information.'
                     type: string
                   manageMasterUserPassword:
                     description: Set to true to allow RDS to manage the master user
@@ -6478,9 +6529,9 @@ spec:
                       is provided.
                     type: boolean
                   masterUserSecretKmsKeyId:
-                    description: The Amazon Web Services KMS key identifier is the
-                      key ARN, key ID, alias ARN, or alias name for the KMS key. To
-                      use a KMS key in a different Amazon Web Services account, specify
+                    description: Amazon Web Services KMS key identifier is the key
+                      ARN, key ID, alias ARN, or alias name for the KMS key. To use
+                      a KMS key in a different Amazon Web Services account, specify
                       the key ARN or alias ARN. If not specified, the default KMS
                       key for your Amazon Web Services account is used.
                     type: string
@@ -6559,28 +6610,25 @@ spec:
                         type: object
                     type: object
                   maxAllocatedStorage:
-                    description: Specifies the maximum storage (in GiB) that Amazon
-                      RDS can automatically scale to for this DB instance. By default,
-                      Storage Autoscaling is disabled. To enable Storage Autoscaling,
-                      set max_allocated_storage to greater than or equal to allocated_storage.
-                      Setting max_allocated_storage to 0 explicitly disables Storage
-                      Autoscaling. When configured, changes to allocated_storage will
-                      be automatically ignored as the storage can dynamically scale.
+                    description: Maximum storage (in GiB) that Amazon RDS can automatically
+                      scale to for this DB instance. By default, Storage Autoscaling
+                      is disabled. To enable Storage Autoscaling, set max_allocated_storage
+                      to greater than or equal to allocated_storage. Setting max_allocated_storage
+                      to 0 explicitly disables Storage Autoscaling. When configured,
+                      changes to allocated_storage will be automatically ignored as
+                      the storage can dynamically scale.
                     type: number
                   monitoringInterval:
-                    description: |-
-                      The interval, in seconds, between points
-                      when Enhanced Monitoring metrics are collected for the DB instance. To disable
-                      collecting Enhanced Monitoring metrics, specify 0. The default is 0. Valid
-                      Values: 0, 1, 5, 10, 15, 30, 60.
+                    description: 'Interval, in seconds, between points when Enhanced
+                      Monitoring metrics are collected for the DB instance. To disable
+                      collecting Enhanced Monitoring metrics, specify 0. The default
+                      is 0. Valid Values: 0, 1, 5, 10, 15, 30, 60.'
                     type: number
                   monitoringRoleArn:
-                    description: |-
-                      The ARN for the IAM role that permits RDS
-                      to send enhanced monitoring metrics to CloudWatch Logs. You can find more
-                      information on the AWS
-                      Documentation
-                      what IAM permissions are needed to allow Enhanced Monitoring for RDS Instances.
+                    description: ARN for the IAM role that permits RDS to send enhanced
+                      monitoring metrics to CloudWatch Logs. You can find more information
+                      on the AWS Documentation what IAM permissions are needed to
+                      allow Enhanced Monitoring for RDS Instances.
                     type: string
                   monitoringRoleArnRef:
                     description: Reference to a Role in iam to populate monitoringRoleArn.
@@ -6657,16 +6705,16 @@ spec:
                         type: object
                     type: object
                   multiAz:
-                    description: Specifies if the RDS instance is multi-AZ
+                    description: Whether the RDS instance is multi-AZ.
                     type: boolean
                   ncharCharacterSetName:
-                    description: |-
-                      The national character set is used in the NCHAR, NVARCHAR2, and NCLOB data types for Oracle instances. This can't be changed. See Oracle Character Sets
-                      Supported in Amazon RDS.
+                    description: National character set is used in the NCHAR, NVARCHAR2,
+                      and NCLOB data types for Oracle instances. This can't be changed.
+                      See Oracle Character Sets Supported in Amazon RDS.
                     type: string
                   networkType:
-                    description: 'The network type of the DB instance. Valid values:
-                      IPV4, DUAL.'
+                    description: 'Network type of the DB instance. Valid values: IPV4,
+                      DUAL.'
                     type: string
                   optionGroupName:
                     description: Name of the DB option group to associate.
@@ -6772,7 +6820,8 @@ spec:
                   passwordWoSecretRef:
                     description: Password for the master DB user. Note that this may
                       show up in logs, and it will be stored in the state file. Cannot
-                      be set if manage_master_user_password is set to true.
+                      be set if manage_master_user_password is set to true. If set,
+                      requires password_wo_version to be set.
                     properties:
                       key:
                         description: The key to select.
@@ -6789,15 +6838,15 @@ spec:
                     - namespace
                     type: object
                   passwordWoVersion:
-                    description: Used together with password_wo to trigger an update.
-                      Increment this value when an update to password_wo is required.
+                    description: Required when password_wo is set. Changing this value
+                      triggers an update to password_wo.
                     type: number
                   performanceInsightsEnabled:
-                    description: Specifies whether Performance Insights are enabled.
-                      Defaults to false.
+                    description: Whether Performance Insights are enabled. Defaults
+                      to false.
                     type: boolean
                   performanceInsightsKmsKeyId:
-                    description: The ARN for the KMS key to encrypt Performance Insights
+                    description: ARN for the KMS key to encrypt Performance Insights
                       data. When specifying performance_insights_kms_key_id, performance_insights_enabled
                       needs to be set to true. Once KMS key is set, it can never be
                       changed.
@@ -6883,12 +6932,11 @@ spec:
                       needs to be set to true. Defaults to '7'.
                     type: number
                   port:
-                    description: The port on which the DB accepts connections.
+                    description: Port on which the DB accepts connections.
                     type: number
                   publiclyAccessible:
-                    description: |-
-                      Bool to control if instance is publicly
-                      accessible. Default is false.
+                    description: Bool to control if instance is publicly accessible.
+                      Default is false.
                     type: boolean
                   region:
                     description: |-
@@ -6896,18 +6944,23 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   replicaMode:
-                    description: |-
-                      Specifies whether the replica is in either mounted or open-read-only mode. This attribute
-                      is only supported by Oracle instances. Oracle replicas operate in open-read-only mode unless otherwise specified. See Working with Oracle Read Replicas for more information.
+                    description: Whether the replica is in either mounted or open-read-only
+                      mode. This attribute is only supported by Oracle instances.
+                      Oracle replicas operate in open-read-only mode unless otherwise
+                      specified. See Working with Oracle Read Replicas for more information.
                     type: string
                   replicateSourceDb:
-                    description: |-
-                      Specifies that this resource is a Replica database, and to use this value as the source database.
-                      If replicating an Amazon RDS Database Instance in the same region, use the identifier of the source DB, unless also specifying the db_subnet_group_name.
-                      If specifying the db_subnet_group_name in the same region, use the arn of the source DB.
-                      If replicating an Instance in a different region, use the arn of the source DB.
-                      Note that if you are creating a cross-region replica of an encrypted database you will also need to specify a kms_key_id.
-                      See DB Instance Replication and Working with PostgreSQL and MySQL Read Replicas for more information on using Replication.
+                    description: Set this to specify that this resource is a Replica
+                      database, and to use this value as the source database. If replicating
+                      an Amazon RDS Database Instance in the same region, use the
+                      identifier of the source DB, unless also specifying the db_subnet_group_name.
+                      If specifying the db_subnet_group_name in the same region, use
+                      the arn of the source DB. If replicating an Instance in a different
+                      region, use the arn of the source DB. Note that if you are creating
+                      a cross-region replica of an encrypted database you will also
+                      need to specify a kms_key_id. See DB Instance Replication and
+                      Working with PostgreSQL and MySQL Read Replicas for more information
+                      on using Replication.
                     type: string
                   replicateSourceDbRef:
                     description: Reference to a Instance in rds to populate replicateSourceDb.
@@ -6984,92 +7037,91 @@ spec:
                         type: object
                     type: object
                   restoreToPointInTime:
-                    description: |-
-                      A configuration block for restoring a DB instance to an arbitrary point in time.
-                      Requires the identifier argument to be set with the name of the new DB instance to be created.
-                      See Restore To Point In Time below for details.
+                    description: Configuration block for restoring a DB instance to
+                      an arbitrary point in time. Requires the identifier argument
+                      to be set with the name of the new DB instance to be created.
+                      See restore_to_point_in_time Block below for details.
                     properties:
                       restoreTime:
-                        description: The date and time to restore from. Value must
-                          be a time in Universal Coordinated Time (UTC) format and
-                          must be before the latest restorable time for the DB instance.
+                        description: Date and time to restore from. Value must be
+                          a time in Universal Coordinated Time (UTC) format and must
+                          be before the latest restorable time for the DB instance.
                           Cannot be specified with use_latest_restorable_time.
                         type: string
                       sourceDbInstanceAutomatedBackupsArn:
-                        description: The ARN of the automated backup from which to
-                          restore. Required if source_db_instance_identifier or source_dbi_resource_id
+                        description: ARN of the automated backup from which to restore.
+                          Required if source_db_instance_identifier or source_dbi_resource_id
                           is not specified.
                         type: string
                       sourceDbInstanceIdentifier:
-                        description: The identifier of the source DB instance from
-                          which to restore. Must match the identifier of an existing
-                          DB instance. Required if source_db_instance_automated_backups_arn
+                        description: Identifier of the source DB instance from which
+                          to restore. Must match the identifier of an existing DB
+                          instance. Required if source_db_instance_automated_backups_arn
                           or source_dbi_resource_id is not specified.
                         type: string
                       sourceDbiResourceId:
-                        description: The resource ID of the source DB instance from
-                          which to restore. Required if source_db_instance_identifier
-                          or source_db_instance_automated_backups_arn is not specified.
+                        description: Resource ID of the source DB instance from which
+                          to restore. Required if source_db_instance_identifier or
+                          source_db_instance_automated_backups_arn is not specified.
                         type: string
                       useLatestRestorableTime:
-                        description: A boolean value that indicates whether the DB
-                          instance is restored from the latest backup time. Defaults
-                          to false. Cannot be specified with restore_time.
+                        description: Boolean value that indicates whether the DB instance
+                          is restored from the latest backup time. Defaults to false.
+                          Cannot be specified with restore_time.
                         type: boolean
                     type: object
                   s3Import:
-                    description: Restore from a Percona Xtrabackup in S3.  See Importing
-                      Data into an Amazon RDS MySQL DB Instance
+                    description: Restore from a Percona XtraBackup in S3. See Importing
+                      Data into an Amazon RDS MySQL DB Instance. See s3_import Block
+                      below.
                     properties:
                       bucketName:
-                        description: The bucket name where your backup is stored
+                        description: Bucket name where your backup is stored.
                         type: string
                       bucketPrefix:
-                        description: Can be blank, but is the path to your backup
+                        description: Can be blank, but is the path to your backup.
                         type: string
                       ingestionRole:
                         description: Role applied to load the data.
                         type: string
                       sourceEngine:
-                        description: Source engine for the backup
+                        description: Source engine for the backup.
                         type: string
                       sourceEngineVersion:
                         description: Version of the source engine used to make the
-                          backup
+                          backup.
                         type: string
                     type: object
                   skipFinalSnapshot:
-                    description: |-
-                      Determines whether a final DB snapshot is
-                      created before the DB instance is deleted. If true is specified, no DBSnapshot
-                      is created. If false is specified, a DB snapshot is created before the DB
-                      instance is deleted, using the value from final_snapshot_identifier. Default
-                      is false.
+                    description: Whether a final DB snapshot is created before the
+                      DB instance is deleted. If true is specified, no DBSnapshot
+                      is created. If false is specified, a DB snapshot is created
+                      before the DB instance is deleted, using the value from final_snapshot_identifier.
+                      Default is false.
                     type: boolean
                   snapshotIdentifier:
-                    description: |-
-                      Specifies whether or not to create this database from a snapshot.
-                      This corresponds to the snapshot ID you'd find in the RDS console, e.g: rds:production-2015-06-26-06-05.
+                    description: 'Whether or not to create this database from a snapshot.
+                      This corresponds to the snapshot ID you''d find in the RDS console,
+                      e.g: rds:production-2015-06-26-06-05.'
                     type: string
                   storageEncrypted:
-                    description: |-
-                      Specifies whether the DB instance is
-                      encrypted. Note that if you are creating a cross-region read replica this field
-                      is ignored and you should instead declare kms_key_id with a valid ARN. The
-                      default is false if not specified.
+                    description: Whether the DB instance is encrypted. Note that if
+                      you are creating a cross-region read replica this field is ignored
+                      and you should instead declare kms_key_id with a valid ARN.
+                      The default is false if not specified.
                     type: boolean
                   storageThroughput:
-                    description: The storage throughput value for the DB instance.
-                      Can only be set when storage_type is "gp3". Cannot be specified
+                    description: Storage throughput value for the DB instance. Can
+                      only be set when storage_type is "gp3". Cannot be specified
                       if the allocated_storage value is below a per-engine threshold.
                       See the RDS User Guide for details.
                     type: number
                   storageType:
-                    description: |-
-                      One of "standard" (magnetic), "gp2" (general
-                      purpose SSD), "gp3" (general purpose SSD that needs iops independently)
-                      "io1" (provisioned IOPS SSD) or "io2" (block express storage provisioned IOPS
-                      SSD). The default is "io1" if iops is specified, "gp2" if not.
+                    description: One of "standard" (magnetic), "gp2" (general purpose
+                      SSD), "gp3" (general purpose SSD that needs iops independently)
+                      "io1" (provisioned IOPS SSD) or "io2" (block express storage
+                      provisioned IOPS SSD). The default is "io1" if iops is specified,
+                      "gp2" if not.
                     type: string
                   tags:
                     additionalProperties:
@@ -7078,17 +7130,13 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   timezone:
-                    description: |-
-                      Time zone of the DB instance. timezone is currently
-                      only supported by Microsoft SQL Server. The timezone can only be set on
-                      creation. See MSSQL User
-                      Guide
-                      for more information.
+                    description: Time zone of the DB instance. timezone is currently
+                      only supported by Microsoft SQL Server. The timezone can only
+                      be set on creation. See MSSQL User Guide for more information.
                     type: string
                   upgradeStorageConfig:
-                    description: |-
-                      Whether to upgrade the storage file system configuration on the read replica.
-                      Can only be set with replicate_source_db.
+                    description: Whether to upgrade the storage file system configuration
+                      on the read replica. Can only be set with replicate_source_db.
                     type: boolean
                   username:
                     description: Username for the master DB user. Cannot be specified
@@ -7173,9 +7221,17 @@ spec:
                         type: object
                     type: object
                   vpcSecurityGroupIds:
-                    description: |-
-                      List of VPC security groups to
-                      associate.
+                    description: List of VPC security groups to associate.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
+                  warningEventCategories:
+                    description: Set of RDS event categories (for example failure,
+                      maintenance) to check for after create and update operations.
+                      Has no effect if unset; see DescribeEvents and the aws_rds_events
+                      data source for the source of these events. Requires the rds:DescribeEvents
+                      IAM permission when set.
                     items:
                       type: string
                     type: array
@@ -7197,93 +7253,84 @@ spec:
                   autoscaler.
                 properties:
                   allocatedStorage:
-                    description: The allocated storage in gibibytes. If max_allocated_storage
+                    description: Allocated storage in gibibytes. If max_allocated_storage
                       is configured, this argument represents the initial storage
                       allocation and differences from the configuration will be ignored
                       automatically when Storage Autoscaling occurs. If replicate_source_db
                       is set, the value is ignored during the creation of the instance.
                     type: number
                   allowMajorVersionUpgrade:
-                    description: |-
-                      Indicates that major version
-                      upgrades are allowed. Changing this parameter does not result in an outage and
-                      the change is asynchronously applied as soon as possible.
+                    description: Whether major version upgrades are allowed. Changing
+                      this parameter does not result in an outage and the change is
+                      asynchronously applied as soon as possible.
                     type: boolean
                   applyImmediately:
-                    description: |-
-                      Specifies whether any database modifications
-                      are applied immediately, or during the next maintenance window. Default is
-                      false. See Amazon RDS Documentation for more
-                      information.
+                    description: Whether any database modifications are applied immediately,
+                      or during the next maintenance window. Default is false. See
+                      Amazon RDS Documentation for more information.
                     type: boolean
                   autoMinorVersionUpgrade:
-                    description: |-
-                      Indicates that minor engine upgrades
-                      will be applied automatically to the DB instance during the maintenance window.
-                      Defaults to true.
+                    description: Whether minor engine upgrades will be applied automatically
+                      to the DB instance during the maintenance window. Defaults to
+                      true.
                     type: boolean
                   availabilityZone:
-                    description: The AZ for the RDS instance.
+                    description: AZ for the RDS instance.
                     type: string
                   backupRetentionPeriod:
-                    description: |-
-                      The days to retain backups for.
-                      Must be between 0 and 35.
-                      Default is 0.
-                      Must be greater than 0 if the database is used as a source for a Read Replica,
-                      uses low-downtime updates,
+                    description: Days to retain backups for. Must be between 0 and
+                      35. Default is 0. Must be greater than 0 if the database is
+                      used as a source for a Read Replica, uses low-downtime updates,
                       or will use RDS Blue/Green deployments.
                     type: number
                   backupTarget:
-                    description: Specifies where automated backups and manual snapshots
-                      are stored. Possible values are region (default) and outposts.
-                      See Working with Amazon RDS on AWS Outposts for more information.
+                    description: Where automated backups and manual snapshots are
+                      stored. Possible values are region (default) and outposts. See
+                      Working with Amazon RDS on AWS Outposts for more information.
                     type: string
                   backupWindow:
-                    description: |-
-                      The daily time range (in UTC) during which automated backups are created if they are enabled.
-                      Example: "09:46-10:16". Must not overlap with maintenance_window.
+                    description: 'Daily time range (in UTC) during which automated
+                      backups are created if they are enabled. Example: "09:46-10:16".
+                      Must not overlap with maintenance_window.'
                     type: string
                   blueGreenUpdate:
-                    description: |-
-                      Enables low-downtime updates using RDS Blue/Green deployments.
-                      See blue_green_update below.
+                    description: Enables low-downtime updates using RDS Blue/Green
+                      deployments. See blue_green_update Block below.
                     properties:
                       enabled:
-                        description: |-
-                          Enables low-downtime updates when true.
-                          Default is false.
+                        description: Enables low-downtime updates when true. Default
+                          is false.
                         type: boolean
                     type: object
                   caCertIdentifier:
-                    description: The identifier of the CA certificate for the DB instance.
+                    description: Identifier of the CA certificate for the DB instance.
                     type: string
                   characterSetName:
-                    description: |-
-                      The character set name to use for DB encoding in Oracle and Microsoft SQL instances (collation).
-                      This can't be changed.
-                      See Oracle Character Sets Supported in Amazon RDS or
-                      Server-Level Collation for Microsoft SQL Server for more information.
-                      Cannot be set  with replicate_source_db, restore_to_point_in_time, s3_import, or snapshot_identifier.
+                    description: Character set name to use for DB encoding in Oracle
+                      and Microsoft SQL instances (collation). This can't be changed.
+                      See Oracle Character Sets Supported in Amazon RDS or Server-Level
+                      Collation for Microsoft SQL Server for more information. Cannot
+                      be set with replicate_source_db, restore_to_point_in_time, s3_import,
+                      or snapshot_identifier.
                     type: string
                   copyTagsToSnapshot:
                     description: Copy all Instance tags to snapshots. Default is false.
                     type: boolean
                   customIamInstanceProfile:
-                    description: The instance profile associated with the underlying
-                      Amazon EC2 instance of an RDS Custom DB instance.
+                    description: Instance profile associated with the underlying Amazon
+                      EC2 instance of an RDS Custom DB instance.
                     type: string
                   customerOwnedIpEnabled:
-                    description: Indicates whether to enable a customer-owned IP address
-                      (CoIP) for an RDS on Outposts DB instance. See CoIP for RDS
-                      on Outposts for more information.
+                    description: Whether to enable a customer-owned IP address (CoIP)
+                      for an RDS on Outposts DB instance. See CoIP for RDS on Outposts
+                      for more information.
                     type: boolean
                   databaseInsightsMode:
-                    description: 'The mode of Database Insights that is enabled for
-                      the instance. Valid values: standard, advanced .'
+                    description: 'Mode of Database Insights that is enabled for the
+                      instance. Valid values: standard, advanced .'
                     type: string
                   dbName:
-                    description: The name of the database to create when the DB instance
+                    description: Name of the database to create when the DB instance
                       is created. If this parameter is not specified, no database
                       is created in the DB instance. Note that this does not apply
                       for Oracle or SQL Server engines. See the AWS documentation
@@ -7292,13 +7339,14 @@ spec:
                       Cannot be specified for a replica.
                     type: string
                   dbSubnetGroupName:
-                    description: |-
-                      Name of DB subnet group.
-                      DB instance will be created in the VPC associated with the DB subnet group.
-                      If unspecified, will be created in the default Subnet Group.
-                      When working with read replicas created in the same region, defaults to the Subnet Group Name of the source DB.
-                      When working with read replicas created in a different region, defaults to the default Subnet Group.
-                      See DBSubnetGroupName in API action CreateDBInstanceReadReplica for additional read replica constraints.
+                    description: Name of DB subnet group. DB instance will be created
+                      in the VPC associated with the DB subnet group. If unspecified,
+                      will be created in the default Subnet Group. When working with
+                      read replicas created in the same region, defaults to the Subnet
+                      Group Name of the source DB. When working with read replicas
+                      created in a different region, defaults to the default Subnet
+                      Group. See DBSubnetGroupName in API action CreateDBInstanceReadReplica
+                      for additional read replica constraints.
                     type: string
                   dbSubnetGroupNameRef:
                     description: Reference to a SubnetGroup in rds to populate dbSubnetGroupName.
@@ -7380,8 +7428,8 @@ spec:
                       details.
                     type: boolean
                   deleteAutomatedBackups:
-                    description: Specifies whether to remove automated backups immediately
-                      after the DB instance is deleted. Default is true.
+                    description: Whether to remove automated backups immediately after
+                      the DB instance is deleted. Default is true.
                     type: boolean
                   deletionProtection:
                     description: If the DB instance should have deletion protection
@@ -7389,17 +7437,17 @@ spec:
                       to true. The default is false.
                     type: boolean
                   domain:
-                    description: The ID of the Directory Service Active Directory
-                      domain to create the instance in. Conflicts with domain_fqdn,
-                      domain_ou, domain_auth_secret_arn and a domain_dns_ips.
+                    description: ID of the Directory Service Active Directory domain
+                      to create the instance in. Conflicts with domain_fqdn, domain_ou,
+                      domain_auth_secret_arn and a domain_dns_ips.
                     type: string
                   domainAuthSecretArn:
-                    description: The ARN for the Secrets Manager secret with the self
+                    description: ARN for the Secrets Manager secret with the self
                       managed Active Directory credentials for the user joining the
                       domain. Conflicts with domain and domain_iam_role_name.
                     type: string
                   domainDnsIps:
-                    description: The IPv4 DNS IP addresses of your primary and secondary
+                    description: IPv4 DNS IP addresses of your primary and secondary
                       self managed Active Directory domain controllers. Two IP addresses
                       must be provided. If there isn't a secondary domain controller,
                       use the IP address of the primary domain controller for both
@@ -7408,18 +7456,17 @@ spec:
                       type: string
                     type: array
                   domainFqdn:
-                    description: The fully qualified domain name (FQDN) of the self
-                      managed Active Directory domain. Conflicts with domain and domain_iam_role_name.
+                    description: Fully qualified domain name (FQDN) of the self managed
+                      Active Directory domain. Conflicts with domain and domain_iam_role_name.
                     type: string
                   domainIamRoleName:
-                    description: The name of the IAM role to be used when making API
-                      calls to the Directory Service. Conflicts with domain_fqdn,
-                      domain_ou, domain_auth_secret_arn and a domain_dns_ips.
+                    description: Name of the IAM role to be used when making API calls
+                      to the Directory Service. Conflicts with domain_fqdn, domain_ou,
+                      domain_auth_secret_arn and a domain_dns_ips.
                     type: string
                   domainOu:
-                    description: The self managed Active Directory organizational
-                      unit for your DB instance to join. Conflicts with domain and
-                      domain_iam_role_name.
+                    description: Self managed Active Directory organizational unit
+                      for your DB instance to join. Conflicts with domain and domain_iam_role_name.
                     type: string
                   enabledCloudwatchLogsExports:
                     description: Set of log types to enable for exporting to CloudWatch
@@ -7440,7 +7487,7 @@ spec:
                       Notes](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraMySQLReleaseNotes/Welcome.html).
                     type: string
                   engineLifecycleSupport:
-                    description: 'The life cycle type for this DB instance. This setting
+                    description: 'Life cycle type for this DB instance. This setting
                       applies only to RDS for MySQL and RDS for PostgreSQL. Valid
                       values are open-source-rds-extended-support, open-source-rds-extended-support-disabled.
                       Default value is open-source-rds-extended-support. [Using Amazon
@@ -7458,15 +7505,16 @@ spec:
                       engine version'.
                     type: string
                   finalSnapshotIdentifier:
-                    description: |-
-                      The name of your final DB snapshot
-                      when this DB instance is deleted. Must be provided if skip_final_snapshot is
-                      set to false. The value must begin with a letter, only contain alphanumeric characters and hyphens, and not end with a hyphen or contain two consecutive hyphens. Must not be provided when deleting a read replica.
+                    description: Name of your final DB snapshot when this DB instance
+                      is deleted. Must be provided if skip_final_snapshot is set to
+                      false. The value must begin with a letter, only contain alphanumeric
+                      characters and hyphens, and not end with a hyphen or contain
+                      two consecutive hyphens. Must not be provided when deleting
+                      a read replica.
                     type: string
                   iamDatabaseAuthenticationEnabled:
-                    description: |-
-                      Specifies whether mappings of AWS Identity and Access Management (IAM) accounts to database
-                      accounts is enabled.
+                    description: Whether mappings of AWS Identity and Access Management
+                      (IAM) accounts to database accounts is enabled.
                     type: boolean
                   identifier:
                     description: Required if restore_to_point_in_time is specified.
@@ -7476,19 +7524,18 @@ spec:
                       prefix. Conflicts with identifier.
                     type: string
                   instanceClass:
-                    description: The instance type of the RDS instance.
+                    description: Instance type of the RDS instance.
                     type: string
                   iops:
-                    description: |-
-                      The amount of provisioned IOPS. Setting this implies a
-                      storage_type of "io1" or "io2". Can only be set when storage_type is "io1", "io2 or "gp3".
-                      Cannot be specified for gp3 storage if the allocated_storage value is below a per-engine threshold.
+                    description: Amount of provisioned IOPS. Setting this implies
+                      a storage_type of "io1" or "io2". Can only be set when storage_type
+                      is "io1", "io2 or "gp3". Cannot be specified for gp3 storage
+                      if the allocated_storage value is below a per-engine threshold.
                       See the RDS User Guide for details.
                     type: number
                   kmsKeyId:
-                    description: |-
-                      The ARN for the KMS encryption key. If creating an
-                      encrypted replica, set this to the destination KMS ARN.
+                    description: ARN for the KMS encryption key. If creating an encrypted
+                      replica, set this to the destination KMS ARN.
                     type: string
                   kmsKeyIdRef:
                     description: Reference to a Key in kms to populate kmsKeyId.
@@ -7566,15 +7613,15 @@ spec:
                     type: object
                   licenseModel:
                     description: 'License model information for this DB instance.
-                      Valid values for this field are as follows:'
+                      Valid values for this field are as follows: RDS for MariaDB:
+                      general-public-license; RDS for Microsoft SQL Server: license-included;
+                      RDS for MySQL: general-public-license; RDS for Oracle: bring-your-own-license
+                      | license-included; RDS for PostgreSQL: postgresql-license.'
                     type: string
                   maintenanceWindow:
-                    description: |-
-                      The window to perform maintenance in.
-                      Syntax: "ddd:hh24:mi-ddd:hh24:mi". Eg: "Mon:00:00-Mon:03:00". See RDS
-                      Maintenance Window
-                      docs
-                      for more information.
+                    description: 'Window to perform maintenance in. Syntax: "ddd:hh24:mi-ddd:hh24:mi".
+                      Eg: "Mon:00:00-Mon:03:00". See RDS Maintenance Window docs for
+                      more information.'
                     type: string
                   manageMasterUserPassword:
                     description: Set to true to allow RDS to manage the master user
@@ -7582,9 +7629,9 @@ spec:
                       is provided.
                     type: boolean
                   masterUserSecretKmsKeyId:
-                    description: The Amazon Web Services KMS key identifier is the
-                      key ARN, key ID, alias ARN, or alias name for the KMS key. To
-                      use a KMS key in a different Amazon Web Services account, specify
+                    description: Amazon Web Services KMS key identifier is the key
+                      ARN, key ID, alias ARN, or alias name for the KMS key. To use
+                      a KMS key in a different Amazon Web Services account, specify
                       the key ARN or alias ARN. If not specified, the default KMS
                       key for your Amazon Web Services account is used.
                     type: string
@@ -7663,28 +7710,25 @@ spec:
                         type: object
                     type: object
                   maxAllocatedStorage:
-                    description: Specifies the maximum storage (in GiB) that Amazon
-                      RDS can automatically scale to for this DB instance. By default,
-                      Storage Autoscaling is disabled. To enable Storage Autoscaling,
-                      set max_allocated_storage to greater than or equal to allocated_storage.
-                      Setting max_allocated_storage to 0 explicitly disables Storage
-                      Autoscaling. When configured, changes to allocated_storage will
-                      be automatically ignored as the storage can dynamically scale.
+                    description: Maximum storage (in GiB) that Amazon RDS can automatically
+                      scale to for this DB instance. By default, Storage Autoscaling
+                      is disabled. To enable Storage Autoscaling, set max_allocated_storage
+                      to greater than or equal to allocated_storage. Setting max_allocated_storage
+                      to 0 explicitly disables Storage Autoscaling. When configured,
+                      changes to allocated_storage will be automatically ignored as
+                      the storage can dynamically scale.
                     type: number
                   monitoringInterval:
-                    description: |-
-                      The interval, in seconds, between points
-                      when Enhanced Monitoring metrics are collected for the DB instance. To disable
-                      collecting Enhanced Monitoring metrics, specify 0. The default is 0. Valid
-                      Values: 0, 1, 5, 10, 15, 30, 60.
+                    description: 'Interval, in seconds, between points when Enhanced
+                      Monitoring metrics are collected for the DB instance. To disable
+                      collecting Enhanced Monitoring metrics, specify 0. The default
+                      is 0. Valid Values: 0, 1, 5, 10, 15, 30, 60.'
                     type: number
                   monitoringRoleArn:
-                    description: |-
-                      The ARN for the IAM role that permits RDS
-                      to send enhanced monitoring metrics to CloudWatch Logs. You can find more
-                      information on the AWS
-                      Documentation
-                      what IAM permissions are needed to allow Enhanced Monitoring for RDS Instances.
+                    description: ARN for the IAM role that permits RDS to send enhanced
+                      monitoring metrics to CloudWatch Logs. You can find more information
+                      on the AWS Documentation what IAM permissions are needed to
+                      allow Enhanced Monitoring for RDS Instances.
                     type: string
                   monitoringRoleArnRef:
                     description: Reference to a Role in iam to populate monitoringRoleArn.
@@ -7761,16 +7805,16 @@ spec:
                         type: object
                     type: object
                   multiAz:
-                    description: Specifies if the RDS instance is multi-AZ
+                    description: Whether the RDS instance is multi-AZ.
                     type: boolean
                   ncharCharacterSetName:
-                    description: |-
-                      The national character set is used in the NCHAR, NVARCHAR2, and NCLOB data types for Oracle instances. This can't be changed. See Oracle Character Sets
-                      Supported in Amazon RDS.
+                    description: National character set is used in the NCHAR, NVARCHAR2,
+                      and NCLOB data types for Oracle instances. This can't be changed.
+                      See Oracle Character Sets Supported in Amazon RDS.
                     type: string
                   networkType:
-                    description: 'The network type of the DB instance. Valid values:
-                      IPV4, DUAL.'
+                    description: 'Network type of the DB instance. Valid values: IPV4,
+                      DUAL.'
                     type: string
                   optionGroupName:
                     description: Name of the DB option group to associate.
@@ -7876,7 +7920,8 @@ spec:
                   passwordWoSecretRef:
                     description: Password for the master DB user. Note that this may
                       show up in logs, and it will be stored in the state file. Cannot
-                      be set if manage_master_user_password is set to true.
+                      be set if manage_master_user_password is set to true. If set,
+                      requires password_wo_version to be set.
                     properties:
                       key:
                         description: The key to select.
@@ -7893,15 +7938,15 @@ spec:
                     - namespace
                     type: object
                   passwordWoVersion:
-                    description: Used together with password_wo to trigger an update.
-                      Increment this value when an update to password_wo is required.
+                    description: Required when password_wo is set. Changing this value
+                      triggers an update to password_wo.
                     type: number
                   performanceInsightsEnabled:
-                    description: Specifies whether Performance Insights are enabled.
-                      Defaults to false.
+                    description: Whether Performance Insights are enabled. Defaults
+                      to false.
                     type: boolean
                   performanceInsightsKmsKeyId:
-                    description: The ARN for the KMS key to encrypt Performance Insights
+                    description: ARN for the KMS key to encrypt Performance Insights
                       data. When specifying performance_insights_kms_key_id, performance_insights_enabled
                       needs to be set to true. Once KMS key is set, it can never be
                       changed.
@@ -7987,26 +8032,30 @@ spec:
                       needs to be set to true. Defaults to '7'.
                     type: number
                   port:
-                    description: The port on which the DB accepts connections.
+                    description: Port on which the DB accepts connections.
                     type: number
                   publiclyAccessible:
-                    description: |-
-                      Bool to control if instance is publicly
-                      accessible. Default is false.
+                    description: Bool to control if instance is publicly accessible.
+                      Default is false.
                     type: boolean
                   replicaMode:
-                    description: |-
-                      Specifies whether the replica is in either mounted or open-read-only mode. This attribute
-                      is only supported by Oracle instances. Oracle replicas operate in open-read-only mode unless otherwise specified. See Working with Oracle Read Replicas for more information.
+                    description: Whether the replica is in either mounted or open-read-only
+                      mode. This attribute is only supported by Oracle instances.
+                      Oracle replicas operate in open-read-only mode unless otherwise
+                      specified. See Working with Oracle Read Replicas for more information.
                     type: string
                   replicateSourceDb:
-                    description: |-
-                      Specifies that this resource is a Replica database, and to use this value as the source database.
-                      If replicating an Amazon RDS Database Instance in the same region, use the identifier of the source DB, unless also specifying the db_subnet_group_name.
-                      If specifying the db_subnet_group_name in the same region, use the arn of the source DB.
-                      If replicating an Instance in a different region, use the arn of the source DB.
-                      Note that if you are creating a cross-region replica of an encrypted database you will also need to specify a kms_key_id.
-                      See DB Instance Replication and Working with PostgreSQL and MySQL Read Replicas for more information on using Replication.
+                    description: Set this to specify that this resource is a Replica
+                      database, and to use this value as the source database. If replicating
+                      an Amazon RDS Database Instance in the same region, use the
+                      identifier of the source DB, unless also specifying the db_subnet_group_name.
+                      If specifying the db_subnet_group_name in the same region, use
+                      the arn of the source DB. If replicating an Instance in a different
+                      region, use the arn of the source DB. Note that if you are creating
+                      a cross-region replica of an encrypted database you will also
+                      need to specify a kms_key_id. See DB Instance Replication and
+                      Working with PostgreSQL and MySQL Read Replicas for more information
+                      on using Replication.
                     type: string
                   replicateSourceDbRef:
                     description: Reference to a Instance in rds to populate replicateSourceDb.
@@ -8083,92 +8132,91 @@ spec:
                         type: object
                     type: object
                   restoreToPointInTime:
-                    description: |-
-                      A configuration block for restoring a DB instance to an arbitrary point in time.
-                      Requires the identifier argument to be set with the name of the new DB instance to be created.
-                      See Restore To Point In Time below for details.
+                    description: Configuration block for restoring a DB instance to
+                      an arbitrary point in time. Requires the identifier argument
+                      to be set with the name of the new DB instance to be created.
+                      See restore_to_point_in_time Block below for details.
                     properties:
                       restoreTime:
-                        description: The date and time to restore from. Value must
-                          be a time in Universal Coordinated Time (UTC) format and
-                          must be before the latest restorable time for the DB instance.
+                        description: Date and time to restore from. Value must be
+                          a time in Universal Coordinated Time (UTC) format and must
+                          be before the latest restorable time for the DB instance.
                           Cannot be specified with use_latest_restorable_time.
                         type: string
                       sourceDbInstanceAutomatedBackupsArn:
-                        description: The ARN of the automated backup from which to
-                          restore. Required if source_db_instance_identifier or source_dbi_resource_id
+                        description: ARN of the automated backup from which to restore.
+                          Required if source_db_instance_identifier or source_dbi_resource_id
                           is not specified.
                         type: string
                       sourceDbInstanceIdentifier:
-                        description: The identifier of the source DB instance from
-                          which to restore. Must match the identifier of an existing
-                          DB instance. Required if source_db_instance_automated_backups_arn
+                        description: Identifier of the source DB instance from which
+                          to restore. Must match the identifier of an existing DB
+                          instance. Required if source_db_instance_automated_backups_arn
                           or source_dbi_resource_id is not specified.
                         type: string
                       sourceDbiResourceId:
-                        description: The resource ID of the source DB instance from
-                          which to restore. Required if source_db_instance_identifier
-                          or source_db_instance_automated_backups_arn is not specified.
+                        description: Resource ID of the source DB instance from which
+                          to restore. Required if source_db_instance_identifier or
+                          source_db_instance_automated_backups_arn is not specified.
                         type: string
                       useLatestRestorableTime:
-                        description: A boolean value that indicates whether the DB
-                          instance is restored from the latest backup time. Defaults
-                          to false. Cannot be specified with restore_time.
+                        description: Boolean value that indicates whether the DB instance
+                          is restored from the latest backup time. Defaults to false.
+                          Cannot be specified with restore_time.
                         type: boolean
                     type: object
                   s3Import:
-                    description: Restore from a Percona Xtrabackup in S3.  See Importing
-                      Data into an Amazon RDS MySQL DB Instance
+                    description: Restore from a Percona XtraBackup in S3. See Importing
+                      Data into an Amazon RDS MySQL DB Instance. See s3_import Block
+                      below.
                     properties:
                       bucketName:
-                        description: The bucket name where your backup is stored
+                        description: Bucket name where your backup is stored.
                         type: string
                       bucketPrefix:
-                        description: Can be blank, but is the path to your backup
+                        description: Can be blank, but is the path to your backup.
                         type: string
                       ingestionRole:
                         description: Role applied to load the data.
                         type: string
                       sourceEngine:
-                        description: Source engine for the backup
+                        description: Source engine for the backup.
                         type: string
                       sourceEngineVersion:
                         description: Version of the source engine used to make the
-                          backup
+                          backup.
                         type: string
                     type: object
                   skipFinalSnapshot:
-                    description: |-
-                      Determines whether a final DB snapshot is
-                      created before the DB instance is deleted. If true is specified, no DBSnapshot
-                      is created. If false is specified, a DB snapshot is created before the DB
-                      instance is deleted, using the value from final_snapshot_identifier. Default
-                      is false.
+                    description: Whether a final DB snapshot is created before the
+                      DB instance is deleted. If true is specified, no DBSnapshot
+                      is created. If false is specified, a DB snapshot is created
+                      before the DB instance is deleted, using the value from final_snapshot_identifier.
+                      Default is false.
                     type: boolean
                   snapshotIdentifier:
-                    description: |-
-                      Specifies whether or not to create this database from a snapshot.
-                      This corresponds to the snapshot ID you'd find in the RDS console, e.g: rds:production-2015-06-26-06-05.
+                    description: 'Whether or not to create this database from a snapshot.
+                      This corresponds to the snapshot ID you''d find in the RDS console,
+                      e.g: rds:production-2015-06-26-06-05.'
                     type: string
                   storageEncrypted:
-                    description: |-
-                      Specifies whether the DB instance is
-                      encrypted. Note that if you are creating a cross-region read replica this field
-                      is ignored and you should instead declare kms_key_id with a valid ARN. The
-                      default is false if not specified.
+                    description: Whether the DB instance is encrypted. Note that if
+                      you are creating a cross-region read replica this field is ignored
+                      and you should instead declare kms_key_id with a valid ARN.
+                      The default is false if not specified.
                     type: boolean
                   storageThroughput:
-                    description: The storage throughput value for the DB instance.
-                      Can only be set when storage_type is "gp3". Cannot be specified
+                    description: Storage throughput value for the DB instance. Can
+                      only be set when storage_type is "gp3". Cannot be specified
                       if the allocated_storage value is below a per-engine threshold.
                       See the RDS User Guide for details.
                     type: number
                   storageType:
-                    description: |-
-                      One of "standard" (magnetic), "gp2" (general
-                      purpose SSD), "gp3" (general purpose SSD that needs iops independently)
-                      "io1" (provisioned IOPS SSD) or "io2" (block express storage provisioned IOPS
-                      SSD). The default is "io1" if iops is specified, "gp2" if not.
+                    description: One of "standard" (magnetic), "gp2" (general purpose
+                      SSD), "gp3" (general purpose SSD that needs iops independently)
+                      "io1" (provisioned IOPS SSD) or "io2" (block express storage
+                      provisioned IOPS SSD). The default is "io1" if iops is specified,
+                      "gp2" if not.
                     type: string
                   tags:
                     additionalProperties:
@@ -8177,17 +8225,13 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   timezone:
-                    description: |-
-                      Time zone of the DB instance. timezone is currently
-                      only supported by Microsoft SQL Server. The timezone can only be set on
-                      creation. See MSSQL User
-                      Guide
-                      for more information.
+                    description: Time zone of the DB instance. timezone is currently
+                      only supported by Microsoft SQL Server. The timezone can only
+                      be set on creation. See MSSQL User Guide for more information.
                     type: string
                   upgradeStorageConfig:
-                    description: |-
-                      Whether to upgrade the storage file system configuration on the read replica.
-                      Can only be set with replicate_source_db.
+                    description: Whether to upgrade the storage file system configuration
+                      on the read replica. Can only be set with replicate_source_db.
                     type: boolean
                   username:
                     description: Username for the master DB user. Cannot be specified
@@ -8272,9 +8316,17 @@ spec:
                         type: object
                     type: object
                   vpcSecurityGroupIds:
-                    description: |-
-                      List of VPC security groups to
-                      associate.
+                    description: List of VPC security groups to associate.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
+                  warningEventCategories:
+                    description: Set of RDS event categories (for example failure,
+                      maintenance) to check for after create and update operations.
+                      Has no effect if unset; see DescribeEvents and the aws_rds_events
+                      data source for the source of these events. Requires the rds:DescribeEvents
+                      IAM permission when set.
                     items:
                       type: string
                     type: array
@@ -8377,100 +8429,91 @@ spec:
               atProvider:
                 properties:
                   address:
-                    description: The hostname of the RDS instance. See also endpoint
-                      and port.
+                    description: Hostname of the RDS instance. See also endpoint and
+                      port.
                     type: string
                   allocatedStorage:
-                    description: The allocated storage in gibibytes. If max_allocated_storage
+                    description: Allocated storage in gibibytes. If max_allocated_storage
                       is configured, this argument represents the initial storage
                       allocation and differences from the configuration will be ignored
                       automatically when Storage Autoscaling occurs. If replicate_source_db
                       is set, the value is ignored during the creation of the instance.
                     type: number
                   allowMajorVersionUpgrade:
-                    description: |-
-                      Indicates that major version
-                      upgrades are allowed. Changing this parameter does not result in an outage and
-                      the change is asynchronously applied as soon as possible.
+                    description: Whether major version upgrades are allowed. Changing
+                      this parameter does not result in an outage and the change is
+                      asynchronously applied as soon as possible.
                     type: boolean
                   applyImmediately:
-                    description: |-
-                      Specifies whether any database modifications
-                      are applied immediately, or during the next maintenance window. Default is
-                      false. See Amazon RDS Documentation for more
-                      information.
+                    description: Whether any database modifications are applied immediately,
+                      or during the next maintenance window. Default is false. See
+                      Amazon RDS Documentation for more information.
                     type: boolean
                   arn:
-                    description: The ARN of the RDS instance.
+                    description: ARN of the RDS instance.
                     type: string
                   autoMinorVersionUpgrade:
-                    description: |-
-                      Indicates that minor engine upgrades
-                      will be applied automatically to the DB instance during the maintenance window.
-                      Defaults to true.
+                    description: Whether minor engine upgrades will be applied automatically
+                      to the DB instance during the maintenance window. Defaults to
+                      true.
                     type: boolean
                   availabilityZone:
-                    description: The AZ for the RDS instance.
+                    description: AZ for the RDS instance.
                     type: string
                   backupRetentionPeriod:
-                    description: |-
-                      The days to retain backups for.
-                      Must be between 0 and 35.
-                      Default is 0.
-                      Must be greater than 0 if the database is used as a source for a Read Replica,
-                      uses low-downtime updates,
+                    description: Days to retain backups for. Must be between 0 and
+                      35. Default is 0. Must be greater than 0 if the database is
+                      used as a source for a Read Replica, uses low-downtime updates,
                       or will use RDS Blue/Green deployments.
                     type: number
                   backupTarget:
-                    description: Specifies where automated backups and manual snapshots
-                      are stored. Possible values are region (default) and outposts.
-                      See Working with Amazon RDS on AWS Outposts for more information.
+                    description: Where automated backups and manual snapshots are
+                      stored. Possible values are region (default) and outposts. See
+                      Working with Amazon RDS on AWS Outposts for more information.
                     type: string
                   backupWindow:
-                    description: |-
-                      The daily time range (in UTC) during which automated backups are created if they are enabled.
-                      Example: "09:46-10:16". Must not overlap with maintenance_window.
+                    description: 'Daily time range (in UTC) during which automated
+                      backups are created if they are enabled. Example: "09:46-10:16".
+                      Must not overlap with maintenance_window.'
                     type: string
                   blueGreenUpdate:
-                    description: |-
-                      Enables low-downtime updates using RDS Blue/Green deployments.
-                      See blue_green_update below.
+                    description: Enables low-downtime updates using RDS Blue/Green
+                      deployments. See blue_green_update Block below.
                     properties:
                       enabled:
-                        description: |-
-                          Enables low-downtime updates when true.
-                          Default is false.
+                        description: Enables low-downtime updates when true. Default
+                          is false.
                         type: boolean
                     type: object
                   caCertIdentifier:
-                    description: The identifier of the CA certificate for the DB instance.
+                    description: Identifier of the CA certificate for the DB instance.
                     type: string
                   characterSetName:
-                    description: |-
-                      The character set name to use for DB encoding in Oracle and Microsoft SQL instances (collation).
-                      This can't be changed.
-                      See Oracle Character Sets Supported in Amazon RDS or
-                      Server-Level Collation for Microsoft SQL Server for more information.
-                      Cannot be set  with replicate_source_db, restore_to_point_in_time, s3_import, or snapshot_identifier.
+                    description: Character set name to use for DB encoding in Oracle
+                      and Microsoft SQL instances (collation). This can't be changed.
+                      See Oracle Character Sets Supported in Amazon RDS or Server-Level
+                      Collation for Microsoft SQL Server for more information. Cannot
+                      be set with replicate_source_db, restore_to_point_in_time, s3_import,
+                      or snapshot_identifier.
                     type: string
                   copyTagsToSnapshot:
                     description: Copy all Instance tags to snapshots. Default is false.
                     type: boolean
                   customIamInstanceProfile:
-                    description: The instance profile associated with the underlying
-                      Amazon EC2 instance of an RDS Custom DB instance.
+                    description: Instance profile associated with the underlying Amazon
+                      EC2 instance of an RDS Custom DB instance.
                     type: string
                   customerOwnedIpEnabled:
-                    description: Indicates whether to enable a customer-owned IP address
-                      (CoIP) for an RDS on Outposts DB instance. See CoIP for RDS
-                      on Outposts for more information.
+                    description: Whether to enable a customer-owned IP address (CoIP)
+                      for an RDS on Outposts DB instance. See CoIP for RDS on Outposts
+                      for more information.
                     type: boolean
                   databaseInsightsMode:
-                    description: 'The mode of Database Insights that is enabled for
-                      the instance. Valid values: standard, advanced .'
+                    description: 'Mode of Database Insights that is enabled for the
+                      instance. Valid values: standard, advanced .'
                     type: string
                   dbName:
-                    description: The name of the database to create when the DB instance
+                    description: Name of the database to create when the DB instance
                       is created. If this parameter is not specified, no database
                       is created in the DB instance. Note that this does not apply
                       for Oracle or SQL Server engines. See the AWS documentation
@@ -8479,13 +8522,14 @@ spec:
                       Cannot be specified for a replica.
                     type: string
                   dbSubnetGroupName:
-                    description: |-
-                      Name of DB subnet group.
-                      DB instance will be created in the VPC associated with the DB subnet group.
-                      If unspecified, will be created in the default Subnet Group.
-                      When working with read replicas created in the same region, defaults to the Subnet Group Name of the source DB.
-                      When working with read replicas created in a different region, defaults to the default Subnet Group.
-                      See DBSubnetGroupName in API action CreateDBInstanceReadReplica for additional read replica constraints.
+                    description: Name of DB subnet group. DB instance will be created
+                      in the VPC associated with the DB subnet group. If unspecified,
+                      will be created in the default Subnet Group. When working with
+                      read replicas created in the same region, defaults to the Subnet
+                      Group Name of the source DB. When working with read replicas
+                      created in a different region, defaults to the default Subnet
+                      Group. See DBSubnetGroupName in API action CreateDBInstanceReadReplica
+                      for additional read replica constraints.
                     type: string
                   dedicatedLogVolume:
                     description: Use a dedicated log volume (DLV) for the DB instance.
@@ -8493,8 +8537,8 @@ spec:
                       details.
                     type: boolean
                   deleteAutomatedBackups:
-                    description: Specifies whether to remove automated backups immediately
-                      after the DB instance is deleted. Default is true.
+                    description: Whether to remove automated backups immediately after
+                      the DB instance is deleted. Default is true.
                     type: boolean
                   deletionProtection:
                     description: If the DB instance should have deletion protection
@@ -8502,17 +8546,17 @@ spec:
                       to true. The default is false.
                     type: boolean
                   domain:
-                    description: The ID of the Directory Service Active Directory
-                      domain to create the instance in. Conflicts with domain_fqdn,
-                      domain_ou, domain_auth_secret_arn and a domain_dns_ips.
+                    description: ID of the Directory Service Active Directory domain
+                      to create the instance in. Conflicts with domain_fqdn, domain_ou,
+                      domain_auth_secret_arn and a domain_dns_ips.
                     type: string
                   domainAuthSecretArn:
-                    description: The ARN for the Secrets Manager secret with the self
+                    description: ARN for the Secrets Manager secret with the self
                       managed Active Directory credentials for the user joining the
                       domain. Conflicts with domain and domain_iam_role_name.
                     type: string
                   domainDnsIps:
-                    description: The IPv4 DNS IP addresses of your primary and secondary
+                    description: IPv4 DNS IP addresses of your primary and secondary
                       self managed Active Directory domain controllers. Two IP addresses
                       must be provided. If there isn't a secondary domain controller,
                       use the IP address of the primary domain controller for both
@@ -8521,18 +8565,17 @@ spec:
                       type: string
                     type: array
                   domainFqdn:
-                    description: The fully qualified domain name (FQDN) of the self
-                      managed Active Directory domain. Conflicts with domain and domain_iam_role_name.
+                    description: Fully qualified domain name (FQDN) of the self managed
+                      Active Directory domain. Conflicts with domain and domain_iam_role_name.
                     type: string
                   domainIamRoleName:
-                    description: The name of the IAM role to be used when making API
-                      calls to the Directory Service. Conflicts with domain_fqdn,
-                      domain_ou, domain_auth_secret_arn and a domain_dns_ips.
+                    description: Name of the IAM role to be used when making API calls
+                      to the Directory Service. Conflicts with domain_fqdn, domain_ou,
+                      domain_auth_secret_arn and a domain_dns_ips.
                     type: string
                   domainOu:
-                    description: The self managed Active Directory organizational
-                      unit for your DB instance to join. Conflicts with domain and
-                      domain_iam_role_name.
+                    description: Self managed Active Directory organizational unit
+                      for your DB instance to join. Conflicts with domain and domain_iam_role_name.
                     type: string
                   enabledCloudwatchLogsExports:
                     description: Set of log types to enable for exporting to CloudWatch
@@ -8544,7 +8587,7 @@ spec:
                     type: array
                     x-kubernetes-list-type: set
                   endpoint:
-                    description: The connection endpoint in address:port format.
+                    description: Connection endpoint in address:port format.
                     type: string
                   engine:
                     description: The database engine to use. For supported values,
@@ -8556,7 +8599,7 @@ spec:
                       Notes](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraMySQLReleaseNotes/Welcome.html).
                     type: string
                   engineLifecycleSupport:
-                    description: 'The life cycle type for this DB instance. This setting
+                    description: 'Life cycle type for this DB instance. This setting
                       applies only to RDS for MySQL and RDS for PostgreSQL. Valid
                       values are open-source-rds-extended-support, open-source-rds-extended-support-disabled.
                       Default value is open-source-rds-extended-support. [Using Amazon
@@ -8574,23 +8617,23 @@ spec:
                       engine version'.
                     type: string
                   engineVersionActual:
-                    description: The running version of the database.
+                    description: Running version of the database.
                     type: string
                   finalSnapshotIdentifier:
-                    description: |-
-                      The name of your final DB snapshot
-                      when this DB instance is deleted. Must be provided if skip_final_snapshot is
-                      set to false. The value must begin with a letter, only contain alphanumeric characters and hyphens, and not end with a hyphen or contain two consecutive hyphens. Must not be provided when deleting a read replica.
+                    description: Name of your final DB snapshot when this DB instance
+                      is deleted. Must be provided if skip_final_snapshot is set to
+                      false. The value must begin with a letter, only contain alphanumeric
+                      characters and hyphens, and not end with a hyphen or contain
+                      two consecutive hyphens. Must not be provided when deleting
+                      a read replica.
                     type: string
                   hostedZoneId:
-                    description: |-
-                      The canonical hosted zone ID of the DB instance (to be used
-                      in a Route 53 Alias record).
+                    description: Canonical hosted zone ID of the DB instance (to be
+                      used in a Route 53 Alias record).
                     type: string
                   iamDatabaseAuthenticationEnabled:
-                    description: |-
-                      Specifies whether mappings of AWS Identity and Access Management (IAM) accounts to database
-                      accounts is enabled.
+                    description: Whether mappings of AWS Identity and Access Management
+                      (IAM) accounts to database accounts is enabled.
                     type: boolean
                   id:
                     description: RDS DBI resource ID.
@@ -8603,54 +8646,52 @@ spec:
                       prefix. Conflicts with identifier.
                     type: string
                   instanceClass:
-                    description: The instance type of the RDS instance.
+                    description: Instance type of the RDS instance.
                     type: string
                   iops:
-                    description: |-
-                      The amount of provisioned IOPS. Setting this implies a
-                      storage_type of "io1" or "io2". Can only be set when storage_type is "io1", "io2 or "gp3".
-                      Cannot be specified for gp3 storage if the allocated_storage value is below a per-engine threshold.
+                    description: Amount of provisioned IOPS. Setting this implies
+                      a storage_type of "io1" or "io2". Can only be set when storage_type
+                      is "io1", "io2 or "gp3". Cannot be specified for gp3 storage
+                      if the allocated_storage value is below a per-engine threshold.
                       See the RDS User Guide for details.
                     type: number
                   kmsKeyId:
-                    description: |-
-                      The ARN for the KMS encryption key. If creating an
-                      encrypted replica, set this to the destination KMS ARN.
+                    description: ARN for the KMS encryption key. If creating an encrypted
+                      replica, set this to the destination KMS ARN.
                     type: string
                   latestRestorableTime:
-                    description: The latest time, in UTC RFC3339 format, to which
-                      a database can be restored with point-in-time restore.
+                    description: Latest time, in UTC RFC3339 format, to which a database
+                      can be restored with point-in-time restore.
                     type: string
                   licenseModel:
                     description: 'License model information for this DB instance.
-                      Valid values for this field are as follows:'
+                      Valid values for this field are as follows: RDS for MariaDB:
+                      general-public-license; RDS for Microsoft SQL Server: license-included;
+                      RDS for MySQL: general-public-license; RDS for Oracle: bring-your-own-license
+                      | license-included; RDS for PostgreSQL: postgresql-license.'
                     type: string
                   listenerEndpoint:
-                    description: Specifies the listener connection endpoint for SQL
-                      Server Always On. See endpoint below.
+                    description: Listener connection endpoint for SQL Server Always
+                      On. See Endpoint below.
                     items:
                       properties:
                         address:
-                          description: The hostname of the RDS instance. See also
-                            endpoint and port.
+                          description: Hostname of the RDS instance. See also endpoint
+                            and port.
                           type: string
                         hostedZoneId:
-                          description: |-
-                            The canonical hosted zone ID of the DB instance (to be used
-                            in a Route 53 Alias record).
+                          description: Canonical hosted zone ID of the DB instance
+                            (to be used in a Route 53 Alias record).
                           type: string
                         port:
-                          description: The port on which the DB accepts connections.
+                          description: Port on which the DB accepts connections.
                           type: number
                       type: object
                     type: array
                   maintenanceWindow:
-                    description: |-
-                      The window to perform maintenance in.
-                      Syntax: "ddd:hh24:mi-ddd:hh24:mi". Eg: "Mon:00:00-Mon:03:00". See RDS
-                      Maintenance Window
-                      docs
-                      for more information.
+                    description: 'Window to perform maintenance in. Syntax: "ddd:hh24:mi-ddd:hh24:mi".
+                      Eg: "Mon:00:00-Mon:03:00". See RDS Maintenance Window docs for
+                      more information.'
                     type: string
                   manageMasterUserPassword:
                     description: Set to true to allow RDS to manage the master user
@@ -8658,66 +8699,63 @@ spec:
                       is provided.
                     type: boolean
                   masterUserSecret:
-                    description: A block that specifies the master user secret. Only
-                      available when manage_master_user_password is set to true. Documented
-                      below.
+                    description: Block that specifies the master user secret. Only
+                      available when manage_master_user_password is set to true. See
+                      master_user_secret Block below.
                     items:
                       properties:
                         kmsKeyId:
-                          description: The Amazon Web Services KMS key identifier
-                            that is used to encrypt the secret.
+                          description: Amazon Web Services KMS key identifier that
+                            is used to encrypt the secret.
                           type: string
                         secretArn:
                           description: ARN of the secret.
                           type: string
                         secretStatus:
-                          description: 'The status of the secret. Valid Values: creating
+                          description: 'Status of the secret. Valid Values: creating
                             | active | rotating | impaired.'
                           type: string
                       type: object
                     type: array
                   masterUserSecretKmsKeyId:
-                    description: The Amazon Web Services KMS key identifier is the
-                      key ARN, key ID, alias ARN, or alias name for the KMS key. To
-                      use a KMS key in a different Amazon Web Services account, specify
+                    description: Amazon Web Services KMS key identifier is the key
+                      ARN, key ID, alias ARN, or alias name for the KMS key. To use
+                      a KMS key in a different Amazon Web Services account, specify
                       the key ARN or alias ARN. If not specified, the default KMS
                       key for your Amazon Web Services account is used.
                     type: string
                   maxAllocatedStorage:
-                    description: Specifies the maximum storage (in GiB) that Amazon
-                      RDS can automatically scale to for this DB instance. By default,
-                      Storage Autoscaling is disabled. To enable Storage Autoscaling,
-                      set max_allocated_storage to greater than or equal to allocated_storage.
-                      Setting max_allocated_storage to 0 explicitly disables Storage
-                      Autoscaling. When configured, changes to allocated_storage will
-                      be automatically ignored as the storage can dynamically scale.
+                    description: Maximum storage (in GiB) that Amazon RDS can automatically
+                      scale to for this DB instance. By default, Storage Autoscaling
+                      is disabled. To enable Storage Autoscaling, set max_allocated_storage
+                      to greater than or equal to allocated_storage. Setting max_allocated_storage
+                      to 0 explicitly disables Storage Autoscaling. When configured,
+                      changes to allocated_storage will be automatically ignored as
+                      the storage can dynamically scale.
                     type: number
                   monitoringInterval:
-                    description: |-
-                      The interval, in seconds, between points
-                      when Enhanced Monitoring metrics are collected for the DB instance. To disable
-                      collecting Enhanced Monitoring metrics, specify 0. The default is 0. Valid
-                      Values: 0, 1, 5, 10, 15, 30, 60.
+                    description: 'Interval, in seconds, between points when Enhanced
+                      Monitoring metrics are collected for the DB instance. To disable
+                      collecting Enhanced Monitoring metrics, specify 0. The default
+                      is 0. Valid Values: 0, 1, 5, 10, 15, 30, 60.'
                     type: number
                   monitoringRoleArn:
-                    description: |-
-                      The ARN for the IAM role that permits RDS
-                      to send enhanced monitoring metrics to CloudWatch Logs. You can find more
-                      information on the AWS
-                      Documentation
-                      what IAM permissions are needed to allow Enhanced Monitoring for RDS Instances.
+                    description: ARN for the IAM role that permits RDS to send enhanced
+                      monitoring metrics to CloudWatch Logs. You can find more information
+                      on the AWS Documentation what IAM permissions are needed to
+                      allow Enhanced Monitoring for RDS Instances.
                     type: string
                   multiAz:
-                    description: Specifies if the RDS instance is multi-AZ
+                    description: Whether the RDS instance is multi-AZ.
                     type: boolean
                   ncharCharacterSetName:
-                    description: |-
-                      The national character set is used in the NCHAR, NVARCHAR2, and NCLOB data types for Oracle instances. This can't be changed. See Oracle Character Sets
-                      Supported in Amazon RDS.
+                    description: National character set is used in the NCHAR, NVARCHAR2,
+                      and NCLOB data types for Oracle instances. This can't be changed.
+                      See Oracle Character Sets Supported in Amazon RDS.
                     type: string
                   networkType:
-                    description: 'The network type of the DB instance. Valid values:
-                      IPV4, DUAL.'
+                    description: 'Network type of the DB instance. Valid values: IPV4,
+                      DUAL.'
                     type: string
                   optionGroupName:
                     description: Name of the DB option group to associate.
@@ -8726,15 +8764,15 @@ spec:
                     description: Name of the DB parameter group to associate.
                     type: string
                   passwordWoVersion:
-                    description: Used together with password_wo to trigger an update.
-                      Increment this value when an update to password_wo is required.
+                    description: Required when password_wo is set. Changing this value
+                      triggers an update to password_wo.
                     type: number
                   performanceInsightsEnabled:
-                    description: Specifies whether Performance Insights are enabled.
-                      Defaults to false.
+                    description: Whether Performance Insights are enabled. Defaults
+                      to false.
                     type: boolean
                   performanceInsightsKmsKeyId:
-                    description: The ARN for the KMS key to encrypt Performance Insights
+                    description: ARN for the KMS key to encrypt Performance Insights
                       data. When specifying performance_insights_kms_key_id, performance_insights_enabled
                       needs to be set to true. Once KMS key is set, it can never be
                       changed.
@@ -8746,12 +8784,11 @@ spec:
                       needs to be set to true. Defaults to '7'.
                     type: number
                   port:
-                    description: The port on which the DB accepts connections.
+                    description: Port on which the DB accepts connections.
                     type: number
                   publiclyAccessible:
-                    description: |-
-                      Bool to control if instance is publicly
-                      accessible. Default is false.
+                    description: Bool to control if instance is publicly accessible.
+                      Default is false.
                     type: boolean
                   region:
                     description: |-
@@ -8759,116 +8796,122 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   replicaMode:
-                    description: |-
-                      Specifies whether the replica is in either mounted or open-read-only mode. This attribute
-                      is only supported by Oracle instances. Oracle replicas operate in open-read-only mode unless otherwise specified. See Working with Oracle Read Replicas for more information.
+                    description: Whether the replica is in either mounted or open-read-only
+                      mode. This attribute is only supported by Oracle instances.
+                      Oracle replicas operate in open-read-only mode unless otherwise
+                      specified. See Working with Oracle Read Replicas for more information.
                     type: string
                   replicas:
+                    description: List of read replica identifiers associated with
+                      this instance.
                     items:
                       type: string
                     type: array
                   replicateSourceDb:
-                    description: |-
-                      Specifies that this resource is a Replica database, and to use this value as the source database.
-                      If replicating an Amazon RDS Database Instance in the same region, use the identifier of the source DB, unless also specifying the db_subnet_group_name.
-                      If specifying the db_subnet_group_name in the same region, use the arn of the source DB.
-                      If replicating an Instance in a different region, use the arn of the source DB.
-                      Note that if you are creating a cross-region replica of an encrypted database you will also need to specify a kms_key_id.
-                      See DB Instance Replication and Working with PostgreSQL and MySQL Read Replicas for more information on using Replication.
+                    description: Set this to specify that this resource is a Replica
+                      database, and to use this value as the source database. If replicating
+                      an Amazon RDS Database Instance in the same region, use the
+                      identifier of the source DB, unless also specifying the db_subnet_group_name.
+                      If specifying the db_subnet_group_name in the same region, use
+                      the arn of the source DB. If replicating an Instance in a different
+                      region, use the arn of the source DB. Note that if you are creating
+                      a cross-region replica of an encrypted database you will also
+                      need to specify a kms_key_id. See DB Instance Replication and
+                      Working with PostgreSQL and MySQL Read Replicas for more information
+                      on using Replication.
                     type: string
                   resourceId:
-                    description: The RDS Resource ID of this instance.
+                    description: RDS Resource ID of this instance.
                     type: string
                   restoreToPointInTime:
-                    description: |-
-                      A configuration block for restoring a DB instance to an arbitrary point in time.
-                      Requires the identifier argument to be set with the name of the new DB instance to be created.
-                      See Restore To Point In Time below for details.
+                    description: Configuration block for restoring a DB instance to
+                      an arbitrary point in time. Requires the identifier argument
+                      to be set with the name of the new DB instance to be created.
+                      See restore_to_point_in_time Block below for details.
                     properties:
                       restoreTime:
-                        description: The date and time to restore from. Value must
-                          be a time in Universal Coordinated Time (UTC) format and
-                          must be before the latest restorable time for the DB instance.
+                        description: Date and time to restore from. Value must be
+                          a time in Universal Coordinated Time (UTC) format and must
+                          be before the latest restorable time for the DB instance.
                           Cannot be specified with use_latest_restorable_time.
                         type: string
                       sourceDbInstanceAutomatedBackupsArn:
-                        description: The ARN of the automated backup from which to
-                          restore. Required if source_db_instance_identifier or source_dbi_resource_id
+                        description: ARN of the automated backup from which to restore.
+                          Required if source_db_instance_identifier or source_dbi_resource_id
                           is not specified.
                         type: string
                       sourceDbInstanceIdentifier:
-                        description: The identifier of the source DB instance from
-                          which to restore. Must match the identifier of an existing
-                          DB instance. Required if source_db_instance_automated_backups_arn
+                        description: Identifier of the source DB instance from which
+                          to restore. Must match the identifier of an existing DB
+                          instance. Required if source_db_instance_automated_backups_arn
                           or source_dbi_resource_id is not specified.
                         type: string
                       sourceDbiResourceId:
-                        description: The resource ID of the source DB instance from
-                          which to restore. Required if source_db_instance_identifier
-                          or source_db_instance_automated_backups_arn is not specified.
+                        description: Resource ID of the source DB instance from which
+                          to restore. Required if source_db_instance_identifier or
+                          source_db_instance_automated_backups_arn is not specified.
                         type: string
                       useLatestRestorableTime:
-                        description: A boolean value that indicates whether the DB
-                          instance is restored from the latest backup time. Defaults
-                          to false. Cannot be specified with restore_time.
+                        description: Boolean value that indicates whether the DB instance
+                          is restored from the latest backup time. Defaults to false.
+                          Cannot be specified with restore_time.
                         type: boolean
                     type: object
                   s3Import:
-                    description: Restore from a Percona Xtrabackup in S3.  See Importing
-                      Data into an Amazon RDS MySQL DB Instance
+                    description: Restore from a Percona XtraBackup in S3. See Importing
+                      Data into an Amazon RDS MySQL DB Instance. See s3_import Block
+                      below.
                     properties:
                       bucketName:
-                        description: The bucket name where your backup is stored
+                        description: Bucket name where your backup is stored.
                         type: string
                       bucketPrefix:
-                        description: Can be blank, but is the path to your backup
+                        description: Can be blank, but is the path to your backup.
                         type: string
                       ingestionRole:
                         description: Role applied to load the data.
                         type: string
                       sourceEngine:
-                        description: Source engine for the backup
+                        description: Source engine for the backup.
                         type: string
                       sourceEngineVersion:
                         description: Version of the source engine used to make the
-                          backup
+                          backup.
                         type: string
                     type: object
                   skipFinalSnapshot:
-                    description: |-
-                      Determines whether a final DB snapshot is
-                      created before the DB instance is deleted. If true is specified, no DBSnapshot
-                      is created. If false is specified, a DB snapshot is created before the DB
-                      instance is deleted, using the value from final_snapshot_identifier. Default
-                      is false.
+                    description: Whether a final DB snapshot is created before the
+                      DB instance is deleted. If true is specified, no DBSnapshot
+                      is created. If false is specified, a DB snapshot is created
+                      before the DB instance is deleted, using the value from final_snapshot_identifier.
+                      Default is false.
                     type: boolean
                   snapshotIdentifier:
-                    description: |-
-                      Specifies whether or not to create this database from a snapshot.
-                      This corresponds to the snapshot ID you'd find in the RDS console, e.g: rds:production-2015-06-26-06-05.
+                    description: 'Whether or not to create this database from a snapshot.
+                      This corresponds to the snapshot ID you''d find in the RDS console,
+                      e.g: rds:production-2015-06-26-06-05.'
                     type: string
                   status:
-                    description: The RDS instance status.
+                    description: RDS instance status.
                     type: string
                   storageEncrypted:
-                    description: |-
-                      Specifies whether the DB instance is
-                      encrypted. Note that if you are creating a cross-region read replica this field
-                      is ignored and you should instead declare kms_key_id with a valid ARN. The
-                      default is false if not specified.
+                    description: Whether the DB instance is encrypted. Note that if
+                      you are creating a cross-region read replica this field is ignored
+                      and you should instead declare kms_key_id with a valid ARN.
+                      The default is false if not specified.
                     type: boolean
                   storageThroughput:
-                    description: The storage throughput value for the DB instance.
-                      Can only be set when storage_type is "gp3". Cannot be specified
+                    description: Storage throughput value for the DB instance. Can
+                      only be set when storage_type is "gp3". Cannot be specified
                       if the allocated_storage value is below a per-engine threshold.
                       See the RDS User Guide for details.
                     type: number
                   storageType:
-                    description: |-
-                      One of "standard" (magnetic), "gp2" (general
-                      purpose SSD), "gp3" (general purpose SSD that needs iops independently)
-                      "io1" (provisioned IOPS SSD) or "io2" (block express storage provisioned IOPS
-                      SSD). The default is "io1" if iops is specified, "gp2" if not.
+                    description: One of "standard" (magnetic), "gp2" (general purpose
+                      SSD), "gp3" (general purpose SSD that needs iops independently)
+                      "io1" (provisioned IOPS SSD) or "io2" (block express storage
+                      provisioned IOPS SSD). The default is "io1" if iops is specified,
+                      "gp2" if not.
                     type: string
                   tags:
                     additionalProperties:
@@ -8879,36 +8922,39 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
                   timezone:
-                    description: |-
-                      Time zone of the DB instance. timezone is currently
-                      only supported by Microsoft SQL Server. The timezone can only be set on
-                      creation. See MSSQL User
-                      Guide
-                      for more information.
+                    description: Time zone of the DB instance. timezone is currently
+                      only supported by Microsoft SQL Server. The timezone can only
+                      be set on creation. See MSSQL User Guide for more information.
                     type: string
                   upgradeRolloutOrder:
                     description: Order in which the instances are upgraded (first,
                       second, last). See the AWS documentation for details.
                     type: string
                   upgradeStorageConfig:
-                    description: |-
-                      Whether to upgrade the storage file system configuration on the read replica.
-                      Can only be set with replicate_source_db.
+                    description: Whether to upgrade the storage file system configuration
+                      on the read replica. Can only be set with replicate_source_db.
                     type: boolean
                   username:
                     description: Username for the master DB user. Cannot be specified
                       for a replica.
                     type: string
                   vpcSecurityGroupIds:
-                    description: |-
-                      List of VPC security groups to
-                      associate.
+                    description: List of VPC security groups to associate.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
+                  warningEventCategories:
+                    description: Set of RDS event categories (for example failure,
+                      maintenance) to check for after create and update operations.
+                      Has no effect if unset; see DescribeEvents and the aws_rds_events
+                      data source for the source of these events. Requires the rds:DescribeEvents
+                      IAM permission when set.
                     items:
                       type: string
                     type: array

@@ -74,29 +74,29 @@ spec:
               forProvider:
                 properties:
                   description:
-                    description: The description of the DB cluster parameter group.
+                    description: Description of the DB cluster parameter group.
                     type: string
                   family:
-                    description: The family of the DB cluster parameter group.
+                    description: Family of the DB cluster parameter group.
                     type: string
                   parameter:
-                    description: A list of DB parameters to apply. Note that parameters
+                    description: Set of DB parameters to apply. Note that parameters
                       may differ from a family to an other. Full list of all parameters
                       can be discovered via aws rds describe-db-cluster-parameters
-                      after initial creation of the group.
+                      after initial creation of the group. See parameter Block below
+                      for details.
                     items:
                       properties:
                         applyMethod:
-                          description: |-
-                            "immediate" (default), or "pending-reboot". Some
-                            engines can't apply some parameters without a reboot, and you will need to
-                            specify "pending-reboot" here.
+                          description: '"immediate" (default), or "pending-reboot".
+                            Some engines can''t apply some parameters without a reboot,
+                            and you will need to specify "pending-reboot" here.'
                           type: string
                         name:
-                          description: The name of the DB cluster parameter group.
+                          description: Name of the DB parameter.
                           type: string
                         value:
-                          description: The value of the DB parameter.
+                          description: Value of the DB parameter.
                           type: string
                       type: object
                     type: array
@@ -128,29 +128,29 @@ spec:
                   autoscaler.
                 properties:
                   description:
-                    description: The description of the DB cluster parameter group.
+                    description: Description of the DB cluster parameter group.
                     type: string
                   family:
-                    description: The family of the DB cluster parameter group.
+                    description: Family of the DB cluster parameter group.
                     type: string
                   parameter:
-                    description: A list of DB parameters to apply. Note that parameters
+                    description: Set of DB parameters to apply. Note that parameters
                       may differ from a family to an other. Full list of all parameters
                       can be discovered via aws rds describe-db-cluster-parameters
-                      after initial creation of the group.
+                      after initial creation of the group. See parameter Block below
+                      for details.
                     items:
                       properties:
                         applyMethod:
-                          description: |-
-                            "immediate" (default), or "pending-reboot". Some
-                            engines can't apply some parameters without a reboot, and you will need to
-                            specify "pending-reboot" here.
+                          description: '"immediate" (default), or "pending-reboot".
+                            Some engines can''t apply some parameters without a reboot,
+                            and you will need to specify "pending-reboot" here.'
                           type: string
                         name:
-                          description: The name of the DB cluster parameter group.
+                          description: Name of the DB parameter.
                           type: string
                         value:
-                          description: The value of the DB parameter.
+                          description: Value of the DB parameter.
                           type: string
                       type: object
                     type: array
@@ -259,35 +259,35 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The ARN of the db cluster parameter group.
+                    description: ARN of the DB cluster parameter group.
                     type: string
                   description:
-                    description: The description of the DB cluster parameter group.
+                    description: Description of the DB cluster parameter group.
                     type: string
                   family:
-                    description: The family of the DB cluster parameter group.
+                    description: Family of the DB cluster parameter group.
                     type: string
                   id:
-                    description: The db cluster parameter group name.
+                    description: DB cluster parameter group name.
                     type: string
                   parameter:
-                    description: A list of DB parameters to apply. Note that parameters
+                    description: Set of DB parameters to apply. Note that parameters
                       may differ from a family to an other. Full list of all parameters
                       can be discovered via aws rds describe-db-cluster-parameters
-                      after initial creation of the group.
+                      after initial creation of the group. See parameter Block below
+                      for details.
                     items:
                       properties:
                         applyMethod:
-                          description: |-
-                            "immediate" (default), or "pending-reboot". Some
-                            engines can't apply some parameters without a reboot, and you will need to
-                            specify "pending-reboot" here.
+                          description: '"immediate" (default), or "pending-reboot".
+                            Some engines can''t apply some parameters without a reboot,
+                            and you will need to specify "pending-reboot" here.'
                           type: string
                         name:
-                          description: The name of the DB cluster parameter group.
+                          description: Name of the DB parameter.
                           type: string
                         value:
-                          description: The value of the DB parameter.
+                          description: Value of the DB parameter.
                           type: string
                       type: object
                     type: array
@@ -305,9 +305,8 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
                 type: object

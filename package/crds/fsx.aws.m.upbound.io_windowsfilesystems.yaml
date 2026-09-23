@@ -556,9 +556,9 @@ spec:
                       passwordWoSecretRef:
                         description: Password for the service account on your self-managed
                           AD domain that Amazon FSx will use to join to your AD domain.
-                          This is a write-only argument which is not persisted to
-                          state. Conflicts with domain_join_service_account_secret
-                          and password. Required with password_wo_version.
+                          This argument is not persisted to state. Conflicts with
+                          domain_join_service_account_secret and password. If set,
+                          requires password_wo_version to be set.
                         properties:
                           key:
                             type: string
@@ -570,9 +570,8 @@ spec:
                         - name
                         type: object
                       passwordWoVersion:
-                        description: Version of the password. Required with password_wo.
-                          Update this argument when the value of password_wo has changed
-                          to trigger an update to the remote password.
+                        description: Required when password_wo is set. Changing this
+                          value triggers an update to password_wo.
                         type: number
                       username:
                         description: User name for the service account on your self-managed
@@ -1210,9 +1209,9 @@ spec:
                       passwordWoSecretRef:
                         description: Password for the service account on your self-managed
                           AD domain that Amazon FSx will use to join to your AD domain.
-                          This is a write-only argument which is not persisted to
-                          state. Conflicts with domain_join_service_account_secret
-                          and password. Required with password_wo_version.
+                          This argument is not persisted to state. Conflicts with
+                          domain_join_service_account_secret and password. If set,
+                          requires password_wo_version to be set.
                         properties:
                           key:
                             type: string
@@ -1224,9 +1223,8 @@ spec:
                         - name
                         type: object
                       passwordWoVersion:
-                        description: Version of the password. Required with password_wo.
-                          Update this argument when the value of password_wo has changed
-                          to trigger an update to the remote password.
+                        description: Required when password_wo is set. Changing this
+                          value triggers an update to password_wo.
                         type: number
                       username:
                         description: User name for the service account on your self-managed
@@ -1609,9 +1607,8 @@ spec:
                           more, see RFC 2253.
                         type: string
                       passwordWoVersion:
-                        description: Version of the password. Required with password_wo.
-                          Update this argument when the value of password_wo has changed
-                          to trigger an update to the remote password.
+                        description: Required when password_wo is set. Changing this
+                          value triggers an update to password_wo.
                         type: number
                       username:
                         description: User name for the service account on your self-managed

@@ -74,13 +74,13 @@ spec:
               forProvider:
                 properties:
                   description:
-                    description: The description of the DB parameter group.
+                    description: Description of the DB parameter group.
                     type: string
                   family:
-                    description: The family of the DB parameter group.
+                    description: Family of the DB parameter group.
                     type: string
                   parameter:
-                    description: The DB parameters to apply. See parameter Block below
+                    description: DB parameters to apply. See parameter Block below
                       for more details. Note that parameters may differ from a family
                       to an other. Full list of all parameters can be discovered via
                       aws rds describe-db-parameters after initial creation of the
@@ -88,16 +88,15 @@ spec:
                     items:
                       properties:
                         applyMethod:
-                          description: |-
-                            "immediate" (default), or "pending-reboot". Some
-                            engines can't apply some parameters without a reboot, and you will need to
-                            specify "pending-reboot" here.
+                          description: '"immediate" (default), or "pending-reboot".
+                            Some engines can''t apply some parameters without a reboot,
+                            and you will need to specify "pending-reboot" here.'
                           type: string
                         name:
-                          description: The name of the DB parameter.
+                          description: Name of the DB parameter.
                           type: string
                         value:
-                          description: The value of the DB parameter.
+                          description: Value of the DB parameter.
                           type: string
                       type: object
                     type: array
@@ -131,13 +130,13 @@ spec:
                   autoscaler.
                 properties:
                   description:
-                    description: The description of the DB parameter group.
+                    description: Description of the DB parameter group.
                     type: string
                   family:
-                    description: The family of the DB parameter group.
+                    description: Family of the DB parameter group.
                     type: string
                   parameter:
-                    description: The DB parameters to apply. See parameter Block below
+                    description: DB parameters to apply. See parameter Block below
                       for more details. Note that parameters may differ from a family
                       to an other. Full list of all parameters can be discovered via
                       aws rds describe-db-parameters after initial creation of the
@@ -145,16 +144,15 @@ spec:
                     items:
                       properties:
                         applyMethod:
-                          description: |-
-                            "immediate" (default), or "pending-reboot". Some
-                            engines can't apply some parameters without a reboot, and you will need to
-                            specify "pending-reboot" here.
+                          description: '"immediate" (default), or "pending-reboot".
+                            Some engines can''t apply some parameters without a reboot,
+                            and you will need to specify "pending-reboot" here.'
                           type: string
                         name:
-                          description: The name of the DB parameter.
+                          description: Name of the DB parameter.
                           type: string
                         value:
-                          description: The value of the DB parameter.
+                          description: Value of the DB parameter.
                           type: string
                       type: object
                     type: array
@@ -264,19 +262,19 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The ARN of the db parameter group.
+                    description: ARN of the db parameter group.
                     type: string
                   description:
-                    description: The description of the DB parameter group.
+                    description: Description of the DB parameter group.
                     type: string
                   family:
-                    description: The family of the DB parameter group.
+                    description: Family of the DB parameter group.
                     type: string
                   id:
-                    description: The db parameter group name.
+                    description: DB parameter group name.
                     type: string
                   parameter:
-                    description: The DB parameters to apply. See parameter Block below
+                    description: DB parameters to apply. See parameter Block below
                       for more details. Note that parameters may differ from a family
                       to an other. Full list of all parameters can be discovered via
                       aws rds describe-db-parameters after initial creation of the
@@ -284,16 +282,15 @@ spec:
                     items:
                       properties:
                         applyMethod:
-                          description: |-
-                            "immediate" (default), or "pending-reboot". Some
-                            engines can't apply some parameters without a reboot, and you will need to
-                            specify "pending-reboot" here.
+                          description: '"immediate" (default), or "pending-reboot".
+                            Some engines can''t apply some parameters without a reboot,
+                            and you will need to specify "pending-reboot" here.'
                           type: string
                         name:
-                          description: The name of the DB parameter.
+                          description: Name of the DB parameter.
                           type: string
                         value:
-                          description: The value of the DB parameter.
+                          description: Value of the DB parameter.
                           type: string
                       type: object
                     type: array
@@ -313,9 +310,8 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
                 type: object

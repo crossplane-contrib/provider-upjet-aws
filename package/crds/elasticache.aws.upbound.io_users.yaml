@@ -605,7 +605,7 @@ spec:
                   passwordsWoSecretRef:
                     description: Write-only password for this user. This argument
                       is not stored in state. Conflicts with passwords and authentication_mode.
-                      See Write-Only Arguments for more information.11+.
+                      If set, requires passwords_wo_version to be set.
                     properties:
                       key:
                         description: The key to select.
@@ -622,8 +622,8 @@ spec:
                     - namespace
                     type: object
                   passwordsWoVersion:
-                    description: Version number for passwords_wo. Increment this value
-                      to trigger a password update. Required when using passwords_wo.
+                    description: Required when passwords_wo is set. Changing this
+                      value triggers an update to passwords_wo.
                     type: number
                   region:
                     description: |-
@@ -686,7 +686,7 @@ spec:
                   passwordsWoSecretRef:
                     description: Write-only password for this user. This argument
                       is not stored in state. Conflicts with passwords and authentication_mode.
-                      See Write-Only Arguments for more information.11+.
+                      If set, requires passwords_wo_version to be set.
                     properties:
                       key:
                         description: The key to select.
@@ -703,8 +703,8 @@ spec:
                     - namespace
                     type: object
                   passwordsWoVersion:
-                    description: Version number for passwords_wo. Increment this value
-                      to trigger a password update. Required when using passwords_wo.
+                    description: Required when passwords_wo is set. Changing this
+                      value triggers an update to passwords_wo.
                     type: number
                   tags:
                     additionalProperties:
@@ -848,8 +848,8 @@ spec:
                     description: Indicates a password is not required for this user.
                     type: boolean
                   passwordsWoVersion:
-                    description: Version number for passwords_wo. Increment this value
-                      to trigger a password update. Required when using passwords_wo.
+                    description: Required when passwords_wo is set. Changing this
+                      value triggers an update to passwords_wo.
                     type: number
                   region:
                     description: |-
