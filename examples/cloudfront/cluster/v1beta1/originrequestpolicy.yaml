@@ -21,7 +21,6 @@ spec:
       headers:
       - items:
         - example
-    name: example-origin-request-policy
     queryStringsConfig:
     - queryStringBehavior: whitelist
       queryStrings:

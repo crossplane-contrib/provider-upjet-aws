@@ -5,11 +5,14 @@
 package roundtrip
 
 import (
+	"maps"
 	"reflect"
 
 	xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 	"github.com/crossplane/upjet/v2/pkg/apitesting/roundtrip"
+	"github.com/crossplane/upjet/v2/pkg/config/conversion"
 	"github.com/google/go-cmp/cmp"
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"sigs.k8s.io/randfill"
 
 	autoscalingv1beta1 "github.com/upbound/provider-aws/v2/apis/cluster/autoscaling/v1beta1"
@@ -44,6 +47,7 @@ var awsCustomCmpOpts = []cmp.Option{
 	equateConnectRoutingProfile(),
 	equateConnectHoursOfOperation(),
 	equateConnectQueue(),
+	equateFieldConversionAnnotation(),
 }
 
 func keepFirstNonNil(fields ...any) int {
@@ -215,6 +219,30 @@ func fuzzLocalSecretKeySelectors(p *[]xpv2.LocalSecretKeySelector, c randfill.Co
 // then we roundtrip and end up with:
 //    afterRT := v1beta1.MyParameters{ OldFoo: &someValue, NewBar: &someValue }
 // These values are semantically equivalent, so we ignore the diff here
+
+// equateFieldConversionAnnotation ignores the upjet field-conversions
+// annotation when comparing object annotations. Upjet's default option only
+// drops the map entry, so an object that started with nil annotations would
+// still differ from its round-tripped copy, which carries an annotations map
+// holding just that key. Fields added in a newer API version (for example
+// OriginRequestPolicy name in v1beta2) are stored in this annotation while
+// converting to an older version.
+func equateFieldConversionAnnotation() cmp.Option {
+	objectMetaType := reflect.TypeFor[metav1.ObjectMeta]()
+	return cmp.FilterPath(func(p cmp.Path) bool {
+		sf, ok := p.Last().(cmp.StructField)
+		return ok && sf.Name() == "Annotations" && p.Index(-2).Type() == objectMetaType
+	}, cmp.FilterValues(func(x, y map[string]string) bool {
+		// both empty is already handled by cmpopts.EquateEmpty, and
+		// applying here too would make the options ambiguous.
+		return len(x) != 0 || len(y) != 0
+	}, cmp.Comparer(func(x, y map[string]string) bool {
+		x, y = maps.Clone(x), maps.Clone(y)
+		delete(x, conversion.AnnotationKey)
+		delete(y, conversion.AnnotationKey)
+		return maps.Equal(x, y)
+	})))
+}
 
 func equateConnectHoursOfOperation() cmp.Option {
 	return cmp.Transformer("NormalizeHoursOfOperationArn", func(h connectv1beta1.HoursOfOperationObservation) connectv1beta1.HoursOfOperationObservation {
