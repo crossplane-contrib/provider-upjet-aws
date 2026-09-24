@@ -6,6 +6,7 @@ package cloudfront
 
 import (
 	"github.com/crossplane/upjet/v2/pkg/config"
+	"github.com/crossplane/upjet/v2/pkg/config/conversion"
 
 	"github.com/upbound/provider-aws/v2/config/cluster/common"
 )
@@ -46,6 +47,17 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		r.References["endpoint.kinesis_stream_config.stream_arn"] = config.Reference{
 			TerraformName: "aws_kinesis_stream",
 			Extractor:     common.PathTerraformIDExtractor,
+		}
+	})
+
+	p.AddResourceConfigurator("aws_cloudfront_origin_request_policy", func(r *config.Resource) {
+		// name is exposed in v1beta2 since the switch to IdentifierFromProvider,
+		// but v1beta1 (the storage version) omits it. Preserve it through an
+		// annotation when converting to v1beta1 so that it is not lost.
+		for _, path := range []string{"spec.forProvider.name", "spec.initProvider.name", "status.atProvider.name"} {
+			r.Conversions = append(r.Conversions,
+				conversion.NewNewlyIntroducedFieldConversion("v1beta1", "v1beta2", path, conversion.FromAnnotation),
+				conversion.NewNewlyIntroducedFieldConversion("v1beta2", "v1beta1", path, conversion.ToAnnotation))
 		}
 	})
 

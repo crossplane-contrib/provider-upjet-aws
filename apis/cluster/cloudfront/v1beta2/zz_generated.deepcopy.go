@@ -6851,6 +6851,11 @@ func (in *OriginRequestPolicyInitParameters) DeepCopyInto(out *OriginRequestPoli
 		*out = new(OriginRequestPolicyHeadersConfigInitParameters)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.Name != nil {
+		in, out := &in.Name, &out.Name
+		*out = new(string)
+		**out = **in
+	}
 	if in.QueryStringsConfig != nil {
 		in, out := &in.QueryStringsConfig, &out.QueryStringsConfig
 		*out = new(OriginRequestPolicyQueryStringsConfigInitParameters)
@@ -6933,6 +6938,11 @@ func (in *OriginRequestPolicyObservation) DeepCopyInto(out *OriginRequestPolicyO
 		*out = new(string)
 		**out = **in
 	}
+	if in.Name != nil {
+		in, out := &in.Name, &out.Name
+		*out = new(string)
+		**out = **in
+	}
 	if in.QueryStringsConfig != nil {
 		in, out := &in.QueryStringsConfig, &out.QueryStringsConfig
 		*out = new(OriginRequestPolicyQueryStringsConfigObservation)
@@ -6967,6 +6977,11 @@ func (in *OriginRequestPolicyParameters) DeepCopyInto(out *OriginRequestPolicyPa
 		in, out := &in.HeadersConfig, &out.HeadersConfig
 		*out = new(OriginRequestPolicyHeadersConfigParameters)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.Name != nil {
+		in, out := &in.Name, &out.Name
+		*out = new(string)
+		**out = **in
 	}
 	if in.QueryStringsConfig != nil {
 		in, out := &in.QueryStringsConfig, &out.QueryStringsConfig
