@@ -165,6 +165,7 @@
 "aws_cloudfront_field_level_encryption_profile",
 "aws_cloudfront_function",
 "aws_cloudfront_key_group",
+"aws_cloudfront_key_value_store",
 "aws_cloudfront_monitoring_subscription",
 "aws_cloudfront_origin_access_control",
 "aws_cloudfront_origin_access_identity",

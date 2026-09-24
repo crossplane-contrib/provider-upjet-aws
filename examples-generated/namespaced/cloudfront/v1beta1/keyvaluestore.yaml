@@ -1,0 +1,17 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
+apiVersion: cloudfront.aws.m.upbound.io/v1beta1
+kind: KeyValueStore
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cloudfront/v1beta1/keyvaluestore
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    comment: This is an example key value store

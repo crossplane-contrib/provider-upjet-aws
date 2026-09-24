@@ -99,6 +99,8 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	//
 	// Cloudfront VPC Origin can be imported using the ID
 	"aws_cloudfront_vpc_origin": identifierFromProviderWithDefaultStub("vo_stub000000000000000000"),
+	// Cloudfront Key Value Store can be imported using the name
+	"aws_cloudfront_key_value_store": cloudfrontKeyValueStore(),
 
 	// dsql
 	//
@@ -3975,6 +3977,16 @@ func frameworkNameAsIdentifier() config.ExternalName {
 		}
 		return name, nil
 	}
+	return e
+}
+
+// cloudfrontKeyValueStore uses the name as the external name. The Terraform
+// id is the store's UUID, so the name is read back from the state. Unlike
+// frameworkNameAsIdentifier, name is omitted from the spec: it is required
+// and would otherwise have to repeat the external name.
+func cloudfrontKeyValueStore() config.ExternalName {
+	e := frameworkNameAsIdentifier()
+	e.OmittedFields = []string{"name"}
 	return e
 }
 

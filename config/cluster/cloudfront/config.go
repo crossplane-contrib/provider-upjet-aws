@@ -28,6 +28,11 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 	// Setting the field as sensitive to be able to pass the content from a k8s secret
 	p.AddResourceConfigurator("aws_cloudfront_function", func(r *config.Resource) {
 		r.TerraformResource.Schema["code"].Sensitive = true
+		// Resolve key_value_store_associations from KeyValueStore ARNs.
+		r.References["key_value_store_associations"] = config.Reference{
+			TerraformName: "aws_cloudfront_key_value_store",
+			Extractor:     common.PathARNExtractor,
+		}
 	})
 
 	// Setting the field as sensitive to be able to pass the content from a k8s secret
