@@ -93,7 +93,7 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 			return diff, nil
 		}
 		r.LateInitializer = config.LateInitializer{
-			IgnoredFields: []string{"enabled_cloudwatch_logs_exports"},
+			IgnoredFields: []string{"enabled_cloudwatch_logs_exports", "cluster_members"},
 		}
 	})
 
