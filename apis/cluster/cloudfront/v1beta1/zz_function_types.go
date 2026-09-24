@@ -22,8 +22,18 @@ type FunctionInitParameters struct {
 	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
 
 	// List of aws_cloudfront_key_value_store ARNs to be associated to the function. AWS limits associations to one key value store per function.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/cloudfront/v1beta1.KeyValueStore
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +listType=set
 	KeyValueStoreAssociations []*string `json:"keyValueStoreAssociations,omitempty" tf:"key_value_store_associations,omitempty"`
+
+	// References to KeyValueStore in cloudfront to populate keyValueStoreAssociations.
+	// +kubebuilder:validation:Optional
+	KeyValueStoreAssociationsRefs []v2.Reference `json:"keyValueStoreAssociationsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of KeyValueStore in cloudfront to populate keyValueStoreAssociations.
+	// +kubebuilder:validation:Optional
+	KeyValueStoreAssociationsSelector *v2.Selector `json:"keyValueStoreAssociationsSelector,omitempty" tf:"-"`
 
 	// Whether to publish creation/change as Live CloudFront Function Version. Defaults to true.
 	Publish *bool `json:"publish,omitempty" tf:"publish,omitempty"`
@@ -85,9 +95,19 @@ type FunctionParameters struct {
 	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
 
 	// List of aws_cloudfront_key_value_store ARNs to be associated to the function. AWS limits associations to one key value store per function.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/cloudfront/v1beta1.KeyValueStore
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	KeyValueStoreAssociations []*string `json:"keyValueStoreAssociations,omitempty" tf:"key_value_store_associations,omitempty"`
+
+	// References to KeyValueStore in cloudfront to populate keyValueStoreAssociations.
+	// +kubebuilder:validation:Optional
+	KeyValueStoreAssociationsRefs []v2.Reference `json:"keyValueStoreAssociationsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of KeyValueStore in cloudfront to populate keyValueStoreAssociations.
+	// +kubebuilder:validation:Optional
+	KeyValueStoreAssociationsSelector *v2.Selector `json:"keyValueStoreAssociationsSelector,omitempty" tf:"-"`
 
 	// Whether to publish creation/change as Live CloudFront Function Version. Defaults to true.
 	// +kubebuilder:validation:Optional
