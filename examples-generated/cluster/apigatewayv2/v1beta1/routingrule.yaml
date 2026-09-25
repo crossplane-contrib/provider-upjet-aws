@@ -1,0 +1,36 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
+apiVersion: apigatewayv2.aws.upbound.io/v1beta1
+kind: RoutingRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apigatewayv2/v1beta1/routingrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    action:
+    - invokeApi:
+        apiIdSelector:
+          matchLabels:
+            testing.upbound.io/example-name: example
+        stage: example-stage
+        stripBasePath: true
+    condition:
+    - matchBasePaths:
+        anyOf:
+        - example-path
+        - another-path
+      matchHeaders:
+        anyOf:
+          header: X-Example-Header
+          valueGlob: example-value-*
+    domainNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    priority: 1
+    region: us-west-1
