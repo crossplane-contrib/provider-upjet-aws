@@ -2710,7 +2710,7 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	//
 	// SNS platform applications can be imported using the ARN:
 	// arn:aws:sns:us-west-2:0123456789012:app/GCM/gcm_application
-	"aws_sns_platform_application": config.TemplatedStringAsIdentifier("name", fullARNTemplate("sns", "app/GCM/{{ .external_name }}")),
+	"aws_sns_platform_application": snsPlatformApplicationExternalName(),
 	// no import documentation is provided
 	// TODO: we will need to check if normalization is possible
 	"aws_sns_sms_preferences": config.IdentifierFromProvider,
@@ -3754,6 +3754,20 @@ func genericARNTemplate(service string, resource string, elideRegion bool) strin
 		region = ""
 	}
 	return fmt.Sprintf("arn:{{ .setup.client_metadata.partition }}:%s:%s:{{ .setup.client_metadata.account_id }}:%s", service, region, resource)
+}
+
+func snsPlatformApplicationExternalName() config.ExternalName {
+	e := config.TemplatedStringAsIdentifier("name", fullARNTemplate("sns", "app/{{ .parameters.platform }}/{{ .external_name }}"))
+	// Platform participates in the import ID but is not an external identifier.
+	e.IdentifierFields = nil
+	getID := e.GetIDFn
+	e.GetIDFn = func(ctx context.Context, externalName string, parameters map[string]any, setup map[string]any) (string, error) {
+		if platform, ok := parameters["platform"].(string); !ok || platform == "" {
+			return "", errors.New("platform is required to build the SNS platform application import id")
+		}
+		return getID(ctx, externalName, parameters, setup)
+	}
+	return e
 }
 
 func rdsInstanceState() config.ExternalName {
