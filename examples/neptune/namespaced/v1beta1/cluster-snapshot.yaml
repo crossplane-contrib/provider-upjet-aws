@@ -5,6 +5,8 @@
 apiVersion: neptune.aws.m.upbound.io/v1beta1
 kind: ClusterSnapshot
 metadata:
+  annotations:
+    meta.upbound.io/example-id: neptune/v1beta1/clustersnapshot
   name: sample-snapshot
   namespace: upbound-system
 spec:
@@ -12,3 +14,22 @@ spec:
     region: eu-central-1
     dbClusterIdentifierRef:
       name: sample-cluster
+
+---
+
+apiVersion: neptune.aws.m.upbound.io/v1beta1
+kind: Cluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: neptune/v1beta1/clustersnapshot
+  name: sample-cluster
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: eu-central-1
+    applyImmediately: true
+    backupRetentionPeriod: 5
+    engine: neptune
+    iamDatabaseAuthenticationEnabled: true
+    preferredBackupWindow: 07:00-09:00
+    skipFinalSnapshot: true

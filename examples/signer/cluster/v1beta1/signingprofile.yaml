@@ -5,6 +5,8 @@
 apiVersion: signer.aws.upbound.io/v1beta1
 kind: SigningProfile
 metadata:
+  annotations:
+    meta.upbound.io/example-id: signer/v1beta1/signingprofile
   name: example
 spec:
   forProvider:

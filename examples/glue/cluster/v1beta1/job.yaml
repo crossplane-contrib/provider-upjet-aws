@@ -2,7 +2,22 @@
 #
 # SPDX-License-Identifier: CC0-1.0
 
-
+apiVersion: glue.aws.upbound.io/v1beta1
+kind: Job
+metadata:
+  annotations:
+    meta.upbound.io/example-id: glue/v1beta1/job
+  labels:
+    testing.upbound.io/example-name: glue-job-example
+  name: example
+spec:
+  forProvider:
+    region: us-east-1
+    command:
+      - scriptLocation: s3://somebucket/example.py
+    roleArnRef:
+      name: glue-job-example
+---
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: Role
 metadata:
@@ -27,20 +42,3 @@ spec:
           }
         ]
       }
-
----
-apiVersion: glue.aws.upbound.io/v1beta1
-kind: Job
-metadata:
-  annotations:
-    meta.upbound.io/example-id: glue/v1beta1/job
-  labels:
-    testing.upbound.io/example-name: glue-job-example
-  name: example
-spec:
-  forProvider:
-    region: us-east-1
-    command:
-    - scriptLocation: s3://somebucket/example.py
-    roleArnRef:
-      name: glue-job-example

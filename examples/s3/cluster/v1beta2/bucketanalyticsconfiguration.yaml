@@ -22,3 +22,17 @@ spec:
             bucketArnSelector:
               matchLabels:
                 testing.upbound.io/example-name: s3
+
+---
+
+apiVersion: s3.aws.upbound.io/v1beta2
+kind: Bucket
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s3/v1beta2/bucketanalyticsconfiguration
+  labels:
+    testing.upbound.io/example-name: s3
+  name: s3-${Rand.RFC1123Subdomain}
+spec:
+  forProvider:
+    region: us-west-1

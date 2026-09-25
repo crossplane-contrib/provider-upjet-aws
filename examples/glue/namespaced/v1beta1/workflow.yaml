@@ -5,6 +5,8 @@
 apiVersion: glue.aws.m.upbound.io/v1beta1
 kind: Workflow
 metadata:
+  annotations:
+    meta.upbound.io/example-id: glue/v1beta1/workflow
   name: example
   namespace: upbound-system
 spec:

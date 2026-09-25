@@ -5,6 +5,8 @@
 apiVersion: glue.aws.upbound.io/v1beta1
 kind: CatalogDatabase
 metadata:
+  annotations:
+    meta.upbound.io/example-id: glue/v1beta1/catalogdatabase
   name: example
   labels:
     testing.upbound.io/example-name: example

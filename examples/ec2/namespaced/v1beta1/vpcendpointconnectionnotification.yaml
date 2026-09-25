@@ -8,6 +8,7 @@ kind: VPCEndpointConnectionNotification
 metadata:
   annotations:
     upjet.upbound.io/manual-intervention: "This resource needs a VPCEndpointService and it requires manual intervention."
+    meta.upbound.io/example-id: ec2/v1beta1/vpcendpointconnectionnotification
   labels:
     testing.upbound.io/example-name: foo
   name: foo
@@ -30,6 +31,7 @@ kind: Topic
 metadata:
   annotations:
     upjet.upbound.io/manual-intervention: "This resource needs a VPCEndpointService and it requires manual intervention."
+    meta.upbound.io/example-id: ec2/v1beta1/vpcendpointconnectionnotification
   labels:
     testing.upbound.io/example-name: topic
   name: vpce-notification-topic
@@ -55,6 +57,7 @@ kind: VPCEndpointService
 metadata:
   annotations:
     upjet.upbound.io/manual-intervention: "This resource needs manual intervention."
+    meta.upbound.io/example-id: ec2/v1beta1/vpcendpointconnectionnotification
   labels:
     testing.upbound.io/example-name: foo
   name: foo
