@@ -80,8 +80,34 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 			TerraformName: "aws_secretsmanager_secret",
 			Extractor:     common.PathARNExtractor,
 		}
+		r.References["filesystem_configuration.efs_configuration.access_point_arn"] = config.Reference{
+			TerraformName: "aws_efs_access_point",
+			Extractor:     common.PathARNExtractor,
+		}
+		r.References["filesystem_configuration.efs_configuration.file_system_arn"] = config.Reference{
+			TerraformName: "aws_efs_file_system",
+			Extractor:     common.PathARNExtractor,
+		}
+		r.References["filesystem_configuration.s3_files_configuration.access_point_arn"] = config.Reference{
+			TerraformName: "aws_s3files_access_point",
+			Extractor:     common.PathARNExtractor,
+		}
+		r.References["filesystem_configuration.s3_files_configuration.file_system_arn"] = config.Reference{
+			TerraformName: "aws_s3files_file_system",
+			Extractor:     common.PathARNExtractor,
+		}
+		// Mounting a filesystem requires VPC network mode, so the VPC config
+		// needs to be composable alongside the filesystem references above.
+		r.References["network_configuration.vpc_config.security_groups"] = config.Reference{
+			TerraformName: "aws_security_group",
+		}
+		r.References["network_configuration.vpc_config.subnets"] = config.Reference{
+			TerraformName: "aws_subnet",
+		}
 		r.AddSingletonListConversion("certificate[*].location", "certificate[*].location")
 		r.AddSingletonListConversion("certificate[*].location[*].secrets_manager", "certificate[*].location[*].secretsManager")
+		r.AddSingletonListConversion("filesystem_configuration[*].efs_configuration", "filesystemConfiguration[*].efsConfiguration")
+		r.AddSingletonListConversion("filesystem_configuration[*].s3_files_configuration", "filesystemConfiguration[*].s3FilesConfiguration")
 		r.AddSingletonListConversion("network_configuration", "networkConfiguration")
 		r.AddSingletonListConversion("network_configuration[*].vpc_config", "networkConfiguration[*].vpcConfig")
 	})

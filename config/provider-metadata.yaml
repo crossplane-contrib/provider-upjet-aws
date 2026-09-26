@@ -15098,6 +15098,42 @@ resources:
                       "assume_role_policy": "${data.aws_iam_policy_document.assume_role.json}",
                       "name": "bedrock-agentcore-code-interpreter-role"
                     }
+            - name: example
+              manifest: |-
+                {
+                  "description": "Code interpreter with an S3 Files mount",
+                  "execution_role_arn": "${aws_iam_role.example.arn}",
+                  "filesystem_configuration": [
+                    {
+                      "s3_files_configuration": [
+                        {
+                          "access_point_arn": "${aws_s3files_access_point.example.arn}",
+                          "file_system_arn": "${aws_s3files_file_system.example.arn}",
+                          "mount_path": "/mnt/s3data"
+                        }
+                      ]
+                    }
+                  ],
+                  "name": "example-code-interpreter",
+                  "network_configuration": [
+                    {
+                      "network_mode": "VPC",
+                      "vpc_config": [
+                        {
+                          "security_groups": [
+                            "${aws_security_group.example.id}"
+                          ],
+                          "subnets": "${aws_subnet.example[*].id}"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              references:
+                execution_role_arn: aws_iam_role.example.arn
+                filesystem_configuration.s3_files_configuration.access_point_arn: aws_s3files_access_point.example.arn
+                filesystem_configuration.s3_files_configuration.file_system_arn: aws_s3files_file_system.example.arn
+                network_configuration.vpc_config.security_groups: aws_security_group.example.id
         argumentDocs:
             certificate: '- (Optional) Certificates to install in the code interpreter. Between 1 and 200 blocks are supported. See certificate below.'
             certificate.location: '- (Required) Location from which to retrieve the certificate. See certificates.location below.'
@@ -15109,7 +15145,16 @@ resources:
             create: '- (Default 30m)'
             delete: '- (Default 30m)'
             description: '- (Optional) Description of the code interpreter.'
+            efs_configuration.access_point_arn: '- (Required) ARN of the file system access point to mount.'
+            efs_configuration.file_system_arn: '- (Required) ARN of the file system that owns the access point.'
+            efs_configuration.mount_path: '- (Required) Absolute path within the session at which the access point is mounted. Must be under /mnt with exactly one subdirectory level (for example, /mnt/data).'
             execution_role_arn: '- (Optional) ARN of the IAM role that the code interpreter assumes for execution. Required when using SANDBOX network mode.'
+            filesystem_configuration: '- (Optional) List of filesystems to mount into every session started from the code interpreter. Up to 4 entries are supported, of which at most 2 can be Amazon S3 Files access points and at most 2 can be Amazon EFS access points. Requires VPC network mode. See filesystem_configuration below.'
+            filesystem_configuration.efs_configuration: '- (Optional) Amazon EFS access point to mount as shared file storage. Exactly one of s3_files_configuration or efs_configuration must be specified. See efs_configuration below.'
+            filesystem_configuration.s3_files_configuration: '- (Optional) Amazon S3 Files access point to mount as shared file storage. Exactly one of s3_files_configuration or efs_configuration must be specified. See s3_files_configuration below.'
+            filesystem_configuration.s3_files_configuration.access_point_arn: '- (Required) ARN of the file system access point to mount.'
+            filesystem_configuration.s3_files_configuration.file_system_arn: '- (Required) ARN of the file system that owns the access point.'
+            filesystem_configuration.s3_files_configuration.mount_path: '- (Required) Absolute path within the session at which the access point is mounted. Must be under /mnt with exactly one subdirectory level (for example, /mnt/data).'
             name: '- (Required) Name of the code interpreter.'
             network_configuration: '- (Required) Network configuration for the code interpreter. See network_configuration below.'
             network_configuration.network_mode: '- (Required) Network mode for the code interpreter. Valid values: PUBLIC, SANDBOX, VPC.'
