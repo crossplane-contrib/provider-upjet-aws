@@ -498,6 +498,4 @@ require (
 	sigs.k8s.io/yaml v1.6.0 // indirect
 )
 
-// TEMPORARY LOCAL REPLACE - DO NOT COMMIT
-// Restore to: github.com/upbound/terraform-provider-aws <pseudo-version of v6.65.0-upjet.2>
-replace github.com/hashicorp/terraform-provider-aws => /Users/sergenyalcin/workspace/hashicorp/terraform-provider-aws
+replace github.com/hashicorp/terraform-provider-aws => github.com/upbound/terraform-provider-aws v0.0.0-20260928125421-2829a07adf08
