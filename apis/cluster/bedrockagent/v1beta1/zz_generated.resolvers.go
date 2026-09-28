@@ -10,6 +10,7 @@ import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
 	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
+	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	errors "github.com/pkg/errors"
 	common "github.com/upbound/provider-aws/v2/config/cluster/common"
 	apisresolver "github.com/upbound/provider-aws/v2/internal/apis"
@@ -104,6 +105,900 @@ func (mg *Agent) ResolveReferences( // ResolveReferences of this Agent.
 	}
 	mg.Spec.InitProvider.CustomerEncryptionKeyArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.CustomerEncryptionKeyArnRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this AgentKnowledgeBaseAssociation.
+func (mg *AgentKnowledgeBaseAssociation) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("bedrockagent.aws.upbound.io", "v1beta1", "Agent", "AgentList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AgentID),
+			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.AgentIDRef,
+			Selector:     mg.Spec.ForProvider.AgentIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.AgentID")
+	}
+	mg.Spec.ForProvider.AgentID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.AgentIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("bedrockagent.aws.upbound.io", "v1beta1", "KnowledgeBase", "KnowledgeBaseList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KnowledgeBaseID),
+			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.KnowledgeBaseIDRef,
+			Selector:     mg.Spec.ForProvider.KnowledgeBaseIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.KnowledgeBaseID")
+	}
+	mg.Spec.ForProvider.KnowledgeBaseID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.KnowledgeBaseIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this DataSource.
+func (mg *DataSource) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	if mg.Spec.ForProvider.DataSourceConfiguration != nil {
+		if mg.Spec.ForProvider.DataSourceConfiguration.ConfluenceConfiguration != nil {
+			if mg.Spec.ForProvider.DataSourceConfiguration.ConfluenceConfiguration.SourceConfiguration != nil {
+				{
+					m, l, err = apisresolver.GetManagedResource("secretsmanager.aws.upbound.io", "v1beta1", "Secret", "SecretList")
+					if err != nil {
+						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					}
+					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DataSourceConfiguration.ConfluenceConfiguration.SourceConfiguration.CredentialsSecretArn),
+						Extract:      common.ARNExtractor(),
+						Namespace:    mg.GetNamespace(),
+						Reference:    mg.Spec.ForProvider.DataSourceConfiguration.ConfluenceConfiguration.SourceConfiguration.CredentialsSecretArnRef,
+						Selector:     mg.Spec.ForProvider.DataSourceConfiguration.ConfluenceConfiguration.SourceConfiguration.CredentialsSecretArnSelector,
+						To:           reference.To{List: l, Managed: m},
+					})
+				}
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.ForProvider.DataSourceConfiguration.ConfluenceConfiguration.SourceConfiguration.CredentialsSecretArn")
+				}
+				mg.Spec.ForProvider.DataSourceConfiguration.ConfluenceConfiguration.SourceConfiguration.CredentialsSecretArn = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.ForProvider.DataSourceConfiguration.ConfluenceConfiguration.SourceConfiguration.CredentialsSecretArnRef = rsp.ResolvedReference
+
+			}
+		}
+	}
+	if mg.Spec.ForProvider.DataSourceConfiguration != nil {
+		if mg.Spec.ForProvider.DataSourceConfiguration.S3Configuration != nil {
+			{
+				m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io", "v1beta2", "Bucket", "BucketList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DataSourceConfiguration.S3Configuration.BucketArn),
+					Extract:      common.ARNExtractor(),
+					Namespace:    mg.GetNamespace(),
+					Reference:    mg.Spec.ForProvider.DataSourceConfiguration.S3Configuration.BucketArnRef,
+					Selector:     mg.Spec.ForProvider.DataSourceConfiguration.S3Configuration.BucketArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.DataSourceConfiguration.S3Configuration.BucketArn")
+			}
+			mg.Spec.ForProvider.DataSourceConfiguration.S3Configuration.BucketArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.DataSourceConfiguration.S3Configuration.BucketArnRef = rsp.ResolvedReference
+
+		}
+	}
+	if mg.Spec.ForProvider.DataSourceConfiguration != nil {
+		if mg.Spec.ForProvider.DataSourceConfiguration.SalesforceConfiguration != nil {
+			if mg.Spec.ForProvider.DataSourceConfiguration.SalesforceConfiguration.SourceConfiguration != nil {
+				{
+					m, l, err = apisresolver.GetManagedResource("secretsmanager.aws.upbound.io", "v1beta1", "Secret", "SecretList")
+					if err != nil {
+						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					}
+					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DataSourceConfiguration.SalesforceConfiguration.SourceConfiguration.CredentialsSecretArn),
+						Extract:      common.ARNExtractor(),
+						Namespace:    mg.GetNamespace(),
+						Reference:    mg.Spec.ForProvider.DataSourceConfiguration.SalesforceConfiguration.SourceConfiguration.CredentialsSecretArnRef,
+						Selector:     mg.Spec.ForProvider.DataSourceConfiguration.SalesforceConfiguration.SourceConfiguration.CredentialsSecretArnSelector,
+						To:           reference.To{List: l, Managed: m},
+					})
+				}
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.ForProvider.DataSourceConfiguration.SalesforceConfiguration.SourceConfiguration.CredentialsSecretArn")
+				}
+				mg.Spec.ForProvider.DataSourceConfiguration.SalesforceConfiguration.SourceConfiguration.CredentialsSecretArn = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.ForProvider.DataSourceConfiguration.SalesforceConfiguration.SourceConfiguration.CredentialsSecretArnRef = rsp.ResolvedReference
+
+			}
+		}
+	}
+	if mg.Spec.ForProvider.DataSourceConfiguration != nil {
+		if mg.Spec.ForProvider.DataSourceConfiguration.SharePointConfiguration != nil {
+			if mg.Spec.ForProvider.DataSourceConfiguration.SharePointConfiguration.SourceConfiguration != nil {
+				{
+					m, l, err = apisresolver.GetManagedResource("secretsmanager.aws.upbound.io", "v1beta1", "Secret", "SecretList")
+					if err != nil {
+						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					}
+					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DataSourceConfiguration.SharePointConfiguration.SourceConfiguration.CredentialsSecretArn),
+						Extract:      common.ARNExtractor(),
+						Namespace:    mg.GetNamespace(),
+						Reference:    mg.Spec.ForProvider.DataSourceConfiguration.SharePointConfiguration.SourceConfiguration.CredentialsSecretArnRef,
+						Selector:     mg.Spec.ForProvider.DataSourceConfiguration.SharePointConfiguration.SourceConfiguration.CredentialsSecretArnSelector,
+						To:           reference.To{List: l, Managed: m},
+					})
+				}
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.ForProvider.DataSourceConfiguration.SharePointConfiguration.SourceConfiguration.CredentialsSecretArn")
+				}
+				mg.Spec.ForProvider.DataSourceConfiguration.SharePointConfiguration.SourceConfiguration.CredentialsSecretArn = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.ForProvider.DataSourceConfiguration.SharePointConfiguration.SourceConfiguration.CredentialsSecretArnRef = rsp.ResolvedReference
+
+			}
+		}
+	}
+	{
+		m, l, err = apisresolver.GetManagedResource("bedrockagent.aws.upbound.io", "v1beta1", "KnowledgeBase", "KnowledgeBaseList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KnowledgeBaseID),
+			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.KnowledgeBaseIDRef,
+			Selector:     mg.Spec.ForProvider.KnowledgeBaseIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.KnowledgeBaseID")
+	}
+	mg.Spec.ForProvider.KnowledgeBaseID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.KnowledgeBaseIDRef = rsp.ResolvedReference
+
+	if mg.Spec.ForProvider.ServerSideEncryptionConfiguration != nil {
+		{
+			m, l, err = apisresolver.GetManagedResource("kms.aws.upbound.io", "v1beta1", "Key", "KeyList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ServerSideEncryptionConfiguration.KMSKeyArn),
+				Extract:      common.ARNExtractor(),
+				Namespace:    mg.GetNamespace(),
+				Reference:    mg.Spec.ForProvider.ServerSideEncryptionConfiguration.KMSKeyArnRef,
+				Selector:     mg.Spec.ForProvider.ServerSideEncryptionConfiguration.KMSKeyArnSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.ServerSideEncryptionConfiguration.KMSKeyArn")
+		}
+		mg.Spec.ForProvider.ServerSideEncryptionConfiguration.KMSKeyArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.ServerSideEncryptionConfiguration.KMSKeyArnRef = rsp.ResolvedReference
+
+	}
+	if mg.Spec.ForProvider.VectorIngestionConfiguration != nil {
+		if mg.Spec.ForProvider.VectorIngestionConfiguration.CustomTransformationConfiguration != nil {
+			if mg.Spec.ForProvider.VectorIngestionConfiguration.CustomTransformationConfiguration.Transformation != nil {
+				if mg.Spec.ForProvider.VectorIngestionConfiguration.CustomTransformationConfiguration.Transformation.TransformationFunction != nil {
+					if mg.Spec.ForProvider.VectorIngestionConfiguration.CustomTransformationConfiguration.Transformation.TransformationFunction.TransformationLambdaConfiguration != nil {
+						{
+							m, l, err = apisresolver.GetManagedResource("lambda.aws.upbound.io", "v1beta2", "Function", "FunctionList")
+							if err != nil {
+								return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+							}
+							rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+								CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VectorIngestionConfiguration.CustomTransformationConfiguration.Transformation.TransformationFunction.TransformationLambdaConfiguration.LambdaArn),
+								Extract:      common.ARNExtractor(),
+								Namespace:    mg.GetNamespace(),
+								Reference:    mg.Spec.ForProvider.VectorIngestionConfiguration.CustomTransformationConfiguration.Transformation.TransformationFunction.TransformationLambdaConfiguration.LambdaArnRef,
+								Selector:     mg.Spec.ForProvider.VectorIngestionConfiguration.CustomTransformationConfiguration.Transformation.TransformationFunction.TransformationLambdaConfiguration.LambdaArnSelector,
+								To:           reference.To{List: l, Managed: m},
+							})
+						}
+						if err != nil {
+							return errors.Wrap(err, "mg.Spec.ForProvider.VectorIngestionConfiguration.CustomTransformationConfiguration.Transformation.TransformationFunction.TransformationLambdaConfiguration.LambdaArn")
+						}
+						mg.Spec.ForProvider.VectorIngestionConfiguration.CustomTransformationConfiguration.Transformation.TransformationFunction.TransformationLambdaConfiguration.LambdaArn = reference.ToPtrValue(rsp.ResolvedValue)
+						mg.Spec.ForProvider.VectorIngestionConfiguration.CustomTransformationConfiguration.Transformation.TransformationFunction.TransformationLambdaConfiguration.LambdaArnRef = rsp.ResolvedReference
+
+					}
+				}
+			}
+		}
+	}
+	if mg.Spec.InitProvider.DataSourceConfiguration != nil {
+		if mg.Spec.InitProvider.DataSourceConfiguration.ConfluenceConfiguration != nil {
+			if mg.Spec.InitProvider.DataSourceConfiguration.ConfluenceConfiguration.SourceConfiguration != nil {
+				{
+					m, l, err = apisresolver.GetManagedResource("secretsmanager.aws.upbound.io", "v1beta1", "Secret", "SecretList")
+					if err != nil {
+						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					}
+					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DataSourceConfiguration.ConfluenceConfiguration.SourceConfiguration.CredentialsSecretArn),
+						Extract:      common.ARNExtractor(),
+						Namespace:    mg.GetNamespace(),
+						Reference:    mg.Spec.InitProvider.DataSourceConfiguration.ConfluenceConfiguration.SourceConfiguration.CredentialsSecretArnRef,
+						Selector:     mg.Spec.InitProvider.DataSourceConfiguration.ConfluenceConfiguration.SourceConfiguration.CredentialsSecretArnSelector,
+						To:           reference.To{List: l, Managed: m},
+					})
+				}
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.InitProvider.DataSourceConfiguration.ConfluenceConfiguration.SourceConfiguration.CredentialsSecretArn")
+				}
+				mg.Spec.InitProvider.DataSourceConfiguration.ConfluenceConfiguration.SourceConfiguration.CredentialsSecretArn = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.InitProvider.DataSourceConfiguration.ConfluenceConfiguration.SourceConfiguration.CredentialsSecretArnRef = rsp.ResolvedReference
+
+			}
+		}
+	}
+	if mg.Spec.InitProvider.DataSourceConfiguration != nil {
+		if mg.Spec.InitProvider.DataSourceConfiguration.S3Configuration != nil {
+			{
+				m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io", "v1beta2", "Bucket", "BucketList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DataSourceConfiguration.S3Configuration.BucketArn),
+					Extract:      common.ARNExtractor(),
+					Namespace:    mg.GetNamespace(),
+					Reference:    mg.Spec.InitProvider.DataSourceConfiguration.S3Configuration.BucketArnRef,
+					Selector:     mg.Spec.InitProvider.DataSourceConfiguration.S3Configuration.BucketArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.DataSourceConfiguration.S3Configuration.BucketArn")
+			}
+			mg.Spec.InitProvider.DataSourceConfiguration.S3Configuration.BucketArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.DataSourceConfiguration.S3Configuration.BucketArnRef = rsp.ResolvedReference
+
+		}
+	}
+	if mg.Spec.InitProvider.DataSourceConfiguration != nil {
+		if mg.Spec.InitProvider.DataSourceConfiguration.SalesforceConfiguration != nil {
+			if mg.Spec.InitProvider.DataSourceConfiguration.SalesforceConfiguration.SourceConfiguration != nil {
+				{
+					m, l, err = apisresolver.GetManagedResource("secretsmanager.aws.upbound.io", "v1beta1", "Secret", "SecretList")
+					if err != nil {
+						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					}
+					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DataSourceConfiguration.SalesforceConfiguration.SourceConfiguration.CredentialsSecretArn),
+						Extract:      common.ARNExtractor(),
+						Namespace:    mg.GetNamespace(),
+						Reference:    mg.Spec.InitProvider.DataSourceConfiguration.SalesforceConfiguration.SourceConfiguration.CredentialsSecretArnRef,
+						Selector:     mg.Spec.InitProvider.DataSourceConfiguration.SalesforceConfiguration.SourceConfiguration.CredentialsSecretArnSelector,
+						To:           reference.To{List: l, Managed: m},
+					})
+				}
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.InitProvider.DataSourceConfiguration.SalesforceConfiguration.SourceConfiguration.CredentialsSecretArn")
+				}
+				mg.Spec.InitProvider.DataSourceConfiguration.SalesforceConfiguration.SourceConfiguration.CredentialsSecretArn = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.InitProvider.DataSourceConfiguration.SalesforceConfiguration.SourceConfiguration.CredentialsSecretArnRef = rsp.ResolvedReference
+
+			}
+		}
+	}
+	if mg.Spec.InitProvider.DataSourceConfiguration != nil {
+		if mg.Spec.InitProvider.DataSourceConfiguration.SharePointConfiguration != nil {
+			if mg.Spec.InitProvider.DataSourceConfiguration.SharePointConfiguration.SourceConfiguration != nil {
+				{
+					m, l, err = apisresolver.GetManagedResource("secretsmanager.aws.upbound.io", "v1beta1", "Secret", "SecretList")
+					if err != nil {
+						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					}
+					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DataSourceConfiguration.SharePointConfiguration.SourceConfiguration.CredentialsSecretArn),
+						Extract:      common.ARNExtractor(),
+						Namespace:    mg.GetNamespace(),
+						Reference:    mg.Spec.InitProvider.DataSourceConfiguration.SharePointConfiguration.SourceConfiguration.CredentialsSecretArnRef,
+						Selector:     mg.Spec.InitProvider.DataSourceConfiguration.SharePointConfiguration.SourceConfiguration.CredentialsSecretArnSelector,
+						To:           reference.To{List: l, Managed: m},
+					})
+				}
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.InitProvider.DataSourceConfiguration.SharePointConfiguration.SourceConfiguration.CredentialsSecretArn")
+				}
+				mg.Spec.InitProvider.DataSourceConfiguration.SharePointConfiguration.SourceConfiguration.CredentialsSecretArn = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.InitProvider.DataSourceConfiguration.SharePointConfiguration.SourceConfiguration.CredentialsSecretArnRef = rsp.ResolvedReference
+
+			}
+		}
+	}
+	if mg.Spec.InitProvider.ServerSideEncryptionConfiguration != nil {
+		{
+			m, l, err = apisresolver.GetManagedResource("kms.aws.upbound.io", "v1beta1", "Key", "KeyList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ServerSideEncryptionConfiguration.KMSKeyArn),
+				Extract:      common.ARNExtractor(),
+				Namespace:    mg.GetNamespace(),
+				Reference:    mg.Spec.InitProvider.ServerSideEncryptionConfiguration.KMSKeyArnRef,
+				Selector:     mg.Spec.InitProvider.ServerSideEncryptionConfiguration.KMSKeyArnSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.ServerSideEncryptionConfiguration.KMSKeyArn")
+		}
+		mg.Spec.InitProvider.ServerSideEncryptionConfiguration.KMSKeyArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.ServerSideEncryptionConfiguration.KMSKeyArnRef = rsp.ResolvedReference
+
+	}
+	if mg.Spec.InitProvider.VectorIngestionConfiguration != nil {
+		if mg.Spec.InitProvider.VectorIngestionConfiguration.CustomTransformationConfiguration != nil {
+			if mg.Spec.InitProvider.VectorIngestionConfiguration.CustomTransformationConfiguration.Transformation != nil {
+				if mg.Spec.InitProvider.VectorIngestionConfiguration.CustomTransformationConfiguration.Transformation.TransformationFunction != nil {
+					if mg.Spec.InitProvider.VectorIngestionConfiguration.CustomTransformationConfiguration.Transformation.TransformationFunction.TransformationLambdaConfiguration != nil {
+						{
+							m, l, err = apisresolver.GetManagedResource("lambda.aws.upbound.io", "v1beta2", "Function", "FunctionList")
+							if err != nil {
+								return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+							}
+							rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+								CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VectorIngestionConfiguration.CustomTransformationConfiguration.Transformation.TransformationFunction.TransformationLambdaConfiguration.LambdaArn),
+								Extract:      common.ARNExtractor(),
+								Namespace:    mg.GetNamespace(),
+								Reference:    mg.Spec.InitProvider.VectorIngestionConfiguration.CustomTransformationConfiguration.Transformation.TransformationFunction.TransformationLambdaConfiguration.LambdaArnRef,
+								Selector:     mg.Spec.InitProvider.VectorIngestionConfiguration.CustomTransformationConfiguration.Transformation.TransformationFunction.TransformationLambdaConfiguration.LambdaArnSelector,
+								To:           reference.To{List: l, Managed: m},
+							})
+						}
+						if err != nil {
+							return errors.Wrap(err, "mg.Spec.InitProvider.VectorIngestionConfiguration.CustomTransformationConfiguration.Transformation.TransformationFunction.TransformationLambdaConfiguration.LambdaArn")
+						}
+						mg.Spec.InitProvider.VectorIngestionConfiguration.CustomTransformationConfiguration.Transformation.TransformationFunction.TransformationLambdaConfiguration.LambdaArn = reference.ToPtrValue(rsp.ResolvedValue)
+						mg.Spec.InitProvider.VectorIngestionConfiguration.CustomTransformationConfiguration.Transformation.TransformationFunction.TransformationLambdaConfiguration.LambdaArnRef = rsp.ResolvedReference
+
+					}
+				}
+			}
+		}
+	}
+
+	return nil
+}
+
+// ResolveReferences of this KnowledgeBase.
+func (mg *KnowledgeBase) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	if mg.Spec.ForProvider.KnowledgeBaseConfiguration != nil {
+		if mg.Spec.ForProvider.KnowledgeBaseConfiguration.KendraKnowledgeBaseConfiguration != nil {
+			{
+				m, l, err = apisresolver.GetManagedResource("kendra.aws.upbound.io", "v1beta2", "Index", "IndexList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KnowledgeBaseConfiguration.KendraKnowledgeBaseConfiguration.KendraIndexArn),
+					Extract:      common.ARNExtractor(),
+					Namespace:    mg.GetNamespace(),
+					Reference:    mg.Spec.ForProvider.KnowledgeBaseConfiguration.KendraKnowledgeBaseConfiguration.KendraIndexArnRef,
+					Selector:     mg.Spec.ForProvider.KnowledgeBaseConfiguration.KendraKnowledgeBaseConfiguration.KendraIndexArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.KnowledgeBaseConfiguration.KendraKnowledgeBaseConfiguration.KendraIndexArn")
+			}
+			mg.Spec.ForProvider.KnowledgeBaseConfiguration.KendraKnowledgeBaseConfiguration.KendraIndexArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.KnowledgeBaseConfiguration.KendraKnowledgeBaseConfiguration.KendraIndexArnRef = rsp.ResolvedReference
+
+		}
+	}
+	if mg.Spec.ForProvider.KnowledgeBaseConfiguration != nil {
+		if mg.Spec.ForProvider.KnowledgeBaseConfiguration.ManagedKnowledgeBaseConfiguration != nil {
+			if mg.Spec.ForProvider.KnowledgeBaseConfiguration.ManagedKnowledgeBaseConfiguration.ServerSideEncryptionConfiguration != nil {
+				{
+					m, l, err = apisresolver.GetManagedResource("kms.aws.upbound.io", "v1beta1", "Key", "KeyList")
+					if err != nil {
+						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					}
+					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KnowledgeBaseConfiguration.ManagedKnowledgeBaseConfiguration.ServerSideEncryptionConfiguration.KMSKeyArn),
+						Extract:      common.ARNExtractor(),
+						Namespace:    mg.GetNamespace(),
+						Reference:    mg.Spec.ForProvider.KnowledgeBaseConfiguration.ManagedKnowledgeBaseConfiguration.ServerSideEncryptionConfiguration.KMSKeyArnRef,
+						Selector:     mg.Spec.ForProvider.KnowledgeBaseConfiguration.ManagedKnowledgeBaseConfiguration.ServerSideEncryptionConfiguration.KMSKeyArnSelector,
+						To:           reference.To{List: l, Managed: m},
+					})
+				}
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.ForProvider.KnowledgeBaseConfiguration.ManagedKnowledgeBaseConfiguration.ServerSideEncryptionConfiguration.KMSKeyArn")
+				}
+				mg.Spec.ForProvider.KnowledgeBaseConfiguration.ManagedKnowledgeBaseConfiguration.ServerSideEncryptionConfiguration.KMSKeyArn = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.ForProvider.KnowledgeBaseConfiguration.ManagedKnowledgeBaseConfiguration.ServerSideEncryptionConfiguration.KMSKeyArnRef = rsp.ResolvedReference
+
+			}
+		}
+	}
+	if mg.Spec.ForProvider.KnowledgeBaseConfiguration != nil {
+		if mg.Spec.ForProvider.KnowledgeBaseConfiguration.SQLKnowledgeBaseConfiguration != nil {
+			if mg.Spec.ForProvider.KnowledgeBaseConfiguration.SQLKnowledgeBaseConfiguration.RedshiftConfiguration != nil {
+				if mg.Spec.ForProvider.KnowledgeBaseConfiguration.SQLKnowledgeBaseConfiguration.RedshiftConfiguration.QueryEngineConfiguration != nil {
+					if mg.Spec.ForProvider.KnowledgeBaseConfiguration.SQLKnowledgeBaseConfiguration.RedshiftConfiguration.QueryEngineConfiguration.ProvisionedConfiguration != nil {
+						{
+							m, l, err = apisresolver.GetManagedResource("redshift.aws.upbound.io", "v1beta2", "Cluster", "ClusterList")
+							if err != nil {
+								return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+							}
+							rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+								CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KnowledgeBaseConfiguration.SQLKnowledgeBaseConfiguration.RedshiftConfiguration.QueryEngineConfiguration.ProvisionedConfiguration.ClusterIdentifier),
+								Extract:      reference.ExternalName(),
+								Namespace:    mg.GetNamespace(),
+								Reference:    mg.Spec.ForProvider.KnowledgeBaseConfiguration.SQLKnowledgeBaseConfiguration.RedshiftConfiguration.QueryEngineConfiguration.ProvisionedConfiguration.ClusterIdentifierRef,
+								Selector:     mg.Spec.ForProvider.KnowledgeBaseConfiguration.SQLKnowledgeBaseConfiguration.RedshiftConfiguration.QueryEngineConfiguration.ProvisionedConfiguration.ClusterIdentifierSelector,
+								To:           reference.To{List: l, Managed: m},
+							})
+						}
+						if err != nil {
+							return errors.Wrap(err, "mg.Spec.ForProvider.KnowledgeBaseConfiguration.SQLKnowledgeBaseConfiguration.RedshiftConfiguration.QueryEngineConfiguration.ProvisionedConfiguration.ClusterIdentifier")
+						}
+						mg.Spec.ForProvider.KnowledgeBaseConfiguration.SQLKnowledgeBaseConfiguration.RedshiftConfiguration.QueryEngineConfiguration.ProvisionedConfiguration.ClusterIdentifier = reference.ToPtrValue(rsp.ResolvedValue)
+						mg.Spec.ForProvider.KnowledgeBaseConfiguration.SQLKnowledgeBaseConfiguration.RedshiftConfiguration.QueryEngineConfiguration.ProvisionedConfiguration.ClusterIdentifierRef = rsp.ResolvedReference
+
+					}
+				}
+			}
+		}
+	}
+	{
+		m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RoleArn),
+			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.RoleArnRef,
+			Selector:     mg.Spec.ForProvider.RoleArnSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.RoleArn")
+	}
+	mg.Spec.ForProvider.RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.RoleArnRef = rsp.ResolvedReference
+
+	if mg.Spec.ForProvider.StorageConfiguration != nil {
+		if mg.Spec.ForProvider.StorageConfiguration.OpensearchManagedClusterConfiguration != nil {
+			{
+				m, l, err = apisresolver.GetManagedResource("opensearch.aws.upbound.io", "v1beta2", "Domain", "DomainList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageConfiguration.OpensearchManagedClusterConfiguration.DomainArn),
+					Extract:      common.ARNExtractor(),
+					Namespace:    mg.GetNamespace(),
+					Reference:    mg.Spec.ForProvider.StorageConfiguration.OpensearchManagedClusterConfiguration.DomainArnRef,
+					Selector:     mg.Spec.ForProvider.StorageConfiguration.OpensearchManagedClusterConfiguration.DomainArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.StorageConfiguration.OpensearchManagedClusterConfiguration.DomainArn")
+			}
+			mg.Spec.ForProvider.StorageConfiguration.OpensearchManagedClusterConfiguration.DomainArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.StorageConfiguration.OpensearchManagedClusterConfiguration.DomainArnRef = rsp.ResolvedReference
+
+		}
+	}
+	if mg.Spec.ForProvider.StorageConfiguration != nil {
+		if mg.Spec.ForProvider.StorageConfiguration.OpensearchServerlessConfiguration != nil {
+			{
+				m, l, err = apisresolver.GetManagedResource("opensearchserverless.aws.upbound.io", "v1beta1", "Collection", "CollectionList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageConfiguration.OpensearchServerlessConfiguration.CollectionArn),
+					Extract:      common.ARNExtractor(),
+					Namespace:    mg.GetNamespace(),
+					Reference:    mg.Spec.ForProvider.StorageConfiguration.OpensearchServerlessConfiguration.CollectionArnRef,
+					Selector:     mg.Spec.ForProvider.StorageConfiguration.OpensearchServerlessConfiguration.CollectionArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.StorageConfiguration.OpensearchServerlessConfiguration.CollectionArn")
+			}
+			mg.Spec.ForProvider.StorageConfiguration.OpensearchServerlessConfiguration.CollectionArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.StorageConfiguration.OpensearchServerlessConfiguration.CollectionArnRef = rsp.ResolvedReference
+
+		}
+	}
+	if mg.Spec.ForProvider.StorageConfiguration != nil {
+		if mg.Spec.ForProvider.StorageConfiguration.RDSConfiguration != nil {
+			{
+				m, l, err = apisresolver.GetManagedResource("secretsmanager.aws.upbound.io", "v1beta1", "Secret", "SecretList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageConfiguration.RDSConfiguration.CredentialsSecretArn),
+					Extract:      common.ARNExtractor(),
+					Namespace:    mg.GetNamespace(),
+					Reference:    mg.Spec.ForProvider.StorageConfiguration.RDSConfiguration.CredentialsSecretArnRef,
+					Selector:     mg.Spec.ForProvider.StorageConfiguration.RDSConfiguration.CredentialsSecretArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.StorageConfiguration.RDSConfiguration.CredentialsSecretArn")
+			}
+			mg.Spec.ForProvider.StorageConfiguration.RDSConfiguration.CredentialsSecretArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.StorageConfiguration.RDSConfiguration.CredentialsSecretArnRef = rsp.ResolvedReference
+
+		}
+	}
+	if mg.Spec.ForProvider.StorageConfiguration != nil {
+		if mg.Spec.ForProvider.StorageConfiguration.RDSConfiguration != nil {
+			{
+				m, l, err = apisresolver.GetManagedResource("rds.aws.upbound.io", "v1beta2", "Cluster", "ClusterList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageConfiguration.RDSConfiguration.ResourceArn),
+					Extract:      common.ARNExtractor(),
+					Namespace:    mg.GetNamespace(),
+					Reference:    mg.Spec.ForProvider.StorageConfiguration.RDSConfiguration.ResourceArnRef,
+					Selector:     mg.Spec.ForProvider.StorageConfiguration.RDSConfiguration.ResourceArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.StorageConfiguration.RDSConfiguration.ResourceArn")
+			}
+			mg.Spec.ForProvider.StorageConfiguration.RDSConfiguration.ResourceArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.StorageConfiguration.RDSConfiguration.ResourceArnRef = rsp.ResolvedReference
+
+		}
+	}
+	if mg.Spec.ForProvider.StorageConfiguration != nil {
+		if mg.Spec.ForProvider.StorageConfiguration.S3VectorsConfiguration != nil {
+			{
+				m, l, err = apisresolver.GetManagedResource("s3vectors.aws.upbound.io", "v1beta1", "Index", "IndexList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageConfiguration.S3VectorsConfiguration.IndexArn),
+					Extract:      resource.ExtractParamPath("index_arn", true),
+					Namespace:    mg.GetNamespace(),
+					Reference:    mg.Spec.ForProvider.StorageConfiguration.S3VectorsConfiguration.IndexArnRef,
+					Selector:     mg.Spec.ForProvider.StorageConfiguration.S3VectorsConfiguration.IndexArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.StorageConfiguration.S3VectorsConfiguration.IndexArn")
+			}
+			mg.Spec.ForProvider.StorageConfiguration.S3VectorsConfiguration.IndexArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.StorageConfiguration.S3VectorsConfiguration.IndexArnRef = rsp.ResolvedReference
+
+		}
+	}
+	if mg.Spec.ForProvider.StorageConfiguration != nil {
+		if mg.Spec.ForProvider.StorageConfiguration.S3VectorsConfiguration != nil {
+			{
+				m, l, err = apisresolver.GetManagedResource("s3vectors.aws.upbound.io", "v1beta1", "VectorBucket", "VectorBucketList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageConfiguration.S3VectorsConfiguration.VectorBucketArn),
+					Extract:      resource.ExtractParamPath("vector_bucket_arn", true),
+					Namespace:    mg.GetNamespace(),
+					Reference:    mg.Spec.ForProvider.StorageConfiguration.S3VectorsConfiguration.VectorBucketArnRef,
+					Selector:     mg.Spec.ForProvider.StorageConfiguration.S3VectorsConfiguration.VectorBucketArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.StorageConfiguration.S3VectorsConfiguration.VectorBucketArn")
+			}
+			mg.Spec.ForProvider.StorageConfiguration.S3VectorsConfiguration.VectorBucketArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.StorageConfiguration.S3VectorsConfiguration.VectorBucketArnRef = rsp.ResolvedReference
+
+		}
+	}
+	if mg.Spec.InitProvider.KnowledgeBaseConfiguration != nil {
+		if mg.Spec.InitProvider.KnowledgeBaseConfiguration.KendraKnowledgeBaseConfiguration != nil {
+			{
+				m, l, err = apisresolver.GetManagedResource("kendra.aws.upbound.io", "v1beta2", "Index", "IndexList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KnowledgeBaseConfiguration.KendraKnowledgeBaseConfiguration.KendraIndexArn),
+					Extract:      common.ARNExtractor(),
+					Namespace:    mg.GetNamespace(),
+					Reference:    mg.Spec.InitProvider.KnowledgeBaseConfiguration.KendraKnowledgeBaseConfiguration.KendraIndexArnRef,
+					Selector:     mg.Spec.InitProvider.KnowledgeBaseConfiguration.KendraKnowledgeBaseConfiguration.KendraIndexArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.KnowledgeBaseConfiguration.KendraKnowledgeBaseConfiguration.KendraIndexArn")
+			}
+			mg.Spec.InitProvider.KnowledgeBaseConfiguration.KendraKnowledgeBaseConfiguration.KendraIndexArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.KnowledgeBaseConfiguration.KendraKnowledgeBaseConfiguration.KendraIndexArnRef = rsp.ResolvedReference
+
+		}
+	}
+	if mg.Spec.InitProvider.KnowledgeBaseConfiguration != nil {
+		if mg.Spec.InitProvider.KnowledgeBaseConfiguration.ManagedKnowledgeBaseConfiguration != nil {
+			if mg.Spec.InitProvider.KnowledgeBaseConfiguration.ManagedKnowledgeBaseConfiguration.ServerSideEncryptionConfiguration != nil {
+				{
+					m, l, err = apisresolver.GetManagedResource("kms.aws.upbound.io", "v1beta1", "Key", "KeyList")
+					if err != nil {
+						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					}
+					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KnowledgeBaseConfiguration.ManagedKnowledgeBaseConfiguration.ServerSideEncryptionConfiguration.KMSKeyArn),
+						Extract:      common.ARNExtractor(),
+						Namespace:    mg.GetNamespace(),
+						Reference:    mg.Spec.InitProvider.KnowledgeBaseConfiguration.ManagedKnowledgeBaseConfiguration.ServerSideEncryptionConfiguration.KMSKeyArnRef,
+						Selector:     mg.Spec.InitProvider.KnowledgeBaseConfiguration.ManagedKnowledgeBaseConfiguration.ServerSideEncryptionConfiguration.KMSKeyArnSelector,
+						To:           reference.To{List: l, Managed: m},
+					})
+				}
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.InitProvider.KnowledgeBaseConfiguration.ManagedKnowledgeBaseConfiguration.ServerSideEncryptionConfiguration.KMSKeyArn")
+				}
+				mg.Spec.InitProvider.KnowledgeBaseConfiguration.ManagedKnowledgeBaseConfiguration.ServerSideEncryptionConfiguration.KMSKeyArn = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.InitProvider.KnowledgeBaseConfiguration.ManagedKnowledgeBaseConfiguration.ServerSideEncryptionConfiguration.KMSKeyArnRef = rsp.ResolvedReference
+
+			}
+		}
+	}
+	if mg.Spec.InitProvider.KnowledgeBaseConfiguration != nil {
+		if mg.Spec.InitProvider.KnowledgeBaseConfiguration.SQLKnowledgeBaseConfiguration != nil {
+			if mg.Spec.InitProvider.KnowledgeBaseConfiguration.SQLKnowledgeBaseConfiguration.RedshiftConfiguration != nil {
+				if mg.Spec.InitProvider.KnowledgeBaseConfiguration.SQLKnowledgeBaseConfiguration.RedshiftConfiguration.QueryEngineConfiguration != nil {
+					if mg.Spec.InitProvider.KnowledgeBaseConfiguration.SQLKnowledgeBaseConfiguration.RedshiftConfiguration.QueryEngineConfiguration.ProvisionedConfiguration != nil {
+						{
+							m, l, err = apisresolver.GetManagedResource("redshift.aws.upbound.io", "v1beta2", "Cluster", "ClusterList")
+							if err != nil {
+								return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+							}
+							rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+								CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KnowledgeBaseConfiguration.SQLKnowledgeBaseConfiguration.RedshiftConfiguration.QueryEngineConfiguration.ProvisionedConfiguration.ClusterIdentifier),
+								Extract:      reference.ExternalName(),
+								Namespace:    mg.GetNamespace(),
+								Reference:    mg.Spec.InitProvider.KnowledgeBaseConfiguration.SQLKnowledgeBaseConfiguration.RedshiftConfiguration.QueryEngineConfiguration.ProvisionedConfiguration.ClusterIdentifierRef,
+								Selector:     mg.Spec.InitProvider.KnowledgeBaseConfiguration.SQLKnowledgeBaseConfiguration.RedshiftConfiguration.QueryEngineConfiguration.ProvisionedConfiguration.ClusterIdentifierSelector,
+								To:           reference.To{List: l, Managed: m},
+							})
+						}
+						if err != nil {
+							return errors.Wrap(err, "mg.Spec.InitProvider.KnowledgeBaseConfiguration.SQLKnowledgeBaseConfiguration.RedshiftConfiguration.QueryEngineConfiguration.ProvisionedConfiguration.ClusterIdentifier")
+						}
+						mg.Spec.InitProvider.KnowledgeBaseConfiguration.SQLKnowledgeBaseConfiguration.RedshiftConfiguration.QueryEngineConfiguration.ProvisionedConfiguration.ClusterIdentifier = reference.ToPtrValue(rsp.ResolvedValue)
+						mg.Spec.InitProvider.KnowledgeBaseConfiguration.SQLKnowledgeBaseConfiguration.RedshiftConfiguration.QueryEngineConfiguration.ProvisionedConfiguration.ClusterIdentifierRef = rsp.ResolvedReference
+
+					}
+				}
+			}
+		}
+	}
+	{
+		m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RoleArn),
+			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.RoleArnRef,
+			Selector:     mg.Spec.InitProvider.RoleArnSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.RoleArn")
+	}
+	mg.Spec.InitProvider.RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.RoleArnRef = rsp.ResolvedReference
+
+	if mg.Spec.InitProvider.StorageConfiguration != nil {
+		if mg.Spec.InitProvider.StorageConfiguration.OpensearchManagedClusterConfiguration != nil {
+			{
+				m, l, err = apisresolver.GetManagedResource("opensearch.aws.upbound.io", "v1beta2", "Domain", "DomainList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageConfiguration.OpensearchManagedClusterConfiguration.DomainArn),
+					Extract:      common.ARNExtractor(),
+					Namespace:    mg.GetNamespace(),
+					Reference:    mg.Spec.InitProvider.StorageConfiguration.OpensearchManagedClusterConfiguration.DomainArnRef,
+					Selector:     mg.Spec.InitProvider.StorageConfiguration.OpensearchManagedClusterConfiguration.DomainArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.StorageConfiguration.OpensearchManagedClusterConfiguration.DomainArn")
+			}
+			mg.Spec.InitProvider.StorageConfiguration.OpensearchManagedClusterConfiguration.DomainArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.StorageConfiguration.OpensearchManagedClusterConfiguration.DomainArnRef = rsp.ResolvedReference
+
+		}
+	}
+	if mg.Spec.InitProvider.StorageConfiguration != nil {
+		if mg.Spec.InitProvider.StorageConfiguration.OpensearchServerlessConfiguration != nil {
+			{
+				m, l, err = apisresolver.GetManagedResource("opensearchserverless.aws.upbound.io", "v1beta1", "Collection", "CollectionList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageConfiguration.OpensearchServerlessConfiguration.CollectionArn),
+					Extract:      common.ARNExtractor(),
+					Namespace:    mg.GetNamespace(),
+					Reference:    mg.Spec.InitProvider.StorageConfiguration.OpensearchServerlessConfiguration.CollectionArnRef,
+					Selector:     mg.Spec.InitProvider.StorageConfiguration.OpensearchServerlessConfiguration.CollectionArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.StorageConfiguration.OpensearchServerlessConfiguration.CollectionArn")
+			}
+			mg.Spec.InitProvider.StorageConfiguration.OpensearchServerlessConfiguration.CollectionArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.StorageConfiguration.OpensearchServerlessConfiguration.CollectionArnRef = rsp.ResolvedReference
+
+		}
+	}
+	if mg.Spec.InitProvider.StorageConfiguration != nil {
+		if mg.Spec.InitProvider.StorageConfiguration.RDSConfiguration != nil {
+			{
+				m, l, err = apisresolver.GetManagedResource("secretsmanager.aws.upbound.io", "v1beta1", "Secret", "SecretList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageConfiguration.RDSConfiguration.CredentialsSecretArn),
+					Extract:      common.ARNExtractor(),
+					Namespace:    mg.GetNamespace(),
+					Reference:    mg.Spec.InitProvider.StorageConfiguration.RDSConfiguration.CredentialsSecretArnRef,
+					Selector:     mg.Spec.InitProvider.StorageConfiguration.RDSConfiguration.CredentialsSecretArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.StorageConfiguration.RDSConfiguration.CredentialsSecretArn")
+			}
+			mg.Spec.InitProvider.StorageConfiguration.RDSConfiguration.CredentialsSecretArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.StorageConfiguration.RDSConfiguration.CredentialsSecretArnRef = rsp.ResolvedReference
+
+		}
+	}
+	if mg.Spec.InitProvider.StorageConfiguration != nil {
+		if mg.Spec.InitProvider.StorageConfiguration.RDSConfiguration != nil {
+			{
+				m, l, err = apisresolver.GetManagedResource("rds.aws.upbound.io", "v1beta2", "Cluster", "ClusterList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageConfiguration.RDSConfiguration.ResourceArn),
+					Extract:      common.ARNExtractor(),
+					Namespace:    mg.GetNamespace(),
+					Reference:    mg.Spec.InitProvider.StorageConfiguration.RDSConfiguration.ResourceArnRef,
+					Selector:     mg.Spec.InitProvider.StorageConfiguration.RDSConfiguration.ResourceArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.StorageConfiguration.RDSConfiguration.ResourceArn")
+			}
+			mg.Spec.InitProvider.StorageConfiguration.RDSConfiguration.ResourceArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.StorageConfiguration.RDSConfiguration.ResourceArnRef = rsp.ResolvedReference
+
+		}
+	}
+	if mg.Spec.InitProvider.StorageConfiguration != nil {
+		if mg.Spec.InitProvider.StorageConfiguration.S3VectorsConfiguration != nil {
+			{
+				m, l, err = apisresolver.GetManagedResource("s3vectors.aws.upbound.io", "v1beta1", "Index", "IndexList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageConfiguration.S3VectorsConfiguration.IndexArn),
+					Extract:      resource.ExtractParamPath("index_arn", true),
+					Namespace:    mg.GetNamespace(),
+					Reference:    mg.Spec.InitProvider.StorageConfiguration.S3VectorsConfiguration.IndexArnRef,
+					Selector:     mg.Spec.InitProvider.StorageConfiguration.S3VectorsConfiguration.IndexArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.StorageConfiguration.S3VectorsConfiguration.IndexArn")
+			}
+			mg.Spec.InitProvider.StorageConfiguration.S3VectorsConfiguration.IndexArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.StorageConfiguration.S3VectorsConfiguration.IndexArnRef = rsp.ResolvedReference
+
+		}
+	}
+	if mg.Spec.InitProvider.StorageConfiguration != nil {
+		if mg.Spec.InitProvider.StorageConfiguration.S3VectorsConfiguration != nil {
+			{
+				m, l, err = apisresolver.GetManagedResource("s3vectors.aws.upbound.io", "v1beta1", "VectorBucket", "VectorBucketList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageConfiguration.S3VectorsConfiguration.VectorBucketArn),
+					Extract:      resource.ExtractParamPath("vector_bucket_arn", true),
+					Namespace:    mg.GetNamespace(),
+					Reference:    mg.Spec.InitProvider.StorageConfiguration.S3VectorsConfiguration.VectorBucketArnRef,
+					Selector:     mg.Spec.InitProvider.StorageConfiguration.S3VectorsConfiguration.VectorBucketArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.StorageConfiguration.S3VectorsConfiguration.VectorBucketArn")
+			}
+			mg.Spec.InitProvider.StorageConfiguration.S3VectorsConfiguration.VectorBucketArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.StorageConfiguration.S3VectorsConfiguration.VectorBucketArnRef = rsp.ResolvedReference
+
+		}
+	}
 
 	return nil
 }

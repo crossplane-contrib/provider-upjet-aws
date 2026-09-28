@@ -134,6 +134,9 @@ import (
 	guardrail "github.com/upbound/provider-aws/v2/internal/controller/cluster/bedrock/guardrail"
 	inferenceprofile "github.com/upbound/provider-aws/v2/internal/controller/cluster/bedrock/inferenceprofile"
 	agent "github.com/upbound/provider-aws/v2/internal/controller/cluster/bedrockagent/agent"
+	agentknowledgebaseassociation "github.com/upbound/provider-aws/v2/internal/controller/cluster/bedrockagent/agentknowledgebaseassociation"
+	datasourcebedrockagent "github.com/upbound/provider-aws/v2/internal/controller/cluster/bedrockagent/datasource"
+	knowledgebase "github.com/upbound/provider-aws/v2/internal/controller/cluster/bedrockagent/knowledgebase"
 	agentruntime "github.com/upbound/provider-aws/v2/internal/controller/cluster/bedrockagentcore/agentruntime"
 	agentruntimeendpoint "github.com/upbound/provider-aws/v2/internal/controller/cluster/bedrockagentcore/agentruntimeendpoint"
 	apikeycredentialprovider "github.com/upbound/provider-aws/v2/internal/controller/cluster/bedrockagentcore/apikeycredentialprovider"
@@ -1178,6 +1181,9 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		guardrail.Setup,
 		inferenceprofile.Setup,
 		agent.Setup,
+		agentknowledgebaseassociation.Setup,
+		datasourcebedrockagent.Setup,
+		knowledgebase.Setup,
 		agentruntime.Setup,
 		agentruntimeendpoint.Setup,
 		apikeycredentialprovider.Setup,
@@ -2228,6 +2234,9 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		guardrail.SetupGated,
 		inferenceprofile.SetupGated,
 		agent.SetupGated,
+		agentknowledgebaseassociation.SetupGated,
+		datasourcebedrockagent.SetupGated,
+		knowledgebase.SetupGated,
 		agentruntime.SetupGated,
 		agentruntimeendpoint.SetupGated,
 		apikeycredentialprovider.SetupGated,
@@ -3277,6 +3286,9 @@ func SetupWebhookWithManager_monolith(mgr ctrl.Manager) error {
 		guardrail.SetupWebhookWithManager,
 		inferenceprofile.SetupWebhookWithManager,
 		agent.SetupWebhookWithManager,
+		agentknowledgebaseassociation.SetupWebhookWithManager,
+		datasourcebedrockagent.SetupWebhookWithManager,
+		knowledgebase.SetupWebhookWithManager,
 		agentruntime.SetupWebhookWithManager,
 		agentruntimeendpoint.SetupWebhookWithManager,
 		apikeycredentialprovider.SetupWebhookWithManager,

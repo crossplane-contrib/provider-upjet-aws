@@ -1,0 +1,26 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
+apiVersion: bedrockagent.aws.upbound.io/v1beta1
+kind: DataSource
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrockagent/v1beta1/datasource
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    dataSourceConfiguration:
+      s3Configuration:
+        bucketArnSelector:
+          matchLabels:
+            testing.upbound.io/example-name: example
+      type: S3
+    knowledgeBaseIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    name: example
+    region: us-west-1
