@@ -50,6 +50,13 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	//
 	// Bedrock Agent can be imported using the agent arn
 	"aws_bedrockagent_agent": identifierFromProviderWithDefaultStub("STUB123456"),
+	// imported via agent_id,agent_version,knowledge_base_id. agent_version
+	// only accepts DRAFT.
+	"aws_bedrockagent_agent_knowledge_base_association": config.TemplatedStringAsIdentifier("", "{{ .parameters.agent_id }},DRAFT,{{ .parameters.knowledge_base_id }}"),
+	// imported via data_source_id,knowledge_base_id
+	"aws_bedrockagent_data_source": bedrockAgentDataSource(),
+	// imported via the knowledge base ID, e.g. EMDPPAYPZI
+	"aws_bedrockagent_knowledge_base": identifierFromProviderWithDefaultStub("STUB123456"),
 
 	// bedrockagentcore
 	//
@@ -3936,6 +3943,28 @@ func bedrockGuardrail() config.ExternalName { //nolint:gocyclo // easier to foll
 	e.TFPluginFrameworkOptions = config.TFPluginFrameworkOptions{
 		ComputedIdentifierAttributes: []string{"guardrail_id", "version"},
 	}
+	return e
+}
+
+// bedrockAgentDataSource configures the external name for
+// aws_bedrockagent_data_source. The external name is the AWS-assigned
+// data_source_id, while the Terraform ID is "data_source_id,knowledge_base_id"
+// with knowledge_base_id taken from the required parameter.
+func bedrockAgentDataSource() config.ExternalName {
+	// must satisfy the data source ID pattern [0-9a-zA-Z]{10}
+	const stubDataSourceID = "STUB123456"
+	e := config.FrameworkResourceWithComputedIdentifier("data_source_id", stubDataSourceID)
+	e.GetIDFn = func(_ context.Context, externalName string, parameters map[string]any, _ map[string]any) (string, error) {
+		knowledgeBaseID, ok := parameters["knowledge_base_id"].(string)
+		if !ok || knowledgeBaseID == "" {
+			return "", errors.New("knowledge_base_id cannot be empty")
+		}
+		if externalName == "" {
+			externalName = stubDataSourceID
+		}
+		return externalName + "," + knowledgeBaseID, nil
+	}
+	e.IdentifierFields = []string{"knowledge_base_id"}
 	return e
 }
 
