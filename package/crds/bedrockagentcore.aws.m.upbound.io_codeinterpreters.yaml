@@ -250,22 +250,11 @@ spec:
                         type: object
                     type: object
                   filesystemConfiguration:
-                    description: List of filesystems to mount into every session started
-                      from the code interpreter. Up to 4 entries are supported, of
-                      which at most 2 can be Amazon S3 Files access points and at
-                      most 2 can be Amazon EFS access points. Requires VPC network
-                      mode. See filesystem_configuration below.
                     items:
                       properties:
                         efsConfiguration:
-                          description: Amazon EFS access point to mount as shared
-                            file storage. Exactly one of s3_files_configuration or
-                            efs_configuration must be specified. See efs_configuration
-                            below.
                           properties:
                             accessPointArn:
-                              description: ARN of the file system access point to
-                                mount.
                               type: string
                             accessPointArnRef:
                               description: Reference to a AccessPoint in efs to populate
@@ -350,8 +339,6 @@ spec:
                                   type: object
                               type: object
                             fileSystemArn:
-                              description: ARN of the file system that owns the access
-                                point.
                               type: string
                             fileSystemArnRef:
                               description: Reference to a FileSystem in efs to populate
@@ -436,20 +423,11 @@ spec:
                                   type: object
                               type: object
                             mountPath:
-                              description: Absolute path within the session at which
-                                the access point is mounted. Must be under /mnt with
-                                exactly one subdirectory level (for example, /mnt/data).
                               type: string
                           type: object
                         s3FilesConfiguration:
-                          description: Amazon S3 Files access point to mount as shared
-                            file storage. Exactly one of s3_files_configuration or
-                            efs_configuration must be specified. See s3_files_configuration
-                            below.
                           properties:
                             accessPointArn:
-                              description: ARN of the file system access point to
-                                mount.
                               type: string
                             accessPointArnRef:
                               description: Reference to a AccessPoint in s3files to
@@ -534,8 +512,6 @@ spec:
                                   type: object
                               type: object
                             fileSystemArn:
-                              description: ARN of the file system that owns the access
-                                point.
                               type: string
                             fileSystemArnRef:
                               description: Reference to a FileSystem in s3files to
@@ -620,9 +596,6 @@ spec:
                                   type: object
                               type: object
                             mountPath:
-                              description: Absolute path within the session at which
-                                the access point is mounted. Must be under /mnt with
-                                exactly one subdirectory level (for example, /mnt/data).
                               type: string
                           type: object
                       type: object
@@ -1042,22 +1015,11 @@ spec:
                         type: object
                     type: object
                   filesystemConfiguration:
-                    description: List of filesystems to mount into every session started
-                      from the code interpreter. Up to 4 entries are supported, of
-                      which at most 2 can be Amazon S3 Files access points and at
-                      most 2 can be Amazon EFS access points. Requires VPC network
-                      mode. See filesystem_configuration below.
                     items:
                       properties:
                         efsConfiguration:
-                          description: Amazon EFS access point to mount as shared
-                            file storage. Exactly one of s3_files_configuration or
-                            efs_configuration must be specified. See efs_configuration
-                            below.
                           properties:
                             accessPointArn:
-                              description: ARN of the file system access point to
-                                mount.
                               type: string
                             accessPointArnRef:
                               description: Reference to a AccessPoint in efs to populate
@@ -1142,8 +1104,6 @@ spec:
                                   type: object
                               type: object
                             fileSystemArn:
-                              description: ARN of the file system that owns the access
-                                point.
                               type: string
                             fileSystemArnRef:
                               description: Reference to a FileSystem in efs to populate
@@ -1228,20 +1188,11 @@ spec:
                                   type: object
                               type: object
                             mountPath:
-                              description: Absolute path within the session at which
-                                the access point is mounted. Must be under /mnt with
-                                exactly one subdirectory level (for example, /mnt/data).
                               type: string
                           type: object
                         s3FilesConfiguration:
-                          description: Amazon S3 Files access point to mount as shared
-                            file storage. Exactly one of s3_files_configuration or
-                            efs_configuration must be specified. See s3_files_configuration
-                            below.
                           properties:
                             accessPointArn:
-                              description: ARN of the file system access point to
-                                mount.
                               type: string
                             accessPointArnRef:
                               description: Reference to a AccessPoint in s3files to
@@ -1326,8 +1277,6 @@ spec:
                                   type: object
                               type: object
                             fileSystemArn:
-                              description: ARN of the file system that owns the access
-                                point.
                               type: string
                             fileSystemArnRef:
                               description: Reference to a FileSystem in s3files to
@@ -1412,9 +1361,6 @@ spec:
                                   type: object
                               type: object
                             mountPath:
-                              description: Absolute path within the session at which
-                                the access point is mounted. Must be under /mnt with
-                                exactly one subdirectory level (for example, /mnt/data).
                               type: string
                           type: object
                       type: object
@@ -1726,51 +1672,24 @@ spec:
                       for execution. Required when using SANDBOX network mode.
                     type: string
                   filesystemConfiguration:
-                    description: List of filesystems to mount into every session started
-                      from the code interpreter. Up to 4 entries are supported, of
-                      which at most 2 can be Amazon S3 Files access points and at
-                      most 2 can be Amazon EFS access points. Requires VPC network
-                      mode. See filesystem_configuration below.
                     items:
                       properties:
                         efsConfiguration:
-                          description: Amazon EFS access point to mount as shared
-                            file storage. Exactly one of s3_files_configuration or
-                            efs_configuration must be specified. See efs_configuration
-                            below.
                           properties:
                             accessPointArn:
-                              description: ARN of the file system access point to
-                                mount.
                               type: string
                             fileSystemArn:
-                              description: ARN of the file system that owns the access
-                                point.
                               type: string
                             mountPath:
-                              description: Absolute path within the session at which
-                                the access point is mounted. Must be under /mnt with
-                                exactly one subdirectory level (for example, /mnt/data).
                               type: string
                           type: object
                         s3FilesConfiguration:
-                          description: Amazon S3 Files access point to mount as shared
-                            file storage. Exactly one of s3_files_configuration or
-                            efs_configuration must be specified. See s3_files_configuration
-                            below.
                           properties:
                             accessPointArn:
-                              description: ARN of the file system access point to
-                                mount.
                               type: string
                             fileSystemArn:
-                              description: ARN of the file system that owns the access
-                                point.
                               type: string
                             mountPath:
-                              description: Absolute path within the session at which
-                                the access point is mounted. Must be under /mnt with
-                                exactly one subdirectory level (for example, /mnt/data).
                               type: string
                           type: object
                       type: object

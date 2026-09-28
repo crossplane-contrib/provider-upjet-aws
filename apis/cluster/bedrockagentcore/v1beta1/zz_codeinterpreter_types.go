@@ -52,30 +52,22 @@ type CodeInterpreterCertificateParameters struct {
 }
 
 type CodeInterpreterFilesystemConfigurationInitParameters struct {
-
-	// Amazon EFS access point to mount as shared file storage. Exactly one of s3_files_configuration or efs_configuration must be specified. See efs_configuration below.
 	EFSConfiguration *EFSConfigurationInitParameters `json:"efsConfiguration,omitempty" tf:"efs_configuration,omitempty"`
 
-	// Amazon S3 Files access point to mount as shared file storage. Exactly one of s3_files_configuration or efs_configuration must be specified. See s3_files_configuration below.
 	S3FilesConfiguration *S3FilesConfigurationInitParameters `json:"s3FilesConfiguration,omitempty" tf:"s3_files_configuration,omitempty"`
 }
 
 type CodeInterpreterFilesystemConfigurationObservation struct {
-
-	// Amazon EFS access point to mount as shared file storage. Exactly one of s3_files_configuration or efs_configuration must be specified. See efs_configuration below.
 	EFSConfiguration *EFSConfigurationObservation `json:"efsConfiguration,omitempty" tf:"efs_configuration,omitempty"`
 
-	// Amazon S3 Files access point to mount as shared file storage. Exactly one of s3_files_configuration or efs_configuration must be specified. See s3_files_configuration below.
 	S3FilesConfiguration *S3FilesConfigurationObservation `json:"s3FilesConfiguration,omitempty" tf:"s3_files_configuration,omitempty"`
 }
 
 type CodeInterpreterFilesystemConfigurationParameters struct {
 
-	// Amazon EFS access point to mount as shared file storage. Exactly one of s3_files_configuration or efs_configuration must be specified. See efs_configuration below.
 	// +kubebuilder:validation:Optional
 	EFSConfiguration *EFSConfigurationParameters `json:"efsConfiguration,omitempty" tf:"efs_configuration,omitempty"`
 
-	// Amazon S3 Files access point to mount as shared file storage. Exactly one of s3_files_configuration or efs_configuration must be specified. See s3_files_configuration below.
 	// +kubebuilder:validation:Optional
 	S3FilesConfiguration *S3FilesConfigurationParameters `json:"s3FilesConfiguration,omitempty" tf:"s3_files_configuration,omitempty"`
 }
@@ -101,7 +93,6 @@ type CodeInterpreterInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ExecutionRoleArnSelector *v2.Selector `json:"executionRoleArnSelector,omitempty" tf:"-"`
 
-	// List of filesystems to mount into every session started from the code interpreter. Up to 4 entries are supported, of which at most 2 can be Amazon S3 Files access points and at most 2 can be Amazon EFS access points. Requires VPC network mode. See filesystem_configuration below.
 	FilesystemConfiguration []CodeInterpreterFilesystemConfigurationInitParameters `json:"filesystemConfiguration,omitempty" tf:"filesystem_configuration,omitempty"`
 
 	// Name of the code interpreter.
@@ -161,7 +152,6 @@ type CodeInterpreterObservation struct {
 	// ARN of the IAM role that the code interpreter assumes for execution. Required when using SANDBOX network mode.
 	ExecutionRoleArn *string `json:"executionRoleArn,omitempty" tf:"execution_role_arn,omitempty"`
 
-	// List of filesystems to mount into every session started from the code interpreter. Up to 4 entries are supported, of which at most 2 can be Amazon S3 Files access points and at most 2 can be Amazon EFS access points. Requires VPC network mode. See filesystem_configuration below.
 	FilesystemConfiguration []CodeInterpreterFilesystemConfigurationObservation `json:"filesystemConfiguration,omitempty" tf:"filesystem_configuration,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -209,7 +199,6 @@ type CodeInterpreterParameters struct {
 	// +kubebuilder:validation:Optional
 	ExecutionRoleArnSelector *v2.Selector `json:"executionRoleArnSelector,omitempty" tf:"-"`
 
-	// List of filesystems to mount into every session started from the code interpreter. Up to 4 entries are supported, of which at most 2 can be Amazon S3 Files access points and at most 2 can be Amazon EFS access points. Requires VPC network mode. See filesystem_configuration below.
 	// +kubebuilder:validation:Optional
 	FilesystemConfiguration []CodeInterpreterFilesystemConfigurationParameters `json:"filesystemConfiguration,omitempty" tf:"filesystem_configuration,omitempty"`
 
@@ -234,7 +223,6 @@ type CodeInterpreterParameters struct {
 
 type EFSConfigurationInitParameters struct {
 
-	// ARN of the file system access point to mount.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/efs/v1beta2.AccessPoint
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	AccessPointArn *string `json:"accessPointArn,omitempty" tf:"access_point_arn,omitempty"`
@@ -247,7 +235,6 @@ type EFSConfigurationInitParameters struct {
 	// +kubebuilder:validation:Optional
 	AccessPointArnSelector *v2.Selector `json:"accessPointArnSelector,omitempty" tf:"-"`
 
-	// ARN of the file system that owns the access point.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/efs/v1beta2.FileSystem
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	FileSystemArn *string `json:"fileSystemArn,omitempty" tf:"file_system_arn,omitempty"`
@@ -260,25 +247,19 @@ type EFSConfigurationInitParameters struct {
 	// +kubebuilder:validation:Optional
 	FileSystemArnSelector *v2.Selector `json:"fileSystemArnSelector,omitempty" tf:"-"`
 
-	// Absolute path within the session at which the access point is mounted. Must be under /mnt with exactly one subdirectory level (for example, /mnt/data).
 	MountPath *string `json:"mountPath,omitempty" tf:"mount_path,omitempty"`
 }
 
 type EFSConfigurationObservation struct {
-
-	// ARN of the file system access point to mount.
 	AccessPointArn *string `json:"accessPointArn,omitempty" tf:"access_point_arn,omitempty"`
 
-	// ARN of the file system that owns the access point.
 	FileSystemArn *string `json:"fileSystemArn,omitempty" tf:"file_system_arn,omitempty"`
 
-	// Absolute path within the session at which the access point is mounted. Must be under /mnt with exactly one subdirectory level (for example, /mnt/data).
 	MountPath *string `json:"mountPath,omitempty" tf:"mount_path,omitempty"`
 }
 
 type EFSConfigurationParameters struct {
 
-	// ARN of the file system access point to mount.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/efs/v1beta2.AccessPoint
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -292,7 +273,6 @@ type EFSConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	AccessPointArnSelector *v2.Selector `json:"accessPointArnSelector,omitempty" tf:"-"`
 
-	// ARN of the file system that owns the access point.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/efs/v1beta2.FileSystem
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -306,7 +286,6 @@ type EFSConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	FileSystemArnSelector *v2.Selector `json:"fileSystemArnSelector,omitempty" tf:"-"`
 
-	// Absolute path within the session at which the access point is mounted. Must be under /mnt with exactly one subdirectory level (for example, /mnt/data).
 	// +kubebuilder:validation:Optional
 	MountPath *string `json:"mountPath" tf:"mount_path,omitempty"`
 }
@@ -423,7 +402,6 @@ type NetworkConfigurationVPCConfigParameters struct {
 
 type S3FilesConfigurationInitParameters struct {
 
-	// ARN of the file system access point to mount.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3files/v1beta1.AccessPoint
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	AccessPointArn *string `json:"accessPointArn,omitempty" tf:"access_point_arn,omitempty"`
@@ -436,7 +414,6 @@ type S3FilesConfigurationInitParameters struct {
 	// +kubebuilder:validation:Optional
 	AccessPointArnSelector *v2.Selector `json:"accessPointArnSelector,omitempty" tf:"-"`
 
-	// ARN of the file system that owns the access point.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3files/v1beta1.FileSystem
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	FileSystemArn *string `json:"fileSystemArn,omitempty" tf:"file_system_arn,omitempty"`
@@ -449,25 +426,19 @@ type S3FilesConfigurationInitParameters struct {
 	// +kubebuilder:validation:Optional
 	FileSystemArnSelector *v2.Selector `json:"fileSystemArnSelector,omitempty" tf:"-"`
 
-	// Absolute path within the session at which the access point is mounted. Must be under /mnt with exactly one subdirectory level (for example, /mnt/data).
 	MountPath *string `json:"mountPath,omitempty" tf:"mount_path,omitempty"`
 }
 
 type S3FilesConfigurationObservation struct {
-
-	// ARN of the file system access point to mount.
 	AccessPointArn *string `json:"accessPointArn,omitempty" tf:"access_point_arn,omitempty"`
 
-	// ARN of the file system that owns the access point.
 	FileSystemArn *string `json:"fileSystemArn,omitempty" tf:"file_system_arn,omitempty"`
 
-	// Absolute path within the session at which the access point is mounted. Must be under /mnt with exactly one subdirectory level (for example, /mnt/data).
 	MountPath *string `json:"mountPath,omitempty" tf:"mount_path,omitempty"`
 }
 
 type S3FilesConfigurationParameters struct {
 
-	// ARN of the file system access point to mount.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3files/v1beta1.AccessPoint
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -481,7 +452,6 @@ type S3FilesConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	AccessPointArnSelector *v2.Selector `json:"accessPointArnSelector,omitempty" tf:"-"`
 
-	// ARN of the file system that owns the access point.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3files/v1beta1.FileSystem
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -495,7 +465,6 @@ type S3FilesConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	FileSystemArnSelector *v2.Selector `json:"fileSystemArnSelector,omitempty" tf:"-"`
 
-	// Absolute path within the session at which the access point is mounted. Must be under /mnt with exactly one subdirectory level (for example, /mnt/data).
 	// +kubebuilder:validation:Optional
 	MountPath *string `json:"mountPath" tf:"mount_path,omitempty"`
 }
