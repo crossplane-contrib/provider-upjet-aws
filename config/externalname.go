@@ -3110,9 +3110,16 @@ func kmsAlias() config.ExternalName {
 }
 
 // s3vectorsComputedARNIdentifier handles S3 Vectors resources that use
-// @ArnIdentity in the Terraform provider. The stub ARN must include the
-// correct region from parameters so the API doesn't reject a region mismatch.
+// @ArnIdentity in the Terraform provider.
 func s3vectorsComputedARNIdentifier(identifier, resourcePath string) config.ExternalName {
+	return frameworkComputedARNIdentifier("s3vectors", identifier, resourcePath)
+}
+
+// frameworkComputedARNIdentifier handles Terraform Plugin Framework resources
+// that use @ArnIdentity in the Terraform provider and can only be read by
+// their ARN. The stub ARN must include the correct region from parameters so
+// the API doesn't reject a region mismatch.
+func frameworkComputedARNIdentifier(service, identifier, resourcePath string) config.ExternalName {
 	en := config.NewExternalNameFrom(config.IdentifierFromProvider,
 		config.WithSetIdentifierArgumentsFn(func(fn config.SetIdentifierArgumentsFn, base map[string]any, externalName string) {
 			if _, ok := base[identifier]; ok {
@@ -3126,7 +3133,7 @@ func s3vectorsComputedARNIdentifier(identifier, resourcePath string) config.Exte
 			// with params, not with the empty tfState). copyParameters will
 			// then propagate the correct-region stub into the final state.
 			if region, _ := base["region"].(string); region != "" {
-				base[identifier] = fmt.Sprintf("arn:aws:s3vectors:%s:000000000000:%s", region, resourcePath)
+				base[identifier] = fmt.Sprintf("arn:aws:%s:%s:000000000000:%s", service, region, resourcePath)
 			}
 		}),
 		config.WithGetExternalNameFn(func(fn config.GetExternalNameFn, tfState map[string]any) (string, error) {
