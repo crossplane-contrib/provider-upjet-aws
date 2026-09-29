@@ -520,7 +520,7 @@ type KnowledgeBaseConfigurationParameters struct {
 	VectorKnowledgeBaseConfiguration *VectorKnowledgeBaseConfigurationParameters `json:"vectorKnowledgeBaseConfiguration,omitempty" tf:"vector_knowledge_base_configuration,omitempty"`
 }
 
-type KnowledgeBaseInitParameters struct {
+type KnowledgeBaseInitParameters_2 struct {
 
 	// Description of the knowledge base.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
@@ -552,7 +552,7 @@ type KnowledgeBaseInitParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
-type KnowledgeBaseObservation struct {
+type KnowledgeBaseObservation_2 struct {
 
 	// ARN of the knowledge base.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
@@ -596,7 +596,7 @@ type KnowledgeBaseObservation struct {
 	UpdatedAt *string `json:"updatedAt,omitempty" tf:"updated_at,omitempty"`
 }
 
-type KnowledgeBaseParameters struct {
+type KnowledgeBaseParameters_2 struct {
 
 	// Description of the knowledge base.
 	// +kubebuilder:validation:Optional
@@ -2115,7 +2115,7 @@ type VideoSegmentationConfigurationParameters struct {
 // KnowledgeBaseSpec defines the desired state of KnowledgeBase
 type KnowledgeBaseSpec struct {
 	v2.ClusterManagedResourceSpec `json:",inline"`
-	ForProvider                   KnowledgeBaseParameters `json:"forProvider"`
+	ForProvider                   KnowledgeBaseParameters_2 `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -2126,13 +2126,13 @@ type KnowledgeBaseSpec struct {
 	// required on creation, but we do not desire to update them after creation,
 	// for example because of an external controller is managing them, like an
 	// autoscaler.
-	InitProvider KnowledgeBaseInitParameters `json:"initProvider,omitempty"`
+	InitProvider KnowledgeBaseInitParameters_2 `json:"initProvider,omitempty"`
 }
 
 // KnowledgeBaseStatus defines the observed state of KnowledgeBase.
 type KnowledgeBaseStatus struct {
 	v2.ManagedResourceStatus `json:",inline"`
-	AtProvider               KnowledgeBaseObservation `json:"atProvider,omitempty"`
+	AtProvider               KnowledgeBaseObservation_2 `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

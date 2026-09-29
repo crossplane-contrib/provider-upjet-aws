@@ -1,0 +1,1272 @@
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.20.1
+  name: prompts.bedrockagent.aws.m.upbound.io
+spec:
+  group: bedrockagent.aws.m.upbound.io
+  names:
+    categories:
+    - crossplane
+    - managed
+    - aws
+    kind: Prompt
+    listKind: PromptList
+    plural: prompts
+    singular: prompt
+  scope: Namespaced
+  versions:
+  - additionalPrinterColumns:
+    - jsonPath: .status.conditions[?(@.type=='Synced')].status
+      name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
+      type: string
+    - jsonPath: .metadata.annotations.crossplane\.io/external-name
+      name: EXTERNAL-NAME
+      type: string
+    - jsonPath: .metadata.creationTimestamp
+      name: AGE
+      type: date
+    name: v1beta1
+    schema:
+      openAPIV3Schema:
+        description: Prompt is the Schema for the Prompts API.
+        properties:
+          apiVersion:
+            description: |-
+              APIVersion defines the versioned schema of this representation of an object.
+              Servers should convert recognized schemas to the latest internal value, and
+              may reject unrecognized values.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+            type: string
+          kind:
+            description: |-
+              Kind is a string value representing the REST resource this object represents.
+              Servers may infer this from the endpoint the client submits requests to.
+              Cannot be updated.
+              In CamelCase.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: PromptSpec defines the desired state of Prompt
+            properties:
+              forProvider:
+                properties:
+                  customerEncryptionKeyArn:
+                    description: ARN of the KMS key that you encrypted the prompt
+                      with.
+                    type: string
+                  customerEncryptionKeyArnRef:
+                    description: Reference to a Key in kms to populate customerEncryptionKeyArn.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      namespace:
+                        description: Namespace of the referenced object
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  customerEncryptionKeyArnSelector:
+                    description: Selector for a Key in kms to populate customerEncryptionKeyArn.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      namespace:
+                        description: Namespace for the selector
+                        type: string
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  defaultVariant:
+                    description: Name of the default variant for your prompt.
+                    type: string
+                  description:
+                    description: Description of the prompt.
+                    type: string
+                  name:
+                    description: Name of the prompt.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                    x-kubernetes-map-type: granular
+                  variant:
+                    description: A list of objects, each containing details about
+                      a variant of the prompt. See Variant for more information.
+                    items:
+                      properties:
+                        additionalModelRequestFields:
+                          description: Contains model-specific inference configurations
+                            that aren’t in the inferenceConfiguration field. To see
+                            model-specific inference parameters, see Inference request
+                            parameters and response fields for foundation models.
+                          type: string
+                        genAiResource:
+                          description: Specifies a generative AI resource with which
+                            to use the prompt. If this is not supplied, then a gen_ai_resource
+                            must be defined. See Generative AI Resource for more information.
+                          properties:
+                            agent:
+                              description: Specifies an Amazon Bedrock agent with
+                                which to use the prompt. See Agent Configuration for
+                                more information.
+                              properties:
+                                agentIdentifier:
+                                  description: ARN of the agent with which to use
+                                    the prompt.
+                                  type: string
+                              type: object
+                          type: object
+                        inferenceConfiguration:
+                          description: Contains inference configurations for the prompt
+                            variant. See Inference Configuration for more information.
+                          properties:
+                            text:
+                              description: Contains inference configurations for the
+                                prompt variant. See Text Inference Configuration for
+                                more information.
+                              properties:
+                                maxTokens:
+                                  description: Maximum number of tokens to return
+                                    in the response.
+                                  type: number
+                                stopSequences:
+                                  description: List of strings that define sequences
+                                    after which the model will stop generating.
+                                  items:
+                                    type: string
+                                  type: array
+                                temperature:
+                                  description: Controls the randomness of the response.
+                                    Choose a lower value for more predictable outputs
+                                    and a higher value for more surprising outputs.
+                                  type: number
+                                topP:
+                                  description: Percentage of most-likely candidates
+                                    that the model considers for the next token.
+                                  type: number
+                              type: object
+                          type: object
+                        metadata:
+                          description: A list of objects, each containing a key-value
+                            pair that defines a metadata tag and value to attach to
+                            a prompt variant. See Metadata for more information.
+                          items:
+                            properties:
+                              key:
+                                description: Key of a metadata tag for a prompt variant.
+                                type: string
+                              value:
+                                description: Value of a metadata tag for a prompt
+                                  variant.
+                                type: string
+                            type: object
+                          type: array
+                        modelId:
+                          description: Unique identifier of the model or inference
+                            profile with which to run inference on the prompt. If
+                            this is not supplied, then a gen_ai_resource must be defined.
+                          type: string
+                        name:
+                          description: Name of the prompt.
+                          type: string
+                        templateConfiguration:
+                          description: Contains configurations for the prompt template.
+                            See Template Configuration for more information.
+                          properties:
+                            chat:
+                              description: Contains configurations to use the prompt
+                                in a conversational format. See Chat Template Configuration
+                                for more information.
+                              properties:
+                                inputVariable:
+                                  description: A list of variables in the prompt template.
+                                    See Input Variable for more information.
+                                  items:
+                                    properties:
+                                      name:
+                                        description: Name of the prompt.
+                                        type: string
+                                    type: object
+                                  type: array
+                                message:
+                                  description: A list of messages in the chat for
+                                    the prompt. See Message for more information.
+                                  items:
+                                    properties:
+                                      content:
+                                        description: Contains the content for the
+                                          message you pass to, or receive from a model.
+                                          See [Message Content] for more information.
+                                        items:
+                                          properties:
+                                            cachePoint:
+                                              description: A cache checkpoint within
+                                                a template configuration. See Cache
+                                                Point for more information.
+                                              properties:
+                                                type:
+                                                  description: 'Indicates that the
+                                                    CachePointBlock is of the default
+                                                    type. Valid values: default.'
+                                                  type: string
+                                              type: object
+                                            text:
+                                              description: Contains inference configurations
+                                                for the prompt variant. See Text Inference
+                                                Configuration for more information.
+                                              type: string
+                                          type: object
+                                        type: array
+                                      role:
+                                        description: The role that the message belongs
+                                          to.
+                                        type: string
+                                    type: object
+                                  type: array
+                                system:
+                                  description: A list of system prompts to provide
+                                    context to the model or to describe how it should
+                                    behave. See System for more information.
+                                  items:
+                                    properties:
+                                      cachePoint:
+                                        description: A cache checkpoint within a template
+                                          configuration. See Cache Point for more
+                                          information.
+                                        properties:
+                                          type:
+                                            description: 'Indicates that the CachePointBlock
+                                              is of the default type. Valid values:
+                                              default.'
+                                            type: string
+                                        type: object
+                                      text:
+                                        description: Contains inference configurations
+                                          for the prompt variant. See Text Inference
+                                          Configuration for more information.
+                                        type: string
+                                    type: object
+                                  type: array
+                                toolConfiguration:
+                                  description: Configuration information for the tools
+                                    that the model can use when generating a response.
+                                    See Tool Configuration for more information.
+                                  properties:
+                                    tool:
+                                      description: A list of tools to pass to a model.
+                                        See Tool for more information.
+                                      items:
+                                        properties:
+                                          cachePoint:
+                                            description: A cache checkpoint within
+                                              a template configuration. See Cache
+                                              Point for more information.
+                                            properties:
+                                              type:
+                                                description: 'Indicates that the CachePointBlock
+                                                  is of the default type. Valid values:
+                                                  default.'
+                                                type: string
+                                            type: object
+                                          toolSpec:
+                                            description: The specification for the
+                                              tool. See Tool Specification for more
+                                              information.
+                                            properties:
+                                              description:
+                                                description: Description of the prompt.
+                                                type: string
+                                              inputSchema:
+                                                description: The input schema of the
+                                                  tool. See Tool Input Schema for
+                                                  more information.
+                                                properties:
+                                                  json:
+                                                    description: A JSON object defining
+                                                      the input schema for the tool.
+                                                    type: string
+                                                type: object
+                                              name:
+                                                description: Name of the prompt.
+                                                type: string
+                                            type: object
+                                        type: object
+                                      type: array
+                                    toolChoice:
+                                      description: Defines which tools the model should
+                                        request when invoked. See Tool Choice for
+                                        more information.
+                                      properties:
+                                        any:
+                                          description: Defines tools, at least one
+                                            of which must be requested by the model.
+                                            No text is generated but the results of
+                                            tool use are sent back to the model to
+                                            help generate a response. This object
+                                            has no fields.
+                                          type: object
+                                        auto:
+                                          description: Defines tools. The model automatically
+                                            decides whether to call a tool or to generate
+                                            text instead. This object has no fields.
+                                          type: object
+                                        tool:
+                                          description: A list of tools to pass to
+                                            a model. See Tool for more information.
+                                          properties:
+                                            name:
+                                              description: Name of the prompt.
+                                              type: string
+                                          type: object
+                                      type: object
+                                  type: object
+                              type: object
+                            text:
+                              description: Contains inference configurations for the
+                                prompt variant. See Text Inference Configuration for
+                                more information.
+                              properties:
+                                cachePoint:
+                                  description: A cache checkpoint within a template
+                                    configuration. See Cache Point for more information.
+                                  properties:
+                                    type:
+                                      description: 'Indicates that the CachePointBlock
+                                        is of the default type. Valid values: default.'
+                                      type: string
+                                  type: object
+                                inputVariable:
+                                  description: A list of variables in the prompt template.
+                                    See Input Variable for more information.
+                                  items:
+                                    properties:
+                                      name:
+                                        description: Name of the prompt.
+                                        type: string
+                                    type: object
+                                  type: array
+                                text:
+                                  description: Contains inference configurations for
+                                    the prompt variant. See Text Inference Configuration
+                                    for more information.
+                                  type: string
+                              type: object
+                          type: object
+                        templateType:
+                          description: 'Type of prompt template to use. Valid values:
+                            CHAT, TEXT.'
+                          type: string
+                      type: object
+                    type: array
+                required:
+                - region
+                type: object
+              initProvider:
+                description: |-
+                  THIS IS A BETA FIELD. It will be honored
+                  unless the Management Policies feature flag is disabled.
+                  InitProvider holds the same fields as ForProvider, with the exception
+                  of Identifier and other resource reference fields. The fields that are
+                  in InitProvider are merged into ForProvider when the resource is created.
+                  The same fields are also added to the terraform ignore_changes hook, to
+                  avoid updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after creation,
+                  for example because of an external controller is managing them, like an
+                  autoscaler.
+                properties:
+                  customerEncryptionKeyArn:
+                    description: ARN of the KMS key that you encrypted the prompt
+                      with.
+                    type: string
+                  customerEncryptionKeyArnRef:
+                    description: Reference to a Key in kms to populate customerEncryptionKeyArn.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      namespace:
+                        description: Namespace of the referenced object
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  customerEncryptionKeyArnSelector:
+                    description: Selector for a Key in kms to populate customerEncryptionKeyArn.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      namespace:
+                        description: Namespace for the selector
+                        type: string
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  defaultVariant:
+                    description: Name of the default variant for your prompt.
+                    type: string
+                  description:
+                    description: Description of the prompt.
+                    type: string
+                  name:
+                    description: Name of the prompt.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                    x-kubernetes-map-type: granular
+                  variant:
+                    description: A list of objects, each containing details about
+                      a variant of the prompt. See Variant for more information.
+                    items:
+                      properties:
+                        additionalModelRequestFields:
+                          description: Contains model-specific inference configurations
+                            that aren’t in the inferenceConfiguration field. To see
+                            model-specific inference parameters, see Inference request
+                            parameters and response fields for foundation models.
+                          type: string
+                        genAiResource:
+                          description: Specifies a generative AI resource with which
+                            to use the prompt. If this is not supplied, then a gen_ai_resource
+                            must be defined. See Generative AI Resource for more information.
+                          properties:
+                            agent:
+                              description: Specifies an Amazon Bedrock agent with
+                                which to use the prompt. See Agent Configuration for
+                                more information.
+                              properties:
+                                agentIdentifier:
+                                  description: ARN of the agent with which to use
+                                    the prompt.
+                                  type: string
+                              type: object
+                          type: object
+                        inferenceConfiguration:
+                          description: Contains inference configurations for the prompt
+                            variant. See Inference Configuration for more information.
+                          properties:
+                            text:
+                              description: Contains inference configurations for the
+                                prompt variant. See Text Inference Configuration for
+                                more information.
+                              properties:
+                                maxTokens:
+                                  description: Maximum number of tokens to return
+                                    in the response.
+                                  type: number
+                                stopSequences:
+                                  description: List of strings that define sequences
+                                    after which the model will stop generating.
+                                  items:
+                                    type: string
+                                  type: array
+                                temperature:
+                                  description: Controls the randomness of the response.
+                                    Choose a lower value for more predictable outputs
+                                    and a higher value for more surprising outputs.
+                                  type: number
+                                topP:
+                                  description: Percentage of most-likely candidates
+                                    that the model considers for the next token.
+                                  type: number
+                              type: object
+                          type: object
+                        metadata:
+                          description: A list of objects, each containing a key-value
+                            pair that defines a metadata tag and value to attach to
+                            a prompt variant. See Metadata for more information.
+                          items:
+                            properties:
+                              key:
+                                description: Key of a metadata tag for a prompt variant.
+                                type: string
+                              value:
+                                description: Value of a metadata tag for a prompt
+                                  variant.
+                                type: string
+                            type: object
+                          type: array
+                        modelId:
+                          description: Unique identifier of the model or inference
+                            profile with which to run inference on the prompt. If
+                            this is not supplied, then a gen_ai_resource must be defined.
+                          type: string
+                        name:
+                          description: Name of the prompt.
+                          type: string
+                        templateConfiguration:
+                          description: Contains configurations for the prompt template.
+                            See Template Configuration for more information.
+                          properties:
+                            chat:
+                              description: Contains configurations to use the prompt
+                                in a conversational format. See Chat Template Configuration
+                                for more information.
+                              properties:
+                                inputVariable:
+                                  description: A list of variables in the prompt template.
+                                    See Input Variable for more information.
+                                  items:
+                                    properties:
+                                      name:
+                                        description: Name of the prompt.
+                                        type: string
+                                    type: object
+                                  type: array
+                                message:
+                                  description: A list of messages in the chat for
+                                    the prompt. See Message for more information.
+                                  items:
+                                    properties:
+                                      content:
+                                        description: Contains the content for the
+                                          message you pass to, or receive from a model.
+                                          See [Message Content] for more information.
+                                        items:
+                                          properties:
+                                            cachePoint:
+                                              description: A cache checkpoint within
+                                                a template configuration. See Cache
+                                                Point for more information.
+                                              properties:
+                                                type:
+                                                  description: 'Indicates that the
+                                                    CachePointBlock is of the default
+                                                    type. Valid values: default.'
+                                                  type: string
+                                              type: object
+                                            text:
+                                              description: Contains inference configurations
+                                                for the prompt variant. See Text Inference
+                                                Configuration for more information.
+                                              type: string
+                                          type: object
+                                        type: array
+                                      role:
+                                        description: The role that the message belongs
+                                          to.
+                                        type: string
+                                    type: object
+                                  type: array
+                                system:
+                                  description: A list of system prompts to provide
+                                    context to the model or to describe how it should
+                                    behave. See System for more information.
+                                  items:
+                                    properties:
+                                      cachePoint:
+                                        description: A cache checkpoint within a template
+                                          configuration. See Cache Point for more
+                                          information.
+                                        properties:
+                                          type:
+                                            description: 'Indicates that the CachePointBlock
+                                              is of the default type. Valid values:
+                                              default.'
+                                            type: string
+                                        type: object
+                                      text:
+                                        description: Contains inference configurations
+                                          for the prompt variant. See Text Inference
+                                          Configuration for more information.
+                                        type: string
+                                    type: object
+                                  type: array
+                                toolConfiguration:
+                                  description: Configuration information for the tools
+                                    that the model can use when generating a response.
+                                    See Tool Configuration for more information.
+                                  properties:
+                                    tool:
+                                      description: A list of tools to pass to a model.
+                                        See Tool for more information.
+                                      items:
+                                        properties:
+                                          cachePoint:
+                                            description: A cache checkpoint within
+                                              a template configuration. See Cache
+                                              Point for more information.
+                                            properties:
+                                              type:
+                                                description: 'Indicates that the CachePointBlock
+                                                  is of the default type. Valid values:
+                                                  default.'
+                                                type: string
+                                            type: object
+                                          toolSpec:
+                                            description: The specification for the
+                                              tool. See Tool Specification for more
+                                              information.
+                                            properties:
+                                              description:
+                                                description: Description of the prompt.
+                                                type: string
+                                              inputSchema:
+                                                description: The input schema of the
+                                                  tool. See Tool Input Schema for
+                                                  more information.
+                                                properties:
+                                                  json:
+                                                    description: A JSON object defining
+                                                      the input schema for the tool.
+                                                    type: string
+                                                type: object
+                                              name:
+                                                description: Name of the prompt.
+                                                type: string
+                                            type: object
+                                        type: object
+                                      type: array
+                                    toolChoice:
+                                      description: Defines which tools the model should
+                                        request when invoked. See Tool Choice for
+                                        more information.
+                                      properties:
+                                        any:
+                                          description: Defines tools, at least one
+                                            of which must be requested by the model.
+                                            No text is generated but the results of
+                                            tool use are sent back to the model to
+                                            help generate a response. This object
+                                            has no fields.
+                                          type: object
+                                        auto:
+                                          description: Defines tools. The model automatically
+                                            decides whether to call a tool or to generate
+                                            text instead. This object has no fields.
+                                          type: object
+                                        tool:
+                                          description: A list of tools to pass to
+                                            a model. See Tool for more information.
+                                          properties:
+                                            name:
+                                              description: Name of the prompt.
+                                              type: string
+                                          type: object
+                                      type: object
+                                  type: object
+                              type: object
+                            text:
+                              description: Contains inference configurations for the
+                                prompt variant. See Text Inference Configuration for
+                                more information.
+                              properties:
+                                cachePoint:
+                                  description: A cache checkpoint within a template
+                                    configuration. See Cache Point for more information.
+                                  properties:
+                                    type:
+                                      description: 'Indicates that the CachePointBlock
+                                        is of the default type. Valid values: default.'
+                                      type: string
+                                  type: object
+                                inputVariable:
+                                  description: A list of variables in the prompt template.
+                                    See Input Variable for more information.
+                                  items:
+                                    properties:
+                                      name:
+                                        description: Name of the prompt.
+                                        type: string
+                                    type: object
+                                  type: array
+                                text:
+                                  description: Contains inference configurations for
+                                    the prompt variant. See Text Inference Configuration
+                                    for more information.
+                                  type: string
+                              type: object
+                          type: object
+                        templateType:
+                          description: 'Type of prompt template to use. Valid values:
+                            CHAT, TEXT.'
+                          type: string
+                      type: object
+                    type: array
+                type: object
+              managementPolicies:
+                default:
+                - '*'
+                description: |-
+                  THIS IS A BETA FIELD. It is on by default but can be opted out
+                  through a Crossplane feature flag.
+                  ManagementPolicies specify the array of actions Crossplane is allowed to
+                  take on the managed and external resources.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                  and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md
+                items:
+                  description: |-
+                    A ManagementAction represents an action that the Crossplane controllers
+                    can take on an external resource.
+                  enum:
+                  - Observe
+                  - Create
+                  - Update
+                  - Delete
+                  - LateInitialize
+                  - '*'
+                  type: string
+                type: array
+              providerConfigRef:
+                default:
+                  kind: ClusterProviderConfig
+                  name: default
+                description: |-
+                  ProviderConfigReference specifies how the provider that will be used to
+                  create, observe, update, and delete this managed resource should be
+                  configured.
+                properties:
+                  kind:
+                    description: Kind of the referenced object.
+                    type: string
+                  name:
+                    description: Name of the referenced object.
+                    type: string
+                required:
+                - kind
+                - name
+                type: object
+              writeConnectionSecretToRef:
+                description: |-
+                  WriteConnectionSecretToReference specifies the namespace and name of a
+                  Secret to which any connection details for this managed resource should
+                  be written. Connection details frequently include the endpoint, username,
+                  and password required to connect to the managed resource.
+                properties:
+                  name:
+                    description: Name of the secret.
+                    type: string
+                required:
+                - name
+                type: object
+            required:
+            - forProvider
+            type: object
+            x-kubernetes-validations:
+            - message: spec.forProvider.name is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || (has(self.initProvider) && has(self.initProvider.name))'
+          status:
+            description: PromptStatus defines the observed state of Prompt.
+            properties:
+              atProvider:
+                properties:
+                  arn:
+                    description: ARN of the prompt.
+                    type: string
+                  createdAt:
+                    description: Time at which the prompt was created.
+                    type: string
+                  customerEncryptionKeyArn:
+                    description: ARN of the KMS key that you encrypted the prompt
+                      with.
+                    type: string
+                  defaultVariant:
+                    description: Name of the default variant for your prompt.
+                    type: string
+                  description:
+                    description: Description of the prompt.
+                    type: string
+                  id:
+                    description: Unique identifier of the prompt.
+                    type: string
+                  name:
+                    description: Name of the prompt.
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                    x-kubernetes-map-type: granular
+                  tagsAll:
+                    additionalProperties:
+                      type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
+                    type: object
+                    x-kubernetes-map-type: granular
+                  updatedAt:
+                    description: Time at which the prompt was last updated.
+                    type: string
+                  variant:
+                    description: A list of objects, each containing details about
+                      a variant of the prompt. See Variant for more information.
+                    items:
+                      properties:
+                        additionalModelRequestFields:
+                          description: Contains model-specific inference configurations
+                            that aren’t in the inferenceConfiguration field. To see
+                            model-specific inference parameters, see Inference request
+                            parameters and response fields for foundation models.
+                          type: string
+                        genAiResource:
+                          description: Specifies a generative AI resource with which
+                            to use the prompt. If this is not supplied, then a gen_ai_resource
+                            must be defined. See Generative AI Resource for more information.
+                          properties:
+                            agent:
+                              description: Specifies an Amazon Bedrock agent with
+                                which to use the prompt. See Agent Configuration for
+                                more information.
+                              properties:
+                                agentIdentifier:
+                                  description: ARN of the agent with which to use
+                                    the prompt.
+                                  type: string
+                              type: object
+                          type: object
+                        inferenceConfiguration:
+                          description: Contains inference configurations for the prompt
+                            variant. See Inference Configuration for more information.
+                          properties:
+                            text:
+                              description: Contains inference configurations for the
+                                prompt variant. See Text Inference Configuration for
+                                more information.
+                              properties:
+                                maxTokens:
+                                  description: Maximum number of tokens to return
+                                    in the response.
+                                  type: number
+                                stopSequences:
+                                  description: List of strings that define sequences
+                                    after which the model will stop generating.
+                                  items:
+                                    type: string
+                                  type: array
+                                temperature:
+                                  description: Controls the randomness of the response.
+                                    Choose a lower value for more predictable outputs
+                                    and a higher value for more surprising outputs.
+                                  type: number
+                                topP:
+                                  description: Percentage of most-likely candidates
+                                    that the model considers for the next token.
+                                  type: number
+                              type: object
+                          type: object
+                        metadata:
+                          description: A list of objects, each containing a key-value
+                            pair that defines a metadata tag and value to attach to
+                            a prompt variant. See Metadata for more information.
+                          items:
+                            properties:
+                              key:
+                                description: Key of a metadata tag for a prompt variant.
+                                type: string
+                              value:
+                                description: Value of a metadata tag for a prompt
+                                  variant.
+                                type: string
+                            type: object
+                          type: array
+                        modelId:
+                          description: Unique identifier of the model or inference
+                            profile with which to run inference on the prompt. If
+                            this is not supplied, then a gen_ai_resource must be defined.
+                          type: string
+                        name:
+                          description: Name of the prompt.
+                          type: string
+                        templateConfiguration:
+                          description: Contains configurations for the prompt template.
+                            See Template Configuration for more information.
+                          properties:
+                            chat:
+                              description: Contains configurations to use the prompt
+                                in a conversational format. See Chat Template Configuration
+                                for more information.
+                              properties:
+                                inputVariable:
+                                  description: A list of variables in the prompt template.
+                                    See Input Variable for more information.
+                                  items:
+                                    properties:
+                                      name:
+                                        description: Name of the prompt.
+                                        type: string
+                                    type: object
+                                  type: array
+                                message:
+                                  description: A list of messages in the chat for
+                                    the prompt. See Message for more information.
+                                  items:
+                                    properties:
+                                      content:
+                                        description: Contains the content for the
+                                          message you pass to, or receive from a model.
+                                          See [Message Content] for more information.
+                                        items:
+                                          properties:
+                                            cachePoint:
+                                              description: A cache checkpoint within
+                                                a template configuration. See Cache
+                                                Point for more information.
+                                              properties:
+                                                type:
+                                                  description: 'Indicates that the
+                                                    CachePointBlock is of the default
+                                                    type. Valid values: default.'
+                                                  type: string
+                                              type: object
+                                            text:
+                                              description: Contains inference configurations
+                                                for the prompt variant. See Text Inference
+                                                Configuration for more information.
+                                              type: string
+                                          type: object
+                                        type: array
+                                      role:
+                                        description: The role that the message belongs
+                                          to.
+                                        type: string
+                                    type: object
+                                  type: array
+                                system:
+                                  description: A list of system prompts to provide
+                                    context to the model or to describe how it should
+                                    behave. See System for more information.
+                                  items:
+                                    properties:
+                                      cachePoint:
+                                        description: A cache checkpoint within a template
+                                          configuration. See Cache Point for more
+                                          information.
+                                        properties:
+                                          type:
+                                            description: 'Indicates that the CachePointBlock
+                                              is of the default type. Valid values:
+                                              default.'
+                                            type: string
+                                        type: object
+                                      text:
+                                        description: Contains inference configurations
+                                          for the prompt variant. See Text Inference
+                                          Configuration for more information.
+                                        type: string
+                                    type: object
+                                  type: array
+                                toolConfiguration:
+                                  description: Configuration information for the tools
+                                    that the model can use when generating a response.
+                                    See Tool Configuration for more information.
+                                  properties:
+                                    tool:
+                                      description: A list of tools to pass to a model.
+                                        See Tool for more information.
+                                      items:
+                                        properties:
+                                          cachePoint:
+                                            description: A cache checkpoint within
+                                              a template configuration. See Cache
+                                              Point for more information.
+                                            properties:
+                                              type:
+                                                description: 'Indicates that the CachePointBlock
+                                                  is of the default type. Valid values:
+                                                  default.'
+                                                type: string
+                                            type: object
+                                          toolSpec:
+                                            description: The specification for the
+                                              tool. See Tool Specification for more
+                                              information.
+                                            properties:
+                                              description:
+                                                description: Description of the prompt.
+                                                type: string
+                                              inputSchema:
+                                                description: The input schema of the
+                                                  tool. See Tool Input Schema for
+                                                  more information.
+                                                properties:
+                                                  json:
+                                                    description: A JSON object defining
+                                                      the input schema for the tool.
+                                                    type: string
+                                                type: object
+                                              name:
+                                                description: Name of the prompt.
+                                                type: string
+                                            type: object
+                                        type: object
+                                      type: array
+                                    toolChoice:
+                                      description: Defines which tools the model should
+                                        request when invoked. See Tool Choice for
+                                        more information.
+                                      properties:
+                                        any:
+                                          description: Defines tools, at least one
+                                            of which must be requested by the model.
+                                            No text is generated but the results of
+                                            tool use are sent back to the model to
+                                            help generate a response. This object
+                                            has no fields.
+                                          type: object
+                                        auto:
+                                          description: Defines tools. The model automatically
+                                            decides whether to call a tool or to generate
+                                            text instead. This object has no fields.
+                                          type: object
+                                        tool:
+                                          description: A list of tools to pass to
+                                            a model. See Tool for more information.
+                                          properties:
+                                            name:
+                                              description: Name of the prompt.
+                                              type: string
+                                          type: object
+                                      type: object
+                                  type: object
+                              type: object
+                            text:
+                              description: Contains inference configurations for the
+                                prompt variant. See Text Inference Configuration for
+                                more information.
+                              properties:
+                                cachePoint:
+                                  description: A cache checkpoint within a template
+                                    configuration. See Cache Point for more information.
+                                  properties:
+                                    type:
+                                      description: 'Indicates that the CachePointBlock
+                                        is of the default type. Valid values: default.'
+                                      type: string
+                                  type: object
+                                inputVariable:
+                                  description: A list of variables in the prompt template.
+                                    See Input Variable for more information.
+                                  items:
+                                    properties:
+                                      name:
+                                        description: Name of the prompt.
+                                        type: string
+                                    type: object
+                                  type: array
+                                text:
+                                  description: Contains inference configurations for
+                                    the prompt variant. See Text Inference Configuration
+                                    for more information.
+                                  type: string
+                              type: object
+                          type: object
+                        templateType:
+                          description: 'Type of prompt template to use. Valid values:
+                            CHAT, TEXT.'
+                          type: string
+                      type: object
+                    type: array
+                  version:
+                    description: Version of the prompt. When you create a prompt,
+                      the version created is the DRAFT version.
+                    type: string
+                type: object
+              conditions:
+                description: Conditions of the resource.
+                items:
+                  description: A Condition that may apply to a resource.
+                  properties:
+                    lastTransitionTime:
+                      description: |-
+                        LastTransitionTime is the last time this condition transitioned from one
+                        status to another.
+                      format: date-time
+                      type: string
+                    message:
+                      description: |-
+                        A Message containing details about this condition's last transition from
+                        one status to another, if any.
+                      type: string
+                    observedGeneration:
+                      description: |-
+                        ObservedGeneration represents the .metadata.generation that the condition was set based upon.
+                        For instance, if .metadata.generation is currently 12, but the .status.conditions[x].observedGeneration is 9, the condition is out of date
+                        with respect to the current state of the instance.
+                      format: int64
+                      type: integer
+                    reason:
+                      description: A Reason for this condition's last transition from
+                        one status to another.
+                      type: string
+                    status:
+                      description: Status of this condition; is it currently True,
+                        False, or Unknown?
+                      type: string
+                    type:
+                      description: |-
+                        Type of this condition. At most one of each condition type may apply to
+                        a resource at any point in time.
+                      type: string
+                  required:
+                  - lastTransitionTime
+                  - reason
+                  - status
+                  - type
+                  type: object
+                type: array
+                x-kubernetes-list-map-keys:
+                - type
+                x-kubernetes-list-type: map
+              lastHandledReconcileAt:
+                description: |-
+                  LastHandledReconcileAt holds the value of the most recent
+                  reconcile-requested-at annotation token that the controller has
+                  processed. Users can compare this to the annotation to determine
+                  whether a reconcile request has been handled.
+                type: string
+              observedGeneration:
+                description: |-
+                  ObservedGeneration is the latest metadata.generation
+                  which resulted in either a ready state, or stalled due to error
+                  it can not recover from without human intervention.
+                format: int64
+                type: integer
+            type: object
+        required:
+        - spec
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}
