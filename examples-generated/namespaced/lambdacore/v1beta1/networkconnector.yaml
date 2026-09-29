@@ -1,0 +1,102 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
+apiVersion: lambdacore.aws.m.upbound.io/v1beta1
+kind: NetworkConnector
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lambdacore/v1beta1/networkconnector
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    configuration:
+      vpcEgressConfiguration:
+        associatedComputeResourceTypes:
+        - MicroVm
+        networkProtocol: IPv4
+        securityGroupIdRefs:
+        - name: example
+        subnetIdSelector:
+          matchLabels:
+            testing.upbound.io/example-name: example[*]
+    name: example
+    operatorRoleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    region: us-west-1
+
+---
+
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lambdacore/v1beta1/networkconnector
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    assumeRolePolicy: |-
+      ${jsonencode({
+          Version = "2012-10-17"
+          Statement = [{
+            Action = "sts:AssumeRole"
+            Effect = "Allow"
+            Principal = {
+              Service = "network-connectors.lambda.amazonaws.com"
+            }
+          }]
+        })}
+    region: us-west-1
+
+---
+
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: RolePolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lambdacore/v1beta1/networkconnector
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    policy: |-
+      ${jsonencode({
+          Version = "2012-10-17"
+          Statement = [
+            {
+              Sid    = "CreateENI"
+              Effect = "Allow"
+              Action = "ec2:CreateNetworkInterface"
+              Resource = [
+                "arn:aws:ec2:*:*:network-interface/*",
+                "arn:aws:ec2:*:*:subnet/*",
+                "arn:aws:ec2:*:*:security-group/*",
+              ]
+            },
+            {
+              Sid      = "TagENI"
+              Effect   = "Allow"
+              Action   = "ec2:CreateTags"
+              Resource = "arn:aws:ec2:*:*:network-interface/*"
+              Condition = {
+                StringEquals = {
+                  "ec2:ManagedResourceOperator" = "network-connectors.lambda.amazonaws.com"
+                }
+              }
+            },
+          ]
+        })}
+    region: us-west-1
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

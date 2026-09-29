@@ -1,0 +1,25 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
+apiVersion: bedrock.aws.m.upbound.io/v1beta1
+kind: UseCaseForModelAccess
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrock/v1beta1/usecaseformodelaccess
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    formData: |-
+      ${jsonencode({
+          "companyName"         = "AWS Provider",
+          "companyWebsite"      = "https://www.test.com",
+          "intendedUsers"       = "0",
+          "industryOption"      = "Energy",
+          "otherIndustryOption" = "",
+          "useCases"            = ". - Generating developer documentation\n- Code generation/refactoring\n- Summarization of issues / documents"
+        })}
