@@ -1,0 +1,267 @@
+# SPDX-FileCopyrightText: 2026 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+# Agent Knowledge Base Association Example
+# Associates a knowledge base backed by an Amazon S3 Vectors index with the
+# DRAFT version of a Bedrock agent.
+# Bedrock Agents Classic only creates agents in accounts with prior service
+# usage, so the Agent and the association are marked for manual testing.
+
+apiVersion: bedrockagent.aws.m.upbound.io/v1beta1
+kind: AgentKnowledgeBaseAssociation
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrockagent/v1beta1/agentknowledgebaseassociation
+    upjet.upbound.io/manual-intervention: >
+      creating Bedrock Agent: operation error Bedrock Agent: CreateAgent,
+      https response error StatusCode: 403, RequestID: uuid,
+      AccessDeniedException: Bedrock Agents is in Maintenance Mode. New agent
+      creation is not available for accounts without prior service usage. To
+      learn more visit
+      https://docs.aws.amazon.com/bedrock/latest/userguide/agents-classic-maintenance-mode.html.
+  labels:
+    testing.upbound.io/example-name: agentknowledgebaseassociation
+  name: agentknowledgebaseassociation
+  namespace: upbound-system
+spec:
+  forProvider:
+    agentIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: agentknowledgebaseassociation
+    description: Use this knowledge base to answer questions about the example documents.
+    knowledgeBaseIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: agentknowledgebaseassociation
+    knowledgeBaseState: ENABLED
+    region: us-east-1
+
+---
+
+apiVersion: bedrockagent.aws.m.upbound.io/v1beta1
+kind: Agent
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrockagent/v1beta1/agentknowledgebaseassociation
+    upjet.upbound.io/manual-intervention: >
+      creating Bedrock Agent: operation error Bedrock Agent: CreateAgent,
+      https response error StatusCode: 403, RequestID: uuid,
+      AccessDeniedException: Bedrock Agents is in Maintenance Mode. New agent
+      creation is not available for accounts without prior service usage. To
+      learn more visit
+      https://docs.aws.amazon.com/bedrock/latest/userguide/agents-classic-maintenance-mode.html.
+  labels:
+    testing.upbound.io/example-name: agentknowledgebaseassociation
+  name: agentknowledgebaseassociation
+  namespace: upbound-system
+spec:
+  forProvider:
+    agentName: example-agent-knowledge-base-association
+    agentResourceRoleArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: agentknowledgebaseassociation-agent
+    foundationModel: amazon.nova-micro-v1:0
+    idleSessionTtlInSeconds: 500
+    instruction: You answer questions using the documents stored in the associated knowledge base.
+    region: us-east-1
+
+---
+
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrockagent/v1beta1/agentknowledgebaseassociation
+  labels:
+    testing.upbound.io/example-name: agentknowledgebaseassociation-agent
+  name: example-bedrockagent-kbassociation-agent
+  namespace: upbound-system
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {
+              "Service": "bedrock.amazonaws.com"
+            },
+            "Action": "sts:AssumeRole"
+          }
+        ]
+      }
+
+---
+
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: RolePolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrockagent/v1beta1/agentknowledgebaseassociation
+  labels:
+    testing.upbound.io/example-name: agentknowledgebaseassociation-agent
+  name: example-bedrockagent-kbassociation-agent
+  namespace: upbound-system
+spec:
+  forProvider:
+    policy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Action": [
+              "bedrock:InvokeModel",
+              "bedrock:Retrieve"
+            ],
+            "Resource": "*"
+          }
+        ]
+      }
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: agentknowledgebaseassociation-agent
+
+---
+
+apiVersion: bedrockagent.aws.m.upbound.io/v1beta1
+kind: KnowledgeBase
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrockagent/v1beta1/agentknowledgebaseassociation
+  labels:
+    testing.upbound.io/example-name: agentknowledgebaseassociation
+  name: agentknowledgebaseassociation
+  namespace: upbound-system
+spec:
+  forProvider:
+    name: example-agent-knowledge-base-association
+    region: us-east-1
+    roleArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: agentknowledgebaseassociation-kb
+    knowledgeBaseConfiguration:
+      type: VECTOR
+      vectorKnowledgeBaseConfiguration:
+        embeddingModelArn: arn:aws:bedrock:us-east-1::foundation-model/amazon.titan-embed-text-v2:0
+        embeddingModelConfiguration:
+          bedrockEmbeddingModelConfiguration:
+            dimensions: 256
+            embeddingDataType: FLOAT32
+    storageConfiguration:
+      type: S3_VECTORS
+      s3VectorsConfiguration:
+        indexArnSelector:
+          matchLabels:
+            testing.upbound.io/example-name: agentknowledgebaseassociation
+
+---
+
+apiVersion: s3vectors.aws.m.upbound.io/v1beta1
+kind: Index
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrockagent/v1beta1/agentknowledgebaseassociation
+  labels:
+    testing.upbound.io/example-name: agentknowledgebaseassociation
+  name: agentknowledgebaseassociation
+  namespace: upbound-system
+spec:
+  forProvider:
+    dataType: float32
+    dimension: 256
+    distanceMetric: cosine
+    indexName: example-agent-knowledge-base-association
+    metadataConfiguration:
+      nonFilterableMetadataKeys:
+      - AMAZON_BEDROCK_TEXT
+    region: us-east-1
+    vectorBucketNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: agentknowledgebaseassociation
+
+---
+
+apiVersion: s3vectors.aws.m.upbound.io/v1beta1
+kind: VectorBucket
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrockagent/v1beta1/agentknowledgebaseassociation
+  labels:
+    testing.upbound.io/example-name: agentknowledgebaseassociation
+  name: agentknowledgebaseassociation
+  namespace: upbound-system
+spec:
+  forProvider:
+    forceDestroy: true
+    region: us-east-1
+    vectorBucketName: example-bedrockagent-kbassociation
+
+---
+
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrockagent/v1beta1/agentknowledgebaseassociation
+  labels:
+    testing.upbound.io/example-name: agentknowledgebaseassociation-kb
+  name: example-bedrockagent-kbassociation-kb
+  namespace: upbound-system
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {
+              "Service": "bedrock.amazonaws.com"
+            },
+            "Action": "sts:AssumeRole"
+          }
+        ]
+      }
+
+---
+
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: RolePolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrockagent/v1beta1/agentknowledgebaseassociation
+  labels:
+    testing.upbound.io/example-name: agentknowledgebaseassociation-kb
+  name: example-bedrockagent-kbassociation-kb
+  namespace: upbound-system
+spec:
+  forProvider:
+    policy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Action": [
+              "bedrock:InvokeModel"
+            ],
+            "Resource": "*"
+          },
+          {
+            "Effect": "Allow",
+            "Action": [
+              "s3vectors:GetIndex",
+              "s3vectors:QueryVectors",
+              "s3vectors:PutVectors",
+              "s3vectors:GetVectors",
+              "s3vectors:DeleteVectors"
+            ],
+            "Resource": "*"
+          }
+        ]
+      }
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: agentknowledgebaseassociation-kb

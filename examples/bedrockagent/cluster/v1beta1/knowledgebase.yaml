@@ -1,0 +1,145 @@
+# SPDX-FileCopyrightText: 2026 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+# Knowledge Base Example
+# Creates a vector knowledge base backed by an Amazon S3 Vectors index, using
+# Amazon Titan Text Embeddings V2 as the embedding model.
+
+apiVersion: bedrockagent.aws.upbound.io/v1beta1
+kind: KnowledgeBase
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrockagent/v1beta1/knowledgebase
+  labels:
+    testing.upbound.io/example-name: knowledgebase
+  name: knowledgebase
+spec:
+  forProvider:
+    name: example-knowledge-base
+    region: us-east-1
+    roleArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: knowledgebase
+    knowledgeBaseConfiguration:
+      type: VECTOR
+      vectorKnowledgeBaseConfiguration:
+        embeddingModelArn: arn:aws:bedrock:us-east-1::foundation-model/amazon.titan-embed-text-v2:0
+        embeddingModelConfiguration:
+          bedrockEmbeddingModelConfiguration:
+            dimensions: 256
+            embeddingDataType: FLOAT32
+    storageConfiguration:
+      type: S3_VECTORS
+      s3VectorsConfiguration:
+        indexArnSelector:
+          matchLabels:
+            testing.upbound.io/example-name: knowledgebase
+
+---
+
+apiVersion: s3vectors.aws.upbound.io/v1beta1
+kind: Index
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrockagent/v1beta1/knowledgebase
+  labels:
+    testing.upbound.io/example-name: knowledgebase
+  name: knowledgebase
+spec:
+  forProvider:
+    dataType: float32
+    dimension: 256
+    distanceMetric: cosine
+    indexName: example-knowledge-base
+    # Bedrock stores the source text chunk under this key; keeping it
+    # non-filterable avoids the 2 KB filterable metadata limit on ingestion.
+    metadataConfiguration:
+      nonFilterableMetadataKeys:
+      - AMAZON_BEDROCK_TEXT
+    region: us-east-1
+    vectorBucketNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: knowledgebase
+
+---
+
+apiVersion: s3vectors.aws.upbound.io/v1beta1
+kind: VectorBucket
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrockagent/v1beta1/knowledgebase
+  labels:
+    testing.upbound.io/example-name: knowledgebase
+  name: knowledgebase
+spec:
+  forProvider:
+    forceDestroy: true
+    region: us-east-1
+    vectorBucketName: example-bedrockagent-knowledgebase
+
+---
+
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrockagent/v1beta1/knowledgebase
+  labels:
+    testing.upbound.io/example-name: knowledgebase
+  name: example-bedrockagent-knowledgebase
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {
+              "Service": "bedrock.amazonaws.com"
+            },
+            "Action": "sts:AssumeRole"
+          }
+        ]
+      }
+
+---
+
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: RolePolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrockagent/v1beta1/knowledgebase
+  labels:
+    testing.upbound.io/example-name: knowledgebase
+  name: example-bedrockagent-knowledgebase
+spec:
+  forProvider:
+    policy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Action": [
+              "bedrock:InvokeModel"
+            ],
+            "Resource": "*"
+          },
+          {
+            "Effect": "Allow",
+            "Action": [
+              "s3vectors:GetIndex",
+              "s3vectors:QueryVectors",
+              "s3vectors:PutVectors",
+              "s3vectors:GetVectors",
+              "s3vectors:DeleteVectors"
+            ],
+            "Resource": "*"
+          }
+        ]
+      }
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: knowledgebase

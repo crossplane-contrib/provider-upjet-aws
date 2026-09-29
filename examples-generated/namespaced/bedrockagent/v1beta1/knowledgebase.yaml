@@ -1,0 +1,36 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
+apiVersion: bedrockagent.aws.m.upbound.io/v1beta1
+kind: KnowledgeBase
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrockagent/v1beta1/knowledgebase
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    knowledgeBaseConfiguration:
+      type: VECTOR
+      vectorKnowledgeBaseConfiguration:
+        embeddingModelArn: arn:aws:bedrock:us-west-2::foundation-model/amazon.titan-embed-text-v2:0
+    name: example
+    region: us-west-1
+    roleArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    storageConfiguration:
+      opensearchServerlessConfiguration:
+        collectionArnSelector:
+          matchLabels:
+            testing.upbound.io/example-name: example
+        fieldMapping:
+          metadataField: AMAZON_BEDROCK_METADATA
+          textField: AMAZON_BEDROCK_TEXT_CHUNK
+          vectorField: bedrock-knowledge-base-default-vector
+        vectorIndexName: bedrock-knowledge-base-default-index
+      type: OPENSEARCH_SERVERLESS
