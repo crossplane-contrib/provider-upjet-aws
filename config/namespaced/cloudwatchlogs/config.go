@@ -50,4 +50,36 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		}
 	})
 
+	p.AddResourceConfigurator("aws_cloudwatch_log_delivery_source", func(r *config.Resource) {
+		r.References["resource_arn"] = config.Reference{
+			TerraformName: "aws_cloudfront_distribution",
+			Extractor:     common.PathARNExtractor,
+		}
+	})
+
+	p.AddResourceConfigurator("aws_cloudwatch_log_delivery_destination", func(r *config.Resource) {
+		// Framework schemas do not surface max_items for list-nested blocks.
+		r.AddSingletonListConversion("delivery_destination_configuration", "deliveryDestinationConfiguration")
+		r.References["delivery_destination_configuration.destination_resource_arn"] = config.Reference{
+			TerraformName: "aws_cloudwatch_log_group",
+			Extractor:     common.PathARNExtractor,
+		}
+	})
+
+	p.AddResourceConfigurator("aws_cloudwatch_log_delivery_destination_policy", func(r *config.Resource) {
+		r.References["delivery_destination_name"] = config.Reference{
+			TerraformName: "aws_cloudwatch_log_delivery_destination",
+		}
+	})
+
+	p.AddResourceConfigurator("aws_cloudwatch_log_delivery", func(r *config.Resource) {
+		r.AddSingletonListConversion("s3_delivery_configuration", "s3DeliveryConfiguration")
+		r.References["delivery_source_name"] = config.Reference{
+			TerraformName: "aws_cloudwatch_log_delivery_source",
+		}
+		r.References["delivery_destination_arn"] = config.Reference{
+			TerraformName: "aws_cloudwatch_log_delivery_destination",
+			Extractor:     common.PathARNExtractor,
+		}
+	})
 }
