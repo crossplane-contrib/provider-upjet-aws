@@ -17,6 +17,18 @@ import (
 
 // Configure adds configurations for the secretsmanager group.
 func Configure(p *config.Provider) { //nolint:gocyclo
+	p.AddResourceConfigurator("aws_secretsmanager_secret_version", func(r *config.Resource) {
+		// The upstream resource decides whether a secret_string change forces
+		// replacement in a CustomizeDiff that returns early when the prior
+		// state's RawState is null, which is always the case for upjet's
+		// InstanceState. Without the static ForceNew, a changed secret_string
+		// is planned as an in-place update that resourceSecretVersionUpdate
+		// ignores, so the diff never converges and the resource hot-loops.
+		if s, ok := r.TerraformResource.Schema["secret_string"]; ok {
+			s.ForceNew = true
+		}
+	})
+
 	p.AddResourceConfigurator("aws_secretsmanager_secret", func(r *config.Resource) {
 		// Use aws_secretsmanager_secret_rotation.
 		config.MoveToStatus(r.TerraformResource, "rotation_rules", "rotation_lambda_arn")
