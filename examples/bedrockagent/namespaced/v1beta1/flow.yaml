@@ -1,0 +1,140 @@
+# SPDX-FileCopyrightText: 2026 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+# Flow Example
+# Creates a Bedrock flow which passes its input to a prompt and returns the
+# completion of the model.
+
+apiVersion: bedrockagent.aws.m.upbound.io/v1beta1
+kind: Flow
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrockagent/v1beta1/flow
+  labels:
+    testing.upbound.io/example-name: flow
+  name: flow
+  namespace: upbound-system
+spec:
+  forProvider:
+    definition:
+      connection:
+        - configuration:
+            data:
+              sourceOutput: document
+              targetInput: topic
+          name: FlowInputNodeFlowInputNode0ToPrompt_1PromptsNode0
+          source: FlowInputNode
+          target: Prompt_1
+          type: Data
+        - configuration:
+            data:
+              sourceOutput: modelCompletion
+              targetInput: document
+          name: Prompt_1PromptsNode0ToFlowOutputNodeFlowOutputNode0
+          source: Prompt_1
+          target: FlowOutputNode
+          type: Data
+      node:
+        - configuration:
+            input: {}
+          name: FlowInputNode
+          output:
+            - name: document
+              type: String
+          type: Input
+        - configuration:
+            prompt:
+              sourceConfiguration:
+                inline:
+                  inferenceConfiguration:
+                    text:
+                      maxTokens: 2048
+                      temperature: 0
+                  modelId: amazon.nova-micro-v1:0
+                  templateConfiguration:
+                    text:
+                      inputVariable:
+                        - name: topic
+                      text: Write a paragraph about {{topic}}.
+                  templateType: TEXT
+          input:
+            - expression: $.data
+              name: topic
+              type: String
+          name: Prompt_1
+          output:
+            - name: modelCompletion
+              type: String
+          type: Prompt
+        - configuration:
+            output: {}
+          input:
+            - expression: $.data
+              name: document
+              type: String
+          name: FlowOutputNode
+          type: Output
+    description: Example flow
+    executionRoleArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: flow
+    name: example-flow
+    region: us-east-1
+
+---
+
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrockagent/v1beta1/flow
+  labels:
+    testing.upbound.io/example-name: flow
+  name: example-bedrockagent-flow
+  namespace: upbound-system
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {
+              "Service": "bedrock.amazonaws.com"
+            },
+            "Action": "sts:AssumeRole"
+          }
+        ]
+      }
+
+---
+
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: RolePolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrockagent/v1beta1/flow
+  labels:
+    testing.upbound.io/example-name: flow
+  name: example-bedrockagent-flow
+  namespace: upbound-system
+spec:
+  forProvider:
+    policy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Action": [
+              "bedrock:InvokeModel"
+            ],
+            "Resource": "*"
+          }
+        ]
+      }
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: flow
