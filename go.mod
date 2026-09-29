@@ -46,6 +46,8 @@ require (
 	sigs.k8s.io/randfill v1.0.0
 )
 
+replace github.com/crossplane/upjet/v2 => github.com/sergenyalcin/upjet/v2 v2.0.0-20260930203643-f495d4a8c7fb
+
 require (
 	cloud.google.com/go v0.123.0 // indirect
 	github.com/ProtonMail/go-crypto v1.4.1 // indirect
