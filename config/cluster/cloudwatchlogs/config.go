@@ -74,6 +74,10 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 
 	p.AddResourceConfigurator("aws_cloudwatch_log_delivery", func(r *config.Resource) {
 		r.AddSingletonListConversion("s3_delivery_configuration", "s3DeliveryConfiguration")
+		// AWS returns an empty S3 config for non-S3 destinations and rejects it on update.
+		r.LateInitializer = config.LateInitializer{
+			IgnoredFields: []string{"s3_delivery_configuration"},
+		}
 		r.References["delivery_source_name"] = config.Reference{
 			TerraformName: "aws_cloudwatch_log_delivery_source",
 		}
