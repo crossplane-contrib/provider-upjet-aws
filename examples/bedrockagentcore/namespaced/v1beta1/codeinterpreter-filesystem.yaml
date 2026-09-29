@@ -1,0 +1,345 @@
+# SPDX-FileCopyrightText: 2026 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+# Code Interpreter with an S3 Files Mount
+# Mounts an S3 Files access point into every code interpreter session at
+# /mnt/s3data. AWS requires VPC network mode for a filesystem mount, a mount
+# target in the Availability Zone the session runs in, and TCP 2049 between
+# the code interpreter and the mount target.
+#
+# The VPC, subnet and security group are expected to already exist and are
+# referenced by ID. AgentCore attaches an AWS-managed ENI (interface type
+# agentic_ai) to the subnet and security group, and AWS releases that ENI only
+# some time after the code interpreter is deleted, which blocks deletion of the
+# network resources. Keeping them outside the example avoids that teardown race.
+
+apiVersion: bedrockagentcore.aws.m.upbound.io/v1beta1
+kind: CodeInterpreter
+metadata:
+  annotations:
+    uptest.upbound.io/timeout: "3600"
+    meta.upbound.io/example-id: bedrockagentcore/v1beta1/codeinterpreter-filesystem
+  labels:
+    testing.upbound.io/example-name: codeinterpreter-filesystem
+  name: codeinterpreter-filesystem
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-2
+    name: xp_example_code_interpreter_filesystem
+    description: Code interpreter with an S3 Files mount
+    executionRoleArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: codeinterpreter-filesystem
+    networkConfiguration:
+      networkMode: VPC
+      vpcConfig:
+        securityGroups:
+          - sg-09a218a0b29285081
+        subnets:
+          - subnet-066e4ebba9b5bc070
+    filesystemConfiguration:
+      - s3FilesConfiguration:
+          accessPointArnSelector:
+            matchLabels:
+              testing.upbound.io/example-name: codeinterpreter-filesystem
+          fileSystemArnSelector:
+            matchLabels:
+              testing.upbound.io/example-name: codeinterpreter-filesystem
+          mountPath: /mnt/s3data
+
+---
+
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrockagentcore/v1beta1/codeinterpreter-filesystem
+  labels:
+    testing.upbound.io/example-name: codeinterpreter-filesystem
+  name: codeinterpreter-filesystem-exec
+  namespace: upbound-system
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {
+              "Service": "bedrock-agentcore.amazonaws.com"
+            },
+            "Action": "sts:AssumeRole"
+          }
+        ]
+      }
+
+---
+
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: RolePolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrockagentcore/v1beta1/codeinterpreter-filesystem
+  labels:
+    testing.upbound.io/example-name: codeinterpreter-filesystem
+  name: codeinterpreter-filesystem-exec-policy
+  namespace: upbound-system
+spec:
+  forProvider:
+    policy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Sid": "MountS3Files",
+            "Effect": "Allow",
+            "Action": [
+              "s3files:ClientMount",
+              "s3files:ClientWrite",
+              "s3files:GetAccessPoint",
+              "s3files:ListMountTargets"
+            ],
+            "Resource": "*"
+          }
+        ]
+      }
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: codeinterpreter-filesystem
+
+---
+
+apiVersion: s3files.aws.m.upbound.io/v1beta1
+kind: AccessPoint
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrockagentcore/v1beta1/codeinterpreter-filesystem
+  labels:
+    testing.upbound.io/example-name: codeinterpreter-filesystem
+  name: codeinterpreter-filesystem
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-2
+    fileSystemIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: codeinterpreter-filesystem
+    posixUser:
+      gid: 1000
+      uid: 1000
+    rootDirectory:
+      path: /data
+      creationPermissions:
+        ownerGid: 1000
+        ownerUid: 1000
+        permissions: "755"
+
+---
+
+apiVersion: s3files.aws.m.upbound.io/v1beta1
+kind: FileSystem
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrockagentcore/v1beta1/codeinterpreter-filesystem
+  labels:
+    testing.upbound.io/example-name: codeinterpreter-filesystem
+  name: codeinterpreter-filesystem
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-2
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: codeinterpreter-filesystem
+    roleArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: codeinterpreter-filesystem-s3files
+
+---
+
+apiVersion: s3files.aws.m.upbound.io/v1beta1
+kind: MountTarget
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrockagentcore/v1beta1/codeinterpreter-filesystem
+  labels:
+    testing.upbound.io/example-name: codeinterpreter-filesystem
+  name: codeinterpreter-filesystem
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-2
+    fileSystemIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: codeinterpreter-filesystem
+    subnetId: subnet-066e4ebba9b5bc070
+    securityGroups:
+      - sg-09a218a0b29285081
+
+---
+
+apiVersion: s3.aws.m.upbound.io/v1beta1
+kind: Bucket
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrockagentcore/v1beta1/codeinterpreter-filesystem
+  labels:
+    testing.upbound.io/example-name: codeinterpreter-filesystem
+  name: ${Rand.RFC1123Subdomain}
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-2
+
+---
+
+apiVersion: s3.aws.m.upbound.io/v1beta1
+kind: BucketVersioning
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrockagentcore/v1beta1/codeinterpreter-filesystem
+  labels:
+    testing.upbound.io/example-name: codeinterpreter-filesystem-versioning
+  name: codeinterpreter-filesystem-versioning
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-2
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: codeinterpreter-filesystem
+    versioningConfiguration:
+      status: Enabled
+
+---
+
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrockagentcore/v1beta1/codeinterpreter-filesystem
+  labels:
+    testing.upbound.io/example-name: codeinterpreter-filesystem-s3files
+  name: codeinterpreter-filesystem-s3files
+  namespace: upbound-system
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Sid": "AllowS3FilesAssumeRole",
+            "Effect": "Allow",
+            "Principal": {
+              "Service": "elasticfilesystem.amazonaws.com"
+            },
+            "Action": "sts:AssumeRole"
+          }
+        ]
+      }
+
+---
+
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: RolePolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrockagentcore/v1beta1/codeinterpreter-filesystem
+  labels:
+    testing.upbound.io/example-name: codeinterpreter-filesystem-s3files
+  name: codeinterpreter-filesystem-s3files-policy
+  namespace: upbound-system
+spec:
+  forProvider:
+    policy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Sid": "S3BucketPermissions",
+            "Effect": "Allow",
+            "Action": [
+              "s3:ListBucket",
+              "s3:ListBucketVersions"
+            ],
+            "Resource": "*"
+          },
+          {
+            "Sid": "S3ObjectPermissions",
+            "Effect": "Allow",
+            "Action": [
+              "s3:AbortMultipartUpload",
+              "s3:DeleteObject*",
+              "s3:GetObject*",
+              "s3:List*",
+              "s3:PutObject*"
+            ],
+            "Resource": "*"
+          },
+          {
+            "Sid": "EventBridgeManage",
+            "Effect": "Allow",
+            "Action": [
+              "events:DeleteRule",
+              "events:DisableRule",
+              "events:EnableRule",
+              "events:PutRule",
+              "events:PutTargets",
+              "events:RemoveTargets"
+            ],
+            "Resource": [
+              "arn:aws:events:*:*:rule/DO-NOT-DELETE-S3-Files*"
+            ],
+            "Condition": {
+              "StringEquals": {
+                "events:ManagedBy": "elasticfilesystem.amazonaws.com"
+              }
+            }
+          },
+          {
+            "Sid": "EventBridgeRead",
+            "Effect": "Allow",
+            "Action": [
+              "events:DescribeRule",
+              "events:ListRuleNamesByTarget",
+              "events:ListRules",
+              "events:ListTargetsByRule"
+            ],
+            "Resource": [
+              "arn:aws:events:*:*:rule/*"
+            ]
+          }
+        ]
+      }
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: codeinterpreter-filesystem-s3files
+
+---
+
+# The code interpreter and the mount target share this security group, so the
+# NFS rule is self-referencing.
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: SecurityGroupRule
+metadata:
+  annotations:
+    uptest.upbound.io/disable-import: "true"
+    meta.upbound.io/example-id: bedrockagentcore/v1beta1/codeinterpreter-filesystem
+  labels:
+    testing.upbound.io/example-name: codeinterpreter-filesystem-nfs
+  name: codeinterpreter-filesystem-nfs
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-2
+    type: ingress
+    protocol: tcp
+    fromPort: 2049
+    toPort: 2049
+    self: true
+    securityGroupId: sg-09a218a0b29285081
+

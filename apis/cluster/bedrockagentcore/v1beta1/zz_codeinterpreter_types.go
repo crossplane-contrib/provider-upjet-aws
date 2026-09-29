@@ -51,6 +51,27 @@ type CodeInterpreterCertificateParameters struct {
 	Location *CertificateLocationParameters `json:"location,omitempty" tf:"location,omitempty"`
 }
 
+type CodeInterpreterFilesystemConfigurationInitParameters struct {
+	EFSConfiguration *EFSConfigurationInitParameters `json:"efsConfiguration,omitempty" tf:"efs_configuration,omitempty"`
+
+	S3FilesConfiguration *S3FilesConfigurationInitParameters `json:"s3FilesConfiguration,omitempty" tf:"s3_files_configuration,omitempty"`
+}
+
+type CodeInterpreterFilesystemConfigurationObservation struct {
+	EFSConfiguration *EFSConfigurationObservation `json:"efsConfiguration,omitempty" tf:"efs_configuration,omitempty"`
+
+	S3FilesConfiguration *S3FilesConfigurationObservation `json:"s3FilesConfiguration,omitempty" tf:"s3_files_configuration,omitempty"`
+}
+
+type CodeInterpreterFilesystemConfigurationParameters struct {
+
+	// +kubebuilder:validation:Optional
+	EFSConfiguration *EFSConfigurationParameters `json:"efsConfiguration,omitempty" tf:"efs_configuration,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	S3FilesConfiguration *S3FilesConfigurationParameters `json:"s3FilesConfiguration,omitempty" tf:"s3_files_configuration,omitempty"`
+}
+
 type CodeInterpreterInitParameters struct {
 
 	// Certificates to install in the code interpreter. Between 1 and 200 blocks are supported. See certificate below.
@@ -71,6 +92,8 @@ type CodeInterpreterInitParameters struct {
 	// Selector for a Role in iam to populate executionRoleArn.
 	// +kubebuilder:validation:Optional
 	ExecutionRoleArnSelector *v2.Selector `json:"executionRoleArnSelector,omitempty" tf:"-"`
+
+	FilesystemConfiguration []CodeInterpreterFilesystemConfigurationInitParameters `json:"filesystemConfiguration,omitempty" tf:"filesystem_configuration,omitempty"`
 
 	// Name of the code interpreter.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -129,6 +152,8 @@ type CodeInterpreterObservation struct {
 	// ARN of the IAM role that the code interpreter assumes for execution. Required when using SANDBOX network mode.
 	ExecutionRoleArn *string `json:"executionRoleArn,omitempty" tf:"execution_role_arn,omitempty"`
 
+	FilesystemConfiguration []CodeInterpreterFilesystemConfigurationObservation `json:"filesystemConfiguration,omitempty" tf:"filesystem_configuration,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Name of the code interpreter.
@@ -174,6 +199,9 @@ type CodeInterpreterParameters struct {
 	// +kubebuilder:validation:Optional
 	ExecutionRoleArnSelector *v2.Selector `json:"executionRoleArnSelector,omitempty" tf:"-"`
 
+	// +kubebuilder:validation:Optional
+	FilesystemConfiguration []CodeInterpreterFilesystemConfigurationParameters `json:"filesystemConfiguration,omitempty" tf:"filesystem_configuration,omitempty"`
+
 	// Name of the code interpreter.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -191,6 +219,75 @@ type CodeInterpreterParameters struct {
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type EFSConfigurationInitParameters struct {
+
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/efs/v1beta2.AccessPoint
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
+	AccessPointArn *string `json:"accessPointArn,omitempty" tf:"access_point_arn,omitempty"`
+
+	// Reference to a AccessPoint in efs to populate accessPointArn.
+	// +kubebuilder:validation:Optional
+	AccessPointArnRef *v2.Reference `json:"accessPointArnRef,omitempty" tf:"-"`
+
+	// Selector for a AccessPoint in efs to populate accessPointArn.
+	// +kubebuilder:validation:Optional
+	AccessPointArnSelector *v2.Selector `json:"accessPointArnSelector,omitempty" tf:"-"`
+
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/efs/v1beta2.FileSystem
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
+	FileSystemArn *string `json:"fileSystemArn,omitempty" tf:"file_system_arn,omitempty"`
+
+	// Reference to a FileSystem in efs to populate fileSystemArn.
+	// +kubebuilder:validation:Optional
+	FileSystemArnRef *v2.Reference `json:"fileSystemArnRef,omitempty" tf:"-"`
+
+	// Selector for a FileSystem in efs to populate fileSystemArn.
+	// +kubebuilder:validation:Optional
+	FileSystemArnSelector *v2.Selector `json:"fileSystemArnSelector,omitempty" tf:"-"`
+
+	MountPath *string `json:"mountPath,omitempty" tf:"mount_path,omitempty"`
+}
+
+type EFSConfigurationObservation struct {
+	AccessPointArn *string `json:"accessPointArn,omitempty" tf:"access_point_arn,omitempty"`
+
+	FileSystemArn *string `json:"fileSystemArn,omitempty" tf:"file_system_arn,omitempty"`
+
+	MountPath *string `json:"mountPath,omitempty" tf:"mount_path,omitempty"`
+}
+
+type EFSConfigurationParameters struct {
+
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/efs/v1beta2.AccessPoint
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
+	// +kubebuilder:validation:Optional
+	AccessPointArn *string `json:"accessPointArn,omitempty" tf:"access_point_arn,omitempty"`
+
+	// Reference to a AccessPoint in efs to populate accessPointArn.
+	// +kubebuilder:validation:Optional
+	AccessPointArnRef *v2.Reference `json:"accessPointArnRef,omitempty" tf:"-"`
+
+	// Selector for a AccessPoint in efs to populate accessPointArn.
+	// +kubebuilder:validation:Optional
+	AccessPointArnSelector *v2.Selector `json:"accessPointArnSelector,omitempty" tf:"-"`
+
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/efs/v1beta2.FileSystem
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
+	// +kubebuilder:validation:Optional
+	FileSystemArn *string `json:"fileSystemArn,omitempty" tf:"file_system_arn,omitempty"`
+
+	// Reference to a FileSystem in efs to populate fileSystemArn.
+	// +kubebuilder:validation:Optional
+	FileSystemArnRef *v2.Reference `json:"fileSystemArnRef,omitempty" tf:"-"`
+
+	// Selector for a FileSystem in efs to populate fileSystemArn.
+	// +kubebuilder:validation:Optional
+	FileSystemArnSelector *v2.Selector `json:"fileSystemArnSelector,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	MountPath *string `json:"mountPath" tf:"mount_path,omitempty"`
 }
 
 type LocationSecretsManagerInitParameters struct {
@@ -235,12 +332,30 @@ type LocationSecretsManagerParameters struct {
 type NetworkConfigurationVPCConfigInitParameters struct {
 
 	// Security groups associated with the VPC configuration.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.SecurityGroup
 	// +listType=set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
+	// References to SecurityGroup in ec2 to populate securityGroups.
+	// +kubebuilder:validation:Optional
+	SecurityGroupsRefs []v2.Reference `json:"securityGroupsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of SecurityGroup in ec2 to populate securityGroups.
+	// +kubebuilder:validation:Optional
+	SecurityGroupsSelector *v2.Selector `json:"securityGroupsSelector,omitempty" tf:"-"`
+
 	// Subnets associated with the VPC configuration.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Subnet
 	// +listType=set
 	Subnets []*string `json:"subnets,omitempty" tf:"subnets,omitempty"`
+
+	// References to Subnet in ec2 to populate subnets.
+	// +kubebuilder:validation:Optional
+	SubnetsRefs []v2.Reference `json:"subnetsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Subnet in ec2 to populate subnets.
+	// +kubebuilder:validation:Optional
+	SubnetsSelector *v2.Selector `json:"subnetsSelector,omitempty" tf:"-"`
 }
 
 type NetworkConfigurationVPCConfigObservation struct {
@@ -257,14 +372,101 @@ type NetworkConfigurationVPCConfigObservation struct {
 type NetworkConfigurationVPCConfigParameters struct {
 
 	// Security groups associated with the VPC configuration.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.SecurityGroup
 	// +kubebuilder:validation:Optional
 	// +listType=set
-	SecurityGroups []*string `json:"securityGroups" tf:"security_groups,omitempty"`
+	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
+
+	// References to SecurityGroup in ec2 to populate securityGroups.
+	// +kubebuilder:validation:Optional
+	SecurityGroupsRefs []v2.Reference `json:"securityGroupsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of SecurityGroup in ec2 to populate securityGroups.
+	// +kubebuilder:validation:Optional
+	SecurityGroupsSelector *v2.Selector `json:"securityGroupsSelector,omitempty" tf:"-"`
 
 	// Subnets associated with the VPC configuration.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Subnet
 	// +kubebuilder:validation:Optional
 	// +listType=set
-	Subnets []*string `json:"subnets" tf:"subnets,omitempty"`
+	Subnets []*string `json:"subnets,omitempty" tf:"subnets,omitempty"`
+
+	// References to Subnet in ec2 to populate subnets.
+	// +kubebuilder:validation:Optional
+	SubnetsRefs []v2.Reference `json:"subnetsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Subnet in ec2 to populate subnets.
+	// +kubebuilder:validation:Optional
+	SubnetsSelector *v2.Selector `json:"subnetsSelector,omitempty" tf:"-"`
+}
+
+type S3FilesConfigurationInitParameters struct {
+
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3files/v1beta1.AccessPoint
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
+	AccessPointArn *string `json:"accessPointArn,omitempty" tf:"access_point_arn,omitempty"`
+
+	// Reference to a AccessPoint in s3files to populate accessPointArn.
+	// +kubebuilder:validation:Optional
+	AccessPointArnRef *v2.Reference `json:"accessPointArnRef,omitempty" tf:"-"`
+
+	// Selector for a AccessPoint in s3files to populate accessPointArn.
+	// +kubebuilder:validation:Optional
+	AccessPointArnSelector *v2.Selector `json:"accessPointArnSelector,omitempty" tf:"-"`
+
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3files/v1beta1.FileSystem
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
+	FileSystemArn *string `json:"fileSystemArn,omitempty" tf:"file_system_arn,omitempty"`
+
+	// Reference to a FileSystem in s3files to populate fileSystemArn.
+	// +kubebuilder:validation:Optional
+	FileSystemArnRef *v2.Reference `json:"fileSystemArnRef,omitempty" tf:"-"`
+
+	// Selector for a FileSystem in s3files to populate fileSystemArn.
+	// +kubebuilder:validation:Optional
+	FileSystemArnSelector *v2.Selector `json:"fileSystemArnSelector,omitempty" tf:"-"`
+
+	MountPath *string `json:"mountPath,omitempty" tf:"mount_path,omitempty"`
+}
+
+type S3FilesConfigurationObservation struct {
+	AccessPointArn *string `json:"accessPointArn,omitempty" tf:"access_point_arn,omitempty"`
+
+	FileSystemArn *string `json:"fileSystemArn,omitempty" tf:"file_system_arn,omitempty"`
+
+	MountPath *string `json:"mountPath,omitempty" tf:"mount_path,omitempty"`
+}
+
+type S3FilesConfigurationParameters struct {
+
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3files/v1beta1.AccessPoint
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
+	// +kubebuilder:validation:Optional
+	AccessPointArn *string `json:"accessPointArn,omitempty" tf:"access_point_arn,omitempty"`
+
+	// Reference to a AccessPoint in s3files to populate accessPointArn.
+	// +kubebuilder:validation:Optional
+	AccessPointArnRef *v2.Reference `json:"accessPointArnRef,omitempty" tf:"-"`
+
+	// Selector for a AccessPoint in s3files to populate accessPointArn.
+	// +kubebuilder:validation:Optional
+	AccessPointArnSelector *v2.Selector `json:"accessPointArnSelector,omitempty" tf:"-"`
+
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3files/v1beta1.FileSystem
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
+	// +kubebuilder:validation:Optional
+	FileSystemArn *string `json:"fileSystemArn,omitempty" tf:"file_system_arn,omitempty"`
+
+	// Reference to a FileSystem in s3files to populate fileSystemArn.
+	// +kubebuilder:validation:Optional
+	FileSystemArnRef *v2.Reference `json:"fileSystemArnRef,omitempty" tf:"-"`
+
+	// Selector for a FileSystem in s3files to populate fileSystemArn.
+	// +kubebuilder:validation:Optional
+	FileSystemArnSelector *v2.Selector `json:"fileSystemArnSelector,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	MountPath *string `json:"mountPath" tf:"mount_path,omitempty"`
 }
 
 // CodeInterpreterSpec defines the desired state of CodeInterpreter
