@@ -1,0 +1,124 @@
+# SPDX-FileCopyrightText: 2026 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+# Model Invocation Job Example
+# Runs a batch inference job over the records stored in an S3 bucket.
+# The input records have to be uploaded to the bucket before the job starts.
+
+apiVersion: bedrock.aws.upbound.io/v1beta1
+kind: ModelInvocationJob
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrock/v1beta1/modelinvocationjob
+    upjet.upbound.io/manual-intervention: >
+      A batch inference job needs at least 100 records in the S3 bucket at
+      input/ and its model invocations are billed.
+  labels:
+    testing.upbound.io/example-name: modelinvocationjob
+  name: modelinvocationjob
+spec:
+  forProvider:
+    inputDataConfig:
+      s3InputDataConfig:
+        s3Uri: s3://upbound-example-bedrock-modelinvocationjob/input/
+    jobName: example-model-invocation-job
+    modelId: amazon.nova-micro-v1:0
+    outputDataConfig:
+      s3OutputDataConfig:
+        s3Uri: s3://upbound-example-bedrock-modelinvocationjob/output/
+    region: us-east-1
+    roleArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: modelinvocationjob
+
+---
+
+apiVersion: s3.aws.upbound.io/v1beta2
+kind: Bucket
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrock/v1beta1/modelinvocationjob
+    upjet.upbound.io/manual-intervention: >
+      A batch inference job needs at least 100 records in the S3 bucket at
+      input/ and its model invocations are billed.
+  labels:
+    testing.upbound.io/example-name: modelinvocationjob
+  name: upbound-example-bedrock-modelinvocationjob
+spec:
+  forProvider:
+    forceDestroy: true
+    region: us-east-1
+
+---
+
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrock/v1beta1/modelinvocationjob
+    upjet.upbound.io/manual-intervention: >
+      A batch inference job needs at least 100 records in the S3 bucket at
+      input/ and its model invocations are billed.
+  labels:
+    testing.upbound.io/example-name: modelinvocationjob
+  name: example-bedrock-modelinvocationjob
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {
+              "Service": "bedrock.amazonaws.com"
+            },
+            "Action": "sts:AssumeRole"
+          }
+        ]
+      }
+
+---
+
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: RolePolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrock/v1beta1/modelinvocationjob
+    upjet.upbound.io/manual-intervention: >
+      A batch inference job needs at least 100 records in the S3 bucket at
+      input/ and its model invocations are billed.
+  labels:
+    testing.upbound.io/example-name: modelinvocationjob
+  name: example-bedrock-modelinvocationjob
+spec:
+  forProvider:
+    policy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Action": [
+              "bedrock:InvokeModel"
+            ],
+            "Resource": "*"
+          },
+          {
+            "Effect": "Allow",
+            "Action": [
+              "s3:GetObject",
+              "s3:PutObject",
+              "s3:ListBucket"
+            ],
+            "Resource": [
+              "arn:aws:s3:::upbound-example-bedrock-modelinvocationjob",
+              "arn:aws:s3:::upbound-example-bedrock-modelinvocationjob/*"
+            ]
+          }
+        ]
+      }
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: modelinvocationjob

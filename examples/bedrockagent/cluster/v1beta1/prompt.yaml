@@ -1,0 +1,34 @@
+# SPDX-FileCopyrightText: 2026 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+# Prompt Example
+# Creates a Bedrock prompt with a single text variant.
+
+apiVersion: bedrockagent.aws.upbound.io/v1beta1
+kind: Prompt
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrockagent/v1beta1/prompt
+  labels:
+    testing.upbound.io/example-name: prompt
+  name: prompt
+spec:
+  forProvider:
+    defaultVariant: Variant1
+    description: Example prompt
+    name: example-prompt
+    region: us-east-1
+    variant:
+      - inferenceConfiguration:
+          text:
+            temperature: 0.8
+        modelId: amazon.nova-micro-v1:0
+        name: Variant1
+        templateConfiguration:
+          text:
+            inputVariable:
+              - name: genre
+              - name: number
+            text: "Make me a {{genre}} playlist consisting of the following number of songs: {{number}}."
+        templateType: TEXT
