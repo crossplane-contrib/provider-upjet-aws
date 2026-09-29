@@ -1,0 +1,54 @@
+# SPDX-FileCopyrightText: 2026 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: cloudfront.aws.upbound.io/v1beta1
+kind: KeyValueStore
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cloudfront/v1beta1/keyvaluestore
+  labels:
+    testing.upbound.io/example-name: example-kvs
+  name: example-kvs
+spec:
+  forProvider:
+    comment: Example key value store
+---
+apiVersion: cloudfront.aws.upbound.io/v1beta1
+kind: Function
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cloudfront/v1beta1/keyvaluestore
+  labels:
+    testing.upbound.io/example-name: example-kvs-function
+  name: example-kvs-function
+spec:
+  forProvider:
+    codeSecretRef:
+      name: kvs-function-code
+      key: code
+      namespace: upbound-system
+    comment: Reads the associated key value store
+    keyValueStoreAssociationsSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-kvs
+    publish: true
+    runtime: cloudfront-js-2.0
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cloudfront/v1beta1/keyvaluestore
+  name: kvs-function-code
+  namespace: upbound-system
+type: Opaque
+stringData:
+  code: |
+    import cf from 'cloudfront';
+    const kvs = cf.kvs();
+    async function handler(event) {
+      const path = await kvs.get(event.request.uri).catch(() => null);
+      if (path) event.request.uri = path;
+      return event.request;
+    }

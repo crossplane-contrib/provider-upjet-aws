@@ -179,6 +179,7 @@ import (
 	fieldlevelencryptionprofile "github.com/upbound/provider-aws/v2/internal/controller/cluster/cloudfront/fieldlevelencryptionprofile"
 	functioncloudfront "github.com/upbound/provider-aws/v2/internal/controller/cluster/cloudfront/function"
 	keygroup "github.com/upbound/provider-aws/v2/internal/controller/cluster/cloudfront/keygroup"
+	keyvaluestore "github.com/upbound/provider-aws/v2/internal/controller/cluster/cloudfront/keyvaluestore"
 	monitoringsubscription "github.com/upbound/provider-aws/v2/internal/controller/cluster/cloudfront/monitoringsubscription"
 	originaccesscontrol "github.com/upbound/provider-aws/v2/internal/controller/cluster/cloudfront/originaccesscontrol"
 	originaccessidentity "github.com/upbound/provider-aws/v2/internal/controller/cluster/cloudfront/originaccessidentity"
@@ -1226,6 +1227,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		fieldlevelencryptionprofile.Setup,
 		functioncloudfront.Setup,
 		keygroup.Setup,
+		keyvaluestore.Setup,
 		monitoringsubscription.Setup,
 		originaccesscontrol.Setup,
 		originaccessidentity.Setup,
@@ -2279,6 +2281,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		fieldlevelencryptionprofile.SetupGated,
 		functioncloudfront.SetupGated,
 		keygroup.SetupGated,
+		keyvaluestore.SetupGated,
 		monitoringsubscription.SetupGated,
 		originaccesscontrol.SetupGated,
 		originaccessidentity.SetupGated,
@@ -3331,6 +3334,7 @@ func SetupWebhookWithManager_monolith(mgr ctrl.Manager) error {
 		fieldlevelencryptionprofile.SetupWebhookWithManager,
 		functioncloudfront.SetupWebhookWithManager,
 		keygroup.SetupWebhookWithManager,
+		keyvaluestore.SetupWebhookWithManager,
 		monitoringsubscription.SetupWebhookWithManager,
 		originaccesscontrol.SetupWebhookWithManager,
 		originaccessidentity.SetupWebhookWithManager,
