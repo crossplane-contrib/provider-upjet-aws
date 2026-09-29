@@ -5,12 +5,21 @@
 # Agent Knowledge Base Association Example
 # Associates a knowledge base backed by an Amazon S3 Vectors index with the
 # DRAFT version of a Bedrock agent.
+# Bedrock Agents Classic only creates agents in accounts with prior service
+# usage, so the Agent and the association are marked for manual testing.
 
 apiVersion: bedrockagent.aws.upbound.io/v1beta1
 kind: AgentKnowledgeBaseAssociation
 metadata:
   annotations:
     meta.upbound.io/example-id: bedrockagent/v1beta1/agentknowledgebaseassociation
+    upjet.upbound.io/manual-intervention: >
+      creating Bedrock Agent: operation error Bedrock Agent: CreateAgent,
+      https response error StatusCode: 403, RequestID: uuid,
+      AccessDeniedException: Bedrock Agents is in Maintenance Mode. New agent
+      creation is not available for accounts without prior service usage. To
+      learn more visit
+      https://docs.aws.amazon.com/bedrock/latest/userguide/agents-classic-maintenance-mode.html.
   labels:
     testing.upbound.io/example-name: agentknowledgebaseassociation
   name: agentknowledgebaseassociation
@@ -33,6 +42,13 @@ kind: Agent
 metadata:
   annotations:
     meta.upbound.io/example-id: bedrockagent/v1beta1/agentknowledgebaseassociation
+    upjet.upbound.io/manual-intervention: >
+      creating Bedrock Agent: operation error Bedrock Agent: CreateAgent,
+      https response error StatusCode: 403, RequestID: uuid,
+      AccessDeniedException: Bedrock Agents is in Maintenance Mode. New agent
+      creation is not available for accounts without prior service usage. To
+      learn more visit
+      https://docs.aws.amazon.com/bedrock/latest/userguide/agents-classic-maintenance-mode.html.
   labels:
     testing.upbound.io/example-name: agentknowledgebaseassociation
   name: agentknowledgebaseassociation
