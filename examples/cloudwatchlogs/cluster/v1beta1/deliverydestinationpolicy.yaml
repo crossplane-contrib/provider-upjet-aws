@@ -1,0 +1,67 @@
+# SPDX-FileCopyrightText: 2026 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: cloudwatchlogs.aws.upbound.io/v1beta1
+kind: DeliveryDestinationPolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cloudwatchlogs/v1beta1/deliverydestinationpolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    region: us-east-1
+    deliveryDestinationNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    deliveryDestinationPolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Sid": "AllowCreateDelivery",
+            "Effect": "Allow",
+            "Principal": {
+              "AWS": "arn:aws:iam::${data.aws_account_id}:root"
+            },
+            "Action": "logs:CreateDelivery",
+            "Resource": "arn:aws:logs:us-east-1:${data.aws_account_id}:delivery-destination:example-policy-delivery-destination"
+          }
+        ]
+      }
+
+---
+
+apiVersion: cloudwatchlogs.aws.upbound.io/v1beta1
+kind: DeliveryDestination
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cloudwatchlogs/v1beta1/deliverydestinationpolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-deliverydestinationpolicy
+spec:
+  forProvider:
+    region: us-east-1
+    name: example-policy-delivery-destination
+    deliveryDestinationConfiguration:
+      destinationResourceArnSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+
+---
+
+apiVersion: cloudwatchlogs.aws.upbound.io/v1beta1
+kind: Group
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cloudwatchlogs/v1beta1/deliverydestinationpolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-deliverydestinationpolicy
+spec:
+  forProvider:
+    region: us-east-1
+    retentionInDays: 1

@@ -1,0 +1,63 @@
+# SPDX-FileCopyrightText: 2026 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: cloudwatchlogs.aws.upbound.io/v1beta1
+kind: DeliverySource
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cloudwatchlogs/v1beta1/deliverysource
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    # CloudFront delivery sources must be created in us-east-1.
+    region: us-east-1
+    name: example-cloudfront-access-logs
+    logType: ACCESS_LOGS
+    resourceArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: cloudfront.aws.upbound.io/v1beta2
+kind: Distribution
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cloudwatchlogs/v1beta1/deliverysource
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-deliverysource
+spec:
+  forProvider:
+    comment: CloudWatch Logs delivery source example
+    enabled: true
+    defaultCacheBehavior:
+      allowedMethods:
+        - GET
+        - HEAD
+      cachedMethods:
+        - GET
+        - HEAD
+      forwardedValues:
+        cookies:
+          forward: none
+        queryString: false
+      targetOriginId: customOrigin
+      viewerProtocolPolicy: redirect-to-https
+    origin:
+      - customOriginConfig:
+          httpPort: 80
+          httpsPort: 443
+          originProtocolPolicy: https-only
+          originSslProtocols:
+            - TLSv1.2
+        domainName: example.com
+        originId: customOrigin
+    restrictions:
+      geoRestriction:
+        restrictionType: none
+    viewerCertificate:
+      cloudfrontDefaultCertificate: true
