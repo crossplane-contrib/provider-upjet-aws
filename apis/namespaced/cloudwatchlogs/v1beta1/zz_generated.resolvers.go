@@ -11,14 +11,267 @@ import (
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
 	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	errors "github.com/pkg/errors"
-	common "github.com/upbound/provider-aws/v2/config/cluster/common"
-	common1 "github.com/upbound/provider-aws/v2/config/namespaced/common"
+	common1 "github.com/upbound/provider-aws/v2/config/cluster/common"
+	common "github.com/upbound/provider-aws/v2/config/namespaced/common"
 	apisresolver "github.com/upbound/provider-aws/v2/internal/apis"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
-func (mg *Destination) ResolveReferences( // ResolveReferences of this Destination.
+func (mg *Delivery) ResolveReferences( // ResolveReferences of this Delivery.
 	ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPINamespacedResolver(c, mg)
+
+	var rsp reference.NamespacedResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("cloudwatchlogs.aws.m.upbound.io", "v1beta1", "DeliveryDestination", "DeliveryDestinationList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DeliveryDestinationArn),
+			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.DeliveryDestinationArnRef,
+			Selector:     mg.Spec.ForProvider.DeliveryDestinationArnSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.DeliveryDestinationArn")
+	}
+	mg.Spec.ForProvider.DeliveryDestinationArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DeliveryDestinationArnRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("cloudwatchlogs.aws.m.upbound.io", "v1beta1", "DeliverySource", "DeliverySourceList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DeliverySourceName),
+			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.DeliverySourceNameRef,
+			Selector:     mg.Spec.ForProvider.DeliverySourceNameSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.DeliverySourceName")
+	}
+	mg.Spec.ForProvider.DeliverySourceName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DeliverySourceNameRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("cloudwatchlogs.aws.m.upbound.io", "v1beta1", "DeliveryDestination", "DeliveryDestinationList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DeliveryDestinationArn),
+			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.DeliveryDestinationArnRef,
+			Selector:     mg.Spec.InitProvider.DeliveryDestinationArnSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.DeliveryDestinationArn")
+	}
+	mg.Spec.InitProvider.DeliveryDestinationArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.DeliveryDestinationArnRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("cloudwatchlogs.aws.m.upbound.io", "v1beta1", "DeliverySource", "DeliverySourceList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DeliverySourceName),
+			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.DeliverySourceNameRef,
+			Selector:     mg.Spec.InitProvider.DeliverySourceNameSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.DeliverySourceName")
+	}
+	mg.Spec.InitProvider.DeliverySourceName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.DeliverySourceNameRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this DeliveryDestination.
+func (mg *DeliveryDestination) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPINamespacedResolver(c, mg)
+
+	var rsp reference.NamespacedResolutionResponse
+	var err error
+
+	if mg.Spec.ForProvider.DeliveryDestinationConfiguration != nil {
+		{
+			m, l, err = apisresolver.GetManagedResource("cloudwatchlogs.aws.m.upbound.io", "v1beta1", "Group", "GroupList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DeliveryDestinationConfiguration.DestinationResourceArn),
+				Extract:      common.ARNExtractor(),
+				Namespace:    mg.GetNamespace(),
+				Reference:    mg.Spec.ForProvider.DeliveryDestinationConfiguration.DestinationResourceArnRef,
+				Selector:     mg.Spec.ForProvider.DeliveryDestinationConfiguration.DestinationResourceArnSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.DeliveryDestinationConfiguration.DestinationResourceArn")
+		}
+		mg.Spec.ForProvider.DeliveryDestinationConfiguration.DestinationResourceArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.DeliveryDestinationConfiguration.DestinationResourceArnRef = rsp.ResolvedReference
+
+	}
+	if mg.Spec.InitProvider.DeliveryDestinationConfiguration != nil {
+		{
+			m, l, err = apisresolver.GetManagedResource("cloudwatchlogs.aws.m.upbound.io", "v1beta1", "Group", "GroupList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DeliveryDestinationConfiguration.DestinationResourceArn),
+				Extract:      common.ARNExtractor(),
+				Namespace:    mg.GetNamespace(),
+				Reference:    mg.Spec.InitProvider.DeliveryDestinationConfiguration.DestinationResourceArnRef,
+				Selector:     mg.Spec.InitProvider.DeliveryDestinationConfiguration.DestinationResourceArnSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.DeliveryDestinationConfiguration.DestinationResourceArn")
+		}
+		mg.Spec.InitProvider.DeliveryDestinationConfiguration.DestinationResourceArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.DeliveryDestinationConfiguration.DestinationResourceArnRef = rsp.ResolvedReference
+
+	}
+
+	return nil
+}
+
+// ResolveReferences of this DeliveryDestinationPolicy.
+func (mg *DeliveryDestinationPolicy) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPINamespacedResolver(c, mg)
+
+	var rsp reference.NamespacedResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("cloudwatchlogs.aws.m.upbound.io", "v1beta1", "DeliveryDestination", "DeliveryDestinationList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DeliveryDestinationName),
+			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.DeliveryDestinationNameRef,
+			Selector:     mg.Spec.ForProvider.DeliveryDestinationNameSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.DeliveryDestinationName")
+	}
+	mg.Spec.ForProvider.DeliveryDestinationName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DeliveryDestinationNameRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("cloudwatchlogs.aws.m.upbound.io", "v1beta1", "DeliveryDestination", "DeliveryDestinationList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DeliveryDestinationName),
+			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.DeliveryDestinationNameRef,
+			Selector:     mg.Spec.InitProvider.DeliveryDestinationNameSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.DeliveryDestinationName")
+	}
+	mg.Spec.InitProvider.DeliveryDestinationName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.DeliveryDestinationNameRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this DeliverySource.
+func (mg *DeliverySource) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPINamespacedResolver(c, mg)
+
+	var rsp reference.NamespacedResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("cloudfront.aws.m.upbound.io", "v1beta1", "Distribution", "DistributionList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceArn),
+			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.ResourceArnRef,
+			Selector:     mg.Spec.ForProvider.ResourceArnSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceArn")
+	}
+	mg.Spec.ForProvider.ResourceArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceArnRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("cloudfront.aws.m.upbound.io", "v1beta1", "Distribution", "DistributionList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceArn),
+			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.ResourceArnRef,
+			Selector:     mg.Spec.InitProvider.ResourceArnSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ResourceArn")
+	}
+	mg.Spec.InitProvider.ResourceArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ResourceArnRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this Destination.
+func (mg *Destination) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed
 	var l xpresource.ManagedList
 	r := reference.NewAPINamespacedResolver(c, mg)
@@ -33,7 +286,7 @@ func (mg *Destination) ResolveReferences( // ResolveReferences of this Destinati
 
 		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RoleArn),
-			Extract:      common.ARNExtractor(),
+			Extract:      common1.ARNExtractor(),
 			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.RoleArnRef,
 			Selector:     mg.Spec.ForProvider.RoleArnSelector,
@@ -53,7 +306,7 @@ func (mg *Destination) ResolveReferences( // ResolveReferences of this Destinati
 
 		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TargetArn),
-			Extract:      common1.TerraformID(),
+			Extract:      common.TerraformID(),
 			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.TargetArnRef,
 			Selector:     mg.Spec.ForProvider.TargetArnSelector,
@@ -73,7 +326,7 @@ func (mg *Destination) ResolveReferences( // ResolveReferences of this Destinati
 
 		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RoleArn),
-			Extract:      common.ARNExtractor(),
+			Extract:      common1.ARNExtractor(),
 			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.RoleArnRef,
 			Selector:     mg.Spec.InitProvider.RoleArnSelector,
@@ -93,7 +346,7 @@ func (mg *Destination) ResolveReferences( // ResolveReferences of this Destinati
 
 		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TargetArn),
-			Extract:      common1.TerraformID(),
+			Extract:      common.TerraformID(),
 			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.TargetArnRef,
 			Selector:     mg.Spec.InitProvider.TargetArnSelector,
@@ -125,7 +378,7 @@ func (mg *Group) ResolveReferences(ctx context.Context, c client.Reader) error {
 
 		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KMSKeyID),
-			Extract:      common1.ARNExtractor(),
+			Extract:      common.ARNExtractor(),
 			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.KMSKeyIDRef,
 			Selector:     mg.Spec.ForProvider.KMSKeyIDSelector,
@@ -145,7 +398,7 @@ func (mg *Group) ResolveReferences(ctx context.Context, c client.Reader) error {
 
 		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KMSKeyID),
-			Extract:      common1.ARNExtractor(),
+			Extract:      common.ARNExtractor(),
 			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.KMSKeyIDRef,
 			Selector:     mg.Spec.InitProvider.KMSKeyIDSelector,
@@ -281,7 +534,7 @@ func (mg *SubscriptionFilter) ResolveReferences(ctx context.Context, c client.Re
 
 		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DestinationArn),
-			Extract:      common1.TerraformID(),
+			Extract:      common.TerraformID(),
 			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DestinationArnRef,
 			Selector:     mg.Spec.ForProvider.DestinationArnSelector,
@@ -301,7 +554,7 @@ func (mg *SubscriptionFilter) ResolveReferences(ctx context.Context, c client.Re
 
 		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RoleArn),
-			Extract:      common.ARNExtractor(),
+			Extract:      common1.ARNExtractor(),
 			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.RoleArnRef,
 			Selector:     mg.Spec.ForProvider.RoleArnSelector,
@@ -321,7 +574,7 @@ func (mg *SubscriptionFilter) ResolveReferences(ctx context.Context, c client.Re
 
 		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DestinationArn),
-			Extract:      common1.TerraformID(),
+			Extract:      common.TerraformID(),
 			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.DestinationArnRef,
 			Selector:     mg.Spec.InitProvider.DestinationArnSelector,
@@ -341,7 +594,7 @@ func (mg *SubscriptionFilter) ResolveReferences(ctx context.Context, c client.Re
 
 		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RoleArn),
-			Extract:      common.ARNExtractor(),
+			Extract:      common1.ARNExtractor(),
 			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.RoleArnRef,
 			Selector:     mg.Spec.InitProvider.RoleArnSelector,

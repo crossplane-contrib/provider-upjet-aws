@@ -206,6 +206,10 @@ import (
 	targetcloudwatchevents "github.com/upbound/provider-aws/v2/internal/controller/cluster/cloudwatchevents/target"
 	accountpolicy "github.com/upbound/provider-aws/v2/internal/controller/cluster/cloudwatchlogs/accountpolicy"
 	definition "github.com/upbound/provider-aws/v2/internal/controller/cluster/cloudwatchlogs/definition"
+	delivery "github.com/upbound/provider-aws/v2/internal/controller/cluster/cloudwatchlogs/delivery"
+	deliverydestination "github.com/upbound/provider-aws/v2/internal/controller/cluster/cloudwatchlogs/deliverydestination"
+	deliverydestinationpolicy "github.com/upbound/provider-aws/v2/internal/controller/cluster/cloudwatchlogs/deliverydestinationpolicy"
+	deliverysource "github.com/upbound/provider-aws/v2/internal/controller/cluster/cloudwatchlogs/deliverysource"
 	destination "github.com/upbound/provider-aws/v2/internal/controller/cluster/cloudwatchlogs/destination"
 	destinationpolicy "github.com/upbound/provider-aws/v2/internal/controller/cluster/cloudwatchlogs/destinationpolicy"
 	group "github.com/upbound/provider-aws/v2/internal/controller/cluster/cloudwatchlogs/group"
@@ -1254,6 +1258,10 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		targetcloudwatchevents.Setup,
 		accountpolicy.Setup,
 		definition.Setup,
+		delivery.Setup,
+		deliverydestination.Setup,
+		deliverydestinationpolicy.Setup,
+		deliverysource.Setup,
 		destination.Setup,
 		destinationpolicy.Setup,
 		group.Setup,
@@ -2308,6 +2316,10 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		targetcloudwatchevents.SetupGated,
 		accountpolicy.SetupGated,
 		definition.SetupGated,
+		delivery.SetupGated,
+		deliverydestination.SetupGated,
+		deliverydestinationpolicy.SetupGated,
+		deliverysource.SetupGated,
 		destination.SetupGated,
 		destinationpolicy.SetupGated,
 		group.SetupGated,
@@ -3361,6 +3373,10 @@ func SetupWebhookWithManager_monolith(mgr ctrl.Manager) error {
 		targetcloudwatchevents.SetupWebhookWithManager,
 		accountpolicy.SetupWebhookWithManager,
 		definition.SetupWebhookWithManager,
+		delivery.SetupWebhookWithManager,
+		deliverydestination.SetupWebhookWithManager,
+		deliverydestinationpolicy.SetupWebhookWithManager,
+		deliverysource.SetupWebhookWithManager,
 		destination.SetupWebhookWithManager,
 		destinationpolicy.SetupWebhookWithManager,
 		group.SetupWebhookWithManager,

@@ -13,6 +13,18 @@ func (tr *AccountPolicy) Hub() {}
 func (tr *Definition) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *Delivery) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *DeliveryDestination) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *DeliveryDestinationPolicy) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *DeliverySource) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *Destination) Hub() {}
 
 // Hub marks this type as a conversion hub.

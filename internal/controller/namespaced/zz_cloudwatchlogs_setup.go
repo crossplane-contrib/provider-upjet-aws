@@ -11,6 +11,10 @@ import (
 
 	accountpolicy "github.com/upbound/provider-aws/v2/internal/controller/namespaced/cloudwatchlogs/accountpolicy"
 	definition "github.com/upbound/provider-aws/v2/internal/controller/namespaced/cloudwatchlogs/definition"
+	delivery "github.com/upbound/provider-aws/v2/internal/controller/namespaced/cloudwatchlogs/delivery"
+	deliverydestination "github.com/upbound/provider-aws/v2/internal/controller/namespaced/cloudwatchlogs/deliverydestination"
+	deliverydestinationpolicy "github.com/upbound/provider-aws/v2/internal/controller/namespaced/cloudwatchlogs/deliverydestinationpolicy"
+	deliverysource "github.com/upbound/provider-aws/v2/internal/controller/namespaced/cloudwatchlogs/deliverysource"
 	destination "github.com/upbound/provider-aws/v2/internal/controller/namespaced/cloudwatchlogs/destination"
 	destinationpolicy "github.com/upbound/provider-aws/v2/internal/controller/namespaced/cloudwatchlogs/destinationpolicy"
 	group "github.com/upbound/provider-aws/v2/internal/controller/namespaced/cloudwatchlogs/group"
@@ -26,6 +30,10 @@ func Setup_cloudwatchlogs(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		accountpolicy.Setup,
 		definition.Setup,
+		delivery.Setup,
+		deliverydestination.Setup,
+		deliverydestinationpolicy.Setup,
+		deliverysource.Setup,
 		destination.Setup,
 		destinationpolicy.Setup,
 		group.Setup,
@@ -47,6 +55,10 @@ func SetupGated_cloudwatchlogs(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		accountpolicy.SetupGated,
 		definition.SetupGated,
+		delivery.SetupGated,
+		deliverydestination.SetupGated,
+		deliverydestinationpolicy.SetupGated,
+		deliverysource.SetupGated,
 		destination.SetupGated,
 		destinationpolicy.SetupGated,
 		group.SetupGated,
@@ -67,6 +79,10 @@ func SetupWebhookWithManager_cloudwatchlogs(mgr ctrl.Manager) error {
 	for _, setup := range []func(ctrl.Manager) error{
 		accountpolicy.SetupWebhookWithManager,
 		definition.SetupWebhookWithManager,
+		delivery.SetupWebhookWithManager,
+		deliverydestination.SetupWebhookWithManager,
+		deliverydestinationpolicy.SetupWebhookWithManager,
+		deliverysource.SetupWebhookWithManager,
 		destination.SetupWebhookWithManager,
 		destinationpolicy.SetupWebhookWithManager,
 		group.SetupWebhookWithManager,

@@ -109,6 +109,17 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	// Cloudfront Key Value Store can be imported using the name
 	"aws_cloudfront_key_value_store": cloudfrontKeyValueStore(),
 
+	// cloudwatchlogs
+	//
+	// CloudWatch Logs Delivery can be imported using the AWS-assigned delivery ID
+	"aws_cloudwatch_log_delivery": identifierFromProviderWithDefaultStub("xpstub0000000000"),
+	// CloudWatch Logs Delivery Destination can be imported using the name
+	"aws_cloudwatch_log_delivery_destination": frameworkParameterAsIdentifier("name"),
+	// CloudWatch Logs Delivery Destination Policy can be imported using the delivery_destination_name
+	"aws_cloudwatch_log_delivery_destination_policy": frameworkParameterAsIdentifier("delivery_destination_name"),
+	// CloudWatch Logs Delivery Source can be imported using the name
+	"aws_cloudwatch_log_delivery_source": frameworkParameterAsIdentifier("name"),
+
 	// dsql
 	//
 	// DSQL Cluster can be imported using the identifier

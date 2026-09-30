@@ -25,6 +25,42 @@ func (l *DefinitionList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this DeliveryDestinationList.
+func (l *DeliveryDestinationList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this DeliveryDestinationPolicyList.
+func (l *DeliveryDestinationPolicyList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this DeliveryList.
+func (l *DeliveryList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this DeliverySourceList.
+func (l *DeliverySourceList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this DestinationList.
 func (l *DestinationList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
