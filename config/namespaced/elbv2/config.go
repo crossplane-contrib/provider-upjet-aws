@@ -167,12 +167,36 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 	})
 }
 
+// lbListenerRuleForwardTargetGroupAttr matches the individual attributes of a
+// forward target_group set element, e.g.
+// "action.0.forward.0.target_group.2374607727.weight". The third numeric
+// segment is the SDK set hash, not an ordinal.
+var lbListenerRuleForwardTargetGroupAttr = regexp.MustCompile(`^action\.(\d+)\.forward\.\d+\.target_group\.\d+\.(?:arn|weight)$`)
+
 func lbListenerRuleCustomDiff(diff *terraform.InstanceDiff, state *terraform.InstanceState, cfg *terraform.ResourceConfig) (*terraform.InstanceDiff, error) { //nolint:gocyclo // easier to follow as a unit
 	if diff == nil || diff.Empty() || diff.Destroy || diff.Attributes == nil {
 		return diff, nil
 	}
 	for k, attrDiff := range diff.Attributes {
-		if attrDiff == nil || !strings.HasPrefix(k, "action.") || !strings.HasSuffix(k, ".target_group_arn") {
+		if attrDiff == nil || !strings.HasPrefix(k, "action.") {
+			continue
+		}
+
+		// Case C: AWS always returns an expanded forward block, so when the
+		// configuration does not declare one, the target_group elements the
+		// provider wrote to state appear as removals on every plan. Upstream's
+		// diffSuppressMissingForward only covers the ".#" count attributes; the
+		// element attributes survive because schemaMap.diff recurses into
+		// removed set elements with all=true. Suppressing them here keeps the
+		// resource converged without writing the observed form back to spec.
+		if m := lbListenerRuleForwardTargetGroupAttr.FindStringSubmatch(k); m != nil {
+			if attrDiff.NewRemoved && !configActionHasForward(cfg, m[1]) {
+				delete(diff.Attributes, k)
+			}
+			continue
+		}
+
+		if !strings.HasSuffix(k, ".target_group_arn") {
 			continue
 		}
 		idx := strings.TrimPrefix(k, "action.")
@@ -187,8 +211,9 @@ func lbListenerRuleCustomDiff(diff *terraform.InstanceDiff, state *terraform.Ins
 		}
 
 		// Case B: arn present in state, absent from config — the provider's Read
-		// took the flattenForwardActionBoth path (null RawPlan after Update or
-		// restart), writing arn to state, while spec only declares forward.
+		// took the flattenForwardActionBoth path (neither RawConfig nor RawState
+		// carried the action list), writing arn to state, while spec only
+		// declares forward.
 		if attrDiff.Old != "" && attrDiff.New == "" && attrDiff.NewRemoved {
 			forwardKey := fmt.Sprintf("action.%s.forward.#", idx)
 			if state != nil && state.Attributes[forwardKey] != "" && state.Attributes[forwardKey] != "0" {

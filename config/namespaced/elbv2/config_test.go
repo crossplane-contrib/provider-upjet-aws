@@ -186,6 +186,77 @@ func TestLBListenerRuleCustomDiff(t *testing.T) {
 			wantKeys: []string{"action.0.target_group_arn"},
 			goneKeys: []string{"action.1.target_group_arn"},
 		},
+		// Case C: forward target_group set elements reported as removed because
+		// AWS returns an expanded forward block the config never asked for.
+		"CaseC_SuppressesArnRemovalWhenForwardNotConfigured": {
+			reason: "an AWS-populated target_group arn removal is suppressed when the config declares no forward",
+			diff: &terraform.InstanceDiff{
+				Attributes: map[string]*terraform.ResourceAttrDiff{
+					"action.0.forward.0.target_group.2374607727.arn": {Old: testARN, New: "", NewRemoved: true},
+				},
+			},
+			cfg:      configWithARNOnly(),
+			goneKeys: []string{"action.0.forward.0.target_group.2374607727.arn"},
+		},
+		"CaseC_SuppressesWeightRemovalWhenForwardNotConfigured": {
+			reason: "the paired weight removal is suppressed on the same basis as the arn",
+			diff: &terraform.InstanceDiff{
+				Attributes: map[string]*terraform.ResourceAttrDiff{
+					"action.0.forward.0.target_group.2374607727.weight": {Old: "1", New: "0", NewRemoved: true},
+				},
+			},
+			cfg:      configWithARNOnly(),
+			goneKeys: []string{"action.0.forward.0.target_group.2374607727.weight"},
+		},
+		"CaseC_NotSuppressedWhenForwardIsConfigured": {
+			reason: "removing a target group from a forward block the user declared is a real change",
+			diff: &terraform.InstanceDiff{
+				Attributes: map[string]*terraform.ResourceAttrDiff{
+					"action.0.forward.0.target_group.2374607727.arn": {Old: testARN, New: "", NewRemoved: true},
+				},
+			},
+			cfg:      configWithForward(),
+			wantKeys: []string{"action.0.forward.0.target_group.2374607727.arn"},
+		},
+		"CaseC_NotSuppressedWhenNotARemoval": {
+			reason: "a genuine weight change is never suppressed",
+			diff: &terraform.InstanceDiff{
+				Attributes: map[string]*terraform.ResourceAttrDiff{
+					"action.0.forward.0.target_group.2374607727.weight": {Old: "1", New: "2"},
+				},
+			},
+			cfg:      configWithARNOnly(),
+			wantKeys: []string{"action.0.forward.0.target_group.2374607727.weight"},
+		},
+		"CaseC_OnlySuppressesTheActionIndexWithoutForward": {
+			reason: "with two actions, only the one lacking a configured forward is suppressed",
+			diff: &terraform.InstanceDiff{
+				Attributes: map[string]*terraform.ResourceAttrDiff{
+					"action.0.forward.0.target_group.111.arn": {Old: testARN, New: "", NewRemoved: true},
+					"action.1.forward.0.target_group.222.arn": {Old: testARN, New: "", NewRemoved: true},
+				},
+			},
+			cfg: &terraform.ResourceConfig{
+				Config: map[string]interface{}{
+					"action": []interface{}{
+						// action 0: shortcut form, no forward declared
+						map[string]interface{}{"target_group_arn": testARN},
+						// action 1: forward declared by the user
+						map[string]interface{}{
+							"forward": []interface{}{
+								map[string]interface{}{
+									"target_group": []interface{}{
+										map[string]interface{}{"arn": testARN, "weight": 1},
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+			goneKeys: []string{"action.0.forward.0.target_group.111.arn"},
+			wantKeys: []string{"action.1.forward.0.target_group.222.arn"},
+		},
 	}
 
 	for name, tc := range cases {
