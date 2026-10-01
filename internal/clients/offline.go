@@ -113,7 +113,7 @@ func OfflineTerraformSetupBuilder(config *SetupConfig, accountID string) terrafo
 			},
 			ClientMetadata: map[string]string{
 				keyAccountID: accountID,
-				keyPartition: "aws",
+				keyPartition: partitionAWS,
 			},
 		}
 		// Resolving the partition is pure computation over the region and the

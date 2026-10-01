@@ -31,6 +31,9 @@ const (
 	keyRegion           = "region"
 	keyPartition        = "partition"
 	localstackAccountID = "000000000000"
+	// partitionAWS is the commercial AWS partition, which is also the one
+	// assumed when a ProviderConfig does not name another.
+	partitionAWS = "aws"
 )
 
 type SetupConfig struct {
@@ -142,7 +145,7 @@ func SelectTerraformSetup(config *SetupConfig) terraform.SetupFn { // nolint:goc
 		}
 		ps.ClientMetadata = map[string]string{
 			keyAccountID: credCache.accountID,
-			keyPartition: "aws",
+			keyPartition: partitionAWS,
 		}
 
 		if err := setPartition(awsCfg, pc, &ps); err != nil {
@@ -245,7 +248,7 @@ func getGlobalRegion(group, kind string, pc *namespacedv1beta1.ClusterProviderCo
 	}
 
 	// Determine the AWS partition, defaulting to "aws" if not explicitly configured
-	partitionID := "aws" // default partition
+	partitionID := partitionAWS // default partition
 	if pc != nil && pc.Spec.Endpoint != nil && pc.Spec.Endpoint.PartitionID != nil {
 		partitionID = *pc.Spec.Endpoint.PartitionID
 	}
@@ -267,7 +270,7 @@ func getGlobalRegion(group, kind string, pc *namespacedv1beta1.ClusterProviderCo
 // when a service-specific region is not available in the partitions map.
 func getPartitionDefaultRegion(partitionID string) string {
 	switch partitionID {
-	case "aws":
+	case partitionAWS:
 		return "us-east-1"
 	case "aws-cn":
 		return "cn-northwest-1"
