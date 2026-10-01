@@ -21,7 +21,7 @@ require (
 	github.com/crossplane/crossplane-runtime/v2 v2.5.0-rc.0.0.20260908074656-9b2fb6b1d1ff
 	github.com/crossplane/crossplane-tools v0.0.0-20260719180100-659f1dc036c5
 	github.com/crossplane/crossplane/apis/v2 v2.4.1
-	github.com/crossplane/upjet/v2 v2.5.0
+	github.com/crossplane/upjet/v2 v2.0.0-20261001150945-0c7020da8337
 	github.com/go-ini/ini v1.46.0
 	github.com/google/go-cmp v0.7.0
 	github.com/hashicorp/aws-sdk-go-base/v2 v2.0.0-beta.73
@@ -46,7 +46,7 @@ require (
 	sigs.k8s.io/randfill v1.0.0
 )
 
-replace github.com/crossplane/upjet/v2 => github.com/sergenyalcin/upjet/v2 v2.0.0-20260930203643-f495d4a8c7fb
+replace github.com/crossplane/upjet/v2 => github.com/sergenyalcin/upjet/v2 v2.0.0-20261002215452-2501b63f8468
 
 require (
 	cloud.google.com/go v0.123.0 // indirect
