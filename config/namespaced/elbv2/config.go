@@ -39,6 +39,7 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		}
 		r.UseAsync = true
 		r.LateInitializer.IgnoredFields = []string{"access_logs"}
+		r.TerraformCustomDiff = lbCustomDiff
 	})
 
 	p.AddResourceConfigurator("aws_lb_listener", func(r *config.Resource) {
@@ -165,6 +166,28 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		r.ShortGroup = "elbv2"
 		r.Kind = "LBTrustStore"
 	})
+}
+
+// lbCustomDiff drops diffs on the access_logs block for Gateway Load
+// Balancers. AWS does not support the access_logs.s3.* attributes for this
+// load balancer type: the upstream provider only guards against sending them
+// on create, not on update, so a Gateway LB observed with an empty
+// access_logs block (the API's own default) produces a perpetual diff whose
+// resulting update call is rejected by AWS with a ValidationException on
+// every reconcile.
+func lbCustomDiff(diff *terraform.InstanceDiff, state *terraform.InstanceState, _ *terraform.ResourceConfig) (*terraform.InstanceDiff, error) {
+	if diff == nil || diff.Empty() || diff.Destroy || diff.Attributes == nil {
+		return diff, nil
+	}
+	if state == nil || state.Attributes["load_balancer_type"] != "gateway" {
+		return diff, nil
+	}
+	for k := range diff.Attributes {
+		if strings.HasPrefix(k, "access_logs") {
+			delete(diff.Attributes, k)
+		}
+	}
+	return diff, nil
 }
 
 func lbListenerRuleCustomDiff(diff *terraform.InstanceDiff, state *terraform.InstanceState, cfg *terraform.ResourceConfig) (*terraform.InstanceDiff, error) { //nolint:gocyclo // easier to follow as a unit
