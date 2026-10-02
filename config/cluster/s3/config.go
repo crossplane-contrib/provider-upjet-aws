@@ -8,6 +8,8 @@ import (
 	"github.com/crossplane/upjet/v2/pkg/config"
 	"github.com/crossplane/upjet/v2/pkg/registry"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
+
+	"github.com/upbound/provider-aws/v2/config/diffutils"
 )
 
 // Configure adds configurations for the s3 group.
@@ -59,6 +61,12 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		r.LateInitializer = config.LateInitializer{
 			IgnoredFields: []string{"acl", "access_control_policy"},
 		}
+	})
+
+	p.AddResourceConfigurator("aws_s3_bucket_server_side_encryption_configuration", func(r *config.Resource) {
+		// rule is a TypeSet: server-side defaults for its Optional+Computed
+		// attributes (e.g. blocked_encryption_types) re-key the element.
+		r.TerraformCustomDiff = diffutils.SuppressComputedOnlySetRehashFor(r, "rule")
 	})
 
 	p.AddResourceConfigurator("aws_s3_bucket_metrics", func(r *config.Resource) {
