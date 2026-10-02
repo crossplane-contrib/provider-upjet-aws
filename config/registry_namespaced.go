@@ -24,7 +24,7 @@ import (
 // configuration is being read for the code generation pipelines.
 // In that case, we will only use the JSON schema for generating
 // the CRDs.
-func GetProviderNamespaced(ctx context.Context, fwProvider fwprovider.Provider, sdkProvider *schema.Provider, generationProvider bool, skipDefaultTags bool) (*config.Provider, error) {
+func GetProviderNamespaced(_ context.Context, fwProvider fwprovider.Provider, sdkProvider *schema.Provider, generationProvider bool, skipDefaultTags bool) (*config.Provider, error) {
 	if generationProvider {
 		p, err := getProviderSchema(providerSchema)
 		if err != nil {
