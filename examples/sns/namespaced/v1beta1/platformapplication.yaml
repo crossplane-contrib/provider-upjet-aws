@@ -25,5 +25,5 @@ metadata:
   name: example-secret
   namespace: upbound-system
 type: Opaque
-stringData:
-  example-key: "AIzaSyC6FNgsCOpBL5eXhDvwf8979mWba6x7Roo"
+data:
+  example-key: ${data.gcp_fcm_service_account_json_base64}
