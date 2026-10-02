@@ -25,4 +25,7 @@ func (tr *Route) Hub() {}
 func (tr *RouteResponse) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *RoutingRule) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *VPCLink) Hub() {}
