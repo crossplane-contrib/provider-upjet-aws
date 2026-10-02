@@ -1,0 +1,120 @@
+# SPDX-FileCopyrightText: 2026 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+# Image Example
+# Builds a Lambda MicroVM image from the code archive stored in an S3 bucket.
+# The Image selects the Object, which resolves to its s3://<bucket>/<key> URI.
+
+apiVersion: lambdamicrovms.aws.upbound.io/v1beta1
+kind: Image
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lambdamicrovms/v1beta1/image
+  labels:
+    testing.upbound.io/example-name: image
+  name: image
+spec:
+  forProvider:
+    baseImageArn: arn:aws:lambda:us-east-1:aws:microvm-image:al2023-1
+    buildRoleArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: image
+    codeArtifact:
+      uriSelector:
+        matchLabels:
+          testing.upbound.io/example-name: image
+    description: Example MicroVM image
+    name: example-image
+    region: us-east-1
+
+---
+
+apiVersion: s3.aws.upbound.io/v1beta2
+kind: Object
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lambdamicrovms/v1beta1/image
+  labels:
+    testing.upbound.io/example-name: image
+  name: image
+spec:
+  forProvider:
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: image
+    # a zip archive with a Dockerfile and the main.go it builds at its root
+    contentBase64: UEsDBBQAAAAIAAAAIVxika1mnwAAAL0AAAAKAAAARG9ja2VyZmlsZTWNQQuCMBzF7/sUf7y7VXQKPFhqSLXJMkIiYk6z0XQyk+jbl0qXd/jxe+9FnB2g7XOtJC6lxeLdkcLIZ2mJVrkV9kMqo0VTreZ4sQT/CHmvdIHOjO+CmAPprEQblmRQC9XgygBG/ERhs2W3kPrrfRh4M/jhsQauASLa9i8jFA3/nbTiJR/Tjuveram9yR/lIVBIU54lLKYpXJyBOFf0BVBLAwQUAAAACAAAACFc0/hQU3gAAACRAAAABwAAAG1haW4uZ28ljEsKAjEQBdfpUzRZJS5m5zEGBMF9iB0n2J8QIggydzejq6J4xWspP9ODUFJVgCrN+sAAzhcZfmJUIQ8RoLw0/6oQ8QOuWD/gZrZcetXBGvxGzIalm+DYCOmdpDHhWnO32+rj7I+/5cpELZzxhH+lbHqf6w47fAFQSwECFAMUAAAACAAAACFcYpGtZp8AAAC9AAAACgAAAAAAAAAAAAAApAEAAAAARG9ja2VyZmlsZVBLAQIUAxQAAAAIAAAAIVzT+FBTeAAAAJEAAAAHAAAAAAAAAAAAAACkAccAAABtYWluLmdvUEsFBgAAAAACAAIAbQAAAGQBAAAAAA==
+    contentType: application/zip
+    key: code.zip
+    region: us-east-1
+
+---
+
+apiVersion: s3.aws.upbound.io/v1beta2
+kind: Bucket
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lambdamicrovms/v1beta1/image
+  labels:
+    testing.upbound.io/example-name: image
+  name: ${Rand.RFC1123Subdomain}
+spec:
+  forProvider:
+    forceDestroy: true
+    region: us-east-1
+
+---
+
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lambdamicrovms/v1beta1/image
+  labels:
+    testing.upbound.io/example-name: image
+  name: example-lambdamicrovms-image
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {
+              "Service": "lambda.amazonaws.com"
+            },
+            "Action": "sts:AssumeRole"
+          }
+        ]
+      }
+
+---
+
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: RolePolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lambdamicrovms/v1beta1/image
+  labels:
+    testing.upbound.io/example-name: image
+  name: example-lambdamicrovms-image
+spec:
+  forProvider:
+    policy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Action": [
+              "s3:GetObject"
+            ],
+            "Resource": "arn:aws:s3:::*/code.zip"
+          }
+        ]
+      }
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: image

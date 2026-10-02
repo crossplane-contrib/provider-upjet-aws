@@ -1,0 +1,27 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
+apiVersion: bedrock.aws.upbound.io/v1beta1
+kind: ModelInvocationJob
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrock/v1beta1/modelinvocationjob
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    inputDataConfig:
+      s3InputDataConfig:
+        s3Uri: s3://${aws_s3_bucket.example.id}/input/
+    jobName: example-job
+    modelId: us.amazon.nova-2-lite-v1:0
+    outputDataConfig:
+      s3OutputDataConfig:
+        s3Uri: s3://${aws_s3_bucket.example.id}/output/
+    region: us-west-1
+    roleArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

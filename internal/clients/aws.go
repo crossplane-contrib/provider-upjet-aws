@@ -46,11 +46,13 @@ var globalResources = map[string]string{
 	// Add specific global resources here as needed
 	// Example: "backup.aws.upbound.io/GlobalSettings": "backup",
 	"backup.aws.upbound.io/GlobalSettings":              "backup",
+	"bedrock.aws.upbound.io/UseCaseForModelAccess":      "bedrock",
 	"directconnect.aws.upbound.io/Gateway":              "directconnect",
 	"directconnect.aws.upbound.io/GatewayAssociation":   "directconnect",
 	"s3control.aws.upbound.io/AccountPublicAccessBlock": "s3control",
 	// namespaced apis
 	"backup.aws.m.upbound.io/GlobalSettings":              "backup",
+	"bedrock.aws.m.upbound.io/UseCaseForModelAccess":      "bedrock",
 	"directconnect.aws.m.upbound.io/Gateway":              "directconnect",
 	"directconnect.aws.m.upbound.io/GatewayAssociation":   "directconnect",
 	"s3control.aws.m.upbound.io/AccountPublicAccessBlock": "s3control",

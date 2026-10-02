@@ -36,6 +36,10 @@ const (
 	// function in this package.
 	PathTerraformIDExtractor = SelfPackagePath + ".TerraformID()"
 
+	// PathS3ObjectURIExtractor is the golang path to S3ObjectURIExtractor
+	// function in this package.
+	PathS3ObjectURIExtractor = SelfPackagePath + ".S3ObjectURIExtractor()"
+
 	// VersionV1Beta1 is used for resources that meet the v1beta1 criteria
 	// here: https://github.com/upbound/arch/pull/33
 	VersionV1Beta1 = "v1beta1"
@@ -71,6 +75,27 @@ func TerraformID() reference.ExtractValueFn {
 			return ""
 		}
 		return tr.GetID()
+	}
+}
+
+// S3ObjectURIExtractor extracts the S3 URI of an Object.s3 in the
+// s3://<bucket>/<key> form.
+func S3ObjectURIExtractor() reference.ExtractValueFn {
+	return func(mr xpresource.Managed) string {
+		tr, ok := mr.(resource.Terraformed)
+		if !ok {
+			return ""
+		}
+		params, err := tr.GetParameters()
+		if err != nil {
+			return ""
+		}
+		bucket, _ := params["bucket"].(string)
+		key, _ := params["key"].(string)
+		if bucket == "" || key == "" {
+			return ""
+		}
+		return "s3://" + bucket + "/" + key
 	}
 }
 

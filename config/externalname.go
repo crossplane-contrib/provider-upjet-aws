@@ -12,6 +12,7 @@ import (
 
 	"github.com/crossplane/crossplane-runtime/v2/pkg/errors"
 	"github.com/crossplane/upjet/v2/pkg/config"
+	"github.com/hashicorp/terraform-plugin-go/tfprotov6"
 
 	"github.com/upbound/provider-aws/v2/config/cluster/common"
 )
@@ -23,6 +24,11 @@ import (
 var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName{
 
 	// ********** When adding new services please keep them alphabetized by their aws go sdk package name **********
+
+	// agentregistry
+	//
+	// imported via registry_id, must match regex [a-zA-Z0-9]{12,16}
+	"aws_agentregistry_registry": config.FrameworkResourceWithComputedIdentifier("registry_id", "xpstub000000"),
 
 	// apigateway
 	//
@@ -41,10 +47,31 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 
 	// bedrock
 	//
+	// imported via job_arn. The customization job can also be read by its
+	// name, so the stub does not have to be an ARN.
+	"aws_bedrock_custom_model": config.FrameworkResourceWithComputedIdentifier("job_arn", "xpstub000000"),
+	// imported via job_arn, the only identifier the API accepts
+	"aws_bedrock_evaluation_job": bedrockEvaluationJob(),
+	// imported via model_id
+	"aws_bedrock_foundation_model_agreement": frameworkParameterAsIdentifier("model_id"),
 	// Bedrock Guardrail can be imported using the composite ID: guardrail_id,version
 	"aws_bedrock_guardrail": bedrockGuardrail(),
+	// imported via guardrail_arn,version. guardrail_arn is already a required
+	// spec field, so only the provider-assigned version is used as the
+	// external name. The stub must match regex [1-9][0-9]{0,7}
+	"aws_bedrock_guardrail_version": config.FrameworkResourceWithComputedIdentifier("version", "99999999"),
 	// Bedrock inference profile can be imported using the ID: inference_profile-id-12345678
 	"aws_bedrock_inference_profile": identifierFromProviderWithDefaultStub("bedrock12345"),
+	// imported via job_arn. The job can also be read by its ID, which must
+	// match regex [a-z0-9]{12}
+	"aws_bedrock_model_invocation_job": config.FrameworkResourceWithComputedIdentifier("job_arn", "xpstub000000"),
+	// imported via the region, there is a single configuration per region
+	"aws_bedrock_model_invocation_logging_configuration": config.IdentifierFromProvider,
+	// imported via provisioned_model_arn. The Provisioned Throughput can also
+	// be read by its name, so the stub does not have to be an ARN.
+	"aws_bedrock_provisioned_model_throughput": identifierFromProviderWithDefaultStub("xpstub000000"),
+	// imported via the AWS account ID, there is a single use case per account
+	"aws_bedrock_use_case_for_model_access": bedrockUseCaseForModelAccess(),
 
 	// bedrockagent
 	//
@@ -55,8 +82,12 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	"aws_bedrockagent_agent_knowledge_base_association": config.TemplatedStringAsIdentifier("", "{{ .parameters.agent_id }},DRAFT,{{ .parameters.knowledge_base_id }}"),
 	// imported via data_source_id,knowledge_base_id
 	"aws_bedrockagent_data_source": bedrockAgentDataSource(),
+	// imported via the flow ID, e.g. ABCDEFGHIJ
+	"aws_bedrockagent_flow": identifierFromProviderWithDefaultStub("STUB123456"),
 	// imported via the knowledge base ID, e.g. EMDPPAYPZI
 	"aws_bedrockagent_knowledge_base": identifierFromProviderWithDefaultStub("STUB123456"),
+	// imported via the prompt ID, e.g. 1A2BC3DEFG
+	"aws_bedrockagent_prompt": identifierFromProviderWithDefaultStub("STUB123456"),
 
 	// bedrockagentcore
 	//
@@ -172,6 +203,20 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	//
 	// Lambda Runtime Management Config can be imported using function_name and qualifier, separated by a comma (,)
 	"aws_lambda_runtime_management_config": lambdaRuntimeManagementConfig(),
+
+	// lambdacore
+	//
+	// imported via arn. The network connector can also be read by its ID or
+	// name, so the stub does not have to be an ARN.
+	"aws_lambdacore_network_connector": frameworkComputedIdentifierWithStubRead("arn", "xp-stub-network-connector"),
+
+	// lambdamicrovms
+	//
+	// imported via arn. The image can also be read by its ID, so the stub
+	// does not have to be an ARN.
+	"aws_lambdamicrovms_image": frameworkComputedIdentifierWithStubRead("arn", "xp-stub-microvm-image"),
+	// imported via microvm_id, e.g. mvm-01234567-abcd-ef01-2345-6789abcdef01
+	"aws_lambdamicrovms_microvm": config.FrameworkResourceWithComputedIdentifier("microvm_id", "mvm-00000000-0000-0000-0000-000000000000"),
 
 	// memorydb
 	//
@@ -3110,9 +3155,16 @@ func kmsAlias() config.ExternalName {
 }
 
 // s3vectorsComputedARNIdentifier handles S3 Vectors resources that use
-// @ArnIdentity in the Terraform provider. The stub ARN must include the
-// correct region from parameters so the API doesn't reject a region mismatch.
+// @ArnIdentity in the Terraform provider.
 func s3vectorsComputedARNIdentifier(identifier, resourcePath string) config.ExternalName {
+	return frameworkComputedARNIdentifier("s3vectors", identifier, resourcePath)
+}
+
+// frameworkComputedARNIdentifier handles Terraform Plugin Framework resources
+// that use @ArnIdentity in the Terraform provider and can only be read by
+// their ARN. The stub ARN must include the correct region from parameters so
+// the API doesn't reject a region mismatch.
+func frameworkComputedARNIdentifier(service, identifier, resourcePath string) config.ExternalName {
 	en := config.NewExternalNameFrom(config.IdentifierFromProvider,
 		config.WithSetIdentifierArgumentsFn(func(fn config.SetIdentifierArgumentsFn, base map[string]any, externalName string) {
 			if _, ok := base[identifier]; ok {
@@ -3126,7 +3178,7 @@ func s3vectorsComputedARNIdentifier(identifier, resourcePath string) config.Exte
 			// with params, not with the empty tfState). copyParameters will
 			// then propagate the correct-region stub into the final state.
 			if region, _ := base["region"].(string); region != "" {
-				base[identifier] = fmt.Sprintf("arn:aws:s3vectors:%s:000000000000:%s", region, resourcePath)
+				base[identifier] = fmt.Sprintf("arn:aws:%s:%s:000000000000:%s", service, region, resourcePath)
 			}
 		}),
 		config.WithGetExternalNameFn(func(fn config.GetExternalNameFn, tfState map[string]any) (string, error) {
@@ -3979,6 +4031,56 @@ func bedrockAgentDataSource() config.ExternalName {
 	}
 	e.IdentifierFields = []string{"knowledge_base_id"}
 	return e
+}
+
+// bedrockEvaluationJob configures the external name for
+// aws_bedrock_evaluation_job. The external name is the AWS-assigned job ARN.
+// The stub ARN of the initial read belongs to another account, which AWS
+// does not necessarily answer with a not found error.
+func bedrockEvaluationJob() config.ExternalName {
+	// the job ID must satisfy the pattern [a-z0-9]{12}
+	const stubJob = "evaluation-job/xpstub000000"
+	e := frameworkComputedARNIdentifier("bedrock", "job_arn", stubJob)
+	e.IsNotFoundDiagnosticFn = stubReadNotFound(":000000000000:" + stubJob)
+	return e
+}
+
+// bedrockUseCaseForModelAccess configures the external name for
+// aws_bedrock_use_case_for_model_access. There is a single use case per
+// account and the Terraform state holds no identifier, so the external name
+// is a constant.
+func bedrockUseCaseForModelAccess() config.ExternalName {
+	e := config.IdentifierFromProvider
+	e.GetExternalNameFn = func(_ map[string]any) (string, error) {
+		return "use-case-for-model-access", nil
+	}
+	return e
+}
+
+// frameworkComputedIdentifierWithStubRead is
+// config.FrameworkResourceWithComputedIdentifier for the APIs whose answer to
+// a read of the stub is not known to be a not found error.
+func frameworkComputedIdentifierWithStubRead(identifier, stub string) config.ExternalName {
+	e := config.FrameworkResourceWithComputedIdentifier(identifier, stub)
+	e.IsNotFoundDiagnosticFn = stubReadNotFound(stub)
+	return e
+}
+
+// stubReadNotFound treats every error of a read with the given stub identifier
+// as "resource not found". The stub never identifies an existing resource, so
+// an error of a read with a real identifier still fails.
+func stubReadNotFound(stub string) func(diags []*tfprotov6.Diagnostic) bool {
+	return func(diags []*tfprotov6.Diagnostic) bool {
+		for _, d := range diags {
+			if d.Severity != tfprotov6.DiagnosticSeverityError {
+				continue
+			}
+			if strings.Contains(d.Summary, stub) || strings.Contains(d.Detail, stub) {
+				return true
+			}
+		}
+		return false
+	}
 }
 
 func bedrockAgentCoreTokenVaultCMK() config.ExternalName {

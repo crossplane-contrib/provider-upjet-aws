@@ -1,0 +1,30 @@
+# SPDX-FileCopyrightText: 2026 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+# Use Case For Model Access Example
+# Submits the use case details which are required to access Anthropic models.
+# There is a single use case per account, which cannot be updated or deleted.
+
+apiVersion: bedrock.aws.upbound.io/v1beta1
+kind: UseCaseForModelAccess
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrock/v1beta1/usecaseformodelaccess
+    upjet.upbound.io/manual-intervention: >
+      The use case is submitted for the whole account and cannot be updated
+      or deleted afterwards.
+  labels:
+    testing.upbound.io/example-name: usecaseformodelaccess
+  name: usecaseformodelaccess
+spec:
+  forProvider:
+    formData: |
+      {
+        "companyName": "Example Company",
+        "companyWebsite": "https://www.example.com",
+        "intendedUsers": "0",
+        "industryOption": "Energy",
+        "otherIndustryOption": "",
+        "useCases": "Generating developer documentation"
+      }

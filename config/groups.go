@@ -323,4 +323,5 @@ var KindMap = map[string]string{
 	"aws_cloudformation_type":                  "CloudFormationType",
 	"aws_cloudtrail":                           "Trail",
 	"aws_config_configuration_recorder_status": "AWSConfigurationRecorderStatus",
+	"aws_lambdamicrovms_microvm":               "MicroVM",
 }

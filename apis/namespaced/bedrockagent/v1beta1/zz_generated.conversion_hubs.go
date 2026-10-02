@@ -16,4 +16,10 @@ func (tr *AgentKnowledgeBaseAssociation) Hub() {}
 func (tr *DataSource) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *Flow) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *KnowledgeBase) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *Prompt) Hub() {}

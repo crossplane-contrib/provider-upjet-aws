@@ -1,0 +1,157 @@
+# SPDX-FileCopyrightText: 2026 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+# Network Connector Example
+# Creates a Lambda network connector which routes the egress traffic of
+# MicroVMs through the subnet of a VPC.
+
+apiVersion: lambdacore.aws.upbound.io/v1beta1
+kind: NetworkConnector
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lambdacore/v1beta1/networkconnector
+  labels:
+    testing.upbound.io/example-name: networkconnector
+  name: networkconnector
+spec:
+  forProvider:
+    configuration:
+      vpcEgressConfiguration:
+        associatedComputeResourceTypes:
+          - MicroVm
+        networkProtocol: IPv4
+        securityGroupIdSelector:
+          matchLabels:
+            testing.upbound.io/example-name: networkconnector
+        subnetIdSelector:
+          matchLabels:
+            testing.upbound.io/example-name: networkconnector
+    name: example-network-connector
+    operatorRoleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: networkconnector
+    region: us-east-1
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: VPC
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lambdacore/v1beta1/networkconnector
+  labels:
+    testing.upbound.io/example-name: networkconnector
+  name: networkconnector
+spec:
+  forProvider:
+    cidrBlock: 10.0.0.0/16
+    region: us-east-1
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lambdacore/v1beta1/networkconnector
+  labels:
+    testing.upbound.io/example-name: networkconnector
+  name: networkconnector
+spec:
+  forProvider:
+    availabilityZone: us-east-1a
+    cidrBlock: 10.0.1.0/24
+    region: us-east-1
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: networkconnector
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: SecurityGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lambdacore/v1beta1/networkconnector
+  labels:
+    testing.upbound.io/example-name: networkconnector
+  name: networkconnector
+spec:
+  forProvider:
+    name: example-network-connector
+    region: us-east-1
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: networkconnector
+
+---
+
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lambdacore/v1beta1/networkconnector
+  labels:
+    testing.upbound.io/example-name: networkconnector
+  name: example-lambdacore-networkconnector
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {
+              "Service": "network-connectors.lambda.amazonaws.com"
+            },
+            "Action": "sts:AssumeRole"
+          }
+        ]
+      }
+
+---
+
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: RolePolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lambdacore/v1beta1/networkconnector
+  labels:
+    testing.upbound.io/example-name: networkconnector
+  name: example-lambdacore-networkconnector
+spec:
+  forProvider:
+    policy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Action": [
+              "ec2:CreateNetworkInterface"
+            ],
+            "Resource": [
+              "arn:aws:ec2:*:*:network-interface/*",
+              "arn:aws:ec2:*:*:subnet/*",
+              "arn:aws:ec2:*:*:security-group/*"
+            ]
+          },
+          {
+            "Effect": "Allow",
+            "Action": [
+              "ec2:CreateTags"
+            ],
+            "Resource": "arn:aws:ec2:*:*:network-interface/*",
+            "Condition": {
+              "StringEquals": {
+                "ec2:ManagedResourceOperator": "network-connectors.lambda.amazonaws.com"
+              }
+            }
+          }
+        ]
+      }
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: networkconnector

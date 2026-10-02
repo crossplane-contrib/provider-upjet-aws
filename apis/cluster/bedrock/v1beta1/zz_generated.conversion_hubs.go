@@ -7,7 +7,31 @@
 package v1beta1
 
 // Hub marks this type as a conversion hub.
+func (tr *CustomModel) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *EvaluationJob) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *FoundationModelAgreement) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *Guardrail) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *GuardrailVersion) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *InferenceProfile) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *ModelInvocationJob) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *ModelInvocationLoggingConfiguration) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *ProvisionedModelThroughput) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *UseCaseForModelAccess) Hub() {}

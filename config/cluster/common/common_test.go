@@ -27,6 +27,75 @@ var (
 	errBoom = errors.New("boom")
 )
 
+func TestS3ObjectURIExtractor(t *testing.T) {
+	type args struct {
+		mg resource.Managed
+	}
+	type want struct {
+		uri string
+	}
+	cases := map[string]struct {
+		reason string
+		args   args
+		want   want
+	}{
+		"BucketAndKey": {
+			reason: "The URI should be built from the bucket and the key.",
+			args: args{
+				mg: &ujfake.Terraformed{
+					Parameterizable: ujfake.Parameterizable{
+						Parameters: map[string]any{
+							"bucket": "example-bucket",
+							"key":    "path/to/code.zip",
+						},
+					},
+				},
+			},
+			want: want{
+				uri: "s3://example-bucket/path/to/code.zip",
+			},
+		},
+		"BucketNotResolved": {
+			reason: "No URI should be returned until the bucket is known.",
+			args: args{
+				mg: &ujfake.Terraformed{
+					Parameterizable: ujfake.Parameterizable{
+						Parameters: map[string]any{
+							"key": "code.zip",
+						},
+					},
+				},
+			},
+		},
+		"KeyMissing": {
+			reason: "No URI should be returned without a key.",
+			args: args{
+				mg: &ujfake.Terraformed{
+					Parameterizable: ujfake.Parameterizable{
+						Parameters: map[string]any{
+							"bucket": "example-bucket",
+						},
+					},
+				},
+			},
+		},
+		"NotTerraformed": {
+			reason: "No URI should be returned for a resource which is not Terraformed.",
+			args: args{
+				mg: &fake.Managed{},
+			},
+		},
+	}
+	for name, tc := range cases {
+		t.Run(name, func(t *testing.T) {
+			got := S3ObjectURIExtractor()(tc.args.mg)
+			if diff := cmp.Diff(tc.want.uri, got); diff != "" {
+				t.Errorf("\n%s\nS3ObjectURIExtractor(...): -want, +got:\n%s", tc.reason, diff)
+			}
+		})
+	}
+}
+
 func TestPasswordGenerator(t *testing.T) {
 	type args struct {
 		kube               client.Client

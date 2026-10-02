@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
+apiVersion: bedrock.aws.upbound.io/v1beta1
+kind: CustomModel
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrock/v1beta1/custommodel
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    baseModelIdentifier: ${data.aws_bedrock_foundation_model.example.model_arn}
+    customModelName: example-model
+    hyperparameters:
+      batchSize: "1"
+      epochCount: "1"
+      learningRate: "0.005"
+      learningRateWarmupSteps: "0"
+    jobName: example-job-1
+    outputDataConfig:
+      s3Uri: s3://${aws_s3_bucket.output.id}/data/
+    region: us-west-1
+    roleArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    trainingDataConfig:
+      s3Uri: s3://${aws_s3_bucket.training.id}/data/train.jsonl
