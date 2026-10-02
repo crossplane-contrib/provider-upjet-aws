@@ -799,3 +799,120 @@ func TestExpandTFPathWildcards(t *testing.T) {
 		})
 	}
 }
+
+// bucketSSESchema mirrors the aws_s3_bucket_server_side_encryption_configuration
+// Terraform schema. S3 returns blocked_encryption_types (["SSE-C"] on new
+// buckets) inside the `rule` set even when the configuration leaves it unset.
+func bucketSSESchema() map[string]*schema.Schema {
+	return map[string]*schema.Schema{
+		"bucket": {
+			Type:     schema.TypeString,
+			Required: true,
+		},
+		"rule": {
+			Type:     schema.TypeSet,
+			Required: true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"apply_server_side_encryption_by_default": {
+						Type:     schema.TypeList,
+						MaxItems: 1,
+						Optional: true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"kms_master_key_id": {
+									Type:     schema.TypeString,
+									Optional: true,
+									Computed: true,
+								},
+								"sse_algorithm": {
+									Type:     schema.TypeString,
+									Required: true,
+								},
+							},
+						},
+					},
+					"blocked_encryption_types": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Computed: true,
+						Elem:     &schema.Schema{Type: schema.TypeString},
+					},
+					"bucket_key_enabled": {
+						Type:     schema.TypeBool,
+						Optional: true,
+						Computed: true,
+					},
+				},
+			},
+		},
+	}
+}
+
+// bucketSSERule is a shorthand for a single `rule` element. A nil blocked
+// stands for "not set".
+func bucketSSERule(algorithm string, blocked []any) map[string]any {
+	rule := map[string]any{
+		"apply_server_side_encryption_by_default": []any{map[string]any{"sse_algorithm": algorithm}},
+		"bucket_key_enabled":                      true,
+	}
+	if blocked != nil {
+		rule["blocked_encryption_types"] = blocked
+	}
+	return rule
+}
+
+func TestSuppressComputedOnlySetRehashBucketSSE(t *testing.T) {
+	cases := map[string]struct {
+		reason   string
+		rule     map[string]any
+		wantDiff bool
+	}{
+		"BlockedEncryptionTypesUnset": {
+			reason: "The S3 default for an unset blocked_encryption_types must not re-key the rule.",
+			rule:   bucketSSERule("aws:kms", nil),
+		},
+		"BlockedEncryptionTypesChanged": {
+			reason:   "A blocked_encryption_types value the configuration specifies is real drift.",
+			rule:     bucketSSERule("aws:kms", []any{"NONE"}),
+			wantDiff: true,
+		},
+		"SSEAlgorithmChanged": {
+			reason:   "A change nested in apply_server_side_encryption_by_default is real drift.",
+			rule:     bucketSSERule("AES256", nil),
+			wantDiff: true,
+		},
+	}
+	r := &config.Resource{TerraformResource: &schema.Resource{Schema: bucketSSESchema()}}
+	for name, tc := range cases {
+		t.Run(name, func(t *testing.T) {
+			d, err := schema.InternalMap(bucketSSESchema()).Data(&terraform.InstanceState{ID: "example"}, nil)
+			if err != nil {
+				t.Fatalf("cannot construct resource data for the state: %v", err)
+			}
+			if err := d.Set("bucket", "example"); err != nil {
+				t.Fatalf("cannot set \"bucket\" in the state: %v", err)
+			}
+			if err := d.Set("rule", []any{bucketSSERule("aws:kms", []any{"SSE-C"})}); err != nil {
+				t.Fatalf("cannot set \"rule\" in the state: %v", err)
+			}
+			s := d.State()
+			raw := map[string]any{"bucket": "example", "rule": []any{tc.rule}}
+			diff, err := schema.InternalMap(bucketSSESchema()).Diff(t.Context(), s, terraform.NewResourceConfigRaw(raw), nil, nil, false)
+			if err != nil {
+				t.Fatalf("cannot construct the instance diff: %v", err)
+			}
+			if len(attributesWithPrefix(snapshotAttributes(diff), "rule.")) == 0 {
+				t.Fatalf("test case is not exercising diff suppression: the calculated diff has no \"rule.*\" attributes\nReason: %s", tc.reason)
+			}
+
+			got, err := SuppressComputedOnlySetRehash(r, diff, s, "rule")
+			if err != nil {
+				t.Fatalf("SuppressComputedOnlySetRehash(...): unexpected error: %v\nReason: %s", err, tc.reason)
+			}
+			if gotDiff := len(attributesWithPrefix(snapshotAttributes(got), "rule.")) > 0; gotDiff != tc.wantDiff {
+				t.Errorf("SuppressComputedOnlySetRehash(...): want rule diff %v, got %v: %v\nReason: %s", tc.wantDiff, gotDiff, snapshotAttributes(got), tc.reason)
+			}
+		})
+	}
+}
