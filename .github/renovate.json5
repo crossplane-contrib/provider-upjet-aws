@@ -111,13 +111,14 @@
     },
     {
       // We want a PR to bump Crossplane CLI versions used through make variables in
-      // the Makefile, taking it from the official Github repository releases.
+      // the Makefile. Since v2.3.0 the CLI is released from crossplane/cli, not
+      // crossplane/crossplane, whose newer tags have no CLI binary to download.
       "customType": "regex",
       "description": "Bump Crossplane CLI version in the Makefile",
       "managerFilePatterns": ["/^Makefile$/"],
-      "matchStrings": ["CROSSPLANE_CLI_VERSION ??= (?<currentValue>.*?)\\n"],
+      "matchStrings": ["CROSSPLANE_CLI_VERSION \\??= (?<currentValue>.*?)\\n"],
       "datasourceTemplate": "github-releases",
-      "depNameTemplate": "crossplane/crossplane"
+      "depNameTemplate": "crossplane/cli"
     }
   ],
   // PackageRules disabled below should be enabled in case of vulnerabilities
