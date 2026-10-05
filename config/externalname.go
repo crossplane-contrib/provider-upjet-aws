@@ -204,12 +204,12 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	// and the provider-assigned service_account_id, e.g. g-abc12345,1. The
 	// workspace_id is already a required spec field, so only the
 	// provider-assigned service_account_id is used as the external name.
-	"aws_grafana_workspace_service_account": config.FrameworkResourceWithComputedIdentifier("service_account_id", "1"),
+	"aws_grafana_workspace_service_account": grafanaWorkspaceServiceAccount(),
 	// No import documented for the token resource, since the token value is
 	// only returned once at creation time. workspace_id and service_account_id
 	// are already required spec fields, so only the provider-assigned
 	// service_account_token_id is used as the external name.
-	"aws_grafana_workspace_service_account_token": config.FrameworkResourceWithComputedIdentifier("service_account_token_id", "1"),
+	"aws_grafana_workspace_service_account_token": grafanaWorkspaceServiceAccountToken(),
 
 	// guardduty
 	//
@@ -3061,6 +3061,61 @@ func cognitoUserPoolClient() config.ExternalName {
 		return externalName, nil
 	}
 	return e
+}
+
+// grafanaWorkspaceServiceAccount configures the external name for the
+// Terraform Plugin Framework aws_grafana_workspace_service_account
+// resource. Terraform's own "id" attribute for this resource is not the
+// bare service_account_id: the resource's Read implementation parses it as
+// a two-part, comma-separated key ("<workspace_id>,<service_account_id>",
+// e.g. g-abc12345,1) and fails with "parsing resource ID: unexpected format
+// for ID (...), expected more than one part" otherwise.
+// config.FrameworkResourceWithComputedIdentifier's default GetIDFn returns
+// only the computed identifier (service_account_id), so it is overridden
+// here to reconstruct the two-part id from workspace_id (always a known
+// parameter) and service_account_id (populated by
+// FrameworkResourceWithComputedIdentifier's SetIdentifierArgumentsFn, either
+// with its placeholder before creation or with the real external name
+// afterward).
+func grafanaWorkspaceServiceAccount() config.ExternalName {
+	e := config.FrameworkResourceWithComputedIdentifier("service_account_id", "1")
+	e.GetIDFn = func(_ context.Context, _ string, parameters map[string]interface{}, _ map[string]interface{}) (string, error) {
+		return formattedGrafanaWorkspaceID(parameters, "service_account_id")
+	}
+	return e
+}
+
+// grafanaWorkspaceServiceAccountToken configures the external name for the
+// Terraform Plugin Framework aws_grafana_workspace_service_account_token
+// resource, whose Terraform "id" attribute is likewise not the bare
+// service_account_token_id but a three-part, comma-separated key
+// ("<workspace_id>,<service_account_id>,<service_account_token_id>"). See
+// grafanaWorkspaceServiceAccount for the full explanation.
+func grafanaWorkspaceServiceAccountToken() config.ExternalName {
+	e := config.FrameworkResourceWithComputedIdentifier("service_account_token_id", "1")
+	e.GetIDFn = func(_ context.Context, _ string, parameters map[string]interface{}, _ map[string]interface{}) (string, error) {
+		return formattedGrafanaWorkspaceID(parameters, "service_account_id", "service_account_token_id")
+	}
+	return e
+}
+
+// formattedGrafanaWorkspaceID joins workspace_id and the given parameter
+// keys, in order, with a comma to match the Terraform-internal id format
+// used by the Grafana workspace service account resources.
+func formattedGrafanaWorkspaceID(parameters map[string]interface{}, keys ...string) (string, error) {
+	vals := make([]string, 0, len(keys)+1)
+	for _, key := range append([]string{"workspace_id"}, keys...) {
+		val, ok := parameters[key]
+		if !ok {
+			return "", errors.Errorf("%s cannot be empty", key)
+		}
+		s, ok := val.(string)
+		if !ok {
+			return "", errors.Errorf("%s needs to be string", key)
+		}
+		vals = append(vals, s)
+	}
+	return strings.Join(vals, ","), nil
 }
 
 func mqUser() config.ExternalName {
