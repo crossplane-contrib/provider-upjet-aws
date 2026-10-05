@@ -32,6 +32,13 @@ metadata:
 spec:
   capabilities:
     - SafeStart
+    # The package serves the diff gRPC services, through the
+    # `internal diff-server` subcommand. Clients read this before deciding
+    # whether to start a diff server for a resource this package owns, so
+    # without it the feature is never reached. It says the package speaks the
+    # protocol, not that every resource in it can be diffed: a resource whose
+    # diff cannot be computed offline is declined per request.
+    - DiffServer
 {{ if ne .Service "monolith" }}
   crossplane:
     version: ">=v1.12.1-0"
