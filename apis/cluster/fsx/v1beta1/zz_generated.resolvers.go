@@ -46,6 +46,26 @@ func (mg *Backup) ResolveReferences( // ResolveReferences of this Backup.
 	mg.Spec.ForProvider.FileSystemID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.FileSystemIDRef = rsp.ResolvedReference
 	{
+		m, l, err = apisresolver.GetManagedResource("fsx.aws.upbound.io", "v1beta1", "OntapVolume", "OntapVolumeList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VolumeID),
+			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.VolumeIDRef,
+			Selector:     mg.Spec.ForProvider.VolumeIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.VolumeID")
+	}
+	mg.Spec.ForProvider.VolumeID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.VolumeIDRef = rsp.ResolvedReference
+	{
 		m, l, err = apisresolver.GetManagedResource("fsx.aws.upbound.io", "v1beta2", "LustreFileSystem", "LustreFileSystemList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
@@ -65,6 +85,26 @@ func (mg *Backup) ResolveReferences( // ResolveReferences of this Backup.
 	}
 	mg.Spec.InitProvider.FileSystemID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.FileSystemIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("fsx.aws.upbound.io", "v1beta1", "OntapVolume", "OntapVolumeList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VolumeID),
+			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.VolumeIDRef,
+			Selector:     mg.Spec.InitProvider.VolumeIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.VolumeID")
+	}
+	mg.Spec.InitProvider.VolumeID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.VolumeIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -475,6 +515,58 @@ func (mg *OntapStorageVirtualMachine) ResolveReferences(ctx context.Context, c c
 	}
 	mg.Spec.InitProvider.FileSystemID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.FileSystemIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this OntapVolume.
+func (mg *OntapVolume) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("fsx.aws.upbound.io", "v1beta2", "OntapStorageVirtualMachine", "OntapStorageVirtualMachineList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageVirtualMachineID),
+			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.StorageVirtualMachineIDRef,
+			Selector:     mg.Spec.ForProvider.StorageVirtualMachineIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.StorageVirtualMachineID")
+	}
+	mg.Spec.ForProvider.StorageVirtualMachineID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.StorageVirtualMachineIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("fsx.aws.upbound.io", "v1beta2", "OntapStorageVirtualMachine", "OntapStorageVirtualMachineList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageVirtualMachineID),
+			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.StorageVirtualMachineIDRef,
+			Selector:     mg.Spec.InitProvider.StorageVirtualMachineIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.StorageVirtualMachineID")
+	}
+	mg.Spec.InitProvider.StorageVirtualMachineID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.StorageVirtualMachineIDRef = rsp.ResolvedReference
 
 	return nil
 }

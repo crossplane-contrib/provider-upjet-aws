@@ -22,4 +22,7 @@ func (tr *OntapFileSystem) Hub() {}
 func (tr *OntapStorageVirtualMachine) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *OntapVolume) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *WindowsFileSystem) Hub() {}

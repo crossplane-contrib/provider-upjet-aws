@@ -14,6 +14,7 @@ import (
 	lustrefilesystem "github.com/upbound/provider-aws/v2/internal/controller/namespaced/fsx/lustrefilesystem"
 	ontapfilesystem "github.com/upbound/provider-aws/v2/internal/controller/namespaced/fsx/ontapfilesystem"
 	ontapstoragevirtualmachine "github.com/upbound/provider-aws/v2/internal/controller/namespaced/fsx/ontapstoragevirtualmachine"
+	ontapvolume "github.com/upbound/provider-aws/v2/internal/controller/namespaced/fsx/ontapvolume"
 	windowsfilesystem "github.com/upbound/provider-aws/v2/internal/controller/namespaced/fsx/windowsfilesystem"
 )
 
@@ -26,6 +27,7 @@ func Setup_fsx(mgr ctrl.Manager, o controller.Options) error {
 		lustrefilesystem.Setup,
 		ontapfilesystem.Setup,
 		ontapstoragevirtualmachine.Setup,
+		ontapvolume.Setup,
 		windowsfilesystem.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {
@@ -44,6 +46,7 @@ func SetupGated_fsx(mgr ctrl.Manager, o controller.Options) error {
 		lustrefilesystem.SetupGated,
 		ontapfilesystem.SetupGated,
 		ontapstoragevirtualmachine.SetupGated,
+		ontapvolume.SetupGated,
 		windowsfilesystem.SetupGated,
 	} {
 		if err := setup(mgr, o); err != nil {
@@ -61,6 +64,7 @@ func SetupWebhookWithManager_fsx(mgr ctrl.Manager) error {
 		lustrefilesystem.SetupWebhookWithManager,
 		ontapfilesystem.SetupWebhookWithManager,
 		ontapstoragevirtualmachine.SetupWebhookWithManager,
+		ontapvolume.SetupWebhookWithManager,
 		windowsfilesystem.SetupWebhookWithManager,
 	} {
 		if err := setup(mgr); err != nil {
