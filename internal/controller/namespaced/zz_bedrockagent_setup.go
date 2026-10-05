@@ -12,7 +12,9 @@ import (
 	agent "github.com/upbound/provider-aws/v2/internal/controller/namespaced/bedrockagent/agent"
 	agentknowledgebaseassociation "github.com/upbound/provider-aws/v2/internal/controller/namespaced/bedrockagent/agentknowledgebaseassociation"
 	datasource "github.com/upbound/provider-aws/v2/internal/controller/namespaced/bedrockagent/datasource"
+	flow "github.com/upbound/provider-aws/v2/internal/controller/namespaced/bedrockagent/flow"
 	knowledgebase "github.com/upbound/provider-aws/v2/internal/controller/namespaced/bedrockagent/knowledgebase"
+	prompt "github.com/upbound/provider-aws/v2/internal/controller/namespaced/bedrockagent/prompt"
 )
 
 // Setup_bedrockagent creates all controllers with the supplied logger and adds them to
@@ -22,7 +24,9 @@ func Setup_bedrockagent(mgr ctrl.Manager, o controller.Options) error {
 		agent.Setup,
 		agentknowledgebaseassociation.Setup,
 		datasource.Setup,
+		flow.Setup,
 		knowledgebase.Setup,
+		prompt.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err
@@ -38,7 +42,9 @@ func SetupGated_bedrockagent(mgr ctrl.Manager, o controller.Options) error {
 		agent.SetupGated,
 		agentknowledgebaseassociation.SetupGated,
 		datasource.SetupGated,
+		flow.SetupGated,
 		knowledgebase.SetupGated,
+		prompt.SetupGated,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err
@@ -53,7 +59,9 @@ func SetupWebhookWithManager_bedrockagent(mgr ctrl.Manager) error {
 		agent.SetupWebhookWithManager,
 		agentknowledgebaseassociation.SetupWebhookWithManager,
 		datasource.SetupWebhookWithManager,
+		flow.SetupWebhookWithManager,
 		knowledgebase.SetupWebhookWithManager,
+		prompt.SetupWebhookWithManager,
 	} {
 		if err := setup(mgr); err != nil {
 			return err

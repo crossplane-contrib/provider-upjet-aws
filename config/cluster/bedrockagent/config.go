@@ -102,6 +102,82 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		r.AddSingletonListConversion("vector_ingestion_configuration[*].parsing_configuration[*].bedrock_foundation_model_configuration[*].parsing_prompt", "vectorIngestionConfiguration[*].parsingConfiguration[*].bedrockFoundationModelConfiguration[*].parsingPrompt")
 	})
 
+	p.AddResourceConfigurator("aws_bedrockagent_flow", func(r *config.Resource) {
+		r.References["customer_encryption_key_arn"] = config.Reference{
+			TerraformName: "aws_kms_key",
+			Extractor:     common.PathARNExtractor,
+		}
+		r.References["definition.node.configuration.knowledge_base.knowledge_base_id"] = config.Reference{
+			TerraformName: "aws_bedrockagent_knowledge_base",
+		}
+		r.References["definition.node.configuration.lambda_function.lambda_arn"] = config.Reference{
+			TerraformName: "aws_lambda_function",
+			Extractor:     common.PathARNExtractor,
+		}
+		r.References["definition.node.configuration.prompt.source_configuration.resource.prompt_arn"] = config.Reference{
+			TerraformName: "aws_bedrockagent_prompt",
+			Extractor:     common.PathARNExtractor,
+		}
+		r.References["definition.node.configuration.retrieval.service_configuration.s3.bucket_name"] = config.Reference{
+			TerraformName: "aws_s3_bucket",
+		}
+		r.References["definition.node.configuration.storage.service_configuration.s3.bucket_name"] = config.Reference{
+			TerraformName: "aws_s3_bucket",
+		}
+		r.References["execution_role_arn"] = config.Reference{
+			TerraformName: "aws_iam_role",
+			Extractor:     common.PathARNExtractor,
+		}
+		// The content of a chat message is limited to a single element by the
+		// Terraform provider, but is an array in the AWS API, so it is kept as a
+		// list.
+		r.AddSingletonListConversion("definition", "definition")
+		r.AddSingletonListConversion("definition[*].connection[*].configuration", "definition[*].connection[*].configuration")
+		r.AddSingletonListConversion("definition[*].connection[*].configuration[*].conditional", "definition[*].connection[*].configuration[*].conditional")
+		r.AddSingletonListConversion("definition[*].connection[*].configuration[*].data", "definition[*].connection[*].configuration[*].data")
+		r.AddSingletonListConversion("definition[*].node[*].configuration", "definition[*].node[*].configuration")
+		r.AddSingletonListConversion("definition[*].node[*].configuration[*].agent", "definition[*].node[*].configuration[*].agent")
+		r.AddSingletonListConversion("definition[*].node[*].configuration[*].collector", "definition[*].node[*].configuration[*].collector")
+		r.AddSingletonListConversion("definition[*].node[*].configuration[*].condition", "definition[*].node[*].configuration[*].condition")
+		r.AddSingletonListConversion("definition[*].node[*].configuration[*].inline_code", "definition[*].node[*].configuration[*].inlineCode")
+		r.AddSingletonListConversion("definition[*].node[*].configuration[*].input", "definition[*].node[*].configuration[*].input")
+		r.AddSingletonListConversion("definition[*].node[*].configuration[*].iterator", "definition[*].node[*].configuration[*].iterator")
+		r.AddSingletonListConversion("definition[*].node[*].configuration[*].knowledge_base", "definition[*].node[*].configuration[*].knowledgeBase")
+		r.AddSingletonListConversion("definition[*].node[*].configuration[*].knowledge_base[*].guardrail_configuration", "definition[*].node[*].configuration[*].knowledgeBase[*].guardrailConfiguration")
+		r.AddSingletonListConversion("definition[*].node[*].configuration[*].knowledge_base[*].inference_configuration", "definition[*].node[*].configuration[*].knowledgeBase[*].inferenceConfiguration")
+		r.AddSingletonListConversion("definition[*].node[*].configuration[*].knowledge_base[*].inference_configuration[*].text", "definition[*].node[*].configuration[*].knowledgeBase[*].inferenceConfiguration[*].text")
+		r.AddSingletonListConversion("definition[*].node[*].configuration[*].lambda_function", "definition[*].node[*].configuration[*].lambdaFunction")
+		r.AddSingletonListConversion("definition[*].node[*].configuration[*].lex", "definition[*].node[*].configuration[*].lex")
+		r.AddSingletonListConversion("definition[*].node[*].configuration[*].output", "definition[*].node[*].configuration[*].output")
+		r.AddSingletonListConversion("definition[*].node[*].configuration[*].prompt", "definition[*].node[*].configuration[*].prompt")
+		r.AddSingletonListConversion("definition[*].node[*].configuration[*].prompt[*].guardrail_configuration", "definition[*].node[*].configuration[*].prompt[*].guardrailConfiguration")
+		r.AddSingletonListConversion("definition[*].node[*].configuration[*].prompt[*].source_configuration", "definition[*].node[*].configuration[*].prompt[*].sourceConfiguration")
+		r.AddSingletonListConversion("definition[*].node[*].configuration[*].prompt[*].source_configuration[*].inline", "definition[*].node[*].configuration[*].prompt[*].sourceConfiguration[*].inline")
+		r.AddSingletonListConversion("definition[*].node[*].configuration[*].prompt[*].source_configuration[*].inline[*].inference_configuration", "definition[*].node[*].configuration[*].prompt[*].sourceConfiguration[*].inline[*].inferenceConfiguration")
+		r.AddSingletonListConversion("definition[*].node[*].configuration[*].prompt[*].source_configuration[*].inline[*].inference_configuration[*].text", "definition[*].node[*].configuration[*].prompt[*].sourceConfiguration[*].inline[*].inferenceConfiguration[*].text")
+		r.AddSingletonListConversion("definition[*].node[*].configuration[*].prompt[*].source_configuration[*].inline[*].template_configuration", "definition[*].node[*].configuration[*].prompt[*].sourceConfiguration[*].inline[*].templateConfiguration")
+		r.AddSingletonListConversion("definition[*].node[*].configuration[*].prompt[*].source_configuration[*].inline[*].template_configuration[*].chat", "definition[*].node[*].configuration[*].prompt[*].sourceConfiguration[*].inline[*].templateConfiguration[*].chat")
+		r.AddSingletonListConversion("definition[*].node[*].configuration[*].prompt[*].source_configuration[*].inline[*].template_configuration[*].chat[*].message[*].content[*].cache_point", "definition[*].node[*].configuration[*].prompt[*].sourceConfiguration[*].inline[*].templateConfiguration[*].chat[*].message[*].content[*].cachePoint")
+		r.AddSingletonListConversion("definition[*].node[*].configuration[*].prompt[*].source_configuration[*].inline[*].template_configuration[*].chat[*].system[*].cache_point", "definition[*].node[*].configuration[*].prompt[*].sourceConfiguration[*].inline[*].templateConfiguration[*].chat[*].system[*].cachePoint")
+		r.AddSingletonListConversion("definition[*].node[*].configuration[*].prompt[*].source_configuration[*].inline[*].template_configuration[*].chat[*].tool_configuration", "definition[*].node[*].configuration[*].prompt[*].sourceConfiguration[*].inline[*].templateConfiguration[*].chat[*].toolConfiguration")
+		r.AddSingletonListConversion("definition[*].node[*].configuration[*].prompt[*].source_configuration[*].inline[*].template_configuration[*].chat[*].tool_configuration[*].tool[*].cache_point", "definition[*].node[*].configuration[*].prompt[*].sourceConfiguration[*].inline[*].templateConfiguration[*].chat[*].toolConfiguration[*].tool[*].cachePoint")
+		r.AddSingletonListConversion("definition[*].node[*].configuration[*].prompt[*].source_configuration[*].inline[*].template_configuration[*].chat[*].tool_configuration[*].tool[*].tool_spec", "definition[*].node[*].configuration[*].prompt[*].sourceConfiguration[*].inline[*].templateConfiguration[*].chat[*].toolConfiguration[*].tool[*].toolSpec")
+		r.AddSingletonListConversion("definition[*].node[*].configuration[*].prompt[*].source_configuration[*].inline[*].template_configuration[*].chat[*].tool_configuration[*].tool[*].tool_spec[*].input_schema", "definition[*].node[*].configuration[*].prompt[*].sourceConfiguration[*].inline[*].templateConfiguration[*].chat[*].toolConfiguration[*].tool[*].toolSpec[*].inputSchema")
+		r.AddSingletonListConversion("definition[*].node[*].configuration[*].prompt[*].source_configuration[*].inline[*].template_configuration[*].chat[*].tool_configuration[*].tool_choice", "definition[*].node[*].configuration[*].prompt[*].sourceConfiguration[*].inline[*].templateConfiguration[*].chat[*].toolConfiguration[*].toolChoice")
+		r.AddSingletonListConversion("definition[*].node[*].configuration[*].prompt[*].source_configuration[*].inline[*].template_configuration[*].chat[*].tool_configuration[*].tool_choice[*].any", "definition[*].node[*].configuration[*].prompt[*].sourceConfiguration[*].inline[*].templateConfiguration[*].chat[*].toolConfiguration[*].toolChoice[*].any")
+		r.AddSingletonListConversion("definition[*].node[*].configuration[*].prompt[*].source_configuration[*].inline[*].template_configuration[*].chat[*].tool_configuration[*].tool_choice[*].auto", "definition[*].node[*].configuration[*].prompt[*].sourceConfiguration[*].inline[*].templateConfiguration[*].chat[*].toolConfiguration[*].toolChoice[*].auto")
+		r.AddSingletonListConversion("definition[*].node[*].configuration[*].prompt[*].source_configuration[*].inline[*].template_configuration[*].chat[*].tool_configuration[*].tool_choice[*].tool", "definition[*].node[*].configuration[*].prompt[*].sourceConfiguration[*].inline[*].templateConfiguration[*].chat[*].toolConfiguration[*].toolChoice[*].tool")
+		r.AddSingletonListConversion("definition[*].node[*].configuration[*].prompt[*].source_configuration[*].inline[*].template_configuration[*].text", "definition[*].node[*].configuration[*].prompt[*].sourceConfiguration[*].inline[*].templateConfiguration[*].text")
+		r.AddSingletonListConversion("definition[*].node[*].configuration[*].prompt[*].source_configuration[*].inline[*].template_configuration[*].text[*].cache_point", "definition[*].node[*].configuration[*].prompt[*].sourceConfiguration[*].inline[*].templateConfiguration[*].text[*].cachePoint")
+		r.AddSingletonListConversion("definition[*].node[*].configuration[*].prompt[*].source_configuration[*].resource", "definition[*].node[*].configuration[*].prompt[*].sourceConfiguration[*].resource")
+		r.AddSingletonListConversion("definition[*].node[*].configuration[*].retrieval", "definition[*].node[*].configuration[*].retrieval")
+		r.AddSingletonListConversion("definition[*].node[*].configuration[*].retrieval[*].service_configuration", "definition[*].node[*].configuration[*].retrieval[*].serviceConfiguration")
+		r.AddSingletonListConversion("definition[*].node[*].configuration[*].retrieval[*].service_configuration[*].s3", "definition[*].node[*].configuration[*].retrieval[*].serviceConfiguration[*].s3")
+		r.AddSingletonListConversion("definition[*].node[*].configuration[*].storage", "definition[*].node[*].configuration[*].storage")
+		r.AddSingletonListConversion("definition[*].node[*].configuration[*].storage[*].service_configuration", "definition[*].node[*].configuration[*].storage[*].serviceConfiguration")
+		r.AddSingletonListConversion("definition[*].node[*].configuration[*].storage[*].service_configuration[*].s3", "definition[*].node[*].configuration[*].storage[*].serviceConfiguration[*].s3")
+	})
+
 	p.AddResourceConfigurator("aws_bedrockagent_knowledge_base", func(r *config.Resource) {
 		r.References["role_arn"] = config.Reference{
 			TerraformName: "aws_iam_role",
@@ -193,5 +269,33 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		r.AddSingletonListConversion("storage_configuration[*].redis_enterprise_cloud_configuration", "storageConfiguration[*].redisEnterpriseCloudConfiguration")
 		r.AddSingletonListConversion("storage_configuration[*].redis_enterprise_cloud_configuration[*].field_mapping", "storageConfiguration[*].redisEnterpriseCloudConfiguration[*].fieldMapping")
 		r.AddSingletonListConversion("storage_configuration[*].s3_vectors_configuration", "storageConfiguration[*].s3VectorsConfiguration")
+	})
+
+	p.AddResourceConfigurator("aws_bedrockagent_prompt", func(r *config.Resource) {
+		r.References["customer_encryption_key_arn"] = config.Reference{
+			TerraformName: "aws_kms_key",
+			Extractor:     common.PathARNExtractor,
+		}
+		// The content of a chat message is limited to a single element by the
+		// Terraform provider, but is an array in the AWS API, so it is kept as a
+		// list.
+		r.AddSingletonListConversion("variant[*].gen_ai_resource", "variant[*].genAiResource")
+		r.AddSingletonListConversion("variant[*].gen_ai_resource[*].agent", "variant[*].genAiResource[*].agent")
+		r.AddSingletonListConversion("variant[*].inference_configuration", "variant[*].inferenceConfiguration")
+		r.AddSingletonListConversion("variant[*].inference_configuration[*].text", "variant[*].inferenceConfiguration[*].text")
+		r.AddSingletonListConversion("variant[*].template_configuration", "variant[*].templateConfiguration")
+		r.AddSingletonListConversion("variant[*].template_configuration[*].chat", "variant[*].templateConfiguration[*].chat")
+		r.AddSingletonListConversion("variant[*].template_configuration[*].chat[*].message[*].content[*].cache_point", "variant[*].templateConfiguration[*].chat[*].message[*].content[*].cachePoint")
+		r.AddSingletonListConversion("variant[*].template_configuration[*].chat[*].system[*].cache_point", "variant[*].templateConfiguration[*].chat[*].system[*].cachePoint")
+		r.AddSingletonListConversion("variant[*].template_configuration[*].chat[*].tool_configuration", "variant[*].templateConfiguration[*].chat[*].toolConfiguration")
+		r.AddSingletonListConversion("variant[*].template_configuration[*].chat[*].tool_configuration[*].tool[*].cache_point", "variant[*].templateConfiguration[*].chat[*].toolConfiguration[*].tool[*].cachePoint")
+		r.AddSingletonListConversion("variant[*].template_configuration[*].chat[*].tool_configuration[*].tool[*].tool_spec", "variant[*].templateConfiguration[*].chat[*].toolConfiguration[*].tool[*].toolSpec")
+		r.AddSingletonListConversion("variant[*].template_configuration[*].chat[*].tool_configuration[*].tool[*].tool_spec[*].input_schema", "variant[*].templateConfiguration[*].chat[*].toolConfiguration[*].tool[*].toolSpec[*].inputSchema")
+		r.AddSingletonListConversion("variant[*].template_configuration[*].chat[*].tool_configuration[*].tool_choice", "variant[*].templateConfiguration[*].chat[*].toolConfiguration[*].toolChoice")
+		r.AddSingletonListConversion("variant[*].template_configuration[*].chat[*].tool_configuration[*].tool_choice[*].any", "variant[*].templateConfiguration[*].chat[*].toolConfiguration[*].toolChoice[*].any")
+		r.AddSingletonListConversion("variant[*].template_configuration[*].chat[*].tool_configuration[*].tool_choice[*].auto", "variant[*].templateConfiguration[*].chat[*].toolConfiguration[*].toolChoice[*].auto")
+		r.AddSingletonListConversion("variant[*].template_configuration[*].chat[*].tool_configuration[*].tool_choice[*].tool", "variant[*].templateConfiguration[*].chat[*].toolConfiguration[*].toolChoice[*].tool")
+		r.AddSingletonListConversion("variant[*].template_configuration[*].text", "variant[*].templateConfiguration[*].text")
+		r.AddSingletonListConversion("variant[*].template_configuration[*].text[*].cache_point", "variant[*].templateConfiguration[*].text[*].cachePoint")
 	})
 }

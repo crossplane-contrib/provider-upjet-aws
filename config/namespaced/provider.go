@@ -7,6 +7,7 @@ package namespaced
 import (
 	"github.com/upbound/provider-aws/v2/config/namespaced/acm"
 	"github.com/upbound/provider-aws/v2/config/namespaced/acmpca"
+	"github.com/upbound/provider-aws/v2/config/namespaced/agentregistry"
 	"github.com/upbound/provider-aws/v2/config/namespaced/amp"
 	"github.com/upbound/provider-aws/v2/config/namespaced/apigateway"
 	"github.com/upbound/provider-aws/v2/config/namespaced/apigatewayv2"
@@ -70,6 +71,8 @@ import (
 	"github.com/upbound/provider-aws/v2/config/namespaced/kms"
 	"github.com/upbound/provider-aws/v2/config/namespaced/lakeformation"
 	"github.com/upbound/provider-aws/v2/config/namespaced/lambda"
+	"github.com/upbound/provider-aws/v2/config/namespaced/lambdacore"
+	"github.com/upbound/provider-aws/v2/config/namespaced/lambdamicrovms"
 	"github.com/upbound/provider-aws/v2/config/namespaced/licensemanager"
 	"github.com/upbound/provider-aws/v2/config/namespaced/medialive"
 	"github.com/upbound/provider-aws/v2/config/namespaced/memorydb"
@@ -113,6 +116,7 @@ import (
 func init() {
 	ProviderConfiguration.AddConfig(acm.Configure)
 	ProviderConfiguration.AddConfig(acmpca.Configure)
+	ProviderConfiguration.AddConfig(agentregistry.Configure)
 	ProviderConfiguration.AddConfig(amp.Configure)
 	ProviderConfiguration.AddConfig(apigateway.Configure)
 	ProviderConfiguration.AddConfig(apigatewayv2.Configure)
@@ -166,6 +170,8 @@ func init() {
 	ProviderConfiguration.AddConfig(kms.Configure)
 	ProviderConfiguration.AddConfig(lakeformation.Configure)
 	ProviderConfiguration.AddConfig(lambda.Configure)
+	ProviderConfiguration.AddConfig(lambdacore.Configure)
+	ProviderConfiguration.AddConfig(lambdamicrovms.Configure)
 	ProviderConfiguration.AddConfig(licensemanager.Configure)
 	ProviderConfiguration.AddConfig(memorydb.Configure)
 	ProviderConfiguration.AddConfig(mq.Configure)

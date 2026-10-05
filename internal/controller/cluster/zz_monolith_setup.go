@@ -21,6 +21,7 @@ import (
 	certificateauthoritycertificate "github.com/upbound/provider-aws/v2/internal/controller/cluster/acmpca/certificateauthoritycertificate"
 	permission "github.com/upbound/provider-aws/v2/internal/controller/cluster/acmpca/permission"
 	policy "github.com/upbound/provider-aws/v2/internal/controller/cluster/acmpca/policy"
+	registry "github.com/upbound/provider-aws/v2/internal/controller/cluster/agentregistry/registry"
 	alertmanagerdefinition "github.com/upbound/provider-aws/v2/internal/controller/cluster/amp/alertmanagerdefinition"
 	rulegroupnamespace "github.com/upbound/provider-aws/v2/internal/controller/cluster/amp/rulegroupnamespace"
 	scraper "github.com/upbound/provider-aws/v2/internal/controller/cluster/amp/scraper"
@@ -131,12 +132,22 @@ import (
 	jobdefinition "github.com/upbound/provider-aws/v2/internal/controller/cluster/batch/jobdefinition"
 	jobqueue "github.com/upbound/provider-aws/v2/internal/controller/cluster/batch/jobqueue"
 	schedulingpolicy "github.com/upbound/provider-aws/v2/internal/controller/cluster/batch/schedulingpolicy"
+	custommodel "github.com/upbound/provider-aws/v2/internal/controller/cluster/bedrock/custommodel"
+	evaluationjob "github.com/upbound/provider-aws/v2/internal/controller/cluster/bedrock/evaluationjob"
+	foundationmodelagreement "github.com/upbound/provider-aws/v2/internal/controller/cluster/bedrock/foundationmodelagreement"
 	guardrail "github.com/upbound/provider-aws/v2/internal/controller/cluster/bedrock/guardrail"
+	guardrailversion "github.com/upbound/provider-aws/v2/internal/controller/cluster/bedrock/guardrailversion"
 	inferenceprofile "github.com/upbound/provider-aws/v2/internal/controller/cluster/bedrock/inferenceprofile"
+	modelinvocationjob "github.com/upbound/provider-aws/v2/internal/controller/cluster/bedrock/modelinvocationjob"
+	modelinvocationloggingconfiguration "github.com/upbound/provider-aws/v2/internal/controller/cluster/bedrock/modelinvocationloggingconfiguration"
+	provisionedmodelthroughput "github.com/upbound/provider-aws/v2/internal/controller/cluster/bedrock/provisionedmodelthroughput"
+	usecaseformodelaccess "github.com/upbound/provider-aws/v2/internal/controller/cluster/bedrock/usecaseformodelaccess"
 	agent "github.com/upbound/provider-aws/v2/internal/controller/cluster/bedrockagent/agent"
 	agentknowledgebaseassociation "github.com/upbound/provider-aws/v2/internal/controller/cluster/bedrockagent/agentknowledgebaseassociation"
 	datasourcebedrockagent "github.com/upbound/provider-aws/v2/internal/controller/cluster/bedrockagent/datasource"
+	flowbedrockagent "github.com/upbound/provider-aws/v2/internal/controller/cluster/bedrockagent/flow"
 	knowledgebase "github.com/upbound/provider-aws/v2/internal/controller/cluster/bedrockagent/knowledgebase"
+	prompt "github.com/upbound/provider-aws/v2/internal/controller/cluster/bedrockagent/prompt"
 	agentruntime "github.com/upbound/provider-aws/v2/internal/controller/cluster/bedrockagentcore/agentruntime"
 	agentruntimeendpoint "github.com/upbound/provider-aws/v2/internal/controller/cluster/bedrockagentcore/agentruntimeendpoint"
 	apikeycredentialprovider "github.com/upbound/provider-aws/v2/internal/controller/cluster/bedrockagentcore/apikeycredentialprovider"
@@ -536,7 +547,7 @@ import (
 	crawler "github.com/upbound/provider-aws/v2/internal/controller/cluster/glue/crawler"
 	datacatalogencryptionsettings "github.com/upbound/provider-aws/v2/internal/controller/cluster/glue/datacatalogencryptionsettings"
 	job "github.com/upbound/provider-aws/v2/internal/controller/cluster/glue/job"
-	registry "github.com/upbound/provider-aws/v2/internal/controller/cluster/glue/registry"
+	registryglue "github.com/upbound/provider-aws/v2/internal/controller/cluster/glue/registry"
 	resourcepolicyglue "github.com/upbound/provider-aws/v2/internal/controller/cluster/glue/resourcepolicy"
 	schema "github.com/upbound/provider-aws/v2/internal/controller/cluster/glue/schema"
 	securityconfigurationglue "github.com/upbound/provider-aws/v2/internal/controller/cluster/glue/securityconfiguration"
@@ -653,6 +664,9 @@ import (
 	permissionlambda "github.com/upbound/provider-aws/v2/internal/controller/cluster/lambda/permission"
 	provisionedconcurrencyconfig "github.com/upbound/provider-aws/v2/internal/controller/cluster/lambda/provisionedconcurrencyconfig"
 	runtimemanagementconfig "github.com/upbound/provider-aws/v2/internal/controller/cluster/lambda/runtimemanagementconfig"
+	networkconnector "github.com/upbound/provider-aws/v2/internal/controller/cluster/lambdacore/networkconnector"
+	imagelambdamicrovms "github.com/upbound/provider-aws/v2/internal/controller/cluster/lambdamicrovms/image"
+	microvm "github.com/upbound/provider-aws/v2/internal/controller/cluster/lambdamicrovms/microvm"
 	bot "github.com/upbound/provider-aws/v2/internal/controller/cluster/lexmodels/bot"
 	botalias "github.com/upbound/provider-aws/v2/internal/controller/cluster/lexmodels/botalias"
 	intent "github.com/upbound/provider-aws/v2/internal/controller/cluster/lexmodels/intent"
@@ -1073,6 +1087,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		certificateauthoritycertificate.Setup,
 		permission.Setup,
 		policy.Setup,
+		registry.Setup,
 		alertmanagerdefinition.Setup,
 		rulegroupnamespace.Setup,
 		scraper.Setup,
@@ -1183,12 +1198,22 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		jobdefinition.Setup,
 		jobqueue.Setup,
 		schedulingpolicy.Setup,
+		custommodel.Setup,
+		evaluationjob.Setup,
+		foundationmodelagreement.Setup,
 		guardrail.Setup,
+		guardrailversion.Setup,
 		inferenceprofile.Setup,
+		modelinvocationjob.Setup,
+		modelinvocationloggingconfiguration.Setup,
+		provisionedmodelthroughput.Setup,
+		usecaseformodelaccess.Setup,
 		agent.Setup,
 		agentknowledgebaseassociation.Setup,
 		datasourcebedrockagent.Setup,
+		flowbedrockagent.Setup,
 		knowledgebase.Setup,
+		prompt.Setup,
 		agentruntime.Setup,
 		agentruntimeendpoint.Setup,
 		apikeycredentialprovider.Setup,
@@ -1588,7 +1613,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		crawler.Setup,
 		datacatalogencryptionsettings.Setup,
 		job.Setup,
-		registry.Setup,
+		registryglue.Setup,
 		resourcepolicyglue.Setup,
 		schema.Setup,
 		securityconfigurationglue.Setup,
@@ -1705,6 +1730,9 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		permissionlambda.Setup,
 		provisionedconcurrencyconfig.Setup,
 		runtimemanagementconfig.Setup,
+		networkconnector.Setup,
+		imagelambdamicrovms.Setup,
+		microvm.Setup,
 		bot.Setup,
 		botalias.Setup,
 		intent.Setup,
@@ -2131,6 +2159,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		certificateauthoritycertificate.SetupGated,
 		permission.SetupGated,
 		policy.SetupGated,
+		registry.SetupGated,
 		alertmanagerdefinition.SetupGated,
 		rulegroupnamespace.SetupGated,
 		scraper.SetupGated,
@@ -2241,12 +2270,22 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		jobdefinition.SetupGated,
 		jobqueue.SetupGated,
 		schedulingpolicy.SetupGated,
+		custommodel.SetupGated,
+		evaluationjob.SetupGated,
+		foundationmodelagreement.SetupGated,
 		guardrail.SetupGated,
+		guardrailversion.SetupGated,
 		inferenceprofile.SetupGated,
+		modelinvocationjob.SetupGated,
+		modelinvocationloggingconfiguration.SetupGated,
+		provisionedmodelthroughput.SetupGated,
+		usecaseformodelaccess.SetupGated,
 		agent.SetupGated,
 		agentknowledgebaseassociation.SetupGated,
 		datasourcebedrockagent.SetupGated,
+		flowbedrockagent.SetupGated,
 		knowledgebase.SetupGated,
+		prompt.SetupGated,
 		agentruntime.SetupGated,
 		agentruntimeendpoint.SetupGated,
 		apikeycredentialprovider.SetupGated,
@@ -2646,7 +2685,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		crawler.SetupGated,
 		datacatalogencryptionsettings.SetupGated,
 		job.SetupGated,
-		registry.SetupGated,
+		registryglue.SetupGated,
 		resourcepolicyglue.SetupGated,
 		schema.SetupGated,
 		securityconfigurationglue.SetupGated,
@@ -2763,6 +2802,9 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		permissionlambda.SetupGated,
 		provisionedconcurrencyconfig.SetupGated,
 		runtimemanagementconfig.SetupGated,
+		networkconnector.SetupGated,
+		imagelambdamicrovms.SetupGated,
+		microvm.SetupGated,
 		bot.SetupGated,
 		botalias.SetupGated,
 		intent.SetupGated,
@@ -3188,6 +3230,7 @@ func SetupWebhookWithManager_monolith(mgr ctrl.Manager) error {
 		certificateauthoritycertificate.SetupWebhookWithManager,
 		permission.SetupWebhookWithManager,
 		policy.SetupWebhookWithManager,
+		registry.SetupWebhookWithManager,
 		alertmanagerdefinition.SetupWebhookWithManager,
 		rulegroupnamespace.SetupWebhookWithManager,
 		scraper.SetupWebhookWithManager,
@@ -3298,12 +3341,22 @@ func SetupWebhookWithManager_monolith(mgr ctrl.Manager) error {
 		jobdefinition.SetupWebhookWithManager,
 		jobqueue.SetupWebhookWithManager,
 		schedulingpolicy.SetupWebhookWithManager,
+		custommodel.SetupWebhookWithManager,
+		evaluationjob.SetupWebhookWithManager,
+		foundationmodelagreement.SetupWebhookWithManager,
 		guardrail.SetupWebhookWithManager,
+		guardrailversion.SetupWebhookWithManager,
 		inferenceprofile.SetupWebhookWithManager,
+		modelinvocationjob.SetupWebhookWithManager,
+		modelinvocationloggingconfiguration.SetupWebhookWithManager,
+		provisionedmodelthroughput.SetupWebhookWithManager,
+		usecaseformodelaccess.SetupWebhookWithManager,
 		agent.SetupWebhookWithManager,
 		agentknowledgebaseassociation.SetupWebhookWithManager,
 		datasourcebedrockagent.SetupWebhookWithManager,
+		flowbedrockagent.SetupWebhookWithManager,
 		knowledgebase.SetupWebhookWithManager,
+		prompt.SetupWebhookWithManager,
 		agentruntime.SetupWebhookWithManager,
 		agentruntimeendpoint.SetupWebhookWithManager,
 		apikeycredentialprovider.SetupWebhookWithManager,
@@ -3703,7 +3756,7 @@ func SetupWebhookWithManager_monolith(mgr ctrl.Manager) error {
 		crawler.SetupWebhookWithManager,
 		datacatalogencryptionsettings.SetupWebhookWithManager,
 		job.SetupWebhookWithManager,
-		registry.SetupWebhookWithManager,
+		registryglue.SetupWebhookWithManager,
 		resourcepolicyglue.SetupWebhookWithManager,
 		schema.SetupWebhookWithManager,
 		securityconfigurationglue.SetupWebhookWithManager,
@@ -3820,6 +3873,9 @@ func SetupWebhookWithManager_monolith(mgr ctrl.Manager) error {
 		permissionlambda.SetupWebhookWithManager,
 		provisionedconcurrencyconfig.SetupWebhookWithManager,
 		runtimemanagementconfig.SetupWebhookWithManager,
+		networkconnector.SetupWebhookWithManager,
+		imagelambdamicrovms.SetupWebhookWithManager,
+		microvm.SetupWebhookWithManager,
 		bot.SetupWebhookWithManager,
 		botalias.SetupWebhookWithManager,
 		intent.SetupWebhookWithManager,

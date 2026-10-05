@@ -1,0 +1,125 @@
+# SPDX-FileCopyrightText: 2026 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+# Custom Model Example
+# Fine-tunes a foundation model with the training data stored in an S3 bucket.
+# The training data has to be uploaded to the bucket before the job starts.
+
+apiVersion: bedrock.aws.upbound.io/v1beta1
+kind: CustomModel
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrock/v1beta1/custommodel
+    upjet.upbound.io/manual-intervention: >
+      A model customization job needs training data in the S3 bucket at
+      data/train.jsonl, runs for hours and is billed, and the custom model
+      it creates is billed for storage.
+  labels:
+    testing.upbound.io/example-name: custommodel
+  name: custommodel
+spec:
+  forProvider:
+    baseModelIdentifier: arn:aws:bedrock:us-east-1::foundation-model/amazon.nova-micro-v1:0:128k
+    customModelName: example-custom-model
+    customizationType: FINE_TUNING
+    hyperparameters:
+      batchSize: "1"
+      epochCount: "1"
+      learningRate: "0.00001"
+    jobName: example-custom-model-job
+    outputDataConfig:
+      s3Uri: s3://upbound-example-bedrock-custommodel/output/
+    region: us-east-1
+    roleArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: custommodel
+    trainingDataConfig:
+      s3Uri: s3://upbound-example-bedrock-custommodel/data/train.jsonl
+
+---
+
+apiVersion: s3.aws.upbound.io/v1beta2
+kind: Bucket
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrock/v1beta1/custommodel
+    upjet.upbound.io/manual-intervention: >
+      A model customization job needs training data in the S3 bucket at
+      data/train.jsonl, runs for hours and is billed, and the custom model
+      it creates is billed for storage.
+  labels:
+    testing.upbound.io/example-name: custommodel
+  name: upbound-example-bedrock-custommodel
+spec:
+  forProvider:
+    forceDestroy: true
+    region: us-east-1
+
+---
+
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrock/v1beta1/custommodel
+    upjet.upbound.io/manual-intervention: >
+      A model customization job needs training data in the S3 bucket at
+      data/train.jsonl, runs for hours and is billed, and the custom model
+      it creates is billed for storage.
+  labels:
+    testing.upbound.io/example-name: custommodel
+  name: example-bedrock-custommodel
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {
+              "Service": "bedrock.amazonaws.com"
+            },
+            "Action": "sts:AssumeRole"
+          }
+        ]
+      }
+
+---
+
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: RolePolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrock/v1beta1/custommodel
+    upjet.upbound.io/manual-intervention: >
+      A model customization job needs training data in the S3 bucket at
+      data/train.jsonl, runs for hours and is billed, and the custom model
+      it creates is billed for storage.
+  labels:
+    testing.upbound.io/example-name: custommodel
+  name: example-bedrock-custommodel
+spec:
+  forProvider:
+    policy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Action": [
+              "s3:GetObject",
+              "s3:PutObject",
+              "s3:ListBucket"
+            ],
+            "Resource": [
+              "arn:aws:s3:::upbound-example-bedrock-custommodel",
+              "arn:aws:s3:::upbound-example-bedrock-custommodel/*"
+            ]
+          }
+        ]
+      }
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: custommodel

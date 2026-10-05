@@ -1,0 +1,27 @@
+# SPDX-FileCopyrightText: 2026 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+# Foundation Model Agreement Example
+# Accepts the agreement of a foundation model. The offer token is returned by
+# the ListFoundationModelAgreementOffers API for the model, e.g.
+# aws bedrock list-foundation-model-agreement-offers --model-id <model-id>
+
+apiVersion: bedrock.aws.m.upbound.io/v1beta1
+kind: FoundationModelAgreement
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrock/v1beta1/foundationmodelagreement
+    upjet.upbound.io/manual-intervention: >
+      The offer token has to be fetched from the
+      ListFoundationModelAgreementOffers API, and accepting the agreement
+      subscribes the account to the model.
+  labels:
+    testing.upbound.io/example-name: foundationmodelagreement
+  name: foundationmodelagreement
+  namespace: upbound-system
+spec:
+  forProvider:
+    modelId: anthropic.claude-sonnet-4-5-20250929-v1:0
+    offerToken: <offer-token>
+    region: us-east-1

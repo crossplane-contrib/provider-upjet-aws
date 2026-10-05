@@ -1,0 +1,18 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
+apiVersion: bedrockagent.aws.upbound.io/v1beta1
+kind: Prompt
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrockagent/v1beta1/prompt
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    description: My prompt description.
+    name: MyPrompt
+    region: us-west-1

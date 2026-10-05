@@ -1,0 +1,19 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
+apiVersion: bedrock.aws.m.upbound.io/v1beta1
+kind: FoundationModelAgreement
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrock/v1beta1/foundationmodelagreement
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    modelId: ${data.aws_bedrock_foundation_model_agreement_offers.example.model_id}
+    offerToken: ${data.aws_bedrock_foundation_model_agreement_offers.example.offers[0].offer_token}
+    region: us-west-1
