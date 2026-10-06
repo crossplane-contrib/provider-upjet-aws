@@ -39,6 +39,11 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	// arn:aws:apigateway:<region>:<account>:/domainnameaccessassociations/domainname/<domain-id>/vpcesource/<vpce-id>
 	"aws_api_gateway_domain_name_access_association": identifierFromProviderWithDefaultStub("arn:aws:apigateway:us-west-2:123456789012:/domainnameaccessassociations/domainname/12qmzgp2.9m7ilski.test+hykg7a12e7/vpcesource/vpce-05de3f8f82740a748"),
 
+	// apigatewayv2
+	//
+	// can be imported using the provider-assigned routing_rule_id
+	"aws_apigatewayv2_routing_rule": config.FrameworkResourceWithComputedIdentifier("routing_rule_id", "xp-stub-routing-rule-000000"),
+
 	// appconfig
 	//
 	// AppConfig Environments can be imported by using the environment ID and application ID separated by a colon (:)

@@ -65,6 +65,7 @@ import (
 	modelapigatewayv2 "github.com/upbound/provider-aws/v2/internal/controller/cluster/apigatewayv2/model"
 	route "github.com/upbound/provider-aws/v2/internal/controller/cluster/apigatewayv2/route"
 	routeresponse "github.com/upbound/provider-aws/v2/internal/controller/cluster/apigatewayv2/routeresponse"
+	routingrule "github.com/upbound/provider-aws/v2/internal/controller/cluster/apigatewayv2/routingrule"
 	stageapigatewayv2 "github.com/upbound/provider-aws/v2/internal/controller/cluster/apigatewayv2/stage"
 	vpclinkapigatewayv2 "github.com/upbound/provider-aws/v2/internal/controller/cluster/apigatewayv2/vpclink"
 	policyappautoscaling "github.com/upbound/provider-aws/v2/internal/controller/cluster/appautoscaling/policy"
@@ -1132,6 +1133,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		modelapigatewayv2.Setup,
 		route.Setup,
 		routeresponse.Setup,
+		routingrule.Setup,
 		stageapigatewayv2.Setup,
 		vpclinkapigatewayv2.Setup,
 		policyappautoscaling.Setup,
@@ -2205,6 +2207,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		modelapigatewayv2.SetupGated,
 		route.SetupGated,
 		routeresponse.SetupGated,
+		routingrule.SetupGated,
 		stageapigatewayv2.SetupGated,
 		vpclinkapigatewayv2.SetupGated,
 		policyappautoscaling.SetupGated,
@@ -3277,6 +3280,7 @@ func SetupWebhookWithManager_monolith(mgr ctrl.Manager) error {
 		modelapigatewayv2.SetupWebhookWithManager,
 		route.SetupWebhookWithManager,
 		routeresponse.SetupWebhookWithManager,
+		routingrule.SetupWebhookWithManager,
 		stageapigatewayv2.SetupWebhookWithManager,
 		vpclinkapigatewayv2.SetupWebhookWithManager,
 		policyappautoscaling.SetupWebhookWithManager,
