@@ -127,3 +127,85 @@ func TestEcsTaskDefinitionSetIdentifierArgumentFn(t *testing.T) {
 		})
 	}
 }
+
+func TestGrafanaWorkspaceServiceAccountGetIDFn(t *testing.T) {
+	e := grafanaWorkspaceServiceAccount()
+
+	cases := map[string]struct {
+		parameters map[string]any
+		wantID     string
+		wantErr    bool
+	}{
+		"ColdStartWithPlaceholder": {
+			parameters: map[string]any{"workspace_id": "g-abc12345", "service_account_id": "1"},
+			wantID:     "g-abc12345,1",
+		},
+		"CreatedWithRealServiceAccountID": {
+			parameters: map[string]any{"workspace_id": "g-abc12345", "service_account_id": "3"},
+			wantID:     "g-abc12345,3",
+		},
+		"MissingWorkspaceID": {
+			parameters: map[string]any{"service_account_id": "1"},
+			wantErr:    true,
+		},
+	}
+
+	for name, tc := range cases {
+		t.Run(name, func(t *testing.T) {
+			got, err := e.GetIDFn(context.Background(), "", tc.parameters, nil)
+			if tc.wantErr {
+				if err == nil {
+					t.Fatalf("GetIDFn() error = nil, want error")
+				}
+				return
+			}
+			if err != nil {
+				t.Fatalf("GetIDFn() error = %v, want nil", err)
+			}
+			if got != tc.wantID {
+				t.Errorf("GetIDFn() = %q, want %q", got, tc.wantID)
+			}
+		})
+	}
+}
+
+func TestGrafanaWorkspaceServiceAccountTokenGetIDFn(t *testing.T) {
+	e := grafanaWorkspaceServiceAccountToken()
+
+	cases := map[string]struct {
+		parameters map[string]any
+		wantID     string
+		wantErr    bool
+	}{
+		"ColdStartWithPlaceholder": {
+			parameters: map[string]any{"workspace_id": "g-abc12345", "service_account_id": "1", "service_account_token_id": "1"},
+			wantID:     "g-abc12345,1,1",
+		},
+		"CreatedWithRealTokenID": {
+			parameters: map[string]any{"workspace_id": "g-abc12345", "service_account_id": "1", "service_account_token_id": "7"},
+			wantID:     "g-abc12345,1,7",
+		},
+		"MissingServiceAccountID": {
+			parameters: map[string]any{"workspace_id": "g-abc12345", "service_account_token_id": "1"},
+			wantErr:    true,
+		},
+	}
+
+	for name, tc := range cases {
+		t.Run(name, func(t *testing.T) {
+			got, err := e.GetIDFn(context.Background(), "", tc.parameters, nil)
+			if tc.wantErr {
+				if err == nil {
+					t.Fatalf("GetIDFn() error = nil, want error")
+				}
+				return
+			}
+			if err != nil {
+				t.Fatalf("GetIDFn() error = %v, want nil", err)
+			}
+			if got != tc.wantID {
+				t.Errorf("GetIDFn() = %q, want %q", got, tc.wantID)
+			}
+		})
+	}
+}
