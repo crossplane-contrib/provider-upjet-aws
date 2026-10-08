@@ -88,55 +88,12 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 				return nil, errors.New("could not construct resource data for diff customization")
 			}
 			if resourceData.HasChange("global_secondary_index") {
-				gsiUserFieldsHashFunc := func(v interface{}) int {
-					var buf bytes.Buffer
-					tfMap, ok := v.(map[string]interface{})
-					if !ok {
-						return 0
-					}
-					if name, ok := tfMap["name"].(string); ok {
-						fmt.Fprintf(&buf, "%s-", name)
-					}
-					if hashKey, ok := tfMap["hash_key"].(string); ok {
-						fmt.Fprintf(&buf, "%s-", hashKey)
-					}
-					if rangeKey, ok := tfMap["range_key"].(string); ok {
-						fmt.Fprintf(&buf, "%s-", rangeKey)
-					}
-					if projType, ok := tfMap["projection_type"].(string); ok {
-						fmt.Fprintf(&buf, "%s-", projType)
-					}
-					// read_capacity and write_capacity are "number" type in the
-					// Terraform schema, which maps to float64 in Go (not int).
-					if readCap, ok := tfMap["read_capacity"].(float64); ok {
-						fmt.Fprintf(&buf, "%g-", readCap)
-					}
-					if writeCap, ok := tfMap["write_capacity"].(float64); ok {
-						fmt.Fprintf(&buf, "%g-", writeCap)
-					}
-					if nka, ok := tfMap["non_key_attributes"]; ok {
-						if nkaSet, ok := nka.(*schema.Set); ok {
-							nkaList := make([]string, 0, nkaSet.Len())
-							for _, v := range nkaSet.List() {
-								if s, ok := v.(string); ok {
-									nkaList = append(nkaList, s)
-								}
-							}
-							sort.Strings(nkaList)
-							for _, s := range nkaList {
-								fmt.Fprintf(&buf, "%s-", s)
-							}
-						}
-					}
-					return schema.HashString(buf.String())
-				}
-
 				oRaw, nRaw := resourceData.GetChange("global_secondary_index")
 				oldGSIs := oRaw.(*schema.Set)
 				newGSIs := nRaw.(*schema.Set)
 
-				oldGSIsCustomHash := schema.NewSet(gsiUserFieldsHashFunc, oldGSIs.List())
-				newGSIsCustomHash := schema.NewSet(gsiUserFieldsHashFunc, newGSIs.List())
+				oldGSIsCustomHash := schema.NewSet(gsiUserFieldsHash, oldGSIs.List())
+				newGSIsCustomHash := schema.NewSet(gsiUserFieldsHash, newGSIs.List())
 
 				if oldGSIsCustomHash.HashEqual(newGSIsCustomHash) {
 					for dk := range diff.Attributes {
@@ -172,4 +129,40 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 			return diff, nil
 		}
 	})
+}
+
+// gsiUserFieldsHash hashes a global_secondary_index set element of
+// aws_dynamodb_table on the fields users configure only, leaving out the
+// computed fields AWS populates after creation.
+func gsiUserFieldsHash(v interface{}) int {
+	tfMap, ok := v.(map[string]interface{})
+	if !ok {
+		return 0
+	}
+	var buf bytes.Buffer
+	for _, k := range []string{"name", "hash_key", "range_key", "projection_type"} {
+		if s, ok := tfMap[k].(string); ok {
+			fmt.Fprintf(&buf, "%s-", s)
+		}
+	}
+	// read_capacity and write_capacity are TypeInt in the Terraform
+	// schema, so the set elements carry them as int.
+	for _, k := range []string{"read_capacity", "write_capacity"} {
+		if n, ok := tfMap[k].(int); ok {
+			fmt.Fprintf(&buf, "%d-", n)
+		}
+	}
+	if nkaSet, ok := tfMap["non_key_attributes"].(*schema.Set); ok {
+		nkaList := make([]string, 0, nkaSet.Len())
+		for _, v := range nkaSet.List() {
+			if s, ok := v.(string); ok {
+				nkaList = append(nkaList, s)
+			}
+		}
+		sort.Strings(nkaList)
+		for _, s := range nkaList {
+			fmt.Fprintf(&buf, "%s-", s)
+		}
+	}
+	return schema.HashString(buf.String())
 }
