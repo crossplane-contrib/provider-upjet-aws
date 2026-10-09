@@ -1,0 +1,103 @@
+apiVersion: apiextensions.crossplane.io/v2
+kind: CompositeResourceDefinition
+metadata:
+  name: irsas.aws.platform.upbound.io
+  labels:
+    provider: aws
+spec:
+  group: aws.platform.upbound.io
+  names:
+    kind: IRSA
+    plural: irsas
+  versions:
+    - name: v1alpha1
+      served: true
+      referenceable: true
+      schema:
+        openAPIV3Schema:
+          type: object
+          properties:
+            spec:
+              type: object
+              properties:
+                parameters:
+                  type: object
+                  description: IRSA configuration parameters.
+                  properties:
+                    id:
+                      type: string
+                      description: ID of this Cluster that other objects will use to refer to it.
+                    managementPolicies:
+                      description: ManagementPolicies for AWS EC2 resources. Defaults to ["*"] which includes all operations (Create, Observe, Update, Delete, LateInitialize). To orphan resources on deletion, use ["Create", "Observe", "Update", "LateInitialize"].
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - "*"
+                          - Create
+                          - Observe
+                          - Update
+                          - Delete
+                          - LateInitialize
+                        default: "*"
+                    providerConfigName:
+                      description: Crossplane ProviderConfig to use for provisioning this resources
+                      type: string
+                      default: default
+                    providerConfigKind:
+                      description: Crossplane ProviderConfig Kind to use for provisioning this resources
+                      type: string
+                      default: ProviderConfig
+                    serviceAccount:
+                      type: object
+                      description: Configuration for SA
+                      properties:
+                        name:
+                          type: string
+                          description: name kubernetes SA
+                        namespace:
+                          type: string
+                          description: namespace kubernetes SA
+                      required:
+                        - name
+                        - namespace
+                    condition:
+                      type: string
+                      description: This is the whether or not the equals is a hard match or like query
+                      default: StringEquals
+                      enum:
+                        - StringEquals
+                        - StringLike
+                    policyDocument:
+                      type: string
+                      description: The JSON policy document that is the content for the policy.
+                    oidcHost:
+                      type: string
+                      description: The JSON policy document that is the content for the policy.
+                    oidcProviderArn:
+                      type: string
+                      description: The JSON policy document that is the content for the policy.
+                  required:
+                    - id
+                    - condition
+                    - policyDocument
+                    - serviceAccount
+              required:
+                - parameters
+            status:
+              type: object
+              properties:
+                irsa:
+                  description: Freeform field containing status information for irsa
+                  type: object
+                  x-kubernetes-preserve-unknown-fields: true
+                roleArn:
+                  description: The arn of the role
+                  type: string
+                policyArn:
+                  description: The arn of the policy
+                  type: string
+                observed:
+                  description: Freeform field containing information about the observed status.
+                  type: object
+                  x-kubernetes-preserve-unknown-fields: true

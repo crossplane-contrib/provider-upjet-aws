@@ -31,6 +31,9 @@ const (
 	keyRegion           = "region"
 	keyPartition        = "partition"
 	localstackAccountID = "000000000000"
+	// partitionAWS is the commercial AWS partition, which is also the one
+	// assumed when a ProviderConfig does not name another.
+	partitionAWS = "aws"
 )
 
 type SetupConfig struct {
@@ -46,11 +49,13 @@ var globalResources = map[string]string{
 	// Add specific global resources here as needed
 	// Example: "backup.aws.upbound.io/GlobalSettings": "backup",
 	"backup.aws.upbound.io/GlobalSettings":              "backup",
+	"bedrock.aws.upbound.io/UseCaseForModelAccess":      "bedrock",
 	"directconnect.aws.upbound.io/Gateway":              "directconnect",
 	"directconnect.aws.upbound.io/GatewayAssociation":   "directconnect",
 	"s3control.aws.upbound.io/AccountPublicAccessBlock": "s3control",
 	// namespaced apis
 	"backup.aws.m.upbound.io/GlobalSettings":              "backup",
+	"bedrock.aws.m.upbound.io/UseCaseForModelAccess":      "bedrock",
 	"directconnect.aws.m.upbound.io/Gateway":              "directconnect",
 	"directconnect.aws.m.upbound.io/GatewayAssociation":   "directconnect",
 	"s3control.aws.m.upbound.io/AccountPublicAccessBlock": "s3control",
@@ -100,17 +105,17 @@ func SelectTerraformSetup(config *SetupConfig) terraform.SetupFn { // nolint:goc
 		}
 
 		ps := terraform.Setup{}
-		awsCfg, err := getAWSConfigWithDefaultRegion(ctx, c, mg, pc)
+		awsCfg, cfgMeta, err := getAWSConfigWithDefaultRegion(ctx, c, mg, pc)
 		if err != nil {
 			return terraform.Setup{}, errors.Wrap(err, "cannot get aws config")
 		} else if awsCfg == nil {
 			return terraform.Setup{}, errors.Wrap(err, "obtained aws config cannot be nil")
 		}
 
-		// only IRSA auth credentials are currently cached, other auth methods
-		// will skip the cache and call the downstream
-		// CredentialsProvider.Retrieve().
-		credCache, err := credsCache.RetrieveCredentials(ctx, pc, awsCfg.Region, awsCfg.Credentials, func(ctx context.Context) (string, error) {
+		// only IRSA, WebIdentity, and static credentials with an assume role
+		// chain, are currently cached. Other auth methods will skip the cache
+		// and call the downstream CredentialsProvider.Retrieve().
+		credCache, err := credsCache.RetrieveCredentials(ctx, pc, awsCfg.Region, awsCfg.Credentials, cfgMeta, func(ctx context.Context) (string, error) {
 			if pc.Spec.SkipCredsValidation {
 				// then we do not try to resolve the account ID and instead,
 				// return a constant value as before.
@@ -142,7 +147,7 @@ func SelectTerraformSetup(config *SetupConfig) terraform.SetupFn { // nolint:goc
 		}
 		ps.ClientMetadata = map[string]string{
 			keyAccountID: credCache.accountID,
-			keyPartition: "aws",
+			keyPartition: partitionAWS,
 		}
 
 		if err := setPartition(awsCfg, pc, &ps); err != nil {
@@ -202,15 +207,15 @@ func getAccountId(ctx context.Context, cfg *aws.Config, creds aws.Credentials) (
 }
 
 // getAWSConfigWithDefaultRegion is a utility function that wraps the
-// GetAWSConfigWithoutTracking and fills empty region in the returned config for
+// getAWSConfig and fills empty region in the returned config for
 // global API groups with appropriate partition-specific regions. Although
 // this does not have an effect on the resource, as global group resources
 // have no concept of region, this is done to conform with the TF AWS config
 // which requires non-empty region
-func getAWSConfigWithDefaultRegion(ctx context.Context, c client.Client, obj runtime.Object, pc *namespacedv1beta1.ClusterProviderConfig) (*aws.Config, error) {
-	cfg, err := GetAWSConfigWithoutTracking(ctx, c, obj, pc)
+func getAWSConfigWithDefaultRegion(ctx context.Context, c client.Client, obj runtime.Object, pc *namespacedv1beta1.ClusterProviderConfig) (*aws.Config, awsConfigProvenanceMeta, error) {
+	cfg, meta, err := getAWSConfig(ctx, c, obj, pc)
 	if err != nil {
-		return nil, err
+		return nil, meta, err
 	}
 	// For global API groups, set an appropriate default region when none is specified
 	if cfg.Region == "" {
@@ -219,7 +224,7 @@ func getAWSConfigWithDefaultRegion(ctx context.Context, c client.Client, obj run
 			cfg.Region = region
 		}
 	}
-	return cfg, nil
+	return cfg, meta, nil
 }
 
 // getGlobalRegion returns the appropriate region for global resources and API groups
@@ -245,7 +250,7 @@ func getGlobalRegion(group, kind string, pc *namespacedv1beta1.ClusterProviderCo
 	}
 
 	// Determine the AWS partition, defaulting to "aws" if not explicitly configured
-	partitionID := "aws" // default partition
+	partitionID := partitionAWS // default partition
 	if pc != nil && pc.Spec.Endpoint != nil && pc.Spec.Endpoint.PartitionID != nil {
 		partitionID = *pc.Spec.Endpoint.PartitionID
 	}
@@ -267,7 +272,7 @@ func getGlobalRegion(group, kind string, pc *namespacedv1beta1.ClusterProviderCo
 // when a service-specific region is not available in the partitions map.
 func getPartitionDefaultRegion(partitionID string) string {
 	switch partitionID {
-	case "aws":
+	case partitionAWS:
 		return "us-east-1"
 	case "aws-cn":
 		return "cn-northwest-1"

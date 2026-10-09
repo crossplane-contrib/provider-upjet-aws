@@ -25,6 +25,7 @@ spec:
       headers:
         items:
         - example
+    name: example-policy
     queryStringsConfig:
       queryStringBehavior: whitelist
       queryStrings:

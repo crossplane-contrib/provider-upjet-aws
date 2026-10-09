@@ -11,8 +11,8 @@ PROJECT_NAME := provider-$(PROVIDER_NAME)
 PROJECT_REPO := github.com/upbound/$(PROJECT_NAME)/v2
 
 export TERRAFORM_VERSION := 1.5.5
-export TERRAFORM_PROVIDER_VERSION := 6.64.0
-export TERRAFORM_PROVIDER_RELEASE := v$(TERRAFORM_PROVIDER_VERSION)-upjet.1
+export TERRAFORM_PROVIDER_VERSION := 6.65.0
+export TERRAFORM_PROVIDER_RELEASE := v$(TERRAFORM_PROVIDER_VERSION)-upjet.2
 export TERRAFORM_PROVIDER_SOURCE := hashicorp/aws
 export TERRAFORM_PROVIDER_REPO ?= https://github.com/hashicorp/terraform-provider-aws
 export TERRAFORM_DOCS_PATH ?= website/docs/r
@@ -52,7 +52,7 @@ export GOPRIVATE = github.com/upbound/*
 GO_REQUIRED_VERSION ?= $(shell grep -E '^go ' go.mod | awk '{print $2}')
 # GOLANGCILINT_VERSION is inherited from build submodule by default.
 # Uncomment below if you need to override the version.
-GOLANGCILINT_VERSION ?= 2.13.2
+GOLANGCILINT_VERSION ?= 2.14.0
 
 RUN_BUILDTAGGER ?= true
 # if RUN_BUILDTAGGER is set to "true", we will use build constraints
@@ -83,8 +83,8 @@ KIND_VERSION = v0.33.0
 UPTEST_VERSION = v2.2.0
 KUSTOMIZE_VERSION = v5.3.0
 YQ_VERSION = v4.40.5
-CROSSPLANE_VERSION = 2.3.4
-CROSSPLANE_CLI_VERSION = v2.3.4
+CROSSPLANE_VERSION = 2.4.2
+CROSSPLANE_CLI_VERSION = v2.5.0
 CRDDIFF_VERSION = v0.12.1
 KUBECTL_VALIDATE_VERSION ?= v0.0.4
 

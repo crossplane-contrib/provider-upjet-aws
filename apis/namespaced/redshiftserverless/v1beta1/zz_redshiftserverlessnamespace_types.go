@@ -18,15 +18,13 @@ type RedshiftServerlessNamespaceInitParameters struct {
 	// ID of the KMS key used to encrypt the namespace's admin credentials secret.
 	AdminPasswordSecretKMSKeyID *string `json:"adminPasswordSecretKmsKeyId,omitempty" tf:"admin_password_secret_kms_key_id,omitempty"`
 
-	// The password of the administrator for the first database created in the namespace.
-	// Conflicts with manage_admin_password and admin_user_password_wo.
+	// The password of the administrator for the first database created in the namespace. Conflicts with manage_admin_password and admin_user_password_wo.
 	AdminUserPasswordSecretRef *v2.LocalSecretKeySelector `json:"adminUserPasswordSecretRef,omitempty" tf:"-"`
 
-	// The password of the administrator for the first database created in the namespace.
-	// Conflicts with manage_admin_password and admin_user_password.
+	// The password of the administrator for the first database created in the namespace. Conflicts with manage_admin_password and admin_user_password. If set, requires admin_user_password_wo_version to be set.
 	AdminUserPasswordWo *string `json:"adminUserPasswordWo,omitempty" tf:"admin_user_password_wo,omitempty"`
 
-	// Used together with admin_user_password_wo to trigger an update. Increment this value when an update to the admin_user_password_wo is required
+	// Required when admin_user_password_wo is set. Changing this value triggers an update to admin_user_password_wo.
 	AdminUserPasswordWoVersion *float64 `json:"adminUserPasswordWoVersion,omitempty" tf:"admin_user_password_wo_version,omitempty"`
 
 	// The username of the administrator for the first database created in the namespace.
@@ -79,8 +77,7 @@ type RedshiftServerlessNamespaceInitParameters struct {
 	// +listType=set
 	LogExports []*string `json:"logExports,omitempty" tf:"log_exports,omitempty"`
 
-	// Whether to use AWS SecretManager to manage namespace's admin credentials.
-	// Conflicts with admin_user_password and admin_user_password_wo.
+	// Whether to use AWS SecretManager to manage namespace's admin credentials. Conflicts with admin_user_password and admin_user_password_wo.
 	ManageAdminPassword *bool `json:"manageAdminPassword,omitempty" tf:"manage_admin_password,omitempty"`
 
 	// Key-value map of resource tags.
@@ -96,11 +93,10 @@ type RedshiftServerlessNamespaceObservation struct {
 	// ID of the KMS key used to encrypt the namespace's admin credentials secret.
 	AdminPasswordSecretKMSKeyID *string `json:"adminPasswordSecretKmsKeyId,omitempty" tf:"admin_password_secret_kms_key_id,omitempty"`
 
-	// The password of the administrator for the first database created in the namespace.
-	// Conflicts with manage_admin_password and admin_user_password.
+	// The password of the administrator for the first database created in the namespace. Conflicts with manage_admin_password and admin_user_password. If set, requires admin_user_password_wo_version to be set.
 	AdminUserPasswordWo *string `json:"adminUserPasswordWo,omitempty" tf:"admin_user_password_wo,omitempty"`
 
-	// Used together with admin_user_password_wo to trigger an update. Increment this value when an update to the admin_user_password_wo is required
+	// Required when admin_user_password_wo is set. Changing this value triggers an update to admin_user_password_wo.
 	AdminUserPasswordWoVersion *float64 `json:"adminUserPasswordWoVersion,omitempty" tf:"admin_user_password_wo_version,omitempty"`
 
 	// ARN of the Redshift Serverless Namespace.
@@ -126,8 +122,7 @@ type RedshiftServerlessNamespaceObservation struct {
 	// +listType=set
 	LogExports []*string `json:"logExports,omitempty" tf:"log_exports,omitempty"`
 
-	// Whether to use AWS SecretManager to manage namespace's admin credentials.
-	// Conflicts with admin_user_password and admin_user_password_wo.
+	// Whether to use AWS SecretManager to manage namespace's admin credentials. Conflicts with admin_user_password and admin_user_password_wo.
 	ManageAdminPassword *bool `json:"manageAdminPassword,omitempty" tf:"manage_admin_password,omitempty"`
 
 	// The Redshift Namespace ID.
@@ -152,17 +147,15 @@ type RedshiftServerlessNamespaceParameters struct {
 	// +kubebuilder:validation:Optional
 	AdminPasswordSecretKMSKeyID *string `json:"adminPasswordSecretKmsKeyId,omitempty" tf:"admin_password_secret_kms_key_id,omitempty"`
 
-	// The password of the administrator for the first database created in the namespace.
-	// Conflicts with manage_admin_password and admin_user_password_wo.
+	// The password of the administrator for the first database created in the namespace. Conflicts with manage_admin_password and admin_user_password_wo.
 	// +kubebuilder:validation:Optional
 	AdminUserPasswordSecretRef *v2.LocalSecretKeySelector `json:"adminUserPasswordSecretRef,omitempty" tf:"-"`
 
-	// The password of the administrator for the first database created in the namespace.
-	// Conflicts with manage_admin_password and admin_user_password.
+	// The password of the administrator for the first database created in the namespace. Conflicts with manage_admin_password and admin_user_password. If set, requires admin_user_password_wo_version to be set.
 	// +kubebuilder:validation:Optional
 	AdminUserPasswordWo *string `json:"adminUserPasswordWo,omitempty" tf:"admin_user_password_wo,omitempty"`
 
-	// Used together with admin_user_password_wo to trigger an update. Increment this value when an update to the admin_user_password_wo is required
+	// Required when admin_user_password_wo is set. Changing this value triggers an update to admin_user_password_wo.
 	// +kubebuilder:validation:Optional
 	AdminUserPasswordWoVersion *float64 `json:"adminUserPasswordWoVersion,omitempty" tf:"admin_user_password_wo_version,omitempty"`
 
@@ -222,8 +215,7 @@ type RedshiftServerlessNamespaceParameters struct {
 	// +listType=set
 	LogExports []*string `json:"logExports,omitempty" tf:"log_exports,omitempty"`
 
-	// Whether to use AWS SecretManager to manage namespace's admin credentials.
-	// Conflicts with admin_user_password and admin_user_password_wo.
+	// Whether to use AWS SecretManager to manage namespace's admin credentials. Conflicts with admin_user_password and admin_user_password_wo.
 	// +kubebuilder:validation:Optional
 	ManageAdminPassword *bool `json:"manageAdminPassword,omitempty" tf:"manage_admin_password,omitempty"`
 

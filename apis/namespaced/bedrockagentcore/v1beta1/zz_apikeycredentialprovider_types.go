@@ -16,15 +16,15 @@ import (
 type APIKeyCredentialProviderInitParameters struct {
 	APIKeySecretConfig *APIKeySecretConfigInitParameters `json:"apiKeySecretConfig,omitempty" tf:"api_key_secret_config,omitempty"`
 
-	// API key value. Cannot be used with api_key_wo.
+	// API key value. Conflicts with api_key_wo.
 	APIKeySecretRef *v2.LocalSecretKeySelector `json:"apiKeySecretRef,omitempty" tf:"-"`
 
 	APIKeySecretSource *string `json:"apiKeySecretSource,omitempty" tf:"api_key_secret_source,omitempty"`
 
-	// Write-only API key value. Cannot be used with api_key. Must be used together with api_key_wo_version.
+	// Write-only API key value. Conflicts with api_key. If set, requires api_key_wo_version to be set.
 	APIKeyWoSecretRef *v2.LocalSecretKeySelector `json:"apiKeyWoSecretRef,omitempty" tf:"-"`
 
-	// Used together with api_key_wo to trigger an update. Increment this value when an update to api_key_wo is required.
+	// Required when api_key_wo is set. Changing this value triggers an update to api_key_wo.
 	APIKeyWoVersion *float64 `json:"apiKeyWoVersion,omitempty" tf:"api_key_wo_version,omitempty"`
 
 	// Key-value map of resource tags.
@@ -35,13 +35,13 @@ type APIKeyCredentialProviderInitParameters struct {
 type APIKeyCredentialProviderObservation struct {
 
 	// ARN of the AWS Secrets Manager secret containing the API key.
-	APIKeySecretArn []APIKeySecretArnObservation `json:"apiKeySecretArn,omitempty" tf:"api_key_secret_arn,omitempty"`
+	APIKeySecretArn *APIKeySecretArnObservation `json:"apiKeySecretArn,omitempty" tf:"api_key_secret_arn,omitempty"`
 
 	APIKeySecretConfig *APIKeySecretConfigObservation `json:"apiKeySecretConfig,omitempty" tf:"api_key_secret_config,omitempty"`
 
 	APIKeySecretSource *string `json:"apiKeySecretSource,omitempty" tf:"api_key_secret_source,omitempty"`
 
-	// Used together with api_key_wo to trigger an update. Increment this value when an update to api_key_wo is required.
+	// Required when api_key_wo is set. Changing this value triggers an update to api_key_wo.
 	APIKeyWoVersion *float64 `json:"apiKeyWoVersion,omitempty" tf:"api_key_wo_version,omitempty"`
 
 	// ARN of the API Key credential provider.
@@ -70,18 +70,18 @@ type APIKeyCredentialProviderParameters struct {
 	// +kubebuilder:validation:Optional
 	APIKeySecretConfig *APIKeySecretConfigParameters `json:"apiKeySecretConfig,omitempty" tf:"api_key_secret_config,omitempty"`
 
-	// API key value. Cannot be used with api_key_wo.
+	// API key value. Conflicts with api_key_wo.
 	// +kubebuilder:validation:Optional
 	APIKeySecretRef *v2.LocalSecretKeySelector `json:"apiKeySecretRef,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
 	APIKeySecretSource *string `json:"apiKeySecretSource,omitempty" tf:"api_key_secret_source,omitempty"`
 
-	// Write-only API key value. Cannot be used with api_key. Must be used together with api_key_wo_version.
+	// Write-only API key value. Conflicts with api_key. If set, requires api_key_wo_version to be set.
 	// +kubebuilder:validation:Optional
 	APIKeyWoSecretRef *v2.LocalSecretKeySelector `json:"apiKeyWoSecretRef,omitempty" tf:"-"`
 
-	// Used together with api_key_wo to trigger an update. Increment this value when an update to api_key_wo is required.
+	// Required when api_key_wo is set. Changing this value triggers an update to api_key_wo.
 	// +kubebuilder:validation:Optional
 	APIKeyWoVersion *float64 `json:"apiKeyWoVersion,omitempty" tf:"api_key_wo_version,omitempty"`
 
@@ -111,7 +111,17 @@ type APIKeySecretArnParameters struct {
 type APIKeySecretConfigInitParameters struct {
 	JSONKey *string `json:"jsonKey,omitempty" tf:"json_key,omitempty"`
 
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/secretsmanager/v1beta1.Secret
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	SecretID *string `json:"secretId,omitempty" tf:"secret_id,omitempty"`
+
+	// Reference to a Secret in secretsmanager to populate secretId.
+	// +kubebuilder:validation:Optional
+	SecretIDRef *v2.NamespacedReference `json:"secretIdRef,omitempty" tf:"-"`
+
+	// Selector for a Secret in secretsmanager to populate secretId.
+	// +kubebuilder:validation:Optional
+	SecretIDSelector *v2.NamespacedSelector `json:"secretIdSelector,omitempty" tf:"-"`
 }
 
 type APIKeySecretConfigObservation struct {
@@ -125,8 +135,18 @@ type APIKeySecretConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	JSONKey *string `json:"jsonKey" tf:"json_key,omitempty"`
 
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/secretsmanager/v1beta1.Secret
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
-	SecretID *string `json:"secretId" tf:"secret_id,omitempty"`
+	SecretID *string `json:"secretId,omitempty" tf:"secret_id,omitempty"`
+
+	// Reference to a Secret in secretsmanager to populate secretId.
+	// +kubebuilder:validation:Optional
+	SecretIDRef *v2.NamespacedReference `json:"secretIdRef,omitempty" tf:"-"`
+
+	// Selector for a Secret in secretsmanager to populate secretId.
+	// +kubebuilder:validation:Optional
+	SecretIDSelector *v2.NamespacedSelector `json:"secretIdSelector,omitempty" tf:"-"`
 }
 
 // APIKeyCredentialProviderSpec defines the desired state of APIKeyCredentialProvider

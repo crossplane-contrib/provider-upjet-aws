@@ -177,6 +177,13 @@ func configureSingletonListAPIConverters(r *config.Resource) error {
 		}
 		r.PreviousVersions = prev
 	}
+	// Every version this function ever leaves in PreviousVersions - freshly
+	// computed above, or already set by an earlier, unrelated version bump
+	// such as injectFieldRenamingConversionFunctions() - predates bumped, the
+	// version this function is embedding singleton lists into. None of them
+	// has had the embedding applied, so the diff server needs to know to
+	// skip the Terraform conversion for a request at any of them.
+	r.SingletonListVersions = append([]string(nil), r.PreviousVersions...)
 	// we would like to set the storage version to v1beta1 to facilitate
 	// downgrades.
 	r.SetCRDStorageVersion(r.Version)

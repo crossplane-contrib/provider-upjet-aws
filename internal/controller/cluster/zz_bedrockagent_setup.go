@@ -10,6 +10,11 @@ import (
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
 	agent "github.com/upbound/provider-aws/v2/internal/controller/cluster/bedrockagent/agent"
+	agentknowledgebaseassociation "github.com/upbound/provider-aws/v2/internal/controller/cluster/bedrockagent/agentknowledgebaseassociation"
+	datasource "github.com/upbound/provider-aws/v2/internal/controller/cluster/bedrockagent/datasource"
+	flow "github.com/upbound/provider-aws/v2/internal/controller/cluster/bedrockagent/flow"
+	knowledgebase "github.com/upbound/provider-aws/v2/internal/controller/cluster/bedrockagent/knowledgebase"
+	prompt "github.com/upbound/provider-aws/v2/internal/controller/cluster/bedrockagent/prompt"
 )
 
 // Setup_bedrockagent creates all controllers with the supplied logger and adds them to
@@ -17,6 +22,11 @@ import (
 func Setup_bedrockagent(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		agent.Setup,
+		agentknowledgebaseassociation.Setup,
+		datasource.Setup,
+		flow.Setup,
+		knowledgebase.Setup,
+		prompt.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err
@@ -30,6 +40,11 @@ func Setup_bedrockagent(mgr ctrl.Manager, o controller.Options) error {
 func SetupGated_bedrockagent(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		agent.SetupGated,
+		agentknowledgebaseassociation.SetupGated,
+		datasource.SetupGated,
+		flow.SetupGated,
+		knowledgebase.SetupGated,
+		prompt.SetupGated,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err
@@ -42,6 +57,11 @@ func SetupGated_bedrockagent(mgr ctrl.Manager, o controller.Options) error {
 func SetupWebhookWithManager_bedrockagent(mgr ctrl.Manager) error {
 	for _, setup := range []func(ctrl.Manager) error{
 		agent.SetupWebhookWithManager,
+		agentknowledgebaseassociation.SetupWebhookWithManager,
+		datasource.SetupWebhookWithManager,
+		flow.SetupWebhookWithManager,
+		knowledgebase.SetupWebhookWithManager,
+		prompt.SetupWebhookWithManager,
 	} {
 		if err := setup(mgr); err != nil {
 			return err

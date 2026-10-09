@@ -3,6 +3,13 @@ kind: Agent
 metadata:
   annotations:
     meta.upbound.io/example-id: bedrockagent/v1beta1/agent
+    upjet.upbound.io/manual-intervention: >
+      creating Bedrock Agent: operation error Bedrock Agent: CreateAgent,
+      https response error StatusCode: 403, RequestID: uuid,
+      AccessDeniedException: Bedrock Agents is in Maintenance Mode. New agent
+      creation is not available for accounts without prior service usage. To
+      learn more visit
+      https://docs.aws.amazon.com/bedrock/latest/userguide/agents-classic-maintenance-mode.html.
   labels:
     testing.upbound.io/example-name: example-bedrockagent-model
   name: example

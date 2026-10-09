@@ -83,10 +83,10 @@ type SelfManagedActiveDirectoryInitParameters struct {
 	// Password for the service account on your self-managed AD domain that Amazon FSx will use to join to your AD domain. Conflicts with domain_join_service_account_secret and password_wo.
 	PasswordSecretRef *v2.LocalSecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
-	// Password for the service account on your self-managed AD domain that Amazon FSx will use to join to your AD domain. This is a write-only argument which is not persisted to state. Conflicts with domain_join_service_account_secret and password. Required with password_wo_version.
+	// Password for the service account on your self-managed AD domain that Amazon FSx will use to join to your AD domain. This argument is not persisted to state. Conflicts with domain_join_service_account_secret and password. If set, requires password_wo_version to be set.
 	PasswordWoSecretRef *v2.LocalSecretKeySelector `json:"passwordWoSecretRef,omitempty" tf:"-"`
 
-	// Version of the password. Required with password_wo. Update this argument when the value of password_wo has changed to trigger an update to the remote password.
+	// Required when password_wo is set. Changing this value triggers an update to password_wo.
 	PasswordWoVersion *float64 `json:"passwordWoVersion,omitempty" tf:"password_wo_version,omitempty"`
 
 	// User name for the service account on your self-managed AD domain that Amazon FSx will use to join to your AD domain. Conflicts with domain_join_service_account_secret.
@@ -111,7 +111,7 @@ type SelfManagedActiveDirectoryObservation struct {
 	// Fully qualified distinguished name of the organizational unit within your self-managed AD directory that the Windows File Server instance will join. For example, OU=FSx,DC=yourdomain,DC=corp,DC=com. Only accepts OU as the direct parent of the file system. If none is provided, the FSx file system is created in the default location of your self-managed AD directory. To learn more, see RFC 2253.
 	OrganizationalUnitDistinguishedName *string `json:"organizationalUnitDistinguishedName,omitempty" tf:"organizational_unit_distinguished_name,omitempty"`
 
-	// Version of the password. Required with password_wo. Update this argument when the value of password_wo has changed to trigger an update to the remote password.
+	// Required when password_wo is set. Changing this value triggers an update to password_wo.
 	PasswordWoVersion *float64 `json:"passwordWoVersion,omitempty" tf:"password_wo_version,omitempty"`
 
 	// User name for the service account on your self-managed AD domain that Amazon FSx will use to join to your AD domain. Conflicts with domain_join_service_account_secret.
@@ -155,11 +155,11 @@ type SelfManagedActiveDirectoryParameters struct {
 	// +kubebuilder:validation:Optional
 	PasswordSecretRef *v2.LocalSecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
-	// Password for the service account on your self-managed AD domain that Amazon FSx will use to join to your AD domain. This is a write-only argument which is not persisted to state. Conflicts with domain_join_service_account_secret and password. Required with password_wo_version.
+	// Password for the service account on your self-managed AD domain that Amazon FSx will use to join to your AD domain. This argument is not persisted to state. Conflicts with domain_join_service_account_secret and password. If set, requires password_wo_version to be set.
 	// +kubebuilder:validation:Optional
 	PasswordWoSecretRef *v2.LocalSecretKeySelector `json:"passwordWoSecretRef,omitempty" tf:"-"`
 
-	// Version of the password. Required with password_wo. Update this argument when the value of password_wo has changed to trigger an update to the remote password.
+	// Required when password_wo is set. Changing this value triggers an update to password_wo.
 	// +kubebuilder:validation:Optional
 	PasswordWoVersion *float64 `json:"passwordWoVersion,omitempty" tf:"password_wo_version,omitempty"`
 

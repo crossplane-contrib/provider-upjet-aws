@@ -43,6 +43,113 @@ func configWithARNOnly() *terraform.ResourceConfig {
 	}
 }
 
+func TestLBCustomDiff(t *testing.T) {
+	cases := map[string]struct {
+		reason   string
+		diff     *terraform.InstanceDiff
+		state    *terraform.InstanceState
+		wantKeys []string
+		goneKeys []string
+	}{
+		"NilDiff": {
+			reason: "nil diff passes through unchanged",
+			diff:   nil,
+		},
+		"EmptyDiff": {
+			reason: "empty diff passes through unchanged",
+			diff:   &terraform.InstanceDiff{},
+		},
+		"DestroyDiff": {
+			reason: "destroy diff is never modified",
+			diff: &terraform.InstanceDiff{
+				Destroy: true,
+				Attributes: map[string]*terraform.ResourceAttrDiff{
+					"access_logs.0.enabled": {Old: "false", New: "true"},
+				},
+			},
+			state: &terraform.InstanceState{
+				Attributes: map[string]string{"load_balancer_type": "gateway"},
+			},
+			wantKeys: []string{"access_logs.0.enabled"},
+		},
+		"NilState_Kept": {
+			reason: "diff is kept when state is nil, since the load balancer type cannot be determined",
+			diff: &terraform.InstanceDiff{
+				Attributes: map[string]*terraform.ResourceAttrDiff{
+					"access_logs.0.enabled": {Old: "", New: "false"},
+				},
+			},
+			state:    nil,
+			wantKeys: []string{"access_logs.0.enabled"},
+		},
+		"ApplicationType_Kept": {
+			reason: "access_logs diffs are real and meaningful for application load balancers, so they are kept",
+			diff: &terraform.InstanceDiff{
+				Attributes: map[string]*terraform.ResourceAttrDiff{
+					"access_logs.0.enabled": {Old: "", New: "true"},
+					"access_logs.0.bucket":  {Old: "", New: "my-bucket"},
+				},
+			},
+			state: &terraform.InstanceState{
+				Attributes: map[string]string{"load_balancer_type": "application"},
+			},
+			wantKeys: []string{"access_logs.0.enabled", "access_logs.0.bucket"},
+		},
+		"GatewayType_Suppressed": {
+			reason: "the spurious access_logs diff observed for a gateway load balancer is suppressed",
+			diff: &terraform.InstanceDiff{
+				Attributes: map[string]*terraform.ResourceAttrDiff{
+					"access_logs.#":         {Old: "1", New: "0"},
+					"access_logs.0.enabled": {Old: "false", New: ""},
+				},
+			},
+			state: &terraform.InstanceState{
+				Attributes: map[string]string{"load_balancer_type": "gateway"},
+			},
+			goneKeys: []string{"access_logs.#", "access_logs.0.enabled"},
+		},
+		"GatewayType_UnrelatedKeysUntouched": {
+			reason: "keys that do not belong to access_logs are left untouched for a gateway load balancer",
+			diff: &terraform.InstanceDiff{
+				Attributes: map[string]*terraform.ResourceAttrDiff{
+					"access_logs.0.enabled":      {Old: "false", New: ""},
+					"enable_deletion_protection": {Old: "false", New: "true"},
+				},
+			},
+			state: &terraform.InstanceState{
+				Attributes: map[string]string{"load_balancer_type": "gateway"},
+			},
+			wantKeys: []string{"enable_deletion_protection"},
+			goneKeys: []string{"access_logs.0.enabled"},
+		},
+	}
+
+	for name, tc := range cases {
+		t.Run(name, func(t *testing.T) {
+			got, err := lbCustomDiff(tc.diff, tc.state, nil)
+			if err != nil {
+				t.Fatalf("%s: unexpected error: %v", tc.reason, err)
+			}
+			if tc.diff == nil {
+				if got != nil {
+					t.Errorf("%s: expected nil diff, got non-nil", tc.reason)
+				}
+				return
+			}
+			for _, k := range tc.wantKeys {
+				if _, ok := got.Attributes[k]; !ok {
+					t.Errorf("%s: key %q should be present but is missing", tc.reason, k)
+				}
+			}
+			for _, k := range tc.goneKeys {
+				if _, ok := got.Attributes[k]; ok {
+					t.Errorf("%s: key %q should have been suppressed but is still present", tc.reason, k)
+				}
+			}
+		})
+	}
+}
+
 func TestLBListenerRuleCustomDiff(t *testing.T) {
 	cases := map[string]struct {
 		reason   string

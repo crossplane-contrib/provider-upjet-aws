@@ -49,10 +49,10 @@ type ParameterInitParameters_2 struct {
 	// Value of the parameter.15 and later, this may require additional configuration handling for certain scenarios.15 Upgrade Guide.
 	ValueSecretRef *v2.LocalSecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
 
-	// Value of the parameter. Additionally, write-only values are never stored to state. value_wo_version can be used to trigger an update and is required with this argument.15 and later, this may require additional configuration handling for certain scenarios.15 Upgrade Guide.
+	// Value of the parameter. Additionally, write-only values are never stored to state. If set, requires value_wo_version.15 and later, this may require additional configuration handling for certain scenarios.15 Upgrade Guide.
 	ValueWoSecretRef *v2.LocalSecretKeySelector `json:"valueWoSecretRef,omitempty" tf:"-"`
 
-	// Used together with value_wo to trigger an update. Increment this value when an update to the value_wo is required.
+	// Required when value_wo is set. Changing this value triggers an update to value_wo.
 	ValueWoVersion *float64 `json:"valueWoVersion,omitempty" tf:"value_wo_version,omitempty"`
 }
 
@@ -102,7 +102,7 @@ type ParameterObservation_2 struct {
 	// Type of the parameter. Valid types are String, StringList and SecureString.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
-	// Used together with value_wo to trigger an update. Increment this value when an update to the value_wo is required.
+	// Required when value_wo is set. Changing this value triggers an update to value_wo.
 	ValueWoVersion *float64 `json:"valueWoVersion,omitempty" tf:"value_wo_version,omitempty"`
 
 	// Version of the parameter.
@@ -161,11 +161,11 @@ type ParameterParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	ValueSecretRef *v2.LocalSecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
 
-	// Value of the parameter. Additionally, write-only values are never stored to state. value_wo_version can be used to trigger an update and is required with this argument.15 and later, this may require additional configuration handling for certain scenarios.15 Upgrade Guide.
+	// Value of the parameter. Additionally, write-only values are never stored to state. If set, requires value_wo_version.15 and later, this may require additional configuration handling for certain scenarios.15 Upgrade Guide.
 	// +kubebuilder:validation:Optional
 	ValueWoSecretRef *v2.LocalSecretKeySelector `json:"valueWoSecretRef,omitempty" tf:"-"`
 
-	// Used together with value_wo to trigger an update. Increment this value when an update to the value_wo is required.
+	// Required when value_wo is set. Changing this value triggers an update to value_wo.
 	// +kubebuilder:validation:Optional
 	ValueWoVersion *float64 `json:"valueWoVersion,omitempty" tf:"value_wo_version,omitempty"`
 }

@@ -1,0 +1,199 @@
+# SPDX-FileCopyrightText: 2026 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+# Data Source Example
+# Connects an S3 bucket to a knowledge base backed by an Amazon S3 Vectors
+# index. dataDeletionPolicy is RETAIN so that deleting the data source does not
+# need the knowledge base role to remove vectors from the index.
+
+apiVersion: bedrockagent.aws.upbound.io/v1beta1
+kind: DataSource
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrockagent/v1beta1/datasource
+  labels:
+    testing.upbound.io/example-name: datasource
+  name: datasource
+spec:
+  forProvider:
+    name: example-data-source
+    description: example-description
+    region: us-east-1
+    dataDeletionPolicy: RETAIN
+    knowledgeBaseIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: datasource
+    dataSourceConfiguration:
+      type: S3
+      s3Configuration:
+        bucketArnSelector:
+          matchLabels:
+            testing.upbound.io/example-name: datasource
+    vectorIngestionConfiguration:
+      chunkingConfiguration:
+        chunkingStrategy: FIXED_SIZE
+        fixedSizeChunkingConfiguration:
+          maxTokens: 300
+          overlapPercentage: 20
+
+---
+
+apiVersion: s3.aws.upbound.io/v1beta2
+kind: Bucket
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrockagent/v1beta1/datasource
+  labels:
+    testing.upbound.io/example-name: datasource
+  name: ${Rand.RFC1123Subdomain}
+spec:
+  forProvider:
+    forceDestroy: true
+    region: us-east-1
+
+---
+
+apiVersion: bedrockagent.aws.upbound.io/v1beta1
+kind: KnowledgeBase
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrockagent/v1beta1/datasource
+  labels:
+    testing.upbound.io/example-name: datasource
+  name: datasource
+spec:
+  forProvider:
+    name: example-data-source-knowledge-base
+    region: us-east-1
+    roleArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: datasource
+    knowledgeBaseConfiguration:
+      type: VECTOR
+      vectorKnowledgeBaseConfiguration:
+        embeddingModelArn: arn:aws:bedrock:us-east-1::foundation-model/amazon.titan-embed-text-v2:0
+        embeddingModelConfiguration:
+          bedrockEmbeddingModelConfiguration:
+            dimensions: 256
+            embeddingDataType: FLOAT32
+    storageConfiguration:
+      type: S3_VECTORS
+      s3VectorsConfiguration:
+        indexArnSelector:
+          matchLabels:
+            testing.upbound.io/example-name: datasource
+
+---
+
+apiVersion: s3vectors.aws.upbound.io/v1beta1
+kind: Index
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrockagent/v1beta1/datasource
+  labels:
+    testing.upbound.io/example-name: datasource
+  name: datasource
+spec:
+  forProvider:
+    dataType: float32
+    dimension: 256
+    distanceMetric: cosine
+    indexName: example-data-source
+    metadataConfiguration:
+      nonFilterableMetadataKeys:
+      - AMAZON_BEDROCK_TEXT
+    region: us-east-1
+    vectorBucketNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: datasource
+
+---
+
+apiVersion: s3vectors.aws.upbound.io/v1beta1
+kind: VectorBucket
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrockagent/v1beta1/datasource
+  labels:
+    testing.upbound.io/example-name: datasource
+  name: datasource
+spec:
+  forProvider:
+    forceDestroy: true
+    region: us-east-1
+    vectorBucketName: example-bedrockagent-datasource
+
+---
+
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrockagent/v1beta1/datasource
+  labels:
+    testing.upbound.io/example-name: datasource
+  name: example-bedrockagent-datasource
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {
+              "Service": "bedrock.amazonaws.com"
+            },
+            "Action": "sts:AssumeRole"
+          }
+        ]
+      }
+
+---
+
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: RolePolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrockagent/v1beta1/datasource
+  labels:
+    testing.upbound.io/example-name: datasource
+  name: example-bedrockagent-datasource
+spec:
+  forProvider:
+    policy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Action": [
+              "bedrock:InvokeModel"
+            ],
+            "Resource": "*"
+          },
+          {
+            "Effect": "Allow",
+            "Action": [
+              "s3:ListBucket",
+              "s3:GetObject"
+            ],
+            "Resource": "*"
+          },
+          {
+            "Effect": "Allow",
+            "Action": [
+              "s3vectors:GetIndex",
+              "s3vectors:QueryVectors",
+              "s3vectors:PutVectors",
+              "s3vectors:GetVectors",
+              "s3vectors:DeleteVectors"
+            ],
+            "Resource": "*"
+          }
+        ]
+      }
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: datasource

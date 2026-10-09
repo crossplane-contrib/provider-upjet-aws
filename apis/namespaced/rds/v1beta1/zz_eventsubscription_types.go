@@ -15,14 +15,14 @@ import (
 
 type EventSubscriptionInitParameters struct {
 
-	// A boolean flag to enable/disable the subscription. Defaults to true.
+	// Boolean flag to enable/disable the subscription. Defaults to true.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// A list of event categories for a SourceType that you want to subscribe to. See http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Events.html or run aws rds describe-event-categories.
+	// List of event categories for a SourceType that you want to subscribe to. See http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Events.html or run aws rds describe-event-categories.
 	// +listType=set
 	EventCategories []*string `json:"eventCategories,omitempty" tf:"event_categories,omitempty"`
 
-	// The SNS topic to send events to.
+	// SNS topic to send events to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/sns/v1beta1.Topic
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	SnsTopic *string `json:"snsTopic,omitempty" tf:"sns_topic,omitempty"`
@@ -35,7 +35,7 @@ type EventSubscriptionInitParameters struct {
 	// +kubebuilder:validation:Optional
 	SnsTopicSelector *v2.NamespacedSelector `json:"snsTopicSelector,omitempty" tf:"-"`
 
-	// A list of identifiers of the event sources for which events will be returned. If not specified, then all sources are included in the response. If specified, a source_type must also be specified.
+	// List of identifiers of the event sources for which events will be returned. If not specified, then all sources are included in the response. If specified, a source_type must also be specified.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/rds/v1beta1.Instance
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("identifier",false)
 	// +listType=set
@@ -49,7 +49,7 @@ type EventSubscriptionInitParameters struct {
 	// +kubebuilder:validation:Optional
 	SourceIdsSelector *v2.NamespacedSelector `json:"sourceIdsSelector,omitempty" tf:"-"`
 
-	// The type of source that will be generating the events. Valid options are db-instance, db-parameter-group, db-security-group, db-snapshot, db-cluster, db-cluster-snapshot, custom-engine-version, db-proxy, blue-green-deployment, db-shard-group, and zero-etl. If not set, all sources will be subscribed to.
+	// Type of source that will be generating the events. Valid options are db-instance, db-parameter-group, db-security-group, db-snapshot, db-cluster, db-cluster-snapshot, custom-engine-version, db-proxy, blue-green-deployment, db-shard-group, and zero-etl. If not set, all sources will be subscribed to.
 	SourceType *string `json:"sourceType,omitempty" tf:"source_type,omitempty"`
 
 	// Key-value map of resource tags.
@@ -62,49 +62,49 @@ type EventSubscriptionObservation struct {
 	// ARN of the RDS event notification subscription
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The AWS customer account associated with the RDS event notification subscription
+	// AWS customer account associated with the RDS event notification subscription
 	CustomerAwsID *string `json:"customerAwsId,omitempty" tf:"customer_aws_id,omitempty"`
 
-	// A boolean flag to enable/disable the subscription. Defaults to true.
+	// Boolean flag to enable/disable the subscription. Defaults to true.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// A list of event categories for a SourceType that you want to subscribe to. See http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Events.html or run aws rds describe-event-categories.
+	// List of event categories for a SourceType that you want to subscribe to. See http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Events.html or run aws rds describe-event-categories.
 	// +listType=set
 	EventCategories []*string `json:"eventCategories,omitempty" tf:"event_categories,omitempty"`
 
-	// The name of the RDS event notification subscription
+	// Name of the RDS event notification subscription
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The SNS topic to send events to.
+	// SNS topic to send events to.
 	SnsTopic *string `json:"snsTopic,omitempty" tf:"sns_topic,omitempty"`
 
-	// A list of identifiers of the event sources for which events will be returned. If not specified, then all sources are included in the response. If specified, a source_type must also be specified.
+	// List of identifiers of the event sources for which events will be returned. If not specified, then all sources are included in the response. If specified, a source_type must also be specified.
 	// +listType=set
 	SourceIds []*string `json:"sourceIds,omitempty" tf:"source_ids,omitempty"`
 
-	// The type of source that will be generating the events. Valid options are db-instance, db-parameter-group, db-security-group, db-snapshot, db-cluster, db-cluster-snapshot, custom-engine-version, db-proxy, blue-green-deployment, db-shard-group, and zero-etl. If not set, all sources will be subscribed to.
+	// Type of source that will be generating the events. Valid options are db-instance, db-parameter-group, db-security-group, db-snapshot, db-cluster, db-cluster-snapshot, custom-engine-version, db-proxy, blue-green-deployment, db-shard-group, and zero-etl. If not set, all sources will be subscribed to.
 	SourceType *string `json:"sourceType,omitempty" tf:"source_type,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type EventSubscriptionParameters struct {
 
-	// A boolean flag to enable/disable the subscription. Defaults to true.
+	// Boolean flag to enable/disable the subscription. Defaults to true.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// A list of event categories for a SourceType that you want to subscribe to. See http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Events.html or run aws rds describe-event-categories.
+	// List of event categories for a SourceType that you want to subscribe to. See http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Events.html or run aws rds describe-event-categories.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	EventCategories []*string `json:"eventCategories,omitempty" tf:"event_categories,omitempty"`
@@ -114,7 +114,7 @@ type EventSubscriptionParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// The SNS topic to send events to.
+	// SNS topic to send events to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/sns/v1beta1.Topic
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -128,7 +128,7 @@ type EventSubscriptionParameters struct {
 	// +kubebuilder:validation:Optional
 	SnsTopicSelector *v2.NamespacedSelector `json:"snsTopicSelector,omitempty" tf:"-"`
 
-	// A list of identifiers of the event sources for which events will be returned. If not specified, then all sources are included in the response. If specified, a source_type must also be specified.
+	// List of identifiers of the event sources for which events will be returned. If not specified, then all sources are included in the response. If specified, a source_type must also be specified.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/rds/v1beta1.Instance
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("identifier",false)
 	// +kubebuilder:validation:Optional
@@ -143,7 +143,7 @@ type EventSubscriptionParameters struct {
 	// +kubebuilder:validation:Optional
 	SourceIdsSelector *v2.NamespacedSelector `json:"sourceIdsSelector,omitempty" tf:"-"`
 
-	// The type of source that will be generating the events. Valid options are db-instance, db-parameter-group, db-security-group, db-snapshot, db-cluster, db-cluster-snapshot, custom-engine-version, db-proxy, blue-green-deployment, db-shard-group, and zero-etl. If not set, all sources will be subscribed to.
+	// Type of source that will be generating the events. Valid options are db-instance, db-parameter-group, db-security-group, db-snapshot, db-cluster, db-cluster-snapshot, custom-engine-version, db-proxy, blue-green-deployment, db-shard-group, and zero-etl. If not set, all sources will be subscribed to.
 	// +kubebuilder:validation:Optional
 	SourceType *string `json:"sourceType,omitempty" tf:"source_type,omitempty"`
 

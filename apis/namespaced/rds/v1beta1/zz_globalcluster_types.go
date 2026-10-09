@@ -24,7 +24,7 @@ type GlobalClusterInitParameters struct {
 	// Name of the database engine to be used for this DB cluster. Valid values: aurora, aurora-mysql, aurora-postgresql. Defaults to aurora. Conflicts with source_db_cluster_identifier.
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
 
-	// The life cycle type for this DB instance. This setting applies only to Aurora PostgreSQL-based global databases. Valid values are open-source-rds-extended-support, open-source-rds-extended-support-disabled. Default value is open-source-rds-extended-support. [Using Amazon RDS Extended Support]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
+	// Life cycle type for this DB instance. This setting applies only to Aurora PostgreSQL-based global databases. Valid values are open-source-rds-extended-support, open-source-rds-extended-support-disabled. Default value is open-source-rds-extended-support. [Using Amazon RDS Extended Support]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
 	EngineLifecycleSupport *string `json:"engineLifecycleSupport,omitempty" tf:"engine_lifecycle_support,omitempty"`
 
 	// Engine version of the Aurora global database. The engine, engine_version, and instance_class (on the aws_rds_cluster_instance) must together support global databases. See Using Amazon Aurora global databases for more information. NOTE: To avoid an inconsistent final plan error while upgrading, use the lifecycle ignore_changes for engine_version meta argument on the associated aws_rds_cluster resource as shown above in Upgrading Engine Versions example.
@@ -46,7 +46,7 @@ type GlobalClusterInitParameters struct {
 	// +kubebuilder:validation:Optional
 	SourceDBClusterIdentifierSelector *v2.NamespacedSelector `json:"sourceDbClusterIdentifierSelector,omitempty" tf:"-"`
 
-	// Specifies whether the DB cluster is encrypted. The default is false unless source_db_cluster_identifier is specified and encrypted.
+	// Whether the DB cluster is encrypted. The default is false unless source_db_cluster_identifier is specified and encrypted.
 	StorageEncrypted *bool `json:"storageEncrypted,omitempty" tf:"storage_encrypted,omitempty"`
 
 	// Key-value map of resource tags.
@@ -86,12 +86,13 @@ type GlobalClusterObservation struct {
 	// Name of the database engine to be used for this DB cluster. Valid values: aurora, aurora-mysql, aurora-postgresql. Defaults to aurora. Conflicts with source_db_cluster_identifier.
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
 
-	// The life cycle type for this DB instance. This setting applies only to Aurora PostgreSQL-based global databases. Valid values are open-source-rds-extended-support, open-source-rds-extended-support-disabled. Default value is open-source-rds-extended-support. [Using Amazon RDS Extended Support]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
+	// Life cycle type for this DB instance. This setting applies only to Aurora PostgreSQL-based global databases. Valid values are open-source-rds-extended-support, open-source-rds-extended-support-disabled. Default value is open-source-rds-extended-support. [Using Amazon RDS Extended Support]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
 	EngineLifecycleSupport *string `json:"engineLifecycleSupport,omitempty" tf:"engine_lifecycle_support,omitempty"`
 
 	// Engine version of the Aurora global database. The engine, engine_version, and instance_class (on the aws_rds_cluster_instance) must together support global databases. See Using Amazon Aurora global databases for more information. NOTE: To avoid an inconsistent final plan error while upgrading, use the lifecycle ignore_changes for engine_version meta argument on the associated aws_rds_cluster resource as shown above in Upgrading Engine Versions example.
 	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
 
+	// Running version of the database engine.
 	EngineVersionActual *string `json:"engineVersionActual,omitempty" tf:"engine_version_actual,omitempty"`
 
 	// Enable to remove DB Cluster members from Global Cluster on destroy. Required with source_db_cluster_identifier.
@@ -113,7 +114,7 @@ type GlobalClusterObservation struct {
 	// ARN to use as the primary DB Cluster of the Global Cluster on creation. NOTE: After initial creation, this argument can be removed and replaced with engine and engine_version. This allows upgrading the engine version of the Global Cluster.
 	SourceDBClusterIdentifier *string `json:"sourceDbClusterIdentifier,omitempty" tf:"source_db_cluster_identifier,omitempty"`
 
-	// Specifies whether the DB cluster is encrypted. The default is false unless source_db_cluster_identifier is specified and encrypted.
+	// Whether the DB cluster is encrypted. The default is false unless source_db_cluster_identifier is specified and encrypted.
 	StorageEncrypted *bool `json:"storageEncrypted,omitempty" tf:"storage_encrypted,omitempty"`
 
 	// Key-value map of resource tags.
@@ -139,7 +140,7 @@ type GlobalClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
 
-	// The life cycle type for this DB instance. This setting applies only to Aurora PostgreSQL-based global databases. Valid values are open-source-rds-extended-support, open-source-rds-extended-support-disabled. Default value is open-source-rds-extended-support. [Using Amazon RDS Extended Support]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
+	// Life cycle type for this DB instance. This setting applies only to Aurora PostgreSQL-based global databases. Valid values are open-source-rds-extended-support, open-source-rds-extended-support-disabled. Default value is open-source-rds-extended-support. [Using Amazon RDS Extended Support]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
 	// +kubebuilder:validation:Optional
 	EngineLifecycleSupport *string `json:"engineLifecycleSupport,omitempty" tf:"engine_lifecycle_support,omitempty"`
 
@@ -170,7 +171,7 @@ type GlobalClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	SourceDBClusterIdentifierSelector *v2.NamespacedSelector `json:"sourceDbClusterIdentifierSelector,omitempty" tf:"-"`
 
-	// Specifies whether the DB cluster is encrypted. The default is false unless source_db_cluster_identifier is specified and encrypted.
+	// Whether the DB cluster is encrypted. The default is false unless source_db_cluster_identifier is specified and encrypted.
 	// +kubebuilder:validation:Optional
 	StorageEncrypted *bool `json:"storageEncrypted,omitempty" tf:"storage_encrypted,omitempty"`
 

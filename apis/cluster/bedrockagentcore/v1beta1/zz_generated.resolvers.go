@@ -17,8 +17,65 @@ import (
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
-func (mg *AgentRuntime) ResolveReferences( // ResolveReferences of this AgentRuntime.
+func (mg *APIKeyCredentialProvider) ResolveReferences( // ResolveReferences of this APIKeyCredentialProvider.
 	ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	if mg.Spec.ForProvider.APIKeySecretConfig != nil {
+		{
+			m, l, err = apisresolver.GetManagedResource("secretsmanager.aws.upbound.io", "v1beta1", "Secret", "SecretList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.APIKeySecretConfig.SecretID),
+				Extract:      common.ARNExtractor(),
+				Namespace:    mg.GetNamespace(),
+				Reference:    mg.Spec.ForProvider.APIKeySecretConfig.SecretIDRef,
+				Selector:     mg.Spec.ForProvider.APIKeySecretConfig.SecretIDSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.APIKeySecretConfig.SecretID")
+		}
+		mg.Spec.ForProvider.APIKeySecretConfig.SecretID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.APIKeySecretConfig.SecretIDRef = rsp.ResolvedReference
+
+	}
+	if mg.Spec.InitProvider.APIKeySecretConfig != nil {
+		{
+			m, l, err = apisresolver.GetManagedResource("secretsmanager.aws.upbound.io", "v1beta1", "Secret", "SecretList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.APIKeySecretConfig.SecretID),
+				Extract:      common.ARNExtractor(),
+				Namespace:    mg.GetNamespace(),
+				Reference:    mg.Spec.InitProvider.APIKeySecretConfig.SecretIDRef,
+				Selector:     mg.Spec.InitProvider.APIKeySecretConfig.SecretIDSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.APIKeySecretConfig.SecretID")
+		}
+		mg.Spec.InitProvider.APIKeySecretConfig.SecretID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.APIKeySecretConfig.SecretIDRef = rsp.ResolvedReference
+
+	}
+
+	return nil
+}
+
+// ResolveReferences of this AgentRuntime.
+func (mg *AgentRuntime) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed
 	var l xpresource.ManagedList
 	r := reference.NewAPIResolver(c, mg)
@@ -357,6 +414,7 @@ func (mg *CodeInterpreter) ResolveReferences(ctx context.Context, c client.Reade
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
+	var mrsp reference.MultiResolutionResponse
 	var err error
 
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.Certificate); i3++ {
@@ -405,6 +463,150 @@ func (mg *CodeInterpreter) ResolveReferences(ctx context.Context, c client.Reade
 	mg.Spec.ForProvider.ExecutionRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ExecutionRoleArnRef = rsp.ResolvedReference
 
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.FilesystemConfiguration); i3++ {
+		if mg.Spec.ForProvider.FilesystemConfiguration[i3].EFSConfiguration != nil {
+			{
+				m, l, err = apisresolver.GetManagedResource("efs.aws.upbound.io", "v1beta2", "AccessPoint", "AccessPointList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.FilesystemConfiguration[i3].EFSConfiguration.AccessPointArn),
+					Extract:      common.ARNExtractor(),
+					Namespace:    mg.GetNamespace(),
+					Reference:    mg.Spec.ForProvider.FilesystemConfiguration[i3].EFSConfiguration.AccessPointArnRef,
+					Selector:     mg.Spec.ForProvider.FilesystemConfiguration[i3].EFSConfiguration.AccessPointArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.FilesystemConfiguration[i3].EFSConfiguration.AccessPointArn")
+			}
+			mg.Spec.ForProvider.FilesystemConfiguration[i3].EFSConfiguration.AccessPointArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.FilesystemConfiguration[i3].EFSConfiguration.AccessPointArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.FilesystemConfiguration); i3++ {
+		if mg.Spec.ForProvider.FilesystemConfiguration[i3].EFSConfiguration != nil {
+			{
+				m, l, err = apisresolver.GetManagedResource("efs.aws.upbound.io", "v1beta2", "FileSystem", "FileSystemList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.FilesystemConfiguration[i3].EFSConfiguration.FileSystemArn),
+					Extract:      common.ARNExtractor(),
+					Namespace:    mg.GetNamespace(),
+					Reference:    mg.Spec.ForProvider.FilesystemConfiguration[i3].EFSConfiguration.FileSystemArnRef,
+					Selector:     mg.Spec.ForProvider.FilesystemConfiguration[i3].EFSConfiguration.FileSystemArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.FilesystemConfiguration[i3].EFSConfiguration.FileSystemArn")
+			}
+			mg.Spec.ForProvider.FilesystemConfiguration[i3].EFSConfiguration.FileSystemArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.FilesystemConfiguration[i3].EFSConfiguration.FileSystemArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.FilesystemConfiguration); i3++ {
+		if mg.Spec.ForProvider.FilesystemConfiguration[i3].S3FilesConfiguration != nil {
+			{
+				m, l, err = apisresolver.GetManagedResource("s3files.aws.upbound.io", "v1beta1", "AccessPoint", "AccessPointList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.FilesystemConfiguration[i3].S3FilesConfiguration.AccessPointArn),
+					Extract:      common.ARNExtractor(),
+					Namespace:    mg.GetNamespace(),
+					Reference:    mg.Spec.ForProvider.FilesystemConfiguration[i3].S3FilesConfiguration.AccessPointArnRef,
+					Selector:     mg.Spec.ForProvider.FilesystemConfiguration[i3].S3FilesConfiguration.AccessPointArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.FilesystemConfiguration[i3].S3FilesConfiguration.AccessPointArn")
+			}
+			mg.Spec.ForProvider.FilesystemConfiguration[i3].S3FilesConfiguration.AccessPointArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.FilesystemConfiguration[i3].S3FilesConfiguration.AccessPointArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.FilesystemConfiguration); i3++ {
+		if mg.Spec.ForProvider.FilesystemConfiguration[i3].S3FilesConfiguration != nil {
+			{
+				m, l, err = apisresolver.GetManagedResource("s3files.aws.upbound.io", "v1beta1", "FileSystem", "FileSystemList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.FilesystemConfiguration[i3].S3FilesConfiguration.FileSystemArn),
+					Extract:      common.ARNExtractor(),
+					Namespace:    mg.GetNamespace(),
+					Reference:    mg.Spec.ForProvider.FilesystemConfiguration[i3].S3FilesConfiguration.FileSystemArnRef,
+					Selector:     mg.Spec.ForProvider.FilesystemConfiguration[i3].S3FilesConfiguration.FileSystemArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.FilesystemConfiguration[i3].S3FilesConfiguration.FileSystemArn")
+			}
+			mg.Spec.ForProvider.FilesystemConfiguration[i3].S3FilesConfiguration.FileSystemArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.FilesystemConfiguration[i3].S3FilesConfiguration.FileSystemArnRef = rsp.ResolvedReference
+
+		}
+	}
+	if mg.Spec.ForProvider.NetworkConfiguration != nil {
+		if mg.Spec.ForProvider.NetworkConfiguration.VPCConfig != nil {
+			{
+				m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "SecurityGroup", "SecurityGroupList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+					CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.NetworkConfiguration.VPCConfig.SecurityGroups),
+					Extract:       reference.ExternalName(),
+					Namespace:     mg.GetNamespace(),
+					References:    mg.Spec.ForProvider.NetworkConfiguration.VPCConfig.SecurityGroupsRefs,
+					Selector:      mg.Spec.ForProvider.NetworkConfiguration.VPCConfig.SecurityGroupsSelector,
+					To:            reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.NetworkConfiguration.VPCConfig.SecurityGroups")
+			}
+			mg.Spec.ForProvider.NetworkConfiguration.VPCConfig.SecurityGroups = reference.ToPtrValues(mrsp.ResolvedValues)
+			mg.Spec.ForProvider.NetworkConfiguration.VPCConfig.SecurityGroupsRefs = mrsp.ResolvedReferences
+
+		}
+	}
+	if mg.Spec.ForProvider.NetworkConfiguration != nil {
+		if mg.Spec.ForProvider.NetworkConfiguration.VPCConfig != nil {
+			{
+				m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "Subnet", "SubnetList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+					CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.NetworkConfiguration.VPCConfig.Subnets),
+					Extract:       reference.ExternalName(),
+					Namespace:     mg.GetNamespace(),
+					References:    mg.Spec.ForProvider.NetworkConfiguration.VPCConfig.SubnetsRefs,
+					Selector:      mg.Spec.ForProvider.NetworkConfiguration.VPCConfig.SubnetsSelector,
+					To:            reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.NetworkConfiguration.VPCConfig.Subnets")
+			}
+			mg.Spec.ForProvider.NetworkConfiguration.VPCConfig.Subnets = reference.ToPtrValues(mrsp.ResolvedValues)
+			mg.Spec.ForProvider.NetworkConfiguration.VPCConfig.SubnetsRefs = mrsp.ResolvedReferences
+
+		}
+	}
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.Certificate); i3++ {
 		if mg.Spec.InitProvider.Certificate[i3].Location != nil {
 			if mg.Spec.InitProvider.Certificate[i3].Location.SecretsManager != nil {
@@ -450,6 +652,151 @@ func (mg *CodeInterpreter) ResolveReferences(ctx context.Context, c client.Reade
 	}
 	mg.Spec.InitProvider.ExecutionRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ExecutionRoleArnRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.FilesystemConfiguration); i3++ {
+		if mg.Spec.InitProvider.FilesystemConfiguration[i3].EFSConfiguration != nil {
+			{
+				m, l, err = apisresolver.GetManagedResource("efs.aws.upbound.io", "v1beta2", "AccessPoint", "AccessPointList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FilesystemConfiguration[i3].EFSConfiguration.AccessPointArn),
+					Extract:      common.ARNExtractor(),
+					Namespace:    mg.GetNamespace(),
+					Reference:    mg.Spec.InitProvider.FilesystemConfiguration[i3].EFSConfiguration.AccessPointArnRef,
+					Selector:     mg.Spec.InitProvider.FilesystemConfiguration[i3].EFSConfiguration.AccessPointArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.FilesystemConfiguration[i3].EFSConfiguration.AccessPointArn")
+			}
+			mg.Spec.InitProvider.FilesystemConfiguration[i3].EFSConfiguration.AccessPointArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.FilesystemConfiguration[i3].EFSConfiguration.AccessPointArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.FilesystemConfiguration); i3++ {
+		if mg.Spec.InitProvider.FilesystemConfiguration[i3].EFSConfiguration != nil {
+			{
+				m, l, err = apisresolver.GetManagedResource("efs.aws.upbound.io", "v1beta2", "FileSystem", "FileSystemList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FilesystemConfiguration[i3].EFSConfiguration.FileSystemArn),
+					Extract:      common.ARNExtractor(),
+					Namespace:    mg.GetNamespace(),
+					Reference:    mg.Spec.InitProvider.FilesystemConfiguration[i3].EFSConfiguration.FileSystemArnRef,
+					Selector:     mg.Spec.InitProvider.FilesystemConfiguration[i3].EFSConfiguration.FileSystemArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.FilesystemConfiguration[i3].EFSConfiguration.FileSystemArn")
+			}
+			mg.Spec.InitProvider.FilesystemConfiguration[i3].EFSConfiguration.FileSystemArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.FilesystemConfiguration[i3].EFSConfiguration.FileSystemArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.FilesystemConfiguration); i3++ {
+		if mg.Spec.InitProvider.FilesystemConfiguration[i3].S3FilesConfiguration != nil {
+			{
+				m, l, err = apisresolver.GetManagedResource("s3files.aws.upbound.io", "v1beta1", "AccessPoint", "AccessPointList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FilesystemConfiguration[i3].S3FilesConfiguration.AccessPointArn),
+					Extract:      common.ARNExtractor(),
+					Namespace:    mg.GetNamespace(),
+					Reference:    mg.Spec.InitProvider.FilesystemConfiguration[i3].S3FilesConfiguration.AccessPointArnRef,
+					Selector:     mg.Spec.InitProvider.FilesystemConfiguration[i3].S3FilesConfiguration.AccessPointArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.FilesystemConfiguration[i3].S3FilesConfiguration.AccessPointArn")
+			}
+			mg.Spec.InitProvider.FilesystemConfiguration[i3].S3FilesConfiguration.AccessPointArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.FilesystemConfiguration[i3].S3FilesConfiguration.AccessPointArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.FilesystemConfiguration); i3++ {
+		if mg.Spec.InitProvider.FilesystemConfiguration[i3].S3FilesConfiguration != nil {
+			{
+				m, l, err = apisresolver.GetManagedResource("s3files.aws.upbound.io", "v1beta1", "FileSystem", "FileSystemList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FilesystemConfiguration[i3].S3FilesConfiguration.FileSystemArn),
+					Extract:      common.ARNExtractor(),
+					Namespace:    mg.GetNamespace(),
+					Reference:    mg.Spec.InitProvider.FilesystemConfiguration[i3].S3FilesConfiguration.FileSystemArnRef,
+					Selector:     mg.Spec.InitProvider.FilesystemConfiguration[i3].S3FilesConfiguration.FileSystemArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.FilesystemConfiguration[i3].S3FilesConfiguration.FileSystemArn")
+			}
+			mg.Spec.InitProvider.FilesystemConfiguration[i3].S3FilesConfiguration.FileSystemArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.FilesystemConfiguration[i3].S3FilesConfiguration.FileSystemArnRef = rsp.ResolvedReference
+
+		}
+	}
+	if mg.Spec.InitProvider.NetworkConfiguration != nil {
+		if mg.Spec.InitProvider.NetworkConfiguration.VPCConfig != nil {
+			{
+				m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "SecurityGroup", "SecurityGroupList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+					CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.NetworkConfiguration.VPCConfig.SecurityGroups),
+					Extract:       reference.ExternalName(),
+					Namespace:     mg.GetNamespace(),
+					References:    mg.Spec.InitProvider.NetworkConfiguration.VPCConfig.SecurityGroupsRefs,
+					Selector:      mg.Spec.InitProvider.NetworkConfiguration.VPCConfig.SecurityGroupsSelector,
+					To:            reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.NetworkConfiguration.VPCConfig.SecurityGroups")
+			}
+			mg.Spec.InitProvider.NetworkConfiguration.VPCConfig.SecurityGroups = reference.ToPtrValues(mrsp.ResolvedValues)
+			mg.Spec.InitProvider.NetworkConfiguration.VPCConfig.SecurityGroupsRefs = mrsp.ResolvedReferences
+
+		}
+	}
+	if mg.Spec.InitProvider.NetworkConfiguration != nil {
+		if mg.Spec.InitProvider.NetworkConfiguration.VPCConfig != nil {
+			{
+				m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "Subnet", "SubnetList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+					CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.NetworkConfiguration.VPCConfig.Subnets),
+					Extract:       reference.ExternalName(),
+					Namespace:     mg.GetNamespace(),
+					References:    mg.Spec.InitProvider.NetworkConfiguration.VPCConfig.SubnetsRefs,
+					Selector:      mg.Spec.InitProvider.NetworkConfiguration.VPCConfig.SubnetsSelector,
+					To:            reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.NetworkConfiguration.VPCConfig.Subnets")
+			}
+			mg.Spec.InitProvider.NetworkConfiguration.VPCConfig.Subnets = reference.ToPtrValues(mrsp.ResolvedValues)
+			mg.Spec.InitProvider.NetworkConfiguration.VPCConfig.SubnetsRefs = mrsp.ResolvedReferences
+
+		}
+	}
 
 	return nil
 }
@@ -2366,6 +2713,487 @@ func (mg *MemoryStrategy) ResolveReferences(ctx context.Context, c client.Reader
 	}
 	mg.Spec.InitProvider.MemoryID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.MemoryIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this Oauth2CredentialProvider.
+func (mg *Oauth2CredentialProvider) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	if mg.Spec.ForProvider.Oauth2ProviderConfig != nil {
+		if mg.Spec.ForProvider.Oauth2ProviderConfig.AtlassianOauth2ProviderConfig != nil {
+			if mg.Spec.ForProvider.Oauth2ProviderConfig.AtlassianOauth2ProviderConfig.ClientSecretConfig != nil {
+				{
+					m, l, err = apisresolver.GetManagedResource("secretsmanager.aws.upbound.io", "v1beta1", "Secret", "SecretList")
+					if err != nil {
+						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					}
+					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Oauth2ProviderConfig.AtlassianOauth2ProviderConfig.ClientSecretConfig.SecretID),
+						Extract:      common.ARNExtractor(),
+						Namespace:    mg.GetNamespace(),
+						Reference:    mg.Spec.ForProvider.Oauth2ProviderConfig.AtlassianOauth2ProviderConfig.ClientSecretConfig.SecretIDRef,
+						Selector:     mg.Spec.ForProvider.Oauth2ProviderConfig.AtlassianOauth2ProviderConfig.ClientSecretConfig.SecretIDSelector,
+						To:           reference.To{List: l, Managed: m},
+					})
+				}
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.ForProvider.Oauth2ProviderConfig.AtlassianOauth2ProviderConfig.ClientSecretConfig.SecretID")
+				}
+				mg.Spec.ForProvider.Oauth2ProviderConfig.AtlassianOauth2ProviderConfig.ClientSecretConfig.SecretID = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.ForProvider.Oauth2ProviderConfig.AtlassianOauth2ProviderConfig.ClientSecretConfig.SecretIDRef = rsp.ResolvedReference
+
+			}
+		}
+	}
+	if mg.Spec.ForProvider.Oauth2ProviderConfig != nil {
+		if mg.Spec.ForProvider.Oauth2ProviderConfig.CustomOauth2ProviderConfig != nil {
+			if mg.Spec.ForProvider.Oauth2ProviderConfig.CustomOauth2ProviderConfig.ClientSecretConfig != nil {
+				{
+					m, l, err = apisresolver.GetManagedResource("secretsmanager.aws.upbound.io", "v1beta1", "Secret", "SecretList")
+					if err != nil {
+						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					}
+					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Oauth2ProviderConfig.CustomOauth2ProviderConfig.ClientSecretConfig.SecretID),
+						Extract:      common.ARNExtractor(),
+						Namespace:    mg.GetNamespace(),
+						Reference:    mg.Spec.ForProvider.Oauth2ProviderConfig.CustomOauth2ProviderConfig.ClientSecretConfig.SecretIDRef,
+						Selector:     mg.Spec.ForProvider.Oauth2ProviderConfig.CustomOauth2ProviderConfig.ClientSecretConfig.SecretIDSelector,
+						To:           reference.To{List: l, Managed: m},
+					})
+				}
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.ForProvider.Oauth2ProviderConfig.CustomOauth2ProviderConfig.ClientSecretConfig.SecretID")
+				}
+				mg.Spec.ForProvider.Oauth2ProviderConfig.CustomOauth2ProviderConfig.ClientSecretConfig.SecretID = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.ForProvider.Oauth2ProviderConfig.CustomOauth2ProviderConfig.ClientSecretConfig.SecretIDRef = rsp.ResolvedReference
+
+			}
+		}
+	}
+	if mg.Spec.ForProvider.Oauth2ProviderConfig != nil {
+		if mg.Spec.ForProvider.Oauth2ProviderConfig.GithubOauth2ProviderConfig != nil {
+			if mg.Spec.ForProvider.Oauth2ProviderConfig.GithubOauth2ProviderConfig.ClientSecretConfig != nil {
+				{
+					m, l, err = apisresolver.GetManagedResource("secretsmanager.aws.upbound.io", "v1beta1", "Secret", "SecretList")
+					if err != nil {
+						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					}
+					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Oauth2ProviderConfig.GithubOauth2ProviderConfig.ClientSecretConfig.SecretID),
+						Extract:      common.ARNExtractor(),
+						Namespace:    mg.GetNamespace(),
+						Reference:    mg.Spec.ForProvider.Oauth2ProviderConfig.GithubOauth2ProviderConfig.ClientSecretConfig.SecretIDRef,
+						Selector:     mg.Spec.ForProvider.Oauth2ProviderConfig.GithubOauth2ProviderConfig.ClientSecretConfig.SecretIDSelector,
+						To:           reference.To{List: l, Managed: m},
+					})
+				}
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.ForProvider.Oauth2ProviderConfig.GithubOauth2ProviderConfig.ClientSecretConfig.SecretID")
+				}
+				mg.Spec.ForProvider.Oauth2ProviderConfig.GithubOauth2ProviderConfig.ClientSecretConfig.SecretID = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.ForProvider.Oauth2ProviderConfig.GithubOauth2ProviderConfig.ClientSecretConfig.SecretIDRef = rsp.ResolvedReference
+
+			}
+		}
+	}
+	if mg.Spec.ForProvider.Oauth2ProviderConfig != nil {
+		if mg.Spec.ForProvider.Oauth2ProviderConfig.GoogleOauth2ProviderConfig != nil {
+			if mg.Spec.ForProvider.Oauth2ProviderConfig.GoogleOauth2ProviderConfig.ClientSecretConfig != nil {
+				{
+					m, l, err = apisresolver.GetManagedResource("secretsmanager.aws.upbound.io", "v1beta1", "Secret", "SecretList")
+					if err != nil {
+						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					}
+					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Oauth2ProviderConfig.GoogleOauth2ProviderConfig.ClientSecretConfig.SecretID),
+						Extract:      common.ARNExtractor(),
+						Namespace:    mg.GetNamespace(),
+						Reference:    mg.Spec.ForProvider.Oauth2ProviderConfig.GoogleOauth2ProviderConfig.ClientSecretConfig.SecretIDRef,
+						Selector:     mg.Spec.ForProvider.Oauth2ProviderConfig.GoogleOauth2ProviderConfig.ClientSecretConfig.SecretIDSelector,
+						To:           reference.To{List: l, Managed: m},
+					})
+				}
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.ForProvider.Oauth2ProviderConfig.GoogleOauth2ProviderConfig.ClientSecretConfig.SecretID")
+				}
+				mg.Spec.ForProvider.Oauth2ProviderConfig.GoogleOauth2ProviderConfig.ClientSecretConfig.SecretID = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.ForProvider.Oauth2ProviderConfig.GoogleOauth2ProviderConfig.ClientSecretConfig.SecretIDRef = rsp.ResolvedReference
+
+			}
+		}
+	}
+	if mg.Spec.ForProvider.Oauth2ProviderConfig != nil {
+		if mg.Spec.ForProvider.Oauth2ProviderConfig.IncludedOauth2ProviderConfig != nil {
+			if mg.Spec.ForProvider.Oauth2ProviderConfig.IncludedOauth2ProviderConfig.ClientSecretConfig != nil {
+				{
+					m, l, err = apisresolver.GetManagedResource("secretsmanager.aws.upbound.io", "v1beta1", "Secret", "SecretList")
+					if err != nil {
+						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					}
+					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Oauth2ProviderConfig.IncludedOauth2ProviderConfig.ClientSecretConfig.SecretID),
+						Extract:      common.ARNExtractor(),
+						Namespace:    mg.GetNamespace(),
+						Reference:    mg.Spec.ForProvider.Oauth2ProviderConfig.IncludedOauth2ProviderConfig.ClientSecretConfig.SecretIDRef,
+						Selector:     mg.Spec.ForProvider.Oauth2ProviderConfig.IncludedOauth2ProviderConfig.ClientSecretConfig.SecretIDSelector,
+						To:           reference.To{List: l, Managed: m},
+					})
+				}
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.ForProvider.Oauth2ProviderConfig.IncludedOauth2ProviderConfig.ClientSecretConfig.SecretID")
+				}
+				mg.Spec.ForProvider.Oauth2ProviderConfig.IncludedOauth2ProviderConfig.ClientSecretConfig.SecretID = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.ForProvider.Oauth2ProviderConfig.IncludedOauth2ProviderConfig.ClientSecretConfig.SecretIDRef = rsp.ResolvedReference
+
+			}
+		}
+	}
+	if mg.Spec.ForProvider.Oauth2ProviderConfig != nil {
+		if mg.Spec.ForProvider.Oauth2ProviderConfig.LinkedinOauth2ProviderConfig != nil {
+			if mg.Spec.ForProvider.Oauth2ProviderConfig.LinkedinOauth2ProviderConfig.ClientSecretConfig != nil {
+				{
+					m, l, err = apisresolver.GetManagedResource("secretsmanager.aws.upbound.io", "v1beta1", "Secret", "SecretList")
+					if err != nil {
+						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					}
+					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Oauth2ProviderConfig.LinkedinOauth2ProviderConfig.ClientSecretConfig.SecretID),
+						Extract:      common.ARNExtractor(),
+						Namespace:    mg.GetNamespace(),
+						Reference:    mg.Spec.ForProvider.Oauth2ProviderConfig.LinkedinOauth2ProviderConfig.ClientSecretConfig.SecretIDRef,
+						Selector:     mg.Spec.ForProvider.Oauth2ProviderConfig.LinkedinOauth2ProviderConfig.ClientSecretConfig.SecretIDSelector,
+						To:           reference.To{List: l, Managed: m},
+					})
+				}
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.ForProvider.Oauth2ProviderConfig.LinkedinOauth2ProviderConfig.ClientSecretConfig.SecretID")
+				}
+				mg.Spec.ForProvider.Oauth2ProviderConfig.LinkedinOauth2ProviderConfig.ClientSecretConfig.SecretID = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.ForProvider.Oauth2ProviderConfig.LinkedinOauth2ProviderConfig.ClientSecretConfig.SecretIDRef = rsp.ResolvedReference
+
+			}
+		}
+	}
+	if mg.Spec.ForProvider.Oauth2ProviderConfig != nil {
+		if mg.Spec.ForProvider.Oauth2ProviderConfig.MicrosoftOauth2ProviderConfig != nil {
+			if mg.Spec.ForProvider.Oauth2ProviderConfig.MicrosoftOauth2ProviderConfig.ClientSecretConfig != nil {
+				{
+					m, l, err = apisresolver.GetManagedResource("secretsmanager.aws.upbound.io", "v1beta1", "Secret", "SecretList")
+					if err != nil {
+						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					}
+					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Oauth2ProviderConfig.MicrosoftOauth2ProviderConfig.ClientSecretConfig.SecretID),
+						Extract:      common.ARNExtractor(),
+						Namespace:    mg.GetNamespace(),
+						Reference:    mg.Spec.ForProvider.Oauth2ProviderConfig.MicrosoftOauth2ProviderConfig.ClientSecretConfig.SecretIDRef,
+						Selector:     mg.Spec.ForProvider.Oauth2ProviderConfig.MicrosoftOauth2ProviderConfig.ClientSecretConfig.SecretIDSelector,
+						To:           reference.To{List: l, Managed: m},
+					})
+				}
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.ForProvider.Oauth2ProviderConfig.MicrosoftOauth2ProviderConfig.ClientSecretConfig.SecretID")
+				}
+				mg.Spec.ForProvider.Oauth2ProviderConfig.MicrosoftOauth2ProviderConfig.ClientSecretConfig.SecretID = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.ForProvider.Oauth2ProviderConfig.MicrosoftOauth2ProviderConfig.ClientSecretConfig.SecretIDRef = rsp.ResolvedReference
+
+			}
+		}
+	}
+	if mg.Spec.ForProvider.Oauth2ProviderConfig != nil {
+		if mg.Spec.ForProvider.Oauth2ProviderConfig.SalesforceOauth2ProviderConfig != nil {
+			if mg.Spec.ForProvider.Oauth2ProviderConfig.SalesforceOauth2ProviderConfig.ClientSecretConfig != nil {
+				{
+					m, l, err = apisresolver.GetManagedResource("secretsmanager.aws.upbound.io", "v1beta1", "Secret", "SecretList")
+					if err != nil {
+						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					}
+					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Oauth2ProviderConfig.SalesforceOauth2ProviderConfig.ClientSecretConfig.SecretID),
+						Extract:      common.ARNExtractor(),
+						Namespace:    mg.GetNamespace(),
+						Reference:    mg.Spec.ForProvider.Oauth2ProviderConfig.SalesforceOauth2ProviderConfig.ClientSecretConfig.SecretIDRef,
+						Selector:     mg.Spec.ForProvider.Oauth2ProviderConfig.SalesforceOauth2ProviderConfig.ClientSecretConfig.SecretIDSelector,
+						To:           reference.To{List: l, Managed: m},
+					})
+				}
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.ForProvider.Oauth2ProviderConfig.SalesforceOauth2ProviderConfig.ClientSecretConfig.SecretID")
+				}
+				mg.Spec.ForProvider.Oauth2ProviderConfig.SalesforceOauth2ProviderConfig.ClientSecretConfig.SecretID = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.ForProvider.Oauth2ProviderConfig.SalesforceOauth2ProviderConfig.ClientSecretConfig.SecretIDRef = rsp.ResolvedReference
+
+			}
+		}
+	}
+	if mg.Spec.ForProvider.Oauth2ProviderConfig != nil {
+		if mg.Spec.ForProvider.Oauth2ProviderConfig.SlackOauth2ProviderConfig != nil {
+			if mg.Spec.ForProvider.Oauth2ProviderConfig.SlackOauth2ProviderConfig.ClientSecretConfig != nil {
+				{
+					m, l, err = apisresolver.GetManagedResource("secretsmanager.aws.upbound.io", "v1beta1", "Secret", "SecretList")
+					if err != nil {
+						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					}
+					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Oauth2ProviderConfig.SlackOauth2ProviderConfig.ClientSecretConfig.SecretID),
+						Extract:      common.ARNExtractor(),
+						Namespace:    mg.GetNamespace(),
+						Reference:    mg.Spec.ForProvider.Oauth2ProviderConfig.SlackOauth2ProviderConfig.ClientSecretConfig.SecretIDRef,
+						Selector:     mg.Spec.ForProvider.Oauth2ProviderConfig.SlackOauth2ProviderConfig.ClientSecretConfig.SecretIDSelector,
+						To:           reference.To{List: l, Managed: m},
+					})
+				}
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.ForProvider.Oauth2ProviderConfig.SlackOauth2ProviderConfig.ClientSecretConfig.SecretID")
+				}
+				mg.Spec.ForProvider.Oauth2ProviderConfig.SlackOauth2ProviderConfig.ClientSecretConfig.SecretID = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.ForProvider.Oauth2ProviderConfig.SlackOauth2ProviderConfig.ClientSecretConfig.SecretIDRef = rsp.ResolvedReference
+
+			}
+		}
+	}
+	if mg.Spec.InitProvider.Oauth2ProviderConfig != nil {
+		if mg.Spec.InitProvider.Oauth2ProviderConfig.AtlassianOauth2ProviderConfig != nil {
+			if mg.Spec.InitProvider.Oauth2ProviderConfig.AtlassianOauth2ProviderConfig.ClientSecretConfig != nil {
+				{
+					m, l, err = apisresolver.GetManagedResource("secretsmanager.aws.upbound.io", "v1beta1", "Secret", "SecretList")
+					if err != nil {
+						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					}
+					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Oauth2ProviderConfig.AtlassianOauth2ProviderConfig.ClientSecretConfig.SecretID),
+						Extract:      common.ARNExtractor(),
+						Namespace:    mg.GetNamespace(),
+						Reference:    mg.Spec.InitProvider.Oauth2ProviderConfig.AtlassianOauth2ProviderConfig.ClientSecretConfig.SecretIDRef,
+						Selector:     mg.Spec.InitProvider.Oauth2ProviderConfig.AtlassianOauth2ProviderConfig.ClientSecretConfig.SecretIDSelector,
+						To:           reference.To{List: l, Managed: m},
+					})
+				}
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.InitProvider.Oauth2ProviderConfig.AtlassianOauth2ProviderConfig.ClientSecretConfig.SecretID")
+				}
+				mg.Spec.InitProvider.Oauth2ProviderConfig.AtlassianOauth2ProviderConfig.ClientSecretConfig.SecretID = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.InitProvider.Oauth2ProviderConfig.AtlassianOauth2ProviderConfig.ClientSecretConfig.SecretIDRef = rsp.ResolvedReference
+
+			}
+		}
+	}
+	if mg.Spec.InitProvider.Oauth2ProviderConfig != nil {
+		if mg.Spec.InitProvider.Oauth2ProviderConfig.CustomOauth2ProviderConfig != nil {
+			if mg.Spec.InitProvider.Oauth2ProviderConfig.CustomOauth2ProviderConfig.ClientSecretConfig != nil {
+				{
+					m, l, err = apisresolver.GetManagedResource("secretsmanager.aws.upbound.io", "v1beta1", "Secret", "SecretList")
+					if err != nil {
+						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					}
+					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Oauth2ProviderConfig.CustomOauth2ProviderConfig.ClientSecretConfig.SecretID),
+						Extract:      common.ARNExtractor(),
+						Namespace:    mg.GetNamespace(),
+						Reference:    mg.Spec.InitProvider.Oauth2ProviderConfig.CustomOauth2ProviderConfig.ClientSecretConfig.SecretIDRef,
+						Selector:     mg.Spec.InitProvider.Oauth2ProviderConfig.CustomOauth2ProviderConfig.ClientSecretConfig.SecretIDSelector,
+						To:           reference.To{List: l, Managed: m},
+					})
+				}
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.InitProvider.Oauth2ProviderConfig.CustomOauth2ProviderConfig.ClientSecretConfig.SecretID")
+				}
+				mg.Spec.InitProvider.Oauth2ProviderConfig.CustomOauth2ProviderConfig.ClientSecretConfig.SecretID = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.InitProvider.Oauth2ProviderConfig.CustomOauth2ProviderConfig.ClientSecretConfig.SecretIDRef = rsp.ResolvedReference
+
+			}
+		}
+	}
+	if mg.Spec.InitProvider.Oauth2ProviderConfig != nil {
+		if mg.Spec.InitProvider.Oauth2ProviderConfig.GithubOauth2ProviderConfig != nil {
+			if mg.Spec.InitProvider.Oauth2ProviderConfig.GithubOauth2ProviderConfig.ClientSecretConfig != nil {
+				{
+					m, l, err = apisresolver.GetManagedResource("secretsmanager.aws.upbound.io", "v1beta1", "Secret", "SecretList")
+					if err != nil {
+						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					}
+					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Oauth2ProviderConfig.GithubOauth2ProviderConfig.ClientSecretConfig.SecretID),
+						Extract:      common.ARNExtractor(),
+						Namespace:    mg.GetNamespace(),
+						Reference:    mg.Spec.InitProvider.Oauth2ProviderConfig.GithubOauth2ProviderConfig.ClientSecretConfig.SecretIDRef,
+						Selector:     mg.Spec.InitProvider.Oauth2ProviderConfig.GithubOauth2ProviderConfig.ClientSecretConfig.SecretIDSelector,
+						To:           reference.To{List: l, Managed: m},
+					})
+				}
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.InitProvider.Oauth2ProviderConfig.GithubOauth2ProviderConfig.ClientSecretConfig.SecretID")
+				}
+				mg.Spec.InitProvider.Oauth2ProviderConfig.GithubOauth2ProviderConfig.ClientSecretConfig.SecretID = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.InitProvider.Oauth2ProviderConfig.GithubOauth2ProviderConfig.ClientSecretConfig.SecretIDRef = rsp.ResolvedReference
+
+			}
+		}
+	}
+	if mg.Spec.InitProvider.Oauth2ProviderConfig != nil {
+		if mg.Spec.InitProvider.Oauth2ProviderConfig.GoogleOauth2ProviderConfig != nil {
+			if mg.Spec.InitProvider.Oauth2ProviderConfig.GoogleOauth2ProviderConfig.ClientSecretConfig != nil {
+				{
+					m, l, err = apisresolver.GetManagedResource("secretsmanager.aws.upbound.io", "v1beta1", "Secret", "SecretList")
+					if err != nil {
+						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					}
+					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Oauth2ProviderConfig.GoogleOauth2ProviderConfig.ClientSecretConfig.SecretID),
+						Extract:      common.ARNExtractor(),
+						Namespace:    mg.GetNamespace(),
+						Reference:    mg.Spec.InitProvider.Oauth2ProviderConfig.GoogleOauth2ProviderConfig.ClientSecretConfig.SecretIDRef,
+						Selector:     mg.Spec.InitProvider.Oauth2ProviderConfig.GoogleOauth2ProviderConfig.ClientSecretConfig.SecretIDSelector,
+						To:           reference.To{List: l, Managed: m},
+					})
+				}
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.InitProvider.Oauth2ProviderConfig.GoogleOauth2ProviderConfig.ClientSecretConfig.SecretID")
+				}
+				mg.Spec.InitProvider.Oauth2ProviderConfig.GoogleOauth2ProviderConfig.ClientSecretConfig.SecretID = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.InitProvider.Oauth2ProviderConfig.GoogleOauth2ProviderConfig.ClientSecretConfig.SecretIDRef = rsp.ResolvedReference
+
+			}
+		}
+	}
+	if mg.Spec.InitProvider.Oauth2ProviderConfig != nil {
+		if mg.Spec.InitProvider.Oauth2ProviderConfig.IncludedOauth2ProviderConfig != nil {
+			if mg.Spec.InitProvider.Oauth2ProviderConfig.IncludedOauth2ProviderConfig.ClientSecretConfig != nil {
+				{
+					m, l, err = apisresolver.GetManagedResource("secretsmanager.aws.upbound.io", "v1beta1", "Secret", "SecretList")
+					if err != nil {
+						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					}
+					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Oauth2ProviderConfig.IncludedOauth2ProviderConfig.ClientSecretConfig.SecretID),
+						Extract:      common.ARNExtractor(),
+						Namespace:    mg.GetNamespace(),
+						Reference:    mg.Spec.InitProvider.Oauth2ProviderConfig.IncludedOauth2ProviderConfig.ClientSecretConfig.SecretIDRef,
+						Selector:     mg.Spec.InitProvider.Oauth2ProviderConfig.IncludedOauth2ProviderConfig.ClientSecretConfig.SecretIDSelector,
+						To:           reference.To{List: l, Managed: m},
+					})
+				}
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.InitProvider.Oauth2ProviderConfig.IncludedOauth2ProviderConfig.ClientSecretConfig.SecretID")
+				}
+				mg.Spec.InitProvider.Oauth2ProviderConfig.IncludedOauth2ProviderConfig.ClientSecretConfig.SecretID = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.InitProvider.Oauth2ProviderConfig.IncludedOauth2ProviderConfig.ClientSecretConfig.SecretIDRef = rsp.ResolvedReference
+
+			}
+		}
+	}
+	if mg.Spec.InitProvider.Oauth2ProviderConfig != nil {
+		if mg.Spec.InitProvider.Oauth2ProviderConfig.LinkedinOauth2ProviderConfig != nil {
+			if mg.Spec.InitProvider.Oauth2ProviderConfig.LinkedinOauth2ProviderConfig.ClientSecretConfig != nil {
+				{
+					m, l, err = apisresolver.GetManagedResource("secretsmanager.aws.upbound.io", "v1beta1", "Secret", "SecretList")
+					if err != nil {
+						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					}
+					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Oauth2ProviderConfig.LinkedinOauth2ProviderConfig.ClientSecretConfig.SecretID),
+						Extract:      common.ARNExtractor(),
+						Namespace:    mg.GetNamespace(),
+						Reference:    mg.Spec.InitProvider.Oauth2ProviderConfig.LinkedinOauth2ProviderConfig.ClientSecretConfig.SecretIDRef,
+						Selector:     mg.Spec.InitProvider.Oauth2ProviderConfig.LinkedinOauth2ProviderConfig.ClientSecretConfig.SecretIDSelector,
+						To:           reference.To{List: l, Managed: m},
+					})
+				}
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.InitProvider.Oauth2ProviderConfig.LinkedinOauth2ProviderConfig.ClientSecretConfig.SecretID")
+				}
+				mg.Spec.InitProvider.Oauth2ProviderConfig.LinkedinOauth2ProviderConfig.ClientSecretConfig.SecretID = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.InitProvider.Oauth2ProviderConfig.LinkedinOauth2ProviderConfig.ClientSecretConfig.SecretIDRef = rsp.ResolvedReference
+
+			}
+		}
+	}
+	if mg.Spec.InitProvider.Oauth2ProviderConfig != nil {
+		if mg.Spec.InitProvider.Oauth2ProviderConfig.MicrosoftOauth2ProviderConfig != nil {
+			if mg.Spec.InitProvider.Oauth2ProviderConfig.MicrosoftOauth2ProviderConfig.ClientSecretConfig != nil {
+				{
+					m, l, err = apisresolver.GetManagedResource("secretsmanager.aws.upbound.io", "v1beta1", "Secret", "SecretList")
+					if err != nil {
+						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					}
+					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Oauth2ProviderConfig.MicrosoftOauth2ProviderConfig.ClientSecretConfig.SecretID),
+						Extract:      common.ARNExtractor(),
+						Namespace:    mg.GetNamespace(),
+						Reference:    mg.Spec.InitProvider.Oauth2ProviderConfig.MicrosoftOauth2ProviderConfig.ClientSecretConfig.SecretIDRef,
+						Selector:     mg.Spec.InitProvider.Oauth2ProviderConfig.MicrosoftOauth2ProviderConfig.ClientSecretConfig.SecretIDSelector,
+						To:           reference.To{List: l, Managed: m},
+					})
+				}
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.InitProvider.Oauth2ProviderConfig.MicrosoftOauth2ProviderConfig.ClientSecretConfig.SecretID")
+				}
+				mg.Spec.InitProvider.Oauth2ProviderConfig.MicrosoftOauth2ProviderConfig.ClientSecretConfig.SecretID = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.InitProvider.Oauth2ProviderConfig.MicrosoftOauth2ProviderConfig.ClientSecretConfig.SecretIDRef = rsp.ResolvedReference
+
+			}
+		}
+	}
+	if mg.Spec.InitProvider.Oauth2ProviderConfig != nil {
+		if mg.Spec.InitProvider.Oauth2ProviderConfig.SalesforceOauth2ProviderConfig != nil {
+			if mg.Spec.InitProvider.Oauth2ProviderConfig.SalesforceOauth2ProviderConfig.ClientSecretConfig != nil {
+				{
+					m, l, err = apisresolver.GetManagedResource("secretsmanager.aws.upbound.io", "v1beta1", "Secret", "SecretList")
+					if err != nil {
+						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					}
+					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Oauth2ProviderConfig.SalesforceOauth2ProviderConfig.ClientSecretConfig.SecretID),
+						Extract:      common.ARNExtractor(),
+						Namespace:    mg.GetNamespace(),
+						Reference:    mg.Spec.InitProvider.Oauth2ProviderConfig.SalesforceOauth2ProviderConfig.ClientSecretConfig.SecretIDRef,
+						Selector:     mg.Spec.InitProvider.Oauth2ProviderConfig.SalesforceOauth2ProviderConfig.ClientSecretConfig.SecretIDSelector,
+						To:           reference.To{List: l, Managed: m},
+					})
+				}
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.InitProvider.Oauth2ProviderConfig.SalesforceOauth2ProviderConfig.ClientSecretConfig.SecretID")
+				}
+				mg.Spec.InitProvider.Oauth2ProviderConfig.SalesforceOauth2ProviderConfig.ClientSecretConfig.SecretID = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.InitProvider.Oauth2ProviderConfig.SalesforceOauth2ProviderConfig.ClientSecretConfig.SecretIDRef = rsp.ResolvedReference
+
+			}
+		}
+	}
+	if mg.Spec.InitProvider.Oauth2ProviderConfig != nil {
+		if mg.Spec.InitProvider.Oauth2ProviderConfig.SlackOauth2ProviderConfig != nil {
+			if mg.Spec.InitProvider.Oauth2ProviderConfig.SlackOauth2ProviderConfig.ClientSecretConfig != nil {
+				{
+					m, l, err = apisresolver.GetManagedResource("secretsmanager.aws.upbound.io", "v1beta1", "Secret", "SecretList")
+					if err != nil {
+						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					}
+					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Oauth2ProviderConfig.SlackOauth2ProviderConfig.ClientSecretConfig.SecretID),
+						Extract:      common.ARNExtractor(),
+						Namespace:    mg.GetNamespace(),
+						Reference:    mg.Spec.InitProvider.Oauth2ProviderConfig.SlackOauth2ProviderConfig.ClientSecretConfig.SecretIDRef,
+						Selector:     mg.Spec.InitProvider.Oauth2ProviderConfig.SlackOauth2ProviderConfig.ClientSecretConfig.SecretIDSelector,
+						To:           reference.To{List: l, Managed: m},
+					})
+				}
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.InitProvider.Oauth2ProviderConfig.SlackOauth2ProviderConfig.ClientSecretConfig.SecretID")
+				}
+				mg.Spec.InitProvider.Oauth2ProviderConfig.SlackOauth2ProviderConfig.ClientSecretConfig.SecretID = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.InitProvider.Oauth2ProviderConfig.SlackOauth2ProviderConfig.ClientSecretConfig.SecretIDRef = rsp.ResolvedReference
+
+			}
+		}
+	}
 
 	return nil
 }

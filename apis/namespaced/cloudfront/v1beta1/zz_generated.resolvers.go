@@ -344,6 +344,58 @@ func (mg *FieldLevelEncryptionProfile) ResolveReferences(ctx context.Context, c 
 	return nil
 }
 
+// ResolveReferences of this Function.
+func (mg *Function) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPINamespacedResolver(c, mg)
+
+	var mrsp reference.MultiNamespacedResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("cloudfront.aws.m.upbound.io", "v1beta1", "KeyValueStore", "KeyValueStoreList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiNamespacedResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.KeyValueStoreAssociations),
+			Extract:       common.ARNExtractor(),
+			Namespace:     mg.GetNamespace(),
+			References:    mg.Spec.ForProvider.KeyValueStoreAssociationsRefs,
+			Selector:      mg.Spec.ForProvider.KeyValueStoreAssociationsSelector,
+			To:            reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.KeyValueStoreAssociations")
+	}
+	mg.Spec.ForProvider.KeyValueStoreAssociations = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.ForProvider.KeyValueStoreAssociationsRefs = mrsp.ResolvedReferences
+	{
+		m, l, err = apisresolver.GetManagedResource("cloudfront.aws.m.upbound.io", "v1beta1", "KeyValueStore", "KeyValueStoreList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiNamespacedResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.KeyValueStoreAssociations),
+			Extract:       common.ARNExtractor(),
+			Namespace:     mg.GetNamespace(),
+			References:    mg.Spec.InitProvider.KeyValueStoreAssociationsRefs,
+			Selector:      mg.Spec.InitProvider.KeyValueStoreAssociationsSelector,
+			To:            reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.KeyValueStoreAssociations")
+	}
+	mg.Spec.InitProvider.KeyValueStoreAssociations = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.InitProvider.KeyValueStoreAssociationsRefs = mrsp.ResolvedReferences
+
+	return nil
+}
+
 // ResolveReferences of this KeyGroup.
 func (mg *KeyGroup) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed

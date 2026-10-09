@@ -15,7 +15,7 @@ import (
 
 type ClusterSnapshotInitParameters struct {
 
-	// The DB Cluster Identifier from which to take the snapshot.
+	// DB Cluster Identifier from which to take the snapshot.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/rds/v1beta2.Cluster
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DBClusterIdentifier *string `json:"dbClusterIdentifier,omitempty" tf:"db_cluster_identifier,omitempty"`
@@ -28,7 +28,7 @@ type ClusterSnapshotInitParameters struct {
 	// +kubebuilder:validation:Optional
 	DBClusterIdentifierSelector *v2.Selector `json:"dbClusterIdentifierSelector,omitempty" tf:"-"`
 
-	// The Identifier for the snapshot.
+	// Identifier for the snapshot.
 	DBClusterSnapshotIdentifier *string `json:"dbClusterSnapshotIdentifier,omitempty" tf:"db_cluster_snapshot_identifier,omitempty"`
 
 	// List of AWS Account IDs to share the snapshot with. Use all to make the snapshot public.
@@ -48,13 +48,13 @@ type ClusterSnapshotObservation struct {
 	// List of EC2 Availability Zones that instances in the DB cluster snapshot can be restored in.
 	AvailabilityZones []*string `json:"availabilityZones,omitempty" tf:"availability_zones,omitempty"`
 
-	// The DB Cluster Identifier from which to take the snapshot.
+	// DB Cluster Identifier from which to take the snapshot.
 	DBClusterIdentifier *string `json:"dbClusterIdentifier,omitempty" tf:"db_cluster_identifier,omitempty"`
 
 	// ARN for the DB Cluster Snapshot.
 	DBClusterSnapshotArn *string `json:"dbClusterSnapshotArn,omitempty" tf:"db_cluster_snapshot_arn,omitempty"`
 
-	// The Identifier for the snapshot.
+	// Identifier for the snapshot.
 	DBClusterSnapshotIdentifier *string `json:"dbClusterSnapshotIdentifier,omitempty" tf:"db_cluster_snapshot_identifier,omitempty"`
 
 	// Name of the database engine.
@@ -82,12 +82,13 @@ type ClusterSnapshotObservation struct {
 	// +listType=set
 	SharedAccounts []*string `json:"sharedAccounts,omitempty" tf:"shared_accounts,omitempty"`
 
+	// Type of the DB cluster snapshot.
 	SnapshotType *string `json:"snapshotType,omitempty" tf:"snapshot_type,omitempty"`
 
-	// ARN for the DB Cluster Snapshot.
+	// DB Cluster Snapshot ARN that the DB Cluster Snapshot was copied from. It only has value in case of cross customer or cross region copy.
 	SourceDBClusterSnapshotArn *string `json:"sourceDbClusterSnapshotArn,omitempty" tf:"source_db_cluster_snapshot_arn,omitempty"`
 
-	// The status of this DB Cluster Snapshot.
+	// Status of this DB Cluster Snapshot.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
 	// Whether the DB cluster snapshot is encrypted.
@@ -97,17 +98,17 @@ type ClusterSnapshotObservation struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// The VPC ID associated with the DB cluster snapshot.
+	// VPC ID associated with the DB cluster snapshot.
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 }
 
 type ClusterSnapshotParameters struct {
 
-	// The DB Cluster Identifier from which to take the snapshot.
+	// DB Cluster Identifier from which to take the snapshot.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/rds/v1beta2.Cluster
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -121,7 +122,7 @@ type ClusterSnapshotParameters struct {
 	// +kubebuilder:validation:Optional
 	DBClusterIdentifierSelector *v2.Selector `json:"dbClusterIdentifierSelector,omitempty" tf:"-"`
 
-	// The Identifier for the snapshot.
+	// Identifier for the snapshot.
 	// +kubebuilder:validation:Optional
 	DBClusterSnapshotIdentifier *string `json:"dbClusterSnapshotIdentifier,omitempty" tf:"db_cluster_snapshot_identifier,omitempty"`
 

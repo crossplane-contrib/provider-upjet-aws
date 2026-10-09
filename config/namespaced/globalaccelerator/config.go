@@ -6,6 +6,8 @@ package globalaccelerator
 
 import (
 	"github.com/crossplane/upjet/v2/pkg/config"
+
+	"github.com/upbound/provider-aws/v2/config/namespaced/common"
 )
 
 // Configure adds configurations for the globalaccelerator group.
@@ -14,6 +16,7 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		r.References = config.References{
 			"listener_arn": {
 				TerraformName: "aws_globalaccelerator_listener",
+				Extractor:     common.PathTerraformIDExtractor,
 			},
 		}
 	})
@@ -22,6 +25,7 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		r.References = config.References{
 			"accelerator_arn": {
 				TerraformName: "aws_globalaccelerator_accelerator",
+				Extractor:     common.PathTerraformIDExtractor,
 			},
 		}
 	})

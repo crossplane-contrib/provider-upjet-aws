@@ -19,6 +19,7 @@ import (
 	model "github.com/upbound/provider-aws/v2/internal/controller/cluster/apigatewayv2/model"
 	route "github.com/upbound/provider-aws/v2/internal/controller/cluster/apigatewayv2/route"
 	routeresponse "github.com/upbound/provider-aws/v2/internal/controller/cluster/apigatewayv2/routeresponse"
+	routingrule "github.com/upbound/provider-aws/v2/internal/controller/cluster/apigatewayv2/routingrule"
 	stage "github.com/upbound/provider-aws/v2/internal/controller/cluster/apigatewayv2/stage"
 	vpclink "github.com/upbound/provider-aws/v2/internal/controller/cluster/apigatewayv2/vpclink"
 )
@@ -37,6 +38,7 @@ func Setup_apigatewayv2(mgr ctrl.Manager, o controller.Options) error {
 		model.Setup,
 		route.Setup,
 		routeresponse.Setup,
+		routingrule.Setup,
 		stage.Setup,
 		vpclink.Setup,
 	} {
@@ -61,6 +63,7 @@ func SetupGated_apigatewayv2(mgr ctrl.Manager, o controller.Options) error {
 		model.SetupGated,
 		route.SetupGated,
 		routeresponse.SetupGated,
+		routingrule.SetupGated,
 		stage.SetupGated,
 		vpclink.SetupGated,
 	} {
@@ -84,6 +87,7 @@ func SetupWebhookWithManager_apigatewayv2(mgr ctrl.Manager) error {
 		model.SetupWebhookWithManager,
 		route.SetupWebhookWithManager,
 		routeresponse.SetupWebhookWithManager,
+		routingrule.SetupWebhookWithManager,
 		stage.SetupWebhookWithManager,
 		vpclink.SetupWebhookWithManager,
 	} {

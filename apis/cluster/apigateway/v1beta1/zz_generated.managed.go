@@ -457,6 +457,56 @@ func (mg *DomainName) SetWriteConnectionSecretToReference(r *xpv2.SecretReferenc
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this DomainNameAccessAssociation.
+func (mg *DomainNameAccessAssociation) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this DomainNameAccessAssociation.
+func (mg *DomainNameAccessAssociation) GetDeletionPolicy() xpv2.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetManagementPolicies of this DomainNameAccessAssociation.
+func (mg *DomainNameAccessAssociation) GetManagementPolicies() xpv2.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this DomainNameAccessAssociation.
+func (mg *DomainNameAccessAssociation) GetProviderConfigReference() *xpv2.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetWriteConnectionSecretToReference of this DomainNameAccessAssociation.
+func (mg *DomainNameAccessAssociation) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this DomainNameAccessAssociation.
+func (mg *DomainNameAccessAssociation) SetConditions(c ...xpv2.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this DomainNameAccessAssociation.
+func (mg *DomainNameAccessAssociation) SetDeletionPolicy(r xpv2.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicies of this DomainNameAccessAssociation.
+func (mg *DomainNameAccessAssociation) SetManagementPolicies(r xpv2.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this DomainNameAccessAssociation.
+func (mg *DomainNameAccessAssociation) SetProviderConfigReference(r *xpv2.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetWriteConnectionSecretToReference of this DomainNameAccessAssociation.
+func (mg *DomainNameAccessAssociation) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this GatewayResponse.
 func (mg *GatewayResponse) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)

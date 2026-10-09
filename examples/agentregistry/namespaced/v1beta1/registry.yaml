@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+# Registry Example
+# Creates an Agent Registry registry whose consumers are authorized with IAM.
+
+apiVersion: agentregistry.aws.m.upbound.io/v1beta1
+kind: Registry
+metadata:
+  annotations:
+    meta.upbound.io/example-id: agentregistry/v1beta1/registry
+  labels:
+    testing.upbound.io/example-name: registry
+  name: registry
+  namespace: upbound-system
+spec:
+  forProvider:
+    approvalConfiguration:
+      autoApprovalRules:
+        - APPROVE_ALL
+    description: Example agent registry
+    discoveryConfiguration:
+      authorizerType: AWS_IAM
+    name: example-registry
+    region: us-east-1
+    tags:
+      Environment: example

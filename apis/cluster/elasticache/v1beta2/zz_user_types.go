@@ -54,10 +54,10 @@ type UserInitParameters struct {
 
 	Passwords []*string `json:"passwordsSecretRef,omitempty" tf:"-"`
 
-	// Write-only password for this user. This argument is not stored in state. Conflicts with passwords and authentication_mode. See Write-Only Arguments for more information.11+.
+	// Write-only password for this user. This argument is not stored in state. Conflicts with passwords and authentication_mode. If set, requires passwords_wo_version to be set.
 	PasswordsWoSecretRef *v2.SecretKeySelector `json:"passwordsWoSecretRef,omitempty" tf:"-"`
 
-	// Version number for passwords_wo. Increment this value to trigger a password update. Required when using passwords_wo.
+	// Required when passwords_wo is set. Changing this value triggers an update to passwords_wo.
 	PasswordsWoVersion *float64 `json:"passwordsWoVersion,omitempty" tf:"passwords_wo_version,omitempty"`
 
 	// Key-value map of resource tags.
@@ -87,7 +87,7 @@ type UserObservation struct {
 	// Indicates a password is not required for this user.
 	NoPasswordRequired *bool `json:"noPasswordRequired,omitempty" tf:"no_password_required,omitempty"`
 
-	// Version number for passwords_wo. Increment this value to trigger a password update. Required when using passwords_wo.
+	// Required when passwords_wo is set. Changing this value triggers an update to passwords_wo.
 	PasswordsWoVersion *float64 `json:"passwordsWoVersion,omitempty" tf:"passwords_wo_version,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -127,11 +127,11 @@ type UserParameters struct {
 	// +kubebuilder:validation:Optional
 	PasswordsSecretRef *[]v2.SecretKeySelector `json:"passwordsSecretRef,omitempty" tf:"-"`
 
-	// Write-only password for this user. This argument is not stored in state. Conflicts with passwords and authentication_mode. See Write-Only Arguments for more information.11+.
+	// Write-only password for this user. This argument is not stored in state. Conflicts with passwords and authentication_mode. If set, requires passwords_wo_version to be set.
 	// +kubebuilder:validation:Optional
 	PasswordsWoSecretRef *v2.SecretKeySelector `json:"passwordsWoSecretRef,omitempty" tf:"-"`
 
-	// Version number for passwords_wo. Increment this value to trigger a password update. Required when using passwords_wo.
+	// Required when passwords_wo is set. Changing this value triggers an update to passwords_wo.
 	// +kubebuilder:validation:Optional
 	PasswordsWoVersion *float64 `json:"passwordsWoVersion,omitempty" tf:"passwords_wo_version,omitempty"`
 

@@ -17,6 +17,7 @@ type ListenerInitParameters struct {
 
 	// ARN of your accelerator.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/globalaccelerator/v1beta1.Accelerator
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.TerraformID()
 	AcceleratorArn *string `json:"acceleratorArn,omitempty" tf:"accelerator_arn,omitempty"`
 
 	// Reference to a Accelerator in globalaccelerator to populate acceleratorArn.
@@ -62,6 +63,7 @@ type ListenerParameters struct {
 
 	// ARN of your accelerator.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/globalaccelerator/v1beta1.Accelerator
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.TerraformID()
 	// +kubebuilder:validation:Optional
 	AcceleratorArn *string `json:"acceleratorArn,omitempty" tf:"accelerator_arn,omitempty"`
 

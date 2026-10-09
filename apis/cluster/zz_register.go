@@ -17,6 +17,7 @@ import (
 	v1beta2acm "github.com/upbound/provider-aws/v2/apis/cluster/acm/v1beta2"
 	v1beta1acmpca "github.com/upbound/provider-aws/v2/apis/cluster/acmpca/v1beta1"
 	v1beta2acmpca "github.com/upbound/provider-aws/v2/apis/cluster/acmpca/v1beta2"
+	v1beta1agentregistry "github.com/upbound/provider-aws/v2/apis/cluster/agentregistry/v1beta1"
 	v1beta1amp "github.com/upbound/provider-aws/v2/apis/cluster/amp/v1beta1"
 	v1beta2amp "github.com/upbound/provider-aws/v2/apis/cluster/amp/v1beta2"
 	v1beta1amplify "github.com/upbound/provider-aws/v2/apis/cluster/amplify/v1beta1"
@@ -195,6 +196,8 @@ import (
 	v1beta2lakeformation "github.com/upbound/provider-aws/v2/apis/cluster/lakeformation/v1beta2"
 	v1beta1lambda "github.com/upbound/provider-aws/v2/apis/cluster/lambda/v1beta1"
 	v1beta2lambda "github.com/upbound/provider-aws/v2/apis/cluster/lambda/v1beta2"
+	v1beta1lambdacore "github.com/upbound/provider-aws/v2/apis/cluster/lambdacore/v1beta1"
+	v1beta1lambdamicrovms "github.com/upbound/provider-aws/v2/apis/cluster/lambdamicrovms/v1beta1"
 	v1beta1lexmodels "github.com/upbound/provider-aws/v2/apis/cluster/lexmodels/v1beta1"
 	v1beta2lexmodels "github.com/upbound/provider-aws/v2/apis/cluster/lexmodels/v1beta2"
 	v1beta1licensemanager "github.com/upbound/provider-aws/v2/apis/cluster/licensemanager/v1beta1"
@@ -259,6 +262,7 @@ import (
 	v1beta2s3 "github.com/upbound/provider-aws/v2/apis/cluster/s3/v1beta2"
 	v1beta1s3control "github.com/upbound/provider-aws/v2/apis/cluster/s3control/v1beta1"
 	v1beta2s3control "github.com/upbound/provider-aws/v2/apis/cluster/s3control/v1beta2"
+	v1beta1s3files "github.com/upbound/provider-aws/v2/apis/cluster/s3files/v1beta1"
 	v1beta1s3vectors "github.com/upbound/provider-aws/v2/apis/cluster/s3vectors/v1beta1"
 	v1beta1sagemaker "github.com/upbound/provider-aws/v2/apis/cluster/sagemaker/v1beta1"
 	v1beta2sagemaker "github.com/upbound/provider-aws/v2/apis/cluster/sagemaker/v1beta2"
@@ -323,6 +327,7 @@ func init() {
 		v1beta2acm.SchemeBuilder.AddToScheme,
 		v1beta1acmpca.SchemeBuilder.AddToScheme,
 		v1beta2acmpca.SchemeBuilder.AddToScheme,
+		v1beta1agentregistry.SchemeBuilder.AddToScheme,
 		v1beta1amp.SchemeBuilder.AddToScheme,
 		v1beta2amp.SchemeBuilder.AddToScheme,
 		v1beta1amplify.SchemeBuilder.AddToScheme,
@@ -501,6 +506,8 @@ func init() {
 		v1beta2lakeformation.SchemeBuilder.AddToScheme,
 		v1beta1lambda.SchemeBuilder.AddToScheme,
 		v1beta2lambda.SchemeBuilder.AddToScheme,
+		v1beta1lambdacore.SchemeBuilder.AddToScheme,
+		v1beta1lambdamicrovms.SchemeBuilder.AddToScheme,
 		v1beta1lexmodels.SchemeBuilder.AddToScheme,
 		v1beta2lexmodels.SchemeBuilder.AddToScheme,
 		v1beta1licensemanager.SchemeBuilder.AddToScheme,
@@ -565,6 +572,7 @@ func init() {
 		v1beta2s3.SchemeBuilder.AddToScheme,
 		v1beta1s3control.SchemeBuilder.AddToScheme,
 		v1beta2s3control.SchemeBuilder.AddToScheme,
+		v1beta1s3files.SchemeBuilder.AddToScheme,
 		v1beta1s3vectors.SchemeBuilder.AddToScheme,
 		v1beta1sagemaker.SchemeBuilder.AddToScheme,
 		v1beta2sagemaker.SchemeBuilder.AddToScheme,

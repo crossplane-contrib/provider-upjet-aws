@@ -1,0 +1,27 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
+apiVersion: cloudwatchlogs.aws.m.upbound.io/v1beta1
+kind: Delivery
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cloudwatchlogs/v1beta1/delivery
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    deliveryDestinationArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    deliverySourceNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    fieldDelimiter: ','
+    recordFields:
+    - event_timestamp
+    - event
+    region: us-west-1

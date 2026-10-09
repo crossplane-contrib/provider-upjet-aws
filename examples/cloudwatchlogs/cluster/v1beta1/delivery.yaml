@@ -1,0 +1,124 @@
+# SPDX-FileCopyrightText: 2026 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: cloudwatchlogs.aws.upbound.io/v1beta1
+kind: Delivery
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cloudwatchlogs/v1beta1/delivery
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    region: us-east-1
+    deliverySourceNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    deliveryDestinationArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    recordFields:
+      - date
+      - time
+      - c-ip
+      - sc-status
+      - cs-method
+      - cs-uri-stem
+
+---
+
+apiVersion: cloudwatchlogs.aws.upbound.io/v1beta1
+kind: DeliverySource
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cloudwatchlogs/v1beta1/delivery
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-delivery
+spec:
+  forProvider:
+    region: us-east-1
+    name: example-delivery-cloudfront-access-logs
+    logType: ACCESS_LOGS
+    resourceArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: cloudwatchlogs.aws.upbound.io/v1beta1
+kind: DeliveryDestination
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cloudwatchlogs/v1beta1/delivery
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-delivery
+spec:
+  forProvider:
+    region: us-east-1
+    name: example-delivery-cloudwatch-logs
+    outputFormat: json
+    deliveryDestinationConfiguration:
+      destinationResourceArnSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+
+---
+
+apiVersion: cloudwatchlogs.aws.upbound.io/v1beta1
+kind: Group
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cloudwatchlogs/v1beta1/delivery
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-delivery
+spec:
+  forProvider:
+    region: us-east-1
+    retentionInDays: 1
+
+---
+
+apiVersion: cloudfront.aws.upbound.io/v1beta2
+kind: Distribution
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cloudwatchlogs/v1beta1/delivery
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-delivery
+spec:
+  forProvider:
+    comment: CloudWatch Logs delivery example
+    enabled: true
+    defaultCacheBehavior:
+      allowedMethods:
+        - GET
+        - HEAD
+      cachedMethods:
+        - GET
+        - HEAD
+      forwardedValues:
+        cookies:
+          forward: none
+        queryString: false
+      targetOriginId: customOrigin
+      viewerProtocolPolicy: redirect-to-https
+    origin:
+      - customOriginConfig:
+          httpPort: 80
+          httpsPort: 443
+          originProtocolPolicy: https-only
+          originSslProtocols:
+            - TLSv1.2
+        domainName: example.com
+        originId: customOrigin
+    restrictions:
+      geoRestriction:
+        restrictionType: none
+    viewerCertificate:
+      cloudfrontDefaultCertificate: true

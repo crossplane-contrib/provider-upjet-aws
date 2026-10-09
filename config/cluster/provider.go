@@ -7,6 +7,7 @@ package cluster
 import (
 	"github.com/upbound/provider-aws/v2/config/cluster/acm"
 	"github.com/upbound/provider-aws/v2/config/cluster/acmpca"
+	"github.com/upbound/provider-aws/v2/config/cluster/agentregistry"
 	"github.com/upbound/provider-aws/v2/config/cluster/amp"
 	"github.com/upbound/provider-aws/v2/config/cluster/apigateway"
 	"github.com/upbound/provider-aws/v2/config/cluster/apigatewayv2"
@@ -70,6 +71,8 @@ import (
 	"github.com/upbound/provider-aws/v2/config/cluster/kms"
 	"github.com/upbound/provider-aws/v2/config/cluster/lakeformation"
 	"github.com/upbound/provider-aws/v2/config/cluster/lambda"
+	"github.com/upbound/provider-aws/v2/config/cluster/lambdacore"
+	"github.com/upbound/provider-aws/v2/config/cluster/lambdamicrovms"
 	"github.com/upbound/provider-aws/v2/config/cluster/licensemanager"
 	"github.com/upbound/provider-aws/v2/config/cluster/medialive"
 	"github.com/upbound/provider-aws/v2/config/cluster/memorydb"
@@ -93,6 +96,7 @@ import (
 	"github.com/upbound/provider-aws/v2/config/cluster/route53recoverycontrolconfig"
 	"github.com/upbound/provider-aws/v2/config/cluster/route53resolver"
 	"github.com/upbound/provider-aws/v2/config/cluster/s3"
+	"github.com/upbound/provider-aws/v2/config/cluster/s3files"
 	"github.com/upbound/provider-aws/v2/config/cluster/s3vectors"
 	"github.com/upbound/provider-aws/v2/config/cluster/sagemaker"
 	"github.com/upbound/provider-aws/v2/config/cluster/secretsmanager"
@@ -112,6 +116,7 @@ import (
 func init() {
 	ProviderConfiguration.AddConfig(acm.Configure)
 	ProviderConfiguration.AddConfig(acmpca.Configure)
+	ProviderConfiguration.AddConfig(agentregistry.Configure)
 	ProviderConfiguration.AddConfig(amp.Configure)
 	ProviderConfiguration.AddConfig(apigateway.Configure)
 	ProviderConfiguration.AddConfig(apigatewayv2.Configure)
@@ -165,6 +170,8 @@ func init() {
 	ProviderConfiguration.AddConfig(kms.Configure)
 	ProviderConfiguration.AddConfig(lakeformation.Configure)
 	ProviderConfiguration.AddConfig(lambda.Configure)
+	ProviderConfiguration.AddConfig(lambdacore.Configure)
+	ProviderConfiguration.AddConfig(lambdamicrovms.Configure)
 	ProviderConfiguration.AddConfig(licensemanager.Configure)
 	ProviderConfiguration.AddConfig(memorydb.Configure)
 	ProviderConfiguration.AddConfig(mq.Configure)
@@ -182,6 +189,7 @@ func init() {
 	ProviderConfiguration.AddConfig(route53resolver.Configure)
 	ProviderConfiguration.AddConfig(route53recoverycontrolconfig.Configure)
 	ProviderConfiguration.AddConfig(s3.Configure)
+	ProviderConfiguration.AddConfig(s3files.Configure)
 	ProviderConfiguration.AddConfig(s3vectors.Configure)
 	ProviderConfiguration.AddConfig(secretsmanager.Configure)
 	ProviderConfiguration.AddConfig(servicecatalog.Configure)

@@ -16,7 +16,16 @@ import (
 type HostedPrivateVirtualInterfaceAccepterInitParameters struct {
 
 	// The ID of the Direct Connect gateway to which to connect the virtual interface.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/directconnect/v1beta1.Gateway
 	DxGatewayID *string `json:"dxGatewayId,omitempty" tf:"dx_gateway_id,omitempty"`
+
+	// Reference to a Gateway in directconnect to populate dxGatewayId.
+	// +kubebuilder:validation:Optional
+	DxGatewayIDRef *v2.Reference `json:"dxGatewayIdRef,omitempty" tf:"-"`
+
+	// Selector for a Gateway in directconnect to populate dxGatewayId.
+	// +kubebuilder:validation:Optional
+	DxGatewayIDSelector *v2.Selector `json:"dxGatewayIdSelector,omitempty" tf:"-"`
 
 	// The number of inbound IPv4 route prefixes to allocate to the virtual interface. Valid values are 0 to 1000. If not specified, AWS applies the default allocation of 100.
 	PrefixPoolAllocatedCountIPv4 *float64 `json:"prefixPoolAllocatedCountIpv4,omitempty" tf:"prefix_pool_allocated_count_ipv4,omitempty"`
@@ -93,8 +102,17 @@ type HostedPrivateVirtualInterfaceAccepterObservation struct {
 type HostedPrivateVirtualInterfaceAccepterParameters struct {
 
 	// The ID of the Direct Connect gateway to which to connect the virtual interface.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/directconnect/v1beta1.Gateway
 	// +kubebuilder:validation:Optional
 	DxGatewayID *string `json:"dxGatewayId,omitempty" tf:"dx_gateway_id,omitempty"`
+
+	// Reference to a Gateway in directconnect to populate dxGatewayId.
+	// +kubebuilder:validation:Optional
+	DxGatewayIDRef *v2.Reference `json:"dxGatewayIdRef,omitempty" tf:"-"`
+
+	// Selector for a Gateway in directconnect to populate dxGatewayId.
+	// +kubebuilder:validation:Optional
+	DxGatewayIDSelector *v2.Selector `json:"dxGatewayIdSelector,omitempty" tf:"-"`
 
 	// The number of inbound IPv4 route prefixes to allocate to the virtual interface. Valid values are 0 to 1000. If not specified, AWS applies the default allocation of 100.
 	// +kubebuilder:validation:Optional

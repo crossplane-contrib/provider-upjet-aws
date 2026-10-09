@@ -12,6 +12,7 @@ import (
 
 	"github.com/crossplane/crossplane-runtime/v2/pkg/errors"
 	"github.com/crossplane/upjet/v2/pkg/config"
+	"github.com/hashicorp/terraform-plugin-go/tfprotov6"
 
 	"github.com/upbound/provider-aws/v2/config/cluster/common"
 )
@@ -24,10 +25,24 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 
 	// ********** When adding new services please keep them alphabetized by their aws go sdk package name **********
 
+	// agentregistry
+	//
+	// imported via registry_id, must match regex [a-zA-Z0-9]{12,16}
+	"aws_agentregistry_registry": config.FrameworkResourceWithComputedIdentifier("registry_id", "xpstub000000"),
+
 	// apigateway
 	//
 	// API Gateway Accounts can be imported using the word api-gateway-account
 	"aws_api_gateway_account": apiGatewayAccount(),
+	// API Gateway Domain Name Access Associations are imported by their ARN, which the
+	// provider computes on create:
+	// arn:aws:apigateway:<region>:<account>:/domainnameaccessassociations/domainname/<domain-id>/vpcesource/<vpce-id>
+	"aws_api_gateway_domain_name_access_association": identifierFromProviderWithDefaultStub("arn:aws:apigateway:us-west-2:123456789012:/domainnameaccessassociations/domainname/12qmzgp2.9m7ilski.test+hykg7a12e7/vpcesource/vpce-05de3f8f82740a748"),
+
+	// apigatewayv2
+	//
+	// can be imported using the provider-assigned routing_rule_id
+	"aws_apigatewayv2_routing_rule": config.FrameworkResourceWithComputedIdentifier("routing_rule_id", "xp-stub-routing-rule-000000"),
 
 	// appconfig
 	//
@@ -41,15 +56,47 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 
 	// bedrock
 	//
+	// imported via job_arn. The customization job can also be read by its
+	// name, so the stub does not have to be an ARN.
+	"aws_bedrock_custom_model": config.FrameworkResourceWithComputedIdentifier("job_arn", "xpstub000000"),
+	// imported via job_arn, the only identifier the API accepts
+	"aws_bedrock_evaluation_job": bedrockEvaluationJob(),
+	// imported via model_id
+	"aws_bedrock_foundation_model_agreement": frameworkParameterAsIdentifier("model_id"),
 	// Bedrock Guardrail can be imported using the composite ID: guardrail_id,version
 	"aws_bedrock_guardrail": bedrockGuardrail(),
+	// imported via guardrail_arn,version. guardrail_arn is already a required
+	// spec field, so only the provider-assigned version is used as the
+	// external name. The stub must match regex [1-9][0-9]{0,7}
+	"aws_bedrock_guardrail_version": config.FrameworkResourceWithComputedIdentifier("version", "99999999"),
 	// Bedrock inference profile can be imported using the ID: inference_profile-id-12345678
 	"aws_bedrock_inference_profile": identifierFromProviderWithDefaultStub("bedrock12345"),
+	// imported via job_arn. The job can also be read by its ID, which must
+	// match regex [a-z0-9]{12}
+	"aws_bedrock_model_invocation_job": config.FrameworkResourceWithComputedIdentifier("job_arn", "xpstub000000"),
+	// imported via the region, there is a single configuration per region
+	"aws_bedrock_model_invocation_logging_configuration": config.IdentifierFromProvider,
+	// imported via provisioned_model_arn. The Provisioned Throughput can also
+	// be read by its name, so the stub does not have to be an ARN.
+	"aws_bedrock_provisioned_model_throughput": identifierFromProviderWithDefaultStub("xpstub000000"),
+	// imported via the AWS account ID, there is a single use case per account
+	"aws_bedrock_use_case_for_model_access": bedrockUseCaseForModelAccess(),
 
 	// bedrockagent
 	//
 	// Bedrock Agent can be imported using the agent arn
 	"aws_bedrockagent_agent": identifierFromProviderWithDefaultStub("STUB123456"),
+	// imported via agent_id,agent_version,knowledge_base_id. agent_version
+	// only accepts DRAFT.
+	"aws_bedrockagent_agent_knowledge_base_association": config.TemplatedStringAsIdentifier("", "{{ .parameters.agent_id }},DRAFT,{{ .parameters.knowledge_base_id }}"),
+	// imported via data_source_id,knowledge_base_id
+	"aws_bedrockagent_data_source": bedrockAgentDataSource(),
+	// imported via the flow ID, e.g. ABCDEFGHIJ
+	"aws_bedrockagent_flow": identifierFromProviderWithDefaultStub("STUB123456"),
+	// imported via the knowledge base ID, e.g. EMDPPAYPZI
+	"aws_bedrockagent_knowledge_base": identifierFromProviderWithDefaultStub("STUB123456"),
+	// imported via the prompt ID, e.g. 1A2BC3DEFG
+	"aws_bedrockagent_prompt": identifierFromProviderWithDefaultStub("STUB123456"),
 
 	// bedrockagentcore
 	//
@@ -99,6 +146,19 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	//
 	// Cloudfront VPC Origin can be imported using the ID
 	"aws_cloudfront_vpc_origin": identifierFromProviderWithDefaultStub("vo_stub000000000000000000"),
+	// Cloudfront Key Value Store can be imported using the name
+	"aws_cloudfront_key_value_store": cloudfrontKeyValueStore(),
+
+	// cloudwatchlogs
+	//
+	// CloudWatch Logs Delivery can be imported using the AWS-assigned delivery ID
+	"aws_cloudwatch_log_delivery": identifierFromProviderWithDefaultStub("xpstub0000000000"),
+	// CloudWatch Logs Delivery Destination can be imported using the name
+	"aws_cloudwatch_log_delivery_destination": frameworkParameterAsIdentifier("name"),
+	// CloudWatch Logs Delivery Destination Policy can be imported using the delivery_destination_name
+	"aws_cloudwatch_log_delivery_destination_policy": frameworkParameterAsIdentifier("delivery_destination_name"),
+	// CloudWatch Logs Delivery Source can be imported using the name
+	"aws_cloudwatch_log_delivery_source": frameworkParameterAsIdentifier("name"),
 
 	// dsql
 	//
@@ -138,6 +198,19 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	//
 	"aws_glue_catalog_table_optimizer": config.TemplatedStringAsIdentifier("name", "{{ .parameters.catalog_id }}:{{ .parameters.database_name }}:{{ .external_name }}"),
 
+	// grafana
+	//
+	// Grafana Workspace Service Account can be imported using the workspace_id
+	// and the provider-assigned service_account_id, e.g. g-abc12345,1. The
+	// workspace_id is already a required spec field, so only the
+	// provider-assigned service_account_id is used as the external name.
+	"aws_grafana_workspace_service_account": grafanaWorkspaceServiceAccount(),
+	// No import documented for the token resource, since the token value is
+	// only returned once at creation time. workspace_id and service_account_id
+	// are already required spec fields, so only the provider-assigned
+	// service_account_token_id is used as the external name.
+	"aws_grafana_workspace_service_account_token": grafanaWorkspaceServiceAccountToken(),
+
 	// guardduty
 	//
 	// GuardDuty Malware Protection Plans can be imported using the malware protection plan ID
@@ -152,6 +225,20 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	//
 	// Lambda Runtime Management Config can be imported using function_name and qualifier, separated by a comma (,)
 	"aws_lambda_runtime_management_config": lambdaRuntimeManagementConfig(),
+
+	// lambdacore
+	//
+	// imported via arn. The network connector can also be read by its ID or
+	// name, so the stub does not have to be an ARN.
+	"aws_lambdacore_network_connector": frameworkComputedIdentifierWithStubRead("arn", "xp-stub-network-connector"),
+
+	// lambdamicrovms
+	//
+	// imported via arn. The image can also be read by its ID, so the stub
+	// does not have to be an ARN.
+	"aws_lambdamicrovms_image": frameworkComputedIdentifierWithStubRead("arn", "xp-stub-microvm-image"),
+	// imported via microvm_id, e.g. mvm-01234567-abcd-ef01-2345-6789abcdef01
+	"aws_lambdamicrovms_microvm": config.FrameworkResourceWithComputedIdentifier("microvm_id", "mvm-00000000-0000-0000-0000-000000000000"),
 
 	// memorydb
 	//
@@ -221,6 +308,21 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	"aws_s3_bucket_abac": s3BucketIdentifier(),
 	// The S3 bucket lifecycle configuration resource should be imported using the bucket
 	"aws_s3_bucket_lifecycle_configuration": s3BucketIdentifier(),
+
+	// s3files
+	//
+	// S3 Files File System can be imported using the file system ID
+	"aws_s3files_file_system": identifierFromProviderWithDefaultStub("fs-0123456789abcdef0"),
+	// S3 Files Access Point can be imported using the access point ID
+	"aws_s3files_access_point": identifierFromProviderWithDefaultStub("fsap-0123456789abcdef0"),
+	// S3 Files Mount Target can be imported using the mount target ID
+	"aws_s3files_mount_target": identifierFromProviderWithDefaultStub("fsmt-0123456789abcdef0"),
+	// S3 Files File System Policy can be imported using the file system ID.
+	// The resource has no id attribute, file_system_id is its identity and it is
+	// Required (not Computed), so it must NOT be in ComputedIdentifierAttributes.
+	"aws_s3files_file_system_policy": frameworkParameterAsIdentifier("file_system_id"),
+	// S3 Files Synchronization Configuration can be imported using the file system ID
+	"aws_s3files_synchronization_configuration": s3filesSynchronizationConfig("file_system_id"),
 
 	// s3vectors
 	//
@@ -647,8 +749,8 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"aws_cloudfront_origin_access_control": config.IdentifierFromProvider,
 	// Cloudfront Origin Access Identities can be imported using the id
 	"aws_cloudfront_origin_access_identity": config.IdentifierFromProvider,
-	// No import documented, but https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudfront_origin_request_policy#name
-	"aws_cloudfront_origin_request_policy": config.NameAsIdentifier,
+	// Cloudfront Origin Request Policies can be imported using the id
+	"aws_cloudfront_origin_request_policy": config.IdentifierFromProvider,
 	// CloudFront Public Key can be imported using the id
 	"aws_cloudfront_public_key": config.IdentifierFromProvider,
 	// CloudFront real-time log configurations can be imported using the ARN,
@@ -2695,7 +2797,7 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	//
 	// SNS platform applications can be imported using the ARN:
 	// arn:aws:sns:us-west-2:0123456789012:app/GCM/gcm_application
-	"aws_sns_platform_application": config.TemplatedStringAsIdentifier("name", fullARNTemplate("sns", "app/GCM/{{ .external_name }}")),
+	"aws_sns_platform_application": snsPlatformApplicationExternalName(),
 	// no import documentation is provided
 	// TODO: we will need to check if normalization is possible
 	"aws_sns_sms_preferences": config.IdentifierFromProvider,
@@ -2961,6 +3063,61 @@ func cognitoUserPoolClient() config.ExternalName {
 	return e
 }
 
+// grafanaWorkspaceServiceAccount configures the external name for the
+// Terraform Plugin Framework aws_grafana_workspace_service_account
+// resource. Terraform's own "id" attribute for this resource is not the
+// bare service_account_id: the resource's Read implementation parses it as
+// a two-part, comma-separated key ("<workspace_id>,<service_account_id>",
+// e.g. g-abc12345,1) and fails with "parsing resource ID: unexpected format
+// for ID (...), expected more than one part" otherwise.
+// config.FrameworkResourceWithComputedIdentifier's default GetIDFn returns
+// only the computed identifier (service_account_id), so it is overridden
+// here to reconstruct the two-part id from workspace_id (always a known
+// parameter) and service_account_id (populated by
+// FrameworkResourceWithComputedIdentifier's SetIdentifierArgumentsFn, either
+// with its placeholder before creation or with the real external name
+// afterward).
+func grafanaWorkspaceServiceAccount() config.ExternalName {
+	e := config.FrameworkResourceWithComputedIdentifier("service_account_id", "1")
+	e.GetIDFn = func(_ context.Context, _ string, parameters map[string]interface{}, _ map[string]interface{}) (string, error) {
+		return formattedGrafanaWorkspaceID(parameters, "service_account_id")
+	}
+	return e
+}
+
+// grafanaWorkspaceServiceAccountToken configures the external name for the
+// Terraform Plugin Framework aws_grafana_workspace_service_account_token
+// resource, whose Terraform "id" attribute is likewise not the bare
+// service_account_token_id but a three-part, comma-separated key
+// ("<workspace_id>,<service_account_id>,<service_account_token_id>"). See
+// grafanaWorkspaceServiceAccount for the full explanation.
+func grafanaWorkspaceServiceAccountToken() config.ExternalName {
+	e := config.FrameworkResourceWithComputedIdentifier("service_account_token_id", "1")
+	e.GetIDFn = func(_ context.Context, _ string, parameters map[string]interface{}, _ map[string]interface{}) (string, error) {
+		return formattedGrafanaWorkspaceID(parameters, "service_account_id", "service_account_token_id")
+	}
+	return e
+}
+
+// formattedGrafanaWorkspaceID joins workspace_id and the given parameter
+// keys, in order, with a comma to match the Terraform-internal id format
+// used by the Grafana workspace service account resources.
+func formattedGrafanaWorkspaceID(parameters map[string]interface{}, keys ...string) (string, error) {
+	vals := make([]string, 0, len(keys)+1)
+	for _, key := range append([]string{"workspace_id"}, keys...) {
+		val, ok := parameters[key]
+		if !ok {
+			return "", errors.Errorf("%s cannot be empty", key)
+		}
+		s, ok := val.(string)
+		if !ok {
+			return "", errors.Errorf("%s needs to be string", key)
+		}
+		vals = append(vals, s)
+	}
+	return strings.Join(vals, ","), nil
+}
+
 func mqUser() config.ExternalName {
 	e := config.IdentifierFromProvider
 	e.GetIDFn = func(ctx context.Context, externalName string, parameters map[string]interface{}, cfg map[string]interface{}) (string, error) {
@@ -3075,9 +3232,16 @@ func kmsAlias() config.ExternalName {
 }
 
 // s3vectorsComputedARNIdentifier handles S3 Vectors resources that use
-// @ArnIdentity in the Terraform provider. The stub ARN must include the
-// correct region from parameters so the API doesn't reject a region mismatch.
+// @ArnIdentity in the Terraform provider.
 func s3vectorsComputedARNIdentifier(identifier, resourcePath string) config.ExternalName {
+	return frameworkComputedARNIdentifier("s3vectors", identifier, resourcePath)
+}
+
+// frameworkComputedARNIdentifier handles Terraform Plugin Framework resources
+// that use @ArnIdentity in the Terraform provider and can only be read by
+// their ARN. The stub ARN must include the correct region from parameters so
+// the API doesn't reject a region mismatch.
+func frameworkComputedARNIdentifier(service, identifier, resourcePath string) config.ExternalName {
 	en := config.NewExternalNameFrom(config.IdentifierFromProvider,
 		config.WithSetIdentifierArgumentsFn(func(fn config.SetIdentifierArgumentsFn, base map[string]any, externalName string) {
 			if _, ok := base[identifier]; ok {
@@ -3091,7 +3255,7 @@ func s3vectorsComputedARNIdentifier(identifier, resourcePath string) config.Exte
 			// with params, not with the empty tfState). copyParameters will
 			// then propagate the correct-region stub into the final state.
 			if region, _ := base["region"].(string); region != "" {
-				base[identifier] = fmt.Sprintf("arn:aws:s3vectors:%s:000000000000:%s", region, resourcePath)
+				base[identifier] = fmt.Sprintf("arn:aws:%s:%s:000000000000:%s", service, region, resourcePath)
 			}
 		}),
 		config.WithGetExternalNameFn(func(fn config.GetExternalNameFn, tfState map[string]any) (string, error) {
@@ -3129,6 +3293,70 @@ func s3vectorsPolicyIdentifier() config.ExternalName {
 				}
 			}
 			return "", errors.Errorf("cannot find attribute %q in tfstate", "vector_bucket_arn")
+		}),
+	)
+}
+
+// frameworkParameterAsIdentifier handles Terraform Plugin Framework resources
+// whose identity is a Required (not Computed) parameter rather than a computed
+// "id" attribute. Unlike config.ParameterAsIdentifier, it does not omit the
+// field from the CRD spec, so it stays configurable and referenceable. It also
+// does not set ComputedIdentifierAttributes, which would strip the required
+// field from the resource config.
+func frameworkParameterAsIdentifier(param string) config.ExternalName {
+	return config.NewExternalNameFrom(config.IdentifierFromProvider,
+		config.WithGetIDFn(func(fn config.GetIDFn, _ context.Context, _ string, _ map[string]any, _ map[string]any) (string, error) {
+			return "", nil
+		}),
+		config.WithSetIdentifierArgumentsFn(func(fn config.SetIdentifierArgumentsFn, base map[string]any, externalName string) {
+			if externalName != "" {
+				if v, ok := base[param].(string); !ok || v == "" {
+					base[param] = externalName
+				}
+			}
+		}),
+		config.WithGetExternalNameFn(func(fn config.GetExternalNameFn, tfState map[string]any) (string, error) {
+			if id, ok := tfState[param]; ok {
+				idStr := fmt.Sprintf("%v", id)
+				if len(idStr) > 0 {
+					return idStr, nil
+				}
+			}
+			return "", errors.Errorf("cannot find attribute %q in tfstate", param)
+		}),
+	)
+}
+
+// `SynchronizationConfig.s3files` resource controls an
+// existing `FileSystem.s3files` settings. `FileSystem.s3files` has
+// a default synchronization config returned from AWS API.
+// Due to its stable identifier, SynchronizationConfig MR always
+// starts with a valid prior state even on fresh MR creation.
+// Therefore, it triggers an "Update" API call rather than "Create"
+// in the initial reconcile.
+// `importDataRule[*].sizeLessThan` parameter is "RequiresReplace" in
+// TF schema during Update calls, therefore causes Upjet to reject
+// the plan.
+// At fresh MR creates, set a non-existent `fileSystemId` so that
+// the initial Observe results in an empty state, then TF Create call
+// is triggered
+func s3filesSynchronizationConfig(param string) config.ExternalName {
+	const stubFileSystemID = "fs-00000000000000000"
+	return config.NewExternalNameFrom(frameworkParameterAsIdentifier("file_system_id"),
+		config.WithSetIdentifierArgumentsFn(func(fn config.SetIdentifierArgumentsFn, base map[string]any, externalName string) {
+			v, ok := base[param].(string)
+			if ok && v != "" {
+				return
+			}
+			if externalName == "" {
+				// no external name and no "fileSystemId" in status.atProvider
+				// i.e. fresh MR creation.
+				// set non-existent `fileSystemId`, so that the initial Observe
+				// results in an empty state.
+				base[param] = stubFileSystemID
+				return
+			}
+			base[param] = externalName
 		}),
 	)
 }
@@ -3677,6 +3905,20 @@ func genericARNTemplate(service string, resource string, elideRegion bool) strin
 	return fmt.Sprintf("arn:{{ .setup.client_metadata.partition }}:%s:%s:{{ .setup.client_metadata.account_id }}:%s", service, region, resource)
 }
 
+func snsPlatformApplicationExternalName() config.ExternalName {
+	e := config.TemplatedStringAsIdentifier("name", fullARNTemplate("sns", "app/{{ .parameters.platform }}/{{ .external_name }}"))
+	// Platform participates in the import ID but is not an external identifier.
+	e.IdentifierFields = nil
+	getID := e.GetIDFn
+	e.GetIDFn = func(ctx context.Context, externalName string, parameters map[string]any, setup map[string]any) (string, error) {
+		if platform, ok := parameters["platform"].(string); !ok || platform == "" {
+			return "", errors.New("platform is required to build the SNS platform application import id")
+		}
+		return getID(ctx, externalName, parameters, setup)
+	}
+	return e
+}
+
 func rdsInstanceState() config.ExternalName {
 	e := config.IdentifierFromProvider
 	e.GetExternalNameFn = func(tfstate map[string]any) (string, error) {
@@ -3860,6 +4102,78 @@ func bedrockGuardrail() config.ExternalName { //nolint:gocyclo // easier to foll
 	return e
 }
 
+// bedrockAgentDataSource configures the external name for
+// aws_bedrockagent_data_source. The external name is the AWS-assigned
+// data_source_id, while the Terraform ID is "data_source_id,knowledge_base_id"
+// with knowledge_base_id taken from the required parameter.
+func bedrockAgentDataSource() config.ExternalName {
+	// must satisfy the data source ID pattern [0-9a-zA-Z]{10}
+	const stubDataSourceID = "STUB123456"
+	e := config.FrameworkResourceWithComputedIdentifier("data_source_id", stubDataSourceID)
+	e.GetIDFn = func(_ context.Context, externalName string, parameters map[string]any, _ map[string]any) (string, error) {
+		knowledgeBaseID, ok := parameters["knowledge_base_id"].(string)
+		if !ok || knowledgeBaseID == "" {
+			return "", errors.New("knowledge_base_id cannot be empty")
+		}
+		if externalName == "" {
+			externalName = stubDataSourceID
+		}
+		return externalName + "," + knowledgeBaseID, nil
+	}
+	e.IdentifierFields = []string{"knowledge_base_id"}
+	return e
+}
+
+// bedrockEvaluationJob configures the external name for
+// aws_bedrock_evaluation_job. The external name is the AWS-assigned job ARN.
+// The stub ARN of the initial read belongs to another account, which AWS
+// does not necessarily answer with a not found error.
+func bedrockEvaluationJob() config.ExternalName {
+	// the job ID must satisfy the pattern [a-z0-9]{12}
+	const stubJob = "evaluation-job/xpstub000000"
+	e := frameworkComputedARNIdentifier("bedrock", "job_arn", stubJob)
+	e.IsNotFoundDiagnosticFn = stubReadNotFound(":000000000000:" + stubJob)
+	return e
+}
+
+// bedrockUseCaseForModelAccess configures the external name for
+// aws_bedrock_use_case_for_model_access. There is a single use case per
+// account and the Terraform state holds no identifier, so the external name
+// is a constant.
+func bedrockUseCaseForModelAccess() config.ExternalName {
+	e := config.IdentifierFromProvider
+	e.GetExternalNameFn = func(_ map[string]any) (string, error) {
+		return "use-case-for-model-access", nil
+	}
+	return e
+}
+
+// frameworkComputedIdentifierWithStubRead is
+// config.FrameworkResourceWithComputedIdentifier for the APIs whose answer to
+// a read of the stub is not known to be a not found error.
+func frameworkComputedIdentifierWithStubRead(identifier, stub string) config.ExternalName {
+	e := config.FrameworkResourceWithComputedIdentifier(identifier, stub)
+	e.IsNotFoundDiagnosticFn = stubReadNotFound(stub)
+	return e
+}
+
+// stubReadNotFound treats every error of a read with the given stub identifier
+// as "resource not found". The stub never identifies an existing resource, so
+// an error of a read with a real identifier still fails.
+func stubReadNotFound(stub string) func(diags []*tfprotov6.Diagnostic) bool {
+	return func(diags []*tfprotov6.Diagnostic) bool {
+		for _, d := range diags {
+			if d.Severity != tfprotov6.DiagnosticSeverityError {
+				continue
+			}
+			if strings.Contains(d.Summary, stub) || strings.Contains(d.Detail, stub) {
+				return true
+			}
+		}
+		return false
+	}
+}
+
 func bedrockAgentCoreTokenVaultCMK() config.ExternalName {
 	e := config.IdentifierFromProvider
 	e.GetExternalNameFn = func(tfstate map[string]any) (string, error) {
@@ -3896,6 +4210,16 @@ func frameworkNameAsIdentifier() config.ExternalName {
 		}
 		return name, nil
 	}
+	return e
+}
+
+// cloudfrontKeyValueStore uses the name as the external name. The Terraform
+// id is the store's UUID, so the name is read back from the state. Unlike
+// frameworkNameAsIdentifier, name is omitted from the spec: it is required
+// and would otherwise have to repeat the external name.
+func cloudfrontKeyValueStore() config.ExternalName {
+	e := frameworkNameAsIdentifier()
+	e.OmittedFields = []string{"name"}
 	return e
 }
 

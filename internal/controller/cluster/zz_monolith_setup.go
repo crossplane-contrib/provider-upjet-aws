@@ -21,6 +21,7 @@ import (
 	certificateauthoritycertificate "github.com/upbound/provider-aws/v2/internal/controller/cluster/acmpca/certificateauthoritycertificate"
 	permission "github.com/upbound/provider-aws/v2/internal/controller/cluster/acmpca/permission"
 	policy "github.com/upbound/provider-aws/v2/internal/controller/cluster/acmpca/policy"
+	registry "github.com/upbound/provider-aws/v2/internal/controller/cluster/agentregistry/registry"
 	alertmanagerdefinition "github.com/upbound/provider-aws/v2/internal/controller/cluster/amp/alertmanagerdefinition"
 	rulegroupnamespace "github.com/upbound/provider-aws/v2/internal/controller/cluster/amp/rulegroupnamespace"
 	scraper "github.com/upbound/provider-aws/v2/internal/controller/cluster/amp/scraper"
@@ -38,6 +39,7 @@ import (
 	documentationpart "github.com/upbound/provider-aws/v2/internal/controller/cluster/apigateway/documentationpart"
 	documentationversion "github.com/upbound/provider-aws/v2/internal/controller/cluster/apigateway/documentationversion"
 	domainname "github.com/upbound/provider-aws/v2/internal/controller/cluster/apigateway/domainname"
+	domainnameaccessassociation "github.com/upbound/provider-aws/v2/internal/controller/cluster/apigateway/domainnameaccessassociation"
 	gatewayresponse "github.com/upbound/provider-aws/v2/internal/controller/cluster/apigateway/gatewayresponse"
 	integration "github.com/upbound/provider-aws/v2/internal/controller/cluster/apigateway/integration"
 	integrationresponse "github.com/upbound/provider-aws/v2/internal/controller/cluster/apigateway/integrationresponse"
@@ -63,6 +65,7 @@ import (
 	modelapigatewayv2 "github.com/upbound/provider-aws/v2/internal/controller/cluster/apigatewayv2/model"
 	route "github.com/upbound/provider-aws/v2/internal/controller/cluster/apigatewayv2/route"
 	routeresponse "github.com/upbound/provider-aws/v2/internal/controller/cluster/apigatewayv2/routeresponse"
+	routingrule "github.com/upbound/provider-aws/v2/internal/controller/cluster/apigatewayv2/routingrule"
 	stageapigatewayv2 "github.com/upbound/provider-aws/v2/internal/controller/cluster/apigatewayv2/stage"
 	vpclinkapigatewayv2 "github.com/upbound/provider-aws/v2/internal/controller/cluster/apigatewayv2/vpclink"
 	policyappautoscaling "github.com/upbound/provider-aws/v2/internal/controller/cluster/appautoscaling/policy"
@@ -131,9 +134,22 @@ import (
 	jobdefinition "github.com/upbound/provider-aws/v2/internal/controller/cluster/batch/jobdefinition"
 	jobqueue "github.com/upbound/provider-aws/v2/internal/controller/cluster/batch/jobqueue"
 	schedulingpolicy "github.com/upbound/provider-aws/v2/internal/controller/cluster/batch/schedulingpolicy"
+	custommodel "github.com/upbound/provider-aws/v2/internal/controller/cluster/bedrock/custommodel"
+	evaluationjob "github.com/upbound/provider-aws/v2/internal/controller/cluster/bedrock/evaluationjob"
+	foundationmodelagreement "github.com/upbound/provider-aws/v2/internal/controller/cluster/bedrock/foundationmodelagreement"
 	guardrail "github.com/upbound/provider-aws/v2/internal/controller/cluster/bedrock/guardrail"
+	guardrailversion "github.com/upbound/provider-aws/v2/internal/controller/cluster/bedrock/guardrailversion"
 	inferenceprofile "github.com/upbound/provider-aws/v2/internal/controller/cluster/bedrock/inferenceprofile"
+	modelinvocationjob "github.com/upbound/provider-aws/v2/internal/controller/cluster/bedrock/modelinvocationjob"
+	modelinvocationloggingconfiguration "github.com/upbound/provider-aws/v2/internal/controller/cluster/bedrock/modelinvocationloggingconfiguration"
+	provisionedmodelthroughput "github.com/upbound/provider-aws/v2/internal/controller/cluster/bedrock/provisionedmodelthroughput"
+	usecaseformodelaccess "github.com/upbound/provider-aws/v2/internal/controller/cluster/bedrock/usecaseformodelaccess"
 	agent "github.com/upbound/provider-aws/v2/internal/controller/cluster/bedrockagent/agent"
+	agentknowledgebaseassociation "github.com/upbound/provider-aws/v2/internal/controller/cluster/bedrockagent/agentknowledgebaseassociation"
+	datasourcebedrockagent "github.com/upbound/provider-aws/v2/internal/controller/cluster/bedrockagent/datasource"
+	flowbedrockagent "github.com/upbound/provider-aws/v2/internal/controller/cluster/bedrockagent/flow"
+	knowledgebase "github.com/upbound/provider-aws/v2/internal/controller/cluster/bedrockagent/knowledgebase"
+	prompt "github.com/upbound/provider-aws/v2/internal/controller/cluster/bedrockagent/prompt"
 	agentruntime "github.com/upbound/provider-aws/v2/internal/controller/cluster/bedrockagentcore/agentruntime"
 	agentruntimeendpoint "github.com/upbound/provider-aws/v2/internal/controller/cluster/bedrockagentcore/agentruntimeendpoint"
 	apikeycredentialprovider "github.com/upbound/provider-aws/v2/internal/controller/cluster/bedrockagentcore/apikeycredentialprovider"
@@ -176,6 +192,7 @@ import (
 	fieldlevelencryptionprofile "github.com/upbound/provider-aws/v2/internal/controller/cluster/cloudfront/fieldlevelencryptionprofile"
 	functioncloudfront "github.com/upbound/provider-aws/v2/internal/controller/cluster/cloudfront/function"
 	keygroup "github.com/upbound/provider-aws/v2/internal/controller/cluster/cloudfront/keygroup"
+	keyvaluestore "github.com/upbound/provider-aws/v2/internal/controller/cluster/cloudfront/keyvaluestore"
 	monitoringsubscription "github.com/upbound/provider-aws/v2/internal/controller/cluster/cloudfront/monitoringsubscription"
 	originaccesscontrol "github.com/upbound/provider-aws/v2/internal/controller/cluster/cloudfront/originaccesscontrol"
 	originaccessidentity "github.com/upbound/provider-aws/v2/internal/controller/cluster/cloudfront/originaccessidentity"
@@ -202,6 +219,10 @@ import (
 	targetcloudwatchevents "github.com/upbound/provider-aws/v2/internal/controller/cluster/cloudwatchevents/target"
 	accountpolicy "github.com/upbound/provider-aws/v2/internal/controller/cluster/cloudwatchlogs/accountpolicy"
 	definition "github.com/upbound/provider-aws/v2/internal/controller/cluster/cloudwatchlogs/definition"
+	delivery "github.com/upbound/provider-aws/v2/internal/controller/cluster/cloudwatchlogs/delivery"
+	deliverydestination "github.com/upbound/provider-aws/v2/internal/controller/cluster/cloudwatchlogs/deliverydestination"
+	deliverydestinationpolicy "github.com/upbound/provider-aws/v2/internal/controller/cluster/cloudwatchlogs/deliverydestinationpolicy"
+	deliverysource "github.com/upbound/provider-aws/v2/internal/controller/cluster/cloudwatchlogs/deliverysource"
 	destination "github.com/upbound/provider-aws/v2/internal/controller/cluster/cloudwatchlogs/destination"
 	destinationpolicy "github.com/upbound/provider-aws/v2/internal/controller/cluster/cloudwatchlogs/destinationpolicy"
 	group "github.com/upbound/provider-aws/v2/internal/controller/cluster/cloudwatchlogs/group"
@@ -528,7 +549,7 @@ import (
 	crawler "github.com/upbound/provider-aws/v2/internal/controller/cluster/glue/crawler"
 	datacatalogencryptionsettings "github.com/upbound/provider-aws/v2/internal/controller/cluster/glue/datacatalogencryptionsettings"
 	job "github.com/upbound/provider-aws/v2/internal/controller/cluster/glue/job"
-	registry "github.com/upbound/provider-aws/v2/internal/controller/cluster/glue/registry"
+	registryglue "github.com/upbound/provider-aws/v2/internal/controller/cluster/glue/registry"
 	resourcepolicyglue "github.com/upbound/provider-aws/v2/internal/controller/cluster/glue/resourcepolicy"
 	schema "github.com/upbound/provider-aws/v2/internal/controller/cluster/glue/schema"
 	securityconfigurationglue "github.com/upbound/provider-aws/v2/internal/controller/cluster/glue/securityconfiguration"
@@ -540,6 +561,8 @@ import (
 	workspacegrafana "github.com/upbound/provider-aws/v2/internal/controller/cluster/grafana/workspace"
 	workspaceapikey "github.com/upbound/provider-aws/v2/internal/controller/cluster/grafana/workspaceapikey"
 	workspacesamlconfiguration "github.com/upbound/provider-aws/v2/internal/controller/cluster/grafana/workspacesamlconfiguration"
+	workspaceserviceaccount "github.com/upbound/provider-aws/v2/internal/controller/cluster/grafana/workspaceserviceaccount"
+	workspaceserviceaccounttoken "github.com/upbound/provider-aws/v2/internal/controller/cluster/grafana/workspaceserviceaccounttoken"
 	detector "github.com/upbound/provider-aws/v2/internal/controller/cluster/guardduty/detector"
 	filter "github.com/upbound/provider-aws/v2/internal/controller/cluster/guardduty/filter"
 	malwareprotectionplan "github.com/upbound/provider-aws/v2/internal/controller/cluster/guardduty/malwareprotectionplan"
@@ -645,6 +668,9 @@ import (
 	permissionlambda "github.com/upbound/provider-aws/v2/internal/controller/cluster/lambda/permission"
 	provisionedconcurrencyconfig "github.com/upbound/provider-aws/v2/internal/controller/cluster/lambda/provisionedconcurrencyconfig"
 	runtimemanagementconfig "github.com/upbound/provider-aws/v2/internal/controller/cluster/lambda/runtimemanagementconfig"
+	networkconnector "github.com/upbound/provider-aws/v2/internal/controller/cluster/lambdacore/networkconnector"
+	imagelambdamicrovms "github.com/upbound/provider-aws/v2/internal/controller/cluster/lambdamicrovms/image"
+	microvm "github.com/upbound/provider-aws/v2/internal/controller/cluster/lambdamicrovms/microvm"
 	bot "github.com/upbound/provider-aws/v2/internal/controller/cluster/lexmodels/bot"
 	botalias "github.com/upbound/provider-aws/v2/internal/controller/cluster/lexmodels/botalias"
 	intent "github.com/upbound/provider-aws/v2/internal/controller/cluster/lexmodels/intent"
@@ -861,6 +887,11 @@ import (
 	objectlambdaaccesspoint "github.com/upbound/provider-aws/v2/internal/controller/cluster/s3control/objectlambdaaccesspoint"
 	objectlambdaaccesspointpolicy "github.com/upbound/provider-aws/v2/internal/controller/cluster/s3control/objectlambdaaccesspointpolicy"
 	storagelensconfiguration "github.com/upbound/provider-aws/v2/internal/controller/cluster/s3control/storagelensconfiguration"
+	accesspoints3files "github.com/upbound/provider-aws/v2/internal/controller/cluster/s3files/accesspoint"
+	filesystems3files "github.com/upbound/provider-aws/v2/internal/controller/cluster/s3files/filesystem"
+	filesystempolicys3files "github.com/upbound/provider-aws/v2/internal/controller/cluster/s3files/filesystempolicy"
+	mounttargets3files "github.com/upbound/provider-aws/v2/internal/controller/cluster/s3files/mounttarget"
+	synchronizationconfiguration "github.com/upbound/provider-aws/v2/internal/controller/cluster/s3files/synchronizationconfiguration"
 	indexs3vectors "github.com/upbound/provider-aws/v2/internal/controller/cluster/s3vectors/index"
 	vectorbucket "github.com/upbound/provider-aws/v2/internal/controller/cluster/s3vectors/vectorbucket"
 	vectorbucketpolicy "github.com/upbound/provider-aws/v2/internal/controller/cluster/s3vectors/vectorbucketpolicy"
@@ -1060,6 +1091,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		certificateauthoritycertificate.Setup,
 		permission.Setup,
 		policy.Setup,
+		registry.Setup,
 		alertmanagerdefinition.Setup,
 		rulegroupnamespace.Setup,
 		scraper.Setup,
@@ -1077,6 +1109,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		documentationpart.Setup,
 		documentationversion.Setup,
 		domainname.Setup,
+		domainnameaccessassociation.Setup,
 		gatewayresponse.Setup,
 		integration.Setup,
 		integrationresponse.Setup,
@@ -1102,6 +1135,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		modelapigatewayv2.Setup,
 		route.Setup,
 		routeresponse.Setup,
+		routingrule.Setup,
 		stageapigatewayv2.Setup,
 		vpclinkapigatewayv2.Setup,
 		policyappautoscaling.Setup,
@@ -1170,9 +1204,22 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		jobdefinition.Setup,
 		jobqueue.Setup,
 		schedulingpolicy.Setup,
+		custommodel.Setup,
+		evaluationjob.Setup,
+		foundationmodelagreement.Setup,
 		guardrail.Setup,
+		guardrailversion.Setup,
 		inferenceprofile.Setup,
+		modelinvocationjob.Setup,
+		modelinvocationloggingconfiguration.Setup,
+		provisionedmodelthroughput.Setup,
+		usecaseformodelaccess.Setup,
 		agent.Setup,
+		agentknowledgebaseassociation.Setup,
+		datasourcebedrockagent.Setup,
+		flowbedrockagent.Setup,
+		knowledgebase.Setup,
+		prompt.Setup,
 		agentruntime.Setup,
 		agentruntimeendpoint.Setup,
 		apikeycredentialprovider.Setup,
@@ -1215,6 +1262,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		fieldlevelencryptionprofile.Setup,
 		functioncloudfront.Setup,
 		keygroup.Setup,
+		keyvaluestore.Setup,
 		monitoringsubscription.Setup,
 		originaccesscontrol.Setup,
 		originaccessidentity.Setup,
@@ -1241,6 +1289,10 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		targetcloudwatchevents.Setup,
 		accountpolicy.Setup,
 		definition.Setup,
+		delivery.Setup,
+		deliverydestination.Setup,
+		deliverydestinationpolicy.Setup,
+		deliverysource.Setup,
 		destination.Setup,
 		destinationpolicy.Setup,
 		group.Setup,
@@ -1567,7 +1619,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		crawler.Setup,
 		datacatalogencryptionsettings.Setup,
 		job.Setup,
-		registry.Setup,
+		registryglue.Setup,
 		resourcepolicyglue.Setup,
 		schema.Setup,
 		securityconfigurationglue.Setup,
@@ -1579,6 +1631,8 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		workspacegrafana.Setup,
 		workspaceapikey.Setup,
 		workspacesamlconfiguration.Setup,
+		workspaceserviceaccount.Setup,
+		workspaceserviceaccounttoken.Setup,
 		detector.Setup,
 		filter.Setup,
 		malwareprotectionplan.Setup,
@@ -1684,6 +1738,9 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		permissionlambda.Setup,
 		provisionedconcurrencyconfig.Setup,
 		runtimemanagementconfig.Setup,
+		networkconnector.Setup,
+		imagelambdamicrovms.Setup,
+		microvm.Setup,
 		bot.Setup,
 		botalias.Setup,
 		intent.Setup,
@@ -1900,6 +1957,11 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		objectlambdaaccesspoint.Setup,
 		objectlambdaaccesspointpolicy.Setup,
 		storagelensconfiguration.Setup,
+		accesspoints3files.Setup,
+		filesystems3files.Setup,
+		filesystempolicys3files.Setup,
+		mounttargets3files.Setup,
+		synchronizationconfiguration.Setup,
 		indexs3vectors.Setup,
 		vectorbucket.Setup,
 		vectorbucketpolicy.Setup,
@@ -2105,6 +2167,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		certificateauthoritycertificate.SetupGated,
 		permission.SetupGated,
 		policy.SetupGated,
+		registry.SetupGated,
 		alertmanagerdefinition.SetupGated,
 		rulegroupnamespace.SetupGated,
 		scraper.SetupGated,
@@ -2122,6 +2185,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		documentationpart.SetupGated,
 		documentationversion.SetupGated,
 		domainname.SetupGated,
+		domainnameaccessassociation.SetupGated,
 		gatewayresponse.SetupGated,
 		integration.SetupGated,
 		integrationresponse.SetupGated,
@@ -2147,6 +2211,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		modelapigatewayv2.SetupGated,
 		route.SetupGated,
 		routeresponse.SetupGated,
+		routingrule.SetupGated,
 		stageapigatewayv2.SetupGated,
 		vpclinkapigatewayv2.SetupGated,
 		policyappautoscaling.SetupGated,
@@ -2215,9 +2280,22 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		jobdefinition.SetupGated,
 		jobqueue.SetupGated,
 		schedulingpolicy.SetupGated,
+		custommodel.SetupGated,
+		evaluationjob.SetupGated,
+		foundationmodelagreement.SetupGated,
 		guardrail.SetupGated,
+		guardrailversion.SetupGated,
 		inferenceprofile.SetupGated,
+		modelinvocationjob.SetupGated,
+		modelinvocationloggingconfiguration.SetupGated,
+		provisionedmodelthroughput.SetupGated,
+		usecaseformodelaccess.SetupGated,
 		agent.SetupGated,
+		agentknowledgebaseassociation.SetupGated,
+		datasourcebedrockagent.SetupGated,
+		flowbedrockagent.SetupGated,
+		knowledgebase.SetupGated,
+		prompt.SetupGated,
 		agentruntime.SetupGated,
 		agentruntimeendpoint.SetupGated,
 		apikeycredentialprovider.SetupGated,
@@ -2260,6 +2338,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		fieldlevelencryptionprofile.SetupGated,
 		functioncloudfront.SetupGated,
 		keygroup.SetupGated,
+		keyvaluestore.SetupGated,
 		monitoringsubscription.SetupGated,
 		originaccesscontrol.SetupGated,
 		originaccessidentity.SetupGated,
@@ -2286,6 +2365,10 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		targetcloudwatchevents.SetupGated,
 		accountpolicy.SetupGated,
 		definition.SetupGated,
+		delivery.SetupGated,
+		deliverydestination.SetupGated,
+		deliverydestinationpolicy.SetupGated,
+		deliverysource.SetupGated,
 		destination.SetupGated,
 		destinationpolicy.SetupGated,
 		group.SetupGated,
@@ -2612,7 +2695,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		crawler.SetupGated,
 		datacatalogencryptionsettings.SetupGated,
 		job.SetupGated,
-		registry.SetupGated,
+		registryglue.SetupGated,
 		resourcepolicyglue.SetupGated,
 		schema.SetupGated,
 		securityconfigurationglue.SetupGated,
@@ -2624,6 +2707,8 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		workspacegrafana.SetupGated,
 		workspaceapikey.SetupGated,
 		workspacesamlconfiguration.SetupGated,
+		workspaceserviceaccount.SetupGated,
+		workspaceserviceaccounttoken.SetupGated,
 		detector.SetupGated,
 		filter.SetupGated,
 		malwareprotectionplan.SetupGated,
@@ -2729,6 +2814,9 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		permissionlambda.SetupGated,
 		provisionedconcurrencyconfig.SetupGated,
 		runtimemanagementconfig.SetupGated,
+		networkconnector.SetupGated,
+		imagelambdamicrovms.SetupGated,
+		microvm.SetupGated,
 		bot.SetupGated,
 		botalias.SetupGated,
 		intent.SetupGated,
@@ -2945,6 +3033,11 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		objectlambdaaccesspoint.SetupGated,
 		objectlambdaaccesspointpolicy.SetupGated,
 		storagelensconfiguration.SetupGated,
+		accesspoints3files.SetupGated,
+		filesystems3files.SetupGated,
+		filesystempolicys3files.SetupGated,
+		mounttargets3files.SetupGated,
+		synchronizationconfiguration.SetupGated,
 		indexs3vectors.SetupGated,
 		vectorbucket.SetupGated,
 		vectorbucketpolicy.SetupGated,
@@ -3149,6 +3242,7 @@ func SetupWebhookWithManager_monolith(mgr ctrl.Manager) error {
 		certificateauthoritycertificate.SetupWebhookWithManager,
 		permission.SetupWebhookWithManager,
 		policy.SetupWebhookWithManager,
+		registry.SetupWebhookWithManager,
 		alertmanagerdefinition.SetupWebhookWithManager,
 		rulegroupnamespace.SetupWebhookWithManager,
 		scraper.SetupWebhookWithManager,
@@ -3166,6 +3260,7 @@ func SetupWebhookWithManager_monolith(mgr ctrl.Manager) error {
 		documentationpart.SetupWebhookWithManager,
 		documentationversion.SetupWebhookWithManager,
 		domainname.SetupWebhookWithManager,
+		domainnameaccessassociation.SetupWebhookWithManager,
 		gatewayresponse.SetupWebhookWithManager,
 		integration.SetupWebhookWithManager,
 		integrationresponse.SetupWebhookWithManager,
@@ -3191,6 +3286,7 @@ func SetupWebhookWithManager_monolith(mgr ctrl.Manager) error {
 		modelapigatewayv2.SetupWebhookWithManager,
 		route.SetupWebhookWithManager,
 		routeresponse.SetupWebhookWithManager,
+		routingrule.SetupWebhookWithManager,
 		stageapigatewayv2.SetupWebhookWithManager,
 		vpclinkapigatewayv2.SetupWebhookWithManager,
 		policyappautoscaling.SetupWebhookWithManager,
@@ -3259,9 +3355,22 @@ func SetupWebhookWithManager_monolith(mgr ctrl.Manager) error {
 		jobdefinition.SetupWebhookWithManager,
 		jobqueue.SetupWebhookWithManager,
 		schedulingpolicy.SetupWebhookWithManager,
+		custommodel.SetupWebhookWithManager,
+		evaluationjob.SetupWebhookWithManager,
+		foundationmodelagreement.SetupWebhookWithManager,
 		guardrail.SetupWebhookWithManager,
+		guardrailversion.SetupWebhookWithManager,
 		inferenceprofile.SetupWebhookWithManager,
+		modelinvocationjob.SetupWebhookWithManager,
+		modelinvocationloggingconfiguration.SetupWebhookWithManager,
+		provisionedmodelthroughput.SetupWebhookWithManager,
+		usecaseformodelaccess.SetupWebhookWithManager,
 		agent.SetupWebhookWithManager,
+		agentknowledgebaseassociation.SetupWebhookWithManager,
+		datasourcebedrockagent.SetupWebhookWithManager,
+		flowbedrockagent.SetupWebhookWithManager,
+		knowledgebase.SetupWebhookWithManager,
+		prompt.SetupWebhookWithManager,
 		agentruntime.SetupWebhookWithManager,
 		agentruntimeendpoint.SetupWebhookWithManager,
 		apikeycredentialprovider.SetupWebhookWithManager,
@@ -3304,6 +3413,7 @@ func SetupWebhookWithManager_monolith(mgr ctrl.Manager) error {
 		fieldlevelencryptionprofile.SetupWebhookWithManager,
 		functioncloudfront.SetupWebhookWithManager,
 		keygroup.SetupWebhookWithManager,
+		keyvaluestore.SetupWebhookWithManager,
 		monitoringsubscription.SetupWebhookWithManager,
 		originaccesscontrol.SetupWebhookWithManager,
 		originaccessidentity.SetupWebhookWithManager,
@@ -3330,6 +3440,10 @@ func SetupWebhookWithManager_monolith(mgr ctrl.Manager) error {
 		targetcloudwatchevents.SetupWebhookWithManager,
 		accountpolicy.SetupWebhookWithManager,
 		definition.SetupWebhookWithManager,
+		delivery.SetupWebhookWithManager,
+		deliverydestination.SetupWebhookWithManager,
+		deliverydestinationpolicy.SetupWebhookWithManager,
+		deliverysource.SetupWebhookWithManager,
 		destination.SetupWebhookWithManager,
 		destinationpolicy.SetupWebhookWithManager,
 		group.SetupWebhookWithManager,
@@ -3656,7 +3770,7 @@ func SetupWebhookWithManager_monolith(mgr ctrl.Manager) error {
 		crawler.SetupWebhookWithManager,
 		datacatalogencryptionsettings.SetupWebhookWithManager,
 		job.SetupWebhookWithManager,
-		registry.SetupWebhookWithManager,
+		registryglue.SetupWebhookWithManager,
 		resourcepolicyglue.SetupWebhookWithManager,
 		schema.SetupWebhookWithManager,
 		securityconfigurationglue.SetupWebhookWithManager,
@@ -3668,6 +3782,8 @@ func SetupWebhookWithManager_monolith(mgr ctrl.Manager) error {
 		workspacegrafana.SetupWebhookWithManager,
 		workspaceapikey.SetupWebhookWithManager,
 		workspacesamlconfiguration.SetupWebhookWithManager,
+		workspaceserviceaccount.SetupWebhookWithManager,
+		workspaceserviceaccounttoken.SetupWebhookWithManager,
 		detector.SetupWebhookWithManager,
 		filter.SetupWebhookWithManager,
 		malwareprotectionplan.SetupWebhookWithManager,
@@ -3773,6 +3889,9 @@ func SetupWebhookWithManager_monolith(mgr ctrl.Manager) error {
 		permissionlambda.SetupWebhookWithManager,
 		provisionedconcurrencyconfig.SetupWebhookWithManager,
 		runtimemanagementconfig.SetupWebhookWithManager,
+		networkconnector.SetupWebhookWithManager,
+		imagelambdamicrovms.SetupWebhookWithManager,
+		microvm.SetupWebhookWithManager,
 		bot.SetupWebhookWithManager,
 		botalias.SetupWebhookWithManager,
 		intent.SetupWebhookWithManager,
@@ -3989,6 +4108,11 @@ func SetupWebhookWithManager_monolith(mgr ctrl.Manager) error {
 		objectlambdaaccesspoint.SetupWebhookWithManager,
 		objectlambdaaccesspointpolicy.SetupWebhookWithManager,
 		storagelensconfiguration.SetupWebhookWithManager,
+		accesspoints3files.SetupWebhookWithManager,
+		filesystems3files.SetupWebhookWithManager,
+		filesystempolicys3files.SetupWebhookWithManager,
+		mounttargets3files.SetupWebhookWithManager,
+		synchronizationconfiguration.SetupWebhookWithManager,
 		indexs3vectors.SetupWebhookWithManager,
 		vectorbucket.SetupWebhookWithManager,
 		vectorbucketpolicy.SetupWebhookWithManager,

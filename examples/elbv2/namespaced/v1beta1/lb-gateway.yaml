@@ -1,0 +1,56 @@
+# SPDX-FileCopyrightText: 2026 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: elbv2.aws.m.upbound.io/v1beta1
+kind: LB
+metadata:
+  annotations:
+    meta.upbound.io/example-id: elbv2/v1beta1/lb
+  labels:
+    testing.upbound.io/example-name: elbv2-gateway
+  name: test-gateway
+  namespace: upbound-system
+spec:
+  forProvider:
+    enableDeletionProtection: false
+    loadBalancerType: gateway
+    name: test-gwlb-tf
+    region: us-west-1
+    subnetSelector:
+      matchLabels:
+        testing.upbound.io/example-name: elbv2-gateway
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: VPC
+metadata:
+  annotations:
+    meta.upbound.io/example-id: elbv2/v1beta1/lb
+  labels:
+    testing.upbound.io/example-name: elbv2-gateway
+  name: elbv2-gateway-vpc
+  namespace: upbound-system
+spec:
+  forProvider:
+    cidrBlock: 172.16.0.0/16
+    region: us-west-1
+    tags:
+      Name: DemoGatewayVpc
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: elbv2/v1beta1/lb
+  labels:
+    testing.upbound.io/example-name: elbv2-gateway
+  name: elbv2-gateway-subnet
+  namespace: upbound-system
+spec:
+  forProvider:
+    availabilityZone: us-west-1a
+    cidrBlock: 172.16.10.0/24
+    region: us-west-1
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: elbv2-gateway

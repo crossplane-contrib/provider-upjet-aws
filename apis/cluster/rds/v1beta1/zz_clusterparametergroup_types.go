@@ -15,13 +15,13 @@ import (
 
 type ClusterParameterGroupInitParameters struct {
 
-	// The description of the DB cluster parameter group.
+	// Description of the DB cluster parameter group.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The family of the DB cluster parameter group.
+	// Family of the DB cluster parameter group.
 	Family *string `json:"family,omitempty" tf:"family,omitempty"`
 
-	// A list of DB parameters to apply. Note that parameters may differ from a family to an other. Full list of all parameters can be discovered via aws rds describe-db-cluster-parameters after initial creation of the group.
+	// Set of DB parameters to apply. Note that parameters may differ from a family to an other. Full list of all parameters can be discovered via aws rds describe-db-cluster-parameters after initial creation of the group. See parameter Block below for details.
 	Parameter []ClusterParameterGroupParameterInitParameters `json:"parameter,omitempty" tf:"parameter,omitempty"`
 
 	// Key-value map of resource tags.
@@ -31,19 +31,19 @@ type ClusterParameterGroupInitParameters struct {
 
 type ClusterParameterGroupObservation struct {
 
-	// The ARN of the db cluster parameter group.
+	// ARN of the DB cluster parameter group.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The description of the DB cluster parameter group.
+	// Description of the DB cluster parameter group.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The family of the DB cluster parameter group.
+	// Family of the DB cluster parameter group.
 	Family *string `json:"family,omitempty" tf:"family,omitempty"`
 
-	// The db cluster parameter group name.
+	// DB cluster parameter group name.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// A list of DB parameters to apply. Note that parameters may differ from a family to an other. Full list of all parameters can be discovered via aws rds describe-db-cluster-parameters after initial creation of the group.
+	// Set of DB parameters to apply. Note that parameters may differ from a family to an other. Full list of all parameters can be discovered via aws rds describe-db-cluster-parameters after initial creation of the group. See parameter Block below for details.
 	Parameter []ClusterParameterGroupParameterObservation `json:"parameter,omitempty" tf:"parameter,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -54,67 +54,61 @@ type ClusterParameterGroupObservation struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type ClusterParameterGroupParameterInitParameters struct {
 
-	// "immediate" (default), or "pending-reboot". Some
-	// engines can't apply some parameters without a reboot, and you will need to
-	// specify "pending-reboot" here.
+	// "immediate" (default), or "pending-reboot". Some engines can't apply some parameters without a reboot, and you will need to specify "pending-reboot" here.
 	ApplyMethod *string `json:"applyMethod,omitempty" tf:"apply_method,omitempty"`
 
-	// The name of the DB cluster parameter group.
+	// Name of the DB parameter.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The value of the DB parameter.
+	// Value of the DB parameter.
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type ClusterParameterGroupParameterObservation struct {
 
-	// "immediate" (default), or "pending-reboot". Some
-	// engines can't apply some parameters without a reboot, and you will need to
-	// specify "pending-reboot" here.
+	// "immediate" (default), or "pending-reboot". Some engines can't apply some parameters without a reboot, and you will need to specify "pending-reboot" here.
 	ApplyMethod *string `json:"applyMethod,omitempty" tf:"apply_method,omitempty"`
 
-	// The name of the DB cluster parameter group.
+	// Name of the DB parameter.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The value of the DB parameter.
+	// Value of the DB parameter.
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type ClusterParameterGroupParameterParameters struct {
 
-	// "immediate" (default), or "pending-reboot". Some
-	// engines can't apply some parameters without a reboot, and you will need to
-	// specify "pending-reboot" here.
+	// "immediate" (default), or "pending-reboot". Some engines can't apply some parameters without a reboot, and you will need to specify "pending-reboot" here.
 	// +kubebuilder:validation:Optional
 	ApplyMethod *string `json:"applyMethod,omitempty" tf:"apply_method,omitempty"`
 
-	// The name of the DB cluster parameter group.
+	// Name of the DB parameter.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// The value of the DB parameter.
+	// Value of the DB parameter.
 	// +kubebuilder:validation:Optional
 	Value *string `json:"value" tf:"value,omitempty"`
 }
 
 type ClusterParameterGroupParameters struct {
 
-	// The description of the DB cluster parameter group.
+	// Description of the DB cluster parameter group.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The family of the DB cluster parameter group.
+	// Family of the DB cluster parameter group.
 	// +kubebuilder:validation:Optional
 	Family *string `json:"family,omitempty" tf:"family,omitempty"`
 
-	// A list of DB parameters to apply. Note that parameters may differ from a family to an other. Full list of all parameters can be discovered via aws rds describe-db-cluster-parameters after initial creation of the group.
+	// Set of DB parameters to apply. Note that parameters may differ from a family to an other. Full list of all parameters can be discovered via aws rds describe-db-cluster-parameters after initial creation of the group. See parameter Block below for details.
 	// +kubebuilder:validation:Optional
 	Parameter []ClusterParameterGroupParameterParameters `json:"parameter,omitempty" tf:"parameter,omitempty"`
 

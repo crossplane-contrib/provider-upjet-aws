@@ -13,10 +13,18 @@ import (
 
 // s3vectorsNotFoundDiagnostic treats errors from stub ARN reads (fake account
 // 000000000000) as "resource not found" so the reconciler proceeds to create.
+// AWS answers such reads either with "No account found" or with an
+// AccessDeniedException without a message; the stub ARN is only part of the
+// diagnostic summary, so an access denied error on a real ARN still fails.
 func s3vectorsNotFoundDiagnostic(diags []*tfprotov6.Diagnostic) bool {
 	for _, d := range diags {
-		if d.Severity == tfprotov6.DiagnosticSeverityError &&
-			strings.Contains(d.Detail, "No account found") {
+		if d.Severity != tfprotov6.DiagnosticSeverityError {
+			continue
+		}
+		if strings.Contains(d.Detail, "No account found") {
+			return true
+		}
+		if strings.Contains(d.Summary, ":000000000000:") && strings.Contains(d.Detail, "AccessDeniedException") {
 			return true
 		}
 	}

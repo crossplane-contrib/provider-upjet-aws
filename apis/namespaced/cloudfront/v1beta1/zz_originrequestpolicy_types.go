@@ -104,6 +104,9 @@ type OriginRequestPolicyInitParameters struct {
 	// Object that determines whether any HTTP headers (and if so, which headers) are included in the origin request key and automatically included in requests that CloudFront sends to the origin. See Headers Config for more information.
 	HeadersConfig *OriginRequestPolicyHeadersConfigInitParameters `json:"headersConfig,omitempty" tf:"headers_config,omitempty"`
 
+	// Unique name to identify the origin request policy.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
 	// Object that determines whether any URL query strings in viewer requests (and if so, which query strings) are included in the origin request key and automatically included in requests that CloudFront sends to the origin. See Query String Config for more information.
 	QueryStringsConfig *OriginRequestPolicyQueryStringsConfigInitParameters `json:"queryStringsConfig,omitempty" tf:"query_strings_config,omitempty"`
 }
@@ -128,6 +131,9 @@ type OriginRequestPolicyObservation struct {
 	// The identifier for the origin request policy.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Unique name to identify the origin request policy.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
 	// Object that determines whether any URL query strings in viewer requests (and if so, which query strings) are included in the origin request key and automatically included in requests that CloudFront sends to the origin. See Query String Config for more information.
 	QueryStringsConfig *OriginRequestPolicyQueryStringsConfigObservation `json:"queryStringsConfig,omitempty" tf:"query_strings_config,omitempty"`
 }
@@ -145,6 +151,10 @@ type OriginRequestPolicyParameters struct {
 	// Object that determines whether any HTTP headers (and if so, which headers) are included in the origin request key and automatically included in requests that CloudFront sends to the origin. See Headers Config for more information.
 	// +kubebuilder:validation:Optional
 	HeadersConfig *OriginRequestPolicyHeadersConfigParameters `json:"headersConfig,omitempty" tf:"headers_config,omitempty"`
+
+	// Unique name to identify the origin request policy.
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Object that determines whether any URL query strings in viewer requests (and if so, which query strings) are included in the origin request key and automatically included in requests that CloudFront sends to the origin. See Query String Config for more information.
 	// +kubebuilder:validation:Optional
@@ -229,6 +239,7 @@ type OriginRequestPolicy struct {
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.cookiesConfig) || (has(self.initProvider) && has(self.initProvider.cookiesConfig))",message="spec.forProvider.cookiesConfig is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.headersConfig) || (has(self.initProvider) && has(self.initProvider.headersConfig))",message="spec.forProvider.headersConfig is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || (has(self.initProvider) && has(self.initProvider.name))",message="spec.forProvider.name is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.queryStringsConfig) || (has(self.initProvider) && has(self.initProvider.queryStringsConfig))",message="spec.forProvider.queryStringsConfig is a required parameter"
 	Spec   OriginRequestPolicySpec   `json:"spec"`
 	Status OriginRequestPolicyStatus `json:"status,omitempty"`

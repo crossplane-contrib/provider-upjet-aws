@@ -15,13 +15,13 @@ import (
 
 type ConnectionPoolConfigInitParameters struct {
 
-	// The number of seconds for a proxy to wait for a connection to become available in the connection pool. Only applies when the proxy has opened its maximum number of connections and all connections are busy with client sessions.
+	// Number of seconds for a proxy to wait for a connection to become available in the connection pool. Only applies when the proxy has opened its maximum number of connections and all connections are busy with client sessions.
 	ConnectionBorrowTimeout *float64 `json:"connectionBorrowTimeout,omitempty" tf:"connection_borrow_timeout,omitempty"`
 
 	// One or more SQL statements for the proxy to run when opening each new database connection. Typically used with SET statements to make sure that each connection has identical settings such as time zone and character set. This setting is empty by default. For multiple statements, use semicolons as the separator. You can also include multiple variables in a single SET statement, such as SET x=1, y=2.
 	InitQuery *string `json:"initQuery,omitempty" tf:"init_query,omitempty"`
 
-	// The maximum size of the connection pool for each target in a target group. For Aurora MySQL, it is expressed as a percentage of the max_connections setting for the RDS DB instance or Aurora DB cluster used by the target group.
+	// Maximum size of the connection pool for each target in a target group. For Aurora MySQL, it is expressed as a percentage of the max_connections setting for the RDS DB instance or Aurora DB cluster used by the target group.
 	MaxConnectionsPercent *float64 `json:"maxConnectionsPercent,omitempty" tf:"max_connections_percent,omitempty"`
 
 	// Controls how actively the proxy closes idle database connections in the connection pool. A high value enables the proxy to leave a high percentage of idle connections open. A low value causes the proxy to close idle client connections and return the underlying database connections to the connection pool. For Aurora MySQL, it is expressed as a percentage of the max_connections setting for the RDS DB instance or Aurora DB cluster used by the target group.
@@ -34,13 +34,13 @@ type ConnectionPoolConfigInitParameters struct {
 
 type ConnectionPoolConfigObservation struct {
 
-	// The number of seconds for a proxy to wait for a connection to become available in the connection pool. Only applies when the proxy has opened its maximum number of connections and all connections are busy with client sessions.
+	// Number of seconds for a proxy to wait for a connection to become available in the connection pool. Only applies when the proxy has opened its maximum number of connections and all connections are busy with client sessions.
 	ConnectionBorrowTimeout *float64 `json:"connectionBorrowTimeout,omitempty" tf:"connection_borrow_timeout,omitempty"`
 
 	// One or more SQL statements for the proxy to run when opening each new database connection. Typically used with SET statements to make sure that each connection has identical settings such as time zone and character set. This setting is empty by default. For multiple statements, use semicolons as the separator. You can also include multiple variables in a single SET statement, such as SET x=1, y=2.
 	InitQuery *string `json:"initQuery,omitempty" tf:"init_query,omitempty"`
 
-	// The maximum size of the connection pool for each target in a target group. For Aurora MySQL, it is expressed as a percentage of the max_connections setting for the RDS DB instance or Aurora DB cluster used by the target group.
+	// Maximum size of the connection pool for each target in a target group. For Aurora MySQL, it is expressed as a percentage of the max_connections setting for the RDS DB instance or Aurora DB cluster used by the target group.
 	MaxConnectionsPercent *float64 `json:"maxConnectionsPercent,omitempty" tf:"max_connections_percent,omitempty"`
 
 	// Controls how actively the proxy closes idle database connections in the connection pool. A high value enables the proxy to leave a high percentage of idle connections open. A low value causes the proxy to close idle client connections and return the underlying database connections to the connection pool. For Aurora MySQL, it is expressed as a percentage of the max_connections setting for the RDS DB instance or Aurora DB cluster used by the target group.
@@ -53,7 +53,7 @@ type ConnectionPoolConfigObservation struct {
 
 type ConnectionPoolConfigParameters struct {
 
-	// The number of seconds for a proxy to wait for a connection to become available in the connection pool. Only applies when the proxy has opened its maximum number of connections and all connections are busy with client sessions.
+	// Number of seconds for a proxy to wait for a connection to become available in the connection pool. Only applies when the proxy has opened its maximum number of connections and all connections are busy with client sessions.
 	// +kubebuilder:validation:Optional
 	ConnectionBorrowTimeout *float64 `json:"connectionBorrowTimeout,omitempty" tf:"connection_borrow_timeout,omitempty"`
 
@@ -61,7 +61,7 @@ type ConnectionPoolConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	InitQuery *string `json:"initQuery,omitempty" tf:"init_query,omitempty"`
 
-	// The maximum size of the connection pool for each target in a target group. For Aurora MySQL, it is expressed as a percentage of the max_connections setting for the RDS DB instance or Aurora DB cluster used by the target group.
+	// Maximum size of the connection pool for each target in a target group. For Aurora MySQL, it is expressed as a percentage of the max_connections setting for the RDS DB instance or Aurora DB cluster used by the target group.
 	// +kubebuilder:validation:Optional
 	MaxConnectionsPercent *float64 `json:"maxConnectionsPercent,omitempty" tf:"max_connections_percent,omitempty"`
 
@@ -77,7 +77,7 @@ type ConnectionPoolConfigParameters struct {
 
 type ProxyDefaultTargetGroupInitParameters struct {
 
-	// The settings that determine the size and behavior of the connection pool for the target group.
+	// Settings that determine the size and behavior of the connection pool for the target group. See connection_pool_config Block for details.
 	ConnectionPoolConfig *ConnectionPoolConfigInitParameters `json:"connectionPoolConfig,omitempty" tf:"connection_pool_config,omitempty"`
 
 	// Name of the RDS DB Proxy.
@@ -98,7 +98,7 @@ type ProxyDefaultTargetGroupObservation struct {
 	// ARN representing the target group.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The settings that determine the size and behavior of the connection pool for the target group.
+	// Settings that determine the size and behavior of the connection pool for the target group. See connection_pool_config Block for details.
 	ConnectionPoolConfig *ConnectionPoolConfigObservation `json:"connectionPoolConfig,omitempty" tf:"connection_pool_config,omitempty"`
 
 	// Name of the RDS DB Proxy.
@@ -107,7 +107,7 @@ type ProxyDefaultTargetGroupObservation struct {
 	// Name of the RDS DB Proxy.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The name of the default target group.
+	// Name of the default target group.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -117,7 +117,7 @@ type ProxyDefaultTargetGroupObservation struct {
 
 type ProxyDefaultTargetGroupParameters struct {
 
-	// The settings that determine the size and behavior of the connection pool for the target group.
+	// Settings that determine the size and behavior of the connection pool for the target group. See connection_pool_config Block for details.
 	// +kubebuilder:validation:Optional
 	ConnectionPoolConfig *ConnectionPoolConfigParameters `json:"connectionPoolConfig,omitempty" tf:"connection_pool_config,omitempty"`
 

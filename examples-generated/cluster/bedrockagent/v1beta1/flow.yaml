@@ -1,0 +1,20 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
+apiVersion: bedrockagent.aws.upbound.io/v1beta1
+kind: Flow
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrockagent/v1beta1/flow
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    executionRoleArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    name: example-flow
+    region: us-west-1

@@ -1,0 +1,132 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: Composition
+metadata:
+  name: irsas.aws.platform.upbound.io
+spec:
+  compositeTypeRef:
+    apiVersion: aws.platform.upbound.io/v1alpha1
+    kind: IRSA
+  mode: Pipeline
+  pipeline:
+    - step: patch-and-transform
+      functionRef:
+        name: crossplane-contrib-function-patch-and-transform
+      input:
+        apiVersion: pt.fn.crossplane.io/v1beta1
+        kind: Resources
+        patchSets:
+          - name: Name
+            patches:
+              - fromFieldPath: metadata.name
+                toFieldPath: metadata.annotations[crossplane.io/external-name]
+                type: FromCompositeFieldPath
+          - name: providerConfigRef
+            patches:
+              - fromFieldPath: spec.parameters.providerConfigName
+                toFieldPath: spec.providerConfigRef.name
+                type: FromCompositeFieldPath
+              - fromFieldPath: spec.parameters.providerConfigKind
+                toFieldPath: spec.providerConfigRef.kind
+                type: FromCompositeFieldPath
+        resources:
+          - name: irsaRole
+            base:
+              apiVersion: iam.aws.m.upbound.io/v1beta1
+              kind: Role
+              metadata:
+                labels:
+                  resource: IRSARole
+              spec:
+                forProvider: {}
+            patches:
+              - patchSetName: Name
+                type: PatchSet
+              - patchSetName: providerConfigRef
+                type: PatchSet
+              - fromFieldPath: status.atProvider.arn
+                policy:
+                  fromFieldPath: Optional
+                toFieldPath: status.roleArn
+                type: ToCompositeFieldPath
+              - fromFieldPath: status.conditions
+                policy:
+                  fromFieldPath: Optional
+                toFieldPath: status.observed.role.conditions
+                type: ToCompositeFieldPath
+              - combine:
+                  strategy: string
+                  string:
+                    fmt: |
+                      {
+                        "Version": "2012-10-17",
+                        "Statement": [
+                          {
+                            "Effect": "Allow",
+                            "Principal": {
+                              "Federated": "%s"
+                            },
+                            "Action": "sts:AssumeRoleWithWebIdentity",
+                            "Condition": {
+                              "%s": {
+                                "%s:sub": "system:serviceaccount:%s:%s"
+                              }
+                            }
+                          }
+                        ]
+                      }
+                  variables:
+                    - fromFieldPath: spec.parameters.oidcProviderArn
+                    - fromFieldPath: spec.parameters.condition
+                    - fromFieldPath: spec.parameters.oidcHost
+                    - fromFieldPath: spec.parameters.serviceAccount.namespace
+                    - fromFieldPath: spec.parameters.serviceAccount.name
+                toFieldPath: spec.forProvider.assumeRolePolicy
+                type: CombineFromComposite
+
+          - name: irsaPolicy
+            base:
+              apiVersion: iam.aws.m.upbound.io/v1beta1
+              kind: Policy
+              metadata:
+                labels:
+                  resource: IRSAPolicy
+            patches:
+              - patchSetName: providerConfigRef
+                type: PatchSet
+              - fromFieldPath: spec.parameters.policyDocument
+                toFieldPath: spec.forProvider.policy
+                type: FromCompositeFieldPath
+              - fromFieldPath: metadata.annotations[crossplane.io/external-name]
+                toFieldPath: status.policyArn
+                type: ToCompositeFieldPath
+              - fromFieldPath: status.conditions
+                policy:
+                  fromFieldPath: Optional
+                toFieldPath: status.observed.policy.conditions
+                type: ToCompositeFieldPath
+
+          - name: irsaAttachment
+            base:
+              apiVersion: iam.aws.m.upbound.io/v1beta1
+              kind: RolePolicyAttachment
+              metadata:
+                labels:
+                  resource: RolePolicyAttachment
+              spec:
+                forProvider:
+                  policyArnSelector:
+                    matchControllerRef: true
+                    matchLabels:
+                      resource: IRSAPolicy
+                  roleSelector:
+                    matchControllerRef: true
+                    matchLabels:
+                      resource: IRSARole
+            patches:
+              - patchSetName: providerConfigRef
+                type: PatchSet
+              - fromFieldPath: status.conditions
+                policy:
+                  fromFieldPath: Optional
+                toFieldPath: status.observed.rpa.conditions
+                type: ToCompositeFieldPath

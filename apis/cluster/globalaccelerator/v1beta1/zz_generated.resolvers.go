@@ -11,6 +11,7 @@ import (
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
 	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	errors "github.com/pkg/errors"
+	common "github.com/upbound/provider-aws/v2/config/cluster/common"
 	apisresolver "github.com/upbound/provider-aws/v2/internal/apis"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
@@ -31,7 +32,7 @@ func (mg *EndpointGroup) ResolveReferences( // ResolveReferences of this Endpoin
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ListenerArn),
-			Extract:      reference.ExternalName(),
+			Extract:      common.TerraformID(),
 			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ListenerArnRef,
 			Selector:     mg.Spec.ForProvider.ListenerArnSelector,
@@ -51,7 +52,7 @@ func (mg *EndpointGroup) ResolveReferences( // ResolveReferences of this Endpoin
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ListenerArn),
-			Extract:      reference.ExternalName(),
+			Extract:      common.TerraformID(),
 			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ListenerArnRef,
 			Selector:     mg.Spec.InitProvider.ListenerArnSelector,
@@ -83,7 +84,7 @@ func (mg *Listener) ResolveReferences(ctx context.Context, c client.Reader) erro
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AcceleratorArn),
-			Extract:      reference.ExternalName(),
+			Extract:      common.TerraformID(),
 			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.AcceleratorArnRef,
 			Selector:     mg.Spec.ForProvider.AcceleratorArnSelector,
@@ -103,7 +104,7 @@ func (mg *Listener) ResolveReferences(ctx context.Context, c client.Reader) erro
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AcceleratorArn),
-			Extract:      reference.ExternalName(),
+			Extract:      common.TerraformID(),
 			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.AcceleratorArnRef,
 			Selector:     mg.Spec.InitProvider.AcceleratorArnSelector,
