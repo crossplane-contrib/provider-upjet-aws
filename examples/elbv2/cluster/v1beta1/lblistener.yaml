@@ -5,6 +5,8 @@
 apiVersion: elbv2.aws.upbound.io/v1beta1
 kind: LBListener
 metadata:
+  annotations:
+    meta.upbound.io/example-id: elbv2/v1beta1/lblistener
   labels:
     testing.upbound.io/example-name: elbv2
   name: front-end

@@ -89,7 +89,7 @@ apiVersion: ec2.aws.m.upbound.io/v1beta1
 kind: Subnet
 metadata:
   annotations:
-    meta.upbound.io/example-id: apprunner/v1beta1/fleetstackassociation
+    meta.upbound.io/example-id: appstream/v1beta1/fleetstackassociation
   name: sample-subnet1
   namespace: upbound-system
 spec:
@@ -104,7 +104,7 @@ apiVersion: ec2.aws.m.upbound.io/v1beta1
 kind: VPC
 metadata:
   annotations:
-    meta.upbound.io/example-id: apprunner/v1beta1/fleetstackassociation
+    meta.upbound.io/example-id: appstream/v1beta1/fleetstackassociation
   name: sample-vpc
   namespace: upbound-system
 spec:

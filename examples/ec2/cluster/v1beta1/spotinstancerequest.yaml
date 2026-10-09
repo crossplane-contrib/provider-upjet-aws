@@ -5,6 +5,8 @@
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: SpotInstanceRequest
 metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/spotinstancerequest
   name: example
 spec:
   forProvider:

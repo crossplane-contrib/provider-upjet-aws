@@ -5,6 +5,8 @@
 apiVersion: cognitoidp.aws.m.upbound.io/v1beta1
 kind: IdentityProvider
 metadata:
+  annotations:
+    meta.upbound.io/example-id: cognitoidp/v1beta1/identityprovider
   labels:
     testing.upbound.io/example-name: example_provider
   name: example-provider

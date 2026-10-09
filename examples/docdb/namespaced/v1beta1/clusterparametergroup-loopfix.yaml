@@ -5,6 +5,8 @@
 apiVersion: docdb.aws.m.upbound.io/v1beta1
 kind: ClusterParameterGroup
 metadata:
+  annotations:
+    meta.upbound.io/example-id: docdb/v1beta1/clusterparametergroup
   name: h-docdb50-ttlmonitor-immediate
   namespace: upbound-system
 spec:

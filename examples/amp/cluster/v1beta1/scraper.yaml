@@ -5,19 +5,6 @@
 # This example demonstrates how to create an Amazon Managed Service for Prometheus (AMP) Scraper
 # that collects metrics from an Amazon EKS cluster with all required dependencies.
 
-apiVersion: amp.aws.upbound.io/v1beta2
-kind: Workspace
-metadata:
-  annotations:
-    meta.upbound.io/example-id: amp/v1beta1/scraper
-    uptest.upbound.io/timeout: "7200"
-  labels:
-    testing.upbound.io/example-name: scraper-demo
-  name: scraper-demo
-spec:
-  forProvider:
-    region: us-east-1
----
 apiVersion: amp.aws.upbound.io/v1beta1
 kind: Scraper
 metadata:
@@ -100,6 +87,19 @@ spec:
             target_label: __address__
             regex: (.+?)(\:\d+)?
             replacement: $1:10249
+---
+apiVersion: amp.aws.upbound.io/v1beta2
+kind: Workspace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: amp/v1beta1/scraper
+    uptest.upbound.io/timeout: "7200"
+  labels:
+    testing.upbound.io/example-name: scraper-demo
+  name: scraper-demo
+spec:
+  forProvider:
+    region: us-east-1
 ---
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: Role

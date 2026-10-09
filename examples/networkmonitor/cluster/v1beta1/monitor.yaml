@@ -6,7 +6,7 @@ apiVersion: networkmonitor.aws.upbound.io/v1beta1
 kind: Monitor
 metadata:
   annotations:
-    meta.upbound.io/example-id: networkmonitor/v1beta1/probe
+    meta.upbound.io/example-id: networkmonitor/v1beta1/monitor
   labels:
     testing.upbound.io/example-name: example
   name: example

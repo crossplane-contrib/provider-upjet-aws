@@ -8,6 +8,7 @@ metadata:
   name: example
   annotations:
     upjet.upbound.io/manual-intervention: "Requires a Role with permissions on both buckets."
+    meta.upbound.io/example-id: s3/v1beta1/bucketreplicationconfiguration
 spec:
   forProvider:
     region: us-west-1

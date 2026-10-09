@@ -18,7 +18,6 @@ spec:
       Name: example
     tokenKeyName: Token-Header
     tokenSigningPublicKeysSecretRef:
-      key: signing-token-key
       name: signing-token-secret
       namespace: upbound-system
 ---

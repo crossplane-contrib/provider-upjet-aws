@@ -5,6 +5,8 @@
 apiVersion: iam.aws.m.upbound.io/v1beta1
 kind: User
 metadata:
+  annotations:
+    meta.upbound.io/example-id: iam/v1beta1/user
   name: sample-user-${Rand.RFC1123Subdomain}
   labels:
     testing.upbound.io/example-name: user

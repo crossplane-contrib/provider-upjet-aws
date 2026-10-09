@@ -3,34 +3,31 @@
 # SPDX-License-Identifier: CC0-1.0
 
 apiVersion: timestreaminfluxdb.aws.m.upbound.io/v1beta1
-kind: DBCluster
+kind: DBInstance
 metadata:
   annotations:
-    meta.upbound.io/example-id: timestreaminfluxdb/v1beta1/dbcluster
-    upjet.upbound.io/manual-intervention: Requires an active subscription for InfluxDB Read Replicas from AWS Marketplace
+    meta.upbound.io/example-id: timestreaminfluxdb/v1beta1/dbinstance
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     allocatedStorage: 20
     bucket: example-bucket-name
     dbInstanceType: db.influx.medium
-    failoverMode: AUTOMATIC
-    name: example-db-cluster
+    name: example-db-instance
     organization: organization
     passwordSecretRef:
       key: password
       name: influxdb-password
-      namespace: upbound-system
     port: 8086
     region: us-east-1
     username: admin
     vpcSecurityGroupIdsRefs:
     - name: example
     vpcSubnetIdsRefs:
-    - name: example-1
-    - name: example-2
+    - name: example
   providerConfigRef:
     kind: ClusterProviderConfig
     name: default
@@ -52,7 +49,7 @@ apiVersion: ec2.aws.m.upbound.io/v1beta1
 kind: SecurityGroup
 metadata:
   annotations:
-    meta.upbound.io/example-id: timestreaminfluxdb/v1beta1/dbcluster
+    meta.upbound.io/example-id: timestreaminfluxdb/v1beta1/dbinstance
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -60,10 +57,10 @@ metadata:
 spec:
   forProvider:
     region: us-east-1
-    description: Security group for InfluxDB cluster
-    name: influxdb-cluster-sg
+    description: Security group for InfluxDB instance
+    name: influxdb-instance-sg
     tags:
-      Name: influxdb-cluster-sg
+      Name: influxdb-instance-sg
     vpcIdRef:
       name: sample-vpc
 
@@ -73,35 +70,16 @@ apiVersion: ec2.aws.m.upbound.io/v1beta1
 kind: Subnet
 metadata:
   annotations:
-    meta.upbound.io/example-id: timestreaminfluxdb/v1beta1/dbcluster
+    meta.upbound.io/example-id: timestreaminfluxdb/v1beta1/dbinstance
   labels:
-    testing.upbound.io/example-name: example-1
-  name: example-1
-  namespace: upbound-system
-spec:
-  forProvider:
-    region: us-east-1
-    availabilityZone: us-east-1a
-    cidrBlock: 172.16.10.0/24
-    vpcIdRef:
-      name: sample-vpc
-
----
-
-apiVersion: ec2.aws.m.upbound.io/v1beta1
-kind: Subnet
-metadata:
-  annotations:
-    meta.upbound.io/example-id: timestreaminfluxdb/v1beta1/dbcluster
-  labels:
-    testing.upbound.io/example-name: example-2
-  name: example-2
+    testing.upbound.io/example-name: example
+  name: example
   namespace: upbound-system
 spec:
   forProvider:
     region: us-east-1
     availabilityZone: us-east-1b
-    cidrBlock: 172.16.20.0/24
+    cidrBlock: 172.16.10.0/24
     vpcIdRef:
       name: sample-vpc
 
@@ -111,7 +89,7 @@ apiVersion: ec2.aws.m.upbound.io/v1beta1
 kind: VPC
 metadata:
   annotations:
-    meta.upbound.io/example-id: timestreaminfluxdb/v1beta1/dbcluster
+    meta.upbound.io/example-id: timestreaminfluxdb/v1beta1/dbinstance
   labels:
     testing.upbound.io/example-name: sample-vpc
   name: sample-vpc
@@ -121,4 +99,4 @@ spec:
     region: us-east-1
     cidrBlock: 172.16.0.0/16
     tags:
-      Name: influxdb-cluster-vpc
+      Name: influxdb-instance-vpc

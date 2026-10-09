@@ -5,6 +5,8 @@
 apiVersion: mq.aws.m.upbound.io/v1beta1
 kind: Configuration
 metadata:
+  annotations:
+    meta.upbound.io/example-id: mq/v1beta1/configuration
   name: example
   namespace: upbound-system
 spec:

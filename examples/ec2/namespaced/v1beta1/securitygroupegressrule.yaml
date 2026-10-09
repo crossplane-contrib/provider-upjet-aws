@@ -3,6 +3,26 @@
 # SPDX-License-Identifier: CC0-1.0
 
 apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: SecurityGroupEgressRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/securitygroupegressrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    cidrIpv4: 10.0.0.0/8
+    fromPort: 80
+    ipProtocol: tcp
+    region: us-west-1
+    securityGroupIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    toPort: 8080
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
 kind: VPC
 metadata:
   annotations:
@@ -33,23 +53,3 @@ spec:
     vpcIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
----
-apiVersion: ec2.aws.m.upbound.io/v1beta1
-kind: SecurityGroupEgressRule
-metadata:
-  annotations:
-    meta.upbound.io/example-id: ec2/v1beta1/securitygroupegressrule
-  labels:
-    testing.upbound.io/example-name: example
-  name: example
-  namespace: upbound-system
-spec:
-  forProvider:
-    cidrIpv4: 10.0.0.0/8
-    fromPort: 80
-    ipProtocol: tcp
-    region: us-west-1
-    securityGroupIdSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
-    toPort: 8080

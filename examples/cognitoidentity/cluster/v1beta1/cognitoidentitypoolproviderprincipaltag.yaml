@@ -5,6 +5,8 @@
 apiVersion: cognitoidentity.aws.upbound.io/v1beta1
 kind: CognitoIdentityPoolProviderPrincipalTag
 metadata:
+  annotations:
+    meta.upbound.io/example-id: cognitoidentity/v1beta1/cognitoidentitypoolproviderprincipaltag
   labels:
     testing.upbound.io/example-name: example
   name: example

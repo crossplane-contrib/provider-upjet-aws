@@ -5,6 +5,8 @@
 apiVersion: elb.aws.upbound.io/v1beta1
 kind: Attachment
 metadata:
+  annotations:
+    meta.upbound.io/example-id: elb/v1beta1/attachment
   name: example
 spec:
   forProvider:

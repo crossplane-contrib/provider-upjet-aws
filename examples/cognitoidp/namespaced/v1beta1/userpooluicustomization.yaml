@@ -5,6 +5,8 @@
 apiVersion: cognitoidp.aws.m.upbound.io/v1beta1
 kind: UserPoolUICustomization
 metadata:
+  annotations:
+    meta.upbound.io/example-id: cognitoidp/v1beta1/userpooluicustomization
   labels:
     testing.upbound.io/example-name: example
   name: example

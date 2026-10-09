@@ -5,6 +5,8 @@
 apiVersion: transfer.aws.upbound.io/v1beta1
 kind: Server
 metadata:
+  annotations:
+    meta.upbound.io/example-id: transfer/v1beta1/server
   name: example
 spec:
   forProvider:

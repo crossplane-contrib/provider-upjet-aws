@@ -19,7 +19,6 @@ spec:
       Name: example
     tokenKeyName: Token-Header
     tokenSigningPublicKeysSecretRef:
-      key: signing-token-key
       name: signing-token-secret
 ---
 apiVersion: lambda.aws.m.upbound.io/v1beta1

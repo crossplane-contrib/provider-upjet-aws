@@ -7,6 +7,7 @@ kind: KeyPair
 metadata:
   annotations:
     upjet.upbound.io/manual-intervention: "Requires a valid public key."
+    meta.upbound.io/example-id: ec2/v1beta1/keypair
   name: example
 spec:
   forProvider:

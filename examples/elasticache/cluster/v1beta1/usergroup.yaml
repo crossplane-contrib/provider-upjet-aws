@@ -7,6 +7,7 @@ kind: UserGroup
 metadata:
   annotations:
     upjet.upbound.io/manual-intervention: "This resource needs a User resource and this User resource needs secrets that must contain valid credentials."
+    meta.upbound.io/example-id: elasticache/v1beta1/usergroup
   name: test
 spec:
   forProvider:

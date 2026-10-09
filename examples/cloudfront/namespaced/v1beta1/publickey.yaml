@@ -5,6 +5,8 @@
 apiVersion: cloudfront.aws.m.upbound.io/v1beta1
 kind: PublicKey
 metadata:
+  annotations:
+    meta.upbound.io/example-id: cloudfront/v1beta1/publickey
   name: example-public-key
   labels:
     testing.upbound.io/example-name: publickey

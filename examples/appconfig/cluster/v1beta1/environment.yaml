@@ -48,7 +48,7 @@ apiVersion: cloudwatch.aws.upbound.io/v1beta1
 kind: MetricAlarm
 metadata:
   annotations:
-    meta.upbound.io/example-id: cloudwatch/v1beta1/metricalarm
+    meta.upbound.io/example-id: appconfig/v1beta1/environment
   labels:
     testing.upbound.io/example-name: foobar
   name: foobar

@@ -9,6 +9,7 @@ metadata:
     testing.upbound.io/example-name: main
   annotations:
     upjet.upbound.io/manual-intervention: "roles.authenticated is a map[string]*string, we cannot cross-reference it"
+    meta.upbound.io/example-id: cognitoidentity/v1beta1/poolrolesattachment
   name: main
 spec:
   forProvider:

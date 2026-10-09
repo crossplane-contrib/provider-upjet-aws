@@ -8,6 +8,7 @@ metadata:
   name: example
   annotations:
     upjet.upbound.io/manual-intervention: "This resource has a secret reference."
+    meta.upbound.io/example-id: kms/v1beta1/ciphertext
 spec:
   forProvider:
     region: us-east-1

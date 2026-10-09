@@ -5,6 +5,8 @@
 apiVersion: rds.aws.m.upbound.io/v1beta1
 kind: OptionGroup
 metadata:
+  annotations:
+    meta.upbound.io/example-id: rds/v1beta1/optiongroup
   name: example
   namespace: upbound-system
 spec:

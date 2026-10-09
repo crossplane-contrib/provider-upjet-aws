@@ -7,6 +7,7 @@ kind: Cluster
 metadata:
   annotations:
     uptest.upbound.io/timeout: "7200"
+    meta.upbound.io/example-id: kafka/v1beta2/cluster
   labels:
     testing.upbound.io/example-name: example
   name: example
