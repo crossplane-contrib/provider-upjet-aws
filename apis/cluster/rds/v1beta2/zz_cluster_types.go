@@ -213,6 +213,7 @@ type ClusterInitParameters struct {
 
 	// KMS Key ID to encrypt Performance Insights data. If not specified, the default RDS KMS key will be used (aws/rds).
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kms/v1beta1.Key
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	PerformanceInsightsKMSKeyID *string `json:"performanceInsightsKmsKeyId,omitempty" tf:"performance_insights_kms_key_id,omitempty"`
 
 	// Reference to a Key in kms to populate performanceInsightsKmsKeyId.
@@ -791,6 +792,7 @@ type ClusterParameters struct {
 
 	// KMS Key ID to encrypt Performance Insights data. If not specified, the default RDS KMS key will be used (aws/rds).
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kms/v1beta1.Key
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	PerformanceInsightsKMSKeyID *string `json:"performanceInsightsKmsKeyId,omitempty" tf:"performance_insights_kms_key_id,omitempty"`
 
