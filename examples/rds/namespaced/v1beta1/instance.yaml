@@ -29,6 +29,10 @@ spec:
     passwordSecretRef:
       key: password
       name: example-dbinstance
+    performanceInsightsEnabled: true
+    performanceInsightsKmsKeyIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: sample-key
     publiclyAccessible: false
     region: us-west-1
     skipFinalSnapshot: true
