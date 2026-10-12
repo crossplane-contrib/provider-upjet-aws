@@ -123,6 +123,14 @@ func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
 		managed.WithPollInterval(o.PollInterval),
 	}
 
+	{{- if not .DisableNameInitializer }}
+	opts = append(opts, managed.WithDeterministicExternalName(true))
+	{{- else }}
+	if clients.IsDeterministicExternalName("{{ .ResourceType }}") {
+		opts = append(opts, managed.WithDeterministicExternalName(true))
+	}
+	{{- end}}
+
 	if o.PollJitter != 0 {
 	    opts = append(opts, managed.WithPollJitterHook(o.PollJitter))
 	}
