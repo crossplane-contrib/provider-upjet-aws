@@ -196,7 +196,8 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	// glue
 	//
 	//
-	"aws_glue_catalog_table_optimizer": config.TemplatedStringAsIdentifier("name", "{{ .parameters.catalog_id }}:{{ .parameters.database_name }}:{{ .external_name }}"),
+	// Imported using catalog_id,database_name,table_name,type
+	"aws_glue_catalog_table_optimizer": glueCatalogTableOptimizer(),
 
 	// grafana
 	//
@@ -3976,6 +3977,36 @@ func lambdaRuntimeManagementConfig() config.ExternalName {
 		}
 		return fmt.Sprintf("%s,%s", functionName, qualifier), nil
 	}
+	return e
+}
+
+// glueCatalogTableOptimizer handles the external-name of the
+// aws_glue_catalog_table_optimizer resource. It is a
+// terraform-plugin-framework resource without an "id" attribute, imported
+// using "catalog_id,database_name,table_name,type". All four are required
+// spec fields, so the external name is rebuilt from the Terraform state.
+func glueCatalogTableOptimizer() config.ExternalName {
+	e := config.IdentifierFromProvider
+	// The resource has no monolithic "id" attribute, so do not push one into
+	// the Terraform state.
+	e.GetIDFn = func(_ context.Context, _ string, _ map[string]any, _ map[string]any) (string, error) {
+		return "", nil
+	}
+	e.GetExternalNameFn = func(tfstate map[string]any) (string, error) {
+		keys := []string{"catalog_id", "database_name", "table_name", "type"}
+		vals := make([]string, len(keys))
+		for i, key := range keys {
+			val, err := requiredString(tfstate, key)
+			if err != nil {
+				return "", err
+			}
+			vals[i] = val
+		}
+		return strings.Join(vals, ","), nil
+	}
+	// Keep the identifier fields of the previous templated configuration so
+	// that the generated CRD validation does not change.
+	e.IdentifierFields = []string{"catalog_id", "database_name"}
 	return e
 }
 

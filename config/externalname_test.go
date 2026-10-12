@@ -209,3 +209,60 @@ func TestGrafanaWorkspaceServiceAccountTokenGetIDFn(t *testing.T) {
 		})
 	}
 }
+
+func TestGlueCatalogTableOptimizerExternalName(t *testing.T) {
+	e := TerraformPluginFrameworkExternalNameConfigs["aws_glue_catalog_table_optimizer"]
+	tfState := map[string]any{
+		"catalog_id":    "123456789012",
+		"database_name": "example_db",
+		"table_name":    "example_table",
+		"type":          "retention",
+	}
+
+	cases := map[string]struct {
+		tfState  map[string]any
+		wantName string
+		wantErr  bool
+	}{
+		"StateWithoutID": {
+			tfState:  tfState,
+			wantName: "123456789012,example_db,example_table,retention",
+		},
+		"MissingType": {
+			tfState: map[string]any{"catalog_id": "123456789012", "database_name": "example_db", "table_name": "example_table"},
+			wantErr: true,
+		},
+		"EmptyTableName": {
+			tfState: map[string]any{"catalog_id": "123456789012", "database_name": "example_db", "table_name": "", "type": "retention"},
+			wantErr: true,
+		},
+	}
+
+	for name, tc := range cases {
+		t.Run(name, func(t *testing.T) {
+			got, err := e.GetExternalNameFn(tc.tfState)
+			if tc.wantErr {
+				if err == nil {
+					t.Fatalf("GetExternalNameFn() error = nil, want error")
+				}
+				return
+			}
+			if err != nil {
+				t.Fatalf("GetExternalNameFn() error = %v, want nil", err)
+			}
+			if got != tc.wantName {
+				t.Errorf("GetExternalNameFn() = %q, want %q", got, tc.wantName)
+			}
+		})
+	}
+
+	t.Run("NoIDInState", func(t *testing.T) {
+		id, err := e.GetIDFn(context.Background(), "123456789012,example_db,example_table,retention", tfState, nil)
+		if err != nil {
+			t.Fatalf("GetIDFn() error = %v, want nil", err)
+		}
+		if id != "" {
+			t.Errorf("GetIDFn() = %q, want empty: the resource has no id attribute", id)
+		}
+	})
+}
