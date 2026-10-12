@@ -759,7 +759,7 @@ func (mg *ClusterInstance) ResolveReferences(ctx context.Context, c client.Reade
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PerformanceInsightsKMSKeyID),
-			Extract:      reference.ExternalName(),
+			Extract:      common.ARNExtractor(),
 			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.PerformanceInsightsKMSKeyIDRef,
 			Selector:     mg.Spec.ForProvider.PerformanceInsightsKMSKeyIDSelector,
@@ -859,7 +859,7 @@ func (mg *ClusterInstance) ResolveReferences(ctx context.Context, c client.Reade
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PerformanceInsightsKMSKeyID),
-			Extract:      reference.ExternalName(),
+			Extract:      common.ARNExtractor(),
 			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.PerformanceInsightsKMSKeyIDRef,
 			Selector:     mg.Spec.InitProvider.PerformanceInsightsKMSKeyIDSelector,
