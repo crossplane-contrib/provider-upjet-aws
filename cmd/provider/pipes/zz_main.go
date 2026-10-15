@@ -350,6 +350,14 @@ func main() { //nolint:gocyclo // easier to follow as a unit
 		crdGate := new(gate.Gate[schema.GroupVersionKind])
 		clusterOptions.Gate = crdGate
 		namespacedOptions.Gate = crdGate
+		// The CRD gate reconciles every CRD unless Groups is set. Each
+		// family package owns one cluster group and one namespaced group.
+		// The config package owns ProviderConfig in the root groups. The
+		// monolith owns every group, so it leaves Groups unset.
+
+		clusterOptions.Groups = []string{"pipes.aws.upbound.io", "pipes.aws.m.upbound.io"}
+		namespacedOptions.Groups = clusterOptions.Groups
+
 		kingpin.FatalIfError(customresourcesgate.Setup(mgr, namespacedOptions.Options), "Cannot setup CRD gate")
 		kingpin.FatalIfError(clustercontroller.SetupGated_pipes(mgr, clusterOptions), "Cannot setup cluster-scoped AWS controllers")
 		kingpin.FatalIfError(namespacedcontroller.SetupGated_pipes(mgr, namespacedOptions), "Cannot setup namespaced AWS controllers")
