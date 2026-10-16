@@ -5,6 +5,8 @@
 apiVersion: opensearch.aws.m.upbound.io/v1beta1
 kind: DomainPolicy
 metadata:
+  annotations:
+    meta.upbound.io/example-id: opensearch/v1beta1/domainpolicy
   name: example-domainpolicy
   namespace: upbound-system
 spec:

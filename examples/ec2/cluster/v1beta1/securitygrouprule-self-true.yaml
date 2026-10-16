@@ -3,6 +3,25 @@
 # SPDX-License-Identifier: CC0-1.0
 
 apiVersion: ec2.aws.upbound.io/v1beta1
+kind: SecurityGroupRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/securitygrouprule
+  name: test-vpc-securitygroup
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    fromPort: 22
+    protocol: tcp
+    region: us-east-1
+    securityGroupIdSelector:
+      matchLabels:
+        selector: here-i-am
+    self: true
+    toPort: 22
+    type: ingress
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
 kind: VPC
 metadata:
   annotations:
@@ -31,24 +50,3 @@ spec:
     region: us-east-1
     vpcIdRef:
       name: sample-vpc
-
----
-
-apiVersion: ec2.aws.upbound.io/v1beta1
-kind: SecurityGroupRule
-metadata:
-  annotations:
-    meta.upbound.io/example-id: ec2/v1beta1/securitygrouprule
-  name: test-vpc-securitygroup
-spec:
-  deletionPolicy: Delete
-  forProvider:
-    fromPort: 22
-    protocol: tcp
-    region: us-east-1
-    securityGroupIdSelector:
-      matchLabels:
-        selector: here-i-am
-    self: true
-    toPort: 22
-    type: ingress

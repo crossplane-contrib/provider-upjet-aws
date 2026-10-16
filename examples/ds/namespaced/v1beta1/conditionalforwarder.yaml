@@ -45,12 +45,12 @@ spec:
     type: MicrosoftAD
     edition: Standard
     vpcSettings:
-      - subnetIdsRefs:
-          - name: foo
-          - name: bar
-        vpcIdSelector:
-          matchLabels:
-            testing.upbound.io/example-name: main
+      subnetIdsRefs:
+        - name: foo
+        - name: bar
+      vpcIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: main
 ---
 apiVersion: ec2.aws.m.upbound.io/v1beta1
 kind: Subnet

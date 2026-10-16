@@ -5,6 +5,8 @@
 apiVersion: kafka.aws.m.upbound.io/v1beta1
 kind: Configuration
 metadata:
+  annotations:
+    meta.upbound.io/example-id: kafka/v1beta1/configuration
   name: example
   namespace: upbound-system
 spec:

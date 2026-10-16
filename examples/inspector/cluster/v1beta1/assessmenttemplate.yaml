@@ -30,7 +30,7 @@ apiVersion: inspector.aws.upbound.io/v1beta1
 kind: AssessmentTarget
 metadata:
   annotations:
-    meta.upbound.io/example-id: inspector/v1beta1/assessmenttarget
+    meta.upbound.io/example-id: inspector/v1beta1/assessmenttemplate
   labels:
     testing.upbound.io/example-name: example
   name: example

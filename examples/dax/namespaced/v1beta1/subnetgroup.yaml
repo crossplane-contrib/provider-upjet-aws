@@ -5,6 +5,8 @@
 apiVersion: dax.aws.m.upbound.io/v1beta1
 kind: SubnetGroup
 metadata:
+  annotations:
+    meta.upbound.io/example-id: dax/v1beta1/subnetgroup
   name: example
   namespace: upbound-system
 spec:

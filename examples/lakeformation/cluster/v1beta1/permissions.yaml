@@ -5,6 +5,8 @@
 apiVersion: lakeformation.aws.upbound.io/v1beta1
 kind: Permissions
 metadata:
+  annotations:
+    meta.upbound.io/example-id: lakeformation/v1beta1/permissions
   name: example
 spec:
   forProvider:

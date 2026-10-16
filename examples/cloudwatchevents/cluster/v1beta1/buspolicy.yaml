@@ -5,6 +5,8 @@
 apiVersion: cloudwatchevents.aws.upbound.io/v1beta1
 kind: BusPolicy
 metadata:
+  annotations:
+    meta.upbound.io/example-id: cloudwatchevents/v1beta1/buspolicy
   name: test-bus-policy
 spec:
   forProvider:

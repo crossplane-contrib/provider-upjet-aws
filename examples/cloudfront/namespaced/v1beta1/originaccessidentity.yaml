@@ -5,6 +5,8 @@
 apiVersion: cloudfront.aws.m.upbound.io/v1beta1
 kind: OriginAccessIdentity
 metadata:
+  annotations:
+    meta.upbound.io/example-id: cloudfront/v1beta1/originaccessidentity
   name: example-origin-access-identity
   namespace: upbound-system
 spec:

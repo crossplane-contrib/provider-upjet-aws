@@ -222,13 +222,13 @@ metadata:
 spec:
   replayDeletion: true
   by:
-    apiVersion: batch.aws.upbound.io/v1beta1
+    apiVersion: batch.aws.m.upbound.io/v1beta1
     kind: ComputeEnvironment
     resourceSelector:
       matchLabels:
         testing.upbound.io/example-name: example-jobqueue
   of:
-    apiVersion: iam.aws.upbound.io/v1beta1
+    apiVersion: iam.aws.m.upbound.io/v1beta1
     kind: Role
     resourceSelector:
       matchLabels:
@@ -241,16 +241,17 @@ metadata:
     "uptest.upbound.io/conditions": "Ready"
     "uptest.upbound.io/disable-import": "true"
   name: compute-env-uses-role-binding
+  namespace: upbound-system
 spec:
   replayDeletion: true
   by:
-    apiVersion: batch.aws.upbound.io/v1beta1
+    apiVersion: batch.aws.m.upbound.io/v1beta1
     kind: ComputeEnvironment
     resourceSelector:
       matchLabels:
         testing.upbound.io/example-name: example-jobqueue
   of:
-    apiVersion: iam.aws.upbound.io/v1beta1
+    apiVersion: iam.aws.m.upbound.io/v1beta1
     kind: RolePolicyAttachment
     resourceSelector:
       matchLabels:

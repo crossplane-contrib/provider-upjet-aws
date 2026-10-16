@@ -5,6 +5,8 @@
 apiVersion: lexmodels.aws.upbound.io/v1beta1
 kind: BotAlias
 metadata:
+  annotations:
+    meta.upbound.io/example-id: lexmodels/v1beta1/botalias
   name: example
 spec:
   forProvider:

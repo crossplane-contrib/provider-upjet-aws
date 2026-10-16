@@ -5,6 +5,8 @@
 apiVersion: kms.aws.upbound.io/v1beta1
 kind: Grant
 metadata:
+  annotations:
+    meta.upbound.io/example-id: kms/v1beta1/grant
   name: example
 spec:
   forProvider:

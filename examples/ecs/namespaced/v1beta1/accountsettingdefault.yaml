@@ -5,6 +5,8 @@
 apiVersion: ecs.aws.m.upbound.io/v1beta1
 kind: AccountSettingDefault
 metadata:
+  annotations:
+    meta.upbound.io/example-id: ecs/v1beta1/accountsettingdefault
   name: example
   namespace: upbound-system
 spec:
