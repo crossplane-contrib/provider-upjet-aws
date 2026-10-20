@@ -149,11 +149,36 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		}
 	})
 
-	p.AddResourceConfigurator("aws_elasticache_user_group", func(r *config.Resource) {
-		r.References["user_ids"] = config.Reference{
-			TerraformName:     "aws_elasticache_user",
-			RefFieldName:      "UserIDRefs",
-			SelectorFieldName: "UserIDSelector",
-		}
-	})
+	p.AddResourceConfigurator("aws_elasticache_user_group", configureUserGroup)
+	p.AddResourceConfigurator("aws_elasticache_user_group_association", configureUserGroupAssociation)
+}
+
+const userGroupUserIdsConflictDocs = "- (Optional) The list of user IDs that belong to the user group. Important: leave this field unset when using UserGroupAssociation; put create-time seed users (for example the AWS built-in \"default\" user) in initProvider instead. Managing the same membership via forProvider.userIds and UserGroupAssociation causes a reconcile race."
+
+const userGroupAssociationConflictDescription = " Warning: conflicts with UserGroup when spec.forProvider.userIds is set. Leave UserGroup.spec.forProvider.userIds unset and manage membership via UserGroupAssociation (seed required users in UserGroup.initProvider). Existing UserGroup users must unset forProvider.userIds before adopting this resource."
+
+func configureUserGroup(r *config.Resource) {
+	r.References["user_ids"] = config.Reference{
+		TerraformName:     "aws_elasticache_user",
+		RefFieldName:      "UserIDRefs",
+		SelectorFieldName: "UserIDSelector",
+	}
+	// Membership can also be managed by aws_elasticache_user_group_association.
+	// Do not late-initialize user_ids from AWS or UserGroup will race with associations.
+	r.LateInitializer.IgnoredFields = append(r.LateInitializer.IgnoredFields, "user_ids")
+	if r.MetaResource != nil {
+		r.MetaResource.ArgumentDocs["user_ids"] = userGroupUserIdsConflictDocs
+	}
+}
+
+func configureUserGroupAssociation(r *config.Resource) {
+	r.References["user_group_id"] = config.Reference{
+		TerraformName: "aws_elasticache_user_group",
+	}
+	r.References["user_id"] = config.Reference{
+		TerraformName: "aws_elasticache_user",
+	}
+	if r.MetaResource != nil {
+		r.MetaResource.Description += userGroupAssociationConflictDescription
+	}
 }
