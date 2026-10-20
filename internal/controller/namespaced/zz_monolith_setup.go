@@ -530,6 +530,7 @@ import (
 	lustrefilesystem "github.com/upbound/provider-aws/v2/internal/controller/namespaced/fsx/lustrefilesystem"
 	ontapfilesystem "github.com/upbound/provider-aws/v2/internal/controller/namespaced/fsx/ontapfilesystem"
 	ontapstoragevirtualmachine "github.com/upbound/provider-aws/v2/internal/controller/namespaced/fsx/ontapstoragevirtualmachine"
+	ontapvolume "github.com/upbound/provider-aws/v2/internal/controller/namespaced/fsx/ontapvolume"
 	windowsfilesystem "github.com/upbound/provider-aws/v2/internal/controller/namespaced/fsx/windowsfilesystem"
 	alias "github.com/upbound/provider-aws/v2/internal/controller/namespaced/gamelift/alias"
 	build "github.com/upbound/provider-aws/v2/internal/controller/namespaced/gamelift/build"
@@ -1600,6 +1601,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		lustrefilesystem.Setup,
 		ontapfilesystem.Setup,
 		ontapstoragevirtualmachine.Setup,
+		ontapvolume.Setup,
 		windowsfilesystem.Setup,
 		alias.Setup,
 		build.Setup,
@@ -2676,6 +2678,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		lustrefilesystem.SetupGated,
 		ontapfilesystem.SetupGated,
 		ontapstoragevirtualmachine.SetupGated,
+		ontapvolume.SetupGated,
 		windowsfilesystem.SetupGated,
 		alias.SetupGated,
 		build.SetupGated,
@@ -3751,6 +3754,7 @@ func SetupWebhookWithManager_monolith(mgr ctrl.Manager) error {
 		lustrefilesystem.SetupWebhookWithManager,
 		ontapfilesystem.SetupWebhookWithManager,
 		ontapstoragevirtualmachine.SetupWebhookWithManager,
+		ontapvolume.SetupWebhookWithManager,
 		windowsfilesystem.SetupWebhookWithManager,
 		alias.SetupWebhookWithManager,
 		build.SetupWebhookWithManager,

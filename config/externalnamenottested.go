@@ -282,8 +282,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 
 	// fsx
 	//
-	// FSx ONTAP volume can be imported using the id
-	"aws_fsx_ontap_volume": config.IdentifierFromProvider,
 	// FSx File Systems can be imported using the id
 	"aws_fsx_openzfs_file_system": config.IdentifierFromProvider,
 	// FSx OpenZFS snapshot can be imported using the id
