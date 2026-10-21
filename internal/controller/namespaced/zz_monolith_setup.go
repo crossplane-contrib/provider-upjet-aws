@@ -733,6 +733,7 @@ import (
 	globalclusterneptune "github.com/upbound/provider-aws/v2/internal/controller/namespaced/neptune/globalcluster"
 	parametergroupneptune "github.com/upbound/provider-aws/v2/internal/controller/namespaced/neptune/parametergroup"
 	subnetgroupneptune "github.com/upbound/provider-aws/v2/internal/controller/namespaced/neptune/subnetgroup"
+	containerassociation "github.com/upbound/provider-aws/v2/internal/controller/namespaced/networkfirewall/containerassociation"
 	firewall "github.com/upbound/provider-aws/v2/internal/controller/namespaced/networkfirewall/firewall"
 	firewallpolicy "github.com/upbound/provider-aws/v2/internal/controller/namespaced/networkfirewall/firewallpolicy"
 	loggingconfiguration "github.com/upbound/provider-aws/v2/internal/controller/namespaced/networkfirewall/loggingconfiguration"
@@ -1804,6 +1805,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		globalclusterneptune.Setup,
 		parametergroupneptune.Setup,
 		subnetgroupneptune.Setup,
+		containerassociation.Setup,
 		firewall.Setup,
 		firewallpolicy.Setup,
 		loggingconfiguration.Setup,
@@ -2881,6 +2883,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		globalclusterneptune.SetupGated,
 		parametergroupneptune.SetupGated,
 		subnetgroupneptune.SetupGated,
+		containerassociation.SetupGated,
 		firewall.SetupGated,
 		firewallpolicy.SetupGated,
 		loggingconfiguration.SetupGated,
@@ -3957,6 +3960,7 @@ func SetupWebhookWithManager_monolith(mgr ctrl.Manager) error {
 		globalclusterneptune.SetupWebhookWithManager,
 		parametergroupneptune.SetupWebhookWithManager,
 		subnetgroupneptune.SetupWebhookWithManager,
+		containerassociation.SetupWebhookWithManager,
 		firewall.SetupWebhookWithManager,
 		firewallpolicy.SetupWebhookWithManager,
 		loggingconfiguration.SetupWebhookWithManager,

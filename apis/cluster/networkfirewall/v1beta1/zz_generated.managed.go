@@ -7,6 +7,56 @@ package v1beta1
 
 import xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 
+// GetCondition of this ContainerAssociation.
+func (mg *ContainerAssociation) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this ContainerAssociation.
+func (mg *ContainerAssociation) GetDeletionPolicy() xpv2.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetManagementPolicies of this ContainerAssociation.
+func (mg *ContainerAssociation) GetManagementPolicies() xpv2.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this ContainerAssociation.
+func (mg *ContainerAssociation) GetProviderConfigReference() *xpv2.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetWriteConnectionSecretToReference of this ContainerAssociation.
+func (mg *ContainerAssociation) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this ContainerAssociation.
+func (mg *ContainerAssociation) SetConditions(c ...xpv2.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this ContainerAssociation.
+func (mg *ContainerAssociation) SetDeletionPolicy(r xpv2.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicies of this ContainerAssociation.
+func (mg *ContainerAssociation) SetManagementPolicies(r xpv2.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this ContainerAssociation.
+func (mg *ContainerAssociation) SetProviderConfigReference(r *xpv2.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetWriteConnectionSecretToReference of this ContainerAssociation.
+func (mg *ContainerAssociation) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this Firewall.
 func (mg *Firewall) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
