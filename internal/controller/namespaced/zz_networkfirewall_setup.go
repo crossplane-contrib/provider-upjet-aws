@@ -9,6 +9,7 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
+	containerassociation "github.com/upbound/provider-aws/v2/internal/controller/namespaced/networkfirewall/containerassociation"
 	firewall "github.com/upbound/provider-aws/v2/internal/controller/namespaced/networkfirewall/firewall"
 	firewallpolicy "github.com/upbound/provider-aws/v2/internal/controller/namespaced/networkfirewall/firewallpolicy"
 	loggingconfiguration "github.com/upbound/provider-aws/v2/internal/controller/namespaced/networkfirewall/loggingconfiguration"
@@ -19,6 +20,7 @@ import (
 // the supplied manager.
 func Setup_networkfirewall(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		containerassociation.Setup,
 		firewall.Setup,
 		firewallpolicy.Setup,
 		loggingconfiguration.Setup,
@@ -35,6 +37,7 @@ func Setup_networkfirewall(mgr ctrl.Manager, o controller.Options) error {
 // the supplied manager gated.
 func SetupGated_networkfirewall(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		containerassociation.SetupGated,
 		firewall.SetupGated,
 		firewallpolicy.SetupGated,
 		loggingconfiguration.SetupGated,
@@ -50,6 +53,7 @@ func SetupGated_networkfirewall(mgr ctrl.Manager, o controller.Options) error {
 // SetupWebhookWithManager_networkfirewall registers conversion webhooks for all resource kinds in the group.
 func SetupWebhookWithManager_networkfirewall(mgr ctrl.Manager) error {
 	for _, setup := range []func(ctrl.Manager) error{
+		containerassociation.SetupWebhookWithManager,
 		firewall.SetupWebhookWithManager,
 		firewallpolicy.SetupWebhookWithManager,
 		loggingconfiguration.SetupWebhookWithManager,

@@ -17,8 +17,65 @@ import (
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
-func (mg *Firewall) ResolveReferences( // ResolveReferences of this Firewall.
+func (mg *ContainerAssociation) ResolveReferences( // ResolveReferences of this ContainerAssociation.
 	ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.ContainerMonitoringConfiguration); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("eks.aws.upbound.io", "v1beta2", "Cluster", "ClusterList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ContainerMonitoringConfiguration[i3].ClusterArn),
+				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
+				Reference:    mg.Spec.ForProvider.ContainerMonitoringConfiguration[i3].ClusterArnRef,
+				Selector:     mg.Spec.ForProvider.ContainerMonitoringConfiguration[i3].ClusterArnSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.ContainerMonitoringConfiguration[i3].ClusterArn")
+		}
+		mg.Spec.ForProvider.ContainerMonitoringConfiguration[i3].ClusterArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.ContainerMonitoringConfiguration[i3].ClusterArnRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.ContainerMonitoringConfiguration); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("eks.aws.upbound.io", "v1beta2", "Cluster", "ClusterList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ContainerMonitoringConfiguration[i3].ClusterArn),
+				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
+				Reference:    mg.Spec.InitProvider.ContainerMonitoringConfiguration[i3].ClusterArnRef,
+				Selector:     mg.Spec.InitProvider.ContainerMonitoringConfiguration[i3].ClusterArnSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.ContainerMonitoringConfiguration[i3].ClusterArn")
+		}
+		mg.Spec.InitProvider.ContainerMonitoringConfiguration[i3].ClusterArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.ContainerMonitoringConfiguration[i3].ClusterArnRef = rsp.ResolvedReference
+
+	}
+
+	return nil
+}
+
+// ResolveReferences of this Firewall.
+func (mg *Firewall) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed
 	var l xpresource.ManagedList
 	r := reference.NewAPIResolver(c, mg)
