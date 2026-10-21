@@ -130,7 +130,6 @@ func main() { //nolint:gocyclo // easier to follow as a unit
 	)
 	cmd := kingpin.MustParse(app.Parse(os.Args[1:]))
 	log.Default().SetOutput(io.Discard)
-	ctrl.SetLogger(zap.New(zap.WriteTo(io.Discard)))
 
 	zl := zap.New(zap.UseDevMode(*debug))
 	logr := logging.NewLogrLogger(zl.WithName("provider-aws"))
@@ -139,6 +138,8 @@ func main() { //nolint:gocyclo // easier to follow as a unit
 		// *very* verbose even at info level, so we only provide it a real
 		// logger when we're running in debug mode.
 		ctrl.SetLogger(zl)
+	} else {
+		ctrl.SetLogger(zap.New(zap.WriteTo(io.Discard)))
 	}
 
 	ctx := context.Background()
