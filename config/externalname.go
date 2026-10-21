@@ -250,6 +250,14 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	// admin
 	"aws_mq_user": mqUser(),
 
+	// networkfirewall
+	//
+	// Network Firewall Container Associations are imported by their
+	// provider-assigned container_association_arn, the only identifier the
+	// DescribeContainerAssociation API accepts
+	// Example: arn:aws:network-firewall:us-west-2:123456789012:container-association/example
+	"aws_networkfirewall_container_association": networkFirewallContainerAssociation(),
+
 	// networkmonitor
 	//
 	// import by monitor_name
@@ -3237,6 +3245,20 @@ func kmsAlias() config.ExternalName {
 // @ArnIdentity in the Terraform provider.
 func s3vectorsComputedARNIdentifier(identifier, resourcePath string) config.ExternalName {
 	return frameworkComputedARNIdentifier("s3vectors", identifier, resourcePath)
+}
+
+// networkFirewallContainerAssociation configures the external name for
+// aws_networkfirewall_container_association. The external name is the
+// AWS-assigned container_association_arn, the only identifier the
+// DescribeContainerAssociation API accepts. The stub ARN of the initial read
+// belongs to another account, which AWS does not necessarily answer with a
+// not found error.
+func networkFirewallContainerAssociation() config.ExternalName {
+	// the association name must satisfy the pattern [a-zA-Z0-9-]{1,128}
+	const stubAssociation = "container-association/xpstub000000"
+	e := frameworkComputedARNIdentifier("network-firewall", "container_association_arn", stubAssociation)
+	e.IsNotFoundDiagnosticFn = stubReadNotFound(":000000000000:" + stubAssociation)
+	return e
 }
 
 // frameworkComputedARNIdentifier handles Terraform Plugin Framework resources
