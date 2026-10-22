@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.20.1
+    controller-gen.kubebuilder.io/version: v0.22.0
   name: integrations.rds.aws.upbound.io
 spec:
   group: rds.aws.upbound.io
@@ -75,28 +75,30 @@ spec:
                   additionalEncryptionContext:
                     additionalProperties:
                       type: string
-                    description: |-
-                      Set of non-secret key–value pairs that contains additional contextual information about the data.
-                      For more information, see the User Guide.
-                      You can only include this parameter if you specify the kms_key_id parameter.
+                    description: Set of non-secret key–value pairs that contains additional
+                      contextual information about the data. For more information,
+                      see the User Guide. You can only include this parameter if you
+                      specify the kms_key_id parameter.
                     type: object
                     x-kubernetes-map-type: granular
                   dataFilter:
-                    description: |-
-                      Data filters for the integration.
-                      These filters determine which tables from the source database are sent to the target Amazon Redshift data warehouse.
-                      The value should match the syntax from the AWS CLI which includes an include: or exclude: prefix before a filter expression.
-                      Multiple expressions are separated by a comma.
-                      See the Amazon RDS data filtering guide for additional details.
+                    description: 'Data filters for the integration. These filters
+                      determine which tables from the source database are sent to
+                      the target Amazon Redshift data warehouse. The value should
+                      match the syntax from the AWS CLI which includes an include:
+                      or exclude: prefix before a filter expression. Multiple expressions
+                      are separated by a comma. See the Amazon RDS data filtering
+                      guide for additional details.'
                     type: string
                   integrationName:
                     description: Name of the integration.
                     type: string
                   kmsKeyId:
-                    description: |-
-                      KMS key identifier for the key to use to encrypt the integration.
-                      If you don't specify an encryption key, RDS uses a default AWS owned key.
-                      If you use the default AWS owned key, you should ignore kms_key_id parameter by using lifecycle parameter to avoid unintended change after the first creation.
+                    description: KMS key identifier for the key to use to encrypt
+                      the integration. If you don't specify an encryption key, RDS
+                      uses a default AWS owned key. If you use the default AWS owned
+                      key, you should ignore kms_key_id parameter by using lifecycle
+                      parameter to avoid unintended change after the first creation.
                     type: string
                   kmsKeyIdRef:
                     description: Reference to a Key in kms to populate kmsKeyId.
@@ -359,28 +361,30 @@ spec:
                   additionalEncryptionContext:
                     additionalProperties:
                       type: string
-                    description: |-
-                      Set of non-secret key–value pairs that contains additional contextual information about the data.
-                      For more information, see the User Guide.
-                      You can only include this parameter if you specify the kms_key_id parameter.
+                    description: Set of non-secret key–value pairs that contains additional
+                      contextual information about the data. For more information,
+                      see the User Guide. You can only include this parameter if you
+                      specify the kms_key_id parameter.
                     type: object
                     x-kubernetes-map-type: granular
                   dataFilter:
-                    description: |-
-                      Data filters for the integration.
-                      These filters determine which tables from the source database are sent to the target Amazon Redshift data warehouse.
-                      The value should match the syntax from the AWS CLI which includes an include: or exclude: prefix before a filter expression.
-                      Multiple expressions are separated by a comma.
-                      See the Amazon RDS data filtering guide for additional details.
+                    description: 'Data filters for the integration. These filters
+                      determine which tables from the source database are sent to
+                      the target Amazon Redshift data warehouse. The value should
+                      match the syntax from the AWS CLI which includes an include:
+                      or exclude: prefix before a filter expression. Multiple expressions
+                      are separated by a comma. See the Amazon RDS data filtering
+                      guide for additional details.'
                     type: string
                   integrationName:
                     description: Name of the integration.
                     type: string
                   kmsKeyId:
-                    description: |-
-                      KMS key identifier for the key to use to encrypt the integration.
-                      If you don't specify an encryption key, RDS uses a default AWS owned key.
-                      If you use the default AWS owned key, you should ignore kms_key_id parameter by using lifecycle parameter to avoid unintended change after the first creation.
+                    description: KMS key identifier for the key to use to encrypt
+                      the integration. If you don't specify an encryption key, RDS
+                      uses a default AWS owned key. If you use the default AWS owned
+                      key, you should ignore kms_key_id parameter by using lifecycle
+                      parameter to avoid unintended change after the first creation.
                     type: string
                   kmsKeyIdRef:
                     description: Reference to a Key in kms to populate kmsKeyId.
@@ -719,22 +723,23 @@ spec:
                   additionalEncryptionContext:
                     additionalProperties:
                       type: string
-                    description: |-
-                      Set of non-secret key–value pairs that contains additional contextual information about the data.
-                      For more information, see the User Guide.
-                      You can only include this parameter if you specify the kms_key_id parameter.
+                    description: Set of non-secret key–value pairs that contains additional
+                      contextual information about the data. For more information,
+                      see the User Guide. You can only include this parameter if you
+                      specify the kms_key_id parameter.
                     type: object
                     x-kubernetes-map-type: granular
                   arn:
                     description: ARN of the Integration.
                     type: string
                   dataFilter:
-                    description: |-
-                      Data filters for the integration.
-                      These filters determine which tables from the source database are sent to the target Amazon Redshift data warehouse.
-                      The value should match the syntax from the AWS CLI which includes an include: or exclude: prefix before a filter expression.
-                      Multiple expressions are separated by a comma.
-                      See the Amazon RDS data filtering guide for additional details.
+                    description: 'Data filters for the integration. These filters
+                      determine which tables from the source database are sent to
+                      the target Amazon Redshift data warehouse. The value should
+                      match the syntax from the AWS CLI which includes an include:
+                      or exclude: prefix before a filter expression. Multiple expressions
+                      are separated by a comma. See the Amazon RDS data filtering
+                      guide for additional details.'
                     type: string
                   id:
                     description: (Deprecated, use arn instead) ARN of the Integration.
@@ -748,10 +753,11 @@ spec:
                     description: Name of the integration.
                     type: string
                   kmsKeyId:
-                    description: |-
-                      KMS key identifier for the key to use to encrypt the integration.
-                      If you don't specify an encryption key, RDS uses a default AWS owned key.
-                      If you use the default AWS owned key, you should ignore kms_key_id parameter by using lifecycle parameter to avoid unintended change after the first creation.
+                    description: KMS key identifier for the key to use to encrypt
+                      the integration. If you don't specify an encryption key, RDS
+                      uses a default AWS owned key. If you use the default AWS owned
+                      key, you should ignore kms_key_id parameter by using lifecycle
+                      parameter to avoid unintended change after the first creation.
                     type: string
                   region:
                     description: |-
@@ -770,9 +776,8 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
                   targetArn:

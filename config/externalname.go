@@ -2330,6 +2330,8 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"aws_redshift_hsm_configuration": config.ParameterAsIdentifier("hsm_configuration_identifier"),
 	// Redshift Parameter Groups can be imported using the name
 	"aws_redshift_parameter_group": config.IdentifierFromProvider,
+	// Redshift Resource Policies can be imported using the resource ARN
+	"aws_redshift_resource_policy": config.IdentifierFromProvider,
 	// Redshift Scheduled Action can be imported using the name
 	"aws_redshift_scheduled_action": config.NameAsIdentifier,
 	// Redshift Snapshot Copy Grants support import by name

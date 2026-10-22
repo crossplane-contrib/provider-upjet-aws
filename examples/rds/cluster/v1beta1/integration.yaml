@@ -13,10 +13,11 @@ metadata:
   name: example-${Rand.RFC1123Subdomain}
 spec:
   forProvider:
+    dataFilter: "include: mydb.*.*"
     integrationName: example
     region: us-west-1
     sourceArnRef:
-      name: example-cluster-${Rand.RFC1123Subdomain}
+      name: example-integration-source
     targetArnRef:
       name: example-namespace-${Rand.RFC1123Subdomain}
 ---
@@ -26,15 +27,112 @@ metadata:
   annotations:
     meta.upbound.io/example-id: rds/v1beta1/integration
   labels:
-    testing.upbound.io/example-name: example
-  name: example-cluster-${Rand.RFC1123Subdomain}
+    testing.upbound.io/example-name: example-integration-source
+  name: example-integration-source
 spec:
   forProvider:
     autoGeneratePassword: true
+    databaseName: mydb
+    dbClusterParameterGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-integration-source
     engine: aurora-postgresql
+    masterPasswordSecretRef:
+      name: sample-cluster-password
+      namespace: upbound-system
+      key: password
     masterUsername: cpadmin
     region: us-west-1
     skipFinalSnapshot: true
+---
+apiVersion: rds.aws.upbound.io/v1beta1
+kind: ClusterParameterGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rds/v1beta1/integration
+  labels:
+    testing.upbound.io/example-name: example-integration-source
+  name: example-integration-source
+spec:
+  forProvider:
+    region: us-west-1
+    description: Aurora PostgreSQL cluster parameter group enabling enhanced logical replication for zero-ETL
+    family: aurora-postgresql17
+    parameter:
+      - name: rds.logical_replication
+        value: "1"
+        applyMethod: pending-reboot
+      - name: aurora.enhanced_logical_replication
+        value: "1"
+        applyMethod: pending-reboot
+      - name: aurora.logical_replication_backup
+        value: "0"
+        applyMethod: pending-reboot
+      - name: aurora.logical_replication_globaldb
+        value: "0"
+        applyMethod: pending-reboot
+---
+apiVersion: rds.aws.upbound.io/v1beta1
+kind: ClusterInstance
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rds/v1beta1/integration
+  labels:
+    testing.upbound.io/example-name: example-integration-source
+  name: example-integration-source
+spec:
+  forProvider:
+    region: us-west-1
+    clusterIdentifierRef:
+      name: example-integration-source
+    engine: aurora-postgresql
+    instanceClass: db.r5.large
+---
+apiVersion: redshift.aws.upbound.io/v1beta1
+kind: ResourcePolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rds/v1beta1/integration
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-resourcepolicy-${Rand.RFC1123Subdomain}
+spec:
+  forProvider:
+    region: us-west-1
+    resourceArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-namespace
+    policy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Sid": "EnableCreationAndManagementOfRDSIntegration",
+            "Effect": "Allow",
+            "Principal": {
+              "AWS": "arn:aws:iam::${data.aws_account_id}:root"
+            },
+            "Action": [
+              "redshift:CreateInboundIntegration"
+            ]
+          },
+          {
+            "Sid": "EnableCreationOfInboundIntegration",
+            "Effect": "Allow",
+            "Principal": {
+              "Service": "redshift.amazonaws.com"
+            },
+            "Action": [
+              "redshift:AuthorizeInboundIntegration"
+            ],
+            "Condition": {
+              "StringEquals": {
+                "aws:SourceArn": "arn:aws:rds:us-west-1:${data.aws_account_id}:cluster:example-integration-source"
+              }
+            }
+          }
+        ]
+      }
 ---
 apiVersion: redshiftserverless.aws.upbound.io/v1beta1
 kind: RedshiftServerlessNamespace
@@ -42,7 +140,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: rds/v1beta1/integration
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: example-namespace
   name: example-namespace-${Rand.RFC1123Subdomain}
 spec:
   forProvider:

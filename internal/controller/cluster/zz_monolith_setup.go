@@ -811,6 +811,7 @@ import (
 	hsmclientcertificate "github.com/upbound/provider-aws/v2/internal/controller/cluster/redshift/hsmclientcertificate"
 	hsmconfiguration "github.com/upbound/provider-aws/v2/internal/controller/cluster/redshift/hsmconfiguration"
 	parametergroupredshift "github.com/upbound/provider-aws/v2/internal/controller/cluster/redshift/parametergroup"
+	resourcepolicyredshift "github.com/upbound/provider-aws/v2/internal/controller/cluster/redshift/resourcepolicy"
 	scheduledactionredshift "github.com/upbound/provider-aws/v2/internal/controller/cluster/redshift/scheduledaction"
 	snapshotcopygrant "github.com/upbound/provider-aws/v2/internal/controller/cluster/redshift/snapshotcopygrant"
 	snapshotschedule "github.com/upbound/provider-aws/v2/internal/controller/cluster/redshift/snapshotschedule"
@@ -1882,6 +1883,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		hsmclientcertificate.Setup,
 		hsmconfiguration.Setup,
 		parametergroupredshift.Setup,
+		resourcepolicyredshift.Setup,
 		scheduledactionredshift.Setup,
 		snapshotcopygrant.Setup,
 		snapshotschedule.Setup,
@@ -2959,6 +2961,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		hsmclientcertificate.SetupGated,
 		hsmconfiguration.SetupGated,
 		parametergroupredshift.SetupGated,
+		resourcepolicyredshift.SetupGated,
 		scheduledactionredshift.SetupGated,
 		snapshotcopygrant.SetupGated,
 		snapshotschedule.SetupGated,
@@ -4035,6 +4038,7 @@ func SetupWebhookWithManager_monolith(mgr ctrl.Manager) error {
 		hsmclientcertificate.SetupWebhookWithManager,
 		hsmconfiguration.SetupWebhookWithManager,
 		parametergroupredshift.SetupWebhookWithManager,
+		resourcepolicyredshift.SetupWebhookWithManager,
 		scheduledactionredshift.SetupWebhookWithManager,
 		snapshotcopygrant.SetupWebhookWithManager,
 		snapshotschedule.SetupWebhookWithManager,

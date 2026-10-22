@@ -15,25 +15,17 @@ import (
 
 type IntegrationInitParameters struct {
 
-	// Set of non-secret key–value pairs that contains additional contextual information about the data.
-	// For more information, see the User Guide.
-	// You can only include this parameter if you specify the kms_key_id parameter.
+	// Set of non-secret key–value pairs that contains additional contextual information about the data. For more information, see the User Guide. You can only include this parameter if you specify the kms_key_id parameter.
 	// +mapType=granular
 	AdditionalEncryptionContext map[string]*string `json:"additionalEncryptionContext,omitempty" tf:"additional_encryption_context,omitempty"`
 
-	// Data filters for the integration.
-	// These filters determine which tables from the source database are sent to the target Amazon Redshift data warehouse.
-	// The value should match the syntax from the AWS CLI which includes an include: or exclude: prefix before a filter expression.
-	// Multiple expressions are separated by a comma.
-	// See the Amazon RDS data filtering guide for additional details.
+	// Data filters for the integration. These filters determine which tables from the source database are sent to the target Amazon Redshift data warehouse. The value should match the syntax from the AWS CLI which includes an include: or exclude: prefix before a filter expression. Multiple expressions are separated by a comma. See the Amazon RDS data filtering guide for additional details.
 	DataFilter *string `json:"dataFilter,omitempty" tf:"data_filter,omitempty"`
 
 	// Name of the integration.
 	IntegrationName *string `json:"integrationName,omitempty" tf:"integration_name,omitempty"`
 
-	// KMS key identifier for the key to use to encrypt the integration.
-	// If you don't specify an encryption key, RDS uses a default AWS owned key.
-	// If you use the default AWS owned key, you should ignore kms_key_id parameter by using lifecycle parameter to avoid unintended change after the first creation.
+	// KMS key identifier for the key to use to encrypt the integration. If you don't specify an encryption key, RDS uses a default AWS owned key. If you use the default AWS owned key, you should ignore kms_key_id parameter by using lifecycle parameter to avoid unintended change after the first creation.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kms/v1beta1.Key
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
@@ -78,20 +70,14 @@ type IntegrationInitParameters struct {
 
 type IntegrationObservation struct {
 
-	// Set of non-secret key–value pairs that contains additional contextual information about the data.
-	// For more information, see the User Guide.
-	// You can only include this parameter if you specify the kms_key_id parameter.
+	// Set of non-secret key–value pairs that contains additional contextual information about the data. For more information, see the User Guide. You can only include this parameter if you specify the kms_key_id parameter.
 	// +mapType=granular
 	AdditionalEncryptionContext map[string]*string `json:"additionalEncryptionContext,omitempty" tf:"additional_encryption_context,omitempty"`
 
 	// ARN of the Integration.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// Data filters for the integration.
-	// These filters determine which tables from the source database are sent to the target Amazon Redshift data warehouse.
-	// The value should match the syntax from the AWS CLI which includes an include: or exclude: prefix before a filter expression.
-	// Multiple expressions are separated by a comma.
-	// See the Amazon RDS data filtering guide for additional details.
+	// Data filters for the integration. These filters determine which tables from the source database are sent to the target Amazon Redshift data warehouse. The value should match the syntax from the AWS CLI which includes an include: or exclude: prefix before a filter expression. Multiple expressions are separated by a comma. See the Amazon RDS data filtering guide for additional details.
 	DataFilter *string `json:"dataFilter,omitempty" tf:"data_filter,omitempty"`
 
 	// (Deprecated, use arn instead) ARN of the Integration.
@@ -103,9 +89,7 @@ type IntegrationObservation struct {
 	// Name of the integration.
 	IntegrationName *string `json:"integrationName,omitempty" tf:"integration_name,omitempty"`
 
-	// KMS key identifier for the key to use to encrypt the integration.
-	// If you don't specify an encryption key, RDS uses a default AWS owned key.
-	// If you use the default AWS owned key, you should ignore kms_key_id parameter by using lifecycle parameter to avoid unintended change after the first creation.
+	// KMS key identifier for the key to use to encrypt the integration. If you don't specify an encryption key, RDS uses a default AWS owned key. If you use the default AWS owned key, you should ignore kms_key_id parameter by using lifecycle parameter to avoid unintended change after the first creation.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -119,7 +103,7 @@ type IntegrationObservation struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
@@ -129,18 +113,12 @@ type IntegrationObservation struct {
 
 type IntegrationParameters struct {
 
-	// Set of non-secret key–value pairs that contains additional contextual information about the data.
-	// For more information, see the User Guide.
-	// You can only include this parameter if you specify the kms_key_id parameter.
+	// Set of non-secret key–value pairs that contains additional contextual information about the data. For more information, see the User Guide. You can only include this parameter if you specify the kms_key_id parameter.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	AdditionalEncryptionContext map[string]*string `json:"additionalEncryptionContext,omitempty" tf:"additional_encryption_context,omitempty"`
 
-	// Data filters for the integration.
-	// These filters determine which tables from the source database are sent to the target Amazon Redshift data warehouse.
-	// The value should match the syntax from the AWS CLI which includes an include: or exclude: prefix before a filter expression.
-	// Multiple expressions are separated by a comma.
-	// See the Amazon RDS data filtering guide for additional details.
+	// Data filters for the integration. These filters determine which tables from the source database are sent to the target Amazon Redshift data warehouse. The value should match the syntax from the AWS CLI which includes an include: or exclude: prefix before a filter expression. Multiple expressions are separated by a comma. See the Amazon RDS data filtering guide for additional details.
 	// +kubebuilder:validation:Optional
 	DataFilter *string `json:"dataFilter,omitempty" tf:"data_filter,omitempty"`
 
@@ -148,9 +126,7 @@ type IntegrationParameters struct {
 	// +kubebuilder:validation:Optional
 	IntegrationName *string `json:"integrationName,omitempty" tf:"integration_name,omitempty"`
 
-	// KMS key identifier for the key to use to encrypt the integration.
-	// If you don't specify an encryption key, RDS uses a default AWS owned key.
-	// If you use the default AWS owned key, you should ignore kms_key_id parameter by using lifecycle parameter to avoid unintended change after the first creation.
+	// KMS key identifier for the key to use to encrypt the integration. If you don't specify an encryption key, RDS uses a default AWS owned key. If you use the default AWS owned key, you should ignore kms_key_id parameter by using lifecycle parameter to avoid unintended change after the first creation.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kms/v1beta1.Key
 	// +kubebuilder:validation:Optional
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
