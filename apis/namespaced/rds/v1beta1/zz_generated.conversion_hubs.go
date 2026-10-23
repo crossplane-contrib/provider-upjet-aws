@@ -49,6 +49,9 @@ func (tr *InstanceRoleAssociation) Hub() {}
 func (tr *InstanceState) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *Integration) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *OptionGroup) Hub() {}
 
 // Hub marks this type as a conversion hub.
