@@ -7,6 +7,7 @@ kind: TransitGatewayRouteTableAssociation
 metadata:
   annotations:
     upjet.upbound.io/manual-intervention: "For testing this resource, firstly disassociate the default association."
+    meta.upbound.io/example-id: ec2/v1beta1/transitgatewayroutetableassociation
   name: example
 spec:
   forProvider:

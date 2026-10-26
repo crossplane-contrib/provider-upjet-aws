@@ -7,6 +7,7 @@ kind: IdentityProviderConfig
 metadata:
   annotations:
     uptest.upbound.io/timeout: "3600" # one hour timeout
+    meta.upbound.io/example-id: eks/v1beta1/identityproviderconfig
   name: example
 spec:
   forProvider:

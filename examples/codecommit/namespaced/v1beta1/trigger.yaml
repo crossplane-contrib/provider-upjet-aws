@@ -3,32 +3,6 @@
 # SPDX-License-Identifier: CC0-1.0
 
 apiVersion: codecommit.aws.m.upbound.io/v1beta1
-kind: Repository
-metadata:
-  name: example-trigger
-  annotations:
-    meta.upbound.io/example-id: codecommit/v1beta1/repository
-    uptest.upbound.io/pre-delete-hook: testhooks/delete-trigger.sh
-  labels:
-    testing.upbound.io/example-name: example-trigger
-  namespace: upbound-system
-spec:
-  forProvider:
-    description: This is the Sample App Repository
-    region: us-west-1
----
-apiVersion: sns.aws.m.upbound.io/v1beta1
-kind: Topic
-metadata:
-  name: example
-  labels:
-    testing.upbound.io/example-name: example
-  namespace: upbound-system
-spec:
-  forProvider:
-    region: us-west-1
----
-apiVersion: codecommit.aws.m.upbound.io/v1beta1
 kind: Trigger
 metadata:
   name: example
@@ -50,3 +24,30 @@ spec:
         events:
           - all
         name: all
+
+---
+apiVersion: codecommit.aws.m.upbound.io/v1beta1
+kind: Repository
+metadata:
+  name: example-trigger
+  annotations:
+    meta.upbound.io/example-id: codecommit/v1beta1/trigger
+    uptest.upbound.io/pre-delete-hook: testhooks/delete-trigger.sh
+  labels:
+    testing.upbound.io/example-name: example-trigger
+  namespace: upbound-system
+spec:
+  forProvider:
+    description: This is the Sample App Repository
+    region: us-west-1
+---
+apiVersion: sns.aws.m.upbound.io/v1beta1
+kind: Topic
+metadata:
+  name: example
+  labels:
+    testing.upbound.io/example-name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-1

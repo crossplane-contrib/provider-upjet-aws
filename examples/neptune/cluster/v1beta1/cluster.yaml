@@ -5,6 +5,8 @@
 apiVersion: neptune.aws.upbound.io/v1beta1
 kind: Cluster
 metadata:
+  annotations:
+    meta.upbound.io/example-id: neptune/v1beta1/cluster
   name: sample-cluster
 spec:
   forProvider:

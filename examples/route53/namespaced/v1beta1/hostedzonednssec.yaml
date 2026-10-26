@@ -9,6 +9,7 @@ metadata:
     testing.upbound.io/example-name: example
   annotations:
     upjet.upbound.io/manual-intervention: "This resource is not stable due to https://github.com/crossplane/upjet/issues/80."
+    meta.upbound.io/example-id: route53/v1beta1/hostedzonednssec
   name: example
   namespace: upbound-system
 spec:
@@ -24,6 +25,7 @@ metadata:
     testing.upbound.io/example-name: example
   annotations:
     upjet.upbound.io/manual-intervention: "The dependent resource HostedZoneDNSSEC is not stable and is thus skipped."
+    meta.upbound.io/example-id: route53/v1beta1/hostedzonednssec
   name: example
   namespace: upbound-system
 spec:
@@ -90,6 +92,7 @@ metadata:
     testing.upbound.io/example-name: example
   annotations:
     upjet.upbound.io/manual-intervention: "The dependent resource HostedZoneDNSSEC is not stable and is thus skipped."
+    meta.upbound.io/example-id: route53/v1beta1/hostedzonednssec
   name: example
   namespace: upbound-system
 spec:

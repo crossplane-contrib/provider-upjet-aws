@@ -6,6 +6,8 @@
 apiVersion: dynamodb.aws.m.upbound.io/v1beta1
 kind: TableItem
 metadata:
+  annotations:
+    meta.upbound.io/example-id: dynamodb/v1beta1/tableitem
   name: example
   namespace: upbound-system
 spec:

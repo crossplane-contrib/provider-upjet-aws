@@ -36,7 +36,7 @@ apiVersion: mediastore.aws.m.upbound.io/v1beta1
 kind: Container
 metadata:
   annotations:
-    meta.upbound.io/example-id: mediastore/v1beta1/container
+    meta.upbound.io/example-id: mediastore/v1beta1/containerpolicy
   labels:
     testing.upbound.io/example-name: container
   name: container

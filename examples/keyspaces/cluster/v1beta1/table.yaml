@@ -30,7 +30,7 @@ apiVersion: keyspaces.aws.upbound.io/v1beta1
 kind: Keyspace
 metadata:
   annotations:
-    meta.upbound.io/example-id: keyspaces/v1beta1/keyspace
+    meta.upbound.io/example-id: keyspaces/v1beta1/table
   labels:
     testing.upbound.io/example-name: keyspacelabel
   name: keyspacename
