@@ -266,6 +266,18 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	// import by probe_id
 	"aws_networkmonitor_probe": networkmonitorProbe(),
 
+	// opensearch
+	//
+	// OpenSearch Authorize VPC Endpoint Access has no id attribute. Its
+	// identity is the pair (domain_name, account), and Terraform imports it as
+	// "domain_name,account". Both attributes are Required (not Computed), so
+	// they are always known from the spec. domain_name is used as the external
+	// name and account stays a regular spec field. The external name is
+	// therefore not unique across resources: two resources authorizing
+	// different accounts on the same domain share it. That is harmless
+	// because the controller always reads and writes using the full spec.
+	"aws_opensearch_authorize_vpc_endpoint_access": frameworkParameterAsIdentifier("domain_name"),
+
 	// opensearchserverless
 	//
 	// AccessPolicy can be imported using the policy name
@@ -2209,6 +2221,9 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// Please see the following issue in upjet: https://github.com/crossplane/upjet/issues/32
 	// OpenSearch domains can be imported using the domain_name
 	"aws_opensearch_domain_saml_options": config.IdentifierFromProvider,
+	// OpenSearch VPC endpoints can be imported using the id, which is the
+	// provider-assigned endpoint ID
+	"aws_opensearch_vpc_endpoint": config.IdentifierFromProvider,
 
 	// organizations
 	//
