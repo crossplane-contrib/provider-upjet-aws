@@ -17,8 +17,60 @@ import (
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
-func (mg *Domain) ResolveReferences( // ResolveReferences of this Domain.
+func (mg *AuthorizeVPCEndpointAccess) ResolveReferences( // ResolveReferences of this AuthorizeVPCEndpointAccess.
 	ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPINamespacedResolver(c, mg)
+
+	var rsp reference.NamespacedResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("opensearch.aws.m.upbound.io", "v1beta1", "Domain", "DomainList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DomainName),
+			Extract:      resource.ExtractParamPath("domain_name", true),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.DomainNameRef,
+			Selector:     mg.Spec.ForProvider.DomainNameSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.DomainName")
+	}
+	mg.Spec.ForProvider.DomainName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DomainNameRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("opensearch.aws.m.upbound.io", "v1beta1", "Domain", "DomainList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DomainName),
+			Extract:      resource.ExtractParamPath("domain_name", true),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.DomainNameRef,
+			Selector:     mg.Spec.InitProvider.DomainNameSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.DomainName")
+	}
+	mg.Spec.InitProvider.DomainName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.DomainNameRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this Domain.
+func (mg *Domain) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed
 	var l xpresource.ManagedList
 	r := reference.NewAPINamespacedResolver(c, mg)
@@ -307,6 +359,148 @@ func (mg *DomainSAMLOptions) ResolveReferences(ctx context.Context, c client.Rea
 	}
 	mg.Spec.InitProvider.DomainName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.DomainNameRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this VPCEndpoint.
+func (mg *VPCEndpoint) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPINamespacedResolver(c, mg)
+
+	var rsp reference.NamespacedResolutionResponse
+	var mrsp reference.MultiNamespacedResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("opensearch.aws.m.upbound.io", "v1beta1", "Domain", "DomainList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DomainArn),
+			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.DomainArnRef,
+			Selector:     mg.Spec.ForProvider.DomainArnSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.DomainArn")
+	}
+	mg.Spec.ForProvider.DomainArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DomainArnRef = rsp.ResolvedReference
+
+	if mg.Spec.ForProvider.VPCOptions != nil {
+		{
+			m, l, err = apisresolver.GetManagedResource("ec2.aws.m.upbound.io", "v1beta1", "SecurityGroup", "SecurityGroupList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			mrsp, err = r.ResolveMultiple(ctx, reference.MultiNamespacedResolutionRequest{
+				CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.VPCOptions.SecurityGroupIds),
+				Extract:       resource.ExtractResourceID(),
+				Namespace:     mg.GetNamespace(),
+				References:    mg.Spec.ForProvider.VPCOptions.SecurityGroupIdsRefs,
+				Selector:      mg.Spec.ForProvider.VPCOptions.SecurityGroupIdsSelector,
+				To:            reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.VPCOptions.SecurityGroupIds")
+		}
+		mg.Spec.ForProvider.VPCOptions.SecurityGroupIds = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.ForProvider.VPCOptions.SecurityGroupIdsRefs = mrsp.ResolvedReferences
+
+	}
+	if mg.Spec.ForProvider.VPCOptions != nil {
+		{
+			m, l, err = apisresolver.GetManagedResource("ec2.aws.m.upbound.io", "v1beta1", "Subnet", "SubnetList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			mrsp, err = r.ResolveMultiple(ctx, reference.MultiNamespacedResolutionRequest{
+				CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.VPCOptions.SubnetIds),
+				Extract:       resource.ExtractResourceID(),
+				Namespace:     mg.GetNamespace(),
+				References:    mg.Spec.ForProvider.VPCOptions.SubnetIdsRefs,
+				Selector:      mg.Spec.ForProvider.VPCOptions.SubnetIdsSelector,
+				To:            reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.VPCOptions.SubnetIds")
+		}
+		mg.Spec.ForProvider.VPCOptions.SubnetIds = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.ForProvider.VPCOptions.SubnetIdsRefs = mrsp.ResolvedReferences
+
+	}
+	{
+		m, l, err = apisresolver.GetManagedResource("opensearch.aws.m.upbound.io", "v1beta1", "Domain", "DomainList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DomainArn),
+			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.DomainArnRef,
+			Selector:     mg.Spec.InitProvider.DomainArnSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.DomainArn")
+	}
+	mg.Spec.InitProvider.DomainArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.DomainArnRef = rsp.ResolvedReference
+
+	if mg.Spec.InitProvider.VPCOptions != nil {
+		{
+			m, l, err = apisresolver.GetManagedResource("ec2.aws.m.upbound.io", "v1beta1", "SecurityGroup", "SecurityGroupList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			mrsp, err = r.ResolveMultiple(ctx, reference.MultiNamespacedResolutionRequest{
+				CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.VPCOptions.SecurityGroupIds),
+				Extract:       resource.ExtractResourceID(),
+				Namespace:     mg.GetNamespace(),
+				References:    mg.Spec.InitProvider.VPCOptions.SecurityGroupIdsRefs,
+				Selector:      mg.Spec.InitProvider.VPCOptions.SecurityGroupIdsSelector,
+				To:            reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.VPCOptions.SecurityGroupIds")
+		}
+		mg.Spec.InitProvider.VPCOptions.SecurityGroupIds = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.InitProvider.VPCOptions.SecurityGroupIdsRefs = mrsp.ResolvedReferences
+
+	}
+	if mg.Spec.InitProvider.VPCOptions != nil {
+		{
+			m, l, err = apisresolver.GetManagedResource("ec2.aws.m.upbound.io", "v1beta1", "Subnet", "SubnetList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			mrsp, err = r.ResolveMultiple(ctx, reference.MultiNamespacedResolutionRequest{
+				CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.VPCOptions.SubnetIds),
+				Extract:       resource.ExtractResourceID(),
+				Namespace:     mg.GetNamespace(),
+				References:    mg.Spec.InitProvider.VPCOptions.SubnetIdsRefs,
+				Selector:      mg.Spec.InitProvider.VPCOptions.SubnetIdsSelector,
+				To:            reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.VPCOptions.SubnetIds")
+		}
+		mg.Spec.InitProvider.VPCOptions.SubnetIds = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.InitProvider.VPCOptions.SubnetIdsRefs = mrsp.ResolvedReferences
+
+	}
 
 	return nil
 }

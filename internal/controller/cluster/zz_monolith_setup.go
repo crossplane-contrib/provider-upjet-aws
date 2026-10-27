@@ -754,9 +754,11 @@ import (
 	monitor "github.com/upbound/provider-aws/v2/internal/controller/cluster/networkmonitor/monitor"
 	probe "github.com/upbound/provider-aws/v2/internal/controller/cluster/networkmonitor/probe"
 	sink "github.com/upbound/provider-aws/v2/internal/controller/cluster/oam/sink"
+	authorizevpcendpointaccess "github.com/upbound/provider-aws/v2/internal/controller/cluster/opensearch/authorizevpcendpointaccess"
 	domainopensearch "github.com/upbound/provider-aws/v2/internal/controller/cluster/opensearch/domain"
 	domainpolicyopensearch "github.com/upbound/provider-aws/v2/internal/controller/cluster/opensearch/domainpolicy"
 	domainsamloptionsopensearch "github.com/upbound/provider-aws/v2/internal/controller/cluster/opensearch/domainsamloptions"
+	vpcendpointopensearch "github.com/upbound/provider-aws/v2/internal/controller/cluster/opensearch/vpcendpoint"
 	accesspolicy "github.com/upbound/provider-aws/v2/internal/controller/cluster/opensearchserverless/accesspolicy"
 	collection "github.com/upbound/provider-aws/v2/internal/controller/cluster/opensearchserverless/collection"
 	collectiongroup "github.com/upbound/provider-aws/v2/internal/controller/cluster/opensearchserverless/collectiongroup"
@@ -1826,9 +1828,11 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		monitor.Setup,
 		probe.Setup,
 		sink.Setup,
+		authorizevpcendpointaccess.Setup,
 		domainopensearch.Setup,
 		domainpolicyopensearch.Setup,
 		domainsamloptionsopensearch.Setup,
+		vpcendpointopensearch.Setup,
 		accesspolicy.Setup,
 		collection.Setup,
 		collectiongroup.Setup,
@@ -2904,9 +2908,11 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		monitor.SetupGated,
 		probe.SetupGated,
 		sink.SetupGated,
+		authorizevpcendpointaccess.SetupGated,
 		domainopensearch.SetupGated,
 		domainpolicyopensearch.SetupGated,
 		domainsamloptionsopensearch.SetupGated,
+		vpcendpointopensearch.SetupGated,
 		accesspolicy.SetupGated,
 		collection.SetupGated,
 		collectiongroup.SetupGated,
@@ -3981,9 +3987,11 @@ func SetupWebhookWithManager_monolith(mgr ctrl.Manager) error {
 		monitor.SetupWebhookWithManager,
 		probe.SetupWebhookWithManager,
 		sink.SetupWebhookWithManager,
+		authorizevpcendpointaccess.SetupWebhookWithManager,
 		domainopensearch.SetupWebhookWithManager,
 		domainpolicyopensearch.SetupWebhookWithManager,
 		domainsamloptionsopensearch.SetupWebhookWithManager,
+		vpcendpointopensearch.SetupWebhookWithManager,
 		accesspolicy.SetupWebhookWithManager,
 		collection.SetupWebhookWithManager,
 		collectiongroup.SetupWebhookWithManager,
