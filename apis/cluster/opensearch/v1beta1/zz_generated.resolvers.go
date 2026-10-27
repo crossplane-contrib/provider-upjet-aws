@@ -33,7 +33,7 @@ func (mg *AuthorizeVPCEndpointAccess) ResolveReferences( // ResolveReferences of
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DomainName),
-			Extract:      resource.ExtractParamPath("domain_name", false),
+			Extract:      resource.ExtractParamPath("domain_name", true),
 			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DomainNameRef,
 			Selector:     mg.Spec.ForProvider.DomainNameSelector,
@@ -53,7 +53,7 @@ func (mg *AuthorizeVPCEndpointAccess) ResolveReferences( // ResolveReferences of
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DomainName),
-			Extract:      resource.ExtractParamPath("domain_name", false),
+			Extract:      resource.ExtractParamPath("domain_name", true),
 			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.DomainNameRef,
 			Selector:     mg.Spec.InitProvider.DomainNameSelector,
