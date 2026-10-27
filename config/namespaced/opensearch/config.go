@@ -63,4 +63,11 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		}
 	})
 
+	p.AddResourceConfigurator("aws_opensearch_authorize_vpc_endpoint_access", func(r *config.Resource) {
+		r.References["domain_name"] = config.Reference{
+			TerraformName: "aws_opensearch_domain",
+			Extractor:     `github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("domain_name",true)`,
+		}
+	})
+
 }

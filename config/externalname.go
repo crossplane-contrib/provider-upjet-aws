@@ -268,15 +268,9 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 
 	// opensearch
 	//
-	// OpenSearch Authorize VPC Endpoint Access has no id attribute. Its
-	// identity is the pair (domain_name, account), and Terraform imports it as
-	// "domain_name,account". Both attributes are Required (not Computed), so
-	// they are always known from the spec. domain_name is used as the external
-	// name and account stays a regular spec field. The external name is
-	// therefore not unique across resources: two resources authorizing
-	// different accounts on the same domain share it. That is harmless
-	// because the controller always reads and writes using the full spec.
-	"aws_opensearch_authorize_vpc_endpoint_access": frameworkParameterAsIdentifier("domain_name"),
+	// OpenSearch Authorize VPC Endpoint Access has no id attribute and can be
+	// imported using the domain_name and account separated by a comma.
+	"aws_opensearch_authorize_vpc_endpoint_access": opensearchAuthorizeVPCEndpointAccess(),
 
 	// opensearchserverless
 	//
@@ -3802,6 +3796,42 @@ func eksCapability() config.ExternalName {
 	e := config.IdentifierFromProvider
 	const sep = ","
 	keys := []string{"cluster_name", "capability_name"}
+	e.GetExternalNameFn = func(tfstate map[string]interface{}) (string, error) {
+		vals := make([]string, len(keys))
+		for i, key := range keys {
+			val, ok := tfstate[key]
+			if !ok {
+				return "", errors.Errorf("%q is missing from tfstate", key)
+			}
+			s, ok := val.(string)
+			if !ok || s == "" {
+				return "", errors.Errorf("%q in tfstate must be a non-empty string", key)
+			}
+			vals[i] = s
+		}
+		return strings.Join(vals, sep), nil
+	}
+	e.SetIdentifierArgumentFn = func(base map[string]interface{}, externalName string) {
+		if externalName == "" {
+			return
+		}
+		extNameParts := strings.Split(externalName, sep)
+		if len(extNameParts) != len(keys) {
+			return
+		}
+		for i, key := range keys {
+			if _, ok := base[key]; !ok {
+				base[key] = extNameParts[i]
+			}
+		}
+	}
+	return e
+}
+
+func opensearchAuthorizeVPCEndpointAccess() config.ExternalName {
+	e := config.IdentifierFromProvider
+	const sep = ","
+	keys := []string{"domain_name", "account"}
 	e.GetExternalNameFn = func(tfstate map[string]interface{}) (string, error) {
 		vals := make([]string, len(keys))
 		for i, key := range keys {

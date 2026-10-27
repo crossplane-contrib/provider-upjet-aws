@@ -266,3 +266,87 @@ func TestGlueCatalogTableOptimizerExternalName(t *testing.T) {
 		}
 	})
 }
+
+func TestOpensearchAuthorizeVPCEndpointAccess(t *testing.T) {
+	e := opensearchAuthorizeVPCEndpointAccess()
+
+	t.Run("GetExternalNameFn", func(t *testing.T) {
+		cases := map[string]struct {
+			tfstate map[string]any
+			want    string
+			wantErr bool
+		}{
+			"Composite": {
+				tfstate: map[string]any{"domain_name": "my-domain", "account": "123456789012"},
+				want:    "my-domain,123456789012",
+			},
+			"MissingAccount": {
+				tfstate: map[string]any{"domain_name": "my-domain"},
+				wantErr: true,
+			},
+			"EmptyDomainName": {
+				tfstate: map[string]any{"domain_name": "", "account": "123456789012"},
+				wantErr: true,
+			},
+		}
+		for name, tc := range cases {
+			t.Run(name, func(t *testing.T) {
+				got, err := e.GetExternalNameFn(tc.tfstate)
+				if tc.wantErr {
+					if err == nil {
+						t.Fatalf("GetExternalNameFn() error = nil, want error")
+					}
+					return
+				}
+				if err != nil {
+					t.Fatalf("GetExternalNameFn() error = %v, want nil", err)
+				}
+				if got != tc.want {
+					t.Errorf("GetExternalNameFn() = %q, want %q", got, tc.want)
+				}
+			})
+		}
+	})
+
+	t.Run("SetIdentifierArgumentFn", func(t *testing.T) {
+		cases := map[string]struct {
+			base         map[string]any
+			externalName string
+			want         map[string]any
+		}{
+			"FillsMissingKeys": {
+				base:         map[string]any{},
+				externalName: "my-domain,123456789012",
+				want:         map[string]any{"domain_name": "my-domain", "account": "123456789012"},
+			},
+			"KeepsSpecValues": {
+				base:         map[string]any{"domain_name": "spec-domain"},
+				externalName: "my-domain,123456789012",
+				want:         map[string]any{"domain_name": "spec-domain", "account": "123456789012"},
+			},
+			"EmptyExternalName": {
+				base:         map[string]any{},
+				externalName: "",
+				want:         map[string]any{},
+			},
+			"MalformedExternalName": {
+				base:         map[string]any{},
+				externalName: "my-domain",
+				want:         map[string]any{},
+			},
+		}
+		for name, tc := range cases {
+			t.Run(name, func(t *testing.T) {
+				e.SetIdentifierArgumentFn(tc.base, tc.externalName)
+				if len(tc.base) != len(tc.want) {
+					t.Fatalf("base = %v, want %v", tc.base, tc.want)
+				}
+				for k, v := range tc.want {
+					if tc.base[k] != v {
+						t.Errorf("base[%q] = %v, want %v", k, tc.base[k], v)
+					}
+				}
+			})
+		}
+	})
+}
