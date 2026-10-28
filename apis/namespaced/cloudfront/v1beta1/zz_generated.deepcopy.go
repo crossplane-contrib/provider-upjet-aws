@@ -1974,6 +1974,16 @@ func (in *DefaultCacheBehaviorInitParameters) DeepCopyInto(out *DefaultCacheBeha
 		*out = new(string)
 		**out = **in
 	}
+	if in.CachePolicyIDRef != nil {
+		in, out := &in.CachePolicyIDRef, &out.CachePolicyIDRef
+		*out = new(v2.NamespacedReference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.CachePolicyIDSelector != nil {
+		in, out := &in.CachePolicyIDSelector, &out.CachePolicyIDSelector
+		*out = new(v2.NamespacedSelector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.CachedMethods != nil {
 		in, out := &in.CachedMethods, &out.CachedMethods
 		*out = make([]*string, len(*in))
@@ -2039,6 +2049,16 @@ func (in *DefaultCacheBehaviorInitParameters) DeepCopyInto(out *DefaultCacheBeha
 		*out = new(string)
 		**out = **in
 	}
+	if in.OriginRequestPolicyIDRef != nil {
+		in, out := &in.OriginRequestPolicyIDRef, &out.OriginRequestPolicyIDRef
+		*out = new(v2.NamespacedReference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.OriginRequestPolicyIDSelector != nil {
+		in, out := &in.OriginRequestPolicyIDSelector, &out.OriginRequestPolicyIDSelector
+		*out = new(v2.NamespacedSelector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.RealtimeLogConfigArn != nil {
 		in, out := &in.RealtimeLogConfigArn, &out.RealtimeLogConfigArn
 		*out = new(string)
@@ -2048,6 +2068,16 @@ func (in *DefaultCacheBehaviorInitParameters) DeepCopyInto(out *DefaultCacheBeha
 		in, out := &in.ResponseHeadersPolicyID, &out.ResponseHeadersPolicyID
 		*out = new(string)
 		**out = **in
+	}
+	if in.ResponseHeadersPolicyIDRef != nil {
+		in, out := &in.ResponseHeadersPolicyIDRef, &out.ResponseHeadersPolicyIDRef
+		*out = new(v2.NamespacedReference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ResponseHeadersPolicyIDSelector != nil {
+		in, out := &in.ResponseHeadersPolicyIDSelector, &out.ResponseHeadersPolicyIDSelector
+		*out = new(v2.NamespacedSelector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.SmoothStreaming != nil {
 		in, out := &in.SmoothStreaming, &out.SmoothStreaming
@@ -2260,6 +2290,16 @@ func (in *DefaultCacheBehaviorParameters) DeepCopyInto(out *DefaultCacheBehavior
 		*out = new(string)
 		**out = **in
 	}
+	if in.CachePolicyIDRef != nil {
+		in, out := &in.CachePolicyIDRef, &out.CachePolicyIDRef
+		*out = new(v2.NamespacedReference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.CachePolicyIDSelector != nil {
+		in, out := &in.CachePolicyIDSelector, &out.CachePolicyIDSelector
+		*out = new(v2.NamespacedSelector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.CachedMethods != nil {
 		in, out := &in.CachedMethods, &out.CachedMethods
 		*out = make([]*string, len(*in))
@@ -2325,6 +2365,16 @@ func (in *DefaultCacheBehaviorParameters) DeepCopyInto(out *DefaultCacheBehavior
 		*out = new(string)
 		**out = **in
 	}
+	if in.OriginRequestPolicyIDRef != nil {
+		in, out := &in.OriginRequestPolicyIDRef, &out.OriginRequestPolicyIDRef
+		*out = new(v2.NamespacedReference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.OriginRequestPolicyIDSelector != nil {
+		in, out := &in.OriginRequestPolicyIDSelector, &out.OriginRequestPolicyIDSelector
+		*out = new(v2.NamespacedSelector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.RealtimeLogConfigArn != nil {
 		in, out := &in.RealtimeLogConfigArn, &out.RealtimeLogConfigArn
 		*out = new(string)
@@ -2334,6 +2384,16 @@ func (in *DefaultCacheBehaviorParameters) DeepCopyInto(out *DefaultCacheBehavior
 		in, out := &in.ResponseHeadersPolicyID, &out.ResponseHeadersPolicyID
 		*out = new(string)
 		**out = **in
+	}
+	if in.ResponseHeadersPolicyIDRef != nil {
+		in, out := &in.ResponseHeadersPolicyIDRef, &out.ResponseHeadersPolicyIDRef
+		*out = new(v2.NamespacedReference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ResponseHeadersPolicyIDSelector != nil {
+		in, out := &in.ResponseHeadersPolicyIDSelector, &out.ResponseHeadersPolicyIDSelector
+		*out = new(v2.NamespacedSelector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.SmoothStreaming != nil {
 		in, out := &in.SmoothStreaming, &out.SmoothStreaming
@@ -6520,6 +6580,16 @@ func (in *OrderedCacheBehaviorInitParameters) DeepCopyInto(out *OrderedCacheBeha
 		*out = new(string)
 		**out = **in
 	}
+	if in.CachePolicyIDRef != nil {
+		in, out := &in.CachePolicyIDRef, &out.CachePolicyIDRef
+		*out = new(v2.NamespacedReference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.CachePolicyIDSelector != nil {
+		in, out := &in.CachePolicyIDSelector, &out.CachePolicyIDSelector
+		*out = new(v2.NamespacedSelector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.CachedMethods != nil {
 		in, out := &in.CachedMethods, &out.CachedMethods
 		*out = make([]*string, len(*in))
@@ -6585,6 +6655,16 @@ func (in *OrderedCacheBehaviorInitParameters) DeepCopyInto(out *OrderedCacheBeha
 		*out = new(string)
 		**out = **in
 	}
+	if in.OriginRequestPolicyIDRef != nil {
+		in, out := &in.OriginRequestPolicyIDRef, &out.OriginRequestPolicyIDRef
+		*out = new(v2.NamespacedReference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.OriginRequestPolicyIDSelector != nil {
+		in, out := &in.OriginRequestPolicyIDSelector, &out.OriginRequestPolicyIDSelector
+		*out = new(v2.NamespacedSelector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.PathPattern != nil {
 		in, out := &in.PathPattern, &out.PathPattern
 		*out = new(string)
@@ -6599,6 +6679,16 @@ func (in *OrderedCacheBehaviorInitParameters) DeepCopyInto(out *OrderedCacheBeha
 		in, out := &in.ResponseHeadersPolicyID, &out.ResponseHeadersPolicyID
 		*out = new(string)
 		**out = **in
+	}
+	if in.ResponseHeadersPolicyIDRef != nil {
+		in, out := &in.ResponseHeadersPolicyIDRef, &out.ResponseHeadersPolicyIDRef
+		*out = new(v2.NamespacedReference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ResponseHeadersPolicyIDSelector != nil {
+		in, out := &in.ResponseHeadersPolicyIDSelector, &out.ResponseHeadersPolicyIDSelector
+		*out = new(v2.NamespacedSelector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.SmoothStreaming != nil {
 		in, out := &in.SmoothStreaming, &out.SmoothStreaming
@@ -6926,6 +7016,16 @@ func (in *OrderedCacheBehaviorParameters) DeepCopyInto(out *OrderedCacheBehavior
 		*out = new(string)
 		**out = **in
 	}
+	if in.CachePolicyIDRef != nil {
+		in, out := &in.CachePolicyIDRef, &out.CachePolicyIDRef
+		*out = new(v2.NamespacedReference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.CachePolicyIDSelector != nil {
+		in, out := &in.CachePolicyIDSelector, &out.CachePolicyIDSelector
+		*out = new(v2.NamespacedSelector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.CachedMethods != nil {
 		in, out := &in.CachedMethods, &out.CachedMethods
 		*out = make([]*string, len(*in))
@@ -6991,6 +7091,16 @@ func (in *OrderedCacheBehaviorParameters) DeepCopyInto(out *OrderedCacheBehavior
 		*out = new(string)
 		**out = **in
 	}
+	if in.OriginRequestPolicyIDRef != nil {
+		in, out := &in.OriginRequestPolicyIDRef, &out.OriginRequestPolicyIDRef
+		*out = new(v2.NamespacedReference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.OriginRequestPolicyIDSelector != nil {
+		in, out := &in.OriginRequestPolicyIDSelector, &out.OriginRequestPolicyIDSelector
+		*out = new(v2.NamespacedSelector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.PathPattern != nil {
 		in, out := &in.PathPattern, &out.PathPattern
 		*out = new(string)
@@ -7005,6 +7115,16 @@ func (in *OrderedCacheBehaviorParameters) DeepCopyInto(out *OrderedCacheBehavior
 		in, out := &in.ResponseHeadersPolicyID, &out.ResponseHeadersPolicyID
 		*out = new(string)
 		**out = **in
+	}
+	if in.ResponseHeadersPolicyIDRef != nil {
+		in, out := &in.ResponseHeadersPolicyIDRef, &out.ResponseHeadersPolicyIDRef
+		*out = new(v2.NamespacedReference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ResponseHeadersPolicyIDSelector != nil {
+		in, out := &in.ResponseHeadersPolicyIDSelector, &out.ResponseHeadersPolicyIDSelector
+		*out = new(v2.NamespacedSelector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.SmoothStreaming != nil {
 		in, out := &in.SmoothStreaming, &out.SmoothStreaming
