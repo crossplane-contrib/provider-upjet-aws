@@ -2197,9 +2197,15 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 
 	// oam
 	//
+	// aws_oam_link can be imported using the ARN
+	// Example: arn:aws:oam:us-west-2:123456789012:link/link-id
+	"aws_oam_link": config.IdentifierFromProvider,
 	// aws_oam_sink can be imported using th ARN
 	// Example: arn:aws:oam:us-west-2:123456789012:sink/sink-id
 	"aws_oam_sink": config.IdentifierFromProvider,
+	// aws_oam_sink_policy can be imported using the ARN of the sink
+	// Example: arn:aws:oam:us-west-2:123456789012:sink/sink-id
+	"aws_oam_sink_policy": config.IdentifierFromProvider,
 
 	// opensearch
 	//
