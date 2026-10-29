@@ -1,0 +1,80 @@
+# SPDX-FileCopyrightText: 2026 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
+apiVersion: oam.aws.upbound.io/v1beta1
+kind: Link
+metadata:
+  annotations:
+    meta.upbound.io/example-id: oam/v1beta1/link
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    labelTemplate: $AccountName
+    linkConfiguration:
+      logGroupConfiguration:
+        filter: LogGroupName LIKE '/aws/eks/%'
+    region: us-west-1
+    resourceTypes:
+    - AWS::Logs::LogGroup
+    sinkIdentifierSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    tags:
+      Env: prod
+
+---
+
+apiVersion: oam.aws.upbound.io/v1beta1
+kind: Sink
+metadata:
+  annotations:
+    meta.upbound.io/example-id: oam/v1beta1/link
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  providerConfigRef:
+    name: peer
+  forProvider:
+    name: ExampleSink
+    region: us-west-1
+
+---
+
+apiVersion: oam.aws.upbound.io/v1beta1
+kind: SinkPolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: oam/v1beta1/link
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  providerConfigRef:
+    name: peer
+  forProvider:
+    policy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {"AWS": "${data.aws_account_id}"},
+            "Action": ["oam:CreateLink", "oam:UpdateLink"],
+            "Resource": "*",
+            "Condition": {
+              "ForAllValues:StringEquals": {
+                "oam:ResourceTypes": ["AWS::Logs::LogGroup"]
+              }
+            }
+          }
+        ]
+      }
+    region: us-west-1
+    sinkIdentifierSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

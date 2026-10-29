@@ -753,7 +753,9 @@ import (
 	vpcattachment "github.com/upbound/provider-aws/v2/internal/controller/namespaced/networkmanager/vpcattachment"
 	monitor "github.com/upbound/provider-aws/v2/internal/controller/namespaced/networkmonitor/monitor"
 	probe "github.com/upbound/provider-aws/v2/internal/controller/namespaced/networkmonitor/probe"
+	linkoam "github.com/upbound/provider-aws/v2/internal/controller/namespaced/oam/link"
 	sink "github.com/upbound/provider-aws/v2/internal/controller/namespaced/oam/sink"
+	sinkpolicy "github.com/upbound/provider-aws/v2/internal/controller/namespaced/oam/sinkpolicy"
 	authorizevpcendpointaccess "github.com/upbound/provider-aws/v2/internal/controller/namespaced/opensearch/authorizevpcendpointaccess"
 	domainopensearch "github.com/upbound/provider-aws/v2/internal/controller/namespaced/opensearch/domain"
 	domainpolicyopensearch "github.com/upbound/provider-aws/v2/internal/controller/namespaced/opensearch/domainpolicy"
@@ -1827,7 +1829,9 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		vpcattachment.Setup,
 		monitor.Setup,
 		probe.Setup,
+		linkoam.Setup,
 		sink.Setup,
+		sinkpolicy.Setup,
 		authorizevpcendpointaccess.Setup,
 		domainopensearch.Setup,
 		domainpolicyopensearch.Setup,
@@ -2907,7 +2911,9 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		vpcattachment.SetupGated,
 		monitor.SetupGated,
 		probe.SetupGated,
+		linkoam.SetupGated,
 		sink.SetupGated,
+		sinkpolicy.SetupGated,
 		authorizevpcendpointaccess.SetupGated,
 		domainopensearch.SetupGated,
 		domainpolicyopensearch.SetupGated,
@@ -3986,7 +3992,9 @@ func SetupWebhookWithManager_monolith(mgr ctrl.Manager) error {
 		vpcattachment.SetupWebhookWithManager,
 		monitor.SetupWebhookWithManager,
 		probe.SetupWebhookWithManager,
+		linkoam.SetupWebhookWithManager,
 		sink.SetupWebhookWithManager,
+		sinkpolicy.SetupWebhookWithManager,
 		authorizevpcendpointaccess.SetupWebhookWithManager,
 		domainopensearch.SetupWebhookWithManager,
 		domainpolicyopensearch.SetupWebhookWithManager,
