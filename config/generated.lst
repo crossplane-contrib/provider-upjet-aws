@@ -111,6 +111,7 @@
 "aws_autoscalingplans_scaling_plan",
 "aws_backup_framework",
 "aws_backup_global_settings",
+"aws_backup_logically_air_gapped_vault",
 "aws_backup_plan",
 "aws_backup_region_settings",
 "aws_backup_report_plan",
