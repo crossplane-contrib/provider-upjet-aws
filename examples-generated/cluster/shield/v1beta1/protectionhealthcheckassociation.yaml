@@ -1,0 +1,75 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
+apiVersion: shield.aws.upbound.io/v1beta1
+kind: ProtectionHealthCheckAssociation
+metadata:
+  annotations:
+    meta.upbound.io/example-id: shield/v1beta1/protectionhealthcheckassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    healthCheckArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    shieldProtectionIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: EIP
+metadata:
+  annotations:
+    meta.upbound.io/example-id: shield/v1beta1/protectionhealthcheckassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    domain: vpc
+    tags:
+      Name: example
+
+---
+
+apiVersion: route53.aws.upbound.io/v1beta1
+kind: HealthCheck
+metadata:
+  annotations:
+    meta.upbound.io/example-id: shield/v1beta1/protectionhealthcheckassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    failureThreshold: "3"
+    ipAddress: ${aws_eip.example.public_ip}
+    port: 80
+    requestInterval: "30"
+    resourcePath: /ready
+    tags:
+      Name: tf-example-health-check
+    type: HTTP
+
+---
+
+apiVersion: shield.aws.upbound.io/v1beta1
+kind: Protection
+metadata:
+  annotations:
+    meta.upbound.io/example-id: shield/v1beta1/protectionhealthcheckassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    name: example-protection
+    resourceArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: aws_partition

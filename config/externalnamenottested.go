@@ -467,13 +467,8 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 
 	// shield
 	//
-	// Shield protection resources can be imported by specifying their ID
-	"aws_shield_protection": config.IdentifierFromProvider,
 	// Shield protection group resources can be imported by specifying their protection group id
 	"aws_shield_protection_group": config.ParameterAsIdentifier("protection_group_id"),
-	// Shield protection health check association resources can be imported by specifying the shield_protection_id and health_check_arn
-	// Example: ff9592dc-22f3-4e88-afa1-7b29fde9669a+arn:aws:route53:::healthcheck/3742b175-edb9-46bc-9359-f53e3b794b1b
-	"aws_shield_protection_health_check_association": config.TemplatedStringAsIdentifier("", "{{ .parameters.shield_protection_id }}+{{ .parameters.health_check_arn }}"),
 
 	// transfer
 	//
