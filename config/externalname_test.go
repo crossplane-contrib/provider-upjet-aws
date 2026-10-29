@@ -350,3 +350,47 @@ func TestOpensearchAuthorizeVPCEndpointAccess(t *testing.T) {
 		}
 	})
 }
+
+// TestDBProxyEndpointExternalName checks the mapping against the Terraform ID,
+// which is DBPROXYNAME/DBPROXYENDPOINTNAME (proxyEndpointCreateResourceID in
+// internal/service/rds/proxy_endpoint.go).
+func TestDBProxyEndpointExternalName(t *testing.T) {
+	e := TerraformPluginSDKExternalNameConfigs["aws_db_proxy_endpoint"]
+
+	cases := map[string]struct {
+		proxyName    string
+		externalName string
+		id           string
+	}{
+		"DifferentNames": {
+			proxyName:    "my-proxy",
+			externalName: "my-proxy-reader",
+			id:           "my-proxy/my-proxy-reader",
+		},
+		"SameNames": {
+			proxyName:    "my-proxy",
+			externalName: "my-proxy",
+			id:           "my-proxy/my-proxy",
+		},
+	}
+
+	for name, tc := range cases {
+		t.Run(name, func(t *testing.T) {
+			parameters := map[string]any{"db_proxy_name": tc.proxyName}
+			id, err := e.GetIDFn(context.Background(), tc.externalName, parameters, nil)
+			if err != nil {
+				t.Fatalf("GetIDFn() error = %v, want nil", err)
+			}
+			if id != tc.id {
+				t.Errorf("GetIDFn() = %q, want %q", id, tc.id)
+			}
+			got, err := e.GetExternalNameFn(map[string]any{"id": tc.id})
+			if err != nil {
+				t.Fatalf("GetExternalNameFn() error = %v, want nil", err)
+			}
+			if got != tc.externalName {
+				t.Errorf("GetExternalNameFn() = %q, want %q", got, tc.externalName)
+			}
+		})
+	}
+}
