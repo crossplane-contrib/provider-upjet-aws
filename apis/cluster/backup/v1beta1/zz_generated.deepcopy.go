@@ -1114,6 +1114,16 @@ func (in *LogicallyAirGappedVaultInitParameters) DeepCopyInto(out *LogicallyAirG
 		*out = new(string)
 		**out = **in
 	}
+	if in.EncryptionKeyArnRef != nil {
+		in, out := &in.EncryptionKeyArnRef, &out.EncryptionKeyArnRef
+		*out = new(v2.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.EncryptionKeyArnSelector != nil {
+		in, out := &in.EncryptionKeyArnSelector, &out.EncryptionKeyArnSelector
+		*out = new(v2.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.MaxRetentionDays != nil {
 		in, out := &in.MaxRetentionDays, &out.MaxRetentionDays
 		*out = new(float64)
@@ -1268,6 +1278,16 @@ func (in *LogicallyAirGappedVaultParameters) DeepCopyInto(out *LogicallyAirGappe
 		in, out := &in.EncryptionKeyArn, &out.EncryptionKeyArn
 		*out = new(string)
 		**out = **in
+	}
+	if in.EncryptionKeyArnRef != nil {
+		in, out := &in.EncryptionKeyArnRef, &out.EncryptionKeyArnRef
+		*out = new(v2.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.EncryptionKeyArnSelector != nil {
+		in, out := &in.EncryptionKeyArnSelector, &out.EncryptionKeyArnSelector
+		*out = new(v2.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.MaxRetentionDays != nil {
 		in, out := &in.MaxRetentionDays, &out.MaxRetentionDays

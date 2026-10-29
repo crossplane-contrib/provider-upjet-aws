@@ -16,7 +16,17 @@ import (
 type LogicallyAirGappedVaultInitParameters struct {
 
 	// The AWS KMS key identifier (ARN) used to encrypt the backups in the logically air-gapped vault.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kms/v1beta1.Key
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	EncryptionKeyArn *string `json:"encryptionKeyArn,omitempty" tf:"encryption_key_arn,omitempty"`
+
+	// Reference to a Key in kms to populate encryptionKeyArn.
+	// +kubebuilder:validation:Optional
+	EncryptionKeyArnRef *v2.NamespacedReference `json:"encryptionKeyArnRef,omitempty" tf:"-"`
+
+	// Selector for a Key in kms to populate encryptionKeyArn.
+	// +kubebuilder:validation:Optional
+	EncryptionKeyArnSelector *v2.NamespacedSelector `json:"encryptionKeyArnSelector,omitempty" tf:"-"`
 
 	// Maximum retention period that the Logically Air Gapped Backup Vault retains recovery points.
 	MaxRetentionDays *float64 `json:"maxRetentionDays,omitempty" tf:"max_retention_days,omitempty"`
@@ -62,8 +72,18 @@ type LogicallyAirGappedVaultObservation struct {
 type LogicallyAirGappedVaultParameters struct {
 
 	// The AWS KMS key identifier (ARN) used to encrypt the backups in the logically air-gapped vault.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kms/v1beta1.Key
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	EncryptionKeyArn *string `json:"encryptionKeyArn,omitempty" tf:"encryption_key_arn,omitempty"`
+
+	// Reference to a Key in kms to populate encryptionKeyArn.
+	// +kubebuilder:validation:Optional
+	EncryptionKeyArnRef *v2.NamespacedReference `json:"encryptionKeyArnRef,omitempty" tf:"-"`
+
+	// Selector for a Key in kms to populate encryptionKeyArn.
+	// +kubebuilder:validation:Optional
+	EncryptionKeyArnSelector *v2.NamespacedSelector `json:"encryptionKeyArnSelector,omitempty" tf:"-"`
 
 	// Maximum retention period that the Logically Air Gapped Backup Vault retains recovery points.
 	// +kubebuilder:validation:Optional
