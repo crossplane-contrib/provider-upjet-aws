@@ -1,0 +1,65 @@
+# SPDX-FileCopyrightText: 2026 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: shield.aws.upbound.io/v1beta1
+kind: Protection
+metadata:
+  annotations:
+    meta.upbound.io/example-id: shield/v1beta1/protection
+    uptest.upbound.io/timeout: "3600"
+    upjet.upbound.io/manual-intervention: >
+      Requires an active AWS Shield Advanced subscription in the account,
+      which has a monthly fee and a one-year commitment.
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    name: example
+    resourceArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    tags:
+      Environment: Dev
+
+---
+
+apiVersion: cloudfront.aws.upbound.io/v1beta2
+kind: Distribution
+metadata:
+  annotations:
+    meta.upbound.io/example-id: shield/v1beta1/protection
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    defaultCacheBehavior:
+      allowedMethods:
+        - GET
+        - HEAD
+      cachedMethods:
+        - GET
+        - HEAD
+      forwardedValues:
+        cookies:
+          forward: none
+        queryString: false
+      targetOriginId: customOrigin
+      viewerProtocolPolicy: redirect-to-https
+    enabled: true
+    origin:
+      - customOriginConfig:
+          httpPort: 80
+          httpsPort: 443
+          originProtocolPolicy: https-only
+          originSslProtocols:
+            - TLSv1.2
+        domainName: app.my.cloud
+        originId: customOrigin
+    restrictions:
+      geoRestriction:
+        restrictionType: none
+    viewerCertificate:
+      cloudfrontDefaultCertificate: true

@@ -285,6 +285,7 @@ import (
 	v1beta2sesv2 "github.com/upbound/provider-aws/v2/apis/cluster/sesv2/v1beta2"
 	v1beta1sfn "github.com/upbound/provider-aws/v2/apis/cluster/sfn/v1beta1"
 	v1beta2sfn "github.com/upbound/provider-aws/v2/apis/cluster/sfn/v1beta2"
+	v1beta1shield "github.com/upbound/provider-aws/v2/apis/cluster/shield/v1beta1"
 	v1beta1signer "github.com/upbound/provider-aws/v2/apis/cluster/signer/v1beta1"
 	v1beta2signer "github.com/upbound/provider-aws/v2/apis/cluster/signer/v1beta2"
 	v1beta1sns "github.com/upbound/provider-aws/v2/apis/cluster/sns/v1beta1"
@@ -595,6 +596,7 @@ func init() {
 		v1beta2sesv2.SchemeBuilder.AddToScheme,
 		v1beta1sfn.SchemeBuilder.AddToScheme,
 		v1beta2sfn.SchemeBuilder.AddToScheme,
+		v1beta1shield.SchemeBuilder.AddToScheme,
 		v1beta1signer.SchemeBuilder.AddToScheme,
 		v1beta2signer.SchemeBuilder.AddToScheme,
 		v1beta1sns.SchemeBuilder.AddToScheme,

@@ -50,6 +50,11 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	// terraform-plugin-framework
 	"aws_appconfig_environment": appConfigEnvironment(),
 
+	// backup
+	//
+	// Backup Logically Air Gapped Vault can be imported using the name
+	"aws_backup_logically_air_gapped_vault": config.NameAsIdentifier,
+
 	// batch
 	// AWS Batch job queue can be imported using the name
 	"aws_batch_job_queue": config.TemplatedStringAsIdentifier("name", fullARNTemplate("batch", "job-queue/{{ .external_name }}")),
@@ -2197,9 +2202,15 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 
 	// oam
 	//
+	// aws_oam_link can be imported using the ARN
+	// Example: arn:aws:oam:us-west-2:123456789012:link/link-id
+	"aws_oam_link": config.IdentifierFromProvider,
 	// aws_oam_sink can be imported using th ARN
 	// Example: arn:aws:oam:us-west-2:123456789012:sink/sink-id
 	"aws_oam_sink": config.IdentifierFromProvider,
+	// aws_oam_sink_policy can be imported using the ARN of the sink
+	// Example: arn:aws:oam:us-west-2:123456789012:sink/sink-id
+	"aws_oam_sink_policy": config.IdentifierFromProvider,
 
 	// opensearch
 	//
@@ -2802,6 +2813,14 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"aws_sfn_activity": config.TemplatedStringAsIdentifier("name", fullARNTemplate("states", "activity:{{ .external_name }}")),
 	//
 	"aws_sfn_state_machine": config.TemplatedStringAsIdentifier("name", fullARNTemplate("states", "stateMachine:{{ .external_name }}")),
+
+	// shield
+	//
+	// Shield protection resources can be imported by specifying their ID
+	"aws_shield_protection": config.IdentifierFromProvider,
+	// Shield protection health check association resources can be imported by specifying the shield_protection_id and health_check_arn
+	// Example: ff9592dc-22f3-4e88-afa1-7b29fde9669a+arn:aws:route53:::healthcheck/3742b175-edb9-46bc-9359-f53e3b794b1b
+	"aws_shield_protection_health_check_association": config.TemplatedStringAsIdentifier("", "{{ .parameters.shield_protection_id }}+{{ .parameters.health_check_arn }}"),
 
 	// signer
 	//

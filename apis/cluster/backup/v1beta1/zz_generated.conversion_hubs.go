@@ -10,6 +10,9 @@ package v1beta1
 func (tr *GlobalSettings) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *LogicallyAirGappedVault) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *RegionSettings) Hub() {}
 
 // Hub marks this type as a conversion hub.
