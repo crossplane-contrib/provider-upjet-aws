@@ -977,6 +977,8 @@ import (
 	emailidentitymailfromattributes "github.com/upbound/provider-aws/v2/internal/controller/cluster/sesv2/emailidentitymailfromattributes"
 	activity "github.com/upbound/provider-aws/v2/internal/controller/cluster/sfn/activity"
 	statemachine "github.com/upbound/provider-aws/v2/internal/controller/cluster/sfn/statemachine"
+	protection "github.com/upbound/provider-aws/v2/internal/controller/cluster/shield/protection"
+	protectionhealthcheckassociation "github.com/upbound/provider-aws/v2/internal/controller/cluster/shield/protectionhealthcheckassociation"
 	signingjob "github.com/upbound/provider-aws/v2/internal/controller/cluster/signer/signingjob"
 	signingprofile "github.com/upbound/provider-aws/v2/internal/controller/cluster/signer/signingprofile"
 	signingprofilepermission "github.com/upbound/provider-aws/v2/internal/controller/cluster/signer/signingprofilepermission"
@@ -2051,6 +2053,8 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		emailidentitymailfromattributes.Setup,
 		activity.Setup,
 		statemachine.Setup,
+		protection.Setup,
+		protectionhealthcheckassociation.Setup,
 		signingjob.Setup,
 		signingprofile.Setup,
 		signingprofilepermission.Setup,
@@ -3131,6 +3135,8 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		emailidentitymailfromattributes.SetupGated,
 		activity.SetupGated,
 		statemachine.SetupGated,
+		protection.SetupGated,
+		protectionhealthcheckassociation.SetupGated,
 		signingjob.SetupGated,
 		signingprofile.SetupGated,
 		signingprofilepermission.SetupGated,
@@ -4210,6 +4216,8 @@ func SetupWebhookWithManager_monolith(mgr ctrl.Manager) error {
 		emailidentitymailfromattributes.SetupWebhookWithManager,
 		activity.SetupWebhookWithManager,
 		statemachine.SetupWebhookWithManager,
+		protection.SetupWebhookWithManager,
+		protectionhealthcheckassociation.SetupWebhookWithManager,
 		signingjob.SetupWebhookWithManager,
 		signingprofile.SetupWebhookWithManager,
 		signingprofilepermission.SetupWebhookWithManager,

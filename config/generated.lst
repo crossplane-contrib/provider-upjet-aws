@@ -931,6 +931,8 @@
 "aws_sesv2_email_identity_mail_from_attributes",
 "aws_sfn_activity",
 "aws_sfn_state_machine",
+"aws_shield_protection",
+"aws_shield_protection_health_check_association",
 "aws_signer_signing_job",
 "aws_signer_signing_profile",
 "aws_signer_signing_profile_permission",
