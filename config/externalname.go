@@ -50,6 +50,11 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	// terraform-plugin-framework
 	"aws_appconfig_environment": appConfigEnvironment(),
 
+	// backup
+	//
+	// Backup Logically Air Gapped Vault can be imported using the name
+	"aws_backup_logically_air_gapped_vault": config.NameAsIdentifier,
+
 	// batch
 	// AWS Batch job queue can be imported using the name
 	"aws_batch_job_queue": config.TemplatedStringAsIdentifier("name", fullARNTemplate("batch", "job-queue/{{ .external_name }}")),
