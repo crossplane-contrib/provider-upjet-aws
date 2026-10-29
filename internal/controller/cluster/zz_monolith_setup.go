@@ -122,6 +122,7 @@ import (
 	scalingplan "github.com/upbound/provider-aws/v2/internal/controller/cluster/autoscalingplans/scalingplan"
 	framework "github.com/upbound/provider-aws/v2/internal/controller/cluster/backup/framework"
 	globalsettings "github.com/upbound/provider-aws/v2/internal/controller/cluster/backup/globalsettings"
+	logicallyairgappedvault "github.com/upbound/provider-aws/v2/internal/controller/cluster/backup/logicallyairgappedvault"
 	plan "github.com/upbound/provider-aws/v2/internal/controller/cluster/backup/plan"
 	regionsettings "github.com/upbound/provider-aws/v2/internal/controller/cluster/backup/regionsettings"
 	reportplan "github.com/upbound/provider-aws/v2/internal/controller/cluster/backup/reportplan"
@@ -1198,6 +1199,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		scalingplan.Setup,
 		framework.Setup,
 		globalsettings.Setup,
+		logicallyairgappedvault.Setup,
 		plan.Setup,
 		regionsettings.Setup,
 		reportplan.Setup,
@@ -2280,6 +2282,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		scalingplan.SetupGated,
 		framework.SetupGated,
 		globalsettings.SetupGated,
+		logicallyairgappedvault.SetupGated,
 		plan.SetupGated,
 		regionsettings.SetupGated,
 		reportplan.SetupGated,
@@ -3361,6 +3364,7 @@ func SetupWebhookWithManager_monolith(mgr ctrl.Manager) error {
 		scalingplan.SetupWebhookWithManager,
 		framework.SetupWebhookWithManager,
 		globalsettings.SetupWebhookWithManager,
+		logicallyairgappedvault.SetupWebhookWithManager,
 		plan.SetupWebhookWithManager,
 		regionsettings.SetupWebhookWithManager,
 		reportplan.SetupWebhookWithManager,
