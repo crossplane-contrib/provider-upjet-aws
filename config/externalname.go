@@ -752,7 +752,7 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// cloudfront
 	//
 	// Cloudfront Cache Policies can be imported using the id
-	"aws_cloudfront_cache_policy": config.IdentifierFromProvider,
+	"aws_cloudfront_cache_policy": cloudFrontPolicyIdentifier(),
 	// Cloudfront Distributions can be imported using the id
 	"aws_cloudfront_distribution": config.IdentifierFromProvider,
 	// Cloudfront Field Level Encryption Config can be imported using the id
@@ -770,14 +770,14 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// Cloudfront Origin Access Identities can be imported using the id
 	"aws_cloudfront_origin_access_identity": config.IdentifierFromProvider,
 	// Cloudfront Origin Request Policies can be imported using the id
-	"aws_cloudfront_origin_request_policy": config.IdentifierFromProvider,
+	"aws_cloudfront_origin_request_policy": cloudFrontPolicyIdentifier(),
 	// CloudFront Public Key can be imported using the id
 	"aws_cloudfront_public_key": config.IdentifierFromProvider,
 	// CloudFront real-time log configurations can be imported using the ARN,
 	// $ terraform import aws_cloudfront_realtime_log_config.example arn:aws:cloudfront::111122223333:realtime-log-config/ExampleNameForRealtimeLogConfig
 	"aws_cloudfront_realtime_log_config": config.IdentifierFromProvider,
 	// Cloudfront Response Headers Policies can be imported using the id
-	"aws_cloudfront_response_headers_policy": config.IdentifierFromProvider,
+	"aws_cloudfront_response_headers_policy": cloudFrontPolicyIdentifier(),
 
 	// cloudsearch
 	//
@@ -4339,6 +4339,21 @@ func frameworkNameAsIdentifier() config.ExternalName {
 func cloudfrontKeyValueStore() config.ExternalName {
 	e := frameworkNameAsIdentifier()
 	e.OmittedFields = []string{"name"}
+	return e
+}
+
+// cloudFrontPolicyIdentifier is IdentifierFromProvider, except that the
+// Terraform ID defaults to forProvider.name while the external name is empty.
+// cloudfrontpolicy.ResolveNameOnRead then resolves that name to the policy ID.
+func cloudFrontPolicyIdentifier() config.ExternalName {
+	e := config.IdentifierFromProvider
+	e.GetIDFn = func(_ context.Context, externalName string, parameters map[string]any, _ map[string]any) (string, error) {
+		if externalName != "" {
+			return externalName, nil
+		}
+		name, _ := parameters["name"].(string)
+		return name, nil
+	}
 	return e
 }
 

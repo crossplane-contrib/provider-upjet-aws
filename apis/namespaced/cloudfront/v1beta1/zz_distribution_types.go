@@ -220,7 +220,17 @@ type DefaultCacheBehaviorInitParameters struct {
 	AllowedMethods []*string `json:"allowedMethods,omitempty" tf:"allowed_methods,omitempty"`
 
 	// Unique identifier of the cache policy that is attached to the cache behavior. If configuring the default_cache_behavior either cache_policy_id or forwarded_values must be set.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/cloudfront/v1beta1.CachePolicy
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.TerraformID()
 	CachePolicyID *string `json:"cachePolicyId,omitempty" tf:"cache_policy_id,omitempty"`
+
+	// Reference to a CachePolicy in cloudfront to populate cachePolicyId.
+	// +kubebuilder:validation:Optional
+	CachePolicyIDRef *v2.NamespacedReference `json:"cachePolicyIdRef,omitempty" tf:"-"`
+
+	// Selector for a CachePolicy in cloudfront to populate cachePolicyId.
+	// +kubebuilder:validation:Optional
+	CachePolicyIDSelector *v2.NamespacedSelector `json:"cachePolicyIdSelector,omitempty" tf:"-"`
 
 	// Controls whether CloudFront caches the response to requests using the specified HTTP methods.
 	// +listType=set
@@ -254,13 +264,33 @@ type DefaultCacheBehaviorInitParameters struct {
 	MinTTL *float64 `json:"minTtl,omitempty" tf:"min_ttl,omitempty"`
 
 	// Unique identifier of the origin request policy that is attached to the behavior.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/cloudfront/v1beta1.OriginRequestPolicy
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.TerraformID()
 	OriginRequestPolicyID *string `json:"originRequestPolicyId,omitempty" tf:"origin_request_policy_id,omitempty"`
+
+	// Reference to a OriginRequestPolicy in cloudfront to populate originRequestPolicyId.
+	// +kubebuilder:validation:Optional
+	OriginRequestPolicyIDRef *v2.NamespacedReference `json:"originRequestPolicyIdRef,omitempty" tf:"-"`
+
+	// Selector for a OriginRequestPolicy in cloudfront to populate originRequestPolicyId.
+	// +kubebuilder:validation:Optional
+	OriginRequestPolicyIDSelector *v2.NamespacedSelector `json:"originRequestPolicyIdSelector,omitempty" tf:"-"`
 
 	// ARN of the real-time log configuration that is attached to this cache behavior.
 	RealtimeLogConfigArn *string `json:"realtimeLogConfigArn,omitempty" tf:"realtime_log_config_arn,omitempty"`
 
 	// Identifier for a response headers policy.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/cloudfront/v1beta1.ResponseHeadersPolicy
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.TerraformID()
 	ResponseHeadersPolicyID *string `json:"responseHeadersPolicyId,omitempty" tf:"response_headers_policy_id,omitempty"`
+
+	// Reference to a ResponseHeadersPolicy in cloudfront to populate responseHeadersPolicyId.
+	// +kubebuilder:validation:Optional
+	ResponseHeadersPolicyIDRef *v2.NamespacedReference `json:"responseHeadersPolicyIdRef,omitempty" tf:"-"`
+
+	// Selector for a ResponseHeadersPolicy in cloudfront to populate responseHeadersPolicyId.
+	// +kubebuilder:validation:Optional
+	ResponseHeadersPolicyIDSelector *v2.NamespacedSelector `json:"responseHeadersPolicyIdSelector,omitempty" tf:"-"`
 
 	// Indicates whether you want to distribute media files in Microsoft Smooth Streaming format using the origin that is associated with this cache behavior.
 	SmoothStreaming *bool `json:"smoothStreaming,omitempty" tf:"smooth_streaming,omitempty"`
@@ -351,8 +381,18 @@ type DefaultCacheBehaviorParameters struct {
 	AllowedMethods []*string `json:"allowedMethods" tf:"allowed_methods,omitempty"`
 
 	// Unique identifier of the cache policy that is attached to the cache behavior. If configuring the default_cache_behavior either cache_policy_id or forwarded_values must be set.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/cloudfront/v1beta1.CachePolicy
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.TerraformID()
 	// +kubebuilder:validation:Optional
 	CachePolicyID *string `json:"cachePolicyId,omitempty" tf:"cache_policy_id,omitempty"`
+
+	// Reference to a CachePolicy in cloudfront to populate cachePolicyId.
+	// +kubebuilder:validation:Optional
+	CachePolicyIDRef *v2.NamespacedReference `json:"cachePolicyIdRef,omitempty" tf:"-"`
+
+	// Selector for a CachePolicy in cloudfront to populate cachePolicyId.
+	// +kubebuilder:validation:Optional
+	CachePolicyIDSelector *v2.NamespacedSelector `json:"cachePolicyIdSelector,omitempty" tf:"-"`
 
 	// Controls whether CloudFront caches the response to requests using the specified HTTP methods.
 	// +kubebuilder:validation:Optional
@@ -396,16 +436,36 @@ type DefaultCacheBehaviorParameters struct {
 	MinTTL *float64 `json:"minTtl,omitempty" tf:"min_ttl,omitempty"`
 
 	// Unique identifier of the origin request policy that is attached to the behavior.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/cloudfront/v1beta1.OriginRequestPolicy
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.TerraformID()
 	// +kubebuilder:validation:Optional
 	OriginRequestPolicyID *string `json:"originRequestPolicyId,omitempty" tf:"origin_request_policy_id,omitempty"`
+
+	// Reference to a OriginRequestPolicy in cloudfront to populate originRequestPolicyId.
+	// +kubebuilder:validation:Optional
+	OriginRequestPolicyIDRef *v2.NamespacedReference `json:"originRequestPolicyIdRef,omitempty" tf:"-"`
+
+	// Selector for a OriginRequestPolicy in cloudfront to populate originRequestPolicyId.
+	// +kubebuilder:validation:Optional
+	OriginRequestPolicyIDSelector *v2.NamespacedSelector `json:"originRequestPolicyIdSelector,omitempty" tf:"-"`
 
 	// ARN of the real-time log configuration that is attached to this cache behavior.
 	// +kubebuilder:validation:Optional
 	RealtimeLogConfigArn *string `json:"realtimeLogConfigArn,omitempty" tf:"realtime_log_config_arn,omitempty"`
 
 	// Identifier for a response headers policy.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/cloudfront/v1beta1.ResponseHeadersPolicy
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.TerraformID()
 	// +kubebuilder:validation:Optional
 	ResponseHeadersPolicyID *string `json:"responseHeadersPolicyId,omitempty" tf:"response_headers_policy_id,omitempty"`
+
+	// Reference to a ResponseHeadersPolicy in cloudfront to populate responseHeadersPolicyId.
+	// +kubebuilder:validation:Optional
+	ResponseHeadersPolicyIDRef *v2.NamespacedReference `json:"responseHeadersPolicyIdRef,omitempty" tf:"-"`
+
+	// Selector for a ResponseHeadersPolicy in cloudfront to populate responseHeadersPolicyId.
+	// +kubebuilder:validation:Optional
+	ResponseHeadersPolicyIDSelector *v2.NamespacedSelector `json:"responseHeadersPolicyIdSelector,omitempty" tf:"-"`
 
 	// Indicates whether you want to distribute media files in Microsoft Smooth Streaming format using the origin that is associated with this cache behavior.
 	// +kubebuilder:validation:Optional
@@ -1191,7 +1251,17 @@ type OrderedCacheBehaviorInitParameters struct {
 	AllowedMethods []*string `json:"allowedMethods,omitempty" tf:"allowed_methods,omitempty"`
 
 	// Unique identifier of the cache policy that is attached to the cache behavior. If configuring the default_cache_behavior either cache_policy_id or forwarded_values must be set.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/cloudfront/v1beta1.CachePolicy
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.TerraformID()
 	CachePolicyID *string `json:"cachePolicyId,omitempty" tf:"cache_policy_id,omitempty"`
+
+	// Reference to a CachePolicy in cloudfront to populate cachePolicyId.
+	// +kubebuilder:validation:Optional
+	CachePolicyIDRef *v2.NamespacedReference `json:"cachePolicyIdRef,omitempty" tf:"-"`
+
+	// Selector for a CachePolicy in cloudfront to populate cachePolicyId.
+	// +kubebuilder:validation:Optional
+	CachePolicyIDSelector *v2.NamespacedSelector `json:"cachePolicyIdSelector,omitempty" tf:"-"`
 
 	// Controls whether CloudFront caches the response to requests using the specified HTTP methods.
 	// +listType=set
@@ -1225,7 +1295,17 @@ type OrderedCacheBehaviorInitParameters struct {
 	MinTTL *float64 `json:"minTtl,omitempty" tf:"min_ttl,omitempty"`
 
 	// Unique identifier of the origin request policy that is attached to the behavior.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/cloudfront/v1beta1.OriginRequestPolicy
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.TerraformID()
 	OriginRequestPolicyID *string `json:"originRequestPolicyId,omitempty" tf:"origin_request_policy_id,omitempty"`
+
+	// Reference to a OriginRequestPolicy in cloudfront to populate originRequestPolicyId.
+	// +kubebuilder:validation:Optional
+	OriginRequestPolicyIDRef *v2.NamespacedReference `json:"originRequestPolicyIdRef,omitempty" tf:"-"`
+
+	// Selector for a OriginRequestPolicy in cloudfront to populate originRequestPolicyId.
+	// +kubebuilder:validation:Optional
+	OriginRequestPolicyIDSelector *v2.NamespacedSelector `json:"originRequestPolicyIdSelector,omitempty" tf:"-"`
 
 	// Pattern (for example, images/*.jpg) that specifies which requests you want this cache behavior to apply to.
 	PathPattern *string `json:"pathPattern,omitempty" tf:"path_pattern,omitempty"`
@@ -1234,7 +1314,17 @@ type OrderedCacheBehaviorInitParameters struct {
 	RealtimeLogConfigArn *string `json:"realtimeLogConfigArn,omitempty" tf:"realtime_log_config_arn,omitempty"`
 
 	// Identifier for a response headers policy.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/cloudfront/v1beta1.ResponseHeadersPolicy
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.TerraformID()
 	ResponseHeadersPolicyID *string `json:"responseHeadersPolicyId,omitempty" tf:"response_headers_policy_id,omitempty"`
+
+	// Reference to a ResponseHeadersPolicy in cloudfront to populate responseHeadersPolicyId.
+	// +kubebuilder:validation:Optional
+	ResponseHeadersPolicyIDRef *v2.NamespacedReference `json:"responseHeadersPolicyIdRef,omitempty" tf:"-"`
+
+	// Selector for a ResponseHeadersPolicy in cloudfront to populate responseHeadersPolicyId.
+	// +kubebuilder:validation:Optional
+	ResponseHeadersPolicyIDSelector *v2.NamespacedSelector `json:"responseHeadersPolicyIdSelector,omitempty" tf:"-"`
 
 	// Indicates whether you want to distribute media files in Microsoft Smooth Streaming format using the origin that is associated with this cache behavior.
 	SmoothStreaming *bool `json:"smoothStreaming,omitempty" tf:"smooth_streaming,omitempty"`
@@ -1387,8 +1477,18 @@ type OrderedCacheBehaviorParameters struct {
 	AllowedMethods []*string `json:"allowedMethods" tf:"allowed_methods,omitempty"`
 
 	// Unique identifier of the cache policy that is attached to the cache behavior. If configuring the default_cache_behavior either cache_policy_id or forwarded_values must be set.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/cloudfront/v1beta1.CachePolicy
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.TerraformID()
 	// +kubebuilder:validation:Optional
 	CachePolicyID *string `json:"cachePolicyId,omitempty" tf:"cache_policy_id,omitempty"`
+
+	// Reference to a CachePolicy in cloudfront to populate cachePolicyId.
+	// +kubebuilder:validation:Optional
+	CachePolicyIDRef *v2.NamespacedReference `json:"cachePolicyIdRef,omitempty" tf:"-"`
+
+	// Selector for a CachePolicy in cloudfront to populate cachePolicyId.
+	// +kubebuilder:validation:Optional
+	CachePolicyIDSelector *v2.NamespacedSelector `json:"cachePolicyIdSelector,omitempty" tf:"-"`
 
 	// Controls whether CloudFront caches the response to requests using the specified HTTP methods.
 	// +kubebuilder:validation:Optional
@@ -1432,8 +1532,18 @@ type OrderedCacheBehaviorParameters struct {
 	MinTTL *float64 `json:"minTtl,omitempty" tf:"min_ttl,omitempty"`
 
 	// Unique identifier of the origin request policy that is attached to the behavior.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/cloudfront/v1beta1.OriginRequestPolicy
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.TerraformID()
 	// +kubebuilder:validation:Optional
 	OriginRequestPolicyID *string `json:"originRequestPolicyId,omitempty" tf:"origin_request_policy_id,omitempty"`
+
+	// Reference to a OriginRequestPolicy in cloudfront to populate originRequestPolicyId.
+	// +kubebuilder:validation:Optional
+	OriginRequestPolicyIDRef *v2.NamespacedReference `json:"originRequestPolicyIdRef,omitempty" tf:"-"`
+
+	// Selector for a OriginRequestPolicy in cloudfront to populate originRequestPolicyId.
+	// +kubebuilder:validation:Optional
+	OriginRequestPolicyIDSelector *v2.NamespacedSelector `json:"originRequestPolicyIdSelector,omitempty" tf:"-"`
 
 	// Pattern (for example, images/*.jpg) that specifies which requests you want this cache behavior to apply to.
 	// +kubebuilder:validation:Optional
@@ -1444,8 +1554,18 @@ type OrderedCacheBehaviorParameters struct {
 	RealtimeLogConfigArn *string `json:"realtimeLogConfigArn,omitempty" tf:"realtime_log_config_arn,omitempty"`
 
 	// Identifier for a response headers policy.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/cloudfront/v1beta1.ResponseHeadersPolicy
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.TerraformID()
 	// +kubebuilder:validation:Optional
 	ResponseHeadersPolicyID *string `json:"responseHeadersPolicyId,omitempty" tf:"response_headers_policy_id,omitempty"`
+
+	// Reference to a ResponseHeadersPolicy in cloudfront to populate responseHeadersPolicyId.
+	// +kubebuilder:validation:Optional
+	ResponseHeadersPolicyIDRef *v2.NamespacedReference `json:"responseHeadersPolicyIdRef,omitempty" tf:"-"`
+
+	// Selector for a ResponseHeadersPolicy in cloudfront to populate responseHeadersPolicyId.
+	// +kubebuilder:validation:Optional
+	ResponseHeadersPolicyIDSelector *v2.NamespacedSelector `json:"responseHeadersPolicyIdSelector,omitempty" tf:"-"`
 
 	// Indicates whether you want to distribute media files in Microsoft Smooth Streaming format using the origin that is associated with this cache behavior.
 	// +kubebuilder:validation:Optional
