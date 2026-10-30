@@ -30,7 +30,7 @@ type UserGroupInitParameters struct {
 	// +kubebuilder:validation:Optional
 	UserIDSelector *v2.NamespacedSelector `json:"userIdSelector,omitempty" tf:"-"`
 
-	// The list of user IDs that belong to the user group.
+	// The list of user IDs that belong to the user group. Important: leave this field unset when using UserGroupAssociation; put create-time seed users (for example the AWS built-in "default" user) in initProvider instead. Managing the same membership via forProvider.userIds and UserGroupAssociation causes a reconcile race.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/elasticache/v1beta1.User
 	// +crossplane:generate:reference:refFieldName=UserIDRefs
 	// +crossplane:generate:reference:selectorFieldName=UserIDSelector
@@ -61,7 +61,7 @@ type UserGroupObservation struct {
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// The list of user IDs that belong to the user group.
+	// The list of user IDs that belong to the user group. Important: leave this field unset when using UserGroupAssociation; put create-time seed users (for example the AWS built-in "default" user) in initProvider instead. Managing the same membership via forProvider.userIds and UserGroupAssociation causes a reconcile race.
 	// +listType=set
 	UserIds []*string `json:"userIds,omitempty" tf:"user_ids,omitempty"`
 }
@@ -90,7 +90,7 @@ type UserGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	UserIDSelector *v2.NamespacedSelector `json:"userIdSelector,omitempty" tf:"-"`
 
-	// The list of user IDs that belong to the user group.
+	// The list of user IDs that belong to the user group. Important: leave this field unset when using UserGroupAssociation; put create-time seed users (for example the AWS built-in "default" user) in initProvider instead. Managing the same membership via forProvider.userIds and UserGroupAssociation causes a reconcile race.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/elasticache/v1beta1.User
 	// +crossplane:generate:reference:refFieldName=UserIDRefs
 	// +crossplane:generate:reference:selectorFieldName=UserIDSelector

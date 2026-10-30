@@ -494,6 +494,7 @@ import (
 	subnetgroupelasticache "github.com/upbound/provider-aws/v2/internal/controller/namespaced/elasticache/subnetgroup"
 	userelasticache "github.com/upbound/provider-aws/v2/internal/controller/namespaced/elasticache/user"
 	usergroupelasticache "github.com/upbound/provider-aws/v2/internal/controller/namespaced/elasticache/usergroup"
+	usergroupassociation "github.com/upbound/provider-aws/v2/internal/controller/namespaced/elasticache/usergroupassociation"
 	applicationelasticbeanstalk "github.com/upbound/provider-aws/v2/internal/controller/namespaced/elasticbeanstalk/application"
 	applicationversion "github.com/upbound/provider-aws/v2/internal/controller/namespaced/elasticbeanstalk/applicationversion"
 	configurationtemplate "github.com/upbound/provider-aws/v2/internal/controller/namespaced/elasticbeanstalk/configurationtemplate"
@@ -1573,6 +1574,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		subnetgroupelasticache.Setup,
 		userelasticache.Setup,
 		usergroupelasticache.Setup,
+		usergroupassociation.Setup,
 		applicationelasticbeanstalk.Setup,
 		applicationversion.Setup,
 		configurationtemplate.Setup,
@@ -2658,6 +2660,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		subnetgroupelasticache.SetupGated,
 		userelasticache.SetupGated,
 		usergroupelasticache.SetupGated,
+		usergroupassociation.SetupGated,
 		applicationelasticbeanstalk.SetupGated,
 		applicationversion.SetupGated,
 		configurationtemplate.SetupGated,
@@ -3742,6 +3745,7 @@ func SetupWebhookWithManager_monolith(mgr ctrl.Manager) error {
 		subnetgroupelasticache.SetupWebhookWithManager,
 		userelasticache.SetupWebhookWithManager,
 		usergroupelasticache.SetupWebhookWithManager,
+		usergroupassociation.SetupWebhookWithManager,
 		applicationelasticbeanstalk.SetupWebhookWithManager,
 		applicationversion.SetupWebhookWithManager,
 		configurationtemplate.SetupWebhookWithManager,
