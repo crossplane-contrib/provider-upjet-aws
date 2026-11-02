@@ -1,0 +1,64 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
+apiVersion: rds.aws.m.upbound.io/v1beta1
+kind: Integration
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rds/v1beta1/integration
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    integrationName: example
+    region: us-west-1
+    sourceArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    targetArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: redshiftserverless.aws.m.upbound.io/v1beta1
+kind: RedshiftServerlessNamespace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rds/v1beta1/integration
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-1
+
+---
+
+apiVersion: redshiftserverless.aws.m.upbound.io/v1beta1
+kind: Workgroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rds/v1beta1/integration
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    baseCapacity: 8
+    configParameter:
+    - parameterKey: enable_case_sensitive_identifier
+      parameterValue: "true"
+    namespaceName: redshift-example
+    publiclyAccessible: false
+    region: us-west-1
+    subnetIdRefs:
+    - name: example1
+    - name: example2
+    - name: example3

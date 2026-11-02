@@ -802,6 +802,7 @@ import (
 	instancerds "github.com/upbound/provider-aws/v2/internal/controller/cluster/rds/instance"
 	instanceroleassociation "github.com/upbound/provider-aws/v2/internal/controller/cluster/rds/instanceroleassociation"
 	instancestaterds "github.com/upbound/provider-aws/v2/internal/controller/cluster/rds/instancestate"
+	integrationrds "github.com/upbound/provider-aws/v2/internal/controller/cluster/rds/integration"
 	optiongroup "github.com/upbound/provider-aws/v2/internal/controller/cluster/rds/optiongroup"
 	parametergrouprds "github.com/upbound/provider-aws/v2/internal/controller/cluster/rds/parametergroup"
 	proxy "github.com/upbound/provider-aws/v2/internal/controller/cluster/rds/proxy"
@@ -817,6 +818,7 @@ import (
 	hsmclientcertificate "github.com/upbound/provider-aws/v2/internal/controller/cluster/redshift/hsmclientcertificate"
 	hsmconfiguration "github.com/upbound/provider-aws/v2/internal/controller/cluster/redshift/hsmconfiguration"
 	parametergroupredshift "github.com/upbound/provider-aws/v2/internal/controller/cluster/redshift/parametergroup"
+	resourcepolicyredshift "github.com/upbound/provider-aws/v2/internal/controller/cluster/redshift/resourcepolicy"
 	scheduledactionredshift "github.com/upbound/provider-aws/v2/internal/controller/cluster/redshift/scheduledaction"
 	snapshotcopygrant "github.com/upbound/provider-aws/v2/internal/controller/cluster/redshift/snapshotcopygrant"
 	snapshotschedule "github.com/upbound/provider-aws/v2/internal/controller/cluster/redshift/snapshotschedule"
@@ -1881,6 +1883,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		instancerds.Setup,
 		instanceroleassociation.Setup,
 		instancestaterds.Setup,
+		integrationrds.Setup,
 		optiongroup.Setup,
 		parametergrouprds.Setup,
 		proxy.Setup,
@@ -1896,6 +1899,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		hsmclientcertificate.Setup,
 		hsmconfiguration.Setup,
 		parametergroupredshift.Setup,
+		resourcepolicyredshift.Setup,
 		scheduledactionredshift.Setup,
 		snapshotcopygrant.Setup,
 		snapshotschedule.Setup,
@@ -2966,6 +2970,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		instancerds.SetupGated,
 		instanceroleassociation.SetupGated,
 		instancestaterds.SetupGated,
+		integrationrds.SetupGated,
 		optiongroup.SetupGated,
 		parametergrouprds.SetupGated,
 		proxy.SetupGated,
@@ -2981,6 +2986,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		hsmclientcertificate.SetupGated,
 		hsmconfiguration.SetupGated,
 		parametergroupredshift.SetupGated,
+		resourcepolicyredshift.SetupGated,
 		scheduledactionredshift.SetupGated,
 		snapshotcopygrant.SetupGated,
 		snapshotschedule.SetupGated,
@@ -4050,6 +4056,7 @@ func SetupWebhookWithManager_monolith(mgr ctrl.Manager) error {
 		instancerds.SetupWebhookWithManager,
 		instanceroleassociation.SetupWebhookWithManager,
 		instancestaterds.SetupWebhookWithManager,
+		integrationrds.SetupWebhookWithManager,
 		optiongroup.SetupWebhookWithManager,
 		parametergrouprds.SetupWebhookWithManager,
 		proxy.SetupWebhookWithManager,
@@ -4065,6 +4072,7 @@ func SetupWebhookWithManager_monolith(mgr ctrl.Manager) error {
 		hsmclientcertificate.SetupWebhookWithManager,
 		hsmconfiguration.SetupWebhookWithManager,
 		parametergroupredshift.SetupWebhookWithManager,
+		resourcepolicyredshift.SetupWebhookWithManager,
 		scheduledactionredshift.SetupWebhookWithManager,
 		snapshotcopygrant.SetupWebhookWithManager,
 		snapshotschedule.SetupWebhookWithManager,

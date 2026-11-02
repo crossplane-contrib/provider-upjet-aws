@@ -28,6 +28,9 @@ func (tr *HSMConfiguration) Hub() {}
 func (tr *ParameterGroup) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *ResourcePolicy) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *ScheduledAction) Hub() {}
 
 // Hub marks this type as a conversion hub.

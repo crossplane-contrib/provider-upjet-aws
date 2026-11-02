@@ -23,6 +23,7 @@ import (
 	instance "github.com/upbound/provider-aws/v2/internal/controller/cluster/rds/instance"
 	instanceroleassociation "github.com/upbound/provider-aws/v2/internal/controller/cluster/rds/instanceroleassociation"
 	instancestate "github.com/upbound/provider-aws/v2/internal/controller/cluster/rds/instancestate"
+	integration "github.com/upbound/provider-aws/v2/internal/controller/cluster/rds/integration"
 	optiongroup "github.com/upbound/provider-aws/v2/internal/controller/cluster/rds/optiongroup"
 	parametergroup "github.com/upbound/provider-aws/v2/internal/controller/cluster/rds/parametergroup"
 	proxy "github.com/upbound/provider-aws/v2/internal/controller/cluster/rds/proxy"
@@ -51,6 +52,7 @@ func Setup_rds(mgr ctrl.Manager, o controller.Options) error {
 		instance.Setup,
 		instanceroleassociation.Setup,
 		instancestate.Setup,
+		integration.Setup,
 		optiongroup.Setup,
 		parametergroup.Setup,
 		proxy.Setup,
@@ -85,6 +87,7 @@ func SetupGated_rds(mgr ctrl.Manager, o controller.Options) error {
 		instance.SetupGated,
 		instanceroleassociation.SetupGated,
 		instancestate.SetupGated,
+		integration.SetupGated,
 		optiongroup.SetupGated,
 		parametergroup.SetupGated,
 		proxy.SetupGated,
@@ -118,6 +121,7 @@ func SetupWebhookWithManager_rds(mgr ctrl.Manager) error {
 		instance.SetupWebhookWithManager,
 		instanceroleassociation.SetupWebhookWithManager,
 		instancestate.SetupWebhookWithManager,
+		integration.SetupWebhookWithManager,
 		optiongroup.SetupWebhookWithManager,
 		parametergroup.SetupWebhookWithManager,
 		proxy.SetupWebhookWithManager,
