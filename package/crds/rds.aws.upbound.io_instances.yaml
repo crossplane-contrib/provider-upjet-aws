@@ -648,6 +648,20 @@ spec:
                   multiAz:
                     description: Specifies if the RDS instance is multi-AZ
                     type: boolean
+                  multiTenant:
+                    description: Whether to use the multi-tenant configuration of
+                      the Oracle CDB architecture. Only valid for RDS for Oracle CDB
+                      engines (oracle-ee-cdb and oracle-se2-cdb). Changing from false
+                      to true converts the instance in place and requires apply_immediately
+                      = true; RDS also applies any pending modifications at that time.
+                      Restored instances and read replicas are converted after creation.
+                      Conversion is irreversible, so changing from true to false forces
+                      a new resource. After conversion, RDS rejects changes to password,
+                      password_wo, and manage_master_user_password on the instance;
+                      manage master user credentials on the tenant database instead.
+                      Additional tenant databases are managed outside this resource.
+                      See the AWS documentation for details.
+                    type: boolean
                   name:
                     description: The name of the database to create when the DB instance
                       is created. If this parameter is not specified, no database
@@ -1788,6 +1802,20 @@ spec:
                   multiAz:
                     description: Specifies if the RDS instance is multi-AZ
                     type: boolean
+                  multiTenant:
+                    description: Whether to use the multi-tenant configuration of
+                      the Oracle CDB architecture. Only valid for RDS for Oracle CDB
+                      engines (oracle-ee-cdb and oracle-se2-cdb). Changing from false
+                      to true converts the instance in place and requires apply_immediately
+                      = true; RDS also applies any pending modifications at that time.
+                      Restored instances and read replicas are converted after creation.
+                      Conversion is irreversible, so changing from true to false forces
+                      a new resource. After conversion, RDS rejects changes to password,
+                      password_wo, and manage_master_user_password on the instance;
+                      manage master user credentials on the tenant database instead.
+                      Additional tenant databases are managed outside this resource.
+                      See the AWS documentation for details.
+                    type: boolean
                   name:
                     description: The name of the database to create when the DB instance
                       is created. If this parameter is not specified, no database
@@ -2771,6 +2799,20 @@ spec:
                   multiAz:
                     description: Specifies if the RDS instance is multi-AZ
                     type: boolean
+                  multiTenant:
+                    description: Whether to use the multi-tenant configuration of
+                      the Oracle CDB architecture. Only valid for RDS for Oracle CDB
+                      engines (oracle-ee-cdb and oracle-se2-cdb). Changing from false
+                      to true converts the instance in place and requires apply_immediately
+                      = true; RDS also applies any pending modifications at that time.
+                      Restored instances and read replicas are converted after creation.
+                      Conversion is irreversible, so changing from true to false forces
+                      a new resource. After conversion, RDS rejects changes to password,
+                      password_wo, and manage_master_user_password on the instance;
+                      manage master user credentials on the tenant database instead.
+                      Additional tenant databases are managed outside this resource.
+                      See the AWS documentation for details.
+                    type: boolean
                   name:
                     description: The name of the database to create when the DB instance
                       is created. If this parameter is not specified, no database
@@ -3711,6 +3753,20 @@ spec:
                     type: object
                   multiAz:
                     description: Specifies if the RDS instance is multi-AZ
+                    type: boolean
+                  multiTenant:
+                    description: Whether to use the multi-tenant configuration of
+                      the Oracle CDB architecture. Only valid for RDS for Oracle CDB
+                      engines (oracle-ee-cdb and oracle-se2-cdb). Changing from false
+                      to true converts the instance in place and requires apply_immediately
+                      = true; RDS also applies any pending modifications at that time.
+                      Restored instances and read replicas are converted after creation.
+                      Conversion is irreversible, so changing from true to false forces
+                      a new resource. After conversion, RDS rejects changes to password,
+                      password_wo, and manage_master_user_password on the instance;
+                      manage master user credentials on the tenant database instead.
+                      Additional tenant databases are managed outside this resource.
+                      See the AWS documentation for details.
                     type: boolean
                   ncharCharacterSetName:
                     description: |-
@@ -4836,6 +4892,20 @@ spec:
                   multiAz:
                     description: Specifies if the RDS instance is multi-AZ
                     type: boolean
+                  multiTenant:
+                    description: Whether to use the multi-tenant configuration of
+                      the Oracle CDB architecture. Only valid for RDS for Oracle CDB
+                      engines (oracle-ee-cdb and oracle-se2-cdb). Changing from false
+                      to true converts the instance in place and requires apply_immediately
+                      = true; RDS also applies any pending modifications at that time.
+                      Restored instances and read replicas are converted after creation.
+                      Conversion is irreversible, so changing from true to false forces
+                      a new resource. After conversion, RDS rejects changes to password,
+                      password_wo, and manage_master_user_password on the instance;
+                      manage master user credentials on the tenant database instead.
+                      Additional tenant databases are managed outside this resource.
+                      See the AWS documentation for details.
+                    type: boolean
                   ncharCharacterSetName:
                     description: |-
                       The national character set is used in the NCHAR, NVARCHAR2, and NCLOB data types for Oracle instances. This can't be changed. See Oracle Character Sets
@@ -5802,6 +5872,20 @@ spec:
                     type: string
                   multiAz:
                     description: Specifies if the RDS instance is multi-AZ
+                    type: boolean
+                  multiTenant:
+                    description: Whether to use the multi-tenant configuration of
+                      the Oracle CDB architecture. Only valid for RDS for Oracle CDB
+                      engines (oracle-ee-cdb and oracle-se2-cdb). Changing from false
+                      to true converts the instance in place and requires apply_immediately
+                      = true; RDS also applies any pending modifications at that time.
+                      Restored instances and read replicas are converted after creation.
+                      Conversion is irreversible, so changing from true to false forces
+                      a new resource. After conversion, RDS rejects changes to password,
+                      password_wo, and manage_master_user_password on the instance;
+                      manage master user credentials on the tenant database instead.
+                      Additional tenant databases are managed outside this resource.
+                      See the AWS documentation for details.
                     type: boolean
                   ncharCharacterSetName:
                     description: |-

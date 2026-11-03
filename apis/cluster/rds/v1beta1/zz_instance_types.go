@@ -413,6 +413,9 @@ type InstanceInitParameters struct {
 	// Set of RDS event categories (for example failure, maintenance) to check for after create and update operations. Has no effect if unset; see DescribeEvents and the aws_rds_events data source for the source of these events. Requires the rds:DescribeEvents IAM permission when set.
 	// +listType=set
 	WarningEventCategories []*string `json:"warningEventCategories,omitempty" tf:"warning_event_categories,omitempty"`
+
+	// Whether to use the multi-tenant configuration of the Oracle CDB architecture. Only valid for RDS for Oracle CDB engines (oracle-ee-cdb and oracle-se2-cdb). Changing from false to true converts the instance in place and requires apply_immediately = true; RDS also applies any pending modifications at that time. Restored instances and read replicas are converted after creation. Conversion is irreversible, so changing from true to false forces a new resource. After conversion, RDS rejects changes to password, password_wo, and manage_master_user_password on the instance; manage master user credentials on the tenant database instead. Additional tenant databases are managed outside this resource. See the AWS documentation for details.
+	MultiTenant *bool `json:"multiTenant,omitempty" tf:"multi_tenant,omitempty"`
 }
 
 type InstanceObservation struct {
@@ -756,6 +759,9 @@ type InstanceObservation struct {
 	// Set of RDS event categories (for example failure, maintenance) to check for after create and update operations. Has no effect if unset; see DescribeEvents and the aws_rds_events data source for the source of these events. Requires the rds:DescribeEvents IAM permission when set.
 	// +listType=set
 	WarningEventCategories []*string `json:"warningEventCategories,omitempty" tf:"warning_event_categories,omitempty"`
+
+	// Whether to use the multi-tenant configuration of the Oracle CDB architecture. Only valid for RDS for Oracle CDB engines (oracle-ee-cdb and oracle-se2-cdb). Changing from false to true converts the instance in place and requires apply_immediately = true; RDS also applies any pending modifications at that time. Restored instances and read replicas are converted after creation. Conversion is irreversible, so changing from true to false forces a new resource. After conversion, RDS rejects changes to password, password_wo, and manage_master_user_password on the instance; manage master user credentials on the tenant database instead. Additional tenant databases are managed outside this resource. See the AWS documentation for details.
+	MultiTenant *bool `json:"multiTenant,omitempty" tf:"multi_tenant,omitempty"`
 }
 
 type InstanceParameters struct {
@@ -1222,6 +1228,10 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	WarningEventCategories []*string `json:"warningEventCategories,omitempty" tf:"warning_event_categories,omitempty"`
+
+	// Whether to use the multi-tenant configuration of the Oracle CDB architecture. Only valid for RDS for Oracle CDB engines (oracle-ee-cdb and oracle-se2-cdb). Changing from false to true converts the instance in place and requires apply_immediately = true; RDS also applies any pending modifications at that time. Restored instances and read replicas are converted after creation. Conversion is irreversible, so changing from true to false forces a new resource. After conversion, RDS rejects changes to password, password_wo, and manage_master_user_password on the instance; manage master user credentials on the tenant database instead. Additional tenant databases are managed outside this resource. See the AWS documentation for details.
+	// +kubebuilder:validation:Optional
+	MultiTenant *bool `json:"multiTenant,omitempty" tf:"multi_tenant,omitempty"`
 }
 
 type ListenerEndpointInitParameters struct {

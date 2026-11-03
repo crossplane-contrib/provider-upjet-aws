@@ -205,6 +205,9 @@ type MetricAlarmInitParameters struct {
 
 	// Warm-up period that delays alarm evaluation after the alarm is created. During the warm-up period the alarm stays in INSUFFICIENT_DATA and does not perform alarm actions. See warm_up_configuration below.
 	WarmUpConfiguration []WarmUpConfigurationInitParameters `json:"warmUpConfiguration,omitempty" tf:"warm_up_configuration,omitempty"`
+
+	// Configures the alarm to use a wall clock evaluation window instead of the default sliding window. Not supported for alarms that use evaluation_criteria. See evaluation_window below.
+	EvaluationWindow []EvaluationWindowInitParameters `json:"evaluationWindow,omitempty" tf:"evaluation_window,omitempty"`
 }
 
 type MetricAlarmObservation struct {
@@ -306,6 +309,9 @@ type MetricAlarmObservation struct {
 
 	// Warm-up period that delays alarm evaluation after the alarm is created. During the warm-up period the alarm stays in INSUFFICIENT_DATA and does not perform alarm actions. See warm_up_configuration below.
 	WarmUpConfiguration []WarmUpConfigurationObservation `json:"warmUpConfiguration,omitempty" tf:"warm_up_configuration,omitempty"`
+
+	// Configures the alarm to use a wall clock evaluation window instead of the default sliding window. Not supported for alarms that use evaluation_criteria. See evaluation_window below.
+	EvaluationWindow []EvaluationWindowObservation `json:"evaluationWindow,omitempty" tf:"evaluation_window,omitempty"`
 }
 
 type MetricAlarmParameters struct {
@@ -442,6 +448,10 @@ type MetricAlarmParameters struct {
 	// Warm-up period that delays alarm evaluation after the alarm is created. During the warm-up period the alarm stays in INSUFFICIENT_DATA and does not perform alarm actions. See warm_up_configuration below.
 	// +kubebuilder:validation:Optional
 	WarmUpConfiguration []WarmUpConfigurationParameters `json:"warmUpConfiguration,omitempty" tf:"warm_up_configuration,omitempty"`
+
+	// Configures the alarm to use a wall clock evaluation window instead of the default sliding window. Not supported for alarms that use evaluation_criteria. See evaluation_window below.
+	// +kubebuilder:validation:Optional
+	EvaluationWindow []EvaluationWindowParameters `json:"evaluationWindow,omitempty" tf:"evaluation_window,omitempty"`
 }
 
 type MetricInitParameters struct {
@@ -684,4 +694,42 @@ var (
 
 func init() {
 	SchemeBuilder.Register(&MetricAlarm{}, &MetricAlarmList{})
+}
+
+type WallClockWindowInitParameters struct {
+
+	// Time zone to align the window to. Accepts an IANA time zone name (for example America/New_York), a fixed UTC offset (for example +05:30), or an offset-prefixed identifier (for example UTC+05:30). The offset must be a multiple of 5 minutes. Defaults to UTC. Only IANA time zone names observe daylight saving time.
+	Timezone *string `json:"timezone,omitempty" tf:"timezone,omitempty"`
+}
+
+type EvaluationWindowInitParameters struct {
+
+	// Aligns the evaluated range to fixed clock boundaries that match the alarm's period (for example the top of the hour, midnight, or the start of the calendar week), instead of the default rolling sliding window. Only alarms with a period of 60, 300, 3600, 86400, or 604800 seconds support a wall clock window. See wall_clock_window below.
+	WallClockWindow []WallClockWindowInitParameters `json:"wallClockWindow,omitempty" tf:"wall_clock_window,omitempty"`
+}
+
+type WallClockWindowObservation struct {
+
+	// Time zone to align the window to. Accepts an IANA time zone name (for example America/New_York), a fixed UTC offset (for example +05:30), or an offset-prefixed identifier (for example UTC+05:30). The offset must be a multiple of 5 minutes. Defaults to UTC. Only IANA time zone names observe daylight saving time.
+	Timezone *string `json:"timezone,omitempty" tf:"timezone,omitempty"`
+}
+
+type EvaluationWindowObservation struct {
+
+	// Aligns the evaluated range to fixed clock boundaries that match the alarm's period (for example the top of the hour, midnight, or the start of the calendar week), instead of the default rolling sliding window. Only alarms with a period of 60, 300, 3600, 86400, or 604800 seconds support a wall clock window. See wall_clock_window below.
+	WallClockWindow []WallClockWindowObservation `json:"wallClockWindow,omitempty" tf:"wall_clock_window,omitempty"`
+}
+
+type WallClockWindowParameters struct {
+
+	// Time zone to align the window to. Accepts an IANA time zone name (for example America/New_York), a fixed UTC offset (for example +05:30), or an offset-prefixed identifier (for example UTC+05:30). The offset must be a multiple of 5 minutes. Defaults to UTC. Only IANA time zone names observe daylight saving time.
+	// +kubebuilder:validation:Optional
+	Timezone *string `json:"timezone,omitempty" tf:"timezone,omitempty"`
+}
+
+type EvaluationWindowParameters struct {
+
+	// Aligns the evaluated range to fixed clock boundaries that match the alarm's period (for example the top of the hour, midnight, or the start of the calendar week), instead of the default rolling sliding window. Only alarms with a period of 60, 300, 3600, 86400, or 604800 seconds support a wall clock window. See wall_clock_window below.
+	// +kubebuilder:validation:Optional
+	WallClockWindow []WallClockWindowParameters `json:"wallClockWindow" tf:"wall_clock_window,omitempty"`
 }

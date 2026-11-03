@@ -904,6 +904,13 @@ spec:
                     description: Weekly time range during which system maintenance
                       can occur, in (UTC) e.g., wed:04:00-wed:04:30
                     type: string
+                  publiclyAccessible:
+                    description: Whether the DB cluster is publicly accessible. Valid
+                      only for Multi-AZ DB clusters. If not specified, defaults to
+                      true when db_subnet_group_name is not set or is default, and
+                      false otherwise. If true, the VPC of the DB subnet group must
+                      have an internet gateway attached. Cannot be used with s3_import.
+                    type: boolean
                   region:
                     description: |-
                       Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -2169,6 +2176,13 @@ spec:
                     description: Weekly time range during which system maintenance
                       can occur, in (UTC) e.g., wed:04:00-wed:04:30
                     type: string
+                  publiclyAccessible:
+                    description: Whether the DB cluster is publicly accessible. Valid
+                      only for Multi-AZ DB clusters. If not specified, defaults to
+                      true when db_subnet_group_name is not set or is default, and
+                      false otherwise. If true, the VPC of the DB subnet group must
+                      have an internet gateway attached. Cannot be used with s3_import.
+                    type: boolean
                   replicationSourceIdentifier:
                     description: 'ARN of a source DB cluster or DB instance if this
                       DB cluster is to be created as a Read Replica. Note: Removing
@@ -2993,6 +3007,13 @@ spec:
                     description: Weekly time range during which system maintenance
                       can occur, in (UTC) e.g., wed:04:00-wed:04:30
                     type: string
+                  publiclyAccessible:
+                    description: Whether the DB cluster is publicly accessible. Valid
+                      only for Multi-AZ DB clusters. If not specified, defaults to
+                      true when db_subnet_group_name is not set or is default, and
+                      false otherwise. If true, the VPC of the DB subnet group must
+                      have an internet gateway attached. Cannot be used with s3_import.
+                    type: boolean
                   readerEndpoint:
                     description: |-
                       Read-only endpoint for the Aurora cluster, automatically

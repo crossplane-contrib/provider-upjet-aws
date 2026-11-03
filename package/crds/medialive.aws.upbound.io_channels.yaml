@@ -2525,6 +2525,19 @@ spec:
                                 type: array
                             type: object
                           type: array
+                        thumbnailConfiguration:
+                          description: Thumbnail configuration settings. See thumbnail_configuration
+                            Block for details.
+                          items:
+                            properties:
+                              state:
+                                description: Enables the thumbnail feature, which
+                                  generates thumbnails of the incoming video in each
+                                  pipeline in the channel. Valid values are AUTO and
+                                  DISABLED.
+                                type: string
+                            type: object
+                          type: array
                         timecodeConfig:
                           description: Contains settings used to acquire and adjust
                             timecode information from inputs. See Timecode Config
@@ -6283,6 +6296,19 @@ spec:
                                       type: string
                                   type: object
                                 type: array
+                            type: object
+                          type: array
+                        thumbnailConfiguration:
+                          description: Thumbnail configuration settings. See thumbnail_configuration
+                            Block for details.
+                          items:
+                            properties:
+                              state:
+                                description: Enables the thumbnail feature, which
+                                  generates thumbnails of the incoming video in each
+                                  pipeline in the channel. Valid values are AUTO and
+                                  DISABLED.
+                                type: string
                             type: object
                           type: array
                         timecodeConfig:
@@ -10146,6 +10172,19 @@ spec:
                                       type: string
                                   type: object
                                 type: array
+                            type: object
+                          type: array
+                        thumbnailConfiguration:
+                          description: Thumbnail configuration settings. See thumbnail_configuration
+                            Block for details.
+                          items:
+                            properties:
+                              state:
+                                description: Enables the thumbnail feature, which
+                                  generates thumbnails of the incoming video in each
+                                  pipeline in the channel. Valid values are AUTO and
+                                  DISABLED.
+                                type: string
                             type: object
                           type: array
                         timecodeConfig:

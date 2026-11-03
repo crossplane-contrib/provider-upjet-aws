@@ -55,6 +55,9 @@ type AdditionalModelDataSourceS3DataSourceInitParameters struct {
 
 	// The S3 path of model data to deploy.
 	S3URI *string `json:"s3Uri,omitempty" tf:"s3_uri,omitempty"`
+
+	// Configuration for deploying a model from a SageMaker JumpStart private hub. See Hub Access Config.
+	HubAccessConfig []AdditionalModelDataSourceS3DataSourceHubAccessConfigInitParameters `json:"hubAccessConfig,omitempty" tf:"hub_access_config,omitempty"`
 }
 
 type AdditionalModelDataSourceS3DataSourceModelAccessConfigInitParameters struct {
@@ -89,6 +92,9 @@ type AdditionalModelDataSourceS3DataSourceObservation struct {
 
 	// The S3 path of model data to deploy.
 	S3URI *string `json:"s3Uri,omitempty" tf:"s3_uri,omitempty"`
+
+	// Configuration for deploying a model from a SageMaker JumpStart private hub. See Hub Access Config.
+	HubAccessConfig []AdditionalModelDataSourceS3DataSourceHubAccessConfigObservation `json:"hubAccessConfig,omitempty" tf:"hub_access_config,omitempty"`
 }
 
 type AdditionalModelDataSourceS3DataSourceParameters struct {
@@ -108,6 +114,10 @@ type AdditionalModelDataSourceS3DataSourceParameters struct {
 	// The S3 path of model data to deploy.
 	// +kubebuilder:validation:Optional
 	S3URI *string `json:"s3Uri" tf:"s3_uri,omitempty"`
+
+	// Configuration for deploying a model from a SageMaker JumpStart private hub. See Hub Access Config.
+	// +kubebuilder:validation:Optional
+	HubAccessConfig []AdditionalModelDataSourceS3DataSourceHubAccessConfigParameters `json:"hubAccessConfig,omitempty" tf:"hub_access_config,omitempty"`
 }
 
 type ContainerInitParameters struct {
@@ -353,6 +363,9 @@ type ModelDataSourceS3DataSourceInitParameters struct {
 
 	// The S3 path of model data to deploy.
 	S3URI *string `json:"s3Uri,omitempty" tf:"s3_uri,omitempty"`
+
+	// Configuration for deploying a model from a SageMaker JumpStart private hub. See Hub Access Config.
+	HubAccessConfig []S3DataSourceHubAccessConfigInitParameters `json:"hubAccessConfig,omitempty" tf:"hub_access_config,omitempty"`
 }
 
 type ModelDataSourceS3DataSourceModelAccessConfigInitParameters struct {
@@ -387,6 +400,9 @@ type ModelDataSourceS3DataSourceObservation struct {
 
 	// The S3 path of model data to deploy.
 	S3URI *string `json:"s3Uri,omitempty" tf:"s3_uri,omitempty"`
+
+	// Configuration for deploying a model from a SageMaker JumpStart private hub. See Hub Access Config.
+	HubAccessConfig []S3DataSourceHubAccessConfigObservation `json:"hubAccessConfig,omitempty" tf:"hub_access_config,omitempty"`
 }
 
 type ModelDataSourceS3DataSourceParameters struct {
@@ -406,6 +422,10 @@ type ModelDataSourceS3DataSourceParameters struct {
 	// The S3 path of model data to deploy.
 	// +kubebuilder:validation:Optional
 	S3URI *string `json:"s3Uri" tf:"s3_uri,omitempty"`
+
+	// Configuration for deploying a model from a SageMaker JumpStart private hub. See Hub Access Config.
+	// +kubebuilder:validation:Optional
+	HubAccessConfig []S3DataSourceHubAccessConfigParameters `json:"hubAccessConfig,omitempty" tf:"hub_access_config,omitempty"`
 }
 
 type ModelInitParameters struct {
@@ -675,6 +695,9 @@ type PrimaryContainerModelDataSourceS3DataSourceInitParameters struct {
 
 	// The S3 path of model data to deploy.
 	S3URI *string `json:"s3Uri,omitempty" tf:"s3_uri,omitempty"`
+
+	// Configuration for deploying a model from a SageMaker JumpStart private hub. See Hub Access Config.
+	HubAccessConfig []ModelDataSourceS3DataSourceHubAccessConfigInitParameters `json:"hubAccessConfig,omitempty" tf:"hub_access_config,omitempty"`
 }
 
 type PrimaryContainerModelDataSourceS3DataSourceObservation struct {
@@ -690,6 +713,9 @@ type PrimaryContainerModelDataSourceS3DataSourceObservation struct {
 
 	// The S3 path of model data to deploy.
 	S3URI *string `json:"s3Uri,omitempty" tf:"s3_uri,omitempty"`
+
+	// Configuration for deploying a model from a SageMaker JumpStart private hub. See Hub Access Config.
+	HubAccessConfig []ModelDataSourceS3DataSourceHubAccessConfigObservation `json:"hubAccessConfig,omitempty" tf:"hub_access_config,omitempty"`
 }
 
 type PrimaryContainerModelDataSourceS3DataSourceParameters struct {
@@ -709,6 +735,10 @@ type PrimaryContainerModelDataSourceS3DataSourceParameters struct {
 	// The S3 path of model data to deploy.
 	// +kubebuilder:validation:Optional
 	S3URI *string `json:"s3Uri" tf:"s3_uri,omitempty"`
+
+	// Configuration for deploying a model from a SageMaker JumpStart private hub. See Hub Access Config.
+	// +kubebuilder:validation:Optional
+	HubAccessConfig []ModelDataSourceS3DataSourceHubAccessConfigParameters `json:"hubAccessConfig,omitempty" tf:"hub_access_config,omitempty"`
 }
 
 type PrimaryContainerMultiModelConfigInitParameters struct {
@@ -849,6 +879,9 @@ type S3DataSourceInitParameters struct {
 
 	// The S3 path of model data to deploy.
 	S3URI *string `json:"s3Uri,omitempty" tf:"s3_uri,omitempty"`
+
+	// Configuration for deploying a model from a SageMaker JumpStart private hub. See Hub Access Config.
+	HubAccessConfig []HubAccessConfigInitParameters `json:"hubAccessConfig,omitempty" tf:"hub_access_config,omitempty"`
 }
 
 type S3DataSourceModelAccessConfigInitParameters struct {
@@ -883,6 +916,9 @@ type S3DataSourceObservation struct {
 
 	// The S3 path of model data to deploy.
 	S3URI *string `json:"s3Uri,omitempty" tf:"s3_uri,omitempty"`
+
+	// Configuration for deploying a model from a SageMaker JumpStart private hub. See Hub Access Config.
+	HubAccessConfig []HubAccessConfigObservation `json:"hubAccessConfig,omitempty" tf:"hub_access_config,omitempty"`
 }
 
 type S3DataSourceParameters struct {
@@ -902,6 +938,10 @@ type S3DataSourceParameters struct {
 	// The S3 path of model data to deploy.
 	// +kubebuilder:validation:Optional
 	S3URI *string `json:"s3Uri" tf:"s3_uri,omitempty"`
+
+	// Configuration for deploying a model from a SageMaker JumpStart private hub. See Hub Access Config.
+	// +kubebuilder:validation:Optional
+	HubAccessConfig []HubAccessConfigParameters `json:"hubAccessConfig,omitempty" tf:"hub_access_config,omitempty"`
 }
 
 type VPCConfigInitParameters struct {
@@ -999,4 +1039,80 @@ var (
 
 func init() {
 	SchemeBuilder.Register(&Model{}, &ModelList{})
+}
+
+type AdditionalModelDataSourceS3DataSourceHubAccessConfigInitParameters struct {
+
+	// Versioned ARN of the private hub content to deploy, such as the versioned_hub_content_arn of an aws_sagemaker_hub_content_reference. s3_uri must match the hub content's hosting artifact URI.
+	HubContentArn *string `json:"hubContentArn,omitempty" tf:"hub_content_arn,omitempty"`
+}
+
+type AdditionalModelDataSourceS3DataSourceHubAccessConfigObservation struct {
+
+	// Versioned ARN of the private hub content to deploy, such as the versioned_hub_content_arn of an aws_sagemaker_hub_content_reference. s3_uri must match the hub content's hosting artifact URI.
+	HubContentArn *string `json:"hubContentArn,omitempty" tf:"hub_content_arn,omitempty"`
+}
+
+type AdditionalModelDataSourceS3DataSourceHubAccessConfigParameters struct {
+
+	// Versioned ARN of the private hub content to deploy, such as the versioned_hub_content_arn of an aws_sagemaker_hub_content_reference. s3_uri must match the hub content's hosting artifact URI.
+	// +kubebuilder:validation:Optional
+	HubContentArn *string `json:"hubContentArn" tf:"hub_content_arn,omitempty"`
+}
+
+type S3DataSourceHubAccessConfigInitParameters struct {
+
+	// Versioned ARN of the private hub content to deploy, such as the versioned_hub_content_arn of an aws_sagemaker_hub_content_reference. s3_uri must match the hub content's hosting artifact URI.
+	HubContentArn *string `json:"hubContentArn,omitempty" tf:"hub_content_arn,omitempty"`
+}
+
+type S3DataSourceHubAccessConfigObservation struct {
+
+	// Versioned ARN of the private hub content to deploy, such as the versioned_hub_content_arn of an aws_sagemaker_hub_content_reference. s3_uri must match the hub content's hosting artifact URI.
+	HubContentArn *string `json:"hubContentArn,omitempty" tf:"hub_content_arn,omitempty"`
+}
+
+type S3DataSourceHubAccessConfigParameters struct {
+
+	// Versioned ARN of the private hub content to deploy, such as the versioned_hub_content_arn of an aws_sagemaker_hub_content_reference. s3_uri must match the hub content's hosting artifact URI.
+	// +kubebuilder:validation:Optional
+	HubContentArn *string `json:"hubContentArn" tf:"hub_content_arn,omitempty"`
+}
+
+type ModelDataSourceS3DataSourceHubAccessConfigInitParameters struct {
+
+	// Versioned ARN of the private hub content to deploy, such as the versioned_hub_content_arn of an aws_sagemaker_hub_content_reference. s3_uri must match the hub content's hosting artifact URI.
+	HubContentArn *string `json:"hubContentArn,omitempty" tf:"hub_content_arn,omitempty"`
+}
+
+type ModelDataSourceS3DataSourceHubAccessConfigObservation struct {
+
+	// Versioned ARN of the private hub content to deploy, such as the versioned_hub_content_arn of an aws_sagemaker_hub_content_reference. s3_uri must match the hub content's hosting artifact URI.
+	HubContentArn *string `json:"hubContentArn,omitempty" tf:"hub_content_arn,omitempty"`
+}
+
+type ModelDataSourceS3DataSourceHubAccessConfigParameters struct {
+
+	// Versioned ARN of the private hub content to deploy, such as the versioned_hub_content_arn of an aws_sagemaker_hub_content_reference. s3_uri must match the hub content's hosting artifact URI.
+	// +kubebuilder:validation:Optional
+	HubContentArn *string `json:"hubContentArn" tf:"hub_content_arn,omitempty"`
+}
+
+type HubAccessConfigInitParameters struct {
+
+	// Versioned ARN of the private hub content to deploy, such as the versioned_hub_content_arn of an aws_sagemaker_hub_content_reference. s3_uri must match the hub content's hosting artifact URI.
+	HubContentArn *string `json:"hubContentArn,omitempty" tf:"hub_content_arn,omitempty"`
+}
+
+type HubAccessConfigObservation struct {
+
+	// Versioned ARN of the private hub content to deploy, such as the versioned_hub_content_arn of an aws_sagemaker_hub_content_reference. s3_uri must match the hub content's hosting artifact URI.
+	HubContentArn *string `json:"hubContentArn,omitempty" tf:"hub_content_arn,omitempty"`
+}
+
+type HubAccessConfigParameters struct {
+
+	// Versioned ARN of the private hub content to deploy, such as the versioned_hub_content_arn of an aws_sagemaker_hub_content_reference. s3_uri must match the hub content's hosting artifact URI.
+	// +kubebuilder:validation:Optional
+	HubContentArn *string `json:"hubContentArn" tf:"hub_content_arn,omitempty"`
 }

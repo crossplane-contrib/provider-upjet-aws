@@ -78,6 +78,19 @@ type DurableConfigInitParameters struct {
 
 	// Number of days to retain the function's execution state. Valid value between 1 and 90. If not specified, the function's execution state is not retained. Defaults to 14.
 	RetentionPeriod *float64 `json:"retentionPeriod,omitempty" tf:"retention_period,omitempty"`
+
+	// Selector for a Key in kms to populate kmsKeyArn.
+	// +kubebuilder:validation:Optional
+	KMSKeyArnSelector *v2.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
+
+	// Reference to a Key in kms to populate kmsKeyArn.
+	// +kubebuilder:validation:Optional
+	KMSKeyArnRef *v2.Reference `json:"kmsKeyArnRef,omitempty" tf:"-"`
+
+	// ARN of the KMS customer managed key used to encrypt the durable function's execution state (input, output, and error payloads). If not specified, the execution state is encrypted with an AWS managed key. Changing this value applies the new key to executions that start after the change; executions already in progress continue to use the key they started with. Note that the top-level kms_key_arn argument is not used for durable function state encryption.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kms/v1beta1.Key
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
+	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 }
 
 type DurableConfigObservation struct {
@@ -87,6 +100,9 @@ type DurableConfigObservation struct {
 
 	// Number of days to retain the function's execution state. Valid value between 1 and 90. If not specified, the function's execution state is not retained. Defaults to 14.
 	RetentionPeriod *float64 `json:"retentionPeriod,omitempty" tf:"retention_period,omitempty"`
+
+	// ARN of the KMS customer managed key used to encrypt the durable function's execution state (input, output, and error payloads). If not specified, the execution state is encrypted with an AWS managed key. Changing this value applies the new key to executions that start after the change; executions already in progress continue to use the key they started with. Note that the top-level kms_key_arn argument is not used for durable function state encryption.
+	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 }
 
 type DurableConfigParameters struct {
@@ -98,6 +114,20 @@ type DurableConfigParameters struct {
 	// Number of days to retain the function's execution state. Valid value between 1 and 90. If not specified, the function's execution state is not retained. Defaults to 14.
 	// +kubebuilder:validation:Optional
 	RetentionPeriod *float64 `json:"retentionPeriod,omitempty" tf:"retention_period,omitempty"`
+
+	// Selector for a Key in kms to populate kmsKeyArn.
+	// +kubebuilder:validation:Optional
+	KMSKeyArnSelector *v2.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
+
+	// Reference to a Key in kms to populate kmsKeyArn.
+	// +kubebuilder:validation:Optional
+	KMSKeyArnRef *v2.Reference `json:"kmsKeyArnRef,omitempty" tf:"-"`
+
+	// ARN of the KMS customer managed key used to encrypt the durable function's execution state (input, output, and error payloads). If not specified, the execution state is encrypted with an AWS managed key. Changing this value applies the new key to executions that start after the change; executions already in progress continue to use the key they started with. Note that the top-level kms_key_arn argument is not used for durable function state encryption.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kms/v1beta1.Key
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
+	// +kubebuilder:validation:Optional
+	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 }
 
 type EnvironmentInitParameters struct {

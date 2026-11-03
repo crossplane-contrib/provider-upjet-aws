@@ -3035,6 +3035,9 @@ type EncoderSettingsInitParameters struct {
 
 	// Video Descriptions. See Video Descriptions for more details.
 	VideoDescriptions []VideoDescriptionsInitParameters `json:"videoDescriptions,omitempty" tf:"video_descriptions,omitempty"`
+
+	// Thumbnail configuration settings. See thumbnail_configuration Block for details.
+	ThumbnailConfiguration []ThumbnailConfigurationInitParameters `json:"thumbnailConfiguration,omitempty" tf:"thumbnail_configuration,omitempty"`
 }
 
 type EncoderSettingsObservation struct {
@@ -3065,6 +3068,9 @@ type EncoderSettingsObservation struct {
 
 	// Video Descriptions. See Video Descriptions for more details.
 	VideoDescriptions []VideoDescriptionsObservation `json:"videoDescriptions,omitempty" tf:"video_descriptions,omitempty"`
+
+	// Thumbnail configuration settings. See thumbnail_configuration Block for details.
+	ThumbnailConfiguration []ThumbnailConfigurationObservation `json:"thumbnailConfiguration,omitempty" tf:"thumbnail_configuration,omitempty"`
 }
 
 type EncoderSettingsParameters struct {
@@ -3104,6 +3110,10 @@ type EncoderSettingsParameters struct {
 	// Video Descriptions. See Video Descriptions for more details.
 	// +kubebuilder:validation:Optional
 	VideoDescriptions []VideoDescriptionsParameters `json:"videoDescriptions,omitempty" tf:"video_descriptions,omitempty"`
+
+	// Thumbnail configuration settings. See thumbnail_configuration Block for details.
+	// +kubebuilder:validation:Optional
+	ThumbnailConfiguration []ThumbnailConfigurationParameters `json:"thumbnailConfiguration,omitempty" tf:"thumbnail_configuration,omitempty"`
 }
 
 type FailoverConditionInitParameters struct {
@@ -8216,4 +8226,23 @@ var (
 
 func init() {
 	SchemeBuilder.Register(&Channel{}, &ChannelList{})
+}
+
+type ThumbnailConfigurationInitParameters struct {
+
+	// Enables the thumbnail feature, which generates thumbnails of the incoming video in each pipeline in the channel. Valid values are AUTO and DISABLED.
+	State *string `json:"state,omitempty" tf:"state,omitempty"`
+}
+
+type ThumbnailConfigurationObservation struct {
+
+	// Enables the thumbnail feature, which generates thumbnails of the incoming video in each pipeline in the channel. Valid values are AUTO and DISABLED.
+	State *string `json:"state,omitempty" tf:"state,omitempty"`
+}
+
+type ThumbnailConfigurationParameters struct {
+
+	// Enables the thumbnail feature, which generates thumbnails of the incoming video in each pipeline in the channel. Valid values are AUTO and DISABLED.
+	// +kubebuilder:validation:Optional
+	State *string `json:"state" tf:"state,omitempty"`
 }

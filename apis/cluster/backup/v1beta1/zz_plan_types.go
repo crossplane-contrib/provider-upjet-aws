@@ -323,6 +323,9 @@ type RuleObservation struct {
 
 	// The name of a logical container where backups are stored.
 	TargetVaultName *string `json:"targetVaultName,omitempty" tf:"target_vault_name,omitempty"`
+
+	// Uniquely identifies a rule that is used to schedule the backup of a selection of resources.
+	RuleID *string `json:"ruleId,omitempty" tf:"rule_id,omitempty"`
 }
 
 type RuleParameters struct {
