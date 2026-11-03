@@ -15,48 +15,48 @@ import (
 
 type InputDestinationsInitParameters struct {
 
-	// A unique name for the location the RTMP stream is being pushed to.
+	// Unique name for the location the RTMP stream is being pushed to.
 	StreamName *string `json:"streamName,omitempty" tf:"stream_name,omitempty"`
 }
 
 type InputDestinationsObservation struct {
 
-	// A unique name for the location the RTMP stream is being pushed to.
+	// Unique name for the location the RTMP stream is being pushed to.
 	StreamName *string `json:"streamName,omitempty" tf:"stream_name,omitempty"`
 }
 
 type InputDestinationsParameters struct {
 
-	// A unique name for the location the RTMP stream is being pushed to.
+	// Unique name for the location the RTMP stream is being pushed to.
 	// +kubebuilder:validation:Optional
 	StreamName *string `json:"streamName" tf:"stream_name,omitempty"`
 }
 
 type InputDevicesInitParameters struct {
 
-	// The unique ID for the device.
+	// Unique ID for the device.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type InputDevicesObservation struct {
 
-	// The unique ID for the device.
+	// Unique ID for the device.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type InputDevicesParameters struct {
 
-	// The unique ID for the device.
+	// Unique ID for the device.
 	// +kubebuilder:validation:Optional
 	ID *string `json:"id" tf:"id,omitempty"`
 }
 
 type InputInitParameters struct {
 
-	// Destination settings for PUSH type inputs. See Destinations for more details.
+	// Destination settings for PUSH type inputs. See destinations Block for more details.
 	Destinations []InputDestinationsInitParameters `json:"destinations,omitempty" tf:"destinations,omitempty"`
 
-	// Settings for the devices. See Input Devices for more details.
+	// Settings for the devices. See input_devices Block for more details.
 	InputDevices []InputDevicesInitParameters `json:"inputDevices,omitempty" tf:"input_devices,omitempty"`
 
 	// List of input security groups.
@@ -72,13 +72,13 @@ type InputInitParameters struct {
 	// +kubebuilder:validation:Optional
 	InputSecurityGroupsSelector *v2.Selector `json:"inputSecurityGroupsSelector,omitempty" tf:"-"`
 
-	// A list of the MediaConnect Flows. See Media Connect Flows for more details.
+	// MediaConnect Flows. See media_connect_flows Block for more details.
 	MediaConnectFlows []MediaConnectFlowsInitParameters `json:"mediaConnectFlows,omitempty" tf:"media_connect_flows,omitempty"`
 
 	// Name of the input.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The ARN of the role this input assumes during and after creation.
+	// ARN of the role this input assumes during and after creation.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
@@ -91,17 +91,17 @@ type InputInitParameters struct {
 	// +kubebuilder:validation:Optional
 	RoleArnSelector *v2.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
-	// The source URLs for a PULL-type input. See Sources for more details.
+	// Source URLs for a PULL-type input. See sources Block for more details.
 	Sources []SourcesInitParameters `json:"sources,omitempty" tf:"sources,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The different types of inputs that AWS Elemental MediaLive supports.
+	// Type of input that AWS Elemental MediaLive supports.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
-	// Settings for a private VPC Input. See VPC for more details.
+	// Settings for a private VPC Input. See vpc Block for more details.
 	VPC *InputVPCInitParameters `json:"vpc,omitempty" tf:"vpc,omitempty"`
 }
 
@@ -113,19 +113,19 @@ type InputObservation struct {
 	// Channels attached to Input.
 	AttachedChannels []*string `json:"attachedChannels,omitempty" tf:"attached_channels,omitempty"`
 
-	// Destination settings for PUSH type inputs. See Destinations for more details.
+	// Destination settings for PUSH type inputs. See destinations Block for more details.
 	Destinations []InputDestinationsObservation `json:"destinations,omitempty" tf:"destinations,omitempty"`
 
-	// The unique ID for the device.
+	// (String) ID of the MediaLive Input.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The input class.
+	// Input class.
 	InputClass *string `json:"inputClass,omitempty" tf:"input_class,omitempty"`
 
-	// Settings for the devices. See Input Devices for more details.
+	// Settings for the devices. See input_devices Block for more details.
 	InputDevices []InputDevicesObservation `json:"inputDevices,omitempty" tf:"input_devices,omitempty"`
 
-	// A list of IDs for all Inputs which are partners of this one.
+	// IDs for all Inputs which are partners of this one.
 	InputPartnerIds []*string `json:"inputPartnerIds,omitempty" tf:"input_partner_ids,omitempty"`
 
 	// List of input security groups.
@@ -134,7 +134,7 @@ type InputObservation struct {
 	// Source type of the input.
 	InputSourceType *string `json:"inputSourceType,omitempty" tf:"input_source_type,omitempty"`
 
-	// A list of the MediaConnect Flows. See Media Connect Flows for more details.
+	// MediaConnect Flows. See media_connect_flows Block for more details.
 	MediaConnectFlows []MediaConnectFlowsObservation `json:"mediaConnectFlows,omitempty" tf:"media_connect_flows,omitempty"`
 
 	// Name of the input.
@@ -144,10 +144,10 @@ type InputObservation struct {
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The ARN of the role this input assumes during and after creation.
+	// ARN of the role this input assumes during and after creation.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
-	// The source URLs for a PULL-type input. See Sources for more details.
+	// Source URLs for a PULL-type input. See sources Block for more details.
 	Sources []SourcesObservation `json:"sources,omitempty" tf:"sources,omitempty"`
 
 	// Key-value map of resource tags.
@@ -157,20 +157,20 @@ type InputObservation struct {
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// The different types of inputs that AWS Elemental MediaLive supports.
+	// Type of input that AWS Elemental MediaLive supports.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
-	// Settings for a private VPC Input. See VPC for more details.
+	// Settings for a private VPC Input. See vpc Block for more details.
 	VPC *InputVPCObservation `json:"vpc,omitempty" tf:"vpc,omitempty"`
 }
 
 type InputParameters struct {
 
-	// Destination settings for PUSH type inputs. See Destinations for more details.
+	// Destination settings for PUSH type inputs. See destinations Block for more details.
 	// +kubebuilder:validation:Optional
 	Destinations []InputDestinationsParameters `json:"destinations,omitempty" tf:"destinations,omitempty"`
 
-	// Settings for the devices. See Input Devices for more details.
+	// Settings for the devices. See input_devices Block for more details.
 	// +kubebuilder:validation:Optional
 	InputDevices []InputDevicesParameters `json:"inputDevices,omitempty" tf:"input_devices,omitempty"`
 
@@ -188,7 +188,7 @@ type InputParameters struct {
 	// +kubebuilder:validation:Optional
 	InputSecurityGroupsSelector *v2.Selector `json:"inputSecurityGroupsSelector,omitempty" tf:"-"`
 
-	// A list of the MediaConnect Flows. See Media Connect Flows for more details.
+	// MediaConnect Flows. See media_connect_flows Block for more details.
 	// +kubebuilder:validation:Optional
 	MediaConnectFlows []MediaConnectFlowsParameters `json:"mediaConnectFlows,omitempty" tf:"media_connect_flows,omitempty"`
 
@@ -201,7 +201,7 @@ type InputParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// The ARN of the role this input assumes during and after creation.
+	// ARN of the role this input assumes during and after creation.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -215,7 +215,7 @@ type InputParameters struct {
 	// +kubebuilder:validation:Optional
 	RoleArnSelector *v2.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
-	// The source URLs for a PULL-type input. See Sources for more details.
+	// Source URLs for a PULL-type input. See sources Block for more details.
 	// +kubebuilder:validation:Optional
 	Sources []SourcesParameters `json:"sources,omitempty" tf:"sources,omitempty"`
 
@@ -224,98 +224,98 @@ type InputParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The different types of inputs that AWS Elemental MediaLive supports.
+	// Type of input that AWS Elemental MediaLive supports.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
-	// Settings for a private VPC Input. See VPC for more details.
+	// Settings for a private VPC Input. See vpc Block for more details.
 	// +kubebuilder:validation:Optional
 	VPC *InputVPCParameters `json:"vpc,omitempty" tf:"vpc,omitempty"`
 }
 
 type InputVPCInitParameters struct {
 
-	// A list of up to 5 EC2 VPC security group IDs to attach to the Input.
+	// List of up to 5 EC2 VPC security group IDs to attach to the Input.
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
-	// A list of 2 VPC subnet IDs from the same VPC.
+	// List of 2 VPC subnet IDs from the same VPC.
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 }
 
 type InputVPCObservation struct {
 
-	// A list of up to 5 EC2 VPC security group IDs to attach to the Input.
+	// List of up to 5 EC2 VPC security group IDs to attach to the Input.
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
-	// A list of 2 VPC subnet IDs from the same VPC.
+	// List of 2 VPC subnet IDs from the same VPC.
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 }
 
 type InputVPCParameters struct {
 
-	// A list of up to 5 EC2 VPC security group IDs to attach to the Input.
+	// List of up to 5 EC2 VPC security group IDs to attach to the Input.
 	// +kubebuilder:validation:Optional
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
-	// A list of 2 VPC subnet IDs from the same VPC.
+	// List of 2 VPC subnet IDs from the same VPC.
 	// +kubebuilder:validation:Optional
 	SubnetIds []*string `json:"subnetIds" tf:"subnet_ids,omitempty"`
 }
 
 type MediaConnectFlowsInitParameters struct {
 
-	// The ARN of the MediaConnect Flow
+	// ARN of the MediaConnect Flow.
 	FlowArn *string `json:"flowArn,omitempty" tf:"flow_arn,omitempty"`
 }
 
 type MediaConnectFlowsObservation struct {
 
-	// The ARN of the MediaConnect Flow
+	// ARN of the MediaConnect Flow.
 	FlowArn *string `json:"flowArn,omitempty" tf:"flow_arn,omitempty"`
 }
 
 type MediaConnectFlowsParameters struct {
 
-	// The ARN of the MediaConnect Flow
+	// ARN of the MediaConnect Flow.
 	// +kubebuilder:validation:Optional
 	FlowArn *string `json:"flowArn" tf:"flow_arn,omitempty"`
 }
 
 type SourcesInitParameters struct {
 
-	// The key used to extract the password from EC2 Parameter store.
+	// Key used to extract the password from EC2 Parameter store.
 	PasswordParam *string `json:"passwordParam,omitempty" tf:"password_param,omitempty"`
 
-	// The URL where the stream is pulled from.
+	// URL where the stream is pulled from.
 	URL *string `json:"url,omitempty" tf:"url,omitempty"`
 
-	// The username for the input source.
+	// Username for the input source.
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 
 type SourcesObservation struct {
 
-	// The key used to extract the password from EC2 Parameter store.
+	// Key used to extract the password from EC2 Parameter store.
 	PasswordParam *string `json:"passwordParam,omitempty" tf:"password_param,omitempty"`
 
-	// The URL where the stream is pulled from.
+	// URL where the stream is pulled from.
 	URL *string `json:"url,omitempty" tf:"url,omitempty"`
 
-	// The username for the input source.
+	// Username for the input source.
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 
 type SourcesParameters struct {
 
-	// The key used to extract the password from EC2 Parameter store.
+	// Key used to extract the password from EC2 Parameter store.
 	// +kubebuilder:validation:Optional
 	PasswordParam *string `json:"passwordParam" tf:"password_param,omitempty"`
 
-	// The URL where the stream is pulled from.
+	// URL where the stream is pulled from.
 	// +kubebuilder:validation:Optional
 	URL *string `json:"url" tf:"url,omitempty"`
 
-	// The username for the input source.
+	// Username for the input source.
 	// +kubebuilder:validation:Optional
 	Username *string `json:"username" tf:"username,omitempty"`
 }

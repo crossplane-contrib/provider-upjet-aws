@@ -60,7 +60,7 @@ spec:
               forProvider:
                 properties:
                   applicationName:
-                    description: The name of an existing  Kinesis Analytics v2 Application.
+                    description: Name of an existing Kinesis Analytics v2 Application.
                       Note that the application must be running for a snapshot to
                       be created.
                     type: string
@@ -168,7 +168,7 @@ spec:
                   autoscaler.
                 properties:
                   applicationName:
-                    description: The name of an existing  Kinesis Analytics v2 Application.
+                    description: Name of an existing Kinesis Analytics v2 Application.
                       Note that the application must be running for a snapshot to
                       be created.
                     type: string
@@ -319,16 +319,16 @@ spec:
               atProvider:
                 properties:
                   applicationName:
-                    description: The name of an existing  Kinesis Analytics v2 Application.
+                    description: Name of an existing Kinesis Analytics v2 Application.
                       Note that the application must be running for a snapshot to
                       be created.
                     type: string
                   applicationVersionId:
-                    description: The current application version ID when the snapshot
+                    description: Current application version ID when the snapshot
                       was created.
                     type: number
                   id:
-                    description: The application snapshot identifier.
+                    description: Application snapshot identifier.
                     type: string
                   region:
                     description: |-
@@ -336,7 +336,7 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   snapshotCreationTimestamp:
-                    description: The timestamp of the application snapshot.
+                    description: Timestamp of the application snapshot.
                     type: string
                 type: object
               conditions:

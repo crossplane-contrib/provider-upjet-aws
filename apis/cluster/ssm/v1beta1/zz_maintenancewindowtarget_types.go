@@ -31,7 +31,7 @@ type MaintenanceWindowTargetInitParameters struct {
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/mw-cli-tutorial-targets-examples.html)
 	Targets []MaintenanceWindowTargetTargetsInitParameters `json:"targets,omitempty" tf:"targets,omitempty"`
 
-	// The Id of the maintenance window to register the target with.
+	// The ID of the maintenance window to register the target with.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ssm/v1beta1.MaintenanceWindow
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	WindowID *string `json:"windowId,omitempty" tf:"window_id,omitempty"`
@@ -70,7 +70,7 @@ type MaintenanceWindowTargetObservation struct {
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/mw-cli-tutorial-targets-examples.html)
 	Targets []MaintenanceWindowTargetTargetsObservation `json:"targets,omitempty" tf:"targets,omitempty"`
 
-	// The Id of the maintenance window to register the target with.
+	// The ID of the maintenance window to register the target with.
 	WindowID *string `json:"windowId,omitempty" tf:"window_id,omitempty"`
 }
 
@@ -102,7 +102,7 @@ type MaintenanceWindowTargetParameters struct {
 	// +kubebuilder:validation:Optional
 	Targets []MaintenanceWindowTargetTargetsParameters `json:"targets,omitempty" tf:"targets,omitempty"`
 
-	// The Id of the maintenance window to register the target with.
+	// The ID of the maintenance window to register the target with.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ssm/v1beta1.MaintenanceWindow
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional

@@ -119,7 +119,7 @@ spec:
                                 items:
                                   properties:
                                     arn:
-                                      description: ARN of the hosting environment.
+                                      description: ARN of the managed memory resource.
                                       type: string
                                   type: object
                                 type: array
@@ -300,16 +300,16 @@ spec:
                     type: object
                   environment:
                     description: Compute environment configuration. See environment
-                      Block below.If not specified, configured values can be found
+                      Block below. If not specified, configured values can be found
                       in environment_actual.
                     properties:
                       agentcoreRuntimeEnvironment:
                         description: AgentCore runtime environment configuration.
-                          See agentcore_runtime_environment Block below.
+                          See environment.agentcore_runtime_environment Block below.
                         items:
                           properties:
                             filesystemConfiguration:
-                              description: Filesystem configurations. See filesystem_configuration
+                              description: Filesystem configurations. See environment.agentcore_runtime_environment.filesystem_configuration
                                 Block below.
                               items:
                                 properties:
@@ -317,12 +317,13 @@ spec:
                                     description: Amazon EFS access point to mount
                                       as shared file storage. Exactly one of session_storage,
                                       s3_files_access_point, or efs_access_point must
-                                      be specified. See efs_access_point Block below.
+                                      be specified. See environment.agentcore_runtime_environment.filesystem_configuration.efs_access_point
+                                      Block below.
                                     items:
                                       properties:
                                         accessPointArn:
-                                          description: ARN of the Amazon S3 Files
-                                            access point to mount into the agent runtime.
+                                          description: ARN of the Amazon EFS access
+                                            point to mount into the agent runtime.
                                           type: string
                                         accessPointArnRef:
                                           description: Reference to a AccessPoint
@@ -402,9 +403,9 @@ spec:
                                               type: object
                                           type: object
                                         mountPath:
-                                          description: Mount path for the S3 Files
-                                            access point inside the agent runtime.
-                                            Must be under /mnt with exactly one subdirectory
+                                          description: Mount path for the EFS access
+                                            point inside the agent runtime. Must be
+                                            under /mnt with exactly one subdirectory
                                             level (for example, /mnt/data).
                                           type: string
                                       type: object
@@ -413,8 +414,8 @@ spec:
                                     description: Amazon S3 Files access point to mount
                                       as shared file storage. Exactly one of session_storage,
                                       s3_files_access_point, or efs_access_point must
-                                      be specified. See s3_files_access_point Block
-                                      below.
+                                      be specified. See environment.agentcore_runtime_environment.filesystem_configuration.s3_files_access_point
+                                      Block below.
                                     items:
                                       properties:
                                         accessPointArn:
@@ -499,8 +500,8 @@ spec:
                                               type: object
                                           type: object
                                         mountPath:
-                                          description: Mount path for the S3 Files
-                                            access point inside the agent runtime.
+                                          description: Mount path for the session
+                                            storage filesystem inside the agent runtime.
                                             Must be under /mnt with exactly one subdirectory
                                             level (for example, /mnt/data).
                                           type: string
@@ -511,12 +512,13 @@ spec:
                                       persistent storage across agent runtime session
                                       invocations. Exactly one of session_storage,
                                       s3_files_access_point, or efs_access_point must
-                                      be specified. See session_storage Block below.
+                                      be specified. See environment.agentcore_runtime_environment.filesystem_configuration.session_storage
+                                      Block below.
                                     items:
                                       properties:
                                         mountPath:
-                                          description: Mount path for the S3 Files
-                                            access point inside the agent runtime.
+                                          description: Mount path for the session
+                                            storage filesystem inside the agent runtime.
                                             Must be under /mnt with exactly one subdirectory
                                             level (for example, /mnt/data).
                                           type: string
@@ -525,7 +527,7 @@ spec:
                                 type: object
                               type: array
                             lifecycleConfiguration:
-                              description: Lifecycle configuration. See lifecycle_configuration
+                              description: Lifecycle configuration. See environment.agentcore_runtime_environment.lifecycle_configuration
                                 Block below.
                               items:
                                 properties:
@@ -539,7 +541,7 @@ spec:
                                 type: object
                               type: array
                             networkConfiguration:
-                              description: Network configuration. See network_configuration
+                              description: Network configuration. See environment.agentcore_runtime_environment.network_configuration
                                 Block below.
                               items:
                                 properties:
@@ -548,7 +550,7 @@ spec:
                                       VPC.'
                                     type: string
                                   networkModeConfig:
-                                    description: VPC configuration. See network_mode_config
+                                    description: VPC configuration. See environment.agentcore_runtime_environment.network_configuration.network_mode_config
                                       Block below.
                                     items:
                                       properties:
@@ -585,7 +587,8 @@ spec:
                         type: object
                     type: object
                   environmentVariablesSecretRef:
-                    description: Map of environment variables.
+                    description: Map of environment variables. Set to an empty map
+                      ({}) to remove all environment variables.
                     properties:
                       name:
                         description: Name of the secret.
@@ -676,14 +679,16 @@ spec:
                         type: object
                     type: object
                   harnessName:
-                    description: Name of the harness. Must be 1-40 characters, alphanumeric
-                      and underscores only.
+                    description: Name of the harness. Must be 1-40 characters, start
+                      with a letter, and contain only alphanumeric characters and
+                      underscores.
                     type: string
                   maxIterations:
                     description: Maximum number of iterations the agent loop can perform.
                     type: number
                   maxTokens:
-                    description: Maximum number of tokens in the model response.
+                    description: Maximum total number of output tokens the agent can
+                      generate across all model calls within a single invocation.
                     type: number
                   memory:
                     description: Memory configuration. See memory Block below. If
@@ -693,14 +698,14 @@ spec:
                     properties:
                       agentcoreMemoryConfiguration:
                         description: AgentCore memory configuration. Use this to connect
-                          to an existing AgentCore memory resource. See agentcore_memory_configuration
+                          to an existing AgentCore memory resource. See memory.agentcore_memory_configuration
                           Block below.
                         properties:
                           actorId:
                             description: Actor ID for memory sessions.
                             type: string
                           arn:
-                            description: ARN of the hosting environment.
+                            description: ARN of the AgentCore memory resource.
                             type: string
                           arnRef:
                             description: Reference to a Memory in bedrockagentcore
@@ -779,11 +784,10 @@ spec:
                                 type: object
                             type: object
                           messagesCount:
-                            description: Number of recent messages to keep in the
-                              conversation window.
+                            description: Number of messages to retrieve from memory.
                             type: number
                           retrievalConfig:
-                            description: Retrieval configuration parameters. See retrieval_config
+                            description: Retrieval configuration parameters. See memory.agentcore_memory_configuration.retrieval_config
                               Block below.
                             properties:
                               mapBlockKey:
@@ -874,17 +878,17 @@ spec:
                                     type: object
                                 type: object
                               topK:
-                                description: Top-k sampling parameter.
+                                description: Number of top results to retrieve.
                                 type: number
                             type: object
                         type: object
                       disabled:
                         description: Explicitly disable memory for this harness. See
-                          disabled Block below.
+                          memory.disabled Block below.
                         type: object
                       managedMemoryConfiguration:
                         description: Managed memory configuration. Creates and manages
-                          a memory resource automatically. See managed_memory_configuration
+                          a memory resource automatically. See memory.managed_memory_configuration
                           Block below.
                         properties:
                           encryptionKeyArn:
@@ -897,8 +901,8 @@ spec:
                             type: number
                           strategies:
                             description: Set of strategy types to enable. Valid values
-                              are SEMANTIC, SUMMARIZATION, and USER_PREFERENCE. Defaults
-                              to ["SEMANTIC", "SUMMARIZATION"].
+                              are SEMANTIC, SUMMARIZATION, USER_PREFERENCE, and EPISODIC.
+                              Defaults to ["SEMANTIC", "SUMMARIZATION"].
                             items:
                               type: string
                             type: array
@@ -923,7 +927,9 @@ spec:
                               converse_stream, responses, and chat_completions.
                             type: string
                           maxTokens:
-                            description: Maximum number of tokens in the model response.
+                            description: Maximum total number of output tokens the
+                              agent can generate across all model calls within a single
+                              invocation.
                             type: number
                           modelId:
                             description: Bedrock model ID (e.g., anthropic.claude-sonnet-4-20250514).
@@ -1026,7 +1032,9 @@ spec:
                                 type: object
                             type: object
                           maxTokens:
-                            description: Maximum number of tokens in the model response.
+                            description: Maximum total number of output tokens the
+                              agent can generate across all model calls within a single
+                              invocation.
                             type: number
                           modelId:
                             description: Bedrock model ID (e.g., anthropic.claude-sonnet-4-20250514).
@@ -1135,7 +1143,9 @@ spec:
                                 type: object
                             type: object
                           maxTokens:
-                            description: Maximum number of tokens in the model response.
+                            description: Maximum total number of output tokens the
+                              agent can generate across all model calls within a single
+                              invocation.
                             type: number
                           modelId:
                             description: Bedrock model ID (e.g., anthropic.claude-sonnet-4-20250514).
@@ -1242,7 +1252,9 @@ spec:
                                 type: object
                             type: object
                           maxTokens:
-                            description: Maximum number of tokens in the model response.
+                            description: Maximum total number of output tokens the
+                              agent can generate across all model calls within a single
+                              invocation.
                             type: number
                           modelId:
                             description: Bedrock model ID (e.g., anthropic.claude-sonnet-4-20250514).
@@ -1353,8 +1365,8 @@ spec:
                     items:
                       properties:
                         config:
-                          description: Tool-specific configuration. See tool config
-                            below.
+                          description: Tool-specific configuration. See tool.config
+                            Block below.
                           properties:
                             agentcoreBrowser:
                               description: AgentCore browser configuration. See agentcore_browser
@@ -1613,10 +1625,12 @@ spec:
                                     See outbound_auth Block below.
                                   properties:
                                     awsIam:
-                                      description: Set to true to use AWS IAM authentication.
+                                      description: Whether to use AWS IAM authentication.
+                                        Must be true if set.
                                       type: boolean
                                     none:
-                                      description: Set to true to disable authentication.
+                                      description: Whether to disable authentication.
+                                        Must be true if set.
                                       type: boolean
                                     oauth:
                                       description: OAuth credential provider configuration.
@@ -1801,8 +1815,8 @@ spec:
                       See truncation Block below.
                     properties:
                       config:
-                        description: Strategy-specific configuration. See truncation
-                          config below.
+                        description: Strategy-specific configuration. See truncation.config
+                          Block below.
                         items:
                           properties:
                             slidingWindow:
@@ -1904,7 +1918,7 @@ spec:
                                 items:
                                   properties:
                                     arn:
-                                      description: ARN of the hosting environment.
+                                      description: ARN of the managed memory resource.
                                       type: string
                                   type: object
                                 type: array
@@ -2085,16 +2099,16 @@ spec:
                     type: object
                   environment:
                     description: Compute environment configuration. See environment
-                      Block below.If not specified, configured values can be found
+                      Block below. If not specified, configured values can be found
                       in environment_actual.
                     properties:
                       agentcoreRuntimeEnvironment:
                         description: AgentCore runtime environment configuration.
-                          See agentcore_runtime_environment Block below.
+                          See environment.agentcore_runtime_environment Block below.
                         items:
                           properties:
                             filesystemConfiguration:
-                              description: Filesystem configurations. See filesystem_configuration
+                              description: Filesystem configurations. See environment.agentcore_runtime_environment.filesystem_configuration
                                 Block below.
                               items:
                                 properties:
@@ -2102,12 +2116,13 @@ spec:
                                     description: Amazon EFS access point to mount
                                       as shared file storage. Exactly one of session_storage,
                                       s3_files_access_point, or efs_access_point must
-                                      be specified. See efs_access_point Block below.
+                                      be specified. See environment.agentcore_runtime_environment.filesystem_configuration.efs_access_point
+                                      Block below.
                                     items:
                                       properties:
                                         accessPointArn:
-                                          description: ARN of the Amazon S3 Files
-                                            access point to mount into the agent runtime.
+                                          description: ARN of the Amazon EFS access
+                                            point to mount into the agent runtime.
                                           type: string
                                         accessPointArnRef:
                                           description: Reference to a AccessPoint
@@ -2187,9 +2202,9 @@ spec:
                                               type: object
                                           type: object
                                         mountPath:
-                                          description: Mount path for the S3 Files
-                                            access point inside the agent runtime.
-                                            Must be under /mnt with exactly one subdirectory
+                                          description: Mount path for the EFS access
+                                            point inside the agent runtime. Must be
+                                            under /mnt with exactly one subdirectory
                                             level (for example, /mnt/data).
                                           type: string
                                       type: object
@@ -2198,8 +2213,8 @@ spec:
                                     description: Amazon S3 Files access point to mount
                                       as shared file storage. Exactly one of session_storage,
                                       s3_files_access_point, or efs_access_point must
-                                      be specified. See s3_files_access_point Block
-                                      below.
+                                      be specified. See environment.agentcore_runtime_environment.filesystem_configuration.s3_files_access_point
+                                      Block below.
                                     items:
                                       properties:
                                         accessPointArn:
@@ -2284,8 +2299,8 @@ spec:
                                               type: object
                                           type: object
                                         mountPath:
-                                          description: Mount path for the S3 Files
-                                            access point inside the agent runtime.
+                                          description: Mount path for the session
+                                            storage filesystem inside the agent runtime.
                                             Must be under /mnt with exactly one subdirectory
                                             level (for example, /mnt/data).
                                           type: string
@@ -2296,12 +2311,13 @@ spec:
                                       persistent storage across agent runtime session
                                       invocations. Exactly one of session_storage,
                                       s3_files_access_point, or efs_access_point must
-                                      be specified. See session_storage Block below.
+                                      be specified. See environment.agentcore_runtime_environment.filesystem_configuration.session_storage
+                                      Block below.
                                     items:
                                       properties:
                                         mountPath:
-                                          description: Mount path for the S3 Files
-                                            access point inside the agent runtime.
+                                          description: Mount path for the session
+                                            storage filesystem inside the agent runtime.
                                             Must be under /mnt with exactly one subdirectory
                                             level (for example, /mnt/data).
                                           type: string
@@ -2310,7 +2326,7 @@ spec:
                                 type: object
                               type: array
                             lifecycleConfiguration:
-                              description: Lifecycle configuration. See lifecycle_configuration
+                              description: Lifecycle configuration. See environment.agentcore_runtime_environment.lifecycle_configuration
                                 Block below.
                               items:
                                 properties:
@@ -2324,7 +2340,7 @@ spec:
                                 type: object
                               type: array
                             networkConfiguration:
-                              description: Network configuration. See network_configuration
+                              description: Network configuration. See environment.agentcore_runtime_environment.network_configuration
                                 Block below.
                               items:
                                 properties:
@@ -2333,7 +2349,7 @@ spec:
                                       VPC.'
                                     type: string
                                   networkModeConfig:
-                                    description: VPC configuration. See network_mode_config
+                                    description: VPC configuration. See environment.agentcore_runtime_environment.network_configuration.network_mode_config
                                       Block below.
                                     items:
                                       properties:
@@ -2452,14 +2468,16 @@ spec:
                         type: object
                     type: object
                   harnessName:
-                    description: Name of the harness. Must be 1-40 characters, alphanumeric
-                      and underscores only.
+                    description: Name of the harness. Must be 1-40 characters, start
+                      with a letter, and contain only alphanumeric characters and
+                      underscores.
                     type: string
                   maxIterations:
                     description: Maximum number of iterations the agent loop can perform.
                     type: number
                   maxTokens:
-                    description: Maximum number of tokens in the model response.
+                    description: Maximum total number of output tokens the agent can
+                      generate across all model calls within a single invocation.
                     type: number
                   memory:
                     description: Memory configuration. See memory Block below. If
@@ -2469,14 +2487,14 @@ spec:
                     properties:
                       agentcoreMemoryConfiguration:
                         description: AgentCore memory configuration. Use this to connect
-                          to an existing AgentCore memory resource. See agentcore_memory_configuration
+                          to an existing AgentCore memory resource. See memory.agentcore_memory_configuration
                           Block below.
                         properties:
                           actorId:
                             description: Actor ID for memory sessions.
                             type: string
                           arn:
-                            description: ARN of the hosting environment.
+                            description: ARN of the AgentCore memory resource.
                             type: string
                           arnRef:
                             description: Reference to a Memory in bedrockagentcore
@@ -2555,11 +2573,10 @@ spec:
                                 type: object
                             type: object
                           messagesCount:
-                            description: Number of recent messages to keep in the
-                              conversation window.
+                            description: Number of messages to retrieve from memory.
                             type: number
                           retrievalConfig:
-                            description: Retrieval configuration parameters. See retrieval_config
+                            description: Retrieval configuration parameters. See memory.agentcore_memory_configuration.retrieval_config
                               Block below.
                             properties:
                               mapBlockKey:
@@ -2650,17 +2667,17 @@ spec:
                                     type: object
                                 type: object
                               topK:
-                                description: Top-k sampling parameter.
+                                description: Number of top results to retrieve.
                                 type: number
                             type: object
                         type: object
                       disabled:
                         description: Explicitly disable memory for this harness. See
-                          disabled Block below.
+                          memory.disabled Block below.
                         type: object
                       managedMemoryConfiguration:
                         description: Managed memory configuration. Creates and manages
-                          a memory resource automatically. See managed_memory_configuration
+                          a memory resource automatically. See memory.managed_memory_configuration
                           Block below.
                         properties:
                           encryptionKeyArn:
@@ -2673,8 +2690,8 @@ spec:
                             type: number
                           strategies:
                             description: Set of strategy types to enable. Valid values
-                              are SEMANTIC, SUMMARIZATION, and USER_PREFERENCE. Defaults
-                              to ["SEMANTIC", "SUMMARIZATION"].
+                              are SEMANTIC, SUMMARIZATION, USER_PREFERENCE, and EPISODIC.
+                              Defaults to ["SEMANTIC", "SUMMARIZATION"].
                             items:
                               type: string
                             type: array
@@ -2699,7 +2716,9 @@ spec:
                               converse_stream, responses, and chat_completions.
                             type: string
                           maxTokens:
-                            description: Maximum number of tokens in the model response.
+                            description: Maximum total number of output tokens the
+                              agent can generate across all model calls within a single
+                              invocation.
                             type: number
                           modelId:
                             description: Bedrock model ID (e.g., anthropic.claude-sonnet-4-20250514).
@@ -2802,7 +2821,9 @@ spec:
                                 type: object
                             type: object
                           maxTokens:
-                            description: Maximum number of tokens in the model response.
+                            description: Maximum total number of output tokens the
+                              agent can generate across all model calls within a single
+                              invocation.
                             type: number
                           modelId:
                             description: Bedrock model ID (e.g., anthropic.claude-sonnet-4-20250514).
@@ -2911,7 +2932,9 @@ spec:
                                 type: object
                             type: object
                           maxTokens:
-                            description: Maximum number of tokens in the model response.
+                            description: Maximum total number of output tokens the
+                              agent can generate across all model calls within a single
+                              invocation.
                             type: number
                           modelId:
                             description: Bedrock model ID (e.g., anthropic.claude-sonnet-4-20250514).
@@ -3018,7 +3041,9 @@ spec:
                                 type: object
                             type: object
                           maxTokens:
-                            description: Maximum number of tokens in the model response.
+                            description: Maximum total number of output tokens the
+                              agent can generate across all model calls within a single
+                              invocation.
                             type: number
                           modelId:
                             description: Bedrock model ID (e.g., anthropic.claude-sonnet-4-20250514).
@@ -3124,8 +3149,8 @@ spec:
                     items:
                       properties:
                         config:
-                          description: Tool-specific configuration. See tool config
-                            below.
+                          description: Tool-specific configuration. See tool.config
+                            Block below.
                           properties:
                             agentcoreBrowser:
                               description: AgentCore browser configuration. See agentcore_browser
@@ -3384,10 +3409,12 @@ spec:
                                     See outbound_auth Block below.
                                   properties:
                                     awsIam:
-                                      description: Set to true to use AWS IAM authentication.
+                                      description: Whether to use AWS IAM authentication.
+                                        Must be true if set.
                                       type: boolean
                                     none:
-                                      description: Set to true to disable authentication.
+                                      description: Whether to disable authentication.
+                                        Must be true if set.
                                       type: boolean
                                     oauth:
                                       description: OAuth credential provider configuration.
@@ -3566,8 +3593,8 @@ spec:
                       See truncation Block below.
                     properties:
                       config:
-                        description: Strategy-specific configuration. See truncation
-                          config below.
+                        description: Strategy-specific configuration. See truncation.config
+                          Block below.
                         items:
                           properties:
                             slidingWindow:
@@ -3711,7 +3738,7 @@ spec:
                       type: string
                     type: array
                   arn:
-                    description: ARN of the AgentCore memory resource.
+                    description: ARN of the Harness.
                     type: string
                   authorizerConfiguration:
                     description: Authorization configuration for authenticating requests.
@@ -3753,7 +3780,7 @@ spec:
                                 items:
                                   properties:
                                     arn:
-                                      description: ARN of the hosting environment.
+                                      description: ARN of the managed memory resource.
                                       type: string
                                   type: object
                                 type: array
@@ -3934,12 +3961,12 @@ spec:
                     type: object
                   environment:
                     description: Compute environment configuration. See environment
-                      Block below.If not specified, configured values can be found
+                      Block below. If not specified, configured values can be found
                       in environment_actual.
                     properties:
                       agentcoreRuntimeEnvironment:
                         description: AgentCore runtime environment configuration.
-                          See agentcore_runtime_environment Block below.
+                          See environment.agentcore_runtime_environment Block below.
                         items:
                           properties:
                             agentRuntimeArn:
@@ -3955,7 +3982,7 @@ spec:
                                 for the harness.
                               type: string
                             filesystemConfiguration:
-                              description: Filesystem configurations. See filesystem_configuration
+                              description: Filesystem configurations. See environment.agentcore_runtime_environment.filesystem_configuration
                                 Block below.
                               items:
                                 properties:
@@ -3963,17 +3990,18 @@ spec:
                                     description: Amazon EFS access point to mount
                                       as shared file storage. Exactly one of session_storage,
                                       s3_files_access_point, or efs_access_point must
-                                      be specified. See efs_access_point Block below.
+                                      be specified. See environment.agentcore_runtime_environment.filesystem_configuration.efs_access_point
+                                      Block below.
                                     items:
                                       properties:
                                         accessPointArn:
-                                          description: ARN of the Amazon S3 Files
-                                            access point to mount into the agent runtime.
+                                          description: ARN of the Amazon EFS access
+                                            point to mount into the agent runtime.
                                           type: string
                                         mountPath:
-                                          description: Mount path for the S3 Files
-                                            access point inside the agent runtime.
-                                            Must be under /mnt with exactly one subdirectory
+                                          description: Mount path for the EFS access
+                                            point inside the agent runtime. Must be
+                                            under /mnt with exactly one subdirectory
                                             level (for example, /mnt/data).
                                           type: string
                                       type: object
@@ -3982,8 +4010,8 @@ spec:
                                     description: Amazon S3 Files access point to mount
                                       as shared file storage. Exactly one of session_storage,
                                       s3_files_access_point, or efs_access_point must
-                                      be specified. See s3_files_access_point Block
-                                      below.
+                                      be specified. See environment.agentcore_runtime_environment.filesystem_configuration.s3_files_access_point
+                                      Block below.
                                     items:
                                       properties:
                                         accessPointArn:
@@ -3991,8 +4019,8 @@ spec:
                                             access point to mount into the agent runtime.
                                           type: string
                                         mountPath:
-                                          description: Mount path for the S3 Files
-                                            access point inside the agent runtime.
+                                          description: Mount path for the session
+                                            storage filesystem inside the agent runtime.
                                             Must be under /mnt with exactly one subdirectory
                                             level (for example, /mnt/data).
                                           type: string
@@ -4003,12 +4031,13 @@ spec:
                                       persistent storage across agent runtime session
                                       invocations. Exactly one of session_storage,
                                       s3_files_access_point, or efs_access_point must
-                                      be specified. See session_storage Block below.
+                                      be specified. See environment.agentcore_runtime_environment.filesystem_configuration.session_storage
+                                      Block below.
                                     items:
                                       properties:
                                         mountPath:
-                                          description: Mount path for the S3 Files
-                                            access point inside the agent runtime.
+                                          description: Mount path for the session
+                                            storage filesystem inside the agent runtime.
                                             Must be under /mnt with exactly one subdirectory
                                             level (for example, /mnt/data).
                                           type: string
@@ -4017,7 +4046,7 @@ spec:
                                 type: object
                               type: array
                             lifecycleConfiguration:
-                              description: Lifecycle configuration. See lifecycle_configuration
+                              description: Lifecycle configuration. See environment.agentcore_runtime_environment.lifecycle_configuration
                                 Block below.
                               items:
                                 properties:
@@ -4031,7 +4060,7 @@ spec:
                                 type: object
                               type: array
                             networkConfiguration:
-                              description: Network configuration. See network_configuration
+                              description: Network configuration. See environment.agentcore_runtime_environment.network_configuration
                                 Block below.
                               items:
                                 properties:
@@ -4040,12 +4069,12 @@ spec:
                                       VPC.'
                                     type: string
                                   networkModeConfig:
-                                    description: VPC configuration. See network_mode_config
+                                    description: VPC configuration. See environment.agentcore_runtime_environment.network_configuration.network_mode_config
                                       Block below.
                                     items:
                                       properties:
                                         requireServiceS3Endpoint:
-                                          description: Whether to require an S3 endpoint
+                                          description: Whether an S3 endpoint is required
                                             for the service in the VPC.
                                           type: boolean
                                         securityGroups:
@@ -4068,12 +4097,14 @@ spec:
                         type: array
                     type: object
                   environmentActual:
-                    description: Actual deployed environment configuration.
+                    description: Actual deployed environment configuration. See environment_actual
+                      Block below.
                     items:
                       properties:
                         agentcoreRuntimeEnvironment:
                           description: AgentCore runtime environment configuration.
-                            See agentcore_runtime_environment Block below.
+                            See environment_actual.agentcore_runtime_environment Block
+                            below.
                           items:
                             properties:
                               agentRuntimeArn:
@@ -4089,73 +4120,60 @@ spec:
                                   derives for the harness.
                                 type: string
                               filesystemConfiguration:
-                                description: Filesystem configurations. See filesystem_configuration
+                                description: Filesystem configurations. See environment_actual.agentcore_runtime_environment.filesystem_configuration
                                   Block below.
                                 items:
                                   properties:
                                     efsAccessPoint:
-                                      description: Amazon EFS access point to mount
-                                        as shared file storage. Exactly one of session_storage,
-                                        s3_files_access_point, or efs_access_point
-                                        must be specified. See efs_access_point Block
-                                        below.
+                                      description: Amazon EFS access point mounted
+                                        as shared file storage. See environment_actual.agentcore_runtime_environment.filesystem_configuration.efs_access_point
+                                        Block below.
                                       items:
                                         properties:
                                           accessPointArn:
-                                            description: ARN of the Amazon S3 Files
-                                              access point to mount into the agent
-                                              runtime.
+                                            description: ARN of the Amazon EFS access
+                                              point mounted into the agent runtime.
                                             type: string
                                           mountPath:
-                                            description: Mount path for the S3 Files
-                                              access point inside the agent runtime.
-                                              Must be under /mnt with exactly one
-                                              subdirectory level (for example, /mnt/data).
+                                            description: Mount path for the EFS access
+                                              point inside the agent runtime.
                                             type: string
                                         type: object
                                       type: array
                                     s3FilesAccessPoint:
-                                      description: Amazon S3 Files access point to
-                                        mount as shared file storage. Exactly one
-                                        of session_storage, s3_files_access_point,
-                                        or efs_access_point must be specified. See
-                                        s3_files_access_point Block below.
+                                      description: Amazon S3 Files access point mounted
+                                        as shared file storage. See environment_actual.agentcore_runtime_environment.filesystem_configuration.s3_files_access_point
+                                        Block below.
                                       items:
                                         properties:
                                           accessPointArn:
                                             description: ARN of the Amazon S3 Files
-                                              access point to mount into the agent
+                                              access point mounted into the agent
                                               runtime.
                                             type: string
                                           mountPath:
                                             description: Mount path for the S3 Files
                                               access point inside the agent runtime.
-                                              Must be under /mnt with exactly one
-                                              subdirectory level (for example, /mnt/data).
                                             type: string
                                         type: object
                                       type: array
                                     sessionStorage:
-                                      description: Session storage filesystem providing
-                                        persistent storage across agent runtime session
-                                        invocations. Exactly one of session_storage,
-                                        s3_files_access_point, or efs_access_point
-                                        must be specified. See session_storage Block
-                                        below.
+                                      description: Session storage filesystem. See
+                                        environment_actual.agentcore_runtime_environment.filesystem_configuration.session_storage
+                                        Block below.
                                       items:
                                         properties:
                                           mountPath:
-                                            description: Mount path for the S3 Files
-                                              access point inside the agent runtime.
-                                              Must be under /mnt with exactly one
-                                              subdirectory level (for example, /mnt/data).
+                                            description: Mount path for the session
+                                              storage filesystem inside the agent
+                                              runtime.
                                             type: string
                                         type: object
                                       type: array
                                   type: object
                                 type: array
                               lifecycleConfiguration:
-                                description: Lifecycle configuration. See lifecycle_configuration
+                                description: Lifecycle configuration. See environment_actual.agentcore_runtime_environment.lifecycle_configuration
                                   Block below.
                                 items:
                                   properties:
@@ -4169,22 +4187,21 @@ spec:
                                   type: object
                                 type: array
                               networkConfiguration:
-                                description: Network configuration. See network_configuration
+                                description: Network configuration. See environment_actual.agentcore_runtime_environment.network_configuration
                                   Block below.
                                 items:
                                   properties:
                                     networkMode:
-                                      description: 'Network mode. Valid values: PUBLIC,
-                                        VPC.'
+                                      description: Network mode.
                                       type: string
                                     networkModeConfig:
-                                      description: VPC configuration. See network_mode_config
+                                      description: VPC configuration. See environment_actual.agentcore_runtime_environment.network_configuration.network_mode_config
                                         Block below.
                                       items:
                                         properties:
                                           requireServiceS3Endpoint:
-                                            description: Whether to require an S3
-                                              endpoint for the service in the VPC.
+                                            description: Whether an S3 endpoint is
+                                              required for the service in the VPC.
                                             type: boolean
                                           securityGroups:
                                             description: Security groups for the VPC.
@@ -4227,8 +4244,9 @@ spec:
                     description: Unique identifier of the Harness.
                     type: string
                   harnessName:
-                    description: Name of the harness. Must be 1-40 characters, alphanumeric
-                      and underscores only.
+                    description: Name of the harness. Must be 1-40 characters, start
+                      with a letter, and contain only alphanumeric characters and
+                      underscores.
                     type: string
                   id:
                     type: string
@@ -4236,7 +4254,8 @@ spec:
                     description: Maximum number of iterations the agent loop can perform.
                     type: number
                   maxTokens:
-                    description: Maximum number of tokens in the model response.
+                    description: Maximum total number of output tokens the agent can
+                      generate across all model calls within a single invocation.
                     type: number
                   memory:
                     description: Memory configuration. See memory Block below. If
@@ -4246,21 +4265,20 @@ spec:
                     properties:
                       agentcoreMemoryConfiguration:
                         description: AgentCore memory configuration. Use this to connect
-                          to an existing AgentCore memory resource. See agentcore_memory_configuration
+                          to an existing AgentCore memory resource. See memory.agentcore_memory_configuration
                           Block below.
                         properties:
                           actorId:
                             description: Actor ID for memory sessions.
                             type: string
                           arn:
-                            description: ARN of the hosting environment.
+                            description: ARN of the AgentCore memory resource.
                             type: string
                           messagesCount:
-                            description: Number of recent messages to keep in the
-                              conversation window.
+                            description: Number of messages to retrieve from memory.
                             type: number
                           retrievalConfig:
-                            description: Retrieval configuration parameters. See retrieval_config
+                            description: Retrieval configuration parameters. See memory.agentcore_memory_configuration.retrieval_config
                               Block below.
                             properties:
                               mapBlockKey:
@@ -4275,21 +4293,21 @@ spec:
                                 description: ID of the memory strategy.
                                 type: string
                               topK:
-                                description: Top-k sampling parameter.
+                                description: Number of top results to retrieve.
                                 type: number
                             type: object
                         type: object
                       disabled:
                         description: Explicitly disable memory for this harness. See
-                          disabled Block below.
+                          memory.disabled Block below.
                         type: object
                       managedMemoryConfiguration:
                         description: Managed memory configuration. Creates and manages
-                          a memory resource automatically. See managed_memory_configuration
+                          a memory resource automatically. See memory.managed_memory_configuration
                           Block below.
                         properties:
                           arn:
-                            description: ARN of the hosting environment.
+                            description: ARN of the managed memory resource.
                             type: string
                           encryptionKeyArn:
                             description: ARN of a customer-managed KMS key used to
@@ -4301,8 +4319,8 @@ spec:
                             type: number
                           strategies:
                             description: Set of strategy types to enable. Valid values
-                              are SEMANTIC, SUMMARIZATION, and USER_PREFERENCE. Defaults
-                              to ["SEMANTIC", "SUMMARIZATION"].
+                              are SEMANTIC, SUMMARIZATION, USER_PREFERENCE, and EPISODIC.
+                              Defaults to ["SEMANTIC", "SUMMARIZATION"].
                             items:
                               type: string
                             type: array
@@ -4310,28 +4328,28 @@ spec:
                         type: object
                     type: object
                   memoryActual:
-                    description: Actual deployed memory configuration.
+                    description: Actual deployed memory configuration. See memory_actual
+                      Block below.
                     items:
                       properties:
                         agentcoreMemoryConfiguration:
-                          description: AgentCore memory configuration. Use this to
-                            connect to an existing AgentCore memory resource. See
-                            agentcore_memory_configuration Block below.
+                          description: AgentCore memory configuration. See memory_actual.agentcore_memory_configuration
+                            Block below.
                           items:
                             properties:
                               actorId:
                                 description: Actor ID for memory sessions.
                                 type: string
                               arn:
-                                description: ARN of the hosting environment.
+                                description: ARN of the AgentCore memory resource.
                                 type: string
                               messagesCount:
-                                description: Number of recent messages to keep in
-                                  the conversation window.
+                                description: Number of messages to retrieve from memory.
                                 type: number
                               retrievalConfig:
                                 description: Retrieval configuration parameters. See
-                                  retrieval_config Block below.
+                                  memory_actual.agentcore_memory_configuration.retrieval_config
+                                  Block below.
                                 items:
                                   properties:
                                     mapBlockKey:
@@ -4339,47 +4357,41 @@ spec:
                                         settings.
                                       type: string
                                     relevanceScore:
-                                      description: Relevance score threshold. Valid
-                                        value is between 0 and 1.
+                                      description: Relevance score threshold.
                                       type: number
                                     strategyId:
                                       description: ID of the memory strategy.
                                       type: string
                                     topK:
-                                      description: Top-k sampling parameter.
+                                      description: Number of top results to retrieve.
                                       type: number
                                   type: object
                                 type: array
                             type: object
                           type: array
                         disabled:
-                          description: Explicitly disable memory for this harness.
-                            See disabled Block below.
+                          description: Present when memory is explicitly disabled.
+                            See memory_actual.disabled Block below.
                           items:
                             type: object
                           type: array
                         managedMemoryConfiguration:
-                          description: Managed memory configuration. Creates and manages
-                            a memory resource automatically. See managed_memory_configuration
+                          description: Managed memory configuration. See memory_actual.managed_memory_configuration
                             Block below.
                           items:
                             properties:
                               arn:
-                                description: ARN of the hosting environment.
+                                description: ARN of the managed memory resource.
                                 type: string
                               encryptionKeyArn:
-                                description: ARN of a customer-managed KMS key used
-                                  to encrypt the memory. Defaults to an AWS-owned
-                                  key. Cannot be changed after creation.
+                                description: ARN of the customer-managed KMS key used
+                                  to encrypt the memory.
                                 type: string
                               eventExpiryDuration:
-                                description: Event retention in days. Defaults to
-                                  30.
+                                description: Event retention in days.
                                 type: number
                               strategies:
-                                description: Set of strategy types to enable. Valid
-                                  values are SEMANTIC, SUMMARIZATION, and USER_PREFERENCE.
-                                  Defaults to ["SEMANTIC", "SUMMARIZATION"].
+                                description: Set of strategy types enabled.
                                 items:
                                   type: string
                                 type: array
@@ -4406,7 +4418,9 @@ spec:
                               converse_stream, responses, and chat_completions.
                             type: string
                           maxTokens:
-                            description: Maximum number of tokens in the model response.
+                            description: Maximum total number of output tokens the
+                              agent can generate across all model calls within a single
+                              invocation.
                             type: number
                           modelId:
                             description: Bedrock model ID (e.g., anthropic.claude-sonnet-4-20250514).
@@ -4433,7 +4447,9 @@ spec:
                             description: ARN of the secret containing the API key.
                             type: string
                           maxTokens:
-                            description: Maximum number of tokens in the model response.
+                            description: Maximum total number of output tokens the
+                              agent can generate across all model calls within a single
+                              invocation.
                             type: number
                           modelId:
                             description: Bedrock model ID (e.g., anthropic.claude-sonnet-4-20250514).
@@ -4466,7 +4482,9 @@ spec:
                             description: ARN of the secret containing the API key.
                             type: string
                           maxTokens:
-                            description: Maximum number of tokens in the model response.
+                            description: Maximum total number of output tokens the
+                              agent can generate across all model calls within a single
+                              invocation.
                             type: number
                           modelId:
                             description: Bedrock model ID (e.g., anthropic.claude-sonnet-4-20250514).
@@ -4497,7 +4515,9 @@ spec:
                             description: ARN of the secret containing the API key.
                             type: string
                           maxTokens:
-                            description: Maximum number of tokens in the model response.
+                            description: Maximum total number of output tokens the
+                              agent can generate across all model calls within a single
+                              invocation.
                             type: number
                           modelId:
                             description: Bedrock model ID (e.g., anthropic.claude-sonnet-4-20250514).
@@ -4603,9 +4623,8 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
                   timeoutSeconds:
@@ -4616,8 +4635,8 @@ spec:
                     items:
                       properties:
                         config:
-                          description: Tool-specific configuration. See tool config
-                            below.
+                          description: Tool-specific configuration. See tool.config
+                            Block below.
                           properties:
                             agentcoreBrowser:
                               description: AgentCore browser configuration. See agentcore_browser
@@ -4648,10 +4667,12 @@ spec:
                                     See outbound_auth Block below.
                                   properties:
                                     awsIam:
-                                      description: Set to true to use AWS IAM authentication.
+                                      description: Whether to use AWS IAM authentication.
+                                        Must be true if set.
                                       type: boolean
                                     none:
-                                      description: Set to true to disable authentication.
+                                      description: Whether to disable authentication.
+                                        Must be true if set.
                                       type: boolean
                                     oauth:
                                       description: OAuth credential provider configuration.
@@ -4741,8 +4762,8 @@ spec:
                       See truncation Block below.
                     properties:
                       config:
-                        description: Strategy-specific configuration. See truncation
-                          config below.
+                        description: Strategy-specific configuration. See truncation.config
+                          Block below.
                         items:
                           properties:
                             slidingWindow:

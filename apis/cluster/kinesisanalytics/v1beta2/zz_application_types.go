@@ -15,8 +15,7 @@ import (
 
 type ApplicationInitParameters struct {
 
-	// The CloudWatch log stream options to monitor application errors.
-	// See CloudWatch Logging Options below for more details.
+	// CloudWatch log stream options to monitor application errors. See cloudwatch_logging_options Block below for details.
 	CloudwatchLoggingOptions *CloudwatchLoggingOptionsInitParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
 	// SQL Code to transform input data, and generate output.
@@ -25,18 +24,16 @@ type ApplicationInitParameters struct {
 	// Description of the application.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Input configuration of the application. See Inputs below for more details.
+	// Input configuration of the application. See inputs Block below for details.
 	Inputs *InputsInitParameters `json:"inputs,omitempty" tf:"inputs,omitempty"`
 
-	// Output destination configuration of the application. See Outputs below for more details.
+	// Output destination configuration of the application. See outputs Block below for details.
 	Outputs []OutputsInitParameters `json:"outputs,omitempty" tf:"outputs,omitempty"`
 
-	// An S3 Reference Data Source for the application.
-	// See Reference Data Sources below for more details.
+	// S3 Reference Data Source for the application. See reference_data_sources Block below for details.
 	ReferenceDataSources *ReferenceDataSourcesInitParameters `json:"referenceDataSources,omitempty" tf:"reference_data_sources,omitempty"`
 
-	// Whether to start or stop the Kinesis Analytics Application. To start an application, an input with a defined starting_position must be configured.
-	// To modify an application's starting position, first stop the application by setting start_application = false, then update starting_position and set start_application = true.
+	// Whether to start or stop the Kinesis Analytics Application. To start an application, an input with a defined starting_position must be configured. To modify an application's starting position, first stop the application by setting start_application = false, then update starting_position and set start_application = true.
 	StartApplication *bool `json:"startApplication,omitempty" tf:"start_application,omitempty"`
 
 	// Key-value map of resource tags.
@@ -46,65 +43,61 @@ type ApplicationInitParameters struct {
 
 type ApplicationObservation struct {
 
-	// The ARN of the Kinesis Analytics Appliation.
+	// ARN of the Kinesis Analytics Application.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The CloudWatch log stream options to monitor application errors.
-	// See CloudWatch Logging Options below for more details.
+	// CloudWatch log stream options to monitor application errors. See cloudwatch_logging_options Block below for details.
 	CloudwatchLoggingOptions *CloudwatchLoggingOptionsObservation `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
 	// SQL Code to transform input data, and generate output.
 	Code *string `json:"code,omitempty" tf:"code,omitempty"`
 
-	// The Timestamp when the application version was created.
+	// Timestamp when the application version was created.
 	CreateTimestamp *string `json:"createTimestamp,omitempty" tf:"create_timestamp,omitempty"`
 
 	// Description of the application.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The ARN of the Kinesis Analytics Application.
+	// ARN of the Kinesis Analytics Application.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Input configuration of the application. See Inputs below for more details.
+	// Input configuration of the application. See inputs Block below for details.
 	Inputs *InputsObservation `json:"inputs,omitempty" tf:"inputs,omitempty"`
 
-	// The Timestamp when the application was last updated.
+	// Timestamp when the application was last updated.
 	LastUpdateTimestamp *string `json:"lastUpdateTimestamp,omitempty" tf:"last_update_timestamp,omitempty"`
 
-	// Output destination configuration of the application. See Outputs below for more details.
+	// Output destination configuration of the application. See outputs Block below for details.
 	Outputs []OutputsObservation `json:"outputs,omitempty" tf:"outputs,omitempty"`
 
-	// An S3 Reference Data Source for the application.
-	// See Reference Data Sources below for more details.
+	// S3 Reference Data Source for the application. See reference_data_sources Block below for details.
 	ReferenceDataSources *ReferenceDataSourcesObservation `json:"referenceDataSources,omitempty" tf:"reference_data_sources,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// Whether to start or stop the Kinesis Analytics Application. To start an application, an input with a defined starting_position must be configured.
-	// To modify an application's starting position, first stop the application by setting start_application = false, then update starting_position and set start_application = true.
+	// Whether to start or stop the Kinesis Analytics Application. To start an application, an input with a defined starting_position must be configured. To modify an application's starting position, first stop the application by setting start_application = false, then update starting_position and set start_application = true.
 	StartApplication *bool `json:"startApplication,omitempty" tf:"start_application,omitempty"`
 
-	// The Status of the application.
+	// Status of the application.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// The Version of the application.
+	// Version of the application.
 	Version *float64 `json:"version,omitempty" tf:"version,omitempty"`
 }
 
 type ApplicationParameters struct {
 
-	// The CloudWatch log stream options to monitor application errors.
-	// See CloudWatch Logging Options below for more details.
+	// CloudWatch log stream options to monitor application errors. See cloudwatch_logging_options Block below for details.
 	// +kubebuilder:validation:Optional
 	CloudwatchLoggingOptions *CloudwatchLoggingOptionsParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
@@ -116,16 +109,15 @@ type ApplicationParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Input configuration of the application. See Inputs below for more details.
+	// Input configuration of the application. See inputs Block below for details.
 	// +kubebuilder:validation:Optional
 	Inputs *InputsParameters `json:"inputs,omitempty" tf:"inputs,omitempty"`
 
-	// Output destination configuration of the application. See Outputs below for more details.
+	// Output destination configuration of the application. See outputs Block below for details.
 	// +kubebuilder:validation:Optional
 	Outputs []OutputsParameters `json:"outputs,omitempty" tf:"outputs,omitempty"`
 
-	// An S3 Reference Data Source for the application.
-	// See Reference Data Sources below for more details.
+	// S3 Reference Data Source for the application. See reference_data_sources Block below for details.
 	// +kubebuilder:validation:Optional
 	ReferenceDataSources *ReferenceDataSourcesParameters `json:"referenceDataSources,omitempty" tf:"reference_data_sources,omitempty"`
 
@@ -134,8 +126,7 @@ type ApplicationParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// Whether to start or stop the Kinesis Analytics Application. To start an application, an input with a defined starting_position must be configured.
-	// To modify an application's starting position, first stop the application by setting start_application = false, then update starting_position and set start_application = true.
+	// Whether to start or stop the Kinesis Analytics Application. To start an application, an input with a defined starting_position must be configured. To modify an application's starting position, first stop the application by setting start_application = false, then update starting_position and set start_application = true.
 	// +kubebuilder:validation:Optional
 	StartApplication *bool `json:"startApplication,omitempty" tf:"start_application,omitempty"`
 
@@ -147,7 +138,7 @@ type ApplicationParameters struct {
 
 type CloudwatchLoggingOptionsInitParameters struct {
 
-	// The ARN of the CloudWatch Log Stream.
+	// ARN of the CloudWatch Log Stream.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/cloudwatchlogs/v1beta1.Stream
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	LogStreamArn *string `json:"logStreamArn,omitempty" tf:"log_stream_arn,omitempty"`
@@ -160,7 +151,7 @@ type CloudwatchLoggingOptionsInitParameters struct {
 	// +kubebuilder:validation:Optional
 	LogStreamArnSelector *v2.Selector `json:"logStreamArnSelector,omitempty" tf:"-"`
 
-	// The ARN of the IAM Role used to send application messages.
+	// ARN of the IAM Role used to send application messages.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
@@ -176,19 +167,19 @@ type CloudwatchLoggingOptionsInitParameters struct {
 
 type CloudwatchLoggingOptionsObservation struct {
 
-	// The ARN of the Kinesis Analytics Application.
+	// ARN of the Kinesis Analytics Application.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The ARN of the CloudWatch Log Stream.
+	// ARN of the CloudWatch Log Stream.
 	LogStreamArn *string `json:"logStreamArn,omitempty" tf:"log_stream_arn,omitempty"`
 
-	// The ARN of the IAM Role used to send application messages.
+	// ARN of the IAM Role used to send application messages.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
 
 type CloudwatchLoggingOptionsParameters struct {
 
-	// The ARN of the CloudWatch Log Stream.
+	// ARN of the CloudWatch Log Stream.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/cloudwatchlogs/v1beta1.Stream
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -202,7 +193,7 @@ type CloudwatchLoggingOptionsParameters struct {
 	// +kubebuilder:validation:Optional
 	LogStreamArnSelector *v2.Selector `json:"logStreamArnSelector,omitempty" tf:"-"`
 
-	// The ARN of the IAM Role used to send application messages.
+	// ARN of the IAM Role used to send application messages.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -219,128 +210,114 @@ type CloudwatchLoggingOptionsParameters struct {
 
 type CsvInitParameters struct {
 
-	// The Column Delimiter.
+	// Column Delimiter.
 	RecordColumnDelimiter *string `json:"recordColumnDelimiter,omitempty" tf:"record_column_delimiter,omitempty"`
 
-	// The Row Delimiter.
+	// Row Delimiter.
 	RecordRowDelimiter *string `json:"recordRowDelimiter,omitempty" tf:"record_row_delimiter,omitempty"`
 }
 
 type CsvObservation struct {
 
-	// The Column Delimiter.
+	// Column Delimiter.
 	RecordColumnDelimiter *string `json:"recordColumnDelimiter,omitempty" tf:"record_column_delimiter,omitempty"`
 
-	// The Row Delimiter.
+	// Row Delimiter.
 	RecordRowDelimiter *string `json:"recordRowDelimiter,omitempty" tf:"record_row_delimiter,omitempty"`
 }
 
 type CsvParameters struct {
 
-	// The Column Delimiter.
+	// Column Delimiter.
 	// +kubebuilder:validation:Optional
 	RecordColumnDelimiter *string `json:"recordColumnDelimiter" tf:"record_column_delimiter,omitempty"`
 
-	// The Row Delimiter.
+	// Row Delimiter.
 	// +kubebuilder:validation:Optional
 	RecordRowDelimiter *string `json:"recordRowDelimiter" tf:"record_row_delimiter,omitempty"`
 }
 
 type InputsInitParameters struct {
 
-	// The Kinesis Firehose configuration for the streaming source. Conflicts with kinesis_stream.
-	// See Kinesis Firehose below for more details.
+	// Kinesis Firehose configuration for the streaming source. Conflicts with kinesis_stream. See inputs.kinesis_firehose Block below for details.
 	KinesisFirehose *KinesisFirehoseInitParameters `json:"kinesisFirehose,omitempty" tf:"kinesis_firehose,omitempty"`
 
-	// The Kinesis Stream configuration for the streaming source. Conflicts with kinesis_firehose.
-	// See Kinesis Stream below for more details.
+	// Kinesis Stream configuration for the streaming source. Conflicts with kinesis_firehose. See inputs.kinesis_stream Block below for details.
 	KinesisStream *KinesisStreamInitParameters `json:"kinesisStream,omitempty" tf:"kinesis_stream,omitempty"`
 
-	// The Name Prefix to use when creating an in-application stream.
+	// Name Prefix to use when creating an in-application stream.
 	NamePrefix *string `json:"namePrefix,omitempty" tf:"name_prefix,omitempty"`
 
-	// The number of Parallel in-application streams to create.
-	// See Parallelism below for more details.
+	// Number of Parallel in-application streams to create. See inputs.parallelism Block below for details.
 	Parallelism *ParallelismInitParameters `json:"parallelism,omitempty" tf:"parallelism,omitempty"`
 
-	// The Processing Configuration to transform records as they are received from the stream.
-	// See Processing Configuration below for more details.
+	// Processing Configuration to transform records as they are received from the stream. See inputs.processing_configuration Block below for details.
 	ProcessingConfiguration *ProcessingConfigurationInitParameters `json:"processingConfiguration,omitempty" tf:"processing_configuration,omitempty"`
 
-	// The Schema format of the data in the streaming source. See Source Schema below for more details.
+	// Schema format of the data in the streaming source. See inputs.schema Block below for details.
 	Schema *SchemaInitParameters `json:"schema,omitempty" tf:"schema,omitempty"`
 
-	// The point at which the application starts processing records from the streaming source.
-	// See Starting Position Configuration below for more details.
+	// Point at which the application starts processing records from the streaming source. See inputs.starting_position_configuration Block below for details.
 	StartingPositionConfiguration []StartingPositionConfigurationInitParameters `json:"startingPositionConfiguration,omitempty" tf:"starting_position_configuration,omitempty"`
 }
 
 type InputsObservation struct {
 
-	// The ARN of the Kinesis Analytics Application.
+	// ARN of the Kinesis Analytics Application.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The Kinesis Firehose configuration for the streaming source. Conflicts with kinesis_stream.
-	// See Kinesis Firehose below for more details.
+	// Kinesis Firehose configuration for the streaming source. Conflicts with kinesis_stream. See inputs.kinesis_firehose Block below for details.
 	KinesisFirehose *KinesisFirehoseObservation `json:"kinesisFirehose,omitempty" tf:"kinesis_firehose,omitempty"`
 
-	// The Kinesis Stream configuration for the streaming source. Conflicts with kinesis_firehose.
-	// See Kinesis Stream below for more details.
+	// Kinesis Stream configuration for the streaming source. Conflicts with kinesis_firehose. See inputs.kinesis_stream Block below for details.
 	KinesisStream *KinesisStreamObservation `json:"kinesisStream,omitempty" tf:"kinesis_stream,omitempty"`
 
-	// The Name Prefix to use when creating an in-application stream.
+	// Name Prefix to use when creating an in-application stream.
 	NamePrefix *string `json:"namePrefix,omitempty" tf:"name_prefix,omitempty"`
 
-	// The number of Parallel in-application streams to create.
-	// See Parallelism below for more details.
+	// Number of Parallel in-application streams to create. See inputs.parallelism Block below for details.
 	Parallelism *ParallelismObservation `json:"parallelism,omitempty" tf:"parallelism,omitempty"`
 
-	// The Processing Configuration to transform records as they are received from the stream.
-	// See Processing Configuration below for more details.
+	// Processing Configuration to transform records as they are received from the stream. See inputs.processing_configuration Block below for details.
 	ProcessingConfiguration *ProcessingConfigurationObservation `json:"processingConfiguration,omitempty" tf:"processing_configuration,omitempty"`
 
-	// The Schema format of the data in the streaming source. See Source Schema below for more details.
+	// Schema format of the data in the streaming source. See inputs.schema Block below for details.
 	Schema *SchemaObservation `json:"schema,omitempty" tf:"schema,omitempty"`
 
-	// The point at which the application starts processing records from the streaming source.
-	// See Starting Position Configuration below for more details.
+	// Point at which the application starts processing records from the streaming source. See inputs.starting_position_configuration Block below for details.
 	StartingPositionConfiguration []StartingPositionConfigurationObservation `json:"startingPositionConfiguration,omitempty" tf:"starting_position_configuration,omitempty"`
 
+	// Names of the in-application streams created for the input.
 	StreamNames []*string `json:"streamNames,omitempty" tf:"stream_names,omitempty"`
 }
 
 type InputsParameters struct {
 
-	// The Kinesis Firehose configuration for the streaming source. Conflicts with kinesis_stream.
-	// See Kinesis Firehose below for more details.
+	// Kinesis Firehose configuration for the streaming source. Conflicts with kinesis_stream. See inputs.kinesis_firehose Block below for details.
 	// +kubebuilder:validation:Optional
 	KinesisFirehose *KinesisFirehoseParameters `json:"kinesisFirehose,omitempty" tf:"kinesis_firehose,omitempty"`
 
-	// The Kinesis Stream configuration for the streaming source. Conflicts with kinesis_firehose.
-	// See Kinesis Stream below for more details.
+	// Kinesis Stream configuration for the streaming source. Conflicts with kinesis_firehose. See inputs.kinesis_stream Block below for details.
 	// +kubebuilder:validation:Optional
 	KinesisStream *KinesisStreamParameters `json:"kinesisStream,omitempty" tf:"kinesis_stream,omitempty"`
 
-	// The Name Prefix to use when creating an in-application stream.
+	// Name Prefix to use when creating an in-application stream.
 	// +kubebuilder:validation:Optional
 	NamePrefix *string `json:"namePrefix" tf:"name_prefix,omitempty"`
 
-	// The number of Parallel in-application streams to create.
-	// See Parallelism below for more details.
+	// Number of Parallel in-application streams to create. See inputs.parallelism Block below for details.
 	// +kubebuilder:validation:Optional
 	Parallelism *ParallelismParameters `json:"parallelism,omitempty" tf:"parallelism,omitempty"`
 
-	// The Processing Configuration to transform records as they are received from the stream.
-	// See Processing Configuration below for more details.
+	// Processing Configuration to transform records as they are received from the stream. See inputs.processing_configuration Block below for details.
 	// +kubebuilder:validation:Optional
 	ProcessingConfiguration *ProcessingConfigurationParameters `json:"processingConfiguration,omitempty" tf:"processing_configuration,omitempty"`
 
-	// The Schema format of the data in the streaming source. See Source Schema below for more details.
+	// Schema format of the data in the streaming source. See inputs.schema Block below for details.
 	// +kubebuilder:validation:Optional
 	Schema *SchemaParameters `json:"schema" tf:"schema,omitempty"`
 
-	// The point at which the application starts processing records from the streaming source.
-	// See Starting Position Configuration below for more details.
+	// Point at which the application starts processing records from the streaming source. See inputs.starting_position_configuration Block below for details.
 	// +kubebuilder:validation:Optional
 	StartingPositionConfiguration []StartingPositionConfigurationParameters `json:"startingPositionConfiguration,omitempty" tf:"starting_position_configuration,omitempty"`
 }
@@ -366,36 +343,36 @@ type JSONParameters struct {
 
 type KinesisFirehoseInitParameters struct {
 
-	// The ARN of the Lambda function.
+	// ARN of the Kinesis Firehose delivery stream.
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
 
-	// The IAM Role ARN to read the data.
+	// ARN of the IAM Role used to access the stream.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
 
 type KinesisFirehoseObservation struct {
 
-	// The ARN of the Lambda function.
+	// ARN of the Kinesis Firehose delivery stream.
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
 
-	// The IAM Role ARN to read the data.
+	// ARN of the IAM Role used to access the stream.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
 
 type KinesisFirehoseParameters struct {
 
-	// The ARN of the Lambda function.
+	// ARN of the Kinesis Firehose delivery stream.
 	// +kubebuilder:validation:Optional
 	ResourceArn *string `json:"resourceArn" tf:"resource_arn,omitempty"`
 
-	// The IAM Role ARN to read the data.
+	// ARN of the IAM Role used to access the stream.
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn" tf:"role_arn,omitempty"`
 }
 
 type KinesisStreamInitParameters struct {
 
-	// The ARN of the Lambda function.
+	// ARN of the Kinesis Stream.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kinesis/v1beta2.Stream
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.TerraformID()
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
@@ -408,7 +385,7 @@ type KinesisStreamInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceArnSelector *v2.Selector `json:"resourceArnSelector,omitempty" tf:"-"`
 
-	// The IAM Role ARN to read the data.
+	// ARN of the IAM Role used to access the stream.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
@@ -424,16 +401,16 @@ type KinesisStreamInitParameters struct {
 
 type KinesisStreamObservation struct {
 
-	// The ARN of the Lambda function.
+	// ARN of the Kinesis Stream.
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
 
-	// The IAM Role ARN to read the data.
+	// ARN of the IAM Role used to access the stream.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
 
 type KinesisStreamParameters struct {
 
-	// The ARN of the Lambda function.
+	// ARN of the Kinesis Stream.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kinesis/v1beta2.Stream
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.TerraformID()
 	// +kubebuilder:validation:Optional
@@ -447,7 +424,7 @@ type KinesisStreamParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceArnSelector *v2.Selector `json:"resourceArnSelector,omitempty" tf:"-"`
 
-	// The IAM Role ARN to read the data.
+	// ARN of the IAM Role used to access the stream.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -464,70 +441,68 @@ type KinesisStreamParameters struct {
 
 type LambdaInitParameters struct {
 
-	// The ARN of the Lambda function.
+	// ARN of the Lambda function.
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
 
-	// The IAM Role ARN to read the data.
+	// ARN of the IAM Role used to access the Lambda function.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
 
 type LambdaObservation struct {
 
-	// The ARN of the Lambda function.
+	// ARN of the Lambda function.
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
 
-	// The IAM Role ARN to read the data.
+	// ARN of the IAM Role used to access the Lambda function.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
 
 type LambdaParameters struct {
 
-	// The ARN of the Lambda function.
+	// ARN of the Lambda function.
 	// +kubebuilder:validation:Optional
 	ResourceArn *string `json:"resourceArn" tf:"resource_arn,omitempty"`
 
-	// The IAM Role ARN to read the data.
+	// ARN of the IAM Role used to access the Lambda function.
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn" tf:"role_arn,omitempty"`
 }
 
 type MappingParametersCsvInitParameters struct {
 
-	// The Column Delimiter.
+	// Column Delimiter.
 	RecordColumnDelimiter *string `json:"recordColumnDelimiter,omitempty" tf:"record_column_delimiter,omitempty"`
 
-	// The Row Delimiter.
+	// Row Delimiter.
 	RecordRowDelimiter *string `json:"recordRowDelimiter,omitempty" tf:"record_row_delimiter,omitempty"`
 }
 
 type MappingParametersCsvObservation struct {
 
-	// The Column Delimiter.
+	// Column Delimiter.
 	RecordColumnDelimiter *string `json:"recordColumnDelimiter,omitempty" tf:"record_column_delimiter,omitempty"`
 
-	// The Row Delimiter.
+	// Row Delimiter.
 	RecordRowDelimiter *string `json:"recordRowDelimiter,omitempty" tf:"record_row_delimiter,omitempty"`
 }
 
 type MappingParametersCsvParameters struct {
 
-	// The Column Delimiter.
+	// Column Delimiter.
 	// +kubebuilder:validation:Optional
 	RecordColumnDelimiter *string `json:"recordColumnDelimiter" tf:"record_column_delimiter,omitempty"`
 
-	// The Row Delimiter.
+	// Row Delimiter.
 	// +kubebuilder:validation:Optional
 	RecordRowDelimiter *string `json:"recordRowDelimiter" tf:"record_row_delimiter,omitempty"`
 }
 
 type MappingParametersInitParameters struct {
 
-	// Mapping information when the record format uses delimiters.
-	// See CSV Mapping Parameters below for more details.
+	// Mapping information when the record format uses delimiters. See inputs.schema.record_format.mapping_parameters.csv Block below for details.
 	Csv *CsvInitParameters `json:"csv,omitempty" tf:"csv,omitempty"`
 
-	// Mapping information when JSON is the record format on the streaming source.
-	// See JSON Mapping Parameters below for more details.
+	// Mapping information when JSON is the record format on the streaming source. See inputs.schema.record_format.mapping_parameters.json Block below for details.
 	JSON *JSONInitParameters `json:"json,omitempty" tf:"json,omitempty"`
 }
 
@@ -552,51 +527,45 @@ type MappingParametersJSONParameters struct {
 
 type MappingParametersObservation struct {
 
-	// Mapping information when the record format uses delimiters.
-	// See CSV Mapping Parameters below for more details.
+	// Mapping information when the record format uses delimiters. See inputs.schema.record_format.mapping_parameters.csv Block below for details.
 	Csv *CsvObservation `json:"csv,omitempty" tf:"csv,omitempty"`
 
-	// Mapping information when JSON is the record format on the streaming source.
-	// See JSON Mapping Parameters below for more details.
+	// Mapping information when JSON is the record format on the streaming source. See inputs.schema.record_format.mapping_parameters.json Block below for details.
 	JSON *JSONObservation `json:"json,omitempty" tf:"json,omitempty"`
 }
 
 type MappingParametersParameters struct {
 
-	// Mapping information when the record format uses delimiters.
-	// See CSV Mapping Parameters below for more details.
+	// Mapping information when the record format uses delimiters. See inputs.schema.record_format.mapping_parameters.csv Block below for details.
 	// +kubebuilder:validation:Optional
 	Csv *CsvParameters `json:"csv,omitempty" tf:"csv,omitempty"`
 
-	// Mapping information when JSON is the record format on the streaming source.
-	// See JSON Mapping Parameters below for more details.
+	// Mapping information when JSON is the record format on the streaming source. See inputs.schema.record_format.mapping_parameters.json Block below for details.
 	// +kubebuilder:validation:Optional
 	JSON *JSONParameters `json:"json,omitempty" tf:"json,omitempty"`
 }
 
 type OutputsInitParameters struct {
 
-	// The Kinesis Firehose configuration for the destination stream. Conflicts with kinesis_stream.
-	// See Kinesis Firehose below for more details.
+	// Kinesis Firehose configuration for the destination stream. Conflicts with kinesis_stream. See outputs.kinesis_firehose Block below for details.
 	KinesisFirehose *OutputsKinesisFirehoseInitParameters `json:"kinesisFirehose,omitempty" tf:"kinesis_firehose,omitempty"`
 
-	// The Kinesis Stream configuration for the destination stream. Conflicts with kinesis_firehose.
-	// See Kinesis Stream below for more details.
+	// Kinesis Stream configuration for the destination stream. Conflicts with kinesis_firehose. See outputs.kinesis_stream Block below for details.
 	KinesisStream *OutputsKinesisStreamInitParameters `json:"kinesisStream,omitempty" tf:"kinesis_stream,omitempty"`
 
-	// The Lambda function destination. See Lambda below for more details.
+	// Lambda function destination. See outputs.lambda Block below for details.
 	Lambda *OutputsLambdaInitParameters `json:"lambda,omitempty" tf:"lambda,omitempty"`
 
-	// The Name of the in-application stream.
+	// Name of the in-application stream.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The Schema format of the data written to the destination. See Destination Schema below for more details.
+	// Schema format of the data written to the destination. See outputs.schema Block below for details.
 	Schema *OutputsSchemaInitParameters `json:"schema,omitempty" tf:"schema,omitempty"`
 }
 
 type OutputsKinesisFirehoseInitParameters struct {
 
-	// The ARN of the Lambda function.
+	// ARN of the Kinesis Firehose delivery stream.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/firehose/v1beta2.DeliveryStream
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",false)
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
@@ -609,7 +578,7 @@ type OutputsKinesisFirehoseInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceArnSelector *v2.Selector `json:"resourceArnSelector,omitempty" tf:"-"`
 
-	// The IAM Role ARN to read the data.
+	// ARN of the IAM Role used to access the stream.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
@@ -625,16 +594,16 @@ type OutputsKinesisFirehoseInitParameters struct {
 
 type OutputsKinesisFirehoseObservation struct {
 
-	// The ARN of the Lambda function.
+	// ARN of the Kinesis Firehose delivery stream.
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
 
-	// The IAM Role ARN to read the data.
+	// ARN of the IAM Role used to access the stream.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
 
 type OutputsKinesisFirehoseParameters struct {
 
-	// The ARN of the Lambda function.
+	// ARN of the Kinesis Firehose delivery stream.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/firehose/v1beta2.DeliveryStream
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",false)
 	// +kubebuilder:validation:Optional
@@ -648,7 +617,7 @@ type OutputsKinesisFirehoseParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceArnSelector *v2.Selector `json:"resourceArnSelector,omitempty" tf:"-"`
 
-	// The IAM Role ARN to read the data.
+	// ARN of the IAM Role used to access the stream.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -665,194 +634,190 @@ type OutputsKinesisFirehoseParameters struct {
 
 type OutputsKinesisStreamInitParameters struct {
 
-	// The ARN of the Lambda function.
+	// ARN of the Kinesis Stream.
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
 
-	// The IAM Role ARN to read the data.
+	// ARN of the IAM Role used to access the stream.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
 
 type OutputsKinesisStreamObservation struct {
 
-	// The ARN of the Lambda function.
+	// ARN of the Kinesis Stream.
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
 
-	// The IAM Role ARN to read the data.
+	// ARN of the IAM Role used to access the stream.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
 
 type OutputsKinesisStreamParameters struct {
 
-	// The ARN of the Lambda function.
+	// ARN of the Kinesis Stream.
 	// +kubebuilder:validation:Optional
 	ResourceArn *string `json:"resourceArn" tf:"resource_arn,omitempty"`
 
-	// The IAM Role ARN to read the data.
+	// ARN of the IAM Role used to access the stream.
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn" tf:"role_arn,omitempty"`
 }
 
 type OutputsLambdaInitParameters struct {
 
-	// The ARN of the Lambda function.
+	// ARN of the Lambda function.
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
 
-	// The IAM Role ARN to read the data.
+	// ARN of the IAM Role used to access the Lambda function.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
 
 type OutputsLambdaObservation struct {
 
-	// The ARN of the Lambda function.
+	// ARN of the Lambda function.
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
 
-	// The IAM Role ARN to read the data.
+	// ARN of the IAM Role used to access the Lambda function.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
 
 type OutputsLambdaParameters struct {
 
-	// The ARN of the Lambda function.
+	// ARN of the Lambda function.
 	// +kubebuilder:validation:Optional
 	ResourceArn *string `json:"resourceArn" tf:"resource_arn,omitempty"`
 
-	// The IAM Role ARN to read the data.
+	// ARN of the IAM Role used to access the Lambda function.
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn" tf:"role_arn,omitempty"`
 }
 
 type OutputsObservation struct {
 
-	// The ARN of the Kinesis Analytics Application.
+	// ARN of the Kinesis Analytics Application.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The Kinesis Firehose configuration for the destination stream. Conflicts with kinesis_stream.
-	// See Kinesis Firehose below for more details.
+	// Kinesis Firehose configuration for the destination stream. Conflicts with kinesis_stream. See outputs.kinesis_firehose Block below for details.
 	KinesisFirehose *OutputsKinesisFirehoseObservation `json:"kinesisFirehose,omitempty" tf:"kinesis_firehose,omitempty"`
 
-	// The Kinesis Stream configuration for the destination stream. Conflicts with kinesis_firehose.
-	// See Kinesis Stream below for more details.
+	// Kinesis Stream configuration for the destination stream. Conflicts with kinesis_firehose. See outputs.kinesis_stream Block below for details.
 	KinesisStream *OutputsKinesisStreamObservation `json:"kinesisStream,omitempty" tf:"kinesis_stream,omitempty"`
 
-	// The Lambda function destination. See Lambda below for more details.
+	// Lambda function destination. See outputs.lambda Block below for details.
 	Lambda *OutputsLambdaObservation `json:"lambda,omitempty" tf:"lambda,omitempty"`
 
-	// The Name of the in-application stream.
+	// Name of the in-application stream.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The Schema format of the data written to the destination. See Destination Schema below for more details.
+	// Schema format of the data written to the destination. See outputs.schema Block below for details.
 	Schema *OutputsSchemaObservation `json:"schema,omitempty" tf:"schema,omitempty"`
 }
 
 type OutputsParameters struct {
 
-	// The Kinesis Firehose configuration for the destination stream. Conflicts with kinesis_stream.
-	// See Kinesis Firehose below for more details.
+	// Kinesis Firehose configuration for the destination stream. Conflicts with kinesis_stream. See outputs.kinesis_firehose Block below for details.
 	// +kubebuilder:validation:Optional
 	KinesisFirehose *OutputsKinesisFirehoseParameters `json:"kinesisFirehose,omitempty" tf:"kinesis_firehose,omitempty"`
 
-	// The Kinesis Stream configuration for the destination stream. Conflicts with kinesis_firehose.
-	// See Kinesis Stream below for more details.
+	// Kinesis Stream configuration for the destination stream. Conflicts with kinesis_firehose. See outputs.kinesis_stream Block below for details.
 	// +kubebuilder:validation:Optional
 	KinesisStream *OutputsKinesisStreamParameters `json:"kinesisStream,omitempty" tf:"kinesis_stream,omitempty"`
 
-	// The Lambda function destination. See Lambda below for more details.
+	// Lambda function destination. See outputs.lambda Block below for details.
 	// +kubebuilder:validation:Optional
 	Lambda *OutputsLambdaParameters `json:"lambda,omitempty" tf:"lambda,omitempty"`
 
-	// The Name of the in-application stream.
+	// Name of the in-application stream.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// The Schema format of the data written to the destination. See Destination Schema below for more details.
+	// Schema format of the data written to the destination. See outputs.schema Block below for details.
 	// +kubebuilder:validation:Optional
 	Schema *OutputsSchemaParameters `json:"schema" tf:"schema,omitempty"`
 }
 
 type OutputsSchemaInitParameters struct {
 
-	// The Format Type of the records on the output stream. Can be CSV or JSON.
+	// Format Type of the records on the output stream. Can be CSV or JSON.
 	RecordFormatType *string `json:"recordFormatType,omitempty" tf:"record_format_type,omitempty"`
 }
 
 type OutputsSchemaObservation struct {
 
-	// The Format Type of the records on the output stream. Can be CSV or JSON.
+	// Format Type of the records on the output stream. Can be CSV or JSON.
 	RecordFormatType *string `json:"recordFormatType,omitempty" tf:"record_format_type,omitempty"`
 }
 
 type OutputsSchemaParameters struct {
 
-	// The Format Type of the records on the output stream. Can be CSV or JSON.
+	// Format Type of the records on the output stream. Can be CSV or JSON.
 	// +kubebuilder:validation:Optional
 	RecordFormatType *string `json:"recordFormatType" tf:"record_format_type,omitempty"`
 }
 
 type ParallelismInitParameters struct {
 
-	// The Count of streams.
+	// Count of streams.
 	Count *float64 `json:"count,omitempty" tf:"count,omitempty"`
 }
 
 type ParallelismObservation struct {
 
-	// The Count of streams.
+	// Count of streams.
 	Count *float64 `json:"count,omitempty" tf:"count,omitempty"`
 }
 
 type ParallelismParameters struct {
 
-	// The Count of streams.
+	// Count of streams.
 	// +kubebuilder:validation:Optional
 	Count *float64 `json:"count,omitempty" tf:"count,omitempty"`
 }
 
 type ProcessingConfigurationInitParameters struct {
 
-	// The Lambda function configuration. See Lambda below for more details.
+	// Lambda function configuration. See inputs.processing_configuration.lambda Block below for details.
 	Lambda *LambdaInitParameters `json:"lambda,omitempty" tf:"lambda,omitempty"`
 }
 
 type ProcessingConfigurationObservation struct {
 
-	// The Lambda function configuration. See Lambda below for more details.
+	// Lambda function configuration. See inputs.processing_configuration.lambda Block below for details.
 	Lambda *LambdaObservation `json:"lambda,omitempty" tf:"lambda,omitempty"`
 }
 
 type ProcessingConfigurationParameters struct {
 
-	// The Lambda function configuration. See Lambda below for more details.
+	// Lambda function configuration. See inputs.processing_configuration.lambda Block below for details.
 	// +kubebuilder:validation:Optional
 	Lambda *LambdaParameters `json:"lambda" tf:"lambda,omitempty"`
 }
 
 type RecordColumnsInitParameters struct {
 
-	// The Mapping reference to the data element.
+	// Mapping reference to the data element.
 	Mapping *string `json:"mapping,omitempty" tf:"mapping,omitempty"`
 
 	// Name of the column.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The SQL Type of the column.
+	// SQL Type of the column.
 	SQLType *string `json:"sqlType,omitempty" tf:"sql_type,omitempty"`
 }
 
 type RecordColumnsObservation struct {
 
-	// The Mapping reference to the data element.
+	// Mapping reference to the data element.
 	Mapping *string `json:"mapping,omitempty" tf:"mapping,omitempty"`
 
 	// Name of the column.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The SQL Type of the column.
+	// SQL Type of the column.
 	SQLType *string `json:"sqlType,omitempty" tf:"sql_type,omitempty"`
 }
 
 type RecordColumnsParameters struct {
 
-	// The Mapping reference to the data element.
+	// Mapping reference to the data element.
 	// +kubebuilder:validation:Optional
 	Mapping *string `json:"mapping,omitempty" tf:"mapping,omitempty"`
 
@@ -860,269 +825,248 @@ type RecordColumnsParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// The SQL Type of the column.
+	// SQL Type of the column.
 	// +kubebuilder:validation:Optional
 	SQLType *string `json:"sqlType" tf:"sql_type,omitempty"`
 }
 
 type RecordFormatInitParameters struct {
 
-	// The Mapping Information for the record format.
-	// See Mapping Parameters below for more details.
+	// Mapping Information for the record format. See inputs.schema.record_format.mapping_parameters Block below for details.
 	MappingParameters *MappingParametersInitParameters `json:"mappingParameters,omitempty" tf:"mapping_parameters,omitempty"`
 }
 
 type RecordFormatMappingParametersInitParameters struct {
 
-	// Mapping information when the record format uses delimiters.
-	// See CSV Mapping Parameters below for more details.
+	// Mapping information when the record format uses delimiters. See reference_data_sources.schema.record_format.mapping_parameters.csv Block below for details.
 	Csv *MappingParametersCsvInitParameters `json:"csv,omitempty" tf:"csv,omitempty"`
 
-	// Mapping information when JSON is the record format on the streaming source.
-	// See JSON Mapping Parameters below for more details.
+	// Mapping information when JSON is the record format on the streaming source. See reference_data_sources.schema.record_format.mapping_parameters.json Block below for details.
 	JSON *MappingParametersJSONInitParameters `json:"json,omitempty" tf:"json,omitempty"`
 }
 
 type RecordFormatMappingParametersObservation struct {
 
-	// Mapping information when the record format uses delimiters.
-	// See CSV Mapping Parameters below for more details.
+	// Mapping information when the record format uses delimiters. See reference_data_sources.schema.record_format.mapping_parameters.csv Block below for details.
 	Csv *MappingParametersCsvObservation `json:"csv,omitempty" tf:"csv,omitempty"`
 
-	// Mapping information when JSON is the record format on the streaming source.
-	// See JSON Mapping Parameters below for more details.
+	// Mapping information when JSON is the record format on the streaming source. See reference_data_sources.schema.record_format.mapping_parameters.json Block below for details.
 	JSON *MappingParametersJSONObservation `json:"json,omitempty" tf:"json,omitempty"`
 }
 
 type RecordFormatMappingParametersParameters struct {
 
-	// Mapping information when the record format uses delimiters.
-	// See CSV Mapping Parameters below for more details.
+	// Mapping information when the record format uses delimiters. See reference_data_sources.schema.record_format.mapping_parameters.csv Block below for details.
 	// +kubebuilder:validation:Optional
 	Csv *MappingParametersCsvParameters `json:"csv,omitempty" tf:"csv,omitempty"`
 
-	// Mapping information when JSON is the record format on the streaming source.
-	// See JSON Mapping Parameters below for more details.
+	// Mapping information when JSON is the record format on the streaming source. See reference_data_sources.schema.record_format.mapping_parameters.json Block below for details.
 	// +kubebuilder:validation:Optional
 	JSON *MappingParametersJSONParameters `json:"json,omitempty" tf:"json,omitempty"`
 }
 
 type RecordFormatObservation struct {
 
-	// The Mapping Information for the record format.
-	// See Mapping Parameters below for more details.
+	// Mapping Information for the record format. See inputs.schema.record_format.mapping_parameters Block below for details.
 	MappingParameters *MappingParametersObservation `json:"mappingParameters,omitempty" tf:"mapping_parameters,omitempty"`
 
-	// The Format Type of the records on the output stream. Can be CSV or JSON.
+	// Type of Record Format of the input streaming source.
 	RecordFormatType *string `json:"recordFormatType,omitempty" tf:"record_format_type,omitempty"`
 }
 
 type RecordFormatParameters struct {
 
-	// The Mapping Information for the record format.
-	// See Mapping Parameters below for more details.
+	// Mapping Information for the record format. See inputs.schema.record_format.mapping_parameters Block below for details.
 	// +kubebuilder:validation:Optional
 	MappingParameters *MappingParametersParameters `json:"mappingParameters,omitempty" tf:"mapping_parameters,omitempty"`
 }
 
 type ReferenceDataSourcesInitParameters struct {
 
-	// The S3 configuration for the reference data source. See S3 Reference below for more details.
+	// S3 configuration for the reference data source. See reference_data_sources.s3 Block below for details.
 	S3 *S3InitParameters `json:"s3,omitempty" tf:"s3,omitempty"`
 
-	// The Schema format of the data in the streaming source. See Source Schema below for more details.
+	// Schema format of the data in the streaming source. See reference_data_sources.schema Block below for details.
 	Schema *ReferenceDataSourcesSchemaInitParameters `json:"schema,omitempty" tf:"schema,omitempty"`
 
-	// The in-application Table Name.
+	// In-application Table Name.
 	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
 }
 
 type ReferenceDataSourcesObservation struct {
 
-	// The ARN of the Kinesis Analytics Application.
+	// ARN of the Kinesis Analytics Application.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The S3 configuration for the reference data source. See S3 Reference below for more details.
+	// S3 configuration for the reference data source. See reference_data_sources.s3 Block below for details.
 	S3 *S3Observation `json:"s3,omitempty" tf:"s3,omitempty"`
 
-	// The Schema format of the data in the streaming source. See Source Schema below for more details.
+	// Schema format of the data in the streaming source. See reference_data_sources.schema Block below for details.
 	Schema *ReferenceDataSourcesSchemaObservation `json:"schema,omitempty" tf:"schema,omitempty"`
 
-	// The in-application Table Name.
+	// In-application Table Name.
 	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
 }
 
 type ReferenceDataSourcesParameters struct {
 
-	// The S3 configuration for the reference data source. See S3 Reference below for more details.
+	// S3 configuration for the reference data source. See reference_data_sources.s3 Block below for details.
 	// +kubebuilder:validation:Optional
 	S3 *S3Parameters `json:"s3" tf:"s3,omitempty"`
 
-	// The Schema format of the data in the streaming source. See Source Schema below for more details.
+	// Schema format of the data in the streaming source. See reference_data_sources.schema Block below for details.
 	// +kubebuilder:validation:Optional
 	Schema *ReferenceDataSourcesSchemaParameters `json:"schema" tf:"schema,omitempty"`
 
-	// The in-application Table Name.
+	// In-application Table Name.
 	// +kubebuilder:validation:Optional
 	TableName *string `json:"tableName" tf:"table_name,omitempty"`
 }
 
 type ReferenceDataSourcesSchemaInitParameters struct {
 
-	// The Record Column mapping for the streaming source data element.
-	// See Record Columns below for more details.
+	// Record Column mapping for the streaming source data element. See reference_data_sources.schema.record_columns Block below for details.
 	RecordColumns []SchemaRecordColumnsInitParameters `json:"recordColumns,omitempty" tf:"record_columns,omitempty"`
 
-	// The Encoding of the record in the streaming source.
+	// Encoding of the record in the streaming source.
 	RecordEncoding *string `json:"recordEncoding,omitempty" tf:"record_encoding,omitempty"`
 
-	// The Record Format and mapping information to schematize a record.
-	// See Record Format below for more details.
+	// Record Format and mapping information to schematize a record. See reference_data_sources.schema.record_format Block below for details.
 	RecordFormat *SchemaRecordFormatInitParameters `json:"recordFormat,omitempty" tf:"record_format,omitempty"`
 }
 
 type ReferenceDataSourcesSchemaObservation struct {
 
-	// The Record Column mapping for the streaming source data element.
-	// See Record Columns below for more details.
+	// Record Column mapping for the streaming source data element. See reference_data_sources.schema.record_columns Block below for details.
 	RecordColumns []SchemaRecordColumnsObservation `json:"recordColumns,omitempty" tf:"record_columns,omitempty"`
 
-	// The Encoding of the record in the streaming source.
+	// Encoding of the record in the streaming source.
 	RecordEncoding *string `json:"recordEncoding,omitempty" tf:"record_encoding,omitempty"`
 
-	// The Record Format and mapping information to schematize a record.
-	// See Record Format below for more details.
+	// Record Format and mapping information to schematize a record. See reference_data_sources.schema.record_format Block below for details.
 	RecordFormat *SchemaRecordFormatObservation `json:"recordFormat,omitempty" tf:"record_format,omitempty"`
 }
 
 type ReferenceDataSourcesSchemaParameters struct {
 
-	// The Record Column mapping for the streaming source data element.
-	// See Record Columns below for more details.
+	// Record Column mapping for the streaming source data element. See reference_data_sources.schema.record_columns Block below for details.
 	// +kubebuilder:validation:Optional
 	RecordColumns []SchemaRecordColumnsParameters `json:"recordColumns" tf:"record_columns,omitempty"`
 
-	// The Encoding of the record in the streaming source.
+	// Encoding of the record in the streaming source.
 	// +kubebuilder:validation:Optional
 	RecordEncoding *string `json:"recordEncoding,omitempty" tf:"record_encoding,omitempty"`
 
-	// The Record Format and mapping information to schematize a record.
-	// See Record Format below for more details.
+	// Record Format and mapping information to schematize a record. See reference_data_sources.schema.record_format Block below for details.
 	// +kubebuilder:validation:Optional
 	RecordFormat *SchemaRecordFormatParameters `json:"recordFormat" tf:"record_format,omitempty"`
 }
 
 type S3InitParameters struct {
 
-	// The S3 Bucket ARN.
+	// S3 Bucket ARN.
 	BucketArn *string `json:"bucketArn,omitempty" tf:"bucket_arn,omitempty"`
 
-	// The File Key name containing reference data.
+	// File Key name containing reference data.
 	FileKey *string `json:"fileKey,omitempty" tf:"file_key,omitempty"`
 
-	// The IAM Role ARN to read the data.
+	// IAM Role ARN to read the data.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
 
 type S3Observation struct {
 
-	// The S3 Bucket ARN.
+	// S3 Bucket ARN.
 	BucketArn *string `json:"bucketArn,omitempty" tf:"bucket_arn,omitempty"`
 
-	// The File Key name containing reference data.
+	// File Key name containing reference data.
 	FileKey *string `json:"fileKey,omitempty" tf:"file_key,omitempty"`
 
-	// The IAM Role ARN to read the data.
+	// IAM Role ARN to read the data.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
 
 type S3Parameters struct {
 
-	// The S3 Bucket ARN.
+	// S3 Bucket ARN.
 	// +kubebuilder:validation:Optional
 	BucketArn *string `json:"bucketArn" tf:"bucket_arn,omitempty"`
 
-	// The File Key name containing reference data.
+	// File Key name containing reference data.
 	// +kubebuilder:validation:Optional
 	FileKey *string `json:"fileKey" tf:"file_key,omitempty"`
 
-	// The IAM Role ARN to read the data.
+	// IAM Role ARN to read the data.
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn" tf:"role_arn,omitempty"`
 }
 
 type SchemaInitParameters struct {
 
-	// The Record Column mapping for the streaming source data element.
-	// See Record Columns below for more details.
+	// Record Column mapping for the streaming source data element. See inputs.schema.record_columns Block below for details.
 	RecordColumns []RecordColumnsInitParameters `json:"recordColumns,omitempty" tf:"record_columns,omitempty"`
 
-	// The Encoding of the record in the streaming source.
+	// Encoding of the record in the streaming source.
 	RecordEncoding *string `json:"recordEncoding,omitempty" tf:"record_encoding,omitempty"`
 
-	// The Record Format and mapping information to schematize a record.
-	// See Record Format below for more details.
+	// Record Format and mapping information to schematize a record. See inputs.schema.record_format Block below for details.
 	RecordFormat *RecordFormatInitParameters `json:"recordFormat,omitempty" tf:"record_format,omitempty"`
 }
 
 type SchemaObservation struct {
 
-	// The Record Column mapping for the streaming source data element.
-	// See Record Columns below for more details.
+	// Record Column mapping for the streaming source data element. See inputs.schema.record_columns Block below for details.
 	RecordColumns []RecordColumnsObservation `json:"recordColumns,omitempty" tf:"record_columns,omitempty"`
 
-	// The Encoding of the record in the streaming source.
+	// Encoding of the record in the streaming source.
 	RecordEncoding *string `json:"recordEncoding,omitempty" tf:"record_encoding,omitempty"`
 
-	// The Record Format and mapping information to schematize a record.
-	// See Record Format below for more details.
+	// Record Format and mapping information to schematize a record. See inputs.schema.record_format Block below for details.
 	RecordFormat *RecordFormatObservation `json:"recordFormat,omitempty" tf:"record_format,omitempty"`
 }
 
 type SchemaParameters struct {
 
-	// The Record Column mapping for the streaming source data element.
-	// See Record Columns below for more details.
+	// Record Column mapping for the streaming source data element. See inputs.schema.record_columns Block below for details.
 	// +kubebuilder:validation:Optional
 	RecordColumns []RecordColumnsParameters `json:"recordColumns" tf:"record_columns,omitempty"`
 
-	// The Encoding of the record in the streaming source.
+	// Encoding of the record in the streaming source.
 	// +kubebuilder:validation:Optional
 	RecordEncoding *string `json:"recordEncoding,omitempty" tf:"record_encoding,omitempty"`
 
-	// The Record Format and mapping information to schematize a record.
-	// See Record Format below for more details.
+	// Record Format and mapping information to schematize a record. See inputs.schema.record_format Block below for details.
 	// +kubebuilder:validation:Optional
 	RecordFormat *RecordFormatParameters `json:"recordFormat" tf:"record_format,omitempty"`
 }
 
 type SchemaRecordColumnsInitParameters struct {
 
-	// The Mapping reference to the data element.
+	// Mapping reference to the data element.
 	Mapping *string `json:"mapping,omitempty" tf:"mapping,omitempty"`
 
 	// Name of the column.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The SQL Type of the column.
+	// SQL Type of the column.
 	SQLType *string `json:"sqlType,omitempty" tf:"sql_type,omitempty"`
 }
 
 type SchemaRecordColumnsObservation struct {
 
-	// The Mapping reference to the data element.
+	// Mapping reference to the data element.
 	Mapping *string `json:"mapping,omitempty" tf:"mapping,omitempty"`
 
 	// Name of the column.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The SQL Type of the column.
+	// SQL Type of the column.
 	SQLType *string `json:"sqlType,omitempty" tf:"sql_type,omitempty"`
 }
 
 type SchemaRecordColumnsParameters struct {
 
-	// The Mapping reference to the data element.
+	// Mapping reference to the data element.
 	// +kubebuilder:validation:Optional
 	Mapping *string `json:"mapping,omitempty" tf:"mapping,omitempty"`
 
@@ -1130,51 +1074,48 @@ type SchemaRecordColumnsParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// The SQL Type of the column.
+	// SQL Type of the column.
 	// +kubebuilder:validation:Optional
 	SQLType *string `json:"sqlType" tf:"sql_type,omitempty"`
 }
 
 type SchemaRecordFormatInitParameters struct {
 
-	// The Mapping Information for the record format.
-	// See Mapping Parameters below for more details.
+	// Mapping Information for the record format. See reference_data_sources.schema.record_format.mapping_parameters Block below for details.
 	MappingParameters *RecordFormatMappingParametersInitParameters `json:"mappingParameters,omitempty" tf:"mapping_parameters,omitempty"`
 }
 
 type SchemaRecordFormatObservation struct {
 
-	// The Mapping Information for the record format.
-	// See Mapping Parameters below for more details.
+	// Mapping Information for the record format. See reference_data_sources.schema.record_format.mapping_parameters Block below for details.
 	MappingParameters *RecordFormatMappingParametersObservation `json:"mappingParameters,omitempty" tf:"mapping_parameters,omitempty"`
 
-	// The Format Type of the records on the output stream. Can be CSV or JSON.
+	// Type of Record Format of the reference data source.
 	RecordFormatType *string `json:"recordFormatType,omitempty" tf:"record_format_type,omitempty"`
 }
 
 type SchemaRecordFormatParameters struct {
 
-	// The Mapping Information for the record format.
-	// See Mapping Parameters below for more details.
+	// Mapping Information for the record format. See reference_data_sources.schema.record_format.mapping_parameters Block below for details.
 	// +kubebuilder:validation:Optional
 	MappingParameters *RecordFormatMappingParametersParameters `json:"mappingParameters,omitempty" tf:"mapping_parameters,omitempty"`
 }
 
 type StartingPositionConfigurationInitParameters struct {
 
-	// The starting position on the stream. Valid values: LAST_STOPPED_POINT, NOW, TRIM_HORIZON.
+	// Starting position on the stream. Valid values: LAST_STOPPED_POINT, NOW, TRIM_HORIZON.
 	StartingPosition *string `json:"startingPosition,omitempty" tf:"starting_position,omitempty"`
 }
 
 type StartingPositionConfigurationObservation struct {
 
-	// The starting position on the stream. Valid values: LAST_STOPPED_POINT, NOW, TRIM_HORIZON.
+	// Starting position on the stream. Valid values: LAST_STOPPED_POINT, NOW, TRIM_HORIZON.
 	StartingPosition *string `json:"startingPosition,omitempty" tf:"starting_position,omitempty"`
 }
 
 type StartingPositionConfigurationParameters struct {
 
-	// The starting position on the stream. Valid values: LAST_STOPPED_POINT, NOW, TRIM_HORIZON.
+	// Starting position on the stream. Valid values: LAST_STOPPED_POINT, NOW, TRIM_HORIZON.
 	// +kubebuilder:validation:Optional
 	StartingPosition *string `json:"startingPosition,omitempty" tf:"starting_position,omitempty"`
 }

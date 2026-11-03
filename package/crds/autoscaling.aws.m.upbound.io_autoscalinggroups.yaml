@@ -106,7 +106,7 @@ spec:
                           Reservation resource group.
                         properties:
                           capacityReservationIds:
-                            description: List of On-Demand Capacity Reservation Ids.
+                            description: List of On-Demand Capacity Reservation IDs.
                               Conflicts with capacity_reservation_resource_group_arns.
                             items:
                               type: string
@@ -156,13 +156,13 @@ spec:
                     x-kubernetes-list-type: set
                   forceDelete:
                     description: |-
-                      Allows deleting the Auto Scaling Group without waiting
-                      for all instances in the pool to terminate. You can force an Auto Scaling Group to delete
+                      Allows deleting the Auto Scaling group without waiting
+                      for all instances in the pool to terminate. You can force an Auto Scaling group to delete
                       even if it's in the process of scaling a resource. This bypasses that
                       behavior and potentially leaves resources dangling.
                     type: boolean
                   forceDeleteWarmPool:
-                    description: Allows deleting the Auto Scaling Group without waiting
+                    description: Allows deleting the Auto Scaling group without waiting
                       for all instances in the warm pool to terminate.
                     type: boolean
                   healthCheckGracePeriod:
@@ -182,11 +182,11 @@ spec:
                     description: |-
                       One or more
                       Lifecycle Hooks
-                      to attach to the Auto Scaling Group before instances are launched. The
+                      to attach to the Auto Scaling group before instances are launched. The
                       syntax is exactly the same as the separate
                       aws_autoscaling_lifecycle_hook
                       resource, without the autoscaling_group_name attribute. Please note that this will only work when creating
-                      a new Auto Scaling Group. For all other use-cases, please use aws_autoscaling_lifecycle_hook resource.
+                      a new Auto Scaling group. For all other use-cases, please use aws_autoscaling_lifecycle_hook resource.
                     items:
                       properties:
                         defaultResult:
@@ -196,22 +196,22 @@ spec:
                         lifecycleTransition:
                           type: string
                         name:
-                          description: Name of the Auto Scaling Group. Conflicts with
+                          description: Name of the Auto Scaling group. Conflicts with
                             name_prefix.
                           type: string
                         notificationMetadata:
                           type: string
                         notificationTargetArn:
-                          description: ARN for this Auto Scaling Group
+                          description: ARN for this Auto Scaling group
                           type: string
                         roleArn:
-                          description: ARN for this Auto Scaling Group
+                          description: ARN for this Auto Scaling group
                           type: string
                       type: object
                     type: array
                   instanceLifecyclePolicy:
                     description: If this block is configured, adds an instance lifecycle
-                      policy to the specified Auto Scaling Group. Defined below.
+                      policy to the specified Auto Scaling group. Defined below.
                     properties:
                       retentionTriggers:
                         description: Conditions that trigger instance retention behavior.
@@ -250,7 +250,7 @@ spec:
                     description: |-
                       If this block is configured, start an
                       Instance Refresh
-                      when this Auto Scaling Group is updated. Defined below.
+                      when this Auto Scaling group is updated. Defined below.
                     properties:
                       preferences:
                         description: Override default parameters for Instance Refresh.
@@ -259,7 +259,7 @@ spec:
                             description: Alarm Specification for Instance Refresh.
                             properties:
                               alarms:
-                                description: List of Cloudwatch alarms. If any of
+                                description: List of CloudWatch alarms. If any of
                                   these alarms goes into ALARM state, Instance Refresh
                                   is failed.
                                 items:
@@ -285,7 +285,7 @@ spec:
                           instanceWarmup:
                             description: Number of seconds until a newly launched
                               instance is configured and ready to use. Default behavior
-                              is to use the Auto Scaling Group's health check grace
+                              is to use the Auto Scaling group's health check grace
                               period.
                             type: string
                           maxHealthyPercentage:
@@ -522,7 +522,7 @@ spec:
                       86400 and 31536000 seconds.
                     type: number
                   maxSize:
-                    description: Maximum size of the Auto Scaling Group.
+                    description: Maximum size of the Auto Scaling group.
                     type: number
                   metricsGranularity:
                     description: Granularity to associate with the metrics to collect.
@@ -535,7 +535,7 @@ spec:
                     type: number
                   minSize:
                     description: |-
-                      Minimum size of the Auto Scaling Group.
+                      Minimum size of the Auto Scaling group.
                       (See also Waiting for Capacity below.)
                     type: number
                   mixedInstancesPolicy:
@@ -724,7 +724,7 @@ spec:
                                       x-kubernetes-list-type: set
                                     acceleratorNames:
                                       description: List of accelerator names. Default
-                                        is any acclerator.
+                                        is any accelerator.
                                       items:
                                         type: string
                                       type: array
@@ -770,7 +770,7 @@ spec:
                                       type: array
                                       x-kubernetes-list-type: set
                                     bareMetal:
-                                      description: Indicate whether bare metal instace
+                                      description: Indicate whether bare metal instance
                                         types should be included, excluded, or required.
                                         Default is excluded.
                                       type: string
@@ -1255,8 +1255,8 @@ spec:
                     type: object
                   suspendedProcesses:
                     description: |-
-                      List of processes to suspend for the Auto Scaling Group. The allowed values are Launch, Terminate, HealthCheck, ReplaceUnhealthy, AZRebalance, AlarmNotification, ScheduledActions, AddToLoadBalancer, InstanceRefresh.
-                      Note that if you suspend either the Launch or Terminate process types, it can prevent your Auto Scaling Group from functioning properly.
+                      List of processes to suspend for the Auto Scaling group. The allowed values are Launch, Terminate, HealthCheck, ReplaceUnhealthy, AZRebalance, AlarmNotification, ScheduledActions, AddToLoadBalancer, InstanceRefresh.
+                      Note that if you suspend either the Launch or Terminate process types, it can prevent your Auto Scaling group from functioning properly.
                     items:
                       type: string
                     type: array
@@ -1281,7 +1281,7 @@ spec:
                     type: array
                   terminationPolicies:
                     description: List of policies to decide how the instances in the
-                      Auto Scaling Group should be terminated. The allowed values
+                      Auto Scaling group should be terminated. The allowed values
                       are OldestInstance, NewestInstance, OldestLaunchConfiguration,
                       ClosestToNextInstanceHour, OldestLaunchTemplate, AllocationStrategy,
                       Default. Additionally, the ARN of a Lambda function can be specified
@@ -1438,7 +1438,7 @@ spec:
                         type: number
                       minSize:
                         description: |-
-                          Minimum size of the Auto Scaling Group.
+                          Minimum size of the Auto Scaling group.
                           (See also Waiting for Capacity below.)
                         type: number
                       poolState:
@@ -1510,7 +1510,7 @@ spec:
                           Reservation resource group.
                         properties:
                           capacityReservationIds:
-                            description: List of On-Demand Capacity Reservation Ids.
+                            description: List of On-Demand Capacity Reservation IDs.
                               Conflicts with capacity_reservation_resource_group_arns.
                             items:
                               type: string
@@ -1560,13 +1560,13 @@ spec:
                     x-kubernetes-list-type: set
                   forceDelete:
                     description: |-
-                      Allows deleting the Auto Scaling Group without waiting
-                      for all instances in the pool to terminate. You can force an Auto Scaling Group to delete
+                      Allows deleting the Auto Scaling group without waiting
+                      for all instances in the pool to terminate. You can force an Auto Scaling group to delete
                       even if it's in the process of scaling a resource. This bypasses that
                       behavior and potentially leaves resources dangling.
                     type: boolean
                   forceDeleteWarmPool:
-                    description: Allows deleting the Auto Scaling Group without waiting
+                    description: Allows deleting the Auto Scaling group without waiting
                       for all instances in the warm pool to terminate.
                     type: boolean
                   healthCheckGracePeriod:
@@ -1586,11 +1586,11 @@ spec:
                     description: |-
                       One or more
                       Lifecycle Hooks
-                      to attach to the Auto Scaling Group before instances are launched. The
+                      to attach to the Auto Scaling group before instances are launched. The
                       syntax is exactly the same as the separate
                       aws_autoscaling_lifecycle_hook
                       resource, without the autoscaling_group_name attribute. Please note that this will only work when creating
-                      a new Auto Scaling Group. For all other use-cases, please use aws_autoscaling_lifecycle_hook resource.
+                      a new Auto Scaling group. For all other use-cases, please use aws_autoscaling_lifecycle_hook resource.
                     items:
                       properties:
                         defaultResult:
@@ -1600,22 +1600,22 @@ spec:
                         lifecycleTransition:
                           type: string
                         name:
-                          description: Name of the Auto Scaling Group. Conflicts with
+                          description: Name of the Auto Scaling group. Conflicts with
                             name_prefix.
                           type: string
                         notificationMetadata:
                           type: string
                         notificationTargetArn:
-                          description: ARN for this Auto Scaling Group
+                          description: ARN for this Auto Scaling group
                           type: string
                         roleArn:
-                          description: ARN for this Auto Scaling Group
+                          description: ARN for this Auto Scaling group
                           type: string
                       type: object
                     type: array
                   instanceLifecyclePolicy:
                     description: If this block is configured, adds an instance lifecycle
-                      policy to the specified Auto Scaling Group. Defined below.
+                      policy to the specified Auto Scaling group. Defined below.
                     properties:
                       retentionTriggers:
                         description: Conditions that trigger instance retention behavior.
@@ -1654,7 +1654,7 @@ spec:
                     description: |-
                       If this block is configured, start an
                       Instance Refresh
-                      when this Auto Scaling Group is updated. Defined below.
+                      when this Auto Scaling group is updated. Defined below.
                     properties:
                       preferences:
                         description: Override default parameters for Instance Refresh.
@@ -1663,7 +1663,7 @@ spec:
                             description: Alarm Specification for Instance Refresh.
                             properties:
                               alarms:
-                                description: List of Cloudwatch alarms. If any of
+                                description: List of CloudWatch alarms. If any of
                                   these alarms goes into ALARM state, Instance Refresh
                                   is failed.
                                 items:
@@ -1689,7 +1689,7 @@ spec:
                           instanceWarmup:
                             description: Number of seconds until a newly launched
                               instance is configured and ready to use. Default behavior
-                              is to use the Auto Scaling Group's health check grace
+                              is to use the Auto Scaling group's health check grace
                               period.
                             type: string
                           maxHealthyPercentage:
@@ -1926,7 +1926,7 @@ spec:
                       86400 and 31536000 seconds.
                     type: number
                   maxSize:
-                    description: Maximum size of the Auto Scaling Group.
+                    description: Maximum size of the Auto Scaling group.
                     type: number
                   metricsGranularity:
                     description: Granularity to associate with the metrics to collect.
@@ -1939,7 +1939,7 @@ spec:
                     type: number
                   minSize:
                     description: |-
-                      Minimum size of the Auto Scaling Group.
+                      Minimum size of the Auto Scaling group.
                       (See also Waiting for Capacity below.)
                     type: number
                   mixedInstancesPolicy:
@@ -2128,7 +2128,7 @@ spec:
                                       x-kubernetes-list-type: set
                                     acceleratorNames:
                                       description: List of accelerator names. Default
-                                        is any acclerator.
+                                        is any accelerator.
                                       items:
                                         type: string
                                       type: array
@@ -2174,7 +2174,7 @@ spec:
                                       type: array
                                       x-kubernetes-list-type: set
                                     bareMetal:
-                                      description: Indicate whether bare metal instace
+                                      description: Indicate whether bare metal instance
                                         types should be included, excluded, or required.
                                         Default is excluded.
                                       type: string
@@ -2654,8 +2654,8 @@ spec:
                     type: object
                   suspendedProcesses:
                     description: |-
-                      List of processes to suspend for the Auto Scaling Group. The allowed values are Launch, Terminate, HealthCheck, ReplaceUnhealthy, AZRebalance, AlarmNotification, ScheduledActions, AddToLoadBalancer, InstanceRefresh.
-                      Note that if you suspend either the Launch or Terminate process types, it can prevent your Auto Scaling Group from functioning properly.
+                      List of processes to suspend for the Auto Scaling group. The allowed values are Launch, Terminate, HealthCheck, ReplaceUnhealthy, AZRebalance, AlarmNotification, ScheduledActions, AddToLoadBalancer, InstanceRefresh.
+                      Note that if you suspend either the Launch or Terminate process types, it can prevent your Auto Scaling group from functioning properly.
                     items:
                       type: string
                     type: array
@@ -2680,7 +2680,7 @@ spec:
                     type: array
                   terminationPolicies:
                     description: List of policies to decide how the instances in the
-                      Auto Scaling Group should be terminated. The allowed values
+                      Auto Scaling group should be terminated. The allowed values
                       are OldestInstance, NewestInstance, OldestLaunchConfiguration,
                       ClosestToNextInstanceHour, OldestLaunchTemplate, AllocationStrategy,
                       Default. Additionally, the ARN of a Lambda function can be specified
@@ -2837,7 +2837,7 @@ spec:
                         type: number
                       minSize:
                         description: |-
-                          Minimum size of the Auto Scaling Group.
+                          Minimum size of the Auto Scaling group.
                           (See also Waiting for Capacity below.)
                         type: number
                       poolState:
@@ -2920,7 +2920,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: ARN for this Auto Scaling Group
+                    description: ARN for this Auto Scaling group
                     type: string
                   availabilityZoneDistribution:
                     description: The instance capacity distribution across Availability
@@ -2969,7 +2969,7 @@ spec:
                           Reservation resource group.
                         properties:
                           capacityReservationIds:
-                            description: List of On-Demand Capacity Reservation Ids.
+                            description: List of On-Demand Capacity Reservation IDs.
                               Conflicts with capacity_reservation_resource_group_arns.
                             items:
                               type: string
@@ -3019,13 +3019,13 @@ spec:
                     x-kubernetes-list-type: set
                   forceDelete:
                     description: |-
-                      Allows deleting the Auto Scaling Group without waiting
-                      for all instances in the pool to terminate. You can force an Auto Scaling Group to delete
+                      Allows deleting the Auto Scaling group without waiting
+                      for all instances in the pool to terminate. You can force an Auto Scaling group to delete
                       even if it's in the process of scaling a resource. This bypasses that
                       behavior and potentially leaves resources dangling.
                     type: boolean
                   forceDeleteWarmPool:
-                    description: Allows deleting the Auto Scaling Group without waiting
+                    description: Allows deleting the Auto Scaling group without waiting
                       for all instances in the warm pool to terminate.
                     type: boolean
                   healthCheckGracePeriod:
@@ -3037,7 +3037,7 @@ spec:
                       done.'
                     type: string
                   id:
-                    description: Auto Scaling Group id.
+                    description: Auto Scaling group ID.
                     type: string
                   ignoreFailedScalingActivities:
                     description: Whether to ignore failed Auto Scaling scaling activities
@@ -3048,11 +3048,11 @@ spec:
                     description: |-
                       One or more
                       Lifecycle Hooks
-                      to attach to the Auto Scaling Group before instances are launched. The
+                      to attach to the Auto Scaling group before instances are launched. The
                       syntax is exactly the same as the separate
                       aws_autoscaling_lifecycle_hook
                       resource, without the autoscaling_group_name attribute. Please note that this will only work when creating
-                      a new Auto Scaling Group. For all other use-cases, please use aws_autoscaling_lifecycle_hook resource.
+                      a new Auto Scaling group. For all other use-cases, please use aws_autoscaling_lifecycle_hook resource.
                     items:
                       properties:
                         defaultResult:
@@ -3062,22 +3062,22 @@ spec:
                         lifecycleTransition:
                           type: string
                         name:
-                          description: Name of the Auto Scaling Group. Conflicts with
+                          description: Name of the Auto Scaling group. Conflicts with
                             name_prefix.
                           type: string
                         notificationMetadata:
                           type: string
                         notificationTargetArn:
-                          description: ARN for this Auto Scaling Group
+                          description: ARN for this Auto Scaling group
                           type: string
                         roleArn:
-                          description: ARN for this Auto Scaling Group
+                          description: ARN for this Auto Scaling group
                           type: string
                       type: object
                     type: array
                   instanceLifecyclePolicy:
                     description: If this block is configured, adds an instance lifecycle
-                      policy to the specified Auto Scaling Group. Defined below.
+                      policy to the specified Auto Scaling group. Defined below.
                     properties:
                       retentionTriggers:
                         description: Conditions that trigger instance retention behavior.
@@ -3116,7 +3116,7 @@ spec:
                     description: |-
                       If this block is configured, start an
                       Instance Refresh
-                      when this Auto Scaling Group is updated. Defined below.
+                      when this Auto Scaling group is updated. Defined below.
                     properties:
                       preferences:
                         description: Override default parameters for Instance Refresh.
@@ -3125,7 +3125,7 @@ spec:
                             description: Alarm Specification for Instance Refresh.
                             properties:
                               alarms:
-                                description: List of Cloudwatch alarms. If any of
+                                description: List of CloudWatch alarms. If any of
                                   these alarms goes into ALARM state, Instance Refresh
                                   is failed.
                                 items:
@@ -3151,7 +3151,7 @@ spec:
                           instanceWarmup:
                             description: Number of seconds until a newly launched
                               instance is configured and ready to use. Default behavior
-                              is to use the Auto Scaling Group's health check grace
+                              is to use the Auto Scaling group's health check grace
                               period.
                             type: string
                           maxHealthyPercentage:
@@ -3220,7 +3220,7 @@ spec:
                     type: object
                   loadBalancers:
                     description: |-
-                      List of elastic load balancer names to add to the autoscaling
+                      List of elastic load balancer names to add to the Auto Scaling
                       group names. Only valid for classic load balancers. For ALBs, use target_group_arns instead. To remove all load balancer attachments an empty list should be specified.
                     items:
                       type: string
@@ -3232,7 +3232,7 @@ spec:
                       86400 and 31536000 seconds.
                     type: number
                   maxSize:
-                    description: Maximum size of the Auto Scaling Group.
+                    description: Maximum size of the Auto Scaling group.
                     type: number
                   metricsGranularity:
                     description: Granularity to associate with the metrics to collect.
@@ -3245,7 +3245,7 @@ spec:
                     type: number
                   minSize:
                     description: |-
-                      Minimum size of the Auto Scaling Group.
+                      Minimum size of the Auto Scaling group.
                       (See also Waiting for Capacity below.)
                     type: number
                   mixedInstancesPolicy:
@@ -3352,7 +3352,7 @@ spec:
                                       x-kubernetes-list-type: set
                                     acceleratorNames:
                                       description: List of accelerator names. Default
-                                        is any acclerator.
+                                        is any accelerator.
                                       items:
                                         type: string
                                       type: array
@@ -3398,7 +3398,7 @@ spec:
                                       type: array
                                       x-kubernetes-list-type: set
                                     bareMetal:
-                                      description: Indicate whether bare metal instace
+                                      description: Indicate whether bare metal instance
                                         types should be included, excluded, or required.
                                         Default is excluded.
                                       type: string
@@ -3641,8 +3641,8 @@ spec:
                     type: string
                   suspendedProcesses:
                     description: |-
-                      List of processes to suspend for the Auto Scaling Group. The allowed values are Launch, Terminate, HealthCheck, ReplaceUnhealthy, AZRebalance, AlarmNotification, ScheduledActions, AddToLoadBalancer, InstanceRefresh.
-                      Note that if you suspend either the Launch or Terminate process types, it can prevent your Auto Scaling Group from functioning properly.
+                      List of processes to suspend for the Auto Scaling group. The allowed values are Launch, Terminate, HealthCheck, ReplaceUnhealthy, AZRebalance, AlarmNotification, ScheduledActions, AddToLoadBalancer, InstanceRefresh.
+                      Note that if you suspend either the Launch or Terminate process types, it can prevent your Auto Scaling group from functioning properly.
                     items:
                       type: string
                     type: array
@@ -3675,7 +3675,7 @@ spec:
                     x-kubernetes-list-type: set
                   terminationPolicies:
                     description: List of policies to decide how the instances in the
-                      Auto Scaling Group should be terminated. The allowed values
+                      Auto Scaling group should be terminated. The allowed values
                       are OldestInstance, NewestInstance, OldestLaunchConfiguration,
                       ClosestToNextInstanceHour, OldestLaunchTemplate, AllocationStrategy,
                       Default. Additionally, the ARN of a Lambda function can be specified
@@ -3748,7 +3748,7 @@ spec:
                         type: number
                       minSize:
                         description: |-
-                          Minimum size of the Auto Scaling Group.
+                          Minimum size of the Auto Scaling group.
                           (See also Waiting for Capacity below.)
                         type: number
                       poolState:

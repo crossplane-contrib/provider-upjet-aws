@@ -61,7 +61,7 @@ spec:
                 properties:
                   actions:
                     description: List of actions initiated by this trigger when it
-                      fires. See Actions Below.
+                      fires. See actions below.
                     items:
                       properties:
                         arguments:
@@ -73,7 +73,7 @@ spec:
                           type: object
                           x-kubernetes-map-type: granular
                         crawlerName:
-                          description: The name of the crawler to be executed. Conflicts
+                          description: Name of the crawler to be executed. Conflicts
                             with job_name.
                           type: string
                         crawlerNameRef:
@@ -159,8 +159,8 @@ spec:
                               type: object
                           type: object
                         jobName:
-                          description: The name of a job to be executed. Conflicts
-                            with crawler_name.
+                          description: Name of a job to be executed. Conflicts with
+                            crawler_name.
                           type: string
                         jobNameRef:
                           description: Reference to a Job in glue to populate jobName.
@@ -243,8 +243,8 @@ spec:
                               type: object
                           type: object
                         notificationProperty:
-                          description: Specifies configuration properties of a job
-                            run notification. See Notification Property details below.
+                          description: Configuration properties of a job run notification.
+                            See notification_property details below.
                           properties:
                             notifyDelayAfter:
                               description: After a job run starts, the number of minutes
@@ -252,17 +252,17 @@ spec:
                               type: number
                           type: object
                         securityConfiguration:
-                          description: The name of the Security Configuration structure
+                          description: Name of the Security Configuration structure
                             to be used with this action.
                           type: string
                         timeout:
-                          description: The job run timeout in minutes. It overrides
-                            the timeout value of the job.
+                          description: Job run timeout in minutes. It overrides the
+                            timeout value of the job.
                           type: number
                       type: object
                     type: array
                   description:
-                    description: A description of the new trigger.
+                    description: Description of the new trigger.
                     type: string
                   enabled:
                     description: Start the trigger. Defaults to true.
@@ -270,12 +270,12 @@ spec:
                   eventBatchingCondition:
                     description: Batch condition that must be met (specified number
                       of events received or batch time window expired) before EventBridge
-                      event trigger fires. See Event Batching Condition.
+                      event trigger fires. See event_batching_condition.
                     items:
                       properties:
                         batchSize:
                           description: Number of events that must be received from
-                            Amazon EventBridge before EventBridge  event trigger fires.
+                            Amazon EventBridge before EventBridge event trigger fires.
                           type: number
                         batchWindow:
                           description: Window of time in seconds after which EventBridge
@@ -285,24 +285,25 @@ spec:
                       type: object
                     type: array
                   predicate:
-                    description: A predicate to specify when the new trigger should
-                      fire. Required when trigger type is CONDITIONAL. See Predicate
-                      Below.
+                    description: Predicate to specify when the new trigger should
+                      fire. Required when trigger type is CONDITIONAL. See predicate
+                      below.
                     properties:
                       conditions:
-                        description: A list of the conditions that determine when
-                          the trigger will fire. See Conditions.
+                        description: List of the conditions that determine when the
+                          trigger will fire. See conditions.
                         items:
                           properties:
                             crawlState:
-                              description: The condition crawl state. Currently, the
-                                values supported are RUNNING, SUCCEEDED, CANCELLED,
-                                and FAILED. If this is specified, crawler_name must
-                                also be specified. Conflicts with state.
+                              description: Condition crawl state. Currently, the values
+                                supported are RUNNING, SUCCEEDED, CANCELLED, and FAILED.
+                                If this is specified, crawler_name must also be specified.
+                                Conflicts with state.
                               type: string
                             crawlerName:
-                              description: The name of the crawler to be executed.
-                                Conflicts with job_name.
+                              description: Name of the crawler to watch. If this is
+                                specified, crawl_state must also be specified. Conflicts
+                                with job_name.
                               type: string
                             crawlerNameRef:
                               description: Reference to a Crawler in glue to populate
@@ -387,8 +388,8 @@ spec:
                                   type: object
                               type: object
                             jobName:
-                              description: The name of a job to be executed. Conflicts
-                                with crawler_name.
+                              description: Name of the job to watch. If this is specified,
+                                state must also be specified. Conflicts with crawler_name.
                               type: string
                             jobNameRef:
                               description: Reference to a Job in glue to populate
@@ -473,13 +474,13 @@ spec:
                                   type: object
                               type: object
                             logicalOperator:
-                              description: A logical operator. Defaults to EQUALS.
+                              description: Logical operator. Defaults to EQUALS.
                               type: string
                             state:
-                              description: The condition job state. Currently, the
-                                values supported are SUCCEEDED, STOPPED, TIMEOUT and
-                                FAILED. If this is specified, job_name must also be
-                                specified. Conflicts with crawler_state.
+                              description: Condition job state. Currently, the values
+                                supported are SUCCEEDED, STOPPED, TIMEOUT and FAILED.
+                                If this is specified, job_name must also be specified.
+                                Conflicts with crawler_state.
                               type: string
                           type: object
                         type: array
@@ -494,7 +495,7 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   schedule:
-                    description: A cron expression used to specify the schedule. Time-Based
+                    description: Cron expression used to specify the schedule. Time-Based
                       Schedules for Jobs and Crawlers
                     type: string
                   startOnCreation:
@@ -508,11 +509,11 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   type:
-                    description: The type of trigger. Valid values are CONDITIONAL,
-                      EVENT, ON_DEMAND, and SCHEDULED.
+                    description: Type of trigger. Valid values are CONDITIONAL, EVENT,
+                      ON_DEMAND, and SCHEDULED.
                     type: string
                   workflowName:
-                    description: A workflow to which the trigger should be associated
+                    description: Workflow to which the trigger should be associated
                       to. Every workflow graph (DAG) needs a starting trigger (ON_DEMAND
                       or SCHEDULED type) and can contain multiple additional CONDITIONAL
                       triggers.
@@ -535,7 +536,7 @@ spec:
                 properties:
                   actions:
                     description: List of actions initiated by this trigger when it
-                      fires. See Actions Below.
+                      fires. See actions below.
                     items:
                       properties:
                         arguments:
@@ -547,7 +548,7 @@ spec:
                           type: object
                           x-kubernetes-map-type: granular
                         crawlerName:
-                          description: The name of the crawler to be executed. Conflicts
+                          description: Name of the crawler to be executed. Conflicts
                             with job_name.
                           type: string
                         crawlerNameRef:
@@ -633,8 +634,8 @@ spec:
                               type: object
                           type: object
                         jobName:
-                          description: The name of a job to be executed. Conflicts
-                            with crawler_name.
+                          description: Name of a job to be executed. Conflicts with
+                            crawler_name.
                           type: string
                         jobNameRef:
                           description: Reference to a Job in glue to populate jobName.
@@ -717,8 +718,8 @@ spec:
                               type: object
                           type: object
                         notificationProperty:
-                          description: Specifies configuration properties of a job
-                            run notification. See Notification Property details below.
+                          description: Configuration properties of a job run notification.
+                            See notification_property details below.
                           properties:
                             notifyDelayAfter:
                               description: After a job run starts, the number of minutes
@@ -726,17 +727,17 @@ spec:
                               type: number
                           type: object
                         securityConfiguration:
-                          description: The name of the Security Configuration structure
+                          description: Name of the Security Configuration structure
                             to be used with this action.
                           type: string
                         timeout:
-                          description: The job run timeout in minutes. It overrides
-                            the timeout value of the job.
+                          description: Job run timeout in minutes. It overrides the
+                            timeout value of the job.
                           type: number
                       type: object
                     type: array
                   description:
-                    description: A description of the new trigger.
+                    description: Description of the new trigger.
                     type: string
                   enabled:
                     description: Start the trigger. Defaults to true.
@@ -744,12 +745,12 @@ spec:
                   eventBatchingCondition:
                     description: Batch condition that must be met (specified number
                       of events received or batch time window expired) before EventBridge
-                      event trigger fires. See Event Batching Condition.
+                      event trigger fires. See event_batching_condition.
                     items:
                       properties:
                         batchSize:
                           description: Number of events that must be received from
-                            Amazon EventBridge before EventBridge  event trigger fires.
+                            Amazon EventBridge before EventBridge event trigger fires.
                           type: number
                         batchWindow:
                           description: Window of time in seconds after which EventBridge
@@ -759,24 +760,25 @@ spec:
                       type: object
                     type: array
                   predicate:
-                    description: A predicate to specify when the new trigger should
-                      fire. Required when trigger type is CONDITIONAL. See Predicate
-                      Below.
+                    description: Predicate to specify when the new trigger should
+                      fire. Required when trigger type is CONDITIONAL. See predicate
+                      below.
                     properties:
                       conditions:
-                        description: A list of the conditions that determine when
-                          the trigger will fire. See Conditions.
+                        description: List of the conditions that determine when the
+                          trigger will fire. See conditions.
                         items:
                           properties:
                             crawlState:
-                              description: The condition crawl state. Currently, the
-                                values supported are RUNNING, SUCCEEDED, CANCELLED,
-                                and FAILED. If this is specified, crawler_name must
-                                also be specified. Conflicts with state.
+                              description: Condition crawl state. Currently, the values
+                                supported are RUNNING, SUCCEEDED, CANCELLED, and FAILED.
+                                If this is specified, crawler_name must also be specified.
+                                Conflicts with state.
                               type: string
                             crawlerName:
-                              description: The name of the crawler to be executed.
-                                Conflicts with job_name.
+                              description: Name of the crawler to watch. If this is
+                                specified, crawl_state must also be specified. Conflicts
+                                with job_name.
                               type: string
                             crawlerNameRef:
                               description: Reference to a Crawler in glue to populate
@@ -861,8 +863,8 @@ spec:
                                   type: object
                               type: object
                             jobName:
-                              description: The name of a job to be executed. Conflicts
-                                with crawler_name.
+                              description: Name of the job to watch. If this is specified,
+                                state must also be specified. Conflicts with crawler_name.
                               type: string
                             jobNameRef:
                               description: Reference to a Job in glue to populate
@@ -947,13 +949,13 @@ spec:
                                   type: object
                               type: object
                             logicalOperator:
-                              description: A logical operator. Defaults to EQUALS.
+                              description: Logical operator. Defaults to EQUALS.
                               type: string
                             state:
-                              description: The condition job state. Currently, the
-                                values supported are SUCCEEDED, STOPPED, TIMEOUT and
-                                FAILED. If this is specified, job_name must also be
-                                specified. Conflicts with crawler_state.
+                              description: Condition job state. Currently, the values
+                                supported are SUCCEEDED, STOPPED, TIMEOUT and FAILED.
+                                If this is specified, job_name must also be specified.
+                                Conflicts with crawler_state.
                               type: string
                           type: object
                         type: array
@@ -963,7 +965,7 @@ spec:
                         type: string
                     type: object
                   schedule:
-                    description: A cron expression used to specify the schedule. Time-Based
+                    description: Cron expression used to specify the schedule. Time-Based
                       Schedules for Jobs and Crawlers
                     type: string
                   startOnCreation:
@@ -977,11 +979,11 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   type:
-                    description: The type of trigger. Valid values are CONDITIONAL,
-                      EVENT, ON_DEMAND, and SCHEDULED.
+                    description: Type of trigger. Valid values are CONDITIONAL, EVENT,
+                      ON_DEMAND, and SCHEDULED.
                     type: string
                   workflowName:
-                    description: A workflow to which the trigger should be associated
+                    description: Workflow to which the trigger should be associated
                       to. Every workflow graph (DAG) needs a starting trigger (ON_DEMAND
                       or SCHEDULED type) and can contain multiple additional CONDITIONAL
                       triggers.
@@ -1061,7 +1063,7 @@ spec:
                 properties:
                   actions:
                     description: List of actions initiated by this trigger when it
-                      fires. See Actions Below.
+                      fires. See actions below.
                     items:
                       properties:
                         arguments:
@@ -1073,16 +1075,16 @@ spec:
                           type: object
                           x-kubernetes-map-type: granular
                         crawlerName:
-                          description: The name of the crawler to be executed. Conflicts
+                          description: Name of the crawler to be executed. Conflicts
                             with job_name.
                           type: string
                         jobName:
-                          description: The name of a job to be executed. Conflicts
-                            with crawler_name.
+                          description: Name of a job to be executed. Conflicts with
+                            crawler_name.
                           type: string
                         notificationProperty:
-                          description: Specifies configuration properties of a job
-                            run notification. See Notification Property details below.
+                          description: Configuration properties of a job run notification.
+                            See notification_property details below.
                           properties:
                             notifyDelayAfter:
                               description: After a job run starts, the number of minutes
@@ -1090,12 +1092,12 @@ spec:
                               type: number
                           type: object
                         securityConfiguration:
-                          description: The name of the Security Configuration structure
+                          description: Name of the Security Configuration structure
                             to be used with this action.
                           type: string
                         timeout:
-                          description: The job run timeout in minutes. It overrides
-                            the timeout value of the job.
+                          description: Job run timeout in minutes. It overrides the
+                            timeout value of the job.
                           type: number
                       type: object
                     type: array
@@ -1103,7 +1105,7 @@ spec:
                     description: ARN of Glue Trigger
                     type: string
                   description:
-                    description: A description of the new trigger.
+                    description: Description of the new trigger.
                     type: string
                   enabled:
                     description: Start the trigger. Defaults to true.
@@ -1111,12 +1113,12 @@ spec:
                   eventBatchingCondition:
                     description: Batch condition that must be met (specified number
                       of events received or batch time window expired) before EventBridge
-                      event trigger fires. See Event Batching Condition.
+                      event trigger fires. See event_batching_condition.
                     items:
                       properties:
                         batchSize:
                           description: Number of events that must be received from
-                            Amazon EventBridge before EventBridge  event trigger fires.
+                            Amazon EventBridge before EventBridge event trigger fires.
                           type: number
                         batchWindow:
                           description: Window of time in seconds after which EventBridge
@@ -1129,37 +1131,38 @@ spec:
                     description: Trigger name
                     type: string
                   predicate:
-                    description: A predicate to specify when the new trigger should
-                      fire. Required when trigger type is CONDITIONAL. See Predicate
-                      Below.
+                    description: Predicate to specify when the new trigger should
+                      fire. Required when trigger type is CONDITIONAL. See predicate
+                      below.
                     properties:
                       conditions:
-                        description: A list of the conditions that determine when
-                          the trigger will fire. See Conditions.
+                        description: List of the conditions that determine when the
+                          trigger will fire. See conditions.
                         items:
                           properties:
                             crawlState:
-                              description: The condition crawl state. Currently, the
-                                values supported are RUNNING, SUCCEEDED, CANCELLED,
-                                and FAILED. If this is specified, crawler_name must
-                                also be specified. Conflicts with state.
+                              description: Condition crawl state. Currently, the values
+                                supported are RUNNING, SUCCEEDED, CANCELLED, and FAILED.
+                                If this is specified, crawler_name must also be specified.
+                                Conflicts with state.
                               type: string
                             crawlerName:
-                              description: The name of the crawler to be executed.
-                                Conflicts with job_name.
+                              description: Name of the crawler to watch. If this is
+                                specified, crawl_state must also be specified. Conflicts
+                                with job_name.
                               type: string
                             jobName:
-                              description: The name of a job to be executed. Conflicts
-                                with crawler_name.
+                              description: Name of the job to watch. If this is specified,
+                                state must also be specified. Conflicts with crawler_name.
                               type: string
                             logicalOperator:
-                              description: A logical operator. Defaults to EQUALS.
+                              description: Logical operator. Defaults to EQUALS.
                               type: string
                             state:
-                              description: The condition job state. Currently, the
-                                values supported are SUCCEEDED, STOPPED, TIMEOUT and
-                                FAILED. If this is specified, job_name must also be
-                                specified. Conflicts with crawler_state.
+                              description: Condition job state. Currently, the values
+                                supported are SUCCEEDED, STOPPED, TIMEOUT and FAILED.
+                                If this is specified, job_name must also be specified.
+                                Conflicts with crawler_state.
                               type: string
                           type: object
                         type: array
@@ -1174,7 +1177,7 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   schedule:
-                    description: A cron expression used to specify the schedule. Time-Based
+                    description: Cron expression used to specify the schedule. Time-Based
                       Schedules for Jobs and Crawlers
                     type: string
                   startOnCreation:
@@ -1182,7 +1185,7 @@ spec:
                       when created. True is not supported for ON_DEMAND triggers.
                     type: boolean
                   state:
-                    description: The condition job state. Currently, the values supported
+                    description: Condition job state. Currently, the values supported
                       are SUCCEEDED, STOPPED, TIMEOUT and FAILED. If this is specified,
                       job_name must also be specified. Conflicts with crawler_state.
                     type: string
@@ -1195,17 +1198,16 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
                   type:
-                    description: The type of trigger. Valid values are CONDITIONAL,
-                      EVENT, ON_DEMAND, and SCHEDULED.
+                    description: Type of trigger. Valid values are CONDITIONAL, EVENT,
+                      ON_DEMAND, and SCHEDULED.
                     type: string
                   workflowName:
-                    description: A workflow to which the trigger should be associated
+                    description: Workflow to which the trigger should be associated
                       to. Every workflow graph (DAG) needs a starting trigger (ON_DEMAND
                       or SCHEDULED type) and can contain multiple additional CONDITIONAL
                       triggers.

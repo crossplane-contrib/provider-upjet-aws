@@ -150,7 +150,7 @@ type FleetInitParameters struct {
 
 type FleetObservation struct {
 
-	// ARN of the appstream fleet.
+	// ARN of the AppStream fleet.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Configuration block for the desired capacity of the fleet. See below.
@@ -180,7 +180,7 @@ type FleetObservation struct {
 	// ARN of the IAM role to apply to the fleet.
 	IAMRoleArn *string `json:"iamRoleArn,omitempty" tf:"iam_role_arn,omitempty"`
 
-	// Unique identifier (ID) of the appstream fleet.
+	// Unique identifier (ID) of the AppStream fleet.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Amount of time that users can be idle (inactive) before they are disconnected from their streaming session and the disconnect_timeout_in_seconds time interval begins. Defaults to 0. Valid value is between 60 and 3600 seconds.

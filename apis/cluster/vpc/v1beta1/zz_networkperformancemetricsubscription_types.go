@@ -15,50 +15,50 @@ import (
 
 type NetworkPerformanceMetricSubscriptionInitParameters struct {
 
-	// The target Region or Availability Zone that the metric subscription is enabled for. For example, eu-west-1.
+	// Target Region or Availability Zone that the metric subscription is enabled for. For example, eu-west-1.
 	Destination *string `json:"destination,omitempty" tf:"destination,omitempty"`
 
-	// The metric used for the enabled subscription. Valid values: aggregate-latency. Default: aggregate-latency.
+	// Metric used for the enabled subscription. Valid values: aggregate-latency. Default: aggregate-latency.
 	Metric *string `json:"metric,omitempty" tf:"metric,omitempty"`
 
-	// The source Region or Availability Zone that the metric subscription is enabled for. For example, us-east-1.
+	// Source Region or Availability Zone that the metric subscription is enabled for. For example, us-east-1.
 	Source *string `json:"source,omitempty" tf:"source,omitempty"`
 
-	// The statistic used for the enabled subscription. Valid values: p50. Default: p50.
+	// Statistic used for the enabled subscription. Valid values: p50. Default: p50.
 	Statistic *string `json:"statistic,omitempty" tf:"statistic,omitempty"`
 }
 
 type NetworkPerformanceMetricSubscriptionObservation struct {
 
-	// The target Region or Availability Zone that the metric subscription is enabled for. For example, eu-west-1.
+	// Target Region or Availability Zone that the metric subscription is enabled for. For example, eu-west-1.
 	Destination *string `json:"destination,omitempty" tf:"destination,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The metric used for the enabled subscription. Valid values: aggregate-latency. Default: aggregate-latency.
+	// Metric used for the enabled subscription. Valid values: aggregate-latency. Default: aggregate-latency.
 	Metric *string `json:"metric,omitempty" tf:"metric,omitempty"`
 
-	// The data aggregation time for the subscription.
+	// Data aggregation time for the subscription.
 	Period *string `json:"period,omitempty" tf:"period,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The source Region or Availability Zone that the metric subscription is enabled for. For example, us-east-1.
+	// Source Region or Availability Zone that the metric subscription is enabled for. For example, us-east-1.
 	Source *string `json:"source,omitempty" tf:"source,omitempty"`
 
-	// The statistic used for the enabled subscription. Valid values: p50. Default: p50.
+	// Statistic used for the enabled subscription. Valid values: p50. Default: p50.
 	Statistic *string `json:"statistic,omitempty" tf:"statistic,omitempty"`
 }
 
 type NetworkPerformanceMetricSubscriptionParameters struct {
 
-	// The target Region or Availability Zone that the metric subscription is enabled for. For example, eu-west-1.
+	// Target Region or Availability Zone that the metric subscription is enabled for. For example, eu-west-1.
 	// +kubebuilder:validation:Optional
 	Destination *string `json:"destination,omitempty" tf:"destination,omitempty"`
 
-	// The metric used for the enabled subscription. Valid values: aggregate-latency. Default: aggregate-latency.
+	// Metric used for the enabled subscription. Valid values: aggregate-latency. Default: aggregate-latency.
 	// +kubebuilder:validation:Optional
 	Metric *string `json:"metric,omitempty" tf:"metric,omitempty"`
 
@@ -67,11 +67,11 @@ type NetworkPerformanceMetricSubscriptionParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// The source Region or Availability Zone that the metric subscription is enabled for. For example, us-east-1.
+	// Source Region or Availability Zone that the metric subscription is enabled for. For example, us-east-1.
 	// +kubebuilder:validation:Optional
 	Source *string `json:"source,omitempty" tf:"source,omitempty"`
 
-	// The statistic used for the enabled subscription. Valid values: p50. Default: p50.
+	// Statistic used for the enabled subscription. Valid values: p50. Default: p50.
 	// +kubebuilder:validation:Optional
 	Statistic *string `json:"statistic,omitempty" tf:"statistic,omitempty"`
 }

@@ -285,7 +285,7 @@ spec:
                     description: Fully qualified name of the directory.
                     type: string
                   id:
-                    description: Unique identifier (ID) of the appstream directory
+                    description: Unique identifier (ID) of the AppStream directory
                       config.
                     type: string
                   organizationalUnitDistinguishedNames:

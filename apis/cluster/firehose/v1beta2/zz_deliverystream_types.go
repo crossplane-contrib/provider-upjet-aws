@@ -15,155 +15,156 @@ import (
 
 type AuthenticationConfigurationInitParameters struct {
 
-	// The type of connectivity used to access the Amazon MSK cluster. Valid values: PUBLIC, PRIVATE.
+	// Type of connectivity used to access the Amazon MSK cluster. Valid values: PUBLIC, PRIVATE.
 	Connectivity *string `json:"connectivity,omitempty" tf:"connectivity,omitempty"`
 
-	// The ARN of the role used to access the Amazon MSK cluster.
+	// ARN of the role used to access the Amazon MSK cluster.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
 
 type AuthenticationConfigurationObservation struct {
 
-	// The type of connectivity used to access the Amazon MSK cluster. Valid values: PUBLIC, PRIVATE.
+	// Type of connectivity used to access the Amazon MSK cluster. Valid values: PUBLIC, PRIVATE.
 	Connectivity *string `json:"connectivity,omitempty" tf:"connectivity,omitempty"`
 
-	// The ARN of the role used to access the Amazon MSK cluster.
+	// ARN of the role used to access the Amazon MSK cluster.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
 
 type AuthenticationConfigurationParameters struct {
 
-	// The type of connectivity used to access the Amazon MSK cluster. Valid values: PUBLIC, PRIVATE.
+	// Type of connectivity used to access the Amazon MSK cluster. Valid values: PUBLIC, PRIVATE.
 	// +kubebuilder:validation:Optional
 	Connectivity *string `json:"connectivity" tf:"connectivity,omitempty"`
 
-	// The ARN of the role used to access the Amazon MSK cluster.
+	// ARN of the role used to access the Amazon MSK cluster.
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn" tf:"role_arn,omitempty"`
 }
 
 type CloudwatchLoggingOptionsInitParameters struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The CloudWatch group name for logging. This value is required if enabled is true.
+	// CloudWatch group name for logging. This value is required if enabled is true.
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
 
-	// The CloudWatch log stream name for logging. This value is required if enabled is true.
+	// CloudWatch log stream name for logging. This value is required if enabled is true.
 	LogStreamName *string `json:"logStreamName,omitempty" tf:"log_stream_name,omitempty"`
 }
 
 type CloudwatchLoggingOptionsObservation struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The CloudWatch group name for logging. This value is required if enabled is true.
+	// CloudWatch group name for logging. This value is required if enabled is true.
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
 
-	// The CloudWatch log stream name for logging. This value is required if enabled is true.
+	// CloudWatch log stream name for logging. This value is required if enabled is true.
 	LogStreamName *string `json:"logStreamName,omitempty" tf:"log_stream_name,omitempty"`
 }
 
 type CloudwatchLoggingOptionsParameters struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The CloudWatch group name for logging. This value is required if enabled is true.
+	// CloudWatch group name for logging. This value is required if enabled is true.
 	// +kubebuilder:validation:Optional
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
 
-	// The CloudWatch log stream name for logging. This value is required if enabled is true.
+	// CloudWatch log stream name for logging. This value is required if enabled is true.
 	// +kubebuilder:validation:Optional
 	LogStreamName *string `json:"logStreamName,omitempty" tf:"log_stream_name,omitempty"`
 }
 
 type CommonAttributesInitParameters struct {
 
-	// The name of the HTTP endpoint common attribute.
+	// Name of the HTTP endpoint common attribute.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The value of the HTTP endpoint common attribute.
+	// Value of the HTTP endpoint common attribute.
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type CommonAttributesObservation struct {
 
-	// The name of the HTTP endpoint common attribute.
+	// Name of the HTTP endpoint common attribute.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The value of the HTTP endpoint common attribute.
+	// Value of the HTTP endpoint common attribute.
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type CommonAttributesParameters struct {
 
-	// The name of the HTTP endpoint common attribute.
+	// Name of the HTTP endpoint common attribute.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// The value of the HTTP endpoint common attribute.
+	// Value of the HTTP endpoint common attribute.
 	// +kubebuilder:validation:Optional
 	Value *string `json:"value" tf:"value,omitempty"`
 }
 
 type DataFormatConversionConfigurationInitParameters struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Specifies the deserializer that you want Kinesis Data Firehose to use to convert the format of your data from JSON. See input_format_configuration block below for details.
+	// Deserializer that you want Kinesis Data Firehose to use to convert the format of your data from JSON. See input_format_configuration block below for details.
 	InputFormatConfiguration *InputFormatConfigurationInitParameters `json:"inputFormatConfiguration,omitempty" tf:"input_format_configuration,omitempty"`
 
-	// Specifies the serializer that you want Kinesis Data Firehose to use to convert the format of your data to the Parquet or ORC format. See output_format_configuration block below for details.
+	// Serializer that you want Kinesis Data Firehose to use to convert the format of your data to the Parquet or ORC format. See output_format_configuration block below for details.
 	OutputFormatConfiguration *OutputFormatConfigurationInitParameters `json:"outputFormatConfiguration,omitempty" tf:"output_format_configuration,omitempty"`
 
-	// Specifies the AWS Glue Data Catalog table that contains the column information. See schema_configuration block below for details.
+	// AWS Glue Data Catalog table that contains the column information. See schema_configuration block below for details.
 	SchemaConfiguration *SchemaConfigurationInitParameters `json:"schemaConfiguration,omitempty" tf:"schema_configuration,omitempty"`
 }
 
 type DataFormatConversionConfigurationObservation struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Specifies the deserializer that you want Kinesis Data Firehose to use to convert the format of your data from JSON. See input_format_configuration block below for details.
+	// Deserializer that you want Kinesis Data Firehose to use to convert the format of your data from JSON. See input_format_configuration block below for details.
 	InputFormatConfiguration *InputFormatConfigurationObservation `json:"inputFormatConfiguration,omitempty" tf:"input_format_configuration,omitempty"`
 
-	// Specifies the serializer that you want Kinesis Data Firehose to use to convert the format of your data to the Parquet or ORC format. See output_format_configuration block below for details.
+	// Serializer that you want Kinesis Data Firehose to use to convert the format of your data to the Parquet or ORC format. See output_format_configuration block below for details.
 	OutputFormatConfiguration *OutputFormatConfigurationObservation `json:"outputFormatConfiguration,omitempty" tf:"output_format_configuration,omitempty"`
 
-	// Specifies the AWS Glue Data Catalog table that contains the column information. See schema_configuration block below for details.
+	// AWS Glue Data Catalog table that contains the column information. See schema_configuration block below for details.
 	SchemaConfiguration *SchemaConfigurationObservation `json:"schemaConfiguration,omitempty" tf:"schema_configuration,omitempty"`
 }
 
 type DataFormatConversionConfigurationParameters struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Specifies the deserializer that you want Kinesis Data Firehose to use to convert the format of your data from JSON. See input_format_configuration block below for details.
+	// Deserializer that you want Kinesis Data Firehose to use to convert the format of your data from JSON. See input_format_configuration block below for details.
 	// +kubebuilder:validation:Optional
 	InputFormatConfiguration *InputFormatConfigurationParameters `json:"inputFormatConfiguration" tf:"input_format_configuration,omitempty"`
 
-	// Specifies the serializer that you want Kinesis Data Firehose to use to convert the format of your data to the Parquet or ORC format. See output_format_configuration block below for details.
+	// Serializer that you want Kinesis Data Firehose to use to convert the format of your data to the Parquet or ORC format. See output_format_configuration block below for details.
 	// +kubebuilder:validation:Optional
 	OutputFormatConfiguration *OutputFormatConfigurationParameters `json:"outputFormatConfiguration" tf:"output_format_configuration,omitempty"`
 
-	// Specifies the AWS Glue Data Catalog table that contains the column information. See schema_configuration block below for details.
+	// AWS Glue Data Catalog table that contains the column information. See schema_configuration block below for details.
 	// +kubebuilder:validation:Optional
 	SchemaConfiguration *SchemaConfigurationParameters `json:"schemaConfiguration" tf:"schema_configuration,omitempty"`
 }
 
 type DeliveryStreamInitParameters struct {
 
-	// This is the destination to where the data is delivered. The only options are s3 (Deprecated, use extended_s3 instead), extended_s3, redshift, elasticsearch, splunk, http_endpoint, opensearch, opensearchserverless and snowflake.
+	// Destination where the data is delivered. The only options are s3 (Deprecated, use extended_s3 instead), extended_s3, redshift, elasticsearch, splunk, http_endpoint, opensearch, opensearchserverless and snowflake.
 	Destination *string `json:"destination,omitempty" tf:"destination,omitempty"`
 
+	// Identifier of the destination for the delivery stream.
 	DestinationID *string `json:"destinationId,omitempty" tf:"destination_id,omitempty"`
 
 	// Configuration options when destination is elasticsearch. See elasticsearch_configuration block below for details.
@@ -181,10 +182,10 @@ type DeliveryStreamInitParameters struct {
 	// Stream and role ARNs for a Kinesis data stream used as the source for a delivery stream. See kinesis_source_configuration block below for details.
 	KinesisSourceConfiguration *KinesisSourceConfigurationInitParameters `json:"kinesisSourceConfiguration,omitempty" tf:"kinesis_source_configuration,omitempty"`
 
-	// The configuration for the Amazon MSK cluster to be used as the source for a delivery stream. See msk_source_configuration block below for details.
+	// Configuration for the Amazon MSK cluster to be used as the source for a delivery stream. See msk_source_configuration block below for details.
 	MskSourceConfiguration *MskSourceConfigurationInitParameters `json:"mskSourceConfiguration,omitempty" tf:"msk_source_configuration,omitempty"`
 
-	// A name to identify the stream. This is unique to the AWS account and region the Stream is created in. When using for WAF logging, name must be prefixed with aws-waf-logs-. See AWS Documentation for more details.
+	// Name to identify the stream. This is unique to the AWS account and region the Stream is created in. When using for WAF logging, name must be prefixed with aws-waf-logs-. See AWS Documentation for more details.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Configuration options when destination is opensearch. See opensearch_configuration block below for details.
@@ -209,7 +210,7 @@ type DeliveryStreamInitParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Specifies the table version for the output data schema. Defaults to LATEST.
+	// Version identifier of the delivery stream.
 	VersionID *string `json:"versionId,omitempty" tf:"version_id,omitempty"`
 }
 
@@ -218,9 +219,10 @@ type DeliveryStreamObservation struct {
 	// ARN specifying the Stream
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// This is the destination to where the data is delivered. The only options are s3 (Deprecated, use extended_s3 instead), extended_s3, redshift, elasticsearch, splunk, http_endpoint, opensearch, opensearchserverless and snowflake.
+	// Destination where the data is delivered. The only options are s3 (Deprecated, use extended_s3 instead), extended_s3, redshift, elasticsearch, splunk, http_endpoint, opensearch, opensearchserverless and snowflake.
 	Destination *string `json:"destination,omitempty" tf:"destination,omitempty"`
 
+	// Identifier of the destination for the delivery stream.
 	DestinationID *string `json:"destinationId,omitempty" tf:"destination_id,omitempty"`
 
 	// Configuration options when destination is elasticsearch. See elasticsearch_configuration block below for details.
@@ -240,10 +242,10 @@ type DeliveryStreamObservation struct {
 	// Stream and role ARNs for a Kinesis data stream used as the source for a delivery stream. See kinesis_source_configuration block below for details.
 	KinesisSourceConfiguration *KinesisSourceConfigurationObservation `json:"kinesisSourceConfiguration,omitempty" tf:"kinesis_source_configuration,omitempty"`
 
-	// The configuration for the Amazon MSK cluster to be used as the source for a delivery stream. See msk_source_configuration block below for details.
+	// Configuration for the Amazon MSK cluster to be used as the source for a delivery stream. See msk_source_configuration block below for details.
 	MskSourceConfiguration *MskSourceConfigurationObservation `json:"mskSourceConfiguration,omitempty" tf:"msk_source_configuration,omitempty"`
 
-	// A name to identify the stream. This is unique to the AWS account and region the Stream is created in. When using for WAF logging, name must be prefixed with aws-waf-logs-. See AWS Documentation for more details.
+	// Name to identify the stream. This is unique to the AWS account and region the Stream is created in. When using for WAF logging, name must be prefixed with aws-waf-logs-. See AWS Documentation for more details.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Configuration options when destination is opensearch. See opensearch_configuration block below for details.
@@ -272,20 +274,21 @@ type DeliveryStreamObservation struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// Specifies the table version for the output data schema. Defaults to LATEST.
+	// Version identifier of the delivery stream.
 	VersionID *string `json:"versionId,omitempty" tf:"version_id,omitempty"`
 }
 
 type DeliveryStreamParameters struct {
 
-	// This is the destination to where the data is delivered. The only options are s3 (Deprecated, use extended_s3 instead), extended_s3, redshift, elasticsearch, splunk, http_endpoint, opensearch, opensearchserverless and snowflake.
+	// Destination where the data is delivered. The only options are s3 (Deprecated, use extended_s3 instead), extended_s3, redshift, elasticsearch, splunk, http_endpoint, opensearch, opensearchserverless and snowflake.
 	// +kubebuilder:validation:Optional
 	Destination *string `json:"destination,omitempty" tf:"destination,omitempty"`
 
+	// Identifier of the destination for the delivery stream.
 	// +kubebuilder:validation:Optional
 	DestinationID *string `json:"destinationId,omitempty" tf:"destination_id,omitempty"`
 
@@ -309,11 +312,11 @@ type DeliveryStreamParameters struct {
 	// +kubebuilder:validation:Optional
 	KinesisSourceConfiguration *KinesisSourceConfigurationParameters `json:"kinesisSourceConfiguration,omitempty" tf:"kinesis_source_configuration,omitempty"`
 
-	// The configuration for the Amazon MSK cluster to be used as the source for a delivery stream. See msk_source_configuration block below for details.
+	// Configuration for the Amazon MSK cluster to be used as the source for a delivery stream. See msk_source_configuration block below for details.
 	// +kubebuilder:validation:Optional
 	MskSourceConfiguration *MskSourceConfigurationParameters `json:"mskSourceConfiguration,omitempty" tf:"msk_source_configuration,omitempty"`
 
-	// A name to identify the stream. This is unique to the AWS account and region the Stream is created in. When using for WAF logging, name must be prefixed with aws-waf-logs-. See AWS Documentation for more details.
+	// Name to identify the stream. This is unique to the AWS account and region the Stream is created in. When using for WAF logging, name must be prefixed with aws-waf-logs-. See AWS Documentation for more details.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -351,43 +354,43 @@ type DeliveryStreamParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Specifies the table version for the output data schema. Defaults to LATEST.
+	// Version identifier of the delivery stream.
 	// +kubebuilder:validation:Optional
 	VersionID *string `json:"versionId,omitempty" tf:"version_id,omitempty"`
 }
 
 type DeserializerInitParameters struct {
 
-	// Specifies the native Hive / HCatalog JsonSerDe. More details below. See hive_json_ser_de block below for details.
+	// Native Hive / HCatalog JsonSerDe. See hive_json_ser_de block below for details.
 	HiveJSONSerDe *HiveJSONSerDeInitParameters `json:"hiveJsonSerDe,omitempty" tf:"hive_json_ser_de,omitempty"`
 
-	// Specifies the OpenX SerDe. See open_x_json_ser_de block below for details.
+	// OpenX SerDe. See open_x_json_ser_de block below for details.
 	OpenXJSONSerDe *OpenXJSONSerDeInitParameters `json:"openXJsonSerDe,omitempty" tf:"open_x_json_ser_de,omitempty"`
 }
 
 type DeserializerObservation struct {
 
-	// Specifies the native Hive / HCatalog JsonSerDe. More details below. See hive_json_ser_de block below for details.
+	// Native Hive / HCatalog JsonSerDe. See hive_json_ser_de block below for details.
 	HiveJSONSerDe *HiveJSONSerDeObservation `json:"hiveJsonSerDe,omitempty" tf:"hive_json_ser_de,omitempty"`
 
-	// Specifies the OpenX SerDe. See open_x_json_ser_de block below for details.
+	// OpenX SerDe. See open_x_json_ser_de block below for details.
 	OpenXJSONSerDe *OpenXJSONSerDeObservation `json:"openXJsonSerDe,omitempty" tf:"open_x_json_ser_de,omitempty"`
 }
 
 type DeserializerParameters struct {
 
-	// Specifies the native Hive / HCatalog JsonSerDe. More details below. See hive_json_ser_de block below for details.
+	// Native Hive / HCatalog JsonSerDe. See hive_json_ser_de block below for details.
 	// +kubebuilder:validation:Optional
 	HiveJSONSerDe *HiveJSONSerDeParameters `json:"hiveJsonSerDe,omitempty" tf:"hive_json_ser_de,omitempty"`
 
-	// Specifies the OpenX SerDe. See open_x_json_ser_de block below for details.
+	// OpenX SerDe. See open_x_json_ser_de block below for details.
 	// +kubebuilder:validation:Optional
 	OpenXJSONSerDe *OpenXJSONSerDeParameters `json:"openXJsonSerDe,omitempty" tf:"open_x_json_ser_de,omitempty"`
 }
 
 type DestinationTableConfigurationInitParameters struct {
 
-	// Specifies the name of the AWS Glue database that contains the schema for the output data.
+	// Name of the AWS Glue database that contains the schema for the output data.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/glue/v1beta2.CatalogDatabase
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 
@@ -399,10 +402,10 @@ type DestinationTableConfigurationInitParameters struct {
 	// +kubebuilder:validation:Optional
 	DatabaseNameSelector *v2.Selector `json:"databaseNameSelector,omitempty" tf:"-"`
 
-	// The table specific S3 error output prefix. All the errors that occurred while delivering to this table will be prefixed with this value in S3 destination.
+	// Table specific S3 error output prefix. All the errors that occurred while delivering to this table will be prefixed with this value in S3 destination.
 	S3ErrorOutputPrefix *string `json:"s3ErrorOutputPrefix,omitempty" tf:"s3_error_output_prefix,omitempty"`
 
-	// Specifies the AWS Glue table that contains the column information that constitutes your data schema.
+	// AWS Glue table that contains the column information that constitutes your data schema.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/glue/v1beta2.CatalogTable
 	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
 
@@ -414,28 +417,28 @@ type DestinationTableConfigurationInitParameters struct {
 	// +kubebuilder:validation:Optional
 	TableNameSelector *v2.Selector `json:"tableNameSelector,omitempty" tf:"-"`
 
-	// A list of unique keys for a given Apache Iceberg table. Firehose will use these for running Create, Update, or Delete operations on the given Iceberg table.
+	// List of unique keys for a given Apache Iceberg table. Firehose will use these for running Create, Update, or Delete operations on the given Iceberg table.
 	UniqueKeys []*string `json:"uniqueKeys,omitempty" tf:"unique_keys,omitempty"`
 }
 
 type DestinationTableConfigurationObservation struct {
 
-	// Specifies the name of the AWS Glue database that contains the schema for the output data.
+	// Name of the AWS Glue database that contains the schema for the output data.
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 
-	// The table specific S3 error output prefix. All the errors that occurred while delivering to this table will be prefixed with this value in S3 destination.
+	// Table specific S3 error output prefix. All the errors that occurred while delivering to this table will be prefixed with this value in S3 destination.
 	S3ErrorOutputPrefix *string `json:"s3ErrorOutputPrefix,omitempty" tf:"s3_error_output_prefix,omitempty"`
 
-	// Specifies the AWS Glue table that contains the column information that constitutes your data schema.
+	// AWS Glue table that contains the column information that constitutes your data schema.
 	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
 
-	// A list of unique keys for a given Apache Iceberg table. Firehose will use these for running Create, Update, or Delete operations on the given Iceberg table.
+	// List of unique keys for a given Apache Iceberg table. Firehose will use these for running Create, Update, or Delete operations on the given Iceberg table.
 	UniqueKeys []*string `json:"uniqueKeys,omitempty" tf:"unique_keys,omitempty"`
 }
 
 type DestinationTableConfigurationParameters struct {
 
-	// Specifies the name of the AWS Glue database that contains the schema for the output data.
+	// Name of the AWS Glue database that contains the schema for the output data.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/glue/v1beta2.CatalogDatabase
 	// +kubebuilder:validation:Optional
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
@@ -448,11 +451,11 @@ type DestinationTableConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	DatabaseNameSelector *v2.Selector `json:"databaseNameSelector,omitempty" tf:"-"`
 
-	// The table specific S3 error output prefix. All the errors that occurred while delivering to this table will be prefixed with this value in S3 destination.
+	// Table specific S3 error output prefix. All the errors that occurred while delivering to this table will be prefixed with this value in S3 destination.
 	// +kubebuilder:validation:Optional
 	S3ErrorOutputPrefix *string `json:"s3ErrorOutputPrefix,omitempty" tf:"s3_error_output_prefix,omitempty"`
 
-	// Specifies the AWS Glue table that contains the column information that constitutes your data schema.
+	// AWS Glue table that contains the column information that constitutes your data schema.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/glue/v1beta2.CatalogTable
 	// +kubebuilder:validation:Optional
 	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
@@ -465,33 +468,33 @@ type DestinationTableConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	TableNameSelector *v2.Selector `json:"tableNameSelector,omitempty" tf:"-"`
 
-	// A list of unique keys for a given Apache Iceberg table. Firehose will use these for running Create, Update, or Delete operations on the given Iceberg table.
+	// List of unique keys for a given Apache Iceberg table. Firehose will use these for running Create, Update, or Delete operations on the given Iceberg table.
 	// +kubebuilder:validation:Optional
 	UniqueKeys []*string `json:"uniqueKeys,omitempty" tf:"unique_keys,omitempty"`
 }
 
 type DocumentIDOptionsInitParameters struct {
 
-	// The method for setting up document ID. Valid values: FIREHOSE_DEFAULT, NO_DOCUMENT_ID.
+	// Method for setting up document ID. Valid values: FIREHOSE_DEFAULT, NO_DOCUMENT_ID.
 	DefaultDocumentIDFormat *string `json:"defaultDocumentIdFormat,omitempty" tf:"default_document_id_format,omitempty"`
 }
 
 type DocumentIDOptionsObservation struct {
 
-	// The method for setting up document ID. Valid values: FIREHOSE_DEFAULT, NO_DOCUMENT_ID.
+	// Method for setting up document ID. Valid values: FIREHOSE_DEFAULT, NO_DOCUMENT_ID.
 	DefaultDocumentIDFormat *string `json:"defaultDocumentIdFormat,omitempty" tf:"default_document_id_format,omitempty"`
 }
 
 type DocumentIDOptionsParameters struct {
 
-	// The method for setting up document ID. Valid values: FIREHOSE_DEFAULT, NO_DOCUMENT_ID.
+	// Method for setting up document ID. Valid values: FIREHOSE_DEFAULT, NO_DOCUMENT_ID.
 	// +kubebuilder:validation:Optional
 	DefaultDocumentIDFormat *string `json:"defaultDocumentIdFormat" tf:"default_document_id_format,omitempty"`
 }
 
 type DynamicPartitioningConfigurationInitParameters struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// After an initial failure to deliver to Splunk, the total amount of time, in seconds between 0 to 7200, during which Firehose re-attempts delivery (including the first attempt).  After this time has elapsed, the failed documents are written to Amazon S3.  The default value is 300s.  There will be no retry if the value is 0.
@@ -500,7 +503,7 @@ type DynamicPartitioningConfigurationInitParameters struct {
 
 type DynamicPartitioningConfigurationObservation struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// After an initial failure to deliver to Splunk, the total amount of time, in seconds between 0 to 7200, during which Firehose re-attempts delivery (including the first attempt).  After this time has elapsed, the failed documents are written to Amazon S3.  The default value is 300s.  There will be no retry if the value is 0.
@@ -509,7 +512,7 @@ type DynamicPartitioningConfigurationObservation struct {
 
 type DynamicPartitioningConfigurationParameters struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
@@ -526,13 +529,13 @@ type ElasticsearchConfigurationInitParameters struct {
 	// Buffer incoming data to the specified size, in MBs between 1 to 100, before delivering it to the destination.  The default value is 5MB.
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
+	// CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	CloudwatchLoggingOptions *CloudwatchLoggingOptionsInitParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
-	// The endpoint to use when communicating with the cluster. Conflicts with domain_arn.
+	// Endpoint to use when communicating with the cluster. Conflicts with domain_arn.
 	ClusterEndpoint *string `json:"clusterEndpoint,omitempty" tf:"cluster_endpoint,omitempty"`
 
-	// The ARN of the Amazon ES domain.  The pattern needs to be arn:.*.  Conflicts with cluster_endpoint.
+	// ARN of the Amazon ES domain.  The pattern needs to be arn:.*.  Conflicts with cluster_endpoint.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/elasticsearch/v1beta2.Domain
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	DomainArn *string `json:"domainArn,omitempty" tf:"domain_arn,omitempty"`
@@ -545,19 +548,19 @@ type ElasticsearchConfigurationInitParameters struct {
 	// +kubebuilder:validation:Optional
 	DomainArnSelector *v2.Selector `json:"domainArnSelector,omitempty" tf:"-"`
 
-	// The Elasticsearch index name.
+	// Elasticsearch index name.
 	IndexName *string `json:"indexName,omitempty" tf:"index_name,omitempty"`
 
-	// The Elasticsearch index rotation period.  Index rotation appends a timestamp to the IndexName to facilitate expiration of old data.  Valid values are NoRotation, OneHour, OneDay, OneWeek, and OneMonth.  The default value is OneDay.
+	// Elasticsearch index rotation period.  Index rotation appends a timestamp to the IndexName to facilitate expiration of old data.  Valid values are NoRotation, OneHour, OneDay, OneWeek, and OneMonth.  The default value is OneDay.
 	IndexRotationPeriod *string `json:"indexRotationPeriod,omitempty" tf:"index_rotation_period,omitempty"`
 
-	// The data processing configuration.  See processing_configuration block below for details.
+	// Data processing configuration.  See processing_configuration block below for details.
 	ProcessingConfiguration *ProcessingConfigurationInitParameters `json:"processingConfiguration,omitempty" tf:"processing_configuration,omitempty"`
 
 	// After an initial failure to deliver to Amazon Elasticsearch, the total amount of time, in seconds between 0 to 7200, during which Firehose re-attempts delivery (including the first attempt).  After this time has elapsed, the failed documents are written to Amazon S3.  The default value is 300s.  There will be no retry if the value is 0.
 	RetryDuration *float64 `json:"retryDuration,omitempty" tf:"retry_duration,omitempty"`
 
-	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon ES Configuration API and for indexing documents.  The IAM role must have permission for DescribeElasticsearchDomain, DescribeElasticsearchDomains, and DescribeElasticsearchDomainConfig.  The pattern needs to be arn:.*.
+	// ARN of the IAM role to be assumed by Firehose for calling the Amazon ES Configuration API and for indexing documents.  The IAM role must have permission for DescribeElasticsearchDomain, DescribeElasticsearchDomains, and DescribeElasticsearchDomainConfig.  The pattern needs to be arn:.*.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
@@ -570,16 +573,16 @@ type ElasticsearchConfigurationInitParameters struct {
 	// +kubebuilder:validation:Optional
 	RoleArnSelector *v2.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
-	// Defines how documents should be delivered to Amazon S3.  Valid values are FailedDocumentsOnly and AllDocuments.  Default value is FailedDocumentsOnly.
+	// How documents should be delivered to Amazon S3.  Valid values are FailedDocumentsOnly and AllDocuments.  Default value is FailedDocumentsOnly.
 	S3BackupMode *string `json:"s3BackupMode,omitempty" tf:"s3_backup_mode,omitempty"`
 
-	// The S3 Configuration. See s3_configuration block below for details.
+	// S3 Configuration. See s3_configuration block below for details.
 	S3Configuration *S3ConfigurationInitParameters `json:"s3Configuration,omitempty" tf:"s3_configuration,omitempty"`
 
-	// The Elasticsearch type name with maximum length of 100 characters.
+	// Elasticsearch type name with maximum length of 100 characters.
 	TypeName *string `json:"typeName,omitempty" tf:"type_name,omitempty"`
 
-	// The VPC configuration for the delivery stream to connect to Elastic Search associated with the VPC. See vpc_config block below for details.
+	// VPC configuration for the delivery stream to connect to Elastic Search associated with the VPC. See vpc_config block below for details.
 	VPCConfig *VPCConfigInitParameters `json:"vpcConfig,omitempty" tf:"vpc_config,omitempty"`
 }
 
@@ -591,40 +594,40 @@ type ElasticsearchConfigurationObservation struct {
 	// Buffer incoming data to the specified size, in MBs between 1 to 100, before delivering it to the destination.  The default value is 5MB.
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
+	// CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	CloudwatchLoggingOptions *CloudwatchLoggingOptionsObservation `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
-	// The endpoint to use when communicating with the cluster. Conflicts with domain_arn.
+	// Endpoint to use when communicating with the cluster. Conflicts with domain_arn.
 	ClusterEndpoint *string `json:"clusterEndpoint,omitempty" tf:"cluster_endpoint,omitempty"`
 
-	// The ARN of the Amazon ES domain.  The pattern needs to be arn:.*.  Conflicts with cluster_endpoint.
+	// ARN of the Amazon ES domain.  The pattern needs to be arn:.*.  Conflicts with cluster_endpoint.
 	DomainArn *string `json:"domainArn,omitempty" tf:"domain_arn,omitempty"`
 
-	// The Elasticsearch index name.
+	// Elasticsearch index name.
 	IndexName *string `json:"indexName,omitempty" tf:"index_name,omitempty"`
 
-	// The Elasticsearch index rotation period.  Index rotation appends a timestamp to the IndexName to facilitate expiration of old data.  Valid values are NoRotation, OneHour, OneDay, OneWeek, and OneMonth.  The default value is OneDay.
+	// Elasticsearch index rotation period.  Index rotation appends a timestamp to the IndexName to facilitate expiration of old data.  Valid values are NoRotation, OneHour, OneDay, OneWeek, and OneMonth.  The default value is OneDay.
 	IndexRotationPeriod *string `json:"indexRotationPeriod,omitempty" tf:"index_rotation_period,omitempty"`
 
-	// The data processing configuration.  See processing_configuration block below for details.
+	// Data processing configuration.  See processing_configuration block below for details.
 	ProcessingConfiguration *ProcessingConfigurationObservation `json:"processingConfiguration,omitempty" tf:"processing_configuration,omitempty"`
 
 	// After an initial failure to deliver to Amazon Elasticsearch, the total amount of time, in seconds between 0 to 7200, during which Firehose re-attempts delivery (including the first attempt).  After this time has elapsed, the failed documents are written to Amazon S3.  The default value is 300s.  There will be no retry if the value is 0.
 	RetryDuration *float64 `json:"retryDuration,omitempty" tf:"retry_duration,omitempty"`
 
-	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon ES Configuration API and for indexing documents.  The IAM role must have permission for DescribeElasticsearchDomain, DescribeElasticsearchDomains, and DescribeElasticsearchDomainConfig.  The pattern needs to be arn:.*.
+	// ARN of the IAM role to be assumed by Firehose for calling the Amazon ES Configuration API and for indexing documents.  The IAM role must have permission for DescribeElasticsearchDomain, DescribeElasticsearchDomains, and DescribeElasticsearchDomainConfig.  The pattern needs to be arn:.*.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
-	// Defines how documents should be delivered to Amazon S3.  Valid values are FailedDocumentsOnly and AllDocuments.  Default value is FailedDocumentsOnly.
+	// How documents should be delivered to Amazon S3.  Valid values are FailedDocumentsOnly and AllDocuments.  Default value is FailedDocumentsOnly.
 	S3BackupMode *string `json:"s3BackupMode,omitempty" tf:"s3_backup_mode,omitempty"`
 
-	// The S3 Configuration. See s3_configuration block below for details.
+	// S3 Configuration. See s3_configuration block below for details.
 	S3Configuration *S3ConfigurationObservation `json:"s3Configuration,omitempty" tf:"s3_configuration,omitempty"`
 
-	// The Elasticsearch type name with maximum length of 100 characters.
+	// Elasticsearch type name with maximum length of 100 characters.
 	TypeName *string `json:"typeName,omitempty" tf:"type_name,omitempty"`
 
-	// The VPC configuration for the delivery stream to connect to Elastic Search associated with the VPC. See vpc_config block below for details.
+	// VPC configuration for the delivery stream to connect to Elastic Search associated with the VPC. See vpc_config block below for details.
 	VPCConfig *VPCConfigObservation `json:"vpcConfig,omitempty" tf:"vpc_config,omitempty"`
 }
 
@@ -638,15 +641,15 @@ type ElasticsearchConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
+	// CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	// +kubebuilder:validation:Optional
 	CloudwatchLoggingOptions *CloudwatchLoggingOptionsParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
-	// The endpoint to use when communicating with the cluster. Conflicts with domain_arn.
+	// Endpoint to use when communicating with the cluster. Conflicts with domain_arn.
 	// +kubebuilder:validation:Optional
 	ClusterEndpoint *string `json:"clusterEndpoint,omitempty" tf:"cluster_endpoint,omitempty"`
 
-	// The ARN of the Amazon ES domain.  The pattern needs to be arn:.*.  Conflicts with cluster_endpoint.
+	// ARN of the Amazon ES domain.  The pattern needs to be arn:.*.  Conflicts with cluster_endpoint.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/elasticsearch/v1beta2.Domain
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -660,15 +663,15 @@ type ElasticsearchConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	DomainArnSelector *v2.Selector `json:"domainArnSelector,omitempty" tf:"-"`
 
-	// The Elasticsearch index name.
+	// Elasticsearch index name.
 	// +kubebuilder:validation:Optional
 	IndexName *string `json:"indexName" tf:"index_name,omitempty"`
 
-	// The Elasticsearch index rotation period.  Index rotation appends a timestamp to the IndexName to facilitate expiration of old data.  Valid values are NoRotation, OneHour, OneDay, OneWeek, and OneMonth.  The default value is OneDay.
+	// Elasticsearch index rotation period.  Index rotation appends a timestamp to the IndexName to facilitate expiration of old data.  Valid values are NoRotation, OneHour, OneDay, OneWeek, and OneMonth.  The default value is OneDay.
 	// +kubebuilder:validation:Optional
 	IndexRotationPeriod *string `json:"indexRotationPeriod,omitempty" tf:"index_rotation_period,omitempty"`
 
-	// The data processing configuration.  See processing_configuration block below for details.
+	// Data processing configuration.  See processing_configuration block below for details.
 	// +kubebuilder:validation:Optional
 	ProcessingConfiguration *ProcessingConfigurationParameters `json:"processingConfiguration,omitempty" tf:"processing_configuration,omitempty"`
 
@@ -676,7 +679,7 @@ type ElasticsearchConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	RetryDuration *float64 `json:"retryDuration,omitempty" tf:"retry_duration,omitempty"`
 
-	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon ES Configuration API and for indexing documents.  The IAM role must have permission for DescribeElasticsearchDomain, DescribeElasticsearchDomains, and DescribeElasticsearchDomainConfig.  The pattern needs to be arn:.*.
+	// ARN of the IAM role to be assumed by Firehose for calling the Amazon ES Configuration API and for indexing documents.  The IAM role must have permission for DescribeElasticsearchDomain, DescribeElasticsearchDomains, and DescribeElasticsearchDomainConfig.  The pattern needs to be arn:.*.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -690,65 +693,65 @@ type ElasticsearchConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	RoleArnSelector *v2.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
-	// Defines how documents should be delivered to Amazon S3.  Valid values are FailedDocumentsOnly and AllDocuments.  Default value is FailedDocumentsOnly.
+	// How documents should be delivered to Amazon S3.  Valid values are FailedDocumentsOnly and AllDocuments.  Default value is FailedDocumentsOnly.
 	// +kubebuilder:validation:Optional
 	S3BackupMode *string `json:"s3BackupMode,omitempty" tf:"s3_backup_mode,omitempty"`
 
-	// The S3 Configuration. See s3_configuration block below for details.
+	// S3 Configuration. See s3_configuration block below for details.
 	// +kubebuilder:validation:Optional
 	S3Configuration *S3ConfigurationParameters `json:"s3Configuration" tf:"s3_configuration,omitempty"`
 
-	// The Elasticsearch type name with maximum length of 100 characters.
+	// Elasticsearch type name with maximum length of 100 characters.
 	// +kubebuilder:validation:Optional
 	TypeName *string `json:"typeName,omitempty" tf:"type_name,omitempty"`
 
-	// The VPC configuration for the delivery stream to connect to Elastic Search associated with the VPC. See vpc_config block below for details.
+	// VPC configuration for the delivery stream to connect to Elastic Search associated with the VPC. See vpc_config block below for details.
 	// +kubebuilder:validation:Optional
 	VPCConfig *VPCConfigParameters `json:"vpcConfig,omitempty" tf:"vpc_config,omitempty"`
 }
 
 type ExtendedS3ConfigurationCloudwatchLoggingOptionsInitParameters struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The CloudWatch group name for logging. This value is required if enabled is true.
+	// CloudWatch group name for logging. This value is required if enabled is true.
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
 
-	// The CloudWatch log stream name for logging. This value is required if enabled is true.
+	// CloudWatch log stream name for logging. This value is required if enabled is true.
 	LogStreamName *string `json:"logStreamName,omitempty" tf:"log_stream_name,omitempty"`
 }
 
 type ExtendedS3ConfigurationCloudwatchLoggingOptionsObservation struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The CloudWatch group name for logging. This value is required if enabled is true.
+	// CloudWatch group name for logging. This value is required if enabled is true.
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
 
-	// The CloudWatch log stream name for logging. This value is required if enabled is true.
+	// CloudWatch log stream name for logging. This value is required if enabled is true.
 	LogStreamName *string `json:"logStreamName,omitempty" tf:"log_stream_name,omitempty"`
 }
 
 type ExtendedS3ConfigurationCloudwatchLoggingOptionsParameters struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The CloudWatch group name for logging. This value is required if enabled is true.
+	// CloudWatch group name for logging. This value is required if enabled is true.
 	// +kubebuilder:validation:Optional
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
 
-	// The CloudWatch log stream name for logging. This value is required if enabled is true.
+	// CloudWatch log stream name for logging. This value is required if enabled is true.
 	// +kubebuilder:validation:Optional
 	LogStreamName *string `json:"logStreamName,omitempty" tf:"log_stream_name,omitempty"`
 }
 
 type ExtendedS3ConfigurationInitParameters struct {
 
-	// The ARN of the S3 bucket
+	// ARN of the S3 bucket.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3/v1beta2.Bucket
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	BucketArn *string `json:"bucketArn,omitempty" tf:"bucket_arn,omitempty"`
@@ -761,44 +764,43 @@ type ExtendedS3ConfigurationInitParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketArnSelector *v2.Selector `json:"bucketArnSelector,omitempty" tf:"-"`
 
-	// Buffer incoming data for the specified period of time, in seconds between 0 to 60, before delivering it to the destination.  The default value is 60s.
+	// Buffer incoming data for the specified period of time, in seconds, before delivering it to the destination. The default value is 300.
 	BufferingInterval *float64 `json:"bufferingInterval,omitempty" tf:"buffering_interval,omitempty"`
 
-	// Buffer incoming data to the specified size, in MBs between 1 to 5, before delivering it to the destination.  The default value is 5MB.
+	// Buffer incoming data to the specified size, in MBs, before delivering it to the destination. The default value is 5. We recommend setting this value greater than the amount of data you typically ingest into the delivery stream in 10 seconds. For example, if you typically ingest data at 1 MB/sec, set this value to 10 MB or higher.
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
+	// CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	CloudwatchLoggingOptions *ExtendedS3ConfigurationCloudwatchLoggingOptionsInitParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
-	// The compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
+	// Compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
 	CompressionFormat *string `json:"compressionFormat,omitempty" tf:"compression_format,omitempty"`
 
-	// The time zone you prefer. Valid values are UTC or a non-3-letter IANA time zones (for example, America/Los_Angeles). Default value is UTC.
+	// Time zone you prefer. Valid values are UTC or a non-3-letter IANA time zones (for example, America/Los_Angeles). Default value is UTC.
 	CustomTimeZone *string `json:"customTimeZone,omitempty" tf:"custom_time_zone,omitempty"`
 
 	// Nested argument for the serializer, deserializer, and schema for converting data from the JSON format to the Parquet or ORC format before writing it to Amazon S3. See data_format_conversion_configuration block below for details.
 	DataFormatConversionConfiguration *DataFormatConversionConfigurationInitParameters `json:"dataFormatConversionConfiguration,omitempty" tf:"data_format_conversion_configuration,omitempty"`
 
-	// The configuration for dynamic partitioning. Required when using dynamic partitioning. See dynamic_partitioning_configuration block below for details.
+	// Configuration for dynamic partitioning. Required when using dynamic partitioning. See dynamic_partitioning_configuration block below for details.
 	DynamicPartitioningConfiguration *DynamicPartitioningConfigurationInitParameters `json:"dynamicPartitioningConfiguration,omitempty" tf:"dynamic_partitioning_configuration,omitempty"`
 
 	// Prefix added to failed records before writing them to S3. Not currently supported for redshift destination. This prefix appears immediately following the bucket name. For information about how to specify this prefix, see Custom Prefixes for Amazon S3 Objects.
 	ErrorOutputPrefix *string `json:"errorOutputPrefix,omitempty" tf:"error_output_prefix,omitempty"`
 
-	// The file extension to override the default file extension (for example, .json).
+	// File extension to override the default file extension (for example, .json).
 	FileExtension *string `json:"fileExtension,omitempty" tf:"file_extension,omitempty"`
 
-	// Specifies the KMS key ARN the stream will use to encrypt data. If not set, no encryption will
-	// be used.
+	// KMS key ARN the stream will use to encrypt data. If not set, no encryption will be used.
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
-	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered S3 files. You can specify an extra prefix to be added in front of the time format prefix. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket
+	// Extra prefix added in front of the "YYYY/MM/DD/HH" time format prefix that is automatically used for delivered S3 files. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// The data processing configuration.  See processing_configuration block below for details.
+	// Data processing configuration. See processing_configuration block below for details.
 	ProcessingConfiguration *ExtendedS3ConfigurationProcessingConfigurationInitParameters `json:"processingConfiguration,omitempty" tf:"processing_configuration,omitempty"`
 
-	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
+	// ARN of the AWS credentials.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
@@ -811,68 +813,67 @@ type ExtendedS3ConfigurationInitParameters struct {
 	// +kubebuilder:validation:Optional
 	RoleArnSelector *v2.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
-	// The configuration for backup in Amazon S3. Required if s3_backup_mode is Enabled. Supports the same fields as s3_configuration object.
+	// Configuration for backup in Amazon S3. Required if s3_backup_mode is Enabled. See s3_backup_configuration block below for details.
 	S3BackupConfiguration *S3BackupConfigurationInitParameters `json:"s3BackupConfiguration,omitempty" tf:"s3_backup_configuration,omitempty"`
 
-	// The Amazon S3 backup mode.  Valid values are Disabled and Enabled.  Default value is Disabled.
+	// Amazon S3 backup mode. Valid values are Disabled and Enabled. Default value is Disabled.
 	S3BackupMode *string `json:"s3BackupMode,omitempty" tf:"s3_backup_mode,omitempty"`
 }
 
 type ExtendedS3ConfigurationObservation struct {
 
-	// The ARN of the S3 bucket
+	// ARN of the S3 bucket.
 	BucketArn *string `json:"bucketArn,omitempty" tf:"bucket_arn,omitempty"`
 
-	// Buffer incoming data for the specified period of time, in seconds between 0 to 60, before delivering it to the destination.  The default value is 60s.
+	// Buffer incoming data for the specified period of time, in seconds, before delivering it to the destination. The default value is 300.
 	BufferingInterval *float64 `json:"bufferingInterval,omitempty" tf:"buffering_interval,omitempty"`
 
-	// Buffer incoming data to the specified size, in MBs between 1 to 5, before delivering it to the destination.  The default value is 5MB.
+	// Buffer incoming data to the specified size, in MBs, before delivering it to the destination. The default value is 5. We recommend setting this value greater than the amount of data you typically ingest into the delivery stream in 10 seconds. For example, if you typically ingest data at 1 MB/sec, set this value to 10 MB or higher.
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
+	// CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	CloudwatchLoggingOptions *ExtendedS3ConfigurationCloudwatchLoggingOptionsObservation `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
-	// The compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
+	// Compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
 	CompressionFormat *string `json:"compressionFormat,omitempty" tf:"compression_format,omitempty"`
 
-	// The time zone you prefer. Valid values are UTC or a non-3-letter IANA time zones (for example, America/Los_Angeles). Default value is UTC.
+	// Time zone you prefer. Valid values are UTC or a non-3-letter IANA time zones (for example, America/Los_Angeles). Default value is UTC.
 	CustomTimeZone *string `json:"customTimeZone,omitempty" tf:"custom_time_zone,omitempty"`
 
 	// Nested argument for the serializer, deserializer, and schema for converting data from the JSON format to the Parquet or ORC format before writing it to Amazon S3. See data_format_conversion_configuration block below for details.
 	DataFormatConversionConfiguration *DataFormatConversionConfigurationObservation `json:"dataFormatConversionConfiguration,omitempty" tf:"data_format_conversion_configuration,omitempty"`
 
-	// The configuration for dynamic partitioning. Required when using dynamic partitioning. See dynamic_partitioning_configuration block below for details.
+	// Configuration for dynamic partitioning. Required when using dynamic partitioning. See dynamic_partitioning_configuration block below for details.
 	DynamicPartitioningConfiguration *DynamicPartitioningConfigurationObservation `json:"dynamicPartitioningConfiguration,omitempty" tf:"dynamic_partitioning_configuration,omitempty"`
 
 	// Prefix added to failed records before writing them to S3. Not currently supported for redshift destination. This prefix appears immediately following the bucket name. For information about how to specify this prefix, see Custom Prefixes for Amazon S3 Objects.
 	ErrorOutputPrefix *string `json:"errorOutputPrefix,omitempty" tf:"error_output_prefix,omitempty"`
 
-	// The file extension to override the default file extension (for example, .json).
+	// File extension to override the default file extension (for example, .json).
 	FileExtension *string `json:"fileExtension,omitempty" tf:"file_extension,omitempty"`
 
-	// Specifies the KMS key ARN the stream will use to encrypt data. If not set, no encryption will
-	// be used.
+	// KMS key ARN the stream will use to encrypt data. If not set, no encryption will be used.
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
-	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered S3 files. You can specify an extra prefix to be added in front of the time format prefix. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket
+	// Extra prefix added in front of the "YYYY/MM/DD/HH" time format prefix that is automatically used for delivered S3 files. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// The data processing configuration.  See processing_configuration block below for details.
+	// Data processing configuration. See processing_configuration block below for details.
 	ProcessingConfiguration *ExtendedS3ConfigurationProcessingConfigurationObservation `json:"processingConfiguration,omitempty" tf:"processing_configuration,omitempty"`
 
-	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
+	// ARN of the AWS credentials.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
-	// The configuration for backup in Amazon S3. Required if s3_backup_mode is Enabled. Supports the same fields as s3_configuration object.
+	// Configuration for backup in Amazon S3. Required if s3_backup_mode is Enabled. See s3_backup_configuration block below for details.
 	S3BackupConfiguration *S3BackupConfigurationObservation `json:"s3BackupConfiguration,omitempty" tf:"s3_backup_configuration,omitempty"`
 
-	// The Amazon S3 backup mode.  Valid values are Disabled and Enabled.  Default value is Disabled.
+	// Amazon S3 backup mode. Valid values are Disabled and Enabled. Default value is Disabled.
 	S3BackupMode *string `json:"s3BackupMode,omitempty" tf:"s3_backup_mode,omitempty"`
 }
 
 type ExtendedS3ConfigurationParameters struct {
 
-	// The ARN of the S3 bucket
+	// ARN of the S3 bucket.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3/v1beta2.Bucket
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -886,23 +887,23 @@ type ExtendedS3ConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketArnSelector *v2.Selector `json:"bucketArnSelector,omitempty" tf:"-"`
 
-	// Buffer incoming data for the specified period of time, in seconds between 0 to 60, before delivering it to the destination.  The default value is 60s.
+	// Buffer incoming data for the specified period of time, in seconds, before delivering it to the destination. The default value is 300.
 	// +kubebuilder:validation:Optional
 	BufferingInterval *float64 `json:"bufferingInterval,omitempty" tf:"buffering_interval,omitempty"`
 
-	// Buffer incoming data to the specified size, in MBs between 1 to 5, before delivering it to the destination.  The default value is 5MB.
+	// Buffer incoming data to the specified size, in MBs, before delivering it to the destination. The default value is 5. We recommend setting this value greater than the amount of data you typically ingest into the delivery stream in 10 seconds. For example, if you typically ingest data at 1 MB/sec, set this value to 10 MB or higher.
 	// +kubebuilder:validation:Optional
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
+	// CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	// +kubebuilder:validation:Optional
 	CloudwatchLoggingOptions *ExtendedS3ConfigurationCloudwatchLoggingOptionsParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
-	// The compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
+	// Compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
 	// +kubebuilder:validation:Optional
 	CompressionFormat *string `json:"compressionFormat,omitempty" tf:"compression_format,omitempty"`
 
-	// The time zone you prefer. Valid values are UTC or a non-3-letter IANA time zones (for example, America/Los_Angeles). Default value is UTC.
+	// Time zone you prefer. Valid values are UTC or a non-3-letter IANA time zones (for example, America/Los_Angeles). Default value is UTC.
 	// +kubebuilder:validation:Optional
 	CustomTimeZone *string `json:"customTimeZone,omitempty" tf:"custom_time_zone,omitempty"`
 
@@ -910,7 +911,7 @@ type ExtendedS3ConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	DataFormatConversionConfiguration *DataFormatConversionConfigurationParameters `json:"dataFormatConversionConfiguration,omitempty" tf:"data_format_conversion_configuration,omitempty"`
 
-	// The configuration for dynamic partitioning. Required when using dynamic partitioning. See dynamic_partitioning_configuration block below for details.
+	// Configuration for dynamic partitioning. Required when using dynamic partitioning. See dynamic_partitioning_configuration block below for details.
 	// +kubebuilder:validation:Optional
 	DynamicPartitioningConfiguration *DynamicPartitioningConfigurationParameters `json:"dynamicPartitioningConfiguration,omitempty" tf:"dynamic_partitioning_configuration,omitempty"`
 
@@ -918,24 +919,23 @@ type ExtendedS3ConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	ErrorOutputPrefix *string `json:"errorOutputPrefix,omitempty" tf:"error_output_prefix,omitempty"`
 
-	// The file extension to override the default file extension (for example, .json).
+	// File extension to override the default file extension (for example, .json).
 	// +kubebuilder:validation:Optional
 	FileExtension *string `json:"fileExtension,omitempty" tf:"file_extension,omitempty"`
 
-	// Specifies the KMS key ARN the stream will use to encrypt data. If not set, no encryption will
-	// be used.
+	// KMS key ARN the stream will use to encrypt data. If not set, no encryption will be used.
 	// +kubebuilder:validation:Optional
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
-	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered S3 files. You can specify an extra prefix to be added in front of the time format prefix. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket
+	// Extra prefix added in front of the "YYYY/MM/DD/HH" time format prefix that is automatically used for delivered S3 files. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket.
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// The data processing configuration.  See processing_configuration block below for details.
+	// Data processing configuration. See processing_configuration block below for details.
 	// +kubebuilder:validation:Optional
 	ProcessingConfiguration *ExtendedS3ConfigurationProcessingConfigurationParameters `json:"processingConfiguration,omitempty" tf:"processing_configuration,omitempty"`
 
-	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
+	// ARN of the AWS credentials.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -949,86 +949,86 @@ type ExtendedS3ConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	RoleArnSelector *v2.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
-	// The configuration for backup in Amazon S3. Required if s3_backup_mode is Enabled. Supports the same fields as s3_configuration object.
+	// Configuration for backup in Amazon S3. Required if s3_backup_mode is Enabled. See s3_backup_configuration block below for details.
 	// +kubebuilder:validation:Optional
 	S3BackupConfiguration *S3BackupConfigurationParameters `json:"s3BackupConfiguration,omitempty" tf:"s3_backup_configuration,omitempty"`
 
-	// The Amazon S3 backup mode.  Valid values are Disabled and Enabled.  Default value is Disabled.
+	// Amazon S3 backup mode. Valid values are Disabled and Enabled. Default value is Disabled.
 	// +kubebuilder:validation:Optional
 	S3BackupMode *string `json:"s3BackupMode,omitempty" tf:"s3_backup_mode,omitempty"`
 }
 
 type ExtendedS3ConfigurationProcessingConfigurationInitParameters struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Specifies the data processors as multiple blocks. See processors block below for details.
+	// Data processors as multiple blocks. See processors block below for details.
 	Processors []ProcessingConfigurationProcessorsInitParameters `json:"processors,omitempty" tf:"processors,omitempty"`
 }
 
 type ExtendedS3ConfigurationProcessingConfigurationObservation struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Specifies the data processors as multiple blocks. See processors block below for details.
+	// Data processors as multiple blocks. See processors block below for details.
 	Processors []ProcessingConfigurationProcessorsObservation `json:"processors,omitempty" tf:"processors,omitempty"`
 }
 
 type ExtendedS3ConfigurationProcessingConfigurationParameters struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Specifies the data processors as multiple blocks. See processors block below for details.
+	// Data processors as multiple blocks. See processors block below for details.
 	// +kubebuilder:validation:Optional
 	Processors []ProcessingConfigurationProcessorsParameters `json:"processors,omitempty" tf:"processors,omitempty"`
 }
 
 type HTTPEndpointConfigurationCloudwatchLoggingOptionsInitParameters struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The CloudWatch group name for logging. This value is required if enabled is true.
+	// CloudWatch group name for logging. This value is required if enabled is true.
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
 
-	// The CloudWatch log stream name for logging. This value is required if enabled is true.
+	// CloudWatch log stream name for logging. This value is required if enabled is true.
 	LogStreamName *string `json:"logStreamName,omitempty" tf:"log_stream_name,omitempty"`
 }
 
 type HTTPEndpointConfigurationCloudwatchLoggingOptionsObservation struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The CloudWatch group name for logging. This value is required if enabled is true.
+	// CloudWatch group name for logging. This value is required if enabled is true.
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
 
-	// The CloudWatch log stream name for logging. This value is required if enabled is true.
+	// CloudWatch log stream name for logging. This value is required if enabled is true.
 	LogStreamName *string `json:"logStreamName,omitempty" tf:"log_stream_name,omitempty"`
 }
 
 type HTTPEndpointConfigurationCloudwatchLoggingOptionsParameters struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The CloudWatch group name for logging. This value is required if enabled is true.
+	// CloudWatch group name for logging. This value is required if enabled is true.
 	// +kubebuilder:validation:Optional
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
 
-	// The CloudWatch log stream name for logging. This value is required if enabled is true.
+	// CloudWatch log stream name for logging. This value is required if enabled is true.
 	// +kubebuilder:validation:Optional
 	LogStreamName *string `json:"logStreamName,omitempty" tf:"log_stream_name,omitempty"`
 }
 
 type HTTPEndpointConfigurationInitParameters struct {
 
-	// The access key required for Kinesis Firehose to authenticate with the HTTP endpoint selected as the destination.
+	// Access key required for Kinesis Firehose to authenticate with the HTTP endpoint selected as the destination.
 	AccessKeySecretRef *v2.SecretKeySelector `json:"accessKeySecretRef,omitempty" tf:"-"`
 
 	// Buffer incoming data for the specified period of time, in seconds, before delivering it to the destination. The default value is 300 (5 minutes).
@@ -1037,16 +1037,16 @@ type HTTPEndpointConfigurationInitParameters struct {
 	// Buffer incoming data to the specified size, in MBs, before delivering it to the destination. The default value is 5.
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
+	// CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	CloudwatchLoggingOptions *HTTPEndpointConfigurationCloudwatchLoggingOptionsInitParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
-	// The HTTP endpoint name.
+	// HTTP endpoint name.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The data processing configuration.  See processing_configuration block below for details.
+	// Data processing configuration.  See processing_configuration block below for details.
 	ProcessingConfiguration *HTTPEndpointConfigurationProcessingConfigurationInitParameters `json:"processingConfiguration,omitempty" tf:"processing_configuration,omitempty"`
 
-	// The request configuration.  See request_configuration block below for details.
+	// Request configuration.  See request_configuration block below for details.
 	RequestConfiguration *RequestConfigurationInitParameters `json:"requestConfiguration,omitempty" tf:"request_configuration,omitempty"`
 
 	// Total amount of seconds Firehose spends on retries. This duration starts after the initial attempt fails, It does not include the time periods during which Firehose waits for acknowledgment from the specified destination after each attempt. Valid values between 0 and 7200. Default is 300.
@@ -1065,16 +1065,16 @@ type HTTPEndpointConfigurationInitParameters struct {
 	// +kubebuilder:validation:Optional
 	RoleArnSelector *v2.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
-	// Defines how documents should be delivered to Amazon S3.  Valid values are FailedDataOnly and AllData.  Default value is FailedDataOnly.
+	// How documents should be delivered to Amazon S3.  Valid values are FailedDataOnly and AllData.  Default value is FailedDataOnly.
 	S3BackupMode *string `json:"s3BackupMode,omitempty" tf:"s3_backup_mode,omitempty"`
 
-	// The S3 Configuration. See s3_configuration block below for details.
+	// S3 Configuration. See s3_configuration block below for details.
 	S3Configuration *HTTPEndpointConfigurationS3ConfigurationInitParameters `json:"s3Configuration,omitempty" tf:"s3_configuration,omitempty"`
 
-	// The Secret Manager Configuration. See secrets_manager_configuration block below for details.
+	// Secret Manager Configuration. See secrets_manager_configuration block below for details.
 	SecretsManagerConfiguration *SecretsManagerConfigurationInitParameters `json:"secretsManagerConfiguration,omitempty" tf:"secrets_manager_configuration,omitempty"`
 
-	// The HTTP endpoint URL to which Kinesis Firehose sends your data. Refer to the target vendor's documentation for the correct intake URL (for example, New Relic or Datadog).
+	// HTTP endpoint URL to which Kinesis Firehose sends your data. Refer to the target vendor's documentation for the correct intake URL (for example, New Relic or Datadog).
 	URL *string `json:"url,omitempty" tf:"url,omitempty"`
 }
 
@@ -1086,16 +1086,16 @@ type HTTPEndpointConfigurationObservation struct {
 	// Buffer incoming data to the specified size, in MBs, before delivering it to the destination. The default value is 5.
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
+	// CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	CloudwatchLoggingOptions *HTTPEndpointConfigurationCloudwatchLoggingOptionsObservation `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
-	// The HTTP endpoint name.
+	// HTTP endpoint name.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The data processing configuration.  See processing_configuration block below for details.
+	// Data processing configuration.  See processing_configuration block below for details.
 	ProcessingConfiguration *HTTPEndpointConfigurationProcessingConfigurationObservation `json:"processingConfiguration,omitempty" tf:"processing_configuration,omitempty"`
 
-	// The request configuration.  See request_configuration block below for details.
+	// Request configuration.  See request_configuration block below for details.
 	RequestConfiguration *RequestConfigurationObservation `json:"requestConfiguration,omitempty" tf:"request_configuration,omitempty"`
 
 	// Total amount of seconds Firehose spends on retries. This duration starts after the initial attempt fails, It does not include the time periods during which Firehose waits for acknowledgment from the specified destination after each attempt. Valid values between 0 and 7200. Default is 300.
@@ -1104,22 +1104,22 @@ type HTTPEndpointConfigurationObservation struct {
 	// Kinesis Data Firehose uses this IAM role for all the permissions that the delivery stream needs. The pattern needs to be arn:.*.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
-	// Defines how documents should be delivered to Amazon S3.  Valid values are FailedDataOnly and AllData.  Default value is FailedDataOnly.
+	// How documents should be delivered to Amazon S3.  Valid values are FailedDataOnly and AllData.  Default value is FailedDataOnly.
 	S3BackupMode *string `json:"s3BackupMode,omitempty" tf:"s3_backup_mode,omitempty"`
 
-	// The S3 Configuration. See s3_configuration block below for details.
+	// S3 Configuration. See s3_configuration block below for details.
 	S3Configuration *HTTPEndpointConfigurationS3ConfigurationObservation `json:"s3Configuration,omitempty" tf:"s3_configuration,omitempty"`
 
-	// The Secret Manager Configuration. See secrets_manager_configuration block below for details.
+	// Secret Manager Configuration. See secrets_manager_configuration block below for details.
 	SecretsManagerConfiguration *SecretsManagerConfigurationObservation `json:"secretsManagerConfiguration,omitempty" tf:"secrets_manager_configuration,omitempty"`
 
-	// The HTTP endpoint URL to which Kinesis Firehose sends your data. Refer to the target vendor's documentation for the correct intake URL (for example, New Relic or Datadog).
+	// HTTP endpoint URL to which Kinesis Firehose sends your data. Refer to the target vendor's documentation for the correct intake URL (for example, New Relic or Datadog).
 	URL *string `json:"url,omitempty" tf:"url,omitempty"`
 }
 
 type HTTPEndpointConfigurationParameters struct {
 
-	// The access key required for Kinesis Firehose to authenticate with the HTTP endpoint selected as the destination.
+	// Access key required for Kinesis Firehose to authenticate with the HTTP endpoint selected as the destination.
 	// +kubebuilder:validation:Optional
 	AccessKeySecretRef *v2.SecretKeySelector `json:"accessKeySecretRef,omitempty" tf:"-"`
 
@@ -1131,19 +1131,19 @@ type HTTPEndpointConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
+	// CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	// +kubebuilder:validation:Optional
 	CloudwatchLoggingOptions *HTTPEndpointConfigurationCloudwatchLoggingOptionsParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
-	// The HTTP endpoint name.
+	// HTTP endpoint name.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The data processing configuration.  See processing_configuration block below for details.
+	// Data processing configuration.  See processing_configuration block below for details.
 	// +kubebuilder:validation:Optional
 	ProcessingConfiguration *HTTPEndpointConfigurationProcessingConfigurationParameters `json:"processingConfiguration,omitempty" tf:"processing_configuration,omitempty"`
 
-	// The request configuration.  See request_configuration block below for details.
+	// Request configuration.  See request_configuration block below for details.
 	// +kubebuilder:validation:Optional
 	RequestConfiguration *RequestConfigurationParameters `json:"requestConfiguration,omitempty" tf:"request_configuration,omitempty"`
 
@@ -1165,123 +1165,123 @@ type HTTPEndpointConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	RoleArnSelector *v2.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
-	// Defines how documents should be delivered to Amazon S3.  Valid values are FailedDataOnly and AllData.  Default value is FailedDataOnly.
+	// How documents should be delivered to Amazon S3.  Valid values are FailedDataOnly and AllData.  Default value is FailedDataOnly.
 	// +kubebuilder:validation:Optional
 	S3BackupMode *string `json:"s3BackupMode,omitempty" tf:"s3_backup_mode,omitempty"`
 
-	// The S3 Configuration. See s3_configuration block below for details.
+	// S3 Configuration. See s3_configuration block below for details.
 	// +kubebuilder:validation:Optional
 	S3Configuration *HTTPEndpointConfigurationS3ConfigurationParameters `json:"s3Configuration" tf:"s3_configuration,omitempty"`
 
-	// The Secret Manager Configuration. See secrets_manager_configuration block below for details.
+	// Secret Manager Configuration. See secrets_manager_configuration block below for details.
 	// +kubebuilder:validation:Optional
 	SecretsManagerConfiguration *SecretsManagerConfigurationParameters `json:"secretsManagerConfiguration,omitempty" tf:"secrets_manager_configuration,omitempty"`
 
-	// The HTTP endpoint URL to which Kinesis Firehose sends your data. Refer to the target vendor's documentation for the correct intake URL (for example, New Relic or Datadog).
+	// HTTP endpoint URL to which Kinesis Firehose sends your data. Refer to the target vendor's documentation for the correct intake URL (for example, New Relic or Datadog).
 	// +kubebuilder:validation:Optional
 	URL *string `json:"url" tf:"url,omitempty"`
 }
 
 type HTTPEndpointConfigurationProcessingConfigurationInitParameters struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Specifies the data processors as multiple blocks. See processors block below for details.
+	// Data processors as multiple blocks. See processors block below for details.
 	Processors []HTTPEndpointConfigurationProcessingConfigurationProcessorsInitParameters `json:"processors,omitempty" tf:"processors,omitempty"`
 }
 
 type HTTPEndpointConfigurationProcessingConfigurationObservation struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Specifies the data processors as multiple blocks. See processors block below for details.
+	// Data processors as multiple blocks. See processors block below for details.
 	Processors []HTTPEndpointConfigurationProcessingConfigurationProcessorsObservation `json:"processors,omitempty" tf:"processors,omitempty"`
 }
 
 type HTTPEndpointConfigurationProcessingConfigurationParameters struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Specifies the data processors as multiple blocks. See processors block below for details.
+	// Data processors as multiple blocks. See processors block below for details.
 	// +kubebuilder:validation:Optional
 	Processors []HTTPEndpointConfigurationProcessingConfigurationProcessorsParameters `json:"processors,omitempty" tf:"processors,omitempty"`
 }
 
 type HTTPEndpointConfigurationProcessingConfigurationProcessorsInitParameters struct {
 
-	// Specifies the processor parameters as multiple blocks. See parameters block below for details.
+	// Processor parameters as multiple blocks. See parameters block below for details.
 	Parameters []ProcessingConfigurationProcessorsParametersInitParameters `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
-	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord, Decompression, CloudWatchLogProcessing. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
+	// Type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord, Decompression, CloudWatchLogProcessing. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type HTTPEndpointConfigurationProcessingConfigurationProcessorsObservation struct {
 
-	// Specifies the processor parameters as multiple blocks. See parameters block below for details.
+	// Processor parameters as multiple blocks. See parameters block below for details.
 	Parameters []ProcessingConfigurationProcessorsParametersObservation `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
-	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord, Decompression, CloudWatchLogProcessing. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
+	// Type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord, Decompression, CloudWatchLogProcessing. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type HTTPEndpointConfigurationProcessingConfigurationProcessorsParameters struct {
 
-	// Specifies the processor parameters as multiple blocks. See parameters block below for details.
+	// Processor parameters as multiple blocks. See parameters block below for details.
 	// +kubebuilder:validation:Optional
 	Parameters []ProcessingConfigurationProcessorsParametersParameters `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
-	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord, Decompression, CloudWatchLogProcessing. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
+	// Type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord, Decompression, CloudWatchLogProcessing. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type HTTPEndpointConfigurationS3ConfigurationCloudwatchLoggingOptionsInitParameters struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The CloudWatch group name for logging. This value is required if enabled is true.
+	// CloudWatch group name for logging. This value is required if enabled is true.
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
 
-	// The CloudWatch log stream name for logging. This value is required if enabled is true.
+	// CloudWatch log stream name for logging. This value is required if enabled is true.
 	LogStreamName *string `json:"logStreamName,omitempty" tf:"log_stream_name,omitempty"`
 }
 
 type HTTPEndpointConfigurationS3ConfigurationCloudwatchLoggingOptionsObservation struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The CloudWatch group name for logging. This value is required if enabled is true.
+	// CloudWatch group name for logging. This value is required if enabled is true.
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
 
-	// The CloudWatch log stream name for logging. This value is required if enabled is true.
+	// CloudWatch log stream name for logging. This value is required if enabled is true.
 	LogStreamName *string `json:"logStreamName,omitempty" tf:"log_stream_name,omitempty"`
 }
 
 type HTTPEndpointConfigurationS3ConfigurationCloudwatchLoggingOptionsParameters struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The CloudWatch group name for logging. This value is required if enabled is true.
+	// CloudWatch group name for logging. This value is required if enabled is true.
 	// +kubebuilder:validation:Optional
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
 
-	// The CloudWatch log stream name for logging. This value is required if enabled is true.
+	// CloudWatch log stream name for logging. This value is required if enabled is true.
 	// +kubebuilder:validation:Optional
 	LogStreamName *string `json:"logStreamName,omitempty" tf:"log_stream_name,omitempty"`
 }
 
 type HTTPEndpointConfigurationS3ConfigurationInitParameters struct {
 
-	// The ARN of the S3 bucket
+	// ARN of the S3 bucket.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3/v1beta2.Bucket
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	BucketArn *string `json:"bucketArn,omitempty" tf:"bucket_arn,omitempty"`
@@ -1300,23 +1300,22 @@ type HTTPEndpointConfigurationS3ConfigurationInitParameters struct {
 	// Buffer incoming data to the specified size, in MBs between 1 to 5, before delivering it to the destination.  The default value is 5MB.
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
+	// CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	CloudwatchLoggingOptions *HTTPEndpointConfigurationS3ConfigurationCloudwatchLoggingOptionsInitParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
-	// The compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
+	// Compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
 	CompressionFormat *string `json:"compressionFormat,omitempty" tf:"compression_format,omitempty"`
 
 	// Prefix added to failed records before writing them to S3. Not currently supported for redshift destination. This prefix appears immediately following the bucket name. For information about how to specify this prefix, see Custom Prefixes for Amazon S3 Objects.
 	ErrorOutputPrefix *string `json:"errorOutputPrefix,omitempty" tf:"error_output_prefix,omitempty"`
 
-	// Specifies the KMS key ARN the stream will use to encrypt data. If not set, no encryption will
-	// be used.
+	// KMS key ARN the stream will use to encrypt data. If not set, no encryption will be used.
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
-	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered S3 files. You can specify an extra prefix to be added in front of the time format prefix. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket
+	// Extra prefix added in front of the "YYYY/MM/DD/HH" time format prefix that is automatically used for delivered S3 files. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
+	// ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
@@ -1332,7 +1331,7 @@ type HTTPEndpointConfigurationS3ConfigurationInitParameters struct {
 
 type HTTPEndpointConfigurationS3ConfigurationObservation struct {
 
-	// The ARN of the S3 bucket
+	// ARN of the S3 bucket.
 	BucketArn *string `json:"bucketArn,omitempty" tf:"bucket_arn,omitempty"`
 
 	// Buffer incoming data for the specified period of time, in seconds between 0 to 60, before delivering it to the destination.  The default value is 60s.
@@ -1341,29 +1340,28 @@ type HTTPEndpointConfigurationS3ConfigurationObservation struct {
 	// Buffer incoming data to the specified size, in MBs between 1 to 5, before delivering it to the destination.  The default value is 5MB.
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
+	// CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	CloudwatchLoggingOptions *HTTPEndpointConfigurationS3ConfigurationCloudwatchLoggingOptionsObservation `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
-	// The compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
+	// Compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
 	CompressionFormat *string `json:"compressionFormat,omitempty" tf:"compression_format,omitempty"`
 
 	// Prefix added to failed records before writing them to S3. Not currently supported for redshift destination. This prefix appears immediately following the bucket name. For information about how to specify this prefix, see Custom Prefixes for Amazon S3 Objects.
 	ErrorOutputPrefix *string `json:"errorOutputPrefix,omitempty" tf:"error_output_prefix,omitempty"`
 
-	// Specifies the KMS key ARN the stream will use to encrypt data. If not set, no encryption will
-	// be used.
+	// KMS key ARN the stream will use to encrypt data. If not set, no encryption will be used.
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
-	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered S3 files. You can specify an extra prefix to be added in front of the time format prefix. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket
+	// Extra prefix added in front of the "YYYY/MM/DD/HH" time format prefix that is automatically used for delivered S3 files. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
+	// ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
 
 type HTTPEndpointConfigurationS3ConfigurationParameters struct {
 
-	// The ARN of the S3 bucket
+	// ARN of the S3 bucket.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3/v1beta2.Bucket
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -1385,11 +1383,11 @@ type HTTPEndpointConfigurationS3ConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
+	// CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	// +kubebuilder:validation:Optional
 	CloudwatchLoggingOptions *HTTPEndpointConfigurationS3ConfigurationCloudwatchLoggingOptionsParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
-	// The compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
+	// Compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
 	// +kubebuilder:validation:Optional
 	CompressionFormat *string `json:"compressionFormat,omitempty" tf:"compression_format,omitempty"`
 
@@ -1397,16 +1395,15 @@ type HTTPEndpointConfigurationS3ConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	ErrorOutputPrefix *string `json:"errorOutputPrefix,omitempty" tf:"error_output_prefix,omitempty"`
 
-	// Specifies the KMS key ARN the stream will use to encrypt data. If not set, no encryption will
-	// be used.
+	// KMS key ARN the stream will use to encrypt data. If not set, no encryption will be used.
 	// +kubebuilder:validation:Optional
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
-	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered S3 files. You can specify an extra prefix to be added in front of the time format prefix. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket
+	// Extra prefix added in front of the "YYYY/MM/DD/HH" time format prefix that is automatically used for delivered S3 files. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket.
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
+	// ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -1423,63 +1420,65 @@ type HTTPEndpointConfigurationS3ConfigurationParameters struct {
 
 type HiveJSONSerDeInitParameters struct {
 
-	// A list of how you want Kinesis Data Firehose to parse the date and time stamps that may be present in your input data JSON. To specify these format strings, follow the pattern syntax of JodaTime's DateTimeFormat format strings. For more information, see Class DateTimeFormat. You can also use the special value millis to parse time stamps in epoch milliseconds. If you don't specify a format, Kinesis Data Firehose uses java.sql.Timestamp::valueOf by default.
+	// List of how you want Kinesis Data Firehose to parse the date and time stamps that may be present in your input data JSON. To specify these format strings, follow the pattern syntax of JodaTime's DateTimeFormat format strings. For more information, see Class DateTimeFormat. You can also use the special value millis to parse time stamps in epoch milliseconds. If you don't specify a format, Kinesis Data Firehose uses java.sql.Timestamp::valueOf by default.
 	TimestampFormats []*string `json:"timestampFormats,omitempty" tf:"timestamp_formats,omitempty"`
 }
 
 type HiveJSONSerDeObservation struct {
 
-	// A list of how you want Kinesis Data Firehose to parse the date and time stamps that may be present in your input data JSON. To specify these format strings, follow the pattern syntax of JodaTime's DateTimeFormat format strings. For more information, see Class DateTimeFormat. You can also use the special value millis to parse time stamps in epoch milliseconds. If you don't specify a format, Kinesis Data Firehose uses java.sql.Timestamp::valueOf by default.
+	// List of how you want Kinesis Data Firehose to parse the date and time stamps that may be present in your input data JSON. To specify these format strings, follow the pattern syntax of JodaTime's DateTimeFormat format strings. For more information, see Class DateTimeFormat. You can also use the special value millis to parse time stamps in epoch milliseconds. If you don't specify a format, Kinesis Data Firehose uses java.sql.Timestamp::valueOf by default.
 	TimestampFormats []*string `json:"timestampFormats,omitempty" tf:"timestamp_formats,omitempty"`
 }
 
 type HiveJSONSerDeParameters struct {
 
-	// A list of how you want Kinesis Data Firehose to parse the date and time stamps that may be present in your input data JSON. To specify these format strings, follow the pattern syntax of JodaTime's DateTimeFormat format strings. For more information, see Class DateTimeFormat. You can also use the special value millis to parse time stamps in epoch milliseconds. If you don't specify a format, Kinesis Data Firehose uses java.sql.Timestamp::valueOf by default.
+	// List of how you want Kinesis Data Firehose to parse the date and time stamps that may be present in your input data JSON. To specify these format strings, follow the pattern syntax of JodaTime's DateTimeFormat format strings. For more information, see Class DateTimeFormat. You can also use the special value millis to parse time stamps in epoch milliseconds. If you don't specify a format, Kinesis Data Firehose uses java.sql.Timestamp::valueOf by default.
 	// +kubebuilder:validation:Optional
 	TimestampFormats []*string `json:"timestampFormats,omitempty" tf:"timestamp_formats,omitempty"`
 }
 
 type IcebergConfigurationCloudwatchLoggingOptionsInitParameters struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The CloudWatch group name for logging. This value is required if enabled is true.
+	// CloudWatch group name for logging. This value is required if enabled is true.
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
 
-	// The CloudWatch log stream name for logging. This value is required if enabled is true.
+	// CloudWatch log stream name for logging. This value is required if enabled is true.
 	LogStreamName *string `json:"logStreamName,omitempty" tf:"log_stream_name,omitempty"`
 }
 
 type IcebergConfigurationCloudwatchLoggingOptionsObservation struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The CloudWatch group name for logging. This value is required if enabled is true.
+	// CloudWatch group name for logging. This value is required if enabled is true.
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
 
-	// The CloudWatch log stream name for logging. This value is required if enabled is true.
+	// CloudWatch log stream name for logging. This value is required if enabled is true.
 	LogStreamName *string `json:"logStreamName,omitempty" tf:"log_stream_name,omitempty"`
 }
 
 type IcebergConfigurationCloudwatchLoggingOptionsParameters struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The CloudWatch group name for logging. This value is required if enabled is true.
+	// CloudWatch group name for logging. This value is required if enabled is true.
 	// +kubebuilder:validation:Optional
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
 
-	// The CloudWatch log stream name for logging. This value is required if enabled is true.
+	// CloudWatch log stream name for logging. This value is required if enabled is true.
 	// +kubebuilder:validation:Optional
 	LogStreamName *string `json:"logStreamName,omitempty" tf:"log_stream_name,omitempty"`
 }
 
 type IcebergConfigurationInitParameters struct {
+
+	// Whether to enable append only operations. When set, Firehose only performs insert operations on the destination Apache Iceberg Tables.
 	AppendOnly *bool `json:"appendOnly,omitempty" tf:"append_only,omitempty"`
 
 	// Buffer incoming data for the specified period of time, in seconds between 0 and 900, before delivering it to the destination. The default value is 300.
@@ -1488,22 +1487,22 @@ type IcebergConfigurationInitParameters struct {
 	// Buffer incoming data to the specified size, in MBs between 1 and 128, before delivering it to the destination. The default value is 5.
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// Glue catalog ARN identifier of the destination Apache Iceberg Tables. You must specify the ARN in the format arn:aws:glue:region:account-id:catalog
+	// Glue catalog ARN identifier of the destination Apache Iceberg Tables. You must specify the ARN in the format arn:aws:glue:region:account-id:catalog.
 	CatalogArn *string `json:"catalogArn,omitempty" tf:"catalog_arn,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
+	// CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	CloudwatchLoggingOptions *IcebergConfigurationCloudwatchLoggingOptionsInitParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
 	// Destination table configurations which Firehose uses to deliver data to Apache Iceberg Tables. Firehose will write data with insert if table specific configuration is not provided. See destination_table_configuration block below for details.
 	DestinationTableConfiguration []DestinationTableConfigurationInitParameters `json:"destinationTableConfiguration,omitempty" tf:"destination_table_configuration,omitempty"`
 
-	// The data processing configuration.  See processing_configuration block below for details.
+	// Data processing configuration.  See processing_configuration block below for details.
 	ProcessingConfiguration *IcebergConfigurationProcessingConfigurationInitParameters `json:"processingConfiguration,omitempty" tf:"processing_configuration,omitempty"`
 
-	// The period of time, in seconds between 0 to 7200, during which Firehose retries to deliver data to the specified destination.
+	// Period of time, in seconds between 0 to 7200, during which Firehose retries to deliver data to the specified destination.
 	RetryDuration *float64 `json:"retryDuration,omitempty" tf:"retry_duration,omitempty"`
 
-	// The ARN of the IAM role to be assumed by Firehose for calling Apache Iceberg Tables.
+	// ARN of the IAM role to be assumed by Firehose for calling Apache Iceberg Tables.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
@@ -1516,15 +1515,16 @@ type IcebergConfigurationInitParameters struct {
 	// +kubebuilder:validation:Optional
 	RoleArnSelector *v2.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
-	// Defines how documents should be delivered to Amazon S3.  Valid values are FailedEventsOnly and AllEvents.  Default value is FailedEventsOnly.
-	// secrets_manager_configuration -  The Secrets Manager configuration. See secrets_manager_configuration block below for details. This value is required if hec_token is not provided.
+	// Amazon S3 backup mode. Valid values are FailedDataOnly and AllData. Default value is FailedDataOnly.
 	S3BackupMode *string `json:"s3BackupMode,omitempty" tf:"s3_backup_mode,omitempty"`
 
-	// The S3 Configuration. See s3_configuration block below for details.
+	// S3 Configuration. See s3_configuration block below for details.
 	S3Configuration *IcebergConfigurationS3ConfigurationInitParameters `json:"s3Configuration,omitempty" tf:"s3_configuration,omitempty"`
 }
 
 type IcebergConfigurationObservation struct {
+
+	// Whether to enable append only operations. When set, Firehose only performs insert operations on the destination Apache Iceberg Tables.
 	AppendOnly *bool `json:"appendOnly,omitempty" tf:"append_only,omitempty"`
 
 	// Buffer incoming data for the specified period of time, in seconds between 0 and 900, before delivering it to the destination. The default value is 300.
@@ -1533,34 +1533,34 @@ type IcebergConfigurationObservation struct {
 	// Buffer incoming data to the specified size, in MBs between 1 and 128, before delivering it to the destination. The default value is 5.
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// Glue catalog ARN identifier of the destination Apache Iceberg Tables. You must specify the ARN in the format arn:aws:glue:region:account-id:catalog
+	// Glue catalog ARN identifier of the destination Apache Iceberg Tables. You must specify the ARN in the format arn:aws:glue:region:account-id:catalog.
 	CatalogArn *string `json:"catalogArn,omitempty" tf:"catalog_arn,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
+	// CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	CloudwatchLoggingOptions *IcebergConfigurationCloudwatchLoggingOptionsObservation `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
 	// Destination table configurations which Firehose uses to deliver data to Apache Iceberg Tables. Firehose will write data with insert if table specific configuration is not provided. See destination_table_configuration block below for details.
 	DestinationTableConfiguration []DestinationTableConfigurationObservation `json:"destinationTableConfiguration,omitempty" tf:"destination_table_configuration,omitempty"`
 
-	// The data processing configuration.  See processing_configuration block below for details.
+	// Data processing configuration.  See processing_configuration block below for details.
 	ProcessingConfiguration *IcebergConfigurationProcessingConfigurationObservation `json:"processingConfiguration,omitempty" tf:"processing_configuration,omitempty"`
 
-	// The period of time, in seconds between 0 to 7200, during which Firehose retries to deliver data to the specified destination.
+	// Period of time, in seconds between 0 to 7200, during which Firehose retries to deliver data to the specified destination.
 	RetryDuration *float64 `json:"retryDuration,omitempty" tf:"retry_duration,omitempty"`
 
-	// The ARN of the IAM role to be assumed by Firehose for calling Apache Iceberg Tables.
+	// ARN of the IAM role to be assumed by Firehose for calling Apache Iceberg Tables.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
-	// Defines how documents should be delivered to Amazon S3.  Valid values are FailedEventsOnly and AllEvents.  Default value is FailedEventsOnly.
-	// secrets_manager_configuration -  The Secrets Manager configuration. See secrets_manager_configuration block below for details. This value is required if hec_token is not provided.
+	// Amazon S3 backup mode. Valid values are FailedDataOnly and AllData. Default value is FailedDataOnly.
 	S3BackupMode *string `json:"s3BackupMode,omitempty" tf:"s3_backup_mode,omitempty"`
 
-	// The S3 Configuration. See s3_configuration block below for details.
+	// S3 Configuration. See s3_configuration block below for details.
 	S3Configuration *IcebergConfigurationS3ConfigurationObservation `json:"s3Configuration,omitempty" tf:"s3_configuration,omitempty"`
 }
 
 type IcebergConfigurationParameters struct {
 
+	// Whether to enable append only operations. When set, Firehose only performs insert operations on the destination Apache Iceberg Tables.
 	// +kubebuilder:validation:Optional
 	AppendOnly *bool `json:"appendOnly,omitempty" tf:"append_only,omitempty"`
 
@@ -1572,11 +1572,11 @@ type IcebergConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// Glue catalog ARN identifier of the destination Apache Iceberg Tables. You must specify the ARN in the format arn:aws:glue:region:account-id:catalog
+	// Glue catalog ARN identifier of the destination Apache Iceberg Tables. You must specify the ARN in the format arn:aws:glue:region:account-id:catalog.
 	// +kubebuilder:validation:Optional
 	CatalogArn *string `json:"catalogArn" tf:"catalog_arn,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
+	// CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	// +kubebuilder:validation:Optional
 	CloudwatchLoggingOptions *IcebergConfigurationCloudwatchLoggingOptionsParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
@@ -1584,15 +1584,15 @@ type IcebergConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	DestinationTableConfiguration []DestinationTableConfigurationParameters `json:"destinationTableConfiguration,omitempty" tf:"destination_table_configuration,omitempty"`
 
-	// The data processing configuration.  See processing_configuration block below for details.
+	// Data processing configuration.  See processing_configuration block below for details.
 	// +kubebuilder:validation:Optional
 	ProcessingConfiguration *IcebergConfigurationProcessingConfigurationParameters `json:"processingConfiguration,omitempty" tf:"processing_configuration,omitempty"`
 
-	// The period of time, in seconds between 0 to 7200, during which Firehose retries to deliver data to the specified destination.
+	// Period of time, in seconds between 0 to 7200, during which Firehose retries to deliver data to the specified destination.
 	// +kubebuilder:validation:Optional
 	RetryDuration *float64 `json:"retryDuration,omitempty" tf:"retry_duration,omitempty"`
 
-	// The ARN of the IAM role to be assumed by Firehose for calling Apache Iceberg Tables.
+	// ARN of the IAM role to be assumed by Firehose for calling Apache Iceberg Tables.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -1606,70 +1606,69 @@ type IcebergConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	RoleArnSelector *v2.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
-	// Defines how documents should be delivered to Amazon S3.  Valid values are FailedEventsOnly and AllEvents.  Default value is FailedEventsOnly.
-	// secrets_manager_configuration -  The Secrets Manager configuration. See secrets_manager_configuration block below for details. This value is required if hec_token is not provided.
+	// Amazon S3 backup mode. Valid values are FailedDataOnly and AllData. Default value is FailedDataOnly.
 	// +kubebuilder:validation:Optional
 	S3BackupMode *string `json:"s3BackupMode,omitempty" tf:"s3_backup_mode,omitempty"`
 
-	// The S3 Configuration. See s3_configuration block below for details.
+	// S3 Configuration. See s3_configuration block below for details.
 	// +kubebuilder:validation:Optional
 	S3Configuration *IcebergConfigurationS3ConfigurationParameters `json:"s3Configuration" tf:"s3_configuration,omitempty"`
 }
 
 type IcebergConfigurationProcessingConfigurationInitParameters struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Specifies the data processors as multiple blocks. See processors block below for details.
+	// Data processors as multiple blocks. See processors block below for details.
 	Processors []IcebergConfigurationProcessingConfigurationProcessorsInitParameters `json:"processors,omitempty" tf:"processors,omitempty"`
 }
 
 type IcebergConfigurationProcessingConfigurationObservation struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Specifies the data processors as multiple blocks. See processors block below for details.
+	// Data processors as multiple blocks. See processors block below for details.
 	Processors []IcebergConfigurationProcessingConfigurationProcessorsObservation `json:"processors,omitempty" tf:"processors,omitempty"`
 }
 
 type IcebergConfigurationProcessingConfigurationParameters struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Specifies the data processors as multiple blocks. See processors block below for details.
+	// Data processors as multiple blocks. See processors block below for details.
 	// +kubebuilder:validation:Optional
 	Processors []IcebergConfigurationProcessingConfigurationProcessorsParameters `json:"processors,omitempty" tf:"processors,omitempty"`
 }
 
 type IcebergConfigurationProcessingConfigurationProcessorsInitParameters struct {
 
-	// Specifies the processor parameters as multiple blocks. See parameters block below for details.
+	// Processor parameters as multiple blocks. See parameters block below for details.
 	Parameters []IcebergConfigurationProcessingConfigurationProcessorsParametersInitParameters `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
-	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord, Decompression, CloudWatchLogProcessing. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
+	// Type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord, Decompression, CloudWatchLogProcessing. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type IcebergConfigurationProcessingConfigurationProcessorsObservation struct {
 
-	// Specifies the processor parameters as multiple blocks. See parameters block below for details.
+	// Processor parameters as multiple blocks. See parameters block below for details.
 	Parameters []IcebergConfigurationProcessingConfigurationProcessorsParametersObservation `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
-	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord, Decompression, CloudWatchLogProcessing. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
+	// Type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord, Decompression, CloudWatchLogProcessing. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type IcebergConfigurationProcessingConfigurationProcessorsParameters struct {
 
-	// Specifies the processor parameters as multiple blocks. See parameters block below for details.
+	// Processor parameters as multiple blocks. See parameters block below for details.
 	// +kubebuilder:validation:Optional
 	Parameters []IcebergConfigurationProcessingConfigurationProcessorsParametersParameters `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
-	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord, Decompression, CloudWatchLogProcessing. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
+	// Type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord, Decompression, CloudWatchLogProcessing. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
 }
@@ -1705,46 +1704,46 @@ type IcebergConfigurationProcessingConfigurationProcessorsParametersParameters s
 
 type IcebergConfigurationS3ConfigurationCloudwatchLoggingOptionsInitParameters struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The CloudWatch group name for logging. This value is required if enabled is true.
+	// CloudWatch group name for logging. This value is required if enabled is true.
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
 
-	// The CloudWatch log stream name for logging. This value is required if enabled is true.
+	// CloudWatch log stream name for logging. This value is required if enabled is true.
 	LogStreamName *string `json:"logStreamName,omitempty" tf:"log_stream_name,omitempty"`
 }
 
 type IcebergConfigurationS3ConfigurationCloudwatchLoggingOptionsObservation struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The CloudWatch group name for logging. This value is required if enabled is true.
+	// CloudWatch group name for logging. This value is required if enabled is true.
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
 
-	// The CloudWatch log stream name for logging. This value is required if enabled is true.
+	// CloudWatch log stream name for logging. This value is required if enabled is true.
 	LogStreamName *string `json:"logStreamName,omitempty" tf:"log_stream_name,omitempty"`
 }
 
 type IcebergConfigurationS3ConfigurationCloudwatchLoggingOptionsParameters struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The CloudWatch group name for logging. This value is required if enabled is true.
+	// CloudWatch group name for logging. This value is required if enabled is true.
 	// +kubebuilder:validation:Optional
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
 
-	// The CloudWatch log stream name for logging. This value is required if enabled is true.
+	// CloudWatch log stream name for logging. This value is required if enabled is true.
 	// +kubebuilder:validation:Optional
 	LogStreamName *string `json:"logStreamName,omitempty" tf:"log_stream_name,omitempty"`
 }
 
 type IcebergConfigurationS3ConfigurationInitParameters struct {
 
-	// The ARN of the S3 bucket
+	// ARN of the S3 bucket.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3/v1beta2.Bucket
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	BucketArn *string `json:"bucketArn,omitempty" tf:"bucket_arn,omitempty"`
@@ -1763,23 +1762,22 @@ type IcebergConfigurationS3ConfigurationInitParameters struct {
 	// Buffer incoming data to the specified size, in MBs between 1 to 5, before delivering it to the destination.  The default value is 5MB.
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
+	// CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	CloudwatchLoggingOptions *IcebergConfigurationS3ConfigurationCloudwatchLoggingOptionsInitParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
-	// The compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
+	// Compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
 	CompressionFormat *string `json:"compressionFormat,omitempty" tf:"compression_format,omitempty"`
 
 	// Prefix added to failed records before writing them to S3. Not currently supported for redshift destination. This prefix appears immediately following the bucket name. For information about how to specify this prefix, see Custom Prefixes for Amazon S3 Objects.
 	ErrorOutputPrefix *string `json:"errorOutputPrefix,omitempty" tf:"error_output_prefix,omitempty"`
 
-	// Specifies the KMS key ARN the stream will use to encrypt data. If not set, no encryption will
-	// be used.
+	// KMS key ARN the stream will use to encrypt data. If not set, no encryption will be used.
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
-	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered S3 files. You can specify an extra prefix to be added in front of the time format prefix. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket
+	// Extra prefix added in front of the "YYYY/MM/DD/HH" time format prefix that is automatically used for delivered S3 files. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
+	// ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
@@ -1795,7 +1793,7 @@ type IcebergConfigurationS3ConfigurationInitParameters struct {
 
 type IcebergConfigurationS3ConfigurationObservation struct {
 
-	// The ARN of the S3 bucket
+	// ARN of the S3 bucket.
 	BucketArn *string `json:"bucketArn,omitempty" tf:"bucket_arn,omitempty"`
 
 	// Buffer incoming data for the specified period of time, in seconds between 0 to 60, before delivering it to the destination.  The default value is 60s.
@@ -1804,29 +1802,28 @@ type IcebergConfigurationS3ConfigurationObservation struct {
 	// Buffer incoming data to the specified size, in MBs between 1 to 5, before delivering it to the destination.  The default value is 5MB.
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
+	// CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	CloudwatchLoggingOptions *IcebergConfigurationS3ConfigurationCloudwatchLoggingOptionsObservation `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
-	// The compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
+	// Compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
 	CompressionFormat *string `json:"compressionFormat,omitempty" tf:"compression_format,omitempty"`
 
 	// Prefix added to failed records before writing them to S3. Not currently supported for redshift destination. This prefix appears immediately following the bucket name. For information about how to specify this prefix, see Custom Prefixes for Amazon S3 Objects.
 	ErrorOutputPrefix *string `json:"errorOutputPrefix,omitempty" tf:"error_output_prefix,omitempty"`
 
-	// Specifies the KMS key ARN the stream will use to encrypt data. If not set, no encryption will
-	// be used.
+	// KMS key ARN the stream will use to encrypt data. If not set, no encryption will be used.
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
-	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered S3 files. You can specify an extra prefix to be added in front of the time format prefix. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket
+	// Extra prefix added in front of the "YYYY/MM/DD/HH" time format prefix that is automatically used for delivered S3 files. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
+	// ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
 
 type IcebergConfigurationS3ConfigurationParameters struct {
 
-	// The ARN of the S3 bucket
+	// ARN of the S3 bucket.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3/v1beta2.Bucket
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -1848,11 +1845,11 @@ type IcebergConfigurationS3ConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
+	// CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	// +kubebuilder:validation:Optional
 	CloudwatchLoggingOptions *IcebergConfigurationS3ConfigurationCloudwatchLoggingOptionsParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
-	// The compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
+	// Compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
 	// +kubebuilder:validation:Optional
 	CompressionFormat *string `json:"compressionFormat,omitempty" tf:"compression_format,omitempty"`
 
@@ -1860,16 +1857,15 @@ type IcebergConfigurationS3ConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	ErrorOutputPrefix *string `json:"errorOutputPrefix,omitempty" tf:"error_output_prefix,omitempty"`
 
-	// Specifies the KMS key ARN the stream will use to encrypt data. If not set, no encryption will
-	// be used.
+	// KMS key ARN the stream will use to encrypt data. If not set, no encryption will be used.
 	// +kubebuilder:validation:Optional
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
-	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered S3 files. You can specify an extra prefix to be added in front of the time format prefix. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket
+	// Extra prefix added in front of the "YYYY/MM/DD/HH" time format prefix that is automatically used for delivered S3 files. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket.
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
+	// ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -1886,97 +1882,97 @@ type IcebergConfigurationS3ConfigurationParameters struct {
 
 type InputFormatConfigurationInitParameters struct {
 
-	// Specifies which deserializer to use. You can choose either the Apache Hive JSON SerDe or the OpenX JSON SerDe. See deserializer block below for details.
+	// Which deserializer to use. You can choose either the Apache Hive JSON SerDe or the OpenX JSON SerDe. See deserializer block below for details.
 	Deserializer *DeserializerInitParameters `json:"deserializer,omitempty" tf:"deserializer,omitempty"`
 }
 
 type InputFormatConfigurationObservation struct {
 
-	// Specifies which deserializer to use. You can choose either the Apache Hive JSON SerDe or the OpenX JSON SerDe. See deserializer block below for details.
+	// Which deserializer to use. You can choose either the Apache Hive JSON SerDe or the OpenX JSON SerDe. See deserializer block below for details.
 	Deserializer *DeserializerObservation `json:"deserializer,omitempty" tf:"deserializer,omitempty"`
 }
 
 type InputFormatConfigurationParameters struct {
 
-	// Specifies which deserializer to use. You can choose either the Apache Hive JSON SerDe or the OpenX JSON SerDe. See deserializer block below for details.
+	// Which deserializer to use. You can choose either the Apache Hive JSON SerDe or the OpenX JSON SerDe. See deserializer block below for details.
 	// +kubebuilder:validation:Optional
 	Deserializer *DeserializerParameters `json:"deserializer" tf:"deserializer,omitempty"`
 }
 
 type KinesisSourceConfigurationInitParameters struct {
 
-	// The kinesis stream used as the source of the firehose delivery stream.
+	// Kinesis stream used as the source of the firehose delivery stream.
 	KinesisStreamArn *string `json:"kinesisStreamArn,omitempty" tf:"kinesis_stream_arn,omitempty"`
 
-	// The ARN of the role that provides access to the source Kinesis stream.
+	// ARN of the role that provides access to the source Kinesis stream.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
 
 type KinesisSourceConfigurationObservation struct {
 
-	// The kinesis stream used as the source of the firehose delivery stream.
+	// Kinesis stream used as the source of the firehose delivery stream.
 	KinesisStreamArn *string `json:"kinesisStreamArn,omitempty" tf:"kinesis_stream_arn,omitempty"`
 
-	// The ARN of the role that provides access to the source Kinesis stream.
+	// ARN of the role that provides access to the source Kinesis stream.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
 
 type KinesisSourceConfigurationParameters struct {
 
-	// The kinesis stream used as the source of the firehose delivery stream.
+	// Kinesis stream used as the source of the firehose delivery stream.
 	// +kubebuilder:validation:Optional
 	KinesisStreamArn *string `json:"kinesisStreamArn" tf:"kinesis_stream_arn,omitempty"`
 
-	// The ARN of the role that provides access to the source Kinesis stream.
+	// ARN of the role that provides access to the source Kinesis stream.
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn" tf:"role_arn,omitempty"`
 }
 
 type MskSourceConfigurationInitParameters struct {
 
-	// The authentication configuration of the Amazon MSK cluster. See authentication_configuration block below for details.
+	// Authentication configuration of the Amazon MSK cluster. See authentication_configuration block below for details.
 	AuthenticationConfiguration *AuthenticationConfigurationInitParameters `json:"authenticationConfiguration,omitempty" tf:"authentication_configuration,omitempty"`
 
-	// The ARN of the Amazon MSK cluster.
+	// ARN of the Amazon MSK cluster.
 	MskClusterArn *string `json:"mskClusterArn,omitempty" tf:"msk_cluster_arn,omitempty"`
 
-	// The start date and time in UTC for the offset position within your MSK topic from where Firehose begins to read. By default, this is set to timestamp when Firehose becomes Active. If you want to create a Firehose stream with Earliest start position set the read_from_timestamp parameter to Epoch (1970-01-01T00:00:00Z).
+	// Start date and time in UTC for the offset position within your MSK topic from where Firehose begins to read. By default, this is set to timestamp when Firehose becomes Active. If you want to create a Firehose stream with Earliest start position set the read_from_timestamp parameter to Epoch (1970-01-01T00:00:00Z).
 	ReadFromTimestamp *string `json:"readFromTimestamp,omitempty" tf:"read_from_timestamp,omitempty"`
 
-	// The topic name within the Amazon MSK cluster.
+	// Topic name within the Amazon MSK cluster.
 	TopicName *string `json:"topicName,omitempty" tf:"topic_name,omitempty"`
 }
 
 type MskSourceConfigurationObservation struct {
 
-	// The authentication configuration of the Amazon MSK cluster. See authentication_configuration block below for details.
+	// Authentication configuration of the Amazon MSK cluster. See authentication_configuration block below for details.
 	AuthenticationConfiguration *AuthenticationConfigurationObservation `json:"authenticationConfiguration,omitempty" tf:"authentication_configuration,omitempty"`
 
-	// The ARN of the Amazon MSK cluster.
+	// ARN of the Amazon MSK cluster.
 	MskClusterArn *string `json:"mskClusterArn,omitempty" tf:"msk_cluster_arn,omitempty"`
 
-	// The start date and time in UTC for the offset position within your MSK topic from where Firehose begins to read. By default, this is set to timestamp when Firehose becomes Active. If you want to create a Firehose stream with Earliest start position set the read_from_timestamp parameter to Epoch (1970-01-01T00:00:00Z).
+	// Start date and time in UTC for the offset position within your MSK topic from where Firehose begins to read. By default, this is set to timestamp when Firehose becomes Active. If you want to create a Firehose stream with Earliest start position set the read_from_timestamp parameter to Epoch (1970-01-01T00:00:00Z).
 	ReadFromTimestamp *string `json:"readFromTimestamp,omitempty" tf:"read_from_timestamp,omitempty"`
 
-	// The topic name within the Amazon MSK cluster.
+	// Topic name within the Amazon MSK cluster.
 	TopicName *string `json:"topicName,omitempty" tf:"topic_name,omitempty"`
 }
 
 type MskSourceConfigurationParameters struct {
 
-	// The authentication configuration of the Amazon MSK cluster. See authentication_configuration block below for details.
+	// Authentication configuration of the Amazon MSK cluster. See authentication_configuration block below for details.
 	// +kubebuilder:validation:Optional
 	AuthenticationConfiguration *AuthenticationConfigurationParameters `json:"authenticationConfiguration" tf:"authentication_configuration,omitempty"`
 
-	// The ARN of the Amazon MSK cluster.
+	// ARN of the Amazon MSK cluster.
 	// +kubebuilder:validation:Optional
 	MskClusterArn *string `json:"mskClusterArn" tf:"msk_cluster_arn,omitempty"`
 
-	// The start date and time in UTC for the offset position within your MSK topic from where Firehose begins to read. By default, this is set to timestamp when Firehose becomes Active. If you want to create a Firehose stream with Earliest start position set the read_from_timestamp parameter to Epoch (1970-01-01T00:00:00Z).
+	// Start date and time in UTC for the offset position within your MSK topic from where Firehose begins to read. By default, this is set to timestamp when Firehose becomes Active. If you want to create a Firehose stream with Earliest start position set the read_from_timestamp parameter to Epoch (1970-01-01T00:00:00Z).
 	// +kubebuilder:validation:Optional
 	ReadFromTimestamp *string `json:"readFromTimestamp,omitempty" tf:"read_from_timestamp,omitempty"`
 
-	// The topic name within the Amazon MSK cluster.
+	// Topic name within the Amazon MSK cluster.
 	// +kubebuilder:validation:Optional
 	TopicName *string `json:"topicName" tf:"topic_name,omitempty"`
 }
@@ -1986,7 +1982,7 @@ type OpenXJSONSerDeInitParameters struct {
 	// When set to true, which is the default, Kinesis Data Firehose converts JSON keys to lowercase before deserializing them.
 	CaseInsensitive *bool `json:"caseInsensitive,omitempty" tf:"case_insensitive,omitempty"`
 
-	// A map of column names to JSON keys that aren't identical to the column names. This is useful when the JSON contains keys that are Hive keywords. For example, timestamp is a Hive keyword. If you have a JSON key named timestamp, set this parameter to { ts = "timestamp" } to map this key to a column named ts.
+	// Map of column names to JSON keys that aren't identical to the column names. This is useful when the JSON contains keys that are Hive keywords. For example, timestamp is a Hive keyword. If you have a JSON key named timestamp, set this parameter to { ts = "timestamp" } to map this key to a column named ts.
 	// +mapType=granular
 	ColumnToJSONKeyMappings map[string]*string `json:"columnToJsonKeyMappings,omitempty" tf:"column_to_json_key_mappings,omitempty"`
 
@@ -1999,7 +1995,7 @@ type OpenXJSONSerDeObservation struct {
 	// When set to true, which is the default, Kinesis Data Firehose converts JSON keys to lowercase before deserializing them.
 	CaseInsensitive *bool `json:"caseInsensitive,omitempty" tf:"case_insensitive,omitempty"`
 
-	// A map of column names to JSON keys that aren't identical to the column names. This is useful when the JSON contains keys that are Hive keywords. For example, timestamp is a Hive keyword. If you have a JSON key named timestamp, set this parameter to { ts = "timestamp" } to map this key to a column named ts.
+	// Map of column names to JSON keys that aren't identical to the column names. This is useful when the JSON contains keys that are Hive keywords. For example, timestamp is a Hive keyword. If you have a JSON key named timestamp, set this parameter to { ts = "timestamp" } to map this key to a column named ts.
 	// +mapType=granular
 	ColumnToJSONKeyMappings map[string]*string `json:"columnToJsonKeyMappings,omitempty" tf:"column_to_json_key_mappings,omitempty"`
 
@@ -2013,7 +2009,7 @@ type OpenXJSONSerDeParameters struct {
 	// +kubebuilder:validation:Optional
 	CaseInsensitive *bool `json:"caseInsensitive,omitempty" tf:"case_insensitive,omitempty"`
 
-	// A map of column names to JSON keys that aren't identical to the column names. This is useful when the JSON contains keys that are Hive keywords. For example, timestamp is a Hive keyword. If you have a JSON key named timestamp, set this parameter to { ts = "timestamp" } to map this key to a column named ts.
+	// Map of column names to JSON keys that aren't identical to the column names. This is useful when the JSON contains keys that are Hive keywords. For example, timestamp is a Hive keyword. If you have a JSON key named timestamp, set this parameter to { ts = "timestamp" } to map this key to a column named ts.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	ColumnToJSONKeyMappings map[string]*string `json:"columnToJsonKeyMappings,omitempty" tf:"column_to_json_key_mappings,omitempty"`
@@ -2025,39 +2021,39 @@ type OpenXJSONSerDeParameters struct {
 
 type OpensearchConfigurationCloudwatchLoggingOptionsInitParameters struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The CloudWatch group name for logging. This value is required if enabled is true.
+	// CloudWatch group name for logging. This value is required if enabled is true.
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
 
-	// The CloudWatch log stream name for logging. This value is required if enabled is true.
+	// CloudWatch log stream name for logging. This value is required if enabled is true.
 	LogStreamName *string `json:"logStreamName,omitempty" tf:"log_stream_name,omitempty"`
 }
 
 type OpensearchConfigurationCloudwatchLoggingOptionsObservation struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The CloudWatch group name for logging. This value is required if enabled is true.
+	// CloudWatch group name for logging. This value is required if enabled is true.
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
 
-	// The CloudWatch log stream name for logging. This value is required if enabled is true.
+	// CloudWatch log stream name for logging. This value is required if enabled is true.
 	LogStreamName *string `json:"logStreamName,omitempty" tf:"log_stream_name,omitempty"`
 }
 
 type OpensearchConfigurationCloudwatchLoggingOptionsParameters struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The CloudWatch group name for logging. This value is required if enabled is true.
+	// CloudWatch group name for logging. This value is required if enabled is true.
 	// +kubebuilder:validation:Optional
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
 
-	// The CloudWatch log stream name for logging. This value is required if enabled is true.
+	// CloudWatch log stream name for logging. This value is required if enabled is true.
 	// +kubebuilder:validation:Optional
 	LogStreamName *string `json:"logStreamName,omitempty" tf:"log_stream_name,omitempty"`
 }
@@ -2070,16 +2066,16 @@ type OpensearchConfigurationInitParameters struct {
 	// Buffer incoming data to the specified size, in MBs between 1 to 100, before delivering it to the destination.  The default value is 5MB.
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
+	// CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	CloudwatchLoggingOptions *OpensearchConfigurationCloudwatchLoggingOptionsInitParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
-	// The endpoint to use when communicating with the cluster. Conflicts with domain_arn.
+	// Endpoint to use when communicating with the cluster. Conflicts with domain_arn.
 	ClusterEndpoint *string `json:"clusterEndpoint,omitempty" tf:"cluster_endpoint,omitempty"`
 
-	// The method for setting up document ID. See [document_id_options block] below for details.
+	// Method for setting up document ID. See document_id_options block below for details.
 	DocumentIDOptions *DocumentIDOptionsInitParameters `json:"documentIdOptions,omitempty" tf:"document_id_options,omitempty"`
 
-	// The ARN of the Amazon ES domain.  The pattern needs to be arn:.*.  Conflicts with cluster_endpoint.
+	// ARN of the Amazon ES domain.  The pattern needs to be arn:.*.  Conflicts with cluster_endpoint.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/opensearch/v1beta2.Domain
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	DomainArn *string `json:"domainArn,omitempty" tf:"domain_arn,omitempty"`
@@ -2092,19 +2088,19 @@ type OpensearchConfigurationInitParameters struct {
 	// +kubebuilder:validation:Optional
 	DomainArnSelector *v2.Selector `json:"domainArnSelector,omitempty" tf:"-"`
 
-	// The OpenSearch index name.
+	// OpenSearch index name.
 	IndexName *string `json:"indexName,omitempty" tf:"index_name,omitempty"`
 
-	// The OpenSearch index rotation period.  Index rotation appends a timestamp to the IndexName to facilitate expiration of old data.  Valid values are NoRotation, OneHour, OneDay, OneWeek, and OneMonth.  The default value is OneDay.
+	// OpenSearch index rotation period.  Index rotation appends a timestamp to the IndexName to facilitate expiration of old data.  Valid values are NoRotation, OneHour, OneDay, OneWeek, and OneMonth.  The default value is OneDay.
 	IndexRotationPeriod *string `json:"indexRotationPeriod,omitempty" tf:"index_rotation_period,omitempty"`
 
-	// The data processing configuration. See processing_configuration block below for details.
+	// Data processing configuration. See processing_configuration block below for details.
 	ProcessingConfiguration *OpensearchConfigurationProcessingConfigurationInitParameters `json:"processingConfiguration,omitempty" tf:"processing_configuration,omitempty"`
 
 	// After an initial failure to deliver to Amazon OpenSearch, the total amount of time, in seconds between 0 to 7200, during which Firehose re-attempts delivery (including the first attempt).  After this time has elapsed, the failed documents are written to Amazon S3.  The default value is 300s.  There will be no retry if the value is 0.
 	RetryDuration *float64 `json:"retryDuration,omitempty" tf:"retry_duration,omitempty"`
 
-	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon ES Configuration API and for indexing documents.  The IAM role must have permission for DescribeDomain, DescribeDomains, and DescribeDomainConfig.  The pattern needs to be arn:.*.
+	// ARN of the IAM role to be assumed by Firehose for calling the Amazon ES Configuration API and for indexing documents.  The IAM role must have permission for DescribeDomain, DescribeDomains, and DescribeDomainConfig.  The pattern needs to be arn:.*.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
@@ -2117,16 +2113,16 @@ type OpensearchConfigurationInitParameters struct {
 	// +kubebuilder:validation:Optional
 	RoleArnSelector *v2.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
-	// Defines how documents should be delivered to Amazon S3.  Valid values are FailedDocumentsOnly and AllDocuments.  Default value is FailedDocumentsOnly.
+	// How documents should be delivered to Amazon S3.  Valid values are FailedDocumentsOnly and AllDocuments.  Default value is FailedDocumentsOnly.
 	S3BackupMode *string `json:"s3BackupMode,omitempty" tf:"s3_backup_mode,omitempty"`
 
-	// The S3 Configuration. See s3_configuration block below for details.
+	// S3 Configuration. See s3_configuration block below for details.
 	S3Configuration *OpensearchConfigurationS3ConfigurationInitParameters `json:"s3Configuration,omitempty" tf:"s3_configuration,omitempty"`
 
-	// The Elasticsearch type name with maximum length of 100 characters. Types are deprecated in OpenSearch_1.1. TypeName must be empty.
+	// Elasticsearch type name with maximum length of 100 characters. Types are deprecated in OpenSearch_1.1. TypeName must be empty.
 	TypeName *string `json:"typeName,omitempty" tf:"type_name,omitempty"`
 
-	// The VPC configuration for the delivery stream to connect to OpenSearch associated with the VPC. See vpc_config block below for details.
+	// VPC configuration for the delivery stream to connect to OpenSearch associated with the VPC. See vpc_config block below for details.
 	VPCConfig *OpensearchConfigurationVPCConfigInitParameters `json:"vpcConfig,omitempty" tf:"vpc_config,omitempty"`
 }
 
@@ -2138,43 +2134,43 @@ type OpensearchConfigurationObservation struct {
 	// Buffer incoming data to the specified size, in MBs between 1 to 100, before delivering it to the destination.  The default value is 5MB.
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
+	// CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	CloudwatchLoggingOptions *OpensearchConfigurationCloudwatchLoggingOptionsObservation `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
-	// The endpoint to use when communicating with the cluster. Conflicts with domain_arn.
+	// Endpoint to use when communicating with the cluster. Conflicts with domain_arn.
 	ClusterEndpoint *string `json:"clusterEndpoint,omitempty" tf:"cluster_endpoint,omitempty"`
 
-	// The method for setting up document ID. See [document_id_options block] below for details.
+	// Method for setting up document ID. See document_id_options block below for details.
 	DocumentIDOptions *DocumentIDOptionsObservation `json:"documentIdOptions,omitempty" tf:"document_id_options,omitempty"`
 
-	// The ARN of the Amazon ES domain.  The pattern needs to be arn:.*.  Conflicts with cluster_endpoint.
+	// ARN of the Amazon ES domain.  The pattern needs to be arn:.*.  Conflicts with cluster_endpoint.
 	DomainArn *string `json:"domainArn,omitempty" tf:"domain_arn,omitempty"`
 
-	// The OpenSearch index name.
+	// OpenSearch index name.
 	IndexName *string `json:"indexName,omitempty" tf:"index_name,omitempty"`
 
-	// The OpenSearch index rotation period.  Index rotation appends a timestamp to the IndexName to facilitate expiration of old data.  Valid values are NoRotation, OneHour, OneDay, OneWeek, and OneMonth.  The default value is OneDay.
+	// OpenSearch index rotation period.  Index rotation appends a timestamp to the IndexName to facilitate expiration of old data.  Valid values are NoRotation, OneHour, OneDay, OneWeek, and OneMonth.  The default value is OneDay.
 	IndexRotationPeriod *string `json:"indexRotationPeriod,omitempty" tf:"index_rotation_period,omitempty"`
 
-	// The data processing configuration. See processing_configuration block below for details.
+	// Data processing configuration. See processing_configuration block below for details.
 	ProcessingConfiguration *OpensearchConfigurationProcessingConfigurationObservation `json:"processingConfiguration,omitempty" tf:"processing_configuration,omitempty"`
 
 	// After an initial failure to deliver to Amazon OpenSearch, the total amount of time, in seconds between 0 to 7200, during which Firehose re-attempts delivery (including the first attempt).  After this time has elapsed, the failed documents are written to Amazon S3.  The default value is 300s.  There will be no retry if the value is 0.
 	RetryDuration *float64 `json:"retryDuration,omitempty" tf:"retry_duration,omitempty"`
 
-	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon ES Configuration API and for indexing documents.  The IAM role must have permission for DescribeDomain, DescribeDomains, and DescribeDomainConfig.  The pattern needs to be arn:.*.
+	// ARN of the IAM role to be assumed by Firehose for calling the Amazon ES Configuration API and for indexing documents.  The IAM role must have permission for DescribeDomain, DescribeDomains, and DescribeDomainConfig.  The pattern needs to be arn:.*.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
-	// Defines how documents should be delivered to Amazon S3.  Valid values are FailedDocumentsOnly and AllDocuments.  Default value is FailedDocumentsOnly.
+	// How documents should be delivered to Amazon S3.  Valid values are FailedDocumentsOnly and AllDocuments.  Default value is FailedDocumentsOnly.
 	S3BackupMode *string `json:"s3BackupMode,omitempty" tf:"s3_backup_mode,omitempty"`
 
-	// The S3 Configuration. See s3_configuration block below for details.
+	// S3 Configuration. See s3_configuration block below for details.
 	S3Configuration *OpensearchConfigurationS3ConfigurationObservation `json:"s3Configuration,omitempty" tf:"s3_configuration,omitempty"`
 
-	// The Elasticsearch type name with maximum length of 100 characters. Types are deprecated in OpenSearch_1.1. TypeName must be empty.
+	// Elasticsearch type name with maximum length of 100 characters. Types are deprecated in OpenSearch_1.1. TypeName must be empty.
 	TypeName *string `json:"typeName,omitempty" tf:"type_name,omitempty"`
 
-	// The VPC configuration for the delivery stream to connect to OpenSearch associated with the VPC. See vpc_config block below for details.
+	// VPC configuration for the delivery stream to connect to OpenSearch associated with the VPC. See vpc_config block below for details.
 	VPCConfig *OpensearchConfigurationVPCConfigObservation `json:"vpcConfig,omitempty" tf:"vpc_config,omitempty"`
 }
 
@@ -2188,19 +2184,19 @@ type OpensearchConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
+	// CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	// +kubebuilder:validation:Optional
 	CloudwatchLoggingOptions *OpensearchConfigurationCloudwatchLoggingOptionsParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
-	// The endpoint to use when communicating with the cluster. Conflicts with domain_arn.
+	// Endpoint to use when communicating with the cluster. Conflicts with domain_arn.
 	// +kubebuilder:validation:Optional
 	ClusterEndpoint *string `json:"clusterEndpoint,omitempty" tf:"cluster_endpoint,omitempty"`
 
-	// The method for setting up document ID. See [document_id_options block] below for details.
+	// Method for setting up document ID. See document_id_options block below for details.
 	// +kubebuilder:validation:Optional
 	DocumentIDOptions *DocumentIDOptionsParameters `json:"documentIdOptions,omitempty" tf:"document_id_options,omitempty"`
 
-	// The ARN of the Amazon ES domain.  The pattern needs to be arn:.*.  Conflicts with cluster_endpoint.
+	// ARN of the Amazon ES domain.  The pattern needs to be arn:.*.  Conflicts with cluster_endpoint.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/opensearch/v1beta2.Domain
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -2214,15 +2210,15 @@ type OpensearchConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	DomainArnSelector *v2.Selector `json:"domainArnSelector,omitempty" tf:"-"`
 
-	// The OpenSearch index name.
+	// OpenSearch index name.
 	// +kubebuilder:validation:Optional
 	IndexName *string `json:"indexName" tf:"index_name,omitempty"`
 
-	// The OpenSearch index rotation period.  Index rotation appends a timestamp to the IndexName to facilitate expiration of old data.  Valid values are NoRotation, OneHour, OneDay, OneWeek, and OneMonth.  The default value is OneDay.
+	// OpenSearch index rotation period.  Index rotation appends a timestamp to the IndexName to facilitate expiration of old data.  Valid values are NoRotation, OneHour, OneDay, OneWeek, and OneMonth.  The default value is OneDay.
 	// +kubebuilder:validation:Optional
 	IndexRotationPeriod *string `json:"indexRotationPeriod,omitempty" tf:"index_rotation_period,omitempty"`
 
-	// The data processing configuration. See processing_configuration block below for details.
+	// Data processing configuration. See processing_configuration block below for details.
 	// +kubebuilder:validation:Optional
 	ProcessingConfiguration *OpensearchConfigurationProcessingConfigurationParameters `json:"processingConfiguration,omitempty" tf:"processing_configuration,omitempty"`
 
@@ -2230,7 +2226,7 @@ type OpensearchConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	RetryDuration *float64 `json:"retryDuration,omitempty" tf:"retry_duration,omitempty"`
 
-	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon ES Configuration API and for indexing documents.  The IAM role must have permission for DescribeDomain, DescribeDomains, and DescribeDomainConfig.  The pattern needs to be arn:.*.
+	// ARN of the IAM role to be assumed by Firehose for calling the Amazon ES Configuration API and for indexing documents.  The IAM role must have permission for DescribeDomain, DescribeDomains, and DescribeDomainConfig.  The pattern needs to be arn:.*.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -2244,77 +2240,77 @@ type OpensearchConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	RoleArnSelector *v2.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
-	// Defines how documents should be delivered to Amazon S3.  Valid values are FailedDocumentsOnly and AllDocuments.  Default value is FailedDocumentsOnly.
+	// How documents should be delivered to Amazon S3.  Valid values are FailedDocumentsOnly and AllDocuments.  Default value is FailedDocumentsOnly.
 	// +kubebuilder:validation:Optional
 	S3BackupMode *string `json:"s3BackupMode,omitempty" tf:"s3_backup_mode,omitempty"`
 
-	// The S3 Configuration. See s3_configuration block below for details.
+	// S3 Configuration. See s3_configuration block below for details.
 	// +kubebuilder:validation:Optional
 	S3Configuration *OpensearchConfigurationS3ConfigurationParameters `json:"s3Configuration" tf:"s3_configuration,omitempty"`
 
-	// The Elasticsearch type name with maximum length of 100 characters. Types are deprecated in OpenSearch_1.1. TypeName must be empty.
+	// Elasticsearch type name with maximum length of 100 characters. Types are deprecated in OpenSearch_1.1. TypeName must be empty.
 	// +kubebuilder:validation:Optional
 	TypeName *string `json:"typeName,omitempty" tf:"type_name,omitempty"`
 
-	// The VPC configuration for the delivery stream to connect to OpenSearch associated with the VPC. See vpc_config block below for details.
+	// VPC configuration for the delivery stream to connect to OpenSearch associated with the VPC. See vpc_config block below for details.
 	// +kubebuilder:validation:Optional
 	VPCConfig *OpensearchConfigurationVPCConfigParameters `json:"vpcConfig,omitempty" tf:"vpc_config,omitempty"`
 }
 
 type OpensearchConfigurationProcessingConfigurationInitParameters struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Specifies the data processors as multiple blocks. See processors block below for details.
+	// Data processors as multiple blocks. See processors block below for details.
 	Processors []OpensearchConfigurationProcessingConfigurationProcessorsInitParameters `json:"processors,omitempty" tf:"processors,omitempty"`
 }
 
 type OpensearchConfigurationProcessingConfigurationObservation struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Specifies the data processors as multiple blocks. See processors block below for details.
+	// Data processors as multiple blocks. See processors block below for details.
 	Processors []OpensearchConfigurationProcessingConfigurationProcessorsObservation `json:"processors,omitempty" tf:"processors,omitempty"`
 }
 
 type OpensearchConfigurationProcessingConfigurationParameters struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Specifies the data processors as multiple blocks. See processors block below for details.
+	// Data processors as multiple blocks. See processors block below for details.
 	// +kubebuilder:validation:Optional
 	Processors []OpensearchConfigurationProcessingConfigurationProcessorsParameters `json:"processors,omitempty" tf:"processors,omitempty"`
 }
 
 type OpensearchConfigurationProcessingConfigurationProcessorsInitParameters struct {
 
-	// Specifies the processor parameters as multiple blocks. See parameters block below for details.
+	// Processor parameters as multiple blocks. See parameters block below for details.
 	Parameters []OpensearchConfigurationProcessingConfigurationProcessorsParametersInitParameters `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
-	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord, Decompression, CloudWatchLogProcessing. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
+	// Type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord, Decompression, CloudWatchLogProcessing. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type OpensearchConfigurationProcessingConfigurationProcessorsObservation struct {
 
-	// Specifies the processor parameters as multiple blocks. See parameters block below for details.
+	// Processor parameters as multiple blocks. See parameters block below for details.
 	Parameters []OpensearchConfigurationProcessingConfigurationProcessorsParametersObservation `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
-	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord, Decompression, CloudWatchLogProcessing. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
+	// Type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord, Decompression, CloudWatchLogProcessing. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type OpensearchConfigurationProcessingConfigurationProcessorsParameters struct {
 
-	// Specifies the processor parameters as multiple blocks. See parameters block below for details.
+	// Processor parameters as multiple blocks. See parameters block below for details.
 	// +kubebuilder:validation:Optional
 	Parameters []OpensearchConfigurationProcessingConfigurationProcessorsParametersParameters `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
-	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord, Decompression, CloudWatchLogProcessing. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
+	// Type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord, Decompression, CloudWatchLogProcessing. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
 }
@@ -2350,46 +2346,46 @@ type OpensearchConfigurationProcessingConfigurationProcessorsParametersParameter
 
 type OpensearchConfigurationS3ConfigurationCloudwatchLoggingOptionsInitParameters struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The CloudWatch group name for logging. This value is required if enabled is true.
+	// CloudWatch group name for logging. This value is required if enabled is true.
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
 
-	// The CloudWatch log stream name for logging. This value is required if enabled is true.
+	// CloudWatch log stream name for logging. This value is required if enabled is true.
 	LogStreamName *string `json:"logStreamName,omitempty" tf:"log_stream_name,omitempty"`
 }
 
 type OpensearchConfigurationS3ConfigurationCloudwatchLoggingOptionsObservation struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The CloudWatch group name for logging. This value is required if enabled is true.
+	// CloudWatch group name for logging. This value is required if enabled is true.
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
 
-	// The CloudWatch log stream name for logging. This value is required if enabled is true.
+	// CloudWatch log stream name for logging. This value is required if enabled is true.
 	LogStreamName *string `json:"logStreamName,omitempty" tf:"log_stream_name,omitempty"`
 }
 
 type OpensearchConfigurationS3ConfigurationCloudwatchLoggingOptionsParameters struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The CloudWatch group name for logging. This value is required if enabled is true.
+	// CloudWatch group name for logging. This value is required if enabled is true.
 	// +kubebuilder:validation:Optional
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
 
-	// The CloudWatch log stream name for logging. This value is required if enabled is true.
+	// CloudWatch log stream name for logging. This value is required if enabled is true.
 	// +kubebuilder:validation:Optional
 	LogStreamName *string `json:"logStreamName,omitempty" tf:"log_stream_name,omitempty"`
 }
 
 type OpensearchConfigurationS3ConfigurationInitParameters struct {
 
-	// The ARN of the S3 bucket
+	// ARN of the S3 bucket.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3/v1beta2.Bucket
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	BucketArn *string `json:"bucketArn,omitempty" tf:"bucket_arn,omitempty"`
@@ -2408,23 +2404,22 @@ type OpensearchConfigurationS3ConfigurationInitParameters struct {
 	// Buffer incoming data to the specified size, in MBs between 1 to 5, before delivering it to the destination.  The default value is 5MB.
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
+	// CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	CloudwatchLoggingOptions *OpensearchConfigurationS3ConfigurationCloudwatchLoggingOptionsInitParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
-	// The compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
+	// Compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
 	CompressionFormat *string `json:"compressionFormat,omitempty" tf:"compression_format,omitempty"`
 
 	// Prefix added to failed records before writing them to S3. Not currently supported for redshift destination. This prefix appears immediately following the bucket name. For information about how to specify this prefix, see Custom Prefixes for Amazon S3 Objects.
 	ErrorOutputPrefix *string `json:"errorOutputPrefix,omitempty" tf:"error_output_prefix,omitempty"`
 
-	// Specifies the KMS key ARN the stream will use to encrypt data. If not set, no encryption will
-	// be used.
+	// KMS key ARN the stream will use to encrypt data. If not set, no encryption will be used.
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
-	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered S3 files. You can specify an extra prefix to be added in front of the time format prefix. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket
+	// Extra prefix added in front of the "YYYY/MM/DD/HH" time format prefix that is automatically used for delivered S3 files. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
+	// ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
@@ -2440,7 +2435,7 @@ type OpensearchConfigurationS3ConfigurationInitParameters struct {
 
 type OpensearchConfigurationS3ConfigurationObservation struct {
 
-	// The ARN of the S3 bucket
+	// ARN of the S3 bucket.
 	BucketArn *string `json:"bucketArn,omitempty" tf:"bucket_arn,omitempty"`
 
 	// Buffer incoming data for the specified period of time, in seconds between 0 to 60, before delivering it to the destination.  The default value is 60s.
@@ -2449,29 +2444,28 @@ type OpensearchConfigurationS3ConfigurationObservation struct {
 	// Buffer incoming data to the specified size, in MBs between 1 to 5, before delivering it to the destination.  The default value is 5MB.
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
+	// CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	CloudwatchLoggingOptions *OpensearchConfigurationS3ConfigurationCloudwatchLoggingOptionsObservation `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
-	// The compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
+	// Compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
 	CompressionFormat *string `json:"compressionFormat,omitempty" tf:"compression_format,omitempty"`
 
 	// Prefix added to failed records before writing them to S3. Not currently supported for redshift destination. This prefix appears immediately following the bucket name. For information about how to specify this prefix, see Custom Prefixes for Amazon S3 Objects.
 	ErrorOutputPrefix *string `json:"errorOutputPrefix,omitempty" tf:"error_output_prefix,omitempty"`
 
-	// Specifies the KMS key ARN the stream will use to encrypt data. If not set, no encryption will
-	// be used.
+	// KMS key ARN the stream will use to encrypt data. If not set, no encryption will be used.
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
-	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered S3 files. You can specify an extra prefix to be added in front of the time format prefix. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket
+	// Extra prefix added in front of the "YYYY/MM/DD/HH" time format prefix that is automatically used for delivered S3 files. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
+	// ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
 
 type OpensearchConfigurationS3ConfigurationParameters struct {
 
-	// The ARN of the S3 bucket
+	// ARN of the S3 bucket.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3/v1beta2.Bucket
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -2493,11 +2487,11 @@ type OpensearchConfigurationS3ConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
+	// CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	// +kubebuilder:validation:Optional
 	CloudwatchLoggingOptions *OpensearchConfigurationS3ConfigurationCloudwatchLoggingOptionsParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
-	// The compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
+	// Compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
 	// +kubebuilder:validation:Optional
 	CompressionFormat *string `json:"compressionFormat,omitempty" tf:"compression_format,omitempty"`
 
@@ -2505,16 +2499,15 @@ type OpensearchConfigurationS3ConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	ErrorOutputPrefix *string `json:"errorOutputPrefix,omitempty" tf:"error_output_prefix,omitempty"`
 
-	// Specifies the KMS key ARN the stream will use to encrypt data. If not set, no encryption will
-	// be used.
+	// KMS key ARN the stream will use to encrypt data. If not set, no encryption will be used.
 	// +kubebuilder:validation:Optional
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
-	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered S3 files. You can specify an extra prefix to be added in front of the time format prefix. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket
+	// Extra prefix added in front of the "YYYY/MM/DD/HH" time format prefix that is automatically used for delivered S3 files. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket.
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
+	// ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -2531,7 +2524,7 @@ type OpensearchConfigurationS3ConfigurationParameters struct {
 
 type OpensearchConfigurationVPCConfigInitParameters struct {
 
-	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
+	// ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
@@ -2544,7 +2537,7 @@ type OpensearchConfigurationVPCConfigInitParameters struct {
 	// +kubebuilder:validation:Optional
 	RoleArnSelector *v2.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
-	// A list of security group IDs to associate with Kinesis Firehose.
+	// List of security group IDs to associate with Kinesis Firehose.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +listType=set
@@ -2558,7 +2551,7 @@ type OpensearchConfigurationVPCConfigInitParameters struct {
 	// +kubebuilder:validation:Optional
 	SecurityGroupIdsSelector *v2.Selector `json:"securityGroupIdsSelector,omitempty" tf:"-"`
 
-	// A list of subnet IDs to associate with Kinesis Firehose.
+	// List of subnet IDs to associate with Kinesis Firehose.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +listType=set
@@ -2575,23 +2568,24 @@ type OpensearchConfigurationVPCConfigInitParameters struct {
 
 type OpensearchConfigurationVPCConfigObservation struct {
 
-	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
+	// ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
-	// A list of security group IDs to associate with Kinesis Firehose.
+	// List of security group IDs to associate with Kinesis Firehose.
 	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
-	// A list of subnet IDs to associate with Kinesis Firehose.
+	// List of subnet IDs to associate with Kinesis Firehose.
 	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
+	// ID of the VPC associated with the delivery stream.
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 }
 
 type OpensearchConfigurationVPCConfigParameters struct {
 
-	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
+	// ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -2605,7 +2599,7 @@ type OpensearchConfigurationVPCConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	RoleArnSelector *v2.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
-	// A list of security group IDs to associate with Kinesis Firehose.
+	// List of security group IDs to associate with Kinesis Firehose.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -2620,7 +2614,7 @@ type OpensearchConfigurationVPCConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	SecurityGroupIdsSelector *v2.Selector `json:"securityGroupIdsSelector,omitempty" tf:"-"`
 
-	// A list of subnet IDs to associate with Kinesis Firehose.
+	// List of subnet IDs to associate with Kinesis Firehose.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -2638,39 +2632,39 @@ type OpensearchConfigurationVPCConfigParameters struct {
 
 type OpensearchserverlessConfigurationCloudwatchLoggingOptionsInitParameters struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The CloudWatch group name for logging. This value is required if enabled is true.
+	// CloudWatch group name for logging. This value is required if enabled is true.
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
 
-	// The CloudWatch log stream name for logging. This value is required if enabled is true.
+	// CloudWatch log stream name for logging. This value is required if enabled is true.
 	LogStreamName *string `json:"logStreamName,omitempty" tf:"log_stream_name,omitempty"`
 }
 
 type OpensearchserverlessConfigurationCloudwatchLoggingOptionsObservation struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The CloudWatch group name for logging. This value is required if enabled is true.
+	// CloudWatch group name for logging. This value is required if enabled is true.
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
 
-	// The CloudWatch log stream name for logging. This value is required if enabled is true.
+	// CloudWatch log stream name for logging. This value is required if enabled is true.
 	LogStreamName *string `json:"logStreamName,omitempty" tf:"log_stream_name,omitempty"`
 }
 
 type OpensearchserverlessConfigurationCloudwatchLoggingOptionsParameters struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The CloudWatch group name for logging. This value is required if enabled is true.
+	// CloudWatch group name for logging. This value is required if enabled is true.
 	// +kubebuilder:validation:Optional
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
 
-	// The CloudWatch log stream name for logging. This value is required if enabled is true.
+	// CloudWatch log stream name for logging. This value is required if enabled is true.
 	// +kubebuilder:validation:Optional
 	LogStreamName *string `json:"logStreamName,omitempty" tf:"log_stream_name,omitempty"`
 }
@@ -2683,10 +2677,10 @@ type OpensearchserverlessConfigurationInitParameters struct {
 	// Buffer incoming data to the specified size, in MBs between 1 to 100, before delivering it to the destination.  The default value is 5MB.
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
+	// CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	CloudwatchLoggingOptions *OpensearchserverlessConfigurationCloudwatchLoggingOptionsInitParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
-	// The endpoint to use when communicating with the collection in the Serverless offering for Amazon OpenSearch Service.
+	// Endpoint to use when communicating with the collection in the Serverless offering for Amazon OpenSearch Service.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/opensearchserverless/v1beta1.Collection
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("collection_endpoint",true)
 	CollectionEndpoint *string `json:"collectionEndpoint,omitempty" tf:"collection_endpoint,omitempty"`
@@ -2699,10 +2693,10 @@ type OpensearchserverlessConfigurationInitParameters struct {
 	// +kubebuilder:validation:Optional
 	CollectionEndpointSelector *v2.Selector `json:"collectionEndpointSelector,omitempty" tf:"-"`
 
-	// The Serverless offering for Amazon OpenSearch Service index name.
+	// Serverless offering for Amazon OpenSearch Service index name.
 	IndexName *string `json:"indexName,omitempty" tf:"index_name,omitempty"`
 
-	// The data processing configuration.  See processing_configuration block below for details.
+	// Data processing configuration.  See processing_configuration block below for details.
 	ProcessingConfiguration *OpensearchserverlessConfigurationProcessingConfigurationInitParameters `json:"processingConfiguration,omitempty" tf:"processing_configuration,omitempty"`
 
 	// After an initial failure to deliver to the Serverless offering for Amazon OpenSearch Service, the total amount of time, in seconds between 0 to 7200, during which Kinesis Data Firehose retries delivery (including the first attempt).  After this time has elapsed, the failed documents are written to Amazon S3.  The default value is 300s.  There will be no retry if the value is 0.
@@ -2721,13 +2715,13 @@ type OpensearchserverlessConfigurationInitParameters struct {
 	// +kubebuilder:validation:Optional
 	RoleArnSelector *v2.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
-	// Defines how documents should be delivered to Amazon S3.  Valid values are FailedDocumentsOnly and AllDocuments.  Default value is FailedDocumentsOnly.
+	// How documents should be delivered to Amazon S3.  Valid values are FailedDocumentsOnly and AllDocuments.  Default value is FailedDocumentsOnly.
 	S3BackupMode *string `json:"s3BackupMode,omitempty" tf:"s3_backup_mode,omitempty"`
 
-	// The S3 Configuration. See s3_configuration block below for details.
+	// S3 Configuration. See s3_configuration block below for details.
 	S3Configuration *OpensearchserverlessConfigurationS3ConfigurationInitParameters `json:"s3Configuration,omitempty" tf:"s3_configuration,omitempty"`
 
-	// The VPC configuration for the delivery stream to connect to OpenSearch Serverless associated with the VPC. See vpc_config block below for details.
+	// VPC configuration for the delivery stream to connect to OpenSearch Serverless associated with the VPC. See vpc_config block below for details.
 	VPCConfig *OpensearchserverlessConfigurationVPCConfigInitParameters `json:"vpcConfig,omitempty" tf:"vpc_config,omitempty"`
 }
 
@@ -2739,16 +2733,16 @@ type OpensearchserverlessConfigurationObservation struct {
 	// Buffer incoming data to the specified size, in MBs between 1 to 100, before delivering it to the destination.  The default value is 5MB.
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
+	// CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	CloudwatchLoggingOptions *OpensearchserverlessConfigurationCloudwatchLoggingOptionsObservation `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
-	// The endpoint to use when communicating with the collection in the Serverless offering for Amazon OpenSearch Service.
+	// Endpoint to use when communicating with the collection in the Serverless offering for Amazon OpenSearch Service.
 	CollectionEndpoint *string `json:"collectionEndpoint,omitempty" tf:"collection_endpoint,omitempty"`
 
-	// The Serverless offering for Amazon OpenSearch Service index name.
+	// Serverless offering for Amazon OpenSearch Service index name.
 	IndexName *string `json:"indexName,omitempty" tf:"index_name,omitempty"`
 
-	// The data processing configuration.  See processing_configuration block below for details.
+	// Data processing configuration.  See processing_configuration block below for details.
 	ProcessingConfiguration *OpensearchserverlessConfigurationProcessingConfigurationObservation `json:"processingConfiguration,omitempty" tf:"processing_configuration,omitempty"`
 
 	// After an initial failure to deliver to the Serverless offering for Amazon OpenSearch Service, the total amount of time, in seconds between 0 to 7200, during which Kinesis Data Firehose retries delivery (including the first attempt).  After this time has elapsed, the failed documents are written to Amazon S3.  The default value is 300s.  There will be no retry if the value is 0.
@@ -2757,13 +2751,13 @@ type OpensearchserverlessConfigurationObservation struct {
 	// ARN of the IAM role to be assumed by Kinesis Data Firehose for calling the Serverless offering for Amazon OpenSearch Service Configuration API and for indexing documents.  The pattern needs to be arn:.*.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
-	// Defines how documents should be delivered to Amazon S3.  Valid values are FailedDocumentsOnly and AllDocuments.  Default value is FailedDocumentsOnly.
+	// How documents should be delivered to Amazon S3.  Valid values are FailedDocumentsOnly and AllDocuments.  Default value is FailedDocumentsOnly.
 	S3BackupMode *string `json:"s3BackupMode,omitempty" tf:"s3_backup_mode,omitempty"`
 
-	// The S3 Configuration. See s3_configuration block below for details.
+	// S3 Configuration. See s3_configuration block below for details.
 	S3Configuration *OpensearchserverlessConfigurationS3ConfigurationObservation `json:"s3Configuration,omitempty" tf:"s3_configuration,omitempty"`
 
-	// The VPC configuration for the delivery stream to connect to OpenSearch Serverless associated with the VPC. See vpc_config block below for details.
+	// VPC configuration for the delivery stream to connect to OpenSearch Serverless associated with the VPC. See vpc_config block below for details.
 	VPCConfig *OpensearchserverlessConfigurationVPCConfigObservation `json:"vpcConfig,omitempty" tf:"vpc_config,omitempty"`
 }
 
@@ -2777,11 +2771,11 @@ type OpensearchserverlessConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
+	// CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	// +kubebuilder:validation:Optional
 	CloudwatchLoggingOptions *OpensearchserverlessConfigurationCloudwatchLoggingOptionsParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
-	// The endpoint to use when communicating with the collection in the Serverless offering for Amazon OpenSearch Service.
+	// Endpoint to use when communicating with the collection in the Serverless offering for Amazon OpenSearch Service.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/opensearchserverless/v1beta1.Collection
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("collection_endpoint",true)
 	// +kubebuilder:validation:Optional
@@ -2795,11 +2789,11 @@ type OpensearchserverlessConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	CollectionEndpointSelector *v2.Selector `json:"collectionEndpointSelector,omitempty" tf:"-"`
 
-	// The Serverless offering for Amazon OpenSearch Service index name.
+	// Serverless offering for Amazon OpenSearch Service index name.
 	// +kubebuilder:validation:Optional
 	IndexName *string `json:"indexName" tf:"index_name,omitempty"`
 
-	// The data processing configuration.  See processing_configuration block below for details.
+	// Data processing configuration.  See processing_configuration block below for details.
 	// +kubebuilder:validation:Optional
 	ProcessingConfiguration *OpensearchserverlessConfigurationProcessingConfigurationParameters `json:"processingConfiguration,omitempty" tf:"processing_configuration,omitempty"`
 
@@ -2821,73 +2815,73 @@ type OpensearchserverlessConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	RoleArnSelector *v2.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
-	// Defines how documents should be delivered to Amazon S3.  Valid values are FailedDocumentsOnly and AllDocuments.  Default value is FailedDocumentsOnly.
+	// How documents should be delivered to Amazon S3.  Valid values are FailedDocumentsOnly and AllDocuments.  Default value is FailedDocumentsOnly.
 	// +kubebuilder:validation:Optional
 	S3BackupMode *string `json:"s3BackupMode,omitempty" tf:"s3_backup_mode,omitempty"`
 
-	// The S3 Configuration. See s3_configuration block below for details.
+	// S3 Configuration. See s3_configuration block below for details.
 	// +kubebuilder:validation:Optional
 	S3Configuration *OpensearchserverlessConfigurationS3ConfigurationParameters `json:"s3Configuration" tf:"s3_configuration,omitempty"`
 
-	// The VPC configuration for the delivery stream to connect to OpenSearch Serverless associated with the VPC. See vpc_config block below for details.
+	// VPC configuration for the delivery stream to connect to OpenSearch Serverless associated with the VPC. See vpc_config block below for details.
 	// +kubebuilder:validation:Optional
 	VPCConfig *OpensearchserverlessConfigurationVPCConfigParameters `json:"vpcConfig,omitempty" tf:"vpc_config,omitempty"`
 }
 
 type OpensearchserverlessConfigurationProcessingConfigurationInitParameters struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Specifies the data processors as multiple blocks. See processors block below for details.
+	// Data processors as multiple blocks. See processors block below for details.
 	Processors []OpensearchserverlessConfigurationProcessingConfigurationProcessorsInitParameters `json:"processors,omitempty" tf:"processors,omitempty"`
 }
 
 type OpensearchserverlessConfigurationProcessingConfigurationObservation struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Specifies the data processors as multiple blocks. See processors block below for details.
+	// Data processors as multiple blocks. See processors block below for details.
 	Processors []OpensearchserverlessConfigurationProcessingConfigurationProcessorsObservation `json:"processors,omitempty" tf:"processors,omitempty"`
 }
 
 type OpensearchserverlessConfigurationProcessingConfigurationParameters struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Specifies the data processors as multiple blocks. See processors block below for details.
+	// Data processors as multiple blocks. See processors block below for details.
 	// +kubebuilder:validation:Optional
 	Processors []OpensearchserverlessConfigurationProcessingConfigurationProcessorsParameters `json:"processors,omitempty" tf:"processors,omitempty"`
 }
 
 type OpensearchserverlessConfigurationProcessingConfigurationProcessorsInitParameters struct {
 
-	// Specifies the processor parameters as multiple blocks. See parameters block below for details.
+	// Processor parameters as multiple blocks. See parameters block below for details.
 	Parameters []OpensearchserverlessConfigurationProcessingConfigurationProcessorsParametersInitParameters `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
-	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord, Decompression, CloudWatchLogProcessing. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
+	// Type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord, Decompression, CloudWatchLogProcessing. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type OpensearchserverlessConfigurationProcessingConfigurationProcessorsObservation struct {
 
-	// Specifies the processor parameters as multiple blocks. See parameters block below for details.
+	// Processor parameters as multiple blocks. See parameters block below for details.
 	Parameters []OpensearchserverlessConfigurationProcessingConfigurationProcessorsParametersObservation `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
-	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord, Decompression, CloudWatchLogProcessing. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
+	// Type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord, Decompression, CloudWatchLogProcessing. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type OpensearchserverlessConfigurationProcessingConfigurationProcessorsParameters struct {
 
-	// Specifies the processor parameters as multiple blocks. See parameters block below for details.
+	// Processor parameters as multiple blocks. See parameters block below for details.
 	// +kubebuilder:validation:Optional
 	Parameters []OpensearchserverlessConfigurationProcessingConfigurationProcessorsParametersParameters `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
-	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord, Decompression, CloudWatchLogProcessing. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
+	// Type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord, Decompression, CloudWatchLogProcessing. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
 }
@@ -2923,46 +2917,46 @@ type OpensearchserverlessConfigurationProcessingConfigurationProcessorsParameter
 
 type OpensearchserverlessConfigurationS3ConfigurationCloudwatchLoggingOptionsInitParameters struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The CloudWatch group name for logging. This value is required if enabled is true.
+	// CloudWatch group name for logging. This value is required if enabled is true.
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
 
-	// The CloudWatch log stream name for logging. This value is required if enabled is true.
+	// CloudWatch log stream name for logging. This value is required if enabled is true.
 	LogStreamName *string `json:"logStreamName,omitempty" tf:"log_stream_name,omitempty"`
 }
 
 type OpensearchserverlessConfigurationS3ConfigurationCloudwatchLoggingOptionsObservation struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The CloudWatch group name for logging. This value is required if enabled is true.
+	// CloudWatch group name for logging. This value is required if enabled is true.
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
 
-	// The CloudWatch log stream name for logging. This value is required if enabled is true.
+	// CloudWatch log stream name for logging. This value is required if enabled is true.
 	LogStreamName *string `json:"logStreamName,omitempty" tf:"log_stream_name,omitempty"`
 }
 
 type OpensearchserverlessConfigurationS3ConfigurationCloudwatchLoggingOptionsParameters struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The CloudWatch group name for logging. This value is required if enabled is true.
+	// CloudWatch group name for logging. This value is required if enabled is true.
 	// +kubebuilder:validation:Optional
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
 
-	// The CloudWatch log stream name for logging. This value is required if enabled is true.
+	// CloudWatch log stream name for logging. This value is required if enabled is true.
 	// +kubebuilder:validation:Optional
 	LogStreamName *string `json:"logStreamName,omitempty" tf:"log_stream_name,omitempty"`
 }
 
 type OpensearchserverlessConfigurationS3ConfigurationInitParameters struct {
 
-	// The ARN of the S3 bucket
+	// ARN of the S3 bucket.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3/v1beta2.Bucket
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	BucketArn *string `json:"bucketArn,omitempty" tf:"bucket_arn,omitempty"`
@@ -2981,23 +2975,22 @@ type OpensearchserverlessConfigurationS3ConfigurationInitParameters struct {
 	// Buffer incoming data to the specified size, in MBs between 1 to 5, before delivering it to the destination.  The default value is 5MB.
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
+	// CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	CloudwatchLoggingOptions *OpensearchserverlessConfigurationS3ConfigurationCloudwatchLoggingOptionsInitParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
-	// The compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
+	// Compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
 	CompressionFormat *string `json:"compressionFormat,omitempty" tf:"compression_format,omitempty"`
 
 	// Prefix added to failed records before writing them to S3. Not currently supported for redshift destination. This prefix appears immediately following the bucket name. For information about how to specify this prefix, see Custom Prefixes for Amazon S3 Objects.
 	ErrorOutputPrefix *string `json:"errorOutputPrefix,omitempty" tf:"error_output_prefix,omitempty"`
 
-	// Specifies the KMS key ARN the stream will use to encrypt data. If not set, no encryption will
-	// be used.
+	// KMS key ARN the stream will use to encrypt data. If not set, no encryption will be used.
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
-	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered S3 files. You can specify an extra prefix to be added in front of the time format prefix. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket
+	// Extra prefix added in front of the "YYYY/MM/DD/HH" time format prefix that is automatically used for delivered S3 files. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
+	// ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
@@ -3013,7 +3006,7 @@ type OpensearchserverlessConfigurationS3ConfigurationInitParameters struct {
 
 type OpensearchserverlessConfigurationS3ConfigurationObservation struct {
 
-	// The ARN of the S3 bucket
+	// ARN of the S3 bucket.
 	BucketArn *string `json:"bucketArn,omitempty" tf:"bucket_arn,omitempty"`
 
 	// Buffer incoming data for the specified period of time, in seconds between 0 to 60, before delivering it to the destination.  The default value is 60s.
@@ -3022,29 +3015,28 @@ type OpensearchserverlessConfigurationS3ConfigurationObservation struct {
 	// Buffer incoming data to the specified size, in MBs between 1 to 5, before delivering it to the destination.  The default value is 5MB.
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
+	// CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	CloudwatchLoggingOptions *OpensearchserverlessConfigurationS3ConfigurationCloudwatchLoggingOptionsObservation `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
-	// The compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
+	// Compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
 	CompressionFormat *string `json:"compressionFormat,omitempty" tf:"compression_format,omitempty"`
 
 	// Prefix added to failed records before writing them to S3. Not currently supported for redshift destination. This prefix appears immediately following the bucket name. For information about how to specify this prefix, see Custom Prefixes for Amazon S3 Objects.
 	ErrorOutputPrefix *string `json:"errorOutputPrefix,omitempty" tf:"error_output_prefix,omitempty"`
 
-	// Specifies the KMS key ARN the stream will use to encrypt data. If not set, no encryption will
-	// be used.
+	// KMS key ARN the stream will use to encrypt data. If not set, no encryption will be used.
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
-	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered S3 files. You can specify an extra prefix to be added in front of the time format prefix. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket
+	// Extra prefix added in front of the "YYYY/MM/DD/HH" time format prefix that is automatically used for delivered S3 files. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
+	// ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
 
 type OpensearchserverlessConfigurationS3ConfigurationParameters struct {
 
-	// The ARN of the S3 bucket
+	// ARN of the S3 bucket.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3/v1beta2.Bucket
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -3066,11 +3058,11 @@ type OpensearchserverlessConfigurationS3ConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
+	// CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	// +kubebuilder:validation:Optional
 	CloudwatchLoggingOptions *OpensearchserverlessConfigurationS3ConfigurationCloudwatchLoggingOptionsParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
-	// The compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
+	// Compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
 	// +kubebuilder:validation:Optional
 	CompressionFormat *string `json:"compressionFormat,omitempty" tf:"compression_format,omitempty"`
 
@@ -3078,16 +3070,15 @@ type OpensearchserverlessConfigurationS3ConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	ErrorOutputPrefix *string `json:"errorOutputPrefix,omitempty" tf:"error_output_prefix,omitempty"`
 
-	// Specifies the KMS key ARN the stream will use to encrypt data. If not set, no encryption will
-	// be used.
+	// KMS key ARN the stream will use to encrypt data. If not set, no encryption will be used.
 	// +kubebuilder:validation:Optional
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
-	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered S3 files. You can specify an extra prefix to be added in front of the time format prefix. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket
+	// Extra prefix added in front of the "YYYY/MM/DD/HH" time format prefix that is automatically used for delivered S3 files. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket.
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
+	// ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -3104,46 +3095,47 @@ type OpensearchserverlessConfigurationS3ConfigurationParameters struct {
 
 type OpensearchserverlessConfigurationVPCConfigInitParameters struct {
 
-	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
+	// ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
-	// A list of security group IDs to associate with Kinesis Firehose.
+	// List of security group IDs to associate with Kinesis Firehose.
 	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
-	// A list of subnet IDs to associate with Kinesis Firehose.
+	// List of subnet IDs to associate with Kinesis Firehose.
 	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 }
 
 type OpensearchserverlessConfigurationVPCConfigObservation struct {
 
-	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
+	// ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
-	// A list of security group IDs to associate with Kinesis Firehose.
+	// List of security group IDs to associate with Kinesis Firehose.
 	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
-	// A list of subnet IDs to associate with Kinesis Firehose.
+	// List of subnet IDs to associate with Kinesis Firehose.
 	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
+	// ID of the VPC associated with the delivery stream.
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 }
 
 type OpensearchserverlessConfigurationVPCConfigParameters struct {
 
-	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
+	// ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions.
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn" tf:"role_arn,omitempty"`
 
-	// A list of security group IDs to associate with Kinesis Firehose.
+	// List of security group IDs to associate with Kinesis Firehose.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds" tf:"security_group_ids,omitempty"`
 
-	// A list of subnet IDs to associate with Kinesis Firehose.
+	// List of subnet IDs to associate with Kinesis Firehose.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	SubnetIds []*string `json:"subnetIds" tf:"subnet_ids,omitempty"`
@@ -3151,89 +3143,89 @@ type OpensearchserverlessConfigurationVPCConfigParameters struct {
 
 type OrcSerDeInitParameters struct {
 
-	// The Hadoop Distributed File System (HDFS) block size. This is useful if you intend to copy the data from Amazon S3 to HDFS before querying. The default is 256 MiB and the minimum is 64 MiB. Kinesis Data Firehose uses this value for padding calculations.
+	// Hadoop Distributed File System (HDFS) block size. This is useful if you intend to copy the data from Amazon S3 to HDFS before querying. The default is 256 MiB and the minimum is 64 MiB. Kinesis Data Firehose uses this value for padding calculations.
 	BlockSizeBytes *float64 `json:"blockSizeBytes,omitempty" tf:"block_size_bytes,omitempty"`
 
-	// A list of column names for which you want Kinesis Data Firehose to create bloom filters.
+	// List of column names for which you want Kinesis Data Firehose to create bloom filters.
 	BloomFilterColumns []*string `json:"bloomFilterColumns,omitempty" tf:"bloom_filter_columns,omitempty"`
 
-	// The Bloom filter false positive probability (FPP). The lower the FPP, the bigger the Bloom filter. The default value is 0.05, the minimum is 0, and the maximum is 1.
+	// Bloom filter false positive probability (FPP). The lower the FPP, the bigger the Bloom filter. The default value is 0.05, the minimum is 0, and the maximum is 1.
 	BloomFilterFalsePositiveProbability *float64 `json:"bloomFilterFalsePositiveProbability,omitempty" tf:"bloom_filter_false_positive_probability,omitempty"`
 
-	// The compression code to use over data blocks. The possible values are UNCOMPRESSED, SNAPPY, and GZIP, with the default being SNAPPY. Use SNAPPY for higher decompression speed. Use GZIP if the compression ratio is more important than speed.
+	// Compression code to use over data blocks. The possible values are UNCOMPRESSED, SNAPPY, and GZIP, with the default being SNAPPY. Use SNAPPY for higher decompression speed. Use GZIP if the compression ratio is more important than speed.
 	Compression *string `json:"compression,omitempty" tf:"compression,omitempty"`
 
-	// A float that represents the fraction of the total number of non-null rows. To turn off dictionary encoding, set this fraction to a number that is less than the number of distinct keys in a dictionary. To always use dictionary encoding, set this threshold to 1.
+	// Float that represents the fraction of the total number of non-null rows. To turn off dictionary encoding, set this fraction to a number that is less than the number of distinct keys in a dictionary. To always use dictionary encoding, set this threshold to 1.
 	DictionaryKeyThreshold *float64 `json:"dictionaryKeyThreshold,omitempty" tf:"dictionary_key_threshold,omitempty"`
 
 	// Set this to true to indicate that you want stripes to be padded to the HDFS block boundaries. This is useful if you intend to copy the data from Amazon S3 to HDFS before querying. The default is false.
 	EnablePadding *bool `json:"enablePadding,omitempty" tf:"enable_padding,omitempty"`
 
-	// The version of the file to write. The possible values are V0_11 and V0_12. The default is V0_12.
+	// Version of the file to write. The possible values are V0_11 and V0_12. The default is V0_12.
 	FormatVersion *string `json:"formatVersion,omitempty" tf:"format_version,omitempty"`
 
-	// A float between 0 and 1 that defines the tolerance for block padding as a decimal fraction of stripe size. The default value is 0.05, which means 5 percent of stripe size. For the default values of 64 MiB ORC stripes and 256 MiB HDFS blocks, the default block padding tolerance of 5 percent reserves a maximum of 3.2 MiB for padding within the 256 MiB block. In such a case, if the available size within the block is more than 3.2 MiB, a new, smaller stripe is inserted to fit within that space. This ensures that no stripe crosses block boundaries and causes remote reads within a node-local task. Kinesis Data Firehose ignores this parameter when enable_padding is false.
+	// Float between 0 and 1 that defines the tolerance for block padding as a decimal fraction of stripe size. The default value is 0.05, which means 5 percent of stripe size. For the default values of 64 MiB ORC stripes and 256 MiB HDFS blocks, the default block padding tolerance of 5 percent reserves a maximum of 3.2 MiB for padding within the 256 MiB block. In such a case, if the available size within the block is more than 3.2 MiB, a new, smaller stripe is inserted to fit within that space. This ensures that no stripe crosses block boundaries and causes remote reads within a node-local task. Kinesis Data Firehose ignores this parameter when enable_padding is false.
 	PaddingTolerance *float64 `json:"paddingTolerance,omitempty" tf:"padding_tolerance,omitempty"`
 
-	// The number of rows between index entries. The default is 10000 and the minimum is 1000.
+	// Number of rows between index entries. The default is 10000 and the minimum is 1000.
 	RowIndexStride *float64 `json:"rowIndexStride,omitempty" tf:"row_index_stride,omitempty"`
 
-	// The number of bytes in each stripe. The default is 64 MiB and the minimum is 8 MiB.
+	// Number of bytes in each stripe. The default is 64 MiB and the minimum is 8 MiB.
 	StripeSizeBytes *float64 `json:"stripeSizeBytes,omitempty" tf:"stripe_size_bytes,omitempty"`
 }
 
 type OrcSerDeObservation struct {
 
-	// The Hadoop Distributed File System (HDFS) block size. This is useful if you intend to copy the data from Amazon S3 to HDFS before querying. The default is 256 MiB and the minimum is 64 MiB. Kinesis Data Firehose uses this value for padding calculations.
+	// Hadoop Distributed File System (HDFS) block size. This is useful if you intend to copy the data from Amazon S3 to HDFS before querying. The default is 256 MiB and the minimum is 64 MiB. Kinesis Data Firehose uses this value for padding calculations.
 	BlockSizeBytes *float64 `json:"blockSizeBytes,omitempty" tf:"block_size_bytes,omitempty"`
 
-	// A list of column names for which you want Kinesis Data Firehose to create bloom filters.
+	// List of column names for which you want Kinesis Data Firehose to create bloom filters.
 	BloomFilterColumns []*string `json:"bloomFilterColumns,omitempty" tf:"bloom_filter_columns,omitempty"`
 
-	// The Bloom filter false positive probability (FPP). The lower the FPP, the bigger the Bloom filter. The default value is 0.05, the minimum is 0, and the maximum is 1.
+	// Bloom filter false positive probability (FPP). The lower the FPP, the bigger the Bloom filter. The default value is 0.05, the minimum is 0, and the maximum is 1.
 	BloomFilterFalsePositiveProbability *float64 `json:"bloomFilterFalsePositiveProbability,omitempty" tf:"bloom_filter_false_positive_probability,omitempty"`
 
-	// The compression code to use over data blocks. The possible values are UNCOMPRESSED, SNAPPY, and GZIP, with the default being SNAPPY. Use SNAPPY for higher decompression speed. Use GZIP if the compression ratio is more important than speed.
+	// Compression code to use over data blocks. The possible values are UNCOMPRESSED, SNAPPY, and GZIP, with the default being SNAPPY. Use SNAPPY for higher decompression speed. Use GZIP if the compression ratio is more important than speed.
 	Compression *string `json:"compression,omitempty" tf:"compression,omitempty"`
 
-	// A float that represents the fraction of the total number of non-null rows. To turn off dictionary encoding, set this fraction to a number that is less than the number of distinct keys in a dictionary. To always use dictionary encoding, set this threshold to 1.
+	// Float that represents the fraction of the total number of non-null rows. To turn off dictionary encoding, set this fraction to a number that is less than the number of distinct keys in a dictionary. To always use dictionary encoding, set this threshold to 1.
 	DictionaryKeyThreshold *float64 `json:"dictionaryKeyThreshold,omitempty" tf:"dictionary_key_threshold,omitempty"`
 
 	// Set this to true to indicate that you want stripes to be padded to the HDFS block boundaries. This is useful if you intend to copy the data from Amazon S3 to HDFS before querying. The default is false.
 	EnablePadding *bool `json:"enablePadding,omitempty" tf:"enable_padding,omitempty"`
 
-	// The version of the file to write. The possible values are V0_11 and V0_12. The default is V0_12.
+	// Version of the file to write. The possible values are V0_11 and V0_12. The default is V0_12.
 	FormatVersion *string `json:"formatVersion,omitempty" tf:"format_version,omitempty"`
 
-	// A float between 0 and 1 that defines the tolerance for block padding as a decimal fraction of stripe size. The default value is 0.05, which means 5 percent of stripe size. For the default values of 64 MiB ORC stripes and 256 MiB HDFS blocks, the default block padding tolerance of 5 percent reserves a maximum of 3.2 MiB for padding within the 256 MiB block. In such a case, if the available size within the block is more than 3.2 MiB, a new, smaller stripe is inserted to fit within that space. This ensures that no stripe crosses block boundaries and causes remote reads within a node-local task. Kinesis Data Firehose ignores this parameter when enable_padding is false.
+	// Float between 0 and 1 that defines the tolerance for block padding as a decimal fraction of stripe size. The default value is 0.05, which means 5 percent of stripe size. For the default values of 64 MiB ORC stripes and 256 MiB HDFS blocks, the default block padding tolerance of 5 percent reserves a maximum of 3.2 MiB for padding within the 256 MiB block. In such a case, if the available size within the block is more than 3.2 MiB, a new, smaller stripe is inserted to fit within that space. This ensures that no stripe crosses block boundaries and causes remote reads within a node-local task. Kinesis Data Firehose ignores this parameter when enable_padding is false.
 	PaddingTolerance *float64 `json:"paddingTolerance,omitempty" tf:"padding_tolerance,omitempty"`
 
-	// The number of rows between index entries. The default is 10000 and the minimum is 1000.
+	// Number of rows between index entries. The default is 10000 and the minimum is 1000.
 	RowIndexStride *float64 `json:"rowIndexStride,omitempty" tf:"row_index_stride,omitempty"`
 
-	// The number of bytes in each stripe. The default is 64 MiB and the minimum is 8 MiB.
+	// Number of bytes in each stripe. The default is 64 MiB and the minimum is 8 MiB.
 	StripeSizeBytes *float64 `json:"stripeSizeBytes,omitempty" tf:"stripe_size_bytes,omitempty"`
 }
 
 type OrcSerDeParameters struct {
 
-	// The Hadoop Distributed File System (HDFS) block size. This is useful if you intend to copy the data from Amazon S3 to HDFS before querying. The default is 256 MiB and the minimum is 64 MiB. Kinesis Data Firehose uses this value for padding calculations.
+	// Hadoop Distributed File System (HDFS) block size. This is useful if you intend to copy the data from Amazon S3 to HDFS before querying. The default is 256 MiB and the minimum is 64 MiB. Kinesis Data Firehose uses this value for padding calculations.
 	// +kubebuilder:validation:Optional
 	BlockSizeBytes *float64 `json:"blockSizeBytes,omitempty" tf:"block_size_bytes,omitempty"`
 
-	// A list of column names for which you want Kinesis Data Firehose to create bloom filters.
+	// List of column names for which you want Kinesis Data Firehose to create bloom filters.
 	// +kubebuilder:validation:Optional
 	BloomFilterColumns []*string `json:"bloomFilterColumns,omitempty" tf:"bloom_filter_columns,omitempty"`
 
-	// The Bloom filter false positive probability (FPP). The lower the FPP, the bigger the Bloom filter. The default value is 0.05, the minimum is 0, and the maximum is 1.
+	// Bloom filter false positive probability (FPP). The lower the FPP, the bigger the Bloom filter. The default value is 0.05, the minimum is 0, and the maximum is 1.
 	// +kubebuilder:validation:Optional
 	BloomFilterFalsePositiveProbability *float64 `json:"bloomFilterFalsePositiveProbability,omitempty" tf:"bloom_filter_false_positive_probability,omitempty"`
 
-	// The compression code to use over data blocks. The possible values are UNCOMPRESSED, SNAPPY, and GZIP, with the default being SNAPPY. Use SNAPPY for higher decompression speed. Use GZIP if the compression ratio is more important than speed.
+	// Compression code to use over data blocks. The possible values are UNCOMPRESSED, SNAPPY, and GZIP, with the default being SNAPPY. Use SNAPPY for higher decompression speed. Use GZIP if the compression ratio is more important than speed.
 	// +kubebuilder:validation:Optional
 	Compression *string `json:"compression,omitempty" tf:"compression,omitempty"`
 
-	// A float that represents the fraction of the total number of non-null rows. To turn off dictionary encoding, set this fraction to a number that is less than the number of distinct keys in a dictionary. To always use dictionary encoding, set this threshold to 1.
+	// Float that represents the fraction of the total number of non-null rows. To turn off dictionary encoding, set this fraction to a number that is less than the number of distinct keys in a dictionary. To always use dictionary encoding, set this threshold to 1.
 	// +kubebuilder:validation:Optional
 	DictionaryKeyThreshold *float64 `json:"dictionaryKeyThreshold,omitempty" tf:"dictionary_key_threshold,omitempty"`
 
@@ -3241,38 +3233,38 @@ type OrcSerDeParameters struct {
 	// +kubebuilder:validation:Optional
 	EnablePadding *bool `json:"enablePadding,omitempty" tf:"enable_padding,omitempty"`
 
-	// The version of the file to write. The possible values are V0_11 and V0_12. The default is V0_12.
+	// Version of the file to write. The possible values are V0_11 and V0_12. The default is V0_12.
 	// +kubebuilder:validation:Optional
 	FormatVersion *string `json:"formatVersion,omitempty" tf:"format_version,omitempty"`
 
-	// A float between 0 and 1 that defines the tolerance for block padding as a decimal fraction of stripe size. The default value is 0.05, which means 5 percent of stripe size. For the default values of 64 MiB ORC stripes and 256 MiB HDFS blocks, the default block padding tolerance of 5 percent reserves a maximum of 3.2 MiB for padding within the 256 MiB block. In such a case, if the available size within the block is more than 3.2 MiB, a new, smaller stripe is inserted to fit within that space. This ensures that no stripe crosses block boundaries and causes remote reads within a node-local task. Kinesis Data Firehose ignores this parameter when enable_padding is false.
+	// Float between 0 and 1 that defines the tolerance for block padding as a decimal fraction of stripe size. The default value is 0.05, which means 5 percent of stripe size. For the default values of 64 MiB ORC stripes and 256 MiB HDFS blocks, the default block padding tolerance of 5 percent reserves a maximum of 3.2 MiB for padding within the 256 MiB block. In such a case, if the available size within the block is more than 3.2 MiB, a new, smaller stripe is inserted to fit within that space. This ensures that no stripe crosses block boundaries and causes remote reads within a node-local task. Kinesis Data Firehose ignores this parameter when enable_padding is false.
 	// +kubebuilder:validation:Optional
 	PaddingTolerance *float64 `json:"paddingTolerance,omitempty" tf:"padding_tolerance,omitempty"`
 
-	// The number of rows between index entries. The default is 10000 and the minimum is 1000.
+	// Number of rows between index entries. The default is 10000 and the minimum is 1000.
 	// +kubebuilder:validation:Optional
 	RowIndexStride *float64 `json:"rowIndexStride,omitempty" tf:"row_index_stride,omitempty"`
 
-	// The number of bytes in each stripe. The default is 64 MiB and the minimum is 8 MiB.
+	// Number of bytes in each stripe. The default is 64 MiB and the minimum is 8 MiB.
 	// +kubebuilder:validation:Optional
 	StripeSizeBytes *float64 `json:"stripeSizeBytes,omitempty" tf:"stripe_size_bytes,omitempty"`
 }
 
 type OutputFormatConfigurationInitParameters struct {
 
-	// Specifies which serializer to use. You can choose either the ORC SerDe or the Parquet SerDe. See serializer block below for details.
+	// Which serializer to use. You can choose either the ORC SerDe or the Parquet SerDe. See serializer block below for details.
 	Serializer *SerializerInitParameters `json:"serializer,omitempty" tf:"serializer,omitempty"`
 }
 
 type OutputFormatConfigurationObservation struct {
 
-	// Specifies which serializer to use. You can choose either the ORC SerDe or the Parquet SerDe. See serializer block below for details.
+	// Which serializer to use. You can choose either the ORC SerDe or the Parquet SerDe. See serializer block below for details.
 	Serializer *SerializerObservation `json:"serializer,omitempty" tf:"serializer,omitempty"`
 }
 
 type OutputFormatConfigurationParameters struct {
 
-	// Specifies which serializer to use. You can choose either the ORC SerDe or the Parquet SerDe. See serializer block below for details.
+	// Which serializer to use. You can choose either the ORC SerDe or the Parquet SerDe. See serializer block below for details.
 	// +kubebuilder:validation:Optional
 	Serializer *SerializerParameters `json:"serializer" tf:"serializer,omitempty"`
 }
@@ -3308,127 +3300,127 @@ type ParametersParameters struct {
 
 type ParquetSerDeInitParameters struct {
 
-	// The Hadoop Distributed File System (HDFS) block size. This is useful if you intend to copy the data from Amazon S3 to HDFS before querying. The default is 256 MiB and the minimum is 64 MiB. Kinesis Data Firehose uses this value for padding calculations.
+	// Hadoop Distributed File System (HDFS) block size. This is useful if you intend to copy the data from Amazon S3 to HDFS before querying. The default is 256 MiB and the minimum is 64 MiB. Kinesis Data Firehose uses this value for padding calculations.
 	BlockSizeBytes *float64 `json:"blockSizeBytes,omitempty" tf:"block_size_bytes,omitempty"`
 
-	// The compression code to use over data blocks. The possible values are UNCOMPRESSED, SNAPPY, and GZIP, with the default being SNAPPY. Use SNAPPY for higher decompression speed. Use GZIP if the compression ratio is more important than speed.
+	// Compression code to use over data blocks. The possible values are UNCOMPRESSED, SNAPPY, and GZIP, with the default being SNAPPY. Use SNAPPY for higher decompression speed. Use GZIP if the compression ratio is more important than speed.
 	Compression *string `json:"compression,omitempty" tf:"compression,omitempty"`
 
-	// Indicates whether to enable dictionary compression.
+	// Whether to enable dictionary compression.
 	EnableDictionaryCompression *bool `json:"enableDictionaryCompression,omitempty" tf:"enable_dictionary_compression,omitempty"`
 
-	// The maximum amount of padding to apply. This is useful if you intend to copy the data from Amazon S3 to HDFS before querying. The default is 0.
+	// Maximum amount of padding to apply. This is useful if you intend to copy the data from Amazon S3 to HDFS before querying. The default is 0.
 	MaxPaddingBytes *float64 `json:"maxPaddingBytes,omitempty" tf:"max_padding_bytes,omitempty"`
 
-	// The Parquet page size. Column chunks are divided into pages. A page is conceptually an indivisible unit (in terms of compression and encoding). The minimum value is 64 KiB and the default is 1 MiB.
+	// Parquet page size. Column chunks are divided into pages. A page is conceptually an indivisible unit (in terms of compression and encoding). The minimum value is 64 KiB and the default is 1 MiB.
 	PageSizeBytes *float64 `json:"pageSizeBytes,omitempty" tf:"page_size_bytes,omitempty"`
 
-	// Indicates the version of row format to output. The possible values are V1 and V2. The default is V1.
+	// Version of row format to output. The possible values are V1 and V2. The default is V1.
 	WriterVersion *string `json:"writerVersion,omitempty" tf:"writer_version,omitempty"`
 }
 
 type ParquetSerDeObservation struct {
 
-	// The Hadoop Distributed File System (HDFS) block size. This is useful if you intend to copy the data from Amazon S3 to HDFS before querying. The default is 256 MiB and the minimum is 64 MiB. Kinesis Data Firehose uses this value for padding calculations.
+	// Hadoop Distributed File System (HDFS) block size. This is useful if you intend to copy the data from Amazon S3 to HDFS before querying. The default is 256 MiB and the minimum is 64 MiB. Kinesis Data Firehose uses this value for padding calculations.
 	BlockSizeBytes *float64 `json:"blockSizeBytes,omitempty" tf:"block_size_bytes,omitempty"`
 
-	// The compression code to use over data blocks. The possible values are UNCOMPRESSED, SNAPPY, and GZIP, with the default being SNAPPY. Use SNAPPY for higher decompression speed. Use GZIP if the compression ratio is more important than speed.
+	// Compression code to use over data blocks. The possible values are UNCOMPRESSED, SNAPPY, and GZIP, with the default being SNAPPY. Use SNAPPY for higher decompression speed. Use GZIP if the compression ratio is more important than speed.
 	Compression *string `json:"compression,omitempty" tf:"compression,omitempty"`
 
-	// Indicates whether to enable dictionary compression.
+	// Whether to enable dictionary compression.
 	EnableDictionaryCompression *bool `json:"enableDictionaryCompression,omitempty" tf:"enable_dictionary_compression,omitempty"`
 
-	// The maximum amount of padding to apply. This is useful if you intend to copy the data from Amazon S3 to HDFS before querying. The default is 0.
+	// Maximum amount of padding to apply. This is useful if you intend to copy the data from Amazon S3 to HDFS before querying. The default is 0.
 	MaxPaddingBytes *float64 `json:"maxPaddingBytes,omitempty" tf:"max_padding_bytes,omitempty"`
 
-	// The Parquet page size. Column chunks are divided into pages. A page is conceptually an indivisible unit (in terms of compression and encoding). The minimum value is 64 KiB and the default is 1 MiB.
+	// Parquet page size. Column chunks are divided into pages. A page is conceptually an indivisible unit (in terms of compression and encoding). The minimum value is 64 KiB and the default is 1 MiB.
 	PageSizeBytes *float64 `json:"pageSizeBytes,omitempty" tf:"page_size_bytes,omitempty"`
 
-	// Indicates the version of row format to output. The possible values are V1 and V2. The default is V1.
+	// Version of row format to output. The possible values are V1 and V2. The default is V1.
 	WriterVersion *string `json:"writerVersion,omitempty" tf:"writer_version,omitempty"`
 }
 
 type ParquetSerDeParameters struct {
 
-	// The Hadoop Distributed File System (HDFS) block size. This is useful if you intend to copy the data from Amazon S3 to HDFS before querying. The default is 256 MiB and the minimum is 64 MiB. Kinesis Data Firehose uses this value for padding calculations.
+	// Hadoop Distributed File System (HDFS) block size. This is useful if you intend to copy the data from Amazon S3 to HDFS before querying. The default is 256 MiB and the minimum is 64 MiB. Kinesis Data Firehose uses this value for padding calculations.
 	// +kubebuilder:validation:Optional
 	BlockSizeBytes *float64 `json:"blockSizeBytes,omitempty" tf:"block_size_bytes,omitempty"`
 
-	// The compression code to use over data blocks. The possible values are UNCOMPRESSED, SNAPPY, and GZIP, with the default being SNAPPY. Use SNAPPY for higher decompression speed. Use GZIP if the compression ratio is more important than speed.
+	// Compression code to use over data blocks. The possible values are UNCOMPRESSED, SNAPPY, and GZIP, with the default being SNAPPY. Use SNAPPY for higher decompression speed. Use GZIP if the compression ratio is more important than speed.
 	// +kubebuilder:validation:Optional
 	Compression *string `json:"compression,omitempty" tf:"compression,omitempty"`
 
-	// Indicates whether to enable dictionary compression.
+	// Whether to enable dictionary compression.
 	// +kubebuilder:validation:Optional
 	EnableDictionaryCompression *bool `json:"enableDictionaryCompression,omitempty" tf:"enable_dictionary_compression,omitempty"`
 
-	// The maximum amount of padding to apply. This is useful if you intend to copy the data from Amazon S3 to HDFS before querying. The default is 0.
+	// Maximum amount of padding to apply. This is useful if you intend to copy the data from Amazon S3 to HDFS before querying. The default is 0.
 	// +kubebuilder:validation:Optional
 	MaxPaddingBytes *float64 `json:"maxPaddingBytes,omitempty" tf:"max_padding_bytes,omitempty"`
 
-	// The Parquet page size. Column chunks are divided into pages. A page is conceptually an indivisible unit (in terms of compression and encoding). The minimum value is 64 KiB and the default is 1 MiB.
+	// Parquet page size. Column chunks are divided into pages. A page is conceptually an indivisible unit (in terms of compression and encoding). The minimum value is 64 KiB and the default is 1 MiB.
 	// +kubebuilder:validation:Optional
 	PageSizeBytes *float64 `json:"pageSizeBytes,omitempty" tf:"page_size_bytes,omitempty"`
 
-	// Indicates the version of row format to output. The possible values are V1 and V2. The default is V1.
+	// Version of row format to output. The possible values are V1 and V2. The default is V1.
 	// +kubebuilder:validation:Optional
 	WriterVersion *string `json:"writerVersion,omitempty" tf:"writer_version,omitempty"`
 }
 
 type ProcessingConfigurationInitParameters struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Specifies the data processors as multiple blocks. See processors block below for details.
+	// Data processors as multiple blocks. See processors block below for details.
 	Processors []ProcessorsInitParameters `json:"processors,omitempty" tf:"processors,omitempty"`
 }
 
 type ProcessingConfigurationObservation struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Specifies the data processors as multiple blocks. See processors block below for details.
+	// Data processors as multiple blocks. See processors block below for details.
 	Processors []ProcessorsObservation `json:"processors,omitempty" tf:"processors,omitempty"`
 }
 
 type ProcessingConfigurationParameters struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Specifies the data processors as multiple blocks. See processors block below for details.
+	// Data processors as multiple blocks. See processors block below for details.
 	// +kubebuilder:validation:Optional
 	Processors []ProcessorsParameters `json:"processors,omitempty" tf:"processors,omitempty"`
 }
 
 type ProcessingConfigurationProcessorsInitParameters struct {
 
-	// Specifies the processor parameters as multiple blocks. See parameters block below for details.
+	// Processor parameters as multiple blocks. See parameters block below for details.
 	Parameters []ProcessorsParametersInitParameters `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
-	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord, Decompression, CloudWatchLogProcessing. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
+	// Type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord, Decompression, CloudWatchLogProcessing. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type ProcessingConfigurationProcessorsObservation struct {
 
-	// Specifies the processor parameters as multiple blocks. See parameters block below for details.
+	// Processor parameters as multiple blocks. See parameters block below for details.
 	Parameters []ProcessorsParametersObservation `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
-	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord, Decompression, CloudWatchLogProcessing. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
+	// Type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord, Decompression, CloudWatchLogProcessing. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type ProcessingConfigurationProcessorsParameters struct {
 
-	// Specifies the processor parameters as multiple blocks. See parameters block below for details.
+	// Processor parameters as multiple blocks. See parameters block below for details.
 	// +kubebuilder:validation:Optional
 	Parameters []ProcessorsParametersParameters `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
-	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord, Decompression, CloudWatchLogProcessing. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
+	// Type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord, Decompression, CloudWatchLogProcessing. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
 }
@@ -3464,29 +3456,29 @@ type ProcessingConfigurationProcessorsParametersParameters struct {
 
 type ProcessorsInitParameters struct {
 
-	// Specifies the processor parameters as multiple blocks. See parameters block below for details.
+	// Processor parameters as multiple blocks. See parameters block below for details.
 	Parameters []ParametersInitParameters `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
-	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord, Decompression, CloudWatchLogProcessing. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
+	// Type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord, Decompression, CloudWatchLogProcessing. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type ProcessorsObservation struct {
 
-	// Specifies the processor parameters as multiple blocks. See parameters block below for details.
+	// Processor parameters as multiple blocks. See parameters block below for details.
 	Parameters []ParametersObservation `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
-	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord, Decompression, CloudWatchLogProcessing. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
+	// Type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord, Decompression, CloudWatchLogProcessing. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type ProcessorsParameters struct {
 
-	// Specifies the processor parameters as multiple blocks. See parameters block below for details.
+	// Processor parameters as multiple blocks. See parameters block below for details.
 	// +kubebuilder:validation:Optional
 	Parameters []ParametersParameters `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
-	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord, Decompression, CloudWatchLogProcessing. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
+	// Type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord, Decompression, CloudWatchLogProcessing. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
 }
@@ -3522,70 +3514,70 @@ type ProcessorsParametersParameters struct {
 
 type RedshiftConfigurationCloudwatchLoggingOptionsInitParameters struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The CloudWatch group name for logging. This value is required if enabled is true.
+	// CloudWatch group name for logging. This value is required if enabled is true.
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
 
-	// The CloudWatch log stream name for logging. This value is required if enabled is true.
+	// CloudWatch log stream name for logging. This value is required if enabled is true.
 	LogStreamName *string `json:"logStreamName,omitempty" tf:"log_stream_name,omitempty"`
 }
 
 type RedshiftConfigurationCloudwatchLoggingOptionsObservation struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The CloudWatch group name for logging. This value is required if enabled is true.
+	// CloudWatch group name for logging. This value is required if enabled is true.
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
 
-	// The CloudWatch log stream name for logging. This value is required if enabled is true.
+	// CloudWatch log stream name for logging. This value is required if enabled is true.
 	LogStreamName *string `json:"logStreamName,omitempty" tf:"log_stream_name,omitempty"`
 }
 
 type RedshiftConfigurationCloudwatchLoggingOptionsParameters struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The CloudWatch group name for logging. This value is required if enabled is true.
+	// CloudWatch group name for logging. This value is required if enabled is true.
 	// +kubebuilder:validation:Optional
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
 
-	// The CloudWatch log stream name for logging. This value is required if enabled is true.
+	// CloudWatch log stream name for logging. This value is required if enabled is true.
 	// +kubebuilder:validation:Optional
 	LogStreamName *string `json:"logStreamName,omitempty" tf:"log_stream_name,omitempty"`
 }
 
 type RedshiftConfigurationInitParameters struct {
 
-	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
+	// CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	CloudwatchLoggingOptions *RedshiftConfigurationCloudwatchLoggingOptionsInitParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
-	// The jdbcurl of the redshift cluster.
+	// JDBC URL of the redshift cluster.
 	ClusterJdbcurl *string `json:"clusterJdbcurl,omitempty" tf:"cluster_jdbcurl,omitempty"`
 
-	// Copy options for copying the data from the s3 intermediate bucket into redshift, for example to change the default delimiter. For valid values, see the AWS documentation
+	// Copy options for copying the data from the s3 intermediate bucket into redshift, for example to change the default delimiter. For valid values, see the AWS documentation.
 	CopyOptions *string `json:"copyOptions,omitempty" tf:"copy_options,omitempty"`
 
-	// The data table columns that will be targeted by the copy command.
+	// Data table columns that will be targeted by the copy command.
 	DataTableColumns *string `json:"dataTableColumns,omitempty" tf:"data_table_columns,omitempty"`
 
-	// The name of the table in the redshift cluster that the s3 bucket will copy to.
+	// Name of the table in the redshift cluster that the s3 bucket will copy to.
 	DataTableName *string `json:"dataTableName,omitempty" tf:"data_table_name,omitempty"`
 
-	// The password for the username above. This value is required if secrets_manager_configuration is not provided.
+	// Password for the username above. This value is required if secrets_manager_configuration is not provided.
 	PasswordSecretRef *v2.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
-	// The data processing configuration.  See processing_configuration block below for details.
+	// Data processing configuration. See processing_configuration block below for details.
 	ProcessingConfiguration *RedshiftConfigurationProcessingConfigurationInitParameters `json:"processingConfiguration,omitempty" tf:"processing_configuration,omitempty"`
 
-	// The length of time during which Firehose retries delivery after a failure, starting from the initial request and including the first attempt. The default value is 3600 seconds (60 minutes). Firehose does not retry if the value of DurationInSeconds is 0 (zero) or if the first delivery attempt takes longer than the current value.
+	// Length of time during which Firehose retries delivery after a failure, starting from the initial request and including the first attempt. The default value is 3600 seconds (60 minutes). Firehose does not retry if the value of DurationInSeconds is 0 (zero) or if the first delivery attempt takes longer than the current value.
 	RetryDuration *float64 `json:"retryDuration,omitempty" tf:"retry_duration,omitempty"`
 
-	// The arn of the role the stream assumes.
+	// ARN of the role the stream assumes.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
@@ -3598,101 +3590,99 @@ type RedshiftConfigurationInitParameters struct {
 	// +kubebuilder:validation:Optional
 	RoleArnSelector *v2.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
-	// The configuration for backup in Amazon S3. Required if s3_backup_mode is Enabled. Supports the same fields as s3_configuration object.
-	// secrets_manager_configuration -  The Secrets Manager configuration. See secrets_manager_configuration block below for details. This value is required if username and password are not provided.
+	// Configuration for backup in Amazon S3. Required if s3_backup_mode is Enabled. See s3_backup_configuration block below for details.
 	S3BackupConfiguration *RedshiftConfigurationS3BackupConfigurationInitParameters `json:"s3BackupConfiguration,omitempty" tf:"s3_backup_configuration,omitempty"`
 
-	// The Amazon S3 backup mode.  Valid values are Disabled and Enabled.  Default value is Disabled.
+	// Amazon S3 backup mode. Valid values are Disabled and Enabled. Default value is Disabled.
 	S3BackupMode *string `json:"s3BackupMode,omitempty" tf:"s3_backup_mode,omitempty"`
 
-	// The S3 Configuration. See s3_configuration below for details.
+	// S3 Configuration. See s3_configuration block below for details.
 	S3Configuration *RedshiftConfigurationS3ConfigurationInitParameters `json:"s3Configuration,omitempty" tf:"s3_configuration,omitempty"`
 
-	// The Secrets Manager configuration. See secrets_manager_configuration block below for details. This value is required if user and private_key are not provided.
+	// Secrets Manager configuration. See secrets_manager_configuration block below for details. This value is required if username and password are not provided.
 	SecretsManagerConfiguration *RedshiftConfigurationSecretsManagerConfigurationInitParameters `json:"secretsManagerConfiguration,omitempty" tf:"secrets_manager_configuration,omitempty"`
 
-	// The username that the firehose delivery stream will assume. It is strongly recommended that the username and password provided is used exclusively for Amazon Kinesis Firehose purposes, and that the permissions for the account are restricted for Amazon Redshift INSERT permissions. This value is required if secrets_manager_configuration is not provided.
+	// Username that the firehose delivery stream will assume. It is strongly recommended that the username and password provided is used exclusively for Amazon Kinesis Firehose purposes, and that the permissions for the account are restricted for Amazon Redshift INSERT permissions. This value is required if secrets_manager_configuration is not provided.
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 
 type RedshiftConfigurationObservation struct {
 
-	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
+	// CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	CloudwatchLoggingOptions *RedshiftConfigurationCloudwatchLoggingOptionsObservation `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
-	// The jdbcurl of the redshift cluster.
+	// JDBC URL of the redshift cluster.
 	ClusterJdbcurl *string `json:"clusterJdbcurl,omitempty" tf:"cluster_jdbcurl,omitempty"`
 
-	// Copy options for copying the data from the s3 intermediate bucket into redshift, for example to change the default delimiter. For valid values, see the AWS documentation
+	// Copy options for copying the data from the s3 intermediate bucket into redshift, for example to change the default delimiter. For valid values, see the AWS documentation.
 	CopyOptions *string `json:"copyOptions,omitempty" tf:"copy_options,omitempty"`
 
-	// The data table columns that will be targeted by the copy command.
+	// Data table columns that will be targeted by the copy command.
 	DataTableColumns *string `json:"dataTableColumns,omitempty" tf:"data_table_columns,omitempty"`
 
-	// The name of the table in the redshift cluster that the s3 bucket will copy to.
+	// Name of the table in the redshift cluster that the s3 bucket will copy to.
 	DataTableName *string `json:"dataTableName,omitempty" tf:"data_table_name,omitempty"`
 
-	// The data processing configuration.  See processing_configuration block below for details.
+	// Data processing configuration. See processing_configuration block below for details.
 	ProcessingConfiguration *RedshiftConfigurationProcessingConfigurationObservation `json:"processingConfiguration,omitempty" tf:"processing_configuration,omitempty"`
 
-	// The length of time during which Firehose retries delivery after a failure, starting from the initial request and including the first attempt. The default value is 3600 seconds (60 minutes). Firehose does not retry if the value of DurationInSeconds is 0 (zero) or if the first delivery attempt takes longer than the current value.
+	// Length of time during which Firehose retries delivery after a failure, starting from the initial request and including the first attempt. The default value is 3600 seconds (60 minutes). Firehose does not retry if the value of DurationInSeconds is 0 (zero) or if the first delivery attempt takes longer than the current value.
 	RetryDuration *float64 `json:"retryDuration,omitempty" tf:"retry_duration,omitempty"`
 
-	// The arn of the role the stream assumes.
+	// ARN of the role the stream assumes.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
-	// The configuration for backup in Amazon S3. Required if s3_backup_mode is Enabled. Supports the same fields as s3_configuration object.
-	// secrets_manager_configuration -  The Secrets Manager configuration. See secrets_manager_configuration block below for details. This value is required if username and password are not provided.
+	// Configuration for backup in Amazon S3. Required if s3_backup_mode is Enabled. See s3_backup_configuration block below for details.
 	S3BackupConfiguration *RedshiftConfigurationS3BackupConfigurationObservation `json:"s3BackupConfiguration,omitempty" tf:"s3_backup_configuration,omitempty"`
 
-	// The Amazon S3 backup mode.  Valid values are Disabled and Enabled.  Default value is Disabled.
+	// Amazon S3 backup mode. Valid values are Disabled and Enabled. Default value is Disabled.
 	S3BackupMode *string `json:"s3BackupMode,omitempty" tf:"s3_backup_mode,omitempty"`
 
-	// The S3 Configuration. See s3_configuration below for details.
+	// S3 Configuration. See s3_configuration block below for details.
 	S3Configuration *RedshiftConfigurationS3ConfigurationObservation `json:"s3Configuration,omitempty" tf:"s3_configuration,omitempty"`
 
-	// The Secrets Manager configuration. See secrets_manager_configuration block below for details. This value is required if user and private_key are not provided.
+	// Secrets Manager configuration. See secrets_manager_configuration block below for details. This value is required if username and password are not provided.
 	SecretsManagerConfiguration *RedshiftConfigurationSecretsManagerConfigurationObservation `json:"secretsManagerConfiguration,omitempty" tf:"secrets_manager_configuration,omitempty"`
 
-	// The username that the firehose delivery stream will assume. It is strongly recommended that the username and password provided is used exclusively for Amazon Kinesis Firehose purposes, and that the permissions for the account are restricted for Amazon Redshift INSERT permissions. This value is required if secrets_manager_configuration is not provided.
+	// Username that the firehose delivery stream will assume. It is strongly recommended that the username and password provided is used exclusively for Amazon Kinesis Firehose purposes, and that the permissions for the account are restricted for Amazon Redshift INSERT permissions. This value is required if secrets_manager_configuration is not provided.
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 
 type RedshiftConfigurationParameters struct {
 
-	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
+	// CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	// +kubebuilder:validation:Optional
 	CloudwatchLoggingOptions *RedshiftConfigurationCloudwatchLoggingOptionsParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
-	// The jdbcurl of the redshift cluster.
+	// JDBC URL of the redshift cluster.
 	// +kubebuilder:validation:Optional
 	ClusterJdbcurl *string `json:"clusterJdbcurl" tf:"cluster_jdbcurl,omitempty"`
 
-	// Copy options for copying the data from the s3 intermediate bucket into redshift, for example to change the default delimiter. For valid values, see the AWS documentation
+	// Copy options for copying the data from the s3 intermediate bucket into redshift, for example to change the default delimiter. For valid values, see the AWS documentation.
 	// +kubebuilder:validation:Optional
 	CopyOptions *string `json:"copyOptions,omitempty" tf:"copy_options,omitempty"`
 
-	// The data table columns that will be targeted by the copy command.
+	// Data table columns that will be targeted by the copy command.
 	// +kubebuilder:validation:Optional
 	DataTableColumns *string `json:"dataTableColumns,omitempty" tf:"data_table_columns,omitempty"`
 
-	// The name of the table in the redshift cluster that the s3 bucket will copy to.
+	// Name of the table in the redshift cluster that the s3 bucket will copy to.
 	// +kubebuilder:validation:Optional
 	DataTableName *string `json:"dataTableName" tf:"data_table_name,omitempty"`
 
-	// The password for the username above. This value is required if secrets_manager_configuration is not provided.
+	// Password for the username above. This value is required if secrets_manager_configuration is not provided.
 	// +kubebuilder:validation:Optional
 	PasswordSecretRef *v2.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
-	// The data processing configuration.  See processing_configuration block below for details.
+	// Data processing configuration. See processing_configuration block below for details.
 	// +kubebuilder:validation:Optional
 	ProcessingConfiguration *RedshiftConfigurationProcessingConfigurationParameters `json:"processingConfiguration,omitempty" tf:"processing_configuration,omitempty"`
 
-	// The length of time during which Firehose retries delivery after a failure, starting from the initial request and including the first attempt. The default value is 3600 seconds (60 minutes). Firehose does not retry if the value of DurationInSeconds is 0 (zero) or if the first delivery attempt takes longer than the current value.
+	// Length of time during which Firehose retries delivery after a failure, starting from the initial request and including the first attempt. The default value is 3600 seconds (60 minutes). Firehose does not retry if the value of DurationInSeconds is 0 (zero) or if the first delivery attempt takes longer than the current value.
 	// +kubebuilder:validation:Optional
 	RetryDuration *float64 `json:"retryDuration,omitempty" tf:"retry_duration,omitempty"`
 
-	// The arn of the role the stream assumes.
+	// ARN of the role the stream assumes.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -3706,82 +3696,81 @@ type RedshiftConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	RoleArnSelector *v2.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
-	// The configuration for backup in Amazon S3. Required if s3_backup_mode is Enabled. Supports the same fields as s3_configuration object.
-	// secrets_manager_configuration -  The Secrets Manager configuration. See secrets_manager_configuration block below for details. This value is required if username and password are not provided.
+	// Configuration for backup in Amazon S3. Required if s3_backup_mode is Enabled. See s3_backup_configuration block below for details.
 	// +kubebuilder:validation:Optional
 	S3BackupConfiguration *RedshiftConfigurationS3BackupConfigurationParameters `json:"s3BackupConfiguration,omitempty" tf:"s3_backup_configuration,omitempty"`
 
-	// The Amazon S3 backup mode.  Valid values are Disabled and Enabled.  Default value is Disabled.
+	// Amazon S3 backup mode. Valid values are Disabled and Enabled. Default value is Disabled.
 	// +kubebuilder:validation:Optional
 	S3BackupMode *string `json:"s3BackupMode,omitempty" tf:"s3_backup_mode,omitempty"`
 
-	// The S3 Configuration. See s3_configuration below for details.
+	// S3 Configuration. See s3_configuration block below for details.
 	// +kubebuilder:validation:Optional
 	S3Configuration *RedshiftConfigurationS3ConfigurationParameters `json:"s3Configuration" tf:"s3_configuration,omitempty"`
 
-	// The Secrets Manager configuration. See secrets_manager_configuration block below for details. This value is required if user and private_key are not provided.
+	// Secrets Manager configuration. See secrets_manager_configuration block below for details. This value is required if username and password are not provided.
 	// +kubebuilder:validation:Optional
 	SecretsManagerConfiguration *RedshiftConfigurationSecretsManagerConfigurationParameters `json:"secretsManagerConfiguration,omitempty" tf:"secrets_manager_configuration,omitempty"`
 
-	// The username that the firehose delivery stream will assume. It is strongly recommended that the username and password provided is used exclusively for Amazon Kinesis Firehose purposes, and that the permissions for the account are restricted for Amazon Redshift INSERT permissions. This value is required if secrets_manager_configuration is not provided.
+	// Username that the firehose delivery stream will assume. It is strongly recommended that the username and password provided is used exclusively for Amazon Kinesis Firehose purposes, and that the permissions for the account are restricted for Amazon Redshift INSERT permissions. This value is required if secrets_manager_configuration is not provided.
 	// +kubebuilder:validation:Optional
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 
 type RedshiftConfigurationProcessingConfigurationInitParameters struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Specifies the data processors as multiple blocks. See processors block below for details.
+	// Data processors as multiple blocks. See processors block below for details.
 	Processors []RedshiftConfigurationProcessingConfigurationProcessorsInitParameters `json:"processors,omitempty" tf:"processors,omitempty"`
 }
 
 type RedshiftConfigurationProcessingConfigurationObservation struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Specifies the data processors as multiple blocks. See processors block below for details.
+	// Data processors as multiple blocks. See processors block below for details.
 	Processors []RedshiftConfigurationProcessingConfigurationProcessorsObservation `json:"processors,omitempty" tf:"processors,omitempty"`
 }
 
 type RedshiftConfigurationProcessingConfigurationParameters struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Specifies the data processors as multiple blocks. See processors block below for details.
+	// Data processors as multiple blocks. See processors block below for details.
 	// +kubebuilder:validation:Optional
 	Processors []RedshiftConfigurationProcessingConfigurationProcessorsParameters `json:"processors,omitempty" tf:"processors,omitempty"`
 }
 
 type RedshiftConfigurationProcessingConfigurationProcessorsInitParameters struct {
 
-	// Specifies the processor parameters as multiple blocks. See parameters block below for details.
+	// Processor parameters as multiple blocks. See parameters block below for details.
 	Parameters []RedshiftConfigurationProcessingConfigurationProcessorsParametersInitParameters `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
-	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord, Decompression, CloudWatchLogProcessing. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
+	// Type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord, Decompression, CloudWatchLogProcessing. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type RedshiftConfigurationProcessingConfigurationProcessorsObservation struct {
 
-	// Specifies the processor parameters as multiple blocks. See parameters block below for details.
+	// Processor parameters as multiple blocks. See parameters block below for details.
 	Parameters []RedshiftConfigurationProcessingConfigurationProcessorsParametersObservation `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
-	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord, Decompression, CloudWatchLogProcessing. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
+	// Type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord, Decompression, CloudWatchLogProcessing. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type RedshiftConfigurationProcessingConfigurationProcessorsParameters struct {
 
-	// Specifies the processor parameters as multiple blocks. See parameters block below for details.
+	// Processor parameters as multiple blocks. See parameters block below for details.
 	// +kubebuilder:validation:Optional
 	Parameters []RedshiftConfigurationProcessingConfigurationProcessorsParametersParameters `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
-	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord, Decompression, CloudWatchLogProcessing. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
+	// Type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord, Decompression, CloudWatchLogProcessing. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
 }
@@ -3817,46 +3806,46 @@ type RedshiftConfigurationProcessingConfigurationProcessorsParametersParameters 
 
 type RedshiftConfigurationS3BackupConfigurationCloudwatchLoggingOptionsInitParameters struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The CloudWatch group name for logging. This value is required if enabled is true.
+	// CloudWatch group name for logging. This value is required if enabled is true.
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
 
-	// The CloudWatch log stream name for logging. This value is required if enabled is true.
+	// CloudWatch log stream name for logging. This value is required if enabled is true.
 	LogStreamName *string `json:"logStreamName,omitempty" tf:"log_stream_name,omitempty"`
 }
 
 type RedshiftConfigurationS3BackupConfigurationCloudwatchLoggingOptionsObservation struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The CloudWatch group name for logging. This value is required if enabled is true.
+	// CloudWatch group name for logging. This value is required if enabled is true.
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
 
-	// The CloudWatch log stream name for logging. This value is required if enabled is true.
+	// CloudWatch log stream name for logging. This value is required if enabled is true.
 	LogStreamName *string `json:"logStreamName,omitempty" tf:"log_stream_name,omitempty"`
 }
 
 type RedshiftConfigurationS3BackupConfigurationCloudwatchLoggingOptionsParameters struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The CloudWatch group name for logging. This value is required if enabled is true.
+	// CloudWatch group name for logging. This value is required if enabled is true.
 	// +kubebuilder:validation:Optional
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
 
-	// The CloudWatch log stream name for logging. This value is required if enabled is true.
+	// CloudWatch log stream name for logging. This value is required if enabled is true.
 	// +kubebuilder:validation:Optional
 	LogStreamName *string `json:"logStreamName,omitempty" tf:"log_stream_name,omitempty"`
 }
 
 type RedshiftConfigurationS3BackupConfigurationInitParameters struct {
 
-	// The ARN of the S3 bucket
+	// ARN of the S3 bucket.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3/v1beta2.Bucket
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	BucketArn *string `json:"bucketArn,omitempty" tf:"bucket_arn,omitempty"`
@@ -3875,23 +3864,22 @@ type RedshiftConfigurationS3BackupConfigurationInitParameters struct {
 	// Buffer incoming data to the specified size, in MBs between 1 to 5, before delivering it to the destination.  The default value is 5MB.
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
+	// CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	CloudwatchLoggingOptions *RedshiftConfigurationS3BackupConfigurationCloudwatchLoggingOptionsInitParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
-	// The compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
+	// Compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
 	CompressionFormat *string `json:"compressionFormat,omitempty" tf:"compression_format,omitempty"`
 
 	// Prefix added to failed records before writing them to S3. Not currently supported for redshift destination. This prefix appears immediately following the bucket name. For information about how to specify this prefix, see Custom Prefixes for Amazon S3 Objects.
 	ErrorOutputPrefix *string `json:"errorOutputPrefix,omitempty" tf:"error_output_prefix,omitempty"`
 
-	// Specifies the KMS key ARN the stream will use to encrypt data. If not set, no encryption will
-	// be used.
+	// KMS key ARN the stream will use to encrypt data. If not set, no encryption will be used.
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
-	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered S3 files. You can specify an extra prefix to be added in front of the time format prefix. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket
+	// Extra prefix added in front of the "YYYY/MM/DD/HH" time format prefix that is automatically used for delivered S3 files. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
+	// ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
@@ -3907,7 +3895,7 @@ type RedshiftConfigurationS3BackupConfigurationInitParameters struct {
 
 type RedshiftConfigurationS3BackupConfigurationObservation struct {
 
-	// The ARN of the S3 bucket
+	// ARN of the S3 bucket.
 	BucketArn *string `json:"bucketArn,omitempty" tf:"bucket_arn,omitempty"`
 
 	// Buffer incoming data for the specified period of time, in seconds between 0 to 60, before delivering it to the destination.  The default value is 60s.
@@ -3916,29 +3904,28 @@ type RedshiftConfigurationS3BackupConfigurationObservation struct {
 	// Buffer incoming data to the specified size, in MBs between 1 to 5, before delivering it to the destination.  The default value is 5MB.
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
+	// CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	CloudwatchLoggingOptions *RedshiftConfigurationS3BackupConfigurationCloudwatchLoggingOptionsObservation `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
-	// The compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
+	// Compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
 	CompressionFormat *string `json:"compressionFormat,omitempty" tf:"compression_format,omitempty"`
 
 	// Prefix added to failed records before writing them to S3. Not currently supported for redshift destination. This prefix appears immediately following the bucket name. For information about how to specify this prefix, see Custom Prefixes for Amazon S3 Objects.
 	ErrorOutputPrefix *string `json:"errorOutputPrefix,omitempty" tf:"error_output_prefix,omitempty"`
 
-	// Specifies the KMS key ARN the stream will use to encrypt data. If not set, no encryption will
-	// be used.
+	// KMS key ARN the stream will use to encrypt data. If not set, no encryption will be used.
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
-	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered S3 files. You can specify an extra prefix to be added in front of the time format prefix. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket
+	// Extra prefix added in front of the "YYYY/MM/DD/HH" time format prefix that is automatically used for delivered S3 files. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
+	// ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
 
 type RedshiftConfigurationS3BackupConfigurationParameters struct {
 
-	// The ARN of the S3 bucket
+	// ARN of the S3 bucket.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3/v1beta2.Bucket
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -3960,11 +3947,11 @@ type RedshiftConfigurationS3BackupConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
+	// CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	// +kubebuilder:validation:Optional
 	CloudwatchLoggingOptions *RedshiftConfigurationS3BackupConfigurationCloudwatchLoggingOptionsParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
-	// The compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
+	// Compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
 	// +kubebuilder:validation:Optional
 	CompressionFormat *string `json:"compressionFormat,omitempty" tf:"compression_format,omitempty"`
 
@@ -3972,16 +3959,15 @@ type RedshiftConfigurationS3BackupConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	ErrorOutputPrefix *string `json:"errorOutputPrefix,omitempty" tf:"error_output_prefix,omitempty"`
 
-	// Specifies the KMS key ARN the stream will use to encrypt data. If not set, no encryption will
-	// be used.
+	// KMS key ARN the stream will use to encrypt data. If not set, no encryption will be used.
 	// +kubebuilder:validation:Optional
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
-	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered S3 files. You can specify an extra prefix to be added in front of the time format prefix. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket
+	// Extra prefix added in front of the "YYYY/MM/DD/HH" time format prefix that is automatically used for delivered S3 files. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket.
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
+	// ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -3998,46 +3984,46 @@ type RedshiftConfigurationS3BackupConfigurationParameters struct {
 
 type RedshiftConfigurationS3ConfigurationCloudwatchLoggingOptionsInitParameters struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The CloudWatch group name for logging. This value is required if enabled is true.
+	// CloudWatch group name for logging. This value is required if enabled is true.
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
 
-	// The CloudWatch log stream name for logging. This value is required if enabled is true.
+	// CloudWatch log stream name for logging. This value is required if enabled is true.
 	LogStreamName *string `json:"logStreamName,omitempty" tf:"log_stream_name,omitempty"`
 }
 
 type RedshiftConfigurationS3ConfigurationCloudwatchLoggingOptionsObservation struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The CloudWatch group name for logging. This value is required if enabled is true.
+	// CloudWatch group name for logging. This value is required if enabled is true.
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
 
-	// The CloudWatch log stream name for logging. This value is required if enabled is true.
+	// CloudWatch log stream name for logging. This value is required if enabled is true.
 	LogStreamName *string `json:"logStreamName,omitempty" tf:"log_stream_name,omitempty"`
 }
 
 type RedshiftConfigurationS3ConfigurationCloudwatchLoggingOptionsParameters struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The CloudWatch group name for logging. This value is required if enabled is true.
+	// CloudWatch group name for logging. This value is required if enabled is true.
 	// +kubebuilder:validation:Optional
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
 
-	// The CloudWatch log stream name for logging. This value is required if enabled is true.
+	// CloudWatch log stream name for logging. This value is required if enabled is true.
 	// +kubebuilder:validation:Optional
 	LogStreamName *string `json:"logStreamName,omitempty" tf:"log_stream_name,omitempty"`
 }
 
 type RedshiftConfigurationS3ConfigurationInitParameters struct {
 
-	// The ARN of the S3 bucket
+	// ARN of the S3 bucket.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3/v1beta2.Bucket
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	BucketArn *string `json:"bucketArn,omitempty" tf:"bucket_arn,omitempty"`
@@ -4056,23 +4042,22 @@ type RedshiftConfigurationS3ConfigurationInitParameters struct {
 	// Buffer incoming data to the specified size, in MBs between 1 to 5, before delivering it to the destination.  The default value is 5MB.
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
+	// CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	CloudwatchLoggingOptions *RedshiftConfigurationS3ConfigurationCloudwatchLoggingOptionsInitParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
-	// The compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
+	// Compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
 	CompressionFormat *string `json:"compressionFormat,omitempty" tf:"compression_format,omitempty"`
 
 	// Prefix added to failed records before writing them to S3. Not currently supported for redshift destination. This prefix appears immediately following the bucket name. For information about how to specify this prefix, see Custom Prefixes for Amazon S3 Objects.
 	ErrorOutputPrefix *string `json:"errorOutputPrefix,omitempty" tf:"error_output_prefix,omitempty"`
 
-	// Specifies the KMS key ARN the stream will use to encrypt data. If not set, no encryption will
-	// be used.
+	// KMS key ARN the stream will use to encrypt data. If not set, no encryption will be used.
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
-	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered S3 files. You can specify an extra prefix to be added in front of the time format prefix. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket
+	// Extra prefix added in front of the "YYYY/MM/DD/HH" time format prefix that is automatically used for delivered S3 files. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
+	// ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
@@ -4088,7 +4073,7 @@ type RedshiftConfigurationS3ConfigurationInitParameters struct {
 
 type RedshiftConfigurationS3ConfigurationObservation struct {
 
-	// The ARN of the S3 bucket
+	// ARN of the S3 bucket.
 	BucketArn *string `json:"bucketArn,omitempty" tf:"bucket_arn,omitempty"`
 
 	// Buffer incoming data for the specified period of time, in seconds between 0 to 60, before delivering it to the destination.  The default value is 60s.
@@ -4097,29 +4082,28 @@ type RedshiftConfigurationS3ConfigurationObservation struct {
 	// Buffer incoming data to the specified size, in MBs between 1 to 5, before delivering it to the destination.  The default value is 5MB.
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
+	// CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	CloudwatchLoggingOptions *RedshiftConfigurationS3ConfigurationCloudwatchLoggingOptionsObservation `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
-	// The compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
+	// Compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
 	CompressionFormat *string `json:"compressionFormat,omitempty" tf:"compression_format,omitempty"`
 
 	// Prefix added to failed records before writing them to S3. Not currently supported for redshift destination. This prefix appears immediately following the bucket name. For information about how to specify this prefix, see Custom Prefixes for Amazon S3 Objects.
 	ErrorOutputPrefix *string `json:"errorOutputPrefix,omitempty" tf:"error_output_prefix,omitempty"`
 
-	// Specifies the KMS key ARN the stream will use to encrypt data. If not set, no encryption will
-	// be used.
+	// KMS key ARN the stream will use to encrypt data. If not set, no encryption will be used.
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
-	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered S3 files. You can specify an extra prefix to be added in front of the time format prefix. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket
+	// Extra prefix added in front of the "YYYY/MM/DD/HH" time format prefix that is automatically used for delivered S3 files. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
+	// ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
 
 type RedshiftConfigurationS3ConfigurationParameters struct {
 
-	// The ARN of the S3 bucket
+	// ARN of the S3 bucket.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3/v1beta2.Bucket
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -4141,11 +4125,11 @@ type RedshiftConfigurationS3ConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
+	// CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	// +kubebuilder:validation:Optional
 	CloudwatchLoggingOptions *RedshiftConfigurationS3ConfigurationCloudwatchLoggingOptionsParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
-	// The compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
+	// Compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
 	// +kubebuilder:validation:Optional
 	CompressionFormat *string `json:"compressionFormat,omitempty" tf:"compression_format,omitempty"`
 
@@ -4153,16 +4137,15 @@ type RedshiftConfigurationS3ConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	ErrorOutputPrefix *string `json:"errorOutputPrefix,omitempty" tf:"error_output_prefix,omitempty"`
 
-	// Specifies the KMS key ARN the stream will use to encrypt data. If not set, no encryption will
-	// be used.
+	// KMS key ARN the stream will use to encrypt data. If not set, no encryption will be used.
 	// +kubebuilder:validation:Optional
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
-	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered S3 files. You can specify an extra prefix to be added in front of the time format prefix. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket
+	// Extra prefix added in front of the "YYYY/MM/DD/HH" time format prefix that is automatically used for delivered S3 files. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket.
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
+	// ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -4179,46 +4162,46 @@ type RedshiftConfigurationS3ConfigurationParameters struct {
 
 type RedshiftConfigurationSecretsManagerConfigurationInitParameters struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
+	// ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
-	// The ARN of the Secrets Manager secret. This value is required if enabled is true.
+	// ARN of the Secrets Manager secret. This value is required if enabled is true.
 	SecretArn *string `json:"secretArn,omitempty" tf:"secret_arn,omitempty"`
 }
 
 type RedshiftConfigurationSecretsManagerConfigurationObservation struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
+	// ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
-	// The ARN of the Secrets Manager secret. This value is required if enabled is true.
+	// ARN of the Secrets Manager secret. This value is required if enabled is true.
 	SecretArn *string `json:"secretArn,omitempty" tf:"secret_arn,omitempty"`
 }
 
 type RedshiftConfigurationSecretsManagerConfigurationParameters struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
+	// ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions.
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
-	// The ARN of the Secrets Manager secret. This value is required if enabled is true.
+	// ARN of the Secrets Manager secret. This value is required if enabled is true.
 	// +kubebuilder:validation:Optional
 	SecretArn *string `json:"secretArn,omitempty" tf:"secret_arn,omitempty"`
 }
 
 type RequestConfigurationInitParameters struct {
 
-	// Describes the metadata sent to the HTTP endpoint destination. See common_attributes block below for details.
+	// Metadata sent to the HTTP endpoint destination. See common_attributes block below for details.
 	CommonAttributes []CommonAttributesInitParameters `json:"commonAttributes,omitempty" tf:"common_attributes,omitempty"`
 
 	// Kinesis Data Firehose uses the content encoding to compress the body of a request before sending the request to the destination. Valid values are NONE and GZIP.  Default value is NONE.
@@ -4227,7 +4210,7 @@ type RequestConfigurationInitParameters struct {
 
 type RequestConfigurationObservation struct {
 
-	// Describes the metadata sent to the HTTP endpoint destination. See common_attributes block below for details.
+	// Metadata sent to the HTTP endpoint destination. See common_attributes block below for details.
 	CommonAttributes []CommonAttributesObservation `json:"commonAttributes,omitempty" tf:"common_attributes,omitempty"`
 
 	// Kinesis Data Firehose uses the content encoding to compress the body of a request before sending the request to the destination. Valid values are NONE and GZIP.  Default value is NONE.
@@ -4236,7 +4219,7 @@ type RequestConfigurationObservation struct {
 
 type RequestConfigurationParameters struct {
 
-	// Describes the metadata sent to the HTTP endpoint destination. See common_attributes block below for details.
+	// Metadata sent to the HTTP endpoint destination. See common_attributes block below for details.
 	// +kubebuilder:validation:Optional
 	CommonAttributes []CommonAttributesParameters `json:"commonAttributes,omitempty" tf:"common_attributes,omitempty"`
 
@@ -4247,187 +4230,184 @@ type RequestConfigurationParameters struct {
 
 type S3BackupConfigurationCloudwatchLoggingOptionsInitParameters struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The CloudWatch group name for logging. This value is required if enabled is true.
+	// CloudWatch group name for logging. This value is required if enabled is true.
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
 
-	// The CloudWatch log stream name for logging. This value is required if enabled is true.
+	// CloudWatch log stream name for logging. This value is required if enabled is true.
 	LogStreamName *string `json:"logStreamName,omitempty" tf:"log_stream_name,omitempty"`
 }
 
 type S3BackupConfigurationCloudwatchLoggingOptionsObservation struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The CloudWatch group name for logging. This value is required if enabled is true.
+	// CloudWatch group name for logging. This value is required if enabled is true.
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
 
-	// The CloudWatch log stream name for logging. This value is required if enabled is true.
+	// CloudWatch log stream name for logging. This value is required if enabled is true.
 	LogStreamName *string `json:"logStreamName,omitempty" tf:"log_stream_name,omitempty"`
 }
 
 type S3BackupConfigurationCloudwatchLoggingOptionsParameters struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The CloudWatch group name for logging. This value is required if enabled is true.
+	// CloudWatch group name for logging. This value is required if enabled is true.
 	// +kubebuilder:validation:Optional
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
 
-	// The CloudWatch log stream name for logging. This value is required if enabled is true.
+	// CloudWatch log stream name for logging. This value is required if enabled is true.
 	// +kubebuilder:validation:Optional
 	LogStreamName *string `json:"logStreamName,omitempty" tf:"log_stream_name,omitempty"`
 }
 
 type S3BackupConfigurationInitParameters struct {
 
-	// The ARN of the S3 bucket
+	// ARN of the S3 bucket.
 	BucketArn *string `json:"bucketArn,omitempty" tf:"bucket_arn,omitempty"`
 
-	// Buffer incoming data for the specified period of time, in seconds between 0 to 60, before delivering it to the destination.  The default value is 60s.
+	// Buffer incoming data for the specified period of time, in seconds, before delivering it to the destination. The default value is 300.
 	BufferingInterval *float64 `json:"bufferingInterval,omitempty" tf:"buffering_interval,omitempty"`
 
-	// Buffer incoming data to the specified size, in MBs between 1 to 5, before delivering it to the destination.  The default value is 5MB.
+	// Buffer incoming data to the specified size, in MBs, before delivering it to the destination. The default value is 5.
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
+	// CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	CloudwatchLoggingOptions *S3BackupConfigurationCloudwatchLoggingOptionsInitParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
-	// The compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
+	// Compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
 	CompressionFormat *string `json:"compressionFormat,omitempty" tf:"compression_format,omitempty"`
 
-	// Prefix added to failed records before writing them to S3. Not currently supported for redshift destination. This prefix appears immediately following the bucket name. For information about how to specify this prefix, see Custom Prefixes for Amazon S3 Objects.
+	// Prefix added to failed records before writing them to S3. This prefix appears immediately following the bucket name. For information about how to specify this prefix, see Custom Prefixes for Amazon S3 Objects.
 	ErrorOutputPrefix *string `json:"errorOutputPrefix,omitempty" tf:"error_output_prefix,omitempty"`
 
-	// Specifies the KMS key ARN the stream will use to encrypt data. If not set, no encryption will
-	// be used.
+	// KMS key ARN the stream will use to encrypt data. If not set, no encryption will be used.
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
-	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered S3 files. You can specify an extra prefix to be added in front of the time format prefix. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket
+	// Extra prefix added in front of the "YYYY/MM/DD/HH" time format prefix that is automatically used for delivered S3 files. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
+	// ARN of the AWS credentials.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
 
 type S3BackupConfigurationObservation struct {
 
-	// The ARN of the S3 bucket
+	// ARN of the S3 bucket.
 	BucketArn *string `json:"bucketArn,omitempty" tf:"bucket_arn,omitempty"`
 
-	// Buffer incoming data for the specified period of time, in seconds between 0 to 60, before delivering it to the destination.  The default value is 60s.
+	// Buffer incoming data for the specified period of time, in seconds, before delivering it to the destination. The default value is 300.
 	BufferingInterval *float64 `json:"bufferingInterval,omitempty" tf:"buffering_interval,omitempty"`
 
-	// Buffer incoming data to the specified size, in MBs between 1 to 5, before delivering it to the destination.  The default value is 5MB.
+	// Buffer incoming data to the specified size, in MBs, before delivering it to the destination. The default value is 5.
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
+	// CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	CloudwatchLoggingOptions *S3BackupConfigurationCloudwatchLoggingOptionsObservation `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
-	// The compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
+	// Compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
 	CompressionFormat *string `json:"compressionFormat,omitempty" tf:"compression_format,omitempty"`
 
-	// Prefix added to failed records before writing them to S3. Not currently supported for redshift destination. This prefix appears immediately following the bucket name. For information about how to specify this prefix, see Custom Prefixes for Amazon S3 Objects.
+	// Prefix added to failed records before writing them to S3. This prefix appears immediately following the bucket name. For information about how to specify this prefix, see Custom Prefixes for Amazon S3 Objects.
 	ErrorOutputPrefix *string `json:"errorOutputPrefix,omitempty" tf:"error_output_prefix,omitempty"`
 
-	// Specifies the KMS key ARN the stream will use to encrypt data. If not set, no encryption will
-	// be used.
+	// KMS key ARN the stream will use to encrypt data. If not set, no encryption will be used.
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
-	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered S3 files. You can specify an extra prefix to be added in front of the time format prefix. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket
+	// Extra prefix added in front of the "YYYY/MM/DD/HH" time format prefix that is automatically used for delivered S3 files. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
+	// ARN of the AWS credentials.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
 
 type S3BackupConfigurationParameters struct {
 
-	// The ARN of the S3 bucket
+	// ARN of the S3 bucket.
 	// +kubebuilder:validation:Optional
 	BucketArn *string `json:"bucketArn" tf:"bucket_arn,omitempty"`
 
-	// Buffer incoming data for the specified period of time, in seconds between 0 to 60, before delivering it to the destination.  The default value is 60s.
+	// Buffer incoming data for the specified period of time, in seconds, before delivering it to the destination. The default value is 300.
 	// +kubebuilder:validation:Optional
 	BufferingInterval *float64 `json:"bufferingInterval,omitempty" tf:"buffering_interval,omitempty"`
 
-	// Buffer incoming data to the specified size, in MBs between 1 to 5, before delivering it to the destination.  The default value is 5MB.
+	// Buffer incoming data to the specified size, in MBs, before delivering it to the destination. The default value is 5.
 	// +kubebuilder:validation:Optional
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
+	// CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	// +kubebuilder:validation:Optional
 	CloudwatchLoggingOptions *S3BackupConfigurationCloudwatchLoggingOptionsParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
-	// The compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
+	// Compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
 	// +kubebuilder:validation:Optional
 	CompressionFormat *string `json:"compressionFormat,omitempty" tf:"compression_format,omitempty"`
 
-	// Prefix added to failed records before writing them to S3. Not currently supported for redshift destination. This prefix appears immediately following the bucket name. For information about how to specify this prefix, see Custom Prefixes for Amazon S3 Objects.
+	// Prefix added to failed records before writing them to S3. This prefix appears immediately following the bucket name. For information about how to specify this prefix, see Custom Prefixes for Amazon S3 Objects.
 	// +kubebuilder:validation:Optional
 	ErrorOutputPrefix *string `json:"errorOutputPrefix,omitempty" tf:"error_output_prefix,omitempty"`
 
-	// Specifies the KMS key ARN the stream will use to encrypt data. If not set, no encryption will
-	// be used.
+	// KMS key ARN the stream will use to encrypt data. If not set, no encryption will be used.
 	// +kubebuilder:validation:Optional
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
-	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered S3 files. You can specify an extra prefix to be added in front of the time format prefix. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket
+	// Extra prefix added in front of the "YYYY/MM/DD/HH" time format prefix that is automatically used for delivered S3 files. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket.
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
+	// ARN of the AWS credentials.
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn" tf:"role_arn,omitempty"`
 }
 
 type S3ConfigurationCloudwatchLoggingOptionsInitParameters struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The CloudWatch group name for logging. This value is required if enabled is true.
+	// CloudWatch group name for logging. This value is required if enabled is true.
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
 
-	// The CloudWatch log stream name for logging. This value is required if enabled is true.
+	// CloudWatch log stream name for logging. This value is required if enabled is true.
 	LogStreamName *string `json:"logStreamName,omitempty" tf:"log_stream_name,omitempty"`
 }
 
 type S3ConfigurationCloudwatchLoggingOptionsObservation struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The CloudWatch group name for logging. This value is required if enabled is true.
+	// CloudWatch group name for logging. This value is required if enabled is true.
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
 
-	// The CloudWatch log stream name for logging. This value is required if enabled is true.
+	// CloudWatch log stream name for logging. This value is required if enabled is true.
 	LogStreamName *string `json:"logStreamName,omitempty" tf:"log_stream_name,omitempty"`
 }
 
 type S3ConfigurationCloudwatchLoggingOptionsParameters struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The CloudWatch group name for logging. This value is required if enabled is true.
+	// CloudWatch group name for logging. This value is required if enabled is true.
 	// +kubebuilder:validation:Optional
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
 
-	// The CloudWatch log stream name for logging. This value is required if enabled is true.
+	// CloudWatch log stream name for logging. This value is required if enabled is true.
 	// +kubebuilder:validation:Optional
 	LogStreamName *string `json:"logStreamName,omitempty" tf:"log_stream_name,omitempty"`
 }
 
 type S3ConfigurationInitParameters struct {
 
-	// The ARN of the S3 bucket
+	// ARN of the S3 bucket.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3/v1beta2.Bucket
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	BucketArn *string `json:"bucketArn,omitempty" tf:"bucket_arn,omitempty"`
@@ -4446,23 +4426,22 @@ type S3ConfigurationInitParameters struct {
 	// Buffer incoming data to the specified size, in MBs between 1 to 5, before delivering it to the destination.  The default value is 5MB.
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
+	// CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	CloudwatchLoggingOptions *S3ConfigurationCloudwatchLoggingOptionsInitParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
-	// The compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
+	// Compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
 	CompressionFormat *string `json:"compressionFormat,omitempty" tf:"compression_format,omitempty"`
 
 	// Prefix added to failed records before writing them to S3. Not currently supported for redshift destination. This prefix appears immediately following the bucket name. For information about how to specify this prefix, see Custom Prefixes for Amazon S3 Objects.
 	ErrorOutputPrefix *string `json:"errorOutputPrefix,omitempty" tf:"error_output_prefix,omitempty"`
 
-	// Specifies the KMS key ARN the stream will use to encrypt data. If not set, no encryption will
-	// be used.
+	// KMS key ARN the stream will use to encrypt data. If not set, no encryption will be used.
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
-	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered S3 files. You can specify an extra prefix to be added in front of the time format prefix. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket
+	// Extra prefix added in front of the "YYYY/MM/DD/HH" time format prefix that is automatically used for delivered S3 files. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
+	// ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
@@ -4478,7 +4457,7 @@ type S3ConfigurationInitParameters struct {
 
 type S3ConfigurationObservation struct {
 
-	// The ARN of the S3 bucket
+	// ARN of the S3 bucket.
 	BucketArn *string `json:"bucketArn,omitempty" tf:"bucket_arn,omitempty"`
 
 	// Buffer incoming data for the specified period of time, in seconds between 0 to 60, before delivering it to the destination.  The default value is 60s.
@@ -4487,29 +4466,28 @@ type S3ConfigurationObservation struct {
 	// Buffer incoming data to the specified size, in MBs between 1 to 5, before delivering it to the destination.  The default value is 5MB.
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
+	// CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	CloudwatchLoggingOptions *S3ConfigurationCloudwatchLoggingOptionsObservation `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
-	// The compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
+	// Compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
 	CompressionFormat *string `json:"compressionFormat,omitempty" tf:"compression_format,omitempty"`
 
 	// Prefix added to failed records before writing them to S3. Not currently supported for redshift destination. This prefix appears immediately following the bucket name. For information about how to specify this prefix, see Custom Prefixes for Amazon S3 Objects.
 	ErrorOutputPrefix *string `json:"errorOutputPrefix,omitempty" tf:"error_output_prefix,omitempty"`
 
-	// Specifies the KMS key ARN the stream will use to encrypt data. If not set, no encryption will
-	// be used.
+	// KMS key ARN the stream will use to encrypt data. If not set, no encryption will be used.
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
-	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered S3 files. You can specify an extra prefix to be added in front of the time format prefix. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket
+	// Extra prefix added in front of the "YYYY/MM/DD/HH" time format prefix that is automatically used for delivered S3 files. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
+	// ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
 
 type S3ConfigurationParameters struct {
 
-	// The ARN of the S3 bucket
+	// ARN of the S3 bucket.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3/v1beta2.Bucket
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -4531,11 +4509,11 @@ type S3ConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
+	// CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	// +kubebuilder:validation:Optional
 	CloudwatchLoggingOptions *S3ConfigurationCloudwatchLoggingOptionsParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
-	// The compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
+	// Compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
 	// +kubebuilder:validation:Optional
 	CompressionFormat *string `json:"compressionFormat,omitempty" tf:"compression_format,omitempty"`
 
@@ -4543,16 +4521,15 @@ type S3ConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	ErrorOutputPrefix *string `json:"errorOutputPrefix,omitempty" tf:"error_output_prefix,omitempty"`
 
-	// Specifies the KMS key ARN the stream will use to encrypt data. If not set, no encryption will
-	// be used.
+	// KMS key ARN the stream will use to encrypt data. If not set, no encryption will be used.
 	// +kubebuilder:validation:Optional
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
-	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered S3 files. You can specify an extra prefix to be added in front of the time format prefix. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket
+	// Extra prefix added in front of the "YYYY/MM/DD/HH" time format prefix that is automatically used for delivered S3 files. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket.
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
+	// ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -4569,13 +4546,13 @@ type S3ConfigurationParameters struct {
 
 type SchemaConfigurationInitParameters struct {
 
-	// The ID of the AWS Glue Data Catalog. If you don't supply this, the AWS account ID is used by default.
+	// ID of the AWS Glue Data Catalog. If you don't supply this, the AWS account ID is used by default.
 	CatalogID *string `json:"catalogId,omitempty" tf:"catalog_id,omitempty"`
 
-	// Specifies the name of the AWS Glue database that contains the schema for the output data.
+	// Name of the AWS Glue database that contains the schema for the output data.
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 
-	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
+	// ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
@@ -4588,7 +4565,7 @@ type SchemaConfigurationInitParameters struct {
 	// +kubebuilder:validation:Optional
 	RoleArnSelector *v2.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
-	// Specifies the AWS Glue table that contains the column information that constitutes your data schema.
+	// AWS Glue table that contains the column information that constitutes your data schema.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/glue/v1beta2.CatalogTable
 	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
 
@@ -4600,38 +4577,38 @@ type SchemaConfigurationInitParameters struct {
 	// +kubebuilder:validation:Optional
 	TableNameSelector *v2.Selector `json:"tableNameSelector,omitempty" tf:"-"`
 
-	// Specifies the table version for the output data schema. Defaults to LATEST.
+	// Version identifier of the delivery stream.
 	VersionID *string `json:"versionId,omitempty" tf:"version_id,omitempty"`
 }
 
 type SchemaConfigurationObservation struct {
 
-	// The ID of the AWS Glue Data Catalog. If you don't supply this, the AWS account ID is used by default.
+	// ID of the AWS Glue Data Catalog. If you don't supply this, the AWS account ID is used by default.
 	CatalogID *string `json:"catalogId,omitempty" tf:"catalog_id,omitempty"`
 
-	// Specifies the name of the AWS Glue database that contains the schema for the output data.
+	// Name of the AWS Glue database that contains the schema for the output data.
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 
 	// If you don't specify an AWS Region, the default is the current region.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
+	// ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
-	// Specifies the AWS Glue table that contains the column information that constitutes your data schema.
+	// AWS Glue table that contains the column information that constitutes your data schema.
 	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
 
-	// Specifies the table version for the output data schema. Defaults to LATEST.
+	// Version identifier of the delivery stream.
 	VersionID *string `json:"versionId,omitempty" tf:"version_id,omitempty"`
 }
 
 type SchemaConfigurationParameters struct {
 
-	// The ID of the AWS Glue Data Catalog. If you don't supply this, the AWS account ID is used by default.
+	// ID of the AWS Glue Data Catalog. If you don't supply this, the AWS account ID is used by default.
 	// +kubebuilder:validation:Optional
 	CatalogID *string `json:"catalogId,omitempty" tf:"catalog_id,omitempty"`
 
-	// Specifies the name of the AWS Glue database that contains the schema for the output data.
+	// Name of the AWS Glue database that contains the schema for the output data.
 	// +kubebuilder:validation:Optional
 	DatabaseName *string `json:"databaseName" tf:"database_name,omitempty"`
 
@@ -4639,7 +4616,7 @@ type SchemaConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
+	// ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -4653,7 +4630,7 @@ type SchemaConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	RoleArnSelector *v2.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
-	// Specifies the AWS Glue table that contains the column information that constitutes your data schema.
+	// AWS Glue table that contains the column information that constitutes your data schema.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/glue/v1beta2.CatalogTable
 	// +kubebuilder:validation:Optional
 	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
@@ -4666,75 +4643,75 @@ type SchemaConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	TableNameSelector *v2.Selector `json:"tableNameSelector,omitempty" tf:"-"`
 
-	// Specifies the table version for the output data schema. Defaults to LATEST.
+	// Version identifier of the delivery stream.
 	// +kubebuilder:validation:Optional
 	VersionID *string `json:"versionId,omitempty" tf:"version_id,omitempty"`
 }
 
 type SecretsManagerConfigurationInitParameters struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
+	// ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
-	// The ARN of the Secrets Manager secret. This value is required if enabled is true.
+	// ARN of the Secrets Manager secret. This value is required if enabled is true.
 	SecretArn *string `json:"secretArn,omitempty" tf:"secret_arn,omitempty"`
 }
 
 type SecretsManagerConfigurationObservation struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
+	// ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
-	// The ARN of the Secrets Manager secret. This value is required if enabled is true.
+	// ARN of the Secrets Manager secret. This value is required if enabled is true.
 	SecretArn *string `json:"secretArn,omitempty" tf:"secret_arn,omitempty"`
 }
 
 type SecretsManagerConfigurationParameters struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
+	// ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions.
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
-	// The ARN of the Secrets Manager secret. This value is required if enabled is true.
+	// ARN of the Secrets Manager secret. This value is required if enabled is true.
 	// +kubebuilder:validation:Optional
 	SecretArn *string `json:"secretArn,omitempty" tf:"secret_arn,omitempty"`
 }
 
 type SerializerInitParameters struct {
 
-	// Specifies converting data to the ORC format before storing it in Amazon S3. For more information, see Apache ORC. See orc_ser_de block below for details.
+	// Converts data to the ORC format before storing it in Amazon S3. For more information, see Apache ORC. See orc_ser_de block below for details.
 	OrcSerDe *OrcSerDeInitParameters `json:"orcSerDe,omitempty" tf:"orc_ser_de,omitempty"`
 
-	// Specifies converting data to the Parquet format before storing it in Amazon S3. For more information, see Apache Parquet. More details below.
+	// Converts data to the Parquet format before storing it in Amazon S3. For more information, see Apache Parquet. See parquet_ser_de block below for details.
 	ParquetSerDe *ParquetSerDeInitParameters `json:"parquetSerDe,omitempty" tf:"parquet_ser_de,omitempty"`
 }
 
 type SerializerObservation struct {
 
-	// Specifies converting data to the ORC format before storing it in Amazon S3. For more information, see Apache ORC. See orc_ser_de block below for details.
+	// Converts data to the ORC format before storing it in Amazon S3. For more information, see Apache ORC. See orc_ser_de block below for details.
 	OrcSerDe *OrcSerDeObservation `json:"orcSerDe,omitempty" tf:"orc_ser_de,omitempty"`
 
-	// Specifies converting data to the Parquet format before storing it in Amazon S3. For more information, see Apache Parquet. More details below.
+	// Converts data to the Parquet format before storing it in Amazon S3. For more information, see Apache Parquet. See parquet_ser_de block below for details.
 	ParquetSerDe *ParquetSerDeObservation `json:"parquetSerDe,omitempty" tf:"parquet_ser_de,omitempty"`
 }
 
 type SerializerParameters struct {
 
-	// Specifies converting data to the ORC format before storing it in Amazon S3. For more information, see Apache ORC. See orc_ser_de block below for details.
+	// Converts data to the ORC format before storing it in Amazon S3. For more information, see Apache ORC. See orc_ser_de block below for details.
 	// +kubebuilder:validation:Optional
 	OrcSerDe *OrcSerDeParameters `json:"orcSerDe,omitempty" tf:"orc_ser_de,omitempty"`
 
-	// Specifies converting data to the Parquet format before storing it in Amazon S3. For more information, see Apache Parquet. More details below.
+	// Converts data to the Parquet format before storing it in Amazon S3. For more information, see Apache Parquet. See parquet_ser_de block below for details.
 	// +kubebuilder:validation:Optional
 	ParquetSerDe *ParquetSerDeParameters `json:"parquetSerDe,omitempty" tf:"parquet_ser_de,omitempty"`
 }
@@ -4747,7 +4724,7 @@ type ServerSideEncryptionInitParameters struct {
 	// ARN of the encryption key. Required when key_type is CUSTOMER_MANAGED_CMK.
 	KeyArn *string `json:"keyArn,omitempty" tf:"key_arn,omitempty"`
 
-	// Type of encryption key. Default is AWS_OWNED_CMK. Valid values are AWS_OWNED_CMK and CUSTOMER_MANAGED_CMK
+	// Type of encryption key. Default is AWS_OWNED_CMK. Valid values are AWS_OWNED_CMK and CUSTOMER_MANAGED_CMK.
 	KeyType *string `json:"keyType,omitempty" tf:"key_type,omitempty"`
 }
 
@@ -4759,7 +4736,7 @@ type ServerSideEncryptionObservation struct {
 	// ARN of the encryption key. Required when key_type is CUSTOMER_MANAGED_CMK.
 	KeyArn *string `json:"keyArn,omitempty" tf:"key_arn,omitempty"`
 
-	// Type of encryption key. Default is AWS_OWNED_CMK. Valid values are AWS_OWNED_CMK and CUSTOMER_MANAGED_CMK
+	// Type of encryption key. Default is AWS_OWNED_CMK. Valid values are AWS_OWNED_CMK and CUSTOMER_MANAGED_CMK.
 	KeyType *string `json:"keyType,omitempty" tf:"key_type,omitempty"`
 }
 
@@ -4773,53 +4750,53 @@ type ServerSideEncryptionParameters struct {
 	// +kubebuilder:validation:Optional
 	KeyArn *string `json:"keyArn,omitempty" tf:"key_arn,omitempty"`
 
-	// Type of encryption key. Default is AWS_OWNED_CMK. Valid values are AWS_OWNED_CMK and CUSTOMER_MANAGED_CMK
+	// Type of encryption key. Default is AWS_OWNED_CMK. Valid values are AWS_OWNED_CMK and CUSTOMER_MANAGED_CMK.
 	// +kubebuilder:validation:Optional
 	KeyType *string `json:"keyType,omitempty" tf:"key_type,omitempty"`
 }
 
 type SnowflakeConfigurationCloudwatchLoggingOptionsInitParameters struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The CloudWatch group name for logging. This value is required if enabled is true.
+	// CloudWatch group name for logging. This value is required if enabled is true.
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
 
-	// The CloudWatch log stream name for logging. This value is required if enabled is true.
+	// CloudWatch log stream name for logging. This value is required if enabled is true.
 	LogStreamName *string `json:"logStreamName,omitempty" tf:"log_stream_name,omitempty"`
 }
 
 type SnowflakeConfigurationCloudwatchLoggingOptionsObservation struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The CloudWatch group name for logging. This value is required if enabled is true.
+	// CloudWatch group name for logging. This value is required if enabled is true.
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
 
-	// The CloudWatch log stream name for logging. This value is required if enabled is true.
+	// CloudWatch log stream name for logging. This value is required if enabled is true.
 	LogStreamName *string `json:"logStreamName,omitempty" tf:"log_stream_name,omitempty"`
 }
 
 type SnowflakeConfigurationCloudwatchLoggingOptionsParameters struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The CloudWatch group name for logging. This value is required if enabled is true.
+	// CloudWatch group name for logging. This value is required if enabled is true.
 	// +kubebuilder:validation:Optional
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
 
-	// The CloudWatch log stream name for logging. This value is required if enabled is true.
+	// CloudWatch log stream name for logging. This value is required if enabled is true.
 	// +kubebuilder:validation:Optional
 	LogStreamName *string `json:"logStreamName,omitempty" tf:"log_stream_name,omitempty"`
 }
 
 type SnowflakeConfigurationInitParameters struct {
 
-	// The URL of the Snowflake account. Format: https://[account_identifier].snowflakecomputing.com.
+	// URL of the Snowflake account. Format: https://[account_identifier].snowflakecomputing.com.
 	AccountURL *string `json:"accountUrl,omitempty" tf:"account_url,omitempty"`
 
 	// Buffer incoming data for the specified period of time, in seconds between 0 to 900, before delivering it to the destination.  The default value is 0s.
@@ -4828,34 +4805,34 @@ type SnowflakeConfigurationInitParameters struct {
 	// Buffer incoming data to the specified size, in MBs between 1 to 128, before delivering it to the destination.  The default value is 1MB.
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
+	// CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	CloudwatchLoggingOptions *SnowflakeConfigurationCloudwatchLoggingOptionsInitParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
-	// The name of the content column.
+	// Name of the content column.
 	ContentColumnName *string `json:"contentColumnName,omitempty" tf:"content_column_name,omitempty"`
 
-	// The data loading option.
+	// Data loading option.
 	DataLoadingOption *string `json:"dataLoadingOption,omitempty" tf:"data_loading_option,omitempty"`
 
-	// The Snowflake database name.
+	// Snowflake database name.
 	Database *string `json:"database,omitempty" tf:"database,omitempty"`
 
-	// The passphrase for the private key.
+	// Passphrase for the private key.
 	KeyPassphraseSecretRef *v2.SecretKeySelector `json:"keyPassphraseSecretRef,omitempty" tf:"-"`
 
-	// The name of the metadata column.
+	// Name of the metadata column.
 	MetadataColumnName *string `json:"metadataColumnName,omitempty" tf:"metadata_column_name,omitempty"`
 
-	// The private key for authentication. This value is required if secrets_manager_configuration is not provided.
+	// Private key for authentication. This value is required if secrets_manager_configuration is not provided.
 	PrivateKeySecretRef *v2.SecretKeySelector `json:"privateKeySecretRef,omitempty" tf:"-"`
 
-	// The processing configuration. See processing_configuration block below for details.
+	// Processing configuration. See processing_configuration block below for details.
 	ProcessingConfiguration *SnowflakeConfigurationProcessingConfigurationInitParameters `json:"processingConfiguration,omitempty" tf:"processing_configuration,omitempty"`
 
 	// After an initial failure to deliver to Snowflake, the total amount of time, in seconds between 0 to 7200, during which Firehose re-attempts delivery (including the first attempt).  After this time has elapsed, the failed documents are written to Amazon S3.  The default value is 60s.  There will be no retry if the value is 0.
 	RetryDuration *float64 `json:"retryDuration,omitempty" tf:"retry_duration,omitempty"`
 
-	// The ARN of the IAM role.
+	// ARN of the IAM role.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
@@ -4868,34 +4845,34 @@ type SnowflakeConfigurationInitParameters struct {
 	// +kubebuilder:validation:Optional
 	RoleArnSelector *v2.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
-	// The S3 backup mode.
+	// S3 backup mode.
 	S3BackupMode *string `json:"s3BackupMode,omitempty" tf:"s3_backup_mode,omitempty"`
 
-	// The S3 configuration. See s3_configuration block below for details.
+	// S3 configuration. See s3_configuration block below for details.
 	S3Configuration *SnowflakeConfigurationS3ConfigurationInitParameters `json:"s3Configuration,omitempty" tf:"s3_configuration,omitempty"`
 
-	// The Snowflake schema name.
+	// Snowflake schema name.
 	Schema *string `json:"schema,omitempty" tf:"schema,omitempty"`
 
-	// The Secrets Manager configuration. See secrets_manager_configuration block below for details. This value is required if user and private_key are not provided.
+	// Secrets Manager configuration. See secrets_manager_configuration block below for details. This value is required if user and private_key are not provided.
 	SecretsManagerConfiguration *SnowflakeConfigurationSecretsManagerConfigurationInitParameters `json:"secretsManagerConfiguration,omitempty" tf:"secrets_manager_configuration,omitempty"`
 
-	// The configuration for Snowflake role.
+	// Configuration for Snowflake role. See snowflake_role_configuration block below for details.
 	SnowflakeRoleConfiguration *SnowflakeRoleConfigurationInitParameters `json:"snowflakeRoleConfiguration,omitempty" tf:"snowflake_role_configuration,omitempty"`
 
-	// The VPC configuration for Snowflake.
+	// VPC configuration for Snowflake. See snowflake_vpc_configuration block below for details.
 	SnowflakeVPCConfiguration *SnowflakeVPCConfigurationInitParameters `json:"snowflakeVpcConfiguration,omitempty" tf:"snowflake_vpc_configuration,omitempty"`
 
-	// The Snowflake table name.
+	// Snowflake table name.
 	Table *string `json:"table,omitempty" tf:"table,omitempty"`
 
-	// The user for authentication. This value is required if secrets_manager_configuration is not provided.
+	// User for authentication. This value is required if secrets_manager_configuration is not provided.
 	User *string `json:"user,omitempty" tf:"user,omitempty"`
 }
 
 type SnowflakeConfigurationObservation struct {
 
-	// The URL of the Snowflake account. Format: https://[account_identifier].snowflakecomputing.com.
+	// URL of the Snowflake account. Format: https://[account_identifier].snowflakecomputing.com.
 	AccountURL *string `json:"accountUrl,omitempty" tf:"account_url,omitempty"`
 
 	// Buffer incoming data for the specified period of time, in seconds between 0 to 900, before delivering it to the destination.  The default value is 0s.
@@ -4904,58 +4881,58 @@ type SnowflakeConfigurationObservation struct {
 	// Buffer incoming data to the specified size, in MBs between 1 to 128, before delivering it to the destination.  The default value is 1MB.
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
+	// CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	CloudwatchLoggingOptions *SnowflakeConfigurationCloudwatchLoggingOptionsObservation `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
-	// The name of the content column.
+	// Name of the content column.
 	ContentColumnName *string `json:"contentColumnName,omitempty" tf:"content_column_name,omitempty"`
 
-	// The data loading option.
+	// Data loading option.
 	DataLoadingOption *string `json:"dataLoadingOption,omitempty" tf:"data_loading_option,omitempty"`
 
-	// The Snowflake database name.
+	// Snowflake database name.
 	Database *string `json:"database,omitempty" tf:"database,omitempty"`
 
-	// The name of the metadata column.
+	// Name of the metadata column.
 	MetadataColumnName *string `json:"metadataColumnName,omitempty" tf:"metadata_column_name,omitempty"`
 
-	// The processing configuration. See processing_configuration block below for details.
+	// Processing configuration. See processing_configuration block below for details.
 	ProcessingConfiguration *SnowflakeConfigurationProcessingConfigurationObservation `json:"processingConfiguration,omitempty" tf:"processing_configuration,omitempty"`
 
 	// After an initial failure to deliver to Snowflake, the total amount of time, in seconds between 0 to 7200, during which Firehose re-attempts delivery (including the first attempt).  After this time has elapsed, the failed documents are written to Amazon S3.  The default value is 60s.  There will be no retry if the value is 0.
 	RetryDuration *float64 `json:"retryDuration,omitempty" tf:"retry_duration,omitempty"`
 
-	// The ARN of the IAM role.
+	// ARN of the IAM role.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
-	// The S3 backup mode.
+	// S3 backup mode.
 	S3BackupMode *string `json:"s3BackupMode,omitempty" tf:"s3_backup_mode,omitempty"`
 
-	// The S3 configuration. See s3_configuration block below for details.
+	// S3 configuration. See s3_configuration block below for details.
 	S3Configuration *SnowflakeConfigurationS3ConfigurationObservation `json:"s3Configuration,omitempty" tf:"s3_configuration,omitempty"`
 
-	// The Snowflake schema name.
+	// Snowflake schema name.
 	Schema *string `json:"schema,omitempty" tf:"schema,omitempty"`
 
-	// The Secrets Manager configuration. See secrets_manager_configuration block below for details. This value is required if user and private_key are not provided.
+	// Secrets Manager configuration. See secrets_manager_configuration block below for details. This value is required if user and private_key are not provided.
 	SecretsManagerConfiguration *SnowflakeConfigurationSecretsManagerConfigurationObservation `json:"secretsManagerConfiguration,omitempty" tf:"secrets_manager_configuration,omitempty"`
 
-	// The configuration for Snowflake role.
+	// Configuration for Snowflake role. See snowflake_role_configuration block below for details.
 	SnowflakeRoleConfiguration *SnowflakeRoleConfigurationObservation `json:"snowflakeRoleConfiguration,omitempty" tf:"snowflake_role_configuration,omitempty"`
 
-	// The VPC configuration for Snowflake.
+	// VPC configuration for Snowflake. See snowflake_vpc_configuration block below for details.
 	SnowflakeVPCConfiguration *SnowflakeVPCConfigurationObservation `json:"snowflakeVpcConfiguration,omitempty" tf:"snowflake_vpc_configuration,omitempty"`
 
-	// The Snowflake table name.
+	// Snowflake table name.
 	Table *string `json:"table,omitempty" tf:"table,omitempty"`
 
-	// The user for authentication. This value is required if secrets_manager_configuration is not provided.
+	// User for authentication. This value is required if secrets_manager_configuration is not provided.
 	User *string `json:"user,omitempty" tf:"user,omitempty"`
 }
 
 type SnowflakeConfigurationParameters struct {
 
-	// The URL of the Snowflake account. Format: https://[account_identifier].snowflakecomputing.com.
+	// URL of the Snowflake account. Format: https://[account_identifier].snowflakecomputing.com.
 	// +kubebuilder:validation:Optional
 	AccountURL *string `json:"accountUrl" tf:"account_url,omitempty"`
 
@@ -4967,35 +4944,35 @@ type SnowflakeConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
+	// CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	// +kubebuilder:validation:Optional
 	CloudwatchLoggingOptions *SnowflakeConfigurationCloudwatchLoggingOptionsParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
-	// The name of the content column.
+	// Name of the content column.
 	// +kubebuilder:validation:Optional
 	ContentColumnName *string `json:"contentColumnName,omitempty" tf:"content_column_name,omitempty"`
 
-	// The data loading option.
+	// Data loading option.
 	// +kubebuilder:validation:Optional
 	DataLoadingOption *string `json:"dataLoadingOption,omitempty" tf:"data_loading_option,omitempty"`
 
-	// The Snowflake database name.
+	// Snowflake database name.
 	// +kubebuilder:validation:Optional
 	Database *string `json:"database" tf:"database,omitempty"`
 
-	// The passphrase for the private key.
+	// Passphrase for the private key.
 	// +kubebuilder:validation:Optional
 	KeyPassphraseSecretRef *v2.SecretKeySelector `json:"keyPassphraseSecretRef,omitempty" tf:"-"`
 
-	// The name of the metadata column.
+	// Name of the metadata column.
 	// +kubebuilder:validation:Optional
 	MetadataColumnName *string `json:"metadataColumnName,omitempty" tf:"metadata_column_name,omitempty"`
 
-	// The private key for authentication. This value is required if secrets_manager_configuration is not provided.
+	// Private key for authentication. This value is required if secrets_manager_configuration is not provided.
 	// +kubebuilder:validation:Optional
 	PrivateKeySecretRef *v2.SecretKeySelector `json:"privateKeySecretRef,omitempty" tf:"-"`
 
-	// The processing configuration. See processing_configuration block below for details.
+	// Processing configuration. See processing_configuration block below for details.
 	// +kubebuilder:validation:Optional
 	ProcessingConfiguration *SnowflakeConfigurationProcessingConfigurationParameters `json:"processingConfiguration,omitempty" tf:"processing_configuration,omitempty"`
 
@@ -5003,7 +4980,7 @@ type SnowflakeConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	RetryDuration *float64 `json:"retryDuration,omitempty" tf:"retry_duration,omitempty"`
 
-	// The ARN of the IAM role.
+	// ARN of the IAM role.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -5017,93 +4994,93 @@ type SnowflakeConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	RoleArnSelector *v2.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
-	// The S3 backup mode.
+	// S3 backup mode.
 	// +kubebuilder:validation:Optional
 	S3BackupMode *string `json:"s3BackupMode,omitempty" tf:"s3_backup_mode,omitempty"`
 
-	// The S3 configuration. See s3_configuration block below for details.
+	// S3 configuration. See s3_configuration block below for details.
 	// +kubebuilder:validation:Optional
 	S3Configuration *SnowflakeConfigurationS3ConfigurationParameters `json:"s3Configuration" tf:"s3_configuration,omitempty"`
 
-	// The Snowflake schema name.
+	// Snowflake schema name.
 	// +kubebuilder:validation:Optional
 	Schema *string `json:"schema" tf:"schema,omitempty"`
 
-	// The Secrets Manager configuration. See secrets_manager_configuration block below for details. This value is required if user and private_key are not provided.
+	// Secrets Manager configuration. See secrets_manager_configuration block below for details. This value is required if user and private_key are not provided.
 	// +kubebuilder:validation:Optional
 	SecretsManagerConfiguration *SnowflakeConfigurationSecretsManagerConfigurationParameters `json:"secretsManagerConfiguration,omitempty" tf:"secrets_manager_configuration,omitempty"`
 
-	// The configuration for Snowflake role.
+	// Configuration for Snowflake role. See snowflake_role_configuration block below for details.
 	// +kubebuilder:validation:Optional
 	SnowflakeRoleConfiguration *SnowflakeRoleConfigurationParameters `json:"snowflakeRoleConfiguration,omitempty" tf:"snowflake_role_configuration,omitempty"`
 
-	// The VPC configuration for Snowflake.
+	// VPC configuration for Snowflake. See snowflake_vpc_configuration block below for details.
 	// +kubebuilder:validation:Optional
 	SnowflakeVPCConfiguration *SnowflakeVPCConfigurationParameters `json:"snowflakeVpcConfiguration,omitempty" tf:"snowflake_vpc_configuration,omitempty"`
 
-	// The Snowflake table name.
+	// Snowflake table name.
 	// +kubebuilder:validation:Optional
 	Table *string `json:"table" tf:"table,omitempty"`
 
-	// The user for authentication. This value is required if secrets_manager_configuration is not provided.
+	// User for authentication. This value is required if secrets_manager_configuration is not provided.
 	// +kubebuilder:validation:Optional
 	User *string `json:"user,omitempty" tf:"user,omitempty"`
 }
 
 type SnowflakeConfigurationProcessingConfigurationInitParameters struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Specifies the data processors as multiple blocks. See processors block below for details.
+	// Data processors as multiple blocks. See processors block below for details.
 	Processors []SnowflakeConfigurationProcessingConfigurationProcessorsInitParameters `json:"processors,omitempty" tf:"processors,omitempty"`
 }
 
 type SnowflakeConfigurationProcessingConfigurationObservation struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Specifies the data processors as multiple blocks. See processors block below for details.
+	// Data processors as multiple blocks. See processors block below for details.
 	Processors []SnowflakeConfigurationProcessingConfigurationProcessorsObservation `json:"processors,omitempty" tf:"processors,omitempty"`
 }
 
 type SnowflakeConfigurationProcessingConfigurationParameters struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Specifies the data processors as multiple blocks. See processors block below for details.
+	// Data processors as multiple blocks. See processors block below for details.
 	// +kubebuilder:validation:Optional
 	Processors []SnowflakeConfigurationProcessingConfigurationProcessorsParameters `json:"processors,omitempty" tf:"processors,omitempty"`
 }
 
 type SnowflakeConfigurationProcessingConfigurationProcessorsInitParameters struct {
 
-	// Specifies the processor parameters as multiple blocks. See parameters block below for details.
+	// Processor parameters as multiple blocks. See parameters block below for details.
 	Parameters []SnowflakeConfigurationProcessingConfigurationProcessorsParametersInitParameters `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
-	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord, Decompression, CloudWatchLogProcessing. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
+	// Type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord, Decompression, CloudWatchLogProcessing. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type SnowflakeConfigurationProcessingConfigurationProcessorsObservation struct {
 
-	// Specifies the processor parameters as multiple blocks. See parameters block below for details.
+	// Processor parameters as multiple blocks. See parameters block below for details.
 	Parameters []SnowflakeConfigurationProcessingConfigurationProcessorsParametersObservation `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
-	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord, Decompression, CloudWatchLogProcessing. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
+	// Type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord, Decompression, CloudWatchLogProcessing. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type SnowflakeConfigurationProcessingConfigurationProcessorsParameters struct {
 
-	// Specifies the processor parameters as multiple blocks. See parameters block below for details.
+	// Processor parameters as multiple blocks. See parameters block below for details.
 	// +kubebuilder:validation:Optional
 	Parameters []SnowflakeConfigurationProcessingConfigurationProcessorsParametersParameters `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
-	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord, Decompression, CloudWatchLogProcessing. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
+	// Type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord, Decompression, CloudWatchLogProcessing. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
 }
@@ -5139,46 +5116,46 @@ type SnowflakeConfigurationProcessingConfigurationProcessorsParametersParameters
 
 type SnowflakeConfigurationS3ConfigurationCloudwatchLoggingOptionsInitParameters struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The CloudWatch group name for logging. This value is required if enabled is true.
+	// CloudWatch group name for logging. This value is required if enabled is true.
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
 
-	// The CloudWatch log stream name for logging. This value is required if enabled is true.
+	// CloudWatch log stream name for logging. This value is required if enabled is true.
 	LogStreamName *string `json:"logStreamName,omitempty" tf:"log_stream_name,omitempty"`
 }
 
 type SnowflakeConfigurationS3ConfigurationCloudwatchLoggingOptionsObservation struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The CloudWatch group name for logging. This value is required if enabled is true.
+	// CloudWatch group name for logging. This value is required if enabled is true.
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
 
-	// The CloudWatch log stream name for logging. This value is required if enabled is true.
+	// CloudWatch log stream name for logging. This value is required if enabled is true.
 	LogStreamName *string `json:"logStreamName,omitempty" tf:"log_stream_name,omitempty"`
 }
 
 type SnowflakeConfigurationS3ConfigurationCloudwatchLoggingOptionsParameters struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The CloudWatch group name for logging. This value is required if enabled is true.
+	// CloudWatch group name for logging. This value is required if enabled is true.
 	// +kubebuilder:validation:Optional
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
 
-	// The CloudWatch log stream name for logging. This value is required if enabled is true.
+	// CloudWatch log stream name for logging. This value is required if enabled is true.
 	// +kubebuilder:validation:Optional
 	LogStreamName *string `json:"logStreamName,omitempty" tf:"log_stream_name,omitempty"`
 }
 
 type SnowflakeConfigurationS3ConfigurationInitParameters struct {
 
-	// The ARN of the S3 bucket
+	// ARN of the S3 bucket.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3/v1beta2.Bucket
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	BucketArn *string `json:"bucketArn,omitempty" tf:"bucket_arn,omitempty"`
@@ -5197,23 +5174,22 @@ type SnowflakeConfigurationS3ConfigurationInitParameters struct {
 	// Buffer incoming data to the specified size, in MBs between 1 to 5, before delivering it to the destination.  The default value is 5MB.
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
+	// CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	CloudwatchLoggingOptions *SnowflakeConfigurationS3ConfigurationCloudwatchLoggingOptionsInitParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
-	// The compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
+	// Compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
 	CompressionFormat *string `json:"compressionFormat,omitempty" tf:"compression_format,omitempty"`
 
 	// Prefix added to failed records before writing them to S3. Not currently supported for redshift destination. This prefix appears immediately following the bucket name. For information about how to specify this prefix, see Custom Prefixes for Amazon S3 Objects.
 	ErrorOutputPrefix *string `json:"errorOutputPrefix,omitempty" tf:"error_output_prefix,omitempty"`
 
-	// Specifies the KMS key ARN the stream will use to encrypt data. If not set, no encryption will
-	// be used.
+	// KMS key ARN the stream will use to encrypt data. If not set, no encryption will be used.
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
-	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered S3 files. You can specify an extra prefix to be added in front of the time format prefix. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket
+	// Extra prefix added in front of the "YYYY/MM/DD/HH" time format prefix that is automatically used for delivered S3 files. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
+	// ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
@@ -5229,7 +5205,7 @@ type SnowflakeConfigurationS3ConfigurationInitParameters struct {
 
 type SnowflakeConfigurationS3ConfigurationObservation struct {
 
-	// The ARN of the S3 bucket
+	// ARN of the S3 bucket.
 	BucketArn *string `json:"bucketArn,omitempty" tf:"bucket_arn,omitempty"`
 
 	// Buffer incoming data for the specified period of time, in seconds between 0 to 60, before delivering it to the destination.  The default value is 60s.
@@ -5238,29 +5214,28 @@ type SnowflakeConfigurationS3ConfigurationObservation struct {
 	// Buffer incoming data to the specified size, in MBs between 1 to 5, before delivering it to the destination.  The default value is 5MB.
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
+	// CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	CloudwatchLoggingOptions *SnowflakeConfigurationS3ConfigurationCloudwatchLoggingOptionsObservation `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
-	// The compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
+	// Compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
 	CompressionFormat *string `json:"compressionFormat,omitempty" tf:"compression_format,omitempty"`
 
 	// Prefix added to failed records before writing them to S3. Not currently supported for redshift destination. This prefix appears immediately following the bucket name. For information about how to specify this prefix, see Custom Prefixes for Amazon S3 Objects.
 	ErrorOutputPrefix *string `json:"errorOutputPrefix,omitempty" tf:"error_output_prefix,omitempty"`
 
-	// Specifies the KMS key ARN the stream will use to encrypt data. If not set, no encryption will
-	// be used.
+	// KMS key ARN the stream will use to encrypt data. If not set, no encryption will be used.
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
-	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered S3 files. You can specify an extra prefix to be added in front of the time format prefix. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket
+	// Extra prefix added in front of the "YYYY/MM/DD/HH" time format prefix that is automatically used for delivered S3 files. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
+	// ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
 
 type SnowflakeConfigurationS3ConfigurationParameters struct {
 
-	// The ARN of the S3 bucket
+	// ARN of the S3 bucket.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3/v1beta2.Bucket
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -5282,11 +5257,11 @@ type SnowflakeConfigurationS3ConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
+	// CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	// +kubebuilder:validation:Optional
 	CloudwatchLoggingOptions *SnowflakeConfigurationS3ConfigurationCloudwatchLoggingOptionsParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
-	// The compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
+	// Compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
 	// +kubebuilder:validation:Optional
 	CompressionFormat *string `json:"compressionFormat,omitempty" tf:"compression_format,omitempty"`
 
@@ -5294,16 +5269,15 @@ type SnowflakeConfigurationS3ConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	ErrorOutputPrefix *string `json:"errorOutputPrefix,omitempty" tf:"error_output_prefix,omitempty"`
 
-	// Specifies the KMS key ARN the stream will use to encrypt data. If not set, no encryption will
-	// be used.
+	// KMS key ARN the stream will use to encrypt data. If not set, no encryption will be used.
 	// +kubebuilder:validation:Optional
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
-	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered S3 files. You can specify an extra prefix to be added in front of the time format prefix. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket
+	// Extra prefix added in front of the "YYYY/MM/DD/HH" time format prefix that is automatically used for delivered S3 files. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket.
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
+	// ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -5320,126 +5294,126 @@ type SnowflakeConfigurationS3ConfigurationParameters struct {
 
 type SnowflakeConfigurationSecretsManagerConfigurationInitParameters struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
+	// ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
-	// The ARN of the Secrets Manager secret. This value is required if enabled is true.
+	// ARN of the Secrets Manager secret. This value is required if enabled is true.
 	SecretArn *string `json:"secretArn,omitempty" tf:"secret_arn,omitempty"`
 }
 
 type SnowflakeConfigurationSecretsManagerConfigurationObservation struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
+	// ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
-	// The ARN of the Secrets Manager secret. This value is required if enabled is true.
+	// ARN of the Secrets Manager secret. This value is required if enabled is true.
 	SecretArn *string `json:"secretArn,omitempty" tf:"secret_arn,omitempty"`
 }
 
 type SnowflakeConfigurationSecretsManagerConfigurationParameters struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
+	// ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions.
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
-	// The ARN of the Secrets Manager secret. This value is required if enabled is true.
+	// ARN of the Secrets Manager secret. This value is required if enabled is true.
 	// +kubebuilder:validation:Optional
 	SecretArn *string `json:"secretArn,omitempty" tf:"secret_arn,omitempty"`
 }
 
 type SnowflakeRoleConfigurationInitParameters struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The Snowflake role.
+	// Snowflake role.
 	SnowflakeRole *string `json:"snowflakeRole,omitempty" tf:"snowflake_role,omitempty"`
 }
 
 type SnowflakeRoleConfigurationObservation struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The Snowflake role.
+	// Snowflake role.
 	SnowflakeRole *string `json:"snowflakeRole,omitempty" tf:"snowflake_role,omitempty"`
 }
 
 type SnowflakeRoleConfigurationParameters struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The Snowflake role.
+	// Snowflake role.
 	// +kubebuilder:validation:Optional
 	SnowflakeRole *string `json:"snowflakeRole,omitempty" tf:"snowflake_role,omitempty"`
 }
 
 type SnowflakeVPCConfigurationInitParameters struct {
 
-	// The VPCE ID for Firehose to privately connect with Snowflake.
+	// VPCE ID for Firehose to privately connect with Snowflake.
 	PrivateLinkVpceID *string `json:"privateLinkVpceId,omitempty" tf:"private_link_vpce_id,omitempty"`
 }
 
 type SnowflakeVPCConfigurationObservation struct {
 
-	// The VPCE ID for Firehose to privately connect with Snowflake.
+	// VPCE ID for Firehose to privately connect with Snowflake.
 	PrivateLinkVpceID *string `json:"privateLinkVpceId,omitempty" tf:"private_link_vpce_id,omitempty"`
 }
 
 type SnowflakeVPCConfigurationParameters struct {
 
-	// The VPCE ID for Firehose to privately connect with Snowflake.
+	// VPCE ID for Firehose to privately connect with Snowflake.
 	// +kubebuilder:validation:Optional
 	PrivateLinkVpceID *string `json:"privateLinkVpceId" tf:"private_link_vpce_id,omitempty"`
 }
 
 type SplunkConfigurationCloudwatchLoggingOptionsInitParameters struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The CloudWatch group name for logging. This value is required if enabled is true.
+	// CloudWatch group name for logging. This value is required if enabled is true.
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
 
-	// The CloudWatch log stream name for logging. This value is required if enabled is true.
+	// CloudWatch log stream name for logging. This value is required if enabled is true.
 	LogStreamName *string `json:"logStreamName,omitempty" tf:"log_stream_name,omitempty"`
 }
 
 type SplunkConfigurationCloudwatchLoggingOptionsObservation struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The CloudWatch group name for logging. This value is required if enabled is true.
+	// CloudWatch group name for logging. This value is required if enabled is true.
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
 
-	// The CloudWatch log stream name for logging. This value is required if enabled is true.
+	// CloudWatch log stream name for logging. This value is required if enabled is true.
 	LogStreamName *string `json:"logStreamName,omitempty" tf:"log_stream_name,omitempty"`
 }
 
 type SplunkConfigurationCloudwatchLoggingOptionsParameters struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The CloudWatch group name for logging. This value is required if enabled is true.
+	// CloudWatch group name for logging. This value is required if enabled is true.
 	// +kubebuilder:validation:Optional
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
 
-	// The CloudWatch log stream name for logging. This value is required if enabled is true.
+	// CloudWatch log stream name for logging. This value is required if enabled is true.
 	// +kubebuilder:validation:Optional
 	LogStreamName *string `json:"logStreamName,omitempty" tf:"log_stream_name,omitempty"`
 }
@@ -5452,35 +5426,34 @@ type SplunkConfigurationInitParameters struct {
 	// Buffer incoming data to the specified size, in MBs between 1 to 5, before delivering it to the destination.  The default value is 5MB.
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
+	// CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	CloudwatchLoggingOptions *SplunkConfigurationCloudwatchLoggingOptionsInitParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
-	// The amount of time, in seconds between 180 and 600, that Kinesis Firehose waits to receive an acknowledgment from Splunk after it sends it data.
+	// Amount of time, in seconds between 180 and 600, that Kinesis Firehose waits to receive an acknowledgment from Splunk after it sends it data.
 	HecAcknowledgmentTimeout *float64 `json:"hecAcknowledgmentTimeout,omitempty" tf:"hec_acknowledgment_timeout,omitempty"`
 
-	// The HTTP Event Collector (HEC) endpoint to which Kinesis Firehose sends your data.
+	// HTTP Event Collector (HEC) endpoint to which Kinesis Firehose sends your data.
 	HecEndpoint *string `json:"hecEndpoint,omitempty" tf:"hec_endpoint,omitempty"`
 
-	// The HEC endpoint type. Valid values are Raw or Event. The default value is Raw.
+	// HEC endpoint type. Valid values are Raw or Event. The default value is Raw.
 	HecEndpointType *string `json:"hecEndpointType,omitempty" tf:"hec_endpoint_type,omitempty"`
 
-	// The GUID that you obtain from your Splunk cluster when you create a new HEC endpoint. This value is required if secrets_manager_configuration is not provided.
+	// GUID that you obtain from your Splunk cluster when you create a new HEC endpoint. This value is required if secrets_manager_configuration is not provided.
 	HecTokenSecretRef *v2.SecretKeySelector `json:"hecTokenSecretRef,omitempty" tf:"-"`
 
-	// The data processing configuration.  See processing_configuration block below for details.
+	// Data processing configuration.  See processing_configuration block below for details.
 	ProcessingConfiguration *SplunkConfigurationProcessingConfigurationInitParameters `json:"processingConfiguration,omitempty" tf:"processing_configuration,omitempty"`
 
 	// After an initial failure to deliver to Splunk, the total amount of time, in seconds between 0 to 7200, during which Firehose re-attempts delivery (including the first attempt).  After this time has elapsed, the failed documents are written to Amazon S3.  The default value is 300s.  There will be no retry if the value is 0.
 	RetryDuration *float64 `json:"retryDuration,omitempty" tf:"retry_duration,omitempty"`
 
-	// Defines how documents should be delivered to Amazon S3.  Valid values are FailedEventsOnly and AllEvents.  Default value is FailedEventsOnly.
-	// secrets_manager_configuration -  The Secrets Manager configuration. See secrets_manager_configuration block below for details. This value is required if hec_token is not provided.
+	// How documents should be delivered to Amazon S3.  Valid values are FailedEventsOnly and AllEvents.  Default value is FailedEventsOnly.
 	S3BackupMode *string `json:"s3BackupMode,omitempty" tf:"s3_backup_mode,omitempty"`
 
-	// The S3 Configuration. See s3_configuration block below for details.
+	// S3 Configuration. See s3_configuration block below for details.
 	S3Configuration *SplunkConfigurationS3ConfigurationInitParameters `json:"s3Configuration,omitempty" tf:"s3_configuration,omitempty"`
 
-	// The Secrets Manager configuration. See secrets_manager_configuration block below for details. This value is required if user and private_key are not provided.
+	// Secrets Manager configuration. See secrets_manager_configuration block below for details. This value is required if hec_token is not provided.
 	SecretsManagerConfiguration *SplunkConfigurationSecretsManagerConfigurationInitParameters `json:"secretsManagerConfiguration,omitempty" tf:"secrets_manager_configuration,omitempty"`
 }
 
@@ -5492,32 +5465,31 @@ type SplunkConfigurationObservation struct {
 	// Buffer incoming data to the specified size, in MBs between 1 to 5, before delivering it to the destination.  The default value is 5MB.
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
+	// CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	CloudwatchLoggingOptions *SplunkConfigurationCloudwatchLoggingOptionsObservation `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
-	// The amount of time, in seconds between 180 and 600, that Kinesis Firehose waits to receive an acknowledgment from Splunk after it sends it data.
+	// Amount of time, in seconds between 180 and 600, that Kinesis Firehose waits to receive an acknowledgment from Splunk after it sends it data.
 	HecAcknowledgmentTimeout *float64 `json:"hecAcknowledgmentTimeout,omitempty" tf:"hec_acknowledgment_timeout,omitempty"`
 
-	// The HTTP Event Collector (HEC) endpoint to which Kinesis Firehose sends your data.
+	// HTTP Event Collector (HEC) endpoint to which Kinesis Firehose sends your data.
 	HecEndpoint *string `json:"hecEndpoint,omitempty" tf:"hec_endpoint,omitempty"`
 
-	// The HEC endpoint type. Valid values are Raw or Event. The default value is Raw.
+	// HEC endpoint type. Valid values are Raw or Event. The default value is Raw.
 	HecEndpointType *string `json:"hecEndpointType,omitempty" tf:"hec_endpoint_type,omitempty"`
 
-	// The data processing configuration.  See processing_configuration block below for details.
+	// Data processing configuration.  See processing_configuration block below for details.
 	ProcessingConfiguration *SplunkConfigurationProcessingConfigurationObservation `json:"processingConfiguration,omitempty" tf:"processing_configuration,omitempty"`
 
 	// After an initial failure to deliver to Splunk, the total amount of time, in seconds between 0 to 7200, during which Firehose re-attempts delivery (including the first attempt).  After this time has elapsed, the failed documents are written to Amazon S3.  The default value is 300s.  There will be no retry if the value is 0.
 	RetryDuration *float64 `json:"retryDuration,omitempty" tf:"retry_duration,omitempty"`
 
-	// Defines how documents should be delivered to Amazon S3.  Valid values are FailedEventsOnly and AllEvents.  Default value is FailedEventsOnly.
-	// secrets_manager_configuration -  The Secrets Manager configuration. See secrets_manager_configuration block below for details. This value is required if hec_token is not provided.
+	// How documents should be delivered to Amazon S3.  Valid values are FailedEventsOnly and AllEvents.  Default value is FailedEventsOnly.
 	S3BackupMode *string `json:"s3BackupMode,omitempty" tf:"s3_backup_mode,omitempty"`
 
-	// The S3 Configuration. See s3_configuration block below for details.
+	// S3 Configuration. See s3_configuration block below for details.
 	S3Configuration *SplunkConfigurationS3ConfigurationObservation `json:"s3Configuration,omitempty" tf:"s3_configuration,omitempty"`
 
-	// The Secrets Manager configuration. See secrets_manager_configuration block below for details. This value is required if user and private_key are not provided.
+	// Secrets Manager configuration. See secrets_manager_configuration block below for details. This value is required if hec_token is not provided.
 	SecretsManagerConfiguration *SplunkConfigurationSecretsManagerConfigurationObservation `json:"secretsManagerConfiguration,omitempty" tf:"secrets_manager_configuration,omitempty"`
 }
 
@@ -5531,27 +5503,27 @@ type SplunkConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
+	// CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	// +kubebuilder:validation:Optional
 	CloudwatchLoggingOptions *SplunkConfigurationCloudwatchLoggingOptionsParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
-	// The amount of time, in seconds between 180 and 600, that Kinesis Firehose waits to receive an acknowledgment from Splunk after it sends it data.
+	// Amount of time, in seconds between 180 and 600, that Kinesis Firehose waits to receive an acknowledgment from Splunk after it sends it data.
 	// +kubebuilder:validation:Optional
 	HecAcknowledgmentTimeout *float64 `json:"hecAcknowledgmentTimeout,omitempty" tf:"hec_acknowledgment_timeout,omitempty"`
 
-	// The HTTP Event Collector (HEC) endpoint to which Kinesis Firehose sends your data.
+	// HTTP Event Collector (HEC) endpoint to which Kinesis Firehose sends your data.
 	// +kubebuilder:validation:Optional
 	HecEndpoint *string `json:"hecEndpoint" tf:"hec_endpoint,omitempty"`
 
-	// The HEC endpoint type. Valid values are Raw or Event. The default value is Raw.
+	// HEC endpoint type. Valid values are Raw or Event. The default value is Raw.
 	// +kubebuilder:validation:Optional
 	HecEndpointType *string `json:"hecEndpointType,omitempty" tf:"hec_endpoint_type,omitempty"`
 
-	// The GUID that you obtain from your Splunk cluster when you create a new HEC endpoint. This value is required if secrets_manager_configuration is not provided.
+	// GUID that you obtain from your Splunk cluster when you create a new HEC endpoint. This value is required if secrets_manager_configuration is not provided.
 	// +kubebuilder:validation:Optional
 	HecTokenSecretRef *v2.SecretKeySelector `json:"hecTokenSecretRef,omitempty" tf:"-"`
 
-	// The data processing configuration.  See processing_configuration block below for details.
+	// Data processing configuration.  See processing_configuration block below for details.
 	// +kubebuilder:validation:Optional
 	ProcessingConfiguration *SplunkConfigurationProcessingConfigurationParameters `json:"processingConfiguration,omitempty" tf:"processing_configuration,omitempty"`
 
@@ -5559,74 +5531,73 @@ type SplunkConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	RetryDuration *float64 `json:"retryDuration,omitempty" tf:"retry_duration,omitempty"`
 
-	// Defines how documents should be delivered to Amazon S3.  Valid values are FailedEventsOnly and AllEvents.  Default value is FailedEventsOnly.
-	// secrets_manager_configuration -  The Secrets Manager configuration. See secrets_manager_configuration block below for details. This value is required if hec_token is not provided.
+	// How documents should be delivered to Amazon S3.  Valid values are FailedEventsOnly and AllEvents.  Default value is FailedEventsOnly.
 	// +kubebuilder:validation:Optional
 	S3BackupMode *string `json:"s3BackupMode,omitempty" tf:"s3_backup_mode,omitempty"`
 
-	// The S3 Configuration. See s3_configuration block below for details.
+	// S3 Configuration. See s3_configuration block below for details.
 	// +kubebuilder:validation:Optional
 	S3Configuration *SplunkConfigurationS3ConfigurationParameters `json:"s3Configuration" tf:"s3_configuration,omitempty"`
 
-	// The Secrets Manager configuration. See secrets_manager_configuration block below for details. This value is required if user and private_key are not provided.
+	// Secrets Manager configuration. See secrets_manager_configuration block below for details. This value is required if hec_token is not provided.
 	// +kubebuilder:validation:Optional
 	SecretsManagerConfiguration *SplunkConfigurationSecretsManagerConfigurationParameters `json:"secretsManagerConfiguration,omitempty" tf:"secrets_manager_configuration,omitempty"`
 }
 
 type SplunkConfigurationProcessingConfigurationInitParameters struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Specifies the data processors as multiple blocks. See processors block below for details.
+	// Data processors as multiple blocks. See processors block below for details.
 	Processors []SplunkConfigurationProcessingConfigurationProcessorsInitParameters `json:"processors,omitempty" tf:"processors,omitempty"`
 }
 
 type SplunkConfigurationProcessingConfigurationObservation struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Specifies the data processors as multiple blocks. See processors block below for details.
+	// Data processors as multiple blocks. See processors block below for details.
 	Processors []SplunkConfigurationProcessingConfigurationProcessorsObservation `json:"processors,omitempty" tf:"processors,omitempty"`
 }
 
 type SplunkConfigurationProcessingConfigurationParameters struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Specifies the data processors as multiple blocks. See processors block below for details.
+	// Data processors as multiple blocks. See processors block below for details.
 	// +kubebuilder:validation:Optional
 	Processors []SplunkConfigurationProcessingConfigurationProcessorsParameters `json:"processors,omitempty" tf:"processors,omitempty"`
 }
 
 type SplunkConfigurationProcessingConfigurationProcessorsInitParameters struct {
 
-	// Specifies the processor parameters as multiple blocks. See parameters block below for details.
+	// Processor parameters as multiple blocks. See parameters block below for details.
 	Parameters []SplunkConfigurationProcessingConfigurationProcessorsParametersInitParameters `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
-	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord, Decompression, CloudWatchLogProcessing. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
+	// Type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord, Decompression, CloudWatchLogProcessing. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type SplunkConfigurationProcessingConfigurationProcessorsObservation struct {
 
-	// Specifies the processor parameters as multiple blocks. See parameters block below for details.
+	// Processor parameters as multiple blocks. See parameters block below for details.
 	Parameters []SplunkConfigurationProcessingConfigurationProcessorsParametersObservation `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
-	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord, Decompression, CloudWatchLogProcessing. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
+	// Type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord, Decompression, CloudWatchLogProcessing. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type SplunkConfigurationProcessingConfigurationProcessorsParameters struct {
 
-	// Specifies the processor parameters as multiple blocks. See parameters block below for details.
+	// Processor parameters as multiple blocks. See parameters block below for details.
 	// +kubebuilder:validation:Optional
 	Parameters []SplunkConfigurationProcessingConfigurationProcessorsParametersParameters `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
-	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord, Decompression, CloudWatchLogProcessing. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
+	// Type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord, Decompression, CloudWatchLogProcessing. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
 }
@@ -5662,46 +5633,46 @@ type SplunkConfigurationProcessingConfigurationProcessorsParametersParameters st
 
 type SplunkConfigurationS3ConfigurationCloudwatchLoggingOptionsInitParameters struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The CloudWatch group name for logging. This value is required if enabled is true.
+	// CloudWatch group name for logging. This value is required if enabled is true.
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
 
-	// The CloudWatch log stream name for logging. This value is required if enabled is true.
+	// CloudWatch log stream name for logging. This value is required if enabled is true.
 	LogStreamName *string `json:"logStreamName,omitempty" tf:"log_stream_name,omitempty"`
 }
 
 type SplunkConfigurationS3ConfigurationCloudwatchLoggingOptionsObservation struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The CloudWatch group name for logging. This value is required if enabled is true.
+	// CloudWatch group name for logging. This value is required if enabled is true.
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
 
-	// The CloudWatch log stream name for logging. This value is required if enabled is true.
+	// CloudWatch log stream name for logging. This value is required if enabled is true.
 	LogStreamName *string `json:"logStreamName,omitempty" tf:"log_stream_name,omitempty"`
 }
 
 type SplunkConfigurationS3ConfigurationCloudwatchLoggingOptionsParameters struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The CloudWatch group name for logging. This value is required if enabled is true.
+	// CloudWatch group name for logging. This value is required if enabled is true.
 	// +kubebuilder:validation:Optional
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
 
-	// The CloudWatch log stream name for logging. This value is required if enabled is true.
+	// CloudWatch log stream name for logging. This value is required if enabled is true.
 	// +kubebuilder:validation:Optional
 	LogStreamName *string `json:"logStreamName,omitempty" tf:"log_stream_name,omitempty"`
 }
 
 type SplunkConfigurationS3ConfigurationInitParameters struct {
 
-	// The ARN of the S3 bucket
+	// ARN of the S3 bucket.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3/v1beta2.Bucket
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	BucketArn *string `json:"bucketArn,omitempty" tf:"bucket_arn,omitempty"`
@@ -5720,23 +5691,22 @@ type SplunkConfigurationS3ConfigurationInitParameters struct {
 	// Buffer incoming data to the specified size, in MBs between 1 to 5, before delivering it to the destination.  The default value is 5MB.
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
+	// CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	CloudwatchLoggingOptions *SplunkConfigurationS3ConfigurationCloudwatchLoggingOptionsInitParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
-	// The compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
+	// Compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
 	CompressionFormat *string `json:"compressionFormat,omitempty" tf:"compression_format,omitempty"`
 
 	// Prefix added to failed records before writing them to S3. Not currently supported for redshift destination. This prefix appears immediately following the bucket name. For information about how to specify this prefix, see Custom Prefixes for Amazon S3 Objects.
 	ErrorOutputPrefix *string `json:"errorOutputPrefix,omitempty" tf:"error_output_prefix,omitempty"`
 
-	// Specifies the KMS key ARN the stream will use to encrypt data. If not set, no encryption will
-	// be used.
+	// KMS key ARN the stream will use to encrypt data. If not set, no encryption will be used.
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
-	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered S3 files. You can specify an extra prefix to be added in front of the time format prefix. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket
+	// Extra prefix added in front of the "YYYY/MM/DD/HH" time format prefix that is automatically used for delivered S3 files. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
+	// ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
@@ -5752,7 +5722,7 @@ type SplunkConfigurationS3ConfigurationInitParameters struct {
 
 type SplunkConfigurationS3ConfigurationObservation struct {
 
-	// The ARN of the S3 bucket
+	// ARN of the S3 bucket.
 	BucketArn *string `json:"bucketArn,omitempty" tf:"bucket_arn,omitempty"`
 
 	// Buffer incoming data for the specified period of time, in seconds between 0 to 60, before delivering it to the destination.  The default value is 60s.
@@ -5761,29 +5731,28 @@ type SplunkConfigurationS3ConfigurationObservation struct {
 	// Buffer incoming data to the specified size, in MBs between 1 to 5, before delivering it to the destination.  The default value is 5MB.
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
+	// CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	CloudwatchLoggingOptions *SplunkConfigurationS3ConfigurationCloudwatchLoggingOptionsObservation `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
-	// The compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
+	// Compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
 	CompressionFormat *string `json:"compressionFormat,omitempty" tf:"compression_format,omitempty"`
 
 	// Prefix added to failed records before writing them to S3. Not currently supported for redshift destination. This prefix appears immediately following the bucket name. For information about how to specify this prefix, see Custom Prefixes for Amazon S3 Objects.
 	ErrorOutputPrefix *string `json:"errorOutputPrefix,omitempty" tf:"error_output_prefix,omitempty"`
 
-	// Specifies the KMS key ARN the stream will use to encrypt data. If not set, no encryption will
-	// be used.
+	// KMS key ARN the stream will use to encrypt data. If not set, no encryption will be used.
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
-	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered S3 files. You can specify an extra prefix to be added in front of the time format prefix. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket
+	// Extra prefix added in front of the "YYYY/MM/DD/HH" time format prefix that is automatically used for delivered S3 files. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
+	// ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
 
 type SplunkConfigurationS3ConfigurationParameters struct {
 
-	// The ARN of the S3 bucket
+	// ARN of the S3 bucket.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3/v1beta2.Bucket
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -5805,11 +5774,11 @@ type SplunkConfigurationS3ConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
+	// CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	// +kubebuilder:validation:Optional
 	CloudwatchLoggingOptions *SplunkConfigurationS3ConfigurationCloudwatchLoggingOptionsParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
-	// The compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
+	// Compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
 	// +kubebuilder:validation:Optional
 	CompressionFormat *string `json:"compressionFormat,omitempty" tf:"compression_format,omitempty"`
 
@@ -5817,16 +5786,15 @@ type SplunkConfigurationS3ConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	ErrorOutputPrefix *string `json:"errorOutputPrefix,omitempty" tf:"error_output_prefix,omitempty"`
 
-	// Specifies the KMS key ARN the stream will use to encrypt data. If not set, no encryption will
-	// be used.
+	// KMS key ARN the stream will use to encrypt data. If not set, no encryption will be used.
 	// +kubebuilder:validation:Optional
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
-	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered S3 files. You can specify an extra prefix to be added in front of the time format prefix. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket
+	// Extra prefix added in front of the "YYYY/MM/DD/HH" time format prefix that is automatically used for delivered S3 files. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket.
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
+	// ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -5843,46 +5811,46 @@ type SplunkConfigurationS3ConfigurationParameters struct {
 
 type SplunkConfigurationSecretsManagerConfigurationInitParameters struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
+	// ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
-	// The ARN of the Secrets Manager secret. This value is required if enabled is true.
+	// ARN of the Secrets Manager secret. This value is required if enabled is true.
 	SecretArn *string `json:"secretArn,omitempty" tf:"secret_arn,omitempty"`
 }
 
 type SplunkConfigurationSecretsManagerConfigurationObservation struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
+	// ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
-	// The ARN of the Secrets Manager secret. This value is required if enabled is true.
+	// ARN of the Secrets Manager secret. This value is required if enabled is true.
 	SecretArn *string `json:"secretArn,omitempty" tf:"secret_arn,omitempty"`
 }
 
 type SplunkConfigurationSecretsManagerConfigurationParameters struct {
 
-	// Enables or disables the logging. Defaults to false.
+	// Whether the Snowflake role is enabled.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
+	// ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions.
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
-	// The ARN of the Secrets Manager secret. This value is required if enabled is true.
+	// ARN of the Secrets Manager secret. This value is required if enabled is true.
 	// +kubebuilder:validation:Optional
 	SecretArn *string `json:"secretArn,omitempty" tf:"secret_arn,omitempty"`
 }
 
 type VPCConfigInitParameters struct {
 
-	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
+	// ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
@@ -5895,7 +5863,7 @@ type VPCConfigInitParameters struct {
 	// +kubebuilder:validation:Optional
 	RoleArnSelector *v2.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
-	// A list of security group IDs to associate with Kinesis Firehose.
+	// List of security group IDs to associate with Kinesis Firehose.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +listType=set
@@ -5909,7 +5877,7 @@ type VPCConfigInitParameters struct {
 	// +kubebuilder:validation:Optional
 	SecurityGroupIdsSelector *v2.Selector `json:"securityGroupIdsSelector,omitempty" tf:"-"`
 
-	// A list of subnet IDs to associate with Kinesis Firehose.
+	// List of subnet IDs to associate with Kinesis Firehose.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +listType=set
@@ -5926,23 +5894,24 @@ type VPCConfigInitParameters struct {
 
 type VPCConfigObservation struct {
 
-	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
+	// ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
-	// A list of security group IDs to associate with Kinesis Firehose.
+	// List of security group IDs to associate with Kinesis Firehose.
 	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
-	// A list of subnet IDs to associate with Kinesis Firehose.
+	// List of subnet IDs to associate with Kinesis Firehose.
 	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
+	// ID of the VPC associated with the delivery stream.
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 }
 
 type VPCConfigParameters struct {
 
-	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
+	// ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -5956,7 +5925,7 @@ type VPCConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	RoleArnSelector *v2.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
-	// A list of security group IDs to associate with Kinesis Firehose.
+	// List of security group IDs to associate with Kinesis Firehose.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -5971,7 +5940,7 @@ type VPCConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	SecurityGroupIdsSelector *v2.Selector `json:"securityGroupIdsSelector,omitempty" tf:"-"`
 
-	// A list of subnet IDs to associate with Kinesis Firehose.
+	// List of subnet IDs to associate with Kinesis Firehose.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional

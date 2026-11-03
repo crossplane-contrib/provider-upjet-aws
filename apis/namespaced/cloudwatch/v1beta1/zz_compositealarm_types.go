@@ -77,7 +77,7 @@ type CompositeAlarmInitParameters struct {
 	// The description for the composite alarm.
 	AlarmDescription *string `json:"alarmDescription,omitempty" tf:"alarm_description,omitempty"`
 
-	// An expression that specifies which other alarms are to be evaluated to determine this composite alarm's state. For syntax, see Creating a Composite Alarm. The maximum length is 10240 characters.
+	// Expression that specifies which other alarms are to be evaluated to determine this composite alarm's state. For syntax, see Creating a Composite Alarm. The maximum length is 10240 characters. Leading and trailing whitespace are not allowed.
 	AlarmRule *string `json:"alarmRule,omitempty" tf:"alarm_rule,omitempty"`
 
 	// The set of actions to execute when this alarm transitions to the INSUFFICIENT_DATA state from any other state. Each action is specified as an ARN. Up to 5 actions are allowed.
@@ -118,7 +118,7 @@ type CompositeAlarmObservation struct {
 	// The description for the composite alarm.
 	AlarmDescription *string `json:"alarmDescription,omitempty" tf:"alarm_description,omitempty"`
 
-	// An expression that specifies which other alarms are to be evaluated to determine this composite alarm's state. For syntax, see Creating a Composite Alarm. The maximum length is 10240 characters.
+	// Expression that specifies which other alarms are to be evaluated to determine this composite alarm's state. For syntax, see Creating a Composite Alarm. The maximum length is 10240 characters. Leading and trailing whitespace are not allowed.
 	AlarmRule *string `json:"alarmRule,omitempty" tf:"alarm_rule,omitempty"`
 
 	// The ARN of the composite alarm.
@@ -177,7 +177,7 @@ type CompositeAlarmParameters struct {
 	// +kubebuilder:validation:Optional
 	AlarmDescription *string `json:"alarmDescription,omitempty" tf:"alarm_description,omitempty"`
 
-	// An expression that specifies which other alarms are to be evaluated to determine this composite alarm's state. For syntax, see Creating a Composite Alarm. The maximum length is 10240 characters.
+	// Expression that specifies which other alarms are to be evaluated to determine this composite alarm's state. For syntax, see Creating a Composite Alarm. The maximum length is 10240 characters. Leading and trailing whitespace are not allowed.
 	// +kubebuilder:validation:Optional
 	AlarmRule *string `json:"alarmRule,omitempty" tf:"alarm_rule,omitempty"`
 

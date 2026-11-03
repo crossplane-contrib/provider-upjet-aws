@@ -61,8 +61,8 @@ spec:
               forProvider:
                 properties:
                   encryptionKeyArn:
-                    description: The AWS KMS key identifier (ARN) used to encrypt
-                      the backups in the logically air-gapped vault.
+                    description: AWS KMS key identifier (ARN) used to encrypt the
+                      backups in the logically air-gapped vault.
                     type: string
                   encryptionKeyArnRef:
                     description: Reference to a Key in kms to populate encryptionKeyArn.
@@ -180,8 +180,8 @@ spec:
                   autoscaler.
                 properties:
                   encryptionKeyArn:
-                    description: The AWS KMS key identifier (ARN) used to encrypt
-                      the backups in the logically air-gapped vault.
+                    description: AWS KMS key identifier (ARN) used to encrypt the
+                      backups in the logically air-gapped vault.
                     type: string
                   encryptionKeyArnRef:
                     description: Reference to a Key in kms to populate encryptionKeyArn.
@@ -352,14 +352,14 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The ARN of the Logically Air Gapped Backup Vault.
+                    description: ARN of the Logically Air Gapped Backup Vault.
                     type: string
                   encryptionKeyArn:
-                    description: The AWS KMS key identifier (ARN) used to encrypt
-                      the backups in the logically air-gapped vault.
+                    description: AWS KMS key identifier (ARN) used to encrypt the
+                      backups in the logically air-gapped vault.
                     type: string
                   id:
-                    description: The name of the Logically Air Gapped Backup Vault.
+                    description: Name of the Logically Air Gapped Backup Vault.
                     type: string
                   maxRetentionDays:
                     description: Maximum retention period that the Logically Air Gapped
@@ -383,9 +383,8 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
                 type: object

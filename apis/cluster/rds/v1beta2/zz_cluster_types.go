@@ -27,7 +27,7 @@ type ClusterInitParameters struct {
 	// Whether to apply minor engine upgrades automatically to the DB cluster during the maintenance window. Defaults to true.
 	AutoMinorVersionUpgrade *bool `json:"autoMinorVersionUpgrade,omitempty" tf:"auto_minor_version_upgrade,omitempty"`
 
-	// List of EC2 Availability Zones for the DB cluster storage where DB cluster instances can be created. We recommend specifying 3 AZs or using the  if necessary. A maximum of 3 AZs can be configured. Note: Multi-AZ DB clusters require exactly 3 Availability Zones in the DB subnet group. Aurora DB clusters can operate with fewer AZs, but RDS will still automatically assign 3 AZs as described above.
+	// List of EC2 Availability Zones for the DB cluster storage where DB cluster instances can be created. We recommend specifying 3 AZs or using the  if necessary. A maximum of 3 AZs can be configured. Note: Multi-AZ DB clusters require exactly 3 Availability Zones in the DB subnet group. Aurora DB clusters can operate with fewer AZs, but RDS will still automatically assign 3 AZs as described above. Note: Do not set availability_zones to the output of a data source such as aws_availability_zones, as this may be subject to change (for example, when a new AZ is added to a Region). Changing availability_zones forces a replacement, which will destroy and recreate the cluster. Always use an explicit, static list of AZs.
 	// +listType=set
 	AvailabilityZones []*string `json:"availabilityZones,omitempty" tf:"availability_zones,omitempty"`
 
@@ -119,7 +119,7 @@ type ClusterInitParameters struct {
 	// Whether read replicas can forward write operations to the writer DB instance in the DB cluster. By default, write operations aren't allowed on reader DB instances. See the User Guide for Aurora for more information. NOTE: Local write forwarding requires Aurora MySQL version 3.04 or higher.
 	EnableLocalWriteForwarding *bool `json:"enableLocalWriteForwarding,omitempty" tf:"enable_local_write_forwarding,omitempty"`
 
-	// Set of log types to export to cloudwatch. If omitted, no logs will be exported. The following log types are supported: audit, error, general, iam-db-auth-error, instance, postgresql (PostgreSQL), slowquery.
+	// Set of log types to export to CloudWatch. If omitted, no logs will be exported. The following log types are supported: audit, error, general, iam-db-auth-error, instance, postgresql (PostgreSQL), slowquery.
 	// +listType=set
 	EnabledCloudwatchLogsExports []*string `json:"enabledCloudwatchLogsExports,omitempty" tf:"enabled_cloudwatch_logs_exports,omitempty"`
 
@@ -235,6 +235,9 @@ type ClusterInitParameters struct {
 
 	// Weekly time range during which system maintenance can occur, in (UTC) e.g., wed:04:00-wed:04:30
 	PreferredMaintenanceWindow *string `json:"preferredMaintenanceWindow,omitempty" tf:"preferred_maintenance_window,omitempty"`
+
+	// Whether the DB cluster is publicly accessible. Valid only for Multi-AZ DB clusters. If not specified, defaults to true when db_subnet_group_name is not set or is default, and false otherwise. If true, the VPC of the DB subnet group must have an internet gateway attached. Cannot be used with s3_import.
+	PubliclyAccessible *bool `json:"publiclyAccessible,omitempty" tf:"publicly_accessible,omitempty"`
 
 	// ARN of a source DB cluster or DB instance if this DB cluster is to be created as a Read Replica. Note: Removing this attribute after creation will promote the read replica to a standalone cluster.
 	ReplicationSourceIdentifier *string `json:"replicationSourceIdentifier,omitempty" tf:"replication_source_identifier,omitempty"`
@@ -325,7 +328,7 @@ type ClusterObservation struct {
 	// Whether to apply minor engine upgrades automatically to the DB cluster during the maintenance window. Defaults to true.
 	AutoMinorVersionUpgrade *bool `json:"autoMinorVersionUpgrade,omitempty" tf:"auto_minor_version_upgrade,omitempty"`
 
-	// List of EC2 Availability Zones for the DB cluster storage where DB cluster instances can be created. We recommend specifying 3 AZs or using the  if necessary. A maximum of 3 AZs can be configured. Note: Multi-AZ DB clusters require exactly 3 Availability Zones in the DB subnet group. Aurora DB clusters can operate with fewer AZs, but RDS will still automatically assign 3 AZs as described above.
+	// List of EC2 Availability Zones for the DB cluster storage where DB cluster instances can be created. We recommend specifying 3 AZs or using the  if necessary. A maximum of 3 AZs can be configured. Note: Multi-AZ DB clusters require exactly 3 Availability Zones in the DB subnet group. Aurora DB clusters can operate with fewer AZs, but RDS will still automatically assign 3 AZs as described above. Note: Do not set availability_zones to the output of a data source such as aws_availability_zones, as this may be subject to change (for example, when a new AZ is added to a Region). Changing availability_zones forces a replacement, which will destroy and recreate the cluster. Always use an explicit, static list of AZs.
 	// +listType=set
 	AvailabilityZones []*string `json:"availabilityZones,omitempty" tf:"availability_zones,omitempty"`
 
@@ -396,7 +399,7 @@ type ClusterObservation struct {
 	// Whether read replicas can forward write operations to the writer DB instance in the DB cluster. By default, write operations aren't allowed on reader DB instances. See the User Guide for Aurora for more information. NOTE: Local write forwarding requires Aurora MySQL version 3.04 or higher.
 	EnableLocalWriteForwarding *bool `json:"enableLocalWriteForwarding,omitempty" tf:"enable_local_write_forwarding,omitempty"`
 
-	// Set of log types to export to cloudwatch. If omitted, no logs will be exported. The following log types are supported: audit, error, general, iam-db-auth-error, instance, postgresql (PostgreSQL), slowquery.
+	// Set of log types to export to CloudWatch. If omitted, no logs will be exported. The following log types are supported: audit, error, general, iam-db-auth-error, instance, postgresql (PostgreSQL), slowquery.
 	// +listType=set
 	EnabledCloudwatchLogsExports []*string `json:"enabledCloudwatchLogsExports,omitempty" tf:"enabled_cloudwatch_logs_exports,omitempty"`
 
@@ -485,6 +488,9 @@ type ClusterObservation struct {
 	// Weekly time range during which system maintenance can occur, in (UTC) e.g., wed:04:00-wed:04:30
 	PreferredMaintenanceWindow *string `json:"preferredMaintenanceWindow,omitempty" tf:"preferred_maintenance_window,omitempty"`
 
+	// Whether the DB cluster is publicly accessible. Valid only for Multi-AZ DB clusters. If not specified, defaults to true when db_subnet_group_name is not set or is default, and false otherwise. If true, the VPC of the DB subnet group must have an internet gateway attached. Cannot be used with s3_import.
+	PubliclyAccessible *bool `json:"publiclyAccessible,omitempty" tf:"publicly_accessible,omitempty"`
+
 	// Read-only endpoint for the Aurora cluster, automatically load-balanced across replicas
 	ReaderEndpoint *string `json:"readerEndpoint,omitempty" tf:"reader_endpoint,omitempty"`
 
@@ -565,7 +571,7 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	AutoMinorVersionUpgrade *bool `json:"autoMinorVersionUpgrade,omitempty" tf:"auto_minor_version_upgrade,omitempty"`
 
-	// List of EC2 Availability Zones for the DB cluster storage where DB cluster instances can be created. We recommend specifying 3 AZs or using the  if necessary. A maximum of 3 AZs can be configured. Note: Multi-AZ DB clusters require exactly 3 Availability Zones in the DB subnet group. Aurora DB clusters can operate with fewer AZs, but RDS will still automatically assign 3 AZs as described above.
+	// List of EC2 Availability Zones for the DB cluster storage where DB cluster instances can be created. We recommend specifying 3 AZs or using the  if necessary. A maximum of 3 AZs can be configured. Note: Multi-AZ DB clusters require exactly 3 Availability Zones in the DB subnet group. Aurora DB clusters can operate with fewer AZs, but RDS will still automatically assign 3 AZs as described above. Note: Do not set availability_zones to the output of a data source such as aws_availability_zones, as this may be subject to change (for example, when a new AZ is added to a Region). Changing availability_zones forces a replacement, which will destroy and recreate the cluster. Always use an explicit, static list of AZs.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	AvailabilityZones []*string `json:"availabilityZones,omitempty" tf:"availability_zones,omitempty"`
@@ -678,7 +684,7 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	EnableLocalWriteForwarding *bool `json:"enableLocalWriteForwarding,omitempty" tf:"enable_local_write_forwarding,omitempty"`
 
-	// Set of log types to export to cloudwatch. If omitted, no logs will be exported. The following log types are supported: audit, error, general, iam-db-auth-error, instance, postgresql (PostgreSQL), slowquery.
+	// Set of log types to export to CloudWatch. If omitted, no logs will be exported. The following log types are supported: audit, error, general, iam-db-auth-error, instance, postgresql (PostgreSQL), slowquery.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	EnabledCloudwatchLogsExports []*string `json:"enabledCloudwatchLogsExports,omitempty" tf:"enabled_cloudwatch_logs_exports,omitempty"`
@@ -819,6 +825,10 @@ type ClusterParameters struct {
 	// Weekly time range during which system maintenance can occur, in (UTC) e.g., wed:04:00-wed:04:30
 	// +kubebuilder:validation:Optional
 	PreferredMaintenanceWindow *string `json:"preferredMaintenanceWindow,omitempty" tf:"preferred_maintenance_window,omitempty"`
+
+	// Whether the DB cluster is publicly accessible. Valid only for Multi-AZ DB clusters. If not specified, defaults to true when db_subnet_group_name is not set or is default, and false otherwise. If true, the VPC of the DB subnet group must have an internet gateway attached. Cannot be used with s3_import.
+	// +kubebuilder:validation:Optional
+	PubliclyAccessible *bool `json:"publiclyAccessible,omitempty" tf:"publicly_accessible,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.

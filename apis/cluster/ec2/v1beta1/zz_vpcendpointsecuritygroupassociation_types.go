@@ -18,7 +18,7 @@ type VPCEndpointSecurityGroupAssociationInitParameters struct {
 	// Whether this association should replace the association with the VPC's default security group that is created when no security groups are specified during VPC endpoint creation. At most 1 association per-VPC endpoint should be configured with replace_default_association = true. false should be used when importing resources.
 	ReplaceDefaultAssociation *bool `json:"replaceDefaultAssociation,omitempty" tf:"replace_default_association,omitempty"`
 
-	// The ID of the security group to be associated with the VPC endpoint.
+	// ID of the security group to be associated with the VPC endpoint.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.SecurityGroup
 	SecurityGroupID *string `json:"securityGroupId,omitempty" tf:"security_group_id,omitempty"`
 
@@ -30,7 +30,7 @@ type VPCEndpointSecurityGroupAssociationInitParameters struct {
 	// +kubebuilder:validation:Optional
 	SecurityGroupIDSelector *v2.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 
-	// The ID of the VPC endpoint with which the security group will be associated.
+	// ID of the VPC endpoint with which the security group will be associated.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta2.VPCEndpoint
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	VPCEndpointID *string `json:"vpcEndpointId,omitempty" tf:"vpc_endpoint_id,omitempty"`
@@ -46,7 +46,7 @@ type VPCEndpointSecurityGroupAssociationInitParameters struct {
 
 type VPCEndpointSecurityGroupAssociationObservation struct {
 
-	// The ID of the association.
+	// ID of the association.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -56,10 +56,10 @@ type VPCEndpointSecurityGroupAssociationObservation struct {
 	// Whether this association should replace the association with the VPC's default security group that is created when no security groups are specified during VPC endpoint creation. At most 1 association per-VPC endpoint should be configured with replace_default_association = true. false should be used when importing resources.
 	ReplaceDefaultAssociation *bool `json:"replaceDefaultAssociation,omitempty" tf:"replace_default_association,omitempty"`
 
-	// The ID of the security group to be associated with the VPC endpoint.
+	// ID of the security group to be associated with the VPC endpoint.
 	SecurityGroupID *string `json:"securityGroupId,omitempty" tf:"security_group_id,omitempty"`
 
-	// The ID of the VPC endpoint with which the security group will be associated.
+	// ID of the VPC endpoint with which the security group will be associated.
 	VPCEndpointID *string `json:"vpcEndpointId,omitempty" tf:"vpc_endpoint_id,omitempty"`
 }
 
@@ -74,7 +74,7 @@ type VPCEndpointSecurityGroupAssociationParameters struct {
 	// +kubebuilder:validation:Optional
 	ReplaceDefaultAssociation *bool `json:"replaceDefaultAssociation,omitempty" tf:"replace_default_association,omitempty"`
 
-	// The ID of the security group to be associated with the VPC endpoint.
+	// ID of the security group to be associated with the VPC endpoint.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.SecurityGroup
 	// +kubebuilder:validation:Optional
 	SecurityGroupID *string `json:"securityGroupId,omitempty" tf:"security_group_id,omitempty"`
@@ -87,7 +87,7 @@ type VPCEndpointSecurityGroupAssociationParameters struct {
 	// +kubebuilder:validation:Optional
 	SecurityGroupIDSelector *v2.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 
-	// The ID of the VPC endpoint with which the security group will be associated.
+	// ID of the VPC endpoint with which the security group will be associated.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta2.VPCEndpoint
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional

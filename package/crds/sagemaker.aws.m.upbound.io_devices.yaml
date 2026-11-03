@@ -373,7 +373,7 @@ spec:
                     description: The name of the Device Fleet.
                     type: string
                   id:
-                    description: The id is constructed from device-fleet-name/device-name.
+                    description: The ID is constructed from device-fleet-name/device-name.
                     type: string
                   region:
                     description: |-

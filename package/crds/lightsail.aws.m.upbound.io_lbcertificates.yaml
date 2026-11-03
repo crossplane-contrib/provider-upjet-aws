@@ -288,7 +288,7 @@ spec:
                       type: object
                     type: array
                   id:
-                    description: 'Combination of attributes to create a unique id:
+                    description: 'Combination of attributes to create a unique ID:
                       lb_name,name'
                     type: string
                   lbName:

@@ -77,14 +77,13 @@ spec:
                     description: AWS account ID.
                     type: string
                   description:
-                    description: A description for the group.
+                    description: Description for the group.
                     type: string
                   groupName:
-                    description: A name for the group.
+                    description: Name for the group.
                     type: string
                   namespace:
-                    description: The namespace. Currently, you should set this to
-                      default.
+                    description: Namespace. Currently, you should set this to default.
                     type: string
                   region:
                     description: |-
@@ -111,14 +110,13 @@ spec:
                     description: AWS account ID.
                     type: string
                   description:
-                    description: A description for the group.
+                    description: Description for the group.
                     type: string
                   groupName:
-                    description: A name for the group.
+                    description: Name for the group.
                     type: string
                   namespace:
-                    description: The namespace. Currently, you should set this to
-                      default.
+                    description: Namespace. Currently, you should set this to default.
                     type: string
                 type: object
               managementPolicies:
@@ -224,16 +222,15 @@ spec:
                     description: AWS account ID.
                     type: string
                   description:
-                    description: A description for the group.
+                    description: Description for the group.
                     type: string
                   groupName:
-                    description: A name for the group.
+                    description: Name for the group.
                     type: string
                   id:
                     type: string
                   namespace:
-                    description: The namespace. Currently, you should set this to
-                      default.
+                    description: Namespace. Currently, you should set this to default.
                     type: string
                   region:
                     description: |-

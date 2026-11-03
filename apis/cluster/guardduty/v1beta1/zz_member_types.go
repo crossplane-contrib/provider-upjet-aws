@@ -28,7 +28,7 @@ type MemberInitParameters struct {
 	// +kubebuilder:validation:Optional
 	AccountIDSelector *v2.Selector `json:"accountIdSelector,omitempty" tf:"-"`
 
-	// The detector ID of the GuardDuty account where you want to create member accounts.
+	// Detector ID of the GuardDuty account where you want to create member accounts.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/guardduty/v1beta2.Detector
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DetectorID *string `json:"detectorId,omitempty" tf:"detector_id,omitempty"`
@@ -59,7 +59,7 @@ type MemberObservation struct {
 	// AWS account ID for member account.
 	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
 
-	// The detector ID of the GuardDuty account where you want to create member accounts.
+	// Detector ID of the GuardDuty account where you want to create member accounts.
 	DetectorID *string `json:"detectorId,omitempty" tf:"detector_id,omitempty"`
 
 	// Boolean whether an email notification is sent to the accounts. Defaults to false.
@@ -80,7 +80,7 @@ type MemberObservation struct {
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The status of the relationship between the member account and its primary account. More information can be found in Amazon GuardDuty API Reference.
+	// Status of the relationship between the member account and its primary account. More information can be found in Amazon GuardDuty API Reference.
 	RelationshipStatus *string `json:"relationshipStatus,omitempty" tf:"relationship_status,omitempty"`
 }
 
@@ -100,7 +100,7 @@ type MemberParameters struct {
 	// +kubebuilder:validation:Optional
 	AccountIDSelector *v2.Selector `json:"accountIdSelector,omitempty" tf:"-"`
 
-	// The detector ID of the GuardDuty account where you want to create member accounts.
+	// Detector ID of the GuardDuty account where you want to create member accounts.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/guardduty/v1beta2.Detector
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional

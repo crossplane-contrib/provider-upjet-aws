@@ -95,16 +95,16 @@ type OntapStorageVirtualMachineEndpointsInitParameters struct {
 
 type OntapStorageVirtualMachineEndpointsObservation struct {
 
-	// Endpoint for accessing data on your storage virtual machine via iSCSI protocol. See Endpoint.
+	// Endpoint for accessing data on your storage virtual machine via iSCSI protocol. See endpoints.iscsi below.
 	ISCSI []ISCSIObservation `json:"iscsi,omitempty" tf:"iscsi,omitempty"`
 
-	// Endpoint for managing your file system using the NetApp ONTAP CLI and NetApp ONTAP API. See Endpoint.
+	// Endpoint for managing your file system using the NetApp ONTAP CLI and NetApp ONTAP API. See endpoints.management below.
 	Management []EndpointsManagementObservation `json:"management,omitempty" tf:"management,omitempty"`
 
-	// Endpoint for accessing data on your storage virtual machine via NFS protocol. See Endpoint.
+	// Endpoint for accessing data on your storage virtual machine via NFS protocol. See endpoints.nfs below.
 	NFS []NFSObservation `json:"nfs,omitempty" tf:"nfs,omitempty"`
 
-	// Endpoint for accessing data on your storage virtual machine via SMB protocol. This is only set if an active_directory_configuration has been set. See Endpoint.
+	// Endpoint for accessing data on your storage virtual machine via SMB protocol. This is only set if an active_directory_configuration has been set. See endpoints.smb below.
 	SMB []SMBObservation `json:"smb,omitempty" tf:"smb,omitempty"`
 }
 

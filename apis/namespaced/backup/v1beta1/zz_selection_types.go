@@ -67,7 +67,7 @@ type SelectionInitParameters struct {
 	// Condition-based filters used to specify sets of resources for a backup plan. See below for details.
 	Condition []ConditionInitParameters `json:"condition,omitempty" tf:"condition,omitempty"`
 
-	// The ARN of the IAM role that AWS Backup uses to authenticate when restoring and backing up the target resource. See the AWS Backup Developer Guide for additional information about using AWS managed policies or creating custom policies attached to the IAM role.
+	// ARN of the IAM role that AWS Backup uses to authenticate when restoring and backing up the target resource. See the AWS Backup Developer Guide for additional information about using AWS managed policies or creating custom policies attached to the IAM role.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	IAMRoleArn *string `json:"iamRoleArn,omitempty" tf:"iam_role_arn,omitempty"`
@@ -80,7 +80,7 @@ type SelectionInitParameters struct {
 	// +kubebuilder:validation:Optional
 	IAMRoleArnSelector *v2.NamespacedSelector `json:"iamRoleArnSelector,omitempty" tf:"-"`
 
-	// The display name of a resource selection document.
+	// Display name of a resource selection document.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Array of strings that either contain ARNs or match patterns of resources to exclude from a backup plan.
@@ -97,7 +97,7 @@ type SelectionInitParameters struct {
 	// +kubebuilder:validation:Optional
 	NotResourcesSelector *v2.NamespacedSelector `json:"notResourcesSelector,omitempty" tf:"-"`
 
-	// The backup plan ID to be associated with the selection of resources.
+	// Backup plan ID to be associated with the selection of resources.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/backup/v1beta1.Plan
 	PlanID *string `json:"planId,omitempty" tf:"plan_id,omitempty"`
 
@@ -132,20 +132,20 @@ type SelectionObservation struct {
 	// Condition-based filters used to specify sets of resources for a backup plan. See below for details.
 	Condition []ConditionObservation `json:"condition,omitempty" tf:"condition,omitempty"`
 
-	// The ARN of the IAM role that AWS Backup uses to authenticate when restoring and backing up the target resource. See the AWS Backup Developer Guide for additional information about using AWS managed policies or creating custom policies attached to the IAM role.
+	// ARN of the IAM role that AWS Backup uses to authenticate when restoring and backing up the target resource. See the AWS Backup Developer Guide for additional information about using AWS managed policies or creating custom policies attached to the IAM role.
 	IAMRoleArn *string `json:"iamRoleArn,omitempty" tf:"iam_role_arn,omitempty"`
 
 	// Backup Selection identifier.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The display name of a resource selection document.
+	// Display name of a resource selection document.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Array of strings that either contain ARNs or match patterns of resources to exclude from a backup plan.
 	// +listType=set
 	NotResources []*string `json:"notResources,omitempty" tf:"not_resources,omitempty"`
 
-	// The backup plan ID to be associated with the selection of resources.
+	// Backup plan ID to be associated with the selection of resources.
 	PlanID *string `json:"planId,omitempty" tf:"plan_id,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -166,7 +166,7 @@ type SelectionParameters struct {
 	// +kubebuilder:validation:Optional
 	Condition []ConditionParameters `json:"condition,omitempty" tf:"condition,omitempty"`
 
-	// The ARN of the IAM role that AWS Backup uses to authenticate when restoring and backing up the target resource. See the AWS Backup Developer Guide for additional information about using AWS managed policies or creating custom policies attached to the IAM role.
+	// ARN of the IAM role that AWS Backup uses to authenticate when restoring and backing up the target resource. See the AWS Backup Developer Guide for additional information about using AWS managed policies or creating custom policies attached to the IAM role.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -180,7 +180,7 @@ type SelectionParameters struct {
 	// +kubebuilder:validation:Optional
 	IAMRoleArnSelector *v2.NamespacedSelector `json:"iamRoleArnSelector,omitempty" tf:"-"`
 
-	// The display name of a resource selection document.
+	// Display name of a resource selection document.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -199,7 +199,7 @@ type SelectionParameters struct {
 	// +kubebuilder:validation:Optional
 	NotResourcesSelector *v2.NamespacedSelector `json:"notResourcesSelector,omitempty" tf:"-"`
 
-	// The backup plan ID to be associated with the selection of resources.
+	// Backup plan ID to be associated with the selection of resources.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/backup/v1beta1.Plan
 	// +kubebuilder:validation:Optional
 	PlanID *string `json:"planId,omitempty" tf:"plan_id,omitempty"`
@@ -242,7 +242,7 @@ type SelectionTagInitParameters struct {
 	// Key for the filter.
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
-	// An operation, such as STRINGEQUALS, that is applied to the key-value pair used to filter resources in a selection.
+	// Operation, such as STRINGEQUALS, that is applied to the key-value pair used to filter resources in a selection.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// Value for the filter.
@@ -254,7 +254,7 @@ type SelectionTagObservation struct {
 	// Key for the filter.
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
-	// An operation, such as STRINGEQUALS, that is applied to the key-value pair used to filter resources in a selection.
+	// Operation, such as STRINGEQUALS, that is applied to the key-value pair used to filter resources in a selection.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// Value for the filter.
@@ -267,7 +267,7 @@ type SelectionTagParameters struct {
 	// +kubebuilder:validation:Optional
 	Key *string `json:"key" tf:"key,omitempty"`
 
-	// An operation, such as STRINGEQUALS, that is applied to the key-value pair used to filter resources in a selection.
+	// Operation, such as STRINGEQUALS, that is applied to the key-value pair used to filter resources in a selection.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
 

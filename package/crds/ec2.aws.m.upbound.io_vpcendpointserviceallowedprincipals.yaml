@@ -62,7 +62,7 @@ spec:
               forProvider:
                 properties:
                   principalArn:
-                    description: The ARN of the principal to allow permissions.
+                    description: ARN of the principal to allow permissions.
                     type: string
                   region:
                     description: |-
@@ -70,7 +70,7 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   vpcEndpointServiceId:
-                    description: The ID of the VPC endpoint service to allow permission.
+                    description: ID of the VPC endpoint service to allow permission.
                     type: string
                   vpcEndpointServiceIdRef:
                     description: Reference to a VPCEndpointService in ec2 to populate
@@ -171,10 +171,10 @@ spec:
                   autoscaler.
                 properties:
                   principalArn:
-                    description: The ARN of the principal to allow permissions.
+                    description: ARN of the principal to allow permissions.
                     type: string
                   vpcEndpointServiceId:
-                    description: The ID of the VPC endpoint service to allow permission.
+                    description: ID of the VPC endpoint service to allow permission.
                     type: string
                   vpcEndpointServiceIdRef:
                     description: Reference to a VPCEndpointService in ec2 to populate
@@ -329,10 +329,10 @@ spec:
               atProvider:
                 properties:
                   id:
-                    description: The ID of the association.
+                    description: ID of the association.
                     type: string
                   principalArn:
-                    description: The ARN of the principal to allow permissions.
+                    description: ARN of the principal to allow permissions.
                     type: string
                   region:
                     description: |-
@@ -340,7 +340,7 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   vpcEndpointServiceId:
-                    description: The ID of the VPC endpoint service to allow permission.
+                    description: ID of the VPC endpoint service to allow permission.
                     type: string
                 type: object
               conditions:

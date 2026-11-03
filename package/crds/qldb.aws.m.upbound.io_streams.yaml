@@ -60,29 +60,29 @@ spec:
               forProvider:
                 properties:
                   exclusiveEndTime:
-                    description: 'The exclusive date and time that specifies when
-                      the stream ends. If you don''t define this parameter, the stream
+                    description: 'Exclusive date and time that specifies when the
+                      stream ends. If you don''t define this parameter, the stream
                       runs indefinitely until you cancel it. It must be in ISO 8601
                       date and time format and in Universal Coordinated Time (UTC).
                       For example: "2019-06-13T21:36:34Z".'
                     type: string
                   inclusiveStartTime:
-                    description: 'The inclusive start date and time from which to
-                      start streaming journal data. This parameter must be in ISO
-                      8601 date and time format and in Universal Coordinated Time
-                      (UTC). For example: "2019-06-13T21:36:34Z".  This cannot be
-                      in the future and must be before exclusive_end_time.  If you
-                      provide a value that is before the ledger''s CreationDateTime,
-                      QLDB effectively defaults it to the ledger''s CreationDateTime.'
+                    description: 'Inclusive start date and time from which to start
+                      streaming journal data. This parameter must be in ISO 8601 date
+                      and time format and in Universal Coordinated Time (UTC). For
+                      example: "2019-06-13T21:36:34Z".  This cannot be in the future
+                      and must be before exclusive_end_time.  If you provide a value
+                      that is before the ledger''s CreationDateTime, QLDB effectively
+                      defaults it to the ledger''s CreationDateTime.'
                     type: string
                   kinesisConfiguration:
-                    description: The configuration settings of the Kinesis Data Streams
+                    description: Configuration settings of the Kinesis Data Streams
                       destination for your stream request. Documented below.
                     properties:
                       aggregationEnabled:
-                        description: 'Enables QLDB to publish multiple data records
-                          in a single Kinesis Data Streams record, increasing the
-                          number of records sent per API call. Default: true.'
+                        description: 'Whether to allow QLDB to publish multiple data
+                          records in a single Kinesis Data Streams record, increasing
+                          the number of records sent per API call. Default: true.'
                         type: boolean
                       streamArn:
                         description: ARN of the Kinesis Data Streams resource.
@@ -171,7 +171,7 @@ spec:
                         type: object
                     type: object
                   ledgerName:
-                    description: The name of the QLDB ledger.
+                    description: Name of the QLDB ledger.
                     type: string
                   ledgerNameRef:
                     description: Reference to a Ledger in qldb to populate ledgerName.
@@ -344,7 +344,7 @@ spec:
                         type: object
                     type: object
                   streamName:
-                    description: The name that you want to assign to the QLDB journal
+                    description: Name that you want to assign to the QLDB journal
                       stream. User-defined names can help identify and indicate the
                       purpose of a stream.  Your stream name must be unique among
                       other active streams for a given ledger. Stream names have the
@@ -374,29 +374,29 @@ spec:
                   autoscaler.
                 properties:
                   exclusiveEndTime:
-                    description: 'The exclusive date and time that specifies when
-                      the stream ends. If you don''t define this parameter, the stream
+                    description: 'Exclusive date and time that specifies when the
+                      stream ends. If you don''t define this parameter, the stream
                       runs indefinitely until you cancel it. It must be in ISO 8601
                       date and time format and in Universal Coordinated Time (UTC).
                       For example: "2019-06-13T21:36:34Z".'
                     type: string
                   inclusiveStartTime:
-                    description: 'The inclusive start date and time from which to
-                      start streaming journal data. This parameter must be in ISO
-                      8601 date and time format and in Universal Coordinated Time
-                      (UTC). For example: "2019-06-13T21:36:34Z".  This cannot be
-                      in the future and must be before exclusive_end_time.  If you
-                      provide a value that is before the ledger''s CreationDateTime,
-                      QLDB effectively defaults it to the ledger''s CreationDateTime.'
+                    description: 'Inclusive start date and time from which to start
+                      streaming journal data. This parameter must be in ISO 8601 date
+                      and time format and in Universal Coordinated Time (UTC). For
+                      example: "2019-06-13T21:36:34Z".  This cannot be in the future
+                      and must be before exclusive_end_time.  If you provide a value
+                      that is before the ledger''s CreationDateTime, QLDB effectively
+                      defaults it to the ledger''s CreationDateTime.'
                     type: string
                   kinesisConfiguration:
-                    description: The configuration settings of the Kinesis Data Streams
+                    description: Configuration settings of the Kinesis Data Streams
                       destination for your stream request. Documented below.
                     properties:
                       aggregationEnabled:
-                        description: 'Enables QLDB to publish multiple data records
-                          in a single Kinesis Data Streams record, increasing the
-                          number of records sent per API call. Default: true.'
+                        description: 'Whether to allow QLDB to publish multiple data
+                          records in a single Kinesis Data Streams record, increasing
+                          the number of records sent per API call. Default: true.'
                         type: boolean
                       streamArn:
                         description: ARN of the Kinesis Data Streams resource.
@@ -485,7 +485,7 @@ spec:
                         type: object
                     type: object
                   ledgerName:
-                    description: The name of the QLDB ledger.
+                    description: Name of the QLDB ledger.
                     type: string
                   ledgerNameRef:
                     description: Reference to a Ledger in qldb to populate ledgerName.
@@ -653,7 +653,7 @@ spec:
                         type: object
                     type: object
                   streamName:
-                    description: The name that you want to assign to the QLDB journal
+                    description: Name that you want to assign to the QLDB journal
                       stream. User-defined names can help identify and indicate the
                       purpose of a stream.  Your stream name must be unique among
                       other active streams for a given ledger. Stream names have the
@@ -744,42 +744,42 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The ARN of the QLDB Stream.
+                    description: ARN of the QLDB Stream.
                     type: string
                   exclusiveEndTime:
-                    description: 'The exclusive date and time that specifies when
-                      the stream ends. If you don''t define this parameter, the stream
+                    description: 'Exclusive date and time that specifies when the
+                      stream ends. If you don''t define this parameter, the stream
                       runs indefinitely until you cancel it. It must be in ISO 8601
                       date and time format and in Universal Coordinated Time (UTC).
                       For example: "2019-06-13T21:36:34Z".'
                     type: string
                   id:
-                    description: The ID of the QLDB Stream.
+                    description: ID of the QLDB Stream.
                     type: string
                   inclusiveStartTime:
-                    description: 'The inclusive start date and time from which to
-                      start streaming journal data. This parameter must be in ISO
-                      8601 date and time format and in Universal Coordinated Time
-                      (UTC). For example: "2019-06-13T21:36:34Z".  This cannot be
-                      in the future and must be before exclusive_end_time.  If you
-                      provide a value that is before the ledger''s CreationDateTime,
-                      QLDB effectively defaults it to the ledger''s CreationDateTime.'
+                    description: 'Inclusive start date and time from which to start
+                      streaming journal data. This parameter must be in ISO 8601 date
+                      and time format and in Universal Coordinated Time (UTC). For
+                      example: "2019-06-13T21:36:34Z".  This cannot be in the future
+                      and must be before exclusive_end_time.  If you provide a value
+                      that is before the ledger''s CreationDateTime, QLDB effectively
+                      defaults it to the ledger''s CreationDateTime.'
                     type: string
                   kinesisConfiguration:
-                    description: The configuration settings of the Kinesis Data Streams
+                    description: Configuration settings of the Kinesis Data Streams
                       destination for your stream request. Documented below.
                     properties:
                       aggregationEnabled:
-                        description: 'Enables QLDB to publish multiple data records
-                          in a single Kinesis Data Streams record, increasing the
-                          number of records sent per API call. Default: true.'
+                        description: 'Whether to allow QLDB to publish multiple data
+                          records in a single Kinesis Data Streams record, increasing
+                          the number of records sent per API call. Default: true.'
                         type: boolean
                       streamArn:
                         description: ARN of the Kinesis Data Streams resource.
                         type: string
                     type: object
                   ledgerName:
-                    description: The name of the QLDB ledger.
+                    description: Name of the QLDB ledger.
                     type: string
                   region:
                     description: |-
@@ -792,7 +792,7 @@ spec:
                       Streams resource.
                     type: string
                   streamName:
-                    description: The name that you want to assign to the QLDB journal
+                    description: Name that you want to assign to the QLDB journal
                       stream. User-defined names can help identify and indicate the
                       purpose of a stream.  Your stream name must be unique among
                       other active streams for a given ledger. Stream names have the
@@ -808,9 +808,8 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
                 type: object

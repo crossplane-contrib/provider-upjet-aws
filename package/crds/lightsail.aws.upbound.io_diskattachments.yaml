@@ -516,7 +516,7 @@ spec:
                     description: Disk path to expose to the instance.
                     type: string
                   id:
-                    description: 'Combination of attributes to create a unique id:
+                    description: 'Combination of attributes to create a unique ID:
                       disk_name,instance_name.'
                     type: string
                   instanceName:

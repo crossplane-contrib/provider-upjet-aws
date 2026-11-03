@@ -136,7 +136,7 @@ type HealthCheckObservation struct {
 	// The fully qualified domain name of the endpoint to be checked. If a value is set for ip_address, the value set for fqdn will be passed in the Host header.
 	Fqdn *string `json:"fqdn,omitempty" tf:"fqdn,omitempty"`
 
-	// The id of the health check
+	// The ID of the health check
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The IP address of the endpoint to be checked.

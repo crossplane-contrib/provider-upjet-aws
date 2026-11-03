@@ -76,8 +76,8 @@ spec:
               forProvider:
                 properties:
                   associationConfig:
-                    description: Specifies custom configurations for the associations
-                      between the web ACL and protected resources. See association_config
+                    description: Custom configurations for the associations between
+                      the web ACL and protected resources. See association_config
                       below for details.
                     properties:
                       requestBody:
@@ -93,12 +93,12 @@ spec:
                                 See api_gateway below for details.
                               properties:
                                 defaultSizeInspectionLimit:
-                                  description: Specifies the maximum size of the web
-                                    request body component that an associated AWS
-                                    Verified Access instances should send to AWS WAF
-                                    for inspection. This applies to statements in
-                                    the web ACL that inspect the body or JSON body.
-                                    Valid values are KB_16, KB_32, KB_48 and KB_64.
+                                  description: Maximum size of the web request body
+                                    component that an associated AWS Verified Access
+                                    instances should send to AWS WAF for inspection.
+                                    This applies to statements in the web ACL that
+                                    inspect the body or JSON body. Valid values are
+                                    KB_16, KB_32, KB_48 and KB_64.
                                   type: string
                               type: object
                             appRunnerService:
@@ -108,12 +108,12 @@ spec:
                                 See app_runner_service below for details.
                               properties:
                                 defaultSizeInspectionLimit:
-                                  description: Specifies the maximum size of the web
-                                    request body component that an associated AWS
-                                    Verified Access instances should send to AWS WAF
-                                    for inspection. This applies to statements in
-                                    the web ACL that inspect the body or JSON body.
-                                    Valid values are KB_16, KB_32, KB_48 and KB_64.
+                                  description: Maximum size of the web request body
+                                    component that an associated AWS Verified Access
+                                    instances should send to AWS WAF for inspection.
+                                    This applies to statements in the web ACL that
+                                    inspect the body or JSON body. Valid values are
+                                    KB_16, KB_32, KB_48 and KB_64.
                                   type: string
                               type: object
                             cloudfront:
@@ -123,12 +123,12 @@ spec:
                                 to REGIONAL. See cloudfront below for details.
                               properties:
                                 defaultSizeInspectionLimit:
-                                  description: Specifies the maximum size of the web
-                                    request body component that an associated AWS
-                                    Verified Access instances should send to AWS WAF
-                                    for inspection. This applies to statements in
-                                    the web ACL that inspect the body or JSON body.
-                                    Valid values are KB_16, KB_32, KB_48 and KB_64.
+                                  description: Maximum size of the web request body
+                                    component that an associated AWS Verified Access
+                                    instances should send to AWS WAF for inspection.
+                                    This applies to statements in the web ACL that
+                                    inspect the body or JSON body. Valid values are
+                                    KB_16, KB_32, KB_48 and KB_64.
                                   type: string
                               type: object
                             cognitoUserPool:
@@ -138,67 +138,67 @@ spec:
                                 cognito_user_pool below for details.
                               properties:
                                 defaultSizeInspectionLimit:
-                                  description: Specifies the maximum size of the web
-                                    request body component that an associated AWS
-                                    Verified Access instances should send to AWS WAF
-                                    for inspection. This applies to statements in
-                                    the web ACL that inspect the body or JSON body.
-                                    Valid values are KB_16, KB_32, KB_48 and KB_64.
+                                  description: Maximum size of the web request body
+                                    component that an associated AWS Verified Access
+                                    instances should send to AWS WAF for inspection.
+                                    This applies to statements in the web ACL that
+                                    inspect the body or JSON body. Valid values are
+                                    KB_16, KB_32, KB_48 and KB_64.
                                   type: string
                               type: object
                             verifiedAccessInstance:
                               description: Customizes the request body that your protected
-                                AWS Verfied Access instances forward to AWS WAF for
+                                AWS Verified Access instances forward to AWS WAF for
                                 inspection. Applicable only when scope is set to REGIONAL.
                                 See verified_access_instance below for details.
                               properties:
                                 defaultSizeInspectionLimit:
-                                  description: Specifies the maximum size of the web
-                                    request body component that an associated AWS
-                                    Verified Access instances should send to AWS WAF
-                                    for inspection. This applies to statements in
-                                    the web ACL that inspect the body or JSON body.
-                                    Valid values are KB_16, KB_32, KB_48 and KB_64.
+                                  description: Maximum size of the web request body
+                                    component that an associated AWS Verified Access
+                                    instances should send to AWS WAF for inspection.
+                                    This applies to statements in the web ACL that
+                                    inspect the body or JSON body. Valid values are
+                                    KB_16, KB_32, KB_48 and KB_64.
                                   type: string
                               type: object
                           type: object
                         type: array
                     type: object
                   captchaConfig:
-                    description: Specifies how AWS WAF should handle CAPTCHA evaluations
-                      on the ACL level (used by AWS Bot Control). See captcha_config
+                    description: Configuration for how AWS WAF handles CAPTCHA evaluations
+                      at the web ACL level (used by AWS Bot Control). See captcha_config
                       below for details.
                     properties:
                       immunityTimeProperty:
-                        description: Defines custom immunity time. See immunity_time_property
+                        description: Custom immunity time. See immunity_time_property
                           below for details.
                         properties:
                           immunityTime:
-                            description: The amount of time, in seconds, that a CAPTCHA
+                            description: Amount of time, in seconds, that a CAPTCHA
                               or challenge timestamp is considered valid by AWS WAF.
                               The default setting is 300.
                             type: number
                         type: object
                     type: object
                   challengeConfig:
-                    description: Specifies how AWS WAF should handle Challenge evaluations
-                      on the ACL level (used by AWS Bot Control). See challenge_config
+                    description: Configuration for how AWS WAF handles Challenge evaluations
+                      at the web ACL level (used by AWS Bot Control). See challenge_config
                       below for details.
                     properties:
                       immunityTimeProperty:
-                        description: Defines custom immunity time. See immunity_time_property
+                        description: Custom immunity time. See immunity_time_property
                           below for details.
                         properties:
                           immunityTime:
-                            description: The amount of time, in seconds, that a CAPTCHA
+                            description: Amount of time, in seconds, that a CAPTCHA
                               or challenge timestamp is considered valid by AWS WAF.
                               The default setting is 300.
                             type: number
                         type: object
                     type: object
                   customResponseBody:
-                    description: Defines custom response bodies that can be referenced
-                      by custom_response actions. See custom_response_body below for
+                    description: Custom response bodies that can be referenced by
+                      custom_response actions. See custom_response_body below for
                       details.
                     items:
                       properties:
@@ -218,19 +218,19 @@ spec:
                       type: object
                     type: array
                   dataProtectionConfig:
-                    description: Specifies data protection to apply to the web request
-                      data for the web ACL. This is a web ACL level data protection
-                      option. See data_protection_config below for details.
+                    description: Data protection to apply to the web request data
+                      for the web ACL. This is a web ACL level data protection option.
+                      See data_protection_config below for details.
                     properties:
                       dataProtection:
-                        description: A block for data protection configurations for
+                        description: Block for data protection configurations for
                           specific web request field types. See data_protection block
                           for details.
                         items:
                           properties:
                             action:
-                              description: Specifies how to protect the field. Valid
-                                values are SUBSTITUTION or HASH.
+                              description: Protection behavior to apply to the field.
+                                Valid values are SUBSTITUTION or HASH.
                               type: string
                             excludeRateBasedDetails:
                               description: Boolean to specify whether to also exclude
@@ -245,9 +245,9 @@ spec:
                                 the terminating matching rule.
                               type: boolean
                             field:
-                              description: Specifies the field type and optional keys
-                                to apply the protection behavior to. See field block
-                                below for details.
+                              description: Field type and optional keys to apply the
+                                protection behavior to. See field block below for
+                                details.
                               properties:
                                 fieldKeys:
                                   description: Array of strings to specify the keys
@@ -258,10 +258,9 @@ spec:
                                     type: string
                                   type: array
                                 fieldType:
-                                  description: Specifies the web request component
-                                    type to protect. Valid Values are SINGLE_HEADER,
-                                    SINGLE_COOKIE, SINGLE_QUERY_ARGUMENT, QUERY_STRING,
-                                    BODY.
+                                  description: Web request component type to protect.
+                                    Valid Values are SINGLE_HEADER, SINGLE_COOKIE,
+                                    SINGLE_QUERY_ARGUMENT, QUERY_STRING, BODY.
                                   type: string
                               type: object
                           type: object
@@ -272,16 +271,16 @@ spec:
                       in the WebACL match. See default_action below for details.
                     properties:
                       allow:
-                        description: Specifies that AWS WAF should allow requests
-                          by default. See allow below for details.
+                        description: Allows requests by default. See allow below for
+                          details.
                         properties:
                           customRequestHandling:
-                            description: Defines custom handling for the web request.
-                              See custom_request_handling below for details.
+                            description: Custom handling for the web request. See
+                              custom_request_handling below for details.
                             properties:
                               insertHeader:
-                                description: The insert_header blocks used to define
-                                  HTTP headers added to the request. See insert_header
+                                description: insert_header blocks used to define HTTP
+                                  headers added to the request. See insert_header
                                   below for details.
                                 items:
                                   properties:
@@ -300,12 +299,12 @@ spec:
                             type: object
                         type: object
                       block:
-                        description: Specifies that AWS WAF should block requests
-                          by default. See block below for details.
+                        description: Blocks requests by default. See block below for
+                          details.
                         properties:
                           customResponse:
-                            description: Defines a custom response for the web request.
-                              See custom_response below for details.
+                            description: Custom response for the web request. See
+                              custom_response below for details.
                             properties:
                               customResponseBodyKey:
                                 description: References the response body that you
@@ -314,11 +313,10 @@ spec:
                                   block of this resource.
                                 type: string
                               responseCode:
-                                description: The HTTP status code to return to the
-                                  client.
+                                description: HTTP status code to return to the client.
                                 type: number
                               responseHeader:
-                                description: The response_header blocks used to define
+                                description: response_header blocks used to define
                                   the HTTP response headers added to the response.
                                   See response_header below for details.
                                 items:
@@ -341,6 +339,54 @@ spec:
                   description:
                     description: Friendly description of the WebACL.
                     type: string
+                  monetizationConfig:
+                    description: Monetization configuration for the web ACL. Provide
+                      this when any rule in the web ACL uses the monetize action.
+                      See monetization_config below for details.
+                    properties:
+                      cryptoConfig:
+                        description: Cryptocurrency payment configuration for the
+                          web ACL. See crypto_config below for details.
+                        properties:
+                          paymentNetwork:
+                            description: Blockchain payment networks configured to
+                              receive payments. You can specify 1 to 2 networks. See
+                              payment_network below for details.
+                            items:
+                              properties:
+                                chain:
+                                  description: Blockchain network used for settlement.
+                                    Valid values are BASE, SOLANA, BASE_SEPOLIA, and
+                                    SOLANA_DEVNET.
+                                  type: string
+                                prices:
+                                  description: Price configuration for this payment
+                                    network. Currently supports a single price entry.
+                                    See prices below for details.
+                                  properties:
+                                    amount:
+                                      description: Base price amount per request,
+                                        expressed as a decimal string with up to 3
+                                        decimal places. Minimum 0.001, maximum 999999999.999
+                                        (for example, "0.001").
+                                      type: string
+                                    currency:
+                                      description: Currency of the price amount. Valid
+                                        value is USDC.
+                                      type: string
+                                  type: object
+                                walletAddress:
+                                  description: Payee wallet address on the specified
+                                    blockchain that receives payments.
+                                  type: string
+                              type: object
+                            type: array
+                        type: object
+                      currencyMode:
+                        description: Currency mode for monetized requests. Valid values
+                          are TEST and REAL. Defaults to REAL.
+                        type: string
+                    type: object
                   name:
                     description: Friendly name of the WebACL. Conflicts with name_prefix.
                     type: string
@@ -358,10 +404,10 @@ spec:
                       https://docs.aws.amazon.com/waf/latest/APIReference/API_CreateWebACL.html'
                     type: string
                   scope:
-                    description: Specifies whether this is for an AWS CloudFront distribution
-                      or for a regional application. Valid values are CLOUDFRONT or
-                      REGIONAL. To work with CloudFront, you must also specify the
-                      region us-east-1 (N. Virginia) on the AWS provider.
+                    description: Scope of the web ACL, either an AWS CloudFront distribution
+                      or a regional application. Valid values are CLOUDFRONT or REGIONAL.
+                      To work with CloudFront, you must also specify the region us-east-1
+                      (N. Virginia) on the AWS provider.
                     type: string
                   tags:
                     additionalProperties:
@@ -370,23 +416,21 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   tokenDomains:
-                    description: Specifies the domains that AWS WAF should accept
-                      in a web request token. This enables the use of tokens across
-                      multiple protected websites. When AWS WAF provides a token,
-                      it uses the domain of the AWS resource that the web ACL is protecting.
-                      If you don't specify a list of token domains, AWS WAF accepts
-                      tokens only for the domain of the protected resource. With a
-                      token domain list, AWS WAF accepts the resource's host domain
-                      plus all domains in the token domain list, including their prefixed
-                      subdomains.
+                    description: Domains that AWS WAF should accept in a web request
+                      token. This enables the use of tokens across multiple protected
+                      websites. When AWS WAF provides a token, it uses the domain
+                      of the AWS resource that the web ACL is protecting. If you don't
+                      specify a list of token domains, AWS WAF accepts tokens only
+                      for the domain of the protected resource. With a token domain
+                      list, AWS WAF accepts the resource's host domain plus all domains
+                      in the token domain list, including their prefixed subdomains.
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
                   visibilityConfig:
-                    description: Defines and enables Amazon CloudWatch metrics and
-                      web request sample collection. See visibility_config below for
-                      details.
+                    description: Amazon CloudWatch metrics and web request sample
+                      collection configuration. See visibility_config below for details.
                     properties:
                       cloudwatchMetricsEnabled:
                         description: Whether the associated resource sends metrics
@@ -394,11 +438,11 @@ spec:
                           WAF Metrics.
                         type: boolean
                       metricName:
-                        description: A friendly name of the CloudWatch metric. The
-                          name can contain only alphanumeric characters (A-Z, a-z,
-                          0-9) hyphen(-) and underscore (_), with length from one
-                          to 128 characters. It can't contain whitespace or metric
-                          names reserved for AWS WAF, for example All and Default_Action.
+                        description: Friendly name of the CloudWatch metric. The name
+                          can contain only alphanumeric characters (A-Z, a-z, 0-9)
+                          hyphen(-) and underscore (_), with length from one to 128
+                          characters. It can't contain whitespace or metric names
+                          reserved for AWS WAF, for example All and Default_Action.
                         type: string
                       sampledRequestsEnabled:
                         description: Whether AWS WAF should store a sampling of the
@@ -423,8 +467,8 @@ spec:
                   autoscaler.
                 properties:
                   associationConfig:
-                    description: Specifies custom configurations for the associations
-                      between the web ACL and protected resources. See association_config
+                    description: Custom configurations for the associations between
+                      the web ACL and protected resources. See association_config
                       below for details.
                     properties:
                       requestBody:
@@ -440,12 +484,12 @@ spec:
                                 See api_gateway below for details.
                               properties:
                                 defaultSizeInspectionLimit:
-                                  description: Specifies the maximum size of the web
-                                    request body component that an associated AWS
-                                    Verified Access instances should send to AWS WAF
-                                    for inspection. This applies to statements in
-                                    the web ACL that inspect the body or JSON body.
-                                    Valid values are KB_16, KB_32, KB_48 and KB_64.
+                                  description: Maximum size of the web request body
+                                    component that an associated AWS Verified Access
+                                    instances should send to AWS WAF for inspection.
+                                    This applies to statements in the web ACL that
+                                    inspect the body or JSON body. Valid values are
+                                    KB_16, KB_32, KB_48 and KB_64.
                                   type: string
                               type: object
                             appRunnerService:
@@ -455,12 +499,12 @@ spec:
                                 See app_runner_service below for details.
                               properties:
                                 defaultSizeInspectionLimit:
-                                  description: Specifies the maximum size of the web
-                                    request body component that an associated AWS
-                                    Verified Access instances should send to AWS WAF
-                                    for inspection. This applies to statements in
-                                    the web ACL that inspect the body or JSON body.
-                                    Valid values are KB_16, KB_32, KB_48 and KB_64.
+                                  description: Maximum size of the web request body
+                                    component that an associated AWS Verified Access
+                                    instances should send to AWS WAF for inspection.
+                                    This applies to statements in the web ACL that
+                                    inspect the body or JSON body. Valid values are
+                                    KB_16, KB_32, KB_48 and KB_64.
                                   type: string
                               type: object
                             cloudfront:
@@ -470,12 +514,12 @@ spec:
                                 to REGIONAL. See cloudfront below for details.
                               properties:
                                 defaultSizeInspectionLimit:
-                                  description: Specifies the maximum size of the web
-                                    request body component that an associated AWS
-                                    Verified Access instances should send to AWS WAF
-                                    for inspection. This applies to statements in
-                                    the web ACL that inspect the body or JSON body.
-                                    Valid values are KB_16, KB_32, KB_48 and KB_64.
+                                  description: Maximum size of the web request body
+                                    component that an associated AWS Verified Access
+                                    instances should send to AWS WAF for inspection.
+                                    This applies to statements in the web ACL that
+                                    inspect the body or JSON body. Valid values are
+                                    KB_16, KB_32, KB_48 and KB_64.
                                   type: string
                               type: object
                             cognitoUserPool:
@@ -485,67 +529,67 @@ spec:
                                 cognito_user_pool below for details.
                               properties:
                                 defaultSizeInspectionLimit:
-                                  description: Specifies the maximum size of the web
-                                    request body component that an associated AWS
-                                    Verified Access instances should send to AWS WAF
-                                    for inspection. This applies to statements in
-                                    the web ACL that inspect the body or JSON body.
-                                    Valid values are KB_16, KB_32, KB_48 and KB_64.
+                                  description: Maximum size of the web request body
+                                    component that an associated AWS Verified Access
+                                    instances should send to AWS WAF for inspection.
+                                    This applies to statements in the web ACL that
+                                    inspect the body or JSON body. Valid values are
+                                    KB_16, KB_32, KB_48 and KB_64.
                                   type: string
                               type: object
                             verifiedAccessInstance:
                               description: Customizes the request body that your protected
-                                AWS Verfied Access instances forward to AWS WAF for
+                                AWS Verified Access instances forward to AWS WAF for
                                 inspection. Applicable only when scope is set to REGIONAL.
                                 See verified_access_instance below for details.
                               properties:
                                 defaultSizeInspectionLimit:
-                                  description: Specifies the maximum size of the web
-                                    request body component that an associated AWS
-                                    Verified Access instances should send to AWS WAF
-                                    for inspection. This applies to statements in
-                                    the web ACL that inspect the body or JSON body.
-                                    Valid values are KB_16, KB_32, KB_48 and KB_64.
+                                  description: Maximum size of the web request body
+                                    component that an associated AWS Verified Access
+                                    instances should send to AWS WAF for inspection.
+                                    This applies to statements in the web ACL that
+                                    inspect the body or JSON body. Valid values are
+                                    KB_16, KB_32, KB_48 and KB_64.
                                   type: string
                               type: object
                           type: object
                         type: array
                     type: object
                   captchaConfig:
-                    description: Specifies how AWS WAF should handle CAPTCHA evaluations
-                      on the ACL level (used by AWS Bot Control). See captcha_config
+                    description: Configuration for how AWS WAF handles CAPTCHA evaluations
+                      at the web ACL level (used by AWS Bot Control). See captcha_config
                       below for details.
                     properties:
                       immunityTimeProperty:
-                        description: Defines custom immunity time. See immunity_time_property
+                        description: Custom immunity time. See immunity_time_property
                           below for details.
                         properties:
                           immunityTime:
-                            description: The amount of time, in seconds, that a CAPTCHA
+                            description: Amount of time, in seconds, that a CAPTCHA
                               or challenge timestamp is considered valid by AWS WAF.
                               The default setting is 300.
                             type: number
                         type: object
                     type: object
                   challengeConfig:
-                    description: Specifies how AWS WAF should handle Challenge evaluations
-                      on the ACL level (used by AWS Bot Control). See challenge_config
+                    description: Configuration for how AWS WAF handles Challenge evaluations
+                      at the web ACL level (used by AWS Bot Control). See challenge_config
                       below for details.
                     properties:
                       immunityTimeProperty:
-                        description: Defines custom immunity time. See immunity_time_property
+                        description: Custom immunity time. See immunity_time_property
                           below for details.
                         properties:
                           immunityTime:
-                            description: The amount of time, in seconds, that a CAPTCHA
+                            description: Amount of time, in seconds, that a CAPTCHA
                               or challenge timestamp is considered valid by AWS WAF.
                               The default setting is 300.
                             type: number
                         type: object
                     type: object
                   customResponseBody:
-                    description: Defines custom response bodies that can be referenced
-                      by custom_response actions. See custom_response_body below for
+                    description: Custom response bodies that can be referenced by
+                      custom_response actions. See custom_response_body below for
                       details.
                     items:
                       properties:
@@ -565,19 +609,19 @@ spec:
                       type: object
                     type: array
                   dataProtectionConfig:
-                    description: Specifies data protection to apply to the web request
-                      data for the web ACL. This is a web ACL level data protection
-                      option. See data_protection_config below for details.
+                    description: Data protection to apply to the web request data
+                      for the web ACL. This is a web ACL level data protection option.
+                      See data_protection_config below for details.
                     properties:
                       dataProtection:
-                        description: A block for data protection configurations for
+                        description: Block for data protection configurations for
                           specific web request field types. See data_protection block
                           for details.
                         items:
                           properties:
                             action:
-                              description: Specifies how to protect the field. Valid
-                                values are SUBSTITUTION or HASH.
+                              description: Protection behavior to apply to the field.
+                                Valid values are SUBSTITUTION or HASH.
                               type: string
                             excludeRateBasedDetails:
                               description: Boolean to specify whether to also exclude
@@ -592,9 +636,9 @@ spec:
                                 the terminating matching rule.
                               type: boolean
                             field:
-                              description: Specifies the field type and optional keys
-                                to apply the protection behavior to. See field block
-                                below for details.
+                              description: Field type and optional keys to apply the
+                                protection behavior to. See field block below for
+                                details.
                               properties:
                                 fieldKeys:
                                   description: Array of strings to specify the keys
@@ -605,10 +649,9 @@ spec:
                                     type: string
                                   type: array
                                 fieldType:
-                                  description: Specifies the web request component
-                                    type to protect. Valid Values are SINGLE_HEADER,
-                                    SINGLE_COOKIE, SINGLE_QUERY_ARGUMENT, QUERY_STRING,
-                                    BODY.
+                                  description: Web request component type to protect.
+                                    Valid Values are SINGLE_HEADER, SINGLE_COOKIE,
+                                    SINGLE_QUERY_ARGUMENT, QUERY_STRING, BODY.
                                   type: string
                               type: object
                           type: object
@@ -619,16 +662,16 @@ spec:
                       in the WebACL match. See default_action below for details.
                     properties:
                       allow:
-                        description: Specifies that AWS WAF should allow requests
-                          by default. See allow below for details.
+                        description: Allows requests by default. See allow below for
+                          details.
                         properties:
                           customRequestHandling:
-                            description: Defines custom handling for the web request.
-                              See custom_request_handling below for details.
+                            description: Custom handling for the web request. See
+                              custom_request_handling below for details.
                             properties:
                               insertHeader:
-                                description: The insert_header blocks used to define
-                                  HTTP headers added to the request. See insert_header
+                                description: insert_header blocks used to define HTTP
+                                  headers added to the request. See insert_header
                                   below for details.
                                 items:
                                   properties:
@@ -647,12 +690,12 @@ spec:
                             type: object
                         type: object
                       block:
-                        description: Specifies that AWS WAF should block requests
-                          by default. See block below for details.
+                        description: Blocks requests by default. See block below for
+                          details.
                         properties:
                           customResponse:
-                            description: Defines a custom response for the web request.
-                              See custom_response below for details.
+                            description: Custom response for the web request. See
+                              custom_response below for details.
                             properties:
                               customResponseBodyKey:
                                 description: References the response body that you
@@ -661,11 +704,10 @@ spec:
                                   block of this resource.
                                 type: string
                               responseCode:
-                                description: The HTTP status code to return to the
-                                  client.
+                                description: HTTP status code to return to the client.
                                 type: number
                               responseHeader:
-                                description: The response_header blocks used to define
+                                description: response_header blocks used to define
                                   the HTTP response headers added to the response.
                                   See response_header below for details.
                                 items:
@@ -688,6 +730,54 @@ spec:
                   description:
                     description: Friendly description of the WebACL.
                     type: string
+                  monetizationConfig:
+                    description: Monetization configuration for the web ACL. Provide
+                      this when any rule in the web ACL uses the monetize action.
+                      See monetization_config below for details.
+                    properties:
+                      cryptoConfig:
+                        description: Cryptocurrency payment configuration for the
+                          web ACL. See crypto_config below for details.
+                        properties:
+                          paymentNetwork:
+                            description: Blockchain payment networks configured to
+                              receive payments. You can specify 1 to 2 networks. See
+                              payment_network below for details.
+                            items:
+                              properties:
+                                chain:
+                                  description: Blockchain network used for settlement.
+                                    Valid values are BASE, SOLANA, BASE_SEPOLIA, and
+                                    SOLANA_DEVNET.
+                                  type: string
+                                prices:
+                                  description: Price configuration for this payment
+                                    network. Currently supports a single price entry.
+                                    See prices below for details.
+                                  properties:
+                                    amount:
+                                      description: Base price amount per request,
+                                        expressed as a decimal string with up to 3
+                                        decimal places. Minimum 0.001, maximum 999999999.999
+                                        (for example, "0.001").
+                                      type: string
+                                    currency:
+                                      description: Currency of the price amount. Valid
+                                        value is USDC.
+                                      type: string
+                                  type: object
+                                walletAddress:
+                                  description: Payee wallet address on the specified
+                                    blockchain that receives payments.
+                                  type: string
+                              type: object
+                            type: array
+                        type: object
+                      currencyMode:
+                        description: Currency mode for monetized requests. Valid values
+                          are TEST and REAL. Defaults to REAL.
+                        type: string
+                    type: object
                   name:
                     description: Friendly name of the WebACL. Conflicts with name_prefix.
                     type: string
@@ -700,10 +790,10 @@ spec:
                       https://docs.aws.amazon.com/waf/latest/APIReference/API_CreateWebACL.html'
                     type: string
                   scope:
-                    description: Specifies whether this is for an AWS CloudFront distribution
-                      or for a regional application. Valid values are CLOUDFRONT or
-                      REGIONAL. To work with CloudFront, you must also specify the
-                      region us-east-1 (N. Virginia) on the AWS provider.
+                    description: Scope of the web ACL, either an AWS CloudFront distribution
+                      or a regional application. Valid values are CLOUDFRONT or REGIONAL.
+                      To work with CloudFront, you must also specify the region us-east-1
+                      (N. Virginia) on the AWS provider.
                     type: string
                   tags:
                     additionalProperties:
@@ -712,23 +802,21 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   tokenDomains:
-                    description: Specifies the domains that AWS WAF should accept
-                      in a web request token. This enables the use of tokens across
-                      multiple protected websites. When AWS WAF provides a token,
-                      it uses the domain of the AWS resource that the web ACL is protecting.
-                      If you don't specify a list of token domains, AWS WAF accepts
-                      tokens only for the domain of the protected resource. With a
-                      token domain list, AWS WAF accepts the resource's host domain
-                      plus all domains in the token domain list, including their prefixed
-                      subdomains.
+                    description: Domains that AWS WAF should accept in a web request
+                      token. This enables the use of tokens across multiple protected
+                      websites. When AWS WAF provides a token, it uses the domain
+                      of the AWS resource that the web ACL is protecting. If you don't
+                      specify a list of token domains, AWS WAF accepts tokens only
+                      for the domain of the protected resource. With a token domain
+                      list, AWS WAF accepts the resource's host domain plus all domains
+                      in the token domain list, including their prefixed subdomains.
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
                   visibilityConfig:
-                    description: Defines and enables Amazon CloudWatch metrics and
-                      web request sample collection. See visibility_config below for
-                      details.
+                    description: Amazon CloudWatch metrics and web request sample
+                      collection configuration. See visibility_config below for details.
                     properties:
                       cloudwatchMetricsEnabled:
                         description: Whether the associated resource sends metrics
@@ -736,11 +824,11 @@ spec:
                           WAF Metrics.
                         type: boolean
                       metricName:
-                        description: A friendly name of the CloudWatch metric. The
-                          name can contain only alphanumeric characters (A-Z, a-z,
-                          0-9) hyphen(-) and underscore (_), with length from one
-                          to 128 characters. It can't contain whitespace or metric
-                          names reserved for AWS WAF, for example All and Default_Action.
+                        description: Friendly name of the CloudWatch metric. The name
+                          can contain only alphanumeric characters (A-Z, a-z, 0-9)
+                          hyphen(-) and underscore (_), with length from one to 128
+                          characters. It can't contain whitespace or metric names
+                          reserved for AWS WAF, for example All and Default_Action.
                         type: string
                       sampledRequestsEnabled:
                         description: Whether AWS WAF should store a sampling of the
@@ -854,15 +942,15 @@ spec:
               atProvider:
                 properties:
                   applicationIntegrationUrl:
-                    description: The URL to use in SDK integrations with managed rule
+                    description: URL to use in SDK integrations with managed rule
                       groups.
                     type: string
                   arn:
-                    description: The ARN of the WAF WebACL.
+                    description: ARN of the WAF WebACL.
                     type: string
                   associationConfig:
-                    description: Specifies custom configurations for the associations
-                      between the web ACL and protected resources. See association_config
+                    description: Custom configurations for the associations between
+                      the web ACL and protected resources. See association_config
                       below for details.
                     properties:
                       requestBody:
@@ -878,12 +966,12 @@ spec:
                                 See api_gateway below for details.
                               properties:
                                 defaultSizeInspectionLimit:
-                                  description: Specifies the maximum size of the web
-                                    request body component that an associated AWS
-                                    Verified Access instances should send to AWS WAF
-                                    for inspection. This applies to statements in
-                                    the web ACL that inspect the body or JSON body.
-                                    Valid values are KB_16, KB_32, KB_48 and KB_64.
+                                  description: Maximum size of the web request body
+                                    component that an associated AWS Verified Access
+                                    instances should send to AWS WAF for inspection.
+                                    This applies to statements in the web ACL that
+                                    inspect the body or JSON body. Valid values are
+                                    KB_16, KB_32, KB_48 and KB_64.
                                   type: string
                               type: object
                             appRunnerService:
@@ -893,12 +981,12 @@ spec:
                                 See app_runner_service below for details.
                               properties:
                                 defaultSizeInspectionLimit:
-                                  description: Specifies the maximum size of the web
-                                    request body component that an associated AWS
-                                    Verified Access instances should send to AWS WAF
-                                    for inspection. This applies to statements in
-                                    the web ACL that inspect the body or JSON body.
-                                    Valid values are KB_16, KB_32, KB_48 and KB_64.
+                                  description: Maximum size of the web request body
+                                    component that an associated AWS Verified Access
+                                    instances should send to AWS WAF for inspection.
+                                    This applies to statements in the web ACL that
+                                    inspect the body or JSON body. Valid values are
+                                    KB_16, KB_32, KB_48 and KB_64.
                                   type: string
                               type: object
                             cloudfront:
@@ -908,12 +996,12 @@ spec:
                                 to REGIONAL. See cloudfront below for details.
                               properties:
                                 defaultSizeInspectionLimit:
-                                  description: Specifies the maximum size of the web
-                                    request body component that an associated AWS
-                                    Verified Access instances should send to AWS WAF
-                                    for inspection. This applies to statements in
-                                    the web ACL that inspect the body or JSON body.
-                                    Valid values are KB_16, KB_32, KB_48 and KB_64.
+                                  description: Maximum size of the web request body
+                                    component that an associated AWS Verified Access
+                                    instances should send to AWS WAF for inspection.
+                                    This applies to statements in the web ACL that
+                                    inspect the body or JSON body. Valid values are
+                                    KB_16, KB_32, KB_48 and KB_64.
                                   type: string
                               type: object
                             cognitoUserPool:
@@ -923,27 +1011,27 @@ spec:
                                 cognito_user_pool below for details.
                               properties:
                                 defaultSizeInspectionLimit:
-                                  description: Specifies the maximum size of the web
-                                    request body component that an associated AWS
-                                    Verified Access instances should send to AWS WAF
-                                    for inspection. This applies to statements in
-                                    the web ACL that inspect the body or JSON body.
-                                    Valid values are KB_16, KB_32, KB_48 and KB_64.
+                                  description: Maximum size of the web request body
+                                    component that an associated AWS Verified Access
+                                    instances should send to AWS WAF for inspection.
+                                    This applies to statements in the web ACL that
+                                    inspect the body or JSON body. Valid values are
+                                    KB_16, KB_32, KB_48 and KB_64.
                                   type: string
                               type: object
                             verifiedAccessInstance:
                               description: Customizes the request body that your protected
-                                AWS Verfied Access instances forward to AWS WAF for
+                                AWS Verified Access instances forward to AWS WAF for
                                 inspection. Applicable only when scope is set to REGIONAL.
                                 See verified_access_instance below for details.
                               properties:
                                 defaultSizeInspectionLimit:
-                                  description: Specifies the maximum size of the web
-                                    request body component that an associated AWS
-                                    Verified Access instances should send to AWS WAF
-                                    for inspection. This applies to statements in
-                                    the web ACL that inspect the body or JSON body.
-                                    Valid values are KB_16, KB_32, KB_48 and KB_64.
+                                  description: Maximum size of the web request body
+                                    component that an associated AWS Verified Access
+                                    instances should send to AWS WAF for inspection.
+                                    This applies to statements in the web ACL that
+                                    inspect the body or JSON body. Valid values are
+                                    KB_16, KB_32, KB_48 and KB_64.
                                   type: string
                               type: object
                           type: object
@@ -954,40 +1042,40 @@ spec:
                       by this web ACL.
                     type: number
                   captchaConfig:
-                    description: Specifies how AWS WAF should handle CAPTCHA evaluations
-                      on the ACL level (used by AWS Bot Control). See captcha_config
+                    description: Configuration for how AWS WAF handles CAPTCHA evaluations
+                      at the web ACL level (used by AWS Bot Control). See captcha_config
                       below for details.
                     properties:
                       immunityTimeProperty:
-                        description: Defines custom immunity time. See immunity_time_property
+                        description: Custom immunity time. See immunity_time_property
                           below for details.
                         properties:
                           immunityTime:
-                            description: The amount of time, in seconds, that a CAPTCHA
+                            description: Amount of time, in seconds, that a CAPTCHA
                               or challenge timestamp is considered valid by AWS WAF.
                               The default setting is 300.
                             type: number
                         type: object
                     type: object
                   challengeConfig:
-                    description: Specifies how AWS WAF should handle Challenge evaluations
-                      on the ACL level (used by AWS Bot Control). See challenge_config
+                    description: Configuration for how AWS WAF handles Challenge evaluations
+                      at the web ACL level (used by AWS Bot Control). See challenge_config
                       below for details.
                     properties:
                       immunityTimeProperty:
-                        description: Defines custom immunity time. See immunity_time_property
+                        description: Custom immunity time. See immunity_time_property
                           below for details.
                         properties:
                           immunityTime:
-                            description: The amount of time, in seconds, that a CAPTCHA
+                            description: Amount of time, in seconds, that a CAPTCHA
                               or challenge timestamp is considered valid by AWS WAF.
                               The default setting is 300.
                             type: number
                         type: object
                     type: object
                   customResponseBody:
-                    description: Defines custom response bodies that can be referenced
-                      by custom_response actions. See custom_response_body below for
+                    description: Custom response bodies that can be referenced by
+                      custom_response actions. See custom_response_body below for
                       details.
                     items:
                       properties:
@@ -1007,19 +1095,19 @@ spec:
                       type: object
                     type: array
                   dataProtectionConfig:
-                    description: Specifies data protection to apply to the web request
-                      data for the web ACL. This is a web ACL level data protection
-                      option. See data_protection_config below for details.
+                    description: Data protection to apply to the web request data
+                      for the web ACL. This is a web ACL level data protection option.
+                      See data_protection_config below for details.
                     properties:
                       dataProtection:
-                        description: A block for data protection configurations for
+                        description: Block for data protection configurations for
                           specific web request field types. See data_protection block
                           for details.
                         items:
                           properties:
                             action:
-                              description: Specifies how to protect the field. Valid
-                                values are SUBSTITUTION or HASH.
+                              description: Protection behavior to apply to the field.
+                                Valid values are SUBSTITUTION or HASH.
                               type: string
                             excludeRateBasedDetails:
                               description: Boolean to specify whether to also exclude
@@ -1034,9 +1122,9 @@ spec:
                                 the terminating matching rule.
                               type: boolean
                             field:
-                              description: Specifies the field type and optional keys
-                                to apply the protection behavior to. See field block
-                                below for details.
+                              description: Field type and optional keys to apply the
+                                protection behavior to. See field block below for
+                                details.
                               properties:
                                 fieldKeys:
                                   description: Array of strings to specify the keys
@@ -1047,10 +1135,9 @@ spec:
                                     type: string
                                   type: array
                                 fieldType:
-                                  description: Specifies the web request component
-                                    type to protect. Valid Values are SINGLE_HEADER,
-                                    SINGLE_COOKIE, SINGLE_QUERY_ARGUMENT, QUERY_STRING,
-                                    BODY.
+                                  description: Web request component type to protect.
+                                    Valid Values are SINGLE_HEADER, SINGLE_COOKIE,
+                                    SINGLE_QUERY_ARGUMENT, QUERY_STRING, BODY.
                                   type: string
                               type: object
                           type: object
@@ -1061,16 +1148,16 @@ spec:
                       in the WebACL match. See default_action below for details.
                     properties:
                       allow:
-                        description: Specifies that AWS WAF should allow requests
-                          by default. See allow below for details.
+                        description: Allows requests by default. See allow below for
+                          details.
                         properties:
                           customRequestHandling:
-                            description: Defines custom handling for the web request.
-                              See custom_request_handling below for details.
+                            description: Custom handling for the web request. See
+                              custom_request_handling below for details.
                             properties:
                               insertHeader:
-                                description: The insert_header blocks used to define
-                                  HTTP headers added to the request. See insert_header
+                                description: insert_header blocks used to define HTTP
+                                  headers added to the request. See insert_header
                                   below for details.
                                 items:
                                   properties:
@@ -1089,12 +1176,12 @@ spec:
                             type: object
                         type: object
                       block:
-                        description: Specifies that AWS WAF should block requests
-                          by default. See block below for details.
+                        description: Blocks requests by default. See block below for
+                          details.
                         properties:
                           customResponse:
-                            description: Defines a custom response for the web request.
-                              See custom_response below for details.
+                            description: Custom response for the web request. See
+                              custom_response below for details.
                             properties:
                               customResponseBodyKey:
                                 description: References the response body that you
@@ -1103,11 +1190,10 @@ spec:
                                   block of this resource.
                                 type: string
                               responseCode:
-                                description: The HTTP status code to return to the
-                                  client.
+                                description: HTTP status code to return to the client.
                                 type: number
                               responseHeader:
-                                description: The response_header blocks used to define
+                                description: response_header blocks used to define
                                   the HTTP response headers added to the response.
                                   See response_header below for details.
                                 items:
@@ -1131,10 +1217,58 @@ spec:
                     description: Friendly description of the WebACL.
                     type: string
                   id:
-                    description: The ID of the WAF WebACL.
+                    description: ID of the WAF WebACL.
                     type: string
                   lockToken:
                     type: string
+                  monetizationConfig:
+                    description: Monetization configuration for the web ACL. Provide
+                      this when any rule in the web ACL uses the monetize action.
+                      See monetization_config below for details.
+                    properties:
+                      cryptoConfig:
+                        description: Cryptocurrency payment configuration for the
+                          web ACL. See crypto_config below for details.
+                        properties:
+                          paymentNetwork:
+                            description: Blockchain payment networks configured to
+                              receive payments. You can specify 1 to 2 networks. See
+                              payment_network below for details.
+                            items:
+                              properties:
+                                chain:
+                                  description: Blockchain network used for settlement.
+                                    Valid values are BASE, SOLANA, BASE_SEPOLIA, and
+                                    SOLANA_DEVNET.
+                                  type: string
+                                prices:
+                                  description: Price configuration for this payment
+                                    network. Currently supports a single price entry.
+                                    See prices below for details.
+                                  properties:
+                                    amount:
+                                      description: Base price amount per request,
+                                        expressed as a decimal string with up to 3
+                                        decimal places. Minimum 0.001, maximum 999999999.999
+                                        (for example, "0.001").
+                                      type: string
+                                    currency:
+                                      description: Currency of the price amount. Valid
+                                        value is USDC.
+                                      type: string
+                                  type: object
+                                walletAddress:
+                                  description: Payee wallet address on the specified
+                                    blockchain that receives payments.
+                                  type: string
+                              type: object
+                            type: array
+                        type: object
+                      currencyMode:
+                        description: Currency mode for monetized requests. Valid values
+                          are TEST and REAL. Defaults to REAL.
+                        type: string
+                    type: object
                   name:
                     description: Friendly name of the WebACL. Conflicts with name_prefix.
                     type: string
@@ -1152,10 +1286,10 @@ spec:
                       https://docs.aws.amazon.com/waf/latest/APIReference/API_CreateWebACL.html'
                     type: string
                   scope:
-                    description: Specifies whether this is for an AWS CloudFront distribution
-                      or for a regional application. Valid values are CLOUDFRONT or
-                      REGIONAL. To work with CloudFront, you must also specify the
-                      region us-east-1 (N. Virginia) on the AWS provider.
+                    description: Scope of the web ACL, either an AWS CloudFront distribution
+                      or a regional application. Valid values are CLOUDFRONT or REGIONAL.
+                      To work with CloudFront, you must also specify the region us-east-1
+                      (N. Virginia) on the AWS provider.
                     type: string
                   tags:
                     additionalProperties:
@@ -1171,23 +1305,21 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   tokenDomains:
-                    description: Specifies the domains that AWS WAF should accept
-                      in a web request token. This enables the use of tokens across
-                      multiple protected websites. When AWS WAF provides a token,
-                      it uses the domain of the AWS resource that the web ACL is protecting.
-                      If you don't specify a list of token domains, AWS WAF accepts
-                      tokens only for the domain of the protected resource. With a
-                      token domain list, AWS WAF accepts the resource's host domain
-                      plus all domains in the token domain list, including their prefixed
-                      subdomains.
+                    description: Domains that AWS WAF should accept in a web request
+                      token. This enables the use of tokens across multiple protected
+                      websites. When AWS WAF provides a token, it uses the domain
+                      of the AWS resource that the web ACL is protecting. If you don't
+                      specify a list of token domains, AWS WAF accepts tokens only
+                      for the domain of the protected resource. With a token domain
+                      list, AWS WAF accepts the resource's host domain plus all domains
+                      in the token domain list, including their prefixed subdomains.
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
                   visibilityConfig:
-                    description: Defines and enables Amazon CloudWatch metrics and
-                      web request sample collection. See visibility_config below for
-                      details.
+                    description: Amazon CloudWatch metrics and web request sample
+                      collection configuration. See visibility_config below for details.
                     properties:
                       cloudwatchMetricsEnabled:
                         description: Whether the associated resource sends metrics
@@ -1195,11 +1327,11 @@ spec:
                           WAF Metrics.
                         type: boolean
                       metricName:
-                        description: A friendly name of the CloudWatch metric. The
-                          name can contain only alphanumeric characters (A-Z, a-z,
-                          0-9) hyphen(-) and underscore (_), with length from one
-                          to 128 characters. It can't contain whitespace or metric
-                          names reserved for AWS WAF, for example All and Default_Action.
+                        description: Friendly name of the CloudWatch metric. The name
+                          can contain only alphanumeric characters (A-Z, a-z, 0-9)
+                          hyphen(-) and underscore (_), with length from one to 128
+                          characters. It can't contain whitespace or metric names
+                          reserved for AWS WAF, for example All and Default_Action.
                         type: string
                       sampledRequestsEnabled:
                         description: Whether AWS WAF should store a sampling of the

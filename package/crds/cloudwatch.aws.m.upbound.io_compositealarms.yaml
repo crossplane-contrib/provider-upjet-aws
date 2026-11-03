@@ -180,10 +180,10 @@ spec:
                     description: The description for the composite alarm.
                     type: string
                   alarmRule:
-                    description: An expression that specifies which other alarms are
+                    description: Expression that specifies which other alarms are
                       to be evaluated to determine this composite alarm's state. For
                       syntax, see Creating a Composite Alarm. The maximum length is
-                      10240 characters.
+                      10240 characters. Leading and trailing whitespace are not allowed.
                     type: string
                   insufficientDataActions:
                     description: The set of actions to execute when this alarm transitions
@@ -432,10 +432,10 @@ spec:
                     description: The description for the composite alarm.
                     type: string
                   alarmRule:
-                    description: An expression that specifies which other alarms are
+                    description: Expression that specifies which other alarms are
                       to be evaluated to determine this composite alarm's state. For
                       syntax, see Creating a Composite Alarm. The maximum length is
-                      10240 characters.
+                      10240 characters. Leading and trailing whitespace are not allowed.
                     type: string
                   insufficientDataActions:
                     description: The set of actions to execute when this alarm transitions
@@ -649,10 +649,10 @@ spec:
                     description: The description for the composite alarm.
                     type: string
                   alarmRule:
-                    description: An expression that specifies which other alarms are
+                    description: Expression that specifies which other alarms are
                       to be evaluated to determine this composite alarm's state. For
                       syntax, see Creating a Composite Alarm. The maximum length is
-                      10240 characters.
+                      10240 characters. Leading and trailing whitespace are not allowed.
                     type: string
                   arn:
                     description: The ARN of the composite alarm.

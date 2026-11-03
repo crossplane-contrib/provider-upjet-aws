@@ -67,7 +67,7 @@ type VPCEndpointInitParameters struct {
 
 type VPCEndpointObservation struct {
 
-	// Unique identified of the Vpc Endpoint.
+	// Unique identified of the VPC Endpoint.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Name of the interface endpoint.

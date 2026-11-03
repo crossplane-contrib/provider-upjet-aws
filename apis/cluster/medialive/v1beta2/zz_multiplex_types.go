@@ -15,10 +15,10 @@ import (
 
 type MultiplexInitParameters struct {
 
-	// A list of availability zones. You must specify exactly two.
+	// List of availability zones. You must specify exactly two.
 	AvailabilityZones []*string `json:"availabilityZones,omitempty" tf:"availability_zones,omitempty"`
 
-	// Multiplex settings. See Multiplex Settings for more details.
+	// Multiplex settings. See multiplex_settings Block for more details.
 	MultiplexSettings *MultiplexMultiplexSettingsInitParameters `json:"multiplexSettings,omitempty" tf:"multiplex_settings,omitempty"`
 
 	// name of Multiplex.
@@ -86,13 +86,13 @@ type MultiplexObservation struct {
 	// ARN of the Multiplex.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// A list of availability zones. You must specify exactly two.
+	// List of availability zones. You must specify exactly two.
 	AvailabilityZones []*string `json:"availabilityZones,omitempty" tf:"availability_zones,omitempty"`
 
 	// (String) ID of the MediaLive Multiplex.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Multiplex settings. See Multiplex Settings for more details.
+	// Multiplex settings. See multiplex_settings Block for more details.
 	MultiplexSettings *MultiplexMultiplexSettingsObservation `json:"multiplexSettings,omitempty" tf:"multiplex_settings,omitempty"`
 
 	// name of Multiplex.
@@ -115,11 +115,11 @@ type MultiplexObservation struct {
 
 type MultiplexParameters struct {
 
-	// A list of availability zones. You must specify exactly two.
+	// List of availability zones. You must specify exactly two.
 	// +kubebuilder:validation:Optional
 	AvailabilityZones []*string `json:"availabilityZones,omitempty" tf:"availability_zones,omitempty"`
 
-	// Multiplex settings. See Multiplex Settings for more details.
+	// Multiplex settings. See multiplex_settings Block for more details.
 	// +kubebuilder:validation:Optional
 	MultiplexSettings *MultiplexMultiplexSettingsParameters `json:"multiplexSettings,omitempty" tf:"multiplex_settings,omitempty"`
 

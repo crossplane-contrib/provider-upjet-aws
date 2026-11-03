@@ -536,7 +536,7 @@ spec:
               forProvider:
                 properties:
                   autoscalingGroupName:
-                    description: Name of the Autoscaling Group to apply the tag to.
+                    description: Name of the Auto Scaling group to apply the tag to.
                     type: string
                   autoscalingGroupNameRef:
                     description: Reference to a AutoscalingGroup in autoscaling to
@@ -650,7 +650,7 @@ spec:
                   autoscaler.
                 properties:
                   autoscalingGroupName:
-                    description: Name of the Autoscaling Group to apply the tag to.
+                    description: Name of the Auto Scaling group to apply the tag to.
                     type: string
                   autoscalingGroupNameRef:
                     description: Reference to a AutoscalingGroup in autoscaling to
@@ -840,7 +840,7 @@ spec:
               atProvider:
                 properties:
                   autoscalingGroupName:
-                    description: Name of the Autoscaling Group to apply the tag to.
+                    description: Name of the Auto Scaling group to apply the tag to.
                     type: string
                   id:
                     description: ASG name and key, separated by a comma (,)

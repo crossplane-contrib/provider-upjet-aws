@@ -28,7 +28,7 @@ type ComputeEnvironmentOrderInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ComputeEnvironmentSelector *v2.NamespacedSelector `json:"computeEnvironmentSelector,omitempty" tf:"-"`
 
-	// The order of the compute environment. Compute environments are tried in ascending order. For example, if two compute environments are associated with a job queue, the compute environment with a lower order integer value is tried for job placement first.
+	// Order of the compute environment. Compute environments are tried in ascending order. For example, if two compute environments are associated with a job queue, the compute environment with a lower order integer value is tried for job placement first.
 	Order *float64 `json:"order,omitempty" tf:"order,omitempty"`
 }
 
@@ -37,7 +37,7 @@ type ComputeEnvironmentOrderObservation struct {
 	// ARN of the compute environment.
 	ComputeEnvironment *string `json:"computeEnvironment,omitempty" tf:"compute_environment,omitempty"`
 
-	// The order of the compute environment. Compute environments are tried in ascending order. For example, if two compute environments are associated with a job queue, the compute environment with a lower order integer value is tried for job placement first.
+	// Order of the compute environment. Compute environments are tried in ascending order. For example, if two compute environments are associated with a job queue, the compute environment with a lower order integer value is tried for job placement first.
 	Order *float64 `json:"order,omitempty" tf:"order,omitempty"`
 }
 
@@ -57,24 +57,23 @@ type ComputeEnvironmentOrderParameters struct {
 	// +kubebuilder:validation:Optional
 	ComputeEnvironmentSelector *v2.NamespacedSelector `json:"computeEnvironmentSelector,omitempty" tf:"-"`
 
-	// The order of the compute environment. Compute environments are tried in ascending order. For example, if two compute environments are associated with a job queue, the compute environment with a lower order integer value is tried for job placement first.
+	// Order of the compute environment. Compute environments are tried in ascending order. For example, if two compute environments are associated with a job queue, the compute environment with a lower order integer value is tried for job placement first.
 	// +kubebuilder:validation:Optional
 	Order *float64 `json:"order" tf:"order,omitempty"`
 }
 
 type JobQueueInitParameters struct {
 
-	// The set of compute environments mapped to a job queue and their order relative to each other. The job scheduler uses this parameter to determine which compute environment runs a specific job. Compute environments must be in the VALID state before you can associate them with a job queue. You can associate up to three compute environments with a job queue.
+	// Set of compute environments mapped to a job queue and their order relative to each other. The job scheduler uses this parameter to determine which compute environment runs a specific job. Compute environments must be in the VALID state before you can associate them with a job queue. You can associate up to three compute environments with a job queue.
 	ComputeEnvironmentOrder []ComputeEnvironmentOrderInitParameters `json:"computeEnvironmentOrder,omitempty" tf:"compute_environment_order,omitempty"`
 
-	// The set of job state time limit actions mapped to a job queue. Specifies an action that AWS Batch will take after the job has remained at the head of the queue in the specified state for longer than the specified time.
+	// Set of job state time limit actions mapped to a job queue. Specifies an action that AWS Batch will take after the job has remained at the head of the queue in the specified state for longer than the specified time.
 	JobStateTimeLimitAction []JobStateTimeLimitActionInitParameters `json:"jobStateTimeLimitAction,omitempty" tf:"job_state_time_limit_action,omitempty"`
 
-	// The priority of the job queue. Job queues with a higher priority
-	// are evaluated first when associated with the same compute environment.
+	// Priority of the job queue. Job queues with a higher priority are evaluated first when associated with the same compute environment.
 	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
-	// The ARN of the fair share scheduling policy. If this parameter is specified, the job queue uses a fair share scheduling policy. If this parameter isn't specified, the job queue uses a first in, first out (FIFO) scheduling policy. After a job queue is created, you can replace but can't remove the fair share scheduling policy.
+	// ARN of the fair share scheduling policy. If this parameter is specified, the job queue uses a fair share scheduling policy. If this parameter isn't specified, the job queue uses a first in, first out (FIFO) scheduling policy. After a job queue is created, you can replace but can't remove the fair share scheduling policy.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/batch/v1beta1.SchedulingPolicy
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	SchedulingPolicyArn *string `json:"schedulingPolicyArn,omitempty" tf:"scheduling_policy_arn,omitempty"`
@@ -87,7 +86,7 @@ type JobQueueInitParameters struct {
 	// +kubebuilder:validation:Optional
 	SchedulingPolicyArnSelector *v2.NamespacedSelector `json:"schedulingPolicyArnSelector,omitempty" tf:"-"`
 
-	// The state of the job queue. Must be one of: ENABLED or DISABLED
+	// State of the job queue. Must be one of: ENABLED or DISABLED
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 
 	// Key-value map of resource tags.
@@ -100,49 +99,47 @@ type JobQueueObservation struct {
 	// ARN of the job queue.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The set of compute environments mapped to a job queue and their order relative to each other. The job scheduler uses this parameter to determine which compute environment runs a specific job. Compute environments must be in the VALID state before you can associate them with a job queue. You can associate up to three compute environments with a job queue.
+	// Set of compute environments mapped to a job queue and their order relative to each other. The job scheduler uses this parameter to determine which compute environment runs a specific job. Compute environments must be in the VALID state before you can associate them with a job queue. You can associate up to three compute environments with a job queue.
 	ComputeEnvironmentOrder []ComputeEnvironmentOrderObservation `json:"computeEnvironmentOrder,omitempty" tf:"compute_environment_order,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The set of job state time limit actions mapped to a job queue. Specifies an action that AWS Batch will take after the job has remained at the head of the queue in the specified state for longer than the specified time.
+	// Set of job state time limit actions mapped to a job queue. Specifies an action that AWS Batch will take after the job has remained at the head of the queue in the specified state for longer than the specified time.
 	JobStateTimeLimitAction []JobStateTimeLimitActionObservation `json:"jobStateTimeLimitAction,omitempty" tf:"job_state_time_limit_action,omitempty"`
 
-	// The priority of the job queue. Job queues with a higher priority
-	// are evaluated first when associated with the same compute environment.
+	// Priority of the job queue. Job queues with a higher priority are evaluated first when associated with the same compute environment.
 	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The ARN of the fair share scheduling policy. If this parameter is specified, the job queue uses a fair share scheduling policy. If this parameter isn't specified, the job queue uses a first in, first out (FIFO) scheduling policy. After a job queue is created, you can replace but can't remove the fair share scheduling policy.
+	// ARN of the fair share scheduling policy. If this parameter is specified, the job queue uses a fair share scheduling policy. If this parameter isn't specified, the job queue uses a first in, first out (FIFO) scheduling policy. After a job queue is created, you can replace but can't remove the fair share scheduling policy.
 	SchedulingPolicyArn *string `json:"schedulingPolicyArn,omitempty" tf:"scheduling_policy_arn,omitempty"`
 
-	// The state of the job queue. Must be one of: ENABLED or DISABLED
+	// State of the job queue. Must be one of: ENABLED or DISABLED
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type JobQueueParameters struct {
 
-	// The set of compute environments mapped to a job queue and their order relative to each other. The job scheduler uses this parameter to determine which compute environment runs a specific job. Compute environments must be in the VALID state before you can associate them with a job queue. You can associate up to three compute environments with a job queue.
+	// Set of compute environments mapped to a job queue and their order relative to each other. The job scheduler uses this parameter to determine which compute environment runs a specific job. Compute environments must be in the VALID state before you can associate them with a job queue. You can associate up to three compute environments with a job queue.
 	// +kubebuilder:validation:Optional
 	ComputeEnvironmentOrder []ComputeEnvironmentOrderParameters `json:"computeEnvironmentOrder,omitempty" tf:"compute_environment_order,omitempty"`
 
-	// The set of job state time limit actions mapped to a job queue. Specifies an action that AWS Batch will take after the job has remained at the head of the queue in the specified state for longer than the specified time.
+	// Set of job state time limit actions mapped to a job queue. Specifies an action that AWS Batch will take after the job has remained at the head of the queue in the specified state for longer than the specified time.
 	// +kubebuilder:validation:Optional
 	JobStateTimeLimitAction []JobStateTimeLimitActionParameters `json:"jobStateTimeLimitAction,omitempty" tf:"job_state_time_limit_action,omitempty"`
 
-	// The priority of the job queue. Job queues with a higher priority
-	// are evaluated first when associated with the same compute environment.
+	// Priority of the job queue. Job queues with a higher priority are evaluated first when associated with the same compute environment.
 	// +kubebuilder:validation:Optional
 	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
@@ -151,7 +148,7 @@ type JobQueueParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// The ARN of the fair share scheduling policy. If this parameter is specified, the job queue uses a fair share scheduling policy. If this parameter isn't specified, the job queue uses a first in, first out (FIFO) scheduling policy. After a job queue is created, you can replace but can't remove the fair share scheduling policy.
+	// ARN of the fair share scheduling policy. If this parameter is specified, the job queue uses a fair share scheduling policy. If this parameter isn't specified, the job queue uses a first in, first out (FIFO) scheduling policy. After a job queue is created, you can replace but can't remove the fair share scheduling policy.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/batch/v1beta1.SchedulingPolicy
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -165,7 +162,7 @@ type JobQueueParameters struct {
 	// +kubebuilder:validation:Optional
 	SchedulingPolicyArnSelector *v2.NamespacedSelector `json:"schedulingPolicyArnSelector,omitempty" tf:"-"`
 
-	// The state of the job queue. Must be one of: ENABLED or DISABLED
+	// State of the job queue. Must be one of: ENABLED or DISABLED
 	// +kubebuilder:validation:Optional
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 
@@ -177,49 +174,49 @@ type JobQueueParameters struct {
 
 type JobStateTimeLimitActionInitParameters struct {
 
-	// The action to take when a job is at the head of the job queue in the specified state for the specified period of time. Valid values include "CANCEL"
+	// Action to take when a job is at the head of the job queue in the specified state for the specified period of time. Valid values include "CANCEL"
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
-	// The approximate amount of time, in seconds, that must pass with the job in the specified state before the action is taken. Valid values include integers between 600 & 86400
+	// Approximate amount of time, in seconds, that must pass with the job in the specified state before the action is taken. Valid values include integers between 600 & 86400
 	MaxTimeSeconds *float64 `json:"maxTimeSeconds,omitempty" tf:"max_time_seconds,omitempty"`
 
-	// The reason to log for the action being taken.
+	// Reason to log for the action being taken.
 	Reason *string `json:"reason,omitempty" tf:"reason,omitempty"`
 
-	// The state of the job needed to trigger the action. Valid values include "RUNNABLE".
+	// State of the job needed to trigger the action. Valid values include "RUNNABLE".
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 }
 
 type JobStateTimeLimitActionObservation struct {
 
-	// The action to take when a job is at the head of the job queue in the specified state for the specified period of time. Valid values include "CANCEL"
+	// Action to take when a job is at the head of the job queue in the specified state for the specified period of time. Valid values include "CANCEL"
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
-	// The approximate amount of time, in seconds, that must pass with the job in the specified state before the action is taken. Valid values include integers between 600 & 86400
+	// Approximate amount of time, in seconds, that must pass with the job in the specified state before the action is taken. Valid values include integers between 600 & 86400
 	MaxTimeSeconds *float64 `json:"maxTimeSeconds,omitempty" tf:"max_time_seconds,omitempty"`
 
-	// The reason to log for the action being taken.
+	// Reason to log for the action being taken.
 	Reason *string `json:"reason,omitempty" tf:"reason,omitempty"`
 
-	// The state of the job needed to trigger the action. Valid values include "RUNNABLE".
+	// State of the job needed to trigger the action. Valid values include "RUNNABLE".
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 }
 
 type JobStateTimeLimitActionParameters struct {
 
-	// The action to take when a job is at the head of the job queue in the specified state for the specified period of time. Valid values include "CANCEL"
+	// Action to take when a job is at the head of the job queue in the specified state for the specified period of time. Valid values include "CANCEL"
 	// +kubebuilder:validation:Optional
 	Action *string `json:"action" tf:"action,omitempty"`
 
-	// The approximate amount of time, in seconds, that must pass with the job in the specified state before the action is taken. Valid values include integers between 600 & 86400
+	// Approximate amount of time, in seconds, that must pass with the job in the specified state before the action is taken. Valid values include integers between 600 & 86400
 	// +kubebuilder:validation:Optional
 	MaxTimeSeconds *float64 `json:"maxTimeSeconds" tf:"max_time_seconds,omitempty"`
 
-	// The reason to log for the action being taken.
+	// Reason to log for the action being taken.
 	// +kubebuilder:validation:Optional
 	Reason *string `json:"reason" tf:"reason,omitempty"`
 
-	// The state of the job needed to trigger the action. Valid values include "RUNNABLE".
+	// State of the job needed to trigger the action. Valid values include "RUNNABLE".
 	// +kubebuilder:validation:Optional
 	State *string `json:"state" tf:"state,omitempty"`
 }

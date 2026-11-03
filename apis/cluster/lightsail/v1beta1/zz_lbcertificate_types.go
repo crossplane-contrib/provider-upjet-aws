@@ -58,7 +58,7 @@ type LBCertificateObservation struct {
 	// Set of domain validation objects which can be used to complete certificate validation. Can have more than one element, e.g., if SANs are defined. Each element contains the following attributes:
 	DomainValidationRecords []DomainValidationRecordsObservation `json:"domainValidationRecords,omitempty" tf:"domain_validation_records,omitempty"`
 
-	// Combination of attributes to create a unique id: lb_name,name
+	// Combination of attributes to create a unique ID: lb_name,name
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Load balancer name where you want to create the SSL/TLS certificate.

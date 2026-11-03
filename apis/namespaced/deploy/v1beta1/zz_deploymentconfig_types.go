@@ -36,7 +36,7 @@ type DeploymentConfigObservation struct {
 	// The compute platform can be Server, Lambda, or ECS. Default is Server.
 	ComputePlatform *string `json:"computePlatform,omitempty" tf:"compute_platform,omitempty"`
 
-	// The AWS Assigned deployment config id
+	// The AWS Assigned deployment config ID
 	DeploymentConfigID *string `json:"deploymentConfigId,omitempty" tf:"deployment_config_id,omitempty"`
 
 	// The deployment group's config name.

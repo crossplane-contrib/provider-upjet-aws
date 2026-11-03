@@ -183,7 +183,7 @@ spec:
                     type: string
                   sourceAmiId:
                     description: |-
-                      Id of the AMI to copy. This id must be valid in the region
+                      ID of the AMI to copy. This ID must be valid in the region
                       given by source_ami_region.
                     type: string
                   sourceAmiIdRef:
@@ -392,7 +392,7 @@ spec:
                     type: string
                   sourceAmiId:
                     description: |-
-                      Id of the AMI to copy. This id must be valid in the region
+                      ID of the AMI to copy. This ID must be valid in the region
                       given by source_ami_region.
                     type: string
                   sourceAmiIdRef:
@@ -695,7 +695,7 @@ spec:
                     type: string
                   sourceAmiId:
                     description: |-
-                      Id of the AMI to copy. This id must be valid in the region
+                      ID of the AMI to copy. This ID must be valid in the region
                       given by source_ami_region.
                     type: string
                   sourceAmiRegion:

@@ -15,10 +15,10 @@ import (
 
 type VPCConnectionInitParameters struct {
 
-	// The authentication type for the client VPC connection. Specify one of these auth type strings: SASL_IAM, SASL_SCRAM, or TLS.
+	// Authentication type for the client VPC connection. Specify one of these auth type strings: SASL_IAM, SASL_SCRAM, or TLS.
 	Authentication *string `json:"authentication,omitempty" tf:"authentication,omitempty"`
 
-	// The list of subnets in the client VPC to connect to.
+	// List of subnets in the client VPC to connect to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Subnet
 	// +listType=set
 	ClientSubnets []*string `json:"clientSubnets,omitempty" tf:"client_subnets,omitempty"`
@@ -31,7 +31,7 @@ type VPCConnectionInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ClientSubnetsSelector *v2.Selector `json:"clientSubnetsSelector,omitempty" tf:"-"`
 
-	// The security groups to attach to the ENIs for the broker nodes.
+	// Security groups to attach to the ENIs for the broker nodes.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.SecurityGroup
 	// +listType=set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
@@ -61,7 +61,7 @@ type VPCConnectionInitParameters struct {
 	// +kubebuilder:validation:Optional
 	TargetClusterArnSelector *v2.Selector `json:"targetClusterArnSelector,omitempty" tf:"-"`
 
-	// The VPC ID of the remote client.
+	// VPC ID of the remote client.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.VPC
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 
@@ -79,10 +79,10 @@ type VPCConnectionObservation struct {
 	// ARN of the VPC connection.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The authentication type for the client VPC connection. Specify one of these auth type strings: SASL_IAM, SASL_SCRAM, or TLS.
+	// Authentication type for the client VPC connection. Specify one of these auth type strings: SASL_IAM, SASL_SCRAM, or TLS.
 	Authentication *string `json:"authentication,omitempty" tf:"authentication,omitempty"`
 
-	// The list of subnets in the client VPC to connect to.
+	// List of subnets in the client VPC to connect to.
 	// +listType=set
 	ClientSubnets []*string `json:"clientSubnets,omitempty" tf:"client_subnets,omitempty"`
 
@@ -92,7 +92,7 @@ type VPCConnectionObservation struct {
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The security groups to attach to the ENIs for the broker nodes.
+	// Security groups to attach to the ENIs for the broker nodes.
 	// +listType=set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
@@ -100,24 +100,24 @@ type VPCConnectionObservation struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// ARN of the cluster.
 	TargetClusterArn *string `json:"targetClusterArn,omitempty" tf:"target_cluster_arn,omitempty"`
 
-	// The VPC ID of the remote client.
+	// VPC ID of the remote client.
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 }
 
 type VPCConnectionParameters struct {
 
-	// The authentication type for the client VPC connection. Specify one of these auth type strings: SASL_IAM, SASL_SCRAM, or TLS.
+	// Authentication type for the client VPC connection. Specify one of these auth type strings: SASL_IAM, SASL_SCRAM, or TLS.
 	// +kubebuilder:validation:Optional
 	Authentication *string `json:"authentication,omitempty" tf:"authentication,omitempty"`
 
-	// The list of subnets in the client VPC to connect to.
+	// List of subnets in the client VPC to connect to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Subnet
 	// +kubebuilder:validation:Optional
 	// +listType=set
@@ -136,7 +136,7 @@ type VPCConnectionParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// The security groups to attach to the ENIs for the broker nodes.
+	// Security groups to attach to the ENIs for the broker nodes.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.SecurityGroup
 	// +kubebuilder:validation:Optional
 	// +listType=set
@@ -169,7 +169,7 @@ type VPCConnectionParameters struct {
 	// +kubebuilder:validation:Optional
 	TargetClusterArnSelector *v2.Selector `json:"targetClusterArnSelector,omitempty" tf:"-"`
 
-	// The VPC ID of the remote client.
+	// VPC ID of the remote client.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.VPC
 	// +kubebuilder:validation:Optional
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`

@@ -47,10 +47,10 @@ type EndpointsInitParameters struct {
 
 type EndpointsObservation struct {
 
-	// Endpoint for managing your file system by setting up NetApp SnapMirror with other ONTAP systems. See Endpoint.
+	// Endpoint for managing your file system by setting up NetApp SnapMirror with other ONTAP systems. See endpoints.intercluster below.
 	Intercluster []InterclusterObservation `json:"intercluster,omitempty" tf:"intercluster,omitempty"`
 
-	// Endpoint for managing your file system using the NetApp ONTAP CLI and NetApp ONTAP API. See Endpoint.
+	// Endpoint for managing your file system using the NetApp ONTAP CLI and NetApp ONTAP API. See endpoints.management below.
 	Management []ManagementObservation `json:"management,omitempty" tf:"management,omitempty"`
 }
 
@@ -62,7 +62,7 @@ type InterclusterInitParameters struct {
 
 type InterclusterObservation struct {
 
-	// DNS name for the file system.
+	// Domain Name Service (DNS) name for the file system. You can mount your file system using its DNS name.
 	DNSName *string `json:"dnsName,omitempty" tf:"dns_name,omitempty"`
 
 	// IP addresses of the file system endpoint.
@@ -78,7 +78,7 @@ type ManagementInitParameters struct {
 
 type ManagementObservation struct {
 
-	// DNS name for the file system.
+	// Domain Name Service (DNS) name for the file system. You can mount your file system using its DNS name.
 	DNSName *string `json:"dnsName,omitempty" tf:"dns_name,omitempty"`
 
 	// IP addresses of the file system endpoint.

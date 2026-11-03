@@ -380,6 +380,11 @@ func (in *InstanceInitParameters) DeepCopyInto(out *InstanceInitParameters) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.MultiTenant != nil {
+		in, out := &in.MultiTenant, &out.MultiTenant
+		*out = new(bool)
+		**out = **in
+	}
 	if in.NcharCharacterSetName != nil {
 		in, out := &in.NcharCharacterSetName, &out.NcharCharacterSetName
 		*out = new(string)
@@ -913,6 +918,11 @@ func (in *InstanceObservation) DeepCopyInto(out *InstanceObservation) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.MultiTenant != nil {
+		in, out := &in.MultiTenant, &out.MultiTenant
+		*out = new(bool)
+		**out = **in
+	}
 	if in.NcharCharacterSetName != nil {
 		in, out := &in.NcharCharacterSetName, &out.NcharCharacterSetName
 		*out = new(string)
@@ -1402,6 +1412,11 @@ func (in *InstanceParameters) DeepCopyInto(out *InstanceParameters) {
 	}
 	if in.MultiAz != nil {
 		in, out := &in.MultiAz, &out.MultiAz
+		*out = new(bool)
+		**out = **in
+	}
+	if in.MultiTenant != nil {
+		in, out := &in.MultiTenant, &out.MultiTenant
 		*out = new(bool)
 		**out = **in
 	}

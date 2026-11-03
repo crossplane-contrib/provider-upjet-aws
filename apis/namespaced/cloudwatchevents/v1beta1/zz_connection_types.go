@@ -50,7 +50,7 @@ type AuthParametersInitParameters struct {
 	// Parameters used for oauth with private API. Documented below.
 	ConnectivityParameters *ConnectivityParametersInitParameters `json:"connectivityParameters,omitempty" tf:"connectivity_parameters,omitempty"`
 
-	// Invocation Http Parameters are additional credentials used to sign each Invocation of the ApiDestination created from this Connection. If the ApiDestination Rule Target has additional HttpParameters, the values will be merged together, with the Connection Invocation Http Parameters taking precedence. Secret values are stored and managed by AWS Secrets Manager. A maximum of 1 are allowed. Documented below.
+	// Invocation HTTP Parameters are additional credentials used to sign each Invocation of the ApiDestination created from this Connection. If the ApiDestination Rule Target has additional HttpParameters, the values will be merged together, with the Connection Invocation HTTP Parameters taking precedence. Secret values are stored and managed by AWS Secrets Manager. A maximum of 1 are allowed. Documented below.
 	InvocationHTTPParameters *InvocationHTTPParametersInitParameters `json:"invocationHttpParameters,omitempty" tf:"invocation_http_parameters,omitempty"`
 
 	// Parameters used for OAUTH_CLIENT_CREDENTIALS authorization. A maximum of 1 are allowed. Conflicts with basic and api_key. Documented below.
@@ -68,7 +68,7 @@ type AuthParametersObservation struct {
 	// Parameters used for oauth with private API. Documented below.
 	ConnectivityParameters *ConnectivityParametersObservation `json:"connectivityParameters,omitempty" tf:"connectivity_parameters,omitempty"`
 
-	// Invocation Http Parameters are additional credentials used to sign each Invocation of the ApiDestination created from this Connection. If the ApiDestination Rule Target has additional HttpParameters, the values will be merged together, with the Connection Invocation Http Parameters taking precedence. Secret values are stored and managed by AWS Secrets Manager. A maximum of 1 are allowed. Documented below.
+	// Invocation HTTP Parameters are additional credentials used to sign each Invocation of the ApiDestination created from this Connection. If the ApiDestination Rule Target has additional HttpParameters, the values will be merged together, with the Connection Invocation HTTP Parameters taking precedence. Secret values are stored and managed by AWS Secrets Manager. A maximum of 1 are allowed. Documented below.
 	InvocationHTTPParameters *InvocationHTTPParametersObservation `json:"invocationHttpParameters,omitempty" tf:"invocation_http_parameters,omitempty"`
 
 	// Parameters used for OAUTH_CLIENT_CREDENTIALS authorization. A maximum of 1 are allowed. Conflicts with basic and api_key. Documented below.
@@ -89,7 +89,7 @@ type AuthParametersParameters struct {
 	// +kubebuilder:validation:Optional
 	ConnectivityParameters *ConnectivityParametersParameters `json:"connectivityParameters,omitempty" tf:"connectivity_parameters,omitempty"`
 
-	// Invocation Http Parameters are additional credentials used to sign each Invocation of the ApiDestination created from this Connection. If the ApiDestination Rule Target has additional HttpParameters, the values will be merged together, with the Connection Invocation Http Parameters taking precedence. Secret values are stored and managed by AWS Secrets Manager. A maximum of 1 are allowed. Documented below.
+	// Invocation HTTP Parameters are additional credentials used to sign each Invocation of the ApiDestination created from this Connection. If the ApiDestination Rule Target has additional HttpParameters, the values will be merged together, with the Connection Invocation HTTP Parameters taking precedence. Secret values are stored and managed by AWS Secrets Manager. A maximum of 1 are allowed. Documented below.
 	// +kubebuilder:validation:Optional
 	InvocationHTTPParameters *InvocationHTTPParametersParameters `json:"invocationHttpParameters,omitempty" tf:"invocation_http_parameters,omitempty"`
 
@@ -575,7 +575,7 @@ type OauthInitParameters struct {
 	// A password for the authorization. Created and stored in AWS Secrets Manager.
 	HTTPMethod *string `json:"httpMethod,omitempty" tf:"http_method,omitempty"`
 
-	// OAuth Http Parameters are additional credentials used to sign the request to the authorization endpoint to exchange the OAuth Client information for an access token. Secret values are stored and managed by AWS Secrets Manager. A maximum of 1 are allowed. Documented below.
+	// OAuth HTTP Parameters are additional credentials used to sign the request to the authorization endpoint to exchange the OAuth Client information for an access token. Secret values are stored and managed by AWS Secrets Manager. A maximum of 1 are allowed. Documented below.
 	OauthHTTPParameters *OauthHTTPParametersInitParameters `json:"oauthHttpParameters,omitempty" tf:"oauth_http_parameters,omitempty"`
 }
 
@@ -590,7 +590,7 @@ type OauthObservation struct {
 	// A password for the authorization. Created and stored in AWS Secrets Manager.
 	HTTPMethod *string `json:"httpMethod,omitempty" tf:"http_method,omitempty"`
 
-	// OAuth Http Parameters are additional credentials used to sign the request to the authorization endpoint to exchange the OAuth Client information for an access token. Secret values are stored and managed by AWS Secrets Manager. A maximum of 1 are allowed. Documented below.
+	// OAuth HTTP Parameters are additional credentials used to sign the request to the authorization endpoint to exchange the OAuth Client information for an access token. Secret values are stored and managed by AWS Secrets Manager. A maximum of 1 are allowed. Documented below.
 	OauthHTTPParameters *OauthHTTPParametersObservation `json:"oauthHttpParameters,omitempty" tf:"oauth_http_parameters,omitempty"`
 }
 
@@ -608,7 +608,7 @@ type OauthParameters struct {
 	// +kubebuilder:validation:Optional
 	HTTPMethod *string `json:"httpMethod" tf:"http_method,omitempty"`
 
-	// OAuth Http Parameters are additional credentials used to sign the request to the authorization endpoint to exchange the OAuth Client information for an access token. Secret values are stored and managed by AWS Secrets Manager. A maximum of 1 are allowed. Documented below.
+	// OAuth HTTP Parameters are additional credentials used to sign the request to the authorization endpoint to exchange the OAuth Client information for an access token. Secret values are stored and managed by AWS Secrets Manager. A maximum of 1 are allowed. Documented below.
 	// +kubebuilder:validation:Optional
 	OauthHTTPParameters *OauthHTTPParametersParameters `json:"oauthHttpParameters" tf:"oauth_http_parameters,omitempty"`
 }

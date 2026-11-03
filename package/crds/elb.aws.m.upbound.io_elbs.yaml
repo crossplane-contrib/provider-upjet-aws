@@ -129,7 +129,7 @@ spec:
                       to be idle. Default: 60'
                     type: number
                   instances:
-                    description: A list of instance ids to place in the ELB pool.
+                    description: A list of instance IDs to place in the ELB pool.
                     items:
                       type: string
                     type: array
@@ -451,7 +451,7 @@ spec:
                       to be idle. Default: 60'
                     type: number
                   instances:
-                    description: A list of instance ids to place in the ELB pool.
+                    description: A list of instance IDs to place in the ELB pool.
                     items:
                       type: string
                     type: array
@@ -830,7 +830,7 @@ spec:
                       to be idle. Default: 60'
                     type: number
                   instances:
-                    description: A list of instance ids to place in the ELB pool.
+                    description: A list of instance IDs to place in the ELB pool.
                     items:
                       type: string
                     type: array

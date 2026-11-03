@@ -1891,6 +1891,11 @@ func (in *RuleObservation) DeepCopyInto(out *RuleObservation) {
 			(*out)[key] = outVal
 		}
 	}
+	if in.RuleID != nil {
+		in, out := &in.RuleID, &out.RuleID
+		*out = new(string)
+		**out = **in
+	}
 	if in.RuleName != nil {
 		in, out := &in.RuleName, &out.RuleName
 		*out = new(string)

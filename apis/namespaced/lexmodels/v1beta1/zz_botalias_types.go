@@ -143,7 +143,7 @@ type LogSettingsObservation struct {
 	// ARN of the CloudWatch Logs log group or S3 bucket where the logs are delivered. Must be less than or equal to 2048 characters in length.
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
 
-	// (Computed) The prefix of the S3 object key for AUDIO logs or the log stream name for TEXT logs.
+	// (Read-Only) The prefix of the S3 object key for AUDIO logs or the log stream name for TEXT logs.
 	ResourcePrefix *string `json:"resourcePrefix,omitempty" tf:"resource_prefix,omitempty"`
 }
 

@@ -19,7 +19,7 @@ type NotificationInitParameters struct {
 	// +listType=set
 	Events []*string `json:"events,omitempty" tf:"events,omitempty"`
 
-	// The SNS Topic ARN.
+	// SNS Topic ARN.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/sns/v1beta1.Topic
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	SnsTopic *string `json:"snsTopic,omitempty" tf:"sns_topic,omitempty"`
@@ -39,7 +39,7 @@ type NotificationObservation struct {
 	// +listType=set
 	Events []*string `json:"events,omitempty" tf:"events,omitempty"`
 
-	// The SNS Topic ARN.
+	// SNS Topic ARN.
 	SnsTopic *string `json:"snsTopic,omitempty" tf:"sns_topic,omitempty"`
 }
 
@@ -50,7 +50,7 @@ type NotificationParameters struct {
 	// +listType=set
 	Events []*string `json:"events" tf:"events,omitempty"`
 
-	// The SNS Topic ARN.
+	// SNS Topic ARN.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/sns/v1beta1.Topic
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -67,11 +67,10 @@ type NotificationParameters struct {
 
 type VaultInitParameters struct {
 
-	// The policy document. This is a JSON formatted string.
-	// The heredoc syntax or file function is helpful here. Use the Glacier Developer Guide for more information on Glacier Vault Policy
+	// Policy document. This is a JSON formatted string. The heredoc syntax or file function is helpful here. Use the Glacier Developer Guide for more information on Glacier Vault Policy
 	AccessPolicy *string `json:"accessPolicy,omitempty" tf:"access_policy,omitempty"`
 
-	// The notifications for the Vault. Fields documented below.
+	// Notifications for the Vault. See below.
 	Notification *NotificationInitParameters `json:"notification,omitempty" tf:"notification,omitempty"`
 
 	// Key-value map of resource tags.
@@ -81,19 +80,18 @@ type VaultInitParameters struct {
 
 type VaultObservation struct {
 
-	// The policy document. This is a JSON formatted string.
-	// The heredoc syntax or file function is helpful here. Use the Glacier Developer Guide for more information on Glacier Vault Policy
+	// Policy document. This is a JSON formatted string. The heredoc syntax or file function is helpful here. Use the Glacier Developer Guide for more information on Glacier Vault Policy
 	AccessPolicy *string `json:"accessPolicy,omitempty" tf:"access_policy,omitempty"`
 
-	// The ARN of the vault.
+	// ARN of the vault.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The URI of the vault that was created.
+	// URI of the vault that was created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// The notifications for the Vault. Fields documented below.
+	// Notifications for the Vault. See below.
 	Notification *NotificationObservation `json:"notification,omitempty" tf:"notification,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -104,19 +102,18 @@ type VaultObservation struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type VaultParameters struct {
 
-	// The policy document. This is a JSON formatted string.
-	// The heredoc syntax or file function is helpful here. Use the Glacier Developer Guide for more information on Glacier Vault Policy
+	// Policy document. This is a JSON formatted string. The heredoc syntax or file function is helpful here. Use the Glacier Developer Guide for more information on Glacier Vault Policy
 	// +kubebuilder:validation:Optional
 	AccessPolicy *string `json:"accessPolicy,omitempty" tf:"access_policy,omitempty"`
 
-	// The notifications for the Vault. Fields documented below.
+	// Notifications for the Vault. See below.
 	// +kubebuilder:validation:Optional
 	Notification *NotificationParameters `json:"notification,omitempty" tf:"notification,omitempty"`
 

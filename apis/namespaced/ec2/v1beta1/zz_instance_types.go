@@ -345,7 +345,7 @@ type InstanceEphemeralBlockDeviceParameters struct {
 
 type InstanceInitParameters struct {
 
-	// AMI to use for the instance. Required unless launch_template is specified and the Launch Template specifes an AMI. If an AMI is specified in the Launch Template, setting ami will override the AMI specified in the Launch Template.
+	// AMI to use for the instance. Required unless launch_template is specified and the Launch Template specifies an AMI. If an AMI is specified in the Launch Template, setting ami will override the AMI specified in the Launch Template.
 	AMI *string `json:"ami,omitempty" tf:"ami,omitempty"`
 
 	// Whether to associate a public IP address with an instance in a VPC.
@@ -435,13 +435,13 @@ type InstanceInitParameters struct {
 	// Customize network interfaces to be attached at instance boot time. See Network Interfaces below for more details.
 	NetworkInterface []InstanceNetworkInterfaceInitParameters `json:"networkInterface,omitempty" tf:"network_interface,omitempty"`
 
-	// Placement Group to start the instance in. Conflicts with placement_group_id.
+	// Placement Group to start the instance in. Conflicts with placement_group_id. Updating this argument stops and restarts the EC2 instance, except for Spot Instances and instances with disable_api_stop and force_destroy enabled, which are replaced.
 	PlacementGroup *string `json:"placementGroup,omitempty" tf:"placement_group,omitempty"`
 
-	// Placement Group ID to start the instance in. Conflicts with placement_group.
+	// Placement Group ID to start the instance in. Conflicts with placement_group. Updating this argument stops and restarts the EC2 instance, except for Spot Instances and instances with disable_api_stop and force_destroy enabled, which are replaced.
 	PlacementGroupID *string `json:"placementGroupId,omitempty" tf:"placement_group_id,omitempty"`
 
-	// Number of the partition the instance is in. Valid only if the  strategy argument is set to "partition".
+	// Number of the partition the instance is in. Valid only if the  strategy argument is set to "partition". Updating this argument stops and restarts the EC2 instance, except for Spot Instances and instances with disable_api_stop and force_destroy enabled, which are replaced.
 	PlacementPartitionNumber *float64 `json:"placementPartitionNumber,omitempty" tf:"placement_partition_number,omitempty"`
 
 	// The primary network interface. See Primary Network Interface below.
@@ -661,7 +661,7 @@ type InstanceNetworkInterfaceParameters struct {
 
 type InstanceObservation struct {
 
-	// AMI to use for the instance. Required unless launch_template is specified and the Launch Template specifes an AMI. If an AMI is specified in the Launch Template, setting ami will override the AMI specified in the Launch Template.
+	// AMI to use for the instance. Required unless launch_template is specified and the Launch Template specifies an AMI. If an AMI is specified in the Launch Template, setting ami will override the AMI specified in the Launch Template.
 	AMI *string `json:"ami,omitempty" tf:"ami,omitempty"`
 
 	// ARN of the instance.
@@ -769,13 +769,13 @@ type InstanceObservation struct {
 	// Base-64 encoded encrypted password data for the instance. Useful for getting the administrator password for instances running Microsoft Windows. This attribute is only exported if get_password_data is true. Note that this encrypted value will be stored in the state file, as with all exported attributes. See GetPasswordData for more information.
 	PasswordData *string `json:"passwordData,omitempty" tf:"password_data,omitempty"`
 
-	// Placement Group to start the instance in. Conflicts with placement_group_id.
+	// Placement Group to start the instance in. Conflicts with placement_group_id. Updating this argument stops and restarts the EC2 instance, except for Spot Instances and instances with disable_api_stop and force_destroy enabled, which are replaced.
 	PlacementGroup *string `json:"placementGroup,omitempty" tf:"placement_group,omitempty"`
 
-	// Placement Group ID to start the instance in. Conflicts with placement_group.
+	// Placement Group ID to start the instance in. Conflicts with placement_group. Updating this argument stops and restarts the EC2 instance, except for Spot Instances and instances with disable_api_stop and force_destroy enabled, which are replaced.
 	PlacementGroupID *string `json:"placementGroupId,omitempty" tf:"placement_group_id,omitempty"`
 
-	// Number of the partition the instance is in. Valid only if the  strategy argument is set to "partition".
+	// Number of the partition the instance is in. Valid only if the  strategy argument is set to "partition". Updating this argument stops and restarts the EC2 instance, except for Spot Instances and instances with disable_api_stop and force_destroy enabled, which are replaced.
 	PlacementPartitionNumber *float64 `json:"placementPartitionNumber,omitempty" tf:"placement_partition_number,omitempty"`
 
 	// The primary network interface. See Primary Network Interface below.
@@ -857,7 +857,7 @@ type InstanceObservation struct {
 
 type InstanceParameters struct {
 
-	// AMI to use for the instance. Required unless launch_template is specified and the Launch Template specifes an AMI. If an AMI is specified in the Launch Template, setting ami will override the AMI specified in the Launch Template.
+	// AMI to use for the instance. Required unless launch_template is specified and the Launch Template specifies an AMI. If an AMI is specified in the Launch Template, setting ami will override the AMI specified in the Launch Template.
 	// +kubebuilder:validation:Optional
 	AMI *string `json:"ami,omitempty" tf:"ami,omitempty"`
 
@@ -977,15 +977,15 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	NetworkInterface []InstanceNetworkInterfaceParameters `json:"networkInterface,omitempty" tf:"network_interface,omitempty"`
 
-	// Placement Group to start the instance in. Conflicts with placement_group_id.
+	// Placement Group to start the instance in. Conflicts with placement_group_id. Updating this argument stops and restarts the EC2 instance, except for Spot Instances and instances with disable_api_stop and force_destroy enabled, which are replaced.
 	// +kubebuilder:validation:Optional
 	PlacementGroup *string `json:"placementGroup,omitempty" tf:"placement_group,omitempty"`
 
-	// Placement Group ID to start the instance in. Conflicts with placement_group.
+	// Placement Group ID to start the instance in. Conflicts with placement_group. Updating this argument stops and restarts the EC2 instance, except for Spot Instances and instances with disable_api_stop and force_destroy enabled, which are replaced.
 	// +kubebuilder:validation:Optional
 	PlacementGroupID *string `json:"placementGroupId,omitempty" tf:"placement_group_id,omitempty"`
 
-	// Number of the partition the instance is in. Valid only if the  strategy argument is set to "partition".
+	// Number of the partition the instance is in. Valid only if the  strategy argument is set to "partition". Updating this argument stops and restarts the EC2 instance, except for Spot Instances and instances with disable_api_stop and force_destroy enabled, which are replaced.
 	// +kubebuilder:validation:Optional
 	PlacementPartitionNumber *float64 `json:"placementPartitionNumber,omitempty" tf:"placement_partition_number,omitempty"`
 

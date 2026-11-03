@@ -18,19 +18,19 @@ type CriterionInitParameters struct {
 	// List of string values to be evaluated.
 	Equals []*string `json:"equals,omitempty" tf:"equals,omitempty"`
 
-	// The name of the field to be evaluated. The full list of field names can be found in AWS documentation.
+	// Name of the field to be evaluated. The full list of field names can be found in AWS documentation.
 	Field *string `json:"field,omitempty" tf:"field,omitempty"`
 
-	// A value to be evaluated. Accepts either an integer given as a string (i.e., enclosed in quotations) or a date in RFC 3339 format.
+	// Value to be evaluated. Accepts either an integer given as a string (i.e., enclosed in quotations) or a date in RFC 3339 format.
 	GreaterThan *string `json:"greaterThan,omitempty" tf:"greater_than,omitempty"`
 
-	// A value to be evaluated. Accepts either an integer given as a string (i.e., enclosed in quotations) or a date in RFC 3339 format.
+	// Value to be evaluated. Accepts either an integer given as a string (i.e., enclosed in quotations) or a date in RFC 3339 format.
 	GreaterThanOrEqual *string `json:"greaterThanOrEqual,omitempty" tf:"greater_than_or_equal,omitempty"`
 
-	// A value to be evaluated. Accepts either an integer given as a string (i.e., enclosed in quotations) or a date in RFC 3339 format.
+	// Value to be evaluated. Accepts either an integer given as a string (i.e., enclosed in quotations) or a date in RFC 3339 format.
 	LessThan *string `json:"lessThan,omitempty" tf:"less_than,omitempty"`
 
-	// A value to be evaluated. Accepts either an integer given as a string (i.e., enclosed in quotations) or a date in RFC 3339 format.
+	// Value to be evaluated. Accepts either an integer given as a string (i.e., enclosed in quotations) or a date in RFC 3339 format.
 	LessThanOrEqual *string `json:"lessThanOrEqual,omitempty" tf:"less_than_or_equal,omitempty"`
 
 	// List of string values to be evaluated as matching conditions.
@@ -48,19 +48,19 @@ type CriterionObservation struct {
 	// List of string values to be evaluated.
 	Equals []*string `json:"equals,omitempty" tf:"equals,omitempty"`
 
-	// The name of the field to be evaluated. The full list of field names can be found in AWS documentation.
+	// Name of the field to be evaluated. The full list of field names can be found in AWS documentation.
 	Field *string `json:"field,omitempty" tf:"field,omitempty"`
 
-	// A value to be evaluated. Accepts either an integer given as a string (i.e., enclosed in quotations) or a date in RFC 3339 format.
+	// Value to be evaluated. Accepts either an integer given as a string (i.e., enclosed in quotations) or a date in RFC 3339 format.
 	GreaterThan *string `json:"greaterThan,omitempty" tf:"greater_than,omitempty"`
 
-	// A value to be evaluated. Accepts either an integer given as a string (i.e., enclosed in quotations) or a date in RFC 3339 format.
+	// Value to be evaluated. Accepts either an integer given as a string (i.e., enclosed in quotations) or a date in RFC 3339 format.
 	GreaterThanOrEqual *string `json:"greaterThanOrEqual,omitempty" tf:"greater_than_or_equal,omitempty"`
 
-	// A value to be evaluated. Accepts either an integer given as a string (i.e., enclosed in quotations) or a date in RFC 3339 format.
+	// Value to be evaluated. Accepts either an integer given as a string (i.e., enclosed in quotations) or a date in RFC 3339 format.
 	LessThan *string `json:"lessThan,omitempty" tf:"less_than,omitempty"`
 
-	// A value to be evaluated. Accepts either an integer given as a string (i.e., enclosed in quotations) or a date in RFC 3339 format.
+	// Value to be evaluated. Accepts either an integer given as a string (i.e., enclosed in quotations) or a date in RFC 3339 format.
 	LessThanOrEqual *string `json:"lessThanOrEqual,omitempty" tf:"less_than_or_equal,omitempty"`
 
 	// List of string values to be evaluated as matching conditions.
@@ -79,23 +79,23 @@ type CriterionParameters struct {
 	// +kubebuilder:validation:Optional
 	Equals []*string `json:"equals,omitempty" tf:"equals,omitempty"`
 
-	// The name of the field to be evaluated. The full list of field names can be found in AWS documentation.
+	// Name of the field to be evaluated. The full list of field names can be found in AWS documentation.
 	// +kubebuilder:validation:Optional
 	Field *string `json:"field" tf:"field,omitempty"`
 
-	// A value to be evaluated. Accepts either an integer given as a string (i.e., enclosed in quotations) or a date in RFC 3339 format.
+	// Value to be evaluated. Accepts either an integer given as a string (i.e., enclosed in quotations) or a date in RFC 3339 format.
 	// +kubebuilder:validation:Optional
 	GreaterThan *string `json:"greaterThan,omitempty" tf:"greater_than,omitempty"`
 
-	// A value to be evaluated. Accepts either an integer given as a string (i.e., enclosed in quotations) or a date in RFC 3339 format.
+	// Value to be evaluated. Accepts either an integer given as a string (i.e., enclosed in quotations) or a date in RFC 3339 format.
 	// +kubebuilder:validation:Optional
 	GreaterThanOrEqual *string `json:"greaterThanOrEqual,omitempty" tf:"greater_than_or_equal,omitempty"`
 
-	// A value to be evaluated. Accepts either an integer given as a string (i.e., enclosed in quotations) or a date in RFC 3339 format.
+	// Value to be evaluated. Accepts either an integer given as a string (i.e., enclosed in quotations) or a date in RFC 3339 format.
 	// +kubebuilder:validation:Optional
 	LessThan *string `json:"lessThan,omitempty" tf:"less_than,omitempty"`
 
-	// A value to be evaluated. Accepts either an integer given as a string (i.e., enclosed in quotations) or a date in RFC 3339 format.
+	// Value to be evaluated. Accepts either an integer given as a string (i.e., enclosed in quotations) or a date in RFC 3339 format.
 	// +kubebuilder:validation:Optional
 	LessThanOrEqual *string `json:"lessThanOrEqual,omitempty" tf:"less_than_or_equal,omitempty"`
 
@@ -114,16 +114,16 @@ type CriterionParameters struct {
 
 type FilterInitParameters struct {
 
-	// Specifies the action that is to be applied to the findings that match the filter. Can be one of ARCHIVE or NOOP.
+	// Action that is to be applied to the findings that match the filter. Can be one of ARCHIVE or NOOP.
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
 	// Description of the filter.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Represents the criteria to be used in the filter for querying findings. Contains one or more criterion blocks, documented below.
+	// Criteria to be used in the filter for querying findings. Contains one or more criterion blocks, documented below.
 	FindingCriteria *FindingCriteriaInitParameters `json:"findingCriteria,omitempty" tf:"finding_criteria,omitempty"`
 
-	// Specifies the position of the filter in the list of current filters. Also specifies the order in which this filter is applied to the findings.
+	// Position of the filter in the list of current filters. Also specifies the order in which this filter is applied to the findings.
 	Rank *float64 `json:"rank,omitempty" tf:"rank,omitempty"`
 
 	// Key-value map of resource tags.
@@ -133,10 +133,10 @@ type FilterInitParameters struct {
 
 type FilterObservation struct {
 
-	// Specifies the action that is to be applied to the findings that match the filter. Can be one of ARCHIVE or NOOP.
+	// Action that is to be applied to the findings that match the filter. Can be one of ARCHIVE or NOOP.
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
-	// The ARN of the GuardDuty filter.
+	// ARN of the GuardDuty filter.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Description of the filter.
@@ -145,12 +145,12 @@ type FilterObservation struct {
 	// ID of a GuardDuty detector, attached to your account.
 	DetectorID *string `json:"detectorId,omitempty" tf:"detector_id,omitempty"`
 
-	// Represents the criteria to be used in the filter for querying findings. Contains one or more criterion blocks, documented below.
+	// Criteria to be used in the filter for querying findings. Contains one or more criterion blocks, documented below.
 	FindingCriteria *FindingCriteriaObservation `json:"findingCriteria,omitempty" tf:"finding_criteria,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Specifies the position of the filter in the list of current filters. Also specifies the order in which this filter is applied to the findings.
+	// Position of the filter in the list of current filters. Also specifies the order in which this filter is applied to the findings.
 	Rank *float64 `json:"rank,omitempty" tf:"rank,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -161,14 +161,14 @@ type FilterObservation struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type FilterParameters struct {
 
-	// Specifies the action that is to be applied to the findings that match the filter. Can be one of ARCHIVE or NOOP.
+	// Action that is to be applied to the findings that match the filter. Can be one of ARCHIVE or NOOP.
 	// +kubebuilder:validation:Optional
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
@@ -190,11 +190,11 @@ type FilterParameters struct {
 	// +kubebuilder:validation:Optional
 	DetectorIDSelector *v2.NamespacedSelector `json:"detectorIdSelector,omitempty" tf:"-"`
 
-	// Represents the criteria to be used in the filter for querying findings. Contains one or more criterion blocks, documented below.
+	// Criteria to be used in the filter for querying findings. Contains one or more criterion blocks, documented below.
 	// +kubebuilder:validation:Optional
 	FindingCriteria *FindingCriteriaParameters `json:"findingCriteria,omitempty" tf:"finding_criteria,omitempty"`
 
-	// Specifies the position of the filter in the list of current filters. Also specifies the order in which this filter is applied to the findings.
+	// Position of the filter in the list of current filters. Also specifies the order in which this filter is applied to the findings.
 	// +kubebuilder:validation:Optional
 	Rank *float64 `json:"rank,omitempty" tf:"rank,omitempty"`
 

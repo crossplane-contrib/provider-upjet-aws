@@ -13,93 +13,215 @@ import (
 	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
+type CryptoConfigInitParameters struct {
+
+	// Blockchain payment networks configured to receive payments. You can specify 1 to 2 networks. See payment_network below for details.
+	PaymentNetwork []PaymentNetworkInitParameters `json:"paymentNetwork,omitempty" tf:"payment_network,omitempty"`
+}
+
+type CryptoConfigObservation struct {
+
+	// Blockchain payment networks configured to receive payments. You can specify 1 to 2 networks. See payment_network below for details.
+	PaymentNetwork []PaymentNetworkObservation `json:"paymentNetwork,omitempty" tf:"payment_network,omitempty"`
+}
+
+type CryptoConfigParameters struct {
+
+	// Blockchain payment networks configured to receive payments. You can specify 1 to 2 networks. See payment_network below for details.
+	// +kubebuilder:validation:Optional
+	PaymentNetwork []PaymentNetworkParameters `json:"paymentNetwork" tf:"payment_network,omitempty"`
+}
+
 type CustomResponseBodyInitParameters struct {
 
-	// The payload of the custom response.
+	// Payload of the custom response.
 	Content *string `json:"content,omitempty" tf:"content,omitempty"`
 
-	// The type of content in the payload that you are defining in the content argument. Valid values are TEXT_PLAIN, TEXT_HTML, or APPLICATION_JSON.
+	// Type of content in the payload that you are defining in the content argument. Valid values are TEXT_PLAIN, TEXT_HTML, or APPLICATION_JSON.
 	ContentType *string `json:"contentType,omitempty" tf:"content_type,omitempty"`
 
-	// A unique key identifying the custom response body. This is referenced by the custom_response_body_key argument in the Custom Response block.
+	// Unique key identifying the custom response body. This is referenced by the custom_response_body_key argument in the Custom Response block.
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 }
 
 type CustomResponseBodyObservation struct {
 
-	// The payload of the custom response.
+	// Payload of the custom response.
 	Content *string `json:"content,omitempty" tf:"content,omitempty"`
 
-	// The type of content in the payload that you are defining in the content argument. Valid values are TEXT_PLAIN, TEXT_HTML, or APPLICATION_JSON.
+	// Type of content in the payload that you are defining in the content argument. Valid values are TEXT_PLAIN, TEXT_HTML, or APPLICATION_JSON.
 	ContentType *string `json:"contentType,omitempty" tf:"content_type,omitempty"`
 
-	// A unique key identifying the custom response body. This is referenced by the custom_response_body_key argument in the Custom Response block.
+	// Unique key identifying the custom response body. This is referenced by the custom_response_body_key argument in the Custom Response block.
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 }
 
 type CustomResponseBodyParameters struct {
 
-	// The payload of the custom response.
+	// Payload of the custom response.
 	// +kubebuilder:validation:Optional
 	Content *string `json:"content" tf:"content,omitempty"`
 
-	// The type of content in the payload that you are defining in the content argument. Valid values are TEXT_PLAIN, TEXT_HTML, or APPLICATION_JSON.
+	// Type of content in the payload that you are defining in the content argument. Valid values are TEXT_PLAIN, TEXT_HTML, or APPLICATION_JSON.
 	// +kubebuilder:validation:Optional
 	ContentType *string `json:"contentType" tf:"content_type,omitempty"`
 
-	// A unique key identifying the custom response body. This is referenced by the custom_response_body_key argument in the Custom Response block.
+	// Unique key identifying the custom response body. This is referenced by the custom_response_body_key argument in the Custom Response block.
 	// +kubebuilder:validation:Optional
 	Key *string `json:"key" tf:"key,omitempty"`
 }
 
+type MonetizationConfigInitParameters struct {
+
+	// Cryptocurrency payment configuration for the rule group. See crypto_config below for details.
+	CryptoConfig *CryptoConfigInitParameters `json:"cryptoConfig,omitempty" tf:"crypto_config,omitempty"`
+
+	// Currency mode for monetized requests. Valid values are TEST and REAL. Defaults to REAL.
+	CurrencyMode *string `json:"currencyMode,omitempty" tf:"currency_mode,omitempty"`
+}
+
+type MonetizationConfigObservation struct {
+
+	// Cryptocurrency payment configuration for the rule group. See crypto_config below for details.
+	CryptoConfig *CryptoConfigObservation `json:"cryptoConfig,omitempty" tf:"crypto_config,omitempty"`
+
+	// Currency mode for monetized requests. Valid values are TEST and REAL. Defaults to REAL.
+	CurrencyMode *string `json:"currencyMode,omitempty" tf:"currency_mode,omitempty"`
+}
+
+type MonetizationConfigParameters struct {
+
+	// Cryptocurrency payment configuration for the rule group. See crypto_config below for details.
+	// +kubebuilder:validation:Optional
+	CryptoConfig *CryptoConfigParameters `json:"cryptoConfig,omitempty" tf:"crypto_config,omitempty"`
+
+	// Currency mode for monetized requests. Valid values are TEST and REAL. Defaults to REAL.
+	// +kubebuilder:validation:Optional
+	CurrencyMode *string `json:"currencyMode,omitempty" tf:"currency_mode,omitempty"`
+}
+
+type PaymentNetworkInitParameters struct {
+
+	// Blockchain network used for settlement. Valid values are BASE, SOLANA, BASE_SEPOLIA, and SOLANA_DEVNET.
+	Chain *string `json:"chain,omitempty" tf:"chain,omitempty"`
+
+	// Price configuration for this payment network. Currently supports a single price entry. See prices below for details.
+	Prices *PricesInitParameters `json:"prices,omitempty" tf:"prices,omitempty"`
+
+	// Payee wallet address on the specified blockchain that receives payments.
+	WalletAddress *string `json:"walletAddress,omitempty" tf:"wallet_address,omitempty"`
+}
+
+type PaymentNetworkObservation struct {
+
+	// Blockchain network used for settlement. Valid values are BASE, SOLANA, BASE_SEPOLIA, and SOLANA_DEVNET.
+	Chain *string `json:"chain,omitempty" tf:"chain,omitempty"`
+
+	// Price configuration for this payment network. Currently supports a single price entry. See prices below for details.
+	Prices *PricesObservation `json:"prices,omitempty" tf:"prices,omitempty"`
+
+	// Payee wallet address on the specified blockchain that receives payments.
+	WalletAddress *string `json:"walletAddress,omitempty" tf:"wallet_address,omitempty"`
+}
+
+type PaymentNetworkParameters struct {
+
+	// Blockchain network used for settlement. Valid values are BASE, SOLANA, BASE_SEPOLIA, and SOLANA_DEVNET.
+	// +kubebuilder:validation:Optional
+	Chain *string `json:"chain" tf:"chain,omitempty"`
+
+	// Price configuration for this payment network. Currently supports a single price entry. See prices below for details.
+	// +kubebuilder:validation:Optional
+	Prices *PricesParameters `json:"prices" tf:"prices,omitempty"`
+
+	// Payee wallet address on the specified blockchain that receives payments.
+	// +kubebuilder:validation:Optional
+	WalletAddress *string `json:"walletAddress" tf:"wallet_address,omitempty"`
+}
+
+type PricesInitParameters struct {
+
+	// Base price amount per request, expressed as a decimal string with up to 3 decimal places. Minimum 0.001, maximum 999999999.999 (for example, "0.001").
+	Amount *string `json:"amount,omitempty" tf:"amount,omitempty"`
+
+	// Currency of the price amount. Valid value is USDC.
+	Currency *string `json:"currency,omitempty" tf:"currency,omitempty"`
+}
+
+type PricesObservation struct {
+
+	// Base price amount per request, expressed as a decimal string with up to 3 decimal places. Minimum 0.001, maximum 999999999.999 (for example, "0.001").
+	Amount *string `json:"amount,omitempty" tf:"amount,omitempty"`
+
+	// Currency of the price amount. Valid value is USDC.
+	Currency *string `json:"currency,omitempty" tf:"currency,omitempty"`
+}
+
+type PricesParameters struct {
+
+	// Base price amount per request, expressed as a decimal string with up to 3 decimal places. Minimum 0.001, maximum 999999999.999 (for example, "0.001").
+	// +kubebuilder:validation:Optional
+	Amount *string `json:"amount" tf:"amount,omitempty"`
+
+	// Currency of the price amount. Valid value is USDC.
+	// +kubebuilder:validation:Optional
+	Currency *string `json:"currency" tf:"currency,omitempty"`
+}
+
 type RuleGroupInitParameters struct {
 
-	// The web ACL capacity units (WCUs) required for this rule group. See here for general information and here for capacity specific information.
+	// Web ACL capacity units (WCUs) required for this rule group. See here for general information and here for capacity specific information.
 	Capacity *float64 `json:"capacity,omitempty" tf:"capacity,omitempty"`
 
-	// Defines custom response bodies that can be referenced by custom_response actions. See Custom Response Body below for details.
+	// Custom response bodies that can be referenced by custom_response actions. See Custom Response Body below for details.
 	CustomResponseBody []CustomResponseBodyInitParameters `json:"customResponseBody,omitempty" tf:"custom_response_body,omitempty"`
 
-	// A friendly description of the rule group.
+	// Friendly description of the rule group.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// A friendly name of the rule group.
+	// Monetization configuration for the rule group. Required when any rule uses the monetize action. See monetization_config below for details.
+	MonetizationConfig *MonetizationConfigInitParameters `json:"monetizationConfig,omitempty" tf:"monetization_config,omitempty"`
+
+	// Friendly name of the rule group.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// A raw JSON string used to define the rules for allowing, blocking, or counting web requests. When this field is used, Crossplane cannot observe changes in the configuration through the AWS API; therefore, drift detection cannot be performed. Refer to the AWS documentation for the expected JSON structure: https://docs.aws.amazon.com/waf/latest/APIReference/API_CreateRuleGroup.html
 	RuleJSON *string `json:"ruleJson,omitempty" tf:"rule_json,omitempty"`
 
-	// Specifies whether this is for an AWS CloudFront distribution or for a regional application. Valid values are CLOUDFRONT or REGIONAL. To work with CloudFront, you must also specify the region us-east-1 (N. Virginia) on the AWS provider.
+	// Scope of the rule group, either an AWS CloudFront distribution or a regional application. Valid values are CLOUDFRONT or REGIONAL. To work with CloudFront, you must also specify the region us-east-1 (N. Virginia) on the AWS provider.
 	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Defines and enables Amazon CloudWatch metrics and web request sample collection. See Visibility Configuration below for details.
+	// Amazon CloudWatch metrics and web request sample collection configuration. See Visibility Configuration below for details.
 	VisibilityConfig *VisibilityConfigInitParameters `json:"visibilityConfig,omitempty" tf:"visibility_config,omitempty"`
 }
 
 type RuleGroupObservation struct {
 
-	// The ARN of the WAF rule group.
+	// ARN of the WAF rule group.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The web ACL capacity units (WCUs) required for this rule group. See here for general information and here for capacity specific information.
+	// Web ACL capacity units (WCUs) required for this rule group. See here for general information and here for capacity specific information.
 	Capacity *float64 `json:"capacity,omitempty" tf:"capacity,omitempty"`
 
-	// Defines custom response bodies that can be referenced by custom_response actions. See Custom Response Body below for details.
+	// Custom response bodies that can be referenced by custom_response actions. See Custom Response Body below for details.
 	CustomResponseBody []CustomResponseBodyObservation `json:"customResponseBody,omitempty" tf:"custom_response_body,omitempty"`
 
-	// A friendly description of the rule group.
+	// Friendly description of the rule group.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The ID of the WAF rule group.
+	// ID of the WAF rule group.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	LockToken *string `json:"lockToken,omitempty" tf:"lock_token,omitempty"`
 
-	// A friendly name of the rule group.
+	// Monetization configuration for the rule group. Required when any rule uses the monetize action. See monetization_config below for details.
+	MonetizationConfig *MonetizationConfigObservation `json:"monetizationConfig,omitempty" tf:"monetization_config,omitempty"`
+
+	// Friendly name of the rule group.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -109,36 +231,40 @@ type RuleGroupObservation struct {
 	// A raw JSON string used to define the rules for allowing, blocking, or counting web requests. When this field is used, Crossplane cannot observe changes in the configuration through the AWS API; therefore, drift detection cannot be performed. Refer to the AWS documentation for the expected JSON structure: https://docs.aws.amazon.com/waf/latest/APIReference/API_CreateRuleGroup.html
 	RuleJSON *string `json:"ruleJson,omitempty" tf:"rule_json,omitempty"`
 
-	// Specifies whether this is for an AWS CloudFront distribution or for a regional application. Valid values are CLOUDFRONT or REGIONAL. To work with CloudFront, you must also specify the region us-east-1 (N. Virginia) on the AWS provider.
+	// Scope of the rule group, either an AWS CloudFront distribution or a regional application. Valid values are CLOUDFRONT or REGIONAL. To work with CloudFront, you must also specify the region us-east-1 (N. Virginia) on the AWS provider.
 	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// Defines and enables Amazon CloudWatch metrics and web request sample collection. See Visibility Configuration below for details.
+	// Amazon CloudWatch metrics and web request sample collection configuration. See Visibility Configuration below for details.
 	VisibilityConfig *VisibilityConfigObservation `json:"visibilityConfig,omitempty" tf:"visibility_config,omitempty"`
 }
 
 type RuleGroupParameters struct {
 
-	// The web ACL capacity units (WCUs) required for this rule group. See here for general information and here for capacity specific information.
+	// Web ACL capacity units (WCUs) required for this rule group. See here for general information and here for capacity specific information.
 	// +kubebuilder:validation:Optional
 	Capacity *float64 `json:"capacity,omitempty" tf:"capacity,omitempty"`
 
-	// Defines custom response bodies that can be referenced by custom_response actions. See Custom Response Body below for details.
+	// Custom response bodies that can be referenced by custom_response actions. See Custom Response Body below for details.
 	// +kubebuilder:validation:Optional
 	CustomResponseBody []CustomResponseBodyParameters `json:"customResponseBody,omitempty" tf:"custom_response_body,omitempty"`
 
-	// A friendly description of the rule group.
+	// Friendly description of the rule group.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// A friendly name of the rule group.
+	// Monetization configuration for the rule group. Required when any rule uses the monetize action. See monetization_config below for details.
+	// +kubebuilder:validation:Optional
+	MonetizationConfig *MonetizationConfigParameters `json:"monetizationConfig,omitempty" tf:"monetization_config,omitempty"`
+
+	// Friendly name of the rule group.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -151,7 +277,7 @@ type RuleGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	RuleJSON *string `json:"ruleJson,omitempty" tf:"rule_json,omitempty"`
 
-	// Specifies whether this is for an AWS CloudFront distribution or for a regional application. Valid values are CLOUDFRONT or REGIONAL. To work with CloudFront, you must also specify the region us-east-1 (N. Virginia) on the AWS provider.
+	// Scope of the rule group, either an AWS CloudFront distribution or a regional application. Valid values are CLOUDFRONT or REGIONAL. To work with CloudFront, you must also specify the region us-east-1 (N. Virginia) on the AWS provider.
 	// +kubebuilder:validation:Optional
 	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
 
@@ -160,46 +286,46 @@ type RuleGroupParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Defines and enables Amazon CloudWatch metrics and web request sample collection. See Visibility Configuration below for details.
+	// Amazon CloudWatch metrics and web request sample collection configuration. See Visibility Configuration below for details.
 	// +kubebuilder:validation:Optional
 	VisibilityConfig *VisibilityConfigParameters `json:"visibilityConfig,omitempty" tf:"visibility_config,omitempty"`
 }
 
 type VisibilityConfigInitParameters struct {
 
-	// A boolean indicating whether the associated resource sends metrics to CloudWatch. For the list of available metrics, see AWS WAF Metrics.
+	// Boolean indicating whether the associated resource sends metrics to CloudWatch. For the list of available metrics, see AWS WAF Metrics.
 	CloudwatchMetricsEnabled *bool `json:"cloudwatchMetricsEnabled,omitempty" tf:"cloudwatch_metrics_enabled,omitempty"`
 
-	// A friendly name of the CloudWatch metric. The name can contain only alphanumeric characters (A-Z, a-z, 0-9) hyphen(-) and underscore (_), with length from one to 128 characters. It can't contain whitespace or metric names reserved for AWS WAF, for example All and Default_Action.
+	// Friendly name of the CloudWatch metric. The name can contain only alphanumeric characters (A-Z, a-z, 0-9) hyphen(-) and underscore (_), with length from one to 128 characters. It can't contain whitespace or metric names reserved for AWS WAF, for example All and Default_Action.
 	MetricName *string `json:"metricName,omitempty" tf:"metric_name,omitempty"`
 
-	// A boolean indicating whether AWS WAF should store a sampling of the web requests that match the rules. You can view the sampled requests through the AWS WAF console.
+	// Boolean indicating whether AWS WAF should store a sampling of the web requests that match the rules. You can view the sampled requests through the AWS WAF console.
 	SampledRequestsEnabled *bool `json:"sampledRequestsEnabled,omitempty" tf:"sampled_requests_enabled,omitempty"`
 }
 
 type VisibilityConfigObservation struct {
 
-	// A boolean indicating whether the associated resource sends metrics to CloudWatch. For the list of available metrics, see AWS WAF Metrics.
+	// Boolean indicating whether the associated resource sends metrics to CloudWatch. For the list of available metrics, see AWS WAF Metrics.
 	CloudwatchMetricsEnabled *bool `json:"cloudwatchMetricsEnabled,omitempty" tf:"cloudwatch_metrics_enabled,omitempty"`
 
-	// A friendly name of the CloudWatch metric. The name can contain only alphanumeric characters (A-Z, a-z, 0-9) hyphen(-) and underscore (_), with length from one to 128 characters. It can't contain whitespace or metric names reserved for AWS WAF, for example All and Default_Action.
+	// Friendly name of the CloudWatch metric. The name can contain only alphanumeric characters (A-Z, a-z, 0-9) hyphen(-) and underscore (_), with length from one to 128 characters. It can't contain whitespace or metric names reserved for AWS WAF, for example All and Default_Action.
 	MetricName *string `json:"metricName,omitempty" tf:"metric_name,omitempty"`
 
-	// A boolean indicating whether AWS WAF should store a sampling of the web requests that match the rules. You can view the sampled requests through the AWS WAF console.
+	// Boolean indicating whether AWS WAF should store a sampling of the web requests that match the rules. You can view the sampled requests through the AWS WAF console.
 	SampledRequestsEnabled *bool `json:"sampledRequestsEnabled,omitempty" tf:"sampled_requests_enabled,omitempty"`
 }
 
 type VisibilityConfigParameters struct {
 
-	// A boolean indicating whether the associated resource sends metrics to CloudWatch. For the list of available metrics, see AWS WAF Metrics.
+	// Boolean indicating whether the associated resource sends metrics to CloudWatch. For the list of available metrics, see AWS WAF Metrics.
 	// +kubebuilder:validation:Optional
 	CloudwatchMetricsEnabled *bool `json:"cloudwatchMetricsEnabled" tf:"cloudwatch_metrics_enabled,omitempty"`
 
-	// A friendly name of the CloudWatch metric. The name can contain only alphanumeric characters (A-Z, a-z, 0-9) hyphen(-) and underscore (_), with length from one to 128 characters. It can't contain whitespace or metric names reserved for AWS WAF, for example All and Default_Action.
+	// Friendly name of the CloudWatch metric. The name can contain only alphanumeric characters (A-Z, a-z, 0-9) hyphen(-) and underscore (_), with length from one to 128 characters. It can't contain whitespace or metric names reserved for AWS WAF, for example All and Default_Action.
 	// +kubebuilder:validation:Optional
 	MetricName *string `json:"metricName" tf:"metric_name,omitempty"`
 
-	// A boolean indicating whether AWS WAF should store a sampling of the web requests that match the rules. You can view the sampled requests through the AWS WAF console.
+	// Boolean indicating whether AWS WAF should store a sampling of the web requests that match the rules. You can view the sampled requests through the AWS WAF console.
 	// +kubebuilder:validation:Optional
 	SampledRequestsEnabled *bool `json:"sampledRequestsEnabled" tf:"sampled_requests_enabled,omitempty"`
 }

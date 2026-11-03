@@ -160,7 +160,7 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   usagePlanId:
-                    description: Id of the usage plan resource representing to associate
+                    description: ID of the usage plan resource representing to associate
                       the key to.
                     type: string
                   usagePlanIdRef:
@@ -337,7 +337,7 @@ spec:
                       key type is API_KEY.
                     type: string
                   usagePlanId:
-                    description: Id of the usage plan resource representing to associate
+                    description: ID of the usage plan resource representing to associate
                       the key to.
                     type: string
                   usagePlanIdRef:
@@ -532,7 +532,7 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   usagePlanId:
-                    description: Id of the usage plan resource representing to associate
+                    description: ID of the usage plan resource representing to associate
                       the key to.
                     type: string
                   value:

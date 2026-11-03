@@ -59,16 +59,16 @@ spec:
               forProvider:
                 properties:
                   clientAuthentication:
-                    description: Specifies client authentication information for the
-                      serverless cluster. See below.
+                    description: Client authentication information for the serverless
+                      cluster. See client_authentication Block below.
                     properties:
                       sasl:
                         description: Details for client authentication using SASL.
-                          See below.
+                          See sasl Block below.
                         properties:
                           iam:
                             description: Details for client authentication using IAM.
-                              See below.
+                              See iam Block below.
                             properties:
                               enabled:
                                 description: Whether SASL/IAM authentication is enabled
@@ -78,7 +78,7 @@ spec:
                         type: object
                     type: object
                   clusterName:
-                    description: The name of the serverless cluster.
+                    description: Name of the serverless cluster.
                     type: string
                   region:
                     description: |-
@@ -92,7 +92,8 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   vpcConfig:
-                    description: VPC configuration information. See below.
+                    description: VPC configuration information. See vpc_config Block
+                      below.
                     items:
                       properties:
                         securityGroupIdRefs:
@@ -181,8 +182,8 @@ spec:
                               type: object
                           type: object
                         securityGroupIds:
-                          description: Specifies up to five security groups that control
-                            inbound and outbound traffic for the serverless cluster.
+                          description: Up to five security groups that control inbound
+                            and outbound traffic for the serverless cluster.
                           items:
                             type: string
                           type: array
@@ -272,8 +273,8 @@ spec:
                               type: object
                           type: object
                         subnetIds:
-                          description: A list of subnets in at least two different
-                            Availability Zones that host your client applications.
+                          description: List of subnets in at least two different Availability
+                            Zones that host your client applications.
                           items:
                             type: string
                           type: array
@@ -297,16 +298,16 @@ spec:
                   autoscaler.
                 properties:
                   clientAuthentication:
-                    description: Specifies client authentication information for the
-                      serverless cluster. See below.
+                    description: Client authentication information for the serverless
+                      cluster. See client_authentication Block below.
                     properties:
                       sasl:
                         description: Details for client authentication using SASL.
-                          See below.
+                          See sasl Block below.
                         properties:
                           iam:
                             description: Details for client authentication using IAM.
-                              See below.
+                              See iam Block below.
                             properties:
                               enabled:
                                 description: Whether SASL/IAM authentication is enabled
@@ -316,7 +317,7 @@ spec:
                         type: object
                     type: object
                   clusterName:
-                    description: The name of the serverless cluster.
+                    description: Name of the serverless cluster.
                     type: string
                   tags:
                     additionalProperties:
@@ -325,7 +326,8 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   vpcConfig:
-                    description: VPC configuration information. See below.
+                    description: VPC configuration information. See vpc_config Block
+                      below.
                     items:
                       properties:
                         securityGroupIdRefs:
@@ -414,8 +416,8 @@ spec:
                               type: object
                           type: object
                         securityGroupIds:
-                          description: Specifies up to five security groups that control
-                            inbound and outbound traffic for the serverless cluster.
+                          description: Up to five security groups that control inbound
+                            and outbound traffic for the serverless cluster.
                           items:
                             type: string
                           type: array
@@ -505,8 +507,8 @@ spec:
                               type: object
                           type: object
                         subnetIds:
-                          description: A list of subnets in at least two different
-                            Availability Zones that host your client applications.
+                          description: List of subnets in at least two different Availability
+                            Zones that host your client applications.
                           items:
                             type: string
                           type: array
@@ -591,7 +593,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The ARN of the serverless cluster.
+                    description: ARN of the serverless cluster.
                     type: string
                   bootstrapBrokersSaslIam:
                     description: One or more DNS names (or IP addresses) and SASL
@@ -601,16 +603,16 @@ spec:
                       applies.
                     type: string
                   clientAuthentication:
-                    description: Specifies client authentication information for the
-                      serverless cluster. See below.
+                    description: Client authentication information for the serverless
+                      cluster. See client_authentication Block below.
                     properties:
                       sasl:
                         description: Details for client authentication using SASL.
-                          See below.
+                          See sasl Block below.
                         properties:
                           iam:
                             description: Details for client authentication using IAM.
-                              See below.
+                              See iam Block below.
                             properties:
                               enabled:
                                 description: Whether SASL/IAM authentication is enabled
@@ -620,7 +622,7 @@ spec:
                         type: object
                     type: object
                   clusterName:
-                    description: The name of the serverless cluster.
+                    description: Name of the serverless cluster.
                     type: string
                   clusterUuid:
                     description: UUID of the serverless cluster, for use in IAM policies.
@@ -641,25 +643,25 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
                   vpcConfig:
-                    description: VPC configuration information. See below.
+                    description: VPC configuration information. See vpc_config Block
+                      below.
                     items:
                       properties:
                         securityGroupIds:
-                          description: Specifies up to five security groups that control
-                            inbound and outbound traffic for the serverless cluster.
+                          description: Up to five security groups that control inbound
+                            and outbound traffic for the serverless cluster.
                           items:
                             type: string
                           type: array
                           x-kubernetes-list-type: set
                         subnetIds:
-                          description: A list of subnets in at least two different
-                            Availability Zones that host your client applications.
+                          description: List of subnets in at least two different Availability
+                            Zones that host your client applications.
                           items:
                             type: string
                           type: array

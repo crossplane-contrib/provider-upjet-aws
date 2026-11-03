@@ -639,7 +639,7 @@ type WorkspaceAccessPropertiesParameters struct {
 
 type WorkspaceCreationPropertiesInitParameters struct {
 
-	// The identifier of your custom security group. Should relate to the same VPC, where workspaces reside in.
+	// The identifier of your custom security group. Should relate to the same VPC, where WorkSpaces reside in.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	CustomSecurityGroupID *string `json:"customSecurityGroupId,omitempty" tf:"custom_security_group_id,omitempty"`
@@ -667,7 +667,7 @@ type WorkspaceCreationPropertiesInitParameters struct {
 
 type WorkspaceCreationPropertiesObservation struct {
 
-	// The identifier of your custom security group. Should relate to the same VPC, where workspaces reside in.
+	// The identifier of your custom security group. Should relate to the same VPC, where WorkSpaces reside in.
 	CustomSecurityGroupID *string `json:"customSecurityGroupId,omitempty" tf:"custom_security_group_id,omitempty"`
 
 	// The default organizational unit (OU) for your WorkSpace directories. Should conform "OU=<value>,DC=<value>,...,DC=<value>" pattern.
@@ -685,7 +685,7 @@ type WorkspaceCreationPropertiesObservation struct {
 
 type WorkspaceCreationPropertiesParameters struct {
 
-	// The identifier of your custom security group. Should relate to the same VPC, where workspaces reside in.
+	// The identifier of your custom security group. Should relate to the same VPC, where WorkSpaces reside in.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional

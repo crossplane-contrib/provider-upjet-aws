@@ -65,12 +65,12 @@ spec:
                       environments. See details below.
                     properties:
                       allocationStrategy:
-                        description: The allocation strategy to use for the compute
-                          resource in case not enough instances of the best fitting
-                          instance type can be allocated. For valid values, refer
-                          to the AWS documentation. Defaults to BEST_FIT. This parameter
-                          isn't applicable to jobs running on Fargate resources, and
-                          shouldn't be specified.
+                        description: Allocation strategy to use for the compute resource
+                          in case not enough instances of the best fitting instance
+                          type can be allocated. For valid values, refer to the AWS
+                          documentation. Defaults to BEST_FIT. This parameter isn't
+                          applicable to jobs running on Fargate resources, and shouldn't
+                          be specified.
                         type: string
                       bidPercentage:
                         description: Integer of maximum percentage that a Spot Instance
@@ -84,9 +84,9 @@ spec:
                           be specified.
                         type: number
                       desiredVcpus:
-                        description: The desired number of EC2 vCPUS in the compute
-                          environment. This parameter isn't applicable to jobs running
-                          on Fargate resources, and shouldn't be specified.
+                        description: Desired number of EC2 vCPUS in the compute environment.
+                          This parameter isn't applicable to jobs running on Fargate
+                          resources, and shouldn't be specified.
                         type: number
                       ec2Configuration:
                         description: Provides information used to select AMIs for
@@ -97,28 +97,28 @@ spec:
                         items:
                           properties:
                             imageIdOverride:
-                              description: The AMI ID used for instances launched
-                                in the compute environment that match the image type.
-                                This setting overrides the image_id argument in the
-                                compute_resources block.
+                              description: AMI ID used for instances launched in the
+                                compute environment that match the image type. This
+                                setting overrides the image_id argument in the compute_resources
+                                block.
                               type: string
                             imageKubernetesVersion:
-                              description: The Kubernetes version for the compute
-                                environment. If you don't specify a value, the latest
-                                version that AWS Batch supports is used. See Supported
-                                Kubernetes versions for the list of Kubernetes versions
-                                supported by AWS Batch on Amazon EKS.
+                              description: Kubernetes version for the compute environment.
+                                If you don't specify a value, the latest version that
+                                AWS Batch supports is used. See Supported Kubernetes
+                                versions for the list of Kubernetes versions supported
+                                by AWS Batch on Amazon EKS.
                               type: string
                             imageType:
-                              description: The image type to match with the instance
-                                type to select an AMI. If the image_id_override parameter
+                              description: Image type to match with the instance type
+                                to select an AMI. If the image_id_override parameter
                                 isn't specified, then a recent Amazon ECS-optimized
                                 Amazon Linux 2 AMI (ECS_AL2) is used.
                               type: string
                           type: object
                         type: array
                       ec2KeyPair:
-                        description: The EC2 key pair that is used for instances launched
+                        description: EC2 key pair that is used for instances launched
                           in the compute environment. This parameter isn't applicable
                           to jobs running on Fargate resources, and shouldn't be specified.
                         type: string
@@ -129,8 +129,8 @@ spec:
                           use ec2_configuration image_id_override instead)
                         type: string
                       instanceRole:
-                        description: The Amazon ECS instance role applied to Amazon
-                          EC2 instances in a compute environment. This parameter isn't
+                        description: Amazon ECS instance role applied to Amazon EC2
+                          instances in a compute environment. This parameter isn't
                           applicable to jobs running on Fargate resources, and shouldn't
                           be specified.
                         type: string
@@ -217,7 +217,7 @@ spec:
                             type: object
                         type: object
                       instanceType:
-                        description: A list of instance types that may be launched.
+                        description: List of instance types that may be launched.
                           This parameter isn't applicable to jobs running on Fargate
                           resources, and shouldn't be specified.
                         items:
@@ -225,7 +225,7 @@ spec:
                         type: array
                         x-kubernetes-list-type: set
                       launchTemplate:
-                        description: The launch template to use for your compute resources.
+                        description: Launch template to use for your compute resources.
                           See details below. This parameter isn't applicable to jobs
                           running on Fargate resources, and shouldn't be specified.
                         properties:
@@ -238,23 +238,23 @@ spec:
                             description: Name of the launch template.
                             type: string
                           version:
-                            description: 'The version number of the launch template.
-                              Default: The default version of the launch template.'
+                            description: 'Version number of the launch template. Default:
+                              The default version of the launch template.'
                             type: string
                         type: object
                       maxVcpus:
-                        description: The maximum number of EC2 vCPUs that an environment
+                        description: Maximum number of EC2 vCPUs that an environment
                           can reach.
                         type: number
                       minVcpus:
-                        description: The minimum number of EC2 vCPUs that an environment
+                        description: Minimum number of EC2 vCPUs that an environment
                           should maintain. For EC2 or SPOT compute environments, if
                           the parameter is not explicitly defined, a 0 default value
                           will be set. This parameter isn't applicable to jobs running
                           on Fargate resources, and shouldn't be specified.
                         type: number
                       placementGroup:
-                        description: The Amazon EC2 placement group to associate with
+                        description: Amazon EC2 placement group to associate with
                           your compute resources.
                         type: string
                       placementGroupRef:
@@ -340,7 +340,7 @@ spec:
                             type: object
                         type: object
                       securityGroupIds:
-                        description: A list of EC2 security group that are associated
+                        description: List of EC2 security group that are associated
                           with instances launched in the compute environment. This
                           parameter is required for Fargate compute environments.
                         items:
@@ -439,8 +439,8 @@ spec:
                           to jobs running on Fargate resources, and shouldn't be specified.
                         type: string
                       subnets:
-                        description: A list of VPC subnets into which the compute
-                          resources are launched.
+                        description: List of VPC subnets into which the compute resources
+                          are launched.
                         items:
                           type: string
                         type: array
@@ -539,8 +539,8 @@ spec:
                         type: object
                         x-kubernetes-map-type: granular
                       type:
-                        description: The type of compute environment. Valid items
-                          are EC2, SPOT, FARGATE or FARGATE_SPOT.
+                        description: Type of compute environment. Valid items are
+                          EC2, SPOT, FARGATE or FARGATE_SPOT.
                         type: string
                     type: object
                   eksConfiguration:
@@ -551,8 +551,8 @@ spec:
                         description: ARN of the Amazon EKS cluster.
                         type: string
                       kubernetesNamespace:
-                        description: The namespace of the Amazon EKS cluster. AWS
-                          Batch manages pods in this namespace.
+                        description: Namespace of the Amazon EKS cluster. AWS Batch
+                          manages pods in this namespace.
                         type: string
                     type: object
                   region:
@@ -645,10 +645,10 @@ spec:
                         type: object
                     type: object
                   state:
-                    description: The state of the compute environment. If the state
-                      is ENABLED, then the compute environment accepts jobs from a
-                      queue and can scale out automatically based on queues. Valid
-                      items are ENABLED or DISABLED. Defaults to ENABLED.
+                    description: State of the compute environment. If the state is
+                      ENABLED, then the compute environment accepts jobs from a queue
+                      and can scale out automatically based on queues. Valid items
+                      are ENABLED or DISABLED. Defaults to ENABLED.
                     type: string
                   tags:
                     additionalProperties:
@@ -657,20 +657,20 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   type:
-                    description: The type of the compute environment. Valid items
-                      are MANAGED or UNMANAGED.
+                    description: Type of the compute environment. Valid items are
+                      MANAGED or UNMANAGED.
                     type: string
                   updatePolicy:
-                    description: Specifies the infrastructure update policy for the
-                      compute environment. See details below.
+                    description: Infrastructure update policy for the compute environment.
+                      See details below.
                     properties:
                       jobExecutionTimeoutMinutes:
-                        description: Specifies the job timeout (in minutes) when the
-                          compute environment infrastructure is updated.
+                        description: Job timeout (in minutes) when the compute environment
+                          infrastructure is updated.
                         type: number
                       terminateJobsOnUpdate:
-                        description: Specifies whether jobs are automatically terminated
-                          when the compute environment infrastructure is updated.
+                        description: Whether jobs are automatically terminated when
+                          the compute environment infrastructure is updated.
                         type: boolean
                     type: object
                 required:
@@ -695,12 +695,12 @@ spec:
                       environments. See details below.
                     properties:
                       allocationStrategy:
-                        description: The allocation strategy to use for the compute
-                          resource in case not enough instances of the best fitting
-                          instance type can be allocated. For valid values, refer
-                          to the AWS documentation. Defaults to BEST_FIT. This parameter
-                          isn't applicable to jobs running on Fargate resources, and
-                          shouldn't be specified.
+                        description: Allocation strategy to use for the compute resource
+                          in case not enough instances of the best fitting instance
+                          type can be allocated. For valid values, refer to the AWS
+                          documentation. Defaults to BEST_FIT. This parameter isn't
+                          applicable to jobs running on Fargate resources, and shouldn't
+                          be specified.
                         type: string
                       bidPercentage:
                         description: Integer of maximum percentage that a Spot Instance
@@ -714,9 +714,9 @@ spec:
                           be specified.
                         type: number
                       desiredVcpus:
-                        description: The desired number of EC2 vCPUS in the compute
-                          environment. This parameter isn't applicable to jobs running
-                          on Fargate resources, and shouldn't be specified.
+                        description: Desired number of EC2 vCPUS in the compute environment.
+                          This parameter isn't applicable to jobs running on Fargate
+                          resources, and shouldn't be specified.
                         type: number
                       ec2Configuration:
                         description: Provides information used to select AMIs for
@@ -727,28 +727,28 @@ spec:
                         items:
                           properties:
                             imageIdOverride:
-                              description: The AMI ID used for instances launched
-                                in the compute environment that match the image type.
-                                This setting overrides the image_id argument in the
-                                compute_resources block.
+                              description: AMI ID used for instances launched in the
+                                compute environment that match the image type. This
+                                setting overrides the image_id argument in the compute_resources
+                                block.
                               type: string
                             imageKubernetesVersion:
-                              description: The Kubernetes version for the compute
-                                environment. If you don't specify a value, the latest
-                                version that AWS Batch supports is used. See Supported
-                                Kubernetes versions for the list of Kubernetes versions
-                                supported by AWS Batch on Amazon EKS.
+                              description: Kubernetes version for the compute environment.
+                                If you don't specify a value, the latest version that
+                                AWS Batch supports is used. See Supported Kubernetes
+                                versions for the list of Kubernetes versions supported
+                                by AWS Batch on Amazon EKS.
                               type: string
                             imageType:
-                              description: The image type to match with the instance
-                                type to select an AMI. If the image_id_override parameter
+                              description: Image type to match with the instance type
+                                to select an AMI. If the image_id_override parameter
                                 isn't specified, then a recent Amazon ECS-optimized
                                 Amazon Linux 2 AMI (ECS_AL2) is used.
                               type: string
                           type: object
                         type: array
                       ec2KeyPair:
-                        description: The EC2 key pair that is used for instances launched
+                        description: EC2 key pair that is used for instances launched
                           in the compute environment. This parameter isn't applicable
                           to jobs running on Fargate resources, and shouldn't be specified.
                         type: string
@@ -759,8 +759,8 @@ spec:
                           use ec2_configuration image_id_override instead)
                         type: string
                       instanceRole:
-                        description: The Amazon ECS instance role applied to Amazon
-                          EC2 instances in a compute environment. This parameter isn't
+                        description: Amazon ECS instance role applied to Amazon EC2
+                          instances in a compute environment. This parameter isn't
                           applicable to jobs running on Fargate resources, and shouldn't
                           be specified.
                         type: string
@@ -847,7 +847,7 @@ spec:
                             type: object
                         type: object
                       instanceType:
-                        description: A list of instance types that may be launched.
+                        description: List of instance types that may be launched.
                           This parameter isn't applicable to jobs running on Fargate
                           resources, and shouldn't be specified.
                         items:
@@ -855,7 +855,7 @@ spec:
                         type: array
                         x-kubernetes-list-type: set
                       launchTemplate:
-                        description: The launch template to use for your compute resources.
+                        description: Launch template to use for your compute resources.
                           See details below. This parameter isn't applicable to jobs
                           running on Fargate resources, and shouldn't be specified.
                         properties:
@@ -868,23 +868,23 @@ spec:
                             description: Name of the launch template.
                             type: string
                           version:
-                            description: 'The version number of the launch template.
-                              Default: The default version of the launch template.'
+                            description: 'Version number of the launch template. Default:
+                              The default version of the launch template.'
                             type: string
                         type: object
                       maxVcpus:
-                        description: The maximum number of EC2 vCPUs that an environment
+                        description: Maximum number of EC2 vCPUs that an environment
                           can reach.
                         type: number
                       minVcpus:
-                        description: The minimum number of EC2 vCPUs that an environment
+                        description: Minimum number of EC2 vCPUs that an environment
                           should maintain. For EC2 or SPOT compute environments, if
                           the parameter is not explicitly defined, a 0 default value
                           will be set. This parameter isn't applicable to jobs running
                           on Fargate resources, and shouldn't be specified.
                         type: number
                       placementGroup:
-                        description: The Amazon EC2 placement group to associate with
+                        description: Amazon EC2 placement group to associate with
                           your compute resources.
                         type: string
                       placementGroupRef:
@@ -970,7 +970,7 @@ spec:
                             type: object
                         type: object
                       securityGroupIds:
-                        description: A list of EC2 security group that are associated
+                        description: List of EC2 security group that are associated
                           with instances launched in the compute environment. This
                           parameter is required for Fargate compute environments.
                         items:
@@ -1069,8 +1069,8 @@ spec:
                           to jobs running on Fargate resources, and shouldn't be specified.
                         type: string
                       subnets:
-                        description: A list of VPC subnets into which the compute
-                          resources are launched.
+                        description: List of VPC subnets into which the compute resources
+                          are launched.
                         items:
                           type: string
                         type: array
@@ -1169,8 +1169,8 @@ spec:
                         type: object
                         x-kubernetes-map-type: granular
                       type:
-                        description: The type of compute environment. Valid items
-                          are EC2, SPOT, FARGATE or FARGATE_SPOT.
+                        description: Type of compute environment. Valid items are
+                          EC2, SPOT, FARGATE or FARGATE_SPOT.
                         type: string
                     type: object
                   eksConfiguration:
@@ -1181,8 +1181,8 @@ spec:
                         description: ARN of the Amazon EKS cluster.
                         type: string
                       kubernetesNamespace:
-                        description: The namespace of the Amazon EKS cluster. AWS
-                          Batch manages pods in this namespace.
+                        description: Namespace of the Amazon EKS cluster. AWS Batch
+                          manages pods in this namespace.
                         type: string
                     type: object
                   serviceRole:
@@ -1270,10 +1270,10 @@ spec:
                         type: object
                     type: object
                   state:
-                    description: The state of the compute environment. If the state
-                      is ENABLED, then the compute environment accepts jobs from a
-                      queue and can scale out automatically based on queues. Valid
-                      items are ENABLED or DISABLED. Defaults to ENABLED.
+                    description: State of the compute environment. If the state is
+                      ENABLED, then the compute environment accepts jobs from a queue
+                      and can scale out automatically based on queues. Valid items
+                      are ENABLED or DISABLED. Defaults to ENABLED.
                     type: string
                   tags:
                     additionalProperties:
@@ -1282,20 +1282,20 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   type:
-                    description: The type of the compute environment. Valid items
-                      are MANAGED or UNMANAGED.
+                    description: Type of the compute environment. Valid items are
+                      MANAGED or UNMANAGED.
                     type: string
                   updatePolicy:
-                    description: Specifies the infrastructure update policy for the
-                      compute environment. See details below.
+                    description: Infrastructure update policy for the compute environment.
+                      See details below.
                     properties:
                       jobExecutionTimeoutMinutes:
-                        description: Specifies the job timeout (in minutes) when the
-                          compute environment infrastructure is updated.
+                        description: Job timeout (in minutes) when the compute environment
+                          infrastructure is updated.
                         type: number
                       terminateJobsOnUpdate:
-                        description: Specifies whether jobs are automatically terminated
-                          when the compute environment infrastructure is updated.
+                        description: Whether jobs are automatically terminated when
+                          the compute environment infrastructure is updated.
                         type: boolean
                     type: object
                 type: object
@@ -1376,12 +1376,12 @@ spec:
                       environments. See details below.
                     properties:
                       allocationStrategy:
-                        description: The allocation strategy to use for the compute
-                          resource in case not enough instances of the best fitting
-                          instance type can be allocated. For valid values, refer
-                          to the AWS documentation. Defaults to BEST_FIT. This parameter
-                          isn't applicable to jobs running on Fargate resources, and
-                          shouldn't be specified.
+                        description: Allocation strategy to use for the compute resource
+                          in case not enough instances of the best fitting instance
+                          type can be allocated. For valid values, refer to the AWS
+                          documentation. Defaults to BEST_FIT. This parameter isn't
+                          applicable to jobs running on Fargate resources, and shouldn't
+                          be specified.
                         type: string
                       bidPercentage:
                         description: Integer of maximum percentage that a Spot Instance
@@ -1395,9 +1395,9 @@ spec:
                           be specified.
                         type: number
                       desiredVcpus:
-                        description: The desired number of EC2 vCPUS in the compute
-                          environment. This parameter isn't applicable to jobs running
-                          on Fargate resources, and shouldn't be specified.
+                        description: Desired number of EC2 vCPUS in the compute environment.
+                          This parameter isn't applicable to jobs running on Fargate
+                          resources, and shouldn't be specified.
                         type: number
                       ec2Configuration:
                         description: Provides information used to select AMIs for
@@ -1408,28 +1408,28 @@ spec:
                         items:
                           properties:
                             imageIdOverride:
-                              description: The AMI ID used for instances launched
-                                in the compute environment that match the image type.
-                                This setting overrides the image_id argument in the
-                                compute_resources block.
+                              description: AMI ID used for instances launched in the
+                                compute environment that match the image type. This
+                                setting overrides the image_id argument in the compute_resources
+                                block.
                               type: string
                             imageKubernetesVersion:
-                              description: The Kubernetes version for the compute
-                                environment. If you don't specify a value, the latest
-                                version that AWS Batch supports is used. See Supported
-                                Kubernetes versions for the list of Kubernetes versions
-                                supported by AWS Batch on Amazon EKS.
+                              description: Kubernetes version for the compute environment.
+                                If you don't specify a value, the latest version that
+                                AWS Batch supports is used. See Supported Kubernetes
+                                versions for the list of Kubernetes versions supported
+                                by AWS Batch on Amazon EKS.
                               type: string
                             imageType:
-                              description: The image type to match with the instance
-                                type to select an AMI. If the image_id_override parameter
+                              description: Image type to match with the instance type
+                                to select an AMI. If the image_id_override parameter
                                 isn't specified, then a recent Amazon ECS-optimized
                                 Amazon Linux 2 AMI (ECS_AL2) is used.
                               type: string
                           type: object
                         type: array
                       ec2KeyPair:
-                        description: The EC2 key pair that is used for instances launched
+                        description: EC2 key pair that is used for instances launched
                           in the compute environment. This parameter isn't applicable
                           to jobs running on Fargate resources, and shouldn't be specified.
                         type: string
@@ -1440,13 +1440,13 @@ spec:
                           use ec2_configuration image_id_override instead)
                         type: string
                       instanceRole:
-                        description: The Amazon ECS instance role applied to Amazon
-                          EC2 instances in a compute environment. This parameter isn't
+                        description: Amazon ECS instance role applied to Amazon EC2
+                          instances in a compute environment. This parameter isn't
                           applicable to jobs running on Fargate resources, and shouldn't
                           be specified.
                         type: string
                       instanceType:
-                        description: A list of instance types that may be launched.
+                        description: List of instance types that may be launched.
                           This parameter isn't applicable to jobs running on Fargate
                           resources, and shouldn't be specified.
                         items:
@@ -1454,7 +1454,7 @@ spec:
                         type: array
                         x-kubernetes-list-type: set
                       launchTemplate:
-                        description: The launch template to use for your compute resources.
+                        description: Launch template to use for your compute resources.
                           See details below. This parameter isn't applicable to jobs
                           running on Fargate resources, and shouldn't be specified.
                         properties:
@@ -1467,27 +1467,27 @@ spec:
                             description: Name of the launch template.
                             type: string
                           version:
-                            description: 'The version number of the launch template.
-                              Default: The default version of the launch template.'
+                            description: 'Version number of the launch template. Default:
+                              The default version of the launch template.'
                             type: string
                         type: object
                       maxVcpus:
-                        description: The maximum number of EC2 vCPUs that an environment
+                        description: Maximum number of EC2 vCPUs that an environment
                           can reach.
                         type: number
                       minVcpus:
-                        description: The minimum number of EC2 vCPUs that an environment
+                        description: Minimum number of EC2 vCPUs that an environment
                           should maintain. For EC2 or SPOT compute environments, if
                           the parameter is not explicitly defined, a 0 default value
                           will be set. This parameter isn't applicable to jobs running
                           on Fargate resources, and shouldn't be specified.
                         type: number
                       placementGroup:
-                        description: The Amazon EC2 placement group to associate with
+                        description: Amazon EC2 placement group to associate with
                           your compute resources.
                         type: string
                       securityGroupIds:
-                        description: A list of EC2 security group that are associated
+                        description: List of EC2 security group that are associated
                           with instances launched in the compute environment. This
                           parameter is required for Fargate compute environments.
                         items:
@@ -1501,8 +1501,8 @@ spec:
                           to jobs running on Fargate resources, and shouldn't be specified.
                         type: string
                       subnets:
-                        description: A list of VPC subnets into which the compute
-                          resources are launched.
+                        description: List of VPC subnets into which the compute resources
+                          are launched.
                         items:
                           type: string
                         type: array
@@ -1517,8 +1517,8 @@ spec:
                         type: object
                         x-kubernetes-map-type: granular
                       type:
-                        description: The type of compute environment. Valid items
-                          are EC2, SPOT, FARGATE or FARGATE_SPOT.
+                        description: Type of compute environment. Valid items are
+                          EC2, SPOT, FARGATE or FARGATE_SPOT.
                         type: string
                     type: object
                   ecsClusterArn:
@@ -1533,8 +1533,8 @@ spec:
                         description: ARN of the Amazon EKS cluster.
                         type: string
                       kubernetesNamespace:
-                        description: The namespace of the Amazon EKS cluster. AWS
-                          Batch manages pods in this namespace.
+                        description: Namespace of the Amazon EKS cluster. AWS Batch
+                          manages pods in this namespace.
                         type: string
                     type: object
                   id:
@@ -1549,17 +1549,17 @@ spec:
                       make calls to other AWS services on your behalf.
                     type: string
                   state:
-                    description: The state of the compute environment. If the state
-                      is ENABLED, then the compute environment accepts jobs from a
-                      queue and can scale out automatically based on queues. Valid
-                      items are ENABLED or DISABLED. Defaults to ENABLED.
+                    description: State of the compute environment. If the state is
+                      ENABLED, then the compute environment accepts jobs from a queue
+                      and can scale out automatically based on queues. Valid items
+                      are ENABLED or DISABLED. Defaults to ENABLED.
                     type: string
                   status:
-                    description: The current status of the compute environment (for
-                      example, CREATING or VALID).
+                    description: Current status of the compute environment (for example,
+                      CREATING or VALID).
                     type: string
                   statusReason:
-                    description: A short, human-readable string to provide additional
+                    description: Short, human-readable string to provide additional
                       details about the current status of the compute environment.
                     type: string
                   tags:
@@ -1571,26 +1571,25 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
                   type:
-                    description: The type of the compute environment. Valid items
-                      are MANAGED or UNMANAGED.
+                    description: Type of the compute environment. Valid items are
+                      MANAGED or UNMANAGED.
                     type: string
                   updatePolicy:
-                    description: Specifies the infrastructure update policy for the
-                      compute environment. See details below.
+                    description: Infrastructure update policy for the compute environment.
+                      See details below.
                     properties:
                       jobExecutionTimeoutMinutes:
-                        description: Specifies the job timeout (in minutes) when the
-                          compute environment infrastructure is updated.
+                        description: Job timeout (in minutes) when the compute environment
+                          infrastructure is updated.
                         type: number
                       terminateJobsOnUpdate:
-                        description: Specifies whether jobs are automatically terminated
-                          when the compute environment infrastructure is updated.
+                        description: Whether jobs are automatically terminated when
+                          the compute environment infrastructure is updated.
                         type: boolean
                     type: object
                 type: object

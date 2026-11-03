@@ -62,7 +62,7 @@ spec:
                   defaultRunProperties:
                     additionalProperties:
                       type: string
-                    description: A map of default run properties for this workflow.
+                    description: Map of default run properties for this workflow.
                       These properties are passed to all jobs associated to the workflow.
                     type: object
                     x-kubernetes-map-type: granular
@@ -105,7 +105,7 @@ spec:
                   defaultRunProperties:
                     additionalProperties:
                       type: string
-                    description: A map of default run properties for this workflow.
+                    description: Map of default run properties for this workflow.
                       These properties are passed to all jobs associated to the workflow.
                     type: object
                     x-kubernetes-map-type: granular
@@ -194,7 +194,7 @@ spec:
                   defaultRunProperties:
                     additionalProperties:
                       type: string
-                    description: A map of default run properties for this workflow.
+                    description: Map of default run properties for this workflow.
                       These properties are passed to all jobs associated to the workflow.
                     type: object
                     x-kubernetes-map-type: granular
@@ -224,9 +224,8 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
                 type: object

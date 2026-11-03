@@ -982,7 +982,7 @@ spec:
                       Default is Server.
                     type: string
                   deploymentConfigId:
-                    description: The AWS Assigned deployment config id
+                    description: The AWS Assigned deployment config ID
                     type: string
                   id:
                     description: The deployment group's config name.

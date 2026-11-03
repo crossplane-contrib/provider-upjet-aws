@@ -35,6 +35,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: GuardrailVersion is the Schema for the GuardrailVersions API.
+          Manages an AWS Bedrock Guardrail Version.
         properties:
           apiVersion:
             description: |-
@@ -159,7 +160,7 @@ spec:
                     type: string
                   skipDestroy:
                     description: Whether to retain the old version of a previously
-                      deployed Guardrail. Default is false
+                      deployed Guardrail. Default is false.
                     type: boolean
                 required:
                 - region
@@ -259,7 +260,7 @@ spec:
                     type: object
                   skipDestroy:
                     description: Whether to retain the old version of a previously
-                      deployed Guardrail. Default is false
+                      deployed Guardrail. Default is false.
                     type: boolean
                 type: object
               managementPolicies:
@@ -368,7 +369,7 @@ spec:
                     type: string
                   skipDestroy:
                     description: Whether to retain the old version of a previously
-                      deployed Guardrail. Default is false
+                      deployed Guardrail. Default is false.
                     type: boolean
                   version:
                     description: Guardrail version.

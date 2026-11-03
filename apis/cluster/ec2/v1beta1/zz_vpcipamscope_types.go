@@ -15,10 +15,10 @@ import (
 
 type VPCIpamScopeInitParameters struct {
 
-	// A description for the scope you're creating.
+	// Description for the scope you're creating.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The ID of the IPAM for which you're creating this scope.
+	// ID of the IPAM for which you're creating this scope.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.VPCIpam
 	IpamID *string `json:"ipamId,omitempty" tf:"ipam_id,omitempty"`
 
@@ -40,25 +40,25 @@ type VPCIpamScopeObservation struct {
 	// ARN of the scope.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// A description for the scope you're creating.
+	// Description for the scope you're creating.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The ID of the IPAM Scope.
+	// ID of the IPAM Scope.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The ARN of the IPAM for which you're creating this scope.
+	// ARN of the IPAM for which you're creating this scope.
 	IpamArn *string `json:"ipamArn,omitempty" tf:"ipam_arn,omitempty"`
 
-	// The ID of the IPAM for which you're creating this scope.
+	// ID of the IPAM for which you're creating this scope.
 	IpamID *string `json:"ipamId,omitempty" tf:"ipam_id,omitempty"`
 
-	// The type of the scope.
+	// Type of the scope.
 	IpamScopeType *string `json:"ipamScopeType,omitempty" tf:"ipam_scope_type,omitempty"`
 
-	// Defines if the scope is the default scope or not.
+	// Whether the scope is the default scope.
 	IsDefault *bool `json:"isDefault,omitempty" tf:"is_default,omitempty"`
 
-	// The number of pools in the scope.
+	// Number of pools in the scope.
 	PoolCount *float64 `json:"poolCount,omitempty" tf:"pool_count,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -75,11 +75,11 @@ type VPCIpamScopeObservation struct {
 
 type VPCIpamScopeParameters struct {
 
-	// A description for the scope you're creating.
+	// Description for the scope you're creating.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The ID of the IPAM for which you're creating this scope.
+	// ID of the IPAM for which you're creating this scope.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.VPCIpam
 	// +kubebuilder:validation:Optional
 	IpamID *string `json:"ipamId,omitempty" tf:"ipam_id,omitempty"`

@@ -303,7 +303,8 @@ spec:
                     type: object
                   iamRoles:
                     description: A list of IAM Role ARNs to associate with the cluster.
-                      A Maximum of 10 can be associated to the cluster at any time.
+                      A maximum of 50 (or 10 in ISO regions) can be associated with
+                      the cluster at any time.
                     items:
                       type: string
                     type: array
@@ -875,7 +876,8 @@ spec:
                     type: object
                   iamRoles:
                     description: A list of IAM Role ARNs to associate with the cluster.
-                      A Maximum of 10 can be associated to the cluster at any time.
+                      A maximum of 50 (or 10 in ISO regions) can be associated with
+                      the cluster at any time.
                     items:
                       type: string
                     type: array
@@ -1368,7 +1370,8 @@ spec:
                     type: string
                   iamRoles:
                     description: A list of IAM Role ARNs to associate with the cluster.
-                      A Maximum of 10 can be associated to the cluster at any time.
+                      A maximum of 50 (or 10 in ISO regions) can be associated with
+                      the cluster at any time.
                     items:
                       type: string
                     type: array

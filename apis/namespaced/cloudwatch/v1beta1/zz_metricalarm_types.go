@@ -32,6 +32,25 @@ type EvaluationCriteriaParameters struct {
 	PromqlCriteria *PromqlCriteriaParameters `json:"promqlCriteria" tf:"promql_criteria,omitempty"`
 }
 
+type EvaluationWindowInitParameters struct {
+
+	// Aligns the evaluated range to fixed clock boundaries that match the alarm's period (for example the top of the hour, midnight, or the start of the calendar week), instead of the default rolling sliding window. Only alarms with a period of 60, 300, 3600, 86400, or 604800 seconds support a wall clock window. See wall_clock_window below.
+	WallClockWindow *WallClockWindowInitParameters `json:"wallClockWindow,omitempty" tf:"wall_clock_window,omitempty"`
+}
+
+type EvaluationWindowObservation struct {
+
+	// Aligns the evaluated range to fixed clock boundaries that match the alarm's period (for example the top of the hour, midnight, or the start of the calendar week), instead of the default rolling sliding window. Only alarms with a period of 60, 300, 3600, 86400, or 604800 seconds support a wall clock window. See wall_clock_window below.
+	WallClockWindow *WallClockWindowObservation `json:"wallClockWindow,omitempty" tf:"wall_clock_window,omitempty"`
+}
+
+type EvaluationWindowParameters struct {
+
+	// Aligns the evaluated range to fixed clock boundaries that match the alarm's period (for example the top of the hour, midnight, or the start of the calendar week), instead of the default rolling sliding window. Only alarms with a period of 60, 300, 3600, 86400, or 604800 seconds support a wall clock window. See wall_clock_window below.
+	// +kubebuilder:validation:Optional
+	WallClockWindow *WallClockWindowParameters `json:"wallClockWindow" tf:"wall_clock_window,omitempty"`
+}
+
 type MetricAlarmInitParameters struct {
 
 	// Indicates whether or not actions should be executed during any changes to the alarm's state. Defaults to true.
@@ -78,6 +97,9 @@ type MetricAlarmInitParameters struct {
 
 	// The number of periods over which data is compared to the specified threshold. Required for traditional metric alarms.
 	EvaluationPeriods *float64 `json:"evaluationPeriods,omitempty" tf:"evaluation_periods,omitempty"`
+
+	// Configures the alarm to use a wall clock evaluation window instead of the default sliding window. Not supported for alarms that use evaluation_criteria. See evaluation_window below.
+	EvaluationWindow *EvaluationWindowInitParameters `json:"evaluationWindow,omitempty" tf:"evaluation_window,omitempty"`
 
 	// The percentile statistic for the metric associated with the alarm. Specify a value between p0.0 and p100.
 	ExtendedStatistic *string `json:"extendedStatistic,omitempty" tf:"extended_statistic,omitempty"`
@@ -178,6 +200,9 @@ type MetricAlarmObservation struct {
 
 	// The number of periods over which data is compared to the specified threshold. Required for traditional metric alarms.
 	EvaluationPeriods *float64 `json:"evaluationPeriods,omitempty" tf:"evaluation_periods,omitempty"`
+
+	// Configures the alarm to use a wall clock evaluation window instead of the default sliding window. Not supported for alarms that use evaluation_criteria. See evaluation_window below.
+	EvaluationWindow *EvaluationWindowObservation `json:"evaluationWindow,omitempty" tf:"evaluation_window,omitempty"`
 
 	// The percentile statistic for the metric associated with the alarm. Specify a value between p0.0 and p100.
 	ExtendedStatistic *string `json:"extendedStatistic,omitempty" tf:"extended_statistic,omitempty"`
@@ -296,6 +321,10 @@ type MetricAlarmParameters struct {
 	// The number of periods over which data is compared to the specified threshold. Required for traditional metric alarms.
 	// +kubebuilder:validation:Optional
 	EvaluationPeriods *float64 `json:"evaluationPeriods,omitempty" tf:"evaluation_periods,omitempty"`
+
+	// Configures the alarm to use a wall clock evaluation window instead of the default sliding window. Not supported for alarms that use evaluation_criteria. See evaluation_window below.
+	// +kubebuilder:validation:Optional
+	EvaluationWindow *EvaluationWindowParameters `json:"evaluationWindow,omitempty" tf:"evaluation_window,omitempty"`
 
 	// The percentile statistic for the metric associated with the alarm. Specify a value between p0.0 and p100.
 	// +kubebuilder:validation:Optional
@@ -591,6 +620,25 @@ type PromqlCriteriaParameters struct {
 	// The duration, in seconds, that a contributor must continuously not be breaching before it transitions back to the OK state. Valid range: 0-86400.
 	// +kubebuilder:validation:Optional
 	RecoveryPeriod *float64 `json:"recoveryPeriod,omitempty" tf:"recovery_period,omitempty"`
+}
+
+type WallClockWindowInitParameters struct {
+
+	// Time zone to align the window to. Accepts an IANA time zone name (for example America/New_York), a fixed UTC offset (for example +05:30), or an offset-prefixed identifier (for example UTC+05:30). The offset must be a multiple of 5 minutes. Defaults to UTC. Only IANA time zone names observe daylight saving time.
+	Timezone *string `json:"timezone,omitempty" tf:"timezone,omitempty"`
+}
+
+type WallClockWindowObservation struct {
+
+	// Time zone to align the window to. Accepts an IANA time zone name (for example America/New_York), a fixed UTC offset (for example +05:30), or an offset-prefixed identifier (for example UTC+05:30). The offset must be a multiple of 5 minutes. Defaults to UTC. Only IANA time zone names observe daylight saving time.
+	Timezone *string `json:"timezone,omitempty" tf:"timezone,omitempty"`
+}
+
+type WallClockWindowParameters struct {
+
+	// Time zone to align the window to. Accepts an IANA time zone name (for example America/New_York), a fixed UTC offset (for example +05:30), or an offset-prefixed identifier (for example UTC+05:30). The offset must be a multiple of 5 minutes. Defaults to UTC. Only IANA time zone names observe daylight saving time.
+	// +kubebuilder:validation:Optional
+	Timezone *string `json:"timezone,omitempty" tf:"timezone,omitempty"`
 }
 
 type WarmUpConfigurationInitParameters struct {

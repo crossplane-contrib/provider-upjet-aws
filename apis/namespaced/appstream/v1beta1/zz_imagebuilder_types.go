@@ -126,7 +126,7 @@ type ImageBuilderObservation struct {
 	// Version of the AppStream 2.0 agent to use for this image builder.
 	AppstreamAgentVersion *string `json:"appstreamAgentVersion,omitempty" tf:"appstream_agent_version,omitempty"`
 
-	// ARN of the appstream image builder.
+	// ARN of the AppStream image builder.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Date and time, in UTC and extended RFC 3339 format, when the image builder was created.

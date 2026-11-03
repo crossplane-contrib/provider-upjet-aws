@@ -15,43 +15,43 @@ import (
 
 type WorkspaceSAMLConfigurationInitParameters struct {
 
-	// The admin role values.
+	// Admin role values.
 	AdminRoleValues []*string `json:"adminRoleValues,omitempty" tf:"admin_role_values,omitempty"`
 
-	// The allowed organizations.
+	// Allowed organizations.
 	AllowedOrganizations []*string `json:"allowedOrganizations,omitempty" tf:"allowed_organizations,omitempty"`
 
-	// The editor role values.
+	// Editor role values.
 	EditorRoleValues []*string `json:"editorRoleValues,omitempty" tf:"editor_role_values,omitempty"`
 
-	// The email assertion.
+	// Email assertion.
 	EmailAssertion *string `json:"emailAssertion,omitempty" tf:"email_assertion,omitempty"`
 
-	// The groups assertion.
+	// Groups assertion.
 	GroupsAssertion *string `json:"groupsAssertion,omitempty" tf:"groups_assertion,omitempty"`
 
-	// The IDP Metadata URL. Note that either idp_metadata_url or idp_metadata_xml (but not both) must be specified.
+	// IDP Metadata URL. Note that either idp_metadata_url or idp_metadata_xml (but not both) must be specified.
 	IdpMetadataURL *string `json:"idpMetadataUrl,omitempty" tf:"idp_metadata_url,omitempty"`
 
-	// The IDP Metadata XML. Note that either idp_metadata_url or idp_metadata_xml (but not both) must be specified.
+	// IDP Metadata XML. Note that either idp_metadata_url or idp_metadata_xml (but not both) must be specified.
 	IdpMetadataXML *string `json:"idpMetadataXml,omitempty" tf:"idp_metadata_xml,omitempty"`
 
-	// The login assertion.
+	// Login assertion.
 	LoginAssertion *string `json:"loginAssertion,omitempty" tf:"login_assertion,omitempty"`
 
-	// The login validity duration.
+	// Login validity duration.
 	LoginValidityDuration *float64 `json:"loginValidityDuration,omitempty" tf:"login_validity_duration,omitempty"`
 
-	// The name assertion.
+	// Name assertion.
 	NameAssertion *string `json:"nameAssertion,omitempty" tf:"name_assertion,omitempty"`
 
-	// The org assertion.
+	// Org assertion.
 	OrgAssertion *string `json:"orgAssertion,omitempty" tf:"org_assertion,omitempty"`
 
-	// The role assertion.
+	// Role assertion.
 	RoleAssertion *string `json:"roleAssertion,omitempty" tf:"role_assertion,omitempty"`
 
-	// The workspace id.
+	// Workspace ID.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/grafana/v1beta1.Workspace
 	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
 
@@ -66,98 +66,98 @@ type WorkspaceSAMLConfigurationInitParameters struct {
 
 type WorkspaceSAMLConfigurationObservation struct {
 
-	// The admin role values.
+	// Admin role values.
 	AdminRoleValues []*string `json:"adminRoleValues,omitempty" tf:"admin_role_values,omitempty"`
 
-	// The allowed organizations.
+	// Allowed organizations.
 	AllowedOrganizations []*string `json:"allowedOrganizations,omitempty" tf:"allowed_organizations,omitempty"`
 
-	// The editor role values.
+	// Editor role values.
 	EditorRoleValues []*string `json:"editorRoleValues,omitempty" tf:"editor_role_values,omitempty"`
 
-	// The email assertion.
+	// Email assertion.
 	EmailAssertion *string `json:"emailAssertion,omitempty" tf:"email_assertion,omitempty"`
 
-	// The groups assertion.
+	// Groups assertion.
 	GroupsAssertion *string `json:"groupsAssertion,omitempty" tf:"groups_assertion,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The IDP Metadata URL. Note that either idp_metadata_url or idp_metadata_xml (but not both) must be specified.
+	// IDP Metadata URL. Note that either idp_metadata_url or idp_metadata_xml (but not both) must be specified.
 	IdpMetadataURL *string `json:"idpMetadataUrl,omitempty" tf:"idp_metadata_url,omitempty"`
 
-	// The IDP Metadata XML. Note that either idp_metadata_url or idp_metadata_xml (but not both) must be specified.
+	// IDP Metadata XML. Note that either idp_metadata_url or idp_metadata_xml (but not both) must be specified.
 	IdpMetadataXML *string `json:"idpMetadataXml,omitempty" tf:"idp_metadata_xml,omitempty"`
 
-	// The login assertion.
+	// Login assertion.
 	LoginAssertion *string `json:"loginAssertion,omitempty" tf:"login_assertion,omitempty"`
 
-	// The login validity duration.
+	// Login validity duration.
 	LoginValidityDuration *float64 `json:"loginValidityDuration,omitempty" tf:"login_validity_duration,omitempty"`
 
-	// The name assertion.
+	// Name assertion.
 	NameAssertion *string `json:"nameAssertion,omitempty" tf:"name_assertion,omitempty"`
 
-	// The org assertion.
+	// Org assertion.
 	OrgAssertion *string `json:"orgAssertion,omitempty" tf:"org_assertion,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The role assertion.
+	// Role assertion.
 	RoleAssertion *string `json:"roleAssertion,omitempty" tf:"role_assertion,omitempty"`
 
-	// The status of the SAML configuration.
+	// Status of the SAML configuration.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
-	// The workspace id.
+	// Workspace ID.
 	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
 }
 
 type WorkspaceSAMLConfigurationParameters struct {
 
-	// The admin role values.
+	// Admin role values.
 	// +kubebuilder:validation:Optional
 	AdminRoleValues []*string `json:"adminRoleValues,omitempty" tf:"admin_role_values,omitempty"`
 
-	// The allowed organizations.
+	// Allowed organizations.
 	// +kubebuilder:validation:Optional
 	AllowedOrganizations []*string `json:"allowedOrganizations,omitempty" tf:"allowed_organizations,omitempty"`
 
-	// The editor role values.
+	// Editor role values.
 	// +kubebuilder:validation:Optional
 	EditorRoleValues []*string `json:"editorRoleValues,omitempty" tf:"editor_role_values,omitempty"`
 
-	// The email assertion.
+	// Email assertion.
 	// +kubebuilder:validation:Optional
 	EmailAssertion *string `json:"emailAssertion,omitempty" tf:"email_assertion,omitempty"`
 
-	// The groups assertion.
+	// Groups assertion.
 	// +kubebuilder:validation:Optional
 	GroupsAssertion *string `json:"groupsAssertion,omitempty" tf:"groups_assertion,omitempty"`
 
-	// The IDP Metadata URL. Note that either idp_metadata_url or idp_metadata_xml (but not both) must be specified.
+	// IDP Metadata URL. Note that either idp_metadata_url or idp_metadata_xml (but not both) must be specified.
 	// +kubebuilder:validation:Optional
 	IdpMetadataURL *string `json:"idpMetadataUrl,omitempty" tf:"idp_metadata_url,omitempty"`
 
-	// The IDP Metadata XML. Note that either idp_metadata_url or idp_metadata_xml (but not both) must be specified.
+	// IDP Metadata XML. Note that either idp_metadata_url or idp_metadata_xml (but not both) must be specified.
 	// +kubebuilder:validation:Optional
 	IdpMetadataXML *string `json:"idpMetadataXml,omitempty" tf:"idp_metadata_xml,omitempty"`
 
-	// The login assertion.
+	// Login assertion.
 	// +kubebuilder:validation:Optional
 	LoginAssertion *string `json:"loginAssertion,omitempty" tf:"login_assertion,omitempty"`
 
-	// The login validity duration.
+	// Login validity duration.
 	// +kubebuilder:validation:Optional
 	LoginValidityDuration *float64 `json:"loginValidityDuration,omitempty" tf:"login_validity_duration,omitempty"`
 
-	// The name assertion.
+	// Name assertion.
 	// +kubebuilder:validation:Optional
 	NameAssertion *string `json:"nameAssertion,omitempty" tf:"name_assertion,omitempty"`
 
-	// The org assertion.
+	// Org assertion.
 	// +kubebuilder:validation:Optional
 	OrgAssertion *string `json:"orgAssertion,omitempty" tf:"org_assertion,omitempty"`
 
@@ -166,11 +166,11 @@ type WorkspaceSAMLConfigurationParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// The role assertion.
+	// Role assertion.
 	// +kubebuilder:validation:Optional
 	RoleAssertion *string `json:"roleAssertion,omitempty" tf:"role_assertion,omitempty"`
 
-	// The workspace id.
+	// Workspace ID.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/grafana/v1beta1.Workspace
 	// +kubebuilder:validation:Optional
 	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`

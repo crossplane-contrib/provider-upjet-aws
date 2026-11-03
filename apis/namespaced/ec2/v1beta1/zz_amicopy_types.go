@@ -89,7 +89,7 @@ type AMICopyInitParameters struct {
 	// Region-unique name for the AMI.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Id of the AMI to copy. This id must be valid in the region
+	// ID of the AMI to copy. This ID must be valid in the region
 	// given by source_ami_region.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.AMI
 	SourceAMIID *string `json:"sourceAmiId,omitempty" tf:"source_ami_id,omitempty"`
@@ -184,7 +184,7 @@ type AMICopyObservation struct {
 	// ID of the created AMI.
 	RootSnapshotID *string `json:"rootSnapshotId,omitempty" tf:"root_snapshot_id,omitempty"`
 
-	// Id of the AMI to copy. This id must be valid in the region
+	// ID of the AMI to copy. This ID must be valid in the region
 	// given by source_ami_region.
 	SourceAMIID *string `json:"sourceAmiId,omitempty" tf:"source_ami_id,omitempty"`
 
@@ -255,7 +255,7 @@ type AMICopyParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// Id of the AMI to copy. This id must be valid in the region
+	// ID of the AMI to copy. This ID must be valid in the region
 	// given by source_ami_region.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.AMI
 	// +kubebuilder:validation:Optional

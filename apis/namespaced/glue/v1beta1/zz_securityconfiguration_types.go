@@ -63,32 +63,40 @@ type CloudwatchEncryptionParameters struct {
 }
 
 type EncryptionConfigurationInitParameters struct {
+
+	// cloudwatch_encryption block as described below, which contains encryption configuration for CloudWatch.
 	CloudwatchEncryption *CloudwatchEncryptionInitParameters `json:"cloudwatchEncryption,omitempty" tf:"cloudwatch_encryption,omitempty"`
 
+	// job_bookmarks_encryption block as described below, which contains encryption configuration for job bookmarks.
 	JobBookmarksEncryption *JobBookmarksEncryptionInitParameters `json:"jobBookmarksEncryption,omitempty" tf:"job_bookmarks_encryption,omitempty"`
 
-	// A s3_encryption  block as described below, which contains encryption configuration for S3 data.
+	// s3_encryption block as described below, which contains encryption configuration for S3 data.
 	S3Encryption *S3EncryptionInitParameters `json:"s3Encryption,omitempty" tf:"s3_encryption,omitempty"`
 }
 
 type EncryptionConfigurationObservation struct {
+
+	// cloudwatch_encryption block as described below, which contains encryption configuration for CloudWatch.
 	CloudwatchEncryption *CloudwatchEncryptionObservation `json:"cloudwatchEncryption,omitempty" tf:"cloudwatch_encryption,omitempty"`
 
+	// job_bookmarks_encryption block as described below, which contains encryption configuration for job bookmarks.
 	JobBookmarksEncryption *JobBookmarksEncryptionObservation `json:"jobBookmarksEncryption,omitempty" tf:"job_bookmarks_encryption,omitempty"`
 
-	// A s3_encryption  block as described below, which contains encryption configuration for S3 data.
+	// s3_encryption block as described below, which contains encryption configuration for S3 data.
 	S3Encryption *S3EncryptionObservation `json:"s3Encryption,omitempty" tf:"s3_encryption,omitempty"`
 }
 
 type EncryptionConfigurationParameters struct {
 
+	// cloudwatch_encryption block as described below, which contains encryption configuration for CloudWatch.
 	// +kubebuilder:validation:Optional
 	CloudwatchEncryption *CloudwatchEncryptionParameters `json:"cloudwatchEncryption" tf:"cloudwatch_encryption,omitempty"`
 
+	// job_bookmarks_encryption block as described below, which contains encryption configuration for job bookmarks.
 	// +kubebuilder:validation:Optional
 	JobBookmarksEncryption *JobBookmarksEncryptionParameters `json:"jobBookmarksEncryption" tf:"job_bookmarks_encryption,omitempty"`
 
-	// A s3_encryption  block as described below, which contains encryption configuration for S3 data.
+	// s3_encryption block as described below, which contains encryption configuration for S3 data.
 	// +kubebuilder:validation:Optional
 	S3Encryption *S3EncryptionParameters `json:"s3Encryption" tf:"s3_encryption,omitempty"`
 }

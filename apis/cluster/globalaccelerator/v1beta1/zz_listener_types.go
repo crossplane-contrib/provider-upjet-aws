@@ -31,10 +31,10 @@ type ListenerInitParameters struct {
 	// Direct all requests from a user to the same endpoint. Valid values are NONE, SOURCE_IP. Default: NONE. If NONE, Global Accelerator uses the "five-tuple" properties of source IP address, source port, destination IP address, destination port, and protocol to select the hash value. If SOURCE_IP, Global Accelerator uses the "two-tuple" properties of source (client) IP address and destination IP address to select the hash value.
 	ClientAffinity *string `json:"clientAffinity,omitempty" tf:"client_affinity,omitempty"`
 
-	// The list of port ranges for the connections from clients to the accelerator. Fields documented below.
+	// Port ranges for the connections from clients to the accelerator. See port_range below.
 	PortRange []PortRangeInitParameters `json:"portRange,omitempty" tf:"port_range,omitempty"`
 
-	// The protocol for the connections from clients to the accelerator. Valid values are TCP, UDP.
+	// Protocol for the connections from clients to the accelerator. Valid values are TCP, UDP.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 }
 
@@ -52,10 +52,10 @@ type ListenerObservation struct {
 	// ARN of the listener.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The list of port ranges for the connections from clients to the accelerator. Fields documented below.
+	// Port ranges for the connections from clients to the accelerator. See port_range below.
 	PortRange []PortRangeObservation `json:"portRange,omitempty" tf:"port_range,omitempty"`
 
-	// The protocol for the connections from clients to the accelerator. Valid values are TCP, UDP.
+	// Protocol for the connections from clients to the accelerator. Valid values are TCP, UDP.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 }
 
@@ -79,40 +79,40 @@ type ListenerParameters struct {
 	// +kubebuilder:validation:Optional
 	ClientAffinity *string `json:"clientAffinity,omitempty" tf:"client_affinity,omitempty"`
 
-	// The list of port ranges for the connections from clients to the accelerator. Fields documented below.
+	// Port ranges for the connections from clients to the accelerator. See port_range below.
 	// +kubebuilder:validation:Optional
 	PortRange []PortRangeParameters `json:"portRange,omitempty" tf:"port_range,omitempty"`
 
-	// The protocol for the connections from clients to the accelerator. Valid values are TCP, UDP.
+	// Protocol for the connections from clients to the accelerator. Valid values are TCP, UDP.
 	// +kubebuilder:validation:Optional
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 }
 
 type PortRangeInitParameters struct {
 
-	// The first port in the range of ports, inclusive.
+	// First port in the range of ports, inclusive.
 	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
 
-	// The last port in the range of ports, inclusive.
+	// Last port in the range of ports, inclusive.
 	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
 }
 
 type PortRangeObservation struct {
 
-	// The first port in the range of ports, inclusive.
+	// First port in the range of ports, inclusive.
 	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
 
-	// The last port in the range of ports, inclusive.
+	// Last port in the range of ports, inclusive.
 	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
 }
 
 type PortRangeParameters struct {
 
-	// The first port in the range of ports, inclusive.
+	// First port in the range of ports, inclusive.
 	// +kubebuilder:validation:Optional
 	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
 
-	// The last port in the range of ports, inclusive.
+	// Last port in the range of ports, inclusive.
 	// +kubebuilder:validation:Optional
 	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
 }

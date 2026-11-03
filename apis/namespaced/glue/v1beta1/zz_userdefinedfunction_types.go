@@ -15,79 +15,79 @@ import (
 
 type ResourceUrisInitParameters struct {
 
-	// The type of the resource. can be one of JAR, FILE, and ARCHIVE.
+	// Type of the resource. can be one of JAR, FILE, and ARCHIVE.
 	ResourceType *string `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
 
-	// The URI for accessing the resource.
+	// URI for accessing the resource.
 	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
 }
 
 type ResourceUrisObservation struct {
 
-	// The type of the resource. can be one of JAR, FILE, and ARCHIVE.
+	// Type of the resource. can be one of JAR, FILE, and ARCHIVE.
 	ResourceType *string `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
 
-	// The URI for accessing the resource.
+	// URI for accessing the resource.
 	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
 }
 
 type ResourceUrisParameters struct {
 
-	// The type of the resource. can be one of JAR, FILE, and ARCHIVE.
+	// Type of the resource. can be one of JAR, FILE, and ARCHIVE.
 	// +kubebuilder:validation:Optional
 	ResourceType *string `json:"resourceType" tf:"resource_type,omitempty"`
 
-	// The URI for accessing the resource.
+	// URI for accessing the resource.
 	// +kubebuilder:validation:Optional
 	URI *string `json:"uri" tf:"uri,omitempty"`
 }
 
 type UserDefinedFunctionInitParameters struct {
 
-	// The Java class that contains the function code.
+	// Java class that contains the function code.
 	ClassName *string `json:"className,omitempty" tf:"class_name,omitempty"`
 
-	// The owner of the function.
+	// Owner of the function.
 	OwnerName *string `json:"ownerName,omitempty" tf:"owner_name,omitempty"`
 
-	// The owner type. can be one of USER, ROLE, and GROUP.
+	// Owner type. can be one of USER, ROLE, and GROUP.
 	OwnerType *string `json:"ownerType,omitempty" tf:"owner_type,omitempty"`
 
-	// The configuration block for Resource URIs. See resource uris below for more details.
+	// Configuration block for Resource URIs. See resource_uris Block below for more details.
 	ResourceUris []ResourceUrisInitParameters `json:"resourceUris,omitempty" tf:"resource_uris,omitempty"`
 }
 
 type UserDefinedFunctionObservation struct {
 
-	// The ARN of the Glue User Defined Function.
+	// ARN of the Glue User Defined Function.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// ID of the Glue Catalog to create the function in. If omitted, this defaults to the AWS Account ID.
 	CatalogID *string `json:"catalogId,omitempty" tf:"catalog_id,omitempty"`
 
-	// The Java class that contains the function code.
+	// Java class that contains the function code.
 	ClassName *string `json:"className,omitempty" tf:"class_name,omitempty"`
 
-	// The time at which the function was created.
+	// Time at which the function was created.
 	CreateTime *string `json:"createTime,omitempty" tf:"create_time,omitempty"`
 
-	// The name of the Database to create the Function.
+	// Name of the Database to create the Function.
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 
-	// The id of the Glue User Defined Function.
+	// ID of the Glue User Defined Function.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The owner of the function.
+	// Owner of the function.
 	OwnerName *string `json:"ownerName,omitempty" tf:"owner_name,omitempty"`
 
-	// The owner type. can be one of USER, ROLE, and GROUP.
+	// Owner type. can be one of USER, ROLE, and GROUP.
 	OwnerType *string `json:"ownerType,omitempty" tf:"owner_type,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The configuration block for Resource URIs. See resource uris below for more details.
+	// Configuration block for Resource URIs. See resource_uris Block below for more details.
 	ResourceUris []ResourceUrisObservation `json:"resourceUris,omitempty" tf:"resource_uris,omitempty"`
 }
 
@@ -97,11 +97,11 @@ type UserDefinedFunctionParameters struct {
 	// +kubebuilder:validation:Required
 	CatalogID *string `json:"catalogId" tf:"catalog_id,omitempty"`
 
-	// The Java class that contains the function code.
+	// Java class that contains the function code.
 	// +kubebuilder:validation:Optional
 	ClassName *string `json:"className,omitempty" tf:"class_name,omitempty"`
 
-	// The name of the Database to create the Function.
+	// Name of the Database to create the Function.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/glue/v1beta1.CatalogDatabase
 	// +kubebuilder:validation:Optional
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
@@ -114,11 +114,11 @@ type UserDefinedFunctionParameters struct {
 	// +kubebuilder:validation:Optional
 	DatabaseNameSelector *v2.NamespacedSelector `json:"databaseNameSelector,omitempty" tf:"-"`
 
-	// The owner of the function.
+	// Owner of the function.
 	// +kubebuilder:validation:Optional
 	OwnerName *string `json:"ownerName,omitempty" tf:"owner_name,omitempty"`
 
-	// The owner type. can be one of USER, ROLE, and GROUP.
+	// Owner type. can be one of USER, ROLE, and GROUP.
 	// +kubebuilder:validation:Optional
 	OwnerType *string `json:"ownerType,omitempty" tf:"owner_type,omitempty"`
 
@@ -127,7 +127,7 @@ type UserDefinedFunctionParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// The configuration block for Resource URIs. See resource uris below for more details.
+	// Configuration block for Resource URIs. See resource_uris Block below for more details.
 	// +kubebuilder:validation:Optional
 	ResourceUris []ResourceUrisParameters `json:"resourceUris,omitempty" tf:"resource_uris,omitempty"`
 }

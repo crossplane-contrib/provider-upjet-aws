@@ -60,7 +60,7 @@ spec:
               forProvider:
                 properties:
                   description:
-                    description: A description of the registry.
+                    description: Description of the registry.
                     type: string
                   region:
                     description: |-
@@ -90,7 +90,7 @@ spec:
                   autoscaler.
                 properties:
                   description:
-                    description: A description of the registry.
+                    description: Description of the registry.
                     type: string
                   tags:
                     additionalProperties:
@@ -166,7 +166,7 @@ spec:
                     description: ARN of Glue Registry.
                     type: string
                   description:
-                    description: A description of the registry.
+                    description: Description of the registry.
                     type: string
                   id:
                     description: ARN of Glue Registry.
@@ -185,9 +185,8 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
                 type: object

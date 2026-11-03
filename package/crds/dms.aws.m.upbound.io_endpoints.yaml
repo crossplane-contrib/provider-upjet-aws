@@ -824,7 +824,7 @@ spec:
                           S3. Defaults to SSE_S3. Valid values are SSE_S3 and SSE_KMS.
                         type: string
                       serverSideEncryptionKmsKeyId:
-                        description: ARN or Id of KMS Key to use when encryption_mode
+                        description: ARN or ID of KMS Key to use when encryption_mode
                           is SSE_KMS.
                         type: string
                       serviceAccessRoleArn:
@@ -931,7 +931,7 @@ spec:
                     description: Host name of the server.
                     type: string
                   serviceAccessRole:
-                    description: ARN used by the service access IAM role for dynamodb
+                    description: ARN used by the service access IAM role for DynamoDB
                       endpoints.
                     type: string
                   serviceAccessRoleRef:
@@ -1808,7 +1808,7 @@ spec:
                           S3. Defaults to SSE_S3. Valid values are SSE_S3 and SSE_KMS.
                         type: string
                       serverSideEncryptionKmsKeyId:
-                        description: ARN or Id of KMS Key to use when encryption_mode
+                        description: ARN or ID of KMS Key to use when encryption_mode
                           is SSE_KMS.
                         type: string
                       serviceAccessRoleArn:
@@ -1910,7 +1910,7 @@ spec:
                     description: Host name of the server.
                     type: string
                   serviceAccessRole:
-                    description: ARN used by the service access IAM role for dynamodb
+                    description: ARN used by the service access IAM role for DynamoDB
                       endpoints.
                     type: string
                   serviceAccessRoleRef:
@@ -2688,7 +2688,7 @@ spec:
                           S3. Defaults to SSE_S3. Valid values are SSE_S3 and SSE_KMS.
                         type: string
                       serverSideEncryptionKmsKeyId:
-                        description: ARN or Id of KMS Key to use when encryption_mode
+                        description: ARN or ID of KMS Key to use when encryption_mode
                           is SSE_KMS.
                         type: string
                       serviceAccessRoleArn:
@@ -2715,7 +2715,7 @@ spec:
                     description: Host name of the server.
                     type: string
                   serviceAccessRole:
-                    description: ARN used by the service access IAM role for dynamodb
+                    description: ARN used by the service access IAM role for DynamoDB
                       endpoints.
                     type: string
                   sslMode:

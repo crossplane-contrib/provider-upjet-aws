@@ -61,8 +61,7 @@ spec:
               forProvider:
                 properties:
                   dhcpOptionsId:
-                    description: The ID of the DHCP Options Set to associate to the
-                      VPC.
+                    description: ID of the DHCP Options Set to associate to the VPC.
                     type: string
                   dhcpOptionsIdRef:
                     description: Reference to a VPCDHCPOptions in ec2 to populate
@@ -152,7 +151,7 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   vpcId:
-                    description: The ID of the VPC to which we would like to associate
+                    description: ID of the VPC to which we would like to associate
                       a DHCP Options Set.
                     type: string
                   vpcIdRef:
@@ -252,8 +251,7 @@ spec:
                   autoscaler.
                 properties:
                   dhcpOptionsId:
-                    description: The ID of the DHCP Options Set to associate to the
-                      VPC.
+                    description: ID of the DHCP Options Set to associate to the VPC.
                     type: string
                   dhcpOptionsIdRef:
                     description: Reference to a VPCDHCPOptions in ec2 to populate
@@ -338,7 +336,7 @@ spec:
                         type: object
                     type: object
                   vpcId:
-                    description: The ID of the VPC to which we would like to associate
+                    description: ID of the VPC to which we would like to associate
                       a DHCP Options Set.
                     type: string
                   vpcIdRef:
@@ -487,11 +485,10 @@ spec:
               atProvider:
                 properties:
                   dhcpOptionsId:
-                    description: The ID of the DHCP Options Set to associate to the
-                      VPC.
+                    description: ID of the DHCP Options Set to associate to the VPC.
                     type: string
                   id:
-                    description: The ID of the DHCP Options Set Association.
+                    description: ID of the DHCP Options Set Association.
                     type: string
                   region:
                     description: |-
@@ -499,7 +496,7 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   vpcId:
-                    description: The ID of the VPC to which we would like to associate
+                    description: ID of the VPC to which we would like to associate
                       a DHCP Options Set.
                     type: string
                 type: object

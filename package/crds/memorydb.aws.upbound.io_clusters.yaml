@@ -74,8 +74,8 @@ spec:
               forProvider:
                 properties:
                   aclName:
-                    description: The name of the Access Control List to associate
-                      with the cluster.
+                    description: Name of the Access Control List to associate with
+                      the cluster.
                     type: string
                   aclNameRef:
                     description: Reference to a ACL in memorydb to populate aclName.
@@ -164,8 +164,8 @@ spec:
                     description: Description for the cluster.
                     type: string
                   engine:
-                    description: The engine that will run on your nodes. Supported
-                      values are redis and valkey.
+                    description: Engine that will run on your nodes. Supported values
+                      are redis and valkey.
                     type: string
                   engineVersion:
                     description: Version number of the engine to be used for the cluster.
@@ -260,35 +260,32 @@ spec:
                         type: object
                     type: object
                   maintenanceWindow:
-                    description: 'Specifies the weekly time range during which maintenance
-                      on the cluster is performed. Specify as a range in the format
-                      ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance
-                      window is a 60 minute period. Example: sun:23:00-mon:01:30.'
+                    description: 'Weekly time range during which maintenance on the
+                      cluster is performed. Specify as a range in the format ddd:hh24:mi-ddd:hh24:mi
+                      (24H Clock UTC). The minimum maintenance window is a 60 minute
+                      period. Example: sun:23:00-mon:01:30.'
                     type: string
                   multiRegionClusterName:
-                    description: The multi region cluster identifier specified on
-                      aws_memorydb_multi_region_cluster.
+                    description: Multi region cluster identifier specified on aws_memorydb_multi_region_cluster.
                     type: string
                   networkType:
                     description: IP address type for the cluster. Valid values are
                       ipv4, ipv6 and dual_stack. Defaults to ipv4.
                     type: string
                   nodeType:
-                    description: The compute and memory capacity of the nodes in the
-                      cluster. See AWS documentation on supported node types as well
-                      as vertical scaling.
+                    description: Compute and memory capacity of the nodes in the cluster.
+                      See AWS documentation on supported node types as well as vertical
+                      scaling.
                     type: string
                   numReplicasPerShard:
-                    description: The number of replicas to apply to each shard, up
-                      to a maximum of 5. Defaults to 1 (i.e. 2 nodes per shard).
+                    description: Number of replicas to apply to each shard, up to
+                      a maximum of 5. Defaults to 1 (i.e. 2 nodes per shard).
                     type: number
                   numShards:
-                    description: The number of shards in the cluster. Defaults to
-                      1.
+                    description: Number of shards in the cluster. Defaults to 1.
                     type: number
                   parameterGroupName:
-                    description: The name of the parameter group associated with the
-                      cluster.
+                    description: Name of the parameter group associated with the cluster.
                     type: string
                   parameterGroupNameRef:
                     description: Reference to a ParameterGroup in memorydb to populate
@@ -367,8 +364,8 @@ spec:
                         type: object
                     type: object
                   port:
-                    description: The port number on which each of the nodes accepts
-                      connections. Defaults to 6379.
+                    description: Port number on which each of the nodes accepts connections.
+                      Defaults to 6379.
                     type: number
                   region:
                     description: |-
@@ -469,16 +466,16 @@ spec:
                       type: string
                     type: array
                   snapshotName:
-                    description: The name of a snapshot from which to restore data
-                      into the new cluster.
+                    description: Name of a snapshot from which to restore data into
+                      the new cluster.
                     type: string
                   snapshotRetentionLimit:
-                    description: The number of days for which MemoryDB retains automatic
+                    description: Number of days for which MemoryDB retains automatic
                       snapshots before deleting them. When set to 0, automatic backups
                       are disabled. Defaults to 0.
                     type: number
                   snapshotWindow:
-                    description: 'The daily time range (in UTC) during which MemoryDB
+                    description: 'Daily time range (in UTC) during which MemoryDB
                       begins taking a daily snapshot of your shard. Example: 05:00-09:00.'
                     type: string
                   snsTopicArn:
@@ -486,7 +483,7 @@ spec:
                       are sent.
                     type: string
                   subnetGroupName:
-                    description: The name of the subnet group to be used for the cluster.
+                    description: Name of the subnet group to be used for the cluster.
                       Defaults to a subnet group consisting of default VPC subnets.
                     type: string
                   subnetGroupNameRef:
@@ -572,7 +569,7 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   tlsEnabled:
-                    description: A flag to enable in-transit encryption on the cluster.
+                    description: Whether to enable in-transit encryption on the cluster.
                       When set to false, the acl_name must be open-access. Defaults
                       to true.
                     type: boolean
@@ -593,8 +590,8 @@ spec:
                   autoscaler.
                 properties:
                   aclName:
-                    description: The name of the Access Control List to associate
-                      with the cluster.
+                    description: Name of the Access Control List to associate with
+                      the cluster.
                     type: string
                   aclNameRef:
                     description: Reference to a ACL in memorydb to populate aclName.
@@ -683,8 +680,8 @@ spec:
                     description: Description for the cluster.
                     type: string
                   engine:
-                    description: The engine that will run on your nodes. Supported
-                      values are redis and valkey.
+                    description: Engine that will run on your nodes. Supported values
+                      are redis and valkey.
                     type: string
                   engineVersion:
                     description: Version number of the engine to be used for the cluster.
@@ -779,35 +776,32 @@ spec:
                         type: object
                     type: object
                   maintenanceWindow:
-                    description: 'Specifies the weekly time range during which maintenance
-                      on the cluster is performed. Specify as a range in the format
-                      ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance
-                      window is a 60 minute period. Example: sun:23:00-mon:01:30.'
+                    description: 'Weekly time range during which maintenance on the
+                      cluster is performed. Specify as a range in the format ddd:hh24:mi-ddd:hh24:mi
+                      (24H Clock UTC). The minimum maintenance window is a 60 minute
+                      period. Example: sun:23:00-mon:01:30.'
                     type: string
                   multiRegionClusterName:
-                    description: The multi region cluster identifier specified on
-                      aws_memorydb_multi_region_cluster.
+                    description: Multi region cluster identifier specified on aws_memorydb_multi_region_cluster.
                     type: string
                   networkType:
                     description: IP address type for the cluster. Valid values are
                       ipv4, ipv6 and dual_stack. Defaults to ipv4.
                     type: string
                   nodeType:
-                    description: The compute and memory capacity of the nodes in the
-                      cluster. See AWS documentation on supported node types as well
-                      as vertical scaling.
+                    description: Compute and memory capacity of the nodes in the cluster.
+                      See AWS documentation on supported node types as well as vertical
+                      scaling.
                     type: string
                   numReplicasPerShard:
-                    description: The number of replicas to apply to each shard, up
-                      to a maximum of 5. Defaults to 1 (i.e. 2 nodes per shard).
+                    description: Number of replicas to apply to each shard, up to
+                      a maximum of 5. Defaults to 1 (i.e. 2 nodes per shard).
                     type: number
                   numShards:
-                    description: The number of shards in the cluster. Defaults to
-                      1.
+                    description: Number of shards in the cluster. Defaults to 1.
                     type: number
                   parameterGroupName:
-                    description: The name of the parameter group associated with the
-                      cluster.
+                    description: Name of the parameter group associated with the cluster.
                     type: string
                   parameterGroupNameRef:
                     description: Reference to a ParameterGroup in memorydb to populate
@@ -886,8 +880,8 @@ spec:
                         type: object
                     type: object
                   port:
-                    description: The port number on which each of the nodes accepts
-                      connections. Defaults to 6379.
+                    description: Port number on which each of the nodes accepts connections.
+                      Defaults to 6379.
                     type: number
                   securityGroupIdRefs:
                     description: References to SecurityGroup in ec2 to populate securityGroupIds.
@@ -983,16 +977,16 @@ spec:
                       type: string
                     type: array
                   snapshotName:
-                    description: The name of a snapshot from which to restore data
-                      into the new cluster.
+                    description: Name of a snapshot from which to restore data into
+                      the new cluster.
                     type: string
                   snapshotRetentionLimit:
-                    description: The number of days for which MemoryDB retains automatic
+                    description: Number of days for which MemoryDB retains automatic
                       snapshots before deleting them. When set to 0, automatic backups
                       are disabled. Defaults to 0.
                     type: number
                   snapshotWindow:
-                    description: 'The daily time range (in UTC) during which MemoryDB
+                    description: 'Daily time range (in UTC) during which MemoryDB
                       begins taking a daily snapshot of your shard. Example: 05:00-09:00.'
                     type: string
                   snsTopicArn:
@@ -1000,7 +994,7 @@ spec:
                       are sent.
                     type: string
                   subnetGroupName:
-                    description: The name of the subnet group to be used for the cluster.
+                    description: Name of the subnet group to be used for the cluster.
                       Defaults to a subnet group consisting of default VPC subnets.
                     type: string
                   subnetGroupNameRef:
@@ -1086,7 +1080,7 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   tlsEnabled:
-                    description: A flag to enable in-transit encryption on the cluster.
+                    description: Whether to enable in-transit encryption on the cluster.
                       When set to false, the acl_name must be open-access. Defaults
                       to true.
                     type: boolean
@@ -1188,11 +1182,11 @@ spec:
               atProvider:
                 properties:
                   aclName:
-                    description: The name of the Access Control List to associate
-                      with the cluster.
+                    description: Name of the Access Control List to associate with
+                      the cluster.
                     type: string
                   arn:
-                    description: The ARN of the cluster.
+                    description: ARN of the cluster.
                     type: string
                   autoMinorVersionUpgrade:
                     description: When set to true, the cluster will automatically
@@ -1206,8 +1200,8 @@ spec:
                           description: DNS hostname of the cluster configuration endpoint.
                           type: string
                         port:
-                          description: The port number on which each of the nodes
-                            accepts connections. Defaults to 6379.
+                          description: Port number on which each of the nodes accepts
+                            connections. Defaults to 6379.
                           type: number
                       type: object
                     type: array
@@ -1219,8 +1213,8 @@ spec:
                     description: Description for the cluster.
                     type: string
                   engine:
-                    description: The engine that will run on your nodes. Supported
-                      values are redis and valkey.
+                    description: Engine that will run on your nodes. Supported values
+                      are redis and valkey.
                     type: string
                   enginePatchVersion:
                     description: Patch version number of the engine used by the cluster.
@@ -1247,39 +1241,36 @@ spec:
                       rest.
                     type: string
                   maintenanceWindow:
-                    description: 'Specifies the weekly time range during which maintenance
-                      on the cluster is performed. Specify as a range in the format
-                      ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance
-                      window is a 60 minute period. Example: sun:23:00-mon:01:30.'
+                    description: 'Weekly time range during which maintenance on the
+                      cluster is performed. Specify as a range in the format ddd:hh24:mi-ddd:hh24:mi
+                      (24H Clock UTC). The minimum maintenance window is a 60 minute
+                      period. Example: sun:23:00-mon:01:30.'
                     type: string
                   multiRegionClusterName:
-                    description: The multi region cluster identifier specified on
-                      aws_memorydb_multi_region_cluster.
+                    description: Multi region cluster identifier specified on aws_memorydb_multi_region_cluster.
                     type: string
                   networkType:
                     description: IP address type for the cluster. Valid values are
                       ipv4, ipv6 and dual_stack. Defaults to ipv4.
                     type: string
                   nodeType:
-                    description: The compute and memory capacity of the nodes in the
-                      cluster. See AWS documentation on supported node types as well
-                      as vertical scaling.
+                    description: Compute and memory capacity of the nodes in the cluster.
+                      See AWS documentation on supported node types as well as vertical
+                      scaling.
                     type: string
                   numReplicasPerShard:
-                    description: The number of replicas to apply to each shard, up
-                      to a maximum of 5. Defaults to 1 (i.e. 2 nodes per shard).
+                    description: Number of replicas to apply to each shard, up to
+                      a maximum of 5. Defaults to 1 (i.e. 2 nodes per shard).
                     type: number
                   numShards:
-                    description: The number of shards in the cluster. Defaults to
-                      1.
+                    description: Number of shards in the cluster. Defaults to 1.
                     type: number
                   parameterGroupName:
-                    description: The name of the parameter group associated with the
-                      cluster.
+                    description: Name of the parameter group associated with the cluster.
                     type: string
                   port:
-                    description: The port number on which each of the nodes accepts
-                      connections. Defaults to 6379.
+                    description: Port number on which each of the nodes accepts connections.
+                      Defaults to 6379.
                     type: number
                   region:
                     description: |-
@@ -1305,12 +1296,11 @@ spec:
                           items:
                             properties:
                               availabilityZone:
-                                description: The Availability Zone in which the node
-                                  resides.
+                                description: Availability Zone in which the node resides.
                                 type: string
                               createTime:
-                                description: 'The date and time when the node was
-                                  created. Example: 2022-01-01T21:00:00Z.'
+                                description: 'Date and time when the node was created.
+                                  Example: 2022-01-01T21:00:00Z.'
                                 type: string
                               endpoint:
                                 items:
@@ -1320,9 +1310,8 @@ spec:
                                         endpoint.
                                       type: string
                                     port:
-                                      description: The port number on which each of
-                                        the nodes accepts connections. Defaults to
-                                        6379.
+                                      description: Port number on which each of the
+                                        nodes accepts connections. Defaults to 6379.
                                       type: number
                                   type: object
                                 type: array
@@ -1348,16 +1337,16 @@ spec:
                       type: string
                     type: array
                   snapshotName:
-                    description: The name of a snapshot from which to restore data
-                      into the new cluster.
+                    description: Name of a snapshot from which to restore data into
+                      the new cluster.
                     type: string
                   snapshotRetentionLimit:
-                    description: The number of days for which MemoryDB retains automatic
+                    description: Number of days for which MemoryDB retains automatic
                       snapshots before deleting them. When set to 0, automatic backups
                       are disabled. Defaults to 0.
                     type: number
                   snapshotWindow:
-                    description: 'The daily time range (in UTC) during which MemoryDB
+                    description: 'Daily time range (in UTC) during which MemoryDB
                       begins taking a daily snapshot of your shard. Example: 05:00-09:00.'
                     type: string
                   snsTopicArn:
@@ -1365,7 +1354,7 @@ spec:
                       are sent.
                     type: string
                   subnetGroupName:
-                    description: The name of the subnet group to be used for the cluster.
+                    description: Name of the subnet group to be used for the cluster.
                       Defaults to a subnet group consisting of default VPC subnets.
                     type: string
                   tags:
@@ -1377,13 +1366,12 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
                   tlsEnabled:
-                    description: A flag to enable in-transit encryption on the cluster.
+                    description: Whether to enable in-transit encryption on the cluster.
                       When set to false, the acl_name must be open-access. Defaults
                       to true.
                     type: boolean

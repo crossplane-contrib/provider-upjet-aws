@@ -60,27 +60,26 @@ spec:
               forProvider:
                 properties:
                   cidr:
-                    description: The CIDR you want to assign to the pool. Conflicts
-                      with netmask_length.
+                    description: CIDR you want to assign to the pool. Conflicts with
+                      netmask_length.
                     type: string
                   cidrAuthorizationContext:
-                    description: A signed document that proves that you are authorized
+                    description: Signed document that proves that you are authorized
                       to bring the specified IP address range to Amazon using BYOIP.
                       This is not stored in the state file. See cidr_authorization_context
                       for more information.
                     properties:
                       message:
-                        description: The plain-text authorization message for the
-                          prefix and account.
+                        description: Plain-text authorization message for the prefix
+                          and account.
                         type: string
                       signature:
-                        description: The signed authorization message for the prefix
-                          and account.
+                        description: Signed authorization message for the prefix and
+                          account.
                         type: string
                     type: object
                   ipamPoolId:
-                    description: The ID of the pool to which you want to assign a
-                      CIDR.
+                    description: ID of the pool to which you want to assign a CIDR.
                     type: string
                   ipamPoolIdRef:
                     description: Reference to a VPCIpamPool in ec2 to populate ipamPoolId.
@@ -163,8 +162,8 @@ spec:
                         type: object
                     type: object
                   netmaskLength:
-                    description: If provided, the cidr provisioned into the specified
-                      pool will be the next available cidr given this declared netmask
+                    description: If provided, the CIDR provisioned into the specified
+                      pool will be the next available CIDR given this declared netmask
                       length. Conflicts with cidr.
                     type: number
                   region:
@@ -189,27 +188,26 @@ spec:
                   autoscaler.
                 properties:
                   cidr:
-                    description: The CIDR you want to assign to the pool. Conflicts
-                      with netmask_length.
+                    description: CIDR you want to assign to the pool. Conflicts with
+                      netmask_length.
                     type: string
                   cidrAuthorizationContext:
-                    description: A signed document that proves that you are authorized
+                    description: Signed document that proves that you are authorized
                       to bring the specified IP address range to Amazon using BYOIP.
                       This is not stored in the state file. See cidr_authorization_context
                       for more information.
                     properties:
                       message:
-                        description: The plain-text authorization message for the
-                          prefix and account.
+                        description: Plain-text authorization message for the prefix
+                          and account.
                         type: string
                       signature:
-                        description: The signed authorization message for the prefix
-                          and account.
+                        description: Signed authorization message for the prefix and
+                          account.
                         type: string
                     type: object
                   ipamPoolId:
-                    description: The ID of the pool to which you want to assign a
-                      CIDR.
+                    description: ID of the pool to which you want to assign a CIDR.
                     type: string
                   ipamPoolIdRef:
                     description: Reference to a VPCIpamPool in ec2 to populate ipamPoolId.
@@ -292,8 +290,8 @@ spec:
                         type: object
                     type: object
                   netmaskLength:
-                    description: If provided, the cidr provisioned into the specified
-                      pool will be the next available cidr given this declared netmask
+                    description: If provided, the CIDR provisioned into the specified
+                      pool will be the next available CIDR given this declared netmask
                       length. Conflicts with cidr.
                     type: number
                 type: object
@@ -361,38 +359,37 @@ spec:
               atProvider:
                 properties:
                   cidr:
-                    description: The CIDR you want to assign to the pool. Conflicts
-                      with netmask_length.
+                    description: CIDR you want to assign to the pool. Conflicts with
+                      netmask_length.
                     type: string
                   cidrAuthorizationContext:
-                    description: A signed document that proves that you are authorized
+                    description: Signed document that proves that you are authorized
                       to bring the specified IP address range to Amazon using BYOIP.
                       This is not stored in the state file. See cidr_authorization_context
                       for more information.
                     properties:
                       message:
-                        description: The plain-text authorization message for the
-                          prefix and account.
+                        description: Plain-text authorization message for the prefix
+                          and account.
                         type: string
                       signature:
-                        description: The signed authorization message for the prefix
-                          and account.
+                        description: Signed authorization message for the prefix and
+                          account.
                         type: string
                     type: object
                   id:
-                    description: The ID of the IPAM Pool Cidr concatenated with the
-                      IPAM Pool ID.
+                    description: ID of the IPAM Pool CIDR concatenated with the IPAM
+                      Pool ID.
                     type: string
                   ipamPoolCidrId:
-                    description: The unique ID generated by AWS for the pool cidr.
+                    description: Unique ID generated by AWS for the pool CIDR.
                     type: string
                   ipamPoolId:
-                    description: The ID of the pool to which you want to assign a
-                      CIDR.
+                    description: ID of the pool to which you want to assign a CIDR.
                     type: string
                   netmaskLength:
-                    description: If provided, the cidr provisioned into the specified
-                      pool will be the next available cidr given this declared netmask
+                    description: If provided, the CIDR provisioned into the specified
+                      pool will be the next available CIDR given this declared netmask
                       length. Conflicts with cidr.
                     type: number
                   region:

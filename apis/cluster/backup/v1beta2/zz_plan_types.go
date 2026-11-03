@@ -15,32 +15,32 @@ import (
 
 type AdvancedBackupSettingInitParameters struct {
 
-	// Specifies the backup option for a selected resource. This option is only available for Windows VSS backup jobs. Set to { WindowsVSS = "enabled" } to enable Windows VSS backup option and create a VSS Windows backup.
+	// Backup option for a selected resource. This option is only available for Windows VSS backup jobs. Set to { WindowsVSS = "enabled" } to enable Windows VSS backup option and create a VSS Windows backup.
 	// +mapType=granular
 	BackupOptions map[string]*string `json:"backupOptions,omitempty" tf:"backup_options,omitempty"`
 
-	// The type of AWS resource to be backed up. For VSS Windows backups, the only supported resource type is Amazon EC2. Valid values: EC2.
+	// Type of AWS resource to be backed up. For VSS Windows backups, the only supported resource type is Amazon EC2. Valid values: EC2.
 	ResourceType *string `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
 }
 
 type AdvancedBackupSettingObservation struct {
 
-	// Specifies the backup option for a selected resource. This option is only available for Windows VSS backup jobs. Set to { WindowsVSS = "enabled" } to enable Windows VSS backup option and create a VSS Windows backup.
+	// Backup option for a selected resource. This option is only available for Windows VSS backup jobs. Set to { WindowsVSS = "enabled" } to enable Windows VSS backup option and create a VSS Windows backup.
 	// +mapType=granular
 	BackupOptions map[string]*string `json:"backupOptions,omitempty" tf:"backup_options,omitempty"`
 
-	// The type of AWS resource to be backed up. For VSS Windows backups, the only supported resource type is Amazon EC2. Valid values: EC2.
+	// Type of AWS resource to be backed up. For VSS Windows backups, the only supported resource type is Amazon EC2. Valid values: EC2.
 	ResourceType *string `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
 }
 
 type AdvancedBackupSettingParameters struct {
 
-	// Specifies the backup option for a selected resource. This option is only available for Windows VSS backup jobs. Set to { WindowsVSS = "enabled" } to enable Windows VSS backup option and create a VSS Windows backup.
+	// Backup option for a selected resource. This option is only available for Windows VSS backup jobs. Set to { WindowsVSS = "enabled" } to enable Windows VSS backup option and create a VSS Windows backup.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	BackupOptions map[string]*string `json:"backupOptions" tf:"backup_options,omitempty"`
 
-	// The type of AWS resource to be backed up. For VSS Windows backups, the only supported resource type is Amazon EC2. Valid values: EC2.
+	// Type of AWS resource to be backed up. For VSS Windows backups, the only supported resource type is Amazon EC2. Valid values: EC2.
 	// +kubebuilder:validation:Optional
 	ResourceType *string `json:"resourceType" tf:"resource_type,omitempty"`
 }
@@ -50,7 +50,7 @@ type CopyActionInitParameters struct {
 	// ARN that uniquely identifies the destination backup vault for the copied backup.
 	DestinationVaultArn *string `json:"destinationVaultArn,omitempty" tf:"destination_vault_arn,omitempty"`
 
-	// The lifecycle defines when a protected resource is transitioned to cold storage and when it expires.  Fields documented below.
+	// Lifecycle that defines when a protected resource is transitioned to cold storage and when it expires. Detailed below.
 	Lifecycle *LifecycleInitParameters `json:"lifecycle,omitempty" tf:"lifecycle,omitempty"`
 }
 
@@ -59,7 +59,7 @@ type CopyActionObservation struct {
 	// ARN that uniquely identifies the destination backup vault for the copied backup.
 	DestinationVaultArn *string `json:"destinationVaultArn,omitempty" tf:"destination_vault_arn,omitempty"`
 
-	// The lifecycle defines when a protected resource is transitioned to cold storage and when it expires.  Fields documented below.
+	// Lifecycle that defines when a protected resource is transitioned to cold storage and when it expires. Detailed below.
 	Lifecycle *LifecycleObservation `json:"lifecycle,omitempty" tf:"lifecycle,omitempty"`
 }
 
@@ -69,59 +69,59 @@ type CopyActionParameters struct {
 	// +kubebuilder:validation:Optional
 	DestinationVaultArn *string `json:"destinationVaultArn" tf:"destination_vault_arn,omitempty"`
 
-	// The lifecycle defines when a protected resource is transitioned to cold storage and when it expires.  Fields documented below.
+	// Lifecycle that defines when a protected resource is transitioned to cold storage and when it expires. Detailed below.
 	// +kubebuilder:validation:Optional
 	Lifecycle *LifecycleParameters `json:"lifecycle,omitempty" tf:"lifecycle,omitempty"`
 }
 
 type LifecycleInitParameters struct {
 
-	// Specifies the number of days after creation that a recovery point is moved to cold storage.
+	// Number of days after creation that a recovery point is moved to cold storage.
 	ColdStorageAfter *float64 `json:"coldStorageAfter,omitempty" tf:"cold_storage_after,omitempty"`
 
-	// Specifies the number of days after creation that a recovery point is deleted. Must be 90 days greater than cold_storage_after.
+	// Number of days after creation that a recovery point is deleted. Must be 90 days greater than cold_storage_after.
 	DeleteAfter *float64 `json:"deleteAfter,omitempty" tf:"delete_after,omitempty"`
 
-	// This setting will instruct your backup plan to transition supported resources to archive (cold) storage tier in accordance with your lifecycle settings.
+	// Whether to transition supported resources to archive (cold) storage tier in accordance with your lifecycle settings.
 	OptInToArchiveForSupportedResources *bool `json:"optInToArchiveForSupportedResources,omitempty" tf:"opt_in_to_archive_for_supported_resources,omitempty"`
 }
 
 type LifecycleObservation struct {
 
-	// Specifies the number of days after creation that a recovery point is moved to cold storage.
+	// Number of days after creation that a recovery point is moved to cold storage.
 	ColdStorageAfter *float64 `json:"coldStorageAfter,omitempty" tf:"cold_storage_after,omitempty"`
 
-	// Specifies the number of days after creation that a recovery point is deleted. Must be 90 days greater than cold_storage_after.
+	// Number of days after creation that a recovery point is deleted. Must be 90 days greater than cold_storage_after.
 	DeleteAfter *float64 `json:"deleteAfter,omitempty" tf:"delete_after,omitempty"`
 
-	// This setting will instruct your backup plan to transition supported resources to archive (cold) storage tier in accordance with your lifecycle settings.
+	// Whether to transition supported resources to archive (cold) storage tier in accordance with your lifecycle settings.
 	OptInToArchiveForSupportedResources *bool `json:"optInToArchiveForSupportedResources,omitempty" tf:"opt_in_to_archive_for_supported_resources,omitempty"`
 }
 
 type LifecycleParameters struct {
 
-	// Specifies the number of days after creation that a recovery point is moved to cold storage.
+	// Number of days after creation that a recovery point is moved to cold storage.
 	// +kubebuilder:validation:Optional
 	ColdStorageAfter *float64 `json:"coldStorageAfter,omitempty" tf:"cold_storage_after,omitempty"`
 
-	// Specifies the number of days after creation that a recovery point is deleted. Must be 90 days greater than cold_storage_after.
+	// Number of days after creation that a recovery point is deleted. Must be 90 days greater than cold_storage_after.
 	// +kubebuilder:validation:Optional
 	DeleteAfter *float64 `json:"deleteAfter,omitempty" tf:"delete_after,omitempty"`
 
-	// This setting will instruct your backup plan to transition supported resources to archive (cold) storage tier in accordance with your lifecycle settings.
+	// Whether to transition supported resources to archive (cold) storage tier in accordance with your lifecycle settings.
 	// +kubebuilder:validation:Optional
 	OptInToArchiveForSupportedResources *bool `json:"optInToArchiveForSupportedResources,omitempty" tf:"opt_in_to_archive_for_supported_resources,omitempty"`
 }
 
 type PlanInitParameters struct {
 
-	// An object that specifies backup options for each resource type.
+	// Object that specifies backup options for each resource type. Detailed below.
 	AdvancedBackupSetting []AdvancedBackupSettingInitParameters `json:"advancedBackupSetting,omitempty" tf:"advanced_backup_setting,omitempty"`
 
-	// The display name of a backup plan.
+	// Display name of a backup plan.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// A rule object that specifies a scheduled task that is used to back up a selection of resources.
+	// Rule that specifies a scheduled task used to back up a selection of resources. Detailed below.
 	Rule []RuleInitParameters `json:"rule,omitempty" tf:"rule,omitempty"`
 
 	// Block for scanning configuration for the backup rule and includes the malware scanner, and scan mode of either full or incremental. Detailed below.
@@ -134,23 +134,23 @@ type PlanInitParameters struct {
 
 type PlanObservation struct {
 
-	// An object that specifies backup options for each resource type.
+	// Object that specifies backup options for each resource type. Detailed below.
 	AdvancedBackupSetting []AdvancedBackupSettingObservation `json:"advancedBackupSetting,omitempty" tf:"advanced_backup_setting,omitempty"`
 
-	// The ARN of the backup plan.
+	// ARN of the backup plan.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The id of the backup plan.
+	// ID of the backup plan.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The display name of a backup plan.
+	// Display name of a backup plan.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// A rule object that specifies a scheduled task that is used to back up a selection of resources.
+	// Rule that specifies a scheduled task used to back up a selection of resources. Detailed below.
 	Rule []RuleObservation `json:"rule,omitempty" tf:"rule,omitempty"`
 
 	// Block for scanning configuration for the backup rule and includes the malware scanner, and scan mode of either full or incremental. Detailed below.
@@ -160,7 +160,7 @@ type PlanObservation struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
@@ -170,11 +170,11 @@ type PlanObservation struct {
 
 type PlanParameters struct {
 
-	// An object that specifies backup options for each resource type.
+	// Object that specifies backup options for each resource type. Detailed below.
 	// +kubebuilder:validation:Optional
 	AdvancedBackupSetting []AdvancedBackupSettingParameters `json:"advancedBackupSetting,omitempty" tf:"advanced_backup_setting,omitempty"`
 
-	// The display name of a backup plan.
+	// Display name of a backup plan.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -183,7 +183,7 @@ type PlanParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// A rule object that specifies a scheduled task that is used to back up a selection of resources.
+	// Rule that specifies a scheduled task used to back up a selection of resources. Detailed below.
 	// +kubebuilder:validation:Optional
 	Rule []RuleParameters `json:"rule,omitempty" tf:"rule,omitempty"`
 
@@ -199,7 +199,7 @@ type PlanParameters struct {
 
 type RuleInitParameters struct {
 
-	// The amount of time in minutes AWS Backup attempts a backup before canceling the job and returning an error.
+	// Amount of time in minutes AWS Backup attempts a backup before canceling the job and returning an error.
 	CompletionWindow *float64 `json:"completionWindow,omitempty" tf:"completion_window,omitempty"`
 
 	// Configuration block(s) with copy operation settings. Detailed below.
@@ -208,32 +208,32 @@ type RuleInitParameters struct {
 	// Enable continuous backups for supported resources.
 	EnableContinuousBackup *bool `json:"enableContinuousBackup,omitempty" tf:"enable_continuous_backup,omitempty"`
 
-	// The lifecycle defines when a protected resource is transitioned to cold storage and when it expires.  Fields documented below.
+	// Lifecycle that defines when a protected resource is transitioned to cold storage and when it expires. Detailed below.
 	Lifecycle *RuleLifecycleInitParameters `json:"lifecycle,omitempty" tf:"lifecycle,omitempty"`
 
 	// Metadata that you can assign to help organize the resources that you create.
 	// +mapType=granular
 	RecoveryPointTags map[string]*string `json:"recoveryPointTags,omitempty" tf:"recovery_point_tags,omitempty"`
 
-	// An display name for a backup rule.
+	// Display name for a backup rule.
 	RuleName *string `json:"ruleName,omitempty" tf:"rule_name,omitempty"`
 
-	// Block for scanning configuration for the backup rule and includes the malware scanner, and scan mode of either full or incremental.
+	// Block for scanning configuration for the backup rule and includes the malware scanner, and scan mode of either full or incremental. Detailed below.
 	ScanAction []ScanActionInitParameters `json:"scanAction,omitempty" tf:"scan_action,omitempty"`
 
-	// A CRON expression specifying when AWS Backup initiates a backup job.
+	// CRON expression specifying when AWS Backup initiates a backup job.
 	Schedule *string `json:"schedule,omitempty" tf:"schedule,omitempty"`
 
-	// The timezone in which the schedule expression is set. Default value: "Etc/UTC".
+	// Timezone in which the schedule expression is set. Default value: "Etc/UTC".
 	ScheduleExpressionTimezone *string `json:"scheduleExpressionTimezone,omitempty" tf:"schedule_expression_timezone,omitempty"`
 
-	// The amount of time in minutes before beginning a backup.
+	// Amount of time in minutes before beginning a backup.
 	StartWindow *float64 `json:"startWindow,omitempty" tf:"start_window,omitempty"`
 
-	// The ARN of a logically air-gapped vault. ARN must be in the same account and region. If provided, supported fully managed resources back up directly to logically air-gapped vault, while other supported resources create a temporary (billable) snapshot in backup vault, then copy it to logically air-gapped vault. Unsupported resources only back up to the specified backup vault.
+	// ARN of a logically air-gapped vault. ARN must be in the same account and region. If provided, supported fully managed resources back up directly to logically air-gapped vault, while other supported resources create a temporary (billable) snapshot in backup vault, then copy it to logically air-gapped vault. Unsupported resources only back up to the specified backup vault.
 	TargetLogicallyAirGappedBackupVaultArn *string `json:"targetLogicallyAirGappedBackupVaultArn,omitempty" tf:"target_logically_air_gapped_backup_vault_arn,omitempty"`
 
-	// The name of a logical container where backups are stored.
+	// Name of a logical container where backups are stored.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/backup/v1beta1.Vault
 	TargetVaultName *string `json:"targetVaultName,omitempty" tf:"target_vault_name,omitempty"`
 
@@ -248,46 +248,46 @@ type RuleInitParameters struct {
 
 type RuleLifecycleInitParameters struct {
 
-	// Specifies the number of days after creation that a recovery point is moved to cold storage.
+	// Number of days after creation that a recovery point is moved to cold storage.
 	ColdStorageAfter *float64 `json:"coldStorageAfter,omitempty" tf:"cold_storage_after,omitempty"`
 
-	// Specifies the number of days after creation that a recovery point is deleted. Must be 90 days greater than cold_storage_after.
+	// Number of days after creation that a recovery point is deleted. Must be 90 days greater than cold_storage_after.
 	DeleteAfter *float64 `json:"deleteAfter,omitempty" tf:"delete_after,omitempty"`
 
-	// This setting will instruct your backup plan to transition supported resources to archive (cold) storage tier in accordance with your lifecycle settings.
+	// Whether to transition supported resources to archive (cold) storage tier in accordance with your lifecycle settings.
 	OptInToArchiveForSupportedResources *bool `json:"optInToArchiveForSupportedResources,omitempty" tf:"opt_in_to_archive_for_supported_resources,omitempty"`
 }
 
 type RuleLifecycleObservation struct {
 
-	// Specifies the number of days after creation that a recovery point is moved to cold storage.
+	// Number of days after creation that a recovery point is moved to cold storage.
 	ColdStorageAfter *float64 `json:"coldStorageAfter,omitempty" tf:"cold_storage_after,omitempty"`
 
-	// Specifies the number of days after creation that a recovery point is deleted. Must be 90 days greater than cold_storage_after.
+	// Number of days after creation that a recovery point is deleted. Must be 90 days greater than cold_storage_after.
 	DeleteAfter *float64 `json:"deleteAfter,omitempty" tf:"delete_after,omitempty"`
 
-	// This setting will instruct your backup plan to transition supported resources to archive (cold) storage tier in accordance with your lifecycle settings.
+	// Whether to transition supported resources to archive (cold) storage tier in accordance with your lifecycle settings.
 	OptInToArchiveForSupportedResources *bool `json:"optInToArchiveForSupportedResources,omitempty" tf:"opt_in_to_archive_for_supported_resources,omitempty"`
 }
 
 type RuleLifecycleParameters struct {
 
-	// Specifies the number of days after creation that a recovery point is moved to cold storage.
+	// Number of days after creation that a recovery point is moved to cold storage.
 	// +kubebuilder:validation:Optional
 	ColdStorageAfter *float64 `json:"coldStorageAfter,omitempty" tf:"cold_storage_after,omitempty"`
 
-	// Specifies the number of days after creation that a recovery point is deleted. Must be 90 days greater than cold_storage_after.
+	// Number of days after creation that a recovery point is deleted. Must be 90 days greater than cold_storage_after.
 	// +kubebuilder:validation:Optional
 	DeleteAfter *float64 `json:"deleteAfter,omitempty" tf:"delete_after,omitempty"`
 
-	// This setting will instruct your backup plan to transition supported resources to archive (cold) storage tier in accordance with your lifecycle settings.
+	// Whether to transition supported resources to archive (cold) storage tier in accordance with your lifecycle settings.
 	// +kubebuilder:validation:Optional
 	OptInToArchiveForSupportedResources *bool `json:"optInToArchiveForSupportedResources,omitempty" tf:"opt_in_to_archive_for_supported_resources,omitempty"`
 }
 
 type RuleObservation struct {
 
-	// The amount of time in minutes AWS Backup attempts a backup before canceling the job and returning an error.
+	// Amount of time in minutes AWS Backup attempts a backup before canceling the job and returning an error.
 	CompletionWindow *float64 `json:"completionWindow,omitempty" tf:"completion_window,omitempty"`
 
 	// Configuration block(s) with copy operation settings. Detailed below.
@@ -296,38 +296,41 @@ type RuleObservation struct {
 	// Enable continuous backups for supported resources.
 	EnableContinuousBackup *bool `json:"enableContinuousBackup,omitempty" tf:"enable_continuous_backup,omitempty"`
 
-	// The lifecycle defines when a protected resource is transitioned to cold storage and when it expires.  Fields documented below.
+	// Lifecycle that defines when a protected resource is transitioned to cold storage and when it expires. Detailed below.
 	Lifecycle *RuleLifecycleObservation `json:"lifecycle,omitempty" tf:"lifecycle,omitempty"`
 
 	// Metadata that you can assign to help organize the resources that you create.
 	// +mapType=granular
 	RecoveryPointTags map[string]*string `json:"recoveryPointTags,omitempty" tf:"recovery_point_tags,omitempty"`
 
-	// An display name for a backup rule.
+	// Uniquely identifies a rule that is used to schedule the backup of a selection of resources.
+	RuleID *string `json:"ruleId,omitempty" tf:"rule_id,omitempty"`
+
+	// Display name for a backup rule.
 	RuleName *string `json:"ruleName,omitempty" tf:"rule_name,omitempty"`
 
-	// Block for scanning configuration for the backup rule and includes the malware scanner, and scan mode of either full or incremental.
+	// Block for scanning configuration for the backup rule and includes the malware scanner, and scan mode of either full or incremental. Detailed below.
 	ScanAction []ScanActionObservation `json:"scanAction,omitempty" tf:"scan_action,omitempty"`
 
-	// A CRON expression specifying when AWS Backup initiates a backup job.
+	// CRON expression specifying when AWS Backup initiates a backup job.
 	Schedule *string `json:"schedule,omitempty" tf:"schedule,omitempty"`
 
-	// The timezone in which the schedule expression is set. Default value: "Etc/UTC".
+	// Timezone in which the schedule expression is set. Default value: "Etc/UTC".
 	ScheduleExpressionTimezone *string `json:"scheduleExpressionTimezone,omitempty" tf:"schedule_expression_timezone,omitempty"`
 
-	// The amount of time in minutes before beginning a backup.
+	// Amount of time in minutes before beginning a backup.
 	StartWindow *float64 `json:"startWindow,omitempty" tf:"start_window,omitempty"`
 
-	// The ARN of a logically air-gapped vault. ARN must be in the same account and region. If provided, supported fully managed resources back up directly to logically air-gapped vault, while other supported resources create a temporary (billable) snapshot in backup vault, then copy it to logically air-gapped vault. Unsupported resources only back up to the specified backup vault.
+	// ARN of a logically air-gapped vault. ARN must be in the same account and region. If provided, supported fully managed resources back up directly to logically air-gapped vault, while other supported resources create a temporary (billable) snapshot in backup vault, then copy it to logically air-gapped vault. Unsupported resources only back up to the specified backup vault.
 	TargetLogicallyAirGappedBackupVaultArn *string `json:"targetLogicallyAirGappedBackupVaultArn,omitempty" tf:"target_logically_air_gapped_backup_vault_arn,omitempty"`
 
-	// The name of a logical container where backups are stored.
+	// Name of a logical container where backups are stored.
 	TargetVaultName *string `json:"targetVaultName,omitempty" tf:"target_vault_name,omitempty"`
 }
 
 type RuleParameters struct {
 
-	// The amount of time in minutes AWS Backup attempts a backup before canceling the job and returning an error.
+	// Amount of time in minutes AWS Backup attempts a backup before canceling the job and returning an error.
 	// +kubebuilder:validation:Optional
 	CompletionWindow *float64 `json:"completionWindow,omitempty" tf:"completion_window,omitempty"`
 
@@ -339,7 +342,7 @@ type RuleParameters struct {
 	// +kubebuilder:validation:Optional
 	EnableContinuousBackup *bool `json:"enableContinuousBackup,omitempty" tf:"enable_continuous_backup,omitempty"`
 
-	// The lifecycle defines when a protected resource is transitioned to cold storage and when it expires.  Fields documented below.
+	// Lifecycle that defines when a protected resource is transitioned to cold storage and when it expires. Detailed below.
 	// +kubebuilder:validation:Optional
 	Lifecycle *RuleLifecycleParameters `json:"lifecycle,omitempty" tf:"lifecycle,omitempty"`
 
@@ -348,31 +351,31 @@ type RuleParameters struct {
 	// +mapType=granular
 	RecoveryPointTags map[string]*string `json:"recoveryPointTags,omitempty" tf:"recovery_point_tags,omitempty"`
 
-	// An display name for a backup rule.
+	// Display name for a backup rule.
 	// +kubebuilder:validation:Optional
 	RuleName *string `json:"ruleName" tf:"rule_name,omitempty"`
 
-	// Block for scanning configuration for the backup rule and includes the malware scanner, and scan mode of either full or incremental.
+	// Block for scanning configuration for the backup rule and includes the malware scanner, and scan mode of either full or incremental. Detailed below.
 	// +kubebuilder:validation:Optional
 	ScanAction []ScanActionParameters `json:"scanAction,omitempty" tf:"scan_action,omitempty"`
 
-	// A CRON expression specifying when AWS Backup initiates a backup job.
+	// CRON expression specifying when AWS Backup initiates a backup job.
 	// +kubebuilder:validation:Optional
 	Schedule *string `json:"schedule,omitempty" tf:"schedule,omitempty"`
 
-	// The timezone in which the schedule expression is set. Default value: "Etc/UTC".
+	// Timezone in which the schedule expression is set. Default value: "Etc/UTC".
 	// +kubebuilder:validation:Optional
 	ScheduleExpressionTimezone *string `json:"scheduleExpressionTimezone,omitempty" tf:"schedule_expression_timezone,omitempty"`
 
-	// The amount of time in minutes before beginning a backup.
+	// Amount of time in minutes before beginning a backup.
 	// +kubebuilder:validation:Optional
 	StartWindow *float64 `json:"startWindow,omitempty" tf:"start_window,omitempty"`
 
-	// The ARN of a logically air-gapped vault. ARN must be in the same account and region. If provided, supported fully managed resources back up directly to logically air-gapped vault, while other supported resources create a temporary (billable) snapshot in backup vault, then copy it to logically air-gapped vault. Unsupported resources only back up to the specified backup vault.
+	// ARN of a logically air-gapped vault. ARN must be in the same account and region. If provided, supported fully managed resources back up directly to logically air-gapped vault, while other supported resources create a temporary (billable) snapshot in backup vault, then copy it to logically air-gapped vault. Unsupported resources only back up to the specified backup vault.
 	// +kubebuilder:validation:Optional
 	TargetLogicallyAirGappedBackupVaultArn *string `json:"targetLogicallyAirGappedBackupVaultArn,omitempty" tf:"target_logically_air_gapped_backup_vault_arn,omitempty"`
 
-	// The name of a logical container where backups are stored.
+	// Name of a logical container where backups are stored.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/backup/v1beta1.Vault
 	// +kubebuilder:validation:Optional
 	TargetVaultName *string `json:"targetVaultName,omitempty" tf:"target_vault_name,omitempty"`
@@ -388,7 +391,7 @@ type RuleParameters struct {
 
 type ScanActionInitParameters struct {
 
-	// Malware scanner to use for the scan action. Currently only GUARDDUTY is supported.
+	// Malware scanner to use for the scan setting. Currently only GUARDDUTY is supported.
 	MalwareScanner *string `json:"malwareScanner,omitempty" tf:"malware_scanner,omitempty"`
 
 	// Scanning mode to use for the scan action. Valid values are FULL_SCAN and INCREMENTAL_SCAN.
@@ -397,7 +400,7 @@ type ScanActionInitParameters struct {
 
 type ScanActionObservation struct {
 
-	// Malware scanner to use for the scan action. Currently only GUARDDUTY is supported.
+	// Malware scanner to use for the scan setting. Currently only GUARDDUTY is supported.
 	MalwareScanner *string `json:"malwareScanner,omitempty" tf:"malware_scanner,omitempty"`
 
 	// Scanning mode to use for the scan action. Valid values are FULL_SCAN and INCREMENTAL_SCAN.
@@ -406,7 +409,7 @@ type ScanActionObservation struct {
 
 type ScanActionParameters struct {
 
-	// Malware scanner to use for the scan action. Currently only GUARDDUTY is supported.
+	// Malware scanner to use for the scan setting. Currently only GUARDDUTY is supported.
 	// +kubebuilder:validation:Optional
 	MalwareScanner *string `json:"malwareScanner" tf:"malware_scanner,omitempty"`
 
@@ -417,7 +420,7 @@ type ScanActionParameters struct {
 
 type ScanSettingInitParameters struct {
 
-	// Malware scanner to use for the scan action. Currently only GUARDDUTY is supported.
+	// Malware scanner to use for the scan setting. Currently only GUARDDUTY is supported.
 	MalwareScanner *string `json:"malwareScanner,omitempty" tf:"malware_scanner,omitempty"`
 
 	// List of resource types to apply the scan setting to. Valid values are EBS, EC2, S3 and ALL.
@@ -430,7 +433,7 @@ type ScanSettingInitParameters struct {
 
 type ScanSettingObservation struct {
 
-	// Malware scanner to use for the scan action. Currently only GUARDDUTY is supported.
+	// Malware scanner to use for the scan setting. Currently only GUARDDUTY is supported.
 	MalwareScanner *string `json:"malwareScanner,omitempty" tf:"malware_scanner,omitempty"`
 
 	// List of resource types to apply the scan setting to. Valid values are EBS, EC2, S3 and ALL.
@@ -443,7 +446,7 @@ type ScanSettingObservation struct {
 
 type ScanSettingParameters struct {
 
-	// Malware scanner to use for the scan action. Currently only GUARDDUTY is supported.
+	// Malware scanner to use for the scan setting. Currently only GUARDDUTY is supported.
 	// +kubebuilder:validation:Optional
 	MalwareScanner *string `json:"malwareScanner" tf:"malware_scanner,omitempty"`
 

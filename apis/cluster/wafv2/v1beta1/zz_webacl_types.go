@@ -15,57 +15,57 @@ import (
 
 type APIGatewayInitParameters struct {
 
-	// Specifies the maximum size of the web request body component that an associated AWS Verified Access instances should send to AWS WAF for inspection. This applies to statements in the web ACL that inspect the body or JSON body. Valid values are KB_16, KB_32, KB_48 and KB_64.
+	// Maximum size of the web request body component that an associated AWS Verified Access instances should send to AWS WAF for inspection. This applies to statements in the web ACL that inspect the body or JSON body. Valid values are KB_16, KB_32, KB_48 and KB_64.
 	DefaultSizeInspectionLimit *string `json:"defaultSizeInspectionLimit,omitempty" tf:"default_size_inspection_limit,omitempty"`
 }
 
 type APIGatewayObservation struct {
 
-	// Specifies the maximum size of the web request body component that an associated AWS Verified Access instances should send to AWS WAF for inspection. This applies to statements in the web ACL that inspect the body or JSON body. Valid values are KB_16, KB_32, KB_48 and KB_64.
+	// Maximum size of the web request body component that an associated AWS Verified Access instances should send to AWS WAF for inspection. This applies to statements in the web ACL that inspect the body or JSON body. Valid values are KB_16, KB_32, KB_48 and KB_64.
 	DefaultSizeInspectionLimit *string `json:"defaultSizeInspectionLimit,omitempty" tf:"default_size_inspection_limit,omitempty"`
 }
 
 type APIGatewayParameters struct {
 
-	// Specifies the maximum size of the web request body component that an associated AWS Verified Access instances should send to AWS WAF for inspection. This applies to statements in the web ACL that inspect the body or JSON body. Valid values are KB_16, KB_32, KB_48 and KB_64.
+	// Maximum size of the web request body component that an associated AWS Verified Access instances should send to AWS WAF for inspection. This applies to statements in the web ACL that inspect the body or JSON body. Valid values are KB_16, KB_32, KB_48 and KB_64.
 	// +kubebuilder:validation:Optional
 	DefaultSizeInspectionLimit *string `json:"defaultSizeInspectionLimit" tf:"default_size_inspection_limit,omitempty"`
 }
 
 type AllowInitParameters struct {
 
-	// Defines custom handling for the web request. See custom_request_handling below for details.
+	// Custom handling for the web request. See custom_request_handling below for details.
 	CustomRequestHandling *CustomRequestHandlingInitParameters `json:"customRequestHandling,omitempty" tf:"custom_request_handling,omitempty"`
 }
 
 type AllowObservation struct {
 
-	// Defines custom handling for the web request. See custom_request_handling below for details.
+	// Custom handling for the web request. See custom_request_handling below for details.
 	CustomRequestHandling *CustomRequestHandlingObservation `json:"customRequestHandling,omitempty" tf:"custom_request_handling,omitempty"`
 }
 
 type AllowParameters struct {
 
-	// Defines custom handling for the web request. See custom_request_handling below for details.
+	// Custom handling for the web request. See custom_request_handling below for details.
 	// +kubebuilder:validation:Optional
 	CustomRequestHandling *CustomRequestHandlingParameters `json:"customRequestHandling,omitempty" tf:"custom_request_handling,omitempty"`
 }
 
 type AppRunnerServiceInitParameters struct {
 
-	// Specifies the maximum size of the web request body component that an associated AWS Verified Access instances should send to AWS WAF for inspection. This applies to statements in the web ACL that inspect the body or JSON body. Valid values are KB_16, KB_32, KB_48 and KB_64.
+	// Maximum size of the web request body component that an associated AWS Verified Access instances should send to AWS WAF for inspection. This applies to statements in the web ACL that inspect the body or JSON body. Valid values are KB_16, KB_32, KB_48 and KB_64.
 	DefaultSizeInspectionLimit *string `json:"defaultSizeInspectionLimit,omitempty" tf:"default_size_inspection_limit,omitempty"`
 }
 
 type AppRunnerServiceObservation struct {
 
-	// Specifies the maximum size of the web request body component that an associated AWS Verified Access instances should send to AWS WAF for inspection. This applies to statements in the web ACL that inspect the body or JSON body. Valid values are KB_16, KB_32, KB_48 and KB_64.
+	// Maximum size of the web request body component that an associated AWS Verified Access instances should send to AWS WAF for inspection. This applies to statements in the web ACL that inspect the body or JSON body. Valid values are KB_16, KB_32, KB_48 and KB_64.
 	DefaultSizeInspectionLimit *string `json:"defaultSizeInspectionLimit,omitempty" tf:"default_size_inspection_limit,omitempty"`
 }
 
 type AppRunnerServiceParameters struct {
 
-	// Specifies the maximum size of the web request body component that an associated AWS Verified Access instances should send to AWS WAF for inspection. This applies to statements in the web ACL that inspect the body or JSON body. Valid values are KB_16, KB_32, KB_48 and KB_64.
+	// Maximum size of the web request body component that an associated AWS Verified Access instances should send to AWS WAF for inspection. This applies to statements in the web ACL that inspect the body or JSON body. Valid values are KB_16, KB_32, KB_48 and KB_64.
 	// +kubebuilder:validation:Optional
 	DefaultSizeInspectionLimit *string `json:"defaultSizeInspectionLimit" tf:"default_size_inspection_limit,omitempty"`
 }
@@ -91,133 +91,172 @@ type AssociationConfigParameters struct {
 
 type BlockInitParameters struct {
 
-	// Defines a custom response for the web request. See custom_response below for details.
+	// Custom response for the web request. See custom_response below for details.
 	CustomResponse *CustomResponseInitParameters `json:"customResponse,omitempty" tf:"custom_response,omitempty"`
 }
 
 type BlockObservation struct {
 
-	// Defines a custom response for the web request. See custom_response below for details.
+	// Custom response for the web request. See custom_response below for details.
 	CustomResponse *CustomResponseObservation `json:"customResponse,omitempty" tf:"custom_response,omitempty"`
 }
 
 type BlockParameters struct {
 
-	// Defines a custom response for the web request. See custom_response below for details.
+	// Custom response for the web request. See custom_response below for details.
 	// +kubebuilder:validation:Optional
 	CustomResponse *CustomResponseParameters `json:"customResponse,omitempty" tf:"custom_response,omitempty"`
 }
 
 type CaptchaConfigInitParameters struct {
 
-	// Defines custom immunity time. See immunity_time_property below for details.
+	// Custom immunity time. See immunity_time_property below for details.
 	ImmunityTimeProperty *ImmunityTimePropertyInitParameters `json:"immunityTimeProperty,omitempty" tf:"immunity_time_property,omitempty"`
 }
 
 type CaptchaConfigObservation struct {
 
-	// Defines custom immunity time. See immunity_time_property below for details.
+	// Custom immunity time. See immunity_time_property below for details.
 	ImmunityTimeProperty *ImmunityTimePropertyObservation `json:"immunityTimeProperty,omitempty" tf:"immunity_time_property,omitempty"`
 }
 
 type CaptchaConfigParameters struct {
 
-	// Defines custom immunity time. See immunity_time_property below for details.
+	// Custom immunity time. See immunity_time_property below for details.
 	// +kubebuilder:validation:Optional
 	ImmunityTimeProperty *ImmunityTimePropertyParameters `json:"immunityTimeProperty,omitempty" tf:"immunity_time_property,omitempty"`
 }
 
 type ChallengeConfigImmunityTimePropertyInitParameters struct {
 
-	// The amount of time, in seconds, that a CAPTCHA or challenge timestamp is considered valid by AWS WAF. The default setting is 300.
+	// Amount of time, in seconds, that a CAPTCHA or challenge timestamp is considered valid by AWS WAF. The default setting is 300.
 	ImmunityTime *float64 `json:"immunityTime,omitempty" tf:"immunity_time,omitempty"`
 }
 
 type ChallengeConfigImmunityTimePropertyObservation struct {
 
-	// The amount of time, in seconds, that a CAPTCHA or challenge timestamp is considered valid by AWS WAF. The default setting is 300.
+	// Amount of time, in seconds, that a CAPTCHA or challenge timestamp is considered valid by AWS WAF. The default setting is 300.
 	ImmunityTime *float64 `json:"immunityTime,omitempty" tf:"immunity_time,omitempty"`
 }
 
 type ChallengeConfigImmunityTimePropertyParameters struct {
 
-	// The amount of time, in seconds, that a CAPTCHA or challenge timestamp is considered valid by AWS WAF. The default setting is 300.
+	// Amount of time, in seconds, that a CAPTCHA or challenge timestamp is considered valid by AWS WAF. The default setting is 300.
 	// +kubebuilder:validation:Optional
 	ImmunityTime *float64 `json:"immunityTime,omitempty" tf:"immunity_time,omitempty"`
 }
 
 type ChallengeConfigInitParameters struct {
 
-	// Defines custom immunity time. See immunity_time_property below for details.
+	// Custom immunity time. See immunity_time_property below for details.
 	ImmunityTimeProperty *ChallengeConfigImmunityTimePropertyInitParameters `json:"immunityTimeProperty,omitempty" tf:"immunity_time_property,omitempty"`
 }
 
 type ChallengeConfigObservation struct {
 
-	// Defines custom immunity time. See immunity_time_property below for details.
+	// Custom immunity time. See immunity_time_property below for details.
 	ImmunityTimeProperty *ChallengeConfigImmunityTimePropertyObservation `json:"immunityTimeProperty,omitempty" tf:"immunity_time_property,omitempty"`
 }
 
 type ChallengeConfigParameters struct {
 
-	// Defines custom immunity time. See immunity_time_property below for details.
+	// Custom immunity time. See immunity_time_property below for details.
 	// +kubebuilder:validation:Optional
 	ImmunityTimeProperty *ChallengeConfigImmunityTimePropertyParameters `json:"immunityTimeProperty,omitempty" tf:"immunity_time_property,omitempty"`
 }
 
 type CloudfrontInitParameters struct {
 
-	// Specifies the maximum size of the web request body component that an associated AWS Verified Access instances should send to AWS WAF for inspection. This applies to statements in the web ACL that inspect the body or JSON body. Valid values are KB_16, KB_32, KB_48 and KB_64.
+	// Maximum size of the web request body component that an associated AWS Verified Access instances should send to AWS WAF for inspection. This applies to statements in the web ACL that inspect the body or JSON body. Valid values are KB_16, KB_32, KB_48 and KB_64.
 	DefaultSizeInspectionLimit *string `json:"defaultSizeInspectionLimit,omitempty" tf:"default_size_inspection_limit,omitempty"`
 }
 
 type CloudfrontObservation struct {
 
-	// Specifies the maximum size of the web request body component that an associated AWS Verified Access instances should send to AWS WAF for inspection. This applies to statements in the web ACL that inspect the body or JSON body. Valid values are KB_16, KB_32, KB_48 and KB_64.
+	// Maximum size of the web request body component that an associated AWS Verified Access instances should send to AWS WAF for inspection. This applies to statements in the web ACL that inspect the body or JSON body. Valid values are KB_16, KB_32, KB_48 and KB_64.
 	DefaultSizeInspectionLimit *string `json:"defaultSizeInspectionLimit,omitempty" tf:"default_size_inspection_limit,omitempty"`
 }
 
 type CloudfrontParameters struct {
 
-	// Specifies the maximum size of the web request body component that an associated AWS Verified Access instances should send to AWS WAF for inspection. This applies to statements in the web ACL that inspect the body or JSON body. Valid values are KB_16, KB_32, KB_48 and KB_64.
+	// Maximum size of the web request body component that an associated AWS Verified Access instances should send to AWS WAF for inspection. This applies to statements in the web ACL that inspect the body or JSON body. Valid values are KB_16, KB_32, KB_48 and KB_64.
 	// +kubebuilder:validation:Optional
 	DefaultSizeInspectionLimit *string `json:"defaultSizeInspectionLimit" tf:"default_size_inspection_limit,omitempty"`
 }
 
 type CognitoUserPoolInitParameters struct {
 
-	// Specifies the maximum size of the web request body component that an associated AWS Verified Access instances should send to AWS WAF for inspection. This applies to statements in the web ACL that inspect the body or JSON body. Valid values are KB_16, KB_32, KB_48 and KB_64.
+	// Maximum size of the web request body component that an associated AWS Verified Access instances should send to AWS WAF for inspection. This applies to statements in the web ACL that inspect the body or JSON body. Valid values are KB_16, KB_32, KB_48 and KB_64.
 	DefaultSizeInspectionLimit *string `json:"defaultSizeInspectionLimit,omitempty" tf:"default_size_inspection_limit,omitempty"`
 }
 
 type CognitoUserPoolObservation struct {
 
-	// Specifies the maximum size of the web request body component that an associated AWS Verified Access instances should send to AWS WAF for inspection. This applies to statements in the web ACL that inspect the body or JSON body. Valid values are KB_16, KB_32, KB_48 and KB_64.
+	// Maximum size of the web request body component that an associated AWS Verified Access instances should send to AWS WAF for inspection. This applies to statements in the web ACL that inspect the body or JSON body. Valid values are KB_16, KB_32, KB_48 and KB_64.
 	DefaultSizeInspectionLimit *string `json:"defaultSizeInspectionLimit,omitempty" tf:"default_size_inspection_limit,omitempty"`
 }
 
 type CognitoUserPoolParameters struct {
 
-	// Specifies the maximum size of the web request body component that an associated AWS Verified Access instances should send to AWS WAF for inspection. This applies to statements in the web ACL that inspect the body or JSON body. Valid values are KB_16, KB_32, KB_48 and KB_64.
+	// Maximum size of the web request body component that an associated AWS Verified Access instances should send to AWS WAF for inspection. This applies to statements in the web ACL that inspect the body or JSON body. Valid values are KB_16, KB_32, KB_48 and KB_64.
 	// +kubebuilder:validation:Optional
 	DefaultSizeInspectionLimit *string `json:"defaultSizeInspectionLimit" tf:"default_size_inspection_limit,omitempty"`
 }
 
+type CryptoConfigPaymentNetworkInitParameters struct {
+
+	// Blockchain network used for settlement. Valid values are BASE, SOLANA, BASE_SEPOLIA, and SOLANA_DEVNET.
+	Chain *string `json:"chain,omitempty" tf:"chain,omitempty"`
+
+	// Price configuration for this payment network. Currently supports a single price entry. See prices below for details.
+	Prices *PaymentNetworkPricesInitParameters `json:"prices,omitempty" tf:"prices,omitempty"`
+
+	// Payee wallet address on the specified blockchain that receives payments.
+	WalletAddress *string `json:"walletAddress,omitempty" tf:"wallet_address,omitempty"`
+}
+
+type CryptoConfigPaymentNetworkObservation struct {
+
+	// Blockchain network used for settlement. Valid values are BASE, SOLANA, BASE_SEPOLIA, and SOLANA_DEVNET.
+	Chain *string `json:"chain,omitempty" tf:"chain,omitempty"`
+
+	// Price configuration for this payment network. Currently supports a single price entry. See prices below for details.
+	Prices *PaymentNetworkPricesObservation `json:"prices,omitempty" tf:"prices,omitempty"`
+
+	// Payee wallet address on the specified blockchain that receives payments.
+	WalletAddress *string `json:"walletAddress,omitempty" tf:"wallet_address,omitempty"`
+}
+
+type CryptoConfigPaymentNetworkParameters struct {
+
+	// Blockchain network used for settlement. Valid values are BASE, SOLANA, BASE_SEPOLIA, and SOLANA_DEVNET.
+	// +kubebuilder:validation:Optional
+	Chain *string `json:"chain" tf:"chain,omitempty"`
+
+	// Price configuration for this payment network. Currently supports a single price entry. See prices below for details.
+	// +kubebuilder:validation:Optional
+	Prices *PaymentNetworkPricesParameters `json:"prices" tf:"prices,omitempty"`
+
+	// Payee wallet address on the specified blockchain that receives payments.
+	// +kubebuilder:validation:Optional
+	WalletAddress *string `json:"walletAddress" tf:"wallet_address,omitempty"`
+}
+
 type CustomRequestHandlingInitParameters struct {
 
-	// The insert_header blocks used to define HTTP headers added to the request. See insert_header below for details.
+	// insert_header blocks used to define HTTP headers added to the request. See insert_header below for details.
 	InsertHeader []InsertHeaderInitParameters `json:"insertHeader,omitempty" tf:"insert_header,omitempty"`
 }
 
 type CustomRequestHandlingObservation struct {
 
-	// The insert_header blocks used to define HTTP headers added to the request. See insert_header below for details.
+	// insert_header blocks used to define HTTP headers added to the request. See insert_header below for details.
 	InsertHeader []InsertHeaderObservation `json:"insertHeader,omitempty" tf:"insert_header,omitempty"`
 }
 
 type CustomRequestHandlingParameters struct {
 
-	// The insert_header blocks used to define HTTP headers added to the request. See insert_header below for details.
+	// insert_header blocks used to define HTTP headers added to the request. See insert_header below for details.
 	// +kubebuilder:validation:Optional
 	InsertHeader []InsertHeaderParameters `json:"insertHeader" tf:"insert_header,omitempty"`
 }
@@ -227,10 +266,10 @@ type CustomResponseInitParameters struct {
 	// References the response body that you want AWS WAF to return to the web request client. This must reference a key defined in a custom_response_body block of this resource.
 	CustomResponseBodyKey *string `json:"customResponseBodyKey,omitempty" tf:"custom_response_body_key,omitempty"`
 
-	// The HTTP status code to return to the client.
+	// HTTP status code to return to the client.
 	ResponseCode *float64 `json:"responseCode,omitempty" tf:"response_code,omitempty"`
 
-	// The response_header blocks used to define the HTTP response headers added to the response. See response_header below for details.
+	// response_header blocks used to define the HTTP response headers added to the response. See response_header below for details.
 	ResponseHeader []ResponseHeaderInitParameters `json:"responseHeader,omitempty" tf:"response_header,omitempty"`
 }
 
@@ -239,10 +278,10 @@ type CustomResponseObservation struct {
 	// References the response body that you want AWS WAF to return to the web request client. This must reference a key defined in a custom_response_body block of this resource.
 	CustomResponseBodyKey *string `json:"customResponseBodyKey,omitempty" tf:"custom_response_body_key,omitempty"`
 
-	// The HTTP status code to return to the client.
+	// HTTP status code to return to the client.
 	ResponseCode *float64 `json:"responseCode,omitempty" tf:"response_code,omitempty"`
 
-	// The response_header blocks used to define the HTTP response headers added to the response. See response_header below for details.
+	// response_header blocks used to define the HTTP response headers added to the response. See response_header below for details.
 	ResponseHeader []ResponseHeaderObservation `json:"responseHeader,omitempty" tf:"response_header,omitempty"`
 }
 
@@ -252,37 +291,37 @@ type CustomResponseParameters struct {
 	// +kubebuilder:validation:Optional
 	CustomResponseBodyKey *string `json:"customResponseBodyKey,omitempty" tf:"custom_response_body_key,omitempty"`
 
-	// The HTTP status code to return to the client.
+	// HTTP status code to return to the client.
 	// +kubebuilder:validation:Optional
 	ResponseCode *float64 `json:"responseCode" tf:"response_code,omitempty"`
 
-	// The response_header blocks used to define the HTTP response headers added to the response. See response_header below for details.
+	// response_header blocks used to define the HTTP response headers added to the response. See response_header below for details.
 	// +kubebuilder:validation:Optional
 	ResponseHeader []ResponseHeaderParameters `json:"responseHeader,omitempty" tf:"response_header,omitempty"`
 }
 
 type DataProtectionConfigInitParameters struct {
 
-	// A block for data protection configurations for specific web request field types. See data_protection block for details.
+	// Block for data protection configurations for specific web request field types. See data_protection block for details.
 	DataProtection []DataProtectionInitParameters `json:"dataProtection,omitempty" tf:"data_protection,omitempty"`
 }
 
 type DataProtectionConfigObservation struct {
 
-	// A block for data protection configurations for specific web request field types. See data_protection block for details.
+	// Block for data protection configurations for specific web request field types. See data_protection block for details.
 	DataProtection []DataProtectionObservation `json:"dataProtection,omitempty" tf:"data_protection,omitempty"`
 }
 
 type DataProtectionConfigParameters struct {
 
-	// A block for data protection configurations for specific web request field types. See data_protection block for details.
+	// Block for data protection configurations for specific web request field types. See data_protection block for details.
 	// +kubebuilder:validation:Optional
 	DataProtection []DataProtectionParameters `json:"dataProtection,omitempty" tf:"data_protection,omitempty"`
 }
 
 type DataProtectionInitParameters struct {
 
-	// Specifies how to protect the field. Valid values are SUBSTITUTION or HASH.
+	// Protection behavior to apply to the field. Valid values are SUBSTITUTION or HASH.
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
 	// Boolean to specify whether to also exclude any rate-based rule details from the data protection you have enabled for a given field.
@@ -291,13 +330,13 @@ type DataProtectionInitParameters struct {
 	// Boolean to specify whether to also exclude any rule match details from the data protection you have enabled for a given field. AWS WAF logs these details for non-terminating matching rules and for the terminating matching rule.
 	ExcludeRuleMatchDetails *bool `json:"excludeRuleMatchDetails,omitempty" tf:"exclude_rule_match_details,omitempty"`
 
-	// Specifies the field type and optional keys to apply the protection behavior to. See field block below for details.
+	// Field type and optional keys to apply the protection behavior to. See field block below for details.
 	Field *FieldInitParameters `json:"field,omitempty" tf:"field,omitempty"`
 }
 
 type DataProtectionObservation struct {
 
-	// Specifies how to protect the field. Valid values are SUBSTITUTION or HASH.
+	// Protection behavior to apply to the field. Valid values are SUBSTITUTION or HASH.
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
 	// Boolean to specify whether to also exclude any rate-based rule details from the data protection you have enabled for a given field.
@@ -306,13 +345,13 @@ type DataProtectionObservation struct {
 	// Boolean to specify whether to also exclude any rule match details from the data protection you have enabled for a given field. AWS WAF logs these details for non-terminating matching rules and for the terminating matching rule.
 	ExcludeRuleMatchDetails *bool `json:"excludeRuleMatchDetails,omitempty" tf:"exclude_rule_match_details,omitempty"`
 
-	// Specifies the field type and optional keys to apply the protection behavior to. See field block below for details.
+	// Field type and optional keys to apply the protection behavior to. See field block below for details.
 	Field *FieldObservation `json:"field,omitempty" tf:"field,omitempty"`
 }
 
 type DataProtectionParameters struct {
 
-	// Specifies how to protect the field. Valid values are SUBSTITUTION or HASH.
+	// Protection behavior to apply to the field. Valid values are SUBSTITUTION or HASH.
 	// +kubebuilder:validation:Optional
 	Action *string `json:"action" tf:"action,omitempty"`
 
@@ -324,36 +363,36 @@ type DataProtectionParameters struct {
 	// +kubebuilder:validation:Optional
 	ExcludeRuleMatchDetails *bool `json:"excludeRuleMatchDetails,omitempty" tf:"exclude_rule_match_details,omitempty"`
 
-	// Specifies the field type and optional keys to apply the protection behavior to. See field block below for details.
+	// Field type and optional keys to apply the protection behavior to. See field block below for details.
 	// +kubebuilder:validation:Optional
 	Field *FieldParameters `json:"field" tf:"field,omitempty"`
 }
 
 type DefaultActionInitParameters struct {
 
-	// Specifies that AWS WAF should allow requests by default. See allow below for details.
+	// Allows requests by default. See allow below for details.
 	Allow *AllowInitParameters `json:"allow,omitempty" tf:"allow,omitempty"`
 
-	// Specifies that AWS WAF should block requests by default. See block below for details.
+	// Blocks requests by default. See block below for details.
 	Block *BlockInitParameters `json:"block,omitempty" tf:"block,omitempty"`
 }
 
 type DefaultActionObservation struct {
 
-	// Specifies that AWS WAF should allow requests by default. See allow below for details.
+	// Allows requests by default. See allow below for details.
 	Allow *AllowObservation `json:"allow,omitempty" tf:"allow,omitempty"`
 
-	// Specifies that AWS WAF should block requests by default. See block below for details.
+	// Blocks requests by default. See block below for details.
 	Block *BlockObservation `json:"block,omitempty" tf:"block,omitempty"`
 }
 
 type DefaultActionParameters struct {
 
-	// Specifies that AWS WAF should allow requests by default. See allow below for details.
+	// Allows requests by default. See allow below for details.
 	// +kubebuilder:validation:Optional
 	Allow *AllowParameters `json:"allow,omitempty" tf:"allow,omitempty"`
 
-	// Specifies that AWS WAF should block requests by default. See block below for details.
+	// Blocks requests by default. See block below for details.
 	// +kubebuilder:validation:Optional
 	Block *BlockParameters `json:"block,omitempty" tf:"block,omitempty"`
 }
@@ -363,7 +402,7 @@ type FieldInitParameters struct {
 	// Array of strings to specify the keys to protect for the specified field type. If you don't specify any key, then all keys for the field type are protected.
 	FieldKeys []*string `json:"fieldKeys,omitempty" tf:"field_keys,omitempty"`
 
-	// Specifies the web request component type to protect. Valid Values are SINGLE_HEADER, SINGLE_COOKIE, SINGLE_QUERY_ARGUMENT, QUERY_STRING, BODY.
+	// Web request component type to protect. Valid Values are SINGLE_HEADER, SINGLE_COOKIE, SINGLE_QUERY_ARGUMENT, QUERY_STRING, BODY.
 	FieldType *string `json:"fieldType,omitempty" tf:"field_type,omitempty"`
 }
 
@@ -372,7 +411,7 @@ type FieldObservation struct {
 	// Array of strings to specify the keys to protect for the specified field type. If you don't specify any key, then all keys for the field type are protected.
 	FieldKeys []*string `json:"fieldKeys,omitempty" tf:"field_keys,omitempty"`
 
-	// Specifies the web request component type to protect. Valid Values are SINGLE_HEADER, SINGLE_COOKIE, SINGLE_QUERY_ARGUMENT, QUERY_STRING, BODY.
+	// Web request component type to protect. Valid Values are SINGLE_HEADER, SINGLE_COOKIE, SINGLE_QUERY_ARGUMENT, QUERY_STRING, BODY.
 	FieldType *string `json:"fieldType,omitempty" tf:"field_type,omitempty"`
 }
 
@@ -382,26 +421,26 @@ type FieldParameters struct {
 	// +kubebuilder:validation:Optional
 	FieldKeys []*string `json:"fieldKeys,omitempty" tf:"field_keys,omitempty"`
 
-	// Specifies the web request component type to protect. Valid Values are SINGLE_HEADER, SINGLE_COOKIE, SINGLE_QUERY_ARGUMENT, QUERY_STRING, BODY.
+	// Web request component type to protect. Valid Values are SINGLE_HEADER, SINGLE_COOKIE, SINGLE_QUERY_ARGUMENT, QUERY_STRING, BODY.
 	// +kubebuilder:validation:Optional
 	FieldType *string `json:"fieldType" tf:"field_type,omitempty"`
 }
 
 type ImmunityTimePropertyInitParameters struct {
 
-	// The amount of time, in seconds, that a CAPTCHA or challenge timestamp is considered valid by AWS WAF. The default setting is 300.
+	// Amount of time, in seconds, that a CAPTCHA or challenge timestamp is considered valid by AWS WAF. The default setting is 300.
 	ImmunityTime *float64 `json:"immunityTime,omitempty" tf:"immunity_time,omitempty"`
 }
 
 type ImmunityTimePropertyObservation struct {
 
-	// The amount of time, in seconds, that a CAPTCHA or challenge timestamp is considered valid by AWS WAF. The default setting is 300.
+	// Amount of time, in seconds, that a CAPTCHA or challenge timestamp is considered valid by AWS WAF. The default setting is 300.
 	ImmunityTime *float64 `json:"immunityTime,omitempty" tf:"immunity_time,omitempty"`
 }
 
 type ImmunityTimePropertyParameters struct {
 
-	// The amount of time, in seconds, that a CAPTCHA or challenge timestamp is considered valid by AWS WAF. The default setting is 300.
+	// Amount of time, in seconds, that a CAPTCHA or challenge timestamp is considered valid by AWS WAF. The default setting is 300.
 	// +kubebuilder:validation:Optional
 	ImmunityTime *float64 `json:"immunityTime,omitempty" tf:"immunity_time,omitempty"`
 }
@@ -435,6 +474,54 @@ type InsertHeaderParameters struct {
 	Value *string `json:"value" tf:"value,omitempty"`
 }
 
+type MonetizationConfigCryptoConfigInitParameters struct {
+
+	// Blockchain payment networks configured to receive payments. You can specify 1 to 2 networks. See payment_network below for details.
+	PaymentNetwork []CryptoConfigPaymentNetworkInitParameters `json:"paymentNetwork,omitempty" tf:"payment_network,omitempty"`
+}
+
+type MonetizationConfigCryptoConfigObservation struct {
+
+	// Blockchain payment networks configured to receive payments. You can specify 1 to 2 networks. See payment_network below for details.
+	PaymentNetwork []CryptoConfigPaymentNetworkObservation `json:"paymentNetwork,omitempty" tf:"payment_network,omitempty"`
+}
+
+type MonetizationConfigCryptoConfigParameters struct {
+
+	// Blockchain payment networks configured to receive payments. You can specify 1 to 2 networks. See payment_network below for details.
+	// +kubebuilder:validation:Optional
+	PaymentNetwork []CryptoConfigPaymentNetworkParameters `json:"paymentNetwork" tf:"payment_network,omitempty"`
+}
+
+type PaymentNetworkPricesInitParameters struct {
+
+	// Base price amount per request, expressed as a decimal string with up to 3 decimal places. Minimum 0.001, maximum 999999999.999 (for example, "0.001").
+	Amount *string `json:"amount,omitempty" tf:"amount,omitempty"`
+
+	// Currency of the price amount. Valid value is USDC.
+	Currency *string `json:"currency,omitempty" tf:"currency,omitempty"`
+}
+
+type PaymentNetworkPricesObservation struct {
+
+	// Base price amount per request, expressed as a decimal string with up to 3 decimal places. Minimum 0.001, maximum 999999999.999 (for example, "0.001").
+	Amount *string `json:"amount,omitempty" tf:"amount,omitempty"`
+
+	// Currency of the price amount. Valid value is USDC.
+	Currency *string `json:"currency,omitempty" tf:"currency,omitempty"`
+}
+
+type PaymentNetworkPricesParameters struct {
+
+	// Base price amount per request, expressed as a decimal string with up to 3 decimal places. Minimum 0.001, maximum 999999999.999 (for example, "0.001").
+	// +kubebuilder:validation:Optional
+	Amount *string `json:"amount" tf:"amount,omitempty"`
+
+	// Currency of the price amount. Valid value is USDC.
+	// +kubebuilder:validation:Optional
+	Currency *string `json:"currency" tf:"currency,omitempty"`
+}
+
 type RequestBodyInitParameters struct {
 
 	// Customizes the request body that your protected Amazon API Gateway REST APIs forward to AWS WAF for inspection. Applicable only when scope is set to CLOUDFRONT. See api_gateway below for details.
@@ -449,7 +536,7 @@ type RequestBodyInitParameters struct {
 	// Customizes the request body that your protected Amazon Cognito user pools forward to AWS WAF for inspection. Applicable only when scope is set to REGIONAL. See cognito_user_pool below for details.
 	CognitoUserPool *CognitoUserPoolInitParameters `json:"cognitoUserPool,omitempty" tf:"cognito_user_pool,omitempty"`
 
-	// Customizes the request body that your protected AWS Verfied Access instances forward to AWS WAF for inspection. Applicable only when scope is set to REGIONAL. See verified_access_instance below for details.
+	// Customizes the request body that your protected AWS Verified Access instances forward to AWS WAF for inspection. Applicable only when scope is set to REGIONAL. See verified_access_instance below for details.
 	VerifiedAccessInstance *VerifiedAccessInstanceInitParameters `json:"verifiedAccessInstance,omitempty" tf:"verified_access_instance,omitempty"`
 }
 
@@ -467,7 +554,7 @@ type RequestBodyObservation struct {
 	// Customizes the request body that your protected Amazon Cognito user pools forward to AWS WAF for inspection. Applicable only when scope is set to REGIONAL. See cognito_user_pool below for details.
 	CognitoUserPool *CognitoUserPoolObservation `json:"cognitoUserPool,omitempty" tf:"cognito_user_pool,omitempty"`
 
-	// Customizes the request body that your protected AWS Verfied Access instances forward to AWS WAF for inspection. Applicable only when scope is set to REGIONAL. See verified_access_instance below for details.
+	// Customizes the request body that your protected AWS Verified Access instances forward to AWS WAF for inspection. Applicable only when scope is set to REGIONAL. See verified_access_instance below for details.
 	VerifiedAccessInstance *VerifiedAccessInstanceObservation `json:"verifiedAccessInstance,omitempty" tf:"verified_access_instance,omitempty"`
 }
 
@@ -489,7 +576,7 @@ type RequestBodyParameters struct {
 	// +kubebuilder:validation:Optional
 	CognitoUserPool *CognitoUserPoolParameters `json:"cognitoUserPool,omitempty" tf:"cognito_user_pool,omitempty"`
 
-	// Customizes the request body that your protected AWS Verfied Access instances forward to AWS WAF for inspection. Applicable only when scope is set to REGIONAL. See verified_access_instance below for details.
+	// Customizes the request body that your protected AWS Verified Access instances forward to AWS WAF for inspection. Applicable only when scope is set to REGIONAL. See verified_access_instance below for details.
 	// +kubebuilder:validation:Optional
 	VerifiedAccessInstance *VerifiedAccessInstanceParameters `json:"verifiedAccessInstance,omitempty" tf:"verified_access_instance,omitempty"`
 }
@@ -525,19 +612,19 @@ type ResponseHeaderParameters struct {
 
 type VerifiedAccessInstanceInitParameters struct {
 
-	// Specifies the maximum size of the web request body component that an associated AWS Verified Access instances should send to AWS WAF for inspection. This applies to statements in the web ACL that inspect the body or JSON body. Valid values are KB_16, KB_32, KB_48 and KB_64.
+	// Maximum size of the web request body component that an associated AWS Verified Access instances should send to AWS WAF for inspection. This applies to statements in the web ACL that inspect the body or JSON body. Valid values are KB_16, KB_32, KB_48 and KB_64.
 	DefaultSizeInspectionLimit *string `json:"defaultSizeInspectionLimit,omitempty" tf:"default_size_inspection_limit,omitempty"`
 }
 
 type VerifiedAccessInstanceObservation struct {
 
-	// Specifies the maximum size of the web request body component that an associated AWS Verified Access instances should send to AWS WAF for inspection. This applies to statements in the web ACL that inspect the body or JSON body. Valid values are KB_16, KB_32, KB_48 and KB_64.
+	// Maximum size of the web request body component that an associated AWS Verified Access instances should send to AWS WAF for inspection. This applies to statements in the web ACL that inspect the body or JSON body. Valid values are KB_16, KB_32, KB_48 and KB_64.
 	DefaultSizeInspectionLimit *string `json:"defaultSizeInspectionLimit,omitempty" tf:"default_size_inspection_limit,omitempty"`
 }
 
 type VerifiedAccessInstanceParameters struct {
 
-	// Specifies the maximum size of the web request body component that an associated AWS Verified Access instances should send to AWS WAF for inspection. This applies to statements in the web ACL that inspect the body or JSON body. Valid values are KB_16, KB_32, KB_48 and KB_64.
+	// Maximum size of the web request body component that an associated AWS Verified Access instances should send to AWS WAF for inspection. This applies to statements in the web ACL that inspect the body or JSON body. Valid values are KB_16, KB_32, KB_48 and KB_64.
 	// +kubebuilder:validation:Optional
 	DefaultSizeInspectionLimit *string `json:"defaultSizeInspectionLimit" tf:"default_size_inspection_limit,omitempty"`
 }
@@ -583,19 +670,19 @@ type WebACLCustomResponseBodyParameters struct {
 
 type WebACLInitParameters struct {
 
-	// Specifies custom configurations for the associations between the web ACL and protected resources. See association_config below for details.
+	// Custom configurations for the associations between the web ACL and protected resources. See association_config below for details.
 	AssociationConfig *AssociationConfigInitParameters `json:"associationConfig,omitempty" tf:"association_config,omitempty"`
 
-	// Specifies how AWS WAF should handle CAPTCHA evaluations on the ACL level (used by AWS Bot Control). See captcha_config below for details.
+	// Configuration for how AWS WAF handles CAPTCHA evaluations at the web ACL level (used by AWS Bot Control). See captcha_config below for details.
 	CaptchaConfig *CaptchaConfigInitParameters `json:"captchaConfig,omitempty" tf:"captcha_config,omitempty"`
 
-	// Specifies how AWS WAF should handle Challenge evaluations on the ACL level (used by AWS Bot Control). See challenge_config below for details.
+	// Configuration for how AWS WAF handles Challenge evaluations at the web ACL level (used by AWS Bot Control). See challenge_config below for details.
 	ChallengeConfig *ChallengeConfigInitParameters `json:"challengeConfig,omitempty" tf:"challenge_config,omitempty"`
 
-	// Defines custom response bodies that can be referenced by custom_response actions. See custom_response_body below for details.
+	// Custom response bodies that can be referenced by custom_response actions. See custom_response_body below for details.
 	CustomResponseBody []WebACLCustomResponseBodyInitParameters `json:"customResponseBody,omitempty" tf:"custom_response_body,omitempty"`
 
-	// Specifies data protection to apply to the web request data for the web ACL. This is a web ACL level data protection option. See data_protection_config below for details.
+	// Data protection to apply to the web request data for the web ACL. This is a web ACL level data protection option. See data_protection_config below for details.
 	DataProtectionConfig *DataProtectionConfigInitParameters `json:"dataProtectionConfig,omitempty" tf:"data_protection_config,omitempty"`
 
 	// Action to perform if none of the rules contained in the WebACL match. See default_action below for details.
@@ -604,51 +691,83 @@ type WebACLInitParameters struct {
 	// Friendly description of the WebACL.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// Monetization configuration for the web ACL. Provide this when any rule in the web ACL uses the monetize action. See monetization_config below for details.
+	MonetizationConfig *WebACLMonetizationConfigInitParameters `json:"monetizationConfig,omitempty" tf:"monetization_config,omitempty"`
+
 	// Friendly name of the WebACL. Conflicts with name_prefix.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// A raw JSON string used to define the rules for allowing, blocking, or counting web requests. When this field is used, Crossplane cannot observe changes in the configuration through the AWS API; therefore, drift detection cannot be performed. Refer to the AWS documentation for the expected JSON structure: https://docs.aws.amazon.com/waf/latest/APIReference/API_CreateWebACL.html
 	RuleJSON *string `json:"ruleJson,omitempty" tf:"rule_json,omitempty"`
 
-	// Specifies whether this is for an AWS CloudFront distribution or for a regional application. Valid values are CLOUDFRONT or REGIONAL. To work with CloudFront, you must also specify the region us-east-1 (N. Virginia) on the AWS provider.
+	// Scope of the web ACL, either an AWS CloudFront distribution or a regional application. Valid values are CLOUDFRONT or REGIONAL. To work with CloudFront, you must also specify the region us-east-1 (N. Virginia) on the AWS provider.
 	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Specifies the domains that AWS WAF should accept in a web request token. This enables the use of tokens across multiple protected websites. When AWS WAF provides a token, it uses the domain of the AWS resource that the web ACL is protecting. If you don't specify a list of token domains, AWS WAF accepts tokens only for the domain of the protected resource. With a token domain list, AWS WAF accepts the resource's host domain plus all domains in the token domain list, including their prefixed subdomains.
+	// Domains that AWS WAF should accept in a web request token. This enables the use of tokens across multiple protected websites. When AWS WAF provides a token, it uses the domain of the AWS resource that the web ACL is protecting. If you don't specify a list of token domains, AWS WAF accepts tokens only for the domain of the protected resource. With a token domain list, AWS WAF accepts the resource's host domain plus all domains in the token domain list, including their prefixed subdomains.
 	// +listType=set
 	TokenDomains []*string `json:"tokenDomains,omitempty" tf:"token_domains,omitempty"`
 
-	// Defines and enables Amazon CloudWatch metrics and web request sample collection. See visibility_config below for details.
+	// Amazon CloudWatch metrics and web request sample collection configuration. See visibility_config below for details.
 	VisibilityConfig *WebACLVisibilityConfigInitParameters `json:"visibilityConfig,omitempty" tf:"visibility_config,omitempty"`
+}
+
+type WebACLMonetizationConfigInitParameters struct {
+
+	// Cryptocurrency payment configuration for the web ACL. See crypto_config below for details.
+	CryptoConfig *MonetizationConfigCryptoConfigInitParameters `json:"cryptoConfig,omitempty" tf:"crypto_config,omitempty"`
+
+	// Currency mode for monetized requests. Valid values are TEST and REAL. Defaults to REAL.
+	CurrencyMode *string `json:"currencyMode,omitempty" tf:"currency_mode,omitempty"`
+}
+
+type WebACLMonetizationConfigObservation struct {
+
+	// Cryptocurrency payment configuration for the web ACL. See crypto_config below for details.
+	CryptoConfig *MonetizationConfigCryptoConfigObservation `json:"cryptoConfig,omitempty" tf:"crypto_config,omitempty"`
+
+	// Currency mode for monetized requests. Valid values are TEST and REAL. Defaults to REAL.
+	CurrencyMode *string `json:"currencyMode,omitempty" tf:"currency_mode,omitempty"`
+}
+
+type WebACLMonetizationConfigParameters struct {
+
+	// Cryptocurrency payment configuration for the web ACL. See crypto_config below for details.
+	// +kubebuilder:validation:Optional
+	CryptoConfig *MonetizationConfigCryptoConfigParameters `json:"cryptoConfig,omitempty" tf:"crypto_config,omitempty"`
+
+	// Currency mode for monetized requests. Valid values are TEST and REAL. Defaults to REAL.
+	// +kubebuilder:validation:Optional
+	CurrencyMode *string `json:"currencyMode,omitempty" tf:"currency_mode,omitempty"`
 }
 
 type WebACLObservation struct {
 
-	// The URL to use in SDK integrations with managed rule groups.
+	// URL to use in SDK integrations with managed rule groups.
 	ApplicationIntegrationURL *string `json:"applicationIntegrationUrl,omitempty" tf:"application_integration_url,omitempty"`
 
-	// The ARN of the WAF WebACL.
+	// ARN of the WAF WebACL.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// Specifies custom configurations for the associations between the web ACL and protected resources. See association_config below for details.
+	// Custom configurations for the associations between the web ACL and protected resources. See association_config below for details.
 	AssociationConfig *AssociationConfigObservation `json:"associationConfig,omitempty" tf:"association_config,omitempty"`
 
 	// Web ACL capacity units (WCUs) currently being used by this web ACL.
 	Capacity *float64 `json:"capacity,omitempty" tf:"capacity,omitempty"`
 
-	// Specifies how AWS WAF should handle CAPTCHA evaluations on the ACL level (used by AWS Bot Control). See captcha_config below for details.
+	// Configuration for how AWS WAF handles CAPTCHA evaluations at the web ACL level (used by AWS Bot Control). See captcha_config below for details.
 	CaptchaConfig *CaptchaConfigObservation `json:"captchaConfig,omitempty" tf:"captcha_config,omitempty"`
 
-	// Specifies how AWS WAF should handle Challenge evaluations on the ACL level (used by AWS Bot Control). See challenge_config below for details.
+	// Configuration for how AWS WAF handles Challenge evaluations at the web ACL level (used by AWS Bot Control). See challenge_config below for details.
 	ChallengeConfig *ChallengeConfigObservation `json:"challengeConfig,omitempty" tf:"challenge_config,omitempty"`
 
-	// Defines custom response bodies that can be referenced by custom_response actions. See custom_response_body below for details.
+	// Custom response bodies that can be referenced by custom_response actions. See custom_response_body below for details.
 	CustomResponseBody []WebACLCustomResponseBodyObservation `json:"customResponseBody,omitempty" tf:"custom_response_body,omitempty"`
 
-	// Specifies data protection to apply to the web request data for the web ACL. This is a web ACL level data protection option. See data_protection_config below for details.
+	// Data protection to apply to the web request data for the web ACL. This is a web ACL level data protection option. See data_protection_config below for details.
 	DataProtectionConfig *DataProtectionConfigObservation `json:"dataProtectionConfig,omitempty" tf:"data_protection_config,omitempty"`
 
 	// Action to perform if none of the rules contained in the WebACL match. See default_action below for details.
@@ -657,10 +776,13 @@ type WebACLObservation struct {
 	// Friendly description of the WebACL.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The ID of the WAF WebACL.
+	// ID of the WAF WebACL.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	LockToken *string `json:"lockToken,omitempty" tf:"lock_token,omitempty"`
+
+	// Monetization configuration for the web ACL. Provide this when any rule in the web ACL uses the monetize action. See monetization_config below for details.
+	MonetizationConfig *WebACLMonetizationConfigObservation `json:"monetizationConfig,omitempty" tf:"monetization_config,omitempty"`
 
 	// Friendly name of the WebACL. Conflicts with name_prefix.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -672,7 +794,7 @@ type WebACLObservation struct {
 	// A raw JSON string used to define the rules for allowing, blocking, or counting web requests. When this field is used, Crossplane cannot observe changes in the configuration through the AWS API; therefore, drift detection cannot be performed. Refer to the AWS documentation for the expected JSON structure: https://docs.aws.amazon.com/waf/latest/APIReference/API_CreateWebACL.html
 	RuleJSON *string `json:"ruleJson,omitempty" tf:"rule_json,omitempty"`
 
-	// Specifies whether this is for an AWS CloudFront distribution or for a regional application. Valid values are CLOUDFRONT or REGIONAL. To work with CloudFront, you must also specify the region us-east-1 (N. Virginia) on the AWS provider.
+	// Scope of the web ACL, either an AWS CloudFront distribution or a regional application. Valid values are CLOUDFRONT or REGIONAL. To work with CloudFront, you must also specify the region us-east-1 (N. Virginia) on the AWS provider.
 	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
 
 	// Key-value map of resource tags.
@@ -683,33 +805,33 @@ type WebACLObservation struct {
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// Specifies the domains that AWS WAF should accept in a web request token. This enables the use of tokens across multiple protected websites. When AWS WAF provides a token, it uses the domain of the AWS resource that the web ACL is protecting. If you don't specify a list of token domains, AWS WAF accepts tokens only for the domain of the protected resource. With a token domain list, AWS WAF accepts the resource's host domain plus all domains in the token domain list, including their prefixed subdomains.
+	// Domains that AWS WAF should accept in a web request token. This enables the use of tokens across multiple protected websites. When AWS WAF provides a token, it uses the domain of the AWS resource that the web ACL is protecting. If you don't specify a list of token domains, AWS WAF accepts tokens only for the domain of the protected resource. With a token domain list, AWS WAF accepts the resource's host domain plus all domains in the token domain list, including their prefixed subdomains.
 	// +listType=set
 	TokenDomains []*string `json:"tokenDomains,omitempty" tf:"token_domains,omitempty"`
 
-	// Defines and enables Amazon CloudWatch metrics and web request sample collection. See visibility_config below for details.
+	// Amazon CloudWatch metrics and web request sample collection configuration. See visibility_config below for details.
 	VisibilityConfig *WebACLVisibilityConfigObservation `json:"visibilityConfig,omitempty" tf:"visibility_config,omitempty"`
 }
 
 type WebACLParameters struct {
 
-	// Specifies custom configurations for the associations between the web ACL and protected resources. See association_config below for details.
+	// Custom configurations for the associations between the web ACL and protected resources. See association_config below for details.
 	// +kubebuilder:validation:Optional
 	AssociationConfig *AssociationConfigParameters `json:"associationConfig,omitempty" tf:"association_config,omitempty"`
 
-	// Specifies how AWS WAF should handle CAPTCHA evaluations on the ACL level (used by AWS Bot Control). See captcha_config below for details.
+	// Configuration for how AWS WAF handles CAPTCHA evaluations at the web ACL level (used by AWS Bot Control). See captcha_config below for details.
 	// +kubebuilder:validation:Optional
 	CaptchaConfig *CaptchaConfigParameters `json:"captchaConfig,omitempty" tf:"captcha_config,omitempty"`
 
-	// Specifies how AWS WAF should handle Challenge evaluations on the ACL level (used by AWS Bot Control). See challenge_config below for details.
+	// Configuration for how AWS WAF handles Challenge evaluations at the web ACL level (used by AWS Bot Control). See challenge_config below for details.
 	// +kubebuilder:validation:Optional
 	ChallengeConfig *ChallengeConfigParameters `json:"challengeConfig,omitempty" tf:"challenge_config,omitempty"`
 
-	// Defines custom response bodies that can be referenced by custom_response actions. See custom_response_body below for details.
+	// Custom response bodies that can be referenced by custom_response actions. See custom_response_body below for details.
 	// +kubebuilder:validation:Optional
 	CustomResponseBody []WebACLCustomResponseBodyParameters `json:"customResponseBody,omitempty" tf:"custom_response_body,omitempty"`
 
-	// Specifies data protection to apply to the web request data for the web ACL. This is a web ACL level data protection option. See data_protection_config below for details.
+	// Data protection to apply to the web request data for the web ACL. This is a web ACL level data protection option. See data_protection_config below for details.
 	// +kubebuilder:validation:Optional
 	DataProtectionConfig *DataProtectionConfigParameters `json:"dataProtectionConfig,omitempty" tf:"data_protection_config,omitempty"`
 
@@ -720,6 +842,10 @@ type WebACLParameters struct {
 	// Friendly description of the WebACL.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Monetization configuration for the web ACL. Provide this when any rule in the web ACL uses the monetize action. See monetization_config below for details.
+	// +kubebuilder:validation:Optional
+	MonetizationConfig *WebACLMonetizationConfigParameters `json:"monetizationConfig,omitempty" tf:"monetization_config,omitempty"`
 
 	// Friendly name of the WebACL. Conflicts with name_prefix.
 	// +kubebuilder:validation:Optional
@@ -734,7 +860,7 @@ type WebACLParameters struct {
 	// +kubebuilder:validation:Optional
 	RuleJSON *string `json:"ruleJson,omitempty" tf:"rule_json,omitempty"`
 
-	// Specifies whether this is for an AWS CloudFront distribution or for a regional application. Valid values are CLOUDFRONT or REGIONAL. To work with CloudFront, you must also specify the region us-east-1 (N. Virginia) on the AWS provider.
+	// Scope of the web ACL, either an AWS CloudFront distribution or a regional application. Valid values are CLOUDFRONT or REGIONAL. To work with CloudFront, you must also specify the region us-east-1 (N. Virginia) on the AWS provider.
 	// +kubebuilder:validation:Optional
 	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
 
@@ -743,12 +869,12 @@ type WebACLParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Specifies the domains that AWS WAF should accept in a web request token. This enables the use of tokens across multiple protected websites. When AWS WAF provides a token, it uses the domain of the AWS resource that the web ACL is protecting. If you don't specify a list of token domains, AWS WAF accepts tokens only for the domain of the protected resource. With a token domain list, AWS WAF accepts the resource's host domain plus all domains in the token domain list, including their prefixed subdomains.
+	// Domains that AWS WAF should accept in a web request token. This enables the use of tokens across multiple protected websites. When AWS WAF provides a token, it uses the domain of the AWS resource that the web ACL is protecting. If you don't specify a list of token domains, AWS WAF accepts tokens only for the domain of the protected resource. With a token domain list, AWS WAF accepts the resource's host domain plus all domains in the token domain list, including their prefixed subdomains.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	TokenDomains []*string `json:"tokenDomains,omitempty" tf:"token_domains,omitempty"`
 
-	// Defines and enables Amazon CloudWatch metrics and web request sample collection. See visibility_config below for details.
+	// Amazon CloudWatch metrics and web request sample collection configuration. See visibility_config below for details.
 	// +kubebuilder:validation:Optional
 	VisibilityConfig *WebACLVisibilityConfigParameters `json:"visibilityConfig,omitempty" tf:"visibility_config,omitempty"`
 }
@@ -758,7 +884,7 @@ type WebACLVisibilityConfigInitParameters struct {
 	// Whether the associated resource sends metrics to CloudWatch. For the list of available metrics, see AWS WAF Metrics.
 	CloudwatchMetricsEnabled *bool `json:"cloudwatchMetricsEnabled,omitempty" tf:"cloudwatch_metrics_enabled,omitempty"`
 
-	// A friendly name of the CloudWatch metric. The name can contain only alphanumeric characters (A-Z, a-z, 0-9) hyphen(-) and underscore (_), with length from one to 128 characters. It can't contain whitespace or metric names reserved for AWS WAF, for example All and Default_Action.
+	// Friendly name of the CloudWatch metric. The name can contain only alphanumeric characters (A-Z, a-z, 0-9) hyphen(-) and underscore (_), with length from one to 128 characters. It can't contain whitespace or metric names reserved for AWS WAF, for example All and Default_Action.
 	MetricName *string `json:"metricName,omitempty" tf:"metric_name,omitempty"`
 
 	// Whether AWS WAF should store a sampling of the web requests that match the rules. You can view the sampled requests through the AWS WAF console.
@@ -770,7 +896,7 @@ type WebACLVisibilityConfigObservation struct {
 	// Whether the associated resource sends metrics to CloudWatch. For the list of available metrics, see AWS WAF Metrics.
 	CloudwatchMetricsEnabled *bool `json:"cloudwatchMetricsEnabled,omitempty" tf:"cloudwatch_metrics_enabled,omitempty"`
 
-	// A friendly name of the CloudWatch metric. The name can contain only alphanumeric characters (A-Z, a-z, 0-9) hyphen(-) and underscore (_), with length from one to 128 characters. It can't contain whitespace or metric names reserved for AWS WAF, for example All and Default_Action.
+	// Friendly name of the CloudWatch metric. The name can contain only alphanumeric characters (A-Z, a-z, 0-9) hyphen(-) and underscore (_), with length from one to 128 characters. It can't contain whitespace or metric names reserved for AWS WAF, for example All and Default_Action.
 	MetricName *string `json:"metricName,omitempty" tf:"metric_name,omitempty"`
 
 	// Whether AWS WAF should store a sampling of the web requests that match the rules. You can view the sampled requests through the AWS WAF console.
@@ -783,7 +909,7 @@ type WebACLVisibilityConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	CloudwatchMetricsEnabled *bool `json:"cloudwatchMetricsEnabled" tf:"cloudwatch_metrics_enabled,omitempty"`
 
-	// A friendly name of the CloudWatch metric. The name can contain only alphanumeric characters (A-Z, a-z, 0-9) hyphen(-) and underscore (_), with length from one to 128 characters. It can't contain whitespace or metric names reserved for AWS WAF, for example All and Default_Action.
+	// Friendly name of the CloudWatch metric. The name can contain only alphanumeric characters (A-Z, a-z, 0-9) hyphen(-) and underscore (_), with length from one to 128 characters. It can't contain whitespace or metric names reserved for AWS WAF, for example All and Default_Action.
 	// +kubebuilder:validation:Optional
 	MetricName *string `json:"metricName" tf:"metric_name,omitempty"`
 

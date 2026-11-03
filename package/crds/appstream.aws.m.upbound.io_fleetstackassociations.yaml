@@ -314,7 +314,7 @@ spec:
                     description: Name of the fleet.
                     type: string
                   id:
-                    description: Unique ID of the appstream stack fleet association,
+                    description: Unique ID of the AppStream stack fleet association,
                       composed of the fleet_name and stack_name separated by a slash
                       (/).
                     type: string

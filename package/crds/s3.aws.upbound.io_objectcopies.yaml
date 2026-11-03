@@ -162,12 +162,12 @@ spec:
                     - namespace
                     type: object
                   expectedBucketOwner:
-                    description: Account id of the expected destination bucket owner.
+                    description: Account ID of the expected destination bucket owner.
                       If the destination bucket is owned by a different account, the
                       request will fail with an HTTP 403 (Access Denied) error.
                     type: string
                   expectedSourceBucketOwner:
-                    description: Account id of the expected source bucket owner. If
+                    description: Account ID of the expected source bucket owner. If
                       the source bucket is owned by a different account, the request
                       will fail with an HTTP 403 (Access Denied) error.
                     type: string
@@ -472,12 +472,12 @@ spec:
                     - namespace
                     type: object
                   expectedBucketOwner:
-                    description: Account id of the expected destination bucket owner.
+                    description: Account ID of the expected destination bucket owner.
                       If the destination bucket is owned by a different account, the
                       request will fail with an HTTP 403 (Access Denied) error.
                     type: string
                   expectedSourceBucketOwner:
-                    description: Account id of the expected source bucket owner. If
+                    description: Account ID of the expected source bucket owner. If
                       the source bucket is owned by a different account, the request
                       will fail with an HTTP 403 (Access Denied) error.
                     type: string
@@ -873,12 +873,12 @@ spec:
                       Headers.
                     type: string
                   expectedBucketOwner:
-                    description: Account id of the expected destination bucket owner.
+                    description: Account ID of the expected destination bucket owner.
                       If the destination bucket is owned by a different account, the
                       request will fail with an HTTP 403 (Access Denied) error.
                     type: string
                   expectedSourceBucketOwner:
-                    description: Account id of the expected source bucket owner. If
+                    description: Account ID of the expected source bucket owner. If
                       the source bucket is owned by a different account, the request
                       will fail with an HTTP 403 (Access Denied) error.
                     type: string

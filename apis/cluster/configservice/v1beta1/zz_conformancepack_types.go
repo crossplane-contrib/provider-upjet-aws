@@ -27,7 +27,7 @@ type ConformancePackInitParameters struct {
 	// A string containing full conformance pack template body. Maximum length of 51200. Drift detection is not possible with this argument.
 	TemplateBody *string `json:"templateBody,omitempty" tf:"template_body,omitempty"`
 
-	// Location of file, e.g., s3://bucketname/prefix, containing the template body. The uri must point to the conformance pack template that is located in an Amazon S3 bucket in the same region as the conformance pack. Maximum length of 1024. Drift detection is not possible with this argument.
+	// Location of file, e.g., s3://bucketname/prefix, containing the template body. The URI must point to the conformance pack template that is located in an Amazon S3 bucket in the same region as the conformance pack. Maximum length of 1024. Drift detection is not possible with this argument.
 	TemplateS3URI *string `json:"templateS3Uri,omitempty" tf:"template_s3_uri,omitempty"`
 }
 
@@ -54,7 +54,7 @@ type ConformancePackObservation struct {
 	// A string containing full conformance pack template body. Maximum length of 51200. Drift detection is not possible with this argument.
 	TemplateBody *string `json:"templateBody,omitempty" tf:"template_body,omitempty"`
 
-	// Location of file, e.g., s3://bucketname/prefix, containing the template body. The uri must point to the conformance pack template that is located in an Amazon S3 bucket in the same region as the conformance pack. Maximum length of 1024. Drift detection is not possible with this argument.
+	// Location of file, e.g., s3://bucketname/prefix, containing the template body. The URI must point to the conformance pack template that is located in an Amazon S3 bucket in the same region as the conformance pack. Maximum length of 1024. Drift detection is not possible with this argument.
 	TemplateS3URI *string `json:"templateS3Uri,omitempty" tf:"template_s3_uri,omitempty"`
 }
 
@@ -81,7 +81,7 @@ type ConformancePackParameters struct {
 	// +kubebuilder:validation:Optional
 	TemplateBody *string `json:"templateBody,omitempty" tf:"template_body,omitempty"`
 
-	// Location of file, e.g., s3://bucketname/prefix, containing the template body. The uri must point to the conformance pack template that is located in an Amazon S3 bucket in the same region as the conformance pack. Maximum length of 1024. Drift detection is not possible with this argument.
+	// Location of file, e.g., s3://bucketname/prefix, containing the template body. The URI must point to the conformance pack template that is located in an Amazon S3 bucket in the same region as the conformance pack. Maximum length of 1024. Drift detection is not possible with this argument.
 	// +kubebuilder:validation:Optional
 	TemplateS3URI *string `json:"templateS3Uri,omitempty" tf:"template_s3_uri,omitempty"`
 }

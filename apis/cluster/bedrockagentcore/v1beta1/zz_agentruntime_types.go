@@ -44,7 +44,7 @@ type AgentRuntimeArtifactParameters struct {
 
 type AgentRuntimeInitParameters struct {
 
-	// Container artifact configuration. See agent_runtime_artifact below.
+	// Artifact configuration for the agent runtime, either a container image or code stored in Amazon S3. See agent_runtime_artifact below.
 	AgentRuntimeArtifact *AgentRuntimeArtifactInitParameters `json:"agentRuntimeArtifact,omitempty" tf:"agent_runtime_artifact,omitempty"`
 
 	// Name of the agent runtime.
@@ -68,6 +68,9 @@ type AgentRuntimeInitParameters struct {
 
 	// Network configuration for the agent runtime. See network_configuration below.
 	NetworkConfiguration *NetworkConfigurationInitParameters `json:"networkConfiguration,omitempty" tf:"network_configuration,omitempty"`
+
+	// Platform version that controls how the agent runtime starts your agent. Valid values: V1, V2. When omitted, a new agent runtime uses V1 and an existing agent runtime keeps its current platform version. V2 restores each instance from a prepared snapshot, which keeps cold starts consistent regardless of image size. On V2, creates and updates take minutes rather than seconds, environment_variables has a smaller total size limit, and availability is limited to a subset of Regions. See Platform versions for details.
+	PlatformVersion *string `json:"platformVersion,omitempty" tf:"platform_version,omitempty"`
 
 	// Protocol configuration for the agent runtime. See protocol_configuration below.
 	ProtocolConfiguration *ProtocolConfigurationInitParameters `json:"protocolConfiguration,omitempty" tf:"protocol_configuration,omitempty"`
@@ -98,7 +101,7 @@ type AgentRuntimeObservation struct {
 	// ARN of the Agent Runtime.
 	AgentRuntimeArn *string `json:"agentRuntimeArn,omitempty" tf:"agent_runtime_arn,omitempty"`
 
-	// Container artifact configuration. See agent_runtime_artifact below.
+	// Artifact configuration for the agent runtime, either a container image or code stored in Amazon S3. See agent_runtime_artifact below.
 	AgentRuntimeArtifact *AgentRuntimeArtifactObservation `json:"agentRuntimeArtifact,omitempty" tf:"agent_runtime_artifact,omitempty"`
 
 	// Unique identifier of the Agent Runtime.
@@ -131,6 +134,9 @@ type AgentRuntimeObservation struct {
 	// Network configuration for the agent runtime. See network_configuration below.
 	NetworkConfiguration *NetworkConfigurationObservation `json:"networkConfiguration,omitempty" tf:"network_configuration,omitempty"`
 
+	// Platform version that controls how the agent runtime starts your agent. Valid values: V1, V2. When omitted, a new agent runtime uses V1 and an existing agent runtime keeps its current platform version. V2 restores each instance from a prepared snapshot, which keeps cold starts consistent regardless of image size. On V2, creates and updates take minutes rather than seconds, environment_variables has a smaller total size limit, and availability is limited to a subset of Regions. See Platform versions for details.
+	PlatformVersion *string `json:"platformVersion,omitempty" tf:"platform_version,omitempty"`
+
 	// Protocol configuration for the agent runtime. See protocol_configuration below.
 	ProtocolConfiguration *ProtocolConfigurationObservation `json:"protocolConfiguration,omitempty" tf:"protocol_configuration,omitempty"`
 
@@ -148,7 +154,7 @@ type AgentRuntimeObservation struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
@@ -158,7 +164,7 @@ type AgentRuntimeObservation struct {
 
 type AgentRuntimeParameters struct {
 
-	// Container artifact configuration. See agent_runtime_artifact below.
+	// Artifact configuration for the agent runtime, either a container image or code stored in Amazon S3. See agent_runtime_artifact below.
 	// +kubebuilder:validation:Optional
 	AgentRuntimeArtifact *AgentRuntimeArtifactParameters `json:"agentRuntimeArtifact,omitempty" tf:"agent_runtime_artifact,omitempty"`
 
@@ -190,6 +196,10 @@ type AgentRuntimeParameters struct {
 	// Network configuration for the agent runtime. See network_configuration below.
 	// +kubebuilder:validation:Optional
 	NetworkConfiguration *NetworkConfigurationParameters `json:"networkConfiguration,omitempty" tf:"network_configuration,omitempty"`
+
+	// Platform version that controls how the agent runtime starts your agent. Valid values: V1, V2. When omitted, a new agent runtime uses V1 and an existing agent runtime keeps its current platform version. V2 restores each instance from a prepared snapshot, which keeps cold starts consistent regardless of image size. On V2, creates and updates take minutes rather than seconds, environment_variables has a smaller total size limit, and availability is limited to a subset of Regions. See Platform versions for details.
+	// +kubebuilder:validation:Optional
+	PlatformVersion *string `json:"platformVersion,omitempty" tf:"platform_version,omitempty"`
 
 	// Protocol configuration for the agent runtime. See protocol_configuration below.
 	// +kubebuilder:validation:Optional
@@ -341,7 +351,7 @@ type CodeConfigurationInitParameters struct {
 	// Array specifying the entry point for code execution, indicating the function or method to invoke when the code runs. The array must contain 1 or 2 elements. Examples: ["main.py"], ["opentelemetry-instrument", "main.py"].
 	EntryPoint []*string `json:"entryPoint,omitempty" tf:"entry_point,omitempty"`
 
-	// Runtime environment used to execute the code. Valid values: PYTHON_3_10, PYTHON_3_11, PYTHON_3_12, PYTHON_3_13.
+	// Runtime environment used to execute the code. Valid values: PYTHON_3_10, PYTHON_3_11, PYTHON_3_12, PYTHON_3_13, PYTHON_3_14, NODE_22.
 	Runtime *string `json:"runtime,omitempty" tf:"runtime,omitempty"`
 }
 
@@ -353,7 +363,7 @@ type CodeConfigurationObservation struct {
 	// Array specifying the entry point for code execution, indicating the function or method to invoke when the code runs. The array must contain 1 or 2 elements. Examples: ["main.py"], ["opentelemetry-instrument", "main.py"].
 	EntryPoint []*string `json:"entryPoint,omitempty" tf:"entry_point,omitempty"`
 
-	// Runtime environment used to execute the code. Valid values: PYTHON_3_10, PYTHON_3_11, PYTHON_3_12, PYTHON_3_13.
+	// Runtime environment used to execute the code. Valid values: PYTHON_3_10, PYTHON_3_11, PYTHON_3_12, PYTHON_3_13, PYTHON_3_14, NODE_22.
 	Runtime *string `json:"runtime,omitempty" tf:"runtime,omitempty"`
 }
 
@@ -367,7 +377,7 @@ type CodeConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	EntryPoint []*string `json:"entryPoint" tf:"entry_point,omitempty"`
 
-	// Runtime environment used to execute the code. Valid values: PYTHON_3_10, PYTHON_3_11, PYTHON_3_12, PYTHON_3_13.
+	// Runtime environment used to execute the code. Valid values: PYTHON_3_10, PYTHON_3_11, PYTHON_3_12, PYTHON_3_13, PYTHON_3_14, NODE_22.
 	// +kubebuilder:validation:Optional
 	Runtime *string `json:"runtime" tf:"runtime,omitempty"`
 }
@@ -803,7 +813,7 @@ type NetworkModeConfigInitParameters struct {
 
 type NetworkModeConfigObservation struct {
 
-	// (Read-only) Whether a service-managed Amazon S3 gateway endpoint is provisioned in the VPC for the agent runtime. This value is managed by the service and cannot be set: it is rejected on both create and update. Agent runtimes created on or after the May 5, 2026 rollout do not include a service-managed Amazon S3 gateway.
+	// Whether a service-managed Amazon S3 gateway endpoint is provisioned in the VPC for the agent runtime. This value is managed by the service. Agent runtimes created on or after the May 5, 2026 rollout do not include a service-managed Amazon S3 gateway.
 	RequireServiceS3Endpoint *bool `json:"requireServiceS3Endpoint,omitempty" tf:"require_service_s3_endpoint,omitempty"`
 
 	// Security groups associated with the VPC configuration.
@@ -1033,21 +1043,21 @@ type ProtocolConfigurationParameters struct {
 
 type RequestHeaderConfigurationInitParameters struct {
 
-	// A list of HTTP request headers that are allowed to be passed through to the runtime.
+	// List of HTTP request headers that are allowed to be passed through to the runtime.
 	// +listType=set
 	RequestHeaderAllowlist []*string `json:"requestHeaderAllowlist,omitempty" tf:"request_header_allowlist,omitempty"`
 }
 
 type RequestHeaderConfigurationObservation struct {
 
-	// A list of HTTP request headers that are allowed to be passed through to the runtime.
+	// List of HTTP request headers that are allowed to be passed through to the runtime.
 	// +listType=set
 	RequestHeaderAllowlist []*string `json:"requestHeaderAllowlist,omitempty" tf:"request_header_allowlist,omitempty"`
 }
 
 type RequestHeaderConfigurationParameters struct {
 
-	// A list of HTTP request headers that are allowed to be passed through to the runtime.
+	// List of HTTP request headers that are allowed to be passed through to the runtime.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	RequestHeaderAllowlist []*string `json:"requestHeaderAllowlist,omitempty" tf:"request_header_allowlist,omitempty"`

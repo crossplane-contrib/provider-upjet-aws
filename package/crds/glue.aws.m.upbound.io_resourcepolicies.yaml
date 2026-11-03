@@ -60,11 +60,11 @@ spec:
               forProvider:
                 properties:
                   enableHybrid:
-                    description: Indicates that you are using both methods to grant
-                      cross-account. Valid values are TRUE and FALSE.
+                    description: Whether you are using both methods to grant cross-account.
+                      Valid values are TRUE and FALSE.
                     type: string
                   policy:
-                    description: The policy to be applied to the aws glue data catalog.
+                    description: Policy to be applied to the aws glue data catalog.
                     type: string
                   region:
                     description: |-
@@ -88,11 +88,11 @@ spec:
                   autoscaler.
                 properties:
                   enableHybrid:
-                    description: Indicates that you are using both methods to grant
-                      cross-account. Valid values are TRUE and FALSE.
+                    description: Whether you are using both methods to grant cross-account.
+                      Valid values are TRUE and FALSE.
                     type: string
                   policy:
-                    description: The policy to be applied to the aws glue data catalog.
+                    description: Policy to be applied to the aws glue data catalog.
                     type: string
                 type: object
               managementPolicies:
@@ -164,13 +164,13 @@ spec:
               atProvider:
                 properties:
                   enableHybrid:
-                    description: Indicates that you are using both methods to grant
-                      cross-account. Valid values are TRUE and FALSE.
+                    description: Whether you are using both methods to grant cross-account.
+                      Valid values are TRUE and FALSE.
                     type: string
                   id:
                     type: string
                   policy:
-                    description: The policy to be applied to the aws glue data catalog.
+                    description: Policy to be applied to the aws glue data catalog.
                     type: string
                   region:
                     description: |-

@@ -241,7 +241,7 @@ spec:
                       tags:
                         additionalProperties:
                           type: string
-                        description: A map of tags to assign to ecs resources.
+                        description: A map of tags to assign to ECS resources.
                         type: object
                         x-kubernetes-map-type: granular
                       taskCount:
@@ -755,7 +755,7 @@ spec:
                     type: object
                   targetId:
                     description: The unique target assignment ID. If missing, will
-                      generate a random, unique id.
+                      generate a random, unique ID.
                     type: string
                 required:
                 - region
@@ -955,7 +955,7 @@ spec:
                       tags:
                         additionalProperties:
                           type: string
-                        description: A map of tags to assign to ecs resources.
+                        description: A map of tags to assign to ECS resources.
                         type: object
                         x-kubernetes-map-type: granular
                       taskCount:
@@ -1464,7 +1464,7 @@ spec:
                     type: object
                   targetId:
                     description: The unique target assignment ID. If missing, will
-                      generate a random, unique id.
+                      generate a random, unique ID.
                     type: string
                 type: object
               managementPolicies:
@@ -1717,7 +1717,7 @@ spec:
                       tags:
                         additionalProperties:
                           type: string
-                        description: A map of tags to assign to ecs resources.
+                        description: A map of tags to assign to ECS resources.
                         type: object
                         x-kubernetes-map-type: granular
                       taskCount:
@@ -1907,7 +1907,7 @@ spec:
                     type: object
                   targetId:
                     description: The unique target assignment ID. If missing, will
-                      generate a random, unique id.
+                      generate a random, unique ID.
                     type: string
                 type: object
               conditions:

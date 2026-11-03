@@ -15,17 +15,17 @@ import (
 
 type VPCIpamPoolCidrAllocationInitParameters struct {
 
-	// The CIDR you want to assign to the pool.
+	// CIDR you want to assign to the pool.
 	Cidr *string `json:"cidr,omitempty" tf:"cidr,omitempty"`
 
-	// The description for the allocation.
+	// Description for the allocation.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Exclude a particular CIDR range from being returned by the pool.
 	// +listType=set
 	DisallowedCidrs []*string `json:"disallowedCidrs,omitempty" tf:"disallowed_cidrs,omitempty"`
 
-	// The ID of the pool to which you want to assign a CIDR.
+	// ID of the pool to which you want to assign a CIDR.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.VPCIpamPool
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	IpamPoolID *string `json:"ipamPoolId,omitempty" tf:"ipam_pool_id,omitempty"`
@@ -38,7 +38,7 @@ type VPCIpamPoolCidrAllocationInitParameters struct {
 	// +kubebuilder:validation:Optional
 	IpamPoolIDSelector *v2.NamespacedSelector `json:"ipamPoolIdSelector,omitempty" tf:"-"`
 
-	// The netmask length of the CIDR you would like to allocate to the IPAM pool. Valid Values: 0-128.
+	// Netmask length of the CIDR you would like to allocate to the IPAM pool. Valid Values: 0-128.
 	NetmaskLength *float64 `json:"netmaskLength,omitempty" tf:"netmask_length,omitempty"`
 
 	// Key-value map of resource tags.
@@ -48,39 +48,39 @@ type VPCIpamPoolCidrAllocationInitParameters struct {
 
 type VPCIpamPoolCidrAllocationObservation struct {
 
-	// The CIDR you want to assign to the pool.
+	// CIDR you want to assign to the pool.
 	Cidr *string `json:"cidr,omitempty" tf:"cidr,omitempty"`
 
-	// The description for the allocation.
+	// Description for the allocation.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Exclude a particular CIDR range from being returned by the pool.
 	// +listType=set
 	DisallowedCidrs []*string `json:"disallowedCidrs,omitempty" tf:"disallowed_cidrs,omitempty"`
 
-	// The ID of the allocation.
+	// ID of the allocation.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The ID of the allocation.
+	// ID of the allocation.
 	IpamPoolAllocationID *string `json:"ipamPoolAllocationId,omitempty" tf:"ipam_pool_allocation_id,omitempty"`
 
-	// The ID of the pool to which you want to assign a CIDR.
+	// ID of the pool to which you want to assign a CIDR.
 	IpamPoolID *string `json:"ipamPoolId,omitempty" tf:"ipam_pool_id,omitempty"`
 
-	// The netmask length of the CIDR you would like to allocate to the IPAM pool. Valid Values: 0-128.
+	// Netmask length of the CIDR you would like to allocate to the IPAM pool. Valid Values: 0-128.
 	NetmaskLength *float64 `json:"netmaskLength,omitempty" tf:"netmask_length,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The ID of the resource.
+	// ID of the resource.
 	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
 
-	// The owner of the resource.
+	// Owner of the resource.
 	ResourceOwner *string `json:"resourceOwner,omitempty" tf:"resource_owner,omitempty"`
 
-	// The type of the resource.
+	// Type of the resource.
 	ResourceType *string `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
 
 	// Key-value map of resource tags.
@@ -94,11 +94,11 @@ type VPCIpamPoolCidrAllocationObservation struct {
 
 type VPCIpamPoolCidrAllocationParameters struct {
 
-	// The CIDR you want to assign to the pool.
+	// CIDR you want to assign to the pool.
 	// +kubebuilder:validation:Optional
 	Cidr *string `json:"cidr,omitempty" tf:"cidr,omitempty"`
 
-	// The description for the allocation.
+	// Description for the allocation.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
@@ -107,7 +107,7 @@ type VPCIpamPoolCidrAllocationParameters struct {
 	// +listType=set
 	DisallowedCidrs []*string `json:"disallowedCidrs,omitempty" tf:"disallowed_cidrs,omitempty"`
 
-	// The ID of the pool to which you want to assign a CIDR.
+	// ID of the pool to which you want to assign a CIDR.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.VPCIpamPool
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -121,7 +121,7 @@ type VPCIpamPoolCidrAllocationParameters struct {
 	// +kubebuilder:validation:Optional
 	IpamPoolIDSelector *v2.NamespacedSelector `json:"ipamPoolIdSelector,omitempty" tf:"-"`
 
-	// The netmask length of the CIDR you would like to allocate to the IPAM pool. Valid Values: 0-128.
+	// Netmask length of the CIDR you would like to allocate to the IPAM pool. Valid Values: 0-128.
 	// +kubebuilder:validation:Optional
 	NetmaskLength *float64 `json:"netmaskLength,omitempty" tf:"netmask_length,omitempty"`
 

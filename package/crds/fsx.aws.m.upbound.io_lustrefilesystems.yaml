@@ -99,7 +99,7 @@ spec:
                           gibibytes (GiB). Required when the sizing_mode is USER_PROVISIONED.
                         type: number
                       sizingMode:
-                        description: Sizing mode for the cache. Valud values are NO_CACHE,
+                        description: Sizing mode for the cache. Valid values are NO_CACHE,
                           USER_PROVISIONED, and PROPORTIONAL_TO_THROUGHPUT_CAPACITY.
                         type: string
                     type: object
@@ -426,9 +426,9 @@ spec:
                     type: boolean
                   storageCapacity:
                     description: Storage capacity (GiB) of the file system. Minimum
-                      of 1200. See more details at Allowed values for Fsx storage
+                      of 1200. See more details at Allowed values for FSx storage
                       capacity. Update is allowed only for SCRATCH_2, PERSISTENT_1
-                      and PERSISTENT_2 deployment types, See more details at Fsx Storage
+                      and PERSISTENT_2 deployment types, See more details at FSx Storage
                       Capacity Update. Required when not creating filesystem for a
                       backup.
                     type: number
@@ -601,7 +601,7 @@ spec:
                           gibibytes (GiB). Required when the sizing_mode is USER_PROVISIONED.
                         type: number
                       sizingMode:
-                        description: Sizing mode for the cache. Valud values are NO_CACHE,
+                        description: Sizing mode for the cache. Valid values are NO_CACHE,
                           USER_PROVISIONED, and PROPORTIONAL_TO_THROUGHPUT_CAPACITY.
                         type: string
                     type: object
@@ -923,9 +923,9 @@ spec:
                     type: boolean
                   storageCapacity:
                     description: Storage capacity (GiB) of the file system. Minimum
-                      of 1200. See more details at Allowed values for Fsx storage
+                      of 1200. See more details at Allowed values for FSx storage
                       capacity. Update is allowed only for SCRATCH_2, PERSISTENT_1
-                      and PERSISTENT_2 deployment types, See more details at Fsx Storage
+                      and PERSISTENT_2 deployment types, See more details at FSx Storage
                       Capacity Update. Required when not creating filesystem for a
                       backup.
                     type: number
@@ -1149,7 +1149,7 @@ spec:
                           gibibytes (GiB). Required when the sizing_mode is USER_PROVISIONED.
                         type: number
                       sizingMode:
-                        description: Sizing mode for the cache. Valud values are NO_CACHE,
+                        description: Sizing mode for the cache. Valid values are NO_CACHE,
                           USER_PROVISIONED, and PROPORTIONAL_TO_THROUGHPUT_CAPACITY.
                         type: string
                     type: object
@@ -1332,9 +1332,9 @@ spec:
                     type: boolean
                   storageCapacity:
                     description: Storage capacity (GiB) of the file system. Minimum
-                      of 1200. See more details at Allowed values for Fsx storage
+                      of 1200. See more details at Allowed values for FSx storage
                       capacity. Update is allowed only for SCRATCH_2, PERSISTENT_1
-                      and PERSISTENT_2 deployment types, See more details at Fsx Storage
+                      and PERSISTENT_2 deployment types, See more details at FSx Storage
                       Capacity Update. Required when not creating filesystem for a
                       backup.
                     type: number

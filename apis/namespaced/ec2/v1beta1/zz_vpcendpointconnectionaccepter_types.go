@@ -18,7 +18,7 @@ type VPCEndpointConnectionAccepterInitParameters struct {
 
 type VPCEndpointConnectionAccepterObservation struct {
 
-	// The ID of the VPC Endpoint Connection.
+	// ID of the VPC Endpoint Connection.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.

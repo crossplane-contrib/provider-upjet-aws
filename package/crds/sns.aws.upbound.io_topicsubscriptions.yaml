@@ -75,8 +75,8 @@ spec:
                 properties:
                   confirmationTimeoutInMinutes:
                     description: Integer indicating number of minutes to wait in retrying
-                      mode for fetching subscription arn before marking it as failure.
-                      Only applicable for http and https protocols. Default is 1.
+                      mode for fetching subscription ARN before marking it as failure.
+                      Only applicable for HTTP and HTTPS protocols. Default is 1.
                     type: number
                   deliveryPolicy:
                     description: JSON String with the delivery policy (retries, backoff,
@@ -372,8 +372,8 @@ spec:
                 properties:
                   confirmationTimeoutInMinutes:
                     description: Integer indicating number of minutes to wait in retrying
-                      mode for fetching subscription arn before marking it as failure.
-                      Only applicable for http and https protocols. Default is 1.
+                      mode for fetching subscription ARN before marking it as failure.
+                      Only applicable for HTTP and HTTPS protocols. Default is 1.
                     type: number
                   deliveryPolicy:
                     description: JSON String with the delivery policy (retries, backoff,
@@ -748,8 +748,8 @@ spec:
                     type: string
                   confirmationTimeoutInMinutes:
                     description: Integer indicating number of minutes to wait in retrying
-                      mode for fetching subscription arn before marking it as failure.
-                      Only applicable for http and https protocols. Default is 1.
+                      mode for fetching subscription ARN before marking it as failure.
+                      Only applicable for HTTP and HTTPS protocols. Default is 1.
                     type: number
                   confirmationWasAuthenticated:
                     description: Whether the subscription confirmation request was

@@ -15,7 +15,7 @@ import (
 
 type RegistryInitParameters struct {
 
-	// A description of the registry.
+	// Description of the registry.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Key-value map of resource tags.
@@ -28,7 +28,7 @@ type RegistryObservation struct {
 	// ARN of Glue Registry.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// A description of the registry.
+	// Description of the registry.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// ARN of Glue Registry.
@@ -42,14 +42,14 @@ type RegistryObservation struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type RegistryParameters struct {
 
-	// A description of the registry.
+	// Description of the registry.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 

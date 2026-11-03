@@ -59,14 +59,14 @@ spec:
               forProvider:
                 properties:
                   availabilityZones:
-                    description: A list of availability zones. You must specify exactly
+                    description: List of availability zones. You must specify exactly
                       two.
                     items:
                       type: string
                     type: array
                   multiplexSettings:
-                    description: Multiplex settings. See Multiplex Settings for more
-                      details.
+                    description: Multiplex settings. See multiplex_settings Block
+                      for more details.
                     properties:
                       maximumVideoBufferDelayMilliseconds:
                         description: Maximum video buffer delay.
@@ -115,14 +115,14 @@ spec:
                   autoscaler.
                 properties:
                   availabilityZones:
-                    description: A list of availability zones. You must specify exactly
+                    description: List of availability zones. You must specify exactly
                       two.
                     items:
                       type: string
                     type: array
                   multiplexSettings:
-                    description: Multiplex settings. See Multiplex Settings for more
-                      details.
+                    description: Multiplex settings. See multiplex_settings Block
+                      for more details.
                     properties:
                       maximumVideoBufferDelayMilliseconds:
                         description: Maximum video buffer delay.
@@ -226,7 +226,7 @@ spec:
                     description: ARN of the Multiplex.
                     type: string
                   availabilityZones:
-                    description: A list of availability zones. You must specify exactly
+                    description: List of availability zones. You must specify exactly
                       two.
                     items:
                       type: string
@@ -235,8 +235,8 @@ spec:
                     description: (String) ID of the MediaLive Multiplex.
                     type: string
                   multiplexSettings:
-                    description: Multiplex settings. See Multiplex Settings for more
-                      details.
+                    description: Multiplex settings. See multiplex_settings Block
+                      for more details.
                     properties:
                       maximumVideoBufferDelayMilliseconds:
                         description: Maximum video buffer delay.

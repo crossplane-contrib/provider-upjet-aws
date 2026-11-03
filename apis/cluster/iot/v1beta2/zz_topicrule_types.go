@@ -1089,7 +1089,7 @@ type IotAnalyticsInitParameters struct {
 	// The payload that contains a JSON array of records will be sent to CloudWatch via a batch call.
 	BatchMode *bool `json:"batchMode,omitempty" tf:"batch_mode,omitempty"`
 
-	// Name of AWS IOT Analytics channel.
+	// Name of AWS IoT Analytics channel.
 	ChannelName *string `json:"channelName,omitempty" tf:"channel_name,omitempty"`
 
 	// The IAM role ARN that allows access to the CloudWatch alarm.
@@ -1101,7 +1101,7 @@ type IotAnalyticsObservation struct {
 	// The payload that contains a JSON array of records will be sent to CloudWatch via a batch call.
 	BatchMode *bool `json:"batchMode,omitempty" tf:"batch_mode,omitempty"`
 
-	// Name of AWS IOT Analytics channel.
+	// Name of AWS IoT Analytics channel.
 	ChannelName *string `json:"channelName,omitempty" tf:"channel_name,omitempty"`
 
 	// The IAM role ARN that allows access to the CloudWatch alarm.
@@ -1114,7 +1114,7 @@ type IotAnalyticsParameters struct {
 	// +kubebuilder:validation:Optional
 	BatchMode *bool `json:"batchMode,omitempty" tf:"batch_mode,omitempty"`
 
-	// Name of AWS IOT Analytics channel.
+	// Name of AWS IoT Analytics channel.
 	// +kubebuilder:validation:Optional
 	ChannelName *string `json:"channelName" tf:"channel_name,omitempty"`
 
@@ -1893,7 +1893,7 @@ type TopicRuleIotAnalyticsInitParameters struct {
 	// The payload that contains a JSON array of records will be sent to CloudWatch via a batch call.
 	BatchMode *bool `json:"batchMode,omitempty" tf:"batch_mode,omitempty"`
 
-	// Name of AWS IOT Analytics channel.
+	// Name of AWS IoT Analytics channel.
 	ChannelName *string `json:"channelName,omitempty" tf:"channel_name,omitempty"`
 
 	// The IAM role ARN that allows access to the CloudWatch alarm.
@@ -1905,7 +1905,7 @@ type TopicRuleIotAnalyticsObservation struct {
 	// The payload that contains a JSON array of records will be sent to CloudWatch via a batch call.
 	BatchMode *bool `json:"batchMode,omitempty" tf:"batch_mode,omitempty"`
 
-	// Name of AWS IOT Analytics channel.
+	// Name of AWS IoT Analytics channel.
 	ChannelName *string `json:"channelName,omitempty" tf:"channel_name,omitempty"`
 
 	// The IAM role ARN that allows access to the CloudWatch alarm.
@@ -1918,7 +1918,7 @@ type TopicRuleIotAnalyticsParameters struct {
 	// +kubebuilder:validation:Optional
 	BatchMode *bool `json:"batchMode,omitempty" tf:"batch_mode,omitempty"`
 
-	// Name of AWS IOT Analytics channel.
+	// Name of AWS IoT Analytics channel.
 	// +kubebuilder:validation:Optional
 	ChannelName *string `json:"channelName" tf:"channel_name,omitempty"`
 

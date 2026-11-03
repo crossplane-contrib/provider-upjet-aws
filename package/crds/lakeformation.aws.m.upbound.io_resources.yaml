@@ -63,7 +63,7 @@ spec:
                     description: ARN of the resource.
                     type: string
                   hybridAccessEnabled:
-                    description: Flag to enable AWS LakeFormation hybrid access permission
+                    description: Flag to enable AWS Lake Formation hybrid access permission
                       mode.
                     type: boolean
                   region:
@@ -189,7 +189,7 @@ spec:
                     description: ARN of the resource.
                     type: string
                   hybridAccessEnabled:
-                    description: Flag to enable AWS LakeFormation hybrid access permission
+                    description: Flag to enable AWS Lake Formation hybrid access permission
                       mode.
                     type: boolean
                   roleArn:
@@ -363,7 +363,7 @@ spec:
                     description: ARN of the resource.
                     type: string
                   hybridAccessEnabled:
-                    description: Flag to enable AWS LakeFormation hybrid access permission
+                    description: Flag to enable AWS Lake Formation hybrid access permission
                       mode.
                     type: boolean
                   id:

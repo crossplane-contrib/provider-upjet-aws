@@ -15,13 +15,13 @@ import (
 
 type StreamInitParameters struct {
 
-	// The encryption type to use. The only acceptable values are NONE or KMS. The default value is NONE.
+	// Encryption type to use. The only acceptable values are NONE or KMS. The default value is NONE.
 	EncryptionType *string `json:"encryptionType,omitempty" tf:"encryption_type,omitempty"`
 
-	// A boolean that indicates all registered consumers should be deregistered from the stream so that the stream can be destroyed without error. The default value is false.
+	// Whether to deregister all registered consumers from the stream so that the stream can be destroyed without error. The default value is false.
 	EnforceConsumerDeletion *bool `json:"enforceConsumerDeletion,omitempty" tf:"enforce_consumer_deletion,omitempty"`
 
-	// The identifier for the customer-managed KMS key to use for encryption. This can be a Key ID (UUID), a Key ARN, an Alias Name (prefixed with alias/), or an Alias ARN. You can also use a master key owned by Kinesis Data Streams by specifying the alias aws/kinesis.
+	// Identifier for the customer-managed KMS key to use for encryption. This can be a Key ID (UUID), a Key ARN, an Alias Name (prefixed with alias/), or an Alias ARN. You can also use a master key owned by Kinesis Data Streams by specifying the alias aws/kinesis.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kms/v1beta1.Key
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
@@ -33,20 +33,20 @@ type StreamInitParameters struct {
 	// +kubebuilder:validation:Optional
 	KMSKeyIDSelector *v2.NamespacedSelector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
-	// The maximum size for a single data record in KiB. The minimum value is 1024. The maximum value is 10240.
+	// Maximum size for a single data record in KiB. The minimum value is 1024. The maximum value is 10240.
 	MaxRecordSizeInKib *float64 `json:"maxRecordSizeInKib,omitempty" tf:"max_record_size_in_kib,omitempty"`
 
 	// Length of time data records are accessible after they are added to the stream. The maximum value of a stream's retention period is 8760 hours. Minimum value is 24. Default is 24.
 	RetentionPeriod *float64 `json:"retentionPeriod,omitempty" tf:"retention_period,omitempty"`
 
-	// The number of shards that the stream will use. If the stream_mode is PROVISIONED, this field is required. Amazon has guidelines for specifying the Stream size that should be referenced when creating a Kinesis stream. See Amazon Kinesis Streams for more.
+	// Number of shards that the stream will use. If the stream_mode is PROVISIONED, this field is required. Amazon has guidelines for specifying the Stream size that should be referenced when creating a Kinesis stream. See Amazon Kinesis Streams for more.
 	ShardCount *float64 `json:"shardCount,omitempty" tf:"shard_count,omitempty"`
 
-	// A list of shard-level CloudWatch metrics which can be enabled for the stream. See Monitoring with CloudWatch for more. Note that the value ALL should not be used; instead you should provide an explicit list of metrics you wish to enable.
+	// List of shard-level CloudWatch metrics which can be enabled for the stream. See Monitoring with CloudWatch for more. Note that the value ALL should not be used; instead you should provide an explicit list of metrics you wish to enable.
 	// +listType=set
 	ShardLevelMetrics []*string `json:"shardLevelMetrics,omitempty" tf:"shard_level_metrics,omitempty"`
 
-	// Indicates the capacity mode of the data stream. Detailed below.
+	// Capacity mode of the data stream. Detailed below.
 	StreamModeDetails *StreamModeDetailsInitParameters `json:"streamModeDetails,omitempty" tf:"stream_mode_details,omitempty"`
 
 	// Key-value map of resource tags.
@@ -59,19 +59,19 @@ type StreamInitParameters struct {
 
 type StreamModeDetailsInitParameters struct {
 
-	// Specifies the capacity mode of the stream. Must be either PROVISIONED or ON_DEMAND.
+	// Capacity mode of the stream. Must be either PROVISIONED or ON_DEMAND.
 	StreamMode *string `json:"streamMode,omitempty" tf:"stream_mode,omitempty"`
 }
 
 type StreamModeDetailsObservation struct {
 
-	// Specifies the capacity mode of the stream. Must be either PROVISIONED or ON_DEMAND.
+	// Capacity mode of the stream. Must be either PROVISIONED or ON_DEMAND.
 	StreamMode *string `json:"streamMode,omitempty" tf:"stream_mode,omitempty"`
 }
 
 type StreamModeDetailsParameters struct {
 
-	// Specifies the capacity mode of the stream. Must be either PROVISIONED or ON_DEMAND.
+	// Capacity mode of the stream. Must be either PROVISIONED or ON_DEMAND.
 	// +kubebuilder:validation:Optional
 	StreamMode *string `json:"streamMode" tf:"stream_mode,omitempty"`
 }
@@ -81,19 +81,19 @@ type StreamObservation struct {
 	// ARN specifying the stream (same as id).
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The encryption type to use. The only acceptable values are NONE or KMS. The default value is NONE.
+	// Encryption type to use. The only acceptable values are NONE or KMS. The default value is NONE.
 	EncryptionType *string `json:"encryptionType,omitempty" tf:"encryption_type,omitempty"`
 
-	// A boolean that indicates all registered consumers should be deregistered from the stream so that the stream can be destroyed without error. The default value is false.
+	// Whether to deregister all registered consumers from the stream so that the stream can be destroyed without error. The default value is false.
 	EnforceConsumerDeletion *bool `json:"enforceConsumerDeletion,omitempty" tf:"enforce_consumer_deletion,omitempty"`
 
-	// The unique stream ID.
+	// Unique stream ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The identifier for the customer-managed KMS key to use for encryption. This can be a Key ID (UUID), a Key ARN, an Alias Name (prefixed with alias/), or an Alias ARN. You can also use a master key owned by Kinesis Data Streams by specifying the alias aws/kinesis.
+	// Identifier for the customer-managed KMS key to use for encryption. This can be a Key ID (UUID), a Key ARN, an Alias Name (prefixed with alias/), or an Alias ARN. You can also use a master key owned by Kinesis Data Streams by specifying the alias aws/kinesis.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
-	// The maximum size for a single data record in KiB. The minimum value is 1024. The maximum value is 10240.
+	// Maximum size for a single data record in KiB. The minimum value is 1024. The maximum value is 10240.
 	MaxRecordSizeInKib *float64 `json:"maxRecordSizeInKib,omitempty" tf:"max_record_size_in_kib,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -103,21 +103,21 @@ type StreamObservation struct {
 	// Length of time data records are accessible after they are added to the stream. The maximum value of a stream's retention period is 8760 hours. Minimum value is 24. Default is 24.
 	RetentionPeriod *float64 `json:"retentionPeriod,omitempty" tf:"retention_period,omitempty"`
 
-	// The number of shards that the stream will use. If the stream_mode is PROVISIONED, this field is required. Amazon has guidelines for specifying the Stream size that should be referenced when creating a Kinesis stream. See Amazon Kinesis Streams for more.
+	// Number of shards that the stream will use. If the stream_mode is PROVISIONED, this field is required. Amazon has guidelines for specifying the Stream size that should be referenced when creating a Kinesis stream. See Amazon Kinesis Streams for more.
 	ShardCount *float64 `json:"shardCount,omitempty" tf:"shard_count,omitempty"`
 
-	// A list of shard-level CloudWatch metrics which can be enabled for the stream. See Monitoring with CloudWatch for more. Note that the value ALL should not be used; instead you should provide an explicit list of metrics you wish to enable.
+	// List of shard-level CloudWatch metrics which can be enabled for the stream. See Monitoring with CloudWatch for more. Note that the value ALL should not be used; instead you should provide an explicit list of metrics you wish to enable.
 	// +listType=set
 	ShardLevelMetrics []*string `json:"shardLevelMetrics,omitempty" tf:"shard_level_metrics,omitempty"`
 
-	// Indicates the capacity mode of the data stream. Detailed below.
+	// Capacity mode of the data stream. Detailed below.
 	StreamModeDetails *StreamModeDetailsObservation `json:"streamModeDetails,omitempty" tf:"stream_mode_details,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
@@ -127,15 +127,15 @@ type StreamObservation struct {
 
 type StreamParameters struct {
 
-	// The encryption type to use. The only acceptable values are NONE or KMS. The default value is NONE.
+	// Encryption type to use. The only acceptable values are NONE or KMS. The default value is NONE.
 	// +kubebuilder:validation:Optional
 	EncryptionType *string `json:"encryptionType,omitempty" tf:"encryption_type,omitempty"`
 
-	// A boolean that indicates all registered consumers should be deregistered from the stream so that the stream can be destroyed without error. The default value is false.
+	// Whether to deregister all registered consumers from the stream so that the stream can be destroyed without error. The default value is false.
 	// +kubebuilder:validation:Optional
 	EnforceConsumerDeletion *bool `json:"enforceConsumerDeletion,omitempty" tf:"enforce_consumer_deletion,omitempty"`
 
-	// The identifier for the customer-managed KMS key to use for encryption. This can be a Key ID (UUID), a Key ARN, an Alias Name (prefixed with alias/), or an Alias ARN. You can also use a master key owned by Kinesis Data Streams by specifying the alias aws/kinesis.
+	// Identifier for the customer-managed KMS key to use for encryption. This can be a Key ID (UUID), a Key ARN, an Alias Name (prefixed with alias/), or an Alias ARN. You can also use a master key owned by Kinesis Data Streams by specifying the alias aws/kinesis.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kms/v1beta1.Key
 	// +kubebuilder:validation:Optional
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
@@ -148,7 +148,7 @@ type StreamParameters struct {
 	// +kubebuilder:validation:Optional
 	KMSKeyIDSelector *v2.NamespacedSelector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
-	// The maximum size for a single data record in KiB. The minimum value is 1024. The maximum value is 10240.
+	// Maximum size for a single data record in KiB. The minimum value is 1024. The maximum value is 10240.
 	// +kubebuilder:validation:Optional
 	MaxRecordSizeInKib *float64 `json:"maxRecordSizeInKib,omitempty" tf:"max_record_size_in_kib,omitempty"`
 
@@ -161,16 +161,16 @@ type StreamParameters struct {
 	// +kubebuilder:validation:Optional
 	RetentionPeriod *float64 `json:"retentionPeriod,omitempty" tf:"retention_period,omitempty"`
 
-	// The number of shards that the stream will use. If the stream_mode is PROVISIONED, this field is required. Amazon has guidelines for specifying the Stream size that should be referenced when creating a Kinesis stream. See Amazon Kinesis Streams for more.
+	// Number of shards that the stream will use. If the stream_mode is PROVISIONED, this field is required. Amazon has guidelines for specifying the Stream size that should be referenced when creating a Kinesis stream. See Amazon Kinesis Streams for more.
 	// +kubebuilder:validation:Optional
 	ShardCount *float64 `json:"shardCount,omitempty" tf:"shard_count,omitempty"`
 
-	// A list of shard-level CloudWatch metrics which can be enabled for the stream. See Monitoring with CloudWatch for more. Note that the value ALL should not be used; instead you should provide an explicit list of metrics you wish to enable.
+	// List of shard-level CloudWatch metrics which can be enabled for the stream. See Monitoring with CloudWatch for more. Note that the value ALL should not be used; instead you should provide an explicit list of metrics you wish to enable.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	ShardLevelMetrics []*string `json:"shardLevelMetrics,omitempty" tf:"shard_level_metrics,omitempty"`
 
-	// Indicates the capacity mode of the data stream. Detailed below.
+	// Capacity mode of the data stream. Detailed below.
 	// +kubebuilder:validation:Optional
 	StreamModeDetails *StreamModeDetailsParameters `json:"streamModeDetails,omitempty" tf:"stream_mode_details,omitempty"`
 

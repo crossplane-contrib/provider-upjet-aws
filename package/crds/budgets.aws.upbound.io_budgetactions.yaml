@@ -1355,32 +1355,33 @@ spec:
               forProvider:
                 properties:
                   accountId:
-                    description: The ID of the target account for budget. Will use
-                      current user's account_id by default if omitted.
+                    description: ID of the target account for the budget. Uses the
+                      current user's account ID by default if omitted.
                     type: string
                   actionThreshold:
-                    description: The trigger threshold of the action. See Action Threshold.
+                    description: Trigger threshold of the action. See action_threshold
+                      Block.
                     properties:
                       actionThresholdType:
-                        description: The type of threshold for a notification. Valid
-                          values are PERCENTAGE or ABSOLUTE_VALUE.
+                        description: Type of threshold for a notification. Valid values
+                          are PERCENTAGE or ABSOLUTE_VALUE.
                         type: string
                       actionThresholdValue:
-                        description: The threshold of a notification.
+                        description: Threshold of a notification.
                         type: number
                     type: object
                   actionType:
-                    description: The type of action. This defines the type of tasks
-                      that can be carried out by this action. This field also determines
+                    description: Type of action. This defines the type of tasks that
+                      can be carried out by this action. This field also determines
                       the format for definition. Valid values are APPLY_IAM_POLICY,
                       APPLY_SCP_POLICY, and RUN_SSM_DOCUMENTS.
                     type: string
                   approvalModel:
-                    description: This specifies if the action needs manual or automatic
-                      approval. Valid values are AUTOMATIC and MANUAL.
+                    description: Whether the action needs manual or automatic approval.
+                      Valid values are AUTOMATIC and MANUAL.
                     type: string
                   budgetName:
-                    description: The name of a budget.
+                    description: Name of a budget.
                     type: string
                   budgetNameRef:
                     description: Reference to a Budget in budgets to populate budgetName.
@@ -1457,15 +1458,14 @@ spec:
                         type: object
                     type: object
                   definition:
-                    description: Specifies all of the type-specific parameters. See
-                      Definition.
+                    description: Type-specific parameters. See definition Block.
                     properties:
                       iamActionDefinition:
-                        description: The AWS Identity and Access Management (IAM)
-                          action definition details. See IAM Action Definition.
+                        description: AWS Identity and Access Management (IAM) action
+                          definition details. See iam_action_definition Block.
                         properties:
                           groups:
-                            description: A list of groups to be attached. There must
+                            description: List of groups to be attached. There must
                               be at least one group.
                             items:
                               type: string
@@ -1551,7 +1551,7 @@ spec:
                                 type: object
                             type: object
                           roles:
-                            description: A list of roles to be attached. There must
+                            description: List of roles to be attached. There must
                               be at least one role.
                             items:
                               type: string
@@ -1636,7 +1636,7 @@ spec:
                                 type: object
                             type: object
                           users:
-                            description: A list of users to be attached. There must
+                            description: List of users to be attached. There must
                               be at least one user.
                             items:
                               type: string
@@ -1644,43 +1644,43 @@ spec:
                             x-kubernetes-list-type: set
                         type: object
                       scpActionDefinition:
-                        description: The service control policies (SCPs) action definition
-                          details. See SCP Action Definition.
+                        description: Service control policies (SCPs) action definition
+                          details. See scp_action_definition Block.
                         properties:
                           policyId:
-                            description: The policy ID attached.
+                            description: Policy ID attached.
                             type: string
                           targetIds:
-                            description: A list of target IDs.
+                            description: List of target IDs.
                             items:
                               type: string
                             type: array
                             x-kubernetes-list-type: set
                         type: object
                       ssmActionDefinition:
-                        description: The AWS Systems Manager (SSM) action definition
-                          details. See SSM Action Definition.
+                        description: AWS Systems Manager (SSM) action definition details.
+                          See ssm_action_definition Block.
                         properties:
                           actionSubType:
-                            description: The action subType. Valid values are STOP_EC2_INSTANCES
+                            description: Action subType. Valid values are STOP_EC2_INSTANCES
                               or STOP_RDS_INSTANCES.
                             type: string
                           instanceIds:
-                            description: The EC2 and RDS instance IDs.
+                            description: EC2 and RDS instance IDs.
                             items:
                               type: string
                             type: array
                             x-kubernetes-list-type: set
                           region:
-                            description: The Region to run the SSM document.
+                            description: Region to run the SSM document.
                             type: string
                         required:
                         - region
                         type: object
                     type: object
                   executionRoleArn:
-                    description: The role passed for action execution and reversion.
-                      Roles and actions must be in the same account.
+                    description: Role passed for action execution and reversion. Roles
+                      and actions must be in the same account.
                     type: string
                   executionRoleArnRef:
                     description: Reference to a Role in iam to populate executionRoleArn.
@@ -1757,20 +1757,20 @@ spec:
                         type: object
                     type: object
                   notificationType:
-                    description: The type of a notification. Valid values are ACTUAL
-                      or FORECASTED.
+                    description: Type of a notification. Valid values are ACTUAL or
+                      FORECASTED.
                     type: string
                   subscriber:
-                    description: A list of subscribers. See Subscriber.
+                    description: Set of subscribers. See subscriber Block.
                     items:
                       properties:
                         address:
-                          description: The address that AWS sends budget notifications
+                          description: Address that AWS sends budget notifications
                             to, either an SNS topic or an email.
                           type: string
                         subscriptionType:
-                          description: The type of notification that AWS sends to
-                            a subscriber. Valid values are SNS or EMAIL.
+                          description: Type of notification that AWS sends to a subscriber.
+                            Valid values are SNS or EMAIL.
                           type: string
                       type: object
                     type: array
@@ -1795,32 +1795,33 @@ spec:
                   autoscaler.
                 properties:
                   accountId:
-                    description: The ID of the target account for budget. Will use
-                      current user's account_id by default if omitted.
+                    description: ID of the target account for the budget. Uses the
+                      current user's account ID by default if omitted.
                     type: string
                   actionThreshold:
-                    description: The trigger threshold of the action. See Action Threshold.
+                    description: Trigger threshold of the action. See action_threshold
+                      Block.
                     properties:
                       actionThresholdType:
-                        description: The type of threshold for a notification. Valid
-                          values are PERCENTAGE or ABSOLUTE_VALUE.
+                        description: Type of threshold for a notification. Valid values
+                          are PERCENTAGE or ABSOLUTE_VALUE.
                         type: string
                       actionThresholdValue:
-                        description: The threshold of a notification.
+                        description: Threshold of a notification.
                         type: number
                     type: object
                   actionType:
-                    description: The type of action. This defines the type of tasks
-                      that can be carried out by this action. This field also determines
+                    description: Type of action. This defines the type of tasks that
+                      can be carried out by this action. This field also determines
                       the format for definition. Valid values are APPLY_IAM_POLICY,
                       APPLY_SCP_POLICY, and RUN_SSM_DOCUMENTS.
                     type: string
                   approvalModel:
-                    description: This specifies if the action needs manual or automatic
-                      approval. Valid values are AUTOMATIC and MANUAL.
+                    description: Whether the action needs manual or automatic approval.
+                      Valid values are AUTOMATIC and MANUAL.
                     type: string
                   budgetName:
-                    description: The name of a budget.
+                    description: Name of a budget.
                     type: string
                   budgetNameRef:
                     description: Reference to a Budget in budgets to populate budgetName.
@@ -1897,15 +1898,14 @@ spec:
                         type: object
                     type: object
                   definition:
-                    description: Specifies all of the type-specific parameters. See
-                      Definition.
+                    description: Type-specific parameters. See definition Block.
                     properties:
                       iamActionDefinition:
-                        description: The AWS Identity and Access Management (IAM)
-                          action definition details. See IAM Action Definition.
+                        description: AWS Identity and Access Management (IAM) action
+                          definition details. See iam_action_definition Block.
                         properties:
                           groups:
-                            description: A list of groups to be attached. There must
+                            description: List of groups to be attached. There must
                               be at least one group.
                             items:
                               type: string
@@ -1991,7 +1991,7 @@ spec:
                                 type: object
                             type: object
                           roles:
-                            description: A list of roles to be attached. There must
+                            description: List of roles to be attached. There must
                               be at least one role.
                             items:
                               type: string
@@ -2076,7 +2076,7 @@ spec:
                                 type: object
                             type: object
                           users:
-                            description: A list of users to be attached. There must
+                            description: List of users to be attached. There must
                               be at least one user.
                             items:
                               type: string
@@ -2084,29 +2084,29 @@ spec:
                             x-kubernetes-list-type: set
                         type: object
                       scpActionDefinition:
-                        description: The service control policies (SCPs) action definition
-                          details. See SCP Action Definition.
+                        description: Service control policies (SCPs) action definition
+                          details. See scp_action_definition Block.
                         properties:
                           policyId:
-                            description: The policy ID attached.
+                            description: Policy ID attached.
                             type: string
                           targetIds:
-                            description: A list of target IDs.
+                            description: List of target IDs.
                             items:
                               type: string
                             type: array
                             x-kubernetes-list-type: set
                         type: object
                       ssmActionDefinition:
-                        description: The AWS Systems Manager (SSM) action definition
-                          details. See SSM Action Definition.
+                        description: AWS Systems Manager (SSM) action definition details.
+                          See ssm_action_definition Block.
                         properties:
                           actionSubType:
-                            description: The action subType. Valid values are STOP_EC2_INSTANCES
+                            description: Action subType. Valid values are STOP_EC2_INSTANCES
                               or STOP_RDS_INSTANCES.
                             type: string
                           instanceIds:
-                            description: The EC2 and RDS instance IDs.
+                            description: EC2 and RDS instance IDs.
                             items:
                               type: string
                             type: array
@@ -2114,8 +2114,8 @@ spec:
                         type: object
                     type: object
                   executionRoleArn:
-                    description: The role passed for action execution and reversion.
-                      Roles and actions must be in the same account.
+                    description: Role passed for action execution and reversion. Roles
+                      and actions must be in the same account.
                     type: string
                   executionRoleArnRef:
                     description: Reference to a Role in iam to populate executionRoleArn.
@@ -2192,20 +2192,20 @@ spec:
                         type: object
                     type: object
                   notificationType:
-                    description: The type of a notification. Valid values are ACTUAL
-                      or FORECASTED.
+                    description: Type of a notification. Valid values are ACTUAL or
+                      FORECASTED.
                     type: string
                   subscriber:
-                    description: A list of subscribers. See Subscriber.
+                    description: Set of subscribers. See subscriber Block.
                     items:
                       properties:
                         address:
-                          description: The address that AWS sends budget notifications
+                          description: Address that AWS sends budget notifications
                             to, either an SNS topic or an email.
                           type: string
                         subscriptionType:
-                          description: The type of notification that AWS sends to
-                            a subscriber. Valid values are SNS or EMAIL.
+                          description: Type of notification that AWS sends to a subscriber.
+                            Valid values are SNS or EMAIL.
                           type: string
                       type: object
                     type: array
@@ -2333,49 +2333,49 @@ spec:
               atProvider:
                 properties:
                   accountId:
-                    description: The ID of the target account for budget. Will use
-                      current user's account_id by default if omitted.
+                    description: ID of the target account for the budget. Uses the
+                      current user's account ID by default if omitted.
                     type: string
                   actionId:
-                    description: The id of the budget action.
+                    description: ID of the budget action.
                     type: string
                   actionThreshold:
-                    description: The trigger threshold of the action. See Action Threshold.
+                    description: Trigger threshold of the action. See action_threshold
+                      Block.
                     properties:
                       actionThresholdType:
-                        description: The type of threshold for a notification. Valid
-                          values are PERCENTAGE or ABSOLUTE_VALUE.
+                        description: Type of threshold for a notification. Valid values
+                          are PERCENTAGE or ABSOLUTE_VALUE.
                         type: string
                       actionThresholdValue:
-                        description: The threshold of a notification.
+                        description: Threshold of a notification.
                         type: number
                     type: object
                   actionType:
-                    description: The type of action. This defines the type of tasks
-                      that can be carried out by this action. This field also determines
+                    description: Type of action. This defines the type of tasks that
+                      can be carried out by this action. This field also determines
                       the format for definition. Valid values are APPLY_IAM_POLICY,
                       APPLY_SCP_POLICY, and RUN_SSM_DOCUMENTS.
                     type: string
                   approvalModel:
-                    description: This specifies if the action needs manual or automatic
-                      approval. Valid values are AUTOMATIC and MANUAL.
+                    description: Whether the action needs manual or automatic approval.
+                      Valid values are AUTOMATIC and MANUAL.
                     type: string
                   arn:
-                    description: The ARN of the budget action.
+                    description: ARN of the budget action.
                     type: string
                   budgetName:
-                    description: The name of a budget.
+                    description: Name of a budget.
                     type: string
                   definition:
-                    description: Specifies all of the type-specific parameters. See
-                      Definition.
+                    description: Type-specific parameters. See definition Block.
                     properties:
                       iamActionDefinition:
-                        description: The AWS Identity and Access Management (IAM)
-                          action definition details. See IAM Action Definition.
+                        description: AWS Identity and Access Management (IAM) action
+                          definition details. See iam_action_definition Block.
                         properties:
                           groups:
-                            description: A list of groups to be attached. There must
+                            description: List of groups to be attached. There must
                               be at least one group.
                             items:
                               type: string
@@ -2385,14 +2385,14 @@ spec:
                             description: ARN of the policy to be attached.
                             type: string
                           roles:
-                            description: A list of roles to be attached. There must
+                            description: List of roles to be attached. There must
                               be at least one role.
                             items:
                               type: string
                             type: array
                             x-kubernetes-list-type: set
                           users:
-                            description: A list of users to be attached. There must
+                            description: List of users to be attached. There must
                               be at least one user.
                             items:
                               type: string
@@ -2400,63 +2400,63 @@ spec:
                             x-kubernetes-list-type: set
                         type: object
                       scpActionDefinition:
-                        description: The service control policies (SCPs) action definition
-                          details. See SCP Action Definition.
+                        description: Service control policies (SCPs) action definition
+                          details. See scp_action_definition Block.
                         properties:
                           policyId:
-                            description: The policy ID attached.
+                            description: Policy ID attached.
                             type: string
                           targetIds:
-                            description: A list of target IDs.
+                            description: List of target IDs.
                             items:
                               type: string
                             type: array
                             x-kubernetes-list-type: set
                         type: object
                       ssmActionDefinition:
-                        description: The AWS Systems Manager (SSM) action definition
-                          details. See SSM Action Definition.
+                        description: AWS Systems Manager (SSM) action definition details.
+                          See ssm_action_definition Block.
                         properties:
                           actionSubType:
-                            description: The action subType. Valid values are STOP_EC2_INSTANCES
+                            description: Action subType. Valid values are STOP_EC2_INSTANCES
                               or STOP_RDS_INSTANCES.
                             type: string
                           instanceIds:
-                            description: The EC2 and RDS instance IDs.
+                            description: EC2 and RDS instance IDs.
                             items:
                               type: string
                             type: array
                             x-kubernetes-list-type: set
                           region:
-                            description: The Region to run the SSM document.
+                            description: Region to run the SSM document.
                             type: string
                         type: object
                     type: object
                   executionRoleArn:
-                    description: The role passed for action execution and reversion.
-                      Roles and actions must be in the same account.
+                    description: Role passed for action execution and reversion. Roles
+                      and actions must be in the same account.
                     type: string
                   id:
                     description: ID of resource.
                     type: string
                   notificationType:
-                    description: The type of a notification. Valid values are ACTUAL
-                      or FORECASTED.
+                    description: Type of a notification. Valid values are ACTUAL or
+                      FORECASTED.
                     type: string
                   status:
-                    description: The status of the budget action.
+                    description: Status of the budget action.
                     type: string
                   subscriber:
-                    description: A list of subscribers. See Subscriber.
+                    description: Set of subscribers. See subscriber Block.
                     items:
                       properties:
                         address:
-                          description: The address that AWS sends budget notifications
+                          description: Address that AWS sends budget notifications
                             to, either an SNS topic or an email.
                           type: string
                         subscriptionType:
-                          description: The type of notification that AWS sends to
-                            a subscriber. Valid values are SNS or EMAIL.
+                          description: Type of notification that AWS sends to a subscriber.
+                            Valid values are SNS or EMAIL.
                           type: string
                       type: object
                     type: array

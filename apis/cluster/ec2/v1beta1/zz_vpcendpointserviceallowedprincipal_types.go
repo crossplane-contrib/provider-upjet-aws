@@ -15,10 +15,10 @@ import (
 
 type VPCEndpointServiceAllowedPrincipalInitParameters struct {
 
-	// The ARN of the principal to allow permissions.
+	// ARN of the principal to allow permissions.
 	PrincipalArn *string `json:"principalArn,omitempty" tf:"principal_arn,omitempty"`
 
-	// The ID of the VPC endpoint service to allow permission.
+	// ID of the VPC endpoint service to allow permission.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.VPCEndpointService
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	VPCEndpointServiceID *string `json:"vpcEndpointServiceId,omitempty" tf:"vpc_endpoint_service_id,omitempty"`
@@ -34,23 +34,23 @@ type VPCEndpointServiceAllowedPrincipalInitParameters struct {
 
 type VPCEndpointServiceAllowedPrincipalObservation struct {
 
-	// The ID of the association.
+	// ID of the association.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The ARN of the principal to allow permissions.
+	// ARN of the principal to allow permissions.
 	PrincipalArn *string `json:"principalArn,omitempty" tf:"principal_arn,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The ID of the VPC endpoint service to allow permission.
+	// ID of the VPC endpoint service to allow permission.
 	VPCEndpointServiceID *string `json:"vpcEndpointServiceId,omitempty" tf:"vpc_endpoint_service_id,omitempty"`
 }
 
 type VPCEndpointServiceAllowedPrincipalParameters struct {
 
-	// The ARN of the principal to allow permissions.
+	// ARN of the principal to allow permissions.
 	// +kubebuilder:validation:Optional
 	PrincipalArn *string `json:"principalArn,omitempty" tf:"principal_arn,omitempty"`
 
@@ -59,7 +59,7 @@ type VPCEndpointServiceAllowedPrincipalParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// The ID of the VPC endpoint service to allow permission.
+	// ID of the VPC endpoint service to allow permission.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.VPCEndpointService
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional

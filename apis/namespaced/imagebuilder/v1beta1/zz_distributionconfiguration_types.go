@@ -257,7 +257,7 @@ type DistributionInitParameters struct {
 	// Configuration block with S3 export settings. Detailed below.
 	S3ExportConfiguration *S3ExportConfigurationInitParameters `json:"s3ExportConfiguration,omitempty" tf:"s3_export_configuration,omitempty"`
 
-	// Configuration block with SSM parameter configuration to use as AMI id output. Detailed below.
+	// Configuration block with SSM parameter configuration to use as AMI ID output. Detailed below.
 	SsmParameterConfiguration []SsmParameterConfigurationInitParameters `json:"ssmParameterConfiguration,omitempty" tf:"ssm_parameter_configuration,omitempty"`
 }
 
@@ -285,7 +285,7 @@ type DistributionObservation struct {
 	// Configuration block with S3 export settings. Detailed below.
 	S3ExportConfiguration *S3ExportConfigurationObservation `json:"s3ExportConfiguration,omitempty" tf:"s3_export_configuration,omitempty"`
 
-	// Configuration block with SSM parameter configuration to use as AMI id output. Detailed below.
+	// Configuration block with SSM parameter configuration to use as AMI ID output. Detailed below.
 	SsmParameterConfiguration []SsmParameterConfigurationObservation `json:"ssmParameterConfiguration,omitempty" tf:"ssm_parameter_configuration,omitempty"`
 }
 
@@ -320,7 +320,7 @@ type DistributionParameters struct {
 	// +kubebuilder:validation:Optional
 	S3ExportConfiguration *S3ExportConfigurationParameters `json:"s3ExportConfiguration,omitempty" tf:"s3_export_configuration,omitempty"`
 
-	// Configuration block with SSM parameter configuration to use as AMI id output. Detailed below.
+	// Configuration block with SSM parameter configuration to use as AMI ID output. Detailed below.
 	// +kubebuilder:validation:Optional
 	SsmParameterConfiguration []SsmParameterConfigurationParameters `json:"ssmParameterConfiguration,omitempty" tf:"ssm_parameter_configuration,omitempty"`
 }

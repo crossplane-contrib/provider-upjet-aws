@@ -31,7 +31,7 @@ type GuardrailVersionInitParameters struct {
 	// +kubebuilder:validation:Optional
 	GuardrailArnSelector *v2.Selector `json:"guardrailArnSelector,omitempty" tf:"-"`
 
-	// Whether to retain the old version of a previously deployed Guardrail. Default is false
+	// Whether to retain the old version of a previously deployed Guardrail. Default is false.
 	SkipDestroy *bool `json:"skipDestroy,omitempty" tf:"skip_destroy,omitempty"`
 }
 
@@ -49,7 +49,7 @@ type GuardrailVersionObservation struct {
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// Whether to retain the old version of a previously deployed Guardrail. Default is false
+	// Whether to retain the old version of a previously deployed Guardrail. Default is false.
 	SkipDestroy *bool `json:"skipDestroy,omitempty" tf:"skip_destroy,omitempty"`
 
 	// Guardrail version.
@@ -81,7 +81,7 @@ type GuardrailVersionParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// Whether to retain the old version of a previously deployed Guardrail. Default is false
+	// Whether to retain the old version of a previously deployed Guardrail. Default is false.
 	// +kubebuilder:validation:Optional
 	SkipDestroy *bool `json:"skipDestroy,omitempty" tf:"skip_destroy,omitempty"`
 }
@@ -113,7 +113,7 @@ type GuardrailVersionStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// GuardrailVersion is the Schema for the GuardrailVersions API.
+// GuardrailVersion is the Schema for the GuardrailVersions API. Manages an AWS Bedrock Guardrail Version.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

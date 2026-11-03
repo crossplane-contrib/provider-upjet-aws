@@ -15,13 +15,13 @@ import (
 
 type VPCIPv6CidrBlockAssociationInitParameters struct {
 
-	// Requests an Amazon-provided IPv6 CIDR block with a /56 prefix length for the VPC. You cannot specify the range of IPv6 addresses, or the size of the CIDR block. Default is false. Conflicts with ipv6_ipam_pool_id, ipv6_pool, ipv6_cidr_block and ipv6_netmask_length.
+	// Whether to request an Amazon-provided IPv6 CIDR block with a /56 prefix length for the VPC. You cannot specify the range of IPv6 addresses, or the size of the CIDR block. Default is false. Conflicts with ipv6_ipam_pool_id, ipv6_pool, ipv6_cidr_block and ipv6_netmask_length.
 	AssignGeneratedIPv6CidrBlock *bool `json:"assignGeneratedIpv6CidrBlock,omitempty" tf:"assign_generated_ipv6_cidr_block,omitempty"`
 
-	// The IPv6 CIDR block for the VPC. CIDR can be explicitly set or it can be derived from IPAM using ipv6_netmask_length. This parameter is required if ipv6_netmask_length is not set and the IPAM pool does not have allocation_default_netmask set. Conflicts with assign_generated_ipv6_cidr_block.
+	// IPv6 CIDR block for the VPC. CIDR can be explicitly set or it can be derived from IPAM using ipv6_netmask_length. This parameter is required if ipv6_netmask_length is not set and the IPAM pool does not have allocation_default_netmask set. Conflicts with assign_generated_ipv6_cidr_block.
 	IPv6CidrBlock *string `json:"ipv6CidrBlock,omitempty" tf:"ipv6_cidr_block,omitempty"`
 
-	// The ID of an IPv6 IPAM pool you want to use for allocating this VPC's CIDR. IPAM is a VPC feature that you can use to automate your IP address management workflows including assigning, tracking, troubleshooting, and auditing IP addresses across AWS Regions and accounts. Conflict with assign_generated_ipv6_cidr_block and ipv6_pool.
+	// ID of an IPv6 IPAM pool you want to use for allocating this VPC's CIDR. IPAM is a VPC feature that you can use to automate your IP address management workflows including assigning, tracking, troubleshooting, and auditing IP addresses across AWS Regions and accounts. Conflict with assign_generated_ipv6_cidr_block and ipv6_pool.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.VPCIpamPool
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	IPv6IpamPoolID *string `json:"ipv6IpamPoolId,omitempty" tf:"ipv6_ipam_pool_id,omitempty"`
@@ -34,13 +34,13 @@ type VPCIPv6CidrBlockAssociationInitParameters struct {
 	// +kubebuilder:validation:Optional
 	IPv6IpamPoolIDSelector *v2.NamespacedSelector `json:"ipv6IpamPoolIdSelector,omitempty" tf:"-"`
 
-	// The netmask length of the IPv6 CIDR you want to allocate to this VPC. Requires specifying a ipv6_ipam_pool_id. This parameter is optional if the IPAM pool has allocation_default_netmask set, otherwise it or ipv6_cidr_block are required. Conflicts with ipv6_cidr_block.
+	// Netmask length of the IPv6 CIDR you want to allocate to this VPC. Requires specifying a ipv6_ipam_pool_id. This parameter is optional if the IPAM pool has allocation_default_netmask set, otherwise it or ipv6_cidr_block are required. Conflicts with ipv6_cidr_block.
 	IPv6NetmaskLength *float64 `json:"ipv6NetmaskLength,omitempty" tf:"ipv6_netmask_length,omitempty"`
 
-	// The  ID of an IPv6 address pool from which to allocate the IPv6 CIDR block. Conflicts with assign_generated_ipv6_cidr_block and ipv6_ipam_pool_id.
+	// ID of an IPv6 address pool from which to allocate the IPv6 CIDR block. Conflicts with assign_generated_ipv6_cidr_block and ipv6_ipam_pool_id.
 	IPv6Pool *string `json:"ipv6Pool,omitempty" tf:"ipv6_pool,omitempty"`
 
-	// The ID of the VPC to make the association with.
+	// ID of the VPC to make the association with.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.VPC
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 
@@ -55,49 +55,49 @@ type VPCIPv6CidrBlockAssociationInitParameters struct {
 
 type VPCIPv6CidrBlockAssociationObservation struct {
 
-	// Requests an Amazon-provided IPv6 CIDR block with a /56 prefix length for the VPC. You cannot specify the range of IPv6 addresses, or the size of the CIDR block. Default is false. Conflicts with ipv6_ipam_pool_id, ipv6_pool, ipv6_cidr_block and ipv6_netmask_length.
+	// Whether to request an Amazon-provided IPv6 CIDR block with a /56 prefix length for the VPC. You cannot specify the range of IPv6 addresses, or the size of the CIDR block. Default is false. Conflicts with ipv6_ipam_pool_id, ipv6_pool, ipv6_cidr_block and ipv6_netmask_length.
 	AssignGeneratedIPv6CidrBlock *bool `json:"assignGeneratedIpv6CidrBlock,omitempty" tf:"assign_generated_ipv6_cidr_block,omitempty"`
 
-	// The ID of the VPC CIDR association.
+	// ID of the VPC CIDR association.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The source that allocated the IP address space. Values: amazon, byoip, none.
+	// Source that allocated the IP address space. Values: amazon, byoip, none.
 	IPSource *string `json:"ipSource,omitempty" tf:"ip_source,omitempty"`
 
 	// Public IPv6 addresses are those advertised on the internet from AWS. Private IP addresses are not and cannot be advertised on the internet from AWS. Values: public, private.
 	IPv6AddressAttribute *string `json:"ipv6AddressAttribute,omitempty" tf:"ipv6_address_attribute,omitempty"`
 
-	// The IPv6 CIDR block for the VPC. CIDR can be explicitly set or it can be derived from IPAM using ipv6_netmask_length. This parameter is required if ipv6_netmask_length is not set and the IPAM pool does not have allocation_default_netmask set. Conflicts with assign_generated_ipv6_cidr_block.
+	// IPv6 CIDR block for the VPC. CIDR can be explicitly set or it can be derived from IPAM using ipv6_netmask_length. This parameter is required if ipv6_netmask_length is not set and the IPAM pool does not have allocation_default_netmask set. Conflicts with assign_generated_ipv6_cidr_block.
 	IPv6CidrBlock *string `json:"ipv6CidrBlock,omitempty" tf:"ipv6_cidr_block,omitempty"`
 
-	// The ID of an IPv6 IPAM pool you want to use for allocating this VPC's CIDR. IPAM is a VPC feature that you can use to automate your IP address management workflows including assigning, tracking, troubleshooting, and auditing IP addresses across AWS Regions and accounts. Conflict with assign_generated_ipv6_cidr_block and ipv6_pool.
+	// ID of an IPv6 IPAM pool you want to use for allocating this VPC's CIDR. IPAM is a VPC feature that you can use to automate your IP address management workflows including assigning, tracking, troubleshooting, and auditing IP addresses across AWS Regions and accounts. Conflict with assign_generated_ipv6_cidr_block and ipv6_pool.
 	IPv6IpamPoolID *string `json:"ipv6IpamPoolId,omitempty" tf:"ipv6_ipam_pool_id,omitempty"`
 
-	// The netmask length of the IPv6 CIDR you want to allocate to this VPC. Requires specifying a ipv6_ipam_pool_id. This parameter is optional if the IPAM pool has allocation_default_netmask set, otherwise it or ipv6_cidr_block are required. Conflicts with ipv6_cidr_block.
+	// Netmask length of the IPv6 CIDR you want to allocate to this VPC. Requires specifying a ipv6_ipam_pool_id. This parameter is optional if the IPAM pool has allocation_default_netmask set, otherwise it or ipv6_cidr_block are required. Conflicts with ipv6_cidr_block.
 	IPv6NetmaskLength *float64 `json:"ipv6NetmaskLength,omitempty" tf:"ipv6_netmask_length,omitempty"`
 
-	// The  ID of an IPv6 address pool from which to allocate the IPv6 CIDR block. Conflicts with assign_generated_ipv6_cidr_block and ipv6_ipam_pool_id.
+	// ID of an IPv6 address pool from which to allocate the IPv6 CIDR block. Conflicts with assign_generated_ipv6_cidr_block and ipv6_ipam_pool_id.
 	IPv6Pool *string `json:"ipv6Pool,omitempty" tf:"ipv6_pool,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The ID of the VPC to make the association with.
+	// ID of the VPC to make the association with.
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 }
 
 type VPCIPv6CidrBlockAssociationParameters struct {
 
-	// Requests an Amazon-provided IPv6 CIDR block with a /56 prefix length for the VPC. You cannot specify the range of IPv6 addresses, or the size of the CIDR block. Default is false. Conflicts with ipv6_ipam_pool_id, ipv6_pool, ipv6_cidr_block and ipv6_netmask_length.
+	// Whether to request an Amazon-provided IPv6 CIDR block with a /56 prefix length for the VPC. You cannot specify the range of IPv6 addresses, or the size of the CIDR block. Default is false. Conflicts with ipv6_ipam_pool_id, ipv6_pool, ipv6_cidr_block and ipv6_netmask_length.
 	// +kubebuilder:validation:Optional
 	AssignGeneratedIPv6CidrBlock *bool `json:"assignGeneratedIpv6CidrBlock,omitempty" tf:"assign_generated_ipv6_cidr_block,omitempty"`
 
-	// The IPv6 CIDR block for the VPC. CIDR can be explicitly set or it can be derived from IPAM using ipv6_netmask_length. This parameter is required if ipv6_netmask_length is not set and the IPAM pool does not have allocation_default_netmask set. Conflicts with assign_generated_ipv6_cidr_block.
+	// IPv6 CIDR block for the VPC. CIDR can be explicitly set or it can be derived from IPAM using ipv6_netmask_length. This parameter is required if ipv6_netmask_length is not set and the IPAM pool does not have allocation_default_netmask set. Conflicts with assign_generated_ipv6_cidr_block.
 	// +kubebuilder:validation:Optional
 	IPv6CidrBlock *string `json:"ipv6CidrBlock,omitempty" tf:"ipv6_cidr_block,omitempty"`
 
-	// The ID of an IPv6 IPAM pool you want to use for allocating this VPC's CIDR. IPAM is a VPC feature that you can use to automate your IP address management workflows including assigning, tracking, troubleshooting, and auditing IP addresses across AWS Regions and accounts. Conflict with assign_generated_ipv6_cidr_block and ipv6_pool.
+	// ID of an IPv6 IPAM pool you want to use for allocating this VPC's CIDR. IPAM is a VPC feature that you can use to automate your IP address management workflows including assigning, tracking, troubleshooting, and auditing IP addresses across AWS Regions and accounts. Conflict with assign_generated_ipv6_cidr_block and ipv6_pool.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.VPCIpamPool
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -111,11 +111,11 @@ type VPCIPv6CidrBlockAssociationParameters struct {
 	// +kubebuilder:validation:Optional
 	IPv6IpamPoolIDSelector *v2.NamespacedSelector `json:"ipv6IpamPoolIdSelector,omitempty" tf:"-"`
 
-	// The netmask length of the IPv6 CIDR you want to allocate to this VPC. Requires specifying a ipv6_ipam_pool_id. This parameter is optional if the IPAM pool has allocation_default_netmask set, otherwise it or ipv6_cidr_block are required. Conflicts with ipv6_cidr_block.
+	// Netmask length of the IPv6 CIDR you want to allocate to this VPC. Requires specifying a ipv6_ipam_pool_id. This parameter is optional if the IPAM pool has allocation_default_netmask set, otherwise it or ipv6_cidr_block are required. Conflicts with ipv6_cidr_block.
 	// +kubebuilder:validation:Optional
 	IPv6NetmaskLength *float64 `json:"ipv6NetmaskLength,omitempty" tf:"ipv6_netmask_length,omitempty"`
 
-	// The  ID of an IPv6 address pool from which to allocate the IPv6 CIDR block. Conflicts with assign_generated_ipv6_cidr_block and ipv6_ipam_pool_id.
+	// ID of an IPv6 address pool from which to allocate the IPv6 CIDR block. Conflicts with assign_generated_ipv6_cidr_block and ipv6_ipam_pool_id.
 	// +kubebuilder:validation:Optional
 	IPv6Pool *string `json:"ipv6Pool,omitempty" tf:"ipv6_pool,omitempty"`
 
@@ -124,7 +124,7 @@ type VPCIPv6CidrBlockAssociationParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// The ID of the VPC to make the association with.
+	// ID of the VPC to make the association with.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.VPC
 	// +kubebuilder:validation:Optional
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`

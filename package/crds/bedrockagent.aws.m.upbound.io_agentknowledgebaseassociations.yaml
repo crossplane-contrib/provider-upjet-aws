@@ -35,7 +35,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: AgentKnowledgeBaseAssociation is the Schema for the AgentKnowledgeBaseAssociations
-          API.
+          API. Manages an AWS Agents for Amazon Bedrock Agent Knowledge Base Association.
         properties:
           apiVersion:
             description: |-
@@ -148,7 +148,7 @@ spec:
                     type: object
                   agentVersion:
                     description: 'Version of the agent with which you want to associate
-                      the knowledge base. Valid values: DRAFT.'
+                      the knowledge base. Valid values: DRAFT. Defaults to DRAFT.'
                     type: string
                   description:
                     description: Description of what the agent should use the knowledge
@@ -267,7 +267,7 @@ spec:
                 properties:
                   agentVersion:
                     description: 'Version of the agent with which you want to associate
-                      the knowledge base. Valid values: DRAFT.'
+                      the knowledge base. Valid values: DRAFT. Defaults to DRAFT.'
                     type: string
                   description:
                     description: Description of what the agent should use the knowledge
@@ -357,7 +357,7 @@ spec:
                     type: string
                   agentVersion:
                     description: 'Version of the agent with which you want to associate
-                      the knowledge base. Valid values: DRAFT.'
+                      the knowledge base. Valid values: DRAFT. Defaults to DRAFT.'
                     type: string
                   description:
                     description: Description of what the agent should use the knowledge

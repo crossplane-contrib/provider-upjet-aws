@@ -15,19 +15,19 @@ import (
 
 type AcceleratorInitParameters struct {
 
-	// The attributes of the accelerator. Fields documented below.
+	// Configuration block with accelerator attributes. See attributes below.
 	Attributes *AttributesInitParameters `json:"attributes,omitempty" tf:"attributes,omitempty"`
 
-	// Indicates whether the accelerator is enabled. Defaults to true. Valid values: true, false.
+	// Whether the accelerator is enabled. Defaults to true. Valid values: true, false.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The value for the address type. Defaults to IPV4. Valid values: IPV4, DUAL_STACK.
+	// Value for the address type. Defaults to IPV4. Valid values: IPV4, DUAL_STACK.
 	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
 
-	// The IP addresses to use for BYOIP accelerators. If not specified, the service assigns IP addresses. Valid values: 1 or 2 IPv4 addresses.
+	// IP addresses to use for BYOIP accelerators. If not specified, the service assigns IP addresses. Valid values: 1 or 2 IPv4 addresses.
 	IPAddresses []*string `json:"ipAddresses,omitempty" tf:"ip_addresses,omitempty"`
 
-	// The name of the accelerator.
+	// Name of the accelerator.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Key-value map of resource tags.
@@ -40,66 +40,64 @@ type AcceleratorObservation struct {
 	// ARN of the accelerator.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The attributes of the accelerator. Fields documented below.
+	// Configuration block with accelerator attributes. See attributes below.
 	Attributes *AttributesObservation `json:"attributes,omitempty" tf:"attributes,omitempty"`
 
-	// The DNS name of the accelerator. For example, a5d53ff5ee6bca4ce.awsglobalaccelerator.com.
+	// DNS name of the accelerator. For example, a5d53ff5ee6bca4ce.awsglobalaccelerator.com.
 	DNSName *string `json:"dnsName,omitempty" tf:"dns_name,omitempty"`
 
-	// DNS name that Global Accelerator creates that points to a dual-stack accelerator's four static IP addresses: two IPv4 addresses and two IPv6 addresses. For example, a1234567890abcdef.dualstack.awsglobalaccelerator.com.
+	// DNS name that points to a dual-stack accelerator's four static IP addresses: two IPv4 addresses and two IPv6 addresses. For example, a1234567890abcdef.dualstack.awsglobalaccelerator.com.
 	DualStackDNSName *string `json:"dualStackDnsName,omitempty" tf:"dual_stack_dns_name,omitempty"`
 
-	// Indicates whether the accelerator is enabled. Defaults to true. Valid values: true, false.
+	// Whether the accelerator is enabled. Defaults to true. Valid values: true, false.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// -  The Global Accelerator Route 53 zone ID that can be used to
-	// route an Alias Resource Record Set to the Global Accelerator. This attribute
-	// is simply an alias for the zone ID Z2BJ6XQ5FK7U4H.
+	// Global Accelerator Route 53 zone ID used to route an Alias Resource Record Set to the accelerator. This is an alias for the zone ID Z2BJ6XQ5FK7U4H.
 	HostedZoneID *string `json:"hostedZoneId,omitempty" tf:"hosted_zone_id,omitempty"`
 
 	// ARN of the accelerator.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The value for the address type. Defaults to IPV4. Valid values: IPV4, DUAL_STACK.
+	// Value for the address type. Defaults to IPV4. Valid values: IPV4, DUAL_STACK.
 	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
 
-	// The IP addresses to use for BYOIP accelerators. If not specified, the service assigns IP addresses. Valid values: 1 or 2 IPv4 addresses.
+	// IP addresses to use for BYOIP accelerators. If not specified, the service assigns IP addresses. Valid values: 1 or 2 IPv4 addresses.
 	IPAddresses []*string `json:"ipAddresses,omitempty" tf:"ip_addresses,omitempty"`
 
-	// IP address set associated with the accelerator.
+	// IP address set associated with the accelerator. See ip_sets below.
 	IPSets []IPSetsObservation `json:"ipSets,omitempty" tf:"ip_sets,omitempty"`
 
-	// The name of the accelerator.
+	// Name of the accelerator.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type AcceleratorParameters struct {
 
-	// The attributes of the accelerator. Fields documented below.
+	// Configuration block with accelerator attributes. See attributes below.
 	// +kubebuilder:validation:Optional
 	Attributes *AttributesParameters `json:"attributes,omitempty" tf:"attributes,omitempty"`
 
-	// Indicates whether the accelerator is enabled. Defaults to true. Valid values: true, false.
+	// Whether the accelerator is enabled. Defaults to true. Valid values: true, false.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The value for the address type. Defaults to IPV4. Valid values: IPV4, DUAL_STACK.
+	// Value for the address type. Defaults to IPV4. Valid values: IPV4, DUAL_STACK.
 	// +kubebuilder:validation:Optional
 	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
 
-	// The IP addresses to use for BYOIP accelerators. If not specified, the service assigns IP addresses. Valid values: 1 or 2 IPv4 addresses.
+	// IP addresses to use for BYOIP accelerators. If not specified, the service assigns IP addresses. Valid values: 1 or 2 IPv4 addresses.
 	// +kubebuilder:validation:Optional
 	IPAddresses []*string `json:"ipAddresses,omitempty" tf:"ip_addresses,omitempty"`
 
-	// The name of the accelerator.
+	// Name of the accelerator.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -111,39 +109,39 @@ type AcceleratorParameters struct {
 
 type AttributesInitParameters struct {
 
-	// Indicates whether flow logs are enabled. Defaults to false. Valid values: true, false.
+	// Whether flow logs are enabled. Defaults to false. Valid values: true, false.
 	FlowLogsEnabled *bool `json:"flowLogsEnabled,omitempty" tf:"flow_logs_enabled,omitempty"`
 
-	// The name of the Amazon S3 bucket for the flow logs. Required if flow_logs_enabled is true.
+	// Name of the Amazon S3 bucket for the flow logs. Required if flow_logs_enabled is true.
 	FlowLogsS3Bucket *string `json:"flowLogsS3Bucket,omitempty" tf:"flow_logs_s3_bucket,omitempty"`
 
-	// The prefix for the location in the Amazon S3 bucket for the flow logs. Required if flow_logs_enabled is true.
+	// Prefix for the location in the Amazon S3 bucket for the flow logs. Required if flow_logs_enabled is true.
 	FlowLogsS3Prefix *string `json:"flowLogsS3Prefix,omitempty" tf:"flow_logs_s3_prefix,omitempty"`
 }
 
 type AttributesObservation struct {
 
-	// Indicates whether flow logs are enabled. Defaults to false. Valid values: true, false.
+	// Whether flow logs are enabled. Defaults to false. Valid values: true, false.
 	FlowLogsEnabled *bool `json:"flowLogsEnabled,omitempty" tf:"flow_logs_enabled,omitempty"`
 
-	// The name of the Amazon S3 bucket for the flow logs. Required if flow_logs_enabled is true.
+	// Name of the Amazon S3 bucket for the flow logs. Required if flow_logs_enabled is true.
 	FlowLogsS3Bucket *string `json:"flowLogsS3Bucket,omitempty" tf:"flow_logs_s3_bucket,omitempty"`
 
-	// The prefix for the location in the Amazon S3 bucket for the flow logs. Required if flow_logs_enabled is true.
+	// Prefix for the location in the Amazon S3 bucket for the flow logs. Required if flow_logs_enabled is true.
 	FlowLogsS3Prefix *string `json:"flowLogsS3Prefix,omitempty" tf:"flow_logs_s3_prefix,omitempty"`
 }
 
 type AttributesParameters struct {
 
-	// Indicates whether flow logs are enabled. Defaults to false. Valid values: true, false.
+	// Whether flow logs are enabled. Defaults to false. Valid values: true, false.
 	// +kubebuilder:validation:Optional
 	FlowLogsEnabled *bool `json:"flowLogsEnabled,omitempty" tf:"flow_logs_enabled,omitempty"`
 
-	// The name of the Amazon S3 bucket for the flow logs. Required if flow_logs_enabled is true.
+	// Name of the Amazon S3 bucket for the flow logs. Required if flow_logs_enabled is true.
 	// +kubebuilder:validation:Optional
 	FlowLogsS3Bucket *string `json:"flowLogsS3Bucket,omitempty" tf:"flow_logs_s3_bucket,omitempty"`
 
-	// The prefix for the location in the Amazon S3 bucket for the flow logs. Required if flow_logs_enabled is true.
+	// Prefix for the location in the Amazon S3 bucket for the flow logs. Required if flow_logs_enabled is true.
 	// +kubebuilder:validation:Optional
 	FlowLogsS3Prefix *string `json:"flowLogsS3Prefix,omitempty" tf:"flow_logs_s3_prefix,omitempty"`
 }
@@ -153,10 +151,10 @@ type IPSetsInitParameters struct {
 
 type IPSetsObservation struct {
 
-	// The IP addresses to use for BYOIP accelerators. If not specified, the service assigns IP addresses. Valid values: 1 or 2 IPv4 addresses.
+	// List of IP addresses in the IP address set.
 	IPAddresses []*string `json:"ipAddresses,omitempty" tf:"ip_addresses,omitempty"`
 
-	// The type of IP addresses included in this IP set.
+	// Type of IP addresses included in this IP set.
 	IPFamily *string `json:"ipFamily,omitempty" tf:"ip_family,omitempty"`
 }
 

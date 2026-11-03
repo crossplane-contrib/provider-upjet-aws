@@ -109,7 +109,7 @@ spec:
                       type: object
                     type: array
                   windowId:
-                    description: The Id of the maintenance window to register the
+                    description: The ID of the maintenance window to register the
                       target with.
                     type: string
                   windowIdRef:
@@ -234,7 +234,7 @@ spec:
                       type: object
                     type: array
                   windowId:
-                    description: The Id of the maintenance window to register the
+                    description: The ID of the maintenance window to register the
                       target with.
                     type: string
                   windowIdRef:
@@ -453,7 +453,7 @@ spec:
                       type: object
                     type: array
                   windowId:
-                    description: The Id of the maintenance window to register the
+                    description: The ID of the maintenance window to register the
                       target with.
                     type: string
                 type: object

@@ -27,22 +27,22 @@ type VaultPolicyInitParameters struct {
 	// +kubebuilder:validation:Optional
 	BackupVaultNameSelector *v2.Selector `json:"backupVaultNameSelector,omitempty" tf:"-"`
 
-	// The backup vault access policy document in JSON format.
+	// Backup vault access policy document in JSON format.
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 }
 
 type VaultPolicyObservation struct {
 
-	// The ARN of the vault.
+	// ARN of the vault.
 	BackupVaultArn *string `json:"backupVaultArn,omitempty" tf:"backup_vault_arn,omitempty"`
 
 	// Name of the backup vault to add policy for.
 	BackupVaultName *string `json:"backupVaultName,omitempty" tf:"backup_vault_name,omitempty"`
 
-	// The name of the vault.
+	// Name of the vault.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The backup vault access policy document in JSON format.
+	// Backup vault access policy document in JSON format.
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -65,7 +65,7 @@ type VaultPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	BackupVaultNameSelector *v2.Selector `json:"backupVaultNameSelector,omitempty" tf:"-"`
 
-	// The backup vault access policy document in JSON format.
+	// Backup vault access policy document in JSON format.
 	// +kubebuilder:validation:Optional
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 

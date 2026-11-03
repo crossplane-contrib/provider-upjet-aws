@@ -62,8 +62,7 @@ spec:
                   context:
                     additionalProperties:
                       type: string
-                    description: An optional mapping that makes up the encryption
-                      context.
+                    description: Mapping that makes up the encryption context.
                     type: object
                     x-kubernetes-map-type: granular
                   keyId:
@@ -150,9 +149,8 @@ spec:
                         type: object
                     type: object
                   plaintextSecretRef:
-                    description: (Exactly one of plaintext or plaintext_wo must be
-                      set) Data to be encrypted. Note that this may show up in logs,
-                      and it will be stored in the state file.
+                    description: Data to be encrypted. Note that this may show up
+                      in logs, and it will be stored in the state file.
                     properties:
                       key:
                         type: string
@@ -164,8 +162,7 @@ spec:
                     - name
                     type: object
                   plaintextWoSecretRef:
-                    description: (Write-Only, Exactly one of plaintext or plaintext_wo
-                      must be set) Data to be encrypted. Note that this may show up
+                    description: Data to be encrypted. Note that this may show up
                       in logs. It will not be stored in the state file.
                     properties:
                       key:
@@ -178,7 +175,7 @@ spec:
                     - name
                     type: object
                   plaintextWoVersion:
-                    description: Used together with plaintext_wo to trigger a replacement.
+                    description: Triggers a replacement together with plaintext_wo.
                       Modify this value when a replacement is required.
                     type: string
                   region:
@@ -205,8 +202,7 @@ spec:
                   context:
                     additionalProperties:
                       type: string
-                    description: An optional mapping that makes up the encryption
-                      context.
+                    description: Mapping that makes up the encryption context.
                     type: object
                     x-kubernetes-map-type: granular
                   keyId:
@@ -293,9 +289,8 @@ spec:
                         type: object
                     type: object
                   plaintextSecretRef:
-                    description: (Exactly one of plaintext or plaintext_wo must be
-                      set) Data to be encrypted. Note that this may show up in logs,
-                      and it will be stored in the state file.
+                    description: Data to be encrypted. Note that this may show up
+                      in logs, and it will be stored in the state file.
                     properties:
                       key:
                         type: string
@@ -307,8 +302,7 @@ spec:
                     - name
                     type: object
                   plaintextWoSecretRef:
-                    description: (Write-Only, Exactly one of plaintext or plaintext_wo
-                      must be set) Data to be encrypted. Note that this may show up
+                    description: Data to be encrypted. Note that this may show up
                       in logs. It will not be stored in the state file.
                     properties:
                       key:
@@ -321,7 +315,7 @@ spec:
                     - name
                     type: object
                   plaintextWoVersion:
-                    description: Used together with plaintext_wo to trigger a replacement.
+                    description: Triggers a replacement together with plaintext_wo.
                       Modify this value when a replacement is required.
                     type: string
                 type: object
@@ -394,8 +388,7 @@ spec:
                   context:
                     additionalProperties:
                       type: string
-                    description: An optional mapping that makes up the encryption
-                      context.
+                    description: Mapping that makes up the encryption context.
                     type: object
                     x-kubernetes-map-type: granular
                   id:
@@ -404,7 +397,7 @@ spec:
                     description: Globally unique key ID for the customer master key.
                     type: string
                   plaintextWoVersion:
-                    description: Used together with plaintext_wo to trigger a replacement.
+                    description: Triggers a replacement together with plaintext_wo.
                       Modify this value when a replacement is required.
                     type: string
                   region:

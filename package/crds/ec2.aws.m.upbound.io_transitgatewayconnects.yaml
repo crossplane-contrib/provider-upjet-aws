@@ -172,7 +172,7 @@ spec:
                         type: object
                     type: object
                   transportAttachmentId:
-                    description: The underlaying VPC attachment
+                    description: The underlying VPC attachment
                     type: string
                   transportAttachmentIdRef:
                     description: Reference to a TransitGatewayVPCAttachment in ec2
@@ -380,7 +380,7 @@ spec:
                         type: object
                     type: object
                   transportAttachmentId:
-                    description: The underlaying VPC attachment
+                    description: The underlying VPC attachment
                     type: string
                   transportAttachmentIdRef:
                     description: Reference to a TransitGatewayVPCAttachment in ec2
@@ -571,7 +571,7 @@ spec:
                     description: Identifier of EC2 Transit Gateway.
                     type: string
                   transportAttachmentId:
-                    description: The underlaying VPC attachment
+                    description: The underlying VPC attachment
                     type: string
                 type: object
               conditions:

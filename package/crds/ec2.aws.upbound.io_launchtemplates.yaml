@@ -4749,7 +4749,7 @@ spec:
                         type: array
                         x-kubernetes-list-type: set
                       acceleratorNames:
-                        description: List of accelerator names. Default is any acclerator.
+                        description: List of accelerator names. Default is any accelerator.
                         items:
                           type: string
                         type: array
@@ -4790,7 +4790,7 @@ spec:
                         type: array
                         x-kubernetes-list-type: set
                       bareMetal:
-                        description: Indicate whether bare metal instace types should
+                        description: Indicate whether bare metal instance types should
                           be included, excluded, or required. Default is excluded.
                         type: string
                       baselineEbsBandwidthMbps:
@@ -5044,7 +5044,7 @@ spec:
                             value, can be left unset.
                           type: string
                         associatePublicIpAddress:
-                          description: Associate a public ip address with the network
+                          description: Associate a public IP address with the network
                             interface. Boolean value, can be left unset.
                           type: string
                         connectionTrackingSpecification:
@@ -6227,7 +6227,7 @@ spec:
                         type: array
                         x-kubernetes-list-type: set
                       acceleratorNames:
-                        description: List of accelerator names. Default is any acclerator.
+                        description: List of accelerator names. Default is any accelerator.
                         items:
                           type: string
                         type: array
@@ -6268,7 +6268,7 @@ spec:
                         type: array
                         x-kubernetes-list-type: set
                       bareMetal:
-                        description: Indicate whether bare metal instace types should
+                        description: Indicate whether bare metal instance types should
                           be included, excluded, or required. Default is excluded.
                         type: string
                       baselineEbsBandwidthMbps:
@@ -6522,7 +6522,7 @@ spec:
                             value, can be left unset.
                           type: string
                         associatePublicIpAddress:
-                          description: Associate a public ip address with the network
+                          description: Associate a public IP address with the network
                             interface. Boolean value, can be left unset.
                           type: string
                         connectionTrackingSpecification:
@@ -7556,7 +7556,7 @@ spec:
                         type: array
                         x-kubernetes-list-type: set
                       acceleratorNames:
-                        description: List of accelerator names. Default is any acclerator.
+                        description: List of accelerator names. Default is any accelerator.
                         items:
                           type: string
                         type: array
@@ -7597,7 +7597,7 @@ spec:
                         type: array
                         x-kubernetes-list-type: set
                       bareMetal:
-                        description: Indicate whether bare metal instace types should
+                        description: Indicate whether bare metal instance types should
                           be included, excluded, or required. Default is excluded.
                         type: string
                       baselineEbsBandwidthMbps:
@@ -7854,7 +7854,7 @@ spec:
                             value, can be left unset.
                           type: string
                         associatePublicIpAddress:
-                          description: Associate a public ip address with the network
+                          description: Associate a public IP address with the network
                             interface. Boolean value, can be left unset.
                           type: string
                         connectionTrackingSpecification:

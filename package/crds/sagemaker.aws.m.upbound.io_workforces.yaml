@@ -303,7 +303,7 @@ spec:
                     description: A list of IP address ranges Used to create an allow
                       list of IP addresses for a private workforce. By default, a
                       workforce isn't restricted to specific IP addresses. see Source
-                      Ip Config details below.
+                      IP Config details below.
                     properties:
                       cidrs:
                         description: A list of up to 10 CIDR values.
@@ -592,7 +592,7 @@ spec:
                     description: A list of IP address ranges Used to create an allow
                       list of IP addresses for a private workforce. By default, a
                       workforce isn't restricted to specific IP addresses. see Source
-                      Ip Config details below.
+                      IP Config details below.
                     properties:
                       cidrs:
                         description: A list of up to 10 CIDR values.
@@ -761,7 +761,7 @@ spec:
                     description: A list of IP address ranges Used to create an allow
                       list of IP addresses for a private workforce. By default, a
                       workforce isn't restricted to specific IP addresses. see Source
-                      Ip Config details below.
+                      IP Config details below.
                     properties:
                       cidrs:
                         description: A list of up to 10 CIDR values.

@@ -42,8 +42,7 @@ spec:
                   property:
                   - name: priority
                     type: string
-                  - items:
-                    - type: string
+                  - itemsJson: ${jsonencode({ type = "string" })}
                     name: tags
                     type: array
                   type: object
@@ -74,6 +73,7 @@ spec:
     authorizerConfiguration:
       customJwtAuthorizer:
         discoveryUrl: https://accounts.google.com/.well-known/openid-configuration
+    authorizerType: CUSTOM_JWT
     name: example-gateway
     region: us-west-1
     roleArnSelector:
@@ -111,6 +111,25 @@ spec:
   forProvider:
     assumeRolePolicy: ${data.aws_iam_policy_document.lambda_assume.json}
     region: us-west-1
+
+---
+
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: RolePolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrockagentcore/v1beta1/gatewaytarget
+  labels:
+    testing.upbound.io/example-name: gateway_lambda_invoke
+  name: gateway-lambda-invoke
+  namespace: upbound-system
+spec:
+  forProvider:
+    policy: ${data.aws_iam_policy_document.gateway_lambda_invoke.json}
+    region: us-west-1
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: gateway_role
 
 ---
 

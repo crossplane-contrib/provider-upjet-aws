@@ -92,7 +92,7 @@ type AutoRepairConfigurationParameters struct {
 
 type AutoScalingGroupProviderInitParameters struct {
 
-	// - ARN of the associated auto scaling group.
+	// - ARN of the associated Auto Scaling group.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/autoscaling/v1beta1.AutoscalingGroup
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	AutoScalingGroupArn *string `json:"autoScalingGroupArn,omitempty" tf:"auto_scaling_group_arn,omitempty"`
@@ -111,13 +111,13 @@ type AutoScalingGroupProviderInitParameters struct {
 	// - Configuration block defining the parameters of the auto scaling. Detailed below.
 	ManagedScaling *ManagedScalingInitParameters `json:"managedScaling,omitempty" tf:"managed_scaling,omitempty"`
 
-	// - Enables or disables container-aware termination of instances in the auto scaling group when scale-in happens. Valid values are ENABLED and DISABLED.
+	// - Enables or disables container-aware termination of instances in the Auto Scaling group when scale-in happens. Valid values are ENABLED and DISABLED.
 	ManagedTerminationProtection *string `json:"managedTerminationProtection,omitempty" tf:"managed_termination_protection,omitempty"`
 }
 
 type AutoScalingGroupProviderObservation struct {
 
-	// - ARN of the associated auto scaling group.
+	// - ARN of the associated Auto Scaling group.
 	AutoScalingGroupArn *string `json:"autoScalingGroupArn,omitempty" tf:"auto_scaling_group_arn,omitempty"`
 
 	// - Enables or disables a graceful shutdown of instances without disturbing workloads. Valid values are ENABLED and DISABLED. The default value is ENABLED when a capacity provider is created.
@@ -126,13 +126,13 @@ type AutoScalingGroupProviderObservation struct {
 	// - Configuration block defining the parameters of the auto scaling. Detailed below.
 	ManagedScaling *ManagedScalingObservation `json:"managedScaling,omitempty" tf:"managed_scaling,omitempty"`
 
-	// - Enables or disables container-aware termination of instances in the auto scaling group when scale-in happens. Valid values are ENABLED and DISABLED.
+	// - Enables or disables container-aware termination of instances in the Auto Scaling group when scale-in happens. Valid values are ENABLED and DISABLED.
 	ManagedTerminationProtection *string `json:"managedTerminationProtection,omitempty" tf:"managed_termination_protection,omitempty"`
 }
 
 type AutoScalingGroupProviderParameters struct {
 
-	// - ARN of the associated auto scaling group.
+	// - ARN of the associated Auto Scaling group.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/autoscaling/v1beta1.AutoscalingGroup
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -154,7 +154,7 @@ type AutoScalingGroupProviderParameters struct {
 	// +kubebuilder:validation:Optional
 	ManagedScaling *ManagedScalingParameters `json:"managedScaling,omitempty" tf:"managed_scaling,omitempty"`
 
-	// - Enables or disables container-aware termination of instances in the auto scaling group when scale-in happens. Valid values are ENABLED and DISABLED.
+	// - Enables or disables container-aware termination of instances in the Auto Scaling group when scale-in happens. Valid values are ENABLED and DISABLED.
 	// +kubebuilder:validation:Optional
 	ManagedTerminationProtection *string `json:"managedTerminationProtection,omitempty" tf:"managed_termination_protection,omitempty"`
 }
@@ -190,7 +190,7 @@ type BaselineEBSBandwidthMbpsParameters struct {
 
 type CapacityProviderInitParameters struct {
 
-	// Configuration block for the provider for the ECS auto scaling group. Detailed below. Exactly one of auto_scaling_group_provider or managed_instances_provider must be specified.
+	// Configuration block for the provider for the ECS Auto Scaling group. Detailed below. Exactly one of auto_scaling_group_provider or managed_instances_provider must be specified.
 	AutoScalingGroupProvider *AutoScalingGroupProviderInitParameters `json:"autoScalingGroupProvider,omitempty" tf:"auto_scaling_group_provider,omitempty"`
 
 	// Name of the ECS cluster. Required when using managed_instances_provider. Must not be set when using auto_scaling_group_provider.
@@ -209,7 +209,7 @@ type CapacityProviderObservation struct {
 	// ARN that identifies the capacity provider.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// Configuration block for the provider for the ECS auto scaling group. Detailed below. Exactly one of auto_scaling_group_provider or managed_instances_provider must be specified.
+	// Configuration block for the provider for the ECS Auto Scaling group. Detailed below. Exactly one of auto_scaling_group_provider or managed_instances_provider must be specified.
 	AutoScalingGroupProvider *AutoScalingGroupProviderObservation `json:"autoScalingGroupProvider,omitempty" tf:"auto_scaling_group_provider,omitempty"`
 
 	// Name of the ECS cluster. Required when using managed_instances_provider. Must not be set when using auto_scaling_group_provider.
@@ -235,7 +235,7 @@ type CapacityProviderObservation struct {
 
 type CapacityProviderParameters struct {
 
-	// Configuration block for the provider for the ECS auto scaling group. Detailed below. Exactly one of auto_scaling_group_provider or managed_instances_provider must be specified.
+	// Configuration block for the provider for the ECS Auto Scaling group. Detailed below. Exactly one of auto_scaling_group_provider or managed_instances_provider must be specified.
 	// +kubebuilder:validation:Optional
 	AutoScalingGroupProvider *AutoScalingGroupProviderParameters `json:"autoScalingGroupProvider,omitempty" tf:"auto_scaling_group_provider,omitempty"`
 

@@ -15,14 +15,14 @@ import (
 
 type ResourcePolicyInitParameters struct {
 
-	// Resource policy definition
+	// Resource policy document in JSON format.
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 }
 
 type ResourcePolicyObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Resource policy definition
+	// Resource policy document in JSON format.
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -35,7 +35,7 @@ type ResourcePolicyObservation struct {
 
 type ResourcePolicyParameters struct {
 
-	// Resource policy definition
+	// Resource policy document in JSON format.
 	// +kubebuilder:validation:Optional
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 

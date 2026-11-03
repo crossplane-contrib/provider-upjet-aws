@@ -80,7 +80,7 @@ spec:
                       properties:
                         location:
                           description: Location from which to retrieve the certificate.
-                            See certificates.location below.
+                            See certificate.location below.
                           properties:
                             secretsManager:
                               description: AWS Secrets Manager location of the certificate.
@@ -175,7 +175,7 @@ spec:
                     type: string
                   executionRoleArn:
                     description: ARN of the IAM role that the code interpreter assumes
-                      for execution. Required when using SANDBOX network mode.
+                      for execution.
                     type: string
                   executionRoleArnRef:
                     description: Reference to a Role in iam to populate executionRoleArn.
@@ -797,7 +797,7 @@ spec:
                       properties:
                         location:
                           description: Location from which to retrieve the certificate.
-                            See certificates.location below.
+                            See certificate.location below.
                           properties:
                             secretsManager:
                               description: AWS Secrets Manager location of the certificate.
@@ -892,7 +892,7 @@ spec:
                     type: string
                   executionRoleArn:
                     description: ARN of the IAM role that the code interpreter assumes
-                      for execution. Required when using SANDBOX network mode.
+                      for execution.
                     type: string
                   executionRoleArnRef:
                     description: Reference to a Role in iam to populate executionRoleArn.
@@ -1590,7 +1590,7 @@ spec:
                       properties:
                         location:
                           description: Location from which to retrieve the certificate.
-                            See certificates.location below.
+                            See certificate.location below.
                           properties:
                             secretsManager:
                               description: AWS Secrets Manager location of the certificate.
@@ -1615,7 +1615,7 @@ spec:
                     type: string
                   executionRoleArn:
                     description: ARN of the IAM role that the code interpreter assumes
-                      for execution. Required when using SANDBOX network mode.
+                      for execution.
                     type: string
                   filesystemConfiguration:
                     items:
@@ -1684,9 +1684,8 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
                 type: object

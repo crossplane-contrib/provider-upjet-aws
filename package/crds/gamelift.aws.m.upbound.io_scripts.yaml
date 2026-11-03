@@ -238,7 +238,7 @@ spec:
                             type: object
                         type: object
                       objectVersion:
-                        description: A specific version of the file. If not set, the
+                        description: Specific version of the file. If not set, the
                           latest version of the file is retrieved.
                         type: string
                       roleArn:
@@ -336,7 +336,7 @@ spec:
                     description: Version that is associated with this script.
                     type: string
                   zipFile:
-                    description: A data object containing your Realtime scripts and
+                    description: Data object containing your Realtime scripts and
                       dependencies as a zip  file. The zip file can have one or multiple
                       files. Maximum size of a zip file is 5 MB.
                     type: string
@@ -530,7 +530,7 @@ spec:
                             type: object
                         type: object
                       objectVersion:
-                        description: A specific version of the file. If not set, the
+                        description: Specific version of the file. If not set, the
                           latest version of the file is retrieved.
                         type: string
                       roleArn:
@@ -628,7 +628,7 @@ spec:
                     description: Version that is associated with this script.
                     type: string
                   zipFile:
-                    description: A data object containing your Realtime scripts and
+                    description: Data object containing your Realtime scripts and
                       dependencies as a zip  file. The zip file can have one or multiple
                       files. Maximum size of a zip file is 5 MB.
                     type: string
@@ -726,7 +726,7 @@ spec:
                         description: Name of the zip file containing your script files.
                         type: string
                       objectVersion:
-                        description: A specific version of the file. If not set, the
+                        description: Specific version of the file. If not set, the
                           latest version of the file is retrieved.
                         type: string
                       roleArn:
@@ -743,16 +743,15 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
                   version:
                     description: Version that is associated with this script.
                     type: string
                   zipFile:
-                    description: A data object containing your Realtime scripts and
+                    description: Data object containing your Realtime scripts and
                       dependencies as a zip  file. The zip file can have one or multiple
                       files. Maximum size of a zip file is 5 MB.
                     type: string

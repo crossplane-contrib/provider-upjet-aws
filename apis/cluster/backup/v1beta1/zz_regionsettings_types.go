@@ -15,13 +15,13 @@ import (
 
 type RegionSettingsInitParameters struct {
 
-	// A map of service names to their full management preferences for the Region. For more information, see the AWS Documentation on what full management is and which services support full management.
+	// Map of service names to their full management preferences for the Region. For more information, see the AWS Documentation on what full management is and which services support full management.
 	//
 	// WARNING: All parameters are required to be given: EFS, DynamoDB
 	// +mapType=granular
 	ResourceTypeManagementPreference map[string]*bool `json:"resourceTypeManagementPreference,omitempty" tf:"resource_type_management_preference,omitempty"`
 
-	// A map of service names to their opt-in preferences for the Region. See AWS Documentation on which services support backup.
+	// Map of service names to their opt-in preferences for the Region. See AWS Documentation on which services support backup.
 	//
 	// WARNING: All parameters are required to be given: EFS, DynamoDB, EBS, EC2, FSx, S3, Aurora, RDS, Storage Gateway, VirtualMachine
 	// +mapType=granular
@@ -30,20 +30,20 @@ type RegionSettingsInitParameters struct {
 
 type RegionSettingsObservation struct {
 
-	// The AWS region.
+	// AWS region.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// A map of service names to their full management preferences for the Region. For more information, see the AWS Documentation on what full management is and which services support full management.
+	// Map of service names to their full management preferences for the Region. For more information, see the AWS Documentation on what full management is and which services support full management.
 	//
 	// WARNING: All parameters are required to be given: EFS, DynamoDB
 	// +mapType=granular
 	ResourceTypeManagementPreference map[string]*bool `json:"resourceTypeManagementPreference,omitempty" tf:"resource_type_management_preference,omitempty"`
 
-	// A map of service names to their opt-in preferences for the Region. See AWS Documentation on which services support backup.
+	// Map of service names to their opt-in preferences for the Region. See AWS Documentation on which services support backup.
 	//
 	// WARNING: All parameters are required to be given: EFS, DynamoDB, EBS, EC2, FSx, S3, Aurora, RDS, Storage Gateway, VirtualMachine
 	// +mapType=granular
@@ -57,14 +57,14 @@ type RegionSettingsParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// A map of service names to their full management preferences for the Region. For more information, see the AWS Documentation on what full management is and which services support full management.
+	// Map of service names to their full management preferences for the Region. For more information, see the AWS Documentation on what full management is and which services support full management.
 	//
 	// WARNING: All parameters are required to be given: EFS, DynamoDB
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	ResourceTypeManagementPreference map[string]*bool `json:"resourceTypeManagementPreference,omitempty" tf:"resource_type_management_preference,omitempty"`
 
-	// A map of service names to their opt-in preferences for the Region. See AWS Documentation on which services support backup.
+	// Map of service names to their opt-in preferences for the Region. See AWS Documentation on which services support backup.
 	//
 	// WARNING: All parameters are required to be given: EFS, DynamoDB, EBS, EC2, FSx, S3, Aurora, RDS, Storage Gateway, VirtualMachine
 	// +kubebuilder:validation:Optional

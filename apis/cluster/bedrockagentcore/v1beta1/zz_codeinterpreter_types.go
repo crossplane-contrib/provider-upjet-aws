@@ -34,19 +34,19 @@ type CertificateLocationParameters struct {
 
 type CodeInterpreterCertificateInitParameters struct {
 
-	// Location from which to retrieve the certificate. See certificates.location below.
+	// Location from which to retrieve the certificate. See certificate.location below.
 	Location *CertificateLocationInitParameters `json:"location,omitempty" tf:"location,omitempty"`
 }
 
 type CodeInterpreterCertificateObservation struct {
 
-	// Location from which to retrieve the certificate. See certificates.location below.
+	// Location from which to retrieve the certificate. See certificate.location below.
 	Location *CertificateLocationObservation `json:"location,omitempty" tf:"location,omitempty"`
 }
 
 type CodeInterpreterCertificateParameters struct {
 
-	// Location from which to retrieve the certificate. See certificates.location below.
+	// Location from which to retrieve the certificate. See certificate.location below.
 	// +kubebuilder:validation:Optional
 	Location *CertificateLocationParameters `json:"location,omitempty" tf:"location,omitempty"`
 }
@@ -80,7 +80,7 @@ type CodeInterpreterInitParameters struct {
 	// Description of the code interpreter.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// ARN of the IAM role that the code interpreter assumes for execution. Required when using SANDBOX network mode.
+	// ARN of the IAM role that the code interpreter assumes for execution.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	ExecutionRoleArn *string `json:"executionRoleArn,omitempty" tf:"execution_role_arn,omitempty"`
@@ -149,7 +149,7 @@ type CodeInterpreterObservation struct {
 	// Description of the code interpreter.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// ARN of the IAM role that the code interpreter assumes for execution. Required when using SANDBOX network mode.
+	// ARN of the IAM role that the code interpreter assumes for execution.
 	ExecutionRoleArn *string `json:"executionRoleArn,omitempty" tf:"execution_role_arn,omitempty"`
 
 	FilesystemConfiguration []CodeInterpreterFilesystemConfigurationObservation `json:"filesystemConfiguration,omitempty" tf:"filesystem_configuration,omitempty"`
@@ -170,7 +170,7 @@ type CodeInterpreterObservation struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
@@ -185,7 +185,7 @@ type CodeInterpreterParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// ARN of the IAM role that the code interpreter assumes for execution. Required when using SANDBOX network mode.
+	// ARN of the IAM role that the code interpreter assumes for execution.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional

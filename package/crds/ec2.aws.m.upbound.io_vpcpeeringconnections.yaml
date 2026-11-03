@@ -60,21 +60,21 @@ spec:
               forProvider:
                 properties:
                   autoAccept:
-                    description: Accept the peering (both VPCs need to be in the same
-                      AWS account and region).
+                    description: Whether to accept the peering (both VPCs need to
+                      be in the same AWS account and region).
                     type: boolean
                   peerOwnerId:
-                    description: |-
-                      The AWS account ID of the target peer VPC.
-                      Defaults to the account ID the AWS provider is currently connected to, so must be managed if connecting cross-account.
+                    description: AWS account ID of the target peer VPC. Defaults to
+                      the account ID the AWS provider is currently connected to, so
+                      must be managed if connecting cross-account.
                     type: string
                   peerRegion:
-                    description: |-
-                      The region of the accepter VPC of the VPC Peering Connection. auto_accept must be false,
-                      and use the aws_vpc_peering_connection_accepter to manage the accepter side.
+                    description: Region of the accepter VPC of the VPC Peering Connection.
+                      auto_accept must be false, and use the aws_vpc_peering_connection_accepter
+                      to manage the accepter side.
                     type: string
                   peerVpcId:
-                    description: The ID of the target VPC with which you are creating
+                    description: ID of the target VPC with which you are creating
                       the VPC Peering Connection.
                     type: string
                   peerVpcIdRef:
@@ -169,7 +169,7 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   vpcId:
-                    description: The ID of the requester VPC.
+                    description: ID of the requester VPC.
                     type: string
                   vpcIdRef:
                     description: Reference to a VPC in ec2 to populate vpcId.
@@ -268,21 +268,21 @@ spec:
                   autoscaler.
                 properties:
                   autoAccept:
-                    description: Accept the peering (both VPCs need to be in the same
-                      AWS account and region).
+                    description: Whether to accept the peering (both VPCs need to
+                      be in the same AWS account and region).
                     type: boolean
                   peerOwnerId:
-                    description: |-
-                      The AWS account ID of the target peer VPC.
-                      Defaults to the account ID the AWS provider is currently connected to, so must be managed if connecting cross-account.
+                    description: AWS account ID of the target peer VPC. Defaults to
+                      the account ID the AWS provider is currently connected to, so
+                      must be managed if connecting cross-account.
                     type: string
                   peerRegion:
-                    description: |-
-                      The region of the accepter VPC of the VPC Peering Connection. auto_accept must be false,
-                      and use the aws_vpc_peering_connection_accepter to manage the accepter side.
+                    description: Region of the accepter VPC of the VPC Peering Connection.
+                      auto_accept must be false, and use the aws_vpc_peering_connection_accepter
+                      to manage the accepter side.
                     type: string
                   peerVpcId:
-                    description: The ID of the target VPC with which you are creating
+                    description: ID of the target VPC with which you are creating
                       the VPC Peering Connection.
                     type: string
                   peerVpcIdRef:
@@ -372,7 +372,7 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   vpcId:
-                    description: The ID of the requester VPC.
+                    description: ID of the requester VPC.
                     type: string
                   vpcIdRef:
                     description: Reference to a VPC in ec2 to populate vpcId.
@@ -520,38 +520,38 @@ spec:
               atProvider:
                 properties:
                   acceptStatus:
-                    description: The status of the VPC Peering Connection request.
+                    description: Status of the VPC Peering Connection request.
                     type: string
                   accepter:
-                    description: |-
-                      An optional configuration block that allows for VPC Peering Connection options to be set for the VPC that accepts
-                      the peering connection (a maximum of one).
+                    description: Configuration block for VPC Peering Connection options
+                      to set for the VPC that accepts the peering connection (a maximum
+                      of one). See accepter Block below.
                     properties:
                       allowRemoteVpcDnsResolution:
-                        description: |-
-                          Allow a local VPC to resolve public DNS hostnames to
-                          private IP addresses when queried from instances in the peer VPC.
+                        description: Whether to allow a local VPC to resolve public
+                          DNS hostnames to private IP addresses when queried from
+                          instances in the peer VPC.
                         type: boolean
                     type: object
                   autoAccept:
-                    description: Accept the peering (both VPCs need to be in the same
-                      AWS account and region).
+                    description: Whether to accept the peering (both VPCs need to
+                      be in the same AWS account and region).
                     type: boolean
                   id:
-                    description: The ID of the VPC Peering Connection.
+                    description: ID of the VPC Peering Connection.
                     type: string
                   peerOwnerId:
-                    description: |-
-                      The AWS account ID of the target peer VPC.
-                      Defaults to the account ID the AWS provider is currently connected to, so must be managed if connecting cross-account.
+                    description: AWS account ID of the target peer VPC. Defaults to
+                      the account ID the AWS provider is currently connected to, so
+                      must be managed if connecting cross-account.
                     type: string
                   peerRegion:
-                    description: |-
-                      The region of the accepter VPC of the VPC Peering Connection. auto_accept must be false,
-                      and use the aws_vpc_peering_connection_accepter to manage the accepter side.
+                    description: Region of the accepter VPC of the VPC Peering Connection.
+                      auto_accept must be false, and use the aws_vpc_peering_connection_accepter
+                      to manage the accepter side.
                     type: string
                   peerVpcId:
-                    description: The ID of the target VPC with which you are creating
+                    description: ID of the target VPC with which you are creating
                       the VPC Peering Connection.
                     type: string
                   region:
@@ -560,14 +560,14 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   requester:
-                    description: |-
-                      A optional configuration block that allows for VPC Peering Connection options to be set for the VPC that requests
-                      the peering connection (a maximum of one).
+                    description: Configuration block for VPC Peering Connection options
+                      to set for the VPC that requests the peering connection (a maximum
+                      of one). See requester Block below.
                     properties:
                       allowRemoteVpcDnsResolution:
-                        description: |-
-                          Allow a local VPC to resolve public DNS hostnames to
-                          private IP addresses when queried from instances in the peer VPC.
+                        description: Whether to allow a local VPC to resolve public
+                          DNS hostnames to private IP addresses when queried from
+                          instances in the peer VPC.
                         type: boolean
                     type: object
                   tags:
@@ -579,13 +579,12 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
                   vpcId:
-                    description: The ID of the requester VPC.
+                    description: ID of the requester VPC.
                     type: string
                 type: object
               conditions:

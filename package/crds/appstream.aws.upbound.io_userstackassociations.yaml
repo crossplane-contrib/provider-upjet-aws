@@ -431,7 +431,7 @@ spec:
                     description: Authentication type for the user.
                     type: string
                   id:
-                    description: Unique ID of the appstream User Stack association.
+                    description: Unique ID of the AppStream User Stack association.
                     type: string
                   region:
                     description: |-

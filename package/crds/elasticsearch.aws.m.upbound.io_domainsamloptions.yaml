@@ -78,7 +78,7 @@ spec:
                               SAML Identity Provider.
                             type: string
                           metadataContent:
-                            description: The Metadata of the SAML application in xml
+                            description: The Metadata of the SAML application in XML
                               format.
                             type: string
                         type: object
@@ -146,7 +146,7 @@ spec:
                               SAML Identity Provider.
                             type: string
                           metadataContent:
-                            description: The Metadata of the SAML application in xml
+                            description: The Metadata of the SAML application in XML
                               format.
                             type: string
                         type: object
@@ -271,7 +271,7 @@ spec:
                               SAML Identity Provider.
                             type: string
                           metadataContent:
-                            description: The Metadata of the SAML application in xml
+                            description: The Metadata of the SAML application in XML
                               format.
                             type: string
                         type: object

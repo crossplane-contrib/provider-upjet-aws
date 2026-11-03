@@ -15,12 +15,12 @@ import (
 
 type DBClusterInitParameters struct {
 
-	// Amount of storage in GiB (gibibytes). The minimum value is 20, the maximum value is 16384. The argument db_storage_type places restrictions on this argument's minimum value. The following is a list of db_storage_type values and the corresponding minimum value for allocated_storage: "InfluxIOIncludedT1": 20, "InfluxIOIncludedT2" and "InfluxIOIncludedT3": 400`. This field is forbidden for InfluxDB V3 clusters (when using an InfluxDB V3 db parameter group).
+	// Amount of storage in GiB (gibibytes). The minimum value is 20, the maximum value is 16384. The argument db_storage_type places restrictions on this argument's minimum value. The following is a list of db_storage_type values and the corresponding minimum value for allocated_storage: "InfluxIOIncludedT1": 20, "InfluxIOIncludedT2" and "InfluxIOIncludedT3": 400`. This field is forbidden for InfluxDB V3 clusters (when using an InfluxDB V3 DB parameter group).
 	// The amount of storage to allocate for your DB storage type in GiB (gibibytes).
 	// This field is forbidden for InfluxDB V3 clusters (when using an InfluxDB V3 db parameter group).
 	AllocatedStorage *float64 `json:"allocatedStorage,omitempty" tf:"allocated_storage,omitempty"`
 
-	// Name of the initial InfluxDB bucket. All InfluxDB data is stored in a bucket. A bucket combines the concept of a database and a retention period (the duration of time that each data point persists). A bucket belongs to an organization. Along with organization, username, and password, this argument will be stored in the secret referred to by the influx_auth_parameters_secret_arn attribute. This field is forbidden for InfluxDB V3 clusters (when using an InfluxDB V3 db parameter group).
+	// Name of the initial InfluxDB bucket. All InfluxDB data is stored in a bucket. A bucket combines the concept of a database and a retention period (the duration of time that each data point persists). A bucket belongs to an organization. Along with organization, username, and password, this argument will be stored in the secret referred to by the influx_auth_parameters_secret_arn attribute. This field is forbidden for InfluxDB V3 clusters (when using an InfluxDB V3 DB parameter group).
 	// Name of the initial InfluxDB bucket. All InfluxDB data is stored in a bucket.
 	// A bucket combines the concept of a database and a retention period (the duration of time
 	// that each data point persists). A bucket belongs to an organization. Along with organization,
@@ -39,19 +39,19 @@ type DBClusterInitParameters struct {
 	// can specify the limit for query concurrency.
 	DBParameterGroupIdentifier *string `json:"dbParameterGroupIdentifier,omitempty" tf:"db_parameter_group_identifier,omitempty"`
 
-	// (Default "InfluxIOIncludedT1") Timestream for InfluxDB DB storage type to read and write InfluxDB data. You can choose between 3 different types of provisioned Influx IOPS included storage according to your workloads requirements: Influx IO Included 3000 IOPS, Influx IO Included 12000 IOPS, Influx IO Included 16000 IOPS. Valid options are: "InfluxIOIncludedT1", "InfluxIOIncludedT2", and "InfluxIOIncludedT3". If you use "InfluxIOIncludedT2" or "InfluxIOIncludedT3", the minimum value for allocated_storage` is 400.
+	// Timestream for InfluxDB DB storage type to read and write InfluxDB data. You can choose between 3 different types of provisioned Influx IOPS included storage according to your workloads requirements: Influx IO Included 3000 IOPS, Influx IO Included 12000 IOPS, Influx IO Included 16000 IOPS. Valid options are: "InfluxIOIncludedT1", "InfluxIOIncludedT2", and "InfluxIOIncludedT3". If you use "InfluxIOIncludedT2" or "InfluxIOIncludedT3", the minimum value for allocated_storage` is 400.
 	// The Timestream for InfluxDB DB storage type to read and write InfluxDB data.
 	// You can choose between 3 different types of provisioned Influx IOPS included storage according
 	// to your workloads requirements: Influx IO Included 3000 IOPS, Influx IO Included 12000 IOPS,
 	// Influx IO Included 16000 IOPS.
 	DBStorageType *string `json:"dbStorageType,omitempty" tf:"db_storage_type,omitempty"`
 
-	// (Default "MULTI_NODE_READ_REPLICAS" for InfluxDB V2 clusters) Specifies the type of cluster to create. Valid options are: "MULTI_NODE_READ_REPLICAS". This field is forbidden for InfluxDB V3 clusters (when using an InfluxDB V3 db parameter group).
+	// Type of cluster to create. Valid options are: "MULTI_NODE_READ_REPLICAS". This field is forbidden for InfluxDB V3 clusters (when using an InfluxDB V3 DB parameter group).
 	// Specifies the type of cluster to create. This field is forbidden for InfluxDB V3 clusters
 	// (when using an InfluxDB V3 db parameter group).
 	DeploymentType *string `json:"deploymentType,omitempty" tf:"deployment_type,omitempty"`
 
-	// (Default "AUTOMATIC") Specifies the behavior of failure recovery when the primary node of the cluster fails. Valid options are: "AUTOMATIC" and "NO_FAILOVER".
+	// Behavior of failure recovery when the primary node of the cluster fails. Valid options are: "AUTOMATIC" and "NO_FAILOVER".
 	// Specifies the behavior of failure recovery when the primary node of the cluster
 	// fails.
 	FailoverMode *string `json:"failoverMode,omitempty" tf:"failover_mode,omitempty"`
@@ -60,7 +60,7 @@ type DBClusterInitParameters struct {
 	// Configuration for sending InfluxDB engine logs to a specified S3 bucket.
 	LogDeliveryConfiguration *LogDeliveryConfigurationInitParameters `json:"logDeliveryConfiguration,omitempty" tf:"log_delivery_configuration,omitempty"`
 
-	// Maintenance schedule for the DB cluster, including the preferred maintenance window and timezone. This argument is updatable. This field is only supported for InfluxDB V3 clusters (when using an InfluxDB V3 db parameter group).
+	// Maintenance schedule for the DB cluster, including the preferred maintenance window and timezone. This argument is updatable. This field is only supported for InfluxDB V3 clusters (when using an InfluxDB V3 DB parameter group).
 	// Specifies the maintenance schedule for the DB cluster, including the preferred
 	// maintenance window and timezone. This field is only supported for InfluxDB V3 clusters
 	// (when using an InfluxDB V3 db parameter group).
@@ -73,13 +73,13 @@ type DBClusterInitParameters struct {
 	// and per region.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Specifies whether the network type of the Timestream for InfluxDB cluster is IPV4, which can communicate over IPv4 protocol only, or DUAL, which can communicate over both IPv4 and IPv6 protocols.
+	// Network type of the Timestream for InfluxDB cluster. IPV4 can communicate over IPv4 protocol only, and DUAL can communicate over both IPv4 and IPv6 protocols.
 	// Specifies whether the networkType of the Timestream for InfluxDB cluster is
 	// IPV4, which can communicate over IPv4 protocol only, or DUAL, which can communicate
 	// over both IPv4 and IPv6 protocols.
 	NetworkType *string `json:"networkType,omitempty" tf:"network_type,omitempty"`
 
-	// Name of the initial organization for the initial admin user in InfluxDB. An InfluxDB organization is a workspace for a group of users. Along with bucket, username, and password, this argument will be stored in the secret referred to by the influx_auth_parameters_secret_arn attribute. This field is forbidden for InfluxDB V3 clusters (when using an InfluxDB V3 db parameter group).
+	// Name of the initial organization for the initial admin user in InfluxDB. An InfluxDB organization is a workspace for a group of users. Along with bucket, username, and password, this argument will be stored in the secret referred to by the influx_auth_parameters_secret_arn attribute. This field is forbidden for InfluxDB V3 clusters (when using an InfluxDB V3 DB parameter group).
 	// Name of the initial organization for the initial admin user in InfluxDB. An
 	// InfluxDB organization is a workspace for a group of users. Along with bucket, username,
 	// and password, this argument will be stored in the secret referred to by the
@@ -87,7 +87,7 @@ type DBClusterInitParameters struct {
 	// (when using an InfluxDB V3 db parameter group).
 	Organization *string `json:"organization,omitempty" tf:"organization,omitempty"`
 
-	// Password of the initial admin user created in InfluxDB. This password will allow you to access the InfluxDB UI to perform various administrative tasks and also use the InfluxDB CLI to create an operator token. Along with bucket, username, and organization, this argument will be stored in the secret referred to by the influx_auth_parameters_secret_arn attribute. This field is forbidden for InfluxDB V3 clusters (when using an InfluxDB V3 db parameter group) as the AWS API rejects it.
+	// Password of the initial admin user created in InfluxDB. This password will allow you to access the InfluxDB UI to perform various administrative tasks and also use the InfluxDB CLI to create an operator token. Along with bucket, username, and organization, this argument will be stored in the secret referred to by the influx_auth_parameters_secret_arn attribute. This field is forbidden for InfluxDB V3 clusters (when using an InfluxDB V3 DB parameter group) as the AWS API rejects it.
 	// Password of the initial admin user created in InfluxDB. This password will
 	// allow you to access the InfluxDB UI to perform various administrative tasks and
 	// also use the InfluxDB CLI to create an operator token. Along with bucket, username,
@@ -96,11 +96,11 @@ type DBClusterInitParameters struct {
 	// (when using an InfluxDB V3 db parameter group) as the AWS API rejects it.
 	PasswordSecretRef *v2.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
-	// (Default 8086) The port on which the cluster accepts connections. Valid values: 1024-65535. Cannot be 2375-2376, 7788-7799, 8090, or 51678-51680. This argument is updatable.
+	// Port on which the cluster accepts connections. Valid values: 1024-65535. Cannot be 2375-2376, 7788-7799, 8090, or 51678-51680. This argument is updatable.
 	// The port number on which InfluxDB accepts connections.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
-	// (Default false) Configures the DB cluster with a public IP to facilitate access. Other resources, such as a VPC, a subnet, an internet gateway, and a route table with routes, are also required to enabled public access, in addition to this argument. See "Usage with Public Internet Access Enabled" for an example configuration with all required resources for public internet access.
+	// Whether to configure the DB cluster with a public IP to facilitate access. Other resources, such as a VPC, a subnet, an internet gateway, and a route table with routes, are also required to enable public access, in addition to this argument. See "Usage with Public Internet Access Enabled" for an example configuration with all required resources for public internet access.
 	// Configures the Timestream for InfluxDB cluster with a public IP to facilitate access.
 	PubliclyAccessible *bool `json:"publiclyAccessible,omitempty" tf:"publicly_accessible,omitempty"`
 
@@ -108,7 +108,7 @@ type DBClusterInitParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Username of the initial admin user created in InfluxDB. Must start with a letter and can't end with a hyphen or contain two consecutive hyphens. This username will allow you to access the InfluxDB UI to perform various administrative tasks and also use the InfluxDB CLI to create an operator token. Along with bucket, organization, and password, this argument will be stored in the secret referred to by the influx_auth_parameters_secret_arn attribute. This field is forbidden for InfluxDB V3 clusters (when using an InfluxDB V3 db parameter group).
+	// Username of the initial admin user created in InfluxDB. Must start with a letter and can't end with a hyphen or contain two consecutive hyphens. This username will allow you to access the InfluxDB UI to perform various administrative tasks and also use the InfluxDB CLI to create an operator token. Along with bucket, organization, and password, this argument will be stored in the secret referred to by the influx_auth_parameters_secret_arn attribute. This field is forbidden for InfluxDB V3 clusters (when using an InfluxDB V3 DB parameter group).
 	// Username of the initial admin user created in InfluxDB. Must start with a letter
 	// and can't end with a hyphen or contain two consecutive hyphens. This username will allow
 	// you to access the InfluxDB UI to perform various administrative tasks and also use the
@@ -149,7 +149,7 @@ type DBClusterInitParameters struct {
 
 type DBClusterObservation struct {
 
-	// Amount of storage in GiB (gibibytes). The minimum value is 20, the maximum value is 16384. The argument db_storage_type places restrictions on this argument's minimum value. The following is a list of db_storage_type values and the corresponding minimum value for allocated_storage: "InfluxIOIncludedT1": 20, "InfluxIOIncludedT2" and "InfluxIOIncludedT3": 400`. This field is forbidden for InfluxDB V3 clusters (when using an InfluxDB V3 db parameter group).
+	// Amount of storage in GiB (gibibytes). The minimum value is 20, the maximum value is 16384. The argument db_storage_type places restrictions on this argument's minimum value. The following is a list of db_storage_type values and the corresponding minimum value for allocated_storage: "InfluxIOIncludedT1": 20, "InfluxIOIncludedT2" and "InfluxIOIncludedT3": 400`. This field is forbidden for InfluxDB V3 clusters (when using an InfluxDB V3 DB parameter group).
 	// The amount of storage to allocate for your DB storage type in GiB (gibibytes).
 	// This field is forbidden for InfluxDB V3 clusters (when using an InfluxDB V3 db parameter group).
 	AllocatedStorage *float64 `json:"allocatedStorage,omitempty" tf:"allocated_storage,omitempty"`
@@ -157,7 +157,7 @@ type DBClusterObservation struct {
 	// ARN of the Timestream for InfluxDB cluster.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// Name of the initial InfluxDB bucket. All InfluxDB data is stored in a bucket. A bucket combines the concept of a database and a retention period (the duration of time that each data point persists). A bucket belongs to an organization. Along with organization, username, and password, this argument will be stored in the secret referred to by the influx_auth_parameters_secret_arn attribute. This field is forbidden for InfluxDB V3 clusters (when using an InfluxDB V3 db parameter group).
+	// Name of the initial InfluxDB bucket. All InfluxDB data is stored in a bucket. A bucket combines the concept of a database and a retention period (the duration of time that each data point persists). A bucket belongs to an organization. Along with organization, username, and password, this argument will be stored in the secret referred to by the influx_auth_parameters_secret_arn attribute. This field is forbidden for InfluxDB V3 clusters (when using an InfluxDB V3 DB parameter group).
 	// Name of the initial InfluxDB bucket. All InfluxDB data is stored in a bucket.
 	// A bucket combines the concept of a database and a retention period (the duration of time
 	// that each data point persists). A bucket belongs to an organization. Along with organization,
@@ -176,14 +176,14 @@ type DBClusterObservation struct {
 	// can specify the limit for query concurrency.
 	DBParameterGroupIdentifier *string `json:"dbParameterGroupIdentifier,omitempty" tf:"db_parameter_group_identifier,omitempty"`
 
-	// (Default "InfluxIOIncludedT1") Timestream for InfluxDB DB storage type to read and write InfluxDB data. You can choose between 3 different types of provisioned Influx IOPS included storage according to your workloads requirements: Influx IO Included 3000 IOPS, Influx IO Included 12000 IOPS, Influx IO Included 16000 IOPS. Valid options are: "InfluxIOIncludedT1", "InfluxIOIncludedT2", and "InfluxIOIncludedT3". If you use "InfluxIOIncludedT2" or "InfluxIOIncludedT3", the minimum value for allocated_storage` is 400.
+	// Timestream for InfluxDB DB storage type to read and write InfluxDB data. You can choose between 3 different types of provisioned Influx IOPS included storage according to your workloads requirements: Influx IO Included 3000 IOPS, Influx IO Included 12000 IOPS, Influx IO Included 16000 IOPS. Valid options are: "InfluxIOIncludedT1", "InfluxIOIncludedT2", and "InfluxIOIncludedT3". If you use "InfluxIOIncludedT2" or "InfluxIOIncludedT3", the minimum value for allocated_storage` is 400.
 	// The Timestream for InfluxDB DB storage type to read and write InfluxDB data.
 	// You can choose between 3 different types of provisioned Influx IOPS included storage according
 	// to your workloads requirements: Influx IO Included 3000 IOPS, Influx IO Included 12000 IOPS,
 	// Influx IO Included 16000 IOPS.
 	DBStorageType *string `json:"dbStorageType,omitempty" tf:"db_storage_type,omitempty"`
 
-	// (Default "MULTI_NODE_READ_REPLICAS" for InfluxDB V2 clusters) Specifies the type of cluster to create. Valid options are: "MULTI_NODE_READ_REPLICAS". This field is forbidden for InfluxDB V3 clusters (when using an InfluxDB V3 db parameter group).
+	// Type of cluster to create. Valid options are: "MULTI_NODE_READ_REPLICAS". This field is forbidden for InfluxDB V3 clusters (when using an InfluxDB V3 DB parameter group).
 	// Specifies the type of cluster to create. This field is forbidden for InfluxDB V3 clusters
 	// (when using an InfluxDB V3 db parameter group).
 	DeploymentType *string `json:"deploymentType,omitempty" tf:"deployment_type,omitempty"`
@@ -196,7 +196,7 @@ type DBClusterObservation struct {
 	// The database engine type of the DB cluster.
 	EngineType *string `json:"engineType,omitempty" tf:"engine_type,omitempty"`
 
-	// (Default "AUTOMATIC") Specifies the behavior of failure recovery when the primary node of the cluster fails. Valid options are: "AUTOMATIC" and "NO_FAILOVER".
+	// Behavior of failure recovery when the primary node of the cluster fails. Valid options are: "AUTOMATIC" and "NO_FAILOVER".
 	// Specifies the behavior of failure recovery when the primary node of the cluster
 	// fails.
 	FailoverMode *string `json:"failoverMode,omitempty" tf:"failover_mode,omitempty"`
@@ -215,7 +215,7 @@ type DBClusterObservation struct {
 	// Configuration for sending InfluxDB engine logs to a specified S3 bucket.
 	LogDeliveryConfiguration *LogDeliveryConfigurationObservation `json:"logDeliveryConfiguration,omitempty" tf:"log_delivery_configuration,omitempty"`
 
-	// Maintenance schedule for the DB cluster, including the preferred maintenance window and timezone. This argument is updatable. This field is only supported for InfluxDB V3 clusters (when using an InfluxDB V3 db parameter group).
+	// Maintenance schedule for the DB cluster, including the preferred maintenance window and timezone. This argument is updatable. This field is only supported for InfluxDB V3 clusters (when using an InfluxDB V3 DB parameter group).
 	// Specifies the maintenance schedule for the DB cluster, including the preferred
 	// maintenance window and timezone. This field is only supported for InfluxDB V3 clusters
 	// (when using an InfluxDB V3 db parameter group).
@@ -228,13 +228,13 @@ type DBClusterObservation struct {
 	// and per region.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Specifies whether the network type of the Timestream for InfluxDB cluster is IPV4, which can communicate over IPv4 protocol only, or DUAL, which can communicate over both IPv4 and IPv6 protocols.
+	// Network type of the Timestream for InfluxDB cluster. IPV4 can communicate over IPv4 protocol only, and DUAL can communicate over both IPv4 and IPv6 protocols.
 	// Specifies whether the networkType of the Timestream for InfluxDB cluster is
 	// IPV4, which can communicate over IPv4 protocol only, or DUAL, which can communicate
 	// over both IPv4 and IPv6 protocols.
 	NetworkType *string `json:"networkType,omitempty" tf:"network_type,omitempty"`
 
-	// Name of the initial organization for the initial admin user in InfluxDB. An InfluxDB organization is a workspace for a group of users. Along with bucket, username, and password, this argument will be stored in the secret referred to by the influx_auth_parameters_secret_arn attribute. This field is forbidden for InfluxDB V3 clusters (when using an InfluxDB V3 db parameter group).
+	// Name of the initial organization for the initial admin user in InfluxDB. An InfluxDB organization is a workspace for a group of users. Along with bucket, username, and password, this argument will be stored in the secret referred to by the influx_auth_parameters_secret_arn attribute. This field is forbidden for InfluxDB V3 clusters (when using an InfluxDB V3 DB parameter group).
 	// Name of the initial organization for the initial admin user in InfluxDB. An
 	// InfluxDB organization is a workspace for a group of users. Along with bucket, username,
 	// and password, this argument will be stored in the secret referred to by the
@@ -242,15 +242,15 @@ type DBClusterObservation struct {
 	// (when using an InfluxDB V3 db parameter group).
 	Organization *string `json:"organization,omitempty" tf:"organization,omitempty"`
 
-	// (Default 8086) The port on which the cluster accepts connections. Valid values: 1024-65535. Cannot be 2375-2376, 7788-7799, 8090, or 51678-51680. This argument is updatable.
+	// Port on which the cluster accepts connections. Valid values: 1024-65535. Cannot be 2375-2376, 7788-7799, 8090, or 51678-51680. This argument is updatable.
 	// The port number on which InfluxDB accepts connections.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
-	// (Default false) Configures the DB cluster with a public IP to facilitate access. Other resources, such as a VPC, a subnet, an internet gateway, and a route table with routes, are also required to enabled public access, in addition to this argument. See "Usage with Public Internet Access Enabled" for an example configuration with all required resources for public internet access.
+	// Whether to configure the DB cluster with a public IP to facilitate access. Other resources, such as a VPC, a subnet, an internet gateway, and a route table with routes, are also required to enable public access, in addition to this argument. See "Usage with Public Internet Access Enabled" for an example configuration with all required resources for public internet access.
 	// Configures the Timestream for InfluxDB cluster with a public IP to facilitate access.
 	PubliclyAccessible *bool `json:"publiclyAccessible,omitempty" tf:"publicly_accessible,omitempty"`
 
-	// The endpoint used to connect to the Timestream for InfluxDB cluster for read-only operations.
+	// Endpoint used to connect to the Timestream for InfluxDB cluster for read-only operations.
 	// The endpoint used to connect to the Timestream for InfluxDB cluster for
 	// read-only operations.
 	ReaderEndpoint *string `json:"readerEndpoint,omitempty" tf:"reader_endpoint,omitempty"`
@@ -267,7 +267,7 @@ type DBClusterObservation struct {
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// Username of the initial admin user created in InfluxDB. Must start with a letter and can't end with a hyphen or contain two consecutive hyphens. This username will allow you to access the InfluxDB UI to perform various administrative tasks and also use the InfluxDB CLI to create an operator token. Along with bucket, organization, and password, this argument will be stored in the secret referred to by the influx_auth_parameters_secret_arn attribute. This field is forbidden for InfluxDB V3 clusters (when using an InfluxDB V3 db parameter group).
+	// Username of the initial admin user created in InfluxDB. Must start with a letter and can't end with a hyphen or contain two consecutive hyphens. This username will allow you to access the InfluxDB UI to perform various administrative tasks and also use the InfluxDB CLI to create an operator token. Along with bucket, organization, and password, this argument will be stored in the secret referred to by the influx_auth_parameters_secret_arn attribute. This field is forbidden for InfluxDB V3 clusters (when using an InfluxDB V3 DB parameter group).
 	// Username of the initial admin user created in InfluxDB. Must start with a letter
 	// and can't end with a hyphen or contain two consecutive hyphens. This username will allow
 	// you to access the InfluxDB UI to perform various administrative tasks and also use the
@@ -290,13 +290,13 @@ type DBClusterObservation struct {
 
 type DBClusterParameters struct {
 
-	// Amount of storage in GiB (gibibytes). The minimum value is 20, the maximum value is 16384. The argument db_storage_type places restrictions on this argument's minimum value. The following is a list of db_storage_type values and the corresponding minimum value for allocated_storage: "InfluxIOIncludedT1": 20, "InfluxIOIncludedT2" and "InfluxIOIncludedT3": 400`. This field is forbidden for InfluxDB V3 clusters (when using an InfluxDB V3 db parameter group).
+	// Amount of storage in GiB (gibibytes). The minimum value is 20, the maximum value is 16384. The argument db_storage_type places restrictions on this argument's minimum value. The following is a list of db_storage_type values and the corresponding minimum value for allocated_storage: "InfluxIOIncludedT1": 20, "InfluxIOIncludedT2" and "InfluxIOIncludedT3": 400`. This field is forbidden for InfluxDB V3 clusters (when using an InfluxDB V3 DB parameter group).
 	// The amount of storage to allocate for your DB storage type in GiB (gibibytes).
 	// This field is forbidden for InfluxDB V3 clusters (when using an InfluxDB V3 db parameter group).
 	// +kubebuilder:validation:Optional
 	AllocatedStorage *float64 `json:"allocatedStorage,omitempty" tf:"allocated_storage,omitempty"`
 
-	// Name of the initial InfluxDB bucket. All InfluxDB data is stored in a bucket. A bucket combines the concept of a database and a retention period (the duration of time that each data point persists). A bucket belongs to an organization. Along with organization, username, and password, this argument will be stored in the secret referred to by the influx_auth_parameters_secret_arn attribute. This field is forbidden for InfluxDB V3 clusters (when using an InfluxDB V3 db parameter group).
+	// Name of the initial InfluxDB bucket. All InfluxDB data is stored in a bucket. A bucket combines the concept of a database and a retention period (the duration of time that each data point persists). A bucket belongs to an organization. Along with organization, username, and password, this argument will be stored in the secret referred to by the influx_auth_parameters_secret_arn attribute. This field is forbidden for InfluxDB V3 clusters (when using an InfluxDB V3 DB parameter group).
 	// Name of the initial InfluxDB bucket. All InfluxDB data is stored in a bucket.
 	// A bucket combines the concept of a database and a retention period (the duration of time
 	// that each data point persists). A bucket belongs to an organization. Along with organization,
@@ -318,7 +318,7 @@ type DBClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	DBParameterGroupIdentifier *string `json:"dbParameterGroupIdentifier,omitempty" tf:"db_parameter_group_identifier,omitempty"`
 
-	// (Default "InfluxIOIncludedT1") Timestream for InfluxDB DB storage type to read and write InfluxDB data. You can choose between 3 different types of provisioned Influx IOPS included storage according to your workloads requirements: Influx IO Included 3000 IOPS, Influx IO Included 12000 IOPS, Influx IO Included 16000 IOPS. Valid options are: "InfluxIOIncludedT1", "InfluxIOIncludedT2", and "InfluxIOIncludedT3". If you use "InfluxIOIncludedT2" or "InfluxIOIncludedT3", the minimum value for allocated_storage` is 400.
+	// Timestream for InfluxDB DB storage type to read and write InfluxDB data. You can choose between 3 different types of provisioned Influx IOPS included storage according to your workloads requirements: Influx IO Included 3000 IOPS, Influx IO Included 12000 IOPS, Influx IO Included 16000 IOPS. Valid options are: "InfluxIOIncludedT1", "InfluxIOIncludedT2", and "InfluxIOIncludedT3". If you use "InfluxIOIncludedT2" or "InfluxIOIncludedT3", the minimum value for allocated_storage` is 400.
 	// The Timestream for InfluxDB DB storage type to read and write InfluxDB data.
 	// You can choose between 3 different types of provisioned Influx IOPS included storage according
 	// to your workloads requirements: Influx IO Included 3000 IOPS, Influx IO Included 12000 IOPS,
@@ -326,13 +326,13 @@ type DBClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	DBStorageType *string `json:"dbStorageType,omitempty" tf:"db_storage_type,omitempty"`
 
-	// (Default "MULTI_NODE_READ_REPLICAS" for InfluxDB V2 clusters) Specifies the type of cluster to create. Valid options are: "MULTI_NODE_READ_REPLICAS". This field is forbidden for InfluxDB V3 clusters (when using an InfluxDB V3 db parameter group).
+	// Type of cluster to create. Valid options are: "MULTI_NODE_READ_REPLICAS". This field is forbidden for InfluxDB V3 clusters (when using an InfluxDB V3 DB parameter group).
 	// Specifies the type of cluster to create. This field is forbidden for InfluxDB V3 clusters
 	// (when using an InfluxDB V3 db parameter group).
 	// +kubebuilder:validation:Optional
 	DeploymentType *string `json:"deploymentType,omitempty" tf:"deployment_type,omitempty"`
 
-	// (Default "AUTOMATIC") Specifies the behavior of failure recovery when the primary node of the cluster fails. Valid options are: "AUTOMATIC" and "NO_FAILOVER".
+	// Behavior of failure recovery when the primary node of the cluster fails. Valid options are: "AUTOMATIC" and "NO_FAILOVER".
 	// Specifies the behavior of failure recovery when the primary node of the cluster
 	// fails.
 	// +kubebuilder:validation:Optional
@@ -343,7 +343,7 @@ type DBClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	LogDeliveryConfiguration *LogDeliveryConfigurationParameters `json:"logDeliveryConfiguration,omitempty" tf:"log_delivery_configuration,omitempty"`
 
-	// Maintenance schedule for the DB cluster, including the preferred maintenance window and timezone. This argument is updatable. This field is only supported for InfluxDB V3 clusters (when using an InfluxDB V3 db parameter group).
+	// Maintenance schedule for the DB cluster, including the preferred maintenance window and timezone. This argument is updatable. This field is only supported for InfluxDB V3 clusters (when using an InfluxDB V3 DB parameter group).
 	// Specifies the maintenance schedule for the DB cluster, including the preferred
 	// maintenance window and timezone. This field is only supported for InfluxDB V3 clusters
 	// (when using an InfluxDB V3 db parameter group).
@@ -358,14 +358,14 @@ type DBClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Specifies whether the network type of the Timestream for InfluxDB cluster is IPV4, which can communicate over IPv4 protocol only, or DUAL, which can communicate over both IPv4 and IPv6 protocols.
+	// Network type of the Timestream for InfluxDB cluster. IPV4 can communicate over IPv4 protocol only, and DUAL can communicate over both IPv4 and IPv6 protocols.
 	// Specifies whether the networkType of the Timestream for InfluxDB cluster is
 	// IPV4, which can communicate over IPv4 protocol only, or DUAL, which can communicate
 	// over both IPv4 and IPv6 protocols.
 	// +kubebuilder:validation:Optional
 	NetworkType *string `json:"networkType,omitempty" tf:"network_type,omitempty"`
 
-	// Name of the initial organization for the initial admin user in InfluxDB. An InfluxDB organization is a workspace for a group of users. Along with bucket, username, and password, this argument will be stored in the secret referred to by the influx_auth_parameters_secret_arn attribute. This field is forbidden for InfluxDB V3 clusters (when using an InfluxDB V3 db parameter group).
+	// Name of the initial organization for the initial admin user in InfluxDB. An InfluxDB organization is a workspace for a group of users. Along with bucket, username, and password, this argument will be stored in the secret referred to by the influx_auth_parameters_secret_arn attribute. This field is forbidden for InfluxDB V3 clusters (when using an InfluxDB V3 DB parameter group).
 	// Name of the initial organization for the initial admin user in InfluxDB. An
 	// InfluxDB organization is a workspace for a group of users. Along with bucket, username,
 	// and password, this argument will be stored in the secret referred to by the
@@ -374,7 +374,7 @@ type DBClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	Organization *string `json:"organization,omitempty" tf:"organization,omitempty"`
 
-	// Password of the initial admin user created in InfluxDB. This password will allow you to access the InfluxDB UI to perform various administrative tasks and also use the InfluxDB CLI to create an operator token. Along with bucket, username, and organization, this argument will be stored in the secret referred to by the influx_auth_parameters_secret_arn attribute. This field is forbidden for InfluxDB V3 clusters (when using an InfluxDB V3 db parameter group) as the AWS API rejects it.
+	// Password of the initial admin user created in InfluxDB. This password will allow you to access the InfluxDB UI to perform various administrative tasks and also use the InfluxDB CLI to create an operator token. Along with bucket, username, and organization, this argument will be stored in the secret referred to by the influx_auth_parameters_secret_arn attribute. This field is forbidden for InfluxDB V3 clusters (when using an InfluxDB V3 DB parameter group) as the AWS API rejects it.
 	// Password of the initial admin user created in InfluxDB. This password will
 	// allow you to access the InfluxDB UI to perform various administrative tasks and
 	// also use the InfluxDB CLI to create an operator token. Along with bucket, username,
@@ -384,12 +384,12 @@ type DBClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	PasswordSecretRef *v2.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
-	// (Default 8086) The port on which the cluster accepts connections. Valid values: 1024-65535. Cannot be 2375-2376, 7788-7799, 8090, or 51678-51680. This argument is updatable.
+	// Port on which the cluster accepts connections. Valid values: 1024-65535. Cannot be 2375-2376, 7788-7799, 8090, or 51678-51680. This argument is updatable.
 	// The port number on which InfluxDB accepts connections.
 	// +kubebuilder:validation:Optional
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
-	// (Default false) Configures the DB cluster with a public IP to facilitate access. Other resources, such as a VPC, a subnet, an internet gateway, and a route table with routes, are also required to enabled public access, in addition to this argument. See "Usage with Public Internet Access Enabled" for an example configuration with all required resources for public internet access.
+	// Whether to configure the DB cluster with a public IP to facilitate access. Other resources, such as a VPC, a subnet, an internet gateway, and a route table with routes, are also required to enable public access, in addition to this argument. See "Usage with Public Internet Access Enabled" for an example configuration with all required resources for public internet access.
 	// Configures the Timestream for InfluxDB cluster with a public IP to facilitate access.
 	// +kubebuilder:validation:Optional
 	PubliclyAccessible *bool `json:"publiclyAccessible,omitempty" tf:"publicly_accessible,omitempty"`
@@ -404,7 +404,7 @@ type DBClusterParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Username of the initial admin user created in InfluxDB. Must start with a letter and can't end with a hyphen or contain two consecutive hyphens. This username will allow you to access the InfluxDB UI to perform various administrative tasks and also use the InfluxDB CLI to create an operator token. Along with bucket, organization, and password, this argument will be stored in the secret referred to by the influx_auth_parameters_secret_arn attribute. This field is forbidden for InfluxDB V3 clusters (when using an InfluxDB V3 db parameter group).
+	// Username of the initial admin user created in InfluxDB. Must start with a letter and can't end with a hyphen or contain two consecutive hyphens. This username will allow you to access the InfluxDB UI to perform various administrative tasks and also use the InfluxDB CLI to create an operator token. Along with bucket, organization, and password, this argument will be stored in the secret referred to by the influx_auth_parameters_secret_arn attribute. This field is forbidden for InfluxDB V3 clusters (when using an InfluxDB V3 DB parameter group).
 	// Username of the initial admin user created in InfluxDB. Must start with a letter
 	// and can't end with a hyphen or contain two consecutive hyphens. This username will allow
 	// you to access the InfluxDB UI to perform various administrative tasks and also use the
@@ -527,7 +527,7 @@ type S3ConfigurationInitParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketNameSelector *v2.Selector `json:"bucketNameSelector,omitempty" tf:"-"`
 
-	// Indicates whether log delivery to the S3 bucket is enabled.
+	// Whether log delivery to the S3 bucket is enabled.
 	// Indicates whether log delivery to the S3 bucket is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 }
@@ -538,7 +538,7 @@ type S3ConfigurationObservation struct {
 	// The name of the S3 bucket to deliver logs to.
 	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
 
-	// Indicates whether log delivery to the S3 bucket is enabled.
+	// Whether log delivery to the S3 bucket is enabled.
 	// Indicates whether log delivery to the S3 bucket is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 }
@@ -559,7 +559,7 @@ type S3ConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketNameSelector *v2.Selector `json:"bucketNameSelector,omitempty" tf:"-"`
 
-	// Indicates whether log delivery to the S3 bucket is enabled.
+	// Whether log delivery to the S3 bucket is enabled.
 	// Indicates whether log delivery to the S3 bucket is enabled.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`

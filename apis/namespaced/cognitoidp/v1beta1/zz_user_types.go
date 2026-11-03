@@ -88,7 +88,7 @@ type UserObservation struct {
 	// current user status.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
-	// unique user id that is never reassignable to another user.
+	// unique user ID that is never reassignable to another user.
 	Sub *string `json:"sub,omitempty" tf:"sub,omitempty"`
 
 	// The user pool ID for the user pool where the user will be created.

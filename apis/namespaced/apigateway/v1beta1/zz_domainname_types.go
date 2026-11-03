@@ -105,7 +105,7 @@ type DomainNameObservation struct {
 	// Upload date associated with the domain certificate.
 	CertificateUploadDate *string `json:"certificateUploadDate,omitempty" tf:"certificate_upload_date,omitempty"`
 
-	// Hostname created by Cloudfront to represent the distribution that implements this domain name mapping.
+	// Hostname created by CloudFront to represent the distribution that implements this domain name mapping.
 	CloudfrontDomainName *string `json:"cloudfrontDomainName,omitempty" tf:"cloudfront_domain_name,omitempty"`
 
 	// For convenience, the hosted zone ID (Z2FDTNDATAQYW2) that can be used to create a Route53 alias record for the distribution.

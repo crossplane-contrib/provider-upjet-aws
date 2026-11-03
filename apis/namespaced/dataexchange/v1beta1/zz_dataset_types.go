@@ -40,7 +40,7 @@ type DataSetObservation struct {
 	// A description for the data set.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The Id of the data set.
+	// The ID of the data set.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The name of the data set.

@@ -9,18 +9,18 @@ metadata:
   annotations:
     meta.upbound.io/example-id: efs/v1beta1/mounttarget
   labels:
-    testing.upbound.io/example-name: alpha
-  name: alpha
+    testing.upbound.io/example-name: example
+  name: example
   namespace: upbound-system
 spec:
   forProvider:
     fileSystemIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: foo
+        testing.upbound.io/example-name: example
     region: us-west-1
     subnetIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: alpha
+        testing.upbound.io/example-name: example
 
 ---
 
@@ -30,8 +30,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: efs/v1beta1/mounttarget
   labels:
-    testing.upbound.io/example-name: alpha
-  name: alpha
+    testing.upbound.io/example-name: example
+  name: example
   namespace: upbound-system
 spec:
   forProvider:
@@ -40,7 +40,7 @@ spec:
     region: us-west-1
     vpcIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: foo
+        testing.upbound.io/example-name: example
 
 ---
 
@@ -50,8 +50,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: efs/v1beta1/mounttarget
   labels:
-    testing.upbound.io/example-name: foo
-  name: foo
+    testing.upbound.io/example-name: example
+  name: example
   namespace: upbound-system
 spec:
   forProvider:

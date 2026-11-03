@@ -15,69 +15,69 @@ import (
 
 type AccessLogsInitParameters struct {
 
-	// A block that specifies configures sending Verified Access logs to CloudWatch Logs. Detailed below.
+	// Block that specifies configures sending Verified Access logs to CloudWatch Logs. Detailed below.
 	CloudwatchLogs *CloudwatchLogsInitParameters `json:"cloudwatchLogs,omitempty" tf:"cloudwatch_logs,omitempty"`
 
-	// Include trust data sent by trust providers into the logs.
+	// Whether to include trust data sent by trust providers in the logs.
 	IncludeTrustContext *bool `json:"includeTrustContext,omitempty" tf:"include_trust_context,omitempty"`
 
-	// A block that specifies configures sending Verified Access logs to Kinesis. Detailed below.
+	// Block that specifies configures sending Verified Access logs to Kinesis. Detailed below.
 	KinesisDataFirehose *KinesisDataFirehoseInitParameters `json:"kinesisDataFirehose,omitempty" tf:"kinesis_data_firehose,omitempty"`
 
-	// The logging version to use. Refer to VerifiedAccessLogOptions for the allowed values.
+	// Logging version to use. Refer to VerifiedAccessLogOptions for the allowed values.
 	LogVersion *string `json:"logVersion,omitempty" tf:"log_version,omitempty"`
 
-	// A block that specifies configures sending Verified Access logs to S3. Detailed below.
+	// Block that specifies configures sending Verified Access logs to S3. Detailed below.
 	S3 *S3InitParameters `json:"s3,omitempty" tf:"s3,omitempty"`
 }
 
 type AccessLogsObservation struct {
 
-	// A block that specifies configures sending Verified Access logs to CloudWatch Logs. Detailed below.
+	// Block that specifies configures sending Verified Access logs to CloudWatch Logs. Detailed below.
 	CloudwatchLogs *CloudwatchLogsObservation `json:"cloudwatchLogs,omitempty" tf:"cloudwatch_logs,omitempty"`
 
-	// Include trust data sent by trust providers into the logs.
+	// Whether to include trust data sent by trust providers in the logs.
 	IncludeTrustContext *bool `json:"includeTrustContext,omitempty" tf:"include_trust_context,omitempty"`
 
-	// A block that specifies configures sending Verified Access logs to Kinesis. Detailed below.
+	// Block that specifies configures sending Verified Access logs to Kinesis. Detailed below.
 	KinesisDataFirehose *KinesisDataFirehoseObservation `json:"kinesisDataFirehose,omitempty" tf:"kinesis_data_firehose,omitempty"`
 
-	// The logging version to use. Refer to VerifiedAccessLogOptions for the allowed values.
+	// Logging version to use. Refer to VerifiedAccessLogOptions for the allowed values.
 	LogVersion *string `json:"logVersion,omitempty" tf:"log_version,omitempty"`
 
-	// A block that specifies configures sending Verified Access logs to S3. Detailed below.
+	// Block that specifies configures sending Verified Access logs to S3. Detailed below.
 	S3 *S3Observation `json:"s3,omitempty" tf:"s3,omitempty"`
 }
 
 type AccessLogsParameters struct {
 
-	// A block that specifies configures sending Verified Access logs to CloudWatch Logs. Detailed below.
+	// Block that specifies configures sending Verified Access logs to CloudWatch Logs. Detailed below.
 	// +kubebuilder:validation:Optional
 	CloudwatchLogs *CloudwatchLogsParameters `json:"cloudwatchLogs,omitempty" tf:"cloudwatch_logs,omitempty"`
 
-	// Include trust data sent by trust providers into the logs.
+	// Whether to include trust data sent by trust providers in the logs.
 	// +kubebuilder:validation:Optional
 	IncludeTrustContext *bool `json:"includeTrustContext,omitempty" tf:"include_trust_context,omitempty"`
 
-	// A block that specifies configures sending Verified Access logs to Kinesis. Detailed below.
+	// Block that specifies configures sending Verified Access logs to Kinesis. Detailed below.
 	// +kubebuilder:validation:Optional
 	KinesisDataFirehose *KinesisDataFirehoseParameters `json:"kinesisDataFirehose,omitempty" tf:"kinesis_data_firehose,omitempty"`
 
-	// The logging version to use. Refer to VerifiedAccessLogOptions for the allowed values.
+	// Logging version to use. Refer to VerifiedAccessLogOptions for the allowed values.
 	// +kubebuilder:validation:Optional
 	LogVersion *string `json:"logVersion,omitempty" tf:"log_version,omitempty"`
 
-	// A block that specifies configures sending Verified Access logs to S3. Detailed below.
+	// Block that specifies configures sending Verified Access logs to S3. Detailed below.
 	// +kubebuilder:validation:Optional
 	S3 *S3Parameters `json:"s3,omitempty" tf:"s3,omitempty"`
 }
 
 type CloudwatchLogsInitParameters struct {
 
-	// Indicates whether logging is enabled.
+	// Whether logging is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The name of the CloudWatch Logs Log Group.
+	// Name of the CloudWatch Logs Log Group.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/cloudwatchlogs/v1beta1.Group
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	LogGroup *string `json:"logGroup,omitempty" tf:"log_group,omitempty"`
@@ -93,20 +93,20 @@ type CloudwatchLogsInitParameters struct {
 
 type CloudwatchLogsObservation struct {
 
-	// Indicates whether logging is enabled.
+	// Whether logging is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The name of the CloudWatch Logs Log Group.
+	// Name of the CloudWatch Logs Log Group.
 	LogGroup *string `json:"logGroup,omitempty" tf:"log_group,omitempty"`
 }
 
 type CloudwatchLogsParameters struct {
 
-	// Indicates whether logging is enabled.
+	// Whether logging is enabled.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 
-	// The name of the CloudWatch Logs Log Group.
+	// Name of the CloudWatch Logs Log Group.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/cloudwatchlogs/v1beta1.Group
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -123,10 +123,10 @@ type CloudwatchLogsParameters struct {
 
 type InstanceLoggingConfigurationInitParameters struct {
 
-	// A block that specifies the configuration options for Verified Access instances. Detailed below.
+	// Block that specifies the configuration options for Verified Access instances. Detailed below.
 	AccessLogs *AccessLogsInitParameters `json:"accessLogs,omitempty" tf:"access_logs,omitempty"`
 
-	// The ID of the Verified Access instance.
+	// ID of the Verified Access instance.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/verifiedaccess/v1beta1.Instance
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	VerifiedaccessInstanceID *string `json:"verifiedaccessInstanceId,omitempty" tf:"verifiedaccess_instance_id,omitempty"`
@@ -142,7 +142,7 @@ type InstanceLoggingConfigurationInitParameters struct {
 
 type InstanceLoggingConfigurationObservation struct {
 
-	// A block that specifies the configuration options for Verified Access instances. Detailed below.
+	// Block that specifies the configuration options for Verified Access instances. Detailed below.
 	AccessLogs *AccessLogsObservation `json:"accessLogs,omitempty" tf:"access_logs,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -151,13 +151,13 @@ type InstanceLoggingConfigurationObservation struct {
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The ID of the Verified Access instance.
+	// ID of the Verified Access instance.
 	VerifiedaccessInstanceID *string `json:"verifiedaccessInstanceId,omitempty" tf:"verifiedaccess_instance_id,omitempty"`
 }
 
 type InstanceLoggingConfigurationParameters struct {
 
-	// A block that specifies the configuration options for Verified Access instances. Detailed below.
+	// Block that specifies the configuration options for Verified Access instances. Detailed below.
 	// +kubebuilder:validation:Optional
 	AccessLogs *AccessLogsParameters `json:"accessLogs,omitempty" tf:"access_logs,omitempty"`
 
@@ -166,7 +166,7 @@ type InstanceLoggingConfigurationParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// The ID of the Verified Access instance.
+	// ID of the Verified Access instance.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/verifiedaccess/v1beta1.Instance
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -183,7 +183,7 @@ type InstanceLoggingConfigurationParameters struct {
 
 type KinesisDataFirehoseInitParameters struct {
 
-	// The name of the delivery stream.
+	// Name of the delivery stream.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/firehose/v1beta2.DeliveryStream
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	DeliveryStream *string `json:"deliveryStream,omitempty" tf:"delivery_stream,omitempty"`
@@ -196,22 +196,22 @@ type KinesisDataFirehoseInitParameters struct {
 	// +kubebuilder:validation:Optional
 	DeliveryStreamSelector *v2.Selector `json:"deliveryStreamSelector,omitempty" tf:"-"`
 
-	// Indicates whether logging is enabled.
+	// Whether logging is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 }
 
 type KinesisDataFirehoseObservation struct {
 
-	// The name of the delivery stream.
+	// Name of the delivery stream.
 	DeliveryStream *string `json:"deliveryStream,omitempty" tf:"delivery_stream,omitempty"`
 
-	// Indicates whether logging is enabled.
+	// Whether logging is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 }
 
 type KinesisDataFirehoseParameters struct {
 
-	// The name of the delivery stream.
+	// Name of the delivery stream.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/firehose/v1beta2.DeliveryStream
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
@@ -225,14 +225,14 @@ type KinesisDataFirehoseParameters struct {
 	// +kubebuilder:validation:Optional
 	DeliveryStreamSelector *v2.Selector `json:"deliveryStreamSelector,omitempty" tf:"-"`
 
-	// Indicates whether logging is enabled.
+	// Whether logging is enabled.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 }
 
 type S3InitParameters struct {
 
-	// The name of S3 bucket.
+	// Name of S3 bucket.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3/v1beta2.Bucket
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
@@ -245,34 +245,34 @@ type S3InitParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketNameSelector *v2.Selector `json:"bucketNameSelector,omitempty" tf:"-"`
 
-	// The ID of the AWS account that owns the Amazon S3 bucket.
+	// ID of the AWS account that owns the Amazon S3 bucket.
 	BucketOwner *string `json:"bucketOwner,omitempty" tf:"bucket_owner,omitempty"`
 
-	// Indicates whether logging is enabled.
+	// Whether logging is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The bucket prefix.
+	// Bucket prefix.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 }
 
 type S3Observation struct {
 
-	// The name of S3 bucket.
+	// Name of S3 bucket.
 	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
 
-	// The ID of the AWS account that owns the Amazon S3 bucket.
+	// ID of the AWS account that owns the Amazon S3 bucket.
 	BucketOwner *string `json:"bucketOwner,omitempty" tf:"bucket_owner,omitempty"`
 
-	// Indicates whether logging is enabled.
+	// Whether logging is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The bucket prefix.
+	// Bucket prefix.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 }
 
 type S3Parameters struct {
 
-	// The name of S3 bucket.
+	// Name of S3 bucket.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3/v1beta2.Bucket
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -286,15 +286,15 @@ type S3Parameters struct {
 	// +kubebuilder:validation:Optional
 	BucketNameSelector *v2.Selector `json:"bucketNameSelector,omitempty" tf:"-"`
 
-	// The ID of the AWS account that owns the Amazon S3 bucket.
+	// ID of the AWS account that owns the Amazon S3 bucket.
 	// +kubebuilder:validation:Optional
 	BucketOwner *string `json:"bucketOwner,omitempty" tf:"bucket_owner,omitempty"`
 
-	// Indicates whether logging is enabled.
+	// Whether logging is enabled.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 
-	// The bucket prefix.
+	// Bucket prefix.
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 }

@@ -74,12 +74,12 @@ spec:
               forProvider:
                 properties:
                   amazonSideAsn:
-                    description: The Autonomous System Number (ASN) for the Amazon
-                      side of the gateway. If you don't specify an ASN, the virtual
-                      private gateway is created with the default ASN.
+                    description: Autonomous System Number (ASN) for the Amazon side
+                      of the gateway. If you don't specify an ASN, the virtual private
+                      gateway is created with the default ASN.
                     type: string
                   availabilityZone:
-                    description: The Availability Zone for the virtual private gateway.
+                    description: Availability Zone for the virtual private gateway.
                     type: string
                   region:
                     description: |-
@@ -93,7 +93,7 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   vpcId:
-                    description: The VPC ID to create in.
+                    description: VPC ID to create in.
                     type: string
                   vpcIdRef:
                     description: Reference to a VPC in ec2 to populate vpcId.
@@ -186,12 +186,12 @@ spec:
                   autoscaler.
                 properties:
                   amazonSideAsn:
-                    description: The Autonomous System Number (ASN) for the Amazon
-                      side of the gateway. If you don't specify an ASN, the virtual
-                      private gateway is created with the default ASN.
+                    description: Autonomous System Number (ASN) for the Amazon side
+                      of the gateway. If you don't specify an ASN, the virtual private
+                      gateway is created with the default ASN.
                     type: string
                   availabilityZone:
-                    description: The Availability Zone for the virtual private gateway.
+                    description: Availability Zone for the virtual private gateway.
                     type: string
                   tags:
                     additionalProperties:
@@ -200,7 +200,7 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   vpcId:
-                    description: The VPC ID to create in.
+                    description: VPC ID to create in.
                     type: string
                   vpcIdRef:
                     description: Reference to a VPC in ec2 to populate vpcId.
@@ -369,18 +369,18 @@ spec:
               atProvider:
                 properties:
                   amazonSideAsn:
-                    description: The Autonomous System Number (ASN) for the Amazon
-                      side of the gateway. If you don't specify an ASN, the virtual
-                      private gateway is created with the default ASN.
+                    description: Autonomous System Number (ASN) for the Amazon side
+                      of the gateway. If you don't specify an ASN, the virtual private
+                      gateway is created with the default ASN.
                     type: string
                   arn:
                     description: ARN of the VPN Gateway.
                     type: string
                   availabilityZone:
-                    description: The Availability Zone for the virtual private gateway.
+                    description: Availability Zone for the virtual private gateway.
                     type: string
                   id:
-                    description: The ID of the VPN Gateway.
+                    description: ID of the VPN Gateway.
                     type: string
                   region:
                     description: |-
@@ -396,13 +396,12 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
                   vpcId:
-                    description: The VPC ID to create in.
+                    description: VPC ID to create in.
                     type: string
                 type: object
               conditions:

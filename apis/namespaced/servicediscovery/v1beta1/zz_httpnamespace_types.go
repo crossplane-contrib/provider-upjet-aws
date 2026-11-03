@@ -18,7 +18,7 @@ type HTTPNamespaceInitParameters struct {
 	// The description that you specify for the namespace when you create it.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The name of the http namespace.
+	// The name of the HTTP namespace.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Key-value map of resource tags.
@@ -40,7 +40,7 @@ type HTTPNamespaceObservation struct {
 	// The ID of a namespace.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The name of the http namespace.
+	// The name of the HTTP namespace.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -62,7 +62,7 @@ type HTTPNamespaceParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The name of the http namespace.
+	// The name of the HTTP namespace.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 

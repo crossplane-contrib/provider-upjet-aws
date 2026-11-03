@@ -145,7 +145,7 @@ type AgentcoreMemoryConfigurationInitParameters struct {
 	// Actor ID for memory sessions.
 	ActorID *string `json:"actorId,omitempty" tf:"actor_id,omitempty"`
 
-	// ARN of the hosting environment.
+	// ARN of the AgentCore memory resource.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/bedrockagentcore/v1beta1.Memory
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
@@ -158,10 +158,10 @@ type AgentcoreMemoryConfigurationInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ArnSelector *v2.NamespacedSelector `json:"arnSelector,omitempty" tf:"-"`
 
-	// Number of recent messages to keep in the conversation window.
+	// Number of messages to retrieve from memory.
 	MessagesCount *float64 `json:"messagesCount,omitempty" tf:"messages_count,omitempty"`
 
-	// Retrieval configuration parameters. See retrieval_config Block below.
+	// Retrieval configuration parameters. See memory.agentcore_memory_configuration.retrieval_config Block below.
 	RetrievalConfig *RetrievalConfigInitParameters `json:"retrievalConfig,omitempty" tf:"retrieval_config,omitempty"`
 }
 
@@ -170,13 +170,13 @@ type AgentcoreMemoryConfigurationObservation struct {
 	// Actor ID for memory sessions.
 	ActorID *string `json:"actorId,omitempty" tf:"actor_id,omitempty"`
 
-	// ARN of the hosting environment.
+	// ARN of the AgentCore memory resource.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// Number of recent messages to keep in the conversation window.
+	// Number of messages to retrieve from memory.
 	MessagesCount *float64 `json:"messagesCount,omitempty" tf:"messages_count,omitempty"`
 
-	// Retrieval configuration parameters. See retrieval_config Block below.
+	// Retrieval configuration parameters. See memory.agentcore_memory_configuration.retrieval_config Block below.
 	RetrievalConfig *RetrievalConfigObservation `json:"retrievalConfig,omitempty" tf:"retrieval_config,omitempty"`
 }
 
@@ -186,7 +186,7 @@ type AgentcoreMemoryConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	ActorID *string `json:"actorId,omitempty" tf:"actor_id,omitempty"`
 
-	// ARN of the hosting environment.
+	// ARN of the AgentCore memory resource.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/bedrockagentcore/v1beta1.Memory
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -200,11 +200,11 @@ type AgentcoreMemoryConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	ArnSelector *v2.NamespacedSelector `json:"arnSelector,omitempty" tf:"-"`
 
-	// Number of recent messages to keep in the conversation window.
+	// Number of messages to retrieve from memory.
 	// +kubebuilder:validation:Optional
 	MessagesCount *float64 `json:"messagesCount,omitempty" tf:"messages_count,omitempty"`
 
-	// Retrieval configuration parameters. See retrieval_config Block below.
+	// Retrieval configuration parameters. See memory.agentcore_memory_configuration.retrieval_config Block below.
 	// +kubebuilder:validation:Optional
 	RetrievalConfig *RetrievalConfigParameters `json:"retrievalConfig,omitempty" tf:"retrieval_config,omitempty"`
 }
@@ -217,13 +217,13 @@ type AgentcoreMemoryConfigurationRetrievalConfigObservation struct {
 	// Namespace path template for retrieval settings.
 	MapBlockKey *string `json:"mapBlockKey,omitempty" tf:"map_block_key,omitempty"`
 
-	// Relevance score threshold. Valid value is between 0 and 1.
+	// Relevance score threshold.
 	RelevanceScore *float64 `json:"relevanceScore,omitempty" tf:"relevance_score,omitempty"`
 
 	// ID of the memory strategy.
 	StrategyID *string `json:"strategyId,omitempty" tf:"strategy_id,omitempty"`
 
-	// Top-k sampling parameter.
+	// Number of top results to retrieve.
 	TopK *float64 `json:"topK,omitempty" tf:"top_k,omitempty"`
 }
 
@@ -235,10 +235,10 @@ type AgentcoreRuntimeEnvironmentFilesystemConfigurationEFSAccessPointInitParamet
 
 type AgentcoreRuntimeEnvironmentFilesystemConfigurationEFSAccessPointObservation struct {
 
-	// ARN of the Amazon S3 Files access point to mount into the agent runtime.
+	// ARN of the Amazon EFS access point mounted into the agent runtime.
 	AccessPointArn *string `json:"accessPointArn,omitempty" tf:"access_point_arn,omitempty"`
 
-	// Mount path for the S3 Files access point inside the agent runtime. Must be under /mnt with exactly one subdirectory level (for example, /mnt/data).
+	// Mount path for the EFS access point inside the agent runtime.
 	MountPath *string `json:"mountPath,omitempty" tf:"mount_path,omitempty"`
 }
 
@@ -247,39 +247,39 @@ type AgentcoreRuntimeEnvironmentFilesystemConfigurationEFSAccessPointParameters 
 
 type AgentcoreRuntimeEnvironmentFilesystemConfigurationInitParameters struct {
 
-	// Amazon EFS access point to mount as shared file storage. Exactly one of session_storage, s3_files_access_point, or efs_access_point must be specified. See efs_access_point Block below.
+	// Amazon EFS access point to mount as shared file storage. Exactly one of session_storage, s3_files_access_point, or efs_access_point must be specified. See environment.agentcore_runtime_environment.filesystem_configuration.efs_access_point Block below.
 	EFSAccessPoint []FilesystemConfigurationEFSAccessPointInitParameters `json:"efsAccessPoint,omitempty" tf:"efs_access_point,omitempty"`
 
-	// Amazon S3 Files access point to mount as shared file storage. Exactly one of session_storage, s3_files_access_point, or efs_access_point must be specified. See s3_files_access_point Block below.
+	// Amazon S3 Files access point to mount as shared file storage. Exactly one of session_storage, s3_files_access_point, or efs_access_point must be specified. See environment.agentcore_runtime_environment.filesystem_configuration.s3_files_access_point Block below.
 	S3FilesAccessPoint []FilesystemConfigurationS3FilesAccessPointInitParameters `json:"s3FilesAccessPoint,omitempty" tf:"s3_files_access_point,omitempty"`
 
-	// Session storage filesystem providing persistent storage across agent runtime session invocations. Exactly one of session_storage, s3_files_access_point, or efs_access_point must be specified. See session_storage Block below.
+	// Session storage filesystem providing persistent storage across agent runtime session invocations. Exactly one of session_storage, s3_files_access_point, or efs_access_point must be specified. See environment.agentcore_runtime_environment.filesystem_configuration.session_storage Block below.
 	SessionStorage []FilesystemConfigurationSessionStorageInitParameters `json:"sessionStorage,omitempty" tf:"session_storage,omitempty"`
 }
 
 type AgentcoreRuntimeEnvironmentFilesystemConfigurationObservation struct {
 
-	// Amazon EFS access point to mount as shared file storage. Exactly one of session_storage, s3_files_access_point, or efs_access_point must be specified. See efs_access_point Block below.
+	// Amazon EFS access point to mount as shared file storage. Exactly one of session_storage, s3_files_access_point, or efs_access_point must be specified. See environment.agentcore_runtime_environment.filesystem_configuration.efs_access_point Block below.
 	EFSAccessPoint []FilesystemConfigurationEFSAccessPointObservation `json:"efsAccessPoint,omitempty" tf:"efs_access_point,omitempty"`
 
-	// Amazon S3 Files access point to mount as shared file storage. Exactly one of session_storage, s3_files_access_point, or efs_access_point must be specified. See s3_files_access_point Block below.
+	// Amazon S3 Files access point to mount as shared file storage. Exactly one of session_storage, s3_files_access_point, or efs_access_point must be specified. See environment.agentcore_runtime_environment.filesystem_configuration.s3_files_access_point Block below.
 	S3FilesAccessPoint []FilesystemConfigurationS3FilesAccessPointObservation `json:"s3FilesAccessPoint,omitempty" tf:"s3_files_access_point,omitempty"`
 
-	// Session storage filesystem providing persistent storage across agent runtime session invocations. Exactly one of session_storage, s3_files_access_point, or efs_access_point must be specified. See session_storage Block below.
+	// Session storage filesystem providing persistent storage across agent runtime session invocations. Exactly one of session_storage, s3_files_access_point, or efs_access_point must be specified. See environment.agentcore_runtime_environment.filesystem_configuration.session_storage Block below.
 	SessionStorage []FilesystemConfigurationSessionStorageObservation `json:"sessionStorage,omitempty" tf:"session_storage,omitempty"`
 }
 
 type AgentcoreRuntimeEnvironmentFilesystemConfigurationParameters struct {
 
-	// Amazon EFS access point to mount as shared file storage. Exactly one of session_storage, s3_files_access_point, or efs_access_point must be specified. See efs_access_point Block below.
+	// Amazon EFS access point to mount as shared file storage. Exactly one of session_storage, s3_files_access_point, or efs_access_point must be specified. See environment.agentcore_runtime_environment.filesystem_configuration.efs_access_point Block below.
 	// +kubebuilder:validation:Optional
 	EFSAccessPoint []FilesystemConfigurationEFSAccessPointParameters `json:"efsAccessPoint,omitempty" tf:"efs_access_point,omitempty"`
 
-	// Amazon S3 Files access point to mount as shared file storage. Exactly one of session_storage, s3_files_access_point, or efs_access_point must be specified. See s3_files_access_point Block below.
+	// Amazon S3 Files access point to mount as shared file storage. Exactly one of session_storage, s3_files_access_point, or efs_access_point must be specified. See environment.agentcore_runtime_environment.filesystem_configuration.s3_files_access_point Block below.
 	// +kubebuilder:validation:Optional
 	S3FilesAccessPoint []FilesystemConfigurationS3FilesAccessPointParameters `json:"s3FilesAccessPoint,omitempty" tf:"s3_files_access_point,omitempty"`
 
-	// Session storage filesystem providing persistent storage across agent runtime session invocations. Exactly one of session_storage, s3_files_access_point, or efs_access_point must be specified. See session_storage Block below.
+	// Session storage filesystem providing persistent storage across agent runtime session invocations. Exactly one of session_storage, s3_files_access_point, or efs_access_point must be specified. See environment.agentcore_runtime_environment.filesystem_configuration.session_storage Block below.
 	// +kubebuilder:validation:Optional
 	SessionStorage []FilesystemConfigurationSessionStorageParameters `json:"sessionStorage,omitempty" tf:"session_storage,omitempty"`
 }
@@ -289,10 +289,10 @@ type AgentcoreRuntimeEnvironmentFilesystemConfigurationS3FilesAccessPointInitPar
 
 type AgentcoreRuntimeEnvironmentFilesystemConfigurationS3FilesAccessPointObservation struct {
 
-	// ARN of the Amazon S3 Files access point to mount into the agent runtime.
+	// ARN of the Amazon S3 Files access point mounted into the agent runtime.
 	AccessPointArn *string `json:"accessPointArn,omitempty" tf:"access_point_arn,omitempty"`
 
-	// Mount path for the S3 Files access point inside the agent runtime. Must be under /mnt with exactly one subdirectory level (for example, /mnt/data).
+	// Mount path for the S3 Files access point inside the agent runtime.
 	MountPath *string `json:"mountPath,omitempty" tf:"mount_path,omitempty"`
 }
 
@@ -304,7 +304,7 @@ type AgentcoreRuntimeEnvironmentFilesystemConfigurationSessionStorageInitParamet
 
 type AgentcoreRuntimeEnvironmentFilesystemConfigurationSessionStorageObservation struct {
 
-	// Mount path for the S3 Files access point inside the agent runtime. Must be under /mnt with exactly one subdirectory level (for example, /mnt/data).
+	// Mount path for the session storage filesystem inside the agent runtime.
 	MountPath *string `json:"mountPath,omitempty" tf:"mount_path,omitempty"`
 }
 
@@ -313,13 +313,13 @@ type AgentcoreRuntimeEnvironmentFilesystemConfigurationSessionStorageParameters 
 
 type AgentcoreRuntimeEnvironmentInitParameters struct {
 
-	// Filesystem configurations. See filesystem_configuration Block below.
+	// Filesystem configurations. See environment.agentcore_runtime_environment.filesystem_configuration Block below.
 	FilesystemConfiguration []AgentcoreRuntimeEnvironmentFilesystemConfigurationInitParameters `json:"filesystemConfiguration,omitempty" tf:"filesystem_configuration,omitempty"`
 
-	// Lifecycle configuration. See lifecycle_configuration Block below.
+	// Lifecycle configuration. See environment.agentcore_runtime_environment.lifecycle_configuration Block below.
 	LifecycleConfiguration []AgentcoreRuntimeEnvironmentLifecycleConfigurationInitParameters `json:"lifecycleConfiguration,omitempty" tf:"lifecycle_configuration,omitempty"`
 
-	// Network configuration. See network_configuration Block below.
+	// Network configuration. See environment.agentcore_runtime_environment.network_configuration Block below.
 	NetworkConfiguration []AgentcoreRuntimeEnvironmentNetworkConfigurationInitParameters `json:"networkConfiguration,omitempty" tf:"network_configuration,omitempty"`
 }
 
@@ -357,7 +357,7 @@ type AgentcoreRuntimeEnvironmentNetworkConfigurationInitParameters struct {
 	// Network mode. Valid values: PUBLIC, VPC.
 	NetworkMode *string `json:"networkMode,omitempty" tf:"network_mode,omitempty"`
 
-	// VPC configuration. See network_mode_config Block below.
+	// VPC configuration. See environment.agentcore_runtime_environment.network_configuration.network_mode_config Block below.
 	NetworkModeConfig []NetworkConfigurationNetworkModeConfigInitParameters `json:"networkModeConfig,omitempty" tf:"network_mode_config,omitempty"`
 }
 
@@ -366,7 +366,7 @@ type AgentcoreRuntimeEnvironmentNetworkConfigurationNetworkModeConfigInitParamet
 
 type AgentcoreRuntimeEnvironmentNetworkConfigurationNetworkModeConfigObservation struct {
 
-	// Whether to require an S3 endpoint for the service in the VPC.
+	// Whether an S3 endpoint is required for the service in the VPC.
 	RequireServiceS3Endpoint *bool `json:"requireServiceS3Endpoint,omitempty" tf:"require_service_s3_endpoint,omitempty"`
 
 	// Security groups for the VPC.
@@ -386,7 +386,7 @@ type AgentcoreRuntimeEnvironmentNetworkConfigurationObservation struct {
 	// Network mode. Valid values: PUBLIC, VPC.
 	NetworkMode *string `json:"networkMode,omitempty" tf:"network_mode,omitempty"`
 
-	// VPC configuration. See network_mode_config Block below.
+	// VPC configuration. See environment.agentcore_runtime_environment.network_configuration.network_mode_config Block below.
 	NetworkModeConfig []NetworkConfigurationNetworkModeConfigObservation `json:"networkModeConfig,omitempty" tf:"network_mode_config,omitempty"`
 }
 
@@ -396,7 +396,7 @@ type AgentcoreRuntimeEnvironmentNetworkConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	NetworkMode *string `json:"networkMode" tf:"network_mode,omitempty"`
 
-	// VPC configuration. See network_mode_config Block below.
+	// VPC configuration. See environment.agentcore_runtime_environment.network_configuration.network_mode_config Block below.
 	// +kubebuilder:validation:Optional
 	NetworkModeConfig []NetworkConfigurationNetworkModeConfigParameters `json:"networkModeConfig,omitempty" tf:"network_mode_config,omitempty"`
 }
@@ -412,27 +412,27 @@ type AgentcoreRuntimeEnvironmentObservation struct {
 	// Name of the agent runtime the service derives for the harness.
 	AgentRuntimeName *string `json:"agentRuntimeName,omitempty" tf:"agent_runtime_name,omitempty"`
 
-	// Filesystem configurations. See filesystem_configuration Block below.
+	// Filesystem configurations. See environment.agentcore_runtime_environment.filesystem_configuration Block below.
 	FilesystemConfiguration []AgentcoreRuntimeEnvironmentFilesystemConfigurationObservation `json:"filesystemConfiguration,omitempty" tf:"filesystem_configuration,omitempty"`
 
-	// Lifecycle configuration. See lifecycle_configuration Block below.
+	// Lifecycle configuration. See environment.agentcore_runtime_environment.lifecycle_configuration Block below.
 	LifecycleConfiguration []AgentcoreRuntimeEnvironmentLifecycleConfigurationObservation `json:"lifecycleConfiguration,omitempty" tf:"lifecycle_configuration,omitempty"`
 
-	// Network configuration. See network_configuration Block below.
+	// Network configuration. See environment.agentcore_runtime_environment.network_configuration Block below.
 	NetworkConfiguration []AgentcoreRuntimeEnvironmentNetworkConfigurationObservation `json:"networkConfiguration,omitempty" tf:"network_configuration,omitempty"`
 }
 
 type AgentcoreRuntimeEnvironmentParameters struct {
 
-	// Filesystem configurations. See filesystem_configuration Block below.
+	// Filesystem configurations. See environment.agentcore_runtime_environment.filesystem_configuration Block below.
 	// +kubebuilder:validation:Optional
 	FilesystemConfiguration []AgentcoreRuntimeEnvironmentFilesystemConfigurationParameters `json:"filesystemConfiguration,omitempty" tf:"filesystem_configuration,omitempty"`
 
-	// Lifecycle configuration. See lifecycle_configuration Block below.
+	// Lifecycle configuration. See environment.agentcore_runtime_environment.lifecycle_configuration Block below.
 	// +kubebuilder:validation:Optional
 	LifecycleConfiguration []AgentcoreRuntimeEnvironmentLifecycleConfigurationParameters `json:"lifecycleConfiguration,omitempty" tf:"lifecycle_configuration,omitempty"`
 
-	// Network configuration. See network_configuration Block below.
+	// Network configuration. See environment.agentcore_runtime_environment.network_configuration Block below.
 	// +kubebuilder:validation:Optional
 	NetworkConfiguration []AgentcoreRuntimeEnvironmentNetworkConfigurationParameters `json:"networkConfiguration,omitempty" tf:"network_configuration,omitempty"`
 }
@@ -745,7 +745,7 @@ type BedrockModelConfigInitParameters struct {
 	// JSON string containing provider-specific parameters to pass through to the Bedrock model provider unchanged.
 	AdditionalParams *string `json:"additionalParams,omitempty" tf:"additional_params,omitempty"`
 
-	// Maximum number of tokens in the model response.
+	// Maximum total number of output tokens the agent can generate across all model calls within a single invocation.
 	MaxTokens *float64 `json:"maxTokens,omitempty" tf:"max_tokens,omitempty"`
 
 	// Bedrock model ID (e.g., anthropic.claude-sonnet-4-20250514).
@@ -766,7 +766,7 @@ type BedrockModelConfigObservation struct {
 	// JSON string containing provider-specific parameters to pass through to the Bedrock model provider unchanged.
 	AdditionalParams *string `json:"additionalParams,omitempty" tf:"additional_params,omitempty"`
 
-	// Maximum number of tokens in the model response.
+	// Maximum total number of output tokens the agent can generate across all model calls within a single invocation.
 	MaxTokens *float64 `json:"maxTokens,omitempty" tf:"max_tokens,omitempty"`
 
 	// Bedrock model ID (e.g., anthropic.claude-sonnet-4-20250514).
@@ -789,7 +789,7 @@ type BedrockModelConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	AdditionalParams *string `json:"additionalParams,omitempty" tf:"additional_params,omitempty"`
 
-	// Maximum number of tokens in the model response.
+	// Maximum total number of output tokens the agent can generate across all model calls within a single invocation.
 	// +kubebuilder:validation:Optional
 	MaxTokens *float64 `json:"maxTokens,omitempty" tf:"max_tokens,omitempty"`
 
@@ -899,19 +899,19 @@ type CustomClaimAuthorizingClaimMatchValueClaimMatchValueParameters struct {
 
 type CustomJwtAuthorizerAllowedWorkloadConfigurationHostingEnvironmentInitParameters struct {
 
-	// ARN of the hosting environment.
+	// ARN of the managed memory resource.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 }
 
 type CustomJwtAuthorizerAllowedWorkloadConfigurationHostingEnvironmentObservation struct {
 
-	// ARN of the hosting environment.
+	// ARN of the managed memory resource.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 }
 
 type CustomJwtAuthorizerAllowedWorkloadConfigurationHostingEnvironmentParameters struct {
 
-	// ARN of the hosting environment.
+	// ARN of the managed memory resource.
 	// +kubebuilder:validation:Optional
 	Arn *string `json:"arn" tf:"arn,omitempty"`
 }
@@ -1056,13 +1056,13 @@ type EnvironmentActualAgentcoreRuntimeEnvironmentFilesystemConfigurationInitPara
 
 type EnvironmentActualAgentcoreRuntimeEnvironmentFilesystemConfigurationObservation struct {
 
-	// Amazon EFS access point to mount as shared file storage. Exactly one of session_storage, s3_files_access_point, or efs_access_point must be specified. See efs_access_point Block below.
+	// Amazon EFS access point mounted as shared file storage. See environment_actual.agentcore_runtime_environment.filesystem_configuration.efs_access_point Block below.
 	EFSAccessPoint []AgentcoreRuntimeEnvironmentFilesystemConfigurationEFSAccessPointObservation `json:"efsAccessPoint,omitempty" tf:"efs_access_point,omitempty"`
 
-	// Amazon S3 Files access point to mount as shared file storage. Exactly one of session_storage, s3_files_access_point, or efs_access_point must be specified. See s3_files_access_point Block below.
+	// Amazon S3 Files access point mounted as shared file storage. See environment_actual.agentcore_runtime_environment.filesystem_configuration.s3_files_access_point Block below.
 	S3FilesAccessPoint []AgentcoreRuntimeEnvironmentFilesystemConfigurationS3FilesAccessPointObservation `json:"s3FilesAccessPoint,omitempty" tf:"s3_files_access_point,omitempty"`
 
-	// Session storage filesystem providing persistent storage across agent runtime session invocations. Exactly one of session_storage, s3_files_access_point, or efs_access_point must be specified. See session_storage Block below.
+	// Session storage filesystem. See environment_actual.agentcore_runtime_environment.filesystem_configuration.session_storage Block below.
 	SessionStorage []AgentcoreRuntimeEnvironmentFilesystemConfigurationSessionStorageObservation `json:"sessionStorage,omitempty" tf:"session_storage,omitempty"`
 }
 
@@ -1092,10 +1092,10 @@ type EnvironmentActualAgentcoreRuntimeEnvironmentNetworkConfigurationInitParamet
 
 type EnvironmentActualAgentcoreRuntimeEnvironmentNetworkConfigurationObservation struct {
 
-	// Network mode. Valid values: PUBLIC, VPC.
+	// Network mode.
 	NetworkMode *string `json:"networkMode,omitempty" tf:"network_mode,omitempty"`
 
-	// VPC configuration. See network_mode_config Block below.
+	// VPC configuration. See environment_actual.agentcore_runtime_environment.network_configuration.network_mode_config Block below.
 	NetworkModeConfig []AgentcoreRuntimeEnvironmentNetworkConfigurationNetworkModeConfigObservation `json:"networkModeConfig,omitempty" tf:"network_mode_config,omitempty"`
 }
 
@@ -1113,13 +1113,13 @@ type EnvironmentActualAgentcoreRuntimeEnvironmentObservation struct {
 	// Name of the agent runtime the service derives for the harness.
 	AgentRuntimeName *string `json:"agentRuntimeName,omitempty" tf:"agent_runtime_name,omitempty"`
 
-	// Filesystem configurations. See filesystem_configuration Block below.
+	// Filesystem configurations. See environment_actual.agentcore_runtime_environment.filesystem_configuration Block below.
 	FilesystemConfiguration []EnvironmentActualAgentcoreRuntimeEnvironmentFilesystemConfigurationObservation `json:"filesystemConfiguration,omitempty" tf:"filesystem_configuration,omitempty"`
 
-	// Lifecycle configuration. See lifecycle_configuration Block below.
+	// Lifecycle configuration. See environment_actual.agentcore_runtime_environment.lifecycle_configuration Block below.
 	LifecycleConfiguration []EnvironmentActualAgentcoreRuntimeEnvironmentLifecycleConfigurationObservation `json:"lifecycleConfiguration,omitempty" tf:"lifecycle_configuration,omitempty"`
 
-	// Network configuration. See network_configuration Block below.
+	// Network configuration. See environment_actual.agentcore_runtime_environment.network_configuration Block below.
 	NetworkConfiguration []EnvironmentActualAgentcoreRuntimeEnvironmentNetworkConfigurationObservation `json:"networkConfiguration,omitempty" tf:"network_configuration,omitempty"`
 }
 
@@ -1131,7 +1131,7 @@ type EnvironmentActualInitParameters struct {
 
 type EnvironmentActualObservation struct {
 
-	// AgentCore runtime environment configuration. See agentcore_runtime_environment Block below.
+	// AgentCore runtime environment configuration. See environment_actual.agentcore_runtime_environment Block below.
 	AgentcoreRuntimeEnvironment []EnvironmentActualAgentcoreRuntimeEnvironmentObservation `json:"agentcoreRuntimeEnvironment,omitempty" tf:"agentcore_runtime_environment,omitempty"`
 }
 
@@ -1178,26 +1178,26 @@ type EnvironmentArtifactParameters struct {
 
 type EnvironmentInitParameters struct {
 
-	// AgentCore runtime environment configuration. See agentcore_runtime_environment Block below.
+	// AgentCore runtime environment configuration. See environment.agentcore_runtime_environment Block below.
 	AgentcoreRuntimeEnvironment []AgentcoreRuntimeEnvironmentInitParameters `json:"agentcoreRuntimeEnvironment,omitempty" tf:"agentcore_runtime_environment,omitempty"`
 }
 
 type EnvironmentObservation struct {
 
-	// AgentCore runtime environment configuration. See agentcore_runtime_environment Block below.
+	// AgentCore runtime environment configuration. See environment.agentcore_runtime_environment Block below.
 	AgentcoreRuntimeEnvironment []AgentcoreRuntimeEnvironmentObservation `json:"agentcoreRuntimeEnvironment,omitempty" tf:"agentcore_runtime_environment,omitempty"`
 }
 
 type EnvironmentParameters struct {
 
-	// AgentCore runtime environment configuration. See agentcore_runtime_environment Block below.
+	// AgentCore runtime environment configuration. See environment.agentcore_runtime_environment Block below.
 	// +kubebuilder:validation:Optional
 	AgentcoreRuntimeEnvironment []AgentcoreRuntimeEnvironmentParameters `json:"agentcoreRuntimeEnvironment,omitempty" tf:"agentcore_runtime_environment,omitempty"`
 }
 
 type FilesystemConfigurationEFSAccessPointInitParameters struct {
 
-	// ARN of the Amazon S3 Files access point to mount into the agent runtime.
+	// ARN of the Amazon EFS access point to mount into the agent runtime.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/efs/v1beta1.AccessPoint
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	AccessPointArn *string `json:"accessPointArn,omitempty" tf:"access_point_arn,omitempty"`
@@ -1210,22 +1210,22 @@ type FilesystemConfigurationEFSAccessPointInitParameters struct {
 	// +kubebuilder:validation:Optional
 	AccessPointArnSelector *v2.NamespacedSelector `json:"accessPointArnSelector,omitempty" tf:"-"`
 
-	// Mount path for the S3 Files access point inside the agent runtime. Must be under /mnt with exactly one subdirectory level (for example, /mnt/data).
+	// Mount path for the EFS access point inside the agent runtime. Must be under /mnt with exactly one subdirectory level (for example, /mnt/data).
 	MountPath *string `json:"mountPath,omitempty" tf:"mount_path,omitempty"`
 }
 
 type FilesystemConfigurationEFSAccessPointObservation struct {
 
-	// ARN of the Amazon S3 Files access point to mount into the agent runtime.
+	// ARN of the Amazon EFS access point to mount into the agent runtime.
 	AccessPointArn *string `json:"accessPointArn,omitempty" tf:"access_point_arn,omitempty"`
 
-	// Mount path for the S3 Files access point inside the agent runtime. Must be under /mnt with exactly one subdirectory level (for example, /mnt/data).
+	// Mount path for the EFS access point inside the agent runtime. Must be under /mnt with exactly one subdirectory level (for example, /mnt/data).
 	MountPath *string `json:"mountPath,omitempty" tf:"mount_path,omitempty"`
 }
 
 type FilesystemConfigurationEFSAccessPointParameters struct {
 
-	// ARN of the Amazon S3 Files access point to mount into the agent runtime.
+	// ARN of the Amazon EFS access point to mount into the agent runtime.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/efs/v1beta1.AccessPoint
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -1239,7 +1239,7 @@ type FilesystemConfigurationEFSAccessPointParameters struct {
 	// +kubebuilder:validation:Optional
 	AccessPointArnSelector *v2.NamespacedSelector `json:"accessPointArnSelector,omitempty" tf:"-"`
 
-	// Mount path for the S3 Files access point inside the agent runtime. Must be under /mnt with exactly one subdirectory level (for example, /mnt/data).
+	// Mount path for the EFS access point inside the agent runtime. Must be under /mnt with exactly one subdirectory level (for example, /mnt/data).
 	// +kubebuilder:validation:Optional
 	MountPath *string `json:"mountPath" tf:"mount_path,omitempty"`
 }
@@ -1259,7 +1259,7 @@ type FilesystemConfigurationS3FilesAccessPointInitParameters struct {
 	// +kubebuilder:validation:Optional
 	AccessPointArnSelector *v2.NamespacedSelector `json:"accessPointArnSelector,omitempty" tf:"-"`
 
-	// Mount path for the S3 Files access point inside the agent runtime. Must be under /mnt with exactly one subdirectory level (for example, /mnt/data).
+	// Mount path for the session storage filesystem inside the agent runtime. Must be under /mnt with exactly one subdirectory level (for example, /mnt/data).
 	MountPath *string `json:"mountPath,omitempty" tf:"mount_path,omitempty"`
 }
 
@@ -1268,7 +1268,7 @@ type FilesystemConfigurationS3FilesAccessPointObservation struct {
 	// ARN of the Amazon S3 Files access point to mount into the agent runtime.
 	AccessPointArn *string `json:"accessPointArn,omitempty" tf:"access_point_arn,omitempty"`
 
-	// Mount path for the S3 Files access point inside the agent runtime. Must be under /mnt with exactly one subdirectory level (for example, /mnt/data).
+	// Mount path for the session storage filesystem inside the agent runtime. Must be under /mnt with exactly one subdirectory level (for example, /mnt/data).
 	MountPath *string `json:"mountPath,omitempty" tf:"mount_path,omitempty"`
 }
 
@@ -1288,26 +1288,26 @@ type FilesystemConfigurationS3FilesAccessPointParameters struct {
 	// +kubebuilder:validation:Optional
 	AccessPointArnSelector *v2.NamespacedSelector `json:"accessPointArnSelector,omitempty" tf:"-"`
 
-	// Mount path for the S3 Files access point inside the agent runtime. Must be under /mnt with exactly one subdirectory level (for example, /mnt/data).
+	// Mount path for the session storage filesystem inside the agent runtime. Must be under /mnt with exactly one subdirectory level (for example, /mnt/data).
 	// +kubebuilder:validation:Optional
 	MountPath *string `json:"mountPath" tf:"mount_path,omitempty"`
 }
 
 type FilesystemConfigurationSessionStorageInitParameters struct {
 
-	// Mount path for the S3 Files access point inside the agent runtime. Must be under /mnt with exactly one subdirectory level (for example, /mnt/data).
+	// Mount path for the session storage filesystem inside the agent runtime. Must be under /mnt with exactly one subdirectory level (for example, /mnt/data).
 	MountPath *string `json:"mountPath,omitempty" tf:"mount_path,omitempty"`
 }
 
 type FilesystemConfigurationSessionStorageObservation struct {
 
-	// Mount path for the S3 Files access point inside the agent runtime. Must be under /mnt with exactly one subdirectory level (for example, /mnt/data).
+	// Mount path for the session storage filesystem inside the agent runtime. Must be under /mnt with exactly one subdirectory level (for example, /mnt/data).
 	MountPath *string `json:"mountPath,omitempty" tf:"mount_path,omitempty"`
 }
 
 type FilesystemConfigurationSessionStorageParameters struct {
 
-	// Mount path for the S3 Files access point inside the agent runtime. Must be under /mnt with exactly one subdirectory level (for example, /mnt/data).
+	// Mount path for the session storage filesystem inside the agent runtime. Must be under /mnt with exactly one subdirectory level (for example, /mnt/data).
 	// +kubebuilder:validation:Optional
 	MountPath *string `json:"mountPath" tf:"mount_path,omitempty"`
 }
@@ -1330,7 +1330,7 @@ type GeminiModelConfigInitParameters struct {
 	// JSON string containing provider-specific parameters to pass through to the Bedrock model provider unchanged.
 	AdditionalParams *string `json:"additionalParams,omitempty" tf:"additional_params,omitempty"`
 
-	// Maximum number of tokens in the model response.
+	// Maximum total number of output tokens the agent can generate across all model calls within a single invocation.
 	MaxTokens *float64 `json:"maxTokens,omitempty" tf:"max_tokens,omitempty"`
 
 	// Bedrock model ID (e.g., anthropic.claude-sonnet-4-20250514).
@@ -1354,7 +1354,7 @@ type GeminiModelConfigObservation struct {
 	// JSON string containing provider-specific parameters to pass through to the Bedrock model provider unchanged.
 	AdditionalParams *string `json:"additionalParams,omitempty" tf:"additional_params,omitempty"`
 
-	// Maximum number of tokens in the model response.
+	// Maximum total number of output tokens the agent can generate across all model calls within a single invocation.
 	MaxTokens *float64 `json:"maxTokens,omitempty" tf:"max_tokens,omitempty"`
 
 	// Bedrock model ID (e.g., anthropic.claude-sonnet-4-20250514).
@@ -1390,7 +1390,7 @@ type GeminiModelConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	AdditionalParams *string `json:"additionalParams,omitempty" tf:"additional_params,omitempty"`
 
-	// Maximum number of tokens in the model response.
+	// Maximum total number of output tokens the agent can generate across all model calls within a single invocation.
 	// +kubebuilder:validation:Optional
 	MaxTokens *float64 `json:"maxTokens,omitempty" tf:"max_tokens,omitempty"`
 
@@ -1575,7 +1575,7 @@ type HarnessInitParameters struct {
 	// Authorization configuration for authenticating requests. See authorizer_configuration Block below.
 	AuthorizerConfiguration *HarnessAuthorizerConfigurationInitParameters `json:"authorizerConfiguration,omitempty" tf:"authorizer_configuration,omitempty"`
 
-	// Compute environment configuration. See environment Block below.If not specified, configured values can be found in environment_actual.
+	// Compute environment configuration. See environment Block below. If not specified, configured values can be found in environment_actual.
 	Environment *EnvironmentInitParameters `json:"environment,omitempty" tf:"environment,omitempty"`
 
 	// Environment artifact configuration. See environment_artifact Block below.
@@ -1596,13 +1596,13 @@ type HarnessInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ExecutionRoleArnSelector *v2.NamespacedSelector `json:"executionRoleArnSelector,omitempty" tf:"-"`
 
-	// Name of the harness. Must be 1-40 characters, alphanumeric and underscores only.
+	// Name of the harness. Must be 1-40 characters, start with a letter, and contain only alphanumeric characters and underscores.
 	HarnessName *string `json:"harnessName,omitempty" tf:"harness_name,omitempty"`
 
 	// Maximum number of iterations the agent loop can perform.
 	MaxIterations *float64 `json:"maxIterations,omitempty" tf:"max_iterations,omitempty"`
 
-	// Maximum number of tokens in the model response.
+	// Maximum total number of output tokens the agent can generate across all model calls within a single invocation.
 	MaxTokens *float64 `json:"maxTokens,omitempty" tf:"max_tokens,omitempty"`
 
 	// Memory configuration. See memory Block below. If not specified, configured values can be found in memory_actual. Clearing this value will reset the memory configuration to default values.
@@ -1685,16 +1685,16 @@ type HarnessObservation struct {
 	// List of tool names allowed for the harness. Use ["*"] to allow all tools.
 	AllowedTools []*string `json:"allowedTools,omitempty" tf:"allowed_tools,omitempty"`
 
-	// ARN of the AgentCore memory resource.
+	// ARN of the Harness.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Authorization configuration for authenticating requests. See authorizer_configuration Block below.
 	AuthorizerConfiguration *HarnessAuthorizerConfigurationObservation `json:"authorizerConfiguration,omitempty" tf:"authorizer_configuration,omitempty"`
 
-	// Compute environment configuration. See environment Block below.If not specified, configured values can be found in environment_actual.
+	// Compute environment configuration. See environment Block below. If not specified, configured values can be found in environment_actual.
 	Environment *EnvironmentObservation `json:"environment,omitempty" tf:"environment,omitempty"`
 
-	// Actual deployed environment configuration.
+	// Actual deployed environment configuration. See environment_actual Block below.
 	EnvironmentActual []EnvironmentActualObservation `json:"environmentActual,omitempty" tf:"environment_actual,omitempty"`
 
 	// Environment artifact configuration. See environment_artifact Block below.
@@ -1706,7 +1706,7 @@ type HarnessObservation struct {
 	// Unique identifier of the Harness.
 	HarnessID *string `json:"harnessId,omitempty" tf:"harness_id,omitempty"`
 
-	// Name of the harness. Must be 1-40 characters, alphanumeric and underscores only.
+	// Name of the harness. Must be 1-40 characters, start with a letter, and contain only alphanumeric characters and underscores.
 	HarnessName *string `json:"harnessName,omitempty" tf:"harness_name,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -1714,13 +1714,13 @@ type HarnessObservation struct {
 	// Maximum number of iterations the agent loop can perform.
 	MaxIterations *float64 `json:"maxIterations,omitempty" tf:"max_iterations,omitempty"`
 
-	// Maximum number of tokens in the model response.
+	// Maximum total number of output tokens the agent can generate across all model calls within a single invocation.
 	MaxTokens *float64 `json:"maxTokens,omitempty" tf:"max_tokens,omitempty"`
 
 	// Memory configuration. See memory Block below. If not specified, configured values can be found in memory_actual. Clearing this value will reset the memory configuration to default values.
 	Memory *MemoryObservation `json:"memory,omitempty" tf:"memory,omitempty"`
 
-	// Actual deployed memory configuration.
+	// Actual deployed memory configuration. See memory_actual Block below.
 	MemoryActual []MemoryActualObservation `json:"memoryActual,omitempty" tf:"memory_actual,omitempty"`
 
 	// Model configuration for the harness. See model Block below.
@@ -1740,7 +1740,7 @@ type HarnessObservation struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
@@ -1764,7 +1764,7 @@ type HarnessParameters struct {
 	// +kubebuilder:validation:Optional
 	AuthorizerConfiguration *HarnessAuthorizerConfigurationParameters `json:"authorizerConfiguration,omitempty" tf:"authorizer_configuration,omitempty"`
 
-	// Compute environment configuration. See environment Block below.If not specified, configured values can be found in environment_actual.
+	// Compute environment configuration. See environment Block below. If not specified, configured values can be found in environment_actual.
 	// +kubebuilder:validation:Optional
 	Environment *EnvironmentParameters `json:"environment,omitempty" tf:"environment,omitempty"`
 
@@ -1772,7 +1772,7 @@ type HarnessParameters struct {
 	// +kubebuilder:validation:Optional
 	EnvironmentArtifact *EnvironmentArtifactParameters `json:"environmentArtifact,omitempty" tf:"environment_artifact,omitempty"`
 
-	// Map of environment variables.
+	// Map of environment variables. Set to an empty map ({}) to remove all environment variables.
 	// +kubebuilder:validation:Optional
 	EnvironmentVariablesSecretRef *v2.LocalSecretReference `json:"environmentVariablesSecretRef,omitempty" tf:"-"`
 
@@ -1790,7 +1790,7 @@ type HarnessParameters struct {
 	// +kubebuilder:validation:Optional
 	ExecutionRoleArnSelector *v2.NamespacedSelector `json:"executionRoleArnSelector,omitempty" tf:"-"`
 
-	// Name of the harness. Must be 1-40 characters, alphanumeric and underscores only.
+	// Name of the harness. Must be 1-40 characters, start with a letter, and contain only alphanumeric characters and underscores.
 	// +kubebuilder:validation:Optional
 	HarnessName *string `json:"harnessName,omitempty" tf:"harness_name,omitempty"`
 
@@ -1798,7 +1798,7 @@ type HarnessParameters struct {
 	// +kubebuilder:validation:Optional
 	MaxIterations *float64 `json:"maxIterations,omitempty" tf:"max_iterations,omitempty"`
 
-	// Maximum number of tokens in the model response.
+	// Maximum total number of output tokens the agent can generate across all model calls within a single invocation.
 	// +kubebuilder:validation:Optional
 	MaxTokens *float64 `json:"maxTokens,omitempty" tf:"max_tokens,omitempty"`
 
@@ -1888,7 +1888,7 @@ type LitellmModelConfigInitParameters struct {
 	// JSON string containing provider-specific parameters to pass through to the Bedrock model provider unchanged.
 	AdditionalParams *string `json:"additionalParams,omitempty" tf:"additional_params,omitempty"`
 
-	// Maximum number of tokens in the model response.
+	// Maximum total number of output tokens the agent can generate across all model calls within a single invocation.
 	MaxTokens *float64 `json:"maxTokens,omitempty" tf:"max_tokens,omitempty"`
 
 	// Bedrock model ID (e.g., anthropic.claude-sonnet-4-20250514).
@@ -1912,7 +1912,7 @@ type LitellmModelConfigObservation struct {
 	// JSON string containing provider-specific parameters to pass through to the Bedrock model provider unchanged.
 	AdditionalParams *string `json:"additionalParams,omitempty" tf:"additional_params,omitempty"`
 
-	// Maximum number of tokens in the model response.
+	// Maximum total number of output tokens the agent can generate across all model calls within a single invocation.
 	MaxTokens *float64 `json:"maxTokens,omitempty" tf:"max_tokens,omitempty"`
 
 	// Bedrock model ID (e.g., anthropic.claude-sonnet-4-20250514).
@@ -1949,7 +1949,7 @@ type LitellmModelConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	AdditionalParams *string `json:"additionalParams,omitempty" tf:"additional_params,omitempty"`
 
-	// Maximum number of tokens in the model response.
+	// Maximum total number of output tokens the agent can generate across all model calls within a single invocation.
 	// +kubebuilder:validation:Optional
 	MaxTokens *float64 `json:"maxTokens,omitempty" tf:"max_tokens,omitempty"`
 
@@ -1974,14 +1974,14 @@ type ManagedMemoryConfigurationInitParameters struct {
 	// Event retention in days. Defaults to 30.
 	EventExpiryDuration *float64 `json:"eventExpiryDuration,omitempty" tf:"event_expiry_duration,omitempty"`
 
-	// Set of strategy types to enable. Valid values are SEMANTIC, SUMMARIZATION, and USER_PREFERENCE. Defaults to ["SEMANTIC", "SUMMARIZATION"].
+	// Set of strategy types to enable. Valid values are SEMANTIC, SUMMARIZATION, USER_PREFERENCE, and EPISODIC. Defaults to ["SEMANTIC", "SUMMARIZATION"].
 	// +listType=set
 	Strategies []*string `json:"strategies,omitempty" tf:"strategies,omitempty"`
 }
 
 type ManagedMemoryConfigurationObservation struct {
 
-	// ARN of the hosting environment.
+	// ARN of the managed memory resource.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// ARN of a customer-managed KMS key used to encrypt the memory. Defaults to an AWS-owned key. Cannot be changed after creation.
@@ -1990,7 +1990,7 @@ type ManagedMemoryConfigurationObservation struct {
 	// Event retention in days. Defaults to 30.
 	EventExpiryDuration *float64 `json:"eventExpiryDuration,omitempty" tf:"event_expiry_duration,omitempty"`
 
-	// Set of strategy types to enable. Valid values are SEMANTIC, SUMMARIZATION, and USER_PREFERENCE. Defaults to ["SEMANTIC", "SUMMARIZATION"].
+	// Set of strategy types to enable. Valid values are SEMANTIC, SUMMARIZATION, USER_PREFERENCE, and EPISODIC. Defaults to ["SEMANTIC", "SUMMARIZATION"].
 	// +listType=set
 	Strategies []*string `json:"strategies,omitempty" tf:"strategies,omitempty"`
 }
@@ -2005,7 +2005,7 @@ type ManagedMemoryConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	EventExpiryDuration *float64 `json:"eventExpiryDuration,omitempty" tf:"event_expiry_duration,omitempty"`
 
-	// Set of strategy types to enable. Valid values are SEMANTIC, SUMMARIZATION, and USER_PREFERENCE. Defaults to ["SEMANTIC", "SUMMARIZATION"].
+	// Set of strategy types to enable. Valid values are SEMANTIC, SUMMARIZATION, USER_PREFERENCE, and EPISODIC. Defaults to ["SEMANTIC", "SUMMARIZATION"].
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	Strategies []*string `json:"strategies,omitempty" tf:"strategies,omitempty"`
@@ -2019,13 +2019,13 @@ type MemoryActualAgentcoreMemoryConfigurationObservation struct {
 	// Actor ID for memory sessions.
 	ActorID *string `json:"actorId,omitempty" tf:"actor_id,omitempty"`
 
-	// ARN of the hosting environment.
+	// ARN of the AgentCore memory resource.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// Number of recent messages to keep in the conversation window.
+	// Number of messages to retrieve from memory.
 	MessagesCount *float64 `json:"messagesCount,omitempty" tf:"messages_count,omitempty"`
 
-	// Retrieval configuration parameters. See retrieval_config Block below.
+	// Retrieval configuration parameters. See memory_actual.agentcore_memory_configuration.retrieval_config Block below.
 	RetrievalConfig []AgentcoreMemoryConfigurationRetrievalConfigObservation `json:"retrievalConfig,omitempty" tf:"retrieval_config,omitempty"`
 }
 
@@ -2049,16 +2049,16 @@ type MemoryActualManagedMemoryConfigurationInitParameters struct {
 
 type MemoryActualManagedMemoryConfigurationObservation struct {
 
-	// ARN of the hosting environment.
+	// ARN of the managed memory resource.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// ARN of a customer-managed KMS key used to encrypt the memory. Defaults to an AWS-owned key. Cannot be changed after creation.
+	// ARN of the customer-managed KMS key used to encrypt the memory.
 	EncryptionKeyArn *string `json:"encryptionKeyArn,omitempty" tf:"encryption_key_arn,omitempty"`
 
-	// Event retention in days. Defaults to 30.
+	// Event retention in days.
 	EventExpiryDuration *float64 `json:"eventExpiryDuration,omitempty" tf:"event_expiry_duration,omitempty"`
 
-	// Set of strategy types to enable. Valid values are SEMANTIC, SUMMARIZATION, and USER_PREFERENCE. Defaults to ["SEMANTIC", "SUMMARIZATION"].
+	// Set of strategy types enabled.
 	// +listType=set
 	Strategies []*string `json:"strategies,omitempty" tf:"strategies,omitempty"`
 }
@@ -2068,13 +2068,13 @@ type MemoryActualManagedMemoryConfigurationParameters struct {
 
 type MemoryActualObservation struct {
 
-	// AgentCore memory configuration. Use this to connect to an existing AgentCore memory resource. See agentcore_memory_configuration Block below.
+	// AgentCore memory configuration. See memory_actual.agentcore_memory_configuration Block below.
 	AgentcoreMemoryConfiguration []MemoryActualAgentcoreMemoryConfigurationObservation `json:"agentcoreMemoryConfiguration,omitempty" tf:"agentcore_memory_configuration,omitempty"`
 
-	// Explicitly disable memory for this harness. See disabled Block below.
+	// Present when memory is explicitly disabled. See memory_actual.disabled Block below.
 	Disabled []MemoryActualDisabledObservation `json:"disabled,omitempty" tf:"disabled,omitempty"`
 
-	// Managed memory configuration. Creates and manages a memory resource automatically. See managed_memory_configuration Block below.
+	// Managed memory configuration. See memory_actual.managed_memory_configuration Block below.
 	ManagedMemoryConfiguration []MemoryActualManagedMemoryConfigurationObservation `json:"managedMemoryConfiguration,omitempty" tf:"managed_memory_configuration,omitempty"`
 }
 
@@ -2083,39 +2083,39 @@ type MemoryActualParameters struct {
 
 type MemoryInitParameters struct {
 
-	// AgentCore memory configuration. Use this to connect to an existing AgentCore memory resource. See agentcore_memory_configuration Block below.
+	// AgentCore memory configuration. Use this to connect to an existing AgentCore memory resource. See memory.agentcore_memory_configuration Block below.
 	AgentcoreMemoryConfiguration *AgentcoreMemoryConfigurationInitParameters `json:"agentcoreMemoryConfiguration,omitempty" tf:"agentcore_memory_configuration,omitempty"`
 
-	// Explicitly disable memory for this harness. See disabled Block below.
+	// Explicitly disable memory for this harness. See memory.disabled Block below.
 	Disabled *DisabledInitParameters `json:"disabled,omitempty" tf:"disabled,omitempty"`
 
-	// Managed memory configuration. Creates and manages a memory resource automatically. See managed_memory_configuration Block below.
+	// Managed memory configuration. Creates and manages a memory resource automatically. See memory.managed_memory_configuration Block below.
 	ManagedMemoryConfiguration *ManagedMemoryConfigurationInitParameters `json:"managedMemoryConfiguration,omitempty" tf:"managed_memory_configuration,omitempty"`
 }
 
 type MemoryObservation struct {
 
-	// AgentCore memory configuration. Use this to connect to an existing AgentCore memory resource. See agentcore_memory_configuration Block below.
+	// AgentCore memory configuration. Use this to connect to an existing AgentCore memory resource. See memory.agentcore_memory_configuration Block below.
 	AgentcoreMemoryConfiguration *AgentcoreMemoryConfigurationObservation `json:"agentcoreMemoryConfiguration,omitempty" tf:"agentcore_memory_configuration,omitempty"`
 
-	// Explicitly disable memory for this harness. See disabled Block below.
+	// Explicitly disable memory for this harness. See memory.disabled Block below.
 	Disabled *DisabledParameters `json:"disabled,omitempty" tf:"disabled,omitempty"`
 
-	// Managed memory configuration. Creates and manages a memory resource automatically. See managed_memory_configuration Block below.
+	// Managed memory configuration. Creates and manages a memory resource automatically. See memory.managed_memory_configuration Block below.
 	ManagedMemoryConfiguration *ManagedMemoryConfigurationObservation `json:"managedMemoryConfiguration,omitempty" tf:"managed_memory_configuration,omitempty"`
 }
 
 type MemoryParameters struct {
 
-	// AgentCore memory configuration. Use this to connect to an existing AgentCore memory resource. See agentcore_memory_configuration Block below.
+	// AgentCore memory configuration. Use this to connect to an existing AgentCore memory resource. See memory.agentcore_memory_configuration Block below.
 	// +kubebuilder:validation:Optional
 	AgentcoreMemoryConfiguration *AgentcoreMemoryConfigurationParameters `json:"agentcoreMemoryConfiguration,omitempty" tf:"agentcore_memory_configuration,omitempty"`
 
-	// Explicitly disable memory for this harness. See disabled Block below.
+	// Explicitly disable memory for this harness. See memory.disabled Block below.
 	// +kubebuilder:validation:Optional
 	Disabled *DisabledParameters `json:"disabled,omitempty" tf:"disabled,omitempty"`
 
-	// Managed memory configuration. Creates and manages a memory resource automatically. See managed_memory_configuration Block below.
+	// Managed memory configuration. Creates and manages a memory resource automatically. See memory.managed_memory_configuration Block below.
 	// +kubebuilder:validation:Optional
 	ManagedMemoryConfiguration *ManagedMemoryConfigurationParameters `json:"managedMemoryConfiguration,omitempty" tf:"managed_memory_configuration,omitempty"`
 }
@@ -2133,7 +2133,7 @@ type NetworkConfigurationNetworkModeConfigInitParameters struct {
 
 type NetworkConfigurationNetworkModeConfigObservation struct {
 
-	// Whether to require an S3 endpoint for the service in the VPC.
+	// Whether an S3 endpoint is required for the service in the VPC.
 	RequireServiceS3Endpoint *bool `json:"requireServiceS3Endpoint,omitempty" tf:"require_service_s3_endpoint,omitempty"`
 
 	// Security groups for the VPC.
@@ -2179,7 +2179,7 @@ type OpenaiModelConfigInitParameters struct {
 	// JSON string containing provider-specific parameters to pass through to the Bedrock model provider unchanged.
 	AdditionalParams *string `json:"additionalParams,omitempty" tf:"additional_params,omitempty"`
 
-	// Maximum number of tokens in the model response.
+	// Maximum total number of output tokens the agent can generate across all model calls within a single invocation.
 	MaxTokens *float64 `json:"maxTokens,omitempty" tf:"max_tokens,omitempty"`
 
 	// Bedrock model ID (e.g., anthropic.claude-sonnet-4-20250514).
@@ -2203,7 +2203,7 @@ type OpenaiModelConfigObservation struct {
 	// JSON string containing provider-specific parameters to pass through to the Bedrock model provider unchanged.
 	AdditionalParams *string `json:"additionalParams,omitempty" tf:"additional_params,omitempty"`
 
-	// Maximum number of tokens in the model response.
+	// Maximum total number of output tokens the agent can generate across all model calls within a single invocation.
 	MaxTokens *float64 `json:"maxTokens,omitempty" tf:"max_tokens,omitempty"`
 
 	// Bedrock model ID (e.g., anthropic.claude-sonnet-4-20250514).
@@ -2240,7 +2240,7 @@ type OpenaiModelConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	AdditionalParams *string `json:"additionalParams,omitempty" tf:"additional_params,omitempty"`
 
-	// Maximum number of tokens in the model response.
+	// Maximum total number of output tokens the agent can generate across all model calls within a single invocation.
 	// +kubebuilder:validation:Optional
 	MaxTokens *float64 `json:"maxTokens,omitempty" tf:"max_tokens,omitempty"`
 
@@ -2259,10 +2259,10 @@ type OpenaiModelConfigParameters struct {
 
 type OutboundAuthInitParameters struct {
 
-	// Set to true to use AWS IAM authentication.
+	// Whether to use AWS IAM authentication. Must be true if set.
 	AwsIAM *bool `json:"awsIam,omitempty" tf:"aws_iam,omitempty"`
 
-	// Set to true to disable authentication.
+	// Whether to disable authentication. Must be true if set.
 	None *bool `json:"none,omitempty" tf:"none,omitempty"`
 
 	// OAuth credential provider configuration. See oauth Block below.
@@ -2353,10 +2353,10 @@ type OutboundAuthOauthParameters struct {
 
 type OutboundAuthObservation struct {
 
-	// Set to true to use AWS IAM authentication.
+	// Whether to use AWS IAM authentication. Must be true if set.
 	AwsIAM *bool `json:"awsIam,omitempty" tf:"aws_iam,omitempty"`
 
-	// Set to true to disable authentication.
+	// Whether to disable authentication. Must be true if set.
 	None *bool `json:"none,omitempty" tf:"none,omitempty"`
 
 	// OAuth credential provider configuration. See oauth Block below.
@@ -2365,11 +2365,11 @@ type OutboundAuthObservation struct {
 
 type OutboundAuthParameters struct {
 
-	// Set to true to use AWS IAM authentication.
+	// Whether to use AWS IAM authentication. Must be true if set.
 	// +kubebuilder:validation:Optional
 	AwsIAM *bool `json:"awsIam,omitempty" tf:"aws_iam,omitempty"`
 
-	// Set to true to disable authentication.
+	// Whether to disable authentication. Must be true if set.
 	// +kubebuilder:validation:Optional
 	None *bool `json:"none,omitempty" tf:"none,omitempty"`
 
@@ -2420,7 +2420,7 @@ type RetrievalConfigInitParameters struct {
 	// +kubebuilder:validation:Optional
 	StrategyIDSelector *v2.NamespacedSelector `json:"strategyIdSelector,omitempty" tf:"-"`
 
-	// Top-k sampling parameter.
+	// Number of top results to retrieve.
 	TopK *float64 `json:"topK,omitempty" tf:"top_k,omitempty"`
 }
 
@@ -2435,7 +2435,7 @@ type RetrievalConfigObservation struct {
 	// ID of the memory strategy.
 	StrategyID *string `json:"strategyId,omitempty" tf:"strategy_id,omitempty"`
 
-	// Top-k sampling parameter.
+	// Number of top results to retrieve.
 	TopK *float64 `json:"topK,omitempty" tf:"top_k,omitempty"`
 }
 
@@ -2463,7 +2463,7 @@ type RetrievalConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	StrategyIDSelector *v2.NamespacedSelector `json:"strategyIdSelector,omitempty" tf:"-"`
 
-	// Top-k sampling parameter.
+	// Number of top results to retrieve.
 	// +kubebuilder:validation:Optional
 	TopK *float64 `json:"topK,omitempty" tf:"top_k,omitempty"`
 }
@@ -2612,7 +2612,7 @@ type SystemPromptParameters struct {
 
 type ToolInitParameters struct {
 
-	// Tool-specific configuration. See tool config below.
+	// Tool-specific configuration. See tool.config Block below.
 	Config *ConfigInitParameters `json:"config,omitempty" tf:"config,omitempty"`
 
 	// Name of the tool.
@@ -2624,7 +2624,7 @@ type ToolInitParameters struct {
 
 type ToolObservation struct {
 
-	// Tool-specific configuration. See tool config below.
+	// Tool-specific configuration. See tool.config Block below.
 	Config *ConfigObservation `json:"config,omitempty" tf:"config,omitempty"`
 
 	// Name of the tool.
@@ -2636,7 +2636,7 @@ type ToolObservation struct {
 
 type ToolParameters struct {
 
-	// Tool-specific configuration. See tool config below.
+	// Tool-specific configuration. See tool.config Block below.
 	// +kubebuilder:validation:Optional
 	Config *ConfigParameters `json:"config,omitempty" tf:"config,omitempty"`
 
@@ -2680,7 +2680,7 @@ type TruncationConfigParameters struct {
 
 type TruncationInitParameters struct {
 
-	// Strategy-specific configuration. See truncation config below.
+	// Strategy-specific configuration. See truncation.config Block below.
 	Config []TruncationConfigInitParameters `json:"config,omitempty" tf:"config"`
 
 	// Truncation strategy. Valid values: sliding_window, summarization, none.
@@ -2689,7 +2689,7 @@ type TruncationInitParameters struct {
 
 type TruncationObservation struct {
 
-	// Strategy-specific configuration. See truncation config below.
+	// Strategy-specific configuration. See truncation.config Block below.
 	Config []TruncationConfigObservation `json:"config,omitempty" tf:"config,omitempty"`
 
 	// Truncation strategy. Valid values: sliding_window, summarization, none.
@@ -2698,7 +2698,7 @@ type TruncationObservation struct {
 
 type TruncationParameters struct {
 
-	// Strategy-specific configuration. See truncation config below.
+	// Strategy-specific configuration. See truncation.config Block below.
 	// +kubebuilder:validation:Optional
 	Config []TruncationConfigParameters `json:"config,omitempty" tf:"config"`
 

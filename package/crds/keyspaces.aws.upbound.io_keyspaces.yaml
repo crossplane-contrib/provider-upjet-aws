@@ -79,7 +79,7 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   replicationSpecification:
-                    description: The replication specification of the keyspace.
+                    description: Replication specification of the keyspace. See below.
                     properties:
                       regionList:
                         description: Replication regions. If replication_strategy
@@ -118,7 +118,7 @@ spec:
                   autoscaler.
                 properties:
                   replicationSpecification:
-                    description: The replication specification of the keyspace.
+                    description: Replication specification of the keyspace. See below.
                     properties:
                       regionList:
                         description: Replication regions. If replication_strategy
@@ -233,10 +233,10 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The ARN of the keyspace.
+                    description: ARN of the keyspace.
                     type: string
                   id:
-                    description: The name of the keyspace.
+                    description: Name of the keyspace.
                     type: string
                   region:
                     description: |-
@@ -244,7 +244,7 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   replicationSpecification:
-                    description: The replication specification of the keyspace.
+                    description: Replication specification of the keyspace. See below.
                     properties:
                       regionList:
                         description: Replication regions. If replication_strategy
@@ -269,9 +269,8 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
                 type: object

@@ -562,7 +562,7 @@ type InstanceRequirementsInitParameters struct {
 	// +listType=set
 	AcceleratorManufacturers []*string `json:"acceleratorManufacturers,omitempty" tf:"accelerator_manufacturers,omitempty"`
 
-	// List of accelerator names. Default is any acclerator.
+	// List of accelerator names. Default is any accelerator.
 	// +listType=set
 	AcceleratorNames []*string `json:"acceleratorNames,omitempty" tf:"accelerator_names,omitempty"`
 
@@ -577,7 +577,7 @@ type InstanceRequirementsInitParameters struct {
 	// +listType=set
 	AllowedInstanceTypes []*string `json:"allowedInstanceTypes,omitempty" tf:"allowed_instance_types,omitempty"`
 
-	// Indicate whether bare metal instace types should be included, excluded, or required. Default is excluded.
+	// Indicate whether bare metal instance types should be included, excluded, or required. Default is excluded.
 	BareMetal *string `json:"bareMetal,omitempty" tf:"bare_metal,omitempty"`
 
 	// Block describing the minimum and maximum baseline EBS bandwidth, in Mbps. Default is no minimum or maximum.
@@ -645,7 +645,7 @@ type InstanceRequirementsObservation struct {
 	// +listType=set
 	AcceleratorManufacturers []*string `json:"acceleratorManufacturers,omitempty" tf:"accelerator_manufacturers,omitempty"`
 
-	// List of accelerator names. Default is any acclerator.
+	// List of accelerator names. Default is any accelerator.
 	// +listType=set
 	AcceleratorNames []*string `json:"acceleratorNames,omitempty" tf:"accelerator_names,omitempty"`
 
@@ -660,7 +660,7 @@ type InstanceRequirementsObservation struct {
 	// +listType=set
 	AllowedInstanceTypes []*string `json:"allowedInstanceTypes,omitempty" tf:"allowed_instance_types,omitempty"`
 
-	// Indicate whether bare metal instace types should be included, excluded, or required. Default is excluded.
+	// Indicate whether bare metal instance types should be included, excluded, or required. Default is excluded.
 	BareMetal *string `json:"bareMetal,omitempty" tf:"bare_metal,omitempty"`
 
 	// Block describing the minimum and maximum baseline EBS bandwidth, in Mbps. Default is no minimum or maximum.
@@ -730,7 +730,7 @@ type InstanceRequirementsParameters struct {
 	// +listType=set
 	AcceleratorManufacturers []*string `json:"acceleratorManufacturers,omitempty" tf:"accelerator_manufacturers,omitempty"`
 
-	// List of accelerator names. Default is any acclerator.
+	// List of accelerator names. Default is any accelerator.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	AcceleratorNames []*string `json:"acceleratorNames,omitempty" tf:"accelerator_names,omitempty"`
@@ -749,7 +749,7 @@ type InstanceRequirementsParameters struct {
 	// +listType=set
 	AllowedInstanceTypes []*string `json:"allowedInstanceTypes,omitempty" tf:"allowed_instance_types,omitempty"`
 
-	// Indicate whether bare metal instace types should be included, excluded, or required. Default is excluded.
+	// Indicate whether bare metal instance types should be included, excluded, or required. Default is excluded.
 	// +kubebuilder:validation:Optional
 	BareMetal *string `json:"bareMetal,omitempty" tf:"bare_metal,omitempty"`
 
@@ -1730,7 +1730,7 @@ type NetworkInterfacesInitParameters struct {
 	// Associate a Carrier IP address with eth0 for a new network interface. Use this option when you launch an instance in a Wavelength Zone and want to associate a Carrier IP address with the network interface. Boolean value, can be left unset.
 	AssociateCarrierIPAddress *string `json:"associateCarrierIpAddress,omitempty" tf:"associate_carrier_ip_address,omitempty"`
 
-	// Associate a public ip address with the network interface. Boolean value, can be left unset.
+	// Associate a public IP address with the network interface. Boolean value, can be left unset.
 	AssociatePublicIPAddress *string `json:"associatePublicIpAddress,omitempty" tf:"associate_public_ip_address,omitempty"`
 
 	// The Connection Tracking Configuration for the network interface. See Amazon EC2 security group connection tracking
@@ -1836,7 +1836,7 @@ type NetworkInterfacesObservation struct {
 	// Associate a Carrier IP address with eth0 for a new network interface. Use this option when you launch an instance in a Wavelength Zone and want to associate a Carrier IP address with the network interface. Boolean value, can be left unset.
 	AssociateCarrierIPAddress *string `json:"associateCarrierIpAddress,omitempty" tf:"associate_carrier_ip_address,omitempty"`
 
-	// Associate a public ip address with the network interface. Boolean value, can be left unset.
+	// Associate a public IP address with the network interface. Boolean value, can be left unset.
 	AssociatePublicIPAddress *string `json:"associatePublicIpAddress,omitempty" tf:"associate_public_ip_address,omitempty"`
 
 	// The Connection Tracking Configuration for the network interface. See Amazon EC2 security group connection tracking
@@ -1914,7 +1914,7 @@ type NetworkInterfacesParameters struct {
 	// +kubebuilder:validation:Optional
 	AssociateCarrierIPAddress *string `json:"associateCarrierIpAddress,omitempty" tf:"associate_carrier_ip_address,omitempty"`
 
-	// Associate a public ip address with the network interface. Boolean value, can be left unset.
+	// Associate a public IP address with the network interface. Boolean value, can be left unset.
 	// +kubebuilder:validation:Optional
 	AssociatePublicIPAddress *string `json:"associatePublicIpAddress,omitempty" tf:"associate_public_ip_address,omitempty"`
 

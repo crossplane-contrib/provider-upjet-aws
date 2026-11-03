@@ -163,7 +163,7 @@ spec:
                     type: string
                   engineVersion:
                     description: The neptune engine version. Currently configuring
-                      this argumnet has no effect.
+                      this argument has no effect.
                     type: string
                   instanceClass:
                     description: The instance class to use.
@@ -498,7 +498,7 @@ spec:
                     type: string
                   engineVersion:
                     description: The neptune engine version. Currently configuring
-                      this argumnet has no effect.
+                      this argument has no effect.
                     type: string
                   instanceClass:
                     description: The instance class to use.
@@ -815,7 +815,7 @@ spec:
                     type: string
                   engineVersion:
                     description: The neptune engine version. Currently configuring
-                      this argumnet has no effect.
+                      this argument has no effect.
                     type: string
                   id:
                     description: The Instance identifier

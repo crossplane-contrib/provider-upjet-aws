@@ -15,13 +15,13 @@ import (
 
 type CatalogDatabaseInitParameters struct {
 
-	// Creates a set of default permissions on the table for principals. See create_table_default_permission below.
+	// Creates a set of default permissions on the table for principals. See create_table_default_permission Block below.
 	CreateTableDefaultPermission []CreateTableDefaultPermissionInitParameters `json:"createTableDefaultPermission,omitempty" tf:"create_table_default_permission,omitempty"`
 
 	// Description of the database.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Configuration block that references an entity outside the AWS Glue Data Catalog. See federated_database below.
+	// Configuration block that references an entity outside the AWS Glue Data Catalog. See federated_database Block below.
 	FederatedDatabase *FederatedDatabaseInitParameters `json:"federatedDatabase,omitempty" tf:"federated_database,omitempty"`
 
 	// Location of the database (for example, an HDFS path).
@@ -35,7 +35,7 @@ type CatalogDatabaseInitParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Configuration block for a target database for resource linking. See target_database below.
+	// Configuration block for a target database for resource linking. See target_database Block below.
 	TargetDatabase *TargetDatabaseInitParameters `json:"targetDatabase,omitempty" tf:"target_database,omitempty"`
 }
 
@@ -47,13 +47,13 @@ type CatalogDatabaseObservation struct {
 	// ID of the Glue Catalog to create the database in. If omitted, this defaults to the AWS Account ID.
 	CatalogID *string `json:"catalogId,omitempty" tf:"catalog_id,omitempty"`
 
-	// Creates a set of default permissions on the table for principals. See create_table_default_permission below.
+	// Creates a set of default permissions on the table for principals. See create_table_default_permission Block below.
 	CreateTableDefaultPermission []CreateTableDefaultPermissionObservation `json:"createTableDefaultPermission,omitempty" tf:"create_table_default_permission,omitempty"`
 
 	// Description of the database.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Configuration block that references an entity outside the AWS Glue Data Catalog. See federated_database below.
+	// Configuration block that references an entity outside the AWS Glue Data Catalog. See federated_database Block below.
 	FederatedDatabase *FederatedDatabaseObservation `json:"federatedDatabase,omitempty" tf:"federated_database,omitempty"`
 
 	// Catalog ID and name of the database.
@@ -74,11 +74,11 @@ type CatalogDatabaseObservation struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// Configuration block for a target database for resource linking. See target_database below.
+	// Configuration block for a target database for resource linking. See target_database Block below.
 	TargetDatabase *TargetDatabaseObservation `json:"targetDatabase,omitempty" tf:"target_database,omitempty"`
 }
 
@@ -88,7 +88,7 @@ type CatalogDatabaseParameters struct {
 	// +kubebuilder:validation:Required
 	CatalogID *string `json:"catalogId" tf:"catalog_id,omitempty"`
 
-	// Creates a set of default permissions on the table for principals. See create_table_default_permission below.
+	// Creates a set of default permissions on the table for principals. See create_table_default_permission Block below.
 	// +kubebuilder:validation:Optional
 	CreateTableDefaultPermission []CreateTableDefaultPermissionParameters `json:"createTableDefaultPermission,omitempty" tf:"create_table_default_permission,omitempty"`
 
@@ -96,7 +96,7 @@ type CatalogDatabaseParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Configuration block that references an entity outside the AWS Glue Data Catalog. See federated_database below.
+	// Configuration block that references an entity outside the AWS Glue Data Catalog. See federated_database Block below.
 	// +kubebuilder:validation:Optional
 	FederatedDatabase *FederatedDatabaseParameters `json:"federatedDatabase,omitempty" tf:"federated_database,omitempty"`
 
@@ -119,39 +119,39 @@ type CatalogDatabaseParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Configuration block for a target database for resource linking. See target_database below.
+	// Configuration block for a target database for resource linking. See target_database Block below.
 	// +kubebuilder:validation:Optional
 	TargetDatabase *TargetDatabaseParameters `json:"targetDatabase,omitempty" tf:"target_database,omitempty"`
 }
 
 type CreateTableDefaultPermissionInitParameters struct {
 
-	// The permissions that are granted to the principal.
+	// Permissions that are granted to the principal.
 	// +listType=set
 	Permissions []*string `json:"permissions,omitempty" tf:"permissions,omitempty"`
 
-	// The principal who is granted permissions.. See principal below.
+	// Principal who is granted permissions.. See principal Block below.
 	Principal *PrincipalInitParameters `json:"principal,omitempty" tf:"principal,omitempty"`
 }
 
 type CreateTableDefaultPermissionObservation struct {
 
-	// The permissions that are granted to the principal.
+	// Permissions that are granted to the principal.
 	// +listType=set
 	Permissions []*string `json:"permissions,omitempty" tf:"permissions,omitempty"`
 
-	// The principal who is granted permissions.. See principal below.
+	// Principal who is granted permissions.. See principal Block below.
 	Principal *PrincipalObservation `json:"principal,omitempty" tf:"principal,omitempty"`
 }
 
 type CreateTableDefaultPermissionParameters struct {
 
-	// The permissions that are granted to the principal.
+	// Permissions that are granted to the principal.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	Permissions []*string `json:"permissions,omitempty" tf:"permissions,omitempty"`
 
-	// The principal who is granted permissions.. See principal below.
+	// Principal who is granted permissions.. See principal Block below.
 	// +kubebuilder:validation:Optional
 	Principal *PrincipalParameters `json:"principal,omitempty" tf:"principal,omitempty"`
 }
@@ -187,19 +187,19 @@ type FederatedDatabaseParameters struct {
 
 type PrincipalInitParameters struct {
 
-	// An identifier for the Lake Formation principal.
+	// Identifier for the Lake Formation principal.
 	DataLakePrincipalIdentifier *string `json:"dataLakePrincipalIdentifier,omitempty" tf:"data_lake_principal_identifier,omitempty"`
 }
 
 type PrincipalObservation struct {
 
-	// An identifier for the Lake Formation principal.
+	// Identifier for the Lake Formation principal.
 	DataLakePrincipalIdentifier *string `json:"dataLakePrincipalIdentifier,omitempty" tf:"data_lake_principal_identifier,omitempty"`
 }
 
 type PrincipalParameters struct {
 
-	// An identifier for the Lake Formation principal.
+	// Identifier for the Lake Formation principal.
 	// +kubebuilder:validation:Optional
 	DataLakePrincipalIdentifier *string `json:"dataLakePrincipalIdentifier,omitempty" tf:"data_lake_principal_identifier,omitempty"`
 }

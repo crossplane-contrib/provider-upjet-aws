@@ -254,7 +254,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The ARN of the rule group namespace.
+                    description: ARN of the rule group namespace.
                     type: string
                   data:
                     description: the rule group namespace data that you want to be

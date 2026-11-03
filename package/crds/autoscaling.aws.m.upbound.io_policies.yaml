@@ -65,7 +65,7 @@ spec:
                       ExactCapacity, and PercentChangeInCapacity.
                     type: string
                   autoscalingGroupName:
-                    description: Name of the autoscaling group.
+                    description: Name of the Auto Scaling group.
                     type: string
                   autoscalingGroupNameRef:
                     description: Reference to a AutoscalingGroup in autoscaling to
@@ -1152,7 +1152,7 @@ spec:
                     description: ARN assigned by AWS to the scaling policy.
                     type: string
                   autoscalingGroupName:
-                    description: Name of the autoscaling group.
+                    description: Name of the Auto Scaling group.
                     type: string
                   cooldown:
                     description: Amount of time, in seconds, after a scaling activity

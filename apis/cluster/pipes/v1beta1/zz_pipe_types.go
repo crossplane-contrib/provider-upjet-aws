@@ -15,112 +15,112 @@ import (
 
 type ActivemqBrokerParametersInitParameters struct {
 
-	// The maximum number of records to include in each batch. Maximum value of 10000.
+	// Maximum number of records to include in each batch. Maximum value of 10000.
 	BatchSize *float64 `json:"batchSize,omitempty" tf:"batch_size,omitempty"`
 
-	// The credentials needed to access the resource. Detailed below.
+	// Credentials needed to access the resource. See source_parameters.activemq_broker_parameters.credentials Block for details.
 	Credentials *CredentialsInitParameters `json:"credentials,omitempty" tf:"credentials,omitempty"`
 
-	// The maximum length of a time to wait for events. Maximum value of 300.
+	// Maximum length of a time to wait for events. Maximum value of 300.
 	MaximumBatchingWindowInSeconds *float64 `json:"maximumBatchingWindowInSeconds,omitempty" tf:"maximum_batching_window_in_seconds,omitempty"`
 
-	// The name of the destination queue to consume. Maximum length of 1000.
+	// Name of the destination queue to consume. Maximum length of 1000.
 	QueueName *string `json:"queueName,omitempty" tf:"queue_name,omitempty"`
 }
 
 type ActivemqBrokerParametersObservation struct {
 
-	// The maximum number of records to include in each batch. Maximum value of 10000.
+	// Maximum number of records to include in each batch. Maximum value of 10000.
 	BatchSize *float64 `json:"batchSize,omitempty" tf:"batch_size,omitempty"`
 
-	// The credentials needed to access the resource. Detailed below.
+	// Credentials needed to access the resource. See source_parameters.activemq_broker_parameters.credentials Block for details.
 	Credentials *CredentialsObservation `json:"credentials,omitempty" tf:"credentials,omitempty"`
 
-	// The maximum length of a time to wait for events. Maximum value of 300.
+	// Maximum length of a time to wait for events. Maximum value of 300.
 	MaximumBatchingWindowInSeconds *float64 `json:"maximumBatchingWindowInSeconds,omitempty" tf:"maximum_batching_window_in_seconds,omitempty"`
 
-	// The name of the destination queue to consume. Maximum length of 1000.
+	// Name of the destination queue to consume. Maximum length of 1000.
 	QueueName *string `json:"queueName,omitempty" tf:"queue_name,omitempty"`
 }
 
 type ActivemqBrokerParametersParameters struct {
 
-	// The maximum number of records to include in each batch. Maximum value of 10000.
+	// Maximum number of records to include in each batch. Maximum value of 10000.
 	// +kubebuilder:validation:Optional
 	BatchSize *float64 `json:"batchSize,omitempty" tf:"batch_size,omitempty"`
 
-	// The credentials needed to access the resource. Detailed below.
+	// Credentials needed to access the resource. See source_parameters.activemq_broker_parameters.credentials Block for details.
 	// +kubebuilder:validation:Optional
 	Credentials *CredentialsParameters `json:"credentials" tf:"credentials,omitempty"`
 
-	// The maximum length of a time to wait for events. Maximum value of 300.
+	// Maximum length of a time to wait for events. Maximum value of 300.
 	// +kubebuilder:validation:Optional
 	MaximumBatchingWindowInSeconds *float64 `json:"maximumBatchingWindowInSeconds,omitempty" tf:"maximum_batching_window_in_seconds,omitempty"`
 
-	// The name of the destination queue to consume. Maximum length of 1000.
+	// Name of the destination queue to consume. Maximum length of 1000.
 	// +kubebuilder:validation:Optional
 	QueueName *string `json:"queueName" tf:"queue_name,omitempty"`
 }
 
 type ArrayPropertiesInitParameters struct {
 
-	// The size of the array, if this is an array batch job. Minimum value of 2. Maximum value of 10,000.
+	// Size of the array, if this is an array batch job. Minimum value of 2. Maximum value of 10,000.
 	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
 }
 
 type ArrayPropertiesObservation struct {
 
-	// The size of the array, if this is an array batch job. Minimum value of 2. Maximum value of 10,000.
+	// Size of the array, if this is an array batch job. Minimum value of 2. Maximum value of 10,000.
 	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
 }
 
 type ArrayPropertiesParameters struct {
 
-	// The size of the array, if this is an array batch job. Minimum value of 2. Maximum value of 10,000.
+	// Size of the array, if this is an array batch job. Minimum value of 2. Maximum value of 10,000.
 	// +kubebuilder:validation:Optional
 	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
 }
 
 type AwsVPCConfigurationInitParameters struct {
 
-	// Specifies whether the task's elastic network interface receives a public IP address. You can specify ENABLED only when LaunchType in EcsParameters is set to FARGATE. Valid Values: ENABLED, DISABLED.
+	// Whether the task's elastic network interface receives a public IP address. You can specify ENABLED only when LaunchType in EcsParameters is set to FARGATE. Valid Values: ENABLED, DISABLED.
 	AssignPublicIP *string `json:"assignPublicIp,omitempty" tf:"assign_public_ip,omitempty"`
 
-	// Specifies the security groups associated with the task. These security groups must all be in the same VPC. You can specify as many as five security groups. If you do not specify a security group, the default security group for the VPC is used.
+	// List of security groups associated with the stream. These security groups must all be in the same VPC. You can specify as many as five security groups. If you do not specify a security group, the default security group for the VPC is used.
 	// +listType=set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
-	// Specifies the subnets associated with the task. These subnets must all be in the same VPC. You can specify as many as 16 subnets.
+	// List of the subnets associated with the stream. These subnets must all be in the same VPC. You can specify as many as 16 subnets.
 	// +listType=set
 	Subnets []*string `json:"subnets,omitempty" tf:"subnets,omitempty"`
 }
 
 type AwsVPCConfigurationObservation struct {
 
-	// Specifies whether the task's elastic network interface receives a public IP address. You can specify ENABLED only when LaunchType in EcsParameters is set to FARGATE. Valid Values: ENABLED, DISABLED.
+	// Whether the task's elastic network interface receives a public IP address. You can specify ENABLED only when LaunchType in EcsParameters is set to FARGATE. Valid Values: ENABLED, DISABLED.
 	AssignPublicIP *string `json:"assignPublicIp,omitempty" tf:"assign_public_ip,omitempty"`
 
-	// Specifies the security groups associated with the task. These security groups must all be in the same VPC. You can specify as many as five security groups. If you do not specify a security group, the default security group for the VPC is used.
+	// List of security groups associated with the stream. These security groups must all be in the same VPC. You can specify as many as five security groups. If you do not specify a security group, the default security group for the VPC is used.
 	// +listType=set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
-	// Specifies the subnets associated with the task. These subnets must all be in the same VPC. You can specify as many as 16 subnets.
+	// List of the subnets associated with the stream. These subnets must all be in the same VPC. You can specify as many as 16 subnets.
 	// +listType=set
 	Subnets []*string `json:"subnets,omitempty" tf:"subnets,omitempty"`
 }
 
 type AwsVPCConfigurationParameters struct {
 
-	// Specifies whether the task's elastic network interface receives a public IP address. You can specify ENABLED only when LaunchType in EcsParameters is set to FARGATE. Valid Values: ENABLED, DISABLED.
+	// Whether the task's elastic network interface receives a public IP address. You can specify ENABLED only when LaunchType in EcsParameters is set to FARGATE. Valid Values: ENABLED, DISABLED.
 	// +kubebuilder:validation:Optional
 	AssignPublicIP *string `json:"assignPublicIp,omitempty" tf:"assign_public_ip,omitempty"`
 
-	// Specifies the security groups associated with the task. These security groups must all be in the same VPC. You can specify as many as five security groups. If you do not specify a security group, the default security group for the VPC is used.
+	// List of security groups associated with the stream. These security groups must all be in the same VPC. You can specify as many as five security groups. If you do not specify a security group, the default security group for the VPC is used.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
-	// Specifies the subnets associated with the task. These subnets must all be in the same VPC. You can specify as many as 16 subnets.
+	// List of the subnets associated with the stream. These subnets must all be in the same VPC. You can specify as many as 16 subnets.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	Subnets []*string `json:"subnets,omitempty" tf:"subnets,omitempty"`
@@ -128,65 +128,65 @@ type AwsVPCConfigurationParameters struct {
 
 type BatchJobParametersInitParameters struct {
 
-	// The array properties for the submitted job, such as the size of the array. The array size can be between 2 and 10,000. If you specify array properties for a job, it becomes an array job. This parameter is used only if the target is an AWS Batch job. Detailed below.
+	// Array properties for the submitted job, such as the size of the array. The array size can be between 2 and 10,000. If you specify array properties for a job, it becomes an array job. This parameter is used only if the target is an AWS Batch job. See array_properties Block for details.
 	ArrayProperties *ArrayPropertiesInitParameters `json:"arrayProperties,omitempty" tf:"array_properties,omitempty"`
 
-	// The overrides that are sent to a container. Detailed below.
+	// Overrides that are sent to a container. See container_overrides Block for details.
 	ContainerOverrides *ContainerOverridesInitParameters `json:"containerOverrides,omitempty" tf:"container_overrides,omitempty"`
 
-	// A list of dependencies for the job. A job can depend upon a maximum of 20 jobs. You can specify a SEQUENTIAL type dependency without specifying a job ID for array jobs so that each child array job completes sequentially, starting at index 0. You can also specify an N_TO_N type dependency with a job ID for array jobs. In that case, each index child of this job must wait for the corresponding index child of each dependency to complete before it can begin. Detailed below.
+	// List of dependencies for the job. A job can depend upon a maximum of 20 jobs. You can specify a SEQUENTIAL type dependency without specifying a job ID for array jobs so that each child array job completes sequentially, starting at index 0. You can also specify an N_TO_N type dependency with a job ID for array jobs. In that case, each index child of this job must wait for the corresponding index child of each dependency to complete before it can begin. See depends_on Block for details.
 	DependsOn []DependsOnInitParameters `json:"dependsOn,omitempty" tf:"depends_on,omitempty"`
 
 	// Job definition used by this job. This value can be one of name, name:revision, or the ARN for the job definition. If name is specified without a revision then the latest active revision is used.
 	JobDefinition *string `json:"jobDefinition,omitempty" tf:"job_definition,omitempty"`
 
-	// The name of the job. It can be up to 128 letters long.
+	// Name of the job. It can be up to 128 letters long.
 	JobName *string `json:"jobName,omitempty" tf:"job_name,omitempty"`
 
-	// Additional parameters passed to the job that replace parameter substitution placeholders that are set in the job definition. Parameters are specified as a key and value pair mapping. Parameters included here override any corresponding parameter defaults from the job definition. Detailed below.
+	// Additional parameters passed to the job that replace parameter substitution placeholders that are set in the job definition. Parameters are specified as a key and value pair mapping. Parameters included here override any corresponding parameter defaults from the job definition.
 	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
-	// The retry strategy to use for failed jobs. When a retry strategy is specified here, it overrides the retry strategy defined in the job definition. Detailed below.
+	// Retry strategy to use for failed jobs. When a retry strategy is specified here, it overrides the retry strategy defined in the job definition. See retry_strategy Block for details.
 	RetryStrategy *RetryStrategyInitParameters `json:"retryStrategy,omitempty" tf:"retry_strategy,omitempty"`
 }
 
 type BatchJobParametersObservation struct {
 
-	// The array properties for the submitted job, such as the size of the array. The array size can be between 2 and 10,000. If you specify array properties for a job, it becomes an array job. This parameter is used only if the target is an AWS Batch job. Detailed below.
+	// Array properties for the submitted job, such as the size of the array. The array size can be between 2 and 10,000. If you specify array properties for a job, it becomes an array job. This parameter is used only if the target is an AWS Batch job. See array_properties Block for details.
 	ArrayProperties *ArrayPropertiesObservation `json:"arrayProperties,omitempty" tf:"array_properties,omitempty"`
 
-	// The overrides that are sent to a container. Detailed below.
+	// Overrides that are sent to a container. See container_overrides Block for details.
 	ContainerOverrides *ContainerOverridesObservation `json:"containerOverrides,omitempty" tf:"container_overrides,omitempty"`
 
-	// A list of dependencies for the job. A job can depend upon a maximum of 20 jobs. You can specify a SEQUENTIAL type dependency without specifying a job ID for array jobs so that each child array job completes sequentially, starting at index 0. You can also specify an N_TO_N type dependency with a job ID for array jobs. In that case, each index child of this job must wait for the corresponding index child of each dependency to complete before it can begin. Detailed below.
+	// List of dependencies for the job. A job can depend upon a maximum of 20 jobs. You can specify a SEQUENTIAL type dependency without specifying a job ID for array jobs so that each child array job completes sequentially, starting at index 0. You can also specify an N_TO_N type dependency with a job ID for array jobs. In that case, each index child of this job must wait for the corresponding index child of each dependency to complete before it can begin. See depends_on Block for details.
 	DependsOn []DependsOnObservation `json:"dependsOn,omitempty" tf:"depends_on,omitempty"`
 
 	// Job definition used by this job. This value can be one of name, name:revision, or the ARN for the job definition. If name is specified without a revision then the latest active revision is used.
 	JobDefinition *string `json:"jobDefinition,omitempty" tf:"job_definition,omitempty"`
 
-	// The name of the job. It can be up to 128 letters long.
+	// Name of the job. It can be up to 128 letters long.
 	JobName *string `json:"jobName,omitempty" tf:"job_name,omitempty"`
 
-	// Additional parameters passed to the job that replace parameter substitution placeholders that are set in the job definition. Parameters are specified as a key and value pair mapping. Parameters included here override any corresponding parameter defaults from the job definition. Detailed below.
+	// Additional parameters passed to the job that replace parameter substitution placeholders that are set in the job definition. Parameters are specified as a key and value pair mapping. Parameters included here override any corresponding parameter defaults from the job definition.
 	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
-	// The retry strategy to use for failed jobs. When a retry strategy is specified here, it overrides the retry strategy defined in the job definition. Detailed below.
+	// Retry strategy to use for failed jobs. When a retry strategy is specified here, it overrides the retry strategy defined in the job definition. See retry_strategy Block for details.
 	RetryStrategy *RetryStrategyObservation `json:"retryStrategy,omitempty" tf:"retry_strategy,omitempty"`
 }
 
 type BatchJobParametersParameters struct {
 
-	// The array properties for the submitted job, such as the size of the array. The array size can be between 2 and 10,000. If you specify array properties for a job, it becomes an array job. This parameter is used only if the target is an AWS Batch job. Detailed below.
+	// Array properties for the submitted job, such as the size of the array. The array size can be between 2 and 10,000. If you specify array properties for a job, it becomes an array job. This parameter is used only if the target is an AWS Batch job. See array_properties Block for details.
 	// +kubebuilder:validation:Optional
 	ArrayProperties *ArrayPropertiesParameters `json:"arrayProperties,omitempty" tf:"array_properties,omitempty"`
 
-	// The overrides that are sent to a container. Detailed below.
+	// Overrides that are sent to a container. See container_overrides Block for details.
 	// +kubebuilder:validation:Optional
 	ContainerOverrides *ContainerOverridesParameters `json:"containerOverrides,omitempty" tf:"container_overrides,omitempty"`
 
-	// A list of dependencies for the job. A job can depend upon a maximum of 20 jobs. You can specify a SEQUENTIAL type dependency without specifying a job ID for array jobs so that each child array job completes sequentially, starting at index 0. You can also specify an N_TO_N type dependency with a job ID for array jobs. In that case, each index child of this job must wait for the corresponding index child of each dependency to complete before it can begin. Detailed below.
+	// List of dependencies for the job. A job can depend upon a maximum of 20 jobs. You can specify a SEQUENTIAL type dependency without specifying a job ID for array jobs so that each child array job completes sequentially, starting at index 0. You can also specify an N_TO_N type dependency with a job ID for array jobs. In that case, each index child of this job must wait for the corresponding index child of each dependency to complete before it can begin. See depends_on Block for details.
 	// +kubebuilder:validation:Optional
 	DependsOn []DependsOnParameters `json:"dependsOn,omitempty" tf:"depends_on,omitempty"`
 
@@ -194,62 +194,62 @@ type BatchJobParametersParameters struct {
 	// +kubebuilder:validation:Optional
 	JobDefinition *string `json:"jobDefinition" tf:"job_definition,omitempty"`
 
-	// The name of the job. It can be up to 128 letters long.
+	// Name of the job. It can be up to 128 letters long.
 	// +kubebuilder:validation:Optional
 	JobName *string `json:"jobName" tf:"job_name,omitempty"`
 
-	// Additional parameters passed to the job that replace parameter substitution placeholders that are set in the job definition. Parameters are specified as a key and value pair mapping. Parameters included here override any corresponding parameter defaults from the job definition. Detailed below.
+	// Additional parameters passed to the job that replace parameter substitution placeholders that are set in the job definition. Parameters are specified as a key and value pair mapping. Parameters included here override any corresponding parameter defaults from the job definition.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
-	// The retry strategy to use for failed jobs. When a retry strategy is specified here, it overrides the retry strategy defined in the job definition. Detailed below.
+	// Retry strategy to use for failed jobs. When a retry strategy is specified here, it overrides the retry strategy defined in the job definition. See retry_strategy Block for details.
 	// +kubebuilder:validation:Optional
 	RetryStrategy *RetryStrategyParameters `json:"retryStrategy,omitempty" tf:"retry_strategy,omitempty"`
 }
 
 type CapacityProviderStrategyInitParameters struct {
 
-	// The base value designates how many tasks, at a minimum, to run on the specified capacity provider. Only one capacity provider in a capacity provider strategy can have a base defined. If no value is specified, the default value of 0 is used. Maximum value of 100,000.
+	// Base value designates how many tasks, at a minimum, to run on the specified capacity provider. Only one capacity provider in a capacity provider strategy can have a base defined. If no value is specified, the default value of 0 is used. Maximum value of 100,000.
 	Base *float64 `json:"base,omitempty" tf:"base,omitempty"`
 
-	// The short name of the capacity provider. Maximum value of 255.
+	// Short name of the capacity provider. Maximum value of 255.
 	CapacityProvider *string `json:"capacityProvider,omitempty" tf:"capacity_provider,omitempty"`
 
-	// The weight value designates the relative percentage of the total number of tasks launched that should use the specified capacity provider. The weight value is taken into consideration after the base value, if defined, is satisfied. Maximum value of 1,000.
+	// Weight value designates the relative percentage of the total number of tasks launched that should use the specified capacity provider. The weight value is taken into consideration after the base value, if defined, is satisfied. Maximum value of 1,000.
 	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
 }
 
 type CapacityProviderStrategyObservation struct {
 
-	// The base value designates how many tasks, at a minimum, to run on the specified capacity provider. Only one capacity provider in a capacity provider strategy can have a base defined. If no value is specified, the default value of 0 is used. Maximum value of 100,000.
+	// Base value designates how many tasks, at a minimum, to run on the specified capacity provider. Only one capacity provider in a capacity provider strategy can have a base defined. If no value is specified, the default value of 0 is used. Maximum value of 100,000.
 	Base *float64 `json:"base,omitempty" tf:"base,omitempty"`
 
-	// The short name of the capacity provider. Maximum value of 255.
+	// Short name of the capacity provider. Maximum value of 255.
 	CapacityProvider *string `json:"capacityProvider,omitempty" tf:"capacity_provider,omitempty"`
 
-	// The weight value designates the relative percentage of the total number of tasks launched that should use the specified capacity provider. The weight value is taken into consideration after the base value, if defined, is satisfied. Maximum value of 1,000.
+	// Weight value designates the relative percentage of the total number of tasks launched that should use the specified capacity provider. The weight value is taken into consideration after the base value, if defined, is satisfied. Maximum value of 1,000.
 	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
 }
 
 type CapacityProviderStrategyParameters struct {
 
-	// The base value designates how many tasks, at a minimum, to run on the specified capacity provider. Only one capacity provider in a capacity provider strategy can have a base defined. If no value is specified, the default value of 0 is used. Maximum value of 100,000.
+	// Base value designates how many tasks, at a minimum, to run on the specified capacity provider. Only one capacity provider in a capacity provider strategy can have a base defined. If no value is specified, the default value of 0 is used. Maximum value of 100,000.
 	// +kubebuilder:validation:Optional
 	Base *float64 `json:"base,omitempty" tf:"base,omitempty"`
 
-	// The short name of the capacity provider. Maximum value of 255.
+	// Short name of the capacity provider. Maximum value of 255.
 	// +kubebuilder:validation:Optional
 	CapacityProvider *string `json:"capacityProvider" tf:"capacity_provider,omitempty"`
 
-	// The weight value designates the relative percentage of the total number of tasks launched that should use the specified capacity provider. The weight value is taken into consideration after the base value, if defined, is satisfied. Maximum value of 1,000.
+	// Weight value designates the relative percentage of the total number of tasks launched that should use the specified capacity provider. The weight value is taken into consideration after the base value, if defined, is satisfied. Maximum value of 1,000.
 	// +kubebuilder:validation:Optional
 	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
 }
 
 type CloudwatchLogsLogDestinationInitParameters struct {
 
-	// Amazon Web Services Resource Name (ARN) for the CloudWatch log group to which EventBridge sends the log records.
+	// ARN for the CloudWatch log group to which EventBridge sends the log records.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/cloudwatchlogs/v1beta1.Group
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	LogGroupArn *string `json:"logGroupArn,omitempty" tf:"log_group_arn,omitempty"`
@@ -265,13 +265,13 @@ type CloudwatchLogsLogDestinationInitParameters struct {
 
 type CloudwatchLogsLogDestinationObservation struct {
 
-	// Amazon Web Services Resource Name (ARN) for the CloudWatch log group to which EventBridge sends the log records.
+	// ARN for the CloudWatch log group to which EventBridge sends the log records.
 	LogGroupArn *string `json:"logGroupArn,omitempty" tf:"log_group_arn,omitempty"`
 }
 
 type CloudwatchLogsLogDestinationParameters struct {
 
-	// Amazon Web Services Resource Name (ARN) for the CloudWatch log group to which EventBridge sends the log records.
+	// ARN for the CloudWatch log group to which EventBridge sends the log records.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/cloudwatchlogs/v1beta1.Group
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -288,176 +288,176 @@ type CloudwatchLogsLogDestinationParameters struct {
 
 type CloudwatchLogsParametersInitParameters struct {
 
-	// The name of the log stream.
+	// Name of the log stream.
 	LogStreamName *string `json:"logStreamName,omitempty" tf:"log_stream_name,omitempty"`
 
-	// The time the event occurred, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC. This is the JSON path to the field in the event e.g. $.detail.timestamp
+	// Time the event occurred, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC. This is the JSON path to the field in the event e.g. $.detail.timestamp
 	Timestamp *string `json:"timestamp,omitempty" tf:"timestamp,omitempty"`
 }
 
 type CloudwatchLogsParametersObservation struct {
 
-	// The name of the log stream.
+	// Name of the log stream.
 	LogStreamName *string `json:"logStreamName,omitempty" tf:"log_stream_name,omitempty"`
 
-	// The time the event occurred, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC. This is the JSON path to the field in the event e.g. $.detail.timestamp
+	// Time the event occurred, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC. This is the JSON path to the field in the event e.g. $.detail.timestamp
 	Timestamp *string `json:"timestamp,omitempty" tf:"timestamp,omitempty"`
 }
 
 type CloudwatchLogsParametersParameters struct {
 
-	// The name of the log stream.
+	// Name of the log stream.
 	// +kubebuilder:validation:Optional
 	LogStreamName *string `json:"logStreamName,omitempty" tf:"log_stream_name,omitempty"`
 
-	// The time the event occurred, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC. This is the JSON path to the field in the event e.g. $.detail.timestamp
+	// Time the event occurred, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC. This is the JSON path to the field in the event e.g. $.detail.timestamp
 	// +kubebuilder:validation:Optional
 	Timestamp *string `json:"timestamp,omitempty" tf:"timestamp,omitempty"`
 }
 
 type ContainerOverrideEnvironmentInitParameters struct {
 
-	// The name of the key-value pair. For environment variables, this is the name of the environment variable.
+	// Name of parameter to start execution of a SageMaker AI Model Building Pipeline. Maximum length of 256.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The value of the key-value pair. For environment variables, this is the value of the environment variable.
+	// Value of the key-value pair. For environment variables, this is the value of the environment variable.
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type ContainerOverrideEnvironmentObservation struct {
 
-	// The name of the key-value pair. For environment variables, this is the name of the environment variable.
+	// Name of parameter to start execution of a SageMaker AI Model Building Pipeline. Maximum length of 256.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The value of the key-value pair. For environment variables, this is the value of the environment variable.
+	// Value of the key-value pair. For environment variables, this is the value of the environment variable.
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type ContainerOverrideEnvironmentParameters struct {
 
-	// The name of the key-value pair. For environment variables, this is the name of the environment variable.
+	// Name of parameter to start execution of a SageMaker AI Model Building Pipeline. Maximum length of 256.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The value of the key-value pair. For environment variables, this is the value of the environment variable.
+	// Value of the key-value pair. For environment variables, this is the value of the environment variable.
 	// +kubebuilder:validation:Optional
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type ContainerOverrideInitParameters struct {
 
-	// The number of cpu units reserved for the container, instead of the default value from the task definition. You must also specify a container name.
+	// CPU override for the task.
 	CPU *float64 `json:"cpu,omitempty" tf:"cpu,omitempty"`
 
-	// List of commands to send to the container that overrides the default command from the Docker image or the task definition. You must also specify a container name.
+	// List of commands to send to the container that overrides the default command from the Docker image or the task definition.
 	Command []*string `json:"command,omitempty" tf:"command,omitempty"`
 
-	// The environment variables to send to the container. You can add new environment variables, which are added to the container at launch, or you can override the existing environment variables from the Docker image or the task definition. You must also specify a container name. Detailed below.
+	// Environment variables to send to the container. You can add new environment variables, which are added to the container at launch, or you can override the existing environment variables from the Docker image or the task definition. You must also specify a container name. See target_parameters.ecs_task_parameters.overrides.container_override.environment Block for details.
 	Environment []ContainerOverrideEnvironmentInitParameters `json:"environment,omitempty" tf:"environment,omitempty"`
 
-	// A list of files containing the environment variables to pass to a container, instead of the value from the container definition. Detailed below.
+	// List of files containing the environment variables to pass to a container, instead of the value from the container definition. See environment_file Block for details.
 	EnvironmentFile []EnvironmentFileInitParameters `json:"environmentFile,omitempty" tf:"environment_file,omitempty"`
 
-	// The hard limit (in MiB) of memory to present to the container, instead of the default value from the task definition. If your container attempts to exceed the memory specified here, the container is killed. You must also specify a container name.
+	// Memory override for the task.
 	Memory *float64 `json:"memory,omitempty" tf:"memory,omitempty"`
 
-	// The soft limit (in MiB) of memory to reserve for the container, instead of the default value from the task definition. You must also specify a container name.
+	// Soft limit (in MiB) of memory to reserve for the container, instead of the default value from the task definition. You must also specify a container name.
 	MemoryReservation *float64 `json:"memoryReservation,omitempty" tf:"memory_reservation,omitempty"`
 
-	// The name of the container that receives the override. This parameter is required if any override is specified.
+	// Name of parameter to start execution of a SageMaker AI Model Building Pipeline. Maximum length of 256.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The type and amount of a resource to assign to a container, instead of the default value from the task definition. The only supported resource is a GPU. Detailed below.
+	// Type and amount of a resource to assign to a container, instead of the default value from the task definition. The only supported resource is a GPU. See target_parameters.ecs_task_parameters.overrides.container_override.resource_requirement Block for details.
 	ResourceRequirement []ContainerOverrideResourceRequirementInitParameters `json:"resourceRequirement,omitempty" tf:"resource_requirement,omitempty"`
 }
 
 type ContainerOverrideObservation struct {
 
-	// The number of cpu units reserved for the container, instead of the default value from the task definition. You must also specify a container name.
+	// CPU override for the task.
 	CPU *float64 `json:"cpu,omitempty" tf:"cpu,omitempty"`
 
-	// List of commands to send to the container that overrides the default command from the Docker image or the task definition. You must also specify a container name.
+	// List of commands to send to the container that overrides the default command from the Docker image or the task definition.
 	Command []*string `json:"command,omitempty" tf:"command,omitempty"`
 
-	// The environment variables to send to the container. You can add new environment variables, which are added to the container at launch, or you can override the existing environment variables from the Docker image or the task definition. You must also specify a container name. Detailed below.
+	// Environment variables to send to the container. You can add new environment variables, which are added to the container at launch, or you can override the existing environment variables from the Docker image or the task definition. You must also specify a container name. See target_parameters.ecs_task_parameters.overrides.container_override.environment Block for details.
 	Environment []ContainerOverrideEnvironmentObservation `json:"environment,omitempty" tf:"environment,omitempty"`
 
-	// A list of files containing the environment variables to pass to a container, instead of the value from the container definition. Detailed below.
+	// List of files containing the environment variables to pass to a container, instead of the value from the container definition. See environment_file Block for details.
 	EnvironmentFile []EnvironmentFileObservation `json:"environmentFile,omitempty" tf:"environment_file,omitempty"`
 
-	// The hard limit (in MiB) of memory to present to the container, instead of the default value from the task definition. If your container attempts to exceed the memory specified here, the container is killed. You must also specify a container name.
+	// Memory override for the task.
 	Memory *float64 `json:"memory,omitempty" tf:"memory,omitempty"`
 
-	// The soft limit (in MiB) of memory to reserve for the container, instead of the default value from the task definition. You must also specify a container name.
+	// Soft limit (in MiB) of memory to reserve for the container, instead of the default value from the task definition. You must also specify a container name.
 	MemoryReservation *float64 `json:"memoryReservation,omitempty" tf:"memory_reservation,omitempty"`
 
-	// The name of the container that receives the override. This parameter is required if any override is specified.
+	// Name of parameter to start execution of a SageMaker AI Model Building Pipeline. Maximum length of 256.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The type and amount of a resource to assign to a container, instead of the default value from the task definition. The only supported resource is a GPU. Detailed below.
+	// Type and amount of a resource to assign to a container, instead of the default value from the task definition. The only supported resource is a GPU. See target_parameters.ecs_task_parameters.overrides.container_override.resource_requirement Block for details.
 	ResourceRequirement []ContainerOverrideResourceRequirementObservation `json:"resourceRequirement,omitempty" tf:"resource_requirement,omitempty"`
 }
 
 type ContainerOverrideParameters struct {
 
-	// The number of cpu units reserved for the container, instead of the default value from the task definition. You must also specify a container name.
+	// CPU override for the task.
 	// +kubebuilder:validation:Optional
 	CPU *float64 `json:"cpu,omitempty" tf:"cpu,omitempty"`
 
-	// List of commands to send to the container that overrides the default command from the Docker image or the task definition. You must also specify a container name.
+	// List of commands to send to the container that overrides the default command from the Docker image or the task definition.
 	// +kubebuilder:validation:Optional
 	Command []*string `json:"command,omitempty" tf:"command,omitempty"`
 
-	// The environment variables to send to the container. You can add new environment variables, which are added to the container at launch, or you can override the existing environment variables from the Docker image or the task definition. You must also specify a container name. Detailed below.
+	// Environment variables to send to the container. You can add new environment variables, which are added to the container at launch, or you can override the existing environment variables from the Docker image or the task definition. You must also specify a container name. See target_parameters.ecs_task_parameters.overrides.container_override.environment Block for details.
 	// +kubebuilder:validation:Optional
 	Environment []ContainerOverrideEnvironmentParameters `json:"environment,omitempty" tf:"environment,omitempty"`
 
-	// A list of files containing the environment variables to pass to a container, instead of the value from the container definition. Detailed below.
+	// List of files containing the environment variables to pass to a container, instead of the value from the container definition. See environment_file Block for details.
 	// +kubebuilder:validation:Optional
 	EnvironmentFile []EnvironmentFileParameters `json:"environmentFile,omitempty" tf:"environment_file,omitempty"`
 
-	// The hard limit (in MiB) of memory to present to the container, instead of the default value from the task definition. If your container attempts to exceed the memory specified here, the container is killed. You must also specify a container name.
+	// Memory override for the task.
 	// +kubebuilder:validation:Optional
 	Memory *float64 `json:"memory,omitempty" tf:"memory,omitempty"`
 
-	// The soft limit (in MiB) of memory to reserve for the container, instead of the default value from the task definition. You must also specify a container name.
+	// Soft limit (in MiB) of memory to reserve for the container, instead of the default value from the task definition. You must also specify a container name.
 	// +kubebuilder:validation:Optional
 	MemoryReservation *float64 `json:"memoryReservation,omitempty" tf:"memory_reservation,omitempty"`
 
-	// The name of the container that receives the override. This parameter is required if any override is specified.
+	// Name of parameter to start execution of a SageMaker AI Model Building Pipeline. Maximum length of 256.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The type and amount of a resource to assign to a container, instead of the default value from the task definition. The only supported resource is a GPU. Detailed below.
+	// Type and amount of a resource to assign to a container, instead of the default value from the task definition. The only supported resource is a GPU. See target_parameters.ecs_task_parameters.overrides.container_override.resource_requirement Block for details.
 	// +kubebuilder:validation:Optional
 	ResourceRequirement []ContainerOverrideResourceRequirementParameters `json:"resourceRequirement,omitempty" tf:"resource_requirement,omitempty"`
 }
 
 type ContainerOverrideResourceRequirementInitParameters struct {
 
-	// The type of resource to assign to a container. The supported values are GPU or InferenceAccelerator.
+	// Type of resource to assign to a container. The supported resources include GPU, MEMORY, and VCPU.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
-	// The value for the specified resource type. If the GPU type is used, the value is the number of physical GPUs the Amazon ECS container agent reserves for the container. The number of GPUs that's reserved for all containers in a task can't exceed the number of available GPUs on the container instance that the task is launched on. If the InferenceAccelerator type is used, the value matches the deviceName for an InferenceAccelerator specified in a task definition.
+	// Value of the key-value pair. For environment variables, this is the value of the environment variable.
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type ContainerOverrideResourceRequirementObservation struct {
 
-	// The type of resource to assign to a container. The supported values are GPU or InferenceAccelerator.
+	// Type of resource to assign to a container. The supported resources include GPU, MEMORY, and VCPU.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
-	// The value for the specified resource type. If the GPU type is used, the value is the number of physical GPUs the Amazon ECS container agent reserves for the container. The number of GPUs that's reserved for all containers in a task can't exceed the number of available GPUs on the container instance that the task is launched on. If the InferenceAccelerator type is used, the value matches the deviceName for an InferenceAccelerator specified in a task definition.
+	// Value of the key-value pair. For environment variables, this is the value of the environment variable.
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type ContainerOverrideResourceRequirementParameters struct {
 
-	// The type of resource to assign to a container. The supported values are GPU or InferenceAccelerator.
+	// Type of resource to assign to a container. The supported resources include GPU, MEMORY, and VCPU.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
 
-	// The value for the specified resource type. If the GPU type is used, the value is the number of physical GPUs the Amazon ECS container agent reserves for the container. The number of GPUs that's reserved for all containers in a task can't exceed the number of available GPUs on the container instance that the task is launched on. If the InferenceAccelerator type is used, the value matches the deviceName for an InferenceAccelerator specified in a task definition.
+	// Value of the key-value pair. For environment variables, this is the value of the environment variable.
 	// +kubebuilder:validation:Optional
 	Value *string `json:"value" tf:"value,omitempty"`
 }
@@ -467,13 +467,13 @@ type ContainerOverridesInitParameters struct {
 	// List of commands to send to the container that overrides the default command from the Docker image or the task definition.
 	Command []*string `json:"command,omitempty" tf:"command,omitempty"`
 
-	// The environment variables to send to the container. You can add new environment variables, which are added to the container at launch, or you can override the existing environment variables from the Docker image or the task definition. Environment variables cannot start with " AWS Batch ". This naming convention is reserved for variables that AWS Batch sets. Detailed below.
+	// Environment variables to send to the container. You can add new environment variables, which are added to the container at launch, or you can override the existing environment variables from the Docker image or the task definition. You must also specify a container name. See target_parameters.ecs_task_parameters.overrides.container_override.environment Block for details.
 	Environment []EnvironmentInitParameters `json:"environment,omitempty" tf:"environment,omitempty"`
 
-	// The instance type to use for a multi-node parallel job. This parameter isn't applicable to single-node container jobs or jobs that run on Fargate resources, and shouldn't be provided.
+	// Instance type to use for a multi-node parallel job. This parameter isn't applicable to single-node container jobs or jobs that run on Fargate resources, and shouldn't be provided.
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
-	// The type and amount of resources to assign to a container. This overrides the settings in the job definition. The supported resources include GPU, MEMORY, and VCPU. Detailed below.
+	// Type and amount of a resource to assign to a container, instead of the default value from the task definition. The only supported resource is a GPU. See target_parameters.ecs_task_parameters.overrides.container_override.resource_requirement Block for details.
 	ResourceRequirement []ResourceRequirementInitParameters `json:"resourceRequirement,omitempty" tf:"resource_requirement,omitempty"`
 }
 
@@ -482,13 +482,13 @@ type ContainerOverridesObservation struct {
 	// List of commands to send to the container that overrides the default command from the Docker image or the task definition.
 	Command []*string `json:"command,omitempty" tf:"command,omitempty"`
 
-	// The environment variables to send to the container. You can add new environment variables, which are added to the container at launch, or you can override the existing environment variables from the Docker image or the task definition. Environment variables cannot start with " AWS Batch ". This naming convention is reserved for variables that AWS Batch sets. Detailed below.
+	// Environment variables to send to the container. You can add new environment variables, which are added to the container at launch, or you can override the existing environment variables from the Docker image or the task definition. You must also specify a container name. See target_parameters.ecs_task_parameters.overrides.container_override.environment Block for details.
 	Environment []EnvironmentObservation `json:"environment,omitempty" tf:"environment,omitempty"`
 
-	// The instance type to use for a multi-node parallel job. This parameter isn't applicable to single-node container jobs or jobs that run on Fargate resources, and shouldn't be provided.
+	// Instance type to use for a multi-node parallel job. This parameter isn't applicable to single-node container jobs or jobs that run on Fargate resources, and shouldn't be provided.
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
-	// The type and amount of resources to assign to a container. This overrides the settings in the job definition. The supported resources include GPU, MEMORY, and VCPU. Detailed below.
+	// Type and amount of a resource to assign to a container, instead of the default value from the task definition. The only supported resource is a GPU. See target_parameters.ecs_task_parameters.overrides.container_override.resource_requirement Block for details.
 	ResourceRequirement []ResourceRequirementObservation `json:"resourceRequirement,omitempty" tf:"resource_requirement,omitempty"`
 }
 
@@ -498,95 +498,95 @@ type ContainerOverridesParameters struct {
 	// +kubebuilder:validation:Optional
 	Command []*string `json:"command,omitempty" tf:"command,omitempty"`
 
-	// The environment variables to send to the container. You can add new environment variables, which are added to the container at launch, or you can override the existing environment variables from the Docker image or the task definition. Environment variables cannot start with " AWS Batch ". This naming convention is reserved for variables that AWS Batch sets. Detailed below.
+	// Environment variables to send to the container. You can add new environment variables, which are added to the container at launch, or you can override the existing environment variables from the Docker image or the task definition. You must also specify a container name. See target_parameters.ecs_task_parameters.overrides.container_override.environment Block for details.
 	// +kubebuilder:validation:Optional
 	Environment []EnvironmentParameters `json:"environment,omitempty" tf:"environment,omitempty"`
 
-	// The instance type to use for a multi-node parallel job. This parameter isn't applicable to single-node container jobs or jobs that run on Fargate resources, and shouldn't be provided.
+	// Instance type to use for a multi-node parallel job. This parameter isn't applicable to single-node container jobs or jobs that run on Fargate resources, and shouldn't be provided.
 	// +kubebuilder:validation:Optional
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
-	// The type and amount of resources to assign to a container. This overrides the settings in the job definition. The supported resources include GPU, MEMORY, and VCPU. Detailed below.
+	// Type and amount of a resource to assign to a container, instead of the default value from the task definition. The only supported resource is a GPU. See target_parameters.ecs_task_parameters.overrides.container_override.resource_requirement Block for details.
 	// +kubebuilder:validation:Optional
 	ResourceRequirement []ResourceRequirementParameters `json:"resourceRequirement,omitempty" tf:"resource_requirement,omitempty"`
 }
 
 type CredentialsInitParameters struct {
 
-	// The ARN of the Secrets Manager secret containing the basic auth credentials.
+	// ARN of the Secrets Manager secret containing the basic auth credentials.
 	BasicAuth *string `json:"basicAuth,omitempty" tf:"basic_auth,omitempty"`
 }
 
 type CredentialsObservation struct {
 
-	// The ARN of the Secrets Manager secret containing the basic auth credentials.
+	// ARN of the Secrets Manager secret containing the basic auth credentials.
 	BasicAuth *string `json:"basicAuth,omitempty" tf:"basic_auth,omitempty"`
 }
 
 type CredentialsParameters struct {
 
-	// The ARN of the Secrets Manager secret containing the basic auth credentials.
+	// ARN of the Secrets Manager secret containing the basic auth credentials.
 	// +kubebuilder:validation:Optional
 	BasicAuth *string `json:"basicAuth" tf:"basic_auth,omitempty"`
 }
 
 type DeadLetterConfigInitParameters struct {
 
-	// The ARN of the Amazon SQS queue specified as the target for the dead-letter queue.
+	// ARN of the Amazon SQS queue specified as the target for the dead-letter queue.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 }
 
 type DeadLetterConfigObservation struct {
 
-	// The ARN of the Amazon SQS queue specified as the target for the dead-letter queue.
+	// ARN of the Amazon SQS queue specified as the target for the dead-letter queue.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 }
 
 type DeadLetterConfigParameters struct {
 
-	// The ARN of the Amazon SQS queue specified as the target for the dead-letter queue.
+	// ARN of the Amazon SQS queue specified as the target for the dead-letter queue.
 	// +kubebuilder:validation:Optional
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 }
 
 type DependsOnInitParameters struct {
 
-	// The job ID of the AWS Batch job that's associated with this dependency.
+	// Job ID of the AWS Batch job that's associated with this dependency.
 	JobID *string `json:"jobId,omitempty" tf:"job_id,omitempty"`
 
-	// The type of the job dependency. Valid Values: N_TO_N, SEQUENTIAL.
+	// Type of resource to assign to a container. The supported resources include GPU, MEMORY, and VCPU.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type DependsOnObservation struct {
 
-	// The job ID of the AWS Batch job that's associated with this dependency.
+	// Job ID of the AWS Batch job that's associated with this dependency.
 	JobID *string `json:"jobId,omitempty" tf:"job_id,omitempty"`
 
-	// The type of the job dependency. Valid Values: N_TO_N, SEQUENTIAL.
+	// Type of resource to assign to a container. The supported resources include GPU, MEMORY, and VCPU.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type DependsOnParameters struct {
 
-	// The job ID of the AWS Batch job that's associated with this dependency.
+	// Job ID of the AWS Batch job that's associated with this dependency.
 	// +kubebuilder:validation:Optional
 	JobID *string `json:"jobId,omitempty" tf:"job_id,omitempty"`
 
-	// The type of the job dependency. Valid Values: N_TO_N, SEQUENTIAL.
+	// Type of resource to assign to a container. The supported resources include GPU, MEMORY, and VCPU.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type DynamodbStreamParametersInitParameters struct {
 
-	// The maximum number of records to include in each batch. Maximum value of 10000.
+	// Maximum number of records to include in each batch. Maximum value of 10000.
 	BatchSize *float64 `json:"batchSize,omitempty" tf:"batch_size,omitempty"`
 
-	// Define the target queue to send dead-letter queue events to. Detailed below.
+	// Define the target queue to send dead-letter queue events to. See dead_letter_config Block for details.
 	DeadLetterConfig *DeadLetterConfigInitParameters `json:"deadLetterConfig,omitempty" tf:"dead_letter_config,omitempty"`
 
-	// The maximum length of a time to wait for events. Maximum value of 300.
+	// Maximum length of a time to wait for events. Maximum value of 300.
 	MaximumBatchingWindowInSeconds *float64 `json:"maximumBatchingWindowInSeconds,omitempty" tf:"maximum_batching_window_in_seconds,omitempty"`
 
 	// Discard records older than the specified age. The default value is -1, which sets the maximum age to infinite. When the value is set to infinite, EventBridge never discards old records. Maximum value of 604,800.
@@ -598,22 +598,22 @@ type DynamodbStreamParametersInitParameters struct {
 	// Define how to handle item process failures. AUTOMATIC_BISECT halves each batch and retry each half until all the records are processed or there is one failed message left in the batch. Valid values: AUTOMATIC_BISECT.
 	OnPartialBatchItemFailure *string `json:"onPartialBatchItemFailure,omitempty" tf:"on_partial_batch_item_failure,omitempty"`
 
-	// The number of batches to process concurrently from each shard. The default value is 1. Maximum value of 10.
+	// Number of batches to process concurrently from each shard. The default value is 1. Maximum value of 10.
 	ParallelizationFactor *float64 `json:"parallelizationFactor,omitempty" tf:"parallelization_factor,omitempty"`
 
-	// The position in a stream from which to start reading. Valid values: TRIM_HORIZON, LATEST.
+	// Position in a stream from which to start reading. Valid values: TRIM_HORIZON, LATEST.
 	StartingPosition *string `json:"startingPosition,omitempty" tf:"starting_position,omitempty"`
 }
 
 type DynamodbStreamParametersObservation struct {
 
-	// The maximum number of records to include in each batch. Maximum value of 10000.
+	// Maximum number of records to include in each batch. Maximum value of 10000.
 	BatchSize *float64 `json:"batchSize,omitempty" tf:"batch_size,omitempty"`
 
-	// Define the target queue to send dead-letter queue events to. Detailed below.
+	// Define the target queue to send dead-letter queue events to. See dead_letter_config Block for details.
 	DeadLetterConfig *DeadLetterConfigObservation `json:"deadLetterConfig,omitempty" tf:"dead_letter_config,omitempty"`
 
-	// The maximum length of a time to wait for events. Maximum value of 300.
+	// Maximum length of a time to wait for events. Maximum value of 300.
 	MaximumBatchingWindowInSeconds *float64 `json:"maximumBatchingWindowInSeconds,omitempty" tf:"maximum_batching_window_in_seconds,omitempty"`
 
 	// Discard records older than the specified age. The default value is -1, which sets the maximum age to infinite. When the value is set to infinite, EventBridge never discards old records. Maximum value of 604,800.
@@ -625,24 +625,24 @@ type DynamodbStreamParametersObservation struct {
 	// Define how to handle item process failures. AUTOMATIC_BISECT halves each batch and retry each half until all the records are processed or there is one failed message left in the batch. Valid values: AUTOMATIC_BISECT.
 	OnPartialBatchItemFailure *string `json:"onPartialBatchItemFailure,omitempty" tf:"on_partial_batch_item_failure,omitempty"`
 
-	// The number of batches to process concurrently from each shard. The default value is 1. Maximum value of 10.
+	// Number of batches to process concurrently from each shard. The default value is 1. Maximum value of 10.
 	ParallelizationFactor *float64 `json:"parallelizationFactor,omitempty" tf:"parallelization_factor,omitempty"`
 
-	// The position in a stream from which to start reading. Valid values: TRIM_HORIZON, LATEST.
+	// Position in a stream from which to start reading. Valid values: TRIM_HORIZON, LATEST.
 	StartingPosition *string `json:"startingPosition,omitempty" tf:"starting_position,omitempty"`
 }
 
 type DynamodbStreamParametersParameters struct {
 
-	// The maximum number of records to include in each batch. Maximum value of 10000.
+	// Maximum number of records to include in each batch. Maximum value of 10000.
 	// +kubebuilder:validation:Optional
 	BatchSize *float64 `json:"batchSize,omitempty" tf:"batch_size,omitempty"`
 
-	// Define the target queue to send dead-letter queue events to. Detailed below.
+	// Define the target queue to send dead-letter queue events to. See dead_letter_config Block for details.
 	// +kubebuilder:validation:Optional
 	DeadLetterConfig *DeadLetterConfigParameters `json:"deadLetterConfig,omitempty" tf:"dead_letter_config,omitempty"`
 
-	// The maximum length of a time to wait for events. Maximum value of 300.
+	// Maximum length of a time to wait for events. Maximum value of 300.
 	// +kubebuilder:validation:Optional
 	MaximumBatchingWindowInSeconds *float64 `json:"maximumBatchingWindowInSeconds,omitempty" tf:"maximum_batching_window_in_seconds,omitempty"`
 
@@ -658,180 +658,180 @@ type DynamodbStreamParametersParameters struct {
 	// +kubebuilder:validation:Optional
 	OnPartialBatchItemFailure *string `json:"onPartialBatchItemFailure,omitempty" tf:"on_partial_batch_item_failure,omitempty"`
 
-	// The number of batches to process concurrently from each shard. The default value is 1. Maximum value of 10.
+	// Number of batches to process concurrently from each shard. The default value is 1. Maximum value of 10.
 	// +kubebuilder:validation:Optional
 	ParallelizationFactor *float64 `json:"parallelizationFactor,omitempty" tf:"parallelization_factor,omitempty"`
 
-	// The position in a stream from which to start reading. Valid values: TRIM_HORIZON, LATEST.
+	// Position in a stream from which to start reading. Valid values: TRIM_HORIZON, LATEST.
 	// +kubebuilder:validation:Optional
 	StartingPosition *string `json:"startingPosition" tf:"starting_position,omitempty"`
 }
 
 type EcsTaskParametersInitParameters struct {
 
-	// List of capacity provider strategies to use for the task. If a capacityProviderStrategy is specified, the launchType parameter must be omitted. If no capacityProviderStrategy or launchType is specified, the defaultCapacityProviderStrategy for the cluster is used. Detailed below.
+	// List of capacity provider strategies to use for the task. If a capacityProviderStrategy is specified, the launchType parameter must be omitted. If no capacityProviderStrategy or launchType is specified, the defaultCapacityProviderStrategy for the cluster is used. See capacity_provider_strategy Block for details.
 	CapacityProviderStrategy []CapacityProviderStrategyInitParameters `json:"capacityProviderStrategy,omitempty" tf:"capacity_provider_strategy,omitempty"`
 
-	// Specifies whether to enable Amazon ECS managed tags for the task. Valid values: true, false.
+	// Whether to enable Amazon ECS managed tags for the task. Valid values: true, false.
 	EnableEcsManagedTags *bool `json:"enableEcsManagedTags,omitempty" tf:"enable_ecs_managed_tags,omitempty"`
 
-	// Whether or not to enable the execute command functionality for the containers in this task. If true, this enables execute command functionality on all containers in the task. Valid values: true, false.
+	// Whether to enable the execute command functionality for the containers in this task. If true, this enables execute command functionality on all containers in the task. Valid values: true, false.
 	EnableExecuteCommand *bool `json:"enableExecuteCommand,omitempty" tf:"enable_execute_command,omitempty"`
 
-	// Specifies an Amazon ECS task group for the task. The maximum length is 255 characters.
+	// Amazon ECS task group for the task. The maximum length is 255 characters.
 	Group *string `json:"group,omitempty" tf:"group,omitempty"`
 
-	// Specifies the launch type on which your task is running. The launch type that you specify here must match one of the launch type (compatibilities) of the target task. The FARGATE value is supported only in the Regions where AWS Fargate with Amazon ECS is supported. Valid Values: EC2, FARGATE, EXTERNAL
+	// Launch type on which your task is running. The launch type that you specify here must match one of the launch type (compatibilities) of the target task. The FARGATE value is supported only in the Regions where AWS Fargate with Amazon ECS is supported. Valid Values: EC2, FARGATE, EXTERNAL
 	LaunchType *string `json:"launchType,omitempty" tf:"launch_type,omitempty"`
 
-	// Use this structure if the Amazon ECS task uses the awsvpc network mode. This structure specifies the VPC subnets and security groups associated with the task, and whether a public IP address is to be used. This structure is required if LaunchType is FARGATE because the awsvpc mode is required for Fargate tasks. If you specify NetworkConfiguration when the target ECS task does not use the awsvpc network mode, the task fails. Detailed below.
+	// Use this structure if the Amazon ECS task uses the awsvpc network mode. This structure specifies the VPC subnets and security groups associated with the task, and whether a public IP address is to be used. This structure is required if LaunchType is FARGATE because the awsvpc mode is required for Fargate tasks. If you specify NetworkConfiguration when the target ECS task does not use the awsvpc network mode, the task fails. See network_configuration Block for details.
 	NetworkConfiguration *NetworkConfigurationInitParameters `json:"networkConfiguration,omitempty" tf:"network_configuration,omitempty"`
 
-	// The overrides that are associated with a task. Detailed below.
+	// Overrides that are associated with a task. See overrides Block for details.
 	Overrides *OverridesInitParameters `json:"overrides,omitempty" tf:"overrides,omitempty"`
 
-	// An array of placement constraint objects to use for the task. You can specify up to 10 constraints per task (including constraints in the task definition and those specified at runtime). Detailed below.
+	// Array of placement constraint objects to use for the task. You can specify up to 10 constraints per task (including constraints in the task definition and those specified at runtime). See placement_constraint Block for details.
 	PlacementConstraint []PlacementConstraintInitParameters `json:"placementConstraint,omitempty" tf:"placement_constraint,omitempty"`
 
-	// The placement strategy objects to use for the task. You can specify a maximum of five strategy rules per task. Detailed below.
+	// Placement strategy objects to use for the task. You can specify a maximum of five strategy rules per task. See placement_strategy Block for details.
 	PlacementStrategy []PlacementStrategyInitParameters `json:"placementStrategy,omitempty" tf:"placement_strategy,omitempty"`
 
-	// Specifies the platform version for the task. Specify only the numeric portion of the platform version, such as 1.1.0. This structure is used only if LaunchType is FARGATE.
+	// Platform version for the task. Specify only the numeric portion of the platform version, such as 1.1.0. This structure is used only if LaunchType is FARGATE.
 	PlatformVersion *string `json:"platformVersion,omitempty" tf:"platform_version,omitempty"`
 
-	// Specifies whether to propagate the tags from the task definition to the task. If no value is specified, the tags are not propagated. Tags can only be propagated to the task during task creation. To add tags to a task after task creation, use the TagResource API action. Valid Values: TASK_DEFINITION
+	// Whether to propagate the tags from the task definition to the task. If no value is specified, the tags are not propagated. Tags can only be propagated to the task during task creation. To add tags to a task after task creation, use the TagResource API action. Valid Values: TASK_DEFINITION
 	PropagateTags *string `json:"propagateTags,omitempty" tf:"propagate_tags,omitempty"`
 
-	// The reference ID to use for the task. Maximum length of 1,024.
+	// Reference ID to use for the task. Maximum length of 1,024.
 	ReferenceID *string `json:"referenceId,omitempty" tf:"reference_id,omitempty"`
 
-	// Key-value map of tags that you apply to the task to help you categorize and organize them.
+	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The number of tasks to create based on TaskDefinition. The default is 1.
+	// Number of tasks to create based on TaskDefinition. The default is 1.
 	TaskCount *float64 `json:"taskCount,omitempty" tf:"task_count,omitempty"`
 
-	// The ARN of the task definition to use if the event target is an Amazon ECS task.
+	// ARN of the task definition to use if the event target is an Amazon ECS task.
 	TaskDefinitionArn *string `json:"taskDefinitionArn,omitempty" tf:"task_definition_arn,omitempty"`
 }
 
 type EcsTaskParametersObservation struct {
 
-	// List of capacity provider strategies to use for the task. If a capacityProviderStrategy is specified, the launchType parameter must be omitted. If no capacityProviderStrategy or launchType is specified, the defaultCapacityProviderStrategy for the cluster is used. Detailed below.
+	// List of capacity provider strategies to use for the task. If a capacityProviderStrategy is specified, the launchType parameter must be omitted. If no capacityProviderStrategy or launchType is specified, the defaultCapacityProviderStrategy for the cluster is used. See capacity_provider_strategy Block for details.
 	CapacityProviderStrategy []CapacityProviderStrategyObservation `json:"capacityProviderStrategy,omitempty" tf:"capacity_provider_strategy,omitempty"`
 
-	// Specifies whether to enable Amazon ECS managed tags for the task. Valid values: true, false.
+	// Whether to enable Amazon ECS managed tags for the task. Valid values: true, false.
 	EnableEcsManagedTags *bool `json:"enableEcsManagedTags,omitempty" tf:"enable_ecs_managed_tags,omitempty"`
 
-	// Whether or not to enable the execute command functionality for the containers in this task. If true, this enables execute command functionality on all containers in the task. Valid values: true, false.
+	// Whether to enable the execute command functionality for the containers in this task. If true, this enables execute command functionality on all containers in the task. Valid values: true, false.
 	EnableExecuteCommand *bool `json:"enableExecuteCommand,omitempty" tf:"enable_execute_command,omitempty"`
 
-	// Specifies an Amazon ECS task group for the task. The maximum length is 255 characters.
+	// Amazon ECS task group for the task. The maximum length is 255 characters.
 	Group *string `json:"group,omitempty" tf:"group,omitempty"`
 
-	// Specifies the launch type on which your task is running. The launch type that you specify here must match one of the launch type (compatibilities) of the target task. The FARGATE value is supported only in the Regions where AWS Fargate with Amazon ECS is supported. Valid Values: EC2, FARGATE, EXTERNAL
+	// Launch type on which your task is running. The launch type that you specify here must match one of the launch type (compatibilities) of the target task. The FARGATE value is supported only in the Regions where AWS Fargate with Amazon ECS is supported. Valid Values: EC2, FARGATE, EXTERNAL
 	LaunchType *string `json:"launchType,omitempty" tf:"launch_type,omitempty"`
 
-	// Use this structure if the Amazon ECS task uses the awsvpc network mode. This structure specifies the VPC subnets and security groups associated with the task, and whether a public IP address is to be used. This structure is required if LaunchType is FARGATE because the awsvpc mode is required for Fargate tasks. If you specify NetworkConfiguration when the target ECS task does not use the awsvpc network mode, the task fails. Detailed below.
+	// Use this structure if the Amazon ECS task uses the awsvpc network mode. This structure specifies the VPC subnets and security groups associated with the task, and whether a public IP address is to be used. This structure is required if LaunchType is FARGATE because the awsvpc mode is required for Fargate tasks. If you specify NetworkConfiguration when the target ECS task does not use the awsvpc network mode, the task fails. See network_configuration Block for details.
 	NetworkConfiguration *NetworkConfigurationObservation `json:"networkConfiguration,omitempty" tf:"network_configuration,omitempty"`
 
-	// The overrides that are associated with a task. Detailed below.
+	// Overrides that are associated with a task. See overrides Block for details.
 	Overrides *OverridesObservation `json:"overrides,omitempty" tf:"overrides,omitempty"`
 
-	// An array of placement constraint objects to use for the task. You can specify up to 10 constraints per task (including constraints in the task definition and those specified at runtime). Detailed below.
+	// Array of placement constraint objects to use for the task. You can specify up to 10 constraints per task (including constraints in the task definition and those specified at runtime). See placement_constraint Block for details.
 	PlacementConstraint []PlacementConstraintObservation `json:"placementConstraint,omitempty" tf:"placement_constraint,omitempty"`
 
-	// The placement strategy objects to use for the task. You can specify a maximum of five strategy rules per task. Detailed below.
+	// Placement strategy objects to use for the task. You can specify a maximum of five strategy rules per task. See placement_strategy Block for details.
 	PlacementStrategy []PlacementStrategyObservation `json:"placementStrategy,omitempty" tf:"placement_strategy,omitempty"`
 
-	// Specifies the platform version for the task. Specify only the numeric portion of the platform version, such as 1.1.0. This structure is used only if LaunchType is FARGATE.
+	// Platform version for the task. Specify only the numeric portion of the platform version, such as 1.1.0. This structure is used only if LaunchType is FARGATE.
 	PlatformVersion *string `json:"platformVersion,omitempty" tf:"platform_version,omitempty"`
 
-	// Specifies whether to propagate the tags from the task definition to the task. If no value is specified, the tags are not propagated. Tags can only be propagated to the task during task creation. To add tags to a task after task creation, use the TagResource API action. Valid Values: TASK_DEFINITION
+	// Whether to propagate the tags from the task definition to the task. If no value is specified, the tags are not propagated. Tags can only be propagated to the task during task creation. To add tags to a task after task creation, use the TagResource API action. Valid Values: TASK_DEFINITION
 	PropagateTags *string `json:"propagateTags,omitempty" tf:"propagate_tags,omitempty"`
 
-	// The reference ID to use for the task. Maximum length of 1,024.
+	// Reference ID to use for the task. Maximum length of 1,024.
 	ReferenceID *string `json:"referenceId,omitempty" tf:"reference_id,omitempty"`
 
-	// Key-value map of tags that you apply to the task to help you categorize and organize them.
+	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The number of tasks to create based on TaskDefinition. The default is 1.
+	// Number of tasks to create based on TaskDefinition. The default is 1.
 	TaskCount *float64 `json:"taskCount,omitempty" tf:"task_count,omitempty"`
 
-	// The ARN of the task definition to use if the event target is an Amazon ECS task.
+	// ARN of the task definition to use if the event target is an Amazon ECS task.
 	TaskDefinitionArn *string `json:"taskDefinitionArn,omitempty" tf:"task_definition_arn,omitempty"`
 }
 
 type EcsTaskParametersParameters struct {
 
-	// List of capacity provider strategies to use for the task. If a capacityProviderStrategy is specified, the launchType parameter must be omitted. If no capacityProviderStrategy or launchType is specified, the defaultCapacityProviderStrategy for the cluster is used. Detailed below.
+	// List of capacity provider strategies to use for the task. If a capacityProviderStrategy is specified, the launchType parameter must be omitted. If no capacityProviderStrategy or launchType is specified, the defaultCapacityProviderStrategy for the cluster is used. See capacity_provider_strategy Block for details.
 	// +kubebuilder:validation:Optional
 	CapacityProviderStrategy []CapacityProviderStrategyParameters `json:"capacityProviderStrategy,omitempty" tf:"capacity_provider_strategy,omitempty"`
 
-	// Specifies whether to enable Amazon ECS managed tags for the task. Valid values: true, false.
+	// Whether to enable Amazon ECS managed tags for the task. Valid values: true, false.
 	// +kubebuilder:validation:Optional
 	EnableEcsManagedTags *bool `json:"enableEcsManagedTags,omitempty" tf:"enable_ecs_managed_tags,omitempty"`
 
-	// Whether or not to enable the execute command functionality for the containers in this task. If true, this enables execute command functionality on all containers in the task. Valid values: true, false.
+	// Whether to enable the execute command functionality for the containers in this task. If true, this enables execute command functionality on all containers in the task. Valid values: true, false.
 	// +kubebuilder:validation:Optional
 	EnableExecuteCommand *bool `json:"enableExecuteCommand,omitempty" tf:"enable_execute_command,omitempty"`
 
-	// Specifies an Amazon ECS task group for the task. The maximum length is 255 characters.
+	// Amazon ECS task group for the task. The maximum length is 255 characters.
 	// +kubebuilder:validation:Optional
 	Group *string `json:"group,omitempty" tf:"group,omitempty"`
 
-	// Specifies the launch type on which your task is running. The launch type that you specify here must match one of the launch type (compatibilities) of the target task. The FARGATE value is supported only in the Regions where AWS Fargate with Amazon ECS is supported. Valid Values: EC2, FARGATE, EXTERNAL
+	// Launch type on which your task is running. The launch type that you specify here must match one of the launch type (compatibilities) of the target task. The FARGATE value is supported only in the Regions where AWS Fargate with Amazon ECS is supported. Valid Values: EC2, FARGATE, EXTERNAL
 	// +kubebuilder:validation:Optional
 	LaunchType *string `json:"launchType,omitempty" tf:"launch_type,omitempty"`
 
-	// Use this structure if the Amazon ECS task uses the awsvpc network mode. This structure specifies the VPC subnets and security groups associated with the task, and whether a public IP address is to be used. This structure is required if LaunchType is FARGATE because the awsvpc mode is required for Fargate tasks. If you specify NetworkConfiguration when the target ECS task does not use the awsvpc network mode, the task fails. Detailed below.
+	// Use this structure if the Amazon ECS task uses the awsvpc network mode. This structure specifies the VPC subnets and security groups associated with the task, and whether a public IP address is to be used. This structure is required if LaunchType is FARGATE because the awsvpc mode is required for Fargate tasks. If you specify NetworkConfiguration when the target ECS task does not use the awsvpc network mode, the task fails. See network_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	NetworkConfiguration *NetworkConfigurationParameters `json:"networkConfiguration,omitempty" tf:"network_configuration,omitempty"`
 
-	// The overrides that are associated with a task. Detailed below.
+	// Overrides that are associated with a task. See overrides Block for details.
 	// +kubebuilder:validation:Optional
 	Overrides *OverridesParameters `json:"overrides,omitempty" tf:"overrides,omitempty"`
 
-	// An array of placement constraint objects to use for the task. You can specify up to 10 constraints per task (including constraints in the task definition and those specified at runtime). Detailed below.
+	// Array of placement constraint objects to use for the task. You can specify up to 10 constraints per task (including constraints in the task definition and those specified at runtime). See placement_constraint Block for details.
 	// +kubebuilder:validation:Optional
 	PlacementConstraint []PlacementConstraintParameters `json:"placementConstraint,omitempty" tf:"placement_constraint,omitempty"`
 
-	// The placement strategy objects to use for the task. You can specify a maximum of five strategy rules per task. Detailed below.
+	// Placement strategy objects to use for the task. You can specify a maximum of five strategy rules per task. See placement_strategy Block for details.
 	// +kubebuilder:validation:Optional
 	PlacementStrategy []PlacementStrategyParameters `json:"placementStrategy,omitempty" tf:"placement_strategy,omitempty"`
 
-	// Specifies the platform version for the task. Specify only the numeric portion of the platform version, such as 1.1.0. This structure is used only if LaunchType is FARGATE.
+	// Platform version for the task. Specify only the numeric portion of the platform version, such as 1.1.0. This structure is used only if LaunchType is FARGATE.
 	// +kubebuilder:validation:Optional
 	PlatformVersion *string `json:"platformVersion,omitempty" tf:"platform_version,omitempty"`
 
-	// Specifies whether to propagate the tags from the task definition to the task. If no value is specified, the tags are not propagated. Tags can only be propagated to the task during task creation. To add tags to a task after task creation, use the TagResource API action. Valid Values: TASK_DEFINITION
+	// Whether to propagate the tags from the task definition to the task. If no value is specified, the tags are not propagated. Tags can only be propagated to the task during task creation. To add tags to a task after task creation, use the TagResource API action. Valid Values: TASK_DEFINITION
 	// +kubebuilder:validation:Optional
 	PropagateTags *string `json:"propagateTags,omitempty" tf:"propagate_tags,omitempty"`
 
-	// The reference ID to use for the task. Maximum length of 1,024.
+	// Reference ID to use for the task. Maximum length of 1,024.
 	// +kubebuilder:validation:Optional
 	ReferenceID *string `json:"referenceId,omitempty" tf:"reference_id,omitempty"`
 
-	// Key-value map of tags that you apply to the task to help you categorize and organize them.
+	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The number of tasks to create based on TaskDefinition. The default is 1.
+	// Number of tasks to create based on TaskDefinition. The default is 1.
 	// +kubebuilder:validation:Optional
 	TaskCount *float64 `json:"taskCount,omitempty" tf:"task_count,omitempty"`
 
-	// The ARN of the task definition to use if the event target is an Amazon ECS task.
+	// ARN of the task definition to use if the event target is an Amazon ECS task.
 	// +kubebuilder:validation:Optional
 	TaskDefinitionArn *string `json:"taskDefinitionArn" tf:"task_definition_arn,omitempty"`
 }
 
 type EnrichmentParametersInitParameters struct {
 
-	// Contains the HTTP parameters to use when the target is a API Gateway REST endpoint or EventBridge ApiDestination. If you specify an API Gateway REST API or EventBridge ApiDestination as a target, you can use this parameter to specify headers, path parameters, and query string keys/values as part of your target invoking request. If you're using ApiDestinations, the corresponding Connection can also have these values configured. In case of any conflicting keys, values from the Connection take precedence. Detailed below.
+	// HTTP parameters to use when the target is an API Gateway REST endpoint or EventBridge ApiDestination. If you specify an API Gateway REST API or EventBridge ApiDestination as a target, you can use this parameter to specify headers, path parameters, and query string keys/values as part of your target invoking request. If you're using ApiDestinations, the corresponding Connection can also have these values configured. In case of any conflicting keys, values from the Connection take precedence. See enrichment_parameters.http_parameters Block for details.
 	HTTPParameters *HTTPParametersInitParameters `json:"httpParameters,omitempty" tf:"http_parameters,omitempty"`
 
 	// Valid JSON text passed to the target. In this case, nothing from the event itself is passed to the target. Maximum length of 8192 characters.
@@ -840,7 +840,7 @@ type EnrichmentParametersInitParameters struct {
 
 type EnrichmentParametersObservation struct {
 
-	// Contains the HTTP parameters to use when the target is a API Gateway REST endpoint or EventBridge ApiDestination. If you specify an API Gateway REST API or EventBridge ApiDestination as a target, you can use this parameter to specify headers, path parameters, and query string keys/values as part of your target invoking request. If you're using ApiDestinations, the corresponding Connection can also have these values configured. In case of any conflicting keys, values from the Connection take precedence. Detailed below.
+	// HTTP parameters to use when the target is an API Gateway REST endpoint or EventBridge ApiDestination. If you specify an API Gateway REST API or EventBridge ApiDestination as a target, you can use this parameter to specify headers, path parameters, and query string keys/values as part of your target invoking request. If you're using ApiDestinations, the corresponding Connection can also have these values configured. In case of any conflicting keys, values from the Connection take precedence. See enrichment_parameters.http_parameters Block for details.
 	HTTPParameters *HTTPParametersObservation `json:"httpParameters,omitempty" tf:"http_parameters,omitempty"`
 
 	// Valid JSON text passed to the target. In this case, nothing from the event itself is passed to the target. Maximum length of 8192 characters.
@@ -849,7 +849,7 @@ type EnrichmentParametersObservation struct {
 
 type EnrichmentParametersParameters struct {
 
-	// Contains the HTTP parameters to use when the target is a API Gateway REST endpoint or EventBridge ApiDestination. If you specify an API Gateway REST API or EventBridge ApiDestination as a target, you can use this parameter to specify headers, path parameters, and query string keys/values as part of your target invoking request. If you're using ApiDestinations, the corresponding Connection can also have these values configured. In case of any conflicting keys, values from the Connection take precedence. Detailed below.
+	// HTTP parameters to use when the target is an API Gateway REST endpoint or EventBridge ApiDestination. If you specify an API Gateway REST API or EventBridge ApiDestination as a target, you can use this parameter to specify headers, path parameters, and query string keys/values as part of your target invoking request. If you're using ApiDestinations, the corresponding Connection can also have these values configured. In case of any conflicting keys, values from the Connection take precedence. See enrichment_parameters.http_parameters Block for details.
 	// +kubebuilder:validation:Optional
 	HTTPParameters *HTTPParametersParameters `json:"httpParameters,omitempty" tf:"http_parameters,omitempty"`
 
@@ -860,126 +860,126 @@ type EnrichmentParametersParameters struct {
 
 type EnvironmentFileInitParameters struct {
 
-	// The file type to use. The only supported value is s3.
+	// Type of resource to assign to a container. The supported resources include GPU, MEMORY, and VCPU.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
-	// ARN of the Amazon S3 object containing the environment variable file.
+	// Value of the key-value pair. For environment variables, this is the value of the environment variable.
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type EnvironmentFileObservation struct {
 
-	// The file type to use. The only supported value is s3.
+	// Type of resource to assign to a container. The supported resources include GPU, MEMORY, and VCPU.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
-	// ARN of the Amazon S3 object containing the environment variable file.
+	// Value of the key-value pair. For environment variables, this is the value of the environment variable.
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type EnvironmentFileParameters struct {
 
-	// The file type to use. The only supported value is s3.
+	// Type of resource to assign to a container. The supported resources include GPU, MEMORY, and VCPU.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
 
-	// ARN of the Amazon S3 object containing the environment variable file.
+	// Value of the key-value pair. For environment variables, this is the value of the environment variable.
 	// +kubebuilder:validation:Optional
 	Value *string `json:"value" tf:"value,omitempty"`
 }
 
 type EnvironmentInitParameters struct {
 
-	// The name of the key-value pair. For environment variables, this is the name of the environment variable.
+	// Name of parameter to start execution of a SageMaker AI Model Building Pipeline. Maximum length of 256.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The value of the key-value pair. For environment variables, this is the value of the environment variable.
+	// Value of the key-value pair. For environment variables, this is the value of the environment variable.
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type EnvironmentObservation struct {
 
-	// The name of the key-value pair. For environment variables, this is the name of the environment variable.
+	// Name of parameter to start execution of a SageMaker AI Model Building Pipeline. Maximum length of 256.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The value of the key-value pair. For environment variables, this is the value of the environment variable.
+	// Value of the key-value pair. For environment variables, this is the value of the environment variable.
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type EnvironmentParameters struct {
 
-	// The name of the key-value pair. For environment variables, this is the name of the environment variable.
+	// Name of parameter to start execution of a SageMaker AI Model Building Pipeline. Maximum length of 256.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The value of the key-value pair. For environment variables, this is the value of the environment variable.
+	// Value of the key-value pair. For environment variables, this is the value of the environment variable.
 	// +kubebuilder:validation:Optional
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type EphemeralStorageInitParameters struct {
 
-	// The total amount, in GiB, of ephemeral storage to set for the task. The minimum supported value is 21 GiB and the maximum supported value is 200 GiB.
+	// Total amount, in GiB, of ephemeral storage to set for the task. The minimum supported value is 21 GiB and the maximum supported value is 200 GiB.
 	SizeInGib *float64 `json:"sizeInGib,omitempty" tf:"size_in_gib,omitempty"`
 }
 
 type EphemeralStorageObservation struct {
 
-	// The total amount, in GiB, of ephemeral storage to set for the task. The minimum supported value is 21 GiB and the maximum supported value is 200 GiB.
+	// Total amount, in GiB, of ephemeral storage to set for the task. The minimum supported value is 21 GiB and the maximum supported value is 200 GiB.
 	SizeInGib *float64 `json:"sizeInGib,omitempty" tf:"size_in_gib,omitempty"`
 }
 
 type EphemeralStorageParameters struct {
 
-	// The total amount, in GiB, of ephemeral storage to set for the task. The minimum supported value is 21 GiB and the maximum supported value is 200 GiB.
+	// Total amount, in GiB, of ephemeral storage to set for the task. The minimum supported value is 21 GiB and the maximum supported value is 200 GiB.
 	// +kubebuilder:validation:Optional
 	SizeInGib *float64 `json:"sizeInGib" tf:"size_in_gib,omitempty"`
 }
 
 type EventbridgeEventBusParametersInitParameters struct {
 
-	// A free-form string, with a maximum of 128 characters, used to decide what fields to expect in the event detail.
+	// Free-form string, with a maximum of 128 characters, used to decide what fields to expect in the event detail.
 	DetailType *string `json:"detailType,omitempty" tf:"detail_type,omitempty"`
 
-	// The URL subdomain of the endpoint. For example, if the URL for Endpoint is https://abcde.veo.endpoints.event.amazonaws.com, then the EndpointId is abcde.veo.
+	// URL subdomain of the endpoint. For example, if the URL for Endpoint is https://abcde.veo.endpoints.event.amazonaws.com, then the EndpointId is abcde.veo.
 	EndpointID *string `json:"endpointId,omitempty" tf:"endpoint_id,omitempty"`
 
 	// List of AWS resources, identified by ARN, which the event primarily concerns. Any number, including zero, may be present.
 	// +listType=set
 	Resources []*string `json:"resources,omitempty" tf:"resources,omitempty"`
 
-	// The source of the event. Maximum length of 256.
+	// Source resource of the pipe. This field typically requires an ARN. However, when using a self-managed Kafka cluster, you should use a different format. Instead of an ARN, use 'smk://' followed by the bootstrap server's address.
 	Source *string `json:"source,omitempty" tf:"source,omitempty"`
 
-	// The time stamp of the event, per RFC3339. If no time stamp is provided, the time stamp of the PutEvents call is used. This is the JSON path to the field in the event e.g. $.detail.timestamp
+	// Time stamp of the event, per RFC3339. If no time stamp is provided, the time stamp of the PutEvents call is used. This is the JSON path to the field in the event e.g. $.detail.timestamp
 	Time *string `json:"time,omitempty" tf:"time,omitempty"`
 }
 
 type EventbridgeEventBusParametersObservation struct {
 
-	// A free-form string, with a maximum of 128 characters, used to decide what fields to expect in the event detail.
+	// Free-form string, with a maximum of 128 characters, used to decide what fields to expect in the event detail.
 	DetailType *string `json:"detailType,omitempty" tf:"detail_type,omitempty"`
 
-	// The URL subdomain of the endpoint. For example, if the URL for Endpoint is https://abcde.veo.endpoints.event.amazonaws.com, then the EndpointId is abcde.veo.
+	// URL subdomain of the endpoint. For example, if the URL for Endpoint is https://abcde.veo.endpoints.event.amazonaws.com, then the EndpointId is abcde.veo.
 	EndpointID *string `json:"endpointId,omitempty" tf:"endpoint_id,omitempty"`
 
 	// List of AWS resources, identified by ARN, which the event primarily concerns. Any number, including zero, may be present.
 	// +listType=set
 	Resources []*string `json:"resources,omitempty" tf:"resources,omitempty"`
 
-	// The source of the event. Maximum length of 256.
+	// Source resource of the pipe. This field typically requires an ARN. However, when using a self-managed Kafka cluster, you should use a different format. Instead of an ARN, use 'smk://' followed by the bootstrap server's address.
 	Source *string `json:"source,omitempty" tf:"source,omitempty"`
 
-	// The time stamp of the event, per RFC3339. If no time stamp is provided, the time stamp of the PutEvents call is used. This is the JSON path to the field in the event e.g. $.detail.timestamp
+	// Time stamp of the event, per RFC3339. If no time stamp is provided, the time stamp of the PutEvents call is used. This is the JSON path to the field in the event e.g. $.detail.timestamp
 	Time *string `json:"time,omitempty" tf:"time,omitempty"`
 }
 
 type EventbridgeEventBusParametersParameters struct {
 
-	// A free-form string, with a maximum of 128 characters, used to decide what fields to expect in the event detail.
+	// Free-form string, with a maximum of 128 characters, used to decide what fields to expect in the event detail.
 	// +kubebuilder:validation:Optional
 	DetailType *string `json:"detailType,omitempty" tf:"detail_type,omitempty"`
 
-	// The URL subdomain of the endpoint. For example, if the URL for Endpoint is https://abcde.veo.endpoints.event.amazonaws.com, then the EndpointId is abcde.veo.
+	// URL subdomain of the endpoint. For example, if the URL for Endpoint is https://abcde.veo.endpoints.event.amazonaws.com, then the EndpointId is abcde.veo.
 	// +kubebuilder:validation:Optional
 	EndpointID *string `json:"endpointId,omitempty" tf:"endpoint_id,omitempty"`
 
@@ -988,49 +988,49 @@ type EventbridgeEventBusParametersParameters struct {
 	// +listType=set
 	Resources []*string `json:"resources,omitempty" tf:"resources,omitempty"`
 
-	// The source of the event. Maximum length of 256.
+	// Source resource of the pipe. This field typically requires an ARN. However, when using a self-managed Kafka cluster, you should use a different format. Instead of an ARN, use 'smk://' followed by the bootstrap server's address.
 	// +kubebuilder:validation:Optional
 	Source *string `json:"source,omitempty" tf:"source,omitempty"`
 
-	// The time stamp of the event, per RFC3339. If no time stamp is provided, the time stamp of the PutEvents call is used. This is the JSON path to the field in the event e.g. $.detail.timestamp
+	// Time stamp of the event, per RFC3339. If no time stamp is provided, the time stamp of the PutEvents call is used. This is the JSON path to the field in the event e.g. $.detail.timestamp
 	// +kubebuilder:validation:Optional
 	Time *string `json:"time,omitempty" tf:"time,omitempty"`
 }
 
 type FilterCriteriaInitParameters struct {
 
-	// An array of up to 5 event patterns. Detailed below.
+	// Array of up to 5 event patterns. See filter Block for details.
 	Filter []FilterInitParameters `json:"filter,omitempty" tf:"filter,omitempty"`
 }
 
 type FilterCriteriaObservation struct {
 
-	// An array of up to 5 event patterns. Detailed below.
+	// Array of up to 5 event patterns. See filter Block for details.
 	Filter []FilterObservation `json:"filter,omitempty" tf:"filter,omitempty"`
 }
 
 type FilterCriteriaParameters struct {
 
-	// An array of up to 5 event patterns. Detailed below.
+	// Array of up to 5 event patterns. See filter Block for details.
 	// +kubebuilder:validation:Optional
 	Filter []FilterParameters `json:"filter,omitempty" tf:"filter,omitempty"`
 }
 
 type FilterInitParameters struct {
 
-	// The event pattern. At most 4096 characters.
+	// Event pattern. At most 4096 characters.
 	Pattern *string `json:"pattern,omitempty" tf:"pattern,omitempty"`
 }
 
 type FilterObservation struct {
 
-	// The event pattern. At most 4096 characters.
+	// Event pattern. At most 4096 characters.
 	Pattern *string `json:"pattern,omitempty" tf:"pattern,omitempty"`
 }
 
 type FilterParameters struct {
 
-	// The event pattern. At most 4096 characters.
+	// Event pattern. At most 4096 characters.
 	// +kubebuilder:validation:Optional
 	Pattern *string `json:"pattern" tf:"pattern,omitempty"`
 }
@@ -1060,7 +1060,7 @@ type HTTPParametersInitParameters struct {
 	// +mapType=granular
 	HeaderParameters map[string]*string `json:"headerParameters,omitempty" tf:"header_parameters,omitempty"`
 
-	// The path parameter values to be used to populate API Gateway REST API or EventBridge ApiDestination path wildcards ("*").
+	// Path parameter values used to populate API Gateway REST API or EventBridge ApiDestination path wildcards ("*").
 	PathParameterValues []*string `json:"pathParameterValues,omitempty" tf:"path_parameter_values,omitempty"`
 
 	// Key-value mapping of the query strings that need to be sent as part of request invoking the API Gateway REST API or EventBridge ApiDestination.
@@ -1074,7 +1074,7 @@ type HTTPParametersObservation struct {
 	// +mapType=granular
 	HeaderParameters map[string]*string `json:"headerParameters,omitempty" tf:"header_parameters,omitempty"`
 
-	// The path parameter values to be used to populate API Gateway REST API or EventBridge ApiDestination path wildcards ("*").
+	// Path parameter values used to populate API Gateway REST API or EventBridge ApiDestination path wildcards ("*").
 	PathParameterValues []*string `json:"pathParameterValues,omitempty" tf:"path_parameter_values,omitempty"`
 
 	// Key-value mapping of the query strings that need to be sent as part of request invoking the API Gateway REST API or EventBridge ApiDestination.
@@ -1089,7 +1089,7 @@ type HTTPParametersParameters struct {
 	// +mapType=granular
 	HeaderParameters map[string]*string `json:"headerParameters,omitempty" tf:"header_parameters,omitempty"`
 
-	// The path parameter values to be used to populate API Gateway REST API or EventBridge ApiDestination path wildcards ("*").
+	// Path parameter values used to populate API Gateway REST API or EventBridge ApiDestination path wildcards ("*").
 	// +kubebuilder:validation:Optional
 	PathParameterValues []*string `json:"pathParameterValues,omitempty" tf:"path_parameter_values,omitempty"`
 
@@ -1101,61 +1101,61 @@ type HTTPParametersParameters struct {
 
 type InferenceAcceleratorOverrideInitParameters struct {
 
-	// The Elastic Inference accelerator device name to override for the task. This parameter must match a deviceName specified in the task definition.
+	// Elastic Inference accelerator device name to override for the task. This parameter must match a deviceName specified in the task definition.
 	DeviceName *string `json:"deviceName,omitempty" tf:"device_name,omitempty"`
 
-	// The Elastic Inference accelerator type to use.
+	// Elastic Inference accelerator type to use.
 	DeviceType *string `json:"deviceType,omitempty" tf:"device_type,omitempty"`
 }
 
 type InferenceAcceleratorOverrideObservation struct {
 
-	// The Elastic Inference accelerator device name to override for the task. This parameter must match a deviceName specified in the task definition.
+	// Elastic Inference accelerator device name to override for the task. This parameter must match a deviceName specified in the task definition.
 	DeviceName *string `json:"deviceName,omitempty" tf:"device_name,omitempty"`
 
-	// The Elastic Inference accelerator type to use.
+	// Elastic Inference accelerator type to use.
 	DeviceType *string `json:"deviceType,omitempty" tf:"device_type,omitempty"`
 }
 
 type InferenceAcceleratorOverrideParameters struct {
 
-	// The Elastic Inference accelerator device name to override for the task. This parameter must match a deviceName specified in the task definition.
+	// Elastic Inference accelerator device name to override for the task. This parameter must match a deviceName specified in the task definition.
 	// +kubebuilder:validation:Optional
 	DeviceName *string `json:"deviceName,omitempty" tf:"device_name,omitempty"`
 
-	// The Elastic Inference accelerator type to use.
+	// Elastic Inference accelerator type to use.
 	// +kubebuilder:validation:Optional
 	DeviceType *string `json:"deviceType,omitempty" tf:"device_type,omitempty"`
 }
 
 type KinesisStreamParametersDeadLetterConfigInitParameters struct {
 
-	// The ARN of the Amazon SQS queue specified as the target for the dead-letter queue.
+	// ARN of the Amazon SQS queue specified as the target for the dead-letter queue.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 }
 
 type KinesisStreamParametersDeadLetterConfigObservation struct {
 
-	// The ARN of the Amazon SQS queue specified as the target for the dead-letter queue.
+	// ARN of the Amazon SQS queue specified as the target for the dead-letter queue.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 }
 
 type KinesisStreamParametersDeadLetterConfigParameters struct {
 
-	// The ARN of the Amazon SQS queue specified as the target for the dead-letter queue.
+	// ARN of the Amazon SQS queue specified as the target for the dead-letter queue.
 	// +kubebuilder:validation:Optional
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 }
 
 type KinesisStreamParametersInitParameters struct {
 
-	// The maximum number of records to include in each batch. Maximum value of 10000.
+	// Maximum number of records to include in each batch. Maximum value of 10000.
 	BatchSize *float64 `json:"batchSize,omitempty" tf:"batch_size,omitempty"`
 
-	// Define the target queue to send dead-letter queue events to. Detailed below.
+	// Define the target queue to send dead-letter queue events to. See dead_letter_config Block for details.
 	DeadLetterConfig *KinesisStreamParametersDeadLetterConfigInitParameters `json:"deadLetterConfig,omitempty" tf:"dead_letter_config,omitempty"`
 
-	// The maximum length of a time to wait for events. Maximum value of 300.
+	// Maximum length of a time to wait for events. Maximum value of 300.
 	MaximumBatchingWindowInSeconds *float64 `json:"maximumBatchingWindowInSeconds,omitempty" tf:"maximum_batching_window_in_seconds,omitempty"`
 
 	// Discard records older than the specified age. The default value is -1, which sets the maximum age to infinite. When the value is set to infinite, EventBridge never discards old records. Maximum value of 604,800.
@@ -1167,10 +1167,10 @@ type KinesisStreamParametersInitParameters struct {
 	// Define how to handle item process failures. AUTOMATIC_BISECT halves each batch and retry each half until all the records are processed or there is one failed message left in the batch. Valid values: AUTOMATIC_BISECT.
 	OnPartialBatchItemFailure *string `json:"onPartialBatchItemFailure,omitempty" tf:"on_partial_batch_item_failure,omitempty"`
 
-	// The number of batches to process concurrently from each shard. The default value is 1. Maximum value of 10.
+	// Number of batches to process concurrently from each shard. The default value is 1. Maximum value of 10.
 	ParallelizationFactor *float64 `json:"parallelizationFactor,omitempty" tf:"parallelization_factor,omitempty"`
 
-	// The position in a stream from which to start reading. Valid values: TRIM_HORIZON, LATEST, AT_TIMESTAMP.
+	// Position in a stream from which to start reading. Valid values: TRIM_HORIZON, LATEST, AT_TIMESTAMP.
 	StartingPosition *string `json:"startingPosition,omitempty" tf:"starting_position,omitempty"`
 
 	// With StartingPosition set to AT_TIMESTAMP, the time from which to start reading, in Unix time seconds.
@@ -1179,13 +1179,13 @@ type KinesisStreamParametersInitParameters struct {
 
 type KinesisStreamParametersObservation struct {
 
-	// The maximum number of records to include in each batch. Maximum value of 10000.
+	// Maximum number of records to include in each batch. Maximum value of 10000.
 	BatchSize *float64 `json:"batchSize,omitempty" tf:"batch_size,omitempty"`
 
-	// Define the target queue to send dead-letter queue events to. Detailed below.
+	// Define the target queue to send dead-letter queue events to. See dead_letter_config Block for details.
 	DeadLetterConfig *KinesisStreamParametersDeadLetterConfigObservation `json:"deadLetterConfig,omitempty" tf:"dead_letter_config,omitempty"`
 
-	// The maximum length of a time to wait for events. Maximum value of 300.
+	// Maximum length of a time to wait for events. Maximum value of 300.
 	MaximumBatchingWindowInSeconds *float64 `json:"maximumBatchingWindowInSeconds,omitempty" tf:"maximum_batching_window_in_seconds,omitempty"`
 
 	// Discard records older than the specified age. The default value is -1, which sets the maximum age to infinite. When the value is set to infinite, EventBridge never discards old records. Maximum value of 604,800.
@@ -1197,10 +1197,10 @@ type KinesisStreamParametersObservation struct {
 	// Define how to handle item process failures. AUTOMATIC_BISECT halves each batch and retry each half until all the records are processed or there is one failed message left in the batch. Valid values: AUTOMATIC_BISECT.
 	OnPartialBatchItemFailure *string `json:"onPartialBatchItemFailure,omitempty" tf:"on_partial_batch_item_failure,omitempty"`
 
-	// The number of batches to process concurrently from each shard. The default value is 1. Maximum value of 10.
+	// Number of batches to process concurrently from each shard. The default value is 1. Maximum value of 10.
 	ParallelizationFactor *float64 `json:"parallelizationFactor,omitempty" tf:"parallelization_factor,omitempty"`
 
-	// The position in a stream from which to start reading. Valid values: TRIM_HORIZON, LATEST, AT_TIMESTAMP.
+	// Position in a stream from which to start reading. Valid values: TRIM_HORIZON, LATEST, AT_TIMESTAMP.
 	StartingPosition *string `json:"startingPosition,omitempty" tf:"starting_position,omitempty"`
 
 	// With StartingPosition set to AT_TIMESTAMP, the time from which to start reading, in Unix time seconds.
@@ -1209,15 +1209,15 @@ type KinesisStreamParametersObservation struct {
 
 type KinesisStreamParametersParameters struct {
 
-	// The maximum number of records to include in each batch. Maximum value of 10000.
+	// Maximum number of records to include in each batch. Maximum value of 10000.
 	// +kubebuilder:validation:Optional
 	BatchSize *float64 `json:"batchSize,omitempty" tf:"batch_size,omitempty"`
 
-	// Define the target queue to send dead-letter queue events to. Detailed below.
+	// Define the target queue to send dead-letter queue events to. See dead_letter_config Block for details.
 	// +kubebuilder:validation:Optional
 	DeadLetterConfig *KinesisStreamParametersDeadLetterConfigParameters `json:"deadLetterConfig,omitempty" tf:"dead_letter_config,omitempty"`
 
-	// The maximum length of a time to wait for events. Maximum value of 300.
+	// Maximum length of a time to wait for events. Maximum value of 300.
 	// +kubebuilder:validation:Optional
 	MaximumBatchingWindowInSeconds *float64 `json:"maximumBatchingWindowInSeconds,omitempty" tf:"maximum_batching_window_in_seconds,omitempty"`
 
@@ -1233,11 +1233,11 @@ type KinesisStreamParametersParameters struct {
 	// +kubebuilder:validation:Optional
 	OnPartialBatchItemFailure *string `json:"onPartialBatchItemFailure,omitempty" tf:"on_partial_batch_item_failure,omitempty"`
 
-	// The number of batches to process concurrently from each shard. The default value is 1. Maximum value of 10.
+	// Number of batches to process concurrently from each shard. The default value is 1. Maximum value of 10.
 	// +kubebuilder:validation:Optional
 	ParallelizationFactor *float64 `json:"parallelizationFactor,omitempty" tf:"parallelization_factor,omitempty"`
 
-	// The position in a stream from which to start reading. Valid values: TRIM_HORIZON, LATEST, AT_TIMESTAMP.
+	// Position in a stream from which to start reading. Valid values: TRIM_HORIZON, LATEST, AT_TIMESTAMP.
 	// +kubebuilder:validation:Optional
 	StartingPosition *string `json:"startingPosition" tf:"starting_position,omitempty"`
 
@@ -1248,68 +1248,68 @@ type KinesisStreamParametersParameters struct {
 
 type LambdaFunctionParametersInitParameters struct {
 
-	// Specify whether to invoke the function synchronously or asynchronously. Valid Values: REQUEST_RESPONSE, FIRE_AND_FORGET.
+	// Whether to invoke the function synchronously or asynchronously. Valid Values: REQUEST_RESPONSE, FIRE_AND_FORGET.
 	InvocationType *string `json:"invocationType,omitempty" tf:"invocation_type,omitempty"`
 }
 
 type LambdaFunctionParametersObservation struct {
 
-	// Specify whether to invoke the function synchronously or asynchronously. Valid Values: REQUEST_RESPONSE, FIRE_AND_FORGET.
+	// Whether to invoke the function synchronously or asynchronously. Valid Values: REQUEST_RESPONSE, FIRE_AND_FORGET.
 	InvocationType *string `json:"invocationType,omitempty" tf:"invocation_type,omitempty"`
 }
 
 type LambdaFunctionParametersParameters struct {
 
-	// Specify whether to invoke the function synchronously or asynchronously. Valid Values: REQUEST_RESPONSE, FIRE_AND_FORGET.
+	// Whether to invoke the function synchronously or asynchronously. Valid Values: REQUEST_RESPONSE, FIRE_AND_FORGET.
 	// +kubebuilder:validation:Optional
 	InvocationType *string `json:"invocationType" tf:"invocation_type,omitempty"`
 }
 
 type LogConfigurationInitParameters struct {
 
-	// Amazon CloudWatch Logs logging configuration settings for the pipe. Detailed below.
+	// Amazon CloudWatch Logs logging configuration settings for the pipe. See cloudwatch_logs_log_destination Block for details.
 	CloudwatchLogsLogDestination *CloudwatchLogsLogDestinationInitParameters `json:"cloudwatchLogsLogDestination,omitempty" tf:"cloudwatch_logs_log_destination,omitempty"`
 
-	// Amazon Kinesis Data Firehose logging configuration settings for the pipe. Detailed below.
+	// Amazon Kinesis Data Firehose logging configuration settings for the pipe. See firehose_log_destination Block for details.
 	FirehoseLogDestination *FirehoseLogDestinationInitParameters `json:"firehoseLogDestination,omitempty" tf:"firehose_log_destination,omitempty"`
 
 	// String list that specifies whether the execution data (specifically, the payload, awsRequest, and awsResponse fields) is included in the log messages for this pipe. This applies to all log destinations for the pipe. Valid values ALL.
 	// +listType=set
 	IncludeExecutionData []*string `json:"includeExecutionData,omitempty" tf:"include_execution_data,omitempty"`
 
-	// The level of logging detail to include. Valid values OFF, ERROR, INFO and TRACE.
+	// Level of logging detail to include. Valid values OFF, ERROR, INFO and TRACE.
 	Level *string `json:"level,omitempty" tf:"level,omitempty"`
 
-	// Amazon S3 logging configuration settings for the pipe. Detailed below.
+	// Amazon S3 logging configuration settings for the pipe. See s3_log_destination Block for details.
 	S3LogDestination *S3LogDestinationInitParameters `json:"s3LogDestination,omitempty" tf:"s3_log_destination,omitempty"`
 }
 
 type LogConfigurationObservation struct {
 
-	// Amazon CloudWatch Logs logging configuration settings for the pipe. Detailed below.
+	// Amazon CloudWatch Logs logging configuration settings for the pipe. See cloudwatch_logs_log_destination Block for details.
 	CloudwatchLogsLogDestination *CloudwatchLogsLogDestinationObservation `json:"cloudwatchLogsLogDestination,omitempty" tf:"cloudwatch_logs_log_destination,omitempty"`
 
-	// Amazon Kinesis Data Firehose logging configuration settings for the pipe. Detailed below.
+	// Amazon Kinesis Data Firehose logging configuration settings for the pipe. See firehose_log_destination Block for details.
 	FirehoseLogDestination *FirehoseLogDestinationObservation `json:"firehoseLogDestination,omitempty" tf:"firehose_log_destination,omitempty"`
 
 	// String list that specifies whether the execution data (specifically, the payload, awsRequest, and awsResponse fields) is included in the log messages for this pipe. This applies to all log destinations for the pipe. Valid values ALL.
 	// +listType=set
 	IncludeExecutionData []*string `json:"includeExecutionData,omitempty" tf:"include_execution_data,omitempty"`
 
-	// The level of logging detail to include. Valid values OFF, ERROR, INFO and TRACE.
+	// Level of logging detail to include. Valid values OFF, ERROR, INFO and TRACE.
 	Level *string `json:"level,omitempty" tf:"level,omitempty"`
 
-	// Amazon S3 logging configuration settings for the pipe. Detailed below.
+	// Amazon S3 logging configuration settings for the pipe. See s3_log_destination Block for details.
 	S3LogDestination *S3LogDestinationObservation `json:"s3LogDestination,omitempty" tf:"s3_log_destination,omitempty"`
 }
 
 type LogConfigurationParameters struct {
 
-	// Amazon CloudWatch Logs logging configuration settings for the pipe. Detailed below.
+	// Amazon CloudWatch Logs logging configuration settings for the pipe. See cloudwatch_logs_log_destination Block for details.
 	// +kubebuilder:validation:Optional
 	CloudwatchLogsLogDestination *CloudwatchLogsLogDestinationParameters `json:"cloudwatchLogsLogDestination,omitempty" tf:"cloudwatch_logs_log_destination,omitempty"`
 
-	// Amazon Kinesis Data Firehose logging configuration settings for the pipe. Detailed below.
+	// Amazon Kinesis Data Firehose logging configuration settings for the pipe. See firehose_log_destination Block for details.
 	// +kubebuilder:validation:Optional
 	FirehoseLogDestination *FirehoseLogDestinationParameters `json:"firehoseLogDestination,omitempty" tf:"firehose_log_destination,omitempty"`
 
@@ -1318,150 +1318,150 @@ type LogConfigurationParameters struct {
 	// +listType=set
 	IncludeExecutionData []*string `json:"includeExecutionData,omitempty" tf:"include_execution_data,omitempty"`
 
-	// The level of logging detail to include. Valid values OFF, ERROR, INFO and TRACE.
+	// Level of logging detail to include. Valid values OFF, ERROR, INFO and TRACE.
 	// +kubebuilder:validation:Optional
 	Level *string `json:"level" tf:"level,omitempty"`
 
-	// Amazon S3 logging configuration settings for the pipe. Detailed below.
+	// Amazon S3 logging configuration settings for the pipe. See s3_log_destination Block for details.
 	// +kubebuilder:validation:Optional
 	S3LogDestination *S3LogDestinationParameters `json:"s3LogDestination,omitempty" tf:"s3_log_destination,omitempty"`
 }
 
 type ManagedStreamingKafkaParametersCredentialsInitParameters struct {
 
-	// The ARN of the Secrets Manager secret containing the credentials.
+	// ARN of the Secrets Manager secret containing the credentials.
 	ClientCertificateTLSAuth *string `json:"clientCertificateTlsAuth,omitempty" tf:"client_certificate_tls_auth,omitempty"`
 
-	// The ARN of the Secrets Manager secret containing the credentials.
+	// ARN of the Secrets Manager secret containing the credentials.
 	SaslScram512Auth *string `json:"saslScram512Auth,omitempty" tf:"sasl_scram_512_auth,omitempty"`
 }
 
 type ManagedStreamingKafkaParametersCredentialsObservation struct {
 
-	// The ARN of the Secrets Manager secret containing the credentials.
+	// ARN of the Secrets Manager secret containing the credentials.
 	ClientCertificateTLSAuth *string `json:"clientCertificateTlsAuth,omitempty" tf:"client_certificate_tls_auth,omitempty"`
 
-	// The ARN of the Secrets Manager secret containing the credentials.
+	// ARN of the Secrets Manager secret containing the credentials.
 	SaslScram512Auth *string `json:"saslScram512Auth,omitempty" tf:"sasl_scram_512_auth,omitempty"`
 }
 
 type ManagedStreamingKafkaParametersCredentialsParameters struct {
 
-	// The ARN of the Secrets Manager secret containing the credentials.
+	// ARN of the Secrets Manager secret containing the credentials.
 	// +kubebuilder:validation:Optional
 	ClientCertificateTLSAuth *string `json:"clientCertificateTlsAuth,omitempty" tf:"client_certificate_tls_auth,omitempty"`
 
-	// The ARN of the Secrets Manager secret containing the credentials.
+	// ARN of the Secrets Manager secret containing the credentials.
 	// +kubebuilder:validation:Optional
 	SaslScram512Auth *string `json:"saslScram512Auth,omitempty" tf:"sasl_scram_512_auth,omitempty"`
 }
 
 type ManagedStreamingKafkaParametersInitParameters struct {
 
-	// The maximum number of records to include in each batch. Maximum value of 10000.
+	// Maximum number of records to include in each batch. Maximum value of 10000.
 	BatchSize *float64 `json:"batchSize,omitempty" tf:"batch_size,omitempty"`
 
-	// The name of the destination queue to consume. Maximum value of 200.
+	// Name of the destination queue to consume. Maximum value of 200.
 	ConsumerGroupID *string `json:"consumerGroupId,omitempty" tf:"consumer_group_id,omitempty"`
 
-	// The credentials needed to access the resource. Detailed below.
+	// Credentials needed to access the resource. See source_parameters.activemq_broker_parameters.credentials Block for details.
 	Credentials *ManagedStreamingKafkaParametersCredentialsInitParameters `json:"credentials,omitempty" tf:"credentials,omitempty"`
 
-	// The maximum length of a time to wait for events. Maximum value of 300.
+	// Maximum length of a time to wait for events. Maximum value of 300.
 	MaximumBatchingWindowInSeconds *float64 `json:"maximumBatchingWindowInSeconds,omitempty" tf:"maximum_batching_window_in_seconds,omitempty"`
 
-	// The position in a stream from which to start reading. Valid values: TRIM_HORIZON, LATEST.
+	// Position in a stream from which to start reading. Valid values: TRIM_HORIZON, LATEST.
 	StartingPosition *string `json:"startingPosition,omitempty" tf:"starting_position,omitempty"`
 
-	// The name of the topic that the pipe will read from. Maximum length of 249.
+	// Name of the topic that the pipe will read from. Maximum length of 249.
 	TopicName *string `json:"topicName,omitempty" tf:"topic_name,omitempty"`
 }
 
 type ManagedStreamingKafkaParametersObservation struct {
 
-	// The maximum number of records to include in each batch. Maximum value of 10000.
+	// Maximum number of records to include in each batch. Maximum value of 10000.
 	BatchSize *float64 `json:"batchSize,omitempty" tf:"batch_size,omitempty"`
 
-	// The name of the destination queue to consume. Maximum value of 200.
+	// Name of the destination queue to consume. Maximum value of 200.
 	ConsumerGroupID *string `json:"consumerGroupId,omitempty" tf:"consumer_group_id,omitempty"`
 
-	// The credentials needed to access the resource. Detailed below.
+	// Credentials needed to access the resource. See source_parameters.activemq_broker_parameters.credentials Block for details.
 	Credentials *ManagedStreamingKafkaParametersCredentialsObservation `json:"credentials,omitempty" tf:"credentials,omitempty"`
 
-	// The maximum length of a time to wait for events. Maximum value of 300.
+	// Maximum length of a time to wait for events. Maximum value of 300.
 	MaximumBatchingWindowInSeconds *float64 `json:"maximumBatchingWindowInSeconds,omitempty" tf:"maximum_batching_window_in_seconds,omitempty"`
 
-	// The position in a stream from which to start reading. Valid values: TRIM_HORIZON, LATEST.
+	// Position in a stream from which to start reading. Valid values: TRIM_HORIZON, LATEST.
 	StartingPosition *string `json:"startingPosition,omitempty" tf:"starting_position,omitempty"`
 
-	// The name of the topic that the pipe will read from. Maximum length of 249.
+	// Name of the topic that the pipe will read from. Maximum length of 249.
 	TopicName *string `json:"topicName,omitempty" tf:"topic_name,omitempty"`
 }
 
 type ManagedStreamingKafkaParametersParameters struct {
 
-	// The maximum number of records to include in each batch. Maximum value of 10000.
+	// Maximum number of records to include in each batch. Maximum value of 10000.
 	// +kubebuilder:validation:Optional
 	BatchSize *float64 `json:"batchSize,omitempty" tf:"batch_size,omitempty"`
 
-	// The name of the destination queue to consume. Maximum value of 200.
+	// Name of the destination queue to consume. Maximum value of 200.
 	// +kubebuilder:validation:Optional
 	ConsumerGroupID *string `json:"consumerGroupId,omitempty" tf:"consumer_group_id,omitempty"`
 
-	// The credentials needed to access the resource. Detailed below.
+	// Credentials needed to access the resource. See source_parameters.activemq_broker_parameters.credentials Block for details.
 	// +kubebuilder:validation:Optional
 	Credentials *ManagedStreamingKafkaParametersCredentialsParameters `json:"credentials,omitempty" tf:"credentials,omitempty"`
 
-	// The maximum length of a time to wait for events. Maximum value of 300.
+	// Maximum length of a time to wait for events. Maximum value of 300.
 	// +kubebuilder:validation:Optional
 	MaximumBatchingWindowInSeconds *float64 `json:"maximumBatchingWindowInSeconds,omitempty" tf:"maximum_batching_window_in_seconds,omitempty"`
 
-	// The position in a stream from which to start reading. Valid values: TRIM_HORIZON, LATEST.
+	// Position in a stream from which to start reading. Valid values: TRIM_HORIZON, LATEST.
 	// +kubebuilder:validation:Optional
 	StartingPosition *string `json:"startingPosition,omitempty" tf:"starting_position,omitempty"`
 
-	// The name of the topic that the pipe will read from. Maximum length of 249.
+	// Name of the topic that the pipe will read from. Maximum length of 249.
 	// +kubebuilder:validation:Optional
 	TopicName *string `json:"topicName" tf:"topic_name,omitempty"`
 }
 
 type NetworkConfigurationInitParameters struct {
 
-	// Use this structure to specify the VPC subnets and security groups for the task, and whether a public IP address is to be used. This structure is relevant only for ECS tasks that use the awsvpc network mode. Detailed below.
+	// Use this structure to specify the VPC subnets and security groups for the task, and whether a public IP address is to be used. This structure is relevant only for ECS tasks that use the awsvpc network mode. See aws_vpc_configuration Block for details.
 	AwsVPCConfiguration *AwsVPCConfigurationInitParameters `json:"awsVpcConfiguration,omitempty" tf:"aws_vpc_configuration,omitempty"`
 }
 
 type NetworkConfigurationObservation struct {
 
-	// Use this structure to specify the VPC subnets and security groups for the task, and whether a public IP address is to be used. This structure is relevant only for ECS tasks that use the awsvpc network mode. Detailed below.
+	// Use this structure to specify the VPC subnets and security groups for the task, and whether a public IP address is to be used. This structure is relevant only for ECS tasks that use the awsvpc network mode. See aws_vpc_configuration Block for details.
 	AwsVPCConfiguration *AwsVPCConfigurationObservation `json:"awsVpcConfiguration,omitempty" tf:"aws_vpc_configuration,omitempty"`
 }
 
 type NetworkConfigurationParameters struct {
 
-	// Use this structure to specify the VPC subnets and security groups for the task, and whether a public IP address is to be used. This structure is relevant only for ECS tasks that use the awsvpc network mode. Detailed below.
+	// Use this structure to specify the VPC subnets and security groups for the task, and whether a public IP address is to be used. This structure is relevant only for ECS tasks that use the awsvpc network mode. See aws_vpc_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	AwsVPCConfiguration *AwsVPCConfigurationParameters `json:"awsVpcConfiguration,omitempty" tf:"aws_vpc_configuration,omitempty"`
 }
 
 type OverridesInitParameters struct {
 
-	// The cpu override for the task.
+	// CPU override for the task.
 	CPU *string `json:"cpu,omitempty" tf:"cpu,omitempty"`
 
-	// One or more container overrides that are sent to a task. Detailed below.
+	// One or more container overrides that are sent to a task. See container_override Block for details.
 	ContainerOverride []ContainerOverrideInitParameters `json:"containerOverride,omitempty" tf:"container_override,omitempty"`
 
-	// The ephemeral storage setting override for the task.  Detailed below.
+	// Ephemeral storage setting override for the task. See ephemeral_storage Block for details.
 	EphemeralStorage *EphemeralStorageInitParameters `json:"ephemeralStorage,omitempty" tf:"ephemeral_storage,omitempty"`
 
 	// ARN of the task execution IAM role override for the task.
 	ExecutionRoleArn *string `json:"executionRoleArn,omitempty" tf:"execution_role_arn,omitempty"`
 
-	// List of Elastic Inference accelerator overrides for the task. Detailed below.
+	// List of Elastic Inference accelerator overrides for the task. See inference_accelerator_override Block for details.
 	InferenceAcceleratorOverride []InferenceAcceleratorOverrideInitParameters `json:"inferenceAcceleratorOverride,omitempty" tf:"inference_accelerator_override,omitempty"`
 
-	// The memory override for the task.
+	// Memory override for the task.
 	Memory *string `json:"memory,omitempty" tf:"memory,omitempty"`
 
 	// ARN of the IAM role that containers in this task can assume. All containers in this task are granted the permissions that are specified in this role.
@@ -1470,22 +1470,22 @@ type OverridesInitParameters struct {
 
 type OverridesObservation struct {
 
-	// The cpu override for the task.
+	// CPU override for the task.
 	CPU *string `json:"cpu,omitempty" tf:"cpu,omitempty"`
 
-	// One or more container overrides that are sent to a task. Detailed below.
+	// One or more container overrides that are sent to a task. See container_override Block for details.
 	ContainerOverride []ContainerOverrideObservation `json:"containerOverride,omitempty" tf:"container_override,omitempty"`
 
-	// The ephemeral storage setting override for the task.  Detailed below.
+	// Ephemeral storage setting override for the task. See ephemeral_storage Block for details.
 	EphemeralStorage *EphemeralStorageObservation `json:"ephemeralStorage,omitempty" tf:"ephemeral_storage,omitempty"`
 
 	// ARN of the task execution IAM role override for the task.
 	ExecutionRoleArn *string `json:"executionRoleArn,omitempty" tf:"execution_role_arn,omitempty"`
 
-	// List of Elastic Inference accelerator overrides for the task. Detailed below.
+	// List of Elastic Inference accelerator overrides for the task. See inference_accelerator_override Block for details.
 	InferenceAcceleratorOverride []InferenceAcceleratorOverrideObservation `json:"inferenceAcceleratorOverride,omitempty" tf:"inference_accelerator_override,omitempty"`
 
-	// The memory override for the task.
+	// Memory override for the task.
 	Memory *string `json:"memory,omitempty" tf:"memory,omitempty"`
 
 	// ARN of the IAM role that containers in this task can assume. All containers in this task are granted the permissions that are specified in this role.
@@ -1494,15 +1494,15 @@ type OverridesObservation struct {
 
 type OverridesParameters struct {
 
-	// The cpu override for the task.
+	// CPU override for the task.
 	// +kubebuilder:validation:Optional
 	CPU *string `json:"cpu,omitempty" tf:"cpu,omitempty"`
 
-	// One or more container overrides that are sent to a task. Detailed below.
+	// One or more container overrides that are sent to a task. See container_override Block for details.
 	// +kubebuilder:validation:Optional
 	ContainerOverride []ContainerOverrideParameters `json:"containerOverride,omitempty" tf:"container_override,omitempty"`
 
-	// The ephemeral storage setting override for the task.  Detailed below.
+	// Ephemeral storage setting override for the task. See ephemeral_storage Block for details.
 	// +kubebuilder:validation:Optional
 	EphemeralStorage *EphemeralStorageParameters `json:"ephemeralStorage,omitempty" tf:"ephemeral_storage,omitempty"`
 
@@ -1510,11 +1510,11 @@ type OverridesParameters struct {
 	// +kubebuilder:validation:Optional
 	ExecutionRoleArn *string `json:"executionRoleArn,omitempty" tf:"execution_role_arn,omitempty"`
 
-	// List of Elastic Inference accelerator overrides for the task. Detailed below.
+	// List of Elastic Inference accelerator overrides for the task. See inference_accelerator_override Block for details.
 	// +kubebuilder:validation:Optional
 	InferenceAcceleratorOverride []InferenceAcceleratorOverrideParameters `json:"inferenceAcceleratorOverride,omitempty" tf:"inference_accelerator_override,omitempty"`
 
-	// The memory override for the task.
+	// Memory override for the task.
 	// +kubebuilder:validation:Optional
 	Memory *string `json:"memory,omitempty" tf:"memory,omitempty"`
 
@@ -1525,10 +1525,10 @@ type OverridesParameters struct {
 
 type PipeInitParameters struct {
 
-	// A description of the pipe. At most 512 characters.
+	// Description of the pipe. At most 512 characters.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The state the pipe should be in. One of: RUNNING, STOPPED.
+	// State the pipe should be in. One of: RUNNING, STOPPED.
 	DesiredState *string `json:"desiredState,omitempty" tf:"desired_state,omitempty"`
 
 	// Enrichment resource of the pipe (typically an ARN). Read more about enrichment in the User Guide.
@@ -1536,7 +1536,7 @@ type PipeInitParameters struct {
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	Enrichment *string `json:"enrichment,omitempty" tf:"enrichment,omitempty"`
 
-	// Parameters to configure enrichment for your pipe. Detailed below.
+	// Parameters to configure enrichment for the pipe. See enrichment_parameters Block for details.
 	EnrichmentParameters *EnrichmentParametersInitParameters `json:"enrichmentParameters,omitempty" tf:"enrichment_parameters,omitempty"`
 
 	// Reference to a APIDestination in cloudwatchevents to populate enrichment.
@@ -1550,7 +1550,7 @@ type PipeInitParameters struct {
 	// Identifier of the AWS KMS customer managed key for EventBridge to use, if you choose to use a customer managed key to encrypt pipe data. The identifier can be the key ARN, KeyId, key alias, or key alias ARN. If not set, EventBridge uses an AWS owned key to encrypt pipe data.
 	KMSKeyIdentifier *string `json:"kmsKeyIdentifier,omitempty" tf:"kms_key_identifier,omitempty"`
 
-	// Logging configuration settings for the pipe. Detailed below.
+	// Logging configuration settings for the pipe. See log_configuration Block for details.
 	LogConfiguration *LogConfigurationInitParameters `json:"logConfiguration,omitempty" tf:"log_configuration,omitempty"`
 
 	// ARN of the role that allows the pipe to send data to the target.
@@ -1571,7 +1571,7 @@ type PipeInitParameters struct {
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	Source *string `json:"source,omitempty" tf:"source,omitempty"`
 
-	// Parameters to configure a source for the pipe. Detailed below.
+	// Parameters to configure a source for the pipe. See source_parameters Block for details.
 	SourceParameters *SourceParametersInitParameters `json:"sourceParameters,omitempty" tf:"source_parameters,omitempty"`
 
 	// Reference to a Queue in sqs to populate source.
@@ -1591,7 +1591,7 @@ type PipeInitParameters struct {
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	Target *string `json:"target,omitempty" tf:"target,omitempty"`
 
-	// Parameters to configure a target for your pipe. Detailed below.
+	// Parameters to configure a target for the pipe. See target_parameters Block for details.
 	TargetParameters *TargetParametersInitParameters `json:"targetParameters,omitempty" tf:"target_parameters,omitempty"`
 
 	// Reference to a Queue in sqs to populate target.
@@ -1608,16 +1608,16 @@ type PipeObservation struct {
 	// ARN of this pipe.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// A description of the pipe. At most 512 characters.
+	// Description of the pipe. At most 512 characters.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The state the pipe should be in. One of: RUNNING, STOPPED.
+	// State the pipe should be in. One of: RUNNING, STOPPED.
 	DesiredState *string `json:"desiredState,omitempty" tf:"desired_state,omitempty"`
 
 	// Enrichment resource of the pipe (typically an ARN). Read more about enrichment in the User Guide.
 	Enrichment *string `json:"enrichment,omitempty" tf:"enrichment,omitempty"`
 
-	// Parameters to configure enrichment for your pipe. Detailed below.
+	// Parameters to configure enrichment for the pipe. See enrichment_parameters Block for details.
 	EnrichmentParameters *EnrichmentParametersObservation `json:"enrichmentParameters,omitempty" tf:"enrichment_parameters,omitempty"`
 
 	// Same as name.
@@ -1626,7 +1626,7 @@ type PipeObservation struct {
 	// Identifier of the AWS KMS customer managed key for EventBridge to use, if you choose to use a customer managed key to encrypt pipe data. The identifier can be the key ARN, KeyId, key alias, or key alias ARN. If not set, EventBridge uses an AWS owned key to encrypt pipe data.
 	KMSKeyIdentifier *string `json:"kmsKeyIdentifier,omitempty" tf:"kms_key_identifier,omitempty"`
 
-	// Logging configuration settings for the pipe. Detailed below.
+	// Logging configuration settings for the pipe. See log_configuration Block for details.
 	LogConfiguration *LogConfigurationObservation `json:"logConfiguration,omitempty" tf:"log_configuration,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -1639,7 +1639,7 @@ type PipeObservation struct {
 	// Source resource of the pipe. This field typically requires an ARN. However, when using a self-managed Kafka cluster, you should use a different format. Instead of an ARN, use 'smk://' followed by the bootstrap server's address.
 	Source *string `json:"source,omitempty" tf:"source,omitempty"`
 
-	// Parameters to configure a source for the pipe. Detailed below.
+	// Parameters to configure a source for the pipe. See source_parameters Block for details.
 	SourceParameters *SourceParametersObservation `json:"sourceParameters,omitempty" tf:"source_parameters,omitempty"`
 
 	// Key-value map of resource tags.
@@ -1653,17 +1653,17 @@ type PipeObservation struct {
 	// Target resource of the pipe (typically an ARN).
 	Target *string `json:"target,omitempty" tf:"target,omitempty"`
 
-	// Parameters to configure a target for your pipe. Detailed below.
+	// Parameters to configure a target for the pipe. See target_parameters Block for details.
 	TargetParameters *TargetParametersObservation `json:"targetParameters,omitempty" tf:"target_parameters,omitempty"`
 }
 
 type PipeParameters struct {
 
-	// A description of the pipe. At most 512 characters.
+	// Description of the pipe. At most 512 characters.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The state the pipe should be in. One of: RUNNING, STOPPED.
+	// State the pipe should be in. One of: RUNNING, STOPPED.
 	// +kubebuilder:validation:Optional
 	DesiredState *string `json:"desiredState,omitempty" tf:"desired_state,omitempty"`
 
@@ -1673,7 +1673,7 @@ type PipeParameters struct {
 	// +kubebuilder:validation:Optional
 	Enrichment *string `json:"enrichment,omitempty" tf:"enrichment,omitempty"`
 
-	// Parameters to configure enrichment for your pipe. Detailed below.
+	// Parameters to configure enrichment for the pipe. See enrichment_parameters Block for details.
 	// +kubebuilder:validation:Optional
 	EnrichmentParameters *EnrichmentParametersParameters `json:"enrichmentParameters,omitempty" tf:"enrichment_parameters,omitempty"`
 
@@ -1689,7 +1689,7 @@ type PipeParameters struct {
 	// +kubebuilder:validation:Optional
 	KMSKeyIdentifier *string `json:"kmsKeyIdentifier,omitempty" tf:"kms_key_identifier,omitempty"`
 
-	// Logging configuration settings for the pipe. Detailed below.
+	// Logging configuration settings for the pipe. See log_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	LogConfiguration *LogConfigurationParameters `json:"logConfiguration,omitempty" tf:"log_configuration,omitempty"`
 
@@ -1718,7 +1718,7 @@ type PipeParameters struct {
 	// +kubebuilder:validation:Optional
 	Source *string `json:"source,omitempty" tf:"source,omitempty"`
 
-	// Parameters to configure a source for the pipe. Detailed below.
+	// Parameters to configure a source for the pipe. See source_parameters Block for details.
 	// +kubebuilder:validation:Optional
 	SourceParameters *SourceParametersParameters `json:"sourceParameters,omitempty" tf:"source_parameters,omitempty"`
 
@@ -1741,7 +1741,7 @@ type PipeParameters struct {
 	// +kubebuilder:validation:Optional
 	Target *string `json:"target,omitempty" tf:"target,omitempty"`
 
-	// Parameters to configure a target for your pipe. Detailed below.
+	// Parameters to configure a target for the pipe. See target_parameters Block for details.
 	// +kubebuilder:validation:Optional
 	TargetParameters *TargetParametersParameters `json:"targetParameters,omitempty" tf:"target_parameters,omitempty"`
 
@@ -1756,224 +1756,224 @@ type PipeParameters struct {
 
 type PipelineParameterInitParameters struct {
 
-	// The name of the container that receives the override. This parameter is required if any override is specified.
+	// Name of parameter to start execution of a SageMaker AI Model Building Pipeline. Maximum length of 256.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Value of parameter to start execution of a SageMaker AI Model Building Pipeline. Maximum length of 1024.
+	// Value of the key-value pair. For environment variables, this is the value of the environment variable.
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type PipelineParameterObservation struct {
 
-	// The name of the container that receives the override. This parameter is required if any override is specified.
+	// Name of parameter to start execution of a SageMaker AI Model Building Pipeline. Maximum length of 256.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Value of parameter to start execution of a SageMaker AI Model Building Pipeline. Maximum length of 1024.
+	// Value of the key-value pair. For environment variables, this is the value of the environment variable.
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type PipelineParameterParameters struct {
 
-	// The name of the container that receives the override. This parameter is required if any override is specified.
+	// Name of parameter to start execution of a SageMaker AI Model Building Pipeline. Maximum length of 256.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// Value of parameter to start execution of a SageMaker AI Model Building Pipeline. Maximum length of 1024.
+	// Value of the key-value pair. For environment variables, this is the value of the environment variable.
 	// +kubebuilder:validation:Optional
 	Value *string `json:"value" tf:"value,omitempty"`
 }
 
 type PlacementConstraintInitParameters struct {
 
-	// A cluster query language expression to apply to the constraint. You cannot specify an expression if the constraint type is distinctInstance. Maximum length of 2,000.
+	// Cluster query language expression to apply to the constraint. You cannot specify an expression if the constraint type is distinctInstance. Maximum length of 2,000.
 	Expression *string `json:"expression,omitempty" tf:"expression,omitempty"`
 
-	// The type of constraint. Use distinctInstance to ensure that each task in a particular group is running on a different container instance. Use memberOf to restrict the selection to a group of valid candidates. Valid Values: distinctInstance, memberOf.
+	// Type of resource to assign to a container. The supported resources include GPU, MEMORY, and VCPU.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type PlacementConstraintObservation struct {
 
-	// A cluster query language expression to apply to the constraint. You cannot specify an expression if the constraint type is distinctInstance. Maximum length of 2,000.
+	// Cluster query language expression to apply to the constraint. You cannot specify an expression if the constraint type is distinctInstance. Maximum length of 2,000.
 	Expression *string `json:"expression,omitempty" tf:"expression,omitempty"`
 
-	// The type of constraint. Use distinctInstance to ensure that each task in a particular group is running on a different container instance. Use memberOf to restrict the selection to a group of valid candidates. Valid Values: distinctInstance, memberOf.
+	// Type of resource to assign to a container. The supported resources include GPU, MEMORY, and VCPU.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type PlacementConstraintParameters struct {
 
-	// A cluster query language expression to apply to the constraint. You cannot specify an expression if the constraint type is distinctInstance. Maximum length of 2,000.
+	// Cluster query language expression to apply to the constraint. You cannot specify an expression if the constraint type is distinctInstance. Maximum length of 2,000.
 	// +kubebuilder:validation:Optional
 	Expression *string `json:"expression,omitempty" tf:"expression,omitempty"`
 
-	// The type of constraint. Use distinctInstance to ensure that each task in a particular group is running on a different container instance. Use memberOf to restrict the selection to a group of valid candidates. Valid Values: distinctInstance, memberOf.
+	// Type of resource to assign to a container. The supported resources include GPU, MEMORY, and VCPU.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type PlacementStrategyInitParameters struct {
 
-	// The field to apply the placement strategy against. For the spread placement strategy, valid values are instanceId (or host, which has the same effect), or any platform or custom attribute that is applied to a container instance, such as attribute:ecs.availability-zone. For the binpack placement strategy, valid values are cpu and memory. For the random placement strategy, this field is not used. Maximum length of 255.
+	// Field to apply the placement strategy against. For the spread placement strategy, valid values are instanceId (or host, which has the same effect), or any platform or custom attribute that is applied to a container instance, such as attribute:ecs.availability-zone. For the binpack placement strategy, valid values are cpu and memory. For the random placement strategy, this field is not used. Maximum length of 255.
 	Field *string `json:"field,omitempty" tf:"field,omitempty"`
 
-	// The type of placement strategy. The random placement strategy randomly places tasks on available candidates. The spread placement strategy spreads placement across available candidates evenly based on the field parameter. The binpack strategy places tasks on available candidates that have the least available amount of the resource that is specified with the field parameter. For example, if you binpack on memory, a task is placed on the instance with the least amount of remaining memory (but still enough to run the task). Valid Values: random, spread, binpack.
+	// Type of resource to assign to a container. The supported resources include GPU, MEMORY, and VCPU.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type PlacementStrategyObservation struct {
 
-	// The field to apply the placement strategy against. For the spread placement strategy, valid values are instanceId (or host, which has the same effect), or any platform or custom attribute that is applied to a container instance, such as attribute:ecs.availability-zone. For the binpack placement strategy, valid values are cpu and memory. For the random placement strategy, this field is not used. Maximum length of 255.
+	// Field to apply the placement strategy against. For the spread placement strategy, valid values are instanceId (or host, which has the same effect), or any platform or custom attribute that is applied to a container instance, such as attribute:ecs.availability-zone. For the binpack placement strategy, valid values are cpu and memory. For the random placement strategy, this field is not used. Maximum length of 255.
 	Field *string `json:"field,omitempty" tf:"field,omitempty"`
 
-	// The type of placement strategy. The random placement strategy randomly places tasks on available candidates. The spread placement strategy spreads placement across available candidates evenly based on the field parameter. The binpack strategy places tasks on available candidates that have the least available amount of the resource that is specified with the field parameter. For example, if you binpack on memory, a task is placed on the instance with the least amount of remaining memory (but still enough to run the task). Valid Values: random, spread, binpack.
+	// Type of resource to assign to a container. The supported resources include GPU, MEMORY, and VCPU.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type PlacementStrategyParameters struct {
 
-	// The field to apply the placement strategy against. For the spread placement strategy, valid values are instanceId (or host, which has the same effect), or any platform or custom attribute that is applied to a container instance, such as attribute:ecs.availability-zone. For the binpack placement strategy, valid values are cpu and memory. For the random placement strategy, this field is not used. Maximum length of 255.
+	// Field to apply the placement strategy against. For the spread placement strategy, valid values are instanceId (or host, which has the same effect), or any platform or custom attribute that is applied to a container instance, such as attribute:ecs.availability-zone. For the binpack placement strategy, valid values are cpu and memory. For the random placement strategy, this field is not used. Maximum length of 255.
 	// +kubebuilder:validation:Optional
 	Field *string `json:"field,omitempty" tf:"field,omitempty"`
 
-	// The type of placement strategy. The random placement strategy randomly places tasks on available candidates. The spread placement strategy spreads placement across available candidates evenly based on the field parameter. The binpack strategy places tasks on available candidates that have the least available amount of the resource that is specified with the field parameter. For example, if you binpack on memory, a task is placed on the instance with the least amount of remaining memory (but still enough to run the task). Valid Values: random, spread, binpack.
+	// Type of resource to assign to a container. The supported resources include GPU, MEMORY, and VCPU.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type RabbitmqBrokerParametersCredentialsInitParameters struct {
 
-	// The ARN of the Secrets Manager secret containing the credentials.
+	// ARN of the Secrets Manager secret containing the basic auth credentials.
 	BasicAuth *string `json:"basicAuth,omitempty" tf:"basic_auth,omitempty"`
 }
 
 type RabbitmqBrokerParametersCredentialsObservation struct {
 
-	// The ARN of the Secrets Manager secret containing the credentials.
+	// ARN of the Secrets Manager secret containing the basic auth credentials.
 	BasicAuth *string `json:"basicAuth,omitempty" tf:"basic_auth,omitempty"`
 }
 
 type RabbitmqBrokerParametersCredentialsParameters struct {
 
-	// The ARN of the Secrets Manager secret containing the credentials.
+	// ARN of the Secrets Manager secret containing the basic auth credentials.
 	// +kubebuilder:validation:Optional
 	BasicAuth *string `json:"basicAuth" tf:"basic_auth,omitempty"`
 }
 
 type RabbitmqBrokerParametersInitParameters struct {
 
-	// The maximum number of records to include in each batch. Maximum value of 10000.
+	// Maximum number of records to include in each batch. Maximum value of 10000.
 	BatchSize *float64 `json:"batchSize,omitempty" tf:"batch_size,omitempty"`
 
-	// The credentials needed to access the resource. Detailed below.
+	// Credentials needed to access the resource. See source_parameters.activemq_broker_parameters.credentials Block for details.
 	Credentials *RabbitmqBrokerParametersCredentialsInitParameters `json:"credentials,omitempty" tf:"credentials,omitempty"`
 
-	// The maximum length of a time to wait for events. Maximum value of 300.
+	// Maximum length of a time to wait for events. Maximum value of 300.
 	MaximumBatchingWindowInSeconds *float64 `json:"maximumBatchingWindowInSeconds,omitempty" tf:"maximum_batching_window_in_seconds,omitempty"`
 
-	// The name of the destination queue to consume. Maximum length of 1000.
+	// Name of the destination queue to consume. Maximum length of 1000.
 	QueueName *string `json:"queueName,omitempty" tf:"queue_name,omitempty"`
 
-	// The name of the virtual host associated with the source broker. Maximum length of 200.
+	// Name of the virtual host associated with the source broker. Maximum length of 200.
 	VirtualHost *string `json:"virtualHost,omitempty" tf:"virtual_host,omitempty"`
 }
 
 type RabbitmqBrokerParametersObservation struct {
 
-	// The maximum number of records to include in each batch. Maximum value of 10000.
+	// Maximum number of records to include in each batch. Maximum value of 10000.
 	BatchSize *float64 `json:"batchSize,omitempty" tf:"batch_size,omitempty"`
 
-	// The credentials needed to access the resource. Detailed below.
+	// Credentials needed to access the resource. See source_parameters.activemq_broker_parameters.credentials Block for details.
 	Credentials *RabbitmqBrokerParametersCredentialsObservation `json:"credentials,omitempty" tf:"credentials,omitempty"`
 
-	// The maximum length of a time to wait for events. Maximum value of 300.
+	// Maximum length of a time to wait for events. Maximum value of 300.
 	MaximumBatchingWindowInSeconds *float64 `json:"maximumBatchingWindowInSeconds,omitempty" tf:"maximum_batching_window_in_seconds,omitempty"`
 
-	// The name of the destination queue to consume. Maximum length of 1000.
+	// Name of the destination queue to consume. Maximum length of 1000.
 	QueueName *string `json:"queueName,omitempty" tf:"queue_name,omitempty"`
 
-	// The name of the virtual host associated with the source broker. Maximum length of 200.
+	// Name of the virtual host associated with the source broker. Maximum length of 200.
 	VirtualHost *string `json:"virtualHost,omitempty" tf:"virtual_host,omitempty"`
 }
 
 type RabbitmqBrokerParametersParameters struct {
 
-	// The maximum number of records to include in each batch. Maximum value of 10000.
+	// Maximum number of records to include in each batch. Maximum value of 10000.
 	// +kubebuilder:validation:Optional
 	BatchSize *float64 `json:"batchSize,omitempty" tf:"batch_size,omitempty"`
 
-	// The credentials needed to access the resource. Detailed below.
+	// Credentials needed to access the resource. See source_parameters.activemq_broker_parameters.credentials Block for details.
 	// +kubebuilder:validation:Optional
 	Credentials *RabbitmqBrokerParametersCredentialsParameters `json:"credentials" tf:"credentials,omitempty"`
 
-	// The maximum length of a time to wait for events. Maximum value of 300.
+	// Maximum length of a time to wait for events. Maximum value of 300.
 	// +kubebuilder:validation:Optional
 	MaximumBatchingWindowInSeconds *float64 `json:"maximumBatchingWindowInSeconds,omitempty" tf:"maximum_batching_window_in_seconds,omitempty"`
 
-	// The name of the destination queue to consume. Maximum length of 1000.
+	// Name of the destination queue to consume. Maximum length of 1000.
 	// +kubebuilder:validation:Optional
 	QueueName *string `json:"queueName" tf:"queue_name,omitempty"`
 
-	// The name of the virtual host associated with the source broker. Maximum length of 200.
+	// Name of the virtual host associated with the source broker. Maximum length of 200.
 	// +kubebuilder:validation:Optional
 	VirtualHost *string `json:"virtualHost,omitempty" tf:"virtual_host,omitempty"`
 }
 
 type RedshiftDataParametersInitParameters struct {
 
-	// The database user name. Required when authenticating using temporary credentials.
+	// Database user name. Required when authenticating using temporary credentials.
 	DBUser *string `json:"dbUser,omitempty" tf:"db_user,omitempty"`
 
-	// The name of the database. Required when authenticating using temporary credentials.
+	// Name of the database. Required when authenticating using temporary credentials.
 	Database *string `json:"database,omitempty" tf:"database,omitempty"`
 
-	// The name or ARN of the secret that enables access to the database. Required when authenticating using Secrets Manager.
+	// Name or ARN of the secret that enables access to the database. Required when authenticating using Secrets Manager.
 	SecretManagerArn *string `json:"secretManagerArn,omitempty" tf:"secret_manager_arn,omitempty"`
 
 	// List of SQL statements text to run, each of maximum length of 100,000.
 	// +listType=set
 	Sqls []*string `json:"sqls,omitempty" tf:"sqls,omitempty"`
 
-	// The name of the SQL statement. You can name the SQL statement when you create it to identify the query.
+	// Name of the SQL statement. You can name the SQL statement when you create it to identify the query.
 	StatementName *string `json:"statementName,omitempty" tf:"statement_name,omitempty"`
 
-	// Indicates whether to send an event back to EventBridge after the SQL statement runs.
+	// Whether to send an event back to EventBridge after the SQL statement runs.
 	WithEvent *bool `json:"withEvent,omitempty" tf:"with_event,omitempty"`
 }
 
 type RedshiftDataParametersObservation struct {
 
-	// The database user name. Required when authenticating using temporary credentials.
+	// Database user name. Required when authenticating using temporary credentials.
 	DBUser *string `json:"dbUser,omitempty" tf:"db_user,omitempty"`
 
-	// The name of the database. Required when authenticating using temporary credentials.
+	// Name of the database. Required when authenticating using temporary credentials.
 	Database *string `json:"database,omitempty" tf:"database,omitempty"`
 
-	// The name or ARN of the secret that enables access to the database. Required when authenticating using Secrets Manager.
+	// Name or ARN of the secret that enables access to the database. Required when authenticating using Secrets Manager.
 	SecretManagerArn *string `json:"secretManagerArn,omitempty" tf:"secret_manager_arn,omitempty"`
 
 	// List of SQL statements text to run, each of maximum length of 100,000.
 	// +listType=set
 	Sqls []*string `json:"sqls,omitempty" tf:"sqls,omitempty"`
 
-	// The name of the SQL statement. You can name the SQL statement when you create it to identify the query.
+	// Name of the SQL statement. You can name the SQL statement when you create it to identify the query.
 	StatementName *string `json:"statementName,omitempty" tf:"statement_name,omitempty"`
 
-	// Indicates whether to send an event back to EventBridge after the SQL statement runs.
+	// Whether to send an event back to EventBridge after the SQL statement runs.
 	WithEvent *bool `json:"withEvent,omitempty" tf:"with_event,omitempty"`
 }
 
 type RedshiftDataParametersParameters struct {
 
-	// The database user name. Required when authenticating using temporary credentials.
+	// Database user name. Required when authenticating using temporary credentials.
 	// +kubebuilder:validation:Optional
 	DBUser *string `json:"dbUser,omitempty" tf:"db_user,omitempty"`
 
-	// The name of the database. Required when authenticating using temporary credentials.
+	// Name of the database. Required when authenticating using temporary credentials.
 	// +kubebuilder:validation:Optional
 	Database *string `json:"database" tf:"database,omitempty"`
 
-	// The name or ARN of the secret that enables access to the database. Required when authenticating using Secrets Manager.
+	// Name or ARN of the secret that enables access to the database. Required when authenticating using Secrets Manager.
 	// +kubebuilder:validation:Optional
 	SecretManagerArn *string `json:"secretManagerArn,omitempty" tf:"secret_manager_arn,omitempty"`
 
@@ -1982,59 +1982,59 @@ type RedshiftDataParametersParameters struct {
 	// +listType=set
 	Sqls []*string `json:"sqls" tf:"sqls,omitempty"`
 
-	// The name of the SQL statement. You can name the SQL statement when you create it to identify the query.
+	// Name of the SQL statement. You can name the SQL statement when you create it to identify the query.
 	// +kubebuilder:validation:Optional
 	StatementName *string `json:"statementName,omitempty" tf:"statement_name,omitempty"`
 
-	// Indicates whether to send an event back to EventBridge after the SQL statement runs.
+	// Whether to send an event back to EventBridge after the SQL statement runs.
 	// +kubebuilder:validation:Optional
 	WithEvent *bool `json:"withEvent,omitempty" tf:"with_event,omitempty"`
 }
 
 type ResourceRequirementInitParameters struct {
 
-	// The type of resource to assign to a container. The supported resources include GPU, MEMORY, and VCPU.
+	// Type of resource to assign to a container. The supported resources include GPU, MEMORY, and VCPU.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
-	// The quantity of the specified resource to reserve for the container. The values vary based on the type specified.
+	// Value of the key-value pair. For environment variables, this is the value of the environment variable.
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type ResourceRequirementObservation struct {
 
-	// The type of resource to assign to a container. The supported resources include GPU, MEMORY, and VCPU.
+	// Type of resource to assign to a container. The supported resources include GPU, MEMORY, and VCPU.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
-	// The quantity of the specified resource to reserve for the container. The values vary based on the type specified.
+	// Value of the key-value pair. For environment variables, this is the value of the environment variable.
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type ResourceRequirementParameters struct {
 
-	// The type of resource to assign to a container. The supported resources include GPU, MEMORY, and VCPU.
+	// Type of resource to assign to a container. The supported resources include GPU, MEMORY, and VCPU.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
 
-	// The quantity of the specified resource to reserve for the container. The values vary based on the type specified.
+	// Value of the key-value pair. For environment variables, this is the value of the environment variable.
 	// +kubebuilder:validation:Optional
 	Value *string `json:"value" tf:"value,omitempty"`
 }
 
 type RetryStrategyInitParameters struct {
 
-	// The number of times to move a job to the RUNNABLE status. If the value of attempts is greater than one, the job is retried on failure the same number of attempts as the value. Maximum value of 10.
+	// Number of times to move a job to the RUNNABLE status. If the value of attempts is greater than one, the job is retried on failure the same number of attempts as the value. Maximum value of 10.
 	Attempts *float64 `json:"attempts,omitempty" tf:"attempts,omitempty"`
 }
 
 type RetryStrategyObservation struct {
 
-	// The number of times to move a job to the RUNNABLE status. If the value of attempts is greater than one, the job is retried on failure the same number of attempts as the value. Maximum value of 10.
+	// Number of times to move a job to the RUNNABLE status. If the value of attempts is greater than one, the job is retried on failure the same number of attempts as the value. Maximum value of 10.
 	Attempts *float64 `json:"attempts,omitempty" tf:"attempts,omitempty"`
 }
 
 type RetryStrategyParameters struct {
 
-	// The number of times to move a job to the RUNNABLE status. If the value of attempts is greater than one, the job is retried on failure the same number of attempts as the value. Maximum value of 10.
+	// Number of times to move a job to the RUNNABLE status. If the value of attempts is greater than one, the job is retried on failure the same number of attempts as the value. Maximum value of 10.
 	// +kubebuilder:validation:Optional
 	Attempts *float64 `json:"attempts,omitempty" tf:"attempts,omitempty"`
 }
@@ -2090,351 +2090,351 @@ type S3LogDestinationParameters struct {
 
 type SagemakerPipelineParametersInitParameters struct {
 
-	// List of Parameter names and values for SageMaker AI Model Building Pipeline execution. Detailed below.
+	// List of Parameter names and values for SageMaker AI Model Building Pipeline execution. See pipeline_parameter Block for details.
 	PipelineParameter []PipelineParameterInitParameters `json:"pipelineParameter,omitempty" tf:"pipeline_parameter,omitempty"`
 }
 
 type SagemakerPipelineParametersObservation struct {
 
-	// List of Parameter names and values for SageMaker AI Model Building Pipeline execution. Detailed below.
+	// List of Parameter names and values for SageMaker AI Model Building Pipeline execution. See pipeline_parameter Block for details.
 	PipelineParameter []PipelineParameterObservation `json:"pipelineParameter,omitempty" tf:"pipeline_parameter,omitempty"`
 }
 
 type SagemakerPipelineParametersParameters struct {
 
-	// List of Parameter names and values for SageMaker AI Model Building Pipeline execution. Detailed below.
+	// List of Parameter names and values for SageMaker AI Model Building Pipeline execution. See pipeline_parameter Block for details.
 	// +kubebuilder:validation:Optional
 	PipelineParameter []PipelineParameterParameters `json:"pipelineParameter,omitempty" tf:"pipeline_parameter,omitempty"`
 }
 
 type SelfManagedKafkaParametersCredentialsInitParameters struct {
 
-	// The ARN of the Secrets Manager secret containing the credentials.
+	// ARN of the Secrets Manager secret containing the basic auth credentials.
 	BasicAuth *string `json:"basicAuth,omitempty" tf:"basic_auth,omitempty"`
 
-	// The ARN of the Secrets Manager secret containing the credentials.
+	// ARN of the Secrets Manager secret containing the credentials.
 	ClientCertificateTLSAuth *string `json:"clientCertificateTlsAuth,omitempty" tf:"client_certificate_tls_auth,omitempty"`
 
-	// The ARN of the Secrets Manager secret containing the credentials.
+	// ARN of the Secrets Manager secret containing the credentials.
 	SaslScram256Auth *string `json:"saslScram256Auth,omitempty" tf:"sasl_scram_256_auth,omitempty"`
 
-	// The ARN of the Secrets Manager secret containing the credentials.
+	// ARN of the Secrets Manager secret containing the credentials.
 	SaslScram512Auth *string `json:"saslScram512Auth,omitempty" tf:"sasl_scram_512_auth,omitempty"`
 }
 
 type SelfManagedKafkaParametersCredentialsObservation struct {
 
-	// The ARN of the Secrets Manager secret containing the credentials.
+	// ARN of the Secrets Manager secret containing the basic auth credentials.
 	BasicAuth *string `json:"basicAuth,omitempty" tf:"basic_auth,omitempty"`
 
-	// The ARN of the Secrets Manager secret containing the credentials.
+	// ARN of the Secrets Manager secret containing the credentials.
 	ClientCertificateTLSAuth *string `json:"clientCertificateTlsAuth,omitempty" tf:"client_certificate_tls_auth,omitempty"`
 
-	// The ARN of the Secrets Manager secret containing the credentials.
+	// ARN of the Secrets Manager secret containing the credentials.
 	SaslScram256Auth *string `json:"saslScram256Auth,omitempty" tf:"sasl_scram_256_auth,omitempty"`
 
-	// The ARN of the Secrets Manager secret containing the credentials.
+	// ARN of the Secrets Manager secret containing the credentials.
 	SaslScram512Auth *string `json:"saslScram512Auth,omitempty" tf:"sasl_scram_512_auth,omitempty"`
 }
 
 type SelfManagedKafkaParametersCredentialsParameters struct {
 
-	// The ARN of the Secrets Manager secret containing the credentials.
+	// ARN of the Secrets Manager secret containing the basic auth credentials.
 	// +kubebuilder:validation:Optional
 	BasicAuth *string `json:"basicAuth,omitempty" tf:"basic_auth,omitempty"`
 
-	// The ARN of the Secrets Manager secret containing the credentials.
+	// ARN of the Secrets Manager secret containing the credentials.
 	// +kubebuilder:validation:Optional
 	ClientCertificateTLSAuth *string `json:"clientCertificateTlsAuth,omitempty" tf:"client_certificate_tls_auth,omitempty"`
 
-	// The ARN of the Secrets Manager secret containing the credentials.
+	// ARN of the Secrets Manager secret containing the credentials.
 	// +kubebuilder:validation:Optional
 	SaslScram256Auth *string `json:"saslScram256Auth,omitempty" tf:"sasl_scram_256_auth,omitempty"`
 
-	// The ARN of the Secrets Manager secret containing the credentials.
+	// ARN of the Secrets Manager secret containing the credentials.
 	// +kubebuilder:validation:Optional
 	SaslScram512Auth *string `json:"saslScram512Auth,omitempty" tf:"sasl_scram_512_auth,omitempty"`
 }
 
 type SelfManagedKafkaParametersInitParameters struct {
 
-	// An array of server URLs. Maximum number of 2 items, each of maximum length 300.
+	// Array of server URLs. Maximum number of 2 items, each of maximum length 300.
 	// +listType=set
 	AdditionalBootstrapServers []*string `json:"additionalBootstrapServers,omitempty" tf:"additional_bootstrap_servers,omitempty"`
 
-	// The maximum number of records to include in each batch. Maximum value of 10000.
+	// Maximum number of records to include in each batch. Maximum value of 10000.
 	BatchSize *float64 `json:"batchSize,omitempty" tf:"batch_size,omitempty"`
 
-	// The name of the destination queue to consume. Maximum value of 200.
+	// Name of the destination queue to consume. Maximum value of 200.
 	ConsumerGroupID *string `json:"consumerGroupId,omitempty" tf:"consumer_group_id,omitempty"`
 
-	// The credentials needed to access the resource. Detailed below.
+	// Credentials needed to access the resource. See source_parameters.activemq_broker_parameters.credentials Block for details.
 	Credentials *SelfManagedKafkaParametersCredentialsInitParameters `json:"credentials,omitempty" tf:"credentials,omitempty"`
 
-	// The maximum length of a time to wait for events. Maximum value of 300.
+	// Maximum length of a time to wait for events. Maximum value of 300.
 	MaximumBatchingWindowInSeconds *float64 `json:"maximumBatchingWindowInSeconds,omitempty" tf:"maximum_batching_window_in_seconds,omitempty"`
 
-	// The ARN of the Secrets Manager secret used for certification.
+	// ARN of the Secrets Manager secret used for certification.
 	ServerRootCACertificate *string `json:"serverRootCaCertificate,omitempty" tf:"server_root_ca_certificate,omitempty"`
 
-	// The position in a stream from which to start reading. Valid values: TRIM_HORIZON, LATEST.
+	// Position in a stream from which to start reading. Valid values: TRIM_HORIZON, LATEST.
 	StartingPosition *string `json:"startingPosition,omitempty" tf:"starting_position,omitempty"`
 
-	// The name of the topic that the pipe will read from. Maximum length of 249.
+	// Name of the topic that the pipe will read from. Maximum length of 249.
 	TopicName *string `json:"topicName,omitempty" tf:"topic_name,omitempty"`
 
-	// This structure specifies the VPC subnets and security groups for the stream, and whether a public IP address is to be used. Detailed below.
+	// VPC subnets and security groups for the stream, and whether a public IP address is to be used. See vpc Block for details.
 	VPC *VPCInitParameters `json:"vpc,omitempty" tf:"vpc,omitempty"`
 }
 
 type SelfManagedKafkaParametersObservation struct {
 
-	// An array of server URLs. Maximum number of 2 items, each of maximum length 300.
+	// Array of server URLs. Maximum number of 2 items, each of maximum length 300.
 	// +listType=set
 	AdditionalBootstrapServers []*string `json:"additionalBootstrapServers,omitempty" tf:"additional_bootstrap_servers,omitempty"`
 
-	// The maximum number of records to include in each batch. Maximum value of 10000.
+	// Maximum number of records to include in each batch. Maximum value of 10000.
 	BatchSize *float64 `json:"batchSize,omitempty" tf:"batch_size,omitempty"`
 
-	// The name of the destination queue to consume. Maximum value of 200.
+	// Name of the destination queue to consume. Maximum value of 200.
 	ConsumerGroupID *string `json:"consumerGroupId,omitempty" tf:"consumer_group_id,omitempty"`
 
-	// The credentials needed to access the resource. Detailed below.
+	// Credentials needed to access the resource. See source_parameters.activemq_broker_parameters.credentials Block for details.
 	Credentials *SelfManagedKafkaParametersCredentialsObservation `json:"credentials,omitempty" tf:"credentials,omitempty"`
 
-	// The maximum length of a time to wait for events. Maximum value of 300.
+	// Maximum length of a time to wait for events. Maximum value of 300.
 	MaximumBatchingWindowInSeconds *float64 `json:"maximumBatchingWindowInSeconds,omitempty" tf:"maximum_batching_window_in_seconds,omitempty"`
 
-	// The ARN of the Secrets Manager secret used for certification.
+	// ARN of the Secrets Manager secret used for certification.
 	ServerRootCACertificate *string `json:"serverRootCaCertificate,omitempty" tf:"server_root_ca_certificate,omitempty"`
 
-	// The position in a stream from which to start reading. Valid values: TRIM_HORIZON, LATEST.
+	// Position in a stream from which to start reading. Valid values: TRIM_HORIZON, LATEST.
 	StartingPosition *string `json:"startingPosition,omitempty" tf:"starting_position,omitempty"`
 
-	// The name of the topic that the pipe will read from. Maximum length of 249.
+	// Name of the topic that the pipe will read from. Maximum length of 249.
 	TopicName *string `json:"topicName,omitempty" tf:"topic_name,omitempty"`
 
-	// This structure specifies the VPC subnets and security groups for the stream, and whether a public IP address is to be used. Detailed below.
+	// VPC subnets and security groups for the stream, and whether a public IP address is to be used. See vpc Block for details.
 	VPC *VPCObservation `json:"vpc,omitempty" tf:"vpc,omitempty"`
 }
 
 type SelfManagedKafkaParametersParameters struct {
 
-	// An array of server URLs. Maximum number of 2 items, each of maximum length 300.
+	// Array of server URLs. Maximum number of 2 items, each of maximum length 300.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	AdditionalBootstrapServers []*string `json:"additionalBootstrapServers,omitempty" tf:"additional_bootstrap_servers,omitempty"`
 
-	// The maximum number of records to include in each batch. Maximum value of 10000.
+	// Maximum number of records to include in each batch. Maximum value of 10000.
 	// +kubebuilder:validation:Optional
 	BatchSize *float64 `json:"batchSize,omitempty" tf:"batch_size,omitempty"`
 
-	// The name of the destination queue to consume. Maximum value of 200.
+	// Name of the destination queue to consume. Maximum value of 200.
 	// +kubebuilder:validation:Optional
 	ConsumerGroupID *string `json:"consumerGroupId,omitempty" tf:"consumer_group_id,omitempty"`
 
-	// The credentials needed to access the resource. Detailed below.
+	// Credentials needed to access the resource. See source_parameters.activemq_broker_parameters.credentials Block for details.
 	// +kubebuilder:validation:Optional
 	Credentials *SelfManagedKafkaParametersCredentialsParameters `json:"credentials,omitempty" tf:"credentials,omitempty"`
 
-	// The maximum length of a time to wait for events. Maximum value of 300.
+	// Maximum length of a time to wait for events. Maximum value of 300.
 	// +kubebuilder:validation:Optional
 	MaximumBatchingWindowInSeconds *float64 `json:"maximumBatchingWindowInSeconds,omitempty" tf:"maximum_batching_window_in_seconds,omitempty"`
 
-	// The ARN of the Secrets Manager secret used for certification.
+	// ARN of the Secrets Manager secret used for certification.
 	// +kubebuilder:validation:Optional
 	ServerRootCACertificate *string `json:"serverRootCaCertificate,omitempty" tf:"server_root_ca_certificate,omitempty"`
 
-	// The position in a stream from which to start reading. Valid values: TRIM_HORIZON, LATEST.
+	// Position in a stream from which to start reading. Valid values: TRIM_HORIZON, LATEST.
 	// +kubebuilder:validation:Optional
 	StartingPosition *string `json:"startingPosition,omitempty" tf:"starting_position,omitempty"`
 
-	// The name of the topic that the pipe will read from. Maximum length of 249.
+	// Name of the topic that the pipe will read from. Maximum length of 249.
 	// +kubebuilder:validation:Optional
 	TopicName *string `json:"topicName" tf:"topic_name,omitempty"`
 
-	// This structure specifies the VPC subnets and security groups for the stream, and whether a public IP address is to be used. Detailed below.
+	// VPC subnets and security groups for the stream, and whether a public IP address is to be used. See vpc Block for details.
 	// +kubebuilder:validation:Optional
 	VPC *VPCParameters `json:"vpc,omitempty" tf:"vpc,omitempty"`
 }
 
 type SourceParametersInitParameters struct {
 
-	// The parameters for using an Active MQ broker as a source. Detailed below.
+	// Parameters for using an Active MQ broker as a source. See activemq_broker_parameters Block for details.
 	ActivemqBrokerParameters *ActivemqBrokerParametersInitParameters `json:"activemqBrokerParameters,omitempty" tf:"activemq_broker_parameters,omitempty"`
 
-	// The parameters for using a DynamoDB stream as a source.  Detailed below.
+	// Parameters for using a DynamoDB stream as a source. See dynamodb_stream_parameters Block for details.
 	DynamodbStreamParameters *DynamodbStreamParametersInitParameters `json:"dynamodbStreamParameters,omitempty" tf:"dynamodb_stream_parameters,omitempty"`
 
-	// The collection of event patterns used to filter events. Detailed below.
+	// Collection of event patterns used to filter events. See filter_criteria Block for details.
 	FilterCriteria *FilterCriteriaInitParameters `json:"filterCriteria,omitempty" tf:"filter_criteria,omitempty"`
 
-	// The parameters for using a Kinesis stream as a source. Detailed below.
+	// Parameters for using a Kinesis stream as a source. See source_parameters.kinesis_stream_parameters Block for details.
 	KinesisStreamParameters *KinesisStreamParametersInitParameters `json:"kinesisStreamParameters,omitempty" tf:"kinesis_stream_parameters,omitempty"`
 
-	// The parameters for using an MSK stream as a source. Detailed below.
+	// Parameters for using an MSK stream as a source. See managed_streaming_kafka_parameters Block for details.
 	ManagedStreamingKafkaParameters *ManagedStreamingKafkaParametersInitParameters `json:"managedStreamingKafkaParameters,omitempty" tf:"managed_streaming_kafka_parameters,omitempty"`
 
-	// The parameters for using a Rabbit MQ broker as a source. Detailed below.
+	// Parameters for using a Rabbit MQ broker as a source. See rabbitmq_broker_parameters Block for details.
 	RabbitmqBrokerParameters *RabbitmqBrokerParametersInitParameters `json:"rabbitmqBrokerParameters,omitempty" tf:"rabbitmq_broker_parameters,omitempty"`
 
-	// The parameters for using a self-managed Apache Kafka stream as a source. Detailed below.
+	// Parameters for using a self-managed Apache Kafka stream as a source. See self_managed_kafka_parameters Block for details.
 	SelfManagedKafkaParameters *SelfManagedKafkaParametersInitParameters `json:"selfManagedKafkaParameters,omitempty" tf:"self_managed_kafka_parameters,omitempty"`
 
-	// The parameters for using a Amazon SQS stream as a source. Detailed below.
+	// Parameters for using an Amazon SQS stream as a source. See source_parameters.sqs_queue_parameters Block for details.
 	SqsQueueParameters *SqsQueueParametersInitParameters `json:"sqsQueueParameters,omitempty" tf:"sqs_queue_parameters,omitempty"`
 }
 
 type SourceParametersObservation struct {
 
-	// The parameters for using an Active MQ broker as a source. Detailed below.
+	// Parameters for using an Active MQ broker as a source. See activemq_broker_parameters Block for details.
 	ActivemqBrokerParameters *ActivemqBrokerParametersObservation `json:"activemqBrokerParameters,omitempty" tf:"activemq_broker_parameters,omitempty"`
 
-	// The parameters for using a DynamoDB stream as a source.  Detailed below.
+	// Parameters for using a DynamoDB stream as a source. See dynamodb_stream_parameters Block for details.
 	DynamodbStreamParameters *DynamodbStreamParametersObservation `json:"dynamodbStreamParameters,omitempty" tf:"dynamodb_stream_parameters,omitempty"`
 
-	// The collection of event patterns used to filter events. Detailed below.
+	// Collection of event patterns used to filter events. See filter_criteria Block for details.
 	FilterCriteria *FilterCriteriaObservation `json:"filterCriteria,omitempty" tf:"filter_criteria,omitempty"`
 
-	// The parameters for using a Kinesis stream as a source. Detailed below.
+	// Parameters for using a Kinesis stream as a source. See source_parameters.kinesis_stream_parameters Block for details.
 	KinesisStreamParameters *KinesisStreamParametersObservation `json:"kinesisStreamParameters,omitempty" tf:"kinesis_stream_parameters,omitempty"`
 
-	// The parameters for using an MSK stream as a source. Detailed below.
+	// Parameters for using an MSK stream as a source. See managed_streaming_kafka_parameters Block for details.
 	ManagedStreamingKafkaParameters *ManagedStreamingKafkaParametersObservation `json:"managedStreamingKafkaParameters,omitempty" tf:"managed_streaming_kafka_parameters,omitempty"`
 
-	// The parameters for using a Rabbit MQ broker as a source. Detailed below.
+	// Parameters for using a Rabbit MQ broker as a source. See rabbitmq_broker_parameters Block for details.
 	RabbitmqBrokerParameters *RabbitmqBrokerParametersObservation `json:"rabbitmqBrokerParameters,omitempty" tf:"rabbitmq_broker_parameters,omitempty"`
 
-	// The parameters for using a self-managed Apache Kafka stream as a source. Detailed below.
+	// Parameters for using a self-managed Apache Kafka stream as a source. See self_managed_kafka_parameters Block for details.
 	SelfManagedKafkaParameters *SelfManagedKafkaParametersObservation `json:"selfManagedKafkaParameters,omitempty" tf:"self_managed_kafka_parameters,omitempty"`
 
-	// The parameters for using a Amazon SQS stream as a source. Detailed below.
+	// Parameters for using an Amazon SQS stream as a source. See source_parameters.sqs_queue_parameters Block for details.
 	SqsQueueParameters *SqsQueueParametersObservation `json:"sqsQueueParameters,omitempty" tf:"sqs_queue_parameters,omitempty"`
 }
 
 type SourceParametersParameters struct {
 
-	// The parameters for using an Active MQ broker as a source. Detailed below.
+	// Parameters for using an Active MQ broker as a source. See activemq_broker_parameters Block for details.
 	// +kubebuilder:validation:Optional
 	ActivemqBrokerParameters *ActivemqBrokerParametersParameters `json:"activemqBrokerParameters,omitempty" tf:"activemq_broker_parameters,omitempty"`
 
-	// The parameters for using a DynamoDB stream as a source.  Detailed below.
+	// Parameters for using a DynamoDB stream as a source. See dynamodb_stream_parameters Block for details.
 	// +kubebuilder:validation:Optional
 	DynamodbStreamParameters *DynamodbStreamParametersParameters `json:"dynamodbStreamParameters,omitempty" tf:"dynamodb_stream_parameters,omitempty"`
 
-	// The collection of event patterns used to filter events. Detailed below.
+	// Collection of event patterns used to filter events. See filter_criteria Block for details.
 	// +kubebuilder:validation:Optional
 	FilterCriteria *FilterCriteriaParameters `json:"filterCriteria,omitempty" tf:"filter_criteria,omitempty"`
 
-	// The parameters for using a Kinesis stream as a source. Detailed below.
+	// Parameters for using a Kinesis stream as a source. See source_parameters.kinesis_stream_parameters Block for details.
 	// +kubebuilder:validation:Optional
 	KinesisStreamParameters *KinesisStreamParametersParameters `json:"kinesisStreamParameters,omitempty" tf:"kinesis_stream_parameters,omitempty"`
 
-	// The parameters for using an MSK stream as a source. Detailed below.
+	// Parameters for using an MSK stream as a source. See managed_streaming_kafka_parameters Block for details.
 	// +kubebuilder:validation:Optional
 	ManagedStreamingKafkaParameters *ManagedStreamingKafkaParametersParameters `json:"managedStreamingKafkaParameters,omitempty" tf:"managed_streaming_kafka_parameters,omitempty"`
 
-	// The parameters for using a Rabbit MQ broker as a source. Detailed below.
+	// Parameters for using a Rabbit MQ broker as a source. See rabbitmq_broker_parameters Block for details.
 	// +kubebuilder:validation:Optional
 	RabbitmqBrokerParameters *RabbitmqBrokerParametersParameters `json:"rabbitmqBrokerParameters,omitempty" tf:"rabbitmq_broker_parameters,omitempty"`
 
-	// The parameters for using a self-managed Apache Kafka stream as a source. Detailed below.
+	// Parameters for using a self-managed Apache Kafka stream as a source. See self_managed_kafka_parameters Block for details.
 	// +kubebuilder:validation:Optional
 	SelfManagedKafkaParameters *SelfManagedKafkaParametersParameters `json:"selfManagedKafkaParameters,omitempty" tf:"self_managed_kafka_parameters,omitempty"`
 
-	// The parameters for using a Amazon SQS stream as a source. Detailed below.
+	// Parameters for using an Amazon SQS stream as a source. See source_parameters.sqs_queue_parameters Block for details.
 	// +kubebuilder:validation:Optional
 	SqsQueueParameters *SqsQueueParametersParameters `json:"sqsQueueParameters,omitempty" tf:"sqs_queue_parameters,omitempty"`
 }
 
 type SqsQueueParametersInitParameters struct {
 
-	// The maximum number of records to include in each batch. Maximum value of 10000.
+	// Maximum number of records to include in each batch. Maximum value of 10000.
 	BatchSize *float64 `json:"batchSize,omitempty" tf:"batch_size,omitempty"`
 
-	// The maximum length of a time to wait for events. Maximum value of 300.
+	// Maximum length of a time to wait for events. Maximum value of 300.
 	MaximumBatchingWindowInSeconds *float64 `json:"maximumBatchingWindowInSeconds,omitempty" tf:"maximum_batching_window_in_seconds,omitempty"`
 }
 
 type SqsQueueParametersObservation struct {
 
-	// The maximum number of records to include in each batch. Maximum value of 10000.
+	// Maximum number of records to include in each batch. Maximum value of 10000.
 	BatchSize *float64 `json:"batchSize,omitempty" tf:"batch_size,omitempty"`
 
-	// The maximum length of a time to wait for events. Maximum value of 300.
+	// Maximum length of a time to wait for events. Maximum value of 300.
 	MaximumBatchingWindowInSeconds *float64 `json:"maximumBatchingWindowInSeconds,omitempty" tf:"maximum_batching_window_in_seconds,omitempty"`
 }
 
 type SqsQueueParametersParameters struct {
 
-	// The maximum number of records to include in each batch. Maximum value of 10000.
+	// Maximum number of records to include in each batch. Maximum value of 10000.
 	// +kubebuilder:validation:Optional
 	BatchSize *float64 `json:"batchSize,omitempty" tf:"batch_size,omitempty"`
 
-	// The maximum length of a time to wait for events. Maximum value of 300.
+	// Maximum length of a time to wait for events. Maximum value of 300.
 	// +kubebuilder:validation:Optional
 	MaximumBatchingWindowInSeconds *float64 `json:"maximumBatchingWindowInSeconds,omitempty" tf:"maximum_batching_window_in_seconds,omitempty"`
 }
 
 type StepFunctionStateMachineParametersInitParameters struct {
 
-	// Specify whether to invoke the function synchronously or asynchronously. Valid Values: REQUEST_RESPONSE, FIRE_AND_FORGET.
+	// Whether to invoke the function synchronously or asynchronously. Valid Values: REQUEST_RESPONSE, FIRE_AND_FORGET.
 	InvocationType *string `json:"invocationType,omitempty" tf:"invocation_type,omitempty"`
 }
 
 type StepFunctionStateMachineParametersObservation struct {
 
-	// Specify whether to invoke the function synchronously or asynchronously. Valid Values: REQUEST_RESPONSE, FIRE_AND_FORGET.
+	// Whether to invoke the function synchronously or asynchronously. Valid Values: REQUEST_RESPONSE, FIRE_AND_FORGET.
 	InvocationType *string `json:"invocationType,omitempty" tf:"invocation_type,omitempty"`
 }
 
 type StepFunctionStateMachineParametersParameters struct {
 
-	// Specify whether to invoke the function synchronously or asynchronously. Valid Values: REQUEST_RESPONSE, FIRE_AND_FORGET.
+	// Whether to invoke the function synchronously or asynchronously. Valid Values: REQUEST_RESPONSE, FIRE_AND_FORGET.
 	// +kubebuilder:validation:Optional
 	InvocationType *string `json:"invocationType" tf:"invocation_type,omitempty"`
 }
 
 type TargetParametersHTTPParametersInitParameters struct {
 
-	// Key-value mapping of the headers that need to be sent as part of request invoking the API Gateway REST API or EventBridge ApiDestination. Detailed below.
+	// Key-value mapping of the headers that need to be sent as part of request invoking the API Gateway REST API or EventBridge ApiDestination.
 	// +mapType=granular
 	HeaderParameters map[string]*string `json:"headerParameters,omitempty" tf:"header_parameters,omitempty"`
 
-	// The path parameter values to be used to populate API Gateway REST API or EventBridge ApiDestination path wildcards ("*").
+	// Path parameter values used to populate API Gateway REST API or EventBridge ApiDestination path wildcards ("*").
 	PathParameterValues []*string `json:"pathParameterValues,omitempty" tf:"path_parameter_values,omitempty"`
 
-	// Key-value mapping of the query strings that need to be sent as part of request invoking the API Gateway REST API or EventBridge ApiDestination. Detailed below.
+	// Key-value mapping of the query strings that need to be sent as part of request invoking the API Gateway REST API or EventBridge ApiDestination.
 	// +mapType=granular
 	QueryStringParameters map[string]*string `json:"queryStringParameters,omitempty" tf:"query_string_parameters,omitempty"`
 }
 
 type TargetParametersHTTPParametersObservation struct {
 
-	// Key-value mapping of the headers that need to be sent as part of request invoking the API Gateway REST API or EventBridge ApiDestination. Detailed below.
+	// Key-value mapping of the headers that need to be sent as part of request invoking the API Gateway REST API or EventBridge ApiDestination.
 	// +mapType=granular
 	HeaderParameters map[string]*string `json:"headerParameters,omitempty" tf:"header_parameters,omitempty"`
 
-	// The path parameter values to be used to populate API Gateway REST API or EventBridge ApiDestination path wildcards ("*").
+	// Path parameter values used to populate API Gateway REST API or EventBridge ApiDestination path wildcards ("*").
 	PathParameterValues []*string `json:"pathParameterValues,omitempty" tf:"path_parameter_values,omitempty"`
 
-	// Key-value mapping of the query strings that need to be sent as part of request invoking the API Gateway REST API or EventBridge ApiDestination. Detailed below.
+	// Key-value mapping of the query strings that need to be sent as part of request invoking the API Gateway REST API or EventBridge ApiDestination.
 	// +mapType=granular
 	QueryStringParameters map[string]*string `json:"queryStringParameters,omitempty" tf:"query_string_parameters,omitempty"`
 }
 
 type TargetParametersHTTPParametersParameters struct {
 
-	// Key-value mapping of the headers that need to be sent as part of request invoking the API Gateway REST API or EventBridge ApiDestination. Detailed below.
+	// Key-value mapping of the headers that need to be sent as part of request invoking the API Gateway REST API or EventBridge ApiDestination.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	HeaderParameters map[string]*string `json:"headerParameters,omitempty" tf:"header_parameters,omitempty"`
 
-	// The path parameter values to be used to populate API Gateway REST API or EventBridge ApiDestination path wildcards ("*").
+	// Path parameter values used to populate API Gateway REST API or EventBridge ApiDestination path wildcards ("*").
 	// +kubebuilder:validation:Optional
 	PathParameterValues []*string `json:"pathParameterValues,omitempty" tf:"path_parameter_values,omitempty"`
 
-	// Key-value mapping of the query strings that need to be sent as part of request invoking the API Gateway REST API or EventBridge ApiDestination. Detailed below.
+	// Key-value mapping of the query strings that need to be sent as part of request invoking the API Gateway REST API or EventBridge ApiDestination.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	QueryStringParameters map[string]*string `json:"queryStringParameters,omitempty" tf:"query_string_parameters,omitempty"`
@@ -2442,120 +2442,120 @@ type TargetParametersHTTPParametersParameters struct {
 
 type TargetParametersInitParameters struct {
 
-	// The parameters for using an AWS Batch job as a target. Detailed below.
+	// Parameters for using an AWS Batch job as a target. See batch_job_parameters Block for details.
 	BatchJobParameters *BatchJobParametersInitParameters `json:"batchJobParameters,omitempty" tf:"batch_job_parameters,omitempty"`
 
-	// The parameters for using an CloudWatch Logs log stream as a target. Detailed below.
+	// Parameters for using a CloudWatch Logs log stream as a target. See cloudwatch_logs_parameters Block for details.
 	CloudwatchLogsParameters *CloudwatchLogsParametersInitParameters `json:"cloudwatchLogsParameters,omitempty" tf:"cloudwatch_logs_parameters,omitempty"`
 
-	// The parameters for using an Amazon ECS task as a target. Detailed below.
+	// Parameters for using an Amazon ECS task as a target. See ecs_task_parameters Block for details.
 	EcsTaskParameters *EcsTaskParametersInitParameters `json:"ecsTaskParameters,omitempty" tf:"ecs_task_parameters,omitempty"`
 
-	// The parameters for using an EventBridge event bus as a target. Detailed below.
+	// Parameters for using an EventBridge event bus as a target. See eventbridge_event_bus_parameters Block for details.
 	EventbridgeEventBusParameters *EventbridgeEventBusParametersInitParameters `json:"eventbridgeEventBusParameters,omitempty" tf:"eventbridge_event_bus_parameters,omitempty"`
 
-	// These are custom parameter to be used when the target is an API Gateway REST APIs or EventBridge ApiDestinations. Detailed below.
+	// Custom parameters used when the target is an API Gateway REST API or EventBridge ApiDestination. See target_parameters.http_parameters Block for details.
 	HTTPParameters *TargetParametersHTTPParametersInitParameters `json:"httpParameters,omitempty" tf:"http_parameters,omitempty"`
 
 	// Valid JSON text passed to the target. In this case, nothing from the event itself is passed to the target. Maximum length of 8192 characters.
 	InputTemplate *string `json:"inputTemplate,omitempty" tf:"input_template,omitempty"`
 
-	// The parameters for using a Kinesis stream as a source. Detailed below.
+	// Parameters for using a Kinesis stream as a target. See target_parameters.kinesis_stream_parameters Block for details.
 	KinesisStreamParameters *TargetParametersKinesisStreamParametersInitParameters `json:"kinesisStreamParameters,omitempty" tf:"kinesis_stream_parameters,omitempty"`
 
-	// The parameters for using a Lambda function as a target. Detailed below.
+	// Parameters for using a Lambda function as a target. See lambda_function_parameters Block for details.
 	LambdaFunctionParameters *LambdaFunctionParametersInitParameters `json:"lambdaFunctionParameters,omitempty" tf:"lambda_function_parameters,omitempty"`
 
-	// These are custom parameters to be used when the target is a Amazon Redshift cluster to invoke the Amazon Redshift Data API BatchExecuteStatement. Detailed below.
+	// Custom parameters used when the target is an Amazon Redshift cluster to invoke the Amazon Redshift Data API BatchExecuteStatement. See redshift_data_parameters Block for details.
 	RedshiftDataParameters *RedshiftDataParametersInitParameters `json:"redshiftDataParameters,omitempty" tf:"redshift_data_parameters,omitempty"`
 
-	// The parameters for using a SageMaker AI pipeline as a target. Detailed below.
+	// Parameters for using a SageMaker AI pipeline as a target. See sagemaker_pipeline_parameters Block for details.
 	SagemakerPipelineParameters *SagemakerPipelineParametersInitParameters `json:"sagemakerPipelineParameters,omitempty" tf:"sagemaker_pipeline_parameters,omitempty"`
 
-	// The parameters for using a Amazon SQS stream as a target. Detailed below.
+	// Parameters for using an Amazon SQS stream as a target. See target_parameters.sqs_queue_parameters Block for details.
 	SqsQueueParameters *TargetParametersSqsQueueParametersInitParameters `json:"sqsQueueParameters,omitempty" tf:"sqs_queue_parameters,omitempty"`
 
-	// The parameters for using a Step Functions state machine as a target. Detailed below.
+	// Parameters for using a Step Functions state machine as a target. See step_function_state_machine_parameters Block for details.
 	StepFunctionStateMachineParameters *StepFunctionStateMachineParametersInitParameters `json:"stepFunctionStateMachineParameters,omitempty" tf:"step_function_state_machine_parameters,omitempty"`
 }
 
 type TargetParametersKinesisStreamParametersInitParameters struct {
 
-	// Determines which shard in the stream the data record is assigned to. Partition keys are Unicode strings with a maximum length limit of 256 characters for each key. Amazon Kinesis Data Streams uses the partition key as input to a hash function that maps the partition key and associated data to a specific shard. Specifically, an MD5 hash function is used to map partition keys to 128-bit integer values and to map associated data records to shards. As a result of this hashing mechanism, all data records with the same partition key map to the same shard within the stream.
+	// Value used to determine which shard in the stream the data record is assigned to. Partition keys are Unicode strings with a maximum length limit of 256 characters for each key. Amazon Kinesis Data Streams uses the partition key as input to a hash function that maps the partition key and associated data to a specific shard. Specifically, an MD5 hash function is used to map partition keys to 128-bit integer values and to map associated data records to shards. As a result of this hashing mechanism, all data records with the same partition key map to the same shard within the stream.
 	PartitionKey *string `json:"partitionKey,omitempty" tf:"partition_key,omitempty"`
 }
 
 type TargetParametersKinesisStreamParametersObservation struct {
 
-	// Determines which shard in the stream the data record is assigned to. Partition keys are Unicode strings with a maximum length limit of 256 characters for each key. Amazon Kinesis Data Streams uses the partition key as input to a hash function that maps the partition key and associated data to a specific shard. Specifically, an MD5 hash function is used to map partition keys to 128-bit integer values and to map associated data records to shards. As a result of this hashing mechanism, all data records with the same partition key map to the same shard within the stream.
+	// Value used to determine which shard in the stream the data record is assigned to. Partition keys are Unicode strings with a maximum length limit of 256 characters for each key. Amazon Kinesis Data Streams uses the partition key as input to a hash function that maps the partition key and associated data to a specific shard. Specifically, an MD5 hash function is used to map partition keys to 128-bit integer values and to map associated data records to shards. As a result of this hashing mechanism, all data records with the same partition key map to the same shard within the stream.
 	PartitionKey *string `json:"partitionKey,omitempty" tf:"partition_key,omitempty"`
 }
 
 type TargetParametersKinesisStreamParametersParameters struct {
 
-	// Determines which shard in the stream the data record is assigned to. Partition keys are Unicode strings with a maximum length limit of 256 characters for each key. Amazon Kinesis Data Streams uses the partition key as input to a hash function that maps the partition key and associated data to a specific shard. Specifically, an MD5 hash function is used to map partition keys to 128-bit integer values and to map associated data records to shards. As a result of this hashing mechanism, all data records with the same partition key map to the same shard within the stream.
+	// Value used to determine which shard in the stream the data record is assigned to. Partition keys are Unicode strings with a maximum length limit of 256 characters for each key. Amazon Kinesis Data Streams uses the partition key as input to a hash function that maps the partition key and associated data to a specific shard. Specifically, an MD5 hash function is used to map partition keys to 128-bit integer values and to map associated data records to shards. As a result of this hashing mechanism, all data records with the same partition key map to the same shard within the stream.
 	// +kubebuilder:validation:Optional
 	PartitionKey *string `json:"partitionKey" tf:"partition_key,omitempty"`
 }
 
 type TargetParametersObservation struct {
 
-	// The parameters for using an AWS Batch job as a target. Detailed below.
+	// Parameters for using an AWS Batch job as a target. See batch_job_parameters Block for details.
 	BatchJobParameters *BatchJobParametersObservation `json:"batchJobParameters,omitempty" tf:"batch_job_parameters,omitempty"`
 
-	// The parameters for using an CloudWatch Logs log stream as a target. Detailed below.
+	// Parameters for using a CloudWatch Logs log stream as a target. See cloudwatch_logs_parameters Block for details.
 	CloudwatchLogsParameters *CloudwatchLogsParametersObservation `json:"cloudwatchLogsParameters,omitempty" tf:"cloudwatch_logs_parameters,omitempty"`
 
-	// The parameters for using an Amazon ECS task as a target. Detailed below.
+	// Parameters for using an Amazon ECS task as a target. See ecs_task_parameters Block for details.
 	EcsTaskParameters *EcsTaskParametersObservation `json:"ecsTaskParameters,omitempty" tf:"ecs_task_parameters,omitempty"`
 
-	// The parameters for using an EventBridge event bus as a target. Detailed below.
+	// Parameters for using an EventBridge event bus as a target. See eventbridge_event_bus_parameters Block for details.
 	EventbridgeEventBusParameters *EventbridgeEventBusParametersObservation `json:"eventbridgeEventBusParameters,omitempty" tf:"eventbridge_event_bus_parameters,omitempty"`
 
-	// These are custom parameter to be used when the target is an API Gateway REST APIs or EventBridge ApiDestinations. Detailed below.
+	// Custom parameters used when the target is an API Gateway REST API or EventBridge ApiDestination. See target_parameters.http_parameters Block for details.
 	HTTPParameters *TargetParametersHTTPParametersObservation `json:"httpParameters,omitempty" tf:"http_parameters,omitempty"`
 
 	// Valid JSON text passed to the target. In this case, nothing from the event itself is passed to the target. Maximum length of 8192 characters.
 	InputTemplate *string `json:"inputTemplate,omitempty" tf:"input_template,omitempty"`
 
-	// The parameters for using a Kinesis stream as a source. Detailed below.
+	// Parameters for using a Kinesis stream as a target. See target_parameters.kinesis_stream_parameters Block for details.
 	KinesisStreamParameters *TargetParametersKinesisStreamParametersObservation `json:"kinesisStreamParameters,omitempty" tf:"kinesis_stream_parameters,omitempty"`
 
-	// The parameters for using a Lambda function as a target. Detailed below.
+	// Parameters for using a Lambda function as a target. See lambda_function_parameters Block for details.
 	LambdaFunctionParameters *LambdaFunctionParametersObservation `json:"lambdaFunctionParameters,omitempty" tf:"lambda_function_parameters,omitempty"`
 
-	// These are custom parameters to be used when the target is a Amazon Redshift cluster to invoke the Amazon Redshift Data API BatchExecuteStatement. Detailed below.
+	// Custom parameters used when the target is an Amazon Redshift cluster to invoke the Amazon Redshift Data API BatchExecuteStatement. See redshift_data_parameters Block for details.
 	RedshiftDataParameters *RedshiftDataParametersObservation `json:"redshiftDataParameters,omitempty" tf:"redshift_data_parameters,omitempty"`
 
-	// The parameters for using a SageMaker AI pipeline as a target. Detailed below.
+	// Parameters for using a SageMaker AI pipeline as a target. See sagemaker_pipeline_parameters Block for details.
 	SagemakerPipelineParameters *SagemakerPipelineParametersObservation `json:"sagemakerPipelineParameters,omitempty" tf:"sagemaker_pipeline_parameters,omitempty"`
 
-	// The parameters for using a Amazon SQS stream as a target. Detailed below.
+	// Parameters for using an Amazon SQS stream as a target. See target_parameters.sqs_queue_parameters Block for details.
 	SqsQueueParameters *TargetParametersSqsQueueParametersObservation `json:"sqsQueueParameters,omitempty" tf:"sqs_queue_parameters,omitempty"`
 
-	// The parameters for using a Step Functions state machine as a target. Detailed below.
+	// Parameters for using a Step Functions state machine as a target. See step_function_state_machine_parameters Block for details.
 	StepFunctionStateMachineParameters *StepFunctionStateMachineParametersObservation `json:"stepFunctionStateMachineParameters,omitempty" tf:"step_function_state_machine_parameters,omitempty"`
 }
 
 type TargetParametersParameters struct {
 
-	// The parameters for using an AWS Batch job as a target. Detailed below.
+	// Parameters for using an AWS Batch job as a target. See batch_job_parameters Block for details.
 	// +kubebuilder:validation:Optional
 	BatchJobParameters *BatchJobParametersParameters `json:"batchJobParameters,omitempty" tf:"batch_job_parameters,omitempty"`
 
-	// The parameters for using an CloudWatch Logs log stream as a target. Detailed below.
+	// Parameters for using a CloudWatch Logs log stream as a target. See cloudwatch_logs_parameters Block for details.
 	// +kubebuilder:validation:Optional
 	CloudwatchLogsParameters *CloudwatchLogsParametersParameters `json:"cloudwatchLogsParameters,omitempty" tf:"cloudwatch_logs_parameters,omitempty"`
 
-	// The parameters for using an Amazon ECS task as a target. Detailed below.
+	// Parameters for using an Amazon ECS task as a target. See ecs_task_parameters Block for details.
 	// +kubebuilder:validation:Optional
 	EcsTaskParameters *EcsTaskParametersParameters `json:"ecsTaskParameters,omitempty" tf:"ecs_task_parameters,omitempty"`
 
-	// The parameters for using an EventBridge event bus as a target. Detailed below.
+	// Parameters for using an EventBridge event bus as a target. See eventbridge_event_bus_parameters Block for details.
 	// +kubebuilder:validation:Optional
 	EventbridgeEventBusParameters *EventbridgeEventBusParametersParameters `json:"eventbridgeEventBusParameters,omitempty" tf:"eventbridge_event_bus_parameters,omitempty"`
 
-	// These are custom parameter to be used when the target is an API Gateway REST APIs or EventBridge ApiDestinations. Detailed below.
+	// Custom parameters used when the target is an API Gateway REST API or EventBridge ApiDestination. See target_parameters.http_parameters Block for details.
 	// +kubebuilder:validation:Optional
 	HTTPParameters *TargetParametersHTTPParametersParameters `json:"httpParameters,omitempty" tf:"http_parameters,omitempty"`
 
@@ -2563,56 +2563,56 @@ type TargetParametersParameters struct {
 	// +kubebuilder:validation:Optional
 	InputTemplate *string `json:"inputTemplate,omitempty" tf:"input_template,omitempty"`
 
-	// The parameters for using a Kinesis stream as a source. Detailed below.
+	// Parameters for using a Kinesis stream as a target. See target_parameters.kinesis_stream_parameters Block for details.
 	// +kubebuilder:validation:Optional
 	KinesisStreamParameters *TargetParametersKinesisStreamParametersParameters `json:"kinesisStreamParameters,omitempty" tf:"kinesis_stream_parameters,omitempty"`
 
-	// The parameters for using a Lambda function as a target. Detailed below.
+	// Parameters for using a Lambda function as a target. See lambda_function_parameters Block for details.
 	// +kubebuilder:validation:Optional
 	LambdaFunctionParameters *LambdaFunctionParametersParameters `json:"lambdaFunctionParameters,omitempty" tf:"lambda_function_parameters,omitempty"`
 
-	// These are custom parameters to be used when the target is a Amazon Redshift cluster to invoke the Amazon Redshift Data API BatchExecuteStatement. Detailed below.
+	// Custom parameters used when the target is an Amazon Redshift cluster to invoke the Amazon Redshift Data API BatchExecuteStatement. See redshift_data_parameters Block for details.
 	// +kubebuilder:validation:Optional
 	RedshiftDataParameters *RedshiftDataParametersParameters `json:"redshiftDataParameters,omitempty" tf:"redshift_data_parameters,omitempty"`
 
-	// The parameters for using a SageMaker AI pipeline as a target. Detailed below.
+	// Parameters for using a SageMaker AI pipeline as a target. See sagemaker_pipeline_parameters Block for details.
 	// +kubebuilder:validation:Optional
 	SagemakerPipelineParameters *SagemakerPipelineParametersParameters `json:"sagemakerPipelineParameters,omitempty" tf:"sagemaker_pipeline_parameters,omitempty"`
 
-	// The parameters for using a Amazon SQS stream as a target. Detailed below.
+	// Parameters for using an Amazon SQS stream as a target. See target_parameters.sqs_queue_parameters Block for details.
 	// +kubebuilder:validation:Optional
 	SqsQueueParameters *TargetParametersSqsQueueParametersParameters `json:"sqsQueueParameters,omitempty" tf:"sqs_queue_parameters,omitempty"`
 
-	// The parameters for using a Step Functions state machine as a target. Detailed below.
+	// Parameters for using a Step Functions state machine as a target. See step_function_state_machine_parameters Block for details.
 	// +kubebuilder:validation:Optional
 	StepFunctionStateMachineParameters *StepFunctionStateMachineParametersParameters `json:"stepFunctionStateMachineParameters,omitempty" tf:"step_function_state_machine_parameters,omitempty"`
 }
 
 type TargetParametersSqsQueueParametersInitParameters struct {
 
-	// This parameter applies only to FIFO (first-in-first-out) queues. The token used for deduplication of sent messages.
+	// Token used for deduplication of sent messages. This parameter applies only to FIFO (first-in-first-out) queues.
 	MessageDeduplicationID *string `json:"messageDeduplicationId,omitempty" tf:"message_deduplication_id,omitempty"`
 
-	// The FIFO message group ID to use as the target.
+	// FIFO message group ID to use as the target.
 	MessageGroupID *string `json:"messageGroupId,omitempty" tf:"message_group_id,omitempty"`
 }
 
 type TargetParametersSqsQueueParametersObservation struct {
 
-	// This parameter applies only to FIFO (first-in-first-out) queues. The token used for deduplication of sent messages.
+	// Token used for deduplication of sent messages. This parameter applies only to FIFO (first-in-first-out) queues.
 	MessageDeduplicationID *string `json:"messageDeduplicationId,omitempty" tf:"message_deduplication_id,omitempty"`
 
-	// The FIFO message group ID to use as the target.
+	// FIFO message group ID to use as the target.
 	MessageGroupID *string `json:"messageGroupId,omitempty" tf:"message_group_id,omitempty"`
 }
 
 type TargetParametersSqsQueueParametersParameters struct {
 
-	// This parameter applies only to FIFO (first-in-first-out) queues. The token used for deduplication of sent messages.
+	// Token used for deduplication of sent messages. This parameter applies only to FIFO (first-in-first-out) queues.
 	// +kubebuilder:validation:Optional
 	MessageDeduplicationID *string `json:"messageDeduplicationId,omitempty" tf:"message_deduplication_id,omitempty"`
 
-	// The FIFO message group ID to use as the target.
+	// FIFO message group ID to use as the target.
 	// +kubebuilder:validation:Optional
 	MessageGroupID *string `json:"messageGroupId,omitempty" tf:"message_group_id,omitempty"`
 }

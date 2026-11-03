@@ -125,7 +125,7 @@ type BrowserObservation struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
@@ -187,38 +187,38 @@ type BrowserParameters struct {
 
 type BrowserSigningInitParameters struct {
 
-	// Whether browser signing is enabled. When enabled, the browser cryptographically signs HTTP requests to identify itself as an AI agent to bot control vendors.
+	// Whether to enable browser signing. When enabled, the browser cryptographically signs HTTP requests to identify itself as an AI agent to bot control vendors.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 }
 
 type BrowserSigningObservation struct {
 
-	// Whether browser signing is enabled. When enabled, the browser cryptographically signs HTTP requests to identify itself as an AI agent to bot control vendors.
+	// Whether to enable browser signing. When enabled, the browser cryptographically signs HTTP requests to identify itself as an AI agent to bot control vendors.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 }
 
 type BrowserSigningParameters struct {
 
-	// Whether browser signing is enabled. When enabled, the browser cryptographically signs HTTP requests to identify itself as an AI agent to bot control vendors.
+	// Whether to enable browser signing. When enabled, the browser cryptographically signs HTTP requests to identify itself as an AI agent to bot control vendors.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 }
 
 type CertificateInitParameters struct {
 
-	// Location from which to retrieve the certificate. See certificates.location below.
+	// Location from which to retrieve the certificate. See certificate.location below.
 	Location *LocationInitParameters `json:"location,omitempty" tf:"location,omitempty"`
 }
 
 type CertificateObservation struct {
 
-	// Location from which to retrieve the certificate. See certificates.location below.
+	// Location from which to retrieve the certificate. See certificate.location below.
 	Location *LocationObservation `json:"location,omitempty" tf:"location,omitempty"`
 }
 
 type CertificateParameters struct {
 
-	// Location from which to retrieve the certificate. See certificates.location below.
+	// Location from which to retrieve the certificate. See certificate.location below.
 	// +kubebuilder:validation:Optional
 	Location *LocationParameters `json:"location,omitempty" tf:"location,omitempty"`
 }
@@ -360,7 +360,7 @@ type RecordingParameters struct {
 
 type S3LocationInitParameters struct {
 
-	// Name of the S3 bucket where recordings are stored.
+	// Name of the S3 bucket.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/s3/v1beta1.Bucket
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
@@ -372,22 +372,22 @@ type S3LocationInitParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketSelector *v2.NamespacedSelector `json:"bucketSelector,omitempty" tf:"-"`
 
-	// S3 key prefix for recording files.
+	// Prefix for objects in the S3 bucket.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 }
 
 type S3LocationObservation struct {
 
-	// Name of the S3 bucket where recordings are stored.
+	// Name of the S3 bucket.
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
-	// S3 key prefix for recording files.
+	// Prefix for objects in the S3 bucket.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 }
 
 type S3LocationParameters struct {
 
-	// Name of the S3 bucket where recordings are stored.
+	// Name of the S3 bucket.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/s3/v1beta1.Bucket
 	// +kubebuilder:validation:Optional
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
@@ -400,7 +400,7 @@ type S3LocationParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketSelector *v2.NamespacedSelector `json:"bucketSelector,omitempty" tf:"-"`
 
-	// S3 key prefix for recording files.
+	// Prefix for objects in the S3 bucket.
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix" tf:"prefix,omitempty"`
 }

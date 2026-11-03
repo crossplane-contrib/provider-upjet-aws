@@ -692,7 +692,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: ARN of the appstream fleet.
+                    description: ARN of the AppStream fleet.
                     type: string
                   computeCapacity:
                     description: Configuration block for the desired capacity of the
@@ -756,7 +756,7 @@ spec:
                     description: ARN of the IAM role to apply to the fleet.
                     type: string
                   id:
-                    description: Unique identifier (ID) of the appstream fleet.
+                    description: Unique identifier (ID) of the AppStream fleet.
                     type: string
                   idleDisconnectTimeoutInSeconds:
                     description: Amount of time that users can be idle (inactive)

@@ -15,7 +15,7 @@ import (
 
 type BucketInitParameters struct {
 
-	// Bundle ID to use for the bucket. A bucket bundle specifies the monthly cost, storage space, and data transfer quota for a bucket. Use the get-bucket-bundles cli command to get a list of bundle IDs that you can specify.
+	// Bundle ID to use for the bucket. A bucket bundle specifies the monthly cost, storage space, and data transfer quota for a bucket. Use the get-bucket-bundles CLI command to get a list of bundle IDs that you can specify.
 	BundleID *string `json:"bundleId,omitempty" tf:"bundle_id,omitempty"`
 
 	// AWS by default will not delete a bucket which is not empty, to prevent losing bucket data and affecting other resources in Lightsail. If force_delete is set to true the bucket will be deleted even when not empty.
@@ -34,7 +34,7 @@ type BucketObservation struct {
 	// Availability Zone. Follows the format us-east-2a (case-sensitive).
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
-	// Bundle ID to use for the bucket. A bucket bundle specifies the monthly cost, storage space, and data transfer quota for a bucket. Use the get-bucket-bundles cli command to get a list of bundle IDs that you can specify.
+	// Bundle ID to use for the bucket. A bucket bundle specifies the monthly cost, storage space, and data transfer quota for a bucket. Use the get-bucket-bundles CLI command to get a list of bundle IDs that you can specify.
 	BundleID *string `json:"bundleId,omitempty" tf:"bundle_id,omitempty"`
 
 	// Date and time when the bucket was created.
@@ -67,7 +67,7 @@ type BucketObservation struct {
 
 type BucketParameters struct {
 
-	// Bundle ID to use for the bucket. A bucket bundle specifies the monthly cost, storage space, and data transfer quota for a bucket. Use the get-bucket-bundles cli command to get a list of bundle IDs that you can specify.
+	// Bundle ID to use for the bucket. A bucket bundle specifies the monthly cost, storage space, and data transfer quota for a bucket. Use the get-bucket-bundles CLI command to get a list of bundle IDs that you can specify.
 	// +kubebuilder:validation:Optional
 	BundleID *string `json:"bundleId,omitempty" tf:"bundle_id,omitempty"`
 

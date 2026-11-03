@@ -34,7 +34,7 @@ type ClusterInitParameters struct {
 	// Value that indicates whether the DB cluster has deletion protection enabled.The database can't be deleted when deletion protection is enabled. By default, deletion protection is disabled.
 	DeletionProtection *bool `json:"deletionProtection,omitempty" tf:"deletion_protection,omitempty"`
 
-	// List of the log types this DB cluster is configured to export to Cloudwatch Logs. Currently only supports audit and slowquery.
+	// List of the log types this DB cluster is configured to export to CloudWatch Logs. Currently only supports audit and slowquery.
 	// +listType=set
 	EnableCloudwatchLogsExports []*string `json:"enableCloudwatchLogsExports,omitempty" tf:"enable_cloudwatch_logs_exports,omitempty"`
 
@@ -106,6 +106,9 @@ type ClusterInitParameters struct {
 	// Selector for a SubnetGroup in neptune to populate neptuneSubnetGroupName.
 	// +kubebuilder:validation:Optional
 	NeptuneSubnetGroupNameSelector *v2.Selector `json:"neptuneSubnetGroupNameSelector,omitempty" tf:"-"`
+
+	// Network type of the Neptune cluster. Valid values: IPV4, DUAL. Default: IPV4. Specifying DUAL enables dual-stack IPv4/IPv6 connectivity. The Neptune DB subnet group associated with the cluster must be backed by IPv6-capable subnets. See the Neptune dual-stack documentation for prerequisites.
+	NetworkType *string `json:"networkType,omitempty" tf:"network_type,omitempty"`
 
 	// Port on which the Neptune accepts connections. Default is 8182.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
@@ -203,7 +206,7 @@ type ClusterObservation struct {
 	// Value that indicates whether the DB cluster has deletion protection enabled.The database can't be deleted when deletion protection is enabled. By default, deletion protection is disabled.
 	DeletionProtection *bool `json:"deletionProtection,omitempty" tf:"deletion_protection,omitempty"`
 
-	// List of the log types this DB cluster is configured to export to Cloudwatch Logs. Currently only supports audit and slowquery.
+	// List of the log types this DB cluster is configured to export to CloudWatch Logs. Currently only supports audit and slowquery.
 	// +listType=set
 	EnableCloudwatchLogsExports []*string `json:"enableCloudwatchLogsExports,omitempty" tf:"enable_cloudwatch_logs_exports,omitempty"`
 
@@ -246,6 +249,9 @@ type ClusterObservation struct {
 
 	// Neptune subnet group to associate with this Neptune instance.
 	NeptuneSubnetGroupName *string `json:"neptuneSubnetGroupName,omitempty" tf:"neptune_subnet_group_name,omitempty"`
+
+	// Network type of the Neptune cluster. Valid values: IPV4, DUAL. Default: IPV4. Specifying DUAL enables dual-stack IPv4/IPv6 connectivity. The Neptune DB subnet group associated with the cluster must be backed by IPv6-capable subnets. See the Neptune dual-stack documentation for prerequisites.
+	NetworkType *string `json:"networkType,omitempty" tf:"network_type,omitempty"`
 
 	// Port on which the Neptune accepts connections. Default is 8182.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
@@ -321,7 +327,7 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	DeletionProtection *bool `json:"deletionProtection,omitempty" tf:"deletion_protection,omitempty"`
 
-	// List of the log types this DB cluster is configured to export to Cloudwatch Logs. Currently only supports audit and slowquery.
+	// List of the log types this DB cluster is configured to export to CloudWatch Logs. Currently only supports audit and slowquery.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	EnableCloudwatchLogsExports []*string `json:"enableCloudwatchLogsExports,omitempty" tf:"enable_cloudwatch_logs_exports,omitempty"`
@@ -404,6 +410,10 @@ type ClusterParameters struct {
 	// Selector for a SubnetGroup in neptune to populate neptuneSubnetGroupName.
 	// +kubebuilder:validation:Optional
 	NeptuneSubnetGroupNameSelector *v2.Selector `json:"neptuneSubnetGroupNameSelector,omitempty" tf:"-"`
+
+	// Network type of the Neptune cluster. Valid values: IPV4, DUAL. Default: IPV4. Specifying DUAL enables dual-stack IPv4/IPv6 connectivity. The Neptune DB subnet group associated with the cluster must be backed by IPv6-capable subnets. See the Neptune dual-stack documentation for prerequisites.
+	// +kubebuilder:validation:Optional
+	NetworkType *string `json:"networkType,omitempty" tf:"network_type,omitempty"`
 
 	// Port on which the Neptune accepts connections. Default is 8182.
 	// +kubebuilder:validation:Optional

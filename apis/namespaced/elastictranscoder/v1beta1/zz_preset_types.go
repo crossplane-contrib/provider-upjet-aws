@@ -171,7 +171,7 @@ type PresetObservation struct {
 	// A description of the preset (maximum 255 characters)
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// A unique identifier for the settings for one watermark. The value of Id can be up to 40 characters long. You can specify settings for up to four watermarks.
+	// A unique identifier for the settings for one watermark. The value of ID can be up to 40 characters long. You can specify settings for up to four watermarks.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The name of the preset. (maximum 40 characters)
@@ -481,7 +481,7 @@ type VideoWatermarksInitParameters struct {
 	// The amount by which you want the horizontal position of the watermark to be offset from the position specified by horizontal_align.
 	HorizontalOffset *string `json:"horizontalOffset,omitempty" tf:"horizontal_offset,omitempty"`
 
-	// A unique identifier for the settings for one watermark. The value of Id can be up to 40 characters long. You can specify settings for up to four watermarks.
+	// A unique identifier for the settings for one watermark. The value of ID can be up to 40 characters long. You can specify settings for up to four watermarks.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The maximum height of thumbnails, in pixels. If you specify auto, Elastic Transcoder uses 1080 (Full HD) as the default value. If you specify a numeric value, enter an even integer between 32 and 3072, inclusive.
@@ -514,7 +514,7 @@ type VideoWatermarksObservation struct {
 	// The amount by which you want the horizontal position of the watermark to be offset from the position specified by horizontal_align.
 	HorizontalOffset *string `json:"horizontalOffset,omitempty" tf:"horizontal_offset,omitempty"`
 
-	// A unique identifier for the settings for one watermark. The value of Id can be up to 40 characters long. You can specify settings for up to four watermarks.
+	// A unique identifier for the settings for one watermark. The value of ID can be up to 40 characters long. You can specify settings for up to four watermarks.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The maximum height of thumbnails, in pixels. If you specify auto, Elastic Transcoder uses 1080 (Full HD) as the default value. If you specify a numeric value, enter an even integer between 32 and 3072, inclusive.
@@ -549,7 +549,7 @@ type VideoWatermarksParameters struct {
 	// +kubebuilder:validation:Optional
 	HorizontalOffset *string `json:"horizontalOffset,omitempty" tf:"horizontal_offset,omitempty"`
 
-	// A unique identifier for the settings for one watermark. The value of Id can be up to 40 characters long. You can specify settings for up to four watermarks.
+	// A unique identifier for the settings for one watermark. The value of ID can be up to 40 characters long. You can specify settings for up to four watermarks.
 	// +kubebuilder:validation:Optional
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 

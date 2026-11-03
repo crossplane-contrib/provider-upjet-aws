@@ -428,7 +428,7 @@ type PartitionIndexObservation struct {
 	// Name of the partition index.
 	IndexName *string `json:"indexName,omitempty" tf:"index_name,omitempty"`
 
-	// Status of the partition index.
+	// (Read-Only) Status of the partition index.
 	IndexStatus *string `json:"indexStatus,omitempty" tf:"index_status,omitempty"`
 
 	// Keys for the partition index.

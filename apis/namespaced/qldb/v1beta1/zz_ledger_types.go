@@ -15,7 +15,7 @@ import (
 
 type LedgerInitParameters struct {
 
-	// The deletion protection for the QLDB Ledger instance. By default it is true.
+	// Whether to enable deletion protection for the QLDB Ledger instance. By default it is true.
 	DeletionProtection *bool `json:"deletionProtection,omitempty" tf:"deletion_protection,omitempty"`
 
 	// Key in KMS to use for encryption of data at rest in the ledger. For more information, see the AWS documentation. Valid values are "AWS_OWNED_KMS_KEY" to use an AWS KMS key that is owned and managed by AWS on your behalf, or the ARN of a valid symmetric customer managed KMS key.
@@ -30,7 +30,7 @@ type LedgerInitParameters struct {
 	// +kubebuilder:validation:Optional
 	KMSKeySelector *v2.NamespacedSelector `json:"kmsKeySelector,omitempty" tf:"-"`
 
-	// The permissions mode for the QLDB ledger instance. Specify either ALLOW_ALL or STANDARD.
+	// Permissions mode for the QLDB ledger instance. Specify either ALLOW_ALL or STANDARD.
 	PermissionsMode *string `json:"permissionsMode,omitempty" tf:"permissions_mode,omitempty"`
 
 	// Key-value map of resource tags.
@@ -40,19 +40,19 @@ type LedgerInitParameters struct {
 
 type LedgerObservation struct {
 
-	// The ARN of the QLDB Ledger
+	// ARN of the QLDB Ledger
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The deletion protection for the QLDB Ledger instance. By default it is true.
+	// Whether to enable deletion protection for the QLDB Ledger instance. By default it is true.
 	DeletionProtection *bool `json:"deletionProtection,omitempty" tf:"deletion_protection,omitempty"`
 
-	// The Name of the QLDB Ledger
+	// Name of the QLDB Ledger
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Key in KMS to use for encryption of data at rest in the ledger. For more information, see the AWS documentation. Valid values are "AWS_OWNED_KMS_KEY" to use an AWS KMS key that is owned and managed by AWS on your behalf, or the ARN of a valid symmetric customer managed KMS key.
 	KMSKey *string `json:"kmsKey,omitempty" tf:"kms_key,omitempty"`
 
-	// The permissions mode for the QLDB ledger instance. Specify either ALLOW_ALL or STANDARD.
+	// Permissions mode for the QLDB ledger instance. Specify either ALLOW_ALL or STANDARD.
 	PermissionsMode *string `json:"permissionsMode,omitempty" tf:"permissions_mode,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -63,14 +63,14 @@ type LedgerObservation struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type LedgerParameters struct {
 
-	// The deletion protection for the QLDB Ledger instance. By default it is true.
+	// Whether to enable deletion protection for the QLDB Ledger instance. By default it is true.
 	// +kubebuilder:validation:Optional
 	DeletionProtection *bool `json:"deletionProtection,omitempty" tf:"deletion_protection,omitempty"`
 
@@ -87,7 +87,7 @@ type LedgerParameters struct {
 	// +kubebuilder:validation:Optional
 	KMSKeySelector *v2.NamespacedSelector `json:"kmsKeySelector,omitempty" tf:"-"`
 
-	// The permissions mode for the QLDB ledger instance. Specify either ALLOW_ALL or STANDARD.
+	// Permissions mode for the QLDB ledger instance. Specify either ALLOW_ALL or STANDARD.
 	// +kubebuilder:validation:Optional
 	PermissionsMode *string `json:"permissionsMode,omitempty" tf:"permissions_mode,omitempty"`
 

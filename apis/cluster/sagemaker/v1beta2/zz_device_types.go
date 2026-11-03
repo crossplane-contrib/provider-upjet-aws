@@ -82,7 +82,7 @@ type DeviceObservation struct {
 	// The name of the Device Fleet.
 	DeviceFleetName *string `json:"deviceFleetName,omitempty" tf:"device_fleet_name,omitempty"`
 
-	// The id is constructed from device-fleet-name/device-name.
+	// The ID is constructed from device-fleet-name/device-name.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.

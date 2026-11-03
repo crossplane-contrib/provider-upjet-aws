@@ -86,7 +86,7 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   roleArn:
-                    description: The ARN of the role that allows IoT to write to Cloudwatch
+                    description: The ARN of the role that allows IoT to write to CloudWatch
                       logs.
                     type: string
                   roleArnRef:
@@ -187,7 +187,7 @@ spec:
                     description: If true all logs are disabled. The default is false.
                     type: boolean
                   roleArn:
-                    description: The ARN of the role that allows IoT to write to Cloudwatch
+                    description: The ARN of the role that allows IoT to write to CloudWatch
                       logs.
                     type: string
                   roleArnRef:
@@ -376,7 +376,7 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   roleArn:
-                    description: The ARN of the role that allows IoT to write to Cloudwatch
+                    description: The ARN of the role that allows IoT to write to CloudWatch
                       logs.
                     type: string
                 type: object

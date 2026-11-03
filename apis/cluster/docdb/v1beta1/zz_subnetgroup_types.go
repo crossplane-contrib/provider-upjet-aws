@@ -15,7 +15,7 @@ import (
 
 type SubnetGroupInitParameters struct {
 
-	// The description of the docDB subnet group.
+	// The description of the DocDB subnet group.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// A list of VPC subnet IDs.
@@ -38,13 +38,13 @@ type SubnetGroupInitParameters struct {
 
 type SubnetGroupObservation struct {
 
-	// The ARN of the docDB subnet group.
+	// The ARN of the DocDB subnet group.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The description of the docDB subnet group.
+	// The description of the DocDB subnet group.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The docDB subnet group name.
+	// The DocDB subnet group name.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -55,7 +55,7 @@ type SubnetGroupObservation struct {
 	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
-	// The network type of the docDB subnet group (IPV4 or DUAL).
+	// The network type of the DocDB subnet group (IPV4 or DUAL).
 	// +listType=set
 	SupportedNetworkTypes []*string `json:"supportedNetworkTypes,omitempty" tf:"supported_network_types,omitempty"`
 
@@ -70,7 +70,7 @@ type SubnetGroupObservation struct {
 
 type SubnetGroupParameters struct {
 
-	// The description of the docDB subnet group.
+	// The description of the DocDB subnet group.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 

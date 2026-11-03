@@ -651,7 +651,7 @@ spec:
                     properties:
                       customSecurityGroupId:
                         description: The identifier of your custom security group.
-                          Should relate to the same VPC, where workspaces reside in.
+                          Should relate to the same VPC, where WorkSpaces reside in.
                         type: string
                       customSecurityGroupIdRef:
                         description: Reference to a SecurityGroup in ec2 to populate
@@ -1370,7 +1370,7 @@ spec:
                     properties:
                       customSecurityGroupId:
                         description: The identifier of your custom security group.
-                          Should relate to the same VPC, where workspaces reside in.
+                          Should relate to the same VPC, where WorkSpaces reside in.
                         type: string
                       customSecurityGroupIdRef:
                         description: Reference to a SecurityGroup in ec2 to populate
@@ -1769,7 +1769,7 @@ spec:
                     properties:
                       customSecurityGroupId:
                         description: The identifier of your custom security group.
-                          Should relate to the same VPC, where workspaces reside in.
+                          Should relate to the same VPC, where WorkSpaces reside in.
                         type: string
                       defaultOu:
                         description: The default organizational unit (OU) for your

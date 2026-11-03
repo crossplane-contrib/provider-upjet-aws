@@ -18,7 +18,7 @@ type CustomModelInitParameters struct {
 	// ARN of the base model.
 	BaseModelIdentifier *string `json:"baseModelIdentifier,omitempty" tf:"base_model_identifier,omitempty"`
 
-	// The custom model is encrypted at rest using this key. Specify the key ARN.
+	// Key ARN used to encrypt the custom model at rest.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kms/v1beta1.Key
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	CustomModelKMSKeyID *string `json:"customModelKmsKeyId,omitempty" tf:"custom_model_kms_key_id,omitempty"`
@@ -34,17 +34,17 @@ type CustomModelInitParameters struct {
 	// Name for the custom model.
 	CustomModelName *string `json:"customModelName,omitempty" tf:"custom_model_name,omitempty"`
 
-	// The customization type. Valid values: FINE_TUNING, CONTINUED_PRE_TRAINING.
+	// Customization type. Valid values: FINE_TUNING, CONTINUED_PRE_TRAINING.
 	CustomizationType *string `json:"customizationType,omitempty" tf:"customization_type,omitempty"`
 
 	// Parameters related to tuning the model.
 	// +mapType=granular
 	Hyperparameters map[string]*string `json:"hyperparameters,omitempty" tf:"hyperparameters,omitempty"`
 
-	// A name for the customization job.
+	// Name for the customization job.
 	JobName *string `json:"jobName,omitempty" tf:"job_name,omitempty"`
 
-	// S3 location for the output data.
+	// S3 location for the output data. See output_data_config below.
 	OutputDataConfig *OutputDataConfigInitParameters `json:"outputDataConfig,omitempty" tf:"output_data_config,omitempty"`
 
 	// ARN of an IAM role that Bedrock can assume to perform tasks on your behalf.
@@ -64,13 +64,13 @@ type CustomModelInitParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Information about the training dataset.
+	// Information about the training dataset. See training_data_config below.
 	TrainingDataConfig *TrainingDataConfigInitParameters `json:"trainingDataConfig,omitempty" tf:"training_data_config,omitempty"`
 
-	// Configuration parameters for the private VPC that contains the resources you are using for this job.
+	// Configuration parameters for the private VPC that contains the resources you are using for this job. See vpc_config below.
 	VPCConfig *VPCConfigInitParameters `json:"vpcConfig,omitempty" tf:"vpc_config,omitempty"`
 
-	// Information about the validation dataset.
+	// Information about the validation dataset. See validation_data_config below.
 	ValidationDataConfig *ValidationDataConfigInitParameters `json:"validationDataConfig,omitempty" tf:"validation_data_config,omitempty"`
 }
 
@@ -79,16 +79,16 @@ type CustomModelObservation struct {
 	// ARN of the base model.
 	BaseModelIdentifier *string `json:"baseModelIdentifier,omitempty" tf:"base_model_identifier,omitempty"`
 
-	// The ARN of the output model.
+	// ARN of the output model.
 	CustomModelArn *string `json:"customModelArn,omitempty" tf:"custom_model_arn,omitempty"`
 
-	// The custom model is encrypted at rest using this key. Specify the key ARN.
+	// Key ARN used to encrypt the custom model at rest.
 	CustomModelKMSKeyID *string `json:"customModelKmsKeyId,omitempty" tf:"custom_model_kms_key_id,omitempty"`
 
 	// Name for the custom model.
 	CustomModelName *string `json:"customModelName,omitempty" tf:"custom_model_name,omitempty"`
 
-	// The customization type. Valid values: FINE_TUNING, CONTINUED_PRE_TRAINING.
+	// Customization type. Valid values: FINE_TUNING, CONTINUED_PRE_TRAINING.
 	CustomizationType *string `json:"customizationType,omitempty" tf:"customization_type,omitempty"`
 
 	// Parameters related to tuning the model.
@@ -97,16 +97,16 @@ type CustomModelObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The ARN of the customization job.
+	// ARN of the customization job.
 	JobArn *string `json:"jobArn,omitempty" tf:"job_arn,omitempty"`
 
-	// A name for the customization job.
+	// Name for the customization job.
 	JobName *string `json:"jobName,omitempty" tf:"job_name,omitempty"`
 
-	// The status of the customization job. A successful job transitions from InProgress to Completed when the output model is ready to use.
+	// Status of the customization job. A successful job transitions from InProgress to Completed when the output model is ready to use.
 	JobStatus *string `json:"jobStatus,omitempty" tf:"job_status,omitempty"`
 
-	// S3 location for the output data.
+	// S3 location for the output data. See output_data_config below.
 	OutputDataConfig *OutputDataConfigObservation `json:"outputDataConfig,omitempty" tf:"output_data_config,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -124,19 +124,19 @@ type CustomModelObservation struct {
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// Information about the training dataset.
+	// Information about the training dataset. See training_data_config below.
 	TrainingDataConfig *TrainingDataConfigObservation `json:"trainingDataConfig,omitempty" tf:"training_data_config,omitempty"`
 
 	// Metrics associated with the customization job.
 	TrainingMetrics *TrainingMetricsObservation `json:"trainingMetrics,omitempty" tf:"training_metrics,omitempty"`
 
-	// Configuration parameters for the private VPC that contains the resources you are using for this job.
+	// Configuration parameters for the private VPC that contains the resources you are using for this job. See vpc_config below.
 	VPCConfig *VPCConfigObservation `json:"vpcConfig,omitempty" tf:"vpc_config,omitempty"`
 
-	// Information about the validation dataset.
+	// Information about the validation dataset. See validation_data_config below.
 	ValidationDataConfig *ValidationDataConfigObservation `json:"validationDataConfig,omitempty" tf:"validation_data_config,omitempty"`
 
-	// The loss metric for each validator that you provided.
+	// Loss metric for each validator that you provided.
 	ValidationMetrics []ValidationMetricsObservation `json:"validationMetrics,omitempty" tf:"validation_metrics,omitempty"`
 }
 
@@ -146,7 +146,7 @@ type CustomModelParameters struct {
 	// +kubebuilder:validation:Optional
 	BaseModelIdentifier *string `json:"baseModelIdentifier,omitempty" tf:"base_model_identifier,omitempty"`
 
-	// The custom model is encrypted at rest using this key. Specify the key ARN.
+	// Key ARN used to encrypt the custom model at rest.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kms/v1beta1.Key
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -164,7 +164,7 @@ type CustomModelParameters struct {
 	// +kubebuilder:validation:Optional
 	CustomModelName *string `json:"customModelName,omitempty" tf:"custom_model_name,omitempty"`
 
-	// The customization type. Valid values: FINE_TUNING, CONTINUED_PRE_TRAINING.
+	// Customization type. Valid values: FINE_TUNING, CONTINUED_PRE_TRAINING.
 	// +kubebuilder:validation:Optional
 	CustomizationType *string `json:"customizationType,omitempty" tf:"customization_type,omitempty"`
 
@@ -173,11 +173,11 @@ type CustomModelParameters struct {
 	// +mapType=granular
 	Hyperparameters map[string]*string `json:"hyperparameters,omitempty" tf:"hyperparameters,omitempty"`
 
-	// A name for the customization job.
+	// Name for the customization job.
 	// +kubebuilder:validation:Optional
 	JobName *string `json:"jobName,omitempty" tf:"job_name,omitempty"`
 
-	// S3 location for the output data.
+	// S3 location for the output data. See output_data_config below.
 	// +kubebuilder:validation:Optional
 	OutputDataConfig *OutputDataConfigParameters `json:"outputDataConfig,omitempty" tf:"output_data_config,omitempty"`
 
@@ -205,53 +205,53 @@ type CustomModelParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Information about the training dataset.
+	// Information about the training dataset. See training_data_config below.
 	// +kubebuilder:validation:Optional
 	TrainingDataConfig *TrainingDataConfigParameters `json:"trainingDataConfig,omitempty" tf:"training_data_config,omitempty"`
 
-	// Configuration parameters for the private VPC that contains the resources you are using for this job.
+	// Configuration parameters for the private VPC that contains the resources you are using for this job. See vpc_config below.
 	// +kubebuilder:validation:Optional
 	VPCConfig *VPCConfigParameters `json:"vpcConfig,omitempty" tf:"vpc_config,omitempty"`
 
-	// Information about the validation dataset.
+	// Information about the validation dataset. See validation_data_config below.
 	// +kubebuilder:validation:Optional
 	ValidationDataConfig *ValidationDataConfigParameters `json:"validationDataConfig,omitempty" tf:"validation_data_config,omitempty"`
 }
 
 type OutputDataConfigInitParameters struct {
 
-	// The S3 URI where the output data is stored.
+	// S3 URI where the output data is stored.
 	S3URI *string `json:"s3Uri,omitempty" tf:"s3_uri,omitempty"`
 }
 
 type OutputDataConfigObservation struct {
 
-	// The S3 URI where the output data is stored.
+	// S3 URI where the output data is stored.
 	S3URI *string `json:"s3Uri,omitempty" tf:"s3_uri,omitempty"`
 }
 
 type OutputDataConfigParameters struct {
 
-	// The S3 URI where the output data is stored.
+	// S3 URI where the output data is stored.
 	// +kubebuilder:validation:Optional
 	S3URI *string `json:"s3Uri" tf:"s3_uri,omitempty"`
 }
 
 type TrainingDataConfigInitParameters struct {
 
-	// The S3 URI where the output data is stored.
+	// S3 URI where the training data is stored.
 	S3URI *string `json:"s3Uri,omitempty" tf:"s3_uri,omitempty"`
 }
 
 type TrainingDataConfigObservation struct {
 
-	// The S3 URI where the output data is stored.
+	// S3 URI where the training data is stored.
 	S3URI *string `json:"s3Uri,omitempty" tf:"s3_uri,omitempty"`
 }
 
 type TrainingDataConfigParameters struct {
 
-	// The S3 URI where the output data is stored.
+	// S3 URI where the training data is stored.
 	// +kubebuilder:validation:Optional
 	S3URI *string `json:"s3Uri" tf:"s3_uri,omitempty"`
 }
@@ -349,19 +349,19 @@ type VPCConfigParameters struct {
 
 type ValidationDataConfigInitParameters struct {
 
-	// Information about the validators.
+	// Information about the validators. See validator below.
 	Validator []ValidatorInitParameters `json:"validator,omitempty" tf:"validator,omitempty"`
 }
 
 type ValidationDataConfigObservation struct {
 
-	// Information about the validators.
+	// Information about the validators. See validator below.
 	Validator []ValidatorObservation `json:"validator,omitempty" tf:"validator,omitempty"`
 }
 
 type ValidationDataConfigParameters struct {
 
-	// Information about the validators.
+	// Information about the validators. See validator below.
 	// +kubebuilder:validation:Optional
 	Validator []ValidatorParameters `json:"validator,omitempty" tf:"validator,omitempty"`
 }
@@ -371,7 +371,7 @@ type ValidationMetricsInitParameters struct {
 
 type ValidationMetricsObservation struct {
 
-	// The validation loss associated with the validator.
+	// Validation loss associated with the validator.
 	ValidationLoss *float64 `json:"validationLoss,omitempty" tf:"validation_loss,omitempty"`
 }
 
@@ -380,19 +380,19 @@ type ValidationMetricsParameters struct {
 
 type ValidatorInitParameters struct {
 
-	// The S3 URI where the output data is stored.
+	// S3 URI where the training data is stored.
 	S3URI *string `json:"s3Uri,omitempty" tf:"s3_uri,omitempty"`
 }
 
 type ValidatorObservation struct {
 
-	// The S3 URI where the output data is stored.
+	// S3 URI where the training data is stored.
 	S3URI *string `json:"s3Uri,omitempty" tf:"s3_uri,omitempty"`
 }
 
 type ValidatorParameters struct {
 
-	// The S3 URI where the output data is stored.
+	// S3 URI where the training data is stored.
 	// +kubebuilder:validation:Optional
 	S3URI *string `json:"s3Uri" tf:"s3_uri,omitempty"`
 }

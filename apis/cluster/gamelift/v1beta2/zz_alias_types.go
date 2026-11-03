@@ -21,7 +21,7 @@ type AliasInitParameters struct {
 	// Name of the alias.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Specifies the fleet and/or routing type to use for the alias.
+	// Fleet and/or routing type to use for the alias.
 	RoutingStrategy *RoutingStrategyInitParameters `json:"routingStrategy,omitempty" tf:"routing_strategy,omitempty"`
 
 	// Key-value map of resource tags.
@@ -47,14 +47,14 @@ type AliasObservation struct {
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// Specifies the fleet and/or routing type to use for the alias.
+	// Fleet and/or routing type to use for the alias.
 	RoutingStrategy *RoutingStrategyObservation `json:"routingStrategy,omitempty" tf:"routing_strategy,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
@@ -74,7 +74,7 @@ type AliasParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// Specifies the fleet and/or routing type to use for the alias.
+	// Fleet and/or routing type to use for the alias.
 	// +kubebuilder:validation:Optional
 	RoutingStrategy *RoutingStrategyParameters `json:"routingStrategy,omitempty" tf:"routing_strategy,omitempty"`
 

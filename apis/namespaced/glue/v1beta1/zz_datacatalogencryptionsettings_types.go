@@ -15,7 +15,7 @@ import (
 
 type ConnectionPasswordEncryptionInitParameters struct {
 
-	// A KMS key ARN that is used to encrypt the connection password. If connection password protection is enabled, the caller of CreateConnection and UpdateConnection needs at least kms:Encrypt permission on the specified AWS KMS key, to encrypt passwords before storing them in the Data Catalog.
+	// KMS key ARN that is used to encrypt the connection password. If connection password protection is enabled, the caller of CreateConnection and UpdateConnection needs at least kms:Encrypt permission on the specified AWS KMS key, to encrypt passwords before storing them in the Data Catalog.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kms/v1beta1.Key
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	AwsKMSKeyID *string `json:"awsKmsKeyId,omitempty" tf:"aws_kms_key_id,omitempty"`
@@ -34,7 +34,7 @@ type ConnectionPasswordEncryptionInitParameters struct {
 
 type ConnectionPasswordEncryptionObservation struct {
 
-	// A KMS key ARN that is used to encrypt the connection password. If connection password protection is enabled, the caller of CreateConnection and UpdateConnection needs at least kms:Encrypt permission on the specified AWS KMS key, to encrypt passwords before storing them in the Data Catalog.
+	// KMS key ARN that is used to encrypt the connection password. If connection password protection is enabled, the caller of CreateConnection and UpdateConnection needs at least kms:Encrypt permission on the specified AWS KMS key, to encrypt passwords before storing them in the Data Catalog.
 	AwsKMSKeyID *string `json:"awsKmsKeyId,omitempty" tf:"aws_kms_key_id,omitempty"`
 
 	// When set to true, passwords remain encrypted in the responses of GetConnection and GetConnections. This encryption takes effect independently of the catalog encryption.
@@ -43,7 +43,7 @@ type ConnectionPasswordEncryptionObservation struct {
 
 type ConnectionPasswordEncryptionParameters struct {
 
-	// A KMS key ARN that is used to encrypt the connection password. If connection password protection is enabled, the caller of CreateConnection and UpdateConnection needs at least kms:Encrypt permission on the specified AWS KMS key, to encrypt passwords before storing them in the Data Catalog.
+	// KMS key ARN that is used to encrypt the connection password. If connection password protection is enabled, the caller of CreateConnection and UpdateConnection needs at least kms:Encrypt permission on the specified AWS KMS key, to encrypt passwords before storing them in the Data Catalog.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kms/v1beta1.Key
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -64,51 +64,51 @@ type ConnectionPasswordEncryptionParameters struct {
 
 type DataCatalogEncryptionSettingsDataCatalogEncryptionSettingsInitParameters struct {
 
-	// When connection password protection is enabled, the Data Catalog uses a customer-provided key to encrypt the password as part of CreateConnection or UpdateConnection and store it in the ENCRYPTED_PASSWORD field in the connection properties. You can enable catalog encryption or only password encryption. see Connection Password Encryption.
+	// When connection password protection is enabled, the Data Catalog uses a customer-provided key to encrypt the password as part of CreateConnection or UpdateConnection and store it in the ENCRYPTED_PASSWORD field in the connection properties. You can enable catalog encryption or only password encryption. see connection_password_encryption Block.
 	ConnectionPasswordEncryption *ConnectionPasswordEncryptionInitParameters `json:"connectionPasswordEncryption,omitempty" tf:"connection_password_encryption,omitempty"`
 
-	// Specifies the encryption-at-rest configuration for the Data Catalog. see Encryption At Rest.
+	// Encryption-at-rest configuration for the Data Catalog. see encryption_at_rest Block.
 	EncryptionAtRest *EncryptionAtRestInitParameters `json:"encryptionAtRest,omitempty" tf:"encryption_at_rest,omitempty"`
 }
 
 type DataCatalogEncryptionSettingsDataCatalogEncryptionSettingsObservation struct {
 
-	// When connection password protection is enabled, the Data Catalog uses a customer-provided key to encrypt the password as part of CreateConnection or UpdateConnection and store it in the ENCRYPTED_PASSWORD field in the connection properties. You can enable catalog encryption or only password encryption. see Connection Password Encryption.
+	// When connection password protection is enabled, the Data Catalog uses a customer-provided key to encrypt the password as part of CreateConnection or UpdateConnection and store it in the ENCRYPTED_PASSWORD field in the connection properties. You can enable catalog encryption or only password encryption. see connection_password_encryption Block.
 	ConnectionPasswordEncryption *ConnectionPasswordEncryptionObservation `json:"connectionPasswordEncryption,omitempty" tf:"connection_password_encryption,omitempty"`
 
-	// Specifies the encryption-at-rest configuration for the Data Catalog. see Encryption At Rest.
+	// Encryption-at-rest configuration for the Data Catalog. see encryption_at_rest Block.
 	EncryptionAtRest *EncryptionAtRestObservation `json:"encryptionAtRest,omitempty" tf:"encryption_at_rest,omitempty"`
 }
 
 type DataCatalogEncryptionSettingsDataCatalogEncryptionSettingsParameters struct {
 
-	// When connection password protection is enabled, the Data Catalog uses a customer-provided key to encrypt the password as part of CreateConnection or UpdateConnection and store it in the ENCRYPTED_PASSWORD field in the connection properties. You can enable catalog encryption or only password encryption. see Connection Password Encryption.
+	// When connection password protection is enabled, the Data Catalog uses a customer-provided key to encrypt the password as part of CreateConnection or UpdateConnection and store it in the ENCRYPTED_PASSWORD field in the connection properties. You can enable catalog encryption or only password encryption. see connection_password_encryption Block.
 	// +kubebuilder:validation:Optional
 	ConnectionPasswordEncryption *ConnectionPasswordEncryptionParameters `json:"connectionPasswordEncryption" tf:"connection_password_encryption,omitempty"`
 
-	// Specifies the encryption-at-rest configuration for the Data Catalog. see Encryption At Rest.
+	// Encryption-at-rest configuration for the Data Catalog. see encryption_at_rest Block.
 	// +kubebuilder:validation:Optional
 	EncryptionAtRest *EncryptionAtRestParameters `json:"encryptionAtRest" tf:"encryption_at_rest,omitempty"`
 }
 
 type DataCatalogEncryptionSettingsInitParameters struct {
 
-	// The ID of the Data Catalog to set the security configuration for. If none is provided, the AWS account ID is used by default.
+	// ID of the Data Catalog to set the security configuration for. If none is provided, the AWS account ID is used by default.
 	CatalogID *string `json:"catalogId,omitempty" tf:"catalog_id,omitempty"`
 
-	// The security configuration to set. see Data Catalog Encryption Settings.
+	// Security configuration to set. see data_catalog_encryption_settings Block.
 	DataCatalogEncryptionSettings *DataCatalogEncryptionSettingsDataCatalogEncryptionSettingsInitParameters `json:"dataCatalogEncryptionSettings,omitempty" tf:"data_catalog_encryption_settings,omitempty"`
 }
 
 type DataCatalogEncryptionSettingsObservation struct {
 
-	// The ID of the Data Catalog to set the security configuration for. If none is provided, the AWS account ID is used by default.
+	// ID of the Data Catalog to set the security configuration for. If none is provided, the AWS account ID is used by default.
 	CatalogID *string `json:"catalogId,omitempty" tf:"catalog_id,omitempty"`
 
-	// The security configuration to set. see Data Catalog Encryption Settings.
+	// Security configuration to set. see data_catalog_encryption_settings Block.
 	DataCatalogEncryptionSettings *DataCatalogEncryptionSettingsDataCatalogEncryptionSettingsObservation `json:"dataCatalogEncryptionSettings,omitempty" tf:"data_catalog_encryption_settings,omitempty"`
 
-	// The ID of the Data Catalog to set the security configuration for.
+	// ID of the Data Catalog to set the security configuration for.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -118,11 +118,11 @@ type DataCatalogEncryptionSettingsObservation struct {
 
 type DataCatalogEncryptionSettingsParameters struct {
 
-	// The ID of the Data Catalog to set the security configuration for. If none is provided, the AWS account ID is used by default.
+	// ID of the Data Catalog to set the security configuration for. If none is provided, the AWS account ID is used by default.
 	// +kubebuilder:validation:Optional
 	CatalogID *string `json:"catalogId,omitempty" tf:"catalog_id,omitempty"`
 
-	// The security configuration to set. see Data Catalog Encryption Settings.
+	// Security configuration to set. see data_catalog_encryption_settings Block.
 	// +kubebuilder:validation:Optional
 	DataCatalogEncryptionSettings *DataCatalogEncryptionSettingsDataCatalogEncryptionSettingsParameters `json:"dataCatalogEncryptionSettings,omitempty" tf:"data_catalog_encryption_settings,omitempty"`
 
@@ -134,10 +134,10 @@ type DataCatalogEncryptionSettingsParameters struct {
 
 type EncryptionAtRestInitParameters struct {
 
-	// The encryption-at-rest mode for encrypting Data Catalog data. Valid values: DISABLED, SSE-KMS, SSE-KMS-WITH-SERVICE-ROLE.
+	// Encryption-at-rest mode for encrypting Data Catalog data. Valid values: DISABLED, SSE-KMS, SSE-KMS-WITH-SERVICE-ROLE.
 	CatalogEncryptionMode *string `json:"catalogEncryptionMode,omitempty" tf:"catalog_encryption_mode,omitempty"`
 
-	// The ARN of the AWS IAM role used for accessing encrypted Data Catalog data.
+	// ARN of the AWS IAM role used for accessing encrypted Data Catalog data.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	CatalogEncryptionServiceRole *string `json:"catalogEncryptionServiceRole,omitempty" tf:"catalog_encryption_service_role,omitempty"`
@@ -150,7 +150,7 @@ type EncryptionAtRestInitParameters struct {
 	// +kubebuilder:validation:Optional
 	CatalogEncryptionServiceRoleSelector *v2.NamespacedSelector `json:"catalogEncryptionServiceRoleSelector,omitempty" tf:"-"`
 
-	// The ARN of the AWS KMS key to use for encryption at rest.
+	// ARN of the AWS KMS key to use for encryption at rest.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kms/v1beta1.Key
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	SseAwsKMSKeyID *string `json:"sseAwsKmsKeyId,omitempty" tf:"sse_aws_kms_key_id,omitempty"`
@@ -166,23 +166,23 @@ type EncryptionAtRestInitParameters struct {
 
 type EncryptionAtRestObservation struct {
 
-	// The encryption-at-rest mode for encrypting Data Catalog data. Valid values: DISABLED, SSE-KMS, SSE-KMS-WITH-SERVICE-ROLE.
+	// Encryption-at-rest mode for encrypting Data Catalog data. Valid values: DISABLED, SSE-KMS, SSE-KMS-WITH-SERVICE-ROLE.
 	CatalogEncryptionMode *string `json:"catalogEncryptionMode,omitempty" tf:"catalog_encryption_mode,omitempty"`
 
-	// The ARN of the AWS IAM role used for accessing encrypted Data Catalog data.
+	// ARN of the AWS IAM role used for accessing encrypted Data Catalog data.
 	CatalogEncryptionServiceRole *string `json:"catalogEncryptionServiceRole,omitempty" tf:"catalog_encryption_service_role,omitempty"`
 
-	// The ARN of the AWS KMS key to use for encryption at rest.
+	// ARN of the AWS KMS key to use for encryption at rest.
 	SseAwsKMSKeyID *string `json:"sseAwsKmsKeyId,omitempty" tf:"sse_aws_kms_key_id,omitempty"`
 }
 
 type EncryptionAtRestParameters struct {
 
-	// The encryption-at-rest mode for encrypting Data Catalog data. Valid values: DISABLED, SSE-KMS, SSE-KMS-WITH-SERVICE-ROLE.
+	// Encryption-at-rest mode for encrypting Data Catalog data. Valid values: DISABLED, SSE-KMS, SSE-KMS-WITH-SERVICE-ROLE.
 	// +kubebuilder:validation:Optional
 	CatalogEncryptionMode *string `json:"catalogEncryptionMode" tf:"catalog_encryption_mode,omitempty"`
 
-	// The ARN of the AWS IAM role used for accessing encrypted Data Catalog data.
+	// ARN of the AWS IAM role used for accessing encrypted Data Catalog data.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -196,7 +196,7 @@ type EncryptionAtRestParameters struct {
 	// +kubebuilder:validation:Optional
 	CatalogEncryptionServiceRoleSelector *v2.NamespacedSelector `json:"catalogEncryptionServiceRoleSelector,omitempty" tf:"-"`
 
-	// The ARN of the AWS KMS key to use for encryption at rest.
+	// ARN of the AWS KMS key to use for encryption at rest.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kms/v1beta1.Key
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	// +kubebuilder:validation:Optional

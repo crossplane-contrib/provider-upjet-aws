@@ -69,7 +69,7 @@ type DirectoryConfigObservation struct {
 	// Fully qualified name of the directory.
 	DirectoryName *string `json:"directoryName,omitempty" tf:"directory_name,omitempty"`
 
-	// Unique identifier (ID) of the appstream directory config.
+	// Unique identifier (ID) of the AppStream directory config.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Distinguished names of the organizational units for computer accounts.

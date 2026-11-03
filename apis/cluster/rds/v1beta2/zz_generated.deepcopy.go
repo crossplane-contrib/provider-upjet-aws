@@ -441,6 +441,11 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.PubliclyAccessible != nil {
+		in, out := &in.PubliclyAccessible, &out.PubliclyAccessible
+		*out = new(bool)
+		**out = **in
+	}
 	if in.ReplicationSourceIdentifier != nil {
 		in, out := &in.ReplicationSourceIdentifier, &out.ReplicationSourceIdentifier
 		*out = new(string)
@@ -959,6 +964,11 @@ func (in *ClusterObservation) DeepCopyInto(out *ClusterObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.PubliclyAccessible != nil {
+		in, out := &in.PubliclyAccessible, &out.PubliclyAccessible
+		*out = new(bool)
+		**out = **in
+	}
 	if in.ReaderEndpoint != nil {
 		in, out := &in.ReaderEndpoint, &out.ReaderEndpoint
 		*out = new(string)
@@ -1434,6 +1444,11 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 	if in.PreferredMaintenanceWindow != nil {
 		in, out := &in.PreferredMaintenanceWindow, &out.PreferredMaintenanceWindow
 		*out = new(string)
+		**out = **in
+	}
+	if in.PubliclyAccessible != nil {
+		in, out := &in.PubliclyAccessible, &out.PubliclyAccessible
+		*out = new(bool)
 		**out = **in
 	}
 	if in.Region != nil {

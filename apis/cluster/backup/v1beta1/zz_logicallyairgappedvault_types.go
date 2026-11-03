@@ -15,7 +15,7 @@ import (
 
 type LogicallyAirGappedVaultInitParameters struct {
 
-	// The AWS KMS key identifier (ARN) used to encrypt the backups in the logically air-gapped vault.
+	// AWS KMS key identifier (ARN) used to encrypt the backups in the logically air-gapped vault.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kms/v1beta1.Key
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	EncryptionKeyArn *string `json:"encryptionKeyArn,omitempty" tf:"encryption_key_arn,omitempty"`
@@ -41,13 +41,13 @@ type LogicallyAirGappedVaultInitParameters struct {
 
 type LogicallyAirGappedVaultObservation struct {
 
-	// The ARN of the Logically Air Gapped Backup Vault.
+	// ARN of the Logically Air Gapped Backup Vault.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The AWS KMS key identifier (ARN) used to encrypt the backups in the logically air-gapped vault.
+	// AWS KMS key identifier (ARN) used to encrypt the backups in the logically air-gapped vault.
 	EncryptionKeyArn *string `json:"encryptionKeyArn,omitempty" tf:"encryption_key_arn,omitempty"`
 
-	// The name of the Logically Air Gapped Backup Vault.
+	// Name of the Logically Air Gapped Backup Vault.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Maximum retention period that the Logically Air Gapped Backup Vault retains recovery points.
@@ -64,14 +64,14 @@ type LogicallyAirGappedVaultObservation struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type LogicallyAirGappedVaultParameters struct {
 
-	// The AWS KMS key identifier (ARN) used to encrypt the backups in the logically air-gapped vault.
+	// AWS KMS key identifier (ARN) used to encrypt the backups in the logically air-gapped vault.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kms/v1beta1.Key
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional

@@ -314,11 +314,11 @@ type MemoryStrategyInitParameters struct {
 	// Name of the memory strategy. Changing this forces a new resource, because the service API does not support renaming a strategy.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Set containing exactly one namespace template where this strategy applies (for example /strategies/{memoryStrategyId}/actors/{actorId}/sessions/{sessionId}). Namespace templates help organize and scope memory content. Exactly one of namespace_templates or namespaces must be configured for all strategies except CUSTOM strategies using SELF_MANAGED configuration.
+	// Set containing exactly one namespace template where this strategy applies (for example /strategies/{memoryStrategyId}/actors/{actorId}/sessions/{sessionId}). Namespace templates help organize and scope memory content. Exactly one of namespace_templates or namespaces must be configured, except for CUSTOM strategies using SELF_MANAGED configuration, where neither can be configured.
 	// +listType=set
 	NamespaceTemplates []*string `json:"namespaceTemplates,omitempty" tf:"namespace_templates,omitempty"`
 
-	// Set of namespace identifiers where this strategy applies. Exactly one of namespaces or namespace_templates must be configured. The API treats this as a legacy parameter; prefer namespace_templates. Since the API mirrors the two fields, switching an existing configuration from namespaces to namespace_templates with the same value is an in-place no-op.
+	// Set of namespace identifiers where this strategy applies. Exactly one of namespaces or namespace_templates must be configured, except for CUSTOM strategies using SELF_MANAGED configuration, where neither can be configured. The API treats this as a legacy parameter; prefer namespace_templates. Since the API mirrors the two fields, switching an existing configuration from namespaces to namespace_templates with the same value is an in-place no-op.
 	// +listType=set
 	Namespaces []*string `json:"namespaces,omitempty" tf:"namespaces,omitempty"`
 
@@ -354,11 +354,11 @@ type MemoryStrategyObservation struct {
 	// Name of the memory strategy. Changing this forces a new resource, because the service API does not support renaming a strategy.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Set containing exactly one namespace template where this strategy applies (for example /strategies/{memoryStrategyId}/actors/{actorId}/sessions/{sessionId}). Namespace templates help organize and scope memory content. Exactly one of namespace_templates or namespaces must be configured for all strategies except CUSTOM strategies using SELF_MANAGED configuration.
+	// Set containing exactly one namespace template where this strategy applies (for example /strategies/{memoryStrategyId}/actors/{actorId}/sessions/{sessionId}). Namespace templates help organize and scope memory content. Exactly one of namespace_templates or namespaces must be configured, except for CUSTOM strategies using SELF_MANAGED configuration, where neither can be configured.
 	// +listType=set
 	NamespaceTemplates []*string `json:"namespaceTemplates,omitempty" tf:"namespace_templates,omitempty"`
 
-	// Set of namespace identifiers where this strategy applies. Exactly one of namespaces or namespace_templates must be configured. The API treats this as a legacy parameter; prefer namespace_templates. Since the API mirrors the two fields, switching an existing configuration from namespaces to namespace_templates with the same value is an in-place no-op.
+	// Set of namespace identifiers where this strategy applies. Exactly one of namespaces or namespace_templates must be configured, except for CUSTOM strategies using SELF_MANAGED configuration, where neither can be configured. The API treats this as a legacy parameter; prefer namespace_templates. Since the API mirrors the two fields, switching an existing configuration from namespaces to namespace_templates with the same value is an in-place no-op.
 	// +listType=set
 	Namespaces []*string `json:"namespaces,omitempty" tf:"namespaces,omitempty"`
 
@@ -419,12 +419,12 @@ type MemoryStrategyParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Set containing exactly one namespace template where this strategy applies (for example /strategies/{memoryStrategyId}/actors/{actorId}/sessions/{sessionId}). Namespace templates help organize and scope memory content. Exactly one of namespace_templates or namespaces must be configured for all strategies except CUSTOM strategies using SELF_MANAGED configuration.
+	// Set containing exactly one namespace template where this strategy applies (for example /strategies/{memoryStrategyId}/actors/{actorId}/sessions/{sessionId}). Namespace templates help organize and scope memory content. Exactly one of namespace_templates or namespaces must be configured, except for CUSTOM strategies using SELF_MANAGED configuration, where neither can be configured.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	NamespaceTemplates []*string `json:"namespaceTemplates,omitempty" tf:"namespace_templates,omitempty"`
 
-	// Set of namespace identifiers where this strategy applies. Exactly one of namespaces or namespace_templates must be configured. The API treats this as a legacy parameter; prefer namespace_templates. Since the API mirrors the two fields, switching an existing configuration from namespaces to namespace_templates with the same value is an in-place no-op.
+	// Set of namespace identifiers where this strategy applies. Exactly one of namespaces or namespace_templates must be configured, except for CUSTOM strategies using SELF_MANAGED configuration, where neither can be configured. The API treats this as a legacy parameter; prefer namespace_templates. Since the API mirrors the two fields, switching an existing configuration from namespaces to namespace_templates with the same value is an in-place no-op.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	Namespaces []*string `json:"namespaces,omitempty" tf:"namespaces,omitempty"`
@@ -788,39 +788,39 @@ type TriggerConditionsActualTokenBasedTriggerParameters struct {
 
 type TriggerConditionsInitParameters struct {
 
-	// Message-based condition. See message_based_trigger Block below.
+	// Message-based condition. See configuration.self_managed_configuration.trigger_conditions.message_based_trigger Block below.
 	MessageBasedTrigger *MessageBasedTriggerInitParameters `json:"messageBasedTrigger,omitempty" tf:"message_based_trigger,omitempty"`
 
-	// Idle-time condition. See time_based_trigger Block below.
+	// Idle-time condition. See configuration.self_managed_configuration.trigger_conditions.time_based_trigger Block below.
 	TimeBasedTrigger *TimeBasedTriggerInitParameters `json:"timeBasedTrigger,omitempty" tf:"time_based_trigger,omitempty"`
 
-	// Token-based condition. See token_based_trigger Block below.
+	// Token-based condition. See configuration.self_managed_configuration.trigger_conditions.token_based_trigger Block below.
 	TokenBasedTrigger *TokenBasedTriggerInitParameters `json:"tokenBasedTrigger,omitempty" tf:"token_based_trigger,omitempty"`
 }
 
 type TriggerConditionsObservation struct {
 
-	// Message-based condition. See message_based_trigger Block below.
+	// Message-based condition. See configuration.self_managed_configuration.trigger_conditions.message_based_trigger Block below.
 	MessageBasedTrigger *MessageBasedTriggerObservation `json:"messageBasedTrigger,omitempty" tf:"message_based_trigger,omitempty"`
 
-	// Idle-time condition. See time_based_trigger Block below.
+	// Idle-time condition. See configuration.self_managed_configuration.trigger_conditions.time_based_trigger Block below.
 	TimeBasedTrigger *TimeBasedTriggerObservation `json:"timeBasedTrigger,omitempty" tf:"time_based_trigger,omitempty"`
 
-	// Token-based condition. See token_based_trigger Block below.
+	// Token-based condition. See configuration.self_managed_configuration.trigger_conditions.token_based_trigger Block below.
 	TokenBasedTrigger *TokenBasedTriggerObservation `json:"tokenBasedTrigger,omitempty" tf:"token_based_trigger,omitempty"`
 }
 
 type TriggerConditionsParameters struct {
 
-	// Message-based condition. See message_based_trigger Block below.
+	// Message-based condition. See configuration.self_managed_configuration.trigger_conditions.message_based_trigger Block below.
 	// +kubebuilder:validation:Optional
 	MessageBasedTrigger *MessageBasedTriggerParameters `json:"messageBasedTrigger,omitempty" tf:"message_based_trigger,omitempty"`
 
-	// Idle-time condition. See time_based_trigger Block below.
+	// Idle-time condition. See configuration.self_managed_configuration.trigger_conditions.time_based_trigger Block below.
 	// +kubebuilder:validation:Optional
 	TimeBasedTrigger *TimeBasedTriggerParameters `json:"timeBasedTrigger,omitempty" tf:"time_based_trigger,omitempty"`
 
-	// Token-based condition. See token_based_trigger Block below.
+	// Token-based condition. See configuration.self_managed_configuration.trigger_conditions.token_based_trigger Block below.
 	// +kubebuilder:validation:Optional
 	TokenBasedTrigger *TokenBasedTriggerParameters `json:"tokenBasedTrigger,omitempty" tf:"token_based_trigger,omitempty"`
 }

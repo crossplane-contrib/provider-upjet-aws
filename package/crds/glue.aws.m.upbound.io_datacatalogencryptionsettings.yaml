@@ -61,12 +61,12 @@ spec:
               forProvider:
                 properties:
                   catalogId:
-                    description: The ID of the Data Catalog to set the security configuration
+                    description: ID of the Data Catalog to set the security configuration
                       for. If none is provided, the AWS account ID is used by default.
                     type: string
                   dataCatalogEncryptionSettings:
-                    description: The security configuration to set. see Data Catalog
-                      Encryption Settings.
+                    description: Security configuration to set. see data_catalog_encryption_settings
+                      Block.
                     properties:
                       connectionPasswordEncryption:
                         description: When connection password protection is enabled,
@@ -74,12 +74,12 @@ spec:
                           the password as part of CreateConnection or UpdateConnection
                           and store it in the ENCRYPTED_PASSWORD field in the connection
                           properties. You can enable catalog encryption or only password
-                          encryption. see Connection Password Encryption.
+                          encryption. see connection_password_encryption Block.
                         properties:
                           awsKmsKeyId:
-                            description: A KMS key ARN that is used to encrypt the
-                              connection password. If connection password protection
-                              is enabled, the caller of CreateConnection and UpdateConnection
+                            description: KMS key ARN that is used to encrypt the connection
+                              password. If connection password protection is enabled,
+                              the caller of CreateConnection and UpdateConnection
                               needs at least kms:Encrypt permission on the specified
                               AWS KMS key, to encrypt passwords before storing them
                               in the Data Catalog.
@@ -172,16 +172,15 @@ spec:
                             type: boolean
                         type: object
                       encryptionAtRest:
-                        description: Specifies the encryption-at-rest configuration
-                          for the Data Catalog. see Encryption At Rest.
+                        description: Encryption-at-rest configuration for the Data
+                          Catalog. see encryption_at_rest Block.
                         properties:
                           catalogEncryptionMode:
-                            description: 'The encryption-at-rest mode for encrypting
-                              Data Catalog data. Valid values: DISABLED, SSE-KMS,
-                              SSE-KMS-WITH-SERVICE-ROLE.'
+                            description: 'Encryption-at-rest mode for encrypting Data
+                              Catalog data. Valid values: DISABLED, SSE-KMS, SSE-KMS-WITH-SERVICE-ROLE.'
                             type: string
                           catalogEncryptionServiceRole:
-                            description: The ARN of the AWS IAM role used for accessing
+                            description: ARN of the AWS IAM role used for accessing
                               encrypted Data Catalog data.
                             type: string
                           catalogEncryptionServiceRoleRef:
@@ -265,7 +264,7 @@ spec:
                                 type: object
                             type: object
                           sseAwsKmsKeyId:
-                            description: The ARN of the AWS KMS key to use for encryption
+                            description: ARN of the AWS KMS key to use for encryption
                               at rest.
                             type: string
                           sseAwsKmsKeyIdRef:
@@ -372,12 +371,12 @@ spec:
                   autoscaler.
                 properties:
                   catalogId:
-                    description: The ID of the Data Catalog to set the security configuration
+                    description: ID of the Data Catalog to set the security configuration
                       for. If none is provided, the AWS account ID is used by default.
                     type: string
                   dataCatalogEncryptionSettings:
-                    description: The security configuration to set. see Data Catalog
-                      Encryption Settings.
+                    description: Security configuration to set. see data_catalog_encryption_settings
+                      Block.
                     properties:
                       connectionPasswordEncryption:
                         description: When connection password protection is enabled,
@@ -385,12 +384,12 @@ spec:
                           the password as part of CreateConnection or UpdateConnection
                           and store it in the ENCRYPTED_PASSWORD field in the connection
                           properties. You can enable catalog encryption or only password
-                          encryption. see Connection Password Encryption.
+                          encryption. see connection_password_encryption Block.
                         properties:
                           awsKmsKeyId:
-                            description: A KMS key ARN that is used to encrypt the
-                              connection password. If connection password protection
-                              is enabled, the caller of CreateConnection and UpdateConnection
+                            description: KMS key ARN that is used to encrypt the connection
+                              password. If connection password protection is enabled,
+                              the caller of CreateConnection and UpdateConnection
                               needs at least kms:Encrypt permission on the specified
                               AWS KMS key, to encrypt passwords before storing them
                               in the Data Catalog.
@@ -483,16 +482,15 @@ spec:
                             type: boolean
                         type: object
                       encryptionAtRest:
-                        description: Specifies the encryption-at-rest configuration
-                          for the Data Catalog. see Encryption At Rest.
+                        description: Encryption-at-rest configuration for the Data
+                          Catalog. see encryption_at_rest Block.
                         properties:
                           catalogEncryptionMode:
-                            description: 'The encryption-at-rest mode for encrypting
-                              Data Catalog data. Valid values: DISABLED, SSE-KMS,
-                              SSE-KMS-WITH-SERVICE-ROLE.'
+                            description: 'Encryption-at-rest mode for encrypting Data
+                              Catalog data. Valid values: DISABLED, SSE-KMS, SSE-KMS-WITH-SERVICE-ROLE.'
                             type: string
                           catalogEncryptionServiceRole:
-                            description: The ARN of the AWS IAM role used for accessing
+                            description: ARN of the AWS IAM role used for accessing
                               encrypted Data Catalog data.
                             type: string
                           catalogEncryptionServiceRoleRef:
@@ -576,7 +574,7 @@ spec:
                                 type: object
                             type: object
                           sseAwsKmsKeyId:
-                            description: The ARN of the AWS KMS key to use for encryption
+                            description: ARN of the AWS KMS key to use for encryption
                               at rest.
                             type: string
                           sseAwsKmsKeyIdRef:
@@ -733,12 +731,12 @@ spec:
               atProvider:
                 properties:
                   catalogId:
-                    description: The ID of the Data Catalog to set the security configuration
+                    description: ID of the Data Catalog to set the security configuration
                       for. If none is provided, the AWS account ID is used by default.
                     type: string
                   dataCatalogEncryptionSettings:
-                    description: The security configuration to set. see Data Catalog
-                      Encryption Settings.
+                    description: Security configuration to set. see data_catalog_encryption_settings
+                      Block.
                     properties:
                       connectionPasswordEncryption:
                         description: When connection password protection is enabled,
@@ -746,12 +744,12 @@ spec:
                           the password as part of CreateConnection or UpdateConnection
                           and store it in the ENCRYPTED_PASSWORD field in the connection
                           properties. You can enable catalog encryption or only password
-                          encryption. see Connection Password Encryption.
+                          encryption. see connection_password_encryption Block.
                         properties:
                           awsKmsKeyId:
-                            description: A KMS key ARN that is used to encrypt the
-                              connection password. If connection password protection
-                              is enabled, the caller of CreateConnection and UpdateConnection
+                            description: KMS key ARN that is used to encrypt the connection
+                              password. If connection password protection is enabled,
+                              the caller of CreateConnection and UpdateConnection
                               needs at least kms:Encrypt permission on the specified
                               AWS KMS key, to encrypt passwords before storing them
                               in the Data Catalog.
@@ -764,26 +762,25 @@ spec:
                             type: boolean
                         type: object
                       encryptionAtRest:
-                        description: Specifies the encryption-at-rest configuration
-                          for the Data Catalog. see Encryption At Rest.
+                        description: Encryption-at-rest configuration for the Data
+                          Catalog. see encryption_at_rest Block.
                         properties:
                           catalogEncryptionMode:
-                            description: 'The encryption-at-rest mode for encrypting
-                              Data Catalog data. Valid values: DISABLED, SSE-KMS,
-                              SSE-KMS-WITH-SERVICE-ROLE.'
+                            description: 'Encryption-at-rest mode for encrypting Data
+                              Catalog data. Valid values: DISABLED, SSE-KMS, SSE-KMS-WITH-SERVICE-ROLE.'
                             type: string
                           catalogEncryptionServiceRole:
-                            description: The ARN of the AWS IAM role used for accessing
+                            description: ARN of the AWS IAM role used for accessing
                               encrypted Data Catalog data.
                             type: string
                           sseAwsKmsKeyId:
-                            description: The ARN of the AWS KMS key to use for encryption
+                            description: ARN of the AWS KMS key to use for encryption
                               at rest.
                             type: string
                         type: object
                     type: object
                   id:
-                    description: The ID of the Data Catalog to set the security configuration
+                    description: ID of the Data Catalog to set the security configuration
                       for.
                     type: string
                   region:

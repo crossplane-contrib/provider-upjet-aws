@@ -145,7 +145,8 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   userName:
-                    description: The username of the user.
+                    description: The username of the user. For IAM authentication,
+                      this value must match user_id.
                     type: string
                 required:
                 - region
@@ -216,7 +217,8 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   userName:
-                    description: The username of the user.
+                    description: The username of the user. For IAM authentication,
+                      this value must match user_id.
                     type: string
                 type: object
               managementPolicies:
@@ -343,7 +345,8 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   userName:
-                    description: The username of the user.
+                    description: The username of the user. For IAM authentication,
+                      this value must match user_id.
                     type: string
                 type: object
               conditions:

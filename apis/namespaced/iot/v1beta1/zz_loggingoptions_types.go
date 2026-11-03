@@ -21,7 +21,7 @@ type LoggingOptionsInitParameters struct {
 	// If true all logs are disabled. The default is false.
 	DisableAllLogs *bool `json:"disableAllLogs,omitempty" tf:"disable_all_logs,omitempty"`
 
-	// The ARN of the role that allows IoT to write to Cloudwatch logs.
+	// The ARN of the role that allows IoT to write to CloudWatch logs.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
@@ -49,7 +49,7 @@ type LoggingOptionsObservation struct {
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The ARN of the role that allows IoT to write to Cloudwatch logs.
+	// The ARN of the role that allows IoT to write to CloudWatch logs.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
 
@@ -68,7 +68,7 @@ type LoggingOptionsParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// The ARN of the role that allows IoT to write to Cloudwatch logs.
+	// The ARN of the role that allows IoT to write to CloudWatch logs.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional

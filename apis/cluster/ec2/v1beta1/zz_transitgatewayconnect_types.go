@@ -41,7 +41,7 @@ type TransitGatewayConnectInitParameters struct {
 	// +kubebuilder:validation:Optional
 	TransitGatewayIDSelector *v2.Selector `json:"transitGatewayIdSelector,omitempty" tf:"-"`
 
-	// The underlaying VPC attachment
+	// The underlying VPC attachment
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.TransitGatewayVPCAttachment
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	TransportAttachmentID *string `json:"transportAttachmentId,omitempty" tf:"transport_attachment_id,omitempty"`
@@ -84,7 +84,7 @@ type TransitGatewayConnectObservation struct {
 	// Identifier of EC2 Transit Gateway.
 	TransitGatewayID *string `json:"transitGatewayId,omitempty" tf:"transit_gateway_id,omitempty"`
 
-	// The underlaying VPC attachment
+	// The underlying VPC attachment
 	TransportAttachmentID *string `json:"transportAttachmentId,omitempty" tf:"transport_attachment_id,omitempty"`
 }
 
@@ -126,7 +126,7 @@ type TransitGatewayConnectParameters struct {
 	// +kubebuilder:validation:Optional
 	TransitGatewayIDSelector *v2.Selector `json:"transitGatewayIdSelector,omitempty" tf:"-"`
 
-	// The underlaying VPC attachment
+	// The underlying VPC attachment
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.TransitGatewayVPCAttachment
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional

@@ -18,7 +18,7 @@ type RevisionInitParameters struct {
 	// An optional comment about the revision.
 	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
 
-	// The dataset id.
+	// The dataset ID.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/dataexchange/v1beta1.DataSet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DataSetID *string `json:"dataSetId,omitempty" tf:"data_set_id,omitempty"`
@@ -44,17 +44,17 @@ type RevisionObservation struct {
 	// An optional comment about the revision.
 	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
 
-	// The dataset id.
+	// The dataset ID.
 	DataSetID *string `json:"dataSetId,omitempty" tf:"data_set_id,omitempty"`
 
-	// The Id of the data set.
+	// The ID of the data set.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The Id of the revision.
+	// The ID of the revision.
 	RevisionID *string `json:"revisionId,omitempty" tf:"revision_id,omitempty"`
 
 	// Key-value map of resource tags.
@@ -72,7 +72,7 @@ type RevisionParameters struct {
 	// +kubebuilder:validation:Optional
 	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
 
-	// The dataset id.
+	// The dataset ID.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/dataexchange/v1beta1.DataSet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional

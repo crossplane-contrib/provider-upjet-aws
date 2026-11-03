@@ -565,11 +565,11 @@ spec:
               forProvider:
                 properties:
                   alias:
-                    description: The alias of the prometheus workspace. See more in
-                      AWS Docs.
+                    description: Alias of the prometheus workspace. See more in AWS
+                      Docs.
                     type: string
                   kmsKeyArn:
-                    description: The ARN for the KMS encryption key. If this argument
+                    description: ARN for the KMS encryption key. If this argument
                       is not provided, then the AWS owned encryption key will be used
                       to encrypt the data in the workspace. See more in AWS Docs
                     type: string
@@ -648,13 +648,13 @@ spec:
                         type: object
                     type: object
                   loggingConfiguration:
-                    description: Logging configuration for the workspace. See Logging
-                      Configuration below for details.
+                    description: Logging configuration for the workspace. See logging_configuration
+                      Block below for details.
                     properties:
                       logGroupArn:
-                        description: The ARN of the CloudWatch log group to which
-                          the vended log data will be published. This log group must
-                          exist. The ARN must end with :*
+                        description: ARN of the CloudWatch log group to which the
+                          vended log data will be published. This log group must exist.
+                          The ARN must end with :*
                         type: string
                     type: object
                   region:
@@ -685,11 +685,11 @@ spec:
                   autoscaler.
                 properties:
                   alias:
-                    description: The alias of the prometheus workspace. See more in
-                      AWS Docs.
+                    description: Alias of the prometheus workspace. See more in AWS
+                      Docs.
                     type: string
                   kmsKeyArn:
-                    description: The ARN for the KMS encryption key. If this argument
+                    description: ARN for the KMS encryption key. If this argument
                       is not provided, then the AWS owned encryption key will be used
                       to encrypt the data in the workspace. See more in AWS Docs
                     type: string
@@ -768,13 +768,13 @@ spec:
                         type: object
                     type: object
                   loggingConfiguration:
-                    description: Logging configuration for the workspace. See Logging
-                      Configuration below for details.
+                    description: Logging configuration for the workspace. See logging_configuration
+                      Block below for details.
                     properties:
                       logGroupArn:
-                        description: The ARN of the CloudWatch log group to which
-                          the vended log data will be published. This log group must
-                          exist. The ARN must end with :*
+                        description: ARN of the CloudWatch log group to which the
+                          vended log data will be published. This log group must exist.
+                          The ARN must end with :*
                         type: string
                     type: object
                   tags:
@@ -876,8 +876,8 @@ spec:
               atProvider:
                 properties:
                   alias:
-                    description: The alias of the prometheus workspace. See more in
-                      AWS Docs.
+                    description: Alias of the prometheus workspace. See more in AWS
+                      Docs.
                     type: string
                   arn:
                     description: ARN of the workspace.
@@ -886,18 +886,18 @@ spec:
                     description: Identifier of the workspace
                     type: string
                   kmsKeyArn:
-                    description: The ARN for the KMS encryption key. If this argument
+                    description: ARN for the KMS encryption key. If this argument
                       is not provided, then the AWS owned encryption key will be used
                       to encrypt the data in the workspace. See more in AWS Docs
                     type: string
                   loggingConfiguration:
-                    description: Logging configuration for the workspace. See Logging
-                      Configuration below for details.
+                    description: Logging configuration for the workspace. See logging_configuration
+                      Block below for details.
                     properties:
                       logGroupArn:
-                        description: The ARN of the CloudWatch log group to which
-                          the vended log data will be published. This log group must
-                          exist. The ARN must end with :*
+                        description: ARN of the CloudWatch log group to which the
+                          vended log data will be published. This log group must exist.
+                          The ARN must end with :*
                         type: string
                     type: object
                   prometheusEndpoint:
@@ -917,9 +917,8 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
                 type: object

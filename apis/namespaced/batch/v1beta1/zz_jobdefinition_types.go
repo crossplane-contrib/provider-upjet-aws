@@ -558,7 +558,7 @@ type JobDefinitionInitParameters struct {
 	// Valid ECS properties provided as a single valid JSON document. This parameter is only valid if the type parameter is container.
 	EcsProperties *string `json:"ecsProperties,omitempty" tf:"ecs_properties,omitempty"`
 
-	// Valid eks properties. This parameter is only valid if the type parameter is container.
+	// Valid EKS properties. This parameter is only valid if the type parameter is container.
 	EksProperties *EksPropertiesInitParameters `json:"eksProperties,omitempty" tf:"eks_properties,omitempty"`
 
 	// Name of the job definition.
@@ -612,7 +612,7 @@ type JobDefinitionObservation struct {
 	// Valid ECS properties provided as a single valid JSON document. This parameter is only valid if the type parameter is container.
 	EcsProperties *string `json:"ecsProperties,omitempty" tf:"ecs_properties,omitempty"`
 
-	// Valid eks properties. This parameter is only valid if the type parameter is container.
+	// Valid EKS properties. This parameter is only valid if the type parameter is container.
 	EksProperties *EksPropertiesObservation `json:"eksProperties,omitempty" tf:"eks_properties,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -676,7 +676,7 @@ type JobDefinitionParameters struct {
 	// +kubebuilder:validation:Optional
 	EcsProperties *string `json:"ecsProperties,omitempty" tf:"ecs_properties,omitempty"`
 
-	// Valid eks properties. This parameter is only valid if the type parameter is container.
+	// Valid EKS properties. This parameter is only valid if the type parameter is container.
 	// +kubebuilder:validation:Optional
 	EksProperties *EksPropertiesParameters `json:"eksProperties,omitempty" tf:"eks_properties,omitempty"`
 

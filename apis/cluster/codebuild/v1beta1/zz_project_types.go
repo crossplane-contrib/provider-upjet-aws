@@ -242,7 +242,7 @@ type BuildStatusConfigInitParameters struct {
 	// this parameter depends on the source provider.
 	Context *string `json:"context,omitempty" tf:"context,omitempty"`
 
-	// Specifies the target url of the build status CodeBuild sends to the source provider. The
+	// Specifies the target URL of the build status CodeBuild sends to the source provider. The
 	// usage of this parameter depends on the source provider.
 	TargetURL *string `json:"targetUrl,omitempty" tf:"target_url,omitempty"`
 }
@@ -253,7 +253,7 @@ type BuildStatusConfigObservation struct {
 	// this parameter depends on the source provider.
 	Context *string `json:"context,omitempty" tf:"context,omitempty"`
 
-	// Specifies the target url of the build status CodeBuild sends to the source provider. The
+	// Specifies the target URL of the build status CodeBuild sends to the source provider. The
 	// usage of this parameter depends on the source provider.
 	TargetURL *string `json:"targetUrl,omitempty" tf:"target_url,omitempty"`
 }
@@ -265,7 +265,7 @@ type BuildStatusConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	Context *string `json:"context,omitempty" tf:"context,omitempty"`
 
-	// Specifies the target url of the build status CodeBuild sends to the source provider. The
+	// Specifies the target URL of the build status CodeBuild sends to the source provider. The
 	// usage of this parameter depends on the source provider.
 	// +kubebuilder:validation:Optional
 	TargetURL *string `json:"targetUrl,omitempty" tf:"target_url,omitempty"`
@@ -1606,7 +1606,7 @@ type SourceBuildStatusConfigInitParameters struct {
 	// this parameter depends on the source provider.
 	Context *string `json:"context,omitempty" tf:"context,omitempty"`
 
-	// Specifies the target url of the build status CodeBuild sends to the source provider. The
+	// Specifies the target URL of the build status CodeBuild sends to the source provider. The
 	// usage of this parameter depends on the source provider.
 	TargetURL *string `json:"targetUrl,omitempty" tf:"target_url,omitempty"`
 }
@@ -1617,7 +1617,7 @@ type SourceBuildStatusConfigObservation struct {
 	// this parameter depends on the source provider.
 	Context *string `json:"context,omitempty" tf:"context,omitempty"`
 
-	// Specifies the target url of the build status CodeBuild sends to the source provider. The
+	// Specifies the target URL of the build status CodeBuild sends to the source provider. The
 	// usage of this parameter depends on the source provider.
 	TargetURL *string `json:"targetUrl,omitempty" tf:"target_url,omitempty"`
 }
@@ -1629,7 +1629,7 @@ type SourceBuildStatusConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	Context *string `json:"context,omitempty" tf:"context,omitempty"`
 
-	// Specifies the target url of the build status CodeBuild sends to the source provider. The
+	// Specifies the target URL of the build status CodeBuild sends to the source provider. The
 	// usage of this parameter depends on the source provider.
 	// +kubebuilder:validation:Optional
 	TargetURL *string `json:"targetUrl,omitempty" tf:"target_url,omitempty"`

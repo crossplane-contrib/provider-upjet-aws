@@ -15,11 +15,11 @@ spec:
   forProvider:
     platform: APNS
     platformCredentialSecretRef:
-      key: example-key
+      key: attribute.apns-private-key.pem
       name: example-secret
       namespace: upbound-system
     platformPrincipalSecretRef:
-      key: example-key
+      key: attribute.apns-certificate.pem
       name: example-secret
       namespace: upbound-system
     region: us-west-1

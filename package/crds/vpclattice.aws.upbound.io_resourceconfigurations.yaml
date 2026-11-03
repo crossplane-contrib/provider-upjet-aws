@@ -92,14 +92,16 @@ spec:
                     type: string
                   portRanges:
                     description: Port ranges to access the Resource either single
-                      port 80 or range 80-81 range.
+                      port 80 or range 80-81 range. For CIDR resource configurations,
+                      include port 53 to allow DNS.
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
                   protocol:
-                    description: Protocol for the Resource TCP is currently the only
-                      supported value.  MUST be specified if resource_configuration_group_id
+                    description: Protocol for the Resource. Valid values are TCP and
+                      TCP_UDP. TCP_UDP is only supported when type is CIDR (UDP is
+                      only supported for DNS). MUST be specified if resource_configuration_group_id
                       is not.
                     type: string
                   region:
@@ -198,6 +200,24 @@ spec:
                                 type: object
                             type: object
                           type: array
+                        cidrResource:
+                          description: Resource CIDR configuration. Only valid when
+                            type is CIDR. See cidr_resource Block for details.
+                          items:
+                            properties:
+                              cidrRanges:
+                                description: Set of 1 to 10 IPv4 and/or IPv6 CIDR
+                                  ranges (prefix length required), for example 10.0.0.0/16.
+                                  0.0.0.0/0 and ::/0 are only allowed as the sole
+                                  range. Reserved ranges such as 169.254.0.0/16, 100.64.0.0/10,
+                                  224.0.0.0/4, fe80::/10 and ff00::/8 are rejected
+                                  by AWS.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                            type: object
+                          type: array
                         dnsResource:
                           description: Resource DNS Configuration. See dns_resource
                             Block for details.
@@ -314,7 +334,7 @@ spec:
                     x-kubernetes-map-type: granular
                   type:
                     description: Type of Resource Configuration. Must be one of GROUP,
-                      CHILD, SINGLE, ARN.
+                      CHILD, SINGLE, ARN, CIDR. Use CIDR with a cidr_resource block.
                     type: string
                 required:
                 - region
@@ -351,14 +371,16 @@ spec:
                     type: string
                   portRanges:
                     description: Port ranges to access the Resource either single
-                      port 80 or range 80-81 range.
+                      port 80 or range 80-81 range. For CIDR resource configurations,
+                      include port 53 to allow DNS.
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
                   protocol:
-                    description: Protocol for the Resource TCP is currently the only
-                      supported value.  MUST be specified if resource_configuration_group_id
+                    description: Protocol for the Resource. Valid values are TCP and
+                      TCP_UDP. TCP_UDP is only supported when type is CIDR (UDP is
+                      only supported for DNS). MUST be specified if resource_configuration_group_id
                       is not.
                     type: string
                   resourceConfigurationDefinition:
@@ -452,6 +474,24 @@ spec:
                                 type: object
                             type: object
                           type: array
+                        cidrResource:
+                          description: Resource CIDR configuration. Only valid when
+                            type is CIDR. See cidr_resource Block for details.
+                          items:
+                            properties:
+                              cidrRanges:
+                                description: Set of 1 to 10 IPv4 and/or IPv6 CIDR
+                                  ranges (prefix length required), for example 10.0.0.0/16.
+                                  0.0.0.0/0 and ::/0 are only allowed as the sole
+                                  range. Reserved ranges such as 169.254.0.0/16, 100.64.0.0/10,
+                                  224.0.0.0/4, fe80::/10 and ff00::/8 are rejected
+                                  by AWS.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                            type: object
+                          type: array
                         dnsResource:
                           description: Resource DNS Configuration. See dns_resource
                             Block for details.
@@ -568,7 +608,7 @@ spec:
                     x-kubernetes-map-type: granular
                   type:
                     description: Type of Resource Configuration. Must be one of GROUP,
-                      CHILD, SINGLE, ARN.
+                      CHILD, SINGLE, ARN, CIDR. Use CIDR with a cidr_resource block.
                     type: string
                 type: object
               managementPolicies:
@@ -699,14 +739,16 @@ spec:
                     type: string
                   portRanges:
                     description: Port ranges to access the Resource either single
-                      port 80 or range 80-81 range.
+                      port 80 or range 80-81 range. For CIDR resource configurations,
+                      include port 53 to allow DNS.
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
                   protocol:
-                    description: Protocol for the Resource TCP is currently the only
-                      supported value.  MUST be specified if resource_configuration_group_id
+                    description: Protocol for the Resource. Valid values are TCP and
+                      TCP_UDP. TCP_UDP is only supported when type is CIDR (UDP is
+                      only supported for DNS). MUST be specified if resource_configuration_group_id
                       is not.
                     type: string
                   region:
@@ -727,6 +769,24 @@ spec:
                               arn:
                                 description: ARN of the Resource for this configuration.
                                 type: string
+                            type: object
+                          type: array
+                        cidrResource:
+                          description: Resource CIDR configuration. Only valid when
+                            type is CIDR. See cidr_resource Block for details.
+                          items:
+                            properties:
+                              cidrRanges:
+                                description: Set of 1 to 10 IPv4 and/or IPv6 CIDR
+                                  ranges (prefix length required), for example 10.0.0.0/16.
+                                  0.0.0.0/0 and ::/0 are only allowed as the sole
+                                  range. Reserved ranges such as 169.254.0.0/16, 100.64.0.0/10,
+                                  224.0.0.0/4, fe80::/10 and ff00::/8 are rejected
+                                  by AWS.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
                             type: object
                           type: array
                         dnsResource:
@@ -776,7 +836,7 @@ spec:
                     x-kubernetes-map-type: granular
                   type:
                     description: Type of Resource Configuration. Must be one of GROUP,
-                      CHILD, SINGLE, ARN.
+                      CHILD, SINGLE, ARN, CIDR. Use CIDR with a cidr_resource block.
                     type: string
                 type: object
               conditions:

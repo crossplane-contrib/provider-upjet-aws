@@ -255,10 +255,9 @@ spec:
                                     type: string
                                   type: array
                                 taskType:
-                                  description: Type of task to evaluate. Common values
-                                    are Summarization, Classification, QuestionAndAnswer,
-                                    Generation, and Custom. Use General for automated
-                                    evaluation jobs that use a judge model (evaluator_model_config).
+                                  description: 'Type of task to evaluate. Valid values:
+                                    Summarization, Classification, QuestionAndAnswer,
+                                    Generation, Custom.'
                                   type: string
                               type: object
                             type: array
@@ -334,10 +333,9 @@ spec:
                                     type: string
                                   type: array
                                 taskType:
-                                  description: Type of task to evaluate. Common values
-                                    are Summarization, Classification, QuestionAndAnswer,
-                                    Generation, and Custom. Use General for automated
-                                    evaluation jobs that use a judge model (evaluator_model_config).
+                                  description: 'Type of task to evaluate. Valid values:
+                                    Summarization, Classification, QuestionAndAnswer,
+                                    Generation, Custom.'
                                   type: string
                               type: object
                             type: array
@@ -985,10 +983,9 @@ spec:
                                     type: string
                                   type: array
                                 taskType:
-                                  description: Type of task to evaluate. Common values
-                                    are Summarization, Classification, QuestionAndAnswer,
-                                    Generation, and Custom. Use General for automated
-                                    evaluation jobs that use a judge model (evaluator_model_config).
+                                  description: 'Type of task to evaluate. Valid values:
+                                    Summarization, Classification, QuestionAndAnswer,
+                                    Generation, Custom.'
                                   type: string
                               type: object
                             type: array
@@ -1064,10 +1061,9 @@ spec:
                                     type: string
                                   type: array
                                 taskType:
-                                  description: Type of task to evaluate. Common values
-                                    are Summarization, Classification, QuestionAndAnswer,
-                                    Generation, and Custom. Use General for automated
-                                    evaluation jobs that use a judge model (evaluator_model_config).
+                                  description: 'Type of task to evaluate. Valid values:
+                                    Summarization, Classification, QuestionAndAnswer,
+                                    Generation, Custom.'
                                   type: string
                               type: object
                             type: array
@@ -1686,10 +1682,9 @@ spec:
                                     type: string
                                   type: array
                                 taskType:
-                                  description: Type of task to evaluate. Common values
-                                    are Summarization, Classification, QuestionAndAnswer,
-                                    Generation, and Custom. Use General for automated
-                                    evaluation jobs that use a judge model (evaluator_model_config).
+                                  description: 'Type of task to evaluate. Valid values:
+                                    Summarization, Classification, QuestionAndAnswer,
+                                    Generation, Custom.'
                                   type: string
                               type: object
                             type: array
@@ -1765,10 +1760,9 @@ spec:
                                     type: string
                                   type: array
                                 taskType:
-                                  description: Type of task to evaluate. Common values
-                                    are Summarization, Classification, QuestionAndAnswer,
-                                    Generation, and Custom. Use General for automated
-                                    evaluation jobs that use a judge model (evaluator_model_config).
+                                  description: 'Type of task to evaluate. Valid values:
+                                    Summarization, Classification, QuestionAndAnswer,
+                                    Generation, Custom.'
                                   type: string
                               type: object
                             type: array
@@ -1981,6 +1975,8 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
                 type: object

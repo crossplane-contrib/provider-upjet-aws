@@ -33,14 +33,14 @@ type DBInstanceInitParameters struct {
 	// The id of the DB parameter group assigned to your DB instance.
 	DBParameterGroupIdentifier *string `json:"dbParameterGroupIdentifier,omitempty" tf:"db_parameter_group_identifier,omitempty"`
 
-	// (Default "InfluxIOIncludedT1") Timestream for InfluxDB DB storage type to read and write InfluxDB data. You can choose between 3 different types of provisioned Influx IOPS included storage according to your workloads requirements: Influx IO Included 3000 IOPS, Influx IO Included 12000 IOPS, Influx IO Included 16000 IOPS. Valid options are: "InfluxIOIncludedT1", "InfluxIOIncludedT2", and "InfluxIOIncludedT3". If you use "InfluxIOIncludedT2" or "InfluxIOIncludedT3", the minimum value for allocated_storage` is 400. This argument is updatable. For a single instance, after this argument has been updated once, it can only be updated again after 6 hours have passed.
+	// Timestream for InfluxDB DB storage type to read and write InfluxDB data. You can choose between 3 different types of provisioned Influx IOPS included storage according to your workloads requirements: Influx IO Included 3000 IOPS, Influx IO Included 12000 IOPS, Influx IO Included 16000 IOPS. Valid options are: "InfluxIOIncludedT1", "InfluxIOIncludedT2", and "InfluxIOIncludedT3". If you use "InfluxIOIncludedT2" or "InfluxIOIncludedT3", the minimum value for allocated_storage` is 400. This argument is updatable. For a single instance, after this argument has been updated once, it can only be updated again after 6 hours have passed.
 	// The Timestream for InfluxDB DB storage type to read and write InfluxDB data.
 	// You can choose between 3 different types of provisioned Influx IOPS included storage according
 	// to your workloads requirements: Influx IO Included 3000 IOPS, Influx IO Included 12000 IOPS,
 	// Influx IO Included 16000 IOPS.
 	DBStorageType *string `json:"dbStorageType,omitempty" tf:"db_storage_type,omitempty"`
 
-	// (Default "SINGLE_AZ") Specifies whether the DB instance will be deployed as a standalone instance or with a Multi-AZ standby for high availability. Valid options are: "SINGLE_AZ", "WITH_MULTIAZ_STANDBY". This argument is updatable.
+	// Whether the DB instance will be deployed as a standalone instance or with a Multi-AZ standby for high availability. Valid options are: "SINGLE_AZ", "WITH_MULTIAZ_STANDBY". This argument is updatable.
 	// Specifies whether the DB instance will be deployed as a standalone instance or
 	// with a Multi-AZ standby for high availability.
 	DeploymentType *string `json:"deploymentType,omitempty" tf:"deployment_type,omitempty"`
@@ -60,7 +60,7 @@ type DBInstanceInitParameters struct {
 	// and per region.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Specifies whether the networkType of the Timestream for InfluxDB instance is IPV4, which can communicate over IPv4 protocol only, or DUAL, which can communicate over both IPv4 and IPv6 protocols.
+	// Network type of the Timestream for InfluxDB instance. IPV4 can communicate over IPv4 protocol only, and DUAL can communicate over both IPv4 and IPv6 protocols.
 	// Specifies whether the networkType of the Timestream for InfluxDB instance is
 	// IPV4, which can communicate over IPv4 protocol only, or DUAL, which can communicate
 	// over both IPv4 and IPv6 protocols.
@@ -78,11 +78,11 @@ type DBInstanceInitParameters struct {
 	// stored in a Secret created in AWS SecretManager in your account.
 	PasswordSecretRef v2.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
-	// (Default 8086) The port on which the instance accepts connections. Valid values: 1024-65535. Cannot be 2375-2376, 7788-7799, 8090, or 51678-51680. This argument is updatable.
+	// Port on which the instance accepts connections. Valid values: 1024-65535. Cannot be 2375-2376, 7788-7799, 8090, or 51678-51680. This argument is updatable.
 	// The port number on which InfluxDB accepts connections.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
-	// (Default false) Configures the DB instance with a public IP to facilitate access. Other resources, such as a VPC, a subnet, an internet gateway, and a route table with routes, are also required to enabled public access, in addition to this argument. See "Usage with Public Internet Access Enabled" for an example configuration with all required resources for public internet access.
+	// Whether to configure the DB instance with a public IP to facilitate access. Other resources, such as a VPC, a subnet, an internet gateway, and a route table with routes, are also required to enable public access, in addition to this argument. See "Usage with Public Internet Access Enabled" for an example configuration with all required resources for public internet access.
 	// Configures the DB instance with a public IP to facilitate access.
 	PubliclyAccessible *bool `json:"publiclyAccessible,omitempty" tf:"publicly_accessible,omitempty"`
 
@@ -208,14 +208,14 @@ type DBInstanceObservation struct {
 	// The id of the DB parameter group assigned to your DB instance.
 	DBParameterGroupIdentifier *string `json:"dbParameterGroupIdentifier,omitempty" tf:"db_parameter_group_identifier,omitempty"`
 
-	// (Default "InfluxIOIncludedT1") Timestream for InfluxDB DB storage type to read and write InfluxDB data. You can choose between 3 different types of provisioned Influx IOPS included storage according to your workloads requirements: Influx IO Included 3000 IOPS, Influx IO Included 12000 IOPS, Influx IO Included 16000 IOPS. Valid options are: "InfluxIOIncludedT1", "InfluxIOIncludedT2", and "InfluxIOIncludedT3". If you use "InfluxIOIncludedT2" or "InfluxIOIncludedT3", the minimum value for allocated_storage` is 400. This argument is updatable. For a single instance, after this argument has been updated once, it can only be updated again after 6 hours have passed.
+	// Timestream for InfluxDB DB storage type to read and write InfluxDB data. You can choose between 3 different types of provisioned Influx IOPS included storage according to your workloads requirements: Influx IO Included 3000 IOPS, Influx IO Included 12000 IOPS, Influx IO Included 16000 IOPS. Valid options are: "InfluxIOIncludedT1", "InfluxIOIncludedT2", and "InfluxIOIncludedT3". If you use "InfluxIOIncludedT2" or "InfluxIOIncludedT3", the minimum value for allocated_storage` is 400. This argument is updatable. For a single instance, after this argument has been updated once, it can only be updated again after 6 hours have passed.
 	// The Timestream for InfluxDB DB storage type to read and write InfluxDB data.
 	// You can choose between 3 different types of provisioned Influx IOPS included storage according
 	// to your workloads requirements: Influx IO Included 3000 IOPS, Influx IO Included 12000 IOPS,
 	// Influx IO Included 16000 IOPS.
 	DBStorageType *string `json:"dbStorageType,omitempty" tf:"db_storage_type,omitempty"`
 
-	// (Default "SINGLE_AZ") Specifies whether the DB instance will be deployed as a standalone instance or with a Multi-AZ standby for high availability. Valid options are: "SINGLE_AZ", "WITH_MULTIAZ_STANDBY". This argument is updatable.
+	// Whether the DB instance will be deployed as a standalone instance or with a Multi-AZ standby for high availability. Valid options are: "SINGLE_AZ", "WITH_MULTIAZ_STANDBY". This argument is updatable.
 	// Specifies whether the DB instance will be deployed as a standalone instance or
 	// with a Multi-AZ standby for high availability.
 	DeploymentType *string `json:"deploymentType,omitempty" tf:"deployment_type,omitempty"`
@@ -249,7 +249,7 @@ type DBInstanceObservation struct {
 	// and per region.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Specifies whether the networkType of the Timestream for InfluxDB instance is IPV4, which can communicate over IPv4 protocol only, or DUAL, which can communicate over both IPv4 and IPv6 protocols.
+	// Network type of the Timestream for InfluxDB instance. IPV4 can communicate over IPv4 protocol only, and DUAL can communicate over both IPv4 and IPv6 protocols.
 	// Specifies whether the networkType of the Timestream for InfluxDB instance is
 	// IPV4, which can communicate over IPv4 protocol only, or DUAL, which can communicate
 	// over both IPv4 and IPv6 protocols.
@@ -260,11 +260,11 @@ type DBInstanceObservation struct {
 	// InfluxDB organization is a workspace for a group of users.
 	Organization *string `json:"organization,omitempty" tf:"organization,omitempty"`
 
-	// (Default 8086) The port on which the instance accepts connections. Valid values: 1024-65535. Cannot be 2375-2376, 7788-7799, 8090, or 51678-51680. This argument is updatable.
+	// Port on which the instance accepts connections. Valid values: 1024-65535. Cannot be 2375-2376, 7788-7799, 8090, or 51678-51680. This argument is updatable.
 	// The port number on which InfluxDB accepts connections.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
-	// (Default false) Configures the DB instance with a public IP to facilitate access. Other resources, such as a VPC, a subnet, an internet gateway, and a route table with routes, are also required to enabled public access, in addition to this argument. See "Usage with Public Internet Access Enabled" for an example configuration with all required resources for public internet access.
+	// Whether to configure the DB instance with a public IP to facilitate access. Other resources, such as a VPC, a subnet, an internet gateway, and a route table with routes, are also required to enable public access, in addition to this argument. See "Usage with Public Internet Access Enabled" for an example configuration with all required resources for public internet access.
 	// Configures the DB instance with a public IP to facilitate access.
 	PubliclyAccessible *bool `json:"publiclyAccessible,omitempty" tf:"publicly_accessible,omitempty"`
 
@@ -331,7 +331,7 @@ type DBInstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	DBParameterGroupIdentifier *string `json:"dbParameterGroupIdentifier,omitempty" tf:"db_parameter_group_identifier,omitempty"`
 
-	// (Default "InfluxIOIncludedT1") Timestream for InfluxDB DB storage type to read and write InfluxDB data. You can choose between 3 different types of provisioned Influx IOPS included storage according to your workloads requirements: Influx IO Included 3000 IOPS, Influx IO Included 12000 IOPS, Influx IO Included 16000 IOPS. Valid options are: "InfluxIOIncludedT1", "InfluxIOIncludedT2", and "InfluxIOIncludedT3". If you use "InfluxIOIncludedT2" or "InfluxIOIncludedT3", the minimum value for allocated_storage` is 400. This argument is updatable. For a single instance, after this argument has been updated once, it can only be updated again after 6 hours have passed.
+	// Timestream for InfluxDB DB storage type to read and write InfluxDB data. You can choose between 3 different types of provisioned Influx IOPS included storage according to your workloads requirements: Influx IO Included 3000 IOPS, Influx IO Included 12000 IOPS, Influx IO Included 16000 IOPS. Valid options are: "InfluxIOIncludedT1", "InfluxIOIncludedT2", and "InfluxIOIncludedT3". If you use "InfluxIOIncludedT2" or "InfluxIOIncludedT3", the minimum value for allocated_storage` is 400. This argument is updatable. For a single instance, after this argument has been updated once, it can only be updated again after 6 hours have passed.
 	// The Timestream for InfluxDB DB storage type to read and write InfluxDB data.
 	// You can choose between 3 different types of provisioned Influx IOPS included storage according
 	// to your workloads requirements: Influx IO Included 3000 IOPS, Influx IO Included 12000 IOPS,
@@ -339,7 +339,7 @@ type DBInstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	DBStorageType *string `json:"dbStorageType,omitempty" tf:"db_storage_type,omitempty"`
 
-	// (Default "SINGLE_AZ") Specifies whether the DB instance will be deployed as a standalone instance or with a Multi-AZ standby for high availability. Valid options are: "SINGLE_AZ", "WITH_MULTIAZ_STANDBY". This argument is updatable.
+	// Whether the DB instance will be deployed as a standalone instance or with a Multi-AZ standby for high availability. Valid options are: "SINGLE_AZ", "WITH_MULTIAZ_STANDBY". This argument is updatable.
 	// Specifies whether the DB instance will be deployed as a standalone instance or
 	// with a Multi-AZ standby for high availability.
 	// +kubebuilder:validation:Optional
@@ -363,7 +363,7 @@ type DBInstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Specifies whether the networkType of the Timestream for InfluxDB instance is IPV4, which can communicate over IPv4 protocol only, or DUAL, which can communicate over both IPv4 and IPv6 protocols.
+	// Network type of the Timestream for InfluxDB instance. IPV4 can communicate over IPv4 protocol only, and DUAL can communicate over both IPv4 and IPv6 protocols.
 	// Specifies whether the networkType of the Timestream for InfluxDB instance is
 	// IPV4, which can communicate over IPv4 protocol only, or DUAL, which can communicate
 	// over both IPv4 and IPv6 protocols.
@@ -384,12 +384,12 @@ type DBInstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	PasswordSecretRef v2.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
-	// (Default 8086) The port on which the instance accepts connections. Valid values: 1024-65535. Cannot be 2375-2376, 7788-7799, 8090, or 51678-51680. This argument is updatable.
+	// Port on which the instance accepts connections. Valid values: 1024-65535. Cannot be 2375-2376, 7788-7799, 8090, or 51678-51680. This argument is updatable.
 	// The port number on which InfluxDB accepts connections.
 	// +kubebuilder:validation:Optional
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
-	// (Default false) Configures the DB instance with a public IP to facilitate access. Other resources, such as a VPC, a subnet, an internet gateway, and a route table with routes, are also required to enabled public access, in addition to this argument. See "Usage with Public Internet Access Enabled" for an example configuration with all required resources for public internet access.
+	// Whether to configure the DB instance with a public IP to facilitate access. Other resources, such as a VPC, a subnet, an internet gateway, and a route table with routes, are also required to enable public access, in addition to this argument. See "Usage with Public Internet Access Enabled" for an example configuration with all required resources for public internet access.
 	// Configures the DB instance with a public IP to facilitate access.
 	// +kubebuilder:validation:Optional
 	PubliclyAccessible *bool `json:"publiclyAccessible,omitempty" tf:"publicly_accessible,omitempty"`
@@ -462,7 +462,7 @@ type LogDeliveryConfigurationS3ConfigurationInitParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketNameSelector *v2.Selector `json:"bucketNameSelector,omitempty" tf:"-"`
 
-	// Indicates whether log delivery to the S3 bucket is enabled.
+	// Whether log delivery to the S3 bucket is enabled.
 	// Indicates whether log delivery to the S3 bucket is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 }
@@ -473,7 +473,7 @@ type LogDeliveryConfigurationS3ConfigurationObservation struct {
 	// The name of the S3 bucket to deliver logs to.
 	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
 
-	// Indicates whether log delivery to the S3 bucket is enabled.
+	// Whether log delivery to the S3 bucket is enabled.
 	// Indicates whether log delivery to the S3 bucket is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 }
@@ -494,7 +494,7 @@ type LogDeliveryConfigurationS3ConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketNameSelector *v2.Selector `json:"bucketNameSelector,omitempty" tf:"-"`
 
-	// Indicates whether log delivery to the S3 bucket is enabled.
+	// Whether log delivery to the S3 bucket is enabled.
 	// Indicates whether log delivery to the S3 bucket is enabled.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`

@@ -73,13 +73,12 @@ spec:
               forProvider:
                 properties:
                   authentication:
-                    description: 'The authentication type for the client VPC connection.
+                    description: 'Authentication type for the client VPC connection.
                       Specify one of these auth type strings: SASL_IAM, SASL_SCRAM,
                       or TLS.'
                     type: string
                   clientSubnets:
-                    description: The list of subnets in the client VPC to connect
-                      to.
+                    description: List of subnets in the client VPC to connect to.
                     items:
                       type: string
                     type: array
@@ -168,8 +167,8 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   securityGroups:
-                    description: The security groups to attach to the ENIs for the
-                      broker nodes.
+                    description: Security groups to attach to the ENIs for the broker
+                      nodes.
                     items:
                       type: string
                     type: array
@@ -336,7 +335,7 @@ spec:
                         type: object
                     type: object
                   vpcId:
-                    description: The VPC ID of the remote client.
+                    description: VPC ID of the remote client.
                     type: string
                   vpcIdRef:
                     description: Reference to a VPC in ec2 to populate vpcId.
@@ -429,13 +428,12 @@ spec:
                   autoscaler.
                 properties:
                   authentication:
-                    description: 'The authentication type for the client VPC connection.
+                    description: 'Authentication type for the client VPC connection.
                       Specify one of these auth type strings: SASL_IAM, SASL_SCRAM,
                       or TLS.'
                     type: string
                   clientSubnets:
-                    description: The list of subnets in the client VPC to connect
-                      to.
+                    description: List of subnets in the client VPC to connect to.
                     items:
                       type: string
                     type: array
@@ -519,8 +517,8 @@ spec:
                         type: object
                     type: object
                   securityGroups:
-                    description: The security groups to attach to the ENIs for the
-                      broker nodes.
+                    description: Security groups to attach to the ENIs for the broker
+                      nodes.
                     items:
                       type: string
                     type: array
@@ -687,7 +685,7 @@ spec:
                         type: object
                     type: object
                   vpcId:
-                    description: The VPC ID of the remote client.
+                    description: VPC ID of the remote client.
                     type: string
                   vpcIdRef:
                     description: Reference to a VPC in ec2 to populate vpcId.
@@ -864,13 +862,12 @@ spec:
                     description: ARN of the VPC connection.
                     type: string
                   authentication:
-                    description: 'The authentication type for the client VPC connection.
+                    description: 'Authentication type for the client VPC connection.
                       Specify one of these auth type strings: SASL_IAM, SASL_SCRAM,
                       or TLS.'
                     type: string
                   clientSubnets:
-                    description: The list of subnets in the client VPC to connect
-                      to.
+                    description: List of subnets in the client VPC to connect to.
                     items:
                       type: string
                     type: array
@@ -883,8 +880,8 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   securityGroups:
-                    description: The security groups to attach to the ENIs for the
-                      broker nodes.
+                    description: Security groups to attach to the ENIs for the broker
+                      nodes.
                     items:
                       type: string
                     type: array
@@ -898,16 +895,15 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
                   targetClusterArn:
                     description: ARN of the cluster.
                     type: string
                   vpcId:
-                    description: The VPC ID of the remote client.
+                    description: VPC ID of the remote client.
                     type: string
                 type: object
               conditions:

@@ -443,8 +443,7 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   routingStrategy:
-                    description: Specifies the fleet and/or routing type to use for
-                      the alias.
+                    description: Fleet and/or routing type to use for the alias.
                     properties:
                       fleetId:
                         description: ID of the GameLift Fleet to point the alias to.
@@ -486,8 +485,7 @@ spec:
                     description: Name of the alias.
                     type: string
                   routingStrategy:
-                    description: Specifies the fleet and/or routing type to use for
-                      the alias.
+                    description: Fleet and/or routing type to use for the alias.
                     properties:
                       fleetId:
                         description: ID of the GameLift Fleet to point the alias to.
@@ -625,8 +623,7 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   routingStrategy:
-                    description: Specifies the fleet and/or routing type to use for
-                      the alias.
+                    description: Fleet and/or routing type to use for the alias.
                     properties:
                       fleetId:
                         description: ID of the GameLift Fleet to point the alias to.
@@ -648,9 +645,8 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
                 type: object

@@ -89,6 +89,7 @@ type ReplicationConfigurationObservation struct {
 	// A destination configuration block (documented below).
 	Destination *DestinationObservation `json:"destination,omitempty" tf:"destination,omitempty"`
 
+	// (String) ID of the file system.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// ARN of the original source Amazon EFS file system in the replication configuration.

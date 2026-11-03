@@ -294,7 +294,7 @@ spec:
                                 than or equal to 2048 characters in length.
                               type: string
                             resourcePrefix:
-                              description: (Computed) The prefix of the S3 object
+                              description: (Read-Only) The prefix of the S3 object
                                 key for AUDIO logs or the log stream name for TEXT
                                 logs.
                               type: string

@@ -35,6 +35,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: InferenceProfile is the Schema for the InferenceProfiles API.
+          Manages an AWS Bedrock Inference Profile.
         properties:
           apiVersion:
             description: |-
@@ -59,20 +60,20 @@ spec:
               forProvider:
                 properties:
                   description:
-                    description: The description of the inference profile.
+                    description: Description of the inference profile.
                     type: string
                   modelSource:
-                    description: The source of the model this inference profile will
-                      track metrics and cost for. See model_source.
+                    description: Source of the model this inference profile will track
+                      metrics and cost for. See model_source.
                     items:
                       properties:
                         copyFrom:
-                          description: The ARN of the model.
+                          description: ARN of the model.
                           type: string
                       type: object
                     type: array
                   name:
-                    description: The name of the inference profile.
+                    description: Name of the inference profile.
                     type: string
                   region:
                     description: |-
@@ -102,20 +103,20 @@ spec:
                   autoscaler.
                 properties:
                   description:
-                    description: The description of the inference profile.
+                    description: Description of the inference profile.
                     type: string
                   modelSource:
-                    description: The source of the model this inference profile will
-                      track metrics and cost for. See model_source.
+                    description: Source of the model this inference profile will track
+                      metrics and cost for. See model_source.
                     items:
                       properties:
                         copyFrom:
-                          description: The ARN of the model.
+                          description: ARN of the model.
                           type: string
                       type: object
                     type: array
                   name:
-                    description: The name of the inference profile.
+                    description: Name of the inference profile.
                     type: string
                   tags:
                     additionalProperties:
@@ -193,39 +194,39 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The ARN of the inference profile.
+                    description: ARN of the inference profile.
                     type: string
                   createdAt:
-                    description: The time at which the inference profile was created.
+                    description: Time at which the inference profile was created.
                     type: string
                   description:
-                    description: The description of the inference profile.
+                    description: Description of the inference profile.
                     type: string
                   id:
-                    description: The unique identifier of the inference profile.
+                    description: Unique identifier of the inference profile.
                     type: string
                   modelSource:
-                    description: The source of the model this inference profile will
-                      track metrics and cost for. See model_source.
+                    description: Source of the model this inference profile will track
+                      metrics and cost for. See model_source.
                     items:
                       properties:
                         copyFrom:
-                          description: The ARN of the model.
+                          description: ARN of the model.
                           type: string
                       type: object
                     type: array
                   models:
-                    description: A list of information about each model in the inference
+                    description: List of information about each model in the inference
                       profile. See models.
                     items:
                       properties:
                         modelArn:
-                          description: The ARN of the model.
+                          description: ARN of the model.
                           type: string
                       type: object
                     type: array
                   name:
-                    description: The name of the inference profile.
+                    description: Name of the inference profile.
                     type: string
                   region:
                     description: |-
@@ -233,8 +234,8 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   status:
-                    description: The status of the inference profile. ACTIVE means
-                      that the inference profile is available to use.
+                    description: Status of the inference profile. ACTIVE means that
+                      the inference profile is available to use.
                     type: string
                   tags:
                     additionalProperties:
@@ -245,17 +246,17 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
                   type:
-                    description: The type of the inference profile. SYSTEM_DEFINED
-                      means that the inference profile is defined by Amazon Bedrock.
-                      APPLICATION means that the inference profile is defined by the
-                      user.
+                    description: Type of the inference profile. SYSTEM_DEFINED means
+                      that the inference profile is defined by Amazon Bedrock. APPLICATION
+                      means that the inference profile is defined by the user.
                     type: string
                   updatedAt:
-                    description: The time at which the inference profile was last
-                      updated.
+                    description: Time at which the inference profile was last updated.
                     type: string
                 type: object
               conditions:

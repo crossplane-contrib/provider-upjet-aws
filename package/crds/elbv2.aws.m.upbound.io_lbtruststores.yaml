@@ -67,7 +67,7 @@ spec:
                     description: S3 object key holding the client certificate CA bundle.
                     type: string
                   caCertificatesBundleS3ObjectVersion:
-                    description: Version Id of CA bundle S3 bucket object, if versioned,
+                    description: Version ID of CA bundle S3 bucket object, if versioned,
                       defaults to latest if omitted.
                     type: string
                   name:
@@ -111,7 +111,7 @@ spec:
                     description: S3 object key holding the client certificate CA bundle.
                     type: string
                   caCertificatesBundleS3ObjectVersion:
-                    description: Version Id of CA bundle S3 bucket object, if versioned,
+                    description: Version ID of CA bundle S3 bucket object, if versioned,
                       defaults to latest if omitted.
                     type: string
                   name:
@@ -214,7 +214,7 @@ spec:
                     description: S3 object key holding the client certificate CA bundle.
                     type: string
                   caCertificatesBundleS3ObjectVersion:
-                    description: Version Id of CA bundle S3 bucket object, if versioned,
+                    description: Version ID of CA bundle S3 bucket object, if versioned,
                       defaults to latest if omitted.
                     type: string
                   id:

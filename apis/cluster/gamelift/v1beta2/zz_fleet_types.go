@@ -15,19 +15,19 @@ import (
 
 type CertificateConfigurationInitParameters struct {
 
-	// Indicates whether a TLS/SSL certificate is generated for a fleet. Valid values are DISABLED and GENERATED. Default value is DISABLED.
+	// Whether a TLS/SSL certificate is generated for a fleet. Valid values are DISABLED and GENERATED. Default value is DISABLED.
 	CertificateType *string `json:"certificateType,omitempty" tf:"certificate_type,omitempty"`
 }
 
 type CertificateConfigurationObservation struct {
 
-	// Indicates whether a TLS/SSL certificate is generated for a fleet. Valid values are DISABLED and GENERATED. Default value is DISABLED.
+	// Whether a TLS/SSL certificate is generated for a fleet. Valid values are DISABLED and GENERATED. Default value is DISABLED.
 	CertificateType *string `json:"certificateType,omitempty" tf:"certificate_type,omitempty"`
 }
 
 type CertificateConfigurationParameters struct {
 
-	// Indicates whether a TLS/SSL certificate is generated for a fleet. Valid values are DISABLED and GENERATED. Default value is DISABLED.
+	// Whether a TLS/SSL certificate is generated for a fleet. Valid values are DISABLED and GENERATED. Default value is DISABLED.
 	// +kubebuilder:validation:Optional
 	CertificateType *string `json:"certificateType,omitempty" tf:"certificate_type,omitempty"`
 }
@@ -126,7 +126,7 @@ type FleetInitParameters struct {
 	// List of names of metric groups to add this fleet to. A metric group tracks metrics across all fleets in the group. Defaults to default.
 	MetricGroups []*string `json:"metricGroups,omitempty" tf:"metric_groups,omitempty"`
 
-	// The name of the fleet.
+	// Name of the fleet.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Game session protection policy to apply to all instances in this fleetE.g., FullProtection. Defaults to NoProtection.
@@ -178,12 +178,13 @@ type FleetObservation struct {
 	// ARN of an IAM role that instances in the fleet can assume.
 	InstanceRoleArn *string `json:"instanceRoleArn,omitempty" tf:"instance_role_arn,omitempty"`
 
+	// List of paths from which the fleet captures logs.
 	LogPaths []*string `json:"logPaths,omitempty" tf:"log_paths,omitempty"`
 
 	// List of names of metric groups to add this fleet to. A metric group tracks metrics across all fleets in the group. Defaults to default.
 	MetricGroups []*string `json:"metricGroups,omitempty" tf:"metric_groups,omitempty"`
 
-	// The name of the fleet.
+	// Name of the fleet.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Game session protection policy to apply to all instances in this fleetE.g., FullProtection. Defaults to NoProtection.
@@ -212,7 +213,7 @@ type FleetObservation struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
@@ -270,7 +271,7 @@ type FleetParameters struct {
 	// +kubebuilder:validation:Optional
 	MetricGroups []*string `json:"metricGroups,omitempty" tf:"metric_groups,omitempty"`
 
-	// The name of the fleet.
+	// Name of the fleet.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 

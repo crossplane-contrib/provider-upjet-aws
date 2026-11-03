@@ -79,7 +79,7 @@ type IdpInitParameters struct {
 	// Unique Entity ID of the application in SAML Identity Provider.
 	EntityID *string `json:"entityId,omitempty" tf:"entity_id,omitempty"`
 
-	// Metadata of the SAML application in xml format.
+	// Metadata of the SAML application in XML format.
 	MetadataContent *string `json:"metadataContent,omitempty" tf:"metadata_content,omitempty"`
 }
 
@@ -88,7 +88,7 @@ type IdpObservation struct {
 	// Unique Entity ID of the application in SAML Identity Provider.
 	EntityID *string `json:"entityId,omitempty" tf:"entity_id,omitempty"`
 
-	// Metadata of the SAML application in xml format.
+	// Metadata of the SAML application in XML format.
 	MetadataContent *string `json:"metadataContent,omitempty" tf:"metadata_content,omitempty"`
 }
 
@@ -98,7 +98,7 @@ type IdpParameters struct {
 	// +kubebuilder:validation:Optional
 	EntityID *string `json:"entityId" tf:"entity_id,omitempty"`
 
-	// Metadata of the SAML application in xml format.
+	// Metadata of the SAML application in XML format.
 	// +kubebuilder:validation:Optional
 	MetadataContent *string `json:"metadataContent" tf:"metadata_content,omitempty"`
 }

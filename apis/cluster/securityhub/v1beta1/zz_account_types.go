@@ -27,7 +27,7 @@ type AccountInitParameters struct {
 
 type AccountObservation struct {
 
-	// ARN of the SecurityHub Hub created in the account.
+	// ARN of the Security Hub Hub created in the account.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Whether to automatically enable new controls when they are added to standards that are enabled. By default, this is set to true, and new controls are enabled automatically. To not automatically enable new controls, set this to false.

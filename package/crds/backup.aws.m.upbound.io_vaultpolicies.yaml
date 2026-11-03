@@ -143,7 +143,7 @@ spec:
                         type: object
                     type: object
                   policy:
-                    description: The backup vault access policy document in JSON format.
+                    description: Backup vault access policy document in JSON format.
                     type: string
                   region:
                     description: |-
@@ -250,7 +250,7 @@ spec:
                         type: object
                     type: object
                   policy:
-                    description: The backup vault access policy document in JSON format.
+                    description: Backup vault access policy document in JSON format.
                     type: string
                 type: object
               managementPolicies:
@@ -322,16 +322,16 @@ spec:
               atProvider:
                 properties:
                   backupVaultArn:
-                    description: The ARN of the vault.
+                    description: ARN of the vault.
                     type: string
                   backupVaultName:
                     description: Name of the backup vault to add policy for.
                     type: string
                   id:
-                    description: The name of the vault.
+                    description: Name of the vault.
                     type: string
                   policy:
-                    description: The backup vault access policy document in JSON format.
+                    description: Backup vault access policy document in JSON format.
                     type: string
                   region:
                     description: |-

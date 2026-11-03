@@ -15,144 +15,144 @@ import (
 
 type ChatInputVariableInitParameters struct {
 
-	// Name of the prompt.
+	// Name of the prompt variant.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type ChatInputVariableObservation struct {
 
-	// Name of the prompt.
+	// Name of the prompt variant.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type ChatInputVariableParameters struct {
 
-	// Name of the prompt.
+	// Name of the prompt variant.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 }
 
 type ChatMessageInitParameters struct {
 
-	// Contains the content for the message you pass to, or receive from a model. See [Message Content] for more information.
+	// Content for the message you pass to, or receive from, a model. See content Block for more information.
 	Content []MessageContentInitParameters `json:"content,omitempty" tf:"content,omitempty"`
 
-	// The role that the message belongs to.
+	// Role that the message belongs to.
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
 }
 
 type ChatMessageObservation struct {
 
-	// Contains the content for the message you pass to, or receive from a model. See [Message Content] for more information.
+	// Content for the message you pass to, or receive from, a model. See content Block for more information.
 	Content []MessageContentObservation `json:"content,omitempty" tf:"content,omitempty"`
 
-	// The role that the message belongs to.
+	// Role that the message belongs to.
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
 }
 
 type ChatMessageParameters struct {
 
-	// Contains the content for the message you pass to, or receive from a model. See [Message Content] for more information.
+	// Content for the message you pass to, or receive from, a model. See content Block for more information.
 	// +kubebuilder:validation:Optional
 	Content []MessageContentParameters `json:"content,omitempty" tf:"content,omitempty"`
 
-	// The role that the message belongs to.
+	// Role that the message belongs to.
 	// +kubebuilder:validation:Optional
 	Role *string `json:"role" tf:"role,omitempty"`
 }
 
 type ChatSystemCachePointInitParameters struct {
 
-	// Indicates that the CachePointBlock is of the default type. Valid values: default.
+	// Cache point type. Valid values: default.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type ChatSystemCachePointObservation struct {
 
-	// Indicates that the CachePointBlock is of the default type. Valid values: default.
+	// Cache point type. Valid values: default.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type ChatSystemCachePointParameters struct {
 
-	// Indicates that the CachePointBlock is of the default type. Valid values: default.
+	// Cache point type. Valid values: default.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type ChatSystemInitParameters struct {
 
-	// A cache checkpoint within a template configuration. See Cache Point for more information.
+	// Cache checkpoint within a message. See cache_point Block for more information.
 	CachePoint *ChatSystemCachePointInitParameters `json:"cachePoint,omitempty" tf:"cache_point,omitempty"`
 
-	// Contains inference configurations for the prompt variant. See Text Inference Configuration for more information.
+	// Inference configurations for the prompt variant. See variant.inference_configuration.text Block for more information.
 	Text *string `json:"text,omitempty" tf:"text,omitempty"`
 }
 
 type ChatSystemObservation struct {
 
-	// A cache checkpoint within a template configuration. See Cache Point for more information.
+	// Cache checkpoint within a message. See cache_point Block for more information.
 	CachePoint *ChatSystemCachePointObservation `json:"cachePoint,omitempty" tf:"cache_point,omitempty"`
 
-	// Contains inference configurations for the prompt variant. See Text Inference Configuration for more information.
+	// Inference configurations for the prompt variant. See variant.inference_configuration.text Block for more information.
 	Text *string `json:"text,omitempty" tf:"text,omitempty"`
 }
 
 type ChatSystemParameters struct {
 
-	// A cache checkpoint within a template configuration. See Cache Point for more information.
+	// Cache checkpoint within a message. See cache_point Block for more information.
 	// +kubebuilder:validation:Optional
 	CachePoint *ChatSystemCachePointParameters `json:"cachePoint,omitempty" tf:"cache_point,omitempty"`
 
-	// Contains inference configurations for the prompt variant. See Text Inference Configuration for more information.
+	// Inference configurations for the prompt variant. See variant.inference_configuration.text Block for more information.
 	// +kubebuilder:validation:Optional
 	Text *string `json:"text,omitempty" tf:"text,omitempty"`
 }
 
 type ChatToolConfigurationInitParameters struct {
 
-	// A list of tools to pass to a model. See Tool for more information.
+	// Specific tool that the model must request. No text is generated but the results of tool use are sent back to the model to help generate a response. See variant.template_configuration.chat.tool_configuration.tool_choice.tool Block for more information.
 	Tool []ToolConfigurationToolInitParameters `json:"tool,omitempty" tf:"tool,omitempty"`
 
-	// Defines which tools the model should request when invoked. See Tool Choice for more information.
+	// Configuration for which tools the model should request when invoked. See tool_choice Block for more information.
 	ToolChoice *ToolConfigurationToolChoiceInitParameters `json:"toolChoice,omitempty" tf:"tool_choice,omitempty"`
 }
 
 type ChatToolConfigurationObservation struct {
 
-	// A list of tools to pass to a model. See Tool for more information.
+	// Specific tool that the model must request. No text is generated but the results of tool use are sent back to the model to help generate a response. See variant.template_configuration.chat.tool_configuration.tool_choice.tool Block for more information.
 	Tool []ToolConfigurationToolObservation `json:"tool,omitempty" tf:"tool,omitempty"`
 
-	// Defines which tools the model should request when invoked. See Tool Choice for more information.
+	// Configuration for which tools the model should request when invoked. See tool_choice Block for more information.
 	ToolChoice *ToolConfigurationToolChoiceObservation `json:"toolChoice,omitempty" tf:"tool_choice,omitempty"`
 }
 
 type ChatToolConfigurationParameters struct {
 
-	// A list of tools to pass to a model. See Tool for more information.
+	// Specific tool that the model must request. No text is generated but the results of tool use are sent back to the model to help generate a response. See variant.template_configuration.chat.tool_configuration.tool_choice.tool Block for more information.
 	// +kubebuilder:validation:Optional
 	Tool []ToolConfigurationToolParameters `json:"tool,omitempty" tf:"tool,omitempty"`
 
-	// Defines which tools the model should request when invoked. See Tool Choice for more information.
+	// Configuration for which tools the model should request when invoked. See tool_choice Block for more information.
 	// +kubebuilder:validation:Optional
 	ToolChoice *ToolConfigurationToolChoiceParameters `json:"toolChoice,omitempty" tf:"tool_choice,omitempty"`
 }
 
 type ContentCachePointInitParameters struct {
 
-	// Indicates that the CachePointBlock is of the default type. Valid values: default.
+	// Cache point type. Valid values: default.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type ContentCachePointObservation struct {
 
-	// Indicates that the CachePointBlock is of the default type. Valid values: default.
+	// Cache point type. Valid values: default.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type ContentCachePointParameters struct {
 
-	// Indicates that the CachePointBlock is of the default type. Valid values: default.
+	// Cache point type. Valid values: default.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
 }
@@ -178,48 +178,48 @@ type GenAIResourceAgentParameters struct {
 
 type GenAIResourceInitParameters struct {
 
-	// Specifies an Amazon Bedrock agent with which to use the prompt. See Agent Configuration for more information.
+	// Amazon Bedrock agent with which to use the prompt. See agent Block for more information.
 	Agent *GenAIResourceAgentInitParameters `json:"agent,omitempty" tf:"agent,omitempty"`
 }
 
 type GenAIResourceObservation struct {
 
-	// Specifies an Amazon Bedrock agent with which to use the prompt. See Agent Configuration for more information.
+	// Amazon Bedrock agent with which to use the prompt. See agent Block for more information.
 	Agent *GenAIResourceAgentObservation `json:"agent,omitempty" tf:"agent,omitempty"`
 }
 
 type GenAIResourceParameters struct {
 
-	// Specifies an Amazon Bedrock agent with which to use the prompt. See Agent Configuration for more information.
+	// Amazon Bedrock agent with which to use the prompt. See agent Block for more information.
 	// +kubebuilder:validation:Optional
 	Agent *GenAIResourceAgentParameters `json:"agent,omitempty" tf:"agent,omitempty"`
 }
 
 type MessageContentInitParameters struct {
 
-	// A cache checkpoint within a template configuration. See Cache Point for more information.
+	// Cache checkpoint within a message. See cache_point Block for more information.
 	CachePoint *ContentCachePointInitParameters `json:"cachePoint,omitempty" tf:"cache_point,omitempty"`
 
-	// Contains inference configurations for the prompt variant. See Text Inference Configuration for more information.
+	// Inference configurations for the prompt variant. See variant.inference_configuration.text Block for more information.
 	Text *string `json:"text,omitempty" tf:"text,omitempty"`
 }
 
 type MessageContentObservation struct {
 
-	// A cache checkpoint within a template configuration. See Cache Point for more information.
+	// Cache checkpoint within a message. See cache_point Block for more information.
 	CachePoint *ContentCachePointObservation `json:"cachePoint,omitempty" tf:"cache_point,omitempty"`
 
-	// Contains inference configurations for the prompt variant. See Text Inference Configuration for more information.
+	// Inference configurations for the prompt variant. See variant.inference_configuration.text Block for more information.
 	Text *string `json:"text,omitempty" tf:"text,omitempty"`
 }
 
 type MessageContentParameters struct {
 
-	// A cache checkpoint within a template configuration. See Cache Point for more information.
+	// Cache checkpoint within a message. See cache_point Block for more information.
 	// +kubebuilder:validation:Optional
 	CachePoint *ContentCachePointParameters `json:"cachePoint,omitempty" tf:"cache_point,omitempty"`
 
-	// Contains inference configurations for the prompt variant. See Text Inference Configuration for more information.
+	// Inference configurations for the prompt variant. See variant.inference_configuration.text Block for more information.
 	// +kubebuilder:validation:Optional
 	Text *string `json:"text,omitempty" tf:"text,omitempty"`
 }
@@ -281,7 +281,7 @@ type PromptInitParameters_2 struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A list of objects, each containing details about a variant of the prompt. See Variant for more information.
+	// List of objects, each containing details about a variant of the prompt. See variant Block for more information.
 	Variant []VariantInitParameters `json:"variant,omitempty" tf:"variant,omitempty"`
 }
 
@@ -316,14 +316,14 @@ type PromptObservation_2 struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Time at which the prompt was last updated.
 	UpdatedAt *string `json:"updatedAt,omitempty" tf:"updated_at,omitempty"`
 
-	// A list of objects, each containing details about a variant of the prompt. See Variant for more information.
+	// List of objects, each containing details about a variant of the prompt. See variant Block for more information.
 	Variant []VariantObservation `json:"variant,omitempty" tf:"variant,omitempty"`
 
 	// Version of the prompt. When you create a prompt, the version created is the DRAFT version.
@@ -368,94 +368,94 @@ type PromptParameters_2 struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A list of objects, each containing details about a variant of the prompt. See Variant for more information.
+	// List of objects, each containing details about a variant of the prompt. See variant Block for more information.
 	// +kubebuilder:validation:Optional
 	Variant []VariantParameters `json:"variant,omitempty" tf:"variant,omitempty"`
 }
 
 type TemplateConfigurationChatInitParameters struct {
 
-	// A list of variables in the prompt template. See Input Variable for more information.
+	// List of variables in the prompt template. See input_variable Block for more information.
 	InputVariable []ChatInputVariableInitParameters `json:"inputVariable,omitempty" tf:"input_variable,omitempty"`
 
-	// A list of messages in the chat for the prompt. See Message for more information.
+	// List of messages in the chat for the prompt. See message Block for more information.
 	Message []ChatMessageInitParameters `json:"message,omitempty" tf:"message,omitempty"`
 
-	// A list of system prompts to provide context to the model or to describe how it should behave. See System for more information.
+	// List of system prompts to provide context to the model or to describe how it should behave. See system Block for more information.
 	System []ChatSystemInitParameters `json:"system,omitempty" tf:"system,omitempty"`
 
-	// Configuration information for the tools that the model can use when generating a response. See Tool Configuration for more information.
+	// Configuration information for the tools that the model can use when generating a response. See tool_configuration Block for more information.
 	ToolConfiguration *ChatToolConfigurationInitParameters `json:"toolConfiguration,omitempty" tf:"tool_configuration,omitempty"`
 }
 
 type TemplateConfigurationChatObservation struct {
 
-	// A list of variables in the prompt template. See Input Variable for more information.
+	// List of variables in the prompt template. See input_variable Block for more information.
 	InputVariable []ChatInputVariableObservation `json:"inputVariable,omitempty" tf:"input_variable,omitempty"`
 
-	// A list of messages in the chat for the prompt. See Message for more information.
+	// List of messages in the chat for the prompt. See message Block for more information.
 	Message []ChatMessageObservation `json:"message,omitempty" tf:"message,omitempty"`
 
-	// A list of system prompts to provide context to the model or to describe how it should behave. See System for more information.
+	// List of system prompts to provide context to the model or to describe how it should behave. See system Block for more information.
 	System []ChatSystemObservation `json:"system,omitempty" tf:"system,omitempty"`
 
-	// Configuration information for the tools that the model can use when generating a response. See Tool Configuration for more information.
+	// Configuration information for the tools that the model can use when generating a response. See tool_configuration Block for more information.
 	ToolConfiguration *ChatToolConfigurationObservation `json:"toolConfiguration,omitempty" tf:"tool_configuration,omitempty"`
 }
 
 type TemplateConfigurationChatParameters struct {
 
-	// A list of variables in the prompt template. See Input Variable for more information.
+	// List of variables in the prompt template. See input_variable Block for more information.
 	// +kubebuilder:validation:Optional
 	InputVariable []ChatInputVariableParameters `json:"inputVariable,omitempty" tf:"input_variable,omitempty"`
 
-	// A list of messages in the chat for the prompt. See Message for more information.
+	// List of messages in the chat for the prompt. See message Block for more information.
 	// +kubebuilder:validation:Optional
 	Message []ChatMessageParameters `json:"message,omitempty" tf:"message,omitempty"`
 
-	// A list of system prompts to provide context to the model or to describe how it should behave. See System for more information.
+	// List of system prompts to provide context to the model or to describe how it should behave. See system Block for more information.
 	// +kubebuilder:validation:Optional
 	System []ChatSystemParameters `json:"system,omitempty" tf:"system,omitempty"`
 
-	// Configuration information for the tools that the model can use when generating a response. See Tool Configuration for more information.
+	// Configuration information for the tools that the model can use when generating a response. See tool_configuration Block for more information.
 	// +kubebuilder:validation:Optional
 	ToolConfiguration *ChatToolConfigurationParameters `json:"toolConfiguration,omitempty" tf:"tool_configuration,omitempty"`
 }
 
 type TemplateConfigurationTextCachePointInitParameters struct {
 
-	// Indicates that the CachePointBlock is of the default type. Valid values: default.
+	// Cache point type. Valid values: default.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type TemplateConfigurationTextCachePointObservation struct {
 
-	// Indicates that the CachePointBlock is of the default type. Valid values: default.
+	// Cache point type. Valid values: default.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type TemplateConfigurationTextCachePointParameters struct {
 
-	// Indicates that the CachePointBlock is of the default type. Valid values: default.
+	// Cache point type. Valid values: default.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type TemplateConfigurationTextInputVariableInitParameters struct {
 
-	// Name of the prompt.
+	// Name of the prompt variant.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type TemplateConfigurationTextInputVariableObservation struct {
 
-	// Name of the prompt.
+	// Name of the prompt variant.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type TemplateConfigurationTextInputVariableParameters struct {
 
-	// Name of the prompt.
+	// Name of the prompt variant.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 }
@@ -480,183 +480,183 @@ type ToolChoiceAutoParameters struct {
 
 type ToolConfigurationToolCachePointInitParameters struct {
 
-	// Indicates that the CachePointBlock is of the default type. Valid values: default.
+	// Cache point type. Valid values: default.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type ToolConfigurationToolCachePointObservation struct {
 
-	// Indicates that the CachePointBlock is of the default type. Valid values: default.
+	// Cache point type. Valid values: default.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type ToolConfigurationToolCachePointParameters struct {
 
-	// Indicates that the CachePointBlock is of the default type. Valid values: default.
+	// Cache point type. Valid values: default.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type ToolConfigurationToolChoiceInitParameters struct {
 
-	// Defines tools, at least one of which must be requested by the model. No text is generated but the results of tool use are sent back to the model to help generate a response. This object has no fields.
+	// Tools, at least one of which must be requested by the model. No text is generated but the results of tool use are sent back to the model to help generate a response. This object has no fields.
 	Any *ToolChoiceAnyInitParameters `json:"any,omitempty" tf:"any,omitempty"`
 
-	// Defines tools. The model automatically decides whether to call a tool or to generate text instead. This object has no fields.
+	// Tools from which the model automatically decides whether to call a tool or to generate text instead. This object has no fields.
 	Auto *ToolChoiceAutoInitParameters `json:"auto,omitempty" tf:"auto,omitempty"`
 
-	// A list of tools to pass to a model. See Tool for more information.
+	// Specific tool that the model must request. No text is generated but the results of tool use are sent back to the model to help generate a response. See variant.template_configuration.chat.tool_configuration.tool_choice.tool Block for more information.
 	Tool *ToolConfigurationToolChoiceToolInitParameters `json:"tool,omitempty" tf:"tool,omitempty"`
 }
 
 type ToolConfigurationToolChoiceObservation struct {
 
-	// Defines tools, at least one of which must be requested by the model. No text is generated but the results of tool use are sent back to the model to help generate a response. This object has no fields.
+	// Tools, at least one of which must be requested by the model. No text is generated but the results of tool use are sent back to the model to help generate a response. This object has no fields.
 	Any *ToolChoiceAnyParameters `json:"any,omitempty" tf:"any,omitempty"`
 
-	// Defines tools. The model automatically decides whether to call a tool or to generate text instead. This object has no fields.
+	// Tools from which the model automatically decides whether to call a tool or to generate text instead. This object has no fields.
 	Auto *ToolChoiceAutoParameters `json:"auto,omitempty" tf:"auto,omitempty"`
 
-	// A list of tools to pass to a model. See Tool for more information.
+	// Specific tool that the model must request. No text is generated but the results of tool use are sent back to the model to help generate a response. See variant.template_configuration.chat.tool_configuration.tool_choice.tool Block for more information.
 	Tool *ToolConfigurationToolChoiceToolObservation `json:"tool,omitempty" tf:"tool,omitempty"`
 }
 
 type ToolConfigurationToolChoiceParameters struct {
 
-	// Defines tools, at least one of which must be requested by the model. No text is generated but the results of tool use are sent back to the model to help generate a response. This object has no fields.
+	// Tools, at least one of which must be requested by the model. No text is generated but the results of tool use are sent back to the model to help generate a response. This object has no fields.
 	// +kubebuilder:validation:Optional
 	Any *ToolChoiceAnyParameters `json:"any,omitempty" tf:"any,omitempty"`
 
-	// Defines tools. The model automatically decides whether to call a tool or to generate text instead. This object has no fields.
+	// Tools from which the model automatically decides whether to call a tool or to generate text instead. This object has no fields.
 	// +kubebuilder:validation:Optional
 	Auto *ToolChoiceAutoParameters `json:"auto,omitempty" tf:"auto,omitempty"`
 
-	// A list of tools to pass to a model. See Tool for more information.
+	// Specific tool that the model must request. No text is generated but the results of tool use are sent back to the model to help generate a response. See variant.template_configuration.chat.tool_configuration.tool_choice.tool Block for more information.
 	// +kubebuilder:validation:Optional
 	Tool *ToolConfigurationToolChoiceToolParameters `json:"tool,omitempty" tf:"tool,omitempty"`
 }
 
 type ToolConfigurationToolChoiceToolInitParameters struct {
 
-	// Name of the prompt.
+	// Name of the prompt variant.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type ToolConfigurationToolChoiceToolObservation struct {
 
-	// Name of the prompt.
+	// Name of the prompt variant.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type ToolConfigurationToolChoiceToolParameters struct {
 
-	// Name of the prompt.
+	// Name of the prompt variant.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 }
 
 type ToolConfigurationToolInitParameters struct {
 
-	// A cache checkpoint within a template configuration. See Cache Point for more information.
+	// Cache checkpoint within a message. See cache_point Block for more information.
 	CachePoint *ToolConfigurationToolCachePointInitParameters `json:"cachePoint,omitempty" tf:"cache_point,omitempty"`
 
-	// The specification for the tool. See Tool Specification for more information.
+	// Specification for the tool. See tool_spec Block for more information.
 	ToolSpec *ToolToolSpecInitParameters `json:"toolSpec,omitempty" tf:"tool_spec,omitempty"`
 }
 
 type ToolConfigurationToolObservation struct {
 
-	// A cache checkpoint within a template configuration. See Cache Point for more information.
+	// Cache checkpoint within a message. See cache_point Block for more information.
 	CachePoint *ToolConfigurationToolCachePointObservation `json:"cachePoint,omitempty" tf:"cache_point,omitempty"`
 
-	// The specification for the tool. See Tool Specification for more information.
+	// Specification for the tool. See tool_spec Block for more information.
 	ToolSpec *ToolToolSpecObservation `json:"toolSpec,omitempty" tf:"tool_spec,omitempty"`
 }
 
 type ToolConfigurationToolParameters struct {
 
-	// A cache checkpoint within a template configuration. See Cache Point for more information.
+	// Cache checkpoint within a message. See cache_point Block for more information.
 	// +kubebuilder:validation:Optional
 	CachePoint *ToolConfigurationToolCachePointParameters `json:"cachePoint,omitempty" tf:"cache_point,omitempty"`
 
-	// The specification for the tool. See Tool Specification for more information.
+	// Specification for the tool. See tool_spec Block for more information.
 	// +kubebuilder:validation:Optional
 	ToolSpec *ToolToolSpecParameters `json:"toolSpec,omitempty" tf:"tool_spec,omitempty"`
 }
 
 type ToolSpecInputSchemaInitParameters struct {
 
-	// A JSON object defining the input schema for the tool.
+	// JSON object defining the input schema for the tool.
 	JSON *string `json:"json,omitempty" tf:"json,omitempty"`
 }
 
 type ToolSpecInputSchemaObservation struct {
 
-	// A JSON object defining the input schema for the tool.
+	// JSON object defining the input schema for the tool.
 	JSON *string `json:"json,omitempty" tf:"json,omitempty"`
 }
 
 type ToolSpecInputSchemaParameters struct {
 
-	// A JSON object defining the input schema for the tool.
+	// JSON object defining the input schema for the tool.
 	// +kubebuilder:validation:Optional
 	JSON *string `json:"json,omitempty" tf:"json,omitempty"`
 }
 
 type ToolToolSpecInitParameters struct {
 
-	// Description of the prompt.
+	// Description of the tool.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The input schema of the tool. See Tool Input Schema for more information.
+	// Input schema of the tool. See input_schema Block for more information.
 	InputSchema *ToolSpecInputSchemaInitParameters `json:"inputSchema,omitempty" tf:"input_schema,omitempty"`
 
-	// Name of the prompt.
+	// Name of the prompt variant.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type ToolToolSpecObservation struct {
 
-	// Description of the prompt.
+	// Description of the tool.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The input schema of the tool. See Tool Input Schema for more information.
+	// Input schema of the tool. See input_schema Block for more information.
 	InputSchema *ToolSpecInputSchemaObservation `json:"inputSchema,omitempty" tf:"input_schema,omitempty"`
 
-	// Name of the prompt.
+	// Name of the prompt variant.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type ToolToolSpecParameters struct {
 
-	// Description of the prompt.
+	// Description of the tool.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The input schema of the tool. See Tool Input Schema for more information.
+	// Input schema of the tool. See input_schema Block for more information.
 	// +kubebuilder:validation:Optional
 	InputSchema *ToolSpecInputSchemaParameters `json:"inputSchema,omitempty" tf:"input_schema,omitempty"`
 
-	// Name of the prompt.
+	// Name of the prompt variant.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 }
 
 type VariantInferenceConfigurationInitParameters struct {
 
-	// Contains inference configurations for the prompt variant. See Text Inference Configuration for more information.
+	// Inference configurations for the prompt variant. See variant.inference_configuration.text Block for more information.
 	Text *VariantInferenceConfigurationTextInitParameters `json:"text,omitempty" tf:"text,omitempty"`
 }
 
 type VariantInferenceConfigurationObservation struct {
 
-	// Contains inference configurations for the prompt variant. See Text Inference Configuration for more information.
+	// Inference configurations for the prompt variant. See variant.inference_configuration.text Block for more information.
 	Text *VariantInferenceConfigurationTextObservation `json:"text,omitempty" tf:"text,omitempty"`
 }
 
 type VariantInferenceConfigurationParameters struct {
 
-	// Contains inference configurations for the prompt variant. See Text Inference Configuration for more information.
+	// Inference configurations for the prompt variant. See variant.inference_configuration.text Block for more information.
 	// +kubebuilder:validation:Optional
 	Text *VariantInferenceConfigurationTextParameters `json:"text,omitempty" tf:"text,omitempty"`
 }
@@ -712,25 +712,25 @@ type VariantInferenceConfigurationTextParameters struct {
 
 type VariantInitParameters struct {
 
-	// Contains model-specific inference configurations that aren’t in the inferenceConfiguration field. To see model-specific inference parameters, see Inference request parameters and response fields for foundation models.
+	// Model-specific inference configurations that aren’t in the inference_configuration block. To see model-specific inference parameters, see Inference request parameters and response fields for foundation models.
 	AdditionalModelRequestFields *string `json:"additionalModelRequestFields,omitempty" tf:"additional_model_request_fields,omitempty"`
 
-	// Specifies a generative AI resource with which to use the prompt. If this is not supplied, then a gen_ai_resource must be defined. See Generative AI Resource for more information.
+	// Generative AI resource with which to use the prompt. If this is not supplied, then a model_id must be defined. See gen_ai_resource Block for more information.
 	GenAIResource *GenAIResourceInitParameters `json:"genAiResource,omitempty" tf:"gen_ai_resource,omitempty"`
 
-	// Contains inference configurations for the prompt variant. See Inference Configuration for more information.
+	// Inference configurations for the prompt variant. See inference_configuration Block for more information.
 	InferenceConfiguration *VariantInferenceConfigurationInitParameters `json:"inferenceConfiguration,omitempty" tf:"inference_configuration,omitempty"`
 
-	// A list of objects, each containing a key-value pair that defines a metadata tag and value to attach to a prompt variant. See Metadata for more information.
+	// List of objects, each containing a key-value pair that defines a metadata tag and value to attach to a prompt variant. See metadata Block for more information.
 	Metadata []MetadataInitParameters `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
 	// Unique identifier of the model or inference profile with which to run inference on the prompt. If this is not supplied, then a gen_ai_resource must be defined.
 	ModelID *string `json:"modelId,omitempty" tf:"model_id,omitempty"`
 
-	// Name of the prompt.
+	// Name of the prompt variant.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Contains configurations for the prompt template. See Template Configuration for more information.
+	// Configurations for the prompt template. See template_configuration Block for more information.
 	TemplateConfiguration *VariantTemplateConfigurationInitParameters `json:"templateConfiguration,omitempty" tf:"template_configuration,omitempty"`
 
 	// Type of prompt template to use. Valid values: CHAT, TEXT.
@@ -739,25 +739,25 @@ type VariantInitParameters struct {
 
 type VariantObservation struct {
 
-	// Contains model-specific inference configurations that aren’t in the inferenceConfiguration field. To see model-specific inference parameters, see Inference request parameters and response fields for foundation models.
+	// Model-specific inference configurations that aren’t in the inference_configuration block. To see model-specific inference parameters, see Inference request parameters and response fields for foundation models.
 	AdditionalModelRequestFields *string `json:"additionalModelRequestFields,omitempty" tf:"additional_model_request_fields,omitempty"`
 
-	// Specifies a generative AI resource with which to use the prompt. If this is not supplied, then a gen_ai_resource must be defined. See Generative AI Resource for more information.
+	// Generative AI resource with which to use the prompt. If this is not supplied, then a model_id must be defined. See gen_ai_resource Block for more information.
 	GenAIResource *GenAIResourceObservation `json:"genAiResource,omitempty" tf:"gen_ai_resource,omitempty"`
 
-	// Contains inference configurations for the prompt variant. See Inference Configuration for more information.
+	// Inference configurations for the prompt variant. See inference_configuration Block for more information.
 	InferenceConfiguration *VariantInferenceConfigurationObservation `json:"inferenceConfiguration,omitempty" tf:"inference_configuration,omitempty"`
 
-	// A list of objects, each containing a key-value pair that defines a metadata tag and value to attach to a prompt variant. See Metadata for more information.
+	// List of objects, each containing a key-value pair that defines a metadata tag and value to attach to a prompt variant. See metadata Block for more information.
 	Metadata []MetadataObservation `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
 	// Unique identifier of the model or inference profile with which to run inference on the prompt. If this is not supplied, then a gen_ai_resource must be defined.
 	ModelID *string `json:"modelId,omitempty" tf:"model_id,omitempty"`
 
-	// Name of the prompt.
+	// Name of the prompt variant.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Contains configurations for the prompt template. See Template Configuration for more information.
+	// Configurations for the prompt template. See template_configuration Block for more information.
 	TemplateConfiguration *VariantTemplateConfigurationObservation `json:"templateConfiguration,omitempty" tf:"template_configuration,omitempty"`
 
 	// Type of prompt template to use. Valid values: CHAT, TEXT.
@@ -766,19 +766,19 @@ type VariantObservation struct {
 
 type VariantParameters struct {
 
-	// Contains model-specific inference configurations that aren’t in the inferenceConfiguration field. To see model-specific inference parameters, see Inference request parameters and response fields for foundation models.
+	// Model-specific inference configurations that aren’t in the inference_configuration block. To see model-specific inference parameters, see Inference request parameters and response fields for foundation models.
 	// +kubebuilder:validation:Optional
 	AdditionalModelRequestFields *string `json:"additionalModelRequestFields,omitempty" tf:"additional_model_request_fields,omitempty"`
 
-	// Specifies a generative AI resource with which to use the prompt. If this is not supplied, then a gen_ai_resource must be defined. See Generative AI Resource for more information.
+	// Generative AI resource with which to use the prompt. If this is not supplied, then a model_id must be defined. See gen_ai_resource Block for more information.
 	// +kubebuilder:validation:Optional
 	GenAIResource *GenAIResourceParameters `json:"genAiResource,omitempty" tf:"gen_ai_resource,omitempty"`
 
-	// Contains inference configurations for the prompt variant. See Inference Configuration for more information.
+	// Inference configurations for the prompt variant. See inference_configuration Block for more information.
 	// +kubebuilder:validation:Optional
 	InferenceConfiguration *VariantInferenceConfigurationParameters `json:"inferenceConfiguration,omitempty" tf:"inference_configuration,omitempty"`
 
-	// A list of objects, each containing a key-value pair that defines a metadata tag and value to attach to a prompt variant. See Metadata for more information.
+	// List of objects, each containing a key-value pair that defines a metadata tag and value to attach to a prompt variant. See metadata Block for more information.
 	// +kubebuilder:validation:Optional
 	Metadata []MetadataParameters `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
@@ -786,11 +786,11 @@ type VariantParameters struct {
 	// +kubebuilder:validation:Optional
 	ModelID *string `json:"modelId,omitempty" tf:"model_id,omitempty"`
 
-	// Name of the prompt.
+	// Name of the prompt variant.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// Contains configurations for the prompt template. See Template Configuration for more information.
+	// Configurations for the prompt template. See template_configuration Block for more information.
 	// +kubebuilder:validation:Optional
 	TemplateConfiguration *VariantTemplateConfigurationParameters `json:"templateConfiguration,omitempty" tf:"template_configuration,omitempty"`
 
@@ -801,68 +801,68 @@ type VariantParameters struct {
 
 type VariantTemplateConfigurationInitParameters struct {
 
-	// Contains configurations to use the prompt in a conversational format. See Chat Template Configuration for more information.
+	// Configurations to use the prompt in a conversational format. See chat Block for more information.
 	Chat *TemplateConfigurationChatInitParameters `json:"chat,omitempty" tf:"chat,omitempty"`
 
-	// Contains inference configurations for the prompt variant. See Text Inference Configuration for more information.
+	// Inference configurations for the prompt variant. See variant.inference_configuration.text Block for more information.
 	Text *VariantTemplateConfigurationTextInitParameters `json:"text,omitempty" tf:"text,omitempty"`
 }
 
 type VariantTemplateConfigurationObservation struct {
 
-	// Contains configurations to use the prompt in a conversational format. See Chat Template Configuration for more information.
+	// Configurations to use the prompt in a conversational format. See chat Block for more information.
 	Chat *TemplateConfigurationChatObservation `json:"chat,omitempty" tf:"chat,omitempty"`
 
-	// Contains inference configurations for the prompt variant. See Text Inference Configuration for more information.
+	// Inference configurations for the prompt variant. See variant.inference_configuration.text Block for more information.
 	Text *VariantTemplateConfigurationTextObservation `json:"text,omitempty" tf:"text,omitempty"`
 }
 
 type VariantTemplateConfigurationParameters struct {
 
-	// Contains configurations to use the prompt in a conversational format. See Chat Template Configuration for more information.
+	// Configurations to use the prompt in a conversational format. See chat Block for more information.
 	// +kubebuilder:validation:Optional
 	Chat *TemplateConfigurationChatParameters `json:"chat,omitempty" tf:"chat,omitempty"`
 
-	// Contains inference configurations for the prompt variant. See Text Inference Configuration for more information.
+	// Inference configurations for the prompt variant. See variant.inference_configuration.text Block for more information.
 	// +kubebuilder:validation:Optional
 	Text *VariantTemplateConfigurationTextParameters `json:"text,omitempty" tf:"text,omitempty"`
 }
 
 type VariantTemplateConfigurationTextInitParameters struct {
 
-	// A cache checkpoint within a template configuration. See Cache Point for more information.
+	// Cache checkpoint within a message. See cache_point Block for more information.
 	CachePoint *TemplateConfigurationTextCachePointInitParameters `json:"cachePoint,omitempty" tf:"cache_point,omitempty"`
 
-	// A list of variables in the prompt template. See Input Variable for more information.
+	// List of variables in the prompt template. See input_variable Block for more information.
 	InputVariable []TemplateConfigurationTextInputVariableInitParameters `json:"inputVariable,omitempty" tf:"input_variable,omitempty"`
 
-	// Contains inference configurations for the prompt variant. See Text Inference Configuration for more information.
+	// Inference configurations for the prompt variant. See variant.inference_configuration.text Block for more information.
 	Text *string `json:"text,omitempty" tf:"text,omitempty"`
 }
 
 type VariantTemplateConfigurationTextObservation struct {
 
-	// A cache checkpoint within a template configuration. See Cache Point for more information.
+	// Cache checkpoint within a message. See cache_point Block for more information.
 	CachePoint *TemplateConfigurationTextCachePointObservation `json:"cachePoint,omitempty" tf:"cache_point,omitempty"`
 
-	// A list of variables in the prompt template. See Input Variable for more information.
+	// List of variables in the prompt template. See input_variable Block for more information.
 	InputVariable []TemplateConfigurationTextInputVariableObservation `json:"inputVariable,omitempty" tf:"input_variable,omitempty"`
 
-	// Contains inference configurations for the prompt variant. See Text Inference Configuration for more information.
+	// Inference configurations for the prompt variant. See variant.inference_configuration.text Block for more information.
 	Text *string `json:"text,omitempty" tf:"text,omitempty"`
 }
 
 type VariantTemplateConfigurationTextParameters struct {
 
-	// A cache checkpoint within a template configuration. See Cache Point for more information.
+	// Cache checkpoint within a message. See cache_point Block for more information.
 	// +kubebuilder:validation:Optional
 	CachePoint *TemplateConfigurationTextCachePointParameters `json:"cachePoint,omitempty" tf:"cache_point,omitempty"`
 
-	// A list of variables in the prompt template. See Input Variable for more information.
+	// List of variables in the prompt template. See input_variable Block for more information.
 	// +kubebuilder:validation:Optional
 	InputVariable []TemplateConfigurationTextInputVariableParameters `json:"inputVariable,omitempty" tf:"input_variable,omitempty"`
 
-	// Contains inference configurations for the prompt variant. See Text Inference Configuration for more information.
+	// Inference configurations for the prompt variant. See variant.inference_configuration.text Block for more information.
 	// +kubebuilder:validation:Optional
 	Text *string `json:"text" tf:"text,omitempty"`
 }
@@ -894,7 +894,7 @@ type PromptStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// Prompt is the Schema for the Prompts API.
+// Prompt is the Schema for the Prompts API. Manages an AWS Bedrock Agents Prompt.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

@@ -15,11 +15,10 @@ spec:
   forProvider:
     region: us-west-1
     retentionPeriod: 48
-    shardCount: 1
     shardLevelMetrics:
     - IncomingBytes
     - OutgoingBytes
     streamModeDetails:
-      streamMode: PROVISIONED
+      streamMode: ON_DEMAND
     tags:
       Environment: test

@@ -14,7 +14,7 @@ metadata:
 spec:
   forProvider:
     description: Code interpreter for data analysis
-    name: example-code-interpreter
+    name: example_code_interpreter
     networkConfiguration:
       networkMode: PUBLIC
     region: us-west-1

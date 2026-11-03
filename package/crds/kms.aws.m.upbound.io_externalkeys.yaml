@@ -75,9 +75,8 @@ spec:
                     description: Description of the key.
                     type: string
                   enabled:
-                    description: Specifies whether the key is enabled. Keys pending
-                      import can only be false. Imported keys default to true unless
-                      expired.
+                    description: Whether the key is enabled. Keys pending import can
+                      only be false. Imported keys default to true unless expired.
                     type: boolean
                   keyMaterialBase64SecretRef:
                     description: Base64 encoded 256-bit symmetric encryption key material
@@ -95,27 +94,26 @@ spec:
                     - name
                     type: object
                   keySpec:
-                    description: 'Specifies whether the key contains a symmetric key
-                      or an asymmetric key pair and the encryption algorithms or signing
-                      algorithms that the key supports. Valid values: SYMMETRIC_DEFAULT,
-                      RSA_2048, RSA_3072, RSA_4096, HMAC_224, HMAC_256, HMAC_384,
-                      HMAC_512, ECC_NIST_P256, ECC_NIST_P384, ECC_NIST_P521, ECC_SECG_P256K1,
+                    description: 'Whether the key contains a symmetric key or an asymmetric
+                      key pair and the encryption algorithms or signing algorithms
+                      that the key supports. Valid values: SYMMETRIC_DEFAULT, RSA_2048,
+                      RSA_3072, RSA_4096, HMAC_224, HMAC_256, HMAC_384, HMAC_512,
+                      ECC_NIST_P256, ECC_NIST_P384, ECC_NIST_P521, ECC_SECG_P256K1,
                       ML_DSA_44, ML_DSA_65, ML_DSA_87, or SM2 (China Regions only).
                       Defaults to SYMMETRIC_DEFAULT. For help with choosing a key
                       spec, see the AWS KMS Developer Guide.'
                     type: string
                   keyUsage:
-                    description: 'Specifies the intended use of the key. Valid values:
-                      ENCRYPT_DECRYPT, SIGN_VERIFY, or GENERATE_VERIFY_MAC. Defaults
-                      to ENCRYPT_DECRYPT.'
+                    description: 'Intended use of the key. Valid values: ENCRYPT_DECRYPT,
+                      SIGN_VERIFY, or GENERATE_VERIFY_MAC. Defaults to ENCRYPT_DECRYPT.'
                     type: string
                   multiRegion:
-                    description: Indicates whether the KMS key is a multi-Region (true)
-                      or regional (false) key. Defaults to false.
+                    description: Whether the KMS key is a multi-Region (true) or regional
+                      (false) key. Defaults to false.
                     type: boolean
                   policy:
-                    description: A key policy JSON document. If you do not provide
-                      a key policy, AWS KMS attaches a default key policy to the CMK.
+                    description: Key policy JSON document. If you do not provide a
+                      key policy, AWS KMS attaches a default key policy to the CMK.
                     type: string
                   region:
                     description: |-
@@ -166,9 +164,8 @@ spec:
                     description: Description of the key.
                     type: string
                   enabled:
-                    description: Specifies whether the key is enabled. Keys pending
-                      import can only be false. Imported keys default to true unless
-                      expired.
+                    description: Whether the key is enabled. Keys pending import can
+                      only be false. Imported keys default to true unless expired.
                     type: boolean
                   keyMaterialBase64SecretRef:
                     description: Base64 encoded 256-bit symmetric encryption key material
@@ -186,27 +183,26 @@ spec:
                     - name
                     type: object
                   keySpec:
-                    description: 'Specifies whether the key contains a symmetric key
-                      or an asymmetric key pair and the encryption algorithms or signing
-                      algorithms that the key supports. Valid values: SYMMETRIC_DEFAULT,
-                      RSA_2048, RSA_3072, RSA_4096, HMAC_224, HMAC_256, HMAC_384,
-                      HMAC_512, ECC_NIST_P256, ECC_NIST_P384, ECC_NIST_P521, ECC_SECG_P256K1,
+                    description: 'Whether the key contains a symmetric key or an asymmetric
+                      key pair and the encryption algorithms or signing algorithms
+                      that the key supports. Valid values: SYMMETRIC_DEFAULT, RSA_2048,
+                      RSA_3072, RSA_4096, HMAC_224, HMAC_256, HMAC_384, HMAC_512,
+                      ECC_NIST_P256, ECC_NIST_P384, ECC_NIST_P521, ECC_SECG_P256K1,
                       ML_DSA_44, ML_DSA_65, ML_DSA_87, or SM2 (China Regions only).
                       Defaults to SYMMETRIC_DEFAULT. For help with choosing a key
                       spec, see the AWS KMS Developer Guide.'
                     type: string
                   keyUsage:
-                    description: 'Specifies the intended use of the key. Valid values:
-                      ENCRYPT_DECRYPT, SIGN_VERIFY, or GENERATE_VERIFY_MAC. Defaults
-                      to ENCRYPT_DECRYPT.'
+                    description: 'Intended use of the key. Valid values: ENCRYPT_DECRYPT,
+                      SIGN_VERIFY, or GENERATE_VERIFY_MAC. Defaults to ENCRYPT_DECRYPT.'
                     type: string
                   multiRegion:
-                    description: Indicates whether the KMS key is a multi-Region (true)
-                      or regional (false) key. Defaults to false.
+                    description: Whether the KMS key is a multi-Region (true) or regional
+                      (false) key. Defaults to false.
                     type: boolean
                   policy:
-                    description: A key policy JSON document. If you do not provide
-                      a key policy, AWS KMS attaches a default key policy to the CMK.
+                    description: Key policy JSON document. If you do not provide a
+                      key policy, AWS KMS attaches a default key policy to the CMK.
                     type: string
                   tags:
                     additionalProperties:
@@ -303,42 +299,40 @@ spec:
                     description: Description of the key.
                     type: string
                   enabled:
-                    description: Specifies whether the key is enabled. Keys pending
-                      import can only be false. Imported keys default to true unless
-                      expired.
+                    description: Whether the key is enabled. Keys pending import can
+                      only be false. Imported keys default to true unless expired.
                     type: boolean
                   expirationModel:
                     description: Whether the key material expires. Empty when pending
                       key material import, otherwise KEY_MATERIAL_EXPIRES or KEY_MATERIAL_DOES_NOT_EXPIRE.
                     type: string
                   id:
-                    description: The unique identifier for the key.
+                    description: Unique identifier for the key.
                     type: string
                   keySpec:
-                    description: 'Specifies whether the key contains a symmetric key
-                      or an asymmetric key pair and the encryption algorithms or signing
-                      algorithms that the key supports. Valid values: SYMMETRIC_DEFAULT,
-                      RSA_2048, RSA_3072, RSA_4096, HMAC_224, HMAC_256, HMAC_384,
-                      HMAC_512, ECC_NIST_P256, ECC_NIST_P384, ECC_NIST_P521, ECC_SECG_P256K1,
+                    description: 'Whether the key contains a symmetric key or an asymmetric
+                      key pair and the encryption algorithms or signing algorithms
+                      that the key supports. Valid values: SYMMETRIC_DEFAULT, RSA_2048,
+                      RSA_3072, RSA_4096, HMAC_224, HMAC_256, HMAC_384, HMAC_512,
+                      ECC_NIST_P256, ECC_NIST_P384, ECC_NIST_P521, ECC_SECG_P256K1,
                       ML_DSA_44, ML_DSA_65, ML_DSA_87, or SM2 (China Regions only).
                       Defaults to SYMMETRIC_DEFAULT. For help with choosing a key
                       spec, see the AWS KMS Developer Guide.'
                     type: string
                   keyState:
-                    description: The state of the CMK.
+                    description: State of the CMK.
                     type: string
                   keyUsage:
-                    description: 'Specifies the intended use of the key. Valid values:
-                      ENCRYPT_DECRYPT, SIGN_VERIFY, or GENERATE_VERIFY_MAC. Defaults
-                      to ENCRYPT_DECRYPT.'
+                    description: 'Intended use of the key. Valid values: ENCRYPT_DECRYPT,
+                      SIGN_VERIFY, or GENERATE_VERIFY_MAC. Defaults to ENCRYPT_DECRYPT.'
                     type: string
                   multiRegion:
-                    description: Indicates whether the KMS key is a multi-Region (true)
-                      or regional (false) key. Defaults to false.
+                    description: Whether the KMS key is a multi-Region (true) or regional
+                      (false) key. Defaults to false.
                     type: boolean
                   policy:
-                    description: A key policy JSON document. If you do not provide
-                      a key policy, AWS KMS attaches a default key policy to the CMK.
+                    description: Key policy JSON document. If you do not provide a
+                      key policy, AWS KMS attaches a default key policy to the CMK.
                     type: string
                   region:
                     description: |-
@@ -354,9 +348,8 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
                   validTo:

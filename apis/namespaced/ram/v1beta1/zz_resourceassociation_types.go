@@ -34,7 +34,7 @@ type ResourceAssociationInitParameters struct {
 
 type ResourceAssociationObservation struct {
 
-	// ARN of the resource share.
+	// Composite identifier containing the Resource Share ARN and resource ARN, separated by a comma.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.

@@ -74,23 +74,23 @@ spec:
               forProvider:
                 properties:
                   description:
-                    description: A custom description of the custom data identifier.
-                      The description can contain as many as 512 characters.
+                    description: Custom description of the custom data identifier.
+                      Can contain as many as 512 characters.
                     type: string
                   ignoreWords:
-                    description: An array that lists specific character sequences
-                      (ignore words) to exclude from the results. If the text matched
-                      by the regular expression is the same as any string in this
-                      array, Amazon Macie ignores it. The array can contain as many
-                      as 10 ignore words. Each ignore word can contain 4 - 90 characters.
+                    description: Array that lists specific character sequences (ignore
+                      words) to exclude from the results. If the text matched by the
+                      regular expression is the same as any string in this array,
+                      Amazon Macie ignores it. The array can contain as many as 10
+                      ignore words. Each ignore word can contain 4 - 90 characters.
                       Ignore words are case sensitive.
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
                   keywords:
-                    description: An array that lists specific character sequences
-                      (keywords), one of which must be within proximity (maximum_match_distance)
+                    description: Array that lists specific character sequences (keywords),
+                      one of which must be within proximity (maximum_match_distance)
                       of the regular expression to match. The array can contain as
                       many as 50 keywords. Each keyword can contain 3 - 90 characters.
                       Keywords aren't case sensitive.
@@ -99,7 +99,7 @@ spec:
                     type: array
                     x-kubernetes-list-type: set
                   maximumMatchDistance:
-                    description: The maximum number of characters that can exist between
+                    description: Maximum number of characters that can exist between
                       text that matches the regex pattern and the character sequences
                       specified by the keywords array. Macie includes or excludes
                       a result based on the proximity of a keyword to text that matches
@@ -107,11 +107,11 @@ spec:
                       default value is 50.
                     type: number
                   name:
-                    description: A custom name for the custom data identifier. The
-                      name can contain as many as 128 characters. Conflicts with name_prefix.
+                    description: Custom name for the custom data identifier. Can contain
+                      as many as 128 characters. Conflicts with name_prefix.
                     type: string
                   regex:
-                    description: The regular expression (regex) that defines the pattern
+                    description: Regular expression (regex) that defines the pattern
                       to match. The expression can contain as many as 512 characters.
                     type: string
                   region:
@@ -142,23 +142,23 @@ spec:
                   autoscaler.
                 properties:
                   description:
-                    description: A custom description of the custom data identifier.
-                      The description can contain as many as 512 characters.
+                    description: Custom description of the custom data identifier.
+                      Can contain as many as 512 characters.
                     type: string
                   ignoreWords:
-                    description: An array that lists specific character sequences
-                      (ignore words) to exclude from the results. If the text matched
-                      by the regular expression is the same as any string in this
-                      array, Amazon Macie ignores it. The array can contain as many
-                      as 10 ignore words. Each ignore word can contain 4 - 90 characters.
+                    description: Array that lists specific character sequences (ignore
+                      words) to exclude from the results. If the text matched by the
+                      regular expression is the same as any string in this array,
+                      Amazon Macie ignores it. The array can contain as many as 10
+                      ignore words. Each ignore word can contain 4 - 90 characters.
                       Ignore words are case sensitive.
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
                   keywords:
-                    description: An array that lists specific character sequences
-                      (keywords), one of which must be within proximity (maximum_match_distance)
+                    description: Array that lists specific character sequences (keywords),
+                      one of which must be within proximity (maximum_match_distance)
                       of the regular expression to match. The array can contain as
                       many as 50 keywords. Each keyword can contain 3 - 90 characters.
                       Keywords aren't case sensitive.
@@ -167,7 +167,7 @@ spec:
                     type: array
                     x-kubernetes-list-type: set
                   maximumMatchDistance:
-                    description: The maximum number of characters that can exist between
+                    description: Maximum number of characters that can exist between
                       text that matches the regex pattern and the character sequences
                       specified by the keywords array. Macie includes or excludes
                       a result based on the proximity of a keyword to text that matches
@@ -175,11 +175,11 @@ spec:
                       default value is 50.
                     type: number
                   name:
-                    description: A custom name for the custom data identifier. The
-                      name can contain as many as 128 characters. Conflicts with name_prefix.
+                    description: Custom name for the custom data identifier. Can contain
+                      as many as 128 characters. Conflicts with name_prefix.
                     type: string
                   regex:
-                    description: The regular expression (regex) that defines the pattern
+                    description: Regular expression (regex) that defines the pattern
                       to match. The expression can contain as many as 512 characters.
                     type: string
                   tags:
@@ -285,31 +285,30 @@ spec:
                     description: ARN of the custom data identifier.
                     type: string
                   createdAt:
-                    description: The date and time, in UTC and extended RFC 3339 format,
-                      when the Amazon Macie account was created.
+                    description: Date and time, in UTC and extended RFC 3339 format,
+                      when the custom data identifier was created.
                     type: string
                   description:
-                    description: A custom description of the custom data identifier.
-                      The description can contain as many as 512 characters.
+                    description: Custom description of the custom data identifier.
+                      Can contain as many as 512 characters.
                     type: string
                   id:
-                    description: The unique identifier (ID) of the macie custom data
-                      identifier.
+                    description: Unique identifier (ID) of the Macie custom data identifier.
                     type: string
                   ignoreWords:
-                    description: An array that lists specific character sequences
-                      (ignore words) to exclude from the results. If the text matched
-                      by the regular expression is the same as any string in this
-                      array, Amazon Macie ignores it. The array can contain as many
-                      as 10 ignore words. Each ignore word can contain 4 - 90 characters.
+                    description: Array that lists specific character sequences (ignore
+                      words) to exclude from the results. If the text matched by the
+                      regular expression is the same as any string in this array,
+                      Amazon Macie ignores it. The array can contain as many as 10
+                      ignore words. Each ignore word can contain 4 - 90 characters.
                       Ignore words are case sensitive.
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
                   keywords:
-                    description: An array that lists specific character sequences
-                      (keywords), one of which must be within proximity (maximum_match_distance)
+                    description: Array that lists specific character sequences (keywords),
+                      one of which must be within proximity (maximum_match_distance)
                       of the regular expression to match. The array can contain as
                       many as 50 keywords. Each keyword can contain 3 - 90 characters.
                       Keywords aren't case sensitive.
@@ -318,7 +317,7 @@ spec:
                     type: array
                     x-kubernetes-list-type: set
                   maximumMatchDistance:
-                    description: The maximum number of characters that can exist between
+                    description: Maximum number of characters that can exist between
                       text that matches the regex pattern and the character sequences
                       specified by the keywords array. Macie includes or excludes
                       a result based on the proximity of a keyword to text that matches
@@ -326,11 +325,11 @@ spec:
                       default value is 50.
                     type: number
                   name:
-                    description: A custom name for the custom data identifier. The
-                      name can contain as many as 128 characters. Conflicts with name_prefix.
+                    description: Custom name for the custom data identifier. Can contain
+                      as many as 128 characters. Conflicts with name_prefix.
                     type: string
                   regex:
-                    description: The regular expression (regex) that defines the pattern
+                    description: Regular expression (regex) that defines the pattern
                       to match. The expression can contain as many as 512 characters.
                     type: string
                   region:
@@ -347,9 +346,8 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
                 type: object

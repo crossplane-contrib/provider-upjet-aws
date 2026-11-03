@@ -18,7 +18,7 @@ type AutoscalingGroupsInitParameters struct {
 
 type AutoscalingGroupsObservation struct {
 
-	// Name of the AutoScaling Group.
+	// Name of the Auto Scaling group.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
@@ -543,7 +543,7 @@ type ResourcesInitParameters struct {
 
 type ResourcesObservation struct {
 
-	// List of objects containing information about AutoScaling Groups.
+	// List of objects containing information about Auto Scaling groups.
 	AutoscalingGroups []AutoscalingGroupsObservation `json:"autoscalingGroups,omitempty" tf:"autoscaling_groups,omitempty"`
 
 	// Identifier of the remote access EC2 Security Group.
@@ -672,7 +672,7 @@ type UpdateConfigParameters struct {
 
 type WarmPoolConfigInitParameters struct {
 
-	// Maximum number of instances that are allowed to be in the warm pool combined with the Auto Scaling Group. Use -1 to specify an unlimited capacity.
+	// Maximum number of instances that are allowed to be in the warm pool combined with the Auto Scaling group. Use -1 to specify an unlimited capacity.
 	MaxGroupPreparedCapacity *float64 `json:"maxGroupPreparedCapacity,omitempty" tf:"max_group_prepared_capacity,omitempty"`
 
 	// Minimum number of instances to maintain in the warm pool. Defaults to 0.
@@ -681,13 +681,13 @@ type WarmPoolConfigInitParameters struct {
 	// Instance state to transition warm pool instances to. Valid values: STOPPED, RUNNING, HIBERNATED. Defaults to STOPPED.
 	PoolState *string `json:"poolState,omitempty" tf:"pool_state,omitempty"`
 
-	// Whether to return instances in the Auto Scaling Group to the warm pool on scale in. Not supported on Bottlerocket. Defaults to false.
+	// Whether to return instances in the Auto Scaling group to the warm pool on scale in. Not supported on Bottlerocket. Defaults to false.
 	ReuseOnScaleIn *bool `json:"reuseOnScaleIn,omitempty" tf:"reuse_on_scale_in,omitempty"`
 }
 
 type WarmPoolConfigObservation struct {
 
-	// Maximum number of instances that are allowed to be in the warm pool combined with the Auto Scaling Group. Use -1 to specify an unlimited capacity.
+	// Maximum number of instances that are allowed to be in the warm pool combined with the Auto Scaling group. Use -1 to specify an unlimited capacity.
 	MaxGroupPreparedCapacity *float64 `json:"maxGroupPreparedCapacity,omitempty" tf:"max_group_prepared_capacity,omitempty"`
 
 	// Minimum number of instances to maintain in the warm pool. Defaults to 0.
@@ -696,13 +696,13 @@ type WarmPoolConfigObservation struct {
 	// Instance state to transition warm pool instances to. Valid values: STOPPED, RUNNING, HIBERNATED. Defaults to STOPPED.
 	PoolState *string `json:"poolState,omitempty" tf:"pool_state,omitempty"`
 
-	// Whether to return instances in the Auto Scaling Group to the warm pool on scale in. Not supported on Bottlerocket. Defaults to false.
+	// Whether to return instances in the Auto Scaling group to the warm pool on scale in. Not supported on Bottlerocket. Defaults to false.
 	ReuseOnScaleIn *bool `json:"reuseOnScaleIn,omitempty" tf:"reuse_on_scale_in,omitempty"`
 }
 
 type WarmPoolConfigParameters struct {
 
-	// Maximum number of instances that are allowed to be in the warm pool combined with the Auto Scaling Group. Use -1 to specify an unlimited capacity.
+	// Maximum number of instances that are allowed to be in the warm pool combined with the Auto Scaling group. Use -1 to specify an unlimited capacity.
 	// +kubebuilder:validation:Optional
 	MaxGroupPreparedCapacity *float64 `json:"maxGroupPreparedCapacity,omitempty" tf:"max_group_prepared_capacity,omitempty"`
 
@@ -714,7 +714,7 @@ type WarmPoolConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	PoolState *string `json:"poolState,omitempty" tf:"pool_state,omitempty"`
 
-	// Whether to return instances in the Auto Scaling Group to the warm pool on scale in. Not supported on Bottlerocket. Defaults to false.
+	// Whether to return instances in the Auto Scaling group to the warm pool on scale in. Not supported on Bottlerocket. Defaults to false.
 	// +kubebuilder:validation:Optional
 	ReuseOnScaleIn *bool `json:"reuseOnScaleIn,omitempty" tf:"reuse_on_scale_in,omitempty"`
 }

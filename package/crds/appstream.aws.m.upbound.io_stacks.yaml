@@ -398,7 +398,7 @@ spec:
                         type: string
                     type: object
                   arn:
-                    description: ARN of the appstream stack.
+                    description: ARN of the AppStream stack.
                     type: string
                   createdTime:
                     description: Date and time, in UTC and extended RFC 3339 format,
@@ -424,7 +424,7 @@ spec:
                       link is displayed. .
                     type: string
                   id:
-                    description: Unique ID of the appstream stack.
+                    description: Unique ID of the AppStream stack.
                     type: string
                   name:
                     description: Unique name for the AppStream stack.

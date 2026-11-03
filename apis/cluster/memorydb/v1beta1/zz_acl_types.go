@@ -26,13 +26,13 @@ type ACLInitParameters struct {
 
 type ACLObservation struct {
 
-	// The ARN of the ACL.
+	// ARN of the ACL.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Same as name.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The minimum engine version supported by the ACL.
+	// Minimum engine version supported by the ACL.
 	MinimumEngineVersion *string `json:"minimumEngineVersion,omitempty" tf:"minimum_engine_version,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -43,7 +43,7 @@ type ACLObservation struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 

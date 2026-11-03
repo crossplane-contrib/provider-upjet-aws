@@ -3895,7 +3895,7 @@ spec:
                               records will be sent to CloudWatch via a batch call.
                             type: boolean
                           channelName:
-                            description: Name of AWS IOT Analytics channel.
+                            description: Name of AWS IoT Analytics channel.
                             type: string
                           roleArn:
                             description: The IAM role ARN that allows access to the
@@ -4297,7 +4297,7 @@ spec:
                             will be sent to CloudWatch via a batch call.
                           type: boolean
                         channelName:
-                          description: Name of AWS IOT Analytics channel.
+                          description: Name of AWS IoT Analytics channel.
                           type: string
                         roleArn:
                           description: The IAM role ARN that allows access to the
@@ -5031,7 +5031,7 @@ spec:
                               records will be sent to CloudWatch via a batch call.
                             type: boolean
                           channelName:
-                            description: Name of AWS IOT Analytics channel.
+                            description: Name of AWS IoT Analytics channel.
                             type: string
                           roleArn:
                             description: The IAM role ARN that allows access to the
@@ -5433,7 +5433,7 @@ spec:
                             will be sent to CloudWatch via a batch call.
                           type: boolean
                         channelName:
-                          description: Name of AWS IOT Analytics channel.
+                          description: Name of AWS IoT Analytics channel.
                           type: string
                         roleArn:
                           description: The IAM role ARN that allows access to the
@@ -6254,7 +6254,7 @@ spec:
                               records will be sent to CloudWatch via a batch call.
                             type: boolean
                           channelName:
-                            description: Name of AWS IOT Analytics channel.
+                            description: Name of AWS IoT Analytics channel.
                             type: string
                           roleArn:
                             description: The IAM role ARN that allows access to the
@@ -6511,7 +6511,7 @@ spec:
                             will be sent to CloudWatch via a batch call.
                           type: boolean
                         channelName:
-                          description: Name of AWS IOT Analytics channel.
+                          description: Name of AWS IoT Analytics channel.
                           type: string
                         roleArn:
                           description: The IAM role ARN that allows access to the

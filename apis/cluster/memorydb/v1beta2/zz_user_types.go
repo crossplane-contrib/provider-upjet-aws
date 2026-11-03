@@ -16,7 +16,7 @@ import (
 type AuthenticationModeInitParameters struct {
 	Passwords []*string `json:"passwordsSecretRef,omitempty" tf:"-"`
 
-	// Specifies the authentication type. Valid values are: password or iam.
+	// Type of authentication. Valid values are password or iam.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -25,7 +25,7 @@ type AuthenticationModeObservation struct {
 	// Number of passwords belonging to the user if type is set to password.
 	PasswordCount *float64 `json:"passwordCount,omitempty" tf:"password_count,omitempty"`
 
-	// Specifies the authentication type. Valid values are: password or iam.
+	// Type of authentication. Valid values are password or iam.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -35,7 +35,7 @@ type AuthenticationModeParameters struct {
 	// +kubebuilder:validation:Optional
 	PasswordsSecretRef *[]v2.SecretKeySelector `json:"passwordsSecretRef,omitempty" tf:"-"`
 
-	// Specifies the authentication type. Valid values are: password or iam.
+	// Type of authentication. Valid values are password or iam.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
 }
@@ -45,7 +45,7 @@ type UserInitParameters struct {
 	// Access permissions string used for this user.
 	AccessString *string `json:"accessString,omitempty" tf:"access_string,omitempty"`
 
-	// Denotes the user's authentication properties. Detailed below.
+	// Authentication properties for the user. Detailed below.
 	AuthenticationMode *AuthenticationModeInitParameters `json:"authenticationMode,omitempty" tf:"authentication_mode,omitempty"`
 
 	// Key-value map of resource tags.
@@ -61,7 +61,7 @@ type UserObservation struct {
 	// ARN of the user.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// Denotes the user's authentication properties. Detailed below.
+	// Authentication properties for the user. Detailed below.
 	AuthenticationMode *AuthenticationModeObservation `json:"authenticationMode,omitempty" tf:"authentication_mode,omitempty"`
 
 	// Same as user_name.
@@ -78,7 +78,7 @@ type UserObservation struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
@@ -89,7 +89,7 @@ type UserParameters struct {
 	// +kubebuilder:validation:Optional
 	AccessString *string `json:"accessString,omitempty" tf:"access_string,omitempty"`
 
-	// Denotes the user's authentication properties. Detailed below.
+	// Authentication properties for the user. Detailed below.
 	// +kubebuilder:validation:Optional
 	AuthenticationMode *AuthenticationModeParameters `json:"authenticationMode,omitempty" tf:"authentication_mode,omitempty"`
 

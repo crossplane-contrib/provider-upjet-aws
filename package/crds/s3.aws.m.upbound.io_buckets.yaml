@@ -283,7 +283,7 @@ spec:
                     items:
                       properties:
                         id:
-                          description: Canonical user id to grant for. Used only when
+                          description: Canonical user ID to grant for. Used only when
                             type is CanonicalUser.
                           type: string
                         permissions:
@@ -299,7 +299,7 @@ spec:
                             not supported.
                           type: string
                         uri:
-                          description: Uri address to grant for. Used only when type
+                          description: URI address to grant for. Used only when type
                             is Group.
                           type: string
                       type: object
@@ -697,7 +697,8 @@ spec:
                         type: string
                       indexDocument:
                         description: Amazon S3 returns this index document when requests
-                          are made to the root domain or any of the subfolders.
+                          are made to the root domain or any of the subfolders. Required
+                          unless using redirect_all_requests_to.
                         type: string
                       redirectAllRequestsTo:
                         description: Hostname to redirect all website requests for

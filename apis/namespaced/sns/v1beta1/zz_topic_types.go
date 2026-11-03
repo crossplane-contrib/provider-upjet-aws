@@ -152,6 +152,9 @@ type TopicInitParameters struct {
 	// Percentage of success to sample
 	LambdaSuccessFeedbackSampleRate *float64 `json:"lambdaSuccessFeedbackSampleRate,omitempty" tf:"lambda_success_feedback_sample_rate,omitempty"`
 
+	// The maximum size, in bytes, of a message that can be published to the topic. Valid values are 1024 to 1048576 (1 MiB). The default is 262144 (256 KiB). A topic with a maximum_message_size above 256 KiB must have 100 or fewer subscriptions, and each subscription must be an Amazon SQS, Amazon Data Firehose, or AWS Lambda subscription.
+	MaximumMessageSize *float64 `json:"maximumMessageSize,omitempty" tf:"maximum_message_size,omitempty"`
+
 	// The fully-formed AWS policy as JSON.
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
@@ -262,6 +265,9 @@ type TopicObservation struct {
 
 	// Percentage of success to sample
 	LambdaSuccessFeedbackSampleRate *float64 `json:"lambdaSuccessFeedbackSampleRate,omitempty" tf:"lambda_success_feedback_sample_rate,omitempty"`
+
+	// The maximum size, in bytes, of a message that can be published to the topic. Valid values are 1024 to 1048576 (1 MiB). The default is 262144 (256 KiB). A topic with a maximum_message_size above 256 KiB must have 100 or fewer subscriptions, and each subscription must be an Amazon SQS, Amazon Data Firehose, or AWS Lambda subscription.
+	MaximumMessageSize *float64 `json:"maximumMessageSize,omitempty" tf:"maximum_message_size,omitempty"`
 
 	// The AWS Account ID of the SNS topic owner
 	Owner *string `json:"owner,omitempty" tf:"owner,omitempty"`
@@ -454,6 +460,10 @@ type TopicParameters struct {
 	// Percentage of success to sample
 	// +kubebuilder:validation:Optional
 	LambdaSuccessFeedbackSampleRate *float64 `json:"lambdaSuccessFeedbackSampleRate,omitempty" tf:"lambda_success_feedback_sample_rate,omitempty"`
+
+	// The maximum size, in bytes, of a message that can be published to the topic. Valid values are 1024 to 1048576 (1 MiB). The default is 262144 (256 KiB). A topic with a maximum_message_size above 256 KiB must have 100 or fewer subscriptions, and each subscription must be an Amazon SQS, Amazon Data Firehose, or AWS Lambda subscription.
+	// +kubebuilder:validation:Optional
+	MaximumMessageSize *float64 `json:"maximumMessageSize,omitempty" tf:"maximum_message_size,omitempty"`
 
 	// The fully-formed AWS policy as JSON.
 	// +kubebuilder:validation:Optional

@@ -14,7 +14,7 @@ metadata:
 spec:
   forProvider:
     description: Browser for web data extraction
-    name: example-browser
+    name: example_browser
     networkConfiguration:
       networkMode: PUBLIC
     region: us-west-1

@@ -15,10 +15,10 @@ import (
 
 type VPNConnectionRouteInitParameters struct {
 
-	// The CIDR block associated with the local subnet of the customer network.
+	// CIDR block associated with the local subnet of the customer network.
 	DestinationCidrBlock *string `json:"destinationCidrBlock,omitempty" tf:"destination_cidr_block,omitempty"`
 
-	// The ID of the VPN connection.
+	// ID of the VPN connection.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta2.VPNConnection
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	VPNConnectionID *string `json:"vpnConnectionId,omitempty" tf:"vpn_connection_id,omitempty"`
@@ -34,7 +34,7 @@ type VPNConnectionRouteInitParameters struct {
 
 type VPNConnectionRouteObservation struct {
 
-	// The CIDR block associated with the local subnet of the customer network.
+	// CIDR block associated with the local subnet of the customer network.
 	DestinationCidrBlock *string `json:"destinationCidrBlock,omitempty" tf:"destination_cidr_block,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -43,13 +43,13 @@ type VPNConnectionRouteObservation struct {
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The ID of the VPN connection.
+	// ID of the VPN connection.
 	VPNConnectionID *string `json:"vpnConnectionId,omitempty" tf:"vpn_connection_id,omitempty"`
 }
 
 type VPNConnectionRouteParameters struct {
 
-	// The CIDR block associated with the local subnet of the customer network.
+	// CIDR block associated with the local subnet of the customer network.
 	// +kubebuilder:validation:Optional
 	DestinationCidrBlock *string `json:"destinationCidrBlock,omitempty" tf:"destination_cidr_block,omitempty"`
 
@@ -58,7 +58,7 @@ type VPNConnectionRouteParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// The ID of the VPN connection.
+	// ID of the VPN connection.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta2.VPNConnection
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional

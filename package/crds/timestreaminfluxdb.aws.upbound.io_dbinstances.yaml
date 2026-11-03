@@ -96,7 +96,7 @@ spec:
                     type: string
                   dbStorageType:
                     description: |-
-                      (Default "InfluxIOIncludedT1") Timestream for InfluxDB DB storage type to read and write InfluxDB data. You can choose between 3 different types of provisioned Influx IOPS included storage according to your workloads requirements: Influx IO Included 3000 IOPS, Influx IO Included 12000 IOPS, Influx IO Included 16000 IOPS. Valid options are: "InfluxIOIncludedT1", "InfluxIOIncludedT2", and "InfluxIOIncludedT3". If you use "InfluxIOIncludedT2" or "InfluxIOIncludedT3", the minimum value for allocated_storage` is 400. This argument is updatable. For a single instance, after this argument has been updated once, it can only be updated again after 6 hours have passed.
+                      Timestream for InfluxDB DB storage type to read and write InfluxDB data. You can choose between 3 different types of provisioned Influx IOPS included storage according to your workloads requirements: Influx IO Included 3000 IOPS, Influx IO Included 12000 IOPS, Influx IO Included 16000 IOPS. Valid options are: "InfluxIOIncludedT1", "InfluxIOIncludedT2", and "InfluxIOIncludedT3". If you use "InfluxIOIncludedT2" or "InfluxIOIncludedT3", the minimum value for allocated_storage` is 400. This argument is updatable. For a single instance, after this argument has been updated once, it can only be updated again after 6 hours have passed.
                       The Timestream for InfluxDB DB storage type to read and write InfluxDB data.
                       You can choose between 3 different types of provisioned Influx IOPS included storage according
                       to your workloads requirements: Influx IO Included 3000 IOPS, Influx IO Included 12000 IOPS,
@@ -104,7 +104,7 @@ spec:
                     type: string
                   deploymentType:
                     description: |-
-                      (Default "SINGLE_AZ") Specifies whether the DB instance will be deployed as a standalone instance or with a Multi-AZ standby for high availability. Valid options are: "SINGLE_AZ", "WITH_MULTIAZ_STANDBY". This argument is updatable.
+                      Whether the DB instance will be deployed as a standalone instance or with a Multi-AZ standby for high availability. Valid options are: "SINGLE_AZ", "WITH_MULTIAZ_STANDBY". This argument is updatable.
                       Specifies whether the DB instance will be deployed as a standalone instance or
                       with a Multi-AZ standby for high availability.
                     type: string
@@ -199,7 +199,7 @@ spec:
                             type: object
                           enabled:
                             description: |-
-                              Indicates whether log delivery to the S3 bucket is enabled.
+                              Whether log delivery to the S3 bucket is enabled.
                               Indicates whether log delivery to the S3 bucket is enabled.
                             type: boolean
                         type: object
@@ -229,7 +229,7 @@ spec:
                     type: string
                   networkType:
                     description: |-
-                      Specifies whether the networkType of the Timestream for InfluxDB instance is IPV4, which can communicate over IPv4 protocol only, or DUAL, which can communicate over both IPv4 and IPv6 protocols.
+                      Network type of the Timestream for InfluxDB instance. IPV4 can communicate over IPv4 protocol only, and DUAL can communicate over both IPv4 and IPv6 protocols.
                       Specifies whether the networkType of the Timestream for InfluxDB instance is
                       IPV4, which can communicate over IPv4 protocol only, or DUAL, which can communicate
                       over both IPv4 and IPv6 protocols.
@@ -264,12 +264,12 @@ spec:
                     type: object
                   port:
                     description: |-
-                      (Default 8086) The port on which the instance accepts connections. Valid values: 1024-65535. Cannot be 2375-2376, 7788-7799, 8090, or 51678-51680. This argument is updatable.
+                      Port on which the instance accepts connections. Valid values: 1024-65535. Cannot be 2375-2376, 7788-7799, 8090, or 51678-51680. This argument is updatable.
                       The port number on which InfluxDB accepts connections.
                     type: number
                   publiclyAccessible:
                     description: |-
-                      (Default false) Configures the DB instance with a public IP to facilitate access. Other resources, such as a VPC, a subnet, an internet gateway, and a route table with routes, are also required to enabled public access, in addition to this argument. See "Usage with Public Internet Access Enabled" for an example configuration with all required resources for public internet access.
+                      Whether to configure the DB instance with a public IP to facilitate access. Other resources, such as a VPC, a subnet, an internet gateway, and a route table with routes, are also required to enable public access, in addition to this argument. See "Usage with Public Internet Access Enabled" for an example configuration with all required resources for public internet access.
                       Configures the DB instance with a public IP to facilitate access.
                     type: boolean
                   region:
@@ -507,7 +507,7 @@ spec:
                     type: string
                   dbStorageType:
                     description: |-
-                      (Default "InfluxIOIncludedT1") Timestream for InfluxDB DB storage type to read and write InfluxDB data. You can choose between 3 different types of provisioned Influx IOPS included storage according to your workloads requirements: Influx IO Included 3000 IOPS, Influx IO Included 12000 IOPS, Influx IO Included 16000 IOPS. Valid options are: "InfluxIOIncludedT1", "InfluxIOIncludedT2", and "InfluxIOIncludedT3". If you use "InfluxIOIncludedT2" or "InfluxIOIncludedT3", the minimum value for allocated_storage` is 400. This argument is updatable. For a single instance, after this argument has been updated once, it can only be updated again after 6 hours have passed.
+                      Timestream for InfluxDB DB storage type to read and write InfluxDB data. You can choose between 3 different types of provisioned Influx IOPS included storage according to your workloads requirements: Influx IO Included 3000 IOPS, Influx IO Included 12000 IOPS, Influx IO Included 16000 IOPS. Valid options are: "InfluxIOIncludedT1", "InfluxIOIncludedT2", and "InfluxIOIncludedT3". If you use "InfluxIOIncludedT2" or "InfluxIOIncludedT3", the minimum value for allocated_storage` is 400. This argument is updatable. For a single instance, after this argument has been updated once, it can only be updated again after 6 hours have passed.
                       The Timestream for InfluxDB DB storage type to read and write InfluxDB data.
                       You can choose between 3 different types of provisioned Influx IOPS included storage according
                       to your workloads requirements: Influx IO Included 3000 IOPS, Influx IO Included 12000 IOPS,
@@ -515,7 +515,7 @@ spec:
                     type: string
                   deploymentType:
                     description: |-
-                      (Default "SINGLE_AZ") Specifies whether the DB instance will be deployed as a standalone instance or with a Multi-AZ standby for high availability. Valid options are: "SINGLE_AZ", "WITH_MULTIAZ_STANDBY". This argument is updatable.
+                      Whether the DB instance will be deployed as a standalone instance or with a Multi-AZ standby for high availability. Valid options are: "SINGLE_AZ", "WITH_MULTIAZ_STANDBY". This argument is updatable.
                       Specifies whether the DB instance will be deployed as a standalone instance or
                       with a Multi-AZ standby for high availability.
                     type: string
@@ -610,7 +610,7 @@ spec:
                             type: object
                           enabled:
                             description: |-
-                              Indicates whether log delivery to the S3 bucket is enabled.
+                              Whether log delivery to the S3 bucket is enabled.
                               Indicates whether log delivery to the S3 bucket is enabled.
                             type: boolean
                         type: object
@@ -640,7 +640,7 @@ spec:
                     type: string
                   networkType:
                     description: |-
-                      Specifies whether the networkType of the Timestream for InfluxDB instance is IPV4, which can communicate over IPv4 protocol only, or DUAL, which can communicate over both IPv4 and IPv6 protocols.
+                      Network type of the Timestream for InfluxDB instance. IPV4 can communicate over IPv4 protocol only, and DUAL can communicate over both IPv4 and IPv6 protocols.
                       Specifies whether the networkType of the Timestream for InfluxDB instance is
                       IPV4, which can communicate over IPv4 protocol only, or DUAL, which can communicate
                       over both IPv4 and IPv6 protocols.
@@ -675,12 +675,12 @@ spec:
                     type: object
                   port:
                     description: |-
-                      (Default 8086) The port on which the instance accepts connections. Valid values: 1024-65535. Cannot be 2375-2376, 7788-7799, 8090, or 51678-51680. This argument is updatable.
+                      Port on which the instance accepts connections. Valid values: 1024-65535. Cannot be 2375-2376, 7788-7799, 8090, or 51678-51680. This argument is updatable.
                       The port number on which InfluxDB accepts connections.
                     type: number
                   publiclyAccessible:
                     description: |-
-                      (Default false) Configures the DB instance with a public IP to facilitate access. Other resources, such as a VPC, a subnet, an internet gateway, and a route table with routes, are also required to enabled public access, in addition to this argument. See "Usage with Public Internet Access Enabled" for an example configuration with all required resources for public internet access.
+                      Whether to configure the DB instance with a public IP to facilitate access. Other resources, such as a VPC, a subnet, an internet gateway, and a route table with routes, are also required to enable public access, in addition to this argument. See "Usage with Public Internet Access Enabled" for an example configuration with all required resources for public internet access.
                       Configures the DB instance with a public IP to facilitate access.
                     type: boolean
                   tags:
@@ -1027,7 +1027,7 @@ spec:
                     type: string
                   dbStorageType:
                     description: |-
-                      (Default "InfluxIOIncludedT1") Timestream for InfluxDB DB storage type to read and write InfluxDB data. You can choose between 3 different types of provisioned Influx IOPS included storage according to your workloads requirements: Influx IO Included 3000 IOPS, Influx IO Included 12000 IOPS, Influx IO Included 16000 IOPS. Valid options are: "InfluxIOIncludedT1", "InfluxIOIncludedT2", and "InfluxIOIncludedT3". If you use "InfluxIOIncludedT2" or "InfluxIOIncludedT3", the minimum value for allocated_storage` is 400. This argument is updatable. For a single instance, after this argument has been updated once, it can only be updated again after 6 hours have passed.
+                      Timestream for InfluxDB DB storage type to read and write InfluxDB data. You can choose between 3 different types of provisioned Influx IOPS included storage according to your workloads requirements: Influx IO Included 3000 IOPS, Influx IO Included 12000 IOPS, Influx IO Included 16000 IOPS. Valid options are: "InfluxIOIncludedT1", "InfluxIOIncludedT2", and "InfluxIOIncludedT3". If you use "InfluxIOIncludedT2" or "InfluxIOIncludedT3", the minimum value for allocated_storage` is 400. This argument is updatable. For a single instance, after this argument has been updated once, it can only be updated again after 6 hours have passed.
                       The Timestream for InfluxDB DB storage type to read and write InfluxDB data.
                       You can choose between 3 different types of provisioned Influx IOPS included storage according
                       to your workloads requirements: Influx IO Included 3000 IOPS, Influx IO Included 12000 IOPS,
@@ -1035,7 +1035,7 @@ spec:
                     type: string
                   deploymentType:
                     description: |-
-                      (Default "SINGLE_AZ") Specifies whether the DB instance will be deployed as a standalone instance or with a Multi-AZ standby for high availability. Valid options are: "SINGLE_AZ", "WITH_MULTIAZ_STANDBY". This argument is updatable.
+                      Whether the DB instance will be deployed as a standalone instance or with a Multi-AZ standby for high availability. Valid options are: "SINGLE_AZ", "WITH_MULTIAZ_STANDBY". This argument is updatable.
                       Specifies whether the DB instance will be deployed as a standalone instance or
                       with a Multi-AZ standby for high availability.
                     type: string
@@ -1072,7 +1072,7 @@ spec:
                             type: string
                           enabled:
                             description: |-
-                              Indicates whether log delivery to the S3 bucket is enabled.
+                              Whether log delivery to the S3 bucket is enabled.
                               Indicates whether log delivery to the S3 bucket is enabled.
                             type: boolean
                         type: object
@@ -1102,7 +1102,7 @@ spec:
                     type: string
                   networkType:
                     description: |-
-                      Specifies whether the networkType of the Timestream for InfluxDB instance is IPV4, which can communicate over IPv4 protocol only, or DUAL, which can communicate over both IPv4 and IPv6 protocols.
+                      Network type of the Timestream for InfluxDB instance. IPV4 can communicate over IPv4 protocol only, and DUAL can communicate over both IPv4 and IPv6 protocols.
                       Specifies whether the networkType of the Timestream for InfluxDB instance is
                       IPV4, which can communicate over IPv4 protocol only, or DUAL, which can communicate
                       over both IPv4 and IPv6 protocols.
@@ -1115,12 +1115,12 @@ spec:
                     type: string
                   port:
                     description: |-
-                      (Default 8086) The port on which the instance accepts connections. Valid values: 1024-65535. Cannot be 2375-2376, 7788-7799, 8090, or 51678-51680. This argument is updatable.
+                      Port on which the instance accepts connections. Valid values: 1024-65535. Cannot be 2375-2376, 7788-7799, 8090, or 51678-51680. This argument is updatable.
                       The port number on which InfluxDB accepts connections.
                     type: number
                   publiclyAccessible:
                     description: |-
-                      (Default false) Configures the DB instance with a public IP to facilitate access. Other resources, such as a VPC, a subnet, an internet gateway, and a route table with routes, are also required to enabled public access, in addition to this argument. See "Usage with Public Internet Access Enabled" for an example configuration with all required resources for public internet access.
+                      Whether to configure the DB instance with a public IP to facilitate access. Other resources, such as a VPC, a subnet, an internet gateway, and a route table with routes, are also required to enable public access, in addition to this argument. See "Usage with Public Internet Access Enabled" for an example configuration with all required resources for public internet access.
                       Configures the DB instance with a public IP to facilitate access.
                     type: boolean
                   region:

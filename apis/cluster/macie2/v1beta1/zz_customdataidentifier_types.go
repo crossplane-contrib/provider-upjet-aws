@@ -15,24 +15,24 @@ import (
 
 type CustomDataIdentifierInitParameters struct {
 
-	// A custom description of the custom data identifier. The description can contain as many as 512 characters.
+	// Custom description of the custom data identifier. Can contain as many as 512 characters.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// An array that lists specific character sequences (ignore words) to exclude from the results. If the text matched by the regular expression is the same as any string in this array, Amazon Macie ignores it. The array can contain as many as 10 ignore words. Each ignore word can contain 4 - 90 characters. Ignore words are case sensitive.
+	// Array that lists specific character sequences (ignore words) to exclude from the results. If the text matched by the regular expression is the same as any string in this array, Amazon Macie ignores it. The array can contain as many as 10 ignore words. Each ignore word can contain 4 - 90 characters. Ignore words are case sensitive.
 	// +listType=set
 	IgnoreWords []*string `json:"ignoreWords,omitempty" tf:"ignore_words,omitempty"`
 
-	// An array that lists specific character sequences (keywords), one of which must be within proximity (maximum_match_distance) of the regular expression to match. The array can contain as many as 50 keywords. Each keyword can contain 3 - 90 characters. Keywords aren't case sensitive.
+	// Array that lists specific character sequences (keywords), one of which must be within proximity (maximum_match_distance) of the regular expression to match. The array can contain as many as 50 keywords. Each keyword can contain 3 - 90 characters. Keywords aren't case sensitive.
 	// +listType=set
 	Keywords []*string `json:"keywords,omitempty" tf:"keywords,omitempty"`
 
-	// The maximum number of characters that can exist between text that matches the regex pattern and the character sequences specified by the keywords array. Macie includes or excludes a result based on the proximity of a keyword to text that matches the regex pattern. The distance can be 1 - 300 characters. The default value is 50.
+	// Maximum number of characters that can exist between text that matches the regex pattern and the character sequences specified by the keywords array. Macie includes or excludes a result based on the proximity of a keyword to text that matches the regex pattern. The distance can be 1 - 300 characters. The default value is 50.
 	MaximumMatchDistance *float64 `json:"maximumMatchDistance,omitempty" tf:"maximum_match_distance,omitempty"`
 
-	// A custom name for the custom data identifier. The name can contain as many as 128 characters. Conflicts with name_prefix.
+	// Custom name for the custom data identifier. Can contain as many as 128 characters. Conflicts with name_prefix.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The regular expression (regex) that defines the pattern to match. The expression can contain as many as 512 characters.
+	// Regular expression (regex) that defines the pattern to match. The expression can contain as many as 512 characters.
 	Regex *string `json:"regex,omitempty" tf:"regex,omitempty"`
 
 	// Key-value map of resource tags.
@@ -45,30 +45,30 @@ type CustomDataIdentifierObservation struct {
 	// ARN of the custom data identifier.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The date and time, in UTC and extended RFC 3339 format, when the Amazon Macie account was created.
+	// Date and time, in UTC and extended RFC 3339 format, when the custom data identifier was created.
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
-	// A custom description of the custom data identifier. The description can contain as many as 512 characters.
+	// Custom description of the custom data identifier. Can contain as many as 512 characters.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The unique identifier (ID) of the macie custom data identifier.
+	// Unique identifier (ID) of the Macie custom data identifier.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// An array that lists specific character sequences (ignore words) to exclude from the results. If the text matched by the regular expression is the same as any string in this array, Amazon Macie ignores it. The array can contain as many as 10 ignore words. Each ignore word can contain 4 - 90 characters. Ignore words are case sensitive.
+	// Array that lists specific character sequences (ignore words) to exclude from the results. If the text matched by the regular expression is the same as any string in this array, Amazon Macie ignores it. The array can contain as many as 10 ignore words. Each ignore word can contain 4 - 90 characters. Ignore words are case sensitive.
 	// +listType=set
 	IgnoreWords []*string `json:"ignoreWords,omitempty" tf:"ignore_words,omitempty"`
 
-	// An array that lists specific character sequences (keywords), one of which must be within proximity (maximum_match_distance) of the regular expression to match. The array can contain as many as 50 keywords. Each keyword can contain 3 - 90 characters. Keywords aren't case sensitive.
+	// Array that lists specific character sequences (keywords), one of which must be within proximity (maximum_match_distance) of the regular expression to match. The array can contain as many as 50 keywords. Each keyword can contain 3 - 90 characters. Keywords aren't case sensitive.
 	// +listType=set
 	Keywords []*string `json:"keywords,omitempty" tf:"keywords,omitempty"`
 
-	// The maximum number of characters that can exist between text that matches the regex pattern and the character sequences specified by the keywords array. Macie includes or excludes a result based on the proximity of a keyword to text that matches the regex pattern. The distance can be 1 - 300 characters. The default value is 50.
+	// Maximum number of characters that can exist between text that matches the regex pattern and the character sequences specified by the keywords array. Macie includes or excludes a result based on the proximity of a keyword to text that matches the regex pattern. The distance can be 1 - 300 characters. The default value is 50.
 	MaximumMatchDistance *float64 `json:"maximumMatchDistance,omitempty" tf:"maximum_match_distance,omitempty"`
 
-	// A custom name for the custom data identifier. The name can contain as many as 128 characters. Conflicts with name_prefix.
+	// Custom name for the custom data identifier. Can contain as many as 128 characters. Conflicts with name_prefix.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The regular expression (regex) that defines the pattern to match. The expression can contain as many as 512 characters.
+	// Regular expression (regex) that defines the pattern to match. The expression can contain as many as 512 characters.
 	Regex *string `json:"regex,omitempty" tf:"regex,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -79,36 +79,36 @@ type CustomDataIdentifierObservation struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type CustomDataIdentifierParameters struct {
 
-	// A custom description of the custom data identifier. The description can contain as many as 512 characters.
+	// Custom description of the custom data identifier. Can contain as many as 512 characters.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// An array that lists specific character sequences (ignore words) to exclude from the results. If the text matched by the regular expression is the same as any string in this array, Amazon Macie ignores it. The array can contain as many as 10 ignore words. Each ignore word can contain 4 - 90 characters. Ignore words are case sensitive.
+	// Array that lists specific character sequences (ignore words) to exclude from the results. If the text matched by the regular expression is the same as any string in this array, Amazon Macie ignores it. The array can contain as many as 10 ignore words. Each ignore word can contain 4 - 90 characters. Ignore words are case sensitive.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	IgnoreWords []*string `json:"ignoreWords,omitempty" tf:"ignore_words,omitempty"`
 
-	// An array that lists specific character sequences (keywords), one of which must be within proximity (maximum_match_distance) of the regular expression to match. The array can contain as many as 50 keywords. Each keyword can contain 3 - 90 characters. Keywords aren't case sensitive.
+	// Array that lists specific character sequences (keywords), one of which must be within proximity (maximum_match_distance) of the regular expression to match. The array can contain as many as 50 keywords. Each keyword can contain 3 - 90 characters. Keywords aren't case sensitive.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	Keywords []*string `json:"keywords,omitempty" tf:"keywords,omitempty"`
 
-	// The maximum number of characters that can exist between text that matches the regex pattern and the character sequences specified by the keywords array. Macie includes or excludes a result based on the proximity of a keyword to text that matches the regex pattern. The distance can be 1 - 300 characters. The default value is 50.
+	// Maximum number of characters that can exist between text that matches the regex pattern and the character sequences specified by the keywords array. Macie includes or excludes a result based on the proximity of a keyword to text that matches the regex pattern. The distance can be 1 - 300 characters. The default value is 50.
 	// +kubebuilder:validation:Optional
 	MaximumMatchDistance *float64 `json:"maximumMatchDistance,omitempty" tf:"maximum_match_distance,omitempty"`
 
-	// A custom name for the custom data identifier. The name can contain as many as 128 characters. Conflicts with name_prefix.
+	// Custom name for the custom data identifier. Can contain as many as 128 characters. Conflicts with name_prefix.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The regular expression (regex) that defines the pattern to match. The expression can contain as many as 512 characters.
+	// Regular expression (regex) that defines the pattern to match. The expression can contain as many as 512 characters.
 	// +kubebuilder:validation:Optional
 	Regex *string `json:"regex,omitempty" tf:"regex,omitempty"`
 

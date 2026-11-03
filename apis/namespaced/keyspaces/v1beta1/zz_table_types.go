@@ -15,39 +15,39 @@ import (
 
 type CapacitySpecificationInitParameters struct {
 
-	// The throughput capacity specified for read operations defined in read capacity units (RCUs).
+	// Throughput capacity specified for read operations defined in read capacity units (RCUs).
 	ReadCapacityUnits *float64 `json:"readCapacityUnits,omitempty" tf:"read_capacity_units,omitempty"`
 
-	// The read/write throughput capacity mode for a table. Valid values: PAY_PER_REQUEST, PROVISIONED. The default value is PAY_PER_REQUEST.
+	// Read/write throughput capacity mode for a table. Valid values: PAY_PER_REQUEST, PROVISIONED. The default value is PAY_PER_REQUEST.
 	ThroughputMode *string `json:"throughputMode,omitempty" tf:"throughput_mode,omitempty"`
 
-	// The throughput capacity specified for write operations defined in write capacity units (WCUs).
+	// Throughput capacity specified for write operations defined in write capacity units (WCUs).
 	WriteCapacityUnits *float64 `json:"writeCapacityUnits,omitempty" tf:"write_capacity_units,omitempty"`
 }
 
 type CapacitySpecificationObservation struct {
 
-	// The throughput capacity specified for read operations defined in read capacity units (RCUs).
+	// Throughput capacity specified for read operations defined in read capacity units (RCUs).
 	ReadCapacityUnits *float64 `json:"readCapacityUnits,omitempty" tf:"read_capacity_units,omitempty"`
 
-	// The read/write throughput capacity mode for a table. Valid values: PAY_PER_REQUEST, PROVISIONED. The default value is PAY_PER_REQUEST.
+	// Read/write throughput capacity mode for a table. Valid values: PAY_PER_REQUEST, PROVISIONED. The default value is PAY_PER_REQUEST.
 	ThroughputMode *string `json:"throughputMode,omitempty" tf:"throughput_mode,omitempty"`
 
-	// The throughput capacity specified for write operations defined in write capacity units (WCUs).
+	// Throughput capacity specified for write operations defined in write capacity units (WCUs).
 	WriteCapacityUnits *float64 `json:"writeCapacityUnits,omitempty" tf:"write_capacity_units,omitempty"`
 }
 
 type CapacitySpecificationParameters struct {
 
-	// The throughput capacity specified for read operations defined in read capacity units (RCUs).
+	// Throughput capacity specified for read operations defined in read capacity units (RCUs).
 	// +kubebuilder:validation:Optional
 	ReadCapacityUnits *float64 `json:"readCapacityUnits,omitempty" tf:"read_capacity_units,omitempty"`
 
-	// The read/write throughput capacity mode for a table. Valid values: PAY_PER_REQUEST, PROVISIONED. The default value is PAY_PER_REQUEST.
+	// Read/write throughput capacity mode for a table. Valid values: PAY_PER_REQUEST, PROVISIONED. The default value is PAY_PER_REQUEST.
 	// +kubebuilder:validation:Optional
 	ThroughputMode *string `json:"throughputMode,omitempty" tf:"throughput_mode,omitempty"`
 
-	// The throughput capacity specified for write operations defined in write capacity units (WCUs).
+	// Throughput capacity specified for write operations defined in write capacity units (WCUs).
 	// +kubebuilder:validation:Optional
 	WriteCapacityUnits *float64 `json:"writeCapacityUnits,omitempty" tf:"write_capacity_units,omitempty"`
 }
@@ -73,77 +73,77 @@ type ClientSideTimestampsParameters struct {
 
 type ClusteringKeyInitParameters struct {
 
-	// The name of the column.
+	// Name of the clustering key column.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The order modifier. Valid values: ASC, DESC.
+	// Order modifier. Valid values: ASC, DESC.
 	OrderBy *string `json:"orderBy,omitempty" tf:"order_by,omitempty"`
 }
 
 type ClusteringKeyObservation struct {
 
-	// The name of the column.
+	// Name of the clustering key column.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The order modifier. Valid values: ASC, DESC.
+	// Order modifier. Valid values: ASC, DESC.
 	OrderBy *string `json:"orderBy,omitempty" tf:"order_by,omitempty"`
 }
 
 type ClusteringKeyParameters struct {
 
-	// The name of the column.
+	// Name of the clustering key column.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// The order modifier. Valid values: ASC, DESC.
+	// Order modifier. Valid values: ASC, DESC.
 	// +kubebuilder:validation:Optional
 	OrderBy *string `json:"orderBy" tf:"order_by,omitempty"`
 }
 
 type ColumnInitParameters struct {
 
-	// The name of the column.
+	// Name of the clustering key column.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The encryption option specified for the table. Valid values: AWS_OWNED_KMS_KEY, CUSTOMER_MANAGED_KMS_KEY. The default value is AWS_OWNED_KMS_KEY.
+	// Data type of the column. See the Developer Guide for a list of available data types.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type ColumnObservation struct {
 
-	// The name of the column.
+	// Name of the clustering key column.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The encryption option specified for the table. Valid values: AWS_OWNED_KMS_KEY, CUSTOMER_MANAGED_KMS_KEY. The default value is AWS_OWNED_KMS_KEY.
+	// Data type of the column. See the Developer Guide for a list of available data types.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type ColumnParameters struct {
 
-	// The name of the column.
+	// Name of the clustering key column.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// The encryption option specified for the table. Valid values: AWS_OWNED_KMS_KEY, CUSTOMER_MANAGED_KMS_KEY. The default value is AWS_OWNED_KMS_KEY.
+	// Data type of the column. See the Developer Guide for a list of available data types.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type CommentInitParameters struct {
 
-	// A description of the table.
+	// Description of the table.
 	Message *string `json:"message,omitempty" tf:"message,omitempty"`
 }
 
 type CommentObservation struct {
 
-	// A description of the table.
+	// Description of the table.
 	Message *string `json:"message,omitempty" tf:"message,omitempty"`
 }
 
 type CommentParameters struct {
 
-	// A description of the table.
+	// Description of the table.
 	// +kubebuilder:validation:Optional
 	Message *string `json:"message,omitempty" tf:"message,omitempty"`
 }
@@ -153,7 +153,7 @@ type EncryptionSpecificationInitParameters struct {
 	// ARN of the customer managed KMS key.
 	KMSKeyIdentifier *string `json:"kmsKeyIdentifier,omitempty" tf:"kms_key_identifier,omitempty"`
 
-	// The encryption option specified for the table. Valid values: AWS_OWNED_KMS_KEY, CUSTOMER_MANAGED_KMS_KEY. The default value is AWS_OWNED_KMS_KEY.
+	// Encryption option specified for the table. Valid values: AWS_OWNED_KMS_KEY, CUSTOMER_MANAGED_KMS_KEY. The default value is AWS_OWNED_KMS_KEY.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -162,7 +162,7 @@ type EncryptionSpecificationObservation struct {
 	// ARN of the customer managed KMS key.
 	KMSKeyIdentifier *string `json:"kmsKeyIdentifier,omitempty" tf:"kms_key_identifier,omitempty"`
 
-	// The encryption option specified for the table. Valid values: AWS_OWNED_KMS_KEY, CUSTOMER_MANAGED_KMS_KEY. The default value is AWS_OWNED_KMS_KEY.
+	// Encryption option specified for the table. Valid values: AWS_OWNED_KMS_KEY, CUSTOMER_MANAGED_KMS_KEY. The default value is AWS_OWNED_KMS_KEY.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -172,154 +172,154 @@ type EncryptionSpecificationParameters struct {
 	// +kubebuilder:validation:Optional
 	KMSKeyIdentifier *string `json:"kmsKeyIdentifier,omitempty" tf:"kms_key_identifier,omitempty"`
 
-	// The encryption option specified for the table. Valid values: AWS_OWNED_KMS_KEY, CUSTOMER_MANAGED_KMS_KEY. The default value is AWS_OWNED_KMS_KEY.
+	// Encryption option specified for the table. Valid values: AWS_OWNED_KMS_KEY, CUSTOMER_MANAGED_KMS_KEY. The default value is AWS_OWNED_KMS_KEY.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type PartitionKeyInitParameters struct {
 
-	// The name of the column.
+	// Name of the clustering key column.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type PartitionKeyObservation struct {
 
-	// The name of the column.
+	// Name of the clustering key column.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type PartitionKeyParameters struct {
 
-	// The name of the column.
+	// Name of the clustering key column.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 }
 
 type PointInTimeRecoveryInitParameters struct {
 
-	// Shows how to enable client-side timestamps settings for the specified table. Valid values: ENABLED.
+	// Valid values: ENABLED, DISABLED. The default value is DISABLED.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
 
 type PointInTimeRecoveryObservation struct {
 
-	// Shows how to enable client-side timestamps settings for the specified table. Valid values: ENABLED.
+	// Valid values: ENABLED, DISABLED. The default value is DISABLED.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
 
 type PointInTimeRecoveryParameters struct {
 
-	// Shows how to enable client-side timestamps settings for the specified table. Valid values: ENABLED.
+	// Valid values: ENABLED, DISABLED. The default value is DISABLED.
 	// +kubebuilder:validation:Optional
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
 
 type SchemaDefinitionInitParameters struct {
 
-	// The columns that are part of the clustering key of the table.
+	// Columns that are part of the clustering key of the table. See clustering_key below.
 	ClusteringKey []ClusteringKeyInitParameters `json:"clusteringKey,omitempty" tf:"clustering_key,omitempty"`
 
-	// The regular columns of the table.
+	// Regular columns of the table. See column below.
 	Column []ColumnInitParameters `json:"column,omitempty" tf:"column,omitempty"`
 
-	// The columns that are part of the partition key of the table .
+	// Columns that are part of the partition key of the table. See partition_key below.
 	PartitionKey []PartitionKeyInitParameters `json:"partitionKey,omitempty" tf:"partition_key,omitempty"`
 
-	// The columns that have been defined as STATIC. Static columns store values that are shared by all rows in the same partition.
+	// Columns that have been defined as STATIC. Static columns store values that are shared by all rows in the same partition. See static_column below.
 	StaticColumn []StaticColumnInitParameters `json:"staticColumn,omitempty" tf:"static_column,omitempty"`
 }
 
 type SchemaDefinitionObservation struct {
 
-	// The columns that are part of the clustering key of the table.
+	// Columns that are part of the clustering key of the table. See clustering_key below.
 	ClusteringKey []ClusteringKeyObservation `json:"clusteringKey,omitempty" tf:"clustering_key,omitempty"`
 
-	// The regular columns of the table.
+	// Regular columns of the table. See column below.
 	Column []ColumnObservation `json:"column,omitempty" tf:"column,omitempty"`
 
-	// The columns that are part of the partition key of the table .
+	// Columns that are part of the partition key of the table. See partition_key below.
 	PartitionKey []PartitionKeyObservation `json:"partitionKey,omitempty" tf:"partition_key,omitempty"`
 
-	// The columns that have been defined as STATIC. Static columns store values that are shared by all rows in the same partition.
+	// Columns that have been defined as STATIC. Static columns store values that are shared by all rows in the same partition. See static_column below.
 	StaticColumn []StaticColumnObservation `json:"staticColumn,omitempty" tf:"static_column,omitempty"`
 }
 
 type SchemaDefinitionParameters struct {
 
-	// The columns that are part of the clustering key of the table.
+	// Columns that are part of the clustering key of the table. See clustering_key below.
 	// +kubebuilder:validation:Optional
 	ClusteringKey []ClusteringKeyParameters `json:"clusteringKey,omitempty" tf:"clustering_key,omitempty"`
 
-	// The regular columns of the table.
+	// Regular columns of the table. See column below.
 	// +kubebuilder:validation:Optional
 	Column []ColumnParameters `json:"column" tf:"column,omitempty"`
 
-	// The columns that are part of the partition key of the table .
+	// Columns that are part of the partition key of the table. See partition_key below.
 	// +kubebuilder:validation:Optional
 	PartitionKey []PartitionKeyParameters `json:"partitionKey" tf:"partition_key,omitempty"`
 
-	// The columns that have been defined as STATIC. Static columns store values that are shared by all rows in the same partition.
+	// Columns that have been defined as STATIC. Static columns store values that are shared by all rows in the same partition. See static_column below.
 	// +kubebuilder:validation:Optional
 	StaticColumn []StaticColumnParameters `json:"staticColumn,omitempty" tf:"static_column,omitempty"`
 }
 
 type StaticColumnInitParameters struct {
 
-	// The name of the column.
+	// Name of the clustering key column.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type StaticColumnObservation struct {
 
-	// The name of the column.
+	// Name of the clustering key column.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type StaticColumnParameters struct {
 
-	// The name of the column.
+	// Name of the clustering key column.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 }
 
 type TTLInitParameters struct {
 
-	// Shows how to enable client-side timestamps settings for the specified table. Valid values: ENABLED.
+	// Valid values: ENABLED.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
 
 type TTLObservation struct {
 
-	// Shows how to enable client-side timestamps settings for the specified table. Valid values: ENABLED.
+	// Valid values: ENABLED.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
 
 type TTLParameters struct {
 
-	// Shows how to enable client-side timestamps settings for the specified table. Valid values: ENABLED.
+	// Valid values: ENABLED.
 	// +kubebuilder:validation:Optional
 	Status *string `json:"status" tf:"status,omitempty"`
 }
 
 type TableInitParameters struct {
 
-	// Specifies the read/write throughput capacity mode for the table.
+	// Read/write throughput capacity mode for the table. See capacity_specification below.
 	CapacitySpecification *CapacitySpecificationInitParameters `json:"capacitySpecification,omitempty" tf:"capacity_specification,omitempty"`
 
-	// Enables client-side timestamps for the table. By default, the setting is disabled.
+	// Enables client-side timestamps for the table. By default, the setting is disabled. See client_side_timestamps below.
 	ClientSideTimestamps *ClientSideTimestampsInitParameters `json:"clientSideTimestamps,omitempty" tf:"client_side_timestamps,omitempty"`
 
-	// A description of the table.
+	// Description of the table. See comment below.
 	Comment *CommentInitParameters `json:"comment,omitempty" tf:"comment,omitempty"`
 
-	// The default Time to Live setting in seconds for the table. More information can be found in the Developer Guide.
+	// Default Time to Live setting in seconds for the table. More information can be found in the Developer Guide.
 	DefaultTimeToLive *float64 `json:"defaultTimeToLive,omitempty" tf:"default_time_to_live,omitempty"`
 
-	// Specifies how the encryption key for encryption at rest is managed for the table. More information can be found in the Developer Guide.
+	// Encryption key management for encryption at rest for the table. More information can be found in the Developer Guide. See encryption_specification below.
 	EncryptionSpecification *EncryptionSpecificationInitParameters `json:"encryptionSpecification,omitempty" tf:"encryption_specification,omitempty"`
 
-	// The name of the keyspace that the table is going to be created in.
+	// Name of the keyspace that the table is going to be created in.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/keyspaces/v1beta1.Keyspace
 	KeyspaceName *string `json:"keyspaceName,omitempty" tf:"keyspace_name,omitempty"`
 
@@ -331,16 +331,16 @@ type TableInitParameters struct {
 	// +kubebuilder:validation:Optional
 	KeyspaceNameSelector *v2.NamespacedSelector `json:"keyspaceNameSelector,omitempty" tf:"-"`
 
-	// Specifies if point-in-time recovery is enabled or disabled for the table. More information can be found in the Developer Guide.
+	// Enables or disables point-in-time recovery for the table. More information can be found in the Developer Guide. See point_in_time_recovery below.
 	PointInTimeRecovery *PointInTimeRecoveryInitParameters `json:"pointInTimeRecovery,omitempty" tf:"point_in_time_recovery,omitempty"`
 
-	// Describes the schema of the table.
+	// Schema of the table. See schema_definition below.
 	SchemaDefinition *SchemaDefinitionInitParameters `json:"schemaDefinition,omitempty" tf:"schema_definition,omitempty"`
 
-	// Enables Time to Live custom settings for the table. More information can be found in the Developer Guide.
+	// Enables Time to Live custom settings for the table. More information can be found in the Developer Guide. See ttl below.
 	TTL *TTLInitParameters `json:"ttl,omitempty" tf:"ttl,omitempty"`
 
-	// The name of the table.
+	// Name of the table.
 	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
 
 	// Key-value map of resource tags.
@@ -350,77 +350,77 @@ type TableInitParameters struct {
 
 type TableObservation struct {
 
-	// The ARN of the table.
+	// ARN of the table.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// Specifies the read/write throughput capacity mode for the table.
+	// Read/write throughput capacity mode for the table. See capacity_specification below.
 	CapacitySpecification *CapacitySpecificationObservation `json:"capacitySpecification,omitempty" tf:"capacity_specification,omitempty"`
 
-	// Enables client-side timestamps for the table. By default, the setting is disabled.
+	// Enables client-side timestamps for the table. By default, the setting is disabled. See client_side_timestamps below.
 	ClientSideTimestamps *ClientSideTimestampsObservation `json:"clientSideTimestamps,omitempty" tf:"client_side_timestamps,omitempty"`
 
-	// A description of the table.
+	// Description of the table. See comment below.
 	Comment *CommentObservation `json:"comment,omitempty" tf:"comment,omitempty"`
 
-	// The default Time to Live setting in seconds for the table. More information can be found in the Developer Guide.
+	// Default Time to Live setting in seconds for the table. More information can be found in the Developer Guide.
 	DefaultTimeToLive *float64 `json:"defaultTimeToLive,omitempty" tf:"default_time_to_live,omitempty"`
 
-	// Specifies how the encryption key for encryption at rest is managed for the table. More information can be found in the Developer Guide.
+	// Encryption key management for encryption at rest for the table. More information can be found in the Developer Guide. See encryption_specification below.
 	EncryptionSpecification *EncryptionSpecificationObservation `json:"encryptionSpecification,omitempty" tf:"encryption_specification,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The name of the keyspace that the table is going to be created in.
+	// Name of the keyspace that the table is going to be created in.
 	KeyspaceName *string `json:"keyspaceName,omitempty" tf:"keyspace_name,omitempty"`
 
-	// Specifies if point-in-time recovery is enabled or disabled for the table. More information can be found in the Developer Guide.
+	// Enables or disables point-in-time recovery for the table. More information can be found in the Developer Guide. See point_in_time_recovery below.
 	PointInTimeRecovery *PointInTimeRecoveryObservation `json:"pointInTimeRecovery,omitempty" tf:"point_in_time_recovery,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// Describes the schema of the table.
+	// Schema of the table. See schema_definition below.
 	SchemaDefinition *SchemaDefinitionObservation `json:"schemaDefinition,omitempty" tf:"schema_definition,omitempty"`
 
-	// Enables Time to Live custom settings for the table. More information can be found in the Developer Guide.
+	// Enables Time to Live custom settings for the table. More information can be found in the Developer Guide. See ttl below.
 	TTL *TTLObservation `json:"ttl,omitempty" tf:"ttl,omitempty"`
 
-	// The name of the table.
+	// Name of the table.
 	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type TableParameters struct {
 
-	// Specifies the read/write throughput capacity mode for the table.
+	// Read/write throughput capacity mode for the table. See capacity_specification below.
 	// +kubebuilder:validation:Optional
 	CapacitySpecification *CapacitySpecificationParameters `json:"capacitySpecification,omitempty" tf:"capacity_specification,omitempty"`
 
-	// Enables client-side timestamps for the table. By default, the setting is disabled.
+	// Enables client-side timestamps for the table. By default, the setting is disabled. See client_side_timestamps below.
 	// +kubebuilder:validation:Optional
 	ClientSideTimestamps *ClientSideTimestampsParameters `json:"clientSideTimestamps,omitempty" tf:"client_side_timestamps,omitempty"`
 
-	// A description of the table.
+	// Description of the table. See comment below.
 	// +kubebuilder:validation:Optional
 	Comment *CommentParameters `json:"comment,omitempty" tf:"comment,omitempty"`
 
-	// The default Time to Live setting in seconds for the table. More information can be found in the Developer Guide.
+	// Default Time to Live setting in seconds for the table. More information can be found in the Developer Guide.
 	// +kubebuilder:validation:Optional
 	DefaultTimeToLive *float64 `json:"defaultTimeToLive,omitempty" tf:"default_time_to_live,omitempty"`
 
-	// Specifies how the encryption key for encryption at rest is managed for the table. More information can be found in the Developer Guide.
+	// Encryption key management for encryption at rest for the table. More information can be found in the Developer Guide. See encryption_specification below.
 	// +kubebuilder:validation:Optional
 	EncryptionSpecification *EncryptionSpecificationParameters `json:"encryptionSpecification,omitempty" tf:"encryption_specification,omitempty"`
 
-	// The name of the keyspace that the table is going to be created in.
+	// Name of the keyspace that the table is going to be created in.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/keyspaces/v1beta1.Keyspace
 	// +kubebuilder:validation:Optional
 	KeyspaceName *string `json:"keyspaceName,omitempty" tf:"keyspace_name,omitempty"`
@@ -433,7 +433,7 @@ type TableParameters struct {
 	// +kubebuilder:validation:Optional
 	KeyspaceNameSelector *v2.NamespacedSelector `json:"keyspaceNameSelector,omitempty" tf:"-"`
 
-	// Specifies if point-in-time recovery is enabled or disabled for the table. More information can be found in the Developer Guide.
+	// Enables or disables point-in-time recovery for the table. More information can be found in the Developer Guide. See point_in_time_recovery below.
 	// +kubebuilder:validation:Optional
 	PointInTimeRecovery *PointInTimeRecoveryParameters `json:"pointInTimeRecovery,omitempty" tf:"point_in_time_recovery,omitempty"`
 
@@ -442,15 +442,15 @@ type TableParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// Describes the schema of the table.
+	// Schema of the table. See schema_definition below.
 	// +kubebuilder:validation:Optional
 	SchemaDefinition *SchemaDefinitionParameters `json:"schemaDefinition,omitempty" tf:"schema_definition,omitempty"`
 
-	// Enables Time to Live custom settings for the table. More information can be found in the Developer Guide.
+	// Enables Time to Live custom settings for the table. More information can be found in the Developer Guide. See ttl below.
 	// +kubebuilder:validation:Optional
 	TTL *TTLParameters `json:"ttl,omitempty" tf:"ttl,omitempty"`
 
-	// The name of the table.
+	// Name of the table.
 	// +kubebuilder:validation:Optional
 	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
 

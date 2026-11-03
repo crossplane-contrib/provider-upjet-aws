@@ -39,7 +39,7 @@ type ScheduleInitParameters struct {
 
 type ScheduleObservation struct {
 
-	// ARN assigned by AWS to the autoscaling schedule.
+	// ARN assigned by AWS to the Auto Scaling schedule.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The name of the Auto Scaling group.

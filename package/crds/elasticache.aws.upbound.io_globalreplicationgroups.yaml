@@ -123,8 +123,9 @@ spec:
                     type: string
                   primaryReplicationGroupId:
                     description: The ID of the primary cluster that accepts writes
-                      and will replicate updates to the secondary cluster. If primary_replication_group_id
-                      is changed, creates a new resource.
+                      and will replicate updates to the secondary cluster. Changing
+                      this value will trigger a failover to the specified replication
+                      group.
                     type: string
                   primaryReplicationGroupIdRef:
                     description: Reference to a ReplicationGroup in elasticache to
@@ -273,8 +274,9 @@ spec:
                     type: string
                   primaryReplicationGroupId:
                     description: The ID of the primary cluster that accepts writes
-                      and will replicate updates to the secondary cluster. If primary_replication_group_id
-                      is changed, creates a new resource.
+                      and will replicate updates to the secondary cluster. Changing
+                      this value will trigger a failover to the specified replication
+                      group.
                     type: string
                   primaryReplicationGroupIdRef:
                     description: Reference to a ReplicationGroup in elasticache to
@@ -540,8 +542,9 @@ spec:
                     type: string
                   primaryReplicationGroupId:
                     description: The ID of the primary cluster that accepts writes
-                      and will replicate updates to the secondary cluster. If primary_replication_group_id
-                      is changed, creates a new resource.
+                      and will replicate updates to the secondary cluster. Changing
+                      this value will trigger a failover to the specified replication
+                      group.
                     type: string
                   region:
                     description: |-

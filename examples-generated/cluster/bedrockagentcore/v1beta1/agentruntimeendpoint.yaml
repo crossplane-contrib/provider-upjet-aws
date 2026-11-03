@@ -17,5 +17,5 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     description: Endpoint for agent runtime communication
-    name: example-endpoint
+    name: example_endpoint
     region: us-west-1

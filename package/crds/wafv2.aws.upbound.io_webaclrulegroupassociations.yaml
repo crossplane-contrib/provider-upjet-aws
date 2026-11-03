@@ -243,7 +243,7 @@ spec:
                                         x-kubernetes-list-type: set
                                       identifier:
                                         description: |-
-                                          Identifier for the value to match against in the JSON.
+                                          Name of the username field.
                                           Identifier of the JSON field to inspect
                                         type: string
                                       successValues:
@@ -1300,7 +1300,7 @@ spec:
                                         x-kubernetes-list-type: set
                                       identifier:
                                         description: |-
-                                          Identifier for the value to match against in the JSON.
+                                          Name of the username field.
                                           Identifier of the JSON field to inspect
                                         type: string
                                       successValues:
@@ -2440,7 +2440,7 @@ spec:
                                         x-kubernetes-list-type: set
                                       identifier:
                                         description: |-
-                                          Identifier for the value to match against in the JSON.
+                                          Name of the username field.
                                           Identifier of the JSON field to inspect
                                         type: string
                                       successValues:

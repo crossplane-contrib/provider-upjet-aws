@@ -60,7 +60,7 @@ spec:
               forProvider:
                 properties:
                   databaseName:
-                    description: The name of the Timestream database.
+                    description: Name of the Timestream database.
                     type: string
                   databaseNameRef:
                     description: Reference to a Database in timestreamwrite to populate
@@ -145,23 +145,23 @@ spec:
                         type: object
                     type: object
                   magneticStoreWriteProperties:
-                    description: Contains properties to set on the table when enabling
-                      magnetic store writes. See Magnetic Store Write Properties below
+                    description: Properties to set on the table when enabling magnetic
+                      store writes. See magnetic_store_write_properties Block below
                       for more details.
                     properties:
                       enableMagneticStoreWrites:
-                        description: A flag to enable magnetic store writes.
+                        description: Whether to enable magnetic store writes.
                         type: boolean
                       magneticStoreRejectedDataLocation:
-                        description: The location to write error reports for records
-                          rejected asynchronously during magnetic store writes. See
-                          Magnetic Store Rejected Data Location below for more details.
+                        description: Location to write error reports for records rejected
+                          asynchronously during magnetic store writes. See magnetic_store_rejected_data_location
+                          Block below for more details.
                         properties:
                           s3Configuration:
                             description: Configuration of an S3 location to write
                               error reports for records rejected, asynchronously,
-                              during magnetic store writes. See S3 Configuration below
-                              for more details.
+                              during magnetic store writes. See s3_configuration Block
+                              below for more details.
                             properties:
                               bucketName:
                                 description: Bucket name of the customer S3 bucket.
@@ -173,7 +173,7 @@ spec:
                                   values are SSE_KMS and SSE_S3.
                                 type: string
                               kmsKeyId:
-                                description: KMS key arn for the customer s3 location
+                                description: KMS key ARN for the customer s3 location
                                   when encrypting with a KMS managed key.
                                 type: string
                               objectKeyPrefix:
@@ -189,52 +189,51 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   retentionProperties:
-                    description: The retention duration for the memory store and magnetic
-                      store. See Retention Properties below for more details. If not
-                      provided, magnetic_store_retention_period_in_days default to
-                      73000 and memory_store_retention_period_in_hours defaults to
-                      6.
+                    description: Retention duration for the memory store and magnetic
+                      store. See retention_properties Block below for more details.
+                      If not provided, magnetic_store_retention_period_in_days defaults
+                      to 73000 and memory_store_retention_period_in_hours defaults
+                      to 6.
                     properties:
                       magneticStoreRetentionPeriodInDays:
-                        description: The duration for which data must be stored in
-                          the magnetic store. Minimum value of 1. Maximum value of
-                          73000.
+                        description: Duration for which data must be stored in the
+                          magnetic store. Minimum value of 1. Maximum value of 73000.
                         type: number
                       memoryStoreRetentionPeriodInHours:
-                        description: The duration for which data must be stored in
-                          the memory store. Minimum value of 1. Maximum value of 8766.
+                        description: Duration for which data must be stored in the
+                          memory store. Minimum value of 1. Maximum value of 8766.
                         type: number
                     type: object
                   schema:
-                    description: The schema of the table. See Schema below for more
+                    description: Schema of the table. See schema Block below for more
                       details.
                     properties:
                       compositePartitionKey:
-                        description: A non-empty list of partition keys defining the
+                        description: Non-empty list of partition keys defining the
                           attributes used to partition the table data. The order of
                           the list determines the partition hierarchy. The name and
                           type of each partition key as well as the partition key
                           order cannot be changed after the table is created. However,
                           the enforcement level of each partition key can be changed.
-                          See Composite Partition Key below for more details.
+                          See composite_partition_key Block below for more details.
                         properties:
                           enforcementInRecord:
-                            description: 'The level of enforcement for the specification
+                            description: 'Level of enforcement for the specification
                               of a dimension key in ingested records. Valid values:
                               REQUIRED, OPTIONAL.'
                             type: string
                           name:
-                            description: The name of the attribute used for a dimension
+                            description: Name of the attribute used for a dimension
                               key.
                             type: string
                           type:
-                            description: 'The type of the partition key. Valid values:
+                            description: 'Type of the partition key. Valid values:
                               DIMENSION, MEASURE.'
                             type: string
                         type: object
                     type: object
                   tableName:
-                    description: The name of the Timestream table.
+                    description: Name of the Timestream table.
                     type: string
                   tags:
                     additionalProperties:
@@ -260,23 +259,23 @@ spec:
                   autoscaler.
                 properties:
                   magneticStoreWriteProperties:
-                    description: Contains properties to set on the table when enabling
-                      magnetic store writes. See Magnetic Store Write Properties below
+                    description: Properties to set on the table when enabling magnetic
+                      store writes. See magnetic_store_write_properties Block below
                       for more details.
                     properties:
                       enableMagneticStoreWrites:
-                        description: A flag to enable magnetic store writes.
+                        description: Whether to enable magnetic store writes.
                         type: boolean
                       magneticStoreRejectedDataLocation:
-                        description: The location to write error reports for records
-                          rejected asynchronously during magnetic store writes. See
-                          Magnetic Store Rejected Data Location below for more details.
+                        description: Location to write error reports for records rejected
+                          asynchronously during magnetic store writes. See magnetic_store_rejected_data_location
+                          Block below for more details.
                         properties:
                           s3Configuration:
                             description: Configuration of an S3 location to write
                               error reports for records rejected, asynchronously,
-                              during magnetic store writes. See S3 Configuration below
-                              for more details.
+                              during magnetic store writes. See s3_configuration Block
+                              below for more details.
                             properties:
                               bucketName:
                                 description: Bucket name of the customer S3 bucket.
@@ -288,7 +287,7 @@ spec:
                                   values are SSE_KMS and SSE_S3.
                                 type: string
                               kmsKeyId:
-                                description: KMS key arn for the customer s3 location
+                                description: KMS key ARN for the customer s3 location
                                   when encrypting with a KMS managed key.
                                 type: string
                               objectKeyPrefix:
@@ -299,46 +298,45 @@ spec:
                         type: object
                     type: object
                   retentionProperties:
-                    description: The retention duration for the memory store and magnetic
-                      store. See Retention Properties below for more details. If not
-                      provided, magnetic_store_retention_period_in_days default to
-                      73000 and memory_store_retention_period_in_hours defaults to
-                      6.
+                    description: Retention duration for the memory store and magnetic
+                      store. See retention_properties Block below for more details.
+                      If not provided, magnetic_store_retention_period_in_days defaults
+                      to 73000 and memory_store_retention_period_in_hours defaults
+                      to 6.
                     properties:
                       magneticStoreRetentionPeriodInDays:
-                        description: The duration for which data must be stored in
-                          the magnetic store. Minimum value of 1. Maximum value of
-                          73000.
+                        description: Duration for which data must be stored in the
+                          magnetic store. Minimum value of 1. Maximum value of 73000.
                         type: number
                       memoryStoreRetentionPeriodInHours:
-                        description: The duration for which data must be stored in
-                          the memory store. Minimum value of 1. Maximum value of 8766.
+                        description: Duration for which data must be stored in the
+                          memory store. Minimum value of 1. Maximum value of 8766.
                         type: number
                     type: object
                   schema:
-                    description: The schema of the table. See Schema below for more
+                    description: Schema of the table. See schema Block below for more
                       details.
                     properties:
                       compositePartitionKey:
-                        description: A non-empty list of partition keys defining the
+                        description: Non-empty list of partition keys defining the
                           attributes used to partition the table data. The order of
                           the list determines the partition hierarchy. The name and
                           type of each partition key as well as the partition key
                           order cannot be changed after the table is created. However,
                           the enforcement level of each partition key can be changed.
-                          See Composite Partition Key below for more details.
+                          See composite_partition_key Block below for more details.
                         properties:
                           enforcementInRecord:
-                            description: 'The level of enforcement for the specification
+                            description: 'Level of enforcement for the specification
                               of a dimension key in ingested records. Valid values:
                               REQUIRED, OPTIONAL.'
                             type: string
                           name:
-                            description: The name of the attribute used for a dimension
+                            description: Name of the attribute used for a dimension
                               key.
                             type: string
                           type:
-                            description: 'The type of the partition key. Valid values:
+                            description: 'Type of the partition key. Valid values:
                               DIMENSION, MEASURE.'
                             type: string
                         type: object
@@ -414,33 +412,33 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The ARN that uniquely identifies this table.
+                    description: ARN that uniquely identifies this table.
                     type: string
                   databaseName:
-                    description: The name of the Timestream database.
+                    description: Name of the Timestream database.
                     type: string
                   id:
-                    description: The table_name and database_name separated by a colon
+                    description: table_name and database_name separated by a colon
                       (:).
                     type: string
                   magneticStoreWriteProperties:
-                    description: Contains properties to set on the table when enabling
-                      magnetic store writes. See Magnetic Store Write Properties below
+                    description: Properties to set on the table when enabling magnetic
+                      store writes. See magnetic_store_write_properties Block below
                       for more details.
                     properties:
                       enableMagneticStoreWrites:
-                        description: A flag to enable magnetic store writes.
+                        description: Whether to enable magnetic store writes.
                         type: boolean
                       magneticStoreRejectedDataLocation:
-                        description: The location to write error reports for records
-                          rejected asynchronously during magnetic store writes. See
-                          Magnetic Store Rejected Data Location below for more details.
+                        description: Location to write error reports for records rejected
+                          asynchronously during magnetic store writes. See magnetic_store_rejected_data_location
+                          Block below for more details.
                         properties:
                           s3Configuration:
                             description: Configuration of an S3 location to write
                               error reports for records rejected, asynchronously,
-                              during magnetic store writes. See S3 Configuration below
-                              for more details.
+                              during magnetic store writes. See s3_configuration Block
+                              below for more details.
                             properties:
                               bucketName:
                                 description: Bucket name of the customer S3 bucket.
@@ -452,7 +450,7 @@ spec:
                                   values are SSE_KMS and SSE_S3.
                                 type: string
                               kmsKeyId:
-                                description: KMS key arn for the customer s3 location
+                                description: KMS key ARN for the customer s3 location
                                   when encrypting with a KMS managed key.
                                 type: string
                               objectKeyPrefix:
@@ -468,52 +466,51 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   retentionProperties:
-                    description: The retention duration for the memory store and magnetic
-                      store. See Retention Properties below for more details. If not
-                      provided, magnetic_store_retention_period_in_days default to
-                      73000 and memory_store_retention_period_in_hours defaults to
-                      6.
+                    description: Retention duration for the memory store and magnetic
+                      store. See retention_properties Block below for more details.
+                      If not provided, magnetic_store_retention_period_in_days defaults
+                      to 73000 and memory_store_retention_period_in_hours defaults
+                      to 6.
                     properties:
                       magneticStoreRetentionPeriodInDays:
-                        description: The duration for which data must be stored in
-                          the magnetic store. Minimum value of 1. Maximum value of
-                          73000.
+                        description: Duration for which data must be stored in the
+                          magnetic store. Minimum value of 1. Maximum value of 73000.
                         type: number
                       memoryStoreRetentionPeriodInHours:
-                        description: The duration for which data must be stored in
-                          the memory store. Minimum value of 1. Maximum value of 8766.
+                        description: Duration for which data must be stored in the
+                          memory store. Minimum value of 1. Maximum value of 8766.
                         type: number
                     type: object
                   schema:
-                    description: The schema of the table. See Schema below for more
+                    description: Schema of the table. See schema Block below for more
                       details.
                     properties:
                       compositePartitionKey:
-                        description: A non-empty list of partition keys defining the
+                        description: Non-empty list of partition keys defining the
                           attributes used to partition the table data. The order of
                           the list determines the partition hierarchy. The name and
                           type of each partition key as well as the partition key
                           order cannot be changed after the table is created. However,
                           the enforcement level of each partition key can be changed.
-                          See Composite Partition Key below for more details.
+                          See composite_partition_key Block below for more details.
                         properties:
                           enforcementInRecord:
-                            description: 'The level of enforcement for the specification
+                            description: 'Level of enforcement for the specification
                               of a dimension key in ingested records. Valid values:
                               REQUIRED, OPTIONAL.'
                             type: string
                           name:
-                            description: The name of the attribute used for a dimension
+                            description: Name of the attribute used for a dimension
                               key.
                             type: string
                           type:
-                            description: 'The type of the partition key. Valid values:
+                            description: 'Type of the partition key. Valid values:
                               DIMENSION, MEASURE.'
                             type: string
                         type: object
                     type: object
                   tableName:
-                    description: The name of the Timestream table.
+                    description: Name of the Timestream table.
                     type: string
                   tags:
                     additionalProperties:
@@ -524,9 +521,8 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
                 type: object

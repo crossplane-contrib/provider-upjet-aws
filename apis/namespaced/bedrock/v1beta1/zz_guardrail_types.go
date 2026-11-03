@@ -15,80 +15,77 @@ import (
 
 type ContentPolicyConfigInitParameters struct {
 
-	// Set of content filter configs in content policy.
-	// See Filters Config for more information.
+	// Set of content filter configs in content policy. See content_policy_config.filters_config Block for more information.
 	FiltersConfig []FiltersConfigInitParameters `json:"filtersConfig,omitempty" tf:"filters_config,omitempty"`
 
-	// Configuration block for the content policy tier. See Tier Config for more information.
+	// Configuration block for the content policy tier. See content_policy_config.tier_config Block for more information.
 	TierConfig *TierConfigInitParameters `json:"tierConfig,omitempty" tf:"tier_config,omitempty"`
 }
 
 type ContentPolicyConfigObservation struct {
 
-	// Set of content filter configs in content policy.
-	// See Filters Config for more information.
+	// Set of content filter configs in content policy. See content_policy_config.filters_config Block for more information.
 	FiltersConfig []FiltersConfigObservation `json:"filtersConfig,omitempty" tf:"filters_config,omitempty"`
 
-	// Configuration block for the content policy tier. See Tier Config for more information.
+	// Configuration block for the content policy tier. See content_policy_config.tier_config Block for more information.
 	TierConfig *TierConfigObservation `json:"tierConfig,omitempty" tf:"tier_config,omitempty"`
 }
 
 type ContentPolicyConfigParameters struct {
 
-	// Set of content filter configs in content policy.
-	// See Filters Config for more information.
+	// Set of content filter configs in content policy. See content_policy_config.filters_config Block for more information.
 	// +kubebuilder:validation:Optional
 	FiltersConfig []FiltersConfigParameters `json:"filtersConfig,omitempty" tf:"filters_config,omitempty"`
 
-	// Configuration block for the content policy tier. See Tier Config for more information.
+	// Configuration block for the content policy tier. See content_policy_config.tier_config Block for more information.
 	// +kubebuilder:validation:Optional
 	TierConfig *TierConfigParameters `json:"tierConfig,omitempty" tf:"tier_config,omitempty"`
 }
 
 type ContextualGroundingPolicyConfigFiltersConfigInitParameters struct {
 
-	// The threshold for this filter.
+	// Threshold for this filter.
 	Threshold *float64 `json:"threshold,omitempty" tf:"threshold,omitempty"`
 
-	// Type of topic in a policy.
+	// Type of contextual grounding filter.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type ContextualGroundingPolicyConfigFiltersConfigObservation struct {
 
-	// The threshold for this filter.
+	// Threshold for this filter.
 	Threshold *float64 `json:"threshold,omitempty" tf:"threshold,omitempty"`
 
-	// Type of topic in a policy.
+	// Type of contextual grounding filter.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type ContextualGroundingPolicyConfigFiltersConfigParameters struct {
 
-	// The threshold for this filter.
+	// Threshold for this filter.
 	// +kubebuilder:validation:Optional
 	Threshold *float64 `json:"threshold" tf:"threshold,omitempty"`
 
-	// Type of topic in a policy.
+	// Type of contextual grounding filter.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type ContextualGroundingPolicyConfigInitParameters struct {
 
-	// One or more blocks defining contextual grounding filter configs. See Contextual Grounding Filters Config for more information.
+	// One or more blocks defining contextual grounding filter configs. See contextual_grounding_policy_config.filters_config Block for more information.
 	FiltersConfig []ContextualGroundingPolicyConfigFiltersConfigInitParameters `json:"filtersConfig,omitempty" tf:"filters_config,omitempty"`
 }
 
 type ContextualGroundingPolicyConfigObservation struct {
 
-	// One or more blocks defining contextual grounding filter configs. See Contextual Grounding Filters Config for more information.
+	// One or more blocks defining contextual grounding filter configs. See contextual_grounding_policy_config.filters_config Block for more information.
 	FiltersConfig []ContextualGroundingPolicyConfigFiltersConfigObservation `json:"filtersConfig,omitempty" tf:"filters_config,omitempty"`
 }
 
 type ContextualGroundingPolicyConfigParameters struct {
 
-	// One or more blocks defining contextual grounding filter configs. See Contextual Grounding Filters Config for more information.
+	// One or more blocks defining contextual grounding filter configs. See contextual_grounding_policy_config.filters_config Block for more information.
 	// +kubebuilder:validation:Optional
 	FiltersConfig []ContextualGroundingPolicyConfigFiltersConfigParameters `json:"filtersConfig,omitempty" tf:"filters_config,omitempty"`
 }
@@ -117,7 +114,7 @@ type FiltersConfigInitParameters struct {
 	// Action to take when harmful content is detected. Valid values: BLOCK, NONE.
 	InputAction *string `json:"inputAction,omitempty" tf:"input_action,omitempty"`
 
-	// Toggles guardrail evaluation on input.
+	// Whether to enable guardrail evaluation on input.
 	InputEnabled *bool `json:"inputEnabled,omitempty" tf:"input_enabled,omitempty"`
 
 	// List of selected input modalities. Valid values: IMAGE, TEXT.
@@ -130,7 +127,7 @@ type FiltersConfigInitParameters struct {
 	// Action to take when harmful content is detected. Valid values: BLOCK, NONE.
 	OutputAction *string `json:"outputAction,omitempty" tf:"output_action,omitempty"`
 
-	// Toggles guardrail evaluation on output.
+	// Whether to enable guardrail evaluation on output.
 	OutputEnabled *bool `json:"outputEnabled,omitempty" tf:"output_enabled,omitempty"`
 
 	// List of selected output modalities. Valid values: IMAGE, TEXT.
@@ -140,7 +137,7 @@ type FiltersConfigInitParameters struct {
 	// Strength for filters. Valid values: NONE, LOW, MEDIUM, HIGH.
 	OutputStrength *string `json:"outputStrength,omitempty" tf:"output_strength,omitempty"`
 
-	// Type of filter in content policy. Valid Values: SEXUAL, VIOLENCE, HATE, INSULTS, MISCONDUCT, PROMPT_ATTACK.
+	// Type of filter in content policy. Valid values: SEXUAL, VIOLENCE, HATE, INSULTS, MISCONDUCT, PROMPT_ATTACK.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -149,7 +146,7 @@ type FiltersConfigObservation struct {
 	// Action to take when harmful content is detected. Valid values: BLOCK, NONE.
 	InputAction *string `json:"inputAction,omitempty" tf:"input_action,omitempty"`
 
-	// Toggles guardrail evaluation on input.
+	// Whether to enable guardrail evaluation on input.
 	InputEnabled *bool `json:"inputEnabled,omitempty" tf:"input_enabled,omitempty"`
 
 	// List of selected input modalities. Valid values: IMAGE, TEXT.
@@ -162,7 +159,7 @@ type FiltersConfigObservation struct {
 	// Action to take when harmful content is detected. Valid values: BLOCK, NONE.
 	OutputAction *string `json:"outputAction,omitempty" tf:"output_action,omitempty"`
 
-	// Toggles guardrail evaluation on output.
+	// Whether to enable guardrail evaluation on output.
 	OutputEnabled *bool `json:"outputEnabled,omitempty" tf:"output_enabled,omitempty"`
 
 	// List of selected output modalities. Valid values: IMAGE, TEXT.
@@ -172,7 +169,7 @@ type FiltersConfigObservation struct {
 	// Strength for filters. Valid values: NONE, LOW, MEDIUM, HIGH.
 	OutputStrength *string `json:"outputStrength,omitempty" tf:"output_strength,omitempty"`
 
-	// Type of filter in content policy. Valid Values: SEXUAL, VIOLENCE, HATE, INSULTS, MISCONDUCT, PROMPT_ATTACK.
+	// Type of filter in content policy. Valid values: SEXUAL, VIOLENCE, HATE, INSULTS, MISCONDUCT, PROMPT_ATTACK.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -182,7 +179,7 @@ type FiltersConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	InputAction *string `json:"inputAction,omitempty" tf:"input_action,omitempty"`
 
-	// Toggles guardrail evaluation on input.
+	// Whether to enable guardrail evaluation on input.
 	// +kubebuilder:validation:Optional
 	InputEnabled *bool `json:"inputEnabled,omitempty" tf:"input_enabled,omitempty"`
 
@@ -199,7 +196,7 @@ type FiltersConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	OutputAction *string `json:"outputAction,omitempty" tf:"output_action,omitempty"`
 
-	// Toggles guardrail evaluation on output.
+	// Whether to enable guardrail evaluation on output.
 	// +kubebuilder:validation:Optional
 	OutputEnabled *bool `json:"outputEnabled,omitempty" tf:"output_enabled,omitempty"`
 
@@ -212,7 +209,7 @@ type FiltersConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	OutputStrength *string `json:"outputStrength" tf:"output_strength,omitempty"`
 
-	// Type of filter in content policy. Valid Values: SEXUAL, VIOLENCE, HATE, INSULTS, MISCONDUCT, PROMPT_ATTACK.
+	// Type of filter in content policy. Valid values: SEXUAL, VIOLENCE, HATE, INSULTS, MISCONDUCT, PROMPT_ATTACK.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
 }
@@ -225,19 +222,19 @@ type GuardrailInitParameters struct {
 	// Message to return when the guardrail blocks a model response.
 	BlockedOutputsMessaging *string `json:"blockedOutputsMessaging,omitempty" tf:"blocked_outputs_messaging,omitempty"`
 
-	// Content policy config for a guardrail. See Content Policy Config for more information.
+	// Content policy config for a guardrail. See content_policy_config Block for more information.
 	ContentPolicyConfig *ContentPolicyConfigInitParameters `json:"contentPolicyConfig,omitempty" tf:"content_policy_config,omitempty"`
 
-	// Contextual grounding policy config for a guardrail. See Contextual Grounding Policy Config for more information.
+	// Contextual grounding policy config for a guardrail. See contextual_grounding_policy_config Block for more information.
 	ContextualGroundingPolicyConfig *ContextualGroundingPolicyConfigInitParameters `json:"contextualGroundingPolicyConfig,omitempty" tf:"contextual_grounding_policy_config,omitempty"`
 
-	// region routing for bedrock guardrails. See [Cross Region Config](#cross-region-config for more information. Note see available regions here.
+	// Configuration block to enable cross-region routing for bedrock guardrails. See cross_region_config Block for more information. See available Regions.
 	CrossRegionConfig *CrossRegionConfigInitParameters `json:"crossRegionConfig,omitempty" tf:"cross_region_config,omitempty"`
 
 	// Description of the guardrail or its version.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The KMS key with which the guardrail was encrypted at rest.
+	// KMS key with which the guardrail was encrypted at rest.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kms/v1beta1.Key
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
@@ -253,17 +250,17 @@ type GuardrailInitParameters struct {
 	// Name of the guardrail.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Sensitive information policy config for a guardrail. See Sensitive Information Policy Config for more information.
+	// Sensitive information policy config for a guardrail. See sensitive_information_policy_config Block for more information.
 	SensitiveInformationPolicyConfig *SensitiveInformationPolicyConfigInitParameters `json:"sensitiveInformationPolicyConfig,omitempty" tf:"sensitive_information_policy_config,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Topic policy config for a guardrail. See Topic Policy Config for more information.
+	// Topic policy config for a guardrail. See topic_policy_config Block for more information.
 	TopicPolicyConfig *TopicPolicyConfigInitParameters `json:"topicPolicyConfig,omitempty" tf:"topic_policy_config,omitempty"`
 
-	// Word policy config for a guardrail. See Word Policy Config for more information.
+	// Word policy config for a guardrail. See word_policy_config Block for more information.
 	WordPolicyConfig *WordPolicyConfigInitParameters `json:"wordPolicyConfig,omitempty" tf:"word_policy_config,omitempty"`
 }
 
@@ -275,16 +272,16 @@ type GuardrailObservation struct {
 	// Message to return when the guardrail blocks a model response.
 	BlockedOutputsMessaging *string `json:"blockedOutputsMessaging,omitempty" tf:"blocked_outputs_messaging,omitempty"`
 
-	// Content policy config for a guardrail. See Content Policy Config for more information.
+	// Content policy config for a guardrail. See content_policy_config Block for more information.
 	ContentPolicyConfig *ContentPolicyConfigObservation `json:"contentPolicyConfig,omitempty" tf:"content_policy_config,omitempty"`
 
-	// Contextual grounding policy config for a guardrail. See Contextual Grounding Policy Config for more information.
+	// Contextual grounding policy config for a guardrail. See contextual_grounding_policy_config Block for more information.
 	ContextualGroundingPolicyConfig *ContextualGroundingPolicyConfigObservation `json:"contextualGroundingPolicyConfig,omitempty" tf:"contextual_grounding_policy_config,omitempty"`
 
-	// Unix epoch timestamp in seconds for when the Guardrail was created.
+	// Date and time the Guardrail was created, in RFC3339 format.
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
-	// region routing for bedrock guardrails. See [Cross Region Config](#cross-region-config for more information. Note see available regions here.
+	// Configuration block to enable cross-region routing for bedrock guardrails. See cross_region_config Block for more information. See available Regions.
 	CrossRegionConfig *CrossRegionConfigObservation `json:"crossRegionConfig,omitempty" tf:"cross_region_config,omitempty"`
 
 	// Description of the guardrail or its version.
@@ -298,7 +295,7 @@ type GuardrailObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The KMS key with which the guardrail was encrypted at rest.
+	// KMS key with which the guardrail was encrypted at rest.
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
 	// Name of the guardrail.
@@ -308,29 +305,30 @@ type GuardrailObservation struct {
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// Sensitive information policy config for a guardrail. See Sensitive Information Policy Config for more information.
+	// Sensitive information policy config for a guardrail. See sensitive_information_policy_config Block for more information.
 	SensitiveInformationPolicyConfig *SensitiveInformationPolicyConfigObservation `json:"sensitiveInformationPolicyConfig,omitempty" tf:"sensitive_information_policy_config,omitempty"`
 
-	// Status of the Bedrock Guardrail. One of READY, FAILED.
+	// Status of the Bedrock Guardrail.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// Topic policy config for a guardrail. See Topic Policy Config for more information.
+	// Topic policy config for a guardrail. See topic_policy_config Block for more information.
 	TopicPolicyConfig *TopicPolicyConfigObservation `json:"topicPolicyConfig,omitempty" tf:"topic_policy_config,omitempty"`
 
-	// Date and time that the Guardrail list was last updated.
+	// Date and time that the Guardrail was last updated, in RFC3339 format.
 	UpdatedAt *string `json:"updatedAt,omitempty" tf:"updated_at,omitempty"`
 
 	// Version of the Guardrail.
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 
-	// Word policy config for a guardrail. See Word Policy Config for more information.
+	// Word policy config for a guardrail. See word_policy_config Block for more information.
 	WordPolicyConfig *WordPolicyConfigObservation `json:"wordPolicyConfig,omitempty" tf:"word_policy_config,omitempty"`
 }
 
@@ -344,15 +342,15 @@ type GuardrailParameters struct {
 	// +kubebuilder:validation:Optional
 	BlockedOutputsMessaging *string `json:"blockedOutputsMessaging,omitempty" tf:"blocked_outputs_messaging,omitempty"`
 
-	// Content policy config for a guardrail. See Content Policy Config for more information.
+	// Content policy config for a guardrail. See content_policy_config Block for more information.
 	// +kubebuilder:validation:Optional
 	ContentPolicyConfig *ContentPolicyConfigParameters `json:"contentPolicyConfig,omitempty" tf:"content_policy_config,omitempty"`
 
-	// Contextual grounding policy config for a guardrail. See Contextual Grounding Policy Config for more information.
+	// Contextual grounding policy config for a guardrail. See contextual_grounding_policy_config Block for more information.
 	// +kubebuilder:validation:Optional
 	ContextualGroundingPolicyConfig *ContextualGroundingPolicyConfigParameters `json:"contextualGroundingPolicyConfig,omitempty" tf:"contextual_grounding_policy_config,omitempty"`
 
-	// region routing for bedrock guardrails. See [Cross Region Config](#cross-region-config for more information. Note see available regions here.
+	// Configuration block to enable cross-region routing for bedrock guardrails. See cross_region_config Block for more information. See available Regions.
 	// +kubebuilder:validation:Optional
 	CrossRegionConfig *CrossRegionConfigParameters `json:"crossRegionConfig,omitempty" tf:"cross_region_config,omitempty"`
 
@@ -360,7 +358,7 @@ type GuardrailParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The KMS key with which the guardrail was encrypted at rest.
+	// KMS key with which the guardrail was encrypted at rest.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kms/v1beta1.Key
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -383,7 +381,7 @@ type GuardrailParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// Sensitive information policy config for a guardrail. See Sensitive Information Policy Config for more information.
+	// Sensitive information policy config for a guardrail. See sensitive_information_policy_config Block for more information.
 	// +kubebuilder:validation:Optional
 	SensitiveInformationPolicyConfig *SensitiveInformationPolicyConfigParameters `json:"sensitiveInformationPolicyConfig,omitempty" tf:"sensitive_information_policy_config,omitempty"`
 
@@ -392,54 +390,54 @@ type GuardrailParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Topic policy config for a guardrail. See Topic Policy Config for more information.
+	// Topic policy config for a guardrail. See topic_policy_config Block for more information.
 	// +kubebuilder:validation:Optional
 	TopicPolicyConfig *TopicPolicyConfigParameters `json:"topicPolicyConfig,omitempty" tf:"topic_policy_config,omitempty"`
 
-	// Word policy config for a guardrail. See Word Policy Config for more information.
+	// Word policy config for a guardrail. See word_policy_config Block for more information.
 	// +kubebuilder:validation:Optional
 	WordPolicyConfig *WordPolicyConfigParameters `json:"wordPolicyConfig,omitempty" tf:"word_policy_config,omitempty"`
 }
 
 type ManagedWordListsConfigInitParameters struct {
 
-	// Action to take when harmful content is detected in the input. Valid values: BLOCK, ANONYMIZE, NONE.
+	// Action to take when harmful content is detected in the input. Valid values: BLOCK, NONE.
 	InputAction *string `json:"inputAction,omitempty" tf:"input_action,omitempty"`
 
 	// Whether to enable guardrail evaluation on the input. When disabled, you aren't charged for the evaluation.
 	InputEnabled *bool `json:"inputEnabled,omitempty" tf:"input_enabled,omitempty"`
 
-	// Action to take when harmful content is detected in the output. Valid values: BLOCK, ANONYMIZE, NONE.
+	// Action to take when harmful content is detected in the output. Valid values: BLOCK, NONE.
 	OutputAction *string `json:"outputAction,omitempty" tf:"output_action,omitempty"`
 
 	// Whether to enable guardrail evaluation on the output. When disabled, you aren't charged for the evaluation.
 	OutputEnabled *bool `json:"outputEnabled,omitempty" tf:"output_enabled,omitempty"`
 
-	// Type of topic in a policy.
+	// Options for managed words.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type ManagedWordListsConfigObservation struct {
 
-	// Action to take when harmful content is detected in the input. Valid values: BLOCK, ANONYMIZE, NONE.
+	// Action to take when harmful content is detected in the input. Valid values: BLOCK, NONE.
 	InputAction *string `json:"inputAction,omitempty" tf:"input_action,omitempty"`
 
 	// Whether to enable guardrail evaluation on the input. When disabled, you aren't charged for the evaluation.
 	InputEnabled *bool `json:"inputEnabled,omitempty" tf:"input_enabled,omitempty"`
 
-	// Action to take when harmful content is detected in the output. Valid values: BLOCK, ANONYMIZE, NONE.
+	// Action to take when harmful content is detected in the output. Valid values: BLOCK, NONE.
 	OutputAction *string `json:"outputAction,omitempty" tf:"output_action,omitempty"`
 
 	// Whether to enable guardrail evaluation on the output. When disabled, you aren't charged for the evaluation.
 	OutputEnabled *bool `json:"outputEnabled,omitempty" tf:"output_enabled,omitempty"`
 
-	// Type of topic in a policy.
+	// Options for managed words.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type ManagedWordListsConfigParameters struct {
 
-	// Action to take when harmful content is detected in the input. Valid values: BLOCK, ANONYMIZE, NONE.
+	// Action to take when harmful content is detected in the input. Valid values: BLOCK, NONE.
 	// +kubebuilder:validation:Optional
 	InputAction *string `json:"inputAction,omitempty" tf:"input_action,omitempty"`
 
@@ -447,7 +445,7 @@ type ManagedWordListsConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	InputEnabled *bool `json:"inputEnabled,omitempty" tf:"input_enabled,omitempty"`
 
-	// Action to take when harmful content is detected in the output. Valid values: BLOCK, ANONYMIZE, NONE.
+	// Action to take when harmful content is detected in the output. Valid values: BLOCK, NONE.
 	// +kubebuilder:validation:Optional
 	OutputAction *string `json:"outputAction,omitempty" tf:"output_action,omitempty"`
 
@@ -455,7 +453,7 @@ type ManagedWordListsConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	OutputEnabled *bool `json:"outputEnabled,omitempty" tf:"output_enabled,omitempty"`
 
-	// Type of topic in a policy.
+	// Options for managed words.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
 }
@@ -477,7 +475,7 @@ type PiiEntitiesConfigInitParameters struct {
 	// Whether to enable guardrail evaluation on the output. When disabled, you aren't charged for the evaluation.
 	OutputEnabled *bool `json:"outputEnabled,omitempty" tf:"output_enabled,omitempty"`
 
-	// Type of topic in a policy.
+	// Currently supported PII entities.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -498,7 +496,7 @@ type PiiEntitiesConfigObservation struct {
 	// Whether to enable guardrail evaluation on the output. When disabled, you aren't charged for the evaluation.
 	OutputEnabled *bool `json:"outputEnabled,omitempty" tf:"output_enabled,omitempty"`
 
-	// Type of topic in a policy.
+	// Currently supported PII entities.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -524,7 +522,7 @@ type PiiEntitiesConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	OutputEnabled *bool `json:"outputEnabled,omitempty" tf:"output_enabled,omitempty"`
 
-	// Type of topic in a policy.
+	// Currently supported PII entities.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
 }
@@ -534,25 +532,25 @@ type RegexesConfigInitParameters struct {
 	// Options for sensitive information action. Valid values: BLOCK, ANONYMIZE, NONE.
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
-	// Description of the guardrail or its version.
+	// Regex description.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Action to take when harmful content is detected in the input. Valid values: BLOCK, ANONYMIZE, NONE.
+	// Action to take when harmful content is detected in the input. Valid values: BLOCK, NONE.
 	InputAction *string `json:"inputAction,omitempty" tf:"input_action,omitempty"`
 
 	// Whether to enable guardrail evaluation on the input. When disabled, you aren't charged for the evaluation.
 	InputEnabled *bool `json:"inputEnabled,omitempty" tf:"input_enabled,omitempty"`
 
-	// Name of the guardrail.
+	// Name of topic in topic policy.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Action to take when harmful content is detected in the output. Valid values: BLOCK, ANONYMIZE, NONE.
+	// Action to take when harmful content is detected in the output. Valid values: BLOCK, NONE.
 	OutputAction *string `json:"outputAction,omitempty" tf:"output_action,omitempty"`
 
 	// Whether to enable guardrail evaluation on the output. When disabled, you aren't charged for the evaluation.
 	OutputEnabled *bool `json:"outputEnabled,omitempty" tf:"output_enabled,omitempty"`
 
-	// The regex pattern.
+	// Regex pattern.
 	Pattern *string `json:"pattern,omitempty" tf:"pattern,omitempty"`
 }
 
@@ -561,25 +559,25 @@ type RegexesConfigObservation struct {
 	// Options for sensitive information action. Valid values: BLOCK, ANONYMIZE, NONE.
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
-	// Description of the guardrail or its version.
+	// Regex description.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Action to take when harmful content is detected in the input. Valid values: BLOCK, ANONYMIZE, NONE.
+	// Action to take when harmful content is detected in the input. Valid values: BLOCK, NONE.
 	InputAction *string `json:"inputAction,omitempty" tf:"input_action,omitempty"`
 
 	// Whether to enable guardrail evaluation on the input. When disabled, you aren't charged for the evaluation.
 	InputEnabled *bool `json:"inputEnabled,omitempty" tf:"input_enabled,omitempty"`
 
-	// Name of the guardrail.
+	// Name of topic in topic policy.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Action to take when harmful content is detected in the output. Valid values: BLOCK, ANONYMIZE, NONE.
+	// Action to take when harmful content is detected in the output. Valid values: BLOCK, NONE.
 	OutputAction *string `json:"outputAction,omitempty" tf:"output_action,omitempty"`
 
 	// Whether to enable guardrail evaluation on the output. When disabled, you aren't charged for the evaluation.
 	OutputEnabled *bool `json:"outputEnabled,omitempty" tf:"output_enabled,omitempty"`
 
-	// The regex pattern.
+	// Regex pattern.
 	Pattern *string `json:"pattern,omitempty" tf:"pattern,omitempty"`
 }
 
@@ -589,11 +587,11 @@ type RegexesConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	Action *string `json:"action" tf:"action,omitempty"`
 
-	// Description of the guardrail or its version.
+	// Regex description.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Action to take when harmful content is detected in the input. Valid values: BLOCK, ANONYMIZE, NONE.
+	// Action to take when harmful content is detected in the input. Valid values: BLOCK, NONE.
 	// +kubebuilder:validation:Optional
 	InputAction *string `json:"inputAction,omitempty" tf:"input_action,omitempty"`
 
@@ -601,11 +599,11 @@ type RegexesConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	InputEnabled *bool `json:"inputEnabled,omitempty" tf:"input_enabled,omitempty"`
 
-	// Name of the guardrail.
+	// Name of topic in topic policy.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// Action to take when harmful content is detected in the output. Valid values: BLOCK, ANONYMIZE, NONE.
+	// Action to take when harmful content is detected in the output. Valid values: BLOCK, NONE.
 	// +kubebuilder:validation:Optional
 	OutputAction *string `json:"outputAction,omitempty" tf:"output_action,omitempty"`
 
@@ -613,103 +611,103 @@ type RegexesConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	OutputEnabled *bool `json:"outputEnabled,omitempty" tf:"output_enabled,omitempty"`
 
-	// The regex pattern.
+	// Regex pattern.
 	// +kubebuilder:validation:Optional
 	Pattern *string `json:"pattern" tf:"pattern,omitempty"`
 }
 
 type SensitiveInformationPolicyConfigInitParameters struct {
 
-	// List of entities. See PII Entities Config for more information.
+	// List of entities. See pii_entities_config Block for more information.
 	PiiEntitiesConfig []PiiEntitiesConfigInitParameters `json:"piiEntitiesConfig,omitempty" tf:"pii_entities_config,omitempty"`
 
-	// List of regex. See Regexes Config for more information.
+	// List of regex. See regexes_config Block for more information.
 	RegexesConfig []RegexesConfigInitParameters `json:"regexesConfig,omitempty" tf:"regexes_config,omitempty"`
 }
 
 type SensitiveInformationPolicyConfigObservation struct {
 
-	// List of entities. See PII Entities Config for more information.
+	// List of entities. See pii_entities_config Block for more information.
 	PiiEntitiesConfig []PiiEntitiesConfigObservation `json:"piiEntitiesConfig,omitempty" tf:"pii_entities_config,omitempty"`
 
-	// List of regex. See Regexes Config for more information.
+	// List of regex. See regexes_config Block for more information.
 	RegexesConfig []RegexesConfigObservation `json:"regexesConfig,omitempty" tf:"regexes_config,omitempty"`
 }
 
 type SensitiveInformationPolicyConfigParameters struct {
 
-	// List of entities. See PII Entities Config for more information.
+	// List of entities. See pii_entities_config Block for more information.
 	// +kubebuilder:validation:Optional
 	PiiEntitiesConfig []PiiEntitiesConfigParameters `json:"piiEntitiesConfig,omitempty" tf:"pii_entities_config,omitempty"`
 
-	// List of regex. See Regexes Config for more information.
+	// List of regex. See regexes_config Block for more information.
 	// +kubebuilder:validation:Optional
 	RegexesConfig []RegexesConfigParameters `json:"regexesConfig,omitempty" tf:"regexes_config,omitempty"`
 }
 
 type TierConfigInitParameters struct {
 
-	// The name of the content policy tier. Valid values include STANDARD or CLASSIC.
+	// Name of the topic policy tier. Valid values: CLASSIC, STANDARD. STANDARD requires cross_region_config.
 	TierName *string `json:"tierName,omitempty" tf:"tier_name"`
 }
 
 type TierConfigObservation struct {
 
-	// The name of the content policy tier. Valid values include STANDARD or CLASSIC.
+	// Name of the topic policy tier. Valid values: CLASSIC, STANDARD. STANDARD requires cross_region_config.
 	TierName *string `json:"tierName,omitempty" tf:"tier_name,omitempty"`
 }
 
 type TierConfigParameters struct {
 
-	// The name of the content policy tier. Valid values include STANDARD or CLASSIC.
+	// Name of the topic policy tier. Valid values: CLASSIC, STANDARD. STANDARD requires cross_region_config.
 	// +kubebuilder:validation:Optional
 	TierName *string `json:"tierName,omitempty" tf:"tier_name"`
 }
 
 type TopicPolicyConfigInitParameters struct {
 
-	// Configuration block for the topic policy tier. See Tier Config for more information.
+	// Configuration block for the topic policy tier. See topic_policy_config.tier_config Block for more information.
 	TierConfig *TopicPolicyConfigTierConfigInitParameters `json:"tierConfig,omitempty" tf:"tier_config,omitempty"`
 
-	// List of topic configs in topic policy. See Topics Config for more information.
+	// List of topic configs in topic policy. See topics_config Block for more information.
 	TopicsConfig []TopicsConfigInitParameters `json:"topicsConfig,omitempty" tf:"topics_config,omitempty"`
 }
 
 type TopicPolicyConfigObservation struct {
 
-	// Configuration block for the topic policy tier. See Tier Config for more information.
+	// Configuration block for the topic policy tier. See topic_policy_config.tier_config Block for more information.
 	TierConfig *TopicPolicyConfigTierConfigObservation `json:"tierConfig,omitempty" tf:"tier_config,omitempty"`
 
-	// List of topic configs in topic policy. See Topics Config for more information.
+	// List of topic configs in topic policy. See topics_config Block for more information.
 	TopicsConfig []TopicsConfigObservation `json:"topicsConfig,omitempty" tf:"topics_config,omitempty"`
 }
 
 type TopicPolicyConfigParameters struct {
 
-	// Configuration block for the topic policy tier. See Tier Config for more information.
+	// Configuration block for the topic policy tier. See topic_policy_config.tier_config Block for more information.
 	// +kubebuilder:validation:Optional
 	TierConfig *TopicPolicyConfigTierConfigParameters `json:"tierConfig,omitempty" tf:"tier_config,omitempty"`
 
-	// List of topic configs in topic policy. See Topics Config for more information.
+	// List of topic configs in topic policy. See topics_config Block for more information.
 	// +kubebuilder:validation:Optional
 	TopicsConfig []TopicsConfigParameters `json:"topicsConfig,omitempty" tf:"topics_config,omitempty"`
 }
 
 type TopicPolicyConfigTierConfigInitParameters struct {
 
-	// The name of the content policy tier. Valid values include STANDARD or CLASSIC.
+	// Name of the topic policy tier. Valid values: CLASSIC, STANDARD. STANDARD requires cross_region_config.
 	TierName *string `json:"tierName,omitempty" tf:"tier_name"`
 }
 
 type TopicPolicyConfigTierConfigObservation struct {
 
-	// The name of the content policy tier. Valid values include STANDARD or CLASSIC.
+	// Name of the topic policy tier. Valid values: CLASSIC, STANDARD. STANDARD requires cross_region_config.
 	TierName *string `json:"tierName,omitempty" tf:"tier_name,omitempty"`
 }
 
 type TopicPolicyConfigTierConfigParameters struct {
 
-	// The name of the content policy tier. Valid values include STANDARD or CLASSIC.
+	// Name of the topic policy tier. Valid values: CLASSIC, STANDARD. STANDARD requires cross_region_config.
 	// +kubebuilder:validation:Optional
 	TierName *string `json:"tierName,omitempty" tf:"tier_name"`
 }
@@ -722,10 +720,10 @@ type TopicsConfigInitParameters struct {
 	// List of text examples.
 	Examples []*string `json:"examples,omitempty" tf:"examples,omitempty"`
 
-	// Name of the guardrail.
+	// Name of topic in topic policy.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Type of topic in a policy.
+	// Options for managed words.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -737,10 +735,10 @@ type TopicsConfigObservation struct {
 	// List of text examples.
 	Examples []*string `json:"examples,omitempty" tf:"examples,omitempty"`
 
-	// Name of the guardrail.
+	// Name of topic in topic policy.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Type of topic in a policy.
+	// Options for managed words.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -754,83 +752,83 @@ type TopicsConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	Examples []*string `json:"examples,omitempty" tf:"examples,omitempty"`
 
-	// Name of the guardrail.
+	// Name of topic in topic policy.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// Type of topic in a policy.
+	// Options for managed words.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type WordPolicyConfigInitParameters struct {
 
-	// A config for the list of managed words. See Managed Word Lists Config for more information.
+	// Config for the list of managed words. See managed_word_lists_config Block for more information.
 	ManagedWordListsConfig []ManagedWordListsConfigInitParameters `json:"managedWordListsConfig,omitempty" tf:"managed_word_lists_config,omitempty"`
 
-	// List of custom word configs. See Words Config for more information.
+	// List of custom word configs. See words_config Block for more information.
 	WordsConfig []WordsConfigInitParameters `json:"wordsConfig,omitempty" tf:"words_config,omitempty"`
 }
 
 type WordPolicyConfigObservation struct {
 
-	// A config for the list of managed words. See Managed Word Lists Config for more information.
+	// Config for the list of managed words. See managed_word_lists_config Block for more information.
 	ManagedWordListsConfig []ManagedWordListsConfigObservation `json:"managedWordListsConfig,omitempty" tf:"managed_word_lists_config,omitempty"`
 
-	// List of custom word configs. See Words Config for more information.
+	// List of custom word configs. See words_config Block for more information.
 	WordsConfig []WordsConfigObservation `json:"wordsConfig,omitempty" tf:"words_config,omitempty"`
 }
 
 type WordPolicyConfigParameters struct {
 
-	// A config for the list of managed words. See Managed Word Lists Config for more information.
+	// Config for the list of managed words. See managed_word_lists_config Block for more information.
 	// +kubebuilder:validation:Optional
 	ManagedWordListsConfig []ManagedWordListsConfigParameters `json:"managedWordListsConfig,omitempty" tf:"managed_word_lists_config,omitempty"`
 
-	// List of custom word configs. See Words Config for more information.
+	// List of custom word configs. See words_config Block for more information.
 	// +kubebuilder:validation:Optional
 	WordsConfig []WordsConfigParameters `json:"wordsConfig,omitempty" tf:"words_config,omitempty"`
 }
 
 type WordsConfigInitParameters struct {
 
-	// Action to take when harmful content is detected in the input. Valid values: BLOCK, ANONYMIZE, NONE.
+	// Action to take when harmful content is detected in the input. Valid values: BLOCK, NONE.
 	InputAction *string `json:"inputAction,omitempty" tf:"input_action,omitempty"`
 
 	// Whether to enable guardrail evaluation on the input. When disabled, you aren't charged for the evaluation.
 	InputEnabled *bool `json:"inputEnabled,omitempty" tf:"input_enabled,omitempty"`
 
-	// Action to take when harmful content is detected in the output. Valid values: BLOCK, ANONYMIZE, NONE.
+	// Action to take when harmful content is detected in the output. Valid values: BLOCK, NONE.
 	OutputAction *string `json:"outputAction,omitempty" tf:"output_action,omitempty"`
 
 	// Whether to enable guardrail evaluation on the output. When disabled, you aren't charged for the evaluation.
 	OutputEnabled *bool `json:"outputEnabled,omitempty" tf:"output_enabled,omitempty"`
 
-	// The custom word text.
+	// Custom word text.
 	Text *string `json:"text,omitempty" tf:"text,omitempty"`
 }
 
 type WordsConfigObservation struct {
 
-	// Action to take when harmful content is detected in the input. Valid values: BLOCK, ANONYMIZE, NONE.
+	// Action to take when harmful content is detected in the input. Valid values: BLOCK, NONE.
 	InputAction *string `json:"inputAction,omitempty" tf:"input_action,omitempty"`
 
 	// Whether to enable guardrail evaluation on the input. When disabled, you aren't charged for the evaluation.
 	InputEnabled *bool `json:"inputEnabled,omitempty" tf:"input_enabled,omitempty"`
 
-	// Action to take when harmful content is detected in the output. Valid values: BLOCK, ANONYMIZE, NONE.
+	// Action to take when harmful content is detected in the output. Valid values: BLOCK, NONE.
 	OutputAction *string `json:"outputAction,omitempty" tf:"output_action,omitempty"`
 
 	// Whether to enable guardrail evaluation on the output. When disabled, you aren't charged for the evaluation.
 	OutputEnabled *bool `json:"outputEnabled,omitempty" tf:"output_enabled,omitempty"`
 
-	// The custom word text.
+	// Custom word text.
 	Text *string `json:"text,omitempty" tf:"text,omitempty"`
 }
 
 type WordsConfigParameters struct {
 
-	// Action to take when harmful content is detected in the input. Valid values: BLOCK, ANONYMIZE, NONE.
+	// Action to take when harmful content is detected in the input. Valid values: BLOCK, NONE.
 	// +kubebuilder:validation:Optional
 	InputAction *string `json:"inputAction,omitempty" tf:"input_action,omitempty"`
 
@@ -838,7 +836,7 @@ type WordsConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	InputEnabled *bool `json:"inputEnabled,omitempty" tf:"input_enabled,omitempty"`
 
-	// Action to take when harmful content is detected in the output. Valid values: BLOCK, ANONYMIZE, NONE.
+	// Action to take when harmful content is detected in the output. Valid values: BLOCK, NONE.
 	// +kubebuilder:validation:Optional
 	OutputAction *string `json:"outputAction,omitempty" tf:"output_action,omitempty"`
 
@@ -846,7 +844,7 @@ type WordsConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	OutputEnabled *bool `json:"outputEnabled,omitempty" tf:"output_enabled,omitempty"`
 
-	// The custom word text.
+	// Custom word text.
 	// +kubebuilder:validation:Optional
 	Text *string `json:"text" tf:"text,omitempty"`
 }
@@ -878,7 +876,7 @@ type GuardrailStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// Guardrail is the Schema for the Guardrails API.
+// Guardrail is the Schema for the Guardrails API. Manages an Amazon Bedrock Guardrail.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

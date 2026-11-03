@@ -18,7 +18,7 @@ type ResourceInitParameters struct {
 	// ARN of the resource.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// Flag to enable AWS LakeFormation hybrid access permission mode.
+	// Flag to enable AWS Lake Formation hybrid access permission mode.
 	HybridAccessEnabled *bool `json:"hybridAccessEnabled,omitempty" tf:"hybrid_access_enabled,omitempty"`
 
 	// Role that has read/write access to the resource.
@@ -49,7 +49,7 @@ type ResourceObservation struct {
 	// ARN of the resource.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// Flag to enable AWS LakeFormation hybrid access permission mode.
+	// Flag to enable AWS Lake Formation hybrid access permission mode.
 	HybridAccessEnabled *bool `json:"hybridAccessEnabled,omitempty" tf:"hybrid_access_enabled,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -80,7 +80,7 @@ type ResourceParameters struct {
 	// +kubebuilder:validation:Optional
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// Flag to enable AWS LakeFormation hybrid access permission mode.
+	// Flag to enable AWS Lake Formation hybrid access permission mode.
 	// +kubebuilder:validation:Optional
 	HybridAccessEnabled *bool `json:"hybridAccessEnabled,omitempty" tf:"hybrid_access_enabled,omitempty"`
 

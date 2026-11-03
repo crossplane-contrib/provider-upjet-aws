@@ -1357,6 +1357,21 @@ func (in *DurableConfigInitParameters) DeepCopyInto(out *DurableConfigInitParame
 		*out = new(float64)
 		**out = **in
 	}
+	if in.KMSKeyArn != nil {
+		in, out := &in.KMSKeyArn, &out.KMSKeyArn
+		*out = new(string)
+		**out = **in
+	}
+	if in.KMSKeyArnRef != nil {
+		in, out := &in.KMSKeyArnRef, &out.KMSKeyArnRef
+		*out = new(v2.NamespacedReference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.KMSKeyArnSelector != nil {
+		in, out := &in.KMSKeyArnSelector, &out.KMSKeyArnSelector
+		*out = new(v2.NamespacedSelector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.RetentionPeriod != nil {
 		in, out := &in.RetentionPeriod, &out.RetentionPeriod
 		*out = new(float64)
@@ -1380,6 +1395,11 @@ func (in *DurableConfigObservation) DeepCopyInto(out *DurableConfigObservation) 
 	if in.ExecutionTimeout != nil {
 		in, out := &in.ExecutionTimeout, &out.ExecutionTimeout
 		*out = new(float64)
+		**out = **in
+	}
+	if in.KMSKeyArn != nil {
+		in, out := &in.KMSKeyArn, &out.KMSKeyArn
+		*out = new(string)
 		**out = **in
 	}
 	if in.RetentionPeriod != nil {
@@ -1406,6 +1426,21 @@ func (in *DurableConfigParameters) DeepCopyInto(out *DurableConfigParameters) {
 		in, out := &in.ExecutionTimeout, &out.ExecutionTimeout
 		*out = new(float64)
 		**out = **in
+	}
+	if in.KMSKeyArn != nil {
+		in, out := &in.KMSKeyArn, &out.KMSKeyArn
+		*out = new(string)
+		**out = **in
+	}
+	if in.KMSKeyArnRef != nil {
+		in, out := &in.KMSKeyArnRef, &out.KMSKeyArnRef
+		*out = new(v2.NamespacedReference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.KMSKeyArnSelector != nil {
+		in, out := &in.KMSKeyArnSelector, &out.KMSKeyArnSelector
+		*out = new(v2.NamespacedSelector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.RetentionPeriod != nil {
 		in, out := &in.RetentionPeriod, &out.RetentionPeriod

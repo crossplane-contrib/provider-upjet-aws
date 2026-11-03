@@ -53,7 +53,7 @@ spec:
         testing.upbound.io/example-name: example
     engine: mysql
     engineVersion: 5.6.17
-    instanceClass: db.t2.micro
+    instanceClass: db.t4g.micro
     parameterGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example

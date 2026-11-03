@@ -63,8 +63,7 @@ spec:
                     description: ARN of the base model.
                     type: string
                   customModelKmsKeyId:
-                    description: The custom model is encrypted at rest using this
-                      key. Specify the key ARN.
+                    description: Key ARN used to encrypt the custom model at rest.
                     type: string
                   customModelKmsKeyIdRef:
                     description: Reference to a Key in kms to populate customModelKmsKeyId.
@@ -150,8 +149,7 @@ spec:
                     description: Name for the custom model.
                     type: string
                   customizationType:
-                    description: 'The customization type. Valid values: FINE_TUNING,
-                      CONTINUED_PRE_TRAINING.'
+                    description: 'Customization type. Valid values: FINE_TUNING, CONTINUED_PRE_TRAINING.'
                     type: string
                   hyperparameters:
                     additionalProperties:
@@ -160,13 +158,14 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   jobName:
-                    description: A name for the customization job.
+                    description: Name for the customization job.
                     type: string
                   outputDataConfig:
-                    description: S3 location for the output data.
+                    description: S3 location for the output data. See output_data_config
+                      below.
                     properties:
                       s3Uri:
-                        description: The S3 URI where the output data is stored.
+                        description: S3 URI where the output data is stored.
                         type: string
                     type: object
                   region:
@@ -265,28 +264,32 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   trainingDataConfig:
-                    description: Information about the training dataset.
+                    description: Information about the training dataset. See training_data_config
+                      below.
                     properties:
                       s3Uri:
-                        description: The S3 URI where the output data is stored.
+                        description: S3 URI where the training data is stored.
                         type: string
                     type: object
                   validationDataConfig:
-                    description: Information about the validation dataset.
+                    description: Information about the validation dataset. See validation_data_config
+                      below.
                     properties:
                       validator:
-                        description: Information about the validators.
+                        description: Information about the validators. See validator
+                          below.
                         items:
                           properties:
                             s3Uri:
-                              description: The S3 URI where the output data is stored.
+                              description: S3 URI where the training data is stored.
                               type: string
                           type: object
                         type: array
                     type: object
                   vpcConfig:
                     description: Configuration parameters for the private VPC that
-                      contains the resources you are using for this job.
+                      contains the resources you are using for this job. See vpc_config
+                      below.
                     properties:
                       securityGroupIdRefs:
                         description: References to SecurityGroup in ec2 to populate
@@ -490,8 +493,7 @@ spec:
                     description: ARN of the base model.
                     type: string
                   customModelKmsKeyId:
-                    description: The custom model is encrypted at rest using this
-                      key. Specify the key ARN.
+                    description: Key ARN used to encrypt the custom model at rest.
                     type: string
                   customModelKmsKeyIdRef:
                     description: Reference to a Key in kms to populate customModelKmsKeyId.
@@ -577,8 +579,7 @@ spec:
                     description: Name for the custom model.
                     type: string
                   customizationType:
-                    description: 'The customization type. Valid values: FINE_TUNING,
-                      CONTINUED_PRE_TRAINING.'
+                    description: 'Customization type. Valid values: FINE_TUNING, CONTINUED_PRE_TRAINING.'
                     type: string
                   hyperparameters:
                     additionalProperties:
@@ -587,13 +588,14 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   jobName:
-                    description: A name for the customization job.
+                    description: Name for the customization job.
                     type: string
                   outputDataConfig:
-                    description: S3 location for the output data.
+                    description: S3 location for the output data. See output_data_config
+                      below.
                     properties:
                       s3Uri:
-                        description: The S3 URI where the output data is stored.
+                        description: S3 URI where the output data is stored.
                         type: string
                     type: object
                   roleArn:
@@ -687,28 +689,32 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   trainingDataConfig:
-                    description: Information about the training dataset.
+                    description: Information about the training dataset. See training_data_config
+                      below.
                     properties:
                       s3Uri:
-                        description: The S3 URI where the output data is stored.
+                        description: S3 URI where the training data is stored.
                         type: string
                     type: object
                   validationDataConfig:
-                    description: Information about the validation dataset.
+                    description: Information about the validation dataset. See validation_data_config
+                      below.
                     properties:
                       validator:
-                        description: Information about the validators.
+                        description: Information about the validators. See validator
+                          below.
                         items:
                           properties:
                             s3Uri:
-                              description: The S3 URI where the output data is stored.
+                              description: S3 URI where the training data is stored.
                               type: string
                           type: object
                         type: array
                     type: object
                   vpcConfig:
                     description: Configuration parameters for the private VPC that
-                      contains the resources you are using for this job.
+                      contains the resources you are using for this job. See vpc_config
+                      below.
                     properties:
                       securityGroupIdRefs:
                         description: References to SecurityGroup in ec2 to populate
@@ -977,18 +983,16 @@ spec:
                     description: ARN of the base model.
                     type: string
                   customModelArn:
-                    description: The ARN of the output model.
+                    description: ARN of the output model.
                     type: string
                   customModelKmsKeyId:
-                    description: The custom model is encrypted at rest using this
-                      key. Specify the key ARN.
+                    description: Key ARN used to encrypt the custom model at rest.
                     type: string
                   customModelName:
                     description: Name for the custom model.
                     type: string
                   customizationType:
-                    description: 'The customization type. Valid values: FINE_TUNING,
-                      CONTINUED_PRE_TRAINING.'
+                    description: 'Customization type. Valid values: FINE_TUNING, CONTINUED_PRE_TRAINING.'
                     type: string
                   hyperparameters:
                     additionalProperties:
@@ -999,21 +1003,22 @@ spec:
                   id:
                     type: string
                   jobArn:
-                    description: The ARN of the customization job.
+                    description: ARN of the customization job.
                     type: string
                   jobName:
-                    description: A name for the customization job.
+                    description: Name for the customization job.
                     type: string
                   jobStatus:
-                    description: The status of the customization job. A successful
-                      job transitions from InProgress to Completed when the output
-                      model is ready to use.
+                    description: Status of the customization job. A successful job
+                      transitions from InProgress to Completed when the output model
+                      is ready to use.
                     type: string
                   outputDataConfig:
-                    description: S3 location for the output data.
+                    description: S3 location for the output data. See output_data_config
+                      below.
                     properties:
                       s3Uri:
-                        description: The S3 URI where the output data is stored.
+                        description: S3 URI where the output data is stored.
                         type: string
                     type: object
                   region:
@@ -1039,10 +1044,11 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   trainingDataConfig:
-                    description: Information about the training dataset.
+                    description: Information about the training dataset. See training_data_config
+                      below.
                     properties:
                       s3Uri:
-                        description: The S3 URI where the output data is stored.
+                        description: S3 URI where the training data is stored.
                         type: string
                     type: object
                   trainingMetrics:
@@ -1054,30 +1060,33 @@ spec:
                         type: number
                     type: object
                   validationDataConfig:
-                    description: Information about the validation dataset.
+                    description: Information about the validation dataset. See validation_data_config
+                      below.
                     properties:
                       validator:
-                        description: Information about the validators.
+                        description: Information about the validators. See validator
+                          below.
                         items:
                           properties:
                             s3Uri:
-                              description: The S3 URI where the output data is stored.
+                              description: S3 URI where the training data is stored.
                               type: string
                           type: object
                         type: array
                     type: object
                   validationMetrics:
-                    description: The loss metric for each validator that you provided.
+                    description: Loss metric for each validator that you provided.
                     items:
                       properties:
                         validationLoss:
-                          description: The validation loss associated with the validator.
+                          description: Validation loss associated with the validator.
                           type: number
                       type: object
                     type: array
                   vpcConfig:
                     description: Configuration parameters for the private VPC that
-                      contains the resources you are using for this job.
+                      contains the resources you are using for this job. See vpc_config
+                      below.
                     properties:
                       securityGroupIds:
                         description: VPC configuration security group IDs.

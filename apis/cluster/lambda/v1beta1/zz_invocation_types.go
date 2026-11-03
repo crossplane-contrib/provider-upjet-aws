@@ -36,7 +36,7 @@ type InvocationInitParameters struct {
 	// Qualifier (i.e., version) of the Lambda function. Defaults to $LATEST.
 	Qualifier *string `json:"qualifier,omitempty" tf:"qualifier,omitempty"`
 
-	// Tenant Id to serve invocations from specified tenant.
+	// Tenant ID to serve invocations from specified tenant.
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 
 	// JSON key used to store lifecycle information in the input JSON payload. Defaults to tf. This additional key is only included when lifecycle_scope is set to CRUD.
@@ -70,7 +70,7 @@ type InvocationObservation struct {
 	// String result of the Lambda function invocation.
 	Result *string `json:"result,omitempty" tf:"result,omitempty"`
 
-	// Tenant Id to serve invocations from specified tenant.
+	// Tenant ID to serve invocations from specified tenant.
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 
 	// JSON key used to store lifecycle information in the input JSON payload. Defaults to tf. This additional key is only included when lifecycle_scope is set to CRUD.
@@ -113,7 +113,7 @@ type InvocationParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// Tenant Id to serve invocations from specified tenant.
+	// Tenant ID to serve invocations from specified tenant.
 	// +kubebuilder:validation:Optional
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 

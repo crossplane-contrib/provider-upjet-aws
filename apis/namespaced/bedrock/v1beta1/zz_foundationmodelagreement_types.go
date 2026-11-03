@@ -31,7 +31,7 @@ type FoundationModelAgreementObservation struct {
 	// Offer token encapsulates information for an offer.
 	OfferToken *string `json:"offerToken,omitempty" tf:"offer_token,omitempty"`
 
-	// Region where this action should be run. Defaults to the Region set in the provider configuration.
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
@@ -46,7 +46,7 @@ type FoundationModelAgreementParameters struct {
 	// +kubebuilder:validation:Optional
 	OfferToken *string `json:"offerToken,omitempty" tf:"offer_token,omitempty"`
 
-	// Region where this action should be run. Defaults to the Region set in the provider configuration.
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`

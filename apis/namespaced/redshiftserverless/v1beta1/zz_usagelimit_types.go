@@ -52,7 +52,7 @@ type UsageLimitObservation struct {
 	// The action that Amazon Redshift Serverless takes when the limit is reached. Valid values are log, emit-metric, and deactivate. The default is log.
 	BreachAction *string `json:"breachAction,omitempty" tf:"breach_action,omitempty"`
 
-	// The Redshift Usage Limit id.
+	// The Redshift Usage Limit ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The time period that the amount applies to. A weekly period begins on Sunday. Valid values are daily, weekly, and monthly. The default is monthly.

@@ -241,7 +241,7 @@ spec:
                     type: object
                   sourceS3Path:
                     description: S3 path where your block list text file is located.
-                      See details below.
+                      See source_s3_path Block for details.
                     properties:
                       bucket:
                         description: Name of the S3 bucket that contains the file.
@@ -333,9 +333,7 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
-                    description: Key-value map of resource tags. If configured with
-                      a provider default_tags configuration block, tags with matching
-                      keys will overwrite those defined at the provider-level.
+                    description: Key-value map of resource tags.
                     type: object
                     x-kubernetes-map-type: granular
                 required:
@@ -529,7 +527,7 @@ spec:
                     type: object
                   sourceS3Path:
                     description: S3 path where your block list text file is located.
-                      See details below.
+                      See source_s3_path Block for details.
                     properties:
                       bucket:
                         description: Name of the S3 bucket that contains the file.
@@ -621,9 +619,7 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
-                    description: Key-value map of resource tags. If configured with
-                      a provider default_tags configuration block, tags with matching
-                      keys will overwrite those defined at the provider-level.
+                    description: Key-value map of resource tags.
                     type: object
                     x-kubernetes-map-type: granular
                 type: object
@@ -728,7 +724,7 @@ spec:
                     type: string
                   sourceS3Path:
                     description: S3 path where your block list text file is located.
-                      See details below.
+                      See source_s3_path Block for details.
                     properties:
                       bucket:
                         description: Name of the S3 bucket that contains the file.
@@ -738,13 +734,12 @@ spec:
                         type: string
                     type: object
                   status:
+                    description: Current status of the block list.
                     type: string
                   tags:
                     additionalProperties:
                       type: string
-                    description: Key-value map of resource tags. If configured with
-                      a provider default_tags configuration block, tags with matching
-                      keys will overwrite those defined at the provider-level.
+                    description: Key-value map of resource tags.
                     type: object
                     x-kubernetes-map-type: granular
                   tagsAll:

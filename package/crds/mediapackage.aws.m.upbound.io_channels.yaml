@@ -60,10 +60,10 @@ spec:
               forProvider:
                 properties:
                   channelId:
-                    description: A unique identifier describing the channel
+                    description: Unique identifier describing the channel
                     type: string
                   description:
-                    description: A description of the channel
+                    description: Description of the channel
                     type: string
                   region:
                     description: |-
@@ -93,10 +93,10 @@ spec:
                   autoscaler.
                 properties:
                   channelId:
-                    description: A unique identifier describing the channel
+                    description: Unique identifier describing the channel
                     type: string
                   description:
-                    description: A description of the channel
+                    description: Description of the channel
                     type: string
                   tags:
                     additionalProperties:
@@ -174,37 +174,37 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The ARN of the channel
+                    description: ARN of the channel
                     type: string
                   channelId:
-                    description: A unique identifier describing the channel
+                    description: Unique identifier describing the channel
                     type: string
                   description:
-                    description: A description of the channel
+                    description: Description of the channel
                     type: string
                   hlsIngest:
-                    description: A single item list of HLS ingest information
+                    description: Single item list of HLS ingest information
                     items:
                       properties:
                         ingestEndpoints:
-                          description: A list of the ingest endpoints
+                          description: List of the ingest endpoints
                           items:
                             properties:
                               password:
-                                description: The password
+                                description: Password
                                 type: string
                               url:
-                                description: The URL
+                                description: URL
                                 type: string
                               username:
-                                description: The username
+                                description: Username
                                 type: string
                             type: object
                           type: array
                       type: object
                     type: array
                   id:
-                    description: The same as channel_id
+                    description: Same as channel_id
                     type: string
                   region:
                     description: |-
@@ -220,9 +220,8 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
                 type: object

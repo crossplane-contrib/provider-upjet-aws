@@ -74,16 +74,16 @@ spec:
               forProvider:
                 properties:
                   compatibility:
-                    description: 'The compatibility mode of the schema. Values values
+                    description: 'Compatibility mode of the schema. Values values
                       are: NONE, DISABLED, BACKWARD, BACKWARD_ALL, FORWARD, FORWARD_ALL,
                       FULL, and FULL_ALL.'
                     type: string
                   dataFormat:
-                    description: The data format of the schema definition. Valid values
+                    description: Data format of the schema definition. Valid values
                       are AVRO, JSON and PROTOBUF.
                     type: string
                   description:
-                    description: A description of the schema.
+                    description: Description of the schema.
                     type: string
                   region:
                     description: |-
@@ -91,8 +91,7 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   registryArn:
-                    description: The ARN of the Glue Registry to create the schema
-                      in.
+                    description: ARN of the Glue Registry to create the schema in.
                     type: string
                   registryArnRef:
                     description: Reference to a Registry in glue to populate registryArn.
@@ -169,11 +168,11 @@ spec:
                         type: object
                     type: object
                   schemaDefinition:
-                    description: The schema definition using the data_format setting
-                      for schema_name.
+                    description: Schema definition using the data_format setting for
+                      schema_name.
                     type: string
                   schemaName:
-                    description: The Name of the schema.
+                    description: Name of the schema.
                     type: string
                   tags:
                     additionalProperties:
@@ -198,20 +197,19 @@ spec:
                   autoscaler.
                 properties:
                   compatibility:
-                    description: 'The compatibility mode of the schema. Values values
+                    description: 'Compatibility mode of the schema. Values values
                       are: NONE, DISABLED, BACKWARD, BACKWARD_ALL, FORWARD, FORWARD_ALL,
                       FULL, and FULL_ALL.'
                     type: string
                   dataFormat:
-                    description: The data format of the schema definition. Valid values
+                    description: Data format of the schema definition. Valid values
                       are AVRO, JSON and PROTOBUF.
                     type: string
                   description:
-                    description: A description of the schema.
+                    description: Description of the schema.
                     type: string
                   registryArn:
-                    description: The ARN of the Glue Registry to create the schema
-                      in.
+                    description: ARN of the Glue Registry to create the schema in.
                     type: string
                   registryArnRef:
                     description: Reference to a Registry in glue to populate registryArn.
@@ -288,11 +286,11 @@ spec:
                         type: object
                     type: object
                   schemaDefinition:
-                    description: The schema definition using the data_format setting
-                      for schema_name.
+                    description: Schema definition using the data_format setting for
+                      schema_name.
                     type: string
                   schemaName:
-                    description: The Name of the schema.
+                    description: Name of the schema.
                     type: string
                   tags:
                     additionalProperties:
@@ -413,27 +411,27 @@ spec:
                     description: ARN of the schema.
                     type: string
                   compatibility:
-                    description: 'The compatibility mode of the schema. Values values
+                    description: 'Compatibility mode of the schema. Values values
                       are: NONE, DISABLED, BACKWARD, BACKWARD_ALL, FORWARD, FORWARD_ALL,
                       FULL, and FULL_ALL.'
                     type: string
                   dataFormat:
-                    description: The data format of the schema definition. Valid values
+                    description: Data format of the schema definition. Valid values
                       are AVRO, JSON and PROTOBUF.
                     type: string
                   description:
-                    description: A description of the schema.
+                    description: Description of the schema.
                     type: string
                   id:
                     description: ARN of the schema.
                     type: string
                   latestSchemaVersion:
-                    description: The latest version of the schema associated with
-                      the returned schema definition.
+                    description: Latest version of the schema associated with the
+                      returned schema definition.
                     type: number
                   nextSchemaVersion:
-                    description: The next version of the schema associated with the
-                      returned schema definition.
+                    description: Next version of the schema associated with the returned
+                      schema definition.
                     type: number
                   region:
                     description: |-
@@ -441,22 +439,21 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   registryArn:
-                    description: The ARN of the Glue Registry to create the schema
-                      in.
+                    description: ARN of the Glue Registry to create the schema in.
                     type: string
                   registryName:
-                    description: The name of the Glue Registry.
+                    description: Name of the Glue Registry.
                     type: string
                   schemaCheckpoint:
-                    description: The version number of the checkpoint (the last time
-                      the compatibility mode was changed).
+                    description: Version number of the checkpoint (the last time the
+                      compatibility mode was changed).
                     type: number
                   schemaDefinition:
-                    description: The schema definition using the data_format setting
-                      for schema_name.
+                    description: Schema definition using the data_format setting for
+                      schema_name.
                     type: string
                   schemaName:
-                    description: The Name of the schema.
+                    description: Name of the schema.
                     type: string
                   tags:
                     additionalProperties:
@@ -467,9 +464,8 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
                 type: object

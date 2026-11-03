@@ -78,7 +78,8 @@ spec:
                     type: string
                   encryptionKeyArn:
                     description: ARN of the KMS key used to encrypt the policy engine.
-                      If not set, AWS uses an AWS managed key.
+                      If not set, the policy engine is encrypted with an AWS owned
+                      key.
                     type: string
                   encryptionKeyArnRef:
                     description: Reference to a Key in kms to populate encryptionKeyArn.
@@ -191,7 +192,8 @@ spec:
                     type: string
                   encryptionKeyArn:
                     description: ARN of the KMS key used to encrypt the policy engine.
-                      If not set, AWS uses an AWS managed key.
+                      If not set, the policy engine is encrypted with an AWS owned
+                      key.
                     type: string
                   encryptionKeyArnRef:
                     description: Reference to a Key in kms to populate encryptionKeyArn.
@@ -380,7 +382,8 @@ spec:
                     type: string
                   encryptionKeyArn:
                     description: ARN of the KMS key used to encrypt the policy engine.
-                      If not set, AWS uses an AWS managed key.
+                      If not set, the policy engine is encrypted with an AWS owned
+                      key.
                     type: string
                   id:
                     type: string

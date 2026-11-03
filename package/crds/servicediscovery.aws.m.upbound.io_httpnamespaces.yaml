@@ -64,7 +64,7 @@ spec:
                       when you create it.
                     type: string
                   name:
-                    description: The name of the http namespace.
+                    description: The name of the HTTP namespace.
                     type: string
                   region:
                     description: |-
@@ -98,7 +98,7 @@ spec:
                       when you create it.
                     type: string
                   name:
-                    description: The name of the http namespace.
+                    description: The name of the HTTP namespace.
                     type: string
                   tags:
                     additionalProperties:
@@ -190,7 +190,7 @@ spec:
                     description: The ID of a namespace.
                     type: string
                   name:
-                    description: The name of the http namespace.
+                    description: The name of the HTTP namespace.
                     type: string
                   region:
                     description: |-

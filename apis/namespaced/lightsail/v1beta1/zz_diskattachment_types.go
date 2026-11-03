@@ -51,7 +51,7 @@ type DiskAttachmentObservation struct {
 	// Disk path to expose to the instance.
 	DiskPath *string `json:"diskPath,omitempty" tf:"disk_path,omitempty"`
 
-	// Combination of attributes to create a unique id: disk_name,instance_name.
+	// Combination of attributes to create a unique ID: disk_name,instance_name.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Name of the Lightsail instance to attach to.

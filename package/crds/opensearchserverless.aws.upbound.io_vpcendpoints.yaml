@@ -703,7 +703,7 @@ spec:
               atProvider:
                 properties:
                   id:
-                    description: Unique identified of the Vpc Endpoint.
+                    description: Unique identified of the VPC Endpoint.
                     type: string
                   name:
                     description: |-

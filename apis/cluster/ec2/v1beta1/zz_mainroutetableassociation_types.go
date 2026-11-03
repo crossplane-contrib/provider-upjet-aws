@@ -15,8 +15,7 @@ import (
 
 type MainRouteTableAssociationInitParameters struct {
 
-	// The ID of the Route Table to set as the new
-	// main route table for the target VPC
+	// ID of the Route Table to set as the new main route table for the target VPC
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.RouteTable
 	RouteTableID *string `json:"routeTableId,omitempty" tf:"route_table_id,omitempty"`
 
@@ -28,7 +27,7 @@ type MainRouteTableAssociationInitParameters struct {
 	// +kubebuilder:validation:Optional
 	RouteTableIDSelector *v2.Selector `json:"routeTableIdSelector,omitempty" tf:"-"`
 
-	// The ID of the VPC whose main route table should be set
+	// ID of the VPC whose main route table should be set
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.VPC
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 
@@ -43,21 +42,20 @@ type MainRouteTableAssociationInitParameters struct {
 
 type MainRouteTableAssociationObservation struct {
 
-	// The ID of the Route Table Association
+	// ID of the Route Table Association
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Used internally, see Notes below
+	// Original route table ID, used internally; see Notes below
 	OriginalRouteTableID *string `json:"originalRouteTableId,omitempty" tf:"original_route_table_id,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The ID of the Route Table to set as the new
-	// main route table for the target VPC
+	// ID of the Route Table to set as the new main route table for the target VPC
 	RouteTableID *string `json:"routeTableId,omitempty" tf:"route_table_id,omitempty"`
 
-	// The ID of the VPC whose main route table should be set
+	// ID of the VPC whose main route table should be set
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 }
 
@@ -68,8 +66,7 @@ type MainRouteTableAssociationParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// The ID of the Route Table to set as the new
-	// main route table for the target VPC
+	// ID of the Route Table to set as the new main route table for the target VPC
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.RouteTable
 	// +kubebuilder:validation:Optional
 	RouteTableID *string `json:"routeTableId,omitempty" tf:"route_table_id,omitempty"`
@@ -82,7 +79,7 @@ type MainRouteTableAssociationParameters struct {
 	// +kubebuilder:validation:Optional
 	RouteTableIDSelector *v2.Selector `json:"routeTableIdSelector,omitempty" tf:"-"`
 
-	// The ID of the VPC whose main route table should be set
+	// ID of the VPC whose main route table should be set
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.VPC
 	// +kubebuilder:validation:Optional
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`

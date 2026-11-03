@@ -19,7 +19,7 @@ type VPCEndpointConnectionNotificationInitParameters struct {
 	// +listType=set
 	ConnectionEvents []*string `json:"connectionEvents,omitempty" tf:"connection_events,omitempty"`
 
-	// The ARN of the SNS topic for the notifications.
+	// ARN of the SNS topic for the notifications.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/sns/v1beta1.Topic
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	ConnectionNotificationArn *string `json:"connectionNotificationArn,omitempty" tf:"connection_notification_arn,omitempty"`
@@ -32,10 +32,10 @@ type VPCEndpointConnectionNotificationInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ConnectionNotificationArnSelector *v2.NamespacedSelector `json:"connectionNotificationArnSelector,omitempty" tf:"-"`
 
-	// The ID of the VPC Endpoint to receive notifications for.
+	// ID of the VPC Endpoint to receive notifications for.
 	VPCEndpointID *string `json:"vpcEndpointId,omitempty" tf:"vpc_endpoint_id,omitempty"`
 
-	// The ID of the VPC Endpoint Service to receive notifications for.
+	// ID of the VPC Endpoint Service to receive notifications for.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.VPCEndpointService
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	VPCEndpointServiceID *string `json:"vpcEndpointServiceId,omitempty" tf:"vpc_endpoint_service_id,omitempty"`
@@ -55,26 +55,26 @@ type VPCEndpointConnectionNotificationObservation struct {
 	// +listType=set
 	ConnectionEvents []*string `json:"connectionEvents,omitempty" tf:"connection_events,omitempty"`
 
-	// The ARN of the SNS topic for the notifications.
+	// ARN of the SNS topic for the notifications.
 	ConnectionNotificationArn *string `json:"connectionNotificationArn,omitempty" tf:"connection_notification_arn,omitempty"`
 
-	// The ID of the VPC connection notification.
+	// ID of the VPC connection notification.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The type of notification.
+	// Type of notification.
 	NotificationType *string `json:"notificationType,omitempty" tf:"notification_type,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The state of the notification.
+	// State of the notification.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 
-	// The ID of the VPC Endpoint to receive notifications for.
+	// ID of the VPC Endpoint to receive notifications for.
 	VPCEndpointID *string `json:"vpcEndpointId,omitempty" tf:"vpc_endpoint_id,omitempty"`
 
-	// The ID of the VPC Endpoint Service to receive notifications for.
+	// ID of the VPC Endpoint Service to receive notifications for.
 	VPCEndpointServiceID *string `json:"vpcEndpointServiceId,omitempty" tf:"vpc_endpoint_service_id,omitempty"`
 }
 
@@ -85,7 +85,7 @@ type VPCEndpointConnectionNotificationParameters struct {
 	// +listType=set
 	ConnectionEvents []*string `json:"connectionEvents,omitempty" tf:"connection_events,omitempty"`
 
-	// The ARN of the SNS topic for the notifications.
+	// ARN of the SNS topic for the notifications.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/sns/v1beta1.Topic
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -104,11 +104,11 @@ type VPCEndpointConnectionNotificationParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// The ID of the VPC Endpoint to receive notifications for.
+	// ID of the VPC Endpoint to receive notifications for.
 	// +kubebuilder:validation:Optional
 	VPCEndpointID *string `json:"vpcEndpointId,omitempty" tf:"vpc_endpoint_id,omitempty"`
 
-	// The ID of the VPC Endpoint Service to receive notifications for.
+	// ID of the VPC Endpoint Service to receive notifications for.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.VPCEndpointService
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional

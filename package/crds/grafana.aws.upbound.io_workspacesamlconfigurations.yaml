@@ -75,45 +75,45 @@ spec:
               forProvider:
                 properties:
                   adminRoleValues:
-                    description: The admin role values.
+                    description: Admin role values.
                     items:
                       type: string
                     type: array
                   allowedOrganizations:
-                    description: The allowed organizations.
+                    description: Allowed organizations.
                     items:
                       type: string
                     type: array
                   editorRoleValues:
-                    description: The editor role values.
+                    description: Editor role values.
                     items:
                       type: string
                     type: array
                   emailAssertion:
-                    description: The email assertion.
+                    description: Email assertion.
                     type: string
                   groupsAssertion:
-                    description: The groups assertion.
+                    description: Groups assertion.
                     type: string
                   idpMetadataUrl:
-                    description: The IDP Metadata URL. Note that either idp_metadata_url
+                    description: IDP Metadata URL. Note that either idp_metadata_url
                       or idp_metadata_xml (but not both) must be specified.
                     type: string
                   idpMetadataXml:
-                    description: The IDP Metadata XML. Note that either idp_metadata_url
+                    description: IDP Metadata XML. Note that either idp_metadata_url
                       or idp_metadata_xml (but not both) must be specified.
                     type: string
                   loginAssertion:
-                    description: The login assertion.
+                    description: Login assertion.
                     type: string
                   loginValidityDuration:
-                    description: The login validity duration.
+                    description: Login validity duration.
                     type: number
                   nameAssertion:
-                    description: The name assertion.
+                    description: Name assertion.
                     type: string
                   orgAssertion:
-                    description: The org assertion.
+                    description: Org assertion.
                     type: string
                   region:
                     description: |-
@@ -121,10 +121,10 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   roleAssertion:
-                    description: The role assertion.
+                    description: Role assertion.
                     type: string
                   workspaceId:
-                    description: The workspace id.
+                    description: Workspace ID.
                     type: string
                   workspaceIdRef:
                     description: Reference to a Workspace in grafana to populate workspaceId.
@@ -217,51 +217,51 @@ spec:
                   autoscaler.
                 properties:
                   adminRoleValues:
-                    description: The admin role values.
+                    description: Admin role values.
                     items:
                       type: string
                     type: array
                   allowedOrganizations:
-                    description: The allowed organizations.
+                    description: Allowed organizations.
                     items:
                       type: string
                     type: array
                   editorRoleValues:
-                    description: The editor role values.
+                    description: Editor role values.
                     items:
                       type: string
                     type: array
                   emailAssertion:
-                    description: The email assertion.
+                    description: Email assertion.
                     type: string
                   groupsAssertion:
-                    description: The groups assertion.
+                    description: Groups assertion.
                     type: string
                   idpMetadataUrl:
-                    description: The IDP Metadata URL. Note that either idp_metadata_url
+                    description: IDP Metadata URL. Note that either idp_metadata_url
                       or idp_metadata_xml (but not both) must be specified.
                     type: string
                   idpMetadataXml:
-                    description: The IDP Metadata XML. Note that either idp_metadata_url
+                    description: IDP Metadata XML. Note that either idp_metadata_url
                       or idp_metadata_xml (but not both) must be specified.
                     type: string
                   loginAssertion:
-                    description: The login assertion.
+                    description: Login assertion.
                     type: string
                   loginValidityDuration:
-                    description: The login validity duration.
+                    description: Login validity duration.
                     type: number
                   nameAssertion:
-                    description: The name assertion.
+                    description: Name assertion.
                     type: string
                   orgAssertion:
-                    description: The org assertion.
+                    description: Org assertion.
                     type: string
                   roleAssertion:
-                    description: The role assertion.
+                    description: Role assertion.
                     type: string
                   workspaceId:
-                    description: The workspace id.
+                    description: Workspace ID.
                     type: string
                   workspaceIdRef:
                     description: Reference to a Workspace in grafana to populate workspaceId.
@@ -436,47 +436,47 @@ spec:
               atProvider:
                 properties:
                   adminRoleValues:
-                    description: The admin role values.
+                    description: Admin role values.
                     items:
                       type: string
                     type: array
                   allowedOrganizations:
-                    description: The allowed organizations.
+                    description: Allowed organizations.
                     items:
                       type: string
                     type: array
                   editorRoleValues:
-                    description: The editor role values.
+                    description: Editor role values.
                     items:
                       type: string
                     type: array
                   emailAssertion:
-                    description: The email assertion.
+                    description: Email assertion.
                     type: string
                   groupsAssertion:
-                    description: The groups assertion.
+                    description: Groups assertion.
                     type: string
                   id:
                     type: string
                   idpMetadataUrl:
-                    description: The IDP Metadata URL. Note that either idp_metadata_url
+                    description: IDP Metadata URL. Note that either idp_metadata_url
                       or idp_metadata_xml (but not both) must be specified.
                     type: string
                   idpMetadataXml:
-                    description: The IDP Metadata XML. Note that either idp_metadata_url
+                    description: IDP Metadata XML. Note that either idp_metadata_url
                       or idp_metadata_xml (but not both) must be specified.
                     type: string
                   loginAssertion:
-                    description: The login assertion.
+                    description: Login assertion.
                     type: string
                   loginValidityDuration:
-                    description: The login validity duration.
+                    description: Login validity duration.
                     type: number
                   nameAssertion:
-                    description: The name assertion.
+                    description: Name assertion.
                     type: string
                   orgAssertion:
-                    description: The org assertion.
+                    description: Org assertion.
                     type: string
                   region:
                     description: |-
@@ -484,13 +484,13 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   roleAssertion:
-                    description: The role assertion.
+                    description: Role assertion.
                     type: string
                   status:
-                    description: The status of the SAML configuration.
+                    description: Status of the SAML configuration.
                     type: string
                   workspaceId:
-                    description: The workspace id.
+                    description: Workspace ID.
                     type: string
                 type: object
               conditions:

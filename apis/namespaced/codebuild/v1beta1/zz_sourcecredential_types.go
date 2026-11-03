@@ -17,7 +17,7 @@ type SourceCredentialInitParameters struct {
 
 	// The type of authentication used to connect to a GitHub, GitHub Enterprise, or Bitbucket
 	// repository. Valid values are BASIC_AUTH,
-	// PERSONAL_ACCESS_TOKEN, CODECONNECTIONS, and SECRETS_MANAGER. An OAUTH connection is not supported by the API.
+	// PERSONAL_ACCESS_TOKEN, CODECONNECTIONS, and SECRETS_MANAGER. An OAuth connection is not supported by the API.
 	AuthType *string `json:"authType,omitempty" tf:"auth_type,omitempty"`
 
 	// The source provider used for this project.
@@ -40,7 +40,7 @@ type SourceCredentialObservation struct {
 
 	// The type of authentication used to connect to a GitHub, GitHub Enterprise, or Bitbucket
 	// repository. Valid values are BASIC_AUTH,
-	// PERSONAL_ACCESS_TOKEN, CODECONNECTIONS, and SECRETS_MANAGER. An OAUTH connection is not supported by the API.
+	// PERSONAL_ACCESS_TOKEN, CODECONNECTIONS, and SECRETS_MANAGER. An OAuth connection is not supported by the API.
 	AuthType *string `json:"authType,omitempty" tf:"auth_type,omitempty"`
 
 	// The ARN of Source Credential.
@@ -62,7 +62,7 @@ type SourceCredentialParameters struct {
 
 	// The type of authentication used to connect to a GitHub, GitHub Enterprise, or Bitbucket
 	// repository. Valid values are BASIC_AUTH,
-	// PERSONAL_ACCESS_TOKEN, CODECONNECTIONS, and SECRETS_MANAGER. An OAUTH connection is not supported by the API.
+	// PERSONAL_ACCESS_TOKEN, CODECONNECTIONS, and SECRETS_MANAGER. An OAuth connection is not supported by the API.
 	// +kubebuilder:validation:Optional
 	AuthType *string `json:"authType,omitempty" tf:"auth_type,omitempty"`
 

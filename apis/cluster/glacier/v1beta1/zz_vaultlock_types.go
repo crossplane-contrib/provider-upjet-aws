@@ -24,7 +24,7 @@ type VaultLockInitParameters struct {
 	// JSON string containing the IAM policy to apply as the Glacier Vault Lock policy.
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
-	// The name of the Glacier Vault.
+	// Name of the Glacier Vault.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/glacier/v1beta2.Vault
 	VaultName *string `json:"vaultName,omitempty" tf:"vault_name,omitempty"`
 
@@ -55,7 +55,7 @@ type VaultLockObservation struct {
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The name of the Glacier Vault.
+	// Name of the Glacier Vault.
 	VaultName *string `json:"vaultName,omitempty" tf:"vault_name,omitempty"`
 }
 
@@ -78,7 +78,7 @@ type VaultLockParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// The name of the Glacier Vault.
+	// Name of the Glacier Vault.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/glacier/v1beta2.Vault
 	// +kubebuilder:validation:Optional
 	VaultName *string `json:"vaultName,omitempty" tf:"vault_name,omitempty"`

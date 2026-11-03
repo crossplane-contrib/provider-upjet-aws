@@ -15,7 +15,7 @@ import (
 
 type AgentKnowledgeBaseAssociationInitParameters struct {
 
-	// Version of the agent with which you want to associate the knowledge base. Valid values: DRAFT.
+	// Version of the agent with which you want to associate the knowledge base. Valid values: DRAFT. Defaults to DRAFT.
 	AgentVersion *string `json:"agentVersion,omitempty" tf:"agent_version,omitempty"`
 
 	// Description of what the agent should use the knowledge base for.
@@ -30,7 +30,7 @@ type AgentKnowledgeBaseAssociationObservation struct {
 	// Unique identifier of the agent with which you want to associate the knowledge base.
 	AgentID *string `json:"agentId,omitempty" tf:"agent_id,omitempty"`
 
-	// Version of the agent with which you want to associate the knowledge base. Valid values: DRAFT.
+	// Version of the agent with which you want to associate the knowledge base. Valid values: DRAFT. Defaults to DRAFT.
 	AgentVersion *string `json:"agentVersion,omitempty" tf:"agent_version,omitempty"`
 
 	// Description of what the agent should use the knowledge base for.
@@ -65,7 +65,7 @@ type AgentKnowledgeBaseAssociationParameters struct {
 	// +kubebuilder:validation:Optional
 	AgentIDSelector *v2.Selector `json:"agentIdSelector,omitempty" tf:"-"`
 
-	// Version of the agent with which you want to associate the knowledge base. Valid values: DRAFT.
+	// Version of the agent with which you want to associate the knowledge base. Valid values: DRAFT. Defaults to DRAFT.
 	// +kubebuilder:validation:Optional
 	AgentVersion *string `json:"agentVersion,omitempty" tf:"agent_version,omitempty"`
 
@@ -123,7 +123,7 @@ type AgentKnowledgeBaseAssociationStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// AgentKnowledgeBaseAssociation is the Schema for the AgentKnowledgeBaseAssociations API.
+// AgentKnowledgeBaseAssociation is the Schema for the AgentKnowledgeBaseAssociations API. Manages an AWS Agents for Amazon Bedrock Agent Knowledge Base Association.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

@@ -31,7 +31,7 @@ type GameSessionQueueInitParameters struct {
 	// +kubebuilder:validation:Optional
 	DestinationsSelector *v2.NamespacedSelector `json:"destinationsSelector,omitempty" tf:"-"`
 
-	// An SNS topic ARN that is set up to receive game session placement notifications.
+	// SNS topic ARN that is set up to receive game session placement notifications.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/sns/v1beta1.Topic
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	NotificationTarget *string `json:"notificationTarget,omitempty" tf:"notification_target,omitempty"`
@@ -68,7 +68,7 @@ type GameSessionQueueObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// An SNS topic ARN that is set up to receive game session placement notifications.
+	// SNS topic ARN that is set up to receive game session placement notifications.
 	NotificationTarget *string `json:"notificationTarget,omitempty" tf:"notification_target,omitempty"`
 
 	// One or more policies used to choose fleet based on player latency. See below.
@@ -82,7 +82,7 @@ type GameSessionQueueObservation struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
@@ -110,7 +110,7 @@ type GameSessionQueueParameters struct {
 	// +kubebuilder:validation:Optional
 	DestinationsSelector *v2.NamespacedSelector `json:"destinationsSelector,omitempty" tf:"-"`
 
-	// An SNS topic ARN that is set up to receive game session placement notifications.
+	// SNS topic ARN that is set up to receive game session placement notifications.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/sns/v1beta1.Topic
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	// +kubebuilder:validation:Optional

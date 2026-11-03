@@ -1029,28 +1029,28 @@ spec:
               forProvider:
                 properties:
                   advancedBackupSetting:
-                    description: An object that specifies backup options for each
-                      resource type.
+                    description: Object that specifies backup options for each resource
+                      type. Detailed below.
                     items:
                       properties:
                         backupOptions:
                           additionalProperties:
                             type: string
-                          description: Specifies the backup option for a selected
-                            resource. This option is only available for Windows VSS
-                            backup jobs. Set to { WindowsVSS = "enabled" } to enable
-                            Windows VSS backup option and create a VSS Windows backup.
+                          description: Backup option for a selected resource. This
+                            option is only available for Windows VSS backup jobs.
+                            Set to { WindowsVSS = "enabled" } to enable Windows VSS
+                            backup option and create a VSS Windows backup.
                           type: object
                           x-kubernetes-map-type: granular
                         resourceType:
-                          description: 'The type of AWS resource to be backed up.
-                            For VSS Windows backups, the only supported resource type
+                          description: 'Type of AWS resource to be backed up. For
+                            VSS Windows backups, the only supported resource type
                             is Amazon EC2. Valid values: EC2.'
                           type: string
                       type: object
                     type: array
                   name:
-                    description: The display name of a backup plan.
+                    description: Display name of a backup plan.
                     type: string
                   region:
                     description: |-
@@ -1058,12 +1058,12 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   rule:
-                    description: A rule object that specifies a scheduled task that
-                      is used to back up a selection of resources.
+                    description: Rule that specifies a scheduled task used to back
+                      up a selection of resources. Detailed below.
                     items:
                       properties:
                         completionWindow:
-                          description: The amount of time in minutes AWS Backup attempts
+                          description: Amount of time in minutes AWS Backup attempts
                             a backup before canceling the job and returning an error.
                           type: number
                         copyAction:
@@ -1076,25 +1076,23 @@ spec:
                                   backup vault for the copied backup.
                                 type: string
                               lifecycle:
-                                description: The lifecycle defines when a protected
+                                description: Lifecycle that defines when a protected
                                   resource is transitioned to cold storage and when
-                                  it expires.  Fields documented below.
+                                  it expires. Detailed below.
                                 properties:
                                   coldStorageAfter:
-                                    description: Specifies the number of days after
-                                      creation that a recovery point is moved to cold
-                                      storage.
+                                    description: Number of days after creation that
+                                      a recovery point is moved to cold storage.
                                     type: number
                                   deleteAfter:
-                                    description: Specifies the number of days after
-                                      creation that a recovery point is deleted. Must
-                                      be 90 days greater than cold_storage_after.
+                                    description: Number of days after creation that
+                                      a recovery point is deleted. Must be 90 days
+                                      greater than cold_storage_after.
                                     type: number
                                   optInToArchiveForSupportedResources:
-                                    description: This setting will instruct your backup
-                                      plan to transition supported resources to archive
-                                      (cold) storage tier in accordance with your
-                                      lifecycle settings.
+                                    description: Whether to transition supported resources
+                                      to archive (cold) storage tier in accordance
+                                      with your lifecycle settings.
                                     type: boolean
                                 type: object
                             type: object
@@ -1103,24 +1101,22 @@ spec:
                           description: Enable continuous backups for supported resources.
                           type: boolean
                         lifecycle:
-                          description: The lifecycle defines when a protected resource
-                            is transitioned to cold storage and when it expires.  Fields
-                            documented below.
+                          description: Lifecycle that defines when a protected resource
+                            is transitioned to cold storage and when it expires. Detailed
+                            below.
                           properties:
                             coldStorageAfter:
-                              description: Specifies the number of days after creation
-                                that a recovery point is moved to cold storage.
+                              description: Number of days after creation that a recovery
+                                point is moved to cold storage.
                               type: number
                             deleteAfter:
-                              description: Specifies the number of days after creation
-                                that a recovery point is deleted. Must be 90 days
-                                greater than cold_storage_after.
+                              description: Number of days after creation that a recovery
+                                point is deleted. Must be 90 days greater than cold_storage_after.
                               type: number
                             optInToArchiveForSupportedResources:
-                              description: This setting will instruct your backup
-                                plan to transition supported resources to archive
-                                (cold) storage tier in accordance with your lifecycle
-                                settings.
+                              description: Whether to transition supported resources
+                                to archive (cold) storage tier in accordance with
+                                your lifecycle settings.
                               type: boolean
                           type: object
                         recoveryPointTags:
@@ -1131,16 +1127,16 @@ spec:
                           type: object
                           x-kubernetes-map-type: granular
                         ruleName:
-                          description: An display name for a backup rule.
+                          description: Display name for a backup rule.
                           type: string
                         scanAction:
                           description: Block for scanning configuration for the backup
                             rule and includes the malware scanner, and scan mode of
-                            either full or incremental.
+                            either full or incremental. Detailed below.
                           items:
                             properties:
                               malwareScanner:
-                                description: Malware scanner to use for the scan action.
+                                description: Malware scanner to use for the scan setting.
                                   Currently only GUARDDUTY is supported.
                                 type: string
                               scanMode:
@@ -1150,20 +1146,20 @@ spec:
                             type: object
                           type: array
                         schedule:
-                          description: A CRON expression specifying when AWS Backup
+                          description: CRON expression specifying when AWS Backup
                             initiates a backup job.
                           type: string
                         scheduleExpressionTimezone:
-                          description: 'The timezone in which the schedule expression
+                          description: 'Timezone in which the schedule expression
                             is set. Default value: "Etc/UTC".'
                           type: string
                         startWindow:
-                          description: The amount of time in minutes before beginning
+                          description: Amount of time in minutes before beginning
                             a backup.
                           type: number
                         targetLogicallyAirGappedBackupVaultArn:
-                          description: The ARN of a logically air-gapped vault. ARN
-                            must be in the same account and region. If provided, supported
+                          description: ARN of a logically air-gapped vault. ARN must
+                            be in the same account and region. If provided, supported
                             fully managed resources back up directly to logically
                             air-gapped vault, while other supported resources create
                             a temporary (billable) snapshot in backup vault, then
@@ -1171,8 +1167,8 @@ spec:
                             only back up to the specified backup vault.
                           type: string
                         targetVaultName:
-                          description: The name of a logical container where backups
-                            are stored.
+                          description: Name of a logical container where backups are
+                            stored.
                           type: string
                         targetVaultNameRef:
                           description: Reference to a Vault in backup to populate
@@ -1259,7 +1255,7 @@ spec:
                     items:
                       properties:
                         malwareScanner:
-                          description: Malware scanner to use for the scan action.
+                          description: Malware scanner to use for the scan setting.
                             Currently only GUARDDUTY is supported.
                           type: string
                         resourceTypes:
@@ -1298,36 +1294,36 @@ spec:
                   autoscaler.
                 properties:
                   advancedBackupSetting:
-                    description: An object that specifies backup options for each
-                      resource type.
+                    description: Object that specifies backup options for each resource
+                      type. Detailed below.
                     items:
                       properties:
                         backupOptions:
                           additionalProperties:
                             type: string
-                          description: Specifies the backup option for a selected
-                            resource. This option is only available for Windows VSS
-                            backup jobs. Set to { WindowsVSS = "enabled" } to enable
-                            Windows VSS backup option and create a VSS Windows backup.
+                          description: Backup option for a selected resource. This
+                            option is only available for Windows VSS backup jobs.
+                            Set to { WindowsVSS = "enabled" } to enable Windows VSS
+                            backup option and create a VSS Windows backup.
                           type: object
                           x-kubernetes-map-type: granular
                         resourceType:
-                          description: 'The type of AWS resource to be backed up.
-                            For VSS Windows backups, the only supported resource type
+                          description: 'Type of AWS resource to be backed up. For
+                            VSS Windows backups, the only supported resource type
                             is Amazon EC2. Valid values: EC2.'
                           type: string
                       type: object
                     type: array
                   name:
-                    description: The display name of a backup plan.
+                    description: Display name of a backup plan.
                     type: string
                   rule:
-                    description: A rule object that specifies a scheduled task that
-                      is used to back up a selection of resources.
+                    description: Rule that specifies a scheduled task used to back
+                      up a selection of resources. Detailed below.
                     items:
                       properties:
                         completionWindow:
-                          description: The amount of time in minutes AWS Backup attempts
+                          description: Amount of time in minutes AWS Backup attempts
                             a backup before canceling the job and returning an error.
                           type: number
                         copyAction:
@@ -1340,25 +1336,23 @@ spec:
                                   backup vault for the copied backup.
                                 type: string
                               lifecycle:
-                                description: The lifecycle defines when a protected
+                                description: Lifecycle that defines when a protected
                                   resource is transitioned to cold storage and when
-                                  it expires.  Fields documented below.
+                                  it expires. Detailed below.
                                 properties:
                                   coldStorageAfter:
-                                    description: Specifies the number of days after
-                                      creation that a recovery point is moved to cold
-                                      storage.
+                                    description: Number of days after creation that
+                                      a recovery point is moved to cold storage.
                                     type: number
                                   deleteAfter:
-                                    description: Specifies the number of days after
-                                      creation that a recovery point is deleted. Must
-                                      be 90 days greater than cold_storage_after.
+                                    description: Number of days after creation that
+                                      a recovery point is deleted. Must be 90 days
+                                      greater than cold_storage_after.
                                     type: number
                                   optInToArchiveForSupportedResources:
-                                    description: This setting will instruct your backup
-                                      plan to transition supported resources to archive
-                                      (cold) storage tier in accordance with your
-                                      lifecycle settings.
+                                    description: Whether to transition supported resources
+                                      to archive (cold) storage tier in accordance
+                                      with your lifecycle settings.
                                     type: boolean
                                 type: object
                             type: object
@@ -1367,24 +1361,22 @@ spec:
                           description: Enable continuous backups for supported resources.
                           type: boolean
                         lifecycle:
-                          description: The lifecycle defines when a protected resource
-                            is transitioned to cold storage and when it expires.  Fields
-                            documented below.
+                          description: Lifecycle that defines when a protected resource
+                            is transitioned to cold storage and when it expires. Detailed
+                            below.
                           properties:
                             coldStorageAfter:
-                              description: Specifies the number of days after creation
-                                that a recovery point is moved to cold storage.
+                              description: Number of days after creation that a recovery
+                                point is moved to cold storage.
                               type: number
                             deleteAfter:
-                              description: Specifies the number of days after creation
-                                that a recovery point is deleted. Must be 90 days
-                                greater than cold_storage_after.
+                              description: Number of days after creation that a recovery
+                                point is deleted. Must be 90 days greater than cold_storage_after.
                               type: number
                             optInToArchiveForSupportedResources:
-                              description: This setting will instruct your backup
-                                plan to transition supported resources to archive
-                                (cold) storage tier in accordance with your lifecycle
-                                settings.
+                              description: Whether to transition supported resources
+                                to archive (cold) storage tier in accordance with
+                                your lifecycle settings.
                               type: boolean
                           type: object
                         recoveryPointTags:
@@ -1395,16 +1387,16 @@ spec:
                           type: object
                           x-kubernetes-map-type: granular
                         ruleName:
-                          description: An display name for a backup rule.
+                          description: Display name for a backup rule.
                           type: string
                         scanAction:
                           description: Block for scanning configuration for the backup
                             rule and includes the malware scanner, and scan mode of
-                            either full or incremental.
+                            either full or incremental. Detailed below.
                           items:
                             properties:
                               malwareScanner:
-                                description: Malware scanner to use for the scan action.
+                                description: Malware scanner to use for the scan setting.
                                   Currently only GUARDDUTY is supported.
                                 type: string
                               scanMode:
@@ -1414,20 +1406,20 @@ spec:
                             type: object
                           type: array
                         schedule:
-                          description: A CRON expression specifying when AWS Backup
+                          description: CRON expression specifying when AWS Backup
                             initiates a backup job.
                           type: string
                         scheduleExpressionTimezone:
-                          description: 'The timezone in which the schedule expression
+                          description: 'Timezone in which the schedule expression
                             is set. Default value: "Etc/UTC".'
                           type: string
                         startWindow:
-                          description: The amount of time in minutes before beginning
+                          description: Amount of time in minutes before beginning
                             a backup.
                           type: number
                         targetLogicallyAirGappedBackupVaultArn:
-                          description: The ARN of a logically air-gapped vault. ARN
-                            must be in the same account and region. If provided, supported
+                          description: ARN of a logically air-gapped vault. ARN must
+                            be in the same account and region. If provided, supported
                             fully managed resources back up directly to logically
                             air-gapped vault, while other supported resources create
                             a temporary (billable) snapshot in backup vault, then
@@ -1435,8 +1427,8 @@ spec:
                             only back up to the specified backup vault.
                           type: string
                         targetVaultName:
-                          description: The name of a logical container where backups
-                            are stored.
+                          description: Name of a logical container where backups are
+                            stored.
                           type: string
                         targetVaultNameRef:
                           description: Reference to a Vault in backup to populate
@@ -1523,7 +1515,7 @@ spec:
                     items:
                       properties:
                         malwareScanner:
-                          description: Malware scanner to use for the scan action.
+                          description: Malware scanner to use for the scan setting.
                             Currently only GUARDDUTY is supported.
                           type: string
                         resourceTypes:
@@ -1647,34 +1639,34 @@ spec:
               atProvider:
                 properties:
                   advancedBackupSetting:
-                    description: An object that specifies backup options for each
-                      resource type.
+                    description: Object that specifies backup options for each resource
+                      type. Detailed below.
                     items:
                       properties:
                         backupOptions:
                           additionalProperties:
                             type: string
-                          description: Specifies the backup option for a selected
-                            resource. This option is only available for Windows VSS
-                            backup jobs. Set to { WindowsVSS = "enabled" } to enable
-                            Windows VSS backup option and create a VSS Windows backup.
+                          description: Backup option for a selected resource. This
+                            option is only available for Windows VSS backup jobs.
+                            Set to { WindowsVSS = "enabled" } to enable Windows VSS
+                            backup option and create a VSS Windows backup.
                           type: object
                           x-kubernetes-map-type: granular
                         resourceType:
-                          description: 'The type of AWS resource to be backed up.
-                            For VSS Windows backups, the only supported resource type
+                          description: 'Type of AWS resource to be backed up. For
+                            VSS Windows backups, the only supported resource type
                             is Amazon EC2. Valid values: EC2.'
                           type: string
                       type: object
                     type: array
                   arn:
-                    description: The ARN of the backup plan.
+                    description: ARN of the backup plan.
                     type: string
                   id:
-                    description: The id of the backup plan.
+                    description: ID of the backup plan.
                     type: string
                   name:
-                    description: The display name of a backup plan.
+                    description: Display name of a backup plan.
                     type: string
                   region:
                     description: |-
@@ -1682,12 +1674,12 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   rule:
-                    description: A rule object that specifies a scheduled task that
-                      is used to back up a selection of resources.
+                    description: Rule that specifies a scheduled task used to back
+                      up a selection of resources. Detailed below.
                     items:
                       properties:
                         completionWindow:
-                          description: The amount of time in minutes AWS Backup attempts
+                          description: Amount of time in minutes AWS Backup attempts
                             a backup before canceling the job and returning an error.
                           type: number
                         copyAction:
@@ -1700,25 +1692,23 @@ spec:
                                   backup vault for the copied backup.
                                 type: string
                               lifecycle:
-                                description: The lifecycle defines when a protected
+                                description: Lifecycle that defines when a protected
                                   resource is transitioned to cold storage and when
-                                  it expires.  Fields documented below.
+                                  it expires. Detailed below.
                                 properties:
                                   coldStorageAfter:
-                                    description: Specifies the number of days after
-                                      creation that a recovery point is moved to cold
-                                      storage.
+                                    description: Number of days after creation that
+                                      a recovery point is moved to cold storage.
                                     type: number
                                   deleteAfter:
-                                    description: Specifies the number of days after
-                                      creation that a recovery point is deleted. Must
-                                      be 90 days greater than cold_storage_after.
+                                    description: Number of days after creation that
+                                      a recovery point is deleted. Must be 90 days
+                                      greater than cold_storage_after.
                                     type: number
                                   optInToArchiveForSupportedResources:
-                                    description: This setting will instruct your backup
-                                      plan to transition supported resources to archive
-                                      (cold) storage tier in accordance with your
-                                      lifecycle settings.
+                                    description: Whether to transition supported resources
+                                      to archive (cold) storage tier in accordance
+                                      with your lifecycle settings.
                                     type: boolean
                                 type: object
                             type: object
@@ -1727,24 +1717,22 @@ spec:
                           description: Enable continuous backups for supported resources.
                           type: boolean
                         lifecycle:
-                          description: The lifecycle defines when a protected resource
-                            is transitioned to cold storage and when it expires.  Fields
-                            documented below.
+                          description: Lifecycle that defines when a protected resource
+                            is transitioned to cold storage and when it expires. Detailed
+                            below.
                           properties:
                             coldStorageAfter:
-                              description: Specifies the number of days after creation
-                                that a recovery point is moved to cold storage.
+                              description: Number of days after creation that a recovery
+                                point is moved to cold storage.
                               type: number
                             deleteAfter:
-                              description: Specifies the number of days after creation
-                                that a recovery point is deleted. Must be 90 days
-                                greater than cold_storage_after.
+                              description: Number of days after creation that a recovery
+                                point is deleted. Must be 90 days greater than cold_storage_after.
                               type: number
                             optInToArchiveForSupportedResources:
-                              description: This setting will instruct your backup
-                                plan to transition supported resources to archive
-                                (cold) storage tier in accordance with your lifecycle
-                                settings.
+                              description: Whether to transition supported resources
+                                to archive (cold) storage tier in accordance with
+                                your lifecycle settings.
                               type: boolean
                           type: object
                         recoveryPointTags:
@@ -1754,17 +1742,21 @@ spec:
                             the resources that you create.
                           type: object
                           x-kubernetes-map-type: granular
+                        ruleId:
+                          description: Uniquely identifies a rule that is used to
+                            schedule the backup of a selection of resources.
+                          type: string
                         ruleName:
-                          description: An display name for a backup rule.
+                          description: Display name for a backup rule.
                           type: string
                         scanAction:
                           description: Block for scanning configuration for the backup
                             rule and includes the malware scanner, and scan mode of
-                            either full or incremental.
+                            either full or incremental. Detailed below.
                           items:
                             properties:
                               malwareScanner:
-                                description: Malware scanner to use for the scan action.
+                                description: Malware scanner to use for the scan setting.
                                   Currently only GUARDDUTY is supported.
                                 type: string
                               scanMode:
@@ -1774,20 +1766,20 @@ spec:
                             type: object
                           type: array
                         schedule:
-                          description: A CRON expression specifying when AWS Backup
+                          description: CRON expression specifying when AWS Backup
                             initiates a backup job.
                           type: string
                         scheduleExpressionTimezone:
-                          description: 'The timezone in which the schedule expression
+                          description: 'Timezone in which the schedule expression
                             is set. Default value: "Etc/UTC".'
                           type: string
                         startWindow:
-                          description: The amount of time in minutes before beginning
+                          description: Amount of time in minutes before beginning
                             a backup.
                           type: number
                         targetLogicallyAirGappedBackupVaultArn:
-                          description: The ARN of a logically air-gapped vault. ARN
-                            must be in the same account and region. If provided, supported
+                          description: ARN of a logically air-gapped vault. ARN must
+                            be in the same account and region. If provided, supported
                             fully managed resources back up directly to logically
                             air-gapped vault, while other supported resources create
                             a temporary (billable) snapshot in backup vault, then
@@ -1795,8 +1787,8 @@ spec:
                             only back up to the specified backup vault.
                           type: string
                         targetVaultName:
-                          description: The name of a logical container where backups
-                            are stored.
+                          description: Name of a logical container where backups are
+                            stored.
                           type: string
                       type: object
                     type: array
@@ -1807,7 +1799,7 @@ spec:
                     items:
                       properties:
                         malwareScanner:
-                          description: Malware scanner to use for the scan action.
+                          description: Malware scanner to use for the scan setting.
                             Currently only GUARDDUTY is supported.
                           type: string
                         resourceTypes:
@@ -1832,9 +1824,8 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
                   version:

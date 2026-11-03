@@ -15,13 +15,13 @@ import (
 
 type WorkspaceServiceAccountTokenInitParameters struct {
 
-	// A name for the token to create. The name must be unique within the workspace.
+	// Name for the token to create. The name must be unique within the workspace.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Sets how long the token will be valid, in seconds. You can set the time up to 30 days in the future.
 	SecondsToLive *float64 `json:"secondsToLive,omitempty" tf:"seconds_to_live,omitempty"`
 
-	// The ID of the service account for which to create a token.
+	// ID of the service account for which to create a token.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/grafana/v1beta1.WorkspaceServiceAccount
 	ServiceAccountID *string `json:"serviceAccountId,omitempty" tf:"service_account_id,omitempty"`
 
@@ -33,7 +33,7 @@ type WorkspaceServiceAccountTokenInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ServiceAccountIDSelector *v2.NamespacedSelector `json:"serviceAccountIdSelector,omitempty" tf:"-"`
 
-	// The Grafana workspace with which the service account token is associated.
+	// Grafana workspace with which the service account token is associated.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/grafana/v1beta1.Workspace
 	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
 
@@ -48,15 +48,15 @@ type WorkspaceServiceAccountTokenInitParameters struct {
 
 type WorkspaceServiceAccountTokenObservation struct {
 
-	// Specifies when the service account token was created.
+	// When the service account token was created.
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
-	// Specifies when the service account token will expire.
+	// When the service account token will expire.
 	ExpiresAt *string `json:"expiresAt,omitempty" tf:"expires_at,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// A name for the token to create. The name must be unique within the workspace.
+	// Name for the token to create. The name must be unique within the workspace.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -66,19 +66,19 @@ type WorkspaceServiceAccountTokenObservation struct {
 	// Sets how long the token will be valid, in seconds. You can set the time up to 30 days in the future.
 	SecondsToLive *float64 `json:"secondsToLive,omitempty" tf:"seconds_to_live,omitempty"`
 
-	// The ID of the service account for which to create a token.
+	// ID of the service account for which to create a token.
 	ServiceAccountID *string `json:"serviceAccountId,omitempty" tf:"service_account_id,omitempty"`
 
 	// Identifier of the service account token in the given Grafana workspace.
 	ServiceAccountTokenID *string `json:"serviceAccountTokenId,omitempty" tf:"service_account_token_id,omitempty"`
 
-	// The Grafana workspace with which the service account token is associated.
+	// Grafana workspace with which the service account token is associated.
 	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
 }
 
 type WorkspaceServiceAccountTokenParameters struct {
 
-	// A name for the token to create. The name must be unique within the workspace.
+	// Name for the token to create. The name must be unique within the workspace.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -91,7 +91,7 @@ type WorkspaceServiceAccountTokenParameters struct {
 	// +kubebuilder:validation:Optional
 	SecondsToLive *float64 `json:"secondsToLive,omitempty" tf:"seconds_to_live,omitempty"`
 
-	// The ID of the service account for which to create a token.
+	// ID of the service account for which to create a token.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/grafana/v1beta1.WorkspaceServiceAccount
 	// +kubebuilder:validation:Optional
 	ServiceAccountID *string `json:"serviceAccountId,omitempty" tf:"service_account_id,omitempty"`
@@ -104,7 +104,7 @@ type WorkspaceServiceAccountTokenParameters struct {
 	// +kubebuilder:validation:Optional
 	ServiceAccountIDSelector *v2.NamespacedSelector `json:"serviceAccountIdSelector,omitempty" tf:"-"`
 
-	// The Grafana workspace with which the service account token is associated.
+	// Grafana workspace with which the service account token is associated.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/grafana/v1beta1.Workspace
 	// +kubebuilder:validation:Optional
 	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`

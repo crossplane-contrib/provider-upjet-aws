@@ -17,7 +17,7 @@ spec:
     memoryIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    name: semantic-strategy
+    name: semantic_strategy
     namespaceTemplates:
     - default
     region: us-west-1

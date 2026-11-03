@@ -89,7 +89,7 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   snsTopicArn:
-                    description: SNS topic arn to send events on.
+                    description: SNS topic ARN to send events on.
                     type: string
                   snsTopicArnRef:
                     description: Reference to a Topic in sns to populate snsTopicArn.
@@ -166,7 +166,7 @@ spec:
                         type: object
                     type: object
                   sourceIds:
-                    description: Ids of sources to listen to. If you don't specify
+                    description: IDs of sources to listen to. If you don't specify
                       a value, notifications are provided for all sources.
                     items:
                       type: string
@@ -288,7 +288,7 @@ spec:
                     type: array
                     x-kubernetes-list-type: set
                   snsTopicArn:
-                    description: SNS topic arn to send events on.
+                    description: SNS topic ARN to send events on.
                     type: string
                   snsTopicArnRef:
                     description: Reference to a Topic in sns to populate snsTopicArn.
@@ -365,7 +365,7 @@ spec:
                         type: object
                     type: object
                   sourceIds:
-                    description: Ids of sources to listen to. If you don't specify
+                    description: IDs of sources to listen to. If you don't specify
                       a value, notifications are provided for all sources.
                     items:
                       type: string
@@ -582,10 +582,10 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   snsTopicArn:
-                    description: SNS topic arn to send events on.
+                    description: SNS topic ARN to send events on.
                     type: string
                   sourceIds:
-                    description: Ids of sources to listen to. If you don't specify
+                    description: IDs of sources to listen to. If you don't specify
                       a value, notifications are provided for all sources.
                     items:
                       type: string

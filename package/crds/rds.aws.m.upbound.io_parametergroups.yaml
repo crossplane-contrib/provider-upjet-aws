@@ -220,7 +220,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: ARN of the db parameter group.
+                    description: ARN of the DB parameter group.
                     type: string
                   description:
                     description: Description of the DB parameter group.

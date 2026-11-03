@@ -70,7 +70,7 @@ type DiskContainerInitParameters struct {
 	// The format of the disk image being imported. One of VHD or VMDK.
 	Format *string `json:"format,omitempty" tf:"format,omitempty"`
 
-	// The URL to the Amazon S3-based disk image being imported. It can either be a https URL (https://..) or an Amazon S3 URL (s3://..). One of url or user_bucket must be set.
+	// The URL to the Amazon S3-based disk image being imported. It can either be an HTTPS URL (https://..) or an Amazon S3 URL (s3://..). One of url or user_bucket must be set.
 	URL *string `json:"url,omitempty" tf:"url,omitempty"`
 
 	// The Amazon S3 bucket for the disk image. One of url or user_bucket must be set. Detailed below.
@@ -85,7 +85,7 @@ type DiskContainerObservation struct {
 	// The format of the disk image being imported. One of VHD or VMDK.
 	Format *string `json:"format,omitempty" tf:"format,omitempty"`
 
-	// The URL to the Amazon S3-based disk image being imported. It can either be a https URL (https://..) or an Amazon S3 URL (s3://..). One of url or user_bucket must be set.
+	// The URL to the Amazon S3-based disk image being imported. It can either be an HTTPS URL (https://..) or an Amazon S3 URL (s3://..). One of url or user_bucket must be set.
 	URL *string `json:"url,omitempty" tf:"url,omitempty"`
 
 	// The Amazon S3 bucket for the disk image. One of url or user_bucket must be set. Detailed below.
@@ -102,7 +102,7 @@ type DiskContainerParameters struct {
 	// +kubebuilder:validation:Optional
 	Format *string `json:"format" tf:"format,omitempty"`
 
-	// The URL to the Amazon S3-based disk image being imported. It can either be a https URL (https://..) or an Amazon S3 URL (s3://..). One of url or user_bucket must be set.
+	// The URL to the Amazon S3-based disk image being imported. It can either be an HTTPS URL (https://..) or an Amazon S3 URL (s3://..). One of url or user_bucket must be set.
 	// +kubebuilder:validation:Optional
 	URL *string `json:"url,omitempty" tf:"url,omitempty"`
 

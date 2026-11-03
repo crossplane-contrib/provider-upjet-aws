@@ -15,32 +15,32 @@ import (
 
 type VPCPeeringConnectionOptionsAccepterInitParameters struct {
 
-	// Allow a local VPC to resolve public DNS hostnames to private IP addresses when queried from instances in the peer VPC.
+	// Whether to allow a local VPC to resolve public DNS hostnames to private IP addresses when queried from instances in the peer VPC.
 	AllowRemoteVPCDNSResolution *bool `json:"allowRemoteVpcDnsResolution,omitempty" tf:"allow_remote_vpc_dns_resolution,omitempty"`
 }
 
 type VPCPeeringConnectionOptionsAccepterObservation struct {
 
-	// Allow a local VPC to resolve public DNS hostnames to private IP addresses when queried from instances in the peer VPC.
+	// Whether to allow a local VPC to resolve public DNS hostnames to private IP addresses when queried from instances in the peer VPC.
 	AllowRemoteVPCDNSResolution *bool `json:"allowRemoteVpcDnsResolution,omitempty" tf:"allow_remote_vpc_dns_resolution,omitempty"`
 }
 
 type VPCPeeringConnectionOptionsAccepterParameters struct {
 
-	// Allow a local VPC to resolve public DNS hostnames to private IP addresses when queried from instances in the peer VPC.
+	// Whether to allow a local VPC to resolve public DNS hostnames to private IP addresses when queried from instances in the peer VPC.
 	// +kubebuilder:validation:Optional
 	AllowRemoteVPCDNSResolution *bool `json:"allowRemoteVpcDnsResolution,omitempty" tf:"allow_remote_vpc_dns_resolution,omitempty"`
 }
 
 type VPCPeeringConnectionOptionsInitParameters struct {
 
-	// An optional configuration block that allows for VPC Peering Connection options to be set for the VPC that accepts the peering connection (a maximum of one).
+	// Configuration block for VPC Peering Connection options to set for the VPC that accepts the peering connection (a maximum of one). See accepter Block below.
 	Accepter *VPCPeeringConnectionOptionsAccepterInitParameters `json:"accepter,omitempty" tf:"accepter,omitempty"`
 
-	// A optional configuration block that allows for VPC Peering Connection options to be set for the VPC that requests the peering connection (a maximum of one).
+	// Configuration block for VPC Peering Connection options to set for the VPC that requests the peering connection (a maximum of one). See requester Block below.
 	Requester *VPCPeeringConnectionOptionsRequesterInitParameters `json:"requester,omitempty" tf:"requester,omitempty"`
 
-	// The ID of the requester VPC peering connection.
+	// ID of the requester VPC peering connection.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.VPCPeeringConnection
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	VPCPeeringConnectionID *string `json:"vpcPeeringConnectionId,omitempty" tf:"vpc_peering_connection_id,omitempty"`
@@ -56,26 +56,26 @@ type VPCPeeringConnectionOptionsInitParameters struct {
 
 type VPCPeeringConnectionOptionsObservation struct {
 
-	// An optional configuration block that allows for VPC Peering Connection options to be set for the VPC that accepts the peering connection (a maximum of one).
+	// Configuration block for VPC Peering Connection options to set for the VPC that accepts the peering connection (a maximum of one). See accepter Block below.
 	Accepter *VPCPeeringConnectionOptionsAccepterObservation `json:"accepter,omitempty" tf:"accepter,omitempty"`
 
-	// The ID of the VPC Peering Connection Options.
+	// ID of the VPC Peering Connection Options.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// A optional configuration block that allows for VPC Peering Connection options to be set for the VPC that requests the peering connection (a maximum of one).
+	// Configuration block for VPC Peering Connection options to set for the VPC that requests the peering connection (a maximum of one). See requester Block below.
 	Requester *VPCPeeringConnectionOptionsRequesterObservation `json:"requester,omitempty" tf:"requester,omitempty"`
 
-	// The ID of the requester VPC peering connection.
+	// ID of the requester VPC peering connection.
 	VPCPeeringConnectionID *string `json:"vpcPeeringConnectionId,omitempty" tf:"vpc_peering_connection_id,omitempty"`
 }
 
 type VPCPeeringConnectionOptionsParameters struct {
 
-	// An optional configuration block that allows for VPC Peering Connection options to be set for the VPC that accepts the peering connection (a maximum of one).
+	// Configuration block for VPC Peering Connection options to set for the VPC that accepts the peering connection (a maximum of one). See accepter Block below.
 	// +kubebuilder:validation:Optional
 	Accepter *VPCPeeringConnectionOptionsAccepterParameters `json:"accepter,omitempty" tf:"accepter,omitempty"`
 
@@ -84,11 +84,11 @@ type VPCPeeringConnectionOptionsParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// A optional configuration block that allows for VPC Peering Connection options to be set for the VPC that requests the peering connection (a maximum of one).
+	// Configuration block for VPC Peering Connection options to set for the VPC that requests the peering connection (a maximum of one). See requester Block below.
 	// +kubebuilder:validation:Optional
 	Requester *VPCPeeringConnectionOptionsRequesterParameters `json:"requester,omitempty" tf:"requester,omitempty"`
 
-	// The ID of the requester VPC peering connection.
+	// ID of the requester VPC peering connection.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.VPCPeeringConnection
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -105,19 +105,19 @@ type VPCPeeringConnectionOptionsParameters struct {
 
 type VPCPeeringConnectionOptionsRequesterInitParameters struct {
 
-	// Allow a local VPC to resolve public DNS hostnames to private IP addresses when queried from instances in the peer VPC.
+	// Whether to allow a local VPC to resolve public DNS hostnames to private IP addresses when queried from instances in the peer VPC.
 	AllowRemoteVPCDNSResolution *bool `json:"allowRemoteVpcDnsResolution,omitempty" tf:"allow_remote_vpc_dns_resolution,omitempty"`
 }
 
 type VPCPeeringConnectionOptionsRequesterObservation struct {
 
-	// Allow a local VPC to resolve public DNS hostnames to private IP addresses when queried from instances in the peer VPC.
+	// Whether to allow a local VPC to resolve public DNS hostnames to private IP addresses when queried from instances in the peer VPC.
 	AllowRemoteVPCDNSResolution *bool `json:"allowRemoteVpcDnsResolution,omitempty" tf:"allow_remote_vpc_dns_resolution,omitempty"`
 }
 
 type VPCPeeringConnectionOptionsRequesterParameters struct {
 
-	// Allow a local VPC to resolve public DNS hostnames to private IP addresses when queried from instances in the peer VPC.
+	// Whether to allow a local VPC to resolve public DNS hostnames to private IP addresses when queried from instances in the peer VPC.
 	// +kubebuilder:validation:Optional
 	AllowRemoteVPCDNSResolution *bool `json:"allowRemoteVpcDnsResolution,omitempty" tf:"allow_remote_vpc_dns_resolution,omitempty"`
 }

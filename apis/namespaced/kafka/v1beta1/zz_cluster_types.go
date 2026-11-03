@@ -15,49 +15,49 @@ import (
 
 type BrokerLogsInitParameters struct {
 
-	// Configuration block for Cloudwatch Logs settings. See logging_info broker_logs cloudwatch_logs Argument Reference below.
+	// Configuration block for CloudWatch Logs settings. See cloudwatch_logs Block below.
 	CloudwatchLogs *CloudwatchLogsInitParameters `json:"cloudwatchLogs,omitempty" tf:"cloudwatch_logs,omitempty"`
 
-	// Configuration block for Kinesis Data Firehose settings. See logging_info broker_logs firehose Argument Reference below.
+	// Configuration block for Kinesis Data Firehose settings. See firehose Block below.
 	Firehose *FirehoseInitParameters `json:"firehose,omitempty" tf:"firehose,omitempty"`
 
-	// Configuration block for S3 settings. See logging_info broker_logs s3 Argument Reference below.
+	// Configuration block for S3 settings. See s3 Block below.
 	S3 *S3InitParameters `json:"s3,omitempty" tf:"s3,omitempty"`
 }
 
 type BrokerLogsObservation struct {
 
-	// Configuration block for Cloudwatch Logs settings. See logging_info broker_logs cloudwatch_logs Argument Reference below.
+	// Configuration block for CloudWatch Logs settings. See cloudwatch_logs Block below.
 	CloudwatchLogs *CloudwatchLogsObservation `json:"cloudwatchLogs,omitempty" tf:"cloudwatch_logs,omitempty"`
 
-	// Configuration block for Kinesis Data Firehose settings. See logging_info broker_logs firehose Argument Reference below.
+	// Configuration block for Kinesis Data Firehose settings. See firehose Block below.
 	Firehose *FirehoseObservation `json:"firehose,omitempty" tf:"firehose,omitempty"`
 
-	// Configuration block for S3 settings. See logging_info broker_logs s3 Argument Reference below.
+	// Configuration block for S3 settings. See s3 Block below.
 	S3 *S3Observation `json:"s3,omitempty" tf:"s3,omitempty"`
 }
 
 type BrokerLogsParameters struct {
 
-	// Configuration block for Cloudwatch Logs settings. See logging_info broker_logs cloudwatch_logs Argument Reference below.
+	// Configuration block for CloudWatch Logs settings. See cloudwatch_logs Block below.
 	// +kubebuilder:validation:Optional
 	CloudwatchLogs *CloudwatchLogsParameters `json:"cloudwatchLogs,omitempty" tf:"cloudwatch_logs,omitempty"`
 
-	// Configuration block for Kinesis Data Firehose settings. See logging_info broker_logs firehose Argument Reference below.
+	// Configuration block for Kinesis Data Firehose settings. See firehose Block below.
 	// +kubebuilder:validation:Optional
 	Firehose *FirehoseParameters `json:"firehose,omitempty" tf:"firehose,omitempty"`
 
-	// Configuration block for S3 settings. See logging_info broker_logs s3 Argument Reference below.
+	// Configuration block for S3 settings. See s3 Block below.
 	// +kubebuilder:validation:Optional
 	S3 *S3Parameters `json:"s3,omitempty" tf:"s3,omitempty"`
 }
 
 type BrokerNodeGroupInfoInitParameters struct {
 
-	// The distribution of broker nodes across availability zones (documentation). Currently, the only valid value is DEFAULT.
+	// Distribution of broker nodes across availability zones (documentation). Currently, the only valid value is DEFAULT.
 	AzDistribution *string `json:"azDistribution,omitempty" tf:"az_distribution,omitempty"`
 
-	// A list of subnets to connect to in client VPC (documentation).
+	// List of subnets to connect to in client VPC (documentation).
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Subnet
 	// +listType=set
 	ClientSubnets []*string `json:"clientSubnets,omitempty" tf:"client_subnets,omitempty"`
@@ -70,13 +70,13 @@ type BrokerNodeGroupInfoInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ClientSubnetsSelector *v2.NamespacedSelector `json:"clientSubnetsSelector,omitempty" tf:"-"`
 
-	// Information about the cluster access configuration. See broker_node_group_info connectivity_info Argument Reference below. For security reasons, you can't turn on public access while creating an MSK cluster. However, you can update an existing cluster to make it publicly accessible. You can also create a new cluster and then update it to make it publicly accessible (documentation).
+	// Information about the cluster access configuration. See connectivity_info Block below. For security reasons, you can't turn on public access while creating an MSK cluster. However, you can update an existing cluster to make it publicly accessible. You can also create a new cluster and then update it to make it publicly accessible (documentation).
 	ConnectivityInfo *ConnectivityInfoInitParameters `json:"connectivityInfo,omitempty" tf:"connectivity_info,omitempty"`
 
-	// Specify the instance type to use for the kafka brokersE.g., kafka.m5.large. (Pricing info)
+	// Instance type to use for the kafka brokers. For example, kafka.m5.large. (Pricing info)
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
-	// A list of the security groups to associate with the elastic network interfaces to control who can communicate with the cluster.
+	// List of the security groups to associate with the elastic network interfaces to control who can communicate with the cluster.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
 	// +listType=set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
@@ -89,40 +89,40 @@ type BrokerNodeGroupInfoInitParameters struct {
 	// +kubebuilder:validation:Optional
 	SecurityGroupsSelector *v2.NamespacedSelector `json:"securityGroupsSelector,omitempty" tf:"-"`
 
-	// A block that contains information about storage volumes attached to MSK broker nodes. See broker_node_group_info storage_info Argument Reference below. This block must not be specified when an Express instance type is specified for instance_type.
+	// Configuration block that contains information about storage volumes attached to MSK broker nodes. See storage_info Block below. This block must not be specified when an Express instance type is specified for instance_type.
 	StorageInfo *StorageInfoInitParameters `json:"storageInfo,omitempty" tf:"storage_info,omitempty"`
 }
 
 type BrokerNodeGroupInfoObservation struct {
 
-	// The distribution of broker nodes across availability zones (documentation). Currently, the only valid value is DEFAULT.
+	// Distribution of broker nodes across availability zones (documentation). Currently, the only valid value is DEFAULT.
 	AzDistribution *string `json:"azDistribution,omitempty" tf:"az_distribution,omitempty"`
 
-	// A list of subnets to connect to in client VPC (documentation).
+	// List of subnets to connect to in client VPC (documentation).
 	// +listType=set
 	ClientSubnets []*string `json:"clientSubnets,omitempty" tf:"client_subnets,omitempty"`
 
-	// Information about the cluster access configuration. See broker_node_group_info connectivity_info Argument Reference below. For security reasons, you can't turn on public access while creating an MSK cluster. However, you can update an existing cluster to make it publicly accessible. You can also create a new cluster and then update it to make it publicly accessible (documentation).
+	// Information about the cluster access configuration. See connectivity_info Block below. For security reasons, you can't turn on public access while creating an MSK cluster. However, you can update an existing cluster to make it publicly accessible. You can also create a new cluster and then update it to make it publicly accessible (documentation).
 	ConnectivityInfo *ConnectivityInfoObservation `json:"connectivityInfo,omitempty" tf:"connectivity_info,omitempty"`
 
-	// Specify the instance type to use for the kafka brokersE.g., kafka.m5.large. (Pricing info)
+	// Instance type to use for the kafka brokers. For example, kafka.m5.large. (Pricing info)
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
-	// A list of the security groups to associate with the elastic network interfaces to control who can communicate with the cluster.
+	// List of the security groups to associate with the elastic network interfaces to control who can communicate with the cluster.
 	// +listType=set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
-	// A block that contains information about storage volumes attached to MSK broker nodes. See broker_node_group_info storage_info Argument Reference below. This block must not be specified when an Express instance type is specified for instance_type.
+	// Configuration block that contains information about storage volumes attached to MSK broker nodes. See storage_info Block below. This block must not be specified when an Express instance type is specified for instance_type.
 	StorageInfo *StorageInfoObservation `json:"storageInfo,omitempty" tf:"storage_info,omitempty"`
 }
 
 type BrokerNodeGroupInfoParameters struct {
 
-	// The distribution of broker nodes across availability zones (documentation). Currently, the only valid value is DEFAULT.
+	// Distribution of broker nodes across availability zones (documentation). Currently, the only valid value is DEFAULT.
 	// +kubebuilder:validation:Optional
 	AzDistribution *string `json:"azDistribution,omitempty" tf:"az_distribution,omitempty"`
 
-	// A list of subnets to connect to in client VPC (documentation).
+	// List of subnets to connect to in client VPC (documentation).
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Subnet
 	// +kubebuilder:validation:Optional
 	// +listType=set
@@ -136,15 +136,15 @@ type BrokerNodeGroupInfoParameters struct {
 	// +kubebuilder:validation:Optional
 	ClientSubnetsSelector *v2.NamespacedSelector `json:"clientSubnetsSelector,omitempty" tf:"-"`
 
-	// Information about the cluster access configuration. See broker_node_group_info connectivity_info Argument Reference below. For security reasons, you can't turn on public access while creating an MSK cluster. However, you can update an existing cluster to make it publicly accessible. You can also create a new cluster and then update it to make it publicly accessible (documentation).
+	// Information about the cluster access configuration. See connectivity_info Block below. For security reasons, you can't turn on public access while creating an MSK cluster. However, you can update an existing cluster to make it publicly accessible. You can also create a new cluster and then update it to make it publicly accessible (documentation).
 	// +kubebuilder:validation:Optional
 	ConnectivityInfo *ConnectivityInfoParameters `json:"connectivityInfo,omitempty" tf:"connectivity_info,omitempty"`
 
-	// Specify the instance type to use for the kafka brokersE.g., kafka.m5.large. (Pricing info)
+	// Instance type to use for the kafka brokers. For example, kafka.m5.large. (Pricing info)
 	// +kubebuilder:validation:Optional
 	InstanceType *string `json:"instanceType" tf:"instance_type,omitempty"`
 
-	// A list of the security groups to associate with the elastic network interfaces to control who can communicate with the cluster.
+	// List of the security groups to associate with the elastic network interfaces to control who can communicate with the cluster.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
 	// +kubebuilder:validation:Optional
 	// +listType=set
@@ -158,75 +158,75 @@ type BrokerNodeGroupInfoParameters struct {
 	// +kubebuilder:validation:Optional
 	SecurityGroupsSelector *v2.NamespacedSelector `json:"securityGroupsSelector,omitempty" tf:"-"`
 
-	// A block that contains information about storage volumes attached to MSK broker nodes. See broker_node_group_info storage_info Argument Reference below. This block must not be specified when an Express instance type is specified for instance_type.
+	// Configuration block that contains information about storage volumes attached to MSK broker nodes. See storage_info Block below. This block must not be specified when an Express instance type is specified for instance_type.
 	// +kubebuilder:validation:Optional
 	StorageInfo *StorageInfoParameters `json:"storageInfo,omitempty" tf:"storage_info,omitempty"`
 }
 
 type ClientAuthenticationInitParameters struct {
 
-	// SASL authentication type details for VPC connectivity. See vpc_connectivity client_authentication sasl Argument Reference below.
+	// SASL authentication type details for VPC connectivity. See vpc_connectivity.client_authentication.sasl Block below.
 	Sasl *SaslInitParameters `json:"sasl,omitempty" tf:"sasl,omitempty"`
 
-	// Enables TLS authentication for VPC connectivity.
+	// Whether to enable TLS authentication for VPC connectivity.
 	TLS *bool `json:"tls,omitempty" tf:"tls,omitempty"`
 }
 
 type ClientAuthenticationObservation struct {
 
-	// SASL authentication type details for VPC connectivity. See vpc_connectivity client_authentication sasl Argument Reference below.
+	// SASL authentication type details for VPC connectivity. See vpc_connectivity.client_authentication.sasl Block below.
 	Sasl *SaslObservation `json:"sasl,omitempty" tf:"sasl,omitempty"`
 
-	// Enables TLS authentication for VPC connectivity.
+	// Whether to enable TLS authentication for VPC connectivity.
 	TLS *bool `json:"tls,omitempty" tf:"tls,omitempty"`
 }
 
 type ClientAuthenticationParameters struct {
 
-	// SASL authentication type details for VPC connectivity. See vpc_connectivity client_authentication sasl Argument Reference below.
+	// SASL authentication type details for VPC connectivity. See vpc_connectivity.client_authentication.sasl Block below.
 	// +kubebuilder:validation:Optional
 	Sasl *SaslParameters `json:"sasl,omitempty" tf:"sasl,omitempty"`
 
-	// Enables TLS authentication for VPC connectivity.
+	// Whether to enable TLS authentication for VPC connectivity.
 	// +kubebuilder:validation:Optional
 	TLS *bool `json:"tls,omitempty" tf:"tls,omitempty"`
 }
 
 type ClientAuthenticationSaslInitParameters struct {
 
-	// Enables SASL/IAM authentication for VPC connectivity.
+	// Whether to enable SASL/IAM authentication for VPC connectivity.
 	IAM *bool `json:"iam,omitempty" tf:"iam,omitempty"`
 
-	// Enables SASL/SCRAM authentication for VPC connectivity.
+	// Whether to enable SASL/SCRAM authentication for VPC connectivity.
 	Scram *bool `json:"scram,omitempty" tf:"scram,omitempty"`
 }
 
 type ClientAuthenticationSaslObservation struct {
 
-	// Enables SASL/IAM authentication for VPC connectivity.
+	// Whether to enable SASL/IAM authentication for VPC connectivity.
 	IAM *bool `json:"iam,omitempty" tf:"iam,omitempty"`
 
-	// Enables SASL/SCRAM authentication for VPC connectivity.
+	// Whether to enable SASL/SCRAM authentication for VPC connectivity.
 	Scram *bool `json:"scram,omitempty" tf:"scram,omitempty"`
 }
 
 type ClientAuthenticationSaslParameters struct {
 
-	// Enables SASL/IAM authentication for VPC connectivity.
+	// Whether to enable SASL/IAM authentication for VPC connectivity.
 	// +kubebuilder:validation:Optional
 	IAM *bool `json:"iam,omitempty" tf:"iam,omitempty"`
 
-	// Enables SASL/SCRAM authentication for VPC connectivity.
+	// Whether to enable SASL/SCRAM authentication for VPC connectivity.
 	// +kubebuilder:validation:Optional
 	Scram *bool `json:"scram,omitempty" tf:"scram,omitempty"`
 }
 
 type CloudwatchLogsInitParameters struct {
 
-	// Controls whether provisioned throughput is enabled or not. Default value: false.
+	// Whether to enable or disable streaming broker logs to S3.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Name of the Cloudwatch Log Group to deliver logs to.
+	// Name of the CloudWatch Log Group to deliver logs to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/cloudwatchlogs/v1beta1.Group
 	LogGroup *string `json:"logGroup,omitempty" tf:"log_group,omitempty"`
 
@@ -241,20 +241,20 @@ type CloudwatchLogsInitParameters struct {
 
 type CloudwatchLogsObservation struct {
 
-	// Controls whether provisioned throughput is enabled or not. Default value: false.
+	// Whether to enable or disable streaming broker logs to S3.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Name of the Cloudwatch Log Group to deliver logs to.
+	// Name of the CloudWatch Log Group to deliver logs to.
 	LogGroup *string `json:"logGroup,omitempty" tf:"log_group,omitempty"`
 }
 
 type CloudwatchLogsParameters struct {
 
-	// Controls whether provisioned throughput is enabled or not. Default value: false.
+	// Whether to enable or disable streaming broker logs to S3.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 
-	// Name of the Cloudwatch Log Group to deliver logs to.
+	// Name of the CloudWatch Log Group to deliver logs to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/cloudwatchlogs/v1beta1.Group
 	// +kubebuilder:validation:Optional
 	LogGroup *string `json:"logGroup,omitempty" tf:"log_group,omitempty"`
@@ -270,76 +270,76 @@ type CloudwatchLogsParameters struct {
 
 type ClusterClientAuthenticationInitParameters struct {
 
-	// SASL authentication type details for VPC connectivity. See vpc_connectivity client_authentication sasl Argument Reference below.
+	// Configuration block for specifying SASL client authentication. See sasl Block below.
 	Sasl *ClientAuthenticationSaslInitParameters `json:"sasl,omitempty" tf:"sasl,omitempty"`
 
-	// Enables TLS authentication for VPC connectivity.
+	// Configuration block for specifying TLS client authentication. See tls Block below.
 	TLS *TLSInitParameters `json:"tls,omitempty" tf:"tls,omitempty"`
 
-	// Enables unauthenticated access.
+	// Whether to enable unauthenticated access.
 	Unauthenticated *bool `json:"unauthenticated,omitempty" tf:"unauthenticated,omitempty"`
 }
 
 type ClusterClientAuthenticationObservation struct {
 
-	// SASL authentication type details for VPC connectivity. See vpc_connectivity client_authentication sasl Argument Reference below.
+	// Configuration block for specifying SASL client authentication. See sasl Block below.
 	Sasl *ClientAuthenticationSaslObservation `json:"sasl,omitempty" tf:"sasl,omitempty"`
 
-	// Enables TLS authentication for VPC connectivity.
+	// Configuration block for specifying TLS client authentication. See tls Block below.
 	TLS *TLSObservation `json:"tls,omitempty" tf:"tls,omitempty"`
 
-	// Enables unauthenticated access.
+	// Whether to enable unauthenticated access.
 	Unauthenticated *bool `json:"unauthenticated,omitempty" tf:"unauthenticated,omitempty"`
 }
 
 type ClusterClientAuthenticationParameters struct {
 
-	// SASL authentication type details for VPC connectivity. See vpc_connectivity client_authentication sasl Argument Reference below.
+	// Configuration block for specifying SASL client authentication. See sasl Block below.
 	// +kubebuilder:validation:Optional
 	Sasl *ClientAuthenticationSaslParameters `json:"sasl,omitempty" tf:"sasl,omitempty"`
 
-	// Enables TLS authentication for VPC connectivity.
+	// Configuration block for specifying TLS client authentication. See tls Block below.
 	// +kubebuilder:validation:Optional
 	TLS *TLSParameters `json:"tls,omitempty" tf:"tls,omitempty"`
 
-	// Enables unauthenticated access.
+	// Whether to enable unauthenticated access.
 	// +kubebuilder:validation:Optional
 	Unauthenticated *bool `json:"unauthenticated,omitempty" tf:"unauthenticated,omitempty"`
 }
 
 type ClusterInitParameters struct {
 
-	// Configuration block for the broker nodes of the Kafka cluster. See broker_node_group_info Argument Reference below.
+	// Configuration block for the broker nodes of the Kafka cluster. See broker_node_group_info Block below.
 	BrokerNodeGroupInfo *BrokerNodeGroupInfoInitParameters `json:"brokerNodeGroupInfo,omitempty" tf:"broker_node_group_info,omitempty"`
 
-	// Configuration block for specifying a client authentication. See client_authentication Argument Reference below.
+	// Configuration block for specifying a client authentication. See client_authentication Block below.
 	ClientAuthentication *ClusterClientAuthenticationInitParameters `json:"clientAuthentication,omitempty" tf:"client_authentication,omitempty"`
 
 	// Name of the MSK cluster.
 	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
 
-	// Configuration block for specifying an MSK Configuration to attach to Kafka brokers. See configuration_info Argument Reference below.
+	// Configuration block for specifying an MSK Configuration to attach to Kafka brokers. See configuration_info Block below.
 	ConfigurationInfo *ConfigurationInfoInitParameters `json:"configurationInfo,omitempty" tf:"configuration_info,omitempty"`
 
-	// Configuration block for specifying encryption. See encryption_info Argument Reference below.
+	// Configuration block for specifying encryption. See encryption_info Block below.
 	EncryptionInfo *EncryptionInfoInitParameters `json:"encryptionInfo,omitempty" tf:"encryption_info,omitempty"`
 
-	// Specify the desired enhanced MSK CloudWatch monitoring level. See Monitoring Amazon MSK with Amazon CloudWatch
+	// Desired enhanced MSK CloudWatch monitoring level. See Monitoring Amazon MSK with Amazon CloudWatch.
 	EnhancedMonitoring *string `json:"enhancedMonitoring,omitempty" tf:"enhanced_monitoring,omitempty"`
 
-	// Specify the desired Kafka software version.
+	// Desired Kafka software version.
 	KafkaVersion *string `json:"kafkaVersion,omitempty" tf:"kafka_version,omitempty"`
 
-	// Configuration block for streaming broker logs to Cloudwatch/S3/Kinesis Firehose. See logging_info Argument Reference below.
+	// Configuration block for streaming broker logs to Cloudwatch/S3/Kinesis Firehose. See logging_info Block below.
 	LoggingInfo *LoggingInfoInitParameters `json:"loggingInfo,omitempty" tf:"logging_info,omitempty"`
 
-	// The desired total number of broker nodes in the kafka cluster.  It must be a multiple of the number of specified client subnets.
+	// Desired total number of broker nodes in the kafka cluster. It must be a multiple of the number of specified client subnets.
 	NumberOfBrokerNodes *float64 `json:"numberOfBrokerNodes,omitempty" tf:"number_of_broker_nodes,omitempty"`
 
-	// Configuration block for JMX and Node monitoring for the MSK cluster. See open_monitoring Argument Reference below.
+	// Configuration block for JMX and Node monitoring for the MSK cluster. See open_monitoring Block below.
 	OpenMonitoring *OpenMonitoringInitParameters `json:"openMonitoring,omitempty" tf:"open_monitoring,omitempty"`
 
-	// Configuration block for intelligent rebalancing. See rebalancing Argument Reference below. Only applicable to MSK Provisioned clusters with Express brokers.
+	// Configuration block for intelligent rebalancing. See rebalancing Block below. Only applicable to MSK Provisioned clusters with Express brokers.
 	Rebalancing *RebalancingInitParameters `json:"rebalancing,omitempty" tf:"rebalancing,omitempty"`
 
 	// Controls storage mode for supported storage tiers. Valid values are: LOCAL or TIERED.
@@ -352,7 +352,7 @@ type ClusterInitParameters struct {
 
 type ClusterObservation struct {
 
-	// ARN of the MSK Configuration to use in the cluster.
+	// ARN of the MSK cluster.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Comma separated list of one or more hostname:port pairs of kafka brokers suitable to bootstrap connectivity to the kafka cluster. Contains a value if encryption_info.0.encryption_in_transit.0.client_broker is set to PLAINTEXT or TLS_PLAINTEXT. The resource sorts values alphabetically. AWS may not always return all endpoints so this value is not guaranteed to be stable across applies.
@@ -388,19 +388,19 @@ type ClusterObservation struct {
 	// One or more IPv6 DNS names (or IP addresses) and TLS port pairs. This attribute will have a value if the cluster is configured with broker_node_group_info.0.connectivity_info.0.network_type set to DUAL and encryption_info.0.encryption_in_transit.0.client_broker is set to TLS_PLAINTEXT or TLS. The resource sorts the list alphabetically. AWS may not always return all endpoints so the values may not be stable across applies.
 	BootstrapBrokersTLSIPv6 *string `json:"bootstrapBrokersTlsIpv6,omitempty" tf:"bootstrap_brokers_tls_ipv6,omitempty"`
 
-	// A string containing one or more DNS names (or IP addresses) and SASL IAM port pairs for VPC connectivity. AWS may not always return all endpoints so the values may not be stable across applies.
+	// One or more DNS names (or IP addresses) and SASL IAM port pairs for VPC connectivity. AWS may not always return all endpoints so the values may not be stable across applies.
 	BootstrapBrokersVPCConnectivitySaslIAM *string `json:"bootstrapBrokersVpcConnectivitySaslIam,omitempty" tf:"bootstrap_brokers_vpc_connectivity_sasl_iam,omitempty"`
 
-	// A string containing one or more DNS names (or IP addresses) and SASL SCRAM port pairs for VPC connectivity. AWS may not always return all endpoints so the values may not be stable across applies.
+	// One or more DNS names (or IP addresses) and SASL SCRAM port pairs for VPC connectivity. AWS may not always return all endpoints so the values may not be stable across applies.
 	BootstrapBrokersVPCConnectivitySaslScram *string `json:"bootstrapBrokersVpcConnectivitySaslScram,omitempty" tf:"bootstrap_brokers_vpc_connectivity_sasl_scram,omitempty"`
 
-	// A string containing one or more DNS names (or IP addresses) and TLS port pairs for VPC connectivity. AWS may not always return all endpoints so the values may not be stable across applies.
+	// One or more DNS names (or IP addresses) and TLS port pairs for VPC connectivity. AWS may not always return all endpoints so the values may not be stable across applies.
 	BootstrapBrokersVPCConnectivityTLS *string `json:"bootstrapBrokersVpcConnectivityTls,omitempty" tf:"bootstrap_brokers_vpc_connectivity_tls,omitempty"`
 
-	// Configuration block for the broker nodes of the Kafka cluster. See broker_node_group_info Argument Reference below.
+	// Configuration block for the broker nodes of the Kafka cluster. See broker_node_group_info Block below.
 	BrokerNodeGroupInfo *BrokerNodeGroupInfoObservation `json:"brokerNodeGroupInfo,omitempty" tf:"broker_node_group_info,omitempty"`
 
-	// Configuration block for specifying a client authentication. See client_authentication Argument Reference below.
+	// Configuration block for specifying a client authentication. See client_authentication Block below.
 	ClientAuthentication *ClusterClientAuthenticationObservation `json:"clientAuthentication,omitempty" tf:"client_authentication,omitempty"`
 
 	// Name of the MSK cluster.
@@ -409,7 +409,7 @@ type ClusterObservation struct {
 	// UUID of the MSK cluster, for use in IAM policies.
 	ClusterUUID *string `json:"clusterUuid,omitempty" tf:"cluster_uuid,omitempty"`
 
-	// Configuration block for specifying an MSK Configuration to attach to Kafka brokers. See configuration_info Argument Reference below.
+	// Configuration block for specifying an MSK Configuration to attach to Kafka brokers. See configuration_info Block below.
 	ConfigurationInfo *ConfigurationInfoObservation `json:"configurationInfo,omitempty" tf:"configuration_info,omitempty"`
 
 	// Current version of the MSK Cluster used for updates, e.g., K13V1IB3VIYZZH
@@ -418,27 +418,27 @@ type ClusterObservation struct {
 	// Status indicating whether Amazon MSK requires customer action for the cluster. Valid values are NONE, ACTION_RECOMMENDED, and CRITICAL_ACTION_REQUIRED.
 	CustomerActionStatus *string `json:"customerActionStatus,omitempty" tf:"customer_action_status,omitempty"`
 
-	// Configuration block for specifying encryption. See encryption_info Argument Reference below.
+	// Configuration block for specifying encryption. See encryption_info Block below.
 	EncryptionInfo *EncryptionInfoObservation `json:"encryptionInfo,omitempty" tf:"encryption_info,omitempty"`
 
-	// Specify the desired enhanced MSK CloudWatch monitoring level. See Monitoring Amazon MSK with Amazon CloudWatch
+	// Desired enhanced MSK CloudWatch monitoring level. See Monitoring Amazon MSK with Amazon CloudWatch.
 	EnhancedMonitoring *string `json:"enhancedMonitoring,omitempty" tf:"enhanced_monitoring,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Specify the desired Kafka software version.
+	// Desired Kafka software version.
 	KafkaVersion *string `json:"kafkaVersion,omitempty" tf:"kafka_version,omitempty"`
 
-	// Configuration block for streaming broker logs to Cloudwatch/S3/Kinesis Firehose. See logging_info Argument Reference below.
+	// Configuration block for streaming broker logs to Cloudwatch/S3/Kinesis Firehose. See logging_info Block below.
 	LoggingInfo *LoggingInfoObservation `json:"loggingInfo,omitempty" tf:"logging_info,omitempty"`
 
-	// The desired total number of broker nodes in the kafka cluster.  It must be a multiple of the number of specified client subnets.
+	// Desired total number of broker nodes in the kafka cluster. It must be a multiple of the number of specified client subnets.
 	NumberOfBrokerNodes *float64 `json:"numberOfBrokerNodes,omitempty" tf:"number_of_broker_nodes,omitempty"`
 
-	// Configuration block for JMX and Node monitoring for the MSK cluster. See open_monitoring Argument Reference below.
+	// Configuration block for JMX and Node monitoring for the MSK cluster. See open_monitoring Block below.
 	OpenMonitoring *OpenMonitoringObservation `json:"openMonitoring,omitempty" tf:"open_monitoring,omitempty"`
 
-	// Configuration block for intelligent rebalancing. See rebalancing Argument Reference below. Only applicable to MSK Provisioned clusters with Express brokers.
+	// Configuration block for intelligent rebalancing. See rebalancing Block below. Only applicable to MSK Provisioned clusters with Express brokers.
 	Rebalancing *RebalancingObservation `json:"rebalancing,omitempty" tf:"rebalancing,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -452,24 +452,24 @@ type ClusterObservation struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// A comma separated list of one or more hostname:port pairs to use to connect to the Apache Zookeeper cluster. The returned values are sorted alphabetically. The AWS API may not return all endpoints, so this value is not guaranteed to be stable across applies.
+	// Comma separated list of one or more hostname:port pairs to use to connect to the Apache Zookeeper cluster. The returned values are sorted alphabetically. The AWS API may not return all endpoints, so this value is not guaranteed to be stable across applies.
 	ZookeeperConnectString *string `json:"zookeeperConnectString,omitempty" tf:"zookeeper_connect_string,omitempty"`
 
-	// A comma separated list of one or more hostname:port pairs to use to connect to the Apache Zookeeper cluster via TLS. The returned values are sorted alphabetically. The AWS API may not return all endpoints, so this value is not guaranteed to be stable across applies.
+	// Comma separated list of one or more hostname:port pairs to use to connect to the Apache Zookeeper cluster via TLS. The returned values are sorted alphabetically. The AWS API may not return all endpoints, so this value is not guaranteed to be stable across applies.
 	ZookeeperConnectStringTLS *string `json:"zookeeperConnectStringTls,omitempty" tf:"zookeeper_connect_string_tls,omitempty"`
 }
 
 type ClusterParameters struct {
 
-	// Configuration block for the broker nodes of the Kafka cluster. See broker_node_group_info Argument Reference below.
+	// Configuration block for the broker nodes of the Kafka cluster. See broker_node_group_info Block below.
 	// +kubebuilder:validation:Optional
 	BrokerNodeGroupInfo *BrokerNodeGroupInfoParameters `json:"brokerNodeGroupInfo,omitempty" tf:"broker_node_group_info,omitempty"`
 
-	// Configuration block for specifying a client authentication. See client_authentication Argument Reference below.
+	// Configuration block for specifying a client authentication. See client_authentication Block below.
 	// +kubebuilder:validation:Optional
 	ClientAuthentication *ClusterClientAuthenticationParameters `json:"clientAuthentication,omitempty" tf:"client_authentication,omitempty"`
 
@@ -477,35 +477,35 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
 
-	// Configuration block for specifying an MSK Configuration to attach to Kafka brokers. See configuration_info Argument Reference below.
+	// Configuration block for specifying an MSK Configuration to attach to Kafka brokers. See configuration_info Block below.
 	// +kubebuilder:validation:Optional
 	ConfigurationInfo *ConfigurationInfoParameters `json:"configurationInfo,omitempty" tf:"configuration_info,omitempty"`
 
-	// Configuration block for specifying encryption. See encryption_info Argument Reference below.
+	// Configuration block for specifying encryption. See encryption_info Block below.
 	// +kubebuilder:validation:Optional
 	EncryptionInfo *EncryptionInfoParameters `json:"encryptionInfo,omitempty" tf:"encryption_info,omitempty"`
 
-	// Specify the desired enhanced MSK CloudWatch monitoring level. See Monitoring Amazon MSK with Amazon CloudWatch
+	// Desired enhanced MSK CloudWatch monitoring level. See Monitoring Amazon MSK with Amazon CloudWatch.
 	// +kubebuilder:validation:Optional
 	EnhancedMonitoring *string `json:"enhancedMonitoring,omitempty" tf:"enhanced_monitoring,omitempty"`
 
-	// Specify the desired Kafka software version.
+	// Desired Kafka software version.
 	// +kubebuilder:validation:Optional
 	KafkaVersion *string `json:"kafkaVersion,omitempty" tf:"kafka_version,omitempty"`
 
-	// Configuration block for streaming broker logs to Cloudwatch/S3/Kinesis Firehose. See logging_info Argument Reference below.
+	// Configuration block for streaming broker logs to Cloudwatch/S3/Kinesis Firehose. See logging_info Block below.
 	// +kubebuilder:validation:Optional
 	LoggingInfo *LoggingInfoParameters `json:"loggingInfo,omitempty" tf:"logging_info,omitempty"`
 
-	// The desired total number of broker nodes in the kafka cluster.  It must be a multiple of the number of specified client subnets.
+	// Desired total number of broker nodes in the kafka cluster. It must be a multiple of the number of specified client subnets.
 	// +kubebuilder:validation:Optional
 	NumberOfBrokerNodes *float64 `json:"numberOfBrokerNodes,omitempty" tf:"number_of_broker_nodes,omitempty"`
 
-	// Configuration block for JMX and Node monitoring for the MSK cluster. See open_monitoring Argument Reference below.
+	// Configuration block for JMX and Node monitoring for the MSK cluster. See open_monitoring Block below.
 	// +kubebuilder:validation:Optional
 	OpenMonitoring *OpenMonitoringParameters `json:"openMonitoring,omitempty" tf:"open_monitoring,omitempty"`
 
-	// Configuration block for intelligent rebalancing. See rebalancing Argument Reference below. Only applicable to MSK Provisioned clusters with Express brokers.
+	// Configuration block for intelligent rebalancing. See rebalancing Block below. Only applicable to MSK Provisioned clusters with Express brokers.
 	// +kubebuilder:validation:Optional
 	Rebalancing *RebalancingParameters `json:"rebalancing,omitempty" tf:"rebalancing,omitempty"`
 
@@ -578,10 +578,10 @@ type ConnectivityInfoInitParameters struct {
 	// Network type of the cluster. Valid values are: IPV4 or DUAL. Default value: IPV4. Only updating from IPV4 to DUAL is allowed.
 	NetworkType *string `json:"networkType,omitempty" tf:"network_type,omitempty"`
 
-	// Access control settings for brokers. See connectivity_info public_access Argument Reference below.
+	// Access control settings for brokers. See public_access Block below.
 	PublicAccess *PublicAccessInitParameters `json:"publicAccess,omitempty" tf:"public_access,omitempty"`
 
-	// VPC connectivity access control for brokers. See connectivity_info vpc_connectivity Argument Reference below.
+	// VPC connectivity access control for brokers. See vpc_connectivity Block below.
 	VPCConnectivity *VPCConnectivityInitParameters `json:"vpcConnectivity,omitempty" tf:"vpc_connectivity,omitempty"`
 }
 
@@ -590,10 +590,10 @@ type ConnectivityInfoObservation struct {
 	// Network type of the cluster. Valid values are: IPV4 or DUAL. Default value: IPV4. Only updating from IPV4 to DUAL is allowed.
 	NetworkType *string `json:"networkType,omitempty" tf:"network_type,omitempty"`
 
-	// Access control settings for brokers. See connectivity_info public_access Argument Reference below.
+	// Access control settings for brokers. See public_access Block below.
 	PublicAccess *PublicAccessObservation `json:"publicAccess,omitempty" tf:"public_access,omitempty"`
 
-	// VPC connectivity access control for brokers. See connectivity_info vpc_connectivity Argument Reference below.
+	// VPC connectivity access control for brokers. See vpc_connectivity Block below.
 	VPCConnectivity *VPCConnectivityObservation `json:"vpcConnectivity,omitempty" tf:"vpc_connectivity,omitempty"`
 }
 
@@ -603,40 +603,40 @@ type ConnectivityInfoParameters struct {
 	// +kubebuilder:validation:Optional
 	NetworkType *string `json:"networkType,omitempty" tf:"network_type,omitempty"`
 
-	// Access control settings for brokers. See connectivity_info public_access Argument Reference below.
+	// Access control settings for brokers. See public_access Block below.
 	// +kubebuilder:validation:Optional
 	PublicAccess *PublicAccessParameters `json:"publicAccess,omitempty" tf:"public_access,omitempty"`
 
-	// VPC connectivity access control for brokers. See connectivity_info vpc_connectivity Argument Reference below.
+	// VPC connectivity access control for brokers. See vpc_connectivity Block below.
 	// +kubebuilder:validation:Optional
 	VPCConnectivity *VPCConnectivityParameters `json:"vpcConnectivity,omitempty" tf:"vpc_connectivity,omitempty"`
 }
 
 type EBSStorageInfoInitParameters struct {
 
-	// A block that contains EBS volume provisioned throughput information. To provision storage throughput, you must choose broker type kafka.m5.4xlarge or larger. See ebs_storage_info provisioned_throughput Argument Reference below.
+	// Configuration block that contains EBS volume provisioned throughput information. To provision storage throughput, you must choose broker type kafka.m5.4xlarge or larger. See provisioned_throughput Block below.
 	ProvisionedThroughput *ProvisionedThroughputInitParameters `json:"provisionedThroughput,omitempty" tf:"provisioned_throughput,omitempty"`
 
-	// The size in GiB of the EBS volume for the data drive on each broker node. Minimum value of 1 and maximum value of 16384.
+	// Size in GiB of the EBS volume for the data drive on each broker node. Minimum value of 1 and maximum value of 16384.
 	VolumeSize *float64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
 }
 
 type EBSStorageInfoObservation struct {
 
-	// A block that contains EBS volume provisioned throughput information. To provision storage throughput, you must choose broker type kafka.m5.4xlarge or larger. See ebs_storage_info provisioned_throughput Argument Reference below.
+	// Configuration block that contains EBS volume provisioned throughput information. To provision storage throughput, you must choose broker type kafka.m5.4xlarge or larger. See provisioned_throughput Block below.
 	ProvisionedThroughput *ProvisionedThroughputObservation `json:"provisionedThroughput,omitempty" tf:"provisioned_throughput,omitempty"`
 
-	// The size in GiB of the EBS volume for the data drive on each broker node. Minimum value of 1 and maximum value of 16384.
+	// Size in GiB of the EBS volume for the data drive on each broker node. Minimum value of 1 and maximum value of 16384.
 	VolumeSize *float64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
 }
 
 type EBSStorageInfoParameters struct {
 
-	// A block that contains EBS volume provisioned throughput information. To provision storage throughput, you must choose broker type kafka.m5.4xlarge or larger. See ebs_storage_info provisioned_throughput Argument Reference below.
+	// Configuration block that contains EBS volume provisioned throughput information. To provision storage throughput, you must choose broker type kafka.m5.4xlarge or larger. See provisioned_throughput Block below.
 	// +kubebuilder:validation:Optional
 	ProvisionedThroughput *ProvisionedThroughputParameters `json:"provisionedThroughput,omitempty" tf:"provisioned_throughput,omitempty"`
 
-	// The size in GiB of the EBS volume for the data drive on each broker node. Minimum value of 1 and maximum value of 16384.
+	// Size in GiB of the EBS volume for the data drive on each broker node. Minimum value of 1 and maximum value of 16384.
 	// +kubebuilder:validation:Optional
 	VolumeSize *float64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
 }
@@ -672,7 +672,7 @@ type EncryptionInTransitParameters struct {
 
 type EncryptionInfoInitParameters struct {
 
-	// The ARN of the KMS key used for encryption at rest of the broker data volumes.
+	// KMS key short ID or ARN (it will always output an ARN) to use for encrypting your data at rest. If no key is specified, an AWS managed KMS ('aws/msk' managed service) key will be used for encrypting the data at rest.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kms/v1beta1.Key
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	EncryptionAtRestKMSKeyArn *string `json:"encryptionAtRestKmsKeyArn,omitempty" tf:"encryption_at_rest_kms_key_arn,omitempty"`
@@ -685,22 +685,22 @@ type EncryptionInfoInitParameters struct {
 	// +kubebuilder:validation:Optional
 	EncryptionAtRestKMSKeyArnSelector *v2.NamespacedSelector `json:"encryptionAtRestKmsKeyArnSelector,omitempty" tf:"-"`
 
-	// Configuration block to specify encryption in transit. See encryption_info encryption_in_transit Argument Reference below.
+	// Configuration block to specify encryption in transit. See encryption_in_transit Block below.
 	EncryptionInTransit *EncryptionInTransitInitParameters `json:"encryptionInTransit,omitempty" tf:"encryption_in_transit,omitempty"`
 }
 
 type EncryptionInfoObservation struct {
 
-	// The ARN of the KMS key used for encryption at rest of the broker data volumes.
+	// KMS key short ID or ARN (it will always output an ARN) to use for encrypting your data at rest. If no key is specified, an AWS managed KMS ('aws/msk' managed service) key will be used for encrypting the data at rest.
 	EncryptionAtRestKMSKeyArn *string `json:"encryptionAtRestKmsKeyArn,omitempty" tf:"encryption_at_rest_kms_key_arn,omitempty"`
 
-	// Configuration block to specify encryption in transit. See encryption_info encryption_in_transit Argument Reference below.
+	// Configuration block to specify encryption in transit. See encryption_in_transit Block below.
 	EncryptionInTransit *EncryptionInTransitObservation `json:"encryptionInTransit,omitempty" tf:"encryption_in_transit,omitempty"`
 }
 
 type EncryptionInfoParameters struct {
 
-	// The ARN of the KMS key used for encryption at rest of the broker data volumes.
+	// KMS key short ID or ARN (it will always output an ARN) to use for encrypting your data at rest. If no key is specified, an AWS managed KMS ('aws/msk' managed service) key will be used for encrypting the data at rest.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kms/v1beta1.Key
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -714,7 +714,7 @@ type EncryptionInfoParameters struct {
 	// +kubebuilder:validation:Optional
 	EncryptionAtRestKMSKeyArnSelector *v2.NamespacedSelector `json:"encryptionAtRestKmsKeyArnSelector,omitempty" tf:"-"`
 
-	// Configuration block to specify encryption in transit. See encryption_info encryption_in_transit Argument Reference below.
+	// Configuration block to specify encryption in transit. See encryption_in_transit Block below.
 	// +kubebuilder:validation:Optional
 	EncryptionInTransit *EncryptionInTransitParameters `json:"encryptionInTransit,omitempty" tf:"encryption_in_transit,omitempty"`
 }
@@ -734,7 +734,7 @@ type FirehoseInitParameters struct {
 	// +kubebuilder:validation:Optional
 	DeliveryStreamSelector *v2.NamespacedSelector `json:"deliveryStreamSelector,omitempty" tf:"-"`
 
-	// Controls whether provisioned throughput is enabled or not. Default value: false.
+	// Whether to enable or disable streaming broker logs to S3.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 }
 
@@ -743,7 +743,7 @@ type FirehoseObservation struct {
 	// Name of the Kinesis Data Firehose delivery stream to deliver logs to.
 	DeliveryStream *string `json:"deliveryStream,omitempty" tf:"delivery_stream,omitempty"`
 
-	// Controls whether provisioned throughput is enabled or not. Default value: false.
+	// Whether to enable or disable streaming broker logs to S3.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 }
 
@@ -763,141 +763,141 @@ type FirehoseParameters struct {
 	// +kubebuilder:validation:Optional
 	DeliveryStreamSelector *v2.NamespacedSelector `json:"deliveryStreamSelector,omitempty" tf:"-"`
 
-	// Controls whether provisioned throughput is enabled or not. Default value: false.
+	// Whether to enable or disable streaming broker logs to S3.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 }
 
 type JmxExporterInitParameters struct {
 
-	// Indicates whether you want to enable or disable the JMX Exporter.
+	// Whether to enable or disable the Node Exporter.
 	EnabledInBroker *bool `json:"enabledInBroker,omitempty" tf:"enabled_in_broker,omitempty"`
 }
 
 type JmxExporterObservation struct {
 
-	// Indicates whether you want to enable or disable the JMX Exporter.
+	// Whether to enable or disable the Node Exporter.
 	EnabledInBroker *bool `json:"enabledInBroker,omitempty" tf:"enabled_in_broker,omitempty"`
 }
 
 type JmxExporterParameters struct {
 
-	// Indicates whether you want to enable or disable the JMX Exporter.
+	// Whether to enable or disable the Node Exporter.
 	// +kubebuilder:validation:Optional
 	EnabledInBroker *bool `json:"enabledInBroker" tf:"enabled_in_broker,omitempty"`
 }
 
 type LoggingInfoInitParameters struct {
 
-	// Configuration block for Broker Logs settings for logging info. See logging_info broker_logs Argument Reference below.
+	// Configuration block for Broker Logs settings for logging info. See broker_logs Block below.
 	BrokerLogs *BrokerLogsInitParameters `json:"brokerLogs,omitempty" tf:"broker_logs,omitempty"`
 }
 
 type LoggingInfoObservation struct {
 
-	// Configuration block for Broker Logs settings for logging info. See logging_info broker_logs Argument Reference below.
+	// Configuration block for Broker Logs settings for logging info. See broker_logs Block below.
 	BrokerLogs *BrokerLogsObservation `json:"brokerLogs,omitempty" tf:"broker_logs,omitempty"`
 }
 
 type LoggingInfoParameters struct {
 
-	// Configuration block for Broker Logs settings for logging info. See logging_info broker_logs Argument Reference below.
+	// Configuration block for Broker Logs settings for logging info. See broker_logs Block below.
 	// +kubebuilder:validation:Optional
 	BrokerLogs *BrokerLogsParameters `json:"brokerLogs" tf:"broker_logs,omitempty"`
 }
 
 type NodeExporterInitParameters struct {
 
-	// Indicates whether you want to enable or disable the JMX Exporter.
+	// Whether to enable or disable the Node Exporter.
 	EnabledInBroker *bool `json:"enabledInBroker,omitempty" tf:"enabled_in_broker,omitempty"`
 }
 
 type NodeExporterObservation struct {
 
-	// Indicates whether you want to enable or disable the JMX Exporter.
+	// Whether to enable or disable the Node Exporter.
 	EnabledInBroker *bool `json:"enabledInBroker,omitempty" tf:"enabled_in_broker,omitempty"`
 }
 
 type NodeExporterParameters struct {
 
-	// Indicates whether you want to enable or disable the JMX Exporter.
+	// Whether to enable or disable the Node Exporter.
 	// +kubebuilder:validation:Optional
 	EnabledInBroker *bool `json:"enabledInBroker" tf:"enabled_in_broker,omitempty"`
 }
 
 type OpenMonitoringInitParameters struct {
 
-	// Configuration block for Prometheus settings for open monitoring. See open_monitoring prometheus Argument Reference below.
+	// Configuration block for Prometheus settings for open monitoring. See prometheus Block below.
 	Prometheus *PrometheusInitParameters `json:"prometheus,omitempty" tf:"prometheus,omitempty"`
 }
 
 type OpenMonitoringObservation struct {
 
-	// Configuration block for Prometheus settings for open monitoring. See open_monitoring prometheus Argument Reference below.
+	// Configuration block for Prometheus settings for open monitoring. See prometheus Block below.
 	Prometheus *PrometheusObservation `json:"prometheus,omitempty" tf:"prometheus,omitempty"`
 }
 
 type OpenMonitoringParameters struct {
 
-	// Configuration block for Prometheus settings for open monitoring. See open_monitoring prometheus Argument Reference below.
+	// Configuration block for Prometheus settings for open monitoring. See prometheus Block below.
 	// +kubebuilder:validation:Optional
 	Prometheus *PrometheusParameters `json:"prometheus" tf:"prometheus,omitempty"`
 }
 
 type PrometheusInitParameters struct {
 
-	// Configuration block for JMX Exporter. See open_monitoring prometheus jmx_exporter Argument Reference below.
+	// Configuration block for JMX Exporter. See jmx_exporter Block below.
 	JmxExporter *JmxExporterInitParameters `json:"jmxExporter,omitempty" tf:"jmx_exporter,omitempty"`
 
-	// Configuration block for Node Exporter. See open_monitoring prometheus node_exporter Argument Reference below.
+	// Configuration block for Node Exporter. See node_exporter Block below.
 	NodeExporter *NodeExporterInitParameters `json:"nodeExporter,omitempty" tf:"node_exporter,omitempty"`
 }
 
 type PrometheusObservation struct {
 
-	// Configuration block for JMX Exporter. See open_monitoring prometheus jmx_exporter Argument Reference below.
+	// Configuration block for JMX Exporter. See jmx_exporter Block below.
 	JmxExporter *JmxExporterObservation `json:"jmxExporter,omitempty" tf:"jmx_exporter,omitempty"`
 
-	// Configuration block for Node Exporter. See open_monitoring prometheus node_exporter Argument Reference below.
+	// Configuration block for Node Exporter. See node_exporter Block below.
 	NodeExporter *NodeExporterObservation `json:"nodeExporter,omitempty" tf:"node_exporter,omitempty"`
 }
 
 type PrometheusParameters struct {
 
-	// Configuration block for JMX Exporter. See open_monitoring prometheus jmx_exporter Argument Reference below.
+	// Configuration block for JMX Exporter. See jmx_exporter Block below.
 	// +kubebuilder:validation:Optional
 	JmxExporter *JmxExporterParameters `json:"jmxExporter,omitempty" tf:"jmx_exporter,omitempty"`
 
-	// Configuration block for Node Exporter. See open_monitoring prometheus node_exporter Argument Reference below.
+	// Configuration block for Node Exporter. See node_exporter Block below.
 	// +kubebuilder:validation:Optional
 	NodeExporter *NodeExporterParameters `json:"nodeExporter,omitempty" tf:"node_exporter,omitempty"`
 }
 
 type ProvisionedThroughputInitParameters struct {
 
-	// Controls whether provisioned throughput is enabled or not. Default value: false.
+	// Whether to enable or disable streaming broker logs to S3.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Throughput value of the EBS volumes for the data drive on each kafka broker node in MiB per second. The minimum value is 250. The maximum value varies between broker type. You can refer to the valid values for the maximum volume throughput at the following documentation on throughput bottlenecks
+	// Throughput value of the EBS volumes for the data drive on each kafka broker node in MiB per second. The minimum value is 250. The maximum value varies between broker type. You can refer to the valid values for the maximum volume throughput at the following documentation on throughput bottlenecks.
 	VolumeThroughput *float64 `json:"volumeThroughput,omitempty" tf:"volume_throughput,omitempty"`
 }
 
 type ProvisionedThroughputObservation struct {
 
-	// Controls whether provisioned throughput is enabled or not. Default value: false.
+	// Whether to enable or disable streaming broker logs to S3.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Throughput value of the EBS volumes for the data drive on each kafka broker node in MiB per second. The minimum value is 250. The maximum value varies between broker type. You can refer to the valid values for the maximum volume throughput at the following documentation on throughput bottlenecks
+	// Throughput value of the EBS volumes for the data drive on each kafka broker node in MiB per second. The minimum value is 250. The maximum value varies between broker type. You can refer to the valid values for the maximum volume throughput at the following documentation on throughput bottlenecks.
 	VolumeThroughput *float64 `json:"volumeThroughput,omitempty" tf:"volume_throughput,omitempty"`
 }
 
 type ProvisionedThroughputParameters struct {
 
-	// Controls whether provisioned throughput is enabled or not. Default value: false.
+	// Whether to enable or disable streaming broker logs to S3.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Throughput value of the EBS volumes for the data drive on each kafka broker node in MiB per second. The minimum value is 250. The maximum value varies between broker type. You can refer to the valid values for the maximum volume throughput at the following documentation on throughput bottlenecks
+	// Throughput value of the EBS volumes for the data drive on each kafka broker node in MiB per second. The minimum value is 250. The maximum value varies between broker type. You can refer to the valid values for the maximum volume throughput at the following documentation on throughput bottlenecks.
 	// +kubebuilder:validation:Optional
 	VolumeThroughput *float64 `json:"volumeThroughput,omitempty" tf:"volume_throughput,omitempty"`
 }
@@ -923,19 +923,19 @@ type PublicAccessParameters struct {
 
 type RebalancingInitParameters struct {
 
-	// The status of intelligent rebalancing. Valid values: ACTIVE, PAUSED. Default is ACTIVE for new Express-based clusters.
+	// Status of intelligent rebalancing. Valid values: ACTIVE, PAUSED. Default is ACTIVE for new Express-based clusters.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
 
 type RebalancingObservation struct {
 
-	// The status of intelligent rebalancing. Valid values: ACTIVE, PAUSED. Default is ACTIVE for new Express-based clusters.
+	// Status of intelligent rebalancing. Valid values: ACTIVE, PAUSED. Default is ACTIVE for new Express-based clusters.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
 
 type RebalancingParameters struct {
 
-	// The status of intelligent rebalancing. Valid values: ACTIVE, PAUSED. Default is ACTIVE for new Express-based clusters.
+	// Status of intelligent rebalancing. Valid values: ACTIVE, PAUSED. Default is ACTIVE for new Express-based clusters.
 	// +kubebuilder:validation:Optional
 	Status *string `json:"status" tf:"status,omitempty"`
 }
@@ -954,7 +954,7 @@ type S3InitParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketSelector *v2.NamespacedSelector `json:"bucketSelector,omitempty" tf:"-"`
 
-	// Controls whether provisioned throughput is enabled or not. Default value: false.
+	// Whether to enable or disable streaming broker logs to S3.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// Prefix to append to the folder name.
@@ -966,7 +966,7 @@ type S3Observation struct {
 	// Name of the S3 bucket to deliver logs to.
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
-	// Controls whether provisioned throughput is enabled or not. Default value: false.
+	// Whether to enable or disable streaming broker logs to S3.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// Prefix to append to the folder name.
@@ -988,7 +988,7 @@ type S3Parameters struct {
 	// +kubebuilder:validation:Optional
 	BucketSelector *v2.NamespacedSelector `json:"bucketSelector,omitempty" tf:"-"`
 
-	// Controls whether provisioned throughput is enabled or not. Default value: false.
+	// Whether to enable or disable streaming broker logs to S3.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 
@@ -999,48 +999,48 @@ type S3Parameters struct {
 
 type SaslInitParameters struct {
 
-	// Enables SASL/IAM authentication for VPC connectivity.
+	// Whether to enable SASL/IAM authentication for VPC connectivity.
 	IAM *bool `json:"iam,omitempty" tf:"iam,omitempty"`
 
-	// Enables SASL/SCRAM authentication for VPC connectivity.
+	// Whether to enable SASL/SCRAM authentication for VPC connectivity.
 	Scram *bool `json:"scram,omitempty" tf:"scram,omitempty"`
 }
 
 type SaslObservation struct {
 
-	// Enables SASL/IAM authentication for VPC connectivity.
+	// Whether to enable SASL/IAM authentication for VPC connectivity.
 	IAM *bool `json:"iam,omitempty" tf:"iam,omitempty"`
 
-	// Enables SASL/SCRAM authentication for VPC connectivity.
+	// Whether to enable SASL/SCRAM authentication for VPC connectivity.
 	Scram *bool `json:"scram,omitempty" tf:"scram,omitempty"`
 }
 
 type SaslParameters struct {
 
-	// Enables SASL/IAM authentication for VPC connectivity.
+	// Whether to enable SASL/IAM authentication for VPC connectivity.
 	// +kubebuilder:validation:Optional
 	IAM *bool `json:"iam,omitempty" tf:"iam,omitempty"`
 
-	// Enables SASL/SCRAM authentication for VPC connectivity.
+	// Whether to enable SASL/SCRAM authentication for VPC connectivity.
 	// +kubebuilder:validation:Optional
 	Scram *bool `json:"scram,omitempty" tf:"scram,omitempty"`
 }
 
 type StorageInfoInitParameters struct {
 
-	// A block that contains EBS volume information. See storage_info ebs_storage_info Argument Reference below.
+	// Configuration block that contains EBS volume information. See ebs_storage_info Block below.
 	EBSStorageInfo *EBSStorageInfoInitParameters `json:"ebsStorageInfo,omitempty" tf:"ebs_storage_info,omitempty"`
 }
 
 type StorageInfoObservation struct {
 
-	// A block that contains EBS volume information. See storage_info ebs_storage_info Argument Reference below.
+	// Configuration block that contains EBS volume information. See ebs_storage_info Block below.
 	EBSStorageInfo *EBSStorageInfoObservation `json:"ebsStorageInfo,omitempty" tf:"ebs_storage_info,omitempty"`
 }
 
 type StorageInfoParameters struct {
 
-	// A block that contains EBS volume information. See storage_info ebs_storage_info Argument Reference below.
+	// Configuration block that contains EBS volume information. See ebs_storage_info Block below.
 	// +kubebuilder:validation:Optional
 	EBSStorageInfo *EBSStorageInfoParameters `json:"ebsStorageInfo,omitempty" tf:"ebs_storage_info,omitempty"`
 }
@@ -1069,19 +1069,19 @@ type TLSParameters struct {
 
 type VPCConnectivityInitParameters struct {
 
-	// Configuration block for specifying a client authentication. See client_authentication Argument Reference below.
+	// Client authentication information for VPC connectivity. See vpc_connectivity.client_authentication Block below.
 	ClientAuthentication *ClientAuthenticationInitParameters `json:"clientAuthentication,omitempty" tf:"client_authentication,omitempty"`
 }
 
 type VPCConnectivityObservation struct {
 
-	// Configuration block for specifying a client authentication. See client_authentication Argument Reference below.
+	// Client authentication information for VPC connectivity. See vpc_connectivity.client_authentication Block below.
 	ClientAuthentication *ClientAuthenticationObservation `json:"clientAuthentication,omitempty" tf:"client_authentication,omitempty"`
 }
 
 type VPCConnectivityParameters struct {
 
-	// Configuration block for specifying a client authentication. See client_authentication Argument Reference below.
+	// Client authentication information for VPC connectivity. See vpc_connectivity.client_authentication Block below.
 	// +kubebuilder:validation:Optional
 	ClientAuthentication *ClientAuthenticationParameters `json:"clientAuthentication,omitempty" tf:"client_authentication,omitempty"`
 }

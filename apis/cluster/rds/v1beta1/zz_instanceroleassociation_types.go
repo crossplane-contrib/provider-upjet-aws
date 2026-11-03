@@ -28,7 +28,7 @@ type InstanceRoleAssociationInitParameters struct {
 	// +kubebuilder:validation:Optional
 	DBInstanceIdentifierSelector *v2.Selector `json:"dbInstanceIdentifierSelector,omitempty" tf:"-"`
 
-	// Name of the feature for association. This can be found in the AWS documentation relevant to the integration or a full list is available in the SupportedFeatureNames list returned by AWS CLI rds describe-db-engine-versions.
+	// Name of the feature for association. This can be found in the AWS documentation relevant to the integration or a full list is available in the SupportedFeatureNames list returned by AWS CLI .
 	FeatureName *string `json:"featureName,omitempty" tf:"feature_name,omitempty"`
 
 	// ARN of the IAM Role to associate with the DB Instance.
@@ -50,7 +50,7 @@ type InstanceRoleAssociationObservation struct {
 	// DB Instance Identifier to associate with the IAM Role.
 	DBInstanceIdentifier *string `json:"dbInstanceIdentifier,omitempty" tf:"db_instance_identifier,omitempty"`
 
-	// Name of the feature for association. This can be found in the AWS documentation relevant to the integration or a full list is available in the SupportedFeatureNames list returned by AWS CLI rds describe-db-engine-versions.
+	// Name of the feature for association. This can be found in the AWS documentation relevant to the integration or a full list is available in the SupportedFeatureNames list returned by AWS CLI .
 	FeatureName *string `json:"featureName,omitempty" tf:"feature_name,omitempty"`
 
 	// DB Instance Identifier and IAM Role ARN separated by a comma (,)
@@ -80,7 +80,7 @@ type InstanceRoleAssociationParameters struct {
 	// +kubebuilder:validation:Optional
 	DBInstanceIdentifierSelector *v2.Selector `json:"dbInstanceIdentifierSelector,omitempty" tf:"-"`
 
-	// Name of the feature for association. This can be found in the AWS documentation relevant to the integration or a full list is available in the SupportedFeatureNames list returned by AWS CLI rds describe-db-engine-versions.
+	// Name of the feature for association. This can be found in the AWS documentation relevant to the integration or a full list is available in the SupportedFeatureNames list returned by AWS CLI .
 	// +kubebuilder:validation:Optional
 	FeatureName *string `json:"featureName,omitempty" tf:"feature_name,omitempty"`
 

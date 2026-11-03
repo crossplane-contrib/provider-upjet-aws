@@ -843,6 +843,11 @@ func (in *TopicInitParameters) DeepCopyInto(out *TopicInitParameters) {
 		*out = new(float64)
 		**out = **in
 	}
+	if in.MaximumMessageSize != nil {
+		in, out := &in.MaximumMessageSize, &out.MaximumMessageSize
+		*out = new(float64)
+		**out = **in
+	}
 	if in.Policy != nil {
 		in, out := &in.Policy, &out.Policy
 		*out = new(string)
@@ -1063,6 +1068,11 @@ func (in *TopicObservation) DeepCopyInto(out *TopicObservation) {
 	}
 	if in.LambdaSuccessFeedbackSampleRate != nil {
 		in, out := &in.LambdaSuccessFeedbackSampleRate, &out.LambdaSuccessFeedbackSampleRate
+		*out = new(float64)
+		**out = **in
+	}
+	if in.MaximumMessageSize != nil {
+		in, out := &in.MaximumMessageSize, &out.MaximumMessageSize
 		*out = new(float64)
 		**out = **in
 	}
@@ -1325,6 +1335,11 @@ func (in *TopicParameters) DeepCopyInto(out *TopicParameters) {
 	}
 	if in.LambdaSuccessFeedbackSampleRate != nil {
 		in, out := &in.LambdaSuccessFeedbackSampleRate, &out.LambdaSuccessFeedbackSampleRate
+		*out = new(float64)
+		**out = **in
+	}
+	if in.MaximumMessageSize != nil {
+		in, out := &in.MaximumMessageSize, &out.MaximumMessageSize
 		*out = new(float64)
 		**out = **in
 	}

@@ -15,19 +15,19 @@ import (
 
 type QueueInitParameters struct {
 
-	// The maximum number of jobs your queue can process concurrently. For on-demand queues, the value you enter is constrained by your service quotas for Maximum concurrent jobs, per on-demand queue and Maximum concurrent jobs, per account. For reserved queues, specify the number of jobs you can process concurrently in your reservation plan instead.
+	// Maximum number of jobs your queue can process concurrently. For on-demand queues, the value you enter is constrained by your service quotas for Maximum concurrent jobs, per on-demand queue and Maximum concurrent jobs, per account. For reserved queues, specify the number of jobs you can process concurrently in your reservation plan instead.
 	ConcurrentJobs *float64 `json:"concurrentJobs,omitempty" tf:"concurrent_jobs,omitempty"`
 
-	// A description of the queue
+	// Description of the queue
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Specifies whether the pricing plan for the queue is on-demand or reserved. Valid values are ON_DEMAND or RESERVED. Default to ON_DEMAND.
+	// Whether the pricing plan for the queue is on-demand or reserved. Valid values are ON_DEMAND or RESERVED. Default to ON_DEMAND.
 	PricingPlan *string `json:"pricingPlan,omitempty" tf:"pricing_plan,omitempty"`
 
-	// A detail pricing plan of the  reserved queue. See below.
+	// Detail pricing plan of the reserved queue. See below.
 	ReservationPlanSettings *ReservationPlanSettingsInitParameters `json:"reservationPlanSettings,omitempty" tf:"reservation_plan_settings,omitempty"`
 
-	// A status of the queue. Valid values are ACTIVE or RESERVED. Default to PAUSED.
+	// Status of the queue. Valid values are ACTIVE or RESERVED. Default to PAUSED.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
 	// Key-value map of resource tags.
@@ -37,51 +37,51 @@ type QueueInitParameters struct {
 
 type QueueObservation struct {
 
-	// The Arn of the queue
+	// ARN of the queue
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The maximum number of jobs your queue can process concurrently. For on-demand queues, the value you enter is constrained by your service quotas for Maximum concurrent jobs, per on-demand queue and Maximum concurrent jobs, per account. For reserved queues, specify the number of jobs you can process concurrently in your reservation plan instead.
+	// Maximum number of jobs your queue can process concurrently. For on-demand queues, the value you enter is constrained by your service quotas for Maximum concurrent jobs, per on-demand queue and Maximum concurrent jobs, per account. For reserved queues, specify the number of jobs you can process concurrently in your reservation plan instead.
 	ConcurrentJobs *float64 `json:"concurrentJobs,omitempty" tf:"concurrent_jobs,omitempty"`
 
-	// A description of the queue
+	// Description of the queue
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The same as name
+	// Same as name
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Specifies whether the pricing plan for the queue is on-demand or reserved. Valid values are ON_DEMAND or RESERVED. Default to ON_DEMAND.
+	// Whether the pricing plan for the queue is on-demand or reserved. Valid values are ON_DEMAND or RESERVED. Default to ON_DEMAND.
 	PricingPlan *string `json:"pricingPlan,omitempty" tf:"pricing_plan,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// A detail pricing plan of the  reserved queue. See below.
+	// Detail pricing plan of the reserved queue. See below.
 	ReservationPlanSettings *ReservationPlanSettingsObservation `json:"reservationPlanSettings,omitempty" tf:"reservation_plan_settings,omitempty"`
 
-	// A status of the queue. Valid values are ACTIVE or RESERVED. Default to PAUSED.
+	// Status of the queue. Valid values are ACTIVE or RESERVED. Default to PAUSED.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type QueueParameters struct {
 
-	// The maximum number of jobs your queue can process concurrently. For on-demand queues, the value you enter is constrained by your service quotas for Maximum concurrent jobs, per on-demand queue and Maximum concurrent jobs, per account. For reserved queues, specify the number of jobs you can process concurrently in your reservation plan instead.
+	// Maximum number of jobs your queue can process concurrently. For on-demand queues, the value you enter is constrained by your service quotas for Maximum concurrent jobs, per on-demand queue and Maximum concurrent jobs, per account. For reserved queues, specify the number of jobs you can process concurrently in your reservation plan instead.
 	// +kubebuilder:validation:Optional
 	ConcurrentJobs *float64 `json:"concurrentJobs,omitempty" tf:"concurrent_jobs,omitempty"`
 
-	// A description of the queue
+	// Description of the queue
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Specifies whether the pricing plan for the queue is on-demand or reserved. Valid values are ON_DEMAND or RESERVED. Default to ON_DEMAND.
+	// Whether the pricing plan for the queue is on-demand or reserved. Valid values are ON_DEMAND or RESERVED. Default to ON_DEMAND.
 	// +kubebuilder:validation:Optional
 	PricingPlan *string `json:"pricingPlan,omitempty" tf:"pricing_plan,omitempty"`
 
@@ -90,11 +90,11 @@ type QueueParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// A detail pricing plan of the  reserved queue. See below.
+	// Detail pricing plan of the reserved queue. See below.
 	// +kubebuilder:validation:Optional
 	ReservationPlanSettings *ReservationPlanSettingsParameters `json:"reservationPlanSettings,omitempty" tf:"reservation_plan_settings,omitempty"`
 
-	// A status of the queue. Valid values are ACTIVE or RESERVED. Default to PAUSED.
+	// Status of the queue. Valid values are ACTIVE or RESERVED. Default to PAUSED.
 	// +kubebuilder:validation:Optional
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
@@ -106,39 +106,39 @@ type QueueParameters struct {
 
 type ReservationPlanSettingsInitParameters struct {
 
-	// The length of the term of your reserved queue pricing plan commitment. Valid value is ONE_YEAR.
+	// Length of the term of your reserved queue pricing plan commitment. Valid value is ONE_YEAR.
 	Commitment *string `json:"commitment,omitempty" tf:"commitment,omitempty"`
 
-	// Specifies whether the term of your reserved queue pricing plan. Valid values are AUTO_RENEW or EXPIRE.
+	// Renewal type of your reserved queue pricing plan. Valid values are AUTO_RENEW or EXPIRE.
 	RenewalType *string `json:"renewalType,omitempty" tf:"renewal_type,omitempty"`
 
-	// Specifies the number of reserved transcode slots (RTS) for queue.
+	// Number of reserved transcode slots (RTS) for queue.
 	ReservedSlots *float64 `json:"reservedSlots,omitempty" tf:"reserved_slots,omitempty"`
 }
 
 type ReservationPlanSettingsObservation struct {
 
-	// The length of the term of your reserved queue pricing plan commitment. Valid value is ONE_YEAR.
+	// Length of the term of your reserved queue pricing plan commitment. Valid value is ONE_YEAR.
 	Commitment *string `json:"commitment,omitempty" tf:"commitment,omitempty"`
 
-	// Specifies whether the term of your reserved queue pricing plan. Valid values are AUTO_RENEW or EXPIRE.
+	// Renewal type of your reserved queue pricing plan. Valid values are AUTO_RENEW or EXPIRE.
 	RenewalType *string `json:"renewalType,omitempty" tf:"renewal_type,omitempty"`
 
-	// Specifies the number of reserved transcode slots (RTS) for queue.
+	// Number of reserved transcode slots (RTS) for queue.
 	ReservedSlots *float64 `json:"reservedSlots,omitempty" tf:"reserved_slots,omitempty"`
 }
 
 type ReservationPlanSettingsParameters struct {
 
-	// The length of the term of your reserved queue pricing plan commitment. Valid value is ONE_YEAR.
+	// Length of the term of your reserved queue pricing plan commitment. Valid value is ONE_YEAR.
 	// +kubebuilder:validation:Optional
 	Commitment *string `json:"commitment" tf:"commitment,omitempty"`
 
-	// Specifies whether the term of your reserved queue pricing plan. Valid values are AUTO_RENEW or EXPIRE.
+	// Renewal type of your reserved queue pricing plan. Valid values are AUTO_RENEW or EXPIRE.
 	// +kubebuilder:validation:Optional
 	RenewalType *string `json:"renewalType" tf:"renewal_type,omitempty"`
 
-	// Specifies the number of reserved transcode slots (RTS) for queue.
+	// Number of reserved transcode slots (RTS) for queue.
 	// +kubebuilder:validation:Optional
 	ReservedSlots *float64 `json:"reservedSlots" tf:"reserved_slots,omitempty"`
 }

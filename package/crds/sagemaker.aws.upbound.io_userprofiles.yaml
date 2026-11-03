@@ -3366,7 +3366,7 @@ spec:
                         type: array
                       customPosixUserConfig:
                         description: Details about the POSIX identity that is used
-                          for file system operations. See Custom Posix User Config
+                          for file system operations. See Custom POSIX User Config
                           below.
                         properties:
                           gid:
@@ -4178,7 +4178,7 @@ spec:
                         type: array
                       customPosixUserConfig:
                         description: Details about the POSIX identity that is used
-                          for file system operations. See Custom Posix User Config
+                          for file system operations. See Custom POSIX User Config
                           below.
                         properties:
                           gid:
@@ -5019,7 +5019,7 @@ spec:
                         type: array
                       customPosixUserConfig:
                         description: Details about the POSIX identity that is used
-                          for file system operations. See Custom Posix User Config
+                          for file system operations. See Custom POSIX User Config
                           below.
                         properties:
                           gid:

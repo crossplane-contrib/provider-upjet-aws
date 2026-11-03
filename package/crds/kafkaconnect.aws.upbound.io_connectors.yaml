@@ -2383,34 +2383,33 @@ spec:
                           for the connector. See autoscaling Block for details.
                         properties:
                           maxWorkerCount:
-                            description: The maximum number of workers allocated to
-                              the connector.
+                            description: Maximum number of workers allocated to the
+                              connector.
                             type: number
                           mcuCount:
-                            description: 'The number of microcontroller units (MCUs)
-                              allocated to each connector worker. Valid values: 1,
-                              2, 4, 8. The default value is 1.'
+                            description: 'Number of microcontroller units (MCUs) allocated
+                              to each connector worker. Valid values: 1, 2, 4, 8.
+                              The default value is 1.'
                             type: number
                           minWorkerCount:
-                            description: The minimum number of workers allocated to
-                              the connector.
+                            description: Minimum number of workers allocated to the
+                              connector.
                             type: number
                           scaleInPolicy:
-                            description: The scale-in policy for the connector. See
-                              scale_in_policy Block for details.
+                            description: Scale-in policy for the connector. See scale_in_policy
+                              Block for details.
                             properties:
                               cpuUtilizationPercentage:
-                                description: Specifies the CPU utilization percentage
-                                  threshold at which you want connector scale in to
-                                  be triggered.
+                                description: CPU utilization percentage threshold
+                                  at which you want connector scale in to be triggered.
                                 type: number
                             type: object
                           scaleOutPolicy:
-                            description: The scale-out policy for the connector. See
-                              scale_out_policy Block for details.
+                            description: Scale-out policy for the connector. See scale_out_policy
+                              Block for details.
                             properties:
                               cpuUtilizationPercentage:
-                                description: The CPU utilization percentage threshold
+                                description: CPU utilization percentage threshold
                                   at which you want connector scale out to be triggered.
                                 type: number
                             type: object
@@ -2420,36 +2419,36 @@ spec:
                           connector. See provisioned_capacity Block for details.
                         properties:
                           mcuCount:
-                            description: 'The number of microcontroller units (MCUs)
-                              allocated to each connector worker. Valid values: 1,
-                              2, 4, 8. The default value is 1.'
+                            description: 'Number of microcontroller units (MCUs) allocated
+                              to each connector worker. Valid values: 1, 2, 4, 8.
+                              The default value is 1.'
                             type: number
                           workerCount:
-                            description: The number of workers that are allocated
-                              to the connector.
+                            description: Number of workers that are allocated to the
+                              connector.
                             type: number
                         type: object
                     type: object
                   connectorConfiguration:
                     additionalProperties:
                       type: string
-                    description: A map of keys to values that represent the configuration
+                    description: Map of keys to values that represent the configuration
                       for the connector.
                     type: object
                     x-kubernetes-map-type: granular
                   description:
-                    description: A summary description of the connector.
+                    description: Summary description of the connector.
                     type: string
                   kafkaCluster:
-                    description: Specifies which Apache Kafka cluster to connect to.
-                      See kafka_cluster Block for details.
+                    description: Apache Kafka cluster to connect to. See kafka_cluster
+                      Block for details.
                     properties:
                       apacheKafkaCluster:
-                        description: The Apache Kafka cluster to which the connector
-                          is connected. See apache_kafka_cluster Block for details.
+                        description: Apache Kafka cluster to which the connector is
+                          connected. See apache_kafka_cluster Block for details.
                         properties:
                           bootstrapServers:
-                            description: The bootstrap servers of the cluster.
+                            description: Bootstrap servers of the cluster.
                             type: string
                           vpc:
                             description: Details of an Amazon VPC which has network
@@ -2536,7 +2535,7 @@ spec:
                                     type: object
                                 type: object
                               securityGroups:
-                                description: The security groups for the connector.
+                                description: Security groups for the connector.
                                 items:
                                   type: string
                                 type: array
@@ -2621,7 +2620,7 @@ spec:
                                     type: object
                                 type: object
                               subnets:
-                                description: The subnets for the connector.
+                                description: Subnets for the connector.
                                 items:
                                   type: string
                                 type: array
@@ -2635,7 +2634,7 @@ spec:
                       Block for details.
                     properties:
                       authenticationType:
-                        description: 'The type of client authentication used to connect
+                        description: 'Type of client authentication used to connect
                           to the Apache Kafka cluster. Valid values: IAM, NONE. A
                           value of NONE means that no client authentication is used.
                           The default value is NONE.'
@@ -2646,13 +2645,13 @@ spec:
                       cluster. See kafka_cluster_encryption_in_transit Block for details.
                     properties:
                       encryptionType:
-                        description: 'The type of encryption in transit to the Apache
+                        description: 'Type of encryption in transit to the Apache
                           Kafka cluster. Valid values: PLAINTEXT, TLS. The default
                           values is PLAINTEXT.'
                         type: string
                     type: object
                   kafkaconnectVersion:
-                    description: The version of Kafka Connect. It has to be compatible
+                    description: Version of Kafka Connect. It has to be compatible
                       with both the Apache Kafka cluster's version and the plugins.
                     type: string
                   logDelivery:
@@ -2660,10 +2659,9 @@ spec:
                       for details.
                     properties:
                       workerLogDelivery:
-                        description: The workers can send worker logs to different
-                          destination types. This configuration specifies the details
-                          of these destinations. See worker_log_delivery Block for
-                          details.
+                        description: Workers can send worker logs to different destination
+                          types. This configuration specifies the details of these
+                          destinations. See worker_log_delivery Block for details.
                         properties:
                           cloudwatchLogs:
                             description: Details about delivering logs to Amazon CloudWatch
@@ -2674,8 +2672,8 @@ spec:
                                   Logs is enabled.
                                 type: boolean
                               logGroup:
-                                description: The name of the CloudWatch log group
-                                  that is the destination for log delivery.
+                                description: Name of the CloudWatch log group that
+                                  is the destination for log delivery.
                                 type: string
                               logGroupRef:
                                 description: Reference to a Group in cloudwatchlogs
@@ -2759,9 +2757,8 @@ spec:
                               Data Firehose. See firehose Block for details.
                             properties:
                               deliveryStream:
-                                description: The name of the Kinesis Data Firehose
-                                  delivery stream that is the destination for log
-                                  delivery.
+                                description: Name of the Kinesis Data Firehose delivery
+                                  stream that is the destination for log delivery.
                                 type: string
                               deliveryStreamRef:
                                 description: Reference to a DeliveryStream in firehose
@@ -2840,8 +2837,8 @@ spec:
                                     type: object
                                 type: object
                               enabled:
-                                description: Specifies whether connector logs get
-                                  sent to the specified Amazon S3 destination.
+                                description: Whether connector logs get sent to the
+                                  specified Amazon S3 destination.
                                 type: boolean
                             type: object
                           s3:
@@ -2849,8 +2846,8 @@ spec:
                               See s3 Block for deetails.
                             properties:
                               bucket:
-                                description: The name of the S3 bucket that is the
-                                  destination for log delivery.
+                                description: Name of the S3 bucket that is the destination
+                                  for log delivery.
                                 type: string
                               bucketRef:
                                 description: Reference to a Bucket in s3 to populate
@@ -2929,22 +2926,22 @@ spec:
                                     type: object
                                 type: object
                               enabled:
-                                description: Specifies whether connector logs get
-                                  sent to the specified Amazon S3 destination.
+                                description: Whether connector logs get sent to the
+                                  specified Amazon S3 destination.
                                 type: boolean
                               prefix:
-                                description: The S3 prefix that is the destination
-                                  for log delivery.
+                                description: S3 prefix that is the destination for
+                                  log delivery.
                                 type: string
                             type: object
                         type: object
                     type: object
                   name:
-                    description: The name of the connector.
+                    description: Name of the connector.
                     type: string
                   plugin:
-                    description: Specifies which plugins to use for the connector.
-                      See plugin Block for details.
+                    description: Plugins to use for the connector. See plugin Block
+                      for details.
                     items:
                       properties:
                         customPlugin:
@@ -3031,7 +3028,7 @@ spec:
                                   type: object
                               type: object
                             revision:
-                              description: The revision of the custom plugin.
+                              description: Revision of the custom plugin.
                               type: number
                           type: object
                       type: object
@@ -3129,8 +3126,8 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   workerConfiguration:
-                    description: Specifies which worker configuration to use with
-                      the connector. See worker_configuration Block for details.
+                    description: Worker configuration to use with the connector. See
+                      worker_configuration Block for details.
                     properties:
                       arn:
                         description: ARN of the worker configuration.
@@ -3212,7 +3209,7 @@ spec:
                             type: object
                         type: object
                       revision:
-                        description: The revision of the worker configuration.
+                        description: Revision of the worker configuration.
                         type: number
                     type: object
                 required:
@@ -3241,34 +3238,33 @@ spec:
                           for the connector. See autoscaling Block for details.
                         properties:
                           maxWorkerCount:
-                            description: The maximum number of workers allocated to
-                              the connector.
+                            description: Maximum number of workers allocated to the
+                              connector.
                             type: number
                           mcuCount:
-                            description: 'The number of microcontroller units (MCUs)
-                              allocated to each connector worker. Valid values: 1,
-                              2, 4, 8. The default value is 1.'
+                            description: 'Number of microcontroller units (MCUs) allocated
+                              to each connector worker. Valid values: 1, 2, 4, 8.
+                              The default value is 1.'
                             type: number
                           minWorkerCount:
-                            description: The minimum number of workers allocated to
-                              the connector.
+                            description: Minimum number of workers allocated to the
+                              connector.
                             type: number
                           scaleInPolicy:
-                            description: The scale-in policy for the connector. See
-                              scale_in_policy Block for details.
+                            description: Scale-in policy for the connector. See scale_in_policy
+                              Block for details.
                             properties:
                               cpuUtilizationPercentage:
-                                description: Specifies the CPU utilization percentage
-                                  threshold at which you want connector scale in to
-                                  be triggered.
+                                description: CPU utilization percentage threshold
+                                  at which you want connector scale in to be triggered.
                                 type: number
                             type: object
                           scaleOutPolicy:
-                            description: The scale-out policy for the connector. See
-                              scale_out_policy Block for details.
+                            description: Scale-out policy for the connector. See scale_out_policy
+                              Block for details.
                             properties:
                               cpuUtilizationPercentage:
-                                description: The CPU utilization percentage threshold
+                                description: CPU utilization percentage threshold
                                   at which you want connector scale out to be triggered.
                                 type: number
                             type: object
@@ -3278,36 +3274,36 @@ spec:
                           connector. See provisioned_capacity Block for details.
                         properties:
                           mcuCount:
-                            description: 'The number of microcontroller units (MCUs)
-                              allocated to each connector worker. Valid values: 1,
-                              2, 4, 8. The default value is 1.'
+                            description: 'Number of microcontroller units (MCUs) allocated
+                              to each connector worker. Valid values: 1, 2, 4, 8.
+                              The default value is 1.'
                             type: number
                           workerCount:
-                            description: The number of workers that are allocated
-                              to the connector.
+                            description: Number of workers that are allocated to the
+                              connector.
                             type: number
                         type: object
                     type: object
                   connectorConfiguration:
                     additionalProperties:
                       type: string
-                    description: A map of keys to values that represent the configuration
+                    description: Map of keys to values that represent the configuration
                       for the connector.
                     type: object
                     x-kubernetes-map-type: granular
                   description:
-                    description: A summary description of the connector.
+                    description: Summary description of the connector.
                     type: string
                   kafkaCluster:
-                    description: Specifies which Apache Kafka cluster to connect to.
-                      See kafka_cluster Block for details.
+                    description: Apache Kafka cluster to connect to. See kafka_cluster
+                      Block for details.
                     properties:
                       apacheKafkaCluster:
-                        description: The Apache Kafka cluster to which the connector
-                          is connected. See apache_kafka_cluster Block for details.
+                        description: Apache Kafka cluster to which the connector is
+                          connected. See apache_kafka_cluster Block for details.
                         properties:
                           bootstrapServers:
-                            description: The bootstrap servers of the cluster.
+                            description: Bootstrap servers of the cluster.
                             type: string
                           vpc:
                             description: Details of an Amazon VPC which has network
@@ -3394,7 +3390,7 @@ spec:
                                     type: object
                                 type: object
                               securityGroups:
-                                description: The security groups for the connector.
+                                description: Security groups for the connector.
                                 items:
                                   type: string
                                 type: array
@@ -3479,7 +3475,7 @@ spec:
                                     type: object
                                 type: object
                               subnets:
-                                description: The subnets for the connector.
+                                description: Subnets for the connector.
                                 items:
                                   type: string
                                 type: array
@@ -3493,7 +3489,7 @@ spec:
                       Block for details.
                     properties:
                       authenticationType:
-                        description: 'The type of client authentication used to connect
+                        description: 'Type of client authentication used to connect
                           to the Apache Kafka cluster. Valid values: IAM, NONE. A
                           value of NONE means that no client authentication is used.
                           The default value is NONE.'
@@ -3504,13 +3500,13 @@ spec:
                       cluster. See kafka_cluster_encryption_in_transit Block for details.
                     properties:
                       encryptionType:
-                        description: 'The type of encryption in transit to the Apache
+                        description: 'Type of encryption in transit to the Apache
                           Kafka cluster. Valid values: PLAINTEXT, TLS. The default
                           values is PLAINTEXT.'
                         type: string
                     type: object
                   kafkaconnectVersion:
-                    description: The version of Kafka Connect. It has to be compatible
+                    description: Version of Kafka Connect. It has to be compatible
                       with both the Apache Kafka cluster's version and the plugins.
                     type: string
                   logDelivery:
@@ -3518,10 +3514,9 @@ spec:
                       for details.
                     properties:
                       workerLogDelivery:
-                        description: The workers can send worker logs to different
-                          destination types. This configuration specifies the details
-                          of these destinations. See worker_log_delivery Block for
-                          details.
+                        description: Workers can send worker logs to different destination
+                          types. This configuration specifies the details of these
+                          destinations. See worker_log_delivery Block for details.
                         properties:
                           cloudwatchLogs:
                             description: Details about delivering logs to Amazon CloudWatch
@@ -3532,8 +3527,8 @@ spec:
                                   Logs is enabled.
                                 type: boolean
                               logGroup:
-                                description: The name of the CloudWatch log group
-                                  that is the destination for log delivery.
+                                description: Name of the CloudWatch log group that
+                                  is the destination for log delivery.
                                 type: string
                               logGroupRef:
                                 description: Reference to a Group in cloudwatchlogs
@@ -3617,9 +3612,8 @@ spec:
                               Data Firehose. See firehose Block for details.
                             properties:
                               deliveryStream:
-                                description: The name of the Kinesis Data Firehose
-                                  delivery stream that is the destination for log
-                                  delivery.
+                                description: Name of the Kinesis Data Firehose delivery
+                                  stream that is the destination for log delivery.
                                 type: string
                               deliveryStreamRef:
                                 description: Reference to a DeliveryStream in firehose
@@ -3698,8 +3692,8 @@ spec:
                                     type: object
                                 type: object
                               enabled:
-                                description: Specifies whether connector logs get
-                                  sent to the specified Amazon S3 destination.
+                                description: Whether connector logs get sent to the
+                                  specified Amazon S3 destination.
                                 type: boolean
                             type: object
                           s3:
@@ -3707,8 +3701,8 @@ spec:
                               See s3 Block for deetails.
                             properties:
                               bucket:
-                                description: The name of the S3 bucket that is the
-                                  destination for log delivery.
+                                description: Name of the S3 bucket that is the destination
+                                  for log delivery.
                                 type: string
                               bucketRef:
                                 description: Reference to a Bucket in s3 to populate
@@ -3787,19 +3781,19 @@ spec:
                                     type: object
                                 type: object
                               enabled:
-                                description: Specifies whether connector logs get
-                                  sent to the specified Amazon S3 destination.
+                                description: Whether connector logs get sent to the
+                                  specified Amazon S3 destination.
                                 type: boolean
                               prefix:
-                                description: The S3 prefix that is the destination
-                                  for log delivery.
+                                description: S3 prefix that is the destination for
+                                  log delivery.
                                 type: string
                             type: object
                         type: object
                     type: object
                   plugin:
-                    description: Specifies which plugins to use for the connector.
-                      See plugin Block for details.
+                    description: Plugins to use for the connector. See plugin Block
+                      for details.
                     items:
                       properties:
                         customPlugin:
@@ -3886,7 +3880,7 @@ spec:
                                   type: object
                               type: object
                             revision:
-                              description: The revision of the custom plugin.
+                              description: Revision of the custom plugin.
                               type: number
                           type: object
                       type: object
@@ -3979,8 +3973,8 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   workerConfiguration:
-                    description: Specifies which worker configuration to use with
-                      the connector. See worker_configuration Block for details.
+                    description: Worker configuration to use with the connector. See
+                      worker_configuration Block for details.
                     properties:
                       arn:
                         description: ARN of the worker configuration.
@@ -4062,7 +4056,7 @@ spec:
                             type: object
                         type: object
                       revision:
-                        description: The revision of the worker configuration.
+                        description: Revision of the worker configuration.
                         type: number
                     type: object
                 type: object
@@ -4200,34 +4194,33 @@ spec:
                           for the connector. See autoscaling Block for details.
                         properties:
                           maxWorkerCount:
-                            description: The maximum number of workers allocated to
-                              the connector.
+                            description: Maximum number of workers allocated to the
+                              connector.
                             type: number
                           mcuCount:
-                            description: 'The number of microcontroller units (MCUs)
-                              allocated to each connector worker. Valid values: 1,
-                              2, 4, 8. The default value is 1.'
+                            description: 'Number of microcontroller units (MCUs) allocated
+                              to each connector worker. Valid values: 1, 2, 4, 8.
+                              The default value is 1.'
                             type: number
                           minWorkerCount:
-                            description: The minimum number of workers allocated to
-                              the connector.
+                            description: Minimum number of workers allocated to the
+                              connector.
                             type: number
                           scaleInPolicy:
-                            description: The scale-in policy for the connector. See
-                              scale_in_policy Block for details.
+                            description: Scale-in policy for the connector. See scale_in_policy
+                              Block for details.
                             properties:
                               cpuUtilizationPercentage:
-                                description: Specifies the CPU utilization percentage
-                                  threshold at which you want connector scale in to
-                                  be triggered.
+                                description: CPU utilization percentage threshold
+                                  at which you want connector scale in to be triggered.
                                 type: number
                             type: object
                           scaleOutPolicy:
-                            description: The scale-out policy for the connector. See
-                              scale_out_policy Block for details.
+                            description: Scale-out policy for the connector. See scale_out_policy
+                              Block for details.
                             properties:
                               cpuUtilizationPercentage:
-                                description: The CPU utilization percentage threshold
+                                description: CPU utilization percentage threshold
                                   at which you want connector scale out to be triggered.
                                 type: number
                             type: object
@@ -4237,38 +4230,38 @@ spec:
                           connector. See provisioned_capacity Block for details.
                         properties:
                           mcuCount:
-                            description: 'The number of microcontroller units (MCUs)
-                              allocated to each connector worker. Valid values: 1,
-                              2, 4, 8. The default value is 1.'
+                            description: 'Number of microcontroller units (MCUs) allocated
+                              to each connector worker. Valid values: 1, 2, 4, 8.
+                              The default value is 1.'
                             type: number
                           workerCount:
-                            description: The number of workers that are allocated
-                              to the connector.
+                            description: Number of workers that are allocated to the
+                              connector.
                             type: number
                         type: object
                     type: object
                   connectorConfiguration:
                     additionalProperties:
                       type: string
-                    description: A map of keys to values that represent the configuration
+                    description: Map of keys to values that represent the configuration
                       for the connector.
                     type: object
                     x-kubernetes-map-type: granular
                   description:
-                    description: A summary description of the connector.
+                    description: Summary description of the connector.
                     type: string
                   id:
                     type: string
                   kafkaCluster:
-                    description: Specifies which Apache Kafka cluster to connect to.
-                      See kafka_cluster Block for details.
+                    description: Apache Kafka cluster to connect to. See kafka_cluster
+                      Block for details.
                     properties:
                       apacheKafkaCluster:
-                        description: The Apache Kafka cluster to which the connector
-                          is connected. See apache_kafka_cluster Block for details.
+                        description: Apache Kafka cluster to which the connector is
+                          connected. See apache_kafka_cluster Block for details.
                         properties:
                           bootstrapServers:
-                            description: The bootstrap servers of the cluster.
+                            description: Bootstrap servers of the cluster.
                             type: string
                           vpc:
                             description: Details of an Amazon VPC which has network
@@ -4276,13 +4269,13 @@ spec:
                               for details.
                             properties:
                               securityGroups:
-                                description: The security groups for the connector.
+                                description: Security groups for the connector.
                                 items:
                                   type: string
                                 type: array
                                 x-kubernetes-list-type: set
                               subnets:
-                                description: The subnets for the connector.
+                                description: Subnets for the connector.
                                 items:
                                   type: string
                                 type: array
@@ -4296,7 +4289,7 @@ spec:
                       Block for details.
                     properties:
                       authenticationType:
-                        description: 'The type of client authentication used to connect
+                        description: 'Type of client authentication used to connect
                           to the Apache Kafka cluster. Valid values: IAM, NONE. A
                           value of NONE means that no client authentication is used.
                           The default value is NONE.'
@@ -4307,13 +4300,13 @@ spec:
                       cluster. See kafka_cluster_encryption_in_transit Block for details.
                     properties:
                       encryptionType:
-                        description: 'The type of encryption in transit to the Apache
+                        description: 'Type of encryption in transit to the Apache
                           Kafka cluster. Valid values: PLAINTEXT, TLS. The default
                           values is PLAINTEXT.'
                         type: string
                     type: object
                   kafkaconnectVersion:
-                    description: The version of Kafka Connect. It has to be compatible
+                    description: Version of Kafka Connect. It has to be compatible
                       with both the Apache Kafka cluster's version and the plugins.
                     type: string
                   logDelivery:
@@ -4321,10 +4314,9 @@ spec:
                       for details.
                     properties:
                       workerLogDelivery:
-                        description: The workers can send worker logs to different
-                          destination types. This configuration specifies the details
-                          of these destinations. See worker_log_delivery Block for
-                          details.
+                        description: Workers can send worker logs to different destination
+                          types. This configuration specifies the details of these
+                          destinations. See worker_log_delivery Block for details.
                         properties:
                           cloudwatchLogs:
                             description: Details about delivering logs to Amazon CloudWatch
@@ -4335,8 +4327,8 @@ spec:
                                   Logs is enabled.
                                 type: boolean
                               logGroup:
-                                description: The name of the CloudWatch log group
-                                  that is the destination for log delivery.
+                                description: Name of the CloudWatch log group that
+                                  is the destination for log delivery.
                                 type: string
                             type: object
                           firehose:
@@ -4344,13 +4336,12 @@ spec:
                               Data Firehose. See firehose Block for details.
                             properties:
                               deliveryStream:
-                                description: The name of the Kinesis Data Firehose
-                                  delivery stream that is the destination for log
-                                  delivery.
+                                description: Name of the Kinesis Data Firehose delivery
+                                  stream that is the destination for log delivery.
                                 type: string
                               enabled:
-                                description: Specifies whether connector logs get
-                                  sent to the specified Amazon S3 destination.
+                                description: Whether connector logs get sent to the
+                                  specified Amazon S3 destination.
                                 type: boolean
                             type: object
                           s3:
@@ -4358,26 +4349,26 @@ spec:
                               See s3 Block for deetails.
                             properties:
                               bucket:
-                                description: The name of the S3 bucket that is the
-                                  destination for log delivery.
+                                description: Name of the S3 bucket that is the destination
+                                  for log delivery.
                                 type: string
                               enabled:
-                                description: Specifies whether connector logs get
-                                  sent to the specified Amazon S3 destination.
+                                description: Whether connector logs get sent to the
+                                  specified Amazon S3 destination.
                                 type: boolean
                               prefix:
-                                description: The S3 prefix that is the destination
-                                  for log delivery.
+                                description: S3 prefix that is the destination for
+                                  log delivery.
                                 type: string
                             type: object
                         type: object
                     type: object
                   name:
-                    description: The name of the connector.
+                    description: Name of the connector.
                     type: string
                   plugin:
-                    description: Specifies which plugins to use for the connector.
-                      See plugin Block for details.
+                    description: Plugins to use for the connector. See plugin Block
+                      for details.
                     items:
                       properties:
                         customPlugin:
@@ -4388,7 +4379,7 @@ spec:
                               description: ARN of the custom plugin.
                               type: string
                             revision:
-                              description: The revision of the custom plugin.
+                              description: Revision of the custom plugin.
                               type: number
                           type: object
                       type: object
@@ -4414,23 +4405,22 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
                   version:
-                    description: The current version of the connector.
+                    description: Current version of the connector.
                     type: string
                   workerConfiguration:
-                    description: Specifies which worker configuration to use with
-                      the connector. See worker_configuration Block for details.
+                    description: Worker configuration to use with the connector. See
+                      worker_configuration Block for details.
                     properties:
                       arn:
                         description: ARN of the worker configuration.
                         type: string
                       revision:
-                        description: The revision of the worker configuration.
+                        description: Revision of the worker configuration.
                         type: number
                     type: object
                 type: object

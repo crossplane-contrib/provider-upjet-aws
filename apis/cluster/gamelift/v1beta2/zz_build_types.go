@@ -57,7 +57,7 @@ type BuildObservation struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
@@ -121,7 +121,7 @@ type StorageLocationInitParameters struct {
 	// +kubebuilder:validation:Optional
 	KeySelector *v2.Selector `json:"keySelector,omitempty" tf:"-"`
 
-	// A specific version of the file. If not set, the latest version of the file is retrieved.
+	// Specific version of the file. If not set, the latest version of the file is retrieved.
 	ObjectVersion *string `json:"objectVersion,omitempty" tf:"object_version,omitempty"`
 
 	// ARN of the access role that allows Amazon GameLift to access your S3 bucket.
@@ -146,7 +146,7 @@ type StorageLocationObservation struct {
 	// Name of the zip file containing your build files.
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
-	// A specific version of the file. If not set, the latest version of the file is retrieved.
+	// Specific version of the file. If not set, the latest version of the file is retrieved.
 	ObjectVersion *string `json:"objectVersion,omitempty" tf:"object_version,omitempty"`
 
 	// ARN of the access role that allows Amazon GameLift to access your S3 bucket.
@@ -182,7 +182,7 @@ type StorageLocationParameters struct {
 	// +kubebuilder:validation:Optional
 	KeySelector *v2.Selector `json:"keySelector,omitempty" tf:"-"`
 
-	// A specific version of the file. If not set, the latest version of the file is retrieved.
+	// Specific version of the file. If not set, the latest version of the file is retrieved.
 	// +kubebuilder:validation:Optional
 	ObjectVersion *string `json:"objectVersion,omitempty" tf:"object_version,omitempty"`
 

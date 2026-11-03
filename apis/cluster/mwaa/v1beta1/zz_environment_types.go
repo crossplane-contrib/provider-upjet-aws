@@ -15,7 +15,7 @@ import (
 
 type DagProcessingLogsInitParameters struct {
 
-	// Enabling or disabling the collection of logs
+	// Whether to enable the collection of logs.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// Logging level. Valid values: CRITICAL, ERROR, WARNING, INFO, DEBUG. Will be INFO by default.
@@ -24,10 +24,10 @@ type DagProcessingLogsInitParameters struct {
 
 type DagProcessingLogsObservation struct {
 
-	// Provides the ARN for the CloudWatch group where the logs will be published
+	// (Read-Only) ARN of the CloudWatch Logs log group where the logs are published.
 	CloudWatchLogGroupArn *string `json:"cloudWatchLogGroupArn,omitempty" tf:"cloud_watch_log_group_arn,omitempty"`
 
-	// Enabling or disabling the collection of logs
+	// Whether to enable the collection of logs.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// Logging level. Valid values: CRITICAL, ERROR, WARNING, INFO, DEBUG. Will be INFO by default.
@@ -36,7 +36,7 @@ type DagProcessingLogsObservation struct {
 
 type DagProcessingLogsParameters struct {
 
-	// Enabling or disabling the collection of logs
+	// Whether to enable the collection of logs.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
@@ -51,10 +51,10 @@ type EnvironmentInitParameters struct {
 	// Airflow version of your environment, will be set by default to the latest version that MWAA supports.
 	AirflowVersion *string `json:"airflowVersion,omitempty" tf:"airflow_version,omitempty"`
 
-	// The relative path to the DAG folder on your Amazon S3 storage bucket. For example, dags. For more information, see Importing DAGs on Amazon MWAA.
+	// Relative path to the DAG folder on your Amazon S3 storage bucket. For example, dags. For more information, see Importing DAGs on Amazon MWAA.
 	DagS3Path *string `json:"dagS3Path,omitempty" tf:"dag_s3_path,omitempty"`
 
-	// Defines whether the VPC endpoints configured for the environment are created and managed by the customer or by AWS. If set to SERVICE, Amazon MWAA will create and manage the required VPC endpoints in your VPC. If set to CUSTOMER, you must create, and manage, the VPC endpoints for your VPC. Defaults to SERVICE if not set.
+	// Whether the VPC endpoints configured for the environment are created and managed by the customer or by AWS. If set to SERVICE, Amazon MWAA will create and manage the required VPC endpoints in your VPC. If set to CUSTOMER, you must create, and manage, the VPC endpoints for your VPC. Defaults to SERVICE if not set.
 	EndpointManagement *string `json:"endpointManagement,omitempty" tf:"endpoint_management,omitempty"`
 
 	// Environment class for the cluster. Possible options are mw1.micro, mw1.small, mw1.medium, mw1.large. Will be set by default to mw1.small. Please check the AWS Pricing for more information about the environment classes.
@@ -85,37 +85,37 @@ type EnvironmentInitParameters struct {
 	// +kubebuilder:validation:Optional
 	KMSKeySelector *v2.Selector `json:"kmsKeySelector,omitempty" tf:"-"`
 
-	// The Apache Airflow logs you want to send to Amazon CloudWatch Logs. See logging_configuration Block for details.
+	// Apache Airflow logs you want to send to Amazon CloudWatch Logs. See logging_configuration Block for details.
 	LoggingConfiguration *LoggingConfigurationInitParameters `json:"loggingConfiguration,omitempty" tf:"logging_configuration,omitempty"`
 
-	// The maximum number of web servers that you want to run in your environment. Value need to be between 2 and 5 if environment_class is not mw1.micro, 1 otherwise.
+	// Maximum number of web servers that you want to run in your environment. Value need to be between 2 and 5 if environment_class is not mw1.micro, 1 otherwise.
 	MaxWebservers *float64 `json:"maxWebservers,omitempty" tf:"max_webservers,omitempty"`
 
-	// The maximum number of workers that can be automatically scaled up. Value need to be between 1 and 25. Will be 10 by default.
+	// Maximum number of workers that can be automatically scaled up. Value need to be between 1 and 25. Will be 10 by default.
 	MaxWorkers *float64 `json:"maxWorkers,omitempty" tf:"max_workers,omitempty"`
 
-	// The minimum number of web servers that you want to run in your environment. Value need to be between 2 and 5 if environment_class is not mw1.micro, 1 otherwise.
+	// Minimum number of web servers that you want to run in your environment. Value need to be between 2 and 5 if environment_class is not mw1.micro, 1 otherwise.
 	MinWebservers *float64 `json:"minWebservers,omitempty" tf:"min_webservers,omitempty"`
 
-	// The minimum number of workers that you want to run in your environment. Will be 1 by default.
+	// Minimum number of workers that you want to run in your environment. Will be 1 by default.
 	MinWorkers *float64 `json:"minWorkers,omitempty" tf:"min_workers,omitempty"`
 
-	// Specifies the network configuration for your Apache Airflow Environment. This includes two private subnets as well as security groups for the Airflow environment. Each subnet requires internet connection, otherwise the deployment will fail. See network_configuration Block for details.
+	// Network configuration for your Apache Airflow Environment. This includes two private subnets as well as security groups for the Airflow environment. Each subnet requires internet connection, otherwise the deployment will fail. See network_configuration Block for details.
 	NetworkConfiguration *NetworkConfigurationInitParameters `json:"networkConfiguration,omitempty" tf:"network_configuration,omitempty"`
 
-	// The plugins.zip file version you want to use.
+	// Version of the plugins.zip file you want to use.
 	PluginsS3ObjectVersion *string `json:"pluginsS3ObjectVersion,omitempty" tf:"plugins_s3_object_version,omitempty"`
 
-	// The relative path to the plugins.zip file on your Amazon S3 storage bucket. For example, plugins.zip. If a relative path is provided in the request, then plugins_s3_object_version is required. For more information, see Importing DAGs on Amazon MWAA.
+	// Relative path to the plugins.zip file on your Amazon S3 storage bucket. For example, plugins.zip. If a relative path is provided in the request, then plugins_s3_object_version is required. For more information, see Importing DAGs on Amazon MWAA.
 	PluginsS3Path *string `json:"pluginsS3Path,omitempty" tf:"plugins_s3_path,omitempty"`
 
-	// The requirements.txt file version you want to use.
+	// Version of the requirements.txt file you want to use.
 	RequirementsS3ObjectVersion *string `json:"requirementsS3ObjectVersion,omitempty" tf:"requirements_s3_object_version,omitempty"`
 
-	// The relative path to the requirements.txt file on your Amazon S3 storage bucket. For example, requirements.txt. If a relative path is provided in the request, then requirements_s3_object_version is required. For more information, see Importing DAGs on Amazon MWAA.
+	// Relative path to the requirements.txt file on your Amazon S3 storage bucket. For example, requirements.txt. If a relative path is provided in the request, then requirements_s3_object_version is required. For more information, see Importing DAGs on Amazon MWAA.
 	RequirementsS3Path *string `json:"requirementsS3Path,omitempty" tf:"requirements_s3_path,omitempty"`
 
-	// The number of schedulers that you want to run in your environment. v2.0.2 and above accepts 2 - 5, default 2. v1.10.12 accepts 1.
+	// Number of schedulers that you want to run in your environment. v2.0.2 and above accepts 2 - 5, default 2. v1.10.12 accepts 1.
 	Schedulers *float64 `json:"schedulers,omitempty" tf:"schedulers,omitempty"`
 
 	// ARN of your Amazon S3 storage bucket. For example, arn:aws:s3:::airflow-mybucketname.
@@ -131,20 +131,20 @@ type EnvironmentInitParameters struct {
 	// +kubebuilder:validation:Optional
 	SourceBucketArnSelector *v2.Selector `json:"sourceBucketArnSelector,omitempty" tf:"-"`
 
-	// The version of the startup shell script you want to use. You must specify the version ID that Amazon S3 assigns to the file every time you update the script.
+	// Version of the startup shell script you want to use. You must specify the version ID that Amazon S3 assigns to the file every time you update the script.
 	StartupScriptS3ObjectVersion *string `json:"startupScriptS3ObjectVersion,omitempty" tf:"startup_script_s3_object_version,omitempty"`
 
-	// The relative path to the script hosted in your bucket. The script runs as your environment starts before starting the Apache Airflow process. Use this script to install dependencies, modify configuration options, and set environment variables. See Using a startup script. Supported for environment versions 2.x and later.
+	// Relative path to the script hosted in your bucket. The script runs as your environment starts before starting the Apache Airflow process. Use this script to install dependencies, modify configuration options, and set environment variables. See Using a startup script. Supported for environment versions 2.x and later.
 	StartupScriptS3Path *string `json:"startupScriptS3Path,omitempty" tf:"startup_script_s3_path,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Specifies whether the webserver should be accessible over the internet or via your specified VPC. Possible options: PRIVATE_ONLY (default), PUBLIC_ONLY and PUBLIC_AND_PRIVATE.
+	// Whether the webserver should be accessible over the internet or via your specified VPC. Possible options: PRIVATE_ONLY (default), PUBLIC_ONLY and PUBLIC_AND_PRIVATE.
 	WebserverAccessMode *string `json:"webserverAccessMode,omitempty" tf:"webserver_access_mode,omitempty"`
 
-	// Specifies the start date for the weekly maintenance window.
+	// Start date for the weekly maintenance window.
 	WeeklyMaintenanceWindowStart *string `json:"weeklyMaintenanceWindowStart,omitempty" tf:"weekly_maintenance_window_start,omitempty"`
 
 	// Worker replacement strategy. Valid values: FORCED, GRACEFUL.
@@ -156,19 +156,19 @@ type EnvironmentObservation struct {
 	// Airflow version of your environment, will be set by default to the latest version that MWAA supports.
 	AirflowVersion *string `json:"airflowVersion,omitempty" tf:"airflow_version,omitempty"`
 
-	// The ARN of the MWAA Environment
+	// ARN of the MWAA Environment.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The Created At date of the MWAA Environment
+	// Created At date of the MWAA Environment.
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
-	// The relative path to the DAG folder on your Amazon S3 storage bucket. For example, dags. For more information, see Importing DAGs on Amazon MWAA.
+	// Relative path to the DAG folder on your Amazon S3 storage bucket. For example, dags. For more information, see Importing DAGs on Amazon MWAA.
 	DagS3Path *string `json:"dagS3Path,omitempty" tf:"dag_s3_path,omitempty"`
 
-	// The VPC endpoint for the environment's Amazon RDS database
+	// VPC endpoint for the environment's Amazon RDS database.
 	DatabaseVPCEndpointService *string `json:"databaseVpcEndpointService,omitempty" tf:"database_vpc_endpoint_service,omitempty"`
 
-	// Defines whether the VPC endpoints configured for the environment are created and managed by the customer or by AWS. If set to SERVICE, Amazon MWAA will create and manage the required VPC endpoints in your VPC. If set to CUSTOMER, you must create, and manage, the VPC endpoints for your VPC. Defaults to SERVICE if not set.
+	// Whether the VPC endpoints configured for the environment are created and managed by the customer or by AWS. If set to SERVICE, Amazon MWAA will create and manage the required VPC endpoints in your VPC. If set to CUSTOMER, you must create, and manage, the VPC endpoints for your VPC. Defaults to SERVICE if not set.
 	EndpointManagement *string `json:"endpointManagement,omitempty" tf:"endpoint_management,omitempty"`
 
 	// Environment class for the cluster. Possible options are mw1.micro, mw1.small, mw1.medium, mw1.large. Will be set by default to mw1.small. Please check the AWS Pricing for more information about the environment classes.
@@ -182,78 +182,79 @@ type EnvironmentObservation struct {
 	// ARN of your KMS key that you want to use for encryption. Will be set to the ARN of the managed KMS key aws/airflow by default. Please check the Official Documentation for more information.
 	KMSKey *string `json:"kmsKey,omitempty" tf:"kms_key,omitempty"`
 
+	// Information about the last update of the environment. See last_updated Block for details.
 	LastUpdated []LastUpdatedObservation `json:"lastUpdated,omitempty" tf:"last_updated,omitempty"`
 
-	// The Apache Airflow logs you want to send to Amazon CloudWatch Logs. See logging_configuration Block for details.
+	// Apache Airflow logs you want to send to Amazon CloudWatch Logs. See logging_configuration Block for details.
 	LoggingConfiguration *LoggingConfigurationObservation `json:"loggingConfiguration,omitempty" tf:"logging_configuration,omitempty"`
 
-	// The maximum number of web servers that you want to run in your environment. Value need to be between 2 and 5 if environment_class is not mw1.micro, 1 otherwise.
+	// Maximum number of web servers that you want to run in your environment. Value need to be between 2 and 5 if environment_class is not mw1.micro, 1 otherwise.
 	MaxWebservers *float64 `json:"maxWebservers,omitempty" tf:"max_webservers,omitempty"`
 
-	// The maximum number of workers that can be automatically scaled up. Value need to be between 1 and 25. Will be 10 by default.
+	// Maximum number of workers that can be automatically scaled up. Value need to be between 1 and 25. Will be 10 by default.
 	MaxWorkers *float64 `json:"maxWorkers,omitempty" tf:"max_workers,omitempty"`
 
-	// The minimum number of web servers that you want to run in your environment. Value need to be between 2 and 5 if environment_class is not mw1.micro, 1 otherwise.
+	// Minimum number of web servers that you want to run in your environment. Value need to be between 2 and 5 if environment_class is not mw1.micro, 1 otherwise.
 	MinWebservers *float64 `json:"minWebservers,omitempty" tf:"min_webservers,omitempty"`
 
-	// The minimum number of workers that you want to run in your environment. Will be 1 by default.
+	// Minimum number of workers that you want to run in your environment. Will be 1 by default.
 	MinWorkers *float64 `json:"minWorkers,omitempty" tf:"min_workers,omitempty"`
 
-	// Specifies the network configuration for your Apache Airflow Environment. This includes two private subnets as well as security groups for the Airflow environment. Each subnet requires internet connection, otherwise the deployment will fail. See network_configuration Block for details.
+	// Network configuration for your Apache Airflow Environment. This includes two private subnets as well as security groups for the Airflow environment. Each subnet requires internet connection, otherwise the deployment will fail. See network_configuration Block for details.
 	NetworkConfiguration *NetworkConfigurationObservation `json:"networkConfiguration,omitempty" tf:"network_configuration,omitempty"`
 
-	// The plugins.zip file version you want to use.
+	// Version of the plugins.zip file you want to use.
 	PluginsS3ObjectVersion *string `json:"pluginsS3ObjectVersion,omitempty" tf:"plugins_s3_object_version,omitempty"`
 
-	// The relative path to the plugins.zip file on your Amazon S3 storage bucket. For example, plugins.zip. If a relative path is provided in the request, then plugins_s3_object_version is required. For more information, see Importing DAGs on Amazon MWAA.
+	// Relative path to the plugins.zip file on your Amazon S3 storage bucket. For example, plugins.zip. If a relative path is provided in the request, then plugins_s3_object_version is required. For more information, see Importing DAGs on Amazon MWAA.
 	PluginsS3Path *string `json:"pluginsS3Path,omitempty" tf:"plugins_s3_path,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The requirements.txt file version you want to use.
+	// Version of the requirements.txt file you want to use.
 	RequirementsS3ObjectVersion *string `json:"requirementsS3ObjectVersion,omitempty" tf:"requirements_s3_object_version,omitempty"`
 
-	// The relative path to the requirements.txt file on your Amazon S3 storage bucket. For example, requirements.txt. If a relative path is provided in the request, then requirements_s3_object_version is required. For more information, see Importing DAGs on Amazon MWAA.
+	// Relative path to the requirements.txt file on your Amazon S3 storage bucket. For example, requirements.txt. If a relative path is provided in the request, then requirements_s3_object_version is required. For more information, see Importing DAGs on Amazon MWAA.
 	RequirementsS3Path *string `json:"requirementsS3Path,omitempty" tf:"requirements_s3_path,omitempty"`
 
-	// The number of schedulers that you want to run in your environment. v2.0.2 and above accepts 2 - 5, default 2. v1.10.12 accepts 1.
+	// Number of schedulers that you want to run in your environment. v2.0.2 and above accepts 2 - 5, default 2. v1.10.12 accepts 1.
 	Schedulers *float64 `json:"schedulers,omitempty" tf:"schedulers,omitempty"`
 
-	// The Service Role ARN of the Amazon MWAA Environment
+	// Service Role ARN of the Amazon MWAA Environment.
 	ServiceRoleArn *string `json:"serviceRoleArn,omitempty" tf:"service_role_arn,omitempty"`
 
 	// ARN of your Amazon S3 storage bucket. For example, arn:aws:s3:::airflow-mybucketname.
 	SourceBucketArn *string `json:"sourceBucketArn,omitempty" tf:"source_bucket_arn,omitempty"`
 
-	// The version of the startup shell script you want to use. You must specify the version ID that Amazon S3 assigns to the file every time you update the script.
+	// Version of the startup shell script you want to use. You must specify the version ID that Amazon S3 assigns to the file every time you update the script.
 	StartupScriptS3ObjectVersion *string `json:"startupScriptS3ObjectVersion,omitempty" tf:"startup_script_s3_object_version,omitempty"`
 
-	// The relative path to the script hosted in your bucket. The script runs as your environment starts before starting the Apache Airflow process. Use this script to install dependencies, modify configuration options, and set environment variables. See Using a startup script. Supported for environment versions 2.x and later.
+	// Relative path to the script hosted in your bucket. The script runs as your environment starts before starting the Apache Airflow process. Use this script to install dependencies, modify configuration options, and set environment variables. See Using a startup script. Supported for environment versions 2.x and later.
 	StartupScriptS3Path *string `json:"startupScriptS3Path,omitempty" tf:"startup_script_s3_path,omitempty"`
 
-	// The status of the Amazon MWAA Environment
+	// Status of the Amazon MWAA Environment.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// Specifies whether the webserver should be accessible over the internet or via your specified VPC. Possible options: PRIVATE_ONLY (default), PUBLIC_ONLY and PUBLIC_AND_PRIVATE.
+	// Whether the webserver should be accessible over the internet or via your specified VPC. Possible options: PRIVATE_ONLY (default), PUBLIC_ONLY and PUBLIC_AND_PRIVATE.
 	WebserverAccessMode *string `json:"webserverAccessMode,omitempty" tf:"webserver_access_mode,omitempty"`
 
-	// The webserver URL of the MWAA Environment
+	// Webserver URL of the MWAA Environment.
 	WebserverURL *string `json:"webserverUrl,omitempty" tf:"webserver_url,omitempty"`
 
-	// The VPC endpoint for the environment's web server
+	// VPC endpoint for the environment's web server.
 	WebserverVPCEndpointService *string `json:"webserverVpcEndpointService,omitempty" tf:"webserver_vpc_endpoint_service,omitempty"`
 
-	// Specifies the start date for the weekly maintenance window.
+	// Start date for the weekly maintenance window.
 	WeeklyMaintenanceWindowStart *string `json:"weeklyMaintenanceWindowStart,omitempty" tf:"weekly_maintenance_window_start,omitempty"`
 
 	// Worker replacement strategy. Valid values: FORCED, GRACEFUL.
@@ -262,7 +263,7 @@ type EnvironmentObservation struct {
 
 type EnvironmentParameters struct {
 
-	// The airflow_configuration_options parameter specifies airflow override options. Check the Official documentation for all possible configuration options.
+	// Airflow override options. Check the Official documentation for all possible configuration options.
 	// +kubebuilder:validation:Optional
 	AirflowConfigurationOptionsSecretRef *v2.SecretReference `json:"airflowConfigurationOptionsSecretRef,omitempty" tf:"-"`
 
@@ -270,11 +271,11 @@ type EnvironmentParameters struct {
 	// +kubebuilder:validation:Optional
 	AirflowVersion *string `json:"airflowVersion,omitempty" tf:"airflow_version,omitempty"`
 
-	// The relative path to the DAG folder on your Amazon S3 storage bucket. For example, dags. For more information, see Importing DAGs on Amazon MWAA.
+	// Relative path to the DAG folder on your Amazon S3 storage bucket. For example, dags. For more information, see Importing DAGs on Amazon MWAA.
 	// +kubebuilder:validation:Optional
 	DagS3Path *string `json:"dagS3Path,omitempty" tf:"dag_s3_path,omitempty"`
 
-	// Defines whether the VPC endpoints configured for the environment are created and managed by the customer or by AWS. If set to SERVICE, Amazon MWAA will create and manage the required VPC endpoints in your VPC. If set to CUSTOMER, you must create, and manage, the VPC endpoints for your VPC. Defaults to SERVICE if not set.
+	// Whether the VPC endpoints configured for the environment are created and managed by the customer or by AWS. If set to SERVICE, Amazon MWAA will create and manage the required VPC endpoints in your VPC. If set to CUSTOMER, you must create, and manage, the VPC endpoints for your VPC. Defaults to SERVICE if not set.
 	// +kubebuilder:validation:Optional
 	EndpointManagement *string `json:"endpointManagement,omitempty" tf:"endpoint_management,omitempty"`
 
@@ -309,35 +310,35 @@ type EnvironmentParameters struct {
 	// +kubebuilder:validation:Optional
 	KMSKeySelector *v2.Selector `json:"kmsKeySelector,omitempty" tf:"-"`
 
-	// The Apache Airflow logs you want to send to Amazon CloudWatch Logs. See logging_configuration Block for details.
+	// Apache Airflow logs you want to send to Amazon CloudWatch Logs. See logging_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	LoggingConfiguration *LoggingConfigurationParameters `json:"loggingConfiguration,omitempty" tf:"logging_configuration,omitempty"`
 
-	// The maximum number of web servers that you want to run in your environment. Value need to be between 2 and 5 if environment_class is not mw1.micro, 1 otherwise.
+	// Maximum number of web servers that you want to run in your environment. Value need to be between 2 and 5 if environment_class is not mw1.micro, 1 otherwise.
 	// +kubebuilder:validation:Optional
 	MaxWebservers *float64 `json:"maxWebservers,omitempty" tf:"max_webservers,omitempty"`
 
-	// The maximum number of workers that can be automatically scaled up. Value need to be between 1 and 25. Will be 10 by default.
+	// Maximum number of workers that can be automatically scaled up. Value need to be between 1 and 25. Will be 10 by default.
 	// +kubebuilder:validation:Optional
 	MaxWorkers *float64 `json:"maxWorkers,omitempty" tf:"max_workers,omitempty"`
 
-	// The minimum number of web servers that you want to run in your environment. Value need to be between 2 and 5 if environment_class is not mw1.micro, 1 otherwise.
+	// Minimum number of web servers that you want to run in your environment. Value need to be between 2 and 5 if environment_class is not mw1.micro, 1 otherwise.
 	// +kubebuilder:validation:Optional
 	MinWebservers *float64 `json:"minWebservers,omitempty" tf:"min_webservers,omitempty"`
 
-	// The minimum number of workers that you want to run in your environment. Will be 1 by default.
+	// Minimum number of workers that you want to run in your environment. Will be 1 by default.
 	// +kubebuilder:validation:Optional
 	MinWorkers *float64 `json:"minWorkers,omitempty" tf:"min_workers,omitempty"`
 
-	// Specifies the network configuration for your Apache Airflow Environment. This includes two private subnets as well as security groups for the Airflow environment. Each subnet requires internet connection, otherwise the deployment will fail. See network_configuration Block for details.
+	// Network configuration for your Apache Airflow Environment. This includes two private subnets as well as security groups for the Airflow environment. Each subnet requires internet connection, otherwise the deployment will fail. See network_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	NetworkConfiguration *NetworkConfigurationParameters `json:"networkConfiguration,omitempty" tf:"network_configuration,omitempty"`
 
-	// The plugins.zip file version you want to use.
+	// Version of the plugins.zip file you want to use.
 	// +kubebuilder:validation:Optional
 	PluginsS3ObjectVersion *string `json:"pluginsS3ObjectVersion,omitempty" tf:"plugins_s3_object_version,omitempty"`
 
-	// The relative path to the plugins.zip file on your Amazon S3 storage bucket. For example, plugins.zip. If a relative path is provided in the request, then plugins_s3_object_version is required. For more information, see Importing DAGs on Amazon MWAA.
+	// Relative path to the plugins.zip file on your Amazon S3 storage bucket. For example, plugins.zip. If a relative path is provided in the request, then plugins_s3_object_version is required. For more information, see Importing DAGs on Amazon MWAA.
 	// +kubebuilder:validation:Optional
 	PluginsS3Path *string `json:"pluginsS3Path,omitempty" tf:"plugins_s3_path,omitempty"`
 
@@ -346,15 +347,15 @@ type EnvironmentParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// The requirements.txt file version you want to use.
+	// Version of the requirements.txt file you want to use.
 	// +kubebuilder:validation:Optional
 	RequirementsS3ObjectVersion *string `json:"requirementsS3ObjectVersion,omitempty" tf:"requirements_s3_object_version,omitempty"`
 
-	// The relative path to the requirements.txt file on your Amazon S3 storage bucket. For example, requirements.txt. If a relative path is provided in the request, then requirements_s3_object_version is required. For more information, see Importing DAGs on Amazon MWAA.
+	// Relative path to the requirements.txt file on your Amazon S3 storage bucket. For example, requirements.txt. If a relative path is provided in the request, then requirements_s3_object_version is required. For more information, see Importing DAGs on Amazon MWAA.
 	// +kubebuilder:validation:Optional
 	RequirementsS3Path *string `json:"requirementsS3Path,omitempty" tf:"requirements_s3_path,omitempty"`
 
-	// The number of schedulers that you want to run in your environment. v2.0.2 and above accepts 2 - 5, default 2. v1.10.12 accepts 1.
+	// Number of schedulers that you want to run in your environment. v2.0.2 and above accepts 2 - 5, default 2. v1.10.12 accepts 1.
 	// +kubebuilder:validation:Optional
 	Schedulers *float64 `json:"schedulers,omitempty" tf:"schedulers,omitempty"`
 
@@ -372,11 +373,11 @@ type EnvironmentParameters struct {
 	// +kubebuilder:validation:Optional
 	SourceBucketArnSelector *v2.Selector `json:"sourceBucketArnSelector,omitempty" tf:"-"`
 
-	// The version of the startup shell script you want to use. You must specify the version ID that Amazon S3 assigns to the file every time you update the script.
+	// Version of the startup shell script you want to use. You must specify the version ID that Amazon S3 assigns to the file every time you update the script.
 	// +kubebuilder:validation:Optional
 	StartupScriptS3ObjectVersion *string `json:"startupScriptS3ObjectVersion,omitempty" tf:"startup_script_s3_object_version,omitempty"`
 
-	// The relative path to the script hosted in your bucket. The script runs as your environment starts before starting the Apache Airflow process. Use this script to install dependencies, modify configuration options, and set environment variables. See Using a startup script. Supported for environment versions 2.x and later.
+	// Relative path to the script hosted in your bucket. The script runs as your environment starts before starting the Apache Airflow process. Use this script to install dependencies, modify configuration options, and set environment variables. See Using a startup script. Supported for environment versions 2.x and later.
 	// +kubebuilder:validation:Optional
 	StartupScriptS3Path *string `json:"startupScriptS3Path,omitempty" tf:"startup_script_s3_path,omitempty"`
 
@@ -385,11 +386,11 @@ type EnvironmentParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Specifies whether the webserver should be accessible over the internet or via your specified VPC. Possible options: PRIVATE_ONLY (default), PUBLIC_ONLY and PUBLIC_AND_PRIVATE.
+	// Whether the webserver should be accessible over the internet or via your specified VPC. Possible options: PRIVATE_ONLY (default), PUBLIC_ONLY and PUBLIC_AND_PRIVATE.
 	// +kubebuilder:validation:Optional
 	WebserverAccessMode *string `json:"webserverAccessMode,omitempty" tf:"webserver_access_mode,omitempty"`
 
-	// Specifies the start date for the weekly maintenance window.
+	// Start date for the weekly maintenance window.
 	// +kubebuilder:validation:Optional
 	WeeklyMaintenanceWindowStart *string `json:"weeklyMaintenanceWindowStart,omitempty" tf:"weekly_maintenance_window_start,omitempty"`
 
@@ -402,8 +403,11 @@ type ErrorInitParameters struct {
 }
 
 type ErrorObservation struct {
+
+	// Error code of the last update error.
 	ErrorCode *string `json:"errorCode,omitempty" tf:"error_code,omitempty"`
 
+	// Error message of the last update error.
 	ErrorMessage *string `json:"errorMessage,omitempty" tf:"error_message,omitempty"`
 }
 
@@ -415,12 +419,13 @@ type LastUpdatedInitParameters struct {
 
 type LastUpdatedObservation struct {
 
-	// The Created At date of the MWAA Environment
+	// Date and time the environment was last updated.
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
+	// Error that occurred during the last update, if any. See last_updated.error Block for details.
 	Error []ErrorObservation `json:"error,omitempty" tf:"error,omitempty"`
 
-	// The status of the Amazon MWAA Environment
+	// Status of the last update.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
 
@@ -429,59 +434,59 @@ type LastUpdatedParameters struct {
 
 type LoggingConfigurationInitParameters struct {
 
-	// Log configuration options for processing DAGs. See Module logging configuration for more information. Disabled by default.
+	// Log configuration options for processing DAGs. See Module logging configuration blocks for details. Disabled by default.
 	DagProcessingLogs *DagProcessingLogsInitParameters `json:"dagProcessingLogs,omitempty" tf:"dag_processing_logs,omitempty"`
 
-	// Log configuration options for the schedulers. See Module logging configuration for more information. Disabled by default.
+	// Log configuration options for the schedulers. See Module logging configuration blocks for details. Disabled by default.
 	SchedulerLogs *SchedulerLogsInitParameters `json:"schedulerLogs,omitempty" tf:"scheduler_logs,omitempty"`
 
-	// Log configuration options for DAG tasks. See Module logging configuration for more information. Enabled by default with INFO log level.
+	// Log configuration options for DAG tasks. See Module logging configuration blocks for details. Enabled by default with INFO log level.
 	TaskLogs *TaskLogsInitParameters `json:"taskLogs,omitempty" tf:"task_logs,omitempty"`
 
-	// Log configuration options for the webservers. See Module logging configuration for more information. Disabled by default.
+	// Log configuration options for the webservers. See Module logging configuration blocks for details. Disabled by default.
 	WebserverLogs *WebserverLogsInitParameters `json:"webserverLogs,omitempty" tf:"webserver_logs,omitempty"`
 
-	// Log configuration options for the workers. See Module logging configuration for more information. Disabled by default.
+	// Log configuration options for the workers. See Module logging configuration blocks for details. Disabled by default.
 	WorkerLogs *WorkerLogsInitParameters `json:"workerLogs,omitempty" tf:"worker_logs,omitempty"`
 }
 
 type LoggingConfigurationObservation struct {
 
-	// Log configuration options for processing DAGs. See Module logging configuration for more information. Disabled by default.
+	// Log configuration options for processing DAGs. See Module logging configuration blocks for details. Disabled by default.
 	DagProcessingLogs *DagProcessingLogsObservation `json:"dagProcessingLogs,omitempty" tf:"dag_processing_logs,omitempty"`
 
-	// Log configuration options for the schedulers. See Module logging configuration for more information. Disabled by default.
+	// Log configuration options for the schedulers. See Module logging configuration blocks for details. Disabled by default.
 	SchedulerLogs *SchedulerLogsObservation `json:"schedulerLogs,omitempty" tf:"scheduler_logs,omitempty"`
 
-	// Log configuration options for DAG tasks. See Module logging configuration for more information. Enabled by default with INFO log level.
+	// Log configuration options for DAG tasks. See Module logging configuration blocks for details. Enabled by default with INFO log level.
 	TaskLogs *TaskLogsObservation `json:"taskLogs,omitempty" tf:"task_logs,omitempty"`
 
-	// Log configuration options for the webservers. See Module logging configuration for more information. Disabled by default.
+	// Log configuration options for the webservers. See Module logging configuration blocks for details. Disabled by default.
 	WebserverLogs *WebserverLogsObservation `json:"webserverLogs,omitempty" tf:"webserver_logs,omitempty"`
 
-	// Log configuration options for the workers. See Module logging configuration for more information. Disabled by default.
+	// Log configuration options for the workers. See Module logging configuration blocks for details. Disabled by default.
 	WorkerLogs *WorkerLogsObservation `json:"workerLogs,omitempty" tf:"worker_logs,omitempty"`
 }
 
 type LoggingConfigurationParameters struct {
 
-	// Log configuration options for processing DAGs. See Module logging configuration for more information. Disabled by default.
+	// Log configuration options for processing DAGs. See Module logging configuration blocks for details. Disabled by default.
 	// +kubebuilder:validation:Optional
 	DagProcessingLogs *DagProcessingLogsParameters `json:"dagProcessingLogs,omitempty" tf:"dag_processing_logs,omitempty"`
 
-	// Log configuration options for the schedulers. See Module logging configuration for more information. Disabled by default.
+	// Log configuration options for the schedulers. See Module logging configuration blocks for details. Disabled by default.
 	// +kubebuilder:validation:Optional
 	SchedulerLogs *SchedulerLogsParameters `json:"schedulerLogs,omitempty" tf:"scheduler_logs,omitempty"`
 
-	// Log configuration options for DAG tasks. See Module logging configuration for more information. Enabled by default with INFO log level.
+	// Log configuration options for DAG tasks. See Module logging configuration blocks for details. Enabled by default with INFO log level.
 	// +kubebuilder:validation:Optional
 	TaskLogs *TaskLogsParameters `json:"taskLogs,omitempty" tf:"task_logs,omitempty"`
 
-	// Log configuration options for the webservers. See Module logging configuration for more information. Disabled by default.
+	// Log configuration options for the webservers. See Module logging configuration blocks for details. Disabled by default.
 	// +kubebuilder:validation:Optional
 	WebserverLogs *WebserverLogsParameters `json:"webserverLogs,omitempty" tf:"webserver_logs,omitempty"`
 
-	// Log configuration options for the workers. See Module logging configuration for more information. Disabled by default.
+	// Log configuration options for the workers. See Module logging configuration blocks for details. Disabled by default.
 	// +kubebuilder:validation:Optional
 	WorkerLogs *WorkerLogsParameters `json:"workerLogs,omitempty" tf:"worker_logs,omitempty"`
 }
@@ -501,7 +506,7 @@ type NetworkConfigurationInitParameters struct {
 	// +kubebuilder:validation:Optional
 	SecurityGroupIdsSelector *v2.Selector `json:"securityGroupIdsSelector,omitempty" tf:"-"`
 
-	// The private subnet IDs in which the environment should be created. MWAA requires two subnets.
+	// Private subnet IDs in which the environment should be created. MWAA requires two subnets.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Subnet
 	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
@@ -521,7 +526,7 @@ type NetworkConfigurationObservation struct {
 	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
-	// The private subnet IDs in which the environment should be created. MWAA requires two subnets.
+	// Private subnet IDs in which the environment should be created. MWAA requires two subnets.
 	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 }
@@ -542,7 +547,7 @@ type NetworkConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	SecurityGroupIdsSelector *v2.Selector `json:"securityGroupIdsSelector,omitempty" tf:"-"`
 
-	// The private subnet IDs in which the environment should be created. MWAA requires two subnets.
+	// Private subnet IDs in which the environment should be created. MWAA requires two subnets.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Subnet
 	// +kubebuilder:validation:Optional
 	// +listType=set
@@ -559,7 +564,7 @@ type NetworkConfigurationParameters struct {
 
 type SchedulerLogsInitParameters struct {
 
-	// Enabling or disabling the collection of logs
+	// Whether to enable the collection of logs.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// Logging level. Valid values: CRITICAL, ERROR, WARNING, INFO, DEBUG. Will be INFO by default.
@@ -568,10 +573,10 @@ type SchedulerLogsInitParameters struct {
 
 type SchedulerLogsObservation struct {
 
-	// Provides the ARN for the CloudWatch group where the logs will be published
+	// (Read-Only) ARN of the CloudWatch Logs log group where the logs are published.
 	CloudWatchLogGroupArn *string `json:"cloudWatchLogGroupArn,omitempty" tf:"cloud_watch_log_group_arn,omitempty"`
 
-	// Enabling or disabling the collection of logs
+	// Whether to enable the collection of logs.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// Logging level. Valid values: CRITICAL, ERROR, WARNING, INFO, DEBUG. Will be INFO by default.
@@ -580,7 +585,7 @@ type SchedulerLogsObservation struct {
 
 type SchedulerLogsParameters struct {
 
-	// Enabling or disabling the collection of logs
+	// Whether to enable the collection of logs.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
@@ -591,7 +596,7 @@ type SchedulerLogsParameters struct {
 
 type TaskLogsInitParameters struct {
 
-	// Enabling or disabling the collection of logs
+	// Whether to enable the collection of logs.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// Logging level. Valid values: CRITICAL, ERROR, WARNING, INFO, DEBUG. Will be INFO by default.
@@ -600,10 +605,10 @@ type TaskLogsInitParameters struct {
 
 type TaskLogsObservation struct {
 
-	// Provides the ARN for the CloudWatch group where the logs will be published
+	// (Read-Only) ARN of the CloudWatch Logs log group where the logs are published.
 	CloudWatchLogGroupArn *string `json:"cloudWatchLogGroupArn,omitempty" tf:"cloud_watch_log_group_arn,omitempty"`
 
-	// Enabling or disabling the collection of logs
+	// Whether to enable the collection of logs.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// Logging level. Valid values: CRITICAL, ERROR, WARNING, INFO, DEBUG. Will be INFO by default.
@@ -612,7 +617,7 @@ type TaskLogsObservation struct {
 
 type TaskLogsParameters struct {
 
-	// Enabling or disabling the collection of logs
+	// Whether to enable the collection of logs.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
@@ -623,7 +628,7 @@ type TaskLogsParameters struct {
 
 type WebserverLogsInitParameters struct {
 
-	// Enabling or disabling the collection of logs
+	// Whether to enable the collection of logs.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// Logging level. Valid values: CRITICAL, ERROR, WARNING, INFO, DEBUG. Will be INFO by default.
@@ -632,10 +637,10 @@ type WebserverLogsInitParameters struct {
 
 type WebserverLogsObservation struct {
 
-	// Provides the ARN for the CloudWatch group where the logs will be published
+	// (Read-Only) ARN of the CloudWatch Logs log group where the logs are published.
 	CloudWatchLogGroupArn *string `json:"cloudWatchLogGroupArn,omitempty" tf:"cloud_watch_log_group_arn,omitempty"`
 
-	// Enabling or disabling the collection of logs
+	// Whether to enable the collection of logs.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// Logging level. Valid values: CRITICAL, ERROR, WARNING, INFO, DEBUG. Will be INFO by default.
@@ -644,7 +649,7 @@ type WebserverLogsObservation struct {
 
 type WebserverLogsParameters struct {
 
-	// Enabling or disabling the collection of logs
+	// Whether to enable the collection of logs.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
@@ -655,7 +660,7 @@ type WebserverLogsParameters struct {
 
 type WorkerLogsInitParameters struct {
 
-	// Enabling or disabling the collection of logs
+	// Whether to enable the collection of logs.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// Logging level. Valid values: CRITICAL, ERROR, WARNING, INFO, DEBUG. Will be INFO by default.
@@ -664,10 +669,10 @@ type WorkerLogsInitParameters struct {
 
 type WorkerLogsObservation struct {
 
-	// Provides the ARN for the CloudWatch group where the logs will be published
+	// (Read-Only) ARN of the CloudWatch Logs log group where the logs are published.
 	CloudWatchLogGroupArn *string `json:"cloudWatchLogGroupArn,omitempty" tf:"cloud_watch_log_group_arn,omitempty"`
 
-	// Enabling or disabling the collection of logs
+	// Whether to enable the collection of logs.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// Logging level. Valid values: CRITICAL, ERROR, WARNING, INFO, DEBUG. Will be INFO by default.
@@ -676,7 +681,7 @@ type WorkerLogsObservation struct {
 
 type WorkerLogsParameters struct {
 
-	// Enabling or disabling the collection of logs
+	// Whether to enable the collection of logs.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 

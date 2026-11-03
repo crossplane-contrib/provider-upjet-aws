@@ -21,7 +21,7 @@ type ClusterEndpointObservation struct {
 	// DNS hostname of the cluster configuration endpoint.
 	Address *string `json:"address,omitempty" tf:"address,omitempty"`
 
-	// The port number on which each of the nodes accepts connections. Defaults to 6379.
+	// Port number on which each of the nodes accepts connections. Defaults to 6379.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 }
 
@@ -30,7 +30,7 @@ type ClusterEndpointParameters struct {
 
 type ClusterInitParameters struct {
 
-	// The name of the Access Control List to associate with the cluster.
+	// Name of the Access Control List to associate with the cluster.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/memorydb/v1beta1.ACL
 	ACLName *string `json:"aclName,omitempty" tf:"acl_name,omitempty"`
 
@@ -51,7 +51,7 @@ type ClusterInitParameters struct {
 	// Description for the cluster.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The engine that will run on your nodes. Supported values are redis and valkey.
+	// Engine that will run on your nodes. Supported values are redis and valkey.
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
 
 	// Version number of the engine to be used for the cluster. Downgrades are not supported.
@@ -75,25 +75,25 @@ type ClusterInitParameters struct {
 	// +kubebuilder:validation:Optional
 	KMSKeyArnSelector *v2.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
 
-	// Specifies the weekly time range during which maintenance on the cluster is performed. Specify as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period. Example: sun:23:00-mon:01:30.
+	// Weekly time range during which maintenance on the cluster is performed. Specify as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period. Example: sun:23:00-mon:01:30.
 	MaintenanceWindow *string `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
-	// The multi region cluster identifier specified on aws_memorydb_multi_region_cluster.
+	// Multi region cluster identifier specified on aws_memorydb_multi_region_cluster.
 	MultiRegionClusterName *string `json:"multiRegionClusterName,omitempty" tf:"multi_region_cluster_name,omitempty"`
 
 	// IP address type for the cluster. Valid values are ipv4, ipv6 and dual_stack. Defaults to ipv4.
 	NetworkType *string `json:"networkType,omitempty" tf:"network_type,omitempty"`
 
-	// The compute and memory capacity of the nodes in the cluster. See AWS documentation on supported node types as well as vertical scaling.
+	// Compute and memory capacity of the nodes in the cluster. See AWS documentation on supported node types as well as vertical scaling.
 	NodeType *string `json:"nodeType,omitempty" tf:"node_type,omitempty"`
 
-	// The number of replicas to apply to each shard, up to a maximum of 5. Defaults to 1 (i.e. 2 nodes per shard).
+	// Number of replicas to apply to each shard, up to a maximum of 5. Defaults to 1 (i.e. 2 nodes per shard).
 	NumReplicasPerShard *float64 `json:"numReplicasPerShard,omitempty" tf:"num_replicas_per_shard,omitempty"`
 
-	// The number of shards in the cluster. Defaults to 1.
+	// Number of shards in the cluster. Defaults to 1.
 	NumShards *float64 `json:"numShards,omitempty" tf:"num_shards,omitempty"`
 
-	// The name of the parameter group associated with the cluster.
+	// Name of the parameter group associated with the cluster.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/memorydb/v1beta1.ParameterGroup
 	ParameterGroupName *string `json:"parameterGroupName,omitempty" tf:"parameter_group_name,omitempty"`
 
@@ -105,7 +105,7 @@ type ClusterInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ParameterGroupNameSelector *v2.Selector `json:"parameterGroupNameSelector,omitempty" tf:"-"`
 
-	// The port number on which each of the nodes accepts connections. Defaults to 6379.
+	// Port number on which each of the nodes accepts connections. Defaults to 6379.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// References to SecurityGroup in ec2 to populate securityGroupIds.
@@ -126,19 +126,19 @@ type ClusterInitParameters struct {
 	// List of ARN-s that uniquely identify RDB snapshot files stored in S3. The snapshot files will be used to populate the new cluster. Object names in the ARN-s cannot contain any commas.
 	SnapshotArns []*string `json:"snapshotArns,omitempty" tf:"snapshot_arns,omitempty"`
 
-	// The name of a snapshot from which to restore data into the new cluster.
+	// Name of a snapshot from which to restore data into the new cluster.
 	SnapshotName *string `json:"snapshotName,omitempty" tf:"snapshot_name,omitempty"`
 
-	// The number of days for which MemoryDB retains automatic snapshots before deleting them. When set to 0, automatic backups are disabled. Defaults to 0.
+	// Number of days for which MemoryDB retains automatic snapshots before deleting them. When set to 0, automatic backups are disabled. Defaults to 0.
 	SnapshotRetentionLimit *float64 `json:"snapshotRetentionLimit,omitempty" tf:"snapshot_retention_limit,omitempty"`
 
-	// The daily time range (in UTC) during which MemoryDB begins taking a daily snapshot of your shard. Example: 05:00-09:00.
+	// Daily time range (in UTC) during which MemoryDB begins taking a daily snapshot of your shard. Example: 05:00-09:00.
 	SnapshotWindow *string `json:"snapshotWindow,omitempty" tf:"snapshot_window,omitempty"`
 
 	// ARN of the SNS topic to which cluster notifications are sent.
 	SnsTopicArn *string `json:"snsTopicArn,omitempty" tf:"sns_topic_arn,omitempty"`
 
-	// The name of the subnet group to be used for the cluster. Defaults to a subnet group consisting of default VPC subnets.
+	// Name of the subnet group to be used for the cluster. Defaults to a subnet group consisting of default VPC subnets.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/memorydb/v1beta1.SubnetGroup
 	SubnetGroupName *string `json:"subnetGroupName,omitempty" tf:"subnet_group_name,omitempty"`
 
@@ -150,7 +150,7 @@ type ClusterInitParameters struct {
 	// +kubebuilder:validation:Optional
 	SubnetGroupNameSelector *v2.Selector `json:"subnetGroupNameSelector,omitempty" tf:"-"`
 
-	// A flag to enable in-transit encryption on the cluster. When set to false, the acl_name must be open-access. Defaults to true.
+	// Whether to enable in-transit encryption on the cluster. When set to false, the acl_name must be open-access. Defaults to true.
 	TLSEnabled *bool `json:"tlsEnabled,omitempty" tf:"tls_enabled,omitempty"`
 
 	// Key-value map of resource tags.
@@ -160,10 +160,10 @@ type ClusterInitParameters struct {
 
 type ClusterObservation struct {
 
-	// The name of the Access Control List to associate with the cluster.
+	// Name of the Access Control List to associate with the cluster.
 	ACLName *string `json:"aclName,omitempty" tf:"acl_name,omitempty"`
 
-	// The ARN of the cluster.
+	// ARN of the cluster.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// When set to true, the cluster will automatically receive minor engine version upgrades after launch. Defaults to true.
@@ -177,7 +177,7 @@ type ClusterObservation struct {
 	// Description for the cluster.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The engine that will run on your nodes. Supported values are redis and valkey.
+	// Engine that will run on your nodes. Supported values are redis and valkey.
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
 
 	// Patch version number of the engine used by the cluster.
@@ -198,28 +198,28 @@ type ClusterObservation struct {
 	// ARN of the KMS key used to encrypt the cluster at rest.
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
-	// Specifies the weekly time range during which maintenance on the cluster is performed. Specify as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period. Example: sun:23:00-mon:01:30.
+	// Weekly time range during which maintenance on the cluster is performed. Specify as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period. Example: sun:23:00-mon:01:30.
 	MaintenanceWindow *string `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
-	// The multi region cluster identifier specified on aws_memorydb_multi_region_cluster.
+	// Multi region cluster identifier specified on aws_memorydb_multi_region_cluster.
 	MultiRegionClusterName *string `json:"multiRegionClusterName,omitempty" tf:"multi_region_cluster_name,omitempty"`
 
 	// IP address type for the cluster. Valid values are ipv4, ipv6 and dual_stack. Defaults to ipv4.
 	NetworkType *string `json:"networkType,omitempty" tf:"network_type,omitempty"`
 
-	// The compute and memory capacity of the nodes in the cluster. See AWS documentation on supported node types as well as vertical scaling.
+	// Compute and memory capacity of the nodes in the cluster. See AWS documentation on supported node types as well as vertical scaling.
 	NodeType *string `json:"nodeType,omitempty" tf:"node_type,omitempty"`
 
-	// The number of replicas to apply to each shard, up to a maximum of 5. Defaults to 1 (i.e. 2 nodes per shard).
+	// Number of replicas to apply to each shard, up to a maximum of 5. Defaults to 1 (i.e. 2 nodes per shard).
 	NumReplicasPerShard *float64 `json:"numReplicasPerShard,omitempty" tf:"num_replicas_per_shard,omitempty"`
 
-	// The number of shards in the cluster. Defaults to 1.
+	// Number of shards in the cluster. Defaults to 1.
 	NumShards *float64 `json:"numShards,omitempty" tf:"num_shards,omitempty"`
 
-	// The name of the parameter group associated with the cluster.
+	// Name of the parameter group associated with the cluster.
 	ParameterGroupName *string `json:"parameterGroupName,omitempty" tf:"parameter_group_name,omitempty"`
 
-	// The port number on which each of the nodes accepts connections. Defaults to 6379.
+	// Port number on which each of the nodes accepts connections. Defaults to 6379.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -236,36 +236,36 @@ type ClusterObservation struct {
 	// List of ARN-s that uniquely identify RDB snapshot files stored in S3. The snapshot files will be used to populate the new cluster. Object names in the ARN-s cannot contain any commas.
 	SnapshotArns []*string `json:"snapshotArns,omitempty" tf:"snapshot_arns,omitempty"`
 
-	// The name of a snapshot from which to restore data into the new cluster.
+	// Name of a snapshot from which to restore data into the new cluster.
 	SnapshotName *string `json:"snapshotName,omitempty" tf:"snapshot_name,omitempty"`
 
-	// The number of days for which MemoryDB retains automatic snapshots before deleting them. When set to 0, automatic backups are disabled. Defaults to 0.
+	// Number of days for which MemoryDB retains automatic snapshots before deleting them. When set to 0, automatic backups are disabled. Defaults to 0.
 	SnapshotRetentionLimit *float64 `json:"snapshotRetentionLimit,omitempty" tf:"snapshot_retention_limit,omitempty"`
 
-	// The daily time range (in UTC) during which MemoryDB begins taking a daily snapshot of your shard. Example: 05:00-09:00.
+	// Daily time range (in UTC) during which MemoryDB begins taking a daily snapshot of your shard. Example: 05:00-09:00.
 	SnapshotWindow *string `json:"snapshotWindow,omitempty" tf:"snapshot_window,omitempty"`
 
 	// ARN of the SNS topic to which cluster notifications are sent.
 	SnsTopicArn *string `json:"snsTopicArn,omitempty" tf:"sns_topic_arn,omitempty"`
 
-	// The name of the subnet group to be used for the cluster. Defaults to a subnet group consisting of default VPC subnets.
+	// Name of the subnet group to be used for the cluster. Defaults to a subnet group consisting of default VPC subnets.
 	SubnetGroupName *string `json:"subnetGroupName,omitempty" tf:"subnet_group_name,omitempty"`
 
-	// A flag to enable in-transit encryption on the cluster. When set to false, the acl_name must be open-access. Defaults to true.
+	// Whether to enable in-transit encryption on the cluster. When set to false, the acl_name must be open-access. Defaults to true.
 	TLSEnabled *bool `json:"tlsEnabled,omitempty" tf:"tls_enabled,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type ClusterParameters struct {
 
-	// The name of the Access Control List to associate with the cluster.
+	// Name of the Access Control List to associate with the cluster.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/memorydb/v1beta1.ACL
 	// +kubebuilder:validation:Optional
 	ACLName *string `json:"aclName,omitempty" tf:"acl_name,omitempty"`
@@ -290,7 +290,7 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The engine that will run on your nodes. Supported values are redis and valkey.
+	// Engine that will run on your nodes. Supported values are redis and valkey.
 	// +kubebuilder:validation:Optional
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
 
@@ -319,11 +319,11 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	KMSKeyArnSelector *v2.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
 
-	// Specifies the weekly time range during which maintenance on the cluster is performed. Specify as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period. Example: sun:23:00-mon:01:30.
+	// Weekly time range during which maintenance on the cluster is performed. Specify as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period. Example: sun:23:00-mon:01:30.
 	// +kubebuilder:validation:Optional
 	MaintenanceWindow *string `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
-	// The multi region cluster identifier specified on aws_memorydb_multi_region_cluster.
+	// Multi region cluster identifier specified on aws_memorydb_multi_region_cluster.
 	// +kubebuilder:validation:Optional
 	MultiRegionClusterName *string `json:"multiRegionClusterName,omitempty" tf:"multi_region_cluster_name,omitempty"`
 
@@ -331,19 +331,19 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	NetworkType *string `json:"networkType,omitempty" tf:"network_type,omitempty"`
 
-	// The compute and memory capacity of the nodes in the cluster. See AWS documentation on supported node types as well as vertical scaling.
+	// Compute and memory capacity of the nodes in the cluster. See AWS documentation on supported node types as well as vertical scaling.
 	// +kubebuilder:validation:Optional
 	NodeType *string `json:"nodeType,omitempty" tf:"node_type,omitempty"`
 
-	// The number of replicas to apply to each shard, up to a maximum of 5. Defaults to 1 (i.e. 2 nodes per shard).
+	// Number of replicas to apply to each shard, up to a maximum of 5. Defaults to 1 (i.e. 2 nodes per shard).
 	// +kubebuilder:validation:Optional
 	NumReplicasPerShard *float64 `json:"numReplicasPerShard,omitempty" tf:"num_replicas_per_shard,omitempty"`
 
-	// The number of shards in the cluster. Defaults to 1.
+	// Number of shards in the cluster. Defaults to 1.
 	// +kubebuilder:validation:Optional
 	NumShards *float64 `json:"numShards,omitempty" tf:"num_shards,omitempty"`
 
-	// The name of the parameter group associated with the cluster.
+	// Name of the parameter group associated with the cluster.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/memorydb/v1beta1.ParameterGroup
 	// +kubebuilder:validation:Optional
 	ParameterGroupName *string `json:"parameterGroupName,omitempty" tf:"parameter_group_name,omitempty"`
@@ -356,7 +356,7 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	ParameterGroupNameSelector *v2.Selector `json:"parameterGroupNameSelector,omitempty" tf:"-"`
 
-	// The port number on which each of the nodes accepts connections. Defaults to 6379.
+	// Port number on which each of the nodes accepts connections. Defaults to 6379.
 	// +kubebuilder:validation:Optional
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
@@ -385,15 +385,15 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	SnapshotArns []*string `json:"snapshotArns,omitempty" tf:"snapshot_arns,omitempty"`
 
-	// The name of a snapshot from which to restore data into the new cluster.
+	// Name of a snapshot from which to restore data into the new cluster.
 	// +kubebuilder:validation:Optional
 	SnapshotName *string `json:"snapshotName,omitempty" tf:"snapshot_name,omitempty"`
 
-	// The number of days for which MemoryDB retains automatic snapshots before deleting them. When set to 0, automatic backups are disabled. Defaults to 0.
+	// Number of days for which MemoryDB retains automatic snapshots before deleting them. When set to 0, automatic backups are disabled. Defaults to 0.
 	// +kubebuilder:validation:Optional
 	SnapshotRetentionLimit *float64 `json:"snapshotRetentionLimit,omitempty" tf:"snapshot_retention_limit,omitempty"`
 
-	// The daily time range (in UTC) during which MemoryDB begins taking a daily snapshot of your shard. Example: 05:00-09:00.
+	// Daily time range (in UTC) during which MemoryDB begins taking a daily snapshot of your shard. Example: 05:00-09:00.
 	// +kubebuilder:validation:Optional
 	SnapshotWindow *string `json:"snapshotWindow,omitempty" tf:"snapshot_window,omitempty"`
 
@@ -401,7 +401,7 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	SnsTopicArn *string `json:"snsTopicArn,omitempty" tf:"sns_topic_arn,omitempty"`
 
-	// The name of the subnet group to be used for the cluster. Defaults to a subnet group consisting of default VPC subnets.
+	// Name of the subnet group to be used for the cluster. Defaults to a subnet group consisting of default VPC subnets.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/memorydb/v1beta1.SubnetGroup
 	// +kubebuilder:validation:Optional
 	SubnetGroupName *string `json:"subnetGroupName,omitempty" tf:"subnet_group_name,omitempty"`
@@ -414,7 +414,7 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	SubnetGroupNameSelector *v2.Selector `json:"subnetGroupNameSelector,omitempty" tf:"-"`
 
-	// A flag to enable in-transit encryption on the cluster. When set to false, the acl_name must be open-access. Defaults to true.
+	// Whether to enable in-transit encryption on the cluster. When set to false, the acl_name must be open-access. Defaults to true.
 	// +kubebuilder:validation:Optional
 	TLSEnabled *bool `json:"tlsEnabled,omitempty" tf:"tls_enabled,omitempty"`
 
@@ -432,7 +432,7 @@ type EndpointObservation struct {
 	// DNS hostname of the cluster configuration endpoint.
 	Address *string `json:"address,omitempty" tf:"address,omitempty"`
 
-	// The port number on which each of the nodes accepts connections. Defaults to 6379.
+	// Port number on which each of the nodes accepts connections. Defaults to 6379.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 }
 
@@ -444,10 +444,10 @@ type NodesInitParameters struct {
 
 type NodesObservation struct {
 
-	// The Availability Zone in which the node resides.
+	// Availability Zone in which the node resides.
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
-	// The date and time when the node was created. Example: 2022-01-01T21:00:00Z.
+	// Date and time when the node was created. Example: 2022-01-01T21:00:00Z.
 	CreateTime *string `json:"createTime,omitempty" tf:"create_time,omitempty"`
 
 	Endpoint []EndpointObservation `json:"endpoint,omitempty" tf:"endpoint,omitempty"`

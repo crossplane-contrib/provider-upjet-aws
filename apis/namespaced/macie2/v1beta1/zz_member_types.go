@@ -15,22 +15,22 @@ import (
 
 type MemberInitParameters struct {
 
-	// The AWS account ID for the account.
+	// AWS account ID for the account.
 	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
 
-	// The email address for the account.
+	// Email address for the account.
 	Email *string `json:"email,omitempty" tf:"email,omitempty"`
 
-	// Specifies whether to send an email notification to the root user of each account that the invitation will be sent to. This notification is in addition to an alert that the root user receives in AWS Personal Health Dashboard. To send an email notification to the root user of each account, set this value to true.
+	// Whether to send an email notification to the root user of each account that the invitation will be sent to. This notification is in addition to an alert that the root user receives in AWS Personal Health Dashboard. To send an email notification to the root user of each account, set this value to true.
 	InvitationDisableEmailNotification *bool `json:"invitationDisableEmailNotification,omitempty" tf:"invitation_disable_email_notification,omitempty"`
 
-	// A custom message to include in the invitation. Amazon Macie adds this message to the standard content that it sends for an invitation.
+	// Custom message to include in the invitation. Amazon Macie adds this message to the standard content that it sends for an invitation.
 	InvitationMessage *string `json:"invitationMessage,omitempty" tf:"invitation_message,omitempty"`
 
-	// Send an invitation to a member
+	// Whether to send an invitation to a member.
 	Invite *bool `json:"invite,omitempty" tf:"invite,omitempty"`
 
-	// Specifies the status for the account. To enable Amazon Macie and start all Macie activities for the account, set this value to ENABLED. Valid values are ENABLED or PAUSED.
+	// Status for the account. To enable Amazon Macie and start all Macie activities for the account, set this value to ENABLED. Valid values are ENABLED or PAUSED.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
 	// Key-value map of resource tags.
@@ -40,77 +40,77 @@ type MemberInitParameters struct {
 
 type MemberObservation struct {
 
-	// The AWS account ID for the account.
+	// AWS account ID for the account.
 	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
 
-	// The AWS account ID for the administrator account.
+	// AWS account ID for the administrator account.
 	AdministratorAccountID *string `json:"administratorAccountId,omitempty" tf:"administrator_account_id,omitempty"`
 
 	// ARN of the account.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The email address for the account.
+	// Email address for the account.
 	Email *string `json:"email,omitempty" tf:"email,omitempty"`
 
-	// The unique identifier (ID) of the macie Member.
+	// Unique identifier (ID) of the Macie Member.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Specifies whether to send an email notification to the root user of each account that the invitation will be sent to. This notification is in addition to an alert that the root user receives in AWS Personal Health Dashboard. To send an email notification to the root user of each account, set this value to true.
+	// Whether to send an email notification to the root user of each account that the invitation will be sent to. This notification is in addition to an alert that the root user receives in AWS Personal Health Dashboard. To send an email notification to the root user of each account, set this value to true.
 	InvitationDisableEmailNotification *bool `json:"invitationDisableEmailNotification,omitempty" tf:"invitation_disable_email_notification,omitempty"`
 
-	// A custom message to include in the invitation. Amazon Macie adds this message to the standard content that it sends for an invitation.
+	// Custom message to include in the invitation. Amazon Macie adds this message to the standard content that it sends for an invitation.
 	InvitationMessage *string `json:"invitationMessage,omitempty" tf:"invitation_message,omitempty"`
 
-	// Send an invitation to a member
+	// Whether to send an invitation to a member.
 	Invite *bool `json:"invite,omitempty" tf:"invite,omitempty"`
 
-	// The date and time, in UTC and extended RFC 3339 format, when an Amazon Macie membership invitation was last sent to the account. This value is null if a Macie invitation hasn't been sent to the account.
+	// Date and time, in UTC and extended RFC 3339 format, when an Amazon Macie membership invitation was last sent to the account. This value is null if a Macie invitation hasn't been sent to the account.
 	InvitedAt *string `json:"invitedAt,omitempty" tf:"invited_at,omitempty"`
 
-	// The AWS account ID for the account.
+	// AWS account ID for the master account.
 	MasterAccountID *string `json:"masterAccountId,omitempty" tf:"master_account_id,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The current status of the relationship between the account and the administrator account.
+	// Current status of the relationship between the account and the administrator account.
 	RelationshipStatus *string `json:"relationshipStatus,omitempty" tf:"relationship_status,omitempty"`
 
-	// Specifies the status for the account. To enable Amazon Macie and start all Macie activities for the account, set this value to ENABLED. Valid values are ENABLED or PAUSED.
+	// Status for the account. To enable Amazon Macie and start all Macie activities for the account, set this value to ENABLED. Valid values are ENABLED or PAUSED.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// The date and time, in UTC and extended RFC 3339 format, of the most recent change to the status of the relationship between the account and the administrator account.
+	// Date and time, in UTC and extended RFC 3339 format, of the most recent change to the status of the relationship between the account and the administrator account.
 	UpdatedAt *string `json:"updatedAt,omitempty" tf:"updated_at,omitempty"`
 }
 
 type MemberParameters struct {
 
-	// The AWS account ID for the account.
+	// AWS account ID for the account.
 	// +kubebuilder:validation:Optional
 	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
 
-	// The email address for the account.
+	// Email address for the account.
 	// +kubebuilder:validation:Optional
 	Email *string `json:"email,omitempty" tf:"email,omitempty"`
 
-	// Specifies whether to send an email notification to the root user of each account that the invitation will be sent to. This notification is in addition to an alert that the root user receives in AWS Personal Health Dashboard. To send an email notification to the root user of each account, set this value to true.
+	// Whether to send an email notification to the root user of each account that the invitation will be sent to. This notification is in addition to an alert that the root user receives in AWS Personal Health Dashboard. To send an email notification to the root user of each account, set this value to true.
 	// +kubebuilder:validation:Optional
 	InvitationDisableEmailNotification *bool `json:"invitationDisableEmailNotification,omitempty" tf:"invitation_disable_email_notification,omitempty"`
 
-	// A custom message to include in the invitation. Amazon Macie adds this message to the standard content that it sends for an invitation.
+	// Custom message to include in the invitation. Amazon Macie adds this message to the standard content that it sends for an invitation.
 	// +kubebuilder:validation:Optional
 	InvitationMessage *string `json:"invitationMessage,omitempty" tf:"invitation_message,omitempty"`
 
-	// Send an invitation to a member
+	// Whether to send an invitation to a member.
 	// +kubebuilder:validation:Optional
 	Invite *bool `json:"invite,omitempty" tf:"invite,omitempty"`
 
@@ -119,7 +119,7 @@ type MemberParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// Specifies the status for the account. To enable Amazon Macie and start all Macie activities for the account, set this value to ENABLED. Valid values are ENABLED or PAUSED.
+	// Status for the account. To enable Amazon Macie and start all Macie activities for the account, set this value to ENABLED. Valid values are ENABLED or PAUSED.
 	// +kubebuilder:validation:Optional
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 

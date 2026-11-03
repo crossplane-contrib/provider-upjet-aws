@@ -49,4 +49,5 @@ metadata:
 spec:
   forProvider:
     region: us-west-1
-    shardCount: 1
+    streamModeDetails:
+      streamMode: ON_DEMAND

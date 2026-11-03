@@ -25,7 +25,7 @@ type RuleGroupNamespaceInitParameters struct {
 
 type RuleGroupNamespaceObservation struct {
 
-	// The ARN of the rule group namespace.
+	// ARN of the rule group namespace.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// the rule group namespace data that you want to be applied. See more in AWS Docs.

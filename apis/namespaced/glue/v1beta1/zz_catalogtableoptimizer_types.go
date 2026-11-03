@@ -15,25 +15,25 @@ import (
 
 type CatalogTableOptimizerInitParameters struct {
 
-	// A configuration block that defines the table optimizer settings. See Configuration for additional details.
+	// Configuration block that defines the table optimizer settings. See configuration Block for additional details.
 	Configuration []ConfigurationInitParameters `json:"configuration,omitempty" tf:"configuration,omitempty"`
 
-	// The name of the table.
+	// Name of the table.
 	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
 
-	// The type of table optimizer. Valid values are compaction, retention, and orphan_file_deletion.
+	// Type of table optimizer. Valid values are compaction, retention, and orphan_file_deletion.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type CatalogTableOptimizerObservation struct {
 
-	// The Catalog ID of the table.
+	// Catalog ID of the table.
 	CatalogID *string `json:"catalogId,omitempty" tf:"catalog_id,omitempty"`
 
-	// A configuration block that defines the table optimizer settings. See Configuration for additional details.
+	// Configuration block that defines the table optimizer settings. See configuration Block for additional details.
 	Configuration []ConfigurationObservation `json:"configuration,omitempty" tf:"configuration,omitempty"`
 
-	// The name of the database in the catalog in which the table resides.
+	// Name of the database in the catalog in which the table resides.
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -42,24 +42,24 @@ type CatalogTableOptimizerObservation struct {
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The name of the table.
+	// Name of the table.
 	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
 
-	// The type of table optimizer. Valid values are compaction, retention, and orphan_file_deletion.
+	// Type of table optimizer. Valid values are compaction, retention, and orphan_file_deletion.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type CatalogTableOptimizerParameters struct {
 
-	// The Catalog ID of the table.
+	// Catalog ID of the table.
 	// +kubebuilder:validation:Required
 	CatalogID *string `json:"catalogId" tf:"catalog_id,omitempty"`
 
-	// A configuration block that defines the table optimizer settings. See Configuration for additional details.
+	// Configuration block that defines the table optimizer settings. See configuration Block for additional details.
 	// +kubebuilder:validation:Optional
 	Configuration []ConfigurationParameters `json:"configuration,omitempty" tf:"configuration,omitempty"`
 
-	// The name of the database in the catalog in which the table resides.
+	// Name of the database in the catalog in which the table resides.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/glue/v1beta1.CatalogDatabase
 	// +kubebuilder:validation:Optional
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
@@ -77,186 +77,186 @@ type CatalogTableOptimizerParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// The name of the table.
+	// Name of the table.
 	// +kubebuilder:validation:Optional
 	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
 
-	// The type of table optimizer. Valid values are compaction, retention, and orphan_file_deletion.
+	// Type of table optimizer. Valid values are compaction, retention, and orphan_file_deletion.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type CompactionConfigurationInitParameters struct {
 
-	// The configuration for an Iceberg orphan file deletion optimizer.
+	// Configuration for an Iceberg compaction optimizer. See configuration.compaction_configuration.iceberg_configuration Block for additional details.
 	IcebergConfiguration []IcebergConfigurationInitParameters `json:"icebergConfiguration,omitempty" tf:"iceberg_configuration,omitempty"`
 }
 
 type CompactionConfigurationObservation struct {
 
-	// The configuration for an Iceberg orphan file deletion optimizer.
+	// Configuration for an Iceberg compaction optimizer. See configuration.compaction_configuration.iceberg_configuration Block for additional details.
 	IcebergConfiguration []IcebergConfigurationObservation `json:"icebergConfiguration,omitempty" tf:"iceberg_configuration,omitempty"`
 }
 
 type CompactionConfigurationParameters struct {
 
-	// The configuration for an Iceberg orphan file deletion optimizer.
+	// Configuration for an Iceberg compaction optimizer. See configuration.compaction_configuration.iceberg_configuration Block for additional details.
 	// +kubebuilder:validation:Optional
 	IcebergConfiguration []IcebergConfigurationParameters `json:"icebergConfiguration,omitempty" tf:"iceberg_configuration,omitempty"`
 }
 
 type ConfigurationInitParameters struct {
 
-	// The configuration block for a compaction optimizer. See Compaction Configuration for additional details.
+	// Configuration block for a compaction optimizer. See compaction_configuration Block for additional details.
 	CompactionConfiguration []CompactionConfigurationInitParameters `json:"compactionConfiguration,omitempty" tf:"compaction_configuration,omitempty"`
 
-	// Indicates whether the table optimizer is enabled.
+	// Whether the table optimizer is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The configuration block for an orphan file deletion optimizer. See Orphan File Deletion Configuration for additional details.
+	// Configuration block for an orphan file deletion optimizer. See orphan_file_deletion_configuration Block for additional details.
 	OrphanFileDeletionConfiguration []OrphanFileDeletionConfigurationInitParameters `json:"orphanFileDeletionConfiguration,omitempty" tf:"orphan_file_deletion_configuration,omitempty"`
 
-	// The configuration block for a snapshot retention optimizer. See Retention Configuration for additional details.
+	// Configuration block for a snapshot retention optimizer. See retention_configuration Block for additional details.
 	RetentionConfiguration []RetentionConfigurationInitParameters `json:"retentionConfiguration,omitempty" tf:"retention_configuration,omitempty"`
 
-	// The ARN of the IAM role to use for the table optimizer.
+	// ARN of the IAM role to use for the table optimizer.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
 
 type ConfigurationObservation struct {
 
-	// The configuration block for a compaction optimizer. See Compaction Configuration for additional details.
+	// Configuration block for a compaction optimizer. See compaction_configuration Block for additional details.
 	CompactionConfiguration []CompactionConfigurationObservation `json:"compactionConfiguration,omitempty" tf:"compaction_configuration,omitempty"`
 
-	// Indicates whether the table optimizer is enabled.
+	// Whether the table optimizer is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The configuration block for an orphan file deletion optimizer. See Orphan File Deletion Configuration for additional details.
+	// Configuration block for an orphan file deletion optimizer. See orphan_file_deletion_configuration Block for additional details.
 	OrphanFileDeletionConfiguration []OrphanFileDeletionConfigurationObservation `json:"orphanFileDeletionConfiguration,omitempty" tf:"orphan_file_deletion_configuration,omitempty"`
 
-	// The configuration block for a snapshot retention optimizer. See Retention Configuration for additional details.
+	// Configuration block for a snapshot retention optimizer. See retention_configuration Block for additional details.
 	RetentionConfiguration []RetentionConfigurationObservation `json:"retentionConfiguration,omitempty" tf:"retention_configuration,omitempty"`
 
-	// The ARN of the IAM role to use for the table optimizer.
+	// ARN of the IAM role to use for the table optimizer.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
 
 type ConfigurationParameters struct {
 
-	// The configuration block for a compaction optimizer. See Compaction Configuration for additional details.
+	// Configuration block for a compaction optimizer. See compaction_configuration Block for additional details.
 	// +kubebuilder:validation:Optional
 	CompactionConfiguration []CompactionConfigurationParameters `json:"compactionConfiguration,omitempty" tf:"compaction_configuration,omitempty"`
 
-	// Indicates whether the table optimizer is enabled.
+	// Whether the table optimizer is enabled.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 
-	// The configuration block for an orphan file deletion optimizer. See Orphan File Deletion Configuration for additional details.
+	// Configuration block for an orphan file deletion optimizer. See orphan_file_deletion_configuration Block for additional details.
 	// +kubebuilder:validation:Optional
 	OrphanFileDeletionConfiguration []OrphanFileDeletionConfigurationParameters `json:"orphanFileDeletionConfiguration,omitempty" tf:"orphan_file_deletion_configuration,omitempty"`
 
-	// The configuration block for a snapshot retention optimizer. See Retention Configuration for additional details.
+	// Configuration block for a snapshot retention optimizer. See retention_configuration Block for additional details.
 	// +kubebuilder:validation:Optional
 	RetentionConfiguration []RetentionConfigurationParameters `json:"retentionConfiguration,omitempty" tf:"retention_configuration,omitempty"`
 
-	// The ARN of the IAM role to use for the table optimizer.
+	// ARN of the IAM role to use for the table optimizer.
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn" tf:"role_arn,omitempty"`
 }
 
 type IcebergConfigurationInitParameters struct {
 
-	// The minimum number of deletes that must be present in a data file to make it eligible for compaction. Defaults to 1.
+	// Minimum number of deletes that must be present in a data file to make it eligible for compaction. Defaults to 1.
 	DeleteFileThreshold *float64 `json:"deleteFileThreshold,omitempty" tf:"delete_file_threshold,omitempty"`
 
-	// The minimum number of data files that must be present in a partition before compaction will actually compact files. Defaults to 100.
+	// Minimum number of data files that must be present in a partition before compaction will actually compact files. Defaults to 100.
 	MinInputFiles *float64 `json:"minInputFiles,omitempty" tf:"min_input_files,omitempty"`
 
-	// The strategy to use for compaction. Valid values are binpack, sort and z-order Defaults to binpack.
+	// Strategy to use for compaction. Valid values are binpack, sort and z-order Defaults to binpack.
 	Strategy *string `json:"strategy,omitempty" tf:"strategy,omitempty"`
 }
 
 type IcebergConfigurationObservation struct {
 
-	// The minimum number of deletes that must be present in a data file to make it eligible for compaction. Defaults to 1.
+	// Minimum number of deletes that must be present in a data file to make it eligible for compaction. Defaults to 1.
 	DeleteFileThreshold *float64 `json:"deleteFileThreshold,omitempty" tf:"delete_file_threshold,omitempty"`
 
-	// The minimum number of data files that must be present in a partition before compaction will actually compact files. Defaults to 100.
+	// Minimum number of data files that must be present in a partition before compaction will actually compact files. Defaults to 100.
 	MinInputFiles *float64 `json:"minInputFiles,omitempty" tf:"min_input_files,omitempty"`
 
-	// The strategy to use for compaction. Valid values are binpack, sort and z-order Defaults to binpack.
+	// Strategy to use for compaction. Valid values are binpack, sort and z-order Defaults to binpack.
 	Strategy *string `json:"strategy,omitempty" tf:"strategy,omitempty"`
 }
 
 type IcebergConfigurationParameters struct {
 
-	// The minimum number of deletes that must be present in a data file to make it eligible for compaction. Defaults to 1.
+	// Minimum number of deletes that must be present in a data file to make it eligible for compaction. Defaults to 1.
 	// +kubebuilder:validation:Optional
 	DeleteFileThreshold *float64 `json:"deleteFileThreshold,omitempty" tf:"delete_file_threshold,omitempty"`
 
-	// The minimum number of data files that must be present in a partition before compaction will actually compact files. Defaults to 100.
+	// Minimum number of data files that must be present in a partition before compaction will actually compact files. Defaults to 100.
 	// +kubebuilder:validation:Optional
 	MinInputFiles *float64 `json:"minInputFiles,omitempty" tf:"min_input_files,omitempty"`
 
-	// The strategy to use for compaction. Valid values are binpack, sort and z-order Defaults to binpack.
+	// Strategy to use for compaction. Valid values are binpack, sort and z-order Defaults to binpack.
 	// +kubebuilder:validation:Optional
 	Strategy *string `json:"strategy,omitempty" tf:"strategy,omitempty"`
 }
 
 type OrphanFileDeletionConfigurationIcebergConfigurationInitParameters struct {
 
-	// Specifies a directory in which to look for files. You may choose a sub-directory rather than the top-level table location. Defaults to the table's location.
+	// Directory in which to look for files. You may choose a sub-directory rather than the top-level table location. Defaults to the table's location.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// The number of days that orphan files should be retained before file deletion. Defaults to 3.
+	// Number of days that orphan files should be retained before file deletion. Defaults to 3.
 	OrphanFileRetentionPeriodInDays *float64 `json:"orphanFileRetentionPeriodInDays,omitempty" tf:"orphan_file_retention_period_in_days,omitempty"`
 
-	// interval in hours between orphan file deletion job runs. Defaults to 24.
+	// Interval in hours between orphan file deletion job runs. Defaults to 24.
 	RunRateInHours *float64 `json:"runRateInHours,omitempty" tf:"run_rate_in_hours,omitempty"`
 }
 
 type OrphanFileDeletionConfigurationIcebergConfigurationObservation struct {
 
-	// Specifies a directory in which to look for files. You may choose a sub-directory rather than the top-level table location. Defaults to the table's location.
+	// Directory in which to look for files. You may choose a sub-directory rather than the top-level table location. Defaults to the table's location.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// The number of days that orphan files should be retained before file deletion. Defaults to 3.
+	// Number of days that orphan files should be retained before file deletion. Defaults to 3.
 	OrphanFileRetentionPeriodInDays *float64 `json:"orphanFileRetentionPeriodInDays,omitempty" tf:"orphan_file_retention_period_in_days,omitempty"`
 
-	// interval in hours between orphan file deletion job runs. Defaults to 24.
+	// Interval in hours between orphan file deletion job runs. Defaults to 24.
 	RunRateInHours *float64 `json:"runRateInHours,omitempty" tf:"run_rate_in_hours,omitempty"`
 }
 
 type OrphanFileDeletionConfigurationIcebergConfigurationParameters struct {
 
-	// Specifies a directory in which to look for files. You may choose a sub-directory rather than the top-level table location. Defaults to the table's location.
+	// Directory in which to look for files. You may choose a sub-directory rather than the top-level table location. Defaults to the table's location.
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// The number of days that orphan files should be retained before file deletion. Defaults to 3.
+	// Number of days that orphan files should be retained before file deletion. Defaults to 3.
 	// +kubebuilder:validation:Optional
 	OrphanFileRetentionPeriodInDays *float64 `json:"orphanFileRetentionPeriodInDays,omitempty" tf:"orphan_file_retention_period_in_days,omitempty"`
 
-	// interval in hours between orphan file deletion job runs. Defaults to 24.
+	// Interval in hours between orphan file deletion job runs. Defaults to 24.
 	// +kubebuilder:validation:Optional
 	RunRateInHours *float64 `json:"runRateInHours,omitempty" tf:"run_rate_in_hours,omitempty"`
 }
 
 type OrphanFileDeletionConfigurationInitParameters struct {
 
-	// The configuration for an Iceberg orphan file deletion optimizer.
+	// Configuration for an Iceberg compaction optimizer. See configuration.compaction_configuration.iceberg_configuration Block for additional details.
 	IcebergConfiguration []OrphanFileDeletionConfigurationIcebergConfigurationInitParameters `json:"icebergConfiguration,omitempty" tf:"iceberg_configuration,omitempty"`
 }
 
 type OrphanFileDeletionConfigurationObservation struct {
 
-	// The configuration for an Iceberg orphan file deletion optimizer.
+	// Configuration for an Iceberg compaction optimizer. See configuration.compaction_configuration.iceberg_configuration Block for additional details.
 	IcebergConfiguration []OrphanFileDeletionConfigurationIcebergConfigurationObservation `json:"icebergConfiguration,omitempty" tf:"iceberg_configuration,omitempty"`
 }
 
 type OrphanFileDeletionConfigurationParameters struct {
 
-	// The configuration for an Iceberg orphan file deletion optimizer.
+	// Configuration for an Iceberg compaction optimizer. See configuration.compaction_configuration.iceberg_configuration Block for additional details.
 	// +kubebuilder:validation:Optional
 	IcebergConfiguration []OrphanFileDeletionConfigurationIcebergConfigurationParameters `json:"icebergConfiguration,omitempty" tf:"iceberg_configuration,omitempty"`
 }
@@ -266,13 +266,13 @@ type RetentionConfigurationIcebergConfigurationInitParameters struct {
 	// If set to false, snapshots are only deleted from table metadata, and the underlying data and metadata files are not deleted. Defaults to false.
 	CleanExpiredFiles *bool `json:"cleanExpiredFiles,omitempty" tf:"clean_expired_files,omitempty"`
 
-	// The number of Iceberg snapshots to retain within the retention period. Defaults to 1 or the corresponding Iceberg table configuration field if it exists.
+	// Number of Iceberg snapshots to retain within the retention period. Defaults to 1 or the corresponding Iceberg table configuration field if it exists.
 	NumberOfSnapshotsToRetain *float64 `json:"numberOfSnapshotsToRetain,omitempty" tf:"number_of_snapshots_to_retain,omitempty"`
 
-	// interval in hours between orphan file deletion job runs. Defaults to 24.
+	// Interval in hours between orphan file deletion job runs. Defaults to 24.
 	RunRateInHours *float64 `json:"runRateInHours,omitempty" tf:"run_rate_in_hours,omitempty"`
 
-	// The number of days to retain the Iceberg snapshots. Defaults to 5, or the corresponding Iceberg table configuration field if it exists.
+	// Number of days to retain the Iceberg snapshots. Defaults to 5, or the corresponding Iceberg table configuration field if it exists.
 	SnapshotRetentionPeriodInDays *float64 `json:"snapshotRetentionPeriodInDays,omitempty" tf:"snapshot_retention_period_in_days,omitempty"`
 }
 
@@ -281,13 +281,13 @@ type RetentionConfigurationIcebergConfigurationObservation struct {
 	// If set to false, snapshots are only deleted from table metadata, and the underlying data and metadata files are not deleted. Defaults to false.
 	CleanExpiredFiles *bool `json:"cleanExpiredFiles,omitempty" tf:"clean_expired_files,omitempty"`
 
-	// The number of Iceberg snapshots to retain within the retention period. Defaults to 1 or the corresponding Iceberg table configuration field if it exists.
+	// Number of Iceberg snapshots to retain within the retention period. Defaults to 1 or the corresponding Iceberg table configuration field if it exists.
 	NumberOfSnapshotsToRetain *float64 `json:"numberOfSnapshotsToRetain,omitempty" tf:"number_of_snapshots_to_retain,omitempty"`
 
-	// interval in hours between orphan file deletion job runs. Defaults to 24.
+	// Interval in hours between orphan file deletion job runs. Defaults to 24.
 	RunRateInHours *float64 `json:"runRateInHours,omitempty" tf:"run_rate_in_hours,omitempty"`
 
-	// The number of days to retain the Iceberg snapshots. Defaults to 5, or the corresponding Iceberg table configuration field if it exists.
+	// Number of days to retain the Iceberg snapshots. Defaults to 5, or the corresponding Iceberg table configuration field if it exists.
 	SnapshotRetentionPeriodInDays *float64 `json:"snapshotRetentionPeriodInDays,omitempty" tf:"snapshot_retention_period_in_days,omitempty"`
 }
 
@@ -297,34 +297,34 @@ type RetentionConfigurationIcebergConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	CleanExpiredFiles *bool `json:"cleanExpiredFiles,omitempty" tf:"clean_expired_files,omitempty"`
 
-	// The number of Iceberg snapshots to retain within the retention period. Defaults to 1 or the corresponding Iceberg table configuration field if it exists.
+	// Number of Iceberg snapshots to retain within the retention period. Defaults to 1 or the corresponding Iceberg table configuration field if it exists.
 	// +kubebuilder:validation:Optional
 	NumberOfSnapshotsToRetain *float64 `json:"numberOfSnapshotsToRetain,omitempty" tf:"number_of_snapshots_to_retain,omitempty"`
 
-	// interval in hours between orphan file deletion job runs. Defaults to 24.
+	// Interval in hours between orphan file deletion job runs. Defaults to 24.
 	// +kubebuilder:validation:Optional
 	RunRateInHours *float64 `json:"runRateInHours,omitempty" tf:"run_rate_in_hours,omitempty"`
 
-	// The number of days to retain the Iceberg snapshots. Defaults to 5, or the corresponding Iceberg table configuration field if it exists.
+	// Number of days to retain the Iceberg snapshots. Defaults to 5, or the corresponding Iceberg table configuration field if it exists.
 	// +kubebuilder:validation:Optional
 	SnapshotRetentionPeriodInDays *float64 `json:"snapshotRetentionPeriodInDays,omitempty" tf:"snapshot_retention_period_in_days,omitempty"`
 }
 
 type RetentionConfigurationInitParameters struct {
 
-	// The configuration for an Iceberg orphan file deletion optimizer.
+	// Configuration for an Iceberg compaction optimizer. See configuration.compaction_configuration.iceberg_configuration Block for additional details.
 	IcebergConfiguration []RetentionConfigurationIcebergConfigurationInitParameters `json:"icebergConfiguration,omitempty" tf:"iceberg_configuration,omitempty"`
 }
 
 type RetentionConfigurationObservation struct {
 
-	// The configuration for an Iceberg orphan file deletion optimizer.
+	// Configuration for an Iceberg compaction optimizer. See configuration.compaction_configuration.iceberg_configuration Block for additional details.
 	IcebergConfiguration []RetentionConfigurationIcebergConfigurationObservation `json:"icebergConfiguration,omitempty" tf:"iceberg_configuration,omitempty"`
 }
 
 type RetentionConfigurationParameters struct {
 
-	// The configuration for an Iceberg orphan file deletion optimizer.
+	// Configuration for an Iceberg compaction optimizer. See configuration.compaction_configuration.iceberg_configuration Block for additional details.
 	// +kubebuilder:validation:Optional
 	IcebergConfiguration []RetentionConfigurationIcebergConfigurationParameters `json:"icebergConfiguration,omitempty" tf:"iceberg_configuration,omitempty"`
 }

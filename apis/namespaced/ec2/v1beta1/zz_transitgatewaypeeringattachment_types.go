@@ -15,26 +15,26 @@ import (
 
 type OptionsInitParameters struct {
 
-	// Indicates whether dynamic routing is enabled or disabled.. Supports enable and disable.
+	// Indicates whether dynamic routing is enabled or disabled. Supports enable and disable. If not configured, the value is populated from the API.
 	DynamicRouting *string `json:"dynamicRouting,omitempty" tf:"dynamic_routing,omitempty"`
 }
 
 type OptionsObservation struct {
 
-	// Indicates whether dynamic routing is enabled or disabled.. Supports enable and disable.
+	// Indicates whether dynamic routing is enabled or disabled. Supports enable and disable. If not configured, the value is populated from the API.
 	DynamicRouting *string `json:"dynamicRouting,omitempty" tf:"dynamic_routing,omitempty"`
 }
 
 type OptionsParameters struct {
 
-	// Indicates whether dynamic routing is enabled or disabled.. Supports enable and disable.
+	// Indicates whether dynamic routing is enabled or disabled. Supports enable and disable. If not configured, the value is populated from the API.
 	// +kubebuilder:validation:Optional
 	DynamicRouting *string `json:"dynamicRouting,omitempty" tf:"dynamic_routing,omitempty"`
 }
 
 type TransitGatewayPeeringAttachmentInitParameters struct {
 
-	// Describes whether dynamic routing is enabled or disabled for the transit gateway peering request. See options below for more details!
+	// Block describing whether dynamic routing is enabled or disabled for the transit gateway peering request. If not configured, the value is populated from the API. See options below for more details!
 	Options *OptionsInitParameters `json:"options,omitempty" tf:"options,omitempty"`
 
 	// Account ID of EC2 Transit Gateway to peer with. Defaults to the account ID the AWS provider is currently connected to.
@@ -82,7 +82,7 @@ type TransitGatewayPeeringAttachmentObservation struct {
 	// EC2 Transit Gateway Attachment identifier.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Describes whether dynamic routing is enabled or disabled for the transit gateway peering request. See options below for more details!
+	// Block describing whether dynamic routing is enabled or disabled for the transit gateway peering request. If not configured, the value is populated from the API. See options below for more details!
 	Options *OptionsObservation `json:"options,omitempty" tf:"options,omitempty"`
 
 	// Account ID of EC2 Transit Gateway to peer with. Defaults to the account ID the AWS provider is currently connected to.
@@ -114,7 +114,7 @@ type TransitGatewayPeeringAttachmentObservation struct {
 
 type TransitGatewayPeeringAttachmentParameters struct {
 
-	// Describes whether dynamic routing is enabled or disabled for the transit gateway peering request. See options below for more details!
+	// Block describing whether dynamic routing is enabled or disabled for the transit gateway peering request. If not configured, the value is populated from the API. See options below for more details!
 	// +kubebuilder:validation:Optional
 	Options *OptionsParameters `json:"options,omitempty" tf:"options,omitempty"`
 

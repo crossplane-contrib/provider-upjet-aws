@@ -65,7 +65,7 @@ spec:
                       below.
                     properties:
                       enabled:
-                        description: Whether browser signing is enabled. When enabled,
+                        description: Whether to enable browser signing. When enabled,
                           the browser cryptographically signs HTTP requests to identify
                           itself as an AI agent to bot control vendors.
                         type: boolean
@@ -77,7 +77,7 @@ spec:
                       properties:
                         location:
                           description: Location from which to retrieve the certificate.
-                            See certificates.location below.
+                            See certificate.location below.
                           properties:
                             secretsManager:
                               description: AWS Secrets Manager location of the certificate.
@@ -333,8 +333,7 @@ spec:
                           are stored. See s3_location below.
                         properties:
                           bucket:
-                            description: Name of the S3 bucket where recordings are
-                              stored.
+                            description: Name of the S3 bucket.
                             type: string
                           bucketRef:
                             description: Reference to a Bucket in s3 to populate bucket.
@@ -417,7 +416,7 @@ spec:
                                 type: object
                             type: object
                           prefix:
-                            description: S3 key prefix for recording files.
+                            description: Prefix for objects in the S3 bucket.
                             type: string
                         type: object
                     type: object
@@ -454,7 +453,7 @@ spec:
                       below.
                     properties:
                       enabled:
-                        description: Whether browser signing is enabled. When enabled,
+                        description: Whether to enable browser signing. When enabled,
                           the browser cryptographically signs HTTP requests to identify
                           itself as an AI agent to bot control vendors.
                         type: boolean
@@ -466,7 +465,7 @@ spec:
                       properties:
                         location:
                           description: Location from which to retrieve the certificate.
-                            See certificates.location below.
+                            See certificate.location below.
                           properties:
                             secretsManager:
                               description: AWS Secrets Manager location of the certificate.
@@ -722,8 +721,7 @@ spec:
                           are stored. See s3_location below.
                         properties:
                           bucket:
-                            description: Name of the S3 bucket where recordings are
-                              stored.
+                            description: Name of the S3 bucket.
                             type: string
                           bucketRef:
                             description: Reference to a Bucket in s3 to populate bucket.
@@ -806,7 +804,7 @@ spec:
                                 type: object
                             type: object
                           prefix:
-                            description: S3 key prefix for recording files.
+                            description: Prefix for objects in the S3 bucket.
                             type: string
                         type: object
                     type: object
@@ -897,7 +895,7 @@ spec:
                       below.
                     properties:
                       enabled:
-                        description: Whether browser signing is enabled. When enabled,
+                        description: Whether to enable browser signing. When enabled,
                           the browser cryptographically signs HTTP requests to identify
                           itself as an AI agent to bot control vendors.
                         type: boolean
@@ -909,7 +907,7 @@ spec:
                       properties:
                         location:
                           description: Location from which to retrieve the certificate.
-                            See certificates.location below.
+                            See certificate.location below.
                           properties:
                             secretsManager:
                               description: AWS Secrets Manager location of the certificate.
@@ -1005,11 +1003,10 @@ spec:
                           are stored. See s3_location below.
                         properties:
                           bucket:
-                            description: Name of the S3 bucket where recordings are
-                              stored.
+                            description: Name of the S3 bucket.
                             type: string
                           prefix:
-                            description: S3 key prefix for recording files.
+                            description: Prefix for objects in the S3 bucket.
                             type: string
                         type: object
                     type: object
@@ -1027,9 +1024,8 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
                 type: object

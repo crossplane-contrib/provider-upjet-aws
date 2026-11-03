@@ -60,26 +60,25 @@ spec:
               forProvider:
                 properties:
                   accountId:
-                    description: The AWS account ID for the account.
+                    description: AWS account ID for the account.
                     type: string
                   email:
-                    description: The email address for the account.
+                    description: Email address for the account.
                     type: string
                   invitationDisableEmailNotification:
-                    description: Specifies whether to send an email notification to
-                      the root user of each account that the invitation will be sent
-                      to. This notification is in addition to an alert that the root
-                      user receives in AWS Personal Health Dashboard. To send an email
-                      notification to the root user of each account, set this value
-                      to true.
+                    description: Whether to send an email notification to the root
+                      user of each account that the invitation will be sent to. This
+                      notification is in addition to an alert that the root user receives
+                      in AWS Personal Health Dashboard. To send an email notification
+                      to the root user of each account, set this value to true.
                     type: boolean
                   invitationMessage:
-                    description: A custom message to include in the invitation. Amazon
+                    description: Custom message to include in the invitation. Amazon
                       Macie adds this message to the standard content that it sends
                       for an invitation.
                     type: string
                   invite:
-                    description: Send an invitation to a member
+                    description: Whether to send an invitation to a member.
                     type: boolean
                   region:
                     description: |-
@@ -87,9 +86,9 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   status:
-                    description: Specifies the status for the account. To enable Amazon
-                      Macie and start all Macie activities for the account, set this
-                      value to ENABLED. Valid values are ENABLED or PAUSED.
+                    description: Status for the account. To enable Amazon Macie and
+                      start all Macie activities for the account, set this value to
+                      ENABLED. Valid values are ENABLED or PAUSED.
                     type: string
                   tags:
                     additionalProperties:
@@ -114,31 +113,30 @@ spec:
                   autoscaler.
                 properties:
                   accountId:
-                    description: The AWS account ID for the account.
+                    description: AWS account ID for the account.
                     type: string
                   email:
-                    description: The email address for the account.
+                    description: Email address for the account.
                     type: string
                   invitationDisableEmailNotification:
-                    description: Specifies whether to send an email notification to
-                      the root user of each account that the invitation will be sent
-                      to. This notification is in addition to an alert that the root
-                      user receives in AWS Personal Health Dashboard. To send an email
-                      notification to the root user of each account, set this value
-                      to true.
+                    description: Whether to send an email notification to the root
+                      user of each account that the invitation will be sent to. This
+                      notification is in addition to an alert that the root user receives
+                      in AWS Personal Health Dashboard. To send an email notification
+                      to the root user of each account, set this value to true.
                     type: boolean
                   invitationMessage:
-                    description: A custom message to include in the invitation. Amazon
+                    description: Custom message to include in the invitation. Amazon
                       Macie adds this message to the standard content that it sends
                       for an invitation.
                     type: string
                   invite:
-                    description: Send an invitation to a member
+                    description: Whether to send an invitation to a member.
                     type: boolean
                   status:
-                    description: Specifies the status for the account. To enable Amazon
-                      Macie and start all Macie activities for the account, set this
-                      value to ENABLED. Valid values are ENABLED or PAUSED.
+                    description: Status for the account. To enable Amazon Macie and
+                      start all Macie activities for the account, set this value to
+                      ENABLED. Valid values are ENABLED or PAUSED.
                     type: string
                   tags:
                     additionalProperties:
@@ -220,44 +218,43 @@ spec:
               atProvider:
                 properties:
                   accountId:
-                    description: The AWS account ID for the account.
+                    description: AWS account ID for the account.
                     type: string
                   administratorAccountId:
-                    description: The AWS account ID for the administrator account.
+                    description: AWS account ID for the administrator account.
                     type: string
                   arn:
                     description: ARN of the account.
                     type: string
                   email:
-                    description: The email address for the account.
+                    description: Email address for the account.
                     type: string
                   id:
-                    description: The unique identifier (ID) of the macie Member.
+                    description: Unique identifier (ID) of the Macie Member.
                     type: string
                   invitationDisableEmailNotification:
-                    description: Specifies whether to send an email notification to
-                      the root user of each account that the invitation will be sent
-                      to. This notification is in addition to an alert that the root
-                      user receives in AWS Personal Health Dashboard. To send an email
-                      notification to the root user of each account, set this value
-                      to true.
+                    description: Whether to send an email notification to the root
+                      user of each account that the invitation will be sent to. This
+                      notification is in addition to an alert that the root user receives
+                      in AWS Personal Health Dashboard. To send an email notification
+                      to the root user of each account, set this value to true.
                     type: boolean
                   invitationMessage:
-                    description: A custom message to include in the invitation. Amazon
+                    description: Custom message to include in the invitation. Amazon
                       Macie adds this message to the standard content that it sends
                       for an invitation.
                     type: string
                   invite:
-                    description: Send an invitation to a member
+                    description: Whether to send an invitation to a member.
                     type: boolean
                   invitedAt:
-                    description: The date and time, in UTC and extended RFC 3339 format,
+                    description: Date and time, in UTC and extended RFC 3339 format,
                       when an Amazon Macie membership invitation was last sent to
                       the account. This value is null if a Macie invitation hasn't
                       been sent to the account.
                     type: string
                   masterAccountId:
-                    description: The AWS account ID for the account.
+                    description: AWS account ID for the master account.
                     type: string
                   region:
                     description: |-
@@ -265,13 +262,13 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   relationshipStatus:
-                    description: The current status of the relationship between the
-                      account and the administrator account.
+                    description: Current status of the relationship between the account
+                      and the administrator account.
                     type: string
                   status:
-                    description: Specifies the status for the account. To enable Amazon
-                      Macie and start all Macie activities for the account, set this
-                      value to ENABLED. Valid values are ENABLED or PAUSED.
+                    description: Status for the account. To enable Amazon Macie and
+                      start all Macie activities for the account, set this value to
+                      ENABLED. Valid values are ENABLED or PAUSED.
                     type: string
                   tags:
                     additionalProperties:
@@ -282,13 +279,12 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
                   updatedAt:
-                    description: The date and time, in UTC and extended RFC 3339 format,
+                    description: Date and time, in UTC and extended RFC 3339 format,
                       of the most recent change to the status of the relationship
                       between the account and the administrator account.
                     type: string

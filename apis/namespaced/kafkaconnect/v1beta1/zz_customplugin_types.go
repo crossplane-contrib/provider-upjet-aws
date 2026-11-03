@@ -15,10 +15,10 @@ import (
 
 type CustomPluginInitParameters_2 struct {
 
-	// The type of the plugin file. Allowed values are ZIP and JAR.
+	// Type of the plugin file. Allowed values are ZIP and JAR.
 	ContentType *string `json:"contentType,omitempty" tf:"content_type,omitempty"`
 
-	// A summary description of the custom plugin.
+	// Summary description of the custom plugin.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Information about the location of a custom plugin. See location Block for details.
@@ -34,10 +34,10 @@ type CustomPluginObservation_2 struct {
 	// the ARN of the custom plugin.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The type of the plugin file. Allowed values are ZIP and JAR.
+	// Type of the plugin file. Allowed values are ZIP and JAR.
 	ContentType *string `json:"contentType,omitempty" tf:"content_type,omitempty"`
 
-	// A summary description of the custom plugin.
+	// Summary description of the custom plugin.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -48,7 +48,7 @@ type CustomPluginObservation_2 struct {
 	// Information about the location of a custom plugin. See location Block for details.
 	Location *LocationObservation `json:"location,omitempty" tf:"location,omitempty"`
 
-	// The name of the custom plugin..
+	// Name of the custom plugin.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -62,18 +62,18 @@ type CustomPluginObservation_2 struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type CustomPluginParameters_2 struct {
 
-	// The type of the plugin file. Allowed values are ZIP and JAR.
+	// Type of the plugin file. Allowed values are ZIP and JAR.
 	// +kubebuilder:validation:Optional
 	ContentType *string `json:"contentType,omitempty" tf:"content_type,omitempty"`
 
-	// A summary description of the custom plugin.
+	// Summary description of the custom plugin.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
@@ -81,7 +81,7 @@ type CustomPluginParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	Location *LocationParameters `json:"location,omitempty" tf:"location,omitempty"`
 
-	// The name of the custom plugin..
+	// Name of the custom plugin.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -130,7 +130,7 @@ type LocationS3InitParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketArnSelector *v2.NamespacedSelector `json:"bucketArnSelector,omitempty" tf:"-"`
 
-	// The file key for an object in an S3 bucket.
+	// File key for an object in an S3 bucket.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/s3/v1beta1.Object
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("key",false)
 	FileKey *string `json:"fileKey,omitempty" tf:"file_key,omitempty"`
@@ -143,7 +143,7 @@ type LocationS3InitParameters struct {
 	// +kubebuilder:validation:Optional
 	FileKeySelector *v2.NamespacedSelector `json:"fileKeySelector,omitempty" tf:"-"`
 
-	// The version of an object in an S3 bucket.
+	// Version of an object in an S3 bucket.
 	ObjectVersion *string `json:"objectVersion,omitempty" tf:"object_version,omitempty"`
 }
 
@@ -152,10 +152,10 @@ type LocationS3Observation struct {
 	// ARN of an S3 bucket.
 	BucketArn *string `json:"bucketArn,omitempty" tf:"bucket_arn,omitempty"`
 
-	// The file key for an object in an S3 bucket.
+	// File key for an object in an S3 bucket.
 	FileKey *string `json:"fileKey,omitempty" tf:"file_key,omitempty"`
 
-	// The version of an object in an S3 bucket.
+	// Version of an object in an S3 bucket.
 	ObjectVersion *string `json:"objectVersion,omitempty" tf:"object_version,omitempty"`
 }
 
@@ -175,7 +175,7 @@ type LocationS3Parameters struct {
 	// +kubebuilder:validation:Optional
 	BucketArnSelector *v2.NamespacedSelector `json:"bucketArnSelector,omitempty" tf:"-"`
 
-	// The file key for an object in an S3 bucket.
+	// File key for an object in an S3 bucket.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/s3/v1beta1.Object
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("key",false)
 	// +kubebuilder:validation:Optional
@@ -189,7 +189,7 @@ type LocationS3Parameters struct {
 	// +kubebuilder:validation:Optional
 	FileKeySelector *v2.NamespacedSelector `json:"fileKeySelector,omitempty" tf:"-"`
 
-	// The version of an object in an S3 bucket.
+	// Version of an object in an S3 bucket.
 	// +kubebuilder:validation:Optional
 	ObjectVersion *string `json:"objectVersion,omitempty" tf:"object_version,omitempty"`
 }

@@ -40,7 +40,7 @@ type ClusterInstanceInitParameters struct {
 	// The name of the database engine to be used for the neptune instance. Defaults to neptune. Valid Values: neptune.
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
 
-	// The neptune engine version. Currently configuring this argumnet has no effect.
+	// The neptune engine version. Currently configuring this argument has no effect.
 	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
 
 	// The instance class to use.
@@ -124,7 +124,7 @@ type ClusterInstanceObservation struct {
 	// The name of the database engine to be used for the neptune instance. Defaults to neptune. Valid Values: neptune.
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
 
-	// The neptune engine version. Currently configuring this argumnet has no effect.
+	// The neptune engine version. Currently configuring this argument has no effect.
 	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
 
 	// The Instance identifier
@@ -215,7 +215,7 @@ type ClusterInstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
 
-	// The neptune engine version. Currently configuring this argumnet has no effect.
+	// The neptune engine version. Currently configuring this argument has no effect.
 	// +kubebuilder:validation:Optional
 	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
 

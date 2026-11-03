@@ -73,19 +73,19 @@ type AcceleratorTotalMemoryMibParameters struct {
 
 type AlarmSpecificationInitParameters struct {
 
-	// List of Cloudwatch alarms. If any of these alarms goes into ALARM state, Instance Refresh is failed.
+	// List of CloudWatch alarms. If any of these alarms goes into ALARM state, Instance Refresh is failed.
 	Alarms []*string `json:"alarms,omitempty" tf:"alarms,omitempty"`
 }
 
 type AlarmSpecificationObservation struct {
 
-	// List of Cloudwatch alarms. If any of these alarms goes into ALARM state, Instance Refresh is failed.
+	// List of CloudWatch alarms. If any of these alarms goes into ALARM state, Instance Refresh is failed.
 	Alarms []*string `json:"alarms,omitempty" tf:"alarms,omitempty"`
 }
 
 type AlarmSpecificationParameters struct {
 
-	// List of Cloudwatch alarms. If any of these alarms goes into ALARM state, Instance Refresh is failed.
+	// List of CloudWatch alarms. If any of these alarms goes into ALARM state, Instance Refresh is failed.
 	// +kubebuilder:validation:Optional
 	Alarms []*string `json:"alarms,omitempty" tf:"alarms,omitempty"`
 }
@@ -126,13 +126,13 @@ type AutoscalingGroupInitParameters struct {
 	// +listType=set
 	EnabledMetrics []*string `json:"enabledMetrics,omitempty" tf:"enabled_metrics,omitempty"`
 
-	// Allows deleting the Auto Scaling Group without waiting
-	// for all instances in the pool to terminate. You can force an Auto Scaling Group to delete
+	// Allows deleting the Auto Scaling group without waiting
+	// for all instances in the pool to terminate. You can force an Auto Scaling group to delete
 	// even if it's in the process of scaling a resource. This bypasses that
 	// behavior and potentially leaves resources dangling.
 	ForceDelete *bool `json:"forceDelete,omitempty" tf:"force_delete,omitempty"`
 
-	// Allows deleting the Auto Scaling Group without waiting for all instances in the warm pool to terminate.
+	// Allows deleting the Auto Scaling group without waiting for all instances in the warm pool to terminate.
 	ForceDeleteWarmPool *bool `json:"forceDeleteWarmPool,omitempty" tf:"force_delete_warm_pool,omitempty"`
 
 	// Time (in seconds) after instance comes into service before checking health.
@@ -146,14 +146,14 @@ type AutoscalingGroupInitParameters struct {
 
 	// One or more
 	// Lifecycle Hooks
-	// to attach to the Auto Scaling Group before instances are launched. The
+	// to attach to the Auto Scaling group before instances are launched. The
 	// syntax is exactly the same as the separate
 	// aws_autoscaling_lifecycle_hook
 	// resource, without the autoscaling_group_name attribute. Please note that this will only work when creating
-	// a new Auto Scaling Group. For all other use-cases, please use aws_autoscaling_lifecycle_hook resource.
+	// a new Auto Scaling group. For all other use-cases, please use aws_autoscaling_lifecycle_hook resource.
 	InitialLifecycleHook []InitialLifecycleHookInitParameters `json:"initialLifecycleHook,omitempty" tf:"initial_lifecycle_hook,omitempty"`
 
-	// If this block is configured, adds an instance lifecycle policy to the specified Auto Scaling Group. Defined below.
+	// If this block is configured, adds an instance lifecycle policy to the specified Auto Scaling group. Defined below.
 	InstanceLifecyclePolicy *InstanceLifecyclePolicyInitParameters `json:"instanceLifecyclePolicy,omitempty" tf:"instance_lifecycle_policy,omitempty"`
 
 	// If this block is configured, add a instance maintenance policy to the specified Auto Scaling group. Defined below.
@@ -161,7 +161,7 @@ type AutoscalingGroupInitParameters struct {
 
 	// If this block is configured, start an
 	// Instance Refresh
-	// when this Auto Scaling Group is updated. Defined below.
+	// when this Auto Scaling group is updated. Defined below.
 	InstanceRefresh *InstanceRefreshInitParameters `json:"instanceRefresh,omitempty" tf:"instance_refresh,omitempty"`
 
 	// Name of the launch configuration to use.
@@ -182,7 +182,7 @@ type AutoscalingGroupInitParameters struct {
 	// Maximum amount of time, in seconds, that an instance can be in service, values must be either equal to 0 or between 86400 and 31536000 seconds.
 	MaxInstanceLifetime *float64 `json:"maxInstanceLifetime,omitempty" tf:"max_instance_lifetime,omitempty"`
 
-	// Maximum size of the Auto Scaling Group.
+	// Maximum size of the Auto Scaling group.
 	MaxSize *float64 `json:"maxSize,omitempty" tf:"max_size,omitempty"`
 
 	// Granularity to associate with the metrics to collect. The only valid value is 1Minute. Default is 1Minute.
@@ -192,7 +192,7 @@ type AutoscalingGroupInitParameters struct {
 	// (See also Waiting for Capacity below.)
 	MinELBCapacity *float64 `json:"minElbCapacity,omitempty" tf:"min_elb_capacity,omitempty"`
 
-	// Minimum size of the Auto Scaling Group.
+	// Minimum size of the Auto Scaling group.
 	// (See also Waiting for Capacity below.)
 	MinSize *float64 `json:"minSize,omitempty" tf:"min_size,omitempty"`
 
@@ -232,15 +232,15 @@ type AutoscalingGroupInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ServiceLinkedRoleArnSelector *v2.NamespacedSelector `json:"serviceLinkedRoleArnSelector,omitempty" tf:"-"`
 
-	// List of processes to suspend for the Auto Scaling Group. The allowed values are Launch, Terminate, HealthCheck, ReplaceUnhealthy, AZRebalance, AlarmNotification, ScheduledActions, AddToLoadBalancer, InstanceRefresh.
-	// Note that if you suspend either the Launch or Terminate process types, it can prevent your Auto Scaling Group from functioning properly.
+	// List of processes to suspend for the Auto Scaling group. The allowed values are Launch, Terminate, HealthCheck, ReplaceUnhealthy, AZRebalance, AlarmNotification, ScheduledActions, AddToLoadBalancer, InstanceRefresh.
+	// Note that if you suspend either the Launch or Terminate process types, it can prevent your Auto Scaling group from functioning properly.
 	// +listType=set
 	SuspendedProcesses []*string `json:"suspendedProcesses,omitempty" tf:"suspended_processes,omitempty"`
 
 	// Configuration block(s) containing resource tags. See tag Block below for more details.
 	Tag []TagInitParameters `json:"tag,omitempty" tf:"tag,omitempty"`
 
-	// List of policies to decide how the instances in the Auto Scaling Group should be terminated. The allowed values are OldestInstance, NewestInstance, OldestLaunchConfiguration, ClosestToNextInstanceHour, OldestLaunchTemplate, AllocationStrategy, Default. Additionally, the ARN of a Lambda function can be specified for custom termination policies.
+	// List of policies to decide how the instances in the Auto Scaling group should be terminated. The allowed values are OldestInstance, NewestInstance, OldestLaunchConfiguration, ClosestToNextInstanceHour, OldestLaunchTemplate, AllocationStrategy, Default. Additionally, the ARN of a Lambda function can be specified for custom termination policies.
 	TerminationPolicies []*string `json:"terminationPolicies,omitempty" tf:"termination_policies,omitempty"`
 
 	// Attaches one or more traffic sources to the specified Auto Scaling group.
@@ -275,7 +275,7 @@ type AutoscalingGroupInitParameters struct {
 
 type AutoscalingGroupObservation struct {
 
-	// ARN for this Auto Scaling Group
+	// ARN for this Auto Scaling group
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The instance capacity distribution across Availability Zones. See availability_zone_distribution Block below for more details.
@@ -312,13 +312,13 @@ type AutoscalingGroupObservation struct {
 	// +listType=set
 	EnabledMetrics []*string `json:"enabledMetrics,omitempty" tf:"enabled_metrics,omitempty"`
 
-	// Allows deleting the Auto Scaling Group without waiting
-	// for all instances in the pool to terminate. You can force an Auto Scaling Group to delete
+	// Allows deleting the Auto Scaling group without waiting
+	// for all instances in the pool to terminate. You can force an Auto Scaling group to delete
 	// even if it's in the process of scaling a resource. This bypasses that
 	// behavior and potentially leaves resources dangling.
 	ForceDelete *bool `json:"forceDelete,omitempty" tf:"force_delete,omitempty"`
 
-	// Allows deleting the Auto Scaling Group without waiting for all instances in the warm pool to terminate.
+	// Allows deleting the Auto Scaling group without waiting for all instances in the warm pool to terminate.
 	ForceDeleteWarmPool *bool `json:"forceDeleteWarmPool,omitempty" tf:"force_delete_warm_pool,omitempty"`
 
 	// Time (in seconds) after instance comes into service before checking health.
@@ -327,7 +327,7 @@ type AutoscalingGroupObservation struct {
 	// "EC2" or "ELB". Controls how health checking is done.
 	HealthCheckType *string `json:"healthCheckType,omitempty" tf:"health_check_type,omitempty"`
 
-	// Auto Scaling Group id.
+	// Auto Scaling group ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Whether to ignore failed Auto Scaling scaling activities while waiting for capacity. The default is false -- failed scaling activities cause errors to be returned.
@@ -335,14 +335,14 @@ type AutoscalingGroupObservation struct {
 
 	// One or more
 	// Lifecycle Hooks
-	// to attach to the Auto Scaling Group before instances are launched. The
+	// to attach to the Auto Scaling group before instances are launched. The
 	// syntax is exactly the same as the separate
 	// aws_autoscaling_lifecycle_hook
 	// resource, without the autoscaling_group_name attribute. Please note that this will only work when creating
-	// a new Auto Scaling Group. For all other use-cases, please use aws_autoscaling_lifecycle_hook resource.
+	// a new Auto Scaling group. For all other use-cases, please use aws_autoscaling_lifecycle_hook resource.
 	InitialLifecycleHook []InitialLifecycleHookObservation `json:"initialLifecycleHook,omitempty" tf:"initial_lifecycle_hook,omitempty"`
 
-	// If this block is configured, adds an instance lifecycle policy to the specified Auto Scaling Group. Defined below.
+	// If this block is configured, adds an instance lifecycle policy to the specified Auto Scaling group. Defined below.
 	InstanceLifecyclePolicy *InstanceLifecyclePolicyObservation `json:"instanceLifecyclePolicy,omitempty" tf:"instance_lifecycle_policy,omitempty"`
 
 	// If this block is configured, add a instance maintenance policy to the specified Auto Scaling group. Defined below.
@@ -350,7 +350,7 @@ type AutoscalingGroupObservation struct {
 
 	// If this block is configured, start an
 	// Instance Refresh
-	// when this Auto Scaling Group is updated. Defined below.
+	// when this Auto Scaling group is updated. Defined below.
 	InstanceRefresh *InstanceRefreshObservation `json:"instanceRefresh,omitempty" tf:"instance_refresh,omitempty"`
 
 	// Name of the launch configuration to use.
@@ -359,7 +359,7 @@ type AutoscalingGroupObservation struct {
 	// Nested argument with Launch template specification to use to launch instances. See launch_template Block below for more details.
 	LaunchTemplate *LaunchTemplateObservation `json:"launchTemplate,omitempty" tf:"launch_template,omitempty"`
 
-	// List of elastic load balancer names to add to the autoscaling
+	// List of elastic load balancer names to add to the Auto Scaling
 	// group names. Only valid for classic load balancers. For ALBs, use target_group_arns instead. To remove all load balancer attachments an empty list should be specified.
 	// +listType=set
 	LoadBalancers []*string `json:"loadBalancers,omitempty" tf:"load_balancers,omitempty"`
@@ -367,7 +367,7 @@ type AutoscalingGroupObservation struct {
 	// Maximum amount of time, in seconds, that an instance can be in service, values must be either equal to 0 or between 86400 and 31536000 seconds.
 	MaxInstanceLifetime *float64 `json:"maxInstanceLifetime,omitempty" tf:"max_instance_lifetime,omitempty"`
 
-	// Maximum size of the Auto Scaling Group.
+	// Maximum size of the Auto Scaling group.
 	MaxSize *float64 `json:"maxSize,omitempty" tf:"max_size,omitempty"`
 
 	// Granularity to associate with the metrics to collect. The only valid value is 1Minute. Default is 1Minute.
@@ -377,7 +377,7 @@ type AutoscalingGroupObservation struct {
 	// (See also Waiting for Capacity below.)
 	MinELBCapacity *float64 `json:"minElbCapacity,omitempty" tf:"min_elb_capacity,omitempty"`
 
-	// Minimum size of the Auto Scaling Group.
+	// Minimum size of the Auto Scaling group.
 	// (See also Waiting for Capacity below.)
 	MinSize *float64 `json:"minSize,omitempty" tf:"min_size,omitempty"`
 
@@ -404,8 +404,8 @@ type AutoscalingGroupObservation struct {
 	// ARN of the service-linked role that the ASG will use to call other AWS services
 	ServiceLinkedRoleArn *string `json:"serviceLinkedRoleArn,omitempty" tf:"service_linked_role_arn,omitempty"`
 
-	// List of processes to suspend for the Auto Scaling Group. The allowed values are Launch, Terminate, HealthCheck, ReplaceUnhealthy, AZRebalance, AlarmNotification, ScheduledActions, AddToLoadBalancer, InstanceRefresh.
-	// Note that if you suspend either the Launch or Terminate process types, it can prevent your Auto Scaling Group from functioning properly.
+	// List of processes to suspend for the Auto Scaling group. The allowed values are Launch, Terminate, HealthCheck, ReplaceUnhealthy, AZRebalance, AlarmNotification, ScheduledActions, AddToLoadBalancer, InstanceRefresh.
+	// Note that if you suspend either the Launch or Terminate process types, it can prevent your Auto Scaling group from functioning properly.
 	// +listType=set
 	SuspendedProcesses []*string `json:"suspendedProcesses,omitempty" tf:"suspended_processes,omitempty"`
 
@@ -416,7 +416,7 @@ type AutoscalingGroupObservation struct {
 	// +listType=set
 	TargetGroupArns []*string `json:"targetGroupArns,omitempty" tf:"target_group_arns,omitempty"`
 
-	// List of policies to decide how the instances in the Auto Scaling Group should be terminated. The allowed values are OldestInstance, NewestInstance, OldestLaunchConfiguration, ClosestToNextInstanceHour, OldestLaunchTemplate, AllocationStrategy, Default. Additionally, the ARN of a Lambda function can be specified for custom termination policies.
+	// List of policies to decide how the instances in the Auto Scaling group should be terminated. The allowed values are OldestInstance, NewestInstance, OldestLaunchConfiguration, ClosestToNextInstanceHour, OldestLaunchTemplate, AllocationStrategy, Default. Additionally, the ARN of a Lambda function can be specified for custom termination policies.
 	TerminationPolicies []*string `json:"terminationPolicies,omitempty" tf:"termination_policies,omitempty"`
 
 	// Attaches one or more traffic sources to the specified Auto Scaling group.
@@ -489,14 +489,14 @@ type AutoscalingGroupParameters struct {
 	// +listType=set
 	EnabledMetrics []*string `json:"enabledMetrics,omitempty" tf:"enabled_metrics,omitempty"`
 
-	// Allows deleting the Auto Scaling Group without waiting
-	// for all instances in the pool to terminate. You can force an Auto Scaling Group to delete
+	// Allows deleting the Auto Scaling group without waiting
+	// for all instances in the pool to terminate. You can force an Auto Scaling group to delete
 	// even if it's in the process of scaling a resource. This bypasses that
 	// behavior and potentially leaves resources dangling.
 	// +kubebuilder:validation:Optional
 	ForceDelete *bool `json:"forceDelete,omitempty" tf:"force_delete,omitempty"`
 
-	// Allows deleting the Auto Scaling Group without waiting for all instances in the warm pool to terminate.
+	// Allows deleting the Auto Scaling group without waiting for all instances in the warm pool to terminate.
 	// +kubebuilder:validation:Optional
 	ForceDeleteWarmPool *bool `json:"forceDeleteWarmPool,omitempty" tf:"force_delete_warm_pool,omitempty"`
 
@@ -514,15 +514,15 @@ type AutoscalingGroupParameters struct {
 
 	// One or more
 	// Lifecycle Hooks
-	// to attach to the Auto Scaling Group before instances are launched. The
+	// to attach to the Auto Scaling group before instances are launched. The
 	// syntax is exactly the same as the separate
 	// aws_autoscaling_lifecycle_hook
 	// resource, without the autoscaling_group_name attribute. Please note that this will only work when creating
-	// a new Auto Scaling Group. For all other use-cases, please use aws_autoscaling_lifecycle_hook resource.
+	// a new Auto Scaling group. For all other use-cases, please use aws_autoscaling_lifecycle_hook resource.
 	// +kubebuilder:validation:Optional
 	InitialLifecycleHook []InitialLifecycleHookParameters `json:"initialLifecycleHook,omitempty" tf:"initial_lifecycle_hook,omitempty"`
 
-	// If this block is configured, adds an instance lifecycle policy to the specified Auto Scaling Group. Defined below.
+	// If this block is configured, adds an instance lifecycle policy to the specified Auto Scaling group. Defined below.
 	// +kubebuilder:validation:Optional
 	InstanceLifecyclePolicy *InstanceLifecyclePolicyParameters `json:"instanceLifecyclePolicy,omitempty" tf:"instance_lifecycle_policy,omitempty"`
 
@@ -532,7 +532,7 @@ type AutoscalingGroupParameters struct {
 
 	// If this block is configured, start an
 	// Instance Refresh
-	// when this Auto Scaling Group is updated. Defined below.
+	// when this Auto Scaling group is updated. Defined below.
 	// +kubebuilder:validation:Optional
 	InstanceRefresh *InstanceRefreshParameters `json:"instanceRefresh,omitempty" tf:"instance_refresh,omitempty"`
 
@@ -557,7 +557,7 @@ type AutoscalingGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	MaxInstanceLifetime *float64 `json:"maxInstanceLifetime,omitempty" tf:"max_instance_lifetime,omitempty"`
 
-	// Maximum size of the Auto Scaling Group.
+	// Maximum size of the Auto Scaling group.
 	// +kubebuilder:validation:Optional
 	MaxSize *float64 `json:"maxSize,omitempty" tf:"max_size,omitempty"`
 
@@ -570,7 +570,7 @@ type AutoscalingGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	MinELBCapacity *float64 `json:"minElbCapacity,omitempty" tf:"min_elb_capacity,omitempty"`
 
-	// Minimum size of the Auto Scaling Group.
+	// Minimum size of the Auto Scaling group.
 	// (See also Waiting for Capacity below.)
 	// +kubebuilder:validation:Optional
 	MinSize *float64 `json:"minSize,omitempty" tf:"min_size,omitempty"`
@@ -620,8 +620,8 @@ type AutoscalingGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	ServiceLinkedRoleArnSelector *v2.NamespacedSelector `json:"serviceLinkedRoleArnSelector,omitempty" tf:"-"`
 
-	// List of processes to suspend for the Auto Scaling Group. The allowed values are Launch, Terminate, HealthCheck, ReplaceUnhealthy, AZRebalance, AlarmNotification, ScheduledActions, AddToLoadBalancer, InstanceRefresh.
-	// Note that if you suspend either the Launch or Terminate process types, it can prevent your Auto Scaling Group from functioning properly.
+	// List of processes to suspend for the Auto Scaling group. The allowed values are Launch, Terminate, HealthCheck, ReplaceUnhealthy, AZRebalance, AlarmNotification, ScheduledActions, AddToLoadBalancer, InstanceRefresh.
+	// Note that if you suspend either the Launch or Terminate process types, it can prevent your Auto Scaling group from functioning properly.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	SuspendedProcesses []*string `json:"suspendedProcesses,omitempty" tf:"suspended_processes,omitempty"`
@@ -630,7 +630,7 @@ type AutoscalingGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	Tag []TagParameters `json:"tag,omitempty" tf:"tag,omitempty"`
 
-	// List of policies to decide how the instances in the Auto Scaling Group should be terminated. The allowed values are OldestInstance, NewestInstance, OldestLaunchConfiguration, ClosestToNextInstanceHour, OldestLaunchTemplate, AllocationStrategy, Default. Additionally, the ARN of a Lambda function can be specified for custom termination policies.
+	// List of policies to decide how the instances in the Auto Scaling group should be terminated. The allowed values are OldestInstance, NewestInstance, OldestLaunchConfiguration, ClosestToNextInstanceHour, OldestLaunchTemplate, AllocationStrategy, Default. Additionally, the ARN of a Lambda function can be specified for custom termination policies.
 	// +kubebuilder:validation:Optional
 	TerminationPolicies []*string `json:"terminationPolicies,omitempty" tf:"termination_policies,omitempty"`
 
@@ -748,7 +748,7 @@ type CapacityReservationSpecificationParameters struct {
 
 type CapacityReservationTargetInitParameters struct {
 
-	// List of On-Demand Capacity Reservation Ids. Conflicts with capacity_reservation_resource_group_arns.
+	// List of On-Demand Capacity Reservation IDs. Conflicts with capacity_reservation_resource_group_arns.
 	CapacityReservationIds []*string `json:"capacityReservationIds,omitempty" tf:"capacity_reservation_ids,omitempty"`
 
 	// List of On-Demand Capacity Reservation Resource Group Arns. Conflicts with capacity_reservation_ids.
@@ -757,7 +757,7 @@ type CapacityReservationTargetInitParameters struct {
 
 type CapacityReservationTargetObservation struct {
 
-	// List of On-Demand Capacity Reservation Ids. Conflicts with capacity_reservation_resource_group_arns.
+	// List of On-Demand Capacity Reservation IDs. Conflicts with capacity_reservation_resource_group_arns.
 	CapacityReservationIds []*string `json:"capacityReservationIds,omitempty" tf:"capacity_reservation_ids,omitempty"`
 
 	// List of On-Demand Capacity Reservation Resource Group Arns. Conflicts with capacity_reservation_ids.
@@ -766,7 +766,7 @@ type CapacityReservationTargetObservation struct {
 
 type CapacityReservationTargetParameters struct {
 
-	// List of On-Demand Capacity Reservation Ids. Conflicts with capacity_reservation_resource_group_arns.
+	// List of On-Demand Capacity Reservation IDs. Conflicts with capacity_reservation_resource_group_arns.
 	// +kubebuilder:validation:Optional
 	CapacityReservationIds []*string `json:"capacityReservationIds,omitempty" tf:"capacity_reservation_ids,omitempty"`
 
@@ -782,15 +782,15 @@ type InitialLifecycleHookInitParameters struct {
 
 	LifecycleTransition *string `json:"lifecycleTransition,omitempty" tf:"lifecycle_transition,omitempty"`
 
-	// Name of the Auto Scaling Group. Conflicts with name_prefix.
+	// Name of the Auto Scaling group. Conflicts with name_prefix.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	NotificationMetadata *string `json:"notificationMetadata,omitempty" tf:"notification_metadata,omitempty"`
 
-	// ARN for this Auto Scaling Group
+	// ARN for this Auto Scaling group
 	NotificationTargetArn *string `json:"notificationTargetArn,omitempty" tf:"notification_target_arn,omitempty"`
 
-	// ARN for this Auto Scaling Group
+	// ARN for this Auto Scaling group
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
 
@@ -801,15 +801,15 @@ type InitialLifecycleHookObservation struct {
 
 	LifecycleTransition *string `json:"lifecycleTransition,omitempty" tf:"lifecycle_transition,omitempty"`
 
-	// Name of the Auto Scaling Group. Conflicts with name_prefix.
+	// Name of the Auto Scaling group. Conflicts with name_prefix.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	NotificationMetadata *string `json:"notificationMetadata,omitempty" tf:"notification_metadata,omitempty"`
 
-	// ARN for this Auto Scaling Group
+	// ARN for this Auto Scaling group
 	NotificationTargetArn *string `json:"notificationTargetArn,omitempty" tf:"notification_target_arn,omitempty"`
 
-	// ARN for this Auto Scaling Group
+	// ARN for this Auto Scaling group
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
 
@@ -824,18 +824,18 @@ type InitialLifecycleHookParameters struct {
 	// +kubebuilder:validation:Optional
 	LifecycleTransition *string `json:"lifecycleTransition" tf:"lifecycle_transition,omitempty"`
 
-	// Name of the Auto Scaling Group. Conflicts with name_prefix.
+	// Name of the Auto Scaling group. Conflicts with name_prefix.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	NotificationMetadata *string `json:"notificationMetadata,omitempty" tf:"notification_metadata,omitempty"`
 
-	// ARN for this Auto Scaling Group
+	// ARN for this Auto Scaling group
 	// +kubebuilder:validation:Optional
 	NotificationTargetArn *string `json:"notificationTargetArn,omitempty" tf:"notification_target_arn,omitempty"`
 
-	// ARN for this Auto Scaling Group
+	// ARN for this Auto Scaling group
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
@@ -939,7 +939,7 @@ type InstanceRequirementsInitParameters struct {
 	// +listType=set
 	AcceleratorManufacturers []*string `json:"acceleratorManufacturers,omitempty" tf:"accelerator_manufacturers,omitempty"`
 
-	// List of accelerator names. Default is any acclerator.
+	// List of accelerator names. Default is any accelerator.
 	// +listType=set
 	AcceleratorNames []*string `json:"acceleratorNames,omitempty" tf:"accelerator_names,omitempty"`
 
@@ -954,7 +954,7 @@ type InstanceRequirementsInitParameters struct {
 	// +listType=set
 	AllowedInstanceTypes []*string `json:"allowedInstanceTypes,omitempty" tf:"allowed_instance_types,omitempty"`
 
-	// Indicate whether bare metal instace types should be included, excluded, or required. Default is excluded.
+	// Indicate whether bare metal instance types should be included, excluded, or required. Default is excluded.
 	BareMetal *string `json:"bareMetal,omitempty" tf:"bare_metal,omitempty"`
 
 	// Block describing the minimum and maximum baseline EBS bandwidth, in Mbps. Default is no minimum or maximum.
@@ -1022,7 +1022,7 @@ type InstanceRequirementsObservation struct {
 	// +listType=set
 	AcceleratorManufacturers []*string `json:"acceleratorManufacturers,omitempty" tf:"accelerator_manufacturers,omitempty"`
 
-	// List of accelerator names. Default is any acclerator.
+	// List of accelerator names. Default is any accelerator.
 	// +listType=set
 	AcceleratorNames []*string `json:"acceleratorNames,omitempty" tf:"accelerator_names,omitempty"`
 
@@ -1037,7 +1037,7 @@ type InstanceRequirementsObservation struct {
 	// +listType=set
 	AllowedInstanceTypes []*string `json:"allowedInstanceTypes,omitempty" tf:"allowed_instance_types,omitempty"`
 
-	// Indicate whether bare metal instace types should be included, excluded, or required. Default is excluded.
+	// Indicate whether bare metal instance types should be included, excluded, or required. Default is excluded.
 	BareMetal *string `json:"bareMetal,omitempty" tf:"bare_metal,omitempty"`
 
 	// Block describing the minimum and maximum baseline EBS bandwidth, in Mbps. Default is no minimum or maximum.
@@ -1107,7 +1107,7 @@ type InstanceRequirementsParameters struct {
 	// +listType=set
 	AcceleratorManufacturers []*string `json:"acceleratorManufacturers,omitempty" tf:"accelerator_manufacturers,omitempty"`
 
-	// List of accelerator names. Default is any acclerator.
+	// List of accelerator names. Default is any accelerator.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	AcceleratorNames []*string `json:"acceleratorNames,omitempty" tf:"accelerator_names,omitempty"`
@@ -1126,7 +1126,7 @@ type InstanceRequirementsParameters struct {
 	// +listType=set
 	AllowedInstanceTypes []*string `json:"allowedInstanceTypes,omitempty" tf:"allowed_instance_types,omitempty"`
 
-	// Indicate whether bare metal instace types should be included, excluded, or required. Default is excluded.
+	// Indicate whether bare metal instance types should be included, excluded, or required. Default is excluded.
 	// +kubebuilder:validation:Optional
 	BareMetal *string `json:"bareMetal,omitempty" tf:"bare_metal,omitempty"`
 
@@ -1705,7 +1705,7 @@ type PreferencesInitParameters struct {
 	// List of percentages for each checkpoint. Values must be unique and in ascending order. To replace all instances, the final number must be 100.
 	CheckpointPercentages []*float64 `json:"checkpointPercentages,omitempty" tf:"checkpoint_percentages,omitempty"`
 
-	// Number of seconds until a newly launched instance is configured and ready to use. Default behavior is to use the Auto Scaling Group's health check grace period.
+	// Number of seconds until a newly launched instance is configured and ready to use. Default behavior is to use the Auto Scaling group's health check grace period.
 	InstanceWarmup *string `json:"instanceWarmup,omitempty" tf:"instance_warmup,omitempty"`
 
 	// Amount of capacity in the Auto Scaling group that can be in service and healthy, or pending, to support your workload when an instance refresh is in place, as a percentage of the desired capacity of the Auto Scaling group. Values must be between 100 and 200, defaults to 100.
@@ -1738,7 +1738,7 @@ type PreferencesObservation struct {
 	// List of percentages for each checkpoint. Values must be unique and in ascending order. To replace all instances, the final number must be 100.
 	CheckpointPercentages []*float64 `json:"checkpointPercentages,omitempty" tf:"checkpoint_percentages,omitempty"`
 
-	// Number of seconds until a newly launched instance is configured and ready to use. Default behavior is to use the Auto Scaling Group's health check grace period.
+	// Number of seconds until a newly launched instance is configured and ready to use. Default behavior is to use the Auto Scaling group's health check grace period.
 	InstanceWarmup *string `json:"instanceWarmup,omitempty" tf:"instance_warmup,omitempty"`
 
 	// Amount of capacity in the Auto Scaling group that can be in service and healthy, or pending, to support your workload when an instance refresh is in place, as a percentage of the desired capacity of the Auto Scaling group. Values must be between 100 and 200, defaults to 100.
@@ -1775,7 +1775,7 @@ type PreferencesParameters struct {
 	// +kubebuilder:validation:Optional
 	CheckpointPercentages []*float64 `json:"checkpointPercentages,omitempty" tf:"checkpoint_percentages,omitempty"`
 
-	// Number of seconds until a newly launched instance is configured and ready to use. Default behavior is to use the Auto Scaling Group's health check grace period.
+	// Number of seconds until a newly launched instance is configured and ready to use. Default behavior is to use the Auto Scaling group's health check grace period.
 	// +kubebuilder:validation:Optional
 	InstanceWarmup *string `json:"instanceWarmup,omitempty" tf:"instance_warmup,omitempty"`
 
@@ -1968,7 +1968,7 @@ type WarmPoolInitParameters struct {
 	// Total maximum number of instances that are allowed to be in the warm pool or in any state except Terminated for the Auto Scaling group.
 	MaxGroupPreparedCapacity *float64 `json:"maxGroupPreparedCapacity,omitempty" tf:"max_group_prepared_capacity,omitempty"`
 
-	// Minimum size of the Auto Scaling Group.
+	// Minimum size of the Auto Scaling group.
 	// (See also Waiting for Capacity below.)
 	MinSize *float64 `json:"minSize,omitempty" tf:"min_size,omitempty"`
 
@@ -1984,7 +1984,7 @@ type WarmPoolObservation struct {
 	// Total maximum number of instances that are allowed to be in the warm pool or in any state except Terminated for the Auto Scaling group.
 	MaxGroupPreparedCapacity *float64 `json:"maxGroupPreparedCapacity,omitempty" tf:"max_group_prepared_capacity,omitempty"`
 
-	// Minimum size of the Auto Scaling Group.
+	// Minimum size of the Auto Scaling group.
 	// (See also Waiting for Capacity below.)
 	MinSize *float64 `json:"minSize,omitempty" tf:"min_size,omitempty"`
 
@@ -2002,7 +2002,7 @@ type WarmPoolParameters struct {
 	// +kubebuilder:validation:Optional
 	MaxGroupPreparedCapacity *float64 `json:"maxGroupPreparedCapacity,omitempty" tf:"max_group_prepared_capacity,omitempty"`
 
-	// Minimum size of the Auto Scaling Group.
+	// Minimum size of the Auto Scaling group.
 	// (See also Waiting for Capacity below.)
 	// +kubebuilder:validation:Optional
 	MinSize *float64 `json:"minSize,omitempty" tf:"min_size,omitempty"`

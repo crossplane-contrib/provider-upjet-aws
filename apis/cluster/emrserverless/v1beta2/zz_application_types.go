@@ -584,34 +584,34 @@ type MonitoringConfigurationParameters struct {
 
 type NetworkConfigurationInitParameters struct {
 
-	// The array of security group Ids for customer VPC connectivity.
+	// The array of security group IDs for customer VPC connectivity.
 	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
-	// The array of subnet Ids for customer VPC connectivity.
+	// The array of subnet IDs for customer VPC connectivity.
 	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 }
 
 type NetworkConfigurationObservation struct {
 
-	// The array of security group Ids for customer VPC connectivity.
+	// The array of security group IDs for customer VPC connectivity.
 	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
-	// The array of subnet Ids for customer VPC connectivity.
+	// The array of subnet IDs for customer VPC connectivity.
 	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 }
 
 type NetworkConfigurationParameters struct {
 
-	// The array of security group Ids for customer VPC connectivity.
+	// The array of security group IDs for customer VPC connectivity.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
-	// The array of subnet Ids for customer VPC connectivity.
+	// The array of subnet IDs for customer VPC connectivity.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`

@@ -72,7 +72,7 @@ type AssociationInitParameters struct {
 	// A block containing the targets of the SSM association. Targets are documented below. AWS currently supports a maximum of 5 targets.
 	Targets []TargetsInitParameters `json:"targets,omitempty" tf:"targets,omitempty"`
 
-	// The number of seconds to wait for the association status to be Success. If Success status is not reached within the given time, create opration will fail.
+	// The number of seconds to wait for the association status to be Success. If Success status is not reached within the given time, create operation will fail.
 	WaitForSuccessTimeoutSeconds *float64 `json:"waitForSuccessTimeoutSeconds,omitempty" tf:"wait_for_success_timeout_seconds,omitempty"`
 }
 
@@ -142,7 +142,7 @@ type AssociationObservation struct {
 	// A block containing the targets of the SSM association. Targets are documented below. AWS currently supports a maximum of 5 targets.
 	Targets []TargetsObservation `json:"targets,omitempty" tf:"targets,omitempty"`
 
-	// The number of seconds to wait for the association status to be Success. If Success status is not reached within the given time, create opration will fail.
+	// The number of seconds to wait for the association status to be Success. If Success status is not reached within the given time, create operation will fail.
 	WaitForSuccessTimeoutSeconds *float64 `json:"waitForSuccessTimeoutSeconds,omitempty" tf:"wait_for_success_timeout_seconds,omitempty"`
 }
 
@@ -225,7 +225,7 @@ type AssociationParameters struct {
 	// +kubebuilder:validation:Optional
 	Targets []TargetsParameters `json:"targets,omitempty" tf:"targets,omitempty"`
 
-	// The number of seconds to wait for the association status to be Success. If Success status is not reached within the given time, create opration will fail.
+	// The number of seconds to wait for the association status to be Success. If Success status is not reached within the given time, create operation will fail.
 	// +kubebuilder:validation:Optional
 	WaitForSuccessTimeoutSeconds *float64 `json:"waitForSuccessTimeoutSeconds,omitempty" tf:"wait_for_success_timeout_seconds,omitempty"`
 }

@@ -9,8 +9,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: efs/v1beta2/filesystem
   labels:
-    testing.upbound.io/example-name: foo
-  name: foo
+    testing.upbound.io/example-name: example
+  name: example
 spec:
   forProvider:
     creationToken: my-product
