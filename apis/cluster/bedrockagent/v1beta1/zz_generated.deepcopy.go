@@ -3058,10 +3058,8 @@ func (in *ContextEnrichmentConfigurationInitParameters) DeepCopyInto(out *Contex
 	*out = *in
 	if in.BedrockFoundationModelConfiguration != nil {
 		in, out := &in.BedrockFoundationModelConfiguration, &out.BedrockFoundationModelConfiguration
-		*out = make([]BedrockFoundationModelConfigurationInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(BedrockFoundationModelConfigurationInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Type != nil {
 		in, out := &in.Type, &out.Type
@@ -3085,10 +3083,8 @@ func (in *ContextEnrichmentConfigurationObservation) DeepCopyInto(out *ContextEn
 	*out = *in
 	if in.BedrockFoundationModelConfiguration != nil {
 		in, out := &in.BedrockFoundationModelConfiguration, &out.BedrockFoundationModelConfiguration
-		*out = make([]BedrockFoundationModelConfigurationObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(BedrockFoundationModelConfigurationObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Type != nil {
 		in, out := &in.Type, &out.Type
@@ -3112,10 +3108,8 @@ func (in *ContextEnrichmentConfigurationParameters) DeepCopyInto(out *ContextEnr
 	*out = *in
 	if in.BedrockFoundationModelConfiguration != nil {
 		in, out := &in.BedrockFoundationModelConfiguration, &out.BedrockFoundationModelConfiguration
-		*out = make([]BedrockFoundationModelConfigurationParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(BedrockFoundationModelConfigurationParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Type != nil {
 		in, out := &in.Type, &out.Type
@@ -4115,8 +4109,8 @@ func (in *DayOfMonthInitParameters) DeepCopyInto(out *DayOfMonthInitParameters) 
 	}
 	if in.LastDayOfMonth != nil {
 		in, out := &in.LastDayOfMonth, &out.LastDayOfMonth
-		*out = make([]LastDayOfMonthInitParameters, len(*in))
-		copy(*out, *in)
+		*out = new(LastDayOfMonthInitParameters)
+		**out = **in
 	}
 }
 
@@ -4140,8 +4134,8 @@ func (in *DayOfMonthObservation) DeepCopyInto(out *DayOfMonthObservation) {
 	}
 	if in.LastDayOfMonth != nil {
 		in, out := &in.LastDayOfMonth, &out.LastDayOfMonth
-		*out = make([]LastDayOfMonthParameters, len(*in))
-		copy(*out, *in)
+		*out = new(LastDayOfMonthParameters)
+		**out = **in
 	}
 }
 
@@ -4165,8 +4159,8 @@ func (in *DayOfMonthParameters) DeepCopyInto(out *DayOfMonthParameters) {
 	}
 	if in.LastDayOfMonth != nil {
 		in, out := &in.LastDayOfMonth, &out.LastDayOfMonth
-		*out = make([]LastDayOfMonthParameters, len(*in))
-		copy(*out, *in)
+		*out = new(LastDayOfMonthParameters)
+		**out = **in
 	}
 }
 
@@ -8157,10 +8151,8 @@ func (in *ManagedKnowledgeBaseConnectorConfigurationInitParameters) DeepCopyInto
 	}
 	if in.SyncSchedule != nil {
 		in, out := &in.SyncSchedule, &out.SyncSchedule
-		*out = make([]SyncScheduleInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(SyncScheduleInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -8194,10 +8186,8 @@ func (in *ManagedKnowledgeBaseConnectorConfigurationObservation) DeepCopyInto(ou
 	}
 	if in.SyncSchedule != nil {
 		in, out := &in.SyncSchedule, &out.SyncSchedule
-		*out = make([]SyncScheduleObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(SyncScheduleObservation)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -8231,10 +8221,8 @@ func (in *ManagedKnowledgeBaseConnectorConfigurationParameters) DeepCopyInto(out
 	}
 	if in.SyncSchedule != nil {
 		in, out := &in.SyncSchedule, &out.SyncSchedule
-		*out = make([]SyncScheduleParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(SyncScheduleParameters)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -8853,10 +8841,8 @@ func (in *MonthlyInitParameters) DeepCopyInto(out *MonthlyInitParameters) {
 	*out = *in
 	if in.DayOfMonth != nil {
 		in, out := &in.DayOfMonth, &out.DayOfMonth
-		*out = make([]DayOfMonthInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(DayOfMonthInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -8875,10 +8861,8 @@ func (in *MonthlyObservation) DeepCopyInto(out *MonthlyObservation) {
 	*out = *in
 	if in.DayOfMonth != nil {
 		in, out := &in.DayOfMonth, &out.DayOfMonth
-		*out = make([]DayOfMonthObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(DayOfMonthObservation)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -8897,10 +8881,8 @@ func (in *MonthlyParameters) DeepCopyInto(out *MonthlyParameters) {
 	*out = *in
 	if in.DayOfMonth != nil {
 		in, out := &in.DayOfMonth, &out.DayOfMonth
-		*out = make([]DayOfMonthParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(DayOfMonthParameters)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -10091,8 +10073,10 @@ func (in *ParsingConfigurationBedrockFoundationModelConfigurationInitParameters)
 	}
 	if in.ParsingPrompt != nil {
 		in, out := &in.ParsingPrompt, &out.ParsingPrompt
-		*out = new(ParsingPromptInitParameters)
-		(*in).DeepCopyInto(*out)
+		*out = make([]ParsingPromptInitParameters, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
 	}
 }
 
@@ -10121,8 +10105,10 @@ func (in *ParsingConfigurationBedrockFoundationModelConfigurationObservation) De
 	}
 	if in.ParsingPrompt != nil {
 		in, out := &in.ParsingPrompt, &out.ParsingPrompt
-		*out = new(ParsingPromptObservation)
-		(*in).DeepCopyInto(*out)
+		*out = make([]ParsingPromptObservation, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
 	}
 }
 
@@ -10151,8 +10137,10 @@ func (in *ParsingConfigurationBedrockFoundationModelConfigurationParameters) Dee
 	}
 	if in.ParsingPrompt != nil {
 		in, out := &in.ParsingPrompt, &out.ParsingPrompt
-		*out = new(ParsingPromptParameters)
-		(*in).DeepCopyInto(*out)
+		*out = make([]ParsingPromptParameters, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
 	}
 }
 
@@ -14781,22 +14769,18 @@ func (in *SyncScheduleInitParameters) DeepCopyInto(out *SyncScheduleInitParamete
 	*out = *in
 	if in.Daily != nil {
 		in, out := &in.Daily, &out.Daily
-		*out = make([]DailyInitParameters, len(*in))
-		copy(*out, *in)
+		*out = new(DailyInitParameters)
+		**out = **in
 	}
 	if in.Monthly != nil {
 		in, out := &in.Monthly, &out.Monthly
-		*out = make([]MonthlyInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(MonthlyInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Weekly != nil {
 		in, out := &in.Weekly, &out.Weekly
-		*out = make([]WeeklyInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(WeeklyInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -14815,22 +14799,18 @@ func (in *SyncScheduleObservation) DeepCopyInto(out *SyncScheduleObservation) {
 	*out = *in
 	if in.Daily != nil {
 		in, out := &in.Daily, &out.Daily
-		*out = make([]DailyParameters, len(*in))
-		copy(*out, *in)
+		*out = new(DailyParameters)
+		**out = **in
 	}
 	if in.Monthly != nil {
 		in, out := &in.Monthly, &out.Monthly
-		*out = make([]MonthlyObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(MonthlyObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Weekly != nil {
 		in, out := &in.Weekly, &out.Weekly
-		*out = make([]WeeklyObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(WeeklyObservation)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -14849,22 +14829,18 @@ func (in *SyncScheduleParameters) DeepCopyInto(out *SyncScheduleParameters) {
 	*out = *in
 	if in.Daily != nil {
 		in, out := &in.Daily, &out.Daily
-		*out = make([]DailyParameters, len(*in))
-		copy(*out, *in)
+		*out = new(DailyParameters)
+		**out = **in
 	}
 	if in.Monthly != nil {
 		in, out := &in.Monthly, &out.Monthly
-		*out = make([]MonthlyParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(MonthlyParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Weekly != nil {
 		in, out := &in.Weekly, &out.Weekly
-		*out = make([]WeeklyParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(WeeklyParameters)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -17578,10 +17554,8 @@ func (in *VectorIngestionConfigurationInitParameters) DeepCopyInto(out *VectorIn
 	}
 	if in.ContextEnrichmentConfiguration != nil {
 		in, out := &in.ContextEnrichmentConfiguration, &out.ContextEnrichmentConfiguration
-		*out = make([]ContextEnrichmentConfigurationInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(ContextEnrichmentConfigurationInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.CustomTransformationConfiguration != nil {
 		in, out := &in.CustomTransformationConfiguration, &out.CustomTransformationConfiguration
@@ -17615,10 +17589,8 @@ func (in *VectorIngestionConfigurationObservation) DeepCopyInto(out *VectorInges
 	}
 	if in.ContextEnrichmentConfiguration != nil {
 		in, out := &in.ContextEnrichmentConfiguration, &out.ContextEnrichmentConfiguration
-		*out = make([]ContextEnrichmentConfigurationObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(ContextEnrichmentConfigurationObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.CustomTransformationConfiguration != nil {
 		in, out := &in.CustomTransformationConfiguration, &out.CustomTransformationConfiguration
@@ -17652,10 +17624,8 @@ func (in *VectorIngestionConfigurationParameters) DeepCopyInto(out *VectorIngest
 	}
 	if in.ContextEnrichmentConfiguration != nil {
 		in, out := &in.ContextEnrichmentConfiguration, &out.ContextEnrichmentConfiguration
-		*out = make([]ContextEnrichmentConfigurationParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(ContextEnrichmentConfigurationParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.CustomTransformationConfiguration != nil {
 		in, out := &in.CustomTransformationConfiguration, &out.CustomTransformationConfiguration
