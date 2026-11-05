@@ -350,3 +350,39 @@ func TestOpensearchAuthorizeVPCEndpointAccess(t *testing.T) {
 		}
 	})
 }
+
+func TestCloudFrontPolicyIdentifierGetIDFn(t *testing.T) {
+	tests := map[string]struct {
+		externalName string
+		parameters   map[string]any
+		want         string
+	}{
+		"ExternalNameWins": {
+			externalName: "658327ea-f89d-4fab-a63d-7e88639e58f6",
+			parameters:   map[string]any{"name": "Managed-CachingOptimized"},
+			want:         "658327ea-f89d-4fab-a63d-7e88639e58f6",
+		},
+		"FallsBackToName": {
+			parameters: map[string]any{"name": "Managed-CachingOptimized"},
+			want:       "Managed-CachingOptimized",
+		},
+		"NeitherSet": {
+			parameters: map[string]any{},
+			want:       "",
+		},
+	}
+	for _, r := range []string{"aws_cloudfront_cache_policy", "aws_cloudfront_origin_request_policy", "aws_cloudfront_response_headers_policy"} {
+		e := TerraformPluginSDKExternalNameConfigs[r]
+		for name, tc := range tests {
+			t.Run(r+"/"+name, func(t *testing.T) {
+				got, err := e.GetIDFn(context.Background(), tc.externalName, tc.parameters, nil)
+				if err != nil {
+					t.Fatalf("unexpected error: %v", err)
+				}
+				if got != tc.want {
+					t.Errorf("GetIDFn() = %q, want %q", got, tc.want)
+				}
+			})
+		}
+	}
+}

@@ -26,6 +26,94 @@ func (mg *Distribution) ResolveReferences( // ResolveReferences of this Distribu
 	var rsp reference.ResolutionResponse
 	var err error
 
+	if mg.Spec.ForProvider.DefaultCacheBehavior != nil {
+		{
+			m, l, err = apisresolver.GetManagedResource("cloudfront.aws.upbound.io", "v1beta2", "CachePolicy", "CachePolicyList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DefaultCacheBehavior.CachePolicyID),
+				Extract:      common.TerraformID(),
+				Namespace:    mg.GetNamespace(),
+				Reference:    mg.Spec.ForProvider.DefaultCacheBehavior.CachePolicyIDRef,
+				Selector:     mg.Spec.ForProvider.DefaultCacheBehavior.CachePolicyIDSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.DefaultCacheBehavior.CachePolicyID")
+		}
+		mg.Spec.ForProvider.DefaultCacheBehavior.CachePolicyID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.DefaultCacheBehavior.CachePolicyIDRef = rsp.ResolvedReference
+
+	}
+	if mg.Spec.ForProvider.DefaultCacheBehavior != nil {
+		{
+			m, l, err = apisresolver.GetManagedResource("cloudfront.aws.upbound.io", "v1beta2", "OriginRequestPolicy", "OriginRequestPolicyList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DefaultCacheBehavior.OriginRequestPolicyID),
+				Extract:      common.TerraformID(),
+				Namespace:    mg.GetNamespace(),
+				Reference:    mg.Spec.ForProvider.DefaultCacheBehavior.OriginRequestPolicyIDRef,
+				Selector:     mg.Spec.ForProvider.DefaultCacheBehavior.OriginRequestPolicyIDSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.DefaultCacheBehavior.OriginRequestPolicyID")
+		}
+		mg.Spec.ForProvider.DefaultCacheBehavior.OriginRequestPolicyID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.DefaultCacheBehavior.OriginRequestPolicyIDRef = rsp.ResolvedReference
+
+	}
+	if mg.Spec.ForProvider.DefaultCacheBehavior != nil {
+		{
+			m, l, err = apisresolver.GetManagedResource("cloudfront.aws.upbound.io", "v1beta2", "ResponseHeadersPolicy", "ResponseHeadersPolicyList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DefaultCacheBehavior.ResponseHeadersPolicyID),
+				Extract:      common.TerraformID(),
+				Namespace:    mg.GetNamespace(),
+				Reference:    mg.Spec.ForProvider.DefaultCacheBehavior.ResponseHeadersPolicyIDRef,
+				Selector:     mg.Spec.ForProvider.DefaultCacheBehavior.ResponseHeadersPolicyIDSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.DefaultCacheBehavior.ResponseHeadersPolicyID")
+		}
+		mg.Spec.ForProvider.DefaultCacheBehavior.ResponseHeadersPolicyID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.DefaultCacheBehavior.ResponseHeadersPolicyIDRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.OrderedCacheBehavior); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("cloudfront.aws.upbound.io", "v1beta2", "CachePolicy", "CachePolicyList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.OrderedCacheBehavior[i3].CachePolicyID),
+				Extract:      common.TerraformID(),
+				Namespace:    mg.GetNamespace(),
+				Reference:    mg.Spec.ForProvider.OrderedCacheBehavior[i3].CachePolicyIDRef,
+				Selector:     mg.Spec.ForProvider.OrderedCacheBehavior[i3].CachePolicyIDSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.OrderedCacheBehavior[i3].CachePolicyID")
+		}
+		mg.Spec.ForProvider.OrderedCacheBehavior[i3].CachePolicyID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.OrderedCacheBehavior[i3].CachePolicyIDRef = rsp.ResolvedReference
+
+	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.OrderedCacheBehavior); i3++ {
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.OrderedCacheBehavior[i3].FunctionAssociation); i4++ {
 			{
@@ -74,6 +162,50 @@ func (mg *Distribution) ResolveReferences( // ResolveReferences of this Distribu
 
 		}
 	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.OrderedCacheBehavior); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("cloudfront.aws.upbound.io", "v1beta2", "OriginRequestPolicy", "OriginRequestPolicyList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.OrderedCacheBehavior[i3].OriginRequestPolicyID),
+				Extract:      common.TerraformID(),
+				Namespace:    mg.GetNamespace(),
+				Reference:    mg.Spec.ForProvider.OrderedCacheBehavior[i3].OriginRequestPolicyIDRef,
+				Selector:     mg.Spec.ForProvider.OrderedCacheBehavior[i3].OriginRequestPolicyIDSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.OrderedCacheBehavior[i3].OriginRequestPolicyID")
+		}
+		mg.Spec.ForProvider.OrderedCacheBehavior[i3].OriginRequestPolicyID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.OrderedCacheBehavior[i3].OriginRequestPolicyIDRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.OrderedCacheBehavior); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("cloudfront.aws.upbound.io", "v1beta2", "ResponseHeadersPolicy", "ResponseHeadersPolicyList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.OrderedCacheBehavior[i3].ResponseHeadersPolicyID),
+				Extract:      common.TerraformID(),
+				Namespace:    mg.GetNamespace(),
+				Reference:    mg.Spec.ForProvider.OrderedCacheBehavior[i3].ResponseHeadersPolicyIDRef,
+				Selector:     mg.Spec.ForProvider.OrderedCacheBehavior[i3].ResponseHeadersPolicyIDSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.OrderedCacheBehavior[i3].ResponseHeadersPolicyID")
+		}
+		mg.Spec.ForProvider.OrderedCacheBehavior[i3].ResponseHeadersPolicyID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.OrderedCacheBehavior[i3].ResponseHeadersPolicyIDRef = rsp.ResolvedReference
+
+	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.Origin); i3++ {
 		{
 			m, l, err = apisresolver.GetManagedResource("cloudfront.aws.upbound.io", "v1beta1", "OriginAccessControl", "OriginAccessControlList")
@@ -119,6 +251,94 @@ func (mg *Distribution) ResolveReferences( // ResolveReferences of this Distribu
 			mg.Spec.ForProvider.Origin[i3].S3OriginConfig.OriginAccessIdentityRef = rsp.ResolvedReference
 
 		}
+	}
+	if mg.Spec.InitProvider.DefaultCacheBehavior != nil {
+		{
+			m, l, err = apisresolver.GetManagedResource("cloudfront.aws.upbound.io", "v1beta2", "CachePolicy", "CachePolicyList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DefaultCacheBehavior.CachePolicyID),
+				Extract:      common.TerraformID(),
+				Namespace:    mg.GetNamespace(),
+				Reference:    mg.Spec.InitProvider.DefaultCacheBehavior.CachePolicyIDRef,
+				Selector:     mg.Spec.InitProvider.DefaultCacheBehavior.CachePolicyIDSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.DefaultCacheBehavior.CachePolicyID")
+		}
+		mg.Spec.InitProvider.DefaultCacheBehavior.CachePolicyID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.DefaultCacheBehavior.CachePolicyIDRef = rsp.ResolvedReference
+
+	}
+	if mg.Spec.InitProvider.DefaultCacheBehavior != nil {
+		{
+			m, l, err = apisresolver.GetManagedResource("cloudfront.aws.upbound.io", "v1beta2", "OriginRequestPolicy", "OriginRequestPolicyList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DefaultCacheBehavior.OriginRequestPolicyID),
+				Extract:      common.TerraformID(),
+				Namespace:    mg.GetNamespace(),
+				Reference:    mg.Spec.InitProvider.DefaultCacheBehavior.OriginRequestPolicyIDRef,
+				Selector:     mg.Spec.InitProvider.DefaultCacheBehavior.OriginRequestPolicyIDSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.DefaultCacheBehavior.OriginRequestPolicyID")
+		}
+		mg.Spec.InitProvider.DefaultCacheBehavior.OriginRequestPolicyID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.DefaultCacheBehavior.OriginRequestPolicyIDRef = rsp.ResolvedReference
+
+	}
+	if mg.Spec.InitProvider.DefaultCacheBehavior != nil {
+		{
+			m, l, err = apisresolver.GetManagedResource("cloudfront.aws.upbound.io", "v1beta2", "ResponseHeadersPolicy", "ResponseHeadersPolicyList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DefaultCacheBehavior.ResponseHeadersPolicyID),
+				Extract:      common.TerraformID(),
+				Namespace:    mg.GetNamespace(),
+				Reference:    mg.Spec.InitProvider.DefaultCacheBehavior.ResponseHeadersPolicyIDRef,
+				Selector:     mg.Spec.InitProvider.DefaultCacheBehavior.ResponseHeadersPolicyIDSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.DefaultCacheBehavior.ResponseHeadersPolicyID")
+		}
+		mg.Spec.InitProvider.DefaultCacheBehavior.ResponseHeadersPolicyID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.DefaultCacheBehavior.ResponseHeadersPolicyIDRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.OrderedCacheBehavior); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("cloudfront.aws.upbound.io", "v1beta2", "CachePolicy", "CachePolicyList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.OrderedCacheBehavior[i3].CachePolicyID),
+				Extract:      common.TerraformID(),
+				Namespace:    mg.GetNamespace(),
+				Reference:    mg.Spec.InitProvider.OrderedCacheBehavior[i3].CachePolicyIDRef,
+				Selector:     mg.Spec.InitProvider.OrderedCacheBehavior[i3].CachePolicyIDSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.OrderedCacheBehavior[i3].CachePolicyID")
+		}
+		mg.Spec.InitProvider.OrderedCacheBehavior[i3].CachePolicyID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.OrderedCacheBehavior[i3].CachePolicyIDRef = rsp.ResolvedReference
+
 	}
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.OrderedCacheBehavior); i3++ {
 		for i4 := 0; i4 < len(mg.Spec.InitProvider.OrderedCacheBehavior[i3].FunctionAssociation); i4++ {
@@ -167,6 +387,50 @@ func (mg *Distribution) ResolveReferences( // ResolveReferences of this Distribu
 			mg.Spec.InitProvider.OrderedCacheBehavior[i3].LambdaFunctionAssociation[i4].LambdaArnRef = rsp.ResolvedReference
 
 		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.OrderedCacheBehavior); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("cloudfront.aws.upbound.io", "v1beta2", "OriginRequestPolicy", "OriginRequestPolicyList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.OrderedCacheBehavior[i3].OriginRequestPolicyID),
+				Extract:      common.TerraformID(),
+				Namespace:    mg.GetNamespace(),
+				Reference:    mg.Spec.InitProvider.OrderedCacheBehavior[i3].OriginRequestPolicyIDRef,
+				Selector:     mg.Spec.InitProvider.OrderedCacheBehavior[i3].OriginRequestPolicyIDSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.OrderedCacheBehavior[i3].OriginRequestPolicyID")
+		}
+		mg.Spec.InitProvider.OrderedCacheBehavior[i3].OriginRequestPolicyID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.OrderedCacheBehavior[i3].OriginRequestPolicyIDRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.OrderedCacheBehavior); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("cloudfront.aws.upbound.io", "v1beta2", "ResponseHeadersPolicy", "ResponseHeadersPolicyList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.OrderedCacheBehavior[i3].ResponseHeadersPolicyID),
+				Extract:      common.TerraformID(),
+				Namespace:    mg.GetNamespace(),
+				Reference:    mg.Spec.InitProvider.OrderedCacheBehavior[i3].ResponseHeadersPolicyIDRef,
+				Selector:     mg.Spec.InitProvider.OrderedCacheBehavior[i3].ResponseHeadersPolicyIDSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.OrderedCacheBehavior[i3].ResponseHeadersPolicyID")
+		}
+		mg.Spec.InitProvider.OrderedCacheBehavior[i3].ResponseHeadersPolicyID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.OrderedCacheBehavior[i3].ResponseHeadersPolicyIDRef = rsp.ResolvedReference
+
 	}
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.Origin); i3++ {
 		{

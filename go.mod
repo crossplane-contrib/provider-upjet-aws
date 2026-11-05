@@ -15,6 +15,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/config v1.33.4
 	github.com/aws/aws-sdk-go-v2/credentials v1.20.4
 	github.com/aws/aws-sdk-go-v2/feature/ec2/imds v1.20.0
+	github.com/aws/aws-sdk-go-v2/service/cloudfront v1.73.0
 	github.com/aws/aws-sdk-go-v2/service/eks v1.99.0
 	github.com/aws/aws-sdk-go-v2/service/sts v1.50.0
 	github.com/aws/smithy-go v1.28.1
@@ -24,6 +25,7 @@ require (
 	github.com/crossplane/upjet/v2 v2.5.1-0.20261005082904-c3b7d449d0d4
 	github.com/go-ini/ini v1.46.0
 	github.com/google/go-cmp v0.7.0
+	github.com/google/uuid v1.6.0
 	github.com/hashicorp/aws-sdk-go-base/v2 v2.0.0-beta.73
 	github.com/hashicorp/awspolicyequivalence v1.7.0
 	github.com/hashicorp/terraform-json v0.28.0
@@ -106,7 +108,6 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/cloud9 v1.42.0 // indirect
 	github.com/aws/aws-sdk-go-v2/service/cloudcontrol v1.38.0 // indirect
 	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.81.0 // indirect
-	github.com/aws/aws-sdk-go-v2/service/cloudfront v1.73.0 // indirect
 	github.com/aws/aws-sdk-go-v2/service/cloudfrontkeyvaluestore v1.20.0 // indirect
 	github.com/aws/aws-sdk-go-v2/service/cloudhsmv2 v1.43.0 // indirect
 	github.com/aws/aws-sdk-go-v2/service/cloudsearch v1.40.0 // indirect
@@ -380,7 +381,6 @@ require (
 	github.com/golang/mock v1.6.0 // indirect
 	github.com/golang/protobuf v1.5.4 // indirect
 	github.com/google/gnostic-models v0.7.1 // indirect
-	github.com/google/uuid v1.6.0 // indirect
 	github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go v0.24.0 // indirect
 	github.com/hashicorp/errwrap v1.1.0 // indirect
 	github.com/hashicorp/go-checkpoint v0.5.0 // indirect
