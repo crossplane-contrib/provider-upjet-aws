@@ -107,6 +107,56 @@ func (mg *GlobalSettings) SetWriteConnectionSecretToReference(r *xpv2.SecretRefe
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this LogicallyAirGappedVault.
+func (mg *LogicallyAirGappedVault) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this LogicallyAirGappedVault.
+func (mg *LogicallyAirGappedVault) GetDeletionPolicy() xpv2.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetManagementPolicies of this LogicallyAirGappedVault.
+func (mg *LogicallyAirGappedVault) GetManagementPolicies() xpv2.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this LogicallyAirGappedVault.
+func (mg *LogicallyAirGappedVault) GetProviderConfigReference() *xpv2.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetWriteConnectionSecretToReference of this LogicallyAirGappedVault.
+func (mg *LogicallyAirGappedVault) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this LogicallyAirGappedVault.
+func (mg *LogicallyAirGappedVault) SetConditions(c ...xpv2.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this LogicallyAirGappedVault.
+func (mg *LogicallyAirGappedVault) SetDeletionPolicy(r xpv2.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicies of this LogicallyAirGappedVault.
+func (mg *LogicallyAirGappedVault) SetManagementPolicies(r xpv2.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this LogicallyAirGappedVault.
+func (mg *LogicallyAirGappedVault) SetProviderConfigReference(r *xpv2.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetWriteConnectionSecretToReference of this LogicallyAirGappedVault.
+func (mg *LogicallyAirGappedVault) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this Plan.
 func (mg *Plan) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)

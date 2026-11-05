@@ -173,6 +173,7 @@ import (
 	v1beta1ses "github.com/upbound/provider-aws/v2/apis/namespaced/ses/v1beta1"
 	v1beta1sesv2 "github.com/upbound/provider-aws/v2/apis/namespaced/sesv2/v1beta1"
 	v1beta1sfn "github.com/upbound/provider-aws/v2/apis/namespaced/sfn/v1beta1"
+	v1beta1shield "github.com/upbound/provider-aws/v2/apis/namespaced/shield/v1beta1"
 	v1beta1signer "github.com/upbound/provider-aws/v2/apis/namespaced/signer/v1beta1"
 	v1beta1sns "github.com/upbound/provider-aws/v2/apis/namespaced/sns/v1beta1"
 	v1beta1sqs "github.com/upbound/provider-aws/v2/apis/namespaced/sqs/v1beta1"
@@ -361,6 +362,7 @@ func init() {
 		v1beta1ses.SchemeBuilder.AddToScheme,
 		v1beta1sesv2.SchemeBuilder.AddToScheme,
 		v1beta1sfn.SchemeBuilder.AddToScheme,
+		v1beta1shield.SchemeBuilder.AddToScheme,
 		v1beta1signer.SchemeBuilder.AddToScheme,
 		v1beta1sns.SchemeBuilder.AddToScheme,
 		v1beta1sqs.SchemeBuilder.AddToScheme,

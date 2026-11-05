@@ -1,0 +1,55 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
+apiVersion: oam.aws.m.upbound.io/v1beta1
+kind: SinkPolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: oam/v1beta1/sinkpolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    policy: |-
+      ${jsonencode({
+          Version = "2012-10-17"
+          Statement = [
+            {
+              Action   = ["oam:CreateLink", "oam:UpdateLink"]
+              Effect   = "Allow"
+              Resource = "*"
+              Principal = {
+                "AWS" = ["1111111111111", "222222222222"]
+              }
+              Condition = {
+                "ForAllValues:StringEquals" = {
+                  "oam:ResourceTypes" = ["AWS::CloudWatch::Metric", "AWS::Logs::LogGroup"]
+                }
+              }
+            }
+          ]
+        })}
+    region: us-west-1
+    sinkIdentifierSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: oam.aws.m.upbound.io/v1beta1
+kind: Sink
+metadata:
+  annotations:
+    meta.upbound.io/example-id: oam/v1beta1/sinkpolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    name: ExampleSink
+    region: us-west-1

@@ -22,6 +22,13 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		}
 	})
 
+	p.AddResourceConfigurator("aws_backup_logically_air_gapped_vault", func(r *config.Resource) {
+		r.References["encryption_key_arn"] = config.Reference{
+			TerraformName: "aws_kms_key",
+			Extractor:     common.PathARNExtractor,
+		}
+	})
+
 	p.AddResourceConfigurator("aws_backup_selection", func(r *config.Resource) {
 		r.References["iam_role_arn"] = config.Reference{
 			TerraformName: "aws_iam_role",

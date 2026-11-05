@@ -9,14 +9,18 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
+	link "github.com/upbound/provider-aws/v2/internal/controller/namespaced/oam/link"
 	sink "github.com/upbound/provider-aws/v2/internal/controller/namespaced/oam/sink"
+	sinkpolicy "github.com/upbound/provider-aws/v2/internal/controller/namespaced/oam/sinkpolicy"
 )
 
 // Setup_oam creates all controllers with the supplied logger and adds them to
 // the supplied manager.
 func Setup_oam(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		link.Setup,
 		sink.Setup,
+		sinkpolicy.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err
@@ -29,7 +33,9 @@ func Setup_oam(mgr ctrl.Manager, o controller.Options) error {
 // the supplied manager gated.
 func SetupGated_oam(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		link.SetupGated,
 		sink.SetupGated,
+		sinkpolicy.SetupGated,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err
@@ -41,7 +47,9 @@ func SetupGated_oam(mgr ctrl.Manager, o controller.Options) error {
 // SetupWebhookWithManager_oam registers conversion webhooks for all resource kinds in the group.
 func SetupWebhookWithManager_oam(mgr ctrl.Manager) error {
 	for _, setup := range []func(ctrl.Manager) error{
+		link.SetupWebhookWithManager,
 		sink.SetupWebhookWithManager,
+		sinkpolicy.SetupWebhookWithManager,
 	} {
 		if err := setup(mgr); err != nil {
 			return err

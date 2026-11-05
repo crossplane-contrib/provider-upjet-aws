@@ -122,6 +122,7 @@ import (
 	scalingplan "github.com/upbound/provider-aws/v2/internal/controller/namespaced/autoscalingplans/scalingplan"
 	framework "github.com/upbound/provider-aws/v2/internal/controller/namespaced/backup/framework"
 	globalsettings "github.com/upbound/provider-aws/v2/internal/controller/namespaced/backup/globalsettings"
+	logicallyairgappedvault "github.com/upbound/provider-aws/v2/internal/controller/namespaced/backup/logicallyairgappedvault"
 	plan "github.com/upbound/provider-aws/v2/internal/controller/namespaced/backup/plan"
 	regionsettings "github.com/upbound/provider-aws/v2/internal/controller/namespaced/backup/regionsettings"
 	reportplan "github.com/upbound/provider-aws/v2/internal/controller/namespaced/backup/reportplan"
@@ -753,7 +754,9 @@ import (
 	vpcattachment "github.com/upbound/provider-aws/v2/internal/controller/namespaced/networkmanager/vpcattachment"
 	monitor "github.com/upbound/provider-aws/v2/internal/controller/namespaced/networkmonitor/monitor"
 	probe "github.com/upbound/provider-aws/v2/internal/controller/namespaced/networkmonitor/probe"
+	linkoam "github.com/upbound/provider-aws/v2/internal/controller/namespaced/oam/link"
 	sink "github.com/upbound/provider-aws/v2/internal/controller/namespaced/oam/sink"
+	sinkpolicy "github.com/upbound/provider-aws/v2/internal/controller/namespaced/oam/sinkpolicy"
 	authorizevpcendpointaccess "github.com/upbound/provider-aws/v2/internal/controller/namespaced/opensearch/authorizevpcendpointaccess"
 	domainopensearch "github.com/upbound/provider-aws/v2/internal/controller/namespaced/opensearch/domain"
 	domainpolicyopensearch "github.com/upbound/provider-aws/v2/internal/controller/namespaced/opensearch/domainpolicy"
@@ -977,6 +980,8 @@ import (
 	emailidentitymailfromattributes "github.com/upbound/provider-aws/v2/internal/controller/namespaced/sesv2/emailidentitymailfromattributes"
 	activity "github.com/upbound/provider-aws/v2/internal/controller/namespaced/sfn/activity"
 	statemachine "github.com/upbound/provider-aws/v2/internal/controller/namespaced/sfn/statemachine"
+	protection "github.com/upbound/provider-aws/v2/internal/controller/namespaced/shield/protection"
+	protectionhealthcheckassociation "github.com/upbound/provider-aws/v2/internal/controller/namespaced/shield/protectionhealthcheckassociation"
 	signingjob "github.com/upbound/provider-aws/v2/internal/controller/namespaced/signer/signingjob"
 	signingprofile "github.com/upbound/provider-aws/v2/internal/controller/namespaced/signer/signingprofile"
 	signingprofilepermission "github.com/upbound/provider-aws/v2/internal/controller/namespaced/signer/signingprofilepermission"
@@ -1196,6 +1201,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		scalingplan.Setup,
 		framework.Setup,
 		globalsettings.Setup,
+		logicallyairgappedvault.Setup,
 		plan.Setup,
 		regionsettings.Setup,
 		reportplan.Setup,
@@ -1827,7 +1833,9 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		vpcattachment.Setup,
 		monitor.Setup,
 		probe.Setup,
+		linkoam.Setup,
 		sink.Setup,
+		sinkpolicy.Setup,
 		authorizevpcendpointaccess.Setup,
 		domainopensearch.Setup,
 		domainpolicyopensearch.Setup,
@@ -2051,6 +2059,8 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		emailidentitymailfromattributes.Setup,
 		activity.Setup,
 		statemachine.Setup,
+		protection.Setup,
+		protectionhealthcheckassociation.Setup,
 		signingjob.Setup,
 		signingprofile.Setup,
 		signingprofilepermission.Setup,
@@ -2276,6 +2286,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		scalingplan.SetupGated,
 		framework.SetupGated,
 		globalsettings.SetupGated,
+		logicallyairgappedvault.SetupGated,
 		plan.SetupGated,
 		regionsettings.SetupGated,
 		reportplan.SetupGated,
@@ -2907,7 +2918,9 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		vpcattachment.SetupGated,
 		monitor.SetupGated,
 		probe.SetupGated,
+		linkoam.SetupGated,
 		sink.SetupGated,
+		sinkpolicy.SetupGated,
 		authorizevpcendpointaccess.SetupGated,
 		domainopensearch.SetupGated,
 		domainpolicyopensearch.SetupGated,
@@ -3131,6 +3144,8 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		emailidentitymailfromattributes.SetupGated,
 		activity.SetupGated,
 		statemachine.SetupGated,
+		protection.SetupGated,
+		protectionhealthcheckassociation.SetupGated,
 		signingjob.SetupGated,
 		signingprofile.SetupGated,
 		signingprofilepermission.SetupGated,
@@ -3355,6 +3370,7 @@ func SetupWebhookWithManager_monolith(mgr ctrl.Manager) error {
 		scalingplan.SetupWebhookWithManager,
 		framework.SetupWebhookWithManager,
 		globalsettings.SetupWebhookWithManager,
+		logicallyairgappedvault.SetupWebhookWithManager,
 		plan.SetupWebhookWithManager,
 		regionsettings.SetupWebhookWithManager,
 		reportplan.SetupWebhookWithManager,
@@ -3986,7 +4002,9 @@ func SetupWebhookWithManager_monolith(mgr ctrl.Manager) error {
 		vpcattachment.SetupWebhookWithManager,
 		monitor.SetupWebhookWithManager,
 		probe.SetupWebhookWithManager,
+		linkoam.SetupWebhookWithManager,
 		sink.SetupWebhookWithManager,
+		sinkpolicy.SetupWebhookWithManager,
 		authorizevpcendpointaccess.SetupWebhookWithManager,
 		domainopensearch.SetupWebhookWithManager,
 		domainpolicyopensearch.SetupWebhookWithManager,
@@ -4210,6 +4228,8 @@ func SetupWebhookWithManager_monolith(mgr ctrl.Manager) error {
 		emailidentitymailfromattributes.SetupWebhookWithManager,
 		activity.SetupWebhookWithManager,
 		statemachine.SetupWebhookWithManager,
+		protection.SetupWebhookWithManager,
+		protectionhealthcheckassociation.SetupWebhookWithManager,
 		signingjob.SetupWebhookWithManager,
 		signingprofile.SetupWebhookWithManager,
 		signingprofilepermission.SetupWebhookWithManager,

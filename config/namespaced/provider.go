@@ -103,6 +103,7 @@ import (
 	"github.com/upbound/provider-aws/v2/config/namespaced/servicecatalog"
 	"github.com/upbound/provider-aws/v2/config/namespaced/servicediscovery"
 	"github.com/upbound/provider-aws/v2/config/namespaced/sfn"
+	"github.com/upbound/provider-aws/v2/config/namespaced/shield"
 	"github.com/upbound/provider-aws/v2/config/namespaced/sns"
 	"github.com/upbound/provider-aws/v2/config/namespaced/sqs"
 	"github.com/upbound/provider-aws/v2/config/namespaced/ssoadmin"
@@ -198,6 +199,7 @@ func init() {
 	ProviderConfiguration.AddConfig(budgets.Configure)
 	ProviderConfiguration.AddConfig(servicediscovery.Configure)
 	ProviderConfiguration.AddConfig(sfn.Configure)
+	ProviderConfiguration.AddConfig(shield.Configure)
 	ProviderConfiguration.AddConfig(sns.Configure)
 	ProviderConfiguration.AddConfig(sqs.Configure)
 	ProviderConfiguration.AddConfig(transfer.Configure)

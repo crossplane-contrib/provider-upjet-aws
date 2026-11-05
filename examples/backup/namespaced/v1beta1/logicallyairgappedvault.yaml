@@ -1,0 +1,18 @@
+# SPDX-FileCopyrightText: 2026 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: backup.aws.m.upbound.io/v1beta1
+kind: LogicallyAirGappedVault
+metadata:
+  annotations:
+    meta.upbound.io/example-id: backup/v1beta1/logicallyairgappedvault
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-${Rand.RFC1123Subdomain}
+  namespace: upbound-system
+spec:
+  forProvider:
+    maxRetentionDays: 7
+    minRetentionDays: 7
+    region: us-west-1
