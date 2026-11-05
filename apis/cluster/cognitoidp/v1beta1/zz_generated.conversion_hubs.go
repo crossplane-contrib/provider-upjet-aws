@@ -10,6 +10,9 @@ package v1beta1
 func (tr *IdentityProvider) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *LogDeliveryConfiguration) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *ResourceServer) Hub() {}
 
 // Hub marks this type as a conversion hub.

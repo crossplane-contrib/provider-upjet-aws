@@ -254,6 +254,7 @@ import (
 	pool "github.com/upbound/provider-aws/v2/internal/controller/namespaced/cognitoidentity/pool"
 	poolrolesattachment "github.com/upbound/provider-aws/v2/internal/controller/namespaced/cognitoidentity/poolrolesattachment"
 	identityprovider "github.com/upbound/provider-aws/v2/internal/controller/namespaced/cognitoidp/identityprovider"
+	logdeliveryconfiguration "github.com/upbound/provider-aws/v2/internal/controller/namespaced/cognitoidp/logdeliveryconfiguration"
 	resourceserver "github.com/upbound/provider-aws/v2/internal/controller/namespaced/cognitoidp/resourceserver"
 	riskconfiguration "github.com/upbound/provider-aws/v2/internal/controller/namespaced/cognitoidp/riskconfiguration"
 	usercognitoidp "github.com/upbound/provider-aws/v2/internal/controller/namespaced/cognitoidp/user"
@@ -306,6 +307,8 @@ import (
 	projectdevicefarm "github.com/upbound/provider-aws/v2/internal/controller/namespaced/devicefarm/project"
 	testgridproject "github.com/upbound/provider-aws/v2/internal/controller/namespaced/devicefarm/testgridproject"
 	upload "github.com/upbound/provider-aws/v2/internal/controller/namespaced/devicefarm/upload"
+	agentspace "github.com/upbound/provider-aws/v2/internal/controller/namespaced/devopsagent/agentspace"
+	asset "github.com/upbound/provider-aws/v2/internal/controller/namespaced/devopsagent/asset"
 	bgppeer "github.com/upbound/provider-aws/v2/internal/controller/namespaced/directconnect/bgppeer"
 	connectiondirectconnect "github.com/upbound/provider-aws/v2/internal/controller/namespaced/directconnect/connection"
 	connectionassociation "github.com/upbound/provider-aws/v2/internal/controller/namespaced/directconnect/connectionassociation"
@@ -1333,6 +1336,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		pool.Setup,
 		poolrolesattachment.Setup,
 		identityprovider.Setup,
+		logdeliveryconfiguration.Setup,
 		resourceserver.Setup,
 		riskconfiguration.Setup,
 		usercognitoidp.Setup,
@@ -1385,6 +1389,8 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		projectdevicefarm.Setup,
 		testgridproject.Setup,
 		upload.Setup,
+		agentspace.Setup,
+		asset.Setup,
 		bgppeer.Setup,
 		connectiondirectconnect.Setup,
 		connectionassociation.Setup,
@@ -2418,6 +2424,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		pool.SetupGated,
 		poolrolesattachment.SetupGated,
 		identityprovider.SetupGated,
+		logdeliveryconfiguration.SetupGated,
 		resourceserver.SetupGated,
 		riskconfiguration.SetupGated,
 		usercognitoidp.SetupGated,
@@ -2470,6 +2477,8 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		projectdevicefarm.SetupGated,
 		testgridproject.SetupGated,
 		upload.SetupGated,
+		agentspace.SetupGated,
+		asset.SetupGated,
 		bgppeer.SetupGated,
 		connectiondirectconnect.SetupGated,
 		connectionassociation.SetupGated,
@@ -3502,6 +3511,7 @@ func SetupWebhookWithManager_monolith(mgr ctrl.Manager) error {
 		pool.SetupWebhookWithManager,
 		poolrolesattachment.SetupWebhookWithManager,
 		identityprovider.SetupWebhookWithManager,
+		logdeliveryconfiguration.SetupWebhookWithManager,
 		resourceserver.SetupWebhookWithManager,
 		riskconfiguration.SetupWebhookWithManager,
 		usercognitoidp.SetupWebhookWithManager,
@@ -3554,6 +3564,8 @@ func SetupWebhookWithManager_monolith(mgr ctrl.Manager) error {
 		projectdevicefarm.SetupWebhookWithManager,
 		testgridproject.SetupWebhookWithManager,
 		upload.SetupWebhookWithManager,
+		agentspace.SetupWebhookWithManager,
+		asset.SetupWebhookWithManager,
 		bgppeer.SetupWebhookWithManager,
 		connectiondirectconnect.SetupWebhookWithManager,
 		connectionassociation.SetupWebhookWithManager,

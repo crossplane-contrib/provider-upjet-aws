@@ -146,6 +146,8 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	//
 	// us-west-2_abc123/3ho4ek12345678909nh3fmhpko
 	"aws_cognito_user_pool_client": cognitoUserPoolClient(),
+	// import Cognito IDP (Identity Provider) Log Delivery Configuration using the user_pool_id
+	"aws_cognito_log_delivery_configuration": frameworkParameterAsIdentifier("user_pool_id"),
 
 	// cloudfront
 	//
@@ -164,6 +166,15 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	"aws_cloudwatch_log_delivery_destination_policy": frameworkParameterAsIdentifier("delivery_destination_name"),
 	// CloudWatch Logs Delivery Source can be imported using the name
 	"aws_cloudwatch_log_delivery_source": frameworkParameterAsIdentifier("name"),
+
+	// devopsagent
+	//
+	// DevOps Agent Space can be imported using the agent_space_id
+	"aws_devopsagent_agent_space": config.FrameworkResourceWithComputedIdentifier("agent_space_id", "00000000-0000-0000-0000-000000000000"),
+	// imported via agent_space_id,asset_id. agent_space_id is already a
+	// required spec field, so only the provider-assigned asset_id (a UUID) is
+	// used as the external name.
+	"aws_devopsagent_asset": config.FrameworkResourceWithComputedIdentifier("asset_id", "00000000-0000-0000-0000-000000000000"),
 
 	// dsql
 	//

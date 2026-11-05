@@ -1,0 +1,16 @@
+# SPDX-FileCopyrightText: 2026 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: devopsagent.aws.upbound.io/v1beta1
+kind: AgentSpace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: devopsagent/v1beta1/agentspace
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    name: my-agent-space
+    region: us-west-2

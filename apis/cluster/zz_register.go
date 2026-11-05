@@ -105,6 +105,7 @@ import (
 	v1beta1detective "github.com/upbound/provider-aws/v2/apis/cluster/detective/v1beta1"
 	v1beta1devicefarm "github.com/upbound/provider-aws/v2/apis/cluster/devicefarm/v1beta1"
 	v1beta2devicefarm "github.com/upbound/provider-aws/v2/apis/cluster/devicefarm/v1beta2"
+	v1beta1devopsagent "github.com/upbound/provider-aws/v2/apis/cluster/devopsagent/v1beta1"
 	v1beta1directconnect "github.com/upbound/provider-aws/v2/apis/cluster/directconnect/v1beta1"
 	v1beta1dlm "github.com/upbound/provider-aws/v2/apis/cluster/dlm/v1beta1"
 	v1beta2dlm "github.com/upbound/provider-aws/v2/apis/cluster/dlm/v1beta2"
@@ -416,6 +417,7 @@ func init() {
 		v1beta1detective.SchemeBuilder.AddToScheme,
 		v1beta1devicefarm.SchemeBuilder.AddToScheme,
 		v1beta2devicefarm.SchemeBuilder.AddToScheme,
+		v1beta1devopsagent.SchemeBuilder.AddToScheme,
 		v1beta1directconnect.SchemeBuilder.AddToScheme,
 		v1beta1dlm.SchemeBuilder.AddToScheme,
 		v1beta2dlm.SchemeBuilder.AddToScheme,

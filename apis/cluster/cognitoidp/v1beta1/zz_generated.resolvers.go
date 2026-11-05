@@ -69,6 +69,202 @@ func (mg *IdentityProvider) ResolveReferences( // ResolveReferences of this Iden
 	return nil
 }
 
+// ResolveReferences of this LogDeliveryConfiguration.
+func (mg *LogDeliveryConfiguration) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.LogConfigurations); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.LogConfigurations[i3].CloudWatchLogsConfiguration); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("cloudwatchlogs.aws.upbound.io", "v1beta1", "Group", "GroupList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LogConfigurations[i3].CloudWatchLogsConfiguration[i4].LogGroupArn),
+					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
+					Reference:    mg.Spec.ForProvider.LogConfigurations[i3].CloudWatchLogsConfiguration[i4].LogGroupArnRef,
+					Selector:     mg.Spec.ForProvider.LogConfigurations[i3].CloudWatchLogsConfiguration[i4].LogGroupArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.LogConfigurations[i3].CloudWatchLogsConfiguration[i4].LogGroupArn")
+			}
+			mg.Spec.ForProvider.LogConfigurations[i3].CloudWatchLogsConfiguration[i4].LogGroupArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.LogConfigurations[i3].CloudWatchLogsConfiguration[i4].LogGroupArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.LogConfigurations); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.LogConfigurations[i3].FirehoseConfiguration); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("firehose.aws.upbound.io", "v1beta2", "DeliveryStream", "DeliveryStreamList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LogConfigurations[i3].FirehoseConfiguration[i4].StreamArn),
+					Extract:      resource.ExtractParamPath("arn", false),
+					Namespace:    mg.GetNamespace(),
+					Reference:    mg.Spec.ForProvider.LogConfigurations[i3].FirehoseConfiguration[i4].StreamArnRef,
+					Selector:     mg.Spec.ForProvider.LogConfigurations[i3].FirehoseConfiguration[i4].StreamArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.LogConfigurations[i3].FirehoseConfiguration[i4].StreamArn")
+			}
+			mg.Spec.ForProvider.LogConfigurations[i3].FirehoseConfiguration[i4].StreamArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.LogConfigurations[i3].FirehoseConfiguration[i4].StreamArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.LogConfigurations); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.LogConfigurations[i3].S3Configuration); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io", "v1beta2", "Bucket", "BucketList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LogConfigurations[i3].S3Configuration[i4].BucketArn),
+					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
+					Reference:    mg.Spec.ForProvider.LogConfigurations[i3].S3Configuration[i4].BucketArnRef,
+					Selector:     mg.Spec.ForProvider.LogConfigurations[i3].S3Configuration[i4].BucketArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.LogConfigurations[i3].S3Configuration[i4].BucketArn")
+			}
+			mg.Spec.ForProvider.LogConfigurations[i3].S3Configuration[i4].BucketArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.LogConfigurations[i3].S3Configuration[i4].BucketArnRef = rsp.ResolvedReference
+
+		}
+	}
+	{
+		m, l, err = apisresolver.GetManagedResource("cognitoidp.aws.upbound.io", "v1beta2", "UserPool", "UserPoolList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.UserPoolID),
+			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.UserPoolIDRef,
+			Selector:     mg.Spec.ForProvider.UserPoolIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.UserPoolID")
+	}
+	mg.Spec.ForProvider.UserPoolID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.UserPoolIDRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.LogConfigurations); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.LogConfigurations[i3].CloudWatchLogsConfiguration); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("cloudwatchlogs.aws.upbound.io", "v1beta1", "Group", "GroupList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LogConfigurations[i3].CloudWatchLogsConfiguration[i4].LogGroupArn),
+					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
+					Reference:    mg.Spec.InitProvider.LogConfigurations[i3].CloudWatchLogsConfiguration[i4].LogGroupArnRef,
+					Selector:     mg.Spec.InitProvider.LogConfigurations[i3].CloudWatchLogsConfiguration[i4].LogGroupArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.LogConfigurations[i3].CloudWatchLogsConfiguration[i4].LogGroupArn")
+			}
+			mg.Spec.InitProvider.LogConfigurations[i3].CloudWatchLogsConfiguration[i4].LogGroupArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.LogConfigurations[i3].CloudWatchLogsConfiguration[i4].LogGroupArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.LogConfigurations); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.LogConfigurations[i3].FirehoseConfiguration); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("firehose.aws.upbound.io", "v1beta2", "DeliveryStream", "DeliveryStreamList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LogConfigurations[i3].FirehoseConfiguration[i4].StreamArn),
+					Extract:      resource.ExtractParamPath("arn", false),
+					Namespace:    mg.GetNamespace(),
+					Reference:    mg.Spec.InitProvider.LogConfigurations[i3].FirehoseConfiguration[i4].StreamArnRef,
+					Selector:     mg.Spec.InitProvider.LogConfigurations[i3].FirehoseConfiguration[i4].StreamArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.LogConfigurations[i3].FirehoseConfiguration[i4].StreamArn")
+			}
+			mg.Spec.InitProvider.LogConfigurations[i3].FirehoseConfiguration[i4].StreamArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.LogConfigurations[i3].FirehoseConfiguration[i4].StreamArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.LogConfigurations); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.LogConfigurations[i3].S3Configuration); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io", "v1beta2", "Bucket", "BucketList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LogConfigurations[i3].S3Configuration[i4].BucketArn),
+					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
+					Reference:    mg.Spec.InitProvider.LogConfigurations[i3].S3Configuration[i4].BucketArnRef,
+					Selector:     mg.Spec.InitProvider.LogConfigurations[i3].S3Configuration[i4].BucketArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.LogConfigurations[i3].S3Configuration[i4].BucketArn")
+			}
+			mg.Spec.InitProvider.LogConfigurations[i3].S3Configuration[i4].BucketArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.LogConfigurations[i3].S3Configuration[i4].BucketArnRef = rsp.ResolvedReference
+
+		}
+	}
+	{
+		m, l, err = apisresolver.GetManagedResource("cognitoidp.aws.upbound.io", "v1beta2", "UserPool", "UserPoolList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.UserPoolID),
+			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.UserPoolIDRef,
+			Selector:     mg.Spec.InitProvider.UserPoolIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.UserPoolID")
+	}
+	mg.Spec.InitProvider.UserPoolID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.UserPoolIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this ResourceServer.
 func (mg *ResourceServer) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed

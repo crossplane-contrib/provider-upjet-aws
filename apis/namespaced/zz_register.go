@@ -67,6 +67,7 @@ import (
 	v1beta1deploy "github.com/upbound/provider-aws/v2/apis/namespaced/deploy/v1beta1"
 	v1beta1detective "github.com/upbound/provider-aws/v2/apis/namespaced/detective/v1beta1"
 	v1beta1devicefarm "github.com/upbound/provider-aws/v2/apis/namespaced/devicefarm/v1beta1"
+	v1beta1devopsagent "github.com/upbound/provider-aws/v2/apis/namespaced/devopsagent/v1beta1"
 	v1beta1directconnect "github.com/upbound/provider-aws/v2/apis/namespaced/directconnect/v1beta1"
 	v1beta1dlm "github.com/upbound/provider-aws/v2/apis/namespaced/dlm/v1beta1"
 	v1beta1dms "github.com/upbound/provider-aws/v2/apis/namespaced/dms/v1beta1"
@@ -256,6 +257,7 @@ func init() {
 		v1beta1deploy.SchemeBuilder.AddToScheme,
 		v1beta1detective.SchemeBuilder.AddToScheme,
 		v1beta1devicefarm.SchemeBuilder.AddToScheme,
+		v1beta1devopsagent.SchemeBuilder.AddToScheme,
 		v1beta1directconnect.SchemeBuilder.AddToScheme,
 		v1beta1dlm.SchemeBuilder.AddToScheme,
 		v1beta1dms.SchemeBuilder.AddToScheme,
