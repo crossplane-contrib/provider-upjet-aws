@@ -161,6 +161,7 @@ import (
 	v1beta1s3 "github.com/upbound/provider-aws/v2/apis/namespaced/s3/v1beta1"
 	v1beta1s3control "github.com/upbound/provider-aws/v2/apis/namespaced/s3control/v1beta1"
 	v1beta1s3files "github.com/upbound/provider-aws/v2/apis/namespaced/s3files/v1beta1"
+	v1beta1s3tables "github.com/upbound/provider-aws/v2/apis/namespaced/s3tables/v1beta1"
 	v1beta1s3vectors "github.com/upbound/provider-aws/v2/apis/namespaced/s3vectors/v1beta1"
 	v1beta1sagemaker "github.com/upbound/provider-aws/v2/apis/namespaced/sagemaker/v1beta1"
 	v1beta1scheduler "github.com/upbound/provider-aws/v2/apis/namespaced/scheduler/v1beta1"
@@ -351,6 +352,7 @@ func init() {
 		v1beta1s3.SchemeBuilder.AddToScheme,
 		v1beta1s3control.SchemeBuilder.AddToScheme,
 		v1beta1s3files.SchemeBuilder.AddToScheme,
+		v1beta1s3tables.SchemeBuilder.AddToScheme,
 		v1beta1s3vectors.SchemeBuilder.AddToScheme,
 		v1beta1sagemaker.SchemeBuilder.AddToScheme,
 		v1beta1scheduler.SchemeBuilder.AddToScheme,
