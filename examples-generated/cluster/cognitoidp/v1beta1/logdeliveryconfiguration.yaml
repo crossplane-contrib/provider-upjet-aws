@@ -1,0 +1,55 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
+apiVersion: cognitoidp.aws.upbound.io/v1beta1
+kind: LogDeliveryConfiguration
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cognitoidp/v1beta1/logdeliveryconfiguration
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    logConfigurations:
+    - cloudWatchLogsConfiguration:
+        logGroupArnSelector:
+          matchLabels:
+            testing.upbound.io/example-name: example
+      eventSource: userNotification
+      logLevel: ERROR
+    region: us-west-1
+    userPoolIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: cloudwatchlogs.aws.upbound.io/v1beta1
+kind: Group
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cognitoidp/v1beta1/logdeliveryconfiguration
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+
+---
+
+apiVersion: cognitoidp.aws.upbound.io/v1beta2
+kind: UserPool
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cognitoidp/v1beta1/logdeliveryconfiguration
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    name: example
+    region: us-west-1

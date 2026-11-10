@@ -246,6 +246,7 @@
 "aws_cognito_identity_pool_provider_principal_tag",
 "aws_cognito_identity_pool_roles_attachment",
 "aws_cognito_identity_provider",
+"aws_cognito_log_delivery_configuration",
 "aws_cognito_resource_server",
 "aws_cognito_risk_configuration",
 "aws_cognito_user",

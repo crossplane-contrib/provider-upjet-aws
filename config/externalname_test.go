@@ -7,7 +7,129 @@ package config
 import (
 	"context"
 	"testing"
+
+	ujconfig "github.com/crossplane/upjet/v2/pkg/config"
+	"github.com/google/go-cmp/cmp"
+	"github.com/google/go-cmp/cmp/cmpopts"
+
+	clustercognitoidp "github.com/upbound/provider-aws/v2/config/cluster/cognitoidp"
+	clustercommon "github.com/upbound/provider-aws/v2/config/cluster/common"
+	namespacedcognitoidp "github.com/upbound/provider-aws/v2/config/namespaced/cognitoidp"
+	namespacedcommon "github.com/upbound/provider-aws/v2/config/namespaced/common"
 )
+
+func TestCognitoLogDeliveryConfigurationReferences(t *testing.T) {
+	cases := map[string]struct {
+		configure func(*ujconfig.Provider)
+		extractor string
+	}{
+		"Cluster": {
+			configure: clustercognitoidp.Configure,
+			extractor: clustercommon.PathARNExtractor,
+		},
+		"Namespaced": {
+			configure: namespacedcognitoidp.Configure,
+			extractor: namespacedcommon.PathARNExtractor,
+		},
+	}
+	for name, tc := range cases {
+		t.Run(name, func(t *testing.T) {
+			const resourceName = "aws_cognito_log_delivery_configuration"
+			p := ujconfig.NewProvider([]byte(providerSchema), "aws", "github.com/upbound/provider-aws/v2", providerMetadata,
+				ujconfig.WithIncludeList([]string{resourceName + "$"}),
+			)
+			tc.configure(p)
+			p.ConfigureResources()
+			r, ok := p.Resources[resourceName]
+			if !ok {
+				t.Fatal("log delivery configuration resource was not included")
+			}
+			want := ujconfig.References{
+				"user_pool_id": {
+					TerraformName: "aws_cognito_user_pool",
+				},
+				"log_configurations.cloud_watch_logs_configuration.log_group_arn": {
+					TerraformName: "aws_cloudwatch_log_group",
+					Extractor:     tc.extractor,
+				},
+				"log_configurations.firehose_configuration.stream_arn": {
+					TerraformName: "aws_kinesis_firehose_delivery_stream",
+					Extractor:     tc.extractor,
+				},
+				"log_configurations.s3_configuration.bucket_arn": {
+					TerraformName: "aws_s3_bucket",
+					Extractor:     tc.extractor,
+				},
+			}
+			if diff := cmp.Diff(want, r.References); diff != "" {
+				t.Errorf("References mismatch (-want +got):\n%s", diff)
+			}
+			wantTFPaths := []string{
+				"log_configurations[*].cloud_watch_logs_configuration",
+				"log_configurations[*].firehose_configuration",
+				"log_configurations[*].s3_configuration",
+			}
+			sortPaths := cmpopts.SortSlices(func(a, b string) bool { return a < b })
+			if diff := cmp.Diff(wantTFPaths, r.TFListConversionPaths(), sortPaths); diff != "" {
+				t.Errorf("Terraform singleton conversion paths mismatch (-want +got):\n%s", diff)
+			}
+			wantCRDPaths := []string{
+				"logConfigurations[*].cloudWatchLogsConfiguration",
+				"logConfigurations[*].firehoseConfiguration",
+				"logConfigurations[*].s3Configuration",
+			}
+			if diff := cmp.Diff(wantCRDPaths, r.CRDListConversionPaths(), sortPaths); diff != "" {
+				t.Errorf("CRD singleton conversion paths mismatch (-want +got):\n%s", diff)
+			}
+		})
+	}
+}
+
+func TestCognitoLogDeliveryConfigurationExternalName(t *testing.T) {
+	e := TerraformPluginFrameworkExternalNameConfigs["aws_cognito_log_delivery_configuration"]
+	if len(e.OmittedFields) != 0 {
+		t.Fatalf("user_pool_id must remain configurable, got omitted fields %v", e.OmittedFields)
+	}
+	const poolID = "us-west-2_example123"
+	t.Run("CreateWithReference", func(t *testing.T) {
+		parameters := map[string]any{"user_pool_id": poolID}
+		e.SetIdentifierArgumentFn(parameters, "")
+		if parameters["user_pool_id"] != poolID {
+			t.Fatalf("SetIdentifierArgumentFn() changed the referenced user_pool_id: %v", parameters)
+		}
+	})
+	t.Run("ImportWithExternalName", func(t *testing.T) {
+		parameters := map[string]any{}
+		e.SetIdentifierArgumentFn(parameters, poolID)
+		if parameters["user_pool_id"] != poolID {
+			t.Fatalf("SetIdentifierArgumentFn() = %v, want user_pool_id %q", parameters, poolID)
+		}
+	})
+	t.Run("PreserveConfiguredPool", func(t *testing.T) {
+		parameters := map[string]any{"user_pool_id": poolID}
+		e.SetIdentifierArgumentFn(parameters, "us-west-2_other")
+		if parameters["user_pool_id"] != poolID {
+			t.Fatalf("SetIdentifierArgumentFn() overwrote the configured pool: %v", parameters)
+		}
+	})
+	t.Run("ReadExternalName", func(t *testing.T) {
+		got, err := e.GetExternalNameFn(map[string]any{"user_pool_id": poolID})
+		if err != nil || got != poolID {
+			t.Fatalf("GetExternalNameFn() = %q, %v, want %q, nil", got, err, poolID)
+		}
+	})
+	t.Run("MissingPoolInState", func(t *testing.T) {
+		if _, err := e.GetExternalNameFn(map[string]any{}); err == nil {
+			t.Fatal("GetExternalNameFn() must report a missing user_pool_id")
+		}
+	})
+	t.Run("NoSyntheticID", func(t *testing.T) {
+		got, err := e.GetIDFn(context.Background(), poolID, map[string]any{"user_pool_id": poolID}, nil)
+		if err != nil || got != "" {
+			t.Fatalf("GetIDFn() = %q, %v, want empty ID for a resource without an id attribute", got, err)
+		}
+	})
+}
 
 func TestSNSPlatformApplicationImportID(t *testing.T) {
 	externalName := TerraformPluginSDKExternalNameConfigs["aws_sns_platform_application"]

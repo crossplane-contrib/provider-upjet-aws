@@ -123,6 +123,7 @@ var GroupMap = map[string]GroupKindCalculator{
 	"aws_cognito_identity_pool_roles_attachment":               ReplaceGroupWords("cognitoidentity", 2),
 	"aws_cognito_identity_pool":                                ReplaceGroupWords("cognitoidentity", 2),
 	"aws_cognito_identity_provider":                            ReplaceGroupWords("cognitoidp", 1),
+	"aws_cognito_log_delivery_configuration":                   ReplaceGroupWords("cognitoidp", 1),
 	"aws_cognito_resource_server":                              ReplaceGroupWords("cognitoidp", 1),
 	"aws_cognito_risk_configuration":                           ReplaceGroupWords("cognitoidp", 1),
 	"aws_cognito_user_group":                                   ReplaceGroupWords("cognitoidp", 1),

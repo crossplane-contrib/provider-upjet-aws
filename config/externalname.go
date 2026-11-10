@@ -144,6 +144,8 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 
 	// cognitoidp
 	//
+	// Cognito Log Delivery Configuration is imported using the user_pool_id.
+	"aws_cognito_log_delivery_configuration": frameworkParameterAsIdentifier("user_pool_id"),
 	// us-west-2_abc123/3ho4ek12345678909nh3fmhpko
 	"aws_cognito_user_pool_client": cognitoUserPoolClient(),
 

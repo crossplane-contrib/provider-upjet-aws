@@ -254,6 +254,7 @@ import (
 	pool "github.com/upbound/provider-aws/v2/internal/controller/namespaced/cognitoidentity/pool"
 	poolrolesattachment "github.com/upbound/provider-aws/v2/internal/controller/namespaced/cognitoidentity/poolrolesattachment"
 	identityprovider "github.com/upbound/provider-aws/v2/internal/controller/namespaced/cognitoidp/identityprovider"
+	logdeliveryconfiguration "github.com/upbound/provider-aws/v2/internal/controller/namespaced/cognitoidp/logdeliveryconfiguration"
 	resourceserver "github.com/upbound/provider-aws/v2/internal/controller/namespaced/cognitoidp/resourceserver"
 	riskconfiguration "github.com/upbound/provider-aws/v2/internal/controller/namespaced/cognitoidp/riskconfiguration"
 	usercognitoidp "github.com/upbound/provider-aws/v2/internal/controller/namespaced/cognitoidp/user"
@@ -1333,6 +1334,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		pool.Setup,
 		poolrolesattachment.Setup,
 		identityprovider.Setup,
+		logdeliveryconfiguration.Setup,
 		resourceserver.Setup,
 		riskconfiguration.Setup,
 		usercognitoidp.Setup,
@@ -2418,6 +2420,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		pool.SetupGated,
 		poolrolesattachment.SetupGated,
 		identityprovider.SetupGated,
+		logdeliveryconfiguration.SetupGated,
 		resourceserver.SetupGated,
 		riskconfiguration.SetupGated,
 		usercognitoidp.SetupGated,
@@ -3502,6 +3505,7 @@ func SetupWebhookWithManager_monolith(mgr ctrl.Manager) error {
 		pool.SetupWebhookWithManager,
 		poolrolesattachment.SetupWebhookWithManager,
 		identityprovider.SetupWebhookWithManager,
+		logdeliveryconfiguration.SetupWebhookWithManager,
 		resourceserver.SetupWebhookWithManager,
 		riskconfiguration.SetupWebhookWithManager,
 		usercognitoidp.SetupWebhookWithManager,

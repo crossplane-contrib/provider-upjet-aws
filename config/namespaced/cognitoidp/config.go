@@ -12,6 +12,26 @@ import (
 
 // Configure adds configurations for the cognitoidp group.
 func Configure(p *config.Provider) { //nolint:gocyclo
+	p.AddResourceConfigurator("aws_cognito_log_delivery_configuration", func(r *config.Resource) {
+		r.AddSingletonListConversion("log_configurations[*].cloud_watch_logs_configuration", "logConfigurations[*].cloudWatchLogsConfiguration")
+		r.AddSingletonListConversion("log_configurations[*].firehose_configuration", "logConfigurations[*].firehoseConfiguration")
+		r.AddSingletonListConversion("log_configurations[*].s3_configuration", "logConfigurations[*].s3Configuration")
+		r.References["user_pool_id"] = config.Reference{
+			TerraformName: "aws_cognito_user_pool",
+		}
+		r.References["log_configurations.cloud_watch_logs_configuration.log_group_arn"] = config.Reference{
+			TerraformName: "aws_cloudwatch_log_group",
+			Extractor:     common.PathARNExtractor,
+		}
+		r.References["log_configurations.firehose_configuration.stream_arn"] = config.Reference{
+			TerraformName: "aws_kinesis_firehose_delivery_stream",
+			Extractor:     common.PathARNExtractor,
+		}
+		r.References["log_configurations.s3_configuration.bucket_arn"] = config.Reference{
+			TerraformName: "aws_s3_bucket",
+			Extractor:     common.PathARNExtractor,
+		}
+	})
 	p.AddResourceConfigurator("aws_cognito_user_pool_client", func(r *config.Resource) {
 		r.References["user_pool_id"] = config.Reference{
 			TerraformName: "aws_cognito_user_pool",

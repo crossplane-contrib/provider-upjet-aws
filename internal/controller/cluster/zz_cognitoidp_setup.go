@@ -10,6 +10,7 @@ import (
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
 	identityprovider "github.com/upbound/provider-aws/v2/internal/controller/cluster/cognitoidp/identityprovider"
+	logdeliveryconfiguration "github.com/upbound/provider-aws/v2/internal/controller/cluster/cognitoidp/logdeliveryconfiguration"
 	resourceserver "github.com/upbound/provider-aws/v2/internal/controller/cluster/cognitoidp/resourceserver"
 	riskconfiguration "github.com/upbound/provider-aws/v2/internal/controller/cluster/cognitoidp/riskconfiguration"
 	user "github.com/upbound/provider-aws/v2/internal/controller/cluster/cognitoidp/user"
@@ -26,6 +27,7 @@ import (
 func Setup_cognitoidp(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		identityprovider.Setup,
+		logdeliveryconfiguration.Setup,
 		resourceserver.Setup,
 		riskconfiguration.Setup,
 		user.Setup,
@@ -48,6 +50,7 @@ func Setup_cognitoidp(mgr ctrl.Manager, o controller.Options) error {
 func SetupGated_cognitoidp(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		identityprovider.SetupGated,
+		logdeliveryconfiguration.SetupGated,
 		resourceserver.SetupGated,
 		riskconfiguration.SetupGated,
 		user.SetupGated,
@@ -69,6 +72,7 @@ func SetupGated_cognitoidp(mgr ctrl.Manager, o controller.Options) error {
 func SetupWebhookWithManager_cognitoidp(mgr ctrl.Manager) error {
 	for _, setup := range []func(ctrl.Manager) error{
 		identityprovider.SetupWebhookWithManager,
+		logdeliveryconfiguration.SetupWebhookWithManager,
 		resourceserver.SetupWebhookWithManager,
 		riskconfiguration.SetupWebhookWithManager,
 		user.SetupWebhookWithManager,

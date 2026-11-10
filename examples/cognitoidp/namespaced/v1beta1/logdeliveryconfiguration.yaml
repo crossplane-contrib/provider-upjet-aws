@@ -1,0 +1,62 @@
+# SPDX-FileCopyrightText: 2026 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+# The provider's AWS principal needs Cognito log-delivery permissions,
+# logs:CreateLogDelivery, s3:GetBucketPolicy, s3:PutBucketPolicy, and permission
+# to create the Cognito service-linked role. AWS configures the bucket policy.
+# User-activity logs require the PLUS tier and AUDIT or ENFORCED threat protection.
+apiVersion: cognitoidp.aws.m.upbound.io/v1beta1
+kind: LogDeliveryConfiguration
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cognitoidp/v1beta1/logdeliveryconfiguration
+  labels:
+    testing.upbound.io/example-name: log-delivery
+  name: log-delivery
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-2
+    userPoolIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: log-delivery
+    logConfigurations:
+    - eventSource: userAuthEvents
+      logLevel: INFO
+      s3Configuration:
+        bucketArnSelector:
+          matchLabels:
+            testing.upbound.io/example-name: log-delivery
+---
+apiVersion: cognitoidp.aws.m.upbound.io/v1beta1
+kind: UserPool
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cognitoidp/v1beta1/logdeliveryconfiguration
+  labels:
+    testing.upbound.io/example-name: log-delivery
+  name: log-delivery
+  namespace: upbound-system
+spec:
+  forProvider:
+    name: log-delivery
+    region: us-west-2
+    userPoolTier: PLUS
+    userPoolAddOns:
+      advancedSecurityMode: AUDIT
+---
+apiVersion: s3.aws.m.upbound.io/v1beta1
+kind: Bucket
+metadata:
+  annotations:
+    crossplane.io/external-name: ${Rand.RFC1123Subdomain}
+    meta.upbound.io/example-id: cognitoidp/v1beta1/logdeliveryconfiguration
+  labels:
+    testing.upbound.io/example-name: log-delivery
+  name: log-delivery
+  namespace: upbound-system
+spec:
+  forProvider:
+    forceDestroy: true
+    region: us-west-2
