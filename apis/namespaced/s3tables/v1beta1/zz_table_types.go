@@ -128,7 +128,7 @@ type IcebergInitParameters struct {
 
 	// Schema configuration for the Iceberg table. See .
 	// Schema configuration for the Iceberg table.
-	Schema []SchemaInitParameters `json:"schema,omitempty" tf:"schema,omitempty"`
+	Schema *SchemaInitParameters `json:"schema,omitempty" tf:"schema,omitempty"`
 }
 
 type IcebergObservation struct {
@@ -140,7 +140,7 @@ type IcebergObservation struct {
 
 	// Schema configuration for the Iceberg table. See .
 	// Schema configuration for the Iceberg table.
-	Schema []SchemaObservation `json:"schema,omitempty" tf:"schema,omitempty"`
+	Schema *SchemaObservation `json:"schema,omitempty" tf:"schema,omitempty"`
 }
 
 type IcebergParameters struct {
@@ -154,7 +154,7 @@ type IcebergParameters struct {
 	// Schema configuration for the Iceberg table. See .
 	// Schema configuration for the Iceberg table.
 	// +kubebuilder:validation:Optional
-	Schema []SchemaParameters `json:"schema,omitempty" tf:"schema,omitempty"`
+	Schema *SchemaParameters `json:"schema,omitempty" tf:"schema,omitempty"`
 }
 
 type IcebergSnapshotManagementInitParameters struct {
@@ -248,14 +248,14 @@ type MetadataInitParameters struct {
 
 	// Details about the metadata for an Iceberg table. This block defines the schema structure for the Apache Iceberg table format. See .
 	// Iceberg metadata configuration.
-	Iceberg []IcebergInitParameters `json:"iceberg,omitempty" tf:"iceberg,omitempty"`
+	Iceberg *IcebergInitParameters `json:"iceberg,omitempty" tf:"iceberg,omitempty"`
 }
 
 type MetadataObservation struct {
 
 	// Details about the metadata for an Iceberg table. This block defines the schema structure for the Apache Iceberg table format. See .
 	// Iceberg metadata configuration.
-	Iceberg []IcebergObservation `json:"iceberg,omitempty" tf:"iceberg,omitempty"`
+	Iceberg *IcebergObservation `json:"iceberg,omitempty" tf:"iceberg,omitempty"`
 }
 
 type MetadataParameters struct {
@@ -263,7 +263,7 @@ type MetadataParameters struct {
 	// Details about the metadata for an Iceberg table. This block defines the schema structure for the Apache Iceberg table format. See .
 	// Iceberg metadata configuration.
 	// +kubebuilder:validation:Optional
-	Iceberg []IcebergParameters `json:"iceberg,omitempty" tf:"iceberg,omitempty"`
+	Iceberg *IcebergParameters `json:"iceberg,omitempty" tf:"iceberg,omitempty"`
 }
 
 type SchemaInitParameters struct {
@@ -319,7 +319,7 @@ type TableInitParameters struct {
 	MaintenanceConfiguration *MaintenanceConfigurationInitParameters `json:"maintenanceConfiguration,omitempty" tf:"maintenance_configuration,omitempty"`
 
 	// Details about the table metadata. This configuration specifies the metadata format and schema for the table. Currently only supports Iceberg format. See .
-	Metadata []MetadataInitParameters `json:"metadata,omitempty" tf:"metadata,omitempty"`
+	Metadata *MetadataInitParameters `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
 	// Name of the table. Must be between 1 and 255 characters in length. Can consist of lowercase letters, numbers, and underscores, and must begin and end with a lowercase letter or number. A full list of table naming rules can be found in the S3 Tables documentation.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -378,7 +378,7 @@ type TableObservation struct {
 	MaintenanceConfiguration *MaintenanceConfigurationObservation `json:"maintenanceConfiguration,omitempty" tf:"maintenance_configuration,omitempty"`
 
 	// Details about the table metadata. This configuration specifies the metadata format and schema for the table. Currently only supports Iceberg format. See .
-	Metadata []MetadataObservation `json:"metadata,omitempty" tf:"metadata,omitempty"`
+	Metadata *MetadataObservation `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
 	// Location of table metadata.
 	MetadataLocation *string `json:"metadataLocation,omitempty" tf:"metadata_location,omitempty"`
@@ -439,7 +439,7 @@ type TableParameters struct {
 
 	// Details about the table metadata. This configuration specifies the metadata format and schema for the table. Currently only supports Iceberg format. See .
 	// +kubebuilder:validation:Optional
-	Metadata []MetadataParameters `json:"metadata,omitempty" tf:"metadata,omitempty"`
+	Metadata *MetadataParameters `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
 	// Name of the table. Must be between 1 and 255 characters in length. Can consist of lowercase letters, numbers, and underscores, and must begin and end with a lowercase letter or number. A full list of table naming rules can be found in the S3 Tables documentation.
 	// +kubebuilder:validation:Optional

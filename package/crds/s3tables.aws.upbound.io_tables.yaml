@@ -134,57 +134,51 @@ spec:
                     description: Details about the table metadata. This configuration
                       specifies the metadata format and schema for the table. Currently
                       only supports Iceberg format. See .
-                    items:
-                      properties:
-                        iceberg:
-                          description: |-
-                            Details about the metadata for an Iceberg table. This block defines the schema structure for the Apache Iceberg table format. See .
-                            Iceberg metadata configuration.
-                          items:
+                    properties:
+                      iceberg:
+                        description: |-
+                          Details about the metadata for an Iceberg table. This block defines the schema structure for the Apache Iceberg table format. See .
+                          Iceberg metadata configuration.
+                        properties:
+                          properties:
+                            additionalProperties:
+                              type: string
+                            description: |-
+                              Map of configuration properties for the Iceberg table, for example write.distribution-mode and write.sort-order.
+                              A map of configuration properties for the Iceberg table, for example `write.distribution-mode` and `write.sort-order`.
+                            type: object
+                            x-kubernetes-map-type: granular
+                          schema:
+                            description: |-
+                              Schema configuration for the Iceberg table. See .
+                              Schema configuration for the Iceberg table.
                             properties:
-                              properties:
-                                additionalProperties:
-                                  type: string
+                              field:
                                 description: |-
-                                  Map of configuration properties for the Iceberg table, for example write.distribution-mode and write.sort-order.
-                                  A map of configuration properties for the Iceberg table, for example `write.distribution-mode` and `write.sort-order`.
-                                type: object
-                                x-kubernetes-map-type: granular
-                              schema:
-                                description: |-
-                                  Schema configuration for the Iceberg table. See .
-                                  Schema configuration for the Iceberg table.
+                                  List of schema fields for the Iceberg table. Each field defines a column in the table schema. See .
+                                  List of schema fields for the Iceberg table.
                                 items:
                                   properties:
-                                    field:
+                                    name:
                                       description: |-
-                                        List of schema fields for the Iceberg table. Each field defines a column in the table schema. See .
-                                        List of schema fields for the Iceberg table.
-                                      items:
-                                        properties:
-                                          name:
-                                            description: |-
-                                              Name of the field.
-                                              The name of the field.
-                                            type: string
-                                          required:
-                                            description: |-
-                                              Boolean value that specifies whether values are required for each row in this field. Defaults to false.
-                                              A Boolean value that specifies whether values are required for each row in this field. Default: false.
-                                            type: boolean
-                                          type:
-                                            description: |-
-                                              Field type. S3 Tables supports all Apache Iceberg primitive types including: boolean, int, long, float, double, decimal(precision,scale), date, time, timestamp, timestamptz, string, uuid, fixed(length), binary.
-                                              The field type. S3 Tables supports all Apache Iceberg primitive types.
-                                            type: string
-                                        type: object
-                                      type: array
+                                        Name of the field.
+                                        The name of the field.
+                                      type: string
+                                    required:
+                                      description: |-
+                                        Boolean value that specifies whether values are required for each row in this field. Defaults to false.
+                                        A Boolean value that specifies whether values are required for each row in this field. Default: false.
+                                      type: boolean
+                                    type:
+                                      description: |-
+                                        Field type. S3 Tables supports all Apache Iceberg primitive types including: boolean, int, long, float, double, decimal(precision,scale), date, time, timestamp, timestamptz, string, uuid, fixed(length), binary.
+                                        The field type. S3 Tables supports all Apache Iceberg primitive types.
+                                      type: string
                                   type: object
                                 type: array
                             type: object
-                          type: array
-                      type: object
-                    type: array
+                        type: object
+                    type: object
                   name:
                     description: Name of the table. Must be between 1 and 255 characters
                       in length. Can consist of lowercase letters, numbers, and underscores,
@@ -443,57 +437,51 @@ spec:
                     description: Details about the table metadata. This configuration
                       specifies the metadata format and schema for the table. Currently
                       only supports Iceberg format. See .
-                    items:
-                      properties:
-                        iceberg:
-                          description: |-
-                            Details about the metadata for an Iceberg table. This block defines the schema structure for the Apache Iceberg table format. See .
-                            Iceberg metadata configuration.
-                          items:
+                    properties:
+                      iceberg:
+                        description: |-
+                          Details about the metadata for an Iceberg table. This block defines the schema structure for the Apache Iceberg table format. See .
+                          Iceberg metadata configuration.
+                        properties:
+                          properties:
+                            additionalProperties:
+                              type: string
+                            description: |-
+                              Map of configuration properties for the Iceberg table, for example write.distribution-mode and write.sort-order.
+                              A map of configuration properties for the Iceberg table, for example `write.distribution-mode` and `write.sort-order`.
+                            type: object
+                            x-kubernetes-map-type: granular
+                          schema:
+                            description: |-
+                              Schema configuration for the Iceberg table. See .
+                              Schema configuration for the Iceberg table.
                             properties:
-                              properties:
-                                additionalProperties:
-                                  type: string
+                              field:
                                 description: |-
-                                  Map of configuration properties for the Iceberg table, for example write.distribution-mode and write.sort-order.
-                                  A map of configuration properties for the Iceberg table, for example `write.distribution-mode` and `write.sort-order`.
-                                type: object
-                                x-kubernetes-map-type: granular
-                              schema:
-                                description: |-
-                                  Schema configuration for the Iceberg table. See .
-                                  Schema configuration for the Iceberg table.
+                                  List of schema fields for the Iceberg table. Each field defines a column in the table schema. See .
+                                  List of schema fields for the Iceberg table.
                                 items:
                                   properties:
-                                    field:
+                                    name:
                                       description: |-
-                                        List of schema fields for the Iceberg table. Each field defines a column in the table schema. See .
-                                        List of schema fields for the Iceberg table.
-                                      items:
-                                        properties:
-                                          name:
-                                            description: |-
-                                              Name of the field.
-                                              The name of the field.
-                                            type: string
-                                          required:
-                                            description: |-
-                                              Boolean value that specifies whether values are required for each row in this field. Defaults to false.
-                                              A Boolean value that specifies whether values are required for each row in this field. Default: false.
-                                            type: boolean
-                                          type:
-                                            description: |-
-                                              Field type. S3 Tables supports all Apache Iceberg primitive types including: boolean, int, long, float, double, decimal(precision,scale), date, time, timestamp, timestamptz, string, uuid, fixed(length), binary.
-                                              The field type. S3 Tables supports all Apache Iceberg primitive types.
-                                            type: string
-                                        type: object
-                                      type: array
+                                        Name of the field.
+                                        The name of the field.
+                                      type: string
+                                    required:
+                                      description: |-
+                                        Boolean value that specifies whether values are required for each row in this field. Defaults to false.
+                                        A Boolean value that specifies whether values are required for each row in this field. Default: false.
+                                      type: boolean
+                                    type:
+                                      description: |-
+                                        Field type. S3 Tables supports all Apache Iceberg primitive types including: boolean, int, long, float, double, decimal(precision,scale), date, time, timestamp, timestamptz, string, uuid, fixed(length), binary.
+                                        The field type. S3 Tables supports all Apache Iceberg primitive types.
+                                      type: string
                                   type: object
                                 type: array
                             type: object
-                          type: array
-                      type: object
-                    type: array
+                        type: object
+                    type: object
                   name:
                     description: Name of the table. Must be between 1 and 255 characters
                       in length. Can consist of lowercase letters, numbers, and underscores,
@@ -843,57 +831,51 @@ spec:
                     description: Details about the table metadata. This configuration
                       specifies the metadata format and schema for the table. Currently
                       only supports Iceberg format. See .
-                    items:
-                      properties:
-                        iceberg:
-                          description: |-
-                            Details about the metadata for an Iceberg table. This block defines the schema structure for the Apache Iceberg table format. See .
-                            Iceberg metadata configuration.
-                          items:
+                    properties:
+                      iceberg:
+                        description: |-
+                          Details about the metadata for an Iceberg table. This block defines the schema structure for the Apache Iceberg table format. See .
+                          Iceberg metadata configuration.
+                        properties:
+                          properties:
+                            additionalProperties:
+                              type: string
+                            description: |-
+                              Map of configuration properties for the Iceberg table, for example write.distribution-mode and write.sort-order.
+                              A map of configuration properties for the Iceberg table, for example `write.distribution-mode` and `write.sort-order`.
+                            type: object
+                            x-kubernetes-map-type: granular
+                          schema:
+                            description: |-
+                              Schema configuration for the Iceberg table. See .
+                              Schema configuration for the Iceberg table.
                             properties:
-                              properties:
-                                additionalProperties:
-                                  type: string
+                              field:
                                 description: |-
-                                  Map of configuration properties for the Iceberg table, for example write.distribution-mode and write.sort-order.
-                                  A map of configuration properties for the Iceberg table, for example `write.distribution-mode` and `write.sort-order`.
-                                type: object
-                                x-kubernetes-map-type: granular
-                              schema:
-                                description: |-
-                                  Schema configuration for the Iceberg table. See .
-                                  Schema configuration for the Iceberg table.
+                                  List of schema fields for the Iceberg table. Each field defines a column in the table schema. See .
+                                  List of schema fields for the Iceberg table.
                                 items:
                                   properties:
-                                    field:
+                                    name:
                                       description: |-
-                                        List of schema fields for the Iceberg table. Each field defines a column in the table schema. See .
-                                        List of schema fields for the Iceberg table.
-                                      items:
-                                        properties:
-                                          name:
-                                            description: |-
-                                              Name of the field.
-                                              The name of the field.
-                                            type: string
-                                          required:
-                                            description: |-
-                                              Boolean value that specifies whether values are required for each row in this field. Defaults to false.
-                                              A Boolean value that specifies whether values are required for each row in this field. Default: false.
-                                            type: boolean
-                                          type:
-                                            description: |-
-                                              Field type. S3 Tables supports all Apache Iceberg primitive types including: boolean, int, long, float, double, decimal(precision,scale), date, time, timestamp, timestamptz, string, uuid, fixed(length), binary.
-                                              The field type. S3 Tables supports all Apache Iceberg primitive types.
-                                            type: string
-                                        type: object
-                                      type: array
+                                        Name of the field.
+                                        The name of the field.
+                                      type: string
+                                    required:
+                                      description: |-
+                                        Boolean value that specifies whether values are required for each row in this field. Defaults to false.
+                                        A Boolean value that specifies whether values are required for each row in this field. Default: false.
+                                      type: boolean
+                                    type:
+                                      description: |-
+                                        Field type. S3 Tables supports all Apache Iceberg primitive types including: boolean, int, long, float, double, decimal(precision,scale), date, time, timestamp, timestamptz, string, uuid, fixed(length), binary.
+                                        The field type. S3 Tables supports all Apache Iceberg primitive types.
+                                      type: string
                                   type: object
                                 type: array
                             type: object
-                          type: array
-                      type: object
-                    type: array
+                        type: object
+                    type: object
                   metadataLocation:
                     description: Location of table metadata.
                     type: string

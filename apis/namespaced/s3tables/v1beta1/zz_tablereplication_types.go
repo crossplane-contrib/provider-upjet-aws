@@ -68,7 +68,7 @@ type TableReplicationInitParameters struct {
 	RoleSelector *v2.NamespacedSelector `json:"roleSelector,omitempty" tf:"-"`
 
 	// Replication rules. See Rule below for more details.
-	Rule []TableReplicationRuleInitParameters `json:"rule,omitempty" tf:"rule,omitempty"`
+	Rule *TableReplicationRuleInitParameters `json:"rule,omitempty" tf:"rule,omitempty"`
 
 	// ARN referencing the Table that owns this replication configuration.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/s3tables/v1beta1.Table
@@ -95,7 +95,7 @@ type TableReplicationObservation struct {
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
 
 	// Replication rules. See Rule below for more details.
-	Rule []TableReplicationRuleObservation `json:"rule,omitempty" tf:"rule,omitempty"`
+	Rule *TableReplicationRuleObservation `json:"rule,omitempty" tf:"rule,omitempty"`
 
 	// ARN referencing the Table that owns this replication configuration.
 	TableArn *string `json:"tableArn,omitempty" tf:"table_arn,omitempty"`
@@ -127,7 +127,7 @@ type TableReplicationParameters struct {
 
 	// Replication rules. See Rule below for more details.
 	// +kubebuilder:validation:Optional
-	Rule []TableReplicationRuleParameters `json:"rule,omitempty" tf:"rule,omitempty"`
+	Rule *TableReplicationRuleParameters `json:"rule,omitempty" tf:"rule,omitempty"`
 
 	// ARN referencing the Table that owns this replication configuration.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/s3tables/v1beta1.Table

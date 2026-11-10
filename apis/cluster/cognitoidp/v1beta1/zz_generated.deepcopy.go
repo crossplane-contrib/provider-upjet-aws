@@ -2455,10 +2455,8 @@ func (in *LogConfigurationsInitParameters) DeepCopyInto(out *LogConfigurationsIn
 	*out = *in
 	if in.CloudWatchLogsConfiguration != nil {
 		in, out := &in.CloudWatchLogsConfiguration, &out.CloudWatchLogsConfiguration
-		*out = make([]CloudWatchLogsConfigurationInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(CloudWatchLogsConfigurationInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.EventSource != nil {
 		in, out := &in.EventSource, &out.EventSource
@@ -2467,10 +2465,8 @@ func (in *LogConfigurationsInitParameters) DeepCopyInto(out *LogConfigurationsIn
 	}
 	if in.FirehoseConfiguration != nil {
 		in, out := &in.FirehoseConfiguration, &out.FirehoseConfiguration
-		*out = make([]FirehoseConfigurationInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(FirehoseConfigurationInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.LogLevel != nil {
 		in, out := &in.LogLevel, &out.LogLevel
@@ -2479,10 +2475,8 @@ func (in *LogConfigurationsInitParameters) DeepCopyInto(out *LogConfigurationsIn
 	}
 	if in.S3Configuration != nil {
 		in, out := &in.S3Configuration, &out.S3Configuration
-		*out = make([]S3ConfigurationInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(S3ConfigurationInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -2501,10 +2495,8 @@ func (in *LogConfigurationsObservation) DeepCopyInto(out *LogConfigurationsObser
 	*out = *in
 	if in.CloudWatchLogsConfiguration != nil {
 		in, out := &in.CloudWatchLogsConfiguration, &out.CloudWatchLogsConfiguration
-		*out = make([]CloudWatchLogsConfigurationObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(CloudWatchLogsConfigurationObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.EventSource != nil {
 		in, out := &in.EventSource, &out.EventSource
@@ -2513,10 +2505,8 @@ func (in *LogConfigurationsObservation) DeepCopyInto(out *LogConfigurationsObser
 	}
 	if in.FirehoseConfiguration != nil {
 		in, out := &in.FirehoseConfiguration, &out.FirehoseConfiguration
-		*out = make([]FirehoseConfigurationObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(FirehoseConfigurationObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.LogLevel != nil {
 		in, out := &in.LogLevel, &out.LogLevel
@@ -2525,10 +2515,8 @@ func (in *LogConfigurationsObservation) DeepCopyInto(out *LogConfigurationsObser
 	}
 	if in.S3Configuration != nil {
 		in, out := &in.S3Configuration, &out.S3Configuration
-		*out = make([]S3ConfigurationObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(S3ConfigurationObservation)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -2547,10 +2535,8 @@ func (in *LogConfigurationsParameters) DeepCopyInto(out *LogConfigurationsParame
 	*out = *in
 	if in.CloudWatchLogsConfiguration != nil {
 		in, out := &in.CloudWatchLogsConfiguration, &out.CloudWatchLogsConfiguration
-		*out = make([]CloudWatchLogsConfigurationParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(CloudWatchLogsConfigurationParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.EventSource != nil {
 		in, out := &in.EventSource, &out.EventSource
@@ -2559,10 +2545,8 @@ func (in *LogConfigurationsParameters) DeepCopyInto(out *LogConfigurationsParame
 	}
 	if in.FirehoseConfiguration != nil {
 		in, out := &in.FirehoseConfiguration, &out.FirehoseConfiguration
-		*out = make([]FirehoseConfigurationParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(FirehoseConfigurationParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.LogLevel != nil {
 		in, out := &in.LogLevel, &out.LogLevel
@@ -2571,10 +2555,8 @@ func (in *LogConfigurationsParameters) DeepCopyInto(out *LogConfigurationsParame
 	}
 	if in.S3Configuration != nil {
 		in, out := &in.S3Configuration, &out.S3Configuration
-		*out = make([]S3ConfigurationParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(S3ConfigurationParameters)
+		(*in).DeepCopyInto(*out)
 	}
 }
 

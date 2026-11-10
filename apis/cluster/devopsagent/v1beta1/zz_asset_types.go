@@ -35,7 +35,7 @@ type AssetInitParameters struct {
 
 	// Content to upload. Exactly one block is required. See content Block below.
 	// Content to upload. Exactly one block is required.
-	Content []ContentInitParameters `json:"content,omitempty" tf:"content,omitempty"`
+	Content *ContentInitParameters `json:"content,omitempty" tf:"content,omitempty"`
 
 	// JSON document describing the asset. Required metadata fields depend on asset_type. Updates replace supplied top-level fields and retain omitted fields in AWS; removing a field from this document does not delete it from AWS. Changes to metadata alone do not re-upload content.
 	// JSON document describing the asset. Required metadata fields depend on asset_type. Updates replace supplied top-level fields and retain omitted fields in AWS; removing a field from this document does not delete it from AWS. Changes to metadata alone do not re-upload content.
@@ -58,7 +58,7 @@ type AssetObservation struct {
 
 	// Content to upload. Exactly one block is required. See content Block below.
 	// Content to upload. Exactly one block is required.
-	Content []ContentObservation `json:"content,omitempty" tf:"content,omitempty"`
+	Content *ContentObservation `json:"content,omitempty" tf:"content,omitempty"`
 
 	// Creation timestamp in RFC 3339 format.
 	// Creation timestamp in RFC 3339 format.
@@ -112,7 +112,7 @@ type AssetParameters struct {
 	// Content to upload. Exactly one block is required. See content Block below.
 	// Content to upload. Exactly one block is required.
 	// +kubebuilder:validation:Optional
-	Content []ContentParameters `json:"content,omitempty" tf:"content,omitempty"`
+	Content *ContentParameters `json:"content,omitempty" tf:"content,omitempty"`
 
 	// JSON document describing the asset. Required metadata fields depend on asset_type. Updates replace supplied top-level fields and retain omitted fields in AWS; removing a field from this document does not delete it from AWS. Changes to metadata alone do not re-upload content.
 	// JSON document describing the asset. Required metadata fields depend on asset_type. Updates replace supplied top-level fields and retain omitted fields in AWS; removing a field from this document does not delete it from AWS. Changes to metadata alone do not re-upload content.
@@ -164,30 +164,30 @@ type ContentInitParameters struct {
 
 	// Single file to add or replace. See file Block below.
 	// Single file to add or replace.
-	File []FileInitParameters `json:"file,omitempty" tf:"file,omitempty"`
+	File *FileInitParameters `json:"file,omitempty" tf:"file,omitempty"`
 
 	// Source URL to import. See source_url Block below.
 	// Source URL to import.
-	SourceURL []SourceURLInitParameters `json:"sourceUrl,omitempty" tf:"source_url,omitempty"`
+	SourceURL *SourceURLInitParameters `json:"sourceUrl,omitempty" tf:"source_url,omitempty"`
 
 	// ZIP archive containing asset files. See zip Block below.
 	// ZIP archive containing asset files.
-	Zip []ZipInitParameters `json:"zip,omitempty" tf:"zip,omitempty"`
+	Zip *ZipInitParameters `json:"zip,omitempty" tf:"zip,omitempty"`
 }
 
 type ContentObservation struct {
 
 	// Single file to add or replace. See file Block below.
 	// Single file to add or replace.
-	File []FileObservation `json:"file,omitempty" tf:"file,omitempty"`
+	File *FileObservation `json:"file,omitempty" tf:"file,omitempty"`
 
 	// Source URL to import. See source_url Block below.
 	// Source URL to import.
-	SourceURL []SourceURLObservation `json:"sourceUrl,omitempty" tf:"source_url,omitempty"`
+	SourceURL *SourceURLObservation `json:"sourceUrl,omitempty" tf:"source_url,omitempty"`
 
 	// ZIP archive containing asset files. See zip Block below.
 	// ZIP archive containing asset files.
-	Zip []ZipObservation `json:"zip,omitempty" tf:"zip,omitempty"`
+	Zip *ZipObservation `json:"zip,omitempty" tf:"zip,omitempty"`
 }
 
 type ContentParameters struct {
@@ -195,24 +195,24 @@ type ContentParameters struct {
 	// Single file to add or replace. See file Block below.
 	// Single file to add or replace.
 	// +kubebuilder:validation:Optional
-	File []FileParameters `json:"file,omitempty" tf:"file,omitempty"`
+	File *FileParameters `json:"file,omitempty" tf:"file,omitempty"`
 
 	// Source URL to import. See source_url Block below.
 	// Source URL to import.
 	// +kubebuilder:validation:Optional
-	SourceURL []SourceURLParameters `json:"sourceUrl,omitempty" tf:"source_url,omitempty"`
+	SourceURL *SourceURLParameters `json:"sourceUrl,omitempty" tf:"source_url,omitempty"`
 
 	// ZIP archive containing asset files. See zip Block below.
 	// ZIP archive containing asset files.
 	// +kubebuilder:validation:Optional
-	Zip []ZipParameters `json:"zip,omitempty" tf:"zip,omitempty"`
+	Zip *ZipParameters `json:"zip,omitempty" tf:"zip,omitempty"`
 }
 
 type FileInitParameters struct {
 
 	// File content. See body Block below.
 	// File content.
-	Body []BodyInitParameters `json:"body,omitempty" tf:"body,omitempty"`
+	Body *BodyInitParameters `json:"body,omitempty" tf:"body,omitempty"`
 
 	// JSON document describing the asset. Required metadata fields depend on asset_type. Updates replace supplied top-level fields and retain omitted fields in AWS; removing a field from this document does not delete it from AWS. Changes to metadata alone do not re-upload content.
 	// JSON metadata for the file.
@@ -227,7 +227,7 @@ type FileObservation struct {
 
 	// File content. See body Block below.
 	// File content.
-	Body []BodyObservation `json:"body,omitempty" tf:"body,omitempty"`
+	Body *BodyObservation `json:"body,omitempty" tf:"body,omitempty"`
 
 	// JSON document describing the asset. Required metadata fields depend on asset_type. Updates replace supplied top-level fields and retain omitted fields in AWS; removing a field from this document does not delete it from AWS. Changes to metadata alone do not re-upload content.
 	// JSON metadata for the file.
@@ -243,7 +243,7 @@ type FileParameters struct {
 	// File content. See body Block below.
 	// File content.
 	// +kubebuilder:validation:Optional
-	Body []BodyParameters `json:"body,omitempty" tf:"body,omitempty"`
+	Body *BodyParameters `json:"body,omitempty" tf:"body,omitempty"`
 
 	// JSON document describing the asset. Required metadata fields depend on asset_type. Updates replace supplied top-level fields and retain omitted fields in AWS; removing a field from this document does not delete it from AWS. Changes to metadata alone do not re-upload content.
 	// JSON metadata for the file.

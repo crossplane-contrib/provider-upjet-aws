@@ -354,10 +354,8 @@ func (in *IcebergInitParameters) DeepCopyInto(out *IcebergInitParameters) {
 	}
 	if in.Schema != nil {
 		in, out := &in.Schema, &out.Schema
-		*out = make([]SchemaInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(SchemaInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -392,10 +390,8 @@ func (in *IcebergObservation) DeepCopyInto(out *IcebergObservation) {
 	}
 	if in.Schema != nil {
 		in, out := &in.Schema, &out.Schema
-		*out = make([]SchemaObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(SchemaObservation)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -430,10 +426,8 @@ func (in *IcebergParameters) DeepCopyInto(out *IcebergParameters) {
 	}
 	if in.Schema != nil {
 		in, out := &in.Schema, &out.Schema
-		*out = make([]SchemaParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(SchemaParameters)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -827,10 +821,8 @@ func (in *MetadataInitParameters) DeepCopyInto(out *MetadataInitParameters) {
 	*out = *in
 	if in.Iceberg != nil {
 		in, out := &in.Iceberg, &out.Iceberg
-		*out = make([]IcebergInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(IcebergInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -849,10 +841,8 @@ func (in *MetadataObservation) DeepCopyInto(out *MetadataObservation) {
 	*out = *in
 	if in.Iceberg != nil {
 		in, out := &in.Iceberg, &out.Iceberg
-		*out = make([]IcebergObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(IcebergObservation)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -871,10 +861,8 @@ func (in *MetadataParameters) DeepCopyInto(out *MetadataParameters) {
 	*out = *in
 	if in.Iceberg != nil {
 		in, out := &in.Iceberg, &out.Iceberg
-		*out = make([]IcebergParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(IcebergParameters)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -2050,10 +2038,8 @@ func (in *TableBucketReplicationInitParameters) DeepCopyInto(out *TableBucketRep
 	}
 	if in.Rule != nil {
 		in, out := &in.Rule, &out.Rule
-		*out = make([]RuleInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(RuleInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.TableBucketArn != nil {
 		in, out := &in.TableBucketArn, &out.TableBucketArn
@@ -2134,10 +2120,8 @@ func (in *TableBucketReplicationObservation) DeepCopyInto(out *TableBucketReplic
 	}
 	if in.Rule != nil {
 		in, out := &in.Rule, &out.Rule
-		*out = make([]RuleObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(RuleObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.TableBucketArn != nil {
 		in, out := &in.TableBucketArn, &out.TableBucketArn
@@ -2186,10 +2170,8 @@ func (in *TableBucketReplicationParameters) DeepCopyInto(out *TableBucketReplica
 	}
 	if in.Rule != nil {
 		in, out := &in.Rule, &out.Rule
-		*out = make([]RuleParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(RuleParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.TableBucketArn != nil {
 		in, out := &in.TableBucketArn, &out.TableBucketArn
@@ -2308,10 +2290,8 @@ func (in *TableInitParameters) DeepCopyInto(out *TableInitParameters) {
 	}
 	if in.Metadata != nil {
 		in, out := &in.Metadata, &out.Metadata
-		*out = make([]MetadataInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(MetadataInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
@@ -2448,10 +2428,8 @@ func (in *TableObservation) DeepCopyInto(out *TableObservation) {
 	}
 	if in.Metadata != nil {
 		in, out := &in.Metadata, &out.Metadata
-		*out = make([]MetadataObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(MetadataObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.MetadataLocation != nil {
 		in, out := &in.MetadataLocation, &out.MetadataLocation
@@ -2572,10 +2550,8 @@ func (in *TableParameters) DeepCopyInto(out *TableParameters) {
 	}
 	if in.Metadata != nil {
 		in, out := &in.Metadata, &out.Metadata
-		*out = make([]MetadataParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(MetadataParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
@@ -2966,10 +2942,8 @@ func (in *TableReplicationInitParameters) DeepCopyInto(out *TableReplicationInit
 	}
 	if in.Rule != nil {
 		in, out := &in.Rule, &out.Rule
-		*out = make([]TableReplicationRuleInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(TableReplicationRuleInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.TableArn != nil {
 		in, out := &in.TableArn, &out.TableArn
@@ -3050,10 +3024,8 @@ func (in *TableReplicationObservation) DeepCopyInto(out *TableReplicationObserva
 	}
 	if in.Rule != nil {
 		in, out := &in.Rule, &out.Rule
-		*out = make([]TableReplicationRuleObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(TableReplicationRuleObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.TableArn != nil {
 		in, out := &in.TableArn, &out.TableArn
@@ -3102,10 +3074,8 @@ func (in *TableReplicationParameters) DeepCopyInto(out *TableReplicationParamete
 	}
 	if in.Rule != nil {
 		in, out := &in.Rule, &out.Rule
-		*out = make([]TableReplicationRuleParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(TableReplicationRuleParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.TableArn != nil {
 		in, out := &in.TableArn, &out.TableArn

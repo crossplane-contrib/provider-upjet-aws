@@ -68,96 +68,94 @@ spec:
                         cloudWatchLogsConfiguration:
                           description: Configuration for CloudWatch Logs delivery.
                             See CloudWatch Logs Configuration below.
-                          items:
-                            properties:
-                              logGroupArn:
-                                description: The ARN of the CloudWatch Logs log group
-                                  to which the logs should be delivered.
-                                type: string
-                              logGroupArnRef:
-                                description: Reference to a Group in cloudwatchlogs
-                                  to populate logGroupArn.
-                                properties:
-                                  name:
-                                    description: Name of the referenced object.
-                                    type: string
-                                  namespace:
-                                    description: Namespace of the referenced object
-                                    type: string
-                                  policy:
-                                    description: Policies for referencing.
-                                    properties:
-                                      resolution:
-                                        default: Required
-                                        description: |-
-                                          Resolution specifies whether resolution of this reference is required.
-                                          The default is 'Required', which means the reconcile will fail if the
-                                          reference cannot be resolved. 'Optional' means this reference will be
-                                          a no-op if it cannot be resolved.
-                                        enum:
-                                        - Required
-                                        - Optional
-                                        type: string
-                                      resolve:
-                                        description: |-
-                                          Resolve specifies when this reference should be resolved. The default
-                                          is 'IfNotPresent', which will attempt to resolve the reference only when
-                                          the corresponding field is not present. Use 'Always' to resolve the
-                                          reference on every reconcile.
-                                        enum:
-                                        - Always
-                                        - IfNotPresent
-                                        type: string
-                                    type: object
-                                required:
-                                - name
-                                type: object
-                              logGroupArnSelector:
-                                description: Selector for a Group in cloudwatchlogs
-                                  to populate logGroupArn.
-                                properties:
-                                  matchControllerRef:
-                                    description: |-
-                                      MatchControllerRef ensures an object with the same controller reference
-                                      as the selecting object is selected.
-                                    type: boolean
-                                  matchLabels:
-                                    additionalProperties:
+                          properties:
+                            logGroupArn:
+                              description: The ARN of the CloudWatch Logs log group
+                                to which the logs should be delivered.
+                              type: string
+                            logGroupArnRef:
+                              description: Reference to a Group in cloudwatchlogs
+                                to populate logGroupArn.
+                              properties:
+                                name:
+                                  description: Name of the referenced object.
+                                  type: string
+                                namespace:
+                                  description: Namespace of the referenced object
+                                  type: string
+                                policy:
+                                  description: Policies for referencing.
+                                  properties:
+                                    resolution:
+                                      default: Required
+                                      description: |-
+                                        Resolution specifies whether resolution of this reference is required.
+                                        The default is 'Required', which means the reconcile will fail if the
+                                        reference cannot be resolved. 'Optional' means this reference will be
+                                        a no-op if it cannot be resolved.
+                                      enum:
+                                      - Required
+                                      - Optional
                                       type: string
-                                    description: MatchLabels ensures an object with
-                                      matching labels is selected.
-                                    type: object
-                                  namespace:
-                                    description: Namespace for the selector
+                                    resolve:
+                                      description: |-
+                                        Resolve specifies when this reference should be resolved. The default
+                                        is 'IfNotPresent', which will attempt to resolve the reference only when
+                                        the corresponding field is not present. Use 'Always' to resolve the
+                                        reference on every reconcile.
+                                      enum:
+                                      - Always
+                                      - IfNotPresent
+                                      type: string
+                                  type: object
+                              required:
+                              - name
+                              type: object
+                            logGroupArnSelector:
+                              description: Selector for a Group in cloudwatchlogs
+                                to populate logGroupArn.
+                              properties:
+                                matchControllerRef:
+                                  description: |-
+                                    MatchControllerRef ensures an object with the same controller reference
+                                    as the selecting object is selected.
+                                  type: boolean
+                                matchLabels:
+                                  additionalProperties:
                                     type: string
-                                  policy:
-                                    description: Policies for selection.
-                                    properties:
-                                      resolution:
-                                        default: Required
-                                        description: |-
-                                          Resolution specifies whether resolution of this reference is required.
-                                          The default is 'Required', which means the reconcile will fail if the
-                                          reference cannot be resolved. 'Optional' means this reference will be
-                                          a no-op if it cannot be resolved.
-                                        enum:
-                                        - Required
-                                        - Optional
-                                        type: string
-                                      resolve:
-                                        description: |-
-                                          Resolve specifies when this reference should be resolved. The default
-                                          is 'IfNotPresent', which will attempt to resolve the reference only when
-                                          the corresponding field is not present. Use 'Always' to resolve the
-                                          reference on every reconcile.
-                                        enum:
-                                        - Always
-                                        - IfNotPresent
-                                        type: string
-                                    type: object
-                                type: object
-                            type: object
-                          type: array
+                                  description: MatchLabels ensures an object with
+                                    matching labels is selected.
+                                  type: object
+                                namespace:
+                                  description: Namespace for the selector
+                                  type: string
+                                policy:
+                                  description: Policies for selection.
+                                  properties:
+                                    resolution:
+                                      default: Required
+                                      description: |-
+                                        Resolution specifies whether resolution of this reference is required.
+                                        The default is 'Required', which means the reconcile will fail if the
+                                        reference cannot be resolved. 'Optional' means this reference will be
+                                        a no-op if it cannot be resolved.
+                                      enum:
+                                      - Required
+                                      - Optional
+                                      type: string
+                                    resolve:
+                                      description: |-
+                                        Resolve specifies when this reference should be resolved. The default
+                                        is 'IfNotPresent', which will attempt to resolve the reference only when
+                                        the corresponding field is not present. Use 'Always' to resolve the
+                                        reference on every reconcile.
+                                      enum:
+                                      - Always
+                                      - IfNotPresent
+                                      type: string
+                                  type: object
+                              type: object
+                          type: object
                         eventSource:
                           description: The event source to configure logging for.
                             Valid values are userNotification and userAuthEvents.
@@ -165,96 +163,94 @@ spec:
                         firehoseConfiguration:
                           description: Configuration for Kinesis Data Firehose delivery.
                             See Firehose Configuration below.
-                          items:
-                            properties:
-                              streamArn:
-                                description: The ARN of the Kinesis Data Firehose
-                                  delivery stream to which the logs should be delivered.
-                                type: string
-                              streamArnRef:
-                                description: Reference to a DeliveryStream in firehose
-                                  to populate streamArn.
-                                properties:
-                                  name:
-                                    description: Name of the referenced object.
-                                    type: string
-                                  namespace:
-                                    description: Namespace of the referenced object
-                                    type: string
-                                  policy:
-                                    description: Policies for referencing.
-                                    properties:
-                                      resolution:
-                                        default: Required
-                                        description: |-
-                                          Resolution specifies whether resolution of this reference is required.
-                                          The default is 'Required', which means the reconcile will fail if the
-                                          reference cannot be resolved. 'Optional' means this reference will be
-                                          a no-op if it cannot be resolved.
-                                        enum:
-                                        - Required
-                                        - Optional
-                                        type: string
-                                      resolve:
-                                        description: |-
-                                          Resolve specifies when this reference should be resolved. The default
-                                          is 'IfNotPresent', which will attempt to resolve the reference only when
-                                          the corresponding field is not present. Use 'Always' to resolve the
-                                          reference on every reconcile.
-                                        enum:
-                                        - Always
-                                        - IfNotPresent
-                                        type: string
-                                    type: object
-                                required:
-                                - name
-                                type: object
-                              streamArnSelector:
-                                description: Selector for a DeliveryStream in firehose
-                                  to populate streamArn.
-                                properties:
-                                  matchControllerRef:
-                                    description: |-
-                                      MatchControllerRef ensures an object with the same controller reference
-                                      as the selecting object is selected.
-                                    type: boolean
-                                  matchLabels:
-                                    additionalProperties:
+                          properties:
+                            streamArn:
+                              description: The ARN of the Kinesis Data Firehose delivery
+                                stream to which the logs should be delivered.
+                              type: string
+                            streamArnRef:
+                              description: Reference to a DeliveryStream in firehose
+                                to populate streamArn.
+                              properties:
+                                name:
+                                  description: Name of the referenced object.
+                                  type: string
+                                namespace:
+                                  description: Namespace of the referenced object
+                                  type: string
+                                policy:
+                                  description: Policies for referencing.
+                                  properties:
+                                    resolution:
+                                      default: Required
+                                      description: |-
+                                        Resolution specifies whether resolution of this reference is required.
+                                        The default is 'Required', which means the reconcile will fail if the
+                                        reference cannot be resolved. 'Optional' means this reference will be
+                                        a no-op if it cannot be resolved.
+                                      enum:
+                                      - Required
+                                      - Optional
                                       type: string
-                                    description: MatchLabels ensures an object with
-                                      matching labels is selected.
-                                    type: object
-                                  namespace:
-                                    description: Namespace for the selector
+                                    resolve:
+                                      description: |-
+                                        Resolve specifies when this reference should be resolved. The default
+                                        is 'IfNotPresent', which will attempt to resolve the reference only when
+                                        the corresponding field is not present. Use 'Always' to resolve the
+                                        reference on every reconcile.
+                                      enum:
+                                      - Always
+                                      - IfNotPresent
+                                      type: string
+                                  type: object
+                              required:
+                              - name
+                              type: object
+                            streamArnSelector:
+                              description: Selector for a DeliveryStream in firehose
+                                to populate streamArn.
+                              properties:
+                                matchControllerRef:
+                                  description: |-
+                                    MatchControllerRef ensures an object with the same controller reference
+                                    as the selecting object is selected.
+                                  type: boolean
+                                matchLabels:
+                                  additionalProperties:
                                     type: string
-                                  policy:
-                                    description: Policies for selection.
-                                    properties:
-                                      resolution:
-                                        default: Required
-                                        description: |-
-                                          Resolution specifies whether resolution of this reference is required.
-                                          The default is 'Required', which means the reconcile will fail if the
-                                          reference cannot be resolved. 'Optional' means this reference will be
-                                          a no-op if it cannot be resolved.
-                                        enum:
-                                        - Required
-                                        - Optional
-                                        type: string
-                                      resolve:
-                                        description: |-
-                                          Resolve specifies when this reference should be resolved. The default
-                                          is 'IfNotPresent', which will attempt to resolve the reference only when
-                                          the corresponding field is not present. Use 'Always' to resolve the
-                                          reference on every reconcile.
-                                        enum:
-                                        - Always
-                                        - IfNotPresent
-                                        type: string
-                                    type: object
-                                type: object
-                            type: object
-                          type: array
+                                  description: MatchLabels ensures an object with
+                                    matching labels is selected.
+                                  type: object
+                                namespace:
+                                  description: Namespace for the selector
+                                  type: string
+                                policy:
+                                  description: Policies for selection.
+                                  properties:
+                                    resolution:
+                                      default: Required
+                                      description: |-
+                                        Resolution specifies whether resolution of this reference is required.
+                                        The default is 'Required', which means the reconcile will fail if the
+                                        reference cannot be resolved. 'Optional' means this reference will be
+                                        a no-op if it cannot be resolved.
+                                      enum:
+                                      - Required
+                                      - Optional
+                                      type: string
+                                    resolve:
+                                      description: |-
+                                        Resolve specifies when this reference should be resolved. The default
+                                        is 'IfNotPresent', which will attempt to resolve the reference only when
+                                        the corresponding field is not present. Use 'Always' to resolve the
+                                        reference on every reconcile.
+                                      enum:
+                                      - Always
+                                      - IfNotPresent
+                                      type: string
+                                  type: object
+                              type: object
+                          type: object
                         logLevel:
                           description: The log level to set for the event source.
                             Valid values are ERROR and INFO.
@@ -262,96 +258,94 @@ spec:
                         s3Configuration:
                           description: Configuration for S3 delivery. See S3 Configuration
                             below.
-                          items:
-                            properties:
-                              bucketArn:
-                                description: The ARN of the S3 bucket to which the
-                                  logs should be delivered.
-                                type: string
-                              bucketArnRef:
-                                description: Reference to a Bucket in s3 to populate
-                                  bucketArn.
-                                properties:
-                                  name:
-                                    description: Name of the referenced object.
-                                    type: string
-                                  namespace:
-                                    description: Namespace of the referenced object
-                                    type: string
-                                  policy:
-                                    description: Policies for referencing.
-                                    properties:
-                                      resolution:
-                                        default: Required
-                                        description: |-
-                                          Resolution specifies whether resolution of this reference is required.
-                                          The default is 'Required', which means the reconcile will fail if the
-                                          reference cannot be resolved. 'Optional' means this reference will be
-                                          a no-op if it cannot be resolved.
-                                        enum:
-                                        - Required
-                                        - Optional
-                                        type: string
-                                      resolve:
-                                        description: |-
-                                          Resolve specifies when this reference should be resolved. The default
-                                          is 'IfNotPresent', which will attempt to resolve the reference only when
-                                          the corresponding field is not present. Use 'Always' to resolve the
-                                          reference on every reconcile.
-                                        enum:
-                                        - Always
-                                        - IfNotPresent
-                                        type: string
-                                    type: object
-                                required:
-                                - name
-                                type: object
-                              bucketArnSelector:
-                                description: Selector for a Bucket in s3 to populate
-                                  bucketArn.
-                                properties:
-                                  matchControllerRef:
-                                    description: |-
-                                      MatchControllerRef ensures an object with the same controller reference
-                                      as the selecting object is selected.
-                                    type: boolean
-                                  matchLabels:
-                                    additionalProperties:
+                          properties:
+                            bucketArn:
+                              description: The ARN of the S3 bucket to which the logs
+                                should be delivered.
+                              type: string
+                            bucketArnRef:
+                              description: Reference to a Bucket in s3 to populate
+                                bucketArn.
+                              properties:
+                                name:
+                                  description: Name of the referenced object.
+                                  type: string
+                                namespace:
+                                  description: Namespace of the referenced object
+                                  type: string
+                                policy:
+                                  description: Policies for referencing.
+                                  properties:
+                                    resolution:
+                                      default: Required
+                                      description: |-
+                                        Resolution specifies whether resolution of this reference is required.
+                                        The default is 'Required', which means the reconcile will fail if the
+                                        reference cannot be resolved. 'Optional' means this reference will be
+                                        a no-op if it cannot be resolved.
+                                      enum:
+                                      - Required
+                                      - Optional
                                       type: string
-                                    description: MatchLabels ensures an object with
-                                      matching labels is selected.
-                                    type: object
-                                  namespace:
-                                    description: Namespace for the selector
+                                    resolve:
+                                      description: |-
+                                        Resolve specifies when this reference should be resolved. The default
+                                        is 'IfNotPresent', which will attempt to resolve the reference only when
+                                        the corresponding field is not present. Use 'Always' to resolve the
+                                        reference on every reconcile.
+                                      enum:
+                                      - Always
+                                      - IfNotPresent
+                                      type: string
+                                  type: object
+                              required:
+                              - name
+                              type: object
+                            bucketArnSelector:
+                              description: Selector for a Bucket in s3 to populate
+                                bucketArn.
+                              properties:
+                                matchControllerRef:
+                                  description: |-
+                                    MatchControllerRef ensures an object with the same controller reference
+                                    as the selecting object is selected.
+                                  type: boolean
+                                matchLabels:
+                                  additionalProperties:
                                     type: string
-                                  policy:
-                                    description: Policies for selection.
-                                    properties:
-                                      resolution:
-                                        default: Required
-                                        description: |-
-                                          Resolution specifies whether resolution of this reference is required.
-                                          The default is 'Required', which means the reconcile will fail if the
-                                          reference cannot be resolved. 'Optional' means this reference will be
-                                          a no-op if it cannot be resolved.
-                                        enum:
-                                        - Required
-                                        - Optional
-                                        type: string
-                                      resolve:
-                                        description: |-
-                                          Resolve specifies when this reference should be resolved. The default
-                                          is 'IfNotPresent', which will attempt to resolve the reference only when
-                                          the corresponding field is not present. Use 'Always' to resolve the
-                                          reference on every reconcile.
-                                        enum:
-                                        - Always
-                                        - IfNotPresent
-                                        type: string
-                                    type: object
-                                type: object
-                            type: object
-                          type: array
+                                  description: MatchLabels ensures an object with
+                                    matching labels is selected.
+                                  type: object
+                                namespace:
+                                  description: Namespace for the selector
+                                  type: string
+                                policy:
+                                  description: Policies for selection.
+                                  properties:
+                                    resolution:
+                                      default: Required
+                                      description: |-
+                                        Resolution specifies whether resolution of this reference is required.
+                                        The default is 'Required', which means the reconcile will fail if the
+                                        reference cannot be resolved. 'Optional' means this reference will be
+                                        a no-op if it cannot be resolved.
+                                      enum:
+                                      - Required
+                                      - Optional
+                                      type: string
+                                    resolve:
+                                      description: |-
+                                        Resolve specifies when this reference should be resolved. The default
+                                        is 'IfNotPresent', which will attempt to resolve the reference only when
+                                        the corresponding field is not present. Use 'Always' to resolve the
+                                        reference on every reconcile.
+                                      enum:
+                                      - Always
+                                      - IfNotPresent
+                                      type: string
+                                  type: object
+                              type: object
+                          type: object
                       type: object
                     type: array
                   region:
@@ -469,96 +463,94 @@ spec:
                         cloudWatchLogsConfiguration:
                           description: Configuration for CloudWatch Logs delivery.
                             See CloudWatch Logs Configuration below.
-                          items:
-                            properties:
-                              logGroupArn:
-                                description: The ARN of the CloudWatch Logs log group
-                                  to which the logs should be delivered.
-                                type: string
-                              logGroupArnRef:
-                                description: Reference to a Group in cloudwatchlogs
-                                  to populate logGroupArn.
-                                properties:
-                                  name:
-                                    description: Name of the referenced object.
-                                    type: string
-                                  namespace:
-                                    description: Namespace of the referenced object
-                                    type: string
-                                  policy:
-                                    description: Policies for referencing.
-                                    properties:
-                                      resolution:
-                                        default: Required
-                                        description: |-
-                                          Resolution specifies whether resolution of this reference is required.
-                                          The default is 'Required', which means the reconcile will fail if the
-                                          reference cannot be resolved. 'Optional' means this reference will be
-                                          a no-op if it cannot be resolved.
-                                        enum:
-                                        - Required
-                                        - Optional
-                                        type: string
-                                      resolve:
-                                        description: |-
-                                          Resolve specifies when this reference should be resolved. The default
-                                          is 'IfNotPresent', which will attempt to resolve the reference only when
-                                          the corresponding field is not present. Use 'Always' to resolve the
-                                          reference on every reconcile.
-                                        enum:
-                                        - Always
-                                        - IfNotPresent
-                                        type: string
-                                    type: object
-                                required:
-                                - name
-                                type: object
-                              logGroupArnSelector:
-                                description: Selector for a Group in cloudwatchlogs
-                                  to populate logGroupArn.
-                                properties:
-                                  matchControllerRef:
-                                    description: |-
-                                      MatchControllerRef ensures an object with the same controller reference
-                                      as the selecting object is selected.
-                                    type: boolean
-                                  matchLabels:
-                                    additionalProperties:
+                          properties:
+                            logGroupArn:
+                              description: The ARN of the CloudWatch Logs log group
+                                to which the logs should be delivered.
+                              type: string
+                            logGroupArnRef:
+                              description: Reference to a Group in cloudwatchlogs
+                                to populate logGroupArn.
+                              properties:
+                                name:
+                                  description: Name of the referenced object.
+                                  type: string
+                                namespace:
+                                  description: Namespace of the referenced object
+                                  type: string
+                                policy:
+                                  description: Policies for referencing.
+                                  properties:
+                                    resolution:
+                                      default: Required
+                                      description: |-
+                                        Resolution specifies whether resolution of this reference is required.
+                                        The default is 'Required', which means the reconcile will fail if the
+                                        reference cannot be resolved. 'Optional' means this reference will be
+                                        a no-op if it cannot be resolved.
+                                      enum:
+                                      - Required
+                                      - Optional
                                       type: string
-                                    description: MatchLabels ensures an object with
-                                      matching labels is selected.
-                                    type: object
-                                  namespace:
-                                    description: Namespace for the selector
+                                    resolve:
+                                      description: |-
+                                        Resolve specifies when this reference should be resolved. The default
+                                        is 'IfNotPresent', which will attempt to resolve the reference only when
+                                        the corresponding field is not present. Use 'Always' to resolve the
+                                        reference on every reconcile.
+                                      enum:
+                                      - Always
+                                      - IfNotPresent
+                                      type: string
+                                  type: object
+                              required:
+                              - name
+                              type: object
+                            logGroupArnSelector:
+                              description: Selector for a Group in cloudwatchlogs
+                                to populate logGroupArn.
+                              properties:
+                                matchControllerRef:
+                                  description: |-
+                                    MatchControllerRef ensures an object with the same controller reference
+                                    as the selecting object is selected.
+                                  type: boolean
+                                matchLabels:
+                                  additionalProperties:
                                     type: string
-                                  policy:
-                                    description: Policies for selection.
-                                    properties:
-                                      resolution:
-                                        default: Required
-                                        description: |-
-                                          Resolution specifies whether resolution of this reference is required.
-                                          The default is 'Required', which means the reconcile will fail if the
-                                          reference cannot be resolved. 'Optional' means this reference will be
-                                          a no-op if it cannot be resolved.
-                                        enum:
-                                        - Required
-                                        - Optional
-                                        type: string
-                                      resolve:
-                                        description: |-
-                                          Resolve specifies when this reference should be resolved. The default
-                                          is 'IfNotPresent', which will attempt to resolve the reference only when
-                                          the corresponding field is not present. Use 'Always' to resolve the
-                                          reference on every reconcile.
-                                        enum:
-                                        - Always
-                                        - IfNotPresent
-                                        type: string
-                                    type: object
-                                type: object
-                            type: object
-                          type: array
+                                  description: MatchLabels ensures an object with
+                                    matching labels is selected.
+                                  type: object
+                                namespace:
+                                  description: Namespace for the selector
+                                  type: string
+                                policy:
+                                  description: Policies for selection.
+                                  properties:
+                                    resolution:
+                                      default: Required
+                                      description: |-
+                                        Resolution specifies whether resolution of this reference is required.
+                                        The default is 'Required', which means the reconcile will fail if the
+                                        reference cannot be resolved. 'Optional' means this reference will be
+                                        a no-op if it cannot be resolved.
+                                      enum:
+                                      - Required
+                                      - Optional
+                                      type: string
+                                    resolve:
+                                      description: |-
+                                        Resolve specifies when this reference should be resolved. The default
+                                        is 'IfNotPresent', which will attempt to resolve the reference only when
+                                        the corresponding field is not present. Use 'Always' to resolve the
+                                        reference on every reconcile.
+                                      enum:
+                                      - Always
+                                      - IfNotPresent
+                                      type: string
+                                  type: object
+                              type: object
+                          type: object
                         eventSource:
                           description: The event source to configure logging for.
                             Valid values are userNotification and userAuthEvents.
@@ -566,96 +558,94 @@ spec:
                         firehoseConfiguration:
                           description: Configuration for Kinesis Data Firehose delivery.
                             See Firehose Configuration below.
-                          items:
-                            properties:
-                              streamArn:
-                                description: The ARN of the Kinesis Data Firehose
-                                  delivery stream to which the logs should be delivered.
-                                type: string
-                              streamArnRef:
-                                description: Reference to a DeliveryStream in firehose
-                                  to populate streamArn.
-                                properties:
-                                  name:
-                                    description: Name of the referenced object.
-                                    type: string
-                                  namespace:
-                                    description: Namespace of the referenced object
-                                    type: string
-                                  policy:
-                                    description: Policies for referencing.
-                                    properties:
-                                      resolution:
-                                        default: Required
-                                        description: |-
-                                          Resolution specifies whether resolution of this reference is required.
-                                          The default is 'Required', which means the reconcile will fail if the
-                                          reference cannot be resolved. 'Optional' means this reference will be
-                                          a no-op if it cannot be resolved.
-                                        enum:
-                                        - Required
-                                        - Optional
-                                        type: string
-                                      resolve:
-                                        description: |-
-                                          Resolve specifies when this reference should be resolved. The default
-                                          is 'IfNotPresent', which will attempt to resolve the reference only when
-                                          the corresponding field is not present. Use 'Always' to resolve the
-                                          reference on every reconcile.
-                                        enum:
-                                        - Always
-                                        - IfNotPresent
-                                        type: string
-                                    type: object
-                                required:
-                                - name
-                                type: object
-                              streamArnSelector:
-                                description: Selector for a DeliveryStream in firehose
-                                  to populate streamArn.
-                                properties:
-                                  matchControllerRef:
-                                    description: |-
-                                      MatchControllerRef ensures an object with the same controller reference
-                                      as the selecting object is selected.
-                                    type: boolean
-                                  matchLabels:
-                                    additionalProperties:
+                          properties:
+                            streamArn:
+                              description: The ARN of the Kinesis Data Firehose delivery
+                                stream to which the logs should be delivered.
+                              type: string
+                            streamArnRef:
+                              description: Reference to a DeliveryStream in firehose
+                                to populate streamArn.
+                              properties:
+                                name:
+                                  description: Name of the referenced object.
+                                  type: string
+                                namespace:
+                                  description: Namespace of the referenced object
+                                  type: string
+                                policy:
+                                  description: Policies for referencing.
+                                  properties:
+                                    resolution:
+                                      default: Required
+                                      description: |-
+                                        Resolution specifies whether resolution of this reference is required.
+                                        The default is 'Required', which means the reconcile will fail if the
+                                        reference cannot be resolved. 'Optional' means this reference will be
+                                        a no-op if it cannot be resolved.
+                                      enum:
+                                      - Required
+                                      - Optional
                                       type: string
-                                    description: MatchLabels ensures an object with
-                                      matching labels is selected.
-                                    type: object
-                                  namespace:
-                                    description: Namespace for the selector
+                                    resolve:
+                                      description: |-
+                                        Resolve specifies when this reference should be resolved. The default
+                                        is 'IfNotPresent', which will attempt to resolve the reference only when
+                                        the corresponding field is not present. Use 'Always' to resolve the
+                                        reference on every reconcile.
+                                      enum:
+                                      - Always
+                                      - IfNotPresent
+                                      type: string
+                                  type: object
+                              required:
+                              - name
+                              type: object
+                            streamArnSelector:
+                              description: Selector for a DeliveryStream in firehose
+                                to populate streamArn.
+                              properties:
+                                matchControllerRef:
+                                  description: |-
+                                    MatchControllerRef ensures an object with the same controller reference
+                                    as the selecting object is selected.
+                                  type: boolean
+                                matchLabels:
+                                  additionalProperties:
                                     type: string
-                                  policy:
-                                    description: Policies for selection.
-                                    properties:
-                                      resolution:
-                                        default: Required
-                                        description: |-
-                                          Resolution specifies whether resolution of this reference is required.
-                                          The default is 'Required', which means the reconcile will fail if the
-                                          reference cannot be resolved. 'Optional' means this reference will be
-                                          a no-op if it cannot be resolved.
-                                        enum:
-                                        - Required
-                                        - Optional
-                                        type: string
-                                      resolve:
-                                        description: |-
-                                          Resolve specifies when this reference should be resolved. The default
-                                          is 'IfNotPresent', which will attempt to resolve the reference only when
-                                          the corresponding field is not present. Use 'Always' to resolve the
-                                          reference on every reconcile.
-                                        enum:
-                                        - Always
-                                        - IfNotPresent
-                                        type: string
-                                    type: object
-                                type: object
-                            type: object
-                          type: array
+                                  description: MatchLabels ensures an object with
+                                    matching labels is selected.
+                                  type: object
+                                namespace:
+                                  description: Namespace for the selector
+                                  type: string
+                                policy:
+                                  description: Policies for selection.
+                                  properties:
+                                    resolution:
+                                      default: Required
+                                      description: |-
+                                        Resolution specifies whether resolution of this reference is required.
+                                        The default is 'Required', which means the reconcile will fail if the
+                                        reference cannot be resolved. 'Optional' means this reference will be
+                                        a no-op if it cannot be resolved.
+                                      enum:
+                                      - Required
+                                      - Optional
+                                      type: string
+                                    resolve:
+                                      description: |-
+                                        Resolve specifies when this reference should be resolved. The default
+                                        is 'IfNotPresent', which will attempt to resolve the reference only when
+                                        the corresponding field is not present. Use 'Always' to resolve the
+                                        reference on every reconcile.
+                                      enum:
+                                      - Always
+                                      - IfNotPresent
+                                      type: string
+                                  type: object
+                              type: object
+                          type: object
                         logLevel:
                           description: The log level to set for the event source.
                             Valid values are ERROR and INFO.
@@ -663,96 +653,94 @@ spec:
                         s3Configuration:
                           description: Configuration for S3 delivery. See S3 Configuration
                             below.
-                          items:
-                            properties:
-                              bucketArn:
-                                description: The ARN of the S3 bucket to which the
-                                  logs should be delivered.
-                                type: string
-                              bucketArnRef:
-                                description: Reference to a Bucket in s3 to populate
-                                  bucketArn.
-                                properties:
-                                  name:
-                                    description: Name of the referenced object.
-                                    type: string
-                                  namespace:
-                                    description: Namespace of the referenced object
-                                    type: string
-                                  policy:
-                                    description: Policies for referencing.
-                                    properties:
-                                      resolution:
-                                        default: Required
-                                        description: |-
-                                          Resolution specifies whether resolution of this reference is required.
-                                          The default is 'Required', which means the reconcile will fail if the
-                                          reference cannot be resolved. 'Optional' means this reference will be
-                                          a no-op if it cannot be resolved.
-                                        enum:
-                                        - Required
-                                        - Optional
-                                        type: string
-                                      resolve:
-                                        description: |-
-                                          Resolve specifies when this reference should be resolved. The default
-                                          is 'IfNotPresent', which will attempt to resolve the reference only when
-                                          the corresponding field is not present. Use 'Always' to resolve the
-                                          reference on every reconcile.
-                                        enum:
-                                        - Always
-                                        - IfNotPresent
-                                        type: string
-                                    type: object
-                                required:
-                                - name
-                                type: object
-                              bucketArnSelector:
-                                description: Selector for a Bucket in s3 to populate
-                                  bucketArn.
-                                properties:
-                                  matchControllerRef:
-                                    description: |-
-                                      MatchControllerRef ensures an object with the same controller reference
-                                      as the selecting object is selected.
-                                    type: boolean
-                                  matchLabels:
-                                    additionalProperties:
+                          properties:
+                            bucketArn:
+                              description: The ARN of the S3 bucket to which the logs
+                                should be delivered.
+                              type: string
+                            bucketArnRef:
+                              description: Reference to a Bucket in s3 to populate
+                                bucketArn.
+                              properties:
+                                name:
+                                  description: Name of the referenced object.
+                                  type: string
+                                namespace:
+                                  description: Namespace of the referenced object
+                                  type: string
+                                policy:
+                                  description: Policies for referencing.
+                                  properties:
+                                    resolution:
+                                      default: Required
+                                      description: |-
+                                        Resolution specifies whether resolution of this reference is required.
+                                        The default is 'Required', which means the reconcile will fail if the
+                                        reference cannot be resolved. 'Optional' means this reference will be
+                                        a no-op if it cannot be resolved.
+                                      enum:
+                                      - Required
+                                      - Optional
                                       type: string
-                                    description: MatchLabels ensures an object with
-                                      matching labels is selected.
-                                    type: object
-                                  namespace:
-                                    description: Namespace for the selector
+                                    resolve:
+                                      description: |-
+                                        Resolve specifies when this reference should be resolved. The default
+                                        is 'IfNotPresent', which will attempt to resolve the reference only when
+                                        the corresponding field is not present. Use 'Always' to resolve the
+                                        reference on every reconcile.
+                                      enum:
+                                      - Always
+                                      - IfNotPresent
+                                      type: string
+                                  type: object
+                              required:
+                              - name
+                              type: object
+                            bucketArnSelector:
+                              description: Selector for a Bucket in s3 to populate
+                                bucketArn.
+                              properties:
+                                matchControllerRef:
+                                  description: |-
+                                    MatchControllerRef ensures an object with the same controller reference
+                                    as the selecting object is selected.
+                                  type: boolean
+                                matchLabels:
+                                  additionalProperties:
                                     type: string
-                                  policy:
-                                    description: Policies for selection.
-                                    properties:
-                                      resolution:
-                                        default: Required
-                                        description: |-
-                                          Resolution specifies whether resolution of this reference is required.
-                                          The default is 'Required', which means the reconcile will fail if the
-                                          reference cannot be resolved. 'Optional' means this reference will be
-                                          a no-op if it cannot be resolved.
-                                        enum:
-                                        - Required
-                                        - Optional
-                                        type: string
-                                      resolve:
-                                        description: |-
-                                          Resolve specifies when this reference should be resolved. The default
-                                          is 'IfNotPresent', which will attempt to resolve the reference only when
-                                          the corresponding field is not present. Use 'Always' to resolve the
-                                          reference on every reconcile.
-                                        enum:
-                                        - Always
-                                        - IfNotPresent
-                                        type: string
-                                    type: object
-                                type: object
-                            type: object
-                          type: array
+                                  description: MatchLabels ensures an object with
+                                    matching labels is selected.
+                                  type: object
+                                namespace:
+                                  description: Namespace for the selector
+                                  type: string
+                                policy:
+                                  description: Policies for selection.
+                                  properties:
+                                    resolution:
+                                      default: Required
+                                      description: |-
+                                        Resolution specifies whether resolution of this reference is required.
+                                        The default is 'Required', which means the reconcile will fail if the
+                                        reference cannot be resolved. 'Optional' means this reference will be
+                                        a no-op if it cannot be resolved.
+                                      enum:
+                                      - Required
+                                      - Optional
+                                      type: string
+                                    resolve:
+                                      description: |-
+                                        Resolve specifies when this reference should be resolved. The default
+                                        is 'IfNotPresent', which will attempt to resolve the reference only when
+                                        the corresponding field is not present. Use 'Always' to resolve the
+                                        reference on every reconcile.
+                                      enum:
+                                      - Always
+                                      - IfNotPresent
+                                      type: string
+                                  type: object
+                              type: object
+                          type: object
                       type: object
                     type: array
                   userPoolId:
@@ -916,14 +904,12 @@ spec:
                         cloudWatchLogsConfiguration:
                           description: Configuration for CloudWatch Logs delivery.
                             See CloudWatch Logs Configuration below.
-                          items:
-                            properties:
-                              logGroupArn:
-                                description: The ARN of the CloudWatch Logs log group
-                                  to which the logs should be delivered.
-                                type: string
-                            type: object
-                          type: array
+                          properties:
+                            logGroupArn:
+                              description: The ARN of the CloudWatch Logs log group
+                                to which the logs should be delivered.
+                              type: string
+                          type: object
                         eventSource:
                           description: The event source to configure logging for.
                             Valid values are userNotification and userAuthEvents.
@@ -931,14 +917,12 @@ spec:
                         firehoseConfiguration:
                           description: Configuration for Kinesis Data Firehose delivery.
                             See Firehose Configuration below.
-                          items:
-                            properties:
-                              streamArn:
-                                description: The ARN of the Kinesis Data Firehose
-                                  delivery stream to which the logs should be delivered.
-                                type: string
-                            type: object
-                          type: array
+                          properties:
+                            streamArn:
+                              description: The ARN of the Kinesis Data Firehose delivery
+                                stream to which the logs should be delivered.
+                              type: string
+                          type: object
                         logLevel:
                           description: The log level to set for the event source.
                             Valid values are ERROR and INFO.
@@ -946,14 +930,12 @@ spec:
                         s3Configuration:
                           description: Configuration for S3 delivery. See S3 Configuration
                             below.
-                          items:
-                            properties:
-                              bucketArn:
-                                description: The ARN of the S3 bucket to which the
-                                  logs should be delivered.
-                                type: string
-                            type: object
-                          type: array
+                          properties:
+                            bucketArn:
+                              description: The ARN of the S3 bucket to which the logs
+                                should be delivered.
+                              type: string
+                          type: object
                       type: object
                     type: array
                   region:

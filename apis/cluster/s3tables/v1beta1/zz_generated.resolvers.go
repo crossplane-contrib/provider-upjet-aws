@@ -241,27 +241,27 @@ func (mg *TableBucketReplication) ResolveReferences(ctx context.Context, c clien
 	mg.Spec.ForProvider.Role = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RoleRef = rsp.ResolvedReference
 
-	for i3 := 0; i3 < len(mg.Spec.ForProvider.Rule); i3++ {
-		for i4 := 0; i4 < len(mg.Spec.ForProvider.Rule[i3].Destination); i4++ {
+	if mg.Spec.ForProvider.Rule != nil {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.Rule.Destination); i4++ {
 			{
 				m, l, err = apisresolver.GetManagedResource("s3tables.aws.upbound.io", "v1beta1", "TableBucket", "TableBucketList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Rule[i3].Destination[i4].DestinationTableBucketArn),
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Rule.Destination[i4].DestinationTableBucketArn),
 					Extract:      resource.ExtractParamPath("arn", true),
 					Namespace:    mg.GetNamespace(),
-					Reference:    mg.Spec.ForProvider.Rule[i3].Destination[i4].DestinationTableBucketArnRef,
-					Selector:     mg.Spec.ForProvider.Rule[i3].Destination[i4].DestinationTableBucketArnSelector,
+					Reference:    mg.Spec.ForProvider.Rule.Destination[i4].DestinationTableBucketArnRef,
+					Selector:     mg.Spec.ForProvider.Rule.Destination[i4].DestinationTableBucketArnSelector,
 					To:           reference.To{List: l, Managed: m},
 				})
 			}
 			if err != nil {
-				return errors.Wrap(err, "mg.Spec.ForProvider.Rule[i3].Destination[i4].DestinationTableBucketArn")
+				return errors.Wrap(err, "mg.Spec.ForProvider.Rule.Destination[i4].DestinationTableBucketArn")
 			}
-			mg.Spec.ForProvider.Rule[i3].Destination[i4].DestinationTableBucketArn = reference.ToPtrValue(rsp.ResolvedValue)
-			mg.Spec.ForProvider.Rule[i3].Destination[i4].DestinationTableBucketArnRef = rsp.ResolvedReference
+			mg.Spec.ForProvider.Rule.Destination[i4].DestinationTableBucketArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.Rule.Destination[i4].DestinationTableBucketArnRef = rsp.ResolvedReference
 
 		}
 	}
@@ -305,27 +305,27 @@ func (mg *TableBucketReplication) ResolveReferences(ctx context.Context, c clien
 	mg.Spec.InitProvider.Role = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.RoleRef = rsp.ResolvedReference
 
-	for i3 := 0; i3 < len(mg.Spec.InitProvider.Rule); i3++ {
-		for i4 := 0; i4 < len(mg.Spec.InitProvider.Rule[i3].Destination); i4++ {
+	if mg.Spec.InitProvider.Rule != nil {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.Rule.Destination); i4++ {
 			{
 				m, l, err = apisresolver.GetManagedResource("s3tables.aws.upbound.io", "v1beta1", "TableBucket", "TableBucketList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Rule[i3].Destination[i4].DestinationTableBucketArn),
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Rule.Destination[i4].DestinationTableBucketArn),
 					Extract:      resource.ExtractParamPath("arn", true),
 					Namespace:    mg.GetNamespace(),
-					Reference:    mg.Spec.InitProvider.Rule[i3].Destination[i4].DestinationTableBucketArnRef,
-					Selector:     mg.Spec.InitProvider.Rule[i3].Destination[i4].DestinationTableBucketArnSelector,
+					Reference:    mg.Spec.InitProvider.Rule.Destination[i4].DestinationTableBucketArnRef,
+					Selector:     mg.Spec.InitProvider.Rule.Destination[i4].DestinationTableBucketArnSelector,
 					To:           reference.To{List: l, Managed: m},
 				})
 			}
 			if err != nil {
-				return errors.Wrap(err, "mg.Spec.InitProvider.Rule[i3].Destination[i4].DestinationTableBucketArn")
+				return errors.Wrap(err, "mg.Spec.InitProvider.Rule.Destination[i4].DestinationTableBucketArn")
 			}
-			mg.Spec.InitProvider.Rule[i3].Destination[i4].DestinationTableBucketArn = reference.ToPtrValue(rsp.ResolvedValue)
-			mg.Spec.InitProvider.Rule[i3].Destination[i4].DestinationTableBucketArnRef = rsp.ResolvedReference
+			mg.Spec.InitProvider.Rule.Destination[i4].DestinationTableBucketArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.Rule.Destination[i4].DestinationTableBucketArnRef = rsp.ResolvedReference
 
 		}
 	}
@@ -513,27 +513,27 @@ func (mg *TableReplication) ResolveReferences(ctx context.Context, c client.Read
 	mg.Spec.ForProvider.Role = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RoleRef = rsp.ResolvedReference
 
-	for i3 := 0; i3 < len(mg.Spec.ForProvider.Rule); i3++ {
-		for i4 := 0; i4 < len(mg.Spec.ForProvider.Rule[i3].Destination); i4++ {
+	if mg.Spec.ForProvider.Rule != nil {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.Rule.Destination); i4++ {
 			{
 				m, l, err = apisresolver.GetManagedResource("s3tables.aws.upbound.io", "v1beta1", "TableBucket", "TableBucketList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Rule[i3].Destination[i4].DestinationTableBucketArn),
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Rule.Destination[i4].DestinationTableBucketArn),
 					Extract:      resource.ExtractParamPath("arn", true),
 					Namespace:    mg.GetNamespace(),
-					Reference:    mg.Spec.ForProvider.Rule[i3].Destination[i4].DestinationTableBucketArnRef,
-					Selector:     mg.Spec.ForProvider.Rule[i3].Destination[i4].DestinationTableBucketArnSelector,
+					Reference:    mg.Spec.ForProvider.Rule.Destination[i4].DestinationTableBucketArnRef,
+					Selector:     mg.Spec.ForProvider.Rule.Destination[i4].DestinationTableBucketArnSelector,
 					To:           reference.To{List: l, Managed: m},
 				})
 			}
 			if err != nil {
-				return errors.Wrap(err, "mg.Spec.ForProvider.Rule[i3].Destination[i4].DestinationTableBucketArn")
+				return errors.Wrap(err, "mg.Spec.ForProvider.Rule.Destination[i4].DestinationTableBucketArn")
 			}
-			mg.Spec.ForProvider.Rule[i3].Destination[i4].DestinationTableBucketArn = reference.ToPtrValue(rsp.ResolvedValue)
-			mg.Spec.ForProvider.Rule[i3].Destination[i4].DestinationTableBucketArnRef = rsp.ResolvedReference
+			mg.Spec.ForProvider.Rule.Destination[i4].DestinationTableBucketArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.Rule.Destination[i4].DestinationTableBucketArnRef = rsp.ResolvedReference
 
 		}
 	}
@@ -577,27 +577,27 @@ func (mg *TableReplication) ResolveReferences(ctx context.Context, c client.Read
 	mg.Spec.InitProvider.Role = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.RoleRef = rsp.ResolvedReference
 
-	for i3 := 0; i3 < len(mg.Spec.InitProvider.Rule); i3++ {
-		for i4 := 0; i4 < len(mg.Spec.InitProvider.Rule[i3].Destination); i4++ {
+	if mg.Spec.InitProvider.Rule != nil {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.Rule.Destination); i4++ {
 			{
 				m, l, err = apisresolver.GetManagedResource("s3tables.aws.upbound.io", "v1beta1", "TableBucket", "TableBucketList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Rule[i3].Destination[i4].DestinationTableBucketArn),
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Rule.Destination[i4].DestinationTableBucketArn),
 					Extract:      resource.ExtractParamPath("arn", true),
 					Namespace:    mg.GetNamespace(),
-					Reference:    mg.Spec.InitProvider.Rule[i3].Destination[i4].DestinationTableBucketArnRef,
-					Selector:     mg.Spec.InitProvider.Rule[i3].Destination[i4].DestinationTableBucketArnSelector,
+					Reference:    mg.Spec.InitProvider.Rule.Destination[i4].DestinationTableBucketArnRef,
+					Selector:     mg.Spec.InitProvider.Rule.Destination[i4].DestinationTableBucketArnSelector,
 					To:           reference.To{List: l, Managed: m},
 				})
 			}
 			if err != nil {
-				return errors.Wrap(err, "mg.Spec.InitProvider.Rule[i3].Destination[i4].DestinationTableBucketArn")
+				return errors.Wrap(err, "mg.Spec.InitProvider.Rule.Destination[i4].DestinationTableBucketArn")
 			}
-			mg.Spec.InitProvider.Rule[i3].Destination[i4].DestinationTableBucketArn = reference.ToPtrValue(rsp.ResolvedValue)
-			mg.Spec.InitProvider.Rule[i3].Destination[i4].DestinationTableBucketArnRef = rsp.ResolvedReference
+			mg.Spec.InitProvider.Rule.Destination[i4].DestinationTableBucketArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.Rule.Destination[i4].DestinationTableBucketArnRef = rsp.ResolvedReference
 
 		}
 	}

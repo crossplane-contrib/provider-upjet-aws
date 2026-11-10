@@ -35,6 +35,7 @@ import (
 	"github.com/upbound/provider-aws/v2/config/cluster/datasync"
 	"github.com/upbound/provider-aws/v2/config/cluster/dax"
 	"github.com/upbound/provider-aws/v2/config/cluster/devicefarm"
+	"github.com/upbound/provider-aws/v2/config/cluster/devopsagent"
 	"github.com/upbound/provider-aws/v2/config/cluster/directconnect"
 	"github.com/upbound/provider-aws/v2/config/cluster/dms"
 	"github.com/upbound/provider-aws/v2/config/cluster/docdb"
@@ -224,4 +225,5 @@ func init() {
 	ProviderConfiguration.AddConfig(vpclattice.Configure)
 	ProviderConfiguration.AddConfig(timestreaminfluxdb.Configure)
 	ProviderConfiguration.AddConfig(s3tables.Configure)
+	ProviderConfiguration.AddConfig(devopsagent.Configure)
 }

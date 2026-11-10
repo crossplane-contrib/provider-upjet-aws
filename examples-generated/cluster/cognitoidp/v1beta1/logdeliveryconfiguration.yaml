@@ -15,7 +15,7 @@ spec:
   forProvider:
     logConfigurations:
     - cloudWatchLogsConfiguration:
-      - logGroupArnSelector:
+        logGroupArnSelector:
           matchLabels:
             testing.upbound.io/example-name: example
       eventSource: userNotification

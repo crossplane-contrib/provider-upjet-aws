@@ -155,72 +155,62 @@ spec:
                     description: |-
                       Content to upload. Exactly one block is required. See content Block below.
                       Content to upload. Exactly one block is required.
-                    items:
-                      properties:
-                        file:
-                          description: |-
-                            Single file to add or replace. See file Block below.
-                            Single file to add or replace.
-                          items:
+                    properties:
+                      file:
+                        description: |-
+                          Single file to add or replace. See file Block below.
+                          Single file to add or replace.
+                        properties:
+                          body:
+                            description: |-
+                              File content. See body Block below.
+                              File content.
                             properties:
-                              body:
+                              bytes:
                                 description: |-
-                                  File content. See body Block below.
-                                  File content.
-                                items:
-                                  properties:
-                                    bytes:
-                                      description: |-
-                                        Base64-encoded binary file content.
-                                        Base64-encoded binary file content.
-                                      type: string
-                                    text:
-                                      description: |-
-                                        Text file content.
-                                        Text file content.
-                                      type: string
-                                  type: object
-                                type: array
-                              metadata:
-                                description: |-
-                                  JSON document describing the asset. Required metadata fields depend on asset_type. Updates replace supplied top-level fields and retain omitted fields in AWS; removing a field from this document does not delete it from AWS. Changes to metadata alone do not re-upload content.
-                                  JSON metadata for the file.
+                                  Base64-encoded binary file content.
+                                  Base64-encoded binary file content.
                                 type: string
-                              path:
+                              text:
                                 description: |-
-                                  Path of the file within the asset.
-                                  Path of the file within the asset.
+                                  Text file content.
+                                  Text file content.
                                 type: string
                             type: object
-                          type: array
-                        sourceUrl:
-                          description: |-
-                            Source URL to import. See source_url Block below.
-                            Source URL to import.
-                          items:
-                            properties:
-                              url:
-                                description: |-
-                                  Source URL from which to import asset content.
-                                  Source URL from which to import asset content.
-                                type: string
-                            type: object
-                          type: array
-                        zip:
-                          description: |-
-                            ZIP archive containing asset files. See zip Block below.
-                            ZIP archive containing asset files.
-                          items:
-                            properties:
-                              zipFile:
-                                description: |-
-                                  Base64-encoded ZIP archive. Use filebase64() to load a local ZIP file.
-                                  Base64-encoded ZIP archive. Use filebase64() to load a local ZIP file.
-                                type: string
-                            type: object
-                          type: array
-                      type: object
-                    type: array
+                          metadata:
+                            description: |-
+                              JSON document describing the asset. Required metadata fields depend on asset_type. Updates replace supplied top-level fields and retain omitted fields in AWS; removing a field from this document does not delete it from AWS. Changes to metadata alone do not re-upload content.
+                              JSON metadata for the file.
+                            type: string
+                          path:
+                            description: |-
+                              Path of the file within the asset.
+                              Path of the file within the asset.
+                            type: string
+                        type: object
+                      sourceUrl:
+                        description: |-
+                          Source URL to import. See source_url Block below.
+                          Source URL to import.
+                        properties:
+                          url:
+                            description: |-
+                              Source URL from which to import asset content.
+                              Source URL from which to import asset content.
+                            type: string
+                        type: object
+                      zip:
+                        description: |-
+                          ZIP archive containing asset files. See zip Block below.
+                          ZIP archive containing asset files.
+                        properties:
+                          zipFile:
+                            description: |-
+                              Base64-encoded ZIP archive. Use filebase64() to load a local ZIP file.
+                              Base64-encoded ZIP archive. Use filebase64() to load a local ZIP file.
+                            type: string
+                        type: object
+                    type: object
                   metadata:
                     description: |-
                       JSON document describing the asset. Required metadata fields depend on asset_type. Updates replace supplied top-level fields and retain omitted fields in AWS; removing a field from this document does not delete it from AWS. Changes to metadata alone do not re-upload content.
@@ -343,72 +333,62 @@ spec:
                     description: |-
                       Content to upload. Exactly one block is required. See content Block below.
                       Content to upload. Exactly one block is required.
-                    items:
-                      properties:
-                        file:
-                          description: |-
-                            Single file to add or replace. See file Block below.
-                            Single file to add or replace.
-                          items:
+                    properties:
+                      file:
+                        description: |-
+                          Single file to add or replace. See file Block below.
+                          Single file to add or replace.
+                        properties:
+                          body:
+                            description: |-
+                              File content. See body Block below.
+                              File content.
                             properties:
-                              body:
+                              bytes:
                                 description: |-
-                                  File content. See body Block below.
-                                  File content.
-                                items:
-                                  properties:
-                                    bytes:
-                                      description: |-
-                                        Base64-encoded binary file content.
-                                        Base64-encoded binary file content.
-                                      type: string
-                                    text:
-                                      description: |-
-                                        Text file content.
-                                        Text file content.
-                                      type: string
-                                  type: object
-                                type: array
-                              metadata:
-                                description: |-
-                                  JSON document describing the asset. Required metadata fields depend on asset_type. Updates replace supplied top-level fields and retain omitted fields in AWS; removing a field from this document does not delete it from AWS. Changes to metadata alone do not re-upload content.
-                                  JSON metadata for the file.
+                                  Base64-encoded binary file content.
+                                  Base64-encoded binary file content.
                                 type: string
-                              path:
+                              text:
                                 description: |-
-                                  Path of the file within the asset.
-                                  Path of the file within the asset.
+                                  Text file content.
+                                  Text file content.
                                 type: string
                             type: object
-                          type: array
-                        sourceUrl:
-                          description: |-
-                            Source URL to import. See source_url Block below.
-                            Source URL to import.
-                          items:
-                            properties:
-                              url:
-                                description: |-
-                                  Source URL from which to import asset content.
-                                  Source URL from which to import asset content.
-                                type: string
-                            type: object
-                          type: array
-                        zip:
-                          description: |-
-                            ZIP archive containing asset files. See zip Block below.
-                            ZIP archive containing asset files.
-                          items:
-                            properties:
-                              zipFile:
-                                description: |-
-                                  Base64-encoded ZIP archive. Use filebase64() to load a local ZIP file.
-                                  Base64-encoded ZIP archive. Use filebase64() to load a local ZIP file.
-                                type: string
-                            type: object
-                          type: array
-                      type: object
-                    type: array
+                          metadata:
+                            description: |-
+                              JSON document describing the asset. Required metadata fields depend on asset_type. Updates replace supplied top-level fields and retain omitted fields in AWS; removing a field from this document does not delete it from AWS. Changes to metadata alone do not re-upload content.
+                              JSON metadata for the file.
+                            type: string
+                          path:
+                            description: |-
+                              Path of the file within the asset.
+                              Path of the file within the asset.
+                            type: string
+                        type: object
+                      sourceUrl:
+                        description: |-
+                          Source URL to import. See source_url Block below.
+                          Source URL to import.
+                        properties:
+                          url:
+                            description: |-
+                              Source URL from which to import asset content.
+                              Source URL from which to import asset content.
+                            type: string
+                        type: object
+                      zip:
+                        description: |-
+                          ZIP archive containing asset files. See zip Block below.
+                          ZIP archive containing asset files.
+                        properties:
+                          zipFile:
+                            description: |-
+                              Base64-encoded ZIP archive. Use filebase64() to load a local ZIP file.
+                              Base64-encoded ZIP archive. Use filebase64() to load a local ZIP file.
+                            type: string
+                        type: object
+                    type: object
                   metadata:
                     description: |-
                       JSON document describing the asset. Required metadata fields depend on asset_type. Updates replace supplied top-level fields and retain omitted fields in AWS; removing a field from this document does not delete it from AWS. Changes to metadata alone do not re-upload content.
@@ -502,72 +482,62 @@ spec:
                     description: |-
                       Content to upload. Exactly one block is required. See content Block below.
                       Content to upload. Exactly one block is required.
-                    items:
-                      properties:
-                        file:
-                          description: |-
-                            Single file to add or replace. See file Block below.
-                            Single file to add or replace.
-                          items:
+                    properties:
+                      file:
+                        description: |-
+                          Single file to add or replace. See file Block below.
+                          Single file to add or replace.
+                        properties:
+                          body:
+                            description: |-
+                              File content. See body Block below.
+                              File content.
                             properties:
-                              body:
+                              bytes:
                                 description: |-
-                                  File content. See body Block below.
-                                  File content.
-                                items:
-                                  properties:
-                                    bytes:
-                                      description: |-
-                                        Base64-encoded binary file content.
-                                        Base64-encoded binary file content.
-                                      type: string
-                                    text:
-                                      description: |-
-                                        Text file content.
-                                        Text file content.
-                                      type: string
-                                  type: object
-                                type: array
-                              metadata:
-                                description: |-
-                                  JSON document describing the asset. Required metadata fields depend on asset_type. Updates replace supplied top-level fields and retain omitted fields in AWS; removing a field from this document does not delete it from AWS. Changes to metadata alone do not re-upload content.
-                                  JSON metadata for the file.
+                                  Base64-encoded binary file content.
+                                  Base64-encoded binary file content.
                                 type: string
-                              path:
+                              text:
                                 description: |-
-                                  Path of the file within the asset.
-                                  Path of the file within the asset.
+                                  Text file content.
+                                  Text file content.
                                 type: string
                             type: object
-                          type: array
-                        sourceUrl:
-                          description: |-
-                            Source URL to import. See source_url Block below.
-                            Source URL to import.
-                          items:
-                            properties:
-                              url:
-                                description: |-
-                                  Source URL from which to import asset content.
-                                  Source URL from which to import asset content.
-                                type: string
-                            type: object
-                          type: array
-                        zip:
-                          description: |-
-                            ZIP archive containing asset files. See zip Block below.
-                            ZIP archive containing asset files.
-                          items:
-                            properties:
-                              zipFile:
-                                description: |-
-                                  Base64-encoded ZIP archive. Use filebase64() to load a local ZIP file.
-                                  Base64-encoded ZIP archive. Use filebase64() to load a local ZIP file.
-                                type: string
-                            type: object
-                          type: array
-                      type: object
-                    type: array
+                          metadata:
+                            description: |-
+                              JSON document describing the asset. Required metadata fields depend on asset_type. Updates replace supplied top-level fields and retain omitted fields in AWS; removing a field from this document does not delete it from AWS. Changes to metadata alone do not re-upload content.
+                              JSON metadata for the file.
+                            type: string
+                          path:
+                            description: |-
+                              Path of the file within the asset.
+                              Path of the file within the asset.
+                            type: string
+                        type: object
+                      sourceUrl:
+                        description: |-
+                          Source URL to import. See source_url Block below.
+                          Source URL to import.
+                        properties:
+                          url:
+                            description: |-
+                              Source URL from which to import asset content.
+                              Source URL from which to import asset content.
+                            type: string
+                        type: object
+                      zip:
+                        description: |-
+                          ZIP archive containing asset files. See zip Block below.
+                          ZIP archive containing asset files.
+                        properties:
+                          zipFile:
+                            description: |-
+                              Base64-encoded ZIP archive. Use filebase64() to load a local ZIP file.
+                              Base64-encoded ZIP archive. Use filebase64() to load a local ZIP file.
+                            type: string
+                        type: object
+                    type: object
                   createdAt:
                     description: |-
                       Creation timestamp in RFC 3339 format.

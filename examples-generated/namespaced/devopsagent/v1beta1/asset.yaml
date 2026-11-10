@@ -19,9 +19,9 @@ spec:
         testing.upbound.io/example-name: example
     assetType: agents_md
     content:
-    - file:
-      - body:
-        - text: Follow the operational runbook.
+      file:
+        body:
+          text: Follow the operational runbook.
         path: AGENTS.md
     metadata: ${jsonencode({ agent_type = "GENERIC" })}
     region: us-west-1

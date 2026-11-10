@@ -383,10 +383,8 @@ func (in *AssetInitParameters) DeepCopyInto(out *AssetInitParameters) {
 	}
 	if in.Content != nil {
 		in, out := &in.Content, &out.Content
-		*out = make([]ContentInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(ContentInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Metadata != nil {
 		in, out := &in.Metadata, &out.Metadata
@@ -457,10 +455,8 @@ func (in *AssetObservation) DeepCopyInto(out *AssetObservation) {
 	}
 	if in.Content != nil {
 		in, out := &in.Content, &out.Content
-		*out = make([]ContentObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(ContentObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.CreatedAt != nil {
 		in, out := &in.CreatedAt, &out.CreatedAt
@@ -534,10 +530,8 @@ func (in *AssetParameters) DeepCopyInto(out *AssetParameters) {
 	}
 	if in.Content != nil {
 		in, out := &in.Content, &out.Content
-		*out = make([]ContentParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(ContentParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Metadata != nil {
 		in, out := &in.Metadata, &out.Metadata
@@ -676,24 +670,18 @@ func (in *ContentInitParameters) DeepCopyInto(out *ContentInitParameters) {
 	*out = *in
 	if in.File != nil {
 		in, out := &in.File, &out.File
-		*out = make([]FileInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(FileInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.SourceURL != nil {
 		in, out := &in.SourceURL, &out.SourceURL
-		*out = make([]SourceURLInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(SourceURLInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Zip != nil {
 		in, out := &in.Zip, &out.Zip
-		*out = make([]ZipInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(ZipInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -712,24 +700,18 @@ func (in *ContentObservation) DeepCopyInto(out *ContentObservation) {
 	*out = *in
 	if in.File != nil {
 		in, out := &in.File, &out.File
-		*out = make([]FileObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(FileObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.SourceURL != nil {
 		in, out := &in.SourceURL, &out.SourceURL
-		*out = make([]SourceURLObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(SourceURLObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Zip != nil {
 		in, out := &in.Zip, &out.Zip
-		*out = make([]ZipObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(ZipObservation)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -748,24 +730,18 @@ func (in *ContentParameters) DeepCopyInto(out *ContentParameters) {
 	*out = *in
 	if in.File != nil {
 		in, out := &in.File, &out.File
-		*out = make([]FileParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(FileParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.SourceURL != nil {
 		in, out := &in.SourceURL, &out.SourceURL
-		*out = make([]SourceURLParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(SourceURLParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Zip != nil {
 		in, out := &in.Zip, &out.Zip
-		*out = make([]ZipParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(ZipParameters)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -784,10 +760,8 @@ func (in *FileInitParameters) DeepCopyInto(out *FileInitParameters) {
 	*out = *in
 	if in.Body != nil {
 		in, out := &in.Body, &out.Body
-		*out = make([]BodyInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(BodyInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Metadata != nil {
 		in, out := &in.Metadata, &out.Metadata
@@ -816,10 +790,8 @@ func (in *FileObservation) DeepCopyInto(out *FileObservation) {
 	*out = *in
 	if in.Body != nil {
 		in, out := &in.Body, &out.Body
-		*out = make([]BodyObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(BodyObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Metadata != nil {
 		in, out := &in.Metadata, &out.Metadata
@@ -848,10 +820,8 @@ func (in *FileParameters) DeepCopyInto(out *FileParameters) {
 	*out = *in
 	if in.Body != nil {
 		in, out := &in.Body, &out.Body
-		*out = make([]BodyParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(BodyParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Metadata != nil {
 		in, out := &in.Metadata, &out.Metadata

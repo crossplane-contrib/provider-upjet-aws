@@ -94,44 +94,44 @@ type FirehoseConfigurationParameters struct {
 type LogConfigurationsInitParameters struct {
 
 	// Configuration for CloudWatch Logs delivery. See CloudWatch Logs Configuration below.
-	CloudWatchLogsConfiguration []CloudWatchLogsConfigurationInitParameters `json:"cloudWatchLogsConfiguration,omitempty" tf:"cloud_watch_logs_configuration,omitempty"`
+	CloudWatchLogsConfiguration *CloudWatchLogsConfigurationInitParameters `json:"cloudWatchLogsConfiguration,omitempty" tf:"cloud_watch_logs_configuration,omitempty"`
 
 	// The event source to configure logging for. Valid values are userNotification and userAuthEvents.
 	EventSource *string `json:"eventSource,omitempty" tf:"event_source,omitempty"`
 
 	// Configuration for Kinesis Data Firehose delivery. See Firehose Configuration below.
-	FirehoseConfiguration []FirehoseConfigurationInitParameters `json:"firehoseConfiguration,omitempty" tf:"firehose_configuration,omitempty"`
+	FirehoseConfiguration *FirehoseConfigurationInitParameters `json:"firehoseConfiguration,omitempty" tf:"firehose_configuration,omitempty"`
 
 	// The log level to set for the event source. Valid values are ERROR and INFO.
 	LogLevel *string `json:"logLevel,omitempty" tf:"log_level,omitempty"`
 
 	// Configuration for S3 delivery. See S3 Configuration below.
-	S3Configuration []S3ConfigurationInitParameters `json:"s3Configuration,omitempty" tf:"s3_configuration,omitempty"`
+	S3Configuration *S3ConfigurationInitParameters `json:"s3Configuration,omitempty" tf:"s3_configuration,omitempty"`
 }
 
 type LogConfigurationsObservation struct {
 
 	// Configuration for CloudWatch Logs delivery. See CloudWatch Logs Configuration below.
-	CloudWatchLogsConfiguration []CloudWatchLogsConfigurationObservation `json:"cloudWatchLogsConfiguration,omitempty" tf:"cloud_watch_logs_configuration,omitempty"`
+	CloudWatchLogsConfiguration *CloudWatchLogsConfigurationObservation `json:"cloudWatchLogsConfiguration,omitempty" tf:"cloud_watch_logs_configuration,omitempty"`
 
 	// The event source to configure logging for. Valid values are userNotification and userAuthEvents.
 	EventSource *string `json:"eventSource,omitempty" tf:"event_source,omitempty"`
 
 	// Configuration for Kinesis Data Firehose delivery. See Firehose Configuration below.
-	FirehoseConfiguration []FirehoseConfigurationObservation `json:"firehoseConfiguration,omitempty" tf:"firehose_configuration,omitempty"`
+	FirehoseConfiguration *FirehoseConfigurationObservation `json:"firehoseConfiguration,omitempty" tf:"firehose_configuration,omitempty"`
 
 	// The log level to set for the event source. Valid values are ERROR and INFO.
 	LogLevel *string `json:"logLevel,omitempty" tf:"log_level,omitempty"`
 
 	// Configuration for S3 delivery. See S3 Configuration below.
-	S3Configuration []S3ConfigurationObservation `json:"s3Configuration,omitempty" tf:"s3_configuration,omitempty"`
+	S3Configuration *S3ConfigurationObservation `json:"s3Configuration,omitempty" tf:"s3_configuration,omitempty"`
 }
 
 type LogConfigurationsParameters struct {
 
 	// Configuration for CloudWatch Logs delivery. See CloudWatch Logs Configuration below.
 	// +kubebuilder:validation:Optional
-	CloudWatchLogsConfiguration []CloudWatchLogsConfigurationParameters `json:"cloudWatchLogsConfiguration,omitempty" tf:"cloud_watch_logs_configuration,omitempty"`
+	CloudWatchLogsConfiguration *CloudWatchLogsConfigurationParameters `json:"cloudWatchLogsConfiguration,omitempty" tf:"cloud_watch_logs_configuration,omitempty"`
 
 	// The event source to configure logging for. Valid values are userNotification and userAuthEvents.
 	// +kubebuilder:validation:Optional
@@ -139,7 +139,7 @@ type LogConfigurationsParameters struct {
 
 	// Configuration for Kinesis Data Firehose delivery. See Firehose Configuration below.
 	// +kubebuilder:validation:Optional
-	FirehoseConfiguration []FirehoseConfigurationParameters `json:"firehoseConfiguration,omitempty" tf:"firehose_configuration,omitempty"`
+	FirehoseConfiguration *FirehoseConfigurationParameters `json:"firehoseConfiguration,omitempty" tf:"firehose_configuration,omitempty"`
 
 	// The log level to set for the event source. Valid values are ERROR and INFO.
 	// +kubebuilder:validation:Optional
@@ -147,7 +147,7 @@ type LogConfigurationsParameters struct {
 
 	// Configuration for S3 delivery. See S3 Configuration below.
 	// +kubebuilder:validation:Optional
-	S3Configuration []S3ConfigurationParameters `json:"s3Configuration,omitempty" tf:"s3_configuration,omitempty"`
+	S3Configuration *S3ConfigurationParameters `json:"s3Configuration,omitempty" tf:"s3_configuration,omitempty"`
 }
 
 type LogDeliveryConfigurationInitParameters struct {

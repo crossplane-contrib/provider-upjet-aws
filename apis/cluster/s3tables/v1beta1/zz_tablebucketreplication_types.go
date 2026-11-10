@@ -87,7 +87,7 @@ type TableBucketReplicationInitParameters struct {
 	RoleSelector *v2.Selector `json:"roleSelector,omitempty" tf:"-"`
 
 	// Replication rules. See Rule below for more details.
-	Rule []RuleInitParameters `json:"rule,omitempty" tf:"rule,omitempty"`
+	Rule *RuleInitParameters `json:"rule,omitempty" tf:"rule,omitempty"`
 
 	// ARN referencing the Table Bucket that owns this replication configuration.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3tables/v1beta1.TableBucket
@@ -114,7 +114,7 @@ type TableBucketReplicationObservation struct {
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
 
 	// Replication rules. See Rule below for more details.
-	Rule []RuleObservation `json:"rule,omitempty" tf:"rule,omitempty"`
+	Rule *RuleObservation `json:"rule,omitempty" tf:"rule,omitempty"`
 
 	// ARN referencing the Table Bucket that owns this replication configuration.
 	TableBucketArn *string `json:"tableBucketArn,omitempty" tf:"table_bucket_arn,omitempty"`
@@ -146,7 +146,7 @@ type TableBucketReplicationParameters struct {
 
 	// Replication rules. See Rule below for more details.
 	// +kubebuilder:validation:Optional
-	Rule []RuleParameters `json:"rule,omitempty" tf:"rule,omitempty"`
+	Rule *RuleParameters `json:"rule,omitempty" tf:"rule,omitempty"`
 
 	// ARN referencing the Table Bucket that owns this replication configuration.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3tables/v1beta1.TableBucket

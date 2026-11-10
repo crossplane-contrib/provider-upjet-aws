@@ -19,7 +19,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     rule:
-    - destination:
+      destination:
       - destinationTableBucketArnSelector:
           matchLabels:
             testing.upbound.io/example-name: target
