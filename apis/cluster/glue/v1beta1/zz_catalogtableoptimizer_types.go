@@ -121,6 +121,9 @@ type ConfigurationInitParameters struct {
 
 	// ARN of the IAM role to use for the table optimizer.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Configuration block that defines the table optimizer settings. See configuration Block for additional details.
+	VPCConfiguration []VPCConfigurationInitParameters `json:"vpcConfiguration,omitempty" tf:"vpc_configuration,omitempty"`
 }
 
 type ConfigurationObservation struct {
@@ -139,6 +142,9 @@ type ConfigurationObservation struct {
 
 	// ARN of the IAM role to use for the table optimizer.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Configuration block that defines the table optimizer settings. See configuration Block for additional details.
+	VPCConfiguration []VPCConfigurationObservation `json:"vpcConfiguration,omitempty" tf:"vpc_configuration,omitempty"`
 }
 
 type ConfigurationParameters struct {
@@ -162,6 +168,10 @@ type ConfigurationParameters struct {
 	// ARN of the IAM role to use for the table optimizer.
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn" tf:"role_arn,omitempty"`
+
+	// Configuration block that defines the table optimizer settings. See configuration Block for additional details.
+	// +kubebuilder:validation:Optional
+	VPCConfiguration []VPCConfigurationParameters `json:"vpcConfiguration,omitempty" tf:"vpc_configuration,omitempty"`
 }
 
 type IcebergConfigurationInitParameters struct {
@@ -327,6 +337,20 @@ type RetentionConfigurationParameters struct {
 	// Configuration for an Iceberg compaction optimizer. See configuration.compaction_configuration.iceberg_configuration Block for additional details.
 	// +kubebuilder:validation:Optional
 	IcebergConfiguration []RetentionConfigurationIcebergConfigurationParameters `json:"icebergConfiguration,omitempty" tf:"iceberg_configuration,omitempty"`
+}
+
+type VPCConfigurationInitParameters struct {
+	GlueConnectionName *string `json:"glueConnectionName,omitempty" tf:"glue_connection_name,omitempty"`
+}
+
+type VPCConfigurationObservation struct {
+	GlueConnectionName *string `json:"glueConnectionName,omitempty" tf:"glue_connection_name,omitempty"`
+}
+
+type VPCConfigurationParameters struct {
+
+	// +kubebuilder:validation:Optional
+	GlueConnectionName *string `json:"glueConnectionName" tf:"glue_connection_name,omitempty"`
 }
 
 // CatalogTableOptimizerSpec defines the desired state of CatalogTableOptimizer

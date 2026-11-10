@@ -185,6 +185,16 @@ spec:
                         roleArn:
                           description: ARN of the IAM role to use for the table optimizer.
                           type: string
+                        vpcConfiguration:
+                          description: Configuration block that defines the table
+                            optimizer settings. See configuration Block for additional
+                            details.
+                          items:
+                            properties:
+                              glueConnectionName:
+                                type: string
+                            type: object
+                          type: array
                       type: object
                     type: array
                   databaseName:
@@ -405,6 +415,16 @@ spec:
                         roleArn:
                           description: ARN of the IAM role to use for the table optimizer.
                           type: string
+                        vpcConfiguration:
+                          description: Configuration block that defines the table
+                            optimizer settings. See configuration Block for additional
+                            details.
+                          items:
+                            properties:
+                              glueConnectionName:
+                                type: string
+                            type: object
+                          type: array
                       type: object
                     type: array
                   tableName:
@@ -628,6 +648,16 @@ spec:
                         roleArn:
                           description: ARN of the IAM role to use for the table optimizer.
                           type: string
+                        vpcConfiguration:
+                          description: Configuration block that defines the table
+                            optimizer settings. See configuration Block for additional
+                            details.
+                          items:
+                            properties:
+                              glueConnectionName:
+                                type: string
+                            type: object
+                          type: array
                       type: object
                     type: array
                   databaseName:
