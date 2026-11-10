@@ -3307,7 +3307,7 @@ func s3vectorsComputedARNIdentifier(identifier, resourcePath string) config.Exte
 	return frameworkComputedARNIdentifier("s3vectors", identifier, resourcePath)
 }
 
-func s3tablesNamespace() config.ExternalName {
+func s3tablesNamespace() config.ExternalName { //nolint:gocyclo // easier to follow as a unit
 	return config.NewExternalNameFrom(config.IdentifierFromProvider,
 		config.WithSetIdentifierArgumentsFn(func(fn config.SetIdentifierArgumentsFn, base map[string]any, externalName string) {
 			if externalName == "" {
@@ -3343,7 +3343,7 @@ func s3tablesNamespace() config.ExternalName {
 	)
 }
 
-func s3tablesTable() config.ExternalName {
+func s3tablesTable() config.ExternalName { //nolint:gocyclo // easier to follow as a unit
 	return config.NewExternalNameFrom(config.IdentifierFromProvider,
 		config.WithSetIdentifierArgumentsFn(func(fn config.SetIdentifierArgumentsFn, base map[string]any, externalName string) {
 			if externalName == "" {
