@@ -8,6 +8,8 @@ metadata:
   name: example-titan-app
   namespace: upbound-system
 spec:
+  writeConnectionSecretToRef:
+    name: example-titan-app
   forProvider:
     description: Profile with tag for cost allocation tracking
     modelSource:

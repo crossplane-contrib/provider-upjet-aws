@@ -37,6 +37,16 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		r.AddSingletonListConversion("vpc_config", "vpcConfig")
 	})
 
+	p.AddResourceConfigurator("aws_bedrock_inference_profile", func(r *config.Resource) {
+		r.Sensitive.AdditionalConnectionDetailsFn = func(attr map[string]any) (map[string][]byte, error) {
+			conn := map[string][]byte{}
+			if a, ok := attr["arn"].(string); ok {
+				conn["arn"] = []byte(a)
+			}
+			return conn, nil
+		}
+	})
+
 	p.AddResourceConfigurator("aws_bedrock_evaluation_job", func(r *config.Resource) {
 		r.References["customer_encryption_key_id"] = config.Reference{
 			TerraformName: "aws_kms_key",
