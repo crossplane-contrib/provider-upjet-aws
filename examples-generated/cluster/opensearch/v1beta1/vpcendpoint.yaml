@@ -1,0 +1,26 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
+apiVersion: opensearch.aws.upbound.io/v1beta1
+kind: VPCEndpoint
+metadata:
+  annotations:
+    meta.upbound.io/example-id: opensearch/v1beta1/vpcendpoint
+  labels:
+    testing.upbound.io/example-name: foo
+  name: foo
+spec:
+  forProvider:
+    domainArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: domain_1
+    region: us-west-1
+    vpcOptions:
+      securityGroupIdsRefs:
+      - name: test
+      - name: test2
+      subnetIdsRefs:
+      - name: test
+      - name: test2

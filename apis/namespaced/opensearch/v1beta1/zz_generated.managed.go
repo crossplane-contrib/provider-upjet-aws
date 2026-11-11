@@ -7,6 +7,46 @@ package v1beta1
 
 import xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 
+// GetCondition of this AuthorizeVPCEndpointAccess.
+func (mg *AuthorizeVPCEndpointAccess) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetManagementPolicies of this AuthorizeVPCEndpointAccess.
+func (mg *AuthorizeVPCEndpointAccess) GetManagementPolicies() xpv2.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this AuthorizeVPCEndpointAccess.
+func (mg *AuthorizeVPCEndpointAccess) GetProviderConfigReference() *xpv2.ProviderConfigReference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetWriteConnectionSecretToReference of this AuthorizeVPCEndpointAccess.
+func (mg *AuthorizeVPCEndpointAccess) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this AuthorizeVPCEndpointAccess.
+func (mg *AuthorizeVPCEndpointAccess) SetConditions(c ...xpv2.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetManagementPolicies of this AuthorizeVPCEndpointAccess.
+func (mg *AuthorizeVPCEndpointAccess) SetManagementPolicies(r xpv2.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this AuthorizeVPCEndpointAccess.
+func (mg *AuthorizeVPCEndpointAccess) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetWriteConnectionSecretToReference of this AuthorizeVPCEndpointAccess.
+func (mg *AuthorizeVPCEndpointAccess) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this Domain.
 func (mg *Domain) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
@@ -124,5 +164,45 @@ func (mg *DomainSAMLOptions) SetProviderConfigReference(r *xpv2.ProviderConfigRe
 
 // SetWriteConnectionSecretToReference of this DomainSAMLOptions.
 func (mg *DomainSAMLOptions) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this VPCEndpoint.
+func (mg *VPCEndpoint) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetManagementPolicies of this VPCEndpoint.
+func (mg *VPCEndpoint) GetManagementPolicies() xpv2.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this VPCEndpoint.
+func (mg *VPCEndpoint) GetProviderConfigReference() *xpv2.ProviderConfigReference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetWriteConnectionSecretToReference of this VPCEndpoint.
+func (mg *VPCEndpoint) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this VPCEndpoint.
+func (mg *VPCEndpoint) SetConditions(c ...xpv2.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetManagementPolicies of this VPCEndpoint.
+func (mg *VPCEndpoint) SetManagementPolicies(r xpv2.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this VPCEndpoint.
+func (mg *VPCEndpoint) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetWriteConnectionSecretToReference of this VPCEndpoint.
+func (mg *VPCEndpoint) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

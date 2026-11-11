@@ -43,6 +43,7 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		}
 		r.References["performance_insights_kms_key_id"] = config.Reference{
 			TerraformName: "aws_kms_key",
+			Extractor:     common.PathARNExtractor,
 		}
 		r.UseAsync = true
 		r.Sensitive.AdditionalConnectionDetailsFn = func(attr map[string]any) (map[string][]byte, error) {
@@ -115,6 +116,7 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		}
 		r.References["performance_insights_kms_key_id"] = config.Reference{
 			TerraformName: "aws_kms_key",
+			Extractor:     common.PathARNExtractor,
 		}
 		r.References["restore_to_point_in_time.source_cluster_identifier"] = config.Reference{
 			TerraformName: "aws_rds_cluster",
@@ -147,6 +149,7 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		}
 		r.References["performance_insights_kms_key_id"] = config.Reference{
 			TerraformName: "aws_kms_key",
+			Extractor:     common.PathARNExtractor,
 		}
 		r.UseAsync = true
 		r.LateInitializer = config.LateInitializer{

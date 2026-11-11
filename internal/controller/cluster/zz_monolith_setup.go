@@ -122,6 +122,7 @@ import (
 	scalingplan "github.com/upbound/provider-aws/v2/internal/controller/cluster/autoscalingplans/scalingplan"
 	framework "github.com/upbound/provider-aws/v2/internal/controller/cluster/backup/framework"
 	globalsettings "github.com/upbound/provider-aws/v2/internal/controller/cluster/backup/globalsettings"
+	logicallyairgappedvault "github.com/upbound/provider-aws/v2/internal/controller/cluster/backup/logicallyairgappedvault"
 	plan "github.com/upbound/provider-aws/v2/internal/controller/cluster/backup/plan"
 	regionsettings "github.com/upbound/provider-aws/v2/internal/controller/cluster/backup/regionsettings"
 	reportplan "github.com/upbound/provider-aws/v2/internal/controller/cluster/backup/reportplan"
@@ -530,6 +531,7 @@ import (
 	lustrefilesystem "github.com/upbound/provider-aws/v2/internal/controller/cluster/fsx/lustrefilesystem"
 	ontapfilesystem "github.com/upbound/provider-aws/v2/internal/controller/cluster/fsx/ontapfilesystem"
 	ontapstoragevirtualmachine "github.com/upbound/provider-aws/v2/internal/controller/cluster/fsx/ontapstoragevirtualmachine"
+	ontapvolume "github.com/upbound/provider-aws/v2/internal/controller/cluster/fsx/ontapvolume"
 	windowsfilesystem "github.com/upbound/provider-aws/v2/internal/controller/cluster/fsx/windowsfilesystem"
 	alias "github.com/upbound/provider-aws/v2/internal/controller/cluster/gamelift/alias"
 	build "github.com/upbound/provider-aws/v2/internal/controller/cluster/gamelift/build"
@@ -732,6 +734,7 @@ import (
 	globalclusterneptune "github.com/upbound/provider-aws/v2/internal/controller/cluster/neptune/globalcluster"
 	parametergroupneptune "github.com/upbound/provider-aws/v2/internal/controller/cluster/neptune/parametergroup"
 	subnetgroupneptune "github.com/upbound/provider-aws/v2/internal/controller/cluster/neptune/subnetgroup"
+	containerassociation "github.com/upbound/provider-aws/v2/internal/controller/cluster/networkfirewall/containerassociation"
 	firewall "github.com/upbound/provider-aws/v2/internal/controller/cluster/networkfirewall/firewall"
 	firewallpolicy "github.com/upbound/provider-aws/v2/internal/controller/cluster/networkfirewall/firewallpolicy"
 	loggingconfiguration "github.com/upbound/provider-aws/v2/internal/controller/cluster/networkfirewall/loggingconfiguration"
@@ -751,10 +754,14 @@ import (
 	vpcattachment "github.com/upbound/provider-aws/v2/internal/controller/cluster/networkmanager/vpcattachment"
 	monitor "github.com/upbound/provider-aws/v2/internal/controller/cluster/networkmonitor/monitor"
 	probe "github.com/upbound/provider-aws/v2/internal/controller/cluster/networkmonitor/probe"
+	linkoam "github.com/upbound/provider-aws/v2/internal/controller/cluster/oam/link"
 	sink "github.com/upbound/provider-aws/v2/internal/controller/cluster/oam/sink"
+	sinkpolicy "github.com/upbound/provider-aws/v2/internal/controller/cluster/oam/sinkpolicy"
+	authorizevpcendpointaccess "github.com/upbound/provider-aws/v2/internal/controller/cluster/opensearch/authorizevpcendpointaccess"
 	domainopensearch "github.com/upbound/provider-aws/v2/internal/controller/cluster/opensearch/domain"
 	domainpolicyopensearch "github.com/upbound/provider-aws/v2/internal/controller/cluster/opensearch/domainpolicy"
 	domainsamloptionsopensearch "github.com/upbound/provider-aws/v2/internal/controller/cluster/opensearch/domainsamloptions"
+	vpcendpointopensearch "github.com/upbound/provider-aws/v2/internal/controller/cluster/opensearch/vpcendpoint"
 	accesspolicy "github.com/upbound/provider-aws/v2/internal/controller/cluster/opensearchserverless/accesspolicy"
 	collection "github.com/upbound/provider-aws/v2/internal/controller/cluster/opensearchserverless/collection"
 	collectiongroup "github.com/upbound/provider-aws/v2/internal/controller/cluster/opensearchserverless/collectiongroup"
@@ -973,6 +980,8 @@ import (
 	emailidentitymailfromattributes "github.com/upbound/provider-aws/v2/internal/controller/cluster/sesv2/emailidentitymailfromattributes"
 	activity "github.com/upbound/provider-aws/v2/internal/controller/cluster/sfn/activity"
 	statemachine "github.com/upbound/provider-aws/v2/internal/controller/cluster/sfn/statemachine"
+	protection "github.com/upbound/provider-aws/v2/internal/controller/cluster/shield/protection"
+	protectionhealthcheckassociation "github.com/upbound/provider-aws/v2/internal/controller/cluster/shield/protectionhealthcheckassociation"
 	signingjob "github.com/upbound/provider-aws/v2/internal/controller/cluster/signer/signingjob"
 	signingprofile "github.com/upbound/provider-aws/v2/internal/controller/cluster/signer/signingprofile"
 	signingprofilepermission "github.com/upbound/provider-aws/v2/internal/controller/cluster/signer/signingprofilepermission"
@@ -1192,6 +1201,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		scalingplan.Setup,
 		framework.Setup,
 		globalsettings.Setup,
+		logicallyairgappedvault.Setup,
 		plan.Setup,
 		regionsettings.Setup,
 		reportplan.Setup,
@@ -1600,6 +1610,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		lustrefilesystem.Setup,
 		ontapfilesystem.Setup,
 		ontapstoragevirtualmachine.Setup,
+		ontapvolume.Setup,
 		windowsfilesystem.Setup,
 		alias.Setup,
 		build.Setup,
@@ -1802,6 +1813,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		globalclusterneptune.Setup,
 		parametergroupneptune.Setup,
 		subnetgroupneptune.Setup,
+		containerassociation.Setup,
 		firewall.Setup,
 		firewallpolicy.Setup,
 		loggingconfiguration.Setup,
@@ -1821,10 +1833,14 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		vpcattachment.Setup,
 		monitor.Setup,
 		probe.Setup,
+		linkoam.Setup,
 		sink.Setup,
+		sinkpolicy.Setup,
+		authorizevpcendpointaccess.Setup,
 		domainopensearch.Setup,
 		domainpolicyopensearch.Setup,
 		domainsamloptionsopensearch.Setup,
+		vpcendpointopensearch.Setup,
 		accesspolicy.Setup,
 		collection.Setup,
 		collectiongroup.Setup,
@@ -2043,6 +2059,8 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		emailidentitymailfromattributes.Setup,
 		activity.Setup,
 		statemachine.Setup,
+		protection.Setup,
+		protectionhealthcheckassociation.Setup,
 		signingjob.Setup,
 		signingprofile.Setup,
 		signingprofilepermission.Setup,
@@ -2268,6 +2286,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		scalingplan.SetupGated,
 		framework.SetupGated,
 		globalsettings.SetupGated,
+		logicallyairgappedvault.SetupGated,
 		plan.SetupGated,
 		regionsettings.SetupGated,
 		reportplan.SetupGated,
@@ -2676,6 +2695,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		lustrefilesystem.SetupGated,
 		ontapfilesystem.SetupGated,
 		ontapstoragevirtualmachine.SetupGated,
+		ontapvolume.SetupGated,
 		windowsfilesystem.SetupGated,
 		alias.SetupGated,
 		build.SetupGated,
@@ -2878,6 +2898,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		globalclusterneptune.SetupGated,
 		parametergroupneptune.SetupGated,
 		subnetgroupneptune.SetupGated,
+		containerassociation.SetupGated,
 		firewall.SetupGated,
 		firewallpolicy.SetupGated,
 		loggingconfiguration.SetupGated,
@@ -2897,10 +2918,14 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		vpcattachment.SetupGated,
 		monitor.SetupGated,
 		probe.SetupGated,
+		linkoam.SetupGated,
 		sink.SetupGated,
+		sinkpolicy.SetupGated,
+		authorizevpcendpointaccess.SetupGated,
 		domainopensearch.SetupGated,
 		domainpolicyopensearch.SetupGated,
 		domainsamloptionsopensearch.SetupGated,
+		vpcendpointopensearch.SetupGated,
 		accesspolicy.SetupGated,
 		collection.SetupGated,
 		collectiongroup.SetupGated,
@@ -3119,6 +3144,8 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		emailidentitymailfromattributes.SetupGated,
 		activity.SetupGated,
 		statemachine.SetupGated,
+		protection.SetupGated,
+		protectionhealthcheckassociation.SetupGated,
 		signingjob.SetupGated,
 		signingprofile.SetupGated,
 		signingprofilepermission.SetupGated,
@@ -3343,6 +3370,7 @@ func SetupWebhookWithManager_monolith(mgr ctrl.Manager) error {
 		scalingplan.SetupWebhookWithManager,
 		framework.SetupWebhookWithManager,
 		globalsettings.SetupWebhookWithManager,
+		logicallyairgappedvault.SetupWebhookWithManager,
 		plan.SetupWebhookWithManager,
 		regionsettings.SetupWebhookWithManager,
 		reportplan.SetupWebhookWithManager,
@@ -3751,6 +3779,7 @@ func SetupWebhookWithManager_monolith(mgr ctrl.Manager) error {
 		lustrefilesystem.SetupWebhookWithManager,
 		ontapfilesystem.SetupWebhookWithManager,
 		ontapstoragevirtualmachine.SetupWebhookWithManager,
+		ontapvolume.SetupWebhookWithManager,
 		windowsfilesystem.SetupWebhookWithManager,
 		alias.SetupWebhookWithManager,
 		build.SetupWebhookWithManager,
@@ -3953,6 +3982,7 @@ func SetupWebhookWithManager_monolith(mgr ctrl.Manager) error {
 		globalclusterneptune.SetupWebhookWithManager,
 		parametergroupneptune.SetupWebhookWithManager,
 		subnetgroupneptune.SetupWebhookWithManager,
+		containerassociation.SetupWebhookWithManager,
 		firewall.SetupWebhookWithManager,
 		firewallpolicy.SetupWebhookWithManager,
 		loggingconfiguration.SetupWebhookWithManager,
@@ -3972,10 +4002,14 @@ func SetupWebhookWithManager_monolith(mgr ctrl.Manager) error {
 		vpcattachment.SetupWebhookWithManager,
 		monitor.SetupWebhookWithManager,
 		probe.SetupWebhookWithManager,
+		linkoam.SetupWebhookWithManager,
 		sink.SetupWebhookWithManager,
+		sinkpolicy.SetupWebhookWithManager,
+		authorizevpcendpointaccess.SetupWebhookWithManager,
 		domainopensearch.SetupWebhookWithManager,
 		domainpolicyopensearch.SetupWebhookWithManager,
 		domainsamloptionsopensearch.SetupWebhookWithManager,
+		vpcendpointopensearch.SetupWebhookWithManager,
 		accesspolicy.SetupWebhookWithManager,
 		collection.SetupWebhookWithManager,
 		collectiongroup.SetupWebhookWithManager,
@@ -4194,6 +4228,8 @@ func SetupWebhookWithManager_monolith(mgr ctrl.Manager) error {
 		emailidentitymailfromattributes.SetupWebhookWithManager,
 		activity.SetupWebhookWithManager,
 		statemachine.SetupWebhookWithManager,
+		protection.SetupWebhookWithManager,
+		protectionhealthcheckassociation.SetupWebhookWithManager,
 		signingjob.SetupWebhookWithManager,
 		signingprofile.SetupWebhookWithManager,
 		signingprofilepermission.SetupWebhookWithManager,

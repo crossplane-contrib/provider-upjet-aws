@@ -13,6 +13,9 @@ func (tr *Framework) Hub() {}
 func (tr *GlobalSettings) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *LogicallyAirGappedVault) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *Plan) Hub() {}
 
 // Hub marks this type as a conversion hub.

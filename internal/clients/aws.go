@@ -78,6 +78,7 @@ var globalGroups = map[string]string{
 	"route53.aws.upbound.io":                      "route53",
 	"route53recoverycontrolconfig.aws.upbound.io": "route53recoverycontrolconfig",
 	"route53recoveryreadiness.aws.upbound.io":     "route53recoveryreadiness",
+	"shield.aws.upbound.io":                       "shield",
 	"waf.aws.upbound.io":                          "waf",
 	// namespaced apis
 	"account.aws.m.upbound.io":                      "account",
@@ -93,6 +94,7 @@ var globalGroups = map[string]string{
 	"route53.aws.m.upbound.io":                      "route53",
 	"route53recoverycontrolconfig.aws.m.upbound.io": "route53recoverycontrolconfig",
 	"route53recoveryreadiness.aws.m.upbound.io":     "route53recoveryreadiness",
+	"shield.aws.m.upbound.io":                       "shield",
 	"waf.aws.m.upbound.io":                          "waf",
 }
 

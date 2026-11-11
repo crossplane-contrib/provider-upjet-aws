@@ -33,7 +33,17 @@ type BackupInitParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// ID of the volume to back up. Required if backing up a ONTAP Volume.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/fsx/v1beta1.OntapVolume
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	VolumeID *string `json:"volumeId,omitempty" tf:"volume_id,omitempty"`
+
+	// Reference to a OntapVolume in fsx to populate volumeId.
+	// +kubebuilder:validation:Optional
+	VolumeIDRef *v2.NamespacedReference `json:"volumeIdRef,omitempty" tf:"-"`
+
+	// Selector for a OntapVolume in fsx to populate volumeId.
+	// +kubebuilder:validation:Optional
+	VolumeIDSelector *v2.NamespacedSelector `json:"volumeIdSelector,omitempty" tf:"-"`
 }
 
 type BackupObservation struct {
@@ -99,8 +109,18 @@ type BackupParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// ID of the volume to back up. Required if backing up a ONTAP Volume.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/fsx/v1beta1.OntapVolume
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VolumeID *string `json:"volumeId,omitempty" tf:"volume_id,omitempty"`
+
+	// Reference to a OntapVolume in fsx to populate volumeId.
+	// +kubebuilder:validation:Optional
+	VolumeIDRef *v2.NamespacedReference `json:"volumeIdRef,omitempty" tf:"-"`
+
+	// Selector for a OntapVolume in fsx to populate volumeId.
+	// +kubebuilder:validation:Optional
+	VolumeIDSelector *v2.NamespacedSelector `json:"volumeIdSelector,omitempty" tf:"-"`
 }
 
 // BackupSpec defines the desired state of Backup

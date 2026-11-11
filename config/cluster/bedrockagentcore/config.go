@@ -280,6 +280,13 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 			TerraformName: "aws_secretsmanager_secret",
 			Extractor:     common.PathARNExtractor,
 		}
+		r.Sensitive.AdditionalConnectionDetailsFn = func(attr map[string]any) (map[string][]byte, error) {
+			conn := map[string][]byte{}
+			if a, ok := attr["arn"].(string); ok {
+				conn["arn"] = []byte(a)
+			}
+			return conn, nil
+		}
 		r.AddSingletonListConversion("authorizer_configuration", "authorizerConfiguration")
 		r.AddSingletonListConversion("authorizer_configuration[*].custom_jwt_authorizer", "authorizerConfiguration[*].customJwtAuthorizer")
 		r.AddSingletonListConversion("authorizer_configuration[*].custom_jwt_authorizer[*].allowed_workload_configuration", "authorizerConfiguration[*].customJwtAuthorizer[*].allowedWorkloadConfiguration")

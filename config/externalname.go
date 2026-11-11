@@ -50,6 +50,11 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	// terraform-plugin-framework
 	"aws_appconfig_environment": appConfigEnvironment(),
 
+	// backup
+	//
+	// Backup Logically Air Gapped Vault can be imported using the name
+	"aws_backup_logically_air_gapped_vault": config.NameAsIdentifier,
+
 	// batch
 	// AWS Batch job queue can be imported using the name
 	"aws_batch_job_queue": config.TemplatedStringAsIdentifier("name", fullARNTemplate("batch", "job-queue/{{ .external_name }}")),
@@ -196,7 +201,8 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	// glue
 	//
 	//
-	"aws_glue_catalog_table_optimizer": config.TemplatedStringAsIdentifier("name", "{{ .parameters.catalog_id }}:{{ .parameters.database_name }}:{{ .external_name }}"),
+	// Imported using catalog_id,database_name,table_name,type
+	"aws_glue_catalog_table_optimizer": glueCatalogTableOptimizer(),
 
 	// grafana
 	//
@@ -250,12 +256,26 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	// admin
 	"aws_mq_user": mqUser(),
 
+	// networkfirewall
+	//
+	// Network Firewall Container Associations are imported by their
+	// provider-assigned container_association_arn, the only identifier the
+	// DescribeContainerAssociation API accepts
+	// Example: arn:aws:network-firewall:us-west-2:123456789012:container-association/example
+	"aws_networkfirewall_container_association": networkFirewallContainerAssociation(),
+
 	// networkmonitor
 	//
 	// import by monitor_name
 	"aws_networkmonitor_monitor": config.ParameterAsIdentifier("monitor_name"),
 	// import by probe_id
 	"aws_networkmonitor_probe": networkmonitorProbe(),
+
+	// opensearch
+	//
+	// OpenSearch Authorize VPC Endpoint Access has no id attribute and can be
+	// imported using the domain_name and account separated by a comma.
+	"aws_opensearch_authorize_vpc_endpoint_access": opensearchAuthorizeVPCEndpointAccess(),
 
 	// opensearchserverless
 	//
@@ -1573,6 +1593,8 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"aws_fsx_ontap_file_system": config.IdentifierFromProvider,
 	// FSx Storage Virtual Machine can be imported using the id
 	"aws_fsx_ontap_storage_virtual_machine": config.IdentifierFromProvider,
+	// FSx ONTAP volume can be imported using the id
+	"aws_fsx_ontap_volume": config.IdentifierFromProvider,
 	// FSx File Systems can be imported using the id
 	"aws_fsx_windows_file_system": config.IdentifierFromProvider,
 
@@ -2180,9 +2202,15 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 
 	// oam
 	//
+	// aws_oam_link can be imported using the ARN
+	// Example: arn:aws:oam:us-west-2:123456789012:link/link-id
+	"aws_oam_link": config.IdentifierFromProvider,
 	// aws_oam_sink can be imported using th ARN
 	// Example: arn:aws:oam:us-west-2:123456789012:sink/sink-id
 	"aws_oam_sink": config.IdentifierFromProvider,
+	// aws_oam_sink_policy can be imported using the ARN of the sink
+	// Example: arn:aws:oam:us-west-2:123456789012:sink/sink-id
+	"aws_oam_sink_policy": config.IdentifierFromProvider,
 
 	// opensearch
 	//
@@ -2198,6 +2226,9 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// Please see the following issue in upjet: https://github.com/crossplane/upjet/issues/32
 	// OpenSearch domains can be imported using the domain_name
 	"aws_opensearch_domain_saml_options": config.IdentifierFromProvider,
+	// OpenSearch VPC endpoints can be imported using the id, which is the
+	// provider-assigned endpoint ID
+	"aws_opensearch_vpc_endpoint": config.IdentifierFromProvider,
 
 	// organizations
 	//
@@ -2783,6 +2814,14 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	//
 	"aws_sfn_state_machine": config.TemplatedStringAsIdentifier("name", fullARNTemplate("states", "stateMachine:{{ .external_name }}")),
 
+	// shield
+	//
+	// Shield protection resources can be imported by specifying their ID
+	"aws_shield_protection": config.IdentifierFromProvider,
+	// Shield protection health check association resources can be imported by specifying the shield_protection_id and health_check_arn
+	// Example: ff9592dc-22f3-4e88-afa1-7b29fde9669a+arn:aws:route53:::healthcheck/3742b175-edb9-46bc-9359-f53e3b794b1b
+	"aws_shield_protection_health_check_association": config.TemplatedStringAsIdentifier("", "{{ .parameters.shield_protection_id }}+{{ .parameters.health_check_arn }}"),
+
 	// signer
 	//
 	// Signer signing jobs can be imported using the job_id
@@ -3235,6 +3274,20 @@ func kmsAlias() config.ExternalName {
 // @ArnIdentity in the Terraform provider.
 func s3vectorsComputedARNIdentifier(identifier, resourcePath string) config.ExternalName {
 	return frameworkComputedARNIdentifier("s3vectors", identifier, resourcePath)
+}
+
+// networkFirewallContainerAssociation configures the external name for
+// aws_networkfirewall_container_association. The external name is the
+// AWS-assigned container_association_arn, the only identifier the
+// DescribeContainerAssociation API accepts. The stub ARN of the initial read
+// belongs to another account, which AWS does not necessarily answer with a
+// not found error.
+func networkFirewallContainerAssociation() config.ExternalName {
+	// the association name must satisfy the pattern [a-zA-Z0-9-]{1,128}
+	const stubAssociation = "container-association/xpstub000000"
+	e := frameworkComputedARNIdentifier("network-firewall", "container_association_arn", stubAssociation)
+	e.IsNotFoundDiagnosticFn = stubReadNotFound(":000000000000:" + stubAssociation)
+	return e
 }
 
 // frameworkComputedARNIdentifier handles Terraform Plugin Framework resources
@@ -3794,6 +3847,42 @@ func eksCapability() config.ExternalName {
 	return e
 }
 
+func opensearchAuthorizeVPCEndpointAccess() config.ExternalName {
+	e := config.IdentifierFromProvider
+	const sep = ","
+	keys := []string{"domain_name", "account"}
+	e.GetExternalNameFn = func(tfstate map[string]interface{}) (string, error) {
+		vals := make([]string, len(keys))
+		for i, key := range keys {
+			val, ok := tfstate[key]
+			if !ok {
+				return "", errors.Errorf("%q is missing from tfstate", key)
+			}
+			s, ok := val.(string)
+			if !ok || s == "" {
+				return "", errors.Errorf("%q in tfstate must be a non-empty string", key)
+			}
+			vals[i] = s
+		}
+		return strings.Join(vals, sep), nil
+	}
+	e.SetIdentifierArgumentFn = func(base map[string]interface{}, externalName string) {
+		if externalName == "" {
+			return
+		}
+		extNameParts := strings.Split(externalName, sep)
+		if len(extNameParts) != len(keys) {
+			return
+		}
+		for i, key := range keys {
+			if _, ok := base[key]; !ok {
+				base[key] = extNameParts[i]
+			}
+		}
+	}
+	return e
+}
+
 func eksPodIdentityAssociation() config.ExternalName {
 	e := config.IdentifierFromProvider
 
@@ -3976,6 +4065,36 @@ func lambdaRuntimeManagementConfig() config.ExternalName {
 		}
 		return fmt.Sprintf("%s,%s", functionName, qualifier), nil
 	}
+	return e
+}
+
+// glueCatalogTableOptimizer handles the external-name of the
+// aws_glue_catalog_table_optimizer resource. It is a
+// terraform-plugin-framework resource without an "id" attribute, imported
+// using "catalog_id,database_name,table_name,type". All four are required
+// spec fields, so the external name is rebuilt from the Terraform state.
+func glueCatalogTableOptimizer() config.ExternalName {
+	e := config.IdentifierFromProvider
+	// The resource has no monolithic "id" attribute, so do not push one into
+	// the Terraform state.
+	e.GetIDFn = func(_ context.Context, _ string, _ map[string]any, _ map[string]any) (string, error) {
+		return "", nil
+	}
+	e.GetExternalNameFn = func(tfstate map[string]any) (string, error) {
+		keys := []string{"catalog_id", "database_name", "table_name", "type"}
+		vals := make([]string, len(keys))
+		for i, key := range keys {
+			val, err := requiredString(tfstate, key)
+			if err != nil {
+				return "", err
+			}
+			vals[i] = val
+		}
+		return strings.Join(vals, ","), nil
+	}
+	// Keep the identifier fields of the previous templated configuration so
+	// that the generated CRD validation does not change.
+	e.IdentifierFields = []string{"catalog_id", "database_name"}
 	return e
 }
 

@@ -1,0 +1,107 @@
+# SPDX-FileCopyrightText: 2026 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: shield.aws.m.upbound.io/v1beta1
+kind: ProtectionHealthCheckAssociation
+metadata:
+  annotations:
+    meta.upbound.io/example-id: shield/v1beta1/protectionhealthcheckassociation
+    uptest.upbound.io/timeout: "3600"
+    upjet.upbound.io/manual-intervention: >
+      Requires an active AWS Shield Advanced subscription in the account,
+      which has a monthly fee and a one-year commitment.
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    healthCheckArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-hc
+    shieldProtectionIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-hc
+
+---
+
+apiVersion: shield.aws.m.upbound.io/v1beta1
+kind: Protection
+metadata:
+  annotations:
+    meta.upbound.io/example-id: shield/v1beta1/protectionhealthcheckassociation
+  labels:
+    testing.upbound.io/example-name: example-hc
+  name: example-hc
+  namespace: upbound-system
+spec:
+  forProvider:
+    name: example-hc
+    resourceArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-hc
+
+---
+
+apiVersion: route53.aws.m.upbound.io/v1beta1
+kind: HealthCheck
+metadata:
+  annotations:
+    meta.upbound.io/example-id: shield/v1beta1/protectionhealthcheckassociation
+  labels:
+    testing.upbound.io/example-name: example-hc
+  name: example-hc
+  namespace: upbound-system
+spec:
+  forProvider:
+    failureThreshold: 3
+    fqdn: example.com
+    port: 443
+    requestInterval: 30
+    resourcePath: /
+    tags:
+      Name: example-hc
+    type: HTTPS
+
+---
+
+apiVersion: cloudfront.aws.m.upbound.io/v1beta1
+kind: Distribution
+metadata:
+  annotations:
+    meta.upbound.io/example-id: shield/v1beta1/protectionhealthcheckassociation
+  labels:
+    testing.upbound.io/example-name: example-hc
+  name: example-hc
+  namespace: upbound-system
+spec:
+  forProvider:
+    defaultCacheBehavior:
+      allowedMethods:
+        - GET
+        - HEAD
+      cachedMethods:
+        - GET
+        - HEAD
+      forwardedValues:
+        cookies:
+          forward: none
+        queryString: false
+      targetOriginId: customOrigin
+      viewerProtocolPolicy: redirect-to-https
+    enabled: true
+    origin:
+      - customOriginConfig:
+          httpPort: 80
+          httpsPort: 443
+          originProtocolPolicy: https-only
+          originSslProtocols:
+            - TLSv1.2
+        domainName: app.my.cloud
+        originId: customOrigin
+    restrictions:
+      geoRestriction:
+        restrictionType: none
+    viewerCertificate:
+      cloudfrontDefaultCertificate: true

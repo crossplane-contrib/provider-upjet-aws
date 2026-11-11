@@ -7,6 +7,15 @@ package v1beta1
 
 import resource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 
+// GetItems of this AuthorizeVPCEndpointAccessList.
+func (l *AuthorizeVPCEndpointAccessList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this DomainList.
 func (l *DomainList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -27,6 +36,15 @@ func (l *DomainPolicyList) GetItems() []resource.Managed {
 
 // GetItems of this DomainSAMLOptionsList.
 func (l *DomainSAMLOptionsList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this VPCEndpointList.
+func (l *VPCEndpointList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]

@@ -1,0 +1,30 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
+apiVersion: networkfirewall.aws.m.upbound.io/v1beta1
+kind: ContainerAssociation
+metadata:
+  annotations:
+    meta.upbound.io/example-id: networkfirewall/v1beta1/containerassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    containerAssociationName: example-eks-association
+    containerMonitoringConfiguration:
+    - attributeFilter:
+      - key: app
+        value: backend
+      clusterArnSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+    description: Association for production EKS cluster
+    region: us-west-1
+    tags:
+      Environment: production
+      Name: example
+    type: EKS

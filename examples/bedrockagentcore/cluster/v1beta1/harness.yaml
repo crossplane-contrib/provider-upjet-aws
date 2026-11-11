@@ -16,6 +16,9 @@ metadata:
     testing.upbound.io/example-name: harness
   name: harness
 spec:
+  writeConnectionSecretToRef:
+    name: harness
+    namespace: upbound-system
   forProvider:
     region: us-west-2
     harnessName: uptest_example_harness

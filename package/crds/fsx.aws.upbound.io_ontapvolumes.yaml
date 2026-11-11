@@ -1,0 +1,1083 @@
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.22.0
+  name: ontapvolumes.fsx.aws.upbound.io
+spec:
+  group: fsx.aws.upbound.io
+  names:
+    categories:
+    - crossplane
+    - managed
+    - aws
+    kind: OntapVolume
+    listKind: OntapVolumeList
+    plural: ontapvolumes
+    singular: ontapvolume
+  scope: Cluster
+  versions:
+  - additionalPrinterColumns:
+    - jsonPath: .status.conditions[?(@.type=='Synced')].status
+      name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
+      type: string
+    - jsonPath: .metadata.annotations.crossplane\.io/external-name
+      name: EXTERNAL-NAME
+      type: string
+    - jsonPath: .metadata.creationTimestamp
+      name: AGE
+      type: date
+    name: v1beta1
+    schema:
+      openAPIV3Schema:
+        description: OntapVolume is the Schema for the OntapVolumes API. Manages a
+          FSx ONTAP Volume.
+        properties:
+          apiVersion:
+            description: |-
+              APIVersion defines the versioned schema of this representation of an object.
+              Servers should convert recognized schemas to the latest internal value, and
+              may reject unrecognized values.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+            type: string
+          kind:
+            description: |-
+              Kind is a string value representing the REST resource this object represents.
+              Servers may infer this from the endpoint the client submits requests to.
+              Cannot be updated.
+              In CamelCase.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: OntapVolumeSpec defines the desired state of OntapVolume
+            properties:
+              deletionPolicy:
+                default: Delete
+                description: |-
+                  DeletionPolicy specifies what will happen to the underlying external
+                  when this managed resource is deleted - either "Delete" or "Orphan" the
+                  external resource.
+                  This field is planned to be deprecated in favor of the ManagementPolicies
+                  field in a future release. Currently, both could be set independently and
+                  non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                enum:
+                - Orphan
+                - Delete
+                type: string
+              forProvider:
+                properties:
+                  aggregateConfiguration:
+                    description: Aggregate configuration only applies to FLEXGROUP
+                      volumes. See [aggregate_configuration Block] for details.
+                    properties:
+                      aggregates:
+                        description: Names of the aggregates on which the volume will
+                          be created. Each aggregate needs to be in the format aggrX
+                          where X is the number of the aggregate.
+                        items:
+                          type: string
+                        type: array
+                      constituentsPerAggregate:
+                        description: Number of constituents within the FlexGroup per
+                          storage aggregate. the default value is 8.
+                        type: number
+                    type: object
+                  bypassSnaplockEnterpriseRetention:
+                    description: Whether to allow a SnapLock administrator to delete
+                      an FSx for ONTAP SnapLock Enterprise volume with unexpired write
+                      once, read many (WORM) files. This configuration must be applied
+                      separately before attempting to delete the resource to have
+                      the desired behavior. Defaults to false.
+                    type: boolean
+                  copyTagsToBackups:
+                    description: Whether tags for the volume should be copied to backups.
+                      This value defaults to false.
+                    type: boolean
+                  finalBackupTags:
+                    additionalProperties:
+                      type: string
+                    description: Map of tags to apply to the volume's final backup.
+                    type: object
+                    x-kubernetes-map-type: granular
+                  junctionPath:
+                    description: Location in the storage virtual machine's namespace
+                      where the volume is mounted. The junction_path must have a leading
+                      forward slash, such as /vol3
+                    type: string
+                  name:
+                    description: Name of the Volume. You can use a maximum of 203
+                      alphanumeric characters, plus the underscore (_) special character.
+                    type: string
+                  ontapVolumeType:
+                    description: Type of volume, valid values are RW, DP. Default
+                      value is RW. These can be set by the ONTAP CLI or API. This
+                      setting is used as part of migration and replication Migrating
+                      to Amazon FSx for NetApp ONTAP
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
+                  securityStyle:
+                    description: Volume security style, Valid values are UNIX, NTFS,
+                      and MIXED.
+                    type: string
+                  sizeInBytes:
+                    description: Size of the volume, in megabytes (MB), that you are
+                      creating. Can be used for any size but required for volumes
+                      over 2 PB. Either size_in_bytes or size_in_megabytes must be
+                      specified. Minimum size for FLEXGROUP volumes are 100GiB per
+                      constituent.
+                    type: string
+                  sizeInMegabytes:
+                    description: Size of the volume, in megabytes (MB), that you are
+                      creating. Supported when creating volumes under 2 PB. Either
+                      size_in_bytes or size_in_megabytes must be specified. Minimum
+                      size for FLEXGROUP volumes are 100GiB per constituent.
+                    type: number
+                  skipFinalBackup:
+                    description: Whether to skip the default final backup taken when
+                      the volume is deleted. This configuration must be applied separately
+                      before attempting to delete the resource to have the desired
+                      behavior. Defaults to false.
+                    type: boolean
+                  snaplockConfiguration:
+                    description: SnapLock configuration for an FSx for ONTAP volume.
+                      See snaplock_configuration Block for details.
+                    properties:
+                      auditLogVolume:
+                        description: Whether to enable the audit log volume for an
+                          FSx for ONTAP SnapLock volume. The default value is false.
+                        type: boolean
+                      autocommitPeriod:
+                        description: Configuration object for setting the autocommit
+                          period of files in an FSx for ONTAP SnapLock volume. See
+                          autocommit_period Block for details.
+                        properties:
+                          type:
+                            description: 'Type of time for the autocommit period of
+                              a file in an FSx for ONTAP SnapLock volume. Setting
+                              this value to NONE disables autocommit. Valid values:
+                              MINUTES, HOURS, DAYS, MONTHS, YEARS, NONE.'
+                            type: string
+                          value:
+                            description: Amount of time for the autocommit period
+                              of a file in an FSx for ONTAP SnapLock volume.
+                            type: number
+                        type: object
+                      privilegedDelete:
+                        description: 'Whether privileged delete is enabled, disabled,
+                          or permanently disabled on an FSx for ONTAP SnapLock Enterprise
+                          volume. Valid values: DISABLED, ENABLED, PERMANENTLY_DISABLED.
+                          The default value is DISABLED.'
+                        type: string
+                      retentionPeriod:
+                        description: Retention period of an FSx for ONTAP SnapLock
+                          volume. See retention_period Block for details.
+                        properties:
+                          defaultRetention:
+                            description: Retention period assigned to a write once,
+                              read many (WORM) file by default if an explicit retention
+                              period is not set for an FSx for ONTAP SnapLock volume.
+                              The default retention period must be greater than or
+                              equal to the minimum retention period and less than
+                              or equal to the maximum retention period. See default_retention
+                              Block for details.
+                            properties:
+                              type:
+                                description: 'Type of time for the autocommit period
+                                  of a file in an FSx for ONTAP SnapLock volume. Setting
+                                  this value to NONE disables autocommit. Valid values:
+                                  MINUTES, HOURS, DAYS, MONTHS, YEARS, NONE.'
+                                type: string
+                              value:
+                                description: Amount of time for the autocommit period
+                                  of a file in an FSx for ONTAP SnapLock volume.
+                                type: number
+                            type: object
+                          maximumRetention:
+                            description: Longest retention period that can be assigned
+                              to a WORM file on an FSx for ONTAP SnapLock volume.
+                              See maximum_retention Block for details.
+                            properties:
+                              type:
+                                description: 'Type of time for the autocommit period
+                                  of a file in an FSx for ONTAP SnapLock volume. Setting
+                                  this value to NONE disables autocommit. Valid values:
+                                  MINUTES, HOURS, DAYS, MONTHS, YEARS, NONE.'
+                                type: string
+                              value:
+                                description: Amount of time for the autocommit period
+                                  of a file in an FSx for ONTAP SnapLock volume.
+                                type: number
+                            type: object
+                          minimumRetention:
+                            description: Shortest retention period that can be assigned
+                              to a WORM file on an FSx for ONTAP SnapLock volume.
+                              See minimum_retention Block for details.
+                            properties:
+                              type:
+                                description: 'Type of time for the autocommit period
+                                  of a file in an FSx for ONTAP SnapLock volume. Setting
+                                  this value to NONE disables autocommit. Valid values:
+                                  MINUTES, HOURS, DAYS, MONTHS, YEARS, NONE.'
+                                type: string
+                              value:
+                                description: Amount of time for the autocommit period
+                                  of a file in an FSx for ONTAP SnapLock volume.
+                                type: number
+                            type: object
+                        type: object
+                      snaplockType:
+                        description: 'Retention mode of an FSx for ONTAP SnapLock
+                          volume. After it is set, it can''t be changed. Valid values:
+                          COMPLIANCE, ENTERPRISE.'
+                        type: string
+                      volumeAppendModeEnabled:
+                        description: Whether to enable volume-append mode on an FSx
+                          for ONTAP SnapLock volume. The default value is false.
+                        type: boolean
+                    type: object
+                  snapshotPolicy:
+                    description: Snapshot policy for the volume. See snapshot policies
+                      in the Amazon FSx ONTAP User Guide
+                    type: string
+                  storageEfficiencyEnabled:
+                    description: Whether to enable deduplication, compression, and
+                      compaction storage efficiency features on the volume.
+                    type: boolean
+                  storageVirtualMachineId:
+                    description: Storage virtual machine in which to create the volume.
+                    type: string
+                  storageVirtualMachineIdRef:
+                    description: Reference to a OntapStorageVirtualMachine in fsx
+                      to populate storageVirtualMachineId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  storageVirtualMachineIdSelector:
+                    description: Selector for a OntapStorageVirtualMachine in fsx
+                      to populate storageVirtualMachineId.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                    x-kubernetes-map-type: granular
+                  tieringPolicy:
+                    description: Data tiering policy for an FSx for ONTAP volume.
+                      See tiering_policy Block for details.
+                    properties:
+                      coolingPeriod:
+                        description: Number of days that user data in a volume must
+                          remain inactive before it is considered "cold" and moved
+                          to the capacity pool. Used with AUTO and SNAPSHOT_ONLY tiering
+                          policies only. Valid values are whole numbers between 2
+                          and 183. Default values are 31 days for AUTO and 2 days
+                          for SNAPSHOT_ONLY.
+                        type: number
+                      name:
+                        description: Tiering policy for the ONTAP volume for moving
+                          data to the capacity pool storage. Valid values are SNAPSHOT_ONLY,
+                          AUTO, ALL, NONE. Default value is SNAPSHOT_ONLY.
+                        type: string
+                    type: object
+                  volumeStyle:
+                    description: Styles of volume, valid values are FLEXVOL, FLEXGROUP.
+                      Default value is FLEXVOL. FLEXGROUPS have a larger minimum and
+                      maximum size. See Volume Styles for more details. Volume Styles
+                    type: string
+                  volumeType:
+                    description: Type of volume, currently the only valid value is
+                      ONTAP.
+                    type: string
+                required:
+                - region
+                type: object
+              initProvider:
+                description: |-
+                  THIS IS A BETA FIELD. It will be honored
+                  unless the Management Policies feature flag is disabled.
+                  InitProvider holds the same fields as ForProvider, with the exception
+                  of Identifier and other resource reference fields. The fields that are
+                  in InitProvider are merged into ForProvider when the resource is created.
+                  The same fields are also added to the terraform ignore_changes hook, to
+                  avoid updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after creation,
+                  for example because of an external controller is managing them, like an
+                  autoscaler.
+                properties:
+                  aggregateConfiguration:
+                    description: Aggregate configuration only applies to FLEXGROUP
+                      volumes. See [aggregate_configuration Block] for details.
+                    properties:
+                      aggregates:
+                        description: Names of the aggregates on which the volume will
+                          be created. Each aggregate needs to be in the format aggrX
+                          where X is the number of the aggregate.
+                        items:
+                          type: string
+                        type: array
+                      constituentsPerAggregate:
+                        description: Number of constituents within the FlexGroup per
+                          storage aggregate. the default value is 8.
+                        type: number
+                    type: object
+                  bypassSnaplockEnterpriseRetention:
+                    description: Whether to allow a SnapLock administrator to delete
+                      an FSx for ONTAP SnapLock Enterprise volume with unexpired write
+                      once, read many (WORM) files. This configuration must be applied
+                      separately before attempting to delete the resource to have
+                      the desired behavior. Defaults to false.
+                    type: boolean
+                  copyTagsToBackups:
+                    description: Whether tags for the volume should be copied to backups.
+                      This value defaults to false.
+                    type: boolean
+                  finalBackupTags:
+                    additionalProperties:
+                      type: string
+                    description: Map of tags to apply to the volume's final backup.
+                    type: object
+                    x-kubernetes-map-type: granular
+                  junctionPath:
+                    description: Location in the storage virtual machine's namespace
+                      where the volume is mounted. The junction_path must have a leading
+                      forward slash, such as /vol3
+                    type: string
+                  name:
+                    description: Name of the Volume. You can use a maximum of 203
+                      alphanumeric characters, plus the underscore (_) special character.
+                    type: string
+                  ontapVolumeType:
+                    description: Type of volume, valid values are RW, DP. Default
+                      value is RW. These can be set by the ONTAP CLI or API. This
+                      setting is used as part of migration and replication Migrating
+                      to Amazon FSx for NetApp ONTAP
+                    type: string
+                  securityStyle:
+                    description: Volume security style, Valid values are UNIX, NTFS,
+                      and MIXED.
+                    type: string
+                  sizeInBytes:
+                    description: Size of the volume, in megabytes (MB), that you are
+                      creating. Can be used for any size but required for volumes
+                      over 2 PB. Either size_in_bytes or size_in_megabytes must be
+                      specified. Minimum size for FLEXGROUP volumes are 100GiB per
+                      constituent.
+                    type: string
+                  sizeInMegabytes:
+                    description: Size of the volume, in megabytes (MB), that you are
+                      creating. Supported when creating volumes under 2 PB. Either
+                      size_in_bytes or size_in_megabytes must be specified. Minimum
+                      size for FLEXGROUP volumes are 100GiB per constituent.
+                    type: number
+                  skipFinalBackup:
+                    description: Whether to skip the default final backup taken when
+                      the volume is deleted. This configuration must be applied separately
+                      before attempting to delete the resource to have the desired
+                      behavior. Defaults to false.
+                    type: boolean
+                  snaplockConfiguration:
+                    description: SnapLock configuration for an FSx for ONTAP volume.
+                      See snaplock_configuration Block for details.
+                    properties:
+                      auditLogVolume:
+                        description: Whether to enable the audit log volume for an
+                          FSx for ONTAP SnapLock volume. The default value is false.
+                        type: boolean
+                      autocommitPeriod:
+                        description: Configuration object for setting the autocommit
+                          period of files in an FSx for ONTAP SnapLock volume. See
+                          autocommit_period Block for details.
+                        properties:
+                          type:
+                            description: 'Type of time for the autocommit period of
+                              a file in an FSx for ONTAP SnapLock volume. Setting
+                              this value to NONE disables autocommit. Valid values:
+                              MINUTES, HOURS, DAYS, MONTHS, YEARS, NONE.'
+                            type: string
+                          value:
+                            description: Amount of time for the autocommit period
+                              of a file in an FSx for ONTAP SnapLock volume.
+                            type: number
+                        type: object
+                      privilegedDelete:
+                        description: 'Whether privileged delete is enabled, disabled,
+                          or permanently disabled on an FSx for ONTAP SnapLock Enterprise
+                          volume. Valid values: DISABLED, ENABLED, PERMANENTLY_DISABLED.
+                          The default value is DISABLED.'
+                        type: string
+                      retentionPeriod:
+                        description: Retention period of an FSx for ONTAP SnapLock
+                          volume. See retention_period Block for details.
+                        properties:
+                          defaultRetention:
+                            description: Retention period assigned to a write once,
+                              read many (WORM) file by default if an explicit retention
+                              period is not set for an FSx for ONTAP SnapLock volume.
+                              The default retention period must be greater than or
+                              equal to the minimum retention period and less than
+                              or equal to the maximum retention period. See default_retention
+                              Block for details.
+                            properties:
+                              type:
+                                description: 'Type of time for the autocommit period
+                                  of a file in an FSx for ONTAP SnapLock volume. Setting
+                                  this value to NONE disables autocommit. Valid values:
+                                  MINUTES, HOURS, DAYS, MONTHS, YEARS, NONE.'
+                                type: string
+                              value:
+                                description: Amount of time for the autocommit period
+                                  of a file in an FSx for ONTAP SnapLock volume.
+                                type: number
+                            type: object
+                          maximumRetention:
+                            description: Longest retention period that can be assigned
+                              to a WORM file on an FSx for ONTAP SnapLock volume.
+                              See maximum_retention Block for details.
+                            properties:
+                              type:
+                                description: 'Type of time for the autocommit period
+                                  of a file in an FSx for ONTAP SnapLock volume. Setting
+                                  this value to NONE disables autocommit. Valid values:
+                                  MINUTES, HOURS, DAYS, MONTHS, YEARS, NONE.'
+                                type: string
+                              value:
+                                description: Amount of time for the autocommit period
+                                  of a file in an FSx for ONTAP SnapLock volume.
+                                type: number
+                            type: object
+                          minimumRetention:
+                            description: Shortest retention period that can be assigned
+                              to a WORM file on an FSx for ONTAP SnapLock volume.
+                              See minimum_retention Block for details.
+                            properties:
+                              type:
+                                description: 'Type of time for the autocommit period
+                                  of a file in an FSx for ONTAP SnapLock volume. Setting
+                                  this value to NONE disables autocommit. Valid values:
+                                  MINUTES, HOURS, DAYS, MONTHS, YEARS, NONE.'
+                                type: string
+                              value:
+                                description: Amount of time for the autocommit period
+                                  of a file in an FSx for ONTAP SnapLock volume.
+                                type: number
+                            type: object
+                        type: object
+                      snaplockType:
+                        description: 'Retention mode of an FSx for ONTAP SnapLock
+                          volume. After it is set, it can''t be changed. Valid values:
+                          COMPLIANCE, ENTERPRISE.'
+                        type: string
+                      volumeAppendModeEnabled:
+                        description: Whether to enable volume-append mode on an FSx
+                          for ONTAP SnapLock volume. The default value is false.
+                        type: boolean
+                    type: object
+                  snapshotPolicy:
+                    description: Snapshot policy for the volume. See snapshot policies
+                      in the Amazon FSx ONTAP User Guide
+                    type: string
+                  storageEfficiencyEnabled:
+                    description: Whether to enable deduplication, compression, and
+                      compaction storage efficiency features on the volume.
+                    type: boolean
+                  storageVirtualMachineId:
+                    description: Storage virtual machine in which to create the volume.
+                    type: string
+                  storageVirtualMachineIdRef:
+                    description: Reference to a OntapStorageVirtualMachine in fsx
+                      to populate storageVirtualMachineId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  storageVirtualMachineIdSelector:
+                    description: Selector for a OntapStorageVirtualMachine in fsx
+                      to populate storageVirtualMachineId.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                    x-kubernetes-map-type: granular
+                  tieringPolicy:
+                    description: Data tiering policy for an FSx for ONTAP volume.
+                      See tiering_policy Block for details.
+                    properties:
+                      coolingPeriod:
+                        description: Number of days that user data in a volume must
+                          remain inactive before it is considered "cold" and moved
+                          to the capacity pool. Used with AUTO and SNAPSHOT_ONLY tiering
+                          policies only. Valid values are whole numbers between 2
+                          and 183. Default values are 31 days for AUTO and 2 days
+                          for SNAPSHOT_ONLY.
+                        type: number
+                      name:
+                        description: Tiering policy for the ONTAP volume for moving
+                          data to the capacity pool storage. Valid values are SNAPSHOT_ONLY,
+                          AUTO, ALL, NONE. Default value is SNAPSHOT_ONLY.
+                        type: string
+                    type: object
+                  volumeStyle:
+                    description: Styles of volume, valid values are FLEXVOL, FLEXGROUP.
+                      Default value is FLEXVOL. FLEXGROUPS have a larger minimum and
+                      maximum size. See Volume Styles for more details. Volume Styles
+                    type: string
+                  volumeType:
+                    description: Type of volume, currently the only valid value is
+                      ONTAP.
+                    type: string
+                type: object
+              managementPolicies:
+                default:
+                - '*'
+                description: |-
+                  THIS IS A BETA FIELD. It is on by default but can be opted out
+                  through a Crossplane feature flag.
+                  ManagementPolicies specify the array of actions Crossplane is allowed to
+                  take on the managed and external resources.
+                  This field is planned to replace the DeletionPolicy field in a future
+                  release. Currently, both could be set independently and non-default
+                  values would be honored if the feature flag is enabled. If both are
+                  custom, the DeletionPolicy field will be ignored.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                  and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md
+                items:
+                  description: |-
+                    A ManagementAction represents an action that the Crossplane controllers
+                    can take on an external resource.
+                  enum:
+                  - Observe
+                  - Create
+                  - Update
+                  - Delete
+                  - LateInitialize
+                  - '*'
+                  type: string
+                type: array
+              providerConfigRef:
+                default:
+                  name: default
+                description: |-
+                  ProviderConfigReference specifies how the provider that will be used to
+                  create, observe, update, and delete this managed resource should be
+                  configured.
+                properties:
+                  name:
+                    description: Name of the referenced object.
+                    type: string
+                  policy:
+                    description: Policies for referencing.
+                    properties:
+                      resolution:
+                        default: Required
+                        description: |-
+                          Resolution specifies whether resolution of this reference is required.
+                          The default is 'Required', which means the reconcile will fail if the
+                          reference cannot be resolved. 'Optional' means this reference will be
+                          a no-op if it cannot be resolved.
+                        enum:
+                        - Required
+                        - Optional
+                        type: string
+                      resolve:
+                        description: |-
+                          Resolve specifies when this reference should be resolved. The default
+                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                          the corresponding field is not present. Use 'Always' to resolve the
+                          reference on every reconcile.
+                        enum:
+                        - Always
+                        - IfNotPresent
+                        type: string
+                    type: object
+                required:
+                - name
+                type: object
+              writeConnectionSecretToRef:
+                description: |-
+                  WriteConnectionSecretToReference specifies the namespace and name of a
+                  Secret to which any connection details for this managed resource should
+                  be written. Connection details frequently include the endpoint, username,
+                  and password required to connect to the managed resource.
+                properties:
+                  name:
+                    description: Name of the secret.
+                    type: string
+                  namespace:
+                    description: Namespace of the secret.
+                    type: string
+                required:
+                - name
+                - namespace
+                type: object
+            required:
+            - forProvider
+            type: object
+            x-kubernetes-validations:
+            - message: spec.forProvider.name is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || (has(self.initProvider) && has(self.initProvider.name))'
+          status:
+            description: OntapVolumeStatus defines the observed state of OntapVolume.
+            properties:
+              atProvider:
+                properties:
+                  aggregateConfiguration:
+                    description: Aggregate configuration only applies to FLEXGROUP
+                      volumes. See [aggregate_configuration Block] for details.
+                    properties:
+                      aggregates:
+                        description: Names of the aggregates on which the volume will
+                          be created. Each aggregate needs to be in the format aggrX
+                          where X is the number of the aggregate.
+                        items:
+                          type: string
+                        type: array
+                      constituentsPerAggregate:
+                        description: Number of constituents within the FlexGroup per
+                          storage aggregate. the default value is 8.
+                        type: number
+                      totalConstituents:
+                        description: Total amount of constituents for a FLEXGROUP
+                          volume. This would equal constituents_per_aggregate x aggregates.
+                        type: number
+                    type: object
+                  arn:
+                    description: ARN of the volune.
+                    type: string
+                  bypassSnaplockEnterpriseRetention:
+                    description: Whether to allow a SnapLock administrator to delete
+                      an FSx for ONTAP SnapLock Enterprise volume with unexpired write
+                      once, read many (WORM) files. This configuration must be applied
+                      separately before attempting to delete the resource to have
+                      the desired behavior. Defaults to false.
+                    type: boolean
+                  copyTagsToBackups:
+                    description: Whether tags for the volume should be copied to backups.
+                      This value defaults to false.
+                    type: boolean
+                  fileSystemId:
+                    description: File system for the volume, e.g. fs-12345679
+                    type: string
+                  finalBackupTags:
+                    additionalProperties:
+                      type: string
+                    description: Map of tags to apply to the volume's final backup.
+                    type: object
+                    x-kubernetes-map-type: granular
+                  flexcacheEndpointType:
+                    description: FlexCache endpoint type of the volume, Valid values
+                      are NONE, ORIGIN, CACHE. Default value is NONE. These can be
+                      set by the ONTAP CLI or API and are use with FlexCache feature.
+                    type: string
+                  id:
+                    description: Identifier of the volume, e.g., fsvol-12345678
+                    type: string
+                  junctionPath:
+                    description: Location in the storage virtual machine's namespace
+                      where the volume is mounted. The junction_path must have a leading
+                      forward slash, such as /vol3
+                    type: string
+                  name:
+                    description: Name of the Volume. You can use a maximum of 203
+                      alphanumeric characters, plus the underscore (_) special character.
+                    type: string
+                  ontapVolumeType:
+                    description: Type of volume, valid values are RW, DP. Default
+                      value is RW. These can be set by the ONTAP CLI or API. This
+                      setting is used as part of migration and replication Migrating
+                      to Amazon FSx for NetApp ONTAP
+                    type: string
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
+                  securityStyle:
+                    description: Volume security style, Valid values are UNIX, NTFS,
+                      and MIXED.
+                    type: string
+                  sizeInBytes:
+                    description: Size of the volume, in megabytes (MB), that you are
+                      creating. Can be used for any size but required for volumes
+                      over 2 PB. Either size_in_bytes or size_in_megabytes must be
+                      specified. Minimum size for FLEXGROUP volumes are 100GiB per
+                      constituent.
+                    type: string
+                  sizeInMegabytes:
+                    description: Size of the volume, in megabytes (MB), that you are
+                      creating. Supported when creating volumes under 2 PB. Either
+                      size_in_bytes or size_in_megabytes must be specified. Minimum
+                      size for FLEXGROUP volumes are 100GiB per constituent.
+                    type: number
+                  skipFinalBackup:
+                    description: Whether to skip the default final backup taken when
+                      the volume is deleted. This configuration must be applied separately
+                      before attempting to delete the resource to have the desired
+                      behavior. Defaults to false.
+                    type: boolean
+                  snaplockConfiguration:
+                    description: SnapLock configuration for an FSx for ONTAP volume.
+                      See snaplock_configuration Block for details.
+                    properties:
+                      auditLogVolume:
+                        description: Whether to enable the audit log volume for an
+                          FSx for ONTAP SnapLock volume. The default value is false.
+                        type: boolean
+                      autocommitPeriod:
+                        description: Configuration object for setting the autocommit
+                          period of files in an FSx for ONTAP SnapLock volume. See
+                          autocommit_period Block for details.
+                        properties:
+                          type:
+                            description: 'Type of time for the autocommit period of
+                              a file in an FSx for ONTAP SnapLock volume. Setting
+                              this value to NONE disables autocommit. Valid values:
+                              MINUTES, HOURS, DAYS, MONTHS, YEARS, NONE.'
+                            type: string
+                          value:
+                            description: Amount of time for the autocommit period
+                              of a file in an FSx for ONTAP SnapLock volume.
+                            type: number
+                        type: object
+                      privilegedDelete:
+                        description: 'Whether privileged delete is enabled, disabled,
+                          or permanently disabled on an FSx for ONTAP SnapLock Enterprise
+                          volume. Valid values: DISABLED, ENABLED, PERMANENTLY_DISABLED.
+                          The default value is DISABLED.'
+                        type: string
+                      retentionPeriod:
+                        description: Retention period of an FSx for ONTAP SnapLock
+                          volume. See retention_period Block for details.
+                        properties:
+                          defaultRetention:
+                            description: Retention period assigned to a write once,
+                              read many (WORM) file by default if an explicit retention
+                              period is not set for an FSx for ONTAP SnapLock volume.
+                              The default retention period must be greater than or
+                              equal to the minimum retention period and less than
+                              or equal to the maximum retention period. See default_retention
+                              Block for details.
+                            properties:
+                              type:
+                                description: 'Type of time for the autocommit period
+                                  of a file in an FSx for ONTAP SnapLock volume. Setting
+                                  this value to NONE disables autocommit. Valid values:
+                                  MINUTES, HOURS, DAYS, MONTHS, YEARS, NONE.'
+                                type: string
+                              value:
+                                description: Amount of time for the autocommit period
+                                  of a file in an FSx for ONTAP SnapLock volume.
+                                type: number
+                            type: object
+                          maximumRetention:
+                            description: Longest retention period that can be assigned
+                              to a WORM file on an FSx for ONTAP SnapLock volume.
+                              See maximum_retention Block for details.
+                            properties:
+                              type:
+                                description: 'Type of time for the autocommit period
+                                  of a file in an FSx for ONTAP SnapLock volume. Setting
+                                  this value to NONE disables autocommit. Valid values:
+                                  MINUTES, HOURS, DAYS, MONTHS, YEARS, NONE.'
+                                type: string
+                              value:
+                                description: Amount of time for the autocommit period
+                                  of a file in an FSx for ONTAP SnapLock volume.
+                                type: number
+                            type: object
+                          minimumRetention:
+                            description: Shortest retention period that can be assigned
+                              to a WORM file on an FSx for ONTAP SnapLock volume.
+                              See minimum_retention Block for details.
+                            properties:
+                              type:
+                                description: 'Type of time for the autocommit period
+                                  of a file in an FSx for ONTAP SnapLock volume. Setting
+                                  this value to NONE disables autocommit. Valid values:
+                                  MINUTES, HOURS, DAYS, MONTHS, YEARS, NONE.'
+                                type: string
+                              value:
+                                description: Amount of time for the autocommit period
+                                  of a file in an FSx for ONTAP SnapLock volume.
+                                type: number
+                            type: object
+                        type: object
+                      snaplockType:
+                        description: 'Retention mode of an FSx for ONTAP SnapLock
+                          volume. After it is set, it can''t be changed. Valid values:
+                          COMPLIANCE, ENTERPRISE.'
+                        type: string
+                      volumeAppendModeEnabled:
+                        description: Whether to enable volume-append mode on an FSx
+                          for ONTAP SnapLock volume. The default value is false.
+                        type: boolean
+                    type: object
+                  snapshotPolicy:
+                    description: Snapshot policy for the volume. See snapshot policies
+                      in the Amazon FSx ONTAP User Guide
+                    type: string
+                  storageEfficiencyEnabled:
+                    description: Whether to enable deduplication, compression, and
+                      compaction storage efficiency features on the volume.
+                    type: boolean
+                  storageVirtualMachineId:
+                    description: Storage virtual machine in which to create the volume.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                    x-kubernetes-map-type: granular
+                  tagsAll:
+                    additionalProperties:
+                      type: string
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
+                    type: object
+                    x-kubernetes-map-type: granular
+                  tieringPolicy:
+                    description: Data tiering policy for an FSx for ONTAP volume.
+                      See tiering_policy Block for details.
+                    properties:
+                      coolingPeriod:
+                        description: Number of days that user data in a volume must
+                          remain inactive before it is considered "cold" and moved
+                          to the capacity pool. Used with AUTO and SNAPSHOT_ONLY tiering
+                          policies only. Valid values are whole numbers between 2
+                          and 183. Default values are 31 days for AUTO and 2 days
+                          for SNAPSHOT_ONLY.
+                        type: number
+                      name:
+                        description: Tiering policy for the ONTAP volume for moving
+                          data to the capacity pool storage. Valid values are SNAPSHOT_ONLY,
+                          AUTO, ALL, NONE. Default value is SNAPSHOT_ONLY.
+                        type: string
+                    type: object
+                  uuid:
+                    description: Volume's UUID (universally unique identifier).
+                    type: string
+                  volumeStyle:
+                    description: Styles of volume, valid values are FLEXVOL, FLEXGROUP.
+                      Default value is FLEXVOL. FLEXGROUPS have a larger minimum and
+                      maximum size. See Volume Styles for more details. Volume Styles
+                    type: string
+                  volumeType:
+                    description: Type of volume, currently the only valid value is
+                      ONTAP.
+                    type: string
+                type: object
+              conditions:
+                description: Conditions of the resource.
+                items:
+                  description: A Condition that may apply to a resource.
+                  properties:
+                    lastTransitionTime:
+                      description: |-
+                        LastTransitionTime is the last time this condition transitioned from one
+                        status to another.
+                      format: date-time
+                      type: string
+                    message:
+                      description: |-
+                        A Message containing details about this condition's last transition from
+                        one status to another, if any.
+                      type: string
+                    observedGeneration:
+                      description: |-
+                        ObservedGeneration represents the .metadata.generation that the condition was set based upon.
+                        For instance, if .metadata.generation is currently 12, but the .status.conditions[x].observedGeneration is 9, the condition is out of date
+                        with respect to the current state of the instance.
+                      format: int64
+                      type: integer
+                    reason:
+                      description: A Reason for this condition's last transition from
+                        one status to another.
+                      type: string
+                    status:
+                      description: Status of this condition; is it currently True,
+                        False, or Unknown?
+                      type: string
+                    type:
+                      description: |-
+                        Type of this condition. At most one of each condition type may apply to
+                        a resource at any point in time.
+                      type: string
+                  required:
+                  - lastTransitionTime
+                  - reason
+                  - status
+                  - type
+                  type: object
+                type: array
+                x-kubernetes-list-map-keys:
+                - type
+                x-kubernetes-list-type: map
+              lastHandledReconcileAt:
+                description: |-
+                  LastHandledReconcileAt holds the value of the most recent
+                  reconcile-requested-at annotation token that the controller has
+                  processed. Users can compare this to the annotation to determine
+                  whether a reconcile request has been handled.
+                type: string
+              observedGeneration:
+                description: |-
+                  ObservedGeneration is the latest metadata.generation
+                  which resulted in either a ready state, or stalled due to error
+                  it can not recover from without human intervention.
+                format: int64
+                type: integer
+            type: object
+        required:
+        - spec
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}

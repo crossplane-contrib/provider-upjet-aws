@@ -1,0 +1,97 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+# VPC endpoint access can only be authorized for domains that are deployed in a VPC.
+apiVersion: opensearch.aws.upbound.io/v1beta1
+kind: AuthorizeVPCEndpointAccess
+metadata:
+  annotations:
+    meta.upbound.io/example-id: opensearch/v1beta1/authorizevpcendpointaccess
+    uptest.upbound.io/timeout: "3600"
+  labels:
+    testing.upbound.io/example-name: example-authvpcendpoint
+  name: example-authvpcendpoint
+spec:
+  forProvider:
+    account: "${data.aws_account_id}"
+    domainNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-authvpcendpoint
+    region: us-west-1
+---
+apiVersion: opensearch.aws.upbound.io/v1beta1
+kind: Domain
+metadata:
+  annotations:
+    meta.upbound.io/example-id: opensearch/v1beta1/authorizevpcendpointaccess
+    uptest.upbound.io/timeout: "3600"
+  labels:
+    testing.upbound.io/example-name: example-authvpcendpoint
+  name: example-authvpcendpoint
+spec:
+  forProvider:
+    clusterConfig:
+      - instanceCount: 1
+        instanceType: t3.small.search
+    domainName: example-authvpcendpoint
+    ebsOptions:
+      - ebsEnabled: true
+        volumeSize: 10
+        volumeType: gp2
+    engineVersion: OpenSearch_2.11
+    region: us-west-1
+    vpcOptions:
+      - securityGroupIdRefs:
+          - name: example-authvpcendpoint
+        subnetIdRefs:
+          - name: example-authvpcendpoint-1
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: SecurityGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: opensearch/v1beta1/authorizevpcendpointaccess
+  labels:
+    testing.upbound.io/example-name: example-authvpcendpoint
+  name: example-authvpcendpoint
+spec:
+  forProvider:
+    description: Security group for the OpenSearch domain
+    name: example-authvpcendpoint
+    region: us-west-1
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-authvpcendpoint
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: opensearch/v1beta1/authorizevpcendpointaccess
+  labels:
+    testing.upbound.io/example-name: example-authvpcendpoint
+  name: example-authvpcendpoint-1
+spec:
+  forProvider:
+    # Zone IDs are the same physical zone in every account, unlike zone names
+    # such as us-west-1a, which are mapped differently per account.
+    availabilityZoneId: usw1-az1
+    cidrBlock: 172.16.10.0/24
+    region: us-west-1
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-authvpcendpoint
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: VPC
+metadata:
+  annotations:
+    meta.upbound.io/example-id: opensearch/v1beta1/authorizevpcendpointaccess
+  labels:
+    testing.upbound.io/example-name: example-authvpcendpoint
+  name: example-authvpcendpoint
+spec:
+  forProvider:
+    cidrBlock: 172.16.0.0/16
+    region: us-west-1

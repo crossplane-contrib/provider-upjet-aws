@@ -175,11 +175,6 @@ spec:
                     - name
                     - namespace
                     type: object
-                  pending:
-                    description: Tracks pending modifications returned by the AWS
-                      MQ API. This field allows you to monitor changes that are actively
-                      being processed before they are fully applied.
-                    type: object
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
@@ -309,11 +304,6 @@ spec:
                     - name
                     - namespace
                     type: object
-                  pending:
-                    description: Tracks pending modifications returned by the AWS
-                      MQ API. This field allows you to monitor changes that are actively
-                      being processed before they are fully applied.
-                    type: object
                   replicationUser:
                     description: Whether the user is a replication user.
                     type: boolean
@@ -436,23 +426,18 @@ spec:
                   id:
                     type: string
                   pending:
-                    description: Tracks pending modifications returned by the AWS
-                      MQ API. This field allows you to monitor changes that are actively
-                      being processed before they are fully applied.
+                    description: 'Tracks pending modifications returned by the AWS
+                      MQ API: the type of pending change (CREATE, UPDATE or DELETE)
+                      and the pending console_access and groups values while a change
+                      is being processed.'
                     properties:
                       consoleAccess:
-                        description: The pending console access value if a change
-                          to console access is being processed.
                         type: boolean
                       groups:
-                        description: The pending groups value if a change to groups
-                          is being processed.
                         items:
                           type: string
                         type: array
                       pendingChange:
-                        description: The type of pending change. Valid values are
-                          CREATE, UPDATE, or DELETE.
                         type: string
                     type: object
                   region:

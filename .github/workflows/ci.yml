@@ -14,7 +14,7 @@ on:
 
 jobs:
   detect-noop:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     outputs:
       noop: ${{ steps.noop.outputs.should_skip }}
     steps:
@@ -26,7 +26,7 @@ jobs:
           do_not_skip: '["workflow_dispatch", "schedule", "push"]'
 
   report-breaking-changes:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     needs: detect-noop
     if: needs.detect-noop.outputs.noop != 'true'
     steps:
@@ -150,7 +150,7 @@ jobs:
         run: head -1 _output/skipped_resources.csv
 
       - name: Publish skipped resources CSV to Github
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: skipped_resources
           path: _output/skipped_resources.csv
@@ -188,10 +188,17 @@ jobs:
         run: make -j2 GO_TEST_FLAGS="-timeout 15m" test
 
   local-deploy:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     needs: detect-noop
     if: needs.detect-noop.outputs.noop != 'true'
     steps:
+      # Temporary workaround: ubuntu-26.04 mounts /tmp as a tmpfs capped at about 8 GiB,
+      # which makes large builds fail with "disk quota exceeded". RUNNER_TEMP lives on the
+      # root disk. Remove once GitHub's ubuntu-26.04 rollout keeps /tmp on disk.
+      # See https://github.com/actions/runner-images/issues/14777
+      - name: Keep temp files off the size-capped tmpfs /tmp of ubuntu-26.04 runners
+        run: echo "TMPDIR=$RUNNER_TEMP" >> "$GITHUB_ENV"
+
       - name: Cleanup Disk
         uses: jlumbroso/free-disk-space@ceedf095f4ec1a097402bc6bd80831f2e1a6fde6 # v2.0.0
         with:
@@ -218,7 +225,7 @@ jobs:
         run: make local-deploy
 
   check-examples:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     needs: detect-noop
     if: ${{ needs.detect-noop.outputs.noop != 'true' }}
 
@@ -233,11 +240,17 @@ jobs:
           ./scripts/check-examples.py package/crds examples
 
   example-lint:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     needs: detect-noop
     if: ${{ needs.detect-noop.outputs.noop != 'true' }}
 
     steps:
+      - name: Cleanup Disk
+        uses: jlumbroso/free-disk-space@ceedf095f4ec1a097402bc6bd80831f2e1a6fde6 # v2.0.0
+        with:
+          large-packages: false
+          swap-storage: false
+
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:

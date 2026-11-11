@@ -17,14 +17,10 @@ type PendingInitParameters struct {
 }
 
 type PendingObservation struct {
-
-	// The pending console access value if a change to console access is being processed.
 	ConsoleAccess *bool `json:"consoleAccess,omitempty" tf:"console_access,omitempty"`
 
-	// The pending groups value if a change to groups is being processed.
 	Groups []*string `json:"groups,omitempty" tf:"groups,omitempty"`
 
-	// The type of pending change. Valid values are CREATE, UPDATE, or DELETE.
 	PendingChange *string `json:"pendingChange,omitempty" tf:"pending_change,omitempty"`
 }
 
@@ -54,9 +50,6 @@ type UserInitParameters struct {
 	// The password for the user. Must be at least 12 characters long.
 	PasswordSecretRef v2.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
-	// Tracks pending modifications returned by the AWS MQ API. This field allows you to monitor changes that are actively being processed before they are fully applied.
-	Pending *PendingInitParameters `json:"pending,omitempty" tf:"pending,omitempty"`
-
 	// Whether the user is a replication user.
 	ReplicationUser *bool `json:"replicationUser,omitempty" tf:"replication_user,omitempty"`
 
@@ -77,7 +70,7 @@ type UserObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Tracks pending modifications returned by the AWS MQ API. This field allows you to monitor changes that are actively being processed before they are fully applied.
+	// Tracks pending modifications returned by the AWS MQ API: the type of pending change (CREATE, UPDATE or DELETE) and the pending console_access and groups values while a change is being processed.
 	Pending *PendingObservation `json:"pending,omitempty" tf:"pending,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
@@ -116,10 +109,6 @@ type UserParameters struct {
 	// The password for the user. Must be at least 12 characters long.
 	// +kubebuilder:validation:Optional
 	PasswordSecretRef v2.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
-
-	// Tracks pending modifications returned by the AWS MQ API. This field allows you to monitor changes that are actively being processed before they are fully applied.
-	// +kubebuilder:validation:Optional
-	Pending *PendingParameters `json:"pending,omitempty" tf:"pending,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +kubebuilder:validation:Required

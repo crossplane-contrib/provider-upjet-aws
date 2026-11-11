@@ -1,0 +1,150 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+# VPC endpoints are only supported for domains that are deployed in a VPC.
+# The endpoint is created in a separate "client" VPC that accesses the domain.
+apiVersion: opensearch.aws.upbound.io/v1beta1
+kind: VPCEndpoint
+metadata:
+  annotations:
+    meta.upbound.io/example-id: opensearch/v1beta1/vpcendpoint
+    uptest.upbound.io/timeout: "3600"
+  labels:
+    testing.upbound.io/example-name: example-vpcendpoint
+  name: example-vpcendpoint
+spec:
+  forProvider:
+    domainArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-vpcendpoint
+    region: us-west-1
+    vpcOptions:
+      subnetIdsRefs:
+        - name: example-vpcendpoint-client-1
+        - name: example-vpcendpoint-client-2
+---
+apiVersion: opensearch.aws.upbound.io/v1beta1
+kind: Domain
+metadata:
+  annotations:
+    meta.upbound.io/example-id: opensearch/v1beta1/vpcendpoint
+    uptest.upbound.io/timeout: "3600"
+  labels:
+    testing.upbound.io/example-name: example-vpcendpoint
+  name: example-vpcendpoint
+spec:
+  forProvider:
+    clusterConfig:
+      - instanceCount: 1
+        instanceType: t3.small.search
+    domainName: example-vpcendpoint
+    ebsOptions:
+      - ebsEnabled: true
+        volumeSize: 10
+        volumeType: gp2
+    engineVersion: OpenSearch_2.11
+    region: us-west-1
+    vpcOptions:
+      - securityGroupIdRefs:
+          - name: example-vpcendpoint
+        subnetIdRefs:
+          - name: example-vpcendpoint-1
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: SecurityGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: opensearch/v1beta1/vpcendpoint
+  labels:
+    testing.upbound.io/example-name: example-vpcendpoint
+  name: example-vpcendpoint
+spec:
+  forProvider:
+    description: Security group for the OpenSearch domain
+    name: example-vpcendpoint
+    region: us-west-1
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-vpcendpoint
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: opensearch/v1beta1/vpcendpoint
+  labels:
+    testing.upbound.io/example-name: example-vpcendpoint
+  name: example-vpcendpoint-1
+spec:
+  forProvider:
+    # Zone IDs are the same physical zone in every account, unlike zone names
+    # such as us-west-1a, which are mapped differently per account.
+    availabilityZoneId: usw1-az1
+    cidrBlock: 172.16.10.0/24
+    region: us-west-1
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-vpcendpoint
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: VPC
+metadata:
+  annotations:
+    meta.upbound.io/example-id: opensearch/v1beta1/vpcendpoint
+  labels:
+    testing.upbound.io/example-name: example-vpcendpoint
+  name: example-vpcendpoint
+spec:
+  forProvider:
+    cidrBlock: 172.16.0.0/16
+    region: us-west-1
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: opensearch/v1beta1/vpcendpoint
+  labels:
+    testing.upbound.io/example-name: example-vpcendpoint-client
+  name: example-vpcendpoint-client-1
+spec:
+  forProvider:
+    availabilityZoneId: usw1-az1
+    cidrBlock: 10.0.0.0/24
+    region: us-west-1
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-vpcendpoint-client
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: opensearch/v1beta1/vpcendpoint
+  labels:
+    testing.upbound.io/example-name: example-vpcendpoint-client
+  name: example-vpcendpoint-client-2
+spec:
+  forProvider:
+    availabilityZoneId: usw1-az3
+    cidrBlock: 10.0.1.0/24
+    region: us-west-1
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-vpcendpoint-client
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: VPC
+metadata:
+  annotations:
+    meta.upbound.io/example-id: opensearch/v1beta1/vpcendpoint
+  labels:
+    testing.upbound.io/example-name: example-vpcendpoint-client
+  name: example-vpcendpoint-client
+spec:
+  forProvider:
+    cidrBlock: 10.0.0.0/16
+    enableDnsHostnames: true
+    enableDnsSupport: true
+    region: us-west-1

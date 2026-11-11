@@ -141,11 +141,6 @@ func (in *UserInitParameters) DeepCopyInto(out *UserInitParameters) {
 		}
 	}
 	out.PasswordSecretRef = in.PasswordSecretRef
-	if in.Pending != nil {
-		in, out := &in.Pending, &out.Pending
-		*out = new(PendingInitParameters)
-		**out = **in
-	}
 	if in.ReplicationUser != nil {
 		in, out := &in.ReplicationUser, &out.ReplicationUser
 		*out = new(bool)
@@ -296,11 +291,6 @@ func (in *UserParameters) DeepCopyInto(out *UserParameters) {
 		}
 	}
 	out.PasswordSecretRef = in.PasswordSecretRef
-	if in.Pending != nil {
-		in, out := &in.Pending, &out.Pending
-		*out = new(PendingParameters)
-		**out = **in
-	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
 		*out = new(string)
