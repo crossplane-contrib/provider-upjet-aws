@@ -10073,10 +10073,8 @@ func (in *ParsingConfigurationBedrockFoundationModelConfigurationInitParameters)
 	}
 	if in.ParsingPrompt != nil {
 		in, out := &in.ParsingPrompt, &out.ParsingPrompt
-		*out = make([]ParsingPromptInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(ParsingPromptInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -10105,10 +10103,8 @@ func (in *ParsingConfigurationBedrockFoundationModelConfigurationObservation) De
 	}
 	if in.ParsingPrompt != nil {
 		in, out := &in.ParsingPrompt, &out.ParsingPrompt
-		*out = make([]ParsingPromptObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(ParsingPromptObservation)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -10137,10 +10133,8 @@ func (in *ParsingConfigurationBedrockFoundationModelConfigurationParameters) Dee
 	}
 	if in.ParsingPrompt != nil {
 		in, out := &in.ParsingPrompt, &out.ParsingPrompt
-		*out = make([]ParsingPromptParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(ParsingPromptParameters)
+		(*in).DeepCopyInto(*out)
 	}
 }
 

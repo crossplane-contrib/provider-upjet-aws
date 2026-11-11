@@ -955,7 +955,7 @@ type ParsingConfigurationBedrockFoundationModelConfigurationInitParameters struc
 	ParsingModality *string `json:"parsingModality,omitempty" tf:"parsing_modality,omitempty"`
 
 	// Instructions for interpreting the contents of the document. See parsing_prompt Block for details.
-	ParsingPrompt []ParsingPromptInitParameters `json:"parsingPrompt,omitempty" tf:"parsing_prompt,omitempty"`
+	ParsingPrompt *ParsingPromptInitParameters `json:"parsingPrompt,omitempty" tf:"parsing_prompt,omitempty"`
 }
 
 type ParsingConfigurationBedrockFoundationModelConfigurationObservation struct {
@@ -967,7 +967,7 @@ type ParsingConfigurationBedrockFoundationModelConfigurationObservation struct {
 	ParsingModality *string `json:"parsingModality,omitempty" tf:"parsing_modality,omitempty"`
 
 	// Instructions for interpreting the contents of the document. See parsing_prompt Block for details.
-	ParsingPrompt []ParsingPromptObservation `json:"parsingPrompt,omitempty" tf:"parsing_prompt,omitempty"`
+	ParsingPrompt *ParsingPromptObservation `json:"parsingPrompt,omitempty" tf:"parsing_prompt,omitempty"`
 }
 
 type ParsingConfigurationBedrockFoundationModelConfigurationParameters struct {
@@ -982,7 +982,7 @@ type ParsingConfigurationBedrockFoundationModelConfigurationParameters struct {
 
 	// Instructions for interpreting the contents of the document. See parsing_prompt Block for details.
 	// +kubebuilder:validation:Optional
-	ParsingPrompt []ParsingPromptParameters `json:"parsingPrompt,omitempty" tf:"parsing_prompt,omitempty"`
+	ParsingPrompt *ParsingPromptParameters `json:"parsingPrompt,omitempty" tf:"parsing_prompt,omitempty"`
 }
 
 type ParsingConfigurationInitParameters struct {

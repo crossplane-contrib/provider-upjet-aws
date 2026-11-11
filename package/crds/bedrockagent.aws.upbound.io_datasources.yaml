@@ -1283,14 +1283,12 @@ spec:
                               parsingPrompt:
                                 description: Instructions for interpreting the contents
                                   of the document. See parsing_prompt Block for details.
-                                items:
-                                  properties:
-                                    parsingPromptString:
-                                      description: Instructions for interpreting the
-                                        contents of the document.
-                                      type: string
-                                  type: object
-                                type: array
+                                properties:
+                                  parsingPromptString:
+                                    description: Instructions for interpreting the
+                                      contents of the document.
+                                    type: string
+                                type: object
                             type: object
                           parsingStrategy:
                             description: 'Parsing strategy to use. Valid values: BEDROCK_FOUNDATION_MODEL,
@@ -2439,14 +2437,12 @@ spec:
                               parsingPrompt:
                                 description: Instructions for interpreting the contents
                                   of the document. See parsing_prompt Block for details.
-                                items:
-                                  properties:
-                                    parsingPromptString:
-                                      description: Instructions for interpreting the
-                                        contents of the document.
-                                      type: string
-                                  type: object
-                                type: array
+                                properties:
+                                  parsingPromptString:
+                                    description: Instructions for interpreting the
+                                      contents of the document.
+                                    type: string
+                                type: object
                             type: object
                           parsingStrategy:
                             description: 'Parsing strategy to use. Valid values: BEDROCK_FOUNDATION_MODEL,
@@ -3240,14 +3236,12 @@ spec:
                               parsingPrompt:
                                 description: Instructions for interpreting the contents
                                   of the document. See parsing_prompt Block for details.
-                                items:
-                                  properties:
-                                    parsingPromptString:
-                                      description: Instructions for interpreting the
-                                        contents of the document.
-                                      type: string
-                                  type: object
-                                type: array
+                                properties:
+                                  parsingPromptString:
+                                    description: Instructions for interpreting the
+                                      contents of the document.
+                                    type: string
+                                type: object
                             type: object
                           parsingStrategy:
                             description: 'Parsing strategy to use. Valid values: BEDROCK_FOUNDATION_MODEL,

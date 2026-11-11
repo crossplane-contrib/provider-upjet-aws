@@ -107,6 +107,7 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		r.AddSingletonListConversion("vector_ingestion_configuration[*].parsing_configuration", "vectorIngestionConfiguration[*].parsingConfiguration")
 		r.AddSingletonListConversion("vector_ingestion_configuration[*].parsing_configuration[*].bedrock_data_automation_configuration", "vectorIngestionConfiguration[*].parsingConfiguration[*].bedrockDataAutomationConfiguration")
 		r.AddSingletonListConversion("vector_ingestion_configuration[*].parsing_configuration[*].bedrock_foundation_model_configuration", "vectorIngestionConfiguration[*].parsingConfiguration[*].bedrockFoundationModelConfiguration")
+		r.AddSingletonListConversion("vector_ingestion_configuration[*].parsing_configuration[*].bedrock_foundation_model_configuration[*].parsing_prompt", "vectorIngestionConfiguration[*].parsingConfiguration[*].bedrockFoundationModelConfiguration[*].parsingPrompt")
 		r.AddSingletonListConversion("vector_ingestion_configuration[*].parsing_configuration[*].bedrock_foundation_model_configuration[*].enrichment_strategy_configuration", "vectorIngestionConfiguration[*].parsingConfiguration[*].bedrockFoundationModelConfiguration[*].enrichmentStrategyConfiguration")
 	})
 
