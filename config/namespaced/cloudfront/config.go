@@ -7,6 +7,7 @@ package cloudfront
 import (
 	"github.com/crossplane/upjet/v2/pkg/config"
 
+	"github.com/upbound/provider-aws/v2/config/cloudfrontpolicy"
 	"github.com/upbound/provider-aws/v2/config/namespaced/common"
 )
 
@@ -15,6 +16,22 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_cloudfront_distribution", func(r *config.Resource) {
 		r.UseAsync = true
 		delete(r.References, "origin.domain_name")
+		// Extract the policy ID from status.atProvider.id: the external name of an
+		// observed policy can still hold the policy name it was resolved from.
+		for _, block := range []string{"default_cache_behavior", "ordered_cache_behavior"} {
+			r.References[block+".cache_policy_id"] = config.Reference{
+				TerraformName: "aws_cloudfront_cache_policy",
+				Extractor:     common.PathTerraformIDExtractor,
+			}
+			r.References[block+".origin_request_policy_id"] = config.Reference{
+				TerraformName: "aws_cloudfront_origin_request_policy",
+				Extractor:     common.PathTerraformIDExtractor,
+			}
+			r.References[block+".response_headers_policy_id"] = config.Reference{
+				TerraformName: "aws_cloudfront_response_headers_policy",
+				Extractor:     common.PathTerraformIDExtractor,
+			}
+		}
 		// Temporary edit until example generation pipeline fix
 		for i, exp := range r.MetaResource.Examples {
 			if exp.Name == "s3_distribution" {
@@ -53,6 +70,11 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 			Extractor:     common.PathTerraformIDExtractor,
 		}
 	})
+
+	// Observe policies by name: resolve a non-UUID ID to the policy ID on read.
+	for _, name := range []string{"aws_cloudfront_cache_policy", "aws_cloudfront_origin_request_policy", "aws_cloudfront_response_headers_policy"} {
+		p.AddResourceConfigurator(name, cloudfrontpolicy.ResolveNameOnRead)
+	}
 
 	p.AddResourceConfigurator("aws_cloudfront_vpc_origin", func(r *config.Resource) {
 		r.AddSingletonListConversion("vpc_origin_endpoint_config", "vpcOriginEndpointConfig")
