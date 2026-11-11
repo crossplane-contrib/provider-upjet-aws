@@ -301,59 +301,45 @@ spec:
                             description: Recurring schedule on which the connector
                               automatically syncs this data source. See sync_schedule
                               Block for details.
-                            items:
-                              properties:
-                                daily:
-                                  description: Daily sync that runs once a day at
-                                    a system-chosen off-peak time. The run time is
-                                    not configurable. See daily Block for details.
-                                  items:
-                                    type: object
-                                  type: array
-                                monthly:
-                                  description: Monthly sync that runs once a month
-                                    on the specified day of the month. See monthly
-                                    Block for details.
-                                  items:
+                            properties:
+                              daily:
+                                description: Daily sync that runs once a day at a
+                                  system-chosen off-peak time. The run time is not
+                                  configurable. See daily Block for details.
+                                type: object
+                              monthly:
+                                description: Monthly sync that runs once a month on
+                                  the specified day of the month. See monthly Block
+                                  for details.
+                                properties:
+                                  dayOfMonth:
+                                    description: Day of the month on which the monthly
+                                      sync runs. See day_of_month Block for details.
                                     properties:
-                                      dayOfMonth:
-                                        description: Day of the month on which the
-                                          monthly sync runs. See day_of_month Block
+                                      dayNumber:
+                                        description: Specific day of the month, from
+                                          1 to 28.
+                                        type: number
+                                      lastDayOfMonth:
+                                        description: Configure this option to run
+                                          the monthly sync on the last calendar day
+                                          of each month. See last_day_of_month Block
                                           for details.
-                                        items:
-                                          properties:
-                                            dayNumber:
-                                              description: Specific day of the month,
-                                                from 1 to 28.
-                                              type: number
-                                            lastDayOfMonth:
-                                              description: Configure this option to
-                                                run the monthly sync on the last calendar
-                                                day of each month. See last_day_of_month
-                                                Block for details.
-                                              items:
-                                                type: object
-                                              type: array
-                                          type: object
-                                        type: array
+                                        type: object
                                     type: object
-                                  type: array
-                                weekly:
-                                  description: Weekly sync that runs once a week on
-                                    the specified day of the week. See weekly Block
-                                    for details.
-                                  items:
-                                    properties:
-                                      dayOfWeek:
-                                        description: 'Day of the week on which the
-                                          weekly sync runs. Valid values: SUNDAY,
-                                          MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY,
-                                          SATURDAY.'
-                                        type: string
-                                    type: object
-                                  type: array
-                              type: object
-                            type: array
+                                type: object
+                              weekly:
+                                description: Weekly sync that runs once a week on
+                                  the specified day of the week. See weekly Block
+                                  for details.
+                                properties:
+                                  dayOfWeek:
+                                    description: 'Day of the week on which the weekly
+                                      sync runs. Valid values: SUNDAY, MONDAY, TUESDAY,
+                                      WEDNESDAY, THURSDAY, FRIDAY, SATURDAY.'
+                                    type: string
+                                type: object
+                            type: object
                         type: object
                       s3Configuration:
                         description: Configuration details for the S3 object that
@@ -1138,40 +1124,35 @@ spec:
                           the knowledge base uses Amazon Neptune Analytics (GraphRAG)
                           storage. See context_enrichment_configuration Block for
                           details.
-                        items:
-                          properties:
-                            bedrockFoundationModelConfiguration:
-                              description: Settings for a foundation model used to
-                                parse documents in a data source. See bedrock_foundation_model_configuration
-                                Block for details.
-                              items:
-                                properties:
-                                  enrichmentStrategyConfiguration:
-                                    description: Strategy used to enrich the context
-                                      of data source documents. See context_enrichment_configuration.bedrock_foundation_model_configuration.enrichment_strategy_configuration
-                                      Block for details.
-                                    items:
-                                      properties:
-                                        method:
-                                          description: 'Method used to enrich the
-                                            context of data source documents. Valid
-                                            value: CHUNK_ENTITY_EXTRACTION.'
-                                          type: string
-                                      type: object
-                                    type: array
-                                  modelArn:
-                                    description: ARN of the cross-Region inference
-                                      profile used for context enrichment.
-                                    type: string
-                                type: object
-                              type: array
-                            type:
-                              description: Type of filtering to apply to objects or
-                                content of the data source. For example, the PATTERN
-                                type uses regular expression patterns to filter content.
-                              type: string
-                          type: object
-                        type: array
+                        properties:
+                          bedrockFoundationModelConfiguration:
+                            description: Settings for a foundation model used to parse
+                              documents in a data source. See bedrock_foundation_model_configuration
+                              Block for details.
+                            properties:
+                              enrichmentStrategyConfiguration:
+                                description: Strategy used to enrich the context of
+                                  data source documents. See context_enrichment_configuration.bedrock_foundation_model_configuration.enrichment_strategy_configuration
+                                  Block for details.
+                                items:
+                                  properties:
+                                    method:
+                                      description: 'Method used to enrich the context
+                                        of data source documents. Valid value: CHUNK_ENTITY_EXTRACTION.'
+                                      type: string
+                                  type: object
+                                type: array
+                              modelArn:
+                                description: ARN of the cross-Region inference profile
+                                  used for context enrichment.
+                                type: string
+                            type: object
+                          type:
+                            description: Type of filtering to apply to objects or
+                              content of the data source. For example, the PATTERN
+                              type uses regular expression patterns to filter content.
+                            type: string
+                        type: object
                       customTransformationConfiguration:
                         description: Configuration for custom transformation of data
                           source documents. See custom_transformation_configuration
@@ -1331,12 +1312,14 @@ spec:
                               parsingPrompt:
                                 description: Instructions for interpreting the contents
                                   of the document. See parsing_prompt Block for details.
-                                properties:
-                                  parsingPromptString:
-                                    description: Instructions for interpreting the
-                                      contents of the document.
-                                    type: string
-                                type: object
+                                items:
+                                  properties:
+                                    parsingPromptString:
+                                      description: Instructions for interpreting the
+                                        contents of the document.
+                                      type: string
+                                  type: object
+                                type: array
                             type: object
                           parsingStrategy:
                             description: 'Parsing strategy to use. Valid values: BEDROCK_FOUNDATION_MODEL,
@@ -1602,59 +1585,45 @@ spec:
                             description: Recurring schedule on which the connector
                               automatically syncs this data source. See sync_schedule
                               Block for details.
-                            items:
-                              properties:
-                                daily:
-                                  description: Daily sync that runs once a day at
-                                    a system-chosen off-peak time. The run time is
-                                    not configurable. See daily Block for details.
-                                  items:
-                                    type: object
-                                  type: array
-                                monthly:
-                                  description: Monthly sync that runs once a month
-                                    on the specified day of the month. See monthly
-                                    Block for details.
-                                  items:
+                            properties:
+                              daily:
+                                description: Daily sync that runs once a day at a
+                                  system-chosen off-peak time. The run time is not
+                                  configurable. See daily Block for details.
+                                type: object
+                              monthly:
+                                description: Monthly sync that runs once a month on
+                                  the specified day of the month. See monthly Block
+                                  for details.
+                                properties:
+                                  dayOfMonth:
+                                    description: Day of the month on which the monthly
+                                      sync runs. See day_of_month Block for details.
                                     properties:
-                                      dayOfMonth:
-                                        description: Day of the month on which the
-                                          monthly sync runs. See day_of_month Block
+                                      dayNumber:
+                                        description: Specific day of the month, from
+                                          1 to 28.
+                                        type: number
+                                      lastDayOfMonth:
+                                        description: Configure this option to run
+                                          the monthly sync on the last calendar day
+                                          of each month. See last_day_of_month Block
                                           for details.
-                                        items:
-                                          properties:
-                                            dayNumber:
-                                              description: Specific day of the month,
-                                                from 1 to 28.
-                                              type: number
-                                            lastDayOfMonth:
-                                              description: Configure this option to
-                                                run the monthly sync on the last calendar
-                                                day of each month. See last_day_of_month
-                                                Block for details.
-                                              items:
-                                                type: object
-                                              type: array
-                                          type: object
-                                        type: array
+                                        type: object
                                     type: object
-                                  type: array
-                                weekly:
-                                  description: Weekly sync that runs once a week on
-                                    the specified day of the week. See weekly Block
-                                    for details.
-                                  items:
-                                    properties:
-                                      dayOfWeek:
-                                        description: 'Day of the week on which the
-                                          weekly sync runs. Valid values: SUNDAY,
-                                          MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY,
-                                          SATURDAY.'
-                                        type: string
-                                    type: object
-                                  type: array
-                              type: object
-                            type: array
+                                type: object
+                              weekly:
+                                description: Weekly sync that runs once a week on
+                                  the specified day of the week. See weekly Block
+                                  for details.
+                                properties:
+                                  dayOfWeek:
+                                    description: 'Day of the week on which the weekly
+                                      sync runs. Valid values: SUNDAY, MONDAY, TUESDAY,
+                                      WEDNESDAY, THURSDAY, FRIDAY, SATURDAY.'
+                                    type: string
+                                type: object
+                            type: object
                         type: object
                       s3Configuration:
                         description: Configuration details for the S3 object that
@@ -2348,40 +2317,35 @@ spec:
                           the knowledge base uses Amazon Neptune Analytics (GraphRAG)
                           storage. See context_enrichment_configuration Block for
                           details.
-                        items:
-                          properties:
-                            bedrockFoundationModelConfiguration:
-                              description: Settings for a foundation model used to
-                                parse documents in a data source. See bedrock_foundation_model_configuration
-                                Block for details.
-                              items:
-                                properties:
-                                  enrichmentStrategyConfiguration:
-                                    description: Strategy used to enrich the context
-                                      of data source documents. See context_enrichment_configuration.bedrock_foundation_model_configuration.enrichment_strategy_configuration
-                                      Block for details.
-                                    items:
-                                      properties:
-                                        method:
-                                          description: 'Method used to enrich the
-                                            context of data source documents. Valid
-                                            value: CHUNK_ENTITY_EXTRACTION.'
-                                          type: string
-                                      type: object
-                                    type: array
-                                  modelArn:
-                                    description: ARN of the cross-Region inference
-                                      profile used for context enrichment.
-                                    type: string
-                                type: object
-                              type: array
-                            type:
-                              description: Type of filtering to apply to objects or
-                                content of the data source. For example, the PATTERN
-                                type uses regular expression patterns to filter content.
-                              type: string
-                          type: object
-                        type: array
+                        properties:
+                          bedrockFoundationModelConfiguration:
+                            description: Settings for a foundation model used to parse
+                              documents in a data source. See bedrock_foundation_model_configuration
+                              Block for details.
+                            properties:
+                              enrichmentStrategyConfiguration:
+                                description: Strategy used to enrich the context of
+                                  data source documents. See context_enrichment_configuration.bedrock_foundation_model_configuration.enrichment_strategy_configuration
+                                  Block for details.
+                                items:
+                                  properties:
+                                    method:
+                                      description: 'Method used to enrich the context
+                                        of data source documents. Valid value: CHUNK_ENTITY_EXTRACTION.'
+                                      type: string
+                                  type: object
+                                type: array
+                              modelArn:
+                                description: ARN of the cross-Region inference profile
+                                  used for context enrichment.
+                                type: string
+                            type: object
+                          type:
+                            description: Type of filtering to apply to objects or
+                              content of the data source. For example, the PATTERN
+                              type uses regular expression patterns to filter content.
+                            type: string
+                        type: object
                       customTransformationConfiguration:
                         description: Configuration for custom transformation of data
                           source documents. See custom_transformation_configuration
@@ -2541,12 +2505,14 @@ spec:
                               parsingPrompt:
                                 description: Instructions for interpreting the contents
                                   of the document. See parsing_prompt Block for details.
-                                properties:
-                                  parsingPromptString:
-                                    description: Instructions for interpreting the
-                                      contents of the document.
-                                    type: string
-                                type: object
+                                items:
+                                  properties:
+                                    parsingPromptString:
+                                      description: Instructions for interpreting the
+                                        contents of the document.
+                                      type: string
+                                  type: object
+                                type: array
                             type: object
                           parsingStrategy:
                             description: 'Parsing strategy to use. Valid values: BEDROCK_FOUNDATION_MODEL,
@@ -2783,59 +2749,45 @@ spec:
                             description: Recurring schedule on which the connector
                               automatically syncs this data source. See sync_schedule
                               Block for details.
-                            items:
-                              properties:
-                                daily:
-                                  description: Daily sync that runs once a day at
-                                    a system-chosen off-peak time. The run time is
-                                    not configurable. See daily Block for details.
-                                  items:
-                                    type: object
-                                  type: array
-                                monthly:
-                                  description: Monthly sync that runs once a month
-                                    on the specified day of the month. See monthly
-                                    Block for details.
-                                  items:
+                            properties:
+                              daily:
+                                description: Daily sync that runs once a day at a
+                                  system-chosen off-peak time. The run time is not
+                                  configurable. See daily Block for details.
+                                type: object
+                              monthly:
+                                description: Monthly sync that runs once a month on
+                                  the specified day of the month. See monthly Block
+                                  for details.
+                                properties:
+                                  dayOfMonth:
+                                    description: Day of the month on which the monthly
+                                      sync runs. See day_of_month Block for details.
                                     properties:
-                                      dayOfMonth:
-                                        description: Day of the month on which the
-                                          monthly sync runs. See day_of_month Block
+                                      dayNumber:
+                                        description: Specific day of the month, from
+                                          1 to 28.
+                                        type: number
+                                      lastDayOfMonth:
+                                        description: Configure this option to run
+                                          the monthly sync on the last calendar day
+                                          of each month. See last_day_of_month Block
                                           for details.
-                                        items:
-                                          properties:
-                                            dayNumber:
-                                              description: Specific day of the month,
-                                                from 1 to 28.
-                                              type: number
-                                            lastDayOfMonth:
-                                              description: Configure this option to
-                                                run the monthly sync on the last calendar
-                                                day of each month. See last_day_of_month
-                                                Block for details.
-                                              items:
-                                                type: object
-                                              type: array
-                                          type: object
-                                        type: array
+                                        type: object
                                     type: object
-                                  type: array
-                                weekly:
-                                  description: Weekly sync that runs once a week on
-                                    the specified day of the week. See weekly Block
-                                    for details.
-                                  items:
-                                    properties:
-                                      dayOfWeek:
-                                        description: 'Day of the week on which the
-                                          weekly sync runs. Valid values: SUNDAY,
-                                          MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY,
-                                          SATURDAY.'
-                                        type: string
-                                    type: object
-                                  type: array
-                              type: object
-                            type: array
+                                type: object
+                              weekly:
+                                description: Weekly sync that runs once a week on
+                                  the specified day of the week. See weekly Block
+                                  for details.
+                                properties:
+                                  dayOfWeek:
+                                    description: 'Day of the week on which the weekly
+                                      sync runs. Valid values: SUNDAY, MONDAY, TUESDAY,
+                                      WEDNESDAY, THURSDAY, FRIDAY, SATURDAY.'
+                                    type: string
+                                type: object
+                            type: object
                         type: object
                       s3Configuration:
                         description: Configuration details for the S3 object that
@@ -3221,40 +3173,35 @@ spec:
                           the knowledge base uses Amazon Neptune Analytics (GraphRAG)
                           storage. See context_enrichment_configuration Block for
                           details.
-                        items:
-                          properties:
-                            bedrockFoundationModelConfiguration:
-                              description: Settings for a foundation model used to
-                                parse documents in a data source. See bedrock_foundation_model_configuration
-                                Block for details.
-                              items:
-                                properties:
-                                  enrichmentStrategyConfiguration:
-                                    description: Strategy used to enrich the context
-                                      of data source documents. See context_enrichment_configuration.bedrock_foundation_model_configuration.enrichment_strategy_configuration
-                                      Block for details.
-                                    items:
-                                      properties:
-                                        method:
-                                          description: 'Method used to enrich the
-                                            context of data source documents. Valid
-                                            value: CHUNK_ENTITY_EXTRACTION.'
-                                          type: string
-                                      type: object
-                                    type: array
-                                  modelArn:
-                                    description: ARN of the cross-Region inference
-                                      profile used for context enrichment.
-                                    type: string
-                                type: object
-                              type: array
-                            type:
-                              description: Type of filtering to apply to objects or
-                                content of the data source. For example, the PATTERN
-                                type uses regular expression patterns to filter content.
-                              type: string
-                          type: object
-                        type: array
+                        properties:
+                          bedrockFoundationModelConfiguration:
+                            description: Settings for a foundation model used to parse
+                              documents in a data source. See bedrock_foundation_model_configuration
+                              Block for details.
+                            properties:
+                              enrichmentStrategyConfiguration:
+                                description: Strategy used to enrich the context of
+                                  data source documents. See context_enrichment_configuration.bedrock_foundation_model_configuration.enrichment_strategy_configuration
+                                  Block for details.
+                                items:
+                                  properties:
+                                    method:
+                                      description: 'Method used to enrich the context
+                                        of data source documents. Valid value: CHUNK_ENTITY_EXTRACTION.'
+                                      type: string
+                                  type: object
+                                type: array
+                              modelArn:
+                                description: ARN of the cross-Region inference profile
+                                  used for context enrichment.
+                                type: string
+                            type: object
+                          type:
+                            description: Type of filtering to apply to objects or
+                              content of the data source. For example, the PATTERN
+                              type uses regular expression patterns to filter content.
+                            type: string
+                        type: object
                       customTransformationConfiguration:
                         description: Configuration for custom transformation of data
                           source documents. See custom_transformation_configuration
@@ -3331,12 +3278,14 @@ spec:
                               parsingPrompt:
                                 description: Instructions for interpreting the contents
                                   of the document. See parsing_prompt Block for details.
-                                properties:
-                                  parsingPromptString:
-                                    description: Instructions for interpreting the
-                                      contents of the document.
-                                    type: string
-                                type: object
+                                items:
+                                  properties:
+                                    parsingPromptString:
+                                      description: Instructions for interpreting the
+                                        contents of the document.
+                                      type: string
+                                  type: object
+                                type: array
                             type: object
                           parsingStrategy:
                             description: 'Parsing strategy to use. Valid values: BEDROCK_FOUNDATION_MODEL,

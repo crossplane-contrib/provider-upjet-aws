@@ -161,7 +161,7 @@ type ConfluenceConfigurationParameters struct {
 type ContextEnrichmentConfigurationInitParameters struct {
 
 	// Settings for a foundation model used to parse documents in a data source. See bedrock_foundation_model_configuration Block for details.
-	BedrockFoundationModelConfiguration []BedrockFoundationModelConfigurationInitParameters `json:"bedrockFoundationModelConfiguration,omitempty" tf:"bedrock_foundation_model_configuration,omitempty"`
+	BedrockFoundationModelConfiguration *BedrockFoundationModelConfigurationInitParameters `json:"bedrockFoundationModelConfiguration,omitempty" tf:"bedrock_foundation_model_configuration,omitempty"`
 
 	// Type of filtering to apply to objects or content of the data source. For example, the PATTERN type uses regular expression patterns to filter content.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
@@ -170,7 +170,7 @@ type ContextEnrichmentConfigurationInitParameters struct {
 type ContextEnrichmentConfigurationObservation struct {
 
 	// Settings for a foundation model used to parse documents in a data source. See bedrock_foundation_model_configuration Block for details.
-	BedrockFoundationModelConfiguration []BedrockFoundationModelConfigurationObservation `json:"bedrockFoundationModelConfiguration,omitempty" tf:"bedrock_foundation_model_configuration,omitempty"`
+	BedrockFoundationModelConfiguration *BedrockFoundationModelConfigurationObservation `json:"bedrockFoundationModelConfiguration,omitempty" tf:"bedrock_foundation_model_configuration,omitempty"`
 
 	// Type of filtering to apply to objects or content of the data source. For example, the PATTERN type uses regular expression patterns to filter content.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
@@ -180,7 +180,7 @@ type ContextEnrichmentConfigurationParameters struct {
 
 	// Settings for a foundation model used to parse documents in a data source. See bedrock_foundation_model_configuration Block for details.
 	// +kubebuilder:validation:Optional
-	BedrockFoundationModelConfiguration []BedrockFoundationModelConfigurationParameters `json:"bedrockFoundationModelConfiguration,omitempty" tf:"bedrock_foundation_model_configuration,omitempty"`
+	BedrockFoundationModelConfiguration *BedrockFoundationModelConfigurationParameters `json:"bedrockFoundationModelConfiguration,omitempty" tf:"bedrock_foundation_model_configuration,omitempty"`
 
 	// Type of filtering to apply to objects or content of the data source. For example, the PATTERN type uses regular expression patterns to filter content.
 	// +kubebuilder:validation:Optional
@@ -506,7 +506,7 @@ type DayOfMonthInitParameters struct {
 	DayNumber *float64 `json:"dayNumber,omitempty" tf:"day_number,omitempty"`
 
 	// Configure this option to run the monthly sync on the last calendar day of each month. See last_day_of_month Block for details.
-	LastDayOfMonth []LastDayOfMonthInitParameters `json:"lastDayOfMonth,omitempty" tf:"last_day_of_month,omitempty"`
+	LastDayOfMonth *LastDayOfMonthInitParameters `json:"lastDayOfMonth,omitempty" tf:"last_day_of_month,omitempty"`
 }
 
 type DayOfMonthObservation struct {
@@ -515,7 +515,7 @@ type DayOfMonthObservation struct {
 	DayNumber *float64 `json:"dayNumber,omitempty" tf:"day_number,omitempty"`
 
 	// Configure this option to run the monthly sync on the last calendar day of each month. See last_day_of_month Block for details.
-	LastDayOfMonth []LastDayOfMonthParameters `json:"lastDayOfMonth,omitempty" tf:"last_day_of_month,omitempty"`
+	LastDayOfMonth *LastDayOfMonthParameters `json:"lastDayOfMonth,omitempty" tf:"last_day_of_month,omitempty"`
 }
 
 type DayOfMonthParameters struct {
@@ -526,7 +526,7 @@ type DayOfMonthParameters struct {
 
 	// Configure this option to run the monthly sync on the last calendar day of each month. See last_day_of_month Block for details.
 	// +kubebuilder:validation:Optional
-	LastDayOfMonth []LastDayOfMonthParameters `json:"lastDayOfMonth,omitempty" tf:"last_day_of_month,omitempty"`
+	LastDayOfMonth *LastDayOfMonthParameters `json:"lastDayOfMonth,omitempty" tf:"last_day_of_month,omitempty"`
 }
 
 type DeletionProtectionConfigurationInitParameters struct {
@@ -851,7 +851,7 @@ type ManagedKnowledgeBaseConnectorConfigurationInitParameters struct {
 	MediaExtractionConfiguration *MediaExtractionConfigurationInitParameters `json:"mediaExtractionConfiguration,omitempty" tf:"media_extraction_configuration,omitempty"`
 
 	// Recurring schedule on which the connector automatically syncs this data source. See sync_schedule Block for details.
-	SyncSchedule []SyncScheduleInitParameters `json:"syncSchedule,omitempty" tf:"sync_schedule,omitempty"`
+	SyncSchedule *SyncScheduleInitParameters `json:"syncSchedule,omitempty" tf:"sync_schedule,omitempty"`
 }
 
 type ManagedKnowledgeBaseConnectorConfigurationObservation struct {
@@ -866,7 +866,7 @@ type ManagedKnowledgeBaseConnectorConfigurationObservation struct {
 	MediaExtractionConfiguration *MediaExtractionConfigurationObservation `json:"mediaExtractionConfiguration,omitempty" tf:"media_extraction_configuration,omitempty"`
 
 	// Recurring schedule on which the connector automatically syncs this data source. See sync_schedule Block for details.
-	SyncSchedule []SyncScheduleObservation `json:"syncSchedule,omitempty" tf:"sync_schedule,omitempty"`
+	SyncSchedule *SyncScheduleObservation `json:"syncSchedule,omitempty" tf:"sync_schedule,omitempty"`
 }
 
 type ManagedKnowledgeBaseConnectorConfigurationParameters struct {
@@ -885,7 +885,7 @@ type ManagedKnowledgeBaseConnectorConfigurationParameters struct {
 
 	// Recurring schedule on which the connector automatically syncs this data source. See sync_schedule Block for details.
 	// +kubebuilder:validation:Optional
-	SyncSchedule []SyncScheduleParameters `json:"syncSchedule,omitempty" tf:"sync_schedule,omitempty"`
+	SyncSchedule *SyncScheduleParameters `json:"syncSchedule,omitempty" tf:"sync_schedule,omitempty"`
 }
 
 type MediaExtractionConfigurationInitParameters struct {
@@ -930,20 +930,20 @@ type MediaExtractionConfigurationParameters struct {
 type MonthlyInitParameters struct {
 
 	// Day of the month on which the monthly sync runs. See day_of_month Block for details.
-	DayOfMonth []DayOfMonthInitParameters `json:"dayOfMonth,omitempty" tf:"day_of_month,omitempty"`
+	DayOfMonth *DayOfMonthInitParameters `json:"dayOfMonth,omitempty" tf:"day_of_month,omitempty"`
 }
 
 type MonthlyObservation struct {
 
 	// Day of the month on which the monthly sync runs. See day_of_month Block for details.
-	DayOfMonth []DayOfMonthObservation `json:"dayOfMonth,omitempty" tf:"day_of_month,omitempty"`
+	DayOfMonth *DayOfMonthObservation `json:"dayOfMonth,omitempty" tf:"day_of_month,omitempty"`
 }
 
 type MonthlyParameters struct {
 
 	// Day of the month on which the monthly sync runs. See day_of_month Block for details.
 	// +kubebuilder:validation:Optional
-	DayOfMonth []DayOfMonthParameters `json:"dayOfMonth,omitempty" tf:"day_of_month,omitempty"`
+	DayOfMonth *DayOfMonthParameters `json:"dayOfMonth,omitempty" tf:"day_of_month,omitempty"`
 }
 
 type ParsingConfigurationBedrockFoundationModelConfigurationInitParameters struct {
@@ -955,7 +955,7 @@ type ParsingConfigurationBedrockFoundationModelConfigurationInitParameters struc
 	ParsingModality *string `json:"parsingModality,omitempty" tf:"parsing_modality,omitempty"`
 
 	// Instructions for interpreting the contents of the document. See parsing_prompt Block for details.
-	ParsingPrompt *ParsingPromptInitParameters `json:"parsingPrompt,omitempty" tf:"parsing_prompt,omitempty"`
+	ParsingPrompt []ParsingPromptInitParameters `json:"parsingPrompt,omitempty" tf:"parsing_prompt,omitempty"`
 }
 
 type ParsingConfigurationBedrockFoundationModelConfigurationObservation struct {
@@ -967,7 +967,7 @@ type ParsingConfigurationBedrockFoundationModelConfigurationObservation struct {
 	ParsingModality *string `json:"parsingModality,omitempty" tf:"parsing_modality,omitempty"`
 
 	// Instructions for interpreting the contents of the document. See parsing_prompt Block for details.
-	ParsingPrompt *ParsingPromptObservation `json:"parsingPrompt,omitempty" tf:"parsing_prompt,omitempty"`
+	ParsingPrompt []ParsingPromptObservation `json:"parsingPrompt,omitempty" tf:"parsing_prompt,omitempty"`
 }
 
 type ParsingConfigurationBedrockFoundationModelConfigurationParameters struct {
@@ -982,7 +982,7 @@ type ParsingConfigurationBedrockFoundationModelConfigurationParameters struct {
 
 	// Instructions for interpreting the contents of the document. See parsing_prompt Block for details.
 	// +kubebuilder:validation:Optional
-	ParsingPrompt *ParsingPromptParameters `json:"parsingPrompt,omitempty" tf:"parsing_prompt,omitempty"`
+	ParsingPrompt []ParsingPromptParameters `json:"parsingPrompt,omitempty" tf:"parsing_prompt,omitempty"`
 }
 
 type ParsingConfigurationInitParameters struct {
@@ -1633,40 +1633,40 @@ type SourceConfigurationParameters struct {
 type SyncScheduleInitParameters struct {
 
 	// Daily sync that runs once a day at a system-chosen off-peak time. The run time is not configurable. See daily Block for details.
-	Daily []DailyInitParameters `json:"daily,omitempty" tf:"daily,omitempty"`
+	Daily *DailyInitParameters `json:"daily,omitempty" tf:"daily,omitempty"`
 
 	// Monthly sync that runs once a month on the specified day of the month. See monthly Block for details.
-	Monthly []MonthlyInitParameters `json:"monthly,omitempty" tf:"monthly,omitempty"`
+	Monthly *MonthlyInitParameters `json:"monthly,omitempty" tf:"monthly,omitempty"`
 
 	// Weekly sync that runs once a week on the specified day of the week. See weekly Block for details.
-	Weekly []WeeklyInitParameters `json:"weekly,omitempty" tf:"weekly,omitempty"`
+	Weekly *WeeklyInitParameters `json:"weekly,omitempty" tf:"weekly,omitempty"`
 }
 
 type SyncScheduleObservation struct {
 
 	// Daily sync that runs once a day at a system-chosen off-peak time. The run time is not configurable. See daily Block for details.
-	Daily []DailyParameters `json:"daily,omitempty" tf:"daily,omitempty"`
+	Daily *DailyParameters `json:"daily,omitempty" tf:"daily,omitempty"`
 
 	// Monthly sync that runs once a month on the specified day of the month. See monthly Block for details.
-	Monthly []MonthlyObservation `json:"monthly,omitempty" tf:"monthly,omitempty"`
+	Monthly *MonthlyObservation `json:"monthly,omitempty" tf:"monthly,omitempty"`
 
 	// Weekly sync that runs once a week on the specified day of the week. See weekly Block for details.
-	Weekly []WeeklyObservation `json:"weekly,omitempty" tf:"weekly,omitempty"`
+	Weekly *WeeklyObservation `json:"weekly,omitempty" tf:"weekly,omitempty"`
 }
 
 type SyncScheduleParameters struct {
 
 	// Daily sync that runs once a day at a system-chosen off-peak time. The run time is not configurable. See daily Block for details.
 	// +kubebuilder:validation:Optional
-	Daily []DailyParameters `json:"daily,omitempty" tf:"daily,omitempty"`
+	Daily *DailyParameters `json:"daily,omitempty" tf:"daily,omitempty"`
 
 	// Monthly sync that runs once a month on the specified day of the month. See monthly Block for details.
 	// +kubebuilder:validation:Optional
-	Monthly []MonthlyParameters `json:"monthly,omitempty" tf:"monthly,omitempty"`
+	Monthly *MonthlyParameters `json:"monthly,omitempty" tf:"monthly,omitempty"`
 
 	// Weekly sync that runs once a week on the specified day of the week. See weekly Block for details.
 	// +kubebuilder:validation:Optional
-	Weekly []WeeklyParameters `json:"weekly,omitempty" tf:"weekly,omitempty"`
+	Weekly *WeeklyParameters `json:"weekly,omitempty" tf:"weekly,omitempty"`
 }
 
 type TransformationFunctionInitParameters struct {
@@ -1781,7 +1781,7 @@ type VectorIngestionConfigurationInitParameters struct {
 	ChunkingConfiguration *ChunkingConfigurationInitParameters `json:"chunkingConfiguration,omitempty" tf:"chunking_configuration,omitempty"`
 
 	// Context enrichment configuration used to provide additional context to the RAG application. Required when the knowledge base uses Amazon Neptune Analytics (GraphRAG) storage. See context_enrichment_configuration Block for details.
-	ContextEnrichmentConfiguration []ContextEnrichmentConfigurationInitParameters `json:"contextEnrichmentConfiguration,omitempty" tf:"context_enrichment_configuration,omitempty"`
+	ContextEnrichmentConfiguration *ContextEnrichmentConfigurationInitParameters `json:"contextEnrichmentConfiguration,omitempty" tf:"context_enrichment_configuration,omitempty"`
 
 	// Configuration for custom transformation of data source documents. See custom_transformation_configuration Block for details.
 	CustomTransformationConfiguration *CustomTransformationConfigurationInitParameters `json:"customTransformationConfiguration,omitempty" tf:"custom_transformation_configuration,omitempty"`
@@ -1796,7 +1796,7 @@ type VectorIngestionConfigurationObservation struct {
 	ChunkingConfiguration *ChunkingConfigurationObservation `json:"chunkingConfiguration,omitempty" tf:"chunking_configuration,omitempty"`
 
 	// Context enrichment configuration used to provide additional context to the RAG application. Required when the knowledge base uses Amazon Neptune Analytics (GraphRAG) storage. See context_enrichment_configuration Block for details.
-	ContextEnrichmentConfiguration []ContextEnrichmentConfigurationObservation `json:"contextEnrichmentConfiguration,omitempty" tf:"context_enrichment_configuration,omitempty"`
+	ContextEnrichmentConfiguration *ContextEnrichmentConfigurationObservation `json:"contextEnrichmentConfiguration,omitempty" tf:"context_enrichment_configuration,omitempty"`
 
 	// Configuration for custom transformation of data source documents. See custom_transformation_configuration Block for details.
 	CustomTransformationConfiguration *CustomTransformationConfigurationObservation `json:"customTransformationConfiguration,omitempty" tf:"custom_transformation_configuration,omitempty"`
@@ -1813,7 +1813,7 @@ type VectorIngestionConfigurationParameters struct {
 
 	// Context enrichment configuration used to provide additional context to the RAG application. Required when the knowledge base uses Amazon Neptune Analytics (GraphRAG) storage. See context_enrichment_configuration Block for details.
 	// +kubebuilder:validation:Optional
-	ContextEnrichmentConfiguration []ContextEnrichmentConfigurationParameters `json:"contextEnrichmentConfiguration,omitempty" tf:"context_enrichment_configuration,omitempty"`
+	ContextEnrichmentConfiguration *ContextEnrichmentConfigurationParameters `json:"contextEnrichmentConfiguration,omitempty" tf:"context_enrichment_configuration,omitempty"`
 
 	// Configuration for custom transformation of data source documents. See custom_transformation_configuration Block for details.
 	// +kubebuilder:validation:Optional
